@@ -27,6 +27,9 @@ public class AetherItems {
     public static final Item AETHER_GRASS = new BlockItem(AetherBlocks.AETHER_GRASS, new Item.Settings().group(BLOCKS_GROUP));
     public static final Item ENCHANTED_AETHER_GRASS = new BlockItem(AetherBlocks.AETHER_ENCHANTED_GRASS, new Item.Settings().group(BLOCKS_GROUP).rarity(Rarity.UNCOMMON));
 
+    public static final Item SKYROOT_LOG = new BlockItem(AetherBlocks.SKYROOT_LOG, new Item.Settings().group(BLOCKS_GROUP));
+    public static final Item SKYROOT_PLANK = new BlockItem(AetherBlocks.SKYROOT_PLANK, new Item.Settings().group(BLOCKS_GROUP));
+
     public static final Item GRAVITITE_PICKAXE = new AetherPickaxeItem(ToolMaterials.DIAMOND, 1, -2.8F, (new Item.Settings()).group(TOOLS_GROUP));
     public static final Item GRAVITITE_AXE = new AetherAxeItem(ToolMaterials.DIAMOND, 5.0F, -3.0F, (new Item.Settings()).group(TOOLS_GROUP));
     public static final Item GRAVITITE_SHOVEL = new AetherShovelItem(ToolMaterials.DIAMOND, 1.5F, -3.0F, (new Item.Settings()).group(TOOLS_GROUP));
@@ -38,6 +41,9 @@ public class AetherItems {
         Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "aether_dirt"), AETHER_DIRT);
         Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "aether_grass"), AETHER_GRASS);
         Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "enchanted_aether_grass"), ENCHANTED_AETHER_GRASS);
+
+        Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "skyroot_log"), SKYROOT_LOG);
+        Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "skyroot_plank"), SKYROOT_PLANK);
 
         // Items (Tools)
         Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "gravitite_pickaxe"), GRAVITITE_PICKAXE);

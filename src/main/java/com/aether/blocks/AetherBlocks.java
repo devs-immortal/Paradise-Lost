@@ -4,13 +4,11 @@ import com.aether.Aether;
 import com.aether.blocks.natural.AetherGrassBlock;
 import com.aether.blocks.natural.EnchantedAetherGrassBlock;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 
 public class AetherBlocks {
@@ -29,12 +27,23 @@ public class AetherBlocks {
     public static final Block AETHER_GRASS = new AetherGrassBlock(AbstractBlock.Settings.of(Material.SOLID_ORGANIC));
     public static final Block AETHER_ENCHANTED_GRASS = new EnchantedAetherGrassBlock(AbstractBlock.Settings.of(Material.SOLID_ORGANIC));
 
+    public static final Block SKYROOT_LOG = createLogBlock(MaterialColor.WOOD, MaterialColor.SPRUCE);
+    public static final Block SKYROOT_PLANK = new Block(AbstractBlock.Settings.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD));
+
     public static void initialization() {
-        // Blocks
+        // Blocks (Soil)
         Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, "blue_portal"), BLUE_PORTAL);
         Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, "aether_dirt"), AETHER_DIRT);
         Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, "aether_grass"), AETHER_GRASS);
         Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, "enchanted_aether_grass"), AETHER_ENCHANTED_GRASS);
+
+        // Blocks (Wood)
+        Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, "skyroot_log"), SKYROOT_LOG);
+        Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, "skyroot_plank"), SKYROOT_PLANK);
+    }
+
+    private static PillarBlock createLogBlock(MaterialColor topMaterialColor, MaterialColor sideMaterialColor) {
+        return new PillarBlock(AbstractBlock.Settings.of(Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMaterialColor : sideMaterialColor).strength(2.0F).sounds(BlockSoundGroup.WOOD));
     }
 
     public static void clientInitialization() {
