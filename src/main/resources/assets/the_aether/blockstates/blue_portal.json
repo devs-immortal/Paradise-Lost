@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "the_aether:block/blue_portal_ns"
+    },
+    "axis=z": {
+      "model": "the_aether:block/blue_portal_ew"
+    }
+  }
+}
