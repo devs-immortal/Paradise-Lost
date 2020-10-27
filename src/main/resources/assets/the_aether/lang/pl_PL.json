@@ -3,6 +3,11 @@
   "block.the_aether.aether_grass": "Blok Trawy Aetheru",
   "block.the_aether.enchanted_aether_grass": "Zaklęty Blok Trawy Aetheru",
   "block.the_aether.blue_portal": "Portal Aetheru",
+  "block.the_aether.skyroot_log": "Drewno Niebokorzenia",
+  "block.the_aether.skyroot_plank": "Niebokorzenne Deski",
+  "block.the_aether.holystone": "Święty Kamień",
+  "block.the_aether.mossy_holystone": "Zamszony Święty Kamień",
+  "block.the_aether.holystone_brick": "Świętokamienne Cegły",
 
   "item.the_aether.gravitite_pickaxe": "Grawitytowy Kilof",
   "item.the_aether.gravitite_axe": "Grawitytowa Siekiera",
