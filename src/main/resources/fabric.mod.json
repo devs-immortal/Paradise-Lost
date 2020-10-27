@@ -12,6 +12,11 @@
     "Hugo Payn",
     "JellySquid"
   ],
+  "contact": {
+    "homepage": "https://github.com/kalucky0/The-Aether",
+    "sources": "https://github.com/kalucky0/The-Aether",
+    "issues": "https://github.com/kalucky0/The-Aether/issues"
+  },
   "depends": {
     "fabricloader": ">=0.4.0",
     "minecraft": ">=1.16-rc.3",
