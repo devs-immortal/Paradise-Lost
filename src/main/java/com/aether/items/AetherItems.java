@@ -30,6 +30,10 @@ public class AetherItems {
     public static final Item SKYROOT_LOG = new BlockItem(AetherBlocks.SKYROOT_LOG, new Item.Settings().group(BLOCKS_GROUP));
     public static final Item SKYROOT_PLANK = new BlockItem(AetherBlocks.SKYROOT_PLANK, new Item.Settings().group(BLOCKS_GROUP));
 
+    public static final Item HOLYSTONE = new BlockItem(AetherBlocks.HOLYSTONE, new Item.Settings().group(BLOCKS_GROUP));
+    public static final Item HOLYSTONE_BRICK = new BlockItem(AetherBlocks.HOLYSTONE_BRICK, new Item.Settings().group(BLOCKS_GROUP));
+    public static final Item MOSSY_HOLYSTONE = new BlockItem(AetherBlocks.MOSSY_HOLYSTONE, new Item.Settings().group(BLOCKS_GROUP));
+
     public static final Item GRAVITITE_PICKAXE = new AetherPickaxeItem(ToolMaterials.DIAMOND, 1, -2.8F, (new Item.Settings()).group(TOOLS_GROUP));
     public static final Item GRAVITITE_AXE = new AetherAxeItem(ToolMaterials.DIAMOND, 5.0F, -3.0F, (new Item.Settings()).group(TOOLS_GROUP));
     public static final Item GRAVITITE_SHOVEL = new AetherShovelItem(ToolMaterials.DIAMOND, 1.5F, -3.0F, (new Item.Settings()).group(TOOLS_GROUP));
@@ -44,6 +48,10 @@ public class AetherItems {
 
         Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "skyroot_log"), SKYROOT_LOG);
         Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "skyroot_plank"), SKYROOT_PLANK);
+
+        Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "holystone"), HOLYSTONE);
+        Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "holystone_brick"), HOLYSTONE_BRICK);
+        Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "mossy_holystone"), MOSSY_HOLYSTONE);
 
         // Items (Tools)
         Registry.register(Registry.ITEM, new Identifier(Aether.MODID, "gravitite_pickaxe"), GRAVITITE_PICKAXE);
