@@ -1,0 +1,9 @@
+{
+  "parent": "the_aether:block/base_multi_texture",
+  "textures": {
+    "particle": "the_aether:block/aether_dirt",
+    "bottom": "the_aether:block/aether_dirt",
+    "top": "the_aether:block/aether_grass_top",
+    "side": "the_aether:block/aether_grass_side_snowy"
+  }
+}
