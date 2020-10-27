@@ -118,4 +118,6 @@ run/
 !gradle-wrapper.jar
 
 # Assets that are unlicensed and all rights are reserved to them by Gilded Games.
-src/main/resources/assets/
+src/main/resources/assets/the_aether/blockstates/
+src/main/resources/assets/the_aether/models/
+src/main/resources/assets/the_aether/textures/

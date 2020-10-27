@@ -1,0 +1,14 @@
+{
+  "block.the_aether.aether_dirt": "Ziema Aetheru",
+  "block.the_aether.aether_grass": "Blok Trawy Aetheru",
+  "block.the_aether.enchanted_aether_grass": "Zaklęty Blok Trawy Aetheru",
+  "block.the_aether.blue_portal": "Portal Aetheru",
+
+  "item.the_aether.gravitite_pickaxe": "Grawitytowy Kilof",
+  "item.the_aether.gravitite_axe": "Grawitytowa Siekiera",
+  "item.the_aether.gravitite_shovel": "Grawitytowa Łopata",
+  "item.the_aether.gravitite_sword": "Grawitytowy Miecz",
+
+  "itemGroup.the_aether.aether_tools": "Narzędzia Aetheru",
+  "itemGroup.the_aether.aether_blocks": "Bloki Aetheru"
+}
