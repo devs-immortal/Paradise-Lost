@@ -13,7 +13,12 @@
   "item.the_aether.gravitite_axe": "Grawitytowa Siekiera",
   "item.the_aether.gravitite_shovel": "Grawitytowa Łopata",
   "item.the_aether.gravitite_sword": "Grawitytowy Miecz",
+  "item.the_aether.gravitite_boots": "Grawitytowe Buty",
+  "item.the_aether.gravitite_leggings": "Grawitytowe Nogawice",
+  "item.the_aether.gravitite_chestplate": "Gravitite Napierśnik",
+  "item.the_aether.gravitite_helmet": "Grawitytowy Hełm",
 
   "itemGroup.the_aether.aether_tools": "Narzędzia Aetheru",
-  "itemGroup.the_aether.aether_blocks": "Bloki Aetheru"
+  "itemGroup.the_aether.aether_blocks": "Bloki Aetheru",
+  "itemGroup.the_aether.aether_armor": "Zbroja Aetheru"
 }
