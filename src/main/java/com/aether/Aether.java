@@ -5,6 +5,8 @@ import com.aether.dimension.AetherDimension;
 import com.aether.items.AetherItems;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.util.Identifier;
 
 public class Aether implements ModInitializer, ClientModInitializer {
@@ -17,7 +19,10 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherDimension.setupDimension();
         AetherBlocks.initialization();
         AetherItems.initialization();
+        ServerTickEvents.END_SERVER_TICK.register(AetherEvents::ServerTickEnd);
+        UseBlockCallback.EVENT.register(AetherEvents::UseBlock);
     }
+
     @Override
     public void onInitializeClient() {
         AetherBlocks.clientInitialization();
