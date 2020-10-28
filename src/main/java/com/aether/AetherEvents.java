@@ -9,6 +9,7 @@ import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
@@ -24,37 +25,46 @@ import java.util.List;
 public class AetherEvents {
     private static final Block portalBlock = AetherBlocks.BLUE_PORTAL;
 
-    static public void ServerTickEnd(MinecraftServer server) {
+    public static void ServerTickEnd(MinecraftServer server) {
         server.getPlayerManager().getPlayerList().forEach((ServerPlayerEntity player) -> {
             if (player.getY() < 10 && "the_aether".equals(player.world.getRegistryKey().getValue().getPath())) {
-                //TODO: Teleport to overworld
-                //player.teleport(..., 0, 0, 0, 0, 0);
+                //TODO: Tweak y coordinate and disable fall damage
+                player.teleport(server.getWorld(World.OVERWORLD), player.getX(), 200, player.getZ(), player.yaw, player.pitch);
             }
         });
     }
 
     public static ActionResult UseBlock(PlayerEntity playerEntity, World world, Hand hand, BlockHitResult blockHitResult) {
+        // TODO: cry and rewrite
         if (world.getBlockState(blockHitResult.getBlockPos()).getBlock().is(Blocks.GLOWSTONE) && playerEntity.getMainHandStack().getItem() == Items.WATER_BUCKET) {
-            // Didn't test it yet but should work
             BlockPos pos = blockHitResult.getBlockPos();
             Direction dir = blockHitResult.getSide();
             if (dir == Direction.NORTH)
                 pos = pos.north();
+            else if (dir == Direction.SOUTH)
+                pos = pos.south();
             else if (dir == Direction.WEST)
                 pos = pos.west();
+            else if (dir == Direction.EAST)
+                pos = pos.east();
             else if (dir == Direction.DOWN)
                 pos = pos.down();
+            else if (dir == Direction.UP)
+                pos = pos.up();
             if (activatePortal(pos, dir, world)) {
-                playerEntity.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
+//                playerEntity.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
                 return ActionResult.SUCCESS;
+            } else {
+                playerEntity.sendMessage(Text.of("Can't do portaly stuff uwu"), false);
             }
         }
         return ActionResult.PASS;
     }
 
-    public static boolean activatePortal(BlockPos pos, Direction side, World world) {
+    private static boolean activatePortal(BlockPos pos, Direction side, World world) {
         Pair<Boolean, BlockPos> ns = isValidNSPortal(pos, side, world);
         Pair<Boolean, BlockPos> ew = isValidEWPortal(pos, side, world);
+
         if (ns.getLeft()) {
             BlockState state = portalBlock.getDefaultState();
             BlockPos curPosOuter = ns.getRight();
@@ -204,7 +214,7 @@ public class AetherEvents {
         return valid;
     }
 
-    public static Pair<Integer, Integer> getDimensions(World world, BlockPos corner, Direction.Axis axis) {
+    private static Pair<Integer, Integer> getDimensions(World world, BlockPos corner, Direction.Axis axis) {
         int x = 0;
         int z = 0;
         if (axis != Direction.Axis.X) {
