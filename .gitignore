@@ -119,6 +119,8 @@ run/
 
 # Assets that are unlicensed and all rights are reserved to them by Gilded Games.
 src/main/resources/assets/the_aether/textures/*/*
+!src/main/resources/assets/the_aether/textures/item/tool
+src/main/resources/assets/the_aether/textures/item/tool/*
 src/main/resources/assets/legacy_aether/
 src/main/resources/assets/minecraft/textures/
 
@@ -132,3 +134,19 @@ src/main/resources/assets/minecraft/textures/
 !src/main/resources/assets/the_aether/textures/block/skyroot_plank.png
 !src/main/resources/assets/the_aether/textures/block/holystone.png
 !src/main/resources/assets/the_aether/textures/block/zanite_ore.png
+
+!src/main/resources/assets/the_aether/textures/item/tool/gravitite_axe.png
+!src/main/resources/assets/the_aether/textures/item/tool/gravitite_hoe.png
+!src/main/resources/assets/the_aether/textures/item/tool/gravitite_pickaxe.png
+!src/main/resources/assets/the_aether/textures/item/tool/zanite_axe.png
+!src/main/resources/assets/the_aether/textures/item/tool/gravitite_shovel.png
+!src/main/resources/assets/the_aether/textures/item/tool/zanite_pickaxe.png
+!src/main/resources/assets/the_aether/textures/item/tool/holystone_pickaxe.png
+!src/main/resources/assets/the_aether/textures/item/tool/holystone_axe.png
+!src/main/resources/assets/the_aether/textures/item/tool/zanite_shovel.png
+!src/main/resources/assets/the_aether/textures/item/tool/skyroot_hoe.png
+!src/main/resources/assets/the_aether/textures/item/tool/skyroot_pickaxe.png
+!src/main/resources/assets/the_aether/textures/item/tool/zanite_hoe.png
+!src/main/resources/assets/the_aether/textures/item/tool/skyroot_axe.png
+!src/main/resources/assets/the_aether/textures/item/tool/holystone_hoe.png
+!src/main/resources/assets/the_aether/textures/item/tool/skyroot_shovel.png
