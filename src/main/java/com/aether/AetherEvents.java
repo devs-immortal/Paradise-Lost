@@ -8,8 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
@@ -52,10 +50,7 @@ public class AetherEvents {
             else if (dir == Direction.UP)
                 pos = pos.up();
             if (activatePortal(pos, dir, world)) {
-//                playerEntity.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
                 return ActionResult.SUCCESS;
-            } else {
-                playerEntity.sendMessage(Text.of("Can't do portaly stuff uwu"), false);
             }
         }
         return ActionResult.PASS;

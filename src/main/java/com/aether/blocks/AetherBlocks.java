@@ -3,6 +3,7 @@ package com.aether.blocks;
 import com.aether.Aether;
 import com.aether.blocks.natural.AetherGrassBlock;
 import com.aether.blocks.natural.EnchantedAetherGrassBlock;
+import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -18,36 +19,36 @@ import net.minecraft.util.registry.Registry;
 
 public class AetherBlocks {
 
-    //private static AbstractBlock.Settings dirtMaterial() { return ; }
+    public static final Block BLUE_PORTAL;
 
-    private static Item.Settings buildingBlock() { return new FabricItemSettings().group(AetherItems.BLOCKS_GROUP); }
+    public static final Block AETHER_DIRT;
+    public static final Block AETHER_GRASS;
+    public static final Block AETHER_ENCHANTED_GRASS;
 
-    public static final Block BLUE_PORTAL = new PortalBlock(
-            AbstractBlock.Settings.of(
-                    Material.PORTAL, MaterialColor.BLUE)
-                    .nonOpaque()
-                    .noCollision()
-                    .ticksRandomly()
-                    .dropsNothing()
-                    .blockVision(PortalBlock::never)
-                    .strength(-1.0F)
-                    .sounds(BlockSoundGroup.GLASS)
-                    .luminance((state) -> 11));
+    public static final Block SKYROOT_LOG;
+    public static final Block SKYROOT_PLANK;
 
-    public static final Block AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT)), buildingBlock());
-    public static final Block AETHER_GRASS = register("aether_grass", new AetherGrassBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).materialColor(MaterialColor.CYAN)), buildingBlock());
-    public static final Block AETHER_ENCHANTED_GRASS = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD)), buildingBlock());
+    public static final Block HOLYSTONE;
+    public static final Block HOLYSTONE_BRICK;
+    public static final Block MOSSY_HOLYSTONE;
 
-    public static final Block SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.WOOD, MaterialColor.GREEN), buildingBlock());
-    public static final Block SKYROOT_PLANK = register("skyroot_plank", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)), buildingBlock());
+    static {
+        BLUE_PORTAL = register("blue_portal", new PortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MaterialColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(PortalBlock::never).strength(-1.0F).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
 
-    public static final Block HOLYSTONE = register("holystone", new Block(FabricBlockSettings.copyOf(Blocks.STONE).materialColor(MaterialColor.WHITE)), buildingBlock());
-    public static final Block HOLYSTONE_BRICK = register("holystone_brick", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS).materialColor(MaterialColor.WHITE)), buildingBlock());
-    public static final Block MOSSY_HOLYSTONE = register("mossy_holystone", new Block(FabricBlockSettings.copyOf(Blocks.MOSSY_COBBLESTONE).materialColor(MaterialColor.WHITE)), buildingBlock());
+        AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT)), buildingBlock());
+        AETHER_GRASS = register("aether_grass", new AetherGrassBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).materialColor(MaterialColor.CYAN)), buildingBlock());
+        AETHER_ENCHANTED_GRASS = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD)), buildingBlock());
 
-    public static void initialization() {
-        // NO-OP. But the game needs to be told this place exists
-        Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, "blue_portal"), BLUE_PORTAL);
+        SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.WOOD, MaterialColor.GREEN), buildingBlock());
+        SKYROOT_PLANK = register("skyroot_plank", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)), buildingBlock());
+
+        HOLYSTONE = register("holystone", new Block(FabricBlockSettings.copyOf(Blocks.STONE).materialColor(MaterialColor.WHITE)), buildingBlock());
+        HOLYSTONE_BRICK = register("holystone_brick", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS).materialColor(MaterialColor.WHITE)), buildingBlock());
+        MOSSY_HOLYSTONE = register("mossy_holystone", new Block(FabricBlockSettings.copyOf(Blocks.MOSSY_COBBLESTONE).materialColor(MaterialColor.WHITE)), buildingBlock());
+    }
+
+    private static Item.Settings buildingBlock() {
+        return new FabricItemSettings().group(AetherItemGroups.BLOCKS);
     }
 
     private static Block register(String id, Block block, Item.Settings settings) {
@@ -56,8 +57,7 @@ public class AetherBlocks {
         Registry.register(Registry.ITEM, trueId, new BlockItem(block, settings));
         return block;
     }
-
-    private static Block registerItemless(String id, Block block) {
+    private static Block register(String id, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, id), block);
     }
 

@@ -17,8 +17,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
     @Override
     public void onInitialize() {
         AetherDimension.setupDimension();
-        AetherBlocks.initialization();
-        AetherItems.initialization();
         ServerTickEvents.END_SERVER_TICK.register(AetherEvents::ServerTickEnd);
         UseBlockCallback.EVENT.register(AetherEvents::UseBlock);
     }
