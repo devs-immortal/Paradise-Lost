@@ -17,6 +17,26 @@
   "item.the_aether.gravitite_leggings": "Gravitite Leggings",
   "item.the_aether.gravitite_chestplate": "Gravitite Chestplate",
   "item.the_aether.gravitite_helmet": "Gravitite Helmet",
+  "item.the_aether.gravitite_hoe": "Gravitite Hoe",
+
+  "item.the_aether.zanite_gemstone": "Zanite Gemstone",
+  "item.the_aether.zanite_pickaxe": "Zanite Pickaxe",
+  "item.the_aether.zanite_axe": "Zanite Axe",
+  "item.the_aether.zanite_shovel": "Zanite Shovel",
+  "item.the_aether.zanite_hoe": "Zanite Hoe",
+  "item.the_aether.zanite_sword": "Zanite Sword",
+
+  "item.the_aether.skyroot_pickaxe": "Skyroot Pickaxe",
+  "item.the_aether.skyroot_axe": "Skyroot Axe",
+  "item.the_aether.skyroot_shovel": "Skyroot Shovel",
+  "item.the_aether.skyroot_sword": "Skyroot Sword",
+  "item.the_aether.skyroot_hoe": "Skyroot Hoe",
+
+  "item.the_aether.holystone_pickaxe": "Holystone Pickaxe",
+  "item.the_aether.holystone_axe": "Holystone Axe",
+  "item.the_aether.holystone_shovel": "Holystone Shovel",
+  "item.the_aether.holystone_sword": "Holystone Sword",
+  "item.the_aether.holystone_hoe": "Holystone Hoe",
 
   "itemGroup.the_aether.aether_blocks": "Aether Blocks",
   "itemGroup.the_aether.aether_tools": "Aether Tools",

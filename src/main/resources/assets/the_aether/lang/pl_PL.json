@@ -17,6 +17,26 @@
   "item.the_aether.gravitite_leggings": "Grawitytowe Nogawice",
   "item.the_aether.gravitite_chestplate": "Gravitite Napierśnik",
   "item.the_aether.gravitite_helmet": "Grawitytowy Hełm",
+  "item.the_aether.gravitite_hoe": "Grawitytowa Motyka",
+
+  "item.the_aether.zanite_gemstone": "Kryształ Zirytu",
+  "item.the_aether.zanite_pickaxe": "Zirytowy Kilof",
+  "item.the_aether.zanite_axe": "Zirytowa Siekiera",
+  "item.the_aether.zanite_shovel": "Zirytowa Łopata",
+  "item.the_aether.zanite_hoe": "Zirytowa Motyka",
+  "item.the_aether.zanite_sword": "Zirytowy Miecz",
+
+  "item.the_aether.skyroot_pickaxe": "Niebokorzenny Kilof",
+  "item.the_aether.skyroot_axe": "Niebokorzenna Siekiera",
+  "item.the_aether.skyroot_shovel": "Niebokorzenna Łopata",
+  "item.the_aether.skyroot_sword": "Niebokorzenny Miecz",
+  "item.the_aether.skyroot_hoe": "Niebokorzenna Motyka",
+
+  "item.the_aether.holystone_pickaxe": "Świętokamienny Kilof",
+  "item.the_aether.holystone_axe": "Świętokamienna Siekiera",
+  "item.the_aether.holystone_shovel": "Świętokamienna Łopata",
+  "item.the_aether.holystone_sword": "Świętokamienny Miecz",
+  "item.the_aether.holystone_hoe": "Świętokamienna Motyka",
 
   "itemGroup.the_aether.aether_tools": "Narzędzia Aetheru",
   "itemGroup.the_aether.aether_blocks": "Bloki Aetheru",
