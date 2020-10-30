@@ -26,7 +26,7 @@ public class AetherItemGroups {
 
     public static final ItemGroup FOOD = FabricItemGroupBuilder.build(
             new Identifier(Aether.MODID, "aether_food"),
-            () -> new ItemStack(AetherItems.GRAVITITE_CHESTPLATE)); //TODO: Replace icon with Blue berry
+            () -> new ItemStack(AetherItems.BLUE_BERRY));
 
     public static final ItemGroup ACCESSORIES = FabricItemGroupBuilder.build(
             new Identifier(Aether.MODID, "aether_accessories"),
