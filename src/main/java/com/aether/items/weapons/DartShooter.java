@@ -55,7 +55,7 @@ public class DartShooter extends Item {
                 worldIn.spawnEntity(projectile);
             }
 
-//            worldIn.playSound(playerIn, playerIn.getBlockPos(), SoundsAether.DART_SHOOTER_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (playerIn.getRandom().nextFloat() * 0.4F + 0.8F));
+//            worldIn.playSound(playerIn, playerIn.getBlockPos(), AetherSounds.DART_SHOOTER_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (playerIn.getRandom().nextFloat() * 0.4F + 0.8F));
         }
 
         return super.use(worldIn, playerIn, handIn);
