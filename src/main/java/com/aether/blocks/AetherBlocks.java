@@ -32,6 +32,9 @@ public class AetherBlocks {
     public static final Block HOLYSTONE_BRICK;
     public static final Block MOSSY_HOLYSTONE;
 
+    public static final Block ZANITE_ORE;
+    public static final Block AMBROSIUM_ORE;
+
     static {
         BLUE_PORTAL = register("blue_portal", new PortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MaterialColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(PortalBlock::never).strength(-1.0F).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
 
@@ -45,7 +48,12 @@ public class AetherBlocks {
         HOLYSTONE = register("holystone", new Block(FabricBlockSettings.copyOf(Blocks.STONE).materialColor(MaterialColor.WHITE)), buildingBlock());
         HOLYSTONE_BRICK = register("holystone_brick", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS).materialColor(MaterialColor.WHITE)), buildingBlock());
         MOSSY_HOLYSTONE = register("mossy_holystone", new Block(FabricBlockSettings.copyOf(Blocks.MOSSY_COBBLESTONE).materialColor(MaterialColor.WHITE)), buildingBlock());
+
+        ZANITE_ORE = register("zanite_ore", new Block(FabricBlockSettings.copyOf(Blocks.IRON_ORE)), buildingBlock());
+        AMBROSIUM_ORE = register("ambrosium_ore", new Block(FabricBlockSettings.copyOf(Blocks.COAL_ORE)), buildingBlock());
     }
+
+    public static void noop() {}
 
     private static Item.Settings buildingBlock() {
         return new FabricItemSettings().group(AetherItemGroups.BLOCKS);

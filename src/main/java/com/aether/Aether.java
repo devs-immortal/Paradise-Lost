@@ -16,6 +16,9 @@ public class Aether implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitialize() {
+        //Do not remove these, item loading fucks up if these classes are not explicitly called during init.
+        AetherItems.noop();
+        AetherBlocks.noop();
         AetherDimension.setupDimension();
         ServerTickEvents.END_SERVER_TICK.register(AetherEvents::ServerTickEnd);
         UseBlockCallback.EVENT.register(AetherEvents::UseBlock);
