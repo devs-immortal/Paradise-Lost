@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.aether.items.AetherItemGroups;
-import com.aether.items.util.AetherTiers;
+import com.aether.items.utils.AetherTiers;
 
 public class AetherHoe extends HoeItem implements IAetherTool {
 

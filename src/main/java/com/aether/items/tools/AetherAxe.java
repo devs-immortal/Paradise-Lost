@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.aether.items.AetherItemGroups;
-import com.aether.items.util.AetherTiers;
+import com.aether.items.utils.AetherTiers;
 
 public class AetherAxe extends AxeItem implements IAetherTool {
 

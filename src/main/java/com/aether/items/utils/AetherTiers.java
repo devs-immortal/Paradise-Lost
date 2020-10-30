@@ -1,4 +1,4 @@
-package com.aether.items.util;
+package com.aether.items.utils;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.items.AetherItems;

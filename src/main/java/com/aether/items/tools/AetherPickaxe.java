@@ -3,7 +3,7 @@ package com.aether.items.tools;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.Rarity;
 import com.aether.items.AetherItemGroups;
-import com.aether.items.util.AetherTiers;
+import com.aether.items.utils.AetherTiers;
 
 public class AetherPickaxe extends PickaxeItem implements IAetherTool {
 
