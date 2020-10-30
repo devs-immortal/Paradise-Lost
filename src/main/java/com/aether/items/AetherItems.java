@@ -19,7 +19,7 @@ public class AetherItems {
     }
 
     private static Item.Settings armorItem() {
-        return new FabricItemSettings().group(AetherItemGroups.TOOLS);
+        return new FabricItemSettings().group(AetherItemGroups.ARMOR);
     }
 
     private static Item.Settings foodItem(FoodComponent foodComponent) {
@@ -35,14 +35,14 @@ public class AetherItems {
     }
 
     public static final Item GRAVITITE_INGOT;
+    public static final Item AMBROSIUM_SHARD;
+    public static final Item ZANITE_GEM;
 
     public static final Item GRAVITITE_PICKAXE;
     public static final Item GRAVITITE_AXE;
     public static final Item GRAVITITE_SHOVEL;
     public static final Item GRAVITITE_SWORD;
     public static final Item GRAVITITE_HOE;
-
-    public static final Item ZANITE_GEM;
 
     public static final Item ZANITE_PICKAXE;
     public static final Item ZANITE_AXE;
@@ -74,6 +74,7 @@ public class AetherItems {
         // There is no gravitite ingot in aether. I think...
         GRAVITITE_INGOT = register("gravitite_ingot", new Item(materialsItem()));
         ZANITE_GEM = register("zanite_gemstone", new Item(materialsItem()));
+        AMBROSIUM_SHARD = register("ambrosium_shard", new Item(materialsItem()));
 
         // Tools
         GRAVITITE_PICKAXE = register("gravitite_pickaxe", new AetherPickaxeItem(AetherToolMaterials.GRAVITITE, 1, -2.8F, defaultItem()));

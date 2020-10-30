@@ -34,7 +34,7 @@ public class AetherItemGroups {
 
     public static final ItemGroup MATERIALS = FabricItemGroupBuilder.build(
             new Identifier(Aether.MODID, "aether_materials"),
-            () -> new ItemStack(AetherItems.GRAVITITE_CHESTPLATE)); //TODO: Replace icon with Ambrosium shard
+            () -> new ItemStack(AetherItems.AMBROSIUM_SHARD));
 
     public static final ItemGroup MISC = FabricItemGroupBuilder.build(
             new Identifier(Aether.MODID, "aether_misc"),
