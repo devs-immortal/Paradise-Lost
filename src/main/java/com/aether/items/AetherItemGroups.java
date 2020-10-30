@@ -29,8 +29,8 @@ public class AetherItemGroups {
             () -> new ItemStack(AetherItems.BLUE_BERRY));
 
     public static final ItemGroup ACCESSORIES = FabricItemGroupBuilder.build(
-            new Identifier(Aether.MODID, "aether_accessories"),
-            () -> new ItemStack(AetherItems.GRAVITITE_CHESTPLATE)); //TODO: Replace icon with Gravitite gloves
+            new Identifier(Aether.MODID, "ACCESSORIES"),
+            () -> new ItemStack(AetherItems.GRAVITITE_GLOVES));
 
     public static final ItemGroup MATERIALS = FabricItemGroupBuilder.build(
             new Identifier(Aether.MODID, "aether_materials"),
@@ -38,5 +38,5 @@ public class AetherItemGroups {
 
     public static final ItemGroup MISC = FabricItemGroupBuilder.build(
             new Identifier(Aether.MODID, "aether_misc"),
-            () -> new ItemStack(AetherItems.GRAVITITE_CHESTPLATE)); //TODO: Replace icon with Bronze key
+            () -> new ItemStack(AetherItems.BRONZE_KEY));
 }
