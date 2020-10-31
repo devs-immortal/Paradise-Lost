@@ -1,6 +1,6 @@
 {
   "parent": "item/bow",
   "textures": {
-    "layer0": "the_aether:item/weapons/phoenix_bow"
+    "layer0": "the_aether:item/weapon/phoenix_bow"
   }
 }

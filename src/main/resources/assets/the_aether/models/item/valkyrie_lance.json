@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "the_aether:item/weapons/valkyrie_lance"
+    "layer0": "the_aether:item/weapon/valkyrie_lance"
   }
 }

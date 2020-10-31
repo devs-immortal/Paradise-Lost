@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "the_aether:item/tools/valkyrie_shovel"
+    "layer0": "the_aether:item/tool/valkyrie_shovel"
   }
 }

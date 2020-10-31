@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "the_aether:item/weapons/jeb_hammer"
+    "layer0": "the_aether:item/weapon/jeb_hammer"
   }
 }
