@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "the_aether:item/misc/egg/moa_egg",
+    "layer1": "the_aether:item/misc/egg/moa_egg_spot"
+  }
+}

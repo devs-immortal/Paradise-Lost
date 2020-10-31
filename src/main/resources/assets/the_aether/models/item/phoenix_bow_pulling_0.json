@@ -1,0 +1,6 @@
+{
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "the_aether:item/weapons/bow_pulling_0"
+  }
+}
