@@ -29,7 +29,7 @@ public class AetherItemGroups {
             () -> new ItemStack(AetherItems.BLUE_BERRY));
 
     public static final ItemGroup ACCESSORIES = FabricItemGroupBuilder.build(
-            new Identifier(Aether.MODID, "ACCESSORIES"),
+            new Identifier(Aether.MODID, "aether_accessories"),
             () -> new ItemStack(AetherItems.GRAVITITE_GLOVES));
 
     public static final ItemGroup MATERIALS = FabricItemGroupBuilder.build(

@@ -62,14 +62,15 @@ public class AetherItems {
     public static final Rarity AETHER_LOOT = Rarity.EPIC;
 
     static {
+        // Resources
         ZANITE_GEM = register("zanite_gemstone", new ZaniteGemstone());
         AMBROSIUM_SHARD = register("ambrosium_shard", new AmbrosiumShard());
         GOLDEN_AMBER = register("golden_amber", new GoldenAmber());
         AECHOR_PETAL = register("aechor_petal", new AechorPetal());
         SWET_BALL = register("swet_ball", new SwetBall());
-
         SKYROOT_STICK = register("skyroot_stick", new SkyrootStick());
 
+        // Tools
         SKYROOT_SHOVEL = register("skyroot_shovel", new AetherShovel(AetherTiers.SKYROOT, 1.5F, -3.0F));
         SKYROOT_PICKAXE = register("skyroot_pickaxe", new AetherPickaxe(AetherTiers.SKYROOT, 1, -2.8F));
         SKYROOT_AXE = register("skyroot_axe", new AetherAxe(AetherTiers.SKYROOT, 6.0F, -3.2F));
@@ -94,6 +95,7 @@ public class AetherItems {
         VALKYRIE_PICKAXE = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.VALKYRIE, AETHER_LOOT, 1, -2.8F));
         VALKYRIE_AXE = register("valkyrie_axe", new AetherAxe(AetherTiers.VALKYRIE, AETHER_LOOT, 4.0F, -2.9F));
 
+        // Armor
         ZANITE_HELMET = register("zanite_helmet", new AetherArmor(AetherArmorType.ZANITE, EquipmentSlot.HEAD));
         ZANITE_CHESTPLATE = register("zanite_chestplate", new AetherArmor(AetherArmorType.ZANITE, EquipmentSlot.CHEST));
         ZANITE_LEGGINGS = register("zanite_leggings", new AetherArmor(AetherArmorType.ZANITE, EquipmentSlot.LEGS));
@@ -126,29 +128,32 @@ public class AetherItems {
 
         SENTRY_BOOTS = register("sentry_boots", new AetherArmor("sentry", AetherArmorType.VALKYRIE, AETHER_LOOT, EquipmentSlot.FEET));
 
-        BLUE_BERRY = register("blueberry", new Item(new Item.Settings().group(AetherItemGroups.FOOD).food(AetherFood.DEFAULT)));
+        // Food
+        BLUE_BERRY = register("blue_berry", new Item(new Item.Settings().group(AetherItemGroups.FOOD).food(AetherFood.DEFAULT)));
         ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.FOOD).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
         WHITE_APPLE = register("white_apple", new WhiteApple());
         BLUE_GUMMY_SWET = register("blue_gummy_swet", new GummySwet());
         GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new GummySwet());
         HEALING_STONE = register("healing_stone", new HealingStone());
         CANDY_CANE = register("candy_cane", new Item(new Item.Settings().group(AetherItemGroups.FOOD).food(AetherFood.DEFAULT)));
-        GINGERBREAD_MAN = register("gingerbread_man", new Item(new Item.Settings().group(AetherItemGroups.FOOD).food(AetherFood.DEFAULT)));
+        GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Item.Settings().group(AetherItemGroups.FOOD).food(AetherFood.DEFAULT)));
 
+        // Misc
         SKYROOT_BUCKET = register("skyroot_bucket", new SkyrootBucket());
         SKYROOT_WATER_BUCKET = register("skyroot_water_bucket", new SkyrootBucket(Fluids.WATER, SKYROOT_BUCKET));
         SKYROOT_MILK_BUCKET = register("skyroot_milk_bucket", new SkyrootBucket(SKYROOT_BUCKET));
         SKYROOT_POISON_BUCKET = register("skyroot_poison_bucket", new SkyrootBucket(SKYROOT_BUCKET));
         SKYROOT_REMEDY_BUCKET = register("skyroot_remedy_bucket", new SkyrootBucket(SKYROOT_BUCKET));
 
-        CLOUD_PARACHUTE = register("cloud_parachute", new Parachute());
-        GOLDEN_CLOUD_PARACHUTE = register("golden_cloud_parachute", new Parachute(20));
+        CLOUD_PARACHUTE = register("cold_parachute", new Parachute());
+        GOLDEN_CLOUD_PARACHUTE = register("golden_parachute", new Parachute(20));
 
         BRONZE_KEY = register("bronze_key", new DungeonKey());
         SILVER_KEY = register("silver_key", new DungeonKey());
         GOLDEN_KEY = register("golden_key", new DungeonKey());
         PLATINUM_KEY = register("platinum_key", new DungeonKey());
 
+        // Weapons
         GOLDEN_DART = register("golden_dart", new Dart(Rarity.COMMON));
         ENCHANTED_DART = register("enchanted_dart", new Dart(Rarity.RARE));
         POISON_DART = register("poison_dart", new Dart(Rarity.COMMON));
@@ -167,6 +172,7 @@ public class AetherItems {
         PIG_SLAYER = register("pig_slayer", new PigSlayer());
         CANDY_CANE_SWORD = register("candy_cane_sword", new CandyCaneSword());
 
+        // Accessories
         LEATHER_GLOVES = register("leather_gloves", new ItemAccessory(AccessoryTypes.GLOVES, 0xC65C35).setDamageMultiplier(1.5F));
         IRON_GLOVES = register("iron_gloves", new ItemAccessory(AccessoryTypes.GLOVES).setDamageMultiplier(2.5F));
         GOLDEN_GLOVES = register("golden_gloves", new ItemAccessory(AccessoryTypes.GLOVES, 0xFBF424).setDamageMultiplier(2.0F));
@@ -197,6 +203,7 @@ public class AetherItems {
         AGILITY_CAPE = register("agility_cape", new ItemAccessory("agility", AccessoryTypes.CAPE, AETHER_LOOT));
         INVISIBILITY_CAPE = register("invisibility_cape", new ItemAccessory(AccessoryTypes.CAPE, AETHER_LOOT));
 
+        // More misc I guess
         GOLDEN_FEATHER = register("golden_feather", new ItemAccessory(AccessoryTypes.MISC, AETHER_LOOT));
         REGENERATION_STONE = register("regeneration_stone", new ItemAccessory(AccessoryTypes.MISC, AETHER_LOOT));
         IRON_BUBBLE = register("iron_bubble", new ItemAccessory(AccessoryTypes.MISC, AETHER_LOOT));
@@ -208,6 +215,7 @@ public class AetherItems {
 
         MOA_EGG = register("moa_egg", new MoaEgg());
 
+        // Some music, I think the original ones are copyrighted but whatever
         //TODO: Add AetherSounds
 //        AETHER_TUNE = register("aether_tune", new AetherDisc(20, AetherSounds.aether_tune));
 //        ASCENDING_DAWN = register("ascending_dawn", new AetherDisc(12, AetherSounds.ascending_dawn));

@@ -53,8 +53,6 @@ public class AetherBlocks {
         AMBROSIUM_ORE = register("ambrosium_ore", new Block(FabricBlockSettings.copyOf(Blocks.COAL_ORE)), buildingBlock());
     }
 
-    public static void noop() {}
-
     private static Item.Settings buildingBlock() {
         return new FabricItemSettings().group(AetherItemGroups.BLOCKS);
     }
