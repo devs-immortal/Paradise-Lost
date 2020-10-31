@@ -3,6 +3,7 @@ package com.aether.blocks;
 import com.aether.Aether;
 import com.aether.blocks.decorative.*;
 import com.aether.blocks.natural.AetherGrassBlock;
+import com.aether.blocks.natural.BlueberryBushBlock;
 import com.aether.blocks.natural.EnchantedAetherGrassBlock;
 import com.aether.items.AetherItemGroups;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -150,6 +151,7 @@ public class AetherBlocks {
 //    public static final Block YELLOW_DYED_AERCLOUD;
     public static final Block ZANITE_BLOCK;
     public static final Block ZANITE_ORE;
+    private static final Block BLUEBERRY_BUSH;
 
     static {
         AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT)), buildingBlock());
@@ -160,8 +162,8 @@ public class AetherBlocks {
         HOLYSTONE = register("holystone", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.GRAY).strength(0.5F, 10.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
         HOLYSTONE_BRICK = register("holystone_brick", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS).materialColor(MaterialColor.WHITE)), buildingBlock());
         MOSSY_HOLYSTONE = register("mossy_holystone", new Block(FabricBlockSettings.copyOf(Blocks.MOSSY_COBBLESTONE).materialColor(MaterialColor.WHITE)), buildingBlock());
-        SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.WOOD, MaterialColor.GREEN), buildingBlock());
-        SKYROOT_PLANKS = register("skyroot_plank", new SkyrootPlanksBlock(), buildingBlock());
+        BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).collidable(false)), buildingBlock());
+
         ZANITE_ORE = register("zanite_ore", new Block(FabricBlockSettings.copyOf(Blocks.IRON_ORE)), buildingBlock());
 //        CRYSTAL_SAPLING = register("crystal_sapling", null);
         AEROGEL = register("aerogel", new Block(FabricBlockSettings.of(Material.SOIL).strength(1.0F, 2000.0F).sounds(BlockSoundGroup.METAL)), buildingBlock());
@@ -264,10 +266,12 @@ public class AetherBlocks {
 //        SENTRY_STONE = register("sentry_stone", null);
 //        SENTRY_STONE_TRAP = register("sentry_stone_trap", null);
 //        SENTRY_WALL = register("sentry_wall", null);
+        SKYROOT_PLANKS = register("skyroot_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)), buildingBlock());
 //        SKYROOT_BOOKSHELF = register("skyroot_bookshelf", null);
 //        SKYROOT_FENCE = register("skyroot_fence", null);
         SKYROOT_FENCE_GATE = register("skyroot_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(AetherBlocks.SKYROOT_PLANKS)), buildingBlock());
 //        SKYROOT_LEAVES = register("skyroot_leaves", null);
+        SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.GREEN, MaterialColor.WOOD), buildingBlock());
 //        SKYROOT_SAPLING = register("skyroot_sapling", null);
         SKYROOT_SLAB = register("skyroot_slab", new AetherSlabBlock(SKYROOT_PLANKS.getDefaultState()), buildingBlock());
         SKYROOT_STAIRS = register("skyroot_stairs", new AetherStairsBlock(SKYROOT_PLANKS.getDefaultState()), buildingBlock());
@@ -305,6 +309,8 @@ public class AetherBlocks {
 
     public static void clientInitialization() {
         BlockRenderLayerMap.INSTANCE.putBlock(BLUE_PORTAL, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getTranslucent());
     }

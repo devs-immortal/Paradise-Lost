@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "ripe=true": {
+        "model": "the_aether:block/blueberry_bush"
+      },
+    "ripe=false": {
+      "model": "the_aether:block/blueberry_stalk"
+    }
+  }
+}

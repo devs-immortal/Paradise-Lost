@@ -223,6 +223,8 @@ public class AetherItems {
 //        LEGACY = register("legacy", new AetherDisc(6, AetherSounds.legacy));
     }
 
+    public static void noop() {}
+
     private static Item register(String id, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(Aether.MODID, id), item);
     }
