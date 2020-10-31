@@ -151,7 +151,7 @@ public class AetherItems {
         BRONZE_KEY = register("bronze_key", new DungeonKey());
         SILVER_KEY = register("silver_key", new DungeonKey());
         GOLDEN_KEY = register("golden_key", new DungeonKey());
-        PLATINUM_KEY = register("platinum_key", new DungeonKey());
+//        PLATINUM_KEY = register("platinum_key", new DungeonKey());
 
         // Weapons
         GOLDEN_DART = register("golden_dart", new Dart(Rarity.COMMON));

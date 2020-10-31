@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "bottom": "the_aether:block/enchanter_bottom",
+    "top": "the_aether:block/enchanter_top",
+    "side": "the_aether:block/enchanter_side"
+  }
+}

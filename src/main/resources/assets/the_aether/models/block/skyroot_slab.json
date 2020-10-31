@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "the_aether:block/skyroot_planks",
+    "top": "the_aether:block/skyroot_planks",
+    "side": "the_aether:block/skyroot_planks"
+  }
+}

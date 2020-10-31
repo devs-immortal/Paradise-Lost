@@ -1,0 +1,8 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "the_aether:block/icestone",
+    "top": "the_aether:block/icestone",
+    "side": "the_aether:block/icestone"
+  }
+}

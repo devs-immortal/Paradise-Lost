@@ -1,0 +1,7 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "particle": "the_aether:block/white_flower",
+    "cross": "the_aether:block/white_flower"
+  }
+}

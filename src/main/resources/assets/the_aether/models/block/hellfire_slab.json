@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "the_aether:block/hellfire_stone",
+    "top": "the_aether:block/hellfire_stone",
+    "side": "the_aether:block/hellfire_stone"
+  }
+}
