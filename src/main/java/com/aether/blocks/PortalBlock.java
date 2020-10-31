@@ -137,8 +137,4 @@ public class PortalBlock extends AbstractGlassBlock {
         X_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);
         Z_SHAPE = Block.createCuboidShape(6.0D, 0.0D, 0.0D, 10.0D, 16.0D, 16.0D);
     }
-
-    public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {
-        return false;
-    }
 }
