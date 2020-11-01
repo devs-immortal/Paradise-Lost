@@ -33,18 +33,18 @@ public class AetherBlocks {
     public static final Block AMBROSIUM_ORE;
     public static final Block AMBROSIUM_TORCH;
     public static final Block AMBROSIUM_TORCH_WALL;
-//    public static final Block ANGELIC_SLAB;
-//    public static final Block ANGELIC_STAIRS;
-//    public static final Block ANGELIC_STONE;
-//    public static final Block ANGELIC_STONE_TRAP;
-//    public static final Block ANGELIC_WALL;
-//    public static final Block BERRY_BUSH;
+    public static final Block ANGELIC_SLAB;
+    public static final Block ANGELIC_STAIRS;
+    public static final Block ANGELIC_STONE;
+    public static final Block ANGELIC_STONE_TRAP;
+    public static final Block ANGELIC_WALL;
+    //    public static final Block BERRY_BUSH;
 //    public static final Block BERRY_BUSH_STEM;
 //    public static final Block BLACK_DYED_AERCLOUD;
 //    public static final Block BLUE_AERCLOUD;
 //    public static final Block BLUE_DYED_AERCLOUD;
     public static final Block BLUE_PORTAL;
-//    public static final Block BROWN_DYED_AERCLOUD;
+    //    public static final Block BROWN_DYED_AERCLOUD;
 //    public static final Block CARVED_SLAB;
 //    public static final Block CARVED_STAIRS;
 //    public static final Block CARVED_STONE;
@@ -82,7 +82,7 @@ public class AetherBlocks {
     public static final Block HOLYSTONE_SLAB;
     public static final Block HOLYSTONE_STAIRS;
     public static final Block HOLYSTONE_WALL;
-//    public static final Block ICESTONE;
+    //    public static final Block ICESTONE;
 //    public static final Block ICESTONE_SLAB;
 //    public static final Block ICESTONE_STAIRS;
 //    public static final Block ICESTONE_WALL;
@@ -108,7 +108,7 @@ public class AetherBlocks {
 //    public static final Block LOCKED_SENTRY_STONE;
 //    public static final Block MAGENTA_DYED_AERCLOUD;
     public static final Block MOSSY_HOLYSTONE;
-//    public static final Block MOSSY_HOLYSTONE_SLAB;
+    //    public static final Block MOSSY_HOLYSTONE_SLAB;
 //    public static final Block MOSSY_HOLYSTONE_STAIRS;
 //    public static final Block MOSSY_HOLYSTONE_WALL;
 //    public static final Block ORANGE_DYED_AERCLOUD;
@@ -124,7 +124,7 @@ public class AetherBlocks {
 //    public static final Block QUICKSOIL;
     public static final Block QUICKSOIL_GLASS;
     public static final Block QUICKSOIL_GLASS_PANE;
-//    public static final Block RED_DYED_AERCLOUD;
+    //    public static final Block RED_DYED_AERCLOUD;
 //    public static final Block SENTRY_SLAB;
 //    public static final Block SENTRY_STAIRS;
 //    public static final Block SENTRY_STONE;
@@ -133,13 +133,13 @@ public class AetherBlocks {
 //    public static final Block SKYROOT_BOOKSHELF;
 //    public static final Block SKYROOT_FENCE;
     public static final Block SKYROOT_FENCE_GATE;
-//    public static final Block SKYROOT_LEAVES;
+    //    public static final Block SKYROOT_LEAVES;
     public static final Block SKYROOT_LOG;
     public static final Block SKYROOT_PLANKS;
-//    public static final Block SKYROOT_SAPLING;
+    //    public static final Block SKYROOT_SAPLING;
     public static final Block SKYROOT_SLAB;
     public static final Block SKYROOT_STAIRS;
-//    public static final Block SKYROOT_WOOD;
+    //    public static final Block SKYROOT_WOOD;
 //    public static final Block STRIPPED_GOLDEN_OAK_LOG;
 //    public static final Block STRIPPED_GOLDEN_OAK_WOOD;
 //    public static final Block STRIPPED_SKYROOT_LOG;
@@ -156,13 +156,12 @@ public class AetherBlocks {
     static {
         AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT)), buildingBlock());
         AETHER_GRASS = register("aether_grass", new AetherGrassBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).materialColor(MaterialColor.CYAN)), buildingBlock());
-        AETHER_ENCHANTED_GRASS = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD)), buildingBlock());
+        AETHER_ENCHANTED_GRASS = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD).lightLevel(2)), buildingBlock());
         AMBROSIUM_ORE = register("ambrosium_ore", new Block(FabricBlockSettings.copyOf(Blocks.COAL_ORE)), buildingBlock());
         BLUE_PORTAL = register("blue_portal", new PortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MaterialColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(AetherBlocks::never).strength(-1.0F).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
         HOLYSTONE = register("holystone", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.GRAY).strength(0.5F, 10.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
         HOLYSTONE_BRICK = register("holystone_brick", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS).materialColor(MaterialColor.WHITE)), buildingBlock());
         MOSSY_HOLYSTONE = register("mossy_holystone", new Block(FabricBlockSettings.copyOf(Blocks.MOSSY_COBBLESTONE).materialColor(MaterialColor.WHITE)), buildingBlock());
-        BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).collidable(false)), buildingBlock());
 
         ZANITE_ORE = register("zanite_ore", new Block(FabricBlockSettings.copyOf(Blocks.IRON_ORE)), buildingBlock());
 //        CRYSTAL_SAPLING = register("crystal_sapling", null);
@@ -174,12 +173,12 @@ public class AetherBlocks {
         AETHER_GRASS_PATH = register("aether_grass_path", new AetherGrassPathBlock(), buildingBlock());
         AMBROSIUM_TORCH = register("ambrosium_torch", new AmbrosiumTorchBlock(), buildingBlock());
         AMBROSIUM_TORCH_WALL = register("ambrosium_wall_torch", new AmbrosiumTorchWallBlock());
-//        ANGELIC_SLAB = register("angelic_slab", null);
-//        ANGELIC_STAIRS = register("angelic_stairs", null);
-//        ANGELIC_STONE = register("angelic_stone", null);
-//        ANGELIC_STONE_TRAP = register("angelic_stone_trap", null);
-//        ANGELIC_WALL = register("angelic_wall", null);
-//        BERRY_BUSH = register("berry_bush", null);
+        ANGELIC_STONE = register("angelic_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)));
+        ANGELIC_SLAB = register("angelic_slab", new AetherSlabBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
+        ANGELIC_STAIRS = register("angelic_stairs", new AetherStairsBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
+        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)));
+        ANGELIC_WALL = register("angelic_wall", new AetherWallBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
+        BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).collidable(false)), buildingBlock());
 //        BERRY_BUSH_STEM = register("berry_bush_stem", null);
 //        BLACK_DYED_AERCLOUD = register("black_dyed_aercloud", null);
 //        BLUE_AERCLOUD = register("blue_aercloud", null);
@@ -312,7 +311,9 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getCutout());
     }
 
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {
