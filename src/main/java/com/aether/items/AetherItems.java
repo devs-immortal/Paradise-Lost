@@ -94,6 +94,7 @@ public class AetherItems {
         VALKYRIE_SHOVEL = register("valkyrie_shovel", new AetherShovel(AetherTiers.VALKYRIE, AETHER_LOOT, 1.5F, -3.0F));
         VALKYRIE_PICKAXE = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.VALKYRIE, AETHER_LOOT, 1, -2.8F));
         VALKYRIE_AXE = register("valkyrie_axe", new AetherAxe(AetherTiers.VALKYRIE, AETHER_LOOT, 4.0F, -2.9F));
+        VALKYRIE_LANCE = register("valkyrie_lance", new ValkyrieLance());
 
         // Armor
         ZANITE_HELMET = register("zanite_helmet", new AetherArmor(AetherArmorType.ZANITE, EquipmentSlot.HEAD));
