@@ -125,12 +125,12 @@ public class AetherBlocks {
     public static final Block QUICKSOIL_GLASS;
     public static final Block QUICKSOIL_GLASS_PANE;
     //    public static final Block RED_DYED_AERCLOUD;
-//    public static final Block SENTRY_SLAB;
-//    public static final Block SENTRY_STAIRS;
-//    public static final Block SENTRY_STONE;
-//    public static final Block SENTRY_STONE_TRAP;
-//    public static final Block SENTRY_WALL;
-//    public static final Block SKYROOT_BOOKSHELF;
+    public static final Block SENTRY_SLAB;
+    public static final Block SENTRY_STAIRS;
+    public static final Block SENTRY_STONE;
+    public static final Block SENTRY_STONE_TRAP;
+    public static final Block SENTRY_WALL;
+    //    public static final Block SKYROOT_BOOKSHELF;
 //    public static final Block SKYROOT_FENCE;
     public static final Block SKYROOT_FENCE_GATE;
     //    public static final Block SKYROOT_LEAVES;
@@ -173,10 +173,10 @@ public class AetherBlocks {
         AETHER_GRASS_PATH = register("aether_grass_path", new AetherGrassPathBlock(), buildingBlock());
         AMBROSIUM_TORCH = register("ambrosium_torch", new AmbrosiumTorchBlock(), buildingBlock());
         AMBROSIUM_TORCH_WALL = register("ambrosium_wall_torch", new AmbrosiumTorchWallBlock());
-        ANGELIC_STONE = register("angelic_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)));
+        ANGELIC_STONE = register("angelic_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
         ANGELIC_SLAB = register("angelic_slab", new AetherSlabBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         ANGELIC_STAIRS = register("angelic_stairs", new AetherStairsBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
-        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)));
+        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
         ANGELIC_WALL = register("angelic_wall", new AetherWallBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).collidable(false)), buildingBlock());
 //        BERRY_BUSH_STEM = register("berry_bush_stem", null);
@@ -256,15 +256,15 @@ public class AetherBlocks {
 //        PRESENT = register("present", null);
 //        PURPLE_DYED_AERCLOUD = register("purple_dyed_aercloud", null);
 //        PURPLE_FLOWER = register("purple_flower", null);
-        QUICKSOIL = register("quicksoil", new Block(FabricBlockSettings.of(Material.AGGREGATE).strength(0.5F, -1.0F).sounds(BlockSoundGroup.SAND)));
+        QUICKSOIL = register("quicksoil", new Block(FabricBlockSettings.of(Material.AGGREGATE).strength(0.5F, -1.0F).sounds(BlockSoundGroup.SAND)), buildingBlock());
         QUICKSOIL_GLASS = register("quicksoil_glass", new Block(FabricBlockSettings.of(Material.GLASS).lightLevel(14).strength(0.2F, -1.0F).sounds(BlockSoundGroup.GLASS)), buildingBlock());
         QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
 //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
-//        SENTRY_SLAB = register("sentry_slab", null);
-//        SENTRY_STAIRS = register("sentry_stairs", null);
-//        SENTRY_STONE = register("sentry_stone", null);
-//        SENTRY_STONE_TRAP = register("sentry_stone_trap", null);
-//        SENTRY_WALL = register("sentry_wall", null);
+        SENTRY_STONE = register("sentry_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).lightLevel(11).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        SENTRY_STONE_TRAP = register("sentry_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        SENTRY_SLAB = register("sentry_slab", new AetherSlabBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
+        SENTRY_STAIRS = register("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
+        SENTRY_WALL = register("sentry_wall", new AetherWallBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SKYROOT_PLANKS = register("skyroot_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)), buildingBlock());
 //        SKYROOT_BOOKSHELF = register("skyroot_bookshelf", null);
 //        SKYROOT_FENCE = register("skyroot_fence", null);
@@ -291,16 +291,16 @@ public class AetherBlocks {
         return new FabricItemSettings().group(AetherItemGroups.BLOCKS);
     }
 
-    private static Block register(String id, Block block, Item.Settings settings) {
-        Identifier trueId = new Identifier(Aether.MODID, id);
-        Registry.register(Registry.BLOCK, trueId, block);
-        Registry.register(Registry.ITEM, trueId, new BlockItem(block, settings));
-        return block;
-    }
+private static Block register(String id, Block block, Item.Settings settings) {
+    Identifier trueId = new Identifier(Aether.MODID, id);
+    Registry.register(Registry.BLOCK, trueId, block);
+    Registry.register(Registry.ITEM, trueId, new BlockItem(block, settings));
+    return block;
+}
 
-    private static Block register(String id, Block block) {
-        return Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, id), block);
-    }
+private static Block register(String id, Block block) {
+    return Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, id), block);
+}
 
     private static PillarBlock createLogBlock(MaterialColor topMaterialColor, MaterialColor sideMaterialColor) {
         return new PillarBlock(AbstractBlock.Settings.of(Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMaterialColor : sideMaterialColor).strength(2.0F).sounds(BlockSoundGroup.WOOD));
