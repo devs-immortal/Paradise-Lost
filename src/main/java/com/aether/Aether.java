@@ -8,17 +8,20 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.util.Identifier;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Aether implements ModInitializer, ClientModInitializer {
 
     public static final String MODID = "the_aether";
     public static final Identifier MOD_DIMENSION_ID = new Identifier(Aether.MODID, Aether.MODID);
+    public static final Logger AETHER_LOG = LogManager.getLogger(MODID);
 
     @Override
     public void onInitialize() {
         AetherDimension.setupDimension();
         ServerTickEvents.END_SERVER_TICK.register(AetherEvents::ServerTickEnd);
-        UseBlockCallback.EVENT.register(AetherEvents::UseBlock);
+        //UseBlockCallback.EVENT.register(AetherEvents::UseBlock);
     }
 
     @Override

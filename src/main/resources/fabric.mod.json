@@ -7,6 +7,7 @@
   "license": "GNU GPLv3",
   "authors": [
     "kalucky0",
+    "Azazelthedemonlord",
     "bconlon",
     "Oscar Payn",
     "Hugo Payn",
@@ -25,6 +26,7 @@
     "fabric-networking-v0": "*"
   },
   "mixins": [
+    "the_aether.mixins.json"
   ],
   "entrypoints": {
     "main": [

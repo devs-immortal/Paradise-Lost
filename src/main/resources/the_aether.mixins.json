@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.aether.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PortalBuilderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -68,7 +68,7 @@ public class BlueberryBushBlock extends PlantBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(world.getLightLevel(pos) >= 8 && world.getRandom().nextInt(world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 5 : 16) == 0) {
+        if(world.getLightLevel(pos) >= 8 && world.getRandom().nextInt(world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 12 : 26) == 0) {
             world.setBlockState(pos, state.with(RIPE, true));
         }
     }
