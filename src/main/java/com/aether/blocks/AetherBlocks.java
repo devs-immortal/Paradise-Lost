@@ -121,7 +121,7 @@ public class AetherBlocks {
 //    public static final Block PRESENT;
 //    public static final Block PURPLE_DYED_AERCLOUD;
 //    public static final Block PURPLE_FLOWER;
-//    public static final Block QUICKSOIL;
+    public static final Block QUICKSOIL;
     public static final Block QUICKSOIL_GLASS;
     public static final Block QUICKSOIL_GLASS_PANE;
     //    public static final Block RED_DYED_AERCLOUD;
@@ -256,7 +256,7 @@ public class AetherBlocks {
 //        PRESENT = register("present", null);
 //        PURPLE_DYED_AERCLOUD = register("purple_dyed_aercloud", null);
 //        PURPLE_FLOWER = register("purple_flower", null);
-//        QUICKSOIL = register("quicksoil", null);
+        QUICKSOIL = register("quicksoil", new Block(FabricBlockSettings.of(Material.AGGREGATE).strength(0.5F, -1.0F).sounds(BlockSoundGroup.SAND)));
         QUICKSOIL_GLASS = register("quicksoil_glass", new Block(FabricBlockSettings.of(Material.GLASS).lightLevel(14).strength(0.2F, -1.0F).sounds(BlockSoundGroup.GLASS)), buildingBlock());
         QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
 //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
