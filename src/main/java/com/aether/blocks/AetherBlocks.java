@@ -68,12 +68,12 @@ public class AetherBlocks {
 //    public static final Block GRAVITITE_ORE;
 //    public static final Block GREEN_DYED_AERCLOUD;
 //    public static final Block GREY_DYED_AERCLOUD;
-//    public static final Block HELLFIRE_SLAB;
-//    public static final Block HELLFIRE_STAIRS;
-//    public static final Block HELLFIRE_STONE;
-//    public static final Block HELLFIRE_STONE_TRAP;
-//    public static final Block HELLFIRE_WALL;
-//    public static final Block HOLIDAY_LEAVES;
+    public static final Block HELLFIRE_SLAB;
+    public static final Block HELLFIRE_STAIRS;
+    public static final Block HELLFIRE_STONE;
+    public static final Block HELLFIRE_STONE_TRAP;
+    public static final Block HELLFIRE_WALL;
+    //    public static final Block HOLIDAY_LEAVES;
     public static final Block HOLYSTONE;
     public static final Block HOLYSTONE_BRICK;
     public static final Block HOLYSTONE_BRICK_SLAB;
@@ -94,12 +94,12 @@ public class AetherBlocks {
 //    public static final Block LIGHT_ANGELIC_WALL;
 //    public static final Block LIGHT_BLUE_DYED_AERCLOUD;
 //    public static final Block LIGHT_GREY_DYED_AERCLOUD;
-//    public static final Block LIGHT_HELLFIRE_SLAB;
-//    public static final Block LIGHT_HELLFIRE_STAIRS;
-//    public static final Block LIGHT_HELLFIRE_STONE;
-//    public static final Block LIGHT_HELLFIRE_STONE_TRAP;
-//    public static final Block LIGHT_HELLFIRE_WALL;
-//    public static final Block LIME_DYED_AERCLOUD;
+    public static final Block LIGHT_HELLFIRE_SLAB;
+    public static final Block LIGHT_HELLFIRE_STAIRS;
+    public static final Block LIGHT_HELLFIRE_STONE;
+    public static final Block LIGHT_HELLFIRE_STONE_TRAP;
+    public static final Block LIGHT_HELLFIRE_WALL;
+    //    public static final Block LIME_DYED_AERCLOUD;
 //    public static final Block LOCKED_ANGELIC_STONE;
 //    public static final Block LOCKED_CARVED_STONE;
 //    public static final Block LOCKED_HELLFIRE_STONE;
@@ -157,7 +157,7 @@ public class AetherBlocks {
     static {
         AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT)), buildingBlock());
         AETHER_GRASS = register("aether_grass", new AetherGrassBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).materialColor(MaterialColor.CYAN)), buildingBlock());
-        AETHER_ENCHANTED_GRASS = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD).luminance(ignored -> 2)), buildingBlock());
+        AETHER_ENCHANTED_GRASS = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD)), buildingBlock());
         AMBROSIUM_ORE = register("ambrosium_ore", new Block(FabricBlockSettings.copyOf(Blocks.COAL_ORE)), buildingBlock());
         BLUE_PORTAL = register("blue_portal", new PortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MaterialColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(AetherBlocks::never).strength(-1.0F).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
         HOLYSTONE = register("holystone", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.GRAY).strength(0.5F, 10.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
@@ -207,11 +207,11 @@ public class AetherBlocks {
 //        GRAVITITE_ORE = register("gravitite_ore", null);
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
-//        HELLFIRE_SLAB = register("hellfire_slab", null);
-//        HELLFIRE_STAIRS = register("hellfire_stairs", null);
-//        HELLFIRE_STONE = register("hellfire_stone", null);
-//        HELLFIRE_STONE_TRAP = register("hellfire_stone_trap", null);
-//        HELLFIRE_WALL = register("hellfire_wall", null);
+        HELLFIRE_STONE = register("hellfire_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        HELLFIRE_STONE_TRAP = register("hellfire_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        HELLFIRE_WALL = register("hellfire_wall", new AetherWallBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
+        HELLFIRE_SLAB = register("hellfire_slab", new AetherSlabBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
+        HELLFIRE_STAIRS = register("hellfire_stairs", new AetherStairsBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
 //        HOLIDAY_LEAVES = register("holiday_leaves", null);
         HOLYSTONE_BRICK_SLAB = register("holystone_brick_slab", new AetherSlabBlock(HOLYSTONE_BRICK.getDefaultState()), buildingBlock());
         HOLYSTONE_BRICK_STAIRS = register("holystone_brick_stairs", new AetherStairsBlock(HOLYSTONE_BRICK.getDefaultState()), buildingBlock());
@@ -231,11 +231,11 @@ public class AetherBlocks {
 //        LIGHT_ANGELIC_WALL = register("light_angelic_wall", null);
 //        LIGHT_BLUE_DYED_AERCLOUD = register("light_blue_dyed_aercloud", null);
 //        LIGHT_GREY_DYED_AERCLOUD = register("light_grey_dyed_aercloud", null);
-//        LIGHT_HELLFIRE_SLAB = register("light_hellfire_slab", null);
-//        LIGHT_HELLFIRE_STAIRS = register("light_hellfire_stairs", null);
-//        LIGHT_HELLFIRE_STONE = register("light_hellfire_stone", null);
-//        LIGHT_HELLFIRE_STONE_TRAP = register("light_hellfire_stone_trap", null);
-//        LIGHT_HELLFIRE_WALL = register("light_hellfire_wall", null);
+        LIGHT_HELLFIRE_STONE = register("light_hellfire_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        LIGHT_HELLFIRE_STONE_TRAP = register("light_hellfire_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        LIGHT_HELLFIRE_SLAB = register("light_hellfire_slab", new AetherSlabBlock(LIGHT_HELLFIRE_STONE.getDefaultState()), buildingBlock());
+        LIGHT_HELLFIRE_STAIRS = register("light_hellfire_stairs", new AetherStairsBlock(LIGHT_HELLFIRE_STONE.getDefaultState()), buildingBlock());
+        LIGHT_HELLFIRE_WALL = register("light_hellfire_wall", new AetherWallBlock(LIGHT_HELLFIRE_STONE.getDefaultState()), buildingBlock());
 //        LIME_DYED_AERCLOUD = register("lime_dyed_aercloud", null);
 //        LOCKED_ANGELIC_STONE = register("locked_angelic_stone", null);
 //        LOCKED_CARVED_STONE = register("locked_carved_stone", null);
@@ -293,16 +293,16 @@ public class AetherBlocks {
         return new FabricItemSettings().group(AetherItemGroups.BLOCKS);
     }
 
-private static Block register(String id, Block block, Item.Settings settings) {
-    Identifier trueId = new Identifier(Aether.MODID, id);
-    Registry.register(Registry.BLOCK, trueId, block);
-    Registry.register(Registry.ITEM, trueId, new BlockItem(block, settings));
-    return block;
-}
+    private static Block register(String id, Block block, Item.Settings settings) {
+        Identifier trueId = new Identifier(Aether.MODID, id);
+        Registry.register(Registry.BLOCK, trueId, block);
+        Registry.register(Registry.ITEM, trueId, new BlockItem(block, settings));
+        return block;
+    }
 
-private static Block register(String id, Block block) {
-    return Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, id), block);
-}
+    private static Block register(String id, Block block) {
+        return Registry.register(Registry.BLOCK, new Identifier(Aether.MODID, id), block);
+    }
 
     private static PillarBlock createLogBlock(MaterialColor topMaterialColor, MaterialColor sideMaterialColor) {
         return new PillarBlock(AbstractBlock.Settings.of(Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMaterialColor : sideMaterialColor).strength(2.0F).sounds(BlockSoundGroup.WOOD));
