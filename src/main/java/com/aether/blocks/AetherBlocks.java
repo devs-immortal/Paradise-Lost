@@ -177,7 +177,7 @@ public class AetherBlocks {
         ANGELIC_STONE = register("angelic_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
         ANGELIC_SLAB = register("angelic_slab", new AetherSlabBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         ANGELIC_STAIRS = register("angelic_stairs", new AetherStairsBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
-        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)));
         ANGELIC_WALL = register("angelic_wall", new AetherWallBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).collidable(false)), buildingBlock());
 //        BERRY_BUSH_STEM = register("berry_bush_stem", null);
@@ -208,7 +208,7 @@ public class AetherBlocks {
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
         HELLFIRE_STONE = register("hellfire_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
-        HELLFIRE_STONE_TRAP = register("hellfire_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        HELLFIRE_STONE_TRAP = register("hellfire_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)));
         HELLFIRE_WALL = register("hellfire_wall", new AetherWallBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
         HELLFIRE_SLAB = register("hellfire_slab", new AetherSlabBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
         HELLFIRE_STAIRS = register("hellfire_stairs", new AetherStairsBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
@@ -232,7 +232,7 @@ public class AetherBlocks {
 //        LIGHT_BLUE_DYED_AERCLOUD = register("light_blue_dyed_aercloud", null);
 //        LIGHT_GREY_DYED_AERCLOUD = register("light_grey_dyed_aercloud", null);
         LIGHT_HELLFIRE_STONE = register("light_hellfire_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
-        LIGHT_HELLFIRE_STONE_TRAP = register("light_hellfire_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        LIGHT_HELLFIRE_STONE_TRAP = register("light_hellfire_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)));
         LIGHT_HELLFIRE_SLAB = register("light_hellfire_slab", new AetherSlabBlock(LIGHT_HELLFIRE_STONE.getDefaultState()), buildingBlock());
         LIGHT_HELLFIRE_STAIRS = register("light_hellfire_stairs", new AetherStairsBlock(LIGHT_HELLFIRE_STONE.getDefaultState()), buildingBlock());
         LIGHT_HELLFIRE_WALL = register("light_hellfire_wall", new AetherWallBlock(LIGHT_HELLFIRE_STONE.getDefaultState()), buildingBlock());
@@ -263,7 +263,7 @@ public class AetherBlocks {
 //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
         SENTRY_STONE = register("sentry_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
         LIGHT_SENTRY_STONE = register("light_sentry_stone", new Block(FabricBlockSettings.copyOf(SENTRY_STONE).luminance(ignored -> 10)), buildingBlock());
-        SENTRY_STONE_TRAP = register("sentry_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        SENTRY_STONE_TRAP = register("sentry_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)));
         SENTRY_SLAB = register("sentry_slab", new AetherSlabBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_STAIRS = register("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_WALL = register("sentry_wall", new AetherWallBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
