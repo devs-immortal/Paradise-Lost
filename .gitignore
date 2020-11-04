@@ -120,3 +120,6 @@ run/
 # Assets that are unlicensed and all rights are reserved to them by Gilded Games.
 src/main/resources/assets/legacy_aether/
 src/main/resources/assets/minecraft/textures/
+.classpath
+.project
+.settings/org.eclipse.buildship.core.prefs
