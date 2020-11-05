@@ -13,7 +13,6 @@ group = project.maven_group
 
 repositories {
     maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     maven {
         name = "Modmenu"
         url = "https://maven.fabricmc.net/io/github/prospector/modmenu/"
@@ -27,26 +26,17 @@ repositories {
 }
 
 dependencies {
-    //to change the versions see the gradle.properties file
+    // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    //Libraries
+    // Libraries
     modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:1.0.1"))
-    modImplementation(include(group: "net.fabricmc", name: "fabric-language-kotlin", version: "1.4.0+build.1"))
 
-    // Implement only the required portions of FAPI
-    // Remember to maintain these, and add the modular bits as needed. Do not use the full api if we don't need to!
-    modImplementation "net.fabricmc.fabric-api:fabric-object-builder-api-v1:${project.object_builder_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-events-interaction-v0:${project.interaction_events_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-blockrenderlayer-v1:${project.blockrenderlayer_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-item-api-v1:${project.item_api_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-item-groups-v0:${project.item_groups_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-lifecycle-events-v1:${project.lifecycle_events_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api-base:${project.base_api_version}"
-    //modImplementation "net.fabricmc.fabric-api:fabric-api:0.25.1+build.416-1.16"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    // Implement the required portions of FAPI
+    // Remember to maintain these, and add the modular bits as needed. 
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
     // Testing only, do not JiJ
     //modImplementation "io.github.prospector:modmenu:1.14.6+build.31"
