@@ -4,7 +4,7 @@
   "package": "com.aether.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PortalBuilderMixin"
+    "BucketItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
