@@ -2,7 +2,6 @@ package com.aether.items.food;
 
 import com.aether.items.AetherItemGroups;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

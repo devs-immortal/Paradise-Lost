@@ -24,7 +24,6 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 
 public class SkyrootBucket extends Item {
 

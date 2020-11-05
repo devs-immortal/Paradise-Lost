@@ -10,10 +10,12 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.FlowerFeature;
+import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("unchecked")
 public class AetherGrassBlock extends SpreadableAetherBlock implements Fertilizable {
     public AetherGrassBlock(Settings settings) {
         super(settings.strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS));
@@ -55,9 +57,9 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
                         continue;
                     }
 
-                    ConfiguredFeature<?, ?> configuredFeature = (ConfiguredFeature) list.get(0);
-                    FlowerFeature flowerFeature = (FlowerFeature) configuredFeature.feature;
-                    blockState4 = flowerFeature.getFlowerState(random, blockPos2, configuredFeature.getConfig());
+                    ConfiguredFeature<?, ?> configuredFeature = list.get(0);
+                    FlowerFeature<RandomPatchFeatureConfig> flowerFeature = (FlowerFeature<RandomPatchFeatureConfig>) configuredFeature.feature;
+                    blockState4 = flowerFeature.getFlowerState(random, blockPos2, (RandomPatchFeatureConfig) configuredFeature.getConfig());
                 } else {
                     blockState4 = blockState;
                 }
