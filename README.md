@@ -1,4 +1,4 @@
-# The Aether 1.16.3
+# The Aether
 [![Code license (GNU GPL 3.0)](https://img.shields.io/badge/code%20license-GNU%20GPLv3-green.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Asset license (Unlicensed)](https://img.shields.io/badge/assets%20license-All%20Rights%20Reserved-red.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
 ![GitHub repo size](https://img.shields.io/github/repo-size/kalucky0/The-Aether)
@@ -15,7 +15,7 @@ The Aether is a dimension high in the sky composed of floating islands. Ascend t
 You can support my work by [making a pledge](https://www.patreon.com/kalucky0) today helping fund development and gaining access to special perks. You can also support the Aether project and **Gilded Games** on [their Patreon](https://www.patreon.com/GildedGames) as they are the ones who did most of the work.
 
 ## License information
-Originally made by [Gilded Games](https://gildedgames.com/) under GNU GPLv3 license. Updated to 1.16.3 by [kalucky0](https://kalucky0.dev). New assets by [Azzy](https://www.reddit.com/user/Azazelthedemonlord). You can find more about GNU GPLv3 on [this website](https://www.gnu.org/licenses/gpl-3.0.en.html).
+Originally made by [Gilded Games](https://gildedgames.com/) under GNU GPLv3 license. Updated to modern versions of minecraft by [kalucky0](https://kalucky0.dev). New assets by [Azzy](https://www.reddit.com/user/Azazelthedemonlord). You can find more about GNU GPLv3 on [this website](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 ## Translations
 The Aether project makes use of crowd sourced translations. The Aether is available in these languages thanks to the following contributors:
