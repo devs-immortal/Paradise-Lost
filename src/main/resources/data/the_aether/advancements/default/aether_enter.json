@@ -9,14 +9,14 @@
     "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": true
+    "hidden": false
   },
   "criteria": {
     "enter_aether": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
         "from": "minecraft:overworld",
-        "to": "minecraft:the_nether"
+        "to": "the_aether:the_aether"
       }
     }
   },
