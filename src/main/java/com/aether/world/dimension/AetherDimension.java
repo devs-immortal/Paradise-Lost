@@ -1,6 +1,8 @@
-package com.aether.dimension;
+package com.aether.world.dimension;
 
 import com.aether.Aether;
+import com.aether.world.biome.AetherBiomeProvider;
+
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
@@ -11,7 +13,7 @@ public class AetherDimension {
     public static void setupDimension(){
         AetherChunkGenerator.registerChunkGenerator();
         AetherBiomeProvider.registerBiomeProvider();
-////      TODO: Implement SurfaceBuilders
+//
 //        AetherSurfaceBuilders.registerSurfaceBuilders();
     }
 }

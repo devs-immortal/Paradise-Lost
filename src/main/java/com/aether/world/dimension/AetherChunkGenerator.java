@@ -1,4 +1,4 @@
-package com.aether.dimension;
+package com.aether.world.dimension;
 
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
@@ -114,6 +114,11 @@ public class AetherChunkGenerator extends ChunkGenerator {
                 biomes_1.getBiomeForNoiseGen(int_7, int_8, 0).buildSurface(class_2919_1, chunk, int_7, int_8, 0, 0.0D, AetherBlocks.HOLYSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), 0, region.getSeed());
             }
         }
+    }
+
+    @Override
+    public int getSpawnHeight() {
+        return 0;
     }
 
     @Override

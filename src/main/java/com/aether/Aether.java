@@ -1,7 +1,7 @@
 package com.aether;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.dimension.AetherDimension;
+import com.aether.world.dimension.AetherDimension;
 import com.aether.items.AetherItems;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
