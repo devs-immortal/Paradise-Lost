@@ -10,8 +10,8 @@ public class AetherDimension {
 
     public static void setupDimension(){
         AetherChunkGenerator.registerChunkGenerator();
-//        AetherBiomeProvider.registerBiomeProvider();
-//
+        AetherBiomeProvider.registerBiomeProvider();
+////      TODO: Implement SurfaceBuilders
 //        AetherSurfaceBuilders.registerSurfaceBuilders();
     }
 }

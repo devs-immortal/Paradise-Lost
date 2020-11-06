@@ -1,11 +1,13 @@
 package com.aether.mixin
 
-import com.aether.Aether.AETHER_LOG
 import com.aether.Aether.PORTAL_BLOCKS
 import com.aether.blocks.AetherBlocks
 import com.aether.blocks.PortalBlock
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableSet
+import net.fabricmc.fabric.api.`object`.builder.v1.advancement.CriterionRegistry
+import net.minecraft.advancement.Advancement
+import net.minecraft.advancement.AdvancementManager
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
@@ -71,8 +73,9 @@ class BucketPortalMixin: Item(Settings()){
                     break
                 }
             }
-            if(valid)
+            if(valid) {
                 floodFill(world, pos.up(), dirs, AetherBlocks.BLUE_PORTAL.defaultState.with(PortalBlock.AXIS, if (NS) Direction.Axis.Z else Direction.Axis.X))
+            }
         }
         return valid
     }
