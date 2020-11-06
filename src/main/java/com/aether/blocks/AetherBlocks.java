@@ -131,8 +131,8 @@ public class AetherBlocks {
     public static final Block SENTRY_STONE_TRAP;
     public static final Block SENTRY_WALL;
     public static final Block LIGHT_SENTRY_STONE;
-    //    public static final Block SKYROOT_BOOKSHELF;
-//    public static final Block SKYROOT_FENCE;
+    public static final Block SKYROOT_BOOKSHELF;
+    public static final Block SKYROOT_FENCE;
     public static final Block SKYROOT_FENCE_GATE;
     //    public static final Block SKYROOT_LEAVES;
     public static final Block SKYROOT_LOG;
@@ -163,7 +163,6 @@ public class AetherBlocks {
         HOLYSTONE = register("holystone", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.GRAY).strength(0.5F, 10.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
         HOLYSTONE_BRICK = register("holystone_brick", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS).materialColor(MaterialColor.WHITE)), buildingBlock());
         MOSSY_HOLYSTONE = register("mossy_holystone", new Block(FabricBlockSettings.copyOf(Blocks.MOSSY_COBBLESTONE).materialColor(MaterialColor.WHITE)), buildingBlock());
-
         ZANITE_ORE = register("zanite_ore", new Block(FabricBlockSettings.copyOf(Blocks.IRON_ORE)), buildingBlock());
 //        CRYSTAL_SAPLING = register("crystal_sapling", null);
         AEROGEL = register("aerogel", new Block(FabricBlockSettings.of(Material.SOIL).strength(1.0F, 2000.0F).sounds(BlockSoundGroup.GLASS)), buildingBlock());
@@ -268,8 +267,8 @@ public class AetherBlocks {
         SENTRY_STAIRS = register("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_WALL = register("sentry_wall", new AetherWallBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SKYROOT_PLANKS = register("skyroot_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)), buildingBlock());
-//        SKYROOT_BOOKSHELF = register("skyroot_bookshelf", null);
-//        SKYROOT_FENCE = register("skyroot_fence", null);
+        SKYROOT_BOOKSHELF = register("skyroot_bookshelf", new Block(FabricBlockSettings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD)), buildingBlock());
+        SKYROOT_FENCE = register("skyroot_fence", new FenceBlock(FabricBlockSettings.copy(SKYROOT_PLANKS)), buildingBlock());
         SKYROOT_FENCE_GATE = register("skyroot_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(AetherBlocks.SKYROOT_PLANKS)), buildingBlock());
 //        SKYROOT_LEAVES = register("skyroot_leaves", null);
         SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.GREEN, MaterialColor.WOOD), buildingBlock());
