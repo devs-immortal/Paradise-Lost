@@ -50,7 +50,7 @@ public class AetherBlocks {
     public static final Block CARVED_STONE;
     public static final Block CARVED_STONE_TRAP;
     public static final Block CARVED_WALL;
-//    public static final Block CHEST_MIMIC;
+    //    public static final Block CHEST_MIMIC;
 //    public static final Block COLD_AERCLOUD;
 //    public static final Block CRYSTAL_FRUIT_LEAVES;
 //    public static final Block CRYSTAL_LEAVES;
@@ -92,7 +92,7 @@ public class AetherBlocks {
     public static final Block LIGHT_ANGELIC_STONE;
     public static final Block LIGHT_ANGELIC_STONE_TRAP;
     public static final Block LIGHT_ANGELIC_WALL;
-//    public static final Block LIGHT_BLUE_DYED_AERCLOUD;
+    //    public static final Block LIGHT_BLUE_DYED_AERCLOUD;
 //    public static final Block LIGHT_GREY_DYED_AERCLOUD;
     public static final Block LIGHT_HELLFIRE_SLAB;
     public static final Block LIGHT_HELLFIRE_STAIRS;
@@ -108,10 +108,10 @@ public class AetherBlocks {
 //    public static final Block LOCKED_SENTRY_STONE;
 //    public static final Block MAGENTA_DYED_AERCLOUD;
     public static final Block MOSSY_HOLYSTONE;
-//    public static final Block MOSSY_HOLYSTONE_SLAB;
-//    public static final Block MOSSY_HOLYSTONE_STAIRS;
-//    public static final Block MOSSY_HOLYSTONE_WALL;
-//    public static final Block ORANGE_DYED_AERCLOUD;
+    public static final Block MOSSY_HOLYSTONE_SLAB;
+    public static final Block MOSSY_HOLYSTONE_STAIRS;
+    public static final Block MOSSY_HOLYSTONE_WALL;
+    //    public static final Block ORANGE_DYED_AERCLOUD;
 //    public static final Block PILLAR;
 //    public static final Block PILLAR_TOP;
 //    public static final Block PINK_AERCLOUD;
@@ -244,9 +244,9 @@ public class AetherBlocks {
 //        LOCKED_LIGHT_HELLFIRE_STONE = register("locked_light_hellfire_stone", null);
 //        LOCKED_SENTRY_STONE = register("locked_sentry_stone", null);
 //        MAGENTA_DYED_AERCLOUD = register("magenta_dyed_aercloud", null);
-//        MOSSY_HOLYSTONE_SLAB = register("mossy_holystone_slab", null);
-//        MOSSY_HOLYSTONE_STAIRS = register("mossy_holystone_stairs", null);
-//        MOSSY_HOLYSTONE_WALL = register("mossy_holystone_wall", null);
+        MOSSY_HOLYSTONE_SLAB = register("mossy_holystone_slab", new AetherSlabBlock(MOSSY_HOLYSTONE.getDefaultState()), buildingBlock());
+        MOSSY_HOLYSTONE_STAIRS = register("mossy_holystone_stairs", new AetherStairsBlock(MOSSY_HOLYSTONE.getDefaultState()), buildingBlock());
+        MOSSY_HOLYSTONE_WALL = register("mossy_holystone_wall", new AetherWallBlock(MOSSY_HOLYSTONE.getDefaultState()), buildingBlock());
 //        ORANGE_DYED_AERCLOUD = register("orange_dyed_aercloud", null);
 //        PILLAR = register("pillar", null);
 //        PILLAR_TOP = register("pillar_top", null);
