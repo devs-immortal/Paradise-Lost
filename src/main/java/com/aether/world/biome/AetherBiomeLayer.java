@@ -13,8 +13,6 @@ import net.minecraft.world.gen.ChunkRandom;
 public enum AetherBiomeLayer implements InitLayer {
     INSTANCE;
 
-    //private static final Identifier SUGAR_WATER = new Identifier(Bumblezone.MODID, "sugar_water_floor");
-    //private static final Identifier HIVE_WALL = new Identifier(Bumblezone.MODID, "hive_wall");
     private static final Identifier AETHER_HIGHLANDS = new Identifier(Aether.MODID, "aether_highlands");
 
     private static OctaveSimplexNoiseSampler perlinGen;
@@ -27,21 +25,21 @@ public enum AetherBiomeLayer implements InitLayer {
 //
 //		max = Math.max(max, perlinNoise);
 //		min = Math.min(min, perlinNoise);
-//		Bumblezone.LOGGER.log(Level.INFO, "Max: " + max +", Min: "+min + ", perlin: "+perlinNoise);
+//		Aether.LOGGER.log(Level.INFO, "Max: " + max +", Min: "+min + ", perlin: "+perlinNoise);
 
         /*if (Math.abs(perlinNoise) % 0.1D < 0.07D) {
-            return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(HIVE_WALL));
+            return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(aab));
         }
         else {
-            return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(SUGAR_WATER));
+            return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(bba));
         }*/
         return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(AETHER_HIGHLANDS));
     }
 
     public static void setSeed(long seed) {
         if (perlinGen == null) {
-            ChunkRandom sharedseedrandom = new ChunkRandom(seed);
-            perlinGen = new OctaveSimplexNoiseSampler(sharedseedrandom, IntStream.rangeClosed(-1, 0));
+            ChunkRandom sharedSeedRandom = new ChunkRandom(seed);
+            perlinGen = new OctaveSimplexNoiseSampler(sharedSeedRandom, IntStream.rangeClosed(-1, 0));
         }
     }
 }
