@@ -1,7 +1,7 @@
 {
     "config": {
       "top_material": {
-        "Name": "the_aether:aether_grass"
+        "Name": "the_aether:aether_dirt"
       },
       "under_material": {
         "Name": "the_aether:aether_dirt"

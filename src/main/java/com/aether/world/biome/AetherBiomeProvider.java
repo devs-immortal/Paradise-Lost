@@ -5,6 +5,7 @@ import java.util.function.LongFunction;
 import java.util.stream.Collectors;
 
 import com.aether.Aether;
+import com.aether.mixin.BiomeLayerSamplerAccessor;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
@@ -17,7 +18,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BuiltinBiomes;
-import net.minecraft.world.biome.layer.ScaleLayer;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.CachingLayerContext;
 import net.minecraft.world.biome.layer.util.CachingLayerSampler;
@@ -48,11 +48,10 @@ public class AetherBiomeProvider extends BiomeSource {
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList()));
 
-        //AetherBiomeLayer.setSeed(seed);
+        AetherBiomeLayer.setSeed(seed);
         this.BIOME_REGISTRY = biomeRegistry;
         AetherBiomeProvider.layersBiomeRegistry = biomeRegistry;
-        this.BIOME_SAMPLER = null;
-        //this.BIOME_SAMPLER = buildWorldProcedure(seed);
+        this.BIOME_SAMPLER = buildWorldProcedure(seed);
     }
 
     public static void registerBiomeProvider() {
@@ -81,21 +80,21 @@ public class AetherBiomeProvider extends BiomeSource {
     }
 
 
-    /*public static BiomeLayerSampler buildWorldProcedure(long seed) {
+    public static BiomeLayerSampler buildWorldProcedure(long seed) {
         LayerFactory<CachingLayerSampler> layerFactory = build((salt) ->
                 new CachingLayerContext(25, seed, salt));
         return new BiomeLayerSampler(layerFactory);
-    }*/
+    }
 
 
-    /*public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(LongFunction<C> contextFactory) {
-        LayerFactory<T> layer = AetherBiomeLayer.INSTANCE.create(contextFactory.apply(200L));
-        layer = AetherBiomePillarLayer.INSTANCE.create(contextFactory.apply(1008L), layer);
-        layer = AetherBiomeScalePillarLayer.INSTANCE.create(contextFactory.apply(1055L), layer);
-        layer = ScaleLayer.FUZZY.create(contextFactory.apply(2003L), layer);
-        layer = ScaleLayer.FUZZY.create(contextFactory.apply(2523L), layer);
+    public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(LongFunction<C> contextFactory) {
+        LayerFactory<T> layer = AetherBiomeLayer.INSTANCE.create(contextFactory.apply(1L));
+        //layer = AetherBiomePillarLayer.INSTANCE.create(contextFactory.apply(1008L), layer);
+        //layer = AetherBiomeScalePillarLayer.INSTANCE.create(contextFactory.apply(1055L), layer);
+        //layer = ScaleLayer.FUZZY.create(contextFactory.apply(2003L), layer);
+        //layer = ScaleLayer.FUZZY.create(contextFactory.apply(2523L), layer);
         return layer;
-    }*/
+    }
 
     @Override
     public Biome getBiomeForNoiseGen(int x, int y, int z) {
@@ -103,7 +102,7 @@ public class AetherBiomeProvider extends BiomeSource {
     }
 
     public Biome sample(Registry<Biome> registry, int i, int j) {
-        /*int k = ((BiomeLayerSamplerAccessor)this.BIOME_SAMPLER).getSampler().sample(i, j);
+        int k = ((BiomeLayerSamplerAccessor)this.BIOME_SAMPLER).getSampler().sample(i, j);
         Biome biome = registry.get(k);
         if (biome == null) {
             if (SharedConstants.isDevelopment) {
@@ -113,7 +112,6 @@ public class AetherBiomeProvider extends BiomeSource {
             }
         } else {
             return biome;
-        }*/
-        return BuiltinBiomes.PLAINS;
+        }
     }
 }
