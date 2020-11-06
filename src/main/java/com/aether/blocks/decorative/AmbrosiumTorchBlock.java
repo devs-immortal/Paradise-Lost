@@ -6,9 +6,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.block.TorchBlock;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DustParticleEffect;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,7 +15,7 @@ import java.util.Random;
 
 public class AmbrosiumTorchBlock extends TorchBlock {
     public AmbrosiumTorchBlock() {
-        super(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).breakByHand(true).ticksRandomly().lightLevel(15).sounds(BlockSoundGroup.WOOD), new DustParticleEffect(1f, 0.67f, 0.392f, 0.7f));
+        super(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).breakByHand(true).ticksRandomly().luminance(15).sounds(BlockSoundGroup.WOOD), new DustParticleEffect(1f, 0.67f, 0.392f, 0.7f));
     }
 
     @Environment(EnvType.CLIENT)

@@ -7,6 +7,6 @@ import net.minecraft.sound.BlockSoundGroup;
 
 public class QuicksoilGlassPaneBlock extends PaneBlock {
     public QuicksoilGlassPaneBlock() {
-        super(FabricBlockSettings.of(Material.GLASS).lightLevel(14).strength(0.2F, -1.0F).sounds(BlockSoundGroup.GLASS));
+        super(FabricBlockSettings.of(Material.GLASS).luminance(14).strength(0.2F, -1.0F).sounds(BlockSoundGroup.GLASS));
     }
 }
