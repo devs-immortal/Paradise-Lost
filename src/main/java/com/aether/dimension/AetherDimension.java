@@ -9,7 +9,7 @@ public class AetherDimension {
     public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, Aether.MOD_DIMENSION_ID);
 
     public static void setupDimension(){
-        AetherChunkGenerator.registerChunkgenerator();
+        AetherChunkGenerator.registerChunkGenerator();
 //        AetherBiomeProvider.registerBiomeProvider();
 //
 //        AetherSurfaceBuilders.registerSurfaceBuilders();
