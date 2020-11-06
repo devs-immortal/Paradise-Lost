@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    " X "
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "the_aether:skyroot_planks"
+      }
+    ],
+    "X": {
+      "item": "the_aether:skyroot_stick"
+    }
+  },
+  "result": {
+    "item": "oak_sign",
+    "count": 3
+  }
+}

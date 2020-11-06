@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "the_aether:light_angelic_stone",
+      "data": 2
+    }
+  },
+  "result": {
+    "item": "the_aether:light_angelic_wall",
+    "count": 6
+  }
+}
