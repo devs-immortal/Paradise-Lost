@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "white_wool",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "the_aether:white_cape"
+  }
+}

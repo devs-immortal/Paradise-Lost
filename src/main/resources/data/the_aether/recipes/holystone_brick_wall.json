@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "the_aether:holystone_brick"
+    }
+  },
+  "result": {
+    "item": "the_aether:holystone_brick_wall",
+    "count": 6
+  }
+}

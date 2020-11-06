@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "red_wool",
+      "data": 14
+    }
+  },
+  "result": {
+    "item": "the_aether:red_cape"
+  }
+}

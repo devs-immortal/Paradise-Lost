@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "the_aether:skyroot_poison_bucket"
+    },
+    {
+      "item": "the_aether:golden_dart_shooter"
+    }
+  ],
+  "result": {
+    "item": "the_aether:poison_dart_shooter",
+    "count": 1
+  }
+}

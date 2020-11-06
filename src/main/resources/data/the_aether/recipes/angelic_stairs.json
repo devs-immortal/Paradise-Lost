@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "the_aether:angelic_stone",
+      "data": 2
+    }
+  },
+  "result": {
+    "item": "the_aether:angelic_stairs",
+    "count": 4
+  }
+}
