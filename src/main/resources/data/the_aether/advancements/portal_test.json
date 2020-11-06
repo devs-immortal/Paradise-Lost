@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "the_aether:aether_dirt"
+    },
+    "background": "the_aether:textures/block/holystone.png",
+    "title": "It... Its beautiful...",
+    "description": "Create an aether portal and enter it.",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "enter_aether": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "from": "minecraft:overworld",
+        "to": "minecraft:the_nether"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "enter_aether"
+    ]
+  ]
+}
