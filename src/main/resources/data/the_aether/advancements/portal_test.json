@@ -4,7 +4,7 @@
       "item": "the_aether:aether_dirt"
     },
     "background": "the_aether:textures/block/holystone.png",
-    "title": "It... Its beautiful...",
+    "title": "It... It's beautiful...",
     "description": "Create an aether portal and enter it.",
     "frame": "challenge",
     "show_toast": true,
