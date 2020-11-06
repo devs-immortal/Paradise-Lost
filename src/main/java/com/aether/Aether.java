@@ -20,6 +20,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public static final String MODID = "the_aether";
     public static final Identifier MOD_DIMENSION_ID = new Identifier(Aether.MODID, Aether.MODID);
     public static final Logger AETHER_LOG = LogManager.getLogger(MODID);
+    public static final Set<Block> PORTAL_BLOCKS = new HashSet<>();
 
     @Override
     public void onInitialize() {
@@ -31,5 +32,9 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public void onInitializeClient() {
         AetherBlocks.clientInitialization();
         AetherItems.clientInitialization();
+    }
+
+    static {
+        PORTAL_BLOCKS.add(Blocks.GLOWSTONE);
     }
 }
