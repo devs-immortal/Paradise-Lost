@@ -6,7 +6,6 @@ import com.aether.items.AetherItems;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
@@ -27,7 +26,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public void onInitialize() {
         AetherDimension.setupDimension();
         ServerTickEvents.END_SERVER_TICK.register(AetherEvents::ServerTickEnd);
-        //UseBlockCallback.EVENT.register(AetherEvents::UseBlock);
     }
 
     @Override
