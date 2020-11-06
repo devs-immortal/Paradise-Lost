@@ -3,63 +3,60 @@ package com.aether.items;
 import com.aether.Aether;
 import com.aether.items.accessories.AccessoryTypes;
 import com.aether.items.accessories.ItemAccessory;
-import com.aether.items.armor.AetherArmorType;
 import com.aether.items.armor.AetherArmor;
+import com.aether.items.armor.AetherArmorType;
 import com.aether.items.dungeon.DungeonKey;
 import com.aether.items.food.*;
 import com.aether.items.materials.*;
 import com.aether.items.staff.CloudStaff;
 import com.aether.items.staff.NatureStaff;
-import com.aether.items.tools.AetherAxe;
-import com.aether.items.tools.AetherPickaxe;
-import com.aether.items.tools.AetherShovel;
-import com.aether.items.tools.Parachute;
-import com.aether.items.tools.SkyrootBucket;
+import com.aether.items.tools.*;
 import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 public class AetherItems {
-    public static Item ZANITE_GEM, AMBROSIUM_SHARD, GOLDEN_AMBER, AECHOR_PETAL, SWET_BALL;
-    public static Item SKYROOT_STICK, VICTORY_MEDAL;
-    public static Item SKYROOT_PICKAXE, SKYROOT_AXE, SKYROOT_SHOVEL, SKYROOT_SWORD;
-    public static Item HOLYSTONE_PICKAXE, HOLYSTONE_AXE, HOLYSTONE_SHOVEL, HOLYSTONE_SWORD;
-    public static Item ZANITE_PICKAXE, ZANITE_AXE, ZANITE_SHOVEL, ZANITE_SWORD;
-    public static Item GRAVITITE_PICKAXE, GRAVITITE_AXE, GRAVITITE_SHOVEL, GRAVITITE_SWORD;
-    public static Item VALKYRIE_PICKAXE, VALKYRIE_AXE, VALKYRIE_SHOVEL;
-    public static Item ZANITE_HELMET, ZANITE_CHESTPLATE, ZANITE_LEGGINGS, ZANITE_BOOTS;
-    public static Item GRAVITITE_HELMET, GRAVITITE_CHESTPLATE, GRAVITITE_LEGGINGS, GRAVITITE_BOOTS;
-    public static Item NEPTUNE_HELMET, NEPTUNE_CHESTPLATE, NEPTUNE_LEGGINGS, NEPTUNE_BOOTS;
-    public static Item PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
-    public static Item OBSIDIAN_HELMET, OBSIDIAN_CHESTPLATE, OBSIDIAN_LEGGINGS, OBSIDIAN_BOOTS;
-    public static Item VALKYRIE_HELMET, VALKYRIE_CHESTPLATE, VALKYRIE_LEGGINGS, VALKYRIE_BOOTS;
-    public static Item BLUE_BERRY, ENCHANTED_BLUEBERRY, BLUE_GUMMY_SWET, GOLDEN_GUMMY_SWET, HEALING_STONE, WHITE_APPLE, GINGERBREAD_MAN, CANDY_CANE;
-    public static Item SKYROOT_BUCKET, SKYROOT_WATER_BUCKET, SKYROOT_POISON_BUCKET, SKYROOT_REMEDY_BUCKET, SKYROOT_MILK_BUCKET;
-    public static Item CLOUD_PARACHUTE, GOLDEN_CLOUD_PARACHUTE;
-    public static Item BRONZE_KEY, SILVER_KEY, GOLDEN_KEY, PLATINUM_KEY;
-    public static Item NATURE_STAFF, CLOUD_STAFF, MOA_EGG;
-    public static Item GOLDEN_DART, ENCHANTED_DART, POISON_DART;
-    public static Item GOLDEN_DART_SHOOTER, ENCHANTED_DART_SHOOTER, POISON_DART_SHOOTER;
-    public static Item PHOENIX_BOW;
-    public static Item FLAMING_SWORD, LIGHTNING_SWORD, HOLY_SWORD;
-    public static Item VAMPIRE_BLADE, PIG_SLAYER, CANDY_CANE_SWORD, NOTCH_HAMMER, VALKYRIE_LANCE;
-    public static Item LEATHER_GLOVES, IRON_GLOVES, GOLDEN_GLOVES, CHAIN_GLOVES, DIAMOND_GLOVES;
-    public static Item ZANITE_GLOVES, GRAVITITE_GLOVES, NEPTUNE_GLOVES, PHOENIX_GLOVES, OBSIDIAN_GLOVES, VALKYRIE_GLOVES;
-    public static Item IRON_RING, GOLDEN_RING, ZANITE_RING, ICE_RING, IRON_PENDANT, GOLDEN_PENDANT, ZANITE_PENDANT, ICE_PENDANT;
-    public static Item RED_CAPE, BLUE_CAPE, YELLOW_CAPE, WHITE_CAPE, SWET_CAPE, INVISIBILITY_CAPE, AGILITY_CAPE;
-    public static Item GOLDEN_FEATHER, REGENERATION_STONE, IRON_BUBBLE;
-    public static Item LIFE_SHARD;
-    public static Item SENTRY_BOOTS, LIGHTNING_KNIFE;
-    public static Item AETHER_TUNE, ASCENDING_DAWN, WELCOMING_SKIES, LEGACY;
-    public static Item REPULSION_SHIELD;
-    public static Item LORE_BOOK;
+    public static final Item ZANITE_GEM, AMBROSIUM_SHARD, GOLDEN_AMBER, AECHOR_PETAL, SWET_BALL;
+    public static final Item SKYROOT_STICK/*, VICTORY_MEDAL*/;
+    public static final Item SKYROOT_PICKAXE, SKYROOT_AXE, SKYROOT_SHOVEL, SKYROOT_SWORD;
+    public static final Item HOLYSTONE_PICKAXE, HOLYSTONE_AXE, HOLYSTONE_SHOVEL, HOLYSTONE_SWORD;
+    public static final Item ZANITE_PICKAXE, ZANITE_AXE, ZANITE_SHOVEL, ZANITE_SWORD;
+    public static final Item GRAVITITE_PICKAXE, GRAVITITE_AXE, GRAVITITE_SHOVEL, GRAVITITE_SWORD;
+    public static final Item VALKYRIE_PICKAXE, VALKYRIE_AXE, VALKYRIE_SHOVEL;
+    public static final Item ZANITE_HELMET, ZANITE_CHESTPLATE, ZANITE_LEGGINGS, ZANITE_BOOTS;
+    public static final Item GRAVITITE_HELMET, GRAVITITE_CHESTPLATE, GRAVITITE_LEGGINGS, GRAVITITE_BOOTS;
+    public static final Item NEPTUNE_HELMET, NEPTUNE_CHESTPLATE, NEPTUNE_LEGGINGS, NEPTUNE_BOOTS;
+    public static final Item PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
+    public static final Item OBSIDIAN_HELMET, OBSIDIAN_CHESTPLATE, OBSIDIAN_LEGGINGS, OBSIDIAN_BOOTS;
+    public static final Item VALKYRIE_HELMET, VALKYRIE_CHESTPLATE, VALKYRIE_LEGGINGS, VALKYRIE_BOOTS;
+    public static final Item BLUE_BERRY, ENCHANTED_BLUEBERRY, BLUE_GUMMY_SWET, GOLDEN_GUMMY_SWET, HEALING_STONE, WHITE_APPLE, GINGERBREAD_MAN, CANDY_CANE;
+    public static final Item SKYROOT_BUCKET, SKYROOT_WATER_BUCKET, SKYROOT_POISON_BUCKET, SKYROOT_REMEDY_BUCKET, SKYROOT_MILK_BUCKET;
+    public static final Item CLOUD_PARACHUTE, GOLDEN_CLOUD_PARACHUTE;
+    public static final Item BRONZE_KEY, SILVER_KEY, GOLDEN_KEY;
+    public static final Item NATURE_STAFF, CLOUD_STAFF, MOA_EGG;
+    public static final Item GOLDEN_DART, ENCHANTED_DART, POISON_DART;
+    public static final Item GOLDEN_DART_SHOOTER, ENCHANTED_DART_SHOOTER, POISON_DART_SHOOTER;
+    public static final Item PHOENIX_BOW;
+    public static final Item FLAMING_SWORD, LIGHTNING_SWORD, HOLY_SWORD;
+    public static final Item VAMPIRE_BLADE, PIG_SLAYER, CANDY_CANE_SWORD, /*NOTCH_HAMMER,*/
+            VALKYRIE_LANCE;
+    public static final Item LEATHER_GLOVES, IRON_GLOVES, GOLDEN_GLOVES, CHAIN_GLOVES, DIAMOND_GLOVES;
+    public static final Item ZANITE_GLOVES, GRAVITITE_GLOVES, NEPTUNE_GLOVES, PHOENIX_GLOVES, OBSIDIAN_GLOVES, VALKYRIE_GLOVES;
+    public static final Item IRON_RING, GOLDEN_RING, ZANITE_RING, ICE_RING, IRON_PENDANT, GOLDEN_PENDANT, ZANITE_PENDANT, ICE_PENDANT;
+    public static final Item RED_CAPE, BLUE_CAPE, YELLOW_CAPE, WHITE_CAPE, SWET_CAPE, INVISIBILITY_CAPE, AGILITY_CAPE;
+    public static final Item GOLDEN_FEATHER, REGENERATION_STONE, IRON_BUBBLE;
+    public static final Item LIFE_SHARD;
+    public static final Item SENTRY_BOOTS/*, LIGHTNING_KNIFE*/;
+//    public static Item AETHER_TUNE, ASCENDING_DAWN, WELCOMING_SKIES, LEGACY;
+//    public static Item REPULSION_SHIELD;
+//    public static Item LORE_BOOK;
 
-    public static final Rarity AETHER_LOOT = Rarity.EPIC;
+    public static final Rarity AETHER_LOOT = Rarity.COMMON;
 
     static {
         // Resources
@@ -152,7 +149,6 @@ public class AetherItems {
         BRONZE_KEY = register("bronze_key", new DungeonKey());
         SILVER_KEY = register("silver_key", new DungeonKey());
         GOLDEN_KEY = register("golden_key", new DungeonKey());
-//        PLATINUM_KEY = register("platinum_key", new DungeonKey());
 
         // Weapons
         GOLDEN_DART = register("golden_dart", new Dart(Rarity.COMMON));
@@ -223,8 +219,6 @@ public class AetherItems {
 //        WELCOMING_SKIES = register("welcoming_skies", new AetherDisc(10, AetherSounds.welcoming_skies));
 //        LEGACY = register("legacy", new AetherDisc(6, AetherSounds.legacy));
     }
-
-    public static void noop() {}
 
     private static Item register(String id, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(Aether.MODID, id), item);

@@ -1,0 +1,14 @@
+{
+    "config": {
+      "top_material": {
+        "Name": "the_aether:aether_grass"
+      },
+      "under_material": {
+        "Name": "the_aether:aether_dirt"
+      },
+      "underwater_material": {
+        "Name": "the_aether:aether_dirt"
+      }
+    },
+    "type": "the_aether:aether_surface_builder"
+  }
