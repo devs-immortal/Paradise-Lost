@@ -4,15 +4,15 @@
   "package": "com.aether.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "AetherVoidFallMixin",
     "BiomeLayerSamplerAccessor",
     "BlockStateModelGeneratorMixin",
     "BucketPortalMixin",
     "CloudRendererMixin",
     "CropBlockMixin",
     "FarmlandBlockMixin",
+    "MinecraftClientMixin",
     "PlantBlockMixin",
-    "DisableExperWarnMixin"
+    "PlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
