@@ -65,7 +65,7 @@ public class AetherChunkGenerator extends ChunkGenerator {
     }
 
     public static void registerChunkGenerator() {
-        Registry.register(Registry.CHUNK_GENERATOR, new Identifier(Aether.MODID, "chunk_generator"), AetherChunkGenerator.CODEC);
+        Registry.register(Registry.CHUNK_GENERATOR, Aether.locate("chunk_generator"), AetherChunkGenerator.CODEC);
     }
 
     private double sampleNoise(int int_1, int int_2, int int_3, double double_1, double double_2, double double_3, double double_4) {
@@ -118,7 +118,7 @@ public class AetherChunkGenerator extends ChunkGenerator {
                 int int_7 = int_3 + int_5;
                 int int_8 = int_4 + int_6;
 
-                biomes_1.getBiomeForNoiseGen(int_7, int_8, 0).buildSurface(class_2919_1, chunk, int_7, int_8, 0, 0.0D, AetherBlocks.HOLYSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), 0, region.getSeed());
+                biomes_1.getBiomeForNoiseGen(int_7, int_8, 0).buildSurface(class_2919_1, chunk, int_7, int_8, 0, 0.0D, AetherBlocks.holystone.getDefaultState(), Blocks.AIR.getDefaultState(), 0, region.getSeed());
             }
         }
     }
@@ -161,7 +161,7 @@ public class AetherChunkGenerator extends ChunkGenerator {
                             for (int k2 = 0; k2 < 8; k2++) {
                                 BlockState filler = Blocks.AIR.getDefaultState();
 
-                                if (d15 > 0.0D) filler = AetherBlocks.HOLYSTONE.getDefaultState();
+                                if (d15 > 0.0D) filler = AetherBlocks.holystone.getDefaultState();
 
                                 chunk.setBlockState(new BlockPos(i2 + i1 * 8, l1 + k1 * 4, k2 + j1 * 8), filler, false);
 
@@ -248,7 +248,7 @@ public class AetherChunkGenerator extends ChunkGenerator {
                                 BlockState filler = Blocks.AIR.getDefaultState();
 
                                 if (d15 > 0.0D) {
-                                    filler = AetherBlocks.HOLYSTONE.getDefaultState();
+                                    filler = AetherBlocks.holystone.getDefaultState();
                                 }
 
                                 if (type.getBlockPredicate().test(filler)) {

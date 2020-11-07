@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public class CloudStaff extends Item {
 
     public CloudStaff() {
-        super(new Settings().maxCount(1).maxDamage(60).group(AetherItemGroups.MISC));
+        super(new Settings().maxCount(1).maxDamage(60).group(AetherItemGroups.Misc));
     }
 
     @Override

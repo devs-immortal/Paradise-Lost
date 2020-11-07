@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class WhiteApple extends Item {
 
     public WhiteApple() {
-        super(new Item.Settings().group(AetherItemGroups.FOOD).food(AetherFood.WHITE_APPLE));
+        super(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.WHITE_APPLE));
     }
 
     @Override

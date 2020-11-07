@@ -10,12 +10,12 @@ public class AetherPickaxe extends PickaxeItem implements IAetherTool {
     private final AetherTiers material;
 
     public AetherPickaxe(AetherTiers material, int damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.TOOLS));
+        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Tools));
         this.material = material;
     }
 
     public AetherPickaxe(AetherTiers material, Rarity rarity, int damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.TOOLS).rarity(rarity));
+        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Tools).rarity(rarity));
         this.material = material;
     }
 

@@ -10,12 +10,12 @@ public class AetherSword extends SwordItem {
     private final AetherTiers material;
 
     public AetherSword(AetherTiers material, int damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.WEAPONS));
+        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Weapons));
         this.material = material;
     }
 
     public AetherSword(AetherTiers material, Rarity rarity, int damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.WEAPONS).rarity(rarity));
+        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Weapons).rarity(rarity));
         this.material = material;
     }
 }

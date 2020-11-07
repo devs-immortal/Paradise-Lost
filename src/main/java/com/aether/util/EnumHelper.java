@@ -62,7 +62,7 @@ public class EnumHelper {
         }
         catch (Exception e)
         {
-            Aether.AETHER_LOG.error("Error setting up EnumHelper.", e);
+            Aether.modLogger.error("Error setting up EnumHelper.", e);
         }
 
         isSetup = true;
@@ -229,7 +229,7 @@ public class EnumHelper {
             }
 
             for (String line : lines)
-                Aether.AETHER_LOG.fatal(line);
+                Aether.modLogger.fatal(line);
 
             if (test)
             {
@@ -270,7 +270,7 @@ public class EnumHelper {
         }
         catch (Exception e)
         {
-            Aether.AETHER_LOG.error("Error adding enum with EnumHelper.", e);
+            Aether.modLogger.error("Error adding enum with EnumHelper.", e);
             throw new RuntimeException(e);
         }
     }

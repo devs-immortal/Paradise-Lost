@@ -1,11 +1,13 @@
 package com.aether.mixin.item;
 
-import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.PortalBlock;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -25,6 +27,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -36,6 +39,9 @@ public class BucketItemMixin extends Item {
         super(settings);
     }
 
+    @Unique
+    private Set<Block> compatiblePortalBlocks = ImmutableSet.of(Blocks.GLOWSTONE);
+
     @Shadow
     @Final
     private Fluid fluid;
@@ -45,9 +51,9 @@ public class BucketItemMixin extends Item {
         if (!user.isSneaking() && fluid.matchesType(Fluids.WATER)) {
             BlockHitResult result = raycast(world, user, FluidHandling.NONE);
             if (result.getType() == HitResult.Type.BLOCK) {
-                if (Aether.PORTAL_BLOCKS.contains(world.getBlockState(result.getBlockPos()).getBlock())) {
+                if (compatiblePortalBlocks.contains(world.getBlockState(result.getBlockPos()).getBlock())) {
                     BlockPos pos = result.getBlockPos();
-                    if (buildPortal(world, user, pos, (Aether.PORTAL_BLOCKS.contains(world.getBlockState(pos.offset(Direction.NORTH)).getBlock()) || Aether.PORTAL_BLOCKS.contains(world.getBlockState(pos.offset(Direction.SOUTH)).getBlock()))))
+                    if (buildPortal(world, user, pos, (compatiblePortalBlocks.contains(world.getBlockState(pos.offset(Direction.NORTH)).getBlock()) || compatiblePortalBlocks.contains(world.getBlockState(pos.offset(Direction.SOUTH)).getBlock()))))
                         cir.setReturnValue(TypedActionResult.success(ItemUsage.method_30012(user.getStackInHand(hand), user, new ItemStack(fluid.getBucketItem())), world.isClient()));
                 }
             }
@@ -64,14 +70,14 @@ public class BucketItemMixin extends Item {
             BlockPos testPos = pos;
             while (testPos.getY() < world.getHeight()) {
                 testPos = testPos.up();
-                if (Aether.PORTAL_BLOCKS.contains(world.getBlockState(testPos).getBlock()) && frameScan.contains(testPos)) {
+                if (compatiblePortalBlocks.contains(world.getBlockState(testPos).getBlock()) && frameScan.contains(testPos)) {
                     valid = true;
                     break;
                 }
             }
             if (valid) {
                 BlockPos startPos = pos.up();
-                floodFill(world, startPos, dirs, AetherBlocks.BLUE_PORTAL.getDefaultState().with(PortalBlock.AXIS, NS ? Direction.Axis.Z : Direction.Axis.X), startPos);
+                floodFill(world, startPos, dirs, AetherBlocks.blue_portal.getDefaultState().with(PortalBlock.AXIS, NS ? Direction.Axis.Z : Direction.Axis.X), startPos);
             }
         }
         return valid;
@@ -100,7 +106,7 @@ public class BucketItemMixin extends Item {
                     valid = true;
                     break pathfinder;
                 }
-                if (!path.contains(probePos) && !(path.size() < 8 && probePos == start) && Aether.PORTAL_BLOCKS.contains(world.getBlockState(probePos).getBlock())) {
+                if (!path.contains(probePos) && !(path.size() < 8 && probePos == start) && compatiblePortalBlocks.contains(world.getBlockState(probePos).getBlock())) {
                     path.add(probePos);
                     pos = probePos;
                     endpoint = false;

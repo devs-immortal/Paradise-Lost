@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 
 public class SkyrootStick extends Item {
     public SkyrootStick() {
-        super(new Settings().group(AetherItemGroups.MATERIALS));
+        super(new Settings().group(AetherItemGroups.Materials));
     }
 }

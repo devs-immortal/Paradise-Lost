@@ -15,7 +15,7 @@ public class CropBlockMixin {
     @Inject(method = "canPlantOnTop", at = @At("TAIL"), cancellable = true)
     protected void canPlantOnTop(BlockState floor, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(
-                cir.getReturnValue() || floor.isOf(AetherBlocks.AETHER_FARMLAND)
+                cir.getReturnValue() || floor.isOf(AetherBlocks.aether_farmland)
         );
     }
 }

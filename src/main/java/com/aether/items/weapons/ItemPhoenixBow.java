@@ -6,6 +6,6 @@ import net.minecraft.item.Item;
 
 public class ItemPhoenixBow extends BowItem {
     public ItemPhoenixBow() {
-        super(new Item.Settings().maxDamage(384).group(AetherItemGroups.WEAPONS));
+        super(new Item.Settings().maxDamage(384).group(AetherItemGroups.Weapons));
     }
 }

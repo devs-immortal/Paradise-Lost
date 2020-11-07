@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 public class Dart extends Item {
 
     public Dart(Rarity rarity) {
-        super(new Settings().rarity(rarity).group(AetherItemGroups.WEAPONS));
+        super(new Settings().rarity(rarity).group(AetherItemGroups.Weapons));
     }
 
     public ProjectileEntity createDart(World world, ItemStack stack, LivingEntity entity) {

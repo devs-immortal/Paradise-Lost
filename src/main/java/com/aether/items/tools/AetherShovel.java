@@ -19,12 +19,12 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
     public float[] zaniteHarvestLevels = new float[]{2F, 4F, 6F, 8F, 12F};
 
     public AetherShovel(AetherTiers material, float damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.TOOLS));
+        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Tools));
         this.material = material;
     }
 
     public AetherShovel(AetherTiers material, Rarity rarity, float damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.TOOLS).rarity(rarity));
+        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Tools).rarity(rarity));
         this.material = material;
     }
 

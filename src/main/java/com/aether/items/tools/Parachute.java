@@ -11,11 +11,11 @@ import net.minecraft.world.World;
 public class Parachute extends Item {
 
     public Parachute(int maxDamage) {
-        super(new Settings().maxCount(1).maxDamage(maxDamage).group(AetherItemGroups.MISC));
+        super(new Settings().maxCount(1).maxDamage(maxDamage).group(AetherItemGroups.Misc));
     }
 
     public Parachute() {
-        super(new Settings().maxCount(1).group(AetherItemGroups.MISC));
+        super(new Settings().maxCount(1).group(AetherItemGroups.Misc));
     }
 
     @Override
