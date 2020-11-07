@@ -6,6 +6,7 @@
   "mixins": [
     "AetherVoidFallMixin",
     "BiomeLayerSamplerAccessor",
+    "BlockStateModelGeneratorMixin",
     "BucketPortalMixin",
     "CloudRendererMixin",
     "CropBlockMixin",

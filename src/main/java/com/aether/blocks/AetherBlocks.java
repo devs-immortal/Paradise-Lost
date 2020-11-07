@@ -14,6 +14,7 @@ import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.WallStandingBlockItem;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -194,8 +195,8 @@ public class AetherBlocks {
         AEROGEL_WALL = register("aerogel_wall", new AetherWallBlock(AEROGEL.getDefaultState()), buildingBlock());
         AETHER_FARMLAND = register("aether_farmland", new AetherFarmlandBlock(FabricBlockSettings.of(Material.SOIL).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRAVEL).blockVision(AetherBlocks::always).suffocates(AetherBlocks::always)), buildingBlock());
         AETHER_GRASS_PATH = register("aether_grass_path", new AetherGrassPathBlock(), buildingBlock());
-        AMBROSIUM_TORCH = register("ambrosium_torch", new AmbrosiumTorchBlock(), buildingBlock());
-        AMBROSIUM_TORCH_WALL = register("ambrosium_wall_torch", new AmbrosiumTorchWallBlock());
+        AMBROSIUM_TORCH = register("ambrosium_torch", new AmbrosiumTorchBlock(), false, buildingBlock());
+        AMBROSIUM_TORCH_WALL = register("ambrosium_wall_torch", new AmbrosiumTorchWallBlock(), AMBROSIUM_TORCH, buildingBlock());
         ANGELIC_STONE = register("angelic_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
         ANGELIC_CRACKED_STONE = register("angelic_stone_cracked", new Block(FabricBlockSettings.copyOf(ANGELIC_STONE)), buildingBlock());
         ANGELIC_SLAB = register("angelic_slab", new AetherSlabBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
@@ -335,9 +336,22 @@ public class AetherBlocks {
     }
 
     private static Block register(String id, Block block, Item.Settings settings) {
+        return register(id, block, true, settings);
+    }
+
+    private static Block register(String id, Block block, boolean registerItem, Item.Settings settings) {
         Identifier trueId = new Identifier(Aether.MODID, id);
         Registry.register(Registry.BLOCK, trueId, block);
-        Registry.register(Registry.ITEM, trueId, new BlockItem(block, settings));
+        if (registerItem) {
+            Registry.register(Registry.ITEM, trueId, new BlockItem(block, settings));
+        }
+        return block;
+    }
+
+    private static Block register(String id, Block block, Block rootBlock, Item.Settings settings) {
+        Identifier trueId = new Identifier(Aether.MODID, id);
+        Registry.register(Registry.BLOCK, trueId, block);
+        Registry.register(Registry.ITEM, trueId, new WallStandingBlockItem(rootBlock, block, settings));
         return block;
     }
 
@@ -368,8 +382,8 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_SLAB, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_STAIRS, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_WALL, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH, RenderLayer.getCutoutMipped());
-        BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH_WALL, RenderLayer.getCutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH_WALL, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_SAPLING, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_OAK_SAPLING, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_SAPLING, RenderLayer.getCutoutMipped());
