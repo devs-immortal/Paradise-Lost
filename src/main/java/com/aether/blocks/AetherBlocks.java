@@ -372,6 +372,7 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH_WALL, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_SAPLING, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_OAK_SAPLING, RenderLayer.getCutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_SAPLING, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_OAK_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_LEAVES, RenderLayer.getTranslucent());
