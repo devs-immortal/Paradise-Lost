@@ -14,7 +14,8 @@ public abstract class BlockStateModelGeneratorMixin {
     @Shadow
     protected abstract void registerTorch(Block torch, Block wallTorch);
 
-    @Shadow protected abstract void registerGlassPane(Block glass, Block glassPane);
+    @Shadow
+    protected abstract void registerGlassPane(Block glass, Block glassPane);
 
     @Inject(method = "register", at = @At("TAIL"))
     public void onRegister(CallbackInfo ci) {

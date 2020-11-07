@@ -1,14 +1,13 @@
 package com.aether.world.biome;
 
-import java.util.stream.IntStream;
-
 import com.aether.Aether;
-
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
 import net.minecraft.world.biome.layer.type.InitLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.gen.ChunkRandom;
+
+import java.util.stream.IntStream;
 
 public enum AetherBiomeLayer implements InitLayer {
     INSTANCE;
@@ -19,6 +18,12 @@ public enum AetherBiomeLayer implements InitLayer {
 //	private double max = -100;
 //	private double min = 100;
 
+    public static void setSeed(long seed) {
+        if (perlinGen == null) {
+            ChunkRandom sharedSeedRandom = new ChunkRandom(seed);
+            perlinGen = new OctaveSimplexNoiseSampler(sharedSeedRandom, IntStream.rangeClosed(-1, 0));
+        }
+    }
 
     public int sample(LayerRandomnessSource noise, int x, int z) {
 //        double perlinNoise = perlinGen.sample((double) x * 0.1D, (double) z * 0.0001D, false);
@@ -34,12 +39,5 @@ public enum AetherBiomeLayer implements InitLayer {
             return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(bba));
         }*/
         return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(AETHER_HIGHLANDS));
-    }
-
-    public static void setSeed(long seed) {
-        if (perlinGen == null) {
-            ChunkRandom sharedSeedRandom = new ChunkRandom(seed);
-            perlinGen = new OctaveSimplexNoiseSampler(sharedSeedRandom, IntStream.rangeClosed(-1, 0));
-        }
     }
 }

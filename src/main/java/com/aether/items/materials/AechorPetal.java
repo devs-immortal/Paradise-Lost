@@ -1,7 +1,7 @@
 package com.aether.items.materials;
 
-import net.minecraft.item.Item;
 import com.aether.items.AetherItemGroups;
+import net.minecraft.item.Item;
 
 public class AechorPetal extends Item {
     public AechorPetal() {

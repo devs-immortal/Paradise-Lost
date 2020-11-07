@@ -1,6 +1,7 @@
 package com.aether.items.materials;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.items.AetherItemGroups;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,7 +10,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import com.aether.items.AetherItemGroups;
 
 public class AmbrosiumShard extends Item {
 

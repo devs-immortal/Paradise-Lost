@@ -1,11 +1,10 @@
 package com.aether.items.weapons;
 
+import com.aether.items.AetherItems;
+import com.aether.items.utils.AetherTiers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-
-import com.aether.items.AetherItems;
-import com.aether.items.utils.AetherTiers;
 
 public class VampireBlade extends AetherSword {
 

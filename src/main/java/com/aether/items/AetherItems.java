@@ -13,9 +13,11 @@ import com.aether.items.staff.NatureStaff;
 import com.aether.items.tools.*;
 import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
+import com.aether.util.RarityNursery;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -56,7 +58,7 @@ public class AetherItems {
 //    public static Item REPULSION_SHIELD;
 //    public static Item LORE_BOOK;
 
-    public static final Rarity AETHER_LOOT = Rarity.COMMON;
+    public static final Rarity AETHER_LOOT = RarityNursery.INSTANCE.createRarity(Formatting.GREEN, 1);
 
     static {
         // Resources

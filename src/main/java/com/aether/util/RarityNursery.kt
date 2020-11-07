@@ -4,9 +4,7 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.Rarity
 import sun.misc.Unsafe
 
-
 object RarityNursery {
-
     private val rarityField = Rarity::class.java.getDeclaredField("formatting")
     private val ordinalField = Enum::class.java.getDeclaredField("ordinal")
     private val unsafe: Unsafe

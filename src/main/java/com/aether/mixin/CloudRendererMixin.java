@@ -7,11 +7,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.options.CloudRenderMode;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.SkyProperties;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormats;
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.render.*;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.MatrixStack.Entry;
@@ -29,21 +25,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
 public final class CloudRendererMixin {
+    @Final
+    @Shadow
+    private static final Identifier CLOUDS = new Identifier("textures/environment/clouds.png");
     @Shadow
     @NotNull
     private final ClientWorld world;
     @Shadow
     private final int ticks;
+    @Final
+    @Shadow
+    @NotNull
+    private final MinecraftClient client;
+    @Final
+    @Shadow
+    @NotNull
+    private final TextureManager textureManager;
     @Shadow
     private int lastCloudsBlockX;
     @Shadow
     private int lastCloudsBlockY;
     @Shadow
     private int lastCloudsBlockZ;
-    @Final
-    @Shadow
-    @NotNull
-    private final MinecraftClient client;
     @Shadow
     @NotNull
     private Vec3d lastCloudsColor;
@@ -55,13 +58,10 @@ public final class CloudRendererMixin {
     @Shadow
     @NotNull
     private VertexBuffer cloudsBuffer;
-    @Final
-    @Shadow
-    @NotNull
-    private final TextureManager textureManager;
-    @Final
-    @Shadow
-    private static final Identifier CLOUDS = new Identifier("textures/environment/clouds.png");
+
+    public CloudRendererMixin() {
+        throw new NullPointerException("null cannot be cast to non-null type net.minecraft.client.world.ClientWorld");
+    }
 
     @Inject(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;FDDD)V", at = @At("HEAD"), cancellable = true)
     public void renderClouds(MatrixStack matrices, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
@@ -88,17 +88,17 @@ public final class CloudRendererMixin {
             double e = ((this.ticks + tickDelta) * (0.03F * speedMod));
             double posX = (cameraX + e) / 12.0D;
             // --- THIS RIGHT HERE IS THE JACKPOT ---
-            double renderHeight = cloudHeight - (float)cameraY + cloudOffset;
+            double renderHeight = cloudHeight - (float) cameraY + cloudOffset;
             double posZ = cameraZ / 12.0D + 0.33000001311302185D;
             posX -= MathHelper.floor(posX / 2048.0D) * 2048;
             posZ -= MathHelper.floor(posZ / 2048.0D) * 2048;
-            float adjustedX = (float)(posX - (double)MathHelper.floor(posX));
-            float adjustedY = (float)(renderHeight / 4.0D - (double)MathHelper.floor(renderHeight / 4.0D)) * 4.0F;
-            float adjustedZ = (float)(posZ - (double)MathHelper.floor(posZ));
+            float adjustedX = (float) (posX - (double) MathHelper.floor(posX));
+            float adjustedY = (float) (renderHeight / 4.0D - (double) MathHelper.floor(renderHeight / 4.0D)) * 4.0F;
+            float adjustedZ = (float) (posZ - (double) MathHelper.floor(posZ));
             Vec3d cloudColor = this.world.getCloudsColor(tickDelta);
-            int floorX = (int)Math.floor(posX);
-            int floorY = (int)Math.floor(renderHeight / 4.0D);
-            int floorZ = (int)Math.floor(posZ);
+            int floorX = (int) Math.floor(posX);
+            int floorY = (int) Math.floor(renderHeight / 4.0D);
+            int floorZ = (int) Math.floor(posZ);
             if (floorX != this.lastCloudsBlockX || floorY != this.lastCloudsBlockY || floorZ != this.lastCloudsBlockZ || this.client.options.getCloudRenderMode() != this.lastCloudsRenderMode || this.lastCloudsColor.squaredDistanceTo(cloudColor) > 2.0E-4D) {
                 this.lastCloudsBlockX = floorX;
                 this.lastCloudsBlockY = floorY;
@@ -159,9 +159,5 @@ public final class CloudRendererMixin {
 
     @Shadow
     private void renderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color) {
-    }
-
-    public CloudRendererMixin() {
-        throw new NullPointerException("null cannot be cast to non-null type net.minecraft.client.world.ClientWorld");
     }
 }

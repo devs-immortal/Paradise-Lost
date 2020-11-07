@@ -52,7 +52,7 @@ public class BlueberryBushBlock extends PlantBlock {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if(state.get(RIPE)) {
+        if (state.get(RIPE)) {
             world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(AetherItems.BLUE_BERRY, world.getRandom().nextInt(2) + 1)));
             world.setBlockState(pos, state.with(RIPE, false));
             return ActionResult.SUCCESS;
@@ -67,7 +67,7 @@ public class BlueberryBushBlock extends PlantBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(world.getLightLevel(pos) >= 8 && world.getRandom().nextInt(world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 12 : 26) == 0) {
+        if (world.getLightLevel(pos) >= 8 && world.getRandom().nextInt(world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 12 : 26) == 0) {
             world.setBlockState(pos, state.with(RIPE, true));
         }
     }

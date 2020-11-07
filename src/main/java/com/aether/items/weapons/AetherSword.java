@@ -1,10 +1,9 @@
 package com.aether.items.weapons;
 
 import com.aether.items.AetherItemGroups;
+import com.aether.items.utils.AetherTiers;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.Rarity;
-
-import com.aether.items.utils.AetherTiers;
 
 public class AetherSword extends SwordItem {
 

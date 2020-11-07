@@ -21,10 +21,10 @@ public class AmbrosiumTorchBlock extends TorchBlock {
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         int max = random.nextInt(3) + 2;
-        for(int i = 0; i <= max; i++) {
-            double d = (double)pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.25D;
-            double e = (double)pos.getY() + 0.6D + (random.nextDouble() - 0.5D) * 0.25D;
-            double f = (double)pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.25D;
+        for (int i = 0; i <= max; i++) {
+            double d = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.25D;
+            double e = (double) pos.getY() + 0.6D + (random.nextDouble() - 0.5D) * 0.25D;
+            double f = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.25D;
             world.addParticle(this.particle, d, e, f, 0.0D, -4D, 0.0D);
         }
     }

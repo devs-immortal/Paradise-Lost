@@ -17,7 +17,7 @@ public class PlantBlockMixin {
         cir.setReturnValue(
                 cir.getReturnValue() || (
                         floor.isOf(AetherBlocks.AETHER_GRASS) || floor.isOf(AetherBlocks.AETHER_DIRT)
-                        || floor.isOf(AetherBlocks.AETHER_FARMLAND) || floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS)
+                                || floor.isOf(AetherBlocks.AETHER_FARMLAND) || floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS)
                 )
         );
     }

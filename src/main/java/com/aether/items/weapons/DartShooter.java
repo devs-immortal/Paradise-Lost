@@ -1,5 +1,6 @@
 package com.aether.items.weapons;
 
+import com.aether.items.AetherItemGroups;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,8 +11,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-
-import com.aether.items.AetherItemGroups;
 
 public class DartShooter extends Item {
 

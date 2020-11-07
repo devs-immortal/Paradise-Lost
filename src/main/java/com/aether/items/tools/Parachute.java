@@ -1,13 +1,12 @@
 package com.aether.items.tools;
 
+import com.aether.items.AetherItemGroups;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-
-import com.aether.items.AetherItemGroups;
 
 public class Parachute extends Item {
 

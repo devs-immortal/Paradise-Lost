@@ -14,9 +14,9 @@ import java.util.UUID;
 
 public class ValkyrieLance extends AetherSword {
 
-    private final Multimap<EntityAttribute, EntityAttributeModifier> attributes;
     private static final UUID REACH_ID = UUID.fromString("FA234E1C-4180-4865-B01B-BCCE8785ACA3");
     private static final UUID ATTACK_ID = UUID.fromString("FA234E1C-5180-4765-C01B-BCCE8785ACA3");
+    private final Multimap<EntityAttribute, EntityAttributeModifier> attributes;
 
     public ValkyrieLance() {
 

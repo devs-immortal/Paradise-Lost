@@ -28,12 +28,6 @@ import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import java.util.stream.IntStream;
 
 public class AetherChunkGenerator extends ChunkGenerator {
-    protected final ChunkRandom random;
-    private final long seed;
-    private final OctavePerlinNoiseSampler perlinNoiseSampler;
-    private final OctavePerlinNoiseSampler extraPerlinNoiseSampler;
-    private double[] buffer;
-
     public static final Codec<AetherChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
@@ -41,6 +35,11 @@ public class AetherChunkGenerator extends ChunkGenerator {
                     //Codec.LONG.fieldOf("seed").stable().forGetter((obj) -> obj.seed)
             ).apply(instance, instance.stable(AetherChunkGenerator::new))
     );
+    protected final ChunkRandom random;
+    private final long seed;
+    private final OctavePerlinNoiseSampler perlinNoiseSampler;
+    private final OctavePerlinNoiseSampler extraPerlinNoiseSampler;
+    private double[] buffer;
 
     public AetherChunkGenerator(BiomeSource biomeSource, StructuresConfig structuresConfig, long worldSeed) {
         this(biomeSource, biomeSource, structuresConfig, worldSeed);
@@ -65,6 +64,10 @@ public class AetherChunkGenerator extends ChunkGenerator {
         this(biomeSource, biomeSource2, structuresConfig, 0L);
     }
 
+    public static void registerChunkGenerator() {
+        Registry.register(Registry.CHUNK_GENERATOR, new Identifier(Aether.MODID, "chunk_generator"), AetherChunkGenerator.CODEC);
+    }
+
     private double sampleNoise(int int_1, int int_2, int int_3, double double_1, double double_2, double double_3, double double_4) {
         double double_5 = 0.0D;
         double double_6 = 0.0D;
@@ -79,18 +82,13 @@ public class AetherChunkGenerator extends ChunkGenerator {
             double_5 += this.perlinNoiseSampler.getOctave(int_4).sample(double_9, double_10, double_11, double_12, (double) int_2 * double_12) / double_8;
             double_6 += this.perlinNoiseSampler.getOctave(int_4).sample(double_9, double_10, double_11, double_12, (double) int_2 * double_12) / double_8;
 
-            if (int_4 < 8) {
+            if (int_4 < 8)
                 double_7 += this.extraPerlinNoiseSampler.getOctave(int_4).sample(OctavePerlinNoiseSampler.maintainPrecision((double) int_1 * double_3 * double_8), OctavePerlinNoiseSampler.maintainPrecision((double) int_2 * double_4 * double_8), OctavePerlinNoiseSampler.maintainPrecision((double) int_3 * double_3 * double_8), double_4 * double_8, (double) int_2 * double_4 * double_8) / double_8;
-            }
 
             double_8 /= 2.0D;
         }
 
         return MathHelper.clampedLerp(double_5 / 512.0D, double_6 / 512.0D, (double_7 / 10.0D + 1.0D) / 2.0D);
-    }
-
-    public static void registerChunkGenerator() {
-        Registry.register(Registry.CHUNK_GENERATOR, new Identifier(Aether.MODID, "chunk_generator"), AetherChunkGenerator.CODEC);
     }
 
     @Override
@@ -163,9 +161,7 @@ public class AetherChunkGenerator extends ChunkGenerator {
                             for (int k2 = 0; k2 < 8; k2++) {
                                 BlockState filler = Blocks.AIR.getDefaultState();
 
-                                if (d15 > 0.0D) {
-                                    filler = AetherBlocks.HOLYSTONE.getDefaultState();
-                                }
+                                if (d15 > 0.0D) filler = AetherBlocks.HOLYSTONE.getDefaultState();
 
                                 chunk.setBlockState(new BlockPos(i2 + i1 * 8, l1 + k1 * 4, k2 + j1 * 8), filler, false);
 

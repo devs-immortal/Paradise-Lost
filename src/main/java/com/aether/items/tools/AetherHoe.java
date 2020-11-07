@@ -1,8 +1,10 @@
 package com.aether.items.tools;
 
-import java.util.Map;
-
 import com.aether.blocks.AetherBlocks;
+import com.aether.items.AetherItemGroups;
+import com.aether.items.utils.AetherTiers;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,10 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-import com.aether.items.AetherItemGroups;
-import com.aether.items.utils.AetherTiers;
+import java.util.Map;
 
 public class AetherHoe extends HoeItem implements IAetherTool {
 

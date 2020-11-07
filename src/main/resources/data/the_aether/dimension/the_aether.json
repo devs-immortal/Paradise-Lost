@@ -1,13 +1,13 @@
 {
-    "type": "the_aether:the_aether",
-    "generator": {
-      "biome_source": {
-        "type": "the_aether:biome_source"
-      },
-      "type": "the_aether:chunk_generator",
+  "type": "the_aether:the_aether",
+  "generator": {
+    "biome_source": {
+      "type": "the_aether:biome_source"
+    },
+    "type": "the_aether:chunk_generator",
+    "structures": {
       "structures": {
-        "structures": {
-        }
       }
     }
   }
+}

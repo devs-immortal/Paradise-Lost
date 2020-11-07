@@ -54,11 +54,6 @@ public class ItemAccessory extends Item {
         this(material, type, Rarity.COMMON, color);
     }
 
-    public ItemAccessory setDamageMultiplier(float multiplier) {
-        this.damageMultiplier = multiplier;
-        return this;
-    }
-
     public Identifier getTexture() {
         return this.getTexture(false);
     }
@@ -77,5 +72,10 @@ public class ItemAccessory extends Item {
 
     public float getDamageMultiplier() {
         return this.damageMultiplier;
+    }
+
+    public ItemAccessory setDamageMultiplier(float multiplier) {
+        this.damageMultiplier = multiplier;
+        return this;
     }
 }

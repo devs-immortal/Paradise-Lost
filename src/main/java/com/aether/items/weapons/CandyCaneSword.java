@@ -1,12 +1,12 @@
 package com.aether.items.weapons;
 
-import java.util.Random;
-
 import com.aether.items.AetherItems;
+import com.aether.items.utils.AetherTiers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import com.aether.items.utils.AetherTiers;
+
+import java.util.Random;
 
 public class CandyCaneSword extends AetherSword {
     public CandyCaneSword() {

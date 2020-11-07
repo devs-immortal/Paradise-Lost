@@ -1,7 +1,6 @@
 package com.aether.world.surfacebuilders;
 
 import com.aether.Aether;
-
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;

@@ -6,8 +6,8 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Rarity;
 
 public class AetherArmor extends ArmorItem {
-    private String armorName = "iron";
     private final AetherArmorType typeIn;
+    private String armorName = "iron";
 
     public AetherArmor(AetherArmorType typeIn, EquipmentSlot slotIn) {
         super(typeIn.getMaterial(), slotIn, new Settings().group(AetherItemGroups.ARMOR));

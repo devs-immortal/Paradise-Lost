@@ -1,11 +1,10 @@
 package com.aether;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.world.dimension.AetherDimension;
 import com.aether.items.AetherItems;
+import com.aether.world.dimension.AetherDimension;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
@@ -22,6 +21,10 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public static final Logger AETHER_LOG = LogManager.getLogger(MODID);
     public static final Set<Block> PORTAL_BLOCKS = new HashSet<>();
 
+    static {
+        PORTAL_BLOCKS.add(Blocks.GLOWSTONE);
+    }
+
     @Override
     public void onInitialize() {
         AetherDimension.setupDimension();
@@ -31,9 +34,5 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public void onInitializeClient() {
         AetherBlocks.clientInitialization();
         AetherItems.clientInitialization();
-    }
-
-    static {
-        PORTAL_BLOCKS.add(Blocks.GLOWSTONE);
     }
 }
