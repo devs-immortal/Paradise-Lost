@@ -25,7 +25,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
     @Override
     public void onInitialize() {
         AetherDimension.setupDimension();
-        ServerTickEvents.END_SERVER_TICK.register(AetherEvents::ServerTickEnd);
     }
 
     @Override

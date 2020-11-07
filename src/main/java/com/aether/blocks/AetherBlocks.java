@@ -3,6 +3,7 @@ package com.aether.blocks;
 import com.aether.Aether;
 import com.aether.blocks.decorative.*;
 import com.aether.blocks.natural.AetherGrassBlock;
+import com.aether.blocks.natural.AetherSaplingBlock;
 import com.aether.blocks.natural.BlueberryBushBlock;
 import com.aether.blocks.natural.EnchantedAetherGrassBlock;
 import com.aether.items.AetherItemGroups;
@@ -36,6 +37,7 @@ public class AetherBlocks {
     public static final Block ANGELIC_SLAB;
     public static final Block ANGELIC_STAIRS;
     public static final Block ANGELIC_STONE;
+    public static final Block ANGELIC_CRACKED_STONE;
     public static final Block ANGELIC_STONE_TRAP;
     public static final Block ANGELIC_WALL;
     //    public static final Block BERRY_BUSH;
@@ -71,6 +73,7 @@ public class AetherBlocks {
     public static final Block HELLFIRE_SLAB;
     public static final Block HELLFIRE_STAIRS;
     public static final Block HELLFIRE_STONE;
+    public static final Block HELLFIRE_CRACKED_STONE;
     public static final Block HELLFIRE_STONE_TRAP;
     public static final Block HELLFIRE_WALL;
     //    public static final Block HOLIDAY_LEAVES;
@@ -128,6 +131,7 @@ public class AetherBlocks {
     public static final Block SENTRY_SLAB;
     public static final Block SENTRY_STAIRS;
     public static final Block SENTRY_STONE;
+    public static final Block SENTRY_CRACKED_STONE;
     public static final Block SENTRY_STONE_TRAP;
     public static final Block SENTRY_WALL;
     public static final Block LIGHT_SENTRY_STONE;
@@ -140,9 +144,19 @@ public class AetherBlocks {
     //    public static final Block SKYROOT_SAPLING;
     public static final Block SKYROOT_SLAB;
     public static final Block SKYROOT_STAIRS;
+    public static final Block SKYROOT_SAPLING;
+    public static final Block SKYROOT_LEAVES;
+    public static final Block STRIPPED_SKYROOT_LOG;
+    public static final Block GOLDEN_OAK_SAPLING;
+    public static final Block GOLDEN_OAK_LOG;
+    public static final Block STRIPPED_GOLDEN_OAK_LOG;
+    public static final Block GOLDEN_OAK_LEAVES;
+    public static final Block GOLDEN_OAK_PLANKS;
+    public static final Block GOLDEN_OAK_FENCE;
+    public static final Block GOLDEN_OAK_FENCE_GATE;
+    public static final Block GOLDEN_OAK_SLAB;
+    public static final Block GOLDEN_OAK_STAIRS;
     //    public static final Block SKYROOT_WOOD;
-//    public static final Block STRIPPED_GOLDEN_OAK_LOG;
-//    public static final Block STRIPPED_GOLDEN_OAK_WOOD;
 //    public static final Block STRIPPED_SKYROOT_LOG;
 //    public static final Block STRIPPED_SKYROOT_WOOD;
 //    public static final Block SUN_ALTAR;
@@ -174,6 +188,7 @@ public class AetherBlocks {
         AMBROSIUM_TORCH = register("ambrosium_torch", new AmbrosiumTorchBlock(), buildingBlock());
         AMBROSIUM_TORCH_WALL = register("ambrosium_wall_torch", new AmbrosiumTorchWallBlock());
         ANGELIC_STONE = register("angelic_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        ANGELIC_CRACKED_STONE = register("angelic_stone_cracked", new Block(FabricBlockSettings.copyOf(ANGELIC_STONE)), buildingBlock());
         ANGELIC_SLAB = register("angelic_slab", new AetherSlabBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         ANGELIC_STAIRS = register("angelic_stairs", new AetherStairsBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)));
@@ -207,6 +222,7 @@ public class AetherBlocks {
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
         HELLFIRE_STONE = register("hellfire_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        HELLFIRE_CRACKED_STONE = register("hellfire_stone_cracked", new Block(FabricBlockSettings.copyOf(HELLFIRE_STONE)), buildingBlock());
         HELLFIRE_STONE_TRAP = register("hellfire_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)));
         HELLFIRE_WALL = register("hellfire_wall", new AetherWallBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
         HELLFIRE_SLAB = register("hellfire_slab", new AetherSlabBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
@@ -261,23 +277,31 @@ public class AetherBlocks {
         QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
 //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
         SENTRY_STONE = register("sentry_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5F).resistance(1.0F).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        SENTRY_CRACKED_STONE = register("sentry_stone_cracked", new Block(FabricBlockSettings.copyOf(SENTRY_STONE)), buildingBlock());
         LIGHT_SENTRY_STONE = register("light_sentry_stone", new Block(FabricBlockSettings.copyOf(SENTRY_STONE).luminance(ignored -> 10)), buildingBlock());
         SENTRY_STONE_TRAP = register("sentry_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0F).resistance(6000000.0F).sounds(BlockSoundGroup.STONE)));
         SENTRY_SLAB = register("sentry_slab", new AetherSlabBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_STAIRS = register("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_WALL = register("sentry_wall", new AetherWallBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
+        SKYROOT_SAPLING = register("skyroot_sapling", new AetherSaplingBlock(null, FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)));
+        SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.GREEN, MaterialColor.WOOD), buildingBlock());
+        STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD), buildingBlock());
+        SKYROOT_LEAVES = register("skyroot_leaves", createLeavesBlock(), buildingBlock());
         SKYROOT_PLANKS = register("skyroot_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)), buildingBlock());
         SKYROOT_BOOKSHELF = register("skyroot_bookshelf", new Block(FabricBlockSettings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD)), buildingBlock());
         SKYROOT_FENCE = register("skyroot_fence", new FenceBlock(FabricBlockSettings.copy(SKYROOT_PLANKS)), buildingBlock());
         SKYROOT_FENCE_GATE = register("skyroot_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(AetherBlocks.SKYROOT_PLANKS)), buildingBlock());
-//        SKYROOT_LEAVES = register("skyroot_leaves", null);
-        SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.GREEN, MaterialColor.WOOD), buildingBlock());
-//        SKYROOT_SAPLING = register("skyroot_sapling", null);
         SKYROOT_SLAB = register("skyroot_slab", new AetherSlabBlock(SKYROOT_PLANKS.getDefaultState()), buildingBlock());
         SKYROOT_STAIRS = register("skyroot_stairs", new AetherStairsBlock(SKYROOT_PLANKS.getDefaultState()), buildingBlock());
-//        SKYROOT_WOOD = register("skyroot_wood", null);
-//        STRIPPED_GOLDEN_OAK_LOG = register("stripped_golden_oak_log", null);
-//        STRIPPED_GOLDEN_OAK_WOOD = register("stripped_golden_oak_wood", null);
+        GOLDEN_OAK_SAPLING = register("golden_oak_sapling", new AetherSaplingBlock(null, FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)), buildingBlock());
+        GOLDEN_OAK_LOG = register("golden_oak_log", createLogBlock(MaterialColor.WOOD, MaterialColor.RED), buildingBlock());
+        STRIPPED_GOLDEN_OAK_LOG = register("stripped_golden_oak_log", createLogBlock(MaterialColor.RED, MaterialColor.RED), buildingBlock());
+        GOLDEN_OAK_LEAVES = register("golden_oak_leaves", createLeavesBlock(), buildingBlock());
+        GOLDEN_OAK_PLANKS = register("golden_oak_planks", new Block(FabricBlockSettings.copyOf(SKYROOT_PLANKS)), buildingBlock());
+        GOLDEN_OAK_FENCE = register("golden_oak_fence", new FenceBlock(FabricBlockSettings.copyOf(GOLDEN_OAK_PLANKS)), buildingBlock());
+        GOLDEN_OAK_FENCE_GATE = register("golden_oak_fence_gate", new FenceGateBlock(FabricBlockSettings.copyOf(GOLDEN_OAK_PLANKS)), buildingBlock());
+        GOLDEN_OAK_SLAB = register("golden_oak_slab", new AetherSlabBlock(GOLDEN_OAK_PLANKS.getDefaultState()), buildingBlock());
+        GOLDEN_OAK_STAIRS = register("golden_oak_stairs", new AetherStairsBlock(GOLDEN_OAK_PLANKS.getDefaultState()), buildingBlock());
 //        STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", null);
 //        STRIPPED_SKYROOT_WOOD = register("stripped_skyroot_wood", null);
 //        SUN_ALTAR = register("sun_altar", null);
@@ -307,6 +331,10 @@ public class AetherBlocks {
         return new PillarBlock(AbstractBlock.Settings.of(Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMaterialColor : sideMaterialColor).strength(2.0F).sounds(BlockSoundGroup.WOOD));
     }
 
+    private static LeavesBlock createLeavesBlock() {
+        return new LeavesBlock(AbstractBlock.Settings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never));
+    }
+
     public static void clientInitialization() {
         BlockRenderLayerMap.INSTANCE.putBlock(BLUE_PORTAL, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderLayer.getTranslucent());
@@ -321,6 +349,10 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_WALL, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH_WALL, RenderLayer.getCutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_SAPLING, RenderLayer.getCutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_OAK_SAPLING, RenderLayer.getCutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAVES, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_OAK_LEAVES, RenderLayer.getTranslucent());
     }
 
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {

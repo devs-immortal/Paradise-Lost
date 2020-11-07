@@ -4,8 +4,9 @@
   "package": "com.aether.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BucketPortalMixin",
-    "BiomeLayerSamplerAccessor"
+    "AetherVoidFallMixin",
+    "BiomeLayerSamplerAccessor",
+    "BucketPortalMixin"
   ],
   "injectors": {
     "defaultRequire": 1
