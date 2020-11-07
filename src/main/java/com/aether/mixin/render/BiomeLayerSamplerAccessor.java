@@ -1,4 +1,4 @@
-package com.aether.mixin;
+package com.aether.mixin.render;
 
 import net.minecraft.world.biome.layer.util.CachingLayerSampler;
 import net.minecraft.world.biome.source.BiomeLayerSampler;

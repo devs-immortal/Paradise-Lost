@@ -1,4 +1,4 @@
-package com.aether.mixin;
+package com.aether.mixin.render;
 
 import com.aether.world.dimension.AetherDimension;
 import com.mojang.blaze3d.platform.GlStateManager.DstFactor;

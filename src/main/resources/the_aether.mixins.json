@@ -4,15 +4,15 @@
   "package": "com.aether.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BiomeLayerSamplerAccessor",
-    "BlockStateModelGeneratorMixin",
-    "BucketItemMixin",
-    "CloudRendererMixin",
-    "CropBlockMixin",
-    "FarmlandBlockMixin",
-    "MinecraftClientMixin",
-    "PlantBlockMixin",
-    "PlayerEntityMixin"
+    "block.CropBlockMixin",
+    "block.FarmlandBlockMixin",
+    "block.PlantBlockMixin",
+    "entity.PlayerEntityMixin",
+    "item.BucketItemMixin",
+    "render.BiomeLayerSamplerAccessor",
+    "render.BlockStateModelGeneratorMixin",
+    "render.CloudRendererMixin",
+    "render.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

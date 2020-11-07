@@ -1,4 +1,4 @@
-package com.aether.mixin;
+package com.aether.mixin.entity;
 
 import com.aether.util.CustomStatusEffectInstance;
 import com.aether.world.dimension.AetherDimension;

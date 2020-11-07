@@ -1,7 +1,7 @@
 package com.aether.world.biome;
 
 import com.aether.Aether;
-import com.aether.mixin.BiomeLayerSamplerAccessor;
+import com.aether.mixin.render.BiomeLayerSamplerAccessor;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;

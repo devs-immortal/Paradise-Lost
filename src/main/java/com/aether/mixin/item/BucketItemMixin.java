@@ -1,4 +1,4 @@
-package com.aether.mixin;
+package com.aether.mixin.item;
 
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
