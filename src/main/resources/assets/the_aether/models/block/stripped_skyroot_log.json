@@ -2,6 +2,6 @@
   "parent": "block/cube_column",
   "textures": {
     "end": "the_aether:block/stripped_skyroot_log_top",
-    "side": "the_aether:block/stripped_skyroot_log"
+    "side": "the_aether:block/stripped_skyroot_log_side"
   }
 }
