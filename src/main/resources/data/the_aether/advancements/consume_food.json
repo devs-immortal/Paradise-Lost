@@ -75,7 +75,7 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
                 "item": {
-                    "item": "the_aether:gingerbread_man"
+                    "item": "the_aether:ginger_bread_man"
                 }
             }
         }
