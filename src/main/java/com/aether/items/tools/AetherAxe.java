@@ -32,7 +32,7 @@ public class AetherAxe extends AxeItem implements IAetherTool {
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         float original = super.getMiningSpeedMultiplier(stack, state);
-        if (this.getItemMaterial() == AetherTiers.ZANITE) return this.calculateIncrease(stack, original);
+        if (this.getItemMaterial() == AetherTiers.Zanite) return this.calculateIncrease(stack, original);
         return original;
     }
 
@@ -42,7 +42,7 @@ public class AetherAxe extends AxeItem implements IAetherTool {
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
 
-        if (this.getItemMaterial() == AetherTiers.GRAVITITE && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
+        if (this.getItemMaterial() == AetherTiers.Gravitite && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
             if (world.isAir(blockPos.up()) && !world.isClient) {
                 //TODO: Spawn floating block
             } else {
@@ -55,7 +55,7 @@ public class AetherAxe extends AxeItem implements IAetherTool {
 
     @Override
     public boolean postMine(ItemStack stackIn, World worldIn, BlockState stateIn, BlockPos posIn, LivingEntity entityIn) {
-        if (!worldIn.isClient && this.getItemMaterial() == AetherTiers.HOLYSTONE && worldIn.getRandom().nextInt(100) <= 5)
+        if (!worldIn.isClient && this.getItemMaterial() == AetherTiers.Holystone && worldIn.getRandom().nextInt(100) <= 5)
             worldIn.spawnEntity(new ItemEntity(worldIn, posIn.getX(), posIn.getY(), posIn.getZ(), new ItemStack(AetherItems.ambrosium_shard)));
         return super.postMine(stackIn, worldIn, stateIn, posIn, entityIn);
     }

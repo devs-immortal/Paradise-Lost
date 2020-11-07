@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 public class VampireBlade extends AetherSword {
 
     public VampireBlade() {
-        super(AetherTiers.LEGENDARY, AetherItems.aether_loot, 3, -2.4F);
+        super(AetherTiers.Legendary, AetherItems.aether_loot, 3, -2.4F);
     }
 
     @Override

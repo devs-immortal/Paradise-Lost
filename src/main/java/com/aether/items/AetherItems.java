@@ -69,63 +69,63 @@ public class AetherItems {
         skyroot_stick = register("skyroot_stick", new SkyrootStick());
 
         // Tools
-        skyroot_shovel = register("skyroot_shovel", new AetherShovel(AetherTiers.SKYROOT, 1.5F, -3.0F));
-        skyroot_pickaxe = register("skyroot_pickaxe", new AetherPickaxe(AetherTiers.SKYROOT, 1, -2.8F));
-        skyroot_axe = register("skyroot_axe", new AetherAxe(AetherTiers.SKYROOT, 6.0F, -3.2F));
-        skyroot_sword = register("skyroot_sword", new AetherSword(AetherTiers.SKYROOT, 3, -2.4F));
+        skyroot_shovel = register("skyroot_shovel", new AetherShovel(AetherTiers.Skyroot, 1.5F, -3.0F));
+        skyroot_pickaxe = register("skyroot_pickaxe", new AetherPickaxe(AetherTiers.Skyroot, 1, -2.8F));
+        skyroot_axe = register("skyroot_axe", new AetherAxe(AetherTiers.Skyroot, 6.0F, -3.2F));
+        skyroot_sword = register("skyroot_sword", new AetherSword(AetherTiers.Skyroot, 3, -2.4F));
 
-        holystone_shovel = register("holystone_shovel", new AetherShovel(AetherTiers.HOLYSTONE, 1.5F, -3.0F));
-        holystone_pickaxe = register("holystone_pickaxe", new AetherPickaxe(AetherTiers.HOLYSTONE, 1, -2.8F));
-        holystone_axe = register("holystone_axe", new AetherAxe(AetherTiers.HOLYSTONE, 7.0F, -3.2F));
-        holystone_sword = register("holystone_sword", new AetherSword(AetherTiers.HOLYSTONE, 3, -2.4F));
+        holystone_shovel = register("holystone_shovel", new AetherShovel(AetherTiers.Holystone, 1.5F, -3.0F));
+        holystone_pickaxe = register("holystone_pickaxe", new AetherPickaxe(AetherTiers.Holystone, 1, -2.8F));
+        holystone_axe = register("holystone_axe", new AetherAxe(AetherTiers.Holystone, 7.0F, -3.2F));
+        holystone_sword = register("holystone_sword", new AetherSword(AetherTiers.Holystone, 3, -2.4F));
 
-        zanite_shovel = register("zanite_shovel", new AetherShovel(AetherTiers.ZANITE, 1.5F, -3.0F));
-        zanite_pickaxe = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.ZANITE, 1, -2.8F));
-        zanite_axe = register("zanite_axe", new AetherAxe(AetherTiers.ZANITE, 6.0F, -3.1F));
-        zanite_sword = register("zanite_sword", new AetherSword(AetherTiers.ZANITE, 3, -2.4F));
+        zanite_shovel = register("zanite_shovel", new AetherShovel(AetherTiers.Zanite, 1.5F, -3.0F));
+        zanite_pickaxe = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.Zanite, 1, -2.8F));
+        zanite_axe = register("zanite_axe", new AetherAxe(AetherTiers.Zanite, 6.0F, -3.1F));
+        zanite_sword = register("zanite_sword", new AetherSword(AetherTiers.Zanite, 3, -2.4F));
 
-        gravitite_shovel = register("gravitite_shovel", new AetherShovel(AetherTiers.GRAVITITE, Rarity.RARE, 1.5F, -3.0F));
-        gravitite_pickaxe = register("gravitite_pickaxe", new AetherPickaxe(AetherTiers.GRAVITITE, Rarity.RARE, 1, -2.8F));
-        gravitite_axe = register("gravitite_axe", new AetherAxe(AetherTiers.GRAVITITE, Rarity.RARE, 5.0F, -3.0F));
-        gravitite_sword = register("gravitite_sword", new AetherSword(AetherTiers.GRAVITITE, Rarity.RARE, 3, -2.4F));
+        gravitite_shovel = register("gravitite_shovel", new AetherShovel(AetherTiers.Gravitite, Rarity.RARE, 1.5F, -3.0F));
+        gravitite_pickaxe = register("gravitite_pickaxe", new AetherPickaxe(AetherTiers.Gravitite, Rarity.RARE, 1, -2.8F));
+        gravitite_axe = register("gravitite_axe", new AetherAxe(AetherTiers.Gravitite, Rarity.RARE, 5.0F, -3.0F));
+        gravitite_sword = register("gravitite_sword", new AetherSword(AetherTiers.Gravitite, Rarity.RARE, 3, -2.4F));
 
-        valkyrie_shovel = register("valkyrie_shovel", new AetherShovel(AetherTiers.VALKYRIE, aether_loot, 1.5F, -3.0F));
-        valkyrie_pickaxe = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.VALKYRIE, aether_loot, 1, -2.8F));
-        valkyrie_axe = register("valkyrie_axe", new AetherAxe(AetherTiers.VALKYRIE, aether_loot, 4.0F, -2.9F));
+        valkyrie_shovel = register("valkyrie_shovel", new AetherShovel(AetherTiers.Valkyrie, aether_loot, 1.5F, -3.0F));
+        valkyrie_pickaxe = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.Valkyrie, aether_loot, 1, -2.8F));
+        valkyrie_axe = register("valkyrie_axe", new AetherAxe(AetherTiers.Valkyrie, aether_loot, 4.0F, -2.9F));
         valkyrie_lance = register("valkyrie_lance", new ValkyrieLance());
 
         // Armor
-        zanite_helmet = register("zanite_helmet", new AetherArmor(AetherArmorType.ZANITE, EquipmentSlot.HEAD));
-        zanite_chestplate = register("zanite_chestplate", new AetherArmor(AetherArmorType.ZANITE, EquipmentSlot.CHEST));
-        zanite_leggings = register("zanite_leggings", new AetherArmor(AetherArmorType.ZANITE, EquipmentSlot.LEGS));
-        zanite_boots = register("zanite_boots", new AetherArmor(AetherArmorType.ZANITE, EquipmentSlot.FEET));
+        zanite_helmet = register("zanite_helmet", new AetherArmor(AetherArmorType.Zanite, EquipmentSlot.HEAD));
+        zanite_chestplate = register("zanite_chestplate", new AetherArmor(AetherArmorType.Zanite, EquipmentSlot.CHEST));
+        zanite_leggings = register("zanite_leggings", new AetherArmor(AetherArmorType.Zanite, EquipmentSlot.LEGS));
+        zanite_boots = register("zanite_boots", new AetherArmor(AetherArmorType.Zanite, EquipmentSlot.FEET));
 
-        gravitite_helmet = register("gravitite_helmet", new AetherArmor(AetherArmorType.GRAVITITE, Rarity.RARE, EquipmentSlot.HEAD));
-        gravitite_chestplate = register("gravitite_chestplate", new AetherArmor(AetherArmorType.GRAVITITE, Rarity.RARE, EquipmentSlot.CHEST));
-        gravitite_leggings = register("gravitite_leggings", new AetherArmor(AetherArmorType.GRAVITITE, Rarity.RARE, EquipmentSlot.LEGS));
-        gravitite_boots = register("gravitite_boots", new AetherArmor(AetherArmorType.GRAVITITE, Rarity.RARE, EquipmentSlot.FEET));
+        gravitite_helmet = register("gravitite_helmet", new AetherArmor(AetherArmorType.Gravitite, Rarity.RARE, EquipmentSlot.HEAD));
+        gravitite_chestplate = register("gravitite_chestplate", new AetherArmor(AetherArmorType.Gravitite, Rarity.RARE, EquipmentSlot.CHEST));
+        gravitite_leggings = register("gravitite_leggings", new AetherArmor(AetherArmorType.Gravitite, Rarity.RARE, EquipmentSlot.LEGS));
+        gravitite_boots = register("gravitite_boots", new AetherArmor(AetherArmorType.Gravitite, Rarity.RARE, EquipmentSlot.FEET));
 
-        neptune_helmet = register("neptune_helmet", new AetherArmor(AetherArmorType.NEPTUNE, aether_loot, EquipmentSlot.HEAD));
-        neptune_chestplate = register("neptune_chestplate", new AetherArmor(AetherArmorType.NEPTUNE, aether_loot, EquipmentSlot.CHEST));
-        neptune_leggings = register("neptune_leggings", new AetherArmor(AetherArmorType.NEPTUNE, aether_loot, EquipmentSlot.LEGS));
-        neptune_boots = register("neptune_boots", new AetherArmor(AetherArmorType.NEPTUNE, aether_loot, EquipmentSlot.FEET));
+        neptune_helmet = register("neptune_helmet", new AetherArmor(AetherArmorType.Neptune, aether_loot, EquipmentSlot.HEAD));
+        neptune_chestplate = register("neptune_chestplate", new AetherArmor(AetherArmorType.Neptune, aether_loot, EquipmentSlot.CHEST));
+        neptune_leggings = register("neptune_leggings", new AetherArmor(AetherArmorType.Neptune, aether_loot, EquipmentSlot.LEGS));
+        neptune_boots = register("neptune_boots", new AetherArmor(AetherArmorType.Neptune, aether_loot, EquipmentSlot.FEET));
 
-        phoenix_helmet = register("phoenix_helmet", new AetherArmor("phoenix", AetherArmorType.PHOENIX, aether_loot, EquipmentSlot.HEAD));
-        phoenix_chestplate = register("phoenix_chestplate", new AetherArmor("phoenix", AetherArmorType.PHOENIX, aether_loot, EquipmentSlot.CHEST));
-        phoenix_leggings = register("phoenix_leggings", new AetherArmor("phoenix", AetherArmorType.PHOENIX, aether_loot, EquipmentSlot.LEGS));
-        phoenix_boots = register("phoenix_boots", new AetherArmor("phoenix", AetherArmorType.PHOENIX, aether_loot, EquipmentSlot.FEET));
+        phoenix_helmet = register("phoenix_helmet", new AetherArmor("phoenix", AetherArmorType.Phoenix, aether_loot, EquipmentSlot.HEAD));
+        phoenix_chestplate = register("phoenix_chestplate", new AetherArmor("phoenix", AetherArmorType.Phoenix, aether_loot, EquipmentSlot.CHEST));
+        phoenix_leggings = register("phoenix_leggings", new AetherArmor("phoenix", AetherArmorType.Phoenix, aether_loot, EquipmentSlot.LEGS));
+        phoenix_boots = register("phoenix_boots", new AetherArmor("phoenix", AetherArmorType.Phoenix, aether_loot, EquipmentSlot.FEET));
 
-        obsidian_helmet = register("obsidian_helmet", new AetherArmor(AetherArmorType.OBSIDIAN, aether_loot, EquipmentSlot.HEAD));
-        obsidian_chestplate = register("obsidian_chestplate", new AetherArmor(AetherArmorType.OBSIDIAN, aether_loot, EquipmentSlot.CHEST));
-        obsidian_leggings = register("obsidian_leggings", new AetherArmor(AetherArmorType.OBSIDIAN, aether_loot, EquipmentSlot.LEGS));
-        obsidian_boots = register("obsidian_boots", new AetherArmor(AetherArmorType.OBSIDIAN, aether_loot, EquipmentSlot.FEET));
+        obsidian_helmet = register("obsidian_helmet", new AetherArmor(AetherArmorType.Obsidian, aether_loot, EquipmentSlot.HEAD));
+        obsidian_chestplate = register("obsidian_chestplate", new AetherArmor(AetherArmorType.Obsidian, aether_loot, EquipmentSlot.CHEST));
+        obsidian_leggings = register("obsidian_leggings", new AetherArmor(AetherArmorType.Obsidian, aether_loot, EquipmentSlot.LEGS));
+        obsidian_boots = register("obsidian_boots", new AetherArmor(AetherArmorType.Obsidian, aether_loot, EquipmentSlot.FEET));
 
-        valkyrie_helmet = register("valkyrie_helmet", new AetherArmor("valkyrie", AetherArmorType.VALKYRIE, aether_loot, EquipmentSlot.HEAD));
-        valkyrie_chestplate = register("valkyrie_chestplate", new AetherArmor("valkyrie", AetherArmorType.VALKYRIE, aether_loot, EquipmentSlot.CHEST));
-        valkyrie_leggings = register("valkyrie_leggings", new AetherArmor("valkyrie", AetherArmorType.VALKYRIE, aether_loot, EquipmentSlot.LEGS));
-        valkyrie_boots = register("valkyrie_boots", new AetherArmor("valkyrie", AetherArmorType.VALKYRIE, aether_loot, EquipmentSlot.FEET));
+        valkyrie_helmet = register("valkyrie_helmet", new AetherArmor("valkyrie", AetherArmorType.Valkyrie, aether_loot, EquipmentSlot.HEAD));
+        valkyrie_chestplate = register("valkyrie_chestplate", new AetherArmor("valkyrie", AetherArmorType.Valkyrie, aether_loot, EquipmentSlot.CHEST));
+        valkyrie_leggings = register("valkyrie_leggings", new AetherArmor("valkyrie", AetherArmorType.Valkyrie, aether_loot, EquipmentSlot.LEGS));
+        valkyrie_boots = register("valkyrie_boots", new AetherArmor("valkyrie", AetherArmorType.Valkyrie, aether_loot, EquipmentSlot.FEET));
 
-        sentry_boots = register("sentry_boots", new AetherArmor("sentry", AetherArmorType.VALKYRIE, aether_loot, EquipmentSlot.FEET));
+        sentry_boots = register("sentry_boots", new AetherArmor("sentry", AetherArmorType.Valkyrie, aether_loot, EquipmentSlot.FEET));
 
         // Food
         blue_berry = register("blue_berry", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));

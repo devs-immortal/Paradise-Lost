@@ -20,7 +20,7 @@ public class ValkyrieLance extends AetherSword {
 
     public ValkyrieLance() {
 
-        super(AetherTiers.VALKYRIE, Rarity.EPIC, 6, -3.0F);
+        super(AetherTiers.Valkyrie, Rarity.EPIC, 6, -3.0F);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", 10.0, EntityAttributeModifier.Operation.ADDITION));
         builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", -3.0F, EntityAttributeModifier.Operation.ADDITION));
