@@ -17,7 +17,7 @@ You can support my work by [making a pledge](https://www.patreon.com/kalucky0) t
 
 ## License information
 
-Created by Immortal Developers.
+Created by Immortal Devs and new assets by ARR.
 
 Originally made by [Gilded Games](https://gildedgames.com/) under GNU GPLv3 license.
 You can find more about GNU GPLv3 on [this website](https://www.gnu.org/licenses/gpl-3.0.en.html).
