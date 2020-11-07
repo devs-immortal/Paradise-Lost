@@ -8,8 +8,8 @@ import net.minecraft.util.Rarity;
 
 public class ItemAccessory extends Item {
 
-    private int color;
-    private AccessoryTypes type;
+    private final int color;
+    private final AccessoryTypes type;
     private Identifier texture;
     private Identifier texture_slim;
     private float damageMultiplier = 1.0F;

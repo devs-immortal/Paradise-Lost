@@ -21,7 +21,7 @@ abstract class AetherVoidFallMixin: Entity(null, null) {
     fun damage(source: DamageSource, amount: Float, cir: CallbackInfoReturnable<Boolean>) {
         if(world.registryKey == AetherDimension.AETHER_WORLD_KEY) {
             if(!world.isClient())
-                (this as ServerPlayerEntity).teleport(server.getWorld(World.OVERWORLD), this.getX(), world.height.toDouble(), this.getZ(), this.yaw, this.pitch);
+                (this as ServerPlayerEntity).teleport(server.getWorld(World.OVERWORLD), this.getX(), world.height.toDouble(), this.getZ(), this.yaw, this.pitch)
             cir.returnValue = false
             return
         }

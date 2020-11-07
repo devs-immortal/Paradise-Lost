@@ -13,8 +13,8 @@ public enum AccessoryTypes
 	MISC("misc", 10, 0),
 	EXTRA_MISC("misc", 10, 0);
 
-	private int durability, damagedReduced;
-	private String displayName;
+	private final int durability, damagedReduced;
+	private final String displayName;
 
 	AccessoryTypes(String displayName, int durability, int damageReduced)
 	{

@@ -36,11 +36,11 @@ public class PortalBlock extends AbstractGlassBlock {
 
     public PortalBlock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState) ((BlockState) this.stateManager.getDefaultState()).with(AXIS, Direction.Axis.X));
+        this.setDefaultState(this.stateManager.getDefaultState().with(AXIS, Direction.Axis.X));
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        switch ((Direction.Axis) state.get(AXIS)) {
+        switch (state.get(AXIS)) {
             case Z:
                 return Z_SHAPE;
             case X:
@@ -56,7 +56,7 @@ public class PortalBlock extends AbstractGlassBlock {
             }
 
             if (world.getBlockState(pos).allowsSpawning(world, pos, EntityType.ZOMBIFIED_PIGLIN)) {
-                Entity entity = EntityType.ZOMBIFIED_PIGLIN.spawn(world, (CompoundTag) null, (Text) null, (PlayerEntity) null, pos.up(), SpawnReason.STRUCTURE, false, false);
+                Entity entity = EntityType.ZOMBIFIED_PIGLIN.spawn(world, null, null, null, pos.up(), SpawnReason.STRUCTURE, false, false);
                 if (entity != null) {
                     entity.resetNetherPortalCooldown();
                 }
@@ -67,7 +67,7 @@ public class PortalBlock extends AbstractGlassBlock {
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
         Direction.Axis axis = direction.getAxis();
-        Direction.Axis axis2 = (Direction.Axis) state.get(AXIS);
+        Direction.Axis axis2 = state.get(AXIS);
         boolean bl = axis2 != axis && axis.isHorizontal();
         return !bl && !newState.isOf(this) && !(new AreaHelper(world, pos, axis2)).wasAlreadyValid() ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
     }
@@ -95,10 +95,10 @@ public class PortalBlock extends AbstractGlassBlock {
             int k = random.nextInt(2) * 2 - 1;
             if (!world.getBlockState(pos.west()).isOf(this) && !world.getBlockState(pos.east()).isOf(this)) {
                 d = (double) pos.getX() + 0.5D + 0.25D * (double) k;
-                g = (double) (random.nextFloat() * 2.0F * (float) k);
+                g = random.nextFloat() * 2.0F * (float) k;
             } else {
                 f = (double) pos.getZ() + 0.5D + 0.25D * (double) k;
-                j = (double) (random.nextFloat() * 2.0F * (float) k);
+                j = random.nextFloat() * 2.0F * (float) k;
             }
 
             world.addParticle(ParticleTypes.DRIPPING_WATER, d, e, f, g, h, j);
@@ -115,11 +115,11 @@ public class PortalBlock extends AbstractGlassBlock {
         switch (rotation) {
             case COUNTERCLOCKWISE_90:
             case CLOCKWISE_90:
-                switch ((Direction.Axis) state.get(AXIS)) {
+                switch (state.get(AXIS)) {
                     case Z:
-                        return (BlockState) state.with(AXIS, Direction.Axis.X);
+                        return state.with(AXIS, Direction.Axis.X);
                     case X:
-                        return (BlockState) state.with(AXIS, Direction.Axis.Z);
+                        return state.with(AXIS, Direction.Axis.Z);
                     default:
                         return state;
                 }

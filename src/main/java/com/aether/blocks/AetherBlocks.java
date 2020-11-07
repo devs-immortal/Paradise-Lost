@@ -342,9 +342,7 @@ public class AetherBlocks {
     private static Block register(String id, Block block, boolean registerItem, Item.Settings settings) {
         Identifier trueId = new Identifier(Aether.MODID, id);
         Registry.register(Registry.BLOCK, trueId, block);
-        if (registerItem) {
-            Registry.register(Registry.ITEM, trueId, new BlockItem(block, settings));
-        }
+        if (registerItem) Registry.register(Registry.ITEM, trueId, new BlockItem(block, settings));
         return block;
     }
 

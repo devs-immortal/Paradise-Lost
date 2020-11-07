@@ -100,8 +100,8 @@ class BucketPortalMixin: Item(Settings()){
             for(dir in directions) {
                 val probePos = pos.offset(dir)
                 if((path.size >= 8 && probePos == start)){
-                    valid = true;
-                    break@pathfinder;
+                    valid = true
+                    break@pathfinder
                 }
                 if(!path.contains(probePos) && !(path.size < 8 && probePos == start) && world.getBlockState(probePos).block in PORTAL_BLOCKS) {
                     path.add(probePos)
@@ -110,7 +110,7 @@ class BucketPortalMixin: Item(Settings()){
                 }
             }
             if(endpoint)
-                break;
+                break
             endpoint = true
         }
         return if(valid) path else ImmutableSet.of()
