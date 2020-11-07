@@ -3,6 +3,7 @@ package com.aether;
 import com.aether.blocks.AetherBlocks;
 import com.aether.items.AetherItems;
 import com.aether.world.dimension.AetherDimension;
+import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
@@ -27,7 +28,9 @@ public class Aether implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitialize() {
+        CrowdinTranslate.downloadTranslations("aether", MODID);
         AetherDimension.setupDimension();
+
     }
 
     @Override

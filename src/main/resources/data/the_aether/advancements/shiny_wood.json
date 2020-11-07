@@ -1,0 +1,35 @@
+{
+    "display": {
+        "title": {
+            "text": "Shiny Wood?"
+        },
+        "description": {
+            "text": "Collect wood from  a Golden Oak Tree"
+        },
+        "icon": {
+            "item": "the_aether:golden_oak_log"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "haslog": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "the_aether:golden_oak_log"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "haslog"
+        ]
+    ],
+    "parent": "the_aether:root"
+}

@@ -1,9 +1,26 @@
+
+buildscript {
+    dependencies {
+        classpath 'de.guntram.mcmod:crowdin-translate:1.2'
+    }
+    repositories {
+        maven {
+            name = 'CrowdinTranslate source'
+            url = "https://minecraft.guntram.de/maven/"
+        }
+    }
+}
+
 plugins {
     id 'fabric-loom' version '0.5-SNAPSHOT'
     id 'maven-publish'
     id 'org.jetbrains.kotlin.jvm' version '1.4.20-M1'
 }
 
+apply plugin: 'de.guntram.mcmod.crowdin-translate'
+crowdintranslate.crowdinProjectName = 'aether'
+crowdintranslate.minecraftProjectName = 'the_aether'
+crowdintranslate.verbose = true
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -12,6 +29,9 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+    maven {
+        url = "https://minecraft.guntram.de/maven/"
+    }
     maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
     maven {
         name = "Modmenu"
@@ -34,6 +54,9 @@ dependencies {
     // Libraries
     modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:1.0.1"))
     modImplementation(include(group: "net.fabricmc", name: "fabric-language-kotlin", version: "1.4.0+build.1"))
+
+    modImplementation "de.guntram.mcmod:crowdin-translate:1.2"
+    include "de.guntram.mcmod:crowdin-translate:1.2"
 
     // Implement the required portions of FAPI
     // Remember to maintain these, and add the modular bits as needed. 
@@ -109,4 +132,8 @@ compileTestKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
+
+build {
+    dependsOn downloadTranslations
 }

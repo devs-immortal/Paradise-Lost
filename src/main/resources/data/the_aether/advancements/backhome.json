@@ -1,0 +1,32 @@
+{
+    "display": {
+        "title": {
+            "text": "Escapist"
+        },
+        "description": {
+            "text": "Return to the overworld"
+        },
+        "icon": {
+            "item": "minecraft:grass_block"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "returnhome": {
+            "trigger": "minecraft:changed_dimension",
+            "conditions": {
+                "to": "overworld",
+                "from": "the_aether:the_aether"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "returnhome"
+        ]
+    ],
+    "parent": "the_aether:root"
+}
