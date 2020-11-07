@@ -3,6 +3,9 @@
         "title": {
             "text": "I've been falling, for 30 minutes!"
         },
+        "description": {
+            "text": "Could have at least given me a pillow or something..."
+        },
         "icon": {
             "item": "the_aether:aerogel"
         },
