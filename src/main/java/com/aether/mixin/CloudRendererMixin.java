@@ -63,9 +63,9 @@ public final class CloudRendererMixin {
     @Shadow
     private static final Identifier CLOUDS = new Identifier("textures/environment/clouds.png");
 
-    @Inject(method = {"renderClouds(Lnet/minecraft/client/util/math/MatrixStack;FDDD)V"}, at = {@At("HEAD")}, cancellable = true)
+    @Inject(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;FDDD)V", at = @At("HEAD"), cancellable = true)
     public void renderClouds(MatrixStack matrices, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
-        if(world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
+        if (world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
             internalCloudRender(matrices, tickDelta, cameraX, cameraY, cameraZ, 96, 1f, 1f);
             internalCloudRender(matrices, tickDelta, cameraX, cameraY, cameraZ, 32, 1.25f, -2f);
             internalCloudRender(matrices, tickDelta, cameraX, cameraY, cameraZ, -128, 2f, 1.5f);

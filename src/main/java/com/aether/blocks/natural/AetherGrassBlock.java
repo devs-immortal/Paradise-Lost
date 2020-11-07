@@ -1,6 +1,5 @@
 package com.aether.blocks.natural;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.SpreadableAetherBlock;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
@@ -31,7 +30,7 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
 
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockPos blockPos = pos.up();
-        BlockState blockState = AetherBlocks.AETHER_GRASS.getDefaultState();
+        BlockState blockState = Blocks.GRASS.getDefaultState();
 
         label48:
         for (int i = 0; i < 128; ++i) {
