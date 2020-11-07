@@ -16,7 +16,11 @@ The Aether is a dimension high in the sky composed of floating islands. Ascend t
 You can support my work by [making a pledge](https://www.patreon.com/kalucky0) today helping fund development and gaining access to special perks. You can also support the Aether project and **Gilded Games** on [their Patreon](https://www.patreon.com/GildedGames) as they are the ones who did most of the work.
 
 ## License information
-Originally made by [Gilded Games](https://gildedgames.com/) under GNU GPLv3 license. Updated to modern versions of Minecraft by [kalucky0](https://kalucky0.dev). New assets by [Azzy](https://www.reddit.com/user/Azazelthedemonlord) and [24Chrome](https://github.com/MBatt1). You can find more about GNU GPLv3 on [this website](https://www.gnu.org/licenses/gpl-3.0.en.html).
+
+Created by Immortal Developers.
+
+Originally made by [Gilded Games](https://gildedgames.com/) under GNU GPLv3 license.
+You can find more about GNU GPLv3 on [this website](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 ## Translations
 The Aether project makes use of crowd sourced translations through crowdin. The Aether is available in the 30 top languages, help translate to them here:
