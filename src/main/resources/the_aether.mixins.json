@@ -11,7 +11,8 @@
     "CloudRendererMixin",
     "CropBlockMixin",
     "FarmlandBlockMixin",
-    "PlantBlockMixin"
+    "PlantBlockMixin",
+    "DisableExperWarnMixin"
   ],
   "injectors": {
     "defaultRequire": 1
