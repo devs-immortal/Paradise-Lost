@@ -6,15 +6,15 @@
       },
       {
         "model": "the_aether:block/holystone",
-        "y": 90
+        "Y": 90
       },
       {
         "model": "the_aether:block/holystone",
-        "y": 180
+        "Y": 180
       },
       {
         "model": "the_aether:block/holystone",
-        "y": 270
+        "Y": 270
       }
     ]
   }

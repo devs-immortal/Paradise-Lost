@@ -6,7 +6,8 @@
   "mixins": [
     "AetherVoidFallMixin",
     "BiomeLayerSamplerAccessor",
-    "BucketPortalMixin"
+    "BucketPortalMixin",
+    "CloudRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
