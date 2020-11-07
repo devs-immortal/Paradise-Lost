@@ -13,7 +13,7 @@ import com.aether.items.staff.NatureStaff;
 import com.aether.items.tools.*;
 import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
-import com.aether.util.RarityNursery;
+import com.aether.util.EnumHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -58,7 +58,7 @@ public class AetherItems {
 //    public static Item REPULSION_SHIELD;
     public static Item LORE_BOOK;
 
-    public static final Rarity AETHER_LOOT = RarityNursery.INSTANCE.createRarity(Formatting.GREEN, 1);
+    public static final Rarity AETHER_LOOT = EnumHelper.addRarity("AETHER_LOOT", Formatting.GREEN);
 
     static {
         // Resources
