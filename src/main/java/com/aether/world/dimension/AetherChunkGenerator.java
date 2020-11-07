@@ -29,6 +29,7 @@ import java.util.stream.IntStream;
 
 public class AetherChunkGenerator extends ChunkGenerator {
     protected final ChunkRandom random;
+    private final long seed;
     private final OctavePerlinNoiseSampler perlinNoiseSampler;
     private final OctavePerlinNoiseSampler extraPerlinNoiseSampler;
     private double[] buffer;
@@ -36,24 +37,32 @@ public class AetherChunkGenerator extends ChunkGenerator {
     public static final Codec<AetherChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
-                    StructuresConfig.CODEC.fieldOf("structures").forGetter((ChunkGenerator::getStructuresConfig))
-                    //Codec.LONG.fieldOf("seed").forGetter((obj) -> obj.worldSeed)
+                    StructuresConfig.CODEC.fieldOf("structures").forGetter((ChunkGenerator::getStructuresConfig))//,
+                    //Codec.LONG.fieldOf("seed").stable().forGetter((obj) -> obj.seed)
             ).apply(instance, instance.stable(AetherChunkGenerator::new))
     );
 
-    public AetherChunkGenerator(BiomeSource biomeSource, StructuresConfig structuresConfig) {
-        this(biomeSource, biomeSource, structuresConfig);
+    public AetherChunkGenerator(BiomeSource biomeSource, StructuresConfig structuresConfig, long worldSeed) {
+        this(biomeSource, biomeSource, structuresConfig, worldSeed);
     }
 
-    public AetherChunkGenerator(BiomeSource biomeSource, BiomeSource biomeSource2, StructuresConfig structuresConfig) {
-        super(biomeSource, biomeSource2, structuresConfig, 0L);
+    public AetherChunkGenerator(BiomeSource biomeSource, StructuresConfig structuresConfig) {
+        this(biomeSource, structuresConfig, 0L);
+    }
+
+    public AetherChunkGenerator(BiomeSource biomeSource, BiomeSource biomeSource2, StructuresConfig structuresConfig, long worldSeed) {
+        super(biomeSource, biomeSource2, structuresConfig, worldSeed);
         IntStream perlinNoiseSet = IntStream.rangeClosed(-15, 0);
         IntStream extraPerlinNoiseSet = IntStream.rangeClosed(-7, 0);
 
-        // FIXME: Need a way to find the world seed
-        this.random = new ChunkRandom(0L);
+        this.seed = worldSeed;
+        this.random = new ChunkRandom(worldSeed);
         this.perlinNoiseSampler = new OctavePerlinNoiseSampler(this.random, perlinNoiseSet);
         this.extraPerlinNoiseSampler = new OctavePerlinNoiseSampler(this.random, extraPerlinNoiseSet);
+    }
+
+    public AetherChunkGenerator(BiomeSource biomeSource, BiomeSource biomeSource2, StructuresConfig structuresConfig) {
+        this(biomeSource, biomeSource2, structuresConfig, 0L);
     }
 
     private double sampleNoise(int int_1, int int_2, int int_3, double double_1, double double_2, double double_3, double double_4) {

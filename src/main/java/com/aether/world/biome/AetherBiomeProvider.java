@@ -28,30 +28,31 @@ import net.minecraft.world.biome.source.BiomeLayerSampler;
 import net.minecraft.world.biome.source.BiomeSource;
 
 public class AetherBiomeProvider extends BiomeSource {
-    public static final Codec<AetherBiomeProvider> CODEC =
-            RecordCodecBuilder.create((instance) -> instance.group(
-                    RegistryLookupCodec.of(Registry.BIOME_KEY).forGetter((biomeSource) -> biomeSource.BIOME_REGISTRY))
-            .apply(instance, instance.stable(AetherBiomeProvider::new)));
+    public static final Codec<AetherBiomeProvider> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            RegistryLookupCodec.of(Registry.BIOME_KEY).forGetter(source -> source.biomeRegistry)//,
+            //Codec.LONG.fieldOf("seed").stable().forGetter(source -> source.seed)
+    ).apply(instance, instance.stable(AetherBiomeProvider::new)));
 
-    private final BiomeLayerSampler BIOME_SAMPLER;
-    private final Registry<Biome> BIOME_REGISTRY;
+    private final BiomeLayerSampler biomeSampler;
+    private final Registry<Biome> biomeRegistry;
+    private final long seed;
     public static Registry<Biome> layersBiomeRegistry;
 
     public AetherBiomeProvider(Registry<Biome> biomeRegistry) {
-        // FIXME: Need World Seed Here
-        this(0, biomeRegistry);
+        this(biomeRegistry, 0L);
     }
 
-    public AetherBiomeProvider(long seed, Registry<Biome> biomeRegistry) {
+    public AetherBiomeProvider(Registry<Biome> biomeRegistry, long worldSeed) {
         super(biomeRegistry.getEntries().stream()
                 .filter(entry -> entry.getKey().getValue().getNamespace().equals(Aether.MODID))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList()));
 
-        AetherBiomeLayer.setSeed(seed);
-        this.BIOME_REGISTRY = biomeRegistry;
+        this.seed = worldSeed;
+        AetherBiomeLayer.setSeed(worldSeed);
+        this.biomeRegistry = biomeRegistry;
         AetherBiomeProvider.layersBiomeRegistry = biomeRegistry;
-        this.BIOME_SAMPLER = buildWorldProcedure(seed);
+        this.biomeSampler = buildWorldProcedure(worldSeed);
     }
 
     public static void registerBiomeProvider() {
@@ -66,7 +67,7 @@ public class AetherBiomeProvider extends BiomeSource {
     @Override
     @Environment(EnvType.CLIENT)
     public BiomeSource withSeed(long seed) {
-        return new AetherBiomeProvider(seed, this.BIOME_REGISTRY);
+        return new AetherBiomeProvider(this.biomeRegistry, seed);
     }
 
     public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> stack(long seed, ParentedLayer parent, LayerFactory<T> incomingArea, int count, LongFunction<C> contextFactory) {
@@ -98,11 +99,11 @@ public class AetherBiomeProvider extends BiomeSource {
 
     @Override
     public Biome getBiomeForNoiseGen(int x, int y, int z) {
-        return this.sample(this.BIOME_REGISTRY, x, z);
+        return this.sample(this.biomeRegistry, x, z);
     }
 
     public Biome sample(Registry<Biome> registry, int i, int j) {
-        int k = ((BiomeLayerSamplerAccessor)this.BIOME_SAMPLER).getSampler().sample(i, j);
+        int k = ((BiomeLayerSamplerAccessor)this.biomeSampler).getSampler().sample(i, j);
         Biome biome = registry.get(k);
         if (biome == null) {
             if (SharedConstants.isDevelopment) {
