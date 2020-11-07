@@ -2,6 +2,7 @@ package com.aether.items.tools;
 
 import java.util.Map;
 
+import com.aether.blocks.AetherBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -23,17 +24,33 @@ import com.aether.items.utils.AetherTiers;
 
 public class AetherHoe extends HoeItem implements IAetherTool {
 
-    protected static final Map<Block, BlockState> convertableBlocks = Maps.newHashMap(ImmutableMap.of(/*AetherBlocks.AETHER_GRASS, AetherBlocks.AETHER_FARMLAND.getDefaultState(), AetherBlocks.AETHER_GRASS_PATH, AetherBlocks.AETHER_FARMLAND.getDefaultState(), AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_FARMLAND.getDefaultState(), */Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
+    protected static final Map<Block, BlockState> convertibleBlocks = Maps.newHashMap(ImmutableMap.of(
+            Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(),
+            Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(),
+            Blocks.DIRT, Blocks.FARMLAND.getDefaultState(),
+            Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()
+    ));
     private final AetherTiers material;
 
     public AetherHoe(AetherTiers material, float attackSpeed) {
         super(material.getDefaultTier(), 1, attackSpeed, new Settings().group(AetherItemGroups.TOOLS));
         this.material = material;
+        setupConvertibleData();
     }
 
     public AetherHoe(AetherTiers material, Rarity rarity, float attackSpeed) {
         super(material.getDefaultTier(), 1, attackSpeed, new Settings().group(AetherItemGroups.TOOLS).rarity(rarity));
         this.material = material;
+        setupConvertibleData();
+    }
+
+    private void setupConvertibleData() {
+        final Map<Block, BlockState> modifiedConvertibles = Maps.newHashMap(ImmutableMap.of(
+                AetherBlocks.AETHER_GRASS, AetherBlocks.AETHER_FARMLAND.getDefaultState(),
+                AetherBlocks.AETHER_GRASS_PATH, AetherBlocks.AETHER_FARMLAND.getDefaultState(),
+                AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_FARMLAND.getDefaultState()
+        ));
+        convertibleBlocks.putAll(modifiedConvertibles);
     }
 
     @Override
@@ -42,7 +59,7 @@ public class AetherHoe extends HoeItem implements IAetherTool {
         BlockPos blockpos = context.getBlockPos();
 
         if (context.getSide() != Direction.DOWN && world.isAir(blockpos.up())) {
-            BlockState blockstate = convertableBlocks.get(world.getBlockState(blockpos).getBlock());
+            BlockState blockstate = convertibleBlocks.get(world.getBlockState(blockpos).getBlock());
 
             if (blockstate != null) {
                 PlayerEntity entityPlayer = context.getPlayer();
