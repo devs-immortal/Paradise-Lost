@@ -6,7 +6,7 @@
   "mixins": [
     "BiomeLayerSamplerAccessor",
     "BlockStateModelGeneratorMixin",
-    "BucketPortalMixin",
+    "BucketItemMixin",
     "CloudRendererMixin",
     "CropBlockMixin",
     "FarmlandBlockMixin",

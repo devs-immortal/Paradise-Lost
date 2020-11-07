@@ -31,9 +31,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.*;
 
 @Mixin(BucketItem.class)
-public class BucketPortalMixin extends Item {
-
-    public BucketPortalMixin(Settings settings) {
+public class BucketItemMixin extends Item {
+    public BucketItemMixin(Settings settings) {
         super(settings);
     }
 
