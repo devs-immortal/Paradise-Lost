@@ -1,8 +1,7 @@
 {
     "display": {
         "title": {
-            "text": "Escapist",
-            "color": "white"
+            "text": "Escapist"
         },
         "description": {
             "text": "Return to the overworld"
@@ -19,7 +18,8 @@
         "returnhome": {
             "trigger": "minecraft:changed_dimension",
             "conditions": {
-                "to": "overworld"
+                "to": "overworld",
+                "from": "the_aether:the_aether"
             }
         }
     },
