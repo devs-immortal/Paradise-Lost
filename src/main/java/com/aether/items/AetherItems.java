@@ -56,7 +56,7 @@ public class AetherItems {
     public static final Item SENTRY_BOOTS/*, LIGHTNING_KNIFE*/;
 //    public static Item AETHER_TUNE, ASCENDING_DAWN, WELCOMING_SKIES, LEGACY;
 //    public static Item REPULSION_SHIELD;
-//    public static Item LORE_BOOK;
+    public static Item LORE_BOOK;
 
     public static final Rarity AETHER_LOOT = RarityNursery.INSTANCE.createRarity(Formatting.GREEN, 1);
 
@@ -213,6 +213,8 @@ public class AetherItems {
         NATURE_STAFF = register("nature_staff", new NatureStaff());
 
         MOA_EGG = register("moa_egg", new MoaEgg());
+
+        LORE_BOOK = register("lore_book", new BookOfLore((new Item.Settings()).maxCount(1).group(AetherItemGroups.MISC)));
 
         // Some music, I think the original ones are copyrighted but whatever
         //TODO: Add AetherSounds
