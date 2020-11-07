@@ -176,7 +176,7 @@ public class EnumHelper {
         return addEnum(false, enumType, enumName, paramTypes, paramValues);
     }
 
-    @SuppressWarnings({ "unchecked", "serial" })
+    @SuppressWarnings("unchecked")
     @Nullable
     private static <T extends Enum<? >> T addEnum(boolean test, final Class<T> enumType, @Nullable String enumName, final Class<?>[] paramTypes, @Nullable Object[] paramValues)
             throws Exception
