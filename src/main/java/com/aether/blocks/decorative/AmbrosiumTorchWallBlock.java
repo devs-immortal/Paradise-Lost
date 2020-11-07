@@ -24,7 +24,7 @@ public class AmbrosiumTorchWallBlock extends WallTorchBlock {
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         int max = random.nextInt(3) + 2;
         for(int i = 0; i <= max; i++) {
-            Direction direction = ((Direction) state.get(FACING)).getOpposite();
+            Direction direction = state.get(FACING).getOpposite();
             double e = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.23D + 0.3D * (double) direction.getOffsetX();
             double f = (double) pos.getY() + 0.6D + (random.nextDouble() - 0.5D) * 0.25D + 0.22D;
             double g = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.23D + 0.3D * (double) direction.getOffsetZ();

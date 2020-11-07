@@ -3,7 +3,6 @@ package com.aether.mixin;
 import com.aether.blocks.AetherBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

@@ -8,6 +8,7 @@
     "BiomeLayerSamplerAccessor",
     "BucketPortalMixin",
     "CloudRendererMixin",
+    "CropBlockMixin",
     "FarmlandBlockMixin",
     "PlantBlockMixin"
   ],
