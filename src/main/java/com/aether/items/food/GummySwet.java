@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class GummySwet extends Item {
 
     public GummySwet() {
-        super(new Settings().group(AetherItemGroups.Food).rarity(AetherItems.AETHER_LOOT));
+        super(new Settings().group(AetherItemGroups.Food).rarity(AetherItems.aether_loot));
     }
 
     @Override

@@ -53,7 +53,7 @@ public class BlueberryBushBlock extends PlantBlock {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (state.get(RIPE)) {
-            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(AetherItems.BLUE_BERRY, world.getRandom().nextInt(2) + 1)));
+            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(AetherItems.blue_berry, world.getRandom().nextInt(2) + 1)));
             world.setBlockState(pos, state.with(RIPE, false));
             return ActionResult.SUCCESS;
         }

@@ -4,7 +4,6 @@ import com.aether.api.AetherAPI;
 import com.aether.api.enchantments.AetherEnchantment;
 import com.aether.api.enchantments.AetherEnchantmentFuel;
 import com.aether.api.freezables.AetherFreezable;
-import com.aether.api.freezables.AetherFreezableFuel;
 import com.aether.blocks.AetherBlocks;
 import com.aether.items.AetherItems;
 import net.minecraft.block.Blocks;
@@ -51,15 +50,15 @@ public class AetherAPIRegistry {
         registry.register(new AetherEnchantment(AetherItems.skyroot_poison_bucket, AetherItems.skyroot_remedy_bucket, 1000));
 
         registry.register(new AetherEnchantment(AetherBlocks.holystone, AetherItems.healing_stone, 750));
-        registry.register(new AetherEnchantment(AetherBlocks.gravitite_ore, AetherBlocks.enchanted_gravitite, 1000));
+        //registry.register(new AetherEnchantment(AetherBlocks.gravitite_ore, AetherBlocks.enchanted_gravitite, 1000));
         registry.register(new AetherEnchantment(AetherBlocks.quicksoil, AetherBlocks.quicksoil_glass, 250));
 
-        registry.register(new AetherEnchantment(AetherItems.blueberry, AetherItems.enchanted_blueberry, 300));
+        //registry.register(new AetherEnchantment(AetherItems.blueberry, AetherItems.enchanted_blueberry, 300));
 
         registry.register(new AetherEnchantment(Items.BOW, 4000));
         registry.register(new AetherEnchantment(Items.FISHING_ROD, 600));
 
-        registry.register(new AetherEnchantment(Items.MUSIC_DISC_11, AetherItems.aether_tune, 2500));
+        /*registry.register(new AetherEnchantment(Items.MUSIC_DISC_11, AetherItems.aether_tune, 2500));
         registry.register(new AetherEnchantment(Items.MUSIC_DISC_13, AetherItems.aether_tune, 2500));
         registry.register(new AetherEnchantment(Items.MUSIC_DISC_BLOCKS, AetherItems.aether_tune, 2500));
         registry.register(new AetherEnchantment(Items.MUSIC_DISC_CAT, AetherItems.aether_tune, 2500));
@@ -69,7 +68,7 @@ public class AetherAPIRegistry {
         registry.register(new AetherEnchantment(Items.MUSIC_DISC_STAL, AetherItems.aether_tune, 2500));
         registry.register(new AetherEnchantment(Items.MUSIC_DISC_STRAD, AetherItems.aether_tune, 2500));
         registry.register(new AetherEnchantment(Items.MUSIC_DISC_WAIT, AetherItems.aether_tune, 2500));
-        registry.register(new AetherEnchantment(Items.MUSIC_DISC_WARD, AetherItems.aether_tune, 2500));
+        registry.register(new AetherEnchantment(Items.MUSIC_DISC_WARD, AetherItems.aether_tune, 2500));*/
 
         registry.register(new AetherEnchantment(Items.WOODEN_PICKAXE, 225));
         registry.register(new AetherEnchantment(Items.WOODEN_AXE, 225));
@@ -118,10 +117,10 @@ public class AetherAPIRegistry {
 
         registry.register(new AetherEnchantmentFuel(AetherItems.ambrosium_shard, 500));
 
-        registry.register(new AetherFreezable(AetherBlocks.cold_aercloud, AetherBlocks.blue_aercloud, 100));
+        //registry.register(new AetherFreezable(AetherBlocks.cold_aercloud, AetherBlocks.blue_aercloud, 100));
         registry.register(new AetherFreezable(AetherBlocks.skyroot_leaves, AetherBlocks.crystal_leaves, 150));
         registry.register(new AetherFreezable(AetherItems.skyroot_bucket, Blocks.ICE, 500));
-        registry.register(new AetherFreezable(AetherItems.ascending_dawn, AetherItems.welcoming_skies, 800));
+        //registry.register(new AetherFreezable(AetherItems.ascending_dawn, AetherItems.welcoming_skies, 800));
         registry.register(new AetherFreezable(Blocks.ICE, Blocks.PACKED_ICE, 750));
         registry.register(new AetherFreezable(Items.WATER_BUCKET, Blocks.ICE, 500));
         registry.register(new AetherFreezable(Items.LAVA_BUCKET, Blocks.OBSIDIAN, 500));
@@ -130,6 +129,6 @@ public class AetherAPIRegistry {
         registry.register(new AetherFreezable(AetherItems.iron_pendant, AetherItems.ice_pendant, 2500));
         registry.register(new AetherFreezable(AetherItems.golden_pendant, AetherItems.ice_pendant, 2500));
 
-        registry.register(new AetherFreezableFuel(AetherBlocks.icestone, 500));
+        //registry.register(new AetherFreezableFuel(AetherBlocks.icestone, 500));
     }
 }

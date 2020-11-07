@@ -16,8 +16,8 @@ public class Dart extends Item {
     }
 
     public ProjectileEntity createDart(World world, ItemStack stack, LivingEntity entity) {
-        if (this == AetherItems.ENCHANTED_DART) return null;
-        else if (this == AetherItems.POISON_DART) return null;
+        if (this == AetherItems.enchanted_dart) return null;
+        else if (this == AetherItems.poison_dart) return null;
 
         //TODO: Implement EntityEnchantedDart, EntityPoisonDart and EntityGoldenDart
 

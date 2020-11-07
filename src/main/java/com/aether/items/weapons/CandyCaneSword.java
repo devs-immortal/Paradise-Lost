@@ -14,14 +14,14 @@ public class CandyCaneSword extends AetherSword {
     }
 
     @Override
-    public boolean postHit(ItemStack itemstack, LivingEntity entityliving, LivingEntity entityliving1) {
+    public boolean postHit(ItemStack itemStack, LivingEntity entityLiving, LivingEntity entityLiving1) {
         // TODO: deathCounter replace ???
-        if (entityliving.deathTime > 0) {
+        if (entityLiving.deathTime > 0) {
             return true;
         } else {
-            if ((new Random()).nextBoolean() && entityliving1 instanceof PlayerEntity && !entityliving1.world.isClient && entityliving.hurtTime > 0)
-                entityliving.dropItem(AetherItems.CANDY_CANE, 1);
-            itemstack.damage(1, entityliving1, null);
+            if ((new Random()).nextBoolean() && entityLiving1 instanceof PlayerEntity && !entityLiving1.world.isClient && entityLiving.hurtTime > 0)
+                entityLiving.dropItem(AetherItems.candy_cane, 1);
+            itemStack.damage(1, entityLiving1, null);
             return true;
         }
     }

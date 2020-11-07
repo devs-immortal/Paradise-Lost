@@ -38,11 +38,11 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();
-        BlockPos blockpos = context.getBlockPos();
-        BlockState iblockstate = world.getBlockState(blockpos);
+        BlockPos blockPos = context.getBlockPos();
+        BlockState blockState = world.getBlockState(blockPos);
 
-        if (this.getItemMaterial() == AetherTiers.GRAVITITE && this.getMiningSpeedMultiplier(context.getStack(), iblockstate) == this.miningSpeed) {
-            if (world.isAir(blockpos.up()) && !world.isClient) {
+        if (this.getItemMaterial() == AetherTiers.GRAVITITE && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
+            if (world.isAir(blockPos.up()) && !world.isClient) {
                 //TODO: Spawn floating block
             } else {
                 return ActionResult.PASS;
@@ -55,7 +55,7 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
     @Override
     public boolean postMine(ItemStack stackIn, World worldIn, BlockState stateIn, BlockPos posIn, LivingEntity entityIn) {
         if (!worldIn.isClient && this.getItemMaterial() == AetherTiers.HOLYSTONE && worldIn.getRandom().nextInt(100) <= 5)
-            worldIn.spawnEntity(new ItemEntity(worldIn, posIn.getX(), posIn.getY(), posIn.getZ(), new ItemStack(AetherItems.AMBROSIUM_SHARD)));
+            worldIn.spawnEntity(new ItemEntity(worldIn, posIn.getX(), posIn.getY(), posIn.getZ(), new ItemStack(AetherItems.ambrosium_shard)));
         return super.postMine(stackIn, worldIn, stateIn, posIn, entityIn);
     }
 

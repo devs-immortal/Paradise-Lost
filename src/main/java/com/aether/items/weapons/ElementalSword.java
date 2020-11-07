@@ -12,17 +12,17 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class ElementalSword extends AetherSword {
 
     public ElementalSword() {
-        super(AetherTiers.LEGENDARY, AetherItems.AETHER_LOOT, 4, -2.4F);
+        super(AetherTiers.LEGENDARY, AetherItems.aether_loot, 4, -2.4F);
     }
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity victim, LivingEntity attacker) {
-        if (this == AetherItems.FLAMING_SWORD) {
+        if (this == AetherItems.flaming_sword) {
             victim.setOnFireFor(30);
-        } else if (this == AetherItems.LIGHTNING_SWORD) {
+        } else if (this == AetherItems.lightning_sword) {
             LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, attacker.world);
             if (attacker instanceof ServerPlayerEntity) lightning.setChanneler((ServerPlayerEntity) attacker);
-        } else if (this == AetherItems.HOLY_SWORD && victim.isUndead()) {
+        } else if (this == AetherItems.holy_sword && victim.isUndead()) {
             victim.damage(DamageSource.mob(attacker), 20);
             stack.damage(10, attacker, null);
         }

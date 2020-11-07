@@ -49,7 +49,7 @@ public class SkyrootBucket extends Item {
         ItemStack currentStack = playerIn.getStackInHand(handIn);
         HitResult hitResult = raycast(worldIn, playerIn, this.containedBlock == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
 
-        if (currentStack.getItem() != AetherItems.SKYROOT_WATER_BUCKET && currentStack.getItem() != AetherItems.SKYROOT_BUCKET) {
+        if (currentStack.getItem() != AetherItems.skyroot_water_bucket && currentStack.getItem() != AetherItems.skyroot_bucket) {
             playerIn.setCurrentHand(handIn);
             return new TypedActionResult<>(ActionResult.PASS, currentStack);
         }
@@ -70,7 +70,7 @@ public class SkyrootBucket extends Item {
                         if (fluid != Fluids.EMPTY) {
                             playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                             playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
-                            ItemStack fillStack = this.fillBucket(currentStack, playerIn, AetherItems.SKYROOT_WATER_BUCKET);
+                            ItemStack fillStack = this.fillBucket(currentStack, playerIn, AetherItems.skyroot_water_bucket);
 
                             return new TypedActionResult<>(ActionResult.SUCCESS, fillStack);
                         }
@@ -106,14 +106,14 @@ public class SkyrootBucket extends Item {
 
         if (!entityPlayer.abilities.creativeMode) stack.setCount(stack.getCount() - 1);
 
-        if (stack.getItem() == AetherItems.SKYROOT_POISON_BUCKET) {
+        if (stack.getItem() == AetherItems.skyroot_poison_bucket) {
             // TODO: Hurt player
-        } else if (stack.getItem() == AetherItems.SKYROOT_REMEDY_BUCKET) {
+        } else if (stack.getItem() == AetherItems.skyroot_remedy_bucket) {
             //TODO: Cure player
-        } else if (stack.getItem() == AetherItems.SKYROOT_MILK_BUCKET) {
+        } else if (stack.getItem() == AetherItems.skyroot_milk_bucket) {
             if (!world.isClient) entityPlayer.clearStatusEffects();
         }
-        return stack.isEmpty() ? new ItemStack(AetherItems.SKYROOT_BUCKET) : stack;
+        return stack.isEmpty() ? new ItemStack(AetherItems.skyroot_bucket) : stack;
     }
 
     @Override
@@ -123,13 +123,13 @@ public class SkyrootBucket extends Item {
 
     @Override
     public UseAction getUseAction(ItemStack stack) {
-        if (stack.getItem() != AetherItems.SKYROOT_WATER_BUCKET && stack.getItem() != AetherItems.SKYROOT_BUCKET)
+        if (stack.getItem() != AetherItems.skyroot_water_bucket && stack.getItem() != AetherItems.skyroot_bucket)
             return UseAction.DRINK;
         return UseAction.NONE;
     }
 
-    protected ItemStack emptyBucket(ItemStack p_203790_1_, PlayerEntity p_203790_2_) {
-        return !p_203790_2_.abilities.creativeMode ? new ItemStack(AetherItems.SKYROOT_BUCKET) : p_203790_1_;
+    protected ItemStack emptyBucket(ItemStack stackIn, PlayerEntity playerIn) {
+        return !playerIn.abilities.creativeMode ? new ItemStack(AetherItems.skyroot_bucket) : stackIn;
     }
 
     private ItemStack fillBucket(ItemStack emptyBuckets, PlayerEntity player, Item fullBucket) {
@@ -192,6 +192,6 @@ public class SkyrootBucket extends Item {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return stack.getItem() == AetherItems.SKYROOT_REMEDY_BUCKET ? Rarity.RARE : super.getRarity(stack);
+        return stack.getItem() == AetherItems.skyroot_remedy_bucket ? Rarity.RARE : super.getRarity(stack);
     }
 }
