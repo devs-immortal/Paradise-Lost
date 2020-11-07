@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 public enum AetherBiomeLayer implements InitLayer {
     INSTANCE;
 
-    private static final Identifier AETHER_HIGHLANDS = new Identifier(Aether.MODID, "aether_highlands");
+    private static final Identifier AETHER_HIGHLANDS = Aether.locate("aether_highlands");
 
     private static OctaveSimplexNoiseSampler perlinGen;
 //	private double max = -100;

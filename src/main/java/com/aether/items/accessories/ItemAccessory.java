@@ -1,7 +1,7 @@
 package com.aether.items.accessories;
 
+import com.aether.Aether;
 import com.aether.items.AetherItemGroups;
-import com.aether.items.AetherItems;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -15,19 +15,19 @@ public class ItemAccessory extends Item {
     private float damageMultiplier = 1.0F;
 
     public ItemAccessory(AccessoryTypes type, Rarity rarity, int color) {
-        super(new Settings().group(AetherItemGroups.ACCESSORIES).maxDamage(5 * type.getDurability()).rarity(rarity));
+        super(new Settings().group(AetherItemGroups.Accessories).maxDamage(5 * type.getDurability()).rarity(rarity));
 
         this.type = type;
         this.color = color;
-        this.texture = AetherItems.locate("textures/armor/accessory_base.png");
-        this.texture_slim = AetherItems.locate("textures/armor/accessory_base_slim.png");
+        this.texture = Aether.locate("textures/armor/accessory_base.png");
+        this.texture_slim = Aether.locate("textures/armor/accessory_base_slim.png");
     }
 
     public ItemAccessory(String material, AccessoryTypes type, Rarity rarity, int color) {
         this(type, rarity, color);
 
-        this.texture = AetherItems.locate("textures/armor/accessory_" + material + ".png");
-        this.texture_slim = AetherItems.locate("textures/armor/accessory_" + material + "_slim.png");
+        this.texture = Aether.locate("textures/armor/accessory_" + material + ".png");
+        this.texture_slim = Aether.locate("textures/armor/accessory_" + material + "_slim.png");
     }
 
     public ItemAccessory(AccessoryTypes type) {

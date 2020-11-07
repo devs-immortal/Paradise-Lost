@@ -6,6 +6,6 @@ import net.minecraft.item.Item;
 
 public class DungeonKey extends Item {
     public DungeonKey() {
-        super(new Settings().maxCount(1).group(AetherItemGroups.MISC).rarity(AetherItems.AETHER_LOOT));
+        super(new Settings().maxCount(1).group(AetherItemGroups.Misc).rarity(AetherItems.AETHER_LOOT));
     }
 }

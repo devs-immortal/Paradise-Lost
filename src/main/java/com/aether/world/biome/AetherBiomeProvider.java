@@ -38,7 +38,7 @@ public class AetherBiomeProvider extends BiomeSource {
 
     public AetherBiomeProvider(Registry<Biome> biomeRegistry, long worldSeed) {
         super(biomeRegistry.getEntries().stream()
-                .filter(entry -> entry.getKey().getValue().getNamespace().equals(Aether.MODID))
+                .filter(entry -> entry.getKey().getValue().getNamespace().equals(Aether.modId))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList()));
 
@@ -50,7 +50,7 @@ public class AetherBiomeProvider extends BiomeSource {
     }
 
     public static void registerBiomeProvider() {
-        Registry.register(Registry.BIOME_SOURCE, new Identifier(Aether.MODID, "biome_source"), AetherBiomeProvider.CODEC);
+        Registry.register(Registry.BIOME_SOURCE, Aether.locate("biome_source"), AetherBiomeProvider.CODEC);
     }
 
     public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> stack(long seed, ParentedLayer parent, LayerFactory<T> incomingArea, int count, LongFunction<C> contextFactory) {

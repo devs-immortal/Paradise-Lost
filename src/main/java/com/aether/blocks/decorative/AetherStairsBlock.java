@@ -20,7 +20,7 @@ public class AetherStairsBlock extends StairsBlock {
 
     @Override
     public boolean isIn(Tag<Block> tag) {
-        return tag == BlockTags.STAIRS || (tag == BlockTags.WOODEN_STAIRS && this == AetherBlocks.SKYROOT_STAIRS) || super.isIn(tag);
+        return tag == BlockTags.STAIRS || (tag == BlockTags.WOODEN_STAIRS && this == AetherBlocks.skyroot_stairs) || super.isIn(tag);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class AetherStairsBlock extends StairsBlock {
     }
 
     private boolean isAerogel() {
-        return this == AetherBlocks.AEROGEL_STAIRS;
+        return this == AetherBlocks.aerogel_stairs;
     }
 }

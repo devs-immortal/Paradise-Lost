@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class LifeShard extends Item {
 
     public LifeShard() {
-        super(new Settings().maxCount(1).group(AetherItemGroups.MISC).rarity(AetherItems.AETHER_LOOT));
+        super(new Settings().maxCount(1).group(AetherItemGroups.Misc).rarity(AetherItems.AETHER_LOOT));
     }
 
     @Override

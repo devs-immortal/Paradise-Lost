@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 
 public class ZaniteGemstone extends Item {
     public ZaniteGemstone() {
-        super(new Settings().group(AetherItemGroups.MATERIALS));
+        super(new Settings().group(AetherItemGroups.Materials));
     }
 }

@@ -30,17 +30,17 @@ public class SkyrootBucket extends Item {
     private final Fluid containedBlock;
 
     public SkyrootBucket() {
-        super(new Settings().maxCount(16).group(AetherItemGroups.MISC));
+        super(new Settings().maxCount(16).group(AetherItemGroups.Misc));
         this.containedBlock = Fluids.EMPTY;
     }
 
     public SkyrootBucket(Item containerIn) {
-        super(new Settings().maxCount(1).group(AetherItemGroups.MISC).recipeRemainder(containerIn));
+        super(new Settings().maxCount(1).group(AetherItemGroups.Misc).recipeRemainder(containerIn));
         this.containedBlock = Fluids.EMPTY;
     }
 
     public SkyrootBucket(Fluid containedFluidIn, Item containerIn) {
-        super(new Settings().maxCount(1).group(AetherItemGroups.MISC).recipeRemainder(containerIn));
+        super(new Settings().maxCount(1).group(AetherItemGroups.Misc).recipeRemainder(containerIn));
         this.containedBlock = containedFluidIn;
     }
 

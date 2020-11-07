@@ -7,7 +7,7 @@ import net.minecraft.util.ActionResult;
 public class MoaEgg extends Item {
 
     public MoaEgg() {
-        super(new Item.Settings().maxCount(1).group(AetherItemGroups.MISC));
+        super(new Item.Settings().maxCount(1).group(AetherItemGroups.Misc));
     }
 
     @Override

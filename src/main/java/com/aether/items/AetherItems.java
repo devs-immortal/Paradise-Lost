@@ -18,7 +18,6 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
@@ -129,14 +128,14 @@ public class AetherItems {
         SENTRY_BOOTS = register("sentry_boots", new AetherArmor("sentry", AetherArmorType.VALKYRIE, AETHER_LOOT, EquipmentSlot.FEET));
 
         // Food
-        BLUE_BERRY = register("blue_berry", new Item(new Item.Settings().group(AetherItemGroups.FOOD).food(AetherFood.DEFAULT)));
-        ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.FOOD).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
+        BLUE_BERRY = register("blue_berry", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
+        ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
         WHITE_APPLE = register("white_apple", new WhiteApple());
         BLUE_GUMMY_SWET = register("blue_gummy_swet", new GummySwet());
         GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new GummySwet());
         HEALING_STONE = register("healing_stone", new HealingStone());
-        CANDY_CANE = register("candy_cane", new Item(new Item.Settings().group(AetherItemGroups.FOOD).food(AetherFood.DEFAULT)));
-        GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Item.Settings().group(AetherItemGroups.FOOD).food(AetherFood.DEFAULT)));
+        CANDY_CANE = register("candy_cane", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
+        GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
 
         // Misc
         SKYROOT_BUCKET = register("skyroot_bucket", new SkyrootBucket());
@@ -214,7 +213,7 @@ public class AetherItems {
 
         MOA_EGG = register("moa_egg", new MoaEgg());
 
-        LORE_BOOK = register("lore_book", new BookOfLore((new Item.Settings()).maxCount(1).group(AetherItemGroups.MISC)));
+        LORE_BOOK = register("lore_book", new BookOfLore((new Item.Settings()).maxCount(1).group(AetherItemGroups.Misc)));
 
         // Some music, I think the original ones are copyrighted but whatever
         //TODO: Add AetherSounds
@@ -225,11 +224,7 @@ public class AetherItems {
     }
 
     private static Item register(String id, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(Aether.MODID, id), item);
-    }
-
-    public static Identifier locate(String location) {
-        return new Identifier(Aether.MODID, location);
+        return Registry.register(Registry.ITEM, Aether.locate(id), item);
     }
 
     public static void clientInitialization() {

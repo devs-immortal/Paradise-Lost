@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 
 public class GoldenAmber extends Item {
     public GoldenAmber() {
-        super(new Settings().group(AetherItemGroups.MATERIALS));
+        super(new Settings().group(AetherItemGroups.Materials));
     }
 }

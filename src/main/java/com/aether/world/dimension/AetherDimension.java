@@ -8,7 +8,7 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class AetherDimension {
-    public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, Aether.MOD_DIMENSION_ID);
+    public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, Aether.locate(Aether.modId));
 
     public static void setupDimension() {
         AetherChunkGenerator.registerChunkGenerator();

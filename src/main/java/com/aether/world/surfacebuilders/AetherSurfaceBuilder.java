@@ -19,8 +19,8 @@ public class AetherSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 
     @Override
     public void generate(Random var1, Chunk var2, Biome var3, int var4, int var5, int var6, double var7, BlockState var9, BlockState var10, int var11, long var12, TernarySurfaceConfig var14) {
-        BlockState blockState_6 = AetherBlocks.AETHER_GRASS.getDefaultState();
-        BlockState blockState_7 = AetherBlocks.AETHER_DIRT.getDefaultState();
+        BlockState blockState_6 = AetherBlocks.aether_grass.getDefaultState();
+        BlockState blockState_7 = AetherBlocks.aether_dirt.getDefaultState();
         BlockPos.Mutable blockPos$Mutable_1 = new BlockPos.Mutable();
 
         int int_5 = -1;

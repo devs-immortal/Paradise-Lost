@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 
 public class SwetBall extends Item {
     public SwetBall() {
-        super(new Settings().group(AetherItemGroups.MATERIALS));
+        super(new Settings().group(AetherItemGroups.Materials));
     }
 }

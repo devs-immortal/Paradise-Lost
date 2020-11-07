@@ -14,15 +14,15 @@ import net.minecraft.world.World;
 public class AmbrosiumShard extends Item {
 
     public AmbrosiumShard() {
-        super(new Settings().group(AetherItemGroups.MATERIALS));
+        super(new Settings().group(AetherItemGroups.Materials));
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getWorld().getBlockState(context.getBlockPos()).getBlock() == AetherBlocks.AETHER_GRASS) {
+        if (context.getWorld().getBlockState(context.getBlockPos()).getBlock() == AetherBlocks.aether_grass) {
             if (!context.getPlayer().isCreative())
                 context.getStack().setCount(context.getStack().getCount() - 1);
-            context.getWorld().setBlockState(context.getBlockPos(), AetherBlocks.AETHER_ENCHANTED_GRASS.getDefaultState());
+            context.getWorld().setBlockState(context.getBlockPos(), AetherBlocks.aether_enchanted_grass.getDefaultState());
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;

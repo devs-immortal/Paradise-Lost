@@ -7,7 +7,7 @@ import net.minecraft.util.Rarity;
 
 public class HealingStone extends Item {
     public HealingStone() {
-        super(new Settings().group(AetherItemGroups.FOOD).rarity(Rarity.RARE).food(AetherFood.HEALING_STONE));
+        super(new Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.HEALING_STONE));
     }
 
     @Override

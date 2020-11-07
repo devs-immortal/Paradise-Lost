@@ -32,22 +32,22 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     private final AetherTiers material;
 
     public AetherHoe(AetherTiers material, float attackSpeed) {
-        super(material.getDefaultTier(), 1, attackSpeed, new Settings().group(AetherItemGroups.TOOLS));
+        super(material.getDefaultTier(), 1, attackSpeed, new Settings().group(AetherItemGroups.Tools));
         this.material = material;
         setupConvertibleData();
     }
 
     public AetherHoe(AetherTiers material, Rarity rarity, float attackSpeed) {
-        super(material.getDefaultTier(), 1, attackSpeed, new Settings().group(AetherItemGroups.TOOLS).rarity(rarity));
+        super(material.getDefaultTier(), 1, attackSpeed, new Settings().group(AetherItemGroups.Tools).rarity(rarity));
         this.material = material;
         setupConvertibleData();
     }
 
     private void setupConvertibleData() {
         final Map<Block, BlockState> modifiedConvertibles = Maps.newHashMap(ImmutableMap.of(
-                AetherBlocks.AETHER_GRASS, AetherBlocks.AETHER_FARMLAND.getDefaultState(),
-                AetherBlocks.AETHER_GRASS_PATH, AetherBlocks.AETHER_FARMLAND.getDefaultState(),
-                AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_FARMLAND.getDefaultState()
+                AetherBlocks.aether_grass, AetherBlocks.aether_farmland.getDefaultState(),
+                AetherBlocks.aether_grass_path, AetherBlocks.aether_farmland.getDefaultState(),
+                AetherBlocks.aether_dirt, AetherBlocks.aether_farmland.getDefaultState()
         ));
         convertibleBlocks.putAll(modifiedConvertibles);
     }
@@ -55,18 +55,18 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();
-        BlockPos blockpos = context.getBlockPos();
+        BlockPos blockPos = context.getBlockPos();
 
-        if (context.getSide() != Direction.DOWN && world.isAir(blockpos.up())) {
-            BlockState blockstate = convertibleBlocks.get(world.getBlockState(blockpos).getBlock());
+        if (context.getSide() != Direction.DOWN && world.isAir(blockPos.up())) {
+            BlockState blockState = convertibleBlocks.get(world.getBlockState(blockPos).getBlock());
 
-            if (blockstate != null) {
+            if (blockState != null) {
                 PlayerEntity entityPlayer = context.getPlayer();
 
-                world.playSound(entityPlayer, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(entityPlayer, blockPos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
                 if (!world.isClient) {
-                    world.setBlockState(blockpos, blockstate, 11);
+                    world.setBlockState(blockPos, blockState, 11);
                     if (entityPlayer != null) context.getStack().damage(1, entityPlayer, null);
                 }
                 return ActionResult.SUCCESS;

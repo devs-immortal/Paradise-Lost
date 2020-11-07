@@ -10,12 +10,12 @@ public class AetherArmor extends ArmorItem {
     private String armorName = "iron";
 
     public AetherArmor(AetherArmorType typeIn, EquipmentSlot slotIn) {
-        super(typeIn.getMaterial(), slotIn, new Settings().group(AetherItemGroups.ARMOR));
+        super(typeIn.getMaterial(), slotIn, new Settings().group(AetherItemGroups.Armor));
         this.typeIn = typeIn;
     }
 
     public AetherArmor(AetherArmorType typeIn, Rarity rarityIn, EquipmentSlot slotIn) {
-        super(typeIn.getMaterial(), slotIn, new Settings().group(AetherItemGroups.ARMOR).rarity(rarityIn));
+        super(typeIn.getMaterial(), slotIn, new Settings().group(AetherItemGroups.Armor).rarity(rarityIn));
         this.typeIn = typeIn;
     }
 

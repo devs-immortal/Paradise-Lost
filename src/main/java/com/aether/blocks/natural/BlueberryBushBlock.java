@@ -67,14 +67,14 @@ public class BlueberryBushBlock extends PlantBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.getLightLevel(pos) >= 8 && world.getRandom().nextInt(world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 12 : 26) == 0) {
+        if (world.getLightLevel(pos) >= 8 && world.getRandom().nextInt(world.getBlockState(pos.down()).isOf(AetherBlocks.aether_enchanted_grass) ? 12 : 26) == 0) {
             world.setBlockState(pos, state.with(RIPE, true));
         }
     }
 
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOf(AetherBlocks.AETHER_GRASS) || floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) || floor.isOf(AetherBlocks.AETHER_FARMLAND) || floor.isOf(AetherBlocks.AETHER_DIRT);
+        return floor.isOf(AetherBlocks.aether_grass) || floor.isOf(AetherBlocks.aether_enchanted_grass) || floor.isOf(AetherBlocks.aether_farmland) || floor.isOf(AetherBlocks.aether_dirt);
     }
 
     @Override

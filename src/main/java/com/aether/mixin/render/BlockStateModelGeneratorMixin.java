@@ -19,7 +19,7 @@ public abstract class BlockStateModelGeneratorMixin {
 
     @Inject(method = "register", at = @At("TAIL"))
     public void onRegister(CallbackInfo ci) {
-        registerTorch(AetherBlocks.AMBROSIUM_TORCH, AetherBlocks.AMBROSIUM_TORCH_WALL);
-        registerGlassPane(AetherBlocks.QUICKSOIL_GLASS, AetherBlocks.QUICKSOIL_GLASS_PANE);
+        registerTorch(AetherBlocks.ambrosium_torch, AetherBlocks.ambrosium_torch_wall);
+        registerGlassPane(AetherBlocks.quicksoil_glass, AetherBlocks.quicksoil_glass_pane);
     }
 }
