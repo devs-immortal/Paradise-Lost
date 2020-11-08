@@ -16,7 +16,7 @@ public class FarmlandBlockMixin {
     @Inject(method = "setToDirt", at = @At("HEAD"), cancellable = true)
     private static void onSetToDirt(BlockState state, World world, BlockPos pos, CallbackInfo ci) {
         if (state.isOf(AetherBlocks.aether_farmland)) {
-            world.setBlockState(pos, Block.pushEntitiesUpBeforeBlockChange(state, AetherBlocks.aether_farmland.getDefaultState(), world, pos));
+            world.setBlockState(pos, Block.pushEntitiesUpBeforeBlockChange(state, AetherBlocks.aether_dirt.getDefaultState(), world, pos));
             ci.cancel();
         }
     }
