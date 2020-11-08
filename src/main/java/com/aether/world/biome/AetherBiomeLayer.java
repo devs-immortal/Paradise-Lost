@@ -13,7 +13,9 @@ public enum AetherBiomeLayer implements InitLayer {
     INSTANCE;
 
     private static final Identifier AETHER_HIGHLANDS = Aether.locate("aether_highlands");
-
+    public static Identifier getAetherHighlands() {
+        return AETHER_HIGHLANDS;
+    }
     private static OctaveSimplexNoiseSampler perlinGen;
 //	private double max = -100;
 //	private double min = 100;
