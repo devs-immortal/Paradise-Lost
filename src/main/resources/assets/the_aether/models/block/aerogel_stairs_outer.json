@@ -1,8 +1,47 @@
 {
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "the_aether:block/aerogel",
-    "top": "the_aether:block/aerogel",
-    "side": "the_aether:block/aerogel"
-  }
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "the_aether:block/aerogel",
+		"side": "the_aether:block/aerogel"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 8, 16],
+			"faces": {
+				"north": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "north"},
+				"east": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "west"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "down"}
+			}
+		},
+		{
+			"from": [8, 8, 8],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 8], "texture": "#side"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [8, 0, 16, 8], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [8, 0, 16, 8], "texture": "#side"},
+				"up": {"uv": [8, 8, 16, 16], "texture": "#side", "cullface": "up"}
+			}
+		},
+		{
+			"from": [0, 8, 8],
+			"to": [8, 8, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 8]},
+			"faces": {
+				"up": {"uv": [0, 8, 8, 16], "texture": "#side", "cullface": "up"}
+			}
+		},
+		{
+			"from": [0, 8, 0],
+			"to": [16, 8, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 15, 8]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 8], "texture": "#side"}
+			}
+		}
+	]
 }
