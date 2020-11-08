@@ -7,12 +7,17 @@
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PlantBlockMixin",
+    "entity.EntityMixin",
     "entity.PlayerEntityMixin",
     "item.BucketItemMixin",
+    "item.MapStateMixin",
     "render.BiomeLayerSamplerAccessor",
     "render.BlockStateModelGeneratorMixin",
     "render.CloudRendererMixin",
     "render.MinecraftClientMixin"
+  ],
+  "client": [
+    "client.MapRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
