@@ -283,7 +283,7 @@ public class AetherBlocks {
 //        purple_dyed_aercloud = register("purple_dyed_aercloud", null);
 //        purple_flower = register("purple_flower", null);
         quicksoil = register("quicksoil", new Block(FabricBlockSettings.of(Material.AGGREGATE).strength(0.5f, -1.0f).sounds(BlockSoundGroup.SAND)), buildingBlock());
-        quicksoil_glass = register("quicksoil_glass", new Block(FabricBlockSettings.of(Material.GLASS).luminance(14).strength(0.2f, -1.0f).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
+        quicksoil_glass = register("quicksoil_glass", new GlassBlock(FabricBlockSettings.of(Material.GLASS).luminance(14).strength(0.2f, -1.0f).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
         quicksoil_glass_pane = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
 //        red_dyed_aercloud = register("red_dyed_aercloud", null);
         sentry_stone = register("sentry_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());

@@ -23,9 +23,9 @@ public abstract class PlayerEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
+        if (source.isOutOfWorld() && getY() < 0 && world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
             if (!world.isClient()) {
-                ((ServerPlayerEntity)(Object)this).teleport(getServer().getWorld(World.OVERWORLD), this.getX(), world.getHeight(), this.getZ(), this.yaw, this.pitch);
+                ((ServerPlayerEntity)(Object)this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() / 8, world.getHeight(), this.getZ() / 8, this.yaw, this.pitch);
                 CustomStatusEffectInstance ef = new CustomStatusEffectInstance(StatusEffect.byRawId(9), 160, 2);
                 ef.ShowParticles = false;
                 ((ServerPlayerEntity)(Object)this).addStatusEffect(ef);
