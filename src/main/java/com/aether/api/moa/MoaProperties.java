@@ -4,13 +4,13 @@ import net.minecraft.util.Identifier;
 
 public class MoaProperties {
 
-    private int maxJumps;
+    private final int maxJumps;
 
-    private float moaSpeed;
+    private final float moaSpeed;
 
-    private Identifier location;
+    private final Identifier location;
 
-    private Identifier saddleLocation;
+    private final Identifier saddleLocation;
 
     public MoaProperties(int maxJumps, float moaSpeed, Identifier location, Identifier saddleLocation) {
         this.maxJumps = maxJumps;

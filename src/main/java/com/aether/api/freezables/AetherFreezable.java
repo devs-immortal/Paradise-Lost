@@ -9,7 +9,7 @@ public class AetherFreezable {
 
     public int timeRequired;
     public ItemStack input, output;
-    private Identifier registryName;
+    private final Identifier registryName;
 
     public AetherFreezable(ItemStack input, ItemConvertible output, int timeRequired) {
         this(input, new ItemStack(output), timeRequired);
@@ -57,8 +57,6 @@ public class AetherFreezable {
 
             return inputCheck && outputCheck;
         }
-
         return false;
     }
-
 }

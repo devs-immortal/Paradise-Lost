@@ -4,10 +4,9 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 
 public class MoaType {
-
     public int hexColor;
     private Identifier registryName;
-    private MoaProperties properties;
+    private final MoaProperties properties;
     private ItemGroup group;
 
     public MoaType(int hexColor, MoaProperties properties) {
@@ -44,5 +43,4 @@ public class MoaType {
     public int getMoaEggColor() {
         return this.hexColor;
     }
-
 }

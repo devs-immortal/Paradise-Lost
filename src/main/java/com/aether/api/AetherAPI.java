@@ -19,21 +19,15 @@ import java.util.Random;
 public class AetherAPI {
 
     private static final HashMap<Identifier, AetherAccessory> ACCESSORY_REGISTRY = new HashMap<>();
-
     private static final HashMap<Identifier, AetherEnchantment> ENCHANTMENT_REGISTRY = new HashMap<>();
-
     private static final HashMap<Identifier, AetherFreezable> FREEZABLE_REGISTRY = new HashMap<>();
-
     private static final HashMap<Identifier, AetherEnchantmentFuel> ENCHANTMENT_FUEL_REGISTRY = new HashMap<>();
-
     private static final HashMap<Identifier, AetherFreezableFuel> FREEZABLE_FUEL_REGISTRY = new HashMap<>();
-
     private static final HashMap<Identifier, MoaType> MOA_REGISTRY = new HashMap<>();
     private static final AetherAPI INSTANCE = new AetherAPI();
     private static int moaListSize;
 
     public AetherAPI() {
-
     }
 
     public static IPlayerAether get(PlayerEntity player) {

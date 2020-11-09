@@ -7,13 +7,13 @@ import net.minecraft.util.registry.Registry;
 
 public class AetherAccessory {
 
-    private Identifier registryName;
+    private final Identifier registryName;
 
-    private ItemStack accessoryStack;
+    private final ItemStack accessoryStack;
 
-    private AccessoryType accessoryType;
+    private final AccessoryType accessoryType;
 
-    private AccessoryType extraType;
+    private final AccessoryType extraType;
 
     public AetherAccessory(ItemConvertible provider, AccessoryType type) {
         this(new ItemStack(provider), type);

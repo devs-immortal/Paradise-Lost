@@ -53,9 +53,9 @@ public class AetherItems {
     public static final Item GOLDEN_FEATHER, REGENERATION_STONE, IRON_BUBBLE;
     public static final Item LIFE_SHARD;
     public static final Item SENTRY_BOOTS/*, LIGHTNING_KNIFE*/;
-//    PUBLIC STATIC ITEM AETHER_TUNE, ASCENDING_DAWN, WELCOMING_SKIES, LEGACY;
+    //    PUBLIC STATIC ITEM AETHER_TUNE, ASCENDING_DAWN, WELCOMING_SKIES, LEGACY;
 //    PUBLIC STATIC ITEM REPULSION_SHIELD;
-public static final Item LORE_BOOK;
+    public static final Item LORE_BOOK;
 
     public static final Rarity aether_loot = EnumHelper.addRarity("aether_loot", Formatting.GREEN);
 
