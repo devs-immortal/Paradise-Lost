@@ -20,7 +20,7 @@ public class CandyCaneSword extends AetherSword {
             return true;
         } else {
             if ((new Random()).nextBoolean() && entityLiving1 instanceof PlayerEntity && !entityLiving1.world.isClient && entityLiving.hurtTime > 0)
-                entityLiving.dropItem(AetherItems.candy_cane, 1);
+                entityLiving.dropItem(AetherItems.CANDY_CANE, 1);
             itemStack.damage(1, entityLiving1, null);
             return true;
         }

@@ -17,12 +17,12 @@ public class ElementalSword extends AetherSword {
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity victim, LivingEntity attacker) {
-        if (this == AetherItems.flaming_sword) {
+        if (this == AetherItems.FLAMING_SWORD) {
             victim.setOnFireFor(30);
-        } else if (this == AetherItems.lightning_sword) {
+        } else if (this == AetherItems.LIGHTNING_SWORD) {
             LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, attacker.world);
             if (attacker instanceof ServerPlayerEntity) lightning.setChanneler((ServerPlayerEntity) attacker);
-        } else if (this == AetherItems.holy_sword && victim.isUndead()) {
+        } else if (this == AetherItems.HOLY_SWORD && victim.isUndead()) {
             victim.damage(DamageSource.mob(attacker), 20);
             stack.damage(10, attacker, null);
         }

@@ -13,29 +13,29 @@ public class AetherItemGroups {
 
     public static final ItemGroup Tools = FabricItemGroupBuilder.build(
             Aether.locate("aether_tools"),
-            () -> new ItemStack(AetherItems.gravitite_pickaxe));
+            () -> new ItemStack(AetherItems.GRAVITITE_PICKAXE));
 
     public static final ItemGroup Weapons = FabricItemGroupBuilder.build(
             Aether.locate("aether_weapons"),
-            () -> new ItemStack(AetherItems.gravitite_sword));
+            () -> new ItemStack(AetherItems.GRAVITITE_SWORD));
 
     public static final ItemGroup Armor = FabricItemGroupBuilder.build(
             Aether.locate("aether_armor"),
-            () -> new ItemStack(AetherItems.gravitite_chestplate));
+            () -> new ItemStack(AetherItems.GRAVITITE_CHESTPLATE));
 
     public static final ItemGroup Food = FabricItemGroupBuilder.build(
             Aether.locate("aether_food"),
-            () -> new ItemStack(AetherItems.blue_berry));
+            () -> new ItemStack(AetherItems.BLUE_BERRY));
 
     public static final ItemGroup Accessories = FabricItemGroupBuilder.build(
             Aether.locate("aether_accessories"),
-            () -> new ItemStack(AetherItems.gravitite_gloves));
+            () -> new ItemStack(AetherItems.GRAVITITE_GLOVES));
 
     public static final ItemGroup Materials = FabricItemGroupBuilder.build(
             Aether.locate("aether_materials"),
-            () -> new ItemStack(AetherItems.ambrosium_shard));
+            () -> new ItemStack(AetherItems.AMBROSIUM_SHARD));
 
     public static final ItemGroup Misc = FabricItemGroupBuilder.build(
             Aether.locate("aether_misc"),
-            () -> new ItemStack(AetherItems.bronze_key));
+            () -> new ItemStack(AetherItems.BRONZE_KEY));
 }

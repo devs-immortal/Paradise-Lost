@@ -14,42 +14,42 @@ public class AetherAPIRegistry {
     public static void register() {
         AetherAPI registry = AetherAPI.instance();
 
-        registry.register(new AetherEnchantment(AetherItems.skyroot_pickaxe, 225));
-        registry.register(new AetherEnchantment(AetherItems.skyroot_axe, 225));
-        registry.register(new AetherEnchantment(AetherItems.skyroot_shovel, 225));
-        registry.register(new AetherEnchantment(AetherItems.skyroot_sword, 225));
+        registry.register(new AetherEnchantment(AetherItems.SKYROOT_PICKAXE, 225));
+        registry.register(new AetherEnchantment(AetherItems.SKYROOT_AXE, 225));
+        registry.register(new AetherEnchantment(AetherItems.SKYROOT_SHOVEL, 225));
+        registry.register(new AetherEnchantment(AetherItems.SKYROOT_SWORD, 225));
 
-        registry.register(new AetherEnchantment(AetherItems.holystone_pickaxe, 550));
-        registry.register(new AetherEnchantment(AetherItems.holystone_axe, 550));
-        registry.register(new AetherEnchantment(AetherItems.holystone_shovel, 550));
-        registry.register(new AetherEnchantment(AetherItems.holystone_sword, 550));
+        registry.register(new AetherEnchantment(AetherItems.HOLYSTONE_PICKAXE, 550));
+        registry.register(new AetherEnchantment(AetherItems.HOLYSTONE_AXE, 550));
+        registry.register(new AetherEnchantment(AetherItems.HOLYSTONE_SHOVEL, 550));
+        registry.register(new AetherEnchantment(AetherItems.HOLYSTONE_SWORD, 550));
 
-        registry.register(new AetherEnchantment(AetherItems.zanite_pickaxe, 2250));
-        registry.register(new AetherEnchantment(AetherItems.zanite_axe, 2250));
-        registry.register(new AetherEnchantment(AetherItems.zanite_shovel, 2250));
-        registry.register(new AetherEnchantment(AetherItems.zanite_sword, 2250));
+        registry.register(new AetherEnchantment(AetherItems.ZANITE_PICKAXE, 2250));
+        registry.register(new AetherEnchantment(AetherItems.ZANITE_AXE, 2250));
+        registry.register(new AetherEnchantment(AetherItems.ZANITE_SHOVEL, 2250));
+        registry.register(new AetherEnchantment(AetherItems.ZANITE_SWORD, 2250));
 
-        registry.register(new AetherEnchantment(AetherItems.gravitite_pickaxe, 5500));
-        registry.register(new AetherEnchantment(AetherItems.gravitite_axe, 5500));
-        registry.register(new AetherEnchantment(AetherItems.gravitite_shovel, 5500));
-        registry.register(new AetherEnchantment(AetherItems.gravitite_sword, 5500));
+        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_PICKAXE, 5500));
+        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_AXE, 5500));
+        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_SHOVEL, 5500));
+        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_SWORD, 5500));
 
-        registry.register(new AetherEnchantment(AetherItems.zanite_helmet, 6000));
-        registry.register(new AetherEnchantment(AetherItems.zanite_chestplate, 6000));
-        registry.register(new AetherEnchantment(AetherItems.zanite_leggings, 6000));
-        registry.register(new AetherEnchantment(AetherItems.zanite_boots, 6000));
+        registry.register(new AetherEnchantment(AetherItems.ZANITE_HELMET, 6000));
+        registry.register(new AetherEnchantment(AetherItems.ZANITE_CHESTPLATE, 6000));
+        registry.register(new AetherEnchantment(AetherItems.ZANITE_LEGGINGS, 6000));
+        registry.register(new AetherEnchantment(AetherItems.ZANITE_BOOTS, 6000));
 
-        registry.register(new AetherEnchantment(AetherItems.gravitite_helmet, 13000));
-        registry.register(new AetherEnchantment(AetherItems.gravitite_chestplate, 13000));
-        registry.register(new AetherEnchantment(AetherItems.gravitite_leggings, 13000));
-        registry.register(new AetherEnchantment(AetherItems.gravitite_boots, 13000));
+        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_HELMET, 13000));
+        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_CHESTPLATE, 13000));
+        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_LEGGINGS, 13000));
+        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_BOOTS, 13000));
 
-        registry.register(new AetherEnchantment(AetherItems.golden_dart, AetherItems.enchanted_dart, 250));
-        registry.register(new AetherEnchantment(AetherItems.golden_dart_shooter, AetherItems.enchanted_dart_shooter, 500));
+        registry.register(new AetherEnchantment(AetherItems.GOLDEN_DART, AetherItems.ENCHANTED_DART, 250));
+        registry.register(new AetherEnchantment(AetherItems.GOLDEN_DART_SHOOTER, AetherItems.ENCHANTED_DART_SHOOTER, 500));
 
-        registry.register(new AetherEnchantment(AetherItems.skyroot_poison_bucket, AetherItems.skyroot_remedy_bucket, 1000));
+        registry.register(new AetherEnchantment(AetherItems.SKYROOT_POISON_BUCKET, AetherItems.SKYROOT_REMEDY_BUCKET, 1000));
 
-        registry.register(new AetherEnchantment(AetherBlocks.holystone, AetherItems.healing_stone, 750));
+        registry.register(new AetherEnchantment(AetherBlocks.holystone, AetherItems.HEALING_STONE, 750));
         //registry.register(new AetherEnchantment(AetherBlocks.gravitite_ore, AetherBlocks.enchanted_gravitite, 1000));
         registry.register(new AetherEnchantment(AetherBlocks.quicksoil, AetherBlocks.quicksoil_glass, 250));
 
@@ -115,19 +115,19 @@ public class AetherAPIRegistry {
         registry.register(new AetherEnchantment(Items.DIAMOND_LEGGINGS, 10000));
         registry.register(new AetherEnchantment(Items.DIAMOND_BOOTS, 10000));
 
-        registry.register(new AetherEnchantmentFuel(AetherItems.ambrosium_shard, 500));
+        registry.register(new AetherEnchantmentFuel(AetherItems.AMBROSIUM_SHARD, 500));
 
         //registry.register(new AetherFreezable(AetherBlocks.cold_aercloud, AetherBlocks.blue_aercloud, 100));
         registry.register(new AetherFreezable(AetherBlocks.skyroot_leaves, AetherBlocks.crystal_leaves, 150));
-        registry.register(new AetherFreezable(AetherItems.skyroot_bucket, Blocks.ICE, 500));
+        registry.register(new AetherFreezable(AetherItems.SKYROOT_BUCKET, Blocks.ICE, 500));
         //registry.register(new AetherFreezable(AetherItems.ascending_dawn, AetherItems.welcoming_skies, 800));
         registry.register(new AetherFreezable(Blocks.ICE, Blocks.PACKED_ICE, 750));
         registry.register(new AetherFreezable(Items.WATER_BUCKET, Blocks.ICE, 500));
         registry.register(new AetherFreezable(Items.LAVA_BUCKET, Blocks.OBSIDIAN, 500));
-        registry.register(new AetherFreezable(AetherItems.iron_ring, AetherItems.ice_ring, 2500));
-        registry.register(new AetherFreezable(AetherItems.golden_ring, AetherItems.ice_ring, 2500));
-        registry.register(new AetherFreezable(AetherItems.iron_pendant, AetherItems.ice_pendant, 2500));
-        registry.register(new AetherFreezable(AetherItems.golden_pendant, AetherItems.ice_pendant, 2500));
+        registry.register(new AetherFreezable(AetherItems.IRON_RING, AetherItems.ICE_RING, 2500));
+        registry.register(new AetherFreezable(AetherItems.GOLDEN_RING, AetherItems.ICE_RING, 2500));
+        registry.register(new AetherFreezable(AetherItems.IRON_PENDANT, AetherItems.ICE_PENDANT, 2500));
+        registry.register(new AetherFreezable(AetherItems.GOLDEN_PENDANT, AetherItems.ICE_PENDANT, 2500));
 
         //registry.register(new AetherFreezableFuel(AetherBlocks.icestone, 500));
     }
