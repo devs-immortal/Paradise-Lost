@@ -3,17 +3,15 @@ package com.aether.entities.passive;
 import com.aether.api.AetherAPI;
 import com.aether.api.moa.MoaType;
 import com.aether.entities.AetherEntityTypes;
-import com.aether.entities.util.EntitySaddleMount;
+import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
 import com.aether.items.MoaEgg;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -34,7 +32,7 @@ import net.minecraft.world.World;
 
 //import com.aether.world.storage.loot.AetherLootTableList;
 
-public class MoaEntity extends EntitySaddleMount {
+public class MoaEntity extends SaddleMountEntity {
 
     public static final TrackedData<Integer> MOA_TYPE_ID = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);
     public static final TrackedData<Integer> REMAINING_JUMPS = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);

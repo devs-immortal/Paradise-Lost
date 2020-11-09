@@ -1,13 +1,11 @@
 package com.aether.entities.passive;
 
 import com.aether.entities.AetherEntityTypes;
-import com.aether.entities.util.EntitySaddleMount;
+import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +19,7 @@ import net.minecraft.world.World;
 
 //import com.aether.world.storage.loot.AetherLootTableList;
 
-public class PhygEntity extends EntitySaddleMount {
+public class PhygEntity extends SaddleMountEntity {
 
     public float wingFold;
 
