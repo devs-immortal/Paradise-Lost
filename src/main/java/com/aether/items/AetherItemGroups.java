@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 public class AetherItemGroups {
     public static final ItemGroup Blocks = FabricItemGroupBuilder.build(
             Aether.locate("aether_blocks"),
-            () -> new ItemStack(AetherBlocks.aether_grass));
+            () -> new ItemStack(AetherBlocks.AETHER_GRASS));
 
     public static final ItemGroup Tools = FabricItemGroupBuilder.build(
             Aether.locate("aether_tools"),

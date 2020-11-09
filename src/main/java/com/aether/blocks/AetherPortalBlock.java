@@ -109,9 +109,9 @@ public class AetherPortalBlock extends AbstractGlassBlock {
                 for (int j = 0; j < 16; j++) {
                     for (int k = 0; k < 16; k++) {
                         BlockState state = chunk.getBlockState(k, i, j);
-                        if(state.isOf(AetherBlocks.blue_portal)) {
+                        if(state.isOf(AetherBlocks.BLUE_PORTAL)) {
                             BlockPos checkPos = new BlockPos(k, i, j);
-                            while(state.isOf(AetherBlocks.blue_portal)) {
+                            while(state.isOf(AetherBlocks.BLUE_PORTAL)) {
                                 checkPos.down();
                                 state = world.getBlockState(checkPos);
                             }
@@ -132,7 +132,7 @@ public class AetherPortalBlock extends AbstractGlassBlock {
         pos = pos.up(1).north(1);
         for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
-                world.setBlockState(pos.up(i).north(j), AetherBlocks.blue_portal.getDefaultState().with(AXIS, Direction.Axis.Z));
+                world.setBlockState(pos.up(i).north(j), AetherBlocks.BLUE_PORTAL.getDefaultState().with(AXIS, Direction.Axis.Z));
             }
         }
         if(floored) {
@@ -142,10 +142,10 @@ public class AetherPortalBlock extends AbstractGlassBlock {
                     BlockPos placePos = pos.north(i).east(j);
                     int type = world.getRandom().nextInt(12);
                     if(type >= 9) {
-                        world.setBlockState(placePos, AetherBlocks.mossy_holystone.getDefaultState());
+                        world.setBlockState(placePos, AetherBlocks.MOSSY_HOLYSTONE.getDefaultState());
                     }
                     else
-                        world.setBlockState(placePos, AetherBlocks.holystone.getDefaultState());
+                        world.setBlockState(placePos, AetherBlocks.HOLYSTONE.getDefaultState());
                 }
             }
         }

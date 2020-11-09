@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FarmlandBlockMixin {
     @Inject(method = "setToDirt", at = @At("HEAD"), cancellable = true)
     private static void onSetToDirt(BlockState state, World world, BlockPos pos, CallbackInfo ci) {
-        if (state.isOf(AetherBlocks.aether_farmland)) {
-            world.setBlockState(pos, Block.pushEntitiesUpBeforeBlockChange(state, AetherBlocks.aether_dirt.getDefaultState(), world, pos));
+        if (state.isOf(AetherBlocks.AETHER_FARMLAND)) {
+            world.setBlockState(pos, Block.pushEntitiesUpBeforeBlockChange(state, AetherBlocks.AETHER_DIRT.getDefaultState(), world, pos));
             ci.cancel();
         }
     }

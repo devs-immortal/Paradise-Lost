@@ -9,7 +9,7 @@ import net.minecraft.tag.Tag;
 
 public class SkyrootFenceBlock extends FenceBlock {
     public SkyrootFenceBlock() {
-        super(FabricBlockSettings.copy(AetherBlocks.skyroot_planks));
+        super(FabricBlockSettings.copy(AetherBlocks.SKYROOT_PLANKS));
     }
 
     @Override

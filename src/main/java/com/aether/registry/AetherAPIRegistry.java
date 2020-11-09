@@ -49,9 +49,9 @@ public class AetherAPIRegistry {
 
         registry.register(new AetherEnchantment(AetherItems.SKYROOT_POISON_BUCKET, AetherItems.SKYROOT_REMEDY_BUCKET, 1000));
 
-        registry.register(new AetherEnchantment(AetherBlocks.holystone, AetherItems.HEALING_STONE, 750));
-        //registry.register(new AetherEnchantment(AetherBlocks.gravitite_ore, AetherBlocks.enchanted_gravitite, 1000));
-        registry.register(new AetherEnchantment(AetherBlocks.quicksoil, AetherBlocks.quicksoil_glass, 250));
+        registry.register(new AetherEnchantment(AetherBlocks.HOLYSTONE, AetherItems.HEALING_STONE, 750));
+        //registry.register(new AetherEnchantment(AetherBlocks.GRAVITITE_ORE, AetherBlocks.ENCHANTED_GRAVITITE, 1000));
+        registry.register(new AetherEnchantment(AetherBlocks.QUICKSOIL, AetherBlocks.QUICKSOIL_GLASS, 250));
 
         //registry.register(new AetherEnchantment(AetherItems.blueberry, AetherItems.enchanted_blueberry, 300));
 
@@ -117,10 +117,10 @@ public class AetherAPIRegistry {
 
         registry.register(new AetherEnchantmentFuel(AetherItems.AMBROSIUM_SHARD, 500));
 
-        //registry.register(new AetherFreezable(AetherBlocks.cold_aercloud, AetherBlocks.blue_aercloud, 100));
-        registry.register(new AetherFreezable(AetherBlocks.skyroot_leaves, AetherBlocks.crystal_leaves, 150));
+        //registry.register(new AetherFreezable(AetherBlocks.COLD_AERCLOUD, AetherBlocks.BLUE_AERCLOUD, 100));
+        registry.register(new AetherFreezable(AetherBlocks.SKYROOT_LEAVES, AetherBlocks.CRYSTAL_LEAVES, 150));
         registry.register(new AetherFreezable(AetherItems.SKYROOT_BUCKET, Blocks.ICE, 500));
-        //registry.register(new AetherFreezable(AetherItems.ascending_dawn, AetherItems.welcoming_skies, 800));
+        //registry.register(new AetherFreezable(AetherItems.ASCENDING_DAWN, AetherItems.WELCOMING_SKIES, 800));
         registry.register(new AetherFreezable(Blocks.ICE, Blocks.PACKED_ICE, 750));
         registry.register(new AetherFreezable(Items.WATER_BUCKET, Blocks.ICE, 500));
         registry.register(new AetherFreezable(Items.LAVA_BUCKET, Blocks.OBSIDIAN, 500));

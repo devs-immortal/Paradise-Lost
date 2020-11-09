@@ -25,7 +25,7 @@ public class EntityPortalTickMixin implements AetherEntity {
 
     @Inject(method = {"tick"}, at = {@At("TAIL")})
     public void tick(CallbackInfo ci) {
-        boolean inPortal = world.getBlockState(blockPos).isOf(AetherBlocks.blue_portal);
+        boolean inPortal = world.getBlockState(blockPos).isOf(AetherBlocks.BLUE_PORTAL);
         if(inPortal) {
             if(aetherCooldown == 0) {
                 if(aetherTickTime < 20) {

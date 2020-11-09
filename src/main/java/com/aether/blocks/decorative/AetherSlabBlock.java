@@ -20,7 +20,7 @@ public class AetherSlabBlock extends SlabBlock {
 
     @Override
     public boolean isIn(Tag<Block> tag) {
-        return tag == BlockTags.SLABS || (tag == BlockTags.WOODEN_SLABS && this == AetherBlocks.skyroot_slab) || super.isIn(tag);
+        return tag == BlockTags.SLABS || (tag == BlockTags.WOODEN_SLABS && this == AetherBlocks.SKYROOT_SLAB) || super.isIn(tag);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class AetherSlabBlock extends SlabBlock {
     }
 
     private boolean isAerogel() {
-        return this == AetherBlocks.aerogel_slab;
+        return this == AetherBlocks.AEROGEL_SLAB;
     }
 }

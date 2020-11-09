@@ -18,7 +18,7 @@ public class CropBlockMixin {
     @Inject(method = "canPlantOnTop", at = @At("TAIL"), cancellable = true)
     protected void canPlantOnTop(BlockState floor, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(
-                cir.getReturnValue() || floor.isOf(AetherBlocks.aether_farmland)
+                cir.getReturnValue() || floor.isOf(AetherBlocks.AETHER_FARMLAND)
         );
     }
 
@@ -32,7 +32,7 @@ public class CropBlockMixin {
                 float extraSpeed = 0.0F;
                 BlockState blockState_1 = view.getBlockState(blockPos_2.add(rangeX, 0, rangeZ));
 
-                if (blockState_1.getBlock() == AetherBlocks.aether_farmland) {
+                if (blockState_1.getBlock() == AetherBlocks.AETHER_FARMLAND) {
                     extraSpeed = 1.0F;
 
                     if (blockState_1.get(FarmlandBlock.MOISTURE) > 0) {

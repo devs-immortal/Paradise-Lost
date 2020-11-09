@@ -87,7 +87,7 @@ public class BucketItemMixin extends Item {
             if (valid) {
                 Aether.modLogger.error("3B");
                 BlockPos startPos = pos.up();
-                floodFill(world, startPos, dirs, AetherBlocks.blue_portal.getDefaultState().with(AetherPortalBlock.AXIS, NS ? Direction.Axis.Z : Direction.Axis.X), startPos);
+                floodFill(world, startPos, dirs, AetherBlocks.BLUE_PORTAL.getDefaultState().with(AetherPortalBlock.AXIS, NS ? Direction.Axis.Z : Direction.Axis.X), startPos);
             }
         }
         return valid;
