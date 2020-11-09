@@ -1,7 +1,7 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
-import com.aether.entities.projectile.EntityPoisonNeedle;
+import com.aether.entities.projectile.PoisonNeedleEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -79,7 +79,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
 
     @Override
     public void attack(LivingEntity targetIn, float arg1) {
-        EntityPoisonNeedle needle = new EntityPoisonNeedle(this, this.world);
+        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
 
         double x = targetIn.getX() - this.getX();
         double z = targetIn.getZ() - this.getX();
