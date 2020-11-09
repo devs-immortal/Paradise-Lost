@@ -28,16 +28,16 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
         super(settings.strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS));
     }
 
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        player.getItemsHand().forEach(new Consumer<ItemStack>() {
-            @Override
-            public void accept(ItemStack itemStack) {
-                // TODO: If tool is a shovel, change block to aether_path
-            }
-        });
-        return ActionResult.SUCCESS;
-    }
+//    @Override
+//    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+//        player.getItemsHand().forEach(new Consumer<ItemStack>() {
+//            @Override
+//            public void accept(ItemStack itemStack) {
+//                // TODO: If tool is a shovel, change block to aether_path
+//            }
+//        });
+//        return ActionResult.SUCCESS;
+//    }
 
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
         return world.getBlockState(pos.up()).isAir();

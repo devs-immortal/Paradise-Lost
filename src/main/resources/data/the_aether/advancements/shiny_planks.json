@@ -1,0 +1,35 @@
+{
+    "display": {
+        "title": {
+            "text": "Shiny Planks!"
+        },
+        "description": {
+            "text": "Turn your golden oak logs into golden oak planks!"
+        },
+        "icon": {
+            "item": "the_aether:golden_oak_planks"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "craftplank": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "the_aether:golden_oak_planks"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "craftplank"
+        ]
+    ],
+    "parent": "the_aether:shiny_wood"
+}
