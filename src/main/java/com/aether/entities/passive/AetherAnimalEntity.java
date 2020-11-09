@@ -12,7 +12,7 @@ public class AetherAnimalEntity extends AnimalEntity {
     protected AetherAnimalEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         // TODO: ???
-        // this.spawningGround = BlocksAether.aether_grass;
+        // this.spawningGround = AetherBlocks.aether_grass;
     }
 
     protected AetherAnimalEntity(World world) {

@@ -1,7 +1,11 @@
 package com.aether.items;
 
+import com.aether.api.AetherAPI;
+import com.aether.api.moa.MoaType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.ActionResult;
 
 public class MoaEgg extends Item {
@@ -19,6 +23,14 @@ public class MoaEgg extends Item {
             return ActionResult.SUCCESS;
         }
         return super.useOnBlock(contextIn);
+    }
+
+    public static ItemStack getStack(MoaType type) {
+        ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("moaType", AetherAPI.instance().getMoaId(type));
+        stack.setTag(tag);
+        return stack;
     }
 
     @Override
