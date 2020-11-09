@@ -5,9 +5,9 @@ import net.minecraft.entity.damage.DamageSource;
 
 public class AetherPoisonMovement {
 
+    private final LivingEntity entity;
     public int ticks = 0;
     public double rotD, motD;
-    private final LivingEntity entity;
 
     public AetherPoisonMovement(LivingEntity entity) {
         this.entity = entity;

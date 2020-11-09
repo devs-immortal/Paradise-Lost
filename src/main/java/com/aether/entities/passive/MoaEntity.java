@@ -356,10 +356,9 @@ public class MoaEntity extends SaddleMountEntity {
         return new MoaEntity(this.world, this.getMoaType());
     }
 
-	@Override
-	public Identifier getLootTableId()
-	{
-		return null;//AetherLootTableList.ENTITIES_MOA;
-	}
+    @Override
+    public Identifier getLootTableId() {
+        return null;//AetherLootTableList.ENTITIES_MOA;
+    }
 
 }

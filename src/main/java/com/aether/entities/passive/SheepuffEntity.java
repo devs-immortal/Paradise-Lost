@@ -73,7 +73,7 @@ public class SheepuffEntity extends AnimalEntity {
     private int sheepTimer;
 
     public SheepuffEntity(World world) {
-        super((EntityType<? extends AnimalEntity>) AetherEntityTypes.SHEEPUFF, world);
+        super(AetherEntityTypes.SHEEPUFF, world);
     }
 
     private static float[] getDyedColor(DyeColor color) {
