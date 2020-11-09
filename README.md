@@ -2,8 +2,11 @@
 [![Code license (GNU GPL 3.0)](https://img.shields.io/badge/code%20license-GNU%20GPLv3-green.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Asset license (Unlicensed)](https://img.shields.io/badge/assets%20license-All%20Rights%20Reserved-red.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
 ![GitHub repo size](https://img.shields.io/github/repo-size/kalucky0/The-Aether)
+[![Github all releases](https://img.shields.io/github/downloads/kalucky0/The-Aether/total.svg)](https://github.com/kalucky0/The-Aether/releases/)
 
 The Aether is a dimension high in the sky composed of floating islands. Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, mythical creatures and perilous Dungeons. All you need to do is build a Glowstone frame and add water to light the mystical portal, step in and you'll be transported immediately to the luscious hostile paradise known as the Aether.
+
+You can download the mod on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/aether) or the [releases tab](https://github.com/kalucky0/The-Aether/releases) on github.
 
 **Original repo:** [GildedGames/The-Aether](https://gitea.gildedgames.com/GildedGames/The-Aether)
 
