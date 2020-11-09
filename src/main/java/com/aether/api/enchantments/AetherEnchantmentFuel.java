@@ -7,9 +7,9 @@ import net.minecraft.util.registry.Registry;
 
 public class AetherEnchantmentFuel {
 
+    private final Identifier registryName;
+    private final ItemStack fuel;
     public int timeGiven;
-    private Identifier registryName;
-    private ItemStack fuel;
 
     public AetherEnchantmentFuel(ItemConvertible fuel, int timeGiven) {
         this(new ItemStack(fuel), timeGiven);

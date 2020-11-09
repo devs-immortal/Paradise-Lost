@@ -7,9 +7,9 @@ import net.minecraft.util.registry.Registry;
 
 public class AetherFreezable {
 
+    private final Identifier registryName;
     public int timeRequired;
     public ItemStack input, output;
-    private Identifier registryName;
 
     public AetherFreezable(ItemStack input, ItemConvertible output, int timeRequired) {
         this(input, new ItemStack(output), timeRequired);

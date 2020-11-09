@@ -25,7 +25,6 @@
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*",
     "fabric-networking-v0": "*"
-
   },
   "mixins": [
     "the_aether.mixins.json"

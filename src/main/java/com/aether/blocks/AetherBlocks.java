@@ -166,7 +166,7 @@ public class AetherBlocks {
     public static final Block CRYSTAL_FENCE_GATE;
     public static final Block CRYSTAL_SLAB;
     public static final Block CRYSTAL_STAIRS;
-//    public static final Block SKYROOT_WOOD;
+    //    public static final Block SKYROOT_WOOD;
 //    public static final Block STRIPPED_SKYROOT_LOG;
 //    public static final Block STRIPPED_SKYROOT_WOOD;
 //    public static final Block SUN_ALTAR;

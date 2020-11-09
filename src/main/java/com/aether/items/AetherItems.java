@@ -3,9 +3,6 @@ package com.aether.items;
 import com.aether.Aether;
 import com.aether.items.accessories.AccessoryTypes;
 import com.aether.items.accessories.ItemAccessory;
-import com.aether.items.armor.AetherArmor;
-import com.aether.items.armor.AetherArmorType;
-import com.aether.items.armor.ZaniteArmor;
 import com.aether.items.dungeon.DungeonKey;
 import com.aether.items.food.*;
 import com.aether.items.materials.*;
@@ -15,7 +12,6 @@ import com.aether.items.tools.*;
 import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
 import com.aether.util.EnumHelper;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.util.Formatting;
@@ -30,12 +26,12 @@ public class AetherItems {
     public static final Item ZANITE_PICKAXE, ZANITE_AXE, ZANITE_SHOVEL, ZANITE_SWORD;
     public static final Item GRAVITITE_PICKAXE, GRAVITITE_AXE, GRAVITITE_SHOVEL, GRAVITITE_SWORD;
     public static final Item VALKYRIE_PICKAXE, VALKYRIE_AXE, VALKYRIE_SHOVEL;
-   //public static final ZaniteArmor ZANITE_HELMET, ZANITE_CHESTPLATE, ZANITE_LEGGINGS, ZANITE_BOOTS;
-   //public static final AetherArmor GRAVITITE_HELMET, GRAVITITE_CHESTPLATE, GRAVITITE_LEGGINGS, GRAVITITE_BOOTS;
-   //public static final AetherArmor NEPTUNE_HELMET, NEPTUNE_CHESTPLATE, NEPTUNE_LEGGINGS, NEPTUNE_BOOTS;
-   //public static final AetherArmor PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
-   //public static final AetherArmor OBSIDIAN_HELMET, OBSIDIAN_CHESTPLATE, OBSIDIAN_LEGGINGS, OBSIDIAN_BOOTS;
-   //public static final AetherArmor VALKYRIE_HELMET, VALKYRIE_CHESTPLATE, VALKYRIE_LEGGINGS, VALKYRIE_BOOTS;
+    //public static final ZaniteArmor ZANITE_HELMET, ZANITE_CHESTPLATE, ZANITE_LEGGINGS, ZANITE_BOOTS;
+    //public static final AetherArmor GRAVITITE_HELMET, GRAVITITE_CHESTPLATE, GRAVITITE_LEGGINGS, GRAVITITE_BOOTS;
+    //public static final AetherArmor NEPTUNE_HELMET, NEPTUNE_CHESTPLATE, NEPTUNE_LEGGINGS, NEPTUNE_BOOTS;
+    //public static final AetherArmor PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
+    //public static final AetherArmor OBSIDIAN_HELMET, OBSIDIAN_CHESTPLATE, OBSIDIAN_LEGGINGS, OBSIDIAN_BOOTS;
+    //public static final AetherArmor VALKYRIE_HELMET, VALKYRIE_CHESTPLATE, VALKYRIE_LEGGINGS, VALKYRIE_BOOTS;
     public static final Item BLUE_BERRY, ENCHANTED_BLUEBERRY, BLUE_GUMMY_SWET, GOLDEN_GUMMY_SWET, HEALING_STONE, WHITE_APPLE, GINGERBREAD_MAN, CANDY_CANE;
     public static final Item SKYROOT_BUCKET, SKYROOT_WATER_BUCKET, SKYROOT_POISON_BUCKET, SKYROOT_REMEDY_BUCKET, SKYROOT_MILK_BUCKET;
     public static final Item CLOUD_PARACHUTE, GOLDEN_CLOUD_PARACHUTE;
@@ -56,7 +52,7 @@ public class AetherItems {
     //public static final AetherArmor SENTRY_BOOTS/*, LIGHTNING_KNIFE*/;
 //    PUBLIC STATIC ITEM AETHER_TUNE, ASCENDING_DAWN, WELCOMING_SKIES, LEGACY;
 //    PUBLIC STATIC ITEM REPULSION_SHIELD;
-public static final Item LORE_BOOK;
+    public static final Item LORE_BOOK;
 
     public static final Rarity aether_loot = EnumHelper.addRarity("aether_loot", Formatting.GREEN);
 

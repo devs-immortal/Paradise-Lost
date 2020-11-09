@@ -27,6 +27,7 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
     public AetherGrassBlock(Settings settings) {
         super(settings.strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS));
     }
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         player.getItemsHand().forEach(new Consumer<ItemStack>() {

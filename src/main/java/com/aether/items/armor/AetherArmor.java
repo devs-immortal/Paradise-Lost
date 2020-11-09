@@ -5,7 +5,6 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Rarity;
 import software.bernie.geckolib.core.IAnimatable;
@@ -18,7 +17,6 @@ import software.bernie.geckolib.core.manager.AnimationFactory;
 import software.bernie.geckolib.item.GeoArmorItem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AetherArmor extends GeoArmorItem implements IAnimatable {

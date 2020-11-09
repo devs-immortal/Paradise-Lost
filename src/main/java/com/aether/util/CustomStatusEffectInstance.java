@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 public class CustomStatusEffectInstance extends StatusEffectInstance {
 
     public boolean ShowParticles = false;
+
     public CustomStatusEffectInstance(StatusEffect statusEffect) {
         super(statusEffect);
     }

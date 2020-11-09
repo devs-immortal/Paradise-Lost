@@ -7,9 +7,9 @@ import net.minecraft.util.registry.Registry;
 
 public class AetherEnchantment {
 
+    private final Identifier registryName;
     public int timeRequired;
     public ItemStack input, output;
-    private Identifier registryName;
 
     public AetherEnchantment(ItemConvertible input, int timeRequired) {
         this(input, new ItemStack(input), timeRequired);

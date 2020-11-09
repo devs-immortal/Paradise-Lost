@@ -47,7 +47,7 @@ public class SkyrootBucket extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack currentStack = playerIn.getStackInHand(handIn);
-        HitResult hitResult = raycast(worldIn, playerIn, this.containedBlock == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
+        BlockHitResult hitResult = raycast(worldIn, playerIn, this.containedBlock == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
 
         if (currentStack.getItem() != AetherItems.SKYROOT_WATER_BUCKET && currentStack.getItem() != AetherItems.SKYROOT_BUCKET) {
             playerIn.setCurrentHand(handIn);
@@ -57,7 +57,7 @@ public class SkyrootBucket extends Item {
         if (hitResult == null) {
             return new TypedActionResult<>(ActionResult.PASS, currentStack);
         } else if (hitResult.getType() == HitResult.Type.BLOCK) {
-            BlockHitResult blockHitResult = (BlockHitResult) hitResult;
+            BlockHitResult blockHitResult = hitResult;
             BlockPos hitPos = blockHitResult.getBlockPos();
 
             if (worldIn.canPlayerModifyAt(playerIn, hitPos) && playerIn.canPlaceOn(hitPos, blockHitResult.getSide(), currentStack)) {

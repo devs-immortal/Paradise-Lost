@@ -26,15 +26,16 @@ public abstract class PlayerEntityMixin extends Entity {
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (source.isOutOfWorld() && getY() < -1 && world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
             if (!world.isClient()) {
-                ((ServerPlayerEntity)(Object)this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() / 8, world.getHeight(), this.getZ() / 8, this.yaw, this.pitch);
+                ((ServerPlayerEntity) (Object) this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() / 8, world.getHeight(), this.getZ() / 8, this.yaw, this.pitch);
                 CustomStatusEffectInstance ef = new CustomStatusEffectInstance(StatusEffect.byRawId(9), 160, 2);
                 ef.ShowParticles = false;
-                ((ServerPlayerEntity)(Object)this).addStatusEffect(ef);
+                ((ServerPlayerEntity) (Object) this).addStatusEffect(ef);
             }
 
             cir.setReturnValue(false);
         }
     }
+
     @Inject(method = "onDeath", at = @At("HEAD"), cancellable = true)
     public void onDeath(DamageSource source, CallbackInfo ci) {
         //TODO: Custom death message on fall from aether death.
