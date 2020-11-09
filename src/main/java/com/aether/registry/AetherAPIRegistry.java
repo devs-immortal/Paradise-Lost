@@ -34,15 +34,15 @@ public class AetherAPIRegistry {
         registry.register(new AetherEnchantment(AetherItems.GRAVITITE_SHOVEL, 5500));
         registry.register(new AetherEnchantment(AetherItems.GRAVITITE_SWORD, 5500));
 
-        registry.register(new AetherEnchantment(AetherItems.ZANITE_HELMET, 6000));
-        registry.register(new AetherEnchantment(AetherItems.ZANITE_CHESTPLATE, 6000));
-        registry.register(new AetherEnchantment(AetherItems.ZANITE_LEGGINGS, 6000));
-        registry.register(new AetherEnchantment(AetherItems.ZANITE_BOOTS, 6000));
-
-        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_HELMET, 13000));
-        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_CHESTPLATE, 13000));
-        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_LEGGINGS, 13000));
-        registry.register(new AetherEnchantment(AetherItems.GRAVITITE_BOOTS, 13000));
+        //registry.register(new AetherEnchantment(AetherItems.ZANITE_HELMET, 6000));
+        //registry.register(new AetherEnchantment(AetherItems.ZANITE_CHESTPLATE, 6000));
+        //registry.register(new AetherEnchantment(AetherItems.ZANITE_LEGGINGS, 6000));
+        //registry.register(new AetherEnchantment(AetherItems.ZANITE_BOOTS, 6000));
+//
+        //registry.register(new AetherEnchantment(AetherItems.GRAVITITE_HELMET, 13000));
+        //registry.register(new AetherEnchantment(AetherItems.GRAVITITE_CHESTPLATE, 13000));
+        //registry.register(new AetherEnchantment(AetherItems.GRAVITITE_LEGGINGS, 13000));
+        //registry.register(new AetherEnchantment(AetherItems.GRAVITITE_BOOTS, 13000));
 
         registry.register(new AetherEnchantment(AetherItems.GOLDEN_DART, AetherItems.ENCHANTED_DART, 250));
         registry.register(new AetherEnchantment(AetherItems.GOLDEN_DART_SHOOTER, AetherItems.ENCHANTED_DART_SHOOTER, 500));
