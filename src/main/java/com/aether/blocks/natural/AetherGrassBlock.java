@@ -4,8 +4,13 @@ import com.aether.blocks.SpreadableAetherBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -15,11 +20,22 @@ import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Consumer;
 
 @SuppressWarnings("unchecked")
 public class AetherGrassBlock extends SpreadableAetherBlock implements Fertilizable {
     public AetherGrassBlock(Settings settings) {
         super(settings.strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS));
+    }
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        player.getItemsHand().forEach(new Consumer<ItemStack>() {
+            @Override
+            public void accept(ItemStack itemStack) {
+                // TODO: If tool is a shovel, change block to aether_path
+            }
+        });
+        return ActionResult.SUCCESS;
     }
 
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
