@@ -189,7 +189,7 @@ public class AetherBlocks {
         mossy_holystone = register("mossy_holystone", new Block(FabricBlockSettings.copyOf(Blocks.MOSSY_COBBLESTONE).materialColor(MaterialColor.WHITE)), buildingBlock());
         zanite_ore = register("zanite_ore", new Block(FabricBlockSettings.copyOf(Blocks.IRON_ORE)), buildingBlock());
 //        crystal_sapling = register("crystal_sapling", null);
-        aerogel = register("aerogel", new Block(FabricBlockSettings.of(Material.SOIL).strength(1.0f, 2000.0f).sounds(BlockSoundGroup.GLASS)), buildingBlock());
+        aerogel = register("aerogel", new Block(FabricBlockSettings.of(Material.SOIL).strength(1.0f, 2000.0f).sounds(BlockSoundGroup.GLASS).solidBlock(AetherBlocks::never).nonOpaque()), buildingBlock());
         aerogel_slab = register("aerogel_slab", new AetherSlabBlock(aerogel.getDefaultState()), buildingBlock());
         aerogel_stairs = register("aerogel_stairs", new AetherStairsBlock(aerogel.getDefaultState()), buildingBlock());
         aerogel_wall = register("aerogel_wall", new AetherWallBlock(aerogel.getDefaultState()), buildingBlock());
@@ -283,7 +283,7 @@ public class AetherBlocks {
 //        purple_dyed_aercloud = register("purple_dyed_aercloud", null);
 //        purple_flower = register("purple_flower", null);
         quicksoil = register("quicksoil", new Block(FabricBlockSettings.of(Material.AGGREGATE).strength(0.5f, -1.0f).sounds(BlockSoundGroup.SAND)), buildingBlock());
-        quicksoil_glass = register("quicksoil_glass", new Block(FabricBlockSettings.of(Material.GLASS).luminance(14).strength(0.2f, -1.0f).sounds(BlockSoundGroup.GLASS)), buildingBlock());
+        quicksoil_glass = register("quicksoil_glass", new Block(FabricBlockSettings.of(Material.GLASS).luminance(14).strength(0.2f, -1.0f).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
         quicksoil_glass_pane = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
 //        red_dyed_aercloud = register("red_dyed_aercloud", null);
         sentry_stone = register("sentry_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
