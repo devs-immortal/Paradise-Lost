@@ -68,7 +68,7 @@ public class AetherBlocks {
 //    public static final Block GOLDEN_OAK_LOG;
 //    public static final Block GOLDEN_OAK_SAPLING;
 //    public static final Block GOLDEN_OAK_WOOD;
-//    public static final Block GRAVITITE_ORE;
+    public static final Block GRAVITITE_ORE;
 //    public static final Block GREEN_DYED_AERCLOUD;
 //    public static final Block GREY_DYED_AERCLOUD;
     public static final Block HELLFIRE_SLAB;
@@ -228,7 +228,8 @@ public class AetherBlocks {
 //        GOLDEN_OAK_LOG = register("golden_oak_log", null);
 //        GOLDEN_OAK_SAPLING = register("golden_oak_sapling", null);
 //        GOLDEN_OAK_WOOD = register("golden_oak_wood", null);
-//        GRAVITITE_ORE = register("gravitite_ore", null);
+        // TODO: Somebody fix pls
+        GRAVITITE_ORE = register("gravitite_ore", new Block(FabricBlockSettings.of(Material.STONE)), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
         HELLFIRE_STONE = register("hellfire_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());

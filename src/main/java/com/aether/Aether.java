@@ -1,6 +1,7 @@
 package com.aether;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
 import com.aether.world.dimension.AetherDimension;
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
@@ -36,6 +37,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         GeckoLib.initialize();
         CrowdinTranslate.downloadTranslations("aether", modId);
         AetherDimension.setupDimension();
+        AetherEntityTypes.initialize();
         //AetherAPIRegistry.register();
     }
 
