@@ -4,6 +4,7 @@ import com.aether.blocks.AetherBlocks;
 import com.aether.items.AetherItems;
 import com.aether.registry.AetherAPIRegistry;
 import com.aether.world.dimension.AetherDimension;
+
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
@@ -23,12 +24,12 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public static final Logger modLogger = LogManager.getLogger(modId);
     public static final Set<Block> PORTAL_BLOCKS = new HashSet<>();
 
-    static {
-        PORTAL_BLOCKS.add(Blocks.GLOWSTONE);
-    }
-
     public static Identifier locate(String location) {
         return new Identifier(modId, location);
+    }
+
+    static {
+        PORTAL_BLOCKS.add(Blocks.GLOWSTONE);
     }
 
     @Override

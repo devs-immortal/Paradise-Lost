@@ -8,7 +8,6 @@ import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.collection.DefaultedList;
-
 import java.util.Iterator;
 
 public interface AccessoryInventory extends Inventory {
@@ -60,10 +59,13 @@ public interface AccessoryInventory extends Inventory {
     @Override
     default boolean isEmpty() {
         Iterator<ItemStack> iterator = this.getInventory().iterator();
+
         ItemStack stack;
 
         do {
-            if (!iterator.hasNext()) return true;
+            if (!iterator.hasNext()) {
+                return true;
+            }
 
             stack = iterator.next();
         }
@@ -106,4 +108,5 @@ public interface AccessoryInventory extends Inventory {
     default void clear() {
         this.getInventory().clear();
     }
+
 }

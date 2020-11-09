@@ -2,6 +2,7 @@ package com.aether.mixin.client;
 
 import com.aether.client.rendering.map.AetherMap;
 import com.aether.world.dimension.AetherDimension;
+
 import net.minecraft.block.MaterialColor;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.item.map.MapState;

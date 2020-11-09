@@ -8,8 +8,8 @@ import net.minecraft.util.registry.Registry;
 public class AetherEnchantmentFuel {
 
     public int timeGiven;
-    private final Identifier registryName;
-    private final ItemStack fuel;
+    private Identifier registryName;
+    private ItemStack fuel;
 
     public AetherEnchantmentFuel(ItemConvertible fuel, int timeGiven) {
         this(new ItemStack(fuel), timeGiven);
@@ -41,6 +41,8 @@ public class AetherEnchantmentFuel {
 
             return this.getFuel().getItem() == fuel.getFuel().getItem();
         }
+
         return false;
     }
+
 }

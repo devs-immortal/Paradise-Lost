@@ -12,9 +12,9 @@ public enum AccessoryType {
     MISC("misc", 10, 0),
     EXTRA_MISC("misc", 10, 0);
 
-    private final int durability;
-    private final int damagedReduced;
-    private final String displayName;
+    private int durability, damagedReduced;
+
+    private String displayName;
 
     AccessoryType(String displayName, int durability, int damageReduced) {
         this.displayName = displayName;
@@ -48,4 +48,5 @@ public enum AccessoryType {
     public String getDisplayName() {
         return this.displayName;
     }
+
 }

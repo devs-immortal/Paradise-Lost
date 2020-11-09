@@ -9,7 +9,7 @@ public class AetherEnchantment {
 
     public int timeRequired;
     public ItemStack input, output;
-    private final Identifier registryName;
+    private Identifier registryName;
 
     public AetherEnchantment(ItemConvertible input, int timeRequired) {
         this(input, new ItemStack(input), timeRequired);
@@ -61,6 +61,8 @@ public class AetherEnchantment {
 
             return inputCheck && outputCheck;
         }
+
         return false;
     }
+
 }

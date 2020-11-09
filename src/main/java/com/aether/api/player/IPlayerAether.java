@@ -4,6 +4,7 @@ import com.aether.api.player.util.AccessoryInventory;
 import net.minecraft.entity.player.PlayerEntity;
 
 public interface IPlayerAether {
+
     boolean disableFallDamage();
 
     float setReachDistance(float distance);
@@ -23,4 +24,5 @@ public interface IPlayerAether {
     AccessoryInventory getAccessoryInventory();
 
     PlayerEntity getPlayer();
+
 }

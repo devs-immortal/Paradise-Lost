@@ -5,6 +5,7 @@ import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.AetherPortalBlock;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -31,22 +32,20 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Mixin(BucketItem.class)
 public class BucketItemMixin extends Item {
-    @Unique
-    private Set<Block> compatiblePortalBlocks = ImmutableSet.of(Blocks.GLOWSTONE);
-    @Shadow
-    @Final
-    private Fluid fluid;
-
     public BucketItemMixin(Settings settings) {
         super(settings);
     }
+
+    @Unique
+    private Set<Block> compatiblePortalBlocks = ImmutableSet.of(Blocks.GLOWSTONE);
+
+    @Shadow
+    @Final
+    private Fluid fluid;
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
@@ -70,8 +69,8 @@ public class BucketItemMixin extends Item {
 
     private boolean buildPortal(World world, PlayerEntity user, BlockPos pos, boolean NS) {
         List<Direction> dirs = (NS ?
-                ImmutableList.of(Direction.NORTH, Direction.UP, Direction.SOUTH, Direction.DOWN) :
-                ImmutableList.of(Direction.EAST, Direction.UP, Direction.WEST, Direction.DOWN));
+            ImmutableList.of(Direction.NORTH, Direction.UP, Direction.SOUTH, Direction.DOWN) :
+            ImmutableList.of(Direction.EAST, Direction.UP, Direction.WEST, Direction.DOWN));
         Set<BlockPos> frameScan = verifyFrame(world, pos, dirs);
         boolean valid = false;
         if (!frameScan.isEmpty()) {
@@ -111,8 +110,7 @@ public class BucketItemMixin extends Item {
         boolean valid = false;
         Set<BlockPos> path = new HashSet<BlockPos>();
         boolean endpoint = false;
-        pathfinder:
-        while (true) {
+        pathfinder: while (true) {
             for (Direction dir : directions) {
                 BlockPos probePos = pos.offset(dir);
                 if ((path.size() >= 8 && probePos.equals(start))) {

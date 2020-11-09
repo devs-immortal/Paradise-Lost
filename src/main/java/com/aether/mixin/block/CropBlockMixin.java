@@ -1,6 +1,7 @@
 package com.aether.mixin.block;
 
 import com.aether.blocks.AetherBlocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
@@ -14,6 +15,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CropBlock.class)
 public class CropBlockMixin {
+    @Inject(method = "canPlantOnTop", at = @At("TAIL"), cancellable = true)
+    protected void canPlantOnTop(BlockState floor, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(
+                cir.getReturnValue() || floor.isOf(AetherBlocks.AETHER_FARMLAND)
+        );
+    }
+
     @Inject(method = "getAvailableMoisture", at = @At("RETURN"), cancellable = true)
     private static void getCropGrowthSpeed(Block block, BlockView view, BlockPos pos, CallbackInfoReturnable<Float> ci) {
         float newSpeed = ci.getReturnValue();
@@ -41,12 +49,5 @@ public class CropBlockMixin {
         }
 
         ci.setReturnValue(newSpeed);
-    }
-
-    @Inject(method = "canPlantOnTop", at = @At("TAIL"), cancellable = true)
-    protected void canPlantOnTop(BlockState floor, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(
-                cir.getReturnValue() || floor.isOf(AetherBlocks.AETHER_FARMLAND)
-        );
     }
 }

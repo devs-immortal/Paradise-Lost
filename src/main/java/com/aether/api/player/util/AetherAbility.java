@@ -1,6 +1,7 @@
 package com.aether.api.player.util;
 
 public interface AetherAbility {
+
     boolean shouldExecute();
 
     void update();
@@ -8,4 +9,5 @@ public interface AetherAbility {
     default boolean disableFallDamage() {
         return false;
     }
+
 }

@@ -112,7 +112,9 @@ public final class CloudRendererMixin {
                 this.cloudsDirty = false;
                 Tessellator tessellator = Tessellator.getInstance();
                 BufferBuilder bufferBuilder = tessellator.getBuffer();
-                this.cloudsBuffer.close();
+                if (this.cloudsBuffer != null) {
+                    this.cloudsBuffer.close();
+                }
 
                 this.cloudsBuffer = new VertexBuffer(VertexFormats.POSITION_TEXTURE_COLOR_NORMAL);
                 this.renderClouds(bufferBuilder, posX, renderHeight, posZ, cloudColor);
@@ -125,24 +127,26 @@ public final class CloudRendererMixin {
             matrices.scale(12.0F, 1.0F, 12.0F);
             matrices.scale(cloudScale, cloudScale, cloudScale);
             matrices.translate(-adjustedX, adjustedY, -adjustedZ);
-            this.cloudsBuffer.bind();
-            VertexFormats.POSITION_TEXTURE_COLOR_NORMAL.startDrawing(0L);
-            int cloudMainIndex = this.lastCloudsRenderMode == CloudRenderMode.FANCY ? 0 : 1;
+            if (this.cloudsBuffer != null) {
+                this.cloudsBuffer.bind();
+                VertexFormats.POSITION_TEXTURE_COLOR_NORMAL.startDrawing(0L);
+                int cloudMainIndex = this.lastCloudsRenderMode == CloudRenderMode.FANCY ? 0 : 1;
 
-            for (byte cloudIndex = 1; cloudMainIndex <= cloudIndex; ++cloudMainIndex) {
-                if (cloudMainIndex == 0) {
-                    RenderSystem.colorMask(false, false, false, false);
-                } else {
-                    RenderSystem.colorMask(true, true, true, true);
+                for (byte cloudIndex = 1; cloudMainIndex <= cloudIndex; ++cloudMainIndex) {
+                    if (cloudMainIndex == 0) {
+                        RenderSystem.colorMask(false, false, false, false);
+                    } else {
+                        RenderSystem.colorMask(true, true, true, true);
+                    }
+
+                    VertexBuffer cloudBuffer = this.cloudsBuffer;
+                    Entry entry = matrices.peek();
+                    cloudBuffer.draw(entry.getModel(), 7);
                 }
 
-                VertexBuffer cloudBuffer = this.cloudsBuffer;
-                Entry entry = matrices.peek();
-                cloudBuffer.draw(entry.getModel(), 7);
+                VertexBuffer.unbind();
+                VertexFormats.POSITION_TEXTURE_COLOR_NORMAL.endDrawing();
             }
-
-            VertexBuffer.unbind();
-            VertexFormats.POSITION_TEXTURE_COLOR_NORMAL.endDrawing();
 
             matrices.pop();
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
