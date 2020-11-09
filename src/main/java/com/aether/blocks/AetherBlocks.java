@@ -183,7 +183,7 @@ public class AetherBlocks {
         aether_grass = register("aether_grass", new AetherGrassBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).materialColor(MaterialColor.CYAN)), buildingBlock());
         aether_enchanted_grass = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(aether_grass).materialColor(MaterialColor.GOLD)), buildingBlock());
         ambrosium_ore = register("ambrosium_ore", new Block(FabricBlockSettings.copyOf(Blocks.COAL_ORE)), buildingBlock());
-        blue_portal = register("blue_portal", new PortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MaterialColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(AetherBlocks::never).strength(-1.0f).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
+        blue_portal = register("blue_portal", new AetherPortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MaterialColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(AetherBlocks::never).strength(-1.0f).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
         holystone = register("holystone", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.GRAY).strength(0.5f, 10.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
         holystone_brick = register("holystone_brick", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS).materialColor(MaterialColor.WHITE)), buildingBlock());
         mossy_holystone = register("mossy_holystone", new Block(FabricBlockSettings.copyOf(Blocks.MOSSY_COBBLESTONE).materialColor(MaterialColor.WHITE)), buildingBlock());
@@ -389,6 +389,8 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(skyroot_leaves, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(golden_oak_leaves, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(crystal_leaves, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(quicksoil_glass, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(quicksoil_glass_pane, RenderLayer.getTranslucent());
     }
 
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {
