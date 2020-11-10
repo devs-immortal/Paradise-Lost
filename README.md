@@ -36,7 +36,7 @@ The above list is incomplete, and as such, if your name is missing from it, plea
 ## License information
 Created by Immortal Devs.\
 Originally made by [Gilded Games](https://gildedgames.com/) under GNU GPLv3 license.\
-New assets are unlicensed and all rights are reserved to them by Immortal Devs.\
+New assets are unlicensed and all rights are reserved to them by Immortal Devs.
 
 ```
     Copyright (C) 2020 Immortal Devs
