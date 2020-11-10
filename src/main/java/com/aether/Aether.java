@@ -37,15 +37,15 @@ public class Aether implements ModInitializer, ClientModInitializer {
         GeckoLib.initialize();
         CrowdinTranslate.downloadTranslations("aether", modId);
         AetherDimension.setupDimension();
-        AetherEntityTypes.initialize();
         //AetherAPIRegistry.register();
     }
 
     @Override
     public void onInitializeClient() {
         GeckoLib.initialize();
-        AetherBlocks.clientInitialization();
-        AetherItems.clientInitialization();
+        AetherBlocks.initializeClient();
+        AetherItems.initializeClient();
+        AetherEntityTypes.initializeClient();
         //GeckolibRenderRegistry.init();
     }
 }

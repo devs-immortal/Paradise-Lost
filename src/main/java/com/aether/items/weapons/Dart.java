@@ -19,7 +19,7 @@ public class Dart extends Item {
         if (this == AetherItems.ENCHANTED_DART) return null;
         else if (this == AetherItems.POISON_DART) return null;
 
-        //TODO: Implement EntityEnchantedDart, EntityPoisonDart and EntityGoldenDart
+        //TODO: Implement EnchantedDartEntity, PoisonDartEntity and GoldenDartEntity
 
         return null;
     }

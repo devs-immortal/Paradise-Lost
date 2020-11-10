@@ -25,10 +25,10 @@ import net.minecraft.util.math.MathHelper;
 public class AccessoryLayer extends FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
     private static final Identifier TEXTURE_VALKYRIE = Aether.locate("textures/entity/valkyrie/valkyrie.png");
-    public BipedEntityModel<AbstractClientPlayerEntity> modelMisc;
-    public PlayerEntityModel<AbstractClientPlayerEntity> modelPlayer;
     private final boolean slimFit;
     private final PlayerWingModel modelWings;
+    public BipedEntityModel<AbstractClientPlayerEntity> modelMisc;
+    public PlayerEntityModel<AbstractClientPlayerEntity> modelPlayer;
 
     public AccessoryLayer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context, boolean slimFit) {
         super(context);

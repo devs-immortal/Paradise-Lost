@@ -8,9 +8,6 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
 
-    public float sinage;
-    public float sinage2;
-    public float size;
     private final ModelPart[] petal;
     private final ModelPart[] leaf;
     private final ModelPart[] stamen;
@@ -18,6 +15,9 @@ public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
     private final ModelPart[] thorn;
     private final ModelPart stem;
     private final ModelPart head;
+    public float sinage;
+    public float sinage2;
+    public float size;
 
     public AechorPlantModel() {
         this(0.0F);

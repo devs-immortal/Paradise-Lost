@@ -8,12 +8,11 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public class FlyingCowWingModel extends EntityModel<FlyingCowEntity> {
 
-    private FlyingCowEntity entityIn;
-
     private final ModelPart leftWingInner = new ModelPart(this, 0, 0);
     private final ModelPart leftWingOuter = new ModelPart(this, 20, 0);
     private final ModelPart rightWingInner = new ModelPart(this, 0, 0);
     private final ModelPart rightWingOuter = new ModelPart(this, 40, 0);
+    private FlyingCowEntity entityIn;
 
     public FlyingCowWingModel() {
         this.leftWingInner.addCuboid(-1.0F, -8.0F, -4.0F, 2, 16, 8, 0.0F);

@@ -90,7 +90,6 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         double x = targetIn.getX() - this.getX();
         double z = targetIn.getZ() - this.getZ();
         double y = 0.1D + (Math.sqrt((x * x) + (z * z) + 0.1D) * 0.5D) + ((this.getY() - targetIn.getY()) * 0.25D);
-
         double distance = 1.5D / Math.sqrt((x * x) + (z * z) + 0.1D);
 
 //        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);

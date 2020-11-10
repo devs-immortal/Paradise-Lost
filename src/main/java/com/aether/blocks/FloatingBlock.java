@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class FloatingBlock extends Block {
     public static boolean floatInstantly;
-    private boolean constantlyPowered;
+    private final boolean constantlyPowered;
 
     public FloatingBlock(FabricBlockSettings properties, boolean constantlyPowered) {
         super(properties.ticksRandomly());

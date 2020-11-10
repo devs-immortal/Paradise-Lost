@@ -224,7 +224,7 @@ public class AetherItems {
         return Registry.register(Registry.ITEM, Aether.locate(id), item);
     }
 
-    public static void clientInitialization() {
+    public static void initializeClient() {
         // Empty void. Eternal emptiness
     }
 }
