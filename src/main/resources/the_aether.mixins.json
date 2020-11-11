@@ -4,7 +4,6 @@
   "package": "com.aether.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "EntityPortalTickMixin",
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PlantBlockMixin",
