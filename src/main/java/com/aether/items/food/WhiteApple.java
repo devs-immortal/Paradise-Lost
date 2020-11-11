@@ -1,7 +1,9 @@
 package com.aether.items.food;
 
+import com.aether.api.AetherAPI;
 import com.aether.items.AetherItemGroups;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -14,9 +16,7 @@ public class WhiteApple extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stackIn, World worldIn, LivingEntity entityIn) {
-
-        //TODO: Cure player
-
+        if (entityIn instanceof PlayerEntity) AetherAPI.get((PlayerEntity) entityIn).inflictCure(300);
         return super.finishUsing(stackIn, worldIn, entityIn);
     }
 }

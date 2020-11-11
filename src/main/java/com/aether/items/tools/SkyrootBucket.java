@@ -1,7 +1,10 @@
 package com.aether.items.tools;
 
+import com.aether.api.AetherAPI;
+import com.aether.api.player.IPlayerAether;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidDrainable;
 import net.minecraft.block.FluidFillable;
@@ -101,15 +104,20 @@ public class SkyrootBucket extends Item {
     }
 
     public ItemStack onBucketContentsConsumed(ItemStack stack, World world, PlayerEntity entityPlayer) {
+        IPlayerAether player = AetherAPI.get(entityPlayer);
 
-        if (entityPlayer instanceof ServerPlayerEntity) entityPlayer.incrementStat(Stats.USED.getOrCreateStat(this));
+        if (entityPlayer instanceof ServerPlayerEntity) {
+            ServerPlayerEntity entityPlayerMp = (ServerPlayerEntity) entityPlayer;
+            Criteria.CONSUME_ITEM.trigger(entityPlayerMp, stack);
+            entityPlayer.incrementStat(Stats.USED.getOrCreateStat(this));
+        }
 
-        if (!entityPlayer.abilities.creativeMode) stack.setCount(stack.getCount() - 1);
+        if (!entityPlayer.isCreative()) stack.setCount(stack.getCount() - 1);
 
         if (stack.getItem() == AetherItems.SKYROOT_POISON_BUCKET) {
-            // TODO: Hurt player
+            player.inflictPoison(500);
         } else if (stack.getItem() == AetherItems.SKYROOT_REMEDY_BUCKET) {
-            //TODO: Cure player
+            player.inflictCure(200);
         } else if (stack.getItem() == AetherItems.SKYROOT_MILK_BUCKET) {
             if (!world.isClient) entityPlayer.clearStatusEffects();
         }
