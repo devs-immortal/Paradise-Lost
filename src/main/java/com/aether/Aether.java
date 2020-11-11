@@ -20,13 +20,7 @@ import java.util.Set;
 public class Aether implements ModInitializer, ClientModInitializer {
 
     public static final String modId = "the_aether";
-    public static final Identifier MOD_DIMENSION_ID = new Identifier(Aether.modId, Aether.modId);
     public static final Logger modLogger = LogManager.getLogger(modId);
-    public static final Set<Block> PORTAL_BLOCKS = new HashSet<>();
-
-    static {
-        PORTAL_BLOCKS.add(Blocks.GLOWSTONE);
-    }
 
     public static Identifier locate(String location) {
         return new Identifier(modId, location);
