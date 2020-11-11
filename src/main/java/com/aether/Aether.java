@@ -7,6 +7,12 @@ import com.aether.world.dimension.AetherDimension;
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
+
+import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+
+
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
