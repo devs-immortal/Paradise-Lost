@@ -45,6 +45,7 @@ repositories {
         url = "https://server.bbkr.space/artifactory/libs-release"
     }
     maven { url 'https://repo.repsy.io/mvn/gandiber/geckolib' }
+    maven {url  "https://dl.bintray.com/kyrptonaught/customportalapi"}
     jcenter()
     mavenCentral()
 }
@@ -73,6 +74,10 @@ dependencies {
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
+
+    //customportalapi
+    modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta5-1.16'
+    include 'net.kyrptonaught:customportalapi:0.0.1-beta5-1.16'
 }
 
 processResources {

@@ -4,13 +4,11 @@
   "package": "com.aether.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "EntityPortalTickMixin",
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PlantBlockMixin",
     "entity.EntityMixin",
     "entity.PlayerEntityMixin",
-    "item.BucketItemMixin",
     "item.MapStateMixin",
     "render.BiomeLayerSamplerAccessor",
     "render.BlockStateModelGeneratorMixin",
