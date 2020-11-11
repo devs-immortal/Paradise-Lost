@@ -11,8 +11,8 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
-public class AetherGrassPathBlock extends GrassPathBlock {
-    public AetherGrassPathBlock() {
+public class AetherDirtPathBlock extends GrassPathBlock {
+    public AetherDirtPathBlock() {
         super(FabricBlockSettings.of(Material.SOIL).strength(0.65F, 0.65F).sounds(BlockSoundGroup.GRASS));
     }
 

@@ -46,7 +46,7 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     private void setupConvertibleData() {
         final Map<Block, BlockState> modifiedConvertibles = Maps.newHashMap(ImmutableMap.of(
                 AetherBlocks.AETHER_GRASS, AetherBlocks.AETHER_FARMLAND.getDefaultState(),
-                AetherBlocks.AETHER_GRASS_PATH, AetherBlocks.AETHER_FARMLAND.getDefaultState(),
+                AetherBlocks.AETHER_DIRT_PATH, AetherBlocks.AETHER_FARMLAND.getDefaultState(),
                 AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_FARMLAND.getDefaultState()
         ));
         convertibleBlocks.putAll(modifiedConvertibles);

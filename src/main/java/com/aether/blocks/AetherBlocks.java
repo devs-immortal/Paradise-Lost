@@ -2,10 +2,7 @@ package com.aether.blocks;
 
 import com.aether.Aether;
 import com.aether.blocks.decorative.*;
-import com.aether.blocks.natural.AetherGrassBlock;
-import com.aether.blocks.natural.AetherSaplingBlock;
-import com.aether.blocks.natural.BlueberryBushBlock;
-import com.aether.blocks.natural.EnchantedAetherGrassBlock;
+import com.aether.blocks.natural.*;
 import com.aether.items.AetherItemGroups;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -31,7 +28,7 @@ public class AetherBlocks {
     public static final Block AETHER_ENCHANTED_GRASS;
     public static final Block AETHER_FARMLAND;
     public static final Block AETHER_GRASS;
-    public static final Block AETHER_GRASS_PATH;
+    public static final Block AETHER_DIRT_PATH;
     public static final Block AMBROSIUM_ORE;
     public static final Block AMBROSIUM_TORCH;
     public static final Block AMBROSIUM_TORCH_WALL;
@@ -179,7 +176,7 @@ public class AetherBlocks {
     public static final Block BLUEBERRY_BUSH;
 
     static {
-        AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT)), buildingBlock());
+        AETHER_DIRT = register("aether_dirt", new AetherDirtBlock(FabricBlockSettings.copy(Blocks.DIRT)), buildingBlock());
         AETHER_GRASS = register("aether_grass", new AetherGrassBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).materialColor(MaterialColor.CYAN)), buildingBlock());
         AETHER_ENCHANTED_GRASS = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD)), buildingBlock());
         AMBROSIUM_ORE = register("ambrosium_ore", new Block(FabricBlockSettings.copyOf(Blocks.COAL_ORE)), buildingBlock());
@@ -194,7 +191,7 @@ public class AetherBlocks {
         AEROGEL_STAIRS = register("aerogel_stairs", new AetherStairsBlock(AEROGEL.getDefaultState()), buildingBlock());
         AEROGEL_WALL = register("aerogel_wall", new AetherWallBlock(AEROGEL.getDefaultState()), buildingBlock());
         AETHER_FARMLAND = register("aether_farmland", new AetherFarmlandBlock(FabricBlockSettings.of(Material.SOIL).ticksRandomly().strength(0.6f).sounds(BlockSoundGroup.GRAVEL).blockVision(AetherBlocks::always).suffocates(AetherBlocks::always)), buildingBlock());
-        AETHER_GRASS_PATH = register("aether_grass_path", new AetherGrassPathBlock(), buildingBlock());
+        AETHER_DIRT_PATH = register("aether_grass_path", new AetherDirtPathBlock(), buildingBlock());
         AMBROSIUM_TORCH = register("ambrosium_torch", new AmbrosiumTorchBlock(), false, buildingBlock());
         AMBROSIUM_TORCH_WALL = register("ambrosium_wall_torch", new AmbrosiumTorchWallBlock(), AMBROSIUM_TORCH, buildingBlock());
         ANGELIC_STONE = register("angelic_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
