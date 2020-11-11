@@ -21,11 +21,11 @@ import net.minecraft.util.registry.Registry;
 public class AetherItems {
     public static final Item ZANITE_GEM, AMBROSIUM_SHARD, GOLDEN_AMBER, AECHOR_PETAL, SWET_BALL;
     public static final Item SKYROOT_STICK/*, VICTORY_MEDAL*/;
-    public static final Item SKYROOT_PICKAXE, SKYROOT_AXE, SKYROOT_SHOVEL, SKYROOT_SWORD;
-    public static final Item HOLYSTONE_PICKAXE, HOLYSTONE_AXE, HOLYSTONE_SHOVEL, HOLYSTONE_SWORD;
-    public static final Item ZANITE_PICKAXE, ZANITE_AXE, ZANITE_SHOVEL, ZANITE_SWORD;
-    public static final Item GRAVITITE_PICKAXE, GRAVITITE_AXE, GRAVITITE_SHOVEL, GRAVITITE_SWORD;
-    public static final Item VALKYRIE_PICKAXE, VALKYRIE_AXE, VALKYRIE_SHOVEL;
+    public static final Item SKYROOT_PICKAXE, SKYROOT_AXE, SKYROOT_SHOVEL, SKYROOT_SWORD, SKYROOT_HOE;
+    public static final Item HOLYSTONE_PICKAXE, HOLYSTONE_AXE, HOLYSTONE_SHOVEL, HOLYSTONE_SWORD, HOLYSTONE_HOE;
+    public static final Item ZANITE_PICKAXE, ZANITE_AXE, ZANITE_SHOVEL, ZANITE_SWORD, ZANITE_HOE;
+    public static final Item GRAVITITE_PICKAXE, GRAVITITE_AXE, GRAVITITE_SHOVEL, GRAVITITE_SWORD, GRAVITITE_HOE;
+    public static final Item VALKYRIE_PICKAXE, VALKYRIE_AXE, VALKYRIE_SHOVEL, VALKYRIE_HOE;
     //public static final ZaniteArmor ZANITE_HELMET, ZANITE_CHESTPLATE, ZANITE_LEGGINGS, ZANITE_BOOTS;
     //public static final AetherArmor GRAVITITE_HELMET, GRAVITITE_CHESTPLATE, GRAVITITE_LEGGINGS, GRAVITITE_BOOTS;
     //public static final AetherArmor NEPTUNE_HELMET, NEPTUNE_CHESTPLATE, NEPTUNE_LEGGINGS, NEPTUNE_BOOTS;
@@ -70,26 +70,31 @@ public class AetherItems {
         SKYROOT_PICKAXE = register("skyroot_pickaxe", new AetherPickaxe(AetherTiers.Skyroot, 1, -2.8F));
         SKYROOT_AXE = register("skyroot_axe", new AetherAxe(AetherTiers.Skyroot, 6.0F, -3.2F));
         SKYROOT_SWORD = register("skyroot_sword", new AetherSword(AetherTiers.Skyroot, 3, -2.4F));
+        SKYROOT_HOE = register("skyroot_hoe", new AetherHoe(AetherTiers.Valkyrie, 1));
 
         HOLYSTONE_SHOVEL = register("holystone_shovel", new AetherShovel(AetherTiers.Holystone, 1.5F, -3.0F));
         HOLYSTONE_PICKAXE = register("holystone_pickaxe", new AetherPickaxe(AetherTiers.Holystone, 1, -2.8F));
         HOLYSTONE_AXE = register("holystone_axe", new AetherAxe(AetherTiers.Holystone, 7.0F, -3.2F));
         HOLYSTONE_SWORD = register("holystone_sword", new AetherSword(AetherTiers.Holystone, 3, -2.4F));
+        HOLYSTONE_HOE = register("holystone_hoe", new AetherHoe(AetherTiers.Valkyrie, 2));
 
         ZANITE_SHOVEL = register("zanite_shovel", new AetherShovel(AetherTiers.Zanite, 1.5F, -3.0F));
         ZANITE_PICKAXE = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.Zanite, 1, -2.8F));
         ZANITE_AXE = register("zanite_axe", new AetherAxe(AetherTiers.Zanite, 6.0F, -3.1F));
         ZANITE_SWORD = register("zanite_sword", new AetherSword(AetherTiers.Zanite, 3, -2.4F));
+        ZANITE_HOE = register("zanite_hoe", new AetherHoe(AetherTiers.Valkyrie, 3));
 
         GRAVITITE_SHOVEL = register("gravitite_shovel", new AetherShovel(AetherTiers.Gravitite, Rarity.RARE, 1.5F, -3.0F));
         GRAVITITE_PICKAXE = register("gravitite_pickaxe", new AetherPickaxe(AetherTiers.Gravitite, Rarity.RARE, 1, -2.8F));
         GRAVITITE_AXE = register("gravitite_axe", new AetherAxe(AetherTiers.Gravitite, Rarity.RARE, 5.0F, -3.0F));
         GRAVITITE_SWORD = register("gravitite_sword", new AetherSword(AetherTiers.Gravitite, Rarity.RARE, 3, -2.4F));
+        GRAVITITE_HOE = register("gravitite_hoe", new AetherHoe(AetherTiers.Valkyrie, 4));
 
         VALKYRIE_SHOVEL = register("valkyrie_shovel", new AetherShovel(AetherTiers.Valkyrie, aether_loot, 1.5F, -3.0F));
         VALKYRIE_PICKAXE = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.Valkyrie, aether_loot, 1, -2.8F));
         VALKYRIE_AXE = register("valkyrie_axe", new AetherAxe(AetherTiers.Valkyrie, aether_loot, 4.0F, -2.9F));
         VALKYRIE_LANCE = register("valkyrie_lance", new ValkyrieLance());
+        VALKYRIE_HOE = register("valkyrie_hoe", new AetherHoe(AetherTiers.Valkyrie, 5));
 
         // Armor
         //ZANITE_HELMET = (ZaniteArmor) register("zanite_helmet", new ZaniteArmor(AetherArmorType.Zanite, EquipmentSlot.HEAD));
