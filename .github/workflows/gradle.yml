@@ -17,5 +17,26 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: artifacts
-        path: ./build/lib/
+        path: ./build/libs/
+    - name: Build Success
+      uses: rjstone/discord-webhook-notify@v1
+      if: success()
+      with:
+          severity: info
+          details: Build Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Build Failure
+      uses: rjstone/discord-webhook-notify@v1
+      if: failure()
+      with:
+          severity: error
+          details: Build Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Build Cancelled
+      uses: rjstone/discord-webhook-notify@v1
+      if: cancelled()
+      with:
+          severity: warn
+          details: Build Canceled!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       
