@@ -10,7 +10,7 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import software.bernie.geckolib.GeckoLib;
+import software.bernie.geckolib3.GeckoLib;
 
 public class Aether implements ModInitializer, ClientModInitializer {
 
@@ -31,7 +31,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        GeckoLib.initialize();
         AetherBlocks.initializeClient();
         AetherItems.initializeClient();
         AetherEntityTypes.initializeClient();

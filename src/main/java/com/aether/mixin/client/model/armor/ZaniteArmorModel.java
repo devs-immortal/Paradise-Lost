@@ -3,7 +3,7 @@ package com.aether.mixin.client.model.armor;
 import com.aether.Aether;
 import com.aether.items.armor.ZaniteArmor;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class ZaniteArmorModel extends AnimatedGeoModel<ZaniteArmor> {
 

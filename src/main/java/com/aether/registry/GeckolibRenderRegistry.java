@@ -2,7 +2,7 @@ package com.aether.registry;
 
 import com.aether.items.armor.ZaniteArmor;
 import com.aether.mixin.client.renderer.armor.ZaniteArmorRenderer;
-import software.bernie.geckolib.renderer.geo.GeoArmorRenderer;
+import software.bernie.geckolib3.renderer.geo.GeoArmorRenderer;
 
 public class GeckolibRenderRegistry {
 
