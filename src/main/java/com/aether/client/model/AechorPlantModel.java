@@ -119,11 +119,11 @@ public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
             if (i < 3) {
                 this.stamen[i].pitch = 0.2F + ((float) i / 15F);
                 this.stamen[i].yaw = head.yaw + 0.1F;
-                this.stamen[i].yaw += (float) ((Math.PI * 2) / (float) 3) * (float) i;
+                this.stamen[i].yaw += ((Math.PI * 2) / (float) 3) * (float) i;
                 this.stamen[i].pitch += sinage * 0.4F;
                 this.stamen2[i].pitch = 0.2F + ((float) i / 15F);
                 this.stamen2[i].yaw = head.yaw + 0.1F;
-                this.stamen2[i].yaw += (float) ((Math.PI * 2) / (float) 3) * (float) i;
+                this.stamen2[i].yaw += ((Math.PI * 2) / (float) 3) * (float) i;
                 this.stamen2[i].pitch += sinage * 0.4F;
                 this.stamen[i].pivotY = boff + ((sinage) * 2F);
                 this.stamen2[i].pivotY = boff + ((sinage) * 2F);
@@ -137,11 +137,11 @@ public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
             this.petal[i].pitch = ((i % 2 == 0) ? -0.25F : -0.4125F);
             this.petal[i].pitch += sinage;
             this.petal[i].yaw = head.yaw;
-            this.petal[i].yaw += (float) ((Math.PI * 2) / (float) 10) * (float) i;
+            this.petal[i].yaw += ((Math.PI * 2) / (float) 10) * (float) i;
             this.leaf[i].pitch = ((i % 2 == 0) ? 0.1F : 0.2F);
             this.leaf[i].pitch += sinage * 0.75F;
             this.leaf[i].yaw = (float) (head.yaw + ((Math.PI * 2) / (float) 10 / 2F));
-            this.leaf[i].yaw += (float) ((Math.PI * 2) / (float) 10) * (float) i;
+            this.leaf[i].yaw += ((Math.PI * 2) / (float) 10) * (float) i;
             this.petal[i].pivotY = boff;
             this.leaf[i].pivotY = boff;
         }
