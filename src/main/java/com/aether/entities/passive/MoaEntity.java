@@ -218,7 +218,7 @@ public class MoaEntity extends SaddleMountEntity {
         this.prevWingRotation = this.wingRotation;
         this.prevDestPos = this.destPos;
 
-        this.destPos += 0.2D;
+        this.destPos += 0.2F;
         this.destPos = Math.min(1.0F, Math.max(0.01F, this.destPos));
 
         if (onGround) this.destPos = 0.0F;
