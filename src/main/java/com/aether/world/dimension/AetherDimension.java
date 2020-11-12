@@ -8,6 +8,7 @@ import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
@@ -21,6 +22,6 @@ public class AetherDimension {
 
         AetherSurfaceBuilders.registerSurfaceBuilders();
 
-        CustomPortalApiRegistry.addPortal(Blocks.GLOWSTONE, Blocks.WATER, (CustomPortalBlock)AetherBlocks.BLUE_PORTAL, Aether.MOD_DIMENSION_ID, DyeColor.LIGHT_BLUE.getMaterialColor().color);
+        CustomPortalApiRegistry.addPortal(Blocks.GLOWSTONE, Blocks.WATER, (CustomPortalBlock)AetherBlocks.BLUE_PORTAL, new Identifier(Aether.modId), DyeColor.LIGHT_BLUE.getMaterialColor().color);
     }
 }
