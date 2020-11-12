@@ -45,12 +45,9 @@ public class AetherAxe extends AxeItem implements IAetherTool {
         if (this.getItemMaterial() == AetherTiers.Gravitite && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
             if (world.isAir(blockPos.up()) && !world.isClient) {
                 //TODO: Spawn floating block
-            } else {
-                return ActionResult.PASS;
             }
-            return ActionResult.SUCCESS;
         }
-        return ActionResult.PASS;
+        return super.useOnBlock(context);
     }
 
     @Override
