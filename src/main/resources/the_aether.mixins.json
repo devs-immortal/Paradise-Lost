@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "block.CropBlockMixin",
+    "block.EnchantingTableBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PlantBlockMixin",
     "entity.EntityMixin",
@@ -13,7 +14,8 @@
     "render.BiomeLayerSamplerAccessor",
     "render.BlockStateModelGeneratorMixin",
     "render.CloudRendererMixin",
-    "render.MinecraftClientMixin"
+    "render.MinecraftClientMixin",
+    "screen.EnchantmentScreenHandlerMixin"
   ],
   "client": [
     "client.MapRendererMixin"
