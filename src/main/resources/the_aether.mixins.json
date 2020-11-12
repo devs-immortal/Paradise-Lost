@@ -5,7 +5,6 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "block.CropBlockMixin",
-    "block.EnchantingTableBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PlantBlockMixin",
     "entity.EntityMixin",
@@ -19,7 +18,8 @@
     "screen.EnchantmentScreenHandlerMixin"
   ],
   "client": [
-    "client.MapRendererMixin"
+    "client.MapRendererMixin",
+    "block.EnchantingTableBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
