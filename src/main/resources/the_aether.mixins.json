@@ -9,7 +9,6 @@
     "block.PlantBlockMixin",
     "entity.EntityMixin",
     "entity.PlayerEntityMixin",
-    "item.BucketItemMixin",
     "item.MapStateMixin",
     "render.BiomeLayerSamplerAccessor",
     "render.BlockStateModelGeneratorMixin",
