@@ -65,9 +65,9 @@ public class PlayerWingModel extends BipedEntityModel<AbstractClientPlayerEntity
                     this.wingRight.pitch = this.wingRight.pivotZ = this.wingRight.pivotY = 0.0F;
         }
 
-        this.wingLeft.yaw += Math.sin(this.sinage) / 6F;
+        this.wingLeft.yaw += (float) Math.sin(this.sinage) / 6F;
         this.wingRight.yaw -= Math.sin(this.sinage) / 6F;
-        this.wingLeft.roll += Math.cos(this.sinage) / (this.gonRound ? 8F : 3F);
+        this.wingLeft.roll += (float) Math.cos(this.sinage) / (this.gonRound ? 8F : 3F);
         this.wingRight.roll -= Math.cos(this.sinage) / (this.gonRound ? 8F : 3F);
     }
 
