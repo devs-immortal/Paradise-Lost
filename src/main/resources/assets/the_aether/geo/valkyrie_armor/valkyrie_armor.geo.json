@@ -3,7 +3,7 @@
 	"minecraft:geometry": [
 		{
 			"description": {
-				"identifier": "geometry.unknown",
+				"identifier": "geometry.the_aether",
 				"texture_width": 96,
 				"texture_height": 64,
 				"visible_bounds_width": 4,
@@ -94,7 +94,7 @@
 				{
 					"name": "armorRightLeg",
 					"parent": "bipedRightLeg",
-					"pivot": [-2, 12, 0],
+					"pivot": [2, 12, 0],
 					"cubes": [
 						{"origin": [-0.5, 2, -2.5], "size": [5, 10, 5], "uv": [22, 39]}
 					]
