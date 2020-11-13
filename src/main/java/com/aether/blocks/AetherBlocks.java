@@ -1,6 +1,8 @@
 package com.aether.blocks;
 
 import com.aether.Aether;
+import com.aether.blocks.aercloud.BaseAercloudBlock;
+import com.aether.blocks.aercloud.ColdAercloudBlock;
 import com.aether.blocks.decorative.*;
 import com.aether.blocks.natural.*;
 import com.aether.items.AetherItemGroups;
@@ -52,7 +54,7 @@ public class AetherBlocks {
     public static final Block CARVED_STONE_TRAP;
     public static final Block CARVED_WALL;
     //    public static final Block CHEST_MIMIC;
-//    public static final Block COLD_AERCLOUD;
+    public static final Block COLD_AERCLOUD;
 //    public static final Block CRYSTAL_FRUIT_LEAVES;
 //    public static final Block CRYSTAL_LEAVES;
 //    public static final Block CRYSTAL_SAPLING;
@@ -213,7 +215,7 @@ public class AetherBlocks {
         CARVED_STAIRS = register("carved_stairs", new AetherStairsBlock(CARVED_STONE.getDefaultState()), buildingBlock());
         CARVED_WALL = register("carved_wall", new AetherWallBlock(CARVED_STONE.getDefaultState()), buildingBlock());
 //        CHEST_MIMIC = register("chest_mimic", null);
-//        COLD_AERCLOUD = register("cold_aercloud", null);
+        COLD_AERCLOUD = register("cold_aercloud", new ColdAercloudBlock(), buildingBlock());
 //        CRYSTAL_FRUIT_LEAVES = register("crystal_fruit_leaves", null);
 //        CRYSTAL_LEAVES = register("crystal_leaves", null);
 //        CYAN_DYED_AERCLOUD = register("cyan_dyed_aercloud", null);
@@ -394,6 +396,7 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(COLD_AERCLOUD, RenderLayer.getTranslucent());
     }
 
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {

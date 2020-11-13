@@ -32,7 +32,7 @@ public class GoldenOakLeafParticle extends SpriteBillboardParticle {
         this.velocityY *= 0.0F;
         this.velocityZ *= 0.3F;
 
-        this.velocityComposite = g / 30;
+        this.velocityComposite = g / 50;
         velocityDown = h;
 
         this.rotateFactor = ((float)Math.random() - 0.5F) * 0.01F;
