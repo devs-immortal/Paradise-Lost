@@ -4,7 +4,7 @@ import com.aether.Aether;
 import com.aether.api.AetherAPI;
 import com.aether.api.accessories.AccessoryType;
 import com.aether.api.player.IPlayerAether;
-import com.aether.client.model.PlayerWingModel;
+import com.aether.client.model.entity.PlayerWingModel;
 import com.aether.items.AetherItems;
 import com.aether.items.accessories.ItemAccessory;
 import com.mojang.blaze3d.platform.GlStateManager;

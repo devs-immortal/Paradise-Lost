@@ -1,7 +1,7 @@
 package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
-import com.aether.client.model.ChestMimicModel;
+import com.aether.client.model.entity.ChestMimicModel;
 import com.aether.entities.hostile.ChestMimicEntity;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.render.VertexConsumerProvider;

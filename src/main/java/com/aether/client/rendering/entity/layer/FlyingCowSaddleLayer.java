@@ -1,7 +1,7 @@
 package com.aether.client.rendering.entity.layer;
 
 import com.aether.Aether;
-import com.aether.client.model.FlyingCowModel;
+import com.aether.client.model.entity.FlyingCowModel;
 import com.aether.entities.passive.FlyingCowEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;

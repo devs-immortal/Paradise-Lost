@@ -67,7 +67,7 @@ public class AetherArmor extends GeoArmorItem implements IAnimatable {
         LivingEntity livingEntity = event.getExtraDataOfType(LivingEntity.class).get(0);
 
         //Always loop the animation but later on in this method we'll decide whether or not to actually play it
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.potato_armor.new", true));
+        //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.potato_armor.new", true));
 
         //If the living entity is an armorstand just play the animation nonstop
         if (livingEntity instanceof ArmorStandEntity) {

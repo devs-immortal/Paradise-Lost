@@ -1,8 +1,10 @@
 package com.aether;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.client.rendering.particle.AetherParticles;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
+import com.aether.registry.GeckolibRenderRegistry;
 import com.aether.world.dimension.AetherDimension;
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import net.fabricmc.api.ClientModInitializer;
@@ -14,17 +16,17 @@ import software.bernie.geckolib3.GeckoLib;
 
 public class Aether implements ModInitializer, ClientModInitializer {
 
-    public static final String modId = "the_aether";
-    public static final Logger modLogger = LogManager.getLogger(modId);
+    public static final String MOD_ID = "the_aether";
+    public static final Logger modLogger = LogManager.getLogger(MOD_ID);
 
     public static Identifier locate(String location) {
-        return new Identifier(modId, location);
+        return new Identifier(MOD_ID, location);
     }
 
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
-        CrowdinTranslate.downloadTranslations("aether", modId);
+        CrowdinTranslate.downloadTranslations("aether", MOD_ID);
         AetherDimension.setupDimension();
         //AetherAPIRegistry.register();
     }
@@ -34,6 +36,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherBlocks.initializeClient();
         AetherItems.initializeClient();
         AetherEntityTypes.initializeClient();
-        //GeckolibRenderRegistry.init();
+        AetherParticles.initializeClient();
+        GeckolibRenderRegistry.init();
     }
 }

@@ -1,9 +1,9 @@
 package com.aether.client.rendering.entity.layer;
 
 import com.aether.Aether;
-import com.aether.client.model.SheepuffModel;
-import com.aether.client.model.SheepuffWoolModel;
-import com.aether.client.model.SheepuffedModel;
+import com.aether.client.model.entity.SheepuffModel;
+import com.aether.client.model.entity.SheepuffWoolModel;
+import com.aether.client.model.entity.SheepuffedModel;
 import com.aether.entities.passive.SheepuffEntity;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.render.OverlayTexture;

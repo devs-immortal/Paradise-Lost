@@ -37,7 +37,7 @@ public class AetherBiomeProvider extends BiomeSource {
 
     public AetherBiomeProvider(Registry<Biome> biomeRegistry, long worldSeed) {
         super(biomeRegistry.getEntries().stream()
-                .filter(entry -> entry.getKey().getValue().getNamespace().equals(Aether.modId))
+                .filter(entry -> entry.getKey().getValue().getNamespace().equals(Aether.MOD_ID))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList()));
 

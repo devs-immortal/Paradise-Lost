@@ -1,7 +1,7 @@
 package com.aether.client.rendering.entity.layer;
 
 import com.aether.Aether;
-import com.aether.client.model.PhygWingModel;
+import com.aether.client.model.entity.PhygWingModel;
 import com.aether.entities.passive.PhygEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;

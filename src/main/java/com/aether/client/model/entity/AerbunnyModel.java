@@ -1,4 +1,4 @@
-package com.aether.client.model;
+package com.aether.client.model.entity;
 
 import com.aether.entities.passive.AerbunnyEntity;
 import net.minecraft.client.model.ModelPart;

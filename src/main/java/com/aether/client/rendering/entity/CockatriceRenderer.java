@@ -1,7 +1,7 @@
 package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
-import com.aether.client.model.CockatriceModel;
+import com.aether.client.model.entity.CockatriceModel;
 import com.aether.entities.hostile.CockatriceEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;

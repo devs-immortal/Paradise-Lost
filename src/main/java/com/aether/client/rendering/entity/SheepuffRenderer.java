@@ -1,7 +1,7 @@
 package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
-import com.aether.client.model.SheepuffWoolModel;
+import com.aether.client.model.entity.SheepuffWoolModel;
 import com.aether.client.rendering.entity.layer.SheepuffCoatLayer;
 import com.aether.entities.passive.SheepuffEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;

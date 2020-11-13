@@ -1,4 +1,4 @@
-package com.aether.mixin.client.model.armor;
+package com.aether.client.model.armor;
 
 import com.aether.Aether;
 import com.aether.items.armor.ZaniteArmor;
@@ -9,16 +9,16 @@ public class ZaniteArmorModel extends AnimatedGeoModel<ZaniteArmor> {
 
     @Override
     public Identifier getModelLocation(ZaniteArmor object) {
-        return new Identifier(Aether.modId, "geo/zanite_armor.geo.json");
+        return new Identifier(Aether.MOD_ID, "geo/zanite_armor.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(ZaniteArmor object) {
-        return new Identifier(Aether.modId, "texures/armor/zanite_armor.png");
+        return new Identifier(Aether.MOD_ID, "textures/armor/zanite_armor.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(ZaniteArmor animatable) {
-        return new Identifier(Aether.modId, "animations/armor/zanite_armor.animation.json");
+        return new Identifier(Aether.MOD_ID, "animations/armor/zanite_armor.animation");
     }
 }

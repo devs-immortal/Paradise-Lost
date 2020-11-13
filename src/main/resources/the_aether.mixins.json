@@ -15,11 +15,12 @@
     "render.BlockStateModelGeneratorMixin",
     "render.CloudRendererMixin",
     "render.MinecraftClientMixin",
-    "screen.EnchantmentScreenHandlerMixin"
+    "screen.EnchantmentScreenHandlerMixin",
+    "structure.FeatureMixin"
   ],
   "client": [
-    "client.MapRendererMixin",
-    "block.EnchantingTableBlockMixin"
+    "block.EnchantingTableBlockMixin",
+    "client.MapRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

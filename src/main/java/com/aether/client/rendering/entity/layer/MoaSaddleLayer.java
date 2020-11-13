@@ -1,6 +1,6 @@
 package com.aether.client.rendering.entity.layer;
 
-import com.aether.client.model.MoaModel;
+import com.aether.client.model.entity.MoaModel;
 import com.aether.client.rendering.entity.MoaRenderer;
 import com.aether.entities.passive.MoaEntity;
 import net.minecraft.client.render.OverlayTexture;

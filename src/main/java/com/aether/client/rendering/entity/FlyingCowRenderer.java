@@ -1,7 +1,7 @@
 package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
-import com.aether.client.model.FlyingCowModel;
+import com.aether.client.model.entity.FlyingCowModel;
 import com.aether.client.rendering.entity.layer.FlyingCowSaddleLayer;
 import com.aether.client.rendering.entity.layer.FlyingCowWingLayer;
 import com.aether.entities.passive.FlyingCowEntity;

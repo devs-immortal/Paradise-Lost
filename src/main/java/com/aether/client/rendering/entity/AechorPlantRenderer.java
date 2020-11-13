@@ -1,7 +1,7 @@
 package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
-import com.aether.client.model.AechorPlantModel;
+import com.aether.client.model.entity.AechorPlantModel;
 import com.aether.entities.hostile.AechorPlantEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;

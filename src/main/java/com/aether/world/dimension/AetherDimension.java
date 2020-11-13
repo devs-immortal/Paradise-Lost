@@ -14,7 +14,7 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class AetherDimension {
-    public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, Aether.locate(Aether.modId));
+    public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, Aether.locate(Aether.MOD_ID));
 
     public static void setupDimension() {
         AetherChunkGenerator.registerChunkGenerator();
@@ -22,6 +22,6 @@ public class AetherDimension {
 
         AetherSurfaceBuilders.registerSurfaceBuilders();
 
-        CustomPortalApiRegistry.addPortal(Blocks.GLOWSTONE, Blocks.WATER, (CustomPortalBlock)AetherBlocks.BLUE_PORTAL, new Identifier(Aether.modId), DyeColor.LIGHT_BLUE.getMaterialColor().color);
+        CustomPortalApiRegistry.addPortal(Blocks.GLOWSTONE, Blocks.WATER, (CustomPortalBlock)AetherBlocks.BLUE_PORTAL, new Identifier(Aether.MOD_ID), DyeColor.LIGHT_BLUE.getMaterialColor().color);
     }
 }

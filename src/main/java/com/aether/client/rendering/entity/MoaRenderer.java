@@ -2,7 +2,7 @@ package com.aether.client.rendering.entity;
 
 import com.aether.api.AetherAPI;
 import com.aether.api.player.IPlayerAether;
-import com.aether.client.model.MoaModel;
+import com.aether.client.model.entity.MoaModel;
 import com.aether.client.rendering.entity.layer.MoaSaddleLayer;
 import com.aether.entities.passive.MoaEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
