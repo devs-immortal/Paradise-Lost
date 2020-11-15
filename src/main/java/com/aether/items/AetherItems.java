@@ -1,6 +1,7 @@
 package com.aether.items;
 
 import com.aether.Aether;
+import com.aether.audio.AetherSounds;
 import com.aether.items.accessories.AccessoryTypes;
 import com.aether.items.accessories.ItemAccessory;
 import com.aether.items.armor.*;
@@ -220,9 +221,10 @@ public class AetherItems {
         LORE_BOOK = register("lore_book", new BookOfLore((new Item.Settings()).maxCount(1).group(AetherItemGroups.Misc)));
 
         // Some music, I think the original ones are copyrighted but whatever
+        // I'll make a few -d17
         //TODO: Add AetherSounds
-//        AETHER_TUNE = register("aether_tune", new AetherDisc(20, AetherSounds.aether_tune));
-//        ASCENDING_DAWN = register("ascending_dawn", new AetherDisc(12, AetherSounds.ascending_dawn));
+        //AETHER_TUNE = register("aether_tune", new AetherDisc(20, AetherSounds.aether_tune));
+        //ASCENDING_DAWN = register("ascending_dawn", new AetherDisc(12, AetherSounds.ascending_dawn));
 //        WELCOMING_SKIES = register("welcoming_skies", new AetherDisc(10, AetherSounds.welcoming_skies));
 //        LEGACY = register("legacy", new AetherDisc(6, AetherSounds.legacy));
     }

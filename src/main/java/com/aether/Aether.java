@@ -1,5 +1,6 @@
 package com.aether;
 
+import com.aether.audio.AetherSounds;
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.particle.AetherParticles;
 import com.aether.entities.AetherEntityTypes;
@@ -33,10 +34,12 @@ public class Aether implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+
         AetherBlocks.initializeClient();
         AetherItems.initializeClient();
         AetherEntityTypes.initializeClient();
         AetherParticles.initializeClient();
+        AetherSounds.initializeClient();
         GeckolibRenderRegistry.init();
     }
 }
