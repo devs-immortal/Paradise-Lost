@@ -27,7 +27,6 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-
     maven {
         url = "https://minecraft.guntram.de/maven/"
     }
