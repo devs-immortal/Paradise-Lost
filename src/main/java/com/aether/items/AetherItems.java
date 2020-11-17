@@ -1,6 +1,7 @@
 package com.aether.items;
 
 import com.aether.Aether;
+import com.aether.blocks.AetherBlocks;
 import com.aether.audio.AetherSounds;
 import com.aether.items.accessories.AccessoryTypes;
 import com.aether.items.accessories.ItemAccessory;
@@ -16,7 +17,9 @@ import com.aether.items.weapons.*;
 import com.aether.util.EnumHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -56,6 +59,7 @@ public class AetherItems {
 //    PUBLIC STATIC ITEM AETHER_TUNE, ASCENDING_DAWN, WELCOMING_SKIES, LEGACY;
 //    PUBLIC STATIC ITEM REPULSION_SHIELD;
     public static final Item LORE_BOOK;
+    public static final Item QUICKSOIL_VIAL, AERCLOUD_VIAL;
 
     public static final Rarity AETHER_LOOT = EnumHelper.addRarity("aether_loot", Formatting.GREEN);
 
@@ -148,6 +152,8 @@ public class AetherItems {
         SKYROOT_MILK_BUCKET = register("skyroot_milk_bucket", new SkyrootBucket(SKYROOT_BUCKET));
         SKYROOT_POISON_BUCKET = register("skyroot_poison_bucket", new SkyrootBucket(SKYROOT_BUCKET));
         SKYROOT_REMEDY_BUCKET = register("skyroot_remedy_bucket", new SkyrootBucket(SKYROOT_BUCKET));
+        QUICKSOIL_VIAL = register("quicksoil_vial", new QuicksoilVial(Fluids.EMPTY, new Item.Settings().group(AetherItemGroups.Misc)));
+        AERCLOUD_VIAL = register("aercloud_vial", new QuicksoilVial(AetherBlocks.DENSE_AERCLOUD_STILL, new Item.Settings().group(AetherItemGroups.Misc)));
 
         CLOUD_PARACHUTE = register("cold_parachute", new Parachute());
         GOLDEN_CLOUD_PARACHUTE = register("golden_parachute", new Parachute(20));

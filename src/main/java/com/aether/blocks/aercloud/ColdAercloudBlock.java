@@ -6,12 +6,14 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class ColdAercloudBlock extends BaseAercloudBlock {
@@ -26,5 +28,10 @@ public class ColdAercloudBlock extends BaseAercloudBlock {
         if (entity.getVelocity().y <= 0.0F) {
             entity.setVelocity(entity.getVelocity().multiply(1.0D, 0.005D, 1.0D));
         }
+    }
+
+    @Override
+    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+        return type == NavigationType.LAND;
     }
 }

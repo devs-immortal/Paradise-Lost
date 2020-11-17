@@ -60,7 +60,7 @@ public class EnumHelper {
             newFieldAccessor = Class.forName("sun.reflect.ReflectionFactory").getDeclaredMethod("newFieldAccessor", Field.class, boolean.class);
             fieldAccessorSet = Class.forName("sun.reflect.FieldAccessor").getDeclaredMethod("set", Object.class, Object.class);
         } catch (Exception e) {
-            Aether.modLogger.error("Error setting up EnumHelper.", e);
+            Aether.LOG.error("Error setting up EnumHelper.", e);
         }
 
         isSetup = true;
@@ -204,7 +204,7 @@ public class EnumHelper {
             }
 
             for (String line : lines)
-                Aether.modLogger.fatal(line);
+                Aether.LOG.fatal(line);
 
             if (test) {
                 throw new Exception("Could not find $VALUES field for enum: " + enumType.getName());
@@ -236,7 +236,7 @@ public class EnumHelper {
 
             return newValue;
         } catch (Exception e) {
-            Aether.modLogger.error("Error adding enum with EnumHelper.", e);
+            Aether.LOG.error("Error adding enum with EnumHelper.", e);
             throw new RuntimeException(e);
         }
     }

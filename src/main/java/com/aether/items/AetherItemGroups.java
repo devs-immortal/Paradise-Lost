@@ -21,7 +21,7 @@ public class AetherItemGroups {
 
     public static final ItemGroup Armor = FabricItemGroupBuilder.build(
             Aether.locate("aether_armor"),
-            () -> new ItemStack(AetherItems.BLUE_GUMMY_SWET));
+            () -> new ItemStack(AetherItems.GRAVITITE_HELMET));
 
     public static final ItemGroup Food = FabricItemGroupBuilder.build(
             Aether.locate("aether_food"),

@@ -1,10 +1,10 @@
 package com.aether.blocks;
 
 import com.aether.Aether;
-import com.aether.blocks.aercloud.BaseAercloudBlock;
-import com.aether.blocks.aercloud.ColdAercloudBlock;
+import com.aether.blocks.aercloud.*;
 import com.aether.blocks.decorative.*;
 import com.aether.blocks.natural.*;
+import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.items.AetherItemGroups;
 import com.aether.world.feature.tree.GoldenOakSaplingGenerator;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.WallStandingBlockItem;
@@ -44,7 +45,7 @@ public class AetherBlocks {
     //    public static final Block BERRY_BUSH;
 //    public static final Block BERRY_BUSH_STEM;
 //    public static final Block BLACK_DYED_AERCLOUD;
-//    public static final Block BLUE_AERCLOUD;
+    public static final Block BLUE_AERCLOUD;
 //    public static final Block BLUE_DYED_AERCLOUD;
     public static final Block BLUE_PORTAL;
     //    public static final Block BROWN_DYED_AERCLOUD;
@@ -55,19 +56,12 @@ public class AetherBlocks {
     public static final Block CARVED_WALL;
     //    public static final Block CHEST_MIMIC;
     public static final Block COLD_AERCLOUD;
-//    public static final Block CRYSTAL_FRUIT_LEAVES;
-//    public static final Block CRYSTAL_LEAVES;
-//    public static final Block CRYSTAL_SAPLING;
 //    public static final Block CYAN_DYED_AERCLOUD;
 //    public static final Block DECORATED_HOLIDAY_LEAVES;
 //    public static final Block ENCHANTED_GRAVITITE;
 //    public static final Block ENCHANTER;
 //    public static final Block FREEZER;
-//    public static final Block GOLDEN_AERCLOUD;
-//    public static final Block GOLDEN_OAK_LEAVES;
-//    public static final Block GOLDEN_OAK_LOG;
-//    public static final Block GOLDEN_OAK_SAPLING;
-//    public static final Block GOLDEN_OAK_WOOD;
+    public static final Block GOLDEN_AERCLOUD;
     public static final Block GRAVITITE_ORE;
 //    public static final Block GREEN_DYED_AERCLOUD;
 //    public static final Block GREY_DYED_AERCLOUD;
@@ -118,7 +112,7 @@ public class AetherBlocks {
     //    public static final Block ORANGE_DYED_AERCLOUD;
 //    public static final Block PILLAR;
 //    public static final Block PILLAR_TOP;
-//    public static final Block PINK_AERCLOUD;
+    public static final Block PINK_AERCLOUD;
 //    public static final Block PINK_DYED_AERCLOUD;
 //    public static final Block POTTED_PURPLE_FLOWER;
 //    public static final Block POTTED_WHITE_FLOWER;
@@ -177,6 +171,8 @@ public class AetherBlocks {
     public static final Block ZANITE_BLOCK;
     public static final Block ZANITE_ORE;
     public static final Block BLUEBERRY_BUSH;
+    public static final FlowableFluid DENSE_AERCLOUD_STILL;
+    public static final Block DENSE_AERCLOUD;
 
     static {
         AETHER_DIRT = register("aether_dirt", new AetherDirtBlock(FabricBlockSettings.copy(Blocks.DIRT)), buildingBlock());
@@ -206,7 +202,6 @@ public class AetherBlocks {
         BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).collidable(false)), buildingBlock());
 //        BERRY_BUSH_STEM = register("berry_bush_stem", null);
 //        BLACK_DYED_AERCLOUD = register("black_dyed_aercloud", null);
-//        BLUE_AERCLOUD = register("blue_aercloud", null);
 //        BLUE_DYED_AERCLOUD = register("blue_dyed_aercloud", null);
 //        BROWN_DYED_AERCLOUD = register("brown_dyed_aercloud", null);
         CARVED_STONE = register("carved_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
@@ -216,18 +211,16 @@ public class AetherBlocks {
         CARVED_WALL = register("carved_wall", new AetherWallBlock(CARVED_STONE.getDefaultState()), buildingBlock());
 //        CHEST_MIMIC = register("chest_mimic", null);
         COLD_AERCLOUD = register("cold_aercloud", new ColdAercloudBlock(), buildingBlock());
-//        CRYSTAL_FRUIT_LEAVES = register("crystal_fruit_leaves", null);
-//        CRYSTAL_LEAVES = register("crystal_leaves", null);
+        BLUE_AERCLOUD = register("blue_aercloud", new BlueAercloudBlock(), buildingBlock());
+        PINK_AERCLOUD = register("pink_aercloud", new PinkAercloudBlock(), buildingBlock());
 //        CYAN_DYED_AERCLOUD = register("cyan_dyed_aercloud", null);
 //        DECORATED_HOLIDAY_LEAVES = register("decorated_holiday_leaves", null);
 //        ENCHANTED_GRAVITITE = register("enchanted_gravitite", null);
 //        ENCHANTER = register("enchanter", null);
 //        FREEZER = register("freezer", null);
-//        GOLDEN_AERCLOUD = register("golden_aercloud", null);
-//        GOLDEN_OAK_LEAVES = register("golden_oak_leaves", null);
-//        GOLDEN_OAK_LOG = register("golden_oak_log", null);
-//        GOLDEN_OAK_SAPLING = register("golden_oak_sapling", null);
-//        GOLDEN_OAK_WOOD = register("golden_oak_wood", null);
+        GOLDEN_AERCLOUD = register("golden_aercloud", new GoldenAercloudBlock(), buildingBlock());
+        DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, new Identifier(Aether.MOD_ID, "dense_aercloud"), new DenseAercloudFluid());
+        DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, FabricBlockSettings.copyOf(Blocks.WATER)){}, buildingBlock());
         // TODO: Somebody fix pls
         GRAVITITE_ORE = register("gravitite_ore", new Block(FabricBlockSettings.of(Material.STONE)), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
@@ -397,6 +390,12 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(COLD_AERCLOUD, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(BLUE_AERCLOUD, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(PINK_AERCLOUD, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_AERCLOUD, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putFluid(DENSE_AERCLOUD_STILL, RenderLayer.getTranslucent());
+
+        FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, new Identifier(Aether.MOD_ID, "dense_aercloud"));
     }
 
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {

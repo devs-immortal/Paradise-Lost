@@ -18,7 +18,7 @@ import software.bernie.geckolib3.GeckoLib;
 public class Aether implements ModInitializer, ClientModInitializer {
 
     public static final String MOD_ID = "the_aether";
-    public static final Logger modLogger = LogManager.getLogger(MOD_ID);
+    public static final Logger LOG = LogManager.getLogger(MOD_ID);
 
     public static Identifier locate(String location) {
         return new Identifier(MOD_ID, location);
