@@ -7,6 +7,7 @@ import com.aether.blocks.natural.*;
 import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.items.AetherItemGroups;
 import com.aether.world.feature.tree.GoldenOakSaplingGenerator;
+import com.aether.world.feature.tree.SkyrootSaplingGenerator;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -287,7 +288,7 @@ public class AetherBlocks {
         SENTRY_SLAB = register("sentry_slab", new AetherSlabBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_STAIRS = register("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_WALL = register("sentry_wall", new AetherWallBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
-        SKYROOT_SAPLING = register("skyroot_sapling", new AetherSaplingBlock(null, FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)), buildingBlock());
+        SKYROOT_SAPLING = register("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)), buildingBlock());
         SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.GREEN, MaterialColor.WOOD), buildingBlock());
         STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD), buildingBlock());
         SKYROOT_LEAVES = register("skyroot_leaves", createLeavesBlock(), buildingBlock());

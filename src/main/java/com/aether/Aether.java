@@ -34,7 +34,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
         AetherBlocks.initializeClient();
         AetherItems.initializeClient();
         AetherEntityTypes.initializeClient();
