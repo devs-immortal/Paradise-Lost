@@ -22,6 +22,6 @@ public class AetherDimension {
 
         AetherSurfaceBuilders.registerSurfaceBuilders();
 
-        CustomPortalApiRegistry.addPortal(Blocks.GLOWSTONE, Blocks.WATER, (CustomPortalBlock)AetherBlocks.BLUE_PORTAL, new Identifier(Aether.MOD_ID), DyeColor.LIGHT_BLUE.getMaterialColor().color);
+        CustomPortalApiRegistry.addPortal(Blocks.GLOWSTONE, Blocks.WATER, (CustomPortalBlock)AetherBlocks.BLUE_PORTAL, new Identifier(Aether.MOD_ID,Aether.MOD_ID), DyeColor.LIGHT_BLUE.getMaterialColor().color);
     }
 }
