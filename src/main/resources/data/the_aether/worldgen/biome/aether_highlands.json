@@ -9,7 +9,16 @@
   },
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {},
-  "features": [],
+  "features": [
+    [
+      "minecraft:patch_grass_normal",
+      "the_aether:cold_aercloud"
+    ],
+    [
+      "the_aether:skyroot_tree",
+      "the_aether:golden_oak_tree"
+    ]
+  ],
   "starts": [],
   "spawners": {
     "monster": [

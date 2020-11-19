@@ -3,6 +3,7 @@ package com.aether.world.dimension;
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
 import com.aether.world.biome.AetherBiomeProvider;
+import com.aether.world.feature.AetherFeatures;
 import com.aether.world.surfacebuilders.AetherSurfaceBuilders;
 import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
@@ -17,6 +18,7 @@ public class AetherDimension {
     public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, Aether.locate(Aether.MOD_ID));
 
     public static void setupDimension() {
+        AetherFeatures.registerFeatures();
         AetherChunkGenerator.registerChunkGenerator();
         AetherBiomeProvider.registerBiomeProvider();
 
