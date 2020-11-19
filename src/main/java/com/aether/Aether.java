@@ -2,6 +2,7 @@ package com.aether;
 
 import com.aether.audio.AetherSounds;
 import com.aether.blocks.AetherBlocks;
+import com.aether.client.rendering.block.AetherColorProvs;
 import com.aether.client.rendering.particle.AetherParticles;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
@@ -36,6 +37,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public void onInitializeClient() {
         AetherBlocks.initializeClient();
         AetherItems.initializeClient();
+        AetherColorProvs.initializeClient();
         AetherEntityTypes.initializeClient();
         AetherParticles.initializeClient();
         AetherSounds.initializeClient();
