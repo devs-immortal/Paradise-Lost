@@ -11,8 +11,8 @@
   "carvers": {},
   "features": [
     [
-      "minecraft:patch_grass_normal",
-      "the_aether:cold_aercloud"
+      "the_aether:aether_grass",
+      "the_aether:aether_tall_grass"
     ],
     [
       "the_aether:skyroot_tree",
