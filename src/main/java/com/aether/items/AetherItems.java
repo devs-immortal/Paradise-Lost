@@ -3,6 +3,7 @@ package com.aether.items;
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
 import com.aether.audio.AetherSounds;
+import com.aether.entities.AetherEntityTypes;
 import com.aether.items.accessories.AccessoryTypes;
 import com.aether.items.accessories.ItemAccessory;
 import com.aether.items.armor.*;
@@ -20,6 +21,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -60,6 +62,9 @@ public class AetherItems {
 //    PUBLIC STATIC ITEM REPULSION_SHIELD;
     public static final Item LORE_BOOK;
     public static final Item QUICKSOIL_VIAL, AERCLOUD_VIAL;
+    public static final Item AECHOR_PLANT_SPAWN_EGG, CHEST_MIMIC_SPAWN_EGG,
+            COCKATRICE_SPAWN_EGG, AERBUNNY_SPAWN_EGG, FLYING_COW_SPAWN_EGG,
+            MOA_SPAWN_EGG, PHYG_SPAWN_EGG, SHEEPUFF_SPAWN_EGG;
 
     public static final Rarity AETHER_LOOT = EnumHelper.addRarity("aether_loot", Formatting.GREEN);
 
@@ -180,6 +185,16 @@ public class AetherItems {
         VAMPIRE_BLADE = register("vampire_blade", new VampireBlade());
         PIG_SLAYER = register("pig_slayer", new PigSlayer());
         CANDY_CANE_SWORD = register("candy_cane_sword", new CandyCaneSword());
+
+        // Spawn Eggs
+        AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x9fc3f7, 0x29a793, new Item.Settings().group(AetherItemGroups.Misc)));
+        CHEST_MIMIC_SPAWN_EGG = null;
+        COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, new Item.Settings().group(AetherItemGroups.Misc)));
+        AERBUNNY_SPAWN_EGG = null;
+        FLYING_COW_SPAWN_EGG = null;
+        MOA_SPAWN_EGG = null;
+        PHYG_SPAWN_EGG = null;
+        SHEEPUFF_SPAWN_EGG = null;
 
         // Accessories
         LEATHER_GLOVES = register("leather_gloves", new ItemAccessory(AccessoryTypes.GLOVES, 0xC65C35).setDamageMultiplier(1.5F));
