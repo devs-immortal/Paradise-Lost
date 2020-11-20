@@ -5,6 +5,7 @@ import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.block.AetherColorProvs;
 import com.aether.client.rendering.particle.AetherParticles;
 import com.aether.entities.AetherEntityTypes;
+import com.aether.entities.util.AetherMoaTypes;
 import com.aether.items.AetherItems;
 import com.aether.registry.GeckolibRenderRegistry;
 import com.aether.world.dimension.AetherDimension;
@@ -43,6 +44,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherItems.initializeClient();
         AetherColorProvs.initializeClient();
         AetherEntityTypes.initializeClient();
+        AetherMoaTypes.initialization();
         AetherParticles.initializeClient();
         AetherSounds.initializeClient();
         GeckolibRenderRegistry.init();
