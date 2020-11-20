@@ -15,15 +15,6 @@ public class AetherAnimalEntity extends AnimalEntity {
         // this.spawningGround = AetherBlocks.aether_grass;
     }
 
-    protected AetherAnimalEntity(World world) {
-        // TODO: If anyone knows why this has to be here and what do to with it, you are more than welcome to change it
-        super(EntityType.COW, world);
-    }
-
-    protected void initAttributes() {
-        //
-    }
-
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;

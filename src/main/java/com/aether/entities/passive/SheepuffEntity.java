@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -123,8 +124,6 @@ public class SheepuffEntity extends AnimalEntity {
 
     @Override
     protected void initGoals() {
-        initAttributes();
-
         this.eatGrassGoal = new EatAetherGrassGoal(this);
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
@@ -149,9 +148,10 @@ public class SheepuffEntity extends AnimalEntity {
         super.tickMovement();
     }
 
-    protected void initAttributes() {
-        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(8.0D);
-        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23000000417232513D);
     }
 
     @Override

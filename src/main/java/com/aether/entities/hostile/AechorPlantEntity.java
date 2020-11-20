@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -45,18 +46,15 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     @Override
     protected void initGoals() {
         super.initGoals();
-        initAttributes();
 
         this.goalSelector.add(4, new ProjectileAttackGoal(this, 0.0D, 30, 1.0F));
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal<LivingEntity>(this, LivingEntity.class, true));
     }
 
-    @Override
-    protected void initAttributes() {
-        super.initAttributes();
-
-        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(20.0D);
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D);
     }
 
     @Override

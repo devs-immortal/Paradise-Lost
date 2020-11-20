@@ -7,8 +7,11 @@ import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
 import com.aether.items.MoaEgg;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -87,11 +90,10 @@ public class MoaEntity extends SaddleMountEntity {
         this.dataTracker.startTracking(SITTING, false);
     }
 
-    @Override
-    protected void initAttributes() {
-        super.initAttributes();
-        //this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(35.0D);
-        //this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(1.0D);
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D);
     }
 
     public int getRandomEggTime() {

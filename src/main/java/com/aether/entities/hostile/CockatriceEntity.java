@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -31,7 +32,6 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     @Override
     protected void initGoals() {
         super.initGoals();
-        initAttributes();
 
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(4, new ProjectileAttackGoal(this, 0.5D, 30, 12.0F));
@@ -43,10 +43,11 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         this.targetSelector.add(2, new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
     }
 
-    protected void initAttributes() {
-        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(20.0D);
-        this.getAttributeInstance(EntityAttributes.GENERIC_FOLLOW_RANGE).setBaseValue(35.0D);
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0D);
     }
 
     @Override

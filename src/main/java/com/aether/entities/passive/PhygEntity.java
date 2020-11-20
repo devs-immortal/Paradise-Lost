@@ -4,7 +4,9 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -52,15 +54,10 @@ public class PhygEntity extends SaddleMountEntity {
         this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
     }
 
-    @Override
-    protected void initAttributes() {
-        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(10.0D);
-        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.25D);
-
-        if (this.getSaddled()) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(20.0D);
-            this.setHealth(20);
-        }
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, /*this.getSaddled() ? 20.0D : */10.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
     }
 
     @Override

@@ -5,7 +5,9 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -39,8 +41,6 @@ public class AerbunnyEntity extends AetherAnimalEntity {
 
     @Override
     protected void initGoals() {
-        initAttributes();
-
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new WanderAroundFarGoal(this, 2D, 6));
         this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
@@ -50,12 +50,10 @@ public class AerbunnyEntity extends AetherAnimalEntity {
         //this.goalSelector.add(6, new EntityAIBunnyHop(this));
     }
 
-    @Override
-    protected void initAttributes() {
-        super.initAttributes();
-
-        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(5.0D);
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 5.0D);
     }
 
     @Override

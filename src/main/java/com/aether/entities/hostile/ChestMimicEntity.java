@@ -1,7 +1,9 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
@@ -23,7 +25,6 @@ public class ChestMimicEntity extends HostileEntity {
     @Override
     protected void initGoals() {
         super.initGoals();
-        initAttributes();
 
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0D, false));
@@ -33,11 +34,12 @@ public class ChestMimicEntity extends HostileEntity {
         this.targetSelector.add(2, new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
     }
 
-    protected void initAttributes() {
-        this.getAttributeInstance(EntityAttributes.GENERIC_FOLLOW_RANGE).setBaseValue(8.0D);
-        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.28000000417232513D);
-        this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(3.0D);
-        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(40.0D);
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.28000000417232513D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0D);
     }
 
     @Override

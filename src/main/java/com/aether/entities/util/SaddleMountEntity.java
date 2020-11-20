@@ -45,13 +45,8 @@ public abstract class SaddleMountEntity extends MountableEntity {
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        initAttributes();
 
         this.dataTracker.startTracking(SADDLED, false);
-    }
-
-    protected void initAttributes() {
-        //
     }
 
     @Override

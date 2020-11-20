@@ -13,9 +13,13 @@ import com.aether.entities.projectile.GoldenDartEntity;
 import com.aether.entities.projectile.PoisonDartEntity;
 import com.aether.entities.projectile.PoisonNeedleEntity;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Difficulty;
@@ -91,6 +95,21 @@ public class AetherEntityTypes {
         //entityRenderMap.put(EntityWhirlwind.class, new WhirlwindRenderer(renderManager));
         //entityRenderMap.put(EntityPhoenixArrow.class, new PhoenixArrowRenderer(renderManager));
 
+        // Register Entity Attribute Data and Spawn Restrictions - TODO
+        FabricDefaultAttributeRegistry.register(MOA, MoaEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(FLYING_COW, FlyingCowEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(SHEEPUFF, SheepuffEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(AERBUNNY, AerbunnyEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(AECHOR_PLANT, AechorPlantEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(PHYG, PhygEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(COCKATRICE, CockatriceEntity.initAttributes());
+
+        FabricDefaultAttributeRegistry.register(CHEST_MIMIC, ChestMimicEntity.initAttributes());
+    }
+
+    public static DefaultAttributeContainer.Builder getDefaultAttributes() {
+        return LivingEntity.createLivingAttributes()
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 6);
     }
 
     public static <X extends Entity> EntityType<X> register(String name, int trackingDistance, int updateIntervalTicks, boolean alwaysUpdateVelocity, EntityDimensions size, EntityType.EntityFactory<X> factory) {
