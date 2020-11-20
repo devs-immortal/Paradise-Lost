@@ -3,10 +3,11 @@ package com.aether.client.rendering.entity;
 import com.aether.api.AetherAPI;
 import com.aether.api.player.IPlayerAether;
 import com.aether.client.model.entity.MoaModel;
-import com.aether.client.rendering.entity.layer.MoaSaddleLayer;
 import com.aether.entities.passive.MoaEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.feature.SaddleFeatureRenderer;
+import net.minecraft.client.render.entity.model.PigEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -18,9 +19,10 @@ public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
     public MoaRenderer(EntityRenderDispatcher renderManager) {
         super(renderManager, new MoaModel(0.0F), 1.0F);
 
-        // TODO: ???
+        // TODO: Fix code for Moa Rendering
         //this.addFeature(new MoaCustomizerLayer(renderManager, (MoaModel) this.getModel()));
-        this.addFeature(new MoaSaddleLayer(this));
+        //this.addFeature(new MoaSaddleLayer(this));
+        //this.addFeature(new SaddleFeatureRenderer<>(this, new MoaModel(0.5F), /* TODO */));
     }
 
     @Override

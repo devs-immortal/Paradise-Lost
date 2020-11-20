@@ -14,7 +14,7 @@ public class AetherParticles {
     public static DefaultParticleType GOLDEN_OAK_LEAF;
 
     public static void initializeClient() {
-        GOLDEN_OAK_LEAF = Registry.register(Registry.PARTICLE_TYPE, new Identifier(Aether.MOD_ID, "golden_leaf"), FabricParticleTypes.simple(true));
+        GOLDEN_OAK_LEAF = Registry.register(Registry.PARTICLE_TYPE, Aether.locate("golden_leaf"), FabricParticleTypes.simple(true));
         ParticleFactoryRegistry.getInstance().register(GOLDEN_OAK_LEAF, GoldenOakLeafParticle.DefaultFactory::new);
     }
 }

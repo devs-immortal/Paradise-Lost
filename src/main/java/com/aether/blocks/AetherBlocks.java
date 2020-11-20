@@ -220,7 +220,7 @@ public class AetherBlocks {
 //        ENCHANTER = register("enchanter", null);
 //        FREEZER = register("freezer", null);
         GOLDEN_AERCLOUD = register("golden_aercloud", new GoldenAercloudBlock(), buildingBlock());
-        DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, new Identifier(Aether.MOD_ID, "dense_aercloud"), new DenseAercloudFluid());
+        DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
         DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, FabricBlockSettings.copyOf(Blocks.WATER)){}, buildingBlock());
         // TODO: Somebody fix pls
         GRAVITITE_ORE = register("gravitite_ore", new Block(FabricBlockSettings.of(Material.STONE)), buildingBlock());
@@ -396,7 +396,7 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_AERCLOUD, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putFluid(DENSE_AERCLOUD_STILL, RenderLayer.getTranslucent());
 
-        FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, new Identifier(Aether.MOD_ID, "dense_aercloud"));
+        FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, Aether.locate("dense_aercloud"));
     }
 
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {

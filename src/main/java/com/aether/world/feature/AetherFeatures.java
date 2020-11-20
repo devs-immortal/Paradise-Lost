@@ -23,6 +23,6 @@ public class AetherFeatures {
     }
 
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {
-        return Registry.register(Registry.FEATURE, new Identifier(Aether.MOD_ID, id), feature);
+        return Registry.register(Registry.FEATURE, Aether.locate(id), feature);
     }
 }

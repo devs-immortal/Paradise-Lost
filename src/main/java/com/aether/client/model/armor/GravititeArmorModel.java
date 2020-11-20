@@ -9,16 +9,16 @@ public class GravititeArmorModel extends AnimatedGeoModel<GravititeArmor> {
 
     @Override
     public Identifier getModelLocation(GravititeArmor object) {
-        return new Identifier(Aether.MOD_ID, "geo/gravitite_armor.geo.json");
+        return Aether.locate("geo/gravitite_armor.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(GravititeArmor object) {
-        return new Identifier(Aether.MOD_ID, "textures/armor/gravitite_armor.png");
+        return Aether.locate("textures/armor/gravitite_armor.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(GravititeArmor animatable) {
-        return new Identifier(Aether.MOD_ID, "animations/armor/gravitite_armor.animation");
+        return Aether.locate("animations/armor/gravitite_armor.animation");
     }
 }

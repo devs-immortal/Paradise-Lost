@@ -2,6 +2,7 @@ package com.aether.entities.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Saddleable;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -16,8 +17,9 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public abstract class SaddleMountEntity extends MountableEntity {
+public abstract class SaddleMountEntity extends MountableEntity implements Saddleable {
 
     private static final TrackedData<Boolean> SADDLED = DataTracker.registerData(SaddleMountEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
@@ -53,9 +55,10 @@ public abstract class SaddleMountEntity extends MountableEntity {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getStackInHand(hand);
 
-        if (!this.canSaddle()) return super.interactMob(player, hand);
+        // TODO: Saddle code here may be able to be removed, due to the implement
+        if (!this.canBeSaddled()) return super.interactMob(player, hand);
 
-        if (!this.getSaddled()) {
+        if (!this.isSaddled()) {
             if (heldItem.getItem() == Items.SADDLE && !this.isBaby()) {
                 if (!player.isCreative()) player.setStackInHand(hand, ItemStack.EMPTY);
 
@@ -92,7 +95,7 @@ public abstract class SaddleMountEntity extends MountableEntity {
     @Override
     public void writeCustomDataToTag(CompoundTag nbt) {
         super.writeCustomDataToTag(nbt);
-        nbt.putBoolean("saddled", this.getSaddled());
+        nbt.putBoolean("saddled", this.isSaddled());
     }
 
     @Override
@@ -101,7 +104,7 @@ public abstract class SaddleMountEntity extends MountableEntity {
         this.setSaddled(nbt.getBoolean("saddled"));
     }
 
-    public boolean getSaddled() {
+    public boolean isSaddled() {
         return this.dataTracker.get(SADDLED);
     }
 
@@ -109,8 +112,16 @@ public abstract class SaddleMountEntity extends MountableEntity {
         this.dataTracker.set(SADDLED, saddled);
     }
 
-    public boolean canSaddle() {
+    public boolean canBeSaddled() {
         return true;
+    }
+
+    public void saddle(@Nullable SoundCategory sound) {
+        //this.items.setStack(0, new ItemStack(Items.SADDLE));
+        if (sound != null) {
+            this.world.playSoundFromEntity(null, this, SoundEvents.ENTITY_PIG_SADDLE, sound, 0.5F, 1.0F);
+        }
+
     }
 
 }

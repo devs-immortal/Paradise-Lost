@@ -9,16 +9,16 @@ public class PhoenixArmorModel extends AnimatedGeoModel<PhoenixArmor> {
 
     @Override
     public Identifier getModelLocation(PhoenixArmor object) {
-        return new Identifier(Aether.MOD_ID, "geo/phoenix_armor.geo.json");
+        return Aether.locate("geo/phoenix_armor.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(PhoenixArmor object) {
-        return new Identifier(Aether.MOD_ID, "textures/armor/phoenix_armor.png");
+        return Aether.locate("textures/armor/phoenix_armor.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(PhoenixArmor animatable) {
-        return new Identifier(Aether.MOD_ID, "animations/armor/phoenix_armor.animation");
+        return Aether.locate("animations/armor/phoenix_armor.animation");
     }
 }
