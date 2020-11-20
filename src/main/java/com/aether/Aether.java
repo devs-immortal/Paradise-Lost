@@ -8,6 +8,8 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
 import com.aether.registry.GeckolibRenderRegistry;
 import com.aether.world.dimension.AetherDimension;
+import com.aether.world.feature.AetherConfiguredFeatures;
+import com.aether.world.feature.AetherFeatures;
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
@@ -29,6 +31,8 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public void onInitialize() {
         GeckoLib.initialize();
         CrowdinTranslate.downloadTranslations("aether", MOD_ID);
+        AetherFeatures.registerFeatures();
+        AetherConfiguredFeatures.registerFeatures();
         AetherDimension.setupDimension();
         //AetherAPIRegistry.register();
     }

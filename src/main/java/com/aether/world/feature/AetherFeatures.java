@@ -2,6 +2,7 @@ package com.aether.world.feature;
 
 import com.aether.Aether;
 
+import com.aether.world.feature.config.AercloudConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -11,24 +12,12 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.*;
 
 public class AetherFeatures {
-    public static ConfiguredFeature<?, ?> GOLDEN_OAK, SKYROOT;
-    public static ConfiguredFeature<?, ?> COLD_AERCLOUD, BLUE_AERCLOUD, GOLDEN_AERCLOUD;
-    public static ConfiguredFeature<?, ?> AETHER_GRASS, AETHER_TALL_GRASS;
-    public static ConfiguredFeature<?, ?> AETHER_LAKE;
+    public static Feature<AercloudConfig> DEFAULT_AERCLOUD;
+    public static Feature<SingleStateFeatureConfig> DEFAULT_LAKE;
 
     public static void registerFeatures() {
-        AETHER_LAKE = register("aether_lake", new AetherLakeFeature(SingleStateFeatureConfig.CODEC).configure(new SingleStateFeatureConfig(Blocks.WATER.getDefaultState())).decorate(Decorator.WATER_LAKE.configure(new ChanceDecoratorConfig(4))));
-        AETHER_GRASS = register("aether_grass", Feature.RANDOM_PATCH.configure(AetherConfiguredFeatures.AETHER_GRASS_CONFIG));
-        AETHER_GRASS = register("aether_tall_grass", Feature.RANDOM_PATCH.configure(AetherConfiguredFeatures.AETHER_TALL_GRASS_CONFIG));
-        SKYROOT = register("skyroot_tree", Feature.TREE.configure(AetherConfiguredFeatures.SKYROOT_CONFIG));
-        GOLDEN_OAK = register("golden_oak_tree", Feature.TREE.configure(AetherConfiguredFeatures.GOLDEN_OAK_CONFIG));
-        COLD_AERCLOUD = register("cold_aercloud", new AercloudFeature().configure(AetherConfiguredFeatures.COLD_AERCLOUD_CONFIG));
-        BLUE_AERCLOUD = register("blue_aercloud", new AercloudFeature().configure(AetherConfiguredFeatures.BLUE_AERCLOUD_CONFIG));
-        GOLDEN_AERCLOUD = register("golden_aercloud", new AercloudFeature().configure(AetherConfiguredFeatures.GOLDEN_AERCLOUD_CONFIG));
-    }
-
-    private static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String id, ConfiguredFeature<FC, ?> configuredFeature) {
-        return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(Aether.MOD_ID, id), configuredFeature);
+        DEFAULT_LAKE = register("default_lake", new AetherLakeFeature(SingleStateFeatureConfig.CODEC));
+        DEFAULT_AERCLOUD = register("default_aercloud", new AercloudFeature());
     }
 
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {

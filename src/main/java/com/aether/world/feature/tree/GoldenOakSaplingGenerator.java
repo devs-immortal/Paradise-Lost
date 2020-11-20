@@ -1,5 +1,6 @@
 package com.aether.world.feature.tree;
 
+import com.aether.world.feature.AetherConfiguredFeatures;
 import com.aether.world.feature.AetherFeatures;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -11,6 +12,6 @@ import java.util.Random;
 public class GoldenOakSaplingGenerator extends SaplingGenerator {
     @Override
     protected @Nullable ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
-        return (@Nullable ConfiguredFeature<TreeFeatureConfig, ?>) AetherFeatures.GOLDEN_OAK;
+        return (@Nullable ConfiguredFeature<TreeFeatureConfig, ?>) AetherConfiguredFeatures.GOLDEN_OAK;
     }
 }

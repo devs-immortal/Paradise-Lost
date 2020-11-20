@@ -15,6 +15,11 @@
       "the_aether:aether_tall_grass"
     ],
     [
+      "the_aether:cold_aercloud",
+      "the_aether:blue_aercloud",
+      "the_aether:golden_aercloud"
+    ],
+    [
       "the_aether:skyroot_tree",
       "the_aether:golden_oak_tree"
     ]
