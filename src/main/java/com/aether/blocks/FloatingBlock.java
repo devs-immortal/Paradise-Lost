@@ -2,83 +2,61 @@ package com.aether.blocks;
 
 import com.aether.entities.block.FloatingBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.block.FallingBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
 
 import java.util.Random;
 
-public class FloatingBlock extends Block {
-    public static boolean floatInstantly;
-    private final boolean constantlyPowered;
+public class FloatingBlock extends FallingBlock {
+    private final boolean powered;
 
-    public FloatingBlock(FabricBlockSettings properties, boolean constantlyPowered) {
-        super(properties.ticksRandomly());
-        this.constantlyPowered = constantlyPowered;
-    }
-
-    public static boolean canFloatThrough(BlockState state) {
-        return state.isAir() || state.getBlock() == Blocks.FIRE || !state.getFluidState().isEmpty();
+    public FloatingBlock(boolean powered, FabricBlockSettings properties) {
+        super(properties);
+        this.powered = powered;
     }
 
     @Override
-    public void onPlaced(World worldIn, BlockPos posIn, BlockState stateIn, LivingEntity entityIn, ItemStack itemIn) {
-        worldIn.getBlockTickScheduler().schedule(posIn, this, this.getTickRate(worldIn));
+    public void onBlockAdded(BlockState state, World worldIn, BlockPos posIn, BlockState oldState, boolean notify) {
+        worldIn.getBlockTickScheduler().schedule(posIn, this, this.getFallDelay());
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facingIn, BlockState neighborIn, WorldAccess worldIn, BlockPos posIn, BlockPos neighborPosIn) {
-        worldIn.getBlockTickScheduler().schedule(posIn, this, this.getTickRate(worldIn));
-        // TODO: VERIFY
-        return super.getStateForNeighborUpdate(stateIn, facingIn, neighborIn, worldIn, posIn, neighborPosIn);
+    public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facingIn, BlockState facingState, WorldAccess worldIn, BlockPos posIn, BlockPos facingPosIn) {
+        worldIn.getBlockTickScheduler().schedule(posIn, this, this.getFallDelay());
+        return super.getStateForNeighborUpdate(stateIn, facingIn, facingState, worldIn, posIn, facingPosIn);
     }
 
     @Override
     public void scheduledTick(BlockState stateIn, ServerWorld worldIn, BlockPos posIn, Random randIn) {
-        if (!worldIn.isClient) {
-            if (this.constantlyPowered || worldIn.isReceivingRedstonePower(posIn)) {
-                this.checkFloatable(worldIn, posIn);
+        this.checkFloatable(worldIn, posIn);
+    }
+
+    private void checkFloatable(World worldIn, BlockPos pos) {
+        if ((worldIn.isAir(pos.up()) || canFallThrough(worldIn.getBlockState(pos.up()))) && (!this.powered || worldIn.isReceivingRedstonePower(pos))) {
+            if (!worldIn.isClient) {
+                FloatingBlockEntity floatingblockentity = new FloatingBlockEntity(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, worldIn.getBlockState(pos));
+                this.onStartFloating(floatingblockentity);
+                worldIn.spawnEntity(floatingblockentity);
             }
         }
     }
 
-    private void checkFloatable(World worldIn, BlockPos posIn) {
-        if (canFloatThrough(worldIn.getBlockState(posIn.up())) && posIn.getY() <= worldIn.getHeight()) {
-            if (!floatInstantly && worldIn.isRegionLoaded(posIn.add(-32, -32, -32), posIn.add(32, 32, 32))) {
-                if (!worldIn.isClient) {
-                    FloatingBlockEntity floatingBlock = new FloatingBlockEntity(worldIn, (double) posIn.getX() + 0.5D, posIn.getY(), (double) posIn.getZ() + 0.5D, worldIn.getBlockState(posIn));
-                    this.onStartFloating(floatingBlock);
-                    worldIn.spawnEntity(floatingBlock);
-                }
-            } else {
-                if (worldIn.getBlockState(posIn).getBlock() == this) {
-                    worldIn.isAir(posIn);
-                }
-                BlockPos blockpos;
-                for (blockpos = posIn.up(); canFloatThrough(worldIn.getBlockState(blockpos)) && blockpos.getY() <= worldIn.getHeight(); blockpos = blockpos.up()) {
-                }
-                if (blockpos.getY() < worldIn.getHeight()) {
-                    worldIn.setBlockState(blockpos.up(), this.getDefaultState());
-                }
-            }
-        }
+    protected void onStartFloating(FloatingBlockEntity entityIn) {
     }
 
-    public void onStartFloating(FloatingBlockEntity entityIn) {
+    public void onEndFloating(World worldIn, BlockPos posIn, BlockState floatingState, BlockState hitState) {
     }
 
-    public void onStopFloating(World worldIn, BlockPos posIn, BlockState stateIn, BlockState ceilingStateIn) {
+    public void onBroken(World worldIn, BlockPos pos) {
     }
 
-    public int getTickRate(WorldView worldIn) {
+    @Override
+    protected int getFallDelay() {
         return 2;
     }
 }

@@ -27,10 +27,6 @@ public abstract class MountableEntity extends AetherAnimalEntity {
         super(type, world);
     }
 
-    public MountableEntity(World world) {
-        super(EntityType.PIG, world);
-    }
-
     @Override
     protected void initDataTracker() {
         super.initDataTracker();

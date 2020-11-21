@@ -4,6 +4,7 @@ import com.aether.Aether;
 import com.aether.blocks.aercloud.*;
 import com.aether.blocks.decorative.*;
 import com.aether.blocks.natural.*;
+import com.aether.blocks.natural.ore.GravititeOreBlock;
 import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.items.AetherItemGroups;
 import com.aether.world.feature.tree.GoldenOakSaplingGenerator;
@@ -224,7 +225,7 @@ public class AetherBlocks {
         DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, FabricBlockSettings.copyOf(Blocks.WATER)) {
         }, buildingBlock());
         // TODO: Somebody fix pls
-        GRAVITITE_ORE = register("gravitite_ore", new Block(FabricBlockSettings.of(Material.STONE)), buildingBlock());
+        GRAVITITE_ORE = register("gravitite_ore", new GravititeOreBlock(), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
         HELLFIRE_STONE = register("hellfire_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());

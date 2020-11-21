@@ -1,7 +1,5 @@
 package com.aether.client.rendering.entity;
 
-import com.aether.api.AetherAPI;
-import com.aether.api.player.IPlayerAether;
 import com.aether.client.model.entity.MoaModel;
 import com.aether.entities.passive.MoaEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -10,7 +8,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 
@@ -24,25 +21,25 @@ public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
     }
 
     @Override
-    protected float getAnimationProgress(MoaEntity moa, float f) {
-        float f1 = moa.prevWingRotation + (moa.wingRotation - moa.prevWingRotation) * f;
-        float f2 = moa.prevDestPos + (moa.destPos - moa.prevDestPos) * f;
+    protected float getAnimationProgress(MoaEntity moa, float partialTicks) {
+        float f1 = moa.prevWingRotation + (moa.wingRotation - moa.prevWingRotation) * partialTicks;
+        float f2 = moa.prevDestPos + (moa.destPos - moa.prevDestPos) * partialTicks;
 
         return (MathHelper.sin(f1) + 1.0F) * f2;
     }
 
     @Override
-    protected void scale(MoaEntity moa, MatrixStack matrixStack, float f) {
+    protected void scale(MoaEntity moa, MatrixStack matrixStack, float partialTicks) {
         float moaScale = moa.isBaby() ? 1.0F : 1.8F;
 
-        GL11.glScalef(moaScale, moaScale, moaScale);
+        matrixStack.scale(moaScale, moaScale, moaScale);
     }
 
     @Override
     public Identifier getTexture(MoaEntity entity) {
 
         if (entity.hasPassengers() && entity.getPassengerList().get(0) instanceof PlayerEntity) {
-            IPlayerAether player = AetherAPI.get((PlayerEntity) entity.getPassengerList().get(0));
+//            IPlayerAether player = AetherAPI.get((PlayerEntity) entity.getPassengerList().get(0));
 
 //            if (player instanceof PlayerAether && !((PlayerAether) player).donationPerks.getMoaSkin().shouldUseDefualt())
 //                return null;
