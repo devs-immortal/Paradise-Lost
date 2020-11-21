@@ -20,11 +20,12 @@
       "the_aether:golden_aercloud"
     ],
     [
-      "the_aether:quicksoil"
+      "the_aether:quicksoil",
+      "the_aether:aether_lake",
+      "the_aether:aether_springs"
     ],
     [
-      "the_aether:skyroot_tree",
-      "the_aether:golden_oak_tree"
+      "the_aether:scattered_trees"
     ]
   ],
   "starts": [],

@@ -3,10 +3,7 @@ package com.aether.world.feature;
 import com.aether.Aether;
 import com.aether.world.feature.config.AercloudConfig;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 
 public class AetherFeatures {
     public static Feature<AercloudConfig> DEFAULT_AERCLOUD;
