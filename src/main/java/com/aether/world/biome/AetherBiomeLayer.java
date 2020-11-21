@@ -33,11 +33,11 @@ public enum AetherBiomeLayer implements InitLayer {
 //		Aether.LOGGER.log(Level.INFO, "Max: " + max +", Min: "+min + ", perlin: "+perlinNoise);
 
         /*if (Math.abs(perlinNoise) % 0.1D < 0.07D) {
-            return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(aab));
+            return AetherBiomeSource.layersBiomeRegistry.getRawId(AetherBiomeSource.layersBiomeRegistry.get(aab));
         }
         else {
-            return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(bba));
+            return AetherBiomeSource.layersBiomeRegistry.getRawId(AetherBiomeSource.layersBiomeRegistry.get(bba));
         }*/
-        return AetherBiomeProvider.layersBiomeRegistry.getRawId(AetherBiomeProvider.layersBiomeRegistry.get(AETHER_HIGHLANDS));
+        return AetherBiomeSource.layersBiomeRegistry.getRawId(AetherBiomeSource.layersBiomeRegistry.get(AETHER_HIGHLANDS));
     }
 }

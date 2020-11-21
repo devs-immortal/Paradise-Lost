@@ -16,6 +16,7 @@
     "render.CloudRendererMixin",
     "render.MinecraftClientMixin",
     "screen.EnchantmentScreenHandlerMixin",
+    "server.ServerChunkManagerMixin",
     "structure.FeatureMixin"
   ],
   "client": [

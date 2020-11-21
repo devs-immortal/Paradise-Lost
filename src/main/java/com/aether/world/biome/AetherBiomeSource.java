@@ -1,12 +1,14 @@
 package com.aether.world.biome;
 
 import com.aether.Aether;
+import com.aether.callback.ServerChunkManagerCallback;
 import com.aether.mixin.render.BiomeLayerSamplerAccessor;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.SharedConstants;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
@@ -21,35 +23,52 @@ import java.util.Map;
 import java.util.function.LongFunction;
 import java.util.stream.Collectors;
 
-public class AetherBiomeProvider extends BiomeSource {
+public class AetherBiomeSource extends BiomeSource {
     public static Registry<Biome> layersBiomeRegistry;
-    public static final Codec<AetherBiomeProvider> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            RegistryLookupCodec.of(Registry.BIOME_KEY).forGetter(source -> source.biomeRegistry)//,
-            //Codec.LONG.fieldOf("seed").stable().forGetter(source -> source.seed)
-    ).apply(instance, instance.stable(AetherBiomeProvider::new)));
-    private final BiomeLayerSampler biomeSampler;
+    public static final Codec<AetherBiomeSource> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            RegistryLookupCodec.of(Registry.BIOME_KEY).forGetter(source -> source.biomeRegistry),
+            Codec.LONG.fieldOf("seed").stable().forGetter(source -> source.seed)
+    ).apply(instance, instance.stable(AetherBiomeSource::new)));
+    private BiomeLayerSampler biomeSampler;
     private final Registry<Biome> biomeRegistry;
-    private final long seed;
+    private long seed;
+    private boolean isSetup = false;
 
-    public AetherBiomeProvider(Registry<Biome> biomeRegistry) {
+    public AetherBiomeSource(Registry<Biome> biomeRegistry) {
         this(biomeRegistry, 0L);
     }
 
-    public AetherBiomeProvider(Registry<Biome> biomeRegistry, long worldSeed) {
+    public AetherBiomeSource(Registry<Biome> biomeRegistry, long worldSeed) {
         super(biomeRegistry.getEntries().stream()
                 .filter(entry -> entry.getKey().getValue().getNamespace().equals(Aether.MOD_ID))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList()));
 
-        this.seed = worldSeed;
-        AetherBiomeLayer.setSeed(worldSeed);
         this.biomeRegistry = biomeRegistry;
-        AetherBiomeProvider.layersBiomeRegistry = biomeRegistry;
-        this.biomeSampler = buildWorldProcedure(worldSeed);
+        AetherBiomeSource.layersBiomeRegistry = biomeRegistry;
+        this.seed = worldSeed;
+
+        if (this.seed == 0L) {
+            Aether.LOG.warn("AetherBiomeSource has 0'd seed, using workaround...");
+            ServerChunkManagerCallback.EVENT.register(manager -> {
+                if (!isSetup && this.seed == 0L) {
+                    this.seed = ((ServerWorld) manager.getWorld()).getSeed();
+
+                    Aether.LOG.info("Using Seed for AetherBiomeSource -> " + this.seed);
+                    AetherBiomeLayer.setSeed(this.seed);
+                    this.biomeSampler = buildWorldProcedure(this.seed);
+
+                    isSetup = true;
+                }
+            });
+        } else {
+            AetherBiomeLayer.setSeed(this.seed);
+            this.biomeSampler = buildWorldProcedure(this.seed);
+        }
     }
 
     public static void registerBiomeProvider() {
-        Registry.register(Registry.BIOME_SOURCE, Aether.locate("biome_source"), AetherBiomeProvider.CODEC);
+        Registry.register(Registry.BIOME_SOURCE, Aether.locate("biome_source"), AetherBiomeSource.CODEC);
     }
 
     public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> stack(long seed, ParentedLayer parent, LayerFactory<T> incomingArea, int count, LongFunction<C> contextFactory) {
@@ -84,7 +103,7 @@ public class AetherBiomeProvider extends BiomeSource {
     @Override
     @Environment(EnvType.CLIENT)
     public BiomeSource withSeed(long seed) {
-        return new AetherBiomeProvider(this.biomeRegistry, seed);
+        return new AetherBiomeSource(this.biomeRegistry, seed);
     }
 
     @Override

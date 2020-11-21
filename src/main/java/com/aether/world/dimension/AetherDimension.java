@@ -2,7 +2,7 @@ package com.aether.world.dimension;
 
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
-import com.aether.world.biome.AetherBiomeProvider;
+import com.aether.world.biome.AetherBiomeSource;
 import com.aether.world.surfacebuilders.AetherSurfaceBuilders;
 import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
@@ -17,7 +17,7 @@ public class AetherDimension {
 
     public static void setupDimension() {
         AetherChunkGenerator.registerChunkGenerator();
-        AetherBiomeProvider.registerBiomeProvider();
+        AetherBiomeSource.registerBiomeProvider();
 
         AetherSurfaceBuilders.registerSurfaceBuilders();
 

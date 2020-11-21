@@ -2,10 +2,12 @@ package com.aether.world.dimension;
 
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
+import com.aether.callback.ServerChunkManagerCallback;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -30,33 +32,50 @@ public class AetherChunkGenerator extends ChunkGenerator {
     public static final Codec<AetherChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
-                    StructuresConfig.CODEC.fieldOf("structures").forGetter((ChunkGenerator::getStructuresConfig))//,
-                    //Codec.LONG.fieldOf("seed").stable().forGetter((obj) -> obj.seed)
+                    StructuresConfig.CODEC.fieldOf("structures").forGetter((ChunkGenerator::getStructuresConfig)),
+                    Codec.LONG.fieldOf("seed").stable().forGetter((obj) -> obj.seed)
             ).apply(instance, instance.stable(AetherChunkGenerator::new))
     );
-    protected final ChunkRandom random;
-    private final long seed;
-    private final OctavePerlinNoiseSampler perlinNoiseSampler;
-    private final OctavePerlinNoiseSampler extraPerlinNoiseSampler;
+    protected ChunkRandom random;
+    private long seed;
+    private OctavePerlinNoiseSampler perlinNoiseSampler;
+    private OctavePerlinNoiseSampler extraPerlinNoiseSampler;
     private double[] buffer;
 
+    private final IntStream perlinNoiseSet = IntStream.rangeClosed(-15, 0);
+    private final IntStream extraPerlinNoiseSet = IntStream.rangeClosed(-7, 0);
+    private boolean isSetup = false;
+
     public AetherChunkGenerator(BiomeSource biomeSource, StructuresConfig structuresConfig, long worldSeed) {
-        this(biomeSource, biomeSource, structuresConfig, worldSeed);
+        this(biomeSource.withSeed(worldSeed), biomeSource.withSeed(worldSeed), structuresConfig, worldSeed);
     }
 
     public AetherChunkGenerator(BiomeSource biomeSource, StructuresConfig structuresConfig) {
-        this(biomeSource, structuresConfig, 0L);
+        this(biomeSource.withSeed(0L), structuresConfig, 0L);
     }
 
     public AetherChunkGenerator(BiomeSource biomeSource, BiomeSource biomeSource2, StructuresConfig structuresConfig, long worldSeed) {
-        super(biomeSource, biomeSource2, structuresConfig, worldSeed);
-        IntStream perlinNoiseSet = IntStream.rangeClosed(-15, 0);
-        IntStream extraPerlinNoiseSet = IntStream.rangeClosed(-7, 0);
-
+        super(biomeSource.withSeed(worldSeed), biomeSource2.withSeed(worldSeed), structuresConfig, worldSeed);
         this.seed = worldSeed;
-        this.random = new ChunkRandom(worldSeed);
-        this.perlinNoiseSampler = new OctavePerlinNoiseSampler(this.random, perlinNoiseSet);
-        this.extraPerlinNoiseSampler = new OctavePerlinNoiseSampler(this.random, extraPerlinNoiseSet);
+        if (this.seed == 0L) {
+            Aether.LOG.warn("AetherChunkGenerator has 0'd seed, using workaround...");
+            ServerChunkManagerCallback.EVENT.register(manager -> {
+                if (!isSetup && this.seed == 0L) {
+                    this.seed = ((ServerWorld) manager.getWorld()).getSeed();
+
+                    Aether.LOG.info("Using Seed for AetherChunkGenerator -> " + this.seed);
+                    this.random = new ChunkRandom(this.seed);
+                    this.perlinNoiseSampler = new OctavePerlinNoiseSampler(this.random, perlinNoiseSet);
+                    this.extraPerlinNoiseSampler = new OctavePerlinNoiseSampler(this.random, extraPerlinNoiseSet);
+
+                    isSetup = true;
+                }
+            });
+        } else {
+            this.random = new ChunkRandom(this.seed);
+            this.perlinNoiseSampler = new OctavePerlinNoiseSampler(this.random, perlinNoiseSet);
+            this.extraPerlinNoiseSampler = new OctavePerlinNoiseSampler(this.random, extraPerlinNoiseSet);
+        }
     }
 
     public AetherChunkGenerator(BiomeSource biomeSource, BiomeSource biomeSource2, StructuresConfig structuresConfig) {
