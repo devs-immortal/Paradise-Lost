@@ -11,6 +11,6 @@ import java.util.Random;
 public class SkyrootSaplingGenerator extends SaplingGenerator {
     @Override
     protected @Nullable ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
-        return (@Nullable ConfiguredFeature<TreeFeatureConfig, ?>) AetherConfiguredFeatures.SKYROOT;
+        return AetherConfiguredFeatures.SKYROOT;
     }
 }
