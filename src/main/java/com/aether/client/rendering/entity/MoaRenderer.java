@@ -6,8 +6,6 @@ import com.aether.client.model.entity.MoaModel;
 import com.aether.entities.passive.MoaEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.feature.SaddleFeatureRenderer;
-import net.minecraft.client.render.entity.model.PigEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;

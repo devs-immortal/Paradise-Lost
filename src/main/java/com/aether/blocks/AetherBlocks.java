@@ -47,7 +47,7 @@ public class AetherBlocks {
 //    public static final Block BERRY_BUSH_STEM;
 //    public static final Block BLACK_DYED_AERCLOUD;
     public static final Block BLUE_AERCLOUD;
-//    public static final Block BLUE_DYED_AERCLOUD;
+    //    public static final Block BLUE_DYED_AERCLOUD;
     public static final Block BLUE_PORTAL;
     //    public static final Block BROWN_DYED_AERCLOUD;
     public static final Block CARVED_SLAB;
@@ -57,14 +57,14 @@ public class AetherBlocks {
     public static final Block CARVED_WALL;
     //    public static final Block CHEST_MIMIC;
     public static final Block COLD_AERCLOUD;
-//    public static final Block CYAN_DYED_AERCLOUD;
+    //    public static final Block CYAN_DYED_AERCLOUD;
 //    public static final Block DECORATED_HOLIDAY_LEAVES;
 //    public static final Block ENCHANTED_GRAVITITE;
 //    public static final Block ENCHANTER;
 //    public static final Block FREEZER;
     public static final Block GOLDEN_AERCLOUD;
     public static final Block GRAVITITE_ORE;
-//    public static final Block GREEN_DYED_AERCLOUD;
+    //    public static final Block GREEN_DYED_AERCLOUD;
 //    public static final Block GREY_DYED_AERCLOUD;
     public static final Block HELLFIRE_SLAB;
     public static final Block HELLFIRE_STAIRS;
@@ -114,7 +114,7 @@ public class AetherBlocks {
 //    public static final Block PILLAR;
 //    public static final Block PILLAR_TOP;
     public static final Block PINK_AERCLOUD;
-//    public static final Block PINK_DYED_AERCLOUD;
+    //    public static final Block PINK_DYED_AERCLOUD;
 //    public static final Block POTTED_PURPLE_FLOWER;
 //    public static final Block POTTED_WHITE_FLOWER;
 //    public static final Block PRESENT;
@@ -221,7 +221,8 @@ public class AetherBlocks {
 //        FREEZER = register("freezer", null);
         GOLDEN_AERCLOUD = register("golden_aercloud", new GoldenAercloudBlock(), buildingBlock());
         DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
-        DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, FabricBlockSettings.copyOf(Blocks.WATER)){}, buildingBlock());
+        DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, FabricBlockSettings.copyOf(Blocks.WATER)) {
+        }, buildingBlock());
         // TODO: Somebody fix pls
         GRAVITITE_ORE = register("gravitite_ore", new Block(FabricBlockSettings.of(Material.STONE)), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);

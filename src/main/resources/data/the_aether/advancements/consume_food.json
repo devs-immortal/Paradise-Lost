@@ -1,96 +1,96 @@
 {
-    "display": {
-        "title": {
-            "text": "Exotic Starter"
-        },
-        "description": {
-            "text": "Consume food that has come from the aether."
-        },
-        "icon": {
-            "item": "the_aether:white_apple"
-        },
-        "frame": "task",
-        "show_toast": true,
-        "announce_to_chat": true,
-        "hidden": false
+  "display": {
+    "title": {
+      "text": "Exotic Starter"
     },
-    "criteria": {
-        "whiteapple": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-                "item": {
-                    "item": "the_aether:white_apple"
-                }
-            }
-        },
-        "blueberry": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-                "item": {
-                    "item": "the_aether:blue_berry"
-                }
-            }
-        },
-        "eblueberry": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-                "item": {
-                    "item": "the_aether:enchanted_blueberry"
-                }
-            }
-        },
-        "bluegswet": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-                "item": {
-                    "item": "the_aether:blue_gummy_swet"
-                }
-            }
-        },
-        "goldgswet": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-                "item": {
-                    "item": "the_aether:golden_gummy_swet"
-                }
-            }
-        },
-        "healstone": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-                "item": {
-                    "item": "the_aether:healing_stone"
-                }
-            }
-        },
-        "candycane": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-                "item": {
-                    "item": "the_aether:candy_cane"
-                }
-            }
-        },
-        "gingyman": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-                "item": {
-                    "item": "the_aether:ginger_bread_man"
-                }
-            }
+    "description": {
+      "text": "Consume food that has come from the aether."
+    },
+    "icon": {
+      "item": "the_aether:white_apple"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "whiteapple": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "the_aether:white_apple"
         }
+      }
     },
-    "requirements": [
-        [
-            "whiteapple",
-            "blueberry",
-            "eblueberry",
-            "bluegswet",
-            "goldgswet",
-            "healstone",
-            "candycane",
-            "gingyman"
-        ]
-    ],
-    "parent": "the_aether:root"
+    "blueberry": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "the_aether:blue_berry"
+        }
+      }
+    },
+    "eblueberry": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "the_aether:enchanted_blueberry"
+        }
+      }
+    },
+    "bluegswet": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "the_aether:blue_gummy_swet"
+        }
+      }
+    },
+    "goldgswet": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "the_aether:golden_gummy_swet"
+        }
+      }
+    },
+    "healstone": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "the_aether:healing_stone"
+        }
+      }
+    },
+    "candycane": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "the_aether:candy_cane"
+        }
+      }
+    },
+    "gingyman": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "the_aether:ginger_bread_man"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "whiteapple",
+      "blueberry",
+      "eblueberry",
+      "bluegswet",
+      "goldgswet",
+      "healstone",
+      "candycane",
+      "gingyman"
+    ]
+  ],
+  "parent": "the_aether:root"
 }

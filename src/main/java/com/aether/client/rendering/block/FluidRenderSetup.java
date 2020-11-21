@@ -21,8 +21,7 @@ import java.util.function.Function;
 
 public class FluidRenderSetup {
 
-    public static void setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(final Fluid still, final Identifier textureFluidId)
-    {
+    public static void setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(final Fluid still, final Identifier textureFluidId) {
         final Identifier stillSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_still");
         final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_flow");
 
@@ -36,13 +35,11 @@ public class FluidRenderSetup {
         final Identifier fluidId = Registry.FLUID.getId(still);
         final Identifier listenerId = new Identifier(fluidId.getNamespace(), fluidId.getPath() + "_reload_listener");
 
-        final Sprite[] fluidSprites = { null, null };
+        final Sprite[] fluidSprites = {null, null};
 
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener()
-        {
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             @Override
-            public Identifier getFabricId()
-            {
+            public Identifier getFabricId() {
                 return listenerId;
             }
 
@@ -50,8 +47,7 @@ public class FluidRenderSetup {
              * Get the sprites from the block atlas when resources are reloaded
              */
             @Override
-            public void apply(ResourceManager resourceManager)
-            {
+            public void apply(ResourceManager resourceManager) {
                 final Function<Identifier, Sprite> atlas = MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
                 fluidSprites[0] = atlas.apply(stillSpriteId);
                 fluidSprites[1] = atlas.apply(flowingSpriteId);
@@ -59,17 +55,14 @@ public class FluidRenderSetup {
         });
 
         // The FluidRenderer gets the sprites and color from a FluidRenderHandler during rendering
-        final FluidRenderHandler renderHandler = new FluidRenderHandler()
-        {
+        final FluidRenderHandler renderHandler = new FluidRenderHandler() {
             @Override
-            public Sprite[] getFluidSprites(BlockRenderView view, BlockPos pos, FluidState state)
-            {
+            public Sprite[] getFluidSprites(BlockRenderView view, BlockPos pos, FluidState state) {
                 return fluidSprites;
             }
 
             @Override
-            public int getFluidColor(BlockRenderView view, BlockPos pos, FluidState state)
-            {
+            public int getFluidColor(BlockRenderView view, BlockPos pos, FluidState state) {
                 return 0xFFFFFF;
             }
         };
@@ -77,8 +70,7 @@ public class FluidRenderSetup {
         FluidRenderHandlerRegistry.INSTANCE.register(still, renderHandler);
     }
 
-    public static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId, final int color)
-    {
+    public static void setupFluidRendering(final Fluid still, final Fluid flowing, final Identifier textureFluidId, final int color) {
         final Identifier stillSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_still");
         final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_flow");
 
@@ -92,13 +84,11 @@ public class FluidRenderSetup {
         final Identifier fluidId = Registry.FLUID.getId(still);
         final Identifier listenerId = new Identifier(fluidId.getNamespace(), fluidId.getPath() + "_reload_listener");
 
-        final Sprite[] fluidSprites = { null, null };
+        final Sprite[] fluidSprites = {null, null};
 
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener()
-        {
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             @Override
-            public Identifier getFabricId()
-            {
+            public Identifier getFabricId() {
                 return listenerId;
             }
 
@@ -106,8 +96,7 @@ public class FluidRenderSetup {
              * Get the sprites from the block atlas when resources are reloaded
              */
             @Override
-            public void apply(ResourceManager resourceManager)
-            {
+            public void apply(ResourceManager resourceManager) {
                 final Function<Identifier, Sprite> atlas = MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
                 fluidSprites[0] = atlas.apply(stillSpriteId);
                 fluidSprites[1] = atlas.apply(flowingSpriteId);
@@ -115,17 +104,14 @@ public class FluidRenderSetup {
         });
 
         // The FluidRenderer gets the sprites and color from a FluidRenderHandler during rendering
-        final FluidRenderHandler renderHandler = new FluidRenderHandler()
-        {
+        final FluidRenderHandler renderHandler = new FluidRenderHandler() {
             @Override
-            public Sprite[] getFluidSprites(BlockRenderView view, BlockPos pos, FluidState state)
-            {
+            public Sprite[] getFluidSprites(BlockRenderView view, BlockPos pos, FluidState state) {
                 return fluidSprites;
             }
 
             @Override
-            public int getFluidColor(BlockRenderView view, BlockPos pos, FluidState state)
-            {
+            public int getFluidColor(BlockRenderView view, BlockPos pos, FluidState state) {
                 return color;
             }
         };

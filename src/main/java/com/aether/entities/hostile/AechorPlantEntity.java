@@ -39,6 +39,11 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         this.updatePosition(this.getX(), this.getY(), this.getZ());
     }
 
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D);
+    }
+
     public EntityDimensions getSizeForStatus(EntityPose entityPose_1) {
         return EntityDimensions.changing(0.75F + ((float) this.size * 0.125F), 0.5F + ((float) this.size * 0.075F));
     }
@@ -50,11 +55,6 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         this.goalSelector.add(4, new ProjectileAttackGoal(this, 0.0D, 30, 1.0F));
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal<LivingEntity>(this, LivingEntity.class, true));
-    }
-
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D);
     }
 
     @Override

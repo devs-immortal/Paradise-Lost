@@ -17,6 +17,14 @@ public class MoaEgg extends Item {
         super(new Item.Settings().maxCount(1).group(AetherItemGroups.Misc));
     }
 
+    public static ItemStack getStack(MoaType type) {
+        ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("moaType", AetherAPI.instance().getMoaId(type));
+        stack.setTag(tag);
+        return stack;
+    }
+
     @Override
     public ActionResult useOnBlock(ItemUsageContext contextIn) {
         if (contextIn.getPlayer().isCreative()) {
@@ -54,14 +62,6 @@ public class MoaEgg extends Item {
 
     public int getColor(ItemStack stack) {
         return this.getMoaType(stack).getMoaEggColor();
-    }
-
-    public static ItemStack getStack(MoaType type) {
-        ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
-        CompoundTag tag = new CompoundTag();
-        tag.putInt("moaType", AetherAPI.instance().getMoaId(type));
-        stack.setTag(tag);
-        return stack;
     }
 
     public MoaType getMoaType(ItemStack stack) {

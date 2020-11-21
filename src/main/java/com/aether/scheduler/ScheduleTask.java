@@ -11,6 +11,7 @@ public abstract class ScheduleTask {
     public int getDelay() {
         return Delay;
     }
+
     public boolean getPaused() {
         return Paused;
     }

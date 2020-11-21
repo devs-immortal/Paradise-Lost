@@ -1,31 +1,31 @@
 {
-    "display": {
-        "title": {
-            "text": "Shiny Sapling!"
-        },
-        "description": {
-            "text": "Plant a golden oak sapling."
-        },
-        "icon": {
-            "item": "the_aether:golden_oak_sapling"
-        },
-        "frame": "task",
-        "show_toast": true,
-        "announce_to_chat": true,
-        "hidden": false
+  "display": {
+    "title": {
+      "text": "Shiny Sapling!"
     },
-    "criteria": {
-        "placesapling": {
-            "trigger": "minecraft:placed_block",
-            "conditions": {
-                "block": "the_aether:golden_oak_sapling"
-            }
-        }
+    "description": {
+      "text": "Plant a golden oak sapling."
     },
-    "requirements": [
-        [
-            "placesapling"
-        ]
-    ],
-    "parent": "the_aether:shiny_planks"
+    "icon": {
+      "item": "the_aether:golden_oak_sapling"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "placesapling": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "the_aether:golden_oak_sapling"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "placesapling"
+    ]
+  ],
+  "parent": "the_aether:shiny_planks"
 }

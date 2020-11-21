@@ -4,8 +4,6 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Saddleable;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -43,6 +41,12 @@ public class PhygEntity extends SaddleMountEntity {
         this.canJumpMidAir = true;
     }
 
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, /*this.getSaddled() ? 20.0D : */10.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
+    }
+
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
@@ -53,12 +57,6 @@ public class PhygEntity extends SaddleMountEntity {
         this.goalSelector.add(5, new LookAroundGoal(this));
         this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));
         this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
-    }
-
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, /*this.getSaddled() ? 20.0D : */10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
     }
 
     @Override

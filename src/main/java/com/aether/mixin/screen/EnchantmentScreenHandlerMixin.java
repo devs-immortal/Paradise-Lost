@@ -1,12 +1,7 @@
 package com.aether.mixin.screen;
 
-import com.aether.blocks.AetherBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.screen.EnchantmentScreenHandler;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 //@SuppressWarnings("UnresolvedMixinReference")
 @Mixin(EnchantmentScreenHandler.class)

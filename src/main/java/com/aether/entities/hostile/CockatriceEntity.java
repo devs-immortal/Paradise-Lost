@@ -29,6 +29,13 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         this.stepHeight = 1.0F;
     }
 
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0D);
+    }
+
     @Override
     protected void initGoals() {
         super.initGoals();
@@ -41,13 +48,6 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         this.goalSelector.add(6, new LookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
-    }
-
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0D);
     }
 
     @Override

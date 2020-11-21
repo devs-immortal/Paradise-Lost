@@ -5,14 +5,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
@@ -32,20 +29,20 @@ public class PinkAercloudBlock extends BaseAercloudBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        if(!world.isClient() && entity instanceof LivingEntity) {
-            if(world.getTime() % 20 == 0) {
+        if (!world.isClient() && entity instanceof LivingEntity) {
+            if (world.getTime() % 20 == 0) {
                 ((LivingEntity) entity).heal(1F);
-                for(int i = world.getRandom().nextInt(3); i <= 5; i++) {
+                for (int i = world.getRandom().nextInt(3); i <= 5; i++) {
                     double offX = (world.getRandom().nextDouble() * entity.getWidth()) - (entity.getWidth() / 2);
                     double offZ = (world.getRandom().nextDouble() * entity.getWidth()) - (entity.getWidth() / 2);
                     double offY = world.getRandom().nextDouble() * entity.getHeight();
-                    ((ServerWorld) world).spawnParticles(pinkFluff, entity.getX() + offX, entity.getY() + offY, entity.getZ() + offZ, 3,0, 0, 0, 1);
+                    ((ServerWorld) world).spawnParticles(pinkFluff, entity.getX() + offX, entity.getY() + offY, entity.getZ() + offZ, 3, 0, 0, 0, 1);
                 }
             }
             double offX = (world.getRandom().nextDouble() * entity.getWidth()) - (entity.getWidth() / 2);
             double offZ = (world.getRandom().nextDouble() * entity.getWidth()) - (entity.getWidth() / 2);
             double offY = world.getRandom().nextDouble() * entity.getHeight();
-            ((ServerWorld) world).spawnParticles(pinkFluff, entity.getX() + offX, entity.getY() + offY, entity.getZ() + offZ, 1,0, 0, 0, 0.1);
+            ((ServerWorld) world).spawnParticles(pinkFluff, entity.getX() + offX, entity.getY() + offY, entity.getZ() + offZ, 1, 0, 0, 0, 0.1);
         }
     }
 

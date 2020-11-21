@@ -8,7 +8,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -122,6 +125,12 @@ public class SheepuffEntity extends AnimalEntity {
         return craftingInventory_1;
     }
 
+    public static DefaultAttributeContainer.Builder initAttributes() {
+        return AetherEntityTypes.getDefaultAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23000000417232513D);
+    }
+
     @Override
     protected void initGoals() {
         this.eatGrassGoal = new EatAetherGrassGoal(this);
@@ -146,12 +155,6 @@ public class SheepuffEntity extends AnimalEntity {
     public void tickMovement() {
         if (this.world.isClient) this.sheepTimer = Math.max(0, this.sheepTimer - 1);
         super.tickMovement();
-    }
-
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23000000417232513D);
     }
 
     @Override

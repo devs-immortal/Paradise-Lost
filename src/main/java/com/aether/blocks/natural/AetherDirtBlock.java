@@ -30,10 +30,10 @@ public class AetherDirtBlock extends Block {
         boolean isShovel = sup.get().anyMatch(stack -> ShovelItem.class.isAssignableFrom(stack.getItem().getClass()));
         boolean isHoe = sup.get().anyMatch(stack -> HoeItem.class.isAssignableFrom(stack.getItem().getClass()));
 
-        if(isShovel) {
+        if (isShovel) {
             world.setBlockState(pos, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
             return ActionResult.SUCCESS;
-        } else if(isHoe) {
+        } else if (isHoe) {
             world.setBlockState(pos, AetherBlocks.AETHER_FARMLAND.getDefaultState());
             return ActionResult.SUCCESS;
         }

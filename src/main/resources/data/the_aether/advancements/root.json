@@ -1,30 +1,30 @@
 {
-    "display": {
-        "title": {
-            "text": "It... It's beautiful...",
-            "color": "aqua",
-            "bold": false,
-            "italic": false
-        },
-        "description": {
-            "text": "Enter the aether dimension."
-        },
-        "icon": {
-            "item": "the_aether:aether_grass"
-        },
-        "frame": "goal",
-        "show_toast": true,
-        "announce_to_chat": true,
-        "hidden": false,
-        "background": "the_aether:textures/block/holystone.png"
+  "display": {
+    "title": {
+      "text": "It... It's beautiful...",
+      "color": "aqua",
+      "bold": false,
+      "italic": false
     },
-    "criteria": {
-        "enteraether": {
-            "trigger": "minecraft:changed_dimension",
-            "conditions": {
-                "from": "minecraft:overworld",
-                "to": "the_aether:the_aether"
-            }
-        }
+    "description": {
+      "text": "Enter the aether dimension."
+    },
+    "icon": {
+      "item": "the_aether:aether_grass"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "the_aether:textures/block/holystone.png"
+  },
+  "criteria": {
+    "enteraether": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "from": "minecraft:overworld",
+        "to": "the_aether:the_aether"
+      }
     }
+  }
 }

@@ -1,39 +1,39 @@
 {
-    "display": {
-        "title": {
-            "text": "What clouds are made of..."
-        },
-        "description": {
-            "text": "Description"
-        },
-        "icon": {
-            "item": "the_aether:holystone"
-        },
-        "frame": "task",
-        "show_toast": true,
-        "announce_to_chat": true,
-        "hidden": false
+  "display": {
+    "title": {
+      "text": "What clouds are made of..."
     },
-    "criteria": {
-        "hasholystone": {
-            "trigger": "minecraft:inventory_changed",
-            "conditions": {
-                "items": [
-                    {
-                        "item": "the_aether:holystone",
-                        "count": {
-                            "min": 1,
-                            "max": 1
-                        }
-                    }
-                ]
+    "description": {
+      "text": "Description"
+    },
+    "icon": {
+      "item": "the_aether:holystone"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "hasholystone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "the_aether:holystone",
+            "count": {
+              "min": 1,
+              "max": 1
             }
-        }
-    },
-    "requirements": [
-        [
-            "hasholystone"
+          }
         ]
-    ],
-    "parent": "the_aether:root"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hasholystone"
+    ]
+  ],
+  "parent": "the_aether:root"
 }

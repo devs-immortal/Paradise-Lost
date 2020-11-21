@@ -3,11 +3,8 @@ package com.aether.world.feature;
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
 import com.aether.world.feature.config.AercloudConfig;
-
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.MutableRegistry;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;

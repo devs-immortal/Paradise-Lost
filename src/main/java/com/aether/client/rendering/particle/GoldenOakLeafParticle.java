@@ -4,20 +4,18 @@ package com.aether.client.rendering.particle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.Random;
 import java.util.SplittableRandom;
 
 //I did not steal this from that one falling leaves mod, you have no proof!
 public class GoldenOakLeafParticle extends SpriteBillboardParticle {
 
-    private final float rotateFactor;
     private static final SplittableRandom random = new SplittableRandom();
+    private final float rotateFactor;
     private final double velocityComposite, velocityDown;
 
     protected GoldenOakLeafParticle(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, SpriteProvider provider) {
@@ -35,7 +33,7 @@ public class GoldenOakLeafParticle extends SpriteBillboardParticle {
         this.velocityComposite = g / 50;
         velocityDown = h;
 
-        this.rotateFactor = ((float)Math.random() - 0.5F) * 0.01F;
+        this.rotateFactor = ((float) Math.random() - 0.5F) * 0.01F;
         this.scale = (float) (0.08 + (random.nextDouble() / 10));
     }
 
@@ -47,7 +45,7 @@ public class GoldenOakLeafParticle extends SpriteBillboardParticle {
         if (this.age < 2) {
             this.velocityY = 0;
         }
-        if (this.age > this.maxAge - 1/0.06F) {
+        if (this.age > this.maxAge - 1 / 0.06F) {
             if (this.colorAlpha > 0.06F) {
                 this.colorAlpha -= 0.06F;
             } else {
@@ -56,7 +54,7 @@ public class GoldenOakLeafParticle extends SpriteBillboardParticle {
         }
         this.prevAngle = this.angle;
         if (!this.onGround && !this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
-            this.angle += Math.PI * Math.sin(this.rotateFactor * this.age)/2;
+            this.angle += Math.PI * Math.sin(this.rotateFactor * this.age) / 2;
         }
         if (this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
             this.velocityY = 0;

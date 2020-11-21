@@ -7,7 +7,6 @@ import com.aether.entities.passive.FlyingCowEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.SaddleFeatureRenderer;
-import net.minecraft.client.render.entity.model.PigEntityModel;
 import net.minecraft.util.Identifier;
 
 public class FlyingCowRenderer extends MobEntityRenderer<FlyingCowEntity, FlyingCowModel> {
