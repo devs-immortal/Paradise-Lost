@@ -29,6 +29,7 @@
   "mixins": [
     "the_aether.mixins.json"
   ],
+  "accessWidener": "the_aether.accesswidener",
   "entrypoints": {
     "main": [
       "com.aether.Aether"

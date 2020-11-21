@@ -8,7 +8,6 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 public class CockatriceRenderer extends MobEntityRenderer<CockatriceEntity, CockatriceModel> {
 
@@ -28,7 +27,7 @@ public class CockatriceRenderer extends MobEntityRenderer<CockatriceEntity, Cock
 
     @Override
     protected void scale(CockatriceEntity cockatrice, MatrixStack matrices, float f) {
-        GL11.glScalef(1.8F, 1.8F, 1.8F);
+        matrices.scale(1.8F, 1.8F, 1.8F);
     }
 
     @Override
