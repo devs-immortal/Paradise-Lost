@@ -21,8 +21,8 @@
   ],
   "client": [
     "block.EnchantingTableBlockMixin",
-    "client.MapRendererMixin",
     "client.BackgroundRendererMixin",
+    "client.MapRendererMixin",
     "client.WorldRendererMixin"
   ],
   "injectors": {

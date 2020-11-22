@@ -29,8 +29,8 @@ public class AetherBiomeSource extends BiomeSource {
             RegistryLookupCodec.of(Registry.BIOME_KEY).forGetter(source -> source.biomeRegistry),
             Codec.LONG.fieldOf("seed").stable().forGetter(source -> source.seed)
     ).apply(instance, instance.stable(AetherBiomeSource::new)));
-    private BiomeLayerSampler biomeSampler;
     private final Registry<Biome> biomeRegistry;
+    private BiomeLayerSampler biomeSampler;
     private long seed;
     private boolean isSetup = false;
 

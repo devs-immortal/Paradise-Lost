@@ -36,14 +36,13 @@ public class AetherChunkGenerator extends ChunkGenerator {
                     Codec.LONG.fieldOf("seed").stable().forGetter((obj) -> obj.seed)
             ).apply(instance, instance.stable(AetherChunkGenerator::new))
     );
+    private final IntStream perlinNoiseSet = IntStream.rangeClosed(-15, 0);
+    private final IntStream extraPerlinNoiseSet = IntStream.rangeClosed(-7, 0);
     protected ChunkRandom random;
     private long seed;
     private OctavePerlinNoiseSampler perlinNoiseSampler;
     private OctavePerlinNoiseSampler extraPerlinNoiseSampler;
     private double[] buffer;
-
-    private final IntStream perlinNoiseSet = IntStream.rangeClosed(-15, 0);
-    private final IntStream extraPerlinNoiseSet = IntStream.rangeClosed(-7, 0);
     private boolean isSetup = false;
 
     public AetherChunkGenerator(BiomeSource biomeSource, StructuresConfig structuresConfig, long worldSeed) {
