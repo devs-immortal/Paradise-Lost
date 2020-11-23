@@ -1,10 +1,10 @@
-package com.aether.items.materials;
+package com.aether.items.resources;
 
 import com.aether.items.AetherItemGroups;
 import net.minecraft.item.Item;
 
-public class GoldenAmber extends Item {
-    public GoldenAmber() {
+public class GoldAerdust extends Item {
+    public GoldAerdust() {
         super(new Settings().group(AetherItemGroups.Materials));
     }
 }
