@@ -28,6 +28,7 @@ import net.minecraft.world.gen.chunk.VerticalBlockSample;
 
 import java.util.stream.IntStream;
 
+@Deprecated
 public class AetherChunkGenerator extends ChunkGenerator {
     public static final Codec<AetherChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(

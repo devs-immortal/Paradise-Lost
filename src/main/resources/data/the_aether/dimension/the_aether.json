@@ -6,7 +6,8 @@
       "type": "the_aether:biome_source",
       "seed": 0
     },
-    "type": "the_aether:chunk_generator",
+    "type": "minecraft:noise",
+    "settings": "the_aether:aether_noise",
     "structures": {
       "structures": {
       }
