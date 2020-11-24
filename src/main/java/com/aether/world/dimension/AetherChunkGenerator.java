@@ -85,27 +85,27 @@ public class AetherChunkGenerator extends ChunkGenerator {
         Registry.register(Registry.CHUNK_GENERATOR, Aether.locate("chunk_generator"), AetherChunkGenerator.CODEC);
     }
 
-    private double sampleNoise(int int_1, int int_2, int int_3, double double_1, double double_2, double double_3, double double_4) {
-        double double_5 = 0.0D;
-        double double_6 = 0.0D;
-        double double_7 = 0.0D;
-        double double_8 = 1.0D;
+    private double sampleNoise(int x, int y, int z, double horizontalScale, double verticalScale, double horizontalStretch, double verticalStretch) {
+        double start = 0.0D;
+        double end = 0.0D;
+        double delta = 0.0D;
+        double offset = 1.0D;
 
-        for (int int_4 = 0; int_4 < 16; ++int_4) {
-            double double_9 = OctavePerlinNoiseSampler.maintainPrecision((double) int_1 * double_1 * double_8);
-            double double_10 = OctavePerlinNoiseSampler.maintainPrecision((double) int_2 * double_2 * double_8);
-            double double_11 = OctavePerlinNoiseSampler.maintainPrecision((double) int_3 * double_1 * double_8);
-            double double_12 = double_2 * double_8;
-            double_5 += this.perlinNoiseSampler.getOctave(int_4).sample(double_9, double_10, double_11, double_12, (double) int_2 * double_12) / double_8;
-            double_6 += this.perlinNoiseSampler.getOctave(int_4).sample(double_9, double_10, double_11, double_12, (double) int_2 * double_12) / double_8;
+        for (int octave = 0; octave < 16; ++octave) {
+            double sampleX = OctavePerlinNoiseSampler.maintainPrecision((double) x * horizontalScale * offset);
+            double sampleY = OctavePerlinNoiseSampler.maintainPrecision((double) y * verticalScale * offset);
+            double sampleZ = OctavePerlinNoiseSampler.maintainPrecision((double) z * horizontalScale * offset);
+            double double_12 = verticalScale * offset;
+            start += this.perlinNoiseSampler.getOctave(octave).sample(sampleX, sampleY, sampleZ, double_12, (double) y * double_12) / offset;
+            end += this.perlinNoiseSampler.getOctave(octave).sample(sampleX, sampleY, sampleZ, double_12, (double) y * double_12) / offset;
 
-            if (int_4 < 8)
-                double_7 += this.extraPerlinNoiseSampler.getOctave(int_4).sample(OctavePerlinNoiseSampler.maintainPrecision((double) int_1 * double_3 * double_8), OctavePerlinNoiseSampler.maintainPrecision((double) int_2 * double_4 * double_8), OctavePerlinNoiseSampler.maintainPrecision((double) int_3 * double_3 * double_8), double_4 * double_8, (double) int_2 * double_4 * double_8) / double_8;
+            if (octave < 8)
+                delta += this.extraPerlinNoiseSampler.getOctave(octave).sample(OctavePerlinNoiseSampler.maintainPrecision((double) x * horizontalStretch * offset), OctavePerlinNoiseSampler.maintainPrecision((double) y * verticalStretch * offset), OctavePerlinNoiseSampler.maintainPrecision((double) z * horizontalStretch * offset), verticalStretch * offset, (double) y * verticalStretch * offset) / offset;
 
-            double_8 /= 2.0D;
+            offset /= 2.0D;
         }
 
-        return MathHelper.clampedLerp(double_5 / 512.0D, double_6 / 512.0D, (double_7 / 10.0D + 1.0D) / 2.0D);
+        return MathHelper.clampedLerp(start / 512.0D, end / 512.0D, (delta / 10.0D + 1.0D) / 2.0D);
     }
 
     @Override
@@ -120,22 +120,22 @@ public class AetherChunkGenerator extends ChunkGenerator {
 
     @Override
     public void buildSurface(ChunkRegion region, Chunk chunk) {
-        ChunkPos chunkPos_1 = chunk.getPos();
-        int int_1 = chunkPos_1.x;
-        int int_2 = chunkPos_1.z;
-        ChunkRandom class_2919_1 = new ChunkRandom();
-        class_2919_1.setTerrainSeed(int_1, int_2);
+        ChunkPos chunkPos = chunk.getPos();
+        int chunkX = chunkPos.x;
+        int chunkZ = chunkPos.z;
+        ChunkRandom chunkRandom = new ChunkRandom();
+        chunkRandom.setTerrainSeed(chunkX, chunkZ);
         ChunkPos chunkPos_2 = chunk.getPos();
-        int int_3 = chunkPos_2.getStartX();
-        int int_4 = chunkPos_2.getStartZ();
-        BiomeArray biomes_1 = chunk.getBiomeArray();
+        int startX = chunkPos_2.getStartX();
+        int startZ = chunkPos_2.getStartZ();
+        BiomeArray biomeArray = chunk.getBiomeArray();
 
         for (int int_5 = 0; int_5 < 16; ++int_5) {
             for (int int_6 = 0; int_6 < 16; ++int_6) {
-                int int_7 = int_3 + int_5;
-                int int_8 = int_4 + int_6;
+                int biomeX = startX + int_5;
+                int biomeZ = startZ + int_6;
 
-                biomes_1.getBiomeForNoiseGen(int_7, int_8, 0).buildSurface(class_2919_1, chunk, int_7, int_8, 0, 0.0D, AetherBlocks.HOLYSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), 0, region.getSeed());
+                biomeArray.getBiomeForNoiseGen(biomeX, biomeZ, 0).buildSurface(chunkRandom, chunk, biomeX, biomeZ, 0, 0.0D, AetherBlocks.HOLYSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), 0, region.getSeed());
             }
         }
     }

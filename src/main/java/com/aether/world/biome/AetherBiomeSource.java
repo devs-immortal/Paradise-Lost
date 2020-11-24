@@ -87,12 +87,7 @@ public class AetherBiomeSource extends BiomeSource {
     }
 
     public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(LongFunction<C> contextFactory) {
-        LayerFactory<T> layer = AetherBiomeLayer.INSTANCE.create(contextFactory.apply(1L));
-        //layer = AetherBiomePillarLayer.INSTANCE.create(contextFactory.apply(1008L), layer);
-        //layer = AetherBiomeScalePillarLayer.INSTANCE.create(contextFactory.apply(1055L), layer);
-        //layer = ScaleLayer.FUZZY.create(contextFactory.apply(2003L), layer);
-        //layer = ScaleLayer.FUZZY.create(contextFactory.apply(2523L), layer);
-        return layer;
+        return AetherBiomeLayer.INSTANCE.create(contextFactory.apply(1L));
     }
 
     @Override

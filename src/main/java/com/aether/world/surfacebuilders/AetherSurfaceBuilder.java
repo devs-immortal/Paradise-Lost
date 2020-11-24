@@ -18,39 +18,39 @@ public class AetherSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
     }
 
     @Override
-    public void generate(Random var1, Chunk var2, Biome var3, int var4, int var5, int var6, double var7, BlockState var9, BlockState var10, int var11, long var12, TernarySurfaceConfig var14) {
-        BlockState blockState_6 = AetherBlocks.AETHER_GRASS.getDefaultState();
-        BlockState blockState_7 = AetherBlocks.AETHER_DIRT.getDefaultState();
-        BlockPos.Mutable blockPos$Mutable_1 = new BlockPos.Mutable();
+    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig surfaceBlocks) {
+        BlockState topState = AetherBlocks.AETHER_GRASS.getDefaultState();
+        BlockState subState = AetherBlocks.AETHER_DIRT.getDefaultState();
+        BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable();
 
         int int_5 = -1;
-        int int_6 = (int) (3.0D + var1.nextDouble() * 0.25D);
+        int int_6 = (int) (3.0D + random.nextDouble() * 0.25D);
 
-        for (int int_9 = 128; int_9 >= 0; --int_9) {
-            blockPos$Mutable_1.set(var4, int_9, var5);
+        for (int yLevel = 128; yLevel >= 0; --yLevel) {
+            mutableBlockPos.set(x, yLevel, z);
 
-            BlockState blockState_8 = var2.getBlockState(blockPos$Mutable_1);
+            BlockState chunkBlockState = chunk.getBlockState(mutableBlockPos);
 
-            if (blockState_8.isAir()) {
+            if (chunkBlockState.isAir()) {
                 int_5 = -1;
-            } else if (blockState_8.getBlock() == var9.getBlock()) {
+            } else if (chunkBlockState.getBlock() == defaultBlock.getBlock()) {
                 if (int_5 == -1) {
                     if (int_6 <= 0) {
-                        blockState_6 = Blocks.AIR.getDefaultState();
-                        blockState_7 = var9;
+                        topState = Blocks.AIR.getDefaultState();
+                        subState = defaultBlock;
                     }
 
                     int_5 = int_6;
 
-                    if (int_9 >= 0) {
-                        var2.setBlockState(blockPos$Mutable_1, blockState_6, false);
+                    if (yLevel >= 0) {
+                        chunk.setBlockState(mutableBlockPos, topState, false);
                     } else {
-                        var2.setBlockState(blockPos$Mutable_1, blockState_7, false);
+                        chunk.setBlockState(mutableBlockPos, subState, false);
                     }
                 } else if (int_5 > 0) {
                     --int_5;
 
-                    var2.setBlockState(blockPos$Mutable_1, blockState_7, false);
+                    chunk.setBlockState(mutableBlockPos, subState, false);
                 }
             }
         }
