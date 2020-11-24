@@ -6,12 +6,24 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:golden_aercloud"
-        }
-      ],
-      "conditions": [
+          "name": "the_aether:gold_aerdust"
+        },
         {
-          "condition": "minecraft:survives_explosion"
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "the_aether:gold_aercloud",
+          "conditions": [
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "enchantments": [
+                  {
+                    "enchantment": "minecraft:silk_touch"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
     }

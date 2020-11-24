@@ -8,7 +8,7 @@ import com.aether.items.accessories.ItemAccessory;
 import com.aether.items.armor.*;
 import com.aether.items.dungeon.DungeonKey;
 import com.aether.items.food.*;
-import com.aether.items.materials.*;
+import com.aether.items.resources.*;
 import com.aether.items.staff.CloudStaff;
 import com.aether.items.staff.NatureStaff;
 import com.aether.items.tools.*;
@@ -61,9 +61,10 @@ public class AetherItems {
     public static final Item QUICKSOIL_VIAL, AERCLOUD_VIAL;
     public static final Item AECHOR_PLANT_SPAWN_EGG, CHEST_MIMIC_SPAWN_EGG,
             COCKATRICE_SPAWN_EGG, AERBUNNY_SPAWN_EGG, FLYING_COW_SPAWN_EGG,
-            MOA_SPAWN_EGG, PHYG_SPAWN_EGG, SHEEPUFF_SPAWN_EGG;
+            MOA_SPAWN_EGG, PHYG_SPAWN_EGG, SHEEPUFF_SPAWN_EGG, GOLD_AERDUST, FROZEN_AERDUST;
 
     public static final Rarity AETHER_LOOT = EnumHelper.addRarity("aether_loot", Formatting.GREEN);
+
 
     static {
         // Resources
@@ -73,6 +74,8 @@ public class AetherItems {
         AECHOR_PETAL = register("aechor_petal", new AechorPetal());
         SWET_BALL = register("swet_ball", new SwetBall());
         SKYROOT_STICK = register("skyroot_stick", new SkyrootStick());
+        GOLD_AERDUST = register("gold_aerdust", new GoldAerdust());
+        FROZEN_AERDUST = register("frozen_aerdust", new FrozenAerdust());
 
         // Tools
         SKYROOT_SHOVEL = register("skyroot_shovel", new AetherShovel(AetherTiers.Skyroot, 1.5F, -3.0F));
@@ -148,7 +151,15 @@ public class AetherItems {
         CANDY_CANE = register("candy_cane", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
         GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
 
-        // Misc
+        // Misc + Materials
+        GOLDEN_FEATHER = register("golden_feather", new ItemAccessory(AccessoryTypes.MISC, AETHER_LOOT));
+        REGENERATION_STONE = register("regeneration_stone", new ItemAccessory(AccessoryTypes.MISC, AETHER_LOOT));
+        IRON_BUBBLE = register("iron_bubble", new ItemAccessory(AccessoryTypes.MISC, AETHER_LOOT));
+        LIFE_SHARD = register("life_shard", new LifeShard());
+        CLOUD_STAFF = register("cloud_staff", new CloudStaff());
+        NATURE_STAFF = register("nature_staff", new NatureStaff());
+        MOA_EGG = register("moa_egg", new MoaEgg());
+        LORE_BOOK = register("lore_book", new BookOfLore((new Item.Settings()).maxCount(1).group(AetherItemGroups.Misc)));
         SKYROOT_BUCKET = register("skyroot_bucket", new SkyrootBucket());
         SKYROOT_WATER_BUCKET = register("skyroot_water_bucket", new SkyrootBucket(Fluids.WATER, SKYROOT_BUCKET));
         SKYROOT_MILK_BUCKET = register("skyroot_milk_bucket", new SkyrootBucket(SKYROOT_BUCKET));
@@ -163,6 +174,9 @@ public class AetherItems {
         BRONZE_KEY = register("bronze_key", new DungeonKey());
         SILVER_KEY = register("silver_key", new DungeonKey());
         GOLDEN_KEY = register("golden_key", new DungeonKey());
+
+        // Materials
+
 
         // Weapons
         GOLDEN_DART = register("golden_dart", new Dart(Rarity.COMMON));
@@ -223,21 +237,6 @@ public class AetherItems {
         SWET_CAPE = register("swet_cape", new ItemAccessory("swet", AccessoryTypes.CAPE, AETHER_LOOT));
         AGILITY_CAPE = register("agility_cape", new ItemAccessory("agility", AccessoryTypes.CAPE, AETHER_LOOT));
         INVISIBILITY_CAPE = register("invisibility_cape", new ItemAccessory(AccessoryTypes.CAPE, AETHER_LOOT));
-
-        // More misc I guess
-        GOLDEN_FEATHER = register("golden_feather", new ItemAccessory(AccessoryTypes.MISC, AETHER_LOOT));
-        REGENERATION_STONE = register("regeneration_stone", new ItemAccessory(AccessoryTypes.MISC, AETHER_LOOT));
-        IRON_BUBBLE = register("iron_bubble", new ItemAccessory(AccessoryTypes.MISC, AETHER_LOOT));
-
-        LIFE_SHARD = register("life_shard", new LifeShard());
-
-        CLOUD_STAFF = register("cloud_staff", new CloudStaff());
-        NATURE_STAFF = register("nature_staff", new NatureStaff());
-
-        MOA_EGG = register("moa_egg", new MoaEgg());
-
-        LORE_BOOK = register("lore_book", new BookOfLore((new Item.Settings()).maxCount(1).group(AetherItemGroups.Misc)));
-
         // Some music, I think the original ones are copyrighted but whatever
         // I'll make a few -d17
         //TODO: Add AetherSounds
