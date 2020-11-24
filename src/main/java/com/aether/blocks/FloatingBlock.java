@@ -60,5 +60,3 @@ public class FloatingBlock extends FallingBlock {
         return 2;
     }
 }
-
-

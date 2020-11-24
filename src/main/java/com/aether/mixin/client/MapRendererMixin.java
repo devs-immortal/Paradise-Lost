@@ -36,16 +36,12 @@ public class MapRendererMixin {
                 } else {
                     int color = MaterialColor.COLORS[int_4 / 4].getRenderColor(int_4 & 3);
 
-                    if (isAether) {
-                        color = AetherMap.getColor(MaterialColor.COLORS[int_4 / 4], int_4 & 3);
-                    }
+                    if (isAether) color = AetherMap.getColor(MaterialColor.COLORS[int_4 / 4], int_4 & 3);
 
                     this.texture.getImage().setPixelColor(int_2, int_1, color);
                 }
             }
         }
-
         this.texture.upload();
     }
-
 }

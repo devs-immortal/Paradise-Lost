@@ -185,5 +185,4 @@ public class FlyingCowEntity extends SaddleMountEntity {
     protected double getMountJumpStrength() {
         return 5.0D;
     }
-
 }

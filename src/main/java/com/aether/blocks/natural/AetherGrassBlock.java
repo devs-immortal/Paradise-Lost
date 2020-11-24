@@ -67,23 +67,19 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
 
             for (int j = 0; j < i / 16; ++j) {
                 blockPos2 = blockPos2.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-                if (!world.getBlockState(blockPos2.down()).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) {
+                if (!world.getBlockState(blockPos2.down()).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2))
                     continue label48;
-                }
             }
 
             BlockState blockState2 = world.getBlockState(blockPos2);
-            if (blockState2.isOf(blockState.getBlock()) && random.nextInt(10) == 0) {
+            if (blockState2.isOf(blockState.getBlock()) && random.nextInt(10) == 0)
                 ((Fertilizable) blockState.getBlock()).grow(world, random, blockPos2, blockState2);
-            }
 
             if (blockState2.isAir()) {
                 BlockState blockState4;
                 if (random.nextInt(8) == 0) {
                     List<ConfiguredFeature<?, ?>> list = world.getBiome(blockPos2).getGenerationSettings().getFlowerFeatures();
-                    if (list.isEmpty()) {
-                        continue;
-                    }
+                    if (list.isEmpty()) continue;
 
                     ConfiguredFeature<?, ?> configuredFeature = list.get(0);
                     FlowerFeature<RandomPatchFeatureConfig> flowerFeature = (FlowerFeature<RandomPatchFeatureConfig>) configuredFeature.feature;
@@ -92,9 +88,7 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
                     blockState4 = blockState;
                 }
 
-                if (blockState4.canPlaceAt(world, blockPos2)) {
-                    world.setBlockState(blockPos2, blockState4, 3);
-                }
+                if (blockState4.canPlaceAt(world, blockPos2)) world.setBlockState(blockPos2, blockState4, 3);
             }
         }
     }

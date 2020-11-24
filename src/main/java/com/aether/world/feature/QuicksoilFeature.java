@@ -26,33 +26,26 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
 
                     if (world.getBlockState(newPos).isAir() && world.getBlockState(newPos.up()).getBlock() == AetherBlocks.AETHER_GRASS && world.getBlockState(newPos.up(2)).isAir()) {
                         n += 128;
-
                         spawnPos = new BlockPos(newPos.getX(), n, newPos.getZ());
                     }
                 }
             }
         }
 
-        if (spawnPos.getY() < 128) {
-            return false;
-        }
+        if (spawnPos.getY() < 128) return false;
 
         spawnPos = spawnPos.down(128);
 
-        if (world.getBlockState(spawnPos.up()).isAir()) {
-            return false;
-        }
+        if (world.getBlockState(spawnPos.up()).isAir()) return false;
 
         for (int x = spawnPos.getX() - 3; x < spawnPos.getX() + 4; x++) {
             for (int z = spawnPos.getZ() - 3; z < spawnPos.getZ() + 4; z++) {
                 BlockPos newPos = new BlockPos(x, spawnPos.getY(), z);
 
-                if (world.getBlockState(newPos).isAir() && ((x - spawnPos.getX()) * (x - spawnPos.getX()) + (z - spawnPos.getZ()) * (z - spawnPos.getZ())) < 12) {
+                if (world.getBlockState(newPos).isAir() && ((x - spawnPos.getX()) * (x - spawnPos.getX()) + (z - spawnPos.getZ()) * (z - spawnPos.getZ())) < 12)
                     this.setBlockState(world, newPos, AetherBlocks.QUICKSOIL.getDefaultState());
-                }
             }
         }
-
         return false;
     }
 }

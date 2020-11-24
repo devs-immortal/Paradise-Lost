@@ -40,10 +40,7 @@ public class AetherPortalBlock extends CustomPortalBlock {
             f = (double) pos.getZ() + 0.5D + 0.25D * (double) k;
             j = random.nextFloat() * 2.0F * (float) k;
         }
-        if (world.getRandom().nextInt(6) != 0) {
-            world.addParticle(ParticleTypes.DRIPPING_WATER, d, e, f, g, h, j);
-        } else
-            world.addParticle(ParticleTypes.CLOUD, d, e, f, 0, 0, 0);
-
+        if (world.getRandom().nextInt(6) != 0) world.addParticle(ParticleTypes.DRIPPING_WATER, d, e, f, g, h, j);
+        else world.addParticle(ParticleTypes.CLOUD, d, e, f, 0, 0, 0);
     }
 }

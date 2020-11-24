@@ -32,7 +32,7 @@ public class AxeItemMixin {
         AETHER_STRIPPED_BLOCKS.put(AetherBlocks.CRYSTAL_LOG, AetherBlocks.STRIPPED_CRYSTAL_LOG);
         AETHER_STRIPPED_BLOCKS.put(AetherBlocks.GOLDEN_OAK_LOG, AetherBlocks.STRIPPED_GOLDEN_OAK_LOG);
         AETHER_STRIPPED_BLOCKS.put(AetherBlocks.SKYROOT_LOG, AetherBlocks.STRIPPED_SKYROOT_LOG);
-        Block block = (Block) AETHER_STRIPPED_BLOCKS.get(blockState.getBlock());
+        Block block = AETHER_STRIPPED_BLOCKS.get(blockState.getBlock());
 
         if (block != null) {
             PlayerEntity playerEntity = context.getPlayer();
@@ -42,7 +42,6 @@ public class AxeItemMixin {
                 if (playerEntity != null)
                     context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
             }
-
             cir.setReturnValue(ActionResult.success(world.isClient));
         }
     }

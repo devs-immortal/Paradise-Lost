@@ -45,9 +45,8 @@ public class BlueberryBushBlock extends PlantBlock {
     }
 
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (state.get(RIPE) && entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
+        if (state.get(RIPE) && entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE)
             entity.slowMovement(state, new Vec3d(0.800000011920929D, 0.75D, 0.800000011920929D));
-        }
     }
 
     @Override
@@ -67,9 +66,8 @@ public class BlueberryBushBlock extends PlantBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.getLightLevel(pos) >= 8 && world.getRandom().nextInt(world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 12 : 26) == 0) {
+        if (world.getLightLevel(pos) >= 8 && world.getRandom().nextInt(world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 12 : 26) == 0)
             world.setBlockState(pos, state.with(RIPE, true));
-        }
     }
 
     @Override

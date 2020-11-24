@@ -24,9 +24,6 @@ public class MapStateMixin {
     public void addDimensionData(ItemStack itemStack_1, BlockView blockView_1, PlayerEntity playerEntity_1, CallbackInfoReturnable<Packet<?>> ci) {
         Packet<?> packetData = ci.getReturnValue();
 
-        if (packetData instanceof MapDimensionData) {
-            ((MapDimensionData) packetData).setDimension(this.dimension);
-        }
+        if (packetData instanceof MapDimensionData) ((MapDimensionData) packetData).setDimension(this.dimension);
     }
-
 }

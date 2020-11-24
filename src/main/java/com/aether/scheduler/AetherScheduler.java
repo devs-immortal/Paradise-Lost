@@ -9,7 +9,7 @@ public class AetherScheduler {
     public static void Remove(int id) {
         try {
             Tasks.remove(id);
-        } catch (Exception any) {
+        } catch (Exception ignored) {
 
         }
     }
@@ -21,7 +21,7 @@ public class AetherScheduler {
     public static void Pause(int id) {
         try {
             Tasks.get(id).Paused = true;
-        } catch (Exception any) {
+        } catch (Exception ignored) {
 
         }
     }

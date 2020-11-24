@@ -27,19 +27,12 @@ public class CropBlockMixin {
                 if (blockState_1.getBlock() == AetherBlocks.AETHER_FARMLAND) {
                     extraSpeed = 1.0F;
 
-                    if (blockState_1.get(FarmlandBlock.MOISTURE) > 0) {
-                        extraSpeed = 3.0F;
-                    }
+                    if (blockState_1.get(FarmlandBlock.MOISTURE) > 0) extraSpeed = 3.0F;
                 }
-
-                if (rangeX != 0 || rangeZ != 0) {
-                    extraSpeed /= 4.0F;
-                }
-
+                if (rangeX != 0 || rangeZ != 0) extraSpeed /= 4.0F;
                 newSpeed += extraSpeed;
             }
         }
-
         ci.setReturnValue(newSpeed);
     }
 

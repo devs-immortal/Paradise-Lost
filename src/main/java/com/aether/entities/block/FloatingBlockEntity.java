@@ -119,9 +119,7 @@ public class FloatingBlockEntity extends Entity {
                 }
             }
 
-            if (!this.hasNoGravity()) {
-                this.setVelocity(this.getVelocity().add(0.0D, 0.04D, 0.0D));
-            }
+            if (!this.hasNoGravity()) this.setVelocity(this.getVelocity().add(0.0D, 0.04D, 0.0D));
 
             this.move(MovementType.SELF, this.getVelocity());
             if (!this.world.isClient) {
@@ -145,9 +143,8 @@ public class FloatingBlockEntity extends Entity {
 
                 if ((!this.verticalCollision || this.onGround) && !flag1) {
                     if (!this.world.isClient && this.floatTime > 100 && (blockPos.getY() < 1 || blockPos.getY() > this.world.getHeight()) || this.floatTime > 600) {
-                        if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS) && blockPos.getY() <= this.world.getHeight()) {
+                        if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS) && blockPos.getY() <= this.world.getHeight())
                             this.dropItem(block);
-                        }
 
                         this.remove();
                     }
@@ -160,14 +157,12 @@ public class FloatingBlockEntity extends Entity {
                             boolean flag2 = blockState.canReplace(new AutomaticItemPlacementContext(this.world, blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
                             boolean flag4 = this.floatTile.canPlaceAt(this.world, blockPos);
                             if (flag2 && flag4) {
-                                if (this.floatTile.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockPos).getFluid() == Fluids.WATER) {
+                                if (this.floatTile.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockPos).getFluid() == Fluids.WATER)
                                     this.floatTile = this.floatTile.with(Properties.WATERLOGGED, true);
-                                }
 
                                 if (this.world.setBlockState(blockPos, this.floatTile, 3)) {
-                                    if (block instanceof FloatingBlock) {
+                                    if (block instanceof FloatingBlock)
                                         ((FloatingBlock) block).onEndFloating(this.world, blockPos, this.floatTile, blockState);
-                                    }
 
                                     if (this.blockEntityData != null && this.floatTile.getBlock().hasBlockEntity()) {
                                         BlockEntity blockEntity = this.world.getBlockEntity(blockPos);
@@ -176,9 +171,8 @@ public class FloatingBlockEntity extends Entity {
 
                                             for (String keyName : this.blockEntityData.getKeys()) {
                                                 Tag tag = this.blockEntityData.get(keyName);
-                                                if (!"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName)) {
+                                                if (!"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName))
                                                     compoundTag.put(keyName, tag.copy());
-                                                }
                                             }
 
                                             blockEntity.fromTag(floatTile, compoundTag);
@@ -211,17 +205,13 @@ public class FloatingBlockEntity extends Entity {
                 boolean flag = this.floatTile.isIn(BlockTags.ANVIL);
                 DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
 
-                for (Entity entity : list) {
+                for (Entity entity : list)
                     entity.damage(damagesource, Math.min(MathHelper.floor(i * this.floatHurtAmount), this.floatHurtMax));
-                }
 
                 if (flag && this.random.nextFloat() < 0.05F + i * 0.05F) {
                     BlockState blockstate = AnvilBlock.getLandingState(this.floatTile);
-                    if (blockstate == null) {
-                        this.destroyedOnLanding = true;
-                    } else {
-                        this.floatTile = blockstate;
-                    }
+                    if (blockstate == null) this.destroyedOnLanding = true;
+                    else this.floatTile = blockstate;
                 }
             }
         }
@@ -236,9 +226,7 @@ public class FloatingBlockEntity extends Entity {
         compound.putBoolean("HurtEntities", this.hurtEntities);
         compound.putFloat("FallHurtAmount", this.floatHurtAmount);
         compound.putInt("FallHurtMax", this.floatHurtMax);
-        if (this.blockEntityData != null) {
-            compound.put("TileEntityData", this.blockEntityData);
-        }
+        if (this.blockEntityData != null) compound.put("TileEntityData", this.blockEntityData);
     }
 
     @Override
@@ -253,17 +241,11 @@ public class FloatingBlockEntity extends Entity {
             this.hurtEntities = true;
         }
 
-        if (compound.contains("DropItem", 99)) {
-            this.dropItem = compound.getBoolean("DropItem");
-        }
+        if (compound.contains("DropItem", 99)) this.dropItem = compound.getBoolean("DropItem");
 
-        if (compound.contains("TileEntityData", 10)) {
-            this.blockEntityData = compound.getCompound("TileEntityData");
-        }
+        if (compound.contains("TileEntityData", 10)) this.blockEntityData = compound.getCompound("TileEntityData");
 
-        if (this.floatTile.isAir()) {
-            this.floatTile = AetherBlocks.GRAVITITE_ORE.getDefaultState();
-        }
+        if (this.floatTile.isAir()) this.floatTile = AetherBlocks.GRAVITITE_ORE.getDefaultState();
     }
 
     @Environment(EnvType.CLIENT)

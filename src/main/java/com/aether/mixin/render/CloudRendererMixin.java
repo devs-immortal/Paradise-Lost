@@ -112,9 +112,7 @@ public final class CloudRendererMixin {
                 this.cloudsDirty = false;
                 Tessellator tessellator = Tessellator.getInstance();
                 BufferBuilder bufferBuilder = tessellator.getBuffer();
-                if (this.cloudsBuffer != null) {
-                    this.cloudsBuffer.close();
-                }
+                if (this.cloudsBuffer != null) this.cloudsBuffer.close();
 
                 this.cloudsBuffer = new VertexBuffer(VertexFormats.POSITION_TEXTURE_COLOR_NORMAL);
                 this.renderClouds(bufferBuilder, posX, renderHeight, posZ, cloudColor);

@@ -5,13 +5,10 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 
 public class AercloudConfig implements FeatureConfig {
 
-    private BlockState state;
-
-    private boolean isFlat;
-
-    private int amount;
-
-    private int y;
+    private final BlockState state;
+    private final boolean isFlat;
+    private final int amount;
+    private final int y;
 
     public AercloudConfig(BlockState state, boolean isFlat, int amount, int y) {
         this.state = state;

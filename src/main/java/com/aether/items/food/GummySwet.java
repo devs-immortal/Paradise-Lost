@@ -25,7 +25,6 @@ public class GummySwet extends Item {
             playerIn.heal(playerIn.getMaxHealth());
             return new TypedActionResult<>(ActionResult.SUCCESS, heldItem);
         }
-
         return new TypedActionResult<>(ActionResult.PASS, heldItem);
     }
 }

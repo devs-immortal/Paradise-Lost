@@ -11,5 +11,4 @@ public class GravititeOreBlock extends FloatingBlock {
     public GravititeOreBlock() {
         super(false, FabricBlockSettings.of(Material.STONE).strength(5.0F).sounds(BlockSoundGroup.STONE).breakByTool(FabricToolTags.PICKAXES, 2));
     }
-
 }

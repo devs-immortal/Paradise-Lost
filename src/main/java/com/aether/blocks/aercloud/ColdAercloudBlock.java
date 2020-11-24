@@ -19,9 +19,7 @@ public class ColdAercloudBlock extends BaseAercloudBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        if (entity.getVelocity().y <= 0.0F) {
-            entity.setVelocity(entity.getVelocity().multiply(1.0D, 0.005D, 1.0D));
-        }
+        if (entity.getVelocity().y <= 0.0F) entity.setVelocity(entity.getVelocity().multiply(1.0D, 0.005D, 1.0D));
     }
 
     @Override

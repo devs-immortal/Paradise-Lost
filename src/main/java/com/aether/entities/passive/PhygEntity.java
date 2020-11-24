@@ -153,5 +153,4 @@ public class PhygEntity extends SaddleMountEntity {
     public Identifier getLootTableId() {
         return null;//AetherLootTableList.ENTITIES_PHYG;
     }
-
 }
