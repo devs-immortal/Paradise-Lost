@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class AmbrosiumShard extends Item {
 
     public AmbrosiumShard() {
-        super(new Settings().group(AetherItemGroups.Materials));
+        super(new Settings().group(AetherItemGroups.Resources));
     }
 
     @Override

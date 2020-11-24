@@ -31,8 +31,8 @@ public class AetherItemGroups {
             Aether.locate("aether_accessories"),
             () -> new ItemStack(AetherItems.GRAVITITE_GLOVES));
 
-    public static final ItemGroup Materials = FabricItemGroupBuilder.build(
-            Aether.locate("aether_materials"),
+    public static final ItemGroup Resources = FabricItemGroupBuilder.build(
+            Aether.locate("aether_resources"),
             () -> new ItemStack(AetherItems.AMBROSIUM_SHARD));
 
     public static final ItemGroup Misc = FabricItemGroupBuilder.build(

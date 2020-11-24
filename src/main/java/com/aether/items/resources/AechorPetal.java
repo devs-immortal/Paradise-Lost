@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 
 public class AechorPetal extends Item {
     public AechorPetal() {
-        super(new Settings().group(AetherItemGroups.Materials));
+        super(new Settings().group(AetherItemGroups.Resources));
     }
 }
