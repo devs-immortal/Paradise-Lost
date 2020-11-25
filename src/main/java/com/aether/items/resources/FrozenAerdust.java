@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 
 public class FrozenAerdust extends Item {
     public FrozenAerdust() {
-        super(new Settings().group(AetherItemGroups.Materials));
+        super(new Settings().group(AetherItemGroups.Resources));
     }
 }

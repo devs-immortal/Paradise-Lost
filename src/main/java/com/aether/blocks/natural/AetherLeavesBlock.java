@@ -37,11 +37,8 @@ public class AetherLeavesBlock extends LeavesBlock {
 
                 if (speed == 0 || world.getTime() % 3000 == 0) {
                     speed = world.getRandom().nextInt(4);
-                    if (world.isRaining()) {
-                        speed += 1;
-                    } else if (world.isThundering()) {
-                        speed += 2;
-                    }
+                    if (world.isRaining()) speed += 1;
+                    else if (world.isThundering()) speed += 2;
                 }
 
                 for (int leaf = 0; leaf < 9; leaf++) {

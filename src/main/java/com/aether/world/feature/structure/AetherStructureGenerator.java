@@ -21,21 +21,13 @@ import java.util.Random;
 public abstract class AetherStructureGenerator extends StructurePiece {
 
     public int chance;
-
     public BlockState airState = Blocks.AIR.getDefaultState(), blockState, extraBlockState;
-
     public boolean replaceAir, replaceSolid;
-
     public StructureWorldAccess world;
-
     public Random random;
-
     public BlockBox structureBoundingBox;
-
     public ChunkGenerator chunkGenerator;
-
     public ChunkPos chunkPos;
-
     private int startX, startY, startZ;
 
     public AetherStructureGenerator(StructurePieceType piece, CompoundTag compound) {
@@ -53,9 +45,7 @@ public abstract class AetherStructureGenerator extends StructurePiece {
         this.extraBlockState = extraBlockState;
         this.chance = chance;
 
-        if (this.chance < 1) {
-            this.chance = 1;
-        }
+        if (this.chance < 1) this.chance = 1;
     }
 
     public void setStructureOffset(int x, int y, int z) {
@@ -68,9 +58,8 @@ public abstract class AetherStructureGenerator extends StructurePiece {
         for (int lineX = x; lineX < x + xRange; lineX++) {
             Block block = this.getBlockState(lineX + this.startX, y + this.startY, z + this.startZ).getBlock();
 
-            if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR)) {
+            if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR))
                 this.setBlock(lineX + this.startX, y + this.startY, z + this.startZ);
-            }
         }
     }
 
@@ -78,9 +67,8 @@ public abstract class AetherStructureGenerator extends StructurePiece {
         for (int lineY = y; lineY < y + yRange; lineY++) {
             Block block = this.getBlockState(x + this.startX, lineY + this.startY, z + this.startZ).getBlock();
 
-            if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR)) {
+            if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR))
                 this.setBlock(x + this.startX, lineY + this.startY, z + this.startZ);
-            }
         }
     }
 
@@ -88,9 +76,8 @@ public abstract class AetherStructureGenerator extends StructurePiece {
         for (int lineZ = z; lineZ < z + zRange; lineZ++) {
             Block block = this.getBlockState(x + this.startX, y + this.startY, lineZ + this.startZ).getBlock();
 
-            if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR)) {
+            if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR))
                 this.setBlock(x + this.startX, y + this.startY, lineZ + this.startZ);
-            }
         }
     }
 
@@ -99,9 +86,8 @@ public abstract class AetherStructureGenerator extends StructurePiece {
             for (int lineZ = z; lineZ < z + zRange; lineZ++) {
                 Block block = this.getBlockState(x + this.startX, lineY + this.startY, lineZ + this.startZ).getBlock();
 
-                if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR)) {
+                if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR))
                     this.setBlock(x + this.startX, lineY + this.startY, lineZ + this.startZ);
-                }
             }
         }
     }
@@ -111,9 +97,8 @@ public abstract class AetherStructureGenerator extends StructurePiece {
             for (int lineZ = z; lineZ < z + zRange; lineZ++) {
                 Block block = this.getBlockState(lineX + this.startX, y + this.startY, lineZ + this.startZ).getBlock();
 
-                if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR)) {
+                if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR))
                     this.setBlock(lineX + this.startX, y + this.startY, lineZ + this.startZ);
-                }
             }
         }
     }
@@ -123,9 +108,8 @@ public abstract class AetherStructureGenerator extends StructurePiece {
             for (int lineY = y; lineY < y + yRange; lineY++) {
                 Block block = this.getBlockState(lineX + this.startX, lineY + this.startY, z + this.startZ).getBlock();
 
-                if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR)) {
+                if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR))
                     this.setBlock(lineX + this.startX, lineY + this.startY, z + this.startZ);
-                }
             }
         }
     }
@@ -173,9 +157,8 @@ public abstract class AetherStructureGenerator extends StructurePiece {
                 for (int lineZ = z; lineZ < z + zRange; lineZ++) {
                     Block block = this.getBlockState(lineX + this.startX, lineY + this.startY, lineZ + this.startZ).getBlock();
 
-                    if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR)) {
+                    if ((this.replaceAir || block != Blocks.AIR) && (this.replaceSolid || block == Blocks.AIR))
                         this.setBlock(lineX + this.startX, lineY + this.startY, lineZ + this.startZ);
-                    }
                 }
             }
         }
@@ -187,9 +170,8 @@ public abstract class AetherStructureGenerator extends StructurePiece {
         for (int lineX = x; lineX < x + xRange; lineX++) {
             for (int lineY = y; lineY < y + yRange; lineY++) {
                 for (int lineZ = z; lineZ < z + zRange; lineZ++) {
-                    if (this.getBlockState(lineX + this.startX, lineY + this.startY, lineZ + this.startZ).getBlock() == Blocks.AIR) {
+                    if (this.getBlockState(lineX + this.startX, lineY + this.startY, lineZ + this.startZ).getBlock() == Blocks.AIR)
                         flag = false;
-                    }
                 }
             }
         }
@@ -203,9 +185,8 @@ public abstract class AetherStructureGenerator extends StructurePiece {
         for (int lineX = x; lineX < x + xRange; lineX++) {
             for (int lineY = y; lineY < y + yRange; lineY++) {
                 for (int lineZ = z; lineZ < z + zRange; lineZ++) {
-                    if (this.getBlockState(lineX + this.startX, lineY + this.startY, lineZ + this.startZ).getBlock() != Blocks.AIR) {
+                    if (this.getBlockState(lineX + this.startX, lineY + this.startY, lineZ + this.startZ).getBlock() != Blocks.AIR)
                         flag = false;
-                    }
                 }
             }
         }
@@ -215,7 +196,6 @@ public abstract class AetherStructureGenerator extends StructurePiece {
 
     public BlockEntity getTileEntityFromPosWithOffset(int x, int y, int z) {
         BlockPos blockpos = new BlockPos(this.getActualX(x, z), this.getActualY(y), this.getActualZ(x, z));
-
         return !this.structureBoundingBox.contains(blockpos) ? null : this.world.getBlockEntity(blockpos);
     }
 
@@ -238,7 +218,6 @@ public abstract class AetherStructureGenerator extends StructurePiece {
     public void setBlockWithOffset(int x, int y, int z) {
         if (this.chance == 0) {
             this.setBlock(x + this.startX, y + this.startY, z + this.startZ, this.blockState);
-
             return;
         }
         if (this.random.nextInt(this.chance) == 0) {
@@ -251,7 +230,6 @@ public abstract class AetherStructureGenerator extends StructurePiece {
     public void setBlock(int x, int y, int z) {
         if (this.chance == 0) {
             this.setBlock(x, y, z, this.blockState);
-
             return;
         }
         if (this.random.nextInt(this.chance) == 0) {
@@ -271,14 +249,11 @@ public abstract class AetherStructureGenerator extends StructurePiece {
 
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity = ((LivingEntity) entity);
-
                 livingEntity.heal(livingEntity.getMaxHealth());
             }
 
             if (!this.world.isClient()) // Not taking chances ~Kino
-            {
                 this.world.spawnEntity(entity);
-            }
 
             return true;
         }
@@ -312,7 +287,5 @@ public abstract class AetherStructureGenerator extends StructurePiece {
 
     @Override
     protected void toNbt(CompoundTag compound) {
-
     }
-
 }

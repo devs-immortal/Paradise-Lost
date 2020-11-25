@@ -138,9 +138,7 @@ public class EnumHelper {
         for (Class<?>[] lookup : map) {
             if (lookup[0] == enumType) {
                 Class<?>[] paramTypes = new Class<?>[lookup.length - 1];
-                if (paramTypes.length > 0) {
-                    System.arraycopy(lookup, 1, paramTypes, 0, paramTypes.length);
-                }
+                if (paramTypes.length > 0) System.arraycopy(lookup, 1, paramTypes, 0, paramTypes.length);
                 return addEnum(enumType, enumName, paramTypes, paramValues);
             }
         }
@@ -162,9 +160,7 @@ public class EnumHelper {
     @Nullable
     private static <T extends Enum<?>> T addEnum(boolean test, final Class<T> enumType, @Nullable String enumName, final Class<?>[] paramTypes, @Nullable Object[] paramValues)
             throws Exception {
-        if (!isSetup) {
-            setup();
-        }
+        if (!isSetup) setup();
 
         Field valuesField = null;
         Field[] fields = enumType.getDeclaredFields();
@@ -206,9 +202,7 @@ public class EnumHelper {
             for (String line : lines)
                 Aether.LOG.fatal(line);
 
-            if (test) {
-                throw new Exception("Could not find $VALUES field for enum: " + enumType.getName());
-            }
+            if (test) throw new Exception("Could not find $VALUES field for enum: " + enumType.getName());
             return null;
         }
 
@@ -220,9 +214,8 @@ public class EnumHelper {
             } catch (Exception e) {
                 ex = e;
             }
-            if (ctr == null || ex != null) {
+            if (ctr == null || ex != null)
                 throw new Exception(String.format("Could not find constructor for Enum %s", enumType.getName()), ex);
-            }
             return null;
         }
 

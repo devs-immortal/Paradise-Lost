@@ -17,7 +17,6 @@ import net.minecraft.world.WorldView;
 
 public class DenseAercloudFluid extends FlowableFluid {
 
-
     @Override
     public Fluid getFlowing() {
         return AetherBlocks.DENSE_AERCLOUD_STILL;
@@ -35,7 +34,6 @@ public class DenseAercloudFluid extends FlowableFluid {
 
     @Override
     protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
-
     }
 
     @Override

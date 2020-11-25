@@ -15,7 +15,8 @@ import java.util.Random;
 
 public class AmbrosiumTorchBlock extends TorchBlock {
     public AmbrosiumTorchBlock() {
-        super(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).breakByHand(true).ticksRandomly().luminance(15).sounds(BlockSoundGroup.WOOD), new DustParticleEffect(1f, 0.67f, 0.392f, 0.7f));
+        super(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).breakByHand(true).ticksRandomly().luminance(15).sounds(BlockSoundGroup.WOOD),
+                new DustParticleEffect(1f, 0.67f, 0.392f, 0.7f));
     }
 
     @Environment(EnvType.CLIENT)

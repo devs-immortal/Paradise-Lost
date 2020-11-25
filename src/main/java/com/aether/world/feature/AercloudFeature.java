@@ -44,15 +44,13 @@ public class AercloudFeature extends Feature<AercloudConfig> {
                         BlockPos pos = new BlockPos(x, y, z);
 
                         if (worldIn.isAir(pos)) {
-                            if (Math.abs(x - position.getX()) + Math.abs(y - position.getY()) + Math.abs(z - position.getZ()) < 4 * configIn.cloudModifier() + randIn.nextInt(2)) {
+                            if (Math.abs(x - position.getX()) + Math.abs(y - position.getY()) + Math.abs(z - position.getZ()) < 4 * configIn.cloudModifier() + randIn.nextInt(2))
                                 this.setBlockState(worldIn, pos, configIn.getCloudState());
-                            }
                         }
                     }
                 }
             }
         }
-
         return true;
     }
 }

@@ -6,9 +6,7 @@ import net.minecraft.server.world.ServerChunkManager;
 
 public interface ServerChunkManagerCallback {
     Event<ServerChunkManagerCallback> EVENT = EventFactory.createArrayBacked(ServerChunkManagerCallback.class, (listeners) -> (manager) -> {
-        for (ServerChunkManagerCallback listener : listeners) {
-            listener.handle(manager);
-        }
+        for (ServerChunkManagerCallback listener : listeners) listener.handle(manager);
     });
 
     void handle(ServerChunkManager manager);

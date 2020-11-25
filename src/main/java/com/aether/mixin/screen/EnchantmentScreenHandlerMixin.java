@@ -13,4 +13,3 @@ public abstract class EnchantmentScreenHandlerMixin {
 //        return blockState.getBlock().is(block) || blockState.getBlock().is(AetherBlocks.SKYROOT_BOOKSHELF);
 //    }
 }
-

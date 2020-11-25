@@ -265,21 +265,15 @@ public class AetherChunkGenerator extends ChunkGenerator {
                             for (int k2 = 0; k2 < 8; k2++) {
                                 BlockState filler = Blocks.AIR.getDefaultState();
 
-                                if (d15 > 0.0D) {
-                                    filler = AetherBlocks.HOLYSTONE.getDefaultState();
-                                }
+                                if (d15 > 0.0D) filler = AetherBlocks.HOLYSTONE.getDefaultState();
 
-                                if (type.getBlockPredicate().test(filler)) {
-                                    return (l1 + k1 * 4) + 1;
-                                }
+                                if (type.getBlockPredicate().test(filler)) return (l1 + k1 * 4) + 1;
 
                                 d15 += d16;
                             }
-
                             d10 += d12;
                             d11 += d13;
                         }
-
                         d1 += d5;
                         d2 += d6;
                         d3 += d7;

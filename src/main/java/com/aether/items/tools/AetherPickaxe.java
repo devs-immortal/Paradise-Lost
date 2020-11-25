@@ -23,5 +23,4 @@ public class AetherPickaxe extends PickaxeItem implements IAetherTool {
     public AetherTiers getItemMaterial() {
         return this.material;
     }
-
 }

@@ -42,14 +42,10 @@ public class AetherSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 
                     int_5 = int_6;
 
-                    if (yLevel >= 0) {
-                        chunk.setBlockState(mutableBlockPos, topState, false);
-                    } else {
-                        chunk.setBlockState(mutableBlockPos, subState, false);
-                    }
+                    if (yLevel >= 0) chunk.setBlockState(mutableBlockPos, topState, false);
+                    else chunk.setBlockState(mutableBlockPos, subState, false);
                 } else if (int_5 > 0) {
                     --int_5;
-
                     chunk.setBlockState(mutableBlockPos, subState, false);
                 }
             }

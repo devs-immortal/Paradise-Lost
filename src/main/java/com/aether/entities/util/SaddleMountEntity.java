@@ -43,7 +43,6 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-
         this.dataTracker.startTracking(SADDLED, false);
     }
 
@@ -114,10 +113,6 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
 
     public void saddle(@Nullable SoundCategory sound) {
         //this.items.setStack(0, new ItemStack(Items.SADDLE));
-        if (sound != null) {
-            this.world.playSoundFromEntity(null, this, SoundEvents.ENTITY_PIG_SADDLE, sound, 0.5F, 1.0F);
-        }
-
+        if (sound != null) this.world.playSoundFromEntity(null, this, SoundEvents.ENTITY_PIG_SADDLE, sound, 0.5F, 1.0F);
     }
-
 }

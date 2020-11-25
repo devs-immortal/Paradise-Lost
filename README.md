@@ -1,4 +1,4 @@
-# The Aether
+# The Aether Reborn
 [![Code license (GNU GPL 3.0)](https://img.shields.io/badge/code%20license-GNU%20GPLv3-green.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Asset license (Unlicensed)](https://img.shields.io/badge/assets%20license-All%20Rights%20Reserved-red.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Github all releases](https://img.shields.io/github/downloads/kalucky0/The-Aether/total.svg?logoColor=FFFFFF&logo=github)](https://github.com/kalucky0/The-Aether/releases/)

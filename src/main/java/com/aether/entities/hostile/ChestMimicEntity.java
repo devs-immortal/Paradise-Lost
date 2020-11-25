@@ -78,5 +78,4 @@ public class ChestMimicEntity extends HostileEntity {
     protected SoundEvent getDeathSound() {
         return SoundEvents.BLOCK_CHEST_CLOSE;
     }
-
 }

@@ -60,10 +60,9 @@ public class SkyrootBucket extends Item {
         if (hitResult == null) {
             return new TypedActionResult<>(ActionResult.PASS, currentStack);
         } else if (hitResult.getType() == HitResult.Type.BLOCK) {
-            BlockHitResult blockHitResult = hitResult;
-            BlockPos hitPos = blockHitResult.getBlockPos();
+            BlockPos hitPos = hitResult.getBlockPos();
 
-            if (worldIn.canPlayerModifyAt(playerIn, hitPos) && playerIn.canPlaceOn(hitPos, blockHitResult.getSide(), currentStack)) {
+            if (worldIn.canPlayerModifyAt(playerIn, hitPos) && playerIn.canPlaceOn(hitPos, hitResult.getSide(), currentStack)) {
                 if (this.containedBlock == Fluids.EMPTY) {
                     BlockState hitState = worldIn.getBlockState(hitPos);
 
@@ -82,9 +81,9 @@ public class SkyrootBucket extends Item {
                     return new TypedActionResult<>(ActionResult.FAIL, currentStack);
                 } else {
                     BlockState hitBlockState = worldIn.getBlockState(hitPos);
-                    BlockPos adjustedPos = hitBlockState.getBlock() instanceof FluidFillable ? hitPos : blockHitResult.getBlockPos().offset(blockHitResult.getSide());
+                    BlockPos adjustedPos = hitBlockState.getBlock() instanceof FluidFillable ? hitPos : hitResult.getBlockPos().offset(hitResult.getSide());
 
-                    this.placeLiquid(playerIn, worldIn, adjustedPos, blockHitResult);
+                    this.placeLiquid(playerIn, worldIn, adjustedPos, hitResult);
 
                     playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                     return new TypedActionResult<>(ActionResult.SUCCESS, this.emptyBucket(currentStack, playerIn));

@@ -69,9 +69,7 @@ public class AetherArmor extends GeoArmorItem implements IAnimatable {
         //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.potato_armor.new", true));
 
         //If the living entity is an armorstand just play the animation nonstop
-        if (livingEntity instanceof ArmorStandEntity) {
-            return PlayState.CONTINUE;
-        }
+        if (livingEntity instanceof ArmorStandEntity) return PlayState.CONTINUE;
 
         //The entity is a player, so we want to only play if the player is wearing the full set of armor
         else if (livingEntity instanceof ClientPlayerEntity) {
