@@ -201,7 +201,7 @@ public class AetherItems {
         AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x9fc3f7, 0x29a793, new Item.Settings().group(AetherItemGroups.Misc)));
         CHEST_MIMIC_SPAWN_EGG = null;
         COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, new Item.Settings().group(AetherItemGroups.Misc)));
-        AERBUNNY_SPAWN_EGG = null;
+        AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0x9fc3f7, 0x3d2338, new Item.Settings().group(AetherItemGroups.Misc)));
         FLYING_COW_SPAWN_EGG = null;
         MOA_SPAWN_EGG = null;
         PHYG_SPAWN_EGG = null;
