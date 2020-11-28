@@ -4,38 +4,31 @@
   "sea_level": 0,
   "disable_mob_generation": false,
   "structures": {
-    "stronghold": {
-      "distance": 0,
-      "count": 0,
-      "spread": 0
-    },
     "structures": {}
   },
   "noise": {
+    "density_factor": 0.0,
+    "density_offset": 0.0,
+    "simplex_surface_noise": true,
     "top_slide": {
-      "target": -1,
-      "size": 31,
-      "offset": 1
+      "target": -30,
+      "size": 100,
+      "offset": -36
     },
     "bottom_slide": {
-      "target": -1,
+      "target": -30,
       "size": 7,
-      "offset": 1
+      "offset": 2
     },
-    "sampling": {
-      "xz_scale": 2,
-      "y_scale": 1,
-      "xz_factor": 80,
-      "y_factor": 160
-    },
-    "size_vertical": 2,
     "size_horizontal": 2,
-    "height": 256,
-    "density_factor": -30,
-    "density_offset": 1,
-    "simplex_surface_noise": true,
-    "island_noise_override": true,
-    "random_density_offset": true
+    "size_vertical": 1,
+    "height": 128,
+    "sampling": {
+      "xz_scale": 2.0,
+      "y_scale": 1.0,
+      "xz_factor": 80.0,
+      "y_factor": 160.0
+    }
   },
   "default_block": {
     "Name": "the_aether:holystone",
