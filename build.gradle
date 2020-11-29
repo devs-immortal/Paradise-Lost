@@ -80,7 +80,7 @@ dependencies {
     // You may need to force-disable transitiveness on them.
 
     //customportalapi
-    modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta7-1.16'
+    modImplementation 'net.kyrptonaught:customportalapi:0.0.1-DEV2-1.16'
     include 'net.kyrptonaught:customportalapi:0.0.1-beta7-1.16'
 }
 
