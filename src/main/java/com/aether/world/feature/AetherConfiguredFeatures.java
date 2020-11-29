@@ -22,6 +22,8 @@ import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
+import java.util.Random;
+
 public class AetherConfiguredFeatures {
 
     public static ConfiguredFeature<TreeFeatureConfig, ?> GOLDEN_OAK, SKYROOT;
@@ -57,7 +59,9 @@ public class AetherConfiguredFeatures {
         public static final TreeFeatureConfig GOLDEN_OAK_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.GOLDEN_OAK_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.GOLDEN_OAK_LEAVES.getDefaultState()), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
 
         public static final RandomFeatureConfig SCATTERED_TREES_CONFIG = new RandomFeatureConfig(
-                ImmutableList.of(Feature.TREE.configure(GOLDEN_OAK_CONFIG).withChance(0.1F)), Feature.TREE.configure(Configs.SKYROOT_CONFIG));
+                ImmutableList.of(Feature.TREE.configure(GOLDEN_OAK_CONFIG).withChance(0.1F)),
+                Feature.TREE.configure(Configs.SKYROOT_CONFIG)
+        );
 
         public static final AercloudConfig COLD_AERCLOUD_CONFIG = new AercloudConfig(AetherBlocks.COLD_AERCLOUD.getDefaultState(), false, 16, 64);
         public static final AercloudConfig BLUE_AERCLOUD_CONFIG = new AercloudConfig(AetherBlocks.BLUE_AERCLOUD.getDefaultState(), false, 8, 32);

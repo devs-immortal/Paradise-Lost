@@ -26,9 +26,8 @@ public class AercloudFeature extends Feature<AercloudConfig> {
 
     @Override
     public boolean generate(StructureWorldAccess worldIn, ChunkGenerator generator, Random randIn, BlockPos posIn, AercloudConfig configIn) {
-        BlockPos origin = new BlockPos(posIn.getX() - 14, (configIn.isFlat() ? 0 : randIn.nextInt(64)) + configIn.getY(), posIn.getZ() - 14);
-        BlockPos position = new BlockPos(origin);
-
+        BlockPos origin = new BlockPos(posIn.getX() - Math.pow(randIn.nextInt(8), 2), (randIn.nextInt(configIn.isFlat() ? 4 : 64)) + configIn.getY(), posIn.getZ() - Math.pow(randIn.nextInt(8), 2));
+        
         for (int amount = 0; amount < configIn.cloudAmount(); ++amount) {
             boolean offsetY = ((randIn.nextBoolean() && !configIn.isFlat()) || (configIn.isFlat() && randIn.nextInt(10) == 0));
 
@@ -36,21 +35,22 @@ public class AercloudFeature extends Feature<AercloudConfig> {
             int yOffset = (offsetY ? randIn.nextInt(3) - 1 : 0);
             int zOffset = randIn.nextInt(2);
 
-            position = position.add(xOffset, yOffset, zOffset);
+            origin = origin.add(xOffset, yOffset, zOffset);
 
-            for (int x = position.getX(); x < position.getX() + randIn.nextInt(2) + 3 * configIn.cloudModifier(); ++x) {
-                for (int y = position.getY(); y < position.getY() + randIn.nextInt(1) + 2; ++y) {
-                    for (int z = position.getZ(); z < position.getZ() + randIn.nextInt(2) + 3 * configIn.cloudModifier(); ++z) {
+            for (int x = origin.getX(); x < origin.getX() + randIn.nextInt(2) + 3 * configIn.cloudModifier(); ++x) {
+                for (int y = origin.getY(); y < origin.getY() + randIn.nextInt(1) + 2; ++y) {
+                    for (int z = origin.getZ(); z < origin.getZ() + randIn.nextInt(2) + 3 * configIn.cloudModifier(); ++z) {
                         BlockPos pos = new BlockPos(x, y, z);
 
                         if (worldIn.isAir(pos)) {
-                            if (Math.abs(x - position.getX()) + Math.abs(y - position.getY()) + Math.abs(z - position.getZ()) < 4 * configIn.cloudModifier() + randIn.nextInt(2))
+                            if (Math.abs(x - origin.getX()) + Math.abs(y - origin.getY()) + Math.abs(z - origin.getZ()) < 4 * configIn.cloudModifier() + randIn.nextInt(2))
                                 this.setBlockState(worldIn, pos, configIn.getCloudState());
                         }
                     }
                 }
             }
         }
+        
         return true;
     }
 }
