@@ -38,7 +38,7 @@ public class AetherConfiguredFeatures {
         AETHER_TALL_GRASS = register("aether_tall_grass", Feature.RANDOM_PATCH.configure(Configs.AETHER_TALL_GRASS_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).repeat(4));
         SKYROOT = register("skyroot_tree", Feature.TREE.configure(Configs.SKYROOT_CONFIG));
         GOLDEN_OAK = register("golden_oak_tree", Feature.TREE.configure(Configs.GOLDEN_OAK_CONFIG));
-        SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Configs.SCATTERED_TREES_CONFIG).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(1, 0.1F, 2))));
+        SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Configs.SCATTERED_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(5, 0.1F, 1))));
         COLD_AERCLOUD = register("cold_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.COLD_AERCLOUD_CONFIG).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(10))));
         BLUE_AERCLOUD = register("blue_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.BLUE_AERCLOUD_CONFIG).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(20))));
         GOLDEN_AERCLOUD = register("golden_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.GOLDEN_AERCLOUD_CONFIG).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(30))));
@@ -56,7 +56,8 @@ public class AetherConfiguredFeatures {
         public static final TreeFeatureConfig SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LEAVES.getDefaultState()), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
         public static final TreeFeatureConfig GOLDEN_OAK_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.GOLDEN_OAK_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.GOLDEN_OAK_LEAVES.getDefaultState()), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
 
-        public static final RandomFeatureConfig SCATTERED_TREES_CONFIG = new RandomFeatureConfig(ImmutableList.of(Feature.TREE.configure(GOLDEN_OAK_CONFIG).withChance(0.1F)), Feature.TREE.configure(Configs.SKYROOT_CONFIG));
+        public static final RandomFeatureConfig SCATTERED_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(Feature.TREE.configure(GOLDEN_OAK_CONFIG).withChance(0.1F)), Feature.TREE.configure(Configs.SKYROOT_CONFIG));
 
         public static final AercloudConfig COLD_AERCLOUD_CONFIG = new AercloudConfig(AetherBlocks.COLD_AERCLOUD.getDefaultState(), false, 16, 64);
         public static final AercloudConfig BLUE_AERCLOUD_CONFIG = new AercloudConfig(AetherBlocks.BLUE_AERCLOUD.getDefaultState(), false, 8, 32);
