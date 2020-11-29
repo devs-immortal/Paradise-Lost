@@ -9,16 +9,16 @@ public class ZaniteArmorModel extends AnimatedGeoModel<ZaniteArmor> {
 
     @Override
     public Identifier getModelLocation(ZaniteArmor object) {
-        return Aether.locate("geo/zanite_armor.geo.json");
+        return Aether.locate("geo/zanite_armor/zanite_armor.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(ZaniteArmor object) {
-        return Aether.locate("textures/armor/zanite_armor.png");
+        return Aether.locate("textures/models/armor/zanite_armor.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(ZaniteArmor animatable) {
-        return Aether.locate("animations/armor/zanite_armor.animation");
+        return Aether.locate("animations/zanite_armor/zanite_armor.animation");
     }
 }
