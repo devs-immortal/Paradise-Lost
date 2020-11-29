@@ -7,13 +7,13 @@ public class AercloudConfig implements FeatureConfig {
 
     private final BlockState state;
     private final boolean isFlat;
-    private final int amount;
+    private final int segmentCount;
     private final int y;
 
-    public AercloudConfig(BlockState state, boolean isFlat, int amount, int y) {
+    public AercloudConfig(BlockState state, boolean isFlat, int segmentCount, int y) {
         this.state = state;
         this.isFlat = isFlat;
-        this.amount = amount;
+        this.segmentCount = segmentCount;
         this.y = y;
     }
 
@@ -29,8 +29,8 @@ public class AercloudConfig implements FeatureConfig {
         return this.isFlat ? 3 : 1;
     }
 
-    public int cloudAmount() {
-        return this.amount;
+    public int maxSegments() {
+        return this.segmentCount;
     }
 
     public boolean isFlat() {
