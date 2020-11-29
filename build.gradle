@@ -46,6 +46,7 @@ repositories {
     }
     maven { url = "https://www.cursemaven.com" }
     maven { url "https://dl.bintray.com/kyrptonaught/customportalapi" }
+    maven { url "https://hephaestus.dev/release" }
     jcenter()
     mavenCentral()
 }
@@ -82,6 +83,9 @@ dependencies {
     //customportalapi
     modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta7-1.16'
     include 'net.kyrptonaught:customportalapi:0.0.1-beta7-1.16'
+
+    modImplementation "dev.hephaestus:seedy-behavior:${project.seedy_version}"
+    include "dev.hephaestus:seedy-behavior:${project.seedy_version}"
 }
 
 processResources {
