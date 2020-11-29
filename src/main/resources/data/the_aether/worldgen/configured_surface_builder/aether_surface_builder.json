@@ -1,14 +1,23 @@
 {
   "config": {
     "top_material": {
-      "Name": "the_aether:aether_dirt"
+      "Name": "the_aether:aether_grass",
+      "Properties": {
+        "snowy": "false"
+      }
     },
     "under_material": {
-      "Name": "the_aether:aether_dirt"
+      "Name": "the_aether:aether_dirt",
+      "Properties": {
+
+      }
     },
     "underwater_material": {
-      "Name": "the_aether:aether_dirt"
+      "Name": "the_aether:aether_dirt",
+      "Properties": {
+
+      }
     }
   },
-  "type": "the_aether:aether_surface_builder"
+  "type": "minecraft:default"
 }

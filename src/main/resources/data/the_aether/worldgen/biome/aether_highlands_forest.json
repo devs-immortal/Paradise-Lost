@@ -23,6 +23,9 @@
       "the_aether:quicksoil",
       "the_aether:aether_lake",
       "the_aether:aether_springs"
+    ],
+    [
+      "the_aether:scattered_trees"
     ]
   ],
   "starts": [],
