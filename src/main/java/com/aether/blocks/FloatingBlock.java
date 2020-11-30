@@ -39,7 +39,7 @@ public class FloatingBlock extends FallingBlock {
     private void checkFloatable(World worldIn, BlockPos pos) {
         if ((worldIn.isAir(pos.up()) || canFallThrough(worldIn.getBlockState(pos.up()))) && (!this.powered || worldIn.isReceivingRedstonePower(pos))) {
             if (!worldIn.isClient) {
-                FloatingBlockEntity floatingblockentity = new FloatingBlockEntity(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, worldIn.getBlockState(pos));
+                FloatingBlockEntity floatingblockentity = new FloatingBlockEntity(worldIn, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, worldIn.getBlockState(pos));
                 this.onStartFloating(floatingblockentity);
                 worldIn.spawnEntity(floatingblockentity);
             }
