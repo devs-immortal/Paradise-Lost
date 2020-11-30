@@ -39,7 +39,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherConfiguredFeatures.registerFeatures();
         AetherDimension.setupDimension();
         NetworkingHell.init();
-        //AetherAPIRegistry.register();
     }
 
     @Override

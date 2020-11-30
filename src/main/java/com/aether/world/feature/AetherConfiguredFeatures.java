@@ -45,7 +45,7 @@ public class AetherConfiguredFeatures {
         COLD_AERCLOUD = register("cold_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.COLD_AERCLOUD_CONFIG).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(15))));
         BLUE_AERCLOUD = register("blue_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.BLUE_AERCLOUD_CONFIG).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(75))));
         GOLDEN_AERCLOUD = register("golden_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.GOLDEN_AERCLOUD_CONFIG).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(100))));
-        QUICKSOIL = register("quicksoil", AetherFeatures.DEFAULT_QUICKSOIL.configure(new DefaultFeatureConfig())).decorate(Decorator.COUNT.configure(new CountConfig(3)));
+        QUICKSOIL = register("quicksoil", AetherFeatures.DEFAULT_QUICKSOIL.configure(new DefaultFeatureConfig())).decorate(Decorator.COUNT.configure(new CountConfig(5)));
     }
 
     private static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String id, ConfiguredFeature<FC, ?> configuredFeature) {

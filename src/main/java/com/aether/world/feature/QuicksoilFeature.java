@@ -74,7 +74,7 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
         mut.set(origin);
 
         int radius = 6;
-        if (centers.size() > 5) {
+        if (centers.size() > 10) {
             for (BlockPos center : centers) {
                 radius = MathHelper.clamp(radius + (random.nextInt(5) - 2) * 2, 2, 7);
 
