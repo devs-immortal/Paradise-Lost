@@ -63,6 +63,8 @@ public class AetherItems {
             COCKATRICE_SPAWN_EGG, AERBUNNY_SPAWN_EGG, FLYING_COW_SPAWN_EGG,
             MOA_SPAWN_EGG, PHYG_SPAWN_EGG, SHEEPUFF_SPAWN_EGG, GOLD_AERDUST, FROZEN_AERDUST;
 
+    public static final Item AETHER_PORTAL;
+
     public static final Rarity AETHER_LOOT = EnumHelper.addRarity("aether_loot", Formatting.GREEN);
 
 
@@ -237,6 +239,8 @@ public class AetherItems {
         SWET_CAPE = register("swet_cape", new ItemAccessory("swet", AccessoryTypes.CAPE, AETHER_LOOT));
         AGILITY_CAPE = register("agility_cape", new ItemAccessory("agility", AccessoryTypes.CAPE, AETHER_LOOT));
         INVISIBILITY_CAPE = register("invisibility_cape", new ItemAccessory(AccessoryTypes.CAPE, AETHER_LOOT));
+
+        AETHER_PORTAL = register("aether_portal", new AetherPortalItem(new Item.Settings().group(AetherItemGroups.Misc)));
         // Some music, I think the original ones are copyrighted but whatever
         // I'll make a few -d17
         //TODO: Add AetherSounds
