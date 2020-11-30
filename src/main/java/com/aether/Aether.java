@@ -8,11 +8,14 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.AetherMoaTypes;
 import com.aether.items.AetherItems;
 import com.aether.registry.GeckolibRenderRegistry;
+import com.aether.util.NetworkingHell;
 import com.aether.world.dimension.AetherDimension;
 import com.aether.world.feature.AetherConfiguredFeatures;
 import com.aether.world.feature.AetherFeatures;
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
@@ -35,10 +38,11 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherFeatures.registerFeatures();
         AetherConfiguredFeatures.registerFeatures();
         AetherDimension.setupDimension();
-        //AetherAPIRegistry.register();
+        NetworkingHell.init();
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
         AetherBlocks.initializeClient();
         AetherItems.initializeClient();
@@ -48,5 +52,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherParticles.initializeClient();
         AetherSounds.initializeClient();
         GeckolibRenderRegistry.init();
+        NetworkingHell.initClient();
     }
 }
