@@ -47,6 +47,7 @@ repositories {
     maven { url = "https://www.cursemaven.com" }
     maven { url "https://dl.bintray.com/kyrptonaught/customportalapi" }
     maven { url "https://hephaestus.dev/release" }
+    maven { url "https://jitpack.io" }
     jcenter()
     mavenCentral()
 }
@@ -79,6 +80,10 @@ dependencies {
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
+
+    modRuntime ("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
+        exclude module: "fabric-loader"
+    }
 
     //customportalapi
     modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta7-1.16'
