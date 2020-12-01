@@ -10,6 +10,21 @@
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {},
   "features": [
+    [],
+    [
+      "the_aether:aether_lake"
+    ],
+    [
+      "the_aether:quicksoil",
+      "the_aether:aether_springs"
+    ],
+    [],
+    [],
+    [],
+    [
+      "the_aether:gravitite_ore"
+    ],
+    [],
     [
       "the_aether:aether_grass",
       "the_aether:aether_tall_grass"
@@ -18,11 +33,6 @@
       "the_aether:cold_aercloud",
       "the_aether:blue_aercloud",
       "the_aether:golden_aercloud"
-    ],
-    [
-      "the_aether:quicksoil",
-      "the_aether:aether_lake",
-      "the_aether:aether_springs"
     ]
   ],
   "starts": [],
