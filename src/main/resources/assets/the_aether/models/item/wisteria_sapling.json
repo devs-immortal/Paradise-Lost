@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "the_aether:item/accessories/ice_ring"
+    "layer0": "the_aether:block/wisteria_sapling"
   }
 }

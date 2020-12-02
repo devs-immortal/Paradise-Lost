@@ -7,8 +7,10 @@ import com.aether.blocks.natural.*;
 import com.aether.blocks.natural.ore.GravititeOreBlock;
 import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.items.AetherItemGroups;
+import com.aether.world.feature.AetherConfiguredFeatures;
 import com.aether.world.feature.tree.GoldenOakSaplingGenerator;
 import com.aether.world.feature.tree.SkyrootSaplingGenerator;
+import com.aether.world.feature.tree.WisteriaSaplingGenerator;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -169,6 +171,8 @@ public class AetherBlocks {
 //    public static final Block TREASURE_CHEST;
 //    public static final Block WHITE_DYED_AERCLOUD;
 //    public static final Block WHITE_FLOWER;
+    public static final Block WISTERIA_LEAVES;
+    public static final Block WISTERIA_SAPLING;
 //    public static final Block YELLOW_DYED_AERCLOUD;
     public static final Block ZANITE_BLOCK;
     public static final Block ZANITE_ORE;
@@ -318,6 +322,8 @@ public class AetherBlocks {
         CRYSTAL_FENCE_GATE = register("crystal_fence_gate", new FenceGateBlock(FabricBlockSettings.copyOf(CRYSTAL_PLANKS)), buildingBlock());
         CRYSTAL_SLAB = register("crystal_slab", new AetherSlabBlock(CRYSTAL_PLANKS.getDefaultState()), buildingBlock());
         CRYSTAL_STAIRS = register("crystal_stairs", new AetherStairsBlock(CRYSTAL_PLANKS.getDefaultState()), buildingBlock());
+        WISTERIA_LEAVES = register("wisteria_leaves", createLeavesBlock(), buildingBlock());
+        WISTERIA_SAPLING = register("wisteria_sapling", new AetherSaplingBlock(new WisteriaSaplingGenerator(), FabricBlockSettings.copyOf(SKYROOT_SAPLING)), buildingBlock());
 //        STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", null);
 //        STRIPPED_SKYROOT_WOOD = register("stripped_skyroot_wood", null);
 //        SUN_ALTAR = register("sun_altar", null);
@@ -390,12 +396,14 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_OAK_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_LEAVES, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(WISTERIA_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(COLD_AERCLOUD, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUE_AERCLOUD, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(PINK_AERCLOUD, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_AERCLOUD, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(AETHER_GRASS, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putFluid(DENSE_AERCLOUD_STILL, RenderLayer.getTranslucent());
 
         FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, Aether.locate("dense_aercloud"));

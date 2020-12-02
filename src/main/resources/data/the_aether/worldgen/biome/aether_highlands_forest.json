@@ -12,7 +12,8 @@
   "features": [
     [
       "the_aether:aether_grass",
-      "the_aether:aether_tall_grass"
+      "the_aether:aether_tall_grass",
+      "the_aether:patch_blueberry"
     ],
     [
       "the_aether:cold_aercloud",
