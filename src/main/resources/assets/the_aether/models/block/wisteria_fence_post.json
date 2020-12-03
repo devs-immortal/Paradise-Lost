@@ -1,0 +1,6 @@
+{
+  "parent": "block/fence_post",
+  "textures": {
+    "texture": "the_aether:block/wisteria_planks"
+  }
+}

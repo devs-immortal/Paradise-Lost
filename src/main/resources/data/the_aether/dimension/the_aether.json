@@ -23,6 +23,16 @@
             "temperature": 0.1,
             "humidity": 0.0
           }
+        },
+        {
+          "biome": "the_aether:aether_highlands_thicket",
+          "parameters": {
+            "altitude": 0.0,
+            "weirdness": 0.05,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "humidity": 0.2
+          }
         }
       ],
       "altitude_noise": {

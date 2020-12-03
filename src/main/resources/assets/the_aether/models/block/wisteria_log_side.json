@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "the_aether:block/wisteria_log_side",
+    "side": "the_aether:block/wisteria_log_base"
+  }
+}
