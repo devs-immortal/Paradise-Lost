@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "the_aether:block/rose_wisteria_sapling"
+  }
+}
