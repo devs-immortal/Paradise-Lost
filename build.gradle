@@ -44,7 +44,12 @@ repositories {
         name = "CottonMC"
         url = "https://server.bbkr.space/artifactory/libs-release"
     }
-    maven { url = "https://www.cursemaven.com" }
+    maven { 
+              url = "https://www.cursemaven.com" 
+              content {
+                  includeGroup "curse.maven"
+              }
+    }
     maven { url "https://dl.bintray.com/kyrptonaught/customportalapi" }
     maven { url "https://hephaestus.dev/release" }
     jcenter()
