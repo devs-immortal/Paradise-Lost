@@ -1,10 +1,16 @@
 {
   "variants": {
-    "ripe=true": {
-      "model": "the_aether:block/blueberry_bush"
+    "age=0": {
+      "model": "minecraft:block/blueberry_bush_stage0"
     },
-    "ripe=false": {
-      "model": "the_aether:block/blueberry_stalk"
+    "age=1": {
+      "model": "minecraft:block/blueberry_bush_stage1"
+    },
+    "age=2": {
+      "model": "minecraft:block/blueberry_bush_stage2"
+    },
+    "age=3": {
+      "model": "minecraft:block/blueberry_bush_stage3"
     }
   }
 }
