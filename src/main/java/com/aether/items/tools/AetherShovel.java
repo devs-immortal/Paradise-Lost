@@ -35,8 +35,7 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
         return original;
     }
 
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
+    /*public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
@@ -50,7 +49,7 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
-    }
+    }*/
 
     @Override
     public boolean postMine(ItemStack stackIn, World worldIn, BlockState stateIn, BlockPos posIn, LivingEntity entityIn) {

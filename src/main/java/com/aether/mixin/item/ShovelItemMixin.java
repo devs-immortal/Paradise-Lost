@@ -1,6 +1,7 @@
 package com.aether.mixin.item;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
@@ -33,6 +34,17 @@ public class ShovelItemMixin {
         AETHER_PATH_STATES.put(AetherBlocks.AETHER_GRASS, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
         AETHER_PATH_STATES.put(AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
 
+//        context.
+//
+//        if (this.getItemMaterial() == AetherTiers.Gravitite && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
+//            if (world.isAir(blockPos.up()) && !world.isClient) {
+//                //TODO: Spawn floating block
+//            } else {
+//                return ActionResult.PASS;
+//            }
+//            return ActionResult.SUCCESS;
+//        }
+
         if (context.getSide() == Direction.DOWN) {
             cir.setReturnValue(ActionResult.PASS);
         } else {
@@ -57,8 +69,6 @@ public class ShovelItemMixin {
                 }
 
                 cir.setReturnValue(ActionResult.success(world.isClient));
-            } else {
-                cir.setReturnValue(ActionResult.PASS);
             }
         }
     }
