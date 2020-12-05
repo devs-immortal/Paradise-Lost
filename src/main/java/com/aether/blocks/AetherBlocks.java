@@ -133,6 +133,9 @@ public class AetherBlocks {
     public static final Block SENTRY_STONE_TRAP;
     public static final Block SENTRY_WALL;
     public static final Block LIGHT_SENTRY_STONE;
+    public static final Block LIGHT_SENTRY_STAIRS;
+    public static final Block LIGHT_SENTRY_SLAB;
+    public static final Block LIGHT_SENTRY_WALL;
     public static final Block SKYROOT_BOOKSHELF;
     public static final Block SKYROOT_FENCE;
     public static final Block SKYROOT_FENCE_GATE;
@@ -308,6 +311,9 @@ public class AetherBlocks {
         SENTRY_SLAB = register("sentry_slab", new AetherSlabBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_STAIRS = register("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_WALL = register("sentry_wall", new AetherWallBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
+        LIGHT_SENTRY_SLAB = register("light_sentry_slab", new AetherSlabBlock(LIGHT_SENTRY_STONE.getDefaultState()), buildingBlock());
+        LIGHT_SENTRY_STAIRS = register("light_sentry_stairs", new AetherStairsBlock(LIGHT_SENTRY_STONE.getDefaultState()), buildingBlock());
+        LIGHT_SENTRY_WALL = register("light_sentry_wall", new AetherWallBlock(LIGHT_SENTRY_STONE.getDefaultState()), buildingBlock());
         SKYROOT_SAPLING = register("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)), buildingBlock());
         SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.GREEN, MaterialColor.WOOD), buildingBlock());
         STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD), buildingBlock());

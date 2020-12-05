@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "the_aether:block/light_sentry_stone",
+    "top": "the_aether:block/light_sentry_stone",
+    "side": "the_aether:block/light_sentry_stone"
+  }
+}
