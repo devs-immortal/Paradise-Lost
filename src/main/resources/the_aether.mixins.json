@@ -10,6 +10,8 @@
     "entity.EntityMixin",
     "entity.PlayerEntityMixin",
     "item.AxeItemMixin",
+    "item.HoeItemMixin",
+    "item.ShovelItemMixin",
     "item.MapStateMixin",
     "render.BackgroundRendererMixin",
     "render.BiomeLayerSamplerAccessor",
