@@ -1,7 +1,7 @@
 {
   "effects": {
     "sky_color": 12632319,
-    "foliage_color": 11665355,
+    "foliage_color": 14483329,
     "grass_color": 11665355,
     "fog_color": 16777215,
     "water_color": 4159204,
@@ -31,6 +31,10 @@
       "the_aether:aether_grass",
       "the_aether:aether_tall_grass",
       "the_aether:water_spring"
+      "the_aether:alt_aether_grass",
+      "the_aether:alt_aether_tall_grass",
+      "the_aether:patch_blueberry"
+      "the_aether:sparse_trees"
     ],
     [
       "the_aether:cold_aercloud",

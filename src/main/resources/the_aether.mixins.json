@@ -10,7 +10,10 @@
     "entity.EntityMixin",
     "entity.PlayerEntityMixin",
     "item.AxeItemMixin",
+    "item.HoeItemMixin",
+    "item.ShovelItemMixin",
     "item.MapStateMixin",
+    "render.BackgroundRendererMixin",
     "render.BiomeLayerSamplerAccessor",
     "render.BlockStateModelGeneratorMixin",
     "render.CloudRendererMixin",
@@ -22,7 +25,6 @@
   ],
   "client": [
     "block.EnchantingTableBlockMixin",
-    "client.BackgroundRendererMixin",
     "client.MapRendererMixin",
     "client.WorldRendererMixin"
   ],

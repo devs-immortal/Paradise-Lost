@@ -9,6 +9,7 @@ import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.items.AetherItemGroups;
 import com.aether.world.feature.tree.GoldenOakSaplingGenerator;
 import com.aether.world.feature.tree.SkyrootSaplingGenerator;
+import com.aether.world.feature.tree.WisteriaSaplingGenerator;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -132,6 +133,9 @@ public class AetherBlocks {
     public static final Block SENTRY_STONE_TRAP;
     public static final Block SENTRY_WALL;
     public static final Block LIGHT_SENTRY_STONE;
+    public static final Block LIGHT_SENTRY_STAIRS;
+    public static final Block LIGHT_SENTRY_SLAB;
+    public static final Block LIGHT_SENTRY_WALL;
     public static final Block SKYROOT_BOOKSHELF;
     public static final Block SKYROOT_FENCE;
     public static final Block SKYROOT_FENCE_GATE;
@@ -143,6 +147,7 @@ public class AetherBlocks {
     public static final Block SKYROOT_STAIRS;
     public static final Block SKYROOT_SAPLING;
     public static final Block SKYROOT_LEAVES;
+    public static final Block SKYROOT_LEAF_PILE;
     public static final Block STRIPPED_SKYROOT_LOG;
     public static final Block GOLDEN_OAK_SAPLING;
     public static final Block GOLDEN_OAK_LOG;
@@ -169,6 +174,22 @@ public class AetherBlocks {
 //    public static final Block TREASURE_CHEST;
 //    public static final Block WHITE_DYED_AERCLOUD;
 //    public static final Block WHITE_FLOWER;
+    public static final Block ROSE_WISTERIA_LEAVES;
+    public static final Block ROSE_WISTERIA_LEAF_PILE;
+    public static final Block ROSE_WISTERIA_SAPLING;
+    public static final Block FROST_WISTERIA_LEAVES;
+    public static final Block FROST_WISTERIA_LEAF_PILE;
+    public static final Block FROST_WISTERIA_SAPLING;
+    public static final Block LAVENDER_WISTERIA_LEAVES;
+    public static final Block LAVENDER_WISTERIA_LEAF_PILE;
+    public static final Block LAVENDER_WISTERIA_SAPLING;
+    public static final Block WISTERIA_LOG;
+    public static final Block STRIPPED_WISTERIA_LOG;
+    public static final Block WISTERIA_PLANKS;
+    public static final Block WISTERIA_SLAB;
+    public static final Block WISTERIA_STAIRS;
+    public static final Block WISTERIA_FENCE;
+    public static final Block WISTERIA_FENCE_GATE;
 //    public static final Block YELLOW_DYED_AERCLOUD;
     public static final Block ZANITE_BLOCK;
     public static final Block ZANITE_ORE;
@@ -289,10 +310,14 @@ public class AetherBlocks {
         SENTRY_SLAB = register("sentry_slab", new AetherSlabBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_STAIRS = register("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_WALL = register("sentry_wall", new AetherWallBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
+        LIGHT_SENTRY_SLAB = register("light_sentry_slab", new AetherSlabBlock(LIGHT_SENTRY_STONE.getDefaultState()), buildingBlock());
+        LIGHT_SENTRY_STAIRS = register("light_sentry_stairs", new AetherStairsBlock(LIGHT_SENTRY_STONE.getDefaultState()), buildingBlock());
+        LIGHT_SENTRY_WALL = register("light_sentry_wall", new AetherWallBlock(LIGHT_SENTRY_STONE.getDefaultState()), buildingBlock());
         SKYROOT_SAPLING = register("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)), buildingBlock());
         SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.GREEN, MaterialColor.WOOD), buildingBlock());
         STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD), buildingBlock());
         SKYROOT_LEAVES = register("skyroot_leaves", createLeavesBlock(), buildingBlock());
+        SKYROOT_LEAF_PILE = register("skyroot_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
         SKYROOT_PLANKS = register("skyroot_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)), buildingBlock());
         SKYROOT_BOOKSHELF = register("skyroot_bookshelf", new Block(FabricBlockSettings.of(Material.WOOD).strength(1.5f).sounds(BlockSoundGroup.WOOD)), buildingBlock());
         SKYROOT_FENCE = register("skyroot_fence", new FenceBlock(FabricBlockSettings.copy(SKYROOT_PLANKS)), buildingBlock());
@@ -317,6 +342,22 @@ public class AetherBlocks {
         CRYSTAL_FENCE_GATE = register("crystal_fence_gate", new FenceGateBlock(FabricBlockSettings.copyOf(CRYSTAL_PLANKS)), buildingBlock());
         CRYSTAL_SLAB = register("crystal_slab", new AetherSlabBlock(CRYSTAL_PLANKS.getDefaultState()), buildingBlock());
         CRYSTAL_STAIRS = register("crystal_stairs", new AetherStairsBlock(CRYSTAL_PLANKS.getDefaultState()), buildingBlock());
+        WISTERIA_LOG = register("wisteria_log", createLogBlock(MaterialColor.YELLOW, MaterialColor.RED), buildingBlock());
+        STRIPPED_WISTERIA_LOG = register("stripped_wisteria_log", createLogBlock(MaterialColor.RED, MaterialColor.RED), buildingBlock());
+        ROSE_WISTERIA_LEAVES = register("rose_wisteria_leaves", createLeavesBlock(), buildingBlock());
+        ROSE_WISTERIA_LEAF_PILE = register("rose_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
+        ROSE_WISTERIA_SAPLING = register("rose_wisteria_sapling", new AetherSaplingBlock(new WisteriaSaplingGenerator(), FabricBlockSettings.copyOf(SKYROOT_SAPLING)), buildingBlock());
+        FROST_WISTERIA_LEAVES = register("frost_wisteria_leaves", createLeavesBlock(), buildingBlock());
+        FROST_WISTERIA_LEAF_PILE = register("frost_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
+        FROST_WISTERIA_SAPLING = register("frost_wisteria_sapling", new AetherSaplingBlock(new WisteriaSaplingGenerator(), FabricBlockSettings.copyOf(SKYROOT_SAPLING)), buildingBlock());
+        LAVENDER_WISTERIA_LEAVES = register("lavender_wisteria_leaves", createLeavesBlock(), buildingBlock());
+        LAVENDER_WISTERIA_LEAF_PILE = register("lavender_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
+        LAVENDER_WISTERIA_SAPLING = register("lavender_wisteria_sapling", new AetherSaplingBlock(new WisteriaSaplingGenerator(), FabricBlockSettings.copyOf(SKYROOT_SAPLING)), buildingBlock());
+        WISTERIA_PLANKS = register("wisteria_planks", new Block(FabricBlockSettings.copyOf(SKYROOT_PLANKS).materialColor(MaterialColor.YELLOW)), buildingBlock());
+        WISTERIA_FENCE = register("wisteria_fence", new FenceBlock(FabricBlockSettings.copyOf(WISTERIA_PLANKS)), buildingBlock());
+        WISTERIA_FENCE_GATE = register("wisteria_fence_gate", new FenceGateBlock(FabricBlockSettings.copyOf(WISTERIA_PLANKS)), buildingBlock());
+        WISTERIA_SLAB = register("wisteria_slab", new AetherSlabBlock(WISTERIA_PLANKS.getDefaultState()), buildingBlock());
+        WISTERIA_STAIRS = register("wisteria_stairs", new AetherStairsBlock(WISTERIA_PLANKS.getDefaultState()), buildingBlock());
 //        STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", null);
 //        STRIPPED_SKYROOT_WOOD = register("stripped_skyroot_wood", null);
 //        SUN_ALTAR = register("sun_altar", null);
@@ -361,6 +402,10 @@ public class AetherBlocks {
         return new AetherLeavesBlock(AbstractBlock.Settings.of(Material.LEAVES).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never));
     }
 
+    private static FabricBlockSettings createLeafPileBlock(BlockSoundGroup sounds) {
+        return FabricBlockSettings.of(Material.LEAVES).strength(0.2f).sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
+    }
+
     private static AetherLeavesBlock createLeavesBlock(BlockSoundGroup sounds) {
         return new AetherLeavesBlock(AbstractBlock.Settings.of(Material.LEAVES).strength(0.2f).ticksRandomly().sounds(sounds).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never));
     }
@@ -389,12 +434,23 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_OAK_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_LEAVES, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAF_PILE, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_LEAF_PILE, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_LEAVES, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_SAPLING, RenderLayer.getCutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(FROST_WISTERIA_LEAF_PILE, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(FROST_WISTERIA_LEAVES, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(FROST_WISTERIA_SAPLING, RenderLayer.getCutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(LAVENDER_WISTERIA_LEAF_PILE, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(LAVENDER_WISTERIA_LEAVES, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(LAVENDER_WISTERIA_SAPLING, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(COLD_AERCLOUD, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUE_AERCLOUD, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(PINK_AERCLOUD, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_AERCLOUD, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(AETHER_GRASS, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putFluid(DENSE_AERCLOUD_STILL, RenderLayer.getTranslucent());
 
         FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, Aether.locate("dense_aercloud"));
