@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "the_aether:block/aether_tall_grass_bottom"
+    },
+    "half=upper": {
+      "model": "the_aether:block/aether_tall_grass_top"
+    }
+  }
+}

@@ -31,7 +31,7 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
                     mut.set(startPos);
                     mut.move(x, y, z);
 
-                    if (world.getBlockState(mut).isAir() && world.getBlockState(mut.up()).isOf(AetherBlocks.AETHER_GRASS) && world.getBlockState(mut.up(2)).isAir()) {
+                    if (world.getBlockState(mut).isAir() && world.getBlockState(mut.up()).isOf(AetherBlocks.AETHER_GRASS_BLOCK) && world.getBlockState(mut.up(2)).isAir()) {
                         origin = new BlockPos(mut);
                     }
                 }

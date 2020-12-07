@@ -5,15 +5,18 @@
     "grass_color": 8773039,
     "fog_color": 16777215,
     "water_color": 11139071,
-    "water_fog_color": 11139071
+    "water_fog_color": 11139071,
+    "grass_color_modifier": "dark_forest"
   },
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {},
   "features": [
     [
       "the_aether:aether_grass",
+      "the_aether:aether_bush",
+      "the_aether:dense_aether_fern",
       "the_aether:alt_aether_grass",
-      "the_aether:dense_aether_tall_grass",
+      "the_aether:fallen_leaves",
       "the_aether:patch_blueberry"
     ],
     [
@@ -82,6 +85,7 @@
       "charge": 2.0
     }
   },
+  "parent": "the_aether:aether_highlands_forest",
   "player_spawn_friendly": false,
   "precipitation": "none",
   "temperature": 0.5,

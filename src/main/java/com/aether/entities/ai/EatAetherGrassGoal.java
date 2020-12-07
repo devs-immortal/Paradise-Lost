@@ -14,7 +14,7 @@ import java.util.EnumSet;
 import java.util.function.Predicate;
 
 public class EatAetherGrassGoal extends Goal {
-    private static final Predicate<BlockState> grass = BlockStatePredicate.forBlock(AetherBlocks.AETHER_GRASS);
+    private static final Predicate<BlockState> grass = BlockStatePredicate.forBlock(AetherBlocks.AETHER_GRASS_BLOCK);
 
     private final MobEntity owner;
     private final World world;
@@ -35,7 +35,7 @@ public class EatAetherGrassGoal extends Goal {
             BlockPos pos = new BlockPos(this.owner.getX(), this.owner.getY(), this.owner.getZ());
 
             if (grass.test(this.world.getBlockState(pos))) return true;
-            else return this.world.getBlockState(pos.down(1)).getBlock() == AetherBlocks.AETHER_GRASS;
+            else return this.world.getBlockState(pos.down(1)).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK;
         }
     }
 
@@ -71,9 +71,9 @@ public class EatAetherGrassGoal extends Goal {
             } else {
                 BlockPos downPos = pos.down(1);
 
-                if (this.world.getBlockState(downPos).getBlock() == AetherBlocks.AETHER_GRASS) {
+                if (this.world.getBlockState(downPos).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK) {
                     if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-                        this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(AetherBlocks.AETHER_GRASS.getDefaultState()));
+                        this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(AetherBlocks.AETHER_GRASS_BLOCK.getDefaultState()));
                         this.world.setBlockState(downPos, AetherBlocks.AETHER_DIRT.getDefaultState(), 2);
                     }
 

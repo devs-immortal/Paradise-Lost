@@ -8,9 +8,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class WisteriaSaplingGenerator extends SaplingGenerator {
+public class FrostWisteriaSaplingGenerator extends SaplingGenerator {
     @Override
     protected @Nullable ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
-        return AetherConfiguredFeatures.WISTERIA_TREE;
+        return random.nextInt(20) == 0 ? AetherConfiguredFeatures.FROST_WISTERIA_TREE : AetherConfiguredFeatures.FANCY_FROST_WISTERIA_TREE;
     }
 }

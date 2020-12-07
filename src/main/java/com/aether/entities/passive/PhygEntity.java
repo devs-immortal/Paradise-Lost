@@ -52,7 +52,7 @@ public class PhygEntity extends SaddleMountEntity {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
         this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(AetherItems.BLUE_BERRY), false));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(AetherItems.BLUEBERRY), false));
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(5, new LookAroundGoal(this));
         this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));

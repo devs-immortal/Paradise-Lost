@@ -132,7 +132,7 @@ public class AetherEntityTypes {
     }
 
     public static boolean getAnimalData(EntityType<? extends Entity> entityType, WorldAccess WorldAccess, SpawnReason SpawnReason, BlockPos blockPos, Random random) {
-        return WorldAccess.getBlockState(blockPos.down()).getBlock() == AetherBlocks.AETHER_GRASS && WorldAccess.getBaseLightLevel(blockPos, 0) > 8 && (SpawnReason == SPAWNER || WorldAccess.getBlockState(blockPos).allowsSpawning(WorldAccess, blockPos, entityType));
+        return WorldAccess.getBlockState(blockPos.down()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK && WorldAccess.getBaseLightLevel(blockPos, 0) > 8 && (SpawnReason == SPAWNER || WorldAccess.getBlockState(blockPos).allowsSpawning(WorldAccess, blockPos, entityType));
     }
 
     public static boolean getHostileData(EntityType<? extends Entity> entityType_1, ServerWorldAccess WorldAccess_1, SpawnReason SpawnReason, BlockPos blockPos_1, Random random_1) {

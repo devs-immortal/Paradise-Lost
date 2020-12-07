@@ -12,6 +12,7 @@ import com.aether.util.NetworkingHell;
 import com.aether.world.dimension.AetherDimension;
 import com.aether.world.feature.AetherConfiguredFeatures;
 import com.aether.world.feature.AetherFeatures;
+import com.aether.world.feature.tree.AetherTreeHell;
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -35,6 +36,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public void onInitialize() {
         GeckoLib.initialize();
         CrowdinTranslate.downloadTranslations("aether", MOD_ID);
+        AetherTreeHell.init();
         AetherFeatures.registerFeatures();
         AetherConfiguredFeatures.registerFeatures();
         AetherDimension.setupDimension();

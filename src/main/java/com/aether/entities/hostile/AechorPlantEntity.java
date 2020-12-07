@@ -68,7 +68,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
 
         if (this.sinage > 3.141593F * 2F) this.sinage -= (3.141593F * 2F);
 
-        if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS)
+        if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK)
             this.destroy();
     }
 
@@ -80,7 +80,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
 
     @Override
     public boolean canSpawn(WorldAccess worldIn, SpawnReason SpawnReason) {
-        return worldIn.getBlockState(this.getBlockPos().down(1)).getBlock() == AetherBlocks.AETHER_GRASS && this.random.nextInt(400) == 0;
+        return worldIn.getBlockState(this.getBlockPos().down(1)).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK && this.random.nextInt(400) == 0;
     }
 
     @Override
