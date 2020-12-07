@@ -1,7 +1,6 @@
 package com.aether.items.tools;
 
 import com.aether.api.AetherAPI;
-import com.aether.api.player.IPlayerAether;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
 import net.kyrptonaught.customportalapi.util.CustomPortalFluidProvider;
@@ -103,23 +102,22 @@ public class SkyrootBucket extends Item implements CustomPortalFluidProvider {
         return super.finishUsing(stack, worldIn, entityLiving);
     }
 
-    public ItemStack onBucketContentsConsumed(ItemStack stack, World world, PlayerEntity entityPlayer) {
-        IPlayerAether player = AetherAPI.get(entityPlayer);
+    public ItemStack onBucketContentsConsumed(ItemStack stack, World world, PlayerEntity playerEntity) {
 
-        if (entityPlayer instanceof ServerPlayerEntity) {
-            ServerPlayerEntity entityPlayerMp = (ServerPlayerEntity) entityPlayer;
+        if (playerEntity instanceof ServerPlayerEntity) {
+            ServerPlayerEntity entityPlayerMp = (ServerPlayerEntity) playerEntity;
             Criteria.CONSUME_ITEM.trigger(entityPlayerMp, stack);
-            entityPlayer.incrementStat(Stats.USED.getOrCreateStat(this));
+            playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
 
-        if (!entityPlayer.isCreative()) stack.setCount(stack.getCount() - 1);
+        if (!playerEntity.isCreative()) stack.setCount(stack.getCount() - 1);
 
         if (stack.getItem() == AetherItems.SKYROOT_POISON_BUCKET) {
-            player.inflictPoison(500);
+            //player.inflictPoison(500);
         } else if (stack.getItem() == AetherItems.SKYROOT_REMEDY_BUCKET) {
-            player.inflictCure(200);
+            //player.inflictCure(200);
         } else if (stack.getItem() == AetherItems.SKYROOT_MILK_BUCKET) {
-            if (!world.isClient) entityPlayer.clearStatusEffects();
+            if (!world.isClient) playerEntity.clearStatusEffects();
         }
         return stack.isEmpty() ? new ItemStack(AetherItems.SKYROOT_BUCKET) : stack;
     }

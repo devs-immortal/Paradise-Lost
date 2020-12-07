@@ -27,6 +27,10 @@ public abstract class MountableEntity extends AetherAnimalEntity {
         super(type, world);
     }
 
+    public MountableEntity(World world) {
+        super(null, world);
+    }
+
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
@@ -49,8 +53,6 @@ public abstract class MountableEntity extends AetherAnimalEntity {
 
             if (motion.z <= 0.0F) motion.multiply(1.0F, 1.0F, 0.25F);
             else motion.multiply(1.0F, 1.0F, 0.75F);
-
-            if (AetherAPI.get(player).isJumping()) this.onMountedJump(motion);
 
             if (this.jumpPower > 0.0F && !this.isMountJumping() && (this.onGround || this.canJumpMidAir)) {
                 this.setVelocity(new Vec3d(this.getVelocity().x, this.getMountJumpStrength() * this.jumpPower, this.getVelocity().z));

@@ -79,7 +79,7 @@ public class PoisonDartEntity extends DartEntity {
         super.onHit(entityIn);
 
         if (entityIn instanceof ServerPlayerEntity) {
-            AetherAPI.get((PlayerEntity) entityIn).inflictPoison(500);
+            //AetherAPI.get((PlayerEntity) entityIn).inflictPoison(500);
 
             PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
 
