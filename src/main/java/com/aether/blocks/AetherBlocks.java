@@ -224,7 +224,6 @@ public class AetherBlocks {
         DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
         DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, FabricBlockSettings.copyOf(Blocks.WATER)) {
         }, buildingBlock());
-        // TODO: Somebody fix pls
         GRAVITITE_ORE = register("gravitite_ore", new GravititeOreBlock(), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);

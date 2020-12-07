@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:decorated",
+  "config": {
+    "feature": {
+      "type": "the_aether:aercloud",
+      "config": {
+        "state": {
+          "Name": "the_aether:golden_aercloud"
+        },
+        "flat": false,
+        "maxRadius": 48,
+        "y": 96
+      }
+    },
+    "decorator": {
+      "type": "minecraft:decorated",
+      "config": {
+        "outer": {
+          "type": "minecraft:heightmap_spread_double",
+          "config": {}
+        },
+        "inner": {
+          "type": "minecraft:chance",
+          "config": {
+            "chance": 30
+          }
+        }
+      }
+    }
+  }
+}

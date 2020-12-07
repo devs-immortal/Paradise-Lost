@@ -9,14 +9,14 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 
 public class AetherFeatures {
-    public static Feature<AercloudConfig> DEFAULT_AERCLOUD;
-    public static Feature<SingleStateFeatureConfig> DEFAULT_LAKE;
-    public static Feature<DefaultFeatureConfig> DEFAULT_QUICKSOIL;
+    public static Feature<AercloudConfig> AERCLOUD;
+    public static Feature<SingleStateFeatureConfig> LAKE;
+    public static Feature<DefaultFeatureConfig> QUICKSOIL;
 
     public static void registerFeatures() {
-        DEFAULT_LAKE = register("default_lake", new AetherLakeFeature(SingleStateFeatureConfig.CODEC));
-        DEFAULT_AERCLOUD = register("default_aercloud", new AercloudFeature());
-        DEFAULT_QUICKSOIL = register("default_quicksoil", new QuicksoilFeature());
+        LAKE = register("lake", new AetherLakeFeature(SingleStateFeatureConfig.CODEC));
+        AERCLOUD = register("aercloud", new AercloudFeature());
+        QUICKSOIL = register("quicksoil", new QuicksoilFeature());
     }
 
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {

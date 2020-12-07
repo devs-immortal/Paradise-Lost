@@ -1,0 +1,50 @@
+{
+  "type": "minecraft:decorated",
+  "config": {
+    "feature": {
+      "type": "minecraft:decorated",
+      "config": {
+        "feature": {
+          "type": "minecraft:decorated",
+          "config": {
+            "feature": {
+              "type": "minecraft:spring_feature",
+              "config": {
+                "rock_count": 4,
+                "hole_count": 1,
+                "valid_blocks": [
+                  "the_aether:holystone"
+                ],
+                "state": {
+                  "Properties": {
+                    "falling": "true"
+                  },
+                  "Name": "minecraft:water"
+                },
+                "requires_block_below": true
+              }
+            },
+            "decorator": {
+              "type": "minecraft:range_biased",
+              "config": {
+                "bottom_offset": 8,
+                "top_offset": 8,
+                "maximum": 256
+              }
+            }
+          }
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      }
+    },
+    "decorator": {
+      "type": "minecraft:count",
+      "config": {
+        "count": 50
+      }
+    }
+  }
+}

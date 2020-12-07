@@ -4,8 +4,8 @@
     "foliage_color": 11665355,
     "grass_color": 11665355,
     "fog_color": 16777215,
-    "water_color": 11139071,
-    "water_fog_color": 11139071
+    "water_color": 4159204,
+    "water_fog_color": 329011
   },
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {
@@ -15,11 +15,10 @@
   "features": [
     [],
     [
-      "the_aether:aether_lake"
+      "the_aether:lake_water"
     ],
     [
-      "the_aether:quicksoil",
-      "the_aether:aether_springs"
+      "the_aether:quicksoil"
     ],
     [],
     [],
@@ -30,7 +29,8 @@
     [],
     [
       "the_aether:aether_grass",
-      "the_aether:aether_tall_grass"
+      "the_aether:aether_tall_grass",
+      "the_aether:water_spring"
     ],
     [
       "the_aether:cold_aercloud",
