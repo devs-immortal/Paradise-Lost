@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "the_aether:block/rootcap",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "the_aether:block/rootcap"
+    },
+    "facing=south": {
+      "model": "the_aether:block/rootcap",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "the_aether:block/rootcap",
+      "y": 270
+    }
+  }
+}
