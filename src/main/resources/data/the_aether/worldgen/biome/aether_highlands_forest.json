@@ -12,8 +12,11 @@
   "features": [
     [
       "the_aether:aether_grass",
+      "the_aether:aether_bush",
       "the_aether:aether_tall_grass",
-      "the_aether:patch_blueberry"
+      "the_aether:aether_fern",
+      "the_aether:patch_blueberry",
+      "the_aether:alt_fallen_leaves"
     ],
     [
       "the_aether:cold_aercloud",

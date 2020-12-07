@@ -13,7 +13,7 @@ public class FeatureMixin {
 
     @Inject(method = {"isSoil(Lnet/minecraft/block/Block;)Z"}, at = {@At("HEAD")}, cancellable = true)
     private static void isSoil(Block block, CallbackInfoReturnable<Boolean> cir) {
-        if (block == AetherBlocks.AETHER_DIRT || block == AetherBlocks.AETHER_GRASS || block == AetherBlocks.AETHER_ENCHANTED_GRASS || block == AetherBlocks.AETHER_FARMLAND) {
+        if (block == AetherBlocks.AETHER_DIRT || block == AetherBlocks.AETHER_GRASS_BLOCK || block == AetherBlocks.AETHER_ENCHANTED_GRASS || block == AetherBlocks.AETHER_FARMLAND) {
             cir.setReturnValue(true);
             cir.cancel();
         }

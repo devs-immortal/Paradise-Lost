@@ -2,12 +2,18 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.particle.AetherParticles;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
@@ -21,10 +27,34 @@ public class AetherLeavesBlock extends LeavesBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!(Boolean) state.get(PERSISTENT) && state.get(DISTANCE) >= 13) {
-            dropStacks(state, world, pos);
-            world.removeBlock(pos, false);
+        if ((state.isOf(AetherBlocks.GOLDEN_OAK_LEAVES) || state.isOf(AetherBlocks.FROST_WISTERIA_LEAVES) || state.isOf(AetherBlocks.ROSE_WISTERIA_LEAVES) || state.isOf(AetherBlocks.LAVENDER_WISTERIA_LEAVES))) {
+            if(!(Boolean) state.get(PERSISTENT) && state.get(DISTANCE) >= 13) {
+                dropStacks(state, world, pos);
+                world.removeBlock(pos, false);
+            }
         }
+        else
+            super.randomTick(state, world, pos, random);
+    }
+
+    public static BlockState getHanger(Block block) {
+        if(block.is(AetherBlocks.ROSE_WISTERIA_LEAVES))
+            return AetherBlocks.ROSE_WISTERIA_HANGER.getDefaultState();
+        else if(block.is(AetherBlocks.LAVENDER_WISTERIA_LEAVES))
+            return AetherBlocks.LAVENDER_WISTERIA_HANGER.getDefaultState();
+        else if(block.is(AetherBlocks.FROST_WISTERIA_LEAVES))
+            return AetherBlocks.FROST_WISTERIA_HANGER.getDefaultState();
+        return Blocks.AIR.getDefaultState();
+    }
+
+    public static BlockState getHangerTip(Block block) {
+        if(block.is(AetherBlocks.ROSE_WISTERIA_LEAVES))
+            return AetherBlocks.ROSE_WISTERIA_HANGER_PLANT.getDefaultState();
+        else if(block.is(AetherBlocks.LAVENDER_WISTERIA_LEAVES))
+            return AetherBlocks.LAVENDER_WISTERIA_HANGER_PLANT.getDefaultState();
+        else if(block.is(AetherBlocks.FROST_WISTERIA_LEAVES))
+            return AetherBlocks.FROST_WISTERIA_HANGER_PLANT.getDefaultState();
+        return Blocks.AIR.getDefaultState();
     }
 
     @Override

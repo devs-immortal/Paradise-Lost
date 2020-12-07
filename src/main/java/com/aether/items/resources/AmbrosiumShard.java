@@ -19,7 +19,7 @@ public class AmbrosiumShard extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getWorld().getBlockState(context.getBlockPos()).getBlock() == AetherBlocks.AETHER_GRASS) {
+        if (context.getWorld().getBlockState(context.getBlockPos()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK) {
             if (!context.getPlayer().isCreative())
                 context.getStack().setCount(context.getStack().getCount() - 1);
             context.getWorld().setBlockState(context.getBlockPos(), AetherBlocks.AETHER_ENCHANTED_GRASS.getDefaultState());

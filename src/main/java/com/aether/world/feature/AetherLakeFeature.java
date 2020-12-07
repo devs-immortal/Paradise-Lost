@@ -104,7 +104,7 @@ public class AetherLakeFeature extends Feature<SingleStateFeatureConfig> {
                             if (bls[(ab * 16 + ac) * 8 + ad]) {
                                 blockPos3 = blockPos.add(ab, ad - 1, ac);
                                 if (isSoil(structureWorldAccess.getBlockState(blockPos3).getBlock()) && structureWorldAccess.getLightLevel(LightType.SKY, blockPos.add(ab, ad, ac)) > 0) {
-                                    structureWorldAccess.setBlockState(blockPos3, AetherBlocks.AETHER_GRASS.getDefaultState(), 2);
+                                    structureWorldAccess.setBlockState(blockPos3, AetherBlocks.AETHER_GRASS_BLOCK.getDefaultState(), 2);
                                 }
                             }
                         }
