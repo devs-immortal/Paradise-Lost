@@ -8,7 +8,10 @@
     "water_fog_color": 11139071
   },
   "surface_builder": "the_aether:aether_surface_builder",
-  "carvers": {},
+  "carvers": {
+    "air": [
+    ]
+  },
   "features": [
     [],
     [

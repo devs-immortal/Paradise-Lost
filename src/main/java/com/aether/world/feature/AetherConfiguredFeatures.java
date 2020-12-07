@@ -23,8 +23,6 @@ import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
-import java.util.Random;
-
 public class AetherConfiguredFeatures {
 
     public static ConfiguredFeature<TreeFeatureConfig, ?> GOLDEN_OAK, SKYROOT;
@@ -42,9 +40,9 @@ public class AetherConfiguredFeatures {
         SKYROOT = register("skyroot_tree", Feature.TREE.configure(Configs.SKYROOT_CONFIG));
         GOLDEN_OAK = register("golden_oak_tree", Feature.TREE.configure(Configs.GOLDEN_OAK_CONFIG));
         SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Configs.SCATTERED_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(5, 0.1F, 1))));
-        COLD_AERCLOUD = register("cold_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.COLD_AERCLOUD_CONFIG).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(15))));
-        BLUE_AERCLOUD = register("blue_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.BLUE_AERCLOUD_CONFIG).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(75))));
-        GOLDEN_AERCLOUD = register("golden_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.GOLDEN_AERCLOUD_CONFIG).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(100))));
+        COLD_AERCLOUD = register("cold_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.COLD_AERCLOUD_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP_SPREAD_DOUBLE).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))));
+        BLUE_AERCLOUD = register("blue_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.BLUE_AERCLOUD_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP_SPREAD_DOUBLE).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(15))));
+        GOLDEN_AERCLOUD = register("golden_aercloud", AetherFeatures.DEFAULT_AERCLOUD.configure(Configs.GOLDEN_AERCLOUD_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP_SPREAD_DOUBLE).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(30))));
         QUICKSOIL = register("quicksoil", AetherFeatures.DEFAULT_QUICKSOIL.configure(new DefaultFeatureConfig())).decorate(Decorator.COUNT.configure(new CountConfig(5)));
     }
 
@@ -65,8 +63,8 @@ public class AetherConfiguredFeatures {
         );
 
         public static final AercloudConfig COLD_AERCLOUD_CONFIG = new AercloudConfig(AetherBlocks.COLD_AERCLOUD.getDefaultState(), false, 48, 64);
-        public static final AercloudConfig BLUE_AERCLOUD_CONFIG = new AercloudConfig(AetherBlocks.BLUE_AERCLOUD.getDefaultState(), false, 24, 32);
-        public static final AercloudConfig GOLDEN_AERCLOUD_CONFIG = new AercloudConfig(AetherBlocks.GOLDEN_AERCLOUD.getDefaultState(), false, 16, 96);
+        public static final AercloudConfig BLUE_AERCLOUD_CONFIG = new AercloudConfig(AetherBlocks.BLUE_AERCLOUD.getDefaultState(), false, 32, 32);
+        public static final AercloudConfig GOLDEN_AERCLOUD_CONFIG = new AercloudConfig(AetherBlocks.GOLDEN_AERCLOUD.getDefaultState(), false, 32, 96);
 
         public static final SingleStateFeatureConfig AETHER_LAKES_CONFIG = new SingleStateFeatureConfig(Blocks.WATER.getDefaultState());
         public static final SpringFeatureConfig AETHER_SPRINGS_CONFIG = new SpringFeatureConfig(Fluids.WATER.getDefaultState(), false, 4, 1, ImmutableSet.of(AetherBlocks.AETHER_DIRT, AetherBlocks.HOLYSTONE));
