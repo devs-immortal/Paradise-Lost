@@ -20,12 +20,12 @@ public class AetherAnimalEntity extends AnimalEntity {
 
     @Override
     public float getPathfindingFavor(BlockPos pos, WorldView worldIn) {
-        return worldIn.getBlockState(pos.down()).getBlock() == AetherBlocks.AETHER_GRASS ? 10.0F : worldIn.getLightLevel(pos) - 0.5F;
+        return worldIn.getBlockState(pos.down()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK ? 10.0F : worldIn.getLightLevel(pos) - 0.5F;
     }
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.getItem() == AetherItems.BLUE_BERRY;
+        return stack.getItem() == AetherItems.BLUEBERRY;
     }
 
     @Override

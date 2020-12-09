@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 public class AetherItemGroups {
     public static final ItemGroup Blocks = FabricItemGroupBuilder.build(
             Aether.locate("aether_blocks"),
-            () -> new ItemStack(AetherBlocks.AETHER_GRASS));
+            () -> new ItemStack(AetherBlocks.AETHER_GRASS_BLOCK));
 
     public static final ItemGroup Tools = FabricItemGroupBuilder.build(
             Aether.locate("aether_tools"),
@@ -25,7 +25,7 @@ public class AetherItemGroups {
 
     public static final ItemGroup Food = FabricItemGroupBuilder.build(
             Aether.locate("aether_food"),
-            () -> new ItemStack(AetherItems.BLUE_BERRY));
+            () -> new ItemStack(AetherItems.BLUEBERRY));
 
     public static final ItemGroup Accessories = FabricItemGroupBuilder.build(
             Aether.locate("aether_accessories"),

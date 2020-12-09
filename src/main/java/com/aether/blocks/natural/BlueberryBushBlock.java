@@ -2,18 +2,17 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.items.AetherItems;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.PlantBlock;
+import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -24,13 +23,10 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlueberryBushBlock extends PlantBlock {
-
-    public static final BooleanProperty RIPE = BooleanProperty.of("ripe");
+public class BlueberryBushBlock extends SweetBerryBushBlock {
 
     public BlueberryBushBlock(Settings settings) {
         super(settings);
-        setDefaultState(this.getDefaultState().with(RIPE, false));
     }
 
     @Override
@@ -38,45 +34,38 @@ public class BlueberryBushBlock extends PlantBlock {
         return true;
     }
 
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(RIPE);
-        super.appendProperties(builder);
-    }
-
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (state.get(RIPE) && entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE)
-            entity.slowMovement(state, new Vec3d(0.800000011920929D, 0.75D, 0.800000011920929D));
+        if (state.get(AGE) > 0 && entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
+            entity.slowMovement(state, new Vec3d(0.900000011920929D, 0.75D, 0.900000011920929D));
+        }
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (state.get(RIPE)) {
-            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(AetherItems.BLUE_BERRY, world.getRandom().nextInt(2) + 1)));
-            world.setBlockState(pos, state.with(RIPE, false));
-            return ActionResult.SUCCESS;
+        int i = state.get(AGE);
+        boolean mature = i == 3;
+        BlockState floor = world.getBlockState(pos.down());
+        double mod = floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 2 : floor.isOf(AetherBlocks.AETHER_FARMLAND) ? 1.5 : 1;
+        if (!mature && player.getStackInHand(hand).getItem() == Items.BONE_MEAL) {
+            return ActionResult.PASS;
+        } else if (i > 1) {
+            int berries = world.random.nextInt(2) + 1;
+            dropStack(world, pos, new ItemStack(AetherItems.BLUEBERRY, (int) (berries + (mature ? 1 : 0) * mod)));
+            world.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+            world.setBlockState(pos, state.with(AGE, 1), 2);
+            return ActionResult.success(world.isClient);
+        } else {
+            return ActionResult.FAIL;
         }
-        return super.onUse(state, world, pos, player, hand, hit);
     }
 
     @Override
-    public boolean hasRandomTicks(BlockState state) {
-        return !state.get(RIPE);
-    }
-
-    @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.getLightLevel(pos) >= 8 && world.getRandom().nextInt(world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 12 : 26) == 0)
-            world.setBlockState(pos, state.with(RIPE, true));
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        return new ItemStack(this.asItem());
     }
 
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOf(AetherBlocks.AETHER_GRASS) || floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) || floor.isOf(AetherBlocks.AETHER_FARMLAND) || floor.isOf(AetherBlocks.AETHER_DIRT);
-    }
-
-    @Override
-    public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
-        return state.get(RIPE) ? 0.2F : 1.0F;
+        return floor.isOf(AetherBlocks.AETHER_GRASS_BLOCK) || floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) || floor.isOf(AetherBlocks.AETHER_FARMLAND) || floor.isOf(AetherBlocks.AETHER_DIRT) || super.canPlantOnTop(floor, world, pos);
     }
 }

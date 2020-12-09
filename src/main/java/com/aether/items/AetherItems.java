@@ -37,7 +37,7 @@ public class AetherItems {
     public static final AetherArmor PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
     public static final AetherArmor OBSIDIAN_HELMET, OBSIDIAN_CHESTPLATE, OBSIDIAN_LEGGINGS, OBSIDIAN_BOOTS;
     public static final AetherArmor VALKYRIE_HELMET, VALKYRIE_CHESTPLATE, VALKYRIE_LEGGINGS, VALKYRIE_BOOTS;
-    public static final Item BLUE_BERRY, ENCHANTED_BLUEBERRY, BLUE_GUMMY_SWET, GOLDEN_GUMMY_SWET, HEALING_STONE, WHITE_APPLE, GINGERBREAD_MAN, CANDY_CANE;
+    public static final Item BLUEBERRY, ENCHANTED_BLUEBERRY, BLUE_GUMMY_SWET, GOLDEN_GUMMY_SWET, HEALING_STONE, WHITE_APPLE, GINGERBREAD_MAN, CANDY_CANE;
     public static final Item SKYROOT_BUCKET, SKYROOT_WATER_BUCKET, SKYROOT_POISON_BUCKET, SKYROOT_REMEDY_BUCKET, SKYROOT_MILK_BUCKET;
     public static final Item CLOUD_PARACHUTE, GOLDEN_CLOUD_PARACHUTE;
     public static final Item BRONZE_KEY, SILVER_KEY, GOLDEN_KEY;
@@ -144,7 +144,7 @@ public class AetherItems {
         SENTRY_BOOTS = (AetherArmor) register("sentry_boots", new AetherArmor("sentry", AetherArmorType.Valkyrie, AETHER_LOOT, EquipmentSlot.FEET));
 
         // Food
-        BLUE_BERRY = register("blue_berry", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
+        BLUEBERRY = register("blue_berry", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
         ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
         WHITE_APPLE = register("white_apple", new WhiteApple());
         BLUE_GUMMY_SWET = register("blue_gummy_swet", new GummySwet());

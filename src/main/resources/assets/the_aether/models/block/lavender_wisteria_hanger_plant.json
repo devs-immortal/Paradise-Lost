@@ -1,0 +1,6 @@
+{
+  "parent": "the_aether:block/wisteria_hanger",
+  "textures": {
+    "leaves": "the_aether:block/lavender_wisteria_hanger_tip"
+  }
+}
