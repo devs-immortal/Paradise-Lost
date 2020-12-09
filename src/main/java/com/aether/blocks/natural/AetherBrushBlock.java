@@ -1,19 +1,30 @@
 package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FernBlock;
-import net.minecraft.block.TallPlantBlock;
+import com.google.common.collect.ImmutableSet;
+import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 
 import java.util.Random;
+import java.util.Set;
 
 public class AetherBrushBlock extends FernBlock {
 
+    private final Set<Block> validFloors;
+    private final boolean override;
+
     public AetherBrushBlock(Settings settings) {
         super(settings);
+        validFloors = ImmutableSet.of();
+        override = false;
+    }
+
+    public AetherBrushBlock(Settings settings, Set<Block> validFloors, boolean override) {
+        super(settings);
+        this.validFloors = validFloors;
+        this.override = override;
     }
 
     @Override
@@ -29,6 +40,13 @@ public class AetherBrushBlock extends FernBlock {
             if(world.isAir(target) && canPlaceAt(state, world, target) && random.nextInt(target.getManhattanDistance(pos) + 1) == 0)
                 world.setBlockState(target, state);
         });
+    }
+
+    @Override
+    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
+        if(override)
+            return validFloors.contains(floor.getBlock());
+        return super.canPlantOnTop(floor, world, pos) || validFloors.contains(floor.getBlock());
     }
 
     @Override

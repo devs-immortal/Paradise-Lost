@@ -4,14 +4,11 @@
     "foliage_color": 14483329,
     "grass_color": 11665355,
     "fog_color": 16777215,
-    "water_color": 4159204,
-    "water_fog_color": 329011
+    "water_color": 11139071,
+    "water_fog_color": 11139071
   },
   "surface_builder": "the_aether:aether_surface_builder",
-  "carvers": {
-    "air": [
-    ]
-  },
+  "carvers": {},
   "features": [
     [],
     [
@@ -34,7 +31,8 @@
       "the_aether:alt_aether_grass",
       "the_aether:alt_aether_tall_grass",
       "the_aether:patch_blueberry",
-      "the_aether:sparse_trees"
+      "the_aether:sparse_trees",
+      "the_aether:flutegrass"
     ],
     [
       "the_aether:cold_aercloud",

@@ -16,7 +16,7 @@ public class WhiteApple extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stackIn, World worldIn, LivingEntity entityIn) {
-        if (entityIn instanceof PlayerEntity) AetherAPI.get((PlayerEntity) entityIn).inflictCure(300);
+        if (entityIn instanceof PlayerEntity); //AetherAPI.get((PlayerEntity) entityIn).inflictCure(300);
         return super.finishUsing(stackIn, worldIn, entityIn);
     }
 }

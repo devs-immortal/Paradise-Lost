@@ -149,12 +149,12 @@ public class AerbunnyEntity extends AetherAnimalEntity {
                 player.fallDistance = 0.0F;
 
                 if (player.getVelocity().y < -0.22499999403953552D) {
-                    if (AetherAPI.get(player).isJumping()) {
-                        this.setVelocity(new Vec3d(this.getVelocity().x, 0.125D, this.getVelocity().z));
-
-                        this.setPuffiness(11);
-                        this.playSpawnEffects();
-                    }
+                    //if (AetherAPI.get(player).isJumping()) {
+                    //    this.setVelocity(new Vec3d(this.getVelocity().x, 0.125D, this.getVelocity().z));
+//
+                    //    this.setPuffiness(11);
+                    //    this.playSpawnEffects();
+                    //}
                 }
             }
         }
