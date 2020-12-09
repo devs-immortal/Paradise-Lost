@@ -8,7 +8,6 @@ import com.aether.blocks.natural.ore.GravititeOreBlock;
 import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.items.AetherItemGroups;
 import com.aether.world.feature.tree.*;
-import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -259,7 +258,6 @@ public class AetherBlocks {
         DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
         DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, FabricBlockSettings.copyOf(Blocks.WATER)) {
         });
-        // TODO: Somebody fix pls
         GRAVITITE_ORE = register("gravitite_ore", new GravititeOreBlock(), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
@@ -317,8 +315,7 @@ public class AetherBlocks {
         QUICKSOIL = register("quicksoil", new Block(FabricBlockSettings.of(Material.AGGREGATE).strength(0.5f, -1.0f).slipperiness(1.1F).velocityMultiplier(1.002F).sounds(BlockSoundGroup.SAND)), buildingBlock());
         QUICKSOIL_GLASS = register("quicksoil_glass", new GlassBlock(FabricBlockSettings.of(Material.GLASS).luminance(14).strength(0.2f, -1.0f).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
         QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
-        FLUTEGRASS = register("flutegrass", new AetherBrushBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD), ImmutableSet.of(QUICKSOIL), true), buildingBlock());
-        //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
+//        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
         SENTRY_STONE = register("sentry_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
         SENTRY_CRACKED_STONE = register("sentry_stone_cracked", new Block(FabricBlockSettings.copyOf(SENTRY_STONE)), buildingBlock());
         LIGHT_SENTRY_STONE = register("light_sentry_stone", new Block(FabricBlockSettings.copyOf(SENTRY_STONE).luminance(ignored -> 10)), buildingBlock());

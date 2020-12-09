@@ -17,7 +17,8 @@
       "Properties": {
 
       }
-    }
+    },
+    "generate_quick_soil": true
   },
-  "type": "minecraft:default"
+  "type": "the_aether:surface_builder"
 }

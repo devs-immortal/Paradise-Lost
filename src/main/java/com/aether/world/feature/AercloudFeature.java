@@ -5,10 +5,15 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
 
@@ -26,54 +31,43 @@ public class AercloudFeature extends Feature<AercloudConfig> {
 
     @Override
     public boolean generate(StructureWorldAccess worldIn, ChunkGenerator generator, Random randIn, BlockPos posIn, AercloudConfig configIn) {
-        BlockPos origin = new BlockPos(posIn.getX(), (randIn.nextInt(configIn.isFlat() ? 4 : 64)) + configIn.getY(), posIn.getZ());
-        BlockPos.Mutable mut0 = new BlockPos.Mutable();
-        BlockPos.Mutable mut1 = new BlockPos.Mutable();
+        BlockPos.Mutable mut = new BlockPos.Mutable(posIn.getX() + 8, (randIn.nextInt(configIn.isFlat() ? 4 : 16)) + 30 + configIn.getY(), posIn.getZ() + 8);
 
-        int x = 0, y = 0, z = 0;
-        int xTrend = randIn.nextInt() % 2 == 0 ? -1 : 1;
-        int zTrend = randIn.nextInt() % 2 == 0 ? -1 : 1;
-        int stride = randIn.nextInt(2) + 1;
-        boolean which = randIn.nextBoolean();
+        ChunkRegion region = (ChunkRegion) worldIn;
 
-        origin = origin.add(-64 * xTrend, 0, -64 * zTrend);
+        int size = randIn.nextInt(60) + 20;
+        double s = Math.sqrt(size);
 
-        for (int i = 0; i < configIn.maxSegments(); ++i) {
-            int dX = randIn.nextInt(3);
-            int dY = randIn.nextInt(20) == 0 ? 0 : randIn.nextInt(3);
-            int dZ = randIn.nextInt(3);
+        List<int[]> positions = new ArrayList<>();
+        MutableBoolean fail = new MutableBoolean(false);
 
-            int xMax = randIn.nextInt(4) + 9;
-            int yMax = randIn.nextInt(1) + 2;
-            int zMax = randIn.nextInt(4) + 9;
+        for (int i = 0; i < size; ++i) {
+            double v = s * Math.sin((Math.PI * i) / size);
+            int base = (int) (s + v);
 
-            int radius = randIn.nextInt(4) + 4;
-
-            x += dX + (xTrend * (which ? stride : 1));
-            y += dY - 1;
-            z += dZ + (zTrend * (which ? 1 : stride));
-
-            mut0.set(origin);
-            mut0.move(x, y, z);
-
-            for (int x0 = x - xMax; x0 < x + xMax; ++x0) {
-                for (int y0 = y; y0 < y + yMax; ++y0) {
-                    for (int z0 = z - zMax; z0 < z + zMax; ++z0) {
-                        mut1.set(origin);
-                        mut1.move(x0, y0, z0);
-
-                        try {
-                            if (worldIn.getBlockState(mut1).isAir() && mut1.isWithinDistance(mut0, radius)) {
-                                this.setBlockState(worldIn, mut1, configIn.getCloudState());
-                            }
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
-                        }
-                    }
+            int width = (int) (randIn.nextDouble() * base + s);
+            int height = (int) (randIn.nextDouble() * base + (s / 2));
+            int depth = (int) (randIn.nextDouble() * base + s);
+            BlockPos.iterate(mut.add(-width / 2, -height / 2, -depth / 2), mut.add(width / 2, height / 2, depth / 2)).forEach(pos -> {
+                if (worldIn.getBlockState(pos).isAir() && region.isChunkLoaded(pos.getX() >> 4, pos.getZ() >> 4)) {
+                    positions.add(new int[] {pos.getX(), pos.getY(), pos.getZ()});
+                } else {
+                    fail.setTrue();
                 }
+            });
+
+            int distance = (int) Math.ceil(s + (s - v));
+
+            mut.move(randIn.nextInt(distance) - distance / 2, randIn.nextInt(3) - 1, randIn.nextInt(distance) - (distance / 2));
+        }
+
+        if (!fail.booleanValue()) {
+            for (int[] pos : positions) {
+                mut.set(pos[0], pos[1], pos[2]);
+                this.setBlockState(worldIn, mut, configIn.getCloudState());
             }
         }
-        
-        return true;
+
+        return !fail.booleanValue();
     }
 }

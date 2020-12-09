@@ -1,0 +1,48 @@
+{
+  "type": "minecraft:decorated",
+  "config": {
+    "feature": {
+      "type": "minecraft:ore",
+      "config": {
+        "target": {
+          "predicate_type": "block_match",
+          "block": "the_aether:holystone"
+        },
+        "state": {
+          "Name": "the_aether:zanite_ore"
+        },
+        "size": 9
+      }
+    },
+    "decorator": {
+      "type": "minecraft:decorated",
+      "config": {
+        "outer": {
+          "type": "minecraft:count_extra",
+          "config": {
+            "count": 6,
+            "extra_chance": 0.6,
+            "extra_count": 2
+          }
+        },
+        "inner": {
+          "type": "minecraft:decorated",
+          "config": {
+            "outer": {
+              "type": "minecraft:range",
+              "config": {
+                "bottom_offset": 0,
+                "top_offset": 0,
+                "maximum": 128
+              }
+            },
+            "inner": {
+              "type": "minecraft:square",
+              "config": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
