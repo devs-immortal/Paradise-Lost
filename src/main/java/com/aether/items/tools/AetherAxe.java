@@ -1,6 +1,5 @@
 package com.aether.items.tools;
 
-import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
@@ -10,7 +9,6 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -19,13 +17,8 @@ public class AetherAxe extends AxeItem implements IAetherTool {
     private final AetherTiers material;
     public float[] zaniteHarvestLevels = new float[]{2F, 4F, 6F, 8F, 12F};
 
-    public AetherAxe(AetherTiers material, float damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Tools));
-        this.material = material;
-    }
-
-    public AetherAxe(AetherTiers material, Rarity rarity, float damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Tools).rarity(rarity));
+    public AetherAxe(AetherTiers material, Settings settings, float damageVsEntity, float attackSpeed) {
+        super(material.getDefaultTier(), damageVsEntity, attackSpeed, settings);
         this.material = material;
     }
 

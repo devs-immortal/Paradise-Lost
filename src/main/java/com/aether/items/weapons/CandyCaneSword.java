@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 import java.util.Random;
 
 public class CandyCaneSword extends AetherSword {
-    public CandyCaneSword() {
-        super(AetherTiers.Candy, 3, -2.0F);
+    public CandyCaneSword(Settings settings) {
+        super(AetherTiers.Candy, 3, -2, settings);
     }
 
     @Override

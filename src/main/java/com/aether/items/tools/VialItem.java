@@ -14,11 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
-public class QuicksoilVial extends Item {
+public class VialItem extends Item {
 
     private final Fluid fluid;
 
-    public QuicksoilVial(Fluid fluid, Settings settings) {
+    public VialItem(Fluid fluid, Settings settings) {
         super(settings);
         this.fluid = fluid;
     }

@@ -1,7 +1,5 @@
 package com.aether.items.food;
 
-import com.aether.items.AetherItemGroups;
-import com.aether.items.AetherItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,8 +10,8 @@ import net.minecraft.world.World;
 
 public class GummySwet extends Item {
 
-    public GummySwet() {
-        super(new Settings().group(AetherItemGroups.Food).rarity(AetherItems.AETHER_LOOT));
+    public GummySwet(Settings settings) {
+        super(settings);
     }
 
     @Override

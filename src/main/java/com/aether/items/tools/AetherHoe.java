@@ -31,14 +31,8 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     ));
     private final AetherTiers material;
 
-    public AetherHoe(AetherTiers material, float attackSpeed) {
-        super(material.getDefaultTier(), 1, attackSpeed, new Settings().group(AetherItemGroups.Tools));
-        this.material = material;
-        setupConvertibleData();
-    }
-
-    public AetherHoe(AetherTiers material, Rarity rarity, float attackSpeed) {
-        super(material.getDefaultTier(), 1, attackSpeed, new Settings().group(AetherItemGroups.Tools).rarity(rarity));
+    public AetherHoe(AetherTiers material, Settings settings, float attackSpeed) {
+        super(material.getDefaultTier(), 1, attackSpeed, settings);
         this.material = material;
         setupConvertibleData();
     }
