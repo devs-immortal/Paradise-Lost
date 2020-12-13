@@ -8,6 +8,7 @@ import com.aether.blocks.natural.ore.GravititeOreBlock;
 import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.items.AetherItemGroups;
 import com.aether.world.feature.tree.*;
+import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -316,6 +317,7 @@ public class AetherBlocks {
         QUICKSOIL_GLASS = register("quicksoil_glass", new GlassBlock(FabricBlockSettings.of(Material.GLASS).luminance(14).strength(0.2f, -1.0f).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
         QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
 //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
+        FLUTEGRASS = register("flutegrass", new AetherBrushBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD), ImmutableSet.of(QUICKSOIL), true), buildingBlock());
         SENTRY_STONE = register("sentry_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
         SENTRY_CRACKED_STONE = register("sentry_stone_cracked", new Block(FabricBlockSettings.copyOf(SENTRY_STONE)), buildingBlock());
         LIGHT_SENTRY_STONE = register("light_sentry_stone", new Block(FabricBlockSettings.copyOf(SENTRY_STONE).luminance(ignored -> 10)), buildingBlock());
