@@ -12,12 +12,13 @@
     "Oscar Payn",
     "Hugo Payn",
     "JellySquid",
-    "Calum Henderson (diabolical17)"
+    "Calum Henderson (diabolical17)",
+    "Karanomuro"
   ],
   "contact": {
-    "homepage": "https://github.com/kalucky0/The-Aether",
-    "sources": "https://github.com/kalucky0/The-Aether",
-    "issues": "https://github.com/kalucky0/The-Aether/issues"
+    "homepage": "https://github.com/devs-immortal/The-Aether",
+    "sources": "https://github.com/devs-immortal/The-Aether",
+    "issues": "https://github.com/devs-immortal/The-Aether/issues"
   },
   "depends": {
     "fabricloader": ">=0.4.0",
