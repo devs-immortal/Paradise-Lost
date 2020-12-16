@@ -9,7 +9,7 @@
     "music": {
       "sound": "the_aether:flying_01",
       "min_delay": 0,
-      "max_delay": 0,
+      "max_delay": 240,
       "replace_current_music": true
     }
   },

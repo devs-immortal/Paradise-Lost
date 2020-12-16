@@ -10,7 +10,7 @@
     "music": {
       "sound": "the_aether:exploring_empty_spaces",
       "min_delay": 0,
-      "max_delay": 0,
+      "max_delay": 240,
       "replace_current_music": true
     }
   },
