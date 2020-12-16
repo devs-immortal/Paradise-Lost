@@ -1,8 +1,27 @@
 {
-  "above": {
-    "sounds": [
-      "the_aether:above"
-    ]
-  }
+	"above": {
+		"sounds": [
+			"the_aether:above"
+		]
+	},
+	"exploring_empty_spaces": {
+		"sounds": [
+			"the_aether:exploring_empty_spaces"
+		]
+	},
+	"floaty_blocks": {
+		"sounds": [
+			"the_aether:floaty_blocks"
+		]
+	},
+	"flying_01": {
+		"sounds": [
+			"the_aether:flying_01"
+		]
+	},
+	"soaring": {
+		"sounds": [
+			"the_aether:soaring"
+		]
+	}
 }
-
