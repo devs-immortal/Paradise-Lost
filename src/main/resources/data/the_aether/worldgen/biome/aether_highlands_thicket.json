@@ -9,8 +9,8 @@
     "grass_color_modifier": "dark_forest",
     "music": {
       "sound": "the_aether:exploring_empty_spaces",
-      "min_delay": 0,
-      "max_delay": 240,
+      "min_delay": 280,
+      "max_delay": 14400,
       "replace_current_music": true
     }
   },

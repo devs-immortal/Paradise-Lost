@@ -14,9 +14,9 @@
 			"the_aether:floaty_blocks"
 		]
 	},
-	"flying_01": {
+	"flying": {
 		"sounds": [
-			"the_aether:flying_01"
+			"the_aether:flying"
 		]
 	},
 	"soaring": {

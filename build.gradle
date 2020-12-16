@@ -1,3 +1,5 @@
+import com.modrinth.minotaur.TaskModrinthUpload
+
 buildscript {
     dependencies {
         classpath 'de.guntram.mcmod:crowdin-translate:1.2'
@@ -13,6 +15,7 @@ buildscript {
 plugins {
     id 'fabric-loom' version '0.5-SNAPSHOT'
     id 'maven-publish'
+    id "com.modrinth.minotaur" version "1.1.0"
 }
 
 apply plugin: 'de.guntram.mcmod.crowdin-translate'
@@ -125,6 +128,23 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = "sources"
     from sourceSets.main.allSource
 }
+
+//task publishModrinth (type: TaskModrinthUpload){
+//    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//    System.out.println("Enter the modrinth auth token: ");
+//    token = br.readLine(); // Get password
+//    projectId = 'IKpsG0nF'
+//    System.out.println("Enter the version number:");
+//    versionNumber = br.readLine();
+//    System.out.println("Enter the version name:");
+//    versionName = br.readLine();
+//    uploadFile = jar // This is the java jar task
+//    System.out.println("Enter the game version number: (See minotaur docs for valids)");
+//    addGameVersion(br.readLine());
+//    System.out.println("Enter changelog:");
+//    changelog = br.readLine();
+//    addLoader('fabric')
+//}
 
 jar {
     from "LICENSE.md"
