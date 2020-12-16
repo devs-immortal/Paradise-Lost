@@ -1,6 +1,5 @@
 package com.aether;
 
-import com.aether.audio.AetherSounds;
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.block.AetherColorProvs;
 import com.aether.client.rendering.particle.AetherParticles;
@@ -52,7 +51,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherEntityTypes.initializeClient();
         AetherMoaTypes.initialization();
         AetherParticles.initializeClient();
-        AetherSounds.initializeClient();
+        //AetherSounds.initializeClient();
         GeckolibRenderRegistry.init();
         NetworkingHell.initClient();
     }
