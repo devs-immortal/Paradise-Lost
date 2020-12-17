@@ -19,15 +19,8 @@ You can support my work by [making a pledge](https://www.patreon.com/kalucky0) t
 ## Translations
 [![Crowdin](https://badges.crowdin.net/aether/localized.svg)](https://crowdin.com/project/aether)
 
-The Aether project makes use of crowd sourced translations. The Aether is available in these languages thanks to the following contributors:
+The Aether project makes use of crowd sourced translations. 
 
-- Polish * (pl_PL)
-- British English (en_GB) - [diabolical17](https://github.com/diabolical17)
-- Spanish * (es_LA) - [diabolical17](https://github.com/diabolical17)
-
-_\* Indicates only partial language support._
-
-The above list is incomplete, and as such, if your name is missing from it, please contact us.
 **You can help translate The Aether mod to additional languages here: [crowdin.com](https://crowdin.com/project/aether).**
 
 ## Gallery
