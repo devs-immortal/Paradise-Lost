@@ -5,7 +5,7 @@
 
 The Aether is a dimension high in the sky composed of floating islands. Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, mythical creatures and perilous Dungeons. All you need to do is build a Glowstone frame and add water to light the mystical portal, step in and you'll be transported immediately to the luscious hostile paradise known as the Aether.
 
-You can download the mod on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/aether) or the [releases tab](https://github.com/kalucky0/The-Aether/releases) on github.
+You can download the mod on [Modrinth](https://modrinth.com/mod/aether) or the [releases tab](https://github.com/kalucky0/The-Aether/releases) on github.
 
 **Original repo:** [GildedGames/The-Aether](https://gitea.gildedgames.com/GildedGames/The-Aether)
 
@@ -31,7 +31,12 @@ The above list is incomplete, and as such, if your name is missing from it, plea
 **You can help translate The Aether mod to additional languages here: [crowdin.com](https://crowdin.com/project/aether).**
 
 ## Gallery
-<img src="https://cdn.discordapp.com/attachments/770698788629118997/772862334792237106/2020-11-02_17.38.44.png" width="30%"></img> <img src="https://cdn.discordapp.com/attachments/770698788629118997/772861007793225779/unknown.png" width="30%"></img> <img src="https://cdn.discordapp.com/attachments/770698788629118997/772210831566831666/unknown.png" width="30%"></img> <img src="https://cdn.discordapp.com/attachments/770698788629118997/772188663559880704/2020-10-31_21.01.46.png" width="30%"></img> <img src="https://i.imgur.com/QOUUNCP.jpg" width="30%"></img> <img src="https://i.imgur.com/Ipw8clh.jpg" width="30%"></img> 
+
+<img src="https://i.imgur.com/Rt0E0y4.jpg" width="570">
+<br>
+<img src="https://i.imgur.com/Ync6Nwh.jpg"  width="570">
+</center>
+<br><br>
 
 ## License information
 Created by Immortal Devs.\
