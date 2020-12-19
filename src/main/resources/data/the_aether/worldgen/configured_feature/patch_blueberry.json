@@ -7,13 +7,13 @@
             "can_replace": false,
             "project": true,
             "need_water": false,
-            "xspread": 7,
-            "yspread": 3,
-            "zspread": 7,
+            "xspread": 5,
+            "yspread": 5,
+            "zspread": 5,
             "whitelist": [
             ],
             "blacklist": [],
-            "tries": 8,
+            "tries": 42,
             "state_provider": {
               "state": {
                 "Name": "the_aether:blueberry_bush",
