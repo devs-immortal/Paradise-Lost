@@ -5,7 +5,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Rarity;
 
 public class AetherDisc extends MusicDiscItem {
-    public AetherDisc(int comparatorValueIn, SoundEvent soundIn) {
-        super(comparatorValueIn, soundIn, new Settings().maxCount(1).group(AetherItemGroups.Misc).rarity(Rarity.RARE));
+    public AetherDisc(int comparatorValueIn, SoundEvent soundIn, Settings settings) {
+        super(comparatorValueIn, soundIn, settings/*new Settings().maxCount(1).group(AetherItemGroups.Misc).rarity(Rarity.RARE)*/);
     }
 }

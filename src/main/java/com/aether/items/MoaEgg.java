@@ -12,9 +12,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.collection.DefaultedList;
 
 public class MoaEgg extends Item {
-
-    public MoaEgg() {
-        super(new Item.Settings().maxCount(1).group(AetherItemGroups.Misc));
+    public MoaEgg(Settings settings) {
+        super(settings);
     }
 
     public static ItemStack getStack(MoaType type) {

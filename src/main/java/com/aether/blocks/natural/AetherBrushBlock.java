@@ -16,9 +16,7 @@ public class AetherBrushBlock extends FernBlock {
     private final boolean override;
 
     public AetherBrushBlock(Settings settings) {
-        super(settings);
-        validFloors = ImmutableSet.of();
-        override = false;
+        this(settings, ImmutableSet.of(), false);
     }
 
     public AetherBrushBlock(Settings settings, Set<Block> validFloors, boolean override) {

@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 
 public class VampireBlade extends AetherSword {
 
-    public VampireBlade() {
-        super(AetherTiers.Legendary, AetherItems.AETHER_LOOT, 3, -2.4F);
+    public VampireBlade(Settings settings) {
+        super(AetherTiers.Legendary, -2.4F, 3, settings);
     }
 
     @Override

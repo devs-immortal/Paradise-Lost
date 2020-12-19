@@ -2,7 +2,7 @@ package com.aether.items.accessories;
 
 import net.minecraft.util.collection.Int2ObjectBiMap;
 
-public enum AccessoryTypes {
+public enum AccessoryType {
     RING("ring", 11, 3),
     EXTRA_RING("ring", 11, 3),
     PENDANT("pendant", 16, 7),
@@ -15,14 +15,14 @@ public enum AccessoryTypes {
     private final int durability, damagedReduced;
     private final String displayName;
 
-    AccessoryTypes(String displayName, int durability, int damageReduced) {
+    AccessoryType(String displayName, int durability, int damageReduced) {
         this.displayName = displayName;
         this.durability = durability;
         this.damagedReduced = damageReduced;
     }
 
-    public static Int2ObjectBiMap<AccessoryTypes> createCompleteList() {
-        Int2ObjectBiMap<AccessoryTypes> map = new Int2ObjectBiMap<AccessoryTypes>(8);
+    public static Int2ObjectBiMap<AccessoryType> createCompleteList() {
+        Int2ObjectBiMap<AccessoryType> map = new Int2ObjectBiMap<AccessoryType>(8);
 
         map.put(PENDANT, 0);
         map.put(CAPE, 1);

@@ -19,7 +19,7 @@ import java.util.Random;
 @SuppressWarnings("unchecked")
 public class AetherGrassBlock extends SpreadableAetherBlock implements Fertilizable {
     public AetherGrassBlock(Settings settings) {
-        super(settings.strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS));
+        super(settings);
     }
 
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
