@@ -6,7 +6,13 @@
     "fog_color": 16777215,
     "water_color": 11139071,
     "water_fog_color": 11139071,
-    "grass_color_modifier": "dark_forest"
+    "grass_color_modifier": "dark_forest",
+    "music": {
+      "sound": "the_aether:exploring_empty_spaces",
+      "min_delay": 280,
+      "max_delay": 14400,
+      "replace_current_music": true
+    }
   },
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {},

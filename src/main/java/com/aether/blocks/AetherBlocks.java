@@ -334,6 +334,7 @@ public class AetherBlocks {
         QUICKSOIL = register("quicksoil", new Block(FabricBlockSettings.of(Material.AGGREGATE).strength(0.5f, -1.0f).slipperiness(1.1F).velocityMultiplier(1.002F).sounds(BlockSoundGroup.SAND)), buildingBlock());
         QUICKSOIL_GLASS = register("quicksoil_glass", new GlassBlock(FabricBlockSettings.of(Material.GLASS).luminance(14).strength(0.2f, -1.0f).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
         QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
+        FLUTEGRASS = register("flutegrass", new AetherBrushBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD), ImmutableSet.of(QUICKSOIL), true), buildingBlock());
 //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
         FLUTEGRASS = register("flutegrass", new AetherBrushBlock(GRASS.materialColor(MaterialColor.GOLD), ImmutableSet.of(QUICKSOIL), true), buildingBlock());
         final FabricBlockSettings SENTRY_STONES = FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE);

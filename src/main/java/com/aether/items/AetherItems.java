@@ -254,13 +254,6 @@ public class AetherItems {
         INVISIBILITY_CAPE = register("invisibility_cape", new ItemAccessory(AccessoryType.CAPE, new AetherItemSettings().rarity(AETHER_LOOT)));
 
         AETHER_PORTAL = register("aether_portal", new AetherPortalItem(new Item.Settings().group(AetherItemGroups.Misc)));
-        // Some music, I think the original ones are copyrighted but whatever
-        // I'll make a few -d17
-        //TODO: Add AetherSounds
-        //AETHER_TUNE = register("aether_tune", new AetherDisc(20, AetherSounds.aether_tune));
-        //ASCENDING_DAWN = register("ascending_dawn", new AetherDisc(12, AetherSounds.ascending_dawn));
-//        WELCOMING_SKIES = register("welcoming_skies", new AetherDisc(10, AetherSounds.welcoming_skies));
-//        LEGACY = register("legacy", new AetherDisc(6, AetherSounds.legacy));
     }
 
     private static <T extends Item> T register(String id, T item) {

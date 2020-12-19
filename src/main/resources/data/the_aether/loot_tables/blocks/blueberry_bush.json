@@ -1,0 +1,43 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 2,
+      "bonus_rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "the_aether:blueberry"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "enchantments": [
+              {
+                "enchantment": "minecraft:fortune"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "bonus_rolls": {
+        "min": 2,
+        "max": 5
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "the_aether:blueberry"
+        }
+      ]
+    }
+  ]
+}

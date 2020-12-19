@@ -3,6 +3,8 @@
 .settings
 .vscode
 
+todo.md
+
 *.iml
 *.ipr
 *.iws
