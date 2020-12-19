@@ -14,11 +14,12 @@ public class AetherFeatures {
     public static Feature<DefaultFeatureConfig> QUICKSOIL;
 
     public static void registerFeatures() {
-        LAKE = register("lake", new AetherLakeFeature(SingleStateFeatureConfig.CODEC));
-        AERCLOUD = register("aercloud", new AercloudFeature());
-        QUICKSOIL = register("quicksoil", new QuicksoilFeature());
+        register("lake", new AetherLakeFeature(SingleStateFeatureConfig.CODEC));
+        register("aercloud", new AercloudFeature());
+        register("quicksoil", new QuicksoilFeature());
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {
         return Registry.register(Registry.FEATURE, Aether.locate(id), feature);
     }
