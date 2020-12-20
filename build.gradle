@@ -102,6 +102,9 @@ dependencies {
     modImplementation "dev.hephaestus:seedy-behavior:${project.seedy_version}"
     include "dev.hephaestus:seedy-behavior:${project.seedy_version}"
 
+    // Modmenu
+    modRuntime("io.github.prospector:modmenu:1.7.16.1.14.4+build.128")
+
     // Implement trinkets for parachutes, rings etc.
     modImplementation "com.github.emilyploszaj:trinkets:${trinkets_version}"
 }
