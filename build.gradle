@@ -54,6 +54,10 @@ repositories {
     maven { url "https://dl.bintray.com/kyrptonaught/customportalapi" }
     maven { url "https://hephaestus.dev/release" }
     maven { url "https://jitpack.io" }
+    maven {
+        name = "NerdHubMC"
+        url = "https://maven.abusedmaster.xyz/"
+    }
     jcenter()
     mavenCentral()
 }
@@ -97,6 +101,9 @@ dependencies {
 
     modImplementation "dev.hephaestus:seedy-behavior:${project.seedy_version}"
     include "dev.hephaestus:seedy-behavior:${project.seedy_version}"
+
+    // Implement trinkets for parachutes, rings etc.
+    modImplementation "com.github.emilyploszaj:trinkets:${trinkets_version}"
 }
 
 processResources {

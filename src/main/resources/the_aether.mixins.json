@@ -11,6 +11,7 @@
     "block.PlantBlockMixin",
     "client.InGameHudMixin",
     "entity.EntityMixin",
+    "entity.MixinLivingEntity",
     "entity.PlayerEntityMixin",
     "item.AxeItemMixin",
     "item.HoeItemMixin",
