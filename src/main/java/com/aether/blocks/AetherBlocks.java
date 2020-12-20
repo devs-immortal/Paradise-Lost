@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.FlowableFluid;
@@ -394,6 +395,10 @@ public class AetherBlocks {
     }
 
     private static Block register(String id, Block block, Item.Settings settings) {
+        return register(id, block, true, settings);
+    }
+    private static Block register(String id, Block block, Item.Settings settings, boolean flamable, int burn, int spread) {
+        FlammableBlockRegistry.getDefaultInstance().add(block, burn, spread);
         return register(id, block, true, settings);
     }
 
