@@ -1,12 +1,10 @@
 package com.aether.items.armor;
 
-import com.aether.items.AetherItemGroups;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.item.Item;
-import net.minecraft.util.Rarity;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -23,23 +21,13 @@ public class AetherArmor extends GeoArmorItem implements IAnimatable {
     private final AetherArmorType typeIn;
     private String armorName = "iron";
 
-    public AetherArmor(AetherArmorType typeIn, EquipmentSlot slotIn) {
-        super(typeIn.getMaterial(), slotIn, new Settings().group(AetherItemGroups.Armor));
+    public AetherArmor(AetherArmorType typeIn, EquipmentSlot slotIn, Settings settings) {
+        super(typeIn.getMaterial(), slotIn, settings);
         this.typeIn = typeIn;
     }
 
-    public AetherArmor(AetherArmorType typeIn, Rarity rarityIn, EquipmentSlot slotIn) {
-        super(typeIn.getMaterial(), slotIn, new Settings().group(AetherItemGroups.Armor).rarity(rarityIn));
-        this.typeIn = typeIn;
-    }
-
-    public AetherArmor(String nameIn, AetherArmorType typeIn, EquipmentSlot slotIn) {
-        this(typeIn, slotIn);
-        this.armorName = nameIn;
-    }
-
-    public AetherArmor(String nameIn, AetherArmorType typeIn, Rarity rarityIn, EquipmentSlot slotIn) {
-        this(typeIn, rarityIn, slotIn);
+    public AetherArmor(String nameIn, AetherArmorType typeIn, EquipmentSlot slotIn, Settings settings) {
+        this(typeIn, slotIn, settings);
         this.armorName = nameIn;
     }
 

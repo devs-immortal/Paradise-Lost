@@ -1,6 +1,5 @@
 package com.aether.items.tools;
 
-import com.aether.api.AetherAPI;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
 import net.kyrptonaught.customportalapi.util.CustomPortalFluidProvider;
@@ -29,21 +28,15 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
 public class SkyrootBucket extends Item implements CustomPortalFluidProvider {
-
     private final Fluid containedBlock;
 
-    public SkyrootBucket() {
-        super(new Settings().maxCount(16).group(AetherItemGroups.Misc));
+    public SkyrootBucket(Settings settings) {
+        super(settings);
         this.containedBlock = Fluids.EMPTY;
     }
 
-    public SkyrootBucket(Item containerIn) {
-        super(new Settings().maxCount(1).group(AetherItemGroups.Misc).recipeRemainder(containerIn));
-        this.containedBlock = Fluids.EMPTY;
-    }
-
-    public SkyrootBucket(Fluid containedFluidIn, Item containerIn) {
-        super(new Settings().maxCount(1).group(AetherItemGroups.Misc).recipeRemainder(containerIn));
+    public SkyrootBucket(Fluid containedFluidIn, Settings settings) {
+        super(settings);
         this.containedBlock = containedFluidIn;
     }
 

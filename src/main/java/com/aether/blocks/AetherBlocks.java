@@ -15,6 +15,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -209,19 +210,31 @@ public class AetherBlocks {
     public static final Block AETHER_BUSH;
 
     static {
-        AETHER_DIRT = register("aether_dirt", new AetherDirtBlock(FabricBlockSettings.copy(Blocks.DIRT)), buildingBlock());
-        AETHER_GRASS_BLOCK = register("aether_grass", new AetherGrassBlock(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).materialColor(MaterialColor.CYAN)), buildingBlock());
-        AETHER_ENCHANTED_GRASS = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(AETHER_GRASS_BLOCK).materialColor(MaterialColor.GOLD)), buildingBlock());
-        AETHER_GRASS = register("aether_grass_plant", new AetherBrushBlock(FabricBlockSettings.copyOf(Blocks.GRASS)), buildingBlock());
-        AETHER_TALL_GRASS = register("aether_tall_grass", new TallPlantBlock(FabricBlockSettings.copyOf(AETHER_GRASS)), buildingBlock());
-        AETHER_FERN = register("aether_fern", new AetherBrushBlock(FabricBlockSettings.copyOf(AETHER_GRASS)), buildingBlock());
-        AETHER_BUSH = register("aether_bush", new AetherBrushBlock(FabricBlockSettings.copyOf(AETHER_GRASS)), buildingBlock());
-        AMBROSIUM_ORE = register("ambrosium_ore", new Block(FabricBlockSettings.copyOf(Blocks.COAL_ORE)), buildingBlock());
+        AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).strength(0.3f).sounds(BlockSoundGroup.GRAVEL)), buildingBlock());
+
+        // We're going to be using this more than once, so we might as well store it in a variable.
+        final FabricBlockSettings GRASS_BLOCKS = FabricBlockSettings.of(Material.SOLID_ORGANIC).materialColor(MaterialColor.CYAN).strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS);
+        AETHER_GRASS_BLOCK = register("aether_grass", new AetherGrassBlock(GRASS_BLOCKS), buildingBlock());
+
+        // Note that because we're changing the material color (which mutates the `FabricBlockSettings`), we want to
+        // make a copy of the settings first.
+
+        // Copying block settings is okay in this case, but copying the settings of another block is *not* something
+        // you should do unless the new block is *directly related* to the block you're copying from. If the blocks just
+        // happen to have several things in common, you should make a new settings object from scratch instead.
+        AETHER_ENCHANTED_GRASS = register("enchanted_aether_grass", new EnchantedAetherGrassBlock(FabricBlockSettings.copyOf(GRASS_BLOCKS).materialColor(MaterialColor.GOLD)), buildingBlock());
+
+        final FabricBlockSettings GRASS = FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS);
+        AETHER_GRASS = register("aether_grass_plant", new AetherBrushBlock(GRASS), buildingBlock());
+        AETHER_TALL_GRASS = register("aether_tall_grass", new TallPlantBlock(GRASS), buildingBlock());
+        AETHER_FERN = register("aether_fern", new AetherBrushBlock(GRASS), buildingBlock());
+        AETHER_BUSH = register("aether_bush", new AetherBrushBlock(GRASS), buildingBlock());
+        AMBROSIUM_ORE = register("ambrosium_ore", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), buildingBlock());
         BLUE_PORTAL = register("blue_portal", new AetherPortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MaterialColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(AetherBlocks::never).strength(-1.0f).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
         HOLYSTONE = register("holystone", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.GRAY).strength(0.5f, 10.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
-        HOLYSTONE_BRICK = register("holystone_brick", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS).materialColor(MaterialColor.WHITE)), buildingBlock());
-        MOSSY_HOLYSTONE = register("mossy_holystone", new Block(FabricBlockSettings.copyOf(Blocks.MOSSY_COBBLESTONE).materialColor(MaterialColor.WHITE)), buildingBlock());
-        ZANITE_ORE = register("zanite_ore", new Block(FabricBlockSettings.copyOf(Blocks.IRON_ORE)), buildingBlock());
+        HOLYSTONE_BRICK = register("holystone_brick", new Block(FabricBlockSettings.of(Material.STONE).requiresTool().strength(1.5F, 6.0F).materialColor(MaterialColor.WHITE)), buildingBlock());
+        MOSSY_HOLYSTONE = register("mossy_holystone", new Block(FabricBlockSettings.of(Material.STONE).requiresTool().strength(2.0F, 6.0F).materialColor(MaterialColor.WHITE)), buildingBlock());
+        ZANITE_ORE = register("zanite_ore", new Block(FabricBlockSettings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), buildingBlock());
 //        CRYSTAL_SAPLING = register("crystal_sapling", null);
         AEROGEL = register("aerogel", new Block(FabricBlockSettings.of(Material.SOIL).strength(1.0f, 2000.0f).sounds(BlockSoundGroup.GLASS).solidBlock(AetherBlocks::never).nonOpaque()), buildingBlock());
         AEROGEL_SLAB = register("aerogel_slab", new AetherSlabBlock(AEROGEL.getDefaultState()), buildingBlock());
@@ -231,13 +244,15 @@ public class AetherBlocks {
         AETHER_DIRT_PATH = register("aether_grass_path", new AetherDirtPathBlock(), buildingBlock());
         AMBROSIUM_TORCH = register("ambrosium_torch", new AmbrosiumTorchBlock(), false, buildingBlock());
         AMBROSIUM_TORCH_WALL = register("ambrosium_wall_torch", new AmbrosiumTorchWallBlock(), AMBROSIUM_TORCH, buildingBlock());
-        ANGELIC_STONE = register("angelic_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
-        ANGELIC_CRACKED_STONE = register("angelic_stone_cracked", new Block(FabricBlockSettings.copyOf(ANGELIC_STONE)), buildingBlock());
+
+        final FabricBlockSettings ANGELIC_STONES = FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE);
+        ANGELIC_STONE = register("angelic_stone", new Block(ANGELIC_STONES), buildingBlock());
+        ANGELIC_CRACKED_STONE = register("angelic_stone_cracked", new Block(ANGELIC_STONES), buildingBlock());
         ANGELIC_SLAB = register("angelic_slab", new AetherSlabBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         ANGELIC_STAIRS = register("angelic_stairs", new AetherStairsBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
         ANGELIC_WALL = register("angelic_wall", new AetherWallBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
-        BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).collidable(false)), buildingBlock());
+        BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(AetherBlocks::canSpawnOnLeaves).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never).collidable(false)), buildingBlock());
 //        BERRY_BUSH_STEM = register("berry_bush_stem", null);
 //        BLACK_DYED_AERCLOUD = register("black_dyed_aercloud", null);
 //        BLUE_DYED_AERCLOUD = register("blue_dyed_aercloud", null);
@@ -258,13 +273,15 @@ public class AetherBlocks {
 //        FREEZER = register("freezer", null);
         GOLDEN_AERCLOUD = register("golden_aercloud", new GoldenAercloudBlock(), buildingBlock());
         DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
-        DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, FabricBlockSettings.copyOf(Blocks.WATER)) {
+        DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, AbstractBlock.Settings.of(Material.WATER).noCollision().strength(100.0F).dropsNothing()) {
         });
         GRAVITITE_ORE = register("gravitite_ore", new GravititeOreBlock(), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
-        HELLFIRE_STONE = register("hellfire_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
-        HELLFIRE_CRACKED_STONE = register("hellfire_stone_cracked", new Block(FabricBlockSettings.copyOf(HELLFIRE_STONE)), buildingBlock());
+
+        final AbstractBlock.Settings HELLFIRE_STONES = FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE);
+        HELLFIRE_STONE = register("hellfire_stone", new Block(HELLFIRE_STONES), buildingBlock());
+        HELLFIRE_CRACKED_STONE = register("hellfire_stone_cracked", new Block(HELLFIRE_STONES), buildingBlock());
         HELLFIRE_STONE_TRAP = register("hellfire_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
         HELLFIRE_WALL = register("hellfire_wall", new AetherWallBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
         HELLFIRE_SLAB = register("hellfire_slab", new AetherSlabBlock(HELLFIRE_STONE.getDefaultState()), buildingBlock());
@@ -317,11 +334,12 @@ public class AetherBlocks {
         QUICKSOIL = register("quicksoil", new Block(FabricBlockSettings.of(Material.AGGREGATE).strength(0.5f, -1.0f).slipperiness(1.1F).velocityMultiplier(1.002F).sounds(BlockSoundGroup.SAND)), buildingBlock());
         QUICKSOIL_GLASS = register("quicksoil_glass", new GlassBlock(FabricBlockSettings.of(Material.GLASS).luminance(14).strength(0.2f, -1.0f).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
         QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
-        FLUTEGRASS = register("flutegrass", new AetherBrushBlock(FabricBlockSettings.copyOf(AETHER_GRASS).materialColor(MaterialColor.GOLD), ImmutableSet.of(QUICKSOIL), true), buildingBlock());
 //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
-        SENTRY_STONE = register("sentry_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
-        SENTRY_CRACKED_STONE = register("sentry_stone_cracked", new Block(FabricBlockSettings.copyOf(SENTRY_STONE)), buildingBlock());
-        LIGHT_SENTRY_STONE = register("light_sentry_stone", new Block(FabricBlockSettings.copyOf(SENTRY_STONE).luminance(ignored -> 10)), buildingBlock());
+        FLUTEGRASS = register("flutegrass", new AetherBrushBlock(GRASS.materialColor(MaterialColor.GOLD), ImmutableSet.of(QUICKSOIL), true), buildingBlock());
+        final FabricBlockSettings SENTRY_STONES = FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE);
+        SENTRY_STONE = register("sentry_stone", new Block(SENTRY_STONES), buildingBlock());
+        SENTRY_CRACKED_STONE = register("sentry_stone_cracked", new Block(SENTRY_STONES), buildingBlock());
+        LIGHT_SENTRY_STONE = register("light_sentry_stone", new Block(SENTRY_STONES.luminance(ignored -> 10)), buildingBlock());
         SENTRY_STONE_TRAP = register("sentry_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
         SENTRY_SLAB = register("sentry_slab", new AetherSlabBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
         SENTRY_STAIRS = register("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState()), buildingBlock());
@@ -329,55 +347,71 @@ public class AetherBlocks {
         LIGHT_SENTRY_SLAB = register("light_sentry_slab", new AetherSlabBlock(LIGHT_SENTRY_STONE.getDefaultState()), buildingBlock());
         LIGHT_SENTRY_STAIRS = register("light_sentry_stairs", new AetherStairsBlock(LIGHT_SENTRY_STONE.getDefaultState()), buildingBlock());
         LIGHT_SENTRY_WALL = register("light_sentry_wall", new AetherWallBlock(LIGHT_SENTRY_STONE.getDefaultState()), buildingBlock());
-        SKYROOT_SAPLING = register("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)), buildingBlock());
+
+        final Block.Settings SAPLINGS = AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS);
+        SKYROOT_SAPLING = register("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), SAPLINGS), buildingBlock());
         SKYROOT_LOG = register("skyroot_log", createLogBlock(MaterialColor.GREEN, MaterialColor.WOOD), buildingBlock());
         STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD), buildingBlock());
         SKYROOT_LEAVES = register("skyroot_leaves", createLeavesBlock(), buildingBlock());
         SKYROOT_LEAF_PILE = register("skyroot_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
-        SKYROOT_PLANKS = register("skyroot_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)), buildingBlock());
+
+        final FabricBlockSettings SKYROOT_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
+        SKYROOT_PLANKS = register("skyroot_planks", new Block(SKYROOT_WOOD), buildingBlock());
         SKYROOT_BOOKSHELF = register("skyroot_bookshelf", new Block(FabricBlockSettings.of(Material.WOOD).strength(1.5f).sounds(BlockSoundGroup.WOOD)), buildingBlock());
-        SKYROOT_FENCE = register("skyroot_fence", new FenceBlock(FabricBlockSettings.copy(SKYROOT_PLANKS)), buildingBlock());
-        SKYROOT_FENCE_GATE = register("skyroot_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(AetherBlocks.SKYROOT_PLANKS)), buildingBlock());
+        SKYROOT_FENCE = register("skyroot_fence", new FenceBlock(SKYROOT_WOOD), buildingBlock());
+        SKYROOT_FENCE_GATE = register("skyroot_fence_gate", new FenceGateBlock(SKYROOT_WOOD), buildingBlock());
         SKYROOT_SLAB = register("skyroot_slab", new AetherSlabBlock(SKYROOT_PLANKS.getDefaultState()), buildingBlock());
         SKYROOT_STAIRS = register("skyroot_stairs", new AetherStairsBlock(SKYROOT_PLANKS.getDefaultState()), buildingBlock());
-        GOLDEN_OAK_SAPLING = register("golden_oak_sapling", new AetherSaplingBlock(new GoldenOakSaplingGenerator(), FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)), buildingBlock());
+
+        GOLDEN_OAK_SAPLING = register("golden_oak_sapling", new AetherSaplingBlock(new GoldenOakSaplingGenerator(), SAPLINGS), buildingBlock());
         GOLDEN_OAK_LOG = register("golden_oak_log", createLogBlock(MaterialColor.WOOD, MaterialColor.RED), buildingBlock());
         STRIPPED_GOLDEN_OAK_LOG = register("stripped_golden_oak_log", createLogBlock(MaterialColor.RED, MaterialColor.RED), buildingBlock());
         GOLDEN_OAK_LEAVES = register("golden_oak_leaves", createLeavesBlock(5), buildingBlock());
-        GOLDEN_OAK_PLANKS = register("golden_oak_planks", new Block(FabricBlockSettings.copyOf(SKYROOT_PLANKS).materialColor(MaterialColor.RED)), buildingBlock());
-        GOLDEN_OAK_FENCE = register("golden_oak_fence", new FenceBlock(FabricBlockSettings.copyOf(GOLDEN_OAK_PLANKS)), buildingBlock());
-        GOLDEN_OAK_FENCE_GATE = register("golden_oak_fence_gate", new FenceGateBlock(FabricBlockSettings.copyOf(GOLDEN_OAK_PLANKS)), buildingBlock());
+
+        final Block.Settings GOLDEN_OAK_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.RED).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
+        GOLDEN_OAK_PLANKS = register("golden_oak_planks", new Block(GOLDEN_OAK_WOOD), buildingBlock());
+        GOLDEN_OAK_FENCE = register("golden_oak_fence", new FenceBlock(GOLDEN_OAK_WOOD), buildingBlock());
+        GOLDEN_OAK_FENCE_GATE = register("golden_oak_fence_gate", new FenceGateBlock(GOLDEN_OAK_WOOD), buildingBlock());
         GOLDEN_OAK_SLAB = register("golden_oak_slab", new AetherSlabBlock(GOLDEN_OAK_PLANKS.getDefaultState()), buildingBlock());
         GOLDEN_OAK_STAIRS = register("golden_oak_stairs", new AetherStairsBlock(GOLDEN_OAK_PLANKS.getDefaultState()), buildingBlock());
-        CRYSTAL_SAPLING = register("crystal_sapling", new AetherSaplingBlock(null, FabricBlockSettings.copyOf(Blocks.OAK_SAPLING).sounds(BlockSoundGroup.GLASS)), buildingBlock());
+
+        CRYSTAL_SAPLING = register("crystal_sapling", new AetherSaplingBlock(null, FabricBlockSettings.copyOf(SAPLINGS).sounds(BlockSoundGroup.GLASS)), buildingBlock());
         CRYSTAL_LOG = register("crystal_log", createLogBlock(MaterialColor.GRAY, MaterialColor.LIGHT_GRAY), buildingBlock());
         STRIPPED_CRYSTAL_LOG = register("stripped_crystal_log", createLogBlock(MaterialColor.LIGHT_GRAY, MaterialColor.LIGHT_GRAY), buildingBlock());
         CRYSTAL_LEAVES = register("crystal_leaves", createLeavesBlock(BlockSoundGroup.GLASS), buildingBlock());
-        CRYSTAL_PLANKS = register("crystal_planks", new Block(FabricBlockSettings.copyOf(SKYROOT_PLANKS).materialColor(MaterialColor.LIGHT_GRAY)), buildingBlock());
-        CRYSTAL_FENCE = register("crystal_fence", new FenceBlock(FabricBlockSettings.copyOf(CRYSTAL_PLANKS)), buildingBlock());
-        CRYSTAL_FENCE_GATE = register("crystal_fence_gate", new FenceGateBlock(FabricBlockSettings.copyOf(CRYSTAL_PLANKS)), buildingBlock());
+
+        final Block.Settings CRYSTAL_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.LIGHT_GRAY).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
+        CRYSTAL_PLANKS = register("crystal_planks", new Block(CRYSTAL_WOOD), buildingBlock());
+        CRYSTAL_FENCE = register("crystal_fence", new FenceBlock(CRYSTAL_WOOD), buildingBlock());
+        CRYSTAL_FENCE_GATE = register("crystal_fence_gate", new FenceGateBlock(CRYSTAL_WOOD), buildingBlock());
         CRYSTAL_SLAB = register("crystal_slab", new AetherSlabBlock(CRYSTAL_PLANKS.getDefaultState()), buildingBlock());
         CRYSTAL_STAIRS = register("crystal_stairs", new AetherStairsBlock(CRYSTAL_PLANKS.getDefaultState()), buildingBlock());
         WISTERIA_LOG = register("wisteria_log", createLogBlock(MaterialColor.YELLOW, MaterialColor.RED), buildingBlock());
         STRIPPED_WISTERIA_LOG = register("stripped_wisteria_log", createLogBlock(MaterialColor.RED, MaterialColor.RED), buildingBlock());
-        ROSE_WISTERIA_LEAVES = register("rose_wisteria_leaves", createLeavesBlock(), buildingBlock());
+
+        final Block.Settings ROSE_WISTERIA = FabricBlockSettings.of(Material.LEAVES, MaterialColor.MAGENTA).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
+        ROSE_WISTERIA_LEAVES = register("rose_wisteria_leaves", new AetherLeavesBlock(ROSE_WISTERIA), buildingBlock());
         ROSE_WISTERIA_LEAF_PILE = register("rose_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
-        ROSE_WISTERIA_SAPLING = register("rose_wisteria_sapling", new AetherSaplingBlock(new RoseWisteriaSaplingGenerator(), FabricBlockSettings.copyOf(SKYROOT_SAPLING)), buildingBlock());
-        ROSE_WISTERIA_HANGER = register("rose_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA_LEAVES).noCollision().breakInstantly()), buildingBlock());
-        ROSE_WISTERIA_HANGER_PLANT = register("rose_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA_HANGER).noCollision().breakInstantly()), buildingBlock());
-        FROST_WISTERIA_LEAVES = register("frost_wisteria_leaves", createLeavesBlock(), buildingBlock());
+        ROSE_WISTERIA_SAPLING = register("rose_wisteria_sapling", new AetherSaplingBlock(new RoseWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
+        ROSE_WISTERIA_HANGER = register("rose_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+        ROSE_WISTERIA_HANGER_PLANT = register("rose_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+
+        final Block.Settings FROST_WISTERIA = FabricBlockSettings.of(Material.LEAVES, MaterialColor.LIGHT_BLUE).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
+        FROST_WISTERIA_LEAVES = register("frost_wisteria_leaves", new AetherLeavesBlock(FROST_WISTERIA), buildingBlock());
         FROST_WISTERIA_LEAF_PILE = register("frost_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
-        FROST_WISTERIA_SAPLING = register("frost_wisteria_sapling", new AetherSaplingBlock(new FrostWisteriaSaplingGenerator(), FabricBlockSettings.copyOf(SKYROOT_SAPLING)), buildingBlock());
-        FROST_WISTERIA_HANGER = register("frost_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA_LEAVES).noCollision().breakInstantly()), buildingBlock());
-        FROST_WISTERIA_HANGER_PLANT = register("frost_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA_HANGER).noCollision().breakInstantly()), buildingBlock());
+        FROST_WISTERIA_SAPLING = register("frost_wisteria_sapling", new AetherSaplingBlock(new FrostWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
+        FROST_WISTERIA_HANGER = register("frost_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(FROST_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+        FROST_WISTERIA_HANGER_PLANT = register("frost_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(FROST_WISTERIA).noCollision().breakInstantly()), buildingBlock());
         LAVENDER_WISTERIA_LEAVES = register("lavender_wisteria_leaves", createLeavesBlock(), buildingBlock());
         LAVENDER_WISTERIA_LEAF_PILE = register("lavender_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
-        LAVENDER_WISTERIA_SAPLING = register("lavender_wisteria_sapling", new AetherSaplingBlock(new LavenderWisteriaSaplingGenerator(), FabricBlockSettings.copyOf(SKYROOT_SAPLING)), buildingBlock());
-        LAVENDER_WISTERIA_HANGER = register("lavender_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA_LEAVES).noCollision().breakInstantly()), buildingBlock());
-        LAVENDER_WISTERIA_HANGER_PLANT = register("lavender_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA_HANGER).noCollision().breakInstantly()), buildingBlock());
-        WISTERIA_PLANKS = register("wisteria_planks", new Block(FabricBlockSettings.copyOf(SKYROOT_PLANKS).materialColor(MaterialColor.YELLOW)), buildingBlock());
-        WISTERIA_FENCE = register("wisteria_fence", new FenceBlock(FabricBlockSettings.copyOf(WISTERIA_PLANKS)), buildingBlock());
-        WISTERIA_FENCE_GATE = register("wisteria_fence_gate", new FenceGateBlock(FabricBlockSettings.copyOf(WISTERIA_PLANKS)), buildingBlock());
+        LAVENDER_WISTERIA_SAPLING = register("lavender_wisteria_sapling", new AetherSaplingBlock(new LavenderWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
+        LAVENDER_WISTERIA_HANGER = register("lavender_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(FROST_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+        LAVENDER_WISTERIA_HANGER_PLANT = register("lavender_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(FROST_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+
+        final Block.Settings WISTERIA_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.YELLOW).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
+        WISTERIA_PLANKS = register("wisteria_planks", new Block(WISTERIA_WOOD), buildingBlock());
+        WISTERIA_FENCE = register("wisteria_fence", new FenceBlock(WISTERIA_WOOD), buildingBlock());
+        WISTERIA_FENCE_GATE = register("wisteria_fence_gate", new FenceGateBlock(WISTERIA_WOOD), buildingBlock());
         WISTERIA_SLAB = register("wisteria_slab", new AetherSlabBlock(WISTERIA_PLANKS.getDefaultState()), buildingBlock());
         WISTERIA_STAIRS = register("wisteria_stairs", new AetherStairsBlock(WISTERIA_PLANKS.getDefaultState()), buildingBlock());
 //        STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", null);
@@ -478,6 +512,10 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), AETHER_GRASS, AETHER_TALL_GRASS, AETHER_FERN, AETHER_BUSH, FLUTEGRASS);
 
         FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, Aether.locate("dense_aercloud"));
+    }
+
+    private static Boolean canSpawnOnLeaves(BlockState state, BlockView world, BlockPos pos, EntityType<?> type) {
+        return type == EntityType.OCELOT || type == EntityType.PARROT;
     }
 
     public static boolean never(BlockState blockState, BlockView blockView, BlockPos blockPos) {

@@ -7,12 +7,14 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.AetherMoaTypes;
 import com.aether.items.AetherItems;
 import com.aether.registry.GeckolibRenderRegistry;
+import com.aether.registry.TrinketSlotRegistry;
 import com.aether.util.NetworkingHell;
 import com.aether.world.dimension.AetherDimension;
 import com.aether.world.feature.AetherConfiguredFeatures;
 import com.aether.world.feature.AetherFeatures;
 import com.aether.world.feature.tree.AetherTreeHell;
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
+import dev.emi.trinkets.api.TrinketSlots;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -34,6 +36,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
+        TrinketSlotRegistry.init();
         CrowdinTranslate.downloadTranslations("aether", MOD_ID);
         AetherTreeHell.init();
         AetherFeatures.registerFeatures();

@@ -16,8 +16,8 @@ public class DartShooter extends Item {
 
     private final Dart ammo;
 
-    public DartShooter(Dart ammo, Rarity rarity) {
-        super(new Settings().maxCount(1).rarity(rarity).group(AetherItemGroups.Weapons));
+    public DartShooter(Dart ammo, Settings settings) {
+        super(settings);
         this.ammo = ammo;
     }
 

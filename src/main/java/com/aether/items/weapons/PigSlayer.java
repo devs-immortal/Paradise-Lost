@@ -9,8 +9,8 @@ import net.minecraft.particle.ParticleTypes;
 
 public class PigSlayer extends AetherSword {
 
-    public PigSlayer() {
-        super(AetherTiers.Legendary, AetherItems.AETHER_LOOT, 3, -2.4F);
+    public PigSlayer(Settings settings) {
+        super(AetherTiers.Legendary, -2.4F, 3, settings);
     }
 
     @Override

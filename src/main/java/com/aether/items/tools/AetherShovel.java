@@ -1,11 +1,14 @@
 package com.aether.items.tools;
 
 import com.aether.items.AetherItemGroups;
+import com.aether.items.AetherItemSettings;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
+import com.aether.util.item.AetherRarity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ShovelItem;
@@ -18,13 +21,8 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
     private final AetherTiers material;
     public float[] zaniteHarvestLevels = new float[]{2F, 4F, 6F, 8F, 12F};
 
-    public AetherShovel(AetherTiers material, float damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Tools));
-        this.material = material;
-    }
-
-    public AetherShovel(AetherTiers material, Rarity rarity, float damageVsEntity, float attackSpeed) {
-        super(material.getDefaultTier(), damageVsEntity, attackSpeed, new Settings().group(AetherItemGroups.Tools).rarity(rarity));
+    public AetherShovel(AetherTiers material, Item.Settings settings, float damageVsEntity, float attackSpeed) {
+        super(material.getDefaultTier(), damageVsEntity, attackSpeed, settings);
         this.material = material;
     }
 
