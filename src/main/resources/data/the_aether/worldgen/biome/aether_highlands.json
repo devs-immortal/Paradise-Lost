@@ -75,12 +75,6 @@
       }
     ],
     "creature": [
-      {
-        "type": "minecraft:bee",
-        "weight": 100,
-        "minCount": 4,
-        "maxCount": 8
-      }
     ],
     "ambient": [],
     "water_creature": [],
