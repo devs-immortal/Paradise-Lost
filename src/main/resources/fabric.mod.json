@@ -25,7 +25,8 @@
     "minecraft": ">=1.16-rc.4",
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*",
-    "fabric-networking-v0": "*"
+    "fabric-networking-v0": "*",
+    "trinkets": "*"
   },
   "mixins": [
     "the_aether.mixins.json"

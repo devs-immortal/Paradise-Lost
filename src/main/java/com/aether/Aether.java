@@ -14,7 +14,6 @@ import com.aether.world.feature.AetherConfiguredFeatures;
 import com.aether.world.feature.AetherFeatures;
 import com.aether.world.feature.tree.AetherTreeHell;
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
-import dev.emi.trinkets.api.TrinketSlots;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
