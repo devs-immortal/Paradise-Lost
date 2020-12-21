@@ -1,4 +1,4 @@
-package com.aether.mixin.render;
+package com.aether.mixin.client.render;
 
 import com.aether.blocks.AetherBlocks;
 import net.minecraft.block.Block;
