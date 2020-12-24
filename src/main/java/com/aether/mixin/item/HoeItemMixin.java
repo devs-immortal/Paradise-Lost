@@ -1,11 +1,15 @@
 package com.aether.mixin.item;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.entities.block.FloatingBlockEntity;
+import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.MiningToolItem;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -19,9 +23,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Mixin(HoeItem.class)
-public class HoeItemMixin {
+public class HoeItemMixin extends MiningToolItem {
+
+    protected HoeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Set<Block> effectiveBlocks, Settings settings) {
+        super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
+    }
 
     @Inject(at = @At("HEAD"), method = "useOnBlock", cancellable = true)
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
@@ -33,7 +42,7 @@ public class HoeItemMixin {
         AETHER_TILLED_BLOCKS.put(AetherBlocks.AETHER_DIRT_PATH, AetherBlocks.AETHER_FARMLAND.getDefaultState());
 
         if (context.getSide() != Direction.DOWN && world.getBlockState(blockPos.up()).isAir()) {
-            BlockState blockState = (BlockState)AETHER_TILLED_BLOCKS.get(world.getBlockState(blockPos).getBlock());
+            BlockState blockState = AETHER_TILLED_BLOCKS.get(world.getBlockState(blockPos).getBlock());
             if (blockState != null) {
                 PlayerEntity playerEntity = context.getPlayer();
                 world.playSound(playerEntity, blockPos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -44,6 +53,10 @@ public class HoeItemMixin {
                 }
                 cir.setReturnValue(ActionResult.success(world.isClient));
             }
+        }
+
+        if (this.getMaterial() == AetherTiers.Gravitite.getDefaultTier() && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+            cir.setReturnValue(ActionResult.SUCCESS);
         }
     }
 }

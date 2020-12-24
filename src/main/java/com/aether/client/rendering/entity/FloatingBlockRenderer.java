@@ -4,6 +4,7 @@ import com.aether.entities.block.FloatingBlockEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.BlockRenderManager;
@@ -21,7 +22,7 @@ public class FloatingBlockRenderer extends EntityRenderer<FloatingBlockEntity> {
 
     public FloatingBlockRenderer(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn);
-        this.shadowOpacity = 0.5F;
+        this.shadowRadius = 0.5F;
     }
 
     @Override
@@ -37,8 +38,7 @@ public class FloatingBlockRenderer extends EntityRenderer<FloatingBlockEntity> {
                 BlockPos blockpos = new BlockPos(entity.getX(), entity.getBoundingBox().maxY, entity.getZ());
                 matrices.translate(-0.5, 0.0, -0.5);
                 BlockRenderManager blockRenderManager = MinecraftClient.getInstance().getBlockRenderManager();
-                blockRenderManager.getModelRenderer().render(world, blockRenderManager.getModel(blockState), blockState, blockpos, matrices, vertexConsumers.getBuffer(RenderLayers.getEntityBlockLayer(blockState, false)), false, new Random(), blockState.getRenderingSeed(entity.getOrigin()), 0);
-
+                blockRenderManager.getModelRenderer().render(world, blockRenderManager.getModel(blockState), blockState, blockpos, matrices, vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(blockState)), false, new Random(), blockState.getRenderingSeed(entity.getOrigin()), OverlayTexture.DEFAULT_UV);
                 matrices.pop();
                 super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
             }

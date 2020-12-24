@@ -59,4 +59,9 @@ public class FloatingBlock extends FallingBlock {
     protected int getFallDelay() {
         return 2;
     }
+
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+
+    }
 }
