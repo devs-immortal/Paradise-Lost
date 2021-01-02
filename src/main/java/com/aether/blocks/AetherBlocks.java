@@ -384,7 +384,7 @@ public class AetherBlocks {
         GOLDEN_OAK_SLAB = register("golden_oak_slab", new AetherSlabBlock(GOLDEN_OAK_PLANKS.getDefaultState()), buildingBlock());
         GOLDEN_OAK_STAIRS = register("golden_oak_stairs", new AetherStairsBlock(GOLDEN_OAK_PLANKS.getDefaultState()), buildingBlock());
 
-        CRYSTAL_SAPLING = register("crystal_sapling", new AetherSaplingBlock(null, FabricBlockSettings.copyOf(SAPLINGS).sounds(BlockSoundGroup.GLASS)), buildingBlock());
+        CRYSTAL_SAPLING = register("crystal_sapling", new AetherSaplingBlock(new CrystalSaplingGenerator(), FabricBlockSettings.copyOf(SAPLINGS).sounds(BlockSoundGroup.GLASS)), buildingBlock());
         POTTED_CRYSTAL_SAPLING = register("potted_crystal_sapling", createPottedBlock(CRYSTAL_SAPLING));
         CRYSTAL_LOG = register("crystal_log", createLogBlock(MaterialColor.GRAY, MaterialColor.LIGHT_GRAY), buildingBlock());
         STRIPPED_CRYSTAL_LOG = register("stripped_crystal_log", createLogBlock(MaterialColor.LIGHT_GRAY, MaterialColor.LIGHT_GRAY), buildingBlock());
