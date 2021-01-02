@@ -25,10 +25,14 @@ The Aether project makes use of crowd sourced translations.
 
 ## Gallery
 
+<center>
+
 <img src="https://i.imgur.com/Rt0E0y4.jpg" width="570">
 <br>
 <img src="https://i.imgur.com/Ync6Nwh.jpg"  width="570">
+
 </center>
+
 <br><br>
 
 ## License information
