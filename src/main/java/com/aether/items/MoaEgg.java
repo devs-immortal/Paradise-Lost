@@ -54,11 +54,6 @@ public class MoaEgg extends Item {
         }
     }
 
-    @Override
-    public boolean isNetworkSynced() {
-        return true;
-    }
-
     public int getColor(ItemStack stack) {
         return this.getMoaType(stack).getMoaEggColor();
     }

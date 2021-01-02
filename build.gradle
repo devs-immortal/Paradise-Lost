@@ -75,7 +75,7 @@ dependencies {
     // Libraries
     modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:1.0.1"))
     modImplementation(include("io.github.cottonmc:LibGui:3.2.2+1.16.3"))
-    modImplementation(include("curse.maven:geckolib-398667:3109621"))
+    modImplementation(include("curse.maven:geckolib-398667:3135822"))
 
     modImplementation "de.guntram.mcmod:crowdin-translate:1.2"
     include "de.guntram.mcmod:crowdin-translate:1.2"
@@ -96,8 +96,8 @@ dependencies {
     }
 
     //customportalapi
-    modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta18-1.16'
-    include 'net.kyrptonaught:customportalapi:0.0.1-beta18-1.16'
+    modImplementation "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
+    include "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
 
     modImplementation "dev.hephaestus:seedy-behavior:${project.seedy_version}"
     include "dev.hephaestus:seedy-behavior:${project.seedy_version}"

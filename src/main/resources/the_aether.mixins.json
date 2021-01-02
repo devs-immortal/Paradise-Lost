@@ -9,7 +9,6 @@
     "block.FarmlandBlockMixin",
     "block.LeavesBlockMixin",
     "block.PlantBlockMixin",
-    "client.InGameHudMixin",
     "entity.EntityMixin",
     "entity.MixinLivingEntity",
     "entity.PlayerEntityMixin",
@@ -19,20 +18,26 @@
     "item.ItemStackMixin",
     "item.MapStateMixin",
     "item.ShovelItemMixin",
-    "render.BackgroundRendererMixin",
-    "render.BiomeLayerSamplerAccessor",
-    "render.BlockStateModelGeneratorMixin",
-    "render.CloudRendererMixin",
-    "render.MinecraftClientMixin",
     "screen.EnchantmentScreenHandlerMixin",
     "server.PlayerManagerMixin",
     "server.ServerChunkManagerMixin",
+    "server.ServerPlayNetworkHandlerMixin",
+    "server.ServerWorldMixin",
     "structure.FeatureMixin"
   ],
   "client": [
     "block.EnchantingTableBlockMixin",
+    "client.BackgroundRendererMixin",
+    "client.ClientPlayerEntityMixin",
+    "client.ClientWorldMixin",
+    "client.InGameHudMixin",
     "client.MapRendererMixin",
-    "client.WorldRendererMixin"
+    "client.WorldRendererMixin",
+    "client.render.BiomeLayerSamplerAccessor",
+    "client.render.BlockStateModelGeneratorMixin",
+    "client.render.CloudRendererMixin",
+    "client.render.MinecraftClientMixin",
+    "client.render.entity.feature.FixFAPICrash"
   ],
   "injectors": {
     "defaultRequire": 1

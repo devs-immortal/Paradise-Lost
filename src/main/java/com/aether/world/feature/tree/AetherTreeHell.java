@@ -4,7 +4,6 @@ import com.aether.Aether;
 import com.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import com.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
 import com.mojang.serialization.Codec;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
@@ -14,6 +13,7 @@ import net.minecraft.world.gen.trunk.TrunkPlacerType;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class AetherTreeHell {
 
     private static Constructor<FoliagePlacerType> foliageConstructor;
@@ -24,11 +24,11 @@ public class AetherTreeHell {
     public static TrunkPlacerType<WisteriaTrunkPlacer> WISTERIA_TRUNK;
 
     public static <P extends FoliagePlacer> FoliagePlacerType<P> registerFoliage(String name, Codec<P> codec) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return Registry.register(Registry.FOLIAGE_PLACER_TYPE, new Identifier(Aether.MOD_ID, name), foliageConstructor.newInstance(codec));
+        return Registry.register(Registry.FOLIAGE_PLACER_TYPE, Aether.locate(name), foliageConstructor.newInstance(codec));
     }
 
     public static <P extends TrunkPlacer> TrunkPlacerType<P> registerTrunk(String name, Codec<P> codec) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return Registry.register(Registry.TRUNK_PLACER_TYPE, new Identifier(Aether.MOD_ID, name), trunkConstructor.newInstance(codec));
+        return Registry.register(Registry.TRUNK_PLACER_TYPE, Aether.locate(name), trunkConstructor.newInstance(codec));
     }
 
     public static void init() {
@@ -37,8 +37,8 @@ public class AetherTreeHell {
             WISTERIA_TRUNK = registerTrunk("wisteria_trunk_placer", WisteriaTrunkPlacer.CODEC);
             foliageConstructor.setAccessible(false);
             trunkConstructor.setAccessible(false);
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -48,8 +48,8 @@ public class AetherTreeHell {
             foliageConstructor.setAccessible(true);
             trunkConstructor = TrunkPlacerType.class.getDeclaredConstructor(Codec.class);
             trunkConstructor.setAccessible(true);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        } catch (NoSuchMethodException ex) {
+            ex.printStackTrace();
         }
     }
 }

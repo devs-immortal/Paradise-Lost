@@ -1,13 +1,16 @@
 package com.aether.mixin.item;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.ShovelItem;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -21,29 +24,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Mixin(ShovelItem.class)
-public class ShovelItemMixin {
+public class ShovelItemMixin extends MiningToolItem {
+
+    protected ShovelItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Set<Block> effectiveBlocks, Settings settings) {
+        super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
+    }
 
     @Inject(at = @At("HEAD"), method = "useOnBlock", cancellable = true)
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
+        if (this.getMaterial() == AetherTiers.Gravitite.getDefaultTier() && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+            cir.setReturnValue(ActionResult.SUCCESS);
+        }
+
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
         Map<Block, BlockState> AETHER_PATH_STATES = new HashMap<>();
-        AETHER_PATH_STATES.put(AetherBlocks.AETHER_GRASS, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
+        AETHER_PATH_STATES.put(AetherBlocks.AETHER_GRASS_BLOCK, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
         AETHER_PATH_STATES.put(AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
-
-//        context.
-//
-//        if (this.getItemMaterial() == AetherTiers.Gravitite && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
-//            if (world.isAir(blockPos.up()) && !world.isClient) {
-//                //TODO: Spawn floating block
-//            } else {
-//                return ActionResult.PASS;
-//            }
-//            return ActionResult.SUCCESS;
-//        }
 
         if (context.getSide() == Direction.DOWN) {
             cir.setReturnValue(ActionResult.PASS);
@@ -54,11 +55,11 @@ public class ShovelItemMixin {
             if (blockState2 != null && world.getBlockState(blockPos.up()).isAir()) {
                 world.playSound(playerEntity, blockPos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 blockState3 = blockState2;
-            } else if (blockState.getBlock() instanceof CampfireBlock && (Boolean)blockState.get(CampfireBlock.LIT)) {
-                if (!world.isClient()) world.syncWorldEvent((PlayerEntity) null, 1009, blockPos, 0);
+            } else if (blockState.getBlock() instanceof CampfireBlock && blockState.get(CampfireBlock.LIT)) {
+                if (!world.isClient()) world.syncWorldEvent(null, 1009, blockPos, 0);
 
                 CampfireBlock.extinguish(world, blockPos, blockState);
-                blockState3 = (BlockState)blockState.with(CampfireBlock.LIT, false);
+                blockState3 = blockState.with(CampfireBlock.LIT, false);
             }
 
             if (blockState3 != null) {

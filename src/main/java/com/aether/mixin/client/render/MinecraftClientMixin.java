@@ -1,6 +1,5 @@
-package com.aether.mixin.render;
+package com.aether.mixin.client.render;
 
-import com.aether.scheduler.AetherScheduler;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
