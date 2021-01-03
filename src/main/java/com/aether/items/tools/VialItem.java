@@ -31,7 +31,9 @@ public class VialItem extends Item {
             BlockPos hitPos = hitResult.getBlockPos();
             if (this.fluid != Fluids.EMPTY && world.getBlockState(hitPos.up()).canReplace(new ItemPlacementContext(user, hand, itemStack, hitResult))) {
                 world.setBlockState(hitPos.up(), fluid.getDefaultState().getBlockState());
-                itemStack.decrement(1);
+                if (!user.isCreative()) {
+                    itemStack.decrement(1);
+                }
                 return TypedActionResult.success(itemStack, world.isClient());
             }
         }
