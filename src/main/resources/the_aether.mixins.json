@@ -7,7 +7,6 @@
     "block.AbstractBlockAccessor",
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
-    "block.LeavesBlockMixin",
     "block.PlantBlockMixin",
     "entity.EntityMixin",
     "entity.MixinLivingEntity",
