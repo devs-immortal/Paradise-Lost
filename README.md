@@ -5,7 +5,7 @@
 
 The Aether is a dimension high in the sky composed of floating islands. Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, mythical creatures and perilous Dungeons. All you need to do is build a Glowstone frame and add water to light the mystical portal, step in and you'll be transported immediately to the luscious hostile paradise known as the Aether.
 
-You can download the mod on [Modrinth](https://modrinth.com/mod/aether) or the [releases tab](https://github.com/kalucky0/The-Aether/releases) on github.
+You can download the mod on [Modrinth](https://modrinth.com/mod/aether) or the [releases tab](https://github.com/kalucky0/The-Aether/releases) on Github.
 
 **Original repo:** [GildedGames/The-Aether](https://gitea.gildedgames.com/GildedGames/The-Aether)
 
@@ -14,14 +14,14 @@ You can download the mod on [Modrinth](https://modrinth.com/mod/aether) or the [
 [![Support on Patreon](https://img.shields.io/badge/Support%20on-Patreon-orange?logoColor=FFFFFF&logo=patreon)](https://www.patreon.com/kalucky0)
 [![Support on Ko-Fi](https://img.shields.io/badge/Support%20on-Ko--Fi-blue?logoColor=FFFFFF&logo=ko-fi)](https://ko-fi.com/kalucky0)
 
-You can support my work by [making a pledge](https://www.patreon.com/kalucky0) today helping fund development and gaining access to special perks. You can also support the Aether project and **Gilded Games** on [their Patreon](https://www.patreon.com/GildedGames) as they are the ones who did most of the work.
+You can support our work by [making a pledge](https://www.patreon.com/kalucky0) today helping fund development and gaining access to special perks. You can also support the Aether project and **Gilded Games** on [their Patreon](https://www.patreon.com/GildedGames) as they are the ones who did most of the work.
 
 ## Translations
 [![Crowdin](https://badges.crowdin.net/aether/localized.svg)](https://crowdin.com/project/aether)
 
-The Aether project makes use of crowd sourced translations. 
+The Aether Reborn makes use of crowd sourced translations. 
 
-**You can help translate The Aether mod to additional languages here: [crowdin.com](https://crowdin.com/project/aether).**
+**You can help translate The Aether Reborn mod to additional languages here: [crowdin.com](https://crowdin.com/project/aether).**
 
 ## Gallery
 
@@ -33,15 +33,13 @@ The Aether project makes use of crowd sourced translations.
 
 </center>
 
-<br><br>
-
 ## License information
 Created by Immortal Devs.\
 Originally made by [Gilded Games](https://gildedgames.com/) under GNU GPLv3 license.\
 New assets are unlicensed and all rights are reserved to them by Immortal Devs.
 
 ```
-    Copyright (C) 2020 Immortal Devs
+    Copyright (C) 2021 Immortal Devs
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
