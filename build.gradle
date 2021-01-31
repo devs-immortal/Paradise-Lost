@@ -75,7 +75,7 @@ dependencies {
     // Libraries
     modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:1.0.1"))
     modImplementation(include("io.github.cottonmc:LibGui:3.2.2+1.16.3"))
-    modImplementation(include("curse.maven:geckolib-398667:3135822"))
+    modImplementation 'software.bernie.geckolib:geckolib-fabric-1.16.5:3.0.15:dev'
 
     modImplementation "de.guntram.mcmod:crowdin-translate:1.2"
     include "de.guntram.mcmod:crowdin-translate:1.2"
