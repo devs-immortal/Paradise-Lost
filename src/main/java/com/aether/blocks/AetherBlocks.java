@@ -528,6 +528,7 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(AETHER_GRASS_BLOCK, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putFluid(DENSE_AERCLOUD_STILL, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), AETHER_GRASS, AETHER_TALL_GRASS, AETHER_FERN, AETHER_BUSH, FLUTEGRASS);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), POTTED_SKYROOT_SAPLING, POTTED_CRYSTAL_SAPLING, POTTED_AETHER_FERN, POTTED_FROST_WISTERIA_SAPLING, POTTED_GOLDEN_OAK_SAPLING, POTTED_LAVENDER_WISTERIA_SAPLING, POTTED_ROSE_WISTERIA_SAPLING);
 
         FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, Aether.locate("dense_aercloud"));
     }
