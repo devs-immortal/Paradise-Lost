@@ -375,7 +375,7 @@ public class AetherBlocks {
         POTTED_GOLDEN_OAK_SAPLING = register("potted_golden_oak_sapling", createPottedBlock(GOLDEN_OAK_SAPLING));
         GOLDEN_OAK_LOG = register("golden_oak_log", createLogBlock(MaterialColor.WOOD, MaterialColor.RED), buildingBlock());
         STRIPPED_GOLDEN_OAK_LOG = register("stripped_golden_oak_log", createLogBlock(MaterialColor.RED, MaterialColor.RED), buildingBlock());
-        GOLDEN_OAK_LEAVES = register("golden_oak_leaves", createLeavesBlock(5), buildingBlock());
+        GOLDEN_OAK_LEAVES = register("golden_oak_leaves", createLeavesBlock(), buildingBlock());
 
         final Block.Settings GOLDEN_OAK_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.RED).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
         GOLDEN_OAK_PLANKS = register("golden_oak_planks", new Block(GOLDEN_OAK_WOOD), buildingBlock());
