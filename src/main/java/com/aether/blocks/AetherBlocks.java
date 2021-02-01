@@ -44,7 +44,7 @@ public class AetherBlocks {
     public static final Block ANGELIC_STAIRS;
     public static final Block ANGELIC_STONE;
     public static final Block ANGELIC_CRACKED_STONE;
-    public static final Block ANGELIC_STONE_TRAP;
+//    public static final Block ANGELIC_STONE_TRAP;
     public static final Block ANGELIC_WALL;
     //    public static final Block BERRY_BUSH;
 //    public static final Block BERRY_BUSH_STEM;
@@ -257,7 +257,7 @@ public class AetherBlocks {
         ANGELIC_CRACKED_STONE = register("angelic_stone_cracked", new Block(ANGELIC_STONES), buildingBlock());
         ANGELIC_SLAB = register("angelic_slab", new AetherSlabBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         ANGELIC_STAIRS = register("angelic_stairs", new AetherStairsBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
-        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
+//        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
         ANGELIC_WALL = register("angelic_wall", new AetherWallBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(AetherBlocks::canSpawnOnLeaves).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never).collidable(false)), buildingBlock());
 //        BERRY_BUSH_STEM = register("berry_bush_stem", null);
@@ -306,7 +306,7 @@ public class AetherBlocks {
 //        ICESTONE_WALL = register("icestone_wall", null);
 //        INCUBATOR = register("incubator", null);
         LIGHT_ANGELIC_STONE = register("light_angelic_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).luminance(11).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
-        LIGHT_ANGELIC_STONE_TRAP = register("light_angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).luminance(11).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        LIGHT_ANGELIC_STONE_TRAP = register("light_angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).luminance(11).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
         LIGHT_ANGELIC_SLAB = register("light_angelic_slab", new AetherSlabBlock(LIGHT_ANGELIC_STONE.getDefaultState()), buildingBlock());
         LIGHT_ANGELIC_STAIRS = register("light_angelic_stairs", new AetherStairsBlock(LIGHT_ANGELIC_STONE.getDefaultState()), buildingBlock());
         LIGHT_ANGELIC_WALL = register("light_angelic_wall", new AetherWallBlock(LIGHT_ANGELIC_STONE.getDefaultState()), buildingBlock());
