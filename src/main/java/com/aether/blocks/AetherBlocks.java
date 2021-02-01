@@ -93,7 +93,7 @@ public class AetherBlocks {
     public static final Block LIGHT_ANGELIC_SLAB;
     public static final Block LIGHT_ANGELIC_STAIRS;
     public static final Block LIGHT_ANGELIC_STONE;
-//    public static final Block LIGHT_ANGELIC_STONE_TRAP;
+    public static final Block LIGHT_ANGELIC_STONE_TRAP;
     public static final Block LIGHT_ANGELIC_WALL;
     //    public static final Block LIGHT_BLUE_DYED_AERCLOUD;
 //    public static final Block LIGHT_GREY_DYED_AERCLOUD;

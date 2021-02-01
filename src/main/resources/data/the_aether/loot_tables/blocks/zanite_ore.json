@@ -9,7 +9,6 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "the_aether:zanite_ore",
               "conditions": [
                 {
                   "condition": "minecraft:match_tool",
@@ -24,11 +23,11 @@
                     ]
                   }
                 }
-              ]
+              ],
+              "name": "the_aether:zanite_ore"
             },
             {
               "type": "minecraft:item",
-              "name": "the_aether:zanite",
               "functions": [
                 {
                   "function": "minecraft:apply_bonus",
@@ -38,7 +37,8 @@
                 {
                   "function": "minecraft:explosion_decay"
                 }
-              ]
+              ],
+              "name": "the_aether:zanite_gemstone"
             }
           ]
         }

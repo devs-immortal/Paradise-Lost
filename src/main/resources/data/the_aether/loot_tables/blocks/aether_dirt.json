@@ -6,45 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:aether_dirt",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 2,
-              "conditions": [
-                {
-                  "condition": "minecraft:block_state_property",
-                  "block": "the_aether:aether_dirt",
-                  "properties": {
-                    "double_drop": "true"
-                  }
-                },
-                {
-                  "condition": "minecraft:alternative",
-                  "terms": [
-                    {
-                      "condition": "minecraft:match_tool",
-                      "predicate": {
-                        "item": "the_aether:skyroot_axe"
-                      }
-                    },
-                    {
-                      "condition": "minecraft:match_tool",
-                      "predicate": {
-                        "item": "the_aether:skyroot_pickaxe"
-                      }
-                    },
-                    {
-                      "condition": "minecraft:match_tool",
-                      "predicate": {
-                        "item": "the_aether:skyroot_shovel"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "name": "the_aether:aether_dirt"
         }
       ],
       "conditions": [
