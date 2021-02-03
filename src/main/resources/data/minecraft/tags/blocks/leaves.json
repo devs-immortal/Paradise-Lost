@@ -1,0 +1,17 @@
+{
+  "replace": "false",
+  "values": [
+    "minecraft:jungle_leaves",
+    "minecraft:oak_leaves",
+    "minecraft:spruce_leaves",
+    "minecraft:dark_oak_leaves",
+    "minecraft:acacia_leaves",
+    "minecraft:birch_leaves",
+    "the_aether:skyroot_leaves",
+    "the_aether:golden_oak_leaves",
+    "the_aether:crystal_leaves",
+    "the_aether:rose_wisteria_leaves",
+    "the_aether:frost_wisteria_leaves",
+    "the_aether:lavender_wisteria_leaves"
+  ]
+}

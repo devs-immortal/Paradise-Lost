@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_aether:dense_aercloud"
+    "the_aether:dense_aercloud",
+    "minecraft:water",
+    "minecraft:flowing_water"
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_stairs",
+    "the_aether:golden_oak_stairs",
+    "the_aether:crystal_stairs",
+    "the_aether:wisteria_stairs",
+    "the_aether:aerogel_stairs",
+    "the_aether:angelic_stairs",
+    "the_aether:carved_stairs",
+    "the_aether:hellfire_stairs",
+    "the_aether:holystone_brick_stairs",
+    "the_aether:holystone_stairs",
+    "the_aether:light_angelic_stairs",
+    "the_aether:light_hellfire_stairs",
+    "the_aether:mossy_holystone_stairs",
+    "the_aether:light_sentry_stairs"
+  ]
+}

@@ -1,9 +1,12 @@
 {
-  "replace": false,
+  "replace": "false",
   "values": [
-    "the_aether:skyroot_log",
-    "the_aether:golden_oak_log",
-    "the_aether:crystal_log",
-    "the_aether:wisteria_log"
+    "#minecraft:dark_oak_logs",
+    "#minecraft:oak_logs",
+    "#minecraft:acacia_logs",
+    "#minecraft:birch_logs",
+    "#minecraft:jungle_logs",
+    "#minecraft:spruce_logs",
+    "#the_aether:aether_logs"
   ]
 }
