@@ -9,12 +9,15 @@
     "X": {
       "item": "the_aether:gold_aerdust"
     },
-    "S": {
-      "item": "minecraft:sugar"
-    }
+    "S": 
+    [
+      {
+        "item": "minecraft:sugar"
+      }
+    ]
   },
   "result": {
-    "count": "16",
-    "item": "the_aether:quicksoil"
+    "item": "the_aether:quicksoil",
+    "count": 16
   }
 }

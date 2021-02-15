@@ -11,11 +11,14 @@
         "item": "the_aether:skyroot_planks"
       }
     ],
-    "X": {
-      "item": "book"
-    }
+    "X": [
+      {
+        "item": "book"
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:skyroot_bookshelf"
+    "item": "the_aether:skyroot_bookshelf",
+    "count": 1
   }
 }

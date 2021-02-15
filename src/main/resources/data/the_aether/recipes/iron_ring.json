@@ -1,16 +1,1 @@
-{
-  "type": "crafting_shaped",
-  "pattern": [
-    " I ",
-    "I I",
-    " I "
-  ],
-  "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
-    }
-  },
-  "result": {
-    "item": "the_aether:iron_ring"
-  }
-}
+{"type":"minecraft:crafting_shaped","group":"iron","pattern":[" # ","# #"," # "],"key":{"#":[{"item":"minecraft:iron_ingot"}]},"result":{"item":"the_aether:iron_ring","count":1}}

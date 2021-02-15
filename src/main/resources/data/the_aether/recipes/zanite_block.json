@@ -1,16 +1,1 @@
-{
-  "type": "crafting_shaped",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "the_aether:zanite_gemstone"
-    }
-  },
-  "result": {
-    "item": "the_aether:zanite_block"
-  }
-}
+{"type":"minecraft:crafting_shaped","group":"zanite","pattern":["###","###","###"],"key":{"#":[{"item":"the_aether:zanite_gemstone"}]},"result":{"item":"the_aether:zanite_block","count":1}}

@@ -6,12 +6,17 @@
     "F"
   ],
   "key": {
-    "S": {
-      "item": "the_aether:skyroot_planks"
-    },
-    "F": {
-      "item": "the_aether:golden_amber"
-    }
+    "S": 
+    [
+      {
+        "item": "the_aether:skyroot_planks"
+      }
+    ],
+    "F": [
+      {
+        "item": "the_aether:golden_amber"
+      }
+    ]
   },
   "result": {
     "item": "the_aether:golden_dart_shooter",

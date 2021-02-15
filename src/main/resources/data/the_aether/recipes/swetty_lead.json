@@ -1,20 +1,24 @@
 {
   "type": "crafting_shaped",
   "pattern": [
-    "~~ ",
-    "~O ",
-    "  ~"
+    "## ",
+    "#B ",
+    "  #"
   ],
   "key": {
-    "~": {
-      "item": "string"
-    },
-    "O": {
-      "item": "the_aether:swet_ball"
-    }
+    "#": [
+      {
+        "item": "minecraft:string"
+      }
+    ],
+    "B": [
+        {
+        "item": "the_aether:swet_ball"
+      }
+    ]
   },
   "result": {
-    "item": "lead",
+    "item": "minecraft:lead",
     "count": 2
   }
 }

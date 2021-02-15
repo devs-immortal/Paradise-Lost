@@ -6,12 +6,15 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "yellow_wool",
-      "data": 4
-    }
+    "#": [
+      {
+        "item": "yellow_wool",
+        "data": 4
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:yellow_cape"
+    "item": "the_aether:yellow_cape",
+    "count": 1
   }
 }

@@ -1,14 +1,1 @@
-{
-  "type": "crafting_shaped",
-  "pattern": [
-    "X X"
-  ],
-  "key": {
-    "X": {
-      "item": "minecraft:diamond"
-    }
-  },
-  "result": {
-    "item": "the_aether:diamond_gloves"
-  }
-}
+{"type":"minecraft:crafting_shaped","group":"diamond","pattern":["# #"],"key":{"#":[{"item":"minecraft:diamond"}]},"result":{"item":"the_aether:diamond_gloves","count":1}}

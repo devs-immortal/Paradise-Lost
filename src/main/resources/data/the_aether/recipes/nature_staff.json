@@ -5,14 +5,19 @@
     "#"
   ],
   "key": {
-    "#": {
-      "item": "the_aether:skyroot_stick"
-    },
-    "X": {
-      "item": "the_aether:zanite_gemstone"
-    }
+    "#": [
+      {
+        "item": "the_aether:skyroot_stick"
+      }
+    ],
+    "X": [
+      {
+        "item": "the_aether:zanite_gemstone"
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:nature_staff"
+    "item": "the_aether:nature_staff",
+    "count": 1
   }
 }

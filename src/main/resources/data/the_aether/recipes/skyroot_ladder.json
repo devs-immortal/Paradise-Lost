@@ -6,9 +6,11 @@
     "# #"
   ],
   "key": {
-    "#": {
-      "item": "the_aether:skyroot_stick"
-    }
+    "#": [
+      {
+        "item": "the_aether:skyroot_stick"
+      }
+    ]
   },
   "result": {
     "item": "minecraft:ladder",
