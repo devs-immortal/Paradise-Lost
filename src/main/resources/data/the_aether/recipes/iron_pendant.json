@@ -1,1 +1,25 @@
-{"type":"minecraft:crafting_shaped","group":"iron","pattern":["@@@","@ @"," # "],"key":{"#":[{"item":"minecraft:iron_ingot"}],"@":[{"item":"minecraft:string"}]},"result":{"item":"the_aether:iron_pendant","count":1}}
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "iron",
+  "pattern": [
+    "@@@",
+    "@ @",
+    " # "
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:iron_ingot"
+      }
+    ],
+    "@": [
+      {
+        "item": "minecraft:string"
+      }
+    ]
+  },
+  "result": {
+    "item": "the_aether:iron_pendant",
+    "count": 1
+  }
+}

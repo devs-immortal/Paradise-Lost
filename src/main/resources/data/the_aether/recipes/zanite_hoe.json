@@ -1,1 +1,25 @@
-{"type":"minecraft:crafting_shaped","group":"zanite","pattern":["##","S ","S "],"key":{"#":[{"item":"the_aether:zanite_gemstone"}],"S":[{"item":"the_aether:skyroot_stick"}]},"result":{"item":"the_aether:zanite_hoe","count":1}}
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "zanite",
+  "pattern": [
+    "##",
+    "S ",
+    "S "
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "the_aether:zanite_gemstone"
+      }
+    ],
+    "S": [
+      {
+        "item": "the_aether:skyroot_stick"
+      }
+    ]
+  },
+  "result": {
+    "item": "the_aether:zanite_hoe",
+    "count": 1
+  }
+}

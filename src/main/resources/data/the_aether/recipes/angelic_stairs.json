@@ -1,1 +1,19 @@
-{"type":"minecraft:crafting_shaped","pattern":["#  ","## ","###"],"key":{"#":[{"item":"the_aether:angelic_stone"}]},"result":{"item":"the_aether:angelic_stairs","count":4}}
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "the_aether:angelic_stone"
+      }
+    ]
+  },
+  "result": {
+    "item": "the_aether:angelic_stairs",
+    "count": 4
+  }
+}
