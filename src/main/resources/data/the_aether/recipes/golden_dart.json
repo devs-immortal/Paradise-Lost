@@ -6,15 +6,21 @@
     "Y"
   ],
   "key": {
-    "#": {
-      "item": "the_aether:skyroot_stick"
-    },
-    "X": {
-      "item": "minecraft:feather"
-    },
-    "Y": {
-      "item": "the_aether:golden_amber"
-    }
+    "#": [
+      {
+        "item": "the_aether:skyroot_stick"
+      }
+    ],
+    "X": [
+      {
+        "item": "minecraft:feather"
+      }
+    ],
+    "Y": [
+      {
+        "item": "the_aether:golden_amber"
+      }
+    ]
   },
   "result": {
     "item": "the_aether:golden_dart",

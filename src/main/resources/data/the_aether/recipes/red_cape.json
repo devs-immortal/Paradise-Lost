@@ -6,12 +6,15 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "red_wool",
-      "data": 14
-    }
+    "#": [
+      {
+        "item": "red_wool",
+        "data": 14
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:red_cape"
+    "item": "the_aether:red_cape",
+    "count": 1
   }
 }

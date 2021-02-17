@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "holystone",
+  "pattern": [
+    "##",
+    "S ",
+    "S "
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "the_aether:holystone"
+      }
+    ],
+    "S": [
+      {
+        "item": "the_aether:skyroot_stick"
+      }
+    ]
+  },
+  "result": {
+    "item": "the_aether:holystone_hoe",
+    "count": 1
+  }
+}

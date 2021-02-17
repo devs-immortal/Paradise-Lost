@@ -45,11 +45,11 @@ repositories {
         name = "CottonMC"
         url = "https://server.bbkr.space/artifactory/libs-release"
     }
-    maven { 
-              url = "https://www.cursemaven.com" 
-              content {
-                  includeGroup "curse.maven"
-              }
+    maven {
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
     }
     maven { url "https://dl.bintray.com/kyrptonaught/customportalapi" }
     maven { url "https://hephaestus.dev/release" }
@@ -91,7 +91,7 @@ dependencies {
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
 
-    modRuntime ("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
+    modRuntime("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
         exclude module: "fabric-loader"
     }
 

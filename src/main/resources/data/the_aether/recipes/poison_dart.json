@@ -6,12 +6,16 @@
     "HHH"
   ],
   "key": {
-    "B": {
-      "item": "the_aether:skyroot_poison_bucket"
-    },
-    "H": {
-      "item": "the_aether:golden_dart"
-    }
+    "B": [
+      {
+        "item": "the_aether:skyroot_poison_bucket"
+      }
+    ],
+    "H": [
+      {
+        "item": "the_aether:golden_dart"
+      }
+    ]
   },
   "result": {
     "item": "the_aether:poison_dart",

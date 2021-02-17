@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S#S",
+    "S#S"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "the_aether:crystal_planks"
+      }
+    ],
+    "S": [
+      {
+        "item": "the_aether:skyroot_stick"
+      },
+      {
+        "item": "minecraft:stick"
+      }
+    ]
+  },
+  "result": {
+    "item": "the_aether:crystal_fence_gate"
+  }
+}

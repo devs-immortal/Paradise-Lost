@@ -5,9 +5,11 @@
     "#"
   ],
   "key": {
-    "#": {
-      "item": "the_aether:zanite_block"
-    }
+    "#": [
+      {
+        "item": "the_aether:zanite_block"
+      }
+    ]
   },
   "result": {
     "item": "the_aether:zanite_gemstone",

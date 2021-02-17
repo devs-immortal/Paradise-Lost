@@ -1,19 +1,25 @@
 {
-  "type": "crafting_shaped",
+  "type": "minecraft:crafting_shaped",
+  "group": "holystone",
   "pattern": [
-    "XXX",
-    " # ",
-    " # "
+    "###",
+    " S ",
+    " S "
   ],
   "key": {
-    "#": {
-      "item": "the_aether:skyroot_stick"
-    },
-    "X": {
-      "item": "the_aether:holystone"
-    }
+    "#": [
+      {
+        "item": "the_aether:holystone"
+      }
+    ],
+    "S": [
+      {
+        "item": "the_aether:skyroot_stick"
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:holystone_pickaxe"
+    "item": "the_aether:holystone_pickaxe",
+    "count": 1
   }
 }

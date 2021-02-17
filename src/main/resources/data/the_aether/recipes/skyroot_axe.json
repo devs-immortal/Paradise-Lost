@@ -1,19 +1,25 @@
 {
-  "type": "crafting_shaped",
+  "type": "minecraft:crafting_shaped",
+  "group": "skyroot",
   "pattern": [
-    "XX",
-    "X#",
-    " #"
+    "##",
+    "S#",
+    "S "
   ],
   "key": {
-    "#": {
-      "item": "the_aether:skyroot_stick"
-    },
-    "X": {
-      "item": "the_aether:skyroot_planks"
-    }
+    "#": [
+      {
+        "item": "the_aether:skyroot_planks"
+      }
+    ],
+    "S": [
+      {
+        "item": "the_aether:skyroot_stick"
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:skyroot_axe"
+    "item": "the_aether:skyroot_axe",
+    "count": 1
   }
 }

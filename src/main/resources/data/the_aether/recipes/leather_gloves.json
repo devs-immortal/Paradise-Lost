@@ -1,14 +1,18 @@
 {
-  "type": "crafting_shaped",
+  "type": "minecraft:crafting_shaped",
+  "group": "leather",
   "pattern": [
-    "X X"
+    "# #"
   ],
   "key": {
-    "X": {
-      "item": "minecraft:leather"
-    }
+    "#": [
+      {
+        "item": "minecraft:leather"
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:leather_gloves"
+    "item": "the_aether:leather_gloves",
+    "count": 1
   }
 }

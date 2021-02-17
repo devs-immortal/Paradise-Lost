@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "zanite",
+  "pattern": [
+    "# #",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "the_aether:zanite_gemstone"
+      }
+    ]
+  },
+  "result": {
+    "item": "the_aether:zanite_chestplate",
+    "count": 1
+  }
+}

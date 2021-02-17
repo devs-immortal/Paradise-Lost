@@ -1,20 +1,25 @@
 {
-  "type": "crafting_shaped",
-  "group": "wooden_fence",
+  "type": "minecraft:crafting_shaped",
   "pattern": [
-    "W#W",
-    "W#W"
+    "#S#",
+    "#S#"
   ],
   "key": {
-    "#": {
-      "item": "the_aether:skyroot_stick"
-    },
-    "W": {
-      "item": "the_aether:skyroot_planks"
-    }
+    "#": [
+      {
+        "item": "the_aether:skyroot_planks"
+      }
+    ],
+    "S": [
+      {
+        "item": "the_aether:skyroot_stick"
+      },
+      {
+        "item": "minecraft:stick"
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:skyroot_fence",
-    "count": 3
+    "item": "the_aether:skyroot_fence"
   }
 }

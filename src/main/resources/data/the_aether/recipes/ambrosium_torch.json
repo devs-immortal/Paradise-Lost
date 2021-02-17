@@ -5,9 +5,11 @@
     "#"
   ],
   "key": {
-    "#": {
-      "item": "the_aether:skyroot_stick"
-    },
+    "#": [
+      {
+        "item": "the_aether:skyroot_stick"
+      }
+    ],
     "X": [
       {
         "item": "the_aether:ambrosium_shard"

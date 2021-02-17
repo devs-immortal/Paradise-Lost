@@ -5,14 +5,19 @@
     "LSL"
   ],
   "key": {
-    "S": {
-      "item": "minecraft:string"
-    },
-    "L": {
-      "item": "minecraft:leather"
-    }
+    "S": [
+      {
+        "item": "minecraft:string"
+      }
+    ],
+    "L": [
+      {
+        "item": "minecraft:leather"
+      }
+    ]
   },
   "result": {
-    "item": "minecraft:saddle"
+    "item": "minecraft:saddle",
+    "count": 1
   }
 }

@@ -1,19 +1,25 @@
 {
-  "type": "crafting_shaped",
+  "type": "minecraft:crafting_shaped",
+  "group": "iron",
   "pattern": [
-    "SSS",
-    "S S",
-    " I "
+    "@@@",
+    "@ @",
+    " # "
   ],
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "#": [
+      {
+        "item": "minecraft:iron_ingot"
+      }
+    ],
+    "@": [
+      {
+        "item": "minecraft:string"
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:iron_pendant"
+    "item": "the_aether:iron_pendant",
+    "count": 1
   }
 }

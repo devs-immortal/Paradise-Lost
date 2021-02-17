@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "golden",
+  "pattern": [
+    "@@@",
+    "@ @",
+    " # "
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:gold_ingot"
+      }
+    ],
+    "@": [
+      {
+        "item": "minecraft:string"
+      }
+    ]
+  },
+  "result": {
+    "item": "the_aether:golden_pendant",
+    "count": 1
+  }
+}

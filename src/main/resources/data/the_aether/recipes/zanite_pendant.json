@@ -1,19 +1,25 @@
 {
-  "type": "crafting_shaped",
+  "type": "minecraft:crafting_shaped",
+  "group": "zanite",
   "pattern": [
-    "SSS",
-    "S S",
-    " Z "
+    "@@@",
+    "@ @",
+    " # "
   ],
   "key": {
-    "Z": {
-      "item": "the_aether:zanite_gemstone"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "#": [
+      {
+        "item": "the_aether:zanite_gemstone"
+      }
+    ],
+    "@": [
+      {
+        "item": "minecraft:string"
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:zanite_pendant"
+    "item": "the_aether:zanite_pendant",
+    "count": 1
   }
 }

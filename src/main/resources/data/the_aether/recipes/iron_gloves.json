@@ -1,14 +1,18 @@
 {
-  "type": "crafting_shaped",
+  "type": "minecraft:crafting_shaped",
+  "group": "iron",
   "pattern": [
-    "X X"
+    "# #"
   ],
   "key": {
-    "X": {
-      "item": "minecraft:iron_ingot"
-    }
+    "#": [
+      {
+        "item": "minecraft:iron_ingot"
+      }
+    ]
   },
   "result": {
-    "item": "the_aether:iron_gloves"
+    "item": "the_aether:iron_gloves",
+    "count": 1
   }
 }
