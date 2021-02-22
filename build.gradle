@@ -73,7 +73,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Libraries
-    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:1.0.1"))
+    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:2.0.0"))
     modImplementation(include("io.github.cottonmc:LibGui:3.2.2+1.16.3"))
     modImplementation 'software.bernie.geckolib:geckolib-fabric-1.16.5:3.0.15:dev'
 
