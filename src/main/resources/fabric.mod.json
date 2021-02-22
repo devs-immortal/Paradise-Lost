@@ -26,7 +26,8 @@
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*",
     "fabric-networking-v0": "*",
-    "trinkets": "*"
+    "trinkets": "*",
+    "geckolib3": "*"
   },
   "mixins": [
     "the_aether.mixins.json"

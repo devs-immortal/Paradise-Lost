@@ -12,6 +12,8 @@ import com.aether.entities.projectile.EnchantedDartEntity;
 import com.aether.entities.projectile.GoldenDartEntity;
 import com.aether.entities.projectile.PoisonDartEntity;
 import com.aether.entities.projectile.PoisonNeedleEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -74,27 +76,7 @@ public class AetherEntityTypes {
 //        PHOENIX_ARROW = register("phoenix_arrow", ...);
     }
 
-    public static void initializeClient() {
-        register(MOA, (entityRenderDispatcher, context) -> new MoaRenderer(entityRenderDispatcher));
-        register(FLOATING_BLOCK, (entityRenderDispatcher, context) -> new FloatingBlockRenderer(entityRenderDispatcher));
-        register(FLYING_COW, (entityRenderDispatcher, context) -> new FlyingCowRenderer(entityRenderDispatcher));
-        register(SHEEPUFF, (entityRenderDispatcher, context) -> new SheepuffRenderer(entityRenderDispatcher));
-        register(AERBUNNY, (entityRenderDispatcher, context) -> new AerbunnyRenderer(entityRenderDispatcher));
-        register(AECHOR_PLANT, (entityRenderDispatcher, context) -> new AechorPlantRenderer(entityRenderDispatcher));
-        register(PHYG, (entityRenderDispatcher, context) -> new PhygRenderer(entityRenderDispatcher));
-        register(COCKATRICE, (entityRenderDispatcher, context) -> new CockatriceRenderer(entityRenderDispatcher));
-
-        register(ENCHANTED_DART, (entityRenderDispatcher, context) -> new DartRenderer(entityRenderDispatcher));
-        register(GOLDEN_DART, (entityRenderDispatcher, context) -> new DartRenderer(entityRenderDispatcher));
-        register(POISON_DART, (entityRenderDispatcher, context) -> new DartRenderer(entityRenderDispatcher));
-        register(POISON_NEEDLE, (entityRenderDispatcher, context) -> new DartRenderer(entityRenderDispatcher));
-
-        //entityRenderMap.put(EntityMiniCloud.class, new MiniCloudRenderer(renderManager));
-        //entityRenderMap.put(EntityAerwhale.class, new AerwhaleRenderer(renderManager));
-        register(CHEST_MIMIC, (entityRendererDispatcher, context) -> new ChestMimicRenderer(entityRendererDispatcher));
-        //entityRenderMap.put(EntityWhirlwind.class, new WhirlwindRenderer(renderManager));
-        //entityRenderMap.put(EntityPhoenixArrow.class, new PhoenixArrowRenderer(renderManager));
-
+    public static void init() {
         // Register Entity Attribute Data and Spawn Restrictions - TODO
         FabricDefaultAttributeRegistry.register(MOA, MoaEntity.initAttributes());
         FabricDefaultAttributeRegistry.register(FLYING_COW, FlyingCowEntity.initAttributes());
@@ -125,10 +107,6 @@ public class AetherEntityTypes {
 
     public static <X extends Entity> EntityType<X> register(String name, SpawnGroup category, EntityDimensions size, EntityType.EntityFactory<X> factory) {
         return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(category, factory).dimensions(size).disableSaving().build());
-    }
-
-    private static void register(EntityType<? extends Entity> clazz, EntityRendererRegistry.Factory factory) {
-        EntityRendererRegistry.INSTANCE.register(clazz, factory);
     }
 
     public static boolean getAnimalData(EntityType<? extends Entity> entityType, WorldAccess WorldAccess, SpawnReason SpawnReason, BlockPos blockPos, Random random) {

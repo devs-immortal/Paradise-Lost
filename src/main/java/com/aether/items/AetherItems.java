@@ -261,7 +261,7 @@ public class AetherItems {
         return Registry.register(Registry.ITEM, Aether.locate(id), item);
     }
 
-    public static void initializeClient() {
+    public static void initClient() {
         // Empty void. Eternal emptiness
     }
 }
