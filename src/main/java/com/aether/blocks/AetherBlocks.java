@@ -9,6 +9,8 @@ import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.items.AetherItemGroups;
 import com.aether.world.feature.tree.*;
 import com.google.common.collect.ImmutableSet;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -492,7 +494,12 @@ public class AetherBlocks {
         return new FlowerPotBlock(sourceBlock, AbstractBlock.Settings.of(Material.SUPPORTED).breakInstantly().nonOpaque());
     }
 
-    public static void initializeClient() {
+    public static void init() {
+
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void initClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(BLUE_PORTAL, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderLayer.getCutoutMipped());

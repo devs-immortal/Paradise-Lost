@@ -10,7 +10,7 @@ public class AetherMoaTypes {
 
     public static MoaType blue, orange, white, black;
 
-    public static void initialization() {
+    public static void init() {
         blue = register("blue", 0x7777FF, new MoaProperties(3, 0.3F, Aether.locate("textures/entity/moa/moa_blue.png"), Aether.locate("textures/entity/moa/moa_saddle.png")));
         orange = register("orange", -0xC3D78, new MoaProperties(2, 0.6F, Aether.locate("textures/entity/moa/moa_orange.png"), Aether.locate("textures/entity/moa/moa_saddle.png")));
         white = register("white", 0xFFFFFF, new MoaProperties(4, 0.3F, Aether.locate("textures/entity/moa/moa_white.png"), Aether.locate("textures/entity/moa/moa_saddle.png")));

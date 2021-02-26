@@ -2,6 +2,7 @@ package com.aether;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.block.AetherColorProvs;
+import com.aether.client.rendering.entity.AetherEntityRenderers;
 import com.aether.client.rendering.particle.AetherParticles;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.AetherMoaTypes;
@@ -21,7 +22,6 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import software.bernie.geckolib3.GeckoLib;
 
 public class Aether implements ModInitializer, ClientModInitializer {
 
@@ -34,27 +34,31 @@ public class Aether implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitialize() {
-        GeckoLib.initialize();
         TrinketSlotRegistry.init();
-        CrowdinTranslate.downloadTranslations("aether", MOD_ID);
         AetherTreeHell.init();
         AetherFeatures.registerFeatures();
         AetherConfiguredFeatures.registerFeatures();
         AetherDimension.setupDimension();
+        AetherEntityTypes.init();
+        AetherBlocks.init();
+        AetherMoaTypes.init();
+        AetherParticles.init();
         NetworkingHell.init();
     }
 
     @Override
     @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
-        AetherBlocks.initializeClient();
-        AetherItems.initializeClient();
-        AetherColorProvs.initializeClient();
-        AetherEntityTypes.initializeClient();
-        AetherMoaTypes.initialization();
-        AetherParticles.initializeClient();
+        CrowdinTranslate.downloadTranslations("aether", MOD_ID);
+        AetherItems.initClient();
+        AetherColorProvs.initClient();
+        AetherEntityRenderers.initClient();
+        AetherBlocks.initClient();
+        AetherParticles.initClient();
         //AetherSounds.initializeClient();
-        GeckolibRenderRegistry.init();
+
+        GeckolibRenderRegistry.initClient();
+
         NetworkingHell.initClient();
     }
 }

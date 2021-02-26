@@ -30,6 +30,7 @@
     "client.ClientPlayerEntityMixin",
     "client.ClientWorldMixin",
     "client.InGameHudMixin",
+    "client.ItemStackMixin",
     "client.MapRendererMixin",
     "client.WorldRendererMixin",
     "client.render.BiomeLayerSamplerAccessor",
