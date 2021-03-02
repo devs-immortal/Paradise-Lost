@@ -14,26 +14,23 @@ If one or more of these items fit your match. Please see our supported versions.
 
 | Version 	| Supported? 	| End of Support Date 	|
 |---------	|------------	|---------------------	|
-| DEV\*     	| [x]        	| Never               	|
-| ALPHA   	| [x]        	| Not Decided Yet     	|
-
+| DEV\*     |  ✅       	| Never               	|
+| ALPHA   	|  ✅        	| Not Decided Yet     	|
 
 
 ## Reporting a Vulnerability
 
-**Please only report a vulnerability if the version the bug or issue is on is supported and it fits into atleast one of the statements in the Introduction**
+**Please only report a vulnerability if the version the bug or issue is on is supported, and it fits into at least one of the statements in the Introduction**
 
 You can report a bug or important issue at the following contacts:
 
 - Discord
-  + mariuszk312#9850
-  + diabolical17#3432
+  + kalucky0#2137
   + azazelthedemonlord#2563
 - Email
-  + contact@kalucky0.dev
-  + calumproh28@gmail.com
+  + kalucki23@gmail.com
 
-Please provide as much infomation as you can, and we prefer discord as we can respond faster.
+Please provide as much information as you can, and we prefer Discord as we can respond faster.
 
 Thank you for helping us keep our code safe.
 
