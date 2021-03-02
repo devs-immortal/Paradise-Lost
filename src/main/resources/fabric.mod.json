@@ -16,13 +16,13 @@
     "Karanomuro"
   ],
   "contact": {
-    "homepage": "https://github.com/devs-immortal/The-Aether",
+    "homepage": "https://github.com/devs-immortal/The-Aether#readme",
     "sources": "https://github.com/devs-immortal/The-Aether",
     "issues": "https://github.com/devs-immortal/The-Aether/issues"
   },
   "depends": {
-    "fabricloader": ">=0.4.0",
-    "minecraft": ">=1.16-rc.4",
+    "fabricloader": ">=0.11.2",
+    "minecraft": ">=1.16.4",
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*",
     "fabric-networking-v0": "*",
