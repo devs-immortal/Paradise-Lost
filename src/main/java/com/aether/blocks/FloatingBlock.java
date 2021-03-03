@@ -1,18 +1,24 @@
 package com.aether.blocks;
 
 import com.aether.entities.block.FloatingBlockEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.FallingBlock;
+import net.minecraft.block.Material;
+import net.minecraft.block.OreBlock;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
-public class FloatingBlock extends FallingBlock {
+@SuppressWarnings("deprecation")
+public class FloatingBlock extends OreBlock {
     private final boolean powered;
 
     public FloatingBlock(boolean powered, FabricBlockSettings properties) {
@@ -20,18 +26,15 @@ public class FloatingBlock extends FallingBlock {
         this.powered = powered;
     }
 
-    @Override
     public void onBlockAdded(BlockState state, World worldIn, BlockPos posIn, BlockState oldState, boolean notify) {
         worldIn.getBlockTickScheduler().schedule(posIn, this, this.getFallDelay());
     }
 
-    @Override
     public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facingIn, BlockState facingState, WorldAccess worldIn, BlockPos posIn, BlockPos facingPosIn) {
         worldIn.getBlockTickScheduler().schedule(posIn, this, this.getFallDelay());
         return super.getStateForNeighborUpdate(stateIn, facingIn, facingState, worldIn, posIn, facingPosIn);
     }
 
-    @Override
     public void scheduledTick(BlockState stateIn, ServerWorld worldIn, BlockPos posIn, Random randIn) {
         this.checkFloatable(worldIn, posIn);
     }
@@ -55,13 +58,20 @@ public class FloatingBlock extends FallingBlock {
     public void onBroken(World worldIn, BlockPos pos) {
     }
 
-    @Override
     protected int getFallDelay() {
         return 2;
     }
 
-    @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+    }
 
+    public static boolean canFallThrough(BlockState state) {
+        Material material = state.getMaterial();
+        return state.isAir() || state.isIn(BlockTags.FIRE) || material.isLiquid() || material.isReplaceable();
+    }
+
+    @Environment(EnvType.CLIENT)
+    public int getColor(BlockState state, BlockView world, BlockPos pos) {
+        return -16777216;
     }
 }
