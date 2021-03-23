@@ -14,7 +14,6 @@ plugins {
     id 'fabric-loom' version '0.5-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "1.1.0"
-    id "org.sonarqube" version "3.1.1"
 }
 
 apply plugin: 'de.guntram.mcmod.crowdin-translate'
@@ -133,14 +132,6 @@ tasks.withType(JavaCompile) {
 task sourcesJar(type: Jar, dependsOn: classes) {
     archiveClassifier.set("sources")
     from sourceSets.main.allSource
-}
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "devs-immortal_The-Aether"
-        property "sonar.organization", "devs-immortal"
-        property "sonar.host.url", "https://sonarcloud.io"
-    }
 }
 
 //task publishModrinth (type: TaskModrinthUpload){
