@@ -9,16 +9,16 @@ public class NeptuneArmorModel extends AnimatedGeoModel<AetherArmor> {
 
     @Override
     public Identifier getModelLocation(AetherArmor object) {
-        return Aether.locate("geo/neptune_armor.geo.json");
+        return Aether.locate("geo/neptune_armor/neptune_armor.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(AetherArmor object) {
-        return Aether.locate("textures/armor/neptune_armor.png");
+        return Aether.locate("textures/models/armor/neptune_armor.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(AetherArmor animatable) {
-        return Aether.locate("animations/armor/neptune_armor.animation");
+        return Aether.locate("animations/neptune_armor/neptune_armor.animation");
     }
 }

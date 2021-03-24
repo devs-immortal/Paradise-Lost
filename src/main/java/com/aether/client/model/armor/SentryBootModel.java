@@ -9,16 +9,16 @@ public class SentryBootModel extends AnimatedGeoModel<AetherArmor> {
 
     @Override
     public Identifier getModelLocation(AetherArmor object) {
-        return Aether.locate("geo/sentry_boots.geo.json");
+        return Aether.locate("geo/sentry_boots/sentry_boots.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(AetherArmor object) {
-        return Aether.locate("textures/armor/sentry_boots.png");
+        return Aether.locate("textures/models/armor/sentry_boots.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(AetherArmor animatable) {
-        return Aether.locate("animations/armor/sentry_boots.animation");
+        return Aether.locate("animations/sentry_boots/sentry_boots.animation");
     }
 }

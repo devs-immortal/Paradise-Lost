@@ -315,5 +315,6 @@
   "itemGroup.the_aether.aether_misc": "Aether Miscellaneous",
   "itemGroup.the_aether.aether_resources": "Aether Materials",
   "itemGroup.the_aether.aether_tools": "Aether Tools",
-  "itemGroup.the_aether.aether_weapons": "Aether Weapons"
+  "itemGroup.the_aether.aether_weapons": "Aether Weapons",
+  "trinkets.slot.chest.parachute": "Parachute"
 }
