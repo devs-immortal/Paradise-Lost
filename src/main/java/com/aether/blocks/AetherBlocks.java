@@ -97,6 +97,11 @@ public class AetherBlocks {
     public static final Block LIGHT_ANGELIC_STONE;
     public static final Block LIGHT_ANGELIC_STONE_TRAP;
     public static final Block LIGHT_ANGELIC_WALL;
+    public static final Block LIGHT_CARVED_SLAB;
+    public static final Block LIGHT_CARVED_STAIRS;
+    public static final Block LIGHT_CARVED_STONE;
+    public static final Block LIGHT_CARVED_STONE_TRAP;
+    public static final Block LIGHT_CARVED_WALL;
     //    public static final Block LIGHT_BLUE_DYED_AERCLOUD;
 //    public static final Block LIGHT_GREY_DYED_AERCLOUD;
     public static final Block LIGHT_HELLFIRE_SLAB;
@@ -312,6 +317,11 @@ public class AetherBlocks {
         LIGHT_ANGELIC_SLAB = register("light_angelic_slab", new AetherSlabBlock(LIGHT_ANGELIC_STONE.getDefaultState()), buildingBlock());
         LIGHT_ANGELIC_STAIRS = register("light_angelic_stairs", new AetherStairsBlock(LIGHT_ANGELIC_STONE.getDefaultState()), buildingBlock());
         LIGHT_ANGELIC_WALL = register("light_angelic_wall", new AetherWallBlock(LIGHT_ANGELIC_STONE.getDefaultState()), buildingBlock());
+        LIGHT_CARVED_STONE = register("light_carved_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).luminance(11).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
+        LIGHT_CARVED_STONE_TRAP = register("light_carved_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).luminance(11).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
+        LIGHT_CARVED_SLAB = register("light_carved_slab", new AetherSlabBlock(LIGHT_CARVED_STONE.getDefaultState()), buildingBlock());
+        LIGHT_CARVED_STAIRS = register("light_carved_stairs", new AetherStairsBlock(LIGHT_CARVED_STONE.getDefaultState()), buildingBlock());
+        LIGHT_CARVED_WALL = register("light_carved_wall", new AetherWallBlock(LIGHT_CARVED_STONE.getDefaultState()), buildingBlock());
 //        LIGHT_BLUE_DYED_AERCLOUD = register("light_blue_dyed_aercloud", null);
 //        LIGHT_GREY_DYED_AERCLOUD = register("light_grey_dyed_aercloud", null);
         LIGHT_HELLFIRE_STONE = register("light_hellfire_stone", new Block(FabricBlockSettings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
