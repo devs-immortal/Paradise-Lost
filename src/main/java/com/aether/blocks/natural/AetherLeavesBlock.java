@@ -17,7 +17,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
-public class AetherLeavesBlock extends LeavesBlock {
+public class  AetherLeavesBlock extends LeavesBlock {
 
     private int speed = 0;
 

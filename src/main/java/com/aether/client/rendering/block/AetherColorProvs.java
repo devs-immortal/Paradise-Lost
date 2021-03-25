@@ -5,6 +5,9 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
+import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class AetherColorProvs {
 

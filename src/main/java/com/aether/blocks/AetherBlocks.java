@@ -217,6 +217,15 @@ public class AetherBlocks {
     public static final Block AETHER_FERN;
     public static final Block POTTED_AETHER_FERN;
     public static final Block AETHER_BUSH;
+    //public static final Block DRIGEAN;
+    //public static final Block CLOUDSBLUFF;
+    //public static final Block ATARAXIA;
+    //public static final Block ANCIENT_FLOWER;
+    //public static final Block LUMINAR;
+    //public static final Block SPORECAP_PINK;
+    //public static final Block SPORECAP_BROWN;
+    //public static final Block ROOTCAP;
+    //public static final Block CINNABAR_ROSE;
 
     static {
         AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).strength(0.3f).sounds(BlockSoundGroup.GRAVEL)), buildingBlock());

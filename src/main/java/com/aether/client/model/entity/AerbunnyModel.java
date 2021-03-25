@@ -1,4 +1,8 @@
-package com.aether.client.model.entity;
+// Made with Blockbench 3.8.3
+	// Exported for Minecraft version 1.15
+	// Paste this class into your mod and generate all required imports
+
+	package com.aether.client.model.entity;
 
 import com.aether.entities.passive.AerbunnyEntity;
 import net.minecraft.client.model.ModelPart;
@@ -9,135 +13,93 @@ import net.minecraft.util.math.MathHelper;
 
 public class AerbunnyModel extends EntityModel<AerbunnyEntity> {
 
-    public ModelPart a;
-    public ModelPart b;
-    public ModelPart b2;
-    public ModelPart b3;
-    public ModelPart e1;
-    public ModelPart e2;
-    public ModelPart ff1;
-    public ModelPart ff2;
-    public ModelPart g;
-    public ModelPart g2;
-    public ModelPart h;
-    public ModelPart h2;
-    public float puffiness;
+	private final ModelPart body;
+	private final ScaledModelPart fluff;
+	private final ModelPart head;
+	private final ModelPart left_front_leg;
+	private final ModelPart right_front_leg;
+	private final ModelPart back_right_leg;
+	private final ModelPart back_left_leg;
+	private final ModelPart tail;
 
-    private AerbunnyEntity e;
 
-    public AerbunnyModel() {
-        byte byte0 = 16;
-        this.a = new ModelPart(this, 0, 0);
-        this.a.addCuboid(-2.0F, -1.0F, -4.0F, 4, 4, 6, 0.0F);
-        this.a.setPivot(0.0F, (float) (-1 + byte0), -4.0F);
-        this.g = new ModelPart(this, 14, 0);
-        this.g.addCuboid(-2.0F, -5.0F, -3.0F, 1, 4, 2, 0.0F);
-        this.g.setPivot(0.0F, (float) (-1 + byte0), -4.0F);
-        this.g2 = new ModelPart(this, 14, 0);
-        this.g2.addCuboid(1.0F, -5.0F, -3.0F, 1, 4, 2, 0.0F);
-        this.g2.setPivot(0.0F, (float) (-1 + byte0), -4.0F);
-        this.h = new ModelPart(this, 20, 0);
-        this.h.addCuboid(-4.0F, 0.0F, -3.0F, 2, 3, 2, 0.0F);
-        this.h.setPivot(0.0F, (float) (-1 + byte0), -4.0F);
-        this.h2 = new ModelPart(this, 20, 0);
-        this.h2.addCuboid(2.0F, 0.0F, -3.0F, 2, 3, 2, 0.0F);
-        this.h2.setPivot(0.0F, (float) (-1 + byte0), -4.0F);
-        this.b = new ModelPart(this, 0, 10);
-        this.b.addCuboid(-3.0F, -4.0F, -3.0F, 6, 8, 6, 0.0F);
-        this.b.setPivot(0.0F, byte0, 0.0F);
-        this.b2 = new ModelPart(this, 0, 24);
-        this.b2.addCuboid(-2.0F, 4.0F, -2.0F, 4, 3, 4, 0.0F);
-        this.b2.setPivot(0.0F, byte0, 0.0F);
-        this.b3 = new ModelPart(this, 29, 0);
-        this.b3.addCuboid(-3.5F, -3.5F, -3.5F, 7, 7, 7, 0.0F);
-        this.b3.setPivot(0.0F, 0.0F, 0.0F);
-        this.e1 = new ModelPart(this, 24, 16);
-        this.e1.addCuboid(-2.0F, 0.0F, -1.0F, 2, 2, 2);
-        this.e1.setPivot(3.0F, (float) (3 + byte0), -3.0F);
-        this.e2 = new ModelPart(this, 24, 16);
-        this.e2.addCuboid(0.0F, 0.0F, -1.0F, 2, 2, 2);
-        this.e2.setPivot(-3.0F, (float) (3 + byte0), -3.0F);
-        this.ff1 = new ModelPart(this, 16, 24);
-        this.ff1.addCuboid(-2.0F, 0.0F, -4.0F, 2, 2, 4);
-        this.ff1.setPivot(3.0F, (float) (3 + byte0), 4.0F);
-        this.ff2 = new ModelPart(this, 16, 24);
-        this.ff2.addCuboid(0.0F, 0.0F, -4.0F, 2, 2, 4);
-        this.ff2.setPivot(-3.0F, (float) (3 + byte0), 4.0F);
-    }
+	public AerbunnyModel() {
+		textureWidth = 32;
+		textureHeight = 32;
+		body = new ModelPart(this);
+		body.setPivot(0.0F, 22.8889F, 1.0F);
 
-    @Override
-    public void animateModel(AerbunnyEntity entity, float f, float g, float h) {
-        e = entity;
-    }
 
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-        this.puffiness = (float) e.getPuffiness() / 10.0F;
+		fluff = new ScaledModelPart(this);
+		fluff.setPivot(0.0F, 0F, 0F);
+		fluff.setTextureOffset(0, 0).addCuboid(-4.0F, -3.5F, -3.5F, 8.0F, 7.0F, 7.0F, 0.0F, false);
 
-        float a;
-        if (this.child) {
-            a = 2.0F;
-            matrices.push();
-            matrices.translate(0.0F, 0.0f, 0.0f);
-            this.a.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.g.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.g2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.h.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.h2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            matrices.pop();
-            matrices.scale(1.0F / a, 1.0F / a, 1.0F / a);
-            matrices.translate(0.0F, 18.0F/* * f5*/, 0.0F);
-            this.b.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.b2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.e1.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.e2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.ff1.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.ff2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            float a1 = 1.0F + this.puffiness * 0.5F;
-            matrices.translate(0.0F, 1.0F, 0.0F);
-            matrices.scale(a1, a1, a1);
-            this.b3.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        } else {
-            this.a.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.g.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.g2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.h.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.h2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.b.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.b2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            matrices.push();
-            a = 1.0F + this.puffiness * 0.5F;
-            matrices.translate(0.0F, 1.0F, 0.0F);
-            matrices.scale(a, a, a);
-            this.b3.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            matrices.pop();
-            this.e1.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.e2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.ff1.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-            this.ff2.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        }
-    }
+		head = new ModelPart(this);
+		head.setPivot(0.0F, -2.3889F, -4.5F);
+		body.addChild(head);
+		head.setTextureOffset(18, 26).addCuboid(-2.0F, -1.5F, -3.0F, 4.0F, 3.0F, 3.0F, 0.0F, false);
+		head.setTextureOffset(0, 0).addCuboid(-2.0F, -5.5F, -2.0F, 1.0F, 4.0F, 1.0F, 0.0F, false);
+		head.setTextureOffset(0, 0).addCuboid(1.0F, -5.5F, -2.0F, 1.0F, 4.0F, 1.0F, 0.0F, false);
+		head.setTextureOffset(0, 14).addCuboid(-4.0F, -0.5F, -2.0F, 2.0F, 2.0F, 0.0F, 0.0F, false);
+		head.setTextureOffset(0, 14).addCuboid(2.0F, -0.5F, -2.0F, 2.0F, 2.0F, 0.0F, 0.0F, true);
 
-    @Override
-    public void setAngles(AerbunnyEntity e, float f, float f1, float f2, float f3, float f4) {
-        this.e = e;
-        this.a.pitch = -(f4 / (180F / (float) Math.PI));
-        this.a.yaw = f3 / (180F / (float) Math.PI);
-        this.g.pitch = this.a.pitch;
-        this.g.yaw = this.a.yaw;
-        this.g2.pitch = this.a.pitch;
-        this.g2.yaw = this.a.yaw;
-        this.h.pitch = this.a.pitch;
-        this.h.yaw = this.a.yaw;
-        this.h2.pitch = this.a.pitch;
-        this.h2.yaw = this.a.yaw;
-        this.b.pitch = ((float) Math.PI / 2F);
-        this.b2.pitch = ((float) Math.PI / 2F);
-        this.b3.pitch = ((float) Math.PI / 2F);
-        this.e1.pitch = MathHelper.cos(f * 0.6662F) * 1.0F * f1;
-        this.ff1.pitch = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.2F * f1;
-        this.e2.pitch = MathHelper.cos(f * 0.6662F) * 1.0F * f1;
-        this.ff2.pitch = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.2F * f1;
-    }
+		left_front_leg = new ModelPart(this);
+		left_front_leg.setPivot(-4.0F, 1.1111F, -3.25F);
+		body.addChild(left_front_leg);
+		left_front_leg.setTextureOffset(0, 21).addCuboid(-1.0F, -1.0F, -2.25F, 2.0F, 1.0F, 3.0F, 0.0F, false);
 
+		right_front_leg = new ModelPart(this);
+		right_front_leg.setPivot(4.0F, 1.1111F, -3.0F);
+		body.addChild(right_front_leg);
+		right_front_leg.setTextureOffset(0, 21).addCuboid(-1.0F, -1.0F, -2.5F, 2.0F, 1.0F, 3.0F, 0.0F, false);
+
+		back_right_leg = new ModelPart(this);
+		back_right_leg.setPivot(4.0F, 0.1111F, 2.5F);
+		body.addChild(back_right_leg);
+		back_right_leg.setTextureOffset(10, 20).addCuboid(-1.0F, 0.0F, -3.0F, 2.0F, 1.0F, 4.0F, 0.0F, false);
+		back_right_leg.setTextureOffset(22, 20).addCuboid(-1.0F, -2.0F, -2.0F, 2.0F, 2.0F, 3.0F, 0.0F, false);
+
+		back_left_leg = new ModelPart(this);
+		back_left_leg.setPivot(-4.0F, 0.1111F, 2.5F);
+		body.addChild(back_left_leg);
+		back_left_leg.setTextureOffset(22, 20).addCuboid(-1.0F, -2.0F, -2.0F, 2.0F, 2.0F, 3.0F, 0.0F, false);
+		back_left_leg.setTextureOffset(10, 20).addCuboid(-1.0F, 0.0F, -3.0F, 2.0F, 1.0F, 4.0F, 0.0F, false);
+
+		tail = new ModelPart(this);
+		tail.setPivot(0.0F, -2.8889F, 2.5F);
+		body.addChild(tail);
+		tail.setTextureOffset(0, 25).addCuboid(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 3.0F, 0.0F, false);
+	}
+
+	@Override
+	public void setAngles(AerbunnyEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+		head.pitch = headPitch * 0.017453F;
+		head.yaw = netHeadYaw * 0.017453292F;
+		back_right_leg.pitch = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		back_left_leg.pitch = MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * 1.4F * limbSwingAmount;
+		right_front_leg.pitch = MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * 1.4F * limbSwingAmount;
+		left_front_leg.pitch = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+
+		float targetFloof = entity.getPuffiness() / 2F;
+
+		if(entity.floof < targetFloof) {
+			entity.floof += 0.025F;
+		}
+		else if(entity.floof > targetFloof) {
+			entity.floof -= 0.025F;
+		}
+
+		if(Math.abs(targetFloof - entity.floof) <= 0.03)
+			entity.floof = targetFloof;
+
+		fluff.uniformScale(entity.floof + 1);
+	}
+
+	@Override
+	public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+			body.render(matrixStack, buffer, packedLight, packedOverlay);
+			matrixStack.translate(0, 1.28, 0);
+			matrixStack.scale(fluff.scaleX, fluff.scaleY, fluff.scaleZ);
+			fluff.render(matrixStack, buffer, packedLight, packedOverlay);
+	}
 }

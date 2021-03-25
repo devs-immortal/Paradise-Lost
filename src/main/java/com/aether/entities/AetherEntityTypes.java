@@ -56,7 +56,7 @@ public class AetherEntityTypes {
     static {
         AECHOR_PLANT = register("aechor_plant", SpawnGroup.MONSTER, EntityDimensions.changing(1.0F, 1.0F), (entityType, world) -> new AechorPlantEntity(world));
         FLYING_COW = register("flying_cow", SpawnGroup.CREATURE, EntityDimensions.changing(0.9F, 1.3F), (entityType, world) -> new FlyingCowEntity(world));
-        AERBUNNY = register("aerbunny", SpawnGroup.CREATURE, EntityDimensions.changing(0.4F, 0.4F), (entityType, world) -> new AerbunnyEntity(world));
+        AERBUNNY = register("aerbunny", SpawnGroup.CREATURE, EntityDimensions.changing(0.55F, 0.55F), (entityType, world) -> new AerbunnyEntity(world));
         MOA = register("moa", SpawnGroup.CREATURE, EntityDimensions.changing(1.0F, 2.0F), (entityType, world) -> new MoaEntity(world));
         PHYG = register("phyg", SpawnGroup.CREATURE, EntityDimensions.changing(0.9F, 1.3F), (entityType, world) -> new PhygEntity(world));
         SHEEPUFF = register("sheepuff", SpawnGroup.CREATURE, EntityDimensions.changing(0.9F, 1.3F), (entityType, world) -> new SheepuffEntity(world));

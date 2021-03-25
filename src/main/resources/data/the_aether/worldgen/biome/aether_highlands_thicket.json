@@ -4,8 +4,8 @@
     "foliage_color": 13166202,
     "grass_color": 8773039,
     "fog_color": 16777215,
-    "water_color": 11139071,
-    "water_fog_color": 11139071,
+    "water_color": 5826047,
+    "water_fog_color": 5826047,
     "grass_color_modifier": "dark_forest",
     "music": {
       "sound": "the_aether:exploring_empty_spaces",

@@ -4,8 +4,8 @@
     "foliage_color": 14483329,
     "grass_color": 11665355,
     "fog_color": 16777215,
-    "water_color": 11139071,
-    "water_fog_color": 11139071,
+    "water_color": 5826047,
+    "water_fog_color": 5826047,
     "music": {
       "sound": "the_aether:flying_01",
       "min_delay": 280,

@@ -4,6 +4,7 @@ import com.aether.Aether;
 import com.aether.client.model.entity.AerbunnyModel;
 import com.aether.entities.passive.AerbunnyEntity;
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -17,25 +18,16 @@ public class AerbunnyRenderer extends MobEntityRenderer<AerbunnyEntity, Aerbunny
         super(renderManager, new AerbunnyModel(), 0.3F);
     }
 
-    protected void rotateAerbunny(MatrixStack matrices, AerbunnyEntity bunny) {
-        if (bunny.getPrimaryPassenger() != null) {
-            matrices.translate(0.0F, -0.2F, 0.0F);
-        }
-
-        if (!bunny.isOnGround()) {
-            if (bunny.getVelocity().y > 0.5D) {
-                GlStateManager.rotatef(15.0F, -1.0F, 0.0F, 0.0F);
-            } else if (bunny.getVelocity().y < -0.5D) {
-                GlStateManager.rotatef(-15.0F, -1.0F, 0.0F, 0.0F);
-            } else {
-                GlStateManager.rotatef((float) (bunny.getVelocity().y * 30.0D), -1.0F, 0.0F, 0.0F);
-            }
-        }
+    @Override
+    public AerbunnyModel getModel() {
+        return super.getModel();
     }
 
     @Override
-    protected void scale(AerbunnyEntity entitybunny, MatrixStack matrices, float f) {
-        this.rotateAerbunny(matrices, entitybunny);
+    protected void setupTransforms(AerbunnyEntity entity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta) {
+        super.setupTransforms(entity, matrices, animationProgress, bodyYaw, tickDelta);
+        if(entity.isBaby())
+            matrices.scale(0.6F, 0.6F, 0.6F);
     }
 
     @Override

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "blooming=true": {
+      "model": "the_aether:block/cinnabar_rose_on"
+    },
+    "blooming=false": {
+      "model": "the_aether:block/cinnabar_rose"
+    }
+  }
+}
