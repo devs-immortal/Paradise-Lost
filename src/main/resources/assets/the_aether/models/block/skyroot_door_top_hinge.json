@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_rh",
+  "textures": {
+    "top": "the_aether:block/skyroot_door_top",
+    "bottom": "the_aether:block/skyroot_door_bottom"
+  }
+}
