@@ -146,6 +146,7 @@ public class AetherBlocks {
     public static final Block LIGHT_SENTRY_SLAB;
     public static final Block LIGHT_SENTRY_WALL;
     public static final Block SKYROOT_BOOKSHELF;
+    public static final Block SKYROOT_DOOR;
     public static final Block SKYROOT_FENCE;
     public static final Block SKYROOT_FENCE_GATE;
     //    public static final Block SKYROOT_LEAVES;
@@ -155,6 +156,7 @@ public class AetherBlocks {
     public static final Block SKYROOT_SLAB;
     public static final Block SKYROOT_STAIRS;
     public static final Block SKYROOT_SAPLING;
+    public static final Block SKYROOT_TRAPDOOR;
     public static final Block POTTED_SKYROOT_SAPLING;
     public static final Block SKYROOT_LEAVES;
     public static final Block SKYROOT_LEAF_PILE;
@@ -391,6 +393,8 @@ public class AetherBlocks {
         SKYROOT_FENCE_GATE = register("skyroot_fence_gate", new FenceGateBlock(SKYROOT_WOOD), buildingBlock());
         SKYROOT_SLAB = register("skyroot_slab", new AetherSlabBlock(SKYROOT_PLANKS.getDefaultState()), buildingBlock());
         SKYROOT_STAIRS = register("skyroot_stairs", new AetherStairsBlock(SKYROOT_PLANKS.getDefaultState()), buildingBlock());
+        SKYROOT_TRAPDOOR = register("skyroot_trapdoor", new AetherTrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)), buildingBlock());
+        SKYROOT_DOOR = register("skyroot_door", new AetherDoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR)), buildingBlock());
 
         GOLDEN_OAK_SAPLING = register("golden_oak_sapling", new AetherSaplingBlock(new GoldenOakSaplingGenerator(), SAPLINGS), buildingBlock());
         POTTED_GOLDEN_OAK_SAPLING = register("potted_golden_oak_sapling", createPottedBlock(GOLDEN_OAK_SAPLING));
@@ -536,6 +540,8 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_OAK_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAF_PILE, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_DOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_TRAPDOOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_LEAF_PILE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(FROST_WISTERIA_LEAF_PILE, RenderLayer.getTranslucent());
