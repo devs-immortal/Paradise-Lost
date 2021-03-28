@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "the_aether:gravitite_ore"
+  },
+  "result": "the_aether:gravitite_gemstone",
+  "experience": 1.0,
+  "cookingtime": 200
+}
