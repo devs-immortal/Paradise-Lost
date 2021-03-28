@@ -1,17 +1,18 @@
+
 {
   "type": "minecraft:crafting_shaped",
+  "group": "wooden_slab",
   "pattern": [
     "###"
   ],
   "key": {
-    "#": [
-      {
-        "item": "the_aether:skyroot_planks"
-      }
-    ]
+    "#": {
+      "item": "the_aether:skyroot_planks"
+    }
   },
   "result": {
     "item": "the_aether:skyroot_slab",
     "count": 6
   }
 }
+        

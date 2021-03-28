@@ -1,3 +1,4 @@
+
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
@@ -5,14 +6,13 @@
     "###"
   ],
   "key": {
-    "#": [
-      {
-        "item": "the_aether:mossy_holystone"
-      }
-    ]
+    "#": {
+      "item": "the_aether:mossy_holystone"
+    }
   },
   "result": {
     "item": "the_aether:mossy_holystone_wall",
     "count": 6
   }
 }
+        

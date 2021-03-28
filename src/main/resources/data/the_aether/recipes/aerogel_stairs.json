@@ -1,3 +1,4 @@
+
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
@@ -6,14 +7,13 @@
     "###"
   ],
   "key": {
-    "#": [
-      {
-        "item": "the_aether:aerogel"
-      }
-    ]
+    "#": {
+      "item": "the_aether:aerogel"
+    }
   },
   "result": {
     "item": "the_aether:aerogel_stairs",
     "count": 4
   }
 }
+        

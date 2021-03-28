@@ -1,3 +1,4 @@
+
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
@@ -6,14 +7,13 @@
     "###"
   ],
   "key": {
-    "#": [
-      {
-        "item": "the_aether:holystone"
-      }
-    ]
+    "#": {
+      "item": "the_aether:holystone"
+    }
   },
   "result": {
     "item": "the_aether:holystone_stairs",
     "count": 4
   }
 }
+        

@@ -5,6 +5,7 @@
     "minecraft:emerald_block",
     "minecraft:diamond_block",
     "minecraft:gold_block",
-    "minecraft:iron_block"
+    "minecraft:iron_block",
+    "the_aether:zanite_block"
   ]
 }
