@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"particle": "the_aether/ambrosium_lantern",
-		"lantern": "the_aether/ambrosium_lantern"
+		"particle": "the_aether:block/ambrosium_lantern",
+		"lantern": "the_aether:block/ambrosium_lantern"
 	},
 	"elements": [
 		{

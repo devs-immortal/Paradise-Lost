@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "# #",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "tag": "the_aether:aether_planks"
+    }
+  },
+  "result": {
+    "item": "the_aether:skyroot_bucket"
+  }
+}

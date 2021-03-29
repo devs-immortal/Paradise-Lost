@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "item": "the_aether:ambrosium_wall_torch"
+    },
+    "X": {
+      "item": "the_aether:zanite_fragment"
+    }
+  },
+  "result": {
+    "item": "the_aether:ambrosium_lantern"
+  }
+}

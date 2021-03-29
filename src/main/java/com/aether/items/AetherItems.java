@@ -24,7 +24,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 public class AetherItems {
-    public static final Item ZANITE_GEM, GRAVITITE_GEM, AMBROSIUM_SHARD, GOLDEN_AMBER, AECHOR_PETAL, SWET_BALL;
+    public static final Item ZANITE_GEM, ZANITE_FRAGMENT, GRAVITITE_GEM, AMBROSIUM_SHARD, GOLDEN_AMBER, AECHOR_PETAL, SWET_BALL;
     public static final Item SKYROOT_STICK/*, VICTORY_MEDAL*/;
     public static final Item SKYROOT_PICKAXE, SKYROOT_AXE, SKYROOT_SHOVEL, SKYROOT_SWORD, SKYROOT_HOE;
     public static final Item HOLYSTONE_PICKAXE, HOLYSTONE_AXE, HOLYSTONE_SHOVEL, HOLYSTONE_SWORD, HOLYSTONE_HOE;
@@ -71,6 +71,7 @@ public class AetherItems {
         // Resources
         final Item.Settings RESOURCES = new Item.Settings().group(AetherItemGroups.Resources);
         ZANITE_GEM = register("zanite_gemstone", new Item(RESOURCES));
+        ZANITE_FRAGMENT = register("zanite_fragment", new Item(RESOURCES));
         GRAVITITE_GEM = register("gravitite_gemstone", new Item(RESOURCES));
         AMBROSIUM_SHARD = register("ambrosium_shard", new AmbrosiumShard(RESOURCES));
         GOLDEN_AMBER = register("golden_amber", new Item(RESOURCES));

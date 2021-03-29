@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "N",
+    "I",
+    "N"
+  ],
+  "key": {
+    "I": {
+      "item": "the_aether:zanite_gemstone"
+    },
+    "N": {
+      "item": "the_aether:zanite_fragment"
+    }
+  },
+  "result": {
+    "item": "the_aether:zanite_chain"
+  }
+}

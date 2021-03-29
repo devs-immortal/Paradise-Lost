@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "the_aether:zanite_gemstone"
+    }
+  ],
+  "result": {
+    "item": "the_aether:zanite_fragment",
+    "count": 9
+  }
+}

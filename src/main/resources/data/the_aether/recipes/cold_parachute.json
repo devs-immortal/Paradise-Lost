@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:string"
+    },
+    "X": {
+      "item": "the_aether:cold_aercloud"
+    }
+  },
+  "result": {
+    "item": "the_aether:cold_parachute"
+  }
+}
+    

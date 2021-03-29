@@ -171,6 +171,8 @@ public class AetherBlocks {
     public static final Block GOLDEN_OAK_FENCE_GATE;
     public static final Block GOLDEN_OAK_SLAB;
     public static final Block GOLDEN_OAK_STAIRS;
+    public static final Block GOLDEN_OAK_DOOR;
+    public static final Block GOLDEN_OAK_TRAPDOOR;
     public static final Block CRYSTAL_SAPLING;
     public static final Block POTTED_CRYSTAL_SAPLING;
     public static final Block CRYSTAL_LOG;
@@ -181,6 +183,8 @@ public class AetherBlocks {
     public static final Block CRYSTAL_FENCE_GATE;
     public static final Block CRYSTAL_SLAB;
     public static final Block CRYSTAL_STAIRS;
+    public static final Block CRYSTAL_DOOR;
+    public static final Block CRYSTAL_TRAPDOOR;
     //    public static final Block SKYROOT_WOOD;
 //    public static final Block STRIPPED_SKYROOT_LOG;
 //    public static final Block STRIPPED_SKYROOT_WOOD;
@@ -213,7 +217,9 @@ public class AetherBlocks {
     public static final Block WISTERIA_STAIRS;
     public static final Block WISTERIA_FENCE;
     public static final Block WISTERIA_FENCE_GATE;
-//    public static final Block YELLOW_DYED_AERCLOUD;
+    public static final Block WISTERIA_DOOR;
+    public static final Block WISTERIA_TRAPDOOR;
+    //    public static final Block YELLOW_DYED_AERCLOUD;
     public static final Block ZANITE_BLOCK;
     public static final Block ZANITE_ORE;
     public static final Block BLUEBERRY_BUSH;
@@ -233,6 +239,8 @@ public class AetherBlocks {
     //public static final Block SPORECAP_BROWN;
     //public static final Block ROOTCAP;
     //public static final Block CINNABAR_ROSE;
+    public static final Block ZANITE_CHAIN;
+    public static final Block AMBROSIUM_LANTERN;
 
     static {
         AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).strength(0.3f).sounds(BlockSoundGroup.GRAVEL)), buildingBlock());
@@ -402,18 +410,23 @@ public class AetherBlocks {
         STRIPPED_GOLDEN_OAK_LOG = register("stripped_golden_oak_log", createLogBlock(MaterialColor.RED, MaterialColor.RED), buildingBlock());
         GOLDEN_OAK_LEAVES = register("golden_oak_leaves", createLeavesBlock(), buildingBlock());
 
+
         final Block.Settings GOLDEN_OAK_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.RED).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
         GOLDEN_OAK_PLANKS = register("golden_oak_planks", new Block(GOLDEN_OAK_WOOD), buildingBlock());
         GOLDEN_OAK_FENCE = register("golden_oak_fence", new FenceBlock(GOLDEN_OAK_WOOD), buildingBlock());
         GOLDEN_OAK_FENCE_GATE = register("golden_oak_fence_gate", new FenceGateBlock(GOLDEN_OAK_WOOD), buildingBlock());
         GOLDEN_OAK_SLAB = register("golden_oak_slab", new AetherSlabBlock(GOLDEN_OAK_PLANKS.getDefaultState()), buildingBlock());
         GOLDEN_OAK_STAIRS = register("golden_oak_stairs", new AetherStairsBlock(GOLDEN_OAK_PLANKS.getDefaultState()), buildingBlock());
+        GOLDEN_OAK_TRAPDOOR = register("golden_oak_trapdoor", new AetherTrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)), buildingBlock());
+        GOLDEN_OAK_DOOR = register("golden_oak_door", new AetherDoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR)), buildingBlock());
 
         CRYSTAL_SAPLING = register("crystal_sapling", new AetherSaplingBlock(new CrystalSaplingGenerator(), FabricBlockSettings.copyOf(SAPLINGS).sounds(BlockSoundGroup.GLASS)), buildingBlock());
         POTTED_CRYSTAL_SAPLING = register("potted_crystal_sapling", createPottedBlock(CRYSTAL_SAPLING));
         CRYSTAL_LOG = register("crystal_log", createLogBlock(MaterialColor.GRAY, MaterialColor.LIGHT_GRAY), buildingBlock());
         STRIPPED_CRYSTAL_LOG = register("stripped_crystal_log", createLogBlock(MaterialColor.LIGHT_GRAY, MaterialColor.LIGHT_GRAY), buildingBlock());
         CRYSTAL_LEAVES = register("crystal_leaves", createLeavesBlock(BlockSoundGroup.GLASS), buildingBlock());
+        CRYSTAL_TRAPDOOR = register("crystal_trapdoor", new AetherTrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)), buildingBlock());
+        CRYSTAL_DOOR = register("crystal_door", new AetherDoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR)), buildingBlock());
 
         final Block.Settings CRYSTAL_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.LIGHT_GRAY).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
         CRYSTAL_PLANKS = register("crystal_planks", new Block(CRYSTAL_WOOD), buildingBlock());
@@ -452,6 +465,9 @@ public class AetherBlocks {
         WISTERIA_FENCE_GATE = register("wisteria_fence_gate", new FenceGateBlock(WISTERIA_WOOD), buildingBlock());
         WISTERIA_SLAB = register("wisteria_slab", new AetherSlabBlock(WISTERIA_PLANKS.getDefaultState()), buildingBlock());
         WISTERIA_STAIRS = register("wisteria_stairs", new AetherStairsBlock(WISTERIA_PLANKS.getDefaultState()), buildingBlock());
+        WISTERIA_TRAPDOOR = register("wisteria_trapdoor", new AetherTrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)), buildingBlock());
+        WISTERIA_DOOR = register("wisteria_door", new AetherDoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR)), buildingBlock());
+
 //        STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", null);
 //        STRIPPED_SKYROOT_WOOD = register("stripped_skyroot_wood", null);
 //        SUN_ALTAR = register("sun_altar", null);
@@ -460,6 +476,9 @@ public class AetherBlocks {
 //        WHITE_FLOWER = register("white_flower", null);
 //        YELLOW_DYED_AERCLOUD = register("yellow_dyed_aercloud", null);
         ZANITE_BLOCK = register("zanite_block", new Block(FabricBlockSettings.of(Material.METAL).strength(3.0f, -1.0f).sounds(BlockSoundGroup.METAL)), buildingBlock());
+        ZANITE_CHAIN = register("zanite_chain", new ChainBlock(FabricBlockSettings.copyOf(Blocks.CHAIN)), buildingBlock());
+        AMBROSIUM_LANTERN = register("ambrosium_lantern", new LanternBlock(FabricBlockSettings.of(Material.METAL).hardness(3.5f).requiresTool().luminance(15).resistance(1.0f).sounds(BlockSoundGroup.LANTERN)), buildingBlock());
+
     }
 
     private static Item.Settings buildingBlock() {
@@ -542,6 +561,8 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAF_PILE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_DOOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_TRAPDOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_DOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_TRAPDOOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_LEAF_PILE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(FROST_WISTERIA_LEAF_PILE, RenderLayer.getTranslucent());
@@ -561,7 +582,8 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putFluid(DENSE_AERCLOUD_STILL, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), AETHER_GRASS, AETHER_TALL_GRASS, AETHER_FERN, AETHER_BUSH, FLUTEGRASS);
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), POTTED_SKYROOT_SAPLING, POTTED_CRYSTAL_SAPLING, POTTED_AETHER_FERN, POTTED_FROST_WISTERIA_SAPLING, POTTED_GOLDEN_OAK_SAPLING, POTTED_LAVENDER_WISTERIA_SAPLING, POTTED_ROSE_WISTERIA_SAPLING);
-
+        BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_LANTERN, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ZANITE_CHAIN, RenderLayer.getCutout());
         FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, Aether.locate("dense_aercloud"));
     }
 
