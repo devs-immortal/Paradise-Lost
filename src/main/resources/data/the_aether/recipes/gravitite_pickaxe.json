@@ -1,0 +1,21 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "the_aether:gravitite_gemstone"
+    }
+  },
+  "result": {
+    "item": "the_aether:gravitite_pickaxe"
+  }
+}
+    

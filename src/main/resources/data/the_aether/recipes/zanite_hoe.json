@@ -1,0 +1,21 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "the_aether:zanite_gemstone"
+    }
+  },
+  "result": {
+    "item": "the_aether:zanite_hoe"
+  }
+}
+    

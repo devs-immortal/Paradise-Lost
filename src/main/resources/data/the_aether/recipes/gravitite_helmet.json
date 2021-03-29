@@ -1,0 +1,17 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "the_aether:gravitite_gemstone"
+    }
+  },
+  "result": {
+    "item": "the_aether:gravitite_helmet"
+  }
+}
+    
