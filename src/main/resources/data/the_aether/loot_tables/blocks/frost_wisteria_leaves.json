@@ -91,7 +91,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "the_aether:skyroot_stick"
+          "name": "minecraft:stick"
         }
       ],
       "conditions": [

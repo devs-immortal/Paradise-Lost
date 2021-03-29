@@ -73,6 +73,12 @@
       }
     ],
     "creature": [
+    {
+        "type": "the_aether:aerbunny",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+    }
     ],
     "ambient": [],
     "water_creature": [],
