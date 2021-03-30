@@ -47,7 +47,7 @@ public class AetherEntityTypes {
     public static final EntityType<PoisonDartEntity> POISON_DART;
     public static final EntityType<PoisonNeedleEntity> POISON_NEEDLE;
 //    public static EntityType<WhirlwindEntity> WHIRLWIND;
-//    public static EntityType<AerwhaleEntity> AERWHALE;
+    public static EntityType<AerwhaleEntity> AERWHALE;
 //    public static EntityType<MiniCloudEntity> MINI_CLOUD;
 //    public static EntityType<FireMinionEntity> FIRE_MINION;
 //    public static EntityType<CrystalEntity> CRYSTAL;
@@ -67,7 +67,7 @@ public class AetherEntityTypes {
         ENCHANTED_DART = register("enchanted_dart", SpawnGroup.MISC, EntityDimensions.changing(0.5F, 0.5F), (entityType, world) -> new EnchantedDartEntity(world));
         POISON_DART = register("poison_dart", SpawnGroup.MISC, EntityDimensions.changing(0.5F, 0.5F), (entityType, world) -> new PoisonDartEntity(world));
         POISON_NEEDLE = register("poison_needle", SpawnGroup.MISC, EntityDimensions.changing(0.5F, 0.5F), (entityType, world) -> new PoisonNeedleEntity(world));
-
+        AERWHALE = register("aerwhale", SpawnGroup.CREATURE, EntityDimensions.changing(3.0F, 1.2F), (entityType, world) -> new AerwhaleEntity(world));
 //        WHIRLWIND = register("whirlwind", ...);
 //        AERWHALE = register("aerwhale", ...);
 //        MINI_CLOUD = register("mini_cloud", ...);
@@ -85,7 +85,7 @@ public class AetherEntityTypes {
         FabricDefaultAttributeRegistry.register(AECHOR_PLANT, AechorPlantEntity.initAttributes());
         FabricDefaultAttributeRegistry.register(PHYG, PhygEntity.initAttributes());
         FabricDefaultAttributeRegistry.register(COCKATRICE, CockatriceEntity.initAttributes());
-
+        FabricDefaultAttributeRegistry.register(AERWHALE, AerwhaleEntity.initAttributes());
         FabricDefaultAttributeRegistry.register(CHEST_MIMIC, ChestMimicEntity.initAttributes());
 
         SpawnRestriction.register(SHEEPUFF, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);

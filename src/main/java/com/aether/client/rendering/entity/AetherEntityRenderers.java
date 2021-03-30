@@ -23,6 +23,8 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.GOLDEN_DART, (entityRenderDispatcher, context) -> new DartRenderer(entityRenderDispatcher));
         register(AetherEntityTypes.POISON_DART, (entityRenderDispatcher, context) -> new DartRenderer(entityRenderDispatcher));
         register(AetherEntityTypes.POISON_NEEDLE, (entityRenderDispatcher, context) -> new DartRenderer(entityRenderDispatcher));
+        register(AetherEntityTypes.AERWHALE, (entityRenderDispatcher, context) -> new AerwhaleRenderer(entityRenderDispatcher));
+
 
         //entityRenderMap.put(EntityMiniCloud.class, new MiniCloudRenderer(renderManager));
         //entityRenderMap.put(EntityAerwhale.class, new AerwhaleRenderer(renderManager));
