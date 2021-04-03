@@ -69,7 +69,6 @@ public class AetherEntityTypes {
         POISON_NEEDLE = register("poison_needle", SpawnGroup.MISC, EntityDimensions.changing(0.5F, 0.5F), (entityType, world) -> new PoisonNeedleEntity(world));
         AERWHALE = register("aerwhale", SpawnGroup.CREATURE, EntityDimensions.changing(3.0F, 1.2F), (entityType, world) -> new AerwhaleEntity(world));
 //        WHIRLWIND = register("whirlwind", ...);
-//        AERWHALE = register("aerwhale", ...);
 //        MINI_CLOUD = register("mini_cloud", ...);
 //        FIRE_MINION = register("fire_minion", ...);
 //        CRYSTAL = register("crystal", ...);
@@ -88,6 +87,7 @@ public class AetherEntityTypes {
         FabricDefaultAttributeRegistry.register(AERWHALE, AerwhaleEntity.initAttributes());
         FabricDefaultAttributeRegistry.register(CHEST_MIMIC, ChestMimicEntity.initAttributes());
 
+        SpawnRestriction.register(AERWHALE, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(SHEEPUFF, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(PHYG, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(AERBUNNY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
@@ -106,7 +106,7 @@ public class AetherEntityTypes {
     }
 
     public static <X extends Entity> EntityType<X> register(String name, SpawnGroup category, EntityDimensions size, EntityType.EntityFactory<X> factory) {
-        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(category, factory).dimensions(size).disableSaving().build());
+        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(category, factory).dimensions(size).build());
     }
 
     public static boolean getAnimalData(EntityType<? extends Entity> entityType, WorldAccess WorldAccess, SpawnReason SpawnReason, BlockPos blockPos, Random random) {
