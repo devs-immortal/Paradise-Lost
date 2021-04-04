@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.HoeItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -44,6 +45,17 @@ public class AetherHoe extends HoeItem implements IAetherTool {
                 AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_FARMLAND.getDefaultState()
         ));
         convertibleBlocks.putAll(modifiedConvertibles);
+    }
+
+    @Override
+    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
+        float original = super.getMiningSpeedMultiplier(stack, state);
+        if (this.getItemMaterial() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
+        return original;
+    }
+
+    private float calculateIncrease(ItemStack tool) {
+        return (float) tool.getMaxDamage() / tool.getDamage() / 50;
     }
 
     @Override

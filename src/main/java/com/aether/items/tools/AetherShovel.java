@@ -29,8 +29,12 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         float original = super.getMiningSpeedMultiplier(stack, state);
-        if (this.getItemMaterial() == AetherTiers.Zanite) return this.calculateIncrease(stack, original);
+        if (this.getItemMaterial() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
         return original;
+    }
+
+    private float calculateIncrease(ItemStack tool) {
+        return (float) tool.getMaxDamage() / tool.getDamage() / 50;
     }
 
     /*public ActionResult useOnBlock(ItemUsageContext context) {
@@ -59,26 +63,5 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
     @Override
     public AetherTiers getItemMaterial() {
         return this.material;
-    }
-
-    private float calculateIncrease(ItemStack tool, float original) {
-        boolean AllowedCalculations = !(original != 4.0F);
-        int current = tool.getDamage();
-
-        if (AllowedCalculations) {
-            if (this.isBetween(tool.getDamage(), current, tool.getDamage() - 50)) return this.zaniteHarvestLevels[4];
-            else if (this.isBetween(tool.getDamage() - 51, current, tool.getDamage() - 110))
-                return this.zaniteHarvestLevels[3];
-            else if (this.isBetween(tool.getDamage() - 111, current, tool.getDamage() - 200))
-                return this.zaniteHarvestLevels[2];
-            else if (this.isBetween(tool.getDamage() - 201, current, tool.getDamage() - 239))
-                return this.zaniteHarvestLevels[1];
-            return this.zaniteHarvestLevels[0];
-        }
-        return 1.0F;
-    }
-
-    private boolean isBetween(int max, int origin, int min) {
-        return origin <= max && origin >= min;
     }
 }
