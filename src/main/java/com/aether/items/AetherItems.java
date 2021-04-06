@@ -16,6 +16,7 @@ import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
@@ -154,7 +155,7 @@ public class AetherItems {
 
         // Food
         AetherItemSettings LOOT_FOOD = new AetherItemSettings().group(AetherItemGroups.Food).rarity(AetherItems.AETHER_LOOT);
-        BLUEBERRY = register("blue_berry", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
+        BLUEBERRY = register("blue_berry", new BlockItem(AetherBlocks.BLUEBERRY_BUSH, new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
         ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
         WHITE_APPLE = register("white_apple", new WhiteApple(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.WHITE_APPLE)));
         BLUE_GUMMY_SWET = register("blue_gummy_swet", new GummySwet(LOOT_FOOD));
