@@ -15,6 +15,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.EntityType;
@@ -70,6 +71,7 @@ public class AetherBlocks {
     public static final Block FLUTEGRASS;
     public static final Block GOLDEN_AERCLOUD;
     public static final Block GRAVITITE_ORE;
+    public static final Block BLOCK_OF_GRAVITITE;
     //    public static final Block GREEN_DYED_AERCLOUD;
 //    public static final Block GREY_DYED_AERCLOUD;
     public static final Block HELLFIRE_SLAB;
@@ -308,7 +310,7 @@ public class AetherBlocks {
         DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
         DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, AbstractBlock.Settings.of(Material.WATER).noCollision().strength(100.0F).dropsNothing()) {
         });
-        GRAVITITE_ORE = register("gravitite_ore", new GravititeOreBlock(), buildingBlock());
+        GRAVITITE_ORE = register("gravitite_ore", new FloatingBlock(false, FabricBlockSettings.of(Material.STONE).strength(5.0F).sounds(BlockSoundGroup.STONE).breakByTool(FabricToolTags.PICKAXES, 2)), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
 
@@ -476,6 +478,7 @@ public class AetherBlocks {
 //        WHITE_FLOWER = register("white_flower", null);
 //        YELLOW_DYED_AERCLOUD = register("yellow_dyed_aercloud", null);
         ZANITE_BLOCK = register("zanite_block", new Block(FabricBlockSettings.of(Material.METAL).strength(3.0f, -1.0f).sounds(BlockSoundGroup.METAL)), buildingBlock());
+        BLOCK_OF_GRAVITITE = register("block_of_gravitite", new FloatingBlock(false, FabricBlockSettings.of(Material.METAL).strength(3.0f, -1.0f).sounds(BlockSoundGroup.METAL)), buildingBlock());
         ZANITE_CHAIN = register("zanite_chain", new ChainBlock(FabricBlockSettings.copyOf(Blocks.CHAIN)), buildingBlock());
         AMBROSIUM_LANTERN = register("ambrosium_lantern", new LanternBlock(FabricBlockSettings.of(Material.METAL).hardness(3.5f).requiresTool().luminance(15).resistance(1.0f).sounds(BlockSoundGroup.LANTERN)), buildingBlock());
 

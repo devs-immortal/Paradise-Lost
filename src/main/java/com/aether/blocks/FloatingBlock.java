@@ -50,6 +50,7 @@ public class FloatingBlock extends OreBlock {
     }
 
     protected void onStartFloating(FloatingBlockEntity entityIn) {
+        entityIn.dropItem = false;
     }
 
     public void onEndFloating(World worldIn, BlockPos posIn, BlockState floatingState, BlockState hitState) {

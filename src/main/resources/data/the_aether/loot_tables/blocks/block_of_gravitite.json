@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:angelic_stone_trap"
+          "name": "the_aether:block_of_gravitite"
         }
       ],
       "conditions": [
