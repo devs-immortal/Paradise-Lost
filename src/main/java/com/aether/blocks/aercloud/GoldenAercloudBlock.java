@@ -1,13 +1,12 @@
 package com.aether.blocks.aercloud;
 
+import com.aether.blocks.AetherBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -22,8 +21,11 @@ public class GoldenAercloudBlock extends BaseAercloudBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        entity.fallDistance = 23F;
-        entity.setVelocity(entity.getVelocity().x, -3.9, entity.getVelocity().z);
+        if (canFallThrough(world.getBlockState(pos.down())) && canFallThrough(world.getBlockState(pos.down().down()))) {
+            entity.fallDistance = 23F;
+            entity.setVelocity(entity.getVelocity().x, -3.9, entity.getVelocity().z);
+        }
+
     }
 
     @Override
@@ -34,5 +36,10 @@ public class GoldenAercloudBlock extends BaseAercloudBlock {
     @Override
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
+    }
+
+    public static boolean canFallThrough(BlockState state) {
+        Material material = state.getMaterial();
+        return state.isAir() || state.isIn(BlockTags.FIRE) || material.isLiquid() || material.isReplaceable() || state == AetherBlocks.GOLDEN_AERCLOUD.getDefaultState();
     }
 }
