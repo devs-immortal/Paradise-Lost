@@ -13,8 +13,8 @@ public class GravititeOreBlock extends FloatingBlock {
         super(false, FabricBlockSettings.of(Material.STONE).strength(5.0F).sounds(BlockSoundGroup.STONE).breakByTool(FabricToolTags.PICKAXES, 2));
     }
 
-    @Override
-    protected void onStartFloating(FloatingBlockEntity entityIn) {
-        entityIn.dropItem = false;
-    }
+//    @Override
+//    protected void onStartFloating(FloatingBlockEntity entityIn) {
+//        entityIn.dropItem = false;
+//    }
 }

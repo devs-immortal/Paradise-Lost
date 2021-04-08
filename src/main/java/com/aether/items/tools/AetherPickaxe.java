@@ -1,9 +1,14 @@
 package com.aether.items.tools;
 
+import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.PickaxeItem;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class AetherPickaxe extends PickaxeItem implements IAetherTool {
 
@@ -24,6 +29,18 @@ public class AetherPickaxe extends PickaxeItem implements IAetherTool {
     private float calculateIncrease(ItemStack tool) {
         return (float) tool.getMaxDamage() / tool.getDamage() / 50;
     }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        World world = context.getWorld();
+        BlockPos blockPos = context.getBlockPos();
+        if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+            return ActionResult.SUCCESS;
+        } else {
+            return ActionResult.PASS;
+        }
+    }
+
 
     @Override
     public AetherTiers getItemMaterial() {

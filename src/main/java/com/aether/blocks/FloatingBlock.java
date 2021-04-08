@@ -43,15 +43,15 @@ public class FloatingBlock extends OreBlock {
         if ((worldIn.isAir(pos.up()) || canFallThrough(worldIn.getBlockState(pos.up()))) && (!this.powered || worldIn.isReceivingRedstonePower(pos))) {
             if (!worldIn.isClient) {
                 FloatingBlockEntity floatingblockentity = new FloatingBlockEntity(worldIn, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, worldIn.getBlockState(pos));
-                this.onStartFloating(floatingblockentity);
+                //this.onStartFloating(floatingblockentity);
                 worldIn.spawnEntity(floatingblockentity);
             }
         }
     }
 
-    protected void onStartFloating(FloatingBlockEntity entityIn) {
-        entityIn.dropItem = false;
-    }
+//    protected void onStartFloating(FloatingBlockEntity entityIn) {
+//        entityIn.dropItem = false;
+//    }
 
     public void onEndFloating(World worldIn, BlockPos posIn, BlockState floatingState, BlockState hitState) {
     }

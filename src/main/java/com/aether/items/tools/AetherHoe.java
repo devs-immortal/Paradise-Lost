@@ -1,6 +1,7 @@
 package com.aether.items.tools;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.ImmutableMap;
@@ -62,7 +63,9 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
-
+        if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+            return ActionResult.SUCCESS;
+        }
         if (context.getSide() != Direction.DOWN && world.isAir(blockPos.up())) {
             BlockState blockState = convertibleBlocks.get(world.getBlockState(blockPos).getBlock());
 

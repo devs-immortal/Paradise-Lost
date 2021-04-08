@@ -71,6 +71,7 @@ public class AetherBlocks {
     public static final Block FLUTEGRASS;
     public static final Block GOLDEN_AERCLOUD;
     public static final Block GRAVITITE_ORE;
+    public static final Block GRAVITITE_LEVITATOR;
     public static final Block BLOCK_OF_GRAVITITE;
     //    public static final Block GREEN_DYED_AERCLOUD;
 //    public static final Block GREY_DYED_AERCLOUD;
@@ -311,6 +312,7 @@ public class AetherBlocks {
         DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, AbstractBlock.Settings.of(Material.WATER).noCollision().strength(100.0F).dropsNothing()) {
         });
         GRAVITITE_ORE = register("gravitite_ore", new FloatingBlock(false, FabricBlockSettings.of(Material.STONE).strength(5.0F).sounds(BlockSoundGroup.STONE).breakByTool(FabricToolTags.PICKAXES, 2)), buildingBlock());
+        GRAVITITE_LEVITATOR = register("gravitite_levitator", new FloatingBlock(true, FabricBlockSettings.of(Material.WOOD).strength(3.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
 

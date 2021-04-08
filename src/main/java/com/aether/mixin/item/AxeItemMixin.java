@@ -36,26 +36,27 @@ public class AxeItemMixin extends MiningToolItem {
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         if (this.getMaterial() == AetherTiers.Gravitite.getDefaultTier() && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
             cir.setReturnValue(ActionResult.SUCCESS);
-        }
+        } else {
 
-        World world = context.getWorld();
-        BlockPos blockPos = context.getBlockPos();
-        BlockState blockState = world.getBlockState(blockPos);
-        Map<Block, Block> AETHER_STRIPPED_BLOCKS = new HashMap<>();
-        AETHER_STRIPPED_BLOCKS.put(AetherBlocks.CRYSTAL_LOG, AetherBlocks.STRIPPED_CRYSTAL_LOG);
-        AETHER_STRIPPED_BLOCKS.put(AetherBlocks.GOLDEN_OAK_LOG, AetherBlocks.STRIPPED_GOLDEN_OAK_LOG);
-        AETHER_STRIPPED_BLOCKS.put(AetherBlocks.SKYROOT_LOG, AetherBlocks.STRIPPED_SKYROOT_LOG);
-        Block block = AETHER_STRIPPED_BLOCKS.get(blockState.getBlock());
+            World world = context.getWorld();
+            BlockPos blockPos = context.getBlockPos();
+            BlockState blockState = world.getBlockState(blockPos);
+            Map<Block, Block> AETHER_STRIPPED_BLOCKS = new HashMap<>();
+            AETHER_STRIPPED_BLOCKS.put(AetherBlocks.CRYSTAL_LOG, AetherBlocks.STRIPPED_CRYSTAL_LOG);
+            AETHER_STRIPPED_BLOCKS.put(AetherBlocks.GOLDEN_OAK_LOG, AetherBlocks.STRIPPED_GOLDEN_OAK_LOG);
+            AETHER_STRIPPED_BLOCKS.put(AetherBlocks.SKYROOT_LOG, AetherBlocks.STRIPPED_SKYROOT_LOG);
+            Block block = AETHER_STRIPPED_BLOCKS.get(blockState.getBlock());
 
-        if (block != null) {
-            PlayerEntity playerEntity = context.getPlayer();
-            world.playSound(playerEntity, blockPos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if (!world.isClient) {
-                world.setBlockState(blockPos, block.getDefaultState().with(PillarBlock.AXIS, blockState.get(PillarBlock.AXIS)), 11);
-                if (playerEntity != null)
-                    context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
+            if (block != null) {
+                PlayerEntity playerEntity = context.getPlayer();
+                world.playSound(playerEntity, blockPos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                if (!world.isClient) {
+                    world.setBlockState(blockPos, block.getDefaultState().with(PillarBlock.AXIS, blockState.get(PillarBlock.AXIS)), 11);
+                    if (playerEntity != null)
+                        context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
+                }
+                cir.setReturnValue(ActionResult.success(world.isClient));
             }
-            cir.setReturnValue(ActionResult.success(world.isClient));
         }
     }
 }

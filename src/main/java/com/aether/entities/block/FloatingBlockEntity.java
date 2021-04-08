@@ -161,16 +161,16 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                 }
             }
 
-            boolean isGravititeOre = this.blockState.getBlock() == AetherBlocks.GRAVITITE_ORE;
+            boolean isFastFloater = (this.blockState.getBlock() == AetherBlocks.GRAVITITE_ORE || this.blockState.getBlock() == AetherBlocks.GRAVITITE_LEVITATOR || this.blockState.getBlock() == AetherBlocks.BLOCK_OF_GRAVITITE);
             if (!this.hasNoGravity()) {
-                if (isGravititeOre) {
+                if (isFastFloater) {
                     this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
                 } else {
-                    if (this.floatTime > 600) {
-                        this.setVelocity(this.getVelocity().add(0.0D, -0.04D, 0.0D));
-                    } else {
-                        this.setVelocity(this.getVelocity().add(0.0D, Math.min(Math.sin((Math.PI * this.age) / 100D), 1) * 0.075D, 0.0D));
-                    }
+//                    if (this.floatTime > 600) {
+//                        this.setVelocity(this.getVelocity().add(0.0D, -0.04D, 0.0D));
+//                    } else {
+                    this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
+//                    }
                 }
             }
 
@@ -209,14 +209,14 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
 
                 if (!this.verticalCollision && !shouldSolidify) {
                     if (!this.world.isClient) {
-                        if (this.floatTime > 100 && blockPos.getY() < 1) {
-                            if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+                        if (this.floatTime > 100 && blockPos.getY() > this.world.getHeight()+64) {
+                            if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS) && this.world.isPlayerInRange(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 4)) {
                                 this.dropItem(block);
                             }
                             this.remove();
-                        } else if (isGravititeOre && floatTime > 600) {
-                            this.remove();
-                        }
+                        } //else if (isFastFloater && floatTime > 600) {
+                        //    this.remove();
+                        //}
                     }
                 } else {
                     BlockState blockState = this.world.getBlockState(blockPos);
