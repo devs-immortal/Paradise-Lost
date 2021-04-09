@@ -482,7 +482,7 @@ public class AetherBlocks {
         ZANITE_BLOCK = register("zanite_block", new Block(FabricBlockSettings.of(Material.METAL).strength(3.0f, -1.0f).sounds(BlockSoundGroup.METAL)), buildingBlock());
         BLOCK_OF_GRAVITITE = register("block_of_gravitite", new FloatingBlock(false, FabricBlockSettings.of(Material.METAL).strength(3.0f, -1.0f).sounds(BlockSoundGroup.METAL)), buildingBlock());
         ZANITE_CHAIN = register("zanite_chain", new ChainBlock(FabricBlockSettings.copyOf(Blocks.CHAIN)), buildingBlock());
-        AMBROSIUM_LANTERN = register("ambrosium_lantern", new LanternBlock(FabricBlockSettings.of(Material.METAL).hardness(3.5f).requiresTool().luminance(15).resistance(1.0f).sounds(BlockSoundGroup.LANTERN)), buildingBlock());
+        AMBROSIUM_LANTERN = register("ambrosium_lantern", new AmbrosiumLanternBlock(FabricBlockSettings.of(Material.METAL).hardness(3.5f).requiresTool().luminance(15).resistance(1.0f).sounds(BlockSoundGroup.LANTERN)), buildingBlock());
 
     }
 
