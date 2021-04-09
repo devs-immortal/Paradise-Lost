@@ -16,10 +16,7 @@ import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BowItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -32,7 +29,7 @@ public class AetherItems {
     public static final Item ZANITE_PICKAXE, ZANITE_AXE, ZANITE_SHOVEL, ZANITE_SWORD, ZANITE_HOE;
     public static final Item GRAVITITE_PICKAXE, GRAVITITE_AXE, GRAVITITE_SHOVEL, GRAVITITE_SWORD, GRAVITITE_HOE;
     public static final Item VALKYRIE_PICKAXE, VALKYRIE_AXE, VALKYRIE_SHOVEL, VALKYRIE_HOE;
-    public static final AetherArmor ZANITE_HELMET, ZANITE_CHESTPLATE, ZANITE_LEGGINGS, ZANITE_BOOTS;
+    public static final Item  ZANITE_HELMET, ZANITE_CHESTPLATE, ZANITE_LEGGINGS, ZANITE_BOOTS;
     public static final AetherArmor GRAVITITE_HELMET, GRAVITITE_CHESTPLATE, GRAVITITE_LEGGINGS, GRAVITITE_BOOTS;
     public static final AetherArmor NEPTUNE_HELMET, NEPTUNE_CHESTPLATE, NEPTUNE_LEGGINGS, NEPTUNE_BOOTS;
     public static final AetherArmor PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
@@ -119,10 +116,10 @@ public class AetherItems {
 
         // Armor
         final AetherItemSettings ARMOR = new AetherItemSettings().group(AetherItemGroups.Armor);
-        ZANITE_HELMET = register("zanite_helmet", new ZaniteArmor(AetherArmorType.Zanite, EquipmentSlot.HEAD, ARMOR));
-        ZANITE_CHESTPLATE = register("zanite_chestplate", new ZaniteArmor(AetherArmorType.Zanite, EquipmentSlot.CHEST, ARMOR));
-        ZANITE_LEGGINGS = register("zanite_leggings", new ZaniteArmor(AetherArmorType.Zanite, EquipmentSlot.LEGS, ARMOR));
-        ZANITE_BOOTS = register("zanite_boots", new ZaniteArmor(AetherArmorType.Zanite, EquipmentSlot.FEET, ARMOR));
+        ZANITE_HELMET = register("zanite_helmet", new ArmorItem(AetherArmorType.Zanite.getMaterial(), EquipmentSlot.HEAD, ARMOR));
+        ZANITE_CHESTPLATE = register("zanite_chestplate", new ArmorItem(AetherArmorType.Zanite.getMaterial(), EquipmentSlot.CHEST, ARMOR));
+        ZANITE_LEGGINGS = register("zanite_leggings", new ArmorItem(AetherArmorType.Zanite.getMaterial(), EquipmentSlot.LEGS, ARMOR));
+        ZANITE_BOOTS = register("zanite_boots", new ArmorItem(AetherArmorType.Zanite.getMaterial(), EquipmentSlot.FEET, ARMOR));
 //
         final AetherItemSettings GRAVITITE_ARMOR = new AetherItemSettings().group(AetherItemGroups.Armor).rarity(Rarity.RARE);
         GRAVITITE_HELMET = register("gravitite_helmet", new GravititeArmor(AetherArmorType.Gravitite, EquipmentSlot.HEAD, GRAVITITE_ARMOR));
