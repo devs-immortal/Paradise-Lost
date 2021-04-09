@@ -181,6 +181,12 @@
   "block.the_aether.zanite_chain": "Zanite Chain",  
   "block.the_aether.zanite_ore": "Zanite Ore",
   "block.the_aether.gravitite_levitator": "Gravitite Levitator",
+  "block.the_aether.ancient_flower": "Ancient Flower",
+  "block.the_aether.ataraxia": "Ataraxia",
+  "block.the_aether.cloudsbluff": "Cloudsbluff",
+  "block.the_aether.drigean": "Drigean",
+  "block.the_aether.luminar": "Luminar",
+  
   "book.edition": "%dst Edition",
   "item.the_aether.aechor_petal": "Aechor Petal",
   "item.the_aether.aechor_plant_spawn_egg": "Aechor Plant Spawn Egg",

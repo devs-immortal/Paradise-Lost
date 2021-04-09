@@ -19,6 +19,7 @@ import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -233,17 +234,19 @@ public class AetherBlocks {
     public static final Block AETHER_FERN;
     public static final Block POTTED_AETHER_FERN;
     public static final Block AETHER_BUSH;
-    //public static final Block DRIGEAN;
-    //public static final Block CLOUDSBLUFF;
-    //public static final Block ATARAXIA;
-    //public static final Block ANCIENT_FLOWER;
-    //public static final Block LUMINAR;
+    public static final Block DRIGEAN;
+    public static final Block CLOUDSBLUFF;
+    public static final Block ATARAXIA;
+    public static final Block ANCIENT_FLOWER;
+    public static final Block LUMINAR;
     //public static final Block SPORECAP_PINK;
     //public static final Block SPORECAP_BROWN;
     //public static final Block ROOTCAP;
     //public static final Block CINNABAR_ROSE;
     public static final Block ZANITE_CHAIN;
     public static final Block AMBROSIUM_LANTERN;
+
+
 
     static {
         AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).strength(0.3f).sounds(BlockSoundGroup.GRAVEL)), buildingBlock());
@@ -484,6 +487,13 @@ public class AetherBlocks {
         ZANITE_CHAIN = register("zanite_chain", new ChainBlock(FabricBlockSettings.copyOf(Blocks.CHAIN)), buildingBlock());
         AMBROSIUM_LANTERN = register("ambrosium_lantern", new AmbrosiumLanternBlock(FabricBlockSettings.of(Material.METAL).hardness(3.5f).requiresTool().luminance(15).resistance(1.0f).sounds(BlockSoundGroup.LANTERN)), buildingBlock());
 
+        ANCIENT_FLOWER = register("ancient_flower", new FlowerBlock(StatusEffects.ABSORPTION, 20, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
+        ATARAXIA = register("ataraxia", new FlowerBlock(StatusEffects.INSTANT_DAMAGE, 1, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
+        CLOUDSBLUFF = register("cloudsbluff", new FlowerBlock(StatusEffects.SLOW_FALLING, 6, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
+        DRIGEAN = register("drigean", new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 8, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
+        LUMINAR = register("luminar", new FlowerBlock(StatusEffects.GLOWING, 9, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
+
+
     }
 
     private static Item.Settings buildingBlock() {
@@ -589,6 +599,11 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), POTTED_SKYROOT_SAPLING, POTTED_CRYSTAL_SAPLING, POTTED_AETHER_FERN, POTTED_FROST_WISTERIA_SAPLING, POTTED_GOLDEN_OAK_SAPLING, POTTED_LAVENDER_WISTERIA_SAPLING, POTTED_ROSE_WISTERIA_SAPLING);
         BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_LANTERN, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ZANITE_CHAIN, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_FLOWER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ATARAXIA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CLOUDSBLUFF, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(DRIGEAN, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(LUMINAR, RenderLayer.getCutout());
         FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, Aether.locate("dense_aercloud"));
     }
 
