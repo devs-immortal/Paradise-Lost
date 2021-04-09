@@ -21,11 +21,10 @@ public class GoldenAercloudBlock extends BaseAercloudBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if ((Math.abs(entity.getVelocity().getY()) > 0.1f) & canFallThrough(world.getBlockState(entity.getBlockPos().down())) & canFallThrough(world.getBlockState(entity.getBlockPos().down().down()))) {
+        if ((Math.abs(entity.getVelocity().getY()) > 0.1f) && canFallThrough(world.getBlockState(entity.getBlockPos().down())) && canFallThrough(world.getBlockState(entity.getBlockPos().down().down()))) {
             entity.fallDistance = 23F;
             entity.setVelocity(entity.getVelocity().x, -3.9, entity.getVelocity().z);
         }
-
     }
 
     @Override
