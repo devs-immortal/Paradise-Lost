@@ -334,13 +334,11 @@
   "item.the_aether.zanite_ring": "Zanite Ring",
   "item.the_aether.zanite_shovel": "Zanite Shovel",
   "item.the_aether.zanite_sword": "Zanite Sword",
-  "itemGroup.the_aether.aether_accessories": "Aether Accessories",
-  "itemGroup.the_aether.aether_armor": "Aether Armor",
+  "itemGroup.the_aether.aether_wearables": "Aether Wearables",
   "itemGroup.the_aether.aether_blocks": "Aether Blocks",
   "itemGroup.the_aether.aether_food": "Aether Foods",
   "itemGroup.the_aether.aether_misc": "Aether Miscellaneous",
   "itemGroup.the_aether.aether_resources": "Aether Materials",
   "itemGroup.the_aether.aether_tools": "Aether Tools",
-  "itemGroup.the_aether.aether_weapons": "Aether Weapons",
   "trinkets.slot.chest.parachute": "Parachute"
 }
