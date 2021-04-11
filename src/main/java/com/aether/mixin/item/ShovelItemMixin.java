@@ -35,41 +35,37 @@ public class ShovelItemMixin extends MiningToolItem {
 
     @Inject(at = @At("HEAD"), method = "useOnBlock", cancellable = true)
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
-        if (this.getMaterial() == AetherTiers.Gravitite.getDefaultTier() && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
-            cir.setReturnValue(ActionResult.SUCCESS);
+        World world = context.getWorld();
+        BlockPos blockPos = context.getBlockPos();
+        BlockState blockState = world.getBlockState(blockPos);
+        Map<Block, BlockState> AETHER_PATH_STATES = new HashMap<>();
+        AETHER_PATH_STATES.put(AetherBlocks.AETHER_GRASS_BLOCK, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
+        AETHER_PATH_STATES.put(AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
+
+        if (context.getSide() == Direction.DOWN) {
+            cir.setReturnValue(ActionResult.PASS);
         } else {
-            World world = context.getWorld();
-            BlockPos blockPos = context.getBlockPos();
-            BlockState blockState = world.getBlockState(blockPos);
-            Map<Block, BlockState> AETHER_PATH_STATES = new HashMap<>();
-            AETHER_PATH_STATES.put(AetherBlocks.AETHER_GRASS_BLOCK, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
-            AETHER_PATH_STATES.put(AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());
+            PlayerEntity playerEntity = context.getPlayer();
+            BlockState blockState2 = AETHER_PATH_STATES.get(blockState.getBlock());
+            BlockState blockState3 = null;
+            if (blockState2 != null && world.getBlockState(blockPos.up()).isAir()) {
+                world.playSound(playerEntity, blockPos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                blockState3 = blockState2;
+            } else if (blockState.getBlock() instanceof CampfireBlock && blockState.get(CampfireBlock.LIT)) {
+                if (!world.isClient()) world.syncWorldEvent(null, 1009, blockPos, 0);
 
-            if (context.getSide() == Direction.DOWN) {
-                cir.setReturnValue(ActionResult.PASS);
-            } else {
-                PlayerEntity playerEntity = context.getPlayer();
-                BlockState blockState2 = AETHER_PATH_STATES.get(blockState.getBlock());
-                BlockState blockState3 = null;
-                if (blockState2 != null && world.getBlockState(blockPos.up()).isAir()) {
-                    world.playSound(playerEntity, blockPos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    blockState3 = blockState2;
-                } else if (blockState.getBlock() instanceof CampfireBlock && blockState.get(CampfireBlock.LIT)) {
-                    if (!world.isClient()) world.syncWorldEvent(null, 1009, blockPos, 0);
+                CampfireBlock.extinguish(world, blockPos, blockState);
+                blockState3 = blockState.with(CampfireBlock.LIT, false);
+            }
 
-                    CampfireBlock.extinguish(world, blockPos, blockState);
-                    blockState3 = blockState.with(CampfireBlock.LIT, false);
+            if (blockState3 != null) {
+                if (!world.isClient) {
+                    world.setBlockState(blockPos, blockState3, 11);
+                    if (playerEntity != null)
+                        context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
                 }
 
-                if (blockState3 != null) {
-                    if (!world.isClient) {
-                        world.setBlockState(blockPos, blockState3, 11);
-                        if (playerEntity != null)
-                            context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
-                    }
-
-                    cir.setReturnValue(ActionResult.success(world.isClient));
-                }
+                cir.setReturnValue(ActionResult.success(world.isClient));
             }
         }
     }
