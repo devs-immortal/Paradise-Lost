@@ -26,4 +26,14 @@ public class ColdAercloudBlock extends BaseAercloudBlock {
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return type == NavigationType.LAND;
     }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context){
+        if ((world.getBlockState(pos.down()).getBlock() instanceof BaseAercloudBlock) || !(world.getBlockState(pos.down()).isSideSolidFullSquare(world, pos, Direction.DOWN)))
+            return Block.createCuboidShape(0, 0, 0, 16, 0.001, 16);
+        else if (world.getBlockState(pos.up()).getBlock() instanceof BaseAercloudBlock)
+            return VoxelShapes.fullCube();
+        else
+            return VoxelShapes.empty();
+    }
 }
