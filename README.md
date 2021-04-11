@@ -27,9 +27,11 @@ The Aether Reborn makes use of crowd sourced translations.
 
 <center>
 
-<img src="https://i.imgur.com/Rt0E0y4.jpg" width="570">
+<img src="https://i.imgur.com/ScAnbx8" width="570">
 <br>
-<img src="https://i.imgur.com/Ync6Nwh.jpg"  width="570">
+<img src="https://i.imgur.com/UrHZDVz"  width="570">
+<br>
+<img src="https://i.imgur.com/0uhYnT6"  width="570">
 
 </center>
 
