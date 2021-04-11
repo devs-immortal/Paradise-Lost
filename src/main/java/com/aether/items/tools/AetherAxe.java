@@ -1,16 +1,20 @@
 package com.aether.items.tools;
 
+import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.swing.*;
 
 public class AetherAxe extends AxeItem implements IAetherTool {
 
@@ -38,10 +42,11 @@ public class AetherAxe extends AxeItem implements IAetherTool {
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
 
-        if (this.getItemMaterial() == AetherTiers.Gravitite && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
-            if (world.isAir(blockPos.up()) && !world.isClient) {
-                //TODO: Spawn floating block
-            }
+        if (this.getMaterial() == AetherTiers.Gravitite.getDefaultTier() && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+            PlayerEntity playerEntity = context.getPlayer();
+            if (playerEntity != null)
+                context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
+            return ActionResult.SUCCESS;
         }
         return super.useOnBlock(context);
     }
