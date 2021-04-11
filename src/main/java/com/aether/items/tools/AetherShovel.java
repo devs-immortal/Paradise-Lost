@@ -1,5 +1,6 @@
 package com.aether.items.tools;
 
+import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItemSettings;
 import com.aether.items.AetherItems;
@@ -8,6 +9,7 @@ import com.aether.util.item.AetherRarity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -37,21 +39,19 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
         return (float) tool.getMaxDamage() / tool.getDamage() / 50;
     }
 
-    /*public ActionResult useOnBlock(ItemUsageContext context) {
+    public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
 
-        if (this.getItemMaterial() == AetherTiers.Gravitite && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
-            if (world.isAir(blockPos.up()) && !world.isClient) {
-                //TODO: Spawn floating block
-            } else {
-                return ActionResult.PASS;
-            }
+        if (this.getMaterial() == AetherTiers.Gravitite.getDefaultTier() && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+            PlayerEntity playerEntity = context.getPlayer();
+            if (playerEntity != null)
+                context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
             return ActionResult.SUCCESS;
         }
-        return ActionResult.PASS;
-    }*/
+        return super.useOnBlock(context);
+    }
 
     @Override
     public boolean postMine(ItemStack stackIn, World worldIn, BlockState stateIn, BlockPos posIn, LivingEntity entityIn) {
