@@ -1,12 +1,16 @@
 package com.aether.blocks.aercloud;
 
+import com.aether.blocks.AetherBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -33,9 +37,10 @@ public class ColdAercloudBlock extends BaseAercloudBlock {
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context){
         if ((world.getBlockState(pos.down()).getBlock() instanceof BaseAercloudBlock) || !(world.getBlockState(pos.down()).isSideSolidFullSquare(world, pos, Direction.DOWN)))
             return Block.createCuboidShape(0, 0, 0, 16, 0.001, 16);
-        else if (world.getBlockState(pos.up()).getBlock() instanceof BaseAercloudBlock)
+        else if (world.getBlockState(pos.up()).getBlock().equals(AetherBlocks.COLD_AERCLOUD))
             return VoxelShapes.fullCube();
         else
             return VoxelShapes.empty();
     }
+
 }
