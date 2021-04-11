@@ -9,6 +9,7 @@
     "block.FarmlandBlockMixin",
     "block.OreBlockMixin",
     "block.PlantBlockMixin",
+    "entity.CowEntityMixin",
     "entity.EntityMixin",
     "entity.MixinLivingEntity",
     "entity.PlayerEntityMixin",
