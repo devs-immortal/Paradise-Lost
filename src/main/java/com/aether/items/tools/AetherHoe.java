@@ -64,9 +64,31 @@ public class AetherHoe extends HoeItem implements IAetherTool {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
         if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+            PlayerEntity playerEntity = context.getPlayer();
+            if (playerEntity != null) {
+                context.getStack().damage(1, playerEntity, (p) -> {
+                    p.sendToolBreakStatus(context.getHand());
+                });
+            }
             return ActionResult.SUCCESS;
         }
-        return super.useOnBlock(context);
+        if (context.getSide() != Direction.DOWN && world.isAir(blockPos.up())) {
+            BlockState blockState = convertibleBlocks.get(world.getBlockState(blockPos).getBlock());
+            if (blockState != null) {
+                PlayerEntity playerEntity = context.getPlayer();
+                world.playSound(playerEntity, blockPos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                if (!world.isClient) {
+                    world.setBlockState(blockPos, blockState, 11);
+                    if (playerEntity != null) {
+                        context.getStack().damage(1, playerEntity, (p) -> {
+                            p.sendToolBreakStatus(context.getHand());
+                        });
+                    }
+                }
+                return ActionResult.SUCCESS;
+            }
+        }
+        return ActionResult.PASS;
     }
 
     @Override
