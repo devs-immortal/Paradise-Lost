@@ -1,12 +1,10 @@
 package com.aether.mixin.client;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.aercloud.BaseAercloudBlock;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.client.MinecraftClient;
@@ -22,21 +20,19 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Matrix4f;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-
-import java.awt.*;
 
 @Mixin(InGameOverlayRenderer.class)
 @Environment(EnvType.CLIENT)
 public class InGameOverlayRendererMixin {
 
+    //Here I overwrite the whole method instead of using injection because it wouldn't work
     @Overwrite
     public static void renderOverlays(MinecraftClient minecraftClient, MatrixStack matrixStack){
+
+        // From here
         RenderSystem.disableAlphaTest();
         PlayerEntity playerEntity = minecraftClient.player;
         if (!playerEntity.noClip) {
@@ -55,7 +51,9 @@ public class InGameOverlayRendererMixin {
                 renderFireOverlay(minecraftClient, matrixStack);
             }
         }
+        // To here, is the code of the original method.
 
+        // This block is the code I have written
         PlayerEntity player = minecraftClient.player;
         if (!player.noClip) {
             BlockState blockState = getBlockStateFromEyePos(player);
@@ -63,7 +61,8 @@ public class InGameOverlayRendererMixin {
                 renderInAercloudOverlay(minecraftClient, blockState.getBlock(), matrixStack);
             }
         }
-        RenderSystem.enableAlphaTest();
+
+        RenderSystem.enableAlphaTest(); // This single statement is also from the original method.
     }
 
     @Shadow
@@ -83,23 +82,26 @@ public class InGameOverlayRendererMixin {
         return null;
     }
 
+    // Follows the same procedures as the renderUnderwaterOverlay method in the original class
     private static void renderInAercloudOverlay(MinecraftClient minecraftClient, Block block, MatrixStack matrixStack) {
         minecraftClient.getTextureManager().bindTexture(new Identifier("the_aether:textures/block/aercloud_overlay.png"));
+        // color[0] = red, color[1] = green, color[2] = blue
         int[] color = rgbFromMaterialColor(block.getDefaultMaterialColor());
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
-        float f = minecraftClient.player.getBrightnessAtEyes();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
+        // m and n move the overlay as the player rotates
         float m = -minecraftClient.player.yaw / 256.0F;
         float n = minecraftClient.player.pitch / 256.0F;
         Matrix4f matrix4f = matrixStack.peek().getModel();
         bufferBuilder.begin(7, VertexFormats.POSITION_COLOR_TEXTURE);
+        // The reason it's 255-color[n] is because this function calculates colors backwards.
         bufferBuilder.vertex(matrix4f, -2.0F, -2.0F, -0.5F).color(255-color[0], 255-color[1], 255-color[2], 0.4F).texture(4.0F + m, 4.0F + n).next();
         bufferBuilder.vertex(matrix4f, 2.0F, -2.0F, -0.5F).color(255-color[0], 255-color[1], 255-color[2], 0.4F).texture(0.0F + m, 4.0F + n).next();
         bufferBuilder.vertex(matrix4f, 2.0F, 2.0F, -0.5F).color(255-color[0], 255-color[1], 255-color[2], 0.4F).texture(0.0F + m, 0.0F + n).next();
         bufferBuilder.vertex(matrix4f, -2.0F, 2.0F, -0.5F).color(255-color[0], 255-color[1], 255-color[2], 0.4F).texture(4.0F + m, 0.0F + n).next();
         bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.draw(bufferBuilder); // Overlays it on the screen
         RenderSystem.disableBlend();
     }
 
