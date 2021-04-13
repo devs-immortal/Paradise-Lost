@@ -27,13 +27,14 @@
     [],
     [],
     [
-      "the_aether:ambrosium_ore",
-      "the_aether:gravitite_ore",
-      "the_aether:zanite_ore"
+      "the_aether:ore_ambrosium",
+      "the_aether:ore_gravitite",
+      "the_aether:ore_zanite"
     ],
     [
     ],
     [
+      "the_aether:aether_flowers",
       "the_aether:aether_grass",
       "the_aether:aether_bush",
       "the_aether:aether_tall_grass",

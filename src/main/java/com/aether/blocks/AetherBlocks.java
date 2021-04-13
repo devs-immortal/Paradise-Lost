@@ -478,12 +478,9 @@ public class AetherBlocks {
         WISTERIA_TRAPDOOR = register("wisteria_trapdoor", new AetherTrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)), buildingBlock());
         WISTERIA_DOOR = register("wisteria_door", new AetherDoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR)), buildingBlock());
 
-//        STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", null);
-//        STRIPPED_SKYROOT_WOOD = register("stripped_skyroot_wood", null);
 //        SUN_ALTAR = register("sun_altar", null);
 //        TREASURE_CHEST = register("treasure_chest", null);
 //        WHITE_DYED_AERCLOUD = register("white_dyed_aercloud", null);
-//        WHITE_FLOWER = register("white_flower", null);
 //        YELLOW_DYED_AERCLOUD = register("yellow_dyed_aercloud", null);
         ZANITE_BLOCK = register("zanite_block", new Block(FabricBlockSettings.of(Material.METAL).strength(3.0f, -1.0f).sounds(BlockSoundGroup.METAL)), buildingBlock());
         BLOCK_OF_GRAVITITE = register("block_of_gravitite", new FloatingBlock(false, FabricBlockSettings.of(Material.METAL).strength(3.0f, -1.0f).sounds(BlockSoundGroup.METAL)), buildingBlock());

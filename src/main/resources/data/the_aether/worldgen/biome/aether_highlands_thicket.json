@@ -32,9 +32,9 @@
       "the_aether:gravitite_ore",
       "the_aether:zanite_ore"
     ],
+    [],
     [
-    ],
-    [
+      "the_aether:aether_flowers",
       "the_aether:aether_grass",
       "the_aether:aether_bush",
       "the_aether:dense_aether_fern",
