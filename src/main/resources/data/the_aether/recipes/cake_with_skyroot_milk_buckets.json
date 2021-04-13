@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BEB",
+    "CCC"
+  ],
+  "key": {
+    "A": {
+      "tag": "the_aether:milk_buckets"
+    },
+    "B": {
+      "item": "minecraft:sugar"
+    },
+    "C": {
+      "item": "minecraft:wheat"
+    },
+    "E": {
+      "item": "minecraft:egg"
+    }
+  },
+  "result": {
+    "item": "minecraft:cake"
+  }
+}
