@@ -14,7 +14,7 @@
               }
             ],
             "blacklist": [],
-            "tries": 16,
+            "tries": 64,
             "state_provider": {
               "state": {
                 "Name": "the_aether:flutegrass",
@@ -46,8 +46,8 @@
     },
     "decorator": {
       "config": {
-        "noise_level": -0.8,
-        "below_noise": 5,
+        "noise_level": -0.7,
+        "below_noise": 4,
         "above_noise": 10
       },
       "type": "minecraft:count_noise"

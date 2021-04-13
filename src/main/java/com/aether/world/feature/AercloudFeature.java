@@ -5,19 +5,17 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
-import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
-import java.util.function.Consumer;
 
 public class AercloudFeature extends Feature<AercloudConfig> {
+
     private static final Codec<AercloudConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BlockState.CODEC.fieldOf("state").forGetter(AercloudConfig::getCloudState),
             Codec.BOOL.fieldOf("flat").forGetter(AercloudConfig::isFlat),
@@ -30,44 +28,76 @@ public class AercloudFeature extends Feature<AercloudConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess worldIn, ChunkGenerator generator, Random randIn, BlockPos posIn, AercloudConfig configIn) {
-        BlockPos.Mutable mut = new BlockPos.Mutable(posIn.getX() + 8, (randIn.nextInt(configIn.isFlat() ? 4 : 16)) + 30 + configIn.getY(), posIn.getZ() + 8);
+    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos core, AercloudConfig config) {
+        int radius = (random.nextInt((int) (config.maxRadius / 1.5)) + config.maxRadius / 4) + 1;
+        int baseHeight = (int) (radius / (random.nextDouble() + 1.25));
 
-        ChunkRegion region = (ChunkRegion) worldIn;
-
-        int size = randIn.nextInt(60) + 20;
-        double s = Math.sqrt(size);
-
-        List<int[]> positions = new ArrayList<>();
-        MutableBoolean fail = new MutableBoolean(false);
-
-        for (int i = 0; i < size; ++i) {
-            double v = s * Math.sin((Math.PI * i) / size);
-            int base = (int) (s + v);
-
-            int width = (int) (randIn.nextDouble() * base + s);
-            int height = (int) (randIn.nextDouble() * base + (s / 2));
-            int depth = (int) (randIn.nextDouble() * base + s);
-            BlockPos.iterate(mut.add(-width / 2, -height / 2, -depth / 2), mut.add(width / 2, height / 2, depth / 2)).forEach(pos -> {
-                if (worldIn.getBlockState(pos).isAir() && region.isChunkLoaded(pos.getX() >> 4, pos.getZ() >> 4)) {
-                    positions.add(new int[] {pos.getX(), pos.getY(), pos.getZ()});
-                } else {
-                    fail.setTrue();
-                }
-            });
-
-            int distance = (int) Math.ceil(s + (s - v));
-
-            mut.move(randIn.nextInt(distance) - distance / 2, randIn.nextInt(3) - 1, randIn.nextInt(distance) - (distance / 2));
-        }
-
-        if (!fail.booleanValue()) {
-            for (int[] pos : positions) {
-                mut.set(pos[0], pos[1], pos[2]);
-                this.setBlockState(worldIn, mut, configIn.getCloudState());
+        for (BlockPos blockPos : BlockPos.iterate(core.add(-radius * 1.1, -baseHeight * 1.1, -radius * 1.1), core.add(radius * 1.1, baseHeight * 1.1, radius * 1.1))) {
+            if (testElipsoid(radius, baseHeight, radius, blockPos, core) && !world.isAir(blockPos)) {
+                return false;
             }
         }
 
-        return !fail.booleanValue();
+        final Queue<CloudInfo> nodes = new LinkedList<>();
+
+        nodes.add(new CloudInfo(core, radius, baseHeight));
+
+        for (int i = 0; i < 6 && (random.nextBoolean() || i == 0); i++) {
+            int offset = radius - random.nextInt((int) Math.ceil(radius / 2.0));
+            nodes.add(new CloudInfo(core.add(offset * Math.cos(random.nextDouble() * 2 * Math.PI), random.nextInt(5) - 2, offset * Math.sin(random.nextDouble() * 2 * Math.PI)), (int) (radius * (random.nextDouble() / 4 + 0.75)), (int) (baseHeight * (random.nextDouble() / 2 + 0.5))));
+        }
+
+        final Queue<CloudInfo> secNodes = new LinkedList<>();
+
+        for (CloudInfo node : nodes) {
+            int offset = node.radius - random.nextInt((int) Math.ceil(node.radius / 2.0));
+            secNodes.add(new CloudInfo(node.center.add(offset * Math.cos(random.nextDouble() * 2 * Math.PI), random.nextInt(5) - 2, offset * Math.sin(random.nextDouble() * 2 * Math.PI)), (int) (node.radius * (random.nextDouble() / 4 + 0.75)), (int) (node.yMod * (random.nextDouble() + 0.5))));
+        }
+
+        nodes.addAll(secNodes);
+
+        while (!nodes.isEmpty()) {
+            CloudInfo node = nodes.poll();
+
+            BlockPos heart = node.center;
+            int nodeRadius = node.radius;
+            int nodeHeight = node.yMod;
+
+            for (BlockPos blockPos : BlockPos.iterate(heart.add(-nodeRadius, -nodeHeight, -nodeRadius), heart.add(nodeRadius, nodeHeight, nodeRadius))) {
+                if (testElipsoid(radius, baseHeight, radius + random.nextInt(5) - 2, blockPos, heart) && world.isAir(blockPos)) {
+                    world.setBlockState(blockPos, config.state, 2);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    //private void createCloudAdditively(WorldAccess world, BlockState cloud, Random random, int radius, int rarityMod, BlockPos leaf, BlockPos core,) {
+    //    if(testSphere(radius, leaf, core)) {
+    //        if(repeat && random.nextInt(rarityMod) == 0)
+    //            nodes.add(leaf);
+    //
+    //    }
+    //}
+
+    private static class CloudInfo {
+
+        public final int radius;
+        public final BlockPos center;
+        public final int yMod;
+
+        public CloudInfo(BlockPos center, int radius, int yMod) {
+            this.radius = radius;
+            this.center = center;
+            this.yMod = yMod;
+        }
+    }
+
+    private boolean testElipsoid(int a, int b, int c, BlockPos test, BlockPos center) {
+        int x = Math.abs(test.getX() - center.getX());
+        int y = Math.abs(test.getY() - center.getY());
+        int z = Math.abs(test.getZ() - center.getZ());
+        return Math.pow(x, 2) / Math.pow(a, 2) + Math.pow(y, 2) / Math.pow(b, 2) + Math.pow(z, 2) / Math.pow(c, 2)  <= 1;
     }
 }

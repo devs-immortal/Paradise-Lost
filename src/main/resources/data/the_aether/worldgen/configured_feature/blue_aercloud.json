@@ -8,7 +8,7 @@
           "Name": "the_aether:blue_aercloud"
         },
         "flat": false,
-        "maxRadius": 32,
+        "maxRadius": 10,
         "y": 32
       }
     },
@@ -22,7 +22,7 @@
         "inner": {
           "type": "minecraft:chance",
           "config": {
-            "chance": 15
+            "chance": 20
           }
         }
       }

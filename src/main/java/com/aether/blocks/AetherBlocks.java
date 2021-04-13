@@ -249,10 +249,10 @@ public class AetherBlocks {
 
 
     static {
-        AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).strength(0.3f).sounds(BlockSoundGroup.GRAVEL)), buildingBlock());
+        AETHER_DIRT = register("aether_dirt", new Block(FabricBlockSettings.copyOf(Blocks.DIRT).strength(0.3f).breakByTool(FabricToolTags.SHOVELS).breakByHand(true).sounds(BlockSoundGroup.GRAVEL)), buildingBlock());
 
         // We're going to be using this more than once, so we might as well store it in a variable.
-        final FabricBlockSettings GRASS_BLOCKS = FabricBlockSettings.of(Material.SOLID_ORGANIC).materialColor(MaterialColor.CYAN).strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS);
+        final FabricBlockSettings GRASS_BLOCKS = FabricBlockSettings.of(Material.SOLID_ORGANIC).breakByTool(FabricToolTags.SHOVELS).breakByHand(true).materialColor(MaterialColor.CYAN).strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS);
         AETHER_GRASS_BLOCK = register("aether_grass", new AetherGrassBlock(GRASS_BLOCKS), buildingBlock());
 
         // Note that because we're changing the material color (which mutates the `FabricBlockSettings`), we want to
