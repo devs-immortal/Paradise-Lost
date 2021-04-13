@@ -11,9 +11,9 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.6-SNAPSHOT'
+    id 'fabric-loom' version '0.7.26'
     id 'maven-publish'
-    id "com.modrinth.minotaur" version "1.1.0"
+    id "com.modrinth.minotaur" version "1.2.0"
 }
 
 apply plugin: 'de.guntram.mcmod.crowdin-translate'
@@ -73,7 +73,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Libraries
-    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:1.1.1"))
+    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:2.0.1"))
     modImplementation(include("io.github.cottonmc:LibGui:3.3.5+1.16.5"))
     modImplementation 'software.bernie.geckolib:geckolib-fabric-1.16.5:3.0.26:dev'
 
