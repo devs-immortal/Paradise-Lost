@@ -465,8 +465,8 @@ public class AetherBlocks {
         LAVENDER_WISTERIA_LEAF_PILE = register("lavender_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
         LAVENDER_WISTERIA_SAPLING = register("lavender_wisteria_sapling", new AetherSaplingBlock(new LavenderWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
         POTTED_LAVENDER_WISTERIA_SAPLING = register("potted_lavender_wisteria_sapling", createPottedBlock(LAVENDER_WISTERIA_SAPLING));
-        LAVENDER_WISTERIA_HANGER = register("lavender_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(FROST_WISTERIA).noCollision().breakInstantly()), buildingBlock());
-        LAVENDER_WISTERIA_HANGER_PLANT = register("lavender_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(FROST_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+        LAVENDER_WISTERIA_HANGER = register("lavender_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(LAVENDER_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+        LAVENDER_WISTERIA_HANGER_PLANT = register("lavender_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(LAVENDER_WISTERIA).noCollision().breakInstantly()), buildingBlock());
 
         final Block.Settings WISTERIA_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.YELLOW).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
         WISTERIA_PLANKS = register("wisteria_planks", new Block(WISTERIA_WOOD), buildingBlock());
