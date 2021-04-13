@@ -32,13 +32,13 @@ public class AetherPickaxe extends PickaxeItem implements IAetherTool {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        BlockPos blockPos = context.getBlockPos();
-        if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
-            return ActionResult.SUCCESS;
-        } else {
-            return ActionResult.PASS;
+        ActionResult superUsage = super.useOnBlock(context);
+        if (superUsage.equals(ActionResult.PASS)) {
+            if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+                return ActionResult.SUCCESS;
+            }
         }
+        return superUsage;
     }
 
 

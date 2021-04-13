@@ -11,9 +11,9 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.6-SNAPSHOT'
+    id 'fabric-loom' version '0.7.26'
     id 'maven-publish'
-    id "com.modrinth.minotaur" version "1.1.0"
+    id "com.modrinth.minotaur" version "1.2.0"
 }
 
 apply plugin: 'de.guntram.mcmod.crowdin-translate'

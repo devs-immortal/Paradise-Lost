@@ -1,5 +1,6 @@
 package com.aether.items.tools;
 
+import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItemSettings;
 import com.aether.items.AetherItems;
@@ -37,21 +38,16 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
         return (float) tool.getMaxDamage() / tool.getDamage() / 50;
     }
 
-    /*public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        BlockPos blockPos = context.getBlockPos();
-        BlockState blockState = world.getBlockState(blockPos);
-
-        if (this.getItemMaterial() == AetherTiers.Gravitite && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
-            if (world.isAir(blockPos.up()) && !world.isClient) {
-                //TODO: Spawn floating block
-            } else {
-                return ActionResult.PASS;
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        ActionResult superUsage = super.useOnBlock(context);
+        if (superUsage.equals(ActionResult.PASS)) {
+            if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+                return ActionResult.SUCCESS;
             }
-            return ActionResult.SUCCESS;
         }
-        return ActionResult.PASS;
-    }*/
+        return superUsage;
+    }
 
     @Override
     public boolean postMine(ItemStack stackIn, World worldIn, BlockState stateIn, BlockPos posIn, LivingEntity entityIn) {
