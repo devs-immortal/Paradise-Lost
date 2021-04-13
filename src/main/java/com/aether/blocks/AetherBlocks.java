@@ -534,7 +534,7 @@ public class AetherBlocks {
     }
 
     private static AetherLeavesBlock createLeavesBlock() {
-        return new AetherLeavesBlock(AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never));
+        return new AetherLeavesBlock(AbstractBlock.Settings.of(Material.LEAVES).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never));
     }
 
     private static FabricBlockSettings createLeafPileBlock(BlockSoundGroup sounds) {
