@@ -16,44 +16,21 @@ import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameOverlayRenderer.class)
 @Environment(EnvType.CLIENT)
 public class InGameOverlayRendererMixin {
 
-    //Here I overwrite the whole method instead of using injection because it wouldn't work
-    @Overwrite
-    public static void renderOverlays(MinecraftClient minecraftClient, MatrixStack matrixStack){
-
-        // From here
-        RenderSystem.disableAlphaTest();
-        PlayerEntity playerEntity = minecraftClient.player;
-        if (!playerEntity.noClip) {
-            BlockState blockState = getInWallBlockState(playerEntity);
-            if (blockState != null) {
-                renderInWallOverlay(minecraftClient, minecraftClient.getBlockRenderManager().getModels().getSprite(blockState), matrixStack);
-            }
-        }
-
-        if (!minecraftClient.player.isSpectator()) {
-            if (minecraftClient.player.isSubmergedIn(FluidTags.WATER)) {
-                renderUnderwaterOverlay(minecraftClient, matrixStack);
-            }
-
-            if (minecraftClient.player.isOnFire()) {
-                renderFireOverlay(minecraftClient, matrixStack);
-            }
-        }
-        // To here, is the code of the original method.
-
-        // This block is the code I have written
+    @Inject(method = "renderOverlays", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;enableAlphaTest()V"))
+    private static void renderOverlays(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo ci){
         PlayerEntity player = minecraftClient.player;
         if (!player.noClip) {
             BlockState blockState = getBlockStateFromEyePos(player);
@@ -61,25 +38,6 @@ public class InGameOverlayRendererMixin {
                 renderInAercloudOverlay(minecraftClient, blockState.getBlock(), matrixStack);
             }
         }
-
-        RenderSystem.enableAlphaTest(); // This single statement is also from the original method.
-    }
-
-    @Shadow
-    private static void renderFireOverlay(MinecraftClient minecraftClient, MatrixStack matrixStack) {
-    }
-
-    @Shadow
-    private static void renderUnderwaterOverlay(MinecraftClient minecraftClient, MatrixStack matrixStack) {
-    }
-
-    @Shadow
-    private static void renderInWallOverlay(MinecraftClient minecraftClient, Sprite sprite, MatrixStack matrixStack) {
-    }
-
-    @Shadow
-    private static BlockState getInWallBlockState(PlayerEntity playerEntity) {
-        return null;
     }
 
     // Follows the same procedures as the renderUnderwaterOverlay method in the original class
