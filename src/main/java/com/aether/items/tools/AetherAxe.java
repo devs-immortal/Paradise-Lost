@@ -1,5 +1,6 @@
 package com.aether.items.tools;
 
+import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
@@ -34,16 +35,13 @@ public class AetherAxe extends AxeItem implements IAetherTool {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        BlockPos blockPos = context.getBlockPos();
-        BlockState blockState = world.getBlockState(blockPos);
-
-        if (this.getItemMaterial() == AetherTiers.Gravitite && this.getMiningSpeedMultiplier(context.getStack(), blockState) == this.miningSpeed) {
-            if (world.isAir(blockPos.up()) && !world.isClient) {
-                //TODO: Spawn floating block
+        ActionResult superUsage = super.useOnBlock(context);
+        if (superUsage.equals(ActionResult.PASS)) {
+            if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+                return ActionResult.SUCCESS;
             }
         }
-        return super.useOnBlock(context);
+        return superUsage;
     }
 
     @Override

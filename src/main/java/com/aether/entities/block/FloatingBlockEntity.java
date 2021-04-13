@@ -18,6 +18,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.Item;
@@ -27,6 +28,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
@@ -166,24 +169,21 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                 if (isFastFloater) {
                     this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
                 } else {
-//                    if (this.floatTime > 600) {
-//                        this.setVelocity(this.getVelocity().add(0.0D, -0.04D, 0.0D));
-//                    } else {
                     this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
-//                    }
                 }
             }
 
             Box oldBox = getBoundingBox();
 
             this.move(MovementType.SELF, this.getVelocity());
-
-            Box newBox = getBoundingBox();
-            List<Entity> otherEntities = this.world.getOtherEntities(this, oldBox.union(newBox));
-            for (Entity entity : otherEntities) {
-                if (!(entity instanceof FloatingBlockEntity) && !entity.noClip) {
-                    if (entity.getY() < newBox.maxY) {
-                        entity.updatePosition(entity.getPos().x, newBox.maxY, entity.getPos().z);
+            if (!FallingBlock.canFallThrough(this.blockState)) {
+                Box newBox = getBoundingBox();
+                List<Entity> otherEntities = this.world.getOtherEntities(this, oldBox.union(newBox));
+                for (Entity entity : otherEntities) {
+                    if (!(entity instanceof FloatingBlockEntity) && !entity.noClip) {
+                        if (entity.getY() < newBox.maxY) {
+                            entity.updatePosition(entity.getPos().x, newBox.maxY, entity.getPos().z);
+                        }
                     }
                 }
             }
@@ -214,9 +214,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                                 this.dropItem(block);
                             }
                             this.remove();
-                        } //else if (isFastFloater && floatTime > 600) {
-                        //    this.remove();
-                        //}
+                        }
                     }
                 } else {
                     BlockState blockState = this.world.getBlockState(blockPos);
@@ -383,6 +381,13 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
             if (!world.isClient) {
                 FloatingBlockEntity floatingblockentity = new FloatingBlockEntity(world, blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5, world.getBlockState(blockPos));
                 world.spawnEntity(floatingblockentity);
+            }
+            PlayerEntity playerEntity = context.getPlayer();
+            world.playSound(playerEntity, blockPos, blockState.getBlock().getSoundGroup(blockState).getBreakSound(), SoundCategory.BLOCKS, 1.0F, 0.75F);
+            if (playerEntity != null) {
+                context.getStack().damage(1, playerEntity, (p) -> {
+                    p.sendToolBreakStatus(context.getHand());
+                });
             }
             return true;
         }
