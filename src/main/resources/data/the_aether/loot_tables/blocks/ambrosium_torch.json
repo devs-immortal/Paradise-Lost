@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:ambrosium_wall_torch"
+          "name": "the_aether:ambrosium_torch"
         }
       ],
       "conditions": [
