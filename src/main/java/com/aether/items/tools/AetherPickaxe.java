@@ -35,6 +35,9 @@ public class AetherPickaxe extends PickaxeItem implements IAetherTool {
         ActionResult superUsage = super.useOnBlock(context);
         if (superUsage.equals(ActionResult.PASS)) {
             if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
+                PlayerEntity playerEntity = context.getPlayer();
+                if (playerEntity != null)
+                    context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
                 return ActionResult.SUCCESS;
             }
         }
