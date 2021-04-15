@@ -84,7 +84,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
         if (dataTracker == null) {
             super.updatePosition(x, y, z);
         } else {
-            BlockPos origin = getOrigin();
+            BlockPos origin = dataTracker.get(ORIGIN);
             VoxelShape colShape = blockState.getCollisionShape(world, origin);
             if (colShape.isEmpty()) {
                 colShape = blockState.getOutlineShape(world, origin);
@@ -126,7 +126,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
 
     @Override
     public boolean collides() {
-        return !this.removed && !blockState.getCollisionShape(world, getOrigin()).isEmpty();
+        return !this.removed && !blockState.getCollisionShape(world, dataTracker.get(ORIGIN)).isEmpty();
     }
 
     @Override
