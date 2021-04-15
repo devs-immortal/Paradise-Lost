@@ -6,7 +6,31 @@
   "structures": {
     "structures": {}
   },
+  "default_block": {
+    "Name": "the_aether:holystone"
+  },
+  "default_fluid": {
+    "Name": "minecraft:water",
+    "Properties": {
+      "level": "8"
+    }
+  },
   "noise": {
+    "height": 128,
+    "size_horizontal": 2,
+    "size_vertical": 1,
+    "density_factor": 0,
+    "density_offset": 0,
+    "simplex_surface_noise": false,
+    "random_density_offset": false,
+    "island_noise_override": false,
+    "amplified": false,
+    "sampling": {
+      "xz_scale": 1.8,
+      "xz_factor": 60,
+      "y_scale": 1.0,
+      "y_factor": 80
+    },
     "top_slide": {
       "target": -16,
       "size": 20,
@@ -16,30 +40,6 @@
       "target": -20,
       "size": 8,
       "offset": 0
-    },
-    "sampling": {
-      "xz_scale": 1.8,
-      "xz_factor": 60,
-      "y_scale": 1.0,
-      "y_factor": 80
-    },
-    "size_vertical": 1,
-    "size_horizontal": 2,
-    "height": 128,
-    "density_factor": 0,
-    "density_offset": 0,
-    "random_density_offset": false,
-    "simplex_surface_noise": false,
-    "island_noise_override": false,
-    "amplified": false
-  },
-  "default_block": {
-    "Name": "the_aether:holystone"
-  },
-  "default_fluid": {
-    "Name": "minecraft:water",
-    "Properties": {
-      "level": "8"
     }
   }
 }
