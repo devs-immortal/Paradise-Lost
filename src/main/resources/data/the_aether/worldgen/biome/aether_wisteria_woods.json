@@ -17,8 +17,10 @@
   "carvers": {},
   "features": [
     [
+      "the_aether:aether_flowers",
+      "the_aether:aether_grass",
+      "the_aether:aether_fern",      
       "the_aether:rainbow_fallen_leaves",
-      "the_aether:aether_fern",
       "the_aether:aether_bush",
       "the_aether:patch_blueberry"
     ],

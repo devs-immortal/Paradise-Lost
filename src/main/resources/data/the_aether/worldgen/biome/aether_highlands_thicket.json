@@ -28,19 +28,19 @@
     [],
     [],
     [
-      "the_aether:ambrosium_ore",
-      "the_aether:gravitite_ore",
-      "the_aether:zanite_ore"
+      "the_aether:ore_ambrosium",
+      "the_aether:ore_gravitite",
+      "the_aether:ore_zanite"
     ],
     [],
     [
       "the_aether:aether_flowers",
       "the_aether:aether_grass",
-      "the_aether:aether_bush",
-      "the_aether:dense_aether_fern",
-      "the_aether:fallen_leaves",
-      "the_aether:patch_blueberry",
-      "the_aether:thicket_trees",
+      "the_aether:aether_tall_grass",
+      "the_aether:water_spring",
+      "the_aether:aether_dense_bush",
+      "the_aether:aether_dense_fern",
+      "the_aether:sparse_trees",
       "the_aether:flutegrass"
     ],
     [
@@ -78,6 +78,12 @@
       }
     ],
     "creature": [
+    {
+        "type": "the_aether:aerbunny",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+    }
     ],
     "ambient": [],
     "water_creature": [],
@@ -95,7 +101,6 @@
       "charge": 2.0
     }
   },
-  "parent": "the_aether:aether_highlands_forest",
   "player_spawn_friendly": false,
   "precipitation": "none",
   "temperature": 0.5,

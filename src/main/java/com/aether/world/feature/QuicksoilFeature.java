@@ -81,10 +81,10 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
 
         List<int[]> positions = new ArrayList<>();
 
-        int radius = 6;
+        int radius;
         if (centers.size() > 10) {
             for (BlockPos center : centers) {
-                radius = MathHelper.clamp(radius + (random.nextInt(5) - 2) * 2, 2, 7);
+                radius = random.nextInt(2)+4;
 
                 for (int x = center.getX() - radius; x < center.getX() + radius; x++) {
                     for (int z = center.getZ() - radius; z < center.getZ() + radius; z++) {

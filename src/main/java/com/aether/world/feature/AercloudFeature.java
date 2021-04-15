@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -30,48 +31,89 @@ public class AercloudFeature extends Feature<AercloudConfig> {
     @Override
     public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos core, AercloudConfig config) {
         int radius = (random.nextInt((int) (config.maxRadius / 1.5)) + config.maxRadius / 4) + 1;
-        int baseHeight = (int) (radius / (random.nextDouble() + 1.25));
+        return (createCloudBlob(world, config.state, random, core, 3, 10) || createCloudBlob(world, config.state, random, core.north(3).east(), 3, 8));
+    }
 
-        for (BlockPos blockPos : BlockPos.iterate(core.add(-radius * 1.1, -baseHeight * 1.1, -radius * 1.1), core.add(radius * 1.1, baseHeight * 1.1, radius * 1.1))) {
-            if (testElipsoid(radius, baseHeight, radius, blockPos, core) && !world.isAir(blockPos)) {
+    private int randomSign(Random random) {
+        int ran = random.nextInt(2);
+        if (ran == 0) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+
+    private boolean createCloudBlob(StructureWorldAccess world, BlockState state, Random random, BlockPos center, int sizex, int sizez) {
+        for (BlockPos blockPos : BlockPos.iterate(center.add(-sizex * 0.3, -sizex * 0.3, -sizez * 0.3), center.add(sizex * 0.3, sizex * 0.3, sizez * 0.3))) {
+            if (testElipsoid(sizex, sizex, sizez, blockPos, center) && (!(world.isAir(blockPos) || world.getBlockState(blockPos) == state.getBlock().getDefaultState()))) {
                 return false;
             }
         }
-
-        final Queue<CloudInfo> nodes = new LinkedList<>();
-
-        nodes.add(new CloudInfo(core, radius, baseHeight));
-
-        for (int i = 0; i < 6 && (random.nextBoolean() || i == 0); i++) {
-            int offset = radius - random.nextInt((int) Math.ceil(radius / 2.0));
-            nodes.add(new CloudInfo(core.add(offset * Math.cos(random.nextDouble() * 2 * Math.PI), random.nextInt(5) - 2, offset * Math.sin(random.nextDouble() * 2 * Math.PI)), (int) (radius * (random.nextDouble() / 4 + 0.75)), (int) (baseHeight * (random.nextDouble() / 2 + 0.5))));
-        }
-
-        final Queue<CloudInfo> secNodes = new LinkedList<>();
-
-        for (CloudInfo node : nodes) {
-            int offset = node.radius - random.nextInt((int) Math.ceil(node.radius / 2.0));
-            secNodes.add(new CloudInfo(node.center.add(offset * Math.cos(random.nextDouble() * 2 * Math.PI), random.nextInt(5) - 2, offset * Math.sin(random.nextDouble() * 2 * Math.PI)), (int) (node.radius * (random.nextDouble() / 4 + 0.75)), (int) (node.yMod * (random.nextDouble() + 0.5))));
-        }
-
-        nodes.addAll(secNodes);
-
-        while (!nodes.isEmpty()) {
-            CloudInfo node = nodes.poll();
-
-            BlockPos heart = node.center;
-            int nodeRadius = node.radius;
-            int nodeHeight = node.yMod;
-
-            for (BlockPos blockPos : BlockPos.iterate(heart.add(-nodeRadius, -nodeHeight, -nodeRadius), heart.add(nodeRadius, nodeHeight, nodeRadius))) {
-                if (testElipsoid(radius, baseHeight, radius + random.nextInt(5) - 2, blockPos, heart) && world.isAir(blockPos)) {
-                    world.setBlockState(blockPos, config.state, 2);
+        if (sizex > 0 && sizez > 1) {
+            for (int z = -sizez; z <= sizez; z++) {
+                int stuffsize = Math.round(sizex*(1f/(Math.max(Math.abs(((float)z)/7), 1))));
+                for (int x = center.getX() - stuffsize; x <= center.getX() + stuffsize; x++) {
+                    for (int y = center.getY() - Math.round(stuffsize*0.7f); y <= center.getY() + Math.round(stuffsize*0.7f); y++) {
+                        if (!((x == center.getX() - stuffsize || x == center.getX() + stuffsize) && (y == center.getY() - stuffsize + 1 || y == center.getY() + stuffsize - 1))) {
+                            world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
+                        }
+                    }
                 }
             }
+            center = center.down((random.nextInt(1)+1)*randomSign(random));
+            center = center.east((random.nextInt(3)+3)*randomSign(random));
+            center = center.north((random.nextInt(3)+3)*randomSign(random));
+            createCloudBlob(world, state, random, center, sizex-random.nextInt(1), sizez-random.nextInt(1)-1);
         }
 
         return true;
     }
+
+//    @Override
+//    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos core, AercloudConfig config) {
+//        int radius = (random.nextInt((int) (config.maxRadius / 1.5)) + config.maxRadius / 4) + 1;
+//        int baseHeight = (int) (radius / (random.nextDouble() + 1.25));
+//
+//        for (BlockPos blockPos : BlockPos.iterate(core.add(-radius * 1.1, -baseHeight * 1.1, -radius * 1.1), core.add(radius * 1.1, baseHeight * 1.1, radius * 1.1))) {
+//            if (testElipsoid(radius, baseHeight, radius, blockPos, core) && !world.isAir(blockPos)) {
+//                return false;
+//            }
+//        }
+//
+//        final Queue<CloudInfo> nodes = new LinkedList<>();
+//
+//        nodes.add(new CloudInfo(core, radius, baseHeight));
+//
+//        for (int i = 0; i < 6 && (random.nextBoolean() || i == 0); i++) {
+//            int offset = radius - random.nextInt((int) Math.ceil(radius / 2.0));
+//            nodes.add(new CloudInfo(core.add(offset * Math.cos(random.nextDouble() * 2 * Math.PI), random.nextInt(5) - 2, offset * Math.sin(random.nextDouble() * 2 * Math.PI)), (int) (radius * (random.nextDouble() / 4 + 0.75)), (int) (baseHeight * (random.nextDouble() / 2 + 0.5))));
+//        }
+//
+//        final Queue<CloudInfo> secNodes = new LinkedList<>();
+//
+//        for (CloudInfo node : nodes) {
+//            int offset = node.radius - random.nextInt((int) Math.ceil(node.radius / 2.0));
+//            secNodes.add(new CloudInfo(node.center.add(offset * Math.cos(random.nextDouble() * 2 * Math.PI), random.nextInt(5) - 2, offset * Math.sin(random.nextDouble() * 2 * Math.PI)), (int) (node.radius * (random.nextDouble() / 4 + 0.75)), (int) (node.yMod * (random.nextDouble() + 0.5))));
+//        }
+//
+//        nodes.addAll(secNodes);
+//
+//        while (!nodes.isEmpty()) {
+//            CloudInfo node = nodes.poll();
+//
+//            BlockPos heart = node.center;
+//            int nodeRadius = node.radius;
+//            int nodeHeight = node.yMod;
+//
+//            for (BlockPos blockPos : BlockPos.iterate(heart.add(-nodeRadius, -nodeHeight, -nodeRadius), heart.add(nodeRadius, nodeHeight, nodeRadius))) {
+//                if (testElipsoid(radius, baseHeight, radius + random.nextInt(5) - 2, blockPos, heart) && world.isAir(blockPos)) {
+//                    world.setBlockState(blockPos, config.state, 2);
+//                }
+//            }
+//        }
+//
+//        return true;
+//    }
 
     //private void createCloudAdditively(WorldAccess world, BlockState cloud, Random random, int radius, int rarityMod, BlockPos leaf, BlockPos core,) {
     //    if(testSphere(radius, leaf, core)) {

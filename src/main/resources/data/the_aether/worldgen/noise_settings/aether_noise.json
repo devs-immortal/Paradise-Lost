@@ -7,34 +7,34 @@
     "structures": {}
   },
   "noise": {
-    "density_factor": 0.0,
-    "density_offset": 0.0,
-    "simplex_surface_noise": true,
     "top_slide": {
-      "target": -30,
-      "size": 100,
-      "offset": -36
+      "target": -16,
+      "size": 20,
+      "offset": 4
     },
     "bottom_slide": {
-      "target": -30,
-      "size": 7,
-      "offset": 2
+      "target": -20,
+      "size": 8,
+      "offset": 0
     },
-    "size_horizontal": 2,
-    "size_vertical": 1,
-    "height": 128,
     "sampling": {
-      "xz_scale": 2.0,
+      "xz_scale": 1.8,
+      "xz_factor": 60,
       "y_scale": 1.0,
-      "xz_factor": 80.0,
-      "y_factor": 160.0
-    }
+      "y_factor": 80
+    },
+    "size_vertical": 1,
+    "size_horizontal": 2,
+    "height": 128,
+    "density_factor": 0,
+    "density_offset": 0,
+    "random_density_offset": false,
+    "simplex_surface_noise": false,
+    "island_noise_override": false,
+    "amplified": false
   },
   "default_block": {
-    "Name": "the_aether:holystone",
-    "Properties": {
-      "waterlogged": false
-    }
+    "Name": "the_aether:holystone"
   },
   "default_fluid": {
     "Name": "minecraft:water",
