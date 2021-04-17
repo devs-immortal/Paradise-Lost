@@ -4,11 +4,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -42,5 +45,10 @@ public class AetherPortalBlock extends CustomPortalBlock {
         }
         if (world.getRandom().nextInt(6) != 0) world.addParticle(ParticleTypes.DRIPPING_WATER, d, e, f, g, h, j);
         else world.addParticle(ParticleTypes.CLOUD, d, e, f, 0, 0, 0);
+    }
+
+    @Override
+    public Block getPortalBase(BlockView world, BlockPos pos) {
+        return Blocks.GLOWSTONE;
     }
 }
