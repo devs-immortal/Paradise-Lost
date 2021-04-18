@@ -129,22 +129,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:survives_explosion"
-            },
-            {
-              "condition": "minecraft:table_bonus",
-              "enchantment": "minecraft:fortune",
-              "chances": [
-                0.001,
-                0.0015555557,
-                0.00125,
-                0.002333334,
-                0.015
-              ]
-            }
-          ],
           "name": "the_aether:white_apple"
         }
       ],
@@ -174,6 +158,13 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "the_aether:crystal_leaves",
+          "properties": {
+            "fruity": "true"
           }
         }
       ]

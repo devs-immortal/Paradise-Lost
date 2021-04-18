@@ -432,7 +432,7 @@ public class AetherBlocks {
         POTTED_CRYSTAL_SAPLING = register("potted_crystal_sapling", createPottedBlock(CRYSTAL_SAPLING));
         CRYSTAL_LOG = register("crystal_log", createLogBlock(MaterialColor.GRAY, MaterialColor.LIGHT_GRAY), buildingBlock());
         STRIPPED_CRYSTAL_LOG = register("stripped_crystal_log", createLogBlock(MaterialColor.LIGHT_GRAY, MaterialColor.LIGHT_GRAY), buildingBlock());
-        CRYSTAL_LEAVES = register("crystal_leaves", createLeavesBlock(BlockSoundGroup.GLASS), buildingBlock());
+        CRYSTAL_LEAVES = register("crystal_leaves", createCrystalLeavesBlock(BlockSoundGroup.GLASS), buildingBlock());
         CRYSTAL_TRAPDOOR = register("crystal_trapdoor", new AetherTrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)), buildingBlock());
         CRYSTAL_DOOR = register("crystal_door", new AetherDoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR)), buildingBlock());
 
@@ -545,6 +545,10 @@ public class AetherBlocks {
 
     private static AetherLeavesBlock createLeavesBlock(int luminance) {
         return new AetherLeavesBlock(AbstractBlock.Settings.of(Material.LEAVES).strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never).luminance(ignored -> luminance));
+    }
+
+    private static CrystalLeavesBlock createCrystalLeavesBlock(BlockSoundGroup sounds) {
+        return new CrystalLeavesBlock(AbstractBlock.Settings.of(Material.LEAVES).strength(0.2f).ticksRandomly().sounds(sounds).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never));
     }
 
     private static FlowerPotBlock createPottedBlock(Block sourceBlock) {

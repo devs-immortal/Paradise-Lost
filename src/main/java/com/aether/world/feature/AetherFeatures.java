@@ -6,6 +6,7 @@ import com.aether.world.feature.generator.OutpostGenerator;
 import com.aether.world.feature.generator.WellGenerator;
 import com.aether.world.feature.structure.OutpostFeature;
 import com.aether.world.feature.structure.WellFeature;
+import com.aether.world.gen.decorator.CrystalTreeIslandDecorator;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
@@ -14,6 +15,9 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 
 public class AetherFeatures {
@@ -28,6 +32,10 @@ public class AetherFeatures {
         register("lake", new AetherLakeFeature(SingleStateFeatureConfig.CODEC));
         register("aercloud", new AercloudFeature());
         register("quicksoil", new QuicksoilFeature());
+        register("crystal_tree_island", new CrystalTreeIslandFeature(DefaultFeatureConfig.CODEC));
+
+        // Decorators
+        registerDecorator("crystal_tree_island", new CrystalTreeIslandDecorator(NopeDecoratorConfig.CODEC));
 
         WELL_PIECE = registerStructure("well", WellGenerator.WellPiece::new, new WellFeature(DefaultFeatureConfig.CODEC), 213769);
         OUTPOST_PIECE = registerStructure("outpost", OutpostGenerator.OutpostPiece::new, new OutpostFeature(DefaultFeatureConfig.CODEC), 4208012);
@@ -54,6 +62,12 @@ public class AetherFeatures {
 
     @SuppressWarnings("UnusedReturnValue")
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {
+
         return Registry.register(Registry.FEATURE, Aether.locate(id), feature);
     }
+
+    private static <T extends DecoratorConfig, G extends Decorator<T>> G registerDecorator(String id, G decorator) {
+        return Registry.register(Registry.DECORATOR, Aether.locate(id), decorator);
+    }
+
 }

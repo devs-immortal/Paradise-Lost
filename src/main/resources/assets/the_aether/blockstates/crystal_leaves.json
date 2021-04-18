@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "fruity=false": {
       "model": "the_aether:block/crystal_leaves"
+    },
+    "fruity=true": {
+      "model": "the_aether:block/crystal_fruit_leaves"
     }
   }
 }
