@@ -51,17 +51,10 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
             }
             f = (float)((double)f - ((double)random.nextInt(2) + 0.5D));
         }
-
-        BlockState[] states = new BlockState[] {
-                AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1),
-                AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1),
-                AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1).with(CrystalLeavesBlock.FRUITY, true)
-
-        };
         int[] leafRadii = new int[] {0, 3, 2, 1, 2, 1, 0, 1};
 
         for (int y = 1; y < 9; y++) {
-            this.generateTreeCircle(structureWorldAccess, random, blockPos.up(y), leafRadii[y-1], states);
+            this.generateTreeCircle(structureWorldAccess, random, blockPos.up(y), leafRadii[y-1], AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
             this.setBlockState(structureWorldAccess, blockPos.up(y), AetherBlocks.CRYSTAL_LOG.getDefaultState());
         }
         this.setBlockState(structureWorldAccess, blockPos.up(9), AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
@@ -69,18 +62,14 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
         return true;
     }
 
-    private void generateTreeCircle(StructureWorldAccess structureWorldAccess, Random random, BlockPos blockPos, int radius, BlockState[] states) {
+    private void generateTreeCircle(StructureWorldAccess structureWorldAccess, Random random, BlockPos blockPos, int radius, BlockState state) {
         if (radius < 1) { return; }
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 if (!(Math.abs(x) == radius && Math.abs(z) == radius) || (x == 0 && z == 0)) {
-                    this.setBlockState(structureWorldAccess, blockPos.add(x, 0, z), randomBlock(random, states));
+                    this.setBlockState(structureWorldAccess, blockPos.add(x, 0, z), AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
                 }
             }
         }
-    }
-
-    private BlockState randomBlock(Random random, BlockState[] states) {
-        return states[random.nextInt(states.length)];
     }
 }

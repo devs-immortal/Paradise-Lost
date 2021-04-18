@@ -29,7 +29,7 @@ public class CrystalLeavesBlock extends LeavesBlock {
         if (!state.get(PERSISTENT) && state.get(DISTANCE) == 7) {
             dropStacks(state, world, pos);
             world.removeBlock(pos, false);
-        } else if ((random.nextInt(6) == 0) && (!checkFruitiness(world, pos.up()) && !checkFruitiness(world, pos.down()) && !checkFruitiness(world, pos.north()) && !checkFruitiness(world, pos.east()) && !checkFruitiness(world, pos.south()) && !checkFruitiness(world, pos.west()))) {
+        } else if ((random.nextInt(60) == 0) && (!checkFruitiness(world, pos.up()) && !checkFruitiness(world, pos.down()) && !checkFruitiness(world, pos.north()) && !checkFruitiness(world, pos.east()) && !checkFruitiness(world, pos.south()) && !checkFruitiness(world, pos.west()))) {
             world.setBlockState(pos, state.with(FRUITY, true));
         }
 
