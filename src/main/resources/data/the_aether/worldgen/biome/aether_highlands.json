@@ -27,6 +27,7 @@
     [],
     [],
     [
+      "the_aether:holystone_boulder",
       "the_aether:ore_ambrosium",
       "the_aether:ore_gravitite",
       "the_aether:ore_zanite"
@@ -101,9 +102,9 @@
     }
   },
   "player_spawn_friendly": false,
-  "precipitation": "none",
+  "precipitation": "rain",
   "temperature": 0.5,
-  "downfall": 0.0,
+  "downfall": 1.0,
   "category": "forest",
   "depth": 0.1,
   "scale": 0.1

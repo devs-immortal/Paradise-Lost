@@ -87,9 +87,9 @@
   },
   "parent": "the_aether:aether_highlands_forest",
   "player_spawn_friendly": false,
-  "precipitation": "none",
+  "precipitation": "rain",
   "temperature": 0.5,
-  "downfall": 0.0,
+  "downfall": 1.0,
   "category": "forest",
   "depth": 0.1,
   "scale": 0.1

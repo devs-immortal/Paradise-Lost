@@ -18,4 +18,12 @@ public class FeatureMixin {
             cir.cancel();
         }
     }
+
+    @Inject(method = {"isStone"}, at = {@At("HEAD")}, cancellable = true)
+    private static void isStone(Block block, CallbackInfoReturnable<Boolean> cir) {
+        if (block == AetherBlocks.HOLYSTONE || block == AetherBlocks.MOSSY_HOLYSTONE) {
+            cir.setReturnValue(true);
+            cir.cancel();
+        }
+    }
 }

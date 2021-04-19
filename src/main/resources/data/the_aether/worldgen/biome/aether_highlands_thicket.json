@@ -22,7 +22,7 @@
       "the_aether:lake_water"
     ],
     [
-      "the_aether:quicksoil"
+      "the_aether:mossy_holystone_boulder"
     ],
     [],
     [],
@@ -36,12 +36,13 @@
     [
       "the_aether:aether_flowers",
       "the_aether:aether_grass",
+      "the_aether:fallen_leaves",
       "the_aether:aether_tall_grass",
       "the_aether:water_spring",
       "the_aether:aether_dense_bush",
       "the_aether:aether_dense_fern",
-      "the_aether:sparse_trees",
-      "the_aether:flutegrass"
+      "the_aether:thicket_trees",
+      "the_aether:sparse_trees"
     ],
     [
       "the_aether:cold_aercloud",
@@ -103,9 +104,9 @@
     }
   },
   "player_spawn_friendly": false,
-  "precipitation": "none",
-  "temperature": 0.5,
-  "downfall": 0.0,
+  "precipitation": "rain",
+  "temperature": 0.4,
+  "downfall": 2.0,
   "category": "forest",
   "depth": 0.1,
   "scale": 0.1
