@@ -2,7 +2,7 @@
   "effects": {
     "sky_color": 12632319,
     "foliage_color": 14483329,
-    "grass_color": 11665355,
+    "grass_color": 6868364,
     "fog_color": 16777215,
     "water_color": 5826047,
     "water_fog_color": 5826047,
@@ -35,9 +35,10 @@
     ],
     [
       "the_aether:aether_flowers",
+      "the_aether:aether_tall_grass",
       "the_aether:aether_grass",
       "the_aether:aether_bush",
-      "the_aether:aether_tall_grass",
+      "the_aether:aether_dense_tall_grass",
       "the_aether:patch_blueberry",
       "the_aether:scattered_trees",
       "the_aether:water_spring",
@@ -99,9 +100,9 @@
     }
   },
   "player_spawn_friendly": false,
-  "precipitation": "none",
+  "precipitation": "rain",
   "temperature": 0.5,
-  "downfall": 0.0,
+  "downfall": 1.0,
   "category": "forest",
   "depth": 0.1,
   "scale": 0.1

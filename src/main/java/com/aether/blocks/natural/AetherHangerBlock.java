@@ -21,7 +21,6 @@ public class AetherHangerBlock extends PlantBlock {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity) {
             entity.fallDistance = 0;
-            entity.slowMovement(state, new Vec3d(0.99D, 0.9D, 0.99D));
         }
     }
 

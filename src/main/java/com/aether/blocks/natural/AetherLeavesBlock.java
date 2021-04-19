@@ -2,16 +2,19 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.particle.AetherParticles;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
@@ -20,9 +23,11 @@ import java.util.Random;
 public class  AetherLeavesBlock extends LeavesBlock {
 
     private int speed = 0;
+    private final boolean collidable;
 
-    public AetherLeavesBlock(Settings settings) {
+    public AetherLeavesBlock(Settings settings, boolean collidable) {
         super(settings);
+        this.collidable = collidable;
     }
 
     @Override
@@ -35,6 +40,14 @@ public class  AetherLeavesBlock extends LeavesBlock {
         }
         else
             super.randomTick(state, world, pos, random);
+    }
+
+    @Override
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        if (!collidable && entity instanceof LivingEntity) {
+            entity.fallDistance = 0;
+            entity.slowMovement(state, new Vec3d(0.99D, 0.9D, 0.99D));
+        }
     }
 
     public static BlockState getHanger(Block block) {
@@ -81,5 +94,30 @@ public class  AetherLeavesBlock extends LeavesBlock {
             }
         }
         super.randomDisplayTick(state, world, pos, random);
+    }
+
+    @Override
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+        return false;
+    }
+
+    @Override
+    public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
+        return 0.2F;
+    }
+
+    @Override
+    public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
+        return 1;
+    }
+
+    @Override
+    public VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
+        return VoxelShapes.fullCube();
+    }
+
+    @Override
+    public VoxelShape getVisualShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return VoxelShapes.fullCube();
     }
 }
