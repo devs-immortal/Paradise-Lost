@@ -30,7 +30,7 @@ public class AetherHangerBlock extends PlantBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity) {
-            entity.slowMovement(state, new Vec3d(0.800000011920929D, 0.75D, 0.800000011920929D));
+            entity.fallDistance = 0;
         }
     }
 
@@ -42,6 +42,11 @@ public class AetherHangerBlock extends PlantBlock {
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return this.canPlantOnTop(world.getBlockState(pos.up()), world, pos.up());
+    }
+
+    @Override
+    public OffsetType getOffsetType() {
+        return OffsetType.XZ;
     }
 
     @Override
