@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "the_aether:block/cobbled_holystone",
+    "top": "the_aether:block/cobbled_holystone",
+    "side": "the_aether:block/cobbled_holystone"
+  }
+}

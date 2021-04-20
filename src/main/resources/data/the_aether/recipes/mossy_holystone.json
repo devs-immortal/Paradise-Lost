@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "the_aether:holystone"
+      "item": "the_aether:cobbled_holystone"
     },
     {
       "item": "minecraft:vine"
