@@ -31,7 +31,7 @@ public class AetherItems {
     public static final Item VALKYRIE_PICKAXE, VALKYRIE_AXE, VALKYRIE_SHOVEL, VALKYRIE_HOE;
     public static final Item  ZANITE_HELMET, ZANITE_CHESTPLATE, ZANITE_LEGGINGS, ZANITE_BOOTS;
     public static final AetherArmor GRAVITITE_HELMET, GRAVITITE_CHESTPLATE, GRAVITITE_LEGGINGS, GRAVITITE_BOOTS;
-    public static final AetherArmor NEPTUNE_HELMET, NEPTUNE_CHESTPLATE, NEPTUNE_LEGGINGS, NEPTUNE_BOOTS;
+    public static final ArmorItem NEPTUNE_HELMET, NEPTUNE_CHESTPLATE, NEPTUNE_LEGGINGS, NEPTUNE_BOOTS;
     public static final AetherArmor PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
     public static final AetherArmor OBSIDIAN_HELMET, OBSIDIAN_CHESTPLATE, OBSIDIAN_LEGGINGS, OBSIDIAN_BOOTS;
     public static final AetherArmor VALKYRIE_HELMET, VALKYRIE_CHESTPLATE, VALKYRIE_LEGGINGS, VALKYRIE_BOOTS;
@@ -52,7 +52,7 @@ public class AetherItems {
     public static final Item RED_CAPE, BLUE_CAPE, YELLOW_CAPE, WHITE_CAPE, SWET_CAPE, INVISIBILITY_CAPE, AGILITY_CAPE;
     public static final Item GOLDEN_FEATHER, REGENERATION_STONE, IRON_BUBBLE;
     public static final Item LIFE_SHARD;
-    public static final AetherArmor SENTRY_BOOTS/*, LIGHTNING_KNIFE*/;
+    public static final ArmorItem SENTRY_BOOTS/*, LIGHTNING_KNIFE*/;
     //    PUBLIC STATIC ITEM AETHER_TUNE, ASCENDING_DAWN, WELCOMING_SKIES, LEGACY;
 //    PUBLIC STATIC ITEM REPULSION_SHIELD;
     public static final Item LORE_BOOK;
@@ -128,10 +128,10 @@ public class AetherItems {
         GRAVITITE_BOOTS = register("gravitite_boots", new GravititeArmor(AetherArmorType.Gravitite, EquipmentSlot.FEET, GRAVITITE_ARMOR));
 //
         final AetherItemSettings LOOT_ARMOR = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Wearable);
-        NEPTUNE_HELMET = register("neptune_helmet", new NeptuneArmor(AetherArmorType.Neptune, EquipmentSlot.HEAD, LOOT_ARMOR));
-        NEPTUNE_CHESTPLATE = register("neptune_chestplate", new NeptuneArmor(AetherArmorType.Neptune, EquipmentSlot.CHEST, LOOT_ARMOR));
-        NEPTUNE_LEGGINGS = register("neptune_leggings", new NeptuneArmor(AetherArmorType.Neptune, EquipmentSlot.LEGS, LOOT_ARMOR));
-        NEPTUNE_BOOTS = register("neptune_boots", new NeptuneArmor(AetherArmorType.Neptune, EquipmentSlot.FEET, LOOT_ARMOR));
+        NEPTUNE_HELMET = register("neptune_helmet", new ArmorItem(AetherArmorType.Neptune.getMaterial(), EquipmentSlot.HEAD, LOOT_ARMOR));
+        NEPTUNE_CHESTPLATE = register("neptune_chestplate", new ArmorItem(AetherArmorType.Neptune.getMaterial(), EquipmentSlot.CHEST, LOOT_ARMOR));
+        NEPTUNE_LEGGINGS = register("neptune_leggings", new ArmorItem(AetherArmorType.Neptune.getMaterial(), EquipmentSlot.LEGS, LOOT_ARMOR));
+        NEPTUNE_BOOTS = register("neptune_boots", new ArmorItem(AetherArmorType.Neptune.getMaterial(), EquipmentSlot.FEET, LOOT_ARMOR));
 //
         PHOENIX_HELMET = register("phoenix_helmet", new PhoenixArmor(AetherArmorType.Phoenix, EquipmentSlot.HEAD, LOOT_ARMOR));
         PHOENIX_CHESTPLATE = register("phoenix_chestplate", new PhoenixArmor(AetherArmorType.Phoenix, EquipmentSlot.CHEST, LOOT_ARMOR));
@@ -148,7 +148,7 @@ public class AetherItems {
         VALKYRIE_LEGGINGS = register("valkyrie_leggings", new ValkyrieArmor(AetherArmorType.Valkyrie, EquipmentSlot.LEGS, LOOT_ARMOR));
         VALKYRIE_BOOTS = register("valkyrie_boots", new ValkyrieArmor(AetherArmorType.Valkyrie, EquipmentSlot.FEET, LOOT_ARMOR));
 //
-        SENTRY_BOOTS = register("sentry_boots", new AetherArmor("sentry", AetherArmorType.Valkyrie, EquipmentSlot.FEET, new AetherItemSettings().group(AetherItemGroups.Wearable).rarity(AETHER_LOOT)));
+        SENTRY_BOOTS = register("sentry_boots", new ArmorItem(AetherArmorType.Sentry.getMaterial(), EquipmentSlot.FEET, LOOT_ARMOR));
 
         // Food
         AetherItemSettings LOOT_FOOD = new AetherItemSettings().group(AetherItemGroups.Food).rarity(AetherItems.AETHER_LOOT);

@@ -12,7 +12,8 @@ public enum AetherArmorType {
     Neptune(new AetherArmorMaterial("neptune", 35, new int[]{4, 6, 8, 4}, 8, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.5F, Blocks.AIR, 0), 0x2654FF),
     Phoenix(new AetherArmorMaterial("phoenix", 35, new int[]{4, 6, 8, 4}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.5F, Blocks.AIR, 0), 0xFF7700),
     Obsidian(new AetherArmorMaterial("obsidian", 38, new int[]{4, 8, 10, 4}, 6, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, Blocks.AIR, 0), 0x1B1447),
-    Valkyrie(new AetherArmorMaterial("valkyrie", 35, new int[]{4, 8, 10, 4}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.5F, Blocks.AIR, 0), 0xDDDDDD);
+    Valkyrie(new AetherArmorMaterial("valkyrie", 35, new int[]{4, 8, 10, 4}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.5F, Blocks.AIR, 0), 0xDDDDDD),
+    Sentry(new AetherArmorMaterial("sentry", 35, new int[]{4, 8, 10, 4}, 10, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, 1.5F, Blocks.AIR, 0), 0x707070);
 
     private final ArmorMaterial material;
     private final int color;
