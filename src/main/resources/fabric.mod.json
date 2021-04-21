@@ -13,7 +13,8 @@
     "Hugo Payn",
     "JellySquid",
     "Calum Henderson (diabolical17)",
-    "Karanomuro"
+    "Karanomuro",
+    "24Chrome"
   ],
   "contact": {
     "homepage": "https://github.com/devs-immortal/The-Aether#readme",
@@ -26,8 +27,7 @@
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*",
     "fabric-networking-v0": "*",
-    "trinkets": "*",
-    "geckolib3": "*"
+    "trinkets": "*"
   },
   "mixins": [
     "the_aether.mixins.json"

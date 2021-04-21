@@ -1,5 +1,6 @@
 package com.aether.mixin.client.render.entity.feature;
 
+import net.fabricmc.fabric.impl.client.rendering.ArmorRenderingRegistryImpl;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -9,7 +10,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import software.bernie.geckolib3.ArmorRenderingRegistryImpl;
 
 @Mixin(ArmorRenderingRegistryImpl.class)
 public class FixFAPICrash {

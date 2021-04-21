@@ -2,6 +2,7 @@ package com.aether.items;
 
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
+import com.aether.client.model.armor.PhoenixArmorModel;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.items.accessories.AccessoryType;
 import com.aether.items.accessories.ItemAccessory;
@@ -14,10 +15,12 @@ import com.aether.items.tools.*;
 import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderingRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
@@ -30,11 +33,11 @@ public class AetherItems {
     public static final Item GRAVITITE_PICKAXE, GRAVITITE_AXE, GRAVITITE_SHOVEL, GRAVITITE_SWORD, GRAVITITE_HOE;
     public static final Item VALKYRIE_PICKAXE, VALKYRIE_AXE, VALKYRIE_SHOVEL, VALKYRIE_HOE;
     public static final Item  ZANITE_HELMET, ZANITE_CHESTPLATE, ZANITE_LEGGINGS, ZANITE_BOOTS;
-    public static final AetherArmor GRAVITITE_HELMET, GRAVITITE_CHESTPLATE, GRAVITITE_LEGGINGS, GRAVITITE_BOOTS;
+    public static final ArmorItem GRAVITITE_HELMET, GRAVITITE_CHESTPLATE, GRAVITITE_LEGGINGS, GRAVITITE_BOOTS;
     public static final ArmorItem NEPTUNE_HELMET, NEPTUNE_CHESTPLATE, NEPTUNE_LEGGINGS, NEPTUNE_BOOTS;
-    public static final AetherArmor PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
-    public static final AetherArmor OBSIDIAN_HELMET, OBSIDIAN_CHESTPLATE, OBSIDIAN_LEGGINGS, OBSIDIAN_BOOTS;
-    public static final AetherArmor VALKYRIE_HELMET, VALKYRIE_CHESTPLATE, VALKYRIE_LEGGINGS, VALKYRIE_BOOTS;
+    public static final ArmorItem PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
+    public static final ArmorItem OBSIDIAN_HELMET, OBSIDIAN_CHESTPLATE, OBSIDIAN_LEGGINGS, OBSIDIAN_BOOTS;
+    public static final ArmorItem VALKYRIE_HELMET, VALKYRIE_CHESTPLATE, VALKYRIE_LEGGINGS, VALKYRIE_BOOTS;
     public static final Item BLUEBERRY, ENCHANTED_BLUEBERRY, BLUE_GUMMY_SWET, GOLDEN_GUMMY_SWET, HEALING_STONE, AETHER_MILK, WHITE_APPLE, GINGERBREAD_MAN, CANDY_CANE;
     public static final Item SKYROOT_BUCKET, SKYROOT_WATER_BUCKET, SKYROOT_POISON_BUCKET, SKYROOT_REMEDY_BUCKET, SKYROOT_MILK_BUCKET;
     public static final Item CLOUD_PARACHUTE, GOLDEN_CLOUD_PARACHUTE;
@@ -122,10 +125,10 @@ public class AetherItems {
         ZANITE_BOOTS = register("zanite_boots", new ArmorItem(AetherArmorType.Zanite.getMaterial(), EquipmentSlot.FEET, ARMOR));
 //
         final AetherItemSettings GRAVITITE_ARMOR = new AetherItemSettings().group(AetherItemGroups.Wearable).rarity(Rarity.RARE);
-        GRAVITITE_HELMET = register("gravitite_helmet", new GravititeArmor(AetherArmorType.Gravitite, EquipmentSlot.HEAD, GRAVITITE_ARMOR));
-        GRAVITITE_CHESTPLATE = register("gravitite_chestplate", new GravititeArmor(AetherArmorType.Gravitite, EquipmentSlot.CHEST, GRAVITITE_ARMOR));
-        GRAVITITE_LEGGINGS = register("gravitite_leggings", new GravititeArmor(AetherArmorType.Gravitite, EquipmentSlot.LEGS, GRAVITITE_ARMOR));
-        GRAVITITE_BOOTS = register("gravitite_boots", new GravititeArmor(AetherArmorType.Gravitite, EquipmentSlot.FEET, GRAVITITE_ARMOR));
+        GRAVITITE_HELMET = register("gravitite_helmet", new ArmorItem(AetherArmorType.Gravitite.getMaterial(), EquipmentSlot.HEAD, GRAVITITE_ARMOR));
+        GRAVITITE_CHESTPLATE = register("gravitite_chestplate", new ArmorItem(AetherArmorType.Gravitite.getMaterial(), EquipmentSlot.CHEST, GRAVITITE_ARMOR));
+        GRAVITITE_LEGGINGS = register("gravitite_leggings", new ArmorItem(AetherArmorType.Gravitite.getMaterial(), EquipmentSlot.LEGS, GRAVITITE_ARMOR));
+        GRAVITITE_BOOTS = register("gravitite_boots", new ArmorItem(AetherArmorType.Gravitite.getMaterial(), EquipmentSlot.FEET, GRAVITITE_ARMOR));
 //
         final AetherItemSettings LOOT_ARMOR = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Wearable);
         NEPTUNE_HELMET = register("neptune_helmet", new ArmorItem(AetherArmorType.Neptune.getMaterial(), EquipmentSlot.HEAD, LOOT_ARMOR));
@@ -133,20 +136,20 @@ public class AetherItems {
         NEPTUNE_LEGGINGS = register("neptune_leggings", new ArmorItem(AetherArmorType.Neptune.getMaterial(), EquipmentSlot.LEGS, LOOT_ARMOR));
         NEPTUNE_BOOTS = register("neptune_boots", new ArmorItem(AetherArmorType.Neptune.getMaterial(), EquipmentSlot.FEET, LOOT_ARMOR));
 //
-        PHOENIX_HELMET = register("phoenix_helmet", new PhoenixArmor(AetherArmorType.Phoenix, EquipmentSlot.HEAD, LOOT_ARMOR));
-        PHOENIX_CHESTPLATE = register("phoenix_chestplate", new PhoenixArmor(AetherArmorType.Phoenix, EquipmentSlot.CHEST, LOOT_ARMOR));
-        PHOENIX_LEGGINGS = register("phoenix_leggings", new PhoenixArmor(AetherArmorType.Phoenix, EquipmentSlot.LEGS, LOOT_ARMOR));
-        PHOENIX_BOOTS = register("phoenix_boots", new PhoenixArmor(AetherArmorType.Phoenix, EquipmentSlot.FEET, LOOT_ARMOR));
+        PHOENIX_HELMET = register("phoenix_helmet", new ArmorItem(AetherArmorType.Phoenix.getMaterial(), EquipmentSlot.HEAD, LOOT_ARMOR));
+        PHOENIX_CHESTPLATE = register("phoenix_chestplate", new ArmorItem(AetherArmorType.Phoenix.getMaterial(), EquipmentSlot.CHEST, LOOT_ARMOR));
+        PHOENIX_LEGGINGS = register("phoenix_leggings", new ArmorItem(AetherArmorType.Phoenix.getMaterial(), EquipmentSlot.LEGS, LOOT_ARMOR));
+        PHOENIX_BOOTS = register("phoenix_boots", new ArmorItem(AetherArmorType.Phoenix.getMaterial(), EquipmentSlot.FEET, LOOT_ARMOR));
 //
-        OBSIDIAN_HELMET = register("obsidian_helmet", new ObsidianArmor(AetherArmorType.Obsidian, EquipmentSlot.HEAD, LOOT_ARMOR));
-        OBSIDIAN_CHESTPLATE = register("obsidian_chestplate", new ObsidianArmor(AetherArmorType.Obsidian, EquipmentSlot.CHEST, LOOT_ARMOR));
-        OBSIDIAN_LEGGINGS = register("obsidian_leggings", new ObsidianArmor(AetherArmorType.Obsidian, EquipmentSlot.LEGS, LOOT_ARMOR));
-        OBSIDIAN_BOOTS = register("obsidian_boots", new ObsidianArmor(AetherArmorType.Obsidian, EquipmentSlot.FEET, LOOT_ARMOR));
+        OBSIDIAN_HELMET = register("obsidian_helmet", new ArmorItem(AetherArmorType.Obsidian.getMaterial(), EquipmentSlot.HEAD, LOOT_ARMOR));
+        OBSIDIAN_CHESTPLATE = register("obsidian_chestplate", new ArmorItem(AetherArmorType.Obsidian.getMaterial(), EquipmentSlot.CHEST, LOOT_ARMOR));
+        OBSIDIAN_LEGGINGS = register("obsidian_leggings", new ArmorItem(AetherArmorType.Obsidian.getMaterial(), EquipmentSlot.LEGS, LOOT_ARMOR));
+        OBSIDIAN_BOOTS = register("obsidian_boots", new ArmorItem(AetherArmorType.Obsidian.getMaterial(), EquipmentSlot.FEET, LOOT_ARMOR));
 //
-        VALKYRIE_HELMET = register("valkyrie_helmet", new ValkyrieArmor(AetherArmorType.Valkyrie, EquipmentSlot.HEAD, LOOT_ARMOR));
-        VALKYRIE_CHESTPLATE = register("valkyrie_chestplate", new ValkyrieArmor(AetherArmorType.Valkyrie, EquipmentSlot.CHEST, LOOT_ARMOR));
-        VALKYRIE_LEGGINGS = register("valkyrie_leggings", new ValkyrieArmor(AetherArmorType.Valkyrie, EquipmentSlot.LEGS, LOOT_ARMOR));
-        VALKYRIE_BOOTS = register("valkyrie_boots", new ValkyrieArmor(AetherArmorType.Valkyrie, EquipmentSlot.FEET, LOOT_ARMOR));
+        VALKYRIE_HELMET = register("valkyrie_helmet", new ArmorItem(AetherArmorType.Valkyrie.getMaterial(), EquipmentSlot.HEAD, LOOT_ARMOR));
+        VALKYRIE_CHESTPLATE = register("valkyrie_chestplate", new ArmorItem(AetherArmorType.Valkyrie.getMaterial(), EquipmentSlot.CHEST, LOOT_ARMOR));
+        VALKYRIE_LEGGINGS = register("valkyrie_leggings", new ArmorItem(AetherArmorType.Valkyrie.getMaterial(), EquipmentSlot.LEGS, LOOT_ARMOR));
+        VALKYRIE_BOOTS = register("valkyrie_boots", new ArmorItem(AetherArmorType.Valkyrie.getMaterial(), EquipmentSlot.FEET, LOOT_ARMOR));
 //
         SENTRY_BOOTS = register("sentry_boots", new ArmorItem(AetherArmorType.Sentry.getMaterial(), EquipmentSlot.FEET, LOOT_ARMOR));
 
@@ -261,8 +264,13 @@ public class AetherItems {
         return Registry.register(Registry.ITEM, Aether.locate(id), item);
     }
 
-    public static void init() {
 
+    static {
+        ArmorRenderingRegistry.registerModel((entity, stack, slot, defaultModel) -> new PhoenixArmorModel(1), PHOENIX_HELMET);
+        ArmorRenderingRegistry.registerTexture((entity, stack, slot, secondLayer, suffix, defaultTexture) -> new Identifier("minecraft", "textures/models/armor/phoenix_layer_1.png"), PHOENIX_HELMET);
+    }
+
+    public static void init() {
     }
 
     public static void initClient() {

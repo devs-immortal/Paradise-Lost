@@ -1,24 +1,17 @@
 package com.aether.client.model.armor;
 
-import com.aether.Aether;
-import com.aether.items.armor.AetherArmor;
-import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.LivingEntity;
 
-public class PhoenixArmorModel extends AnimatedGeoModel<AetherArmor> {
+public class PhoenixArmorModel extends BipedEntityModel<LivingEntity> {
+    public ModelPart beak;
 
-    @Override
-    public Identifier getModelLocation(AetherArmor object) {
-        return Aether.locate("geo/phoenix_armor/phoenix_armor.geo.json");
+
+    public PhoenixArmorModel(float scale) {
+        super(scale);
+        this.head.setTextureOffset(24, 0).addCuboid(-2.0F, -5.125F, -7.125F, 4.0F, 1.0F, 2.0F, 0.5F, 0.125F, 0.125F);
     }
 
-    @Override
-    public Identifier getTextureLocation(AetherArmor object) {
-        return Aether.locate("textures/models/armor/phoenix_armor.png");
-    }
 
-    @Override
-    public Identifier getAnimationFileLocation(AetherArmor animatable) {
-        return Aether.locate("animations/phoenix_armor/phoenix_armor.animation");
-    }
 }
