@@ -264,16 +264,11 @@ public class AetherItems {
         return Registry.register(Registry.ITEM, Aether.locate(id), item);
     }
 
-
-    static {
-        ArmorRenderingRegistry.registerModel((entity, stack, slot, defaultModel) -> new PhoenixArmorModel(1), PHOENIX_HELMET);
-        ArmorRenderingRegistry.registerTexture((entity, stack, slot, secondLayer, suffix, defaultTexture) -> new Identifier("minecraft", "textures/models/armor/phoenix_layer_1.png"), PHOENIX_HELMET);
-    }
-
     public static void init() {
+        // Empty void. Eternal emptiness
     }
 
     public static void initClient() {
-        // Empty void. Eternal emptiness
+
     }
 }

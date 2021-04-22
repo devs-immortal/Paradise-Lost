@@ -1,6 +1,7 @@
 package com.aether;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.client.model.AetherArmorModels;
 import com.aether.client.rendering.block.AetherColorProvs;
 import com.aether.client.rendering.entity.AetherEntityRenderers;
 import com.aether.client.rendering.particle.AetherParticles;
@@ -51,6 +52,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public void onInitializeClient() {
         CrowdinTranslate.downloadTranslations("aether", MOD_ID);
         AetherItems.initClient();
+        AetherArmorModels.registerArmorModels();
         AetherColorProvs.initClient();
         AetherEntityRenderers.initClient();
         AetherBlocks.initClient();
