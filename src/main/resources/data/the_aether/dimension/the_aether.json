@@ -5,44 +5,44 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "the_aether:aether_highlands_thicket",
-          "parameters": {
-            "altitude": 0.1,
-            "weirdness": 0.2,
-            "offset": 0.0,
-            "temperature": 0.0,
-            "humidity": -0.1
-          }
-        },
-        {
-          "biome": "the_aether:aether_highlands",
           "parameters": {
             "altitude": 0.0,
-            "weirdness": 0.1,
+            "weirdness": 0.0,
             "offset": 0.0,
             "temperature": 0.0,
             "humidity": 0.0
-          }
+          },
+          "biome": "the_aether:aether_highlands"
         },
         {
-          "biome": "the_aether:aether_wisteria_woods",
           "parameters": {
-            "altitude": -0.1,
-            "weirdness": 0.1,
-            "offset": -0.15,
-            "temperature": 0.2,
-            "humidity": -0.1
-          }
-        },
-        {
-          "biome": "the_aether:aether_highlands_forest",
-          "parameters": {
-            "altitude": 0.1,
-            "weirdness": 0.1,
+            "altitude": 0.0,
+            "weirdness": 0.0,
             "offset": 0.0,
             "temperature": 0.0,
-            "humidity": -0.05
-          }
+            "humidity": -0.5
+          },
+          "biome": "the_aether:aether_highlands_thicket"
+        },
+        {
+          "parameters": {
+            "altitude": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0,
+            "temperature": 0.4,
+            "humidity": 0.0
+          },
+          "biome": "the_aether:aether_highlands_forest"
+        },
+        {
+          "parameters": {
+            "altitude": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.125,
+            "temperature": 0.0,
+            "humidity": 0.5
+          },
+          "biome": "the_aether:aether_wisteria_woods"
         }
       ],
       "altitude_noise": {

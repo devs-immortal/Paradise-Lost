@@ -15,7 +15,7 @@ public class CrystalTreeIslandDecorator extends SimpleDecorator<NopeDecoratorCon
 
     public Stream<BlockPos> getPositions(Random random, NopeDecoratorConfig nopeDecoratorConfig, BlockPos blockPos) {
         Stream<BlockPos> stream = Stream.empty();
-        if (random.nextInt(90) == 0) {
+        if (random.nextInt(300) == 0) {
             return Stream.concat(stream, Stream.of(blockPos.add(random.nextInt(16), 55 + random.nextInt(16), random.nextInt(16))));
         } else {
             return Stream.empty();

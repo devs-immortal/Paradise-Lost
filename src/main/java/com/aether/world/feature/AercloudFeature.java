@@ -4,6 +4,7 @@ import com.aether.world.feature.config.AercloudConfig;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.StructureWorldAccess;
@@ -30,7 +31,6 @@ public class AercloudFeature extends Feature<AercloudConfig> {
 
     @Override
     public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos core, AercloudConfig config) {
-        int radius = (random.nextInt((int) (config.maxRadius / 1.5)) + config.maxRadius / 4) + 1;
         return (createCloudBlob(world, config.state, random, core, 3, 10) || createCloudBlob(world, config.state, random, core.north(3).east(), 3, 8));
     }
 
@@ -55,7 +55,9 @@ public class AercloudFeature extends Feature<AercloudConfig> {
                 for (int x = center.getX() - stuffsize; x <= center.getX() + stuffsize; x++) {
                     for (int y = center.getY() - Math.round(stuffsize*0.7f); y <= center.getY() + Math.round(stuffsize*0.7f); y++) {
                         if (!((x == center.getX() - stuffsize || x == center.getX() + stuffsize) && (y == center.getY() - stuffsize + 1 || y == center.getY() + stuffsize - 1))) {
-                            world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
+                            if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).getBlock().is(Blocks.AIR)) {
+                                world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
+                            }
                         }
                     }
                 }

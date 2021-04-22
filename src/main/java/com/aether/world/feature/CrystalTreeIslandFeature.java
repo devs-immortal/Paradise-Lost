@@ -23,6 +23,17 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
     }
 
     public boolean generate(StructureWorldAccess structureWorldAccess, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, DefaultFeatureConfig defaultFeatureConfig) {
+        int checkSize = 4;
+        for(int x = -checkSize; x >= checkSize; x++) {
+            for(int y = -5; y >= 8; y++) {
+                for(int z = -checkSize; z >= checkSize; z++) {
+                    if (!structureWorldAccess.getBlockState(blockPos.add(x,y,z)).getBlock().is(Blocks.AIR)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
         float f = (float)(random.nextInt(3) + 3);
 
         for(int y = 0; f > 0.5F; --y) {
@@ -57,6 +68,7 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
             this.generateTreeCircle(structureWorldAccess, random, blockPos.up(y), leafRadii[y-1], AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
             this.setBlockState(structureWorldAccess, blockPos.up(y), AetherBlocks.CRYSTAL_LOG.getDefaultState());
         }
+
         this.setBlockState(structureWorldAccess, blockPos.up(9), AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
 
         return true;
@@ -67,7 +79,9 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 if (!(Math.abs(x) == radius && Math.abs(z) == radius) || (x == 0 && z == 0)) {
-                    this.setBlockState(structureWorldAccess, blockPos.add(x, 0, z), AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
+                    if (structureWorldAccess.getBlockState(blockPos.add(x, 0, z)).getBlock().is(Blocks.AIR)) {
+                        this.setBlockState(structureWorldAccess, blockPos.add(x, 0, z), AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
+                    }
                 }
             }
         }
