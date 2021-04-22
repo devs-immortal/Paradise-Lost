@@ -274,9 +274,4 @@ public class AerbunnyEntity extends AetherAnimalEntity {
         }
     }
 
-    @Override
-    public Identifier getLootTableId() {
-        return null;//AetherLootTableList.ENTITIES_AERBUNNY;
-    }
-
 }
