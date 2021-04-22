@@ -378,12 +378,13 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
         if ((!blockState.isToolRequired() || item.isEffectiveOn(blockState)) && FallingBlock.canFallThrough(world.getBlockState(blockPos.up()))) {
+            PlayerEntity playerEntity = context.getPlayer();
             if (!world.isClient) {
                 FloatingBlockEntity floatingblockentity = new FloatingBlockEntity(world, blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5, world.getBlockState(blockPos));
                 world.spawnEntity(floatingblockentity);
+            } else {
+                world.playSound(playerEntity, blockPos, blockState.getBlock().getSoundGroup(blockState).getBreakSound(), SoundCategory.BLOCKS, 1.0F, 0.75F);
             }
-            PlayerEntity playerEntity = context.getPlayer();
-            world.playSound(playerEntity, blockPos, blockState.getBlock().getSoundGroup(blockState).getBreakSound(), SoundCategory.BLOCKS, 1.0F, 0.75F);
             if (playerEntity != null) {
                 context.getStack().damage(1, playerEntity, (p) -> {
                     p.sendToolBreakStatus(context.getHand());
