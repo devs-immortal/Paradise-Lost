@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "tip=false": {
       "model": "the_aether:block/lavender_wisteria_hanger"
+    },
+    "tip=true": {
+      "model": "the_aether:block/lavender_wisteria_hanger_plant"
     }
   }
 }

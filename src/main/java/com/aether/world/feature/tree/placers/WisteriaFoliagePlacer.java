@@ -27,6 +27,8 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import java.util.Random;
 import java.util.Set;
 
+import static com.aether.blocks.natural.AetherHangerBlock.TIP;
+
 public class WisteriaFoliagePlacer extends FoliagePlacer {
 
     public static final Codec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
@@ -53,11 +55,9 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
         BlockPos altNodePos = nodePos.add(0, 1, 0);
         BlockState leafBlock = config.leavesProvider.getBlockState(random, nodePos);
         BlockState hanger = Blocks.AIR.getDefaultState();
-        BlockState hangerTip = Blocks.AIR.getDefaultState();
 
         if(leafBlock.getBlock() instanceof AetherLeavesBlock) {
             hanger = AetherLeavesBlock.getHanger(leafBlock.getBlock());
-            hangerTip = AetherLeavesBlock.getHangerTip(leafBlock.getBlock());
         }
 
         for(int i = -radius; i <= radius; i++) {
@@ -91,9 +91,9 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
                                 if(k <= lonke)
                                     world.setBlockState(hangPos, leafBlock, 19);
                                 else if(k == cap - 1)
-                                    world.setBlockState(hangPos, hangerTip, 19);
+                                    world.setBlockState(hangPos, hanger.with(TIP, true), 19);
                                 else
-                                    world.setBlockState(hangPos, hanger, 19);
+                                    world.setBlockState(hangPos, hanger.with(TIP, false), 19);
                             }
                             else
                                 break;

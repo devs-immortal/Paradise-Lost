@@ -50,8 +50,6 @@ public class AetherBlocks {
     public static final Block ANGELIC_CRACKED_STONE;
 //    public static final Block ANGELIC_STONE_TRAP;
     public static final Block ANGELIC_WALL;
-    //    public static final Block BERRY_BUSH;
-//    public static final Block BERRY_BUSH_STEM;
 //    public static final Block BLACK_DYED_AERCLOUD;
     public static final Block BLUE_AERCLOUD;
     //    public static final Block BLUE_DYED_AERCLOUD;
@@ -158,10 +156,8 @@ public class AetherBlocks {
     public static final Block SKYROOT_DOOR;
     public static final Block SKYROOT_FENCE;
     public static final Block SKYROOT_FENCE_GATE;
-    //    public static final Block SKYROOT_LEAVES;
     public static final Block SKYROOT_LOG;
     public static final Block SKYROOT_PLANKS;
-    //    public static final Block SKYROOT_SAPLING;
     public static final Block SKYROOT_SLAB;
     public static final Block SKYROOT_STAIRS;
     public static final Block SKYROOT_SAPLING;
@@ -194,31 +190,26 @@ public class AetherBlocks {
     public static final Block CRYSTAL_STAIRS;
     public static final Block CRYSTAL_DOOR;
     public static final Block CRYSTAL_TRAPDOOR;
-    //    public static final Block SKYROOT_WOOD;
-//    public static final Block STRIPPED_SKYROOT_LOG;
+//    public static final Block SKYROOT_WOOD;
 //    public static final Block STRIPPED_SKYROOT_WOOD;
 //    public static final Block SUN_ALTAR;
 //    public static final Block TREASURE_CHEST;
 //    public static final Block WHITE_DYED_AERCLOUD;
-//    public static final Block WHITE_FLOWER;
     public static final Block ROSE_WISTERIA_LEAVES;
     public static final Block ROSE_WISTERIA_LEAF_PILE;
     public static final Block ROSE_WISTERIA_SAPLING;
     public static final Block POTTED_ROSE_WISTERIA_SAPLING;
     public static final Block ROSE_WISTERIA_HANGER;
-    public static final Block ROSE_WISTERIA_HANGER_PLANT;
     public static final Block FROST_WISTERIA_LEAVES;
     public static final Block FROST_WISTERIA_LEAF_PILE;
     public static final Block FROST_WISTERIA_SAPLING;
     public static final Block POTTED_FROST_WISTERIA_SAPLING;
     public static final Block FROST_WISTERIA_HANGER;
-    public static final Block FROST_WISTERIA_HANGER_PLANT;
     public static final Block LAVENDER_WISTERIA_LEAVES;
     public static final Block LAVENDER_WISTERIA_LEAF_PILE;
     public static final Block LAVENDER_WISTERIA_SAPLING;
     public static final Block POTTED_LAVENDER_WISTERIA_SAPLING;
     public static final Block LAVENDER_WISTERIA_HANGER;
-    public static final Block LAVENDER_WISTERIA_HANGER_PLANT;
     public static final Block WISTERIA_LOG;
     public static final Block STRIPPED_WISTERIA_LOG;
     public static final Block WISTERIA_PLANKS;
@@ -300,7 +291,6 @@ public class AetherBlocks {
 //        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
         ANGELIC_WALL = register("angelic_wall", new AetherWallBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(AetherBlocks::canSpawnOnLeaves).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never).collidable(false)), buildingBlock());
-//        BERRY_BUSH_STEM = register("berry_bush_stem", null);
 //        BLACK_DYED_AERCLOUD = register("black_dyed_aercloud", null);
 //        BLUE_DYED_AERCLOUD = register("blue_dyed_aercloud", null);
 //        BROWN_DYED_AERCLOUD = register("brown_dyed_aercloud", null);
@@ -461,7 +451,6 @@ public class AetherBlocks {
         ROSE_WISTERIA_SAPLING = register("rose_wisteria_sapling", new AetherSaplingBlock(new RoseWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
         POTTED_ROSE_WISTERIA_SAPLING = register("potted_rose_wisteria_sapling", createPottedBlock(ROSE_WISTERIA_SAPLING));
         ROSE_WISTERIA_HANGER = register("rose_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA).noCollision().breakInstantly()), buildingBlock());
-        ROSE_WISTERIA_HANGER_PLANT = register("rose_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA).noCollision().breakInstantly()), buildingBlock());
 
         final Block.Settings FROST_WISTERIA = FabricBlockSettings.of(Material.LEAVES, MaterialColor.LIGHT_BLUE).noCollision().strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
         FROST_WISTERIA_LEAVES = register("frost_wisteria_leaves", new AetherLeavesBlock(FROST_WISTERIA, false), buildingBlock());
@@ -469,7 +458,6 @@ public class AetherBlocks {
         FROST_WISTERIA_SAPLING = register("frost_wisteria_sapling", new AetherSaplingBlock(new FrostWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
         POTTED_FROST_WISTERIA_SAPLING = register("potted_frost_wisteria_sapling", createPottedBlock(FROST_WISTERIA_SAPLING));
         FROST_WISTERIA_HANGER = register("frost_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(FROST_WISTERIA).noCollision().breakInstantly()), buildingBlock());
-        FROST_WISTERIA_HANGER_PLANT = register("frost_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(FROST_WISTERIA).noCollision().breakInstantly()), buildingBlock());
 
         final Block.Settings LAVENDER_WISTERIA = FabricBlockSettings.of(Material.LEAVES, MaterialColor.MAGENTA).noCollision().strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
         LAVENDER_WISTERIA_LEAVES = register("lavender_wisteria_leaves", new AetherLeavesBlock(LAVENDER_WISTERIA, false), buildingBlock());
@@ -477,7 +465,6 @@ public class AetherBlocks {
         LAVENDER_WISTERIA_SAPLING = register("lavender_wisteria_sapling", new AetherSaplingBlock(new LavenderWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
         POTTED_LAVENDER_WISTERIA_SAPLING = register("potted_lavender_wisteria_sapling", createPottedBlock(LAVENDER_WISTERIA_SAPLING));
         LAVENDER_WISTERIA_HANGER = register("lavender_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(LAVENDER_WISTERIA).noCollision().breakInstantly()), buildingBlock());
-        LAVENDER_WISTERIA_HANGER_PLANT = register("lavender_wisteria_hanger_plant", new AetherHangerBlock(FabricBlockSettings.copyOf(LAVENDER_WISTERIA).noCollision().breakInstantly()), buildingBlock());
 
         final Block.Settings WISTERIA_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.YELLOW).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
         WISTERIA_PLANKS = register("wisteria_planks", new Block(WISTERIA_WOOD), buildingBlock());
@@ -506,6 +493,79 @@ public class AetherBlocks {
 
     }
 
+    static {
+        // Logs
+        for (Block block : new Block[]{
+                SKYROOT_LOG,
+                STRIPPED_SKYROOT_LOG,
+                GOLDEN_OAK_LOG,
+                STRIPPED_GOLDEN_OAK_LOG,
+                CRYSTAL_LOG,
+                STRIPPED_CRYSTAL_LOG,
+                WISTERIA_LOG,
+                STRIPPED_WISTERIA_LOG
+        }) {
+            registerFlammable(block, 5, 5);
+        }
+        // Plank stuff
+        for (Block block : new Block[]{
+                SKYROOT_PLANKS,
+                SKYROOT_SLAB,
+                SKYROOT_FENCE_GATE,
+                SKYROOT_FENCE,
+                SKYROOT_STAIRS,
+                GOLDEN_OAK_PLANKS,
+                GOLDEN_OAK_SLAB,
+                GOLDEN_OAK_FENCE_GATE,
+                GOLDEN_OAK_FENCE,
+                GOLDEN_OAK_STAIRS,
+                CRYSTAL_PLANKS,
+                CRYSTAL_SLAB,
+                CRYSTAL_FENCE_GATE,
+                CRYSTAL_FENCE,
+                CRYSTAL_STAIRS,
+                WISTERIA_PLANKS,
+                WISTERIA_SLAB,
+                WISTERIA_FENCE_GATE,
+                WISTERIA_FENCE,
+                WISTERIA_STAIRS
+        }) {
+            registerFlammable(block, 20, 5);
+        }
+        // Leaves and leaf stuff
+        for (Block block : new Block[]{
+                SKYROOT_LEAVES,
+                GOLDEN_OAK_LEAVES,
+                CRYSTAL_LEAVES,
+                ROSE_WISTERIA_LEAVES,
+                FROST_WISTERIA_LEAVES,
+                LAVENDER_WISTERIA_LEAVES,
+                SKYROOT_LEAF_PILE,
+                ROSE_WISTERIA_LEAF_PILE,
+                ROSE_WISTERIA_HANGER,
+                FROST_WISTERIA_LEAF_PILE,
+                FROST_WISTERIA_HANGER,
+                LAVENDER_WISTERIA_LEAF_PILE,
+                LAVENDER_WISTERIA_HANGER
+        }) {
+            registerFlammable(block, 60, 30);
+        }
+        // Grass
+        for (Block block : new Block[]{
+                AETHER_GRASS,
+                AETHER_TALL_GRASS,
+                AETHER_FERN,
+                AETHER_BUSH,
+                FLUTEGRASS,
+                BLUEBERRY_BUSH
+        }) {
+            registerFlammable(block, 100, 60);
+        }
+        // Misc
+        registerFlammable(SKYROOT_BOOKSHELF, 20, 30);
+
+    }
+
     private static Item.Settings buildingBlock() {
         return new FabricItemSettings().group(AetherItemGroups.Blocks);
     }
@@ -514,9 +574,8 @@ public class AetherBlocks {
         return register(id, block, true, settings);
     }
 
-    private static Block register(String id, Block block, Item.Settings settings, int burn, int spread) {
-        FlammableBlockRegistry.getDefaultInstance().add(block, burn, spread);
-        return register(id, block, true, settings);
+    private static void registerFlammable(Block block, int flammability, int encouragement) {
+        FlammableBlockRegistry.getDefaultInstance().add(block, flammability, encouragement);
     }
 
     private static Block register(String id, Block block, boolean registerAsBlockItem, Item.Settings settings) {
@@ -596,8 +655,8 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(FROST_WISTERIA_LEAF_PILE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(FROST_WISTERIA_LEAVES, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ROSE_WISTERIA_HANGER, ROSE_WISTERIA_HANGER_PLANT, LAVENDER_WISTERIA_HANGER, LAVENDER_WISTERIA_HANGER_PLANT, FROST_WISTERIA_HANGER, FROST_WISTERIA_HANGER_PLANT);
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), ROSE_WISTERIA_HANGER, ROSE_WISTERIA_HANGER_PLANT, LAVENDER_WISTERIA_HANGER, LAVENDER_WISTERIA_HANGER_PLANT, FROST_WISTERIA_HANGER, FROST_WISTERIA_HANGER_PLANT);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ROSE_WISTERIA_HANGER, LAVENDER_WISTERIA_HANGER, FROST_WISTERIA_HANGER);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), ROSE_WISTERIA_HANGER, LAVENDER_WISTERIA_HANGER, FROST_WISTERIA_HANGER);
         BlockRenderLayerMap.INSTANCE.putBlock(LAVENDER_WISTERIA_LEAF_PILE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(LAVENDER_WISTERIA_LEAVES, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), SKYROOT_SAPLING, GOLDEN_OAK_SAPLING, CRYSTAL_SAPLING, ROSE_WISTERIA_SAPLING, LAVENDER_WISTERIA_SAPLING, FROST_WISTERIA_SAPLING);

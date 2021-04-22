@@ -60,16 +60,6 @@ public class  AetherLeavesBlock extends LeavesBlock {
         return Blocks.AIR.getDefaultState();
     }
 
-    public static BlockState getHangerTip(Block block) {
-        if(block.is(AetherBlocks.ROSE_WISTERIA_LEAVES))
-            return AetherBlocks.ROSE_WISTERIA_HANGER_PLANT.getDefaultState();
-        else if(block.is(AetherBlocks.LAVENDER_WISTERIA_LEAVES))
-            return AetherBlocks.LAVENDER_WISTERIA_HANGER_PLANT.getDefaultState();
-        else if(block.is(AetherBlocks.FROST_WISTERIA_LEAVES))
-            return AetherBlocks.FROST_WISTERIA_HANGER_PLANT.getDefaultState();
-        return Blocks.AIR.getDefaultState();
-    }
-
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (state.isOf(AetherBlocks.GOLDEN_OAK_LEAVES) && random.nextInt(75) == 0) {
