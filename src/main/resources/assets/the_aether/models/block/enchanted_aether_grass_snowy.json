@@ -1,9 +1,9 @@
 {
-  "parent": "the_aether:block/base_multi_texture",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "particle": "the_aether:block/aether_dirt",
-    "bottom": "the_aether:block/aether_dirt",
     "top": "the_aether:block/enchanted_aether_grass_top",
-    "side": "the_aether:block/aether_grass_side_snowy"
+    "bottom": "the_aether:block/aether_dirt",
+    "side": "the_aether:block/aether_grass_side_snowy",
+    "particle": "the_aether:block/aether_dirt"
   }
 }
