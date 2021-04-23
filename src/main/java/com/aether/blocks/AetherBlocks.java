@@ -33,9 +33,6 @@ import net.minecraft.world.BlockView;
 
 public class AetherBlocks {
     public static final Block AEROGEL;
-    public static final Block AEROGEL_SLAB;
-    public static final Block AEROGEL_STAIRS;
-    public static final Block AEROGEL_WALL;
     public static final Block AETHER_DIRT;
     public static final Block AETHER_ENCHANTED_GRASS;
     public static final Block AETHER_FARMLAND;
@@ -274,9 +271,6 @@ public class AetherBlocks {
         GOLDEN_MOSSY_HOLYSTONE = register("golden_mossy_holystone", new Block(FabricBlockSettings.of(Material.STONE).requiresTool().strength(2.0F, 6.0F).materialColor(MaterialColor.WHITE)), buildingBlock());
         ZANITE_ORE = register("zanite_ore", new OreBlock(FabricBlockSettings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), buildingBlock());
         AEROGEL = register("aerogel", new Block(FabricBlockSettings.of(Material.SOIL).strength(1.0f, 2000.0f).sounds(BlockSoundGroup.GLASS).solidBlock(AetherBlocks::never).nonOpaque()), buildingBlock());
-        AEROGEL_SLAB = register("aerogel_slab", new AetherSlabBlock(AEROGEL.getDefaultState()), buildingBlock());
-        AEROGEL_STAIRS = register("aerogel_stairs", new AetherStairsBlock(AEROGEL.getDefaultState()), buildingBlock());
-        AEROGEL_WALL = register("aerogel_wall", new AetherWallBlock(AEROGEL.getDefaultState()), buildingBlock());
         AETHER_FARMLAND = register("aether_farmland", new AetherFarmlandBlock(FabricBlockSettings.of(Material.SOIL).ticksRandomly().strength(0.6f).sounds(BlockSoundGroup.GRAVEL).blockVision(AetherBlocks::always).suffocates(AetherBlocks::always)), buildingBlock());
         AETHER_DIRT_PATH = register("aether_grass_path", new AetherDirtPathBlock(), buildingBlock());
         AMBROSIUM_TORCH = register("ambrosium_torch",  new AmbrosiumTorchBlock(), false, buildingBlock());
@@ -642,9 +636,6 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_SLAB, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_STAIRS, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_WALL, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH_WALL, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAVES, RenderLayer.getTranslucent());

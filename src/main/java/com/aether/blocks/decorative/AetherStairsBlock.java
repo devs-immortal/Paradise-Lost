@@ -22,19 +22,4 @@ public class AetherStairsBlock extends StairsBlock {
     public boolean isIn(Tag<Block> tag) {
         return tag == BlockTags.STAIRS || (tag == BlockTags.WOODEN_STAIRS && this == AetherBlocks.SKYROOT_STAIRS) || super.isIn(tag);
     }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public boolean isSideInvisible(BlockState blockState_1, BlockState blockState_2, Direction direction_1) {
-        return this.isAerogel() && blockState_2.getBlock() == this && blockState_2.get(FACING) == blockState_1.get(FACING) || super.isSideInvisible(blockState_1, blockState_2, direction_1);
-    }
-
-    @Override
-    public boolean isTranslucent(BlockState blockState_1, BlockView blockView_1, BlockPos blockPos_1) {
-        return this.isAerogel();
-    }
-
-    private boolean isAerogel() {
-        return this == AetherBlocks.AEROGEL_STAIRS;
-    }
 }
