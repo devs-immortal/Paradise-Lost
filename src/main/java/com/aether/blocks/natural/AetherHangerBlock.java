@@ -4,11 +4,14 @@ import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -16,6 +19,8 @@ import net.minecraft.world.WorldView;
 
 public class AetherHangerBlock extends PlantBlock {
     public static final BooleanProperty TIP = BooleanProperty.of("tip");
+    protected static final VoxelShape FULL_SHAPE;
+    protected static final VoxelShape TIP_SHAPE;
 
     public AetherHangerBlock(Settings settings) {
         super(settings);
@@ -25,7 +30,7 @@ public class AetherHangerBlock extends PlantBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity) {
-            entity.fallDistance = 0;
+            entity.slowMovement(state, new Vec3d(0.800000011920929D, 0.75D, 0.800000011920929D));
         }
     }
 
@@ -54,5 +59,18 @@ public class AetherHangerBlock extends PlantBlock {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(TIP);
+    }
+
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        if (state.get(TIP)) {
+            return TIP_SHAPE;
+        } else {
+            return FULL_SHAPE;
+        }
+    }
+
+    static {
+        FULL_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+        TIP_SHAPE = Block.createCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D);
     }
 }

@@ -450,21 +450,21 @@ public class AetherBlocks {
         ROSE_WISTERIA_LEAF_PILE = register("rose_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
         ROSE_WISTERIA_SAPLING = register("rose_wisteria_sapling", new AetherSaplingBlock(new RoseWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
         POTTED_ROSE_WISTERIA_SAPLING = register("potted_rose_wisteria_sapling", createPottedBlock(ROSE_WISTERIA_SAPLING));
-        ROSE_WISTERIA_HANGER = register("rose_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(ROSE_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+        ROSE_WISTERIA_HANGER = register("rose_wisteria_hanger", new AetherHangerBlock(createWisteriaHangerBlock(BlockSoundGroup.GRASS)), buildingBlock());
 
         final Block.Settings FROST_WISTERIA = FabricBlockSettings.of(Material.LEAVES, MaterialColor.LIGHT_BLUE).noCollision().strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
         FROST_WISTERIA_LEAVES = register("frost_wisteria_leaves", new AetherLeavesBlock(FROST_WISTERIA, false), buildingBlock());
         FROST_WISTERIA_LEAF_PILE = register("frost_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
         FROST_WISTERIA_SAPLING = register("frost_wisteria_sapling", new AetherSaplingBlock(new FrostWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
         POTTED_FROST_WISTERIA_SAPLING = register("potted_frost_wisteria_sapling", createPottedBlock(FROST_WISTERIA_SAPLING));
-        FROST_WISTERIA_HANGER = register("frost_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(FROST_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+        FROST_WISTERIA_HANGER = register("frost_wisteria_hanger", new AetherHangerBlock(createWisteriaHangerBlock(BlockSoundGroup.GRASS)), buildingBlock());
 
         final Block.Settings LAVENDER_WISTERIA = FabricBlockSettings.of(Material.LEAVES, MaterialColor.MAGENTA).noCollision().strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
         LAVENDER_WISTERIA_LEAVES = register("lavender_wisteria_leaves", new AetherLeavesBlock(LAVENDER_WISTERIA, false), buildingBlock());
         LAVENDER_WISTERIA_LEAF_PILE = register("lavender_wisteria_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
         LAVENDER_WISTERIA_SAPLING = register("lavender_wisteria_sapling", new AetherSaplingBlock(new LavenderWisteriaSaplingGenerator(), SAPLINGS), buildingBlock());
         POTTED_LAVENDER_WISTERIA_SAPLING = register("potted_lavender_wisteria_sapling", createPottedBlock(LAVENDER_WISTERIA_SAPLING));
-        LAVENDER_WISTERIA_HANGER = register("lavender_wisteria_hanger", new AetherHangerBlock(FabricBlockSettings.copyOf(LAVENDER_WISTERIA).noCollision().breakInstantly()), buildingBlock());
+        LAVENDER_WISTERIA_HANGER = register("lavender_wisteria_hanger", new AetherHangerBlock(createWisteriaHangerBlock(BlockSoundGroup.GRASS)), buildingBlock());
 
         final Block.Settings WISTERIA_WOOD = FabricBlockSettings.of(Material.WOOD, MaterialColor.YELLOW).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
         WISTERIA_PLANKS = register("wisteria_planks", new Block(WISTERIA_WOOD), buildingBlock());
@@ -606,6 +606,10 @@ public class AetherBlocks {
 
     private static FabricBlockSettings createLeafPileBlock(BlockSoundGroup sounds) {
         return FabricBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.2f).sounds(sounds).nonOpaque().suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
+    }
+
+    private static FabricBlockSettings createWisteriaHangerBlock(BlockSoundGroup sounds) {
+        return FabricBlockSettings.of(Material.SUPPORTED).strength(0.2f).noCollision().breakInstantly().sounds(sounds).nonOpaque().suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
     }
 
     private static AetherLeavesBlock createLeavesBlock(BlockSoundGroup sounds) {
