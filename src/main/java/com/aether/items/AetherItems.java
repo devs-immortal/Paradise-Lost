@@ -217,10 +217,10 @@ public class AetherItems {
         CANDY_CANE_SWORD = register("candy_cane_sword", new CandyCaneSword(WEAPONS));
 
         // Spawn Eggs
-        AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x9fc3f7, 0x29a793, new Item.Settings().group(AetherItemGroups.Misc)));
+        AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x97ded4, 0x31897d, new Item.Settings().group(AetherItemGroups.Misc)));
         CHEST_MIMIC_SPAWN_EGG = null;
         COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, new Item.Settings().group(AetherItemGroups.Misc)));
-        AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0x9fc3f7, 0x3d2338, new Item.Settings().group(AetherItemGroups.Misc)));
+        AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xc5d6ed, 0x82a6d9, new Item.Settings().group(AetherItemGroups.Misc)));
         FLYING_COW_SPAWN_EGG = null;
         MOA_SPAWN_EGG = null;
         PHYG_SPAWN_EGG = null;
