@@ -60,9 +60,10 @@ public class SkyrootBucket extends Item implements CustomPortalFluidProvider {
                     BlockState hitState = worldIn.getBlockState(hitPos);
 
                     if (hitState.getBlock() instanceof FluidDrainable) {
-                        Fluid fluid = ((FluidDrainable) hitState.getBlock()).tryDrainFluid(worldIn, hitPos, hitState);
+                        Fluid fluid = (hitState.getFluidState().getFluid());
 
-                        if (fluid != Fluids.EMPTY) {
+                        if (fluid == Fluids.WATER) {
+                            ((FluidDrainable) hitState.getBlock()).tryDrainFluid(worldIn, hitPos, hitState);
                             playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                             playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
                             ItemStack fillStack = this.fillBucket(currentStack, playerIn, AetherItems.SKYROOT_WATER_BUCKET);
