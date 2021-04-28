@@ -5,7 +5,6 @@ import com.aether.blocks.aercloud.*;
 import com.aether.blocks.decorative.*;
 import com.aether.blocks.natural.*;
 import com.aether.client.rendering.block.FluidRenderSetup;
-import com.aether.entities.util.RenderUtils;
 import com.aether.items.AetherItemGroups;
 import com.aether.world.feature.tree.*;
 import com.google.common.collect.ImmutableSet;
@@ -28,15 +27,11 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 
 public class AetherBlocks {
     public static final Block AEROGEL;
-    public static final Block AEROGEL_SLAB;
-    public static final Block AEROGEL_STAIRS;
-    public static final Block AEROGEL_WALL;
     public static final Block AETHER_DIRT;
     public static final Block AETHER_ENCHANTED_GRASS;
     public static final Block AETHER_FARMLAND;
@@ -51,8 +46,6 @@ public class AetherBlocks {
     public static final Block ANGELIC_CRACKED_STONE;
 //    public static final Block ANGELIC_STONE_TRAP;
     public static final Block ANGELIC_WALL;
-    //    public static final Block BERRY_BUSH;
-//    public static final Block BERRY_BUSH_STEM;
 //    public static final Block BLACK_DYED_AERCLOUD;
     public static final Block BLUE_AERCLOUD;
     //    public static final Block BLUE_DYED_AERCLOUD;
@@ -159,10 +152,8 @@ public class AetherBlocks {
     public static final Block SKYROOT_DOOR;
     public static final Block SKYROOT_FENCE;
     public static final Block SKYROOT_FENCE_GATE;
-    //    public static final Block SKYROOT_LEAVES;
     public static final Block SKYROOT_LOG;
     public static final Block SKYROOT_PLANKS;
-    //    public static final Block SKYROOT_SAPLING;
     public static final Block SKYROOT_SLAB;
     public static final Block SKYROOT_STAIRS;
     public static final Block SKYROOT_SAPLING;
@@ -195,8 +186,7 @@ public class AetherBlocks {
     public static final Block CRYSTAL_STAIRS;
     public static final Block CRYSTAL_DOOR;
     public static final Block CRYSTAL_TRAPDOOR;
-    //    public static final Block SKYROOT_WOOD;
-//    public static final Block STRIPPED_SKYROOT_LOG;
+//    public static final Block SKYROOT_WOOD;
 //    public static final Block STRIPPED_SKYROOT_WOOD;
 //    public static final Block SUN_ALTAR;
 //    public static final Block TREASURE_CHEST;
@@ -283,9 +273,6 @@ public class AetherBlocks {
         GOLDEN_MOSSY_HOLYSTONE = register("golden_mossy_holystone", new Block(FabricBlockSettings.of(Material.STONE).requiresTool().strength(2.0F, 6.0F).materialColor(MaterialColor.WHITE)), buildingBlock());
         ZANITE_ORE = register("zanite_ore", new OreBlock(FabricBlockSettings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F)), buildingBlock());
         AEROGEL = register("aerogel", new Block(FabricBlockSettings.of(Material.SOIL).strength(1.0f, 2000.0f).sounds(BlockSoundGroup.GLASS).solidBlock(AetherBlocks::never).nonOpaque()), buildingBlock());
-        AEROGEL_SLAB = register("aerogel_slab", new AetherSlabBlock(AEROGEL.getDefaultState()), buildingBlock());
-        AEROGEL_STAIRS = register("aerogel_stairs", new AetherStairsBlock(AEROGEL.getDefaultState()), buildingBlock());
-        AEROGEL_WALL = register("aerogel_wall", new AetherWallBlock(AEROGEL.getDefaultState()), buildingBlock());
         AETHER_FARMLAND = register("aether_farmland", new AetherFarmlandBlock(FabricBlockSettings.of(Material.SOIL).ticksRandomly().strength(0.6f).sounds(BlockSoundGroup.GRAVEL).blockVision(AetherBlocks::always).suffocates(AetherBlocks::always)), buildingBlock());
         AETHER_DIRT_PATH = register("aether_grass_path", new AetherDirtPathBlock(), buildingBlock());
         AMBROSIUM_TORCH = register("ambrosium_torch",  new AmbrosiumTorchBlock(), false, buildingBlock());
@@ -300,7 +287,6 @@ public class AetherBlocks {
 //        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(FabricBlockSettings.of(Material.STONE).hardness(-1.0f).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
         ANGELIC_WALL = register("angelic_wall", new AetherWallBlock(ANGELIC_STONE.getDefaultState()), buildingBlock());
         BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(AetherBlocks::canSpawnOnLeaves).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never).collidable(false)), buildingBlock());
-//        BERRY_BUSH_STEM = register("berry_bush_stem", null);
 //        BLACK_DYED_AERCLOUD = register("black_dyed_aercloud", null);
 //        BLUE_DYED_AERCLOUD = register("blue_dyed_aercloud", null);
 //        BROWN_DYED_AERCLOUD = register("brown_dyed_aercloud", null);
@@ -658,9 +644,6 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_SLAB, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_STAIRS, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL_WALL, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH_WALL, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAVES, RenderLayer.getTranslucent());

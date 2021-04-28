@@ -56,12 +56,12 @@ public class AetherConfiguredFeatures {
         FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", Feature.TREE.configure(Configs.FANCY_BOREAL_WISTERIA_CONFIG));
         FANCY_SKYROOT_TREE = register("fancy_skyroot_tree", Feature.TREE.configure(Configs.FANCY_SKYROOT_CONFIG));
         SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Configs.SCATTERED_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(7, 0.1F, 2))));
-        SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(30))));
+        SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))));
         THICKET_TREES = register("thicket_trees", Feature.RANDOM_SELECTOR.configure(Configs.THICKET_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(20, 0.25F, 12)))).spreadHorizontally().repeatRandomly(3);
         RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(Configs.RAINBOW_FOREST_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(16, 0.25F, 8)))).spreadHorizontally().repeatRandomly(4);
 
         // Used in json
-        HOLYSTONE_BOULDER = register("holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.COBBLED_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).applyChance(30);
+        HOLYSTONE_BOULDER = register("holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.COBBLED_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(15))).spreadHorizontally().repeatRandomly(2);
         MOSSY_HOLYSTONE_BOULDER = register("mossy_holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.MOSSY_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(3))).spreadHorizontally().repeatRandomly(2);
 
         FALLEN_LEAVES = register("fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP.decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(UniformIntDistribution.of(3, 1)))))).spreadHorizontally().repeatRandomly(3);
@@ -94,17 +94,29 @@ public class AetherConfiguredFeatures {
         public static final TreeFeatureConfig FANCY_SKYROOT_CONFIG = (new net.minecraft.world.gen.feature.TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LEAVES.getDefaultState()), new LargeOakFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(4), 4), new LargeOakTrunkPlacer(4, 11, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();
 
         public static final RandomFeatureConfig SCATTERED_TREES_CONFIG = new RandomFeatureConfig(
-                ImmutableList.of(Feature.TREE.configure(FANCY_SKYROOT_CONFIG).withChance(0.05F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.002F)),
+                ImmutableList.of(
+                        Feature.TREE.configure(FANCY_SKYROOT_CONFIG).withChance(0.05F),
+                        Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.002F)
+                ),
                 Feature.TREE.configure(Configs.SKYROOT_CONFIG)
         );
 
         public static final RandomFeatureConfig THICKET_TREES_CONFIG = new RandomFeatureConfig(
-                ImmutableList.of(Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(GOLDEN_OAK_CONFIG).withChance(0.0025F), Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.1F)),
+                ImmutableList.of(
+                        Feature.TREE.configure(GOLDEN_OAK_CONFIG).withChance(0.005F),
+                        Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.1F)
+                ),
                 Feature.TREE.configure(Configs.FANCY_SKYROOT_CONFIG)
         );
 
         public static final RandomFeatureConfig RAINBOW_FOREST_CONFIG = new RandomFeatureConfig(
-                ImmutableList.of(Feature.TREE.configure(FANCY_LAVENDER_WISTERIA_CONFIG).withChance(0.33F), Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.05F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FROST_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(FANCY_SKYROOT_CONFIG).withChance(0.1F)),
+                ImmutableList.of(
+                        Feature.TREE.configure(FANCY_LAVENDER_WISTERIA_CONFIG).withChance(0.33F),
+                        Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.05F),
+                        Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.075F),
+                        Feature.TREE.configure(FROST_WISTERIA_CONFIG).withChance(0.002F),
+                        Feature.TREE.configure(FANCY_SKYROOT_CONFIG).withChance(0.1F)
+                ),
                 Feature.TREE.configure(Configs.FANCY_ROSE_WISTERIA_CONFIG)
         );
 
