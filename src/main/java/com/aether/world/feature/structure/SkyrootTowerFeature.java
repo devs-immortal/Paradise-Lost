@@ -1,6 +1,6 @@
 package com.aether.world.feature.structure;
 
-import com.aether.world.feature.generator.OutpostGenerator;
+import com.aether.world.feature.generator.SkyrootTowerGenerator;
 import com.mojang.serialization.Codec;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
@@ -14,8 +14,8 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
-public class OutpostFeature extends StructureFeature<DefaultFeatureConfig> {
-    public OutpostFeature(Codec<DefaultFeatureConfig> codec) {
+public class SkyrootTowerFeature extends StructureFeature<DefaultFeatureConfig> {
+    public SkyrootTowerFeature(Codec<DefaultFeatureConfig> codec) {
         super(codec);
     }
 
@@ -37,7 +37,7 @@ public class OutpostFeature extends StructureFeature<DefaultFeatureConfig> {
             int y = chunkGenerator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG);
             BlockPos pos = new BlockPos(x, y, z);
             BlockRotation rotation = BlockRotation.random(this.random);
-            OutpostGenerator.addPieces(manager, pos, rotation, this.children);
+            SkyrootTowerGenerator.addPieces(manager, pos, rotation, this.children);
             this.setBoundingBoxFromChildren();
         }
     }

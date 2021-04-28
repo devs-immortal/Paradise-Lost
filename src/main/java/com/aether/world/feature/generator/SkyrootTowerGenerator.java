@@ -15,26 +15,26 @@ import net.minecraft.world.ServerWorldAccess;
 import java.util.List;
 import java.util.Random;
 
-public class OutpostGenerator {
-    private static final Identifier OUTPOST = Aether.locate("outpost");
+public class SkyrootTowerGenerator {
+    private static final Identifier SKYROOT_TOWER = Aether.locate("skyroot_tower");
 
     public static void addPieces(StructureManager manager, BlockPos pos, BlockRotation rotation, List<StructurePiece> pieces) {
-        pieces.add(new OutpostPiece(manager, pos, OUTPOST, rotation));
+        pieces.add(new TowerPiece(manager, pos, SKYROOT_TOWER, rotation));
     }
 
-    public static class OutpostPiece extends SimpleStructurePiece {
+    public static class TowerPiece extends SimpleStructurePiece {
         private final BlockRotation rotation;
         private final Identifier template;
 
-        public OutpostPiece(StructureManager structureManager, CompoundTag compoundTag) {
-            super(AetherFeatures.OUTPOST_PIECE, compoundTag);
+        public TowerPiece(StructureManager structureManager, CompoundTag compoundTag) {
+            super(AetherFeatures.SKYROOT_TOWER_PIECE, compoundTag);
             this.template = new Identifier(compoundTag.getString("Template"));
             this.rotation = BlockRotation.valueOf(compoundTag.getString("Rot"));
             this.initializeStructureData(structureManager);
         }
 
-        public OutpostPiece(StructureManager structureManager, BlockPos pos, Identifier template, BlockRotation rotation) {
-            super(AetherFeatures.OUTPOST_PIECE, 0);
+        public TowerPiece(StructureManager structureManager, BlockPos pos, Identifier template, BlockRotation rotation) {
+            super(AetherFeatures.SKYROOT_TOWER_PIECE, 0);
             this.pos = pos;
             this.rotation = rotation;
             this.template = template;

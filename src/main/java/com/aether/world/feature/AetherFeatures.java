@@ -2,9 +2,9 @@ package com.aether.world.feature;
 
 import com.aether.Aether;
 import com.aether.world.feature.config.AercloudConfig;
-import com.aether.world.feature.generator.OutpostGenerator;
+import com.aether.world.feature.generator.SkyrootTowerGenerator;
 import com.aether.world.feature.generator.WellGenerator;
-import com.aether.world.feature.structure.OutpostFeature;
+import com.aether.world.feature.structure.SkyrootTowerFeature;
 import com.aether.world.feature.structure.WellFeature;
 import com.aether.world.gen.decorator.CrystalTreeIslandDecorator;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -26,7 +26,7 @@ public class AetherFeatures {
     public static Feature<DefaultFeatureConfig> QUICKSOIL;
 
     public static StructurePieceType WELL_PIECE;
-    public static StructurePieceType OUTPOST_PIECE;
+    public static StructurePieceType SKYROOT_TOWER_PIECE;
 
     public static void registerFeatures() {
         register("lake", new AetherLakeFeature(SingleStateFeatureConfig.CODEC));
@@ -38,7 +38,7 @@ public class AetherFeatures {
         registerDecorator("crystal_tree_island", new CrystalTreeIslandDecorator(NopeDecoratorConfig.CODEC));
 
         WELL_PIECE = registerStructure("well", WellGenerator.WellPiece::new, new WellFeature(DefaultFeatureConfig.CODEC), 213769);
-        OUTPOST_PIECE = registerStructure("outpost", OutpostGenerator.OutpostPiece::new, new OutpostFeature(DefaultFeatureConfig.CODEC), 4208012);
+        SKYROOT_TOWER_PIECE = registerStructure("skyroot_tower", SkyrootTowerGenerator.TowerPiece::new, new SkyrootTowerFeature(DefaultFeatureConfig.CODEC), 4208012);
     }
 
     private static StructurePieceType registerStructure(String id, StructurePieceType piece, StructureFeature<DefaultFeatureConfig> structure, int salt) {
