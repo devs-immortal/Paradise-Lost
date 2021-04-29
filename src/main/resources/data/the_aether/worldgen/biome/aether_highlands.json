@@ -53,13 +53,13 @@
   "spawners": {
     "monster": [
       {
-        "type": "minecraft:slime",
+        "type": "the_aether:swet",
         "weight": 20,
         "minCount": 1,
-        "maxCount": 1
+        "maxCount": 10
       },
       {
-        "type": "minecraft:endermen",
+        "type": "minecraft:enderman",
         "weight": 2,
         "minCount": 1,
         "maxCount": 1
@@ -92,11 +92,15 @@
   },
   "creature_spawn_probability": 0.4,
   "spawn_costs": {
-    "minecraft:endermen": {
+    "minecraft:enderman": {
       "energy_budget": 0.02,
       "charge": 3.0
     },
     "minecraft:phantom": {
+      "energy_budget": 0.01,
+      "charge": 2.0
+    },
+    "the_aether:swet": {
       "energy_budget": 0.01,
       "charge": 2.0
     }
