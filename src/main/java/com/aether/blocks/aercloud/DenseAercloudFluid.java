@@ -7,6 +7,7 @@ import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
@@ -48,7 +49,7 @@ public class DenseAercloudFluid extends FlowableFluid {
 
     @Override
     public Item getBucketItem() {
-        return AetherItems.SKYROOT_BUCKET;
+        return Items.BUCKET;
     }
 
     @Override
