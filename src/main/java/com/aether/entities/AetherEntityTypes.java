@@ -2,19 +2,13 @@ package com.aether.entities;
 
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
-import com.aether.client.rendering.entity.*;
 import com.aether.entities.block.FloatingBlockEntity;
-import com.aether.entities.hostile.AechorPlantEntity;
-import com.aether.entities.hostile.ChestMimicEntity;
-import com.aether.entities.hostile.CockatriceEntity;
+import com.aether.entities.hostile.*;
 import com.aether.entities.passive.*;
 import com.aether.entities.projectile.EnchantedDartEntity;
 import com.aether.entities.projectile.GoldenDartEntity;
 import com.aether.entities.projectile.PoisonDartEntity;
 import com.aether.entities.projectile.PoisonNeedleEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
@@ -52,6 +46,8 @@ public class AetherEntityTypes {
 //    public static EntityType<FireMinionEntity> FIRE_MINION;
 //    public static EntityType<CrystalEntity> CRYSTAL;
 //    public static EntityType<PhoenixArrowEntity> PHOENIX_ARROW;
+    public static final EntityType<SwetEntity> BLUE_SWET;
+    public static final EntityType<SwetEntity> YELLOW_SWET;
 
     static {
         AECHOR_PLANT = register("aechor_plant", SpawnGroup.MONSTER, EntityDimensions.changing(1.0F, 1.0F), (entityType, world) -> new AechorPlantEntity(world));
@@ -73,6 +69,8 @@ public class AetherEntityTypes {
 //        FIRE_MINION = register("fire_minion", ...);
 //        CRYSTAL = register("crystal", ...);
 //        PHOENIX_ARROW = register("phoenix_arrow", ...);
+        BLUE_SWET = register("blue_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new BlueSwetEntity(world));
+        YELLOW_SWET = register("yellow_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new YellowSwetEntity(world));
     }
 
     public static void init() {
@@ -86,6 +84,8 @@ public class AetherEntityTypes {
         FabricDefaultAttributeRegistry.register(COCKATRICE, CockatriceEntity.initAttributes());
         FabricDefaultAttributeRegistry.register(AERWHALE, AerwhaleEntity.initAttributes());
         FabricDefaultAttributeRegistry.register(CHEST_MIMIC, ChestMimicEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(BLUE_SWET, SwetEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(YELLOW_SWET, SwetEntity.initAttributes());
 
         SpawnRestriction.register(AERWHALE, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(SHEEPUFF, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
@@ -94,6 +94,8 @@ public class AetherEntityTypes {
         SpawnRestriction.register(FLYING_COW, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(COCKATRICE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
         SpawnRestriction.register(AECHOR_PLANT, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
+        SpawnRestriction.register(BLUE_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
+        SpawnRestriction.register(YELLOW_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
     }
 
     public static DefaultAttributeContainer.Builder getDefaultAttributes() {

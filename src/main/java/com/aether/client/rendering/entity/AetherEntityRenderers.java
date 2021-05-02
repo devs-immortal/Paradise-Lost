@@ -31,6 +31,8 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.CHEST_MIMIC, (entityRendererDispatcher, context) -> new ChestMimicRenderer(entityRendererDispatcher));
         //entityRenderMap.put(EntityWhirlwind.class, new WhirlwindRenderer(renderManager));
         //entityRenderMap.put(EntityPhoenixArrow.class, new PhoenixArrowRenderer(renderManager));
+        register(AetherEntityTypes.BLUE_SWET, (entityRenderDispatcher, context) -> new SwetRenderer(entityRenderDispatcher));
+        register(AetherEntityTypes.YELLOW_SWET, (entityRenderDispatcher, context) -> new SwetRenderer(entityRenderDispatcher));
     }
 
     private static void register(EntityType<? extends Entity> clazz, EntityRendererRegistry.Factory factory) {
