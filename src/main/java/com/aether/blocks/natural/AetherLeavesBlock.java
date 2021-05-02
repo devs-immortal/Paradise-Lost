@@ -22,8 +22,8 @@ import java.util.Random;
 
 public class  AetherLeavesBlock extends LeavesBlock {
 
-    private int speed = 0;
-    private final boolean collidable;
+    protected int speed = 0;
+    protected final boolean collidable;
 
     public AetherLeavesBlock(Settings settings, boolean collidable) {
         super(settings);
@@ -32,7 +32,7 @@ public class  AetherLeavesBlock extends LeavesBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if ((state.isOf(AetherBlocks.GOLDEN_OAK_LEAVES) || state.isOf(AetherBlocks.FROST_WISTERIA_LEAVES) || state.isOf(AetherBlocks.ROSE_WISTERIA_LEAVES) || state.isOf(AetherBlocks.LAVENDER_WISTERIA_LEAVES))) {
+        if ((state.isOf(AetherBlocks.GOLDEN_OAK_LEAVES) || state.isOf(AetherBlocks.FROST_WISTERIA_LEAVES) || state.isOf(AetherBlocks.BOREAL_WISTERIA_LEAVES) || state.isOf(AetherBlocks.ROSE_WISTERIA_LEAVES) || state.isOf(AetherBlocks.LAVENDER_WISTERIA_LEAVES))) {
             if(!(Boolean) state.get(PERSISTENT) && state.get(DISTANCE) >= 13) {
                 dropStacks(state, world, pos);
                 world.removeBlock(pos, false);
@@ -57,6 +57,8 @@ public class  AetherLeavesBlock extends LeavesBlock {
             return AetherBlocks.LAVENDER_WISTERIA_HANGER.getDefaultState();
         else if(block.is(AetherBlocks.FROST_WISTERIA_LEAVES))
             return AetherBlocks.FROST_WISTERIA_HANGER.getDefaultState();
+        else if(block.is(AetherBlocks.BOREAL_WISTERIA_LEAVES))
+            return AetherBlocks.BOREAL_WISTERIA_HANGER.getDefaultState();
         return Blocks.AIR.getDefaultState();
     }
 
