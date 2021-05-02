@@ -32,7 +32,8 @@ public class SwetEntity extends SlimeEntity {
         return AetherEntityTypes.getDefaultAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.28000000417232513D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0D)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.25D)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0D);
     }
 
