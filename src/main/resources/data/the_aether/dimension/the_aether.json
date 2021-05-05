@@ -75,10 +75,6 @@
       }
     },
     "type": "minecraft:noise",
-    "settings": "the_aether:aether_noise",
-    "structures": {
-      "structures": {
-      }
-    }
+    "settings": "the_aether:aether_noise"
   }
 }
