@@ -86,7 +86,12 @@
     "water_ambient": [],
     "misc": []
   },
-  "spawn_costs": {},
+  "spawn_costs": {
+      "the_aether:blue_swet": {
+      "energy_budget": 0.12,
+      "charge": 1.0
+    }
+  },
   "player_spawn_friendly": false,
   "precipitation": "rain",
   "temperature": 0.5,
