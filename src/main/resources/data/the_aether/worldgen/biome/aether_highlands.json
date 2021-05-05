@@ -56,58 +56,37 @@
   "spawners": {
     "monster": [
       {
-        "type": "the_aether:swet",
-        "weight": 20,
-        "minCount": 1,
-        "maxCount": 10
-      },
-      {
-        "type": "minecraft:enderman",
-        "weight": 2,
-        "minCount": 1,
-        "maxCount": 1
-      },
-      {
-        "type": "minecraft:phantom",
-        "weight": 1,
-        "minCount": 1,
-        "maxCount": 1
-      },
-      {
-        "type": "minecraft:snowball",
-        "weight": 2200,
-        "minCount": 1,
-        "maxCount": 1
+        "type": "the_aether:blue_swet",
+        "weight": 100,
+        "minCount": 2,
+        "maxCount": 6
       }
     ],
     "creature": [
-    {
+      {
         "type": "the_aether:aerbunny",
-        "weight": 10,
-        "minCount": 2,
+        "weight": 12,
+        "minCount": 4,
         "maxCount": 4
-    }
+      },
+      {
+        "type": "the_aether:moa",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "the_aether:aerwhale",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 3
+      }
     ],
-    "ambient": [],
     "water_creature": [],
     "water_ambient": [],
     "misc": []
   },
-  "creature_spawn_probability": 0.4,
-  "spawn_costs": {
-    "minecraft:enderman": {
-      "energy_budget": 0.02,
-      "charge": 3.0
-    },
-    "minecraft:phantom": {
-      "energy_budget": 0.01,
-      "charge": 2.0
-    },
-    "the_aether:swet": {
-      "energy_budget": 0.01,
-      "charge": 2.0
-    }
-  },
+  "spawn_costs": {},
   "player_spawn_friendly": false,
   "precipitation": "rain",
   "temperature": 0.5,
