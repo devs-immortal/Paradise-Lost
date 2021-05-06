@@ -95,8 +95,8 @@ dependencies {
     }
 
     //customportalapi
-    modImplementation "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
-    include "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
+    modImplementation "com.github.kyrptonaught:customportalapi:8db933af27"
+    include "com.github.kyrptonaught:customportalapi:8db933af27"
 
     modImplementation "dev.hephaestus:seedy-behavior:${project.seedy_version}"
     include "dev.hephaestus:seedy-behavior:${project.seedy_version}"
