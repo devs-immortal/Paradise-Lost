@@ -32,7 +32,9 @@ public class AetherEntityRenderers {
         //entityRenderMap.put(EntityWhirlwind.class, new WhirlwindRenderer(renderManager));
         //entityRenderMap.put(EntityPhoenixArrow.class, new PhoenixArrowRenderer(renderManager));
         register(AetherEntityTypes.BLUE_SWET, (entityRenderDispatcher, context) -> new SwetRenderer(entityRenderDispatcher));
-        register(AetherEntityTypes.YELLOW_SWET, (entityRenderDispatcher, context) -> new SwetRenderer(entityRenderDispatcher));
+        register(AetherEntityTypes.PURPLE_SWET, (entityRenderDispatcher, context) -> new SwetRenderer(entityRenderDispatcher));
+        register(AetherEntityTypes.WHITE_SWET, (entityRenderDispatcher, context) -> new SwetRenderer(entityRenderDispatcher));
+        register(AetherEntityTypes.GOLDEN_SWET, (entityRenderDispatcher, context) -> new SwetRenderer(entityRenderDispatcher));
     }
 
     private static void register(EntityType<? extends Entity> clazz, EntityRendererRegistry.Factory factory) {
