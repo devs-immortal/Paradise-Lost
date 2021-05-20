@@ -1,23 +1,16 @@
 package com.aether.world.feature.tree.placers;
 
-import com.aether.Aether;
-import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.natural.AetherLeavesBlock;
-import com.aether.mixin.block.AbstractBlockAccessor;
 import com.aether.world.feature.tree.AetherTreeHell;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;

@@ -1,8 +1,6 @@
 package com.aether.mixin.item;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.entities.block.FloatingBlockEntity;
-import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

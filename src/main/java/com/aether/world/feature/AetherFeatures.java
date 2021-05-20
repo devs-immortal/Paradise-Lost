@@ -53,5 +53,4 @@ public class AetherFeatures {
     private static <T extends DecoratorConfig, G extends Decorator<T>> G register(String id, G decorator) {
         return Registry.register(Registry.DECORATOR, Aether.locate(id), decorator);
     }
-
 }

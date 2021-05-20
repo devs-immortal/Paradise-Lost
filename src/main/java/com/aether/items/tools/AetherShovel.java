@@ -1,11 +1,8 @@
 package com.aether.items.tools;
 
 import com.aether.entities.block.FloatingBlockEntity;
-import com.aether.items.AetherItemGroups;
-import com.aether.items.AetherItemSettings;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
-import com.aether.util.item.AetherRarity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -14,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

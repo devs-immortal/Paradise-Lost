@@ -29,11 +29,9 @@ import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.crash.CrashReportSection;
 import net.minecraft.util.hit.BlockHitResult;
@@ -44,7 +42,6 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 

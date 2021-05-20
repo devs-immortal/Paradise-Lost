@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
 import java.util.Random;
 
 public class CinnabarRoseBlock extends AetherMushroomBlock {

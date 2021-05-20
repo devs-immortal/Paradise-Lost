@@ -1,8 +1,6 @@
 package com.aether.mixin.entity;
 
-import com.aether.Aether;
 import com.aether.items.AetherItems;
-import com.aether.items.tools.IAetherTool;
 import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.Sets;
 import dev.emi.trinkets.api.TrinketsApi;
@@ -10,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.EntityDamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;

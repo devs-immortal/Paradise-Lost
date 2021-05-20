@@ -2,7 +2,6 @@ package com.aether.items;
 
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
-import com.aether.client.model.armor.PhoenixArmorModel;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.items.accessories.AccessoryType;
 import com.aether.items.accessories.ItemAccessory;
@@ -15,12 +14,10 @@ import com.aether.items.tools.*;
 import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
-import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderingRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 

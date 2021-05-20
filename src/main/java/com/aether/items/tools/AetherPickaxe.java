@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class AetherPickaxe extends PickaxeItem implements IAetherTool {
 

@@ -8,7 +8,6 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 
 public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 

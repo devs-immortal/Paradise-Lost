@@ -1,6 +1,5 @@
 package com.aether.items.tools;
 
-import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
 import net.kyrptonaught.customportalapi.util.CustomPortalFluidProvider;
 import net.minecraft.advancement.criterion.Criteria;

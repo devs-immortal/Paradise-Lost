@@ -3,13 +3,11 @@ package com.aether.items.weapons;
 import com.aether.entities.projectile.EnchantedDartEntity;
 import com.aether.entities.projectile.GoldenDartEntity;
 import com.aether.entities.projectile.PoisonDartEntity;
-import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 
 public class Dart extends Item {

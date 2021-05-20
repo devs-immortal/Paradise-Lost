@@ -2,24 +2,18 @@ package com.aether.entities.passive;
 
 import com.aether.entities.AetherEntityTypes;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.MovementType;
 import net.minecraft.entity.ai.TargetFinder;
 import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.BeeEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
-import java.util.Random;
 
 public class AerwhaleEntity extends AetherAnimalEntity {
 

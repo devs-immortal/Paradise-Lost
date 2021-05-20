@@ -5,7 +5,6 @@
 	package com.aether.client.model.entity;
 
 import com.aether.entities.passive.MoaEntity;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
