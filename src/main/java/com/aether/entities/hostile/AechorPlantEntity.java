@@ -27,7 +27,8 @@ import net.minecraft.world.WorldAccess;
 public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttackMob {
 
     public float sinage;
-    public int poisonRemaining, size;
+    public final int poisonRemaining;
+    public int size;
 
     public AechorPlantEntity(World world) {
         super(AetherEntityTypes.AECHOR_PLANT, world);
@@ -54,7 +55,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
 
         this.goalSelector.add(4, new ProjectileAttackGoal(this, 0.0D, 30, 1.0F));
         this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new FollowTargetGoal<LivingEntity>(this, LivingEntity.class, true));
+        this.targetSelector.add(2, new FollowTargetGoal<>(this, LivingEntity.class, true));
     }
 
     @Override
@@ -87,8 +88,9 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     public void attack(LivingEntity targetIn, float arg1) {
         double x = targetIn.getX() - this.getX();
         double z = targetIn.getZ() - this.getZ();
-        double y = 0.1D + (Math.sqrt((x * x) + (z * z) + 0.1D) * 0.5D) + ((this.getY() - targetIn.getY()) * 0.25D);
-        double distance = 1.5D / Math.sqrt((x * x) + (z * z) + 0.1D);
+        final double sqrt = Math.sqrt((x * x) + (z * z) + 0.1D);
+        double y = 0.1D + (sqrt * 0.5D) + ((this.getY() - targetIn.getY()) * 0.25D);
+        double distance = 1.5D / sqrt;
 
 //        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
 //        needle.setVelocity(x * distance, y, z * distance, 0.285F + ((float) y * 0.05F), 1.0F);

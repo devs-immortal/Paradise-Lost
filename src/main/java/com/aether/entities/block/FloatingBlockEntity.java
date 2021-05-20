@@ -383,9 +383,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                 world.playSound(playerEntity, blockPos, blockState.getBlock().getSoundGroup(blockState).getBreakSound(), SoundCategory.BLOCKS, 1.0F, 0.75F);
             }
             if (playerEntity != null) {
-                context.getStack().damage(1, playerEntity, (p) -> {
-                    p.sendToolBreakStatus(context.getHand());
-                });
+                context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
             }
             return true;
         }

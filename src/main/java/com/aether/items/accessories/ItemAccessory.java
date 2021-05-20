@@ -8,8 +8,7 @@ import net.minecraft.util.Identifier;
 public class ItemAccessory extends Item {
     private final int color;
     private final AccessoryType type;
-    private Identifier texture;
-    private Identifier texture_slim;
+    private final Identifier texture, texture_slim;
     private float damageMultiplier = 1.0F;
 
     public ItemAccessory(AccessoryType type, String material, AetherItemSettings settings) {

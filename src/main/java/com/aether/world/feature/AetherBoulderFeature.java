@@ -9,7 +9,6 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 
-import java.util.Iterator;
 import java.util.Random;
 
 public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
@@ -39,11 +38,9 @@ public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
                 int k = random.nextInt(3);
                 int l = random.nextInt(3);
                 float f = (float)(j + k + l) * 0.333F + 0.5F;
-                Iterator var11 = BlockPos.iterate(blockPos.add(-j, -k, -l), blockPos.add(j, k, l)).iterator();
 
-                while(var11.hasNext()) {
-                    BlockPos blockPos2 = (BlockPos)var11.next();
-                    if (blockPos2.getSquaredDistance(blockPos) <= (double)(f * f)) {
+                for (BlockPos blockPos2 : BlockPos.iterate(blockPos.add(-j, -k, -l), blockPos.add(j, k, l))) {
+                    if (blockPos2.getSquaredDistance(blockPos) <= (double) (f * f)) {
                         structureWorldAccess.setBlockState(blockPos2, singleStateFeatureConfig.state, 4);
                     }
                 }

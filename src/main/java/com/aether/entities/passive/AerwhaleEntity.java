@@ -71,6 +71,8 @@ public class AerwhaleEntity extends AetherAnimalEntity {
             this.setControls(EnumSet.of(Control.MOVE));
         }
 
+        // I had to comment out all System.outs becuase it was lagging my IDE
+
         public boolean canStart() {
 //            if (this.mob.getRandom().nextInt(10) != 0) {
 //                return false;
@@ -78,13 +80,13 @@ public class AerwhaleEntity extends AetherAnimalEntity {
 
             Vec3d vec3d = this.getWanderTarget();
             if (vec3d == null) {
-                System.out.println("Target was null");
+//                System.out.println("Target was null");
                 return false;
             } else {
                 this.targetX = vec3d.x;
                 this.targetY = vec3d.y;
                 this.targetZ = vec3d.z;
-                System.out.println("Target found:"+targetX+", "+targetY+", "+targetZ);
+//                System.out.println("Target found:"+targetX+", "+targetY+", "+targetZ);
                 return true;
             }
         }
@@ -97,10 +99,10 @@ public class AerwhaleEntity extends AetherAnimalEntity {
 
         public boolean shouldContinue() {
             if (this.mob.getRandom().nextInt(30) != 0) {
-                System.out.println("Continuing path...");
+//                System.out.println("Continuing path...");
                 return true;
             }
-            System.out.println("Stopping path...");
+//            System.out.println("Stopping path...");
             return false;
 
 //            if (this.mob.getNavigation().isNearPathStartPos()) {
@@ -112,12 +114,12 @@ public class AerwhaleEntity extends AetherAnimalEntity {
         }
 
         public void start() {
-            System.out.println("Starting nav to:"+targetX+", "+targetY+", "+targetZ);
+//            System.out.println("Starting nav to:"+targetX+", "+targetY+", "+targetZ);
             this.mob.getNavigation().startMovingTo(this.targetX, this.targetY, this.targetZ, 0.5);
         }
 
         public void stop() {
-            System.out.println("Stopping nav...");
+//            System.out.println("Stopping nav...");
             this.mob.getNavigation().stop();
             super.stop();
         }

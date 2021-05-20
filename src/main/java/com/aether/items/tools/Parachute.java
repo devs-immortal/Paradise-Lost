@@ -10,6 +10,6 @@ public class Parachute extends TrinketItem {
 
     @Override
     public boolean canWearInSlot(String s, String s1) {
-        return s == "chest" && s1 == "parachute";
+        return s.equals("chest") && s1.equals("parachute");
     }
 }

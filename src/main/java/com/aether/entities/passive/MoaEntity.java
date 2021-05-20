@@ -308,7 +308,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                         if (g > 0.0F) {
                             float i = MathHelper.sin(this.yaw * 0.017453292F);
                             float j = MathHelper.cos(this.yaw * 0.017453292F);
-                            this.setVelocity(this.getVelocity().add(-0.4F * i * this.jumpStrength, 0.0D, (double)(0.4F * j * this.jumpStrength)));
+                            this.setVelocity(this.getVelocity().add(-0.4F * i * this.jumpStrength, 0.0D, 0.4F * j * this.jumpStrength));
                         }
 
                         this.jumpStrength = 0.0F;
@@ -321,7 +321,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                 this.flyingSpeed = this.getMovementSpeed() * (isGliding() ? 0.5F : 0.1F);
                 if (this.isLogicalSideForUpdatingMovement()) {
                     this.setMovementSpeed((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
-                    super.travel(new Vec3d((double)f, movementInput.y, (double)g));
+                    super.travel(new Vec3d(f, movementInput.y, g));
                 } else if (livingEntity instanceof PlayerEntity) {
                     this.setVelocity(Vec3d.ZERO);
                 }

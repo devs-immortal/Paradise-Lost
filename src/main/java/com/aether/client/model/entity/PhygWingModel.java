@@ -30,11 +30,8 @@ public class PhygWingModel extends EntityModel<PhygEntity> {
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
         float wingBend;
-        float x;
-        float y;
-        float z;
-        float x2;
-        float y2;
+        float x, y, z;
+        float x2, y2;
         if (phyg.isBaby()) {
             wingBend = -((float) Math.acos(phyg.wingFold));
             matrices.scale(1.0F / 2.0F, 1.0F / 2.0F, 1.0F / 2.0F);

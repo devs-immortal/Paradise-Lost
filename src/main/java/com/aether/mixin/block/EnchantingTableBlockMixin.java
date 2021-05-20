@@ -26,7 +26,7 @@ public class EnchantingTableBlockMixin {
                         BlockPos blockPos = pos.add(i, k, j);
                         if (world.getBlockState(blockPos).isOf(AetherBlocks.SKYROOT_BOOKSHELF)) {
                             if (!world.isAir(pos.add(i / 2, 0, j / 2))) break;
-                            world.addParticle(ParticleTypes.ENCHANT, (double) pos.getX() + 0.5D, (double) pos.getY() + 2.0D, (double) pos.getZ() + 0.5D, (double) ((float) i + random.nextFloat()) - 0.5D, (double) ((float) k - random.nextFloat() - 1.0F), (double) ((float) j + random.nextFloat()) - 0.5D);
+                            world.addParticle(ParticleTypes.ENCHANT, (double) pos.getX() + 0.5D, (double) pos.getY() + 2.0D, (double) pos.getZ() + 0.5D, (double) ((float) i + random.nextFloat()) - 0.5D, (float) k - random.nextFloat() - 1.0F, (double) ((float) j + random.nextFloat()) - 0.5D);
                         }
                     }
                 }

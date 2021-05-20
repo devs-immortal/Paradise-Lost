@@ -8,9 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public class ChestMimicModel extends EntityModel<ChestMimicEntity> {
 
-    public ModelPart box, boxLid;
-
-    public ModelPart leftLeg, rightLeg;
+    public final ModelPart box, boxLid, leftLeg, rightLeg;
 
     public ChestMimicModel() {
         this.box = new ModelPart(this, 0, 0);
@@ -45,5 +43,4 @@ public class ChestMimicModel extends EntityModel<ChestMimicEntity> {
         leftLeg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
         rightLeg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
     }
-
 }

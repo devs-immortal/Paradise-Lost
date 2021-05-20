@@ -9,15 +9,11 @@ import net.minecraft.util.math.MathHelper;
 
 public class CockatriceModel extends EntityModel<CockatriceEntity> {
 
-    public ModelPart head, body;
-
-    public ModelPart legs, legs2;
-
-    public ModelPart wings, wings2;
-
-    public ModelPart jaw, neck;
-
-    public ModelPart feather1, feather2, feather3;
+    public final ModelPart head, body;
+    public final ModelPart legs, legs2;
+    public final ModelPart wings, wings2;
+    public final ModelPart jaw, neck;
+    public final ModelPart feather1, feather2, feather3;
 
     public CockatriceModel() {
         this.head = new ModelPart(this, 0, 13);
@@ -115,5 +111,4 @@ public class CockatriceModel extends EntityModel<CockatriceEntity> {
         this.neck.yaw = head.yaw;
         this.jaw.pitch += 0.35F;
     }
-
 }
