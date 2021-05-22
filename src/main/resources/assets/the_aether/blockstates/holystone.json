@@ -7,6 +7,10 @@
       {
         "model": "the_aether:block/holystone_alt"
       }
+    ,
+      {
+        "model": "the_aether:block/holystone_alt_2"
+      }
     ]
   }
 }
