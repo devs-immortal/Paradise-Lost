@@ -2,6 +2,7 @@ package com.aether.world.feature.tree.placers;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.natural.AetherLeavesBlock;
+import com.aether.blocks.natural.AuralLeavesBlock;
 import com.aether.world.feature.tree.AetherTreeHell;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -42,15 +43,13 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
         if(radius <= 3)
             radius = 3;
 
-
-
         radius -= treeNode.getFoliageRadius();
         BlockPos nodePos = treeNode.getCenter();
         BlockPos altNodePos = nodePos.add(0, 1, 0);
         BlockState leafBlock = config.leavesProvider.getBlockState(random, nodePos);
         BlockState hanger = Blocks.AIR.getDefaultState();
 
-        if(leafBlock.getBlock() instanceof AetherLeavesBlock) {
+        if(leafBlock.getBlock() instanceof AetherLeavesBlock || leafBlock.getBlock() instanceof AuralLeavesBlock) {
             hanger = AetherLeavesBlock.getHanger(leafBlock.getBlock());
         }
 
@@ -65,15 +64,14 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
                 }
             }
         }
-        int flip = random.nextInt();
         for (int i = -radius; i < radius; i++) {
             for (int j = -radius; j < radius; j++) {
                 BlockPos offPos = nodePos.add(i, 0, j);
                 if(leaves.contains(offPos) && random.nextBoolean()) {
-                    offPos.down(2);
+                    offPos = offPos.down();
                     int hangerLength = 1 + random.nextInt(2);
                     int step = 0;
-                    while (step <= hangerLength && TreeFeature.canReplace(world, offPos)) {
+                    while (step <= hangerLength && world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir)) {
                         world.setBlockState(offPos, hanger.with(TIP, false), 19);
                         offPos = offPos.down();
                         step++;
