@@ -11,6 +11,6 @@ import java.util.Random;
 public class LavenderWisteriaSaplingGenerator extends SaplingGenerator {
     @Override
     protected @Nullable ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
-        return random.nextInt(20) == 0 ? AetherConfiguredFeatures.LAVENDER_WISTERIA_TREE : AetherConfiguredFeatures.FANCY_LAVENDER_WISTERIA_TREE;
+        return AetherConfiguredFeatures.LAVENDER_WISTERIA_TREE;
     }
 }

@@ -11,6 +11,6 @@ import java.util.Random;
 public class RoseWisteriaSaplingGenerator extends SaplingGenerator {
     @Override
     protected @Nullable ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
-        return random.nextInt(20) == 0 ? AetherConfiguredFeatures.ROSE_WISTERIA_TREE : AetherConfiguredFeatures.FANCY_ROSE_WISTERIA_TREE;
+        return AetherConfiguredFeatures.ROSE_WISTERIA_TREE;
     }
 }

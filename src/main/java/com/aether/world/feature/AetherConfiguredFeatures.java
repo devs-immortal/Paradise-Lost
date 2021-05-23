@@ -23,6 +23,7 @@ import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
+import net.minecraft.world.gen.trunk.ForkingTrunkPlacer;
 import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
@@ -58,7 +59,7 @@ public class AetherConfiguredFeatures {
         SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Configs.SCATTERED_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(7, 0.1F, 2))));
         SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))));
         THICKET_TREES = register("thicket_trees", Feature.RANDOM_SELECTOR.configure(Configs.THICKET_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(20, 0.25F, 12)))).spreadHorizontally().repeatRandomly(3);
-        RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(Configs.RAINBOW_FOREST_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(16, 0.25F, 8)))).spreadHorizontally().repeatRandomly(4);
+        RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(Configs.RAINBOW_FOREST_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(16, 0.25F, 16)))).spreadHorizontally().repeatRandomly(4);
 
         // Used in json
         HOLYSTONE_BOULDER = register("holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.COBBLED_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).applyChance(5);
@@ -66,7 +67,7 @@ public class AetherConfiguredFeatures {
 
         FALLEN_LEAVES = register("fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP.decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(UniformIntDistribution.of(3, 1)))))).spreadHorizontally().repeatRandomly(3);
         ALT_FALLEN_LEAVES = register("alt_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP.decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(UniformIntDistribution.of(2)))))).spreadHorizontally();
-        FALLEN_RAINBOW_LEAVES = register("rainbow_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.RAINBOW_LEAVES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(UniformIntDistribution.of(4, 3))))).spreadHorizontally().repeatRandomly(20);
+        FALLEN_RAINBOW_LEAVES = register("rainbow_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.RAINBOW_LEAVES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP.decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(UniformIntDistribution.of(3, 1)))))).spreadHorizontally().repeatRandomly(3);
     }
 
     private static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String id, ConfiguredFeature<FC, ?> configuredFeature) {
@@ -81,10 +82,13 @@ public class AetherConfiguredFeatures {
         public static final TreeFeatureConfig SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LEAVES.getDefaultState()), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
         // TODO: Maybe change the shape idk
         public static final TreeFeatureConfig CRYSTAL_TREE_CONFIG = (new net.minecraft.world.gen.feature.TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.CRYSTAL_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.CRYSTAL_LEAVES.getDefaultState()), new SpruceFoliagePlacer(UniformIntDistribution.of(2, 1), UniformIntDistribution.of(0, 2), UniformIntDistribution.of(1, 1)), new StraightTrunkPlacer(5, 2, 2), new TwoLayersFeatureSize(2, 0, 2))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();
-        public static final TreeFeatureConfig ROSE_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.ROSE_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(4, 1), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(6, 3, 2), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
-        public static final TreeFeatureConfig LAVENDER_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.LAVENDER_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(4, 1), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(5, 2, 3), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
-        public static final TreeFeatureConfig FROST_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.FROST_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(6, 2), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(9, 3, 3), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
-        public static final TreeFeatureConfig BOREAL_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.BOREAL_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(6, 2), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(9, 3, 3), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
+
+        public static final TreeFeatureConfig ROSE_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.ROSE_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(2, 1), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(6, 3, 2), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
+
+        public static final TreeFeatureConfig LAVENDER_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.LAVENDER_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(2, 1), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(6, 3, 2), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
+        public static final TreeFeatureConfig FROST_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.FROST_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(2, 1), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(6, 3, 2), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
+        public static final TreeFeatureConfig BOREAL_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.BOREAL_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(3, 2), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(6, 3, 2), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
+
         public static final TreeFeatureConfig FANCY_ROSE_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.ROSE_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(7, 2), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(9, 4, 2), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
         public static final TreeFeatureConfig FANCY_LAVENDER_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.LAVENDER_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(7, 2), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(9, 4, 2), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
         public static final TreeFeatureConfig FANCY_FROST_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.FROST_WISTERIA_LEAVES.getDefaultState()), new WisteriaFoliagePlacer(UniformIntDistribution.of(9, 3), UniformIntDistribution.of(0, 1)), new WisteriaTrunkPlacer(11, 6, 3), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
@@ -104,8 +108,8 @@ public class AetherConfiguredFeatures {
         );
 
         public static final RandomFeatureConfig RAINBOW_FOREST_CONFIG = new RandomFeatureConfig(
-                ImmutableList.of(Feature.TREE.configure(FANCY_LAVENDER_WISTERIA_CONFIG).withChance(0.33F), Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.05F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FROST_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(FANCY_SKYROOT_CONFIG).withChance(0.1F)),
-                Feature.TREE.configure(Configs.FANCY_ROSE_WISTERIA_CONFIG)
+                ImmutableList.of(Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.33F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FROST_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.1F)),
+                Feature.TREE.configure(Configs.ROSE_WISTERIA_CONFIG)
         );
 
         public static final RandomFeatureConfig SPARSE_TREES_CONFIG = new RandomFeatureConfig(

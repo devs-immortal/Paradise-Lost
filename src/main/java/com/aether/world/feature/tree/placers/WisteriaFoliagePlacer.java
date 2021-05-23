@@ -1,5 +1,6 @@
 package com.aether.world.feature.tree.placers;
 
+import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.natural.AetherLeavesBlock;
 import com.aether.world.feature.tree.AetherTreeHell;
 import com.mojang.serialization.Codec;
@@ -56,7 +57,7 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
         for(int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
                 for (int k = 0; k < radius; k++) {
-                    BlockPos offPos = nodePos.add(i, k, j);
+                    BlockPos offPos = nodePos.add(Math.signum(i) * Math.abs(i)-k, k, Math.signum(j) * Math.abs(j)-k);
                     if((world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir) || TreeFeature.canReplace(world, offPos)) && offPos.isWithinDistance(random.nextBoolean() ? nodePos : altNodePos, radius)) {
                         world.setBlockState(offPos, leafBlock, 19);
                         leaves.add(offPos);
@@ -68,30 +69,16 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
         for (int i = -radius; i < radius; i++) {
             for (int j = -radius; j < radius; j++) {
                 BlockPos offPos = nodePos.add(i, 0, j);
-                if(leaves.contains(offPos)) {
-                    int cap = random.nextInt(Math.max(trunkHeight - (flip % 2 == 0 ? 2 : 0), 1));
-                    flip++;
-                    int lonke = 0;
-                    if(cap > 1)
-                        lonke = random.nextInt(cap + 1);
-                    if(offPos.getManhattanDistance(nodePos) >= radius - 1)
-                        cap++;
-                    for (int k = 1; k < cap; k++) {
-                        BlockPos hangPos = offPos.down(k);
-                        if(!world.testBlockState(hangPos, state -> state.isFullCube((BlockView) world, hangPos))) {
-                            if(world.testBlockState(hangPos.down(), AbstractBlock.AbstractBlockState::isAir) || TreeFeature.canReplace(world, hangPos)) {
-                                world.breakBlock(hangPos, false);
-                                if(k <= lonke)
-                                    world.setBlockState(hangPos, leafBlock, 19);
-                                else if(k == cap - 1)
-                                    world.setBlockState(hangPos, hanger.with(TIP, true), 19);
-                                else
-                                    world.setBlockState(hangPos, hanger.with(TIP, false), 19);
-                            }
-                            else
-                                break;
-                        }
+                if(leaves.contains(offPos) && random.nextBoolean()) {
+                    offPos.down(2);
+                    int hangerLength = 1 + random.nextInt(2);
+                    int step = 0;
+                    while (step <= hangerLength && TreeFeature.canReplace(world, offPos)) {
+                        world.setBlockState(offPos, hanger.with(TIP, false), 19);
+                        offPos = offPos.down();
+                        step++;
                     }
+                    world.setBlockState(offPos.up(), hanger.with(TIP, true), 19);
                 }
             }
         }
