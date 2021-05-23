@@ -15,6 +15,10 @@
         "model": "the_aether:block/holystone_mirrored",
         "y": 180
       }
+    ,
+      {
+        "model": "the_aether:block/holystone_alt_2"
+      }
     ]
   }
 }
