@@ -47,8 +47,7 @@ public class AetherPortalBlock extends CustomPortalBlock {
         else world.addParticle(ParticleTypes.CLOUD, d, e, f, 0, 0, 0);
     }
 
-    @Override
-    public Block getPortalBase(BlockView world, BlockPos pos) {
+    public static Block getPortalBase(BlockView world, BlockPos pos) {
         return Blocks.GLOWSTONE;
     }
 }

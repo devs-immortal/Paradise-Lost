@@ -3,11 +3,8 @@ package com.aether.client.rendering.entity;
 import com.aether.Aether;
 import com.aether.client.model.entity.AerwhaleModel;
 import com.aether.entities.passive.AerwhaleEntity;
-import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class AerwhaleRenderer  extends MobEntityRenderer<AerwhaleEntity, AerwhaleModel> {

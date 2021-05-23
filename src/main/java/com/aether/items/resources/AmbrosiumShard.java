@@ -1,7 +1,6 @@
 package com.aether.items.resources;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.items.AetherItemGroups;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

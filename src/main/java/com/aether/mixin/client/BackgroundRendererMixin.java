@@ -2,7 +2,6 @@ package com.aether.mixin.client;
 
 import com.aether.util.RegistryUtil;
 import com.aether.world.dimension.AetherDimension;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;

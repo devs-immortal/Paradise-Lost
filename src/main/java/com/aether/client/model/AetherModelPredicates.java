@@ -8,7 +8,7 @@ public class AetherModelPredicates {
 
     public static void init() {
         FabricModelPredicateProviderRegistry.register(AetherItems.PHOENIX_BOW, new Identifier("pull"), ((stack, world, entity) -> {
-            if(entity == null) {
+            if (entity == null) {
                 return 0F;
             }
             return entity.getActiveItem() != stack ? 0F : (stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20F;

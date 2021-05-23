@@ -1,7 +1,6 @@
 package com.aether.blocks.aercloud;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;

@@ -1,7 +1,6 @@
 package com.aether.entities.projectile;
 
 import com.aether.Aether;
-import com.aether.api.AetherAPI;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.AetherPoisonMovement;
 import com.aether.items.AetherItems;

@@ -41,7 +41,7 @@ public class AetherEntityTypes {
     public static final EntityType<PoisonDartEntity> POISON_DART;
     public static final EntityType<PoisonNeedleEntity> POISON_NEEDLE;
 //    public static EntityType<WhirlwindEntity> WHIRLWIND;
-    public static EntityType<AerwhaleEntity> AERWHALE;
+    public static final EntityType<AerwhaleEntity> AERWHALE;
 //    public static EntityType<MiniCloudEntity> MINI_CLOUD;
 //    public static EntityType<FireMinionEntity> FIRE_MINION;
 //    public static EntityType<CrystalEntity> CRYSTAL;
@@ -114,7 +114,7 @@ public class AetherEntityTypes {
     }
 
     public static <X extends Entity> EntityType<X> register(String name, int trackingDistance, int updateIntervalTicks, boolean alwaysUpdateVelocity, EntityDimensions size, EntityType.EntityFactory<X> factory) {
-        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory).trackable(trackingDistance, updateIntervalTicks, alwaysUpdateVelocity).dimensions(size).disableSaving().build());
+        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory).trackRangeBlocks(trackingDistance).trackedUpdateRate(updateIntervalTicks).forceTrackedVelocityUpdates(alwaysUpdateVelocity).dimensions(size).disableSaving().build());
     }
 
     public static <X extends Entity> EntityType<X> register(String name, SpawnGroup category, EntityDimensions size, EntityType.EntityFactory<X> factory) {

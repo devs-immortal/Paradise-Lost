@@ -12,13 +12,13 @@ import java.util.List;
 public class MinecraftLaunchJson {
     public String id;
     public String inheritsFrom;
-    public String releaseTime = Utils.ISO_8601.format(new Date());
+    public final String releaseTime = Utils.ISO_8601.format(new Date());
     public String time = releaseTime;
     public String type = "release";
-    public String mainClass;
+    public final String mainClass;
     public transient String mainClassServer;
-    public Arguments arguments = new Arguments();
-    public List<Library> libraries = new ArrayList<>();
+    public final Arguments arguments = new Arguments();
+    public final List<Library> libraries = new ArrayList<>();
 
     //Used for reading the fabric-launch.json and populating the minecraft format
     public MinecraftLaunchJson(JsonObject jsonObject) {
@@ -48,7 +48,7 @@ public class MinecraftLaunchJson {
 
     public static class Library {
 
-        public String name;
+        public final String name;
         public String url;
 
         public Library(String name, String url) {
@@ -89,6 +89,6 @@ public class MinecraftLaunchJson {
 
     public static class Arguments {
 
-        public List<String> game = new ArrayList<>();
+        public final List<String> game = new ArrayList<>();
     }
 }

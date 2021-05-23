@@ -20,14 +20,12 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -36,7 +34,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 //import com.aether.world.storage.loot.AetherLootTableList;
 
@@ -311,7 +308,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                         if (g > 0.0F) {
                             float i = MathHelper.sin(this.yaw * 0.017453292F);
                             float j = MathHelper.cos(this.yaw * 0.017453292F);
-                            this.setVelocity(this.getVelocity().add(-0.4F * i * this.jumpStrength, 0.0D, (double)(0.4F * j * this.jumpStrength)));
+                            this.setVelocity(this.getVelocity().add(-0.4F * i * this.jumpStrength, 0.0D, 0.4F * j * this.jumpStrength));
                         }
 
                         this.jumpStrength = 0.0F;
@@ -324,7 +321,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                 this.flyingSpeed = this.getMovementSpeed() * (isGliding() ? 0.5F : 0.1F);
                 if (this.isLogicalSideForUpdatingMovement()) {
                     this.setMovementSpeed((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
-                    super.travel(new Vec3d((double)f, movementInput.y, (double)g));
+                    super.travel(new Vec3d(f, movementInput.y, g));
                 } else if (livingEntity instanceof PlayerEntity) {
                     this.setVelocity(Vec3d.ZERO);
                 }

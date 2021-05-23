@@ -1,23 +1,18 @@
 package com.aether.world.feature.tree.placers;
 
-import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.natural.AetherLeavesBlock;
-import com.aether.mixin.block.AbstractBlockAccessor;
+import com.aether.blocks.natural.AuralLeavesBlock;
 import com.aether.world.feature.tree.AetherTreeHell;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -48,22 +43,20 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
         if(radius <= 3)
             radius = 3;
 
-
-
         radius -= treeNode.getFoliageRadius();
         BlockPos nodePos = treeNode.getCenter();
         BlockPos altNodePos = nodePos.add(0, 1, 0);
         BlockState leafBlock = config.leavesProvider.getBlockState(random, nodePos);
         BlockState hanger = Blocks.AIR.getDefaultState();
 
-        if(leafBlock.getBlock() instanceof AetherLeavesBlock) {
+        if(leafBlock.getBlock() instanceof AetherLeavesBlock || leafBlock.getBlock() instanceof AuralLeavesBlock) {
             hanger = AetherLeavesBlock.getHanger(leafBlock.getBlock());
         }
 
         for(int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
                 for (int k = 0; k < radius; k++) {
-                    BlockPos offPos = nodePos.add(i, k, j);
+                    BlockPos offPos = nodePos.add(Math.signum(i) * Math.abs(i)-k, k, Math.signum(j) * Math.abs(j)-k);
                     if((world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir) || TreeFeature.canReplace(world, offPos)) && offPos.isWithinDistance(random.nextBoolean() ? nodePos : altNodePos, radius)) {
                         world.setBlockState(offPos, leafBlock, 19);
                         leaves.add(offPos);
@@ -71,34 +64,19 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
                 }
             }
         }
-        int flip = random.nextInt();
         for (int i = -radius; i < radius; i++) {
             for (int j = -radius; j < radius; j++) {
                 BlockPos offPos = nodePos.add(i, 0, j);
-                if(leaves.contains(offPos)) {
-                    int cap = random.nextInt(Math.max(trunkHeight - (flip % 2 == 0 ? 2 : 0), 1));
-                    flip++;
-                    int lonke = 0;
-                    if(cap > 1)
-                        lonke = random.nextInt(cap + 1);
-                    if(offPos.getManhattanDistance(nodePos) >= radius - 1)
-                        cap++;
-                    for (int k = 1; k < cap; k++) {
-                        BlockPos hangPos = offPos.down(k);
-                        if(!world.testBlockState(hangPos, state -> state.isFullCube((BlockView) world, hangPos))) {
-                            if(world.testBlockState(hangPos.down(), AbstractBlock.AbstractBlockState::isAir) || TreeFeature.canReplace(world, hangPos)) {
-                                world.breakBlock(hangPos, false);
-                                if(k <= lonke)
-                                    world.setBlockState(hangPos, leafBlock, 19);
-                                else if(k == cap - 1)
-                                    world.setBlockState(hangPos, hanger.with(TIP, true), 19);
-                                else
-                                    world.setBlockState(hangPos, hanger.with(TIP, false), 19);
-                            }
-                            else
-                                break;
-                        }
+                if(leaves.contains(offPos) && random.nextBoolean()) {
+                    offPos = offPos.down();
+                    int hangerLength = 1 + random.nextInt(2);
+                    int step = 0;
+                    while (step <= hangerLength && world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir)) {
+                        world.setBlockState(offPos, hanger.with(TIP, false), 19);
+                        offPos = offPos.down();
+                        step++;
                     }
+                    world.setBlockState(offPos.up(), hanger.with(TIP, true), 19);
                 }
             }
         }

@@ -2,12 +2,9 @@ package com.aether.world.feature;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.natural.AetherLeavesBlock;
-import com.aether.blocks.natural.CrystalLeavesBlock;
-import com.aether.world.feature.tree.CrystalSaplingGenerator;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.StructureWorldAccess;

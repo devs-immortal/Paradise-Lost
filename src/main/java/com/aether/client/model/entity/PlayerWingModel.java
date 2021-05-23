@@ -12,8 +12,7 @@ import java.util.function.Function;
 
 public class PlayerWingModel extends BipedEntityModel<AbstractClientPlayerEntity> {
 
-    public ModelPart wingLeft;
-    public ModelPart wingRight;
+    public final ModelPart wingLeft, wingRight;
     public float sinage;
     public boolean gonRound;
 

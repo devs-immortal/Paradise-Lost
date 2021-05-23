@@ -1,17 +1,14 @@
 package com.aether.items.accessories;
 
 import com.aether.Aether;
-import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 
 public class ItemAccessory extends Item {
     private final int color;
     private final AccessoryType type;
-    private Identifier texture;
-    private Identifier texture_slim;
+    private final Identifier texture, texture_slim;
     private float damageMultiplier = 1.0F;
 
     public ItemAccessory(AccessoryType type, String material, AetherItemSettings settings) {

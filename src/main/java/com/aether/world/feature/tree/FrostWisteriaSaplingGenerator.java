@@ -11,6 +11,6 @@ import java.util.Random;
 public class FrostWisteriaSaplingGenerator extends SaplingGenerator {
     @Override
     protected @Nullable ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
-        return random.nextInt(20) == 0 ? AetherConfiguredFeatures.FROST_WISTERIA_TREE : AetherConfiguredFeatures.FANCY_FROST_WISTERIA_TREE;
+        return AetherConfiguredFeatures.FROST_WISTERIA_TREE;
     }
 }

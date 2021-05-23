@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "the_aether:swet_ball"
+    },
+    {
+      "item": "the_aether:swet_ball"
+    },
+    {
+      "item": "the_aether:swet_ball"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "the_aether:blue_gummy_swet"
+  }
+}

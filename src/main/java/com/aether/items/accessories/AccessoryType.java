@@ -22,7 +22,7 @@ public enum AccessoryType {
     }
 
     public static Int2ObjectBiMap<AccessoryType> createCompleteList() {
-        Int2ObjectBiMap<AccessoryType> map = new Int2ObjectBiMap<AccessoryType>(8);
+        Int2ObjectBiMap<AccessoryType> map = new Int2ObjectBiMap<>(8);
 
         map.put(PENDANT, 0);
         map.put(CAPE, 1);

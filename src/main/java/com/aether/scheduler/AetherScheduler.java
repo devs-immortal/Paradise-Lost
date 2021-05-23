@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AetherScheduler {
-    public static HashMap<Integer, ScheduleTask> Tasks = new HashMap<>();
+    public static final HashMap<Integer, ScheduleTask> Tasks = new HashMap<>();
 
     public static void Remove(int id) {
         try {
