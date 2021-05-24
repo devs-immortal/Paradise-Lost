@@ -40,7 +40,7 @@ public class SwetEntity extends SlimeEntity {
     @Override
     public void tick(){
         if(stuckCooldown >= 0){
-            System.out.println(stuckCooldown);
+//            System.out.println(stuckCooldown);
             --stuckCooldown;
         }
         super.tick();
