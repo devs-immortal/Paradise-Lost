@@ -51,7 +51,7 @@ repositories {
             includeGroup "curse.maven"
         }
     }
-    maven { url "https://dl.bintray.com/kyrptonaught/customportalapi" }
+    maven { url "http://maven.kyrptonaught.dev" }
     maven { url "https://hephaestus.dev/release" }
     maven { url "https://jitpack.io" }
     maven {
@@ -94,14 +94,14 @@ dependencies {
         exclude module: "fabric-loader"
     }
 
-    //customportalapi
-    modImplementation "com.github.kyrptonaught:customportalapi:8db933af27"
-    include "com.github.kyrptonaught:customportalapi:8db933af27"
+    // Custom Portal Api
+    modImplementation "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
+    include "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
 
     modImplementation "dev.hephaestus:seedy-behavior:${project.seedy_version}"
     include "dev.hephaestus:seedy-behavior:${project.seedy_version}"
 
-    // Implement trinkets for parachutes, rings etc.
+    // Implement Trinkets for parachutes, rings etc.
     modImplementation "com.github.emilyploszaj:trinkets:${trinkets_version}"
 }
 
