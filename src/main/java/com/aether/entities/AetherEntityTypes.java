@@ -47,7 +47,9 @@ public class AetherEntityTypes {
 //    public static EntityType<CrystalEntity> CRYSTAL;
 //    public static EntityType<PhoenixArrowEntity> PHOENIX_ARROW;
     public static final EntityType<SwetEntity> BLUE_SWET;
-    public static final EntityType<SwetEntity> YELLOW_SWET;
+    public static final EntityType<SwetEntity> PURPLE_SWET;
+    public static final EntityType<SwetEntity> WHITE_SWET;
+    public static final EntityType<SwetEntity> GOLDEN_SWET;
 
     static {
         AECHOR_PLANT = register("aechor_plant", SpawnGroup.MONSTER, EntityDimensions.changing(1.0F, 1.0F), (entityType, world) -> new AechorPlantEntity(world));
@@ -70,7 +72,9 @@ public class AetherEntityTypes {
 //        CRYSTAL = register("crystal", ...);
 //        PHOENIX_ARROW = register("phoenix_arrow", ...);
         BLUE_SWET = register("blue_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new BlueSwetEntity(world));
-        YELLOW_SWET = register("yellow_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new YellowSwetEntity(world));
+        PURPLE_SWET = register("purple_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new PurpleSwetEntity(world));
+        WHITE_SWET = register("white_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new WhiteSwetEntity(world));
+        GOLDEN_SWET = register("golden_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new GoldenSwetEntity(world));
     }
 
     public static void init() {
@@ -85,7 +89,9 @@ public class AetherEntityTypes {
         FabricDefaultAttributeRegistry.register(AERWHALE, AerwhaleEntity.initAttributes());
         FabricDefaultAttributeRegistry.register(CHEST_MIMIC, ChestMimicEntity.initAttributes());
         FabricDefaultAttributeRegistry.register(BLUE_SWET, SwetEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(YELLOW_SWET, SwetEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(PURPLE_SWET, SwetEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(WHITE_SWET, SwetEntity.initAttributes());
+        FabricDefaultAttributeRegistry.register(GOLDEN_SWET, SwetEntity.initAttributes());
 
         // Don't seem to spawn if there is a restriction, i'm not sure but maybe it's because of their size?
         //SpawnRestriction.register(AERWHALE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
@@ -97,7 +103,9 @@ public class AetherEntityTypes {
         SpawnRestriction.register(COCKATRICE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
         SpawnRestriction.register(AECHOR_PLANT, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
         SpawnRestriction.register(BLUE_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
-        SpawnRestriction.register(YELLOW_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
+        SpawnRestriction.register(PURPLE_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
+        SpawnRestriction.register(WHITE_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
+        SpawnRestriction.register(GOLDEN_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
     }
 
     public static DefaultAttributeContainer.Builder getDefaultAttributes() {

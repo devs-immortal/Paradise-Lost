@@ -22,8 +22,12 @@ public class SwetEntity extends SlimeEntity {
         init();
     }
 
-    private void init(){
-        super.setSize(2, false);
+    protected void init(){
+        if (this instanceof GoldenSwetEntity) {
+            super.setSize(4, false);
+        } else {
+            super.setSize(2, false);
+        }
         getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(25);
         setHealth(getMaxHealth());
     }
@@ -40,7 +44,6 @@ public class SwetEntity extends SlimeEntity {
     @Override
     public void tick(){
         if(stuckCooldown >= 0){
-//            System.out.println(stuckCooldown);
             --stuckCooldown;
         }
         super.tick();
@@ -59,6 +62,7 @@ public class SwetEntity extends SlimeEntity {
         if (passenger instanceof PlayerEntity) {
             stuckCooldown = 30;
         }
+        super.removePassenger(passenger);
     }
 
     // Prevents the size from being changed
