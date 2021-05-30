@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath 'de.guntram.mcmod:crowdin-translate:1.2'
+        classpath "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
     }
     repositories {
         maven {
@@ -76,8 +76,8 @@ dependencies {
     modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:1.1.1"))
     modImplementation(include("io.github.cottonmc:LibGui:3.3.5+1.16.5"))
 
-    modImplementation "de.guntram.mcmod:crowdin-translate:1.2"
-    include "de.guntram.mcmod:crowdin-translate:1.2"
+    modImplementation "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
+    include "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
 
     // Implement the required portions of FAPI
     // Remember to maintain these, and add the modular bits as needed. 
