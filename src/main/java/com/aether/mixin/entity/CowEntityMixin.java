@@ -37,7 +37,7 @@ public class CowEntityMixin extends AnimalEntity {
     }
 
     @Shadow
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+    public CowEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
     }
 }
