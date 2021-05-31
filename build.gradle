@@ -62,7 +62,6 @@ repositories {
         name = "NerdHubMC"
         url = "https://maven.abusedmaster.xyz/"
     }
-    jcenter()
     mavenCentral()
 }
 
@@ -94,9 +93,9 @@ dependencies {
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
 
-    modRuntime("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
-        exclude module: "fabric-loader"
-    }
+//    modRuntime("com.github.SuperCoder7979:databreaker:${databreaker_version}") {
+//        exclude module: "fabric-loader"
+//    }
 
     // Custom Portal Api
     modImplementation "com.github.kyrptonaught:customportalapi:${project.customportalapi_version}"
