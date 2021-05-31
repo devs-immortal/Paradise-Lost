@@ -3,9 +3,18 @@
 [![Asset license (Unlicensed)](https://img.shields.io/badge/assets%20license-All%20Rights%20Reserved-red.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Github all releases](https://img.shields.io/github/downloads/kalucky0/The-Aether/total.svg?logoColor=FFFFFF&logo=github)](https://github.com/kalucky0/The-Aether/releases/)
 
-The Aether is a dimension high in the sky composed of floating islands. Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, mythical creatures and perilous Dungeons. All you need to do is build a Glowstone frame and add water to light the mystical portal, step in and you'll be transported immediately to the luscious hostile paradise known as the Aether.
+**Is this official?**
 
-You can download the mod on [Modrinth](https://modrinth.com/mod/aether) or the [releases tab](https://github.com/kalucky0/The-Aether/releases) on Github.
+The Aether Reborn is an unofficial reimagining of the original Aether mod, developed by Gilded Games (GG). 
+We are a team separate from GG looking to adapt the original concepts of The Aether to modern Minecraft's updated design concepts, and give the mod a fresh set of textures to match. As a Fabric mod we're looking to take advantage of Fabric's quick updates to the latest versions to keep The Aether usable with the newest Minecraft and stay up-to-date.
+
+**What is The Aether?**
+
+The Aether is a dimension high in the sky composed of floating islands. 
+Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, structures to explore, mythical creatures, and perilous dungeons. Build a Glowstone frame and add water to light the mystical portal, step in and be transported to the beautiful but hostile paradise known as the Aether.
+This tranquil oasis is the polar opposite of the Nether, filled with lush trees and foliage, and populated by unique and exotic mobs, both hostile and friendly. The Aether is deceptively charming, and the further you explore, the darker its secrets get. Mine new ores, craft new gear, explore hidden temples and dungeons, and battle to claim The Aether as your own.
+
+You can download the mod on [Modrinth](https://modrinth.com/mod/aether), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/aether), or in the [releases tab](https://github.com/kalucky0/The-Aether/releases) on Github.
 
 **Original repo:** [GildedGames/The-Aether](https://gitea.gildedgames.com/GildedGames/The-Aether)
 
@@ -14,7 +23,7 @@ You can download the mod on [Modrinth](https://modrinth.com/mod/aether) or the [
 [![Support on Patreon](https://img.shields.io/badge/Support%20on-Patreon-orange?logoColor=FFFFFF&logo=patreon)](https://www.patreon.com/kalucky0)
 [![Support on Ko-Fi](https://img.shields.io/badge/Support%20on-Ko--Fi-blue?logoColor=FFFFFF&logo=ko-fi)](https://ko-fi.com/kalucky0)
 
-You can support our work by [making a pledge](https://www.patreon.com/kalucky0) today helping fund development and gaining access to special perks. You can also support the Aether project and **Gilded Games** on [their Patreon](https://www.patreon.com/GildedGames) as they are the ones who did most of the work.
+You can support our work by [making a pledge](https://www.patreon.com/kalucky0) today helping fund development and gaining access to special perks. You can also support the Aether project and **Gilded Games** on [their Patreon](https://www.patreon.com/GildedGames).
 
 ## Translations
 [![Crowdin](https://badges.crowdin.net/aether/localized.svg)](https://crowdin.com/project/aether)
@@ -25,15 +34,10 @@ The Aether Reborn makes use of crowd sourced translations.
 
 ## Gallery
 
-<center>
-
-<img src="https://user-images.githubusercontent.com/53229958/114324118-0a432a80-9aee-11eb-8c13-b65aa5b160a4.png" width="570">
-<br>
-<img src="https://user-images.githubusercontent.com/53229958/114324133-2646cc00-9aee-11eb-83da-99ed15a96299.png"  width="570">
-<br>
-<img src="https://user-images.githubusercontent.com/53229958/114324132-25ae3580-9aee-11eb-8d91-b7311a1772a7.png"  width="570">
-
-</center>
+| <img src="https://user-images.githubusercontent.com/53229958/120235847-8faaa780-c220-11eb-98e5-c288cb01c475.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/120235855-92a59800-c220-11eb-994f-889c843beb5b.png" width="570"> |
+| --- | --- |
+| <img src="https://user-images.githubusercontent.com/53229958/120235859-93d6c500-c220-11eb-86bc-5fac972ed2eb.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/120235863-946f5b80-c220-11eb-99e6-98c03a79a29a.png" width="570"> |
+| <img src="https://user-images.githubusercontent.com/53229958/120235865-95a08880-c220-11eb-8003-5904088b0fcf.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/120235868-96391f00-c220-11eb-9cd1-9186fc07d37a.png" width="570"> |
 
 ## License information
 Created by Immortal Devs.\
