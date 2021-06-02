@@ -11,7 +11,7 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.7.26'
+    id 'fabric-loom' version '0.8.15'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "1.2.1"
 }
