@@ -73,7 +73,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Libraries
-    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:1.1.1"))
+    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:2.1.0"))
     modImplementation(include("io.github.cottonmc:LibGui:3.4.0+"))
 
     modImplementation "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
