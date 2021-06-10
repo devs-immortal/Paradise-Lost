@@ -2,7 +2,6 @@ package com.aether.entities.passive;
 
 import com.aether.entities.AetherEntityTypes;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.ai.TargetFinder;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -41,10 +40,10 @@ public class AerwhaleEntity extends AetherAnimalEntity {
     }
 
 
-    @Override
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier) {
-        return false;
-    }
+//    @Override
+//    public boolean handleFallDamage(float fallDistance, float damageMultiplier) {
+//        return false;
+//    }
 
 
     @Override
@@ -78,7 +77,7 @@ public class AerwhaleEntity extends AetherAnimalEntity {
 //                return false;
 //            }
 
-            Vec3d vec3d = this.getWanderTarget();
+            Vec3d vec3d = null;//this.getWanderTarget();
             if (vec3d == null) {
 //                System.out.println("Target was null");
                 return false;
@@ -91,10 +90,10 @@ public class AerwhaleEntity extends AetherAnimalEntity {
             }
         }
 
-        @Nullable
-        protected Vec3d getWanderTarget() {
-            return TargetFinder.findAirTarget(mob, 16, 6, Vec3d.ZERO, 180.0F, 20, 4);
-        }
+//        @Nullable
+//        protected Vec3d getWanderTarget() {
+//            return TargetFinder.findAirTarget(mob, 16, 6, Vec3d.ZERO, 180.0F, 20, 4);
+//        }
 
 
         public boolean shouldContinue() {
