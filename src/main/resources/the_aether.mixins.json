@@ -38,7 +38,6 @@
     "client.WorldRendererMixin",
     "client.render.BiomeLayerSamplerAccessor",
     "client.render.BlockStateModelGeneratorMixin",
-    "client.render.CloudRendererMixin",
     "client.render.MinecraftClientMixin"
   ],
   "injectors": {
