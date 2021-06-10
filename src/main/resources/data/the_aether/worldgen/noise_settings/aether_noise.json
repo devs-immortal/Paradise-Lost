@@ -2,6 +2,11 @@
   "bedrock_roof_position": -20,
   "bedrock_floor_position": -20,
   "sea_level": 0,
+  "noise_caves_enabled": false,
+  "noodle_caves_enabled": false,
+  "deepslate_enabled": false,
+  "ore_veins_enabled": false,
+  "aquifers_enabled": false,
   "disable_mob_generation": false,
   "structures": {
     "structures": {
@@ -27,7 +32,8 @@
     }
   },
   "noise": {
-    "height": 128,
+    "min_y": 0,
+    "height": 256,
     "size_horizontal": 2,
     "size_vertical": 1,
     "density_factor": 0,
