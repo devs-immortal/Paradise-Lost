@@ -6,10 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.*;
 
@@ -20,9 +19,11 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos startPos, DefaultFeatureConfig config) {
+    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         BlockPos origin = null;
         BlockPos.Mutable mut = new BlockPos.Mutable();
+
+        BlockPos startPos = context.getOrigin();
 
         for (int x = -16; x < 16; ++x) {
             for (int y = 20; y < 128; y++) {
@@ -30,7 +31,7 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
                     mut.set(startPos);
                     mut.move(x, y, z);
 
-                    if (world.getBlockState(mut).isAir() && world.getBlockState(mut.up()).isOf(AetherBlocks.AETHER_GRASS_BLOCK) && world.getBlockState(mut.up(2)).isAir()) {
+                    if (context.getWorld().getBlockState(mut).isAir() && context.getWorld().getBlockState(mut.up()).isOf(AetherBlocks.AETHER_GRASS_BLOCK) && context.getWorld().getBlockState(mut.up(2)).isAir()) {
                         origin = new BlockPos(mut);
                     }
                 }
@@ -59,7 +60,7 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
 
                     if (!visited.contains(mut) && !centers.contains(mut)) {
                         BlockState up;
-                        if (world.getBlockState(mut).isAir() && !(up = world.getBlockState(mut.up())).isAir() && !(up.getBlock() instanceof BaseAercloudBlock) && mut.isWithinDistance(startPos, 24)) {
+                        if (context.getWorld().getBlockState(mut).isAir() && !(up = context.getWorld().getBlockState(mut.up())).isAir() && !(up.getBlock() instanceof BaseAercloudBlock) && mut.isWithinDistance(startPos, 24)) {
                             BlockPos p = new BlockPos(mut);
                             nextStops.add(p);
                             centers.add(p);
@@ -76,21 +77,21 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
 
         mut.set(origin);
 
-        ChunkRegion region = (ChunkRegion) world;
+        ChunkRegion region = (ChunkRegion) context.getWorld();
 
         List<int[]> positions = new ArrayList<>();
 
         int radius;
         if (centers.size() > 10) {
             for (BlockPos center : centers) {
-                radius = random.nextInt(2)+4;
+                radius = context.getRandom().nextInt(2)+4;
 
                 for (int x = center.getX() - radius; x < center.getX() + radius; x++) {
                     for (int z = center.getZ() - radius; z < center.getZ() + radius; z++) {
                         mut.set(x, center.getY(), z);
 
                         if (region.isChunkLoaded(mut.getX() >> 4, mut.getZ() >> 4)) {
-                            if (world.getBlockState(mut).isAir() && mut.isWithinDistance(center, radius)) {
+                            if (context.getWorld().getBlockState(mut).isAir() && mut.isWithinDistance(center, radius)) {
                                 positions.add(new int[] {mut.getX(), mut.getY(), mut.getZ()});
                             }
                         } else {
@@ -103,7 +104,7 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
 
         for (int[] pos : positions) {
             mut.set(pos[0], pos[1], pos[2]);
-            this.setBlockState(world, mut, AetherBlocks.QUICKSOIL.getDefaultState());
+            this.setBlockState(context.getWorld(), mut, AetherBlocks.QUICKSOIL.getDefaultState());
         }
 
         return true;

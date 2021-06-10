@@ -37,7 +37,7 @@ public abstract class DartEntity extends PersistentProjectileEntity {
             if (!this.onGround) ++this.ticksInAir;
 
             if (this.ticksInAir == 500) {
-                this.remove();
+                this.discard();
                 return;
             }
         }

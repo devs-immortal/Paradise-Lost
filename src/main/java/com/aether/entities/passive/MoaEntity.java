@@ -280,11 +280,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
         if (this.isAlive()) {
             if (this.hasPassengers() && this.canBeControlledByRider() && this.isSaddled()) {
                 LivingEntity livingEntity = (LivingEntity)this.getPrimaryPassenger();
-                this.yaw = livingEntity.yaw;
-                this.prevYaw = this.yaw;
-                this.pitch = livingEntity.pitch * 0.5F;
-                this.setRotation(this.yaw, this.pitch);
-                this.bodyYaw = this.yaw;
+                this.prevYaw = this.getYaw();
+                this.setYaw(livingEntity.getYaw());
+                this.setPitch(livingEntity.getPitch() * 0.5F);
+                this.setRotation(this.getYaw(), this.getPitch());
+                this.bodyYaw = this.getYaw();
                 this.headYaw = this.bodyYaw;
                 float f = livingEntity.sidewaysSpeed * 0.5F;
                 float g = livingEntity.forwardSpeed;
@@ -306,8 +306,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                         this.setVelocity(vec3d.x, h, vec3d.z);
                         this.velocityDirty = true;
                         if (g > 0.0F) {
-                            float i = MathHelper.sin(this.yaw * 0.017453292F);
-                            float j = MathHelper.cos(this.yaw * 0.017453292F);
+                            float i = MathHelper.sin(this.getYaw() * 0.017453292F);
+                            float j = MathHelper.cos(this.getYaw() * 0.017453292F);
                             this.setVelocity(this.getVelocity().add(-0.4F * i * this.jumpStrength, 0.0D, 0.4F * j * this.jumpStrength));
                         }
 

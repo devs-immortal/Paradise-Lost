@@ -12,8 +12,9 @@ public class AetherWallBlock extends WallBlock {
         super(FabricBlockSettings.copy(state.getBlock()));
     }
 
-    @Override
-    public boolean isIn(Tag<Block> tag) {
-        return tag == BlockTags.WALLS || super.isIn(tag);
-    }
+    // TODO: Stubbed. Pending 1.17 rewrite.
+//    @Override
+//    public boolean isIn(Tag<Block> tag) {
+//        return tag == BlockTags.WALLS || super.isIn(tag);
+//    }
 }

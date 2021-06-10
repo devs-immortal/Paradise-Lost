@@ -237,7 +237,7 @@ public class SheepuffEntity extends AnimalEntity {
 
             return 0.62831855F + 0.21991149F * MathHelper.sin(float_2 * 28.7F);
         } else {
-            return this.sheepTimer > 0 ? 0.62831855F : this.pitch * 0.017453292F;
+            return this.sheepTimer > 0 ? 0.62831855F : this.getPitch() * 0.017453292F;
         }
     }
 

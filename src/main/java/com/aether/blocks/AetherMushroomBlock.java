@@ -10,15 +10,17 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class AetherMushroomBlock extends MushroomPlantBlock {
 
     private final HangType type;
 
-    public AetherMushroomBlock(Settings settings, HangType type) {
-        super(settings);
+    public AetherMushroomBlock(Settings settings, Supplier<ConfiguredFeature<?, ?>> feature, HangType type) {
+        super(settings, feature);
         this.type = type;
     }
 

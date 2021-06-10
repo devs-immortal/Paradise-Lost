@@ -16,8 +16,9 @@ import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 
 public class AetherFeatures {
-    public static final StructurePieceType WELL_PIECE = register(WellGenerator.WellPiece::new, "well");
-    public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.TowerPiece::new, "skyroot_tower");
+    // TODO: Stubbed. Pending 1.17 rewrite.
+//    public static final StructurePieceType WELL_PIECE = register(WellGenerator.WellPiece::new, "well");
+//    public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.TowerPiece::new, "skyroot_tower");
 
     public static void registerFeatures() {
         register("lake", new AetherLakeFeature(SingleStateFeatureConfig.CODEC));

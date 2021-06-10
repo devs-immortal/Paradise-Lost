@@ -39,7 +39,7 @@ public class AerwhaleEntity extends AetherAnimalEntity {
         //this.goalSelector.add(0, new WanderAroundGoal(this, 0.5));
     }
 
-
+    // TODO: Stubbed. Pending 1.17 rewrite.
 //    @Override
 //    public boolean handleFallDamage(float fallDistance, float damageMultiplier) {
 //        return false;

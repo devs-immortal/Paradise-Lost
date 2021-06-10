@@ -11,6 +11,7 @@ import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -22,12 +23,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 @Mixin(ShovelItem.class)
 public class ShovelItemMixin extends MiningToolItem {
 
-    protected ShovelItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Set<Block> effectiveBlocks, Settings settings) {
+    protected ShovelItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Tag<Block> effectiveBlocks, Settings settings) {
         super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
     }
 
@@ -52,7 +52,7 @@ public class ShovelItemMixin extends MiningToolItem {
             } else if (blockState.getBlock() instanceof CampfireBlock && blockState.get(CampfireBlock.LIT)) {
                 if (!world.isClient()) world.syncWorldEvent(null, 1009, blockPos, 0);
 
-                CampfireBlock.extinguish(world, blockPos, blockState);
+                CampfireBlock.extinguish(playerEntity, world, blockPos, blockState);
                 blockState3 = blockState.with(CampfireBlock.LIT, false);
             }
 

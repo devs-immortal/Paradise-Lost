@@ -12,8 +12,9 @@ public class SkyrootPlanksBlock extends Block {
         super(FabricBlockSettings.of(Material.WOOD).strength(2.0F, 5.0F).sounds(BlockSoundGroup.WOOD));
     }
 
-    @Override
-    public boolean isIn(Tag<Block> tag) {
-        return tag == BlockTags.PLANKS || super.isIn(tag);
-    }
+    // TODO: Stubbed. Pending 1.17 rewrite.
+//    @Override
+//    public boolean isIn(Tag<Block> tag) {
+//        return tag == BlockTags.PLANKS || super.isIn(tag);
+//    }
 }

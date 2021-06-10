@@ -9,6 +9,7 @@ import net.minecraft.block.TorchBlock;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -16,7 +17,7 @@ import java.util.Random;
 public class AmbrosiumTorchBlock extends TorchBlock {
     public AmbrosiumTorchBlock() {
         super(FabricBlockSettings.of(Material.DECORATION).collidable(false).breakByHand(true).ticksRandomly().luminance(15).sounds(BlockSoundGroup.WOOD),
-                new DustParticleEffect(0.886f, 0.871f, 0.125f, 0.7f));
+                new DustParticleEffect(new Vec3f(0.886f, 0.871f, 0.125f), 0.7f));
     }
 
     @Environment(EnvType.CLIENT)

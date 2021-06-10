@@ -102,11 +102,11 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     public ActionResult interactMob(PlayerEntity playerIn, Hand handIn) {
         ItemStack heldItem = playerIn.getStackInHand(handIn);
 
-        if (heldItem.getItem() == AetherItems.SKYROOT_BUCKET && !playerIn.abilities.creativeMode) {
+        if (heldItem.getItem() == AetherItems.SKYROOT_BUCKET && !playerIn.getAbilities().creativeMode) {
             heldItem.setCount(heldItem.getCount() - 1);
 
             if (heldItem.isEmpty()) playerIn.setStackInHand(handIn, new ItemStack(AetherItems.SKYROOT_POISON_BUCKET));
-            else if (!playerIn.inventory.insertStack(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET)))
+            else if (!playerIn.getInventory().insertStack(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET)))
                 playerIn.dropItem(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET), false);
 
             return ActionResult.SUCCESS;
@@ -116,7 +116,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     }
 
     @Override
-    public void takeKnockback(float strength, double xRatio, double zRatio) {
+    public void takeKnockback(double strength, double xRatio, double zRatio) {
         if (this.getHealth() <= 0.0F) super.takeKnockback(strength, xRatio, zRatio);
     }
 

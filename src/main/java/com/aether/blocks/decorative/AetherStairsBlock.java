@@ -13,8 +13,9 @@ public class AetherStairsBlock extends StairsBlock {
         super(state, FabricBlockSettings.copy(state.getBlock()));
     }
 
-    @Override
-    public boolean isIn(Tag<Block> tag) {
-        return tag == BlockTags.STAIRS || (tag == BlockTags.WOODEN_STAIRS && this == AetherBlocks.SKYROOT_STAIRS) || super.isIn(tag);
-    }
+    // TODO: Stubbed. Pending 1.17 rewrite.
+//    @Override
+//    public boolean isIn(Tag<Block> tag) {
+//        return tag == BlockTags.STAIRS || (tag == BlockTags.WOODEN_STAIRS && this == AetherBlocks.SKYROOT_STAIRS) || super.isIn(tag);
+//    }
 }

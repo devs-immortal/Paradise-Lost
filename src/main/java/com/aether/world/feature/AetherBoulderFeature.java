@@ -1,15 +1,12 @@
 package com.aether.world.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
-
-import java.util.Random;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
 
@@ -17,13 +14,13 @@ public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
         super(configCodec);
     }
 
-    public boolean generate(StructureWorldAccess structureWorldAccess, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, SingleStateFeatureConfig singleStateFeatureConfig) {
-
-        blockPos = structureWorldAccess.getTopPosition(Heightmap.Type.WORLD_SURFACE_WG, blockPos).add(random.nextInt(16), 0, random.nextInt(16));
+    public boolean generate(FeatureContext<SingleStateFeatureConfig> context) {
+        BlockPos blockPos = context.getOrigin();
+        blockPos = context.getWorld().getTopPosition(Heightmap.Type.WORLD_SURFACE_WG, blockPos).add(context.getRandom().nextInt(16), 0, context.getRandom().nextInt(16));
 
         for(; blockPos.getY() > 3; blockPos = blockPos.down()) {
-            if (!structureWorldAccess.isAir(blockPos.down())) {
-                Block block = structureWorldAccess.getBlockState(blockPos.down()).getBlock();
+            if (!context.getWorld().isAir(blockPos.down())) {
+                BlockState block = context.getWorld().getBlockState(blockPos.down());
                 if (isSoil(block) || isStone(block)) {
                     break;
                 }
@@ -34,18 +31,18 @@ public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
             return false;
         } else {
             for(int i = 0; i < 3; ++i) {
-                int j = random.nextInt(3);
-                int k = random.nextInt(3);
-                int l = random.nextInt(3);
+                int j = context.getRandom().nextInt(3);
+                int k = context.getRandom().nextInt(3);
+                int l = context.getRandom().nextInt(3);
                 float f = (float)(j + k + l) * 0.333F + 0.5F;
 
                 for (BlockPos blockPos2 : BlockPos.iterate(blockPos.add(-j, -k, -l), blockPos.add(j, k, l))) {
                     if (blockPos2.getSquaredDistance(blockPos) <= (double) (f * f)) {
-                        structureWorldAccess.setBlockState(blockPos2, singleStateFeatureConfig.state, 4);
+                        context.getWorld().setBlockState(blockPos2, context.getConfig().state, 4);
                     }
                 }
 
-                blockPos = blockPos.add(-1 + random.nextInt(3), -random.nextInt(2), -1 + random.nextInt(3));
+                blockPos = blockPos.add(-1 + context.getRandom().nextInt(3), -context.getRandom().nextInt(2), -1 + context.getRandom().nextInt(3));
             }
 
             return true;

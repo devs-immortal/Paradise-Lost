@@ -286,7 +286,7 @@ public abstract class AetherStructureGenerator extends StructurePiece {
         return this.generate();
     }
 
-    @Override
-    protected void writeNbt(NbtCompound compound) {
-    }
+//    @Override
+//    protected void writeNbt(NbtCompound compound) {
+//    }
 }

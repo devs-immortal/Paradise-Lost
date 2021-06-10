@@ -128,18 +128,18 @@ public class SkyrootBucket extends Item implements CustomPortalFluidProvider {
     }
 
     protected ItemStack emptyBucket(ItemStack stackIn, PlayerEntity playerIn) {
-        return !playerIn.abilities.creativeMode ? new ItemStack(AetherItems.SKYROOT_BUCKET) : stackIn;
+        return !playerIn.getAbilities().creativeMode ? new ItemStack(AetherItems.SKYROOT_BUCKET) : stackIn;
     }
 
     private ItemStack fillBucket(ItemStack emptyBuckets, PlayerEntity player, Item fullBucket) {
-        if (player.abilities.creativeMode) {
+        if (player.getAbilities().creativeMode) {
             return emptyBuckets;
         } else {
             emptyBuckets.setCount(emptyBuckets.getCount() - 1);
             if (emptyBuckets.isEmpty()) {
                 return new ItemStack(fullBucket);
             } else {
-                if (!player.inventory.insertStack(new ItemStack(fullBucket)))
+                if (!player.getInventory().insertStack(new ItemStack(fullBucket)))
                     player.dropItem(new ItemStack(fullBucket), false);
                 return emptyBuckets;
             }

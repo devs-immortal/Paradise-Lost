@@ -67,7 +67,8 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
             if (this.getPassengerList().isEmpty()) {
                 if (!player.world.isClient) {
                     player.startRiding(this);
-                    player.prevYaw = player.yaw = this.yaw;
+                    player.prevYaw = player.getYaw();
+                    player.setYaw(this.getYaw());
                 }
 
                 return ActionResult.SUCCESS;

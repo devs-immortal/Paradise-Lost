@@ -111,10 +111,11 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
         this.setPosition(getX(), getY(), getZ());
     }
 
-    @Override
-    public boolean canClimb() {
-        return false;
-    }
+    // TODO: Stubbed. Pending 1.17 rewrite.
+//    @Override
+//    public boolean canClimb() {
+//        return false;
+//    }
 
     @Override
     protected void initDataTracker() {
@@ -123,7 +124,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
 
     @Override
     public boolean collides() {
-        return !this.removed && !blockState.getCollisionShape(world, dataTracker.get(ORIGIN)).isEmpty();
+        return !this.isRemoved() && !blockState.getCollisionShape(world, dataTracker.get(ORIGIN)).isEmpty();
     }
 
     @Override
@@ -147,7 +148,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
      */
     public void postTickEntities() {
         if (this.blockState.isAir()) {
-            this.remove();
+            this.discard();
         } else {
             Block block = this.blockState.getBlock();
             BlockPos blockPos;
@@ -156,7 +157,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                 if (this.world.getBlockState(blockPos).isOf(block)) {
                     this.world.removeBlock(blockPos, false);
                 } else if (!this.world.isClient) {
-                    this.remove();
+                    this.discard();
                     return;
                 }
             }
@@ -210,14 +211,14 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                             if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS) && this.world.isPlayerInRange(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 4)) {
                                 this.dropItem(block);
                             }
-                            this.remove();
+                            this.discard();
                         }
                     }
                 } else {
                     BlockState blockState = this.world.getBlockState(blockPos);
                     this.setVelocity(this.getVelocity().multiply(0.7, 0.5, 0.7));
                     if (blockState.getBlock() != Blocks.MOVING_PISTON) {
-                        this.remove();
+                        this.discard();
                         if (!this.destroyedOnLanding) {
                             boolean canReplace = blockState.canReplace(new AutomaticItemPlacementContext(this.world, blockPos, Direction.DOWN, ItemStack.EMPTY, Direction.UP));
                             if (!canReplace) {
@@ -233,7 +234,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                                     if (block instanceof FloatingBlock)
                                         ((FloatingBlock) block).onEndFloating(this.world, blockPos, this.blockState, blockState);
 
-                                    if (this.blockEntityData != null && this.blockState.getBlock().hasBlockEntity()) {
+                                    if (this.blockEntityData != null/* && this.blockState.getBlock().hasBlockEntity()*/) {
                                         BlockEntity blockEntity = this.world.getBlockEntity(blockPos);
                                         if (blockEntity != null) {
                                             NbtCompound compoundTag = blockEntity.writeNbt(new NbtCompound());
@@ -245,7 +246,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                                                 }
                                             }
 
-                                            blockEntity.readNbt(this.blockState, compoundTag);
+                                            blockEntity.readNbt(compoundTag);
                                             blockEntity.markDirty();
                                         }
                                     }
@@ -266,27 +267,28 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
         }
     }
 
-    @Override
-    public boolean handleFallDamage(float distance, float damageMultiplier) {
-        if (this.hurtEntities) {
-            int i = MathHelper.ceil(distance - 1.0F);
-            if (i > 0) {
-                List<Entity> list = Lists.newArrayList(this.world.getOtherEntities(this, this.getBoundingBox()));
-                boolean flag = this.blockState.isIn(BlockTags.ANVIL);
-                DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
-
-                for (Entity entity : list)
-                    entity.damage(damagesource, Math.min(MathHelper.floor(i * this.floatHurtAmount), this.floatHurtMax));
-
-                if (flag && this.random.nextFloat() < 0.05F + i * 0.05F) {
-                    BlockState blockstate = AnvilBlock.getLandingState(this.blockState);
-                    if (blockstate == null) this.destroyedOnLanding = true;
-                    else this.blockState = blockstate;
-                }
-            }
-        }
-        return false;
-    }
+    // TODO: Stubbed. Pending 1.17 rewrite.
+//    @Override
+//    public boolean handleFallDamage(float distance, float damageMultiplier) {
+//        if (this.hurtEntities) {
+//            int i = MathHelper.ceil(distance - 1.0F);
+//            if (i > 0) {
+//                List<Entity> list = Lists.newArrayList(this.world.getOtherEntities(this, this.getBoundingBox()));
+//                boolean flag = this.blockState.isIn(BlockTags.ANVIL);
+//                DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
+//
+//                for (Entity entity : list)
+//                    entity.damage(damagesource, Math.min(MathHelper.floor(i * this.floatHurtAmount), this.floatHurtMax));
+//
+//                if (flag && this.random.nextFloat() < 0.05F + i * 0.05F) {
+//                    BlockState blockstate = AnvilBlock.getLandingState(this.blockState);
+//                    if (blockstate == null) this.destroyedOnLanding = true;
+//                    else this.blockState = blockstate;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound compound) {

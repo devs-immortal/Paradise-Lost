@@ -12,8 +12,9 @@ public class SkyrootFenceBlock extends FenceBlock {
         super(FabricBlockSettings.copy(AetherBlocks.SKYROOT_PLANKS));
     }
 
-    @Override
-    public boolean isIn(Tag<Block> tag) {
-        return tag == BlockTags.FENCES || tag == BlockTags.WOODEN_FENCES || super.isIn(tag);
-    }
+    // TODO: Stubbed. Pending 1.17 rewrite.
+//    @Override
+//    public boolean isIn(Tag<Block> tag) {
+//        return tag == BlockTags.FENCES || tag == BlockTags.WOODEN_FENCES || super.isIn(tag);
+//    }
 }

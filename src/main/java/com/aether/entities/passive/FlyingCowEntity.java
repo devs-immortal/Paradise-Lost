@@ -130,15 +130,15 @@ public class FlyingCowEntity extends SaddleMountEntity {
         if (currentStack.getItem() == Items.BUCKET && !this.isBaby()) {
             if (currentStack.getCount() == 1) {
                 player.setStackInHand(hand, new ItemStack(Items.MILK_BUCKET));
-            } else if (!player.inventory.insertStack(new ItemStack(Items.MILK_BUCKET))) {
+            } else if (!player.getInventory().insertStack(new ItemStack(Items.MILK_BUCKET))) {
                 if (!this.world.isClient) {
                     player.dropItem(new ItemStack(Items.MILK_BUCKET), false);
 
-                    if (!player.abilities.creativeMode) {
+                    if (!player.getAbilities().creativeMode) {
                         currentStack.setCount(currentStack.getCount() - 1);
                     }
                 }
-            } else if (!player.abilities.creativeMode) {
+            } else if (!player.getAbilities().creativeMode) {
                 currentStack.setCount(currentStack.getCount() - 1);
             }
         }

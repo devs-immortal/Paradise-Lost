@@ -72,9 +72,4 @@ public class SwetEntity extends SlimeEntity {
             this.setHealth(this.getMaxHealth());
         }
     }
-
-    @Override
-    public void remove(){
-        this.removed = true;
-    }
 }

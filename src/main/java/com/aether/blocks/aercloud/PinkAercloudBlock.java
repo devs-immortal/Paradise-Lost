@@ -13,6 +13,7 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 
 public class PinkAercloudBlock extends BaseAercloudBlock {
 
-    private static final ParticleEffect pinkFluff = new DustParticleEffect(0.89F, 0.65F, 0.9F, 1F);
+    private static final ParticleEffect pinkFluff = new DustParticleEffect(new Vec3f(0.89F, 0.65F, 0.9F), 1F);
 
     public PinkAercloudBlock() {
         super(FabricBlockSettings.of(Material.SNOW_BLOCK, MapColor.PINK).sounds(BlockSoundGroup.SNOW));

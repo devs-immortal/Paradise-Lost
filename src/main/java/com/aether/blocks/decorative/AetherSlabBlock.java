@@ -13,8 +13,9 @@ public class AetherSlabBlock extends SlabBlock {
         super(FabricBlockSettings.copy(state.getBlock()));
     }
 
-    @Override
-    public boolean isIn(Tag<Block> tag) {
-        return tag == BlockTags.SLABS || (tag == BlockTags.WOODEN_SLABS && this == AetherBlocks.SKYROOT_SLAB) || super.isIn(tag);
-    }
+    // TODO: Stubbed. Pending 1.17 rewrite.
+//    @Override
+//    public boolean isIn(Tag<Block> tag) {
+//        return tag == BlockTags.SLABS || (tag == BlockTags.WOODEN_SLABS && this == AetherBlocks.SKYROOT_SLAB) || super.isIn(tag);
+//    }
 }

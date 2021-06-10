@@ -85,7 +85,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         double x = targetIn.getX() - this.getX();
         double z = targetIn.getZ() - this.getX();
         double y = targetIn.getBoundingBox().minY + (double) (targetIn.getHeight() / 3.0F) - needle.getY();
-        double double_4 = MathHelper.sqrt(x * x + z * z);
+        double double_4 = MathHelper.sqrt((float) (x * x + z * z));
 
         needle.setVelocity(x, y + double_4 * 0.20000000298023224D, z, 1.2F, 1.0F);
 
@@ -98,10 +98,11 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         return world.getRandom().nextInt(25) == 0 && super.canSpawn(world, SpawnReason);
     }
 
-    @Override
-    public boolean handleFallDamage(float distance, float damageMultiplier) {
-        return false;
-    }
+    // TODO: Stubbed. Pending 1.17 rewrite.
+//    @Override
+//    public boolean handleFallDamage(float distance, float damageMultiplier) {
+//        return false;
+//    }
 
     @Override
     public boolean canHaveStatusEffect(StatusEffectInstance effect) {
