@@ -74,7 +74,7 @@ dependencies {
 
     // Libraries
     modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:1.1.1"))
-    modImplementation(include("io.github.cottonmc:LibGui:3.4.0+"))
+    modImplementation(include("io.github.cottonmc:LibGui:4.0.0+"))
 
     modImplementation "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
     include "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
