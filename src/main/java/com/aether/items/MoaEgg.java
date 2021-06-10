@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.collection.DefaultedList;
 
@@ -18,7 +18,7 @@ public class MoaEgg extends Item {
 
     public static ItemStack getStack(MoaType type) {
         ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
-        CompoundTag tag = new CompoundTag();
+        NbtCompound tag = new NbtCompound();
         tag.putInt("moaType", AetherAPI.instance().getMoaId(type));
         stack.setTag(tag);
         return stack;
@@ -43,7 +43,7 @@ public class MoaEgg extends Item {
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> subItems) {
         for (int moaTypeSize = 0; moaTypeSize < AetherAPI.instance().getMoaRegistrySize(); ++moaTypeSize) {
             ItemStack stack = new ItemStack(this);
-            CompoundTag compound = new CompoundTag();
+            NbtCompound compound = new NbtCompound();
             MoaType moaType = AetherAPI.instance().getMoa(moaTypeSize);
 
             if (moaType.getItemGroup() == group || group == ItemGroup.SEARCH) {
@@ -59,7 +59,7 @@ public class MoaEgg extends Item {
     }
 
     public MoaType getMoaType(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
+        NbtCompound tag = stack.getTag();
         if (tag != null) return AetherAPI.instance().getMoa(tag.getInt("moaType"));
         return AetherAPI.instance().getMoa(0);
     }

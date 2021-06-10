@@ -64,7 +64,7 @@ public class GoldenOakLeafParticle extends SpriteBillboardParticle {
         }
     }
 
-    public int getColorMultiplier(float tint) {
+    public int getBrightness(float tint) {
         return 200;
     }
 

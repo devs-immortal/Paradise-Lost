@@ -2,7 +2,7 @@ package com.aether.world.feature.generator;
 
 import com.aether.Aether;
 import com.aether.world.feature.AetherFeatures;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
 import net.minecraft.util.BlockMirror;
@@ -26,7 +26,7 @@ public class WellGenerator {
         private final BlockRotation rotation;
         private final Identifier template;
 
-        public WellPiece(StructureManager structureManager, CompoundTag compoundTag) {
+        public WellPiece(StructureManager structureManager, NbtCompound compoundTag) {
             super(AetherFeatures.WELL_PIECE, compoundTag);
             this.template = new Identifier(compoundTag.getString("Template"));
             this.rotation = BlockRotation.valueOf(compoundTag.getString("Rot"));
@@ -51,8 +51,8 @@ public class WellGenerator {
             this.setStructureData(structure, this.pos, placementData);
         }
 
-        protected void toNbt(CompoundTag tag) {
-            super.toNbt(tag);
+        protected void writeNbt(NbtCompound tag) {
+            super.writeNbt(tag);
             tag.putString("Template", this.template.toString());
             tag.putString("Rot", this.rotation.name());
         }

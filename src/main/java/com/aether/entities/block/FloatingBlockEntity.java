@@ -24,9 +24,9 @@ import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.property.Properties;
@@ -49,7 +49,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
     protected static final TrackedData<BlockPos> ORIGIN = DataTracker.registerData(FloatingBlockEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     public int floatTime;
     public boolean dropItem;
-    public CompoundTag blockEntityData;
+    public NbtCompound blockEntityData;
     private BlockState blockState;
     private boolean destroyedOnLanding;
     private boolean hurtEntities;
@@ -68,7 +68,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
         this(AetherEntityTypes.FLOATING_BLOCK, world);
         this.blockState = floatingBlockState;
         this.inanimate = true;
-        this.updatePosition(x, y, z);
+        this.setPosition(x, y, z);
         this.setVelocity(Vec3d.ZERO);
         this.prevX = x;
         this.prevY = y;
@@ -77,9 +77,9 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
     }
 
     @Override
-    public void updatePosition(double x, double y, double z) {
+    public void setPosition(double x, double y, double z) {
         if (dataTracker == null) {
-            super.updatePosition(x, y, z);
+            super.setPosition(x, y, z);
         } else {
             BlockPos origin = dataTracker.get(ORIGIN);
             VoxelShape colShape = blockState.getCollisionShape(world, origin);
@@ -87,7 +87,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                 colShape = blockState.getOutlineShape(world, origin);
             }
             if (colShape.isEmpty()) {
-                super.updatePosition(x, y, z);
+                super.setPosition(x, y, z);
             } else {
                 this.setPos(x, y, z);
                 Box box = colShape.getBoundingBox();
@@ -108,7 +108,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
 
     public void setOrigin(BlockPos origin) {
         this.dataTracker.set(ORIGIN, origin);
-        this.updatePosition(getX(), getY(), getZ());
+        this.setPosition(getX(), getY(), getZ());
     }
 
     @Override
@@ -179,7 +179,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                 for (Entity entity : otherEntities) {
                     if (!(entity instanceof FloatingBlockEntity) && !entity.noClip) {
                         if (entity.getY() < newBox.maxY) {
-                            entity.updatePosition(entity.getPos().x, newBox.maxY, entity.getPos().z);
+                            entity.setPosition(entity.getPos().x, newBox.maxY, entity.getPos().z);
                         }
                     }
                 }
@@ -236,16 +236,16 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
                                     if (this.blockEntityData != null && this.blockState.getBlock().hasBlockEntity()) {
                                         BlockEntity blockEntity = this.world.getBlockEntity(blockPos);
                                         if (blockEntity != null) {
-                                            CompoundTag compoundTag = blockEntity.toTag(new CompoundTag());
+                                            NbtCompound compoundTag = blockEntity.writeNbt(new NbtCompound());
 
                                             for (String keyName : this.blockEntityData.getKeys()) {
-                                                Tag tag = this.blockEntityData.get(keyName);
+                                                NbtElement tag = this.blockEntityData.get(keyName);
                                                 if (tag != null && !"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName)) {
                                                     compoundTag.put(keyName, tag.copy());
                                                 }
                                             }
 
-                                            blockEntity.fromTag(this.blockState, compoundTag);
+                                            blockEntity.readNbt(this.blockState, compoundTag);
                                             blockEntity.markDirty();
                                         }
                                     }
@@ -289,7 +289,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
     }
 
     @Override
-    protected void writeCustomDataToTag(CompoundTag compound) {
+    protected void writeCustomDataToNbt(NbtCompound compound) {
         compound.put("BlockState", NbtHelper.fromBlockState(this.blockState));
         compound.putInt("Time", this.floatTime);
         compound.putBoolean("DropItem", this.dropItem);
@@ -300,7 +300,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
     }
 
     @Override
-    protected void readCustomDataFromTag(CompoundTag compound) {
+    protected void readCustomDataFromNbt(NbtCompound compound) {
         this.blockState = NbtHelper.toBlockState(compound.getCompound("BlockState"));
         this.floatTime = compound.getInt("Time");
         if (compound.contains("HurtEntities", 99)) {
@@ -350,7 +350,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
     @Override
     public Identifier createSpawnPacket(PacketByteBuf buf) {
         super.createSpawnPacket(buf);
-        buf.writeCompoundTag(NbtHelper.fromBlockState(this.getBlockState()));
+        buf.writeNbt(NbtHelper.fromBlockState(this.getBlockState()));
 
         return NetworkingHell.SPAWN_FLOATING_BLOCK_ENTITY;
     }
@@ -358,13 +358,13 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
 
     public static void spawn(PacketContext ctx, PacketByteBuf buf) {
         EntityData data = new EntityData(buf);
-        BlockState blockState = NbtHelper.toBlockState(Objects.requireNonNull(buf.readCompoundTag()));
+        BlockState blockState = NbtHelper.toBlockState(Objects.requireNonNull(buf.readNbt()));
 
         ctx.getTaskQueue().execute(() -> {
             FloatingBlockEntity entity = new FloatingBlockEntity(ctx.getPlayer().world, data.x, data.y, data.z, blockState);
             entity.updateTrackedPosition(data.x, data.y, data.z);
             entity.refreshPositionAfterTeleport(data.x, data.y, data.z);
-            entity.setEntityId(data.id);
+            entity.setId(data.id);
             entity.setUuid(data.uuid);
             ((ClientWorld) ctx.getPlayer().world).addEntity(data.id, entity);
         });
@@ -374,7 +374,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
-        if ((!blockState.isToolRequired() || item.isEffectiveOn(blockState)) && FallingBlock.canFallThrough(world.getBlockState(blockPos.up()))) {
+        if ((!blockState.isToolRequired() || item.isSuitableFor(blockState)) && FallingBlock.canFallThrough(world.getBlockState(blockPos.up()))) {
             PlayerEntity playerEntity = context.getPlayer();
             if (!world.isClient) {
                 FloatingBlockEntity floatingblockentity = new FloatingBlockEntity(world, blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5, world.getBlockState(blockPos));

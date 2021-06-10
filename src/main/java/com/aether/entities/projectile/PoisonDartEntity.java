@@ -59,7 +59,7 @@ public class PoisonDartEntity extends DartEntity {
 
         if (this.victim != null) {
             if (!this.victim.isAlive() || this.poison.ticks == 0) {
-                this.destroy();
+                this.tickInVoid();
                 return;
             }
 
@@ -69,7 +69,7 @@ public class PoisonDartEntity extends DartEntity {
             this.removed = false;
             this.poison.onUpdate();
             this.setInvisible(true);
-            this.updatePosition(this.victim.getX(), this.victim.getY(), this.victim.getZ());
+            this.setPosition(this.victim.getX(), this.victim.getY(), this.victim.getZ());
         }
     }
 

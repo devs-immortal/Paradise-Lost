@@ -2,8 +2,8 @@ package com.aether.blocks.aercloud;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class BlueAercloudBlock extends BaseAercloudBlock {
 
     public BlueAercloudBlock() {
-        super(FabricBlockSettings.of(Material.SNOW_BLOCK, MaterialColor.LIGHT_BLUE).sounds(BlockSoundGroup.SNOW));
+        super(FabricBlockSettings.of(Material.SNOW_BLOCK, MapColor.LIGHT_BLUE).sounds(BlockSoundGroup.SNOW));
     }
 
     @Override

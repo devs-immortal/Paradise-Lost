@@ -6,7 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameOverlayRenderer;
 import net.minecraft.client.render.BufferBuilder;
@@ -42,7 +42,7 @@ public class InGameOverlayRendererMixin {
     private static void renderInAercloudOverlay(MinecraftClient minecraftClient, Block block, MatrixStack matrixStack) {
         minecraftClient.getTextureManager().bindTexture(new Identifier("the_aether:textures/block/aercloud_overlay.png"));
         // color[0] = red, color[1] = green, color[2] = blue
-        int[] color = rgbFromMaterialColor(block.getDefaultMaterialColor());
+        int[] color = rgbFromMaterialColor(block.getDefaultMapColor());
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
@@ -68,7 +68,7 @@ public class InGameOverlayRendererMixin {
         return playerEntity.world.getBlockState(mutable);
     }
 
-    private static int[] rgbFromMaterialColor(MaterialColor materialColor){
+    private static int[] rgbFromMaterialColor(MapColor materialColor){
         int color = materialColor.color;
         int r = color/256/256;
         int g = (color/256)%256;

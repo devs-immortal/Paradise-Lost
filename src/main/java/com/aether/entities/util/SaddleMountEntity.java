@@ -11,7 +11,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -88,14 +88,14 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     }
 
     @Override
-    public void writeCustomDataToTag(CompoundTag nbt) {
-        super.writeCustomDataToTag(nbt);
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("saddled", this.isSaddled());
     }
 
     @Override
-    public void readCustomDataFromTag(CompoundTag nbt) {
-        super.readCustomDataFromTag(nbt);
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
         this.setSaddled(nbt.getBoolean("saddled"));
     }
 

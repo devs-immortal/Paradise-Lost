@@ -19,7 +19,7 @@ public class AetherHoe extends HoeItem implements IAetherTool {
 
     protected static final Map<Block, BlockState> convertibleBlocks = Maps.newHashMap(ImmutableMap.of(
             Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(),
-            Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(),
+            Blocks.DIRT_PATH, Blocks.FARMLAND.getDefaultState(),
             Blocks.DIRT, Blocks.FARMLAND.getDefaultState(),
             Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()
     ));

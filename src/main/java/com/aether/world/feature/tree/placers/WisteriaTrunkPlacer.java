@@ -23,7 +23,7 @@ import java.util.Set;
 public class WisteriaTrunkPlacer extends TrunkPlacer {
 
     public static final Codec<WisteriaTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->
-            method_28904(instance).apply(instance, WisteriaTrunkPlacer::new));
+            fillTrunkPlacerFields(instance).apply(instance, WisteriaTrunkPlacer::new));
 
     public WisteriaTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {
         super(baseHeight, firstRandomHeight, secondRandomHeight);

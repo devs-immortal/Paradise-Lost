@@ -14,7 +14,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -37,7 +37,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         this.sinage = this.random.nextFloat() * 6F;
         this.poisonRemaining = this.random.nextInt(4) + 2;
 
-        this.updatePosition(this.getX(), this.getY(), this.getZ());
+        this.setPosition(this.getX(), this.getY(), this.getZ());
     }
 
     public static DefaultAttributeContainer.Builder initAttributes() {
@@ -70,7 +70,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         if (this.sinage > 3.141593F * 2F) this.sinage -= (3.141593F * 2F);
 
         if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK)
-            this.destroy();
+            this.tickInVoid();
     }
 
     @Override
@@ -121,14 +121,14 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     }
 
     @Override
-    public void writeCustomDataToTag(CompoundTag compound) {
-        super.writeCustomDataToTag(compound);
+    public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
         compound.putInt("size", this.size);
     }
 
     @Override
-    public void readCustomDataFromTag(CompoundTag compound) {
-        super.readCustomDataFromTag(compound);
+    public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
         this.size = compound.getInt("size");
     }
 

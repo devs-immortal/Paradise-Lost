@@ -1,10 +1,10 @@
 package com.aether.client.rendering.map;
 
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 
 public class AetherMap {
 
-    public static int getColor(MaterialColor material, int shade) {
+    public static int getColor(MapColor material, int shade) {
         int newColor = recolor(material.id) == -1 ? material.color : recolor(material.id);
 
         int value = 220;

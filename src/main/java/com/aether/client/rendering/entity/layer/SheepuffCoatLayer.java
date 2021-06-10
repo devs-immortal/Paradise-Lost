@@ -34,7 +34,7 @@ public class SheepuffCoatLayer extends FeatureRenderer<SheepuffEntity, SheepuffW
             GlStateManager.pushMatrix();
 
             if (sheepuff.hasCustomName() && "jeb_".equals(sheepuff.getName().asString())) {
-                int i = sheepuff.age / 25 + sheepuff.getEntityId();
+                int i = sheepuff.age / 25 + sheepuff.getId();
                 int j1 = DyeColor.values().length;
                 int k = i % j1;
                 int l = (i + 1) % j1;

@@ -31,9 +31,9 @@ public class FlyingCowModel extends QuadrupedEntityModel<FlyingCowEntity> {
         this.udders.addCuboid(-2.0F, -3.0F, 0.0F, 4, 6, 2, 0.0F);
         this.udders.setPivot(0.0F, 14.0F, 6.0F);
         this.udders.pitch = ((float) Math.PI / 2F);
-        this.torso = new ModelPart(this, 18, 4);
-        this.torso.addCuboid(-6.0F, -10.0F, -7.0F, 12, 18, 10, scale);
-        this.torso.setPivot(0.0F, 5.0F, 2.0F);
+        this.body = new ModelPart(this, 18, 4);
+        this.body.addCuboid(-6.0F, -10.0F, -7.0F, 12, 18, 10, scale);
+        this.body.setPivot(0.0F, 5.0F, 2.0F);
 
         --this.backRightLeg.pivotX;
         ++this.backLeftLeg.pivotX;

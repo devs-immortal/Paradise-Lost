@@ -2,8 +2,8 @@ package com.aether.blocks.aercloud;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -23,7 +23,7 @@ public class PinkAercloudBlock extends BaseAercloudBlock {
     private static final ParticleEffect pinkFluff = new DustParticleEffect(0.89F, 0.65F, 0.9F, 1F);
 
     public PinkAercloudBlock() {
-        super(FabricBlockSettings.of(Material.SNOW_BLOCK, MaterialColor.PINK).sounds(BlockSoundGroup.SNOW));
+        super(FabricBlockSettings.of(Material.SNOW_BLOCK, MapColor.PINK).sounds(BlockSoundGroup.SNOW));
     }
 
     @Override

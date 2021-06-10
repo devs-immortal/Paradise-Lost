@@ -21,7 +21,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
@@ -326,7 +326,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                     this.setVelocity(Vec3d.ZERO);
                 }
 
-                this.method_29242(this, false);
+                this.updateLimbs(this, false);
             } else {
                 this.flyingSpeed = getMovementSpeed() * (isGliding() ? 0.3F : 0.1F);
                 super.travel(movementInput);
@@ -352,8 +352,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     }
 
     @Override
-    public void writeCustomDataToTag(CompoundTag compound) {
-        super.writeCustomDataToTag(compound);
+    public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
 
         compound.putBoolean("playerGrown", this.isPlayerGrown());
         compound.putInt("remainingJumps", this.getRemainingJumps());
@@ -365,8 +365,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     }
 
     @Override
-    public void readCustomDataFromTag(CompoundTag compound) {
-        super.readCustomDataFromTag(compound);
+    public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
 
         this.setPlayerGrown(compound.getBoolean("playerGrown"));
         this.setRemainingJumps(compound.getInt("remainingJumps"));

@@ -68,7 +68,7 @@ public class DenseAercloudFluid extends FlowableFluid {
 
     @Override
     protected BlockState toBlockState(FluidState state) {
-        return AetherBlocks.DENSE_AERCLOUD.getDefaultState().with(Properties.LEVEL_15, method_15741(state));
+        return AetherBlocks.DENSE_AERCLOUD.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(state));
     }
 
     @Override

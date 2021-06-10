@@ -37,7 +37,7 @@ public class CinnabarRoseBlock extends AetherMushroomBlock {
                 double d = (double) pos.getX() + random.nextDouble();
                 double e = (double) pos.getY() + random.nextDouble();
                 double f = (double) pos.getZ() + random.nextDouble();
-                world.addParticle(DustParticleEffect.RED, d, e, f, 0.0D, 0.0D, 0.0D);
+                world.addParticle(DustParticleEffect.DEFAULT, d, e, f, 0.0D, 0.0D, 0.0D);
             }
         }
     }
@@ -90,7 +90,7 @@ public class CinnabarRoseBlock extends AetherMushroomBlock {
                 double d = (double) pos.getX() + random.nextDouble();
                 double e = (double) pos.getY() + random.nextDouble();
                 double f = (double) pos.getZ() + random.nextDouble();
-                world.addParticle(DustParticleEffect.RED, d, e, f, 0.0D, 0.0D, 0.0D);
+                world.addParticle(DustParticleEffect.DEFAULT, d, e, f, 0.0D, 0.0D, 0.0D);
             }
         }
     }

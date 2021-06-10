@@ -2,7 +2,7 @@ package com.aether.mixin.client;
 
 import com.aether.client.rendering.map.AetherMap;
 import com.aether.world.dimension.AetherDimension;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.item.map.MapState;
 import org.spongepowered.asm.mixin.Final;
@@ -34,9 +34,9 @@ public class MapRendererMixin {
                 if (int_4 / 4 == 0) {
                     this.texture.getImage().setPixelColor(int_2, int_1, (int_3 + int_3 / 128 & 1) * 8 + 16 << 24);
                 } else {
-                    int color = MaterialColor.COLORS[int_4 / 4].getRenderColor(int_4 & 3);
+                    int color = MapColor.COLORS[int_4 / 4].getRenderColor(int_4 & 3);
 
-                    if (isAether) color = AetherMap.getColor(MaterialColor.COLORS[int_4 / 4], int_4 & 3);
+                    if (isAether) color = AetherMap.getColor(MapColor.COLORS[int_4 / 4], int_4 & 3);
 
                     this.texture.getImage().setPixelColor(int_2, int_1, color);
                 }

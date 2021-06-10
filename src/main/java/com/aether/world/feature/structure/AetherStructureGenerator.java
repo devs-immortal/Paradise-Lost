@@ -6,7 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.math.BlockBox;
@@ -31,7 +31,7 @@ public abstract class AetherStructureGenerator extends StructurePiece {
     public ChunkPos chunkPos;
     private int startX, startY, startZ;
 
-    public AetherStructureGenerator(StructurePieceType piece, CompoundTag compound) {
+    public AetherStructureGenerator(StructurePieceType piece, NbtCompound compound) {
         super(piece, compound);
     }
 
@@ -287,6 +287,6 @@ public abstract class AetherStructureGenerator extends StructurePiece {
     }
 
     @Override
-    protected void toNbt(CompoundTag compound) {
+    protected void writeNbt(NbtCompound compound) {
     }
 }

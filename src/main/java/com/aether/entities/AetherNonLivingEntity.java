@@ -18,7 +18,7 @@ public abstract class AetherNonLivingEntity extends Entity {
 	}
 
 	public Identifier createSpawnPacket(PacketByteBuf buf) {
-		buf.writeVarInt(this.getEntityId());
+		buf.writeVarInt(this.getId());
 		buf.writeUuid(this.getUuid());
 		buf.writeDouble(this.getX());
 		buf.writeDouble(this.getY());

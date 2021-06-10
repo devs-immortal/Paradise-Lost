@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class GoldenAercloudBlock extends BaseAercloudBlock {
 
     public GoldenAercloudBlock() {
-        super(FabricBlockSettings.of(Material.SNOW_BLOCK, MaterialColor.GOLD).sounds(BlockSoundGroup.SNOW));
+        super(FabricBlockSettings.of(Material.SNOW_BLOCK, MapColor.GOLD).sounds(BlockSoundGroup.SNOW));
     }
 
     @Override
