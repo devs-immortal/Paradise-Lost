@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Random;
 
@@ -26,8 +27,8 @@ public class AercloudFeature extends Feature<AercloudConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos core, AercloudConfig config) {
-        return (createCloudBlob(world, config.state, random, core, 3, 10) || createCloudBlob(world, config.state, random, core.north(3).east(), 3, 8));
+    public boolean generate(FeatureContext<AercloudConfig> context) {
+        return (createCloudBlob(context.getWorld(), context.getConfig().state, context.getRandom(), context.getOrigin(), 3, 10) || createCloudBlob(context.getWorld(), context.getConfig().state, context.getRandom(), context.getOrigin().north(3).east(), 3, 8));
     }
 
     private int randomSign(Random random) {
@@ -51,7 +52,8 @@ public class AercloudFeature extends Feature<AercloudConfig> {
                 for (int x = center.getX() - stuffsize; x <= center.getX() + stuffsize; x++) {
                     for (int y = center.getY() - Math.round(stuffsize*0.7f); y <= center.getY() + Math.round(stuffsize*0.7f); y++) {
                         if (!((x == center.getX() - stuffsize || x == center.getX() + stuffsize) && (y == center.getY() - stuffsize + 1 || y == center.getY() + stuffsize - 1))) {
-                            if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).getBlock().is(Blocks.AIR)) {
+                            // TODO: This is concern. Verify this in 1.17 (As .is(block) doesn't exist)
+                            if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).getBlock().equals(Blocks.AIR)) {
                                 world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
                             }
                         }
