@@ -52,7 +52,7 @@ public class AetherBlocks {
 //    public static final Block BLACK_DYED_AERCLOUD;
     public static final Block BLUE_AERCLOUD;
     //    public static final Block BLUE_DYED_AERCLOUD;
-    public static final Block BLUE_PORTAL;
+    //public static final Block BLUE_PORTAL;
     //    public static final Block BROWN_DYED_AERCLOUD;
     public static final Block CARVED_SLAB;
     public static final Block CARVED_STAIRS;
@@ -267,7 +267,7 @@ public class AetherBlocks {
         POTTED_AETHER_FERN = register("potted_aether_fern", createPottedBlock(AETHER_FERN));
         AETHER_BUSH = register("aether_bush", new AetherBrushBlock(GRASS), buildingBlock());
         AMBROSIUM_ORE = register("ambrosium_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F), UniformIntProvider.create(0, 2)), buildingBlock());
-        BLUE_PORTAL = register("blue_portal", new AetherPortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MapColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(AetherBlocks::never).strength(-1.0f).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
+        //BLUE_PORTAL = register("blue_portal", new AetherPortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MapColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(AetherBlocks::never).strength(-1.0f).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
         HOLYSTONE = register("holystone", new Block(FabricBlockSettings.of(Material.STONE, MapColor.GRAY).requiresTool().strength(0.5f, 10.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
         COBBLED_HOLYSTONE = register("cobbled_holystone", new Block(FabricBlockSettings.of(Material.STONE, MapColor.GRAY).requiresTool().strength(0.4f, 8.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
         HOLYSTONE_BRICK = register("holystone_brick", new Block(FabricBlockSettings.of(Material.STONE).requiresTool().strength(1.5F, 6.0F).materialColor(MapColor.WHITE)), buildingBlock());
@@ -640,7 +640,7 @@ public class AetherBlocks {
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        BlockRenderLayerMap.INSTANCE.putBlock(BLUE_PORTAL, RenderLayer.getTranslucent());
+        //BlockRenderLayerMap.INSTANCE.putBlock(BLUE_PORTAL, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderLayer.getCutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderLayer.getTranslucent());
