@@ -53,13 +53,44 @@
   ],
   "starts": [],
   "spawners": {
-    "monster": [],
-    "creature": [],
+    "monster": [
+      {
+        "type": "the_aether:blue_swet",
+        "weight": 100,
+        "minCount": 2,
+        "maxCount": 6
+      }
+    ],
+    "creature": [
+      {
+        "type": "the_aether:aerbunny",
+        "weight": 12,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "the_aether:moa",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "the_aether:aerwhale",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ],
     "water_creature": [],
     "water_ambient": [],
     "misc": []
   },
-  "spawn_costs": {},
+  "spawn_costs": {
+      "the_aether:blue_swet": {
+      "energy_budget": 0.12,
+      "charge": 1.0
+    }
+  },
   "player_spawn_friendly": false,
   "precipitation": "rain",
   "temperature": 0.4,
