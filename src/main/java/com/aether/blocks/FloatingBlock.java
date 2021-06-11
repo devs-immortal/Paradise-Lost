@@ -11,6 +11,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -21,9 +22,13 @@ import java.util.Random;
 public class FloatingBlock extends OreBlock {
     private final boolean powered;
 
-    public FloatingBlock(boolean powered, FabricBlockSettings properties) {
-        super(properties);
+    public FloatingBlock(boolean powered, FabricBlockSettings properties, UniformIntProvider experienceDropped) {
+        super(properties, experienceDropped);
         this.powered = powered;
+    }
+
+    public FloatingBlock(boolean powered, FabricBlockSettings properties) {
+        this(powered, properties, UniformIntProvider.create(0, 0));
     }
 
     public void onBlockAdded(BlockState state, World worldIn, BlockPos posIn, BlockState oldState, boolean notify) {
