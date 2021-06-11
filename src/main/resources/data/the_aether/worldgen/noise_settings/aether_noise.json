@@ -1,6 +1,6 @@
 {
-  "bedrock_roof_position": -20,
-  "bedrock_floor_position": -20,
+  "bedrock_roof_position": -2147483648,
+  "bedrock_floor_position": -2147483648,
   "sea_level": 0,
   "noise_caves_enabled": false,
   "noodle_caves_enabled": false,
@@ -23,7 +23,7 @@
   },
   "noise": {
     "min_y": 0,
-    "height": 256,
+    "height": 128,
     "size_horizontal": 2,
     "size_vertical": 1,
     "density_factor": 0,
