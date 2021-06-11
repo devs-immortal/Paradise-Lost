@@ -25,11 +25,19 @@
               }
             },
             "decorator": {
-              "type": "minecraft:range_biased",
+              "type": "minecraft:range",
               "config": {
-                "bottom_offset": 8,
-                "top_offset": 8,
-                "maximum": 256
+                "height": {
+                  "type": "minecraft:uniform",
+                  "min_inclusive": {
+                    "type": "minecraft:constant",
+                    "below_top":256
+                  },
+                  "max_inclusive": {
+                    "type": "minecraft:constant",
+                    "below_top":128
+                  }
+                }
               }
             }
           }

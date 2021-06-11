@@ -24,9 +24,17 @@
             },
             "decorator": {
               "config": {
-                "bottom_offset": 0,
-                "top_offset": 0,
-                "maximum": 128
+                "height": {
+                  "type": "minecraft:uniform",
+                  "min_inclusive": {
+                    "type": "minecraft:constant",
+                    "below_top":256
+                  },
+                  "max_inclusive": {
+                    "type": "minecraft:constant",
+                    "below_top":128
+                  }
+                }
               },
               "type": "minecraft:range"
             }

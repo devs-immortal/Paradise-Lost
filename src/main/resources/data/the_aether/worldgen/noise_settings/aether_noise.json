@@ -7,6 +7,7 @@
   "deepslate_enabled": false,
   "ore_veins_enabled": false,
   "aquifers_enabled": false,
+  "min_surface_level": 0,
   "disable_mob_generation": false,
   "structures": {
     "structures": {
