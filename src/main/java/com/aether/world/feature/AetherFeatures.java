@@ -29,8 +29,8 @@ public class AetherFeatures {
         // Decorators
         register("crystal_tree_island", new CrystalTreeIslandDecorator(NopeDecoratorConfig.CODEC));
 
-        register("well", new WellFeature(DefaultFeatureConfig.CODEC));
-        register("skyroot_tower", new SkyrootTowerFeature(DefaultFeatureConfig.CODEC));
+        //register("well", new WellFeature(DefaultFeatureConfig.CODEC));
+        //register("skyroot_tower", new SkyrootTowerFeature(DefaultFeatureConfig.CODEC));
     }
 
     private static <T extends FeatureConfig> void register(String id, StructureFeature<T> structure) {
