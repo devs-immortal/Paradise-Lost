@@ -66,7 +66,7 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
 //        BlockState hanger = Blocks.AIR.getDefaultState();
 //
 //        if(leafBlock.getBlock() instanceof AetherLeavesBlock || leafBlock.getBlock() instanceof AuralLeavesBlock) {
-//            hanger = AetherLeavesBlock.getHanger(leafBlock.getBlock());
+//            hanger = AetherLeavesBlock.getHanger(leafBlock);
 //        }
 //
 //        for(int i = -radius; i <= radius; i++) {

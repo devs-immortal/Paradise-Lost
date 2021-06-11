@@ -52,8 +52,7 @@ public class AercloudFeature extends Feature<AercloudConfig> {
                 for (int x = center.getX() - stuffsize; x <= center.getX() + stuffsize; x++) {
                     for (int y = center.getY() - Math.round(stuffsize*0.7f); y <= center.getY() + Math.round(stuffsize*0.7f); y++) {
                         if (!((x == center.getX() - stuffsize || x == center.getX() + stuffsize) && (y == center.getY() - stuffsize + 1 || y == center.getY() + stuffsize - 1))) {
-                            // TODO: This is concern. Verify this in 1.17 (As .is(block) doesn't exist)
-                            if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).getBlock().equals(Blocks.AIR)) {
+                            if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).isOf(Blocks.AIR)) {
                                 world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
                             }
                         }

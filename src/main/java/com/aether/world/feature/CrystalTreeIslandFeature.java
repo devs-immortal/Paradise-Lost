@@ -25,8 +25,7 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
         for(int x = -checkSize; x >= checkSize; x++) {
             for(int y = -5; y >= 8; y++) {
                 for(int z = -checkSize; z >= checkSize; z++) {
-                    // TODO: Verify is -> equals in 1.17
-                    if (!context.getWorld().getBlockState(context.getOrigin().add(x,y,z)).getBlock().equals(Blocks.AIR)) {
+                    if (!context.getWorld().getBlockState(context.getOrigin().add(x,y,z)).isOf(Blocks.AIR)) {
                         return false;
                     }
                 }
@@ -78,8 +77,7 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 if (!(Math.abs(x) == radius && Math.abs(z) == radius) || (x == 0 && z == 0)) {
-                    // TODO: Verify is -> equals in 1.17
-                    if (structureWorldAccess.getBlockState(blockPos.add(x, 0, z)).getBlock().equals(Blocks.AIR)) {
+                    if (structureWorldAccess.getBlockState(blockPos.add(x, 0, z)).isOf(Blocks.AIR)) {
                         this.setBlockState(structureWorldAccess, blockPos.add(x, 0, z), AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
                     }
                 }

@@ -35,7 +35,7 @@ public class ColdAercloudBlock extends BaseAercloudBlock {
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context){
-        if (world.getBlockState(pos.up()).getBlock().equals(AetherBlocks.COLD_AERCLOUD))
+        if (world.getBlockState(pos.up()).isOf(AetherBlocks.COLD_AERCLOUD))
             return VoxelShapes.fullCube();
         else if ((world.getBlockState(pos.down()).getBlock() instanceof BaseAercloudBlock) || !(world.getBlockState(pos.down()).isSideSolidFullSquare(world, pos, Direction.DOWN)))
             return Block.createCuboidShape(0, 0, 0, 16, 0.001, 16);

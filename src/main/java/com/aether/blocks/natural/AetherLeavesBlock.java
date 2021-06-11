@@ -46,15 +46,14 @@ public class  AetherLeavesBlock extends LeavesBlock {
         }
     }
 
-    public static BlockState getHanger(Block block) {
-        // TODO: Verify is -> equals in 1.17
-        if(block.equals(AetherBlocks.ROSE_WISTERIA_LEAVES))
+    public static BlockState getHanger(BlockState state) {
+        if(state.isOf(AetherBlocks.ROSE_WISTERIA_LEAVES))
             return AetherBlocks.ROSE_WISTERIA_HANGER.getDefaultState();
-        else if(block.equals(AetherBlocks.LAVENDER_WISTERIA_LEAVES))
+        else if(state.isOf(AetherBlocks.LAVENDER_WISTERIA_LEAVES))
             return AetherBlocks.LAVENDER_WISTERIA_HANGER.getDefaultState();
-        else if(block.equals(AetherBlocks.FROST_WISTERIA_LEAVES))
+        else if(state.isOf(AetherBlocks.FROST_WISTERIA_LEAVES))
             return AetherBlocks.FROST_WISTERIA_HANGER.getDefaultState();
-        else if(block.equals(AetherBlocks.BOREAL_WISTERIA_LEAVES))
+        else if(state.isOf(AetherBlocks.BOREAL_WISTERIA_LEAVES))
             return AetherBlocks.BOREAL_WISTERIA_HANGER.getDefaultState();
         return Blocks.AIR.getDefaultState();
     }
