@@ -24,6 +24,7 @@
         "outer": {
           "type": "minecraft:heightmap",
           "config": {
+            "heightmap": "MOTION_BLOCKING"
           }
         }
       }

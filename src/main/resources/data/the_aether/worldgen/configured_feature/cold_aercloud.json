@@ -17,7 +17,9 @@
       "config": {
         "outer": {
           "type": "minecraft:heightmap_spread_double",
-          "config": {}
+          "config": {
+            "heightmap": "MOTION_BLOCKING"
+          }
         },
         "inner": {
           "type": "minecraft:chance",

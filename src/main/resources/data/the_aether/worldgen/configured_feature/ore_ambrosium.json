@@ -6,13 +6,18 @@
           "config": {
             "feature": {
               "config": {
-                "target": {
-                  "predicate_type": "block_match",
-                  "block": "the_aether:holystone"
-                },
-                "state": {
-                  "Name": "the_aether:ambrosium_ore"
-                },
+                "discard_chance_on_air_exposure": 0,
+                "targets": [
+                  {
+                    "target": {
+                      "predicate_type": "block_match",
+                      "block": "the_aether:holystone"
+                    },
+                    "state": {
+                      "Name": "the_aether:ambrosium_ore"
+                    }
+                  }
+                ],
                 "size": 14
               },
               "type": "minecraft:ore"
