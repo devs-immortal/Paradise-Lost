@@ -15,7 +15,44 @@
   },
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {},
-  "features": [],
+  "features": [
+    [],
+    [
+      "the_aether:lake_water"
+    ],
+    [
+      "the_aether:quicksoil"
+    ],
+    [],
+    [],
+    [],
+    [
+      "the_aether:ore_ambrosium",
+      "the_aether:ore_gravitite",
+      "the_aether:ore_zanite"
+    ],
+    [
+    ],
+    [
+      "the_aether:aether_flowers",
+      "the_aether:aether_tall_grass",
+      "the_aether:aether_grass",
+      "the_aether:aether_bush",
+      "the_aether:aether_dense_tall_grass",
+      "the_aether:patch_blueberry",
+      "the_aether:scattered_trees",
+      "the_aether:water_spring",
+      "the_aether:aether_fern",
+      "the_aether:alt_fallen_leaves",
+      "the_aether:flutegrass"
+    ],
+    [
+      "the_aether:cold_aercloud",
+      "the_aether:blue_aercloud",
+      "the_aether:golden_aercloud",
+      "the_aether:crystal_tree_island_decorated"
+    ]
+  ],
   "starts": [],
   "spawners": {
     "monster": [],
