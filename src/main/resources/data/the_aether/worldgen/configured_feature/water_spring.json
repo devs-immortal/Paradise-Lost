@@ -25,20 +25,19 @@
               }
             },
             "decorator": {
-              "type": "minecraft:range",
               "config": {
                 "height": {
-                  "type": "minecraft:uniform",
                   "min_inclusive": {
-                    "type": "minecraft:constant",
-                    "below_top":256
+                    "above_bottom": 0
                   },
                   "max_inclusive": {
-                    "type": "minecraft:constant",
-                    "below_top":128
-                  }
+                    "below_top": 8
+                  },
+                  "inner": 8,
+                  "type": "minecraft:biased_to_bottom"
                 }
-              }
+              },
+              "type": "minecraft:range"
             }
           }
         },

@@ -26,11 +26,11 @@
               "type": "minecraft:uniform",
               "min_inclusive": {
                 "type": "minecraft:constant",
-                "below_top":256
+                "below_top":32
               },
               "max_inclusive": {
                 "type": "minecraft:constant",
-                "below_top":128
+                "below_top":79
               }
             }
           },
