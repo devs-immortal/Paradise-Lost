@@ -1,23 +1,14 @@
 package com.aether.world.feature;
 
 import com.aether.Aether;
-import com.aether.world.feature.generator.SkyrootTowerGenerator;
-import com.aether.world.feature.generator.WellGenerator;
-import com.aether.world.feature.structure.SkyrootTowerFeature;
-import com.aether.world.feature.structure.WellFeature;
 import com.aether.world.gen.decorator.CrystalTreeIslandDecorator;
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.core.Registry;
-import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.StructurePieceType;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.DecoratorConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneDecoratorConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 
 public class AetherFeatures {

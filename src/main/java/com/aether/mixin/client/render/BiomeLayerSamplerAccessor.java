@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(Layer.class)
 public interface BiomeLayerSamplerAccessor {
-    @Accessor("sampler")
-    LazyArea getSampler();
+    @Accessor("area")
+    LazyArea getArea();
 }

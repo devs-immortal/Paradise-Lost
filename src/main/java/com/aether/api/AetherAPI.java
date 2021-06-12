@@ -1,9 +1,10 @@
 package com.aether.api;
 
 import com.aether.api.moa.MoaType;
+import net.minecraft.resources.ResourceLocation;
+
 import java.util.HashMap;
 import java.util.Random;
-import net.minecraft.resources.ResourceLocation;
 
 public class AetherAPI {
 

@@ -10,7 +10,6 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
-import java.util.Random;
 
 public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockColorProvider {
 

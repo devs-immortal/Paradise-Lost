@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FarmBlock.class)
 public class FarmlandBlockMixin {
-    @Inject(method = "setToDirt", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "turnToDirt", at = @At("HEAD"), cancellable = true)
     private static void onSetToDirt(BlockState state, Level world, BlockPos pos, CallbackInfo ci) {
         if (state.is(AetherBlocks.AETHER_FARMLAND)) {
             world.setBlockAndUpdate(pos, Block.pushEntitiesUp(state, AetherBlocks.AETHER_DIRT.defaultBlockState(), world, pos));

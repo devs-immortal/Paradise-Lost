@@ -1,7 +1,6 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
-import net.minecraft.entity.ai.goal.*;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;

@@ -1,10 +1,6 @@
 package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherMushroomBlock;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
-import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -21,6 +17,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class CinnabarRoseBlock extends AetherMushroomBlock {
 

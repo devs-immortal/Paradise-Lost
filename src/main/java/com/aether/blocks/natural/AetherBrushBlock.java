@@ -2,7 +2,6 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
@@ -10,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.TallGrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
+
 import java.util.Random;
 import java.util.Set;
 

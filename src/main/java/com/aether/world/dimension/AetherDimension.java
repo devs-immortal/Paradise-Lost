@@ -1,7 +1,6 @@
 package com.aether.world.dimension;
 
 import com.aether.Aether;
-import com.aether.blocks.AetherBlocks;
 import com.aether.world.gen.AetherSurfaceBuilder;
 import com.aether.world.gen.AetherSurfaceBuilderConfig;
 import net.minecraft.core.Registry;

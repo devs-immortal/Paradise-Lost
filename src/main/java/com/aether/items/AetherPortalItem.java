@@ -1,6 +1,5 @@
 package com.aether.items;
 
-import com.aether.blocks.AetherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;

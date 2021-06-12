@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Feature.class)
 public class FeatureMixin {
 
-    @Inject(method = {"isSoil(Lnet/minecraft/block/BlockState;)Z"}, at = {@At("HEAD")}, cancellable = true)
+    @Inject(method = {"isDirt"}, at = {@At("HEAD")}, cancellable = true)
     private static void isSoil(BlockState state, CallbackInfoReturnable<Boolean> cir) {
         if (state.getBlock() == AetherBlocks.AETHER_DIRT || state.getBlock() == AetherBlocks.AETHER_GRASS_BLOCK || state.getBlock() == AetherBlocks.AETHER_ENCHANTED_GRASS || state.getBlock() == AetherBlocks.AETHER_FARMLAND) {
             cir.setReturnValue(true);

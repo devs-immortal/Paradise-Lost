@@ -9,7 +9,7 @@ import net.minecraft.world.level.material.Material;
 public class GravititeOreBlock extends FloatingBlock {
 
     public GravititeOreBlock() {
-        super(false, FabricBlockSettings.of(Material.STONE).strength(5.0F).sound(SoundType.STONE).breakByTool(FabricToolTags.PICKAXES, 2));
+        super(false, FabricBlockSettings.of(Material.STONE).strength(5.0F).breakByTool(FabricToolTags.PICKAXES, 2).sound(SoundType.STONE));
     }
 
 //    @Override

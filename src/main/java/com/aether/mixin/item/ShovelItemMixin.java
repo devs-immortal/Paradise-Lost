@@ -1,13 +1,6 @@
 package com.aether.mixin.item;
 
 import com.aether.blocks.AetherBlocks;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.HashMap;
-import java.util.Map;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -23,6 +16,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Mixin(ShovelItem.class)
 public class ShovelItemMixin extends DiggerItem {
@@ -31,7 +31,7 @@ public class ShovelItemMixin extends DiggerItem {
         super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
     }
 
-    @Inject(at = @At("HEAD"), method = "useOnBlock", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "useOn", cancellable = true)
     public void useOnBlock(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         Level world = context.getLevel();
         BlockPos blockPos = context.getClickedPos();

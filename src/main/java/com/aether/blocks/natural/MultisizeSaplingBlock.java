@@ -1,10 +1,11 @@
 package com.aether.blocks.natural;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Random;
 
 public class MultisizeSaplingBlock extends AetherSaplingBlock {
 

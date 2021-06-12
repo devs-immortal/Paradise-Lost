@@ -1,22 +1,22 @@
 package com.aether.mixin.block;
 
 import com.aether.blocks.AetherBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EnchantmentTableBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.EnchantmentTableBlock;
-import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(EnchantmentTableBlock.class)
 public class EnchantingTableBlockMixin {
 
-    @Inject(at = @At("HEAD"), method = "randomDisplayTick")
+    @Inject(at = @At("HEAD"), method = "animateTick")
     public void randomDisplayTick(BlockState state, Level world, BlockPos pos, Random random, CallbackInfo ci) {
         for (int i = -2; i <= 2; ++i) {
             for (int j = -2; j <= 2; ++j) {

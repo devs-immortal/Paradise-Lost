@@ -1,8 +1,5 @@
 package com.aether.blocks;
 
-import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -15,6 +12,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Supplier;
 
 public class AetherWallMushroomBlock extends AetherMushroomBlock {
 

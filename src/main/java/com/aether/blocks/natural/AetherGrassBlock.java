@@ -1,8 +1,6 @@
 package com.aether.blocks.natural;
 
 import com.aether.blocks.SpreadableAetherBlock;
-import java.util.List;
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
@@ -13,6 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.AbstractFlowerFeature;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+
+import java.util.List;
+import java.util.Random;
 
 @SuppressWarnings("unchecked")
 public class AetherGrassBlock extends SpreadableAetherBlock implements BonemealableBlock {

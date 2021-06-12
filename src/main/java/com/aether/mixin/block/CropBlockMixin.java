@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CropBlock.class)
 public class CropBlockMixin {
-    @Inject(method = "getAvailableMoisture", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getGrowthSpeed", at = @At("RETURN"), cancellable = true)
     private static void getCropGrowthSpeed(Block block, BlockGetter view, BlockPos pos, CallbackInfoReturnable<Float> ci) {
         float newSpeed = ci.getReturnValue();
         BlockPos blockPos_2 = pos.below();
@@ -36,7 +36,7 @@ public class CropBlockMixin {
         ci.setReturnValue(newSpeed);
     }
 
-    @Inject(method = "canPlantOnTop", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "mayPlaceOn", at = @At("TAIL"), cancellable = true)
     protected void canPlantOnTop(BlockState floor, BlockGetter world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(
                 cir.getReturnValue() || floor.is(AetherBlocks.AETHER_FARMLAND)

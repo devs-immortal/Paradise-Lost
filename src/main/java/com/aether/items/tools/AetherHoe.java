@@ -5,7 +5,6 @@ import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import java.util.Map;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
@@ -13,6 +12,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Map;
 
 public class AetherHoe extends HoeItem implements IAetherTool {
 

@@ -1,6 +1,5 @@
 package com.aether.world.feature.structure;
 
-import com.aether.world.feature.generator.WellGenerator;
 import com.mojang.serialization.Codec;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;

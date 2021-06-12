@@ -1,10 +1,11 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
-import java.util.Collection;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+
+import java.util.Collection;
 
 public class WhiteSwetEntity extends SwetEntity{
     public WhiteSwetEntity(Level world){

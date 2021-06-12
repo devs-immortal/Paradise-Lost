@@ -3,7 +3,6 @@ package com.aether.blocks;
 import com.aether.entities.block.FloatingBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -13,20 +12,22 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class FloatingBlock extends OreBlock {
     private final boolean powered;
 
-    public FloatingBlock(boolean powered, FabricBlockSettings properties, UniformInt experienceDropped) {
+    public FloatingBlock(boolean powered, BlockBehaviour.Properties properties, UniformInt experienceDropped) {
         super(properties, experienceDropped);
         this.powered = powered;
     }
 
-    public FloatingBlock(boolean powered, FabricBlockSettings properties) {
+    public FloatingBlock(boolean powered, BlockBehaviour.Properties properties) {
         this(powered, properties, UniformInt.of(0, 0));
     }
 

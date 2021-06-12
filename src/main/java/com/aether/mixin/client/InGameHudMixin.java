@@ -15,11 +15,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class InGameHudMixin {
 
 
-    @Shadow private ItemStack currentStack;
+    @Shadow private ItemStack lastToolHighlight;
 
-    @Redirect(method = "renderHeldItemTooltip", at = @At(value = "FIELD", target = "Lnet/minecraft/util/Rarity;formatting:Lnet/minecraft/util/Formatting;", opcode = Opcodes.GETFIELD))
+    @Redirect(method = "renderSelectedItemName", at = @At(value = "FIELD", target = "Lnet/minecraft/world/item/Rarity;color:Lnet/minecraft/ChatFormatting;", opcode = Opcodes.GETFIELD))
     private ChatFormatting getCustomRarityFormatting(Rarity rarity) {
         if (rarity != null) return rarity.color;
-        return ((AetherItemExtensions) this.currentStack.getItem()).getCustomRarityFormatting();
+        return ((AetherItemExtensions) this.lastToolHighlight.getItem()).getCustomRarityFormatting();
     }
 }

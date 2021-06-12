@@ -1,8 +1,6 @@
 package com.aether.entities.ai;
 
 import com.aether.blocks.AetherBlocks;
-import java.util.EnumSet;
-import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -11,6 +9,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
+
+import java.util.EnumSet;
+import java.util.function.Predicate;
 
 public class EatAetherGrassGoal extends Goal {
     private static final Predicate<BlockState> grass = BlockStatePredicate.forBlock(AetherBlocks.AETHER_GRASS_BLOCK);

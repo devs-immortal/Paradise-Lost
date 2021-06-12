@@ -1,11 +1,5 @@
 package com.aether.world.feature.generator;
 
-import com.aether.Aether;
-import com.aether.world.feature.AetherFeatures;
-import net.minecraft.structure.*;
-import java.util.List;
-import java.util.Random;
-
 // TODO: Stubbed. Pending 1.17 rewrite.
 public class SkyrootTowerGenerator {
 //    private static final Identifier SKYROOT_TOWER = Aether.locate("skyroot_tower");

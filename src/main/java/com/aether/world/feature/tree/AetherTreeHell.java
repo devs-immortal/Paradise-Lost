@@ -4,13 +4,14 @@ import com.aether.Aether;
 import com.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import com.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
 import com.mojang.serialization.Codec;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class AetherTreeHell {

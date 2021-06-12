@@ -5,9 +5,9 @@ import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.items.accessories.AccessoryType;
 import com.aether.items.accessories.ItemAccessory;
-import com.aether.items.armor.*;
+import com.aether.items.armor.AetherArmorType;
 import com.aether.items.food.*;
-import com.aether.items.resources.*;
+import com.aether.items.resources.AmbrosiumShard;
 import com.aether.items.staff.CloudStaff;
 import com.aether.items.staff.NatureStaff;
 import com.aether.items.tools.*;
@@ -16,14 +16,8 @@ import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
-import net.minecraft.item.*;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 
 public class AetherItems {

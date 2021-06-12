@@ -1,7 +1,8 @@
 package com.aether.entities.util;
 
-import java.util.UUID;
 import net.minecraft.network.FriendlyByteBuf;
+
+import java.util.UUID;
 
 public class EntityData {
 	public final int id;

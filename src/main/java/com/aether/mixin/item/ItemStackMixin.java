@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class ItemStackMixin {
     @Shadow public abstract Item getItem();
 
-    @Redirect(method = "toHoverableText", at = @At(value = "FIELD", target = "Lnet/minecraft/util/Rarity;formatting:Lnet/minecraft/util/Formatting;", opcode = Opcodes.GETFIELD))
+    @Redirect(method = "getDisplayName", at = @At(value = "FIELD", target = "Lnet/minecraft/world/item/Rarity;color:Lnet/minecraft/ChatFormatting;", opcode = Opcodes.GETFIELD))
     private ChatFormatting getCustomRarityFormattingForHovering(Rarity rarity) {
         if (rarity != null) return rarity.color;
         return ((AetherItemExtensions) this.getItem()).getCustomRarityFormatting();

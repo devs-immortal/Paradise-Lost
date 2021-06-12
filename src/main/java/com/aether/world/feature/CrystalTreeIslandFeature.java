@@ -3,7 +3,6 @@ package com.aether.world.feature;
 import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.natural.AetherLeavesBlock;
 import com.mojang.serialization.Codec;
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.WorldGenLevel;
@@ -12,6 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+
+import java.util.Random;
 
 public class CrystalTreeIslandFeature extends Feature<NoneFeatureConfiguration> {
     public CrystalTreeIslandFeature(Codec<NoneFeatureConfiguration> codec) {

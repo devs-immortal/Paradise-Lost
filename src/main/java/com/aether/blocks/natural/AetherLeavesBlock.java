@@ -2,7 +2,6 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.particle.AetherParticles;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -17,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
 import java.util.Random;
 
 public class  AetherLeavesBlock extends LeavesBlock {

@@ -1,24 +1,10 @@
 package com.aether.mixin.entity;
 
-import com.aether.Aether;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.Sets;
-import dev.emi.trinkets.TrinketsClient;
-import dev.emi.trinkets.api.SlotGroup;
-import dev.emi.trinkets.api.SlotType;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
@@ -29,6 +15,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Optional;
+import java.util.Set;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity extends Entity {
@@ -37,9 +32,9 @@ public abstract class MixinLivingEntity extends Entity {
     }
 
     @Shadow
-    public abstract boolean hasStatusEffect(MobEffect effect);
+    public abstract boolean hasEffect(MobEffect effect);
 
-    @ModifyVariable(method = "travel", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/entity/LivingEntity;isTouchingWater()Z"))
+    @ModifyVariable(method = "travel", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/world/entity/LivingEntity;isInWater()Z"))
     private double changeGravity(double gravity) {
         boolean isFalling = this.getDeltaMovement().y <= 0.0D;
 
@@ -52,7 +47,7 @@ public abstract class MixinLivingEntity extends Entity {
                 final Set<Item> validItems = Sets.newHashSet(AetherItems.CLOUD_PARACHUTE, AetherItems.GOLDEN_CLOUD_PARACHUTE);
                 for (Item item : validItems) {
                     if (componentOptional.get().isEquipped(item)) {
-                        if (isFalling && !this.hasStatusEffect(MobEffects.SLOW_FALLING) && !isInWater() && !playerEntity.isShiftKeyDown()) {
+                        if (isFalling && !this.hasEffect(MobEffects.SLOW_FALLING) && !isInWater() && !playerEntity.isShiftKeyDown()) {
                             gravity -= 0.07;
                             this.fallDistance = 0;
                         }
@@ -65,7 +60,7 @@ public abstract class MixinLivingEntity extends Entity {
         return gravity;
     }
 
-    @Inject(at = @At("RETURN"), method = "damage")
+    @Inject(at = @At("RETURN"), method = "hurt")
     void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         Entity attacker = source.getEntity();
         if (cir.getReturnValue() && attacker instanceof LivingEntity) {

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BushBlock.class)
 public class PlantBlockMixin {
-    @Inject(method = "canPlantOnTop", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "mayPlaceOn", at = @At("TAIL"), cancellable = true)
     protected void canPlantOnTop(BlockState floor, BlockGetter world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(
                 cir.getReturnValue() || (

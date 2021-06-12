@@ -22,7 +22,7 @@ public abstract class PlayerEntityMixin extends Entity {
         super(type, world);
     }
 
-    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (source.isBypassInvul() && getY() < -1 && level.dimension() == AetherDimension.AETHER_WORLD_KEY) {
             if (!level.isClientSide()) {
@@ -36,7 +36,7 @@ public abstract class PlayerEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "onDeath", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "die", at = @At("HEAD"), cancellable = true)
     public void onDeath(DamageSource source, CallbackInfo ci) {
         //TODO: Custom death message on fall from aether death.
     }

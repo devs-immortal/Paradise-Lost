@@ -1,6 +1,5 @@
 package com.aether.blocks.decorative;
 
-import com.aether.blocks.AetherBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;

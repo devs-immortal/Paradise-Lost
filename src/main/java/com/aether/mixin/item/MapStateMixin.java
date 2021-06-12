@@ -20,7 +20,7 @@ public class MapStateMixin {
     @Final
     public ResourceKey<Level> dimension;
 
-    @Inject(method = "getPlayerMarkerPacket", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getUpdatePacket", at = @At("RETURN"), cancellable = true)
     public void addDimensionData(int id, Player player, CallbackInfoReturnable<Packet<?>> cir) {
         Packet<?> packetData = cir.getReturnValue();
 

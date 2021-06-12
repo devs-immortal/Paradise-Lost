@@ -1,11 +1,5 @@
 package com.aether.world.feature.generator;
 
-import com.aether.Aether;
-import com.aether.world.feature.AetherFeatures;
-import net.minecraft.structure.*;
-import java.util.List;
-import java.util.Random;
-
 // TODO: Stubbed. Pending 1.17 rewrite.
 public class WellGenerator {
 //    private static final Identifier WELL = Aether.locate("well_top");

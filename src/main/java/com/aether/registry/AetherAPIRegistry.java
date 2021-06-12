@@ -1,9 +1,5 @@
 package com.aether.registry;
 
-import com.aether.api.AetherAPI;
-import com.aether.blocks.AetherBlocks;
-import com.aether.items.AetherItems;
-
 public class AetherAPIRegistry {
 /*
     public static void register() {

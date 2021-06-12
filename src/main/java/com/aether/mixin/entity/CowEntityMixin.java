@@ -1,7 +1,6 @@
 package com.aether.mixin.entity;
 
 import com.aether.items.AetherItems;
-import net.minecraft.item.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -27,7 +26,7 @@ public class CowEntityMixin extends Animal {
         super(entityType, world);
     }
 
-    @Inject(at = @At("HEAD"), method = "interactMob", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "mobInteract", cancellable = true)
     public void interactMob(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack itemStack = player.getItemInHand(hand);
         if (itemStack.getItem() == AetherItems.SKYROOT_BUCKET && !this.isBaby()) {

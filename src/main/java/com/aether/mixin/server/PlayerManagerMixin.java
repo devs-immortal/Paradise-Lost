@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerList.class)
 public class PlayerManagerMixin {
-	@Inject(method = "createPlayer", at = @At("RETURN"))
+	@Inject(method = "getPlayerForLogin", at = @At("RETURN"))
 	private void givePlayerAetherPortal(GameProfile profile, CallbackInfoReturnable<ServerPlayer> cir) {
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			cir.getReturnValue().addItem(new ItemStack(AetherItems.AETHER_PORTAL));

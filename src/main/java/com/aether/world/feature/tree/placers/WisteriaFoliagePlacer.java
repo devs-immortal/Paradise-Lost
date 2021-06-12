@@ -1,15 +1,8 @@
 package com.aether.world.feature.tree.placers;
 
-import com.aether.blocks.AetherBlocks;
-import com.aether.blocks.natural.AetherLeavesBlock;
-import com.aether.blocks.natural.AuralLeavesBlock;
 import com.aether.world.feature.tree.AetherTreeHell;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import java.util.Random;
-import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
@@ -18,7 +11,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
-import static com.aether.blocks.natural.AetherHangerBlock.TIP;
+import java.util.Random;
+import java.util.function.BiConsumer;
 
 public class WisteriaFoliagePlacer extends FoliagePlacer {
 

@@ -1,7 +1,5 @@
 package com.aether.blocks;
 
-import java.util.Random;
-import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -13,6 +11,9 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class AetherMushroomBlock extends MushroomBlock {
 

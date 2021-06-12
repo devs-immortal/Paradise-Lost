@@ -13,11 +13,12 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+
 import java.util.Random;
 
 public class AmbrosiumTorchWallBlock extends WallTorchBlock {
     public AmbrosiumTorchWallBlock() {
-        super(FabricBlockSettings.of(Material.DECORATION).collidable(false).breakByHand(true).randomTicks().luminance(15).sound(SoundType.WOOD).dropsLike(AetherBlocks.AMBROSIUM_TORCH),
+        super(FabricBlockSettings.of(Material.DECORATION).collidable(false).breakByHand(true).randomTicks().lightLevel(state -> 15).sound(SoundType.WOOD).dropsLike(AetherBlocks.AMBROSIUM_TORCH),
                 new DustParticleOptions(new Vector3f(0.886f, 0.871f, 0.125f), 0.7f));
     }
 

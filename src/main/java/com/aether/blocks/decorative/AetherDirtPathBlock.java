@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.DirtPathBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+
 import java.util.Random;
 
 public class AetherDirtPathBlock extends DirtPathBlock {

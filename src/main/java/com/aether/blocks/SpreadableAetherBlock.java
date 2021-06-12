@@ -1,6 +1,5 @@
 package com.aether.blocks;
 
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -12,6 +11,7 @@ import net.minecraft.world.level.block.SnowyDirtBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LayerLightEngine;
+
 import java.util.Random;
 
 public abstract class SpreadableAetherBlock extends SnowyDirtBlock {
@@ -19,7 +19,7 @@ public abstract class SpreadableAetherBlock extends SnowyDirtBlock {
         super(settings);
     }
 
-    private static boolean canSurvive(BlockState state, LevelReader worldView, BlockPos pos) {
+    private static boolean canBeGrass(BlockState state, LevelReader worldView, BlockPos pos) {
         BlockPos blockPos = pos.above();
         BlockState blockState = worldView.getBlockState(blockPos);
         if (blockState.is(Blocks.SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) {
@@ -32,9 +32,9 @@ public abstract class SpreadableAetherBlock extends SnowyDirtBlock {
         }
     }
 
-    private static boolean canSpread(BlockState state, LevelReader worldView, BlockPos pos) {
+    private static boolean canPropagate(BlockState state, LevelReader worldView, BlockPos pos) {
         BlockPos blockPos = pos.above();
-        return canSurvive(state, worldView, pos) && !worldView.getFluidState(blockPos).is(FluidTags.WATER);
+        return canBeGrass(state, worldView, pos) && !worldView.getFluidState(blockPos).is(FluidTags.WATER);
     }
 
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
@@ -46,7 +46,7 @@ public abstract class SpreadableAetherBlock extends SnowyDirtBlock {
 
                 for (int i = 0; i < 4; ++i) {
                     BlockPos blockPos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                    if (world.getBlockState(blockPos).is(AetherBlocks.AETHER_DIRT) && canSpread(blockState, world, blockPos))
+                    if (world.getBlockState(blockPos).is(AetherBlocks.AETHER_DIRT) && canPropagate(blockState, world, blockPos))
                         world.setBlockAndUpdate(blockPos, blockState.setValue(SNOWY, world.getBlockState(blockPos.above()).is(Blocks.SNOW)));
                 }
             }

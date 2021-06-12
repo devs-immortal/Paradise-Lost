@@ -1,6 +1,5 @@
 package com.aether.world.gen;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -8,13 +7,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 
+import java.util.Random;
+
 public class AetherSurfaceBuilder extends SurfaceBuilder<AetherSurfaceBuilderConfig> {
 	public AetherSurfaceBuilder() {
 		super(AetherSurfaceBuilderConfig.CODEC);
 	}
 
 	@Override
-	public void generate(Random random, ChunkAccess chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int i, long seed, AetherSurfaceBuilderConfig config) {
+	public void apply(Random random, ChunkAccess chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int i, long seed, AetherSurfaceBuilderConfig config) {
 		BlockState topState = config.getTopMaterial();
 		BlockState underState = config.getUnderMaterial();
 		BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos();
