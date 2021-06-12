@@ -3,6 +3,7 @@
   "values": [
     "minecraft:cobblestone",
     "minecraft:blackstone",
+    "minecraft:cobbled_deepslate",
     "the_aether:cobbled_holystone"
   ]
 }

@@ -18,6 +18,7 @@
     "minecraft:green_stained_glass",
     "minecraft:red_stained_glass",
     "minecraft:black_stained_glass",
+    "minecraft:tinted_glass",
     "the_aether:quicksoil_glass"
   ]
 }
