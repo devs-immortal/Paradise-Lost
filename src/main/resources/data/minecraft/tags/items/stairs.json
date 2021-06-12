@@ -1,5 +1,5 @@
 {
-  "replace": "false",
+  "replace": false,
   "values": [
     "#minecraft:wooden_stairs",
     "minecraft:cobblestone_stairs",

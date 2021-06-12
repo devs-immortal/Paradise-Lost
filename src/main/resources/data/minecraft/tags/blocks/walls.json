@@ -1,5 +1,5 @@
 {
-  "replace": "false",
+  "replace": false,
   "values": [
     "minecraft:cobblestone_wall",
     "minecraft:mossy_cobblestone_wall",

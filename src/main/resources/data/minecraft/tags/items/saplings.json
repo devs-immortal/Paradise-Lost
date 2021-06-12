@@ -1,5 +1,5 @@
 {
-  "replace": "false",
+  "replace": false,
   "values": [
     "minecraft:oak_sapling",
     "minecraft:spruce_sapling",
@@ -12,6 +12,7 @@
     "the_aether:crystal_sapling",
     "the_aether:rose_wisteria_sapling",
     "the_aether:frost_wisteria_sapling",
-    "the_aether:lavender_wisteria_sapling"
+    "the_aether:lavender_wisteria_sapling",
+    "the_aether:boreal_wisteria_sapling"
   ]
 }
