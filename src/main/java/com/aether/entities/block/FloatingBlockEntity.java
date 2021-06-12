@@ -6,6 +6,7 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.AetherNonLivingEntity;
 import com.aether.entities.util.EntityData;
 import com.aether.util.NetworkingHell;
+import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.PacketContext;
@@ -25,6 +26,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
@@ -36,10 +38,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ConcretePowderBlock;
-import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -275,28 +274,27 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
         }
     }
 
-    // TODO: Stubbed. Pending 1.17 rewrite.
-//    @Override
-//    public boolean handleFallDamage(float distance, float damageMultiplier) {
-//        if (this.hurtEntities) {
-//            int i = MathHelper.ceil(distance - 1.0F);
-//            if (i > 0) {
-//                List<Entity> list = Lists.newArrayList(this.world.getOtherEntities(this, this.getBoundingBox()));
-//                boolean flag = this.blockState.isIn(BlockTags.ANVIL);
-//                DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
-//
-//                for (Entity entity : list)
-//                    entity.damage(damagesource, Math.min(MathHelper.floor(i * this.floatHurtAmount), this.floatHurtMax));
-//
-//                if (flag && this.random.nextFloat() < 0.05F + i * 0.05F) {
-//                    BlockState blockstate = AnvilBlock.getLandingState(this.blockState);
-//                    if (blockstate == null) this.destroyedOnLanding = true;
-//                    else this.blockState = blockstate;
-//                }
-//            }
-//        }
-//        return false;
-//    }
+    @Override
+    public boolean causeFallDamage(float distance, float multiplier, DamageSource damageSource) {
+        if (this.hurtEntities) {
+            int i = Mth.ceil(distance - 1.0F);
+            if (i > 0) {
+                List<Entity> list = Lists.newArrayList(this.level.getEntities(this, this.getBoundingBox()));
+                boolean flag = this.blockState.is(BlockTags.ANVIL);
+                DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
+
+                for (Entity entity : list)
+                    entity.hurt(damagesource, Math.min(Mth.floor(i * this.floatHurtAmount), this.floatHurtMax));
+
+                if (flag && this.random.nextFloat() < 0.05F + i * 0.05F) {
+                    BlockState blockstate = AnvilBlock.damage(this.blockState);
+                    if (blockstate == null) this.destroyedOnLanding = true;
+                    else this.blockState = blockstate;
+                }
+            }
+        }
+        return false;
+    }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
