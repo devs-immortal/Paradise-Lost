@@ -22,8 +22,7 @@
     "server.PlayerManagerMixin",
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
-    "structure.FeatureMixin",
-    "tags.BlockTagsProviderMixin"
+    "structure.FeatureMixin"
   ],
   "client": [
     "block.EnchantingTableBlockMixin",

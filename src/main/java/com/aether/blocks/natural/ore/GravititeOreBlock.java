@@ -8,7 +8,7 @@ import net.minecraft.world.level.material.Material;
 public class GravititeOreBlock extends FloatingBlock {
 
     public GravititeOreBlock() {
-        // Note: Any Blocks using this should also be appropriatly tagged in the BlockTagsProvider as follows:
+        // Note: Any Blocks using this should also be appropriately tagged as follows:
         // - MINEABLE_WITH_PICKAXE
         // - NEEDS_IRON_TOOL
         super(false, BlockBehaviour.Properties.of(Material.STONE).strength(5.0F).sound(SoundType.STONE));

@@ -1,6 +1,5 @@
 accessWidener	v1	named
 accessible    class     net/minecraft/data/worldgen/Features$Decorators
-accessible    class     net/minecraft/data/tags/TagsProvider$TagAppender
 accessible    method    net/minecraft/data/worldgen/Features                      weightedBlockStateBuilder    ()Lnet/minecraft/util/random/SimpleWeightedRandomList$Builder;
 accessible	  method	net/minecraft/world/entity/SpawnPlacements	              register	                   (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
 accessible    field     net/minecraft/world/item/Item$Properties                  rarity                       Lnet/minecraft/world/item/Rarity;
