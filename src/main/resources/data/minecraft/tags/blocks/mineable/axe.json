@@ -81,6 +81,6 @@
     "#minecraft:wooden_slabs",
     "#minecraft:wooden_stairs",
     "#minecraft:wooden_trapdoors",
-    "#the_aether:aether_logs"
+    "the_aether:aether_grass_plant"
   ]
 }
