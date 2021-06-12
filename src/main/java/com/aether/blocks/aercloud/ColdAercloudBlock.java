@@ -1,7 +1,6 @@
 package com.aether.blocks.aercloud;
 
 import com.aether.blocks.AetherBlocks;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -9,6 +8,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class ColdAercloudBlock extends BaseAercloudBlock {
 
     public ColdAercloudBlock() {
-        super(FabricBlockSettings.of(Material.SNOW).sound(SoundType.SNOW));
+        super(BlockBehaviour.Properties.of(Material.SNOW).sound(SoundType.SNOW));
     }
 
     @Override

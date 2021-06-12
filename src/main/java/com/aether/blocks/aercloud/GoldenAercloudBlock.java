@@ -1,13 +1,13 @@
 package com.aether.blocks.aercloud;
 
 import com.aether.blocks.AetherBlocks;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class GoldenAercloudBlock extends BaseAercloudBlock {
 
     public GoldenAercloudBlock() {
-        super(FabricBlockSettings.of(Material.SNOW, MaterialColor.GOLD).sound(SoundType.SNOW));
+        super(BlockBehaviour.Properties.of(Material.SNOW, MaterialColor.GOLD).sound(SoundType.SNOW));
     }
 
     @Override

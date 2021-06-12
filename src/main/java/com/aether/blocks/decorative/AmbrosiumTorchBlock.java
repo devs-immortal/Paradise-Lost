@@ -3,12 +3,12 @@ package com.aether.blocks.decorative;
 import com.mojang.math.Vector3f;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TorchBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 
@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class AmbrosiumTorchBlock extends TorchBlock {
     public AmbrosiumTorchBlock() {
-        super(FabricBlockSettings.of(Material.DECORATION).collidable(false).breakByHand(true).randomTicks().lightLevel(state -> 15).sound(SoundType.WOOD),
+        super(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().instabreak().randomTicks().lightLevel(state -> 15).sound(SoundType.WOOD),
                 new DustParticleOptions(new Vector3f(0.886f, 0.871f, 0.125f), 0.7f));
     }
 

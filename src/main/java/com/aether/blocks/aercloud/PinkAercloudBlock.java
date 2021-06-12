@@ -1,7 +1,6 @@
 package com.aether.blocks.aercloud;
 
 import com.mojang.math.Vector3f;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
@@ -11,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -24,7 +24,7 @@ public class PinkAercloudBlock extends BaseAercloudBlock {
     private static final ParticleOptions pinkFluff = new DustParticleOptions(new Vector3f(0.89F, 0.65F, 0.9F), 1F);
 
     public PinkAercloudBlock() {
-        super(FabricBlockSettings.of(Material.SNOW, MaterialColor.COLOR_PINK).sound(SoundType.SNOW));
+        super(BlockBehaviour.Properties.of(Material.SNOW, MaterialColor.COLOR_PINK).sound(SoundType.SNOW));
     }
 
     @Override

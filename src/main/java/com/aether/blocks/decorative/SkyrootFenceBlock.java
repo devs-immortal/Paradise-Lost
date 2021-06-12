@@ -1,12 +1,12 @@
 package com.aether.blocks.decorative;
 
 import com.aether.blocks.AetherBlocks;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class SkyrootFenceBlock extends FenceBlock {
     public SkyrootFenceBlock() {
-        super(FabricBlockSettings.copy(AetherBlocks.SKYROOT_PLANKS));
+        super(BlockBehaviour.Properties.copy(AetherBlocks.SKYROOT_PLANKS));
     }
 
     // TODO: Stubbed. Pending 1.17 rewrite.

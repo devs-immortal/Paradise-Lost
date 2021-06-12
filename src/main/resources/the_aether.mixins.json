@@ -20,10 +20,10 @@
     "item.ShovelItemMixin",
     "screen.EnchantmentScreenHandlerMixin",
     "server.PlayerManagerMixin",
-    "server.ServerChunkManagerMixin",
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
-    "structure.FeatureMixin"
+    "structure.FeatureMixin",
+    "tags.BlockTagsProviderMixin"
   ],
   "client": [
     "block.EnchantingTableBlockMixin",
