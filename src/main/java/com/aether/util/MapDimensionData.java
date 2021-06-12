@@ -1,10 +1,10 @@
 package com.aether.util;
 
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 
 public interface MapDimensionData {
-    RegistryKey<World> getDimension();
+    ResourceKey<Level> getDimension();
 
-    void setDimension(RegistryKey<World> dimension);
+    void setDimension(ResourceKey<Level> dimension);
 }

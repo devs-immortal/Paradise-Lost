@@ -1,80 +1,80 @@
 package com.aether.entities.util;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Saddleable;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Saddleable;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class SaddleMountEntity extends MountableEntity implements Saddleable {
 
-    private static final TrackedData<Boolean> SADDLED = DataTracker.registerData(SaddleMountEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(SaddleMountEntity.class, EntityDataSerializers.BOOLEAN);
 
-    public SaddleMountEntity(EntityType<? extends AnimalEntity> type, World world) {
+    public SaddleMountEntity(EntityType<? extends Animal> type, Level world) {
         super(type, world);
     }
 
     @Override
-    public Entity getPrimaryPassenger() {
-        return this.getPassengerList().isEmpty() ? null : this.getPassengerList().get(0);
+    public Entity getControllingPassenger() {
+        return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
     }
 
     @Override
-    public boolean damage(DamageSource damagesource, float i) {
-        if ((damagesource.getAttacker() instanceof PlayerEntity) && (!this.getPassengerList().isEmpty() && this.getPassengerList().get(0) == damagesource.getSource()))
+    public boolean hurt(DamageSource damagesource, float i) {
+        if ((damagesource.getEntity() instanceof Player) && (!this.getPassengers().isEmpty() && this.getPassengers().get(0) == damagesource.getDirectEntity()))
             return false;
 
-        return super.damage(damagesource, i);
+        return super.hurt(damagesource, i);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(SADDLED, false);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(SADDLED, false);
     }
 
     @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack heldItem = player.getStackInHand(hand);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack heldItem = player.getItemInHand(hand);
 
         // TODO: Saddle code here may be able to be removed, due to the implement
-        if (!this.canBeSaddled()) return super.interactMob(player, hand);
+        if (!this.isSaddleable()) return super.mobInteract(player, hand);
 
         if (!this.isSaddled()) {
             if (heldItem.getItem() == Items.SADDLE && !this.isBaby()) {
-                if (!player.isCreative()) player.setStackInHand(hand, ItemStack.EMPTY);
+                if (!player.isCreative()) player.setItemInHand(hand, ItemStack.EMPTY);
 
-                if (player.world.isClient)
-                    player.world.playSound(player, player.getBlockPos(), SoundEvents.ENTITY_PIG_SADDLE, SoundCategory.AMBIENT, 1.0F, 1.0F);
+                if (player.level.isClientSide)
+                    player.level.playSound(player, player.blockPosition(), SoundEvents.PIG_SADDLE, SoundSource.AMBIENT, 1.0F, 1.0F);
 
                 this.setSaddled(true);
-                return ActionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         } else {
-            if (this.getPassengerList().isEmpty()) {
-                if (!player.world.isClient) {
+            if (this.getPassengers().isEmpty()) {
+                if (!player.level.isClientSide) {
                     player.startRiding(this);
-                    player.prevYaw = player.getYaw();
-                    player.setYaw(this.getYaw());
+                    player.yRotO = player.getYRot();
+                    player.setYRot(this.getYRot());
                 }
 
-                return ActionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
-        return super.interactMob(player, hand);
+        return super.mobInteract(player, hand);
     }
 
     @Override
@@ -83,37 +83,37 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     }
 
     @Override
-    public boolean isInsideWall() {
-        if (!this.getPassengerList().isEmpty()) return false;
-        return super.isInsideWall();
+    public boolean isInWall() {
+        if (!this.getPassengers().isEmpty()) return false;
+        return super.isInWall();
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
+    public void addAdditionalSaveData(CompoundTag nbt) {
+        super.addAdditionalSaveData(nbt);
         nbt.putBoolean("saddled", this.isSaddled());
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
+    public void readAdditionalSaveData(CompoundTag nbt) {
+        super.readAdditionalSaveData(nbt);
         this.setSaddled(nbt.getBoolean("saddled"));
     }
 
     public boolean isSaddled() {
-        return this.dataTracker.get(SADDLED);
+        return this.entityData.get(SADDLED);
     }
 
     public void setSaddled(boolean saddled) {
-        this.dataTracker.set(SADDLED, saddled);
+        this.entityData.set(SADDLED, saddled);
     }
 
-    public boolean canBeSaddled() {
+    public boolean isSaddleable() {
         return true;
     }
 
-    public void saddle(@Nullable SoundCategory sound) {
+    public void equipSaddle(@Nullable SoundSource sound) {
         //this.items.setStack(0, new ItemStack(Items.SADDLE));
-        if (sound != null) this.world.playSoundFromEntity(null, this, SoundEvents.ENTITY_PIG_SADDLE, sound, 0.5F, 1.0F);
+        if (sound != null) this.level.playSound(null, this, SoundEvents.PIG_SADDLE, sound, 0.5F, 1.0F);
     }
 }

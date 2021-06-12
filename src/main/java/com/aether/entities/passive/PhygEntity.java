@@ -3,20 +3,28 @@ package com.aether.entities.passive;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
-import net.minecraft.block.BlockState;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.FollowParentGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 //import com.aether.world.storage.loot.AetherLootTableList;
 
@@ -30,33 +38,33 @@ public class PhygEntity extends SaddleMountEntity {
     public int ticks;
     private float aimingForFold;
 
-    public PhygEntity(World world) {
+    public PhygEntity(Level world) {
         super(AetherEntityTypes.PHYG, world);
 
         this.jumpsRemaining = 0;
         this.maxJumps = 1;
-        this.stepHeight = 1.0F;
+        this.maxUpStep = 1.0F;
 
-        this.ignoreCameraFrustum = true;
+        this.noCulling = true;
         this.canJumpMidAir = true;
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
+    public static AttributeSupplier.Builder initAttributes() {
         return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, /*this.getSaddled() ? 20.0D : */10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
+                .add(Attributes.MAX_HEALTH, /*this.getSaddled() ? 20.0D : */10.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
-        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(AetherItems.BLUEBERRY), false));
-        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.add(5, new LookAroundGoal(this));
-        this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(AetherItems.BLUEBERRY), false));
+        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0D));
     }
 
     @Override
@@ -95,7 +103,7 @@ public class PhygEntity extends SaddleMountEntity {
 //    }
 
     @Override
-    public double getMountedHeightOffset() {
+    public double getPassengersRidingOffset() {
         return 0.65D;
     }
 
@@ -110,11 +118,11 @@ public class PhygEntity extends SaddleMountEntity {
     }
 
     private void fall() {
-        if (this.getVelocity().y < 0.0D && !this.isSneaking())
-            this.setVelocity(this.getVelocity().multiply(1.0D, 0.6D, 1.0D));
+        if (this.getDeltaMovement().y < 0.0D && !this.isShiftKeyDown())
+            this.setDeltaMovement(this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
 
-        if (!this.onGround && !this.firstUpdate) {
-            if (this.onGround && !this.world.isClient) this.jumpsRemaining = this.maxJumps;
+        if (!this.onGround && !this.firstTick) {
+            if (this.onGround && !this.level.isClientSide) this.jumpsRemaining = this.maxJumps;
         }
     }
 
@@ -125,32 +133,32 @@ public class PhygEntity extends SaddleMountEntity {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState par4) {
-        this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_PIG_STEP, SoundCategory.NEUTRAL, 0.15F, 1.0F);
+        this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.PIG_STEP, SoundSource.NEUTRAL, 0.15F, 1.0F);
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound compound) {
-        super.readCustomDataFromNbt(compound);
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
 
         this.maxJumps = compound.getInt("maxJumps");
         this.jumpsRemaining = compound.getInt("remainingJumps");
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound compound) {
-        super.writeCustomDataToNbt(compound);
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
 
         compound.putInt("maxJumps", this.maxJumps);
         compound.putInt("remainingJumps", this.jumpsRemaining);
     }
 
     @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entityageable) {
-        return new PhygEntity(this.world);
+    public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entityageable) {
+        return new PhygEntity(this.level);
     }
 
     @Override
-    public Identifier getLootTableId() {
+    public ResourceLocation getDefaultLootTable() {
         return null;//AetherLootTableList.ENTITIES_PHYG;
     }
 }

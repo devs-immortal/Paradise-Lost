@@ -1,34 +1,34 @@
 package com.aether.entities.util;
 
 import com.aether.entities.passive.AetherAnimalEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public abstract class MountableEntity extends AetherAnimalEntity {
 
-    private static final TrackedData<Boolean> RIDER_SNEAKING = DataTracker.registerData(MountableEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> RIDER_SNEAKING = SynchedEntityData.defineId(MountableEntity.class, EntityDataSerializers.BOOLEAN);
     protected float jumpPower;
     protected boolean mountJumping;
     protected boolean playStepSound = false;
     protected boolean canJumpMidAir = false;
 
-    public MountableEntity(EntityType<? extends AnimalEntity> type, World world) {
+    public MountableEntity(EntityType<? extends Animal> type, Level world) {
         super(type, world);
     }
 
-    public MountableEntity(World world) {
+    public MountableEntity(Level world) {
         super(null, world);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(RIDER_SNEAKING, false);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(RIDER_SNEAKING, false);
     }
 
    //@Override
@@ -96,7 +96,7 @@ public abstract class MountableEntity extends AetherAnimalEntity {
    //}
 
     @Override
-    public float getMovementSpeed() {
+    public float getSpeed() {
         return this.getMountedMoveSpeed();
     }
 
@@ -116,7 +116,7 @@ public abstract class MountableEntity extends AetherAnimalEntity {
         this.mountJumping = mountJumping;
     }
 
-    public void onMountedJump(Vec3d motion) {
+    public void onMountedJump(Vec3 motion) {
         this.jumpPower = 0.4F;
     }
 

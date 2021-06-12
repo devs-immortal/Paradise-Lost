@@ -1,9 +1,9 @@
 package com.aether.blocks.decorative;
 
-import net.minecraft.block.TrapdoorBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
 
-public class AetherTrapdoorBlock extends TrapdoorBlock {
-    public AetherTrapdoorBlock(Settings settings) {
+public class AetherTrapdoorBlock extends TrapDoorBlock {
+    public AetherTrapdoorBlock(Properties settings) {
         super(settings);
     }
 }

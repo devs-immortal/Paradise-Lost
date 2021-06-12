@@ -1,7 +1,7 @@
 package com.aether.entities.util;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 
 public class AetherPoisonMovement {
 
@@ -27,7 +27,7 @@ public class AetherPoisonMovement {
             if (this.ticks == 0) return;
             this.distract();
 
-            if (timeUntilHit == 0) this.entity.damage(DamageSource.MAGIC, 1.0F);
+            if (timeUntilHit == 0) this.entity.hurt(DamageSource.MAGIC, 1.0F);
             this.ticks--;
         }
     }
@@ -45,15 +45,15 @@ public class AetherPoisonMovement {
     }
 
     public void distract() {
-        double gaussian = this.entity.world.random.nextGaussian();
+        double gaussian = this.entity.level.random.nextGaussian();
         double newMotD = 0.1D * gaussian;
         double newRotD = (Math.PI / 4D) * gaussian;
 
         this.motD = 0.2D * newMotD + (0.8D) * this.motD;
-        this.entity.setVelocity(this.entity.getVelocity().add(this.motD, 0.0D, this.motD));
+        this.entity.setDeltaMovement(this.entity.getDeltaMovement().add(this.motD, 0.0D, this.motD));
         this.rotD = 0.125D * newRotD + (1.0D - 0.125D) * this.rotD;
 
-        this.entity.setYaw((float) ((double) this.entity.getYaw() + rotD));
-        this.entity.setPitch((float) ((double) this.entity.getPitch() + rotD));
+        this.entity.setYRot((float) ((double) this.entity.getYRot() + rotD));
+        this.entity.setXRot((float) ((double) this.entity.getXRot() + rotD));
     }
 }

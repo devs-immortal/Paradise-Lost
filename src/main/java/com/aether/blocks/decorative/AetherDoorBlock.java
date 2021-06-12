@@ -1,9 +1,9 @@
 package com.aether.blocks.decorative;
 
-import net.minecraft.block.DoorBlock;
+import net.minecraft.world.level.block.DoorBlock;
 
 public class AetherDoorBlock extends DoorBlock {
-    public AetherDoorBlock(Settings settings) {
+    public AetherDoorBlock(Properties settings) {
         super(settings);
     }
 }

@@ -1,14 +1,14 @@
 package com.aether.mixin.client;
 
 import com.aether.entities.block.FloatingBlockEntity;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.player.LocalPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(ClientPlayerEntity.class)
+@Mixin(LocalPlayer.class)
 public abstract class ClientPlayerEntityMixin implements FloatingBlockEntity.ICPEM {
 
     @Shadow
@@ -23,7 +23,7 @@ public abstract class ClientPlayerEntityMixin implements FloatingBlockEntity.ICP
      */
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendMovementPackets()V"), method = "tick")
-    void redirectSendMovementPackets(ClientPlayerEntity clientPlayerEntity) {
+    void redirectSendMovementPackets(LocalPlayer clientPlayerEntity) {
         sendMovement = true;
     }
 

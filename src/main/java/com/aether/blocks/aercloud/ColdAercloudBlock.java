@@ -2,45 +2,45 @@ package com.aether.blocks.aercloud;
 
 import com.aether.blocks.AetherBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ColdAercloudBlock extends BaseAercloudBlock {
 
     public ColdAercloudBlock() {
-        super(FabricBlockSettings.of(Material.SNOW_BLOCK).sounds(BlockSoundGroup.SNOW));
+        super(FabricBlockSettings.of(Material.SNOW).sound(SoundType.SNOW));
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
-        if (entity.getVelocity().y <= 0.0F) entity.setVelocity(entity.getVelocity().multiply(1.0D, 0.005D, 1.0D));
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+        super.entityInside(state, world, pos, entity);
+        if (entity.getDeltaMovement().y <= 0.0F) entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0D, 0.005D, 1.0D));
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return type == NavigationType.LAND;
+    public boolean isPathfindable(BlockState state, BlockGetter world, BlockPos pos, PathComputationType type) {
+        return type == PathComputationType.LAND;
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context){
-        if (world.getBlockState(pos.up()).isOf(AetherBlocks.COLD_AERCLOUD))
-            return VoxelShapes.fullCube();
-        else if ((world.getBlockState(pos.down()).getBlock() instanceof BaseAercloudBlock) || !(world.getBlockState(pos.down()).isSideSolidFullSquare(world, pos, Direction.DOWN)))
-            return Block.createCuboidShape(0, 0, 0, 16, 0.001, 16);
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context){
+        if (world.getBlockState(pos.above()).is(AetherBlocks.COLD_AERCLOUD))
+            return Shapes.block();
+        else if ((world.getBlockState(pos.below()).getBlock() instanceof BaseAercloudBlock) || !(world.getBlockState(pos.below()).isFaceSturdy(world, pos, Direction.DOWN)))
+            return Block.box(0, 0, 0, 16, 0.001, 16);
         else
-            return VoxelShapes.empty();
+            return Shapes.empty();
     }
 
 }

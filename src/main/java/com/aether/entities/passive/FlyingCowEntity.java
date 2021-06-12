@@ -3,24 +3,32 @@ package com.aether.entities.passive;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
-import net.minecraft.block.BlockState;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.FollowParentGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 //import com.aether.world.storage.loot.AetherLootTableList;
 
@@ -34,33 +42,33 @@ public class FlyingCowEntity extends SaddleMountEntity {
     private float aimingForFold;
     private int ticks;
 
-    public FlyingCowEntity(World world) {
+    public FlyingCowEntity(Level world) {
         super(AetherEntityTypes.FLYING_COW, world);
 
         this.ticks = 0;
         this.maxJumps = 1;
         this.jumpsRemaining = 0;
-        this.stepHeight = 1.0F;
-        this.ignoreCameraFrustum = true;
+        this.maxUpStep = 1.0F;
+        this.noCulling = true;
         this.canJumpMidAir = true;
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
+    public static AttributeSupplier.Builder initAttributes() {
         return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20000000298023224D);
+                .add(Attributes.MAX_HEALTH, 10.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.20000000298023224D);
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 2.0D));
-        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(AetherItems.BLUEBERRY), false));
-        this.goalSelector.add(4, new FollowParentGoal(this, 1.25D));
-        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
-        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.add(7, new LookAroundGoal(this));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(AetherItems.BLUEBERRY), false));
+        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
 
     @Override
@@ -84,23 +92,23 @@ public class FlyingCowEntity extends SaddleMountEntity {
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound compound) {
-        super.writeCustomDataToNbt(compound);
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
 
         compound.putInt("maxJumps", this.maxJumps);
         compound.putInt("remainingJumps", this.jumpsRemaining);
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound compound) {
-        super.readCustomDataFromNbt(compound);
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
 
         this.maxJumps = compound.getInt("maxJumps");
         this.jumpsRemaining = compound.getInt("remainingJumps");
     }
 
     @Override
-    public double getMountedHeightOffset() {
+    public double getPassengersRidingOffset() {
         return 1.15D;
     }
 
@@ -116,34 +124,34 @@ public class FlyingCowEntity extends SaddleMountEntity {
 
     private void fall() {
         if (!this.onGround) {
-            if (this.getVelocity().y < 0.0D && !this.isSneaking())
-                this.setVelocity(this.getVelocity().multiply(1.0D, 0.6D, 1.0D));
+            if (this.getDeltaMovement().y < 0.0D && !this.isShiftKeyDown())
+                this.setDeltaMovement(this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
 
-            if (this.onGround && !this.world.isClient) this.jumpsRemaining = this.maxJumps;
+            if (this.onGround && !this.level.isClientSide) this.jumpsRemaining = this.maxJumps;
         }
     }
 
     @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack currentStack = player.getStackInHand(hand);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack currentStack = player.getItemInHand(hand);
 
         if (currentStack.getItem() == Items.BUCKET && !this.isBaby()) {
             if (currentStack.getCount() == 1) {
-                player.setStackInHand(hand, new ItemStack(Items.MILK_BUCKET));
-            } else if (!player.getInventory().insertStack(new ItemStack(Items.MILK_BUCKET))) {
-                if (!this.world.isClient) {
-                    player.dropItem(new ItemStack(Items.MILK_BUCKET), false);
+                player.setItemInHand(hand, new ItemStack(Items.MILK_BUCKET));
+            } else if (!player.getInventory().add(new ItemStack(Items.MILK_BUCKET))) {
+                if (!this.level.isClientSide) {
+                    player.drop(new ItemStack(Items.MILK_BUCKET), false);
 
-                    if (!player.getAbilities().creativeMode) {
+                    if (!player.getAbilities().instabuild) {
                         currentStack.setCount(currentStack.getCount() - 1);
                     }
                 }
-            } else if (!player.getAbilities().creativeMode) {
+            } else if (!player.getAbilities().instabuild) {
                 currentStack.setCount(currentStack.getCount() - 1);
             }
         }
 
-        return super.interactMob(player, hand);
+        return super.mobInteract(player, hand);
     }
 
 //    @Override
@@ -168,16 +176,16 @@ public class FlyingCowEntity extends SaddleMountEntity {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_COW_STEP, SoundCategory.NEUTRAL, 0.15F, 1.0F);
+        this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.COW_STEP, SoundSource.NEUTRAL, 0.15F, 1.0F);
     }
 
     @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return new FlyingCowEntity(this.world);
+    public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
+        return new FlyingCowEntity(this.level);
     }
 
     @Override
-    public Identifier getLootTableId() {
+    public ResourceLocation getDefaultLootTable() {
         return null;//AetherLootTableList.ENTITIES_FLYING_COW;
     }
 

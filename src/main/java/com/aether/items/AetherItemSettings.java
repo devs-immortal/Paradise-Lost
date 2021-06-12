@@ -1,20 +1,20 @@
 package com.aether.items;
 
 import com.aether.util.item.AetherRarity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Rarity;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 
-public class AetherItemSettings extends Item.Settings {
-    private Formatting formatting = null;
+public class AetherItemSettings extends Item.Properties {
+    private ChatFormatting formatting = null;
     private int enchantmentGlintColor = 0x8e48e1;
 
     public AetherItemSettings rarity(AetherRarity rarity) {
         return formatting(rarity.getCustomRarityFormatting());
     }
 
-    public AetherItemSettings formatting(Formatting formatting) {
+    public AetherItemSettings formatting(ChatFormatting formatting) {
         this.rarity((Rarity) null);
         this.formatting = formatting;
         return this;
@@ -25,8 +25,8 @@ public class AetherItemSettings extends Item.Settings {
         return this;
     }
 
-    public AetherItemSettings group(ItemGroup group) {
-        super.group(group);
+    public AetherItemSettings tab(CreativeModeTab group) {
+        super.tab(group);
         return this;
     }
 
@@ -35,7 +35,7 @@ public class AetherItemSettings extends Item.Settings {
         return this;
     }
 
-    public Formatting getRarityFormatting() {
+    public ChatFormatting getRarityFormatting() {
 //        if (rarity == null && formatting != null){
 //            return formatting;
 //        } else if (this.rarity != null) {

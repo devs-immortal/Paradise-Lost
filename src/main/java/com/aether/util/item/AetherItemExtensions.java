@@ -1,8 +1,8 @@
 package com.aether.util.item;
 
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
 
 public interface AetherItemExtensions {
-    Formatting getCustomRarityFormatting();
+    ChatFormatting getCustomRarityFormatting();
     int getCustomEnchantmentGlintColor();
 }

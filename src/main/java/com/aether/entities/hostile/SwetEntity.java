@@ -1,23 +1,23 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.SlimeEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
-public class SwetEntity extends SlimeEntity {
+public class SwetEntity extends Slime {
     public int stuckCooldown = 0;
 
-    public SwetEntity(World world){
+    public SwetEntity(Level world){
         super(AetherEntityTypes.BLUE_SWET, world);
         init();
     }
 
-    public SwetEntity(EntityType<? extends SwetEntity> entityType, World world){
+    public SwetEntity(EntityType<? extends SwetEntity> entityType, Level world){
         super(entityType, world);
         init();
     }
@@ -28,17 +28,17 @@ public class SwetEntity extends SlimeEntity {
         } else {
             super.setSize(2, false);
         }
-        getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(25);
+        getAttribute(Attributes.MAX_HEALTH).setBaseValue(25);
         setHealth(getMaxHealth());
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
+    public static AttributeSupplier.Builder initAttributes() {
         return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.28000000417232513D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.25D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0D);
+                .add(Attributes.FOLLOW_RANGE, 8.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.28000000417232513D)
+                .add(Attributes.ATTACK_DAMAGE, 1.0D)
+                .add(Attributes.ATTACK_SPEED, 0.25D)
+                .add(Attributes.MAX_HEALTH, 25.0D);
     }
 
     @Override
@@ -50,16 +50,16 @@ public class SwetEntity extends SlimeEntity {
     }
 
     @Override
-    public void onPlayerCollision(PlayerEntity player){
+    public void playerTouch(Player player){
         if (player.getVehicle() == null && stuckCooldown <= 0) {
             player.startRiding(this, true);
         } else {
-            super.onPlayerCollision(player);
+            super.playerTouch(player);
         }
     }
 
     protected void removePassenger(Entity passenger) {
-        if (passenger instanceof PlayerEntity) {
+        if (passenger instanceof Player) {
             stuckCooldown = 30;
         }
         super.removePassenger(passenger);

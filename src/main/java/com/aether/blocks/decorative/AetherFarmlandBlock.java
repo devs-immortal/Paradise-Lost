@@ -1,11 +1,11 @@
 package com.aether.blocks.decorative;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.FarmlandBlock;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class AetherFarmlandBlock extends FarmlandBlock {
-    public AetherFarmlandBlock(AbstractBlock.Settings settings) {
+public class AetherFarmlandBlock extends FarmBlock {
+    public AetherFarmlandBlock(BlockBehaviour.Properties settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(MOISTURE, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(MOISTURE, 0));
     }
 }

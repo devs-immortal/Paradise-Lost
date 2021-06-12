@@ -2,17 +2,7 @@ package com.aether.world.feature.generator;
 
 import com.aether.Aether;
 import com.aether.world.feature.AetherFeatures;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.*;
-import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockBox;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ServerWorldAccess;
-
 import java.util.List;
 import java.util.Random;
 

@@ -4,7 +4,7 @@ import dev.emi.trinkets.api.TrinketItem;
 
 public class Parachute extends TrinketItem {
 
-    public Parachute(Settings settings) {
+    public Parachute(Properties settings) {
         super(settings);
     }
 }

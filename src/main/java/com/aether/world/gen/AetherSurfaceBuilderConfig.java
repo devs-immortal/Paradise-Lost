@@ -3,10 +3,10 @@ package com.aether.world.gen;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.PrimitiveCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderConfiguration;
 
-public class AetherSurfaceBuilderConfig implements SurfaceConfig {
+public class AetherSurfaceBuilderConfig implements SurfaceBuilderConfiguration {
     public static final Codec<AetherSurfaceBuilderConfig> CODEC = RecordCodecBuilder.create((instance) -> instance.group(BlockState.CODEC.fieldOf("top_material")
             .forGetter(config -> config.topMaterial), BlockState.CODEC.fieldOf("under_material")
             .forGetter(config -> config.underMaterial), BlockState.CODEC.fieldOf("underwater_material")

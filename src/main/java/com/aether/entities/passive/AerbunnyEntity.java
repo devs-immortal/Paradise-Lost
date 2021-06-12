@@ -5,167 +5,176 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SweetBerryBushBlock;
-import net.minecraft.entity.MovementType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.ai.pathing.Path;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.SweetBerryBushBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.phys.Vec3;
 
 //import com.aether.world.storage.loot.AetherLootTableList;
 
 public class AerbunnyEntity extends AetherAnimalEntity {
 
-    public static final TrackedData<Byte> PUFF = DataTracker.registerData(AerbunnyEntity.class, TrackedDataHandlerRegistry.BYTE);
+    public static final EntityDataAccessor<Byte> PUFF = SynchedEntityData.defineId(AerbunnyEntity.class, EntityDataSerializers.BYTE);
     public float floof;
 
-    public AerbunnyEntity(World world) {
+    public AerbunnyEntity(Level world) {
         super(AetherEntityTypes.AERBUNNY, world);
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
+    public static AttributeSupplier.Builder initAttributes() {
         return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 5.0D);
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.MAX_HEALTH, 5.0D);
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0D, 20));
-        this.goalSelector.add(2, new WanderAroundGoal(this, 1.0D, 15));
-        this.goalSelector.add(3, new EatBlueberriesGoal(0.9D, 40, 8));
-        this.goalSelector.add(4, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(5, new TemptGoal(this, 1.15D, Ingredient.ofItems(AetherItems.BLUEBERRY), false));
-        this.goalSelector.add(6, new LookAroundGoal(this));
-        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F, 32));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D, 20));
+        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1.0D, 15));
+        this.goalSelector.addGoal(3, new EatBlueberriesGoal(0.9D, 40, 8));
+        this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new TemptGoal(this, 1.15D, Ingredient.of(AetherItems.BLUEBERRY), false));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F, 32));
         //this.goalSelector.add(6, new EntityAIBunnyHop(this));
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(PUFF, (byte) 0);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(PUFF, (byte) 0);
     }
 
     @Override
     @Environment(EnvType.CLIENT)
-    public boolean shouldRender(double par1) {
+    public boolean shouldRenderAtSqrDistance(double par1) {
         return true;
     }
 
     @Override
-    public double getMountedHeightOffset() {
+    public double getPassengersRidingOffset() {
         return 0.4D;
     }
 
     @Override
-    public void playSpawnEffects() {
-        if (this.world.isClient) {
+    public void spawnAnim() {
+        if (this.level.isClientSide) {
             for (int i = 0; i < 5; ++i) {
                 double double_1 = this.random.nextGaussian() * 0.02D;
                 double double_2 = this.random.nextGaussian() * 0.02D;
                 double double_3 = this.random.nextGaussian() * 0.02D;
 
-                this.world.addParticle(ParticleTypes.POOF, this.getX() + (double) (this.random.nextFloat() * this.getWidth() * 2.0F) - (double) this.getWidth() - double_1 * 10.0D, this.getY() + (double) (this.random.nextFloat() * this.getHeight()) - double_2 * 10.0D, this.getZ() + (double) (this.random.nextFloat() * this.getWidth() * 2.0F) - (double) this.getWidth() - double_3 * 10.0D, double_1, double_2, double_3);
+                this.level.addParticle(ParticleTypes.POOF, this.getX() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth() - double_1 * 10.0D, this.getY() + (double) (this.random.nextFloat() * this.getBbHeight()) - double_2 * 10.0D, this.getZ() + (double) (this.random.nextFloat() * this.getBbWidth() * 2.0F) - (double) this.getBbWidth() - double_3 * 10.0D, double_1, double_2, double_3);
             }
         } else {
-            this.world.sendEntityStatus(this, (byte) 20);
+            this.level.broadcastEntityEvent(this, (byte) 20);
         }
     }
 
     //@Override public boolean canRiderInteract() { return true; }
 
     public int getPuffiness() {
-        return (int) this.dataTracker.get(PUFF);
+        return (int) this.entityData.get(PUFF);
     }
 
     public void setPuffiness(int i) {
-        this.dataTracker.set(PUFF, (byte) i);
+        this.entityData.set(PUFF, (byte) i);
     }
 
     @Override
     public void tick() {
         super.tick();
         int puff = getPuffiness();
-        if(puff > 0 && world.getTime() % 4 == 0) {
-            Vec3d pos = getPos();
-            world.addParticle(ParticleTypes.CLOUD, pos.x, pos.y + 0.2, pos.z, 0, 0, 0);
+        if(puff > 0 && level.getGameTime() % 4 == 0) {
+            Vec3 pos = position();
+            level.addParticle(ParticleTypes.CLOUD, pos.x, pos.y + 0.2, pos.z, 0, 0, 0);
         }
         else if(isOnGround() && puff > 0) {
             setPuffiness(0);
         }
 
         if(random.nextFloat() <= 0.03F) {
-            AerbunnyEntity.this.playSound(SoundEvents.ENTITY_FOX_SNIFF, 1.0F, 2.0F);
+            AerbunnyEntity.this.playSound(SoundEvents.FOX_SNIFF, 1.0F, 2.0F);
         }
     }
 
     @Override
-    public void tickMovement() {
-        super.tickMovement();
-        if(this.isOnGround() && ((getVelocity().x > 0.025 || getVelocity().z > 0.025) && random.nextInt(4) == 0)) {
-            jump();
+    public void aiStep() {
+        super.aiStep();
+        if(this.isOnGround() && ((getDeltaMovement().x > 0.025 || getDeltaMovement().z > 0.025) && random.nextInt(4) == 0)) {
+            jumpFromGround();
         }
     }
 
     @Override
-    protected float getJumpVelocity() {
-        if (!this.horizontalCollision && (!this.moveControl.isMoving() || !(this.moveControl.getTargetY() > this.getY() + 0.5D))) {
-            Path path = this.navigation.getCurrentPath();
-            if (path != null && !path.isFinished()) {
-                Vec3d vec3d = path.getNodePosition(this);
+    protected float getJumpPower() {
+        if (!this.horizontalCollision && (!this.moveControl.hasWanted() || !(this.moveControl.getWantedY() > this.getY() + 0.5D))) {
+            Path path = this.navigation.getPath();
+            if (path != null && !path.isDone()) {
+                Vec3 vec3d = path.getNextEntityPos(this);
                 if (vec3d.y > this.getY() + 0.5D) {
                     return 0.45F;
                 }
             }
-            return this.moveControl.getSpeed() <= 0.6D ? 0.3F : 0.4F;
+            return this.moveControl.getSpeedModifier() <= 0.6D ? 0.3F : 0.4F;
         } else {
             return 0.45F;
         }
     }
 
     @Override
-    protected void jump() {
+    protected void jumpFromGround() {
         setPuffiness(1);
-        Vec3d pos = getPos();
+        Vec3 pos = position();
         for (int i = 0; i < 4; i++) {
-            world.addParticle(ParticleTypes.CLOUD, pos.x + (random.nextGaussian() * 0.2), pos.y + (random.nextGaussian() * 0.2), pos.z + (random.nextGaussian() * 0.2), 0, 0, 0);
+            level.addParticle(ParticleTypes.CLOUD, pos.x + (random.nextGaussian() * 0.2), pos.y + (random.nextGaussian() * 0.2), pos.z + (random.nextGaussian() * 0.2), 0, 0, 0);
         }
-        world.playSoundFromEntity(null, this, SoundEvents.ENTITY_RABBIT_JUMP, SoundCategory.NEUTRAL, 1, 1);
-        super.jump();
+        level.playSound(null, this, SoundEvents.RABBIT_JUMP, SoundSource.NEUTRAL, 1, 1);
+        super.jumpFromGround();
     }
 
     @Override
-    public boolean shouldSpawnSprintingParticles() {
+    public boolean canSpawnSprintParticle() {
         return false;
     }
 
     @Override
-    public void move(MovementType type, Vec3d movement) {
+    public void move(MoverType type, Vec3 movement) {
         super.move(type, isOnGround() ? movement : movement.multiply(3.5, (movement.y < 0 && getPuffiness() > 0) ? 0.15 : 1, 3.5));
     }
 
@@ -176,87 +185,87 @@ public class AerbunnyEntity extends AetherAnimalEntity {
 //    }
 
     @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getStackInHand(hand);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
 
         if (!stack.isEmpty()) {
-            return super.interactMob(player, hand);
+            return super.mobInteract(player, hand);
         } else {
 //            this.world.playSound(this.getX(), this.getY(), this.getZ(), AetherSounds.AERBUNNY_LIFT, SoundCategory.NEUTRAL, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F, false);
 
-            if (this.getPrimaryPassenger() != null) this.stopRiding();
+            if (this.getControllingPassenger() != null) this.stopRiding();
             else this.startRiding(player);
 
-            return ActionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
     }
 
     @Override
-    public boolean damage(DamageSource source, float damage) {
-        return (this.getPrimaryPassenger() == null || source.getAttacker() != this.getPrimaryPassenger()) && super.damage(source, damage);
+    public boolean hurt(DamageSource source, float damage) {
+        return (this.getControllingPassenger() == null || source.getEntity() != this.getControllingPassenger()) && super.hurt(source, damage);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_RABBIT_HURT;
+        return SoundEvents.RABBIT_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_RABBIT_DEATH;
+        return SoundEvents.RABBIT_DEATH;
     }
 
     @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entityageable) {
-        return new AerbunnyEntity(this.world);
+    public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entityageable) {
+        return new AerbunnyEntity(this.level);
     }
 
-    public class EatBlueberriesGoal extends MoveToTargetPosGoal {
+    public class EatBlueberriesGoal extends MoveToBlockGoal {
         protected int timer;
 
         public EatBlueberriesGoal(double speed, int range, int maxYDifference) {
             super(AerbunnyEntity.this, speed, range, maxYDifference);
         }
 
-        public double getDesiredSquaredDistanceToTarget() {
+        public double acceptedDistance() {
             return 2.0D;
         }
 
-        public boolean shouldResetPath() {
-            return this.tryingTime % 100 == 0;
+        public boolean shouldRecalculatePath() {
+            return this.tryTicks % 100 == 0;
         }
 
-        protected boolean isTargetPos(WorldView world, BlockPos pos) {
+        protected boolean isValidTarget(LevelReader world, BlockPos pos) {
             BlockState blockState = world.getBlockState(pos);
-            return blockState.isOf(AetherBlocks.BLUEBERRY_BUSH) && blockState.get(SweetBerryBushBlock.AGE) >= 3;
+            return blockState.is(AetherBlocks.BLUEBERRY_BUSH) && blockState.getValue(SweetBerryBushBlock.AGE) >= 3;
         }
 
         public void tick() {
-            if (this.hasReached()) {
+            if (this.isReachedTarget()) {
                 if (this.timer >= 40) {
                     this.eatSweetBerry();
                 } else {
                     ++this.timer;
                 }
-            } else if (!this.hasReached() && AerbunnyEntity.this.random.nextFloat() < 0.05F) {
-                AerbunnyEntity.this.playSound(SoundEvents.ENTITY_FOX_SNIFF, 1.0F, 2.0F);
+            } else if (!this.isReachedTarget() && AerbunnyEntity.this.random.nextFloat() < 0.05F) {
+                AerbunnyEntity.this.playSound(SoundEvents.FOX_SNIFF, 1.0F, 2.0F);
             }
             super.tick();
         }
 
         protected void eatSweetBerry() {
-            BlockState blockState = AerbunnyEntity.this.world.getBlockState(this.targetPos);
-            if (blockState.isOf(AetherBlocks.BLUEBERRY_BUSH) && blockState.get(SweetBerryBushBlock.AGE) == 3) {
-                AerbunnyEntity.this.setLoveTicks(40);
-                AerbunnyEntity.this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 10, 2));
-                AerbunnyEntity.this.playSound(SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, 1.0F, 1.0F);
-                AerbunnyEntity.this.playSound(SoundEvents.ENTITY_LLAMA_EAT, 0.8F, 2.0F);
-                AerbunnyEntity.this.world.setBlockState(this.targetPos, blockState.with(SweetBerryBushBlock.AGE, 1), 2);
+            BlockState blockState = AerbunnyEntity.this.level.getBlockState(this.blockPos);
+            if (blockState.is(AetherBlocks.BLUEBERRY_BUSH) && blockState.getValue(SweetBerryBushBlock.AGE) == 3) {
+                AerbunnyEntity.this.setInLoveTime(40);
+                AerbunnyEntity.this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 10, 2));
+                AerbunnyEntity.this.playSound(SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, 1.0F, 1.0F);
+                AerbunnyEntity.this.playSound(SoundEvents.LLAMA_EAT, 0.8F, 2.0F);
+                AerbunnyEntity.this.level.setBlock(this.blockPos, blockState.setValue(SweetBerryBushBlock.AGE, 1), 2);
             }
         }
 
         @Override
-        public boolean shouldContinue() {
+        public boolean canContinueToUse() {
             return true;
         }
 

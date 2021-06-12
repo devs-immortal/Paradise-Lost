@@ -1,6 +1,6 @@
 package com.aether.items.accessories;
 
-import net.minecraft.util.collection.Int2ObjectBiMap;
+import net.minecraft.util.CrudeIncrementalIntIdentityHashBiMap;
 
 public enum AccessoryType {
     RING("ring", 11, 3),
@@ -21,17 +21,17 @@ public enum AccessoryType {
         this.damagedReduced = damageReduced;
     }
 
-    public static Int2ObjectBiMap<AccessoryType> createCompleteList() {
-        Int2ObjectBiMap<AccessoryType> map = new Int2ObjectBiMap<>(8);
+    public static CrudeIncrementalIntIdentityHashBiMap<AccessoryType> createCompleteList() {
+        CrudeIncrementalIntIdentityHashBiMap<AccessoryType> map = new CrudeIncrementalIntIdentityHashBiMap<>(8);
 
-        map.put(PENDANT, 0);
-        map.put(CAPE, 1);
-        map.put(SHIELD, 2);
-        map.put(MISC, 3);
-        map.put(RING, 4);
-        map.put(EXTRA_RING, 5);
-        map.put(GLOVES, 6);
-        map.put(EXTRA_MISC, 7);
+        map.addMapping(PENDANT, 0);
+        map.addMapping(CAPE, 1);
+        map.addMapping(SHIELD, 2);
+        map.addMapping(MISC, 3);
+        map.addMapping(RING, 4);
+        map.addMapping(EXTRA_RING, 5);
+        map.addMapping(GLOVES, 6);
+        map.addMapping(EXTRA_MISC, 7);
 
         return map;
     }

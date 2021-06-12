@@ -3,15 +3,13 @@ package com.aether.world.feature;
 import com.aether.world.feature.config.AercloudConfig;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.util.FeatureContext;
-
 import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 public class AercloudFeature extends Feature<AercloudConfig> {
 
@@ -27,8 +25,8 @@ public class AercloudFeature extends Feature<AercloudConfig> {
     }
 
     @Override
-    public boolean generate(FeatureContext<AercloudConfig> context) {
-        return (createCloudBlob(context.getWorld(), context.getConfig().state, context.getRandom(), context.getOrigin(), 3, 10) || createCloudBlob(context.getWorld(), context.getConfig().state, context.getRandom(), context.getOrigin().north(3).east(), 3, 8));
+    public boolean place(FeaturePlaceContext<AercloudConfig> context) {
+        return (createCloudBlob(context.level(), context.config().state, context.random(), context.origin(), 3, 10) || createCloudBlob(context.level(), context.config().state, context.random(), context.origin().north(3).east(), 3, 8));
     }
 
     private int randomSign(Random random) {
@@ -40,9 +38,9 @@ public class AercloudFeature extends Feature<AercloudConfig> {
         }
     }
 
-    private boolean createCloudBlob(StructureWorldAccess world, BlockState state, Random random, BlockPos center, int sizex, int sizez) {
-        for (BlockPos blockPos : BlockPos.iterate(center.add(-sizex * 0.3, -sizex * 0.3, -sizez * 0.3), center.add(sizex * 0.3, sizex * 0.3, sizez * 0.3))) {
-            if (testElipsoid(sizex, sizex, sizez, blockPos, center) && (!(world.isAir(blockPos) || world.getBlockState(blockPos) == state.getBlock().getDefaultState()))) {
+    private boolean createCloudBlob(WorldGenLevel world, BlockState state, Random random, BlockPos center, int sizex, int sizez) {
+        for (BlockPos blockPos : BlockPos.betweenClosed(center.offset(-sizex * 0.3, -sizex * 0.3, -sizez * 0.3), center.offset(sizex * 0.3, sizex * 0.3, sizez * 0.3))) {
+            if (testElipsoid(sizex, sizex, sizez, blockPos, center) && (!(world.isEmptyBlock(blockPos) || world.getBlockState(blockPos) == state.getBlock().defaultBlockState()))) {
                 return false;
             }
         }
@@ -52,14 +50,14 @@ public class AercloudFeature extends Feature<AercloudConfig> {
                 for (int x = center.getX() - stuffsize; x <= center.getX() + stuffsize; x++) {
                     for (int y = center.getY() - Math.round(stuffsize*0.7f); y <= center.getY() + Math.round(stuffsize*0.7f); y++) {
                         if (!((x == center.getX() - stuffsize || x == center.getX() + stuffsize) && (y == center.getY() - stuffsize + 1 || y == center.getY() + stuffsize - 1))) {
-                            if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).isOf(Blocks.AIR)) {
-                                world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
+                            if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).is(Blocks.AIR)) {
+                                world.setBlock(new BlockPos(x, y, center.getZ() + z), state, 2);
                             }
                         }
                     }
                 }
             }
-            center = center.down((random.nextInt(1)+1)*randomSign(random));
+            center = center.below((random.nextInt(1)+1)*randomSign(random));
             center = center.east((random.nextInt(3)+3)*randomSign(random));
             center = center.north((random.nextInt(3)+3)*randomSign(random));
             createCloudBlob(world, state, random, center, sizex-random.nextInt(1), sizez-random.nextInt(1)-1);

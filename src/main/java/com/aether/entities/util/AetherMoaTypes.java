@@ -4,7 +4,7 @@ import com.aether.Aether;
 import com.aether.api.AetherAPI;
 import com.aether.api.moa.MoaProperties;
 import com.aether.api.moa.MoaType;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.CreativeModeTab;
 
 public class AetherMoaTypes {
 
@@ -18,7 +18,7 @@ public class AetherMoaTypes {
     }
 
     public static MoaType register(String name, int hexColor, MoaProperties properties) {
-        MoaType moaType = new MoaType(hexColor, ItemGroup.MISC, properties);
+        MoaType moaType = new MoaType(hexColor, CreativeModeTab.TAB_MISC, properties);
         AetherAPI.instance().register(Aether.locate(name), moaType);
         return moaType;
     }

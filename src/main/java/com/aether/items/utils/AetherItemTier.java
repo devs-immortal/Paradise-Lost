@@ -1,25 +1,25 @@
 package com.aether.items.utils;
 
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.util.Lazy;
+import net.minecraft.util.LazyLoadedValue;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 
-public class AetherItemTier implements ToolMaterial {
+public class AetherItemTier implements Tier {
     private final int harvestLevel;
     private final int maxUses;
     private final float damageVsEntity;
     private final int enchantability;
     private final float speedMultiplier;
-    private final Lazy<Ingredient> ingredientLoader;
+    private final LazyLoadedValue<Ingredient> ingredientLoader;
 
-    public AetherItemTier(int harvestLevel, int maxUses, float speedMultiplier, float damageVsEntity, int enchantability, ItemConvertible repairMaterial) {
+    public AetherItemTier(int harvestLevel, int maxUses, float speedMultiplier, float damageVsEntity, int enchantability, ItemLike repairMaterial) {
         this.harvestLevel = harvestLevel;
         this.maxUses = maxUses;
         this.speedMultiplier = speedMultiplier;
         this.damageVsEntity = damageVsEntity;
         this.enchantability = enchantability;
-        this.ingredientLoader = new Lazy<>(() -> Ingredient.ofItems(repairMaterial));
+        this.ingredientLoader = new LazyLoadedValue<>(() -> Ingredient.of(repairMaterial));
     }
 
     @Override
@@ -28,27 +28,27 @@ public class AetherItemTier implements ToolMaterial {
     }
 
     @Override
-    public int getMiningLevel() {
+    public int getLevel() {
         return this.harvestLevel;
     }
 
     @Override
-    public int getDurability() {
+    public int getUses() {
         return this.maxUses;
     }
 
     @Override
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return this.enchantability;
     }
 
     @Override
-    public float getMiningSpeedMultiplier() {
+    public float getSpeed() {
         return this.speedMultiplier;
     }
 
     @Override
-    public float getAttackDamage() {
+    public float getAttackDamageBonus() {
         return this.damageVsEntity;
     }
 }

@@ -1,21 +1,18 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.Level;
 
 public class GoldenSwetEntity extends SwetEntity{
-    public GoldenSwetEntity(World world){
+    public GoldenSwetEntity(Level world){
         super(AetherEntityTypes.GOLDEN_SWET, world);
     }
 
     protected void init(){
         super.init();
-        getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(40);
-        getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(2);
+        getAttribute(Attributes.MAX_HEALTH).setBaseValue(40);
+        getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(2);
         setHealth(getMaxHealth());
     }
 }

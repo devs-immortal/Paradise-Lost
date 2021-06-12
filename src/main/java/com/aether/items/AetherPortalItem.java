@@ -1,13 +1,12 @@
 package com.aether.items;
 
 import com.aether.blocks.AetherBlocks;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Blocks;
 
 public class AetherPortalItem extends Item {
 	private static final byte[][] GLOWSTONE = new byte[][] {
@@ -23,27 +22,27 @@ public class AetherPortalItem extends Item {
 			new byte[] {-1, 1, 0}
 	};
 
-	public AetherPortalItem(Settings settings) {
+	public AetherPortalItem(Properties settings) {
 		super(settings);
 	}
 
 	@Override
-	public ActionResult useOnBlock(ItemUsageContext context) {
-		if (!context.getWorld().isClient) {
-			BlockPos.Mutable mut = new BlockPos.Mutable();
+	public InteractionResult useOn(UseOnContext context) {
+		if (!context.getLevel().isClientSide) {
+			BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos();
 
 			for (byte[] b : GLOWSTONE) {
-				mut.set(context.getBlockPos());
+				mut.set(context.getClickedPos());
 				mut.move(
-						context.getPlayerFacing().getAxis() == Direction.Axis.X ? b[2] : b[0],
+						context.getHorizontalDirection().getAxis() == Direction.Axis.X ? b[2] : b[0],
 						b[1],
-						context.getPlayerFacing().getAxis() == Direction.Axis.X ? b[0] : b[2]
+						context.getHorizontalDirection().getAxis() == Direction.Axis.X ? b[0] : b[2]
 				);
 
-				context.getWorld().setBlockState(mut, Blocks.GLOWSTONE.getDefaultState());
+				context.getLevel().setBlockAndUpdate(mut, Blocks.GLOWSTONE.defaultBlockState());
 			}
 
-			mut.set(context.getBlockPos());
+			mut.set(context.getClickedPos());
 
 			for (byte i = 0; i < 2; ++i) {
 				mut.move(Direction.UP);
@@ -51,12 +50,12 @@ public class AetherPortalItem extends Item {
 			}
 
 			if (context.getPlayer() != null && !context.getPlayer().isCreative()) {
-				context.getStack().decrement(1);
+				context.getItemInHand().shrink(1);
 			}
 
-			return ActionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
 
-		return ActionResult.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 }

@@ -2,9 +2,9 @@ package com.aether.mixin.client;
 
 import com.aether.client.rendering.map.AetherMap;
 import com.aether.world.dimension.AetherDimension;
-import net.minecraft.block.MapColor;
-import net.minecraft.client.texture.NativeImageBackedTexture;
-import net.minecraft.item.map.MapState;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,11 +17,11 @@ public class MapRendererMixin {
 
     @Shadow
     @Final
-    private MapState state;
+    private MapItemSavedData state;
 
     @Shadow
     @Final
-    private NativeImageBackedTexture texture;
+    private DynamicTexture texture;
 
     @Inject(method = "updateTexture()V", at = @At(value = "RETURN", target = "net/minecraft/client/render/MapRenderer$MapTexture.updateTexture()V"))
     private void updateAetherTexture(CallbackInfo ci) {
@@ -32,13 +32,13 @@ public class MapRendererMixin {
                 int int_4 = this.state.colors[int_3] & 255;
 
                 if (int_4 / 4 == 0) {
-                    this.texture.getImage().setPixelColor(int_2, int_1, (int_3 + int_3 / 128 & 1) * 8 + 16 << 24);
+                    this.texture.getPixels().setPixelRGBA(int_2, int_1, (int_3 + int_3 / 128 & 1) * 8 + 16 << 24);
                 } else {
-                    int color = MapColor.COLORS[int_4 / 4].getRenderColor(int_4 & 3);
+                    int color = MaterialColor.MATERIAL_COLORS[int_4 / 4].calculateRGBColor(int_4 & 3);
 
-                    if (isAether) color = AetherMap.getColor(MapColor.COLORS[int_4 / 4], int_4 & 3);
+                    if (isAether) color = AetherMap.getColor(MaterialColor.MATERIAL_COLORS[int_4 / 4], int_4 & 3);
 
-                    this.texture.getImage().setPixelColor(int_2, int_1, color);
+                    this.texture.getPixels().setPixelRGBA(int_2, int_1, color);
                 }
             }
         }

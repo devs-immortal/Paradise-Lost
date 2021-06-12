@@ -1,15 +1,15 @@
 package com.aether.util.item;
 
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
 
 public class AetherRarity {
-    private final Formatting formatting;
+    private final ChatFormatting formatting;
 
-    public AetherRarity(Formatting formatting) {
+    public AetherRarity(ChatFormatting formatting) {
         this.formatting = formatting;
     }
 
-    public Formatting getCustomRarityFormatting() {
+    public ChatFormatting getCustomRarityFormatting() {
         return formatting;
     }
 }

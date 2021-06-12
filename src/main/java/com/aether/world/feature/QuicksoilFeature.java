@@ -2,28 +2,27 @@ package com.aether.world.feature;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.aercloud.BaseAercloudBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.util.FeatureContext;
-
 import java.util.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
+public class QuicksoilFeature extends Feature<NoneFeatureConfiguration> {
 
     public QuicksoilFeature() {
-        super(DefaultFeatureConfig.CODEC);
+        super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         BlockPos origin = null;
-        BlockPos.Mutable mut = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos();
 
-        BlockPos startPos = context.getOrigin();
+        BlockPos startPos = context.origin();
 
         for (int x = -16; x < 16; ++x) {
             for (int y = 20; y < 128; y++) {
@@ -31,7 +30,7 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
                     mut.set(startPos);
                     mut.move(x, y, z);
 
-                    if (context.getWorld().getBlockState(mut).isAir() && context.getWorld().getBlockState(mut.up()).isOf(AetherBlocks.AETHER_GRASS_BLOCK) && context.getWorld().getBlockState(mut.up(2)).isAir()) {
+                    if (context.level().getBlockState(mut).isAir() && context.level().getBlockState(mut.above()).is(AetherBlocks.AETHER_GRASS_BLOCK) && context.level().getBlockState(mut.above(2)).isAir()) {
                         origin = new BlockPos(mut);
                     }
                 }
@@ -60,7 +59,7 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
 
                     if (!visited.contains(mut) && !centers.contains(mut)) {
                         BlockState up;
-                        if (context.getWorld().getBlockState(mut).isAir() && !(up = context.getWorld().getBlockState(mut.up())).isAir() && !(up.getBlock() instanceof BaseAercloudBlock) && mut.isWithinDistance(startPos, 24)) {
+                        if (context.level().getBlockState(mut).isAir() && !(up = context.level().getBlockState(mut.above())).isAir() && !(up.getBlock() instanceof BaseAercloudBlock) && mut.closerThan(startPos, 24)) {
                             BlockPos p = new BlockPos(mut);
                             nextStops.add(p);
                             centers.add(p);
@@ -77,21 +76,21 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
 
         mut.set(origin);
 
-        ChunkRegion region = (ChunkRegion) context.getWorld();
+        WorldGenRegion region = (WorldGenRegion) context.level();
 
         List<int[]> positions = new ArrayList<>();
 
         int radius;
         if (centers.size() > 10) {
             for (BlockPos center : centers) {
-                radius = context.getRandom().nextInt(2)+4;
+                radius = context.random().nextInt(2)+4;
 
                 for (int x = center.getX() - radius; x < center.getX() + radius; x++) {
                     for (int z = center.getZ() - radius; z < center.getZ() + radius; z++) {
                         mut.set(x, center.getY(), z);
 
-                        if (region.isChunkLoaded(mut.getX() >> 4, mut.getZ() >> 4)) {
-                            if (context.getWorld().getBlockState(mut).isAir() && mut.isWithinDistance(center, radius)) {
+                        if (region.hasChunk(mut.getX() >> 4, mut.getZ() >> 4)) {
+                            if (context.level().getBlockState(mut).isAir() && mut.closerThan(center, radius)) {
                                 positions.add(new int[] {mut.getX(), mut.getY(), mut.getZ()});
                             }
                         } else {
@@ -104,7 +103,7 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
 
         for (int[] pos : positions) {
             mut.set(pos[0], pos[1], pos[2]);
-            this.setBlockState(context.getWorld(), mut, AetherBlocks.QUICKSOIL.getDefaultState());
+            this.setBlock(context.level(), mut, AetherBlocks.QUICKSOIL.defaultBlockState());
         }
 
         return true;

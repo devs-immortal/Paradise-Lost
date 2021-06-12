@@ -1,9 +1,9 @@
 package com.aether.world.feature.config;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
-public class AercloudConfig implements FeatureConfig {
+public class AercloudConfig implements FeatureConfiguration {
 
     public final BlockState state;
     public final boolean isFlat;

@@ -1,40 +1,41 @@
 package com.aether.entities.passive;
 
 import com.aether.entities.AetherEntityTypes;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 
 public class AerwhaleEntity extends AetherAnimalEntity {
 
-    public AerwhaleEntity(World world) {
+    public AerwhaleEntity(Level world) {
         super(AetherEntityTypes.AERWHALE, world);
-        this.moveControl = new FlightMoveControl(this, 20, true);
+        this.moveControl = new FlyingMoveControl(this, 20, true);
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
+    public static AttributeSupplier.Builder initAttributes() {
         return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0D)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5D)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.5D);
+                .add(Attributes.MAX_HEALTH, 25.0D)
+                .add(Attributes.FLYING_SPEED, 0.5D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
     }
 
     @Override
-    protected void initGoals() {
+    protected void registerGoals() {
         //this.goalSelector.add(0, new SwimGoal(this));
         //this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0D, 20));
         //this.goalSelector.add(3, new WanderAroundGoal(this, 1.0D, 15));
         //this.goalSelector.add(0, new EscapeDangerGoal(this, 1.0D));
-        this.goalSelector.add(0, new AerwhaleEntity.FlyGoal(1.0));
+        this.goalSelector.addGoal(0, new AerwhaleEntity.FlyGoal(1.0));
 
         //this.goalSelector.add(0, new WanderAroundGoal(this, 0.5));
     }
@@ -47,19 +48,19 @@ public class AerwhaleEntity extends AetherAnimalEntity {
 
 
     @Override
-    protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {
+    protected void checkFallDamage(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {
     }
 
 
     @Override
-    public boolean isClimbing() {
+    public boolean onClimbable() {
         return false;
     }
 
 
     class FlyGoal extends Goal {
 
-        protected final PathAwareEntity mob = AerwhaleEntity.this;
+        protected final PathfinderMob mob = AerwhaleEntity.this;
         protected double targetX;
         protected double targetY;
         protected double targetZ;
@@ -67,17 +68,17 @@ public class AerwhaleEntity extends AetherAnimalEntity {
 
         public FlyGoal(double d) {
             this.speed = d;
-            this.setControls(EnumSet.of(Control.MOVE));
+            this.setFlags(EnumSet.of(Flag.MOVE));
         }
 
         // I had to comment out all System.outs becuase it was lagging my IDE
 
-        public boolean canStart() {
+        public boolean canUse() {
 //            if (this.mob.getRandom().nextInt(10) != 0) {
 //                return false;
 //            }
 
-            Vec3d vec3d = null;//this.getWanderTarget();
+            Vec3 vec3d = null;//this.getWanderTarget();
             if (vec3d == null) {
 //                System.out.println("Target was null");
                 return false;
@@ -96,7 +97,7 @@ public class AerwhaleEntity extends AetherAnimalEntity {
 //        }
 
 
-        public boolean shouldContinue() {
+        public boolean canContinueToUse() {
             if (this.mob.getRandom().nextInt(30) != 0) {
 //                System.out.println("Continuing path...");
                 return true;
@@ -114,7 +115,7 @@ public class AerwhaleEntity extends AetherAnimalEntity {
 
         public void start() {
 //            System.out.println("Starting nav to:"+targetX+", "+targetY+", "+targetZ);
-            this.mob.getNavigation().startMovingTo(this.targetX, this.targetY, this.targetZ, 0.5);
+            this.mob.getNavigation().moveTo(this.targetX, this.targetY, this.targetZ, 0.5);
         }
 
         public void stop() {

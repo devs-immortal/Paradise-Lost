@@ -1,23 +1,23 @@
 package com.aether.items.staff;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class CloudStaff extends Item {
 
-    public CloudStaff(Settings settings) {
+    public CloudStaff(Properties settings) {
         super(settings);
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack heldItem = playerIn.getStackInHand(handIn);
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+        ItemStack heldItem = playerIn.getItemInHand(handIn);
 
-        if (worldIn.isClient) return super.use(worldIn, playerIn, handIn);
+        if (worldIn.isClientSide) return super.use(worldIn, playerIn, handIn);
 
         //TODO: Implement logic
 

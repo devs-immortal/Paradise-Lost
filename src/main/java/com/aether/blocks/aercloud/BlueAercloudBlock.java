@@ -1,38 +1,38 @@
 package com.aether.blocks.aercloud;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlueAercloudBlock extends BaseAercloudBlock {
 
     public BlueAercloudBlock() {
-        super(FabricBlockSettings.of(Material.SNOW_BLOCK, MapColor.LIGHT_BLUE).sounds(BlockSoundGroup.SNOW));
+        super(FabricBlockSettings.of(Material.SNOW, MaterialColor.COLOR_LIGHT_BLUE).sound(SoundType.SNOW));
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
         entity.fallDistance = 0F;
-        entity.setVelocity(entity.getVelocity().x, 1.95, entity.getVelocity().z);
+        entity.setDeltaMovement(entity.getDeltaMovement().x, 1.95, entity.getDeltaMovement().z);
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.empty();
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return Shapes.empty();
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return type != NavigationType.WATER;
+    public boolean isPathfindable(BlockState state, BlockGetter world, BlockPos pos, PathComputationType type) {
+        return type != PathComputationType.WATER;
     }
 }

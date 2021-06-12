@@ -1,48 +1,47 @@
 package com.aether.entities.ai;
 
 import com.aether.blocks.AetherBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.predicate.block.BlockStatePredicate;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
-
 import java.util.EnumSet;
 import java.util.function.Predicate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 
 public class EatAetherGrassGoal extends Goal {
     private static final Predicate<BlockState> grass = BlockStatePredicate.forBlock(AetherBlocks.AETHER_GRASS_BLOCK);
 
-    private final MobEntity owner;
-    private final World world;
+    private final Mob owner;
+    private final Level world;
     private int timer;
 
-    public EatAetherGrassGoal(MobEntity entity) {
+    public EatAetherGrassGoal(Mob entity) {
         this.owner = entity;
-        this.world = entity.world;
+        this.world = entity.level;
 
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK, Goal.Control.JUMP));
+        this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
     }
 
     @Override
-    public boolean canStart() {
+    public boolean canUse() {
         if (this.owner.getRandom().nextInt(this.owner.isBaby() ? 50 : 1000) != 0) {
             return false;
         } else {
             BlockPos pos = new BlockPos(this.owner.getX(), this.owner.getY(), this.owner.getZ());
 
             if (grass.test(this.world.getBlockState(pos))) return true;
-            else return this.world.getBlockState(pos.down(1)).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK;
+            else return this.world.getBlockState(pos.below(1)).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK;
         }
     }
 
     @Override
     public void start() {
         this.timer = 40;
-        this.world.sendEntityStatus(this.owner, (byte) 10);
+        this.world.broadcastEntityEvent(this.owner, (byte) 10);
         this.owner.getNavigation().stop();
     }
 
@@ -53,7 +52,7 @@ public class EatAetherGrassGoal extends Goal {
     }
 
     @Override
-    public boolean shouldContinue() {
+    public boolean canContinueToUse() {
         return this.timer > 0;
     }
 
@@ -65,19 +64,19 @@ public class EatAetherGrassGoal extends Goal {
             BlockPos pos = new BlockPos(this.owner.getX(), this.owner.getY(), this.owner.getZ());
 
             if (grass.test(this.world.getBlockState(pos))) {
-                if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) this.world.breakBlock(pos, false);
+                if (this.world.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) this.world.destroyBlock(pos, false);
 
-                this.owner.onEatingGrass();
+                this.owner.ate();
             } else {
-                BlockPos downPos = pos.down(1);
+                BlockPos downPos = pos.below(1);
 
                 if (this.world.getBlockState(downPos).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK) {
-                    if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-                        this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(AetherBlocks.AETHER_GRASS_BLOCK.getDefaultState()));
-                        this.world.setBlockState(downPos, AetherBlocks.AETHER_DIRT.getDefaultState(), 2);
+                    if (this.world.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+                        this.world.globalLevelEvent(2001, downPos, Block.getId(AetherBlocks.AETHER_GRASS_BLOCK.defaultBlockState()));
+                        this.world.setBlock(downPos, AetherBlocks.AETHER_DIRT.defaultBlockState(), 2);
                     }
 
-                    this.owner.onEatingGrass();
+                    this.owner.ate();
                 }
             }
         }

@@ -1,51 +1,50 @@
 package com.aether.blocks.natural;
 
 import com.aether.blocks.SpreadableAetherBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.FlowerFeature;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
-
 import java.util.List;
 import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.AbstractFlowerFeature;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 
 @SuppressWarnings("unchecked")
-public class AetherGrassBlock extends SpreadableAetherBlock implements Fertilizable {
-    public AetherGrassBlock(Settings settings) {
+public class AetherGrassBlock extends SpreadableAetherBlock implements BonemealableBlock {
+    public AetherGrassBlock(Properties settings) {
         super(settings);
     }
 
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return world.getBlockState(pos.up()).isAir();
+    public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+        return world.getBlockState(pos.above()).isAir();
     }
 
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
         return true;
     }
 
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        BlockPos blockPos = pos.up();
-        BlockState blockState = Blocks.GRASS.getDefaultState();
+    public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+        BlockPos blockPos = pos.above();
+        BlockState blockState = Blocks.GRASS.defaultBlockState();
 
         label48:
         for (int i = 0; i < 128; ++i) {
             BlockPos blockPos2 = blockPos;
 
             for (int j = 0; j < i / 16; ++j) {
-                blockPos2 = blockPos2.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-                if (!world.getBlockState(blockPos2.down()).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2))
+                blockPos2 = blockPos2.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
+                if (!world.getBlockState(blockPos2.below()).is(this) || world.getBlockState(blockPos2).isCollisionShapeFullBlock(world, blockPos2))
                     continue label48;
             }
 
             BlockState blockState2 = world.getBlockState(blockPos2);
-            if (blockState2.isOf(blockState.getBlock()) && random.nextInt(10) == 0)
-                ((Fertilizable) blockState.getBlock()).grow(world, random, blockPos2, blockState2);
+            if (blockState2.is(blockState.getBlock()) && random.nextInt(10) == 0)
+                ((BonemealableBlock) blockState.getBlock()).performBonemeal(world, random, blockPos2, blockState2);
 
             if (blockState2.isAir()) {
                 BlockState blockState4;
@@ -54,13 +53,13 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
                     if (list.isEmpty()) continue;
 
                     ConfiguredFeature<?, ?> configuredFeature = list.get(0);
-                    FlowerFeature<RandomPatchFeatureConfig> flowerFeature = (FlowerFeature<RandomPatchFeatureConfig>) configuredFeature.feature;
-                    blockState4 = flowerFeature.getFlowerState(random, blockPos2, (RandomPatchFeatureConfig) configuredFeature.getConfig());
+                    AbstractFlowerFeature<RandomPatchConfiguration> flowerFeature = (AbstractFlowerFeature<RandomPatchConfiguration>) configuredFeature.feature;
+                    blockState4 = flowerFeature.getRandomFlower(random, blockPos2, (RandomPatchConfiguration) configuredFeature.config());
                 } else {
                     blockState4 = blockState;
                 }
 
-                if (blockState4.canPlaceAt(world, blockPos2)) world.setBlockState(blockPos2, blockState4, 3);
+                if (blockState4.canSurvive(world, blockPos2)) world.setBlock(blockPos2, blockState4, 3);
             }
         }
     }

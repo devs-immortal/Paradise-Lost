@@ -3,13 +3,13 @@ package com.aether.blocks.natural.ore;
 import com.aether.blocks.FloatingBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.Material;
-import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 
 public class GravititeOreBlock extends FloatingBlock {
 
     public GravititeOreBlock() {
-        super(false, FabricBlockSettings.of(Material.STONE).strength(5.0F).sounds(BlockSoundGroup.STONE).breakByTool(FabricToolTags.PICKAXES, 2));
+        super(false, FabricBlockSettings.of(Material.STONE).strength(5.0F).sound(SoundType.STONE).breakByTool(FabricToolTags.PICKAXES, 2));
     }
 
 //    @Override

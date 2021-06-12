@@ -4,14 +4,13 @@ import com.aether.Aether;
 import com.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import com.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
 import com.mojang.serialization.Codec;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.foliage.FoliagePlacer;
-import net.minecraft.world.gen.foliage.FoliagePlacerType;
-import net.minecraft.world.gen.trunk.TrunkPlacer;
-import net.minecraft.world.gen.trunk.TrunkPlacerType;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class AetherTreeHell {
@@ -24,11 +23,11 @@ public class AetherTreeHell {
     public static TrunkPlacerType<WisteriaTrunkPlacer> WISTERIA_TRUNK;
 
     public static <P extends FoliagePlacer> FoliagePlacerType<P> registerFoliage(String name, Codec<P> codec) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return Registry.register(Registry.FOLIAGE_PLACER_TYPE, Aether.locate(name), foliageConstructor.newInstance(codec));
+        return Registry.register(Registry.FOLIAGE_PLACER_TYPES, Aether.locate(name), foliageConstructor.newInstance(codec));
     }
 
     public static <P extends TrunkPlacer> TrunkPlacerType<P> registerTrunk(String name, Codec<P> codec) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return Registry.register(Registry.TRUNK_PLACER_TYPE, Aether.locate(name), trunkConstructor.newInstance(codec));
+        return Registry.register(Registry.TRUNK_PLACER_TYPES, Aether.locate(name), trunkConstructor.newInstance(codec));
     }
 
     public static void init() {

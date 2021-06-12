@@ -1,43 +1,43 @@
 package com.aether.util;
 
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import org.jetbrains.annotations.Nullable;
 
-public class CustomStatusEffectInstance extends StatusEffectInstance {
+public class CustomStatusEffectInstance extends MobEffectInstance {
 
     public boolean ShowParticles = false;
 
-    public CustomStatusEffectInstance(StatusEffect statusEffect) {
+    public CustomStatusEffectInstance(MobEffect statusEffect) {
         super(statusEffect);
     }
 
-    public CustomStatusEffectInstance(StatusEffect type, int duration) {
+    public CustomStatusEffectInstance(MobEffect type, int duration) {
         super(type, duration);
     }
 
-    public CustomStatusEffectInstance(StatusEffect type, int duration, int amplifier) {
+    public CustomStatusEffectInstance(MobEffect type, int duration, int amplifier) {
         super(type, duration, amplifier);
     }
 
-    public CustomStatusEffectInstance(StatusEffect type, int duration, int amplifier, boolean ambient, boolean visible) {
+    public CustomStatusEffectInstance(MobEffect type, int duration, int amplifier, boolean ambient, boolean visible) {
         super(type, duration, amplifier, ambient, visible);
     }
 
-    public CustomStatusEffectInstance(StatusEffect type, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon) {
+    public CustomStatusEffectInstance(MobEffect type, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon) {
         super(type, duration, amplifier, ambient, showParticles, showIcon);
     }
 
-    public CustomStatusEffectInstance(StatusEffect type, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon, @Nullable StatusEffectInstance hiddenEffect) {
+    public CustomStatusEffectInstance(MobEffect type, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon, @Nullable MobEffectInstance hiddenEffect) {
         super(type, duration, amplifier, ambient, showParticles, showIcon, hiddenEffect);
     }
 
-    public CustomStatusEffectInstance(StatusEffectInstance statusEffectInstance) {
+    public CustomStatusEffectInstance(MobEffectInstance statusEffectInstance) {
         super(statusEffectInstance);
     }
 
     @Override
-    public boolean shouldShowParticles() {
+    public boolean isVisible() {
         return this.ShowParticles;
     }
 }

@@ -1,15 +1,15 @@
 package com.aether.mixin.client.render;
 
 import com.aether.blocks.AetherBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.data.client.model.BlockStateModelGenerator;
+import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(BlockStateModelGenerator.class)
+@Mixin(BlockModelGenerators.class)
 public abstract class BlockStateModelGeneratorMixin {
     @Shadow
     protected abstract void registerTorch(Block torch, Block wallTorch);

@@ -1,20 +1,6 @@
 package com.aether.mixin.item;
 
 import com.aether.blocks.AetherBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.MiningToolItem;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.Tag;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,32 +8,46 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashMap;
 import java.util.Map;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(HoeItem.class)
-public class HoeItemMixin extends MiningToolItem {
+public class HoeItemMixin extends DiggerItem {
 
-    protected HoeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Tag<Block> effectiveBlocks, Settings settings) {
+    protected HoeItemMixin(float attackDamage, float attackSpeed, Tier material, Tag<Block> effectiveBlocks, Properties settings) {
         super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
     }
 
     @Inject(at = @At("HEAD"), method = "useOnBlock", cancellable = true)
-    public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
-        World world = context.getWorld();
-        BlockPos blockPos = context.getBlockPos();
+    public void useOnBlock(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
+        Level world = context.getLevel();
+        BlockPos blockPos = context.getClickedPos();
         Map<Block, BlockState> AETHER_TILLED_BLOCKS = new HashMap<>();
-        AETHER_TILLED_BLOCKS.put(AetherBlocks.AETHER_GRASS_BLOCK, AetherBlocks.AETHER_FARMLAND.getDefaultState());
-        AETHER_TILLED_BLOCKS.put(AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_FARMLAND.getDefaultState());
-        if (context.getSide() != Direction.DOWN && world.getBlockState(blockPos.up()).isAir()) {
+        AETHER_TILLED_BLOCKS.put(AetherBlocks.AETHER_GRASS_BLOCK, AetherBlocks.AETHER_FARMLAND.defaultBlockState());
+        AETHER_TILLED_BLOCKS.put(AetherBlocks.AETHER_DIRT, AetherBlocks.AETHER_FARMLAND.defaultBlockState());
+        if (context.getClickedFace() != Direction.DOWN && world.getBlockState(blockPos.above()).isAir()) {
             BlockState blockState = AETHER_TILLED_BLOCKS.get(world.getBlockState(blockPos).getBlock());
             if (blockState != null) {
-                PlayerEntity playerEntity = context.getPlayer();
-                world.playSound(playerEntity, blockPos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                if (!world.isClient) {
-                    world.setBlockState(blockPos, blockState, 11);
+                Player playerEntity = context.getPlayer();
+                world.playSound(playerEntity, blockPos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+                if (!world.isClientSide) {
+                    world.setBlock(blockPos, blockState, 11);
                     if (playerEntity != null)
-                        context.getStack().damage(1, playerEntity, (p) -> p.sendToolBreakStatus(context.getHand()));
+                        context.getItemInHand().hurtAndBreak(1, playerEntity, (p) -> p.broadcastBreakEvent(context.getHand()));
                 }
-                cir.setReturnValue(ActionResult.success(world.isClient));
+                cir.setReturnValue(InteractionResult.sidedSuccess(world.isClientSide));
             }
         }
     }

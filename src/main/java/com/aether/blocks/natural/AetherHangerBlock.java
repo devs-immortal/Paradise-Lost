@@ -1,44 +1,50 @@
 package com.aether.blocks.natural;
 
 import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class AetherHangerBlock extends PlantBlock {
-    public static final BooleanProperty TIP = BooleanProperty.of("tip");
+public class AetherHangerBlock extends BushBlock {
+    public static final BooleanProperty TIP = BooleanProperty.create("tip");
     protected static final VoxelShape FULL_SHAPE;
     protected static final VoxelShape TIP_SHAPE;
 
-    public AetherHangerBlock(Settings settings) {
+    public AetherHangerBlock(Properties settings) {
         super(settings);
-        this.setDefaultState((this.stateManager.getDefaultState()).with(TIP, true));
+        this.registerDefaultState((this.stateDefinition.any()).setValue(TIP, true));
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity) {
-            entity.slowMovement(state, new Vec3d(0.800000011920929D, 0.75D, 0.800000011920929D));
+            entity.makeStuckInBlock(state, new Vec3(0.800000011920929D, 0.75D, 0.800000011920929D));
         }
     }
 
     @Override
-    protected boolean canPlantOnTop(BlockState ceiling, BlockView world, BlockPos pos) {
-        return ceiling.getBlock() instanceof AetherHangerBlock || ceiling.getBlock() instanceof LeavesBlock || ceiling.isSideSolidFullSquare(world, pos, Direction.DOWN);
+    protected boolean mayPlaceOn(BlockState ceiling, BlockGetter world, BlockPos pos) {
+        return ceiling.getBlock() instanceof AetherHangerBlock || ceiling.getBlock() instanceof LeavesBlock || ceiling.isFaceSturdy(world, pos, Direction.DOWN);
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return this.canPlantOnTop(world.getBlockState(pos.up()), world, pos.up());
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+        return this.mayPlaceOn(world.getBlockState(pos.above()), world, pos.above());
     }
 
     @Override
@@ -47,24 +53,24 @@ public class AetherHangerBlock extends PlantBlock {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        if (!state.canPlaceAt(world, pos)) {
-            return Blocks.AIR.getDefaultState();
-        } else if (!(world.getBlockState(pos.down()).getBlock() instanceof AetherHangerBlock)) {
-            return this.getDefaultState().with(TIP, true);
+    public BlockState updateShape(BlockState state, Direction direction, BlockState newState, LevelAccessor world, BlockPos pos, BlockPos posFrom) {
+        if (!state.canSurvive(world, pos)) {
+            return Blocks.AIR.defaultBlockState();
+        } else if (!(world.getBlockState(pos.below()).getBlock() instanceof AetherHangerBlock)) {
+            return this.defaultBlockState().setValue(TIP, true);
         } else {
-            return this.getDefaultState().with(TIP, false);
+            return this.defaultBlockState().setValue(TIP, false);
         }
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(TIP);
     }
 
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (state.get(TIP)) {
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        if (state.getValue(TIP)) {
             return TIP_SHAPE;
         } else {
             return FULL_SHAPE;
@@ -72,7 +78,7 @@ public class AetherHangerBlock extends PlantBlock {
     }
 
     static {
-        FULL_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
-        TIP_SHAPE = Block.createCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+        FULL_SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+        TIP_SHAPE = Block.box(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D);
     }
 }

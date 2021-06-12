@@ -1,15 +1,14 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 public class PurpleSwetEntity extends SwetEntity{
-    public PurpleSwetEntity(World world){
+    public PurpleSwetEntity(Level world){
         super(AetherEntityTypes.PURPLE_SWET, world);
     }
 
@@ -17,14 +16,14 @@ public class PurpleSwetEntity extends SwetEntity{
         super.removePassenger(passenger);
     }
 
-    public void onPlayerCollision(PlayerEntity player){
+    public void playerTouch(Player player){
         if (player.getVehicle() == null){
             if (stuckCooldown <= 0) {
                 player.startRiding(this, true);
             } else {
-                this.damage(player);
+                this.dealDamage(player);
             }
         }
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 20 * 4, 1));
+        player.addEffect(new MobEffectInstance(MobEffects.POISON, 20 * 4, 1));
     }
 }

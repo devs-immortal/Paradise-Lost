@@ -3,8 +3,6 @@ package com.aether.registry;
 import com.aether.api.AetherAPI;
 import com.aether.blocks.AetherBlocks;
 import com.aether.items.AetherItems;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
 
 public class AetherAPIRegistry {
 /*

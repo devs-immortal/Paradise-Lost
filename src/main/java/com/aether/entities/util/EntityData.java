@@ -1,8 +1,7 @@
 package com.aether.entities.util;
 
-import net.minecraft.network.PacketByteBuf;
-
 import java.util.UUID;
+import net.minecraft.network.FriendlyByteBuf;
 
 public class EntityData {
 	public final int id;
@@ -11,9 +10,9 @@ public class EntityData {
 	public final double y;
 	public final double z;
 
-	public EntityData(PacketByteBuf buf) {
+	public EntityData(FriendlyByteBuf buf) {
 		this.id = buf.readVarInt();
-		this.uuid = buf.readUuid();
+		this.uuid = buf.readUUID();
 		this.x = buf.readDouble();
 		this.y = buf.readDouble();
 		this.z = buf.readDouble();
