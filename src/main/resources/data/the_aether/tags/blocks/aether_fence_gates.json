@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_fence_gate",
+    "the_aether:golden_oak_fence_gate",
+    "the_aether:crystal_fence_gate",
+    "the_aether:wisteria_fence_gate"
+  ]
+}

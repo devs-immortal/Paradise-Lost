@@ -211,6 +211,7 @@ public class AetherBlocks {
     public static final Block BOREAL_WISTERIA_LEAVES;
     public static final Block BOREAL_WISTERIA_HANGER;
     public static final Block BOREAL_WISTERIA_SAPLING;
+    public static final Block POTTED_BOREAL_WISTERIA_SAPLING;
     public static final Block WISTERIA_LOG;
     public static final Block STRIPPED_WISTERIA_LOG;
     public static final Block WISTERIA_PLANKS;
@@ -468,6 +469,7 @@ public class AetherBlocks {
         final BlockBehaviour.Properties BOREAL_WISTERIA = BlockBehaviour.Properties.of(Material.LEAVES, MaterialColor.COLOR_CYAN).noCollission().strength(0.05F).sound(SoundType.GLASS).lightLevel(state -> 7).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn((a, b, c, d) -> false).isSuffocating(AetherBlocks::never).isViewBlocking(AetherBlocks::never).emissiveRendering(AetherBlocks::always).hasPostProcess(AetherBlocks::always);
         BOREAL_WISTERIA_LEAVES = register("boreal_wisteria_leaves", new AuralLeavesBlock(BOREAL_WISTERIA, false, BOREAL_COLORS), buildingBlock());
         BOREAL_WISTERIA_SAPLING = register("boreal_wisteria_sapling", new AetherSaplingBlock(new BorealWisteriaSaplingGenerator(), SAPLINGS.lightLevel(state -> 7)), buildingBlock());
+        POTTED_BOREAL_WISTERIA_SAPLING = register("potted_boreal_wisteria_sapling", createPottedBlock(BOREAL_WISTERIA_SAPLING));
         BOREAL_WISTERIA_HANGER = register("boreal_wisteria_hanger", new AuralHangerBlock(BOREAL_WISTERIA, BOREAL_COLORS), buildingBlock());
 
         final BlockBehaviour.Properties WISTERIA_WOOD = BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.COLOR_YELLOW).strength(2.0F, 3.0F).sound(SoundType.WOOD);
@@ -676,7 +678,7 @@ public class AetherBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(AETHER_GRASS_BLOCK, RenderType.cutoutMipped());
         BlockRenderLayerMap.INSTANCE.putFluid(DENSE_AERCLOUD_STILL, RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(), AETHER_GRASS, AETHER_TALL_GRASS, AETHER_FERN, AETHER_BUSH, FLUTEGRASS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(), POTTED_SKYROOT_SAPLING, POTTED_CRYSTAL_SAPLING, POTTED_AETHER_FERN, POTTED_FROST_WISTERIA_SAPLING, POTTED_GOLDEN_OAK_SAPLING, POTTED_LAVENDER_WISTERIA_SAPLING, POTTED_ROSE_WISTERIA_SAPLING);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(), POTTED_SKYROOT_SAPLING, POTTED_CRYSTAL_SAPLING, POTTED_AETHER_FERN, POTTED_FROST_WISTERIA_SAPLING, POTTED_GOLDEN_OAK_SAPLING, POTTED_LAVENDER_WISTERIA_SAPLING, POTTED_ROSE_WISTERIA_SAPLING, POTTED_BOREAL_WISTERIA_SAPLING);
         BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_LANTERN, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ZANITE_CHAIN, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_FLOWER, RenderType.cutout());

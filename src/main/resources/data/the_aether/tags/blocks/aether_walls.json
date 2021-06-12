@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:angelic_wall",
+    "the_aether:carved_wall",
+    "the_aether:hellfire_wall",
+    "the_aether:holystone_brick_wall",
+    "the_aether:holystone_wall",
+    "the_aether:light_angelic_wall",
+    "the_aether:light_hellfire_wall",
+    "the_aether:mossy_holystone_wall",
+    "the_aether:light_sentry_wall",
+    "the_aether:cobbled_holystone_wall"
+  ]
+}

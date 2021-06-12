@@ -33,11 +33,6 @@
     "minecraft:black_concrete_powder",
     "minecraft:soul_soil",
     "minecraft:rooted_dirt",
-    "the_aether:aether_grass",
-    "the_aether:aether_grass_path",
-    "the_aether:aether_dirt",
-    "the_aether:quicksoil",
-    "the_aether:aether_farmland",
-    "the_aether:enchanted_aether_grass"
+    "#the_aether:aether_shovelables"
   ]
 }
