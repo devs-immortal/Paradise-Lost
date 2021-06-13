@@ -34,7 +34,6 @@
     "client.ItemStackMixin",
     "client.MapRendererMixin",
     "client.WorldRendererMixin",
-    "client.render.BiomeLayerSamplerAccessor",
     "client.render.BlockStateModelGeneratorMixin",
     "client.render.MinecraftClientMixin"
   ],
