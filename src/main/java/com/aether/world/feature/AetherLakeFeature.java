@@ -1,7 +1,9 @@
 package com.aether.world.feature;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.world.feature.config.DynamicConfiguration;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.LightLayer;
@@ -10,21 +12,25 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.material.Material;
 
-public class AetherLakeFeature extends Feature<BlockStateConfiguration> {
+public class AetherLakeFeature extends Feature<DynamicConfiguration> {
     private static final BlockState CAVE_AIR;
+
+    private static final Codec<DynamicConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            BlockState.CODEC.fieldOf("state").forGetter(DynamicConfiguration::getState),
+            Codec.STRING.optionalFieldOf("genType").forGetter(DynamicConfiguration::getGenString)
+    ).apply(instance, DynamicConfiguration::new));
 
     static {
         CAVE_AIR = Blocks.CAVE_AIR.defaultBlockState();
     }
 
-    public AetherLakeFeature(Codec<BlockStateConfiguration> codec) {
-        super(codec);
+    public AetherLakeFeature() {
+        super(CODEC);
     }
 
-    public boolean place(FeaturePlaceContext<BlockStateConfiguration> context) {
+    public boolean place(FeaturePlaceContext<DynamicConfiguration> context) {
         BlockPos blockPos = context.origin();
         while (blockPos.getY() > 60 && context.level().isEmptyBlock(blockPos)) {
             blockPos = blockPos.below();

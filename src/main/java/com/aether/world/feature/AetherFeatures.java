@@ -17,7 +17,7 @@ public class AetherFeatures {
 //    public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.TowerPiece::new, "skyroot_tower");
 
     public static void registerFeatures() {
-        register("lake", new AetherLakeFeature(BlockStateConfiguration.CODEC));
+        register("lake", new AetherLakeFeature());
         register("aercloud", new AercloudFeature());
         register("quicksoil", new QuicksoilFeature());
         register("crystal_tree_island", new CrystalTreeIslandFeature(NoneFeatureConfiguration.CODEC));
