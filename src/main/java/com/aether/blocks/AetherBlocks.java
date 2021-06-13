@@ -581,7 +581,8 @@ public class AetherBlocks {
     }
 
     private static void registerFlammable(Block block, int flammability, int encouragement) {
-        FlammableBlockRegistry.getDefaultInstance().add(block, flammability, encouragement);
+        FireBlock fireBlock = (FireBlock) Blocks.FIRE;
+        fireBlock.setFlammable(block, flammability, encouragement);
     }
 
     private static Block register(String id, Block block, boolean registerAsBlockItem, Item.Properties settings) {
