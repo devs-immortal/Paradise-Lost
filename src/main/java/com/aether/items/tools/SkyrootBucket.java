@@ -1,6 +1,7 @@
 package com.aether.items.tools;
 
 import com.aether.items.AetherItems;
+import net.kyrptonaught.customportalapi.util.CustomPortalFluidProvider;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -29,7 +30,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
-public class SkyrootBucket extends Item /*implements CustomPortalFluidProvider*/ {
+public class SkyrootBucket extends Item implements CustomPortalFluidProvider {
     private final Fluid containedBlock;
 
     public SkyrootBucket(Properties settings) {
@@ -197,13 +198,13 @@ public class SkyrootBucket extends Item /*implements CustomPortalFluidProvider*/
         return stack.getItem() == AetherItems.SKYROOT_REMEDY_BUCKET ? Rarity.RARE : super.getRarity(stack);
     }
 
-//    @Override
-//    public Fluid getFluidContent() {
-//        return containedBlock;
-//    }
-//
-//    @Override
-//    public ItemStack emptyContents(ItemStack itemStack, PlayerEntity playerEntity) {
-//        return emptyBucket(itemStack, playerEntity);
-//    }
+    @Override
+    public Fluid getFluidContent() {
+        return containedBlock;
+    }
+
+    @Override
+    public ItemStack emptyContents(ItemStack itemStack, Player playerEntity) {
+        return emptyBucket(itemStack, playerEntity);
+    }
 }

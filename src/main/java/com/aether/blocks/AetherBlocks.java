@@ -52,7 +52,7 @@ public class AetherBlocks {
 //    public static final Block BLACK_DYED_AERCLOUD;
     public static final Block BLUE_AERCLOUD;
     //    public static final Block BLUE_DYED_AERCLOUD;
-    //public static final Block BLUE_PORTAL;
+    public static final Block BLUE_PORTAL;
     //    public static final Block BROWN_DYED_AERCLOUD;
     public static final Block CARVED_SLAB;
     public static final Block CARVED_STAIRS;
@@ -268,7 +268,7 @@ public class AetherBlocks {
         POTTED_AETHER_FERN = register("potted_aether_fern", createPottedBlock(AETHER_FERN));
         AETHER_BUSH = register("aether_bush", new AetherBrushBlock(GRASS), buildingBlock());
         AMBROSIUM_ORE = register("ambrosium_ore", new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)), buildingBlock());
-        //BLUE_PORTAL = register("blue_portal", new AetherPortalBlock(AbstractBlock.Settings.of(Material.PORTAL, MapColor.BLUE).nonOpaque().noCollision().ticksRandomly().dropsNothing().blockVision(AetherBlocks::never).strength(-1.0f).sounds(BlockSoundGroup.GLASS).luminance((state) -> 11)));
+        BLUE_PORTAL = register("blue_portal", new AetherPortalBlock(BlockBehaviour.Properties.of(Material.PORTAL, MaterialColor.COLOR_BLUE).noCollission().randomTicks().noOcclusion().isViewBlocking(AetherBlocks::never).strength(-1.0f).sound(SoundType.GLASS).lightLevel((state) -> 11)));
         HOLYSTONE = register("holystone", new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(0.5f, 10.0f).sound(SoundType.STONE)), buildingBlock());
         COBBLED_HOLYSTONE = register("cobbled_holystone", new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(0.4f, 8.0f).sound(SoundType.STONE)), buildingBlock());
         HOLYSTONE_BRICK = register("holystone_brick", new Block(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F).color(MaterialColor.SNOW)), buildingBlock());
@@ -640,7 +640,7 @@ public class AetherBlocks {
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        //BlockRenderLayerMap.INSTANCE.putBlock(BLUE_PORTAL, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(BLUE_PORTAL, RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderType.cutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderType.translucent());

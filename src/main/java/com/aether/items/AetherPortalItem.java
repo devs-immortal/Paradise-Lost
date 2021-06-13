@@ -1,11 +1,13 @@
 package com.aether.items;
 
+import com.aether.blocks.AetherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class AetherPortalItem extends Item {
 	private static final byte[][] GLOWSTONE = new byte[][] {
@@ -45,7 +47,7 @@ public class AetherPortalItem extends Item {
 
 			for (byte i = 0; i < 2; ++i) {
 				mut.move(Direction.UP);
-				//context.getWorld().setBlockState(mut, AetherBlocks.BLUE_PORTAL.getDefaultState().with(Properties.HORIZONTAL_AXIS, context.getPlayerFacing().rotateYClockwise().getAxis()));
+				context.getLevel().setBlockAndUpdate(mut, AetherBlocks.BLUE_PORTAL.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_AXIS, context.getHorizontalDirection().getClockWise().getAxis()));
 			}
 
 			if (context.getPlayer() != null && !context.getPlayer().isCreative()) {
