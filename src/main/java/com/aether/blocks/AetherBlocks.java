@@ -13,6 +13,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -299,15 +300,15 @@ public class AetherBlocks {
         CARVED_STAIRS = register("carved_stairs", new AetherStairsBlock(CARVED_STONE.defaultBlockState()), buildingBlock());
         CARVED_WALL = register("carved_wall", new AetherWallBlock(CARVED_STONE.defaultBlockState()), buildingBlock());
 //        CHEST_MIMIC = register("chest_mimic", null);
-        COLD_AERCLOUD = register("cold_aercloud", new ColdAercloudBlock(), buildingBlock());
-        BLUE_AERCLOUD = register("blue_aercloud", new BlueAercloudBlock(), buildingBlock());
-        PINK_AERCLOUD = register("pink_aercloud", new PinkAercloudBlock(), buildingBlock());
+        COLD_AERCLOUD = register("cold_aercloud", new BaseAercloudBlock(BlockBehaviour.Properties.of(Material.ICE, MaterialColor.SNOW).strength(0.2F).sound(SoundType.WOOL).noOcclusion()), buildingBlock());
+        BLUE_AERCLOUD = register("blue_aercloud", new BlueAercloudBlock(BlockBehaviour.Properties.of(Material.ICE, MaterialColor.COLOR_LIGHT_BLUE).strength(0.2F).sound(SoundType.WOOL).noOcclusion()), buildingBlock());
+        PINK_AERCLOUD = register("pink_aercloud", new PinkAercloudBlock(BlockBehaviour.Properties.of(Material.ICE, MaterialColor.COLOR_PINK).strength(0.2F).sound(SoundType.WOOL).noOcclusion()), buildingBlock());
 //        CYAN_DYED_AERCLOUD = register("cyan_dyed_aercloud", null);
 //        DECORATED_HOLIDAY_LEAVES = register("decorated_holiday_leaves", null);
 //        ENCHANTED_GRAVITITE = register("enchanted_gravitite", null);
 //        ENCHANTER = register("enchanter", null);
 //        FREEZER = register("freezer", null);
-        GOLDEN_AERCLOUD = register("golden_aercloud", new GoldenAercloudBlock(), buildingBlock());
+        GOLDEN_AERCLOUD = register("golden_aercloud", new GoldenAercloudBlock(BlockBehaviour.Properties.of(Material.ICE, MaterialColor.COLOR_YELLOW).strength(0.2F).sound(SoundType.WOOL).noOcclusion()), buildingBlock());
         DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
         DENSE_AERCLOUD = register("dense_aercloud", new LiquidBlock(DENSE_AERCLOUD_STILL, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()) {
         });
@@ -641,52 +642,31 @@ public class AetherBlocks {
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        BlockRenderLayerMap.INSTANCE.putBlock(BLUE_PORTAL, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(BLUEBERRY_BUSH, RenderType.cutoutMipped());
-        BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderType.cutoutMipped());
-        BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AEROGEL, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_TORCH_WALL, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAVES, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_OAK_LEAVES, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_LEAVES, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_LEAF_PILE, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_DOOR, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(SKYROOT_TRAPDOOR, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_DOOR, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(CRYSTAL_TRAPDOOR, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_LEAF_PILE, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(ROSE_WISTERIA_LEAVES, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(FROST_WISTERIA_LEAF_PILE, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(FROST_WISTERIA_LEAVES, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), ROSE_WISTERIA_HANGER, LAVENDER_WISTERIA_HANGER, FROST_WISTERIA_HANGER, BOREAL_WISTERIA_HANGER);
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(), ROSE_WISTERIA_HANGER, LAVENDER_WISTERIA_HANGER, FROST_WISTERIA_HANGER, BOREAL_WISTERIA_HANGER);
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), ROSE_WISTERIA_HANGER, LAVENDER_WISTERIA_HANGER, FROST_WISTERIA_HANGER);
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(), ROSE_WISTERIA_HANGER, LAVENDER_WISTERIA_HANGER, FROST_WISTERIA_HANGER);
-        BlockRenderLayerMap.INSTANCE.putBlock(LAVENDER_WISTERIA_LEAF_PILE, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(LAVENDER_WISTERIA_LEAVES, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(), SKYROOT_SAPLING, GOLDEN_OAK_SAPLING, CRYSTAL_SAPLING, ROSE_WISTERIA_SAPLING, LAVENDER_WISTERIA_SAPLING, FROST_WISTERIA_SAPLING, BOREAL_WISTERIA_SAPLING);
-        BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(QUICKSOIL_GLASS_PANE, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(COLD_AERCLOUD, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(BLUE_AERCLOUD, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(PINK_AERCLOUD, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(GOLDEN_AERCLOUD, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(AETHER_GRASS_BLOCK, RenderType.cutoutMipped());
-        BlockRenderLayerMap.INSTANCE.putFluid(DENSE_AERCLOUD_STILL, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(), AETHER_GRASS, AETHER_TALL_GRASS, AETHER_FERN, AETHER_BUSH, FLUTEGRASS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(), POTTED_SKYROOT_SAPLING, POTTED_CRYSTAL_SAPLING, POTTED_AETHER_FERN, POTTED_FROST_WISTERIA_SAPLING, POTTED_GOLDEN_OAK_SAPLING, POTTED_LAVENDER_WISTERIA_SAPLING, POTTED_ROSE_WISTERIA_SAPLING, POTTED_BOREAL_WISTERIA_SAPLING);
-        BlockRenderLayerMap.INSTANCE.putBlock(AMBROSIUM_LANTERN, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ZANITE_CHAIN, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_FLOWER, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ATARAXIA, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(CLOUDSBLUFF, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(DRIGEAN, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(LUMINAR, RenderType.cutout());
+        // TODO: Replace with a mixin to ItemBlockRenderTypes
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(),
+                BLUE_PORTAL, QUICKSOIL_GLASS, QUICKSOIL_GLASS_PANE, AEROGEL,
+                COLD_AERCLOUD, BLUE_AERCLOUD, PINK_AERCLOUD, GOLDEN_AERCLOUD
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderType.translucent(),
+                DENSE_AERCLOUD_STILL
+        );
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
+                SKYROOT_SAPLING, GOLDEN_OAK_SAPLING, CRYSTAL_SAPLING,
+                ROSE_WISTERIA_SAPLING, FROST_WISTERIA_SAPLING, LAVENDER_WISTERIA_SAPLING, BOREAL_WISTERIA_SAPLING,
+                AETHER_GRASS, AETHER_TALL_GRASS, AETHER_FERN, AETHER_BUSH, FLUTEGRASS, BLUEBERRY_BUSH,
+                ROSE_WISTERIA_HANGER, LAVENDER_WISTERIA_HANGER, FROST_WISTERIA_HANGER, BOREAL_WISTERIA_HANGER,
+                AMBROSIUM_TORCH, AMBROSIUM_TORCH_WALL,
+                SKYROOT_TRAPDOOR, GOLDEN_OAK_TRAPDOOR, CRYSTAL_TRAPDOOR, WISTERIA_TRAPDOOR,
+                POTTED_SKYROOT_SAPLING, POTTED_GOLDEN_OAK_SAPLING, POTTED_CRYSTAL_SAPLING, POTTED_AETHER_FERN,
+                POTTED_ROSE_WISTERIA_SAPLING, POTTED_FROST_WISTERIA_SAPLING, POTTED_LAVENDER_WISTERIA_SAPLING, POTTED_BOREAL_WISTERIA_SAPLING,
+                SKYROOT_DOOR, GOLDEN_OAK_DOOR, CRYSTAL_DOOR, WISTERIA_DOOR
+        );
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(),
+                AETHER_GRASS_BLOCK,
+                SKYROOT_LEAVES, GOLDEN_OAK_LEAVES, CRYSTAL_LEAVES,
+                ROSE_WISTERIA_LEAVES, FROST_WISTERIA_LEAVES, LAVENDER_WISTERIA_LEAVES, BOREAL_WISTERIA_LEAVES,
+                SKYROOT_LEAF_PILE, ROSE_WISTERIA_LEAF_PILE, FROST_WISTERIA_LEAF_PILE, LAVENDER_WISTERIA_LEAF_PILE
+        );
         FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, Aether.locate("dense_aercloud"));
     }
 

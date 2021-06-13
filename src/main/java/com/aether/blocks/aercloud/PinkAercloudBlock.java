@@ -23,8 +23,8 @@ public class PinkAercloudBlock extends BaseAercloudBlock {
 
     private static final ParticleOptions pinkFluff = new DustParticleOptions(new Vector3f(0.89F, 0.65F, 0.9F), 1F);
 
-    public PinkAercloudBlock() {
-        super(BlockBehaviour.Properties.of(Material.SNOW, MaterialColor.COLOR_PINK).sound(SoundType.SNOW));
+    public PinkAercloudBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -45,15 +45,5 @@ public class PinkAercloudBlock extends BaseAercloudBlock {
             double offY = world.getRandom().nextDouble() * entity.getBbHeight();
             ((ServerLevel) world).sendParticles(pinkFluff, entity.getX() + offX, entity.getY() + offY, entity.getZ() + offZ, 1, 0, 0, 0, 0.1);
         }
-    }
-
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return Shapes.empty();
-    }
-
-    @Override
-    public boolean isPathfindable(BlockState state, BlockGetter world, BlockPos pos, PathComputationType type) {
-        return type != PathComputationType.WATER;
     }
 }
