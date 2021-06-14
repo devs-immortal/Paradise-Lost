@@ -72,4 +72,9 @@ public class SwetEntity extends Slime {
             this.setHealth(this.getMaxHealth());
         }
     }
+
+    @Override
+    protected ParticleEffect getParticles() {
+        return ParticleTypes.SPLASH;
+    }
 }
