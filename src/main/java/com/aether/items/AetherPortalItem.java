@@ -1,13 +1,13 @@
 package com.aether.items;
 
 import com.aether.blocks.AetherBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
 public class AetherPortalItem extends Item {
 	private static final byte[][] GLOWSTONE = new byte[][] {
@@ -23,40 +23,40 @@ public class AetherPortalItem extends Item {
 			new byte[] {-1, 1, 0}
 	};
 
-	public AetherPortalItem(Properties settings) {
+	public AetherPortalItem(Settings settings) {
 		super(settings);
 	}
 
 	@Override
-	public InteractionResult useOn(UseOnContext context) {
-		if (!context.getLevel().isClientSide) {
-			BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos();
+	public ActionResult useOnBlock(ItemUsageContext context) {
+		if (!context.getWorld().isClient) {
+			BlockPos.Mutable mut = new BlockPos.Mutable();
 
 			for (byte[] b : GLOWSTONE) {
-				mut.set(context.getClickedPos());
+				mut.set(context.getBlockPos());
 				mut.move(
-						context.getHorizontalDirection().getAxis() == Direction.Axis.X ? b[2] : b[0],
+						context.getPlayerFacing().getAxis() == Direction.Axis.X ? b[2] : b[0],
 						b[1],
-						context.getHorizontalDirection().getAxis() == Direction.Axis.X ? b[0] : b[2]
+						context.getPlayerFacing().getAxis() == Direction.Axis.X ? b[0] : b[2]
 				);
 
-				context.getLevel().setBlockAndUpdate(mut, Blocks.GLOWSTONE.defaultBlockState());
+				context.getWorld().setBlockState(mut, Blocks.GLOWSTONE.getDefaultState());
 			}
 
-			mut.set(context.getClickedPos());
+			mut.set(context.getBlockPos());
 
 			for (byte i = 0; i < 2; ++i) {
 				mut.move(Direction.UP);
-				context.getLevel().setBlockAndUpdate(mut, AetherBlocks.BLUE_PORTAL.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_AXIS, context.getHorizontalDirection().getClockWise().getAxis()));
+				context.getWorld().setBlockState(mut, AetherBlocks.BLUE_PORTAL.getDefaultState().with(Properties.HORIZONTAL_AXIS, context.getPlayerFacing().rotateYClockwise().getAxis()));
 			}
 
 			if (context.getPlayer() != null && !context.getPlayer().isCreative()) {
-				context.getItemInHand().shrink(1);
+				context.getStack().decrement(1);
 			}
 
-			return InteractionResult.SUCCESS;
+			return ActionResult.SUCCESS;
 		}
 
-		return InteractionResult.SUCCESS;
+		return ActionResult.SUCCESS;
 	}
 }

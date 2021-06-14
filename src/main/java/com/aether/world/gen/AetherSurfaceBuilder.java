@@ -1,11 +1,11 @@
 package com.aether.world.gen;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import java.util.Random;
 
@@ -15,10 +15,10 @@ public class AetherSurfaceBuilder extends SurfaceBuilder<AetherSurfaceBuilderCon
 	}
 
 	@Override
-	public void apply(Random random, ChunkAccess chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int i, long seed, AetherSurfaceBuilderConfig config) {
+	public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int i, long seed, AetherSurfaceBuilderConfig config) {
 		BlockState topState = config.getTopMaterial();
 		BlockState underState = config.getUnderMaterial();
-		BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos();
+		BlockPos.Mutable mut = new BlockPos.Mutable();
 		int maxDepth = -1;
 		int depth = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
 		int cX = x & 15;
@@ -29,10 +29,10 @@ public class AetherSurfaceBuilder extends SurfaceBuilder<AetherSurfaceBuilderCon
 			BlockState blockState3 = chunk.getBlockState(mut);
 			if (blockState3.isAir()) {
 				maxDepth = -1;
-			} else if (blockState3.is(defaultBlock.getBlock())) {
+			} else if (blockState3.isOf(defaultBlock.getBlock())) {
 				if (maxDepth == -1) {
 					if (depth <= 0) {
-						topState = Blocks.AIR.defaultBlockState();
+						topState = Blocks.AIR.getDefaultState();
 						underState = defaultBlock;
 					} else if (m >= seaLevel - 4 && m <= seaLevel + 1) {
 						topState = config.getTopMaterial();
@@ -41,7 +41,7 @@ public class AetherSurfaceBuilder extends SurfaceBuilder<AetherSurfaceBuilderCon
 
 					if (m < seaLevel && (topState == null || topState.isAir())) {
 						if (biome.getTemperature(mut.set(x, m, z)) < 0.15F) {
-							topState = Blocks.ICE.defaultBlockState();
+							topState = Blocks.ICE.getDefaultState();
 						} else {
 							topState = defaultFluid;
 						}
@@ -53,7 +53,7 @@ public class AetherSurfaceBuilder extends SurfaceBuilder<AetherSurfaceBuilderCon
 					if (m >= seaLevel - 1) {
 						chunk.setBlockState(mut, topState, false);
 					} else if (m < seaLevel - 7 - depth) {
-						topState = Blocks.AIR.defaultBlockState();
+						topState = Blocks.AIR.getDefaultState();
 						underState = defaultBlock;
 						chunk.setBlockState(mut, config.getUnderwaterMaterial(), false);
 					} else {

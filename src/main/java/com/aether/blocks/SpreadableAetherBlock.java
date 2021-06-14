@@ -1,53 +1,49 @@
 package com.aether.blocks;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SnowLayerBlock;
-import net.minecraft.world.level.block.SnowyDirtBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.lighting.LayerLightEngine;
+import net.minecraft.block.*;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.FluidTags;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.chunk.light.ChunkLightProvider;
 
 import java.util.Random;
 
-public abstract class SpreadableAetherBlock extends SnowyDirtBlock {
-    protected SpreadableAetherBlock(BlockBehaviour.Properties settings) {
+public abstract class SpreadableAetherBlock extends SnowyBlock {
+    protected SpreadableAetherBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 
-    private static boolean canBeGrass(BlockState state, LevelReader worldView, BlockPos pos) {
-        BlockPos blockPos = pos.above();
+    private static boolean canBeGrass(BlockState state, WorldView worldView, BlockPos pos) {
+        BlockPos blockPos = pos.up();
         BlockState blockState = worldView.getBlockState(blockPos);
-        if (blockState.is(Blocks.SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) {
+        if (blockState.isOf(Blocks.SNOW) && blockState.get(SnowBlock.LAYERS) == 1) {
             return true;
-        } else if (blockState.getFluidState().getAmount() == 8) {
+        } else if (blockState.getFluidState().getLevel() == 8) {
             return false;
         } else {
-            int i = LayerLightEngine.getLightBlockInto(worldView, state, pos, blockState, blockPos, Direction.UP, blockState.getLightBlock(worldView, blockPos));
+            int i = ChunkLightProvider.getRealisticOpacity(worldView, state, pos, blockState, blockPos, Direction.UP, blockState.getOpacity(worldView, blockPos));
             return i < worldView.getMaxLightLevel();
         }
     }
 
-    private static boolean canPropagate(BlockState state, LevelReader worldView, BlockPos pos) {
-        BlockPos blockPos = pos.above();
-        return canBeGrass(state, worldView, pos) && !worldView.getFluidState(blockPos).is(FluidTags.WATER);
+    private static boolean canPropagate(BlockState state, WorldView worldView, BlockPos pos) {
+        BlockPos blockPos = pos.up();
+        return canBeGrass(state, worldView, pos) && !worldView.getFluidState(blockPos).isIn(FluidTags.WATER);
     }
 
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        if (!canSurvive(state, world, pos)) {
-            world.setBlockAndUpdate(pos, AetherBlocks.AETHER_DIRT.defaultBlockState());
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (!canPlaceAt(state, world, pos)) {
+            world.setBlockState(pos, AetherBlocks.AETHER_DIRT.getDefaultState());
         } else {
-            if (world.getMaxLocalRawBrightness(pos.above()) >= 9) {
-                BlockState blockState = this.defaultBlockState();
+            if (world.getLightLevel(pos.up()) >= 9) {
+                BlockState blockState = this.getDefaultState();
 
                 for (int i = 0; i < 4; ++i) {
-                    BlockPos blockPos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                    if (world.getBlockState(blockPos).is(AetherBlocks.AETHER_DIRT) && canPropagate(blockState, world, blockPos))
-                        world.setBlockAndUpdate(blockPos, blockState.setValue(SNOWY, world.getBlockState(blockPos.above()).is(Blocks.SNOW)));
+                    BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+                    if (world.getBlockState(blockPos).isOf(AetherBlocks.AETHER_DIRT) && canPropagate(blockState, world, blockPos))
+                        world.setBlockState(blockPos, blockState.with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
                 }
             }
         }

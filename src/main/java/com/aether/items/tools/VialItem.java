@@ -1,42 +1,42 @@
 package com.aether.items.tools;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.RaycastContext;
+import net.minecraft.world.World;
 
 public class VialItem extends Item {
 
     private final Fluid fluid;
 
-    public VialItem(Fluid fluid, Properties settings) {
+    public VialItem(Fluid fluid, Settings settings) {
         super(settings);
         this.fluid = fluid;
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        ItemStack itemStack = user.getItemInHand(hand);
-        BlockHitResult hitResult = getPlayerPOVHitResult(world, user, this.fluid == Fluids.EMPTY ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack itemStack = user.getStackInHand(hand);
+        BlockHitResult hitResult = raycast(world, user, this.fluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
         if (hitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos hitPos = hitResult.getBlockPos();
-            if (this.fluid != Fluids.EMPTY && world.getBlockState(hitPos.above()).canBeReplaced(new BlockPlaceContext(user, hand, itemStack, hitResult))) {
-                world.setBlockAndUpdate(hitPos.above(), fluid.defaultFluidState().createLegacyBlock());
+            if (this.fluid != Fluids.EMPTY && world.getBlockState(hitPos.up()).canReplace(new ItemPlacementContext(user, hand, itemStack, hitResult))) {
+                world.setBlockState(hitPos.up(), fluid.getDefaultState().getBlockState());
                 if (!user.isCreative()) {
-                    itemStack.shrink(1);
+                    itemStack.decrement(1);
                 }
-                return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide());
+                return TypedActionResult.success(itemStack, world.isClient());
             }
         }
-        return InteractionResultHolder.fail(itemStack);
+        return TypedActionResult.fail(itemStack);
     }
 }

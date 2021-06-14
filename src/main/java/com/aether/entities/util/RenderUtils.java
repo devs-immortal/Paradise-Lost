@@ -1,6 +1,6 @@
 package com.aether.entities.util;
 
-import net.minecraft.core.Vec3i;
+import net.minecraft.util.math.Vec3i;
 
 public class RenderUtils {
 

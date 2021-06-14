@@ -1,41 +1,41 @@
 package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.model.SlimeModel;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.SlimeOuterLayer;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.feature.SlimeOverlayFeatureRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.entity.model.SlimeEntityModel;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.mob.SlimeEntity;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 
-public class SwetRenderer extends MobRenderer<Slime, SlimeModel<Slime>> {
-    private static final ResourceLocation TEXTURE = Aether.locate("textures/entity/swet/blue_swet.png");
+public class SwetRenderer extends MobEntityRenderer<SlimeEntity, SlimeEntityModel<SlimeEntity>> {
+    private static final Identifier TEXTURE = Aether.locate("textures/entity/swet/blue_swet.png");
 
-    public SwetRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new SlimeModel<>(renderManager.bakeLayer(ModelLayers.SLIME)), 0.25F);
-        this.addLayer(new SlimeOuterLayer<>(this, renderManager.getModelSet()));
+    public SwetRenderer(EntityRendererFactory.Context renderManager) {
+        super(renderManager, new SlimeEntityModel<>(renderManager.getPart(EntityModelLayers.SLIME)), 0.25F);
+        this.addFeature(new SlimeOverlayFeatureRenderer<>(this, renderManager.getModelLoader()));
     }
 
-    public void render(Slime slimeEntity, float f, float g, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int i) {
+    public void render(SlimeEntity slimeEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         this.shadowRadius = 0.25F * (float)slimeEntity.getSize();
         super.render(slimeEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
 
-    protected void scale(Slime slimeEntity, PoseStack matrixStack, float f) {
+    protected void scale(SlimeEntity slimeEntity, MatrixStack matrixStack, float f) {
         float g = 0.999F;
         matrixStack.scale(0.999F, 0.999F, 0.999F);
         matrixStack.translate(0.0D, 0.0010000000474974513D, 0.0D);
         float h = (float)slimeEntity.getSize();
-        float i = Mth.lerp(f, slimeEntity.oSquish, slimeEntity.squish) / (h * 0.5F + 1.0F);
+        float i = MathHelper.lerp(f, slimeEntity.lastStretch, slimeEntity.stretch) / (h * 0.5F + 1.0F);
         float j = 1.0F / (i + 1.0F);
         matrixStack.scale(j * h, 1.0F / j * h, j * h);
     }
 
-    public ResourceLocation getTextureLocation(Slime slimeEntity) {
+    public Identifier getTexture(SlimeEntity slimeEntity) {
         return TEXTURE;
     }
 }

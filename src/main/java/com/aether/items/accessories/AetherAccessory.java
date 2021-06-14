@@ -1,18 +1,18 @@
 package com.aether.items.accessories;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class AetherAccessory {
 
-    private final ResourceLocation registryName;
+    private final Identifier registryName;
     private final ItemStack accessoryStack;
     private final AccessoryType accessoryType;
     private final AccessoryType extraType;
 
-    public AetherAccessory(ItemLike provider, AccessoryType type) {
+    public AetherAccessory(ItemConvertible provider, AccessoryType type) {
         this(new ItemStack(provider), type);
     }
 
@@ -20,11 +20,11 @@ public class AetherAccessory {
         this.accessoryType = type;
         this.accessoryStack = stack;
 
-        this.registryName = Registry.ITEM.getKey(stack.getItem());
+        this.registryName = Registry.ITEM.getId(stack.getItem());
         this.extraType = type == AccessoryType.RING ? AccessoryType.EXTRA_RING : type == AccessoryType.MISC ? AccessoryType.EXTRA_MISC : null;
     }
 
-    public ResourceLocation getRegistryName() {
+    public Identifier getRegistryName() {
         return this.registryName;
     }
 

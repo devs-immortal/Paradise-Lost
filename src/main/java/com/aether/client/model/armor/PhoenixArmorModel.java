@@ -1,10 +1,10 @@
 package com.aether.client.model.armor;
 
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.LivingEntity;
 
-public class PhoenixArmorModel extends HumanoidModel<LivingEntity> {
+public class PhoenixArmorModel extends BipedEntityModel<LivingEntity> {
     public ModelPart beak;
 
 

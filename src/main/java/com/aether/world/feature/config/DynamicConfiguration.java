@@ -1,11 +1,11 @@
 package com.aether.world.feature.config;
 
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.block.BlockState;
+import net.minecraft.world.gen.feature.FeatureConfig;
 
 import java.util.Optional;
 
-public class DynamicConfiguration implements FeatureConfiguration {
+public class DynamicConfiguration implements FeatureConfig {
     public final BlockState state;
     public final Optional<String> genTypeRaw;
     public final GeneratorType genType;

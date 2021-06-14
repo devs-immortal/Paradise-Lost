@@ -1,10 +1,10 @@
 package com.aether.mixin.screen;
 
-import net.minecraft.world.inventory.EnchantmentMenu;
+import net.minecraft.screen.EnchantmentScreenHandler;
 import org.spongepowered.asm.mixin.Mixin;
 
 //@SuppressWarnings("UnresolvedMixinReference")
-@Mixin(EnchantmentMenu.class)
+@Mixin(EnchantmentScreenHandler.class)
 public abstract class EnchantmentScreenHandlerMixin {
 
 //    @Redirect(method = "method_17411",

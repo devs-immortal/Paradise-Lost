@@ -3,31 +3,31 @@ package com.aether.items;
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 
 public class AetherItemGroups {
-    public static final CreativeModeTab Blocks = FabricItemGroupBuilder.build(
+    public static final ItemGroup Blocks = FabricItemGroupBuilder.build(
             Aether.locate("aether_blocks"),
             () -> new ItemStack(AetherBlocks.AETHER_GRASS_BLOCK));
 
-    public static final CreativeModeTab Tools = FabricItemGroupBuilder.build(
+    public static final ItemGroup Tools = FabricItemGroupBuilder.build(
             Aether.locate("aether_tools"),
             () -> new ItemStack(AetherItems.GRAVITITE_PICKAXE));
 
-    public static final CreativeModeTab Food = FabricItemGroupBuilder.build(
+    public static final ItemGroup Food = FabricItemGroupBuilder.build(
             Aether.locate("aether_food"),
             () -> new ItemStack(AetherItems.BLUEBERRY));
 
-    public static final CreativeModeTab Resources = FabricItemGroupBuilder.build(
+    public static final ItemGroup Resources = FabricItemGroupBuilder.build(
             Aether.locate("aether_resources"),
             () -> new ItemStack(AetherItems.AMBROSIUM_SHARD));
 
-    public static final CreativeModeTab Misc = FabricItemGroupBuilder.build(
+    public static final ItemGroup Misc = FabricItemGroupBuilder.build(
             Aether.locate("aether_misc"),
             () -> new ItemStack(AetherItems.BRONZE_KEY));
 
-    public static final CreativeModeTab Wearable = FabricItemGroupBuilder.build(
+    public static final ItemGroup Wearable = FabricItemGroupBuilder.build(
             Aether.locate("aether_wearables"),
             () -> new ItemStack(AetherItems.ZANITE_CHESTPLATE));
 }

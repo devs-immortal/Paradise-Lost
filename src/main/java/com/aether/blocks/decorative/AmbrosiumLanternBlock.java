@@ -1,31 +1,31 @@
 package com.aether.blocks.decorative;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LanternBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.LanternBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 
 public class AmbrosiumLanternBlock extends LanternBlock {
 
     protected static final VoxelShape STANDING_SHAPE;
     protected static final VoxelShape HANGING_SHAPE;
 
-    public AmbrosiumLanternBlock(Properties settings) {
+    public AmbrosiumLanternBlock(Settings settings) {
         super(settings);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return state.getValue(HANGING) ? HANGING_SHAPE : STANDING_SHAPE;
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return state.get(HANGING) ? HANGING_SHAPE : STANDING_SHAPE;
     }
 
 
     static {
-        STANDING_SHAPE = Shapes.or(Block.box(6.0D, 8.0D, 6.0D, 10.0D, 9.0D, 10.0D), Block.box(5.0D, 1.0D, 5.0D, 11.0D, 7.0D, 11.0D), Block.box(4.0D, 0.0D, 4.0D, 12.0D, 1.0D, 12.0D), Block.box(4.0D, 7.0D, 4.0D, 12.0D, 8.0D, 12.0D));
-        HANGING_SHAPE = Shapes.or(Block.box(6.0D, 9.0D, 6.0D, 10.0D, 10.0D, 10.0D), Block.box(5.0D, 2.0D, 5.0D, 11.0D, 8.0D, 11.0D), Block.box(4.0D, 1.0D, 4.0D, 12.0D, 2.0D, 12.0D), Block.box(4.0D, 8.0D, 4.0D, 12.0D, 9.0D, 12.0D));
+        STANDING_SHAPE = VoxelShapes.union(Block.createCuboidShape(6.0D, 8.0D, 6.0D, 10.0D, 9.0D, 10.0D), Block.createCuboidShape(5.0D, 1.0D, 5.0D, 11.0D, 7.0D, 11.0D), Block.createCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 1.0D, 12.0D), Block.createCuboidShape(4.0D, 7.0D, 4.0D, 12.0D, 8.0D, 12.0D));
+        HANGING_SHAPE = VoxelShapes.union(Block.createCuboidShape(6.0D, 9.0D, 6.0D, 10.0D, 10.0D, 10.0D), Block.createCuboidShape(5.0D, 2.0D, 5.0D, 11.0D, 8.0D, 11.0D), Block.createCuboidShape(4.0D, 1.0D, 4.0D, 12.0D, 2.0D, 12.0D), Block.createCuboidShape(4.0D, 8.0D, 4.0D, 12.0D, 9.0D, 12.0D));
     }
 }

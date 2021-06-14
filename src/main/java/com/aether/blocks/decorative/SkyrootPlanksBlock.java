@@ -1,13 +1,13 @@
 package com.aether.blocks.decorative;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Material;
+import net.minecraft.sound.BlockSoundGroup;
 
 public class SkyrootPlanksBlock extends Block {
     public SkyrootPlanksBlock() {
-        super(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F, 5.0F).sound(SoundType.WOOD));
+        super(AbstractBlock.Settings.of(Material.WOOD).strength(2.0F, 5.0F).sounds(BlockSoundGroup.WOOD));
     }
 
     // TODO: Stubbed. Pending 1.17 rewrite.

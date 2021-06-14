@@ -1,16 +1,16 @@
 package com.aether.world.feature.structure;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
 
-public class SkyrootTowerFeature extends StructureFeature<NoneFeatureConfiguration> {
-    public SkyrootTowerFeature(Codec<NoneFeatureConfiguration> codec) {
+public class SkyrootTowerFeature extends StructureFeature<DefaultFeatureConfig> {
+    public SkyrootTowerFeature(Codec<DefaultFeatureConfig> codec) {
         super(codec);
     }
 
     @Override
-    public StructureStartFactory<NoneFeatureConfiguration> getStartFactory() {
+    public StructureStartFactory<DefaultFeatureConfig> getStructureStartFactory() {
         return null; // TODO: Stubbed until revisions in 1.17
     }
 

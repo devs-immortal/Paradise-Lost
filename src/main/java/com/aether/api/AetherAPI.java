@@ -1,14 +1,14 @@
 package com.aether.api;
 
 import com.aether.api.moa.MoaType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
 import java.util.Random;
 
 public class AetherAPI {
 
-    private static final HashMap<ResourceLocation, MoaType> MOA_REGISTRY = new HashMap<>();
+    private static final HashMap<Identifier, MoaType> MOA_REGISTRY = new HashMap<>();
     private static final AetherAPI INSTANCE = new AetherAPI();
     private static int moaListSize;
 
@@ -20,7 +20,7 @@ public class AetherAPI {
         return INSTANCE;
     }
 
-    public void register(ResourceLocation registryName, MoaType moa) {
+    public void register(Identifier registryName, MoaType moa) {
         moa.setRegistryName(registryName);
 
         MOA_REGISTRY.put(registryName, moa);
@@ -34,7 +34,7 @@ public class AetherAPI {
         return rescValues[random.nextInt(rescValues.length)];
     }
 
-    public MoaType getMoa(ResourceLocation registryName) {
+    public MoaType getMoa(Identifier registryName) {
         return MOA_REGISTRY.get(registryName);
     }
 

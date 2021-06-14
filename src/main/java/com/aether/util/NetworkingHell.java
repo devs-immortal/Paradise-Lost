@@ -5,10 +5,10 @@ import com.aether.entities.block.FloatingBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Identifier;
 
 public class NetworkingHell {
-	public static final ResourceLocation SPAWN_FLOATING_BLOCK_ENTITY = packet("entity", "spawn", "floating_block");
+	public static final Identifier SPAWN_FLOATING_BLOCK_ENTITY = packet("entity", "spawn", "floating_block");
 
 	public static void init() {
 
@@ -19,7 +19,7 @@ public class NetworkingHell {
 		ClientSidePacketRegistry.INSTANCE.register(SPAWN_FLOATING_BLOCK_ENTITY, FloatingBlockEntity::spawn);
 	}
 
-	private static ResourceLocation packet(String... path) {
+	private static Identifier packet(String... path) {
 		return Aether.locate(String.join(".", path));
 	}
 }

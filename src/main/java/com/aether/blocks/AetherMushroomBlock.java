@@ -1,56 +1,56 @@
 package com.aether.blocks;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.MushroomBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.MushroomPlantBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class AetherMushroomBlock extends MushroomBlock {
+public class AetherMushroomBlock extends MushroomPlantBlock {
 
     private final HangType type;
 
-    public AetherMushroomBlock(Properties settings, Supplier<ConfiguredFeature<?, ?>> feature, HangType type) {
+    public AetherMushroomBlock(Settings settings, Supplier<ConfiguredFeature<?, ?>> feature, HangType type) {
         super(settings, feature);
         this.type = type;
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos;
         if (type == HangType.ROOF) {
-            blockPos = pos.above();
+            blockPos = pos.up();
         }
         else
-            blockPos = pos.below();
+            blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
-        if (blockState.is(BlockTags.MUSHROOM_GROW_BLOCK)) {
+        if (blockState.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
             return true;
         } else {
-            return world.getRawBrightness(pos, 0) < 13 && this.mayPlaceOn(blockState, world, blockPos);
+            return world.getBaseLightLevel(pos, 0) < 13 && this.canPlantOnTop(blockState, world, blockPos);
         }
     }
 
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return Shapes.block();
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return VoxelShapes.fullCube();
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter world, BlockPos pos) {
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
         return true;
     }
 
     @Override
-    public boolean growMushroom(ServerLevel serverWorld, BlockPos pos, BlockState state, Random random) {
+    public boolean trySpawningBigMushroom(ServerWorld serverWorld, BlockPos pos, BlockState state, Random random) {
         return false;
     }
 

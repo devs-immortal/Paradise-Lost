@@ -2,26 +2,26 @@ package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
 import com.aether.entities.passive.PhygEntity;
-import net.minecraft.client.model.PigModel;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.SaddleLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.feature.SaddleFeatureRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.entity.model.PigEntityModel;
+import net.minecraft.util.Identifier;
 
-public class PhygRenderer extends MobRenderer<PhygEntity, PigModel<PhygEntity>> {
+public class PhygRenderer extends MobEntityRenderer<PhygEntity, PigEntityModel<PhygEntity>> {
 
-    private static final ResourceLocation TEXTURE = Aether.locate("textures/entity/phyg/phyg.png");
+    private static final Identifier TEXTURE = Aether.locate("textures/entity/phyg/phyg.png");
 
-    public PhygRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new PigModel<>(renderManager.bakeLayer(ModelLayers.PIG)), 0.7F);
+    public PhygRenderer(EntityRendererFactory.Context renderManager) {
+        super(renderManager, new PigEntityModel<>(renderManager.getPart(EntityModelLayers.PIG)), 0.7F);
 
         //this.addFeature(new PhygWingLayer(this));
-        this.addLayer(new SaddleLayer<>(this, new PigModel<>(renderManager.bakeLayer(ModelLayers.PIG_SADDLE)), new ResourceLocation("textures/entity/pig/pig_saddle.png")));
+        this.addFeature(new SaddleFeatureRenderer<>(this, new PigEntityModel<>(renderManager.getPart(EntityModelLayers.PIG_SADDLE)), new Identifier("textures/entity/pig/pig_saddle.png")));
     }
 
     @Override
-    public ResourceLocation getTextureLocation(PhygEntity entity) {
+    public Identifier getTexture(PhygEntity entity) {
         return TEXTURE;
     }
 }

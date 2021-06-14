@@ -1,11 +1,11 @@
 package com.aether.items.armor;
 
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.LazyLoadedValue;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Lazy;
 
 public class AetherArmorMaterial implements ArmorMaterial {
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
@@ -15,28 +15,28 @@ public class AetherArmorMaterial implements ArmorMaterial {
     private final int enchantability;
     private final SoundEvent soundEvent;
     private final float toughness;
-    private final LazyLoadedValue<Ingredient> ingredientLoader;
+    private final Lazy<Ingredient> ingredientLoader;
     private final float knockbackResistance;
 
-    public AetherArmorMaterial(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, ItemLike repairMaterial, float knockbackResistance) {
+    public AetherArmorMaterial(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, ItemConvertible repairMaterial, float knockbackResistance) {
         this.name = name;
         this.maxDamageFactor = maxDamageFactor;
         this.damageReductionAmountArray = damageReductionAmountArray;
         this.enchantability = enchantability;
         this.soundEvent = soundEvent;
         this.toughness = toughness;
-        this.ingredientLoader = new LazyLoadedValue<>(() -> Ingredient.of(repairMaterial));
+        this.ingredientLoader = new Lazy<>(() -> Ingredient.ofItems(repairMaterial));
         this.knockbackResistance = knockbackResistance;
     }
 
     @Override
-    public int getDurabilityForSlot(EquipmentSlot slot) {
-        return MAX_DAMAGE_ARRAY[slot.getIndex()] * this.maxDamageFactor;
+    public int getDurability(EquipmentSlot slot) {
+        return MAX_DAMAGE_ARRAY[slot.getEntitySlotId()] * this.maxDamageFactor;
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlot slot) {
-        return this.damageReductionAmountArray[slot.getIndex()];
+    public int getProtectionAmount(EquipmentSlot slot) {
+        return this.damageReductionAmountArray[slot.getEntitySlotId()];
     }
 
     @Override
@@ -65,7 +65,7 @@ public class AetherArmorMaterial implements ArmorMaterial {
     }
 
     @Override
-    public int getEnchantmentValue() {
+    public int getEnchantability() {
         return this.enchantability;
     }
 }

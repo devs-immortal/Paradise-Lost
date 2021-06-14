@@ -2,66 +2,64 @@ package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.projectile.PoisonNeedleEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.RangedAttackMob;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
-public class CockatriceEntity extends Monster implements RangedAttackMob {
+public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
 
     public float wingRotation, destPos, prevDestPos, prevWingRotation;
     public int shootTime, ticksUntilFlap;
 
-    public CockatriceEntity(Level world) {
+    public CockatriceEntity(World world) {
         super(AetherEntityTypes.COCKATRICE, world);
-        this.maxUpStep = 1.0F;
+        this.stepHeight = 1.0F;
     }
 
-    public static AttributeSupplier.Builder initAttributes() {
+    public static DefaultAttributeContainer.Builder initAttributes() {
         return AetherEntityTypes.getDefaultAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.MAX_HEALTH, 20.0D)
-                .add(Attributes.FOLLOW_RANGE, 35.0D);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0D);
     }
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
+    protected void initGoals() {
+        super.initGoals();
 
-        this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(4, new RangedAttackGoal(this, 0.5D, 30, 12.0F));
+        this.goalSelector.add(1, new SwimGoal(this));
+        this.goalSelector.add(4, new ProjectileAttackGoal(this, 0.5D, 30, 12.0F));
         //this.goalSelector.add(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(6, new LookAroundGoal(this));
+        this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (!this.onGround && this.getDeltaMovement().y < 0.0D)
-            this.setDeltaMovement(this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
+        if (!this.onGround && this.getVelocity().y < 0.0D)
+            this.setVelocity(this.getVelocity().multiply(1.0D, 0.6D, 1.0D));
 
         if (!this.onGround) {
             if (this.ticksUntilFlap == 0) {
-                this.level.playSound(null, new BlockPos(this.position()), SoundEvents.BAT_TAKEOFF, SoundSource.NEUTRAL, 0.15F, Mth.clamp(this.random.nextFloat(), 0.7f, 1.0f) + Mth.clamp(this.random.nextFloat(), 0f, 0.3f));
+                this.world.playSound(null, new BlockPos(this.getPos()), SoundEvents.ENTITY_BAT_TAKEOFF, SoundCategory.NEUTRAL, 0.15F, MathHelper.clamp(this.random.nextFloat(), 0.7f, 1.0f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.3f));
 
                 this.ticksUntilFlap = 8;
             } else {
@@ -81,23 +79,23 @@ public class CockatriceEntity extends Monster implements RangedAttackMob {
     }
 
     @Override
-    public void performRangedAttack(LivingEntity targetIn, float arg1) {
-        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.level);
+    public void attack(LivingEntity targetIn, float arg1) {
+        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
 
         double x = targetIn.getX() - this.getX();
         double z = targetIn.getZ() - this.getX();
-        double y = targetIn.getBoundingBox().minY + (double) (targetIn.getBbHeight() / 3.0F) - needle.getY();
-        double double_4 = Mth.sqrt((float) (x * x + z * z));
+        double y = targetIn.getBoundingBox().minY + (double) (targetIn.getHeight() / 3.0F) - needle.getY();
+        double double_4 = MathHelper.sqrt((float) (x * x + z * z));
 
-        needle.shoot(x, y + double_4 * 0.20000000298023224D, z, 1.2F, 1.0F);
+        needle.setVelocity(x, y + double_4 * 0.20000000298023224D, z, 1.2F, 1.0F);
 
-        this.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
+        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
 
-        this.level.addFreshEntity(needle);
+        this.world.spawnEntity(needle);
     }
 
-    public boolean checkSpawnRules(LevelAccessor world, MobSpawnType SpawnReason) {
-        return world.getRandom().nextInt(25) == 0 && super.checkSpawnRules(world, SpawnReason);
+    public boolean canSpawn(WorldAccess world, SpawnReason SpawnReason) {
+        return world.getRandom().nextInt(25) == 0 && super.canSpawn(world, SpawnReason);
     }
 
     // TODO: Stubbed. Pending 1.17 rewrite.
@@ -107,12 +105,12 @@ public class CockatriceEntity extends Monster implements RangedAttackMob {
 //    }
 
     @Override
-    public boolean canBeAffected(MobEffectInstance effect) {
-        return effect.getEffect() != MobEffects.POISON && super.canBeAffected(effect);
+    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+        return effect.getEffectType() != StatusEffects.POISON && super.canHaveStatusEffect(effect);
     }
 
     @Override
-    public int getMaxSpawnClusterSize() {
+    public int getLimitPerChunk() {
         return 1;
     }
 

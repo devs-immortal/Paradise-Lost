@@ -20,7 +20,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,8 +29,8 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public static final String MOD_ID = "the_aether";
     public static final Logger LOG = LogManager.getLogger(MOD_ID);
 
-    public static ResourceLocation locate(String location) {
-        return new ResourceLocation(MOD_ID, location);
+    public static Identifier locate(String location) {
+        return new Identifier(MOD_ID, location);
     }
 
     @Override

@@ -4,24 +4,25 @@ import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.passive.AetherAnimalEntity;
 import com.aether.items.AetherItems;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.RangedAttackMob;
+import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttackMob {
 
@@ -29,32 +30,32 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     public final int poisonRemaining;
     public int size;
 
-    public AechorPlantEntity(Level world) {
+    public AechorPlantEntity(World world) {
         super(AetherEntityTypes.AECHOR_PLANT, world);
 
         this.size = this.random.nextInt(4) + 1;
         this.sinage = this.random.nextFloat() * 6F;
         this.poisonRemaining = this.random.nextInt(4) + 2;
 
-        this.setPos(this.getX(), this.getY(), this.getZ());
+        this.setPosition(this.getX(), this.getY(), this.getZ());
     }
 
-    public static AttributeSupplier.Builder initAttributes() {
+    public static DefaultAttributeContainer.Builder initAttributes() {
         return AetherEntityTypes.getDefaultAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0D);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D);
     }
 
-    public EntityDimensions getSizeForStatus(Pose entityPose_1) {
-        return EntityDimensions.scalable(0.75F + ((float) this.size * 0.125F), 0.5F + ((float) this.size * 0.075F));
+    public EntityDimensions getSizeForStatus(EntityPose entityPose_1) {
+        return EntityDimensions.changing(0.75F + ((float) this.size * 0.125F), 0.5F + ((float) this.size * 0.075F));
     }
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
+    protected void initGoals() {
+        super.initGoals();
 
-        this.goalSelector.addGoal(4, new RangedAttackGoal(this, 0.0D, 30, 1.0F));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true));
+        this.goalSelector.add(4, new ProjectileAttackGoal(this, 0.0D, 30, 1.0F));
+        this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(2, new FollowTargetGoal<>(this, LivingEntity.class, true));
     }
 
     @Override
@@ -63,28 +64,28 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
 
         if (this.hurtTime > 0) this.sinage += 0.9F;
 
-        if (this.getLastHurtByMob() != null) this.sinage += 0.3F;
+        if (this.getAttacker() != null) this.sinage += 0.3F;
         else this.sinage += 0.1F;
 
         if (this.sinage > 3.141593F * 2F) this.sinage -= (3.141593F * 2F);
 
-        if (this.level.getBlockState(this.blockPosition().below(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK)
-            this.outOfWorld();
+        if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK)
+            this.tickInVoid();
     }
 
     @Override
-    public boolean hasLineOfSight(Entity entity) {
+    public boolean canSee(Entity entity) {
         double distance = this.distanceTo(entity);
-        return distance <= 4.0F && super.hasLineOfSight(entity);
+        return distance <= 4.0F && super.canSee(entity);
     }
 
     @Override
-    public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType SpawnReason) {
-        return worldIn.getBlockState(this.blockPosition().below(1)).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK && this.random.nextInt(400) == 0;
+    public boolean canSpawn(WorldAccess worldIn, SpawnReason SpawnReason) {
+        return worldIn.getBlockState(this.getBlockPos().down(1)).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK && this.random.nextInt(400) == 0;
     }
 
     @Override
-    public void performRangedAttack(LivingEntity targetIn, float arg1) {
+    public void attack(LivingEntity targetIn, float arg1) {
         double x = targetIn.getX() - this.getX();
         double z = targetIn.getZ() - this.getZ();
         final double sqrt = Math.sqrt((x * x) + (z * z) + 0.1D);
@@ -98,51 +99,51 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     }
 
     @Override
-    public InteractionResult mobInteract(Player playerIn, InteractionHand handIn) {
-        ItemStack heldItem = playerIn.getItemInHand(handIn);
+    public ActionResult interactMob(PlayerEntity playerIn, Hand handIn) {
+        ItemStack heldItem = playerIn.getStackInHand(handIn);
 
-        if (heldItem.getItem() == AetherItems.SKYROOT_BUCKET && !playerIn.getAbilities().instabuild) {
+        if (heldItem.getItem() == AetherItems.SKYROOT_BUCKET && !playerIn.getAbilities().creativeMode) {
             heldItem.setCount(heldItem.getCount() - 1);
 
-            if (heldItem.isEmpty()) playerIn.setItemInHand(handIn, new ItemStack(AetherItems.SKYROOT_POISON_BUCKET));
-            else if (!playerIn.getInventory().add(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET)))
-                playerIn.drop(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET), false);
+            if (heldItem.isEmpty()) playerIn.setStackInHand(handIn, new ItemStack(AetherItems.SKYROOT_POISON_BUCKET));
+            else if (!playerIn.getInventory().insertStack(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET)))
+                playerIn.dropItem(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET), false);
 
-            return InteractionResult.SUCCESS;
+            return ActionResult.SUCCESS;
         } else {
-            return super.mobInteract(playerIn, handIn);
+            return super.interactMob(playerIn, handIn);
         }
     }
 
     @Override
-    public void knockback(double strength, double xRatio, double zRatio) {
-        if (this.getHealth() <= 0.0F) super.knockback(strength, xRatio, zRatio);
+    public void takeKnockback(double strength, double xRatio, double zRatio) {
+        if (this.getHealth() <= 0.0F) super.takeKnockback(strength, xRatio, zRatio);
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
+    public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
         compound.putInt("size", this.size);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
+    public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
         this.size = compound.getInt("size");
     }
 
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entityIn) {
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entityIn) {
         return null;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.GENERIC_BIG_FALL;
+        return SoundEvents.ENTITY_GENERIC_BIG_FALL;
     }
 
     @Override
-    public ResourceLocation getDefaultLootTable() {
+    public Identifier getLootTableId() {
         return null;//AetherLootTableList.ENTITIES_AECHOR_PLANT;
     }
 

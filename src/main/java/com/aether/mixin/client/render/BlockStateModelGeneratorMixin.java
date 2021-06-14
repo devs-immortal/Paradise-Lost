@@ -1,25 +1,25 @@
 package com.aether.mixin.client.render;
 
 import com.aether.blocks.AetherBlocks;
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.block.Block;
+import net.minecraft.data.client.model.BlockStateModelGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(BlockModelGenerators.class)
+@Mixin(BlockStateModelGenerator.class)
 public abstract class BlockStateModelGeneratorMixin {
     @Shadow
-    protected abstract void createNormalTorch(Block torch, Block wallTorch);
+    protected abstract void registerTorch(Block torch, Block wallTorch);
 
     @Shadow
-    protected abstract void createGlassBlocks(Block glass, Block glassPane);
+    protected abstract void registerGlassPane(Block glass, Block glassPane);
 
-    @Inject(method = "run", at = @At("TAIL"))
+    @Inject(method = "register", at = @At("TAIL"))
     public void onRegister(CallbackInfo ci) {
-        createNormalTorch(AetherBlocks.AMBROSIUM_TORCH, AetherBlocks.AMBROSIUM_TORCH_WALL);
-        createGlassBlocks(AetherBlocks.QUICKSOIL_GLASS, AetherBlocks.QUICKSOIL_GLASS_PANE);
+        registerTorch(AetherBlocks.AMBROSIUM_TORCH, AetherBlocks.AMBROSIUM_TORCH_WALL);
+        registerGlassPane(AetherBlocks.QUICKSOIL_GLASS, AetherBlocks.QUICKSOIL_GLASS_PANE);
     }
 }

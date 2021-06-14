@@ -2,38 +2,38 @@ package com.aether.items;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class BookOfLore extends Item {
-    public BookOfLore(Properties settings) {
+    public BookOfLore(Settings settings) {
         super(settings);
     }
 
     @Environment(EnvType.CLIENT)
-    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.clear();
-        tooltip.add((new TranslatableComponent("item.the_aether.lore_book")).withStyle(ChatFormatting.YELLOW));
-        tooltip.add((new TranslatableComponent("book.edition", "1")).withStyle(ChatFormatting.GOLD));
-        tooltip.add((new TranslatableComponent("book.byAuthor", "Immortal Devs")).withStyle(ChatFormatting.GRAY));
+        tooltip.add((new TranslatableText("item.the_aether.lore_book")).formatted(Formatting.YELLOW));
+        tooltip.add((new TranslatableText("book.edition", "1")).formatted(Formatting.GOLD));
+        tooltip.add((new TranslatableText("book.byAuthor", "Immortal Devs")).formatted(Formatting.GRAY));
     }
 
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        ItemStack itemStack = user.getItemInHand(hand);
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack itemStack = user.getStackInHand(hand);
 
         // TODO: Open the book
 
-        return InteractionResultHolder.pass(itemStack);
+        return TypedActionResult.pass(itemStack);
     }
 }

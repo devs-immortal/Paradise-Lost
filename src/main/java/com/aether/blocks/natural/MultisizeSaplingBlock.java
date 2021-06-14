@@ -1,20 +1,20 @@
 package com.aether.blocks.natural;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.sapling.SaplingGenerator;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
 public class MultisizeSaplingBlock extends AetherSaplingBlock {
 
-    public MultisizeSaplingBlock(AbstractTreeGrower generator, Properties settings) {
+    public MultisizeSaplingBlock(SaplingGenerator generator, Settings settings) {
         super(generator, settings);
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
-        super.performBonemeal(world, random, pos, state);
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        super.grow(world, random, pos, state);
     }
 }

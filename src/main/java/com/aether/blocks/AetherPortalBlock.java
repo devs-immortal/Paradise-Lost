@@ -3,30 +3,28 @@ package com.aether.blocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-import javax.swing.text.html.BlockView;
 import java.util.Random;
 
 public class AetherPortalBlock extends CustomPortalBlock {
-    public AetherPortalBlock(BlockBehaviour.Properties settings) {
+    public AetherPortalBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 
     @Environment(EnvType.CLIENT)
-    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (random.nextInt(100) == 0) {
             world.getProfiler().push("portal");
-            world.playLocalSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.PORTAL_AMBIENT, SoundSource.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
+            world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
             world.getProfiler().pop();
         }
 
@@ -37,7 +35,7 @@ public class AetherPortalBlock extends CustomPortalBlock {
         double h = ((double) random.nextFloat() - 0.5D) * 0.5D;
         double j = ((double) random.nextFloat() - 0.5D) * 0.5D;
         int k = random.nextInt(2) * 2 - 1;
-        if (!world.getBlockState(pos.west()).is(this) && !world.getBlockState(pos.east()).is(this)) {
+        if (!world.getBlockState(pos.west()).isOf(this) && !world.getBlockState(pos.east()).isOf(this)) {
             d = (double) pos.getX() + 0.5D + 0.25D * (double) k;
             g = random.nextFloat() * 2.0F * (float) k;
         } else {
@@ -49,7 +47,7 @@ public class AetherPortalBlock extends CustomPortalBlock {
     }
 
     @Override
-    public Block getPortalBase(BlockGetter world, BlockPos pos) {
+    public Block getPortalBase(net.minecraft.world.BlockView world, BlockPos pos) {
         return Blocks.GLOWSTONE;
     }
 }

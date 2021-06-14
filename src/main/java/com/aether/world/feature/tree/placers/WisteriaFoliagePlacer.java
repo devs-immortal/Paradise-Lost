@@ -3,13 +3,13 @@ package com.aether.world.feature.tree.placers;
 import com.aether.world.feature.tree.AetherTreeHell;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.world.TestableWorld;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.foliage.FoliagePlacer;
+import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -17,7 +17,7 @@ import java.util.function.BiConsumer;
 public class WisteriaFoliagePlacer extends FoliagePlacer {
 
     public static final Codec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
-            return foliagePlacerParts(instance).apply(instance, WisteriaFoliagePlacer::new); });
+            return fillFoliagePlacerFields(instance).apply(instance, WisteriaFoliagePlacer::new); });
 
     /*
     public static final Codec<DarkOakFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
@@ -30,18 +30,18 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected FoliagePlacerType<?> type() {
+    protected FoliagePlacerType<?> getType() {
         return AetherTreeHell.WISTERIA_FOLIAGE;
     }
 
     @Override
-    protected void createFoliage(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeConfiguration config, int trunkHeight, FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+    protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
         // TODO: FIXME - 1.17 (Using Stub code for now)
-        boolean bl = treeNode.doubleTrunk();
-        BlockPos blockPos = treeNode.pos().above(offset);
-        this.placeLeavesRow(world, replacer, random, config, blockPos, radius + treeNode.radiusOffset(), -1 - foliageHeight, bl);
-        this.placeLeavesRow(world, replacer, random, config, blockPos, radius - 1, -foliageHeight, bl);
-        this.placeLeavesRow(world, replacer, random, config, blockPos, radius + treeNode.radiusOffset() - 1, 0, bl);
+        boolean bl = treeNode.isGiantTrunk();
+        BlockPos blockPos = treeNode.getCenter().up(offset);
+        this.generateSquare(world, replacer, random, config, blockPos, radius + treeNode.getFoliageRadius(), -1 - foliageHeight, bl);
+        this.generateSquare(world, replacer, random, config, blockPos, radius - 1, -foliageHeight, bl);
+        this.generateSquare(world, replacer, random, config, blockPos, radius + treeNode.getFoliageRadius() - 1, 0, bl);
 //        if(radius <= 3)
 //            radius = 3;
 //
@@ -85,12 +85,12 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    public int foliageHeight(Random random, int trunkHeight, TreeConfiguration config) {
+    public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
         return 0;
     }
 
     @Override
-    protected boolean shouldSkipLocation(Random random, int baseHeight, int dx, int y, int dz, boolean giantTrunk) {
+    protected boolean isInvalidForLeaves(Random random, int baseHeight, int dx, int y, int dz, boolean giantTrunk) {
         return false;
     }
 }

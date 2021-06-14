@@ -87,7 +87,7 @@ minecraft {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings minecraft.officialMojangMappings()
+    mappings "net.fabricmc:yarn:1.17+build.10:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Libraries

@@ -1,7 +1,7 @@
 package com.aether.blocks;
 
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.state.property.BooleanProperty;
 
 public class AetherBlockProperties {
-    public static final BooleanProperty DOUBLE_DROPS = BooleanProperty.create("double_drops");
+    public static final BooleanProperty DOUBLE_DROPS = BooleanProperty.of("double_drops");
 }

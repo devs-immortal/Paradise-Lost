@@ -3,50 +3,50 @@ package com.aether.items;
 import com.aether.api.AetherAPI;
 import com.aether.api.moa.MoaType;
 import com.aether.entities.passive.MoaEntity;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.collection.DefaultedList;
 
 public class MoaEgg extends Item {
-    public MoaEgg(Properties settings) {
+    public MoaEgg(Settings settings) {
         super(settings);
     }
 
     public static ItemStack getStack(MoaType type) {
         ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
-        CompoundTag tag = new CompoundTag();
+        NbtCompound tag = new NbtCompound();
         tag.putInt("moaType", AetherAPI.instance().getMoaId(type));
         stack.setTag(tag);
         return stack;
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext contextIn) {
+    public ActionResult useOnBlock(ItemUsageContext contextIn) {
         if (contextIn.getPlayer().isCreative()) {
-            MoaEntity moa = new MoaEntity(contextIn.getLevel(), AetherAPI.instance().getMoa(contextIn.getItemInHand().getTag().getInt("moaType")));
+            MoaEntity moa = new MoaEntity(contextIn.getWorld(), AetherAPI.instance().getMoa(contextIn.getStack().getTag().getInt("moaType")));
 
-            moa.moveTo(contextIn.getClickedPos().above(), 1.0F, 1.0F);
+            moa.refreshPositionAndAngles(contextIn.getBlockPos().up(), 1.0F, 1.0F);
             moa.setPlayerGrown(true);
 
-            if (!contextIn.getLevel().isClientSide) contextIn.getLevel().addFreshEntity(moa);
+            if (!contextIn.getWorld().isClient) contextIn.getWorld().spawnEntity(moa);
 
-            return InteractionResult.SUCCESS;
+            return ActionResult.SUCCESS;
         }
-        return super.useOn(contextIn);
+        return super.useOnBlock(contextIn);
     }
 
     @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> subItems) {
+    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> subItems) {
         for (int moaTypeSize = 0; moaTypeSize < AetherAPI.instance().getMoaRegistrySize(); ++moaTypeSize) {
             ItemStack stack = new ItemStack(this);
-            CompoundTag compound = new CompoundTag();
+            NbtCompound compound = new NbtCompound();
             MoaType moaType = AetherAPI.instance().getMoa(moaTypeSize);
 
-            if (moaType.getItemGroup() == group || group == CreativeModeTab.TAB_SEARCH) {
+            if (moaType.getItemGroup() == group || group == ItemGroup.SEARCH) {
                 compound.putInt("moaType", moaTypeSize);
                 stack.setTag(compound);
                 subItems.add(stack);
@@ -59,13 +59,13 @@ public class MoaEgg extends Item {
     }
 
     public MoaType getMoaType(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
+        NbtCompound tag = stack.getTag();
         if (tag != null) return AetherAPI.instance().getMoa(tag.getInt("moaType"));
         return AetherAPI.instance().getMoa(0);
     }
 
     @Override
-    public boolean shouldOverrideMultiplayerNbt() {
+    public boolean shouldSyncTagToClient() {
         return true;
     }
 }

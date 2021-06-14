@@ -1,40 +1,40 @@
 package com.aether.blocks.aercloud;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.Entity;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 public class BlueAercloudBlock extends BaseAercloudBlock {
 
-    protected static VoxelShape SHAPE = Shapes.empty();
+    protected static VoxelShape SHAPE = VoxelShapes.empty();
 
-    public BlueAercloudBlock(BlockBehaviour.Properties properties) {
+    public BlueAercloudBlock(AbstractBlock.Settings properties) {
         super(properties);
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         entity.fallDistance = 0.0F;
-        Vec3 motion = entity.getDeltaMovement();
+        Vec3d motion = entity.getVelocity();
 
-        if (entity.isShiftKeyDown()) {
+        if (entity.isSneaking()) {
             if (motion.y < 0) {
-                entity.setDeltaMovement(motion.multiply(1.0, 0.005, 1.0));
+                entity.setVelocity(motion.multiply(1.0, 0.005, 1.0));
             }
             return;
         }
 
-        entity.setDeltaMovement(motion.x, 2.0, motion.z);
+        entity.setVelocity(motion.x, 2.0, motion.z);
 
-        if (world.isClientSide) {
+        if (world.isClient) {
             for (int count = 0; count < 50; count++) {
                 double xOffset = pos.getX() + world.random.nextDouble();
                 double yOffset = pos.getY() + world.random.nextDouble();
@@ -46,7 +46,7 @@ public class BlueAercloudBlock extends BaseAercloudBlock {
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 }

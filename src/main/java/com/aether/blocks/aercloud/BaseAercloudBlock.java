@@ -4,62 +4,62 @@ import com.aether.blocks.AetherBlockProperties;
 import com.aether.blocks.AetherBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HalfTransparentBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.TransparentBlock;
+import net.minecraft.entity.Entity;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
-public class BaseAercloudBlock extends HalfTransparentBlock {
+public class BaseAercloudBlock extends TransparentBlock {
 
     private static final BooleanProperty DOUBLE_DROPS = AetherBlockProperties.DOUBLE_DROPS;
-    protected static VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 0.01, 16.0);
+    protected static VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 0.01, 16.0);
 
-    public BaseAercloudBlock(Properties properties) {
-        super(properties.isRedstoneConductor(AetherBlocks::never).isSuffocating(AetherBlocks::never).isViewBlocking(AetherBlocks::never));
-        this.registerDefaultState(this.defaultBlockState().setValue(DOUBLE_DROPS, false));
+    public BaseAercloudBlock(Settings properties) {
+        super(properties.solidBlock(AetherBlocks::never).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never));
+        this.setDefaultState(this.getDefaultState().with(DOUBLE_DROPS, false));
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
         builder.add(DOUBLE_DROPS);
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         entity.fallDistance = 0.0F;
 
-        if (entity.getDeltaMovement().y < 0.0) {
-            entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.005, 1.0));
+        if (entity.getVelocity().y < 0.0) {
+            entity.setVelocity(entity.getVelocity().multiply(1.0, 0.005, 1.0));
         }
     }
 
     @Override
     @Environment(EnvType.CLIENT)
-    public float getShadeBrightness(BlockState state, BlockGetter worldIn, BlockPos pos) {
+    public float getAmbientOcclusionLightLevel(BlockState state, BlockView worldIn, BlockPos pos) {
         return 1.0F;
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+    public boolean isTranslucent(BlockState state, BlockView reader, BlockPos pos) {
         return true;
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+    public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 
     @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
-        return Shapes.empty();
+    public VoxelShape getCameraCollisionShape(BlockState state, BlockView reader, BlockPos pos, ShapeContext context) {
+        return VoxelShapes.empty();
     }
 }

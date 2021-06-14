@@ -1,35 +1,35 @@
 package com.aether.api.moa;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.util.Identifier;
 
 public class MoaType {
 
     private final MoaProperties properties;
     public final int hexColor;
-    private ResourceLocation registryName;
-    private CreativeModeTab group;
+    private Identifier registryName;
+    private ItemGroup group;
 
     public MoaType(int hexColor, MoaProperties properties) {
         this.hexColor = hexColor;
         this.properties = properties;
     }
 
-    public MoaType(int hexColor, CreativeModeTab group, MoaProperties properties) {
+    public MoaType(int hexColor, ItemGroup group, MoaProperties properties) {
         this(hexColor, properties);
 
         this.group = group;
     }
 
-    public ResourceLocation getTexture(boolean saddled) {
+    public Identifier getTexture(boolean saddled) {
         return this.properties.getCustomTexture(saddled);
     }
 
-    public ResourceLocation getRegistryName() {
+    public Identifier getRegistryName() {
         return this.registryName;
     }
 
-    public void setRegistryName(ResourceLocation location) {
+    public void setRegistryName(Identifier location) {
         this.registryName = location;
     }
 
@@ -37,7 +37,7 @@ public class MoaType {
         return this.properties;
     }
 
-    public CreativeModeTab getItemGroup() {
+    public ItemGroup getItemGroup() {
         return this.group;
     }
 

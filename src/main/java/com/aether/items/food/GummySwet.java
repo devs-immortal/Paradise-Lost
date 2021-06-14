@@ -1,28 +1,28 @@
 package com.aether.items.food;
 
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
 
 public class GummySwet extends Item {
 
-    public GummySwet(Properties settings) {
+    public GummySwet(Settings settings) {
         super(settings);
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        ItemStack heldItem = playerIn.getItemInHand(handIn);
+    public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack heldItem = playerIn.getStackInHand(handIn);
 
-        if (playerIn.isHurt()) {
+        if (playerIn.canFoodHeal()) {
             if (!playerIn.isCreative()) heldItem.setCount(heldItem.getCount() - 1);
             playerIn.heal(playerIn.getMaxHealth());
-            return new InteractionResultHolder<>(InteractionResult.SUCCESS, heldItem);
+            return new TypedActionResult<>(ActionResult.SUCCESS, heldItem);
         }
-        return new InteractionResultHolder<>(InteractionResult.PASS, heldItem);
+        return new TypedActionResult<>(ActionResult.PASS, heldItem);
     }
 }

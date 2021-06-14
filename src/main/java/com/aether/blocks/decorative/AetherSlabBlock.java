@@ -1,12 +1,12 @@
 package com.aether.blocks.decorative;
 
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SlabBlock;
 
 public class AetherSlabBlock extends SlabBlock {
     public AetherSlabBlock(BlockState state) {
-        super(BlockBehaviour.Properties.copy(state.getBlock()));
+        super(AbstractBlock.Settings.copy(state.getBlock()));
     }
 
     // TODO: Stubbed. Pending 1.17 rewrite.

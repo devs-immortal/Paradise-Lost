@@ -2,17 +2,17 @@ package com.aether.items.accessories;
 
 import com.aether.Aether;
 import com.aether.items.AetherItemSettings;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
+import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
 
 public class ItemAccessory extends Item {
     private final int color;
     private final AccessoryType type;
-    private final ResourceLocation texture, texture_slim;
+    private final Identifier texture, texture_slim;
     private float damageMultiplier = 1.0F;
 
     public ItemAccessory(AccessoryType type, String material, AetherItemSettings settings) {
-        super(settings.durability(5 * type.getDurability()));
+        super(settings.maxDamage(5 * type.getDurability()));
 
         this.type = type;
         this.color = settings.getEnchantmentGlintColor();
@@ -48,11 +48,11 @@ public class ItemAccessory extends Item {
 //        this(material, type, Rarity.COMMON, color);
 //    }
 
-    public ResourceLocation getTexture() {
+    public Identifier getTexture() {
         return this.getTexture(false);
     }
 
-    public ResourceLocation getTexture(boolean isSlim) {
+    public Identifier getTexture(boolean isSlim) {
         return isSlim ? this.texture_slim : this.texture;
     }
 

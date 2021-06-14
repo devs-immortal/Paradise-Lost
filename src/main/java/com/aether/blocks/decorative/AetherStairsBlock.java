@@ -1,12 +1,12 @@
 package com.aether.blocks.decorative;
 
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.StairsBlock;
 
-public class AetherStairsBlock extends StairBlock {
+public class AetherStairsBlock extends StairsBlock {
     public AetherStairsBlock(BlockState state) {
-        super(state, BlockBehaviour.Properties.copy(state.getBlock()));
+        super(state, AbstractBlock.Settings.copy(state.getBlock()));
     }
 
     // TODO: Stubbed. Pending 1.17 rewrite.

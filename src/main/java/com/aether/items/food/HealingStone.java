@@ -1,15 +1,15 @@
 package com.aether.items.food;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class HealingStone extends Item {
-    public HealingStone(Properties settings) {
+    public HealingStone(Settings settings) {
         super(settings);
     }
 
     @Override
-    public boolean isFoil(ItemStack stackIn) {
+    public boolean hasGlint(ItemStack stackIn) {
         return true;
     }
 }

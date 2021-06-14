@@ -2,20 +2,20 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.particle.AetherParticles;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -24,16 +24,16 @@ public class  AetherLeavesBlock extends LeavesBlock {
     protected int speed = 0;
     protected final boolean collidable;
 
-    public AetherLeavesBlock(Properties settings, boolean collidable) {
+    public AetherLeavesBlock(Settings settings, boolean collidable) {
         super(settings);
         this.collidable = collidable;
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        if ((state.is(AetherBlocks.GOLDEN_OAK_LEAVES) || state.is(AetherBlocks.FROST_WISTERIA_LEAVES) || state.is(AetherBlocks.BOREAL_WISTERIA_LEAVES) || state.is(AetherBlocks.ROSE_WISTERIA_LEAVES) || state.is(AetherBlocks.LAVENDER_WISTERIA_LEAVES))) {
-            if(!(Boolean) state.getValue(PERSISTENT) && state.getValue(DISTANCE) >= 13) {
-                dropResources(state, world, pos);
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if ((state.isOf(AetherBlocks.GOLDEN_OAK_LEAVES) || state.isOf(AetherBlocks.FROST_WISTERIA_LEAVES) || state.isOf(AetherBlocks.BOREAL_WISTERIA_LEAVES) || state.isOf(AetherBlocks.ROSE_WISTERIA_LEAVES) || state.isOf(AetherBlocks.LAVENDER_WISTERIA_LEAVES))) {
+            if(!(Boolean) state.get(PERSISTENT) && state.get(DISTANCE) >= 13) {
+                dropStacks(state, world, pos);
                 world.removeBlock(pos, false);
             }
         }
@@ -42,34 +42,34 @@ public class  AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-        if (!hasCollision && entity instanceof LivingEntity) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        if (!collidable && entity instanceof LivingEntity) {
             entity.fallDistance = 0;
-            entity.makeStuckInBlock(state, new Vec3(0.99D, 0.9D, 0.99D));
+            entity.slowMovement(state, new Vec3d(0.99D, 0.9D, 0.99D));
         }
     }
 
     public static BlockState getHanger(BlockState state) {
-        if(state.is(AetherBlocks.ROSE_WISTERIA_LEAVES))
-            return AetherBlocks.ROSE_WISTERIA_HANGER.defaultBlockState();
-        else if(state.is(AetherBlocks.LAVENDER_WISTERIA_LEAVES))
-            return AetherBlocks.LAVENDER_WISTERIA_HANGER.defaultBlockState();
-        else if(state.is(AetherBlocks.FROST_WISTERIA_LEAVES))
-            return AetherBlocks.FROST_WISTERIA_HANGER.defaultBlockState();
-        else if(state.is(AetherBlocks.BOREAL_WISTERIA_LEAVES))
-            return AetherBlocks.BOREAL_WISTERIA_HANGER.defaultBlockState();
-        return Blocks.AIR.defaultBlockState();
+        if(state.isOf(AetherBlocks.ROSE_WISTERIA_LEAVES))
+            return AetherBlocks.ROSE_WISTERIA_HANGER.getDefaultState();
+        else if(state.isOf(AetherBlocks.LAVENDER_WISTERIA_LEAVES))
+            return AetherBlocks.LAVENDER_WISTERIA_HANGER.getDefaultState();
+        else if(state.isOf(AetherBlocks.FROST_WISTERIA_LEAVES))
+            return AetherBlocks.FROST_WISTERIA_HANGER.getDefaultState();
+        else if(state.isOf(AetherBlocks.BOREAL_WISTERIA_LEAVES))
+            return AetherBlocks.BOREAL_WISTERIA_HANGER.getDefaultState();
+        return Blocks.AIR.getDefaultState();
     }
 
     @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
-        if (state.is(AetherBlocks.GOLDEN_OAK_LEAVES) && random.nextInt(75) == 0) {
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (state.isOf(AetherBlocks.GOLDEN_OAK_LEAVES) && random.nextInt(75) == 0) {
             Direction direction = Direction.DOWN;
-            BlockPos blockPos = pos.relative(direction);
+            BlockPos blockPos = pos.offset(direction);
             BlockState blockState = world.getBlockState(blockPos);
-            if (!(!blockState.isFaceSturdy(world, blockPos, direction.getOpposite()) && !blockState.propagatesSkylightDown(world, blockPos))) {
+            if (!(!blockState.isSideSolidFullSquare(world, blockPos, direction.getOpposite()) && !blockState.isTranslucent(world, blockPos))) {
 
-                if (speed == 0 || world.getGameTime() % 3000 == 0) {
+                if (speed == 0 || world.getTime() % 3000 == 0) {
                     speed = world.getRandom().nextInt(4);
                     if (world.isRaining()) speed += 1;
                     else if (world.isThundering()) speed += 2;
@@ -77,38 +77,38 @@ public class  AetherLeavesBlock extends LeavesBlock {
 
                 for (int leaf = 0; leaf < 9; leaf++) {
                     if (world.random.nextInt(3) == 0) {
-                        double d = direction.getStepX() == 0 ? random.nextDouble() : 0.5D + (double) direction.getStepX() * 0.6D;
-                        double f = direction.getStepZ() == 0 ? random.nextDouble() : 0.5D + (double) direction.getStepZ() * 0.6D;
+                        double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetX() * 0.6D;
+                        double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetZ() * 0.6D;
                         world.addParticle(AetherParticles.GOLDEN_OAK_LEAF, (double) pos.getX() + d, pos.getY(), (double) pos.getZ() + f, speed, world.getRandom().nextDouble() / -20.0, 0);
                     }
                 }
             }
         }
-        super.animateTick(state, world, pos, random);
+        super.randomDisplayTick(state, world, pos, random);
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter world, BlockPos pos) {
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
         return false;
     }
 
     @Override
-    public float getShadeBrightness(BlockState state, BlockGetter world, BlockPos pos) {
+    public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
         return 0.2F;
     }
 
     @Override
-    public int getLightBlock(BlockState state, BlockGetter world, BlockPos pos) {
+    public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
         return 1;
     }
 
     @Override
-    public VoxelShape getOcclusionShape(BlockState state, BlockGetter world, BlockPos pos) {
-        return Shapes.block();
+    public VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
+        return VoxelShapes.fullCube();
     }
 
     @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return Shapes.block();
+    public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return VoxelShapes.fullCube();
     }
 }

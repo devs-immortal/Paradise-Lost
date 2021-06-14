@@ -1,43 +1,43 @@
 package com.aether.items.resources;
 
 import com.aether.blocks.AetherBlocks;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
 
 public class AmbrosiumShard extends Item {
 
-    public AmbrosiumShard(Properties settings) {
+    public AmbrosiumShard(Settings settings) {
         super(settings);
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
-        if (context.getLevel().getBlockState(context.getClickedPos()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK) {
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        if (context.getWorld().getBlockState(context.getBlockPos()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK) {
             if (!context.getPlayer().isCreative())
-                context.getItemInHand().setCount(context.getItemInHand().getCount() - 1);
-            context.getLevel().setBlockAndUpdate(context.getClickedPos(), AetherBlocks.AETHER_ENCHANTED_GRASS.defaultBlockState());
-            return InteractionResult.SUCCESS;
+                context.getStack().setCount(context.getStack().getCount() - 1);
+            context.getWorld().setBlockState(context.getBlockPos(), AetherBlocks.AETHER_ENCHANTED_GRASS.getDefaultState());
+            return ActionResult.SUCCESS;
         }
-        return InteractionResult.PASS;
+        return ActionResult.PASS;
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        ItemStack heldItem = playerIn.getItemInHand(handIn);
+    public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack heldItem = playerIn.getStackInHand(handIn);
 
-        if (playerIn.isHurt()) {
+        if (playerIn.canFoodHeal()) {
             if (!playerIn.isCreative())
                 heldItem.setCount(heldItem.getCount() - 1);
             playerIn.heal(2.0F);
-            return new InteractionResultHolder<>(InteractionResult.SUCCESS, heldItem);
+            return new TypedActionResult<>(ActionResult.SUCCESS, heldItem);
         }
 
-        return new InteractionResultHolder<>(InteractionResult.PASS, heldItem);
+        return new TypedActionResult<>(ActionResult.PASS, heldItem);
     }
 }

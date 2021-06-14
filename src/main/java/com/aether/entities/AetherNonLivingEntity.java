@@ -2,24 +2,24 @@ package com.aether.entities;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.network.Packet;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
 public abstract class AetherNonLivingEntity extends Entity {
-	public AetherNonLivingEntity(EntityType<?> type, Level world) {
+	public AetherNonLivingEntity(EntityType<?> type, World world) {
 		super(type, world);
 	}
 
-	public ResourceLocation createSpawnPacket(FriendlyByteBuf buf) {
+	public Identifier createSpawnPacket(PacketByteBuf buf) {
 		buf.writeVarInt(this.getId());
-		buf.writeUUID(this.getUUID());
+		buf.writeUuid(this.getUuid());
 		buf.writeDouble(this.getX());
 		buf.writeDouble(this.getY());
 		buf.writeDouble(this.getZ());
@@ -28,14 +28,14 @@ public abstract class AetherNonLivingEntity extends Entity {
 	}
 
 	@Override
-	public final Packet<?> getAddEntityPacket() {
-		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		ResourceLocation id = this.createSpawnPacket(buf);
+	public final Packet<?> createSpawnPacket() {
+		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+		Identifier id = this.createSpawnPacket(buf);
 
-		for (ServerPlayer playerEntity : ((ServerLevel) this.level).players()) {
+		for (ServerPlayerEntity playerEntity : ((ServerWorld) this.world).getPlayers()) {
 			ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerEntity, id, buf);
 		}
 
-		return new ClientboundAddEntityPacket(this);
+		return new EntitySpawnS2CPacket(this);
 	}
 }

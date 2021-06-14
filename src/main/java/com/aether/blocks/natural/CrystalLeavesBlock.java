@@ -1,47 +1,47 @@
 package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.LeavesBlock;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
 public class CrystalLeavesBlock extends LeavesBlock {
-    public static final BooleanProperty FRUITY = BooleanProperty.create("fruity");
+    public static final BooleanProperty FRUITY = BooleanProperty.of("fruity");
 
-    public CrystalLeavesBlock(Properties settings) {
+    public CrystalLeavesBlock(Settings settings) {
         super(settings);
-        this.registerDefaultState((this.stateDefinition.any()).setValue(FRUITY, false).setValue(PERSISTENT, false));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(FRUITY, false).with(PERSISTENT, false));
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return (state.getValue(DISTANCE) == 7 && !state.getValue(PERSISTENT)) || (!state.getValue(FRUITY));
+    public boolean hasRandomTicks(BlockState state) {
+        return (state.get(DISTANCE) == 7 && !state.get(PERSISTENT)) || (!state.get(FRUITY));
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        if (!state.getValue(PERSISTENT) && state.getValue(DISTANCE) == 7) {
-            dropResources(state, world, pos);
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (!state.get(PERSISTENT) && state.get(DISTANCE) == 7) {
+            dropStacks(state, world, pos);
             world.removeBlock(pos, false);
-        } else if ((random.nextInt(60) == 0) && (!checkFruitiness(world, pos.above()) && !checkFruitiness(world, pos.below()) && !checkFruitiness(world, pos.north()) && !checkFruitiness(world, pos.east()) && !checkFruitiness(world, pos.south()) && !checkFruitiness(world, pos.west()))) {
-            world.setBlockAndUpdate(pos, state.setValue(FRUITY, true));
+        } else if ((random.nextInt(60) == 0) && (!checkFruitiness(world, pos.up()) && !checkFruitiness(world, pos.down()) && !checkFruitiness(world, pos.north()) && !checkFruitiness(world, pos.east()) && !checkFruitiness(world, pos.south()) && !checkFruitiness(world, pos.west()))) {
+            world.setBlockState(pos, state.with(FRUITY, true));
         }
 
     }
 
-    private boolean checkFruitiness(ServerLevel world, BlockPos pos) {
-        return world.getBlockState(pos).getBlock() == AetherBlocks.CRYSTAL_LEAVES && world.getBlockState(pos).getValue(FRUITY);
+    private boolean checkFruitiness(ServerWorld world, BlockPos pos) {
+        return world.getBlockState(pos).getBlock() == AetherBlocks.CRYSTAL_LEAVES && world.getBlockState(pos).get(FRUITY);
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
         builder.add(FRUITY);
     }
 }
