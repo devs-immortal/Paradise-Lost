@@ -2,24 +2,24 @@ package com.aether.client.rendering.entity.layer;
 
 import com.aether.Aether;
 import com.aether.entities.passive.PhygEntity;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.feature.FeatureRenderer;
-import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.model.PigEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.model.PigModel;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.resources.ResourceLocation;
 
-public class PhygWingLayer extends FeatureRenderer<PhygEntity, PigEntityModel<PhygEntity>> {
+public class PhygWingLayer extends RenderLayer<PhygEntity, PigModel<PhygEntity>> {
 
-    private static final Identifier TEXTURE_WINGS = Aether.locate("textures/entity/phyg/wings.png");
+    private static final ResourceLocation TEXTURE_WINGS = Aether.locate("textures/entity/phyg/wings.png");
     //private final PhygWingModel model = new PhygWingModel();
 
-    public PhygWingLayer(FeatureRendererContext<PhygEntity, PigEntityModel<PhygEntity>> context) {
+    public PhygWingLayer(RenderLayerParent<PhygEntity, PigModel<PhygEntity>> context) {
         super(context);
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, PhygEntity phyg, float limbAngle, float limbDistance, float tickDelta, float customAngle, float netHeadYaw, float headPitch) {
+    public void render(PoseStack matrices, MultiBufferSource vertexConsumers, int light, PhygEntity phyg, float limbAngle, float limbDistance, float tickDelta, float customAngle, float netHeadYaw, float headPitch) {
         //VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(TEXTURE_WINGS));
         //this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
     }

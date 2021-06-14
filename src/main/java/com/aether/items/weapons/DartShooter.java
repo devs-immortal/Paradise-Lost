@@ -1,5 +1,7 @@
 package com.aether.items.weapons;
 
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -54,7 +56,7 @@ public class DartShooter extends Item {
                 } else if (playerIn.isCreative())
                     projectile.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
             }
-            worldIn.playSound(playerIn, playerIn.getBlockPos(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (playerIn.getRandom().nextFloat() * 0.4F + 0.8F));
+            worldIn.playSound(playerIn, playerIn.blockPosition(), SoundEvents.CROSSBOW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (playerIn.getRandom().nextFloat() * 0.4F + 0.8F));
         }
         return super.use(worldIn, playerIn, handIn);
     }

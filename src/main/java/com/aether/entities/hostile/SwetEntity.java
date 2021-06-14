@@ -1,6 +1,8 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -74,7 +76,7 @@ public class SwetEntity extends Slime {
     }
 
     @Override
-    protected ParticleEffect getParticles() {
+    protected ParticleOptions getParticleType() {
         return ParticleTypes.SPLASH;
     }
 }

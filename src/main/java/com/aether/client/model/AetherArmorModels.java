@@ -1,9 +1,5 @@
 package com.aether.client.model;
 
-import com.aether.client.model.armor.PhoenixArmorModel;
-import com.aether.items.AetherItems;
-import net.minecraft.util.Identifier;
-
 public class AetherArmorModels {
 
     public static void registerArmorModels() {

@@ -4,9 +4,9 @@ import com.aether.entities.AetherEntityTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 
 @Environment(EnvType.CLIENT)
 public class AetherEntityRenderers {
@@ -38,7 +38,7 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.GOLDEN_SWET, SwetRenderer::new);
     }
 
-    private static void register(EntityType<? extends Entity> clazz, EntityRendererFactory factory) {
+    private static void register(EntityType<? extends Entity> clazz, EntityRendererProvider factory) {
         EntityRendererRegistry.INSTANCE.register(clazz, factory);
     }
 }

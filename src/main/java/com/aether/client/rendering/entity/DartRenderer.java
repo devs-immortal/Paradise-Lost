@@ -5,20 +5,19 @@ import com.aether.entities.projectile.DartEntity;
 import com.aether.entities.projectile.EnchantedDartEntity;
 import com.aether.entities.projectile.GoldenDartEntity;
 import com.aether.entities.projectile.PoisonNeedleEntity;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.ProjectileEntityRenderer;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
 
-public class DartRenderer extends ProjectileEntityRenderer<DartEntity> {
+public class DartRenderer extends EntityRenderer<DartEntity> {
 
-    public DartRenderer(EntityRendererFactory.Context renderManager) {
+    public DartRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager);
-        this.shadowOpacity = 0.0F;
+        this.shadowStrength = 0.0F;
     }
 
     @Override
-    public Identifier getTexture(DartEntity entity) {
+    public ResourceLocation getTextureLocation(DartEntity entity) {
         String base = entity instanceof GoldenDartEntity ? "golden" : entity instanceof EnchantedDartEntity ? "enchanted" : "poison";
 
         return Aether.locate("textures/entity/projectile/dart/" + base + (entity instanceof PoisonNeedleEntity ? "_needle" : "_dart") + ".png");
