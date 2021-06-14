@@ -85,7 +85,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
 
     @Override
     public void setPos(double x, double y, double z) {
-        if (entityData == null) {
+        if (entityData == null || blockState == null) {
             super.setPos(x, y, z);
         } else {
             BlockPos origin = entityData.get(ORIGIN);
