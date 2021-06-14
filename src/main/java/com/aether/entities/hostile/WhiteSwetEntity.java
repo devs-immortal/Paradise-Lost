@@ -1,11 +1,14 @@
 package com.aether.entities.hostile;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import com.aether.entities.AetherEntityTypes;
+
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-
-import java.util.Collection;
 
 public class WhiteSwetEntity extends SwetEntity{
     public WhiteSwetEntity(World world){
@@ -13,8 +16,11 @@ public class WhiteSwetEntity extends SwetEntity{
     }
 
     public void onPlayerCollision(PlayerEntity player){
+    	List<StatusEffectInstance> parseableEffects = new ArrayList<StatusEffectInstance>();
         Collection<StatusEffectInstance> effects = player.getStatusEffects();
-        for (StatusEffectInstance effect : effects) {
+        parseableEffects.addAll(effects);
+        
+        for (StatusEffectInstance effect : parseableEffects) {
             this.applyStatusEffect(effect);
             player.removeStatusEffect(effect.getEffectType());
         }
