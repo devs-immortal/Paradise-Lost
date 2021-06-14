@@ -33,6 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import org.jetbrains.annotations.Nullable;
 
 public class AetherBlocks {
     public static final Block AEROGEL;
@@ -432,7 +433,7 @@ public class AetherBlocks {
         POTTED_CRYSTAL_SAPLING = register("potted_crystal_sapling", createPottedBlock(CRYSTAL_SAPLING));
         CRYSTAL_LOG = register("crystal_log", createLogBlock(MaterialColor.COLOR_GRAY, MaterialColor.COLOR_LIGHT_GRAY), buildingBlock());
         STRIPPED_CRYSTAL_LOG = register("stripped_crystal_log", createLogBlock(MaterialColor.COLOR_LIGHT_GRAY, MaterialColor.COLOR_LIGHT_GRAY), buildingBlock());
-        CRYSTAL_LEAVES = register("crystal_leaves", createCrystalLeavesBlock(SoundType.GLASS), buildingBlock());
+        CRYSTAL_LEAVES = register("crystal_leaves", createCrystalLeavesBlock(), buildingBlock());
         CRYSTAL_TRAPDOOR = register("crystal_trapdoor", new AetherTrapdoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR)), buildingBlock());
         CRYSTAL_DOOR = register("crystal_door", new AetherDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR)), buildingBlock());
 
@@ -608,10 +609,6 @@ public class AetherBlocks {
         return new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, (blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topMaterialColor : sideMaterialColor).strength(2.0f).sound(SoundType.WOOD));
     }
 
-    private static AetherLeavesBlock createLeavesBlock() {
-        return new AetherLeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2f).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn((a, b, c, d) -> false).isSuffocating(AetherBlocks::never).isViewBlocking(AetherBlocks::never), true);
-    }
-
     private static BlockBehaviour.Properties createLeafPileBlock(SoundType sounds) {
         return BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).strength(0.2f).sound(sounds).noOcclusion().isSuffocating(AetherBlocks::never).isViewBlocking(AetherBlocks::never);
     }
@@ -620,16 +617,30 @@ public class AetherBlocks {
         return BlockBehaviour.Properties.of(Material.DECORATION).strength(0.2f).noCollission().instabreak().sound(sounds).noOcclusion().isSuffocating(AetherBlocks::never).isViewBlocking(AetherBlocks::never);
     }
 
-    private static AetherLeavesBlock createLeavesBlock(SoundType sounds) {
-        return new AetherLeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2f).randomTicks().sound(sounds).noOcclusion().isValidSpawn((a, b, c, d) -> false).isSuffocating(AetherBlocks::never).isViewBlocking(AetherBlocks::never), true);
+    private static BlockBehaviour.Properties createLeavesProperties(@Nullable Integer luminance, @Nullable SoundType sounds) {
+        sounds = (sounds != null ? sounds : SoundType.GRASS);
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2f).randomTicks().sound(sounds).noOcclusion().isValidSpawn(AetherBlocks::ocelotOrParrot).isSuffocating(AetherBlocks::never).isViewBlocking(AetherBlocks::never);
+        if (luminance != null) {
+            properties = properties.lightLevel(ignored -> luminance);
+        }
+        return properties;
     }
 
-    private static AetherLeavesBlock createLeavesBlock(int luminance) {
-        return new AetherLeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2f).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn((a, b, c, d) -> false).isSuffocating(AetherBlocks::never).isViewBlocking(AetherBlocks::never).lightLevel(ignored -> luminance), true);
+    private static AetherLeavesBlock createLeavesBlock(@Nullable Integer luminance, @Nullable SoundType sounds) {
+        return new AetherLeavesBlock(createLeavesProperties(luminance, sounds), true);
     }
 
-    private static CrystalLeavesBlock createCrystalLeavesBlock(SoundType sounds) {
-        return new CrystalLeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2f).randomTicks().sound(sounds).noOcclusion().isValidSpawn((a, b, c, d) -> false).isSuffocating(AetherBlocks::never).isViewBlocking(AetherBlocks::never));
+    private static AetherLeavesBlock createLeavesBlock() {
+        return createLeavesBlock(null, null);
+    }
+
+    private static CrystalLeavesBlock createCrystalLeavesBlock(@Nullable SoundType sounds) {
+        sounds = (sounds != null ? sounds : SoundType.GLASS);
+        return new CrystalLeavesBlock(createLeavesProperties(null, sounds));
+    }
+
+    private static CrystalLeavesBlock createCrystalLeavesBlock() {
+        return createCrystalLeavesBlock(null);
     }
 
     private static FlowerPotBlock createPottedBlock(Block sourceBlock) {
@@ -637,7 +648,7 @@ public class AetherBlocks {
     }
 
     public static void init() {
-
+        // N/A
     }
 
     @Environment(EnvType.CLIENT)
@@ -681,5 +692,9 @@ public class AetherBlocks {
 
     public static boolean always(BlockState blockState, BlockGetter blockView, BlockPos blockPos) {
         return true;
+    }
+
+    private static Boolean ocelotOrParrot(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
+        return entityType == EntityType.OCELOT || entityType == EntityType.PARROT;
     }
 }
