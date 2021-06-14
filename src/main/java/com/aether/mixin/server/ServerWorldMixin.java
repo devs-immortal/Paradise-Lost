@@ -2,11 +2,8 @@ package com.aether.mixin.server;
 
 import com.aether.Aether;
 import com.aether.entities.block.FloatingBlockEntity;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.EntityList;
-import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

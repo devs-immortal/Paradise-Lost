@@ -1,20 +1,13 @@
 package com.aether.mixin.client;
 
-import com.aether.util.RegistryUtil;
 import com.aether.world.dimension.AetherDimension;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BackgroundRenderer;
-import net.minecraft.client.render.Camera;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.tag.Tag;
 import net.minecraft.util.math.Vec3d;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BackgroundRenderer.class)
 public class BackgroundRendererMixin {
@@ -23,15 +16,17 @@ public class BackgroundRendererMixin {
         return MinecraftClient.getInstance().world != null && MinecraftClient.getInstance().world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY ? Double.MAX_VALUE : vec3d.y;
     }
 
-    // TODO: Migrate to shader events in 1.17
-//    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/fluid/FluidState;isIn(Lnet/minecraft/tag/Tag;)Z"))
-//    private static boolean dontChangeFogColor(FluidState fluidState, Tag<Fluid> tag) {
-//        return (!RegistryUtil.dimensionMatches(MinecraftClient.getInstance().world, AetherDimension.TYPE)) && fluidState.isIn(tag);
+    // TODO: Verify migration to shader events in 1.17, when able
+//    @Inject(method = "setupColor", at = @At("HEAD"), cancellable = true)
+//    private static void dontChangeFogColor(Camera camera, float f, ClientLevel clientLevel, int i, float g, CallbackInfo ci) {
+//        if (RegistryUtil.dimensionMatches(Minecraft.getInstance().level, AetherDimension.TYPE)) {
+//            ci.cancel();
+//        }
 //    }
 //
-//    @Inject(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;fogDensity(F)V"), cancellable = true)
-//    private static void dontChangeFogDensity(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo ci) {
-//        if (RegistryUtil.dimensionMatches(MinecraftClient.getInstance().world, AetherDimension.TYPE)) {
+//    @Inject(method = "setupFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V"), cancellable = true)
+//    private static void dontChangeFogDensity(Camera camera, FogRenderer.FogMode fogMode, float f, boolean bl, CallbackInfo ci) {
+//        if (RegistryUtil.dimensionMatches(Minecraft.getInstance().level, AetherDimension.TYPE)) {
 //            ci.cancel();
 //        }
 //    }

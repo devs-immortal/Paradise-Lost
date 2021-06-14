@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_leaves",
+    "the_aether:golden_oak_leaves",
+    "the_aether:crystal_leaves",
+    "the_aether:rose_wisteria_leaves",
+    "the_aether:frost_wisteria_leaves",
+    "the_aether:lavender_wisteria_leaves",
+    "the_aether:boreal_wisteria_leaves"
+  ]
+}

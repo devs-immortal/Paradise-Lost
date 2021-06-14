@@ -1,10 +1,7 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 public class GoldenSwetEntity extends SwetEntity{

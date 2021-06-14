@@ -1,12 +1,8 @@
 package com.aether.mixin.entity;
 
-import com.aether.Aether;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.Sets;
-import dev.emi.trinkets.TrinketsClient;
-import dev.emi.trinkets.api.SlotGroup;
-import dev.emi.trinkets.api.SlotType;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.entity.Entity;
@@ -26,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 

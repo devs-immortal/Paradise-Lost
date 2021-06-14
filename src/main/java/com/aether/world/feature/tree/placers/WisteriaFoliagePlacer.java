@@ -1,32 +1,18 @@
 package com.aether.world.feature.tree.placers;
 
-import com.aether.blocks.AetherBlocks;
-import com.aether.blocks.natural.AetherLeavesBlock;
-import com.aether.blocks.natural.AuralLeavesBlock;
 import com.aether.world.feature.tree.AetherTreeHell;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 import java.util.Random;
-import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-
-import static com.aether.blocks.natural.AetherHangerBlock.TIP;
 
 public class WisteriaFoliagePlacer extends FoliagePlacer {
 

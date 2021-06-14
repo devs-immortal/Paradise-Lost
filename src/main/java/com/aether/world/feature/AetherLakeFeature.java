@@ -1,34 +1,36 @@
 package com.aether.world.feature;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.world.feature.config.DynamicConfiguration;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.world.LightType;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
-import java.util.Random;
-
-public class AetherLakeFeature extends Feature<SingleStateFeatureConfig> {
+public class AetherLakeFeature extends Feature<DynamicConfiguration> {
     private static final BlockState CAVE_AIR;
+
+    private static final Codec<DynamicConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            BlockState.CODEC.fieldOf("state").forGetter(DynamicConfiguration::getState),
+            Codec.STRING.optionalFieldOf("genType").forGetter(DynamicConfiguration::getGenString)
+    ).apply(instance, DynamicConfiguration::new));
 
     static {
         CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
     }
 
-    public AetherLakeFeature(Codec<SingleStateFeatureConfig> codec) {
-        super(codec);
+    public AetherLakeFeature() {
+        super(CODEC);
     }
 
-    public boolean generate(FeatureContext<SingleStateFeatureConfig> context) {
+    public boolean generate(FeatureContext<DynamicConfiguration> context) {
         BlockPos blockPos = context.getOrigin();
         while (blockPos.getY() > 60 && context.getWorld().isAir(blockPos)) {
             blockPos = blockPos.down();

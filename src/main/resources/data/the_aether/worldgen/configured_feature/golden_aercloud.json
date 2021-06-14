@@ -5,7 +5,10 @@
       "type": "the_aether:aercloud",
       "config": {
         "state": {
-          "Name": "the_aether:golden_aercloud"
+          "Name": "the_aether:golden_aercloud",
+          "Properties": {
+            "double_drops": "true"
+          }
         },
         "flat": false,
         "maxRadius": 14,

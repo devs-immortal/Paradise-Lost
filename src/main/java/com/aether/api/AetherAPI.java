@@ -1,10 +1,7 @@
 package com.aether.api;
 
 import com.aether.api.moa.MoaType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;
 import java.util.Random;

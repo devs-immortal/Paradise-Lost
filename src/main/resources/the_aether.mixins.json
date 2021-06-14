@@ -20,7 +20,6 @@
     "item.ShovelItemMixin",
     "screen.EnchantmentScreenHandlerMixin",
     "server.PlayerManagerMixin",
-    "server.ServerChunkManagerMixin",
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
     "structure.FeatureMixin"
@@ -35,7 +34,6 @@
     "client.ItemStackMixin",
     "client.MapRendererMixin",
     "client.WorldRendererMixin",
-    "client.render.BiomeLayerSamplerAccessor",
     "client.render.BlockStateModelGeneratorMixin",
     "client.render.MinecraftClientMixin"
   ],

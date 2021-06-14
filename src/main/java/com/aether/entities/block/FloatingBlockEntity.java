@@ -13,7 +13,9 @@ import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -78,7 +80,7 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
 
     @Override
     public void setPosition(double x, double y, double z) {
-        if (dataTracker == null) {
+        if (dataTracker == null || blockState == null) {
             super.setPosition(x, y, z);
         } else {
             BlockPos origin = dataTracker.get(ORIGIN);
@@ -267,28 +269,27 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
         }
     }
 
-    // TODO: Stubbed. Pending 1.17 rewrite.
-//    @Override
-//    public boolean handleFallDamage(float distance, float damageMultiplier) {
-//        if (this.hurtEntities) {
-//            int i = MathHelper.ceil(distance - 1.0F);
-//            if (i > 0) {
-//                List<Entity> list = Lists.newArrayList(this.world.getOtherEntities(this, this.getBoundingBox()));
-//                boolean flag = this.blockState.isIn(BlockTags.ANVIL);
-//                DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
-//
-//                for (Entity entity : list)
-//                    entity.damage(damagesource, Math.min(MathHelper.floor(i * this.floatHurtAmount), this.floatHurtMax));
-//
-//                if (flag && this.random.nextFloat() < 0.05F + i * 0.05F) {
-//                    BlockState blockstate = AnvilBlock.getLandingState(this.blockState);
-//                    if (blockstate == null) this.destroyedOnLanding = true;
-//                    else this.blockState = blockstate;
-//                }
-//            }
-//        }
-//        return false;
-//    }
+    @Override
+    public boolean handleFallDamage(float distance, float multiplier, DamageSource damageSource) {
+        if (this.hurtEntities) {
+            int i = MathHelper.ceil(distance - 1.0F);
+            if (i > 0) {
+                List<Entity> list = Lists.newArrayList(this.world.getOtherEntities(this, this.getBoundingBox()));
+                boolean flag = this.blockState.isIn(BlockTags.ANVIL);
+                DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
+
+                for (Entity entity : list)
+                    entity.damage(damagesource, Math.min(MathHelper.floor(i * this.floatHurtAmount), this.floatHurtMax));
+
+                if (flag && this.random.nextFloat() < 0.05F + i * 0.05F) {
+                    BlockState blockstate = AnvilBlock.getLandingState(this.blockState);
+                    if (blockstate == null) this.destroyedOnLanding = true;
+                    else this.blockState = blockstate;
+                }
+            }
+        }
+        return false;
+    }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound compound) {

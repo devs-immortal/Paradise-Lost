@@ -1,5 +1,5 @@
 {
-  "replace": "false",
+  "replace": false,
   "values": [
     "minecraft:oak_stairs",
     "minecraft:spruce_stairs",
@@ -9,9 +9,6 @@
     "minecraft:dark_oak_stairs",
     "minecraft:crimson_stairs",
     "minecraft:warped_stairs",
-    "the_aether:skyroot_stairs",
-    "the_aether:golden_oak_stairs",
-    "the_aether:crystal_stairs",
-    "the_aether:wisteria_stairs"
+    "#the_aether:aether_wooden_stairs"
   ]
 }

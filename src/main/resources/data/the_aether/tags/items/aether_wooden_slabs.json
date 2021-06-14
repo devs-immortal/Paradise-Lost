@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_slab",
+    "the_aether:golden_oak_slab",
+    "the_aether:crystal_slab",
+    "the_aether:wisteria_slab"
+  ]
+}

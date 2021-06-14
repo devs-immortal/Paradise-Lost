@@ -5,7 +5,10 @@
       "type": "the_aether:aercloud",
       "config": {
         "state": {
-          "Name": "the_aether:blue_aercloud"
+          "Name": "the_aether:blue_aercloud",
+          "Properties": {
+            "double_drops": "true"
+          }
         },
         "flat": false,
         "maxRadius": 10,

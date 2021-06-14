@@ -1,5 +1,5 @@
 {
-  "parent": "block/grass_path",
+  "parent": "block/dirt_path",
   "textures": {
     "particle": "the_aether:block/aether_dirt",
     "top": "the_aether:block/aether_grass_path_top",

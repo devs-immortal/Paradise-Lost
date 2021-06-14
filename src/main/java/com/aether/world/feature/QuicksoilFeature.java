@@ -1,25 +1,71 @@
 package com.aether.world.feature;
 
+import com.aether.blocks.AetherBlockProperties;
 import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.aercloud.BaseAercloudBlock;
+import com.aether.world.feature.config.DynamicConfiguration;
+import com.aether.world.feature.config.QuicksoilConfig;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
-public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
+public class QuicksoilFeature extends Feature<QuicksoilConfig> {
+
+    private static final Codec<QuicksoilConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            BlockState.CODEC.optionalFieldOf("state").forGetter(QuicksoilConfig::getOptionalState),
+            Codec.STRING.optionalFieldOf("genType").forGetter(QuicksoilConfig::getGenString)
+    ).apply(instance, QuicksoilConfig::new));
 
     public QuicksoilFeature() {
-        super(DefaultFeatureConfig.CODEC);
+        super(CODEC);
     }
 
     @Override
-    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+    public boolean generate(FeatureContext<QuicksoilConfig> context) {
+        if (context.getConfig().getGenType() == DynamicConfiguration.GeneratorType.LEGACY) {
+            return createLegacyBlob(context.getWorld(), context.getConfig().state, context.getOrigin());
+        } else {
+            return createBlob(context);
+        }
+    }
+
+    private boolean createLegacyBlob(StructureWorldAccess reader, BlockState state, BlockPos pos) {
+        boolean doesProtrude = (
+                (reader.getBlockState(pos.west(3)).isAir() ||
+                        reader.getBlockState(pos.north(3)).isAir() ||
+                        reader.getBlockState(pos.south(3)).isAir() ||
+                        reader.getBlockState(pos.east(3)).isAir()) &&
+                        (reader.getBlockState(pos).isOf(AetherBlocks.HOLYSTONE) ||
+                                reader.getBlockState(pos).isOf(AetherBlocks.AETHER_DIRT))
+        );
+        if (doesProtrude) {
+            for(int x = pos.getX() - 4; x < pos.getX() + 5; x++) {
+                for(int z = pos.getZ() - 4; z < pos.getZ() + 5; z++) {
+                    BlockPos newPos = new BlockPos(x, pos.getY(), z);
+
+                    if((x - pos.getX()) * (x - pos.getX()) + (z - pos.getZ()) * (z - pos.getZ()) < 12) {
+                        reader.setBlockState(newPos, state.with(AetherBlockProperties.DOUBLE_DROPS, true), 0);
+                    }
+                }
+
+            }
+        }
+
+        return true;
+    }
+
+    private boolean createBlob(FeatureContext<QuicksoilConfig> context) {
         BlockPos origin = null;
         BlockPos.Mutable mut = new BlockPos.Mutable();
 
@@ -104,7 +150,7 @@ public class QuicksoilFeature extends Feature<DefaultFeatureConfig> {
 
         for (int[] pos : positions) {
             mut.set(pos[0], pos[1], pos[2]);
-            this.setBlockState(context.getWorld(), mut, AetherBlocks.QUICKSOIL.getDefaultState());
+            this.setBlockState(context.getWorld(), mut, context.getConfig().state);
         }
 
         return true;

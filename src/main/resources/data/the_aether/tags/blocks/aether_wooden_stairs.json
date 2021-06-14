@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_stairs",
+    "the_aether:golden_oak_stairs",
+    "the_aether:crystal_stairs",
+    "the_aether:wisteria_stairs"
+  ]
+}

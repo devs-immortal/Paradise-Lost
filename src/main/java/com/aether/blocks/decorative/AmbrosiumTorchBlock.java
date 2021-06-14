@@ -2,7 +2,7 @@ package com.aether.blocks.decorative;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.block.TorchBlock;
@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class AmbrosiumTorchBlock extends TorchBlock {
     public AmbrosiumTorchBlock() {
-        super(FabricBlockSettings.of(Material.DECORATION).collidable(false).breakByHand(true).ticksRandomly().luminance(15).sounds(BlockSoundGroup.WOOD),
+        super(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().ticksRandomly().luminance(state -> 15).sounds(BlockSoundGroup.WOOD),
                 new DustParticleEffect(new Vec3f(0.886f, 0.871f, 0.125f), 0.7f));
     }
 

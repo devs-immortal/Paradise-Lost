@@ -47,7 +47,7 @@ public class AetherPortalItem extends Item {
 
 			for (byte i = 0; i < 2; ++i) {
 				mut.move(Direction.UP);
-				//context.getWorld().setBlockState(mut, AetherBlocks.BLUE_PORTAL.getDefaultState().with(Properties.HORIZONTAL_AXIS, context.getPlayerFacing().rotateYClockwise().getAxis()));
+				context.getWorld().setBlockState(mut, AetherBlocks.BLUE_PORTAL.getDefaultState().with(Properties.HORIZONTAL_AXIS, context.getPlayerFacing().rotateYClockwise().getAxis()));
 			}
 
 			if (context.getPlayer() != null && !context.getPlayer().isCreative()) {

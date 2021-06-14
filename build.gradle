@@ -70,6 +70,13 @@ repositories {
         name = "NerdHubMC"
         url = "https://maven.abusedmaster.xyz/"
     }
+    maven {
+        url = "https://maven.shedaniel.me/"
+    }
+    maven {
+        url = "http://maven.kyrptonaught.dev/"
+        allowInsecureProtocol = true
+    }
     mavenCentral()
 }
 
@@ -80,7 +87,7 @@ minecraft {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    mappings "net.fabricmc:yarn:1.17+build.10:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Libraries
@@ -95,8 +102,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
     // Testing only, do not JiJ
-    //modImplementation "com.terraformersmc:modmenu:2.0.0-beta.7"
-    //modRuntime "me.shedaniel:RoughlyEnoughItems-fabric:6.0.249-alpha"
+    modImplementation "com.terraformersmc:modmenu:2.0.0-beta.7"
+    modRuntime "me.shedaniel:RoughlyEnoughItems-fabric:6.0.250-alpha"
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
@@ -106,8 +113,8 @@ dependencies {
 //    }
 
     // Custom Portal Api
-//    modImplementation "com.github.kyrptonaught:customportalapi:${project.customportalapi_version}"
-//    include "com.github.kyrptonaught:customportalapi:${project.customportalapi_version}"
+    modImplementation "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
+    include "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
 
     modImplementation "dev.hephaestus:seedy-behavior:${project.seedy_version}"
     include "dev.hephaestus:seedy-behavior:${project.seedy_version}"

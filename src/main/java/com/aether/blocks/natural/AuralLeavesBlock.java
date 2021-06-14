@@ -10,9 +10,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.world.gen.ChunkRandom;
-import net.minecraft.world.gen.SimpleRandom;
-
-import java.util.Random;
 
 public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockColorProvider {
 
