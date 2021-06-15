@@ -10,7 +10,6 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.AetherMoaTypes;
 import com.aether.items.AetherItems;
 import com.aether.registry.TrinketSlotRegistry;
-import com.aether.util.NetworkingHell;
 import com.aether.world.dimension.AetherDimension;
 import com.aether.world.feature.AetherConfiguredFeatures;
 import com.aether.world.feature.AetherFeatures;
@@ -45,7 +44,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherBlocks.init();
         AetherMoaTypes.init();
         AetherParticles.init();
-        NetworkingHell.init();
     }
 
     @Override
@@ -60,6 +58,5 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherBlocks.initClient();
         AetherParticles.initClient();
         //AetherSounds.initializeClient();
-        NetworkingHell.initClient();
     }
 }

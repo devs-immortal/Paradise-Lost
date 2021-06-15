@@ -2,6 +2,7 @@ package com.aether.entities;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.network.Packet;
@@ -17,25 +18,12 @@ public abstract class AetherNonLivingEntity extends Entity {
 		super(type, world);
 	}
 
-	public Identifier createSpawnPacket(PacketByteBuf buf) {
-		buf.writeVarInt(this.getId());
-		buf.writeUuid(this.getUuid());
-		buf.writeDouble(this.getX());
-		buf.writeDouble(this.getY());
-		buf.writeDouble(this.getZ());
-
-		return null;
+	public AetherNonLivingEntity(World worldIn) {
+		this(null, worldIn);
 	}
 
 	@Override
-	public final Packet<?> createSpawnPacket() {
-		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-		Identifier id = this.createSpawnPacket(buf);
-
-		for (ServerPlayerEntity playerEntity : ((ServerWorld) this.world).getPlayers()) {
-			ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerEntity, id, buf);
-		}
-
+	public Packet<?> createSpawnPacket() {
 		return new EntitySpawnS2CPacket(this);
 	}
 }

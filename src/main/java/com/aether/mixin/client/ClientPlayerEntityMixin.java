@@ -9,29 +9,29 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin implements FloatingBlockEntity.ICPEM {
+public abstract class ClientPlayerEntityMixin {
 
-    @Shadow
-    protected abstract void sendMovementPackets();
-
-    @Unique
-    boolean sendMovement = false;
+//    @Shadow
+//    protected abstract void sendMovementPackets();
+//
+//    @Unique
+//    boolean sendMovement = false;
 
     /**
      * Since the player can be moved by FloatingBlockEntity after ClientPlayerEntity.tick()
      * the call to sendMovementPackets() needs to be delayed till after all FloatingBlockEntities have ticked
      */
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendMovementPackets()V"), method = "tick")
-    void redirectSendMovementPackets(ClientPlayerEntity clientPlayerEntity) {
-        sendMovement = true;
-    }
-
-    @Override
-    public void postTick() {
-        if (sendMovement) {
-            sendMovementPackets();
-            sendMovement = false;
-        }
-    }
+//    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendMovementPackets()V"), method = "tick")
+//    void redirectSendMovementPackets(ClientPlayerEntity clientPlayerEntity) {
+//        sendMovement = true;
+//    }
+//
+//    @Override
+//    public void postTick() {
+//        if (sendMovement) {
+//            sendMovementPackets();
+//            sendMovement = false;
+//        }
+//    }
 }

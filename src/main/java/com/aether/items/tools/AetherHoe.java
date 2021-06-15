@@ -43,8 +43,14 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         float original = super.getMiningSpeedMultiplier(stack, state);
-        if (this.getItemMaterial() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
+        if (this.getTier() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
         return original;
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        ActionResult defaultResult = super.useOnBlock(context);
+        return IAetherTool.super.useOnBlock(context, defaultResult);
     }
 
     private float calculateIncrease(ItemStack tool) {
@@ -52,18 +58,7 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        ActionResult superUsage = super.useOnBlock(context);
-        if (superUsage.equals(ActionResult.PASS)) {
-            if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
-                return ActionResult.SUCCESS;
-            }
-        }
-        return superUsage;
-    }
-
-    @Override
-    public AetherTiers getItemMaterial() {
+    public AetherTiers getTier() {
         return this.material;
     }
 }
