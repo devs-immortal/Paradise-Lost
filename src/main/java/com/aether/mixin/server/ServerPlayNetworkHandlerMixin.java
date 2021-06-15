@@ -24,15 +24,15 @@ public class ServerPlayNetworkHandlerMixin {
      * Stop the player from rubber banding when riding a floating block
      */
 
-//    @Inject(at = @At("RETURN"), method = "isPlayerNotCollidingWithBlocks", cancellable = true)
-//    void isPlayerNotCollidingWithBlocks(WorldView worldView, Box box, CallbackInfoReturnable<Boolean> cir) {
-//        if (cir.getReturnValue()) {
-//            List<Entity> list = player.world.getOtherEntities(player, player.getBoundingBox());
-//            for (Entity entity : list) {
-//                if (entity instanceof FloatingBlockEntity) {
-//                    cir.setReturnValue(false);
-//                }
-//            }
-//        }
-//    }
+    @Inject(at = @At("RETURN"), method = "isPlayerNotCollidingWithBlocks", cancellable = true)
+    void isPlayerNotCollidingWithBlocks(WorldView worldView, Box box, CallbackInfoReturnable<Boolean> cir) {
+        if (cir.getReturnValue()) {
+            List<Entity> list = player.world.getOtherEntities(player, player.getBoundingBox());
+            for (Entity entity : list) {
+                if (entity instanceof FloatingBlockEntity) {
+                    cir.setReturnValue(false);
+                }
+            }
+        }
+    }
 }

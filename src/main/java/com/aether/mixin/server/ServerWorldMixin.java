@@ -20,16 +20,16 @@ public class ServerWorldMixin {
 
     @Shadow @Final EntityList entityList;
 
-//    @Inject(at = @At(value = "RETURN"), method = "tick")
-//    void postEntityTick(BooleanSupplier shouldKeepTicking, CallbackInfo ci){
-//        if (this.idleTimeout < 300) {
-//            entityList.forEach(entityObj -> {
-//                if (entityObj instanceof FloatingBlockEntity entity) {
-//                    entity.postTickEntities();
-//                } else if (entityObj == null) {
-//                    Aether.LOG.error("Started checking null entities in ServerWorldMixin::postEntityTick");
-//                }
-//            });
-//        }
-//    }
+    @Inject(at = @At(value = "RETURN"), method = "tick")
+    void postEntityTick(BooleanSupplier shouldKeepTicking, CallbackInfo ci){
+        if (this.idleTimeout < 300) {
+            entityList.forEach(entityObj -> {
+                if (entityObj instanceof FloatingBlockEntity entity) {
+                    entity.postTickEntities();
+                } else if (entityObj == null) {
+                    Aether.LOG.error("Started checking null entities in ServerWorldMixin::postEntityTick");
+                }
+            });
+        }
+    }
 }

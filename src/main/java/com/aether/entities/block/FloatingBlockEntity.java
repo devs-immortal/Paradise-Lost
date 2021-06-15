@@ -133,7 +133,9 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
     }
 
     @Override
-    public void tick() {
+    public void tick() {}
+
+    public void postTickEntities() {
         if (this.floatTile.isAir()) {
             this.discard();
         } else {
@@ -348,5 +350,9 @@ public class FloatingBlockEntity extends AetherNonLivingEntity {
         double f = packet.getZ();
         this.setPosition(d, e + (double)((1.0F - this.getHeight()) / 2.0F), f);
         this.setOrigin(this.getBlockPos());
+    }
+
+    public interface ICPEM {
+        void postTick();
     }
 }
