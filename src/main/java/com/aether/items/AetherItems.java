@@ -266,6 +266,6 @@ public class AetherItems {
     }
 
     public static void initClient() {
-
+        // Empty void. Eternal emptiness
     }
 }
