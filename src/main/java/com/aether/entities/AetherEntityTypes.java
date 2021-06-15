@@ -113,7 +113,7 @@ public class AetherEntityTypes {
     }
 
     public static <X extends Entity> EntityType<X> register(String name, int trackingDistance, int updateIntervalTicks, boolean alwaysUpdateVelocity, EntityDimensions size, EntityType.EntityFactory<X> factory) {
-        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), EntityType.Builder.create(factory, SpawnGroup.MISC).setDimensions(size.width, size.height).trackingTickInterval(updateIntervalTicks).maxTrackingRange(trackingDistance).build(name));
+        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), EntityType.Builder.create(factory, SpawnGroup.MISC).maxTrackingRange(trackingDistance).trackingTickInterval(updateIntervalTicks).setDimensions(size.width, size.height).disableSaving().build(name));
     }
 
     public static <X extends Entity> EntityType<X> register(String name, SpawnGroup category, EntityDimensions size, EntityType.EntityFactory<X> factory) {
