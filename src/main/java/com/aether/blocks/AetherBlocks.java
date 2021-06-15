@@ -11,12 +11,13 @@ import com.aether.world.feature.tree.*;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.WallStandingBlockItem;
@@ -29,6 +30,8 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
 
 public class AetherBlocks {
     public static final Block AEROGEL;
@@ -646,17 +649,24 @@ public class AetherBlocks {
         // N/A
     }
 
+    private static void putBlocks(RenderLayer layer, Block... blocks) {
+        Arrays.stream(blocks).forEach(block -> RenderLayers.BLOCKS.put(block, layer));
+    }
+
+    private static void putFluids(RenderLayer layer, Fluid... blocks) {
+        Arrays.stream(blocks).forEach(block -> RenderLayers.FLUIDS.put(block, layer));
+    }
+
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        // TODO: Replace with a mixin to ItemBlockRenderTypes
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
+        putBlocks(RenderLayer.getTranslucent(),
                 BLUE_PORTAL, QUICKSOIL_GLASS, QUICKSOIL_GLASS_PANE, AEROGEL,
                 COLD_AERCLOUD, BLUE_AERCLOUD, PINK_AERCLOUD, GOLDEN_AERCLOUD
         );
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),
+        putFluids(RenderLayer.getTranslucent(),
                 DENSE_AERCLOUD_STILL
         );
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
+        putBlocks(RenderLayer.getCutout(),
                 SKYROOT_SAPLING, GOLDEN_OAK_SAPLING, CRYSTAL_SAPLING,
                 ROSE_WISTERIA_SAPLING, FROST_WISTERIA_SAPLING, LAVENDER_WISTERIA_SAPLING, BOREAL_WISTERIA_SAPLING,
                 AETHER_GRASS, AETHER_TALL_GRASS, AETHER_FERN, AETHER_BUSH, FLUTEGRASS, BLUEBERRY_BUSH,
@@ -668,12 +678,13 @@ public class AetherBlocks {
                 SKYROOT_DOOR, GOLDEN_OAK_DOOR, CRYSTAL_DOOR, WISTERIA_DOOR,
                 ANCIENT_FLOWER, ATARAXIA, CLOUDSBLUFF, DRIGEAN, LUMINAR
         );
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(),
+        putBlocks(RenderLayer.getCutoutMipped(),
                 AETHER_GRASS_BLOCK, ZANITE_CHAIN,
                 SKYROOT_LEAVES, GOLDEN_OAK_LEAVES, CRYSTAL_LEAVES,
                 ROSE_WISTERIA_LEAVES, FROST_WISTERIA_LEAVES, LAVENDER_WISTERIA_LEAVES, BOREAL_WISTERIA_LEAVES,
                 SKYROOT_LEAF_PILE, ROSE_WISTERIA_LEAF_PILE, FROST_WISTERIA_LEAF_PILE, LAVENDER_WISTERIA_LEAF_PILE
         );
+        // TODO: Replace this.
         FluidRenderSetup.setupDenseAercloudRenderingBecauseItJustNeedsToBeASpecialSnowflakeWithOnlyAStillState(DENSE_AERCLOUD_STILL, Aether.locate("dense_aercloud"));
     }
 
