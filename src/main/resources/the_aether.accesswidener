@@ -6,5 +6,6 @@ accessible    method    net/minecraft/entity/SpawnRestriction                   
 accessible    method    net/minecraft/item/Item$Settings                            rarity                       (Lnet/minecraft/util/Rarity;)Lnet/minecraft/item/Item$Settings;
 accessible    method    net/minecraft/client/item/ModelPredicateProviderRegistry    register                     (Lnet/minecraft/item/Item;Lnet/minecraft/util/Identifier;Lnet/minecraft/client/item/UnclampedModelPredicateProvider;)V
 accessible    method    net/minecraft/client/render/entity/EntityRenderers          register                     (Lnet/minecraft/entity/EntityType;Lnet/minecraft/client/render/entity/EntityRendererFactory;)V
+accessible    field    net/minecraft/entity/attribute/DefaultAttributeRegistry      DEFAULT_ATTRIBUTE_REGISTRY   Ljava/util/Map;
 accessible    field     net/minecraft/client/render/RenderLayers                    BLOCKS                       Ljava/util/Map;
 accessible    field     net/minecraft/client/render/RenderLayers                    FLUIDS                       Ljava/util/Map;
