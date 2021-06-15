@@ -1,6 +1,5 @@
 package com.aether.items.tools;
 
-import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;

@@ -1,7 +1,6 @@
 package com.aether.items.tools;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
