@@ -247,10 +247,10 @@ public class AetherBlocks {
 
 
     static {
-        AETHER_DIRT = register("aether_dirt", new Block(AbstractBlock.Settings.copy(Blocks.DIRT).strength(0.3f).breakInstantly().sounds(BlockSoundGroup.GRAVEL)), buildingBlock());
+        AETHER_DIRT = register("aether_dirt", new Block(AbstractBlock.Settings.copy(Blocks.DIRT).strength(0.3f).sounds(BlockSoundGroup.GRAVEL)), buildingBlock());
 
         // We're going to be using this more than once, so we might as well store it in a variable.
-        final AbstractBlock.Settings GRASS_BLOCKS = AbstractBlock.Settings.of(Material.SOLID_ORGANIC).breakInstantly().mapColor(MapColor.CYAN).strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS);
+        final AbstractBlock.Settings GRASS_BLOCKS = AbstractBlock.Settings.of(Material.SOLID_ORGANIC).mapColor(MapColor.CYAN).strength(0.4f).ticksRandomly().sounds(BlockSoundGroup.GRASS);
         AETHER_GRASS_BLOCK = register("aether_grass", new AetherGrassBlock(GRASS_BLOCKS), buildingBlock());
 
         // Note that because we're changing the material color (which mutates the `BlockSettings`), we want to
