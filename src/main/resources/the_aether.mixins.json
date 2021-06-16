@@ -15,6 +15,7 @@
     "item.AxeItemMixin",
     "item.HoeItemMixin",
     "item.ItemMixin",
+    "item.ItemGroupMixin",
     "item.ItemStackMixin",
     "item.MapStateMixin",
     "item.ShovelItemMixin",
