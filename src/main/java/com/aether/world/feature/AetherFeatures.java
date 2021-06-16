@@ -2,10 +2,8 @@ package com.aether.world.feature;
 
 import com.aether.Aether;
 import com.aether.world.gen.decorator.CrystalTreeIslandDecorator;
-import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
@@ -32,11 +30,12 @@ public class AetherFeatures {
         //register("skyroot_tower", new SkyrootTowerFeature(DefaultFeatureConfig.CODEC));
     }
 
+    // TODO: Migrate to how mojang does it (Stubbed until 1.17 rewrite)
     private static <T extends FeatureConfig> void register(String id, StructureFeature<T> structure) {
-        FabricStructureBuilder.create(Aether.locate(id), structure)
-                .step(GenerationStep.Feature.SURFACE_STRUCTURES)
-                .defaultConfig(10, 1, 0)
-                .register();
+//        FabricStructureBuilder.create(Aether.locate(id), structure)
+//                .step(GenerationStep.Feature.SURFACE_STRUCTURES)
+//                .defaultConfig(10, 1, 0)
+//                .register();
     }
 
     static StructurePieceType register(StructurePieceType pieceType, String id) {
