@@ -4,7 +4,6 @@ import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.FloatingBlock;
 import com.aether.entities.AetherEntityTypes;
-import com.aether.entities.AetherNonLivingEntity;
 import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -39,7 +38,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class FloatingBlockEntity extends AetherNonLivingEntity {
+public class FloatingBlockEntity extends Entity {
     protected static final TrackedData<BlockPos> ORIGIN = DataTracker.registerData(FloatingBlockEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     public int floatTime;
     public boolean dropItem = true;
