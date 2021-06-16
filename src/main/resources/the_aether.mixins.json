@@ -38,7 +38,8 @@
     "client.render.BlockColorsMixin",
     "client.render.BlockStateModelGeneratorMixin",
     "client.render.ItemColorsMixin",
-    "client.render.MinecraftClientMixin"
+    "client.render.MinecraftClientMixin",
+    "client.render.ParticleManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
