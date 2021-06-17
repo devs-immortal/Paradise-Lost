@@ -196,8 +196,8 @@ public class FloatingBlockEntity extends Entity {
                 }
 
                 if ((!this.verticalCollision || this.onGround) && !shouldSolidify) {
-                    if (!this.world.isClient && (this.floatTime > 100 && (blockPos.getY() < 1 || blockPos.getY() > this.world.getHeight()) || this.floatTime > 600)) {
-                        if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS) && blockPos.getY() <= this.world.getHeight()) {
+                    if (!this.world.isClient && (this.floatTime > 100 && (blockPos.getY() < this.world.getBottomY() || blockPos.getY() > this.world.getTopY()) || this.floatTime > 600)) {
+                        if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS) && blockPos.getY() <= this.world.getTopY()) {
                             this.dropItem(block);
                         }
                         this.discard();
