@@ -33,7 +33,7 @@ public interface IAetherTool {
                 }
 
                 if (!world.isClient()) {
-                    FloatingBlockEntity entity = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, state);
+                    FloatingBlockEntity entity = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
                     entity.floatTime = 0;
                     world.spawnEntity(entity);
                 }
