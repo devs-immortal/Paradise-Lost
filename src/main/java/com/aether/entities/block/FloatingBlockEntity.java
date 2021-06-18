@@ -116,12 +116,6 @@ public class FloatingBlockEntity extends Entity {
         this.setPosition(getX(), getY(), getZ());
     }
 
-    // TODO: Stubbed. Pending 1.17 rewrite.
-//    @Override
-//    public boolean canClimb() {
-//        return false;
-//    }
-
     @Override
     protected void initDataTracker() {
         this.dataTracker.startTracking(ORIGIN, BlockPos.ORIGIN);

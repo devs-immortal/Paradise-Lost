@@ -27,6 +27,10 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
         super(type, world);
     }
 
+    public SaddleMountEntity(World world) {
+        super(world);
+    }
+
     @Override
     public Entity getPrimaryPassenger() {
         return this.getPassengerList().isEmpty() ? null : this.getPassengerList().get(0);
