@@ -217,7 +217,8 @@ public class FloatingBlockEntity extends Entity {
                 }
             }
 
-            if (this.isDropping() && this.isOnGround()) {
+            System.out.println(this.getVelocity().getY());
+            if ((this.isDropping() || this.getVelocity().getY() == 0) && this.isOnGround()) {
                 this.land();
             }
 
