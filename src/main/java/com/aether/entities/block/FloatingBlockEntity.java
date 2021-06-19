@@ -15,6 +15,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -50,6 +51,7 @@ public class FloatingBlockEntity extends Entity {
     private float floatHurtAmount = 2.0f;
     private Supplier<Boolean> dropState = () -> false;
     private boolean dropping = false;
+    private boolean collides;
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -86,10 +88,12 @@ public class FloatingBlockEntity extends Entity {
         if (dataTracker == null || floatTile == null) {
             super.setPosition(x, y, z);
         } else {
+            collides = true;
             BlockPos origin = dataTracker.get(ORIGIN);
             VoxelShape colShape = floatTile.getCollisionShape(world, origin);
             if (colShape.isEmpty()) {
                 colShape = floatTile.getOutlineShape(world, origin);
+                collides = false;
             }
             if (colShape.isEmpty()) {
                 super.setPosition(x, y, z);
@@ -123,7 +127,7 @@ public class FloatingBlockEntity extends Entity {
 
     @Override
     public boolean collides() {
-        return !this.isRemoved();
+        return !this.isRemoved() && collides;
     }
 
     @Override
@@ -175,14 +179,13 @@ public class FloatingBlockEntity extends Entity {
 
             // Take flight, my child!
             if (!FallingBlock.canFallThrough(this.floatTile)) {
-                Box newBox = getBoundingBox();
-                List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(newBox));
+                List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox());
                 for (Entity entity : otherEntities) {
-                    if (!(entity instanceof FloatingBlockEntity) && !entity.noClip) {
-                        if (entity.getY() < newBox.maxY) {
-                            entity.setPosition(entity.getPos().x, newBox.maxY, entity.getPos().z);
-                        }
+                    if (!(entity instanceof FloatingBlockEntity) && !entity.noClip && this.collides()) {
+                        entity.setPosition(entity.getPos().x, getBoundingBox().maxY, entity.getPos().z);
+                        entity.fallDistance = 0F;
                     }
+                    this.floatTile.getBlock().onEntityCollision(floatTile, world, this.getBlockPos(), entity);
                 }
             }
 
