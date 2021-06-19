@@ -33,6 +33,6 @@
     "minecraft:black_concrete_powder",
     "minecraft:soul_soil",
     "minecraft:rooted_dirt",
-    "#the_aether:aether_shovelables"
+    "#the_aether:mineable_by_shovel"
   ]
 }

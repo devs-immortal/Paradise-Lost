@@ -20,6 +20,6 @@
     "minecraft:sculk_sensor",
     "minecraft:moss_block",
     "minecraft:moss_carpet",
-    "#the_aether:aether_leaves"
+    "#the_aether:mineable_by_hoe"
   ]
 }
