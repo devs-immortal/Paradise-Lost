@@ -1,4 +1,10 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "the_aether:ancient_flower",
+    "the_aether:ataraxia",
+    "the_aether:cloudsbluff",
+    "the_aether:drigean",
+    "the_aether:luminar"
+  ]
 }
