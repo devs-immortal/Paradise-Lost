@@ -18,7 +18,7 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.AERBUNNY, AerbunnyRenderer::new);
         //register(AetherEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
         register(AetherEntityTypes.PHYG, PhygRenderer::new);
-        //register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);
+        register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);
 
         register(AetherEntityTypes.ENCHANTED_DART, DartRenderer::new);
         register(AetherEntityTypes.GOLDEN_DART, DartRenderer::new);
@@ -28,7 +28,7 @@ public class AetherEntityRenderers {
 
 
         //entityRenderMap.put(EntityMiniCloud.class, new MiniCloudRenderer(renderManager));
-       //register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
+        register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
         //entityRenderMap.put(EntityWhirlwind.class, new WhirlwindRenderer(renderManager));
         //entityRenderMap.put(EntityPhoenixArrow.class, new PhoenixArrowRenderer(renderManager));
         register(AetherEntityTypes.BLUE_SWET, SwetRenderer::new);

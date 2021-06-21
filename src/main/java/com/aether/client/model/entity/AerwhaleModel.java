@@ -40,7 +40,7 @@ public class AerwhaleModel extends EntityModel<AerwhaleEntity> {
         modelPartData1.addChild("l_fin", ModelPartBuilder.create().uv(72,48).cuboid(0.0F, -2.0F, 0.0F, 12.0F, 3.0F, 6.0F), ModelTransform.pivot(10.5F,-2.0F,-13.0F));
         modelPartData1.addChild("r_fin", ModelPartBuilder.create().uv(72,57).cuboid(0.0F, -2.0F, -6.0F, 12.0F, 3.0F, 6.0F), ModelTransform.of(-10.5F,-2.0F,-12.0F,0.0F,3.1416F,0.0F));
 
-        return TexturedModelData.of(modelData,192,192);
+        return TexturedModelData.of(modelData,192,96);
     }
 
     final float pi = 3.1415927F;

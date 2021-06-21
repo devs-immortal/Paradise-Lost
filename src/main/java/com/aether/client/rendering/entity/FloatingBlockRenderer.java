@@ -20,8 +20,8 @@ import java.util.Random;
 
 public class FloatingBlockRenderer extends EntityRenderer<FloatingBlockEntity> {
 
-    public FloatingBlockRenderer(EntityRendererFactory.Context renderManagerIn) {
-        super(renderManagerIn);
+    public FloatingBlockRenderer(EntityRendererFactory.Context renderManager) {
+        super(renderManager);
         this.shadowRadius = 0.5F;
     }
 
