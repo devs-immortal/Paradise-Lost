@@ -3,6 +3,7 @@ package com.aether.client.rendering.entity.layer;
 import com.aether.Aether;
 import com.aether.client.model.entity.AerbunnyModel;
 import com.aether.client.model.entity.AerwhaleModel;
+import com.aether.client.model.entity.MoaModel;
 import com.google.common.collect.Maps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,6 +20,7 @@ public class AetherModelLayers {
 
     public static final EntityModelLayer AERBUNNY = register("aerbunny", "main", AerbunnyModel.getTexturedModelData());
     public static final EntityModelLayer AERWHALE = register("aerwhale", "main", AerwhaleModel.getTexturedModelData());
+    public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
 
     public static EntityModelLayer register(Identifier id, String layer, TexturedModelData data) {
         EntityModelLayer entityModelLayer = new EntityModelLayer(id, layer);

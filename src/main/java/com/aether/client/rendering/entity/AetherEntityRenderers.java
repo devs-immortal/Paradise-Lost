@@ -11,7 +11,7 @@ import net.minecraft.entity.EntityType;
 @Environment(EnvType.CLIENT)
 public class AetherEntityRenderers {
     public static void initClient() {
-        //register(AetherEntityTypes.MOA, MoaRenderer::new);
+        register(AetherEntityTypes.MOA, MoaRenderer::new);
         register(AetherEntityTypes.FLOATING_BLOCK, FloatingBlockRenderer::new);
         //register(AetherEntityTypes.FLYING_COW, FlyingCowRenderer::new);
         //register(AetherEntityTypes.SHEEPUFF, SheepuffRenderer::new);
