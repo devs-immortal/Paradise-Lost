@@ -24,11 +24,10 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.GOLDEN_DART, DartRenderer::new);
         register(AetherEntityTypes.POISON_DART, DartRenderer::new);
         register(AetherEntityTypes.POISON_NEEDLE, DartRenderer::new);
-        //register(AetherEntityTypes.AERWHALE, AerwhaleRenderer::new);
+        register(AetherEntityTypes.AERWHALE, AerwhaleRenderer::new);
 
 
         //entityRenderMap.put(EntityMiniCloud.class, new MiniCloudRenderer(renderManager));
-        //entityRenderMap.put(EntityAerwhale.class, new AerwhaleRenderer(renderManager));
        //register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
         //entityRenderMap.put(EntityWhirlwind.class, new WhirlwindRenderer(renderManager));
         //entityRenderMap.put(EntityPhoenixArrow.class, new PhoenixArrowRenderer(renderManager));
