@@ -15,7 +15,7 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.FLOATING_BLOCK, FloatingBlockRenderer::new);
         //register(AetherEntityTypes.FLYING_COW, FlyingCowRenderer::new);
         //register(AetherEntityTypes.SHEEPUFF, SheepuffRenderer::new);
-        //register(AetherEntityTypes.AERBUNNY, AerbunnyRenderer::new);
+        register(AetherEntityTypes.AERBUNNY, AerbunnyRenderer::new);
         //register(AetherEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
         register(AetherEntityTypes.PHYG, PhygRenderer::new);
         //register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);

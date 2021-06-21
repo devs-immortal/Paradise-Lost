@@ -12,3 +12,5 @@ accessible    method    net/minecraft/particle/DefaultParticleType              
 accessible    field     net/minecraft/entity/attribute/DefaultAttributeRegistry     DEFAULT_ATTRIBUTE_REGISTRY   Ljava/util/Map;
 accessible    field     net/minecraft/client/render/RenderLayers                    BLOCKS                       Ljava/util/Map;
 accessible    field     net/minecraft/client/render/RenderLayers                    FLUIDS                       Ljava/util/Map;
+accessible    field     net/minecraft/client/render/entity/model/EntityModelLayers  LAYERS                       Ljava/util/Set;
+mutable       field     net/minecraft/client/render/entity/model/EntityModelLayers  LAYERS                       Ljava/util/Set;
