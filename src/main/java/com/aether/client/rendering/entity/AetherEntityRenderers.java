@@ -37,7 +37,7 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.GOLDEN_SWET, SwetRenderer::new);
     }
 
-    private static void register(EntityType<? extends Entity> clazz, EntityRendererFactory factory) {
+    private static <T extends Entity> void register(EntityType<? extends T> clazz, EntityRendererFactory<T> factory) {
         EntityRenderers.register(clazz, factory);
     }
 }
