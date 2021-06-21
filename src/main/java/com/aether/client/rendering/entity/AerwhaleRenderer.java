@@ -4,7 +4,6 @@ import com.aether.Aether;
 import com.aether.client.model.entity.AerwhaleModel;
 import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.entities.passive.AerwhaleEntity;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;

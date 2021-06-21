@@ -4,15 +4,11 @@ import com.aether.Aether;
 import com.aether.client.model.entity.ChestMimicModel;
 import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.entities.hostile.ChestMimicEntity;
-import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-
-import java.util.Calendar;
 
 public class ChestMimicRenderer extends MobEntityRenderer<ChestMimicEntity, ChestMimicModel> {
 

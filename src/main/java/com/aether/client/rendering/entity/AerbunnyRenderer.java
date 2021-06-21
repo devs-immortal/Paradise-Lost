@@ -4,10 +4,8 @@ import com.aether.Aether;
 import com.aether.client.model.entity.AerbunnyModel;
 import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.entities.passive.AerbunnyEntity;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
