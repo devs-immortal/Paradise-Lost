@@ -179,11 +179,11 @@ public class FloatingBlockEntity extends Entity {
 
             // Take flight, my child!
             if (!FallingBlock.canFallThrough(this.floatTile)) {
-                List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox());
+                List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0,1 + -2 * this.getVelocity().getY(),0)));
                 for (Entity entity : otherEntities) {
                     if (!(entity instanceof FloatingBlockEntity) && !entity.noClip && this.collides()) {
-                        entity.setPosition(entity.getPos().x, getBoundingBox().maxY, entity.getPos().z);
                         entity.fallDistance = 0F;
+                        entity.setPosition(entity.getPos().x, getBoundingBox().maxY, entity.getPos().z);
                     }
                     this.floatTile.getBlock().onEntityCollision(floatTile, world, this.getBlockPos(), entity);
                 }
