@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Mixin(EntityModels.class)
 public class EntityModelsMixin {
-    @Inject(method = "getModels", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;build()Lcom/google/common/collect/ImmutableMap;"), locals = LocalCapture.CAPTURE_FAILEXCEPTION, remap = false)
+    @Inject(method = "getModels", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;build()Lcom/google/common/collect/ImmutableMap;"), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private static void registerExtraModelData(CallbackInfoReturnable<Map<EntityModelLayer, TexturedModelData>> info, ImmutableMap.Builder<EntityModelLayer, TexturedModelData> builder) {
         for (Map.Entry<EntityModelLayer, TexturedModelData> entry : AetherModelLayers.ENTRIES.entrySet()) {
             builder.put(entry.getKey(), entry.getValue());
