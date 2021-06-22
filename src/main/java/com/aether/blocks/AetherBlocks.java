@@ -289,7 +289,7 @@ public class AetherBlocks {
         ANGELIC_STAIRS = register("angelic_stairs", new StairsBlock(ANGELIC_STONE.getDefaultState(), AbstractBlock.Settings.copy(ANGELIC_STONE)), buildingBlock());
 //        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(BlockBehaviour.Properties.of(Material.STONE).hardness(-1.0f).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
         ANGELIC_WALL = register("angelic_wall", new WallBlock(AbstractBlock.Settings.copy(ANGELIC_STONE)), buildingBlock());
-        BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(AetherBlocks::canSpawnOnLeaves).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never).noCollision()), buildingBlock());
+        BLUEBERRY_BUSH = register("blueberry_bush", new BlueberryBushBlock(AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(AetherBlocks::canSpawnOnLeaves).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never).noCollision()));
 //        BLACK_DYED_AERCLOUD = register("black_dyed_aercloud", null);
 //        BLUE_DYED_AERCLOUD = register("blue_dyed_aercloud", null);
 //        BROWN_DYED_AERCLOUD = register("brown_dyed_aercloud", null);
