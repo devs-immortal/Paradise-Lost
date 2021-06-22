@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:wooden_doors",
+    "minecraft:iron_door",
+    "#the_aether:aether_doors"
+  ]
+}
