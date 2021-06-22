@@ -28,6 +28,7 @@ import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.OptionalInt;
 
+@SuppressWarnings("unchecked")
 public class AetherConfiguredFeatures {
 
     public static Feature<SingleStateFeatureConfig> BOULDER;
