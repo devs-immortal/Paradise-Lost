@@ -272,7 +272,7 @@ public class AetherBlocks {
         HOLYSTONE = register("holystone", new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.GRAY).requiresTool().strength(0.5f, 10.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
         COBBLED_HOLYSTONE = register("cobbled_holystone", new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.GRAY).requiresTool().strength(0.4f, 8.0f).sounds(BlockSoundGroup.STONE)), buildingBlock());
         HOLYSTONE_BRICK = register("holystone_brick", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(1.5F, 6.0F).mapColor(MapColor.WHITE)), buildingBlock());
-        MOSSY_HOLYSTONE = register("mossy_holystone", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(2.0F, 6.0F).mapColor(MapColor.WHITE)), buildingBlock());
+        MOSSY_HOLYSTONE = register("mossy_holystone", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(0.4F, 8.0F).mapColor(MapColor.WHITE)), buildingBlock());
         GOLDEN_MOSSY_HOLYSTONE = register("golden_mossy_holystone", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(2.0F, 6.0F).mapColor(MapColor.WHITE)), buildingBlock());
         ZANITE_ORE = register("zanite_ore", new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.0F, 3.0F), UniformIntProvider.create(0, 2)), buildingBlock());
         AEROGEL = register("aerogel", new Block(AbstractBlock.Settings.of(Material.SOIL).strength(1.0f, 2000.0f).sounds(BlockSoundGroup.GLASS).solidBlock(AetherBlocks::never).nonOpaque()), buildingBlock());
