@@ -377,8 +377,8 @@ public class AetherBlocks {
 //        PURPLE_DYED_AERCLOUD = register("purple_dyed_aercloud", null);
 //        PURPLE_FLOWER = register("purple_flower", null);
         QUICKSOIL = register("quicksoil", new Block(AbstractBlock.Settings.of(Material.AGGREGATE).strength(0.5f, -1.0f).slipperiness(1.0F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)), buildingBlock());
-        QUICKSOIL_GLASS = register("quicksoil_glass", new GlassBlock(AbstractBlock.Settings.of(Material.GLASS).luminance(state -> 14).strength(0.2f, -1.0f).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
-        QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new QuicksoilGlassPaneBlock(), buildingBlock());
+        QUICKSOIL_GLASS = register("quicksoil_glass", new GlassBlock(AbstractBlock.Settings.of(Material.GLASS).luminance(state -> 14).strength(0.2f, -1.0f).slipperiness(1.0F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
+        QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new PaneBlock(AbstractBlock.Settings.of(Material.GLASS).luminance(state -> 14).strength(0.2F, -1.0F).slipperiness(1.0F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
 //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
         FLUTEGRASS = register("flutegrass", new AetherBrushBlock(GRASS.mapColor(MapColor.GOLD), ImmutableSet.of(QUICKSOIL), true), buildingBlock());
         final AbstractBlock.Settings SENTRY_STONES = AbstractBlock.Settings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE);
