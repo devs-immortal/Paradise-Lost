@@ -152,7 +152,7 @@ public class AetherItems {
 
         // Food
         AetherItemSettings LOOT_FOOD = new AetherItemSettings().group(AetherItemGroups.Food).rarity(AetherItems.AETHER_LOOT);
-        BLUEBERRY = register("blue_berry", new BlockItem(AetherBlocks.BLUEBERRY_BUSH, new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
+        BLUEBERRY = register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
         ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
         WHITE_APPLE = register("white_apple", new WhiteApple(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.WHITE_APPLE)));
         BLUE_GUMMY_SWET = register("blue_gummy_swet", new GummySwet(LOOT_FOOD));
