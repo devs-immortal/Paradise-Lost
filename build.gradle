@@ -11,7 +11,7 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.8.17'
+    id 'fabric-loom' version '0.9-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "1.2.1"
 }
@@ -87,7 +87,7 @@ minecraft {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:1.17+build.10:v2"
+    mappings "net.fabricmc:yarn:1.17+build.13:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Libraries
@@ -102,8 +102,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
     // Testing only, do not JiJ
-    modImplementation "com.terraformersmc:modmenu:2.0.0-beta.7"
-    modRuntime "me.shedaniel:RoughlyEnoughItems-fabric:6.0.250-alpha"
+    modImplementation "com.terraformersmc:modmenu:2.0.2"
+    modRuntime "me.shedaniel:RoughlyEnoughItems-fabric:6.0.257-alpha"
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
