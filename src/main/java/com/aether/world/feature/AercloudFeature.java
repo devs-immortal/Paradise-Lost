@@ -32,7 +32,7 @@ public class AercloudFeature extends Feature<AercloudConfig> {
         if (context.getConfig().getGenType() == DynamicConfiguration.GeneratorType.LEGACY) {
             return createLegacyBlob(context.getWorld(), context.getRandom(), context.getConfig().state, context.getOrigin());
         } else {
-            return (createCloudBlob(context.getWorld(), context.getConfig().state, context.getRandom(), context.getOrigin(), 3, 10) || createCloudBlob(context.getWorld(), context.getConfig().state, context.getRandom(), context.getOrigin().north(3).east(), 3, 8));
+            return (createCloudBlob(context.getWorld(), context.getConfig().state, context.getRandom(), context.getOrigin(), 3, 10, context.getOrigin()) || createCloudBlob(context.getWorld(), context.getConfig().state, context.getRandom(), context.getOrigin().north(3).east(), 3, 8, context.getOrigin()));
         }
     }
 
@@ -74,7 +74,7 @@ public class AercloudFeature extends Feature<AercloudConfig> {
         return true;
     }
 
-    private boolean createCloudBlob(StructureWorldAccess world, BlockState state, Random random, BlockPos center, int sizex, int sizez) {
+    private boolean createCloudBlob(StructureWorldAccess world, BlockState state, Random random, BlockPos center, int sizex, int sizez, BlockPos origin) {
         for (BlockPos blockPos : BlockPos.iterate(center.add(-sizex * 0.3, -sizex * 0.3, -sizez * 0.3), center.add(sizex * 0.3, sizex * 0.3, sizez * 0.3))) {
             if (testElipsoid(sizex, sizex, sizez, blockPos, center) && (!(world.isAir(blockPos) || world.getBlockState(blockPos) == state.getBlock().getDefaultState()))) {
                 return false;
@@ -87,7 +87,8 @@ public class AercloudFeature extends Feature<AercloudConfig> {
                     for (int y = center.getY() - Math.round(stuffsize*0.7f); y <= center.getY() + Math.round(stuffsize*0.7f); y++) {
                         if (!((x == center.getX() - stuffsize || x == center.getX() + stuffsize) && (y == center.getY() - stuffsize + 1 || y == center.getY() + stuffsize - 1))) {
                             if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).isOf(Blocks.AIR)) {
-                                world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
+                                if(origin.isWithinDistance(new BlockPos(x, y, center.getZ() + z), 16))
+                                    world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
                             }
                         }
                     }
@@ -96,7 +97,7 @@ public class AercloudFeature extends Feature<AercloudConfig> {
             center = center.down((random.nextInt(1)+1)*randomSign(random));
             center = center.east((random.nextInt(3)+3)*randomSign(random));
             center = center.north((random.nextInt(3)+3)*randomSign(random));
-            createCloudBlob(world, state, random, center, sizex-random.nextInt(1), sizez-random.nextInt(1)-1);
+            createCloudBlob(world, state, random, center, sizex-random.nextInt(1), sizez-random.nextInt(1)-1, origin);
         }
 
         return true;

@@ -150,7 +150,8 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
 
         for (int[] pos : positions) {
             mut.set(pos[0], pos[1], pos[2]);
-            this.setBlockState(context.getWorld(), mut, context.getConfig().state);
+            if (startPos.isWithinDistance(mut, 16))
+                this.setBlockState(context.getWorld(), mut, context.getConfig().state);
         }
 
         return true;
