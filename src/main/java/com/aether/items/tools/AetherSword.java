@@ -1,11 +1,11 @@
-package com.aether.items.weapons;
+package com.aether.items.tools;
 
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 
-public class AetherSword extends SwordItem {
+public class AetherSword extends SwordItem implements IAetherTool {
     private final AetherTiers material;
 
     public AetherSword(AetherTiers material, float attackSpeed, int damageVsEntity, Settings settings) {
@@ -20,7 +20,8 @@ public class AetherSword extends SwordItem {
         return original;
     }
 
-    private float calculateIncrease(ItemStack tool) {
-        return (float) tool.getMaxDamage() / tool.getDamage() / 50;
+    @Override
+    public AetherTiers getTier() {
+        return this.material;
     }
 }

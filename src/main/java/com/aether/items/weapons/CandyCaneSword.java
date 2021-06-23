@@ -1,6 +1,7 @@
 package com.aether.items.weapons;
 
 import com.aether.items.AetherItems;
+import com.aether.items.tools.AetherSword;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -29,11 +29,6 @@ public class AetherPickaxe extends PickaxeItem implements IAetherTool {
         return IAetherTool.super.useOnBlock(context, defaultResult);
     }
 
-    private float calculateIncrease(ItemStack tool) {
-        return (float) tool.getMaxDamage() / tool.getDamage() / 50;
-    }
-
-
     @Override
     public AetherTiers getTier() {
         return this.material;

@@ -28,10 +28,6 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
         return original;
     }
 
-    private float calculateIncrease(ItemStack tool) {
-        return (float) tool.getMaxDamage() / tool.getDamage() / 50;
-    }
-
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         ActionResult defaultResult = super.useOnBlock(context);

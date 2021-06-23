@@ -49,6 +49,10 @@ public interface IAetherTool {
         return defaultResult != null ? defaultResult : defaultItemUse(context);
     }
 
+    default float calculateIncrease(ItemStack tool) {
+        return (float) tool.getMaxDamage() / tool.getDamage() / 50;
+    }
+
     default ActionResult defaultItemUse(ItemUsageContext context) {
         return ActionResult.SUCCESS;
     }
