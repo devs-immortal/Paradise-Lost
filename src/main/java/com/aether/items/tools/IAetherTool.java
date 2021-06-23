@@ -50,7 +50,7 @@ public interface IAetherTool {
     }
 
     default float calculateIncrease(ItemStack tool) {
-        return (float) tool.getMaxDamage() / tool.getDamage() / 50;
+        return ((float) tool.getMaxDamage()) / ((float) tool.getDamage()) / 50.0F;
     }
 
     default ActionResult defaultItemUse(ItemUsageContext context) {
