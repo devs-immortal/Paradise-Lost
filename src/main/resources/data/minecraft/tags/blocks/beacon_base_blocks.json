@@ -6,6 +6,6 @@
     "minecraft:diamond_block",
     "minecraft:gold_block",
     "minecraft:iron_block",
-    "the_aether:zanite_block"
+    "#the_aether:aether_ore_blocks"
   ]
 }

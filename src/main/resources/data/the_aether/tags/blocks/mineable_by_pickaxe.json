@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#the_aether:aether_ores",
+    "#the_aether:aether_ore_blocks",
     "the_aether:holystone",
     "the_aether:cobbled_holystone",
     "the_aether:holystone_brick",
@@ -10,6 +11,7 @@
     "the_aether:holystone_brick_slab",
     "the_aether:holystone_stairs",
     "the_aether:ambrosium_lantern",
-    "the_aether:zanite_chain"
+    "the_aether:zanite_chain",
+    "the_aether:gravitite_levitator"
   ]
 }
