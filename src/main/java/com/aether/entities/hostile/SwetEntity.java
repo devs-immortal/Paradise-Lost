@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 
 public class SwetEntity extends SlimeEntity {
     public int stuckCooldown = 0;
@@ -44,7 +45,7 @@ public class SwetEntity extends SlimeEntity {
     }
 
     @Override
-    public void tick(){
+    public void tick() {
         if(stuckCooldown >= 0) {
             --stuckCooldown;
         }
@@ -65,6 +66,23 @@ public class SwetEntity extends SlimeEntity {
             stuckCooldown = 30;
         }
         super.removePassenger(passenger);
+    }
+
+    // Prevents the size from being changed
+    @Override
+    protected void setSize(int size, boolean heal) {
+        if (heal) {
+            this.setHealth(this.getMaxHealth());
+        }
+    }
+
+    // Prevents duplicate entities
+    @Override
+    public void remove(RemovalReason reason) {
+        this.setRemoved(reason);
+        if (reason == Entity.RemovalReason.KILLED) {
+            this.emitGameEvent(GameEvent.ENTITY_KILLED);
+        }
     }
 
     @Override
