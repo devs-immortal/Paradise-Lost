@@ -14,17 +14,17 @@ import net.minecraft.world.World;
 public class SwetEntity extends SlimeEntity {
     public int stuckCooldown = 0;
 
-    public SwetEntity(World world){
+    public SwetEntity(World world) {
         super(AetherEntityTypes.BLUE_SWET, world);
         init();
     }
 
-    public SwetEntity(EntityType<? extends SwetEntity> entityType, World world){
+    public SwetEntity(EntityType<? extends SwetEntity> entityType, World world) {
         super(entityType, world);
         init();
     }
 
-    protected void init(){
+    protected void init() {
         if (this instanceof GoldenSwetEntity) {
             super.setSize(4, false);
         } else {
@@ -45,14 +45,14 @@ public class SwetEntity extends SlimeEntity {
 
     @Override
     public void tick(){
-        if(stuckCooldown >= 0){
+        if(stuckCooldown >= 0) {
             --stuckCooldown;
         }
         super.tick();
     }
 
     @Override
-    public void onPlayerCollision(PlayerEntity player){
+    public void onPlayerCollision(PlayerEntity player) {
         if (player.getVehicle() == null && stuckCooldown <= 0) {
             player.startRiding(this, true);
         } else {
@@ -65,14 +65,6 @@ public class SwetEntity extends SlimeEntity {
             stuckCooldown = 30;
         }
         super.removePassenger(passenger);
-    }
-
-    // Prevents the size from being changed
-    @Override
-    protected void setSize(int size, boolean heal){
-        if (heal) {
-            this.setHealth(this.getMaxHealth());
-        }
     }
 
     @Override
