@@ -183,6 +183,7 @@ public class FloatingBlockEntity extends Entity {
                     if (!(entity instanceof FloatingBlockEntity) && !entity.noClip && this.collides()) {
                         entity.fallDistance = 0F;
                         entity.setPosition(entity.getPos().x, getBoundingBox().maxY, entity.getPos().z);
+                        entity.setOnGround(true);
                     }
                     this.floatTile.getBlock().onEntityCollision(floatTile, world, this.getBlockPos(), entity);
                 }
