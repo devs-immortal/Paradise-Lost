@@ -20,7 +20,7 @@
       "conditions": {
         "items": [
           {
-            "item": "the_aether:golden_oak_planks"
+            "items": ["the_aether:golden_oak_planks"]
           }
         ]
       }
