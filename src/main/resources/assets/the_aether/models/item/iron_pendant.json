@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "the_aether:item/accessories/iron_pendant"
+  }
+}

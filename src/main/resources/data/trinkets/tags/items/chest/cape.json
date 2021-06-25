@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:white_cape",
+    "the_aether:red_cape",
+    "the_aether:blue_cape",
+    "the_aether:yellow_cape",
+    "the_aether:swet_cape",
+    "the_aether:agility_cape",
+    "the_aether:invisibility_cape"
+  ]
+}

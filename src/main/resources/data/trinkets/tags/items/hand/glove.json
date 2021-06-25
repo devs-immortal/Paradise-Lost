@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:leather_gloves",
+    "the_aether:iron_gloves",
+    "the_aether:golden_gloves",
+    "the_aether:chain_gloves",
+    "the_aether:diamond_gloves",
+    "the_aether:zanite_gloves",
+    "the_aether:gravitite_gloves",
+    "the_aether:neptune_gloves",
+    "the_aether:phoenix_gloves",
+    "the_aether:obsidian_gloves",
+    "the_aether:valkyrie_gloves"
+  ]
+}
