@@ -10,6 +10,7 @@
     "block.PlantBlockMixin",
     "entity.CowEntityMixin",
     "entity.EntityMixin",
+    "entity.MixinAbstractFurnaceBlockEntity",
     "entity.MixinLivingEntity",
     "entity.PlayerEntityMixin",
     "item.AxeItemMixin",
