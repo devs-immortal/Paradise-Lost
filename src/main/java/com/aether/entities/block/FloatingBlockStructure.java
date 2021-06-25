@@ -24,6 +24,9 @@ public class FloatingBlockStructure {
     public void spawn(World world){
         blockInfos.forEach(blockInfo -> {
             blockInfo.block.markPartOfStructure();
+            if(!blockInfo.equals(blockInfos.get(0))){
+                blockInfo.block.dropItem = false;
+            }
             blockInfo.block.floatTime = 0;
             world.spawnEntity(blockInfo.block);
         });
