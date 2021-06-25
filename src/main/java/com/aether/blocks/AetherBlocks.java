@@ -495,8 +495,6 @@ public class AetherBlocks {
         CLOUDSBLUFF = register("cloudsbluff", new FlowerBlock(StatusEffects.SLOW_FALLING, 6, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
         DRIGEAN = register("drigean", new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 8, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
         LUMINAR = register("luminar", new FlowerBlock(StatusEffects.GLOWING, 9, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
-
-
     }
 
     static {
@@ -555,6 +553,19 @@ public class AetherBlocks {
                 LAVENDER_WISTERIA_HANGER
         }) {
             registerFlammable(block, 60, 30);
+            ComposterBlock.registerCompostableItem(0.3F, block);
+        }
+        // Saplings
+        for (Block block : new Block[]{
+                SKYROOT_SAPLING,
+                GOLDEN_OAK_SAPLING,
+                CRYSTAL_SAPLING,
+                ROSE_WISTERIA_SAPLING,
+                FROST_WISTERIA_SAPLING,
+                LAVENDER_WISTERIA_SAPLING,
+                BOREAL_WISTERIA_SAPLING
+        }) {
+            ComposterBlock.registerCompostableItem(0.3F, block);
         }
         // Grass
         for (Block block : new Block[]{
@@ -566,10 +577,20 @@ public class AetherBlocks {
                 BLUEBERRY_BUSH
         }) {
             registerFlammable(block, 100, 60);
+            ComposterBlock.registerCompostableItem(0.5F, block);
+        }
+        // Flowers
+        for (Block block : new Block[]{
+                ANCIENT_FLOWER,
+                ATARAXIA,
+                CLOUDSBLUFF,
+                DRIGEAN,
+                LUMINAR
+        }) {
+            ComposterBlock.registerCompostableItem(0.65F, block);
         }
         // Misc
         registerFlammable(SKYROOT_BOOKSHELF, 20, 30);
-
     }
 
     private static Item.Settings buildingBlock() {
