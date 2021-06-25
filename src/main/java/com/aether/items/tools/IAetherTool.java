@@ -1,7 +1,7 @@
 package com.aether.items.tools;
 
-import com.aether.entities.block.FloatingBlockStructure;
 import com.aether.entities.block.FloatingBlockEntity;
+import com.aether.entities.block.FloatingBlockStructure;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
