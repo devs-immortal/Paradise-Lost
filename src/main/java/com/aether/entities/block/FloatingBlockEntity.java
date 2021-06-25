@@ -57,7 +57,7 @@ public class FloatingBlockEntity extends Entity {
         super(entityTypeIn, worldIn);
         setDropState(() -> {
             int distFromTop = worldIn.getTopY() - this.getBlockPos().getY();
-            return distFromTop <= 50;
+            return !this.isFastFloater() && distFromTop <= 50;
         });
     }
 
@@ -165,17 +165,16 @@ public class FloatingBlockEntity extends Entity {
                 }
             }
 
-            boolean isFastFloater = (this.floatTile.getBlock() == AetherBlocks.GRAVITITE_ORE || this.floatTile.getBlock() == AetherBlocks.GRAVITITE_LEVITATOR || this.floatTile.getBlock() == AetherBlocks.BLOCK_OF_GRAVITITE);
             if (!this.hasNoGravity()) {
-                if (isFastFloater) {
-                    this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
-                } else {
-                    if (!isDropping() && !shouldBeginDropping()) {
-                        this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
+                if (!isDropping() && !shouldBeginDropping()) {
+                    if (this.isFastFloater()) {
+                        this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
                     } else {
-                        this.setDropping(true);
-                        this.setVelocity(this.getVelocity().add(0.0D, -0.03D, 0.0D));
+                        this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
                     }
+                } else {
+                    this.setDropping(true);
+                    this.setVelocity(this.getVelocity().add(0.0D, -0.03D, 0.0D));
                 }
             }
 
@@ -231,6 +230,10 @@ public class FloatingBlockEntity extends Entity {
 
             this.setVelocity(this.getVelocity().multiply(0.98D));
         }
+    }
+
+    private boolean isFastFloater() {
+        return (this.floatTile.getBlock() == AetherBlocks.GRAVITITE_ORE || this.floatTile.getBlock() == AetherBlocks.GRAVITITE_LEVITATOR || this.floatTile.getBlock() == AetherBlocks.BLOCK_OF_GRAVITITE);
     }
 
     @Override
