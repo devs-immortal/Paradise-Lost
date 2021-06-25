@@ -23,7 +23,7 @@ public class FloatingBlockStructure {
 
     public void spawn(World world){
         blockInfos.forEach(blockInfo -> {
-            blockInfo.block.markPartOfSet();
+            blockInfo.block.markPartOfStructure();
             blockInfo.block.floatTime = 0;
             world.spawnEntity(blockInfo.block);
         });

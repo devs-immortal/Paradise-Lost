@@ -28,9 +28,9 @@ public class ClientWorldMixin {
                 entity.postTick();
             }
         });
-        FloatingBlockStructure[] sets = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
-        for(FloatingBlockStructure set : sets){
-            set.postTick();
+        FloatingBlockStructure[] structures = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
+        for(FloatingBlockStructure structure : structures){
+            structure.postTick();
         }
     }
 }

@@ -54,8 +54,8 @@ public interface IAetherTool {
                         BlockState upperState = world.getBlockState(pos.up());
                         FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY()+1, pos.getZ() + 0.5, upperState);
                         FloatingBlockEntity lower = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
-                        FloatingBlockStructure combo = new FloatingBlockStructure(lower, upper, Vec3i.ZERO.up());
-                        combo.spawn(world);
+                        FloatingBlockStructure structure = new FloatingBlockStructure(lower, upper, Vec3i.ZERO.up());
+                        structure.spawn(world);
                     } else {
                         FloatingBlockEntity entity = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
                         entity.floatTime = 0;

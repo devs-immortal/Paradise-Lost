@@ -51,7 +51,7 @@ public class FloatingBlockEntity extends Entity {
     private Supplier<Boolean> dropState = () -> false;
     private boolean dropping = false;
     private boolean collides;
-    private boolean partOfSet = false;
+    private boolean partOfStructure = false;
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -120,8 +120,8 @@ public class FloatingBlockEntity extends Entity {
         this.setPosition(getX(), getY(), getZ());
     }
 
-    public void markPartOfSet(){
-        partOfSet = true;
+    public void markPartOfStructure(){
+        partOfStructure = true;
     }
 
     @Override
@@ -159,7 +159,7 @@ public class FloatingBlockEntity extends Entity {
                 BlockPos blockPos = this.getBlockPos();
                 if (this.world.getBlockState(blockPos).isOf(block)) {
                     this.world.removeBlock(blockPos, false);
-                } else if (!this.world.isClient && !partOfSet) {
+                } else if (!this.world.isClient && !partOfStructure) {
                     this.discard();
                     return;
                 }
