@@ -1,6 +1,7 @@
 package com.aether.mixin.server;
 
 import com.aether.Aether;
+import com.aether.entities.block.FloatingBlockStructure;
 import com.aether.entities.block.FloatingBlockEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.EntityList;
@@ -30,6 +31,10 @@ public class ServerWorldMixin {
                     Aether.LOG.error("Started checking null entities in ServerWorldMixin::postEntityTick");
                 }
             });
+            FloatingBlockStructure[] sets = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
+            for(FloatingBlockStructure set : sets){
+                set.postTick();
+            }
         }
     }
 }

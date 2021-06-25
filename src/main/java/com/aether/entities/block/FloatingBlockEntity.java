@@ -51,6 +51,7 @@ public class FloatingBlockEntity extends Entity {
     private Supplier<Boolean> dropState = () -> false;
     private boolean dropping = false;
     private boolean collides;
+    private boolean partOfSet = false;
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -119,6 +120,10 @@ public class FloatingBlockEntity extends Entity {
         this.setPosition(getX(), getY(), getZ());
     }
 
+    public void markPartOfSet(){
+        partOfSet = true;
+    }
+
     @Override
     protected void initDataTracker() {
         this.dataTracker.startTracking(ORIGIN, BlockPos.ORIGIN);
@@ -154,7 +159,7 @@ public class FloatingBlockEntity extends Entity {
                 BlockPos blockPos = this.getBlockPos();
                 if (this.world.getBlockState(blockPos).isOf(block)) {
                     this.world.removeBlock(blockPos, false);
-                } else if (!this.world.isClient) {
+                } else if (!this.world.isClient && !partOfSet) {
                     this.discard();
                     return;
                 }
@@ -353,7 +358,7 @@ public class FloatingBlockEntity extends Entity {
         void postTick();
     }
 
-    private void land() {
+    public void land() {
         BlockPos blockPos = this.getBlockPos();
         Block block = this.floatTile.getBlock();
         BlockState blockState = this.world.getBlockState(blockPos);
