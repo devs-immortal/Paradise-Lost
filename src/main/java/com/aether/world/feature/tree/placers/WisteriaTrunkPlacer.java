@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
@@ -34,26 +35,25 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
     public List<FoliagePlacer.TreeNode> generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, int height, BlockPos startPos, TreeFeatureConfig config) {
         List<FoliagePlacer.TreeNode> nodes = new ArrayList<>();
 
-        // TODO: Revise code for 1.17
-//        for (int i = 0; i < baseHeight; i++) {
-//            getAndSetState(world, random, pos, placedStates, box, config);
-//            pos = pos.up();
-//        }
-//
-//        for (Direction dir : new Direction[] {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}) {
-//            int vOffset = random.nextInt(3) - 1;
-//            int branchSize = 2 + random.nextInt(2);
-//
-//            BlockPos tempPos = pos.down(2);
-//            tempPos = tempPos.up(vOffset);
-//
-//            for(int i = 0; i < branchSize; i++) {
-//                tempPos = tempPos.offset(dir);
-//                if (random.nextBoolean()) tempPos = tempPos.up();
-//                getAndSetState(world, random, tempPos, placedStates, box, config);
-//            }
-//            nodes.add(new FoliagePlacer.TreeNode(tempPos, 0, false));
-//        }
+        for (int i = 0; i < baseHeight; i++) {
+            getAndSetState(world, replacer, random, startPos, config);
+            startPos = startPos.up();
+        }
+
+        for (Direction dir : new Direction[] {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}) {
+            int vOffset = random.nextInt(3) - 1;
+            int branchSize = 2 + random.nextInt(2);
+
+            BlockPos tempPos = startPos.down(2);
+            tempPos = tempPos.up(vOffset);
+
+            for(int i = 0; i < branchSize; i++) {
+                tempPos = tempPos.offset(dir);
+                if (random.nextBoolean()) tempPos = tempPos.up();
+                getAndSetState(world, replacer, random, tempPos, config);
+            }
+            nodes.add(new FoliagePlacer.TreeNode(tempPos, 0, false));
+        }
 
         return nodes;
     }
