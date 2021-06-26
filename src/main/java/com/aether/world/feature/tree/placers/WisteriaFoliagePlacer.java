@@ -16,14 +16,8 @@ import java.util.function.BiConsumer;
 
 public class WisteriaFoliagePlacer extends FoliagePlacer {
 
-    public static final Codec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
-            return fillFoliagePlacerFields(instance).apply(instance, WisteriaFoliagePlacer::new); });
-
-    /*
-    public static final Codec<DarkOakFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
-      return fillFoliagePlacerFields(instance).apply(instance, (BiFunction)(DarkOakFoliagePlacer::new));
-   });
-     */
+    public static final Codec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
+            fillFoliagePlacerFields(instance).apply(instance, WisteriaFoliagePlacer::new));
 
     public WisteriaFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
