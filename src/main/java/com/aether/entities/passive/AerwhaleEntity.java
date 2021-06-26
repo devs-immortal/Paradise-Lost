@@ -83,9 +83,11 @@ public class AerwhaleEntity extends AetherAnimalEntity {
 //                System.out.println("Target was null");
                 return false;
             } else {
+                
                 this.targetX = vec3d.x;
                 this.targetY = vec3d.y;
                 this.targetZ = vec3d.z;
+                if(this.targetY<20){this.targetY=25;}
 //                System.out.println("Target found:"+targetX+", "+targetY+", "+targetZ);
                 return true;
             }
