@@ -6,14 +6,6 @@
       },
       {
         "model": "the_aether:block/holystone_mirrored"
-      },
-      {
-        "model": "the_aether:block/holystone",
-        "y": 180
-      },
-      {
-        "model": "the_aether:block/holystone_mirrored",
-        "y": 180
       }
     ]
   }
