@@ -48,7 +48,7 @@ public class AetherItems {
             VALKYRIE_LANCE;
     public static final Item LEATHER_GLOVES, IRON_GLOVES, GOLDEN_GLOVES, CHAIN_GLOVES, DIAMOND_GLOVES;
     public static final Item ZANITE_GLOVES, GRAVITITE_GLOVES, NEPTUNE_GLOVES, PHOENIX_GLOVES, OBSIDIAN_GLOVES, VALKYRIE_GLOVES;
-    public static final Item IRON_RING, GOLDEN_RING, ZANITE_RING, ICE_RING, IRON_PENDANT, GOLDEN_PENDANT, ZANITE_PENDANT, ICE_PENDANT;
+    public static final Item IRON_RING, GOLDEN_RING, ZANITE_RING, ICE_RING, GOLDEN_PENDANT, ZANITE_PENDANT, ICE_PENDANT;
     public static final Item RED_CAPE, BLUE_CAPE, YELLOW_CAPE, WHITE_CAPE, SWET_CAPE, INVISIBILITY_CAPE, AGILITY_CAPE;
     public static final Item GOLDEN_FEATHER, REGENERATION_STONE, IRON_BUBBLE;
     public static final Item LIFE_SHARD;
@@ -241,7 +241,6 @@ public class AetherItems {
         ZANITE_RING = register("zanite_ring", new ItemAccessory(AccessoryType.RING, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0x711AE8)));
         ICE_RING = register("ice_ring", new ItemAccessory(AccessoryType.RING, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0x95E6E7).rarity(Rarity.RARE)));
 
-        IRON_PENDANT = register("iron_pendant", new ItemAccessory(AccessoryType.PENDANT, new AetherItemSettings()));
         GOLDEN_PENDANT = register("golden_pendant", new ItemAccessory(AccessoryType.PENDANT, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0xEAEE57)));
         ZANITE_PENDANT = register("zanite_pendant", new ItemAccessory(AccessoryType.PENDANT, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0x711AE8)));
         ICE_PENDANT = register("ice_pendant", new ItemAccessory(AccessoryType.PENDANT, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0x95E6E7).rarity(Rarity.RARE)));

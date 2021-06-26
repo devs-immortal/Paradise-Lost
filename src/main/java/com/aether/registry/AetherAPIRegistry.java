@@ -117,7 +117,6 @@ public class AetherAPIRegistry {
         registry.register(new AetherFreezable(Items.LAVA_BUCKET, Blocks.OBSIDIAN, 500));
         registry.register(new AetherFreezable(AetherItems.IRON_RING, AetherItems.ICE_RING, 2500));
         registry.register(new AetherFreezable(AetherItems.GOLDEN_RING, AetherItems.ICE_RING, 2500));
-        registry.register(new AetherFreezable(AetherItems.IRON_PENDANT, AetherItems.ICE_PENDANT, 2500));
         registry.register(new AetherFreezable(AetherItems.GOLDEN_PENDANT, AetherItems.ICE_PENDANT, 2500));
 
         registry.register(new AetherFreezableFuel(AetherBlocks.icestone, 500));
