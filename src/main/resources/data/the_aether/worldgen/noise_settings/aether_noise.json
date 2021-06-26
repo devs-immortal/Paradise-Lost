@@ -10,7 +10,18 @@
   "min_surface_level": 0,
   "disable_mob_generation": false,
   "structures": {
-    "structures": {}
+    "structures": {
+      "the_aether:well": {
+        "spacing": 32,
+        "separation": 8,
+        "salt": 42069
+      },
+      "the_aether:skyroot_tower": {
+        "spacing": 48,
+        "separation": 10,
+        "salt": 123123
+      }
+    }
   },
   "default_block": {
     "Name": "the_aether:holystone"
