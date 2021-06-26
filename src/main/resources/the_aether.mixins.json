@@ -38,6 +38,7 @@
     "client.WorldRendererMixin",
     "client.render.BlockColorsMixin",
     "client.render.BlockStateModelGeneratorMixin",
+    "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
     "client.render.ItemColorsMixin",
     "client.render.MinecraftClientMixin",
