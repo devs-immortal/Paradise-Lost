@@ -4,6 +4,7 @@
     "the_aether:aether_grass_path",
     "the_aether:quicksoil",
     "the_aether:aether_farmland",
-    "#the_aether:aether_dirt_blocks"
+    "#the_aether:aether_dirt_blocks",
+    "#the_aether:aether_aerclouds"
   ]
 }

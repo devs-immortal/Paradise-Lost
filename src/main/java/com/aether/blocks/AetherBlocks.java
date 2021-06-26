@@ -573,8 +573,7 @@ public class AetherBlocks {
                 AETHER_TALL_GRASS,
                 AETHER_FERN,
                 AETHER_BUSH,
-                FLUTEGRASS,
-                BLUEBERRY_BUSH
+                FLUTEGRASS
         }) {
             registerFlammable(block, 100, 60);
             ComposterBlock.registerCompostableItem(0.5F, block);
