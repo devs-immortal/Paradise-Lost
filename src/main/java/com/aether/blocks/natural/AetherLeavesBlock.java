@@ -30,18 +30,6 @@ public class  AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if ((state.isOf(AetherBlocks.GOLDEN_OAK_LEAVES) || state.isOf(AetherBlocks.FROST_WISTERIA_LEAVES) || state.isOf(AetherBlocks.BOREAL_WISTERIA_LEAVES) || state.isOf(AetherBlocks.ROSE_WISTERIA_LEAVES) || state.isOf(AetherBlocks.LAVENDER_WISTERIA_LEAVES))) {
-            if(!(Boolean) state.get(PERSISTENT) && state.get(DISTANCE) >= 13) {
-                dropStacks(state, world, pos);
-                world.removeBlock(pos, false);
-            }
-        }
-        else
-            super.randomTick(state, world, pos, random);
-    }
-
-    @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!collidable && entity instanceof LivingEntity) {
             entity.fallDistance = 0;
