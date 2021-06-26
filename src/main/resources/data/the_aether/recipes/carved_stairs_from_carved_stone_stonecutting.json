@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "the_aether:carved_stone"
+  },
+  "result": "the_aether:carved_stairs",
+  "count": 1
+}

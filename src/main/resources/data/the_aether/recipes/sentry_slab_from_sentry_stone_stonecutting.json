@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "the_aether:sentry_stone"
+  },
+  "result": "the_aether:sentry_slab",
+  "count": 2
+}
