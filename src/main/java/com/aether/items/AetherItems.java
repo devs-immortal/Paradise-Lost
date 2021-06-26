@@ -14,6 +14,7 @@ import com.aether.items.tools.*;
 import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -95,7 +96,7 @@ public class AetherItems {
         HOLYSTONE_HOE = register("holystone_hoe", new AetherHoe(AetherTiers.Holystone, TOOLS, 2));
         */
         ZANITE_SHOVEL = register("zanite_shovel", new AetherShovel(AetherTiers.Zanite, TOOLS, 1.5F, -3.0F));
-        ZANITE_PICKAXE = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.Zanite, TOOLS,  1, -2.8F));
+        ZANITE_PICKAXE = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.Zanite, TOOLS, 1, -2.8F));
         ZANITE_AXE = register("zanite_axe", new AetherAxe(AetherTiers.Zanite, TOOLS, 6.0F, -3.1F));
         ZANITE_SWORD = register("zanite_sword", new AetherSword(AetherTiers.Zanite, -2.4F, 3, WEAPONS));
         ZANITE_HOE = register("zanite_hoe", new AetherHoe(AetherTiers.Zanite, TOOLS, 3));
@@ -254,6 +255,24 @@ public class AetherItems {
         INVISIBILITY_CAPE = register("invisibility_cape", new ItemAccessory(AccessoryType.CAPE, new AetherItemSettings().rarity(AETHER_LOOT)));
 
         AETHER_PORTAL = register("aether_portal", new AetherPortalItem(new Item.Settings().group(AetherItemGroups.Misc)));
+    }
+
+    static {
+
+        for(Item item : new Item[]{
+                BLUEBERRY,
+                GINGERBREAD_MAN,
+                CANDY_CANE
+        }){
+            ComposterBlock.registerCompostableItem(0.3F, item);
+        }
+
+        for(Item item : new Item[]{
+                WHITE_APPLE,
+                AECHOR_PETAL
+        }){
+            ComposterBlock.registerCompostableItem(0.65F, item);
+        }
     }
 
     private static <T extends Item> T register(String id, T item) {
