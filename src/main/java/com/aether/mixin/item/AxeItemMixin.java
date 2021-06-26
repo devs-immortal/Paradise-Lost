@@ -1,7 +1,6 @@
 package com.aether.mixin.item;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.items.AetherItems;
 import com.aether.loot.AetherLootTables;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -10,7 +9,6 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.LootTables;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
@@ -20,9 +18,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
