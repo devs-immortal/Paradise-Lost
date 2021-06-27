@@ -4,7 +4,6 @@ import com.aether.world.feature.generator.WellGenerator;
 import com.mojang.serialization.Codec;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
-import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.DynamicRegistryManager;

@@ -1,14 +1,14 @@
 package com.aether.world.feature;
 
 import com.aether.Aether;
-import com.aether.world.feature.generator.*;
-import com.aether.world.feature.structure.*;
+import com.aether.world.feature.generator.SkyrootTowerGenerator;
+import com.aether.world.feature.generator.WellGenerator;
+import com.aether.world.feature.structure.SkyrootTowerFeature;
+import com.aether.world.feature.structure.WellFeature;
 import com.aether.world.gen.decorator.CrystalTreeIslandDecorator;
-import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.chunk.StructureConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
@@ -16,8 +16,6 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-
-import java.util.Locale;
 
 public class AetherFeatures {
     // TODO: Stubbed. Pending 1.17 rewrite.
