@@ -96,9 +96,12 @@ public abstract class MixinLivingEntity extends Entity implements AetherEntityEx
             gravFlipTime++;
             if(gravFlipTime > 20){
                 flipped = false;
+                this.fallDistance = 0;
             }
-            Vec3d gravity = new Vec3d(0, 0.12D, 0);
-            this.setVelocity(this.getVelocity().add(gravity));
+            if(!this.hasNoGravity()) {
+                Vec3d antiGravity = new Vec3d(0, 0.12D, 0);
+                this.setVelocity(this.getVelocity().add(antiGravity));
+            }
         }
     }
 }
