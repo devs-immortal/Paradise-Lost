@@ -34,6 +34,13 @@ public class MoaEgg extends Item {
 
             if (!contextIn.getWorld().isClient) contextIn.getWorld().spawnEntity(moa);
 
+            if (!contextIn.getPlayer().isCreative()) {
+                contextIn.getStack().decrement(1);
+                if (contextIn.getStack().isEmpty()) {
+                    contextIn.getPlayer().getInventory().removeOne(contextIn.getStack());
+                }
+            }
+
             return ActionResult.SUCCESS;
         }
         return super.useOnBlock(contextIn);
