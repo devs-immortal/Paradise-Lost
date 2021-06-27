@@ -41,6 +41,7 @@
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
     "client.render.ItemColorsMixin",
+    "client.render.LivingEntityRendererMixin",
     "client.render.MinecraftClientMixin",
     "client.render.ParticleManagerMixin"
   ],

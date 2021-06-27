@@ -1,15 +1,19 @@
 package com.aether.items.tools;
 
+import com.aether.entities.AetherEntityExtensions;
 import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.entities.block.FloatingBlockStructure;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
@@ -89,6 +93,14 @@ public interface IAetherTool {
         } else {
             return 3.0F;
         }
+    }
+
+    default ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
+        if(this.getTier() == AetherTiers.Gravitite){
+            ((AetherEntityExtensions)entity).setFlipped();
+            return ActionResult.SUCCESS;
+        }
+        return ActionResult.PASS;
     }
 
     default ActionResult defaultItemUse(ItemUsageContext context) {
