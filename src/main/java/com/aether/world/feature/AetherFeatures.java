@@ -45,7 +45,6 @@ public class AetherFeatures {
 
     @SuppressWarnings("UnusedReturnValue")
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {
-
         return Registry.register(Registry.FEATURE, Aether.locate(id), feature);
     }
 
