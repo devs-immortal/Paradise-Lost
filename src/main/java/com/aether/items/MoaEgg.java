@@ -26,7 +26,7 @@ public class MoaEgg extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext contextIn) {
-        if (contextIn.getPlayer().isCreative()) {
+        if (contextIn.getPlayer() != null) {
             MoaEntity moa = new MoaEntity(contextIn.getWorld(), AetherAPI.instance().getMoa(contextIn.getStack().getTag().getInt("moaType")));
 
             moa.refreshPositionAndAngles(contextIn.getBlockPos().up(), 1.0F, 1.0F);
