@@ -7,8 +7,10 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.loot.LootTables;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
@@ -88,5 +90,10 @@ public class SwetEntity extends SlimeEntity {
     @Override
     protected ParticleEffect getParticles() {
         return ParticleTypes.SPLASH;
+    }
+
+    @Override
+    protected Identifier getLootTableId() {
+        return this.getType().getLootTableId();
     }
 }
