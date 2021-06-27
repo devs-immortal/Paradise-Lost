@@ -7,10 +7,13 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 
 import java.util.Map;
 
@@ -55,5 +58,10 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     @Override
     public AetherTiers getTier() {
         return this.material;
+    }
+
+    @Override
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
+        return IAetherTool.super.useOnEntity(stack, player, entity, hand);
     }
 }

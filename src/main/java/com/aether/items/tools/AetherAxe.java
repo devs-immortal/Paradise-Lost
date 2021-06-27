@@ -5,12 +5,16 @@ import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.swing.*;
 
 public class AetherAxe extends AxeItem implements IAetherTool {
 
@@ -44,5 +48,10 @@ public class AetherAxe extends AxeItem implements IAetherTool {
     @Override
     public AetherTiers getTier() {
         return this.material;
+    }
+
+    @Override
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
+        return IAetherTool.super.useOnEntity(stack, player, entity, hand);
     }
 }

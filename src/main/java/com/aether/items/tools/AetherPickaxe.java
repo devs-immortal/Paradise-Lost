@@ -2,10 +2,13 @@ package com.aether.items.tools;
 
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 
 public class AetherPickaxe extends PickaxeItem implements IAetherTool {
 
@@ -32,5 +35,10 @@ public class AetherPickaxe extends PickaxeItem implements IAetherTool {
     @Override
     public AetherTiers getTier() {
         return this.material;
+    }
+
+    @Override
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
+        return IAetherTool.super.useOnEntity(stack, player, entity, hand);
     }
 }

@@ -1,5 +1,6 @@
 package com.aether.mixin.entity;
 
+import com.aether.entities.AetherEntityExtensions;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.Sets;
@@ -14,21 +15,39 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolItem;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 import java.util.Set;
 
 @Mixin(LivingEntity.class)
-public abstract class MixinLivingEntity extends Entity {
+public abstract class MixinLivingEntity extends Entity implements AetherEntityExtensions {
     public MixinLivingEntity(EntityType<?> type, World world) {
         super(type, world);
+    }
+
+    private boolean flipped = false;
+
+    private int gravFlipTime;
+
+    @Override
+    public boolean getFlipped(){
+        return flipped;
+    }
+
+    @Override
+    public void setFlipped(){
+        flipped = true;
+        gravFlipTime = 0;
     }
 
     @Shadow
@@ -67,6 +86,21 @@ public abstract class MixinLivingEntity extends Entity {
             Item item = ((LivingEntity) attacker).getMainHandStack().getItem();
             if (item instanceof ToolItem && ((ToolItem) item).getMaterial() == AetherTiers.Gravitite.getDefaultTier()) {
                 this.addVelocity(0, amount / 20 + 0.1, 0);
+            }
+        }
+    }
+
+    @Inject(at = @At("TAIL"), method = "tick")
+    void tick(CallbackInfo ci){
+        if(flipped){
+            gravFlipTime++;
+            if(gravFlipTime > 20){
+                flipped = false;
+                this.fallDistance = 0;
+            }
+            if(!this.hasNoGravity()) {
+                Vec3d antiGravity = new Vec3d(0, 0.12D, 0);
+                this.setVelocity(this.getVelocity().add(antiGravity));
             }
         }
     }
