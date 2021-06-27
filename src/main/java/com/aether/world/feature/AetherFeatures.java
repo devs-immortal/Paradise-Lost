@@ -18,7 +18,6 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 public class AetherFeatures {
-    // TODO: Stubbed. Pending 1.17 rewrite.
     public static final StructurePieceType WELL_PIECE = register(WellGenerator.Piece::new, "well");
     public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.Piece::new, "skyroot_tower");
 

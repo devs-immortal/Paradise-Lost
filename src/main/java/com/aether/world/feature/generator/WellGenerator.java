@@ -22,7 +22,6 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 
 import java.util.Random;
 
-// TODO: Stubbed. Pending 1.17 rewrite.
 public class WellGenerator {
     private static final Identifier WELL = Aether.locate("well");
 
@@ -56,12 +55,15 @@ public class WellGenerator {
         }
 
         public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
-            if (!shifted) {
-                this.pos = this.pos.down(3);
-                shifted = true;
+            if (this.pos.getY() > 2) {
+                if (!shifted) {
+                    this.pos = this.pos.down(3);
+                    shifted = true;
+                }
+                boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
+                return super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
             }
-            boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
-            return super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
+            return false;
         }
     }
 }
