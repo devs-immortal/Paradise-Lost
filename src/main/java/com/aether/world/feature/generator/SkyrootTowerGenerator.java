@@ -31,6 +31,8 @@ public class SkyrootTowerGenerator {
     }
 
     public static class Piece extends SimpleStructurePiece {
+        private boolean shifted = false;
+
         public Piece(StructureManager manager, Identifier template, BlockPos pos, BlockRotation rotation) {
             super(AetherFeatures.SKYROOT_TOWER_PIECE, 0, manager, template, template.toString(), createPlacementData(rotation), pos);
         }
@@ -52,6 +54,10 @@ public class SkyrootTowerGenerator {
         }
 
         public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+            if (!shifted) {
+                this.pos = this.pos.down(1);
+                shifted = true;
+            }
             boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
             return super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
         }

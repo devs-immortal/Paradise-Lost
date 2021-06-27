@@ -26,12 +26,15 @@ import java.util.Random;
 public class WellGenerator {
     private static final Identifier WELL = Aether.locate("well");
 
+
     public static void addPieces(StructureManager manager, StructurePiecesHolder structurePiecesHolder, Random random, BlockPos pos) {
         BlockRotation blockRotation = BlockRotation.random(random);
         structurePiecesHolder.addPiece(new Piece(manager, WELL, pos, blockRotation));
     }
 
     public static class Piece extends SimpleStructurePiece {
+        private boolean shifted = false;
+
         public Piece(StructureManager manager, Identifier template, BlockPos pos, BlockRotation rotation) {
             super(AetherFeatures.WELL_PIECE, 0, manager, template, template.toString(), createPlacementData(rotation), pos);
         }
@@ -53,6 +56,10 @@ public class WellGenerator {
         }
 
         public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+            if (!shifted) {
+                this.pos = this.pos.down(3);
+                shifted = true;
+            }
             boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
             return super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
         }
