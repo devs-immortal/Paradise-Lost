@@ -33,7 +33,7 @@ public class FloatingBlockStructure {
     }
 
     public void postTick(){
-        // TODO: For beds and other non-vertical multi-blocks,
+        // TODO: Fix beds and other non-vertical multi-blocks
         FloatingBlockInfoWrapper master = blockInfos.get(0);
         for(FloatingBlockInfoWrapper blockInfo : blockInfos){
             if(blockInfo.equals(master)){ continue; }

@@ -16,6 +16,7 @@ import java.util.Map;
 public class AetherModelLayers {
     public static final Map<EntityModelLayer, TexturedModelData> ENTRIES = Maps.newHashMap();
 
+    public static final EntityModelLayer AECHOR_PLANT = register("aechor_plant", "main", AechorPlantModel.getTexturedModelData());
     public static final EntityModelLayer AERBUNNY = register("aerbunny", "main", AerbunnyModel.getTexturedModelData());
     public static final EntityModelLayer AERWHALE = register("aerwhale", "main", AerwhaleModel.getTexturedModelData());
     public static final EntityModelLayer COCKATRICE = register("cockatrice", "main", CockatriceModel.getTexturedModelData());

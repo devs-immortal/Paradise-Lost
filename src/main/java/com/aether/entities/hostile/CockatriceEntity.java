@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
@@ -98,11 +99,10 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         return world.getRandom().nextInt(25) == 0 && super.canSpawn(world, SpawnReason);
     }
 
-    // TODO: Stubbed. Pending 1.17 rewrite.
-//    @Override
-//    public boolean handleFallDamage(float distance, float damageMultiplier) {
-//        return false;
-//    }
+    @Override
+    public boolean handleFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
+        return false;
+    }
 
     @Override
     public boolean canHaveStatusEffect(StatusEffectInstance effect) {
