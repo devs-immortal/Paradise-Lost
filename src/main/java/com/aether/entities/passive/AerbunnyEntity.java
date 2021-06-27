@@ -169,11 +169,10 @@ public class AerbunnyEntity extends AetherAnimalEntity {
         super.move(type, isOnGround() ? movement : movement.multiply(3.5, (movement.y < 0 && getPuffiness() > 0) ? 0.15 : 1, 3.5));
     }
 
-    // TODO: Stubbed. Pending 1.17 rewrite.
-//    @Override
-//    public boolean handleFallDamage(float distance, float damageMultiplier) {
-//        return false;
-//    }
+    @Override
+    public boolean handleFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
+        return false;
+    }
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {

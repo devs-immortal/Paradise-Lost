@@ -77,23 +77,21 @@ public class AetherEntityTypes {
     }
 
     public static void init() {
-        // Register Entity Attribute Data and Spawn Restrictions - TODO
-        registerAttribute(MOA, MoaEntity.initAttributes().build());
-        registerAttribute(FLYING_COW, FlyingCowEntity.initAttributes().build());
-        registerAttribute(SHEEPUFF, SheepuffEntity.initAttributes().build());
-        registerAttribute(AERBUNNY, AerbunnyEntity.initAttributes().build());
-        registerAttribute(AECHOR_PLANT, AechorPlantEntity.initAttributes().build());
-        registerAttribute(PHYG, PhygEntity.initAttributes().build());
-        registerAttribute(COCKATRICE, CockatriceEntity.initAttributes().build());
-        registerAttribute(AERWHALE, AerwhaleEntity.initAttributes().build());
-        registerAttribute(CHEST_MIMIC, ChestMimicEntity.initAttributes().build());
-        registerAttribute(BLUE_SWET, SwetEntity.initAttributes().build());
-        registerAttribute(PURPLE_SWET, SwetEntity.initAttributes().build());
-        registerAttribute(WHITE_SWET, SwetEntity.initAttributes().build());
-        registerAttribute(GOLDEN_SWET, SwetEntity.initAttributes().build());
+        // Register Entity Attribute Data and Spawn Restrictions
+        registerAttribute(MOA, MoaEntity.initAttributes());
+        registerAttribute(FLYING_COW, FlyingCowEntity.initAttributes());
+        registerAttribute(SHEEPUFF, SheepuffEntity.initAttributes());
+        registerAttribute(AERBUNNY, AerbunnyEntity.initAttributes());
+        registerAttribute(AECHOR_PLANT, AechorPlantEntity.initAttributes());
+        registerAttribute(PHYG, PhygEntity.initAttributes());
+        registerAttribute(COCKATRICE, CockatriceEntity.initAttributes());
+        registerAttribute(AERWHALE, AerwhaleEntity.initAttributes());
+        registerAttribute(CHEST_MIMIC, ChestMimicEntity.initAttributes());
+        registerAttribute(BLUE_SWET, SwetEntity.initAttributes());
+        registerAttribute(PURPLE_SWET, SwetEntity.initAttributes());
+        registerAttribute(WHITE_SWET, SwetEntity.initAttributes());
+        registerAttribute(GOLDEN_SWET, SwetEntity.initAttributes());
 
-        // Don't seem to spawn if there is a restriction, i'm not sure but maybe it's because of their size?
-        //SpawnRestriction.register(AERWHALE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(SHEEPUFF, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(PHYG, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(AERBUNNY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
@@ -122,6 +120,10 @@ public class AetherEntityTypes {
     
     public static void registerAttribute(EntityType<? extends LivingEntity> type, DefaultAttributeContainer container) {
         DefaultAttributeRegistry.DEFAULT_ATTRIBUTE_REGISTRY.put(type, container);
+    }
+
+    public static void registerAttribute(EntityType<? extends LivingEntity> type, DefaultAttributeContainer.Builder container) {
+        registerAttribute(type, container.build());
     }
 
     public static boolean getAnimalData(EntityType<? extends Entity> entityType, WorldAccess WorldAccess, SpawnReason SpawnReason, BlockPos blockPos, Random random) {

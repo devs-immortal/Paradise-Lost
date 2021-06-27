@@ -99,7 +99,8 @@ public class AerwhaleEntity extends FlyingEntity {
 
                 positionIn = new Vec3d(player.sidewaysSpeed, 0.0, (player.forwardSpeed <= 0.0F)? player.forwardSpeed * 0.25F : player.forwardSpeed);
 
-                boolean isJumping = false; // TODO
+                // TODO: Get replacement for isJumping
+                boolean isJumping = false;
 
                 if (isJumping) {
                     this.setVelocity(new Vec3d(0.0, 0.0, 0.0));
@@ -153,7 +154,7 @@ public class AerwhaleEntity extends FlyingEntity {
         return super.interactMob(player, hand);
     }
 
-    // TODO
+    // TODO: Create Sounds for Aerwhales
 //    @Override
 //    protected SoundEvent getAmbientSound() {
 //        return AetherSoundEvents.ENTITY_AERWHALE_AMBIENT;
