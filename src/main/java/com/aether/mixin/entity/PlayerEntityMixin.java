@@ -1,5 +1,6 @@
 package com.aether.mixin.entity;
 
+import com.aether.entities.AetherEntityExtensions;
 import com.aether.util.CustomStatusEffectInstance;
 import com.aether.world.dimension.AetherDimension;
 import net.minecraft.entity.Entity;
@@ -39,5 +40,12 @@ public abstract class PlayerEntityMixin extends Entity {
     @Inject(method = "onDeath", at = @At("HEAD"), cancellable = true)
     public void onDeath(DamageSource source, CallbackInfo ci) {
         //TODO: Custom death message on fall from aether death.
+    }
+
+    @Inject(method = "tick", at = @At("TAIL"))
+    public void tick(CallbackInfo ci){
+        if (((AetherEntityExtensions)this).flipped){
+            this.setVelocity(this.getVelocity().add(0,0.12D,0));
+        }
     }
 }
