@@ -1,11 +1,11 @@
 package com.aether.items.tools;
 
+import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityExtensions;
 import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.entities.block.FloatingBlockStructure;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.FallingBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,6 +21,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Supplier;
+
 public interface IAetherTool {
     float getMiningSpeedMultiplier(ItemStack item, BlockState state);
 
@@ -33,8 +35,17 @@ public interface IAetherTool {
         World world = context.getWorld();
         BlockState state = world.getBlockState(pos);
         ItemStack heldItem = context.getStack();
+        Supplier<Boolean> dropState = () -> {
+            int distFromTop = world.getTopY() - pos.getY();
+            boolean isFastFloater = (
+                    state.getBlock() == AetherBlocks.GRAVITITE_ORE ||
+                    state.getBlock() == AetherBlocks.GRAVITITE_LEVITATOR ||
+                    state.getBlock() == AetherBlocks.BLOCK_OF_GRAVITITE);
+            return !isFastFloater && distFromTop <= 50;
+        };
+
         return (!state.isToolRequired() || heldItem.isSuitableFor(state))
-                && FallingBlock.canFallThrough(world.getBlockState(pos.up()));
+                && FloatingBlockEntity.canMakeBlock(dropState, world.getBlockState(pos.down()),world.getBlockState(pos.up()));
     }
 
     default ActionResult useOnBlock(ItemUsageContext context, @Nullable ActionResult defaultResult) {

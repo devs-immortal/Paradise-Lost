@@ -407,4 +407,11 @@ public class FloatingBlockEntity extends Entity {
             }
         }
     }
+    public static boolean canMakeBlock(Supplier<Boolean> dropState, BlockState below, BlockState above){
+        if(dropState.get()){
+            return FallingBlock.canFallThrough(below);
+        } else {
+            return FallingBlock.canFallThrough(above);
+        }
+    }
 }
