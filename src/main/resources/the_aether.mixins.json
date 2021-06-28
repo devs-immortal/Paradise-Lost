@@ -21,6 +21,7 @@
     "item.MapStateMixin",
     "item.ShovelItemMixin",
     "screen.EnchantmentScreenHandlerMixin",
+    "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
