@@ -22,6 +22,7 @@
     "item.ShovelItemMixin",
     "screen.EnchantmentScreenHandlerMixin",
     "server.PlayerManagerMixin",
+    "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
     "structure.FeatureMixin"
