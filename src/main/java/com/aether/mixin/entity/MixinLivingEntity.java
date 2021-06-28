@@ -90,7 +90,7 @@ public abstract class MixinLivingEntity extends Entity implements AetherEntityEx
     }
 
     @Inject(at = @At("TAIL"), method = "tick")
-    void tick(CallbackInfo ci){
+    public void tick(CallbackInfo ci){
         if(flipped){
             gravFlipTime++;
             if(gravFlipTime > 20){
