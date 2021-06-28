@@ -52,7 +52,7 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         ActionResult defaultResult = super.useOnBlock(context);
-        return IAetherTool.super.useOnBlock(context, defaultResult);
+        return defaultResult != ActionResult.PASS ? defaultResult : IAetherTool.super.useOnBlock(context, defaultResult);
     }
 
     @Override
