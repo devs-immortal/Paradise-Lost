@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:gravitite_ore",
+    "the_aether:ambrosium_ore",
+    "the_aether:zanite_ore"
+  ]
+}

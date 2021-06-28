@@ -1,6 +1,7 @@
 package com.aether.items.weapons;
 
 import com.aether.items.AetherItems;
+import com.aether.items.tools.AetherSword;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,14 +15,18 @@ public class CandyCaneSword extends AetherSword {
     }
 
     @Override
-    public boolean postHit(ItemStack itemStack, LivingEntity entityLiving, LivingEntity entityLiving1) {
-        // TODO: deathCounter replace ???
-        if (entityLiving.deathTime > 0) {
+    public boolean canRepair(ItemStack toRepair, ItemStack repair) {
+        return repair.getItem() == AetherItems.CANDY_CANE;
+    }
+
+    @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (target.deathTime > 0) {
             return true;
         } else {
-            if ((new Random()).nextBoolean() && entityLiving1 instanceof PlayerEntity && !entityLiving1.world.isClient && entityLiving.hurtTime > 0)
-                entityLiving.dropItem(AetherItems.CANDY_CANE, 1);
-            itemStack.damage(1, entityLiving1, null);
+            if ((new Random()).nextBoolean() && attacker instanceof PlayerEntity && !attacker.world.isClient && target.hurtTime > 0)
+                target.dropItem(AetherItems.CANDY_CANE, 1);
+            stack.damage(1, attacker, null);
             return true;
         }
     }

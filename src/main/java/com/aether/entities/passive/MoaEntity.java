@@ -21,7 +21,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
@@ -280,11 +280,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
         if (this.isAlive()) {
             if (this.hasPassengers() && this.canBeControlledByRider() && this.isSaddled()) {
                 LivingEntity livingEntity = (LivingEntity)this.getPrimaryPassenger();
-                this.yaw = livingEntity.yaw;
-                this.prevYaw = this.yaw;
-                this.pitch = livingEntity.pitch * 0.5F;
-                this.setRotation(this.yaw, this.pitch);
-                this.bodyYaw = this.yaw;
+                this.prevYaw = this.getYaw();
+                this.setYaw(livingEntity.getYaw());
+                this.setPitch(livingEntity.getPitch() * 0.5F);
+                this.setRotation(this.getYaw(), this.getPitch());
+                this.bodyYaw = this.getYaw();
                 this.headYaw = this.bodyYaw;
                 float f = livingEntity.sidewaysSpeed * 0.5F;
                 float g = livingEntity.forwardSpeed;
@@ -306,8 +306,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                         this.setVelocity(vec3d.x, h, vec3d.z);
                         this.velocityDirty = true;
                         if (g > 0.0F) {
-                            float i = MathHelper.sin(this.yaw * 0.017453292F);
-                            float j = MathHelper.cos(this.yaw * 0.017453292F);
+                            float i = MathHelper.sin(this.getYaw() * 0.017453292F);
+                            float j = MathHelper.cos(this.getYaw() * 0.017453292F);
                             this.setVelocity(this.getVelocity().add(-0.4F * i * this.jumpStrength, 0.0D, 0.4F * j * this.jumpStrength));
                         }
 
@@ -326,7 +326,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                     this.setVelocity(Vec3d.ZERO);
                 }
 
-                this.method_29242(this, false);
+                this.updateLimbs(this, false);
             } else {
                 this.flyingSpeed = getMovementSpeed() * (isGliding() ? 0.3F : 0.1F);
                 super.travel(movementInput);
@@ -352,8 +352,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     }
 
     @Override
-    public void writeCustomDataToTag(CompoundTag compound) {
-        super.writeCustomDataToTag(compound);
+    public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
 
         compound.putBoolean("playerGrown", this.isPlayerGrown());
         compound.putInt("remainingJumps", this.getRemainingJumps());
@@ -365,8 +365,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     }
 
     @Override
-    public void readCustomDataFromTag(CompoundTag compound) {
-        super.readCustomDataFromTag(compound);
+    public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
 
         this.setPlayerGrown(compound.getBoolean("playerGrown"));
         this.setRemainingJumps(compound.getInt("remainingJumps"));

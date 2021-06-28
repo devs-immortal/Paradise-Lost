@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "#the_aether:aether_stone_slabs",
+    "#the_aether:aether_stone_stairs",
+    "#the_aether:aether_stone_walls",
+    "the_aether:holystone",
+    "the_aether:cobbled_holystone",
+    "the_aether:holystone_brick",
+    "the_aether:mossy_holystone",
+    "the_aether:golden_mossy_holystone",
+    "the_aether:angelic_stone",
+    "the_aether:angelic_stone_cracked",
+    "the_aether:carved_stone",
+    "the_aether:hellfire_stone",
+    "the_aether:hellfire_stone_cracked",
+    "the_aether:light_angelic_stone",
+    "the_aether:light_carved_stone"
+  ]
+}

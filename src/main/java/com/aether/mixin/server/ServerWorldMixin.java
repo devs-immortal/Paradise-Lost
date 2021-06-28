@@ -2,10 +2,9 @@ package com.aether.mixin.server;
 
 import com.aether.Aether;
 import com.aether.entities.block.FloatingBlockEntity;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.entity.Entity;
+import com.aether.entities.block.FloatingBlockStructure;
 import net.minecraft.server.world.ServerWorld;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.world.EntityList;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,21 +19,21 @@ public class ServerWorldMixin {
 
     @Shadow private int idleTimeout;
 
-    @Shadow @Final private Int2ObjectMap<Entity> entitiesById;
-
-    @Shadow @Final private static Logger LOGGER;
+    @Shadow @Final EntityList entityList;
 
     @Inject(at = @At(value = "RETURN"), method = "tick")
     void postEntityTick(BooleanSupplier shouldKeepTicking, CallbackInfo ci){
         if (this.idleTimeout < 300) {
-            for (Int2ObjectMap.Entry<Entity> entry : entitiesById.int2ObjectEntrySet()) {
-                if (entry.getValue() instanceof FloatingBlockEntity) {
-                    FloatingBlockEntity entity = (FloatingBlockEntity) entry.getValue();
+            entityList.forEach(entityObj -> {
+                if (entityObj instanceof FloatingBlockEntity entity) {
                     entity.postTickEntities();
-                } else if (entry.getValue() == null) {
+                } else if (entityObj == null) {
                     Aether.LOG.error("Started checking null entities in ServerWorldMixin::postEntityTick");
-                    return;
                 }
+            });
+            FloatingBlockStructure[] sets = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
+            for(FloatingBlockStructure set : sets){
+                set.postTick();
             }
         }
     }

@@ -3,7 +3,7 @@ package com.aether.blocks.decorative;
 import com.aether.blocks.AetherBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.block.WallTorchBlock;
@@ -11,14 +11,15 @@ import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class AmbrosiumTorchWallBlock extends WallTorchBlock {
     public AmbrosiumTorchWallBlock() {
-        super(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).breakByHand(true).ticksRandomly().luminance(15).sounds(BlockSoundGroup.WOOD).dropsLike(AetherBlocks.AMBROSIUM_TORCH),
-                new DustParticleEffect(0.886f, 0.871f, 0.125f, 0.7f));
+        super(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().ticksRandomly().luminance(state -> 15).sounds(BlockSoundGroup.WOOD).dropsLike(AetherBlocks.AMBROSIUM_TORCH),
+                new DustParticleEffect(new Vec3f(0.886f, 0.871f, 0.125f), 0.7f));
     }
 
     @Environment(EnvType.CLIENT)

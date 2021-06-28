@@ -1,19 +1,25 @@
 {
-  "bedrock_roof_position": -20,
-  "bedrock_floor_position": -20,
+  "bedrock_roof_position": -2147483648,
+  "bedrock_floor_position": -2147483648,
   "sea_level": 0,
+  "noise_caves_enabled": false,
+  "noodle_caves_enabled": false,
+  "deepslate_enabled": false,
+  "ore_veins_enabled": false,
+  "aquifers_enabled": false,
+  "min_surface_level": 0,
   "disable_mob_generation": false,
   "structures": {
     "structures": {
       "the_aether:well": {
-        "spacing": 10,
-        "separation": 1,
-        "salt": 213769
+        "spacing": 32,
+        "separation": 8,
+        "salt": 42069
       },
       "the_aether:skyroot_tower": {
-        "spacing": 10,
-        "separation": 1,
-        "salt": 4208012
+        "spacing": 48,
+        "separation": 10,
+        "salt": 123123
       }
     }
   },
@@ -27,6 +33,7 @@
     }
   },
   "noise": {
+    "min_y": 0,
     "height": 128,
     "size_horizontal": 2,
     "size_vertical": 1,

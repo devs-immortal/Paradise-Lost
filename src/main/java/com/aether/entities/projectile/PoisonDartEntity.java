@@ -59,17 +59,17 @@ public class PoisonDartEntity extends DartEntity {
 
         if (this.victim != null) {
             if (!this.victim.isAlive() || this.poison.ticks == 0) {
-                this.destroy();
+                this.tickInVoid();
                 return;
             }
 
             if (this.getOwner() != null) if (this.getOwner().world instanceof ServerWorld)
                 ((ServerWorld) this.getOwner().world).spawnParticles(new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(Items.RED_DYE)), this.victim.getX(), this.victim.getBoundingBox().minY + this.victim.getHeight() * 0.8D, this.victim.getZ(), 2, 0.0D, 0.0D, 0.0D, 0.0625D);
 
-            this.removed = false;
+            this.unsetRemoved();
             this.poison.onUpdate();
             this.setInvisible(true);
-            this.updatePosition(this.victim.getX(), this.victim.getY(), this.victim.getZ());
+            this.setPosition(this.victim.getX(), this.victim.getY(), this.victim.getZ());
         }
     }
 
@@ -89,7 +89,7 @@ public class PoisonDartEntity extends DartEntity {
             this.victim = entityIn;
             this.poison = new AetherPoisonMovement(this.victim);
             this.poison.inflictPoison(500);
-            this.removed = false;
+            this.unsetRemoved();
         }
     }
 

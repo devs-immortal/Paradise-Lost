@@ -3,6 +3,7 @@ package com.aether.entities.hostile;
 import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.passive.AetherAnimalEntity;
+import com.aether.entities.projectile.PoisonNeedleEntity;
 import com.aether.items.AetherItems;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -14,13 +15,14 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
@@ -37,7 +39,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         this.sinage = this.random.nextFloat() * 6F;
         this.poisonRemaining = this.random.nextInt(4) + 2;
 
-        this.updatePosition(this.getX(), this.getY(), this.getZ());
+        this.setPosition(this.getX(), this.getY(), this.getZ());
     }
 
     public static DefaultAttributeContainer.Builder initAttributes() {
@@ -70,13 +72,13 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         if (this.sinage > 3.141593F * 2F) this.sinage -= (3.141593F * 2F);
 
         if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK)
-            this.destroy();
+            this.tickInVoid();
     }
 
     @Override
     public boolean canSee(Entity entity) {
         double distance = this.distanceTo(entity);
-        return distance <= 4.0F && super.canSee(entity);
+        return distance <= 6.0F && super.canSee(entity);
     }
 
     @Override
@@ -90,23 +92,23 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         double z = targetIn.getZ() - this.getZ();
         final double sqrt = Math.sqrt((x * x) + (z * z) + 0.1D);
         double y = 0.1D + (sqrt * 0.5D) + ((this.getY() - targetIn.getY()) * 0.25D);
-        double distance = 1.5D / sqrt;
+        double distance = 5.0D / sqrt;
 
-//        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
-//        needle.setVelocity(x * distance, y, z * distance, 0.285F + ((float) y * 0.05F), 1.0F);
-//        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
-//        this.world.spawnEntity(needle);
+        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
+        needle.setVelocity(x * distance, y, z * distance, 0.285F + ((float) y * 0.05F), 1.0F);
+        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
+        this.world.spawnEntity(needle);
     }
 
     @Override
     public ActionResult interactMob(PlayerEntity playerIn, Hand handIn) {
         ItemStack heldItem = playerIn.getStackInHand(handIn);
 
-        if (heldItem.getItem() == AetherItems.SKYROOT_BUCKET && !playerIn.abilities.creativeMode) {
+        if (heldItem.getItem() == AetherItems.SKYROOT_BUCKET && !playerIn.getAbilities().creativeMode) {
             heldItem.setCount(heldItem.getCount() - 1);
 
             if (heldItem.isEmpty()) playerIn.setStackInHand(handIn, new ItemStack(AetherItems.SKYROOT_POISON_BUCKET));
-            else if (!playerIn.inventory.insertStack(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET)))
+            else if (!playerIn.getInventory().insertStack(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET)))
                 playerIn.dropItem(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET), false);
 
             return ActionResult.SUCCESS;
@@ -115,20 +117,27 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         }
     }
 
+    public Vec3d getVelocity() {
+        return Vec3d.ZERO;
+    }
+
+    public void setVelocity(Vec3d velocity) {
+    }
+
     @Override
-    public void takeKnockback(float strength, double xRatio, double zRatio) {
+    public void takeKnockback(double strength, double xRatio, double zRatio) {
         if (this.getHealth() <= 0.0F) super.takeKnockback(strength, xRatio, zRatio);
     }
 
     @Override
-    public void writeCustomDataToTag(CompoundTag compound) {
-        super.writeCustomDataToTag(compound);
+    public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
         compound.putInt("size", this.size);
     }
 
     @Override
-    public void readCustomDataFromTag(CompoundTag compound) {
-        super.readCustomDataFromTag(compound);
+    public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
         this.size = compound.getInt("size");
     }
 
@@ -140,11 +149,6 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_GENERIC_BIG_FALL;
-    }
-
-    @Override
-    public Identifier getLootTableId() {
-        return null;//AetherLootTableList.ENTITIES_AECHOR_PLANT;
     }
 
     @Override

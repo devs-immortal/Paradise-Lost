@@ -15,7 +15,7 @@ public class AetherSurfaceBuilder extends SurfaceBuilder<AetherSurfaceBuilderCon
 	}
 
 	@Override
-	public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int y, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, AetherSurfaceBuilderConfig config) {
+	public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int i, long seed, AetherSurfaceBuilderConfig config) {
 		BlockState topState = config.getTopMaterial();
 		BlockState underState = config.getUnderMaterial();
 		BlockPos.Mutable mut = new BlockPos.Mutable();
@@ -24,7 +24,7 @@ public class AetherSurfaceBuilder extends SurfaceBuilder<AetherSurfaceBuilderCon
 		int cX = x & 15;
 		int cZ = z & 15;
 
-		for(int m = y; m >= 0; --m) {
+		for(int m = height; m >= 0; --m) {
 			mut.set(cX, m, cZ);
 			BlockState blockState3 = chunk.getBlockState(mut);
 			if (blockState3.isAir()) {

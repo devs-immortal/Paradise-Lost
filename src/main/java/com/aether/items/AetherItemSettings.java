@@ -15,7 +15,6 @@ public class AetherItemSettings extends Item.Settings {
     }
 
     public AetherItemSettings formatting(Formatting formatting) {
-        this.rarity((Rarity) null);
         this.formatting = formatting;
         return this;
     }

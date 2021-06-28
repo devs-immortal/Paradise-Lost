@@ -1,17 +1,19 @@
 package com.aether.items.tools;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 
 import java.util.Map;
 
@@ -19,7 +21,7 @@ public class AetherHoe extends HoeItem implements IAetherTool {
 
     protected static final Map<Block, BlockState> convertibleBlocks = Maps.newHashMap(ImmutableMap.of(
             Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(),
-            Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(),
+            Blocks.DIRT_PATH, Blocks.FARMLAND.getDefaultState(),
             Blocks.DIRT, Blocks.FARMLAND.getDefaultState(),
             Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()
     ));
@@ -43,27 +45,23 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         float original = super.getMiningSpeedMultiplier(stack, state);
-        if (this.getItemMaterial() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
+        if (this.getTier() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
         return original;
-    }
-
-    private float calculateIncrease(ItemStack tool) {
-        return (float) tool.getMaxDamage() / tool.getDamage() / 50;
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        ActionResult superUsage = super.useOnBlock(context);
-        if (superUsage.equals(ActionResult.PASS)) {
-            if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
-                return ActionResult.SUCCESS;
-            }
-        }
-        return superUsage;
+        ActionResult defaultResult = super.useOnBlock(context);
+        return defaultResult != ActionResult.PASS ? defaultResult : IAetherTool.super.useOnBlock(context, defaultResult);
     }
 
     @Override
-    public AetherTiers getItemMaterial() {
+    public AetherTiers getTier() {
         return this.material;
+    }
+
+    @Override
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
+        return IAetherTool.super.useOnEntity(stack, player, entity, hand);
     }
 }

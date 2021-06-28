@@ -1,16 +1,14 @@
 {
   "display": {
-    "title": {
-      "text": "It... It's beautiful...",
-      "color": "aqua",
-      "bold": false,
-      "italic": false
-    },
-    "description": {
-      "text": "Enter the aether dimension."
-    },
     "icon": {
       "item": "the_aether:aether_grass"
+    },
+    "title": {
+      "translate": "advancements.the_aether.root.title",
+      "color": "aqua"
+    },
+    "description": {
+      "translate": "advancements.the_aether.root.description"
     },
     "frame": "goal",
     "show_toast": true,
@@ -19,12 +17,16 @@
     "background": "the_aether:textures/block/holystone.png"
   },
   "criteria": {
-    "enteraether": {
+    "entered_aether": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
-        "from": "minecraft:overworld",
         "to": "the_aether:the_aether"
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "entered_aether"
+    ]
+  ]
 }

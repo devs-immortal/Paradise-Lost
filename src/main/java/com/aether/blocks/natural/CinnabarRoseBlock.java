@@ -16,16 +16,18 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class CinnabarRoseBlock extends AetherMushroomBlock {
 
     public static final BooleanProperty BLOOMING = BooleanProperty.of("blooming");
 
-    public CinnabarRoseBlock(Settings settings) {
-        super(settings, HangType.FLOOR);
+    public CinnabarRoseBlock(Settings settings, Supplier<ConfiguredFeature<?, ?>> feature) {
+        super(settings, feature, HangType.FLOOR);
         setDefaultState(getDefaultState().with(BLOOMING, false));
     }
 
@@ -37,7 +39,7 @@ public class CinnabarRoseBlock extends AetherMushroomBlock {
                 double d = (double) pos.getX() + random.nextDouble();
                 double e = (double) pos.getY() + random.nextDouble();
                 double f = (double) pos.getZ() + random.nextDouble();
-                world.addParticle(DustParticleEffect.RED, d, e, f, 0.0D, 0.0D, 0.0D);
+                world.addParticle(DustParticleEffect.DEFAULT, d, e, f, 0.0D, 0.0D, 0.0D);
             }
         }
     }
@@ -90,7 +92,7 @@ public class CinnabarRoseBlock extends AetherMushroomBlock {
                 double d = (double) pos.getX() + random.nextDouble();
                 double e = (double) pos.getY() + random.nextDouble();
                 double f = (double) pos.getZ() + random.nextDouble();
-                world.addParticle(DustParticleEffect.RED, d, e, f, 0.0D, 0.0D, 0.0D);
+                world.addParticle(DustParticleEffect.DEFAULT, d, e, f, 0.0D, 0.0D, 0.0D);
             }
         }
     }

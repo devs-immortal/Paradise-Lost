@@ -1,11 +1,8 @@
 package com.aether.registry;
 
-import dev.emi.trinkets.api.TrinketSlots;
-
-import static com.aether.Aether.locate;
-
+// TODO: Find how to add a custom slot in Trinkets v3.0.0. Migrate parachute to that when ready.
 public class TrinketSlotRegistry {
 	public static void init() {
-		TrinketSlots.addSlot("chest","parachute",locate("textures/item/accessories/parachute_slot.png"));
+		//TrinketSlots.addSlot("chest","parachute",locate("textures/item/accessories/parachute_slot.png"));
 	}
 }

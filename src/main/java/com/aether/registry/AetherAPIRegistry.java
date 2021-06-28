@@ -1,11 +1,5 @@
 package com.aether.registry;
 
-import com.aether.api.AetherAPI;
-import com.aether.blocks.AetherBlocks;
-import com.aether.items.AetherItems;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
-
 public class AetherAPIRegistry {
 /*
     public static void register() {
@@ -123,7 +117,6 @@ public class AetherAPIRegistry {
         registry.register(new AetherFreezable(Items.LAVA_BUCKET, Blocks.OBSIDIAN, 500));
         registry.register(new AetherFreezable(AetherItems.IRON_RING, AetherItems.ICE_RING, 2500));
         registry.register(new AetherFreezable(AetherItems.GOLDEN_RING, AetherItems.ICE_RING, 2500));
-        registry.register(new AetherFreezable(AetherItems.IRON_PENDANT, AetherItems.ICE_PENDANT, 2500));
         registry.register(new AetherFreezable(AetherItems.GOLDEN_PENDANT, AetherItems.ICE_PENDANT, 2500));
 
         registry.register(new AetherFreezableFuel(AetherBlocks.icestone, 500));

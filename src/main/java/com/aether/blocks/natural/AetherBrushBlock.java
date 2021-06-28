@@ -2,7 +2,10 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FernBlock;
+import net.minecraft.block.TallPlantBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
@@ -29,8 +32,9 @@ public class AetherBrushBlock extends FernBlock {
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         if(this == AetherBlocks.AETHER_GRASS) {
             TallPlantBlock tallPlantBlock = (TallPlantBlock) AetherBlocks.AETHER_TALL_GRASS;
-            if (tallPlantBlock.getDefaultState().canPlaceAt(world, pos) && world.isAir(pos.up())) {
-                tallPlantBlock.placeAt(world, pos, 2);
+            BlockState blockState = tallPlantBlock.getDefaultState();
+            if (blockState.canPlaceAt(world, pos) && world.isAir(pos.up())) {
+                tallPlantBlock.placeAt(world, blockState, pos, 2);
             }
         }
         Iterable<BlockPos> growPos = BlockPos.iterate(pos.add(-5, 3, -5), pos.add(5, -3, 5));

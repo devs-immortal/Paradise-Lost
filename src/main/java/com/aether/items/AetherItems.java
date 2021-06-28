@@ -5,15 +5,16 @@ import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.items.accessories.AccessoryType;
 import com.aether.items.accessories.ItemAccessory;
-import com.aether.items.armor.*;
+import com.aether.items.armor.AetherArmorType;
 import com.aether.items.food.*;
-import com.aether.items.resources.*;
+import com.aether.items.resources.AmbrosiumShard;
 import com.aether.items.staff.CloudStaff;
 import com.aether.items.staff.NatureStaff;
 import com.aether.items.tools.*;
 import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -48,7 +49,7 @@ public class AetherItems {
             VALKYRIE_LANCE;
     public static final Item LEATHER_GLOVES, IRON_GLOVES, GOLDEN_GLOVES, CHAIN_GLOVES, DIAMOND_GLOVES;
     public static final Item ZANITE_GLOVES, GRAVITITE_GLOVES, NEPTUNE_GLOVES, PHOENIX_GLOVES, OBSIDIAN_GLOVES, VALKYRIE_GLOVES;
-    public static final Item IRON_RING, GOLDEN_RING, ZANITE_RING, ICE_RING, IRON_PENDANT, GOLDEN_PENDANT, ZANITE_PENDANT, ICE_PENDANT;
+    public static final Item IRON_RING, GOLDEN_RING, ZANITE_RING, ICE_RING, GOLDEN_PENDANT, ZANITE_PENDANT, ICE_PENDANT;
     public static final Item RED_CAPE, BLUE_CAPE, YELLOW_CAPE, WHITE_CAPE, SWET_CAPE, INVISIBILITY_CAPE, AGILITY_CAPE;
     public static final Item GOLDEN_FEATHER, REGENERATION_STONE, IRON_BUBBLE;
     public static final Item LIFE_SHARD;
@@ -95,7 +96,7 @@ public class AetherItems {
         HOLYSTONE_HOE = register("holystone_hoe", new AetherHoe(AetherTiers.Holystone, TOOLS, 2));
         */
         ZANITE_SHOVEL = register("zanite_shovel", new AetherShovel(AetherTiers.Zanite, TOOLS, 1.5F, -3.0F));
-        ZANITE_PICKAXE = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.Zanite, TOOLS,  1, -2.8F));
+        ZANITE_PICKAXE = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.Zanite, TOOLS, 1, -2.8F));
         ZANITE_AXE = register("zanite_axe", new AetherAxe(AetherTiers.Zanite, TOOLS, 6.0F, -3.1F));
         ZANITE_SWORD = register("zanite_sword", new AetherSword(AetherTiers.Zanite, -2.4F, 3, WEAPONS));
         ZANITE_HOE = register("zanite_hoe", new AetherHoe(AetherTiers.Zanite, TOOLS, 3));
@@ -152,12 +153,12 @@ public class AetherItems {
 
         // Food
         AetherItemSettings LOOT_FOOD = new AetherItemSettings().group(AetherItemGroups.Food).rarity(AetherItems.AETHER_LOOT);
-        BLUEBERRY = register("blue_berry", new BlockItem(AetherBlocks.BLUEBERRY_BUSH, new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
+        BLUEBERRY = register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
         ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
         WHITE_APPLE = register("white_apple", new WhiteApple(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.WHITE_APPLE)));
-        BLUE_GUMMY_SWET = register("blue_gummy_swet", new GummySwet(LOOT_FOOD));
-        GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new GummySwet(LOOT_FOOD));
-        AETHER_MILK = register("valkyrie_milk", new Item(new Item.Settings().rarity(Rarity.EPIC).food(AetherFood.MILK).maxCount(16)));
+        BLUE_GUMMY_SWET = register("blue_gummy_swet", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GUMMY_SWET)));
+        GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GUMMY_SWET)));
+        AETHER_MILK = register("valkyrie_milk", new DrinkableItem(new Item.Settings().rarity(Rarity.EPIC).food(AetherFood.MILK).maxCount(1)));
         HEALING_STONE = register("healing_stone", new HealingStone(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.HEALING_STONE)));
         CANDY_CANE = register("candy_cane", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
         GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
@@ -241,7 +242,6 @@ public class AetherItems {
         ZANITE_RING = register("zanite_ring", new ItemAccessory(AccessoryType.RING, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0x711AE8)));
         ICE_RING = register("ice_ring", new ItemAccessory(AccessoryType.RING, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0x95E6E7).rarity(Rarity.RARE)));
 
-        IRON_PENDANT = register("iron_pendant", new ItemAccessory(AccessoryType.PENDANT, new AetherItemSettings()));
         GOLDEN_PENDANT = register("golden_pendant", new ItemAccessory(AccessoryType.PENDANT, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0xEAEE57)));
         ZANITE_PENDANT = register("zanite_pendant", new ItemAccessory(AccessoryType.PENDANT, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0x711AE8)));
         ICE_PENDANT = register("ice_pendant", new ItemAccessory(AccessoryType.PENDANT, new AetherItemSettings().group(AetherItemGroups.Wearable).enchantmentGlintColor(0x95E6E7).rarity(Rarity.RARE)));
@@ -257,6 +257,24 @@ public class AetherItems {
         AETHER_PORTAL = register("aether_portal", new AetherPortalItem(new Item.Settings().group(AetherItemGroups.Misc)));
     }
 
+    static {
+
+        for(Item item : new Item[]{
+                BLUEBERRY,
+                GINGERBREAD_MAN,
+                CANDY_CANE
+        }){
+            ComposterBlock.registerCompostableItem(0.3F, item);
+        }
+
+        for(Item item : new Item[]{
+                WHITE_APPLE,
+                AECHOR_PETAL
+        }){
+            ComposterBlock.registerCompostableItem(0.65F, item);
+        }
+    }
+
     private static <T extends Item> T register(String id, T item) {
         return Registry.register(Registry.ITEM, Aether.locate(id), item);
     }
@@ -266,6 +284,6 @@ public class AetherItems {
     }
 
     public static void initClient() {
-
+        // Empty void. Eternal emptiness
     }
 }

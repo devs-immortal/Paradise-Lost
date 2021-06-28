@@ -1,5 +1,5 @@
 {
-  "replace": "false",
+  "replace": false,
   "values": [
     "minecraft:oak_planks",
     "minecraft:spruce_planks",
@@ -9,9 +9,6 @@
     "minecraft:dark_oak_planks",
     "minecraft:crimson_planks",
     "minecraft:warped_planks",
-    "the_aether:skyroot_planks",
-    "the_aether:golden_oak_planks",
-    "the_aether:crystal_planks",
-    "the_aether:wisteria_planks"
+    "#the_aether:aether_planks"
   ]
 }

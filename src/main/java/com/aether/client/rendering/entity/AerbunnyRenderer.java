@@ -2,18 +2,19 @@ package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
 import com.aether.client.model.entity.AerbunnyModel;
+import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.entities.passive.AerbunnyEntity;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class AerbunnyRenderer extends MobEntityRenderer<AerbunnyEntity, AerbunnyModel> {
 
-    private static final Identifier TEXTURE = Aether.locate("textures/entity/aerbunny/aerbunny.png");
+    private static final Identifier TEXTURE = Aether.locate("textures/entity/aerbunny.png");
 
-    public AerbunnyRenderer(EntityRenderDispatcher renderManager) {
-        super(renderManager, new AerbunnyModel(), 0.3F);
+    public AerbunnyRenderer(EntityRendererFactory.Context context) {
+        super(context, new AerbunnyModel(context.getPart(AetherModelLayers.AERBUNNY)), 0.3F);
     }
 
     @Override

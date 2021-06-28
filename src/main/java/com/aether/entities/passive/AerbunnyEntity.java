@@ -18,7 +18,6 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import com.aether.entities.passive.AerbunnyEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -171,7 +170,7 @@ public class AerbunnyEntity extends AetherAnimalEntity {
     }
 
     @Override
-    public boolean handleFallDamage(float distance, float damageMultiplier) {
+    public boolean handleFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
         return false;
     }
 
@@ -249,7 +248,7 @@ public class AerbunnyEntity extends AetherAnimalEntity {
             if (blockState.isOf(AetherBlocks.BLUEBERRY_BUSH) && blockState.get(SweetBerryBushBlock.AGE) == 3) {
                 AerbunnyEntity.this.setLoveTicks(40);
                 AerbunnyEntity.this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 10, 2));
-                AerbunnyEntity.this.playSound(SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, 1.0F, 1.0F);
+                AerbunnyEntity.this.playSound(SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, 1.0F, 1.0F);
                 AerbunnyEntity.this.playSound(SoundEvents.ENTITY_LLAMA_EAT, 0.8F, 2.0F);
                 AerbunnyEntity.this.world.setBlockState(this.targetPos, blockState.with(SweetBerryBushBlock.AGE, 1), 2);
             }

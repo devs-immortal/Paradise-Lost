@@ -2,9 +2,10 @@ package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.SlimeOverlayFeatureRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.SlimeEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.mob.SlimeEntity;
@@ -14,9 +15,9 @@ import net.minecraft.util.math.MathHelper;
 public class SwetRenderer extends MobEntityRenderer<SlimeEntity, SlimeEntityModel<SlimeEntity>> {
     private static final Identifier TEXTURE = Aether.locate("textures/entity/swet/blue_swet.png");
 
-    public SwetRenderer(EntityRenderDispatcher entityRenderDispatcher) {
-        super(entityRenderDispatcher, new SlimeEntityModel(16), 0.25F);
-        this.addFeature(new SlimeOverlayFeatureRenderer(this));
+    public SwetRenderer(EntityRendererFactory.Context renderManager) {
+        super(renderManager, new SlimeEntityModel<>(renderManager.getPart(EntityModelLayers.SLIME)), 0.25F);
+        this.addFeature(new SlimeOverlayFeatureRenderer<>(this, renderManager.getModelLoader()));
     }
 
     public void render(SlimeEntity slimeEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {

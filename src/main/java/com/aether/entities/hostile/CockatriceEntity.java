@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
@@ -85,7 +86,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         double x = targetIn.getX() - this.getX();
         double z = targetIn.getZ() - this.getX();
         double y = targetIn.getBoundingBox().minY + (double) (targetIn.getHeight() / 3.0F) - needle.getY();
-        double double_4 = MathHelper.sqrt(x * x + z * z);
+        double double_4 = MathHelper.sqrt((float) (x * x + z * z));
 
         needle.setVelocity(x, y + double_4 * 0.20000000298023224D, z, 1.2F, 1.0F);
 
@@ -99,7 +100,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     }
 
     @Override
-    public boolean handleFallDamage(float distance, float damageMultiplier) {
+    public boolean handleFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
         return false;
     }
 

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "the_aether:cobbled_holystone"
+  },
+  "result": "the_aether:cobbled_holystone_wall",
+  "count": 1
+}

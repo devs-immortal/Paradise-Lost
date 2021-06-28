@@ -9,10 +9,9 @@ import com.aether.entities.projectile.EnchantedDartEntity;
 import com.aether.entities.projectile.GoldenDartEntity;
 import com.aether.entities.projectile.PoisonDartEntity;
 import com.aether.entities.projectile.PoisonNeedleEntity;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.DefaultAttributeRegistry;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -78,23 +77,21 @@ public class AetherEntityTypes {
     }
 
     public static void init() {
-        // Register Entity Attribute Data and Spawn Restrictions - TODO
-        FabricDefaultAttributeRegistry.register(MOA, MoaEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(FLYING_COW, FlyingCowEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(SHEEPUFF, SheepuffEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(AERBUNNY, AerbunnyEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(AECHOR_PLANT, AechorPlantEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(PHYG, PhygEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(COCKATRICE, CockatriceEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(AERWHALE, AerwhaleEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(CHEST_MIMIC, ChestMimicEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(BLUE_SWET, SwetEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(PURPLE_SWET, SwetEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(WHITE_SWET, SwetEntity.initAttributes());
-        FabricDefaultAttributeRegistry.register(GOLDEN_SWET, SwetEntity.initAttributes());
+        // Register Entity Attribute Data and Spawn Restrictions
+        registerAttribute(MOA, MoaEntity.initAttributes());
+        registerAttribute(FLYING_COW, FlyingCowEntity.initAttributes());
+        registerAttribute(SHEEPUFF, SheepuffEntity.initAttributes());
+        registerAttribute(AERBUNNY, AerbunnyEntity.initAttributes());
+        registerAttribute(AECHOR_PLANT, AechorPlantEntity.initAttributes());
+        registerAttribute(PHYG, PhygEntity.initAttributes());
+        registerAttribute(COCKATRICE, CockatriceEntity.initAttributes());
+        registerAttribute(AERWHALE, AerwhaleEntity.initAttributes());
+        registerAttribute(CHEST_MIMIC, ChestMimicEntity.initAttributes());
+        registerAttribute(BLUE_SWET, SwetEntity.initAttributes());
+        registerAttribute(PURPLE_SWET, SwetEntity.initAttributes());
+        registerAttribute(WHITE_SWET, SwetEntity.initAttributes());
+        registerAttribute(GOLDEN_SWET, SwetEntity.initAttributes());
 
-        // Don't seem to spawn if there is a restriction, i'm not sure but maybe it's because of their size?
-        //SpawnRestriction.register(AERWHALE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(SHEEPUFF, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(PHYG, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
         SpawnRestriction.register(AERBUNNY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
@@ -114,11 +111,19 @@ public class AetherEntityTypes {
     }
 
     public static <X extends Entity> EntityType<X> register(String name, int trackingDistance, int updateIntervalTicks, boolean alwaysUpdateVelocity, EntityDimensions size, EntityType.EntityFactory<X> factory) {
-        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory).trackRangeBlocks(trackingDistance).trackedUpdateRate(updateIntervalTicks).forceTrackedVelocityUpdates(alwaysUpdateVelocity).dimensions(size).disableSaving().build());
+        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), EntityType.Builder.create(factory, SpawnGroup.MISC).maxTrackingRange(trackingDistance).trackingTickInterval(updateIntervalTicks).setDimensions(size.width, size.height).disableSaving().build(name));
     }
 
     public static <X extends Entity> EntityType<X> register(String name, SpawnGroup category, EntityDimensions size, EntityType.EntityFactory<X> factory) {
-        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(category, factory).dimensions(size).build());
+        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), EntityType.Builder.create(factory, category).setDimensions(size.width, size.height).build(name));
+    }
+    
+    public static void registerAttribute(EntityType<? extends LivingEntity> type, DefaultAttributeContainer container) {
+        DefaultAttributeRegistry.DEFAULT_ATTRIBUTE_REGISTRY.put(type, container);
+    }
+
+    public static void registerAttribute(EntityType<? extends LivingEntity> type, DefaultAttributeContainer.Builder container) {
+        registerAttribute(type, container.build());
     }
 
     public static boolean getAnimalData(EntityType<? extends Entity> entityType, WorldAccess WorldAccess, SpawnReason SpawnReason, BlockPos blockPos, Random random) {

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:aether_grass",
+    "the_aether:aether_dirt",
+    "the_aether:enchanted_aether_grass"
+  ]
+}

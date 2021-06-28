@@ -53,7 +53,7 @@ public class AetherPoisonMovement {
         this.entity.setVelocity(this.entity.getVelocity().add(this.motD, 0.0D, this.motD));
         this.rotD = 0.125D * newRotD + (1.0D - 0.125D) * this.rotD;
 
-        this.entity.yaw = (float) ((double) this.entity.yaw + rotD);
-        this.entity.pitch = (float) ((double) this.entity.pitch + rotD);
+        this.entity.setYaw((float) ((double) this.entity.getYaw() + rotD));
+        this.entity.setPitch((float) ((double) this.entity.getPitch() + rotD));
     }
 }

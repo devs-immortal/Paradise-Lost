@@ -32,10 +32,10 @@ public class EatAetherGrassGoal extends Goal {
         if (this.owner.getRandom().nextInt(this.owner.isBaby() ? 50 : 1000) != 0) {
             return false;
         } else {
-            BlockPos pos = new BlockPos(this.owner.getX(), this.owner.getY(), this.owner.getZ());
+            BlockPos pos = new BlockPos(this.owner.getBlockPos());
 
             if (grass.test(this.world.getBlockState(pos))) return true;
-            else return this.world.getBlockState(pos.down(1)).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK;
+            else return this.world.getBlockState(pos.down()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK;
         }
     }
 
@@ -46,7 +46,6 @@ public class EatAetherGrassGoal extends Goal {
         this.owner.getNavigation().stop();
     }
 
-    // TODO: ???
     @Override
     public void stop() {
         this.timer = 0;
@@ -62,14 +61,14 @@ public class EatAetherGrassGoal extends Goal {
         this.timer = Math.max(0, this.timer - 1);
 
         if (this.timer == 4) {
-            BlockPos pos = new BlockPos(this.owner.getX(), this.owner.getY(), this.owner.getZ());
+            BlockPos pos = new BlockPos(this.owner.getBlockPos());
 
             if (grass.test(this.world.getBlockState(pos))) {
                 if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) this.world.breakBlock(pos, false);
 
                 this.owner.onEatingGrass();
             } else {
-                BlockPos downPos = pos.down(1);
+                BlockPos downPos = pos.down();
 
                 if (this.world.getBlockState(downPos).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK) {
                     if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {

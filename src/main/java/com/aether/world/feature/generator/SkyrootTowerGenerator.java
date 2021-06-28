@@ -2,64 +2,67 @@ package com.aether.world.feature.generator;
 
 import com.aether.Aether;
 import com.aether.world.feature.AetherFeatures;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.structure.*;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.structure.SimpleStructurePiece;
+import net.minecraft.structure.StructureManager;
+import net.minecraft.structure.StructurePiecesHolder;
+import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 
-import java.util.List;
 import java.util.Random;
 
 public class SkyrootTowerGenerator {
     private static final Identifier SKYROOT_TOWER = Aether.locate("skyroot_tower");
 
-    public static void addPieces(StructureManager manager, BlockPos pos, BlockRotation rotation, List<StructurePiece> pieces) {
-        pieces.add(new TowerPiece(manager, pos, SKYROOT_TOWER, rotation));
+    public static void addPieces(StructureManager manager, StructurePiecesHolder structurePiecesHolder, Random random, BlockPos pos) {
+        BlockRotation blockRotation = BlockRotation.random(random);
+        structurePiecesHolder.addPiece(new SkyrootTowerGenerator.Piece(manager, SKYROOT_TOWER, pos, blockRotation));
     }
 
-    public static class TowerPiece extends SimpleStructurePiece {
-        private final BlockRotation rotation;
-        private final Identifier template;
+    public static class Piece extends SimpleStructurePiece {
+        private boolean shifted = false;
 
-        public TowerPiece(StructureManager structureManager, CompoundTag compoundTag) {
-            super(AetherFeatures.SKYROOT_TOWER_PIECE, compoundTag);
-            this.template = new Identifier(compoundTag.getString("Template"));
-            this.rotation = BlockRotation.valueOf(compoundTag.getString("Rot"));
-            this.initializeStructureData(structureManager);
+        public Piece(StructureManager manager, Identifier template, BlockPos pos, BlockRotation rotation) {
+            super(AetherFeatures.SKYROOT_TOWER_PIECE, 0, manager, template, template.toString(), createPlacementData(rotation), pos);
         }
 
-        public TowerPiece(StructureManager structureManager, BlockPos pos, Identifier template, BlockRotation rotation) {
-            super(AetherFeatures.SKYROOT_TOWER_PIECE, 0);
-            this.pos = pos;
-            this.rotation = rotation;
-            this.template = template;
-
-            this.initializeStructureData(structureManager);
+        public Piece(ServerWorld world, NbtCompound nbt) {
+            super(AetherFeatures.SKYROOT_TOWER_PIECE, nbt, world, (identifier) -> createPlacementData(BlockRotation.valueOf(nbt.getString("Rot"))));
         }
 
-        private void initializeStructureData(StructureManager structureManager) {
-            Structure structure = structureManager.getStructureOrBlank(this.template);
-            StructurePlacementData placementData = (new StructurePlacementData())
-                    .setRotation(this.rotation)
-                    .setMirror(BlockMirror.NONE)
-                    .addProcessor(BlockIgnoreStructureProcessor.IGNORE_STRUCTURE_BLOCKS);
-            this.setStructureData(structure, this.pos, placementData);
+        private static StructurePlacementData createPlacementData(BlockRotation rotation) {
+            return (new StructurePlacementData()).setRotation(rotation).setMirror(BlockMirror.NONE).addProcessor(BlockIgnoreStructureProcessor.IGNORE_AIR_AND_STRUCTURE_BLOCKS);
         }
 
-        protected void toNbt(CompoundTag tag) {
-            super.toNbt(tag);
-            tag.putString("Template", this.template.toString());
-            tag.putString("Rot", this.rotation.name());
+        protected void writeNbt(ServerWorld world, NbtCompound nbt) {
+            super.writeNbt(world, nbt);
+            nbt.putString("Rot", this.placementData.getRotation().name());
         }
 
-        @Override
-        protected void handleMetadata(String metadata, BlockPos pos, ServerWorldAccess serverWorldAccess, Random random,
-                                      BlockBox boundingBox) {
+        protected void handleMetadata(String metadata, BlockPos pos, ServerWorldAccess world, Random random, BlockBox boundingBox) {
+        }
+
+        public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+            if (this.pos.getY() > 2) {
+                if (!shifted) {
+                    this.pos = this.pos.down(1);
+                    shifted = true;
+                }
+                boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
+                return super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
+            }
+            return false;
         }
     }
 }

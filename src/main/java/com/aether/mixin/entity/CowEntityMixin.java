@@ -2,11 +2,12 @@ package com.aether.mixin.entity;
 
 import com.aether.items.AetherItems;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -30,7 +31,7 @@ public class CowEntityMixin extends AnimalEntity {
         ItemStack itemStack = player.getStackInHand(hand);
         if (itemStack.getItem() == AetherItems.SKYROOT_BUCKET && !this.isBaby()) {
             player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-            ItemStack itemStack2 = ItemUsage.method_30012(itemStack, player, AetherItems.SKYROOT_MILK_BUCKET.getDefaultStack());
+            ItemStack itemStack2 = ItemUsage.exchangeStack(itemStack, player, AetherItems.SKYROOT_MILK_BUCKET.getDefaultStack());
             player.setStackInHand(hand, itemStack2);
             cir.setReturnValue(ActionResult.success(this.world.isClient));
         }

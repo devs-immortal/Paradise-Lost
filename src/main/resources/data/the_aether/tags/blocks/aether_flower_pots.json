@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:potted_aether_fern",
+    "the_aether:potted_skyroot_sapling",
+    "the_aether:potted_golden_oak_sapling",
+    "the_aether:potted_crystal_sapling",
+    "the_aether:potted_rose_wisteria_sapling",
+    "the_aether:potted_frost_wisteria_sapling",
+    "the_aether:potted_lavender_wisteria_sapling",
+    "the_aether:potted_boreal_wisteria_sapling"
+  ]
+}

@@ -1,7 +1,7 @@
 package com.aether.client.model.entity;
 
 import com.aether.entities.hostile.CockatriceEntity;
-import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
@@ -15,43 +15,36 @@ public class CockatriceModel extends EntityModel<CockatriceEntity> {
     public final ModelPart jaw, neck;
     public final ModelPart feather1, feather2, feather3;
 
-    public CockatriceModel() {
-        this.head = new ModelPart(this, 0, 13);
-        this.head.addCuboid(-2.0F, -4.0F, -6.0F, 4, 4, 8, 0.0F);
-        this.head.setPivot(0.0F, (float) (-8 + 16), -4.0F);
-        this.jaw = new ModelPart(this, 24, 13);
-        this.jaw.addCuboid(-2.0F, -1.0F, -6.0F, 4, 1, 8, -0.1F);
-        this.jaw.setPivot(0.0F, (float) (-8 + 16), -4.0F);
-        this.body = new ModelPart(this, 0, 0);
-        this.body.addCuboid(-3.0F, -3.0F, 0.0F, 6, 8, 5, 0.0F);
-        this.body.setPivot(0.0F, (float) (16), 0.0F);
-        this.legs = new ModelPart(this, 22, 0);
-        this.legs.addCuboid(-1.0F, -1.0F, -1.0F, 2, 9, 2);
-        this.legs.setPivot(-2.0F, (float) (16), 1.0F);
-        this.legs2 = new ModelPart(this, 22, 0);
-        this.legs2.addCuboid(-1.0F, -1.0F, -1.0F, 2, 9, 2);
-        this.legs2.setPivot(2.0F, (float) (16), 1.0F);
-        this.wings = new ModelPart(this, 52, 0);
-        this.wings.addCuboid(-1.0F, -0.0F, -1.0F, 1, 8, 4);
-        this.wings.setPivot(-3.0F, (float) (16), 2.0F);
-        this.wings2 = new ModelPart(this, 52, 0);
-        this.wings2.addCuboid(0.0F, -0.0F, -1.0F, 1, 8, 4);
-        this.wings2.setPivot(3.0F, (float) (-4 + 16), 0.0F);
-        this.neck = new ModelPart(this, 44, 0);
-        this.neck.addCuboid(-1.0F, -6.0F, -1.0F, 2, 6, 2);
-        this.neck.setPivot(0.0F, (float) (-2 + 16), -4.0F);
-        this.feather1 = new ModelPart(this, 30, 0);
-        this.feather1.addCuboid(-1.0F, -5.0F, 5.0F, 2, 1, 5, -0.3F);
-        this.feather1.setPivot(0.0F, (float) (1 + 16), 1.0F);
-        this.feather2 = new ModelPart(this, 30, 0);
-        this.feather2.addCuboid(-1.0F, -5.0F, 5.0F, 2, 1, 5, -0.3F);
-        this.feather2.setPivot(0.0F, (float) (1 + 16), 1.0F);
-        this.feather3 = new ModelPart(this, 30, 0);
-        this.feather3.addCuboid(-1.0F, -5.0F, 5.0F, 2, 1, 5, -0.3F);
-        this.feather3.setPivot(0.0F, (float) (1 + 16), 1.0F);
-        this.feather1.pivotY += 0.5F;
-        this.feather2.pivotY += 0.5F;
-        this.feather3.pivotY += 0.5F;
+    public CockatriceModel(ModelPart root) {
+        this.head = root.getChild("head");
+        this.jaw = root.getChild("jaw");
+        this.body = root.getChild("body");
+        this.legs = root.getChild("legs");
+        this.legs2 = root.getChild("legs2");
+        this.wings = root.getChild("wings");
+        this.wings2 = root.getChild("wings2");
+        this.neck = root.getChild("neck");
+        this.feather1 = root.getChild("feather1");
+        this.feather2 = root.getChild("feather2");
+        this.feather3 = root.getChild("feather3");
+    }
+
+    public static TexturedModelData getTexturedModelData() {
+        ModelData modelData = new ModelData();
+        ModelPartData modelPartData = modelData.getRoot();
+        modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 13).cuboid(-2.0F, -4.0F, -6.0F, 4, 4, 8), ModelTransform.pivot(0.0F, (float) (-8 + 16), -4.0F));
+        modelPartData.addChild("jaw", ModelPartBuilder.create().uv(24, 13).cuboid(-2.0F, -1.0F, -6.0F, 4, 1, 8), ModelTransform.pivot(0.0F, (float) (-8 + 16), -4.0F));
+        modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-3.0F, -3.0F, 0.0F, 6, 8, 5), ModelTransform.pivot(0.0F, (float) (16), 0.0F));
+        modelPartData.addChild("legs", ModelPartBuilder.create().uv(22, 0).cuboid(-1.0F, -1.0F, -1.0F, 2, 9, 2), ModelTransform.pivot(-2.0F, (float) (16), 1.0F));
+        modelPartData.addChild("legs2", ModelPartBuilder.create().uv(22, 0).cuboid(-1.0F, -1.0F, -1.0F, 2, 9, 2), ModelTransform.pivot(2.0F, (float) (16), 1.0F));
+        modelPartData.addChild("wings", ModelPartBuilder.create().uv(52, 0).cuboid(-1.0F, -0.0F, -1.0F, 1, 8, 4), ModelTransform.pivot(-3.0F, (float) (16), 2.0F));
+        modelPartData.addChild("wings2", ModelPartBuilder.create().uv(52, 0).cuboid(0.0F, -0.0F, -1.0F, 1, 8, 4), ModelTransform.pivot(3.0F, (float) (-4 + 16), 0.0F));
+        modelPartData.addChild("neck", ModelPartBuilder.create().uv(44, 0).cuboid(-1.0F, -6.0F, -1.0F, 2, 6, 2), ModelTransform.pivot(0.0F, (float) (-2 + 16), -4.0F));
+        modelPartData.addChild("feather1", ModelPartBuilder.create().uv(30, 0).cuboid(-1.0F, -5.0F, 5.0F, 2, 1, 5), ModelTransform.pivot(0.0F, (float) (1 + 16) + 0.5F, 1.0F));
+        modelPartData.addChild("feather2", ModelPartBuilder.create().uv(30, 0).cuboid(-1.0F, -5.0F, 5.0F, 2, 1, 5), ModelTransform.pivot(0.0F, (float) (1 + 16) + 0.5F, 1.0F));
+        modelPartData.addChild("feather3", ModelPartBuilder.create().uv(30, 0).cuboid(-1.0F, -5.0F, 5.0F, 2, 1, 5), ModelTransform.pivot(0.0F, (float) (1 + 16) + 0.5F, 1.0F));
+
+        return TexturedModelData.of(modelData,64,64);
     }
 
     @Override

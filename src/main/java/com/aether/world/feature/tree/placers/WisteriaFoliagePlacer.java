@@ -1,19 +1,17 @@
 package com.aether.world.feature.tree.placers;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.natural.AetherLeavesBlock;
 import com.aether.blocks.natural.AuralLeavesBlock;
 import com.aether.world.feature.tree.AetherTreeHell;
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
@@ -21,15 +19,16 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 import static com.aether.blocks.natural.AetherHangerBlock.TIP;
 
 public class WisteriaFoliagePlacer extends FoliagePlacer {
 
-    public static final Codec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+    public static final Codec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
             fillFoliagePlacerFields(instance).apply(instance, WisteriaFoliagePlacer::new));
 
-    public WisteriaFoliagePlacer(UniformIntDistribution radius, UniformIntDistribution offset) {
+    public WisteriaFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
     }
 
@@ -39,18 +38,20 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int offset, BlockBox box) {
+    protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
+        Set<BlockPos> leaves = Sets.newHashSet();
         if(radius <= 3)
             radius = 3;
 
         radius -= treeNode.getFoliageRadius();
         BlockPos nodePos = treeNode.getCenter();
-        BlockPos altNodePos = nodePos.add(0, 1, 0);
-        BlockState leafBlock = config.leavesProvider.getBlockState(random, nodePos);
+        BlockPos altNodePos = nodePos.up(offset);
+
+        BlockState leafBlock = config.foliageProvider.getBlockState(random, nodePos);
         BlockState hanger = Blocks.AIR.getDefaultState();
 
         if(leafBlock.getBlock() instanceof AetherLeavesBlock || leafBlock.getBlock() instanceof AuralLeavesBlock) {
-            hanger = AetherLeavesBlock.getHanger(leafBlock.getBlock());
+            hanger = AetherLeavesBlock.getHanger(leafBlock);
         }
 
         for(int i = -radius; i <= radius; i++) {
@@ -58,7 +59,7 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
                 for (int k = 0; k < radius; k++) {
                     BlockPos offPos = nodePos.add(Math.signum(i) * Math.abs(i)-k, k, Math.signum(j) * Math.abs(j)-k);
                     if((world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir) || TreeFeature.canReplace(world, offPos)) && offPos.isWithinDistance(random.nextBoolean() ? nodePos : altNodePos, radius)) {
-                        world.setBlockState(offPos, leafBlock, 19);
+                        replacer.accept(offPos, leafBlock);
                         leaves.add(offPos);
                     }
                 }
@@ -72,11 +73,11 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
                     int hangerLength = 1 + random.nextInt(2);
                     int step = 0;
                     while (step <= hangerLength && world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir)) {
-                        world.setBlockState(offPos, hanger.with(TIP, false), 19);
+                        replacer.accept(offPos, hanger.with(TIP, false));
                         offPos = offPos.down();
                         step++;
                     }
-                    world.setBlockState(offPos.up(), hanger.with(TIP, true), 19);
+                    replacer.accept(offPos.up(), hanger.with(TIP, true));
                 }
             }
         }

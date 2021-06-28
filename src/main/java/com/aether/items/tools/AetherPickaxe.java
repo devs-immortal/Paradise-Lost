@@ -1,12 +1,14 @@
 package com.aether.items.tools;
 
-import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 
 public class AetherPickaxe extends PickaxeItem implements IAetherTool {
 
@@ -20,28 +22,23 @@ public class AetherPickaxe extends PickaxeItem implements IAetherTool {
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         float original = super.getMiningSpeedMultiplier(stack, state);
-        if (this.getItemMaterial() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
+        if (this.getTier() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
         return original;
-    }
-
-    private float calculateIncrease(ItemStack tool) {
-        return (float) tool.getMaxDamage() / tool.getDamage() / 50;
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        ActionResult superUsage = super.useOnBlock(context);
-        if (superUsage.equals(ActionResult.PASS)) {
-            if (this.getItemMaterial() == AetherTiers.Gravitite && FloatingBlockEntity.gravititeToolUsedOnBlock(context, this)) {
-                return ActionResult.SUCCESS;
-            }
-        }
-        return superUsage;
+        ActionResult defaultResult = super.useOnBlock(context);
+        return defaultResult != ActionResult.PASS ? defaultResult : IAetherTool.super.useOnBlock(context, defaultResult);
     }
 
+    @Override
+    public AetherTiers getTier() {
+        return this.material;
+    }
 
     @Override
-    public AetherTiers getItemMaterial() {
-        return this.material;
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
+        return IAetherTool.super.useOnEntity(stack, player, entity, hand);
     }
 }

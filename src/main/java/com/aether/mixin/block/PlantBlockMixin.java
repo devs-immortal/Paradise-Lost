@@ -14,11 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PlantBlockMixin {
     @Inject(method = "canPlantOnTop", at = @At("TAIL"), cancellable = true)
     protected void canPlantOnTop(BlockState floor, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(
-                cir.getReturnValue() || (
-                        floor.isOf(AetherBlocks.AETHER_GRASS_BLOCK) || floor.isOf(AetherBlocks.AETHER_DIRT)
-                                || floor.isOf(AetherBlocks.AETHER_FARMLAND) || floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS)
-                )
-        );
+        // @reason Farmland is hardcoded in source code...
+        cir.setReturnValue(cir.getReturnValue() || floor.isOf(AetherBlocks.AETHER_FARMLAND));
     }
 }

@@ -11,14 +11,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Supplier;
 
 public class AetherWallMushroomBlock extends AetherMushroomBlock {
 
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    public AetherWallMushroomBlock(Settings settings) {
-        super(settings, AetherMushroomBlock.HangType.WALL);
+    public AetherWallMushroomBlock(Settings settings, Supplier<ConfiguredFeature<?, ?>> feature) {
+        super(settings, feature, AetherMushroomBlock.HangType.WALL);
     }
 
     @Override

@@ -2,8 +2,9 @@ package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
 import com.aether.client.model.entity.CockatriceModel;
+import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.entities.hostile.CockatriceEntity;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -13,8 +14,8 @@ public class CockatriceRenderer extends MobEntityRenderer<CockatriceEntity, Cock
 
     private static final Identifier TEXTURE = Aether.locate("textures/entity/cockatrice/cockatrice.png");
 
-    public CockatriceRenderer(EntityRenderDispatcher rendermanagerIn) {
-        super(rendermanagerIn, new CockatriceModel(), 1.0F);
+    public CockatriceRenderer(EntityRendererFactory.Context renderManager) {
+        super(renderManager, new CockatriceModel(renderManager.getPart(AetherModelLayers.COCKATRICE)), 1.0F);
     }
 
     @Override

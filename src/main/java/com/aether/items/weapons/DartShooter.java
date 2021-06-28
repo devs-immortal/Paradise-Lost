@@ -6,6 +6,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -25,8 +27,8 @@ public class DartShooter extends Item {
         } else if (playerIn.getStackInHand(Hand.MAIN_HAND).getItem() == this.ammo) {
             return playerIn.getStackInHand(Hand.MAIN_HAND);
         } else {
-            for (int index = 0; index < playerIn.inventory.size(); ++index) {
-                ItemStack stack = playerIn.inventory.getStack(index);
+            for (int index = 0; index < playerIn.getInventory().size(); ++index) {
+                ItemStack stack = playerIn.getInventory().getStack(index);
                 if (stack.getItem() == this.ammo) return stack;
             }
             return ItemStack.EMPTY;
@@ -45,7 +47,7 @@ public class DartShooter extends Item {
             PersistentProjectileEntity projectile = this.ammo.createDart(worldIn, heldItem, playerIn);
 
             if (!worldIn.isClient) {
-                projectile.setProperties(playerIn, playerIn.pitch, playerIn.yaw, 0.0F, 1.0F, 1.0F);
+                projectile.setProperties(playerIn, playerIn.getPitch(), playerIn.getYaw(), 0.0F, 1.0F, 1.0F);
                 worldIn.spawnEntity(projectile);
 
                 if (!playerIn.isCreative()) {
@@ -54,7 +56,7 @@ public class DartShooter extends Item {
                 } else if (playerIn.isCreative())
                     projectile.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
             }
-//            worldIn.playSound(playerIn, playerIn.getBlockPos(), AetherSounds.DART_SHOOTER_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (playerIn.getRandom().nextFloat() * 0.4F + 0.8F));
+            worldIn.playSound(playerIn, playerIn.getBlockPos(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (playerIn.getRandom().nextFloat() * 0.4F + 0.8F));
         }
         return super.use(worldIn, playerIn, handIn);
     }

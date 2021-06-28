@@ -24,7 +24,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.ScreenHandler;
@@ -237,7 +237,7 @@ public class SheepuffEntity extends AnimalEntity {
 
             return 0.62831855F + 0.21991149F * MathHelper.sin(float_2 * 28.7F);
         } else {
-            return this.sheepTimer > 0 ? 0.62831855F : this.pitch * 0.017453292F;
+            return this.sheepTimer > 0 ? 0.62831855F : this.getPitch() * 0.017453292F;
         }
     }
 
@@ -273,16 +273,16 @@ public class SheepuffEntity extends AnimalEntity {
     }
 
     @Override
-    public void writeCustomDataToTag(CompoundTag compound) {
-        super.writeCustomDataToTag(compound);
+    public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
 
         compound.putBoolean("sheared", this.isSheared());
         compound.putByte("color", (byte) this.getColor().getId());
     }
 
     @Override
-    public void readCustomDataFromTag(CompoundTag compound) {
-        super.readCustomDataFromTag(compound);
+    public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
 
         this.setSheared(compound.getBoolean("sheared"));
         this.setColor(DyeColor.byId(compound.getByte("color")));
@@ -355,7 +355,7 @@ public class SheepuffEntity extends AnimalEntity {
     }
 
     @Override
-    public net.minecraft.entity.EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason SpawnReason, net.minecraft.entity.EntityData entityData, CompoundTag compound) {
+    public net.minecraft.entity.EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason SpawnReason, net.minecraft.entity.EntityData entityData, NbtCompound compound) {
         entityData = super.initialize(world, difficulty, SpawnReason, entityData, compound);
 
         this.setColor(generateDefaultColor(world.getRandom()));

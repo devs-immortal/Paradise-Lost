@@ -37,7 +37,7 @@ public abstract class DartEntity extends PersistentProjectileEntity {
             if (!this.onGround) ++this.ticksInAir;
 
             if (this.ticksInAir == 500) {
-                this.remove();
+                this.discard();
                 return;
             }
         }
@@ -47,6 +47,6 @@ public abstract class DartEntity extends PersistentProjectileEntity {
 
     @Override
     public Packet<?> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this, 1 + (this.getOwner() == null ? this.getEntityId() : this.getOwner().getEntityId()));
+        return new EntitySpawnS2CPacket(this, 1 + (this.getOwner() == null ? this.getId() : this.getOwner().getId()));
     }
 }

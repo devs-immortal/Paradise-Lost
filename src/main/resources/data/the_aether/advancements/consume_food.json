@@ -19,7 +19,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "the_aether:white_apple"
+          "items": ["the_aether:white_apple"]
         }
       }
     },
@@ -27,7 +27,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "the_aether:blue_berry"
+          "items": ["the_aether:blue_berry"]
         }
       }
     },
@@ -35,7 +35,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "the_aether:enchanted_blueberry"
+          "items": ["the_aether:enchanted_blueberry"]
         }
       }
     },
@@ -43,7 +43,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "the_aether:blue_gummy_swet"
+          "items": ["the_aether:blue_gummy_swet"]
         }
       }
     },
@@ -51,7 +51,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "the_aether:golden_gummy_swet"
+          "items": ["the_aether:golden_gummy_swet"]
         }
       }
     },
@@ -59,7 +59,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "the_aether:healing_stone"
+          "items": ["the_aether:healing_stone"]
         }
       }
     },
@@ -67,7 +67,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "the_aether:candy_cane"
+          "items": ["the_aether:candy_cane"]
         }
       }
     },
@@ -75,7 +75,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "the_aether:ginger_bread_man"
+          "items": ["the_aether:ginger_bread_man"]
         }
       }
     }

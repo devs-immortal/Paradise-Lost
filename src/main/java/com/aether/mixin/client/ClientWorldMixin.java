@@ -1,9 +1,9 @@
 package com.aether.mixin.client;
 
 import com.aether.entities.block.FloatingBlockEntity;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import com.aether.entities.block.FloatingBlockStructure;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.EntityList;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,19 +16,21 @@ public class ClientWorldMixin {
 
     @Shadow
     @Final
-    private Int2ObjectMap<Entity> regularEntities;
+    EntityList entityList;
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;tickBlockEntities()V"), method = "tickEntities")
     void postEntityTick(CallbackInfo ci) {
-        for (Int2ObjectMap.Entry<Entity> entry : regularEntities.int2ObjectEntrySet()) {
-            if (entry.getValue() instanceof FloatingBlockEntity) {
-                FloatingBlockEntity entity = (FloatingBlockEntity) entry.getValue();
+        entityList.forEach(entityObj -> {
+            if (entityObj instanceof FloatingBlockEntity entity) {
                 entity.postTickEntities();
             }
-            if (entry.getValue() instanceof FloatingBlockEntity.ICPEM) {
-                FloatingBlockEntity.ICPEM entity = (FloatingBlockEntity.ICPEM) entry.getValue();
+            if (entityObj instanceof FloatingBlockEntity.ICPEM entity) {
                 entity.postTick();
             }
+        });
+        FloatingBlockStructure[] structures = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
+        for(FloatingBlockStructure structure : structures){
+            structure.postTick();
         }
     }
 }

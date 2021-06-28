@@ -2,7 +2,6 @@ package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;

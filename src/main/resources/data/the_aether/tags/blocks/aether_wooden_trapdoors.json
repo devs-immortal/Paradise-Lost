@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_trapdoor",
+    "the_aether:golden_oak_trapdoor",
+    "the_aether:crystal_trapdoor",
+    "the_aether:wisteria_trapdoor"
+  ]
+}

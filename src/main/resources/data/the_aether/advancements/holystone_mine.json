@@ -20,7 +20,7 @@
       "conditions": {
         "items": [
           {
-            "item": "the_aether:holystone",
+            "items": ["the_aether:holystone"],
             "count": {
               "min": 1,
               "max": 1

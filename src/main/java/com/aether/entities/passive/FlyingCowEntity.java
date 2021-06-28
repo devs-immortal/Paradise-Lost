@@ -11,7 +11,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -84,16 +84,16 @@ public class FlyingCowEntity extends SaddleMountEntity {
     }
 
     @Override
-    public void writeCustomDataToTag(CompoundTag compound) {
-        super.writeCustomDataToTag(compound);
+    public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
 
         compound.putInt("maxJumps", this.maxJumps);
         compound.putInt("remainingJumps", this.jumpsRemaining);
     }
 
     @Override
-    public void readCustomDataFromTag(CompoundTag compound) {
-        super.readCustomDataFromTag(compound);
+    public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
 
         this.maxJumps = compound.getInt("maxJumps");
         this.jumpsRemaining = compound.getInt("remainingJumps");
@@ -130,15 +130,15 @@ public class FlyingCowEntity extends SaddleMountEntity {
         if (currentStack.getItem() == Items.BUCKET && !this.isBaby()) {
             if (currentStack.getCount() == 1) {
                 player.setStackInHand(hand, new ItemStack(Items.MILK_BUCKET));
-            } else if (!player.inventory.insertStack(new ItemStack(Items.MILK_BUCKET))) {
+            } else if (!player.getInventory().insertStack(new ItemStack(Items.MILK_BUCKET))) {
                 if (!this.world.isClient) {
                     player.dropItem(new ItemStack(Items.MILK_BUCKET), false);
 
-                    if (!player.abilities.creativeMode) {
+                    if (!player.getAbilities().creativeMode) {
                         currentStack.setCount(currentStack.getCount() - 1);
                     }
                 }
-            } else if (!player.abilities.creativeMode) {
+            } else if (!player.getAbilities().creativeMode) {
                 currentStack.setCount(currentStack.getCount() - 1);
             }
         }

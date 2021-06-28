@@ -1,5 +1,6 @@
 package com.aether.items.weapons;
 
+import com.aether.items.tools.AetherSword;
 import com.aether.items.utils.AetherTiers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -32,7 +33,7 @@ public class PigSlayer extends AetherSword {
                 double d3 = 5.0D;
                 entityLiving.world.addParticle(ParticleTypes.FLAME, (entityLiving.getPos().getX() + (double) (entityLiving.world.random.nextFloat() * entityLiving.getWidth() * 2.0F)) - (double) entityLiving.getWidth() - d * d3, (entityLiving.getPos().getY() + (double) (entityLiving.world.random.nextFloat() * entityLiving.getHeight())) - d1 * d3, (entityLiving.getPos().getZ() + (double) (entityLiving.world.random.nextFloat() * entityLiving.getWidth() * 2.0F)) - (double) entityLiving.getWidth() - d2 * d3, d, d1, d2);
             }
-            entityLiving.remove();
+            entityLiving.discard();
         }
         return super.postHit(itemStack, entityLiving, entityLiving1);
     }
