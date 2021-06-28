@@ -51,7 +51,7 @@ repositories {
             includeGroup "curse.maven"
         }
     }
-    maven { url "http://maven.kyrptonaught.dev" }
+    maven { url "https://maven.kyrptonaught.dev" }
     maven { url "https://hephaestus.dev/release" }
     maven { url "https://jitpack.io" }
     maven {
