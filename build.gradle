@@ -54,10 +54,10 @@ repositories {
 //        name = "Ladysnake Libs"
 //        url = "https://ladysnake.jfrog.io/artifactory/mods"
 //    }
-//    maven {
-//        name = "NerdHubMC"
-//        url = "https://maven.abusedmaster.xyz/"
-//    }
+    maven {
+        name = "NerdHubMC"
+        url = "https://maven.abusedmaster.xyz/"
+    }
     maven {
         url = "https://maven.shedaniel.me/"
     }
