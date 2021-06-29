@@ -38,38 +38,26 @@ repositories {
     }
     maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
     maven {
-        name = "Modmenu"
+        name = "Modmenu-Legacy"
         url = "https://maven.fabricmc.net/io/github/prospector/modmenu/"
     }
     maven {
         name = "Fabric"
         url = "https://maven.fabricmc.net/"
     }
-    maven { url 'https://repo.repsy.io/mvn/gandiber/geckolib' }
-    maven {
-        name = "CottonMC"
-        url = "https://server.bbkr.space/artifactory/libs-release"
-    }
-    maven {
-        url = "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-    maven { url "https://hephaestus.dev/release" }
+    maven { url = "https://hephaestus.dev/release" }
     maven {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
-    maven {
-        name = "Ladysnake Libs"
-        url = "https://ladysnake.jfrog.io/artifactory/mods"
-    }
-    maven { url "https://jitpack.io" }
-    maven {
-        name = "NerdHubMC"
-        url = "https://maven.abusedmaster.xyz/"
-    }
+//    maven {
+//        name = "Ladysnake Libs"
+//        url = "https://ladysnake.jfrog.io/artifactory/mods"
+//    }
+//    maven {
+//        name = "NerdHubMC"
+//        url = "https://maven.abusedmaster.xyz/"
+//    }
     maven {
         url = "https://maven.shedaniel.me/"
     }
