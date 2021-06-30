@@ -13,7 +13,7 @@ public class WhiteSwetEntity extends SwetEntity{
     }
 
     public void onPlayerCollision(PlayerEntity player){
-        Collection<StatusEffectInstance> effects = player.getStatusEffects();
+        StatusEffectInstance[] effects = player.getStatusEffects().toArray(new StatusEffectInstance[0]);
         for (StatusEffectInstance effect : effects) {
             this.setStatusEffect(effect, this);
             player.removeStatusEffect(effect.getEffectType());
