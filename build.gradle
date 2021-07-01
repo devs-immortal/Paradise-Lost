@@ -54,10 +54,6 @@ repositories {
         name = "Ladysnake Libs"
         url = "https://ladysnake.jfrog.io/artifactory/mods"
     }
-//    maven {
-//        name = "NerdHubMC"
-//        url = "https://maven.abusedmaster.xyz/"
-//    }
     maven {
         url = "https://maven.shedaniel.me/"
     }
@@ -78,28 +74,25 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Libraries
-    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:2.1.1"))
+    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:${project.entity_attributes_version}"))
 
-    modImplementation "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
-    include "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
+    modImplementation(include("de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"))
 
     // Implement the required portions of FAPI
     // Remember to maintain these, and add the modular bits as needed. 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
     // Testing only, do not JiJ
-    modImplementation "com.terraformersmc:modmenu:2.0.2"
-    modRuntime "me.shedaniel:RoughlyEnoughItems-fabric:6.0.258-alpha"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 
     // Custom Portal Api
-    modImplementation "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
-    include "net.kyrptonaught:customportalapi:${project.customportalapi_version}"
+    modImplementation(include("net.kyrptonaught:customportalapi:${project.customportalapi_version}"))
 
-    modImplementation "dev.hephaestus:seedy-behavior:${project.seedy_version}"
-    include "dev.hephaestus:seedy-behavior:${project.seedy_version}"
+    modImplementation(include("dev.hephaestus:seedy-behavior:${project.seedy_version}"))
 
     // Implement Trinkets for parachutes, rings etc.
-    modImplementation "dev.emi:trinkets:${trinkets_version}"
+    modImplementation(include("dev.emi:trinkets:${project.trinkets_version}"))
 }
 
 processResources {
