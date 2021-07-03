@@ -111,7 +111,7 @@ public class SwetEntity extends SlimeEntity {
     protected void changeType(EntityType<? extends SwetEntity> type){
         if(!this.getType().equals(type) && !this.isRemoved()) {
             SwetEntity entity = type.create(world);
-            entity.setSize(this.getSize(),false);
+            entity.resize(this.getSize());
             entity.setHealth(this.getHealth());
             entity.setPosition(this.getPos());
             this.getStatusEffects().forEach(entity::addStatusEffect);
