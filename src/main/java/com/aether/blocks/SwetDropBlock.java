@@ -3,13 +3,11 @@ package com.aether.blocks;
 import com.aether.entities.hostile.SwetEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.FacingBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -28,7 +26,7 @@ public class SwetDropBlock extends EntityBlockEgg{
         super(settings, (world, pos) -> {
             SwetEntity swet = type.create(world);
             if (swet != null) {
-                swet.setSize(1);
+                swet.resize(1);
                 swet.setPosition(Vec3d.of(pos));
             }
             return swet;

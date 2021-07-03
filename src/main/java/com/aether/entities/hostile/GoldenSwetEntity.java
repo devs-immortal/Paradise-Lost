@@ -6,10 +6,8 @@ import net.minecraft.world.World;
 
 public class GoldenSwetEntity extends SwetEntity{
     public GoldenSwetEntity(World world){
-        super(AetherEntityTypes.GOLDEN_SWET, world, 4);
-    }
-    public GoldenSwetEntity(World world, int size){
-        super(AetherEntityTypes.GOLDEN_SWET, world, size);
+        super(AetherEntityTypes.GOLDEN_SWET, world);
+        resize(4);
     }
 
     @Override
