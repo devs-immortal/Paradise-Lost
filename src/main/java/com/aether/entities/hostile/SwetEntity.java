@@ -17,21 +17,27 @@ public class SwetEntity extends SlimeEntity {
     public int stuckCooldown = 0;
 
     public SwetEntity(World world) {
-        super(AetherEntityTypes.BLUE_SWET, world);
-        init();
+        super(AetherEntityTypes.WHITE_SWET, world);
+        init(2);
+    }
+
+    public SwetEntity(World world, int size) {
+        super(AetherEntityTypes.WHITE_SWET, world);
+        init(size);
     }
 
     public SwetEntity(EntityType<? extends SwetEntity> entityType, World world) {
         super(entityType, world);
-        init();
+        init(2);
     }
 
-    protected void init() {
-        if (this instanceof GoldenSwetEntity) {
-            super.setSize(4, false);
-        } else {
-            super.setSize(2, false);
-        }
+    public SwetEntity(EntityType<? extends SwetEntity> entityType, World world, int size) {
+        super(entityType, world);
+        init(size);
+    }
+
+    protected void init(int size) {
+        super.setSize(size, false);
         getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(25);
         setHealth(getMaxHealth());
     }
@@ -55,7 +61,7 @@ public class SwetEntity extends SlimeEntity {
 
     @Override
     public void onPlayerCollision(PlayerEntity player) {
-        if (player.getVehicle() == null && stuckCooldown <= 0) {
+        if (player.getVehicle() == null && stuckCooldown <= 0 && getSize() > 1) {
             player.startRiding(this, true);
         } else {
             super.onPlayerCollision(player);
@@ -70,11 +76,8 @@ public class SwetEntity extends SlimeEntity {
     }
 
     // Prevents the size from being changed
-    @Override
-    protected void setSize(int size, boolean heal) {
-        if (heal) {
-            this.setHealth(this.getMaxHealth());
-        }
+    public void setSize(int size) {
+        super.setSize(size, false);
     }
 
     // Prevents duplicate entities

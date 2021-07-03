@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import java.util.Collection;
 
 public class WhiteSwetEntity extends SwetEntity{
+
     public WhiteSwetEntity(World world){
         super(AetherEntityTypes.WHITE_SWET, world);
     }
