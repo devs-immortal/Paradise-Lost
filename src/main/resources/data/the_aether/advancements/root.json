@@ -4,11 +4,11 @@
       "item": "the_aether:aether_grass"
     },
     "title": {
-      "translate": "advancements.the_aether.root.title",
+      "text": "The Aether",
       "color": "aqua"
     },
     "description": {
-      "translate": "advancements.the_aether.root.description"
+      "text": "A hostile paradise in the sky, full of mystery and surprises!"
     },
     "frame": "goal",
     "show_toast": true,
