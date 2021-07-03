@@ -5,8 +5,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-import java.util.Collection;
-
 public class WhiteSwetEntity extends SwetEntity{
     public WhiteSwetEntity(World world){
         super(AetherEntityTypes.WHITE_SWET, world);

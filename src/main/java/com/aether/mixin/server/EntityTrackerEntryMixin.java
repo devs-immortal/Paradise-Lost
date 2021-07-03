@@ -1,7 +1,6 @@
 package com.aether.mixin.server;
 
 import com.aether.entities.AetherEntityExtensions;
-import com.aether.mixin.entity.MixinLivingEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.Packet;

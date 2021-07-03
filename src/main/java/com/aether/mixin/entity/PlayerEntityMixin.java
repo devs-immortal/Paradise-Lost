@@ -1,12 +1,10 @@
 package com.aether.mixin.entity;
 
-import com.aether.Aether;
 import com.aether.entities.AetherEntityExtensions;
 import com.aether.util.CustomStatusEffectInstance;
 import com.aether.world.dimension.AetherDimension;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.player.PlayerEntity;

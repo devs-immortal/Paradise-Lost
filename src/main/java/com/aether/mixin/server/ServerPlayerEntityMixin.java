@@ -1,10 +1,8 @@
 package com.aether.mixin.server;
 
-import com.aether.Aether;
 import com.aether.entities.AetherEntityExtensions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
