@@ -23,18 +23,18 @@ public class GoldenOakLeafParticle extends SpriteBillboardParticle {
         this.setSprite(provider);
 
         this.collidesWithWorld = true;
-        this.gravityStrength = 0.1F;
-        this.maxAge = 400;
+        this.gravityStrength = 0.09F;
+        this.maxAge = 350;
 
-        this.velocityX *= 0.3F;
+        this.velocityX *= 0.325F;
         this.velocityY *= 0.0F;
-        this.velocityZ *= 0.3F;
+        this.velocityZ *= 0.325F;
 
         this.velocityComposite = g / 50;
         velocityDown = h;
 
         this.rotateFactor = ((float) Math.random() - 0.5F) * 0.01F;
-        this.scale = (float) (0.08 + (random.nextDouble() / 10));
+        this.scale = (float) (0.06 + (random.nextDouble() / 14));
     }
 
     public void tick() {

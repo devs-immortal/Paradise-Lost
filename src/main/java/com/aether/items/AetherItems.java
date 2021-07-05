@@ -36,7 +36,10 @@ public class AetherItems {
     public static final ArmorItem PHOENIX_HELMET, PHOENIX_CHESTPLATE, PHOENIX_LEGGINGS, PHOENIX_BOOTS;
     public static final ArmorItem OBSIDIAN_HELMET, OBSIDIAN_CHESTPLATE, OBSIDIAN_LEGGINGS, OBSIDIAN_BOOTS;
     public static final ArmorItem VALKYRIE_HELMET, VALKYRIE_CHESTPLATE, VALKYRIE_LEGGINGS, VALKYRIE_BOOTS;
-    public static final Item BLUEBERRY, ENCHANTED_BLUEBERRY, BLUE_GUMMY_SWET, GOLDEN_GUMMY_SWET, HEALING_STONE, AETHER_MILK, WHITE_APPLE, GINGERBREAD_MAN, CANDY_CANE;
+    public static final Item BLUEBERRY, ENCHANTED_BLUEBERRY, ORANGE;
+    public static final Item BLUE_GUMMY_SWET, GOLDEN_GUMMY_SWET;
+    public static final Item HEALING_STONE, AETHER_MILK, WHITE_APPLE;
+    public static final Item GINGERBREAD_MAN, CANDY_CANE;
     public static final Item SKYROOT_BUCKET, SKYROOT_WATER_BUCKET, SKYROOT_POISON_BUCKET, SKYROOT_REMEDY_BUCKET, SKYROOT_MILK_BUCKET;
     public static final Item CLOUD_PARACHUTE, GOLDEN_CLOUD_PARACHUTE;
     public static final Item BRONZE_KEY, SILVER_KEY, GOLDEN_KEY;
@@ -153,15 +156,16 @@ public class AetherItems {
 
         // Food
         AetherItemSettings LOOT_FOOD = new AetherItemSettings().group(AetherItemGroups.Food).rarity(AetherItems.AETHER_LOOT);
-        BLUEBERRY = register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
+        BLUEBERRY = register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.BLUEBERRY)));
         ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
+        ORANGE = register("orange", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.ORANGE)));
         WHITE_APPLE = register("white_apple", new WhiteApple(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.WHITE_APPLE)));
         BLUE_GUMMY_SWET = register("blue_gummy_swet", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GUMMY_SWET)));
         GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GUMMY_SWET)));
         AETHER_MILK = register("valkyrie_milk", new DrinkableItem(new Item.Settings().rarity(Rarity.EPIC).food(AetherFood.MILK).maxCount(1)));
         HEALING_STONE = register("healing_stone", new HealingStone(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.HEALING_STONE)));
-        CANDY_CANE = register("candy_cane", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
-        GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.DEFAULT)));
+        CANDY_CANE = register("candy_cane", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GENERIC)));
+        GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GENERIC)));
 
         // Misc + Materials
         final AetherItemSettings LOOT_ACCESSORY = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Wearable);

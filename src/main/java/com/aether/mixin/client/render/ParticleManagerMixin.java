@@ -1,6 +1,7 @@
 package com.aether.mixin.client.render;
 
 import com.aether.client.rendering.particle.AetherParticles;
+import com.aether.client.rendering.particle.FallingOrangePetalParticle;
 import com.aether.client.rendering.particle.GoldenOakLeafParticle;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.particle.ParticleEffect;
@@ -20,5 +21,6 @@ public abstract class ParticleManagerMixin {
     @Inject(method = "registerDefaultFactories", at = @At("TAIL"))
     private void extendDefaults(CallbackInfo ci) {
         this.registerFactory(AetherParticles.GOLDEN_OAK_LEAF, GoldenOakLeafParticle.DefaultFactory::new);
+        this.registerFactory(AetherParticles.FALLING_ORANGE_PETAL, FallingOrangePetalParticle.DefaultFactory::new);
     }
 }

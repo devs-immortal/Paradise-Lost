@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "the_aether:block/stripped_orange_log"
+    },
+    "axis=z": {
+      "model": "the_aether:block/stripped_orange_log",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "the_aether:block/stripped_orange_log",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

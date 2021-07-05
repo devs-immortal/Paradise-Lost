@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "growth=0": {
+      "model": "the_aether:block/orange_leaves"
+    },
+    "growth=1": {
+      "model": "the_aether:block/orange_leaves_flowering"
+    },
+    "growth=2": {
+      "model": "the_aether:block/orange_leaves_fruiting"
+    }
+  }
+}
