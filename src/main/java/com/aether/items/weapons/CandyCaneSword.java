@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class CandyCaneSword extends AetherSword {
     public CandyCaneSword(Settings settings) {
-        super(AetherTiers.Candy, 3, -2, settings);
+        super(AetherTiers.CANDY, 3, -2, settings);
     }
 
     @Override

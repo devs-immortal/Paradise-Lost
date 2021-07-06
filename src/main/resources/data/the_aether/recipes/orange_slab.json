@@ -1,0 +1,18 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_slab",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "the_aether:orange_planks"
+    }
+  },
+  "result": {
+    "item": "the_aether:orange_slab",
+    "count": 6
+  }
+}
+        

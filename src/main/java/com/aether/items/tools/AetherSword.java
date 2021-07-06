@@ -16,7 +16,7 @@ public class AetherSword extends SwordItem implements IAetherTool {
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         float original = super.getMiningSpeedMultiplier(stack, state);
-        if (material == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
+        if (material == AetherTiers.ZANITE) return original + this.calculateIncrease(stack);
         return original;
     }
 

@@ -83,7 +83,7 @@ public abstract class MixinLivingEntity extends Entity implements AetherEntityEx
         Entity attacker = source.getAttacker();
         if (cir.getReturnValue() && attacker instanceof LivingEntity) {
             Item item = ((LivingEntity) attacker).getMainHandStack().getItem();
-            if (item instanceof ToolItem && ((ToolItem) item).getMaterial() == AetherTiers.Gravitite.getDefaultTier()) {
+            if (item instanceof ToolItem && ((ToolItem) item).getMaterial() == AetherTiers.GRAVITITE.getDefaultTier()) {
                 this.addVelocity(0, amount / 20 + 0.1, 0);
             }
         }

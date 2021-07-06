@@ -1,15 +1,14 @@
 package com.aether.blocks.natural;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.particle.AetherParticles;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -30,6 +29,7 @@ public class AetherFruitingLeaves extends AetherLeavesBlock {
 
     public static final IntProperty GROWTH = IntProperty.of("growth", 0, 2);
     public static final BooleanProperty CAPPED = BooleanProperty.of("capped");
+    public static final BooleanProperty NATURAL = BooleanProperty.of("natural");
     private final Item fruit;
 
     public AetherFruitingLeaves(Settings settings, Item fruit) {
@@ -40,11 +40,34 @@ public class AetherFruitingLeaves extends AetherLeavesBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int growth = state.get(GROWTH);
-        if(!state.get(CAPPED) && growth < 2 && random.nextInt(17) == 0) {
-            state = state.with(GROWTH, growth + 1).with(CAPPED, random.nextDouble() < 0.45 || growth + 1 == 2);
-            world.playSound(null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 2F, 1.5F);
-            world.setBlockState(pos, state);
+        if(!state.get(NATURAL)) {
+            int growth = state.get(GROWTH);
+            if(!state.get(CAPPED)) {
+                if(random.nextInt(60) == 0 && growth < 2) {
+                    if(growth == 1) {
+                        spawnPetalBurst(world, random, pos);
+                    }
+                    state = state.with(GROWTH, growth + 1).with(CAPPED, random.nextDouble() < 0.45 || growth + 1 == 2);
+                    world.playSound(null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 1.25F, 1.5F);
+                    world.setBlockState(pos, state);
+                }
+            }
+            else {
+                if(random.nextInt(240) == 0) {
+                    if(growth == 1) {
+                        spawnPetalBurst(world, random, pos);
+                    }
+                    else {
+                        int dropBlocks = 0;
+                        while (!world.isAir(pos.down(dropBlocks + 1)) && dropBlocks < 16 && world.getBlockState(pos.down(dropBlocks)).isOf(this)) {
+                            dropBlocks++;
+                        }
+                        world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() - (dropBlocks + 0.25), pos.getZ() + 0.5, new ItemStack(fruit), 0, 0, 0));
+                        world.playSound(null, pos, SoundEvents.BLOCK_CANDLE_BREAK, SoundCategory.BLOCKS, 1F, 1F);
+                    }
+                    world.setBlockState(pos, getDefaultState().with(DISTANCE, state.get(DISTANCE)));
+                }
+            }
         }
         super.randomTick(state, world, pos, random);
     }
@@ -64,9 +87,7 @@ public class AetherFruitingLeaves extends AetherLeavesBlock {
             world.playSound(null, pos, SoundEvents.BLOCK_CROP_BREAK, SoundCategory.BLOCKS, 1F, 2F);
 
             if(growth == 1) {
-                for (int i = 0; i < random.nextInt(9) + 5; i++) {
-                    world.addParticle(AetherParticles.FALLING_ORANGE_PETAL, (double) pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), (double) pos.getZ() + random.nextDouble(), speed, world.getRandom().nextDouble() / -20.0, 0);
-                }
+                spawnPetalBurst(world, random, pos);
             }
             else {
                 int fortune = EnchantmentHelper.get(player.getStackInHand(hand)).getOrDefault(Enchantments.FORTUNE, 0);
@@ -79,6 +100,12 @@ public class AetherFruitingLeaves extends AetherLeavesBlock {
         }
 
         return super.onUse(state, world, pos, player, hand, hit);
+    }
+
+    private void spawnPetalBurst(World world, Random random, BlockPos pos) {
+        for (int i = 0; i < random.nextInt(9) + 5; i++) {
+            world.addParticle(AetherParticles.FALLING_ORANGE_PETAL, (double) pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), (double) pos.getZ() + random.nextDouble(), speed, world.getRandom().nextDouble() / -20.0, 0);
+        }
     }
 
     @Override
@@ -108,8 +135,13 @@ public class AetherFruitingLeaves extends AetherLeavesBlock {
     }
 
     @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        super.onBreak(world, pos, state, player);
+    }
+
+    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
-        builder.add(GROWTH, CAPPED);
+        builder.add(GROWTH, CAPPED, NATURAL);
     }
 }

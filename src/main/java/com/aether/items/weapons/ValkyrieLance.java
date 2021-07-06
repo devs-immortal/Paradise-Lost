@@ -19,7 +19,7 @@ public class ValkyrieLance extends AetherSword {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributes;
 
     public ValkyrieLance(Settings settings) {
-        super(AetherTiers.Valkyrie, -3.0F, 6, settings);
+        super(AetherTiers.VALKYRIE, -3.0F, 6, settings);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", 10.0, EntityAttributeModifier.Operation.ADDITION));
         builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", -3.0F, EntityAttributeModifier.Operation.ADDITION));

@@ -26,7 +26,7 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         float original = super.getMiningSpeedMultiplier(stack, state);
-        if (this.getTier() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
+        if (this.getTier() == AetherTiers.ZANITE) return original + this.calculateIncrease(stack);
         return original;
     }
 
@@ -38,7 +38,7 @@ public class AetherShovel extends ShovelItem implements IAetherTool {
 
     @Override
     public boolean postMine(ItemStack stackIn, World worldIn, BlockState stateIn, BlockPos posIn, LivingEntity entityIn) {
-        if (!worldIn.isClient && this.getTier() == AetherTiers.Holystone && worldIn.getRandom().nextInt(100) <= 5)
+        if (!worldIn.isClient && this.getTier() == AetherTiers.HOLYSTONE && worldIn.getRandom().nextInt(100) <= 5)
             worldIn.spawnEntity(new ItemEntity(worldIn, posIn.getX(), posIn.getY(), posIn.getZ(), new ItemStack(AetherItems.AMBROSIUM_SHARD)));
         return super.postMine(stackIn, worldIn, stateIn, posIn, entityIn);
     }

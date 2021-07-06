@@ -13,7 +13,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class ElementalSword extends AetherSword {
 
     public ElementalSword(Settings settings) {
-        super(AetherTiers.Legendary, -2.4F, 4, settings);
+        super(AetherTiers.LEGENDARY, -2.4F, 4, settings);
     }
 
     @Override

@@ -46,6 +46,7 @@ public class AxeItemMixin extends MiningToolItem {
         AETHER_STRIPPED_BLOCKS.put(AetherBlocks.GOLDEN_OAK_LOG, AetherBlocks.STRIPPED_GOLDEN_OAK_LOG);
         AETHER_STRIPPED_BLOCKS.put(AetherBlocks.SKYROOT_LOG, AetherBlocks.STRIPPED_SKYROOT_LOG);
         AETHER_STRIPPED_BLOCKS.put(AetherBlocks.WISTERIA_LOG, AetherBlocks.STRIPPED_WISTERIA_LOG);
+        AETHER_STRIPPED_BLOCKS.put(AetherBlocks.ORANGE_LOG, AetherBlocks.STRIPPED_ORANGE_LOG);
 
         Block block = AETHER_STRIPPED_BLOCKS.get(blockState.getBlock());
 

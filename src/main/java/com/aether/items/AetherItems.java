@@ -98,25 +98,25 @@ public class AetherItems {
         HOLYSTONE_SWORD = register("holystone_sword", new AetherSword(AetherTiers.Holystone, -2.4F, 3, WEAPONS));
         HOLYSTONE_HOE = register("holystone_hoe", new AetherHoe(AetherTiers.Holystone, TOOLS, 2));
         */
-        ZANITE_SHOVEL = register("zanite_shovel", new AetherShovel(AetherTiers.Zanite, TOOLS, 1.5F, -3.0F));
-        ZANITE_PICKAXE = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.Zanite, TOOLS, 1, -2.8F));
-        ZANITE_AXE = register("zanite_axe", new AetherAxe(AetherTiers.Zanite, TOOLS, 6.0F, -3.1F));
-        ZANITE_SWORD = register("zanite_sword", new AetherSword(AetherTiers.Zanite, -2.4F, 3, WEAPONS));
-        ZANITE_HOE = register("zanite_hoe", new AetherHoe(AetherTiers.Zanite, TOOLS, 3));
+        ZANITE_SHOVEL = register("zanite_shovel", new AetherShovel(AetherTiers.ZANITE, TOOLS, 1.5F, -3.0F));
+        ZANITE_PICKAXE = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.ZANITE, TOOLS, 1, -2.8F));
+        ZANITE_AXE = register("zanite_axe", new AetherAxe(AetherTiers.ZANITE, TOOLS, 6.0F, -3.1F));
+        ZANITE_SWORD = register("zanite_sword", new AetherSword(AetherTiers.ZANITE, -2.4F, 3, WEAPONS));
+        ZANITE_HOE = register("zanite_hoe", new AetherHoe(AetherTiers.ZANITE, TOOLS, 3));
 
         final Item.Settings GRAVITITE_TOOLS = new AetherItemSettings().rarity(Rarity.RARE).group(AetherItemGroups.Tools);
-        GRAVITITE_SHOVEL = register("gravitite_shovel", new AetherShovel(AetherTiers.Gravitite, GRAVITITE_TOOLS, 1.5F, -3.0F));
-        GRAVITITE_PICKAXE = register("gravitite_pickaxe", new AetherPickaxe(AetherTiers.Gravitite, GRAVITITE_TOOLS, 1, -2.8F));
-        GRAVITITE_AXE = register("gravitite_axe", new AetherAxe(AetherTiers.Gravitite, GRAVITITE_TOOLS, 5.0F, -3.0F));
-        GRAVITITE_SWORD = register("gravitite_sword", new AetherSword(AetherTiers.Gravitite, -2.4F, 3, new AetherItemSettings().rarity(Rarity.RARE).group(AetherItemGroups.Tools)));
-        GRAVITITE_HOE = register("gravitite_hoe", new AetherHoe(AetherTiers.Gravitite, GRAVITITE_TOOLS, 4));
+        GRAVITITE_SHOVEL = register("gravitite_shovel", new AetherShovel(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 1.5F, -3.0F));
+        GRAVITITE_PICKAXE = register("gravitite_pickaxe", new AetherPickaxe(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 1, -2.8F));
+        GRAVITITE_AXE = register("gravitite_axe", new AetherAxe(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 5.0F, -3.0F));
+        GRAVITITE_SWORD = register("gravitite_sword", new AetherSword(AetherTiers.GRAVITITE, -2.4F, 3, new AetherItemSettings().rarity(Rarity.RARE).group(AetherItemGroups.Tools)));
+        GRAVITITE_HOE = register("gravitite_hoe", new AetherHoe(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 4));
 
         final Item.Settings VALKYRIE_TOOLS = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Tools);
-        VALKYRIE_SHOVEL = register("valkyrie_shovel", new AetherShovel(AetherTiers.Valkyrie, VALKYRIE_TOOLS, 1.5F, -3.0F));
-        VALKYRIE_PICKAXE = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.Valkyrie, VALKYRIE_TOOLS, 1, -2.8F));
-        VALKYRIE_AXE = register("valkyrie_axe", new AetherAxe(AetherTiers.Valkyrie, VALKYRIE_TOOLS, 4.0F, -2.9F));
+        VALKYRIE_SHOVEL = register("valkyrie_shovel", new AetherShovel(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 1.5F, -3.0F));
+        VALKYRIE_PICKAXE = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 1, -2.8F));
+        VALKYRIE_AXE = register("valkyrie_axe", new AetherAxe(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 4.0F, -2.9F));
         VALKYRIE_LANCE = register("valkyrie_lance", new ValkyrieLance(new AetherItemSettings().rarity(Rarity.EPIC).group(AetherItemGroups.Tools)));
-        VALKYRIE_HOE = register("valkyrie_hoe", new AetherHoe(AetherTiers.Valkyrie, VALKYRIE_TOOLS, 5));
+        VALKYRIE_HOE = register("valkyrie_hoe", new AetherHoe(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 5));
 
         // Armor
         final AetherItemSettings ARMOR = new AetherItemSettings().group(AetherItemGroups.Wearable);

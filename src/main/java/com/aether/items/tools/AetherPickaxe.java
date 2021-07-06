@@ -22,7 +22,7 @@ public class AetherPickaxe extends PickaxeItem implements IAetherTool {
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         float original = super.getMiningSpeedMultiplier(stack, state);
-        if (this.getTier() == AetherTiers.Zanite) return original + this.calculateIncrease(stack);
+        if (this.getTier() == AetherTiers.ZANITE) return original + this.calculateIncrease(stack);
         return original;
     }
 

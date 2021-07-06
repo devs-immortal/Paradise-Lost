@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -80,9 +81,9 @@ public class AetherConfiguredFeatures {
 
     public static class Configs {
 
-        public static final BlockState ORANGE_LEAVES = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(AetherFruitingLeaves.CAPPED, true);
-        public static final BlockState ORANGE_LEAVES_FLOWERING = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(AetherFruitingLeaves.CAPPED, true).with(AetherFruitingLeaves.GROWTH, 1);
-        public static final BlockState ORANGE_LEAVES_FRUITING = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(AetherFruitingLeaves.CAPPED, true).with(AetherFruitingLeaves.GROWTH, 2);
+        public static final BlockState ORANGE_LEAVES = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(AetherFruitingLeaves.CAPPED, true).with(AetherFruitingLeaves.NATURAL, true);
+        public static final BlockState ORANGE_LEAVES_FLOWERING = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(AetherFruitingLeaves.CAPPED, true).with(AetherFruitingLeaves.NATURAL, true).with(AetherFruitingLeaves.GROWTH, 1);
+        public static final BlockState ORANGE_LEAVES_FRUITING = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(AetherFruitingLeaves.CAPPED, true).with(AetherFruitingLeaves.NATURAL, true).with(AetherFruitingLeaves.GROWTH, 2);
 
         //public static final RandomPatchFeatureConfig FLOWER_CONFIG = (new RandomPatchFeatureConfig.Builder((new WeightedBlockStateProvider(ConfiguredFeatures.method_35926().add(AetherBlocks.PURPLE_FLOWER.getDefaultState(), 2).add(AetherBlocks.WHITE_FLOWER.getDefaultState(), 1)), new SimpleBlockPlacer())).tries(64).build();
         public static final RandomPatchFeatureConfig AETHER_BUSH_CONFIG = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.AETHER_BUSH.getDefaultState()), SimpleBlockPlacer.INSTANCE)).spreadX(16).spreadY(7).spreadZ(16).tries(256).build();
@@ -91,6 +92,7 @@ public class AetherConfiguredFeatures {
         public static final TreeFeatureConfig SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LOG.getDefaultState()), new StraightTrunkPlacer(4, 2, 0), new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LEAVES.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.SKYROOT_SAPLING.getDefaultState()), new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
         public static final TreeFeatureConfig CRYSTAL_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.CRYSTAL_LOG.getDefaultState()), new StraightTrunkPlacer(5, 2, 2), new SimpleBlockStateProvider(AetherBlocks.CRYSTAL_LEAVES.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.CRYSTAL_SAPLING.getDefaultState()), new SpruceFoliagePlacer(UniformIntProvider.create(1, 2), UniformIntProvider.create(0, 2), UniformIntProvider.create(1, 1)), new TwoLayersFeatureSize(2, 0, 2))).ignoreVines().build();
         public static final TreeFeatureConfig ORANGE_TREE_SAPLING_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.ORANGE_LOG.getDefaultState()), new BendingTrunkPlacer(3, 2, 1, 3, UniformIntProvider.create(1, 2)), new SimpleBlockStateProvider(AetherBlocks.ORANGE_LEAVES.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.ORANGE_SAPLING.getDefaultState()), new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 63), new TwoLayersFeatureSize(1, 0, 1))).build();
+        public static final TreeFeatureConfig ORANGE_TREE_WILD_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.ORANGE_LOG.getDefaultState()), new BendingTrunkPlacer(3, 2, 1, 3, UniformIntProvider.create(1, 2)), new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ORANGE_LEAVES, 2).add(ORANGE_LEAVES_FLOWERING, 2).add(ORANGE_LEAVES_FRUITING, 1)), new SimpleBlockStateProvider(AetherBlocks.ORANGE_SAPLING.getDefaultState()), new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 63), new TwoLayersFeatureSize(1, 0, 1))).build();
         public static final TreeFeatureConfig ROSE_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new WisteriaTrunkPlacer(6, 3, 2), new SimpleBlockStateProvider(AetherBlocks.ROSE_WISTERIA_LEAVES.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.ROSE_WISTERIA_SAPLING.getDefaultState()), new WisteriaFoliagePlacer(UniformIntProvider.create(1, 2), UniformIntProvider.create(0, 1)), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
         public static final TreeFeatureConfig LAVENDER_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new WisteriaTrunkPlacer(6, 3, 2), new SimpleBlockStateProvider(AetherBlocks.LAVENDER_WISTERIA_LEAVES.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.LAVENDER_WISTERIA_SAPLING.getDefaultState()), new WisteriaFoliagePlacer(UniformIntProvider.create(1, 2), UniformIntProvider.create(0, 1)), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
         public static final TreeFeatureConfig FROST_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new WisteriaTrunkPlacer(6, 3, 2), new SimpleBlockStateProvider(AetherBlocks.FROST_WISTERIA_LEAVES.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.FROST_WISTERIA_SAPLING.getDefaultState()), new WisteriaFoliagePlacer(UniformIntProvider.create(1, 2), UniformIntProvider.create(0, 1)), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
@@ -113,13 +115,14 @@ public class AetherConfiguredFeatures {
         );
 
         public static final RandomFeatureConfig RAINBOW_FOREST_CONFIG = new RandomFeatureConfig(
-                ImmutableList.of(Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.33F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FROST_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.1F)),
+                ImmutableList.of(Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.33F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FANCY_LAVENDER_WISTERIA_CONFIG).withChance(0.025F), Feature.TREE.configure(FANCY_ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FROST_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.2F), Feature.TREE.configure(ORANGE_TREE_WILD_CONFIG).withChance(0.0125F)),
                 Feature.TREE.configure(Configs.ROSE_WISTERIA_CONFIG)
         );
 
         public static final RandomFeatureConfig SPARSE_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.1F)
+                        Feature.TREE.configure(FANCY_SKYROOT_CONFIG).withChance(0.1F),
+                        Feature.TREE.configure(ORANGE_TREE_WILD_CONFIG).withChance(0.02F)
                 ),
                 Feature.TREE.configure(Configs.SKYROOT_CONFIG)
         );

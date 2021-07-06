@@ -30,7 +30,7 @@ public interface IAetherTool {
 
     Logger log = LogManager.getLogger(IAetherTool.class);
 
-    private boolean eligibleToFloat(ItemUsageContext context) {
+    default boolean eligibleToFloat(ItemUsageContext context) {
         BlockPos pos = context.getBlockPos();
         World world = context.getWorld();
         BlockState state = world.getBlockState(pos);
@@ -49,7 +49,7 @@ public interface IAetherTool {
     }
 
     default ActionResult useOnBlock(ItemUsageContext context, @Nullable ActionResult defaultResult) {
-        if (this.getTier() == AetherTiers.Gravitite) {
+        if (this.getTier() == AetherTiers.GRAVITITE) {
             BlockPos pos = context.getBlockPos();
             World world = context.getWorld();
             BlockState state = world.getBlockState(pos);
@@ -107,7 +107,7 @@ public interface IAetherTool {
     }
 
     default ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
-        if(this.getTier() == AetherTiers.Gravitite){
+        if(this.getTier() == AetherTiers.GRAVITITE){
             ((AetherEntityExtensions)entity).setFlipped();
             return ActionResult.SUCCESS;
         }
