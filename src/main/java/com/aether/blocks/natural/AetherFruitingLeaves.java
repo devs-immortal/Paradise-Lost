@@ -35,7 +35,7 @@ public class AetherFruitingLeaves extends AetherLeavesBlock {
     public AetherFruitingLeaves(Settings settings, Item fruit) {
         super(settings, true);
         this.fruit = fruit;
-        setDefaultState(getDefaultState().with(GROWTH, 0).with(CAPPED, false));
+        setDefaultState(getDefaultState().with(GROWTH, 0).with(CAPPED, false).with(NATURAL, false));
     }
 
     @Override
