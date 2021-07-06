@@ -60,6 +60,9 @@ repositories {
     maven {
         url = "https://maven.kyrptonaught.dev/"
     }
+    maven {
+        url = "https://jitpack.io"
+    }
     mavenCentral()
 }
 
@@ -93,7 +96,7 @@ dependencies {
 
     // Implement Trinkets for parachutes, rings etc.
     //modImplementation(include("dev.emi:trinkets:${project.trinkets_version}"))
-    modImplementation(include(files("libs/trinkets-${project.trinkets_version}.jar")))
+    modImplementation(include("com.github.CDAGaming:trinkets:d53943eac9"))
 }
 
 processResources {
