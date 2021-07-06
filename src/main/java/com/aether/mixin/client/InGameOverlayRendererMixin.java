@@ -1,70 +1,76 @@
 package com.aether.mixin.client;
 
+import com.aether.blocks.aercloud.BaseAercloudBlock;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameOverlayRenderer;
+import net.minecraft.client.render.*;
+import net.minecraft.client.texture.Sprite;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Matrix4f;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(InGameOverlayRenderer.class)
 @Environment(EnvType.CLIENT)
-public class InGameOverlayRendererMixin {
+public abstract class InGameOverlayRendererMixin {
 
-    // TODO: Replace this with a mixin to renderInWallOverlay (I don't trust myself to not explode this code)
-//    @Inject(method = "renderOverlays", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;enableAlphaTest()V"))
-//    private static void renderOverlays(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo ci){
-//        PlayerEntity player = minecraftClient.player;
-//        if (!player.noClip) {
-//            BlockState blockState = getBlockStateFromEyePos(player);
-//            if (blockState.getBlock() instanceof BaseAercloudBlock) {
-//                renderInAercloudOverlay(minecraftClient, blockState.getBlock(), matrixStack);
-//            }
-//        }
-//    }
+    @Shadow @Nullable protected static BlockState getInWallBlockState(PlayerEntity player) { return null; }
 
-    // Follows the same procedures as the renderUnderwaterOverlay method in the original class
-    // TODO: This should use renderInWallOverlay as it's base for 1.17
-//    private static void renderInAercloudOverlay(MinecraftClient minecraftClient, Block block, MatrixStack matrixStack) {
-//        minecraftClient.getTextureManager().bindTexture(new Identifier("the_aether:textures/block/aercloud_overlay.png"));
-//        // color[0] = red, color[1] = green, color[2] = blue
-//        int[] color = rgbFromMaterialColor(block.getDefaultMapColor());
-//        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
-//        RenderSystem.enableBlend();
-//        RenderSystem.defaultBlendFunc();
-//        // m and n move the overlay as the player rotates
-//        float m = -minecraftClient.player.getYaw() / 256.0F;
-//        float n = minecraftClient.player.getPitch() / 256.0F;
-//        Matrix4f matrix4f = matrixStack.peek().getModel();
-//        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
-//        // The reason it's 255-color[n] is because this function calculates colors backwards.
-//        bufferBuilder.vertex(matrix4f, -2.0F, -2.0F, -0.5F).color(255-color[0], 255-color[1], 255-color[2], 0.4F).texture(4.0F + m, 4.0F + n).next();
-//        bufferBuilder.vertex(matrix4f, 2.0F, -2.0F, -0.5F).color(255-color[0], 255-color[1], 255-color[2], 0.4F).texture(0.0F + m, 4.0F + n).next();
-//        bufferBuilder.vertex(matrix4f, 2.0F, 2.0F, -0.5F).color(255-color[0], 255-color[1], 255-color[2], 0.4F).texture(0.0F + m, 0.0F + n).next();
-//        bufferBuilder.vertex(matrix4f, -2.0F, 2.0F, -0.5F).color(255-color[0], 255-color[1], 255-color[2], 0.4F).texture(4.0F + m, 0.0F + n).next();
-//        bufferBuilder.end();
-//        BufferRenderer.draw(bufferBuilder); // Overlays it on the screen
-//        RenderSystem.disableBlend();
-//    }
-
-    private static BlockState getBlockStateFromEyePos(PlayerEntity playerEntity) {
-        BlockPos.Mutable mutable = new BlockPos.Mutable();
-
-        mutable.set(playerEntity.getX(), playerEntity.getEyeY(), playerEntity.getZ());
-        return playerEntity.world.getBlockState(mutable);
+    @Inject(method = "renderInWallOverlay", at = @At("HEAD"), cancellable = true)
+    private static void renderAercloudOverlay(Sprite sprite, MatrixStack matrices, CallbackInfo ci) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        BlockState overlayState = getInWallBlockState(client.player);
+        if(overlayState != null && overlayState.getBlock() instanceof BaseAercloudBlock) {
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.enableTexture();
+            RenderSystem.setShaderTexture(0, sprite.getAtlas().getId());
+            BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+            float f = client.player.getBrightnessAtEyes();
+            RenderSystem.enableBlend();
+            RenderSystem.defaultBlendFunc();
+            RenderSystem.setShaderColor(f, f, f, 0.775F);
+            float uMin = sprite.getMinU();
+            float uMax = sprite.getMaxU();
+            float vMin = sprite.getMinV();
+            float vMax = sprite.getMaxV();
+            Matrix4f matrix4f = matrices.peek().getModel();
+            bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
+            bufferBuilder.vertex(matrix4f, -1.0F, -1.0F, -0.5F).texture(uMax, vMax).next();
+            bufferBuilder.vertex(matrix4f, 1.0F, -1.0F, -0.5F).texture(uMin, vMax).next();
+            bufferBuilder.vertex(matrix4f, 1.0F, 1.0F, -0.5F).texture(uMin, vMin).next();
+            bufferBuilder.vertex(matrix4f, -1.0F, 1.0F, -0.5F).texture(uMax, vMin).next();
+            bufferBuilder.end();
+            BufferRenderer.draw(bufferBuilder);
+            RenderSystem.disableBlend();
+            ci.cancel();
+        }
     }
 
-    private static int[] rgbFromMaterialColor(MapColor materialColor){
-        int color = materialColor.color;
-        int r = color/256/256;
-        int g = (color/256)%256;
-        int b = (color)%256;
-        int[] rgb = new int[3];
-        rgb[0] = r;
-        rgb[1] = g;
-        rgb[2] = b;
-        return rgb;
+    @Inject(method = "getInWallBlockState", at = @At("HEAD"), cancellable = true)
+    private static void getInWallBlockState(PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
+
+        for(int i = 0; i < 8; ++i) {
+            double d = player.getX() + (double)(((float)((i) % 2) - 0.5F) * player.getWidth() * 0.8F);
+            double e = player.getEyeY() + (double)(((float)((i >> 1) % 2) - 0.5F) * 0.1F);
+            double f = player.getZ() + (double)(((float)((i >> 2) % 2) - 0.5F) * player.getWidth() * 0.8F);
+            mutable.set(d, e, f);
+            BlockState blockState = player.world.getBlockState(mutable);
+            if (blockState.getBlock() instanceof BaseAercloudBlock) {
+                cir.setReturnValue(blockState);
+                cir.cancel();
+            }
+        }
     }
 }
