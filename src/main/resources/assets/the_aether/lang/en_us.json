@@ -1,4 +1,10 @@
 {
+  "itemGroup.the_aether.aether_blocks": "Aether Blocks",
+  "itemGroup.the_aether.aether_food": "Aether Foods",
+  "itemGroup.the_aether.aether_misc": "Aether Miscellaneous",
+  "itemGroup.the_aether.aether_resources": "Aether Materials",
+  "itemGroup.the_aether.aether_tools": "Aether Tools",
+  "itemGroup.the_aether.aether_wearables": "Aether Wearables",
   "block.the_aether.aerogel": "Aerogel",
   "block.the_aether.aerogel_slab": "Aerogel Slab",
   "block.the_aether.aerogel_stairs": "Aerogel Stairs",
@@ -376,11 +382,7 @@
   "item.the_aether.zanite_ring": "Zanite Ring",
   "item.the_aether.zanite_shovel": "Zanite Shovel",
   "item.the_aether.zanite_sword": "Zanite Sword",
-  "itemGroup.the_aether.aether_blocks": "Aether Blocks",
-  "itemGroup.the_aether.aether_food": "Aether Foods",
-  "itemGroup.the_aether.aether_misc": "Aether Miscellaneous",
-  "itemGroup.the_aether.aether_resources": "Aether Materials",
-  "itemGroup.the_aether.aether_tools": "Aether Tools",
-  "itemGroup.the_aether.aether_wearables": "Aether Wearables",
-  "trinkets.slot.chest.parachute": "Parachute"
+  "trinkets.slot.chest.parachute": "Parachute",
+  "death.attack.aether_fall": "%1$s plummeted from the heavens",
+  "death.attack.aether_fall.player": "%1$s was thrown off the heavens above by %2$s"
 }

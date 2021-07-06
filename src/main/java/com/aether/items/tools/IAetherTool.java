@@ -59,7 +59,6 @@ public interface IAetherTool {
                     return ActionResult.FAIL;
                 }
 
-                // TODO: Add compatibility for two-tall blocks such as doors and tall grass
                 if (!world.isClient()) {
                     if(state.getProperties().contains(Properties.DOUBLE_BLOCK_HALF)){
                         if(state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER){
