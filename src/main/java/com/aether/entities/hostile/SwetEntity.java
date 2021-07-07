@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public class SwetEntity extends SlimeEntity {
 
     public int stuckCooldown = 0;
+    protected int initialSize = 2;
 
     public SwetEntity(World world) {
         this(AetherEntityTypes.WHITE_SWET, world);
@@ -89,7 +90,7 @@ public class SwetEntity extends SlimeEntity {
     @Override
     @Nullable
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt){
-        setSize(getInitialSize(), true);
+        setSize(initialSize, true);
         this.getAttributeInstance(EntityAttributes.GENERIC_FOLLOW_RANGE).addPersistentModifier(new EntityAttributeModifier("Random spawn bonus", this.random.nextGaussian() * 0.05D, EntityAttributeModifier.Operation.MULTIPLY_BASE));
         if (this.random.nextFloat() < 0.05F) {
             this.setLeftHanded(true);
@@ -127,6 +128,4 @@ public class SwetEntity extends SlimeEntity {
             world.spawnEntity(swet);
         }
     }
-
-    protected int getInitialSize() { return 2; }
 }

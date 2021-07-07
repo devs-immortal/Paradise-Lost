@@ -8,6 +8,7 @@ public class GoldenSwetEntity extends SwetEntity{
 
     public GoldenSwetEntity(World world){
         super(AetherEntityTypes.GOLDEN_SWET, world);
+        initialSize = 4;
     }
 
     @Override
@@ -17,7 +18,4 @@ public class GoldenSwetEntity extends SwetEntity{
         getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(2);
         setHealth(getMaxHealth());
     }
-
-    @Override
-    protected int getInitialSize() { return 4; }
 }
