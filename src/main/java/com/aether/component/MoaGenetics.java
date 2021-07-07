@@ -5,8 +5,6 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
-
 public class MoaGenetics implements AutoSyncedComponent {
 
     private MoaEntity moa;

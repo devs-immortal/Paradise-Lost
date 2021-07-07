@@ -2,8 +2,6 @@ package com.aether.entities.passive;
 
 import com.aether.api.AetherAPI;
 import com.aether.api.moa.MoaType;
-import com.aether.component.AetherComponents;
-import com.aether.component.MoaGenetics;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
