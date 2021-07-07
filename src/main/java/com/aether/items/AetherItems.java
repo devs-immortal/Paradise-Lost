@@ -160,8 +160,8 @@ public class AetherItems {
         ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
         ORANGE = register("orange", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.ORANGE)));
         WHITE_APPLE = register("white_apple", new WhiteApple(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.WHITE_APPLE)));
-        BLUE_GUMMY_SWET = register("blue_gummy_swet", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GUMMY_SWET)));
-        GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GUMMY_SWET)));
+        BLUE_GUMMY_SWET = register("blue_gummy_swet", new Item(LOOT_FOOD.food(AetherFood.GUMMY_SWET)));
+        GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new Item(LOOT_FOOD.food(AetherFood.GUMMY_SWET)));
         AETHER_MILK = register("valkyrie_milk", new DrinkableItem(new Item.Settings().rarity(Rarity.EPIC).food(AetherFood.MILK).maxCount(1)));
         HEALING_STONE = register("healing_stone", new HealingStone(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.HEALING_STONE)));
         CANDY_CANE = register("candy_cane", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GENERIC)));
