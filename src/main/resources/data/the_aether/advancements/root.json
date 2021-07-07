@@ -4,14 +4,15 @@
       "item": "the_aether:crystal_log"
     },
     "title": {
-      "text": "Aether"
+      "text": "The Aether",
+      "color": "aqua"
     },
     "description": {
-      "text": "The dream begins anew..."
+      "text": "A hostile paradise in the sky, full of mystery and surprises!"
     },
     "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
+    "show_toast": false,
+    "announce_to_chat": false,
     "hidden": false,
     "background": "the_aether:textures/block/skyroot_planks.png"
   },

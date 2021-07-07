@@ -5,12 +5,12 @@
       "item": "minecraft:glowstone"
     },
     "title": {
-      "text": "We Need To Go Higher"
+      "text": "We need to go higher"
     },
     "description": {
       "text": "Build and a flood a frame of shimmering glowstone, then step into the light"
     },
-    "frame": "task",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
