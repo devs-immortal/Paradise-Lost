@@ -2,6 +2,8 @@ package com.aether.entities.passive;
 
 import com.aether.api.AetherAPI;
 import com.aether.api.moa.MoaType;
+import com.aether.component.AetherComponents;
+import com.aether.component.MoaGenetics;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
@@ -60,7 +62,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
 
     public MoaEntity(World world, MoaType type) {
         this(world);
-
         this.setMoaType(type);
     }
 
@@ -337,6 +338,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     @Override
     public float getMountedMoveSpeed() {
         return this.getMoaType().getMoaProperties().getMoaSpeed();
+    }
+
+    @Override
+    public float getMovementSpeed() {
+        return super.getMovementSpeed();
     }
 
     public void setToAdult() {
