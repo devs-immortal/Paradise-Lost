@@ -5,12 +5,9 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtTypes;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
@@ -20,8 +17,6 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class SwetEntity extends SlimeEntity {
 
@@ -33,11 +28,10 @@ public class SwetEntity extends SlimeEntity {
 
     public SwetEntity(EntityType<? extends SwetEntity> entityType, World world) {
         super(entityType, world);
-        init(2);
+        init();
     }
 
-    protected void init(int size) {
-        this.setSize(size, false);
+    protected void init() {
         getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(25);
         setHealth(getMaxHealth());
     }
@@ -45,7 +39,6 @@ public class SwetEntity extends SlimeEntity {
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        System.out.println("initdata");
     }
 
     public static DefaultAttributeContainer.Builder initAttributes() {
@@ -96,6 +89,7 @@ public class SwetEntity extends SlimeEntity {
     @Override
     @Nullable
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt){
+        setSize(getInitialSize(), true);
         this.getAttributeInstance(EntityAttributes.GENERIC_FOLLOW_RANGE).addPersistentModifier(new EntityAttributeModifier("Random spawn bonus", this.random.nextGaussian() * 0.05D, EntityAttributeModifier.Operation.MULTIPLY_BASE));
         if (this.random.nextFloat() < 0.05F) {
             this.setLeftHanded(true);
@@ -133,4 +127,6 @@ public class SwetEntity extends SlimeEntity {
             world.spawnEntity(swet);
         }
     }
+
+    protected int getInitialSize() { return 2; }
 }
