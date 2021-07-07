@@ -26,7 +26,7 @@ public class SwetDropBlock extends EntityBlockEgg{
         super(settings, (world, pos) -> {
             SwetEntity swet = type.create(world);
             if (swet != null) {
-                swet.resize(1);
+                swet.setSize(1, true);
                 swet.setPosition(Vec3d.of(pos));
             }
             return swet;

@@ -14,7 +14,7 @@ public class WhiteSwetEntity extends SwetEntity{
 
     public WhiteSwetEntity(World world){
         super(AetherEntityTypes.WHITE_SWET, world);
-        resize(2);
+        setSize(2, true);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class WhiteSwetEntity extends SwetEntity{
                 livingEntity.removeStatusEffect(effect.getEffectType());
             }
         }
-        if(entity.getVehicle().equals(this)){
+        if(entity.getVehicle() != null && entity.getVehicle().equals(this)){
             if (entity instanceof CockatriceEntity || entity instanceof AechorPlantEntity) {
                 this.changeType(AetherEntityTypes.PURPLE_SWET);
             } // else ifs for other entities
