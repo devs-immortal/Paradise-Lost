@@ -36,15 +36,18 @@ public class WhiteSwetEntity extends SwetEntity{
 
     @Override
     protected void onBlockCollision(BlockState state) {
-        Block block = state.getBlock();
         if (state.getFluidState().getFluid() == Fluids.WATER) {
             this.changeType(AetherEntityTypes.BLUE_SWET);
-        } else if (block == AetherBlocks.GOLDEN_OAK_LOG
-                || block == AetherBlocks.GOLDEN_OAK_LEAVES
-                || block == AetherBlocks.GOLDEN_OAK_SAPLING
-                || block == AetherBlocks.STRIPPED_GOLDEN_OAK_LOG
-                || block == AetherBlocks.POTTED_GOLDEN_OAK_SAPLING) {
-            this.changeType(AetherEntityTypes.GOLDEN_SWET);
         }
+        world.getStatesInBox(this.getBoundingBox().expand(0.2)).forEach((blockState)->{
+            Block block = blockState.getBlock();
+            if (block == AetherBlocks.GOLDEN_OAK_LOG ||
+                    block == AetherBlocks.GOLDEN_OAK_LEAVES ||
+                    block == AetherBlocks.GOLDEN_OAK_SAPLING ||
+                    block == AetherBlocks.STRIPPED_GOLDEN_OAK_LOG ||
+                    block == AetherBlocks.POTTED_GOLDEN_OAK_SAPLING) {
+                this.changeType(AetherEntityTypes.GOLDEN_SWET);
+            }
+        });
     }
 }
