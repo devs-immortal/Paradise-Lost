@@ -29,39 +29,52 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         return (state, world, pos, tintIndex) -> getAuralColor(pos, gradientColors);
     }
 
-    public static int getAuralColor(BlockPos pos, Vec3i[] gradientCols){
-        float clumpSize = 12;
-        PerlinNoiseSampler perlin = new PerlinNoiseSampler(new SimpleRandom(1738));
-        // sample perlin noise
-        double percent = 0.5 * (1 + perlin.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0));
-        double contrast = 12;
+    protected static double contrastCurve(double contrast, double percent){
+        return MathHelper.clamp((1 - Math.exp(-contrast*percent)) * (1 + Math.exp(-contrast/2))/(1 + Math.exp(-contrast * (percent - 0.5)))/(1 - Math.exp(-contrast)),0,1);
+    }
+
+    public static int getAuralColor(BlockPos pos, Vec3i[] colorRGBs){
+        Vec3i color1 = colorRGBs[0];
+        Vec3i color2 = colorRGBs[1];
+        Vec3i color3 = colorRGBs[2];
+        Vec3i color4 = colorRGBs[3];
+        float clumpSize = 7;
+
+        // first, we mix color 1 and color 2 using noise
+        PerlinNoiseSampler perlinNoise = new PerlinNoiseSampler(new SimpleRandom(1738));
+        // sample perlin noise (and change bounds from [-1, 1] to [0, 1])
+        double perlin = 0.5 * (1 + perlinNoise.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0));
         // reshape contrast curve
-        double finalpercent1 = MathHelper.clamp((1 - Math.exp(-contrast*percent)) * (1 + Math.exp(-contrast/2))/(1 + Math.exp(-contrast * (percent - 0.5)))/(1 - Math.exp(-contrast)),0,1);
-        Vec3i color1 = gradientCols[0];
-        Vec3i color2 = gradientCols[1];
+        double percent = contrastCurve(12, perlin);
+        percent = percent*(2-percent);
         // interpolate
-        int r1,g1,b1;
-        r1 = (int) (MathHelper.lerp(finalpercent1*(2-finalpercent1), color1.getX(), color2.getX()));
-        g1 = (int) (MathHelper.lerp(finalpercent1*(2-finalpercent1), color1.getY(), color2.getY()));
-        b1 = (int) (MathHelper.lerp(finalpercent1*(2-finalpercent1), color1.getZ(), color2.getZ()));
+        double r1,g1,b1;
+        r1 = (MathHelper.lerp(percent, color1.getX(), color2.getX()));
+        g1 = (MathHelper.lerp(percent, color1.getY(), color2.getY()));
+        b1 = (MathHelper.lerp(percent, color1.getZ(), color2.getZ()));
 
-        // rinse, repeat.
-        perlin = new PerlinNoiseSampler(new SimpleRandom(1337));
-        double percent2 = MathHelper.clamp(0.5 * (1 + perlin.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0)),0,1);
-        Vec3i color3 = gradientCols[2];
-        Vec3i color4 = gradientCols[3];
-        // this time, we don't need to reshape the contrast curve.
+        // now we mix colors 3 and 4 together using noise
+        // rinse, repeat as seen above.
+        perlinNoise = new PerlinNoiseSampler(new SimpleRandom(1337));
+        // sample & reshape
+        double perlin2 = MathHelper.clamp(0.5 * (1 + perlinNoise.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0)),0,1);
+        double percent2 = perlin2*(2-perlin2);
         // interpolate
-        int r2,g2,b2;
-        r2 = (int) (MathHelper.lerp(percent2*(2-percent2), color3.getX(), color4.getX()));
-        g2 = (int) (MathHelper.lerp(percent2*(2-percent2), color3.getY(), color4.getY()));
-        b2 = (int) (MathHelper.lerp(percent2*(2-percent2), color3.getZ(), color4.getZ()));
+        double r2,g2,b2;
+        r2 = (MathHelper.lerp(percent2, color3.getX(), color4.getX()));
+        g2 = (MathHelper.lerp(percent2, color3.getY(), color4.getY()));
+        b2 = (MathHelper.lerp(percent2, color3.getZ(), color4.getZ()));
 
-        // This last section interpolates between r1, g1, b1, and r2, g2, b2. Makes the patches of green.
-        perlin = new PerlinNoiseSampler(new SimpleRandom(9980));
-        double percent3 = 0.5 * (1 + perlin.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0));
-        contrast = 13.3;
-        double finalpercent3 = MathHelper.clamp((1 - Math.exp(-contrast*percent3)) * (1 + Math.exp(-contrast/2))/(1 + Math.exp(-contrast * (percent3 - 0.5)))/(1 - Math.exp(-contrast)),0,1);
-        return RenderUtils.toHex(r2 + (int) (finalpercent3 * (r1 - r2)), g2 + (int) (finalpercent3 * (g1 - g2)), b2 + (int) (finalpercent3 * (b1 - b2)));
+        // This last section interpolates between r1, g1, b1, and r2, g2, b2, finally mixing all the colors together.
+        perlinNoise = new PerlinNoiseSampler(new SimpleRandom(9980));
+        double perlin3 = 0.5 * (1 + perlinNoise.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0));
+        double finalPercent = contrastCurve(10, perlin3);
+        // interpolate
+        int finalR, finalG, finalB;
+        finalR = (int) (MathHelper.lerp(finalPercent, r1, r2));
+        finalG = (int) (MathHelper.lerp(finalPercent, g1, g2));
+        finalB = (int) (MathHelper.lerp(finalPercent, b1, b2));
+
+        return RenderUtils.toHex(finalR, finalG, finalB);
     }
 }
