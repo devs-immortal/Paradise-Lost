@@ -5,10 +5,13 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.world.World;
 
 public class GoldenSwetEntity extends SwetEntity{
+
     public GoldenSwetEntity(World world){
         super(AetherEntityTypes.GOLDEN_SWET, world);
+        initialSize = 4;
     }
 
+    @Override
     protected void init(){
         super.init();
         getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(40);

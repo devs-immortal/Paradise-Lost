@@ -1,24 +1,30 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
 public class SwetEntity extends SlimeEntity {
+
     public int stuckCooldown = 0;
+    protected int initialSize = 2;
 
     public SwetEntity(World world) {
-        super(AetherEntityTypes.BLUE_SWET, world);
-        init();
+        this(AetherEntityTypes.WHITE_SWET, world);
     }
 
     public SwetEntity(EntityType<? extends SwetEntity> entityType, World world) {
@@ -27,13 +33,13 @@ public class SwetEntity extends SlimeEntity {
     }
 
     protected void init() {
-        if (this instanceof GoldenSwetEntity) {
-            super.setSize(4, false);
-        } else {
-            super.setSize(2, false);
-        }
         getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(25);
         setHealth(getMaxHealth());
+    }
+
+    @Override
+    protected void initDataTracker() {
+        super.initDataTracker();
     }
 
     public static DefaultAttributeContainer.Builder initAttributes() {
@@ -47,34 +53,52 @@ public class SwetEntity extends SlimeEntity {
 
     @Override
     public void tick() {
-        if(stuckCooldown >= 0) {
-            --stuckCooldown;
-        }
+        if (stuckCooldown >= 0) { --stuckCooldown; }
+        // entities don't have onEntityCollision, so this does that
+        world.getOtherEntities(this, this.getBoundingBox()).forEach(this::onEntityCollision);
         super.tick();
     }
 
     @Override
     public void onPlayerCollision(PlayerEntity player) {
-        if (player.getVehicle() == null && stuckCooldown <= 0) {
-            player.startRiding(this, true);
-        } else {
-            super.onPlayerCollision(player);
+        // Already taken care of in tick()
+    }
+
+    protected void onEntityCollision(Entity entity){
+        if (!(entity instanceof SwetEntity swet)) {
+            if (!(entity instanceof PlayerEntity player && player.isCreative())) {
+                if (getSize() > 1 && entity.getVehicle() == null && stuckCooldown <= 0) {
+                    entity.startRiding(this, true);
+                } else if (entity instanceof LivingEntity)
+                    this.damage((LivingEntity) entity);
+            }
+        } else if (this.getSize() >= swet.getSize()) {
+            this.setSize(MathHelper.ceil(MathHelper.sqrt(this.getSize()*this.getSize() + swet.getSize()*swet.getSize())), true);
+            swet.discard();
         }
     }
 
     protected void removePassenger(Entity passenger) {
-        if (passenger instanceof PlayerEntity) {
-            stuckCooldown = 30;
-        }
+        stuckCooldown = 30;
         super.removePassenger(passenger);
     }
 
-    // Prevents the size from being changed
+    public void setSize(int size, boolean heal){
+        super.setSize(size, heal);
+    }
+
     @Override
-    protected void setSize(int size, boolean heal) {
-        if (heal) {
-            this.setHealth(this.getMaxHealth());
+    @Nullable
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt){
+        setSize(initialSize, true);
+        this.getAttributeInstance(EntityAttributes.GENERIC_FOLLOW_RANGE).addPersistentModifier(new EntityAttributeModifier("Random spawn bonus", this.random.nextGaussian() * 0.05D, EntityAttributeModifier.Operation.MULTIPLY_BASE));
+        if (this.random.nextFloat() < 0.05F) {
+            this.setLeftHanded(true);
+        } else {
+            this.setLeftHanded(false);
         }
+
+        return entityData;
     }
 
     // Prevents duplicate entities
@@ -94,5 +118,14 @@ public class SwetEntity extends SlimeEntity {
     @Override
     protected Identifier getLootTableId() {
         return this.getType().getLootTableId();
+    }
+
+    protected void changeType(EntityType<? extends SwetEntity> type){
+        if(!this.getType().equals(type) && !this.isRemoved()) {
+            SwetEntity swet = (this.convertTo(type, true));
+            if (swet != null)
+                swet.setSize(this.getSize(),false);
+            world.spawnEntity(swet);
+        }
     }
 }

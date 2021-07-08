@@ -5,6 +5,7 @@ import com.aether.blocks.aercloud.*;
 import com.aether.blocks.decorative.*;
 import com.aether.blocks.natural.*;
 import com.aether.client.rendering.block.FluidRenderSetup;
+import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.RenderUtils;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
@@ -258,6 +259,10 @@ public class AetherBlocks {
     public static final Block AMBROSIUM_LANTERN;
 
 
+    private static final Block SWET_DROP;
+    private static final Block BLUE_SWET_DROP;
+    private static final Block GOLDEN_SWET_DROP;
+    private static final Block PURPLE_SWET_DROP;
 
     static {
         AETHER_DIRT = register("aether_dirt", new Block(AbstractBlock.Settings.copy(Blocks.DIRT).strength(0.3f).sounds(BlockSoundGroup.GRAVEL)), buildingBlock());
@@ -523,6 +528,11 @@ public class AetherBlocks {
         CLOUDSBLUFF = register("cloudsbluff", new FlowerBlock(StatusEffects.SLOW_FALLING, 6, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
         DRIGEAN = register("drigean", new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 8, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
         LUMINAR = register("luminar", new FlowerBlock(StatusEffects.GLOWING, 9, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
+
+        SWET_DROP = register("swet_drop", new SwetDropBlock(AbstractBlock.Settings.of(Material.SOLID_ORGANIC).breakInstantly().noCollision().mapColor(MapColor.CLEAR), AetherEntityTypes.WHITE_SWET));
+        BLUE_SWET_DROP = register("blue_swet_drop", new SwetDropBlock(AbstractBlock.Settings.of(Material.SOLID_ORGANIC).breakInstantly().noCollision().mapColor(MapColor.CLEAR), AetherEntityTypes.BLUE_SWET));
+        GOLDEN_SWET_DROP = register("golden_swet_drop", new SwetDropBlock(AbstractBlock.Settings.of(Material.SOLID_ORGANIC).breakInstantly().noCollision().mapColor(MapColor.CLEAR), AetherEntityTypes.GOLDEN_SWET));
+        PURPLE_SWET_DROP = register("purple_swet_drop", new SwetDropBlock(AbstractBlock.Settings.of(Material.SOLID_ORGANIC).breakInstantly().noCollision().mapColor(MapColor.CLEAR), AetherEntityTypes.PURPLE_SWET));
     }
 
     static {
