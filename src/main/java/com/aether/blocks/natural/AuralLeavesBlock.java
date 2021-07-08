@@ -29,8 +29,10 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         return (state, world, pos, tintIndex) -> getAuralColor(pos, gradientColors);
     }
 
+    // sigmoid
     protected static double contrastCurve(double contrast, double percent){
-        return MathHelper.clamp((1 - Math.exp(-contrast*percent)) * (1 + Math.exp(-contrast/2))/(1 + Math.exp(-contrast * (percent - 0.5)))/(1 - Math.exp(-contrast)),0,1);
+        percent = percent - 0.5;
+        return MathHelper.clamp(percent * Math.sqrt((4 + contrast)/(4+4*contrast*percent*percent)) + 0.5,0,1);
     }
 
     public static int getAuralColor(BlockPos pos, Vec3i[] colorRGBs){
@@ -45,7 +47,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         // sample perlin noise (and change bounds from [-1, 1] to [0, 1])
         double perlin = 0.5 * (1 + perlinNoise.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0));
         // reshape contrast curve
-        double percent = contrastCurve(12, perlin);
+        double percent = contrastCurve(36, perlin);
         percent = percent*(2-percent);
         // interpolate
         double r1,g1,b1;
@@ -68,7 +70,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         // This last section interpolates between r1, g1, b1, and r2, g2, b2, finally mixing all the colors together.
         perlinNoise = new PerlinNoiseSampler(new SimpleRandom(9980));
         double perlin3 = 0.5 * (1 + perlinNoise.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0));
-        double finalPercent = contrastCurve(10, perlin3);
+        double finalPercent = contrastCurve(25, perlin3);
         // interpolate
         int finalR, finalG, finalB;
         finalR = (int) (MathHelper.lerp(finalPercent, r1, r2));
