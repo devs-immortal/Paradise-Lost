@@ -18,6 +18,7 @@ import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
+import net.minecraft.item.Item.Settings;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -71,7 +72,7 @@ public class AetherItems {
 
     static {
         // Resources
-        final Item.Settings RESOURCES = new Item.Settings().group(AetherItemGroups.Resources);
+        final Settings RESOURCES = new Settings().group(AetherItemGroups.Resources);
         ZANITE_GEM = register("zanite_gemstone", new Item(RESOURCES));
         ZANITE_FRAGMENT = register("zanite_fragment", new Item(RESOURCES));
         GRAVITITE_GEM = register("gravitite_gemstone", new Item(RESOURCES));
@@ -84,8 +85,8 @@ public class AetherItems {
         FROZEN_AERDUST = register("frozen_aerdust", new Item(RESOURCES));
 
         // Tools
-        final Item.Settings TOOLS = new Item.Settings().group(AetherItemGroups.Tools);
-        final Item.Settings WEAPONS = new Item.Settings().group(AetherItemGroups.Tools);
+        final Settings TOOLS = new Settings().group(AetherItemGroups.Tools);
+        final Settings WEAPONS = new Settings().group(AetherItemGroups.Tools);
         /*SKYROOT_SHOVEL = register("skyroot_shovel", new AetherShovel(AetherTiers.Skyroot, TOOLS, 1.5F, -3.0F));
         SKYROOT_PICKAXE = register("skyroot_pickaxe", new AetherPickaxe(AetherTiers.Skyroot, TOOLS, 1, -2.8F));
         SKYROOT_AXE = register("skyroot_axe", new AetherAxe(AetherTiers.Skyroot, TOOLS, 6.0F, -3.2F));
@@ -104,14 +105,14 @@ public class AetherItems {
         ZANITE_SWORD = register("zanite_sword", new AetherSword(AetherTiers.ZANITE, -2.4F, 3, WEAPONS));
         ZANITE_HOE = register("zanite_hoe", new AetherHoe(AetherTiers.ZANITE, TOOLS, 3));
 
-        final Item.Settings GRAVITITE_TOOLS = new AetherItemSettings().rarity(Rarity.RARE).group(AetherItemGroups.Tools);
+        final Settings GRAVITITE_TOOLS = new AetherItemSettings().rarity(Rarity.RARE).group(AetherItemGroups.Tools);
         GRAVITITE_SHOVEL = register("gravitite_shovel", new AetherShovel(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 1.5F, -3.0F));
         GRAVITITE_PICKAXE = register("gravitite_pickaxe", new AetherPickaxe(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 1, -2.8F));
         GRAVITITE_AXE = register("gravitite_axe", new AetherAxe(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 5.0F, -3.0F));
         GRAVITITE_SWORD = register("gravitite_sword", new AetherSword(AetherTiers.GRAVITITE, -2.4F, 3, new AetherItemSettings().rarity(Rarity.RARE).group(AetherItemGroups.Tools)));
         GRAVITITE_HOE = register("gravitite_hoe", new AetherHoe(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 4));
 
-        final Item.Settings VALKYRIE_TOOLS = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Tools);
+        final Settings VALKYRIE_TOOLS = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Tools);
         VALKYRIE_SHOVEL = register("valkyrie_shovel", new AetherShovel(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 1.5F, -3.0F));
         VALKYRIE_PICKAXE = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 1, -2.8F));
         VALKYRIE_AXE = register("valkyrie_axe", new AetherAxe(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 4.0F, -2.9F));
@@ -156,16 +157,16 @@ public class AetherItems {
 
         // Food
         AetherItemSettings LOOT_FOOD = new AetherItemSettings().group(AetherItemGroups.Food).rarity(AetherItems.AETHER_LOOT);
-        BLUEBERRY = register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.BLUEBERRY)));
-        ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
-        ORANGE = register("orange", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.ORANGE)));
-        WHITE_APPLE = register("white_apple", new WhiteApple(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.WHITE_APPLE)));
+        BLUEBERRY = register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, new Settings().group(AetherItemGroups.Food).food(AetherFood.BLUEBERRY)));
+        ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
+        ORANGE = register("orange", new Item(new Settings().group(AetherItemGroups.Food).food(AetherFood.ORANGE)));
+        WHITE_APPLE = register("white_apple", new WhiteApple(new Settings().group(AetherItemGroups.Food).food(AetherFood.WHITE_APPLE)));
         BLUE_GUMMY_SWET = register("blue_gummy_swet", new Item(LOOT_FOOD.food(AetherFood.GUMMY_SWET)));
         GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new Item(LOOT_FOOD.food(AetherFood.GUMMY_SWET)));
-        AETHER_MILK = register("valkyrie_milk", new DrinkableItem(new Item.Settings().rarity(Rarity.EPIC).food(AetherFood.MILK).maxCount(1)));
-        HEALING_STONE = register("healing_stone", new HealingStone(new Item.Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.HEALING_STONE)));
-        CANDY_CANE = register("candy_cane", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GENERIC)));
-        GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Item.Settings().group(AetherItemGroups.Food).food(AetherFood.GENERIC)));
+        AETHER_MILK = register("valkyrie_milk", new DrinkableItem(new Settings().rarity(Rarity.EPIC).food(AetherFood.MILK).maxCount(1)));
+        HEALING_STONE = register("healing_stone", new HealingStone(new Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.HEALING_STONE)));
+        CANDY_CANE = register("candy_cane", new Item(new Settings().group(AetherItemGroups.Food).food(AetherFood.GENERIC)));
+        GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Settings().group(AetherItemGroups.Food).food(AetherFood.GENERIC)));
 
         // Misc + Materials
         final AetherItemSettings LOOT_ACCESSORY = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Wearable);
@@ -173,22 +174,22 @@ public class AetherItems {
         REGENERATION_STONE = register("regeneration_stone", new ItemAccessory(AccessoryType.MISC, LOOT_ACCESSORY));
         IRON_BUBBLE = register("iron_bubble", new ItemAccessory(AccessoryType.MISC, LOOT_ACCESSORY));
         LIFE_SHARD = register("life_shard", new LifeShard(new AetherItemSettings().rarity(AetherItems.AETHER_LOOT).maxCount(1).group(AetherItemGroups.Misc)));
-        CLOUD_STAFF = register("cloud_staff", new CloudStaff(new Item.Settings().maxCount(1).maxDamage(60).group(AetherItemGroups.Misc)));
-        NATURE_STAFF = register("nature_staff", new NatureStaff(new Item.Settings().maxCount(1).maxDamage(100).group(AetherItemGroups.Misc)));
-        MOA_EGG = register("moa_egg", new MoaEgg(new Item.Settings().maxCount(1).group(AetherItemGroups.Misc)));
-        LORE_BOOK = register("lore_book", new BookOfLore((new Item.Settings()).maxCount(1).group(AetherItemGroups.Misc)));
-        SKYROOT_BUCKET = register("skyroot_bucket", new SkyrootBucket(new Item.Settings().maxCount(16).group(AetherItemGroups.Misc)));
+        CLOUD_STAFF = register("cloud_staff", new CloudStaff(new Settings().maxCount(1).maxDamage(60).group(AetherItemGroups.Misc)));
+        NATURE_STAFF = register("nature_staff", new NatureStaff(new Settings().maxCount(1).maxDamage(100).group(AetherItemGroups.Misc)));
+        MOA_EGG = register("moa_egg", new MoaEgg(new Settings().maxCount(1).group(AetherItemGroups.Misc)));
+        LORE_BOOK = register("lore_book", new BookOfLore((new Settings()).maxCount(1).group(AetherItemGroups.Misc)));
+        SKYROOT_BUCKET = register("skyroot_bucket", new SkyrootBucket(new Settings().maxCount(16).group(AetherItemGroups.Misc)));
 
-        final Item.Settings BUCKET = new Item.Settings().maxCount(1).group(AetherItemGroups.Misc).recipeRemainder(SKYROOT_BUCKET);
+        final Settings BUCKET = new Settings().maxCount(1).group(AetherItemGroups.Misc).recipeRemainder(SKYROOT_BUCKET);
         SKYROOT_WATER_BUCKET = register("skyroot_water_bucket", new SkyrootBucket(Fluids.WATER, BUCKET));
         SKYROOT_MILK_BUCKET = register("skyroot_milk_bucket", new SkyrootBucket(BUCKET));
         SKYROOT_POISON_BUCKET = register("skyroot_poison_bucket", new SkyrootBucket(BUCKET));
         SKYROOT_REMEDY_BUCKET = register("skyroot_remedy_bucket", new SkyrootBucket(BUCKET));
-        QUICKSOIL_VIAL = register("quicksoil_vial", new VialItem(Fluids.EMPTY, new Item.Settings().group(AetherItemGroups.Misc)));
-        AERCLOUD_VIAL = register("aercloud_vial", new VialItem(AetherBlocks.DENSE_AERCLOUD_STILL, new Item.Settings().group(AetherItemGroups.Misc)));
+        QUICKSOIL_VIAL = register("quicksoil_vial", new VialItem(Fluids.EMPTY, new Settings().group(AetherItemGroups.Misc)));
+        AERCLOUD_VIAL = register("aercloud_vial", new VialItem(AetherBlocks.DENSE_AERCLOUD_STILL, new Settings().group(AetherItemGroups.Misc)));
 
-        CLOUD_PARACHUTE = register("cold_parachute", new Parachute(new Item.Settings().maxCount(1).group(AetherItemGroups.Misc)));
-        GOLDEN_CLOUD_PARACHUTE = register("golden_parachute", new Parachute(new Item.Settings().maxCount(1).maxDamage(20).group(AetherItemGroups.Misc)));
+        CLOUD_PARACHUTE = register("cold_parachute", new Parachute(new Settings().maxCount(1).group(AetherItemGroups.Misc)));
+        GOLDEN_CLOUD_PARACHUTE = register("golden_parachute", new Parachute(new Settings().maxCount(1).maxDamage(20).group(AetherItemGroups.Misc)));
 
         final AetherItemSettings KEYS = new AetherItemSettings().group(AetherItemGroups.Misc).rarity(AETHER_LOOT);
         BRONZE_KEY = register("bronze_key", new Item(KEYS));
@@ -200,15 +201,15 @@ public class AetherItems {
 
         // Weapons
         final AetherItemSettings LOOT_WEAPON = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Tools);
-        GOLDEN_DART = register("golden_dart", new Dart(new Item.Settings().group(AetherItemGroups.Tools)));
-        ENCHANTED_DART = register("enchanted_dart", new Dart(new Item.Settings().rarity(Rarity.RARE).group(AetherItemGroups.Tools)));
-        POISON_DART = register("poison_dart", new Dart(new Item.Settings().group(AetherItemGroups.Tools)));
+        GOLDEN_DART = register("golden_dart", new Dart(new Settings().group(AetherItemGroups.Tools)));
+        ENCHANTED_DART = register("enchanted_dart", new Dart(new Settings().rarity(Rarity.RARE).group(AetherItemGroups.Tools)));
+        POISON_DART = register("poison_dart", new Dart(new Settings().group(AetherItemGroups.Tools)));
 
-        GOLDEN_DART_SHOOTER = register("golden_dart_shooter", new DartShooter(GOLDEN_DART, new Item.Settings().maxCount(1).group(AetherItemGroups.Tools)));
-        ENCHANTED_DART_SHOOTER = register("enchanted_dart_shooter", new DartShooter(ENCHANTED_DART, new Item.Settings().maxCount(1).rarity(Rarity.RARE).group(AetherItemGroups.Tools)));
-        POISON_DART_SHOOTER = register("poison_dart_shooter", new DartShooter(POISON_DART, new Item.Settings().maxCount(1).group(AetherItemGroups.Tools)));
+        GOLDEN_DART_SHOOTER = register("golden_dart_shooter", new DartShooter(GOLDEN_DART, new Settings().maxCount(1).group(AetherItemGroups.Tools)));
+        ENCHANTED_DART_SHOOTER = register("enchanted_dart_shooter", new DartShooter(ENCHANTED_DART, new Settings().maxCount(1).rarity(Rarity.RARE).group(AetherItemGroups.Tools)));
+        POISON_DART_SHOOTER = register("poison_dart_shooter", new DartShooter(POISON_DART, new Settings().maxCount(1).group(AetherItemGroups.Tools)));
 
-        PHOENIX_BOW = register("phoenix_bow", new BowItem(new Item.Settings().maxDamage(384).group(AetherItemGroups.Tools)));
+        PHOENIX_BOW = register("phoenix_bow", new BowItem(new Settings().maxDamage(384).group(AetherItemGroups.Tools)));
 
         FLAMING_SWORD = register("flaming_sword", new ElementalSword(LOOT_WEAPON));
         LIGHTNING_SWORD = register("lightning_sword", new ElementalSword(LOOT_WEAPON));
@@ -219,10 +220,10 @@ public class AetherItems {
         CANDY_CANE_SWORD = register("candy_cane_sword", new CandyCaneSword(WEAPONS));
 
         // Spawn Eggs
-        AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x97ded4, 0x31897d, new Item.Settings().group(AetherItemGroups.Misc)));
+        AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x97ded4, 0x31897d, new Settings().group(AetherItemGroups.Misc)));
         CHEST_MIMIC_SPAWN_EGG = null;
-        COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, new Item.Settings().group(AetherItemGroups.Misc)));
-        AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xc5d6ed, 0x82a6d9, new Item.Settings().group(AetherItemGroups.Misc)));
+        COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, new Settings().group(AetherItemGroups.Misc)));
+        AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xc5d6ed, 0x82a6d9, new Settings().group(AetherItemGroups.Misc)));
         FLYING_COW_SPAWN_EGG = null;
         MOA_SPAWN_EGG = null;
         PHYG_SPAWN_EGG = null;
@@ -258,7 +259,7 @@ public class AetherItems {
         AGILITY_CAPE = register("agility_cape", new ItemAccessory(AccessoryType.CAPE, "agility", new AetherItemSettings().rarity(AETHER_LOOT)));
         INVISIBILITY_CAPE = register("invisibility_cape", new ItemAccessory(AccessoryType.CAPE, new AetherItemSettings().rarity(AETHER_LOOT)));
 
-        AETHER_PORTAL = register("aether_portal", new AetherPortalItem(new Item.Settings().group(AetherItemGroups.Misc)));
+        AETHER_PORTAL = register("aether_portal", new AetherPortalItem(new Settings().group(AetherItemGroups.Misc)));
     }
 
     static {
