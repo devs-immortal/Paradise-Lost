@@ -4,6 +4,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -40,7 +41,7 @@ public class BlueAercloudBlock extends BaseAercloudBlock {
             }
         }
 
-        if (world.isClient) {
+        if (world.isClient && !entity.verticalCollision && !(entity instanceof PlayerEntity player && player.isCreative())) {
             for (int count = 0; count < 50; count++) {
                 double xOffset = pos.getX() + world.random.nextDouble();
                 double yOffset = pos.getY() + world.random.nextDouble();
