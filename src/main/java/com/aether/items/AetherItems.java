@@ -73,6 +73,13 @@ public class AetherItems {
 
     public static final AetherRarity AETHER_LOOT = new AetherRarity(Formatting.GREEN);
 
+    private static final Item SWET_SPAWN_EGG;
+    private static final Item BLUE_SWET_SPAWN_EGG;
+    private static final Item PURPLE_SWET_SPAWN_EGG;
+    private static final Item GOLDEN_SWET_SPAWN_EGG;
+
+    private static final Item AERWHALE_SPAWN_EGG;
+
     static {
         // Resources
         final Settings RESOURCES = new Settings().group(AetherItemGroups.Resources);
@@ -225,10 +232,15 @@ public class AetherItems {
         // Spawn Eggs
         AECHOR_PLANT_SPAWN_EGG = registerSpawnEgg("aechor_plant_spawn_egg", AetherEntityTypes.AECHOR_PLANT, 0x97ded4, 0x31897d);
         CHEST_MIMIC_SPAWN_EGG = null;
-        COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, new Item.Settings().group(AetherItemGroups.Misc)));
-        AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xc5d6ed, 0x82a6d9, new Item.Settings().group(AetherItemGroups.Misc)));
+        COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, new Settings().group(AetherItemGroups.Misc)));
+        AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xc5d6ed, 0x82a6d9, new Settings().group(AetherItemGroups.Misc)));
+        AERWHALE_SPAWN_EGG = register("aerwhale_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERWHALE, 0x5c6d91, 0xdedbce, new Settings().group(AetherItemGroups.Misc)));
         FLYING_COW_SPAWN_EGG = null;
-        MOA_SPAWN_EGG = register("moa_spawn_egg", new SpawnEggItem(AetherEntityTypes.MOA, 0xc55c2e4, 0xb3a8bb,new Item.Settings().group(AetherItemGroups.Misc)));
+        MOA_SPAWN_EGG = register("moa_spawn_egg", new SpawnEggItem(AetherEntityTypes.MOA, 0xc55c2e4, 0xb3a8bb,new Settings().group(AetherItemGroups.Misc)));
+        SWET_SPAWN_EGG = register("swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.WHITE_SWET, 0x8f9294, 0xe6eaeb,new Settings().group(AetherItemGroups.Misc)));
+        BLUE_SWET_SPAWN_EGG = register("blue_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.BLUE_SWET, 0x46699e, 0xe6eaeb,new Settings().group(AetherItemGroups.Misc)));
+        PURPLE_SWET_SPAWN_EGG = register("purple_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.PURPLE_SWET, 0x5d548c, 0xe6eaeb,new Settings().group(AetherItemGroups.Misc)));
+        GOLDEN_SWET_SPAWN_EGG = register("golden_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.GOLDEN_SWET, 0xc99d36, 0xe6eaeb,new Settings().group(AetherItemGroups.Misc)));
         PHYG_SPAWN_EGG = null;
         SHEEPUFF_SPAWN_EGG = null;
 
