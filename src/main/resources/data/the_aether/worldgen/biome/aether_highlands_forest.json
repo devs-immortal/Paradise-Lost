@@ -76,8 +76,8 @@
       {
         "type": "the_aether:moa",
         "weight": 6,
-        "minCount": 1,
-        "maxCount": 3
+        "minCount": 3,
+        "maxCount": 7
       },
       {
         "type": "the_aether:aerwhale",

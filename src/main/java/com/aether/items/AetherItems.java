@@ -15,7 +15,9 @@ import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
@@ -61,9 +63,11 @@ public class AetherItems {
 //    public static item REPULSION_SHIELD;
     public static final Item LORE_BOOK;
     public static final Item QUICKSOIL_VIAL, AERCLOUD_VIAL;
+    public static final Item GOLD_AERDUST, FROZEN_AERDUST;
     public static final Item AECHOR_PLANT_SPAWN_EGG, CHEST_MIMIC_SPAWN_EGG,
             COCKATRICE_SPAWN_EGG, AERBUNNY_SPAWN_EGG, FLYING_COW_SPAWN_EGG,
-            MOA_SPAWN_EGG, PHYG_SPAWN_EGG, SHEEPUFF_SPAWN_EGG, GOLD_AERDUST, FROZEN_AERDUST;
+            MOA_SPAWN_EGG, PHYG_SPAWN_EGG, SHEEPUFF_SPAWN_EGG;
+
 
     public static final Item AETHER_PORTAL;
 
@@ -219,12 +223,12 @@ public class AetherItems {
         CANDY_CANE_SWORD = register("candy_cane_sword", new CandyCaneSword(WEAPONS));
 
         // Spawn Eggs
-        AECHOR_PLANT_SPAWN_EGG = register("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x97ded4, 0x31897d, new Settings().group(AetherItemGroups.Misc)));
+        AECHOR_PLANT_SPAWN_EGG = registerSpawnEgg("aechor_plant_spawn_egg", AetherEntityTypes.AECHOR_PLANT, 0x97ded4, 0x31897d);
         CHEST_MIMIC_SPAWN_EGG = null;
-        COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, new Settings().group(AetherItemGroups.Misc)));
-        AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xc5d6ed, 0x82a6d9, new Settings().group(AetherItemGroups.Misc)));
+        COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, new Item.Settings().group(AetherItemGroups.Misc)));
+        AERBUNNY_SPAWN_EGG = register("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xc5d6ed, 0x82a6d9, new Item.Settings().group(AetherItemGroups.Misc)));
         FLYING_COW_SPAWN_EGG = null;
-        MOA_SPAWN_EGG = null;
+        MOA_SPAWN_EGG = register("moa_spawn_egg", new SpawnEggItem(AetherEntityTypes.MOA, 0xc55c2e4, 0xb3a8bb,new Item.Settings().group(AetherItemGroups.Misc)));
         PHYG_SPAWN_EGG = null;
         SHEEPUFF_SPAWN_EGG = null;
 
@@ -281,6 +285,10 @@ public class AetherItems {
 
     private static <T extends Item> T register(String id, T item) {
         return Registry.register(Registry.ITEM, Aether.locate(id), item);
+    }
+
+    private static Item registerSpawnEgg(String id, EntityType<? extends MobEntity> type, int mainColor, int secColor) {
+        return register(id, new SpawnEggItem(type, mainColor, secColor, new Settings().group(AetherItemGroups.Misc)));
     }
 
     public static void init() {

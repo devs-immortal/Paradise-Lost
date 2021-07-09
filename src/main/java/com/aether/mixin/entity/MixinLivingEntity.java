@@ -1,6 +1,8 @@
 package com.aether.mixin.entity;
 
+import com.aether.api.MoaAttributes;
 import com.aether.entities.AetherEntityExtensions;
+import com.aether.entities.passive.MoaEntity;
 import com.aether.items.AetherItems;
 import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.Sets;
@@ -101,6 +103,13 @@ public abstract class MixinLivingEntity extends Entity implements AetherEntityEx
                 Vec3d antiGravity = new Vec3d(0, 0.12D, 0);
                 this.setVelocity(this.getVelocity().add(antiGravity));
             }
+        }
+    }
+
+    @Inject(method = "getMaxHealth", at = @At("HEAD"), cancellable = true)
+    public void getMoaMaxHealth(CallbackInfoReturnable<Float> cir) {
+        if((Object) this instanceof MoaEntity) {
+            cir.setReturnValue(((MoaEntity) (Object) this).getGenes().getAttribute(MoaAttributes.MAX_HEALTH));
         }
     }
 }

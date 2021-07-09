@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 
     public MoaRenderer(EntityRendererFactory.Context renderManager) {
-        super(renderManager, new MoaModel(renderManager.getPart(AetherModelLayers.MOA)), 1f);
+        super(renderManager, new MoaModel(renderManager.getPart(AetherModelLayers.MOA)), 0.7f);
     }
 
     @Override
@@ -24,7 +24,6 @@ public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 
     @Override
     public Identifier getTexture(MoaEntity entity) {
-
         if (entity.hasPassengers() && entity.getPassengerList().get(0) instanceof PlayerEntity) {
 //            IPlayerAether player = AetherAPI.get((PlayerEntity) entity.getPassengerList().get(0));
 
@@ -32,6 +31,6 @@ public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 //                return null;
         }
 
-        return Aether.locate("textures/entity/moas/highlands/blue.png");
+        return entity.getGenes().getTexture();
     }
 }

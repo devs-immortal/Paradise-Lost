@@ -2,6 +2,7 @@ package com.aether.items;
 
 import com.aether.api.AetherAPI;
 import com.aether.api.moa.MoaType;
+import com.aether.component.MoaGenes;
 import com.aether.entities.passive.MoaEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -27,10 +28,10 @@ public class MoaEgg extends Item {
     @Override
     public ActionResult useOnBlock(ItemUsageContext contextIn) {
         if (contextIn.getPlayer() != null) {
-            MoaEntity moa = new MoaEntity(contextIn.getWorld(), AetherAPI.instance().getMoa(contextIn.getStack().getTag().getInt("moaType")));
+            MoaEntity moa = new MoaEntity(contextIn.getWorld());
 
             moa.refreshPositionAndAngles(contextIn.getBlockPos().up(), 1.0F, 1.0F);
-            moa.setPlayerGrown(true);
+            MoaGenes.get(moa).initMoa(moa);
 
             if (!contextIn.getWorld().isClient) contextIn.getWorld().spawnEntity(moa);
 

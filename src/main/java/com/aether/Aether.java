@@ -1,12 +1,12 @@
 package com.aether;
 
+import com.aether.api.MoaAPI;
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.model.AetherArmorModels;
 import com.aether.client.model.AetherModelPredicates;
 import com.aether.client.rendering.entity.AetherEntityRenderers;
 import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.entities.AetherEntityTypes;
-import com.aether.entities.util.AetherMoaTypes;
 import com.aether.items.AetherItems;
 import com.aether.registry.TrinketSlotRegistry;
 import com.aether.world.dimension.AetherDimension;
@@ -41,7 +41,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherEntityTypes.init();
         AetherItems.init();
         AetherBlocks.init();
-        AetherMoaTypes.init();
+        MoaAPI.init();
     }
 
     @Override

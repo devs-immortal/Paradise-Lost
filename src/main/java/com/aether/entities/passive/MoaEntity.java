@@ -1,17 +1,21 @@
 package com.aether.entities.passive;
 
 import com.aether.api.AetherAPI;
+import com.aether.api.MoaAttributes;
 import com.aether.api.moa.MoaType;
+import com.aether.component.AetherComponents;
+import com.aether.component.MoaGenes;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
 import com.aether.items.MoaEgg;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.JumpingMount;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -27,29 +31,31 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 //import com.aether.world.storage.loot.AetherLootTableList;
 
 public class MoaEntity extends SaddleMountEntity implements JumpingMount {
 
-    public static final TrackedData<Integer> MOA_TYPE_ID = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    public static final TrackedData<Integer> REMAINING_JUMPS = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);
     public static final TrackedData<Integer> AIR_TICKS = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);
     public static final TrackedData<Byte> AMMOUNT_FEED = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.BYTE);
-    public static final TrackedData<Boolean> PLAYER_GROWN = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    public static final TrackedData<Boolean> HUNGRY = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public static final TrackedData<Boolean> SITTING = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public float curWingRoll, curWingYaw, curLegPitch;
-    protected int maxJumps, secsUntilHungry, secsUntilEgg;
     public float jumpStrength;
     public boolean isInAir;
+    protected int maxJumps;
+    protected int secsUntilEgg;
+    private MoaGenes genes;
 
     public MoaEntity(World world) {
         super(AetherEntityTypes.MOA, world);
@@ -58,9 +64,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
         this.secsUntilEgg = this.getRandomEggTime();
     }
 
-    public MoaEntity(World world, MoaType type) {
-        this(world);
-        this.setMoaType(type);
+    @Override
+    public void updatePosition(double x, double y, double z) {
+        super.updatePosition(x, y, z);
+        //if(!getGenes().isInitialized()) {
+        //    genes.initMoa(this);
+        //}
     }
 
     public static DefaultAttributeContainer.Builder initAttributes() {
@@ -69,16 +78,23 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D);
     }
 
+
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 2));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 0.65F, 0.1F)); //WanderGoal
         this.goalSelector.add(2, new TemptGoal(this, 1.0D, Ingredient.ofItems(AetherItems.NATURE_STAFF), false));
-        this.goalSelector.add(2, new WanderAroundGoal(this, 1.0)); //WanderGoal
+        //this.goalSelector.add(2, new WanderAroundGoal(this, 1.0)); //WanderGoal
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 4.5F));
         this.goalSelector.add(5, new LookAroundGoal(this)); //LookGoal
         this.goalSelector.add(6, new AnimalMateGoal(this, 0.25F));
+    }
+
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+        genes.initMoa(this);
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
     @Override
@@ -90,16 +106,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-
-        MoaType moaType = AetherAPI.instance().getMoa();
-
-        this.dataTracker.startTracking(MOA_TYPE_ID, AetherAPI.instance().getMoaId(moaType));
-        this.dataTracker.startTracking(REMAINING_JUMPS, moaType.getMoaProperties().getMaxJumps());
         this.dataTracker.startTracking(AIR_TICKS, 0);
-
-        this.dataTracker.startTracking(PLAYER_GROWN, false);
         this.dataTracker.startTracking(AMMOUNT_FEED, (byte) 0);
-        this.dataTracker.startTracking(HUNGRY, false);
         this.dataTracker.startTracking(SITTING, false);
     }
 
@@ -149,15 +157,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     public void setSitting(boolean isSitting) {
         this.dataTracker.set(SITTING, isSitting);
     }
-
-    public boolean isHungry() {
-        return this.dataTracker.get(HUNGRY);
-    }
-
-    public void setHungry(boolean hungry) {
-        this.dataTracker.set(HUNGRY, hungry);
-    }
-
     public byte getAmountFed() {
         return this.dataTracker.get(AMMOUNT_FEED);
     }
@@ -169,37 +168,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     public void increaseAmountFed(int amountFed) {
         this.setAmountFed(this.getAmountFed() + amountFed);
     }
-
-    public boolean isPlayerGrown() {
-        return this.dataTracker.get(PLAYER_GROWN);
-    }
-
-    public void setPlayerGrown(boolean playerGrown) {
-        this.dataTracker.set(PLAYER_GROWN, playerGrown);
-    }
-
     public int getMaxJumps() {
         return this.maxJumps;
     }
 
     public void setMaxJumps(int maxJumps) {
         this.maxJumps = maxJumps;
-    }
-
-    public int getRemainingJumps() {
-        return this.dataTracker.get(REMAINING_JUMPS);
-    }
-
-    public void setRemainingJumps(int jumps) {
-        this.dataTracker.set(REMAINING_JUMPS, jumps);
-    }
-
-    public MoaType getMoaType() {
-        return AetherAPI.instance().getMoa(this.dataTracker.get(MOA_TYPE_ID));
-    }
-
-    public void setMoaType(MoaType moa) {
-        this.dataTracker.set(MOA_TYPE_ID, AetherAPI.instance().getMoaId(moa));
     }
 
     @Override
@@ -227,29 +201,15 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
             }
         }
 
-        this.setMaxJumps(this.getMoaType().getMoaProperties().getMaxJumps());
-
         if (this.jumping) this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
 
         this.fall();
-
-        if (this.secsUntilHungry > 0) {
-            if (this.age % 20 == 0) this.secsUntilHungry--;
-        } else if (!this.isHungry()) {
-            this.setHungry(true);
-        }
-
-        if (this.world.isClient && this.isHungry() && this.isBaby()) {
-            if (this.random.nextInt(10) == 0)
-                this.world.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getWidth(), this.getY() + 1, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getWidth(), 0.0D, 0.0D, 0.0D);
-        }
 
         if (!this.world.isClient && !this.isBaby() && this.getPassengerList().isEmpty()) {
             if (this.secsUntilEgg > 0) {
                 if (this.age % 20 == 0) this.secsUntilEgg--;
             } else {
                 this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-                this.dropStack(MoaEgg.getStack(this.getMoaType()), 0);
 
                 this.secsUntilEgg = this.getRandomEggTime();
             }
@@ -257,8 +217,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
+    protected Text getDefaultName() {
+        return super.getDefaultName();
+    }
+
+    @Override
     protected int computeFallDamage(float fallDistance, float damageMultiplier) {
-        return isGliding() ? 0 : (int) (super.computeFallDamage(fallDistance, damageMultiplier) * 0.25);
+        return 0;
     }
 
     public boolean isGliding() {
@@ -267,12 +233,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
 
     public boolean isBreedingItem(ItemStack stack) {
         return false;
-    }
-
-    public void resetHunger() {
-        if (!this.world.isClient) this.setHungry(false);
-
-        this.secsUntilHungry = 40 + this.random.nextInt(40);
     }
 
     public void travel(Vec3d movementInput) {
@@ -305,9 +265,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                         this.setVelocity(vec3d.x, h, vec3d.z);
                         this.velocityDirty = true;
                         if (g > 0.0F) {
+                            float adjVel = jumpStrength / 2F;
                             float i = MathHelper.sin(this.getYaw() * 0.017453292F);
                             float j = MathHelper.cos(this.getYaw() * 0.017453292F);
-                            this.setVelocity(this.getVelocity().add(-0.4F * i * this.jumpStrength, 0.0D, 0.4F * j * this.jumpStrength));
+                            this.setVelocity(this.getVelocity().add(-0.4F * i * adjVel, 0.0D, 0.4F * j * adjVel));
                         }
 
                         this.jumpStrength = 0.0F;
@@ -317,9 +278,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                 if(jumpStrength <= 0.01F && onGround)
                     isInAir = false;
 
-                this.flyingSpeed = this.getMovementSpeed() * (isGliding() ? 0.5F : 0.1F);
+                this.flyingSpeed = getFlyingSpeed();
                 if (this.isLogicalSideForUpdatingMovement()) {
-                    this.setMovementSpeed((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+                    this.setMovementSpeed(getMountedMoveSpeed());
                     super.travel(new Vec3d(f, movementInput.y, g));
                 } else if (livingEntity instanceof PlayerEntity) {
                     this.setVelocity(Vec3d.ZERO);
@@ -327,7 +288,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
 
                 this.updateLimbs(this, false);
             } else {
-                this.flyingSpeed = getMovementSpeed() * (isGliding() ? 0.3F : 0.1F);
+                this.flyingSpeed = getFlyingSpeed();
                 super.travel(movementInput);
             }
         }
@@ -335,13 +296,19 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
 
     @Override
     public float getMountedMoveSpeed() {
-        return this.getMoaType().getMoaProperties().getMoaSpeed();
+        return getMovementSpeed() * 0.75F;
     }
 
     @Override
     public float getMovementSpeed() {
-        return super.getMovementSpeed();
+        return getGenes().getAttribute(MoaAttributes.GROUND_SPEED) * 0.65F;
     }
+
+    public float getFlyingSpeed() {
+        return isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) * 0.8F : getMovementSpeed() * 0.1F;
+    }
+
+
 
     public void setToAdult() {
         this.setBreedingAge(0);
@@ -359,12 +326,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
 
-        compound.putBoolean("playerGrown", this.isPlayerGrown());
-        compound.putInt("remainingJumps", this.getRemainingJumps());
         compound.putByte("amountFed", this.getAmountFed());
-        compound.putBoolean("isHungry", this.isHungry());
         compound.putBoolean("isSitting", this.isSitting());
-        compound.putInt("typeId", AetherAPI.instance().getMoaId(this.getMoaType()));
         compound.putInt("airTicks", dataTracker.get(AIR_TICKS));
     }
 
@@ -372,11 +335,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     public void readCustomDataFromNbt(NbtCompound compound) {
         super.readCustomDataFromNbt(compound);
 
-        this.setPlayerGrown(compound.getBoolean("playerGrown"));
-        this.setRemainingJumps(compound.getInt("remainingJumps"));
-        this.setMoaType(AetherAPI.instance().getMoa(compound.getInt("typeId")));
         this.setAmountFed(compound.getByte("amountFed"));
-        this.setHungry(compound.getBoolean("isHungry"));
         this.setSitting(compound.getBoolean("isSitting"));
         dataTracker.set(AIR_TICKS, compound.getInt("airTicks"));
     }
@@ -392,12 +351,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     }
 
     public void fall() {
-        boolean blockBeneath = !this.world.isAir(new BlockPos(this.getPos()).down(1));
-
         if (this.getVelocity().y < 0.0D && !this.isSneaking())
-            this.setVelocity(this.getVelocity().multiply(1.0D,  isGliding() ? 0.6D : 1D, 1.0D));
-
-        if (blockBeneath) this.setRemainingJumps(this.maxJumps);
+            this.setVelocity(this.getVelocity().multiply(1.0D,  isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) * 1.4 : 1D, 1.0D));
     }
 
     @Override
@@ -412,7 +367,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
 
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity matingAnimal) {
-        return new MoaEntity(this.world, this.getMoaType());
+        return new MoaEntity(this.world);
     }
 
     @Override
@@ -422,7 +377,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
 
     @Override
     public void setJumpStrength(int strength) {
-        jumpStrength = strength / 5F;
+        jumpStrength = strength * getGenes().getAttribute(MoaAttributes.JUMPING_STRENGTH) * 0.95F;
     }
 
     @Override
@@ -438,5 +393,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     @Override
     public void stopJumping() {
 
+    }
+
+    public MoaGenes getGenes() {
+        if(genes == null) {
+            genes = MoaGenes.get(this);
+        }
+        return genes;
     }
 }
