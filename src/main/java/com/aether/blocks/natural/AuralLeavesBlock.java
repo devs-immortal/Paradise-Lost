@@ -29,7 +29,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         return (state, world, pos, tintIndex) -> getAuralColor(pos, gradientColors);
     }
 
-    // sigmoid
+    // Sigmoid
     protected static double contrastCurve(double contrast, double percent){
         percent = percent - 0.5;
         return MathHelper.clamp(percent * Math.sqrt((4 + contrast)/(4+4*contrast*percent*percent)) + 0.5,0,1);
@@ -42,26 +42,26 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         Vec3i color4 = colorRGBs[3];
         float clumpSize = 7;
 
-        // first, we mix color 1 and color 2 using noise
+        // First, we mix color 1 and color 2 using noise
         PerlinNoiseSampler perlinNoise = new PerlinNoiseSampler(new SimpleRandom(1738));
-        // sample perlin noise (and change bounds from [-1, 1] to [0, 1])
+        // Sample perlin noise (and change bounds from [-1, 1] to [0, 1])
         double perlin = 0.5 * (1 + perlinNoise.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0));
-        // reshape contrast curve
+        // Reshape contrast curve
         double percent = contrastCurve(36, perlin);
         percent = percent*(2-percent);
-        // interpolate
+        // Interpolate
         double r1,g1,b1;
         r1 = (MathHelper.lerp(percent, color1.getX(), color2.getX()));
         g1 = (MathHelper.lerp(percent, color1.getY(), color2.getY()));
         b1 = (MathHelper.lerp(percent, color1.getZ(), color2.getZ()));
 
-        // now we mix colors 3 and 4 together using noise
-        // rinse, repeat as seen above.
+        // Now we mix colors 3 and 4 together using noise
+        // Rinse, repeat as seen above.
         perlinNoise = new PerlinNoiseSampler(new SimpleRandom(1337));
-        // sample & reshape
+        // Sample & reshape
         double perlin2 = MathHelper.clamp(0.5 * (1 + perlinNoise.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0)),0,1);
         double percent2 = perlin2*(2-perlin2);
-        // interpolate
+        // Interpolate
         double r2,g2,b2;
         r2 = (MathHelper.lerp(percent2, color3.getX(), color4.getX()));
         g2 = (MathHelper.lerp(percent2, color3.getY(), color4.getY()));
@@ -71,7 +71,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         perlinNoise = new PerlinNoiseSampler(new SimpleRandom(9980));
         double perlin3 = 0.5 * (1 + perlinNoise.sample(pos.getX()/clumpSize,pos.getY()/clumpSize,pos.getZ()/clumpSize,4000,0));
         double finalPercent = contrastCurve(25, perlin3);
-        // interpolate
+        // Interpolate
         int finalR, finalG, finalB;
         finalR = (int) (MathHelper.lerp(finalPercent, r1, r2));
         finalG = (int) (MathHelper.lerp(finalPercent, g1, g2));
