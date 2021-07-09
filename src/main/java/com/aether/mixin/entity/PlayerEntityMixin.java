@@ -41,10 +41,10 @@ public abstract class PlayerEntityMixin extends Entity implements AetherEntityEx
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (source.isOutOfWorld() && getY() < -1 && world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
+        if (source.isOutOfWorld() && getY() < world.getBottomY() - 1 && world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
             if (!world.isClient()) {
                 setAetherFallen(true);
-                ((ServerPlayerEntity) (Object) this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() * 16, world.getHeight(), this.getZ() * 16, this.getYaw(), this.getPitch());
+                ((ServerPlayerEntity) (Object) this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() * 16, world.getTopY(), this.getZ() * 16, this.getYaw(), this.getPitch());
                 CustomStatusEffectInstance ef = new CustomStatusEffectInstance(StatusEffect.byRawId(9), 160, 2);
                 ef.ShowParticles = false;
                 ((ServerPlayerEntity) (Object) this).addStatusEffect(ef);
