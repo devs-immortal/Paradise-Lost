@@ -29,7 +29,7 @@ public class FluidRendererMixin {
         fadeAlpha = 1F;
         if (!state.isStill() && state.getFluid().matchesType(Fluids.WATER)) {
             if (MinecraftClient.getInstance().world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
-                fadeAlpha = Math.min(pos.getY() / 32F, 1);
+                fadeAlpha = Math.min((pos.getY() - world.getBottomY()) / 32F, 1);
             }
 
         }
