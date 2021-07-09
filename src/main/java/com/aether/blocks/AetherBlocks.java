@@ -158,6 +158,7 @@ public class AetherBlocks {
     public static final Block SKYROOT_FENCE;
     public static final Block SKYROOT_FENCE_GATE;
     public static final Block SKYROOT_LOG;
+    public static final Block SKYROOT_WOOD;
     public static final Block SKYROOT_PLANKS;
     public static final Block SKYROOT_SLAB;
     public static final Block SKYROOT_STAIRS;
@@ -167,10 +168,13 @@ public class AetherBlocks {
     public static final Block SKYROOT_LEAVES;
     public static final Block SKYROOT_LEAF_PILE;
     public static final Block STRIPPED_SKYROOT_LOG;
+    public static final Block STRIPPED_SKYROOT_WOOD;
     public static final Block GOLDEN_OAK_SAPLING;
     public static final Block POTTED_GOLDEN_OAK_SAPLING;
     public static final Block GOLDEN_OAK_LOG;
+    public static final Block GOLDEN_OAK_WOOD;
     public static final Block STRIPPED_GOLDEN_OAK_LOG;
+    public static final Block STRIPPED_GOLDEN_OAK_WOOD;
     public static final Block GOLDEN_OAK_LEAVES;
     public static final Block GOLDEN_OAK_PLANKS;
     public static final Block GOLDEN_OAK_FENCE;
@@ -182,7 +186,9 @@ public class AetherBlocks {
     public static final Block ORANGE_SAPLING;
     public static final Block POTTED_ORANGE_SAPLING;
     public static final Block ORANGE_LOG;
+    public static final Block ORANGE_WOOD;
     public static final Block STRIPPED_ORANGE_LOG;
+    public static final Block STRIPPED_ORANGE_WOOD;
     public static final Block ORANGE_LEAVES;
     public static final Block ORANGE_PLANKS;
     public static final Block ORANGE_FENCE;
@@ -194,7 +200,9 @@ public class AetherBlocks {
     public static final Block CRYSTAL_SAPLING;
     public static final Block POTTED_CRYSTAL_SAPLING;
     public static final Block CRYSTAL_LOG;
+    public static final Block CRYSTAL_WOOD;
     public static final Block STRIPPED_CRYSTAL_LOG;
+    public static final Block STRIPPED_CRYSTAL_WOOD;
     public static final Block CRYSTAL_LEAVES;
     public static final Block CRYSTAL_PLANKS;
     public static final Block CRYSTAL_FENCE;
@@ -228,7 +236,9 @@ public class AetherBlocks {
     public static final Block BOREAL_WISTERIA_SAPLING;
     public static final Block POTTED_BOREAL_WISTERIA_SAPLING;
     public static final Block WISTERIA_LOG;
+    public static final Block WISTERIA_WOOD;
     public static final Block STRIPPED_WISTERIA_LOG;
+    public static final Block STRIPPED_WISTERIA_WOOD;
     public static final Block WISTERIA_PLANKS;
     public static final Block WISTERIA_SLAB;
     public static final Block WISTERIA_STAIRS;
@@ -415,7 +425,9 @@ public class AetherBlocks {
         SKYROOT_SAPLING = register("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), createSaplingProperties()), buildingBlock());
         POTTED_SKYROOT_SAPLING = register("potted_skyroot_sapling", createPottedBlock(SKYROOT_SAPLING));
         SKYROOT_LOG = register("skyroot_log", createLogBlock(MapColor.GREEN, MapColor.OAK_TAN), buildingBlock());
+        SKYROOT_WOOD = register("skyroot_wood", createLogBlock(MapColor.GREEN, MapColor.OAK_TAN), buildingBlock());
         STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", createLogBlock(MapColor.OAK_TAN, MapColor.OAK_TAN), buildingBlock());
+        STRIPPED_SKYROOT_WOOD = register("stripped_skyroot_wood", createLogBlock(MapColor.OAK_TAN, MapColor.OAK_TAN), buildingBlock());
         SKYROOT_LEAVES = register("skyroot_leaves", createLeavesBlock(), buildingBlock());
         SKYROOT_LEAF_PILE = register("skyroot_leaf_pile", new AetherLeafPileBlock(createLeafPileBlock(BlockSoundGroup.VINE)), buildingBlock());
 
@@ -432,7 +444,9 @@ public class AetherBlocks {
         GOLDEN_OAK_SAPLING = register("golden_oak_sapling", new AetherSaplingBlock(new GoldenOakSaplingGenerator(), createSaplingProperties().luminance(state -> 7)), buildingBlock());
         POTTED_GOLDEN_OAK_SAPLING = register("potted_golden_oak_sapling", createPottedBlock(GOLDEN_OAK_SAPLING));
         GOLDEN_OAK_LOG = register("golden_oak_log", createLogBlock(MapColor.OAK_TAN, MapColor.RED), buildingBlock());
+        GOLDEN_OAK_WOOD = register("golden_oak_wood", createLogBlock(MapColor.OAK_TAN, MapColor.RED), buildingBlock());
         STRIPPED_GOLDEN_OAK_LOG = register("stripped_golden_oak_log", createLogBlock(MapColor.RED, MapColor.RED), buildingBlock());
+        STRIPPED_GOLDEN_OAK_WOOD = register("stripped_golden_oak_wood", createLogBlock(MapColor.RED, MapColor.RED), buildingBlock());
         GOLDEN_OAK_LEAVES = register("golden_oak_leaves", createLeavesBlock(), buildingBlock());
 
 
@@ -448,7 +462,9 @@ public class AetherBlocks {
         ORANGE_SAPLING = register("orange_sapling", new AetherSaplingBlock(new OrangeSaplingGenerator(), createSaplingProperties()), buildingBlock());
         POTTED_ORANGE_SAPLING = register("potted_orange_sapling", createPottedBlock(ORANGE_SAPLING));
         ORANGE_LOG = register("orange_log", createLogBlock(MapColor.SPRUCE_BROWN, MapColor.PINK), buildingBlock());
+        ORANGE_WOOD = register("orange_wood", createLogBlock(MapColor.SPRUCE_BROWN, MapColor.PINK), buildingBlock());
         STRIPPED_ORANGE_LOG = register("stripped_orange_log", createLogBlock(MapColor.PINK, MapColor.PINK), buildingBlock());
+        STRIPPED_ORANGE_WOOD = register("stripped_orange_wood", createLogBlock(MapColor.PINK, MapColor.PINK), buildingBlock());
         ORANGE_LEAVES = register("orange_leaves", new AetherFruitingLeaves(createLeavesProperties(0, BlockSoundGroup.AZALEA_LEAVES), AetherItems.ORANGE), buildingBlock());
 
         final Settings ORANGE_WOOD = Settings.of(Material.WOOD, MapColor.PINK).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
@@ -463,7 +479,9 @@ public class AetherBlocks {
         CRYSTAL_SAPLING = register("crystal_sapling", new AetherSaplingBlock(new CrystalSaplingGenerator(), createSaplingProperties().sounds(BlockSoundGroup.LARGE_AMETHYST_BUD)), buildingBlock());
         POTTED_CRYSTAL_SAPLING = register("potted_crystal_sapling", createPottedBlock(CRYSTAL_SAPLING));
         CRYSTAL_LOG = register("crystal_log", createLogBlock(MapColor.GRAY, MapColor.LIGHT_GRAY), buildingBlock());
+        CRYSTAL_WOOD = register("crystal_wood", createLogBlock(MapColor.GRAY, MapColor.LIGHT_GRAY), buildingBlock());
         STRIPPED_CRYSTAL_LOG = register("stripped_crystal_log", createLogBlock(MapColor.LIGHT_GRAY, MapColor.LIGHT_GRAY), buildingBlock());
+        STRIPPED_CRYSTAL_WOOD = register("stripped_crystal_wood", createLogBlock(MapColor.LIGHT_GRAY, MapColor.LIGHT_GRAY), buildingBlock());
         CRYSTAL_LEAVES = register("crystal_leaves", createCrystalLeavesBlock(), buildingBlock());
         CRYSTAL_TRAPDOOR = register("crystal_trapdoor", new AetherTrapdoorBlock(Settings.copy(Blocks.OAK_TRAPDOOR)), buildingBlock());
         CRYSTAL_DOOR = register("crystal_door", new AetherDoorBlock(Settings.copy(Blocks.OAK_DOOR)), buildingBlock());
@@ -476,7 +494,9 @@ public class AetherBlocks {
         CRYSTAL_SLAB = register("crystal_slab", new SlabBlock(Settings.copy(CRYSTAL_PLANKS)), buildingBlock());
         CRYSTAL_STAIRS = register("crystal_stairs", new StairsBlock(CRYSTAL_PLANKS.getDefaultState(), Settings.copy(CRYSTAL_PLANKS)), buildingBlock());
         WISTERIA_LOG = register("wisteria_log", createLogBlock(MapColor.YELLOW, MapColor.RED), buildingBlock());
+        WISTERIA_WOOD = register("wisteria_wood", createLogBlock(MapColor.YELLOW, MapColor.RED), buildingBlock());
         STRIPPED_WISTERIA_LOG = register("stripped_wisteria_log", createLogBlock(MapColor.RED, MapColor.RED), buildingBlock());
+        STRIPPED_WISTERIA_WOOD = register("stripped_wisteria_wood", createLogBlock(MapColor.RED, MapColor.RED), buildingBlock());
 
         final Settings ROSE_WISTERIA = Settings.of(Material.LEAVES, MapColor.PINK).noCollision().strength(0.2f).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning((a, b, c, d) -> false).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never);
         ROSE_WISTERIA_LEAVES = register("rose_wisteria_leaves", new AetherLeavesBlock(ROSE_WISTERIA, false), buildingBlock());
@@ -537,7 +557,7 @@ public class AetherBlocks {
     }
 
     static {
-        // Logs
+        // Logs and woods
         for (Block block : new Block[]{
                 SKYROOT_LOG,
                 STRIPPED_SKYROOT_LOG,
@@ -546,7 +566,15 @@ public class AetherBlocks {
                 CRYSTAL_LOG,
                 STRIPPED_CRYSTAL_LOG,
                 WISTERIA_LOG,
-                STRIPPED_WISTERIA_LOG
+                STRIPPED_WISTERIA_LOG,
+                SKYROOT_WOOD,
+                STRIPPED_SKYROOT_WOOD,
+                GOLDEN_OAK_WOOD,
+                STRIPPED_GOLDEN_OAK_WOOD,
+                CRYSTAL_WOOD,
+                STRIPPED_CRYSTAL_WOOD,
+                WISTERIA_WOOD,
+                STRIPPED_WISTERIA_WOOD
         }) {
             registerFlammable(block, 5, 5);
         }
