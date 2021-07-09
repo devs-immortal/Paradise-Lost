@@ -36,7 +36,6 @@ repositories {
     maven {
         url = "https://minecraft.guntram.de/maven/"
     }
-    maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
     maven {
         name = "Modmenu-Legacy"
         url = "https://maven.fabricmc.net/io/github/prospector/modmenu/"
@@ -63,6 +62,7 @@ repositories {
     maven {
         url = "https://jitpack.io"
     }
+    maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
     mavenCentral()
 }
 
