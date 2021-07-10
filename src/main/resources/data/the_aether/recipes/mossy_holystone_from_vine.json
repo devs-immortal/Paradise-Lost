@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "group": "mossy_cobbled_holystone",
   "ingredients": [
     {
       "item": "the_aether:cobbled_holystone"
