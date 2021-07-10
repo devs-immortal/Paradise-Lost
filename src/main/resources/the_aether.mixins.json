@@ -14,6 +14,7 @@
     "entity.MixinLivingEntity",
     "entity.PlayerEntityMixin",
     "item.AxeItemMixin",
+    "item.BucketItemMixin",
     "item.HoeItemMixin",
     "item.ItemGroupMixin",
     "item.ItemMixin",
