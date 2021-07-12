@@ -27,7 +27,7 @@ public class FluidRendererMixin {
     @Inject(method = "render", at = @At("HEAD"))
     private void render(BlockRenderView world, BlockPos pos, VertexConsumer builder, FluidState state, CallbackInfoReturnable<Boolean> info) {
         fadeAlpha = 1F;
-        if (!state.isStill() && state.getFluid().matchesType(Fluids.WATER)) {
+        if (state.getFluid().matchesType(Fluids.WATER)) {
             if (MinecraftClient.getInstance().world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
                 fadeAlpha = Math.min((pos.getY() - world.getBottomY()) / 32F, 1);
             }
