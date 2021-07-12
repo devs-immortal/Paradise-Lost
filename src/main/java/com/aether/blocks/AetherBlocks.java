@@ -91,7 +91,7 @@ public class AetherBlocks {
     public static final Block HOLYSTONE_SLAB;
     public static final Block HOLYSTONE_STAIRS;
     public static final Block HOLYSTONE_WALL;
-//    public static final Block ICESTONE;
+    public static final Block ICESTONE;
 //    public static final Block ICESTONE_SLAB;
 //    public static final Block ICESTONE_STAIRS;
 //    public static final Block ICESTONE_WALL;
@@ -340,7 +340,7 @@ public class AetherBlocks {
         DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
         DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, Settings.of(Material.WATER).noCollision().strength(100.0F).dropsNothing()) {
         });
-        GRAVITITE_ORE = register("gravitite_ore", new FloatingBlock(false, Settings.of(Material.STONE).strength(5.0F).sounds(BlockSoundGroup.STONE), UniformIntProvider.create(0, 2)), buildingBlock());
+        GRAVITITE_ORE = register("gravitite_ore", new FloatingBlock(false, Settings.of(Material.STONE).requiresTool().strength(5.0F).sounds(BlockSoundGroup.STONE), UniformIntProvider.create(0, 2)), buildingBlock());
         GRAVITITE_LEVITATOR = register("gravitite_levitator", new FloatingBlock(true, Settings.of(Material.WOOD).strength(3.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), buildingBlock());
 //        GREEN_DYED_AERCLOUD = register("green_dyed_aercloud", null);
 //        GREY_DYED_AERCLOUD = register("grey_dyed_aercloud", null);
@@ -359,7 +359,7 @@ public class AetherBlocks {
         HOLYSTONE_SLAB = register("holystone_slab", new SlabBlock(Settings.copy(HOLYSTONE)), buildingBlock());
         HOLYSTONE_STAIRS = register("holystone_stairs", new StairsBlock(HOLYSTONE.getDefaultState(), Settings.copy(HOLYSTONE)), buildingBlock());
         HOLYSTONE_WALL = register("holystone_wall", new WallBlock(Settings.copy(HOLYSTONE)), buildingBlock());
-//        ICESTONE = register("icestone", null);
+        ICESTONE = register("icestone", new Block(Settings.of(Material.DENSE_ICE).requiresTool().hardness(0.5f).sounds(BlockSoundGroup.GLASS)), buildingBlock());
 //        ICESTONE_SLAB = register("icestone_slab", null);
 //        ICESTONE_STAIRS = register("icestone_stairs", null);
 //        ICESTONE_WALL = register("icestone_wall", null);
