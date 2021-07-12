@@ -93,7 +93,7 @@ public class SwetEntity extends SlimeEntity {
                 // If the wobbles feel too sharp, try changing the clamp below
                 // TODO: Make sure this works in multiplayer
                 Vec3d suckVelocity = this.getBoundingBox().getCenter().subtract(entity.getPos()).multiply(0.25)
-                        .add(this.getVelocity().subtract(entity.getVelocity()).multiply(0.25));
+                        .add(this.getVelocity().subtract(entity.getVelocity()).multiply(0.45 / this.getSize()));
                 Vec3d newVelocity = entity.getVelocity().add(suckVelocity);
                 double velocityClamp = this.getSize() * 0.1 + 0.25;
                 entity.setVelocity(MathHelper.clamp(newVelocity.getX(), -velocityClamp, velocityClamp),
