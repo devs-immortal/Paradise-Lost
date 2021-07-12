@@ -9,6 +9,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
@@ -16,9 +17,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -88,7 +87,12 @@ public class SwetEntity extends SlimeEntity {
 
     protected void onEntityCollision(Entity entity){
         if (!(entity instanceof SwetEntity swet)) {
-            if (isAbsorbable(entity)) {
+            boolean canPickupNonPlayers = world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
+            boolean isPet = (entity instanceof TameableEntity pet && pet.isTamed());
+            boolean isEligiblePet = isPet && world.getDifficulty() != Difficulty.EASY;
+            boolean isEligibleNonPlayer = !(entity instanceof PlayerEntity || isPet) && canPickupNonPlayers;
+            boolean canBePickedUp = isAbsorbable(entity) && (entity instanceof PlayerEntity || isEligiblePet || isEligibleNonPlayer);
+            if (canBePickedUp) {
                 // The higher the number this is multiplied by, the stiffer the wobble is
                 // If the wobbles feel too sharp, try changing the clamp below
                 // TODO: Make sure this works in multiplayer
@@ -111,7 +115,7 @@ public class SwetEntity extends SlimeEntity {
             if (entity instanceof LivingEntity livingEntity) {
                 // Hack to prevent knockback; TODO: find a better way to prevent knockback
                 EntityAttributeInstance knockbackResistance = livingEntity.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
-                if (knockbackResistance != null) {
+                if (canBePickedUp && knockbackResistance != null) {
                     knockbackResistance.addTemporaryModifier(knockbackResistanceModifier);
                     this.damage(livingEntity);
                     knockbackResistance.removeModifier(knockbackResistanceModifier);
