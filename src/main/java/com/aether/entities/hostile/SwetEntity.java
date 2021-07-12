@@ -74,7 +74,7 @@ public class SwetEntity extends SlimeEntity {
     @Override
     public void tick() {
         // Entities don't have onEntityCollision, so this does that
-        if (!this.isDead()) { // TODO: maybe also don't pick up entities in easy mode?
+        if (!this.isDead()) {
             world.getOtherEntities(this, this.getBoundingBox()).forEach(this::onEntityCollision);
         }
         super.tick();
