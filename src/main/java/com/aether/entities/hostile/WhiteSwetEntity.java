@@ -26,7 +26,7 @@ public class WhiteSwetEntity extends SwetEntity{
                 livingEntity.removeStatusEffect(effect.getEffectType());
             }
         }
-        if(entity.getVehicle() != null && entity.getVehicle().equals(this)){
+        if(entity.squaredDistanceTo(this) <= 1 && this.getSize() > 1){
             if (entity instanceof CockatriceEntity || entity instanceof AechorPlantEntity) {
                 this.changeType(AetherEntityTypes.PURPLE_SWET);
             } // else ifs for other entities
