@@ -102,11 +102,9 @@ public class SwetEntity extends SlimeEntity {
             if (canBePickedUp) {
                 // The higher the number this is multiplied by, the stiffer the wobble is
                 // If the wobbles feel too sharp, try changing the clamp below
-                // TODO: Make sure this works in multiplayer
                 if (massStuck < 1){
                     massStuck = 1;
                 }
-                System.out.println(massStuck);
                 Vec3d suckVelocity = this.getBoundingBox().getCenter().subtract(entity.getPos()).multiply(MathHelper.clamp(0.25 + massStuck/100,0,1))
                         .add(this.getVelocity().subtract(entity.getVelocity()).multiply(0.45 / massStuck / this.getSize()));
                 Vec3d newVelocity = entity.getVelocity().add(suckVelocity);
