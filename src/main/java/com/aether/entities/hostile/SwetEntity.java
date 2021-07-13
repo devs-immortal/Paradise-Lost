@@ -15,6 +15,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.*;
@@ -26,6 +27,7 @@ import java.util.function.Predicate;
 public class SwetEntity extends SlimeEntity {
 
     protected int initialSize = 2;
+    protected float massStuck = 0;
     protected static final EntityAttributeModifier knockbackResistanceModifier = new EntityAttributeModifier(
             "Temporary swet knockback resistance",
             1,
@@ -75,6 +77,11 @@ public class SwetEntity extends SlimeEntity {
     public void tick() {
         // Entities don't have onEntityCollision, so this does that
         if (!this.isDead()) {
+            massStuck = 0;
+            world.getOtherEntities(this, this.getBoundingBox().stretch(0.9, 0.9, 0.9)).forEach((entity) -> {
+                Box box = entity.getBoundingBox();
+                massStuck += box.getXLength() * box.getYLength() * box.getZLength();
+            });
             world.getOtherEntities(this, this.getBoundingBox()).forEach(this::onEntityCollision);
         }
         super.tick();
@@ -96,8 +103,12 @@ public class SwetEntity extends SlimeEntity {
                 // The higher the number this is multiplied by, the stiffer the wobble is
                 // If the wobbles feel too sharp, try changing the clamp below
                 // TODO: Make sure this works in multiplayer
-                Vec3d suckVelocity = this.getBoundingBox().getCenter().subtract(entity.getPos()).multiply(0.25)
-                        .add(this.getVelocity().subtract(entity.getVelocity()).multiply(0.45 / this.getSize()));
+                if (massStuck < 1){
+                    massStuck = 1;
+                }
+                System.out.println(massStuck);
+                Vec3d suckVelocity = this.getBoundingBox().getCenter().subtract(entity.getPos()).multiply(MathHelper.clamp(0.25 + massStuck/100,0,1))
+                        .add(this.getVelocity().subtract(entity.getVelocity()).multiply(0.45 / massStuck / this.getSize()));
                 Vec3d newVelocity = entity.getVelocity().add(suckVelocity);
                 double velocityClamp = this.getSize() * 0.1 + 0.25;
                 entity.setVelocity(MathHelper.clamp(newVelocity.getX(), -velocityClamp, velocityClamp),
