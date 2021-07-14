@@ -1,6 +1,7 @@
 package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
+import com.aether.items.AetherItems;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -11,9 +12,12 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
@@ -40,6 +44,22 @@ public class SwetEntity extends SlimeEntity {
     public SwetEntity(EntityType<? extends SwetEntity> entityType, World world) {
         super(entityType, world);
         init();
+    }
+
+    @Override
+    protected ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getStackInHand(hand);
+        if(stack.isOf(AetherItems.SWET_SPAWN_EGG)
+                || stack.isOf(AetherItems.BLUE_SWET_SPAWN_EGG)
+                || stack.isOf(AetherItems.PURPLE_SWET_SPAWN_EGG)
+                || stack.isOf(AetherItems.GOLDEN_SWET_SPAWN_EGG)){
+            if (!player.isCreative()) {
+                stack.decrement(1);
+            }
+            this.setSize(this.getSize() + 1, true);
+            return ActionResult.SUCCESS;
+        }
+        return super.interactMob(player, hand);
     }
 
     @Override

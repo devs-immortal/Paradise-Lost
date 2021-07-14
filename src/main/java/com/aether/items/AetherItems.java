@@ -73,12 +73,12 @@ public class AetherItems {
 
     public static final AetherRarity AETHER_LOOT = new AetherRarity(Formatting.GREEN);
 
-    private static final Item SWET_SPAWN_EGG;
-    private static final Item BLUE_SWET_SPAWN_EGG;
-    private static final Item PURPLE_SWET_SPAWN_EGG;
-    private static final Item GOLDEN_SWET_SPAWN_EGG;
+    public static final Item SWET_SPAWN_EGG;
+    public static final Item BLUE_SWET_SPAWN_EGG;
+    public static final Item PURPLE_SWET_SPAWN_EGG;
+    public static final Item GOLDEN_SWET_SPAWN_EGG;
 
-    private static final Item AERWHALE_SPAWN_EGG;
+    public static final Item AERWHALE_SPAWN_EGG;
 
     static {
         // Resources
