@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class FloatingBlockStructure {
     private static ArrayList<FloatingBlockStructure> allStructures = new ArrayList<>(0);
-    ArrayList<FloatingBlockInfoWrapper> blockInfos = new ArrayList<>(0);
+    protected ArrayList<FloatingBlockInfoWrapper> blockInfos = new ArrayList<>(0);
 
     public FloatingBlockStructure(FloatingBlockEntity entity1, FloatingBlockEntity entity2, Vec3i offset) {
         this.blockInfos.add(new FloatingBlockInfoWrapper(entity1, Vec3i.ZERO));
@@ -33,29 +33,41 @@ public class FloatingBlockStructure {
     }
 
     public void postTick(){
-        // TODO: Fix beds and other non-vertical multi-blocks
         FloatingBlockInfoWrapper master = blockInfos.get(0);
         for(FloatingBlockInfoWrapper blockInfo : blockInfos){
-            if(blockInfo.equals(master)){ continue; }
-            Vec3d newPos = master.block.getPos().add(Vec3d.of(blockInfo.offset));
-            blockInfo.block.setPos(newPos.x, newPos.y, newPos.z);
-            blockInfo.block.setVelocity(master.block.getVelocity());
-            blockInfo.block.setDropping(master.block.isDropping());
+            if (!blockInfo.equals(master)) {
+                this.alignToMaster(blockInfo);
+            }
+            if(blockInfo.block.isRemoved()){
+                land(blockInfo);
+                break;
+            }
         }
-        if(master.block.isRemoved()){
-            for(FloatingBlockInfoWrapper blockInfo : blockInfos){
-                if (blockInfo.equals(master)){ continue; }
+    }
+
+    protected void alignToMaster(FloatingBlockInfoWrapper blockInfo){
+        FloatingBlockInfoWrapper master = blockInfos.get(0);
+        Vec3d newPos = master.block.getPos().add(Vec3d.of(blockInfo.offset));
+        blockInfo.block.setPos(newPos.x, newPos.y, newPos.z);
+        blockInfo.block.setVelocity(master.block.getVelocity());
+        blockInfo.block.setDropping(master.block.isDropping());
+    }
+
+    public void land(FloatingBlockInfoWrapper lander){
+        for(FloatingBlockInfoWrapper blockInfo : blockInfos){
+            alignToMaster(blockInfo);
+            if (!blockInfo.equals(lander)) {
                 blockInfo.block.land();
             }
-            allStructures.remove(this);
         }
+        allStructures.remove(this);
     }
 
     public static ArrayList<FloatingBlockStructure> getAllStructures(){
         return allStructures;
     }
 
-    public void init(){
+    protected void init(){
         allStructures.add(this);
     }
 

@@ -50,42 +50,45 @@ public interface IAetherTool {
 
     default ActionResult useOnBlock(ItemUsageContext context, @Nullable ActionResult defaultResult) {
         if (this.getTier() == AetherTiers.GRAVITITE) {
-            BlockPos pos = context.getBlockPos();
-            World world = context.getWorld();
-            BlockState state = world.getBlockState(pos);
-
             if (eligibleToFloat(context)) {
-                if (world.getBlockEntity(pos) != null || state.getHardness(world, pos) == -1.0F) {
-                    return ActionResult.FAIL;
-                }
+                return createFloatingBlockEntity(context);
+            }
+        }
+        return defaultResult != null ? defaultResult : defaultItemUse(context);
+    }
 
-                if (!world.isClient()) {
-                    if(state.getProperties().contains(Properties.DOUBLE_BLOCK_HALF)){
-                        if(state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER){
-                            pos = pos.down();
-                            state = world.getBlockState(pos);
-                        }
-                        BlockState upperState = world.getBlockState(pos.up());
-                        FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY()+1, pos.getZ() + 0.5, upperState);
-                        FloatingBlockEntity lower = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
-                        FloatingBlockStructure structure = new FloatingBlockStructure(lower, upper, Vec3i.ZERO.up());
-                        structure.spawn(world);
-                    } else {
-                        FloatingBlockEntity entity = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
-                        entity.floatTime = 0;
-                        world.spawnEntity(entity);
-                    }
-                }
+    private ActionResult createFloatingBlockEntity(ItemUsageContext context){
+        BlockPos pos = context.getBlockPos();
+        World world = context.getWorld();
+        BlockState state = world.getBlockState(pos);
 
-                if (context.getPlayer() != null && !context.getPlayer().isCreative()) {
-                    context.getStack().damage(4, context.getPlayer(), (p) -> p.sendToolBreakStatus(context.getHand()));
-                }
+        if (world.getBlockEntity(pos) != null || state.getHardness(world, pos) == -1.0F) {
+            return ActionResult.FAIL;
+        }
 
-                return ActionResult.SUCCESS;
+        if (!world.isClient()) {
+            if(state.getProperties().contains(Properties.DOUBLE_BLOCK_HALF)){ // doors and tall grass
+                if(state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER){
+                    pos = pos.down();
+                    state = world.getBlockState(pos);
+                }
+                BlockState upperState = world.getBlockState(pos.up());
+                FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY()+1, pos.getZ() + 0.5, upperState);
+                FloatingBlockEntity lower = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
+                FloatingBlockStructure structure = new FloatingBlockStructure(lower, upper, Vec3i.ZERO.up());
+                structure.spawn(world);
+            } else { // everything else
+                FloatingBlockEntity entity = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
+                entity.floatTime = 0;
+                world.spawnEntity(entity);
             }
         }
 
-        return defaultResult != null ? defaultResult : defaultItemUse(context);
+        if (context.getPlayer() != null && !context.getPlayer().isCreative()) {
+            context.getStack().damage(4, context.getPlayer(), (p) -> p.sendToolBreakStatus(context.getHand()));
+        }
+
+        return ActionResult.SUCCESS;
     }
 
     default float calculateIncrease(ItemStack tool) {
