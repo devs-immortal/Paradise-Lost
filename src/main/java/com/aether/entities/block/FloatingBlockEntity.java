@@ -215,7 +215,7 @@ public class FloatingBlockEntity extends Entity {
                 if ((!this.verticalCollision || this.onGround) && !shouldSolidify) {
                     if (!this.world.isClient && (blockPos.getY() < this.world.getBottomY() || blockPos.getY() > this.world.getTopY())) {
                         if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-                            this.dropItem(block);
+                            Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
                         }
                         this.discard();
                     }
@@ -397,10 +397,10 @@ public class FloatingBlockEntity extends Entity {
                             }
                         }
                     } else if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-                        this.dropItem(block);
+                        Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
                     }
                 } else if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-                    this.dropItem(block);
+                    Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
                 }
             } else if (block instanceof FloatingBlock) {
                 ((FloatingBlock) block).onBroken(this.world, blockPos);
