@@ -289,6 +289,7 @@ public class AetherItems {
 
         for(Item item : new Item[]{
                 WHITE_APPLE,
+                ORANGE,
                 AECHOR_PETAL
         }){
             ComposterBlock.registerCompostableItem(0.65F, item);

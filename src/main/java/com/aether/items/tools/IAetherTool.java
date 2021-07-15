@@ -5,12 +5,15 @@ import com.aether.entities.AetherEntityExtensions;
 import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.entities.block.FloatingBlockStructure;
 import com.aether.items.utils.AetherTiers;
+import net.minecraft.block.AirBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -64,6 +67,10 @@ public interface IAetherTool {
 
         if (world.getBlockEntity(pos) != null || state.getHardness(world, pos) == -1.0F) {
             return ActionResult.FAIL;
+        }
+        if (state.getBlock() == Blocks.FIRE || state.getBlock() == Blocks.SOUL_FIRE) {
+            world.breakBlock(pos, false);
+            return ActionResult.SUCCESS;
         }
 
         if (!world.isClient()) {
