@@ -100,7 +100,7 @@ dependencies {
 
     // Implement Trinkets for parachutes, rings etc.
     //modImplementation(include("dev.emi:trinkets:${project.trinkets_version}"))
-    modImplementation(include("com.github.CDAGaming:trinkets:d53943eac9"))
+    modImplementation(include("com.github.CDAGaming:trinkets:${project.trinkets_version}"))
 }
 
 processResources {
