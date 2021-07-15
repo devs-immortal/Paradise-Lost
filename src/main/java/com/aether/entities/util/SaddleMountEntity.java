@@ -51,6 +51,14 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     }
 
     @Override
+    protected void dropInventory() {
+        super.dropInventory();
+        if (this.isSaddled()) {
+            this.dropItem(Items.SADDLE);
+        }
+    }
+
+    @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getStackInHand(hand);
 
