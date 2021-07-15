@@ -12,6 +12,8 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
@@ -113,48 +115,69 @@ public class SwetEntity extends SlimeEntity {
     }
 
     protected void onEntityCollision(Entity entity){
-        if (!(entity instanceof SwetEntity swet)) {
-            boolean canPickupNonPlayers = world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-            boolean isPet = (entity instanceof TameableEntity pet && pet.isTamed());
-            boolean isEligiblePet = isPet && world.getDifficulty() != Difficulty.EASY;
-            boolean isEligibleNonPlayer = !(entity instanceof PlayerEntity || isPet) && canPickupNonPlayers;
-            boolean canBePickedUp = isAbsorbable(entity) && (entity instanceof PlayerEntity || isEligiblePet || isEligibleNonPlayer);
-            if (canBePickedUp) {
-                // The higher the number this is multiplied by, the stiffer the wobble is
-                // If the wobbles feel too sharp, try changing the clamp below
-                if (massStuck < 1){
-                    massStuck = 1;
-                }
-                Vec3d suckVelocity = this.getBoundingBox().getCenter().subtract(entity.getPos()).multiply(MathHelper.clamp(0.25 + massStuck/100,0,1))
-                        .add(this.getVelocity().subtract(entity.getVelocity()).multiply(0.45 / massStuck / this.getSize()));
-                Vec3d newVelocity = entity.getVelocity().add(suckVelocity);
-                double velocityClamp = this.getSize() * 0.1 + 0.25;
-                entity.setVelocity(MathHelper.clamp(newVelocity.getX(), -velocityClamp, velocityClamp),
-                        Math.min(newVelocity.getY(), 0.25),
-                        MathHelper.clamp(newVelocity.getZ(), -velocityClamp, velocityClamp));
-                entity.velocityDirty = true;
-                entity.fallDistance = 0;
+        if (entity instanceof SwetEntity swet) {
+            if (this.getSize() >= swet.getSize() && !swet.isDead()) {
+                this.setSize(MathHelper.ceil(MathHelper.sqrt(this.getSize() * this.getSize() + swet.getSize() * swet.getSize())), true);
+                swet.discard();
             }
+            return;
+        }
+        if (entity.isCollidable()){
+            return;
+        }
+        // vehicles
+        if (entity instanceof BoatEntity || entity instanceof MinecartEntity){
+            return;
+        }
+        // Move this to vermillion swets (?) once they are added.
+        // Ask Azzy about it 🤷‍
+//        if (entity instanceof TntMinecartEntity tnt){
+//            if (!tnt.isPrimed() && this.getSize() >= 4){
+//                tnt.prime();
+//            }
+//        }
+        // Make items ride the swet. They often shake free with the jiggle physics
+        if (entity instanceof ItemEntity item) {
+            if (item.getStack().getItem() == AetherItems.SWET_BALL) {
+                this.setSize(this.getSize() + 1, false);
+                item.remove(RemovalReason.KILLED);
+                return;
+            }
+            item.startRiding(this, true);
+            return;
+        }
+        boolean canPickupNonPlayers = world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
+        boolean isPet = (entity instanceof TameableEntity pet && pet.isTamed());
+        boolean isEligiblePet = isPet && world.getDifficulty() != Difficulty.EASY;
+        boolean isEligibleNonPlayer = !(entity instanceof PlayerEntity || isPet) && canPickupNonPlayers;
+        boolean canBePickedUp = isAbsorbable(entity) && (entity instanceof PlayerEntity || isEligiblePet || isEligibleNonPlayer);
+        if (canBePickedUp) {
+            // The higher the number this is multiplied by, the stiffer the wobble is
+            // If the wobbles feel too sharp, try changing the clamp below
+            if (massStuck < 1){
+                massStuck = 1;
+            }
+            Vec3d suckVelocity = this.getBoundingBox().getCenter().subtract(entity.getPos()).multiply(MathHelper.clamp(0.25 + massStuck/100,0,1))
+                    .add(this.getVelocity().subtract(entity.getVelocity()).multiply(0.45 / massStuck / this.getSize()));
+            Vec3d newVelocity = entity.getVelocity().add(suckVelocity);
+            double velocityClamp = this.getSize() * 0.1 + 0.25;
+            entity.setVelocity(MathHelper.clamp(newVelocity.getX(), -velocityClamp, velocityClamp),
+                    Math.min(newVelocity.getY(), 0.25),
+                    MathHelper.clamp(newVelocity.getZ(), -velocityClamp, velocityClamp));
+            entity.velocityDirty = true;
+            entity.fallDistance = 0;
+        }
 
-            // Make items ride the swet. They often shake free with the jiggle physics
-            if (entity instanceof ItemEntity) {
-                entity.startRiding(this, true);
+        if (entity instanceof LivingEntity livingEntity) {
+            // Hack to prevent knockback; TODO: find a better way to prevent knockback
+            EntityAttributeInstance knockbackResistance = livingEntity.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
+            if (canBePickedUp && knockbackResistance != null) {
+                knockbackResistance.addTemporaryModifier(knockbackResistanceModifier);
+                this.damage(livingEntity);
+                knockbackResistance.removeModifier(knockbackResistanceModifier);
+            } else {
+                this.damage(livingEntity);
             }
-
-            if (entity instanceof LivingEntity livingEntity) {
-                // Hack to prevent knockback; TODO: find a better way to prevent knockback
-                EntityAttributeInstance knockbackResistance = livingEntity.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
-                if (canBePickedUp && knockbackResistance != null) {
-                    knockbackResistance.addTemporaryModifier(knockbackResistanceModifier);
-                    this.damage(livingEntity);
-                    knockbackResistance.removeModifier(knockbackResistanceModifier);
-                } else {
-                    this.damage(livingEntity);
-                }
-            }
-        } else if (this.getSize() >= swet.getSize() && !swet.isDead()) {
-            this.setSize(MathHelper.ceil(MathHelper.sqrt(this.getSize()*this.getSize() + swet.getSize()*swet.getSize())), true);
-            swet.discard();
         }
     }
 

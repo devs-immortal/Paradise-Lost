@@ -2,9 +2,12 @@ package com.aether.entities.hostile;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
+import com.aether.items.AetherItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.fluid.Fluids;
@@ -29,7 +32,13 @@ public class WhiteSwetEntity extends SwetEntity{
         if(entity.squaredDistanceTo(this) <= 1 && this.getSize() > 1){
             if (entity instanceof CockatriceEntity || entity instanceof AechorPlantEntity) {
                 this.changeType(AetherEntityTypes.PURPLE_SWET);
-            } // else ifs for other entities
+            }
+            if (entity instanceof ItemEntity item){
+                if (item.getStack().getItem() == AetherItems.BLUEBERRY){
+                    this.changeType(AetherEntityTypes.BLUE_SWET);
+                }
+                item.remove(RemovalReason.KILLED);
+            }
         }
         super.onEntityCollision(entity);
     }
@@ -39,6 +48,7 @@ public class WhiteSwetEntity extends SwetEntity{
         if (state.getFluidState().getFluid() == Fluids.WATER) {
             this.changeType(AetherEntityTypes.BLUE_SWET);
         }
+        // TODO: relieve lag by doing this in each block's respective class
         world.getStatesInBox(this.getBoundingBox().expand(0.2)).forEach((blockState)->{
             Block block = blockState.getBlock();
             if (block == AetherBlocks.GOLDEN_OAK_LOG ||
@@ -50,4 +60,10 @@ public class WhiteSwetEntity extends SwetEntity{
             }
         });
     }
+
+    @Override
+    public void changeType(EntityType<? extends SwetEntity> type) {
+        super.changeType(type);
+    }
+
 }

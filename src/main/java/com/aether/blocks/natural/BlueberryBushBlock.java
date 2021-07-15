@@ -1,6 +1,7 @@
 package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.entities.hostile.SwetEntity;
 import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
@@ -35,25 +36,35 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
         if (state.get(AGE) > 0 && entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
             entity.slowMovement(state, new Vec3d(0.900000011920929D, 0.75D, 0.900000011920929D));
         }
+        if (entity instanceof SwetEntity){
+            if (state.get(AGE) == 3) {
+                tryPickBerries(world, pos, state);
+            }
+        }
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int i = state.get(AGE);
         boolean mature = i == 3;
-        BlockState floor = world.getBlockState(pos.down());
-        double mod = floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 2 : floor.isOf(AetherBlocks.AETHER_FARMLAND) ? 1.5 : 1;
         if (!mature && player.getStackInHand(hand).getItem() == Items.BONE_MEAL) {
             return ActionResult.PASS;
         } else if (i > 1) {
-            int berries = world.random.nextInt(2) + 1;
-            dropStack(world, pos, new ItemStack(AetherItems.BLUEBERRY, (int) (berries + (mature ? 1 : 0) * mod)));
-            world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
-            world.setBlockState(pos, state.with(AGE, 1), 2);
+            tryPickBerries(world, pos, state);
             return ActionResult.success(world.isClient);
         } else {
             return ActionResult.FAIL;
         }
+    }
+
+    private void tryPickBerries(World world, BlockPos pos, BlockState state){
+        boolean mature = state.get(AGE) == 3;
+        BlockState floor = world.getBlockState(pos.down());
+        double mod = floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 2 : floor.isOf(AetherBlocks.AETHER_FARMLAND) ? 1.5 : 1;
+        int berries = world.random.nextInt(2) + 1;
+        dropStack(world, pos, new ItemStack(AetherItems.BLUEBERRY, (int) (berries + (mature ? 1 : 0) * mod)));
+        world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+        world.setBlockState(pos, state.with(AGE, 1), 2);
     }
 
     @Override
