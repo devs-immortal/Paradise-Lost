@@ -36,6 +36,8 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class FloatingBlockEntity extends Entity {
@@ -52,9 +54,11 @@ public class FloatingBlockEntity extends Entity {
     private boolean dropping = false;
     private boolean collides;
     private boolean partOfStructure = false;
+    private BiConsumer<BlockPos, Float> onLand;
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
+        setOnLand((pos, impact) -> {});
         setDropState(() -> {
             int distFromTop = worldIn.getTopY() - this.getBlockPos().getY();
             return !this.isFastFloater() && distFromTop <= 50;
@@ -151,6 +155,7 @@ public class FloatingBlockEntity extends Entity {
         if (this.floatTile.isAir()) {
             this.discard();
         } else {
+            float impact = (float) this.getVelocity().length();
             this.prevX = this.getX();
             this.prevY = this.getY();
             this.prevZ = this.getZ();
@@ -220,12 +225,12 @@ public class FloatingBlockEntity extends Entity {
                         this.discard();
                     }
                 } else {
-                    this.land();
+                    this.land(impact);
                 }
             }
 
             if ((this.isDropping() || this.getVelocity().getY() == 0) && this.isOnGround()) {
-                this.land();
+                this.land(impact);
             }
 
             this.setVelocity(this.getVelocity().multiply(0.98D));
@@ -361,10 +366,19 @@ public class FloatingBlockEntity extends Entity {
         void postTick();
     }
 
-    public void land() {
+    public BiConsumer<BlockPos, Float> getOnLand(){
+        return this.onLand;
+    }
+
+    public void setOnLand(BiConsumer<BlockPos, Float> consumer){
+        this.onLand = consumer;
+    }
+
+    public void land(float impact) {
         BlockPos blockPos = this.getBlockPos();
         Block block = this.floatTile.getBlock();
         BlockState blockState = this.world.getBlockState(blockPos);
+        Vec3d landingVelocity = this.getVelocity();
         this.setVelocity(this.getVelocity().multiply(0.7, 0.5, 0.7));
         if (blockState.getBlock() != Blocks.MOVING_PISTON) {
             this.discard();
@@ -396,6 +410,7 @@ public class FloatingBlockEntity extends Entity {
                                 blockEntity.markDirty();
                             }
                         }
+                        this.getOnLand().accept(this.getBlockPos(), impact);
                     } else if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
                         Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
                     }

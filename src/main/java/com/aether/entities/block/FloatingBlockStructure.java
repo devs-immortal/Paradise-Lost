@@ -57,7 +57,7 @@ public class FloatingBlockStructure {
         for(FloatingBlockInfoWrapper blockInfo : blockInfos){
             alignToMaster(blockInfo);
             if (!blockInfo.equals(lander)) {
-                blockInfo.block.land();
+                blockInfo.block.land((float) blockInfos.get(0).block.getVelocity().length());
             }
         }
         allStructures.remove(this);

@@ -9,6 +9,8 @@ import net.minecraft.block.AirBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,8 +20,11 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
@@ -87,6 +92,26 @@ public interface IAetherTool {
             } else { // everything else
                 FloatingBlockEntity entity = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
                 entity.floatTime = 0;
+                if (state.getBlock() == Blocks.TNT){
+                    System.out.println("boomer says");
+                    entity.setOnLand((landingPos, impact) -> {
+                        System.out.println("boom " + impact);
+                        if (impact >= 0.8) {
+                            System.out.println("yea");
+                            world.breakBlock(landingPos, false);
+                            world.createExplosion(entity, landingPos.getX(), landingPos.getY(), landingPos.getZ(), (float) MathHelper.clamp(impact*5.5, 0, 10), Explosion.DestructionType.BREAK);
+                        }
+                    });
+                }
+                if (state.getBlock() == Blocks.LIGHTNING_ROD){
+                    entity.setOnLand((landingPos, impact) -> {
+                        if (world.isThundering() && impact >= 1.1){
+                            LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
+                            lightning.setPosition(Vec3d.ofCenter(landingPos));
+                            world.spawnEntity(lightning);
+                        }
+                    });
+                }
                 world.spawnEntity(entity);
             }
         }
