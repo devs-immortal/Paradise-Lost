@@ -5,7 +5,12 @@ accessible    method    net/minecraft/world/gen/feature/ConfiguredFeatures      
 accessible    method    net/minecraft/item/Item$Settings                            rarity                       (Lnet/minecraft/util/Rarity;)Lnet/minecraft/item/Item$Settings;
 accessible    method    net/minecraft/particle/DefaultParticleType                  <init>                       (Z)V
 accessible    method    net/minecraft/block/StairsBlock                             <init>                       (Lnet/minecraft/block/BlockState;Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible    method    net/minecraft/block/PressurePlateBlock                      <init>                       (Lnet/minecraft/block/PressurePlateBlock$ActivationRule;Lnet/minecraft/block/AbstractBlock$Settings;)V
 accessible    method    net/minecraft/block/PaneBlock                               <init>                       (Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible    method    net/minecraft/block/DoorBlock                               <init>                       (Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible    method    net/minecraft/block/TrapdoorBlock                           <init>                       (Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible    method    net/minecraft/block/FarmlandBlock                           <init>                       (Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible    method    net/minecraft/block/WeightedPressurePlateBlock              <init>                       (ILnet/minecraft/block/AbstractBlock$Settings;)V
 accessible    method    net/minecraft/entity/SpawnRestriction                       register                     (Lnet/minecraft/entity/EntityType;Lnet/minecraft/entity/SpawnRestriction$Location;Lnet/minecraft/world/Heightmap$Type;Lnet/minecraft/entity/SpawnRestriction$SpawnPredicate;)V
 accessible    method    net/minecraft/client/item/ModelPredicateProviderRegistry    register                     (Lnet/minecraft/item/Item;Lnet/minecraft/util/Identifier;Lnet/minecraft/client/item/UnclampedModelPredicateProvider;)V
 accessible    method    net/minecraft/client/render/entity/EntityRenderers          register                     (Lnet/minecraft/entity/EntityType;Lnet/minecraft/client/render/entity/EntityRendererFactory;)V
