@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_pressure_plate",
+    "the_aether:golden_oak_pressure_plate",
+    "the_aether:crystal_pressure_plate",
+    "the_aether:wisteria_pressure_plate",
+    "the_aether:orange_pressure_plate"
+  ]
+}
