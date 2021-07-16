@@ -389,9 +389,6 @@ public class FloatingBlockEntity extends Entity {
                         this.floatTile = this.floatTile.with(Properties.WATERLOGGED, true);
 
                     if (this.world.setBlockState(blockPos, this.floatTile, 3)) {
-                        if (block instanceof FloatingBlock)
-                            ((FloatingBlock) block).onEndFloating(this.world, blockPos, this.floatTile, blockState);
-
                         if (this.blockEntityData != null && this.floatTile.hasBlockEntity()) {
                             BlockEntity blockEntity = this.world.getBlockEntity(blockPos);
                             if (blockEntity != null) {
