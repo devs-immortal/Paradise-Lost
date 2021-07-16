@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_button",
+    "the_aether:golden_oak_button",
+    "the_aether:crystal_button",
+    "the_aether:wisteria_button",
+    "the_aether:orange_button"
+  ]
+}

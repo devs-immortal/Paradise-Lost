@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "the_aether:block/skyroot_planks"
+  }
+}

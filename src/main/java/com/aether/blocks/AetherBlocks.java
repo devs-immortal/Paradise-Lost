@@ -169,6 +169,8 @@ public class AetherBlocks {
     public static final Block SKYROOT_LEAF_PILE;
     public static final Block STRIPPED_SKYROOT_LOG;
     public static final Block STRIPPED_SKYROOT_WOOD;
+    public static final Block SKYROOT_BUTTON;
+    public static final Block SKYROOT_PRESSURE_PLATE;
     public static final Block GOLDEN_OAK_SAPLING;
     public static final Block POTTED_GOLDEN_OAK_SAPLING;
     public static final Block GOLDEN_OAK_LOG;
@@ -183,6 +185,8 @@ public class AetherBlocks {
     public static final Block GOLDEN_OAK_STAIRS;
     public static final Block GOLDEN_OAK_DOOR;
     public static final Block GOLDEN_OAK_TRAPDOOR;
+    public static final Block GOLDEN_OAK_BUTTON;
+    public static final Block GOLDEN_OAK_PRESSURE_PLATE;
     public static final Block ORANGE_SAPLING;
     public static final Block POTTED_ORANGE_SAPLING;
     public static final Block ORANGE_LOG;
@@ -197,6 +201,8 @@ public class AetherBlocks {
     public static final Block ORANGE_STAIRS;
     public static final Block ORANGE_DOOR;
     public static final Block ORANGE_TRAPDOOR;
+    public static final Block ORANGE_BUTTON;
+    public static final Block ORANGE_PRESSURE_PLATE;
     public static final Block CRYSTAL_SAPLING;
     public static final Block POTTED_CRYSTAL_SAPLING;
     public static final Block CRYSTAL_LOG;
@@ -211,8 +217,8 @@ public class AetherBlocks {
     public static final Block CRYSTAL_STAIRS;
     public static final Block CRYSTAL_DOOR;
     public static final Block CRYSTAL_TRAPDOOR;
-//    public static final Block SKYROOT_WOOD;
-//    public static final Block STRIPPED_SKYROOT_WOOD;
+    public static final Block CRYSTAL_BUTTON;
+    public static final Block CRYSTAL_PRESSURE_PLATE;
 //    public static final Block SUN_ALTAR;
 //    public static final Block TREASURE_CHEST;
 //    public static final Block WHITE_DYED_AERCLOUD;
@@ -246,6 +252,8 @@ public class AetherBlocks {
     public static final Block WISTERIA_FENCE_GATE;
     public static final Block WISTERIA_DOOR;
     public static final Block WISTERIA_TRAPDOOR;
+    public static final Block WISTERIA_BUTTON;
+    public static final Block WISTERIA_PRESSURE_PLATE;
 //    public static final Block YELLOW_DYED_AERCLOUD;
     public static final Block ZANITE_BLOCK;
     public static final Block ZANITE_ORE;
@@ -440,6 +448,8 @@ public class AetherBlocks {
         SKYROOT_STAIRS = register("skyroot_stairs", new StairsBlock(SKYROOT_PLANKS.getDefaultState(), Settings.copy(SKYROOT_PLANKS)), buildingBlock());
         SKYROOT_TRAPDOOR = register("skyroot_trapdoor", new AetherTrapdoorBlock(Settings.copy(Blocks.OAK_TRAPDOOR)), buildingBlock());
         SKYROOT_DOOR = register("skyroot_door", new AetherDoorBlock(Settings.copy(Blocks.OAK_DOOR)), buildingBlock());
+        SKYROOT_BUTTON = register("skyroot_button", createWoodenButtonBlock(), buildingBlock());
+        SKYROOT_PRESSURE_PLATE = register("skyroot_pressure_plate", createWoodenPressurePlateBlock(MapColor.OAK_TAN), buildingBlock());
 
         GOLDEN_OAK_SAPLING = register("golden_oak_sapling", new AetherSaplingBlock(new GoldenOakSaplingGenerator(), createSaplingProperties().luminance(state -> 7)), buildingBlock());
         POTTED_GOLDEN_OAK_SAPLING = register("potted_golden_oak_sapling", createPottedBlock(GOLDEN_OAK_SAPLING));
@@ -458,6 +468,8 @@ public class AetherBlocks {
         GOLDEN_OAK_STAIRS = register("golden_oak_stairs", new StairsBlock(GOLDEN_OAK_PLANKS.getDefaultState(), Settings.copy(GOLDEN_OAK_PLANKS)), buildingBlock());
         GOLDEN_OAK_TRAPDOOR = register("golden_oak_trapdoor", new AetherTrapdoorBlock(Settings.copy(Blocks.OAK_TRAPDOOR)), buildingBlock());
         GOLDEN_OAK_DOOR = register("golden_oak_door", new AetherDoorBlock(Settings.copy(Blocks.OAK_DOOR)), buildingBlock());
+        GOLDEN_OAK_BUTTON = register("golden_oak_button", createWoodenButtonBlock(), buildingBlock());
+        GOLDEN_OAK_PRESSURE_PLATE = register("golden_oak_pressure_plate", createWoodenPressurePlateBlock(MapColor.RED), buildingBlock());
 
         ORANGE_SAPLING = register("orange_sapling", new AetherSaplingBlock(new OrangeSaplingGenerator(), createSaplingProperties()), buildingBlock());
         POTTED_ORANGE_SAPLING = register("potted_orange_sapling", createPottedBlock(ORANGE_SAPLING));
@@ -475,6 +487,8 @@ public class AetherBlocks {
         ORANGE_STAIRS = register("orange_stairs", new StairsBlock(ORANGE_PLANKS.getDefaultState(), ORANGE_WOOD), buildingBlock());
         ORANGE_TRAPDOOR = register("orange_trapdoor", new AetherTrapdoorBlock(Settings.copy(GOLDEN_OAK_TRAPDOOR)), buildingBlock());
         ORANGE_DOOR = register("orange_door", new AetherDoorBlock(Settings.copy(GOLDEN_OAK_DOOR)), buildingBlock());
+        ORANGE_BUTTON = register("orange_button", createWoodenButtonBlock(), buildingBlock());
+        ORANGE_PRESSURE_PLATE = register("orange_pressure_plate", createWoodenPressurePlateBlock(MapColor.PINK), buildingBlock());
 
         CRYSTAL_SAPLING = register("crystal_sapling", new AetherSaplingBlock(new CrystalSaplingGenerator(), createSaplingProperties().sounds(BlockSoundGroup.LARGE_AMETHYST_BUD)), buildingBlock());
         POTTED_CRYSTAL_SAPLING = register("potted_crystal_sapling", createPottedBlock(CRYSTAL_SAPLING));
@@ -485,7 +499,8 @@ public class AetherBlocks {
         CRYSTAL_LEAVES = register("crystal_leaves", createCrystalLeavesBlock(), buildingBlock());
         CRYSTAL_TRAPDOOR = register("crystal_trapdoor", new AetherTrapdoorBlock(Settings.copy(Blocks.OAK_TRAPDOOR)), buildingBlock());
         CRYSTAL_DOOR = register("crystal_door", new AetherDoorBlock(Settings.copy(Blocks.OAK_DOOR)), buildingBlock());
-
+        CRYSTAL_BUTTON = register("crystal_button", createWoodenButtonBlock(), buildingBlock());
+        CRYSTAL_PRESSURE_PLATE = register("crystal_pressure_plate", createWoodenPressurePlateBlock(MapColor.LIGHT_GRAY), buildingBlock());
 
         final Settings CRYSTAL_WOOD = Settings.of(Material.WOOD, MapColor.LIGHT_GRAY).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD);
         CRYSTAL_PLANKS = register("crystal_planks", new Block(CRYSTAL_WOOD), buildingBlock());
@@ -534,6 +549,8 @@ public class AetherBlocks {
         WISTERIA_STAIRS = register("wisteria_stairs", new StairsBlock(WISTERIA_PLANKS.getDefaultState(), Settings.copy(WISTERIA_PLANKS)), buildingBlock());
         WISTERIA_TRAPDOOR = register("wisteria_trapdoor", new AetherTrapdoorBlock(Settings.copy(Blocks.OAK_TRAPDOOR)), buildingBlock());
         WISTERIA_DOOR = register("wisteria_door", new AetherDoorBlock(Settings.copy(Blocks.OAK_DOOR)), buildingBlock());
+        WISTERIA_BUTTON = register("wisteria_button", createWoodenButtonBlock(), buildingBlock());
+        WISTERIA_PRESSURE_PLATE = register("wisteria_pressure_plate", createWoodenPressurePlateBlock(MapColor.YELLOW), buildingBlock());
 
 //        SUN_ALTAR = register("sun_altar", null);
 //        TREASURE_CHEST = register("treasure_chest", null);
@@ -734,6 +751,14 @@ public class AetherBlocks {
 
     private static FlowerPotBlock createPottedBlock(Block sourceBlock) {
         return new FlowerPotBlock(sourceBlock, Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
+    }
+
+    private static WoodenButtonBlock createWoodenButtonBlock() {
+        return new AetherWoodenButtonBlock(Settings.of(Material.DECORATION).noCollision().strength(0.5F).sounds(BlockSoundGroup.WOOD));
+    }
+
+    private static PressurePlateBlock createWoodenPressurePlateBlock(MapColor color) {
+        return new AetherPressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, Settings.of(Material.WOOD, color).noCollision().strength(0.5F).sounds(BlockSoundGroup.WOOD));
     }
 
     public static void init() {
