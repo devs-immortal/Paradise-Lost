@@ -15,6 +15,7 @@ public class ItemColorsMixin {
         ItemColors origin = info.getReturnValue();
         origin.register(((stack, tintIndex) -> 0xbce632), AetherBlocks.SKYROOT_LEAVES.asItem(), AetherBlocks.SKYROOT_LEAF_PILE.asItem());
         origin.register(((stack, tintIndex) -> 0xB1FFCB), AetherBlocks.AETHER_GRASS_BLOCK.asItem(), AetherBlocks.AETHER_GRASS.asItem(), AetherBlocks.AETHER_TALL_GRASS.asItem(), AetherBlocks.AETHER_FERN.asItem(), AetherBlocks.AETHER_BUSH.asItem());
+        origin.register(((stack, tintIndex) -> 0x599CFF), AetherBlocks.BOREAL_WISTERIA_HANGER.asItem(), AetherBlocks.BOREAL_WISTERIA_LEAVES.asItem());
         info.setReturnValue(origin);
     }
 }
