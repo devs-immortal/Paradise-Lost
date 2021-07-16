@@ -377,7 +377,6 @@ public class FloatingBlockEntity extends Entity {
         BlockPos blockPos = this.getBlockPos();
         Block block = this.floatTile.getBlock();
         BlockState blockState = this.world.getBlockState(blockPos);
-        Vec3d landingVelocity = this.getVelocity();
         this.setVelocity(this.getVelocity().multiply(0.7, 0.5, 0.7));
         if (blockState.getBlock() != Blocks.MOVING_PISTON) {
             this.discard();
