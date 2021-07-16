@@ -232,9 +232,7 @@ public class SwetEntity extends SlimeEntity {
     protected void changeType(EntityType<? extends SwetEntity> type){
         if(!this.getType().equals(type) && !this.isRemoved()) {
             SwetEntity swet = (this.convertTo(type, true));
-            if (swet != null) {
-                swet.setSize(this.getSize(), false);
-            }
+            swet.setSize(this.getSize(), false);
             world.spawnEntity(swet);
         }
     }
