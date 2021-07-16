@@ -415,6 +415,7 @@ public class FloatingBlockEntity extends Entity {
             this.getOnEndFloating().accept(impact, landingSuccessful);
         }
     }
+    
     public static boolean canMakeBlock(Supplier<Boolean> dropState, BlockState below, BlockState above){
         if(dropState.get()){
             return FallingBlock.canFallThrough(below);
