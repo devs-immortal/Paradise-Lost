@@ -2,7 +2,9 @@ package com.aether.blocks;
 
 import com.aether.Aether;
 import com.aether.blocks.aercloud.*;
+import com.aether.blocks.blockentity.FoodBowlBlockEntity;
 import com.aether.blocks.decorative.*;
+import com.aether.blocks.mechanical.FoodBowlBlock;
 import com.aether.blocks.natural.*;
 import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.entities.AetherEntityTypes;
@@ -15,6 +17,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.entity.EntityType;
@@ -37,6 +41,7 @@ import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public class AetherBlocks {
     public static final Block AEROGEL;
@@ -71,6 +76,7 @@ public class AetherBlocks {
 //    public static final Block ENCHANTED_GRAVITITE;
 //    public static final Block ENCHANTER;
 //    public static final Block FREEZER;
+    public static final Block FOOD_BOWL;
     public static final Block FLUTEGRASS;
     public static final Block GOLDEN_AERCLOUD;
     public static final Block GRAVITITE_ORE;
@@ -346,6 +352,7 @@ public class AetherBlocks {
 //        ENCHANTED_GRAVITITE = register("enchanted_gravitite", null);
 //        ENCHANTER = register("enchanter", null);
 //        FREEZER = register("freezer", null);
+        FOOD_BOWL = register("food_bowl", new FoodBowlBlock(Settings.of(Material.WOOD, MapColor.DULL_RED).strength(2.5F).sounds(BlockSoundGroup.WOOD).nonOpaque()), buildingBlock());
         GOLDEN_AERCLOUD = register("golden_aercloud", new GoldenAercloudBlock(Settings.of(Material.ICE, MapColor.YELLOW).strength(0.2F).sounds(BlockSoundGroup.WOOL).nonOpaque()), buildingBlock());
         DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
         DENSE_AERCLOUD = register("dense_aercloud", new FluidBlock(DENSE_AERCLOUD_STILL, Settings.of(Material.WATER).noCollision().strength(100.0F).dropsNothing()) {
@@ -576,6 +583,9 @@ public class AetherBlocks {
         PURPLE_SWET_DROP = register("purple_swet_drop", new SwetDropBlock(Settings.of(Material.SOLID_ORGANIC).breakInstantly().noCollision().mapColor(MapColor.CLEAR), AetherEntityTypes.PURPLE_SWET));
     }
 
+    //  BlockEntities
+    public static final BlockEntityType<FoodBowlBlockEntity> FOOD_BOWL_BLOCK_ENTITY_TYPE = registerBlockEntity("food_bowl", FoodBowlBlockEntity::new, FOOD_BOWL);
+
     static {
         // Logs and woods
         for (Block block : new Block[]{
@@ -708,6 +718,10 @@ public class AetherBlocks {
 
     private static Block register(String id, Block block) {
         return Registry.register(Registry.BLOCK, Aether.locate(id), block);
+    }
+
+    private static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id, BlockEntityType.BlockEntityFactory<T> factory, Block ... blocks) {
+        return Registry.register(Registry.BLOCK_ENTITY_TYPE, Aether.locate(id), BlockEntityType.Builder.create(factory, blocks).build(null));
     }
 
     private static PillarBlock createLogBlock(MapColor topMaterialColor, MapColor sideMaterialColor) {

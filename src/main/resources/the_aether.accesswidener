@@ -1,6 +1,7 @@
 accessWidener	v1	named
 accessible    class     net/minecraft/world/gen/feature/ConfiguredFeatures$Decorators
 accessible    class     net/minecraft/client/particle/ParticleManager$SpriteAwareFactory
+accessible    class     net/minecraft/block/entity/BlockEntityType$BlockEntityFactory
 accessible    method    net/minecraft/world/gen/feature/ConfiguredFeatures          pool                         ()Lnet/minecraft/util/collection/DataPool$Builder;
 accessible    method    net/minecraft/item/Item$Settings                            rarity                       (Lnet/minecraft/util/Rarity;)Lnet/minecraft/item/Item$Settings;
 accessible    method    net/minecraft/particle/DefaultParticleType                  <init>                       (Z)V

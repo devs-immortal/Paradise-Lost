@@ -4,6 +4,8 @@ import com.aether.Aether;
 import com.aether.client.model.entity.MoaModel;
 import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.entities.passive.MoaEntity;
+import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -23,14 +25,12 @@ public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
     }
 
     @Override
+    public void render(MoaEntity moa, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+        super.render(moa, f, g, matrixStack, vertexConsumerProvider, moa.getGenes().getRace().glowing() ? LightmapTextureManager.field_32767 : i);
+    }
+
+    @Override
     public Identifier getTexture(MoaEntity entity) {
-        if (entity.hasPassengers() && entity.getPassengerList().get(0) instanceof PlayerEntity) {
-//            IPlayerAether player = AetherAPI.get((PlayerEntity) entity.getPassengerList().get(0));
-
-//            if (player instanceof PlayerAether && !((PlayerAether) player).donationPerks.getMoaSkin().shouldUseDefualt())
-//                return null;
-        }
-
         return entity.getGenes().getTexture();
     }
 }

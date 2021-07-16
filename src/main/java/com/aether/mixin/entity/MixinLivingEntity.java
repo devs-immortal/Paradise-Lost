@@ -108,8 +108,10 @@ public abstract class MixinLivingEntity extends Entity implements AetherEntityEx
 
     @Inject(method = "getMaxHealth", at = @At("HEAD"), cancellable = true)
     public void getMoaMaxHealth(CallbackInfoReturnable<Float> cir) {
-        if((Object) this instanceof MoaEntity) {
-            cir.setReturnValue(((MoaEntity) (Object) this).getGenes().getAttribute(MoaAttributes.MAX_HEALTH));
+        if((Object) this instanceof MoaEntity moa) {
+            var genes = moa.getGenes();
+            cir.setReturnValue(genes.isInitialized() ? genes.getAttribute(MoaAttributes.MAX_HEALTH) : 40F);
+            cir.cancel();
         }
     }
 }

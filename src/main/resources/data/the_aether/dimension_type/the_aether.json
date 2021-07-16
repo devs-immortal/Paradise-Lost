@@ -1,7 +1,7 @@
 {
   "ultrawarm": false,
   "natural": true,
-  "ambient_light": 0.2,
+  "ambient_light": 0.075,
   "has_skylight": true,
   "has_ceiling": true,
   "infiniburn": "minecraft:infiniburn_overworld",
@@ -11,7 +11,6 @@
   "has_raids": false,
   "respawn_anchor_works": false,
   "bed_works": true,
-  "fixed_time": 6000,
   "piglin_safe": false,
   "coordinate_scale": 10.0
 }
