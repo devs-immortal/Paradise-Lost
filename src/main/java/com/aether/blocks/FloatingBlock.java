@@ -55,8 +55,6 @@ public class FloatingBlock extends OreBlock {
 
     protected void onStartFloating(FloatingBlockEntity entityIn) {}
 
-    public void onEndFloating(World worldIn, BlockPos posIn, BlockState floatingState, BlockState hitState) {}
-
     public void onBroken(World worldIn, BlockPos pos) {}
 
     protected int getFallDelay() {
