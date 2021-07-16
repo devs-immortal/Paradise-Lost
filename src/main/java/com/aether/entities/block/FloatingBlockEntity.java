@@ -1,7 +1,6 @@
 package com.aether.entities.block;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.blocks.FloatingBlock;
 import com.aether.entities.AetherEntityTypes;
 import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
@@ -53,11 +52,11 @@ public class FloatingBlockEntity extends Entity {
     private boolean dropping = false;
     private boolean collides;
     private boolean partOfStructure = false;
-    private BiConsumer<BlockPos, Float> onLand;
+    private BiConsumer<Float, Boolean> onEndFloating;
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
-        setOnLand((pos, impact) -> {});
+        setOnEndFloating((impact, landed) -> {});
         setDropState(() -> {
             int distFromTop = worldIn.getTopY() - this.getBlockPos().getY();
             return !this.isFastFloater() && distFromTop <= 50;
@@ -365,15 +364,16 @@ public class FloatingBlockEntity extends Entity {
         void postTick();
     }
 
-    public BiConsumer<BlockPos, Float> getOnLand(){
-        return this.onLand;
+    public BiConsumer<Float, Boolean> getOnEndFloating(){
+        return this.onEndFloating;
     }
 
-    public void setOnLand(BiConsumer<BlockPos, Float> consumer){
-        this.onLand = consumer;
+    public void setOnEndFloating(BiConsumer<Float, Boolean> consumer){
+        this.onEndFloating = consumer;
     }
 
     public void land(float impact) {
+        boolean landingSuccessful = false;
         BlockPos blockPos = this.getBlockPos();
         Block block = this.floatTile.getBlock();
         BlockState blockState = this.world.getBlockState(blockPos);
@@ -389,6 +389,7 @@ public class FloatingBlockEntity extends Entity {
                         this.floatTile = this.floatTile.with(Properties.WATERLOGGED, true);
 
                     if (this.world.setBlockState(blockPos, this.floatTile, 3)) {
+                        landingSuccessful = true;
                         if (this.blockEntityData != null && this.floatTile.hasBlockEntity()) {
                             BlockEntity blockEntity = this.world.getBlockEntity(blockPos);
                             if (blockEntity != null) {
@@ -405,16 +406,13 @@ public class FloatingBlockEntity extends Entity {
                                 blockEntity.markDirty();
                             }
                         }
-                        this.getOnLand().accept(this.getBlockPos(), impact);
-                    } else if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-                        Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
                     }
-                } else if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+                }
+                if (!landingSuccessful && this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
                     Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
                 }
-            } else if (block instanceof FloatingBlock) {
-                ((FloatingBlock) block).onBroken(this.world, blockPos);
             }
+            this.getOnEndFloating().accept(impact, landingSuccessful);
         }
     }
     public static boolean canMakeBlock(Supplier<Boolean> dropState, BlockState below, BlockState above){

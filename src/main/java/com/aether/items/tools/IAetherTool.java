@@ -92,9 +92,10 @@ public interface IAetherTool {
                 entity.floatTime = 0;
                 if (state.getBlock() == Blocks.TNT){
                     System.out.println("boomer says");
-                    entity.setOnLand((landingPos, impact) -> {
+                    entity.setOnEndFloating((impact, landed) -> {
                         System.out.println("boom " + impact);
                         if (impact >= 0.8) {
+                            BlockPos landingPos = entity.getBlockPos();
                             System.out.println("yea");
                             world.breakBlock(landingPos, false);
                             world.createExplosion(entity, landingPos.getX(), landingPos.getY(), landingPos.getZ(), (float) MathHelper.clamp(impact*5.5, 0, 10), Explosion.DestructionType.BREAK);
@@ -102,10 +103,10 @@ public interface IAetherTool {
                     });
                 }
                 if (state.getBlock() == Blocks.LIGHTNING_ROD){
-                    entity.setOnLand((landingPos, impact) -> {
-                        if (world.isThundering() && impact >= 1.1){
+                    entity.setOnEndFloating((impact, landed) -> {
+                        if (world.isThundering() && landed && impact >= 1.1){
                             LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
-                            lightning.setPosition(Vec3d.ofCenter(landingPos));
+                            lightning.setPosition(Vec3d.ofCenter(entity.getBlockPos()));
                             world.spawnEntity(lightning);
                         }
                     });
