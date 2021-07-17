@@ -30,14 +30,14 @@ public class MoaStatCommand {
                 .then(argument("target", EntityArgumentType.entities())
                 .then(literal("query")
                         .then(argument("attribute", StringArgumentType.word())
-                                .executes((context -> printStat(context.getSource(), (Collection<Entity>) EntityArgumentType.getEntities(context, "target"), StringArgumentType.getString(context, "attribute"))))))
+                                .executes((context -> printStat(context.getSource(), EntityArgumentType.getEntities(context, "target"), StringArgumentType.getString(context, "attribute"))))))
                 .then(literal("assign").then(argument("attribute", StringArgumentType.word())
                         .then(argument("value", FloatArgumentType.floatArg())
                                 .executes(context -> setStat(context.getSource(), EntityArgumentType.getEntity(context, "target"), StringArgumentType.getString(context, "attribute"), FloatArgumentType.getFloat(context, "value")))))))
         );
     }
 
-    private static int printStat(ServerCommandSource source, Collection<Entity> entities, String attributeId) {
+    private static int printStat(ServerCommandSource source, Collection<? extends Entity> entities, String attributeId) {
         entities.forEach(entity -> {
             if(entity instanceof MoaEntity moa) {
                 MoaGenes genes = moa.getGenes();
