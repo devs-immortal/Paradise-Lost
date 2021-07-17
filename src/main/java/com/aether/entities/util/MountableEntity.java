@@ -22,7 +22,7 @@ public abstract class MountableEntity extends AetherAnimalEntity {
     }
 
     public MountableEntity(World world) {
-        super(null, world);
+        this(null, world);
     }
 
     @Override
@@ -31,6 +31,7 @@ public abstract class MountableEntity extends AetherAnimalEntity {
         this.dataTracker.startTracking(RIDER_SNEAKING, false);
     }
 
+    // TODO: Patch this or remove it, pick one.
    //@Override
    //public void travel(Vec3d motion) {
    //    Entity entity = this.getPassengerList().isEmpty() ? null : this.getPassengerList().get(0);

@@ -27,9 +27,13 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
         super(type, world);
     }
 
+    public SaddleMountEntity(World world) {
+        this(null, world);
+    }
+
     @Override
     public Entity getPrimaryPassenger() {
-        return this.getPassengerList().isEmpty() ? null : this.getPassengerList().get(0);
+        return this.getFirstPassenger();
     }
 
     @Override
@@ -87,6 +91,7 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
 
     @Override
     public boolean canBeControlledByRider() {
+        // TODO: A tempted system would be needed here to resolve this, similar to PigEntity and HorseEntity
         return true;
     }
 
@@ -117,7 +122,7 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     }
 
     public boolean canBeSaddled() {
-        return true;
+        return this.isAlive() && !this.isBaby();
     }
 
     public void saddle(@Nullable SoundCategory sound) {
