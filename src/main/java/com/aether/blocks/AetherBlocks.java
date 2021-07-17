@@ -280,10 +280,10 @@ public class AetherBlocks {
     public static final Block AMBROSIUM_LANTERN;
 
 
-    private static final Block SWET_DROP;
-    private static final Block BLUE_SWET_DROP;
-    private static final Block GOLDEN_SWET_DROP;
-    private static final Block PURPLE_SWET_DROP;
+    public static final Block SWET_DROP;
+    public static final Block BLUE_SWET_DROP;
+    public static final Block GOLDEN_SWET_DROP;
+    public static final Block PURPLE_SWET_DROP;
 
     static {
         AETHER_DIRT = register("aether_dirt", new Block(Settings.copy(Blocks.DIRT).strength(0.3f).sounds(BlockSoundGroup.GRAVEL)), buildingBlock());
