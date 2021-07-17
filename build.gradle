@@ -45,10 +45,10 @@ repositories {
         url = "https://maven.fabricmc.net/"
     }
     maven { url = "https://hephaestus.dev/release" }
-//    maven {
-//        name = "TerraformersMC"
-//        url = "https://maven.terraformersmc.com/"
-//    }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.kotlindiscord.com/repository/terraformers/"
+    }
     maven {
         name = "Ladysnake Libs"
         url = "https://ladysnake.jfrog.io/artifactory/mods"
@@ -90,7 +90,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
     // Testing only, do not JiJ
-    //modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     modRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 
     // Custom Portal Api
