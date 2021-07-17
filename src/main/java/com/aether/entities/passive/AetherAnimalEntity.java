@@ -18,6 +18,10 @@ public class AetherAnimalEntity extends AnimalEntity {
         super(entityType, world);
     }
 
+    protected AetherAnimalEntity(World world) {
+        this(null, world);
+    }
+
     @Override
     public float getPathfindingFavor(BlockPos pos, WorldView worldIn) {
         return worldIn.getBlockState(pos.down()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK ? 10.0F : worldIn.getLightLevel(pos) - 0.5F;

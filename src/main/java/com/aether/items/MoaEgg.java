@@ -1,79 +1,66 @@
 package com.aether.items;
 
-import com.aether.api.AetherAPI;
-import com.aether.api.moa.MoaType;
-import com.aether.component.MoaGenes;
+import com.aether.api.MoaAPI;
+import com.aether.api.MoaAttributes;
 import com.aether.entities.passive.MoaEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class MoaEgg extends Item {
     public MoaEgg(Settings settings) {
         super(settings);
     }
 
-    public static ItemStack getStack(MoaType type) {
-        ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
-        NbtCompound tag = new NbtCompound();
-        tag.putInt("moaType", AetherAPI.instance().getMoaId(type));
-        stack.setTag(tag);
-        return stack;
-    }
-
     @Override
     public ActionResult useOnBlock(ItemUsageContext contextIn) {
-        if (contextIn.getPlayer() != null) {
-            MoaEntity moa = new MoaEntity(contextIn.getWorld());
-
-            moa.refreshPositionAndAngles(contextIn.getBlockPos().up(), 1.0F, 1.0F);
-            MoaGenes.get(moa).initMoa(moa);
-
-            if (!contextIn.getWorld().isClient) contextIn.getWorld().spawnEntity(moa);
-
-            if (!contextIn.getPlayer().isCreative()) {
-                contextIn.getStack().decrement(1);
-                if (contextIn.getStack().isEmpty()) {
-                    contextIn.getPlayer().getInventory().removeOne(contextIn.getStack());
-                }
+        World world = contextIn.getWorld();
+        PlayerEntity player = contextIn.getPlayer();
+        ItemStack stack = contextIn.getStack();
+        if (player != null && stack.getOrCreateTag().contains("genes") && player.isCreative()) {
+            MoaEntity moa = new MoaEntity(world);
+            NbtCompound geneTag = stack.getSubTag("genes");
+            boolean baby = geneTag.getBoolean("baby");
+            moa.getGenes().readFromNbt(geneTag);
+            if(baby) {
+                moa.setBreedingAge(-43200);
             }
-
-            return ActionResult.SUCCESS;
+            moa.refreshPositionAndAngles(contextIn.getBlockPos().up(), 0, 0);
+            moa.setHealth(moa.getGenes().getAttribute(MoaAttributes.MAX_HEALTH));
+            world.spawnEntity(moa);
+            return ActionResult.success(world.isClient());
         }
         return super.useOnBlock(contextIn);
     }
 
     @Override
-    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> subItems) {
-        for (int moaTypeSize = 0; moaTypeSize < AetherAPI.instance().getMoaRegistrySize(); ++moaTypeSize) {
-            ItemStack stack = new ItemStack(this);
-            NbtCompound compound = new NbtCompound();
-            MoaType moaType = AetherAPI.instance().getMoa(moaTypeSize);
-
-            if (moaType.getItemGroup() == group || group == ItemGroup.SEARCH) {
-                compound.putInt("moaType", moaTypeSize);
-                stack.setTag(compound);
-                subItems.add(stack);
+    @Environment(EnvType.CLIENT)
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        if(stack.getOrCreateTag().contains("genes")) {
+            NbtCompound geneTag = stack.getSubTag("genes");
+            Identifier raceId = Identifier.tryParse(geneTag.getString("raceId"));
+            var race = MoaAPI.getRace(raceId);
+            if(raceId != null) {
+                tooltip.add(new TranslatableText(MoaAPI.formatForTranslation(raceId)).formatted(race.legendary() ? Formatting.LIGHT_PURPLE : Formatting.DARK_AQUA));
+            }
+            if(!geneTag.getBoolean("baby")) {
+                tooltip.add(new TranslatableText("moa.egg.adult").formatted(Formatting.DARK_PURPLE, Formatting.ITALIC));
             }
         }
-    }
-
-    public int getColor(ItemStack stack) {
-        return this.getMoaType(stack).getMoaEggColor();
-    }
-
-    public MoaType getMoaType(ItemStack stack) {
-        NbtCompound tag = stack.getTag();
-        if (tag != null) return AetherAPI.instance().getMoa(tag.getInt("moaType"));
-        return AetherAPI.instance().getMoa(0);
-    }
-
-    @Override
-    public boolean shouldSyncTagToClient() {
-        return true;
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

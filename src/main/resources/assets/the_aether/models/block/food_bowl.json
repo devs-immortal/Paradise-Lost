@@ -1,0 +1,57 @@
+{
+	"credit": "Made by Azazelthedemonlord",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "the_aether:block/food_bowl",
+		"particle": "the_aether:block/food_bowl"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 1],
+			"to": [16, 8, 15],
+			"faces": {
+				"north": {"uv": [8, 0, 16, 4], "texture": "#0"},
+				"east": {"uv": [8, 8, 15, 12], "texture": "#0"},
+				"south": {"uv": [8, 4, 16, 8], "texture": "#0"},
+				"west": {"uv": [8, 12, 15, 16], "texture": "#0"},
+				"up": {"uv": [8, 7, 0, 0], "texture": "#0"},
+				"down": {"uv": [8, 7, 0, 14], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"head": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 13, 7]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}

@@ -326,6 +326,7 @@
   "item.the_aether.lightning_sword": "Lightning Sword",
   "item.the_aether.lore_book": "Book of Lore",
   "item.the_aether.moa_egg": "Moa Egg",
+  "item.the_aether.moa_spawn_egg": "Moa Spawn Egg",
   "item.the_aether.nature_staff": "Nature Staff",
   "item.the_aether.neptune_boots": "Neptune Boots",
   "item.the_aether.neptune_chestplate": "Neptune Chestplate",
@@ -405,5 +406,19 @@
   "item.the_aether.zanite_sword": "Zanite Sword",
   "trinkets.slot.chest.parachute": "Parachute",
   "death.attack.aether_fall": "%1$s plummeted from the heavens",
-  "death.attack.aether_fall.player": "%1$s was thrown off the heavens above by %2$s"
+  "death.attack.aether_fall.player": "%1$s was thrown off the heavens above by %2$s",
+  "moa.egg.adult": "pre-grown",
+  "moa.race.highlands_blue": "Common Blue",
+  "moa.race.goldenrod": "Goldenrod",
+  "moa.race.mintgrass": "Mintgrass",
+  "moa.race.tangerine": "Tangerine",
+  "moa.race.foxtrot": "Foxtrot",
+  "moa.race.strawberry_wistar": "Strawberry Wistar",
+  "moa.race.moonstruck": "Moonstruck",
+  "commands.aether.moaegg.failure": "Could not find race %1$s",
+  "commands.aether.moaegg.success": "Successfully gave %2$s a %1$s",
+  "commands.aether.moastat.failure.attribute": "Invalid attribute name",
+  "commands.aether.moastat.failure.entity": "Invalid entity - %1$s",
+  "commands.aether.moastat.name": "Name: %1$s",
+  "commands.aether.moastat.race": "Race: %1$s"
 }

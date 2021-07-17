@@ -3,15 +3,19 @@ package com.aether.component;
 import com.aether.api.MoaAPI;
 import com.aether.api.MoaAttributes;
 import com.aether.entities.passive.MoaEntity;
+import com.aether.items.AetherItems;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.UUID;
 
 public class MoaGenes implements AutoSyncedComponent {
 
@@ -19,6 +23,8 @@ public class MoaGenes implements AutoSyncedComponent {
     private MoaAPI.Race race = MoaAPI.FALLBACK_MOA;
     private MoaAttributes affinity;
     private boolean legendary, initialized;
+    private UUID owner;
+    private float hunger = 100F;
 
     public MoaGenes() {}
 
@@ -34,12 +40,92 @@ public class MoaGenes implements AutoSyncedComponent {
         initialized = true;
     }
 
+    public ItemStack getEggForBreeding(MoaGenes otherParent, World world, BlockPos pos) {
+        var childRace = MoaAPI.getMoaForBreeding(this, otherParent, world, pos);
+
+        ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
+        NbtCompound nbt = stack.getOrCreateSubTag("genes");
+        Random random = world.getRandom();
+        MoaGenes genes = new MoaGenes();
+
+        float increaseChance = 1F;
+        for (MoaAttributes attribute : MoaAttributes.values()) {
+            boolean increase = random.nextFloat() <= increaseChance;
+            genes.attributeMap.addTo(attribute, attribute.fromBreeding(this, otherParent, increase));
+            if(increase) {
+                increaseChance /= 2;
+            }
+        }
+        genes.race = childRace;
+        genes.affinity = random.nextBoolean() ? this.affinity : otherParent.affinity;
+        genes.owner = random.nextBoolean() ? this.owner : otherParent.owner;
+        genes.initialized = true;
+
+        genes.writeToNbt(nbt);
+        nbt.putBoolean("baby", true);
+        return stack;
+    }
+
+    public static ItemStack getEggForCommand(MoaAPI.Race race, World world, boolean baby) {
+        ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
+        NbtCompound nbt = stack.getOrCreateSubTag("genes");
+        Random random = world.getRandom();
+        MoaGenes genes = new MoaGenes();
+
+        for (MoaAttributes attribute : MoaAttributes.values()) {
+            genes.attributeMap.addTo(attribute, race.statWeighting().configure(attribute, race, random));
+        }
+        genes.race = race;
+        genes.affinity = race.defaultAffinity();
+        genes.initialized = true;
+
+        genes.writeToNbt(nbt);
+        nbt.putBoolean("baby", baby);
+        return stack;
+    }
+
     public float getAttribute(MoaAttributes attribute) {
         return attributeMap.getOrDefault(attribute, attribute.min);
     }
 
+    public void setAttribute(MoaAttributes attribute, float value) {
+        attributeMap.put(attribute, value);
+    }
+
+    public MoaAttributes getAffinity() {
+        return affinity;
+    }
+
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    public MoaAPI.Race getRace() {
+        return race;
+    }
+
     public Identifier getTexture() {
         return race.texturePath();
+    }
+
+    public float getHunger() {
+        return hunger;
+    }
+
+    public void setHunger(float hunger) {
+        this.hunger = Math.max(Math.min(hunger, 100), 0);
+    }
+
+    public boolean isTamed() {
+        return owner != null;
+    }
+
+    public void tame(UUID newOwner) {
+        this.owner = newOwner;
+    }
+
+    public UUID getOwner() {
+        return owner;
     }
 
     public static MoaGenes get(@NotNull MoaEntity moa) {
@@ -53,6 +139,10 @@ public class MoaGenes implements AutoSyncedComponent {
             race = MoaAPI.getRace(Identifier.tryParse(tag.getString("raceId")));
             affinity = MoaAttributes.valueOf(tag.getString("affinity"));
             legendary = tag.getBoolean("legendary");
+            hunger = tag.getFloat("hunger");
+            if(tag.getBoolean("tamed")) {
+                owner = tag.getUuid("owner");
+            }
             Arrays.stream(MoaAttributes.values()).forEach(attribute -> attributeMap.put(attribute, tag.getFloat(attribute.name())));
         }
     }
@@ -64,6 +154,11 @@ public class MoaGenes implements AutoSyncedComponent {
             tag.putString("raceId", race.id().toString());
             tag.putString("affinity", affinity.name());
             tag.putBoolean("legendary", legendary);
+            tag.putFloat("hunger", hunger);
+            tag.putBoolean("tamed", isTamed());
+            if(isTamed()) {
+                tag.putUuid("owner", owner);
+            }
             Arrays.stream(MoaAttributes.values()).forEach(attribute -> tag.putFloat(attribute.name(), attributeMap.getFloat(attribute)));
         }
     }

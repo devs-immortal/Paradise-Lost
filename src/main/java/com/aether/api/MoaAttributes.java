@@ -1,5 +1,7 @@
 package com.aether.api;
 
+import com.aether.component.MoaGenes;
+
 public enum MoaAttributes {
     GROUND_SPEED(0.24F, 1F, 0.152F),
     GLIDING_SPEED(0.055F, 0.25F, 0.039F),
@@ -14,5 +16,19 @@ public enum MoaAttributes {
         this.min = min;
         this.max = max;
         this.gradeInterval = gradeInterval;
+    }
+
+    public float fromBreeding(MoaGenes parentA, MoaGenes parentB, boolean increase) {
+        float stat = (parentA.getAttribute(this) / 2) + (parentB.getAttribute(this) / 2);
+        if(parentA.getAffinity() == this) {
+            stat += gradeInterval / 3;
+        }
+        if(parentB.getAffinity() == this) {
+            stat += gradeInterval / 3;
+        }
+        if(increase) {
+           stat += gradeInterval / 4;
+        }
+        return stat;
     }
 }

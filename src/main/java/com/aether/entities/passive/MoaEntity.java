@@ -1,59 +1,60 @@
 package com.aether.entities.passive;
 
-import com.aether.api.AetherAPI;
+import com.aether.api.MoaAPI;
 import com.aether.api.MoaAttributes;
-import com.aether.api.moa.MoaType;
-import com.aether.component.AetherComponents;
+import com.aether.blocks.blockentity.FoodBowlBlockEntity;
 import com.aether.component.MoaGenes;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
-import com.aether.items.MoaEgg;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
+import java.util.UUID;
 
 //import com.aether.world.storage.loot.AetherLootTableList;
 
-public class MoaEntity extends SaddleMountEntity implements JumpingMount {
+public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameable {
 
     public static final TrackedData<Integer> AIR_TICKS = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    public static final TrackedData<Byte> AMMOUNT_FEED = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.BYTE);
-    public static final TrackedData<Boolean> SITTING = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public float curWingRoll, curWingYaw, curLegPitch;
     public float jumpStrength;
     public boolean isInAir;
-    protected int maxJumps;
     protected int secsUntilEgg;
     private MoaGenes genes;
 
@@ -64,51 +65,43 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
         this.secsUntilEgg = this.getRandomEggTime();
     }
 
-    @Override
-    public void updatePosition(double x, double y, double z) {
-        super.updatePosition(x, y, z);
-        //if(!getGenes().isInitialized()) {
-        //    genes.initMoa(this);
-        //}
-    }
-
     public static DefaultAttributeContainer.Builder initAttributes() {
         return AetherEntityTypes.getDefaultAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D);
     }
 
-
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 2));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 0.65F, 0.1F)); //WanderGoal
-        this.goalSelector.add(2, new TemptGoal(this, 1.0D, Ingredient.ofItems(AetherItems.NATURE_STAFF), false));
-        //this.goalSelector.add(2, new WanderAroundGoal(this, 1.0)); //WanderGoal
-        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 4.5F));
-        this.goalSelector.add(5, new LookAroundGoal(this)); //LookGoal
-        this.goalSelector.add(6, new AnimalMateGoal(this, 0.25F));
+        this.goalSelector.add(1, new MoaEscapeDangerGoal(this, 2));
+        this.goalSelector.add(2, new EatFromBowlGoal(1, 24, 16));
+        this.goalSelector.add(3, new AnimalMateGoal(this, 0.25F));
+        this.goalSelector.add(4, new TemptGoal(this, 1.0D, Ingredient.ofItems(AetherItems.NATURE_STAFF), false));
+        this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));
+        this.goalSelector.add(6, new WanderAroundFarGoal(this, 0.65F, 0.1F)); //WanderGoal
+        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 4.5F));
+        this.goalSelector.add(8, new LookAroundGoal(this)); //LookGoal
     }
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
-        genes.initMoa(this);
+        if(!genes.isInitialized()) {
+            genes.initMoa(this);
+            setHealth(genes.getAttribute(MoaAttributes.MAX_HEALTH));
+        }
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
     @Override
     public void move(MovementType movement, Vec3d motion) {
-        if (!this.isSitting()) super.move(movement, motion);
-        else super.move(movement, new Vec3d(0, motion.y, 0));
+        super.move(movement, motion);
     }
 
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(AIR_TICKS, 0);
-        this.dataTracker.startTracking(AMMOUNT_FEED, (byte) 0);
-        this.dataTracker.startTracking(SITTING, false);
     }
 
     public float getWingRoll() {
@@ -150,32 +143,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
         return 775 + this.random.nextInt(50);
     }
 
-    public boolean isSitting() {
-        return this.dataTracker.get(SITTING);
-    }
-
-    public void setSitting(boolean isSitting) {
-        this.dataTracker.set(SITTING, isSitting);
-    }
-    public byte getAmountFed() {
-        return this.dataTracker.get(AMMOUNT_FEED);
-    }
-
-    public void setAmountFed(int amountFed) {
-        this.dataTracker.set(AMMOUNT_FEED, (byte) amountFed);
-    }
-
-    public void increaseAmountFed(int amountFed) {
-        this.setAmountFed(this.getAmountFed() + amountFed);
-    }
-    public int getMaxJumps() {
-        return this.maxJumps;
-    }
-
-    public void setMaxJumps(int maxJumps) {
-        this.maxJumps = maxJumps;
-    }
-
     @Override
     protected void playHurtSound(DamageSource source) {
         this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_BAT_DEATH, SoundCategory.NEUTRAL, 0.225F, MathHelper.clamp(this.random.nextFloat(), 0.5f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.15f));
@@ -214,12 +181,39 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
                 this.secsUntilEgg = this.getRandomEggTime();
             }
         }
+        MoaGenes genes = getGenes();
+        float hunger = genes.getHunger();
+        if(genes.isTamed()) {
+            if(random.nextBoolean()) {
+                genes.setHunger(hunger - (1F / 12000F));
+            }
+        }
+        if(getHealth() < getMaxHealth() && hunger > 65F && world.getTime() % 20 == 0 && random.nextBoolean()) {
+            heal(1);
+            genes.setHunger(hunger - 0.5F);
+        }
+        if(hunger < 20F && world.getTime() % 10 + random.nextInt(4) == 0) {
+            produceParticles(ParticleTypes.ANGRY_VILLAGER);
+            if(hunger < 10F) {
+                removeAllPassengers();
+            }
+        }
+    }
+
+    protected void produceParticles(ParticleEffect parameters) {
+        for(int i = 0; i < 5; ++i) {
+            double d = this.random.nextGaussian() * 0.02D;
+            double e = this.random.nextGaussian() * 0.02D;
+            double f = this.random.nextGaussian() * 0.02D;
+            this.world.addParticle(parameters, this.getParticleX(1.0D), this.getRandomBodyY() + 1.0D, this.getParticleZ(1.0D), d, e, f);
+        }
+
     }
 
     @Override
     @Environment(EnvType.CLIENT)
     protected Text getDefaultName() {
-        return super.getDefaultName();
+        return new TranslatableText(MoaAPI.formatForTranslation(getGenes().getRace().id()));
     }
 
     @Override
@@ -232,7 +226,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
     }
 
     public boolean isBreedingItem(ItemStack stack) {
-        return false;
+        return stack.getItem() == AetherItems.ORANGE;
+    }
+
+    @Override
+    public boolean canBeSaddled() {
+        return getGenes().isTamed();
     }
 
     public void travel(Vec3d movementInput) {
@@ -308,41 +307,72 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
         return isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) * 0.8F : getMovementSpeed() * 0.1F;
     }
 
-
-
-    public void setToAdult() {
-        this.setBreedingAge(0);
-    }
-
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getStackInHand(hand);
-
-
+        ItemStack heldStack = player.getStackInHand(hand);
+        Item heldItem = heldStack.getItem();
+        if(heldItem.isFood() && heldItem.getFoodComponent().isMeat()) {
+            if(!getGenes().isTamed()) {
+                if(random.nextFloat() < 0.15F) {
+                    getGenes().tame(player.getUuid());
+                    produceParticles(ParticleTypes.HEART);
+                    playSound(SoundEvents.ENTITY_PARROT_AMBIENT, 2F, 2F);
+                }
+                heldStack.decrement(1);
+                playSound(SoundEvents.ENTITY_PARROT_EAT, 1F, 0.8F);
+            }
+            else {
+                float hungerRestored = heldItem.getFoodComponent().getHunger() * 4;
+                float satiation = getGenes().getHunger();
+                float hunger = 100 - satiation;
+                if(hunger > 1) {
+                    int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), heldStack.getCount());
+                    spawnConsumptionEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
+                    heldStack.decrement(consumption);
+                    getGenes().setHunger(satiation + (consumption * hungerRestored));
+                    playSound(SoundEvents.ENTITY_PARROT_EAT, 1.5F, 0.8F);
+                    produceParticles(ParticleTypes.HAPPY_VILLAGER);
+                }
+            }
+            return ActionResult.success(world.isClient());
+        }
         return super.interactMob(player, hand);
     }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
-
-        compound.putByte("amountFed", this.getAmountFed());
-        compound.putBoolean("isSitting", this.isSitting());
         compound.putInt("airTicks", dataTracker.get(AIR_TICKS));
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound compound) {
         super.readCustomDataFromNbt(compound);
-
-        this.setAmountFed(compound.getByte("amountFed"));
-        this.setSitting(compound.getBoolean("isSitting"));
         dataTracker.set(AIR_TICKS, compound.getInt("airTicks"));
     }
 
     @Override
     public boolean shouldSpawnSprintingParticles() {
         return Math.abs(getVelocity().multiply(1, 0, 1).length()) > 0 && !isTouchingWater() && !isGliding();
+    }
+
+    @Override
+    public void breed(ServerWorld world, AnimalEntity other) {
+        MoaGenes genes = getGenes();
+        if(genes.getHunger() > 80F && genes.isTamed() && other instanceof MoaEntity moa && moa.getGenes().isTamed()) {
+            ItemStack egg = genes.getEggForBreeding(((MoaEntity) other).genes, world, getBlockPos());
+            playSound(SoundEvents.ENTITY_TURTLE_LAY_EGG, 0.8F, 1.5F);
+
+            ItemScatterer.spawn(world, getX(), getY(), getZ(), egg);
+            this.setBreedingAge(6000);
+            other.setBreedingAge(6000);
+            this.resetLoveTicks();
+            other.resetLoveTicks();
+            world.sendEntityStatus(this, (byte)18);
+            if (world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
+                world.spawnEntity(new ExperienceOrbEntity(world, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(16) + 4));
+            }
+        }
     }
 
     @Override
@@ -372,7 +402,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
 
     @Override
     public Identifier getLootTableId() {
-        return null;//AetherLootTableList.ENTITIES_MOA;
+        return null;
     }
 
     @Override
@@ -392,7 +422,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
 
     @Override
     public void stopJumping() {
-
     }
 
     public MoaGenes getGenes() {
@@ -400,5 +429,104 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount {
             genes = MoaGenes.get(this);
         }
         return genes;
+    }
+
+    @Nullable
+    @Override
+    public UUID getOwnerUuid() {
+        return getGenes().getOwner();
+    }
+
+    @Nullable
+    @Override
+    public Entity getOwner() {
+        return Optional.ofNullable(getOwnerUuid()).map(world::getPlayerByUuid).orElse(null);
+    }
+
+    private class MoaEscapeDangerGoal extends EscapeDangerGoal {
+
+        public MoaEscapeDangerGoal(PathAwareEntity mob, double speed) {
+            super(mob, speed);
+        }
+
+        @Override
+        public boolean canStart() {
+            boolean ownerNear = MoaEntity.this.getAttacker() != MoaEntity.this.getOwner();
+            return ownerNear && super.canStart();
+        }
+    }
+
+    public class EatFromBowlGoal extends MoveToTargetPosGoal {
+        protected int timer;
+
+        public EatFromBowlGoal(double speed, int range, int maxYDifference) {
+            super(MoaEntity.this, speed, range, maxYDifference);
+        }
+
+        public double getDesiredSquaredDistanceToTarget() {
+            return 2.0D;
+        }
+
+        public boolean shouldResetPath() {
+            return this.tryingTime % 100 == 0;
+        }
+
+        protected boolean isTargetPos(WorldView world, BlockPos pos) {
+            if(world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
+                ItemStack foodStack = foodBowl.getStack(0);
+                Item foodItem = foodStack.getItem();
+                return foodItem.isFood() && foodItem.getFoodComponent().isMeat();
+            }
+            return false;
+        }
+
+        public void tick() {
+            if (this.hasReached()) {
+                if (this.timer >= 20) {
+                    this.tryEat();
+                } else {
+                    ++this.timer;
+                }
+            } else if (!this.hasReached() && MoaEntity.this.random.nextFloat() < 0.025F) {
+                MoaEntity.this.playSound(SoundEvents.ENTITY_PARROT_DEATH, 0.5F, 2.0F);
+            }
+
+            super.tick();
+        }
+
+        protected void tryEat() {
+            if(world.getBlockEntity(targetPos) instanceof FoodBowlBlockEntity foodBowl) {
+                ItemStack foodStack = foodBowl.getStack(0);
+                Item foodItem = foodStack.getItem();
+                if(foodItem.isFood() && foodItem.getFoodComponent().isMeat()) {
+                    float hungerRestored = foodItem.getFoodComponent().getHunger() * 4;
+                    float satiation = getGenes().getHunger();
+                    float hunger = 100 - satiation;
+                    if(hunger > 1) {
+                        int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), foodStack.getCount());
+                        spawnConsumptionEffects(foodStack, 10 + random.nextInt(consumption * 2 + 1));
+                        foodStack.decrement(consumption);
+                        getGenes().setHunger(satiation + (consumption * hungerRestored));
+                        playSound(SoundEvents.ENTITY_PARROT_EAT, 1.5F, 0.8F);
+                        produceParticles(ParticleTypes.HAPPY_VILLAGER);
+                    }
+                }
+            }
+        }
+
+        @Override
+        public boolean canStart() {
+            return getGenes().getHunger() < 80F && super.canStart();
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return MoaEntity.this.getGenes().getHunger() < 98F && super.shouldContinue();
+        }
+
+        public void start() {
+            this.timer = 0;
+            super.start();
+        }
     }
 }
