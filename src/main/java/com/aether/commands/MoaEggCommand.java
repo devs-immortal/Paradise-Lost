@@ -4,7 +4,6 @@ import com.aether.api.MoaAPI;
 import com.aether.component.MoaGenes;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
@@ -20,7 +19,8 @@ import net.minecraft.util.ItemScatterer;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
-import static net.minecraft.server.command.CommandManager.*;
+import static net.minecraft.server.command.CommandManager.argument;
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class MoaEggCommand {
 

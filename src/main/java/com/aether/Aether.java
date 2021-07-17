@@ -20,12 +20,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Aether implements ModInitializer, ClientModInitializer {
 

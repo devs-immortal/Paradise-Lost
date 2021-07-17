@@ -9,7 +9,6 @@ import com.aether.entities.passive.MoaEntity;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.command.ServerCommandSource;
@@ -19,7 +18,8 @@ import net.minecraft.util.Formatting;
 
 import java.util.Collection;
 
-import static net.minecraft.server.command.CommandManager.*;
+import static net.minecraft.server.command.CommandManager.argument;
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class MoaStatCommand {
 

@@ -3,7 +3,10 @@ package com.aether.blocks;
 import com.aether.Aether;
 import com.aether.blocks.aercloud.*;
 import com.aether.blocks.blockentity.FoodBowlBlockEntity;
-import com.aether.blocks.decorative.*;
+import com.aether.blocks.decorative.AetherDirtPathBlock;
+import com.aether.blocks.decorative.AmbrosiumLanternBlock;
+import com.aether.blocks.decorative.AmbrosiumTorchBlock;
+import com.aether.blocks.decorative.AmbrosiumTorchWallBlock;
 import com.aether.blocks.mechanical.FoodBowlBlock;
 import com.aether.blocks.natural.*;
 import com.aether.client.rendering.block.FluidRenderSetup;
@@ -15,8 +18,8 @@ import com.aether.world.feature.tree.*;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.RenderLayer;
@@ -41,7 +44,6 @@ import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
 
 public class AetherBlocks {
     public static final Block AEROGEL;
