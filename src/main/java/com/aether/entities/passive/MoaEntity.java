@@ -44,6 +44,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.UUID;
 
 //import com.aether.world.storage.loot.AetherLootTableList;
@@ -439,7 +440,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Nullable
     @Override
     public Entity getOwner() {
-        return world.getPlayerByUuid(getOwnerUuid());
+        return Optional.ofNullable(getOwnerUuid()).map(world::getPlayerByUuid).orElse(null);
     }
 
     private class MoaEscapeDangerGoal extends EscapeDangerGoal {
