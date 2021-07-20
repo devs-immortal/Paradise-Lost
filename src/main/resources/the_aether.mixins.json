@@ -26,7 +26,8 @@
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
-    "structure.FeatureMixin"
+    "structure.FeatureMixin",
+    "village.VillagerProfessionMixin"
   ],
   "client": [
     "block.EnchantingTableBlockMixin",
