@@ -9,6 +9,7 @@
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PlantBlockMixin",
+    "entity.AbstractMinecartEntityMixin",
     "entity.CowEntityMixin",
     "entity.MixinAbstractFurnaceBlockEntity",
     "entity.MixinLivingEntity",
