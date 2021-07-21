@@ -14,6 +14,7 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.RenderUtils;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
+import com.aether.village.AetherVillagerProfessionExtensions;
 import com.aether.world.feature.tree.*;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
@@ -40,6 +41,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
 
@@ -689,6 +691,7 @@ public class AetherBlocks {
         }
         // Misc
         registerFlammable(SKYROOT_BOOKSHELF, 20, 30);
+        registerFarmland(AETHER_FARMLAND);
     }
 
     private static Item.Settings buildingBlock() {
@@ -702,6 +705,10 @@ public class AetherBlocks {
     private static void registerFlammable(Block block, int flammability, int encouragement) {
         FireBlock fireBlock = (FireBlock) Blocks.FIRE;
         fireBlock.registerFlammableBlock(block, flammability, encouragement);
+    }
+
+    private static void registerFarmland(Block block) {
+        ((AetherVillagerProfessionExtensions) VillagerProfession.FARMER).addSecondaryJobSite(block);
     }
 
     private static Block register(String id, Block block, boolean registerAsBlockItem, Item.Settings settings) {

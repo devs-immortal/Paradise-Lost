@@ -13,6 +13,7 @@
     "entity.MixinAbstractFurnaceBlockEntity",
     "entity.MixinLivingEntity",
     "entity.PlayerEntityMixin",
+    "entity.EatCarrotCropGoalMixin",
     "item.AxeItemMixin",
     "item.HoeItemMixin",
     "item.ItemGroupMixin",
@@ -26,7 +27,8 @@
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
-    "structure.FeatureMixin"
+    "structure.FeatureMixin",
+    "village.VillagerProfessionMixin"
   ],
   "client": [
     "block.EnchantingTableBlockMixin",
