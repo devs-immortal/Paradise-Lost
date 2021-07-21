@@ -42,8 +42,12 @@ public abstract class TransformableSwetEntity extends SwetEntity{
             if (entity instanceof ItemEntity item){
                 if (item.getStack().getItem() == AetherItems.BLUEBERRY){
                     this.changeType(AetherEntityTypes.BLUE_SWET);
+                    item.remove(RemovalReason.KILLED);
                 }
-                item.remove(RemovalReason.KILLED);
+                if (item.getStack().getItem() == AetherItems.GOLDEN_AMBER){
+                    this.changeType(AetherEntityTypes.GOLDEN_SWET);
+                    item.remove(RemovalReason.KILLED);
+                }
             }
         }
     }
