@@ -2,6 +2,7 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.particle.AetherParticles;
+import com.aether.entities.hostile.TransformableSwetEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
@@ -33,6 +34,9 @@ public class  AetherLeavesBlock extends LeavesBlock {
         if (!collidable && entity instanceof LivingEntity) {
             entity.fallDistance = 0;
             entity.slowMovement(state, new Vec3d(0.99D, 0.9D, 0.99D));
+        }
+        if (this == AetherBlocks.GOLDEN_OAK_LEAVES && entity instanceof TransformableSwetEntity swet) {
+            swet.suggestTypeChange(world, pos, state);
         }
     }
 

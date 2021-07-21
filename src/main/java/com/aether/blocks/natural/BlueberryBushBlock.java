@@ -2,6 +2,7 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.entities.hostile.SwetEntity;
+import com.aether.entities.hostile.TransformableSwetEntity;
 import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
@@ -38,7 +39,12 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
         }
         if (entity instanceof SwetEntity){
             if (state.get(AGE) == 3) {
-                tryPickBerries(world, pos, state);
+                if (entity instanceof TransformableSwetEntity swet && swet.suggestTypeChange(world, pos, state)) {
+                    world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+                    world.setBlockState(pos, state.with(AGE, 1), 2);
+                } else {
+                    tryPickBerries(world, pos, state);
+                }
             }
         }
     }
