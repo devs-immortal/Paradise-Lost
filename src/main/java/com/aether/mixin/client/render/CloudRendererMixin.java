@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class CloudRendererMixin {
     @Final
     @Shadow
-    private static final Identifier CLOUDS = new Identifier("textures/environment/clouds.png");
+    private static Identifier CLOUDS;
     @Shadow
     @NotNull
     private final ClientWorld world;
