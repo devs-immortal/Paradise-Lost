@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "shape=ascending_east": {
+      "model": "the_aether:block/quicksoil_rail_raised_ne",
+      "y": 90
+    },
+    "shape=ascending_north": {
+      "model": "the_aether:block/quicksoil_rail_raised_ne"
+    },
+    "shape=ascending_south": {
+      "model": "the_aether:block/quicksoil_rail_raised_sw"
+    },
+    "shape=ascending_west": {
+      "model": "the_aether:block/quicksoil_rail_raised_sw",
+      "y": 90
+    },
+    "shape=east_west": {
+      "model": "the_aether:block/quicksoil_rail",
+      "y": 90
+    },
+    "shape=north_east": {
+      "model": "the_aether:block/quicksoil_rail_corner",
+      "y": 270
+    },
+    "shape=north_south": {
+      "model": "the_aether:block/quicksoil_rail"
+    },
+    "shape=north_west": {
+      "model": "the_aether:block/quicksoil_rail_corner",
+      "y": 180
+    },
+    "shape=south_east": {
+      "model": "the_aether:block/quicksoil_rail_corner"
+    },
+    "shape=south_west": {
+      "model": "the_aether:block/quicksoil_rail_corner",
+      "y": 90
+    }
+  }
+}

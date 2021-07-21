@@ -9,6 +9,7 @@ import com.aether.blocks.decorative.AmbrosiumTorchBlock;
 import com.aether.blocks.decorative.AmbrosiumTorchWallBlock;
 import com.aether.blocks.mechanical.FoodBowlBlock;
 import com.aether.blocks.natural.*;
+import com.aether.blocks.rail.QuickoilRailBlock;
 import com.aether.client.rendering.block.FluidRenderSetup;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.RenderUtils;
@@ -154,7 +155,8 @@ public class AetherBlocks {
     public static final Block QUICKSOIL;
     public static final Block QUICKSOIL_GLASS;
     public static final Block QUICKSOIL_GLASS_PANE;
-//    public static final Block RED_DYED_AERCLOUD;
+    public static final Block QUICKSOIL_RAIL;
+    //    public static final Block RED_DYED_AERCLOUD;
     public static final Block SENTRY_SLAB;
     public static final Block SENTRY_STAIRS;
     public static final Block SENTRY_STONE;
@@ -334,6 +336,7 @@ public class AetherBlocks {
         final Settings ANGELIC_STONES = Settings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE);
         ANGELIC_STONE = register("angelic_stone", new Block(ANGELIC_STONES), buildingBlock());
         ANGELIC_CRACKED_STONE = register("angelic_stone_cracked", new Block(ANGELIC_STONES), buildingBlock());
+
         ANGELIC_SLAB = register("angelic_slab", new SlabBlock(Settings.copy(ANGELIC_STONE)), buildingBlock());
         ANGELIC_STAIRS = register("angelic_stairs", new StairsBlock(ANGELIC_STONE.getDefaultState(), Settings.copy(ANGELIC_STONE)), buildingBlock());
 //        ANGELIC_STONE_TRAP = register("angelic_stone_trap", new Block(BlockBehaviour.Properties.of(Material.STONE).hardness(-1.0f).resistance(6000000.0f).sounds(BlockSoundGroup.STONE)));
@@ -429,6 +432,7 @@ public class AetherBlocks {
         QUICKSOIL = register("quicksoil", new Block(Settings.of(Material.AGGREGATE).strength(0.5f, -1.0f).slipperiness(1.0F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)), buildingBlock());
         QUICKSOIL_GLASS = register("quicksoil_glass", new GlassBlock(Settings.of(Material.GLASS).luminance(state -> 14).strength(0.2f, -1.0f).slipperiness(1.0F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
         QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", new PaneBlock(Settings.of(Material.GLASS).luminance(state -> 14).strength(0.2F, -1.0F).slipperiness(1.0F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(AetherBlocks::never)), buildingBlock());
+        QUICKSOIL_RAIL = register("quicksoil_rail", new QuickoilRailBlock(Settings.of(Material.DECORATION).noCollision().strength(0.7F).slipperiness(1.0F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.GLASS)), buildingBlock());
 //        RED_DYED_AERCLOUD = register("red_dyed_aercloud", null);
         FLUTEGRASS = register("flutegrass", new AetherBrushBlock(GRASS.mapColor(MapColor.GOLD), ImmutableSet.of(QUICKSOIL), true), buildingBlock());
         final Settings SENTRY_STONES = Settings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE);
