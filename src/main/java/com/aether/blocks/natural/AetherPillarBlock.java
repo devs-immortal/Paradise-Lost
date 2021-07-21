@@ -16,7 +16,7 @@ public class AetherPillarBlock extends PillarBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        if ((this == AetherBlocks.GOLDEN_OAK_LOG || this == AetherBlocks.STRIPPED_GOLDEN_OAK_LOG)
+        if ((this == AetherBlocks.GOLDEN_OAK_LOG)
                 && entity instanceof TransformableSwetEntity swet) {
             swet.suggestTypeChange(world, pos, state);
         }

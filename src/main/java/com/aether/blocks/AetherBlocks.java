@@ -775,8 +775,8 @@ public class AetherBlocks {
         return createCrystalLeavesBlock(null);
     }
 
-    private static AetherFlowerPotBlock createPottedBlock(Block sourceBlock) {
-        return new AetherFlowerPotBlock(sourceBlock, Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
+    private static FlowerPotBlock createPottedBlock(Block sourceBlock) {
+        return new FlowerPotBlock(sourceBlock, Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
     }
 
     private static AbstractButtonBlock createButtonBlock(Block sourceBlock) {
