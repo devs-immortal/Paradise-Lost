@@ -31,9 +31,9 @@ public class MoaEgg extends Item {
         World world = contextIn.getWorld();
         PlayerEntity player = contextIn.getPlayer();
         ItemStack stack = contextIn.getStack();
-        if (player != null && stack.getOrCreateTag().contains("genes") && player.isCreative()) {
+        if (player != null && stack.getOrCreateNbt().contains("genes") && player.isCreative()) {
             MoaEntity moa = new MoaEntity(world);
-            NbtCompound geneTag = stack.getSubTag("genes");
+            NbtCompound geneTag = stack.getSubNbt("genes");
             boolean baby = geneTag.getBoolean("baby");
             moa.getGenes().readFromNbt(geneTag);
             if(baby) {
@@ -50,8 +50,8 @@ public class MoaEgg extends Item {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if(stack.getOrCreateTag().contains("genes")) {
-            NbtCompound geneTag = stack.getSubTag("genes");
+        if(stack.getOrCreateNbt().contains("genes")) {
+            NbtCompound geneTag = stack.getSubNbt("genes");
             Identifier raceId = Identifier.tryParse(geneTag.getString("raceId"));
             var race = MoaAPI.getRace(raceId);
             if(raceId != null) {

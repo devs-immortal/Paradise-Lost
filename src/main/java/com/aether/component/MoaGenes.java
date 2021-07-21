@@ -44,7 +44,7 @@ public class MoaGenes implements AutoSyncedComponent {
         var childRace = MoaAPI.getMoaForBreeding(this, otherParent, world, pos);
 
         ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
-        NbtCompound nbt = stack.getOrCreateSubTag("genes");
+        NbtCompound nbt = stack.getOrCreateSubNbt("genes");
         Random random = world.getRandom();
         MoaGenes genes = new MoaGenes();
 
@@ -68,7 +68,7 @@ public class MoaGenes implements AutoSyncedComponent {
 
     public static ItemStack getEggForCommand(MoaAPI.Race race, World world, boolean baby) {
         ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
-        NbtCompound nbt = stack.getOrCreateSubTag("genes");
+        NbtCompound nbt = stack.getOrCreateSubNbt("genes");
         Random random = world.getRandom();
         MoaGenes genes = new MoaGenes();
 
