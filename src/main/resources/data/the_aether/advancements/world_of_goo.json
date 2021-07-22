@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "item": "the_aether:swet_ball"
+    },
+    "title": "World of Goo",
+    "description": "Grow a swet",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "the_aether:root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "item": {
+          "items": [
+            "the_aether:purple_swet_spawn_egg",
+            "the_aether:golden_swet_spawn_egg",
+            "the_aether:blue_swet_spawn_egg",
+            "the_aether:swet_spawn_egg",
+            "the_aether:swet_ball"
+          ]
+        },
+        "entity": {
+          "type": "#the_aether:swets",
+          "nbt": "{Oversize:true}"
+        }
+      }
+    }
+  }
+}

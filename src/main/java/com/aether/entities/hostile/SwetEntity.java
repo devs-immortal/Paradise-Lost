@@ -54,7 +54,8 @@ public class SwetEntity extends SlimeEntity {
         if(stack.isOf(AetherItems.SWET_SPAWN_EGG)
                 || stack.isOf(AetherItems.BLUE_SWET_SPAWN_EGG)
                 || stack.isOf(AetherItems.PURPLE_SWET_SPAWN_EGG)
-                || stack.isOf(AetherItems.GOLDEN_SWET_SPAWN_EGG)){
+                || stack.isOf(AetherItems.GOLDEN_SWET_SPAWN_EGG)
+                || stack.isOf(AetherItems.SWET_BALL)){
             if (!player.isCreative()) {
                 stack.decrement(1);
             }
@@ -93,6 +94,12 @@ public class SwetEntity extends SlimeEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.25D)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0D);
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putBoolean("Oversize", this.getSize()>=20);
     }
 
     @Override
