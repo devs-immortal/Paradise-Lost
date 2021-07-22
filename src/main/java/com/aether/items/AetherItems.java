@@ -14,9 +14,12 @@ import com.aether.items.tools.*;
 import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -30,6 +33,7 @@ public class AetherItems {
 //    public static final Item SKYROOT_STICK, VICTORY_MEDAL;
 //    public static final Item SKYROOT_PICKAXE, SKYROOT_AXE, SKYROOT_SHOVEL, SKYROOT_SWORD, SKYROOT_HOE;
 //    public static final Item HOLYSTONE_PICKAXE, HOLYSTONE_AXE, HOLYSTONE_SHOVEL, HOLYSTONE_SWORD, HOLYSTONE_HOE;
+    public static final Item MOA_MEAT, COOKED_MOA_MEAT, AMBROSIUM_BLOODSTONE, ZANITE_BLOODSTONE, GRAVITITE_BLOODSTONE, ABSTENTINE_BLOODSTONE;
     public static final Item ZANITE_PICKAXE, ZANITE_AXE, ZANITE_SHOVEL, ZANITE_SWORD, ZANITE_HOE;
     public static final Item GRAVITITE_PICKAXE, GRAVITITE_AXE, GRAVITITE_SHOVEL, GRAVITITE_SWORD, GRAVITITE_HOE;
     public static final Item VALKYRIE_PICKAXE, VALKYRIE_AXE, VALKYRIE_SHOVEL, VALKYRIE_HOE;
@@ -129,6 +133,11 @@ public class AetherItems {
         VALKYRIE_LANCE = register("valkyrie_lance", new ValkyrieLance(new AetherItemSettings().rarity(Rarity.EPIC).group(AetherItemGroups.Tools)));
         VALKYRIE_HOE = register("valkyrie_hoe", new AetherHoe(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 5));
 
+        AMBROSIUM_BLOODSTONE = register("ambrosium_bloodstone", new AmbrosiumBloodstoneItem());
+        ZANITE_BLOODSTONE = register("zanite_bloodstone", new ZaniteBloodstoneItem());
+        GRAVITITE_BLOODSTONE = register("gravitite_bloodstone", new GravititeBloodstoneItem());
+        ABSTENTINE_BLOODSTONE = register("abstentine_bloodstone", new AbstentineBloodstoneItem());
+
         // Armor
         final AetherItemSettings ARMOR = new AetherItemSettings().group(AetherItemGroups.Wearable);
         ZANITE_HELMET = register("zanite_helmet", new ArmorItem(AetherArmorType.Zanite.getMaterial(), EquipmentSlot.HEAD, ARMOR));
@@ -177,6 +186,8 @@ public class AetherItems {
         HEALING_STONE = register("healing_stone", new HealingStone(new Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.HEALING_STONE)));
         CANDY_CANE = register("candy_cane", new Item(new Settings().group(AetherItemGroups.Food).food(AetherFood.GENERIC)));
         GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Settings().group(AetherItemGroups.Food).food(AetherFood.GENERIC)));
+        MOA_MEAT = register("moa_meat", new Item(new FabricItemSettings().group(AetherItemGroups.Food).food(AetherFood.MOA_MEAT)));
+        COOKED_MOA_MEAT = register("moa_meat_cooked", new Item(new FabricItemSettings().group(AetherItemGroups.Food).food(AetherFood.COOKED_MOA_MEAT)));
 
         // Misc + Materials
         final AetherItemSettings LOOT_ACCESSORY = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Wearable);
@@ -275,6 +286,29 @@ public class AetherItems {
         INVISIBILITY_CAPE = register("invisibility_cape", new ItemAccessory(AccessoryType.CAPE, new AetherItemSettings().rarity(AETHER_LOOT)));
 
         AETHER_PORTAL = register("aether_portal", new AetherPortalItem(new Settings().group(AetherItemGroups.Misc)));
+    }
+
+    public static class AetherFood {
+
+        //  Fruits
+        public static final FoodComponent BLUEBERRY = new FoodComponent.Builder().hunger(2).saturationModifier(0.5F).snack().build();
+        public static final FoodComponent ENCHANTED_BLUEBERRY = new FoodComponent.Builder().hunger(8).saturationModifier(1.0F).snack().build();
+        public static final FoodComponent ORANGE = new FoodComponent.Builder().hunger(5).saturationModifier(0.8F).snack().build();
+
+        //  Meat
+        public static final FoodComponent MOA_MEAT = new FoodComponent.Builder().hunger(3).saturationModifier(0.3F).meat().build();
+        public static final FoodComponent COOKED_MOA_MEAT = new FoodComponent.Builder().hunger(6).saturationModifier(1F).meat().build();
+
+        //  Confectionery
+        public static final FoodComponent GUMMY_SWET = new FoodComponent.Builder().hunger(8).saturationModifier(0.5F).build();
+
+        //  Consumables
+        public static final FoodComponent WHITE_APPLE = new FoodComponent.Builder().alwaysEdible().build();
+        public static final FoodComponent HEALING_STONE = new FoodComponent.Builder().saturationModifier(2.5F).alwaysEdible().snack().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 610, 0), 1.0F).build();
+
+        //  Misc
+        public static final FoodComponent GENERIC = new FoodComponent.Builder().hunger(2).saturationModifier(1.5F).build();
+        public static final FoodComponent MILK = new FoodComponent.Builder().hunger(12).saturationModifier(2F).snack().alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1200, 2), 1F).statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 3600, 4), 1F).statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 3600, 1), 1F).build();
     }
 
     static {

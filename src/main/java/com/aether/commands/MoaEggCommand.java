@@ -33,7 +33,7 @@ public class MoaEggCommand {
                         .then(argument("target", EntityArgumentType.players()).then((argument("race", IdentifierArgumentType.identifier()).suggests(RACES)
                                 .executes(context -> execute(context.getSource(), EntityArgumentType.getPlayers(context, "target"), IdentifierArgumentType.getIdentifier(context, "race"), false)))
                                 .then(literal("asBaby")
-                                        .executes(context -> execute(context.getSource(), EntityArgumentType.getPlayers(context, "targets"), IdentifierArgumentType.getIdentifier(context, "race"), true)))))
+                                        .executes(context -> execute(context.getSource(), EntityArgumentType.getPlayers(context, "target"), IdentifierArgumentType.getIdentifier(context, "race"), true)))))
         );
     }
 

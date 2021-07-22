@@ -19,7 +19,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class FoodBowlBlock extends BlockWithEntity {
+public class FoodBowlBlock extends AetherBlockWithEntity {
 
     public static final EnumProperty<Direction.Axis> AXIS = Properties.HORIZONTAL_AXIS;
     public static final BooleanProperty FULL = BooleanProperty.of("full");
@@ -27,7 +27,7 @@ public class FoodBowlBlock extends BlockWithEntity {
     private final VoxelShape shapeZ = Block.createCuboidShape(1, 0, 0, 15, 8, 16);
 
     public FoodBowlBlock(Settings settings) {
-        super(settings);
+        super(settings, false);
         setDefaultState(getDefaultState().with(AXIS, Direction.Axis.Z).with(FULL, false));
     }
 
@@ -56,11 +56,6 @@ public class FoodBowlBlock extends BlockWithEntity {
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new FoodBowlBlockEntity(pos, state);
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
     }
 
     @Override

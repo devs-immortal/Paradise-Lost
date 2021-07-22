@@ -3,13 +3,16 @@ package com.aether.blocks;
 import com.aether.Aether;
 import com.aether.blocks.aercloud.*;
 import com.aether.blocks.blockentity.FoodBowlBlockEntity;
+import com.aether.blocks.blockentity.IncubatorBlockEntity;
 import com.aether.blocks.decorative.AetherDirtPathBlock;
 import com.aether.blocks.decorative.AmbrosiumLanternBlock;
 import com.aether.blocks.decorative.AmbrosiumTorchBlock;
 import com.aether.blocks.decorative.AmbrosiumTorchWallBlock;
 import com.aether.blocks.mechanical.FoodBowlBlock;
+import com.aether.blocks.mechanical.IncubatorBlock;
 import com.aether.blocks.natural.*;
 import com.aether.client.rendering.block.FluidRenderSetup;
+import com.aether.client.rendering.block.IncubatorBlockEntityRenderer;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.RenderUtils;
 import com.aether.items.AetherItemGroups;
@@ -19,12 +22,14 @@ import com.aether.world.feature.tree.*;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.fluid.FlowableFluid;
@@ -107,7 +112,7 @@ public class AetherBlocks {
 //    public static final Block ICESTONE_SLAB;
 //    public static final Block ICESTONE_STAIRS;
 //    public static final Block ICESTONE_WALL;
-//    public static final Block INCUBATOR;
+    public static final Block INCUBATOR;
     public static final Block LIGHT_ANGELIC_SLAB;
     public static final Block LIGHT_ANGELIC_STAIRS;
     public static final Block LIGHT_ANGELIC_STONE;
@@ -356,6 +361,7 @@ public class AetherBlocks {
 //        ENCHANTED_GRAVITITE = register("enchanted_gravitite", null);
 //        ENCHANTER = register("enchanter", null);
 //        FREEZER = register("freezer", null);
+        INCUBATOR = register("incubator", new IncubatorBlock(Settings.of(Material.WOOD, MapColor.DULL_RED).strength(2.5F).sounds(BlockSoundGroup.WOOD).nonOpaque()), buildingBlock());
         FOOD_BOWL = register("food_bowl", new FoodBowlBlock(Settings.of(Material.WOOD, MapColor.DULL_RED).strength(2.5F).sounds(BlockSoundGroup.WOOD).nonOpaque()), buildingBlock());
         GOLDEN_AERCLOUD = register("golden_aercloud", new GoldenAercloudBlock(Settings.of(Material.ICE, MapColor.YELLOW).strength(0.2F).sounds(BlockSoundGroup.WOOL).nonOpaque()), buildingBlock());
         DENSE_AERCLOUD_STILL = Registry.register(Registry.FLUID, Aether.locate("dense_aercloud"), new DenseAercloudFluid());
@@ -589,6 +595,7 @@ public class AetherBlocks {
 
     //  BlockEntities
     public static final BlockEntityType<FoodBowlBlockEntity> FOOD_BOWL_BLOCK_ENTITY_TYPE = registerBlockEntity("food_bowl", FoodBowlBlockEntity::new, FOOD_BOWL);
+    public static final BlockEntityType<IncubatorBlockEntity> INCUBATOR_BLOCK_ENTITY_TYPE = registerBlockEntity("incubator", IncubatorBlockEntity::new, INCUBATOR);
 
     static {
         // Logs and woods
@@ -866,9 +873,6 @@ public class AetherBlocks {
                 BLUE_PORTAL, QUICKSOIL_GLASS, QUICKSOIL_GLASS_PANE, AEROGEL,
                 COLD_AERCLOUD, BLUE_AERCLOUD, PINK_AERCLOUD, GOLDEN_AERCLOUD
         );
-        putFluids(RenderLayer.getTranslucent(),
-                DENSE_AERCLOUD_STILL
-        );
         putBlocks(RenderLayer.getCutout(),
                 SKYROOT_SAPLING, GOLDEN_OAK_SAPLING, ORANGE_SAPLING, CRYSTAL_SAPLING,
                 ROSE_WISTERIA_SAPLING, FROST_WISTERIA_SAPLING, LAVENDER_WISTERIA_SAPLING, BOREAL_WISTERIA_SAPLING,
@@ -882,12 +886,23 @@ public class AetherBlocks {
                 ANCIENT_FLOWER, ATARAXIA, CLOUDSBLUFF, DRIGEAN, LUMINAR
         );
         putBlocks(RenderLayer.getCutoutMipped(),
-                AETHER_GRASS_BLOCK, ZANITE_CHAIN, AMBROSIUM_LANTERN,
+                AETHER_GRASS_BLOCK, ZANITE_CHAIN, AMBROSIUM_LANTERN, INCUBATOR,
                 SKYROOT_LEAVES, GOLDEN_OAK_LEAVES, ORANGE_LEAVES, CRYSTAL_LEAVES,
                 ROSE_WISTERIA_LEAVES, FROST_WISTERIA_LEAVES, LAVENDER_WISTERIA_LEAVES, BOREAL_WISTERIA_LEAVES,
                 SKYROOT_LEAF_PILE, ROSE_WISTERIA_LEAF_PILE, FROST_WISTERIA_LEAF_PILE, LAVENDER_WISTERIA_LEAF_PILE
         );
+
+        registerBER(INCUBATOR_BLOCK_ENTITY_TYPE, IncubatorBlockEntityRenderer::new);
+
+        putFluids(RenderLayer.getTranslucent(),
+                DENSE_AERCLOUD_STILL
+        );
+
         FluidRenderSetup.setupFluidRendering(DENSE_AERCLOUD_STILL, null, Aether.locate("dense_aercloud"), 0xFFFFFF);
+    }
+
+    private static <T extends BlockEntity> void registerBER(BlockEntityType<T> type, BlockEntityRendererFactory<T> factory) {
+        BlockEntityRendererRegistry.INSTANCE.register(type, factory);
     }
 
     private static Boolean canSpawnOnLeaves(BlockState state, BlockView world, BlockPos pos, EntityType<?> type) {

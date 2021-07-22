@@ -10,6 +10,7 @@ import com.aether.items.AetherItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -25,6 +26,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -32,6 +34,8 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -198,22 +202,17 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 removeAllPassengers();
             }
         }
-    }
-
-    protected void produceParticles(ParticleEffect parameters) {
-        for(int i = 0; i < 5; ++i) {
-            double d = this.random.nextGaussian() * 0.02D;
-            double e = this.random.nextGaussian() * 0.02D;
-            double f = this.random.nextGaussian() * 0.02D;
-            this.world.addParticle(parameters, this.getParticleX(1.0D), this.getRandomBodyY() + 1.0D, this.getParticleZ(1.0D), d, e, f);
+        if(getGenes().getRace().legendary() && getVelocity().lengthSquared() <= 0.02 && random.nextFloat() < 0.1F && random.nextBoolean()) {
+            produceParticles((ParticleEffect) getGenes().getRace().particles(), 5, 0.25F);
         }
-
     }
+
+
 
     @Override
     @Environment(EnvType.CLIENT)
     protected Text getDefaultName() {
-        return new TranslatableText(MoaAPI.formatForTranslation(getGenes().getRace().id()));
+        return new TranslatableText(MoaAPI.formatForTranslation(getGenes().getRace().id()), "Moa");
     }
 
     @Override
@@ -290,6 +289,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 this.flyingSpeed = getFlyingSpeed();
                 super.travel(movementInput);
             }
+            if(getGenes().getRace().legendary() && getVelocity().lengthSquared() > 0.02 && random.nextFloat() < 0.55F) {
+                produceParticles((ParticleEffect) getGenes().getRace().particles(), 3, 0.25F);
+            }
         }
     }
 
@@ -309,32 +311,34 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack heldStack = player.getStackInHand(hand);
-        Item heldItem = heldStack.getItem();
-        if(heldItem.isFood() && heldItem.getFoodComponent().isMeat()) {
-            if(!getGenes().isTamed()) {
-                if(random.nextFloat() < 0.15F) {
-                    getGenes().tame(player.getUuid());
-                    produceParticles(ParticleTypes.HEART);
-                    playSound(SoundEvents.ENTITY_PARROT_AMBIENT, 2F, 2F);
+        if(!world.isClient()) {
+            ItemStack heldStack = player.getStackInHand(hand);
+            Item heldItem = heldStack.getItem();
+            if(heldItem.isFood() && heldItem.getFoodComponent().isMeat()) {
+                if(!getGenes().isTamed()) {
+                    if(random.nextFloat() < 0.15F) {
+                        getGenes().tame(player.getUuid());
+                        produceParticles(ParticleTypes.HEART);
+                        playSound(SoundEvents.ENTITY_PARROT_AMBIENT, 2F, 2F);
+                    }
+                    heldStack.decrement(1);
+                    playSound(SoundEvents.ENTITY_PARROT_EAT, 1F, 0.8F);
                 }
-                heldStack.decrement(1);
-                playSound(SoundEvents.ENTITY_PARROT_EAT, 1F, 0.8F);
-            }
-            else {
-                float hungerRestored = heldItem.getFoodComponent().getHunger() * 4;
-                float satiation = getGenes().getHunger();
-                float hunger = 100 - satiation;
-                if(hunger > 1) {
-                    int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), heldStack.getCount());
-                    spawnConsumptionEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
-                    heldStack.decrement(consumption);
-                    getGenes().setHunger(satiation + (consumption * hungerRestored));
-                    playSound(SoundEvents.ENTITY_PARROT_EAT, 1.5F, 0.8F);
-                    produceParticles(ParticleTypes.HAPPY_VILLAGER);
+                else {
+                    float hungerRestored = heldItem.getFoodComponent().getHunger() * 4;
+                    float satiation = getGenes().getHunger();
+                    float hunger = 100 - satiation;
+                    if(hunger > 1) {
+                        int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), heldStack.getCount());
+                        spawnConsumptionEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
+                        heldStack.decrement(consumption);
+                        getGenes().setHunger(satiation + (consumption * hungerRestored));
+                        playSound(SoundEvents.ENTITY_PARROT_EAT, 1.5F, 0.8F);
+                        produceParticles(ParticleTypes.HAPPY_VILLAGER);
+                    }
                 }
+                return ActionResult.success(world.isClient());
             }
-            return ActionResult.success(world.isClient());
         }
         return super.interactMob(player, hand);
     }
@@ -406,6 +410,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     @Override
+    protected void dropLoot(DamageSource source, boolean causedByPlayer) {
+        dropStack(new ItemStack(AetherItems.MOA_MEAT, (int) Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER))));
+        if(random.nextBoolean()) {
+            dropStack(new ItemStack(Items.FEATHER, (int) (Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER)) / 2)));
+        }
+    }
+
+    @Override
     public void setJumpStrength(int strength) {
         jumpStrength = strength * getGenes().getAttribute(MoaAttributes.JUMPING_STRENGTH) * 0.95F;
     }
@@ -429,6 +441,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             genes = MoaGenes.get(this);
         }
         return genes;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public MutableText getAttribute(MoaAttributes attribute) {
+        return new LiteralText(I18n.translate(MoaAPI.formatForTranslation(attribute)) + ": " + String.format("%.2f", getGenes().getAttribute(attribute)));
     }
 
     @Nullable

@@ -1,0 +1,6 @@
+{
+  "parent": "the_aether:item/handheld_small",
+  "textures": {
+    "layer0": "the_aether:item/tool/gravitite_bloodstone"
+  }
+}

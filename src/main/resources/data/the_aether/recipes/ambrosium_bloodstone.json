@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X",
+    "# "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "the_aether:ambrosium_shard"
+    }
+  },
+  "result": {
+    "item": "the_aether:ambrosium_bloodstone"
+  }
+}
+    

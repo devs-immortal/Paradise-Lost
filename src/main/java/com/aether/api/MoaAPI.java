@@ -49,7 +49,12 @@ public class MoaAPI {
 
 
         //  Breeding
-        final Race moonstruck = registerForBreedingPredicate("moonstruck", mintgrass, strawberryWistar, MoaAttributes.GLIDING_SPEED, SpawnStatWeighting.SPEED, true, true, ParticleTypes.END_ROD, "textures/entity/moas/highlands/moonstruck.png", ((moaGenes, moaGenes2, world, pos) -> world.isNight() && world.getRandom().nextFloat() <= 0.1F));
+        final Race redhood = registerForBreedingChance("redhood", foxtrot, highlandsBlue, MoaAttributes.MAX_HEALTH, SpawnStatWeighting.TANK, 0.1F, false, false, ParticleTypes.ENCHANT, "textures/entity/moas/highlands/redhood.png");
+        final Race moonstruck = registerForBreedingPredicate("moonstruck", redhood, strawberryWistar, MoaAttributes.GLIDING_SPEED, SpawnStatWeighting.SPEED, true, true, ParticleTypes.GLOW, "textures/entity/moas/highlands/moonstruck.png", ((moaGenes, moaGenes2, world, pos) -> world.isNight() && world.getRandom().nextFloat() <= 0.25F));
+
+        appendBreeding(new MatingEntry(foxtrot.id, createIdentityCheck(tangerine, goldenrod), createChanceCheck(0.2F)));
+        appendBreeding(new MatingEntry(tangerine.id, createIdentityCheck(goldenrod, strawberryWistar), createChanceCheck(0.5F)));
+        appendBreeding(new MatingEntry(scarlet.id, createIdentityCheck(strawberryWistar, highlandsBlue), createChanceCheck(0.075F)));
     }
 
     public static Race registerForBiome(String name, RegistryKey<Biome> spawnBiome, MoaAttributes affinity, SpawnStatWeighting spawnStats, int weight, boolean glowing, boolean legendary, ParticleType<?> particles, String texturePath) {
@@ -115,6 +120,11 @@ public class MoaAPI {
     @Environment(EnvType.CLIENT)
     public static String formatForTranslation(Identifier raceId) {
         return "moa.race." + raceId.getPath();
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static String formatForTranslation(MoaAttributes attribute) {
+        return "moa.attribute." + attribute.name().toLowerCase();
     }
 
     public static record Race(Identifier id, Identifier texturePath, MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting, boolean glowing, boolean legendary, ParticleType<?> particles) {
