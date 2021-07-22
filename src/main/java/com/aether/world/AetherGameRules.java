@@ -16,7 +16,7 @@ public class AetherGameRules {
     public static final GameRules.Key<DoubleRule> MAX_QUICKSOIL_SPEED = GameRuleRegistry.register("maxQuicksoilVelocity",
             GameRules.Category.MOBS,
             GameRuleFactory.createDoubleRule(
-                    12,
+                    24,
                     0.01,
                     65535,
                     ((server, rule) -> server.getPlayerManager().getPlayerList().forEach(player -> player.networkHandler.sendPacket(getMaxQuicksoilSpeedSyncPacket(rule.get()))))));
