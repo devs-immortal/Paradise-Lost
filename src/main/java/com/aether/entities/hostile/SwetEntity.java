@@ -229,14 +229,6 @@ public class SwetEntity extends SlimeEntity {
         return this.getType().getLootTableId();
     }
 
-    protected void changeType(EntityType<? extends SwetEntity> type){
-        if(!this.getType().equals(type) && !this.isRemoved()) {
-            SwetEntity swet = (this.convertTo(type, true));
-            swet.setSize(this.getSize(), false);
-            world.spawnEntity(swet);
-        }
-    }
-
     protected static boolean canAbsorb(Entity swet, Entity target) {
         return isAbsorbable(target) &&
                 swet.getBoundingBox().expand(0, 0.5, 0).offset(0, 0.25, 0).intersects(target.getBoundingBox());

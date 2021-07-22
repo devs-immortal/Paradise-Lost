@@ -9,6 +9,7 @@ import com.aether.entities.projectile.EnchantedDartEntity;
 import com.aether.entities.projectile.GoldenDartEntity;
 import com.aether.entities.projectile.PoisonDartEntity;
 import com.aether.entities.projectile.PoisonNeedleEntity;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.DefaultAttributeRegistry;
@@ -111,11 +112,18 @@ public class AetherEntityTypes {
     }
 
     public static <X extends Entity> EntityType<X> register(String name, int trackingDistance, int updateIntervalTicks, boolean alwaysUpdateVelocity, EntityDimensions size, EntityType.EntityFactory<X> factory) {
-        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), EntityType.Builder.create(factory, SpawnGroup.MISC).maxTrackingRange(trackingDistance).trackingTickInterval(updateIntervalTicks).setDimensions(size.width, size.height).disableSaving().build(name));
+        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory)
+                .trackRangeBlocks(trackingDistance)
+                .trackedUpdateRate(updateIntervalTicks)
+                .dimensions(EntityDimensions.changing(size.width, size.height))
+                .disableSaving()
+                .build());
     }
 
     public static <X extends Entity> EntityType<X> register(String name, SpawnGroup category, EntityDimensions size, EntityType.EntityFactory<X> factory) {
-        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), EntityType.Builder.create(factory, category).setDimensions(size.width, size.height).build(name));
+        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(category, factory)
+                .dimensions(EntityDimensions.changing(size.width, size.height))
+                .build());
     }
     
     public static void registerAttribute(EntityType<? extends LivingEntity> type, DefaultAttributeContainer container) {

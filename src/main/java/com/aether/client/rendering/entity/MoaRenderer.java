@@ -24,7 +24,7 @@ public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 
     @Override
     public void render(MoaEntity moa, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        super.render(moa, f, g, matrixStack, vertexConsumerProvider, moa.getGenes().getRace().glowing() ? LightmapTextureManager.field_32767 : i);
+        super.render(moa, f, g, matrixStack, vertexConsumerProvider, moa.getGenes().getRace().glowing() ? LightmapTextureManager.MAX_LIGHT_COORDINATE : i);
     }
 
     @Override

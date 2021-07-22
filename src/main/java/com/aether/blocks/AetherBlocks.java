@@ -733,8 +733,8 @@ public class AetherBlocks {
         return Registry.register(Registry.BLOCK_ENTITY_TYPE, Aether.locate(id), BlockEntityType.Builder.create(factory, blocks).build(null));
     }
 
-    private static PillarBlock createLogBlock(MapColor topMaterialColor, MapColor sideMaterialColor) {
-        return new PillarBlock(Settings.of(Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMaterialColor : sideMaterialColor).strength(2.0f).sounds(BlockSoundGroup.WOOD));
+    private static AetherPillarBlock createLogBlock(MapColor topMaterialColor, MapColor sideMaterialColor) {
+        return new AetherPillarBlock(Settings.of(Material.WOOD, (blockState) -> blockState.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMaterialColor : sideMaterialColor).strength(2.0f).sounds(BlockSoundGroup.WOOD));
     }
 
     private static Settings createLeafPileBlock(BlockSoundGroup sounds) {
