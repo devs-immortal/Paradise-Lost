@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @Redirect(method = "getVelocityMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;getVelocityMultiplier()F"))
+    @Redirect(method = "getVelocityMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;getVelocityMultiplier()F"), require = 2)
     private float getVelocityMultiplier(Block target) {
         if (target == AetherBlocks.QUICKSOIL || target == AetherBlocks.QUICKSOIL_GLASS || target == AetherBlocks.QUICKSOIL_GLASS_PANE) {
             double maxSpeed = ((Entity) (Object) this).world.getGameRules().get(AetherGameRules.MAX_QUICKSOIL_SPEED).get();
