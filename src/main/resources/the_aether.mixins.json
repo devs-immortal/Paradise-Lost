@@ -36,6 +36,7 @@
     "client.BackgroundRendererMixin",
     "client.ClientPlayerEntityMixin",
     "client.ClientWorldMixin",
+    "client.CustomPayloadS2CPacketMixin",
     "client.InGameHudMixin",
     "client.InGameOverlayRendererMixin",
     "client.ItemStackMixin",

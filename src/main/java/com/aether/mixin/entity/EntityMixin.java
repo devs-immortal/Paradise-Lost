@@ -14,7 +14,6 @@ public abstract class EntityMixin {
     private float getVelocityMultiplier(Block target) {
         if (target == AetherBlocks.QUICKSOIL || target == AetherBlocks.QUICKSOIL_GLASS || target == AetherBlocks.QUICKSOIL_GLASS_PANE) {
             double maxSpeed = ((Entity) (Object) this).world.getGameRules().get(AetherGameRules.MAX_QUICKSOIL_SPEED).get();
-            System.out.println(maxSpeed); //TODO make this sync to the client world somehow
             return (float) (1 + Math.max(
                     (maxSpeed - ((Entity) (Object) this).getVelocity().horizontalLength()) / maxSpeed * 0.102,
                     0));
