@@ -26,7 +26,6 @@ public class ClientPlayNetworkHandlerMixin {
                     .get(AetherGameRules.MAX_QUICKSOIL_SPEED)
                     .setValue(GameRuleFactory.createDoubleRule(packet.getData().readDouble()).createRule(),
                             (((ClientPlayNetworkHandler) (Object) this).getWorld().getServer()));
-            //}
             ci.cancel();
         }
     }
