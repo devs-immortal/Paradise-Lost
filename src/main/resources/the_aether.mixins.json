@@ -15,6 +15,7 @@
     "entity.MixinAbstractFurnaceBlockEntity",
     "entity.MixinLivingEntity",
     "entity.PlayerEntityMixin",
+    "fluid.FlowableFluidMixin",
     "item.AxeItemMixin",
     "item.FilledMapMixin",
     "item.HoeItemMixin",
