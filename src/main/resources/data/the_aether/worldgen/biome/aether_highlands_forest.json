@@ -14,7 +14,16 @@
     }
   },
   "surface_builder": "the_aether:aether_surface_builder",
-  "carvers": {},
+  "carvers": {
+    "air": [
+      "the_aether:cold_aercloud_giant",
+      "the_aether:cold_aercloud_upper",
+      "the_aether:cold_aercloud_lower",
+      "the_aether:blue_aercloud_upper",
+      "the_aether:blue_aercloud_lower",
+      "the_aether:golden_aercloud"
+    ]
+  },
   "features": [
     [],
     [
@@ -47,9 +56,6 @@
       "the_aether:flutegrass"
     ],
     [
-      "the_aether:cold_aercloud",
-      "the_aether:blue_aercloud",
-      "the_aether:golden_aercloud",
       "the_aether:crystal_tree_island_decorated"
     ]
   ],

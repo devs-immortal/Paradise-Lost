@@ -15,6 +15,7 @@ import com.aether.world.dimension.AetherDimension;
 import com.aether.world.feature.AetherConfiguredFeatures;
 import com.aether.world.feature.AetherFeatures;
 import com.aether.world.feature.tree.AetherTreeHell;
+import com.aether.world.gen.AetherCarvers;
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -36,6 +37,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
     @Override
     public void onInitialize() {
         TrinketSlotRegistry.init();
+        AetherCarvers.init();
         AetherTreeHell.init();
         AetherFeatures.registerFeatures();
         AetherConfiguredFeatures.registerFeatures();
