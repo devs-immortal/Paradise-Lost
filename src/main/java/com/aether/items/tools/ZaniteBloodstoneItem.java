@@ -21,7 +21,7 @@ public class ZaniteBloodstoneItem extends BloodstoneItem {
     protected List<Text> createTooltip(LivingEntity entity) {
         return entity instanceof MoaEntity moa ?
                 ImmutableList.of(
-                        new LiteralText("Race: " + I18n.translate(MoaAPI.formatForTranslation(moa.getGenes().getRace().id()))).formatted(Formatting.ITALIC, Formatting.LIGHT_PURPLE),
+                        new LiteralText("Race: " + I18n.translate(MoaAPI.formatForTranslation(moa.getGenes().getRace().id()), "")).formatted(Formatting.ITALIC, Formatting.LIGHT_PURPLE),
                         new LiteralText("Hunger: " + String.format("%.1f", moa.getGenes().getHunger()) + "/" + 100.0).formatted(Formatting.ITALIC, Formatting.LIGHT_PURPLE),
                         new LiteralText("Affinity: " + I18n.translate(MoaAPI.formatForTranslation(moa.getGenes().getAffinity()))).formatted(Formatting.ITALIC, Formatting.LIGHT_PURPLE),
                         new LiteralText("Owner: " + Optional.ofNullable(moa.getOwner()).map(owner -> owner.getName().asString()).orElse("none")).formatted(Formatting.ITALIC, Formatting.LIGHT_PURPLE)

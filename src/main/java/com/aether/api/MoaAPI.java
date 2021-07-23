@@ -124,7 +124,7 @@ public class MoaAPI {
 
     @Environment(EnvType.CLIENT)
     public static String formatForTranslation(MoaAttributes attribute) {
-        return "moa.attribute." + attribute.name().toLowerCase();
+        return attribute != null ? "moa.attribute." + attribute.name().toLowerCase() : "???";
     }
 
     public static record Race(Identifier id, Identifier texturePath, MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting, boolean glowing, boolean legendary, ParticleType<?> particles) {

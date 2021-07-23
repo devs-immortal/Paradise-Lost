@@ -31,6 +31,6 @@ public class GravititeBloodstoneItem extends BloodstoneItem {
 
     @Override
     protected List<Text> getDefaultText() {
-        return ImmutableList.of(new TranslatableText("info.aether.bloodstone.zanite").formatted(Formatting.GOLD));
+        return ImmutableList.of(new TranslatableText("info.aether.bloodstone.gravitite").formatted(Formatting.GOLD));
     }
 }

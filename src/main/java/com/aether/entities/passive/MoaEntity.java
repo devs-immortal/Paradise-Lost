@@ -176,15 +176,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         this.fall();
 
-        if (!this.world.isClient && !this.isBaby() && this.getPassengerList().isEmpty()) {
-            if (this.secsUntilEgg > 0) {
-                if (this.age % 20 == 0) this.secsUntilEgg--;
-            } else {
-                this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-
-                this.secsUntilEgg = this.getRandomEggTime();
-            }
+        if(hasPassengers()) {
+            streamPassengersAndSelf().forEach(entity -> entity.fallDistance = 0);
         }
+
         MoaGenes genes = getGenes();
         float hunger = genes.getHunger();
         if(genes.isTamed()) {
@@ -205,6 +200,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         if(getGenes().getRace().legendary() && getVelocity().lengthSquared() <= 0.02 && random.nextFloat() < 0.1F && random.nextBoolean()) {
             produceParticles((ParticleEffect) getGenes().getRace().particles(), 5, 0.25F);
         }
+
     }
 
 
@@ -230,7 +226,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public boolean canBeSaddled() {
-        return getGenes().isTamed();
+        return getGenes().isTamed() && super.canBeSaddled();
     }
 
     public void travel(Vec3d movementInput) {
@@ -323,6 +319,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     }
                     heldStack.decrement(1);
                     playSound(SoundEvents.ENTITY_PARROT_EAT, 1F, 0.8F);
+                    produceParticles(ParticleTypes.ELECTRIC_SPARK);
                 }
                 else {
                     float hungerRestored = heldItem.getFoodComponent().getHunger() * 4;
@@ -445,7 +442,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Environment(EnvType.CLIENT)
     public MutableText getAttribute(MoaAttributes attribute) {
-        return new LiteralText(I18n.translate(MoaAPI.formatForTranslation(attribute)) + ": " + String.format("%.2f", getGenes().getAttribute(attribute)));
+        return new LiteralText(attribute != null ? I18n.translate(MoaAPI.formatForTranslation(attribute)) + ": " + String.format("%.2f", getGenes().getAttribute(attribute)) : "???");
     }
 
     @Nullable
@@ -507,7 +504,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             } else if (!this.hasReached() && MoaEntity.this.random.nextFloat() < 0.025F) {
                 MoaEntity.this.playSound(SoundEvents.ENTITY_PARROT_DEATH, 0.5F, 2.0F);
             }
-
             super.tick();
         }
 
