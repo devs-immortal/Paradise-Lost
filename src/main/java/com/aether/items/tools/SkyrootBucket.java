@@ -25,6 +25,7 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class SkyrootBucket extends Item implements CustomPortalFluidProvider {
     private final Fluid containedBlock;
@@ -176,6 +177,7 @@ public class SkyrootBucket extends Item implements CustomPortalFluidProvider {
 
                     this.playEmptySound(playerIn, worldIn, posIn);
                     worldIn.setBlockState(posIn, this.containedBlock.getDefaultState().getBlockState(), 11);
+                    this.CPAonFluidPlaced(worldIn,posIn); //trigger CPA to attempt a portal light.
                 }
 
                 return true;
