@@ -63,7 +63,7 @@ public class AetherConfiguredFeatures {
         FANCY_BOREAL_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_boreal_wisteria_tree", Feature.TREE.configure(Configs.FANCY_BOREAL_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
         FANCY_SKYROOT_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_skyroot_tree", Feature.TREE.configure(Configs.FANCY_SKYROOT_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
         SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Configs.SCATTERED_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(7))));
-        SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))));
+        SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(20))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))));
         THICKET_TREES = register("thicket_trees", Feature.RANDOM_SELECTOR.configure(Configs.THICKET_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(20)))).spreadHorizontally().repeatRandomly(3);
         RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(Configs.RAINBOW_FOREST_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(16)))).spreadHorizontally().repeatRandomly(4);
 
