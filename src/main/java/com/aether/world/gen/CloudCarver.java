@@ -1,6 +1,5 @@
 package com.aether.world.gen;
 
-import com.aether.blocks.AetherBlocks;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
