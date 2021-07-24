@@ -1,5 +1,6 @@
 package com.aether.mixin.entity;
 
+import com.aether.blocks.AetherBlocks;
 import com.aether.items.AetherItems;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.item.Item;
@@ -18,6 +19,9 @@ public abstract class MixinAbstractFurnaceBlockEntity {
         final Map<Item, Integer> returnValue = info.getReturnValue();
 
         returnValue.put(AetherItems.AMBROSIUM_SHARD, 500);
+        returnValue.put(AetherItems.SKYROOT_BUCKET, 200);
+        returnValue.put(AetherBlocks.FOOD_BOWL.asItem(), 300);
+        returnValue.put(AetherBlocks.INCUBATOR.asItem(), 300);
 
         info.setReturnValue(returnValue);
     }

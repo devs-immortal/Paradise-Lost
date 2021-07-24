@@ -1,16 +1,9 @@
 package com.aether.entities.hostile;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
-import com.aether.items.AetherItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.world.World;
 
 public class WhiteSwetEntity extends TransformableSwetEntity{

@@ -4,14 +4,11 @@ import com.aether.api.MoaAPI;
 import com.aether.entities.passive.MoaEntity;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.resource.language.I18n;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 import java.util.Optional;

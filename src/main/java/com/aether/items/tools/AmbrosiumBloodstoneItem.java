@@ -1,6 +1,5 @@
 package com.aether.items.tools;
 
-import com.aether.entities.passive.MoaEntity;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;

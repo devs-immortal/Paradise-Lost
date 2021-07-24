@@ -1,7 +1,6 @@
 package com.aether.entities.hostile;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.blocks.natural.BlueberryBushBlock;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
 import net.minecraft.block.Block;
