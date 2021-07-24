@@ -1,11 +1,11 @@
 {
   "effects": {
     "sky_color": 12632319,
-    "foliage_color": 16762871,
-    "grass_color": 11337659,
+    "foliage_color": 15990657,
+    "grass_color": 8974237,
     "fog_color": 16777215,
     "water_color": 11139071,
-    "water_fog_color": 11139071,
+    "water_fog_color": 5826047,
     "music": {
       "sound": "the_aether:soaring",
       "min_delay": 280,
