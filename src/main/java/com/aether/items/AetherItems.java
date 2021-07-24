@@ -282,7 +282,8 @@ public class AetherItems {
         }) {
             ComposterBlock.registerCompostableItem(0.65F, item);
         }
-        DispenserBehavior skyrootBucketBehaiver = new ItemDispenserBehavior() {
+
+        DispenserBehavior skyrootBucketBehavior = new ItemDispenserBehavior() {
             private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
 
             public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
@@ -297,7 +298,8 @@ public class AetherItems {
                 }
             }
         };
-        DispenserBlock.registerBehavior(SKYROOT_WATER_BUCKET, skyrootBucketBehaiver);
+
+        DispenserBlock.registerBehavior(SKYROOT_WATER_BUCKET, skyrootBucketBehavior);
         DispenserBlock.registerBehavior(SKYROOT_BUCKET, new ItemDispenserBehavior() {
             private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
 
