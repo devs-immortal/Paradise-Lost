@@ -25,7 +25,6 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 public class SkyrootBucket extends Item implements CustomPortalFluidProvider {
     private final Fluid containedBlock;
