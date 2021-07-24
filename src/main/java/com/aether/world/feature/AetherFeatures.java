@@ -1,8 +1,10 @@
 package com.aether.world.feature;
 
 import com.aether.Aether;
+import com.aether.world.feature.generator.OrangeRuinGenerator;
 import com.aether.world.feature.generator.SkyrootTowerGenerator;
 import com.aether.world.feature.generator.WellGenerator;
+import com.aether.world.feature.structure.OrangeRuinFeature;
 import com.aether.world.feature.structure.SkyrootTowerFeature;
 import com.aether.world.feature.structure.WellFeature;
 import com.aether.world.gen.decorator.CrystalTreeIslandDecorator;
@@ -20,6 +22,7 @@ import net.minecraft.world.gen.feature.StructureFeature;
 public class AetherFeatures {
     public static final StructurePieceType WELL_PIECE = register(WellGenerator.Piece::new, "well");
     public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.Piece::new, "skyroot_tower");
+    public static final StructurePieceType ORANGE_RUIN_PIECE = register(OrangeRuinGenerator.Piece::new, "orange_ruin");
 
     public static void registerFeatures() {
         register("lake", new AetherLakeFeature());
@@ -32,6 +35,7 @@ public class AetherFeatures {
 
         register("well", new WellFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
         register("skyroot_tower", new SkyrootTowerFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
+        register("orange_ruin", new OrangeRuinFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
     }
 
     private static <T extends FeatureConfig> void register(String id, StructureFeature<T> structure, GenerationStep.Feature genStep) {
