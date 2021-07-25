@@ -47,6 +47,7 @@
     "client.render.BlockColorsMixin",
     "client.render.BlockStateModelGeneratorMixin",
     "client.render.CloudRendererMixin",
+    "client.render.EntityModelLayersMixin",
     "client.render.EntityModelsMixin",
     "client.render.FluidRendererMixin",
     "client.render.ItemColorsMixin",
