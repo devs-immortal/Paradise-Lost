@@ -2,7 +2,7 @@
   "effects": {
     "sky_color": 12632319,
     "foliage_color": 14483329,
-    "grass_color": 11665355,
+    "grass_color": 16757893,
     "fog_color": 16777215,
     "water_color": 5826047,
     "water_fog_color": 5826047,
@@ -16,6 +16,7 @@
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {
     "air": [
+      "cave",
       "the_aether:cold_aercloud_giant",
       "the_aether:cold_aercloud_upper",
       "the_aether:cold_aercloud_lower",
@@ -103,6 +104,6 @@
   "temperature": 0.5,
   "downfall": 1.0,
   "category": "plains",
-  "depth": 0.1,
+  "depth": 0.0,
   "scale": 0.1
 }
