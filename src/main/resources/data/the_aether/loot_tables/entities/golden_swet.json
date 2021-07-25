@@ -33,7 +33,7 @@
             },
             {
               "function": "the_aether:set_stackable_variant",
-              "variant": 3
+              "variant": 16180597
             }
           ],
           "name": "the_aether:swet_ball"

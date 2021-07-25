@@ -1,6 +1,5 @@
 package com.aether.mixin.item;
 
-import com.aether.items.AetherItems;
 import com.aether.util.item.AetherItemExtensions;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

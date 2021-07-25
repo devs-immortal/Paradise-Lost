@@ -6,19 +6,7 @@
   "overrides": [
     {
       "predicate": {
-        "the_aether:stackable_variant": 1
-      },
-      "model": "the_aether:item/swet_ball_blue"
-    },
-    {
-      "predicate": {
-        "the_aether:stackable_variant": 2
-      },
-      "model": "the_aether:item/swet_ball_purple"
-    },
-    {
-      "predicate": {
-        "the_aether:stackable_variant": 3
+        "the_aether:stackable_variant": 16180597
       },
       "model": "the_aether:item/swet_ball_golden"
     }
