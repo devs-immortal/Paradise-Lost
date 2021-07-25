@@ -1,16 +1,16 @@
 {
   "variants": {
-    "axis=x,full=false": {
+    "axis=z,full=false": {
       "model": "the_aether:block/food_bowl"
     },
-    "axis=x,full=true": {
+    "axis=z,full=true": {
       "model": "the_aether:block/food_bowl_full"
     },
-    "axis=z,full=false": {
+    "axis=x,full=false": {
       "model": "the_aether:block/food_bowl",
       "y": 90
     },
-    "axis=z,full=true": {
+    "axis=x,full=true": {
       "model": "the_aether:block/food_bowl_full",
       "y": 90
     }
