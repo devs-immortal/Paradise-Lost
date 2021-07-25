@@ -17,6 +17,7 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.RenderUtils;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
+import com.aether.util.AetherSignType;
 import com.aether.village.AetherVillagerProfessionExtensions;
 import com.aether.world.feature.tree.*;
 import com.google.common.collect.ImmutableSet;
@@ -36,11 +37,13 @@ import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SignItem;
 import net.minecraft.item.WallStandingBlockItem;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.SignType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
@@ -93,6 +96,7 @@ public class AetherBlocks {
     static {
         Registry.register(Registry.ITEM, Aether.locate("ambrosium_torch"), new WallStandingBlockItem(AMBROSIUM_TORCH, AMBROSIUM_TORCH_WALL, buildingBlock()));
     }
+
 
         private static final Settings ANGELIC_STONES = Settings.of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE);
     public static final Block ANGELIC_STONE = register("angelic_stone", new Block(ANGELIC_STONES), buildingBlock());
@@ -195,6 +199,8 @@ public class AetherBlocks {
     public static final Block SKYROOT_DOOR = register("skyroot_door", new DoorBlock(Settings.copy(Blocks.OAK_DOOR)), buildingBlock());
     public static final Block SKYROOT_BUTTON = register("skyroot_button", createButtonBlock(SKYROOT_PLANKS), buildingBlock());
     public static final Block SKYROOT_PRESSURE_PLATE = register("skyroot_pressure_plate", createPressurePlateBlock(SKYROOT_PLANKS), buildingBlock());
+    public static final Block SKYROOT_SIGN = register("skyroot_sign", createSignBlock(SKYROOT_LOG.getDefaultState(), AetherSignType.SKYROOT));
+    public static final Block SKYROOT_WALL_SIGN = register("skyroot_wall_sign", createWallSignBlock(SKYROOT_PLANKS.getDefaultState(), AetherSignType.SKYROOT, SKYROOT_SIGN));
 
     public static final Block GOLDEN_OAK_SAPLING = register("golden_oak_sapling", new AetherSaplingBlock(new GoldenOakSaplingGenerator(), createSaplingProperties().luminance(state -> 7)), buildingBlock());
     public static final Block POTTED_GOLDEN_OAK_SAPLING = register("potted_golden_oak_sapling", createPottedBlock(GOLDEN_OAK_SAPLING));
@@ -215,6 +221,8 @@ public class AetherBlocks {
     public static final Block GOLDEN_OAK_DOOR = register("golden_oak_door", new DoorBlock(Settings.copy(Blocks.OAK_DOOR)), buildingBlock());
     public static final Block GOLDEN_OAK_BUTTON = register("golden_oak_button", createButtonBlock(GOLDEN_OAK_PLANKS), buildingBlock());
     public static final Block GOLDEN_OAK_PRESSURE_PLATE = register("golden_oak_pressure_plate", createPressurePlateBlock(GOLDEN_OAK_PLANKS), buildingBlock());
+    public static final Block GOLDEN_OAK_SIGN = register("golden_oak_sign", createSignBlock(SKYROOT_LOG.getDefaultState(), AetherSignType.GOLDEN_OAK));
+    public static final Block GOLDEN_OAK_WALL_SIGN = register("golden_oak_wall_sign", createWallSignBlock(GOLDEN_OAK_PLANKS.getDefaultState(), AetherSignType.GOLDEN_OAK, GOLDEN_OAK_SIGN));
 
     public static final Block ORANGE_SAPLING = register("orange_sapling", new AetherSaplingBlock(new OrangeSaplingGenerator(), createSaplingProperties()), buildingBlock());
     public static final Block POTTED_ORANGE_SAPLING = register("potted_orange_sapling", createPottedBlock(ORANGE_SAPLING));
@@ -234,6 +242,8 @@ public class AetherBlocks {
     public static final Block ORANGE_DOOR = register("orange_door", new DoorBlock(Settings.copy(GOLDEN_OAK_DOOR)), buildingBlock());
     public static final Block ORANGE_BUTTON = register("orange_button", createButtonBlock(ORANGE_PLANKS), buildingBlock());
     public static final Block ORANGE_PRESSURE_PLATE = register("orange_pressure_plate", createPressurePlateBlock(ORANGE_PLANKS), buildingBlock());
+    public static final Block ORANGE_SIGN = register("orange_sign", createSignBlock(SKYROOT_LOG.getDefaultState(), AetherSignType.ORANGE));
+    public static final Block ORANGE_WALL_SIGN = register("orange_wall_sign", createWallSignBlock(ORANGE_PLANKS.getDefaultState(), AetherSignType.ORANGE, ORANGE_SIGN));
 
     public static final Block CRYSTAL_SAPLING = register("crystal_sapling", new AetherSaplingBlock(new CrystalSaplingGenerator(), createSaplingProperties().sounds(BlockSoundGroup.LARGE_AMETHYST_BUD)), buildingBlock());
     public static final Block POTTED_CRYSTAL_SAPLING = register("potted_crystal_sapling", createPottedBlock(CRYSTAL_SAPLING));
@@ -253,6 +263,8 @@ public class AetherBlocks {
     public static final Block CRYSTAL_DOOR = register("crystal_door", new DoorBlock(Settings.copy(Blocks.OAK_DOOR)), buildingBlock());
     public static final Block CRYSTAL_BUTTON = register("crystal_button", createButtonBlock(CRYSTAL_PLANKS), buildingBlock());
     public static final Block CRYSTAL_PRESSURE_PLATE = register("crystal_pressure_plate", createPressurePlateBlock(CRYSTAL_PLANKS), buildingBlock());
+    public static final Block CRYSTAL_SIGN = register("crystal_sign", createSignBlock(CRYSTAL_PLANKS.getDefaultState(), AetherSignType.CRYSTAL));
+    public static final Block CRYSTAL_WALL_SIGN = register("crystal_wall_sign", createWallSignBlock(CRYSTAL_PLANKS.getDefaultState(), AetherSignType.CRYSTAL, CRYSTAL_SIGN));
 
     public static final Block WISTERIA_LOG = register("wisteria_log", createLogBlock(MapColor.YELLOW, MapColor.RED), buildingBlock());
     public static final Block WISTERIA_WOOD = register("wisteria_wood", createLogBlock(MapColor.YELLOW, MapColor.RED), buildingBlock());
@@ -297,6 +309,9 @@ public class AetherBlocks {
     public static final Block WISTERIA_DOOR = register("wisteria_door", new DoorBlock(Settings.copy(Blocks.OAK_DOOR)), buildingBlock());
     public static final Block WISTERIA_BUTTON = register("wisteria_button", createButtonBlock(WISTERIA_PLANKS), buildingBlock());
     public static final Block WISTERIA_PRESSURE_PLATE = register("wisteria_pressure_plate", createPressurePlateBlock(WISTERIA_PLANKS), buildingBlock());
+    public static final Block WISTERIA_SIGN = register("wisteria_sign", createSignBlock(SKYROOT_LOG.getDefaultState(), AetherSignType.WISTERIA));
+    public static final Block WISTERIA_WALL_SIGN = register("wisteria_wall_sign", createWallSignBlock(WISTERIA_PLANKS.getDefaultState(), AetherSignType.WISTERIA, WISTERIA_SIGN));
+
     public static final Block ZANITE_BLOCK = register("zanite_block", new Block(Settings.of(Material.METAL).strength(3.0f, -1.0f).sounds(BlockSoundGroup.METAL)), buildingBlock());
     public static final Block BLOCK_OF_GRAVITITE = register("block_of_gravitite", new FloatingBlock(false, Settings.of(Material.METAL).strength(3.0f, -1.0f).sounds(BlockSoundGroup.METAL)), buildingBlock());
     public static final Block ZANITE_CHAIN = register("zanite_chain", new ChainBlock(Settings.copy(Blocks.CHAIN)), buildingBlock());
@@ -313,6 +328,14 @@ public class AetherBlocks {
     public static final Block GOLDEN_SWET_DROP = register("golden_swet_drop", new SwetDropBlock(Settings.of(Material.SOLID_ORGANIC).breakInstantly().noCollision().mapColor(MapColor.CLEAR), AetherEntityTypes.GOLDEN_SWET));
     public static final Block PURPLE_SWET_DROP = register("purple_swet_drop", new SwetDropBlock(Settings.of(Material.SOLID_ORGANIC).breakInstantly().noCollision().mapColor(MapColor.CLEAR), AetherEntityTypes.PURPLE_SWET));
 
+    static {
+        final Item.Settings signSettings = (new Item.Settings()).maxCount(16).group(AetherItemGroups.Blocks);
+        Registry.register(Registry.ITEM, "skyroot_sign", new SignItem(signSettings, AetherBlocks.SKYROOT_SIGN, AetherBlocks.SKYROOT_WALL_SIGN));
+        Registry.register(Registry.ITEM, "orange_sign", new SignItem(signSettings, AetherBlocks.ORANGE_SIGN, AetherBlocks.ORANGE_WALL_SIGN));
+        Registry.register(Registry.ITEM, "golden_oak_sign", new SignItem(signSettings, AetherBlocks.GOLDEN_OAK_SIGN, AetherBlocks.GOLDEN_OAK_WALL_SIGN));
+        Registry.register(Registry.ITEM, "wisteria_sign", new SignItem(signSettings, AetherBlocks.WISTERIA_SIGN, AetherBlocks.WISTERIA_WALL_SIGN));
+        Registry.register(Registry.ITEM, "crystal_sign", new SignItem(signSettings, AetherBlocks.CRYSTAL_SIGN, AetherBlocks.CRYSTAL_WALL_SIGN));
+    }
     //  BlockEntities
     public static final BlockEntityType<FoodBowlBlockEntity> FOOD_BOWL_BLOCK_ENTITY_TYPE = registerBlockEntity("food_bowl", FoodBowlBlockEntity::new, FOOD_BOWL);
     public static final BlockEntityType<IncubatorBlockEntity> INCUBATOR_BLOCK_ENTITY_TYPE = registerBlockEntity("incubator", IncubatorBlockEntity::new, INCUBATOR);
@@ -573,6 +596,14 @@ public class AetherBlocks {
 
     private static WeightedPressurePlateBlock createWeightedPressurePlateBlock(BlockState sourceBlock, int weight) {
         return new WeightedPressurePlateBlock(weight, Settings.of(sourceBlock.getMaterial(), sourceBlock.getBlock().getDefaultMapColor()).requiresTool().noCollision().strength(0.5F).sounds(sourceBlock.getSoundGroup()));
+    }
+
+    private static SignBlock createSignBlock(BlockState sourceBlock, SignType type) {
+        return new SignBlock(Settings.of(sourceBlock.getMaterial(), sourceBlock.getBlock().getDefaultMapColor()).requiresTool().noCollision().strength(1.0F).sounds(sourceBlock.getSoundGroup()), type);
+    }
+
+    private static WallSignBlock createWallSignBlock(BlockState sourceBlock, SignType type, Block standingBlock) {
+        return new WallSignBlock(Settings.of(sourceBlock.getMaterial(), sourceBlock.getBlock().getDefaultMapColor()).requiresTool().noCollision().strength(1.0F).sounds(sourceBlock.getSoundGroup()).dropsLike(standingBlock), type);
     }
 
     public static void init() {
