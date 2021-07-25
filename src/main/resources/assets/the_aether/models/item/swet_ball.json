@@ -2,5 +2,25 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "the_aether:item/misc/swet_ball"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "the_aether:stackable_variant": 1
+      },
+      "model": "the_aether:item/swet_ball_blue"
+    },
+    {
+      "predicate": {
+        "the_aether:stackable_variant": 2
+      },
+      "model": "the_aether:item/swet_ball_purple"
+    },
+    {
+      "predicate": {
+        "the_aether:stackable_variant": 3
+      },
+      "model": "the_aether:item/swet_ball_golden"
+    }
+  ]
 }
