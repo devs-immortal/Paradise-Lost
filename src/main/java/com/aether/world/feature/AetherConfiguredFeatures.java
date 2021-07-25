@@ -38,8 +38,8 @@ public class AetherConfiguredFeatures {
     public static Feature<SingleStateFeatureConfig> BOULDER;
 
     public static ConfiguredFeature<TreeFeatureConfig, ?> GOLDEN_OAK_TREE, CRYSTAL_TREE, SKYROOT_TREE, ORANGE_TREE, ROSE_WISTERIA_TREE, LAVENDER_WISTERIA_TREE, FROST_WISTERIA_TREE, FANCY_ROSE_WISTERIA_TREE, FANCY_LAVENDER_WISTERIA_TREE, FANCY_FROST_WISTERIA_TREE, FANCY_SKYROOT_TREE, BOREAL_WISTERIA_TREE, FANCY_BOREAL_WISTERIA_TREE;
-    public static ConfiguredFeature<?, ?> SCATTERED_TREES, SPARSE_TREES, THICKET_TREES, RAINBOW_FOREST_TREES;
-    public static ConfiguredFeature<?, ?> HOLYSTONE_BOULDER, MOSSY_HOLYSTONE_BOULDER;
+    public static ConfiguredFeature<?, ?> SCATTERED_TREES, SHIELD_TREES, SPARSE_TREES, THICKET_TREES, RAINBOW_FOREST_TREES;
+    public static ConfiguredFeature<?, ?> HOLYSTONE_BOULDER, MOSSY_HOLYSTONE_BOULDER, GOLDEN_MOSSY_HOLYSTONE_BOULDER;
     public static ConfiguredFeature<?, ?> AETHER_GRASS, AETHER_TALL_GRASS, ALT_AETHER_GRASS, ALT_AETHER_TALL_GRASS, DENSE_TALL_GRASS, AETHER_FERN, DENSE_AETHER_FERN, AETHER_BUSH, FLUTEGRASS;
     public static ConfiguredFeature<?, ?> FALLEN_LEAVES, FALLEN_RAINBOW_LEAVES, ALT_FALLEN_LEAVES;
 
@@ -61,14 +61,16 @@ public class AetherConfiguredFeatures {
         FANCY_FROST_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_frost_wisteria_tree", Feature.TREE.configure(Configs.FANCY_FROST_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
         FANCY_BOREAL_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_boreal_wisteria_tree", Feature.TREE.configure(Configs.FANCY_BOREAL_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
         FANCY_SKYROOT_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_skyroot_tree", Feature.TREE.configure(Configs.FANCY_SKYROOT_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Configs.SCATTERED_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(4)))).spreadHorizontally().repeatRandomly(3);
-        SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(14))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(25)))).repeatRandomly(2);
-        THICKET_TREES = register("thicket_trees", Feature.RANDOM_SELECTOR.configure(Configs.THICKET_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(18)))).spreadHorizontally().repeatRandomly(3);
-        RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(Configs.RAINBOW_FOREST_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(16)))).spreadHorizontally().repeatRandomly(4);
+        SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Configs.SCATTERED_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(10)))).spreadHorizontally().repeatRandomly(8);
+        SHIELD_TREES = register("shield_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(18))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(10)))).repeatRandomly(3);
+        SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(14))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(50)))).repeatRandomly(2);
+        THICKET_TREES = register("thicket_trees", Feature.RANDOM_SELECTOR.configure(Configs.THICKET_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(16)))).spreadHorizontally().repeatRandomly(3);
+        RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(Configs.RAINBOW_FOREST_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(17)))).spreadHorizontally().repeatRandomly(4);
 
         // Used in json
-        HOLYSTONE_BOULDER = register("holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.COBBLED_HOLYSTONE.getDefaultState()))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).spreadHorizontally().repeatRandomly(2);
-        MOSSY_HOLYSTONE_BOULDER = register("mossy_holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.COBBLED_HOLYSTONE.getDefaultState()))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).spreadHorizontally().repeatRandomly(4);
+        HOLYSTONE_BOULDER = register("holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.COBBLED_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).repeatRandomly(6);
+        MOSSY_HOLYSTONE_BOULDER = register("mossy_holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.MOSSY_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).repeatRandomly(12);
+        GOLDEN_MOSSY_HOLYSTONE_BOULDER = register("golden_mossy_holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.GOLDEN_MOSSY_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).repeatRandomly(1);
 
         FALLEN_LEAVES = register("fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
         ALT_FALLEN_LEAVES = register("alt_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));

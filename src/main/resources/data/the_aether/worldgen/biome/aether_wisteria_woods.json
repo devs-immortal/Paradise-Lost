@@ -16,6 +16,7 @@
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {
     "air": [
+      "cave",
       "the_aether:cold_aercloud_giant",
       "the_aether:cold_aercloud_upper",
       "the_aether:cold_aercloud_lower",
@@ -104,6 +105,6 @@
   "temperature": 0.5,
   "downfall": 1.0,
   "category": "forest",
-  "depth": 0.1,
-  "scale": 0.1
+  "depth": 0.155,
+  "scale": 0.15
 }

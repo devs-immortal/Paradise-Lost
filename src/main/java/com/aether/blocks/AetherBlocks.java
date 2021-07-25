@@ -306,7 +306,7 @@ public class AetherBlocks {
     public static final Block ATARAXIA = register("ataraxia", new FlowerBlock(StatusEffects.INSTANT_DAMAGE, 1, Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
     public static final Block CLOUDSBLUFF = register("cloudsbluff", new FlowerBlock(StatusEffects.SLOW_FALLING, 6, Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
     public static final Block DRIGEAN = register("drigean", new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 8, Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
-    public static final Block LUMINAR = register("luminar", new FlowerBlock(StatusEffects.GLOWING, 9, Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), buildingBlock());
+    public static final Block LUMINAR = register("luminar", new FlowerBlock(StatusEffects.GLOWING, 9, Settings.of(Material.PLANT).noCollision().breakInstantly().luminance((value -> 3)).sounds(BlockSoundGroup.GRASS)), buildingBlock());
 
     public static final Block SWET_DROP = register("swet_drop", new SwetDropBlock(Settings.of(Material.SOLID_ORGANIC).breakInstantly().noCollision().mapColor(MapColor.CLEAR), AetherEntityTypes.WHITE_SWET));
     public static final Block BLUE_SWET_DROP = register("blue_swet_drop", new SwetDropBlock(Settings.of(Material.SOLID_ORGANIC).breakInstantly().noCollision().mapColor(MapColor.CLEAR), AetherEntityTypes.BLUE_SWET));
