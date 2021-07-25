@@ -17,6 +17,7 @@
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {
     "air": [
+      "cave",
       "the_aether:cold_aercloud_giant",
       "the_aether:cold_aercloud_upper",
       "the_aether:cold_aercloud_lower",
@@ -31,7 +32,10 @@
       "the_aether:lake_water"
     ],
     [
-      "the_aether:mossy_holystone_boulder"
+      "the_aether:mossy_holystone_boulder",
+      "the_aether:mossy_holystone_boulder",
+      "the_aether:mossy_holystone_boulder",
+      "the_aether:golden_mossy_holystone_boulder"
     ],
     [],
     [],
@@ -106,6 +110,6 @@
   "temperature": 0.4,
   "downfall": 2.0,
   "category": "forest",
-  "depth": 0.1,
-  "scale": 0.1
+  "depth": 0.125,
+  "scale": 0.05
 }

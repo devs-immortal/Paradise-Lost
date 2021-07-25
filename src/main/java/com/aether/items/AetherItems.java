@@ -18,18 +18,35 @@ import com.aether.items.utils.AetherTiers;
 import com.aether.items.weapons.*;
 import com.aether.util.item.AetherRarity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.dispenser.DispenserBehavior;
+import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.event.GameEvent;
 
 @SuppressWarnings("unused")
 public class AetherItems {
@@ -250,22 +267,69 @@ public class AetherItems {
     }
 
     static {
-
-        for(Item item : new Item[]{
+        for (Item item : new Item[]{
                 BLUEBERRY,
                 GINGERBREAD_MAN,
                 CANDY_CANE
-        }){
+        }) {
             ComposterBlock.registerCompostableItem(0.3F, item);
         }
 
-        for(Item item : new Item[]{
+        for (Item item : new Item[]{
                 WHITE_APPLE,
                 ORANGE,
                 AECHOR_PETAL
-        }){
+        }) {
             ComposterBlock.registerCompostableItem(0.65F, item);
         }
+
+        DispenserBehavior skyrootBucketBehavior = new ItemDispenserBehavior() {
+            private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
+
+            public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+                if (!(stack.getItem() instanceof SkyrootBucket bucket))
+                    return this.fallbackBehavior.dispense(pointer, stack);
+                BlockPos blockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+                World world = pointer.getWorld();
+                if (bucket.placeLiquid(null, world, blockPos, null)) {
+                    return new ItemStack(SKYROOT_BUCKET);
+                } else {
+                    return this.fallbackBehavior.dispense(pointer, stack);
+                }
+            }
+        };
+
+        DispenserBlock.registerBehavior(SKYROOT_WATER_BUCKET, skyrootBucketBehavior);
+        DispenserBlock.registerBehavior(SKYROOT_BUCKET, new ItemDispenserBehavior() {
+            private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
+
+            public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+                if (!(stack.getItem() instanceof SkyrootBucket bucket))
+                    return this.fallbackBehavior.dispense(pointer, stack);
+                WorldAccess worldAccess = pointer.getWorld();
+                BlockPos blockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+                BlockState blockState = worldAccess.getBlockState(blockPos);
+                Block block = blockState.getBlock();
+                if (block instanceof FluidDrainable && blockState.getFluidState().getFluid() == Fluids.WATER) {
+                    ItemStack itemStack = ((FluidDrainable) block).tryDrainFluid(worldAccess, blockPos, blockState);
+                    if (itemStack.isEmpty()) {
+                        return super.dispenseSilently(pointer, stack);
+                    } else {
+                        worldAccess.emitGameEvent(null, GameEvent.FLUID_PICKUP, blockPos);
+                        stack.decrement(1);
+                        if (stack.isEmpty()) {
+                            return new ItemStack(SKYROOT_WATER_BUCKET);
+                        } else {
+                            if (((DispenserBlockEntity) pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(SKYROOT_WATER_BUCKET)) < 0) {
+                                this.fallbackBehavior.dispense(pointer, new ItemStack(SKYROOT_WATER_BUCKET));
+                            }
+                            return stack;
+                        }
+                    }
+                }
+                return super.dispenseSilently(pointer, stack);
+            }
+        });
     }
 
     private static <T extends Item> T register(String id, T item) {
