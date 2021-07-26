@@ -32,8 +32,8 @@
               }
             },
             {
-              "function": "the_aether:set_stackable_variant",
-              "variant": 10321084
+              "function": "minecraft:set_nbt",
+              "tag": "{stackableVariant:{primaryColor:10321084,secondaryColor:1423923}}"
             }
           ],
           "name": "the_aether:swet_ball"

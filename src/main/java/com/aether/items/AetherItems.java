@@ -31,6 +31,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.BlockPointer;
@@ -323,11 +324,14 @@ public class AetherItems {
             }
         });
 
-        //noinspection ConstantConditions
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
-                        stack.hasNbt() && stack.getNbt().contains("stackableVariant") ?
-                                stack.getNbt().getInt("stackableVariant") : 0xDADADA,
-                SWET_BALL);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            String[] tintFields = new String[]{"primaryColor", "secondaryColor", "tertiaryColor"};
+            NbtCompound sv = stack.getSubNbt("stackableVariant");
+            if (sv != null && sv.contains(tintFields[tintIndex])) {
+                return sv.getInt(tintFields[tintIndex]);
+            }
+            return 0xDADADA;
+        }, SWET_BALL);
     }
 
     private static <T extends Item> T register(String id, T item) {

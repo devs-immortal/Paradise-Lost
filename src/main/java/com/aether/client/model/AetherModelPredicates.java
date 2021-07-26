@@ -35,7 +35,7 @@ public class AetherModelPredicates {
 
             @Override
             public float unclampedCall(ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity entity, int seed) {
-                return stack.hasNbt() ? stack.getNbt().getInt("stackableVariant") : 0;
+                return stack.getSubNbt("stackableVariant") != null ? stack.getSubNbt("stackableVariant").getInt("variant") : 0;
             }
         }));
     }

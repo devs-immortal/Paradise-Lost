@@ -1,12 +1,13 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "the_aether:item/misc/swet_ball"
+    "layer0": "the_aether:item/misc/swet_ball",
+    "layer1": "the_aether:item/misc/swet_ball_overlay"
   },
   "overrides": [
     {
       "predicate": {
-        "the_aether:stackable_variant": 16180597
+        "the_aether:stackable_variant": 1
       },
       "model": "the_aether:item/swet_ball_golden"
     }
