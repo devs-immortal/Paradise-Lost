@@ -7,7 +7,9 @@ import com.aether.client.model.AetherModelPredicates;
 import com.aether.client.rendering.entity.AetherEntityRenderers;
 import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.commands.AetherCommands;
+import com.aether.entities.vehicle.AetherBoatEntityTypeExtensions;
 import com.aether.entities.AetherEntityTypes;
+import com.aether.entities.vehicle.AetherBoatTypes;
 import com.aether.items.AetherItems;
 import com.aether.registry.TrinketSlotRegistry;
 import com.aether.world.AetherGameRules;
@@ -21,9 +23,12 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Arrays;
 
 public class Aether implements ModInitializer, ClientModInitializer {
 
@@ -45,6 +50,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherEntityTypes.init();
         AetherItems.init();
         AetherBlocks.init();
+        AetherBoatTypes.init();
         AetherCommands.init();
         AetherGameRules.init();
         MoaAPI.init();
