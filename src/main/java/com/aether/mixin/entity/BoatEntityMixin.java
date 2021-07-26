@@ -1,6 +1,5 @@
 package com.aether.mixin.entity;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.items.AetherItems;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.Item;
