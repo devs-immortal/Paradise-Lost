@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "block.AbstractBlockAccessor",
+    "block.BlockEntityTypeAccessor",
+    "block.BlockEntityTypeMixin",
     "block.BlockMixin",
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
@@ -31,6 +33,7 @@
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
     "structure.FeatureMixin",
+    "util.SignTypeAccessor",
     "village.VillagerProfessionMixin"
   ],
   "client": [

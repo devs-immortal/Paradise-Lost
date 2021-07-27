@@ -23,4 +23,3 @@ accessible    field     net/minecraft/client/render/RenderLayers                
 accessible    field     net/minecraft/client/render/RenderLayers                    FLUIDS                       Ljava/util/Map;
 accessible    field     net/minecraft/client/render/entity/model/EntityModelLayers  LAYERS                       Ljava/util/Set;
 mutable       field     net/minecraft/client/render/entity/model/EntityModelLayers  LAYERS                       Ljava/util/Set;
-accessible    field     net/minecraft/util/SignType                                 VALUES                       Ljava/util/Set;

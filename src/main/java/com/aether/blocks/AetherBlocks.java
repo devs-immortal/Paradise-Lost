@@ -17,6 +17,7 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.RenderUtils;
 import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
+import com.aether.mixin.block.BlockEntityTypeAccessor;
 import com.aether.util.AetherSignType;
 import com.aether.village.AetherVillagerProfessionExtensions;
 import com.aether.world.feature.tree.*;
@@ -331,8 +332,8 @@ public class AetherBlocks {
     static {
         final Item.Settings signSettings = (new Item.Settings()).maxCount(16).group(AetherItemGroups.Blocks);
         Registry.register(Registry.ITEM, "skyroot_sign", new SignItem(signSettings, AetherBlocks.SKYROOT_SIGN, AetherBlocks.SKYROOT_WALL_SIGN));
-        Registry.register(Registry.ITEM, "orange_sign", new SignItem(signSettings, AetherBlocks.ORANGE_SIGN, AetherBlocks.ORANGE_WALL_SIGN));
         Registry.register(Registry.ITEM, "golden_oak_sign", new SignItem(signSettings, AetherBlocks.GOLDEN_OAK_SIGN, AetherBlocks.GOLDEN_OAK_WALL_SIGN));
+        Registry.register(Registry.ITEM, "orange_sign", new SignItem(signSettings, AetherBlocks.ORANGE_SIGN, AetherBlocks.ORANGE_WALL_SIGN));
         Registry.register(Registry.ITEM, "wisteria_sign", new SignItem(signSettings, AetherBlocks.WISTERIA_SIGN, AetherBlocks.WISTERIA_WALL_SIGN));
         Registry.register(Registry.ITEM, "crystal_sign", new SignItem(signSettings, AetherBlocks.CRYSTAL_SIGN, AetherBlocks.CRYSTAL_WALL_SIGN));
     }
@@ -599,11 +600,15 @@ public class AetherBlocks {
     }
 
     private static SignBlock createSignBlock(BlockState sourceBlock, SignType type) {
-        return new SignBlock(Settings.of(sourceBlock.getMaterial(), sourceBlock.getBlock().getDefaultMapColor()).requiresTool().noCollision().strength(1.0F).sounds(sourceBlock.getSoundGroup()), type);
+        SignBlock signBlock = new SignBlock(Settings.of(sourceBlock.getMaterial(), sourceBlock.getBlock().getDefaultMapColor()).requiresTool().noCollision().strength(1.0F).sounds(sourceBlock.getSoundGroup()), type);
+        ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(signBlock);
+        return signBlock;
     }
 
     private static WallSignBlock createWallSignBlock(BlockState sourceBlock, SignType type, Block standingBlock) {
-        return new WallSignBlock(Settings.of(sourceBlock.getMaterial(), sourceBlock.getBlock().getDefaultMapColor()).requiresTool().noCollision().strength(1.0F).sounds(sourceBlock.getSoundGroup()).dropsLike(standingBlock), type);
+        WallSignBlock wallSignBlock = new WallSignBlock(Settings.of(sourceBlock.getMaterial(), sourceBlock.getBlock().getDefaultMapColor()).requiresTool().noCollision().strength(1.0F).sounds(sourceBlock.getSoundGroup()).dropsLike(standingBlock), type);
+        ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(wallSignBlock);
+        return wallSignBlock;
     }
 
     public static void init() {
