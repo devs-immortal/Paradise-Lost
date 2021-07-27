@@ -67,7 +67,7 @@ repositories {
 }
 
 minecraft {
-    accessWidener "src/main/resources/the_aether.accesswidener"
+    accessWidener file("src/main/resources/the_aether.accesswidener")
 }
 
 dependencies {
