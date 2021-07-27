@@ -166,11 +166,13 @@ public class AetherItems {
     public static final Item SKYROOT_REMEDY_BUCKET = register("skyroot_remedy_bucket", new SkyrootBucket(BUCKET));
     public static final Item QUICKSOIL_VIAL = register("quicksoil_vial", new VialItem(Fluids.EMPTY, new Settings().group(AetherItemGroups.Misc)));
     public static final Item AERCLOUD_VIAL = register("aercloud_vial", new VialItem(AetherBlocks.DENSE_AERCLOUD_STILL, new Settings().group(AetherItemGroups.Misc)));
-    public static final Item SKYROOT_BOAT = register("skyroot_boat", new BoatItem(AetherBoatTypes.SKYROOT, new Settings().maxCount(1).group(AetherItemGroups.Misc)));
-    public static final Item GOLDEN_OAK_BOAT = register("golden_oak_boat", new BoatItem(AetherBoatTypes.GOLDEN_OAK, new Settings().maxCount(1).group(AetherItemGroups.Misc)));
-    public static final Item ORANGE_BOAT = register("orange_boat", new BoatItem(AetherBoatTypes.ORANGE, new Settings().maxCount(1).group(AetherItemGroups.Misc)));
-    public static final Item CRYSTAL_BOAT = register("crystal_boat", new BoatItem(AetherBoatTypes.CRYSTAL, new Settings().maxCount(1).group(AetherItemGroups.Misc)));
-    public static final Item WISTERIA_BOAT = register("wisteria_boat", new BoatItem(AetherBoatTypes.WISTERIA, new Settings().maxCount(1).group(AetherItemGroups.Misc)));
+
+    private static final Settings BOAT = new Settings().maxCount(1).group(AetherItemGroups.Misc);
+    public static final Item SKYROOT_BOAT = register("skyroot_boat", new BoatItem(AetherBoatTypes.SKYROOT, BOAT));
+    public static final Item GOLDEN_OAK_BOAT = register("golden_oak_boat", new BoatItem(AetherBoatTypes.GOLDEN_OAK, BOAT));
+    public static final Item ORANGE_BOAT = register("orange_boat", new BoatItem(AetherBoatTypes.ORANGE, BOAT));
+    public static final Item CRYSTAL_BOAT = register("crystal_boat", new BoatItem(AetherBoatTypes.CRYSTAL, BOAT));
+    public static final Item WISTERIA_BOAT = register("wisteria_boat", new BoatItem(AetherBoatTypes.WISTERIA, BOAT));
     public static final Item CLOUD_PARACHUTE = register("cold_parachute", new Parachute(new Settings().maxCount(1).group(AetherItemGroups.Misc)));
     public static final Item GOLDEN_CLOUD_PARACHUTE = register("golden_parachute", new Parachute(new Settings().maxCount(1).maxDamage(20).group(AetherItemGroups.Misc)));
 

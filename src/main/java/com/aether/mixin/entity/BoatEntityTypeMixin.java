@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import java.util.Arrays;
 
 @Mixin(BoatEntity.Type.class)
-public class BoatEntityTypeMixin implements AetherBoatEntityTypeExtensions{
+public class BoatEntityTypeMixin implements AetherBoatEntityTypeExtensions {
     @SuppressWarnings("ShadowTarget")
     @Shadow
     @Mutable
