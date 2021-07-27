@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "the_aether:item/misc/swet_ball",
-    "layer1": "the_aether:item/misc/swet_ball_overlay_golden"
+    "layer1": "the_aether:item/misc/swet_ball_overlay_multicolor"
   }
 }
