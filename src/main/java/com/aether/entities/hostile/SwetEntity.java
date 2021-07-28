@@ -80,7 +80,6 @@ public class SwetEntity extends SlimeEntity {
     }
 
     protected void init() {
-        getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(25);
         setHealth(getMaxHealth());
     }
 
@@ -206,6 +205,19 @@ public class SwetEntity extends SlimeEntity {
     @Override
     public void setSize(int size, boolean heal){
         super.setSize(size, heal);
+        int i = MathHelper.clamp(size, 1, 127);
+        if (size < 4) {
+            this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2F+0.1F*(float)i);
+        } else {
+            this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.6 + 0.02 * (float)(i - 4));
+        }
+        if (size > 1) {
+            if (size < 20) {
+                getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(20 + 2 * i);
+            } else {
+                getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(60);
+            }
+        }
     }
 
     @Override
