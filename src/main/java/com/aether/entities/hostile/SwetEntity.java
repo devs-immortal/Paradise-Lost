@@ -202,11 +202,13 @@ public class SwetEntity extends SlimeEntity {
     protected void pushAway(Entity entity) {
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void setSize(int size, boolean heal){
         super.setSize(size, heal);
-        int i = MathHelper.clamp(size, 1, 127);
-        if (size < 4) {
+        int clampedSize = MathHelper.clamp(size, 1, 127);
+        float sqrtClampedSize = MathHelper.sqrt(clampedSize);
+        /*if (size < 4) {
             this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2F+0.1F*(float)i);
         } else {
             this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.6 + 0.02 * (float)(i - 4));
@@ -217,9 +219,13 @@ public class SwetEntity extends SlimeEntity {
             } else {
                 getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(60);
             }
-        }
+        }*/
+        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2*sqrtClampedSize + 0.1);
+        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(12*sqrtClampedSize + 1);
+        this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(0.25*clampedSize + sqrtClampedSize);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     @Nullable
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt){
