@@ -2,7 +2,6 @@ package com.aether.mixin.entity;
 
 import com.aether.entities.hostile.SwetEntity;
 import net.minecraft.entity.mob.SlimeEntity;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -25,9 +24,9 @@ public class SlimeMoveControlMixin {
     private void cancelIfUnsafe(CallbackInfo ci) {
         if (this.slime instanceof SwetEntity swet) {
             float yaw = (float) Math.toRadians(swet.getYaw());
-            Vec3d facing = new Vec3d((-MathHelper.sin(yaw)), 0.5, (MathHelper.cos(yaw)));
-            Vec3d raytraceStart = swet.getPos().add(facing);
-            Vec3d raytraceEnd = raytraceStart.add(facing.multiply(0.5)).add(0, -3.5, 0);
+            Vec3d facing = new Vec3d(-MathHelper.sin(yaw), 0, MathHelper.cos(yaw)).multiply(swet.getSize() * 0.2 + 0.6);
+            Vec3d raytraceStart = swet.getPos().add(facing).add(0, 0.5, 0);
+            Vec3d raytraceEnd = raytraceStart.add(facing.multiply(0.5)).add(0, -3.4, 0);
             RaycastContext context = new RaycastContext(raytraceStart,
                     raytraceEnd,
                     RaycastContext.ShapeType.COLLIDER,
