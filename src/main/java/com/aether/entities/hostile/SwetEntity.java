@@ -3,6 +3,7 @@ package com.aether.entities.hostile;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.control.JumpControl;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -32,6 +33,7 @@ import java.util.function.Predicate;
 
 public class SwetEntity extends SlimeEntity {
 
+    private Vec3d lastPos = Vec3d.ZERO;
     protected int initialSize = 2;
     protected float massStuck = 0;
     protected static final EntityAttributeModifier knockbackResistanceModifier = new EntityAttributeModifier(
@@ -100,6 +102,8 @@ public class SwetEntity extends SlimeEntity {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("Oversize", this.getSize()>=20);
+        System.out.println(this.getPos().distanceTo(lastPos));
+        lastPos = this.getPos();
     }
 
     @Override
@@ -258,6 +262,15 @@ public class SwetEntity extends SlimeEntity {
             }
             return super.shouldContinue() &&
                     !(canAbsorb(this.mob, this.mob.getTarget()));
+        }
+    }
+
+    protected static class SwetJumpControl extends JumpControl {
+        private final SwetEntity entity;
+
+        public SwetJumpControl(SwetEntity entity) {
+            super(entity);
+            this.entity = entity;
         }
     }
 }
