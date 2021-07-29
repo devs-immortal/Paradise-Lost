@@ -30,10 +30,6 @@
                   "multiplier": 0.3
                 }
               }
-            },
-            {
-              "function": "minecraft:set_nbt",
-              "tag": "{stackableVariant:{primaryColor:9617107}}"
             }
           ],
           "name": "the_aether:swet_ball"
