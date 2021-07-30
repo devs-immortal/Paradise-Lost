@@ -6,6 +6,7 @@
   "mixins": [
     "block.AbstractBlockAccessor",
     "block.BlockMixin",
+    "block.BlocksAccessor",
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PlantBlockMixin",

@@ -23,7 +23,7 @@ public class BaseAercloudBlock extends TransparentBlock {
     protected static VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 0.01, 16.0);
 
     public BaseAercloudBlock(Settings properties) {
-        super(properties.solidBlock(AetherBlocks::never).suffocates(AetherBlocks::never).blockVision(AetherBlocks::never));
+        super(properties);
         this.setDefaultState(this.getDefaultState().with(DOUBLE_DROPS, false));
     }
 
