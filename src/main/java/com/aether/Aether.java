@@ -2,6 +2,7 @@ package com.aether;
 
 import com.aether.api.MoaAPI;
 import com.aether.blocks.AetherBlocks;
+import com.aether.blocks.blockentity.AetherBlockEntityTypes;
 import com.aether.client.model.AetherArmorModels;
 import com.aether.client.model.AetherModelPredicates;
 import com.aether.client.rendering.entity.AetherEntityRenderers;
@@ -47,6 +48,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherItems.init();
         AetherBlocks.init();
         AetherCommands.init();
+        AetherBlockEntityTypes.register();
         AetherGameRules.init();
         AetherLootNumberProviderTypes.init();
         MoaAPI.init();

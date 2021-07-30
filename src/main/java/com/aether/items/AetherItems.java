@@ -3,6 +3,7 @@ package com.aether.items;
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
+import com.aether.fluids.AetherFluids;
 import com.aether.items.accessories.AccessoryType;
 import com.aether.items.accessories.ItemAccessory;
 import com.aether.items.armor.AetherArmorType;
@@ -166,7 +167,7 @@ public class AetherItems {
     public static final Item SKYROOT_POISON_BUCKET = register("skyroot_poison_bucket", new SkyrootBucket(BUCKET));
     public static final Item SKYROOT_REMEDY_BUCKET = register("skyroot_remedy_bucket", new SkyrootBucket(BUCKET));
     public static final Item QUICKSOIL_VIAL = register("quicksoil_vial", new VialItem(Fluids.EMPTY, new Settings().group(AetherItemGroups.Misc)));
-    public static final Item AERCLOUD_VIAL = register("aercloud_vial", new VialItem(AetherBlocks.DENSE_AERCLOUD_STILL, new Settings().group(AetherItemGroups.Misc)));
+    public static final Item AERCLOUD_VIAL = register("aercloud_vial", new VialItem(AetherFluids.DENSE_AERCLOUD, new Settings().group(AetherItemGroups.Misc)));
     public static final Item CLOUD_PARACHUTE = register("cold_parachute", new Parachute(new Settings().maxCount(1).group(AetherItemGroups.Misc)));
     public static final Item GOLDEN_CLOUD_PARACHUTE = register("golden_parachute", new Parachute(new Settings().maxCount(1).maxDamage(20).group(AetherItemGroups.Misc)));
 

@@ -1,6 +1,7 @@
 package com.aether.items.tools;
 
 import com.aether.blocks.AetherBlocks;
+import com.aether.fluids.AetherFluids;
 import com.aether.items.AetherItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -49,7 +50,7 @@ public class VialItem extends Item {
                 // Originally, vials couldn't pick up dense aercloud. If this was intended, remove this if statement
                 if (this.fluid == Fluids.EMPTY) {
                     blockState = world.getBlockState(blockPos);
-                    if (blockState.getBlock() instanceof FluidDrainable && blockState.getFluidState().getFluid().equals(AetherBlocks.DENSE_AERCLOUD_STILL)) {
+                    if (blockState.getBlock() instanceof FluidDrainable && blockState.getFluidState().getFluid().equals(AetherFluids.DENSE_AERCLOUD)) {
                         FluidDrainable fluidDrainable = (FluidDrainable) blockState.getBlock();
                         ItemStack itemStack2 = fluidDrainable.tryDrainFluid(world, blockPos, blockState);
                         if (!itemStack2.isEmpty()) {
@@ -63,7 +64,7 @@ public class VialItem extends Item {
                     return TypedActionResult.fail(itemStack);
                 } else {
                     blockState = world.getBlockState(blockPos);
-                    BlockPos blockPos3 = blockState.getBlock() instanceof FluidFillable && this.fluid == AetherBlocks.DENSE_AERCLOUD_STILL ? blockPos : blockPos2;
+                    BlockPos blockPos3 = blockState.getBlock() instanceof FluidFillable && this.fluid == AetherFluids.DENSE_AERCLOUD ? blockPos : blockPos2;
                     if (placeFluid(user, world, blockPos3, hitResult)) {
                         return TypedActionResult.success(getEmptiedStack(itemStack, user), world.isClient());
                     } else {
@@ -88,7 +89,7 @@ public class VialItem extends Item {
             boolean bl2 = blockState.isAir() || bl || block instanceof FluidFillable && ((FluidFillable) block).canFillWithFluid(world, pos, blockState, this.fluid);
             if (!bl2) {
                 return hitResult != null && this.placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null);
-            } else if (world.getDimension().isUltrawarm() && this.fluid.equals(AetherBlocks.DENSE_AERCLOUD_STILL)) {
+            } else if (world.getDimension().isUltrawarm() && this.fluid.equals(AetherFluids.DENSE_AERCLOUD)) {
                 int i = pos.getX();
                 int j = pos.getY();
                 int k = pos.getZ();
@@ -99,7 +100,7 @@ public class VialItem extends Item {
                 }
 
                 return true;
-            } else if (block instanceof FluidFillable && this.fluid == AetherBlocks.DENSE_AERCLOUD_STILL) {
+            } else if (block instanceof FluidFillable && this.fluid == AetherFluids.DENSE_AERCLOUD) {
                 ((FluidFillable) block).tryFillWithFluid(world, pos, blockState, ((FlowableFluid) this.fluid).getStill(false));
 //                this.playEmptyingSound(player, world, pos);
                 return true;

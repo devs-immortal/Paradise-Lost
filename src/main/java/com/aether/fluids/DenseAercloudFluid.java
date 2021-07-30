@@ -1,4 +1,4 @@
-package com.aether.blocks.aercloud;
+package com.aether.fluids;
 
 import com.aether.blocks.AetherBlocks;
 import net.minecraft.block.BlockState;
@@ -19,12 +19,12 @@ public class DenseAercloudFluid extends FlowableFluid {
 
     @Override
     public Fluid getFlowing() {
-        return AetherBlocks.DENSE_AERCLOUD_STILL;
+        return AetherFluids.DENSE_AERCLOUD;
     }
 
     @Override
     public Fluid getStill() {
-        return AetherBlocks.DENSE_AERCLOUD_STILL;
+        return AetherFluids.DENSE_AERCLOUD;
     }
 
     @Override
