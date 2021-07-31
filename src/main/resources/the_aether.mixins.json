@@ -15,7 +15,6 @@
     "entity.MixinAbstractFurnaceBlockEntity",
     "entity.MixinLivingEntity",
     "entity.PlayerEntityMixin",
-    "entity.RandomLookGoalAccessor",
     "entity.RandomLookGoalMixin",
     "entity.SlimeMoveControlMixin",
     "fluid.FlowableFluidMixin",
