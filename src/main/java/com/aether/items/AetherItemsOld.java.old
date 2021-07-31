@@ -43,24 +43,28 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 
-import java.util.function.Consumer;
-
 @SuppressWarnings("unused")
-public class AetherItems {
+public class AetherItemsOld {
     private static final RegistryQueue<Item> queue = new RegistryQueue<>(Registry.ITEM, 256);
 
-    private static Settings resource() { return new Settings().group(AetherItemGroups.Resources); }
-    public static final Item ZANITE_GEM = add("zanite_gemstone", new Item(resource()));
-    public static final Item ZANITE_FRAGMENT = add("zanite_fragment", new Item(resource()));
-    public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource()));
-    public static final Item AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShard(resource()));
-    public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource()));
-    public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource()));
-    public static final Item SWET_BALL = add("swet_ball", new Item(resource()));
-    //SKYROOT_STICK = add("skyroot_stick", new Item(resource()));
-    public static final Item GOLD_AERDUST = add("gold_aerdust", new Item(resource()));
-    public static final Item FROZEN_AERDUST = add("frozen_aerdust", new Item(resource()));
+    public static final AetherRarity AETHER_LOOT = new AetherRarity(Formatting.GREEN);
 
+    // Resources
+    private static final Settings RESOURCES = new Settings().group(AetherItemGroups.Resources);
+    public static final Item ZANITE_GEM = register("zanite_gemstone", new Item(RESOURCES));
+    public static final Item ZANITE_FRAGMENT = register("zanite_fragment", new Item(RESOURCES));
+    public static final Item GRAVITITE_GEM = register("gravitite_gemstone", new Item(RESOURCES));
+    public static final Item AMBROSIUM_SHARD = register("ambrosium_shard", new AmbrosiumShard(RESOURCES));
+    public static final Item GOLDEN_AMBER = register("golden_amber", new Item(RESOURCES));
+    public static final Item AECHOR_PETAL = register("aechor_petal", new Item(RESOURCES));
+    public static final Item SWET_BALL = register("swet_ball", new Item(RESOURCES));
+    //SKYROOT_STICK = register("skyroot_stick", new Item(RESOURCES));
+    public static final Item GOLD_AERDUST = register("gold_aerdust", new Item(RESOURCES));
+    public static final Item FROZEN_AERDUST = register("frozen_aerdust", new Item(RESOURCES));
+
+    // Tools
+    private static final Settings TOOLS = new Settings().group(AetherItemGroups.Tools);
+    private static final Settings WEAPONS = new Settings().group(AetherItemGroups.Tools);
     /*SKYROOT_SHOVEL = register("skyroot_shovel", new AetherShovel(AetherTiers.Skyroot, TOOLS, 1.5F, -3.0F));
     SKYROOT_PICKAXE = register("skyroot_pickaxe", new AetherPickaxe(AetherTiers.Skyroot, TOOLS, 1, -2.8F));
     SKYROOT_AXE = register("skyroot_axe", new AetherAxe(AetherTiers.Skyroot, TOOLS, 6.0F, -3.2F));
@@ -72,29 +76,25 @@ public class AetherItems {
     HOLYSTONE_SWORD = register("holystone_sword", new AetherSword(AetherTiers.Holystone, -2.4F, 3, WEAPONS));
     HOLYSTONE_HOE = register("holystone_hoe", new AetherHoe(AetherTiers.Holystone, TOOLS, 2));
     */
+    public static final Item ZANITE_SHOVEL = register("zanite_shovel", new AetherShovel(AetherTiers.ZANITE, TOOLS, 1.5F, -3.0F));
+    public static final Item ZANITE_PICKAXE = register("zanite_pickaxe", new AetherPickaxe(AetherTiers.ZANITE, TOOLS, 1, -2.8F));
+    public static final Item ZANITE_AXE = register("zanite_axe", new AetherAxe(AetherTiers.ZANITE, TOOLS, 6.0F, -3.1F));
+    public static final Item ZANITE_SWORD = register("zanite_sword", new AetherSword(AetherTiers.ZANITE, -2.4F, 3, WEAPONS));
+    public static final Item ZANITE_HOE = register("zanite_hoe", new AetherHoe(AetherTiers.ZANITE, TOOLS, 3));
 
-    private static Settings tool() { return new Settings().group(AetherItemGroups.Tools); }
-    public static final Item ZANITE_SHOVEL = add("zanite_shovel", new AetherShovel(AetherTiers.ZANITE, tool(), 1.5f, -3f));
-    public static final Item ZANITE_PICKAXE = add("zanite_pickaxe", new AetherPickaxe(AetherTiers.ZANITE, tool(), 1, -2.8f));
-    public static final Item ZANITE_AXE = add("zanite_axe", new AetherAxe(AetherTiers.ZANITE, tool(), 6f, -3.1f));
-    public static final Item ZANITE_SWORD = add("zanite_sword", new AetherSword(AetherTiers.ZANITE, -2.4f, 3, tool()));
-    public static final Item ZANITE_HOE = add("zanite_hoe", new AetherHoe(AetherTiers.ZANITE, tool(), 3f));
+    private static final Settings GRAVITITE_TOOLS = new AetherItemSettings().rarity(Rarity.RARE).group(AetherItemGroups.Tools);
+    public static final Item GRAVITITE_SHOVEL = register("gravitite_shovel", new AetherShovel(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 1.5F, -3.0F));
+    public static final Item GRAVITITE_PICKAXE = register("gravitite_pickaxe", new AetherPickaxe(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 1, -2.8F));
+    public static final Item GRAVITITE_AXE = register("gravitite_axe", new AetherAxe(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 5.0F, -3.0F));
+    public static final Item GRAVITITE_SWORD = register("gravitite_sword", new AetherSword(AetherTiers.GRAVITITE, -2.4F, 3, new AetherItemSettings().rarity(Rarity.RARE).group(AetherItemGroups.Tools)));
+    public static final Item GRAVITITE_HOE = register("gravitite_hoe", new AetherHoe(AetherTiers.GRAVITITE, GRAVITITE_TOOLS, 4));
 
-    private static Settings rareTool() { return tool().rarity(Rarity.RARE); }
-    public static final Item GRAVITITE_SHOVEL = register("gravitite_shovel", new AetherShovel(AetherTiers.GRAVITITE, rareTool(), 1.5f, -3f));
-    public static final Item GRAVITITE_PICKAXE = register("gravitite_pickaxe", new AetherPickaxe(AetherTiers.GRAVITITE, rareTool(), 1, -2.8f));
-    public static final Item GRAVITITE_AXE = register("gravitite_axe", new AetherAxe(AetherTiers.GRAVITITE, rareTool(), 5f, -3f));
-    public static final Item GRAVITITE_SWORD = register("gravitite_sword", new AetherSword(AetherTiers.GRAVITITE, -2.4f, 3, rareTool()));
-    public static final Item GRAVITITE_HOE = register("gravitite_hoe", new AetherHoe(AetherTiers.GRAVITITE, rareTool(), 4f));
-
-    private static Settings aetherLootTool() { return tool().rarity(AetherRarity.AETHER_LOOT); }
-    public static final Item VALKYRIE_SHOVEL = register("valkyrie_shovel", new AetherShovel(AetherTiers.VALKYRIE, aetherLootTool(), 1.5f, -3f));
-    public static final Item VALKYRIE_PICKAXE = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.VALKYRIE, aetherLootTool(), 1, -2.8f));
-    public static final Item VALKYRIE_AXE = register("valkyrie_axe", new AetherAxe(AetherTiers.VALKYRIE, aetherLootTool(), 4f, -2.9f));
-    public static final Item VALKYRIE_LANCE = register("valkyrie_lance", new ValkyrieLance(tool().rarity(Rarity.EPIC)));
-    public static final Item VALKYRIE_HOE = register("valkyrie_hoe", new AetherHoe(AetherTiers.VALKYRIE, aetherLootTool(), 5f));
-
-
+    private static final Settings VALKYRIE_TOOLS = new AetherItemSettings().rarity(AETHER_LOOT).group(AetherItemGroups.Tools);
+    public static final Item VALKYRIE_SHOVEL = register("valkyrie_shovel", new AetherShovel(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 1.5F, -3.0F));
+    public static final Item VALKYRIE_PICKAXE = register("valkyrie_pickaxe", new AetherPickaxe(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 1, -2.8F));
+    public static final Item VALKYRIE_AXE = register("valkyrie_axe", new AetherAxe(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 4.0F, -2.9F));
+    public static final Item VALKYRIE_LANCE = register("valkyrie_lance", new ValkyrieLance(new AetherItemSettings().rarity(Rarity.EPIC).group(AetherItemGroups.Tools)));
+    public static final Item VALKYRIE_HOE = register("valkyrie_hoe", new AetherHoe(AetherTiers.VALKYRIE, VALKYRIE_TOOLS, 5));
     public static final Item AMBROSIUM_BLOODSTONE = register("ambrosium_bloodstone", new AmbrosiumBloodstoneItem());
     public static final Item ZANITE_BLOODSTONE = register("zanite_bloodstone", new ZaniteBloodstoneItem());
     public static final Item GRAVITITE_BLOODSTONE = register("gravitite_bloodstone", new GravititeBloodstoneItem());
@@ -137,7 +137,7 @@ public class AetherItems {
     public static final Item SENTRY_BOOTS = register("sentry_boots", new ArmorItem(AetherArmorType.Sentry.getMaterial(), EquipmentSlot.FEET, LOOT_ARMOR));
 
     // Food
-    private static final AetherItemSettings LOOT_FOOD = new AetherItemSettings().group(AetherItemGroups.Food).rarity(AetherItems.AETHER_LOOT);
+    private static final AetherItemSettings LOOT_FOOD = new AetherItemSettings().group(AetherItemGroups.Food).rarity(AetherItemsOld.AETHER_LOOT);
     public static final Item BLUEBERRY = register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, new Settings().group(AetherItemGroups.Food).food(AetherFood.BLUEBERRY)));
     public static final Item ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Settings().group(AetherItemGroups.Food).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
     public static final Item ORANGE = register("orange", new Item(new Settings().group(AetherItemGroups.Food).food(AetherFood.ORANGE)));
@@ -156,7 +156,7 @@ public class AetherItems {
     public static final Item GOLDEN_FEATHER = register("golden_feather", new ItemAccessory(AccessoryType.MISC, LOOT_ACCESSORY));
     public static final Item REGENERATION_STONE = register("regeneration_stone", new ItemAccessory(AccessoryType.MISC, LOOT_ACCESSORY));
     public static final Item IRON_BUBBLE = register("iron_bubble", new ItemAccessory(AccessoryType.MISC, LOOT_ACCESSORY));
-    public static final Item LIFE_SHARD = register("life_shard", new LifeShard(new AetherItemSettings().rarity(AetherItems.AETHER_LOOT).maxCount(1).group(AetherItemGroups.Misc)));
+    public static final Item LIFE_SHARD = register("life_shard", new LifeShard(new AetherItemSettings().rarity(AetherItemsOld.AETHER_LOOT).maxCount(1).group(AetherItemGroups.Misc)));
     public static final Item CLOUD_STAFF = register("cloud_staff", new CloudStaff(new Settings().maxCount(1).maxDamage(60).group(AetherItemGroups.Misc)));
     public static final Item NATURE_STAFF = register("nature_staff", new NatureStaff(new Settings().maxCount(1).maxDamage(100).group(AetherItemGroups.Misc)));
     public static final Item MOA_EGG = register("moa_egg", new MoaEgg(new Settings().maxCount(1).group(AetherItemGroups.Misc)));
@@ -351,10 +351,5 @@ public class AetherItems {
 
     public static void initClient() {
         // Empty void. Eternal emptiness
-    }
-
-    @SafeVarargs
-    private static Item add(String id, Item item, Consumer<Item>... additionalActions) {
-        return queue.add(id, item, additionalActions);
     }
 }

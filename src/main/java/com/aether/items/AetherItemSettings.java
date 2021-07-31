@@ -11,7 +11,7 @@ public class AetherItemSettings extends Item.Settings {
     private int enchantmentGlintColor = 0x8e48e1;
 
     public AetherItemSettings rarity(AetherRarity rarity) {
-        return formatting(rarity.getCustomRarityFormatting());
+        return formatting(rarity.formatting());
     }
 
     public AetherItemSettings formatting(Formatting formatting) {

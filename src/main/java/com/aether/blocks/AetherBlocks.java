@@ -334,8 +334,8 @@ public class AetherBlocks {
 
     @SafeVarargs
     @SuppressWarnings("RedundantSuppression")
-    private static Block add(String name, Block block, Consumer<Block>... additionalActions) {
-        return queue.add(name, block, additionalActions);
+    private static Block add(String id, Block block, Consumer<Block>... additionalActions) {
+        return queue.add(id, block, additionalActions);
     }
 
     public static void init() {
