@@ -4,6 +4,7 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -21,17 +22,16 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 
 public class SwetEntity extends SlimeEntity {
-
+    public IntConsumer setRandomLookTimer;
     protected int initialSize = 2;
     protected float massStuck = 0;
     protected static final EntityAttributeModifier knockbackResistanceModifier = new EntityAttributeModifier(
@@ -198,24 +198,18 @@ public class SwetEntity extends SlimeEntity {
     protected void pushAway(Entity entity) {
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void setSize(int size, boolean heal){
         super.setSize(size, heal);
-        int i = MathHelper.clamp(size, 1, 127);
-        if (size < 4) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2F+0.1F*(float)i);
-        } else {
-            this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.6 + 0.02 * (float)(i - 4));
-        }
-        if (size > 1) {
-            if (size < 20) {
-                getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(20 + 2 * i);
-            } else {
-                getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(60);
-            }
-        }
+        int clampedSize = MathHelper.clamp(size, 1, 127);
+        float sqrtClampedSize = MathHelper.sqrt(clampedSize);
+        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2*sqrtClampedSize + 0.1);
+        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(12*sqrtClampedSize + 1);
+        this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(0.25*clampedSize + sqrtClampedSize);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     @Nullable
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt){
@@ -264,12 +258,7 @@ public class SwetEntity extends SlimeEntity {
 
         @Override
         public boolean shouldContinue() {
-            LivingEntity target = this.mob.getTarget();
-            if (target == null) {
-                target = this.target;
-            }
-            return super.shouldContinue() &&
-                    !(canAbsorb(this.mob, this.mob.getTarget()));
+            return super.shouldContinue() && !(canAbsorb(this.mob, this.mob.getTarget()));
         }
     }
 }
