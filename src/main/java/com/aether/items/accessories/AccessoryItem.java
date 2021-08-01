@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 public class AccessoryItem extends Item {
     private final AccessoryType type;
     private final Identifier texture, texture_slim;
-    private float damageMultiplier = 1.0F;
+    private final float damageMultiplier;
 
     public AccessoryItem(AccessoryType type, String material, float damageMultiplier, Settings settings) {
         super(settings.maxDamage(5 * type.getDurability()));
@@ -20,6 +20,15 @@ public class AccessoryItem extends Item {
     public AccessoryItem(AccessoryType type, float damageMultiplier, Settings settings) {
         this(type, "base", damageMultiplier, settings);
     }
+
+    public AccessoryItem(AccessoryType type, String material, Settings settings) {
+        this(type, material, 1f, settings);
+    }
+
+    public AccessoryItem(AccessoryType type, Settings settings) {
+        this(type, 1f, settings);
+    }
+
 //
 //    public AccessoryItem(AccessoryType type) {
 //        this(type, Rarity.COMMON, 0xDDDDDD);

@@ -41,7 +41,7 @@ import static com.aether.util.item.AetherRarity.*;
 import static net.minecraft.entity.EquipmentSlot.*;
 import static net.minecraft.util.Rarity.*;
 
-@SuppressWarnings({"unused", "InstantiationOfUtilityClass", "AccessStaticViaInstance"})
+@SuppressWarnings({"x", "InstantiationOfUtilityClass", "AccessStaticViaInstance"})
 public class AetherItems {
     private static final RegistryQueue<Item> queue = new RegistryQueue<>(Registry.ITEM, 256);
 
@@ -50,14 +50,20 @@ public class AetherItems {
     private static final AetherArmorMaterials ArmorMat = new AetherArmorMaterials();
     private static final AetherFoodComponent FoodComp = new AetherFoodComponent();
 
+    private static Consumer<Item> compostable(float chance) { return item -> ComposterBlock.registerCompostableItem(chance, item); }
 
-    private static Settings resource() { return new Settings().group(AETHER_BLOCKS); }
+
+    /*
+    Begin items
+     */
+
+    private static Settings resource() { return new Settings().group(AETHER_RESOURCES); }
     public static final Item ZANITE_GEM = add("zanite_gemstone", new Item(resource()));
     public static final Item ZANITE_FRAGMENT = add("zanite_fragment", new Item(resource()));
     public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource()));
     public static final Item AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShard(resource()));
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource()));
-    public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource()));
+    public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource()), compostable(0.65f));
     public static final Item SWET_BALL = add("swet_ball", new Item(resource()));
     public static final Item GOLD_AERDUST = add("gold_aerdust", new Item(resource()));
     public static final Item FROZEN_AERDUST = add("frozen_aerdust", new Item(resource()));
@@ -70,35 +76,41 @@ public class AetherItems {
     public static final Item ZANITE_AXE = add("zanite_axe", new ZaniteAxeItem(ToolMat.ZANITE, 6f, -3.1f, tool()));
     public static final Item ZANITE_SWORD = add("zanite_sword", new ZaniteSwordItem(ToolMat.ZANITE, 3, -2.4f, tool()));
     public static final Item ZANITE_HOE = add("zanite_hoe", new ZaniteHoeItem(ToolMat.ZANITE, 1, 3f, tool()));
+
     public static final Item GRAVITITE_SHOVEL = add("gravitite_shovel", new GravititeShovelItem(ToolMat.GRAVITITE, 1.5f, -3f, tool(RARE)));
     public static final Item GRAVITITE_PICKAXE = add("gravitite_pickaxe", new GravititePickaxeItem(ToolMat.GRAVITITE, 1, -2.8f, tool(RARE)));
     public static final Item GRAVITITE_AXE = add("gravitite_axe", new GravititeAxeItem(ToolMat.GRAVITITE, 5f, -3f, tool(RARE)));
     public static final Item GRAVITITE_SWORD = add("gravitite_sword", new SwordItem(ToolMat.GRAVITITE, 3, -2.4f, tool(RARE)));
     public static final Item GRAVITITE_HOE = add("gravitite_hoe", new GravititeHoeItem(ToolMat.GRAVITITE, 1,4f, tool(RARE)));
+
     public static final Item VALKYRIE_SHOVEL = add("valkyrie_shovel", new ShovelItem(ToolMat.VALKYRIE, 1.5f, -3f,  tool(AETHER_LOOT)));
     public static final Item VALKYRIE_PICKAXE = add("valkyrie_pickaxe", new AetherPickaxeItem(ToolMat.VALKYRIE, 1, -2.8f, tool(AETHER_LOOT)));
     public static final Item VALKYRIE_AXE = add("valkyrie_axe", new AetherAxeItem(ToolMat.VALKYRIE, 4f, -2.9f, tool(AETHER_LOOT)));
     public static final Item VALKYRIE_LANCE = add("valkyrie_lance", new ValkyrieLance(ToolMat.VALKYRIE, 10, -3f, 6f, 4f, tool(EPIC)));
     public static final Item VALKYRIE_HOE = add("valkyrie_hoe", new AetherHoeItem(ToolMat.VALKYRIE, 1, 5f, tool(AETHER_LOOT)));
-    public static final Item GOLDEN_DART = register("golden_dart", new Dart(tool()));
-    public static final Item ENCHANTED_DART = register("enchanted_dart", new Dart(tool(RARE)));
-    public static final Item POISON_DART = register("poison_dart", new Dart(tool()));
-    public static final Item GOLDEN_DART_SHOOTER = register("golden_dart_shooter", new DartShooter((Dart) GOLDEN_DART, tool().maxCount(1)));
-    public static final Item ENCHANTED_DART_SHOOTER = register("enchanted_dart_shooter", new DartShooter((Dart) ENCHANTED_DART, tool(RARE).maxCount(1)));
-    public static final Item POISON_DART_SHOOTER = register("poison_dart_shooter", new DartShooter((Dart) POISON_DART, tool().maxCount(1)));
-    public static final Item PHOENIX_BOW = register("phoenix_bow", new BowItem(tool().maxDamage(384)));
-    public static final Item FLAMING_SWORD = register("flaming_sword", new FlamingSwordItem(ToolMat.LEGENDARY, 4, -2.4f, tool(AETHER_LOOT)));
-    public static final Item LIGHTNING_SWORD = register("lightning_sword", new LightningSwordItem(ToolMat.LEGENDARY, 4, -2.4f, tool(AETHER_LOOT)));
-    public static final Item HOLY_SWORD = register("holy_sword", new HolySwordItem(ToolMat.LEGENDARY, 4, -2.4f, tool(AETHER_LOOT)));
-    public static final Item VAMPIRE_BLADE = register("vampire_blade", new VampireBlade(ToolMat.LEGENDARY, 3, -2.4f, tool(AETHER_LOOT)));
-    public static final Item PIG_SLAYER = register("pig_slayer", new PigSlayer(ToolMat.LEGENDARY, 3, -2.4f, tool(AETHER_LOOT)));
-    public static final Item CANDY_CANE_SWORD = register("candy_cane_sword", new CandyCaneSwordItem(ToolMat.CANDY, 3, -2f, tool()));
 
-    private static Settings bloodstone() { return tool().maxCount(1); }
-    public static final Item AMBROSIUM_BLOODSTONE = add("ambrosium_bloodstone", new AmbrosiumBloodstoneItem(bloodstone()));
-    public static final Item ZANITE_BLOODSTONE = add("zanite_bloodstone", new ZaniteBloodstoneItem(bloodstone()));
-    public static final Item GRAVITITE_BLOODSTONE = add("gravitite_bloodstone", new GravititeBloodstoneItem(bloodstone()));
-    public static final Item ABSTENTINE_BLOODSTONE = add("abstentine_bloodstone", new AbstentineBloodstoneItem(bloodstone()));
+    public static final Item GOLDEN_DART = add("golden_dart", new Dart(tool()));
+    public static final Item ENCHANTED_DART = add("enchanted_dart", new Dart(tool(RARE)));
+    public static final Item POISON_DART = add("poison_dart", new Dart(tool()));
+    public static final Item GOLDEN_DART_SHOOTER = add("golden_dart_shooter", new DartShooter((Dart) GOLDEN_DART, tool().maxCount(1)));
+    public static final Item ENCHANTED_DART_SHOOTER = add("enchanted_dart_shooter", new DartShooter((Dart) ENCHANTED_DART, tool(RARE).maxCount(1)));
+    public static final Item POISON_DART_SHOOTER = add("poison_dart_shooter", new DartShooter((Dart) POISON_DART, tool().maxCount(1)));
+
+    public static final Item PHOENIX_BOW = add("phoenix_bow", new BowItem(tool().maxDamage(384)));
+    public static final Item FLAMING_SWORD = add("flaming_sword", new FlamingSwordItem(ToolMat.LEGENDARY, 4, -2.4f, tool(AETHER_LOOT)));
+    public static final Item LIGHTNING_SWORD = add("lightning_sword", new LightningSwordItem(ToolMat.LEGENDARY, 4, -2.4f, tool(AETHER_LOOT)));
+    public static final Item HOLY_SWORD = add("holy_sword", new HolySwordItem(ToolMat.LEGENDARY, 4, -2.4f, tool(AETHER_LOOT)));
+    public static final Item VAMPIRE_BLADE = add("vampire_blade", new VampireBlade(ToolMat.LEGENDARY, 3, -2.4f, tool(AETHER_LOOT)));
+    public static final Item PIG_SLAYER = add("pig_slayer", new PigSlayer(ToolMat.LEGENDARY, 3, -2.4f, tool(AETHER_LOOT)));
+    public static final Item CANDY_CANE_SWORD = add("candy_cane_sword", new CandyCaneSwordItem(ToolMat.CANDY, 3, -2f, tool()));
+
+    public static final Item CLOUD_PARACHUTE = add("cold_parachute", new ParachuteItem(tool().maxCount(1)));
+    public static final Item GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new ParachuteItem(tool().maxCount(1).maxDamage(20)));
+
+    public static final Item AMBROSIUM_BLOODSTONE = add("ambrosium_bloodstone", new AmbrosiumBloodstoneItem(tool().maxCount(1)));
+    public static final Item ZANITE_BLOODSTONE = add("zanite_bloodstone", new ZaniteBloodstoneItem(tool().maxCount(1)));
+    public static final Item GRAVITITE_BLOODSTONE = add("gravitite_bloodstone", new GravititeBloodstoneItem(tool().maxCount(1)));
+    public static final Item ABSTENTINE_BLOODSTONE = add("abstentine_bloodstone", new AbstentineBloodstoneItem(tool().maxCount(1)));
 
 
     private static Settings wearble() { return new Settings().group(AETHER_WEARABLES); }
@@ -135,100 +147,93 @@ public class AetherItems {
 
     public static final Item SENTRY_BOOTS = add("sentry_boots", new ArmorItem(ArmorMat.SENTRY, FEET, wearble(AETHER_LOOT)));
 
-    public static final Item LEATHER_GLOVES = register("leather_gloves", new AccessoryItem(AccessoryType.GLOVES, wearble().enchantmentGlintColor(0xC65C35)).setDamageMultiplier(1.5F));
-    public static final Item IRON_GLOVES = register("iron_gloves", new AccessoryItem(AccessoryType.GLOVES, new AetherItemSettings()).setDamageMultiplier(2.5F));
-    public static final Item GOLDEN_GLOVES = register("golden_gloves", new AccessoryItem(AccessoryType.GLOVES, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0xFBF424)).setDamageMultiplier(2.0F));
-    public static final Item CHAIN_GLOVES = register("chain_gloves", new AccessoryItem(AccessoryType.GLOVES, "chain", new AetherItemSettings()).setDamageMultiplier(2.0F));
-    public static final Item DIAMOND_GLOVES = register("diamond_gloves", new AccessoryItem(AccessoryType.GLOVES, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0x33EBCB)).setDamageMultiplier(4.5F));
-    public static final Item ZANITE_GLOVES = register("zanite_gloves", new AccessoryItem(AccessoryType.GLOVES, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0x711AE8)).setDamageMultiplier(3.0F));
-    public static final Item GRAVITITE_GLOVES = register("gravitite_gloves", new AccessoryItem(AccessoryType.GLOVES, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0xE752DB).rarity(RARE)).setDamageMultiplier(4.0F));
-    public static final Item NEPTUNE_GLOVES = register("neptune_gloves", new AccessoryItem(AccessoryType.GLOVES, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0x2654FF).rarity(AETHER_LOOT)).setDamageMultiplier(4.5F));
-    public static final Item PHOENIX_GLOVES = register("phoenix_gloves", new AccessoryItem(AccessoryType.GLOVES, "phoenix", new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0xff7700).rarity(AETHER_LOOT)).setDamageMultiplier(4.0F));
-    public static final Item OBSIDIAN_GLOVES = register("obsidian_gloves", new AccessoryItem(AccessoryType.GLOVES, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0x1B1447)).setDamageMultiplier(5.0F));
-    public static final Item VALKYRIE_GLOVES = register("valkyrie_gloves", new AccessoryItem(AccessoryType.GLOVES, "valkyrie", new AetherItemSettings().group(AETHER_WEARABLES).rarity(AETHER_LOOT)).setDamageMultiplier(5.0F));
+    public static final Item LEATHER_GLOVES = add("leather_gloves", new AccessoryItem(AccessoryType.GLOVES, 1.5f, wearble()));
+    public static final Item IRON_GLOVES = add("iron_gloves", new AccessoryItem(AccessoryType.GLOVES, 2.5f, wearble()));
+    public static final Item GOLDEN_GLOVES = add("golden_gloves", new AccessoryItem(AccessoryType.GLOVES, 2f, wearble()));
+    public static final Item CHAIN_GLOVES = add("chain_gloves", new AccessoryItem(AccessoryType.GLOVES, "chain", 2f, wearble()));
+    public static final Item DIAMOND_GLOVES = add("diamond_gloves", new AccessoryItem(AccessoryType.GLOVES, 4.5f, wearble()));
+    public static final Item ZANITE_GLOVES = add("zanite_gloves", new AccessoryItem(AccessoryType.GLOVES, 3.0f, wearble()));
+    public static final Item GRAVITITE_GLOVES = add("gravitite_gloves", new AccessoryItem(AccessoryType.GLOVES, 4f, wearble(RARE)));
+    public static final Item NEPTUNE_GLOVES = add("neptune_gloves", new AccessoryItem(AccessoryType.GLOVES, 4.5f, wearble(AETHER_LOOT)));
+    public static final Item PHOENIX_GLOVES = add("phoenix_gloves", new AccessoryItem(AccessoryType.GLOVES, "phoenix", 4f, wearble(AETHER_LOOT)));
+    public static final Item OBSIDIAN_GLOVES = add("obsidian_gloves", new AccessoryItem(AccessoryType.GLOVES, 5f, wearble()));
+    public static final Item VALKYRIE_GLOVES = add("valkyrie_gloves", new AccessoryItem(AccessoryType.GLOVES, "valkyrie", 5f, wearble(AETHER_LOOT)));
 
-    public static final Item IRON_RING = register("iron_ring", new AccessoryItem(AccessoryType.RING, new AetherItemSettings().group(AETHER_WEARABLES)));
-    public static final Item GOLDEN_RING = register("golden_ring", new AccessoryItem(AccessoryType.RING, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0xEAEE57)));
-    public static final Item ZANITE_RING = register("zanite_ring", new AccessoryItem(AccessoryType.RING, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0x711AE8)));
-    public static final Item ICE_RING = register("ice_ring", new AccessoryItem(AccessoryType.RING, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0x95E6E7).rarity(RARE)));
+    public static final Item IRON_RING = add("iron_ring", new AccessoryItem(AccessoryType.RING, wearble()));
+    public static final Item GOLDEN_RING = add("golden_ring", new AccessoryItem(AccessoryType.RING, wearble()));
+    public static final Item ZANITE_RING = add("zanite_ring", new AccessoryItem(AccessoryType.RING, wearble()));
+    public static final Item ICE_RING = add("ice_ring", new AccessoryItem(AccessoryType.RING, wearble(RARE)));
 
-    public static final Item GOLDEN_PENDANT = register("golden_pendant", new AccessoryItem(AccessoryType.PENDANT, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0xEAEE57)));
-    public static final Item ZANITE_PENDANT = register("zanite_pendant", new AccessoryItem(AccessoryType.PENDANT, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0x711AE8)));
-    public static final Item ICE_PENDANT = register("ice_pendant", new AccessoryItem(AccessoryType.PENDANT, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0x95E6E7).rarity(RARE)));
+    public static final Item GOLDEN_PENDANT = add("golden_pendant", new AccessoryItem(AccessoryType.PENDANT, wearble()));
+    public static final Item ZANITE_PENDANT = add("zanite_pendant", new AccessoryItem(AccessoryType.PENDANT, wearble()));
+    public static final Item ICE_PENDANT = add("ice_pendant", new AccessoryItem(AccessoryType.PENDANT, wearble(RARE)));
 
-    public static final Item WHITE_CAPE = register("white_cape", new AccessoryItem(AccessoryType.CAPE, new AetherItemSettings()));
-    public static final Item RED_CAPE = register("red_cape", new AccessoryItem(AccessoryType.CAPE, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0xE81111)));
-    public static final Item BLUE_CAPE = register("blue_cape", new AccessoryItem(AccessoryType.CAPE, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0x137FB7)));
-    public static final Item YELLOW_CAPE = register("yellow_cape", new AccessoryItem(AccessoryType.CAPE, new AetherItemSettings().group(AETHER_WEARABLES).enchantmentGlintColor(0xCDCB0E)));
-    public static final Item SWET_CAPE = register("swet_cape", new AccessoryItem(AccessoryType.CAPE, "swet", new AetherItemSettings().rarity(AETHER_LOOT)));
-    public static final Item AGILITY_CAPE = register("agility_cape", new AccessoryItem(AccessoryType.CAPE, "agility", new AetherItemSettings().rarity(AETHER_LOOT)));
-    public static final Item INVISIBILITY_CAPE = register("invisibility_cape", new AccessoryItem(AccessoryType.CAPE, new AetherItemSettings().rarity(AETHER_LOOT)));
+    public static final Item WHITE_CAPE = add("white_cape", new AccessoryItem(AccessoryType.CAPE, wearble()));
+    public static final Item RED_CAPE = add("red_cape", new AccessoryItem(AccessoryType.CAPE, wearble()));
+    public static final Item BLUE_CAPE = add("blue_cape", new AccessoryItem(AccessoryType.CAPE, wearble()));
+    public static final Item YELLOW_CAPE = add("yellow_cape", new AccessoryItem(AccessoryType.CAPE, wearble()));
+    public static final Item SWET_CAPE = add("swet_cape", new AccessoryItem(AccessoryType.CAPE, "swet", wearble(AETHER_LOOT)));
+    public static final Item AGILITY_CAPE = add("agility_cape", new AccessoryItem(AccessoryType.CAPE, "agility", wearble(AETHER_LOOT)));
+    public static final Item INVISIBILITY_CAPE = add("invisibility_cape", new AccessoryItem(AccessoryType.CAPE, wearble(AETHER_LOOT)));
 
-    public static final Item GOLDEN_FEATHER = register("golden_feather", new AccessoryItem(AccessoryType.MISC, LOOT_ACCESSORY));
-    public static final Item REGENERATION_STONE = register("regeneration_stone", new AccessoryItem(AccessoryType.MISC, LOOT_ACCESSORY));
-    public static final Item IRON_BUBBLE = register("iron_bubble", new AccessoryItem(AccessoryType.MISC, LOOT_ACCESSORY));
+    public static final Item GOLDEN_FEATHER = add("golden_feather", new AccessoryItem(AccessoryType.MISC, wearble(AETHER_LOOT)));
+    public static final Item REGENERATION_STONE = add("regeneration_stone", new AccessoryItem(AccessoryType.MISC, wearble(AETHER_LOOT)));
+    public static final Item IRON_BUBBLE = add("iron_bubble", new AccessoryItem(AccessoryType.MISC, wearble(AETHER_LOOT)));
+
 
     private static Settings food(FoodComponent foodComponent) { return new Settings().group(AETHER_FOOD).food(foodComponent); }
     private static Settings food(FoodComponent foodComponent, Rarity rarity) { return food(foodComponent).rarity(rarity); }
-    public static final Item BLUEBERRY = register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, food(FoodComp.BLUEBERRY)));
-    public static final Item ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(food(FoodComp.ENCHANTED_BLUEBERRY, RARE)));
-    public static final Item ORANGE = register("orange", new Item(food(FoodComp.ORANGE)));
-    public static final Item WHITE_APPLE = register("white_apple", new WhiteApple(food(FoodComp.WHITE_APPLE)));
-    public static final Item BLUE_GUMMY_SWET = register("blue_gummy_swet", new Item(food(FoodComp.GUMMY_SWET, AETHER_LOOT)));
-    public static final Item GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new Item(food(FoodComp.GUMMY_SWET, AETHER_LOOT)));
-    public static final Item VALKYRIE_MILK = register("valkyrie_milk", new DrinkableItem(food(FoodComp.VALKYRIE_MILK, EPIC).maxCount(1)));
-    public static final Item HEALING_STONE = register("healing_stone", new HealingStone(food(FoodComp.HEALING_STONE, RARE)));
-    public static final Item CANDY_CANE = register("candy_cane", new Item(food(FoodComp.GENERIC)));
-    public static final Item GINGERBREAD_MAN = register("ginger_bread_man", new Item(food(FoodComp.GENERIC)));
-    public static final Item MOA_MEAT = register("moa_meat", new Item(food(FoodComp.MOA_MEAT)));
-    public static final Item COOKED_MOA_MEAT = register("moa_meat_cooked", new Item(food(FoodComp.COOKED_MOA_MEAT)));
-
-    public static final Item LIFE_SHARD = register("life_shard", new LifeShard(new AetherItemSettings().rarity(AETHER_LOOT).maxCount(1).group(AETHER_MISC)));
-    public static final Item CLOUD_STAFF = register("cloud_staff", new CloudStaff(new Settings().maxCount(1).maxDamage(60).group(AETHER_MISC)));
-    public static final Item NATURE_STAFF = register("nature_staff", new NatureStaff(new Settings().maxCount(1).maxDamage(100).group(AETHER_MISC)));
-    public static final Item MOA_EGG = register("moa_egg", new MoaEgg(new Settings().maxCount(1).group(AETHER_MISC)));
-    public static final Item LORE_BOOK = register("lore_book", new BookOfLore((new Settings()).maxCount(1).group(AETHER_MISC)));
-    public static final Item SKYROOT_BUCKET = register("skyroot_bucket", new SkyrootBucketItem(new Settings().maxCount(16).group(AETHER_MISC)));
-
-    private static final Settings BUCKET = new Settings().maxCount(1).group(AETHER_MISC).recipeRemainder(SKYROOT_BUCKET);
-    public static final Item SKYROOT_WATER_BUCKET = register("skyroot_water_bucket", new SkyrootBucketItem(Fluids.WATER, BUCKET));
-    public static final Item SKYROOT_MILK_BUCKET = register("skyroot_milk_bucket", new SkyrootBucketItem(BUCKET));
-    public static final Item SKYROOT_POISON_BUCKET = register("skyroot_poison_bucket", new SkyrootBucketItem(BUCKET));
-    public static final Item SKYROOT_REMEDY_BUCKET = register("skyroot_remedy_bucket", new SkyrootBucketItem(BUCKET));
-    public static final Item QUICKSOIL_VIAL = register("quicksoil_vial", new VialItem(Fluids.EMPTY, new Settings().group(AETHER_MISC)));
-    public static final Item AERCLOUD_VIAL = register("aercloud_vial", new VialItem(AetherFluids.DENSE_AERCLOUD, new Settings().group(AETHER_MISC)));
-    public static final Item CLOUD_PARACHUTE = register("cold_parachute", new ParachuteItem(new Settings().maxCount(1).group(AETHER_MISC)));
-    public static final Item GOLDEN_CLOUD_PARACHUTE = register("golden_parachute", new ParachuteItem(new Settings().maxCount(1).maxDamage(20).group(AETHER_MISC)));
-
-    private static final AetherItemSettings KEYS = new AetherItemSettings().group(AETHER_MISC).rarity(AETHER_LOOT);
-    public static final Item BRONZE_KEY = register("bronze_key", new Item(KEYS));
-    public static final Item SILVER_KEY = register("silver_key", new Item(KEYS));
-    public static final Item GOLDEN_KEY = register("golden_key", new Item(KEYS));
-
-    // Materials
-
-    // Weapons
+    public static final Item BLUEBERRY = add("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, food(FoodComp.BLUEBERRY)), compostable(0.3f));
+    public static final Item ENCHANTED_BLUEBERRY = add("enchanted_blueberry", new Item(food(FoodComp.ENCHANTED_BLUEBERRY, RARE)));
+    public static final Item ORANGE = add("orange", new Item(food(FoodComp.ORANGE)), compostable(0.65f));
+    public static final Item WHITE_APPLE = add("white_apple", new WhiteApple(food(FoodComp.WHITE_APPLE)), compostable(0.65f));
+    public static final Item BLUE_GUMMY_SWET = add("blue_gummy_swet", new Item(food(FoodComp.GUMMY_SWET, AETHER_LOOT)));
+    public static final Item GOLDEN_GUMMY_SWET = add("golden_gummy_swet", new Item(food(FoodComp.GUMMY_SWET, AETHER_LOOT)));
+    public static final Item VALKYRIE_MILK = add("valkyrie_milk", new DrinkableItem(food(FoodComp.VALKYRIE_MILK, EPIC).maxCount(1)));
+    public static final Item HEALING_STONE = add("healing_stone", new HealingStone(food(FoodComp.HEALING_STONE, RARE)));
+    public static final Item CANDY_CANE = add("candy_cane", new Item(food(FoodComp.GENERIC)), compostable(0.3f));
+    public static final Item GINGERBREAD_MAN = add("ginger_bread_man", new Item(food(FoodComp.GENERIC)), compostable(0.3f));
+    public static final Item MOA_MEAT = add("moa_meat", new Item(food(FoodComp.MOA_MEAT)));
+    public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", new Item(food(FoodComp.COOKED_MOA_MEAT)));
 
 
-    // Spawn Eggs
-    public static final Item AECHOR_PLANT_SPAWN_EGG = registerSpawnEgg("aechor_plant_spawn_egg", AetherEntityTypes.AECHOR_PLANT, 0x97ded4, 0x31897d);
+    private static Settings misc() { return new Settings().group(AETHER_MISC); }
+    public static final Item LIFE_SHARD = add("life_shard", new LifeShard(misc().rarity(AETHER_LOOT).maxCount(1)));
+    public static final Item CLOUD_STAFF = add("cloud_staff", new CloudStaff(misc().maxCount(1).maxDamage(60)));
+    public static final Item NATURE_STAFF = add("nature_staff", new NatureStaff(misc().maxCount(1).maxDamage(100)));
+    public static final Item MOA_EGG = add("moa_egg", new MoaEgg(misc().maxCount(1)));
+    public static final Item LORE_BOOK = add("lore_book", new BookOfLore(misc().maxCount(1)));
+    public static final Item SKYROOT_BUCKET = add("skyroot_bucket", new SkyrootBucketItem(misc().maxCount(16)));
+
+    private static Settings skyrootBucket() { return misc().maxCount(1).recipeRemainder(SKYROOT_BUCKET); }
+    public static final Item SKYROOT_WATER_BUCKET = add("skyroot_water_bucket", new SkyrootBucketItem(Fluids.WATER, skyrootBucket()));
+    public static final Item SKYROOT_MILK_BUCKET = add("skyroot_milk_bucket", new SkyrootBucketItem(skyrootBucket()));
+    public static final Item SKYROOT_POISON_BUCKET = add("skyroot_poison_bucket", new SkyrootBucketItem(skyrootBucket()));
+    public static final Item SKYROOT_REMEDY_BUCKET = add("skyroot_remedy_bucket", new SkyrootBucketItem(skyrootBucket()));
+
+    public static final Item QUICKSOIL_VIAL = add("quicksoil_vial", new VialItem(Fluids.EMPTY, misc()));
+    public static final Item AERCLOUD_VIAL = add("aercloud_vial", new VialItem(AetherFluids.DENSE_AERCLOUD, misc()));
+
+    public static final Item BRONZE_KEY = add("bronze_key", new Item(misc().rarity(AETHER_LOOT)));
+    public static final Item SILVER_KEY = add("silver_key", new Item(misc().rarity(AETHER_LOOT)));
+    public static final Item GOLDEN_KEY = add("golden_key", new Item(misc().rarity(AETHER_LOOT)));
+
+    public static final Item AETHER_PORTAL = add("aether_portal", new AetherPortalItem(misc()));
+
+    public static final Item AECHOR_PLANT_SPAWN_EGG = add("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x97ded4, 0x31897d, misc()));
     public static final Item CHEST_MIMIC_SPAWN_EGG = null;
-    public static final Item COCKATRICE_SPAWN_EGG = registerSpawnEgg("cockatrice_spawn_egg", AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338);
-    public static final Item AERBUNNY_SPAWN_EGG = registerSpawnEgg("aerbunny_spawn_egg", AetherEntityTypes.AERBUNNY, 0xc5d6ed, 0x82a6d9);
-    public static final Item AERWHALE_SPAWN_EGG = registerSpawnEgg("aerwhale_spawn_egg", AetherEntityTypes.AERWHALE, 0x5c6d91, 0xdedbce);
+    public static final Item COCKATRICE_SPAWN_EGG = add("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9fc3f7, 0x3d2338, misc()));
+    public static final Item AERBUNNY_SPAWN_EGG = add("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xc5d6ed, 0x82a6d9, misc()));
+    public static final Item AERWHALE_SPAWN_EGG = add("aerwhale_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERWHALE, 0x5c6d91, 0xdedbce, misc()));
     public static final Item FLYING_COW_SPAWN_EGG = null;
-    public static final Item MOA_SPAWN_EGG = registerSpawnEgg("moa_spawn_egg", AetherEntityTypes.MOA, 0xc55c2e4, 0xb3a8bb);
-    public static final Item SWET_SPAWN_EGG = registerSpawnEgg("swet_spawn_egg", AetherEntityTypes.WHITE_SWET, 0x8f9294, 0xe6eaeb);
-    public static final Item BLUE_SWET_SPAWN_EGG = registerSpawnEgg("blue_swet_spawn_egg", AetherEntityTypes.BLUE_SWET, 0x46699e, 0xe6eaeb);
-    public static final Item PURPLE_SWET_SPAWN_EGG = registerSpawnEgg("purple_swet_spawn_egg", AetherEntityTypes.PURPLE_SWET, 0x5d548c, 0xe6eaeb);
-    public static final Item GOLDEN_SWET_SPAWN_EGG = registerSpawnEgg("golden_swet_spawn_egg", AetherEntityTypes.GOLDEN_SWET, 0xc99d36, 0xe6eaeb);
+    public static final Item MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(AetherEntityTypes.MOA, 0xc55c2e4, 0xb3a8bb, misc()));
+    public static final Item SWET_SPAWN_EGG = add("swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.WHITE_SWET, 0x8f9294, 0xe6eaeb, misc()));
+    public static final Item BLUE_SWET_SPAWN_EGG = add("blue_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.BLUE_SWET, 0x46699e, 0xe6eaeb, misc()));
+    public static final Item PURPLE_SWET_SPAWN_EGG = add("purple_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.PURPLE_SWET, 0x5d548c, 0xe6eaeb, misc()));
+    public static final Item GOLDEN_SWET_SPAWN_EGG = add("golden_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.GOLDEN_SWET, 0xc99d36, 0xe6eaeb, misc()));
     public static final Item PHYG_SPAWN_EGG = null;
     public static final Item SHEEPUFF_SPAWN_EGG = null;
 
-    // Accessories
-
-
-    public static final Item AETHER_PORTAL = register("aether_portal", new AetherPortalItem(new Settings().group(AETHER_MISC)));
 
     static {
         for (Item item : new Item[]{
@@ -303,14 +308,6 @@ public class AetherItems {
             }
             return 0xDADADA;
         }, SWET_BALL);
-    }
-
-    private static <T extends Item> T register(String id, T item) {
-        return Registry.register(Registry.ITEM, Aether.locate(id), item);
-    }
-
-    private static Item registerSpawnEgg(String id, EntityType<? extends MobEntity> type, int mainColor, int secColor) {
-        return register(id, new SpawnEggItem(type, mainColor, secColor, new Settings().group(AETHER_MISC)));
     }
 
     public static void init() {
