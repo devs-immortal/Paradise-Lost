@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "the_aether:golden_oak_planks"
+    }
+  },
+  "result": {
+    "item": "the_aether:golden_oak_boat"
+  }
+}

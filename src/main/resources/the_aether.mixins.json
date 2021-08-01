@@ -9,6 +9,8 @@
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
     "block.PlantBlockMixin",
+    "entity.BoatEntityMixin",
+    "entity.BoatEntityTypeMixin",
     "entity.CowEntityMixin",
     "entity.EatCarrotCropGoalMixin",
     "entity.EntityMixin",
