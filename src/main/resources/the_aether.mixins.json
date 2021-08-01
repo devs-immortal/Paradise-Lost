@@ -1,8 +1,7 @@
 {
   "required": true,
-  "minVersion": "0.8",
   "package": "com.aether.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "mixins": [
     "block.AbstractBlockAccessor",
     "block.BlockMixin",
@@ -20,6 +19,7 @@
     "entity.RandomLookGoalMixin",
     "entity.SlimeMoveControlMixin",
     "fluid.FlowableFluidMixin",
+    "item.ArmorMaterialsMixin",
     "item.AxeItemMixin",
     "item.FilledMapMixin",
     "item.HoeItemMixin",
@@ -35,6 +35,7 @@
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
     "structure.FeatureMixin",
+    "util.RarityMixin",
     "village.VillagerProfessionMixin"
   ],
   "client": [

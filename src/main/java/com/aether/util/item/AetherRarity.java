@@ -1,7 +1,9 @@
 package com.aether.util.item;
 
+import com.aether.util.EnumExtender;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Rarity;
 
-public record AetherRarity(Formatting formatting) {
-    public static final AetherRarity AETHER_LOOT = new AetherRarity(Formatting.GREEN);
+public class AetherRarity {
+    public static Rarity AETHER_LOOT = EnumExtender.add(Rarity.class, "AETHER_LOOT", Formatting.GREEN);
 }

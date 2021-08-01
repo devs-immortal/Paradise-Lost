@@ -13,6 +13,7 @@ import com.aether.fluids.AetherFluids;
 import com.aether.items.AetherItems;
 import com.aether.loot.AetherLootNumberProviderTypes;
 import com.aether.registry.TrinketSlotRegistry;
+import com.aether.util.EnumExtender;
 import com.aether.world.AetherGameRules;
 import com.aether.world.dimension.AetherDimension;
 import com.aether.world.feature.AetherConfiguredFeatures;
@@ -24,10 +25,13 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Arrays;
 
 public class Aether implements ModInitializer, ClientModInitializer {
 
@@ -47,14 +51,15 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherConfiguredFeatures.registerFeatures();
         AetherDimension.setupDimension();
         AetherEntityTypes.init();
-        AetherItems.init();
         AetherBlocks.init();
+        AetherItems.init();
         AetherCommands.init();
         AetherBlockEntityTypes.register();
         AetherFluids.init();
         AetherGameRules.init();
         AetherLootNumberProviderTypes.init();
         MoaAPI.init();
+        System.out.println(Arrays.toString(Rarity.values()));
     }
 
     @Override
@@ -66,7 +71,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherArmorModels.registerArmorModels();
         AetherModelLayers.initClient();
         AetherEntityRenderers.initClient();
-        AetherBlocks.initClient();
         //AetherSounds.initializeClient();
     }
 }

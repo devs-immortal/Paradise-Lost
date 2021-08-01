@@ -30,9 +30,8 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 public abstract class BloodstoneItem extends Item {
-
-    public BloodstoneItem() {
-        super(new FabricItemSettings().group(AetherItemGroups.Tools).maxCount(1));
+    public BloodstoneItem(Settings settings) {
+        super(settings);
     }
 
     @Environment(EnvType.CLIENT)
