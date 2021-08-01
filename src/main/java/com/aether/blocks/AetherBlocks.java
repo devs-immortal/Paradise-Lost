@@ -331,11 +331,11 @@ public class AetherBlocks {
 
     static {
         final Item.Settings signSettings = (new Item.Settings()).maxCount(16).group(AetherItemGroups.Blocks);
-        Registry.register(Registry.ITEM, "skyroot_sign", new SignItem(signSettings, AetherBlocks.SKYROOT_SIGN, AetherBlocks.SKYROOT_WALL_SIGN));
-        Registry.register(Registry.ITEM, "golden_oak_sign", new SignItem(signSettings, AetherBlocks.GOLDEN_OAK_SIGN, AetherBlocks.GOLDEN_OAK_WALL_SIGN));
-        Registry.register(Registry.ITEM, "orange_sign", new SignItem(signSettings, AetherBlocks.ORANGE_SIGN, AetherBlocks.ORANGE_WALL_SIGN));
-        Registry.register(Registry.ITEM, "wisteria_sign", new SignItem(signSettings, AetherBlocks.WISTERIA_SIGN, AetherBlocks.WISTERIA_WALL_SIGN));
-        Registry.register(Registry.ITEM, "crystal_sign", new SignItem(signSettings, AetherBlocks.CRYSTAL_SIGN, AetherBlocks.CRYSTAL_WALL_SIGN));
+        Registry.register(Registry.ITEM, Aether.locate("skyroot_sign"), new SignItem(signSettings, AetherBlocks.SKYROOT_SIGN, AetherBlocks.SKYROOT_WALL_SIGN));
+        Registry.register(Registry.ITEM, Aether.locate("golden_oak_sign"), new SignItem(signSettings, AetherBlocks.GOLDEN_OAK_SIGN, AetherBlocks.GOLDEN_OAK_WALL_SIGN));
+        Registry.register(Registry.ITEM, Aether.locate("orange_sign"), new SignItem(signSettings, AetherBlocks.ORANGE_SIGN, AetherBlocks.ORANGE_WALL_SIGN));
+        Registry.register(Registry.ITEM, Aether.locate("wisteria_sign"), new SignItem(signSettings, AetherBlocks.WISTERIA_SIGN, AetherBlocks.WISTERIA_WALL_SIGN));
+        Registry.register(Registry.ITEM, Aether.locate("crystal_sign"), new SignItem(signSettings, AetherBlocks.CRYSTAL_SIGN, AetherBlocks.CRYSTAL_WALL_SIGN));
     }
     //  BlockEntities
     public static final BlockEntityType<FoodBowlBlockEntity> FOOD_BOWL_BLOCK_ENTITY_TYPE = registerBlockEntity("food_bowl", FoodBowlBlockEntity::new, FOOD_BOWL);
@@ -642,10 +642,11 @@ public class AetherBlocks {
                 ANCIENT_FLOWER, ATARAXIA, CLOUDSBLUFF, DRIGEAN, LUMINAR
         );
         putBlocks(RenderLayer.getCutoutMipped(),
-                AETHER_GRASS_BLOCK, ZANITE_CHAIN, AMBROSIUM_LANTERN, INCUBATOR,
+                AETHER_GRASS_BLOCK, ZANITE_CHAIN, AMBROSIUM_LANTERN, INCUBATOR, FOOD_BOWL,
                 SKYROOT_LEAVES, GOLDEN_OAK_LEAVES, ORANGE_LEAVES, CRYSTAL_LEAVES,
                 ROSE_WISTERIA_LEAVES, FROST_WISTERIA_LEAVES, LAVENDER_WISTERIA_LEAVES, BOREAL_WISTERIA_LEAVES,
                 SKYROOT_LEAF_PILE, ROSE_WISTERIA_LEAF_PILE, FROST_WISTERIA_LEAF_PILE, LAVENDER_WISTERIA_LEAF_PILE
+
         );
 
         registerBER(INCUBATOR_BLOCK_ENTITY_TYPE, IncubatorBlockEntityRenderer::new);

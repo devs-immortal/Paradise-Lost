@@ -106,7 +106,7 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
 
                     if (!visited.contains(mut) && !centers.contains(mut)) {
                         BlockState up;
-                        if (context.getWorld().getBlockState(mut).isAir() && !(up = context.getWorld().getBlockState(mut.up())).isAir() && !(up.getBlock() instanceof BaseAercloudBlock) && mut.isWithinDistance(startPos, 24)) {
+                        if (context.getWorld().getBlockState(mut).isAir() && !(up = context.getWorld().getBlockState(mut.up())).isAir() && !(up.getBlock() instanceof BaseAercloudBlock) && mut.isWithinDistance(startPos, 16)) {
                             BlockPos p = new BlockPos(mut);
                             nextStops.add(p);
                             centers.add(p);
@@ -120,7 +120,6 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
             nextStops.remove(stop);
             visited.add(stop);
         }
-
         mut.set(origin);
 
         ChunkRegion region = (ChunkRegion) context.getWorld();
