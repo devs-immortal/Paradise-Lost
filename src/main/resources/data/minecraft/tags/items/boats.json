@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_boat",
+    "the_aether:golden_oak_boat",
+    "the_aether:orange_boat",
+    "the_aether:crystal_boat",
+    "the_aether:wisteria_boat"
+  ]
+}
