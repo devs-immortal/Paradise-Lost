@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_sign",
+    "the_aether:golden_oak_sign",
+    "the_aether:orange_sign",
+    "the_aether:crystal_sign",
+    "the_aether:wisteria_sign"
+  ]
+}
