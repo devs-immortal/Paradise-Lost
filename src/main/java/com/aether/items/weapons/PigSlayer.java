@@ -1,40 +1,41 @@
 package com.aether.items.weapons;
 
-import com.aether.items.tools.AetherSword;
-import com.aether.items.utils.AetherTiers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.particle.ParticleTypes;
 
-public class PigSlayer extends AetherSword {
+import java.util.Random;
 
-    public PigSlayer(Settings settings) {
-        super(AetherTiers.LEGENDARY, -2.4F, 3, settings);
+public class PigSlayer extends SwordItem {
+    public PigSlayer(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings);
     }
 
     @Override
-    public boolean postHit(ItemStack itemStack, LivingEntity entityLiving, LivingEntity entityLiving1) {
-        if (entityLiving == null || entityLiving1 == null) return false;
+    public boolean postHit(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
+        if (target instanceof PigEntity && target.getHealth() >= 0f) {
+            target.hurtTime = 0;
+            target.damage(DamageSource.mob(attacker), 16777216f);
 
-        String s = entityLiving.getType().getTranslationKey().toLowerCase();
-
-        if (s.toLowerCase().contains("pig") || s.toLowerCase().contains("phyg")) {
-            if (entityLiving.getHealth() >= 0.0F) {
-                entityLiving.hurtTime = 0;
-                entityLiving.setHealth(1.0F);
-                entityLiving.damage(DamageSource.mob(entityLiving1), 9999.0F);
+            Random random = target.world.getRandom();
+            for (int i = 0; i < random.nextInt(12) + 24; i++) {
+                double x = random.nextGaussian() * 0.02;
+                double y = random.nextGaussian() * 0.03;
+                double z = random.nextGaussian() * 0.02;
+                target.world.addParticle(ParticleTypes.FLAME,
+                        target.getPos().getX() + (random.nextFloat() * target.getWidth() * 2) - target.getWidth() - x * 5,
+                        target.getPos().getY() + (random.nextFloat() * target.getHeight()) - y * 5,
+                        target.getPos().getZ() + (random.nextFloat() * target.getWidth() * 2) - target.getWidth() - z * 5,
+                        x * 0.75,
+                        y * 1.5,
+                        z * 0.75);
             }
-
-            for (int j = 0; j < 20; ++j) {
-                double d = entityLiving.world.random.nextGaussian() * 0.02D;
-                double d1 = entityLiving.world.random.nextGaussian() * 0.02D;
-                double d2 = entityLiving.world.random.nextGaussian() * 0.02D;
-                double d3 = 5.0D;
-                entityLiving.world.addParticle(ParticleTypes.FLAME, (entityLiving.getPos().getX() + (double) (entityLiving.world.random.nextFloat() * entityLiving.getWidth() * 2.0F)) - (double) entityLiving.getWidth() - d * d3, (entityLiving.getPos().getY() + (double) (entityLiving.world.random.nextFloat() * entityLiving.getHeight())) - d1 * d3, (entityLiving.getPos().getZ() + (double) (entityLiving.world.random.nextFloat() * entityLiving.getWidth() * 2.0F)) - (double) entityLiving.getWidth() - d2 * d3, d, d1, d2);
-            }
-            entityLiving.discard();
         }
-        return super.postHit(itemStack, entityLiving, entityLiving1);
+
+        return super.postHit(itemStack, target, attacker);
     }
 }

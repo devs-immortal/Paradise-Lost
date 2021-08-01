@@ -5,7 +5,7 @@ import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.fluids.AetherFluids;
 import com.aether.items.accessories.AccessoryType;
-import com.aether.items.accessories.ItemAccessory;
+import com.aether.items.accessories.AccessoryItem;
 import com.aether.items.armor.AetherArmorType;
 import com.aether.items.food.DrinkableItem;
 import com.aether.items.food.HealingStone;

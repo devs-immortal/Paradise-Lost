@@ -1,7 +1,6 @@
 package com.aether.items.tools;
 
 import com.aether.items.AetherItems;
-import com.aether.items.utils.AetherTiers;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -14,7 +13,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class AetherAxe extends AxeItem implements IAetherTool {
+/*public class AetherAxe extends AxeItem implements IAetherTool {
 
     private final AetherTiers material;
 
@@ -52,4 +51,4 @@ public class AetherAxe extends AxeItem implements IAetherTool {
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
         return IAetherTool.super.useOnEntity(stack, player, entity, hand);
     }
-}
+}*/

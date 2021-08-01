@@ -6,7 +6,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 
-public class AetherItemSettings extends Item.Settings {
+/*public class AetherItemSettings extends Item.Settings {
     private Formatting formatting = null;
     private int enchantmentGlintColor = 0x8e48e1;
 
@@ -48,4 +48,4 @@ public class AetherItemSettings extends Item.Settings {
     public int getEnchantmentGlintColor() {
         return this.enchantmentGlintColor;
     }
-}
+}*/

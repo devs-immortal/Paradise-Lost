@@ -4,7 +4,6 @@ import com.aether.api.MoaAttributes;
 import com.aether.entities.AetherEntityExtensions;
 import com.aether.entities.passive.MoaEntity;
 import com.aether.items.AetherItems;
-import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.Sets;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;

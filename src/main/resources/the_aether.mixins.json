@@ -28,6 +28,8 @@
     "item.ItemStackMixin",
     "item.MapStateMixin",
     "item.ShovelItemMixin",
+    "item.SwordItemAccessor",
+    "item.ToolMaterialsMixin",
     "screen.EnchantmentScreenHandlerMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
