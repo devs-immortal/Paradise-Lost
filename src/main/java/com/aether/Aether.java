@@ -8,6 +8,7 @@ import com.aether.client.rendering.entity.AetherEntityRenderers;
 import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.commands.AetherCommands;
 import com.aether.entities.AetherEntityTypes;
+import com.aether.entities.vehicle.AetherBoatTypes;
 import com.aether.items.AetherItems;
 import com.aether.registry.TrinketSlotRegistry;
 import com.aether.world.AetherGameRules;
@@ -45,6 +46,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherEntityTypes.init();
         AetherItems.init();
         AetherBlocks.init();
+        AetherBoatTypes.init();
         AetherCommands.init();
         AetherGameRules.init();
         MoaAPI.init();
