@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_wall_sign",
+    "the_aether:golden_oak_wall_sign",
+    "the_aether:orange_wall_sign",
+    "the_aether:crystal_wall_sign",
+    "the_aether:wisteria_wall_sign"
+  ]
+}
