@@ -1,15 +1,13 @@
 package com.aether.items;
 
 import com.aether.Aether;
+import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.fluids.AetherFluids;
 import com.aether.items.accessories.AccessoryType;
 import com.aether.items.accessories.ItemAccessory;
 import com.aether.items.armor.AetherArmorMaterials;
-import com.aether.items.food.DrinkableItem;
-import com.aether.items.food.HealingStone;
-import com.aether.items.food.LifeShard;
-import com.aether.items.food.WhiteApple;
+import com.aether.items.food.*;
 import com.aether.items.resources.AmbrosiumShard;
 import com.aether.items.staff.CloudStaff;
 import com.aether.items.staff.NatureStaff;
@@ -101,49 +99,49 @@ public class AetherItems {
     public static final Item ABSTENTINE_BLOODSTONE = add("abstentine_bloodstone", new AbstentineBloodstoneItem(bloodstone()));
 
     private static Settings armor() { return new Settings().group(AETHER_WEARABLES); }
-    public static final Item ZANITE_HELMET = register("zanite_helmet", new ArmorItem(AetherArmorMaterials.ZANITE, EquipmentSlot.HEAD, armor()));
-    public static final Item ZANITE_CHESTPLATE = register("zanite_chestplate", new ArmorItem(AetherArmorMaterials.ZANITE, EquipmentSlot.CHEST, armor()));
-    public static final Item ZANITE_LEGGINGS = register("zanite_leggings", new ArmorItem(AetherArmorMaterials.ZANITE, EquipmentSlot.LEGS, armor()));
-    public static final Item ZANITE_BOOTS = register("zanite_boots", new ArmorItem(AetherArmorMaterials.ZANITE, EquipmentSlot.FEET, armor()));
+    public static final Item ZANITE_HELMET = add("zanite_helmet", new ArmorItem(AetherArmorMaterials.ZANITE, EquipmentSlot.HEAD, armor()));
+    public static final Item ZANITE_CHESTPLATE = add("zanite_chestplate", new ArmorItem(AetherArmorMaterials.ZANITE, EquipmentSlot.CHEST, armor()));
+    public static final Item ZANITE_LEGGINGS = add("zanite_leggings", new ArmorItem(AetherArmorMaterials.ZANITE, EquipmentSlot.LEGS, armor()));
+    public static final Item ZANITE_BOOTS = add("zanite_boots", new ArmorItem(AetherArmorMaterials.ZANITE, EquipmentSlot.FEET, armor()));
 
     private static Settings gravititeArmor() { return armor().rarity(Rarity.RARE); }
-    public static final Item GRAVITITE_HELMET = register("gravitite_helmet", new ArmorItem(AetherArmorMaterials.GRAVITITE, EquipmentSlot.HEAD, gravititeArmor()));
-    public static final Item GRAVITITE_CHESTPLATE = register("gravitite_chestplate", new ArmorItem(AetherArmorMaterials.GRAVITITE, EquipmentSlot.CHEST, gravititeArmor()));
-    public static final Item GRAVITITE_LEGGINGS = register("gravitite_leggings", new ArmorItem(AetherArmorMaterials.GRAVITITE, EquipmentSlot.LEGS, gravititeArmor()));
-    public static final Item GRAVITITE_BOOTS = register("gravitite_boots", new ArmorItem(AetherArmorMaterials.GRAVITITE, EquipmentSlot.FEET, gravititeArmor()));
+    public static final Item GRAVITITE_HELMET = add("gravitite_helmet", new ArmorItem(AetherArmorMaterials.GRAVITITE, EquipmentSlot.HEAD, gravititeArmor()));
+    public static final Item GRAVITITE_CHESTPLATE = add("gravitite_chestplate", new ArmorItem(AetherArmorMaterials.GRAVITITE, EquipmentSlot.CHEST, gravititeArmor()));
+    public static final Item GRAVITITE_LEGGINGS = add("gravitite_leggings", new ArmorItem(AetherArmorMaterials.GRAVITITE, EquipmentSlot.LEGS, gravititeArmor()));
+    public static final Item GRAVITITE_BOOTS = add("gravitite_boots", new ArmorItem(AetherArmorMaterials.GRAVITITE, EquipmentSlot.FEET, gravititeArmor()));
 
     private static Settings aetherLootArmor() { return armor().rarity(AetherRarity.AETHER_LOOT); }
-    public static final Item NEPTUNE_HELMET = register("neptune_helmet", new ArmorItem(AetherArmorMaterials.NEPTUNE, EquipmentSlot.HEAD, aetherLootArmor()));
-    public static final Item NEPTUNE_CHESTPLATE = register("neptune_chestplate", new ArmorItem(AetherArmorMaterials.NEPTUNE, EquipmentSlot.CHEST, aetherLootArmor()));
-    public static final Item NEPTUNE_LEGGINGS = register("neptune_leggings", new ArmorItem(AetherArmorMaterials.NEPTUNE, EquipmentSlot.LEGS, aetherLootArmor()));
-    public static final Item NEPTUNE_BOOTS = register("neptune_boots", new ArmorItem(AetherArmorMaterials.NEPTUNE, EquipmentSlot.FEET, aetherLootArmor()));
-    public static final Item PHOENIX_HELMET = register("phoenix_helmet", new ArmorItem(AetherArmorMaterials.PHOENIX, EquipmentSlot.HEAD, aetherLootArmor()));
-    public static final Item PHOENIX_CHESTPLATE = register("phoenix_chestplate", new ArmorItem(AetherArmorMaterials.PHOENIX, EquipmentSlot.CHEST, aetherLootArmor()));
-    public static final Item PHOENIX_LEGGINGS = register("phoenix_leggings", new ArmorItem(AetherArmorMaterials.PHOENIX, EquipmentSlot.LEGS, aetherLootArmor()));
-    public static final Item PHOENIX_BOOTS = register("phoenix_boots", new ArmorItem(AetherArmorMaterials.PHOENIX, EquipmentSlot.FEET, aetherLootArmor()));
-    public static final Item OBSIDIAN_HELMET = register("obsidian_helmet", new ArmorItem(AetherArmorMaterials.OBSIDIAN, EquipmentSlot.HEAD, aetherLootArmor()));
-    public static final Item OBSIDIAN_CHESTPLATE = register("obsidian_chestplate", new ArmorItem(AetherArmorMaterials.OBSIDIAN, EquipmentSlot.CHEST, aetherLootArmor()));
-    public static final Item OBSIDIAN_LEGGINGS = register("obsidian_leggings", new ArmorItem(AetherArmorMaterials.OBSIDIAN, EquipmentSlot.LEGS, aetherLootArmor()));
-    public static final Item OBSIDIAN_BOOTS = register("obsidian_boots", new ArmorItem(AetherArmorMaterials.OBSIDIAN, EquipmentSlot.FEET, aetherLootArmor()));
-    public static final Item VALKYRIE_HELMET = register("valkyrie_helmet", new ArmorItem(AetherArmorMaterials.VALKYRIE, EquipmentSlot.HEAD, aetherLootArmor()));
-    public static final Item VALKYRIE_CHESTPLATE = register("valkyrie_chestplate", new ArmorItem(AetherArmorMaterials.VALKYRIE, EquipmentSlot.CHEST, aetherLootArmor()));
-    public static final Item VALKYRIE_LEGGINGS = register("valkyrie_leggings", new ArmorItem(AetherArmorMaterials.VALKYRIE, EquipmentSlot.LEGS, aetherLootArmor()));
-    public static final Item VALKYRIE_BOOTS = register("valkyrie_boots", new ArmorItem(AetherArmorMaterials.VALKYRIE, EquipmentSlot.FEET, aetherLootArmor()));
-    public static final Item SENTRY_BOOTS = register("sentry_boots", new ArmorItem(AetherArmorMaterials.SENTRY, EquipmentSlot.FEET, aetherLootArmor()));
+    public static final Item NEPTUNE_HELMET = add("neptune_helmet", new ArmorItem(AetherArmorMaterials.NEPTUNE, EquipmentSlot.HEAD, aetherLootArmor()));
+    public static final Item NEPTUNE_CHESTPLATE = add("neptune_chestplate", new ArmorItem(AetherArmorMaterials.NEPTUNE, EquipmentSlot.CHEST, aetherLootArmor()));
+    public static final Item NEPTUNE_LEGGINGS = add("neptune_leggings", new ArmorItem(AetherArmorMaterials.NEPTUNE, EquipmentSlot.LEGS, aetherLootArmor()));
+    public static final Item NEPTUNE_BOOTS = add("neptune_boots", new ArmorItem(AetherArmorMaterials.NEPTUNE, EquipmentSlot.FEET, aetherLootArmor()));
+    public static final Item PHOENIX_HELMET = add("phoenix_helmet", new ArmorItem(AetherArmorMaterials.PHOENIX, EquipmentSlot.HEAD, aetherLootArmor()));
+    public static final Item PHOENIX_CHESTPLATE = add("phoenix_chestplate", new ArmorItem(AetherArmorMaterials.PHOENIX, EquipmentSlot.CHEST, aetherLootArmor()));
+    public static final Item PHOENIX_LEGGINGS = add("phoenix_leggings", new ArmorItem(AetherArmorMaterials.PHOENIX, EquipmentSlot.LEGS, aetherLootArmor()));
+    public static final Item PHOENIX_BOOTS = add("phoenix_boots", new ArmorItem(AetherArmorMaterials.PHOENIX, EquipmentSlot.FEET, aetherLootArmor()));
+    public static final Item OBSIDIAN_HELMET = add("obsidian_helmet", new ArmorItem(AetherArmorMaterials.OBSIDIAN, EquipmentSlot.HEAD, aetherLootArmor()));
+    public static final Item OBSIDIAN_CHESTPLATE = add("obsidian_chestplate", new ArmorItem(AetherArmorMaterials.OBSIDIAN, EquipmentSlot.CHEST, aetherLootArmor()));
+    public static final Item OBSIDIAN_LEGGINGS = add("obsidian_leggings", new ArmorItem(AetherArmorMaterials.OBSIDIAN, EquipmentSlot.LEGS, aetherLootArmor()));
+    public static final Item OBSIDIAN_BOOTS = add("obsidian_boots", new ArmorItem(AetherArmorMaterials.OBSIDIAN, EquipmentSlot.FEET, aetherLootArmor()));
+    public static final Item VALKYRIE_HELMET = add("valkyrie_helmet", new ArmorItem(AetherArmorMaterials.VALKYRIE, EquipmentSlot.HEAD, aetherLootArmor()));
+    public static final Item VALKYRIE_CHESTPLATE = add("valkyrie_chestplate", new ArmorItem(AetherArmorMaterials.VALKYRIE, EquipmentSlot.CHEST, aetherLootArmor()));
+    public static final Item VALKYRIE_LEGGINGS = add("valkyrie_leggings", new ArmorItem(AetherArmorMaterials.VALKYRIE, EquipmentSlot.LEGS, aetherLootArmor()));
+    public static final Item VALKYRIE_BOOTS = add("valkyrie_boots", new ArmorItem(AetherArmorMaterials.VALKYRIE, EquipmentSlot.FEET, aetherLootArmor()));
+    public static final Item SENTRY_BOOTS = add("sentry_boots", new ArmorItem(AetherArmorMaterials.SENTRY, EquipmentSlot.FEET, aetherLootArmor()));
 
     private static Settings food() { return new Settings().group(AETHER_FOOD); }
-    public static final Item BLUEBERRY = register("blueberry", new Item(new Settings().group(AETHER_FOOD).rarity(Rarity.RARE).food(AetherFood.BLUEBERRY))); //register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, new Settings().group(AetherItemGroups.Food).food(AetherFood.BLUEBERRY)));
-    public static final Item ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Settings().group(AETHER_FOOD).rarity(Rarity.RARE).food(AetherFood.ENCHANTED_BLUEBERRY)));
-    public static final Item ORANGE = register("orange", new Item(new Settings().group(AETHER_FOOD).food(AetherFood.ORANGE)));
-    public static final Item WHITE_APPLE = register("white_apple", new WhiteApple(new Settings().group(AETHER_FOOD).food(AetherFood.WHITE_APPLE)));
-    public static final Item BLUE_GUMMY_SWET = register("blue_gummy_swet", new Item(LOOT_FOOD.food(AetherFood.GUMMY_SWET)));
-    public static final Item GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new Item(LOOT_FOOD.food(AetherFood.GUMMY_SWET)));
-    public static final Item AETHER_MILK = register("valkyrie_milk", new DrinkableItem(new Settings().rarity(Rarity.EPIC).food(AetherFood.MILK).maxCount(1)));
-    public static final Item HEALING_STONE = register("healing_stone", new HealingStone(new Settings().group(AETHER_FOOD).rarity(Rarity.RARE).food(AetherFood.HEALING_STONE)));
-    public static final Item CANDY_CANE = register("candy_cane", new Item(new Settings().group(AETHER_FOOD).food(AetherFood.GENERIC)));
-    public static final Item GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Settings().group(AETHER_FOOD).food(AetherFood.GENERIC)));
-    public static final Item MOA_MEAT = register("moa_meat", new Item(new FabricItemSettings().group(AETHER_FOOD).food(AetherFood.MOA_MEAT)));
-    public static final Item COOKED_MOA_MEAT = register("moa_meat_cooked", new Item(new FabricItemSettings().group(AETHER_FOOD).food(AetherFood.COOKED_MOA_MEAT)));
+    public static final Item BLUEBERRY = register("blue_berry", new AliasedBlockItem(AetherBlocks.BLUEBERRY_BUSH, food().food(AetherFoodComponent.BLUEBERRY)));
+    public static final Item ENCHANTED_BLUEBERRY = register("enchanted_blueberry", new Item(new Settings().group(AETHER_FOOD).rarity(Rarity.RARE).food(AetherFoodComponent.ENCHANTED_BLUEBERRY)));
+    public static final Item ORANGE = register("orange", new Item(new Settings().group(AETHER_FOOD).food(AetherFoodComponent.ORANGE)));
+    public static final Item WHITE_APPLE = register("white_apple", new WhiteApple(new Settings().group(AETHER_FOOD).food(AetherFoodComponent.WHITE_APPLE)));
+    public static final Item BLUE_GUMMY_SWET = register("blue_gummy_swet", new Item(LOOT_FOOD.food(AetherFoodComponent.GUMMY_SWET)));
+    public static final Item GOLDEN_GUMMY_SWET = register("golden_gummy_swet", new Item(LOOT_FOOD.food(AetherFoodComponent.GUMMY_SWET)));
+    public static final Item AETHER_MILK = register("valkyrie_milk", new DrinkableItem(new Settings().rarity(Rarity.EPIC).food(AetherFoodComponent.MILK).maxCount(1)));
+    public static final Item HEALING_STONE = register("healing_stone", new HealingStone(new Settings().group(AETHER_FOOD).rarity(Rarity.RARE).food(AetherFoodComponent.HEALING_STONE)));
+    public static final Item CANDY_CANE = register("candy_cane", new Item(new Settings().group(AETHER_FOOD).food(AetherFoodComponent.GENERIC)));
+    public static final Item GINGERBREAD_MAN = register("ginger_bread_man", new Item(new Settings().group(AETHER_FOOD).food(AetherFoodComponent.GENERIC)));
+    public static final Item MOA_MEAT = register("moa_meat", new Item(new FabricItemSettings().group(AETHER_FOOD).food(AetherFoodComponent.MOA_MEAT)));
+    public static final Item COOKED_MOA_MEAT = register("moa_meat_cooked", new Item(new FabricItemSettings().group(AETHER_FOOD).food(AetherFoodComponent.COOKED_MOA_MEAT)));
 
     // Misc + Materials
     private static final AetherItemSettings LOOT_ACCESSORY = new AetherItemSettings().rarity(AetherRarity.AETHER_LOOT).group(AETHER_WEARABLES);
@@ -232,29 +230,6 @@ public class AetherItems {
      public static final Item AGILITY_CAPE = register("agility_cape", new ItemAccessory(AccessoryType.CAPE, "agility", new AetherItemSettings().rarity(AetherRarity.AETHER_LOOT)));
      public static final Item INVISIBILITY_CAPE = register("invisibility_cape", new ItemAccessory(AccessoryType.CAPE, new AetherItemSettings().rarity(AetherRarity.AETHER_LOOT)));
      public static final Item AETHER_PORTAL = register("aether_portal", new AetherPortalItem(new Settings().group(AETHER_MISC)));
-
-    public static class AetherFood {
-
-        //  Fruits
-        public static final FoodComponent BLUEBERRY = new FoodComponent.Builder().hunger(2).saturationModifier(0.5F).snack().build();
-        public static final FoodComponent ENCHANTED_BLUEBERRY = new FoodComponent.Builder().hunger(8).saturationModifier(1.0F).snack().build();
-        public static final FoodComponent ORANGE = new FoodComponent.Builder().hunger(5).saturationModifier(0.8F).snack().build();
-
-        //  Meat
-        public static final FoodComponent MOA_MEAT = new FoodComponent.Builder().hunger(3).saturationModifier(0.3F).meat().build();
-        public static final FoodComponent COOKED_MOA_MEAT = new FoodComponent.Builder().hunger(6).saturationModifier(1F).meat().build();
-
-        //  Confectionery
-        public static final FoodComponent GUMMY_SWET = new FoodComponent.Builder().hunger(8).saturationModifier(0.5F).build();
-
-        //  Consumables
-        public static final FoodComponent WHITE_APPLE = new FoodComponent.Builder().alwaysEdible().build();
-        public static final FoodComponent HEALING_STONE = new FoodComponent.Builder().saturationModifier(2.5F).alwaysEdible().snack().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 610, 0), 1.0F).build();
-
-        //  Misc
-        public static final FoodComponent GENERIC = new FoodComponent.Builder().hunger(2).saturationModifier(1.5F).build();
-        public static final FoodComponent MILK = new FoodComponent.Builder().hunger(12).saturationModifier(2F).snack().alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1200, 2), 1F).statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 3600, 4), 1F).statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 3600, 1), 1F).build();
-    }
 
     static {
         for (Item item : new Item[]{
