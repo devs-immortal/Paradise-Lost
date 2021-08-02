@@ -176,7 +176,7 @@ public class SkyrootBucketItem extends Item implements CustomPortalFluidProvider
 
                     this.playEmptySound(playerIn, worldIn, posIn);
                     worldIn.setBlockState(posIn, this.containedBlock.getDefaultState().getBlockState(), 11);
-                    this.CPAonFluidPlaced(worldIn,posIn); //trigger CPA to attempt a portal light.
+                    this.CPAonFluidPlaced(worldIn, posIn); //trigger CPA to attempt a portal light.
                 }
 
                 return true;
