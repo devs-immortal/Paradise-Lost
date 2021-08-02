@@ -1,6 +1,5 @@
 package com.aether.blocks;
 
-import com.aether.Aether;
 import com.aether.blocks.aercloud.*;
 import com.aether.blocks.decorative.AetherDirtPathBlock;
 import com.aether.blocks.decorative.AmbrosiumLanternBlock;
@@ -12,7 +11,6 @@ import com.aether.blocks.mechanical.IncubatorBlock;
 import com.aether.blocks.natural.*;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.RenderUtils;
-import com.aether.items.AetherItemGroups;
 import com.aether.items.AetherItems;
 import com.aether.mixin.block.BlocksAccessor;
 import com.aether.registry.RegistryQueue;
@@ -29,8 +27,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Item;
-import net.minecraft.item.SignItem;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.SignType;
 import net.minecraft.util.math.Direction;
@@ -89,7 +85,7 @@ public class AetherBlocks {
     public static final Block AEROGEL = add("aerogel", new Block(of(Material.SOIL).strength(1f, 1200f).sounds(BlockSoundGroup.GLASS).solidBlock(never).nonOpaque()), translucenRenderLayer);
 
     private static Settings aercloud() { return of(Material.ICE).strength(0.2F).sounds(BlockSoundGroup.WOOL).nonOpaque().solidBlock(never).suffocates(never).blockVision(never); }
-    public static final Block COLD_AERCLOUD = add("cold_aercloud", new BaseAercloudBlock(aercloud().mapColor(MapColor.WHITE)), translucenRenderLayer);
+    public static final Block COLD_AERCLOUD = add("cold_aercloud", new AercloudBlock(aercloud().mapColor(MapColor.WHITE)), translucenRenderLayer);
     public static final Block BLUE_AERCLOUD = add("blue_aercloud", new BlueAercloudBlock(aercloud().mapColor(MapColor.LIGHT_BLUE)), translucenRenderLayer);
     public static final Block PINK_AERCLOUD = add("pink_aercloud", new PinkAercloudBlock(aercloud().mapColor(MapColor.PINK)), translucenRenderLayer);
     public static final Block GOLDEN_AERCLOUD = add("golden_aercloud", new GoldenAercloudBlock(aercloud().mapColor(MapColor.GOLD)), translucenRenderLayer);

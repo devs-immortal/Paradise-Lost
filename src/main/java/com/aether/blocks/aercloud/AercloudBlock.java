@@ -17,12 +17,12 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class BaseAercloudBlock extends TransparentBlock {
+public class AercloudBlock extends TransparentBlock {
 
     private static final BooleanProperty DOUBLE_DROPS = AetherBlockProperties.DOUBLE_DROPS;
     protected static VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 0.01, 16.0);
 
-    public BaseAercloudBlock(Settings properties) {
+    public AercloudBlock(Settings properties) {
         super(properties);
         this.setDefaultState(this.getDefaultState().with(DOUBLE_DROPS, false));
     }

@@ -1,6 +1,6 @@
 package com.aether.mixin.client;
 
-import com.aether.blocks.aercloud.BaseAercloudBlock;
+import com.aether.blocks.aercloud.AercloudBlock;
 import com.aether.fluids.DenseAercloudFluid;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
@@ -35,7 +35,7 @@ public abstract class InGameOverlayRendererMixin {
     private static void renderAercloudOverlay(Sprite sprite, MatrixStack matrices, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
         BlockState overlayState = getInWallBlockState(client.player);
-        if(overlayState != null && overlayState.getBlock() instanceof BaseAercloudBlock) {
+        if(overlayState != null && overlayState.getBlock() instanceof AercloudBlock) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableTexture();
             RenderSystem.setShaderTexture(0, new Identifier("the_aether","textures/block/" + Registry.BLOCK.getId(overlayState.getBlock()).getPath() + ".png"));
@@ -69,7 +69,7 @@ public abstract class InGameOverlayRendererMixin {
             double f = player.getZ() + (double)(((float)((i >> 2) % 2) - 0.5F) * player.getWidth() * 0.8F);
             mutable.set(d, e, f);
             BlockState blockState = player.world.getBlockState(mutable);
-            if (blockState.getBlock() instanceof BaseAercloudBlock) {
+            if (blockState.getBlock() instanceof AercloudBlock) {
                 cir.setReturnValue(blockState);
                 cir.cancel();
             }
