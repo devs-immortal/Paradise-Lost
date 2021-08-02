@@ -28,7 +28,6 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.SignType;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -354,18 +353,6 @@ public class AetherBlocks {
     private static Block add(String id, Block block, Consumer<Block>... additionalActions) {
         System.out.println(id + " kokokokoko");
         return queue.add(() -> locate(id), block, additionalActions);
-    }
-
-    private static SignBlock createSignBlock(BlockState sourceBlock, SignType type) {
-        SignBlock signBlock = new SignBlock(Settings.of(sourceBlock.getMaterial(), sourceBlock.getBlock().getDefaultMapColor()).requiresTool().noCollision().strength(1.0F).sounds(sourceBlock.getSoundGroup()), type);
-        ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(signBlock);
-        return signBlock;
-    }
-
-    private static WallSignBlock createWallSignBlock(BlockState sourceBlock, SignType type, Block standingBlock) {
-        WallSignBlock wallSignBlock = new WallSignBlock(Settings.of(sourceBlock.getMaterial(), sourceBlock.getBlock().getDefaultMapColor()).requiresTool().noCollision().strength(1.0F).sounds(sourceBlock.getSoundGroup()).dropsLike(standingBlock), type);
-        ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(wallSignBlock);
-        return wallSignBlock;
     }
 
     public static void init() {

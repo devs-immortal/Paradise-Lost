@@ -10,8 +10,8 @@ import net.minecraft.particle.ParticleTypes;
 
 import java.util.Random;
 
-public class PigSlayer extends SwordItem {
-    public PigSlayer(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
+public class PigSlayerItem extends SwordItem {
+    public PigSlayerItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
     }
 

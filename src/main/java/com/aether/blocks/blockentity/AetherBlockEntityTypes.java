@@ -13,7 +13,7 @@ public class AetherBlockEntityTypes {
     public static final BlockEntityType<FoodBowlBlockEntity> FOOD_BOWL = create(FoodBowlBlockEntity::new, AetherBlocks.FOOD_BOWL).build();
     public static final BlockEntityType<IncubatorBlockEntity> INCUBATOR = create(IncubatorBlockEntity::new, AetherBlocks.INCUBATOR).build();
 
-    public static void register() {
+    public static void init() {
         Registry.register(Registry.BLOCK_ENTITY_TYPE, locate("food_bowl"), FOOD_BOWL);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, locate("incubator"), INCUBATOR);
 

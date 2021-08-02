@@ -8,10 +8,10 @@ import com.aether.items.accessories.AccessoryItem;
 import com.aether.items.accessories.AccessoryType;
 import com.aether.items.armor.AetherArmorMaterials;
 import com.aether.items.food.*;
-import com.aether.items.resources.AmbrosiumShard;
-import com.aether.items.resources.StackableVariantColorizer;
-import com.aether.items.staff.CloudStaff;
-import com.aether.items.staff.NatureStaff;
+import com.aether.items.resources.AmbrosiumShardItem;
+import com.aether.items.utils.StackableVariantColorizer;
+import com.aether.items.staff.CloudStaffItem;
+import com.aether.items.staff.NatureStaffItem;
 import com.aether.items.tools.*;
 import com.aether.items.tools.AetherToolMaterials;
 import com.aether.items.weapons.*;
@@ -41,7 +41,7 @@ import static com.aether.util.item.AetherRarity.*;
 import static net.minecraft.entity.EquipmentSlot.*;
 import static net.minecraft.util.Rarity.*;
 
-@SuppressWarnings({"x", "InstantiationOfUtilityClass", "AccessStaticViaInstance"})
+@SuppressWarnings({"unused", "InstantiationOfUtilityClass", "AccessStaticViaInstance"})
 public class AetherItems {
     private static final RegistryQueue<Item> queue = new RegistryQueue<>(Registry.ITEM, 384);
 
@@ -69,7 +69,7 @@ public class AetherItems {
     public static final Item ZANITE_GEM = add("zanite_gemstone", new Item(resource()));
     public static final Item ZANITE_FRAGMENT = add("zanite_fragment", new Item(resource()));
     public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource()));
-    public static final Item AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShard(resource()));
+    public static final Item AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShardItem(resource()));
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource()));
     public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource()), compostable65);
     public static final Item SWET_BALL = add("swet_ball", new Item(resource()), swetColor);
@@ -94,22 +94,22 @@ public class AetherItems {
     public static final Item VALKYRIE_SHOVEL = add("valkyrie_shovel", new ShovelItem(AToolMat.VALKYRIE, 1.5f, -3f,  tool(AETHER_LOOT)));
     public static final Item VALKYRIE_PICKAXE = add("valkyrie_pickaxe", new AetherPickaxeItem(AToolMat.VALKYRIE, 1, -2.8f, tool(AETHER_LOOT)));
     public static final Item VALKYRIE_AXE = add("valkyrie_axe", new AetherAxeItem(AToolMat.VALKYRIE, 4f, -2.9f, tool(AETHER_LOOT)));
-    public static final Item VALKYRIE_LANCE = add("valkyrie_lance", new ValkyrieLance(AToolMat.VALKYRIE, 10, -3f, 6f, 4f, tool(EPIC)));
+    public static final Item VALKYRIE_LANCE = add("valkyrie_lance", new ValkyrieLanceItem(AToolMat.VALKYRIE, 10, -3f, 6f, 4f, tool(EPIC)));
     public static final Item VALKYRIE_HOE = add("valkyrie_hoe", new AetherHoeItem(AToolMat.VALKYRIE, 1, 5f, tool(AETHER_LOOT)));
 
-    public static final Item GOLDEN_DART = add("golden_dart", new Dart(tool()));
-    public static final Item ENCHANTED_DART = add("enchanted_dart", new Dart(tool(RARE)));
-    public static final Item POISON_DART = add("poison_dart", new Dart(tool()));
-    public static final Item GOLDEN_DART_SHOOTER = add("golden_dart_shooter", new DartShooter((Dart) GOLDEN_DART, tool().maxCount(1)));
-    public static final Item ENCHANTED_DART_SHOOTER = add("enchanted_dart_shooter", new DartShooter((Dart) ENCHANTED_DART, tool(RARE).maxCount(1)));
-    public static final Item POISON_DART_SHOOTER = add("poison_dart_shooter", new DartShooter((Dart) POISON_DART, tool().maxCount(1)));
+    public static final Item GOLDEN_DART = add("golden_dart", new DartItem(tool()));
+    public static final Item ENCHANTED_DART = add("enchanted_dart", new DartItem(tool(RARE)));
+    public static final Item POISON_DART = add("poison_dart", new DartItem(tool()));
+    public static final Item GOLDEN_DART_SHOOTER = add("golden_dart_shooter", new DartShooterItem((DartItem) GOLDEN_DART, tool().maxCount(1)));
+    public static final Item ENCHANTED_DART_SHOOTER = add("enchanted_dart_shooter", new DartShooterItem((DartItem) ENCHANTED_DART, tool(RARE).maxCount(1)));
+    public static final Item POISON_DART_SHOOTER = add("poison_dart_shooter", new DartShooterItem((DartItem) POISON_DART, tool().maxCount(1)));
 
     public static final Item PHOENIX_BOW = add("phoenix_bow", new BowItem(tool().maxDamage(384)));
     public static final Item FLAMING_SWORD = add("flaming_sword", new FlamingSwordItem(AToolMat.LEGENDARY, 4, -2.4f, tool(AETHER_LOOT)));
     public static final Item LIGHTNING_SWORD = add("lightning_sword", new LightningSwordItem(AToolMat.LEGENDARY, 4, -2.4f, tool(AETHER_LOOT)));
     public static final Item HOLY_SWORD = add("holy_sword", new HolySwordItem(AToolMat.LEGENDARY, 4, -2.4f, tool(AETHER_LOOT)));
-    public static final Item VAMPIRE_BLADE = add("vampire_blade", new VampireBlade(AToolMat.LEGENDARY, 3, -2.4f, tool(AETHER_LOOT)));
-    public static final Item PIG_SLAYER = add("pig_slayer", new PigSlayer(AToolMat.LEGENDARY, 3, -2.4f, tool(AETHER_LOOT)));
+    public static final Item VAMPIRE_BLADE = add("vampire_blade", new VampireBladeItem(AToolMat.LEGENDARY, 3, -2.4f, tool(AETHER_LOOT)));
+    public static final Item PIG_SLAYER = add("pig_slayer", new PigSlayerItem(AToolMat.LEGENDARY, 3, -2.4f, tool(AETHER_LOOT)));
     public static final Item CANDY_CANE_SWORD = add("candy_cane_sword", new CandyCaneSwordItem(AToolMat.CANDY, 3, -2f, tool()));
 
     public static final Item CLOUD_PARACHUTE = add("cold_parachute", new ParachuteItem(tool().maxCount(1)));
@@ -164,7 +164,7 @@ public class AetherItems {
     public static final Item GRAVITITE_GLOVES = add("gravitite_gloves", new AccessoryItem(AccessoryType.GLOVES, 4f, wearble(RARE)));
     public static final Item NEPTUNE_GLOVES = add("neptune_gloves", new AccessoryItem(AccessoryType.GLOVES, 4.5f, wearble(AETHER_LOOT)));
     public static final Item PHOENIX_GLOVES = add("phoenix_gloves", new AccessoryItem(AccessoryType.GLOVES, "phoenix", 4f, wearble(AETHER_LOOT)));
-    public static final Item OBSIDIAN_GLOVES = add("obsidian_gloves", new AccessoryItem(AccessoryType.GLOVES, 5f, wearble()));
+    public static final Item OBSIDIAN_GLOVES = add("obsidian_gloves", new AccessoryItem(AccessoryType.GLOVES, 5f, wearble(AETHER_LOOT)));
     public static final Item VALKYRIE_GLOVES = add("valkyrie_gloves", new AccessoryItem(AccessoryType.GLOVES, "valkyrie", 5f, wearble(AETHER_LOOT)));
 
     public static final Item IRON_RING = add("iron_ring", new AccessoryItem(AccessoryType.RING, wearble()));
@@ -207,10 +207,10 @@ public class AetherItems {
 
     private static Settings misc() { return new Settings().group(AETHER_MISC); }
     public static final Item LIFE_SHARD = add("life_shard", new LifeShard(misc().rarity(AETHER_LOOT).maxCount(1)));
-    public static final Item CLOUD_STAFF = add("cloud_staff", new CloudStaff(misc().maxCount(1).maxDamage(60)));
-    public static final Item NATURE_STAFF = add("nature_staff", new NatureStaff(misc().maxCount(1).maxDamage(100)));
-    public static final Item MOA_EGG = add("moa_egg", new MoaEgg(misc().maxCount(1)));
-    public static final Item LORE_BOOK = add("lore_book", new BookOfLore(misc().maxCount(1)));
+    public static final Item CLOUD_STAFF = add("cloud_staff", new CloudStaffItem(misc().maxCount(1).maxDamage(60)));
+    public static final Item NATURE_STAFF = add("nature_staff", new NatureStaffItem(misc().maxCount(1).maxDamage(100)));
+    public static final Item MOA_EGG = add("moa_egg", new MoaEggItem(misc().maxCount(1)));
+    public static final Item LORE_BOOK = add("lore_book", new BookOfLoreItem(misc().maxCount(1)));
     public static final Item SKYROOT_BUCKET = add("skyroot_bucket", new SkyrootBucketItem(misc().maxCount(16)));
 
     private static Settings skyrootBucket() { return misc().maxCount(1).recipeRemainder(SKYROOT_BUCKET); }
@@ -218,13 +218,6 @@ public class AetherItems {
     public static final Item SKYROOT_MILK_BUCKET = add("skyroot_milk_bucket", new SkyrootBucketItem(skyrootBucket()));
     public static final Item SKYROOT_POISON_BUCKET = add("skyroot_poison_bucket", new SkyrootBucketItem(skyrootBucket()));
     public static final Item SKYROOT_REMEDY_BUCKET = add("skyroot_remedy_bucket", new SkyrootBucketItem(skyrootBucket()));
-
-    private static Settings boat() { return misc().maxCount(1); }
-    public static final Item SKYROOT_BOAT = add("skyroot_boat", new BoatItem(AetherBoatTypes.SKYROOT, boat()));
-    public static final Item GOLDEN_OAK_BOAT = add("golden_oak_boat", new BoatItem(AetherBoatTypes.GOLDEN_OAK, boat()));
-    public static final Item ORANGE_BOAT = add("orange_boat", new BoatItem(AetherBoatTypes.ORANGE, boat()));
-    public static final Item CRYSTAL_BOAT = add("crystal_boat", new BoatItem(AetherBoatTypes.CRYSTAL, boat()));
-    public static final Item WISTERIA_BOAT = add("wisteria_boat", new BoatItem(AetherBoatTypes.WISTERIA, boat()));
 
     public static final Item QUICKSOIL_VIAL = add("quicksoil_vial", new VialItem(Fluids.EMPTY, misc()));
     public static final Item AERCLOUD_VIAL = add("aercloud_vial", new VialItem(AetherFluids.DENSE_AERCLOUD, misc()));
@@ -365,6 +358,7 @@ public class AetherItems {
     public static final Item SKYROOT_BUTTON = add(ABlock.SKYROOT_BUTTON, block());
     public static final Item SKYROOT_PRESSURE_PLATE = add(ABlock.SKYROOT_PRESSURE_PLATE, block());
     public static final Item SKYROOT_SIGN = add(ABlock.SKYROOT_SIGN, new SignItem(block().maxCount(16), ABlock.SKYROOT_SIGN, ABlock.SKYROOT_WALL_SIGN));
+    public static final Item SKYROOT_BOAT = add("skyroot_boat", new BoatItem(AetherBoatTypes.SKYROOT, block().maxCount(1)));
 
     public static final Item GOLDEN_OAK_SAPLING = add(ABlock.GOLDEN_OAK_SAPLING, block(), compostable30);
     public static final Item GOLDEN_OAK_LOG = add(ABlock.GOLDEN_OAK_LOG, block());
@@ -382,6 +376,7 @@ public class AetherItems {
     public static final Item GOLDEN_OAK_BUTTON = add(ABlock.GOLDEN_OAK_BUTTON, block());
     public static final Item GOLDEN_OAK_PRESSURE_PLATE = add(ABlock.GOLDEN_OAK_PRESSURE_PLATE, block());
     public static final Item GOLDEN_OAK_SIGN = add(ABlock.GOLDEN_OAK_SIGN, new SignItem(block().maxCount(16), ABlock.GOLDEN_OAK_SIGN, ABlock.GOLDEN_OAK_WALL_SIGN));
+    public static final Item GOLDEN_OAK_BOAT = add("golden_oak_boat", new BoatItem(AetherBoatTypes.GOLDEN_OAK, block().maxCount(1)));
 
     public static final Item ORANGE_SAPLING = add(ABlock.ORANGE_SAPLING, block(), compostable30);
     public static final Item ORANGE_LOG = add(ABlock.ORANGE_LOG, block());
@@ -399,6 +394,7 @@ public class AetherItems {
     public static final Item ORANGE_BUTTON = add(ABlock.ORANGE_BUTTON, block());
     public static final Item ORANGE_PRESSURE_PLATE = add(ABlock.ORANGE_PRESSURE_PLATE, block());
     public static final Item ORANGE_SIGN = add(ABlock.ORANGE_SIGN, new SignItem(block().maxCount(16), ABlock.ORANGE_SIGN, ABlock.ORANGE_WALL_SIGN));
+    public static final Item ORANGE_BOAT = add("orange_boat", new BoatItem(AetherBoatTypes.ORANGE, block().maxCount(1)));
 
     public static final Item CRYSTAL_SAPLING = add(ABlock.CRYSTAL_SAPLING, block(), compostable50);
     public static final Item CRYSTAL_LOG = add(ABlock.CRYSTAL_LOG, block());
@@ -416,6 +412,7 @@ public class AetherItems {
     public static final Item CRYSTAL_BUTTON = add(ABlock.CRYSTAL_BUTTON, block());
     public static final Item CRYSTAL_PRESSURE_PLATE = add(ABlock.CRYSTAL_PRESSURE_PLATE, block());
     public static final Item CRYSTAL_SIGN = add(ABlock.CRYSTAL_SIGN, new SignItem(block().maxCount(16), ABlock.CRYSTAL_SIGN, ABlock.CRYSTAL_WALL_SIGN));
+    public static final Item CRYSTAL_BOAT = add("crystal_boat", new BoatItem(AetherBoatTypes.CRYSTAL, block().maxCount(1)));
 
     public static final Item WISTERIA_LOG = add(ABlock.WISTERIA_LOG, block());
     public static final Item WISTERIA_WOOD = add(ABlock.WISTERIA_WOOD, block());
@@ -431,6 +428,7 @@ public class AetherItems {
     public static final Item WISTERIA_BUTTON = add(ABlock.WISTERIA_BUTTON, block());
     public static final Item WISTERIA_PRESSURE_PLATE = add(ABlock.WISTERIA_PRESSURE_PLATE, block());
     public static final Item WISTERIA_SIGN = add(ABlock.WISTERIA_SIGN, new SignItem(block().maxCount(16), ABlock.WISTERIA_SIGN, ABlock.WISTERIA_WALL_SIGN));
+    public static final Item WISTERIA_BOAT = add("wisteria_boat", new BoatItem(AetherBoatTypes.WISTERIA, block().maxCount(1)));
 
     public static final Item ROSE_WISTERIA_LEAVES = add(ABlock.ROSE_WISTERIA_LEAVES, block(), compostable30);
     public static final Item ROSE_WISTERIA_LEAF_PILE = add(ABlock.ROSE_WISTERIA_LEAF_PILE, block(), compostable30);

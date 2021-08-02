@@ -10,9 +10,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class AmbrosiumShard extends Item {
+public class AmbrosiumShardItem extends Item {
 
-    public AmbrosiumShard(Settings settings) {
+    public AmbrosiumShardItem(Settings settings) {
         super(settings);
     }
 

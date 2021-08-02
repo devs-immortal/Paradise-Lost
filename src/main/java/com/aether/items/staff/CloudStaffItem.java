@@ -7,9 +7,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class CloudStaff extends Item {
+public class CloudStaffItem extends Item {
 
-    public CloudStaff(Settings settings) {
+    public CloudStaffItem(Settings settings) {
         super(settings);
     }
 

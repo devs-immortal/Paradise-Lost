@@ -10,8 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class Dart extends Item {
-    public Dart(Settings settings) {
+public class DartItem extends Item {
+    public DartItem(Settings settings) {
         super(settings);
     }
 

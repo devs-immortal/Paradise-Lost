@@ -49,7 +49,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherEntityTypes.init();
         AetherBlocks.init();
         AetherItems.init();
-        AetherBlockEntityTypes.register();
+        AetherBlockEntityTypes.init();
         AetherFluids.init();
         AetherBoatTypes.init();
         AetherCommands.init();

@@ -12,11 +12,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class DartShooter extends Item {
+public class DartShooterItem extends Item {
 
-    private final Dart ammo;
+    private final DartItem ammo;
 
-    public DartShooter(Dart ammo, Settings settings) {
+    public DartShooterItem(DartItem ammo, Settings settings) {
         super(settings);
         this.ammo = ammo;
     }

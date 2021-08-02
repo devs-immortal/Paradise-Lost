@@ -1,4 +1,4 @@
-package com.aether.items.resources;
+package com.aether.items.utils;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.item.Item;

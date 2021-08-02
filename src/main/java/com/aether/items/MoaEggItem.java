@@ -21,8 +21,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MoaEgg extends Item {
-    public MoaEgg(Settings settings) {
+public class MoaEggItem extends Item {
+    public MoaEggItem(Settings settings) {
         super(settings);
     }
 

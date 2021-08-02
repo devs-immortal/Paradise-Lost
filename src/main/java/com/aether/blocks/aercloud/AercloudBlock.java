@@ -1,7 +1,6 @@
 package com.aether.blocks.aercloud;
 
 import com.aether.blocks.AetherBlockProperties;
-import com.aether.blocks.AetherBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;

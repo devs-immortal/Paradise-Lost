@@ -11,11 +11,11 @@ import net.minecraft.item.ToolMaterial;
 
 import java.util.UUID;
 
-public class ValkyrieLance extends SwordItem {
+public class ValkyrieLanceItem extends SwordItem {
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("E70BE4E9-B163-4CC1-8848-F860B0BC02FC");
     private static final UUID ATTACK_RANGE_MODIFIER_ID = UUID.fromString("7CB7BC58-D3BA-40AE-BC95-F8C38fE144FF");
 
-    public ValkyrieLance(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, float reach, float attackRange, Settings settings) {
+    public ValkyrieLanceItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, float reach, float attackRange, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.putAll(((SwordItemAccessor) this).getAttributeModifiers());

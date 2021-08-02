@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 
-public class VampireBlade extends SwordItem {
-    public VampireBlade(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
+public class VampireBladeItem extends SwordItem {
+    public VampireBladeItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
     }
 

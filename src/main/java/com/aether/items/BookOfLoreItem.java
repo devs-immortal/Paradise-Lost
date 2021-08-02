@@ -16,8 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BookOfLore extends Item {
-    public BookOfLore(Settings settings) {
+public class BookOfLoreItem extends Item {
+    public BookOfLoreItem(Settings settings) {
         super(settings);
     }
 
