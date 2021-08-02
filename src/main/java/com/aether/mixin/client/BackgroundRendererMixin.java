@@ -1,6 +1,6 @@
 package com.aether.mixin.client;
 
-import com.aether.blocks.aercloud.DenseAercloudFluid;
+import com.aether.fluids.DenseAercloudFluid;
 import com.aether.util.RegistryUtil;
 import com.aether.world.dimension.AetherDimension;
 import net.fabricmc.api.EnvType;

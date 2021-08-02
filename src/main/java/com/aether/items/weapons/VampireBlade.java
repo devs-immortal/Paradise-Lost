@@ -1,23 +1,21 @@
 package com.aether.items.weapons;
 
-import com.aether.items.tools.AetherSword;
-import com.aether.items.utils.AetherTiers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolMaterial;
 
-public class VampireBlade extends AetherSword {
-
-    public VampireBlade(Settings settings) {
-        super(AetherTiers.LEGENDARY, -2.4F, 3, settings);
+public class VampireBlade extends SwordItem {
+    public VampireBlade(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings);
     }
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (!(attacker instanceof PlayerEntity)) return super.postHit(stack, target, attacker);
-
-        PlayerEntity player = (PlayerEntity) attacker;
-        if (player.getHealth() < player.getMaxHealth()) player.heal(1.0F);
+        if (attacker instanceof PlayerEntity player && player.getHealth() < player.getMaxHealth()) {
+            player.heal(1.0F);
+        }
         return super.postHit(stack, target, attacker);
     }
 }

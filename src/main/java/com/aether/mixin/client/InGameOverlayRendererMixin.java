@@ -1,7 +1,7 @@
 package com.aether.mixin.client;
 
 import com.aether.blocks.aercloud.BaseAercloudBlock;
-import com.aether.blocks.aercloud.DenseAercloudFluid;
+import com.aether.fluids.DenseAercloudFluid;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

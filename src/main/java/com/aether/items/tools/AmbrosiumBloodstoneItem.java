@@ -12,6 +12,10 @@ import net.minecraft.util.math.MathHelper;
 import java.util.List;
 
 public class AmbrosiumBloodstoneItem extends BloodstoneItem {
+    public AmbrosiumBloodstoneItem(Settings settings) {
+        super(settings);
+    }
+
     @Override
     protected List<Text> createTooltip(LivingEntity entity) {
         return ImmutableList.of(

@@ -1,7 +1,6 @@
 package com.aether.items.tools;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.items.utils.AetherTiers;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
@@ -17,7 +16,7 @@ import net.minecraft.util.Hand;
 
 import java.util.Map;
 
-public class AetherHoe extends HoeItem implements IAetherTool {
+/*public class AetherHoe extends HoeItem implements IAetherTool {
 
     protected static final Map<Block, BlockState> convertibleBlocks = Maps.newHashMap(ImmutableMap.of(
             Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(),
@@ -64,4 +63,4 @@ public class AetherHoe extends HoeItem implements IAetherTool {
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
         return IAetherTool.super.useOnEntity(stack, player, entity, hand);
     }
-}
+}*/

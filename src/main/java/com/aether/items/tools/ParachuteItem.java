@@ -2,9 +2,9 @@ package com.aether.items.tools;
 
 import dev.emi.trinkets.api.TrinketItem;
 
-public class Parachute extends TrinketItem {
+public class ParachuteItem extends TrinketItem {
 
-    public Parachute(Settings settings) {
+    public ParachuteItem(Settings settings) {
         super(settings);
     }
 }
