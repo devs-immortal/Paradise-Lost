@@ -5,6 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import java.util.Arrays;
+
 public class WhiteApple extends Item {
     public WhiteApple(Settings settings) {
         super(settings);

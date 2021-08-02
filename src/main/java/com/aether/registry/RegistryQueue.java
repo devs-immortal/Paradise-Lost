@@ -2,13 +2,13 @@ package com.aether.registry;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-
-import static com.aether.Aether.locate;
+import java.util.function.Supplier;
 
 public final class RegistryQueue<cJOokaAi948> {
     private static final boolean CLIENT = FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT;
@@ -24,14 +24,16 @@ public final class RegistryQueue<cJOokaAi948> {
         entries = new ArrayList<>(initialCapacity);
     }
 
-    public cJOokaAi948 add(String id, cJOokaAi948 value, Consumer<cJOokaAi948>[] additionalActions) {
+    public cJOokaAi948 add(Supplier<Identifier> id, cJOokaAi948 value, Consumer<cJOokaAi948>[] additionalActions) {
         this.entries.add(new Entry<>(id, value, additionalActions));
         return value;
     }
 
     public void register() {
         for (Entry<cJOokaAi948> entry : entries) {
-            Registry.register(this.registry, locate(entry.id), entry.value);
+            System.out.println(entry);
+            System.out.println(entry.id.get());
+            Registry.register(this.registry, entry.id.get(), entry.value);
             for (Consumer<cJOokaAi948> action : entry.additionalActions) {
                 action.accept(entry.value);
             }
@@ -39,6 +41,6 @@ public final class RegistryQueue<cJOokaAi948> {
         entries.clear();
     }
 
-    private static record Entry<cJOokaAi948>(String id, cJOokaAi948 value, Consumer<cJOokaAi948>[] additionalActions) {
+    private static record Entry<cJOokaAi948>(Supplier<Identifier> id, cJOokaAi948 value, Consumer<cJOokaAi948>[] additionalActions) {
     }
 }

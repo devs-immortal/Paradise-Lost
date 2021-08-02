@@ -12,6 +12,6 @@ public class ZaniteSwordItem extends SwordItem {
 
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-        return super.getMiningSpeedMultiplier(stack, state) + ZaniteTool.calculateSpeedBoost(zstack);
+        return super.getMiningSpeedMultiplier(stack, state) + ZaniteTool.calculateSpeedBoost(stack);
     }
 }

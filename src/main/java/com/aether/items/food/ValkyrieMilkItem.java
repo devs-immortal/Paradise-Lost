@@ -8,9 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-public class DrinkableItem extends Item {
-
-    public DrinkableItem(Settings settings) {
+public class ValkyrieMilkItem extends Item {
+    public ValkyrieMilkItem(Settings settings) {
         super(settings);
     }
 
@@ -21,11 +20,7 @@ public class DrinkableItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        if(!(user instanceof PlayerEntity) || !((PlayerEntity) user).isCreative()) {
-            if (this == AetherItems.AETHER_MILK) {
-                return new ItemStack(AetherItems.QUICKSOIL_VIAL);
-            }
-        }
-        return super.finishUsing(stack, world, user);
+        return user instanceof PlayerEntity player && player.getAbilities().creativeMode ?
+                super.finishUsing(stack, world, user) : new ItemStack(AetherItems.QUICKSOIL_VIAL);
     }
 }

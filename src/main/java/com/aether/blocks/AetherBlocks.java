@@ -24,6 +24,7 @@ import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.Item;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
@@ -32,6 +33,7 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.function.Consumer;
 
+import static com.aether.Aether.locate;
 import static com.aether.registry.RegistryQueue.onClient;
 import static net.minecraft.block.AbstractBlock.Settings.copy;
 import static net.minecraft.block.AbstractBlock.Settings.of;
@@ -55,6 +57,7 @@ public class AetherBlocks {
     private static final Consumer<Block> translucenRenderLayer = onClient(block -> RenderLayers.BLOCKS.put(block, RenderLayer.getTranslucent()));
     private static final Consumer<Block> cutoutRenderLayer = onClient(block -> RenderLayers.BLOCKS.put(block, RenderLayer.getCutout()));
     private static final Consumer<Block> cutoutMippedRenderLayer = onClient(block -> RenderLayers.BLOCKS.put(block, RenderLayer.getCutoutMipped()));
+
 
 
     /*
@@ -212,7 +215,7 @@ public class AetherBlocks {
     public static final Block ORANGE_WOOD = add("orange_wood", new PillarBlock(orange.wood()), flammableLog);
     public static final Block STRIPPED_ORANGE_LOG = add("stripped_orange_log", new PillarBlock(orange.strippedLog()), flammableLog);
     public static final Block STRIPPED_ORANGE_WOOD = add("stripped_orange_wood", new PillarBlock(orange.strippedWood()), flammableLog);
-    public static final Block ORANGE_LEAVES = add("orange_leaves", new AetherFruitingLeaves(orange.leaves().sounds(BlockSoundGroup.AZALEA_LEAVES), AetherItems.ORANGE), flammableLeaves, cutoutMippedRenderLayer);
+    public static final Block ORANGE_LEAVES = add("orange_leaves", new AetherFruitingLeaves(orange.leaves().sounds(BlockSoundGroup.AZALEA_LEAVES), () -> AetherItems.ORANGE), flammableLeaves, cutoutMippedRenderLayer);
     public static final Block ORANGE_PLANKS = add("orange_planks", new Block(orange.planks()), flammablePlanks);
     public static final Block ORANGE_FENCE = add("orange_fence", new FenceBlock(orange.planks()), flammablePlanks);
     public static final Block ORANGE_FENCE_GATE = add("orange_fence_gate", new FenceGateBlock(orange.planks()), flammablePlanks);
@@ -335,7 +338,8 @@ public class AetherBlocks {
     @SafeVarargs
     @SuppressWarnings("RedundantSuppression")
     private static Block add(String id, Block block, Consumer<Block>... additionalActions) {
-        return queue.add(id, block, additionalActions);
+        System.out.println(id + " kokokokoko");
+        return queue.add(() -> locate(id), block, additionalActions);
     }
 
     public static void init() {

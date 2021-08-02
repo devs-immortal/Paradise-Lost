@@ -4,6 +4,7 @@ import com.aether.api.MoaAttributes;
 import com.aether.entities.AetherEntityExtensions;
 import com.aether.entities.passive.MoaEntity;
 import com.aether.items.AetherItems;
+import com.aether.items.tools.AetherToolMaterials;
 import com.google.common.collect.Sets;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
@@ -53,12 +54,12 @@ public abstract class MixinLivingEntity extends Entity implements AetherEntityEx
     @Shadow
     public abstract boolean hasStatusEffect(StatusEffect effect);
 
+    @SuppressWarnings("ConstantConditions")
     @ModifyVariable(method = "travel", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/entity/LivingEntity;isTouchingWater()Z"))
     private double changeGravity(double gravity) {
         boolean isFalling = this.getVelocity().y <= 0.0D;
 
-        if ((Object) this instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity) (Object) this;
+        if ((Object) this instanceof PlayerEntity playerEntity) {
             Optional<TrinketComponent> componentOptional = TrinketsApi.getTrinketComponent(playerEntity);
 
             if (componentOptional.isPresent()) {
@@ -79,19 +80,19 @@ public abstract class MixinLivingEntity extends Entity implements AetherEntityEx
         return gravity;
     }
 
-    @Inject(at = @At("RETURN"), method = "damage")
-    void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "damage", at = @At("RETURN"))
+    private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         Entity attacker = source.getAttacker();
         if (cir.getReturnValue() && attacker instanceof LivingEntity) {
             Item item = ((LivingEntity) attacker).getMainHandStack().getItem();
-            if (item instanceof ToolItem && ((ToolItem) item).getMaterial() == AetherTiers.GRAVITITE.getDefaultTier()) {
+            if (item instanceof ToolItem tool && tool.getMaterial() == AetherToolMaterials.GRAVITITE) {
                 this.addVelocity(0, amount / 20 + 0.1, 0);
             }
         }
     }
 
-    @Inject(at = @At("TAIL"), method = "tick")
-    public void tick(CallbackInfo ci){
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void tick(CallbackInfo ci){
         if(flipped){
             gravFlipTime++;
             if(gravFlipTime > 20){
@@ -105,8 +106,9 @@ public abstract class MixinLivingEntity extends Entity implements AetherEntityEx
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Inject(method = "getMaxHealth", at = @At("HEAD"), cancellable = true)
-    public void getMoaMaxHealth(CallbackInfoReturnable<Float> cir) {
+    private void getMoaMaxHealth(CallbackInfoReturnable<Float> cir) {
         if((Object) this instanceof MoaEntity moa) {
             var genes = moa.getGenes();
             cir.setReturnValue(genes.isInitialized() ? genes.getAttribute(MoaAttributes.MAX_HEALTH) : 40F);

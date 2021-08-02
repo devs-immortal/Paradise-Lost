@@ -24,15 +24,16 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class AetherFruitingLeaves extends AetherLeavesBlock {
 
     public static final IntProperty GROWTH = IntProperty.of("growth", 0, 2);
     public static final BooleanProperty CAPPED = BooleanProperty.of("capped");
     public static final BooleanProperty NATURAL = BooleanProperty.of("natural");
-    private final Item fruit;
+    private final Supplier<Item> fruit;
 
-    public AetherFruitingLeaves(Settings settings, Item fruit) {
+    public AetherFruitingLeaves(Settings settings, Supplier<Item> fruit) {
         super(settings, true);
         this.fruit = fruit;
         setDefaultState(getDefaultState().with(GROWTH, 0).with(CAPPED, false).with(NATURAL, false));
@@ -62,7 +63,7 @@ public class AetherFruitingLeaves extends AetherLeavesBlock {
                         while (!world.isAir(pos.down(dropBlocks + 1)) && dropBlocks < 16 && world.getBlockState(pos.down(dropBlocks)).isOf(this)) {
                             dropBlocks++;
                         }
-                        world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() - (dropBlocks + 0.25), pos.getZ() + 0.5, new ItemStack(fruit), 0, 0, 0));
+                        world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() - (dropBlocks + 0.25), pos.getZ() + 0.5, new ItemStack(fruit.get()), 0, 0, 0));
                         world.playSound(null, pos, SoundEvents.BLOCK_CANDLE_BREAK, SoundCategory.BLOCKS, 1F, 1F);
                     }
                     world.setBlockState(pos, getDefaultState().with(DISTANCE, state.get(DISTANCE)));
@@ -91,7 +92,7 @@ public class AetherFruitingLeaves extends AetherLeavesBlock {
             }
             else {
                 int fortune = EnchantmentHelper.get(player.getStackInHand(hand)).getOrDefault(Enchantments.FORTUNE, 0);
-                ItemStack drops = new ItemStack(fruit, random.nextInt(fortune + 1 + random.nextInt(1)) + 1);
+                ItemStack drops = new ItemStack(fruit.get(), random.nextInt(fortune + 1 + random.nextInt(1)) + 1);
                 if(!player.giveItemStack(drops)) {
                     ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), drops);
                 }

@@ -7,7 +7,7 @@ import com.aether.fluids.AetherFluids;
 import com.aether.items.accessories.AccessoryType;
 import com.aether.items.accessories.AccessoryItem;
 import com.aether.items.armor.AetherArmorType;
-import com.aether.items.food.DrinkableItem;
+import com.aether.items.food.ValkyrieMilkItem;
 import com.aether.items.food.HealingStone;
 import com.aether.items.food.LifeShard;
 import com.aether.items.food.WhiteApple;
