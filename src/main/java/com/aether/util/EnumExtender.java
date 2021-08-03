@@ -30,7 +30,7 @@ public class EnumExtender {
  * Enum mixin template.
  *
  * Replace TARGET with the enum class.
- * Replace VALUEARRAY with the synthetic field storing an array of VALUEs. Find the name via the bytecode.
+ * Replace VALUEARRAY with the synthetic field storing an array of TARGETs. Find the name via the bytecode.
  * Replace ARG0TYPE/NAME, ARG1TYPE/NAME, etc. with the enum argument types/names, adjusting the number of arguments to match the enum constructor.
  *
  *

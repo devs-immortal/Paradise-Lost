@@ -51,7 +51,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherItems.init();
         AetherBlockEntityTypes.init();
         AetherFluids.init();
-        AetherBoatTypes.init();
         AetherCommands.init();
         AetherGameRules.init();
         AetherLootNumberProviderTypes.init();
@@ -66,5 +65,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherArmorModels.registerArmorModels();
         AetherModelLayers.initClient();
         AetherEntityRenderers.initClient();
+        AetherFluids.initClient();
     }
 }
