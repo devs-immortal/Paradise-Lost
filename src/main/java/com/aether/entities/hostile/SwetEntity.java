@@ -27,10 +27,11 @@ import net.minecraft.world.*;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 
 public class SwetEntity extends SlimeEntity {
-    public Goal randomLookGoal;
+    public IntConsumer setRandomLookTimer;
     protected int initialSize = 2;
     protected float massStuck = 0;
     protected static final EntityAttributeModifier knockbackResistanceModifier = new EntityAttributeModifier(
