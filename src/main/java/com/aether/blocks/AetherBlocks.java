@@ -373,14 +373,12 @@ public class AetherBlocks {
     @SafeVarargs
     @SuppressWarnings("RedundantSuppression")
     private static Block add(String id, Block block, Consumer<Block>... additionalActions) {
-        System.out.println(id + " block");
         return RegistryQueue.BLOCK.add(locate(id), block, additionalActions);
     }
 
     @SafeVarargs
     @SuppressWarnings("RedundantSuppression")
     private static Block add(String id, Block block, BiConsumer<String, Block> item, Consumer<Block>... additionalActions) {
-        System.out.println(id + " block with item");
         item.accept(id, block);
         return add(id, block, additionalActions);
     }

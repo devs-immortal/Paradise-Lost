@@ -303,7 +303,6 @@ public class AetherItems {
 
     @SafeVarargs
     public static Item add(String id, Item item, Consumer<Item>... additionalActions) {
-        System.out.println(id + " real item");
         return RegistryQueue.ITEM.add(locate(id), item, additionalActions);
     }
 
