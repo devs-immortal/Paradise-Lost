@@ -13,18 +13,18 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
-public class SwetDropBlock extends EntityBlockEgg{
-
+public class SwetDropBlock extends EntityBlockEgg {
     private static final DirectionProperty FACING = Properties.FACING;
 
-    public SwetDropBlock(Settings settings, BiFunction<World, BlockPos, ? extends LivingEntity> func) {
-        super(settings, func);
+    public SwetDropBlock(Settings settings, BiFunction<World, BlockPos, ? extends LivingEntity> function) {
+        super(settings, function);
     }
 
-    public SwetDropBlock(Settings settings, EntityType<? extends SwetEntity> type) {
+    public SwetDropBlock(Settings settings, Supplier<EntityType<? extends SwetEntity>> entityType) {
         super(settings, (world, pos) -> {
-            SwetEntity swet = type.create(world);
+            SwetEntity swet = entityType.get().create(world);
             if (swet != null) {
                 swet.setSize(1, true);
                 swet.setPosition(Vec3d.of(pos));
@@ -36,5 +36,4 @@ public class SwetDropBlock extends EntityBlockEgg{
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
-
 }

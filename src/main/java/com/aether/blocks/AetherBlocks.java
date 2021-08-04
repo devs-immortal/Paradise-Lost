@@ -361,10 +361,10 @@ public class AetherBlocks {
     static { addItem("ambrosium_torch", new WallStandingBlockItem(AMBROSIUM_TORCH, AMBROSIUM_TORCH_WALL, aetherBlocks)); }
 
     private static Settings swetDrop() { return of(Material.SOLID_ORGANIC, MapColor.CLEAR).breakInstantly().noCollision(); }
-    public static final Block SWET_DROP = add("swet_drop", new SwetDropBlock(swetDrop(), AetherEntityTypes.WHITE_SWET), item(aetherMisc));
-    public static final Block BLUE_SWET_DROP = add("blue_swet_drop", new SwetDropBlock(swetDrop(), AetherEntityTypes.BLUE_SWET), item(aetherMisc));
-    public static final Block GOLDEN_SWET_DROP = add("golden_swet_drop", new SwetDropBlock(swetDrop(), AetherEntityTypes.GOLDEN_SWET), item(aetherMisc));
-    public static final Block PURPLE_SWET_DROP = add("purple_swet_drop", new SwetDropBlock(swetDrop(), AetherEntityTypes.PURPLE_SWET), item(aetherMisc));
+    public static final Block SWET_DROP = add("swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.WHITE_SWET), item(aetherMisc));
+    public static final Block BLUE_SWET_DROP = add("blue_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.BLUE_SWET), item(aetherMisc));
+    public static final Block GOLDEN_SWET_DROP = add("golden_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.GOLDEN_SWET), item(aetherMisc));
+    public static final Block PURPLE_SWET_DROP = add("purple_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.PURPLE_SWET), item(aetherMisc));
 
     public static final Block INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), item(aetherMisc), cutoutMippedRenderLayer);
     public static final Block FOOD_BOWL = add("food_bowl", new FoodBowlBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), item(aetherMisc));
@@ -377,7 +377,6 @@ public class AetherBlocks {
     }
 
     @SafeVarargs
-    @SuppressWarnings("RedundantSuppression")
     private static Block add(String id, Block block, BiConsumer<String, Block> item, Consumer<Block>... additionalActions) {
         item.accept(id, block);
         return add(id, block, additionalActions);

@@ -45,11 +45,11 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherFeatures.registerFeatures();
         AetherConfiguredFeatures.registerFeatures();
         AetherDimension.setupDimension();
-        AetherEntityTypes.init();
         AetherBlocks.init();
+        AetherFluids.init();
+        AetherEntityTypes.init();
         AetherItems.init();
         AetherBlockEntityTypes.init();
-        AetherFluids.init();
         AetherCommands.init();
         AetherGameRules.init();
         AetherLootNumberProviderTypes.init();
