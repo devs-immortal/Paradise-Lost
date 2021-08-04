@@ -9,7 +9,6 @@ import com.aether.client.rendering.entity.AetherEntityRenderers;
 import com.aether.client.rendering.entity.layer.AetherModelLayers;
 import com.aether.commands.AetherCommands;
 import com.aether.entities.AetherEntityTypes;
-import com.aether.entities.vehicle.AetherBoatTypes;
 import com.aether.fluids.AetherFluids;
 import com.aether.items.AetherItems;
 import com.aether.loot.AetherLootNumberProviderTypes;
