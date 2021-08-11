@@ -10,7 +10,6 @@ public class WhiteSwetEntity extends TransformableSwetEntity{
 
     public WhiteSwetEntity(World world){
         super(AetherEntityTypes.WHITE_SWET, world);
-        setSize(2, true);
     }
 
     @Override

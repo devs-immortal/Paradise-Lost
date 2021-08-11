@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 public class PurpleSwetEntity extends SwetEntity{
     public PurpleSwetEntity(World world){
         super(AetherEntityTypes.PURPLE_SWET, world);
-        setSize(2, true);
     }
 
     protected void onEntityCollision(Entity entity){
