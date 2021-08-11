@@ -25,8 +25,7 @@ import java.util.Random;
 public class SkyrootTowerGenerator {
     private static final Identifier SKYROOT_TOWER = Aether.locate("skyroot_tower");
 
-    public static void addPieces(StructureManager manager, StructurePiecesHolder structurePiecesHolder, Random random, BlockPos pos) {
-        BlockRotation blockRotation = BlockRotation.random(random);
+    public static void addPieces(StructureManager manager, StructurePiecesHolder structurePiecesHolder, BlockRotation blockRotation, BlockPos pos) {
         structurePiecesHolder.addPiece(new SkyrootTowerGenerator.Piece(manager, SKYROOT_TOWER, pos, blockRotation));
     }
 
@@ -54,15 +53,15 @@ public class SkyrootTowerGenerator {
         }
 
         public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
-            if (this.pos.getY() > 2) {
+            //if (this.pos.getY() > 2) {
                 if (!shifted) {
                     this.pos = this.pos.down(1);
                     shifted = true;
                 }
                 boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
                 return super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
-            }
-            return false;
+            //}
+            //return false;
         }
     }
 }
