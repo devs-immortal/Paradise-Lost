@@ -76,21 +76,21 @@
   "overrides": [
     {
       "predicate": {
-        "the_aether:pulling": 1
+        "pulling": 1
       },
       "model": "the_aether:item/phoenix_bow_pulling_0"
     },
     {
       "predicate": {
-        "the_aether:pulling": 1,
-        "the_aether:pull": 0.65
+        "pulling": 1,
+        "pull": 0.65
       },
       "model": "the_aether:item/phoenix_bow_pulling_1"
     },
     {
       "predicate": {
-        "the_aether:pulling": 1,
-        "the_aether:pull": 0.9
+        "pulling": 1,
+        "pull": 0.9
       },
       "model": "the_aether:item/phoenix_bow_pulling_2"
     }

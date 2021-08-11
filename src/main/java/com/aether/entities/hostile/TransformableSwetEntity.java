@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class TransformableSwetEntity extends SwetEntity{
-
     public TransformableSwetEntity(World world) {
         super(world);
     }
