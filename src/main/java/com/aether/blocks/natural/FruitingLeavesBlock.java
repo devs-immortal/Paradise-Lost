@@ -26,14 +26,14 @@ import net.minecraft.world.World;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class AetherFruitingLeaves extends AetherLeavesBlock {
+public class FruitingLeavesBlock extends AetherLeavesBlock {
 
     public static final IntProperty GROWTH = IntProperty.of("growth", 0, 2);
     public static final BooleanProperty CAPPED = BooleanProperty.of("capped");
     public static final BooleanProperty NATURAL = BooleanProperty.of("natural");
     private final Supplier<Item> fruit;
 
-    public AetherFruitingLeaves(Settings settings, Supplier<Item> fruit) {
+    public FruitingLeavesBlock(Settings settings, Supplier<Item> fruit) {
         super(settings, true);
         this.fruit = fruit;
         setDefaultState(getDefaultState().with(GROWTH, 0).with(CAPPED, false).with(NATURAL, false));

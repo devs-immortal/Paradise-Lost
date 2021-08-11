@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -26,13 +27,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttackMob {
-
     public float sinage;
     public final int poisonRemaining;
     public int size;
 
-    public AechorPlantEntity(World world) {
-        super(AetherEntityTypes.AECHOR_PLANT, world);
+    public AechorPlantEntity(EntityType<? extends AechorPlantEntity> entityType, World world) {
+        super(entityType, world);
 
         this.size = this.random.nextInt(4) + 1;
         this.sinage = this.random.nextFloat() * 6F;
@@ -41,9 +41,8 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         this.setPosition(this.getX(), this.getY(), this.getZ());
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D);
+    public static DefaultAttributeContainer.Builder createAechorPlantAttributes() {
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0);
     }
 
     public EntityDimensions getSizeForStatus(EntityPose entityPose_1) {
@@ -65,13 +64,13 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
 
         if (this.hurtTime > 0) this.sinage += 0.9F;
 
-        if (this.getAttacker() != null) this.sinage += 0.3F;
-        else this.sinage += 0.1F;
+        this.sinage += (this.getAttacker() != null ? 0.3f : 0.1f);
 
         if (this.sinage > 3.141593F * 2F) this.sinage -= (3.141593F * 2F);
 
-        if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK)
+        if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK) {
             this.tickInVoid();
+        }
     }
 
     @Override
@@ -100,20 +99,18 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     }
 
     @Override
-    public ActionResult interactMob(PlayerEntity playerIn, Hand handIn) {
-        ItemStack heldItem = playerIn.getStackInHand(handIn);
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack heldItem = player.getStackInHand(hand);
 
-        if (heldItem.getItem() == AetherItems.SKYROOT_BUCKET && !playerIn.getAbilities().creativeMode) {
+        if (heldItem.getItem() == AetherItems.SKYROOT_BUCKET && !player.getAbilities().creativeMode) {
             heldItem.setCount(heldItem.getCount() - 1);
 
-            if (heldItem.isEmpty()) playerIn.setStackInHand(handIn, new ItemStack(AetherItems.SKYROOT_POISON_BUCKET));
-            else if (!playerIn.getInventory().insertStack(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET)))
-                playerIn.dropItem(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET), false);
+            if (heldItem.isEmpty()) player.setStackInHand(hand, new ItemStack(AetherItems.SKYROOT_POISON_BUCKET));
+            else if (!player.getInventory().insertStack(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET)))
+                player.dropItem(new ItemStack(AetherItems.SKYROOT_POISON_BUCKET), false);
 
             return ActionResult.SUCCESS;
-        } else {
-            return super.interactMob(playerIn, handIn);
-        }
+        } else return super.interactMob(player, hand);
     }
 
     public Vec3d getVelocity() {

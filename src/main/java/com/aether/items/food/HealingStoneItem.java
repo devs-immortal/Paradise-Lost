@@ -3,8 +3,8 @@ package com.aether.items.food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class HealingStone extends Item {
-    public HealingStone(Settings settings) {
+public class HealingStoneItem extends Item {
+    public HealingStoneItem(Settings settings) {
         super(settings);
     }
 

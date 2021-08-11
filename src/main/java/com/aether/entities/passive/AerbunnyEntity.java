@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.Path;
@@ -34,19 +35,17 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
-//import com.aether.world.storage.loot.AetherLootTableList;
-
 public class AerbunnyEntity extends AetherAnimalEntity {
 
     public static final TrackedData<Byte> PUFF = DataTracker.registerData(AerbunnyEntity.class, TrackedDataHandlerRegistry.BYTE);
     public float floof;
 
-    public AerbunnyEntity(World world) {
-        super(AetherEntityTypes.AERBUNNY, world);
+    public AerbunnyEntity(EntityType<? extends AerbunnyEntity> entityType, World world) {
+        super(entityType, world);
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
+    public static DefaultAttributeContainer.Builder createAerbunnyAttributes() {
+        return createMobAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 5.0D);
     }
@@ -206,8 +205,8 @@ public class AerbunnyEntity extends AetherAnimalEntity {
     }
 
     @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entityageable) {
-        return new AerbunnyEntity(this.world);
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity mate) {
+        return AetherEntityTypes.AERBUNNY.create(world);
     }
 
     public class EatBlueberriesGoal extends MoveToTargetPosGoal {

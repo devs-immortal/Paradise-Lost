@@ -8,9 +8,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class LifeShard extends Item {
+public class LifeShardItem extends Item {
 
-    public LifeShard(Settings settings) {
+    public LifeShardItem(Settings settings) {
         super(settings);
     }
 

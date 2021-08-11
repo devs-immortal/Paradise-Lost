@@ -16,7 +16,9 @@ public class AetherBlockEntityTypes {
     public static void init() {
         Registry.register(Registry.BLOCK_ENTITY_TYPE, locate("food_bowl"), FOOD_BOWL);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, locate("incubator"), INCUBATOR);
+    }
 
+    public static void initClient() {
         BlockEntityRendererRegistry.INSTANCE.register(INCUBATOR, IncubatorBlockEntityRenderer::new);
     }
 }

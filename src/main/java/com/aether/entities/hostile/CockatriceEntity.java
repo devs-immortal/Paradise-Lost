@@ -2,6 +2,7 @@ package com.aether.entities.hostile;
 
 import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.projectile.PoisonNeedleEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -25,16 +26,16 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     public float wingRotation, destPos, prevDestPos, prevWingRotation;
     public int shootTime, ticksUntilFlap;
 
-    public CockatriceEntity(World world) {
-        super(AetherEntityTypes.COCKATRICE, world);
+    public CockatriceEntity(EntityType<? extends CockatriceEntity> entityType, World world) {
+        super(entityType, world);
         this.stepHeight = 1.0F;
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0D);
+    public static DefaultAttributeContainer.Builder createCockatriceAttributes() {
+        return createHostileAttributes()
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0);
     }
 
     @Override

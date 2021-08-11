@@ -29,6 +29,7 @@ public class  AetherLeavesBlock extends LeavesBlock {
         this.collidable = collidable;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!collidable && entity instanceof LivingEntity) {
@@ -83,6 +84,7 @@ public class  AetherLeavesBlock extends LeavesBlock {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
         return 0.2F;
@@ -93,11 +95,13 @@ public class  AetherLeavesBlock extends LeavesBlock {
         return 1;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
         return VoxelShapes.fullCube();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.fullCube();

@@ -2,6 +2,7 @@ package com.aether.items;
 
 import com.aether.api.MoaAPI;
 import com.aether.api.MoaAttributes;
+import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.passive.MoaEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -32,7 +33,7 @@ public class MoaEggItem extends Item {
         PlayerEntity player = contextIn.getPlayer();
         ItemStack stack = contextIn.getStack();
         if (player != null && stack.getOrCreateNbt().contains("genes") && player.isCreative()) {
-            MoaEntity moa = new MoaEntity(world);
+            MoaEntity moa = AetherEntityTypes.MOA.create(world);
             NbtCompound geneTag = stack.getSubNbt("genes");
             boolean baby = geneTag.getBoolean("baby");
             moa.getGenes().readFromNbt(geneTag);

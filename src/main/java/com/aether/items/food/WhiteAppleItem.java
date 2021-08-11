@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 
 import java.util.Arrays;
 
-public class WhiteApple extends Item {
-    public WhiteApple(Settings settings) {
+public class WhiteAppleItem extends Item {
+    public WhiteAppleItem(Settings settings) {
         super(settings);
     }
 

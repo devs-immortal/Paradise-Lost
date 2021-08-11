@@ -1,11 +1,11 @@
 package com.aether.entities.hostile;
 
-import com.aether.entities.AetherEntityTypes;
+import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
 
-public class BlueSwetEntity extends SwetEntity{
-    public BlueSwetEntity(World world){
-        super(AetherEntityTypes.BLUE_SWET, world);
-        setSize(2, true);
+public class BlueSwetEntity extends SwetEntity {
+    public BlueSwetEntity(EntityType<? extends BlueSwetEntity> entityType, World world) {
+        super(entityType, world);
+        this.setSize(2, true);
     }
 }

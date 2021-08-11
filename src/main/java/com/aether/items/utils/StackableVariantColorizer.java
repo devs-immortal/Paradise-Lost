@@ -1,13 +1,15 @@
 package com.aether.items.utils;
 
+import com.aether.registry.RegistryQueue.Action;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.Identifier;
 
 import java.util.Arrays;
 
-public record StackableVariantColorizer(String[] tintFields, int[] defaultColors) {
+public record StackableVariantColorizer(String[] tintFields, int[] defaultColors) implements Action<ItemConvertible> {
     private static final String[] DEFAULT_TINT_FIELDS = new String[]{"primaryColor", "secondaryColor", "tertiaryColor", "quaternaryColor", "quinaryColor", "senaryColor"};
 
     public StackableVariantColorizer {
@@ -19,7 +21,8 @@ public record StackableVariantColorizer(String[] tintFields, int[] defaultColors
         assert defaultColors.length <= DEFAULT_TINT_FIELDS.length;
     }
 
-    public void register(Item item) {
+    @Override
+    public void accept(Identifier id, ItemConvertible item) {
         ColorProviderRegistry.ITEM.register(this::getFromTag, item);
     }
 

@@ -51,10 +51,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.UUID;
 
-//import com.aether.world.storage.loot.AetherLootTableList;
-
 public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameable {
-
     public static final TrackedData<Integer> AIR_TICKS = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);
     public float curWingRoll, curWingYaw, curLegPitch;
     public float jumpStrength;
@@ -62,15 +59,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     protected int secsUntilEgg;
     private MoaGenes genes;
 
-    public MoaEntity(World world) {
-        super(AetherEntityTypes.MOA, world);
-
+    public MoaEntity(EntityType<? extends MoaEntity> entityType, World world) {
+        super(entityType, world);
         this.stepHeight = 1.0F;
         this.secsUntilEgg = this.getRandomEggTime();
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
+    public static DefaultAttributeContainer.Builder createMoaAttributes() {
+        return createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D);
     }
@@ -398,7 +394,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity matingAnimal) {
-        return new MoaEntity(this.world);
+        return AetherEntityTypes.MOA.create(world);
     }
 
     @Override
