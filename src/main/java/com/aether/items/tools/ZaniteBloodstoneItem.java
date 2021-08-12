@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class ZaniteBloodstoneItem extends BloodstoneItem {
+    public ZaniteBloodstoneItem(Settings settings) {
+        super(settings);
+    }
+
     @Override
     protected List<Text> createTooltip(LivingEntity entity) {
         return entity instanceof MoaEntity moa ?

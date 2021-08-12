@@ -1,19 +1,14 @@
 package com.aether.loot;
 
-import com.aether.Aether;
-import net.minecraft.loot.provider.number.LootNumberProvider;
 import net.minecraft.loot.provider.number.LootNumberProviderType;
-import net.minecraft.util.JsonSerializer;
 import net.minecraft.util.registry.Registry;
 
-public class AetherLootNumberProviderTypes {
-    public static final LootNumberProviderType SLIME_SIZE = register("slime_size", new SlimeSizeLootNumberProvider.Serializer());
+import static com.aether.Aether.locate;
 
-    private static LootNumberProviderType register(String id, JsonSerializer<? extends LootNumberProvider> jsonSerializer) {
-        return Registry.register(Registry.LOOT_NUMBER_PROVIDER_TYPE, Aether.locate(id), new LootNumberProviderType(jsonSerializer));
-    }
+public class AetherLootNumberProviderTypes {
+    public static final LootNumberProviderType SLIME_SIZE = new LootNumberProviderType(new SlimeSizeLootNumberProvider.Serializer());
 
     public static void init() {
-        // N/A
+        Registry.register(Registry.LOOT_NUMBER_PROVIDER_TYPE, locate("slime_size"), SLIME_SIZE);
     }
 }

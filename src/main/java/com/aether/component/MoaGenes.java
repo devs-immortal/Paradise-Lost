@@ -2,6 +2,7 @@ package com.aether.component;
 
 import com.aether.api.MoaAPI;
 import com.aether.api.MoaAttributes;
+import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.passive.MoaEntity;
 import com.aether.items.AetherItems;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
@@ -85,7 +86,7 @@ public class MoaGenes implements AutoSyncedComponent {
     }
 
     public static MoaEntity getMoaFromEgg(World world, ItemStack stack) {
-        MoaEntity moa = new MoaEntity(world);
+        MoaEntity moa = AetherEntityTypes.MOA.create(world);
         MoaGenes genes = moa.getGenes();
         if(stack.isOf(AetherItems.MOA_EGG)) {
             genes.readFromNbt(stack.getOrCreateSubNbt("genes"));

@@ -8,33 +8,29 @@ import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.world.World;
 
 public abstract class DartEntity extends PersistentProjectileEntity {
+    protected int ticksInAir;
 
-    private int ticksInAir;
-
-    public DartEntity(EntityType<? extends PersistentProjectileEntity> entityType, double x, double y, double z, World world) {
+    public DartEntity(EntityType<? extends DartEntity> entityType, double x, double y, double z, World world) {
         super(entityType, x, y, z, world);
         this.setNoGravity(true);
     }
 
-    public DartEntity(EntityType<? extends PersistentProjectileEntity> entityType, LivingEntity owner, World world) {
+    public DartEntity(EntityType<? extends DartEntity> entityType, LivingEntity owner, World world) {
         super(entityType, owner, world);
         this.setNoGravity(true);
     }
 
-    public DartEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
+    public DartEntity(EntityType<? extends DartEntity> entityType, World world) {
         super(entityType, world);
-        this.setNoGravity(true);
-    }
-
-    public DartEntity(World world) {
-        super(EntityType.ARROW, world);
         this.setNoGravity(true);
     }
 
     @Override
     public void tick() {
         if (!this.world.isClient) {
-            if (!this.onGround) ++this.ticksInAir;
+            if (!this.onGround) {
+                this.ticksInAir++;
+            }
 
             if (this.ticksInAir == 500) {
                 this.discard();

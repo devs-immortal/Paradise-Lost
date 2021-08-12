@@ -8,10 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -44,8 +41,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class SheepuffEntity extends AnimalEntity {
-
+public class SheepuffEntity extends AetherAnimalEntity {
     private static final TrackedData<Boolean> PUFFY = DataTracker.registerData(SheepuffEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Byte> COLOR = DataTracker.registerData(SheepuffEntity.class, TrackedDataHandlerRegistry.BYTE);
     @SuppressWarnings("RedundantCast")
@@ -76,8 +72,8 @@ public class SheepuffEntity extends AnimalEntity {
     private EatAetherGrassGoal eatGrassGoal;
     private int sheepTimer;
 
-    public SheepuffEntity(World world) {
-        super(AetherEntityTypes.SHEEPUFF, world);
+    public SheepuffEntity(EntityType<? extends SheepuffEntity> entityType, World world) {
+        super(entityType, world);
     }
 
     private static float[] getDyedColor(DyeColor color) {
@@ -98,17 +94,11 @@ public class SheepuffEntity extends AnimalEntity {
     public static DyeColor generateDefaultColor(Random random) {
         int int_1 = random.nextInt(100);
 
-        if (int_1 < 5) {
-            return DyeColor.BLACK;
-        } else if (int_1 < 10) {
-            return DyeColor.GRAY;
-        } else if (int_1 < 15) {
-            return DyeColor.LIGHT_GRAY;
-        } else if (int_1 < 18) {
-            return DyeColor.BROWN;
-        } else {
-            return random.nextInt(500) == 0 ? DyeColor.PINK : DyeColor.WHITE;
-        }
+        if (int_1 < 5) return DyeColor.BLACK;
+        else if (int_1 < 10) return DyeColor.GRAY;
+        else if (int_1 < 15) return DyeColor.LIGHT_GRAY;
+        else if (int_1 < 18) return DyeColor.BROWN;
+        else return random.nextInt(500) == 0 ? DyeColor.PINK : DyeColor.WHITE;
     }
 
     private static CraftingInventory createDyeMixingCraftingInventory(DyeColor parentColor, DyeColor mateColor) {
@@ -125,10 +115,10 @@ public class SheepuffEntity extends AnimalEntity {
         return craftingInventory_1;
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23000000417232513D);
+    public static DefaultAttributeContainer.Builder createSheepuffAttributes() {
+        return createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23);
     }
 
     @Override
@@ -226,8 +216,9 @@ public class SheepuffEntity extends AnimalEntity {
     public float getHeadRotationPointY(float float_1) {
         if (this.sheepTimer <= 0) return 0.0F;
         else if (this.sheepTimer >= 4 && this.sheepTimer <= 36) return 1.0F;
-        else
+        else {
             return this.sheepTimer < 4 ? ((float) this.sheepTimer - float_1) / 4.0F : -((float) (this.sheepTimer - 40) - float_1) / 4.0F;
+        }
     }
 
     @Environment(EnvType.CLIENT)
@@ -338,12 +329,9 @@ public class SheepuffEntity extends AnimalEntity {
     }
 
     public SheepuffEntity createChild(ServerWorld world, PassiveEntity entity) {
-        SheepuffEntity sheepEntity_1 = (SheepuffEntity) entity;
-        SheepuffEntity sheepEntity_2 = new SheepuffEntity(this.world);
-
-        sheepEntity_2.setColor(this.getChildColor(this, sheepEntity_1));
-
-        return sheepEntity_2;
+        SheepuffEntity child = AetherEntityTypes.SHEEPUFF.create(world);
+        child.setColor(this.getChildColor(this, (AnimalEntity) entity));
+        return child;
     }
 
     @Override

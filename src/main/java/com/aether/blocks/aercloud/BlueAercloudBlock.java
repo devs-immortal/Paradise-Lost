@@ -13,7 +13,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class BlueAercloudBlock extends BaseAercloudBlock {
+public class BlueAercloudBlock extends AercloudBlock {
 
     protected static VoxelShape SHAPE = VoxelShapes.empty();
 

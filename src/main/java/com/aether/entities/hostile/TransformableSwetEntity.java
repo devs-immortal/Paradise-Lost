@@ -12,12 +12,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class TransformableSwetEntity extends SwetEntity{
-
-    public TransformableSwetEntity(World world) {
-        super(world);
-    }
-
+public abstract class TransformableSwetEntity extends SwetEntity {
     public TransformableSwetEntity(EntityType<? extends SwetEntity> entityType, World world) {
         super(entityType, world);
     }

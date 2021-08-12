@@ -1,7 +1,5 @@
 package com.aether.mixin.item;
 
-import com.aether.items.AetherItemSettings;
-import com.aether.util.item.AetherItemExtensions;
 import net.minecraft.item.Item;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
@@ -13,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Item.class)
-public class ItemMixin implements AetherItemExtensions {
-    @Shadow @Final private Rarity rarity;
+public class ItemMixin {
+    /*@Shadow @Final private Rarity rarity;
     private Formatting customRarity = null;
     private int enchantmentGlintColor = 0x8e48e1;
 
@@ -40,5 +38,5 @@ public class ItemMixin implements AetherItemExtensions {
     @Override
     public int getCustomEnchantmentGlintColor() {
         return enchantmentGlintColor;
-    }
+    }*/
 }

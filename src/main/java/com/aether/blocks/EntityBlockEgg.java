@@ -15,16 +15,18 @@ import java.util.function.BiFunction;
 public class EntityBlockEgg extends Block {
     private final BiFunction<World, BlockPos, ? extends LivingEntity> function;
 
-    public EntityBlockEgg(Settings settings, BiFunction<World, BlockPos, ? extends LivingEntity> func) {
+    public EntityBlockEgg(Settings settings, BiFunction<World, BlockPos, ? extends LivingEntity> function) {
         super(settings);
-        this.function = func;
+        this.function = function;
     }
 
     public EntityBlockEgg(Settings settings, EntityType<? extends LivingEntity> type) {
         super(settings);
         this.function = (world, pos) -> {
             LivingEntity entity = type.create(world);
-            if (entity!=null) entity.setPosition(Vec3d.of(pos));
+            if (entity != null) {
+                entity.setPosition(Vec3d.of(pos));
+            }
             return entity;
         };
     }

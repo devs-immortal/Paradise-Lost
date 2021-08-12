@@ -13,11 +13,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Block.class)
 public class BlockMixin {
-
     @Inject(method = "onLandedUpon", at = @At("TAIL"))
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci) {
-        if(entity instanceof AetherEntityExtensions) {
-            ((AetherEntityExtensions) entity).setAetherFallen(false);
+        if (entity instanceof AetherEntityExtensions aetherEntity) {
+            aetherEntity.setAetherFallen(false);
         }
     }
 }

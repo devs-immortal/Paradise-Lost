@@ -4,6 +4,7 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -25,17 +26,15 @@ import net.minecraft.world.World;
 //import com.aether.world.storage.loot.AetherLootTableList;
 
 public class FlyingCowEntity extends SaddleMountEntity {
-
     public float wingFold;
 
     public float wingAngle;
     public int maxJumps;
     public int jumpsRemaining;
-    private float aimingForFold;
     private int ticks;
 
-    public FlyingCowEntity(World world) {
-        super(AetherEntityTypes.FLYING_COW, world);
+    public FlyingCowEntity(EntityType<? extends FlyingCowEntity> entityType, World world) {
+        super(entityType, world);
 
         this.ticks = 0;
         this.maxJumps = 1;
@@ -45,10 +44,10 @@ public class FlyingCowEntity extends SaddleMountEntity {
         this.canJumpMidAir = true;
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20000000298023224D);
+    public static DefaultAttributeContainer.Builder createFlyingCowAttributes() {
+        return createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2);
     }
 
     @Override
@@ -67,18 +66,19 @@ public class FlyingCowEntity extends SaddleMountEntity {
     public void tick() {
         super.tick();
 
+        float aimingForFold;
         if (this.onGround) {
             this.wingAngle *= 0.8F;
-            this.aimingForFold = 0.1F;
+            aimingForFold = 0.1F;
             this.jumpsRemaining = this.maxJumps;
         } else {
-            this.aimingForFold = 1.0F;
+            aimingForFold = 1.0F;
         }
 
         this.ticks++;
 
         this.wingAngle = this.wingFold * (float) Math.sin(this.ticks / 31.83098862F);
-        this.wingFold += (this.aimingForFold - this.wingFold) / 5F;
+        this.wingFold += (aimingForFold - this.wingFold) / 5F;
         this.fallDistance = 0;
         this.fall();
     }
@@ -172,8 +172,8 @@ public class FlyingCowEntity extends SaddleMountEntity {
     }
 
     @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return new FlyingCowEntity(this.world);
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity mate) {
+        return AetherEntityTypes.FLYING_COW.create(world);
     }
 
     @Override

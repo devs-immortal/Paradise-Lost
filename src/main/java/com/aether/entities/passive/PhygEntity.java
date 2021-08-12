@@ -4,6 +4,7 @@ import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.util.SaddleMountEntity;
 import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -18,20 +19,15 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-//import com.aether.world.storage.loot.AetherLootTableList;
-
 public class PhygEntity extends SaddleMountEntity {
-
     public float wingFold;
-
     public float wingAngle;
     public int maxJumps;
     public int jumpsRemaining;
     public int ticks;
-    private float aimingForFold;
 
-    public PhygEntity(World world) {
-        super(AetherEntityTypes.PHYG, world);
+    public PhygEntity(EntityType<? extends PhygEntity> entityType, World world) {
+        super(entityType, world);
 
         this.jumpsRemaining = 0;
         this.maxJumps = 1;
@@ -41,10 +37,10 @@ public class PhygEntity extends SaddleMountEntity {
         this.canJumpMidAir = true;
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, /*this.getSaddled() ? 20.0D : */10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
+    public static DefaultAttributeContainer.Builder createPhygAttributes() {
+        return createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, /*this.getSaddled() ? 20.0 : */10.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
     }
 
     @Override
@@ -63,18 +59,19 @@ public class PhygEntity extends SaddleMountEntity {
     public void tick() {
         super.tick();
 
+        float aimingForFold;
         if (this.onGround) {
             this.wingAngle *= 0.8F;
-            this.aimingForFold = 0.1F;
+            aimingForFold = 0.1F;
             this.jumpsRemaining = this.maxJumps;
         } else {
-            this.aimingForFold = 1.0F;
+            aimingForFold = 1.0F;
         }
 
         this.ticks++;
 
         this.wingAngle = this.wingFold * (float) Math.sin(this.ticks / 31.83098862F);
-        this.wingFold += (this.aimingForFold - this.wingFold) / 5F;
+        this.wingFold += (aimingForFold - this.wingFold) / 5F;
         this.fallDistance = 0;
         this.fall();
     }
@@ -146,7 +143,7 @@ public class PhygEntity extends SaddleMountEntity {
 
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entityageable) {
-        return new PhygEntity(this.world);
+        return AetherEntityTypes.PHYG.create(world);
     }
 
     @Override
