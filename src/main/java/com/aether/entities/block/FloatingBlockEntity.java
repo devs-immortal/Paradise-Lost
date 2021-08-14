@@ -204,7 +204,6 @@ public class FloatingBlockEntity extends Entity {
 
                     if (blockHitResult.getType() != HitResult.Type.MISS
                             && this.world.getFluidState(blockHitResult.getBlockPos()).isIn(FluidTags.WATER)) {
-                        
                         blockPos = blockHitResult.getBlockPos();
                         shouldSolidify = true;
                     }
