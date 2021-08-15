@@ -1,6 +1,5 @@
 package com.aether.blocks.blockentity;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.component.MoaGenes;
 import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
@@ -20,7 +19,7 @@ public class IncubatorBlockEntity extends AetherBlockEntity {
     private int hatchTicks = 100;
 
     public IncubatorBlockEntity(BlockPos pos, BlockState state) {
-        super(AetherBlocks.INCUBATOR_BLOCK_ENTITY_TYPE, pos, state, 1, HopperStrategy.ALL_PASS);
+        super(AetherBlockEntityTypes.INCUBATOR, pos, state, 1, HopperStrategy.ALL_PASS);
     }
 
     public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {

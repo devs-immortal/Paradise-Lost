@@ -1,6 +1,5 @@
 package com.aether.blocks.blockentity;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.mechanical.FoodBowlBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
@@ -15,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class FoodBowlBlockEntity extends AetherBlockEntity {
 
     public FoodBowlBlockEntity(BlockPos pos, BlockState state) {
-        super(AetherBlocks.FOOD_BOWL_BLOCK_ENTITY_TYPE, pos, state, 1, HopperStrategy.IN_ANY_OUT_BOTTOM);
+        super(AetherBlockEntityTypes.FOOD_BOWL, pos, state, 1, HopperStrategy.IN_ANY_OUT_BOTTOM);
     }
 
     @SuppressWarnings("ConstantConditions")

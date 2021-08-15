@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 
-public class PinkAercloudBlock extends BaseAercloudBlock {
+public class PinkAercloudBlock extends AercloudBlock {
 
     private static final ParticleEffect pinkFluff = new DustParticleEffect(new Vec3f(0.89F, 0.65F, 0.9F), 1F);
 

@@ -8,7 +8,6 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
@@ -22,22 +21,21 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class PoisonDartEntity extends DartEntity {
-
     private LivingEntity victim;
     private AetherPoisonMovement poison;
 
-    public PoisonDartEntity(EntityType<? extends PersistentProjectileEntity> entityType, double x, double y, double z, World world) {
+    public PoisonDartEntity(EntityType<? extends DartEntity> entityType, World world) {
+        super(entityType, world);
+        this.setDamage(0);
+    }
+
+    protected PoisonDartEntity(EntityType<? extends DartEntity> entityType, double x, double y, double z, World world) {
         super(entityType, x, y, z, world);
         this.setDamage(0);
     }
 
-    public PoisonDartEntity(EntityType<? extends PersistentProjectileEntity> entityType, LivingEntity owner, World world) {
+    protected PoisonDartEntity(EntityType<? extends DartEntity> entityType, LivingEntity owner, World world) {
         super(entityType, owner, world);
-        this.setDamage(0);
-    }
-
-    public PoisonDartEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
-        super(entityType, world);
         this.setDamage(0);
     }
 
@@ -47,10 +45,6 @@ public class PoisonDartEntity extends DartEntity {
 
     public PoisonDartEntity(LivingEntity owner, World world) {
         this(AetherEntityTypes.POISON_DART, owner, world);
-    }
-
-    public PoisonDartEntity(World world) {
-        this(AetherEntityTypes.POISON_DART, world);
     }
 
     @Override
@@ -63,8 +57,9 @@ public class PoisonDartEntity extends DartEntity {
                 return;
             }
 
-            if (this.getOwner() != null) if (this.getOwner().world instanceof ServerWorld)
-                ((ServerWorld) this.getOwner().world).spawnParticles(new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(Items.RED_DYE)), this.victim.getX(), this.victim.getBoundingBox().minY + this.victim.getHeight() * 0.8D, this.victim.getZ(), 2, 0.0D, 0.0D, 0.0D, 0.0625D);
+            if (this.getOwner() != null && this.getOwner().world instanceof ServerWorld serverWorld) {
+                serverWorld.spawnParticles(new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(Items.RED_DYE)), this.victim.getX(), this.victim.getBoundingBox().minY + this.victim.getHeight() * 0.8D, this.victim.getZ(), 2, 0.0D, 0.0D, 0.0D, 0.0625D);
+            }
 
             this.unsetRemoved();
             this.poison.onUpdate();
@@ -74,19 +69,16 @@ public class PoisonDartEntity extends DartEntity {
     }
 
     @Override
-    protected void onHit(LivingEntity entityIn) {
-        super.onHit(entityIn);
+    protected void onHit(LivingEntity target) {
+        super.onHit(target);
 
-        if (entityIn instanceof ServerPlayerEntity) {
+        if (target instanceof ServerPlayerEntity playerTarget) {
             //AetherAPI.get((PlayerEntity) entityIn).inflictPoison(500);
-
             PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
-
             byteBuf.writeInt(500);
-
-            ((ServerPlayerEntity) entityIn).networkHandler.sendPacket(new CustomPayloadC2SPacket(Aether.locate("poison"), byteBuf));
+            playerTarget.networkHandler.sendPacket(new CustomPayloadC2SPacket(Aether.locate("poison"), byteBuf));
         } else {
-            this.victim = entityIn;
+            this.victim = target;
             this.poison = new AetherPoisonMovement(this.victim);
             this.poison.inflictPoison(500);
             this.unsetRemoved();
@@ -100,7 +92,9 @@ public class PoisonDartEntity extends DartEntity {
 
     @Override
     public void onPlayerCollision(PlayerEntity playerIn) {
-        if (this.victim == null) super.onPlayerCollision(playerIn);
+        if (this.victim == null) {
+            super.onPlayerCollision(playerIn);
+        }
     }
 
     @Override

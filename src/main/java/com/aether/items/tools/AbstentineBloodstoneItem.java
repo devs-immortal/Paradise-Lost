@@ -10,6 +10,10 @@ import net.minecraft.util.Formatting;
 import java.util.List;
 
 public class AbstentineBloodstoneItem extends BloodstoneItem {
+    public AbstentineBloodstoneItem(Settings settings) {
+        super(settings);
+    }
+
     @Override
     protected List<Text> createTooltip(LivingEntity entity) {
         return ImmutableList.of(

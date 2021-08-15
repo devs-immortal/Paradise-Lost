@@ -1,15 +1,14 @@
 package com.aether.entities.hostile;
 
-import com.aether.entities.AetherEntityTypes;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.world.World;
 
-public class WhiteSwetEntity extends TransformableSwetEntity{
-
-    public WhiteSwetEntity(World world){
-        super(AetherEntityTypes.WHITE_SWET, world);
+public class WhiteSwetEntity extends TransformableSwetEntity {
+    public WhiteSwetEntity(EntityType<? extends WhiteSwetEntity> entityType, World world){
+        super(entityType, world);
     }
 
     @Override

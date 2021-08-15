@@ -1,6 +1,6 @@
 package com.aether.entities.hostile;
 
-import com.aether.entities.AetherEntityTypes;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -17,16 +17,16 @@ public class ChestMimicEntity extends HostileEntity {
     public float mouth, legs;
     private float legsDirection = 1;
 
-    public ChestMimicEntity(World world) {
-        super(AetherEntityTypes.CHEST_MIMIC, world);
+    public ChestMimicEntity(EntityType<? extends ChestMimicEntity> entityType, World world) {
+        super(entityType, world);
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.28000000417232513D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0D);
+    public static DefaultAttributeContainer.Builder createChestMimicAttributes() {
+        return createHostileAttributes()
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.28)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.aether.world.feature;
 
 import com.aether.blocks.AetherBlockProperties;
 import com.aether.blocks.AetherBlocks;
-import com.aether.blocks.aercloud.BaseAercloudBlock;
+import com.aether.blocks.aercloud.AercloudBlock;
 import com.aether.world.feature.config.DynamicConfiguration;
 import com.aether.world.feature.config.QuicksoilConfig;
 import com.mojang.serialization.Codec;
@@ -106,7 +106,7 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
 
                     if (!visited.contains(mut) && !centers.contains(mut)) {
                         BlockState up;
-                        if (context.getWorld().getBlockState(mut).isAir() && !(up = context.getWorld().getBlockState(mut.up())).isAir() && !(up.getBlock() instanceof BaseAercloudBlock) && mut.isWithinDistance(startPos, 16)) {
+                        if (context.getWorld().getBlockState(mut).isAir() && !(up = context.getWorld().getBlockState(mut.up())).isAir() && !(up.getBlock() instanceof AercloudBlock) && mut.isWithinDistance(startPos, 16)) {
                             BlockPos p = new BlockPos(mut);
                             nextStops.add(p);
                             centers.add(p);

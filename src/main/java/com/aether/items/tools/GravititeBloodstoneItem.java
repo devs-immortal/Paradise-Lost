@@ -12,6 +12,10 @@ import net.minecraft.util.Formatting;
 import java.util.List;
 
 public class GravititeBloodstoneItem extends BloodstoneItem {
+    public GravititeBloodstoneItem(Settings settings) {
+        super(settings);
+    }
+
     @Override
     protected List<Text> createTooltip(LivingEntity entity) {
         return entity instanceof MoaEntity moa ?

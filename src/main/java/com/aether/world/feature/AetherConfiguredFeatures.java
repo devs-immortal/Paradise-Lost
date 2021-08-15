@@ -2,7 +2,7 @@ package com.aether.world.feature;
 
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
-import com.aether.blocks.natural.AetherFruitingLeaves;
+import com.aether.blocks.natural.FruitingLeavesBlock;
 import com.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import com.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
 import com.google.common.collect.ImmutableList;
@@ -83,9 +83,9 @@ public class AetherConfiguredFeatures {
 
     public static class Configs {
 
-        public static final BlockState ORANGE_LEAVES = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(AetherFruitingLeaves.CAPPED, true).with(AetherFruitingLeaves.NATURAL, true);
-        public static final BlockState ORANGE_LEAVES_FLOWERING = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(AetherFruitingLeaves.CAPPED, true).with(AetherFruitingLeaves.NATURAL, true).with(AetherFruitingLeaves.GROWTH, 1);
-        public static final BlockState ORANGE_LEAVES_FRUITING = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(AetherFruitingLeaves.CAPPED, true).with(AetherFruitingLeaves.NATURAL, true).with(AetherFruitingLeaves.GROWTH, 2);
+        public static final BlockState ORANGE_LEAVES = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true);
+        public static final BlockState ORANGE_LEAVES_FLOWERING = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 1);
+        public static final BlockState ORANGE_LEAVES_FRUITING = AetherBlocks.ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 2);
 
         //public static final RandomPatchFeatureConfig FLOWER_CONFIG = (new RandomPatchFeatureConfig.Builder((new WeightedBlockStateProvider(ConfiguredFeatures.pool().add(AetherBlocks.PURPLE_FLOWER.getDefaultState(), 2).add(AetherBlocks.WHITE_FLOWER.getDefaultState(), 1)), new SimpleBlockPlacer())).tries(64).build();
         public static final RandomPatchFeatureConfig AETHER_BUSH_CONFIG = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.AETHER_BUSH.getDefaultState()), SimpleBlockPlacer.INSTANCE)).spreadX(16).spreadY(7).spreadZ(16).tries(128).build();

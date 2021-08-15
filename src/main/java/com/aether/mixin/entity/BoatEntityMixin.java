@@ -1,23 +1,30 @@
 package com.aether.mixin.entity;
 
+import com.aether.entities.vehicle.AetherBoatTypes;
 import com.aether.items.AetherItems;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.Item;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BoatEntity.class)
 public abstract class BoatEntityMixin {
-    @Inject(method = "asItem", at = @At("HEAD"), cancellable = true)
+    @Shadow
+    public abstract BoatEntity.Type getBoatType();
+
+    @Inject(method = "asItem", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;OAK_BOAT:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC), cancellable = true)
     private void checkAetherBoats(CallbackInfoReturnable<Item> cir) {
-        switch (((BoatEntity) (Object) this).getBoatType().getName()) {
-            case "aether_skyroot" -> cir.setReturnValue(AetherItems.SKYROOT_BOAT);
-            case "aether_golden_oak" -> cir.setReturnValue(AetherItems.GOLDEN_OAK_BOAT);
-            case "aether_orange" -> cir.setReturnValue(AetherItems.ORANGE_BOAT);
-            case "aether_crystal" -> cir.setReturnValue(AetherItems.CRYSTAL_BOAT);
-            case "aether_wisteria" -> cir.setReturnValue(AetherItems.WISTERIA_BOAT);
+        BoatEntity.Type type = this.getBoatType();
+        if (type != BoatEntity.Type.OAK) {
+            if (type == AetherBoatTypes.SKYROOT) cir.setReturnValue(AetherItems.SKYROOT_BOAT);
+            else if (type == AetherBoatTypes.GOLDEN_OAK) cir.setReturnValue(AetherItems.GOLDEN_OAK_BOAT);
+            else if (type == AetherBoatTypes.ORANGE) cir.setReturnValue(AetherItems.ORANGE_BOAT);
+            else if (type == AetherBoatTypes.CRYSTAL) cir.setReturnValue(AetherItems.CRYSTAL_BOAT);
+            else if (type == AetherBoatTypes.WISTERIA) cir.setReturnValue(AetherItems.WISTERIA_BOAT);
         }
     }
 }

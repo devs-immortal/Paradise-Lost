@@ -3,6 +3,7 @@ package com.aether.entities.passive;
 import com.aether.blocks.AetherBlocks;
 import com.aether.items.AetherItems;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.item.ItemStack;
@@ -10,8 +11,11 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
 
 public class AetherAnimalEntity extends AnimalEntity {
 
@@ -28,6 +32,9 @@ public class AetherAnimalEntity extends AnimalEntity {
         return worldIn.getBlockState(pos.down()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK ? 10.0F : worldIn.getLightLevel(pos) - 0.5F;
     }
 
+    public static boolean isValidNaturalAetherSpawn(EntityType<? extends AetherAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_GRASS_BLOCK) && world.getBaseLightLevel(pos, 0) > 8;
+    }
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {

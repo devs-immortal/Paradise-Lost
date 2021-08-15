@@ -1,14 +1,13 @@
 package com.aether.entities.hostile;
 
-import com.aether.entities.AetherEntityTypes;
 import com.aether.items.AetherItems;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.TameableEntity;
@@ -27,10 +26,11 @@ import net.minecraft.world.*;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Random;
 import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 
-public class SwetEntity extends SlimeEntity {
+public abstract class SwetEntity extends SlimeEntity {
     public IntConsumer setRandomLookTimer;
     protected int initialSize = 2;
     protected float massStuck = 0;
@@ -39,13 +39,9 @@ public class SwetEntity extends SlimeEntity {
             1,
             EntityAttributeModifier.Operation.ADDITION);
 
-    public SwetEntity(World world) {
-        this(AetherEntityTypes.WHITE_SWET, world);
-    }
-
     public SwetEntity(EntityType<? extends SwetEntity> entityType, World world) {
         super(entityType, world);
-        init();
+        this.init();
     }
 
     @Override
@@ -78,7 +74,7 @@ public class SwetEntity extends SlimeEntity {
     }
 
     protected void init() {
-        setHealth(getMaxHealth());
+        this.setHealth(getMaxHealth());
     }
 
     @Override
@@ -86,13 +82,13 @@ public class SwetEntity extends SlimeEntity {
         super.initDataTracker();
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return AetherEntityTypes.getDefaultAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.28000000417232513D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.25D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0D);
+    public static DefaultAttributeContainer.Builder createSwetAttributes() {
+        return HostileEntity.createHostileAttributes()
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.28)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0);
     }
 
     @Override
@@ -249,6 +245,10 @@ public class SwetEntity extends SlimeEntity {
 
     protected static boolean isAbsorbable(Entity entity) {
         return !(entity.isSneaking() || entity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().flying);
+    }
+
+    public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getDifficulty() != Difficulty.PEACEFUL && HostileEntity.isSpawnDark(world, pos, random) && canMobSpawn(type, world, spawnReason, pos, random);
     }
 
     protected static class FollowUnabsorbedTargetGoal<T extends LivingEntity> extends FollowTargetGoal<T> {

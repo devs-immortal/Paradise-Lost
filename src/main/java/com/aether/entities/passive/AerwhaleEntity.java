@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.FlyingEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.BaseText;
 import net.minecraft.text.LiteralText;
@@ -30,14 +31,9 @@ public class AerwhaleEntity extends FlyingEntity {
 
     public AerwhaleEntity(EntityType<? extends AerwhaleEntity> type, World worldIn) {
         super(type, worldIn);
-        this.ignoreCameraFrustum = true;
-        this.moveControl = new AerwhaleEntity.MoveHelperController(this);
-    }
-
-    public AerwhaleEntity(World worldIn) {
-        this(AetherEntityTypes.AERWHALE, worldIn);
         this.setYaw(360.0F * this.random.nextFloat());
         this.setPitch(90.0F * this.random.nextFloat() - 45.0F);
+        this.ignoreCameraFrustum = true;
         this.moveControl = new AerwhaleEntity.MoveHelperController(this);
     }
 
@@ -49,10 +45,10 @@ public class AerwhaleEntity extends FlyingEntity {
 //		this.goalSelector.add(5, new AerwhaleEntity.TravelCourseGoal(this));
     }
 
-    public static DefaultAttributeContainer.Builder initAttributes() {
-        return FlyingEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D);
+    public static DefaultAttributeContainer.Builder createAerwhaleAttributes() {
+        return createMobAttributes()
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0);
     }
 
     @Override
@@ -183,6 +179,7 @@ public class AerwhaleEntity extends FlyingEntity {
     /**
      * Copied from {@link net.minecraft.entity.mob.GhastEntity.FlyRandomlyGoal}
      */
+    @SuppressWarnings("JavadocReference")
     static class MoveHelperController extends MoveControl {
         private final AerwhaleEntity parentEntity;
         private int courseChangeCooldown;

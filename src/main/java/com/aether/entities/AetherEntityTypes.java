@@ -1,7 +1,5 @@
 package com.aether.entities;
 
-import com.aether.Aether;
-import com.aether.blocks.AetherBlocks;
 import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.entities.hostile.*;
 import com.aether.entities.passive.*;
@@ -9,136 +7,110 @@ import com.aether.entities.projectile.EnchantedDartEntity;
 import com.aether.entities.projectile.GoldenDartEntity;
 import com.aether.entities.projectile.PoisonDartEntity;
 import com.aether.entities.projectile.PoisonNeedleEntity;
+import com.aether.registry.RegistryQueue;
+import com.aether.registry.RegistryQueue.Action;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.DefaultAttributeRegistry;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.world.*;
 
-import java.util.Random;
+import java.util.function.Supplier;
 
-import static net.minecraft.entity.SpawnReason.SPAWNER;
+import static com.aether.Aether.locate;
+import static net.minecraft.entity.EntityDimensions.changing;
+import static net.minecraft.entity.SpawnGroup.*;
 
+@SuppressWarnings({"unused", "SameParameterValue"})
 public class AetherEntityTypes {
-    public static final EntityType<AechorPlantEntity> AECHOR_PLANT;
-    public static final EntityType<FlyingCowEntity> FLYING_COW;
-    public static final EntityType<AerbunnyEntity> AERBUNNY;
-    public static final EntityType<MoaEntity> MOA;
-    public static final EntityType<PhygEntity> PHYG;
-    public static final EntityType<SheepuffEntity> SHEEPUFF;
-    public static final EntityType<CockatriceEntity> COCKATRICE;
-    public static final EntityType<ChestMimicEntity> CHEST_MIMIC;
-    public static final EntityType<FloatingBlockEntity> FLOATING_BLOCK;
-    public static final EntityType<GoldenDartEntity> GOLDEN_DART;
-    public static final EntityType<EnchantedDartEntity> ENCHANTED_DART;
-    public static final EntityType<PoisonDartEntity> POISON_DART;
-    public static final EntityType<PoisonNeedleEntity> POISON_NEEDLE;
-//    public static EntityType<WhirlwindEntity> WHIRLWIND;
-    public static final EntityType<AerwhaleEntity> AERWHALE;
-//    public static EntityType<MiniCloudEntity> MINI_CLOUD;
-//    public static EntityType<FireMinionEntity> FIRE_MINION;
-//    public static EntityType<CrystalEntity> CRYSTAL;
-//    public static EntityType<PhoenixArrowEntity> PHOENIX_ARROW;
-    public static final EntityType<SwetEntity> BLUE_SWET;
-    public static final EntityType<SwetEntity> PURPLE_SWET;
-    public static final EntityType<SwetEntity> WHITE_SWET;
-    public static final EntityType<SwetEntity> GOLDEN_SWET;
-
-    static {
-        AECHOR_PLANT = register("aechor_plant", SpawnGroup.MONSTER, EntityDimensions.changing(1.0F, 1.0F), (entityType, world) -> new AechorPlantEntity(world));
-        FLYING_COW = register("flying_cow", SpawnGroup.CREATURE, EntityDimensions.changing(0.9F, 1.3F), (entityType, world) -> new FlyingCowEntity(world));
-        AERBUNNY = register("aerbunny", SpawnGroup.CREATURE, EntityDimensions.changing(0.55F, 0.55F), (entityType, world) -> new AerbunnyEntity(world));
-        MOA = register("moa", SpawnGroup.CREATURE, EntityDimensions.changing(1.0F, 2.0F), (entityType, world) -> new MoaEntity(world));
-        PHYG = register("phyg", SpawnGroup.CREATURE, EntityDimensions.changing(0.9F, 1.3F), (entityType, world) -> new PhygEntity(world));
-        SHEEPUFF = register("sheepuff", SpawnGroup.CREATURE, EntityDimensions.changing(0.9F, 1.3F), (entityType, world) -> new SheepuffEntity(world));
-        COCKATRICE = register("cockatrice", SpawnGroup.MONSTER, EntityDimensions.changing(1.0F, 2.0F), (entityType, world) -> new CockatriceEntity(world));
-        CHEST_MIMIC = register("chest_mimic", SpawnGroup.MONSTER, EntityDimensions.changing(1.0F, 2.0F), (entityType, world) -> new ChestMimicEntity(world));
-        FLOATING_BLOCK = register("floating_block", 160, 20, true, EntityDimensions.changing(0.98F, 0.98F), FloatingBlockEntity::new);
-        GOLDEN_DART = register("golden_dart", SpawnGroup.MISC, EntityDimensions.changing(0.5F, 0.5F), (entityType, world) -> new GoldenDartEntity(world));
-        ENCHANTED_DART = register("enchanted_dart", SpawnGroup.MISC, EntityDimensions.changing(0.5F, 0.5F), (entityType, world) -> new EnchantedDartEntity(world));
-        POISON_DART = register("poison_dart", SpawnGroup.MISC, EntityDimensions.changing(0.5F, 0.5F), (entityType, world) -> new PoisonDartEntity(world));
-        POISON_NEEDLE = register("poison_needle", SpawnGroup.MISC, EntityDimensions.changing(0.5F, 0.5F), (entityType, world) -> new PoisonNeedleEntity(world));
-        AERWHALE = register("aerwhale", SpawnGroup.CREATURE, EntityDimensions.changing(3.0F, 1.2F), (entityType, world) -> new AerwhaleEntity(world));
-//        WHIRLWIND = register("whirlwind", ...);
-//        MINI_CLOUD = register("mini_cloud", ...);
-//        FIRE_MINION = register("fire_minion", ...);
-//        CRYSTAL = register("crystal", ...);
-//        PHOENIX_ARROW = register("phoenix_arrow", ...);
-        BLUE_SWET = register("blue_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new BlueSwetEntity(world));
-        PURPLE_SWET = register("purple_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new PurpleSwetEntity(world));
-        WHITE_SWET = register("white_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new WhiteSwetEntity(world));
-        GOLDEN_SWET = register("golden_swet", SpawnGroup.MONSTER, EntityDimensions.changing(2.0F, 2.0F), (entityType, world) -> new GoldenSwetEntity(world));
+    private static Action<? super EntityType<? extends LivingEntity>> attributes(Supplier<DefaultAttributeContainer.Builder> builder) {
+        return (id, entityType) -> DefaultAttributeRegistry.DEFAULT_ATTRIBUTE_REGISTRY.put(entityType, builder.get().build());
     }
+
+    private static <T extends MobEntity> Action<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, Heightmap.Type heightmapType, SpawnRestriction.SpawnPredicate<T> predicate) {
+        return (id, entityType) -> SpawnRestriction.register(entityType, location, heightmapType, predicate);
+    }
+
+    private static <T extends MobEntity> Action<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, SpawnRestriction.SpawnPredicate<T> predicate) {
+        return spawnRestrictions(location, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate);
+    }
+
+    private static <T extends MobEntity> Action<EntityType<T>> spawnRestrictions(SpawnRestriction.SpawnPredicate<T> predicate) {
+        return spawnRestrictions(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate);
+    }
+
+
+
+    /*
+    Begin entity types
+     */
+
+    public static final EntityType<AechorPlantEntity> AECHOR_PLANT = add("aechor_plant", of(AechorPlantEntity::new, MONSTER, changing(1f, 1f), 5),
+            attributes(AechorPlantEntity::createAechorPlantAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
+            //todo: why is this an animal? should extend hostile to allow hostile spawn restrictions, and inherit hostile behviour
+
+    public static final EntityType<FlyingCowEntity> FLYING_COW = add("flying_cow", of(FlyingCowEntity::new, CREATURE, changing(0.9F, 1.3F), 5),
+            attributes(FlyingCowEntity::createFlyingCowAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
+
+    public static final EntityType<AerbunnyEntity> AERBUNNY = add("aerbunny", of(AerbunnyEntity::new, CREATURE, changing(0.55F, 0.55F), 5),
+            attributes(AerbunnyEntity::createAerbunnyAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
+
+    public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(1.0F, 2.0F), 5),
+            attributes(MoaEntity::createMoaAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
+
+    public static final EntityType<PhygEntity> PHYG = add("phyg", of(PhygEntity::new, CREATURE, changing(0.9F, 1.3F), 5),
+            attributes(PhygEntity::createPhygAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
+
+    public static final EntityType<SheepuffEntity> SHEEPUFF = add("sheepuff", of(SheepuffEntity::new, CREATURE, changing(0.9F, 1.3F), 5),
+            attributes(SheepuffEntity::createSheepuffAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
+
+    public static final EntityType<CockatriceEntity> COCKATRICE = add("cockatrice", of(CockatriceEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
+            attributes(CockatriceEntity::createCockatriceAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
+
+    public static final EntityType<ChestMimicEntity> CHEST_MIMIC = add("chest_mimic", of(ChestMimicEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
+            attributes(ChestMimicEntity::createChestMimicAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
+
+    public static final EntityType<FloatingBlockEntity> FLOATING_BLOCK = add("floating_block",
+            AetherEntityTypes.<FloatingBlockEntity>of(FloatingBlockEntity::new, MISC, changing(0.98F, 0.98F), 10).trackedUpdateRate(20));
+
+    public static final EntityType<GoldenDartEntity> GOLDEN_DART = add("golden_dart", of(GoldenDartEntity::new, MISC, changing(0.5F, 0.5F), 5));
+    public static final EntityType<EnchantedDartEntity> ENCHANTED_DART = add("enchanted_dart", of(EnchantedDartEntity::new, MISC, changing(0.5F, 0.5F), 5));
+    public static final EntityType<PoisonDartEntity> POISON_DART = add("poison_dart", of(PoisonDartEntity::new, MISC, changing(0.5F, 0.5F), 5));
+    public static final EntityType<PoisonNeedleEntity> POISON_NEEDLE = add("poison_needle", of(PoisonNeedleEntity::new, MISC, changing(0.5F, 0.5F), 5));
+
+    public static final EntityType<AerwhaleEntity> AERWHALE = add("aerwhale", of(AerwhaleEntity::new, CREATURE, changing(3.0F, 1.2F), 5),
+            attributes(AerwhaleEntity::createAerwhaleAttributes), spawnRestrictions(MobEntity::canMobSpawn));
+
+    public static final EntityType<BlueSwetEntity> BLUE_SWET = add("blue_swet", of(BlueSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
+            attributes(BlueSwetEntity::createSwetAttributes), spawnRestrictions(SwetEntity::canSpawn));
+
+    public static final EntityType<PurpleSwetEntity> PURPLE_SWET = add("purple_swet", of(PurpleSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
+            attributes(PurpleSwetEntity::createSwetAttributes), spawnRestrictions(SwetEntity::canSpawn));
+
+    public static final EntityType<WhiteSwetEntity> WHITE_SWET = add("white_swet", of(WhiteSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
+            attributes(WhiteSwetEntity::createSwetAttributes), spawnRestrictions(SwetEntity::canSpawn));
+
+    public static final EntityType<GoldenSwetEntity> GOLDEN_SWET = add("golden_swet", of(GoldenSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
+            attributes(GoldenSwetEntity::createSwetAttributes), spawnRestrictions(SwetEntity::canSpawn));
+
 
     public static void init() {
-        // Register Entity Attribute Data and Spawn Restrictions
-        registerAttribute(MOA, MoaEntity.initAttributes());
-        registerAttribute(FLYING_COW, FlyingCowEntity.initAttributes());
-        registerAttribute(SHEEPUFF, SheepuffEntity.initAttributes());
-        registerAttribute(AERBUNNY, AerbunnyEntity.initAttributes());
-        registerAttribute(AECHOR_PLANT, AechorPlantEntity.initAttributes());
-        registerAttribute(PHYG, PhygEntity.initAttributes());
-        registerAttribute(COCKATRICE, CockatriceEntity.initAttributes());
-        registerAttribute(AERWHALE, AerwhaleEntity.initAttributes());
-        registerAttribute(CHEST_MIMIC, ChestMimicEntity.initAttributes());
-        registerAttribute(BLUE_SWET, SwetEntity.initAttributes());
-        registerAttribute(PURPLE_SWET, SwetEntity.initAttributes());
-        registerAttribute(WHITE_SWET, SwetEntity.initAttributes());
-        registerAttribute(GOLDEN_SWET, SwetEntity.initAttributes());
-
-        SpawnRestriction.register(SHEEPUFF, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
-        SpawnRestriction.register(PHYG, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
-        SpawnRestriction.register(AERBUNNY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
-        SpawnRestriction.register(MOA, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
-        SpawnRestriction.register(FLYING_COW, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getAnimalData);
-        SpawnRestriction.register(COCKATRICE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
-        SpawnRestriction.register(AECHOR_PLANT, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
-        SpawnRestriction.register(BLUE_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
-        SpawnRestriction.register(PURPLE_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
-        SpawnRestriction.register(WHITE_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
-        SpawnRestriction.register(GOLDEN_SWET, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AetherEntityTypes::getHostileData);
+        RegistryQueue.ENTITY_TYPE.register();
     }
 
-    public static DefaultAttributeContainer.Builder getDefaultAttributes() {
-        return LivingEntity.createLivingAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 6);
+    @SafeVarargs
+    private static <V extends EntityType<?>> V add(String id, V type, Action<? super V>... additionalActions) {
+        return RegistryQueue.ENTITY_TYPE.add(locate(id), type, additionalActions);
     }
 
-    public static <X extends Entity> EntityType<X> register(String name, int trackingDistance, int updateIntervalTicks, boolean alwaysUpdateVelocity, EntityDimensions size, EntityType.EntityFactory<X> factory) {
-        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory)
-                .trackRangeBlocks(trackingDistance)
-                .trackedUpdateRate(updateIntervalTicks)
-                .dimensions(EntityDimensions.changing(size.width, size.height))
-                .disableSaving()
-                .build());
+    @SafeVarargs
+    private static <E extends Entity> EntityType<E> add(String id, FabricEntityTypeBuilder<E> builder, Action<? super EntityType<E>>... additionalActions) {
+        return add(id, builder.build(), additionalActions);
     }
 
-    public static <X extends Entity> EntityType<X> register(String name, SpawnGroup category, EntityDimensions size, EntityType.EntityFactory<X> factory) {
-        return Registry.register(Registry.ENTITY_TYPE, Aether.locate(name), FabricEntityTypeBuilder.create(category, factory)
-                .dimensions(EntityDimensions.changing(size.width, size.height))
-                .build());
-    }
-    
-    public static void registerAttribute(EntityType<? extends LivingEntity> type, DefaultAttributeContainer container) {
-        DefaultAttributeRegistry.DEFAULT_ATTRIBUTE_REGISTRY.put(type, container);
-    }
-
-    public static void registerAttribute(EntityType<? extends LivingEntity> type, DefaultAttributeContainer.Builder container) {
-        registerAttribute(type, container.build());
-    }
-
-    public static boolean getAnimalData(EntityType<? extends Entity> entityType, WorldAccess WorldAccess, SpawnReason SpawnReason, BlockPos blockPos, Random random) {
-        return WorldAccess.getBlockState(blockPos.down()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK && WorldAccess.getBaseLightLevel(blockPos, 0) > 8 && (SpawnReason == SPAWNER || WorldAccess.getBlockState(blockPos.down()).allowsSpawning(WorldAccess, blockPos, entityType));
-    }
-
-    public static boolean getHostileData(EntityType<? extends Entity> entityType_1, ServerWorldAccess WorldAccess_1, SpawnReason SpawnReason, BlockPos blockPos_1, Random random_1) {
-        return WorldAccess_1.getDifficulty() != Difficulty.PEACEFUL && HostileEntity.isSpawnDark(WorldAccess_1, blockPos_1, random_1) && (SpawnReason == SPAWNER || WorldAccess_1.getBlockState(blockPos_1.down()).allowsSpawning(WorldAccess_1, blockPos_1, entityType_1));
+    public static <T extends Entity> FabricEntityTypeBuilder<T> of(EntityType.EntityFactory<T> factory, SpawnGroup spawnGroup, EntityDimensions dimensions, int trackingRange) {
+        return FabricEntityTypeBuilder.create(spawnGroup, factory).dimensions(dimensions).trackRangeChunks(trackingRange);
     }
 }

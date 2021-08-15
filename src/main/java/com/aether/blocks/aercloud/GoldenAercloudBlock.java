@@ -14,7 +14,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class GoldenAercloudBlock extends BaseAercloudBlock {
+public class GoldenAercloudBlock extends AercloudBlock {
 
     protected static VoxelShape SHAPE = VoxelShapes.empty();
 

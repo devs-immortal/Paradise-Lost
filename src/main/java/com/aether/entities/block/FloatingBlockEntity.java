@@ -54,22 +54,17 @@ public class FloatingBlockEntity extends Entity {
     private boolean partOfStructure = false;
     private BiConsumer<Float, Boolean> onEndFloating;
 
-    public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityTypeIn, World worldIn) {
-        super(entityTypeIn, worldIn);
-        setOnEndFloating((impact, landed) -> {});
-        setDropState(() -> {
-            int distFromTop = worldIn.getTopY() - this.getBlockPos().getY();
-            return !this.isFastFloater() && distFromTop <= 50;
+    public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityType, World world) {
+        super(entityType, world);
+        this.setOnEndFloating((impact, landed) -> {});
+        this.setDropState(() -> {
+            int distanceFromTop = world.getTopY() - this.getBlockPos().getY();
+            return !this.isFastFloater() && distanceFromTop <= 50;
         });
     }
 
-    public FloatingBlockEntity(World worldIn) {
-        this(AetherEntityTypes.FLOATING_BLOCK, worldIn);
-    }
-
     public FloatingBlockEntity(World world, double x, double y, double z, BlockState floatingBlockState) {
-        this(world);
-
+        this(AetherEntityTypes.FLOATING_BLOCK, world);
         this.floatTile = floatingBlockState;
         this.inanimate = true;
         this.setPosition(x, y, z);
@@ -80,29 +75,27 @@ public class FloatingBlockEntity extends Entity {
         this.setOrigin(new BlockPos(this.getPos()));
     }
 
-    public FloatingBlockEntity(World world, double x, double y, double z, BlockState floatingBlockState, Supplier<Boolean> dropSupplier) {
-        this(world, x, y, z, floatingBlockState);
-        this.setDropState(dropSupplier);
-    }
-
     @Override
     public void setPosition(double x, double y, double z) {
-        if (dataTracker == null || floatTile == null) {
+        if (this.dataTracker == null || this.floatTile == null) {
             super.setPosition(x, y, z);
         } else {
-            collides = true;
-            BlockPos origin = dataTracker.get(ORIGIN);
-            VoxelShape colShape = floatTile.getCollisionShape(world, origin);
+            this.collides = true;
+            BlockPos origin = this.dataTracker.get(ORIGIN);
+            VoxelShape colShape = this.floatTile.getCollisionShape(world, origin);
             if (colShape.isEmpty()) {
-                colShape = floatTile.getOutlineShape(world, origin);
-                collides = false;
+                colShape = this.floatTile.getOutlineShape(world, origin);
+                this.collides = false;
             }
             if (colShape.isEmpty()) {
                 super.setPosition(x, y, z);
             } else {
                 this.setPos(x, y, z);
                 Box box = colShape.getBoundingBox();
-                this.setBoundingBox(box.offset(getPos().subtract(new Vec3d(MathHelper.lerp(0.5D, box.minX, box.maxX), 0, MathHelper.lerp(0.5D, box.minZ, box.maxZ)))));
+                this.setBoundingBox(box.offset(getPos().subtract(new Vec3d(
+                        MathHelper.lerp(0.5D, box.minX, box.maxX),
+                        0,
+                        MathHelper.lerp(0.5D, box.minZ, box.maxZ)))));
             }
         }
     }
@@ -149,6 +142,7 @@ public class FloatingBlockEntity extends Entity {
     @Override
     public void tick() {}
 
+    @SuppressWarnings("deprecation")
     public void postTickEntities() {
         if (this.floatTile.isAir()) {
             this.discard();
@@ -248,12 +242,15 @@ public class FloatingBlockEntity extends Entity {
                 boolean flag = this.floatTile.isIn(BlockTags.ANVIL);
                 DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
 
-                for (Entity entity : list)
+                for (Entity entity : list) {
                     entity.damage(damagesource, Math.min(MathHelper.floor(i * this.floatHurtAmount), this.floatHurtMax));
+                }
 
                 if (flag && this.random.nextFloat() < 0.05F + i * 0.05F) {
                     BlockState blockstate = AnvilBlock.getLandingState(this.floatTile);
-                    if (blockstate == null) this.dontSetBlock = true;
+                    if (blockstate == null) {
+                        this.dontSetBlock = true;
+                    }
                     else this.floatTile = blockstate;
                 }
             }
@@ -270,7 +267,9 @@ public class FloatingBlockEntity extends Entity {
         compound.putBoolean("HurtEntities", this.hurtEntities);
         compound.putFloat("FallHurtAmount", this.floatHurtAmount);
         compound.putInt("FallHurtMax", this.floatHurtMax);
-        if (this.blockEntityData != null) compound.put("TileEntityData", this.blockEntityData);
+        if (this.blockEntityData != null) {
+            compound.put("TileEntityData", this.blockEntityData);
+        }
     }
 
     @Override
@@ -314,8 +313,8 @@ public class FloatingBlockEntity extends Entity {
         return this.floatTile;
     }
 
-    public void setHurtEntities(boolean hurtEntitiesIn) {
-        this.hurtEntities = hurtEntitiesIn;
+    public void setHurtEntities(boolean hurtEntities) {
+        this.hurtEntities = hurtEntities;
     }
 
     public Supplier<Boolean> getDropState() {
@@ -375,7 +374,6 @@ public class FloatingBlockEntity extends Entity {
     public void land(float impact) {
         boolean landingSuccessful = false;
         BlockPos blockPos = this.getBlockPos();
-        Block block = this.floatTile.getBlock();
         BlockState blockState = this.world.getBlockState(blockPos);
         this.setVelocity(this.getVelocity().multiply(0.7, 0.5, 0.7));
         if (blockState.getBlock() != Blocks.MOVING_PISTON) {
