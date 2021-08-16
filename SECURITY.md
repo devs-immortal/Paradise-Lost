@@ -16,6 +16,7 @@ If one or more of these items fit your match. Please see our supported versions.
 |---------	|------------	|---------------------	|
 | DEV\*     |  ✅       	| Never               	|
 | ALPHA   	|  ✅        	| Not Decided Yet     	|
+| BETA   	|  ✅        	| Not Decided Yet     	|
 
 
 ## Reporting a Vulnerability
