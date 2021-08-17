@@ -34,7 +34,6 @@
     "item.ShovelItemMixin",
     "item.SwordItemAccessor",
     "item.ToolMaterialsAccessor",
-    "screen.EnchantmentScreenHandlerMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
@@ -46,7 +45,6 @@
     "village.VillagerProfessionMixin"
   ],
   "client": [
-    "block.EnchantingTableBlockMixin",
     "client.BackgroundRendererMixin",
     "client.ClientPlayerEntityMixin",
     "client.ClientPlayNetworkHandlerMixin",

@@ -60,6 +60,10 @@ repositories {
         url = "https://maven.kyrptonaught.dev/"
     }
     maven {
+        name = "gudenau\'s maven"
+        url = "https://maven.gudenau.net"
+    }
+    maven {
         url = "https://jitpack.io"
     }
     maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
@@ -101,6 +105,8 @@ dependencies {
     // Implement Trinkets for parachutes, rings etc.
     //modImplementation(include("dev.emi:trinkets:${project.trinkets_version}"))
     modImplementation(include("com.github.CDAGaming:trinkets:${project.trinkets_version}"))
+
+    modImplementation(include("net.gudenau.minecraft:MoreTags:${project.moretags_version}"))
 }
 
 processResources {
