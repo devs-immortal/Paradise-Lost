@@ -2,6 +2,7 @@ package com.aether.entities.block;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
+import com.aether.util.AetherBlockTags;
 import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -59,7 +60,7 @@ public class FloatingBlockEntity extends Entity {
         this.setOnEndFloating((impact, landed) -> {});
         this.setDropState(() -> {
             int distanceFromTop = world.getTopY() - this.getBlockPos().getY();
-            return !this.isFastFloater() && distanceFromTop <= 50;
+            return !AetherBlockTags.FAST_FLOATERS.contains(this.floatTile.getBlock()) && distanceFromTop <= 50;
         });
     }
 
@@ -164,7 +165,7 @@ public class FloatingBlockEntity extends Entity {
 
             if (!this.hasNoGravity()) {
                 if (!isDropping() && !shouldBeginDropping()) {
-                    if (this.isFastFloater()) {
+                    if (AetherBlockTags.FAST_FLOATERS.contains(block)) {
                         this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
                     } else {
                         this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
@@ -227,10 +228,6 @@ public class FloatingBlockEntity extends Entity {
 
             this.setVelocity(this.getVelocity().multiply(0.98D));
         }
-    }
-
-    private boolean isFastFloater() {
-        return (this.floatTile.getBlock() == AetherBlocks.GRAVITITE_ORE || this.floatTile.getBlock() == AetherBlocks.GRAVITITE_LEVITATOR || this.floatTile.getBlock() == AetherBlocks.BLOCK_OF_GRAVITITE);
     }
 
     @Override
