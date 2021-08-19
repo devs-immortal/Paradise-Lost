@@ -1,6 +1,7 @@
 package com.aether.entities.hostile;
 
 import com.aether.items.AetherItems;
+import com.aether.tag.AetherItemTags;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -47,11 +48,7 @@ public abstract class SwetEntity extends SlimeEntity {
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
-        if(stack.isOf(AetherItems.SWET_SPAWN_EGG)
-                || stack.isOf(AetherItems.BLUE_SWET_SPAWN_EGG)
-                || stack.isOf(AetherItems.PURPLE_SWET_SPAWN_EGG)
-                || stack.isOf(AetherItems.GOLDEN_SWET_SPAWN_EGG)
-                || stack.isOf(AetherItems.SWET_BALL)){
+        if(AetherItemTags.GROWS_SWETS.contains(stack.getItem())){
             if (!player.isCreative()) {
                 stack.decrement(1);
             }
