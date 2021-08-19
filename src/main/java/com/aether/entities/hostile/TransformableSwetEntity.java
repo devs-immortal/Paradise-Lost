@@ -1,15 +1,18 @@
 package com.aether.entities.hostile;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
-import com.aether.items.AetherItems;
+import com.aether.tag.AetherBlockTags;
+import com.aether.tag.AetherEntityTypeTags;
+import com.aether.tag.AetherFluidTags;
+import com.aether.tag.AetherItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 public abstract class TransformableSwetEntity extends SwetEntity {
@@ -30,34 +33,79 @@ public abstract class TransformableSwetEntity extends SwetEntity {
     @Override
     protected void onEntityCollision(Entity entity) {
         super.onEntityCollision(entity);
-        if (entity.squaredDistanceTo(this) <= 1 && this.getSize() > 1) {
-            if (entity instanceof CockatriceEntity || entity instanceof AechorPlantEntity) {
-                this.changeType(AetherEntityTypes.PURPLE_SWET);
-            }
-            if (entity instanceof ItemEntity item){
-                if (item.getStack().getItem() == AetherItems.BLUEBERRY) {
-                    this.changeType(AetherEntityTypes.BLUE_SWET);
-                    item.remove(RemovalReason.KILLED);
-                }
-                if (item.getStack().getItem() == AetherItems.GOLDEN_AMBER) {
-                    this.changeType(AetherEntityTypes.GOLDEN_SWET);
-                    item.remove(RemovalReason.KILLED);
-                }
-            }
-        }
+        suggestTypeChange(entity);
     }
 
-    public boolean suggestTypeChange(World world, BlockPos blockPos, BlockState state) {
+    public boolean suggestTypeChange(BlockState state) {
         Block block = state.getBlock();
-        if (block == AetherBlocks.GOLDEN_OAK_LOG ||
-                block == AetherBlocks.GOLDEN_OAK_LEAVES ||
-                block == AetherBlocks.GOLDEN_OAK_SAPLING ||
-                block == AetherBlocks.STRIPPED_GOLDEN_OAK_LOG ||
-                block == AetherBlocks.POTTED_GOLDEN_OAK_SAPLING) {
+        if (AetherBlockTags.SWET_TRANSFORMERS_GOLDEN.contains(block)) {
             return this.changeType(AetherEntityTypes.GOLDEN_SWET);
         }
-        if (state.getBlock() == AetherBlocks.BLUEBERRY_BUSH) {
+        if (AetherBlockTags.SWET_TRANSFORMERS_BLUE.contains(block)) {
             return this.changeType(AetherEntityTypes.BLUE_SWET);
+        }
+        if (AetherBlockTags.SWET_TRANSFORMERS_PURPLE.contains(block)) {
+            return this.changeType(AetherEntityTypes.PURPLE_SWET);
+        }
+//        if (AetherBlockTags.SWET_TRANSFORMERS_VERMILION.contains(block)) {
+//            return this.changeType(AetherEntityTypes.VERMILION_SWET);
+//        }
+        return false;
+    }
+
+    public boolean suggestTypeChange(FluidState state) {
+        Fluid fluid = state.getFluid();
+        if (AetherFluidTags.SWET_TRANSFORMERS_GOLDEN.contains(fluid)) {
+            return this.changeType(AetherEntityTypes.GOLDEN_SWET);
+        }
+        if (AetherFluidTags.SWET_TRANSFORMERS_BLUE.contains(fluid)) {
+            return this.changeType(AetherEntityTypes.BLUE_SWET);
+        }
+        if (AetherFluidTags.SWET_TRANSFORMERS_PURPLE.contains(fluid)) {
+            return this.changeType(AetherEntityTypes.PURPLE_SWET);
+        }
+//        if (AetherFluidTags.SWET_TRANSFORMERS_VERMILION.contains(fluid)) {
+//            return this.changeType(AetherEntityTypes.VERMILION_SWET);
+//        }
+        return false;
+    }
+
+    public boolean suggestTypeChange(Item item){
+        if (AetherItemTags.SWET_TRANSFORMERS_BLUE.contains(item)) {
+            return this.changeType(AetherEntityTypes.BLUE_SWET);
+        } else if (AetherItemTags.SWET_TRANSFORMERS_GOLDEN.contains(item)) {
+            return this.changeType(AetherEntityTypes.GOLDEN_SWET);
+        } else if (AetherItemTags.SWET_TRANSFORMERS_PURPLE.contains(item)) {
+            return this.changeType(AetherEntityTypes.PURPLE_SWET);
+        }
+//        } else if (AetherItemTags.SWET_TRANSFORMERS_VERMILION.contains(item)) {
+//            return this.changeType(AetherEntityTypes.VERMILION_SWET);
+//        }
+        return false;
+    }
+
+    public boolean suggestTypeChange(Entity entity) {
+        if (entity instanceof ItemEntity itemEntity){
+            if (suggestTypeChange(itemEntity.getStack().getItem())) {
+                itemEntity.remove(RemovalReason.KILLED);
+                return true;
+            }
+            return false;
+        }
+        if (entity.squaredDistanceTo(this) <= 1 && this.getSize() > 1) {
+            EntityType<?> type = entity.getType();
+            if (AetherEntityTypeTags.SWET_TRANSFORMERS_GOLDEN.contains(type)) {
+                return this.changeType(AetherEntityTypes.GOLDEN_SWET);
+            }
+            if (AetherEntityTypeTags.SWET_TRANSFORMERS_BLUE.contains(type)) {
+                return this.changeType(AetherEntityTypes.BLUE_SWET);
+            }
+            if (AetherEntityTypeTags.SWET_TRANSFORMERS_PURPLE.contains(type)) {
+                return this.changeType(AetherEntityTypes.PURPLE_SWET);
+            }
+//            if (AetherEntityTypeTags.SWET_TRANSFORMERS_VERMILION.contains(type)) {
+//                return this.changeType(AetherEntityTypes.VERMILION_SWET);
+//            }
         }
         return false;
     }
@@ -65,9 +113,7 @@ public abstract class TransformableSwetEntity extends SwetEntity {
     @Override
     protected void onBlockCollision(BlockState state) {
         super.onBlockCollision(state);
-        if (state.getFluidState().getFluid() == Fluids.WATER ||
-                state.getFluidState().getFluid() == Fluids.FLOWING_WATER) {
-            this.changeType(AetherEntityTypes.BLUE_SWET);
-        }
+        suggestTypeChange(state);
+        suggestTypeChange(state.getFluidState());
     }
 }

@@ -2,7 +2,7 @@ package com.aether.entities.block;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
-import com.aether.util.AetherBlockTags;
+import com.aether.tag.AetherBlockTags;
 import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

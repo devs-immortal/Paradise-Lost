@@ -18,7 +18,7 @@ public class AetherPillarBlock extends PillarBlock {
         super.onEntityCollision(state, world, pos, entity);
         if ((this == AetherBlocks.GOLDEN_OAK_LOG)
                 && entity instanceof TransformableSwetEntity swet) {
-            swet.suggestTypeChange(world, pos, state);
+            swet.suggestTypeChange(state);
         }
     }
 }

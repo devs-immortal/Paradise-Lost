@@ -37,7 +37,7 @@ public class  AetherLeavesBlock extends LeavesBlock {
             entity.slowMovement(state, new Vec3d(0.99D, 0.9D, 0.99D));
         }
         if (this == AetherBlocks.GOLDEN_OAK_LEAVES && entity instanceof TransformableSwetEntity swet) {
-            swet.suggestTypeChange(world, pos, state);
+            swet.suggestTypeChange(state);
         }
     }
 
