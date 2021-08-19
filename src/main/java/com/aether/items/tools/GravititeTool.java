@@ -1,9 +1,9 @@
 package com.aether.items.tools;
 
-import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityExtensions;
 import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.entities.block.FloatingBlockStructure;
+import com.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
@@ -45,15 +45,11 @@ public class GravititeTool {
         ItemStack heldItem = context.getStack();
         Supplier<Boolean> dropState = () -> {
             int distFromTop = world.getTopY() - pos.getY();
-            boolean isFastFloater = (
-                    state.getBlock() == AetherBlocks.GRAVITITE_ORE ||
-                            state.getBlock() == AetherBlocks.GRAVITITE_LEVITATOR ||
-                            state.getBlock() == AetherBlocks.BLOCK_OF_GRAVITITE);
-
-            return !isFastFloater && distFromTop <= 50;
+            return !AetherBlockTags.FAST_FLOATERS.contains(state.getBlock()) && distFromTop <= 50;
         };
 
         return (!state.isToolRequired() || heldItem.isSuitableFor(state))
+                && !AetherBlockTags.NON_FLOATERS.contains(state.getBlock())
                 && FloatingBlockEntity.canMakeBlock(dropState, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
     }
 
