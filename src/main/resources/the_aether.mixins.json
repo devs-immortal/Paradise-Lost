@@ -9,13 +9,10 @@
     "block.BlockEntityTypeMixin",
     "block.BlockMixin",
     "block.BlocksAccessor",
-    "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
-    "block.PlantBlockMixin",
     "entity.BoatEntityMixin",
     "entity.BoatEntityTypeMixin",
     "entity.CowEntityMixin",
-    "entity.EatCarrotCropGoalMixin",
     "entity.EntityMixin",
     "entity.MixinAbstractFurnaceBlockEntity",
     "entity.MixinLivingEntity",
@@ -41,8 +38,7 @@
     "server.ServerWorldMixin",
     "structure.FeatureMixin",
     "util.RarityMixin",
-    "util.SignTypeAccessor",
-    "village.VillagerProfessionMixin"
+    "util.SignTypeAccessor"
   ],
   "client": [
     "client.BackgroundRendererMixin",
