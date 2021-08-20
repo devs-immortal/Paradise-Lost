@@ -77,9 +77,4 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
         return new ItemStack(this.asItem());
     }
-
-    @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOf(AetherBlocks.AETHER_GRASS_BLOCK) || floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) || floor.isOf(AetherBlocks.AETHER_FARMLAND) || floor.isOf(AetherBlocks.AETHER_DIRT) || super.canPlantOnTop(floor, world, pos);
-    }
 }
