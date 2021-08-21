@@ -52,15 +52,16 @@ public class FloatingBlockEntity extends Entity {
     private Supplier<Boolean> dropState = () -> false;
     private boolean dropping = false;
     private boolean collides;
-    private boolean partOfStructure = false;
+    private boolean partOfStructure;
     private BiConsumer<Float, Boolean> onEndFloating;
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityType, World world) {
         super(entityType, world);
         this.setOnEndFloating((impact, landed) -> {});
+        partOfStructure = false;
         this.setDropState(() -> {
             int distanceFromTop = world.getTopY() - this.getBlockPos().getY();
-            return !AetherBlockTags.FAST_FLOATERS.contains(this.floatTile.getBlock()) && distanceFromTop <= 50;
+            return !this.isFastFloater() && distanceFromTop <= 50;
         });
     }
 
@@ -165,7 +166,7 @@ public class FloatingBlockEntity extends Entity {
 
             if (!this.hasNoGravity()) {
                 if (!isDropping() && !shouldBeginDropping()) {
-                    if (AetherBlockTags.FAST_FLOATERS.contains(block)) {
+                    if (isFastFloater()) {
                         this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
                     } else {
                         this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
@@ -334,6 +335,10 @@ public class FloatingBlockEntity extends Entity {
         this.dropping = dropping;
     }
 
+    public boolean isFastFloater(){
+        return AetherBlockTags.FAST_FLOATERS.contains(this.floatTile.getBlock()) && !this.partOfStructure;
+    }
+
     @Override
     public boolean entityDataRequiresOperator() {
         return true;
@@ -411,8 +416,8 @@ public class FloatingBlockEntity extends Entity {
         }
     }
     
-    public static boolean canMakeBlock(Supplier<Boolean> dropState, BlockState below, BlockState above){
-        if(dropState.get()){
+    public static boolean canMakeBlock(boolean shouldDrop, BlockState below, BlockState above){
+        if(shouldDrop){
             return FallingBlock.canFallThrough(below);
         } else {
             return FallingBlock.canFallThrough(above);

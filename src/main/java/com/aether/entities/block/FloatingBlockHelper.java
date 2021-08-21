@@ -1,0 +1,229 @@
+package com.aether.entities.block;
+
+import com.aether.blocks.AetherBlocks;
+import com.aether.entities.block.FloatingBlockStructure.FloatingBlockInfoWrapper;
+import com.aether.tag.AetherBlockTags;
+import net.gudenau.minecraft.moretags.MoreTags;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FallingBlock;
+import net.minecraft.block.PistonBlock;
+import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.block.piston.PistonHandler;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.*;
+import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
+
+public class FloatingBlockHelper {
+    public static final BiFunction<World, BlockPos, Boolean> DEFAULT_DROP_STATE = (world, pos) -> {
+        int distFromTop = world.getTopY() - pos.getY();
+        BlockState state = world.getBlockState(pos);
+        return !AetherBlockTags.FAST_FLOATERS.contains(state.getBlock()) && distFromTop <= 50;
+    };
+
+    public static boolean tryCreatePusher(World world, BlockPos pos){
+        Supplier<Boolean> dropState = () -> DEFAULT_DROP_STATE.apply(world, pos);
+        if (dropState.get()) {
+            return tryCreateGeneric(world, pos);
+        }
+
+        if (!canCreatePusher(world, pos, dropState.get())){
+            return false;
+        }
+        FloatingBlockStructure structure = FloatingBlockPusherHandler.construct(world, pos);
+        if (structure != null){
+            FloatingBlockPusherHandler.spawn(structure, world);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean tryCreateDouble(World world, BlockPos posIn){
+        Supplier<Boolean> dropState = () -> DEFAULT_DROP_STATE.apply(world, posIn);
+        if (!canCreateDouble(world, posIn, dropState.get())){
+            return false;
+        }
+        BlockPos pos = posIn;
+        BlockState state = world.getBlockState(pos);
+        if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER) {
+            pos = pos.down();
+            state = world.getBlockState(pos);
+        }
+        BlockState upperState = world.getBlockState(pos.up());
+        FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, upperState);
+        FloatingBlockEntity lower = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
+        FloatingBlockStructure structure = new FloatingBlockStructure(lower, upper, Vec3i.ZERO.up());
+        structure.spawn(world);
+        return true;
+    }
+
+    public static boolean tryCreateGeneric(World world, BlockPos pos){
+        BlockState state = world.getBlockState(pos);
+        Supplier<Boolean> dropState = () -> DEFAULT_DROP_STATE.apply(world, pos);
+        if (!canCreateGeneric(world, pos, dropState.get())){
+            return false;
+        }
+        FloatingBlockEntity entity = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
+        entity.floatTime = 0;
+
+        if (state.isOf(Blocks.TNT)) {
+            entity.setOnEndFloating((impact, landed) -> {
+                if (impact >= 0.8) {
+                    BlockPos landingPos = entity.getBlockPos();
+                    world.breakBlock(landingPos, false);
+                    world.createExplosion(entity, landingPos.getX(), landingPos.getY(), landingPos.getZ(), (float) MathHelper.clamp(impact * 5.5, 0, 10), Explosion.DestructionType.BREAK);
+                }
+            });
+        }
+        if (state.isOf(Blocks.LIGHTNING_ROD)) {
+            entity.setOnEndFloating((impact, landed) -> {
+                if (world.isThundering() && landed && impact >= 1.1) {
+                    LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
+                    lightning.setPosition(Vec3d.ofCenter(entity.getBlockPos()));
+                    world.spawnEntity(lightning);
+                }
+            });
+        }
+        world.spawnEntity(entity);
+        return true;
+    }
+
+    private static boolean canCreatePusher(World world, BlockPos pos, boolean dropping){
+        return !dropping || FallingBlock.canFallThrough(world.getBlockState(pos.down()));
+    }
+
+    private static boolean canCreateDouble(World world, BlockPos pos, boolean dropping){
+        BlockState state = world.getBlockState(pos);
+        if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
+            return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up().up()));
+        } else {
+            return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down().down()), world.getBlockState(pos.up()));
+        }
+    }
+
+    private static boolean canCreateGeneric(World world, BlockPos pos, boolean dropping){
+        return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
+    }
+
+    public static boolean isToolAdequate(ItemUsageContext context){
+        BlockPos pos = context.getBlockPos();
+        World world = context.getWorld();
+        BlockState state = world.getBlockState(pos);
+        Item heldItem = context.getStack().getItem();
+        if (world.getBlockEntity(pos) != null || state.getHardness(world, pos) == -1.0F
+                || (state.isToolRequired() && !heldItem.isSuitableFor(state))
+                || AetherBlockTags.NON_FLOATERS.contains(state.getBlock())){
+            return false;
+        }
+        return true;
+    }
+
+    static class FloatingBlockPusherHandler {
+        public static int MAX_MOVABLE_BLOCKS = PistonHandler.MAX_MOVABLE_BLOCKS;
+
+        @Nullable
+        public static FloatingBlockStructure construct(World world, BlockPos pos){
+            if(!world.getBlockState(pos).isOf(AetherBlocks.GRAVITITE_LEVITATOR)){
+                return null;
+            }
+            ArrayList<FloatingBlockInfoWrapper> infos = new ArrayList<>(0);
+            Vec3i offset = Vec3i.ZERO;
+            if (continueTree(world, pos, offset, infos)) {
+                return new FloatingBlockStructure(infos);
+            } else {
+                return null;
+            }
+        }
+
+        // returns false if the tree is unable to move. returns true otherwise.
+        private static boolean continueTree(World world, BlockPos origin, Vec3i offset, ArrayList<FloatingBlockInfoWrapper> infos){
+            if (infos.size() > MAX_MOVABLE_BLOCKS) {
+                return false;
+            }
+            BlockPos pos = origin.add(offset);
+            BlockState state = world.getBlockState(pos);
+
+            if (state.isAir()) {
+                return true;
+            }
+            // adds the block to the structure
+            FloatingBlockEntity newBlock = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
+            infos.add(new FloatingBlockInfoWrapper(newBlock, offset));
+            // check if above block is movable
+            if (!PistonBlock.isMovable(world.getBlockState(origin.add(offset.up())), world, origin.add(offset.up()), Direction.UP, true, Direction.UP)) {
+                return false;
+            }
+            // check if rest of tree above is movable
+            if (!alreadyCounted(infos, offset.up()) && !continueTree(world, origin, offset.up(), infos)) {
+                return false;
+            }
+            // sides and bottom (sticky blocks)
+            if (MoreTags.STICKY_BLOCKS.contains(state.getBlock())) {
+                // checks each of the sides
+                for(Vec3i newOff : new Vec3i[]{
+                        offset.north(),
+                        offset.east(),
+                        offset.south(),
+                        offset.west(),
+                        offset.down()
+                        /* up has already been checked*/
+                }){
+                    BlockState adjacentState = world.getBlockState(origin.add(newOff));
+                    if (!alreadyCounted(infos, newOff) && isAdjacentBlockStuck(state, adjacentState)){
+                        // check the rest of the tree above the side block
+                        if (!continueTree(world, origin, newOff, infos)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        private static boolean alreadyCounted(ArrayList<FloatingBlockInfoWrapper> infos, Vec3i offset1){
+            for(FloatingBlockInfoWrapper info : infos){
+                if (info.offset.equals(offset1)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static boolean isAdjacentBlockStuck(BlockState state, BlockState adjacentState) {
+            if (MoreTags.HONEY_BLOCKS.contains(state.getBlock()) && MoreTags.SLIME_BLOCKS.contains(adjacentState.getBlock())) {
+                return false;
+            } else if (MoreTags.SLIME_BLOCKS.contains(state.getBlock()) && MoreTags.HONEY_BLOCKS.contains(adjacentState.getBlock())) {
+                return false;
+            } else {
+                return MoreTags.STICKY_BLOCKS.contains(state.getBlock()) || MoreTags.STICKY_BLOCKS.contains(adjacentState.getBlock());
+            }
+        }
+
+        public static void spawn(FloatingBlockStructure structure, World world){
+            if (!(structure.blockInfos.size() == 1)) {
+                FloatingBlockInfoWrapper master = structure.blockInfos.get(0);
+                structure.blockInfos.forEach(blockInfo -> {
+                    blockInfo.block.markPartOfStructure();
+                    blockInfo.block.floatTime = -1;
+                    world.removeBlock(blockInfo.block.getBlockPos(), false);
+                    world.spawnEntity(blockInfo.block);
+                });
+                structure.init();
+            } else {
+                world.spawnEntity(structure.blockInfos.get(0).block);
+            }
+        }
+    }
+
+}

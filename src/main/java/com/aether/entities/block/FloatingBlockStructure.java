@@ -13,12 +13,10 @@ public class FloatingBlockStructure {
     public FloatingBlockStructure(FloatingBlockEntity entity1, FloatingBlockEntity entity2, Vec3i offset) {
         this.blockInfos.add(new FloatingBlockInfoWrapper(entity1, Vec3i.ZERO));
         this.blockInfos.add(new FloatingBlockInfoWrapper(entity2, offset));
-        init();
     }
 
     public FloatingBlockStructure(ArrayList<FloatingBlockInfoWrapper> arr){
-        this.blockInfos = arr;
-        init();
+        this.blockInfos.addAll(arr);
     }
 
     public void spawn(World world){
@@ -27,9 +25,10 @@ public class FloatingBlockStructure {
             if(!blockInfo.equals(blockInfos.get(0))){
                 blockInfo.block.dropItem = false;
             }
-            blockInfo.block.floatTime = 0;
+            blockInfo.block.floatTime = -1;
             world.spawnEntity(blockInfo.block);
         });
+        init();
     }
 
     public void postTick(){

@@ -1,6 +1,6 @@
 package com.aether.blocks;
 
-import com.aether.entities.block.FloatingBlockEntity;
+import com.aether.entities.block.FloatingBlockHelper;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
@@ -44,16 +44,17 @@ public class FloatingBlock extends OreBlock {
     }
 
     private void checkFloatable(World worldIn, BlockPos pos) {
-        if ((worldIn.isAir(pos.up()) || FallingBlock.canFallThrough(worldIn.getBlockState(pos.up()))) && (!this.powered || worldIn.isReceivingRedstonePower(pos))) {
+        if (!this.powered || worldIn.isReceivingRedstonePower(pos)) {
             if (!worldIn.isClient) {
-                FloatingBlockEntity floatingblockentity = new FloatingBlockEntity(worldIn, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, worldIn.getBlockState(pos));
-                this.onStartFloating(floatingblockentity);
-                worldIn.spawnEntity(floatingblockentity);
+                BlockState state = worldIn.getBlockState(pos);
+                if (state.isOf(AetherBlocks.GRAVITITE_LEVITATOR)){
+                    FloatingBlockHelper.tryCreatePusher(worldIn, pos);
+                } else {
+                    FloatingBlockHelper.tryCreateGeneric(worldIn, pos);
+                }
             }
         }
     }
-
-    protected void onStartFloating(FloatingBlockEntity entityIn) {}
 
     protected int getFallDelay() {
         return 2;
