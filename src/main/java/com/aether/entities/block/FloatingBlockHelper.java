@@ -6,7 +6,6 @@ import com.aether.tag.AetherBlockTags;
 import net.gudenau.minecraft.moretags.MoreTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FallingBlock;
 import net.minecraft.block.PistonBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.block.piston.PistonHandler;
@@ -21,25 +20,29 @@ import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public class FloatingBlockHelper {
-    public static final BiFunction<World, BlockPos, Boolean> DEFAULT_DROP_STATE = (world, pos) -> {
+    public static final Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = (entity) -> {
+        World world = entity.world;
+        BlockPos pos = entity.getBlockPos();
         int distFromTop = world.getTopY() - pos.getY();
-        BlockState state = world.getBlockState(pos);
-        return !AetherBlockTags.FAST_FLOATERS.contains(state.getBlock()) && distFromTop <= 50;
+        return !entity.isFastFloater() && distFromTop <= 50;
     };
 
+    public static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfStructure){
+        FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, partOfStructure);
+        boolean willDrop = entity.getDropState().get();
+        entity.discard();
+        return willDrop;
+    }
+
     public static boolean tryCreatePusher(World world, BlockPos pos){
-        Supplier<Boolean> dropState = () -> DEFAULT_DROP_STATE.apply(world, pos);
-        if (dropState.get()) {
+        boolean dropping = willBlockDrop(world, pos, world.getBlockState(pos), true);
+        if (dropping) {
             return tryCreateGeneric(world, pos);
         }
 
-        if (!canCreatePusher(world, pos, dropState.get())){
-            return false;
-        }
         FloatingBlockStructure structure = FloatingBlockPusherHandler.construct(world, pos);
         if (structure != null){
             FloatingBlockPusherHandler.spawn(structure, world);
@@ -49,20 +52,19 @@ public class FloatingBlockHelper {
         }
     }
 
-    public static boolean tryCreateDouble(World world, BlockPos posIn){
-        Supplier<Boolean> dropState = () -> DEFAULT_DROP_STATE.apply(world, posIn);
-        if (!canCreateDouble(world, posIn, dropState.get())){
+    public static boolean tryCreateDouble(World world, BlockPos pos){
+        BlockState state = world.getBlockState(pos);
+        boolean dropping = willBlockDrop(world, pos, state, true);
+        if (!canCreateDouble(world, pos, dropping)){
             return false;
         }
-        BlockPos pos = posIn;
-        BlockState state = world.getBlockState(pos);
         if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER) {
             pos = pos.down();
             state = world.getBlockState(pos);
         }
         BlockState upperState = world.getBlockState(pos.up());
-        FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, upperState);
-        FloatingBlockEntity lower = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
+        FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.up(), upperState, true);
+        FloatingBlockEntity lower = new FloatingBlockEntity(world, pos, state, true);
         FloatingBlockStructure structure = new FloatingBlockStructure(lower, upper, Vec3i.ZERO.up());
         structure.spawn(world);
         return true;
@@ -70,11 +72,11 @@ public class FloatingBlockHelper {
 
     public static boolean tryCreateGeneric(World world, BlockPos pos){
         BlockState state = world.getBlockState(pos);
-        Supplier<Boolean> dropState = () -> DEFAULT_DROP_STATE.apply(world, pos);
-        if (!canCreateGeneric(world, pos, dropState.get())){
+        boolean dropping = willBlockDrop(world, pos, state, false);
+        if (!canCreateGeneric(world, pos, dropping)){
             return false;
         }
-        FloatingBlockEntity entity = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
+        FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, false);
         entity.floatTime = 0;
 
         if (state.isOf(Blocks.TNT)) {
@@ -99,10 +101,6 @@ public class FloatingBlockHelper {
         return true;
     }
 
-    private static boolean canCreatePusher(World world, BlockPos pos, boolean dropping){
-        return !dropping || FallingBlock.canFallThrough(world.getBlockState(pos.down()));
-    }
-
     private static boolean canCreateDouble(World world, BlockPos pos, boolean dropping){
         BlockState state = world.getBlockState(pos);
         if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
@@ -121,12 +119,9 @@ public class FloatingBlockHelper {
         World world = context.getWorld();
         BlockState state = world.getBlockState(pos);
         Item heldItem = context.getStack().getItem();
-        if (world.getBlockEntity(pos) != null || state.getHardness(world, pos) == -1.0F
-                || (state.isToolRequired() && !heldItem.isSuitableFor(state))
-                || AetherBlockTags.NON_FLOATERS.contains(state.getBlock())){
-            return false;
-        }
-        return true;
+        return world.getBlockEntity(pos) == null && state.getHardness(world, pos) != -1.0F
+                && (!state.isToolRequired() || heldItem.isSuitableFor(state))
+                && !AetherBlockTags.NON_FLOATERS.contains(state.getBlock());
     }
 
     static class FloatingBlockPusherHandler {
@@ -148,7 +143,7 @@ public class FloatingBlockHelper {
 
         // returns false if the tree is unable to move. returns true otherwise.
         private static boolean continueTree(World world, BlockPos origin, Vec3i offset, ArrayList<FloatingBlockInfoWrapper> infos){
-            if (infos.size() > MAX_MOVABLE_BLOCKS) {
+            if (infos.size() > MAX_MOVABLE_BLOCKS + 1) {
                 return false;
             }
             BlockPos pos = origin.add(offset);
@@ -158,7 +153,7 @@ public class FloatingBlockHelper {
                 return true;
             }
             // adds the block to the structure
-            FloatingBlockEntity newBlock = new FloatingBlockEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
+            FloatingBlockEntity newBlock = new FloatingBlockEntity(world, pos, state, true);
             infos.add(new FloatingBlockInfoWrapper(newBlock, offset));
             // check if above block is movable
             if (!PistonBlock.isMovable(world.getBlockState(origin.add(offset.up())), world, origin.add(offset.up()), Direction.UP, true, Direction.UP)) {
@@ -212,7 +207,6 @@ public class FloatingBlockHelper {
 
         public static void spawn(FloatingBlockStructure structure, World world){
             if (!(structure.blockInfos.size() == 1)) {
-                FloatingBlockInfoWrapper master = structure.blockInfos.get(0);
                 structure.blockInfos.forEach(blockInfo -> {
                     blockInfo.block.markPartOfStructure();
                     blockInfo.block.floatTime = -1;

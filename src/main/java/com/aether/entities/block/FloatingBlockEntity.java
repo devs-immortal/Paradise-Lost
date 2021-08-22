@@ -52,17 +52,13 @@ public class FloatingBlockEntity extends Entity {
     private Supplier<Boolean> dropState = () -> false;
     private boolean dropping = false;
     private boolean collides;
-    private boolean partOfStructure;
+    private boolean partOfStructure = false;
     private BiConsumer<Float, Boolean> onEndFloating;
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityType, World world) {
         super(entityType, world);
         this.setOnEndFloating((impact, landed) -> {});
-        partOfStructure = false;
-        this.setDropState(() -> {
-            int distanceFromTop = world.getTopY() - this.getBlockPos().getY();
-            return !this.isFastFloater() && distanceFromTop <= 50;
-        });
+        this.setDropState(() -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this));
     }
 
     public FloatingBlockEntity(World world, double x, double y, double z, BlockState floatingBlockState) {
@@ -75,6 +71,11 @@ public class FloatingBlockEntity extends Entity {
         this.prevY = y;
         this.prevZ = z;
         this.setOrigin(new BlockPos(this.getPos()));
+    }
+
+    public FloatingBlockEntity(World world, BlockPos pos, BlockState floatingBlockState, boolean partOfStructure) {
+        this(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, floatingBlockState);
+        this.partOfStructure = partOfStructure;
     }
 
     @Override
@@ -346,13 +347,15 @@ public class FloatingBlockEntity extends Entity {
 
     @Override
     public Packet<?> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this, Block.getRawIdFromState(this.getBlockState()));
+        return new EntitySpawnS2CPacket(this, Block.getRawIdFromState(this.getBlockState()) * (this.partOfStructure ? -1 : 1));
     }
 
     @Override
     public void onSpawnPacket(EntitySpawnS2CPacket packet) {
         super.onSpawnPacket(packet);
-        this.floatTile = Block.getStateFromRawId(packet.getEntityData());
+        int data = packet.getEntityData();
+        this.partOfStructure = data < 0;
+        this.floatTile = Block.getStateFromRawId(packet.getEntityData() * (this.partOfStructure ? -1 : 1));
         this.inanimate = true;
         double d = packet.getX();
         double e = packet.getY();
