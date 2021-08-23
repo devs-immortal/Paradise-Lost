@@ -58,6 +58,7 @@ public class FloatingBlockEntity extends Entity {
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityType, World world) {
         super(entityType, world);
         this.setOnEndFloating((impact, landed) -> {});
+        this.floatTime = 0;
         this.setDropState(() -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this));
     }
 
@@ -78,6 +79,7 @@ public class FloatingBlockEntity extends Entity {
         this.partOfStructure = partOfStructure;
     }
 
+    // TODO: Split into setPosition() and calculateBoundingBox()
     @Override
     public void setPosition(double x, double y, double z) {
         if (this.dataTracker == null || this.floatTile == null) {
@@ -95,10 +97,7 @@ public class FloatingBlockEntity extends Entity {
             } else {
                 this.setPos(x, y, z);
                 Box box = colShape.getBoundingBox();
-                this.setBoundingBox(box.offset(getPos().subtract(new Vec3d(
-                        MathHelper.lerp(0.5D, box.minX, box.maxX),
-                        0,
-                        MathHelper.lerp(0.5D, box.minZ, box.maxZ)))));
+                this.setBoundingBox(box.offset(getPos().subtract(new Vec3d(0.5, 0, 0.5))));
             }
         }
     }
@@ -154,12 +153,12 @@ public class FloatingBlockEntity extends Entity {
             this.prevX = this.getX();
             this.prevY = this.getY();
             this.prevZ = this.getZ();
-            Block block = this.floatTile.getBlock();
             if (this.floatTime++ == 0) {
                 BlockPos blockPos = this.getBlockPos();
+                Block block = this.floatTile.getBlock();
                 if (this.world.getBlockState(blockPos).isOf(block)) {
                     this.world.removeBlock(blockPos, false);
-                } else if (!this.world.isClient && !partOfStructure) {
+                } else if (!this.world.isClient && !this.partOfStructure) {
                     this.discard();
                     return;
                 }

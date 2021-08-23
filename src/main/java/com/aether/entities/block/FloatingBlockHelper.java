@@ -30,13 +30,6 @@ public class FloatingBlockHelper {
         return !entity.isFastFloater() && distFromTop <= 50;
     };
 
-    public static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfStructure){
-        FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, partOfStructure);
-        boolean willDrop = entity.getDropState().get();
-        entity.discard();
-        return willDrop;
-    }
-
     public static boolean tryCreatePusher(World world, BlockPos pos){
         boolean dropping = willBlockDrop(world, pos, world.getBlockState(pos), true);
         if (dropping) {
@@ -45,7 +38,11 @@ public class FloatingBlockHelper {
 
         FloatingBlockStructure structure = FloatingBlockPusherHandler.construct(world, pos);
         if (structure != null){
-            FloatingBlockPusherHandler.spawn(structure, world);
+            if (structure.blockInfos.size() == 1) {
+                world.spawnEntity(structure.blockInfos.get(0).block);
+            } else {
+                structure.spawn(world);
+            }
             return true;
         } else {
             return false;
@@ -65,6 +62,7 @@ public class FloatingBlockHelper {
         BlockState upperState = world.getBlockState(pos.up());
         FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.up(), upperState, true);
         FloatingBlockEntity lower = new FloatingBlockEntity(world, pos, state, true);
+        upper.dropItem = false;
         FloatingBlockStructure structure = new FloatingBlockStructure(lower, upper, Vec3i.ZERO.up());
         structure.spawn(world);
         return true;
@@ -77,7 +75,6 @@ public class FloatingBlockHelper {
             return false;
         }
         FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, false);
-        entity.floatTime = 0;
 
         if (state.isOf(Blocks.TNT)) {
             entity.setOnEndFloating((impact, landed) -> {
@@ -114,6 +111,13 @@ public class FloatingBlockHelper {
         return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
     }
 
+    public static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfStructure){
+        FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, partOfStructure);
+        boolean willDrop = entity.getDropState().get();
+        entity.discard();
+        return willDrop;
+    }
+
     public static boolean isToolAdequate(ItemUsageContext context){
         BlockPos pos = context.getBlockPos();
         World world = context.getWorld();
@@ -124,7 +128,7 @@ public class FloatingBlockHelper {
                 && !AetherBlockTags.NON_FLOATERS.contains(state.getBlock());
     }
 
-    static class FloatingBlockPusherHandler {
+    public static class FloatingBlockPusherHandler {
         public static int MAX_MOVABLE_BLOCKS = PistonHandler.MAX_MOVABLE_BLOCKS;
 
         @Nullable
@@ -149,14 +153,14 @@ public class FloatingBlockHelper {
             BlockPos pos = origin.add(offset);
             BlockState state = world.getBlockState(pos);
 
-            if (state.isAir()) {
+            if (state.isAir() || !PistonBlock.isMovable(state, world, pos, Direction.UP, false, Direction.UP)) {
                 return true;
             }
             // adds the block to the structure
             FloatingBlockEntity newBlock = new FloatingBlockEntity(world, pos, state, true);
             infos.add(new FloatingBlockInfoWrapper(newBlock, offset));
             // check if above block is movable
-            if (!PistonBlock.isMovable(world.getBlockState(origin.add(offset.up())), world, origin.add(offset.up()), Direction.UP, true, Direction.UP)) {
+            if (!PistonBlock.isMovable(world.getBlockState(pos.up()), world, pos.up(), Direction.UP, true, Direction.UP)) {
                 return false;
             }
             // check if rest of tree above is movable
@@ -172,7 +176,7 @@ public class FloatingBlockHelper {
                         offset.south(),
                         offset.west(),
                         offset.down()
-                        /* up has already been checked*/
+                        /* up has already been checked */
                 }){
                     BlockState adjacentState = world.getBlockState(origin.add(newOff));
                     if (!alreadyCounted(infos, newOff) && isAdjacentBlockStuck(state, adjacentState)){
@@ -202,20 +206,6 @@ public class FloatingBlockHelper {
                 return false;
             } else {
                 return MoreTags.STICKY_BLOCKS.contains(state.getBlock()) || MoreTags.STICKY_BLOCKS.contains(adjacentState.getBlock());
-            }
-        }
-
-        public static void spawn(FloatingBlockStructure structure, World world){
-            if (!(structure.blockInfos.size() == 1)) {
-                structure.blockInfos.forEach(blockInfo -> {
-                    blockInfo.block.markPartOfStructure();
-                    blockInfo.block.floatTime = -1;
-                    world.removeBlock(blockInfo.block.getBlockPos(), false);
-                    world.spawnEntity(blockInfo.block);
-                });
-                structure.init();
-            } else {
-                world.spawnEntity(structure.blockInfos.get(0).block);
             }
         }
     }

@@ -21,10 +21,8 @@ public class FloatingBlockStructure {
 
     public void spawn(World world){
         blockInfos.forEach(blockInfo -> {
-            if(!blockInfo.equals(blockInfos.get(0))){
-                blockInfo.block.dropItem = false;
-            }
-            blockInfo.block.floatTime = -1;
+            blockInfo.block.markPartOfStructure();
+            world.removeBlock(blockInfo.block.getBlockPos(), false);
             world.spawnEntity(blockInfo.block);
         });
         init();
@@ -51,6 +49,7 @@ public class FloatingBlockStructure {
         blockInfo.block.setDropping(master.block.isDropping());
     }
 
+    // TODO: Stop Floating Block Structures from dropping items when they don't break on landing
     public void land(FloatingBlockInfoWrapper lander){
         for(FloatingBlockInfoWrapper blockInfo : blockInfos){
             alignToMaster(blockInfo);
