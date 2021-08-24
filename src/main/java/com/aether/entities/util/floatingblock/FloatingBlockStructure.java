@@ -1,5 +1,6 @@
-package com.aether.entities.block;
+package com.aether.entities.util.floatingblock;
 
+import com.aether.entities.block.FloatingBlockEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;

@@ -3,6 +3,7 @@ package com.aether.entities.block;
 import com.aether.blocks.AetherBlocks;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.tag.AetherBlockTags;
+import com.aether.entities.util.floatingblock.FloatingBlockHelper;
 import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -79,27 +80,24 @@ public class FloatingBlockEntity extends Entity {
         this.partOfStructure = partOfStructure;
     }
 
-    // TODO: Split into setPosition() and calculateBoundingBox()
     @Override
-    public void setPosition(double x, double y, double z) {
+    protected Box calculateBoundingBox(){
         if (this.dataTracker == null || this.floatTile == null) {
-            super.setPosition(x, y, z);
+            return super.calculateBoundingBox();
+        }
+        BlockPos origin = this.dataTracker.get(ORIGIN);
+        VoxelShape shape = this.floatTile.getCollisionShape(world, origin);
+        if (shape.isEmpty()) {
+            this.collides = false;
+            shape = this.floatTile.getOutlineShape(world, origin);
+            if (shape.isEmpty()) {
+                return super.calculateBoundingBox();
+            }
         } else {
             this.collides = true;
-            BlockPos origin = this.dataTracker.get(ORIGIN);
-            VoxelShape colShape = this.floatTile.getCollisionShape(world, origin);
-            if (colShape.isEmpty()) {
-                colShape = this.floatTile.getOutlineShape(world, origin);
-                this.collides = false;
-            }
-            if (colShape.isEmpty()) {
-                super.setPosition(x, y, z);
-            } else {
-                this.setPos(x, y, z);
-                Box box = colShape.getBoundingBox();
-                this.setBoundingBox(box.offset(getPos().subtract(new Vec3d(0.5, 0, 0.5))));
-            }
         }
+        Box box = shape.getBoundingBox();
+        return box.offset(getPos().subtract(new Vec3d(0.5, 0, 0.5)));
     }
 
     @Override

@@ -1,9 +1,8 @@
 package com.aether.blocks;
 
-import com.aether.entities.block.FloatingBlockHelper;
+import com.aether.entities.util.floatingblock.FloatingBlockHelper;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.FallingBlock;
 import net.minecraft.block.OreBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;

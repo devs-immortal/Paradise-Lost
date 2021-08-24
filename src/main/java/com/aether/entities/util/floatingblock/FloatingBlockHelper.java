@@ -1,7 +1,8 @@
-package com.aether.entities.block;
+package com.aether.entities.util.floatingblock;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.entities.block.FloatingBlockStructure.FloatingBlockInfoWrapper;
+import com.aether.entities.block.FloatingBlockEntity;
+import com.aether.entities.util.floatingblock.FloatingBlockStructure.FloatingBlockInfoWrapper;
 import com.aether.tag.AetherBlockTags;
 import net.gudenau.minecraft.moretags.MoreTags;
 import net.minecraft.block.BlockState;
@@ -98,7 +99,7 @@ public class FloatingBlockHelper {
         return true;
     }
 
-    private static boolean canCreateDouble(World world, BlockPos pos, boolean dropping){
+    protected static boolean canCreateDouble(World world, BlockPos pos, boolean dropping){
         BlockState state = world.getBlockState(pos);
         if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
             return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up().up()));
@@ -107,11 +108,11 @@ public class FloatingBlockHelper {
         }
     }
 
-    private static boolean canCreateGeneric(World world, BlockPos pos, boolean dropping){
+    protected static boolean canCreateGeneric(World world, BlockPos pos, boolean dropping){
         return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
     }
 
-    public static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfStructure){
+    protected static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfStructure){
         FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, partOfStructure);
         boolean willDrop = entity.getDropState().get();
         entity.discard();
@@ -153,7 +154,9 @@ public class FloatingBlockHelper {
             BlockPos pos = origin.add(offset);
             BlockState state = world.getBlockState(pos);
 
-            if (state.isAir() || !PistonBlock.isMovable(state, world, pos, Direction.UP, false, Direction.UP)) {
+            if (state.isAir()
+                    || !PistonBlock.isMovable(state, world, pos, Direction.UP, false, Direction.UP)
+                    || alreadyCounted(infos, offset)) {
                 return true;
             }
             // adds the block to the structure
@@ -164,7 +167,7 @@ public class FloatingBlockHelper {
                 return false;
             }
             // check if rest of tree above is movable
-            if (!alreadyCounted(infos, offset.up()) && !continueTree(world, origin, offset.up(), infos)) {
+            if (!continueTree(world, origin, offset.up(), infos)) {
                 return false;
             }
             // sides and bottom (sticky blocks)
@@ -179,7 +182,7 @@ public class FloatingBlockHelper {
                         /* up has already been checked */
                 }){
                     BlockState adjacentState = world.getBlockState(origin.add(newOff));
-                    if (!alreadyCounted(infos, newOff) && isAdjacentBlockStuck(state, adjacentState)){
+                    if (isAdjacentBlockStuck(state, adjacentState)){
                         // check the rest of the tree above the side block
                         if (!continueTree(world, origin, newOff, infos)) {
                             return false;
