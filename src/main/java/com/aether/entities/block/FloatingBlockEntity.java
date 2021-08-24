@@ -401,7 +401,6 @@ public class FloatingBlockEntity extends Entity {
                                         compoundTag.put(keyName, tag.copy());
                                     }
                                 }
-
                                 blockEntity.readNbt(compoundTag);
                                 blockEntity.markDirty();
                             }
