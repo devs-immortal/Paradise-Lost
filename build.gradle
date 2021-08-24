@@ -11,7 +11,7 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.9-SNAPSHOT'
+    id 'fabric-loom' version '0.9.+'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "1.2.1"
 }
@@ -47,7 +47,7 @@ repositories {
     maven { url = "https://hephaestus.dev/release" }
     maven {
         name = "TerraformersMC"
-        url = "https://maven.kotlindiscord.com/repository/terraformers/"
+        url = "https://maven.terraformersmc.com/releases/"
     }
     maven {
         name = "Ladysnake Libs"
