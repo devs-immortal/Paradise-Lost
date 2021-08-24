@@ -99,7 +99,7 @@ public class FloatingBlockHelper {
         return true;
     }
 
-    protected static boolean canCreateDouble(World world, BlockPos pos, boolean dropping){
+    private static boolean canCreateDouble(World world, BlockPos pos, boolean dropping){
         BlockState state = world.getBlockState(pos);
         if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
             return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up().up()));
@@ -108,11 +108,11 @@ public class FloatingBlockHelper {
         }
     }
 
-    protected static boolean canCreateGeneric(World world, BlockPos pos, boolean dropping){
+    private static boolean canCreateGeneric(World world, BlockPos pos, boolean dropping){
         return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
     }
 
-    protected static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfStructure){
+    public static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfStructure){
         FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, partOfStructure);
         boolean willDrop = entity.getDropState().get();
         entity.discard();
