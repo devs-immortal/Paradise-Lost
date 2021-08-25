@@ -16,6 +16,7 @@ import com.aether.items.tools.AetherToolMaterials;
 import com.aether.items.weapons.*;
 import com.aether.registry.RegistryQueue;
 import com.aether.registry.RegistryQueue.Action;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -44,6 +45,7 @@ public class AetherItems {
     private static final Action<ItemConvertible> compostable30 = compostable(0.3f);
     private static final Action<ItemConvertible> compostable50 = compostable(0.5f);
     private static final Action<ItemConvertible> compostable65 = compostable(0.65f);
+    private static Action<ItemConvertible> fuel(int ticks) { return (id, item) -> FuelRegistry.INSTANCE.add(item, ticks); }
     private static final Action<ItemConvertible> swetColor = onClient(new StackableVariantColorizer(0xDADADA, 0x939393, 0x4F4F4F));
 
 
@@ -56,7 +58,7 @@ public class AetherItems {
     public static final Item ZANITE_GEM = add("zanite_gemstone", new Item(resource));
     public static final Item ZANITE_FRAGMENT = add("zanite_fragment", new Item(resource));
     public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource));
-    public static final AmbrosiumShardItem AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShardItem(resource));
+    public static final AmbrosiumShardItem AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShardItem(resource), fuel(500));
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource));
     public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
     public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
@@ -205,10 +207,10 @@ public class AetherItems {
     public static final NatureStaffItem NATURE_STAFF = add("nature_staff", new NatureStaffItem(misc().maxCount(1).maxDamage(100)));
     public static final MoaEggItem MOA_EGG = add("moa_egg", new MoaEggItem(misc().maxCount(1)));
     public static final BookOfLoreItem LORE_BOOK = add("lore_book", new BookOfLoreItem(misc().maxCount(1)));
-    public static final BlockItem INCUBATOR = add("incubator", AetherBlocks.INCUBATOR, misc);
-    public static final BlockItem FOOD_BOWL = add("food_bowl", AetherBlocks.FOOD_BOWL, misc);
+    public static final BlockItem INCUBATOR = add("incubator", AetherBlocks.INCUBATOR, misc, fuel(300));
+    public static final BlockItem FOOD_BOWL = add("food_bowl", AetherBlocks.FOOD_BOWL, misc, fuel(300));
 
-    public static final SkyrootBucketItem SKYROOT_BUCKET = add("skyroot_bucket", new SkyrootBucketItem(misc().maxCount(16)));
+    public static final SkyrootBucketItem SKYROOT_BUCKET = add("skyroot_bucket", new SkyrootBucketItem(misc().maxCount(16)), fuel(200));
 
     private static final Settings skyrootBucket = misc().maxCount(1).recipeRemainder(SKYROOT_BUCKET);
     public static final SkyrootBucketItem SKYROOT_WATER_BUCKET = add("skyroot_water_bucket", new SkyrootBucketItem(Fluids.WATER, skyrootBucket));
