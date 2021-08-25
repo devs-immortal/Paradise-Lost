@@ -14,7 +14,7 @@
     "entity.BoatEntityTypeMixin",
     "entity.CowEntityMixin",
     "entity.EntityMixin",
-    "entity.MixinLivingEntity",
+    "entity.LivingEntityMixin",
     "entity.PlayerEntityMixin",
     "entity.RandomLookGoalMixin",
     "entity.SlimeMoveControlMixin",

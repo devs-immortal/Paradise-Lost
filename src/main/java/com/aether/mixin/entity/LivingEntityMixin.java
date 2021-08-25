@@ -31,8 +31,8 @@ import java.util.Optional;
 import java.util.Set;
 
 @Mixin(LivingEntity.class)
-public abstract class MixinLivingEntity extends Entity implements AetherEntityExtensions {
-    public MixinLivingEntity(EntityType<?> type, World world) {
+public abstract class LivingEntityMixin extends Entity implements AetherEntityExtensions {
+    public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
