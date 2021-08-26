@@ -50,7 +50,6 @@
     "client.MapRendererMixin",
     "client.WorldRendererMixin",
     "client.render.BlockColorsMixin",
-    "client.render.BlockStateModelGeneratorMixin",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
     "client.render.FluidRendererMixin",
