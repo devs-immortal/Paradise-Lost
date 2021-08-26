@@ -1,6 +1,7 @@
 package com.aether.client.rendering.entity.layer;
 
 import com.aether.Aether;
+import com.aether.client.model.armor.PhoenixArmorModel;
 import com.aether.client.model.entity.*;
 import com.google.common.collect.Maps;
 import net.fabricmc.api.EnvType;
@@ -22,6 +23,7 @@ public class AetherModelLayers {
     public static final EntityModelLayer COCKATRICE = register("cockatrice", "main", CockatriceModel.getTexturedModelData());
     public static final EntityModelLayer MIMIC = register("mimic", "main", ChestMimicModel.getTexturedModelData());
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
+    public static final EntityModelLayer PHOENIX_ARMOR = register("phoenix_armor", "main", PhoenixArmorModel.getTexturedModelData());
 
     public static EntityModelLayer register(Identifier id, String layer, TexturedModelData data) {
         EntityModelLayer entityModelLayer = new EntityModelLayer(id, layer);
