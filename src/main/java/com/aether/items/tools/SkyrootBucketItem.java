@@ -1,7 +1,6 @@
 package com.aether.items.tools;
 
 import com.aether.items.AetherItems;
-import net.kyrptonaught.customportalapi.util.CustomPortalFluidProvider;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidDrainable;
@@ -26,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
-public class SkyrootBucketItem extends Item implements CustomPortalFluidProvider {
+public class SkyrootBucketItem extends Item {
     private final Fluid containedBlock;
 
     public SkyrootBucketItem(Settings settings) {
@@ -176,7 +175,6 @@ public class SkyrootBucketItem extends Item implements CustomPortalFluidProvider
 
                     this.playEmptySound(playerIn, worldIn, posIn);
                     worldIn.setBlockState(posIn, this.containedBlock.getDefaultState().getBlockState(), 11);
-                    //this.CPAonFluidPlaced(worldIn, posIn); //trigger CPA to attempt a portal light.
                 }
 
                 return true;
@@ -193,15 +191,5 @@ public class SkyrootBucketItem extends Item implements CustomPortalFluidProvider
     @Override
     public Rarity getRarity(ItemStack stack) {
         return stack.getItem() == AetherItems.SKYROOT_REMEDY_BUCKET ? Rarity.RARE : super.getRarity(stack);
-    }
-
-    @Override
-    public Fluid getFluidContent() {
-        return containedBlock;
-    }
-
-    @Override
-    public ItemStack emptyContents(ItemStack itemStack, PlayerEntity playerEntity) {
-        return emptyBucket(itemStack, playerEntity);
     }
 }
