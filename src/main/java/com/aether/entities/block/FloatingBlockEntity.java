@@ -361,7 +361,7 @@ public class FloatingBlockEntity extends Entity {
         this.setOrigin(this.getBlockPos());
     }
 
-    public interface ICPEM {
+    public interface PostTickEntity {
         void postTick();
     }
 

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin implements FloatingBlockEntity.ICPEM {
+public abstract class ClientPlayerEntityMixin implements FloatingBlockEntity.PostTickEntity {
 
     @Shadow
     protected abstract void sendMovementPackets();
@@ -22,7 +22,7 @@ public abstract class ClientPlayerEntityMixin implements FloatingBlockEntity.ICP
      * the call to sendMovementPackets() needs to be delayed till after all FloatingBlockEntities have ticked
      */
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendMovementPackets()V"), method = "tick")
+    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendMovementPackets()V"))
     void redirectSendMovementPackets(ClientPlayerEntity clientPlayerEntity) {
         sendMovement = true;
     }

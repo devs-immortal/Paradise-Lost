@@ -67,6 +67,7 @@ public final class CloudRendererMixin {
         }
     }
 
+    // TODO: Replace this mostly copy-pasted code with some redirects or injections
     private void internalCloudRender(MatrixStack matrices, Matrix4f model, float tickDelta, double cameraX, double cameraY, double cameraZ, float cloudOffset, float cloudScale, float speedMod) {
         SkyProperties properties = this.world.getSkyProperties();
         float cloudHeight = properties.getCloudsHeight();

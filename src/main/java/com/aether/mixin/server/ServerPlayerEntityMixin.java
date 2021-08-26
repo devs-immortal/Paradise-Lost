@@ -16,23 +16,24 @@ public abstract class ServerPlayerEntityMixin extends Entity implements AetherEn
     public ServerPlayerEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
-    
-    private boolean flipped = false;
+//
+//    private boolean flipped = false;
+//
+//    private int gravFlipTime;
 
-    private int gravFlipTime;
-
-    @Inject(method = "tick", at = @At("TAIL"))
-    private void tick(CallbackInfo ci){
-        if(flipped){
-            gravFlipTime++;
-            if(gravFlipTime > 20){
-                flipped = false;
-                this.fallDistance = 0;
-            }
-            if(!this.hasNoGravity()) {
-                Vec3d antiGravity = new Vec3d(0, 0.12D, 0);
-                this.setVelocity(this.getVelocity().add(antiGravity));
-            }
-        }
-    }
+    // inject into playerTick instead
+//    @Inject(method = "tick", at = @At("TAIL"))
+//    private void tick(CallbackInfo ci){
+//        if(flipped){
+//            gravFlipTime++;
+//            if(gravFlipTime > 20){
+//                flipped = false;
+//                this.fallDistance = 0;
+//            }
+//            if(!this.hasNoGravity()) {
+//                Vec3d antiGravity = new Vec3d(0, 0.12D, 0);
+//                this.setVelocity(this.getVelocity().add(antiGravity));
+//            }
+//        }
+//    }
 }

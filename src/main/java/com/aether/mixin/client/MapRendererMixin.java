@@ -34,9 +34,12 @@ public class MapRendererMixin {
                 if (int_4 / 4 == 0) {
                     this.texture.getImage().setPixelColor(int_2, int_1, (int_3 + int_3 / 128 & 1) * 8 + 16 << 24);
                 } else {
-                    int color = MapColor.COLORS[int_4 / 4].getRenderColor(int_4 & 3);
-
-                    if (isAether) color = AetherMap.getColor(MapColor.COLORS[int_4 / 4], int_4 & 3);
+                    int color;
+                    if (isAether) {
+                        color = AetherMap.getColor(MapColor.COLORS[int_4 / 4], int_4 & 3);
+                    } else {
+                        color = MapColor.COLORS[int_4 / 4].getRenderColor(int_4 & 3);
+                    }
 
                     this.texture.getImage().setPixelColor(int_2, int_1, color);
                 }

@@ -36,7 +36,8 @@ public class AxeItemMixin extends MiningToolItem {
         super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
     }
 
-    @Inject(at = @At("HEAD"), method = "useOnBlock", cancellable = true)
+    // TODO: delegate strippable blocks to FAPI
+    @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();

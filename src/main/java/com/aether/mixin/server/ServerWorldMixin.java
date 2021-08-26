@@ -21,7 +21,7 @@ public class ServerWorldMixin {
 
     @Shadow @Final EntityList entityList;
 
-    @Inject(at = @At(value = "RETURN"), method = "tick")
+    @Inject(method = "tick", at = @At(value = "RETURN"))
     void postEntityTick(BooleanSupplier shouldKeepTicking, CallbackInfo ci){
         if (this.idleTimeout < 300) {
             entityList.forEach(entityObj -> {
@@ -31,9 +31,9 @@ public class ServerWorldMixin {
                     Aether.LOG.error("Started checking null entities in ServerWorldMixin::postEntityTick");
                 }
             });
-            FloatingBlockStructure[] sets = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
-            for(FloatingBlockStructure set : sets){
-                set.postTick();
+            FloatingBlockStructure[] structures = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
+            for(FloatingBlockStructure structure : structures){
+                structure.postTick();
             }
         }
     }

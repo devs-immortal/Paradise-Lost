@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemColors.class)
 public class ItemColorsMixin {
-
+    // TODO: delegate to FAPI
     @Inject(method = "create", at = @At("RETURN"), cancellable = true)
     private static void create(CallbackInfoReturnable<ItemColors> info) {
         ItemColors origin = info.getReturnValue();

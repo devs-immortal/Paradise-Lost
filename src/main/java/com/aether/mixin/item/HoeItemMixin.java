@@ -30,7 +30,8 @@ public class HoeItemMixin extends MiningToolItem {
         super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
     }
 
-    @Inject(at = @At("HEAD"), method = "useOnBlock", cancellable = true)
+    // TODO: Instead of this copy-pasted code, add tillable blocks to TILLING_ACTIONS (Probably in some API)
+    @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();

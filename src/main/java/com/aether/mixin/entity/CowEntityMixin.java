@@ -26,7 +26,7 @@ public class CowEntityMixin extends AnimalEntity {
         super(entityType, world);
     }
 
-    @Inject(at = @At("HEAD"), method = "interactMob", cancellable = true)
+    @Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
     public void interactMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack itemStack = player.getStackInHand(hand);
         if (itemStack.getItem() == AetherItems.SKYROOT_BUCKET && !this.isBaby()) {

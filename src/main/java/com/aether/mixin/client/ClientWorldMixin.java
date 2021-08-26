@@ -18,13 +18,12 @@ public class ClientWorldMixin {
     @Final
     EntityList entityList;
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;tickBlockEntities()V"), method = "tickEntities")
+    @Inject(method = "tickEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;tickBlockEntities()V"))
     void postEntityTick(CallbackInfo ci) {
         entityList.forEach(entityObj -> {
             if (entityObj instanceof FloatingBlockEntity entity) {
                 entity.postTickEntities();
-            }
-            if (entityObj instanceof FloatingBlockEntity.ICPEM entity) {
+            } else if (entityObj instanceof FloatingBlockEntity.PostTickEntity entity) {
                 entity.postTick();
             }
         });
