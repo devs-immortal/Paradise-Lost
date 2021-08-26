@@ -1,10 +1,10 @@
 package com.aether.client.rendering.entity;
 
 import com.aether.Aether;
-import com.aether.entities.hostile.BlueSwetEntity;
-import com.aether.entities.hostile.GoldenSwetEntity;
-import com.aether.entities.hostile.PurpleSwetEntity;
-import com.aether.entities.hostile.SwetEntity;
+import com.aether.entities.hostile.swet.BlueSwetEntity;
+import com.aether.entities.hostile.swet.GoldenSwetEntity;
+import com.aether.entities.hostile.swet.PurpleSwetEntity;
+import com.aether.entities.hostile.swet.SwetEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;

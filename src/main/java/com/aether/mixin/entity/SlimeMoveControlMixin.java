@@ -1,6 +1,6 @@
 package com.aether.mixin.entity;
 
-import com.aether.entities.hostile.SwetEntity;
+import com.aether.entities.hostile.swet.SwetEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.MathHelper;

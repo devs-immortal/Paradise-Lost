@@ -2,6 +2,7 @@ package com.aether.entities;
 
 import com.aether.entities.block.FloatingBlockEntity;
 import com.aether.entities.hostile.*;
+import com.aether.entities.hostile.swet.*;
 import com.aether.entities.passive.*;
 import com.aether.entities.projectile.EnchantedDartEntity;
 import com.aether.entities.projectile.GoldenDartEntity;

@@ -2,7 +2,7 @@ package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
 import com.aether.client.rendering.particle.AetherParticles;
-import com.aether.entities.hostile.TransformableSwetEntity;
+import com.aether.entities.hostile.swet.TransformableSwetEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;

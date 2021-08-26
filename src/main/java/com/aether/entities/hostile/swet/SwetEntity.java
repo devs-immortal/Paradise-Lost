@@ -1,4 +1,4 @@
-package com.aether.entities.hostile;
+package com.aether.entities.hostile.swet;
 
 import com.aether.items.AetherItems;
 import com.aether.tag.AetherItemTags;

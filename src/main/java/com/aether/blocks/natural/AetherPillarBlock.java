@@ -1,7 +1,7 @@
 package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.entities.hostile.TransformableSwetEntity;
+import com.aether.entities.hostile.swet.TransformableSwetEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.entity.Entity;

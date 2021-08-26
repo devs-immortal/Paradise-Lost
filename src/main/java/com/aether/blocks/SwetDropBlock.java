@@ -1,6 +1,6 @@
 package com.aether.blocks;
 
-import com.aether.entities.hostile.SwetEntity;
+import com.aether.entities.hostile.swet.SwetEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;

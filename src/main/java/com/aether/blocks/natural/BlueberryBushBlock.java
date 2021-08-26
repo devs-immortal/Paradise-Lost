@@ -1,8 +1,8 @@
 package com.aether.blocks.natural;
 
 import com.aether.blocks.AetherBlocks;
-import com.aether.entities.hostile.SwetEntity;
-import com.aether.entities.hostile.TransformableSwetEntity;
+import com.aether.entities.hostile.swet.SwetEntity;
+import com.aether.entities.hostile.swet.TransformableSwetEntity;
 import com.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;

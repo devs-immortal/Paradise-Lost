@@ -1,4 +1,4 @@
-package com.aether.entities.hostile;
+package com.aether.entities.hostile.swet;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributes;
