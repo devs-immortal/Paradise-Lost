@@ -56,7 +56,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D, 0.01F));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(6, new LookAroundGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(1, new RevengeGoal(this, CockatriceEntity.class));
         this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, true));
     }
 
@@ -197,7 +197,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
 
             if (this.ticksPlunging > 0 || this.plungingCooldown == 0) {
                 boolean shouldPlunge = this.ticksPlunging > 0 // continue plunging if already started
-                        || this.cockatrice.getRandom().nextInt(10) == 0 // rarely start from any distance
+                        || this.cockatrice.getRandom().nextInt(20) == 0 // rarely start from any distance
                         || distSq < 10 * 10 && this.cockatrice.getRandom().nextInt(5) != 0; // normally start if we are close
                 if (shouldPlunge) {
                     if (this.ticksPlunging == 0) {
