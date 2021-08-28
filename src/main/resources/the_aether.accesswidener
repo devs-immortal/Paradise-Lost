@@ -22,3 +22,4 @@ accessible    field     net/minecraft/client/render/RenderLayers                
 accessible    field     net/minecraft/client/render/RenderLayers                    FLUIDS                       Ljava/util/Map;
 accessible    field     net/minecraft/client/render/entity/model/EntityModelLayers  LAYERS                       Ljava/util/Set;
 mutable       field     net/minecraft/client/render/entity/model/EntityModelLayers  LAYERS                       Ljava/util/Set;
+accessible    method    net/minecraft/entity/projectile/ProjectileEntity            <init>                       (Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V
