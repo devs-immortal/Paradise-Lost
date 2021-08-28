@@ -1,6 +1,7 @@
 package com.aether.entities.util.floatingblock;
 
 import com.aether.entities.block.FloatingBlockEntity;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
@@ -36,7 +37,10 @@ public class FloatingBlockStructure {
                 this.alignToMaster(blockInfo);
             }
             if(blockInfo.block.isRemoved()){
-                land(blockInfo);
+                World world = blockInfo.block.world;
+                BlockState state = blockInfo.block.getBlockState();
+                boolean success = world.getBlockState(blockInfo.block.getBlockPos()).isOf(state.getBlock());
+                land(blockInfo, success);
                 break;
             }
         }
@@ -50,14 +54,19 @@ public class FloatingBlockStructure {
         blockInfo.block.setDropping(master.block.isDropping());
     }
 
-    // TODO: Stop Floating Block Structures from dropping items when they don't break on landing
-    public void land(FloatingBlockInfoWrapper lander){
+    public void land(FloatingBlockInfoWrapper lander, boolean success){
         for(FloatingBlockInfoWrapper blockInfo : blockInfos){
             alignToMaster(blockInfo);
             if (!blockInfo.equals(lander)) {
-                blockInfo.block.land((float) blockInfos.get(0).block.getVelocity().length());
+                if (success) {
+                    blockInfo.block.land(blockInfos.get(0).block.getVelocity().length());
+                } else {
+                    blockInfo.block.breakOnLanding();
+                }
             }
+            blockInfo.block.dropItem = false;
         }
+        this.blockInfos.clear();
         allStructures.remove(this);
     }
 

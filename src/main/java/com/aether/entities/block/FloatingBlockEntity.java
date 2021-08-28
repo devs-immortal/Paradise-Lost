@@ -54,7 +54,7 @@ public class FloatingBlockEntity extends Entity {
     private boolean dropping = false;
     private boolean collides;
     private boolean partOfStructure = false;
-    private BiConsumer<Float, Boolean> onEndFloating;
+    private BiConsumer<Double, Boolean> onEndFloating;
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityType, World world) {
         super(entityType, world);
@@ -147,7 +147,7 @@ public class FloatingBlockEntity extends Entity {
         if (this.floatTile.isAir()) {
             this.discard();
         } else {
-            float impact = (float) this.getVelocity().length();
+            double impact = this.getVelocity().length();
             this.prevX = this.getX();
             this.prevY = this.getY();
             this.prevZ = this.getZ();
@@ -302,7 +302,7 @@ public class FloatingBlockEntity extends Entity {
     @Override
     public void populateCrashReport(CrashReportSection section) {
         super.populateCrashReport(section);
-        section.add("Immitating BlockState", this.floatTile.toString());
+        section.add("Imitating BlockState", this.floatTile.toString());
     }
 
     public BlockState getBlockState() {
@@ -365,21 +365,24 @@ public class FloatingBlockEntity extends Entity {
         void postTick();
     }
 
-    public BiConsumer<Float, Boolean> getOnEndFloating(){
+    public BiConsumer<Double, Boolean> getOnEndFloating(){
         return this.onEndFloating;
     }
 
-    public void setOnEndFloating(BiConsumer<Float, Boolean> consumer){
+    public void setOnEndFloating(BiConsumer<Double, Boolean> consumer){
         this.onEndFloating = consumer;
     }
 
-    public void land(float impact) {
-        boolean landingSuccessful = false;
+    public void land(double impact) {
+        if (this.isRemoved()){
+            return;
+        }
         BlockPos blockPos = this.getBlockPos();
         BlockState blockState = this.world.getBlockState(blockPos);
         this.setVelocity(this.getVelocity().multiply(0.7, 0.5, 0.7));
         if (blockState.getBlock() != Blocks.MOVING_PISTON) {
             this.discard();
+            boolean landingSuccessful = false;
             if (!this.dontSetBlock) {
                 boolean canReplace = blockState.canReplace(new AutomaticItemPlacementContext(this.world, blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
                 boolean canPlace = this.floatTile.canPlaceAt(this.world, blockPos);
@@ -407,11 +410,20 @@ public class FloatingBlockEntity extends Entity {
                         }
                     }
                 }
-                if (!landingSuccessful && this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-                    Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
+                if (!landingSuccessful) {
+                    this.breakOnLanding();
                 }
             }
             this.getOnEndFloating().accept(impact, landingSuccessful);
+        }
+    }
+
+    public void breakOnLanding(){
+        if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+            Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
+        }
+        if (!this.isRemoved()){
+            this.discard();
         }
     }
     
