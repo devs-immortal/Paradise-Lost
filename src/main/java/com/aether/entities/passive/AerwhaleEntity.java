@@ -251,6 +251,7 @@ public class AerwhaleEntity extends FlyingEntity {
             Random random = this.aerwhale.getRandom();
             double x = this.aerwhale.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
             double y = this.aerwhale.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+            y = MathHelper.clamp(y, 20, 90);
             double z = this.aerwhale.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
             this.aerwhale.getMoveControl().moveTo(x, y, z, 1.0D);
         }
