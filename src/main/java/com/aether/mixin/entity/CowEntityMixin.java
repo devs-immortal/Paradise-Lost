@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 
 @Mixin(CowEntity.class)
 public abstract class CowEntityMixin extends AnimalEntity {
+
     protected CowEntityMixin(EntityType<? extends AnimalEntity> entityType, World world){
         super(entityType, world);
     }

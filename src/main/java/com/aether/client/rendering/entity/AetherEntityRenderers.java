@@ -1,6 +1,7 @@
 package com.aether.client.rendering.entity;
 
 import com.aether.entities.AetherEntityTypes;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -19,6 +20,7 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
         register(AetherEntityTypes.PHYG, PhygRenderer::new);
         register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);
+        register(AetherEntityTypes.COCKATRICE_SPIT, CockatriceSpitRenderer::new);
 
         register(AetherEntityTypes.ENCHANTED_DART, DartRenderer::new);
         register(AetherEntityTypes.GOLDEN_DART, DartRenderer::new);
