@@ -1,12 +1,19 @@
 package com.aether.entities.hostile;
 
-import com.aether.entities.AetherEntityTypes;
 import com.aether.entities.projectile.PoisonNeedleEntity;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -81,15 +88,15 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     }
 
     @Override
-    public void attack(LivingEntity targetIn, float arg1) {
+    public void attack(LivingEntity target, float pullProgress) {
         PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
 
-        double x = targetIn.getX() - this.getX();
-        double z = targetIn.getZ() - this.getX();
-        double y = targetIn.getBoundingBox().minY + (double) (targetIn.getHeight() / 3.0F) - needle.getY();
-        double double_4 = MathHelper.sqrt((float) (x * x + z * z));
+        double dx = target.getX() - this.getX();
+        double dz = target.getZ() - this.getZ();
+        double dy = target.getBodyY(0.3333333333333333D) - needle.getY();
+        double distance = Math.sqrt(dx * dx + dz * dz);
 
-        needle.setVelocity(x, y + double_4 * 0.20000000298023224D, z, 1.2F, 1.0F);
+        needle.setVelocity(dx, dy + distance * 0.2D, dz, 1.2F, 1.0F);
 
         this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
 
