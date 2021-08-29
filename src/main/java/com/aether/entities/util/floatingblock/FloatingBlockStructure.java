@@ -58,10 +58,11 @@ public class FloatingBlockStructure {
         for(FloatingBlockInfoWrapper blockInfo : blockInfos){
             alignToMaster(blockInfo);
             if (!blockInfo.equals(lander)) {
+                double impact = blockInfos.get(0).block.getVelocity().length();
                 if (success) {
-                    blockInfo.block.land(blockInfos.get(0).block.getVelocity().length());
+                    blockInfo.block.land(impact);
                 } else {
-                    blockInfo.block.breakOnLanding();
+                    blockInfo.block.crashLand(impact);
                 }
             }
             blockInfo.block.dropItem = false;

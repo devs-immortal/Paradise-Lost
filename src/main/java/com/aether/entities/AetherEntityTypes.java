@@ -1,28 +1,49 @@
 package com.aether.entities;
 
+import static com.aether.Aether.locate;
+import static net.minecraft.entity.EntityDimensions.changing;
+import static net.minecraft.entity.SpawnGroup.CREATURE;
+import static net.minecraft.entity.SpawnGroup.MISC;
+import static net.minecraft.entity.SpawnGroup.MONSTER;
+
+import java.util.function.Supplier;
+
 import com.aether.entities.block.FloatingBlockEntity;
-import com.aether.entities.hostile.*;
-import com.aether.entities.hostile.swet.*;
-import com.aether.entities.passive.*;
+import com.aether.entities.hostile.AechorPlantEntity;
+import com.aether.entities.hostile.ChestMimicEntity;
+import com.aether.entities.hostile.CockatriceEntity;
+import com.aether.entities.hostile.swet.BlueSwetEntity;
+import com.aether.entities.hostile.swet.GoldenSwetEntity;
+import com.aether.entities.hostile.swet.PurpleSwetEntity;
+import com.aether.entities.hostile.swet.SwetEntity;
+import com.aether.entities.hostile.swet.WhiteSwetEntity;
+import com.aether.entities.passive.AerbunnyEntity;
+import com.aether.entities.passive.AerwhaleEntity;
+import com.aether.entities.passive.AetherAnimalEntity;
+import com.aether.entities.passive.FlyingCowEntity;
+import com.aether.entities.passive.MoaEntity;
+import com.aether.entities.passive.PhygEntity;
+import com.aether.entities.passive.SheepuffEntity;
+import com.aether.entities.projectile.CockatriceSpitEntity;
 import com.aether.entities.projectile.EnchantedDartEntity;
 import com.aether.entities.projectile.GoldenDartEntity;
 import com.aether.entities.projectile.PoisonDartEntity;
 import com.aether.entities.projectile.PoisonNeedleEntity;
 import com.aether.registry.RegistryQueue;
 import com.aether.registry.RegistryQueue.Action;
+
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.DefaultAttributeRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.world.*;
-
-import java.util.function.Supplier;
-
-import static com.aether.Aether.locate;
-import static net.minecraft.entity.EntityDimensions.changing;
-import static net.minecraft.entity.SpawnGroup.*;
+import net.minecraft.world.Heightmap;
 
 @SuppressWarnings({"unused", "SameParameterValue"})
 public class AetherEntityTypes {
@@ -69,6 +90,7 @@ public class AetherEntityTypes {
 
     public static final EntityType<CockatriceEntity> COCKATRICE = add("cockatrice", of(CockatriceEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
             attributes(CockatriceEntity::createCockatriceAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
+    public static final EntityType<CockatriceSpitEntity> COCKATRICE_SPIT = add("cockatrice_spit", of(CockatriceSpitEntity::new, MISC, changing(0.5F, 0.5F), 5));
 
     public static final EntityType<ChestMimicEntity> CHEST_MIMIC = add("chest_mimic", of(ChestMimicEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
             attributes(ChestMimicEntity::createChestMimicAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));

@@ -379,52 +379,52 @@ public class FloatingBlockEntity extends Entity {
         }
         BlockPos blockPos = this.getBlockPos();
         BlockState blockState = this.world.getBlockState(blockPos);
-        this.setVelocity(this.getVelocity().multiply(0.7, 0.5, 0.7));
-        if (blockState.getBlock() != Blocks.MOVING_PISTON) {
-            this.discard();
-            boolean landingSuccessful = false;
-            if (!this.dontSetBlock) {
-                boolean canReplace = blockState.canReplace(new AutomaticItemPlacementContext(this.world, blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
-                boolean canPlace = this.floatTile.canPlaceAt(this.world, blockPos);
+        if (blockState.isOf(Blocks.MOVING_PISTON)) {
+            this.setVelocity(this.getVelocity().multiply(0.7, 0.5, 0.7));
+            return;
+        }
+        boolean landingSuccessful = false;
+        if (!this.dontSetBlock) {
+            boolean canReplace = blockState.canReplace(new AutomaticItemPlacementContext(this.world, blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
+            boolean canPlace = this.floatTile.canPlaceAt(this.world, blockPos);
 
-                if (canReplace && canPlace) {
-                    if (this.floatTile.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockPos).getFluid() == Fluids.WATER)
-                        this.floatTile = this.floatTile.with(Properties.WATERLOGGED, true);
+            if (canReplace && canPlace) {
+                if (this.floatTile.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockPos).getFluid() == Fluids.WATER) {
+                    this.floatTile = this.floatTile.with(Properties.WATERLOGGED, true);
+                }
 
-                    if (this.world.setBlockState(blockPos, this.floatTile, 3)) {
-                        landingSuccessful = true;
-                        if (this.blockEntityData != null && this.floatTile.hasBlockEntity()) {
-                            BlockEntity blockEntity = this.world.getBlockEntity(blockPos);
-                            if (blockEntity != null) {
-                                NbtCompound compoundTag = blockEntity.writeNbt(new NbtCompound());
-
-                                for (String keyName : this.blockEntityData.getKeys()) {
-                                    NbtElement tag = this.blockEntityData.get(keyName);
-                                    if (tag != null && !"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName)) {
-                                        compoundTag.put(keyName, tag.copy());
-                                    }
+                if (this.world.setBlockState(blockPos, this.floatTile, 3)) {
+                    landingSuccessful = true;
+                    this.discard();
+                    if (this.blockEntityData != null && this.floatTile.hasBlockEntity()) {
+                        BlockEntity blockEntity = this.world.getBlockEntity(blockPos);
+                        if (blockEntity != null) {
+                            NbtCompound compoundTag = blockEntity.writeNbt(new NbtCompound());
+                            for (String keyName : this.blockEntityData.getKeys()) {
+                                NbtElement tag = this.blockEntityData.get(keyName);
+                                if (tag != null && !"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName)) {
+                                    compoundTag.put(keyName, tag.copy());
                                 }
-                                blockEntity.readNbt(compoundTag);
-                                blockEntity.markDirty();
                             }
+                            blockEntity.readNbt(compoundTag);
+                            blockEntity.markDirty();
                         }
                     }
-                }
-                if (!landingSuccessful) {
-                    this.breakOnLanding();
+                    this.getOnEndFloating().accept(impact, true);
                 }
             }
-            this.getOnEndFloating().accept(impact, landingSuccessful);
+        }
+        if (!landingSuccessful) {
+            this.crashLand(impact);
         }
     }
 
-    public void breakOnLanding(){
+    public void crashLand(double impact){
+        this.discard();
         if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
             Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
         }
-        if (!this.isRemoved()){
-            this.discard();
-        }
+        this.getOnEndFloating().accept(impact, false);
     }
     
     public static boolean canMakeBlock(boolean shouldDrop, BlockState below, BlockState above){
