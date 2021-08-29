@@ -1,26 +1,25 @@
 package com.aether.mixin.entity;
 
-import com.aether.items.AetherItems;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.aether.items.AetherItems;
+
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.world.World;
+
 @Mixin(CowEntity.class)
-public class CowEntityMixin extends AnimalEntity {
+public abstract class CowEntityMixin extends AnimalEntity {
 
     protected CowEntityMixin(EntityType<? extends AnimalEntity> entityType, World world){
         super(entityType, world);
@@ -35,10 +34,5 @@ public class CowEntityMixin extends AnimalEntity {
             player.setStackInHand(hand, itemStack2);
             cir.setReturnValue(ActionResult.success(this.world.isClient));
         }
-    }
-
-    @Shadow
-    public CowEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return null;
     }
 }
