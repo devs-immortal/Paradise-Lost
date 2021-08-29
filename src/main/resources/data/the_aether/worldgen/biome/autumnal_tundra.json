@@ -101,7 +101,7 @@
   },
   "player_spawn_friendly": false,
   "precipitation": "rain",
-  "temperature": 0.05,
+  "temperature": 0.25,
   "downfall": 2.0,
   "category": "taiga",
   "depth": 0.1,
