@@ -51,9 +51,9 @@ public class AetherPortalItem extends Item {
 				context.getWorld().setBlockState(mut, Blocks.GLOWSTONE.getDefaultState());
 			}
 
+			// clear the inside
 			mut.set(context.getBlockPos());
 			mut.move(context.getPlayerFacing().rotateYCounterclockwise());
-			// clear the inside
 			for (int i = -1; i < 2; i++){
 				for (int j = -1; j < 2; j++){
 					mut.move(Direction.UP);
@@ -69,8 +69,6 @@ public class AetherPortalItem extends Item {
 			if (context.getPlayer() != null && !context.getPlayer().isCreative()) {
 				context.getStack().decrement(1);
 			}
-
-			return ActionResult.SUCCESS;
 		}
 
 		return ActionResult.SUCCESS;
