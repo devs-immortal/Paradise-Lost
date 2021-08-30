@@ -55,8 +55,7 @@
     "client.render.FluidRendererMixin",
     "client.render.ItemColorsMixin",
     "client.render.LivingEntityRendererMixin",
-    "client.render.MinecraftClientMixin",
-    "client.render.ParticleManagerMixin"
+    "client.render.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
