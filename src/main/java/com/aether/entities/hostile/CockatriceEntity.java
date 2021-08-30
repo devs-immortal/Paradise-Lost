@@ -69,9 +69,9 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         super.tickMovement();
         this.prevFlapProgress = this.flapProgress;
         this.prevMaxWingDeviation = this.maxWingDeviation;
-        this.maxWingDeviation = this.maxWingDeviation + (this.onGround ? -1 : 4) * 0.3F;
+        this.maxWingDeviation = this.maxWingDeviation + (this.onGround && !this.isAttacking() ? -1 : 4) * 0.3F;
         this.maxWingDeviation = MathHelper.clamp(this.maxWingDeviation, 0.0F, 1.0F);
-        if (!this.onGround && this.flapSpeed < 1.0F) {
+        if ((!this.onGround || this.isAttacking()) && this.flapSpeed < 1.0F) {
             this.flapSpeed = 1.0F;
         }
 
