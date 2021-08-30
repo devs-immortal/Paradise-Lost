@@ -198,7 +198,7 @@ public class AetherBlocks {
     public static final PillarBlock GOLDEN_OAK_WOOD = add("golden_oak_wood", new PillarBlock(goldenOak.log()), flammableLog);
     public static final PillarBlock STRIPPED_GOLDEN_OAK_LOG = add("stripped_golden_oak_log", new PillarBlock(goldenOak.strippedLog()), flammableLog);
     public static final PillarBlock STRIPPED_GOLDEN_OAK_WOOD = add("stripped_golden_oak_wood", new PillarBlock(goldenOak.strippedWood()), flammableLog);
-    public static final LeavesBlock GOLDEN_OAK_LEAVES = add("golden_oak_leaves", new LeavesBlock(goldenOak.leaves()), flammableLeaves, cutoutMippedRenderLayer);
+    public static final AetherLeavesBlock GOLDEN_OAK_LEAVES = add("golden_oak_leaves", new AetherLeavesBlock(goldenOak.leaves(), true), flammableLeaves, cutoutMippedRenderLayer);
     public static final Block GOLDEN_OAK_PLANKS = add("golden_oak_planks", new Block(goldenOak.planks()), flammablePlanks);
     public static final FenceBlock GOLDEN_OAK_FENCE = add("golden_oak_fence", new FenceBlock(goldenOak.planks()), flammablePlanks);
     public static final FenceGateBlock GOLDEN_OAK_FENCE_GATE = add("golden_oak_fence_gate", new FenceGateBlock(goldenOak.planks()), flammablePlanks);

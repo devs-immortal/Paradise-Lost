@@ -95,7 +95,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
 
         this.wingRotation += 1.233F;
     }
-
+  
     public boolean isGliding() {
         return !this.onGround || this.isAttacking();
     }
@@ -237,7 +237,6 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
                     this.plungingCooldown = 50 + this.cockatrice.getRandom().nextInt(25);
                 }
             }
-
             double distSq = this.cockatrice.squaredDistanceTo(target);
 
             if (this.ticksPlunging > 0 || this.plungingCooldown == 0) {

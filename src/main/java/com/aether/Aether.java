@@ -5,8 +5,10 @@ import com.aether.blocks.AetherBlocks;
 import com.aether.blocks.blockentity.AetherBlockEntityTypes;
 import com.aether.client.model.AetherArmorModels;
 import com.aether.client.model.AetherModelPredicates;
+import com.aether.client.rendering.AetherColorProviders;
 import com.aether.client.rendering.entity.AetherEntityRenderers;
 import com.aether.client.rendering.entity.layer.AetherModelLayers;
+import com.aether.client.rendering.particle.AetherParticles;
 import com.aether.commands.AetherCommands;
 import com.aether.entities.AetherEntityTypes;
 import com.aether.fluids.AetherFluids;
@@ -65,5 +67,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherEntityRenderers.initClient();
         AetherBlockEntityTypes.initClient();
         AetherFluids.initClient();
+        AetherParticles.initClient();
+        AetherColorProviders.initClient();
     }
 }

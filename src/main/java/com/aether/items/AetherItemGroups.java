@@ -2,16 +2,10 @@ package com.aether.items;
 
 import com.aether.Aether;
 import com.aether.blocks.AetherBlocks;
-import com.aether.items.utils.ItemGroupExpansions;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import static net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder.build;
 
 public class AetherItemGroups {
     public static final ItemGroup AETHER_BLOCKS = build(
@@ -37,32 +31,4 @@ public class AetherItemGroups {
     public static final ItemGroup AETHER_WEARABLES = build(
             Aether.locate("aether_wearables"),
             () -> new ItemStack(AetherItems.ZANITE_CHESTPLATE));
-
-    private static ItemGroup build(Identifier id, @Nullable Supplier<ItemStack> stackSupplier, @Nullable Consumer<List<ItemStack>> stacksForDisplay) {
-        ((ItemGroupExpansions) ItemGroup.BUILDING_BLOCKS).expandArray();
-        return new ItemGroup(ItemGroup.GROUPS.length - 1, String.format("%s.%s", id.getNamespace(), id.getPath())) {
-            @Override
-            public ItemStack createIcon() {
-                if (stackSupplier != null) {
-                    return stackSupplier.get();
-                } else {
-                    return ItemStack.EMPTY;
-                }
-            }
-
-            @Override
-            public void appendStacks(DefaultedList<ItemStack> stacks) {
-                if (stacksForDisplay != null) {
-                    stacksForDisplay.accept(stacks);
-                    return;
-                }
-
-                super.appendStacks(stacks);
-            }
-        };
-    }
-
-    private static ItemGroup build(Identifier id, @Nullable Supplier<ItemStack> stackSupplier) {
-        return build(id, stackSupplier, null);
-    }
 }

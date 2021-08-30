@@ -23,7 +23,6 @@
     "item.AxeItemMixin",
     "item.FilledMapMixin",
     "item.HoeItemMixin",
-    "item.ItemGroupMixin",
     "item.ItemMixin",
     "item.ItemStackMixin",
     "item.MapStateMixin",
@@ -49,14 +48,11 @@
     "client.ItemStackMixin",
     "client.MapRendererMixin",
     "client.WorldRendererMixin",
-    "client.render.BlockColorsMixin",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
     "client.render.FluidRendererMixin",
-    "client.render.ItemColorsMixin",
     "client.render.LivingEntityRendererMixin",
-    "client.render.MinecraftClientMixin",
-    "client.render.ParticleManagerMixin"
+    "client.render.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
