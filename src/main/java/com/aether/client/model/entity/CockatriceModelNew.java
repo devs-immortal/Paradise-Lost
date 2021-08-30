@@ -112,7 +112,7 @@ public class CockatriceModelNew extends EntityModel<CockatriceEntity> {
 
     @Override
     public void setAngles(CockatriceEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        this.head.pitch = headPitch * 0.017453292F;
+        this.head.pitch = 0.2182F + headPitch * 0.017453292F;
         this.head.yaw = headYaw * 0.017453292F;
         this.rightLeg.pitch = 0.9163F + MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance;
         this.leftLeg.pitch = 0.9163F + MathHelper.cos(limbAngle * 0.6662F + 3.1415927F) * 1.4F * limbDistance;
