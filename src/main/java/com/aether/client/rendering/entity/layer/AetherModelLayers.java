@@ -1,17 +1,23 @@
 package com.aether.client.rendering.entity.layer;
 
+import java.util.Map;
+
 import com.aether.Aether;
 import com.aether.client.model.armor.PhoenixArmorModel;
-import com.aether.client.model.entity.*;
+import com.aether.client.model.entity.AechorPlantModel;
+import com.aether.client.model.entity.AerbunnyModel;
+import com.aether.client.model.entity.AerwhaleModel;
+import com.aether.client.model.entity.ChestMimicModel;
+import com.aether.client.model.entity.CockatriceModelNew;
+import com.aether.client.model.entity.MoaModel;
 import com.google.common.collect.Maps;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.util.Identifier;
-
-import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class AetherModelLayers {
@@ -20,7 +26,7 @@ public class AetherModelLayers {
     public static final EntityModelLayer AECHOR_PLANT = register("aechor_plant", "main", AechorPlantModel.getTexturedModelData());
     public static final EntityModelLayer AERBUNNY = register("aerbunny", "main", AerbunnyModel.getTexturedModelData());
     public static final EntityModelLayer AERWHALE = register("aerwhale", "main", AerwhaleModel.getTexturedModelData());
-    public static final EntityModelLayer COCKATRICE = register("cockatrice", "main", CockatriceModel.getTexturedModelData());
+    public static final EntityModelLayer COCKATRICE = register("cockatrice", "main", CockatriceModelNew.getTexturedModelData());
     public static final EntityModelLayer MIMIC = register("mimic", "main", ChestMimicModel.getTexturedModelData());
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer PHOENIX_ARMOR = register("phoenix_armor", "main", PhoenixArmorModel.getTexturedModelData());

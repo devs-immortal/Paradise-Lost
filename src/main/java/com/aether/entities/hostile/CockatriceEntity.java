@@ -34,9 +34,16 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     public float wingRotation, destPos, prevDestPos, prevWingRotation;
     public int shootTime, ticksUntilFlap;
 
+    public float curWingRoll, curWingYaw, curLegPitch;
+
     public CockatriceEntity(EntityType<? extends CockatriceEntity> entityType, World world) {
         super(entityType, world);
         this.stepHeight = 1.0F;
+    }
+
+    @Override
+    public boolean isBaby() {
+        return true;
     }
 
     public static DefaultAttributeContainer.Builder createCockatriceAttributes() {
@@ -67,7 +74,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         if (!this.onGround && this.getVelocity().y < 0.0D)
             this.setVelocity(this.getVelocity().multiply(1.0D, 0.6D, 1.0D));
 
-        if (!this.onGround || this.isAttacking()) {
+        if (isGliding()) {
             if (this.ticksUntilFlap == 0) {
                 this.world.playSound(null, new BlockPos(this.getPos()), SoundEvents.ENTITY_BAT_TAKEOFF, SoundCategory.NEUTRAL, 0.15F, MathHelper.clamp(this.random.nextFloat(), 0.7f, 1.0f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.3f));
 
@@ -87,6 +94,44 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
             this.destPos = 0.0F;
 
         this.wingRotation += 1.233F;
+    }
+
+    public boolean isGliding() {
+        return !this.onGround || this.isAttacking();
+    }
+
+    public float getWingRoll() {
+        if (!isGliding()) {
+            float baseWingRoll = 1.39626F;
+
+            float lDif = -baseWingRoll - curWingRoll;
+            if (Math.abs(lDif) > 0.005F) {
+                curWingRoll += lDif / 6;
+            }
+        } else {
+            curWingRoll = (MathHelper.sin(age / 1.75F) * 0.725F + 0.1F);
+        }
+        return this.curWingRoll;
+    }
+
+    public float getWingYaw() {
+        float baseWingYaw = isGliding() ? 0.95626F : 0.174533F;
+
+        float lDif = -baseWingYaw - curWingYaw;
+        if (Math.abs(lDif) > 0.005F) {
+            curWingYaw += lDif / 12.75;
+        }
+        return curWingYaw;
+    }
+
+    public float getLegPitch() {
+        float baseLegPitch = isGliding() ? -1.5708F : 0.0174533F;
+
+        float lDif = -baseLegPitch - curLegPitch;
+        if (Math.abs(lDif) > 0.005F) {
+            curLegPitch += lDif / 6;
+        }
+        return curLegPitch;
     }
 
     @Override
