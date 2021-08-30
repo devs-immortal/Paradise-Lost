@@ -11,7 +11,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 public class CockatriceRenderer extends MobEntityRenderer<CockatriceEntity, CockatriceModelNew> {
-
     private static final Identifier TEXTURE = Aether.locate("textures/entity/cockatrice.png");
 
     public CockatriceRenderer(EntityRendererFactory.Context renderManager) {
@@ -19,11 +18,10 @@ public class CockatriceRenderer extends MobEntityRenderer<CockatriceEntity, Cock
     }
 
     @Override
-    protected float getAnimationProgress(CockatriceEntity cockatrice, float f) {
-        float f1 = cockatrice.prevWingRotation + (cockatrice.wingRotation - cockatrice.prevWingRotation) * f;
-        float f2 = cockatrice.prevDestPos + (cockatrice.destPos - cockatrice.prevDestPos) * f;
-
-        return (MathHelper.sin(f1) + 1.0F) * f2;
+    protected float getAnimationProgress(CockatriceEntity cockatrice, float tickDelta) {
+        float flap = MathHelper.lerp(tickDelta, cockatrice.prevFlapProgress, cockatrice.flapProgress);
+        float deviation = MathHelper.lerp(tickDelta, cockatrice.prevMaxWingDeviation, cockatrice.maxWingDeviation);
+        return (MathHelper.sin(flap) + 1.0F) * deviation;
     }
 
     @Override
