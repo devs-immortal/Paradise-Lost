@@ -1,9 +1,7 @@
 package com.aether.items.tools;
 
-import com.aether.items.AetherItemGroups;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;

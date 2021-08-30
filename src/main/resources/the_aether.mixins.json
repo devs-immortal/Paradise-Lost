@@ -23,7 +23,6 @@
     "item.AxeItemMixin",
     "item.FilledMapMixin",
     "item.HoeItemMixin",
-    "item.ItemGroupMixin",
     "item.ItemMixin",
     "item.ItemStackMixin",
     "item.MapStateMixin",

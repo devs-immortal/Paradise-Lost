@@ -1,7 +1,6 @@
 package com.aether.client.rendering;
 
 import com.aether.blocks.AetherBlocks;
-import net.fabricmc.fabric.api.client.render.ColorProviderRegistry;
 import net.fabricmc.fabric.impl.client.rendering.ColorProviderRegistryImpl;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
