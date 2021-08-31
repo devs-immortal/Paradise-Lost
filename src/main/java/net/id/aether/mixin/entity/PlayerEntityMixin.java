@@ -1,0 +1,82 @@
+package net.id.aether.mixin.entity;
+
+import net.id.aether.entities.AetherEntityExtensions;
+import net.id.aether.util.AetherDamageSources;
+import net.id.aether.util.CustomStatusEffectInstance;
+import net.id.aether.world.dimension.AetherDimension;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.player.PlayerAbilities;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(PlayerEntity.class)
+public abstract class PlayerEntityMixin extends LivingEntity implements AetherEntityExtensions {
+
+    @Shadow public abstract void increaseStat(Identifier stat, int amount);
+
+    @Shadow @Final private PlayerAbilities abilities;
+
+    public PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
+        super(type, world);
+    }
+
+    private boolean aetherFallen = false;
+
+    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
+    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        if (source.isOutOfWorld() && getY() < world.getBottomY() - 1 && world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
+            if (!world.isClient()) {
+                setAetherFallen(true);
+                ((ServerPlayerEntity) (Object) this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() * 16, world.getTopY() + 320, this.getZ() * 16, this.getYaw(), this.getPitch());
+                CustomStatusEffectInstance ef = new CustomStatusEffectInstance(StatusEffect.byRawId(9), 160, 2);
+                ef.ShowParticles = false;
+                this.addStatusEffect(ef);
+            }
+            cir.setReturnValue(false);
+            cir.cancel();
+        }
+    }
+
+    @Inject(method = "onDeath", at = @At("HEAD"), cancellable = true)
+    public void onDeath(DamageSource source, CallbackInfo ci) {
+    }
+
+    @Override
+    public void setAetherFallen(boolean aetherFallen) {
+        this.aetherFallen = aetherFallen;
+    }
+
+    @Override
+    public boolean isAetherFallen() {
+        return aetherFallen;
+    }
+
+    @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
+    public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+        if(isAetherFallen()) {
+            aetherFallen = false;
+            if (abilities.allowFlying) {
+                cir.setReturnValue(false);
+            } else {
+                if (fallDistance >= 2.0F) {
+                    increaseStat(Stats.FALL_ONE_CM, (int)Math.round((double)fallDistance * 100.0D));
+                }
+                cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, AetherDamageSources.AETHER_FALL));
+            }
+            cir.cancel();
+        }
+    }
+}

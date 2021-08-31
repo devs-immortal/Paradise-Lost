@@ -39,13 +39,13 @@
   "accessWidener": "the_aether.accesswidener",
   "entrypoints": {
     "main": [
-      "com.aether.Aether"
+      "net.id.aether.Aether"
     ],
     "client": [
-      "com.aether.Aether"
+      "net.id.aether.Aether"
     ],
     "cardinal-components": [
-      "com.aether.component.AetherComponents"
+      "net.id.aether.component.AetherComponents"
     ]
   },
   "custom": {

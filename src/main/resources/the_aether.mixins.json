@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.aether.mixin",
+  "package": "net.id.aether.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "block.AbstractBlockAccessor",
