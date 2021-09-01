@@ -8,13 +8,6 @@
     "the_aether:cobbled_holystone",
     "the_aether:holystone_brick",
     "the_aether:mossy_holystone",
-    "the_aether:golden_mossy_holystone",
-    "the_aether:angelic_stone",
-    "the_aether:angelic_stone_cracked",
-    "the_aether:carved_stone",
-    "the_aether:hellfire_stone",
-    "the_aether:hellfire_stone_cracked",
-    "the_aether:light_angelic_stone",
-    "the_aether:light_carved_stone"
+    "the_aether:golden_mossy_holystone"
   ]
 }

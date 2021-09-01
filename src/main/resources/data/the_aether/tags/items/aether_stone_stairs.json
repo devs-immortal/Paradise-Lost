@@ -1,17 +1,9 @@
 {
   "replace": false,
   "values": [
-    "the_aether:angelic_stairs",
-    "the_aether:carved_stairs",
-    "the_aether:hellfire_stairs",
     "the_aether:holystone_brick_stairs",
     "the_aether:holystone_stairs",
-    "the_aether:light_carved_stairs",
-    "the_aether:light_angelic_stairs",
-    "the_aether:light_hellfire_stairs",
     "the_aether:mossy_holystone_stairs",
-    "the_aether:light_sentry_stairs",
-    "the_aether:sentry_stairs",
     "the_aether:cobbled_holystone_stairs"
   ]
 }

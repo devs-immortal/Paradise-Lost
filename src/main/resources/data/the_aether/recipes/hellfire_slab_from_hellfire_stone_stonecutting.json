@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "the_aether:hellfire_stone"
-  },
-  "result": "the_aether:hellfire_slab",
-  "count": 2
-}

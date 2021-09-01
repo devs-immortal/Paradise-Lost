@@ -1,11 +1,5 @@
 {
   "replace": false,
   "values": [
-    "the_aether:carved_stone_trap",
-    "the_aether:hellfire_stone_trap",
-    "the_aether:light_hellfire_stone_trap",
-    "the_aether:light_angelic_stone_trap",
-    "the_aether:light_carved_stone_trap",
-    "the_aether:sentry_stone_trap"
   ]
 }

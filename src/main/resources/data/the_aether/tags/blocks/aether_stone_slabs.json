@@ -1,17 +1,9 @@
 {
   "replace": false,
   "values": [
-    "the_aether:angelic_slab",
-    "the_aether:carved_slab",
-    "the_aether:hellfire_slab",
     "the_aether:holystone_brick_slab",
     "the_aether:holystone_slab",
-    "the_aether:light_carved_slab",
-    "the_aether:light_angelic_slab",
-    "the_aether:light_hellfire_slab",
     "the_aether:mossy_holystone_slab",
-    "the_aether:light_sentry_slab",
-    "the_aether:sentry_slab",
     "the_aether:cobbled_holystone_slab"
   ]
 }
