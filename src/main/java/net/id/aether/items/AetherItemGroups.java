@@ -4,6 +4,7 @@ import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
 import static net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder.build;
 
@@ -24,9 +25,10 @@ public class AetherItemGroups {
             Aether.locate("aether_resources"),
             () -> new ItemStack(AetherItems.AMBROSIUM_SHARD));
 
+    // TODO: find a new icon for this item group, or change it to the bronze key when implemented
     public static final ItemGroup AETHER_MISC = build(
             Aether.locate("aether_misc"),
-            () -> new ItemStack(AetherItems.BRONZE_KEY));
+            () -> new ItemStack(Items.BARRIER));
 
     public static final ItemGroup AETHER_WEARABLES = build(
             Aether.locate("aether_wearables"),

@@ -59,8 +59,8 @@ public class AetherItems {
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource));
     public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
     public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
-    public static final Item GOLD_AERDUST = add("gold_aerdust", new Item(resource));
-    public static final Item FROZEN_AERDUST = add("frozen_aerdust", new Item(resource));
+//    public static final Item GOLD_AERDUST = add("gold_aerdust", new Item(resource));
+//    public static final Item FROZEN_AERDUST = add("frozen_aerdust", new Item(resource));
 
 
     private static Settings tool() { return new Settings().group(AetherItemGroups.AETHER_TOOLS); }
@@ -134,17 +134,17 @@ public class AetherItems {
     public static final ArmorItem PHOENIX_CHESTPLATE = add("phoenix_chestplate", new ArmorItem(AetherArmorMaterials.PHOENIX, CHEST, aetherLootWearable));
     public static final ArmorItem PHOENIX_LEGGINGS = add("phoenix_leggings", new ArmorItem(AetherArmorMaterials.PHOENIX, LEGS, aetherLootWearable));
     public static final ArmorItem PHOENIX_BOOTS = add("phoenix_boots", new ArmorItem(AetherArmorMaterials.PHOENIX, FEET, aetherLootWearable));
-
+/*
     public static final ArmorItem OBSIDIAN_HELMET = add("obsidian_helmet", new ArmorItem(AetherArmorMaterials.OBSIDIAN, HEAD, aetherLootWearable));
     public static final ArmorItem OBSIDIAN_CHESTPLATE = add("obsidian_chestplate", new ArmorItem(AetherArmorMaterials.OBSIDIAN, CHEST, aetherLootWearable));
     public static final ArmorItem OBSIDIAN_LEGGINGS = add("obsidian_leggings", new ArmorItem(AetherArmorMaterials.OBSIDIAN, LEGS, aetherLootWearable));
     public static final ArmorItem OBSIDIAN_BOOTS = add("obsidian_boots", new ArmorItem(AetherArmorMaterials.OBSIDIAN, FEET, aetherLootWearable));
-
+*/
     public static final ArmorItem VALKYRIE_HELMET = add("valkyrie_helmet", new ArmorItem(AetherArmorMaterials.VALKYRIE, HEAD, aetherLootWearable));
     public static final ArmorItem VALKYRIE_CHESTPLATE = add("valkyrie_chestplate", new ArmorItem(AetherArmorMaterials.VALKYRIE, CHEST, aetherLootWearable));
     public static final ArmorItem VALKYRIE_LEGGINGS = add("valkyrie_leggings", new ArmorItem(AetherArmorMaterials.VALKYRIE, LEGS, aetherLootWearable));
     public static final ArmorItem VALKYRIE_BOOTS = add("valkyrie_boots", new ArmorItem(AetherArmorMaterials.VALKYRIE, FEET, aetherLootWearable));
-
+/*
     public static final ArmorItem SENTRY_BOOTS = add("sentry_boots", new ArmorItem(AetherArmorMaterials.SENTRY, FEET, aetherLootWearable));
 
     public static final AccessoryItem LEATHER_GLOVES = add("leather_gloves", new AccessoryItem(AccessoryType.GLOVES, 1.5f, wearable));
@@ -179,7 +179,7 @@ public class AetherItems {
     public static final AccessoryItem GOLDEN_FEATHER = add("golden_feather", new AccessoryItem(AccessoryType.MISC, aetherLootWearable));
     public static final AccessoryItem REGENERATION_STONE = add("regeneration_stone", new AccessoryItem(AccessoryType.MISC, aetherLootWearable));
     public static final AccessoryItem IRON_BUBBLE = add("iron_bubble", new AccessoryItem(AccessoryType.MISC, aetherLootWearable));
-
+*/
 
     private static Settings food(FoodComponent foodComponent) { return new Settings().group(AetherItemGroups.AETHER_FOOD).food(foodComponent); }
     private static Settings food(FoodComponent foodComponent, Rarity rarity) { return food(foodComponent).rarity(rarity); }
@@ -199,9 +199,11 @@ public class AetherItems {
 
     private static Settings misc() { return new Settings().group(AetherItemGroups.AETHER_MISC); }
     private static final Settings misc = misc();
+    /*
     public static final LifeShardItem LIFE_SHARD = add("life_shard", new LifeShardItem(misc().rarity(AetherRarity.AETHER_LOOT).maxCount(1)));
     public static final CloudStaffItem CLOUD_STAFF = add("cloud_staff", new CloudStaffItem(misc().maxCount(1).maxDamage(60)));
     public static final NatureStaffItem NATURE_STAFF = add("nature_staff", new NatureStaffItem(misc().maxCount(1).maxDamage(100)));
+     */
     public static final MoaEggItem MOA_EGG = add("moa_egg", new MoaEggItem(misc().maxCount(1)));
     public static final BookOfLoreItem LORE_BOOK = add("lore_book", new BookOfLoreItem(misc().maxCount(1)));
     public static final BlockItem INCUBATOR = add("incubator", AetherBlocks.INCUBATOR, misc, fuel(300));
@@ -217,33 +219,33 @@ public class AetherItems {
 
     public static final VialItem QUICKSOIL_VIAL = add("quicksoil_vial", new VialItem(Fluids.EMPTY, misc().maxCount(32)));
     public static final VialItem AERCLOUD_VIAL = add("aercloud_vial", new VialItem(AetherFluids.DENSE_AERCLOUD, misc().maxCount(32)));
-
+/*
     public static final Item BRONZE_KEY = add("bronze_key", new Item(misc().rarity(AetherRarity.AETHER_LOOT)));
     public static final Item SILVER_KEY = add("silver_key", new Item(misc().rarity(AetherRarity.AETHER_LOOT)));
     public static final Item GOLDEN_KEY = add("golden_key", new Item(misc().rarity(AetherRarity.AETHER_LOOT)));
-
+*/
     public static final AetherPortalItem AETHER_PORTAL = add("aether_portal", new AetherPortalItem(misc));
 
     public static final SpawnEggItem AECHOR_PLANT_SPAWN_EGG = add("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x97DED4, 0x31897D, misc));
-    public static final SpawnEggItem CHEST_MIMIC_SPAWN_EGG = null;
+//    public static final SpawnEggItem CHEST_MIMIC_SPAWN_EGG = null;
     public static final SpawnEggItem COCKATRICE_SPAWN_EGG = add("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9FC3F7, 0x3D2338, misc));
     public static final SpawnEggItem AERBUNNY_SPAWN_EGG = add("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xC5D6ED, 0x82A6D9, misc));
     public static final SpawnEggItem AERWHALE_SPAWN_EGG = add("aerwhale_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERWHALE, 0x5C6D91, 0xDEDBCE, misc));
-    public static final SpawnEggItem FLYING_COW_SPAWN_EGG = null;
+//    public static final SpawnEggItem FLYING_COW_SPAWN_EGG = null;
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(AetherEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc));
     public static final SpawnEggItem SWET_SPAWN_EGG = add("swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.WHITE_SWET, 0x8F9294, 0xE6EAEB, misc));
     public static final SpawnEggItem BLUE_SWET_SPAWN_EGG = add("blue_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.BLUE_SWET, 0x46699E, 0xE6EAEB, misc));
     public static final SpawnEggItem PURPLE_SWET_SPAWN_EGG = add("purple_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.PURPLE_SWET, 0x5D548C, 0xE6EAEB, misc));
     public static final SpawnEggItem GOLDEN_SWET_SPAWN_EGG = add("golden_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.GOLDEN_SWET, 0xC99D36, 0xE6EAEB, misc));
-    public static final SpawnEggItem PHYG_SPAWN_EGG = null;
-    public static final SpawnEggItem SHEEPUFF_SPAWN_EGG = null;
+//    public static final SpawnEggItem PHYG_SPAWN_EGG = null;
+//    public static final SpawnEggItem SHEEPUFF_SPAWN_EGG = null;
 
     /* todo swet drop block items
     public static final BlockItem SWET_DROP = add("swet_drop", AetherBlocks.SWET_DROP, misc);
     public static final BlockItem BLUE_SWET_DROP = add("blue_swet_drop", AetherBlocks.BLUE_SWET_DROP, misc);
     public static final BlockItem GOLDEN_SWET_DROP = add("golden_swet_drop", AetherBlocks.GOLDEN_SWET_DROP, misc);
-    public static final BlockItem PURPLE_SWET_DROP = add("purple_swet_drop", AetherBlocks.PURPLE_SWET_DROP, misc);*/
-
+    public static final BlockItem PURPLE_SWET_DROP = add("purple_swet_drop", AetherBlocks.PURPLE_SWET_DROP, misc);
+    */
 
     private static Settings block() { return new Settings().group(AetherItemGroups.AETHER_BLOCKS); }
     private static final Settings block = block();
@@ -287,7 +289,7 @@ public class AetherItems {
     public static final BlockItem HOLYSTONE_BRICK_SLAB = add("holystone_brick_slab", AetherBlocks.HOLYSTONE_BRICK_SLAB, block);
     public static final BlockItem HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", AetherBlocks.HOLYSTONE_BRICK_STAIRS, block);
     public static final BlockItem HOLYSTONE_BRICK_WALL = add("holystone_brick_wall", AetherBlocks.HOLYSTONE_BRICK_WALL, block);
-
+/*
     public static final BlockItem ANGELIC_STONE = add("angelic_stone", AetherBlocks.ANGELIC_STONE, block);
     public static final BlockItem ANGELIC_CRACKED_STONE = add("angelic_stone_cracked", AetherBlocks.ANGELIC_CRACKED_STONE, block);
     public static final BlockItem ANGELIC_SLAB = add("angelic_slab", AetherBlocks.ANGELIC_SLAB, block);
@@ -336,7 +338,7 @@ public class AetherItems {
     public static final BlockItem LIGHT_SENTRY_SLAB = add("light_sentry_slab", AetherBlocks.LIGHT_SENTRY_SLAB, block);
     public static final BlockItem LIGHT_SENTRY_STAIRS = add("light_sentry_stairs", AetherBlocks.LIGHT_SENTRY_STAIRS, block);
     public static final BlockItem LIGHT_SENTRY_WALL = add("light_sentry_wall", AetherBlocks.LIGHT_SENTRY_WALL, block);
-
+*/
     public static final BlockItem SKYROOT_SAPLING = add("skyroot_sapling", AetherBlocks.SKYROOT_SAPLING, block, compostable30);
     public static final BlockItem SKYROOT_LOG = add("skyroot_log", AetherBlocks.SKYROOT_LOG, block);
     public static final BlockItem SKYROOT_WOOD = add("skyroot_wood", AetherBlocks.SKYROOT_WOOD, block);

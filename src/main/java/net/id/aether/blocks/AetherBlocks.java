@@ -112,7 +112,7 @@ public class AetherBlocks {
     public static final SlabBlock HOLYSTONE_BRICK_SLAB = add("holystone_brick_slab", new SlabBlock(holystoneBrick()));
     public static final StairsBlock HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", new StairsBlock(HOLYSTONE_BRICK.getDefaultState(), holystoneBrick()));
     public static final WallBlock HOLYSTONE_BRICK_WALL = add("holystone_brick_wall", new WallBlock(holystoneBrick()));
-
+/*
     private static Settings angelicStone() { return of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE); }
     public static final Block ANGELIC_STONE = add("angelic_stone", new Block(angelicStone()));
     public static final Block ANGELIC_CRACKED_STONE = add("angelic_stone_cracked", new Block(angelicStone()));
@@ -169,7 +169,7 @@ public class AetherBlocks {
     public static final SlabBlock LIGHT_SENTRY_SLAB = add("light_sentry_slab", new SlabBlock(lightSentryStone()));
     public static final StairsBlock LIGHT_SENTRY_STAIRS = add("light_sentry_stairs", new StairsBlock(LIGHT_SENTRY_STONE.getDefaultState(), lightSentryStone()));
     public static final WallBlock LIGHT_SENTRY_WALL = add("light_sentry_wall", new WallBlock(lightSentryStone()));
-
+*/
     private static final WoodTypeFactory skyroot = new WoodTypeFactory(MapColor.GREEN, MapColor.TERRACOTTA_GREEN);
     public static final SaplingBlock SKYROOT_SAPLING = add("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), skyroot.sapling()), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_SKYROOT_SAPLING = add("potted_skyroot_sapling", new FlowerPotBlock(SKYROOT_SAPLING, flowerPot()), cutoutRenderLayer);
