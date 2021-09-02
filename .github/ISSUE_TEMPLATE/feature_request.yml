@@ -1,0 +1,62 @@
+name: Feature request
+description: Suggest an idea for this project
+labels: [feature]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us improve our mod!
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: "If your feature is related to a problem, let us know:"
+      placeholder: ex. I'm always frustrated when...
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        If your feature is not related to a problem, it might be better suited for our [discord server](https://discord.com/invite/wmMa47n).
+  - type: textarea
+    id: feature
+    attributes:
+      label: Feature
+      description: What solution did you come up with?
+      placeholder: ex. There should be a...
+    validations:
+      required: true
+  - type: textarea
+    id: other-solutions
+    attributes:
+      label: Other Solutions
+      description: Did you come up with any other solutions?
+      placeholder: ex. You could also...
+    validations:
+      required: false
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What version of our mod are you running?
+      options:
+        - Dev
+        - 1.5.0 (Latest)
+        - 1.4.1 (1.16)
+        - 1.0.4 (1.16)
+        - Older
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: other
+    attributes:
+      label: Additional Information
+      description: Is there anything else we should know?
+      placeholder: ex. I'm using several other mods...
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        Have any relevant screenshots or concept art? Share them!

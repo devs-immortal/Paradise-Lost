@@ -1,0 +1,75 @@
+name: Bug Report
+description: Create a report to help us improve
+title: "Bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us improve our mod!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us what you expected to happen
+      placeholder: A bug!
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What version of our mod are you running?
+      options:
+        - Dev
+        - 1.5.0 (Latest)
+        - 1.4.1 (1.16)
+        - 1.0.4 (1.16)
+        - Older
+        - Unsure
+    validations:
+      required: true
+  - type: input
+    id: fapi-version
+    attributes:
+      label: Fabric API Version
+      description: What version of Fabric API are you using?
+      placeholder: ex. 0.xx.x
+    validations:
+      required: false
+  - type: input
+    id: trinkets-version
+    attributes:
+      label: Trinkets Version
+      description: What version of Trinkets are you using?
+      placeholder: ex. 3.x.x
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste the logs from the event of the bug. The latest log can be found in .minecraft/logs/latest.log.
+      render: shell
+    validations:
+      required: false
+  - type: textarea
+    id: mods
+    attributes:
+      label: Other mods
+      description: If you're using other mods, please share them here. If you're not, you can leave this blank.
+      render: shell
+    validations:
+      required: false
+  - type: textarea
+    id: other
+    attributes:
+      label: Additional Information
+      description: Is there anything else we should know?
+      placeholder: ex. I'm using a third party launcher
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        Have any relevant screenshots? Share them!

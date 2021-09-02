@@ -1,0 +1,85 @@
+name: Crash Report
+description: Report a crash
+title: "Crash: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us improve our mod!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What were you doing when the crash occured?
+    validations:
+      required: true
+  - type: dropdown
+    id: client-server
+    attributes:
+      label: Did it crash the client or server?
+      description: If you don't know what this means, pick "Not sure".
+      options:
+        - Client
+        - Server
+        - Both
+        - Not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Mod Version
+      description: What version of our mod were you running?
+      options:
+        - Dev
+        - b1.5.0 (1.17, Latest)
+        - b1.4.1 (1.16)
+        - b1.0.4 (1.16)
+        - Older
+        - Unsure
+    validations:
+      required: true
+  - type: input
+    id: fapi-version
+    attributes:
+      label: Fabric API Version
+      description: What version of Fabric API were you using?
+      placeholder: ex. 0.xx.x
+    validations:
+      required: false
+  - type: input
+    id: trinkets-version
+    attributes:
+      label: Trinkets Version
+      description: What version of Trinkets were you using?
+      placeholder: ex. 3.x.x
+    validations:
+      required: false
+  - type: textarea
+    id: crash-report
+    attributes:
+      label: Crash Report
+      description: Please copy and paste the crash report here. If there was none provided, the latest log can be found in .minecraft/logs/latest.log.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: mods
+    attributes:
+      label: Other mods
+      description: If you're using other mods, please share them here. If you're not, you can leave this blank.
+      render: shell
+    validations:
+      required: false
+  - type: textarea
+    id: other
+    attributes:
+      label: Additional Information
+      description: Is there anything else we should know?
+      placeholder: ex. I'm using a third party launcher
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        Have any relevant screenshots? Share them!
