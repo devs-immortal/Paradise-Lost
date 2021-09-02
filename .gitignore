@@ -132,3 +132,4 @@ src/main/resources/assets/minecraft/textures/*
 
 # Need to allow armor textures to be placed in this folder
 !src/main/resources/assets/minecraft/textures/models/
+*.launch
