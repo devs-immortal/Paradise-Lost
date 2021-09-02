@@ -1,7 +1,7 @@
 name: Crash Report
 description: Report a crash
 title: "Crash: "
-labels: [bug, triage]
+labels: [Bug, triage]
 body:
   - type: markdown
     attributes:
