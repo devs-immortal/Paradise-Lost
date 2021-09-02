@@ -1,5 +1,6 @@
 package net.id.aether.entities.hostile.swet;
 
+import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.items.AetherItems;
 import net.id.aether.tag.AetherItemTags;
 import net.minecraft.entity.*;
@@ -8,6 +9,8 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.decoration.ArmorStandEntity;
+import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SlimeEntity;
@@ -15,6 +18,7 @@ import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
+import net.minecraft.entity.vehicle.TntMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
@@ -69,7 +73,7 @@ public abstract class SwetEntity extends SlimeEntity {
         this.targetSelector.add(1, new FollowUnabsorbedTargetGoal<>(
                 this, PlayerEntity.class, 10, true, false, (player) ->
                 Math.abs(player.getY() - this.getY()) <= 4.0D &&
-                        !(canAbsorb(this, player))
+                        !(FollowUnabsorbedTargetGoal.canAbsorb(this, player))
         ));
     }
 
@@ -117,6 +121,7 @@ public abstract class SwetEntity extends SlimeEntity {
     }
 
     protected void onEntityCollision(Entity entity){
+        // special absorption rules
         if (entity instanceof SwetEntity swet) {
             if (this.getSize() >= swet.getSize() && !swet.isDead()) {
                 this.setSize(MathHelper.ceil(MathHelper.sqrt(this.getSize() * this.getSize() + swet.getSize() * swet.getSize())), true);
@@ -124,20 +129,6 @@ public abstract class SwetEntity extends SlimeEntity {
             }
             return;
         }
-        if (entity.isCollidable()){
-            return;
-        }
-        // vehicles
-        if (entity instanceof BoatEntity || entity instanceof MinecartEntity){
-            return;
-        }
-        // Move this to vermillion swets (?) once they are added.
-        // Ask Azzy about it 🤷‍
-//        if (entity instanceof TntMinecartEntity tnt){
-//            if (!tnt.isPrimed() && this.getSize() >= 4){
-//                tnt.prime();
-//            }
-//        }
         // Make items ride the swet. They often shake free with the jiggle physics
         if (entity instanceof ItemEntity item) {
             if (item.getStack().getItem() == AetherItems.SWET_BALL) {
@@ -148,24 +139,27 @@ public abstract class SwetEntity extends SlimeEntity {
             item.startRiding(this, true);
             return;
         }
-        boolean canPickupNonPlayers = world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-        boolean isPet = (entity instanceof TameableEntity pet && pet.isTamed());
-        boolean isEligiblePet = isPet && world.getDifficulty() != Difficulty.EASY;
-        boolean isEligibleNonPlayer = !(entity instanceof PlayerEntity || isPet) && canPickupNonPlayers;
-        boolean canBePickedUp = isAbsorbable(entity) && (entity instanceof PlayerEntity || isEligiblePet || isEligibleNonPlayer);
-        if (canBePickedUp) {
-            // The higher the number this is multiplied by, the stiffer the wobble is
-            // If the wobbles feel too sharp, try changing the clamp below
+        boolean absorbable = isAbsorbable(entity, world);
+        if (absorbable) {
+            // The higher this number, the stiffer the wobble is
             if (massStuck < 1){
                 massStuck = 1;
             }
-            Vec3d suckVelocity = this.getBoundingBox().getCenter().subtract(entity.getPos()).multiply(MathHelper.clamp(0.25 + massStuck/100,0,1))
-                    .add(this.getVelocity().subtract(entity.getVelocity()).multiply(0.45 / massStuck / this.getSize()));
+            // dampened oscillator (nonlinear restoring force)
+            Vec3d suckVelocity =
+                    this.getBoundingBox().getCenter().subtract(entity.getPos()) // entity displacement
+                    .multiply(MathHelper.clamp(0.25 + massStuck/100,0,1)) // coefficient
+                    .add(
+                            this.getVelocity().subtract(entity.getVelocity()) // (difference in) velocity
+                            .multiply(0.45 / massStuck / this.getSize()) // coefficient
+                    );
             Vec3d newVelocity = entity.getVelocity().add(suckVelocity);
             double velocityClamp = this.getSize() * 0.1 + 0.25;
-            entity.setVelocity(MathHelper.clamp(newVelocity.getX(), -velocityClamp, velocityClamp),
+            entity.setVelocity(
+                    MathHelper.clamp(newVelocity.getX(), -velocityClamp, velocityClamp),
                     Math.min(newVelocity.getY(), 0.25),
-                    MathHelper.clamp(newVelocity.getZ(), -velocityClamp, velocityClamp));
+                    MathHelper.clamp(newVelocity.getZ(), -velocityClamp, velocityClamp)
+            );
             entity.velocityDirty = true;
             entity.fallDistance = 0;
         }
@@ -173,7 +167,7 @@ public abstract class SwetEntity extends SlimeEntity {
         if (entity instanceof LivingEntity livingEntity) {
             // Hack to prevent knockback; TODO: find a better way to prevent knockback
             EntityAttributeInstance knockbackResistance = livingEntity.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
-            if (canBePickedUp && knockbackResistance != null) {
+            if (absorbable && knockbackResistance != null) {
                 knockbackResistance.addTemporaryModifier(knockbackResistanceModifier);
                 this.damage(livingEntity);
                 knockbackResistance.removeModifier(knockbackResistanceModifier);
@@ -238,13 +232,23 @@ public abstract class SwetEntity extends SlimeEntity {
         return this.getType().getLootTableId();
     }
 
-    protected static boolean canAbsorb(Entity swet, Entity target) {
-        return isAbsorbable(target) &&
-                swet.getBoundingBox().expand(0, 0.5, 0).offset(0, 0.25, 0).intersects(target.getBoundingBox());
-    }
+    protected static boolean isAbsorbable(Entity entity, World world) {
+        if (entity.isCollidable()){ return false; }
 
-    protected static boolean isAbsorbable(Entity entity) {
-        return !(entity.isSneaking() || entity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().flying);
+        if (!((entity instanceof LivingEntity)
+                || (entity instanceof TntEntity)
+                || (entity instanceof TntMinecartEntity)
+                || (entity instanceof FloatingBlockEntity)
+                /* ArmorStands are LivingEntities */
+        )) { return false; }
+
+        boolean canPickupNonPlayers = world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
+        boolean isPet = (entity instanceof TameableEntity pet && pet.isTamed());
+        boolean isEligiblePlayer = (entity instanceof PlayerEntity player && !player.getAbilities().flying);
+        boolean isEligiblePet = isPet && world.getDifficulty() != Difficulty.EASY;
+        boolean isEligibleNonPlayer = !(entity instanceof PlayerEntity || isPet) && canPickupNonPlayers;
+
+        return !entity.isSneaking() && (isEligiblePlayer || isEligiblePet || isEligibleNonPlayer);
     }
 
     public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -259,6 +263,11 @@ public abstract class SwetEntity extends SlimeEntity {
         @Override
         public boolean shouldContinue() {
             return super.shouldContinue() && !(canAbsorb(this.mob, this.mob.getTarget()));
+        }
+
+        protected static boolean canAbsorb(Entity swet, Entity target) {
+            return !target.isSneaking() && !(target instanceof PlayerEntity player && player.getAbilities().flying) &&
+                    swet.getBoundingBox().expand(0, 0.5, 0).offset(0, 0.25, 0).intersects(target.getBoundingBox());
         }
     }
 }
