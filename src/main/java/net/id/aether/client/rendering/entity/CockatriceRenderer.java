@@ -6,29 +6,21 @@ import net.id.aether.client.rendering.entity.layer.AetherModelLayers;
 import net.id.aether.entities.hostile.CockatriceEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 public class CockatriceRenderer extends MobEntityRenderer<CockatriceEntity, CockatriceModel> {
-
-    private static final Identifier TEXTURE = Aether.locate("textures/entity/cockatrice/cockatrice.png");
+    private static final Identifier TEXTURE = Aether.locate("textures/entity/cockatrice.png");
 
     public CockatriceRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager, new CockatriceModel(renderManager.getPart(AetherModelLayers.COCKATRICE)), 1.0F);
     }
 
     @Override
-    protected float getAnimationProgress(CockatriceEntity cockatrice, float f) {
-        float f1 = cockatrice.prevWingRotation + (cockatrice.wingRotation - cockatrice.prevWingRotation) * f;
-        float f2 = cockatrice.prevDestPos + (cockatrice.destPos - cockatrice.prevDestPos) * f;
-
-        return (MathHelper.sin(f1) + 1.0F) * f2;
-    }
-
-    @Override
-    protected void scale(CockatriceEntity cockatrice, MatrixStack matrices, float f) {
-        matrices.scale(1.8F, 1.8F, 1.8F);
+    protected float getAnimationProgress(CockatriceEntity cockatrice, float tickDelta) {
+        float flap = MathHelper.lerp(tickDelta, cockatrice.prevFlapProgress, cockatrice.flapProgress);
+        float deviation = MathHelper.lerp(tickDelta, cockatrice.prevMaxWingDeviation, cockatrice.maxWingDeviation);
+        return (MathHelper.sin(flap) + 1.0F) * deviation;
     }
 
     @Override

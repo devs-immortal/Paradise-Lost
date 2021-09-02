@@ -6,7 +6,14 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.GoToWalkTargetGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -14,17 +21,20 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
-    public float wingRotation, destPos, prevDestPos, prevWingRotation;
-    public int shootTime, ticksUntilFlap;
+    public float flapProgress;
+    public float maxWingDeviation;
+    public float prevMaxWingDeviation;
+    public float prevFlapProgress;
+    public float flapSpeed = 1.0F;
+    private float field_28639 = 1.0F;
 
     public CockatriceEntity(EntityType<? extends CockatriceEntity> entityType, World world) {
         super(entityType, world);
@@ -52,33 +62,38 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, true));
     }
 
+    // copied from ChickenEntity
     @Override
-    public void tick() {
-        super.tick();
-
-        if (!this.onGround && this.getVelocity().y < 0.0D)
-            this.setVelocity(this.getVelocity().multiply(1.0D, 0.6D, 1.0D));
-
-        if (!this.onGround || this.isAttacking()) {
-            if (this.ticksUntilFlap == 0) {
-                this.world.playSound(null, new BlockPos(this.getPos()), SoundEvents.ENTITY_BAT_TAKEOFF, SoundCategory.NEUTRAL, 0.15F, MathHelper.clamp(this.random.nextFloat(), 0.7f, 1.0f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.3f));
-
-                this.ticksUntilFlap = 8;
-            } else {
-                this.ticksUntilFlap--;
-            }
+    public void tickMovement() {
+        super.tickMovement();
+        this.prevFlapProgress = this.flapProgress;
+        this.prevMaxWingDeviation = this.maxWingDeviation;
+        this.maxWingDeviation = this.maxWingDeviation + (this.onGround && !this.isAttacking() ? -1 : 4) * 0.3F;
+        this.maxWingDeviation = MathHelper.clamp(this.maxWingDeviation, 0.0F, 1.0F);
+        if ((!this.onGround || this.isAttacking()) && this.flapSpeed < 1.0F) {
+            this.flapSpeed = 1.0F;
         }
 
-        this.prevWingRotation = this.wingRotation;
-        this.prevDestPos = this.destPos;
+        this.flapSpeed = this.flapSpeed * 0.9F;
+        Vec3d velocity = this.getVelocity();
+        if (!this.onGround && velocity.y < 0.0D) {
+            this.setVelocity(velocity.multiply(1.0D, 0.6D, 1.0D));
+        }
 
-        this.destPos += 0.2F;
-        this.destPos = Math.min(1.0F, Math.max(0.01F, this.destPos));
+        this.flapProgress += this.flapSpeed * 2.0F;
+    }
 
-        if (this.onGround && !this.isAttacking())
-            this.destPos = 0.0F;
+    protected boolean hasWings() {
+        return this.field_28627 > this.field_28639;
+    }
 
-        this.wingRotation += 1.233F;
+    protected void addFlapEffects() {
+        this.field_28639 = this.field_28627 + this.maxWingDeviation / 2.0F;
+    }
+
+    @Override
+    public boolean handleFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
+        return false;
     }
 
     @Override
@@ -98,6 +113,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         this.world.spawnEntity(needle);
     }
 
+    @Override
     public boolean tryAttack(Entity target) {
         if (super.tryAttack(target)) {
             if (target instanceof LivingEntity victim) {
@@ -121,11 +137,6 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason SpawnReason) {
         return world.getRandom().nextInt(25) == 0 && super.canSpawn(world, SpawnReason);
-    }
-
-    @Override
-    public boolean handleFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
-        return false;
     }
 
     @Override
@@ -184,7 +195,6 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
                     this.plungingCooldown = 50 + this.cockatrice.getRandom().nextInt(25);
                 }
             }
-
             double distSq = this.cockatrice.squaredDistanceTo(target);
 
             if (this.ticksPlunging > 0 || this.plungingCooldown == 0) {
