@@ -16,13 +16,7 @@ public class AechorPlantRenderer extends MobEntityRenderer<AechorPlantEntity, Ae
     }
 
     @Override
-    public AechorPlantModel getModel() {
-        return super.getModel();
-    }
-
-    @Override
     public Identifier getTexture(AechorPlantEntity entity) {
         return TEXTURE;
     }
-
 }

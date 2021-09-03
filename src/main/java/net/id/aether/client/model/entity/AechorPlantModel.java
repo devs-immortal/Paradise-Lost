@@ -3,31 +3,118 @@ package net.id.aether.client.model.entity;
 import net.id.aether.entities.hostile.AechorPlantEntity;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.ModelPartBuilder;
 import net.minecraft.client.model.ModelPartData;
+import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
+    private final ModelPart root;
+    private final ModelPart[] petals;
+    private final ModelPart[] leafs;
 
-    public AechorPlantModel(ModelPart root) {
+    public AechorPlantModel(ModelPart modelRoot) {
+        this.root = modelRoot.getChild("root");
+        this.petals = new ModelPart[5];
+        this.leafs = new ModelPart[5];
+        for (int i = 0; i < 5; i++) {
+            this.petals[i] = root.getChild("petal_" + (i + 1));
+            this.leafs[i] = root.getChild("leaf_" + (i + 1));
+        }
     }
 
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
+        ModelPartData modelRoot = modelData.getRoot();
 
-        return TexturedModelData.of(modelData,48,32);
+        ModelPartBuilder bodyBuilder = ModelPartBuilder.create();
+        bodyBuilder.uv(40, 23).cuboid(-1.0F, -2.0F, -1.0F, 2.0F, 3.0F, 2.0F);
+        bodyBuilder.uv(8, 0).cuboid(-5.0F, -0.25F, -5.0F, 10.0F, 0.0F, 10.0F);
+        ModelPartData root = modelRoot.addChild("root", bodyBuilder, ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+
+        ModelPartBuilder petal1Builder = ModelPartBuilder.create();
+        petal1Builder.uv(0, 25).cuboid(0.0F, -1.0F, -3.0F, 8.0F, 0.01F, 6.0F);
+        root.addChild("petal_1", petal1Builder, ModelTransform.of(0.0F, 0.0F, 0.0F, 0, 3.1416F - 0.3142F, 0.2618F));
+
+        ModelPartBuilder petal2Builder = ModelPartBuilder.create();
+        petal2Builder.uv(0, 25).cuboid(0.0F, -1.0F, -3.0F, 8.0F, 0.01F, 6.0F);
+        root.addChild("petal_2", petal2Builder, ModelTransform.of(0.0F, 0.0F, 0.0F, 0, 0.3142F, -0.2618F));
+
+        ModelPartBuilder petal3Builder = ModelPartBuilder.create();
+        petal3Builder.uv(0, 16).cuboid(-3.0F, -1.0F, 0.0F, 6.0F, 0.01F, 8.0F);
+        root.addChild("petal_3", petal3Builder, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.2618F, -0.6283F, 0.0F));
+
+        ModelPartBuilder petal4Builder = ModelPartBuilder.create();
+        petal4Builder.uv(0, 16).cuboid(-3.0F, -1.0F, 0.0F, 6.0F, 0.01F, 8.0F);
+        root.addChild("petal_4", petal4Builder, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.2618F, 3.1416F, 0));
+
+        ModelPartBuilder petal5Builder = ModelPartBuilder.create();
+        petal5Builder.uv(0, 16).cuboid(-3.0F, -1.0F, 0.0F, 6.0F, 0.01F, 8.0F);
+        root.addChild("petal_5", petal5Builder, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.2618F - 3.1416F, -0.6283F + 3.1416F, 3.1416F));
+
+        ModelPartBuilder leaf1_r1 = ModelPartBuilder.create();
+        leaf1_r1.uv(0, 11).cuboid(0.0F, -0.5F, -2.0F, 7.0F, 0.01F, 4.0F);
+        root.addChild("leaf_1", leaf1_r1, ModelTransform.of(0.0F, 0.0F, 0.0F, 0, 3.1416F - 0.9425F, 0.1745F));
+
+        ModelPartBuilder leaf2_r1 = ModelPartBuilder.create();
+        leaf2_r1.uv(0, 3).cuboid(-2.0F, -0.5F, 0.0F, 4.0F, 0.01F, 7.0F);
+        root.addChild("leaf_2", leaf2_r1, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
+
+        ModelPartBuilder leaf3_r1 = ModelPartBuilder.create();
+        leaf3_r1.uv(0, 11).cuboid(0.0F, -0.5F, -2.0F, 7.0F, 0.01F, 4.0F);
+        root.addChild("leaf_3", leaf3_r1, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, -0.3142F, -0.1745F));
+
+        ModelPartBuilder leaf5_r1 = ModelPartBuilder.create();
+        leaf5_r1.uv(0, 11).cuboid(0.0F, -0.5F, -2.0F, 7.0F, 0.01F, 4.0F);
+        root.addChild("leaf_5", leaf5_r1, ModelTransform.of(0.0F, 0.0F, 0.0F, 0, 3.1416F + 0.3142F, 0.1745F));
+
+        ModelPartBuilder leaf4_r1 = ModelPartBuilder.create();
+        leaf4_r1.uv(0, 3).cuboid(-2.0F, -0.5F, 0.0F, 4.0F, 0.01F, 7.0F);
+        root.addChild("leaf_4", leaf4_r1, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.1745F, 3.1416F - 0.6283F, 0));
+
+        ModelPartBuilder pistil = ModelPartBuilder.create();
+
+        pistil.uv(28, 25).cuboid(-2.0F, -2.5F, -2.0F, 4.0F, 2.0F, 4.0F);
+        root.addChild("pistil", pistil, ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+
+        ModelPartBuilder stamenBuilder = ModelPartBuilder.create();
+        ModelPartData stamen = root.addChild("stamen", stamenBuilder, ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+
+        ModelPartBuilder stamen_w_r1 = ModelPartBuilder.create();
+        stamen_w_r1.uv(38, 13).cuboid(1.0F, -7.0F, -2.0F, 0.0F, 5.0F, 4.0F);
+        stamen.addChild("stamen_w_r1", stamen_w_r1, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1745F));
+
+        ModelPartBuilder stamen_s_r1 = ModelPartBuilder.create();
+        stamen_s_r1.uv(25, 17).cuboid(-2.0F, -7.0F, -1.0F, 4.0F, 5.0F, 0.0F);
+        stamen.addChild("stamen_s_r1", stamen_s_r1, ModelTransform.of(0.0F, 0.0F, 0.0F, -2.9671F, 0.0F, 3.1416F));
+
+        ModelPartBuilder stamen_e_r1 = ModelPartBuilder.create();
+        stamen_e_r1.uv(23, 13).cuboid(-1.0F, -7.0F, -2.0F, 0.0F, 5.0F, 4.0F);
+        stamen.addChild("stamen_e_r1", stamen_e_r1, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.1745F));
+
+        ModelPartBuilder stamen_n_r1 = ModelPartBuilder.create();
+        stamen_n_r1.uv(25, 17).cuboid(-2.0F, -7.0F, -1.0F, 4.0F, 5.0F, 0.0F);
+        stamen.addChild("stamen_n_r1", stamen_n_r1, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
+
+        return TexturedModelData.of(modelData, 48, 32);
     }
 
     @Override
-    public void setAngles(AechorPlantEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setAngles(AechorPlantEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+    public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        this.root.render(matrixStack, buffer, packedLight, packedOverlay);
+    }
 
+    public void setRotationAngle(ModelPart bone, float x, float y, float z) {
+        bone.pitch = x;
+        bone.yaw = y;
+        bone.roll = z;
     }
 }
