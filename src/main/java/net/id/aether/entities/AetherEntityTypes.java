@@ -1,5 +1,6 @@
 package net.id.aether.entities;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.entities.hostile.AechorPlantEntity;
@@ -26,7 +27,7 @@ import static net.minecraft.entity.SpawnGroup.*;
 @SuppressWarnings({"unused", "SameParameterValue"})
 public class AetherEntityTypes {
     private static Action<? super EntityType<? extends LivingEntity>> attributes(Supplier<DefaultAttributeContainer.Builder> builder) {
-        return (id, entityType) -> DefaultAttributeRegistry.DEFAULT_ATTRIBUTE_REGISTRY.put(entityType, builder.get().build());
+        return (id, entityType) -> FabricDefaultAttributeRegistry.register(entityType, builder.get());
     }
 
     private static <T extends MobEntity> Action<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, Heightmap.Type heightmapType, SpawnRestriction.SpawnPredicate<T> predicate) {
