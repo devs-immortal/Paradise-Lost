@@ -15,8 +15,6 @@ accessible    method    net/minecraft/block/WeightedPressurePlateBlock          
 accessible    method    net/minecraft/entity/SpawnRestriction                       register                     (Lnet/minecraft/entity/EntityType;Lnet/minecraft/entity/SpawnRestriction$Location;Lnet/minecraft/world/Heightmap$Type;Lnet/minecraft/entity/SpawnRestriction$SpawnPredicate;)V
 accessible    method    net/minecraft/client/render/entity/EntityRenderers          register                     (Lnet/minecraft/entity/EntityType;Lnet/minecraft/client/render/entity/EntityRendererFactory;)V
 accessible    method    net/minecraft/world/gen/feature/StructureFeature            register                     (Ljava/lang/String;Lnet/minecraft/world/gen/feature/StructureFeature;Lnet/minecraft/world/gen/GenerationStep$Feature;)Lnet/minecraft/world/gen/feature/StructureFeature;
-accessible    method    net/minecraft/block/FireBlock                               registerFlammableBlock       (Lnet/minecraft/block/Block;II)V
-accessible    method    net/minecraft/block/ComposterBlock                          registerCompostableItem      (FLnet/minecraft/item/ItemConvertible;)V
 accessible    field     net/minecraft/entity/attribute/DefaultAttributeRegistry     DEFAULT_ATTRIBUTE_REGISTRY   Ljava/util/Map;
 accessible    field     net/minecraft/client/render/RenderLayers                    BLOCKS                       Ljava/util/Map;
 accessible    field     net/minecraft/client/render/RenderLayers                    FLUIDS                       Ljava/util/Map;

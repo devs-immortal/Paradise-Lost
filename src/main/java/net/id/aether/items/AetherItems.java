@@ -8,6 +8,7 @@ import static net.minecraft.entity.EquipmentSlot.LEGS;
 import static net.minecraft.util.Rarity.EPIC;
 import static net.minecraft.util.Rarity.RARE;
 
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityTypes;
@@ -90,7 +91,7 @@ import net.minecraft.world.event.GameEvent;
 @SuppressWarnings("unused")
 public class AetherItems {
     private static RegistryQueue.Action<ItemConvertible> compostable(float chance) {
-        return (id, item) -> ComposterBlock.registerCompostableItem(chance, item);
+        return (id, item) -> CompostingChanceRegistry.INSTANCE.add(item, chance);
     }
 
     private static final RegistryQueue.Action<ItemConvertible> compostable30 = compostable(0.3f);

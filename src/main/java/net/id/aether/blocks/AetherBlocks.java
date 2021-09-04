@@ -1,6 +1,7 @@
 package net.id.aether.blocks;
 
 import com.google.common.collect.ImmutableSet;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.id.aether.blocks.aercloud.AercloudBlock;
 import net.id.aether.blocks.aercloud.BlueAercloudBlock;
@@ -47,8 +48,8 @@ public class AetherBlocks {
 
     private static Settings unbreakable(Settings settings) { return settings.strength(-1f, 3600000f); }
     private static Settings flowerPot() { return copy(POTTED_OAK_SAPLING); }
-    
-    private static RegistryQueue.Action<Block> flammable(int spread, int burn) { return (id, block) -> ((FireBlock) FIRE).registerFlammableBlock(block, spread, burn); }
+
+    private static RegistryQueue.Action<Block> flammable(int spread, int burn) { return (id, block) -> FlammableBlockRegistry.getDefaultInstance().add(block, spread, burn);}
     private static final RegistryQueue.Action<Block> flammableLog = flammable(5, 5);
     private static final RegistryQueue.Action<Block> flammablePlanks = flammable(20, 5);
     private static final RegistryQueue.Action<Block> flammableLeaves = flammable(60, 30);
