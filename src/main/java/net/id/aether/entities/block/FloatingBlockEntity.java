@@ -58,8 +58,7 @@ public class FloatingBlockEntity extends Entity {
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityType, World world) {
         super(entityType, world);
-        this.setOnEndFloating((impact, landed) -> {
-        });
+        this.setOnEndFloating((impact, landed) -> {});
         this.floatTime = 0;
         this.setDropState(() -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this));
     }

@@ -27,8 +27,7 @@ public final class RegistryQueue<T> {
     }
 
     public static <S> Action<S> onClient(Action<S> action) {
-        return CLIENT ? action : (id, value) -> {
-        };
+        return CLIENT ? action : (id, value) -> {};
     }
 
     @SafeVarargs
