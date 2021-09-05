@@ -22,7 +22,6 @@
     "item.ArmorMaterialsAccessor",
     "item.AxeItemMixin",
     "item.FilledMapMixin",
-    "item.HoeItemMixin",
     "item.ItemMixin",
     "item.ItemStackMixin",
     "item.MapStateMixin",

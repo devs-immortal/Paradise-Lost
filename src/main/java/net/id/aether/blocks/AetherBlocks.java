@@ -3,6 +3,7 @@ package net.id.aether.blocks;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.id.aether.blocks.accessor.*;
 import net.id.aether.blocks.aercloud.AercloudBlock;
@@ -34,10 +35,13 @@ import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.HoeItem;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+
+import java.util.ArrayList;
 
 import static net.id.aether.Aether.locate;
 import static net.minecraft.block.AbstractBlock.Settings.copy;
@@ -64,16 +68,17 @@ public class AetherBlocks {
 
     private static Action<Block> strippedFrom(Block original) { return (id, stripped) -> StrippableBlockRegistry.register(original, stripped);}
 
-    
+    private static Action<Block> tillable() { return (id, block) -> addTillAction(block);}
+
     /*
     Begin blocks
      */
 
     private static Settings grassBlock() { return copy(GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f); }
-    public static final AetherGrassBlock AETHER_GRASS_BLOCK = add("aether_grass", new AetherGrassBlock(grassBlock()), cutoutMippedRenderLayer);
+    public static final AetherGrassBlock AETHER_GRASS_BLOCK = add("aether_grass", new AetherGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable());
     public static final EnchantedAetherGrassBlock AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", new EnchantedAetherGrassBlock(grassBlock().mapColor(MapColor.GOLD)));
 
-    public static final Block AETHER_DIRT = add("aether_dirt", new Block(copy(DIRT).strength(0.3f)));
+    public static final Block AETHER_DIRT = add("aether_dirt", new Block(copy(DIRT).strength(0.3f)), tillable());
     public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new AetherFarmlandBlock(copy(FARMLAND)));
     public static final AetherDirtPathBlock AETHER_DIRT_PATH = add("aether_grass_path", new AetherDirtPathBlock(copy(DIRT_PATH)));
     public static final Block QUICKSOIL = add("quicksoil", new Block(of(Material.AGGREGATE).strength(0.5f, -1f).slipperiness(1F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)));
@@ -353,6 +358,10 @@ public class AetherBlocks {
     @SafeVarargs
     private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {
         return RegistryQueue.BLOCK.add(locate(id), block, additionalActions);
+    }
+
+    public static void addTillAction(Block block){
+        TillableBlockRegistry.register(block, HoeItem::canTillFarmland, AETHER_FARMLAND.getDefaultState());
     }
 
     public static void init() {
