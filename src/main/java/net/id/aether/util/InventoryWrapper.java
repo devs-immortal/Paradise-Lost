@@ -18,7 +18,6 @@ public interface InventoryWrapper extends Inventory {
     static InventoryWrapper of(DefaultedList<ItemStack> items) {
         return () -> items;
     }
-    // Creation
 
     /**
      * Creates a new inventory with the size.
@@ -32,7 +31,6 @@ public interface InventoryWrapper extends Inventory {
      * Must return the same instance every time it's called.
      */
     DefaultedList<ItemStack> getItems();
-    // Inventory
 
     /**
      * Returns the inventory size.

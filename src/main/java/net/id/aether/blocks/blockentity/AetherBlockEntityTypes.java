@@ -10,16 +10,15 @@ import static net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlock
 import static net.id.aether.Aether.locate;
 
 public class AetherBlockEntityTypes {
+    public static final BlockEntityType<FoodBowlBlockEntity> FOOD_BOWL = create(FoodBowlBlockEntity::new, AetherBlocks.FOOD_BOWL).build();
+    public static final BlockEntityType<IncubatorBlockEntity> INCUBATOR = create(IncubatorBlockEntity::new, AetherBlocks.INCUBATOR).build();
+
     public static void init() {
         Registry.register(Registry.BLOCK_ENTITY_TYPE, locate("food_bowl"), FOOD_BOWL);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, locate("incubator"), INCUBATOR);
-    }    public static final BlockEntityType<FoodBowlBlockEntity> FOOD_BOWL = create(FoodBowlBlockEntity::new, AetherBlocks.FOOD_BOWL).build();
+    }
 
     public static void initClient() {
         BlockEntityRendererRegistry.INSTANCE.register(INCUBATOR, IncubatorBlockEntityRenderer::new);
-    }    public static final BlockEntityType<IncubatorBlockEntity> INCUBATOR = create(IncubatorBlockEntity::new, AetherBlocks.INCUBATOR).build();
-
-
-
-
+    }
 }

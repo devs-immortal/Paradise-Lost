@@ -26,6 +26,10 @@ import static net.minecraft.entity.SpawnGroup.*;
 
 @SuppressWarnings({"unused", "SameParameterValue"})
 public class AetherEntityTypes {
+    /*
+    Begin entity types
+     */
+    //todo: why is this an animal? should extend hostile to allow hostile spawn restrictions, and inherit hostile behviour
     public static final EntityType<AechorPlantEntity> AECHOR_PLANT = add("aechor_plant", of(AechorPlantEntity::new, MONSTER, changing(1f, 1f), 5),
             attributes(AechorPlantEntity::createAechorPlantAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
     public static final EntityType<FlyingCowEntity> FLYING_COW = add("flying_cow", of(FlyingCowEntity::new, CREATURE, changing(0.9F, 1.3F), 5),
@@ -34,15 +38,8 @@ public class AetherEntityTypes {
             attributes(AerbunnyEntity::createAerbunnyAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(1.0F, 2.0F), 5),
             attributes(MoaEntity::createMoaAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
-
-
-
-    /*
-    Begin entity types
-     */
     public static final EntityType<PhygEntity> PHYG = add("phyg", of(PhygEntity::new, CREATURE, changing(0.9F, 1.3F), 5),
             attributes(PhygEntity::createPhygAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
-    //todo: why is this an animal? should extend hostile to allow hostile spawn restrictions, and inherit hostile behviour
     public static final EntityType<SheepuffEntity> SHEEPUFF = add("sheepuff", of(SheepuffEntity::new, CREATURE, changing(0.9F, 1.3F), 5),
             attributes(SheepuffEntity::createSheepuffAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
     public static final EntityType<CockatriceEntity> COCKATRICE = add("cockatrice", of(CockatriceEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
