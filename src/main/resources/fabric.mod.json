@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "the_aether",
   "version": "${version}",
-  "name": "The Aether",
-  "description": "The Aether is a dimension high in the sky composed of floating islands. Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, mythical creatures and perilous Dungeons. All you need to do is build a Glowstone frame and add water to light the mystical portal, step in and you'll be transported immediately to the luscious hostile paradise known as the Aether.",
+  "name": "The Aether Reborn",
+  "description": "Ascend to paradise lost, seek the half blood valkyrie. Venture forth through heavens reborn, and at the break of dawn find the secret of the moon. ... And let you not be deceived by the lullaby's sweet nothings, for it tells forthwith and uncouth a truth most perverse.",
   "license": "GNU GPLv3",
   "authors": [
     "Immortal Devs - parent organization",
@@ -18,9 +18,9 @@
     "SollyW - developer",
     "Ms.Random (Ash) - developer",
     "Haven King - developer",
+    "Kyrptonaught - developer",
     "yelldow - sound designer / composer",
     "Karanomuro - composer",
-    "Kyrptonaught - portals",
     "Brandon Pearce (kingbdogz_) - GG founder / Aether creator",
     "Oscar Payn (ozzAR0th ) - GG head",
     "Hugo Payn (DevilBringer) - GG design lead"
@@ -28,7 +28,8 @@
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/aether",
     "sources": "https://github.com/devs-immortal/The-Aether",
-    "issues": "https://github.com/devs-immortal/The-Aether/issues"
+    "issues": "https://github.com/devs-immortal/The-Aether/issues",
+    "irc": "https://discord.gg/vAa35wQ2ZP"
   },
   "depends": {
     "fabricloader": ">=0.11.3",
@@ -57,6 +58,11 @@
   "custom": {
     "cardinal-components": [
       "the_aether:moa_genetics"
-    ]
+    ],
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/vAa35wQ2ZP"
+      }
+    }
   }
 }
