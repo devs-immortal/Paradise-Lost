@@ -46,7 +46,7 @@ public class FloatingBlock extends OreBlock {
         if (!this.powered || worldIn.isReceivingRedstonePower(pos)) {
             if (!worldIn.isClient) {
                 BlockState state = worldIn.getBlockState(pos);
-                if (state.isOf(AetherBlocks.GRAVITITE_LEVITATOR)){
+                if (state.isOf(AetherBlocks.GRAVITITE_LEVITATOR)) {
                     FloatingBlockHelper.tryCreatePusher(worldIn, pos);
                 } else {
                     FloatingBlockHelper.tryCreateGeneric(worldIn, pos);

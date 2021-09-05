@@ -38,12 +38,12 @@ public class GravititeTool {
                 world.breakBlock(pos, false);
                 return ActionResult.SUCCESS;
             }
-            if (!FloatingBlockHelper.isToolAdequate(context)){
+            if (!FloatingBlockHelper.isToolAdequate(context)) {
                 return ActionResult.PASS;
             }
 
             boolean success;
-            if (state.isOf(AetherBlocks.GRAVITITE_LEVITATOR)){
+            if (state.isOf(AetherBlocks.GRAVITITE_LEVITATOR)) {
                 success = FloatingBlockHelper.tryCreatePusher(world, pos);
             } else if (state.getProperties().contains(Properties.DOUBLE_BLOCK_HALF)) {
                 success = FloatingBlockHelper.tryCreateDouble(world, pos);
@@ -51,7 +51,7 @@ public class GravititeTool {
                 success = FloatingBlockHelper.tryCreateGeneric(world, pos);
             }
 
-            if (!success){
+            if (!success) {
                 return ActionResult.PASS;
             }
         }

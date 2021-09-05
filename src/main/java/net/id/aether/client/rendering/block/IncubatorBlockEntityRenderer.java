@@ -10,11 +10,12 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public class IncubatorBlockEntityRenderer implements BlockEntityRenderer<IncubatorBlockEntity> {
 
-    public IncubatorBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {}
+    public IncubatorBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+    }
 
     @Override
     public void render(IncubatorBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if(!entity.isEmpty()) {
+        if (!entity.isEmpty()) {
             matrices.push();
             matrices.translate(0.5, 0.55, 0.5);
             matrices.scale(0.9F, 0.9F, 0.9F);

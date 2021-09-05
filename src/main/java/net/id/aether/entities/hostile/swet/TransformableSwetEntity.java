@@ -21,7 +21,7 @@ public abstract class TransformableSwetEntity extends SwetEntity {
     }
 
     protected boolean changeType(EntityType<? extends SwetEntity> type) {
-        if(!this.getType().equals(type) && !this.isRemoved()) {
+        if (!this.getType().equals(type) && !this.isRemoved()) {
             SwetEntity swet = (this.convertTo(type, true));
             swet.setSize(this.getSize(), false);
             world.spawnEntity(swet);
@@ -70,7 +70,7 @@ public abstract class TransformableSwetEntity extends SwetEntity {
         return false;
     }
 
-    public boolean suggestTypeChange(Item item){
+    public boolean suggestTypeChange(Item item) {
         if (AetherItemTags.SWET_TRANSFORMERS_BLUE.contains(item)) {
             return this.changeType(AetherEntityTypes.BLUE_SWET);
         } else if (AetherItemTags.SWET_TRANSFORMERS_GOLDEN.contains(item)) {
@@ -85,7 +85,7 @@ public abstract class TransformableSwetEntity extends SwetEntity {
     }
 
     public boolean suggestTypeChange(Entity entity) {
-        if (entity instanceof ItemEntity itemEntity){
+        if (entity instanceof ItemEntity itemEntity) {
             if (suggestTypeChange(itemEntity.getStack().getItem())) {
                 itemEntity.remove(RemovalReason.KILLED);
                 return true;

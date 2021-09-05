@@ -18,15 +18,15 @@ public class RarityMixin {
     @Final
     private static Rarity[] field_8905;
 
-    private RarityMixin(String valueName, int ordinal, Formatting formatting) {
-        throw new AssertionError();
-    }
-
     static {
         EnumExtender.register(Rarity.class, (name, args) -> {
             Rarity entry = (Rarity) (Object) new RarityMixin(name, field_8905.length, (Formatting) args[0]);
             field_8905 = Arrays.copyOf(field_8905, field_8905.length + 1);
             return field_8905[field_8905.length - 1] = entry;
         });
+    }
+
+    private RarityMixin(String valueName, int ordinal, Formatting formatting) {
+        throw new AssertionError();
     }
 }

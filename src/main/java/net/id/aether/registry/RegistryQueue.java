@@ -21,13 +21,14 @@ public final class RegistryQueue<T> {
     private final Registry<T> registry;
     private final List<Entry<? extends T>> entries;
 
-    public static <S> Action<S> onClient(Action<S> action) {
-        return CLIENT ? action : (id, value) -> {};
-    }
-
     public RegistryQueue(Registry<T> registry, int initialCapacity) {
         this.registry = registry;
         entries = new ArrayList<>(initialCapacity);
+    }
+
+    public static <S> Action<S> onClient(Action<S> action) {
+        return CLIENT ? action : (id, value) -> {
+        };
     }
 
     @SafeVarargs

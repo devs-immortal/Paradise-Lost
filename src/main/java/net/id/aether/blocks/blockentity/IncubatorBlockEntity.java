@@ -22,18 +22,11 @@ public class IncubatorBlockEntity extends AetherBlockEntity {
         super(AetherBlockEntityTypes.INCUBATOR, pos, state, 1, HopperStrategy.ALL_PASS);
     }
 
-    public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
-        ItemStack stored = inventory.get(0);
-        inventory.set(0, handStack);
-        player.setStackInHand(hand, stored);
-        hatchTicks = (int) (12000 / world.getBiome(pos).getTemperature());
-    }
-
     public static <T extends BlockEntity> void tickServer(World world, BlockPos pos, BlockState state, T entity) {
         IncubatorBlockEntity incubator = (IncubatorBlockEntity) entity;
-        if(incubator.inventory.get(0).getItem() == AetherItems.MOA_EGG) {
+        if (incubator.inventory.get(0).getItem() == AetherItems.MOA_EGG) {
             incubator.hatchTicks--;
-            if(incubator.hatchTicks <= 0) {
+            if (incubator.hatchTicks <= 0) {
                 incubator.hatchTicks = 0;
                 var moa = MoaGenes.getMoaFromEgg(world, incubator.inventory.get(0));
                 moa.refreshPositionAndAngles(pos.getX() + 0.25, pos.getY() + 0.65, pos.getZ() + 0.25, world.getRandom().nextFloat() * 360 - 180, 0);
@@ -42,6 +35,13 @@ public class IncubatorBlockEntity extends AetherBlockEntity {
                 incubator.inventory.clear();
             }
         }
+    }
+
+    public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
+        ItemStack stored = inventory.get(0);
+        inventory.set(0, handStack);
+        player.setStackInHand(hand, stored);
+        hatchTicks = (int) (12000 / world.getBiome(pos).getTemperature());
     }
 
     @Override

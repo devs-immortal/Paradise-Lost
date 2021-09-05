@@ -15,7 +15,7 @@ public class GravititeAxeItem extends AxeItem {
     }
 
     @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand){
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand) {
         return GravititeTool.flipEntity(stack, player, entity, hand);
     }
 

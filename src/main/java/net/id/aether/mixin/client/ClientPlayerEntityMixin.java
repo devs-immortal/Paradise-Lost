@@ -11,11 +11,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin implements FloatingBlockEntity.PostTickEntity {
 
-    @Shadow
-    protected abstract void sendMovementPackets();
-
     @Unique
     boolean sendMovement = false;
+
+    @Shadow
+    protected abstract void sendMovementPackets();
 
     /**
      * Since the player can be moved by FloatingBlockEntity after ClientPlayerEntity.tick()

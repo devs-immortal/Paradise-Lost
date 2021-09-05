@@ -29,7 +29,7 @@ public class AetherDimension {
     public static void setupDimension() {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.GLOWSTONE)
-                .customPortalBlock((CustomPortalBlock) AetherBlocks.BLUE_PORTAL)
+                .customPortalBlock(AetherBlocks.BLUE_PORTAL)
                 .destDimID(Aether.locate(Aether.MOD_ID))
                 .tintColor(55, 89, 195)
                 .lightWithWater()

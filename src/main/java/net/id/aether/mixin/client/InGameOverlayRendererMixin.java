@@ -29,16 +29,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Environment(EnvType.CLIENT)
 public abstract class InGameOverlayRendererMixin {
 
-    @Shadow @Nullable protected static BlockState getInWallBlockState(PlayerEntity player) { return null; }
+    @Shadow
+    @Nullable
+    protected static BlockState getInWallBlockState(PlayerEntity player) {
+        return null;
+    }
 
     @Inject(method = "renderInWallOverlay", at = @At("HEAD"), cancellable = true)
     private static void renderAercloudOverlay(Sprite sprite, MatrixStack matrices, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
         BlockState overlayState = getInWallBlockState(client.player);
-        if(overlayState != null && overlayState.getBlock() instanceof AercloudBlock) {
+        if (overlayState != null && overlayState.getBlock() instanceof AercloudBlock) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableTexture();
-            RenderSystem.setShaderTexture(0, new Identifier("the_aether","textures/block/" + Registry.BLOCK.getId(overlayState.getBlock()).getPath() + ".png"));
+            RenderSystem.setShaderTexture(0, new Identifier("the_aether", "textures/block/" + Registry.BLOCK.getId(overlayState.getBlock()).getPath() + ".png"));
             BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
             float f = client.player.getBrightnessAtEyes();
             RenderSystem.enableBlend();
@@ -63,10 +67,10 @@ public abstract class InGameOverlayRendererMixin {
     private static void getInWallBlockState(PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
 
-        for(int i = 0; i < 8; ++i) {
-            double d = player.getX() + (double)(((float)((i) % 2) - 0.5F) * player.getWidth() * 0.8F);
-            double e = player.getEyeY() + (double)(((float)((i >> 1) % 2) - 0.5F) * 0.1F);
-            double f = player.getZ() + (double)(((float)((i >> 2) % 2) - 0.5F) * player.getWidth() * 0.8F);
+        for (int i = 0; i < 8; ++i) {
+            double d = player.getX() + (double) (((float) ((i) % 2) - 0.5F) * player.getWidth() * 0.8F);
+            double e = player.getEyeY() + (double) (((float) ((i >> 1) % 2) - 0.5F) * 0.1F);
+            double f = player.getZ() + (double) (((float) ((i >> 2) % 2) - 0.5F) * player.getWidth() * 0.8F);
             mutable.set(d, e, f);
             BlockState blockState = player.world.getBlockState(mutable);
             if (blockState.getBlock() instanceof AercloudBlock) {
@@ -77,13 +81,13 @@ public abstract class InGameOverlayRendererMixin {
     }
 
     @Inject(method = "renderUnderwaterOverlay", at = @At("HEAD"), cancellable = true)
-    private static void renderDenseAercloudOverlay(MinecraftClient client, MatrixStack matrices, CallbackInfo ci){
+    private static void renderDenseAercloudOverlay(MinecraftClient client, MatrixStack matrices, CallbackInfo ci) {
         BlockPos pos = new BlockPos(client.player.getEyePos());
         World world = client.player.world;
-        if(world.getFluidState(pos).getFluid() instanceof DenseAercloudFluid){
+        if (world.getFluidState(pos).getFluid() instanceof DenseAercloudFluid) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableTexture();
-            RenderSystem.setShaderTexture(0, new Identifier("the_aether","textures/block/dense_aercloud_still.png"));
+            RenderSystem.setShaderTexture(0, new Identifier("the_aether", "textures/block/dense_aercloud_still.png"));
             BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
             float f = client.player.getBrightnessAtEyes();
             RenderSystem.enableBlend();

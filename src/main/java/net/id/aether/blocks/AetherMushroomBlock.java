@@ -29,8 +29,7 @@ public class AetherMushroomBlock extends MushroomPlantBlock {
         BlockPos blockPos;
         if (type == HangType.ROOF) {
             blockPos = pos.up();
-        }
-        else
+        } else
             blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
         if (blockState.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {

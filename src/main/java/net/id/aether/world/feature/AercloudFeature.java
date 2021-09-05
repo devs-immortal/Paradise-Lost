@@ -82,22 +82,22 @@ public class AercloudFeature extends Feature<AercloudConfig> {
         }
         if (sizex > 0 && sizez > 1) {
             for (int z = -sizez; z <= sizez; z++) {
-                int stuffsize = Math.round(sizex*(1f/(Math.max(Math.abs(((float)z)/7), 1))));
+                int stuffsize = Math.round(sizex * (1f / (Math.max(Math.abs(((float) z) / 7), 1))));
                 for (int x = center.getX() - stuffsize; x <= center.getX() + stuffsize; x++) {
-                    for (int y = center.getY() - Math.round(stuffsize*0.7f); y <= center.getY() + Math.round(stuffsize*0.7f); y++) {
+                    for (int y = center.getY() - Math.round(stuffsize * 0.7f); y <= center.getY() + Math.round(stuffsize * 0.7f); y++) {
                         if (!((x == center.getX() - stuffsize || x == center.getX() + stuffsize) && (y == center.getY() - stuffsize + 1 || y == center.getY() + stuffsize - 1))) {
                             if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).isOf(Blocks.AIR)) {
-                                if(origin.isWithinDistance(new BlockPos(x, y, center.getZ() + z), 16))
+                                if (origin.isWithinDistance(new BlockPos(x, y, center.getZ() + z), 16))
                                     world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
                             }
                         }
                     }
                 }
             }
-            center = center.down((random.nextInt(1)+1)*randomSign(random));
-            center = center.east((random.nextInt(3)+3)*randomSign(random));
-            center = center.north((random.nextInt(3)+3)*randomSign(random));
-            createCloudBlob(world, state, random, center, sizex-random.nextInt(1), sizez-random.nextInt(1)-1, origin);
+            center = center.down((random.nextInt(1) + 1) * randomSign(random));
+            center = center.east((random.nextInt(3) + 3) * randomSign(random));
+            center = center.north((random.nextInt(3) + 3) * randomSign(random));
+            createCloudBlob(world, state, random, center, sizex - random.nextInt(1), sizez - random.nextInt(1) - 1, origin);
         }
 
         return true;
@@ -107,6 +107,6 @@ public class AercloudFeature extends Feature<AercloudConfig> {
         int x = Math.abs(test.getX() - center.getX());
         int y = Math.abs(test.getY() - center.getY());
         int z = Math.abs(test.getZ() - center.getZ());
-        return Math.pow(x, 2) / Math.pow(a, 2) + Math.pow(y, 2) / Math.pow(b, 2) + Math.pow(z, 2) / Math.pow(c, 2)  <= 1;
+        return Math.pow(x, 2) / Math.pow(a, 2) + Math.pow(y, 2) / Math.pow(b, 2) + Math.pow(z, 2) / Math.pow(c, 2) <= 1;
     }
 }

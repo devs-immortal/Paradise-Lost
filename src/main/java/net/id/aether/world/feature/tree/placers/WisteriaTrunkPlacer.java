@@ -40,14 +40,14 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
             startPos = startPos.up();
         }
 
-        for (Direction dir : new Direction[] {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}) {
+        for (Direction dir : new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}) {
             int vOffset = random.nextInt(3) - 1;
             int branchSize = 2 + random.nextInt(2);
 
             BlockPos tempPos = startPos.down(2);
             tempPos = tempPos.up(vOffset);
 
-            for(int i = 0; i < branchSize; i++) {
+            for (int i = 0; i < branchSize; i++) {
                 tempPos = tempPos.offset(dir);
                 if (random.nextBoolean()) tempPos = tempPos.up();
                 getAndSetState(world, replacer, random, tempPos, config);

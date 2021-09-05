@@ -25,7 +25,7 @@ public class ChestMimicModel extends EntityModel<ChestMimicEntity> {
         modelPartData.addChild("leftLeg", ModelPartBuilder.create().uv(0, 0).cuboid(-3F, 0F, -3F, 6, 15, 6), ModelTransform.pivot(-4F, -15F, 0F));
         modelPartData.addChild("rightLeg", ModelPartBuilder.create().uv(0, 0).cuboid(-3F, 0F, -3F, 6, 15, 6), ModelTransform.pivot(4F, -15F, 0F));
 
-        return TexturedModelData.of(modelData,64,64);
+        return TexturedModelData.of(modelData, 64, 64);
     }
 
     @Override

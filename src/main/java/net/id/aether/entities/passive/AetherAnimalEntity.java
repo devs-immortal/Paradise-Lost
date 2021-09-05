@@ -27,13 +27,13 @@ public class AetherAnimalEntity extends AnimalEntity {
         this(null, world);
     }
 
+    public static boolean isValidNaturalAetherSpawn(EntityType<? extends AetherAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_GRASS_BLOCK) && world.getBaseLightLevel(pos, 0) > 8;
+    }
+
     @Override
     public float getPathfindingFavor(BlockPos pos, WorldView worldIn) {
         return worldIn.getBlockState(pos.down()).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK ? 10.0F : worldIn.getLightLevel(pos) - 0.5F;
-    }
-
-    public static boolean isValidNaturalAetherSpawn(EntityType<? extends AetherAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isOf(AetherBlocks.AETHER_GRASS_BLOCK) && world.getBaseLightLevel(pos, 0) > 8;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AetherAnimalEntity extends AnimalEntity {
     }
 
     public void produceParticles(ParticleEffect parameters, int amount, float yOffset) {
-        for(int i = 0; i < amount; ++i) {
+        for (int i = 0; i < amount; ++i) {
             double d = this.random.nextGaussian() * 0.02D;
             double e = this.random.nextGaussian() * 0.02D;
             double f = this.random.nextGaussian() * 0.02D;

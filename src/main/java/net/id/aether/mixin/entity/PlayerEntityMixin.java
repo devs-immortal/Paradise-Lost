@@ -25,15 +25,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements AetherEntityExtensions {
 
-    @Shadow public abstract void increaseStat(Identifier stat, int amount);
-
-    @Shadow @Final private PlayerAbilities abilities;
+    @Shadow
+    @Final
+    private PlayerAbilities abilities;
+    private boolean aetherFallen = false;
 
     public PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
         super(type, world);
     }
 
-    private boolean aetherFallen = false;
+    @Shadow
+    public abstract void increaseStat(Identifier stat, int amount);
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
@@ -55,24 +57,24 @@ public abstract class PlayerEntityMixin extends LivingEntity implements AetherEn
     }
 
     @Override
-    public void setAetherFallen(boolean aetherFallen) {
-        this.aetherFallen = aetherFallen;
-    }
-
-    @Override
     public boolean isAetherFallen() {
         return aetherFallen;
     }
 
+    @Override
+    public void setAetherFallen(boolean aetherFallen) {
+        this.aetherFallen = aetherFallen;
+    }
+
     @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
     public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        if(isAetherFallen()) {
+        if (isAetherFallen()) {
             aetherFallen = false;
             if (abilities.allowFlying) {
                 cir.setReturnValue(false);
             } else {
                 if (fallDistance >= 2.0F) {
-                    increaseStat(Stats.FALL_ONE_CM, (int)Math.round((double)fallDistance * 100.0D));
+                    increaseStat(Stats.FALL_ONE_CM, (int) Math.round((double) fallDistance * 100.0D));
                 }
                 cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, AetherDamageSources.AETHER_FALL));
             }

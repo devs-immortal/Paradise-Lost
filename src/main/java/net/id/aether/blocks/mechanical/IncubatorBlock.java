@@ -27,7 +27,7 @@ public class IncubatorBlock extends AetherBlockWithEntity {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if(!player.isSneaking() && world.getBlockEntity(pos) instanceof IncubatorBlockEntity incubator) {
+        if (!player.isSneaking() && world.getBlockEntity(pos) instanceof IncubatorBlockEntity incubator) {
             incubator.handleUse(player, hand, player.getStackInHand(hand));
             return ActionResult.success(world.isClient());
         }

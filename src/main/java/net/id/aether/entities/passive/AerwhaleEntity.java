@@ -35,18 +35,18 @@ public class AerwhaleEntity extends FlyingEntity {
         this.moveControl = new AerwhaleEntity.MoveHelperController(this);
     }
 
+    public static DefaultAttributeContainer.Builder createAerwhaleAttributes() {
+        return createMobAttributes()
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0);
+    }
+
     @Override
     protected void initGoals() {
         this.goalSelector.add(5, new AerwhaleEntity.RandomFlyGoal(this));
 //		this.goalSelector.add(7, new AerwhaleEntity.LookAroundGoal(this));
 //		this.goalSelector.add(1, new AerwhaleEntity.UnstuckGoal(this));
 //		this.goalSelector.add(5, new AerwhaleEntity.TravelCourseGoal(this));
-    }
-
-    public static DefaultAttributeContainer.Builder createAerwhaleAttributes() {
-        return createMobAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class AerwhaleEntity extends FlyingEntity {
         if (!passengers.isEmpty()) {
             Entity entity = passengers.get(0);
             if (entity instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity)entity;
+                PlayerEntity player = (PlayerEntity) entity;
 
                 this.setYaw(player.getYaw());
                 this.prevYaw = this.getYaw();
@@ -91,7 +91,7 @@ public class AerwhaleEntity extends FlyingEntity {
 
                 this.motionYaw = this.headYaw = player.headYaw;
 
-                positionIn = new Vec3d(player.sidewaysSpeed, 0.0, (player.forwardSpeed <= 0.0F)? player.forwardSpeed * 0.25F : player.forwardSpeed);
+                positionIn = new Vec3d(player.sidewaysSpeed, 0.0, (player.forwardSpeed <= 0.0F) ? player.forwardSpeed * 0.25F : player.forwardSpeed);
 
                 // TODO: Get replacement for isJumping
                 boolean isJumping = false;
@@ -119,7 +119,7 @@ public class AerwhaleEntity extends FlyingEntity {
                 this.lastLimbDistance = this.limbDistance;
                 double d0 = this.getX() - this.prevX;
                 double d1 = this.getZ() - this.prevZ;
-                float f4 = 4.0F * MathHelper.sqrt((float) (d0*d0 + d1*d1));
+                float f4 = 4.0F * MathHelper.sqrt((float) (d0 * d0 + d1 * d1));
 
                 if (f4 > 1.0F) {
                     f4 = 1.0F;
@@ -207,10 +207,9 @@ public class AerwhaleEntity extends FlyingEntity {
                         }
 
                         this.parentEntity.prevYaw = this.parentEntity.getYaw();
-                        this.parentEntity.setYaw((float)(MathHelper.atan2(dz, dx) * (180F / (float)Math.PI)) - 90.0F);
-                        this.parentEntity.setPitch(-(float)(Math.atan(dy) * 73.0));
-                    }
-                    else {
+                        this.parentEntity.setYaw((float) (MathHelper.atan2(dz, dx) * (180F / (float) Math.PI)) - 90.0F);
+                        this.parentEntity.setPitch(-(float) (Math.atan(dy) * 73.0));
+                    } else {
                         this.state = MoveControl.State.WAIT;
                     }
                 }
@@ -248,8 +247,7 @@ public class AerwhaleEntity extends FlyingEntity {
             MoveControl movementcontroller = this.parentEntity.getMoveControl();
             if (!movementcontroller.isMoving()) {
                 return true;
-            }
-            else {
+            } else {
                 double d0 = movementcontroller.getTargetX() - this.parentEntity.getX();
                 double d1 = movementcontroller.getTargetY() - this.parentEntity.getY();
                 double d2 = movementcontroller.getTargetZ() - this.parentEntity.getZ();

@@ -28,7 +28,7 @@ public class ClientWorldMixin {
             }
         });
         FloatingBlockStructure[] structures = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
-        for(FloatingBlockStructure structure : structures){
+        for (FloatingBlockStructure structure : structures) {
             structure.postTick();
         }
     }

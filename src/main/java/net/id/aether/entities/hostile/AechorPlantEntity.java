@@ -26,8 +26,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttackMob {
-    public float sinage;
     public final int poisonRemaining;
+    public float sinage;
     public int size;
 
     public AechorPlantEntity(EntityType<? extends AechorPlantEntity> entityType, World world) {

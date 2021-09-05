@@ -6,7 +6,7 @@ import net.minecraft.block.BlockState;
 import java.util.Optional;
 
 public class QuicksoilConfig extends DynamicConfiguration {
-    private Optional<BlockState> optionalState;
+    private final Optional<BlockState> optionalState;
 
     public QuicksoilConfig(Optional<BlockState> state, Optional<String> type) {
         super(state.orElse(AetherBlocks.QUICKSOIL.getDefaultState()), type);

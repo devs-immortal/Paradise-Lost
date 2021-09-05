@@ -35,23 +35,59 @@ import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 
 public abstract class SwetEntity extends SlimeEntity {
-    public IntConsumer setRandomLookTimer;
-    protected int initialSize = 2;
-    protected float massStuck = 0;
     protected static final EntityAttributeModifier knockbackResistanceModifier = new EntityAttributeModifier(
             "Temporary swet knockback resistance",
             1,
             EntityAttributeModifier.Operation.ADDITION);
+    public IntConsumer setRandomLookTimer;
+    protected int initialSize = 2;
+    protected float massStuck = 0;
 
     public SwetEntity(EntityType<? extends SwetEntity> entityType, World world) {
         super(entityType, world);
         this.init();
     }
 
+    public static DefaultAttributeContainer.Builder createSwetAttributes() {
+        return HostileEntity.createHostileAttributes()
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.28)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0);
+    }
+
+    protected static boolean isAbsorbable(Entity entity, World world) {
+        if (entity.isCollidable()) {
+            return false;
+        }
+
+        if (!((entity instanceof LivingEntity)
+                || (entity instanceof TntEntity)
+                || (entity instanceof TntMinecartEntity)
+                || (entity instanceof FloatingBlockEntity)
+                /* ArmorStands are LivingEntities */
+        )) {
+            return false;
+        }
+
+        boolean canPickupNonPlayers = world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
+        boolean isPet = (entity instanceof TameableEntity pet && pet.isTamed());
+        boolean isEligiblePlayer = (entity instanceof PlayerEntity player && !player.getAbilities().flying);
+        boolean isEligiblePet = isPet && world.getDifficulty() != Difficulty.EASY;
+        boolean isEligibleNonPlayer = !(entity instanceof PlayerEntity || isPet) && canPickupNonPlayers;
+
+        return !entity.isSneaking() && (isEligiblePlayer || isEligiblePet || isEligibleNonPlayer);
+    }
+
+    public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getDifficulty() != Difficulty.PEACEFUL && HostileEntity.isSpawnDark(world, pos, random) && canMobSpawn(type, world, spawnReason, pos, random);
+    }
+
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
-        if(AetherItemTags.GROWS_SWETS.contains(stack.getItem())){
+        if (AetherItemTags.GROWS_SWETS.contains(stack.getItem())) {
             if (!player.isCreative()) {
                 stack.decrement(1);
             }
@@ -82,19 +118,10 @@ public abstract class SwetEntity extends SlimeEntity {
         super.initDataTracker();
     }
 
-    public static DefaultAttributeContainer.Builder createSwetAttributes() {
-        return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.28)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0);
-    }
-
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putBoolean("Oversize", this.getSize()>=20);
+        nbt.putBoolean("Oversize", this.getSize() >= 20);
     }
 
     @Override
@@ -116,7 +143,7 @@ public abstract class SwetEntity extends SlimeEntity {
         // Already taken care of in tick()
     }
 
-    protected void onEntityCollision(Entity entity){
+    protected void onEntityCollision(Entity entity) {
         // special absorption rules
         if (entity instanceof SwetEntity swet) {
             if (this.getSize() >= swet.getSize() && !swet.isDead()) {
@@ -138,17 +165,17 @@ public abstract class SwetEntity extends SlimeEntity {
         boolean absorbable = isAbsorbable(entity, world);
         if (absorbable) {
             // The higher this number, the stiffer the wobble is
-            if (massStuck < 1){
+            if (massStuck < 1) {
                 massStuck = 1;
             }
             // dampened oscillator (nonlinear restoring force)
             Vec3d suckVelocity =
                     this.getBoundingBox().getCenter().subtract(entity.getPos()) // entity displacement
-                    .multiply(MathHelper.clamp(0.25 + massStuck/100,0,1)) // coefficient
-                    .add(
-                            this.getVelocity().subtract(entity.getVelocity()) // (difference in) velocity
-                            .multiply(0.45 / massStuck / this.getSize()) // coefficient
-                    );
+                            .multiply(MathHelper.clamp(0.25 + massStuck / 100, 0, 1)) // coefficient
+                            .add(
+                                    this.getVelocity().subtract(entity.getVelocity()) // (difference in) velocity
+                                            .multiply(0.45 / massStuck / this.getSize()) // coefficient
+                            );
             Vec3d newVelocity = entity.getVelocity().add(suckVelocity);
             double velocityClamp = this.getSize() * 0.1 + 0.25;
             entity.setVelocity(
@@ -186,19 +213,19 @@ public abstract class SwetEntity extends SlimeEntity {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void setSize(int size, boolean heal){
+    public void setSize(int size, boolean heal) {
         super.setSize(size, heal);
         int clampedSize = MathHelper.clamp(size, 1, 127);
         float sqrtClampedSize = MathHelper.sqrt(clampedSize);
-        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2*sqrtClampedSize + 0.1);
-        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(12*sqrtClampedSize + 1);
-        this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(0.25*clampedSize + sqrtClampedSize);
+        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2 * sqrtClampedSize + 0.1);
+        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(12 * sqrtClampedSize + 1);
+        this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(0.25 * clampedSize + sqrtClampedSize);
     }
 
     @SuppressWarnings("ConstantConditions")
     @Override
     @Nullable
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt){
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         setSize(initialSize, true);
         this.getAttributeInstance(EntityAttributes.GENERIC_FOLLOW_RANGE).addPersistentModifier(new EntityAttributeModifier(
                 "Random spawn bonus",
@@ -228,42 +255,19 @@ public abstract class SwetEntity extends SlimeEntity {
         return this.getType().getLootTableId();
     }
 
-    protected static boolean isAbsorbable(Entity entity, World world) {
-        if (entity.isCollidable()){ return false; }
-
-        if (!((entity instanceof LivingEntity)
-                || (entity instanceof TntEntity)
-                || (entity instanceof TntMinecartEntity)
-                || (entity instanceof FloatingBlockEntity)
-                /* ArmorStands are LivingEntities */
-        )) { return false; }
-
-        boolean canPickupNonPlayers = world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-        boolean isPet = (entity instanceof TameableEntity pet && pet.isTamed());
-        boolean isEligiblePlayer = (entity instanceof PlayerEntity player && !player.getAbilities().flying);
-        boolean isEligiblePet = isPet && world.getDifficulty() != Difficulty.EASY;
-        boolean isEligibleNonPlayer = !(entity instanceof PlayerEntity || isPet) && canPickupNonPlayers;
-
-        return !entity.isSneaking() && (isEligiblePlayer || isEligiblePet || isEligibleNonPlayer);
-    }
-
-    public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getDifficulty() != Difficulty.PEACEFUL && HostileEntity.isSpawnDark(world, pos, random) && canMobSpawn(type, world, spawnReason, pos, random);
-    }
-
     protected static class FollowUnabsorbedTargetGoal<T extends LivingEntity> extends FollowTargetGoal<T> {
         public FollowUnabsorbedTargetGoal(MobEntity mob, Class<T> targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, @Nullable Predicate<LivingEntity> targetPredicate) {
             super(mob, targetClass, reciprocalChance, checkVisibility, checkCanNavigate, targetPredicate);
         }
 
-        @Override
-        public boolean shouldContinue() {
-            return super.shouldContinue() && !(canAbsorb(this.mob, this.mob.getTarget()));
-        }
-
         protected static boolean canAbsorb(Entity swet, Entity target) {
             return !target.isSneaking() && !(target instanceof PlayerEntity player && player.getAbilities().flying) &&
                     swet.getBoundingBox().expand(0, 0.5, 0).offset(0, 0.25, 0).intersects(target.getBoundingBox());
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return super.shouldContinue() && !(canAbsorb(this.mob, this.mob.getTarget()));
         }
     }
 }

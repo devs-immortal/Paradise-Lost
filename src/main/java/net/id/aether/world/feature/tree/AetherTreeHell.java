@@ -16,12 +16,21 @@ import java.lang.reflect.InvocationTargetException;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class AetherTreeHell {
 
+    public static FoliagePlacerType<WisteriaFoliagePlacer> WISTERIA_FOLIAGE;
+    public static TrunkPlacerType<WisteriaTrunkPlacer> WISTERIA_TRUNK;
     private static Constructor<FoliagePlacerType> foliageConstructor;
     private static Constructor<TrunkPlacerType> trunkConstructor;
 
-    public static FoliagePlacerType<WisteriaFoliagePlacer> WISTERIA_FOLIAGE;
-
-    public static TrunkPlacerType<WisteriaTrunkPlacer> WISTERIA_TRUNK;
+    static {
+        try {
+            foliageConstructor = FoliagePlacerType.class.getDeclaredConstructor(Codec.class);
+            foliageConstructor.setAccessible(true);
+            trunkConstructor = TrunkPlacerType.class.getDeclaredConstructor(Codec.class);
+            trunkConstructor.setAccessible(true);
+        } catch (NoSuchMethodException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public static <P extends FoliagePlacer> FoliagePlacerType<P> registerFoliage(String name, Codec<P> codec) throws IllegalAccessException, InvocationTargetException, InstantiationException {
         return Registry.register(Registry.FOLIAGE_PLACER_TYPE, Aether.locate(name), foliageConstructor.newInstance(codec));
@@ -38,17 +47,6 @@ public class AetherTreeHell {
             foliageConstructor.setAccessible(false);
             trunkConstructor.setAccessible(false);
         } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    static {
-        try {
-            foliageConstructor = FoliagePlacerType.class.getDeclaredConstructor(Codec.class);
-            foliageConstructor.setAccessible(true);
-            trunkConstructor = TrunkPlacerType.class.getDeclaredConstructor(Codec.class);
-            trunkConstructor.setAccessible(true);
-        } catch (NoSuchMethodException ex) {
             ex.printStackTrace();
         }
     }

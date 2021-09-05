@@ -25,10 +25,10 @@ public class EntityTrackerEntryMixin {
     Entity entity;
 
     @Inject(method = "sendPackets", at = @At("HEAD"))
-    private void sendPackets(Consumer<Packet<?>> sender, CallbackInfo ci){
+    private void sendPackets(Consumer<Packet<?>> sender, CallbackInfo ci) {
         if (this.entity instanceof LivingEntity) {
-            this.flipped = ((AetherEntityExtensions)this.entity).getFlipped();
-            this.gravFlippedTime = ((AetherEntityExtensions)this.entity).getFlipTime();
+            this.flipped = ((AetherEntityExtensions) this.entity).getFlipped();
+            this.gravFlippedTime = ((AetherEntityExtensions) this.entity).getFlipTime();
         }
     }
 }

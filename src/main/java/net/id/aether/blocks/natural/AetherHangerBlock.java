@@ -19,6 +19,11 @@ public class AetherHangerBlock extends PlantBlock {
     protected static final VoxelShape FULL_SHAPE;
     protected static final VoxelShape TIP_SHAPE;
 
+    static {
+        FULL_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+        TIP_SHAPE = Block.createCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+    }
+
     public AetherHangerBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(TIP, true));
@@ -69,10 +74,5 @@ public class AetherHangerBlock extends PlantBlock {
         } else {
             return FULL_SHAPE;
         }
-    }
-
-    static {
-        FULL_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
-        TIP_SHAPE = Block.createCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D);
     }
 }

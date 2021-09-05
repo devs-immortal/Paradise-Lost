@@ -8,11 +8,11 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.world.World;
 
 public class PurpleSwetEntity extends SwetEntity {
-    public PurpleSwetEntity(EntityType<? extends PurpleSwetEntity> entityType, World world){
+    public PurpleSwetEntity(EntityType<? extends PurpleSwetEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    protected void onEntityCollision(Entity entity){
+    protected void onEntityCollision(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 20 * 4, 1));
         }

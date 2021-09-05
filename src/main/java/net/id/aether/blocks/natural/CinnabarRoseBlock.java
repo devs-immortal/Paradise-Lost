@@ -46,11 +46,10 @@ public class CinnabarRoseBlock extends AetherMushroomBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(!state.get(BLOOMING) && random.nextInt(4) == 0) {
+        if (!state.get(BLOOMING) && random.nextInt(4) == 0) {
             world.setBlockState(pos, state.with(BLOOMING, true));
             return;
-        }
-        else if(state.get(BLOOMING) && random.nextInt(20) == 0) {
+        } else if (state.get(BLOOMING) && random.nextInt(20) == 0) {
             world.setBlockState(pos, state.with(BLOOMING, false));
             return;
         }
@@ -70,7 +69,7 @@ public class CinnabarRoseBlock extends AetherMushroomBlock {
 
             BlockPos blockPos2 = pos.add(random.nextInt(range) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(range) - 1);
 
-            for(int k = 0; k < 4; ++k) {
+            for (int k = 0; k < 4; ++k) {
                 if (world.isAir(blockPos2) && state.canPlaceAt(world, blockPos2)) {
                     pos = blockPos2;
                 }

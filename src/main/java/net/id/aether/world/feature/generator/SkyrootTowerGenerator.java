@@ -54,12 +54,12 @@ public class SkyrootTowerGenerator {
 
         public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             //if (this.pos.getY() > 2) {
-                if (!shifted) {
-                    this.pos = this.pos.down(1);
-                    shifted = true;
-                }
-                boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
-                return super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
+            if (!shifted) {
+                this.pos = this.pos.down(1);
+                shifted = true;
+            }
+            boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
+            return super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
             //}
             //return false;
         }

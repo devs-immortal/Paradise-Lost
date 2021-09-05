@@ -49,7 +49,7 @@ public class SheepuffEntity extends AetherAnimalEntity {
     private static final Map<DyeColor, ItemConvertible> DROPS;
 
     static {
-        DROPS = Util.make(Maps.<DyeColor, ItemConvertible>newEnumMap(DyeColor.class), (enumMap_1) -> {
+        DROPS = Util.make(Maps.newEnumMap(DyeColor.class), (enumMap_1) -> {
             enumMap_1.put(DyeColor.WHITE, Blocks.WHITE_WOOL);
             enumMap_1.put(DyeColor.ORANGE, Blocks.ORANGE_WOOL);
             enumMap_1.put(DyeColor.MAGENTA, Blocks.MAGENTA_WOOL);

@@ -42,16 +42,15 @@ public abstract class BloodstoneItem extends Item {
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         NbtCompound nbt = stack.getOrCreateNbt();
-        if(world != null && nbt.contains("target") && nbt.getUuid("target") != null) {
+        if (world != null && nbt.contains("target") && nbt.getUuid("target") != null) {
             @SuppressWarnings("unchecked")
             var target = (Optional<LivingEntity>) (Object) StreamSupport
                     .stream(((ClientWorld) world).getEntities().spliterator(), true)
                     .filter(entity -> entity.isLiving() && entity.getUuid().equals(nbt.getUuid("target")))
                     .findFirst();
             tooltip.add(((MutableText) target.map(Entity::getName).orElse(new LiteralText("???"))).formatted(Formatting.GOLD));
-            tooltip.addAll(target.map(((BloodstoneItem)stack.getItem())::createTooltip).orElse(getDefaultText()));
-        }
-        else {
+            tooltip.addAll(target.map(((BloodstoneItem) stack.getItem())::createTooltip).orElse(getDefaultText()));
+        } else {
             tooltip.addAll(getDefaultText());
         }
         super.appendTooltip(stack, world, tooltip, context);
@@ -60,7 +59,7 @@ public abstract class BloodstoneItem extends Item {
     @Override
     public ActionResult useOnEntity(ItemStack unused, PlayerEntity user, LivingEntity entity, Hand hand) {
         var stack = user.getStackInHand(hand);
-        if(!user.isSneaking()) {
+        if (!user.isSneaking()) {
             stack.getOrCreateNbt().putUuid("target", entity.getUuid());
             playPrickEffects(user.world, entity.getBlockPos());
             return ActionResult.success(user.world.isClient());
@@ -70,7 +69,7 @@ public abstract class BloodstoneItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if(user.isSneaking()) {
+        if (user.isSneaking()) {
             var stack = user.getStackInHand(hand);
             stack.getOrCreateNbt().putUuid("target", user.getUuid());
             playPrickEffects(world, user.getBlockPos());

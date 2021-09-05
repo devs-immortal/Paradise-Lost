@@ -7,6 +7,6 @@ public class ZaniteTool {
     public static float calculateSpeedBoost(ItemStack tool) {
         int damage = tool.getDamage();
         int max = tool.getMaxDamage();
-        return (float) (-((damage*damage)/(0.29*max*max))+7.15);
+        return (float) (-((damage * damage) / (0.29 * max * max)) + 7.15);
     }
 }

@@ -10,15 +10,15 @@ import java.util.Date;
 import java.util.List;
 
 public class MinecraftLaunchJson {
-    public String id;
-    public String inheritsFrom;
     public final String releaseTime = Utils.ISO_8601.format(new Date());
-    public String time = releaseTime;
-    public String type = "release";
     public final String mainClass;
-    public transient String mainClassServer;
     public final Arguments arguments = new Arguments();
     public final List<Library> libraries = new ArrayList<>();
+    public String id;
+    public String inheritsFrom;
+    public String time = releaseTime;
+    public String type = "release";
+    public transient String mainClassServer;
 
     //Used for reading the fabric-launch.json and populating the minecraft format
     public MinecraftLaunchJson(JsonObject jsonObject) {

@@ -20,8 +20,8 @@ import java.util.Random;
 
 public abstract class AetherStructureGenerator extends StructurePiece {
 
-    public int chance;
     public final BlockState airState = Blocks.AIR.getDefaultState();
+    public int chance;
     public BlockState blockState, extraBlockState;
     public boolean replaceAir, replaceSolid;
     public StructureWorldAccess world;

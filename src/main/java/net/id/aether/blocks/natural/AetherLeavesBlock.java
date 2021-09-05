@@ -19,14 +19,26 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class  AetherLeavesBlock extends LeavesBlock {
+public class AetherLeavesBlock extends LeavesBlock {
 
-    protected int speed = 0;
     protected final boolean collidable;
+    protected int speed = 0;
 
     public AetherLeavesBlock(Settings settings, boolean collidable) {
         super(settings);
         this.collidable = collidable;
+    }
+
+    public static BlockState getHanger(BlockState state) {
+        if (state.isOf(AetherBlocks.ROSE_WISTERIA_LEAVES))
+            return AetherBlocks.ROSE_WISTERIA_HANGER.getDefaultState();
+        else if (state.isOf(AetherBlocks.LAVENDER_WISTERIA_LEAVES))
+            return AetherBlocks.LAVENDER_WISTERIA_HANGER.getDefaultState();
+        else if (state.isOf(AetherBlocks.FROST_WISTERIA_LEAVES))
+            return AetherBlocks.FROST_WISTERIA_HANGER.getDefaultState();
+        else if (state.isOf(AetherBlocks.BOREAL_WISTERIA_LEAVES))
+            return AetherBlocks.BOREAL_WISTERIA_HANGER.getDefaultState();
+        return Blocks.AIR.getDefaultState();
     }
 
     @SuppressWarnings("deprecation")
@@ -39,18 +51,6 @@ public class  AetherLeavesBlock extends LeavesBlock {
         if (this == AetherBlocks.GOLDEN_OAK_LEAVES && entity instanceof TransformableSwetEntity swet) {
             swet.suggestTypeChange(state);
         }
-    }
-
-    public static BlockState getHanger(BlockState state) {
-        if(state.isOf(AetherBlocks.ROSE_WISTERIA_LEAVES))
-            return AetherBlocks.ROSE_WISTERIA_HANGER.getDefaultState();
-        else if(state.isOf(AetherBlocks.LAVENDER_WISTERIA_LEAVES))
-            return AetherBlocks.LAVENDER_WISTERIA_HANGER.getDefaultState();
-        else if(state.isOf(AetherBlocks.FROST_WISTERIA_LEAVES))
-            return AetherBlocks.FROST_WISTERIA_HANGER.getDefaultState();
-        else if(state.isOf(AetherBlocks.BOREAL_WISTERIA_LEAVES))
-            return AetherBlocks.BOREAL_WISTERIA_HANGER.getDefaultState();
-        return Blocks.AIR.getDefaultState();
     }
 
     @Override

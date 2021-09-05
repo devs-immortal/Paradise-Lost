@@ -104,16 +104,16 @@ public class MoaAPI {
     public static Race getMoaForBiome(RegistryKey<Biome> biome, Random random) {
         Optional<Identifier> raceOptional =
                 Optional.ofNullable(getSpawnBucket(biome)
-                .map(bucket -> bucket.get(random))
-                .orElse(MOA_SPAWN_REGISTRY.get(AetherDimension.HIGHLANDS_PLAINS).get(random)));
+                        .map(bucket -> bucket.get(random))
+                        .orElse(MOA_SPAWN_REGISTRY.get(AetherDimension.HIGHLANDS_PLAINS).get(random)));
         return raceOptional.map(MoaAPI::getRace).orElse(FALLBACK_MOA);
     }
 
     public static Race getMoaForBreeding(MoaGenes parentA, MoaGenes parentB, World world, BlockPos pos) {
         var childRace =
                 MOA_BREEDING_REGISTRY.stream()
-                .filter(matingEntry -> matingEntry.identityCheck.test(parentA.getRace(), parentB.getRace()) && matingEntry.additionalChecks.apply(parentA, parentB, world, pos))
-                .findAny();
+                        .filter(matingEntry -> matingEntry.identityCheck.test(parentA.getRace(), parentB.getRace()) && matingEntry.additionalChecks.apply(parentA, parentB, world, pos))
+                        .findAny();
         return childRace.map(MatingEntry::get).orElse(world.getRandom().nextBoolean() ? parentA.getRace() : parentB.getRace());
     }
 
@@ -127,54 +127,6 @@ public class MoaAPI {
         return attribute != null ? "moa.attribute." + attribute.name().toLowerCase() : "???";
     }
 
-    public static record Race(Identifier id, Identifier texturePath, MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting, boolean glowing, boolean legendary, ParticleType<?> particles) {
-    }
-
-    private static record SpawnBucketEntry(Identifier id, int weight) {
-        public boolean test(Random random, int whole) {
-            return random.nextInt(whole) < weight;
-        }
-    }
-
-    private static class SpawnBucket {
-
-        private final List<SpawnBucketEntry> entries = new ArrayList<>();
-        private SpawnBucketEntry heaviest = new SpawnBucketEntry(FALLBACK_ID, 0);
-        private int totalWeight;
-
-        public void put(Identifier raceId, int weight) {
-
-            if(weight < 1) {
-                throw new IllegalArgumentException(raceId.toString() + " has an invalid weight, must be 1 or higher!");
-            }
-
-            SpawnBucketEntry entry = new SpawnBucketEntry(raceId, weight);
-
-            if(weight > heaviest.weight) {
-                heaviest = entry;
-            }
-
-            entries.add(entry);
-            totalWeight += weight;
-        }
-
-        public Identifier get(Random random) {
-            if(entries.size() == 1) {
-                return entries.get(0).id;
-            }
-            Collections.shuffle(entries);
-            Optional<SpawnBucketEntry> entryOptional = entries.stream().filter(entry -> entry.test(random, totalWeight)).findFirst();
-            return entryOptional.map(SpawnBucketEntry::id).orElse(heaviest.id);
-        }
-
-    }
-
-    private static record MatingEntry(Identifier race, BiPredicate<Race, Race> identityCheck, Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> additionalChecks) {
-        public Race get() {
-            return getRace(race);
-        }
-    }
-
     public static BiPredicate<Race, Race> createIdentityCheck(Race raceA, Race raceB) {
         return (parentA, parentB) -> (raceA == parentA && raceB == parentB) || (raceB == parentA && raceA == parentB);
     }
@@ -182,8 +134,6 @@ public class MoaAPI {
     public static Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> createChanceCheck(float chance) {
         return (parentA, parentB, world, pos) -> world.getRandom().nextFloat() < chance;
     }
-
-    private static record SpawnStatData(float base, float variance) {}
 
     public enum SpawnStatWeighting {
         SPEED(0.08F, 0.1F, 0.02F, 0.03F, 0F, -0.1F, 0F, -0.01F, 0, 8),
@@ -193,7 +143,8 @@ public class MoaAPI {
         MYTHICAL_SPEED(0.31F, 0.17F, 0.082F, 0.0375F, 0F, -0.1F, 0F, -0.01F, 0, 8),
         MYTHICAL_GLIDE(0.013F, 0.08F, 0.035F, 0.039F, -0.085F, -0.085F, 0F, -0.01F, 0, 6),
         MYTHICAL_TANK(0.0F, 0.07F, 0.01F, 0.02F, -0.025F, -0.05F, -0.03F, -0.01F, 14, 6),
-        MYTHICAL_ALL(0.31F, 0.17F, 0.035F, 0.039F, -0.085F, -0.085F, -0.03F, -0.01F, 14, 6),;
+        MYTHICAL_ALL(0.31F, 0.17F, 0.035F, 0.039F, -0.085F, -0.085F, -0.03F, -0.01F, 14, 6),
+        ;
 
         public final ImmutableMap<MoaAttributes, SpawnStatData> data;
 
@@ -212,5 +163,59 @@ public class MoaAPI {
             SpawnStatData statData = data.get(attribute);
             return Math.min(attribute.max, attribute.min + (statData.base + (random.nextFloat() * statData.variance) * (race.defaultAffinity == attribute ? (attribute == MoaAttributes.DROP_MULTIPLIER ? 2F : 1.05F) : 1F)));
         }
+    }
+
+    public static record Race(Identifier id, Identifier texturePath, MoaAttributes defaultAffinity,
+                              SpawnStatWeighting statWeighting, boolean glowing, boolean legendary,
+                              ParticleType<?> particles) {
+    }
+
+    private static record SpawnBucketEntry(Identifier id, int weight) {
+        public boolean test(Random random, int whole) {
+            return random.nextInt(whole) < weight;
+        }
+    }
+
+    private static class SpawnBucket {
+
+        private final List<SpawnBucketEntry> entries = new ArrayList<>();
+        private SpawnBucketEntry heaviest = new SpawnBucketEntry(FALLBACK_ID, 0);
+        private int totalWeight;
+
+        public void put(Identifier raceId, int weight) {
+
+            if (weight < 1) {
+                throw new IllegalArgumentException(raceId.toString() + " has an invalid weight, must be 1 or higher!");
+            }
+
+            SpawnBucketEntry entry = new SpawnBucketEntry(raceId, weight);
+
+            if (weight > heaviest.weight) {
+                heaviest = entry;
+            }
+
+            entries.add(entry);
+            totalWeight += weight;
+        }
+
+        public Identifier get(Random random) {
+            if (entries.size() == 1) {
+                return entries.get(0).id;
+            }
+            Collections.shuffle(entries);
+            Optional<SpawnBucketEntry> entryOptional = entries.stream().filter(entry -> entry.test(random, totalWeight)).findFirst();
+            return entryOptional.map(SpawnBucketEntry::id).orElse(heaviest.id);
+        }
+
+    }
+
+    private static record MatingEntry(Identifier race, BiPredicate<Race, Race> identityCheck,
+                                      Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> additionalChecks) {
+        public Race get() {
+            return getRace(race);
+        }
+    }
+
+    private static record SpawnStatData(float base, float variance) {
     }
 }

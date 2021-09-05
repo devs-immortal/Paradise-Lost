@@ -25,7 +25,7 @@ public class AerbunnyRenderer extends MobEntityRenderer<AerbunnyEntity, Aerbunny
     @Override
     protected void setupTransforms(AerbunnyEntity entity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta) {
         super.setupTransforms(entity, matrices, animationProgress, bodyYaw, tickDelta);
-        if(entity.isBaby())
+        if (entity.isBaby())
             matrices.scale(0.6F, 0.6F, 0.6F);
     }
 

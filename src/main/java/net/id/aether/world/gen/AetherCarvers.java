@@ -37,5 +37,6 @@ public class AetherCarvers {
         return BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_CARVER, Aether.locate(name), carver);
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

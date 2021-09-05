@@ -7,12 +7,12 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.world.World;
 
 public class WhiteSwetEntity extends TransformableSwetEntity {
-    public WhiteSwetEntity(EntityType<? extends WhiteSwetEntity> entityType, World world){
+    public WhiteSwetEntity(EntityType<? extends WhiteSwetEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Override
-    protected void onEntityCollision(Entity entity){
+    protected void onEntityCollision(Entity entity) {
         if (getSize() > 1 && entity instanceof LivingEntity livingEntity) {
             StatusEffectInstance[] effects = livingEntity.getStatusEffects().toArray(new StatusEffectInstance[0]);
             for (StatusEffectInstance effect : effects) {

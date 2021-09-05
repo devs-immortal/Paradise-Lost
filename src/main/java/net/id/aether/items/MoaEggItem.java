@@ -37,7 +37,7 @@ public class MoaEggItem extends Item {
             NbtCompound geneTag = stack.getSubNbt("genes");
             boolean baby = geneTag.getBoolean("baby");
             moa.getGenes().readFromNbt(geneTag);
-            if(baby) {
+            if (baby) {
                 moa.setBreedingAge(-43200);
             }
             moa.refreshPositionAndAngles(contextIn.getBlockPos().up(), 0, 0);
@@ -51,14 +51,14 @@ public class MoaEggItem extends Item {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if(stack.getOrCreateNbt().contains("genes")) {
+        if (stack.getOrCreateNbt().contains("genes")) {
             NbtCompound geneTag = stack.getSubNbt("genes");
             Identifier raceId = Identifier.tryParse(geneTag.getString("raceId"));
             var race = MoaAPI.getRace(raceId);
-            if(raceId != null) {
+            if (raceId != null) {
                 tooltip.add(new TranslatableText(MoaAPI.formatForTranslation(raceId)).formatted(race.legendary() ? Formatting.LIGHT_PURPLE : Formatting.DARK_AQUA));
             }
-            if(!geneTag.getBoolean("baby")) {
+            if (!geneTag.getBoolean("baby")) {
                 tooltip.add(new TranslatableText("moa.egg.adult").formatted(Formatting.DARK_PURPLE, Formatting.ITALIC));
             }
         }

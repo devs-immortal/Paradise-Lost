@@ -8,9 +8,14 @@ import java.util.Collections;
 import java.util.Set;
 
 public class AetherLootTables {
+    public static final Identifier GOLDEN_OAK_STRIPPING;
     private static final Set<Identifier> LOOT_TABLES = Sets.newHashSet();
     private static final Set<Identifier> LOOT_TABLES_READ_ONLY;
-    public static final Identifier GOLDEN_OAK_STRIPPING;
+
+    static {
+        LOOT_TABLES_READ_ONLY = Collections.unmodifiableSet(LOOT_TABLES);
+        GOLDEN_OAK_STRIPPING = register("gameplay/golden_oak_log_strip");
+    }
 
     public AetherLootTables() {
     }
@@ -29,10 +34,5 @@ public class AetherLootTables {
 
     public static Set<Identifier> getAll() {
         return LOOT_TABLES_READ_ONLY;
-    }
-
-    static {
-        LOOT_TABLES_READ_ONLY = Collections.unmodifiableSet(LOOT_TABLES);
-        GOLDEN_OAK_STRIPPING = register("gameplay/golden_oak_log_strip");
     }
 }

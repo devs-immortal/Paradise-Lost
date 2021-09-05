@@ -32,21 +32,20 @@ import java.util.Set;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements AetherEntityExtensions {
+    private boolean flipped = false;
+    private int gravFlipTime;
+
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
-    private boolean flipped = false;
-
-    private int gravFlipTime;
-
     @Override
-    public boolean getFlipped(){
+    public boolean getFlipped() {
         return flipped;
     }
 
     @Override
-    public void setFlipped(){
+    public void setFlipped() {
         flipped = true;
         gravFlipTime = 0;
     }
@@ -92,14 +91,14 @@ public abstract class LivingEntityMixin extends Entity implements AetherEntityEx
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private void tick(CallbackInfo ci){
-        if(flipped){
+    private void tick(CallbackInfo ci) {
+        if (flipped) {
             gravFlipTime++;
-            if(gravFlipTime > 20){
+            if (gravFlipTime > 20) {
                 flipped = false;
                 this.fallDistance = 0;
             }
-            if(!this.hasNoGravity()) {
+            if (!this.hasNoGravity()) {
                 Vec3d antiGravity = new Vec3d(0, 0.12D, 0);
                 this.setVelocity(this.getVelocity().add(antiGravity));
             }
@@ -109,7 +108,7 @@ public abstract class LivingEntityMixin extends Entity implements AetherEntityEx
     @SuppressWarnings("ConstantConditions")
     @Inject(method = "getMaxHealth", at = @At("HEAD"), cancellable = true)
     private void getMoaMaxHealth(CallbackInfoReturnable<Float> cir) {
-        if((Object) this instanceof MoaEntity moa) {
+        if ((Object) this instanceof MoaEntity moa) {
             var genes = moa.getGenes();
             cir.setReturnValue(genes.isInitialized() ? genes.getAttribute(MoaAttributes.MAX_HEALTH) : 40F);
             cir.cancel();

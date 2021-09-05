@@ -20,8 +20,8 @@ public class FoodBowlBlockEntity extends AetherBlockEntity {
     @SuppressWarnings("ConstantConditions")
     public boolean handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
         ItemStack storedFood = inventory.get(0);
-        if(!storedFood.isEmpty() && (handStack.isEmpty() || !handStack.isItemEqual(storedFood))) {
-            if(!player.getInventory().insertStack(storedFood))
+        if (!storedFood.isEmpty() && (handStack.isEmpty() || !handStack.isItemEqual(storedFood))) {
+            if (!player.getInventory().insertStack(storedFood))
                 world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY() + 0.75, pos.getZ(), storedFood, 0, 0, 0));
             inventory.clear();
             updateState();
@@ -30,12 +30,11 @@ public class FoodBowlBlockEntity extends AetherBlockEntity {
 
         Item food = handStack.getItem();
 
-        if(food.isFood() && food.getFoodComponent().isMeat()) {
-            if(storedFood.isEmpty()) {
+        if (food.isFood() && food.getFoodComponent().isMeat()) {
+            if (storedFood.isEmpty()) {
                 inventory.set(0, handStack);
                 player.setStackInHand(hand, ItemStack.EMPTY);
-            }
-            else {
+            } else {
                 int overflow = (storedFood.getCount() + handStack.getCount()) - 64;
                 storedFood.setCount(Math.min(64 + overflow, 64));
                 handStack.setCount(Math.max(overflow, 0));

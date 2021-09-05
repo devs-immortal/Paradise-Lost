@@ -32,12 +32,12 @@ public class BlueAercloudBlock extends AercloudBlock {
             }
             return;
         }
-        
-        if(motion.y < 2) {
+
+        if (motion.y < 2) {
             if (-1.4 < motion.y) {
                 entity.setVelocity(motion.x, 2.0, motion.z);
             } else {
-                entity.setVelocity(motion.x, -1.4*motion.y, motion.z);
+                entity.setVelocity(motion.x, -1.4 * motion.y, motion.z);
             }
         }
 

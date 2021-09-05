@@ -17,12 +17,14 @@ import java.util.function.BooleanSupplier;
 @Mixin(ServerWorld.class)
 public class ServerWorldMixin {
 
-    @Shadow private int idleTimeout;
-
-    @Shadow @Final EntityList entityList;
+    @Shadow
+    @Final
+    EntityList entityList;
+    @Shadow
+    private int idleTimeout;
 
     @Inject(method = "tick", at = @At(value = "RETURN"))
-    void postEntityTick(BooleanSupplier shouldKeepTicking, CallbackInfo ci){
+    void postEntityTick(BooleanSupplier shouldKeepTicking, CallbackInfo ci) {
         if (this.idleTimeout < 300) {
             entityList.forEach(entityObj -> {
                 if (entityObj instanceof FloatingBlockEntity entity) {
@@ -32,7 +34,7 @@ public class ServerWorldMixin {
                 }
             });
             FloatingBlockStructure[] structures = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
-            for(FloatingBlockStructure structure : structures){
+            for (FloatingBlockStructure structure : structures) {
                 structure.postTick();
             }
         }

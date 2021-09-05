@@ -27,6 +27,10 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
         this.alwaysCarvableBlocks = ImmutableSet.of(Blocks.AIR, Blocks.VOID_AIR, Blocks.CAVE_AIR);
     }
 
+    private static boolean isPositionExcluded(double scaledRelativeX, double scaledRelativeY, double scaledRelativeZ) {
+        return scaledRelativeX * scaledRelativeX + scaledRelativeY * scaledRelativeY + scaledRelativeZ * scaledRelativeZ >= 0.85D;
+    }
+
     @Override
     public boolean carve(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, Random random, AquiferSampler sampler, ChunkPos pos, BitSet carvingMask) {
 
@@ -42,7 +46,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
         int systemCount = random.nextInt(random.nextInt(random.nextInt(config.maxSystems.get(random)) + 1) + 1);
 
         // Generate each cave system
-        for(int i = 0; i < systemCount; ++i) {
+        for (int i = 0; i < systemCount; ++i) {
             // Get the position to spawn
 
             // Each system generates 1 tunnel by default, more has a chance to be added later
@@ -89,6 +93,17 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
         return true;
     }
 
+
+    //protected void carveCaveRoom(Chunk chunk, Random random, class_6108 config, int seaLevel, int mainChunkX, int mainChunkZ, double x, double y, double z, float yaw) {
+    //    // Increase the size of the horizontal
+    //    double scaledYaw = 1.5D + yaw;
+    //    // Scale the vertical size to be 1/2 the horizontal size
+    //    double scaledPitch = scaledYaw * 0.5;
+//
+    //    // Call the internal carveRegion function with the given yaw and pitch, as well as a slight x offset
+    //    this.carveRegion(chunk, config, random, seaLevel, mainChunkX, mainChunkZ, x + 1.0, y, z, scaledYaw, scaledPitch);
+    //}
+
     protected void carveTunnels(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, BitSet carvingMask, long seed, AquiferSampler sampler, int mainChunkX, int mainChunkZ, double x, double y, double z, float width, float yaw, float pitch, float yawToPitchRatio, int branchStartIndex, int branchCount, SkipPredicate skipPredicate) {
         // Get the position for starting the next branch, from 25% of the total length to 75% to ensure it doesn't branch near the ends
 
@@ -101,10 +116,10 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
         float yawChange = 0.0F;
         float pitchChange = 0.0F;
 
-        for(int i = branchStartIndex; i < branchCount; ++i) {
+        for (int i = branchStartIndex; i < branchCount; ++i) {
             // Make the yaw the sin of the cave from [0, pi], making it larger in the middle and smaller at the edges.
             // The horizontal size of the cave ranges from [1.5, 1.5 + width].
-            double scaledYaw = 1.5 + (double)(MathHelper.sin(3.1415927F * (float)i / (float)branchCount) * width);
+            double scaledYaw = 1.5 + (double) (MathHelper.sin(3.1415927F * (float) i / (float) branchCount) * width);
             // Scale the pitch by 1.0. The nether carver uses 2.0.
             double scaledPitch = scaledYaw * yawToPitchRatio;
 
@@ -147,22 +162,11 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
         }
     }
 
-
-    //protected void carveCaveRoom(Chunk chunk, Random random, class_6108 config, int seaLevel, int mainChunkX, int mainChunkZ, double x, double y, double z, float yaw) {
-    //    // Increase the size of the horizontal
-    //    double scaledYaw = 1.5D + yaw;
-    //    // Scale the vertical size to be 1/2 the horizontal size
-    //    double scaledPitch = scaledYaw * 0.5;
-//
-    //    // Call the internal carveRegion function with the given yaw and pitch, as well as a slight x offset
-    //    this.carveRegion(chunk, config, random, seaLevel, mainChunkX, mainChunkZ, x + 1.0, y, z, scaledYaw, scaledPitch);
-    //}
-
     protected boolean carveRegion(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, long seed, AquiferSampler sampler, double x, double y, double z, double horizontalScale, double verticalScale, BitSet carvingMask, Carver.SkipPredicate skipPredicate) {
         ChunkPos chunkPos = chunk.getPos();
         int i = chunkPos.x;
         int j = chunkPos.z;
-        Random random = new Random(seed + (long)i + (long)j);
+        Random random = new Random(seed + (long) i + (long) j);
         double d = chunkPos.getCenterX();
         double e = chunkPos.getCenterZ();
         double f = 16.0D + horizontalScale * 2.0D;
@@ -182,18 +186,18 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
                 BlockPos.Mutable mutable = new BlockPos.Mutable();
                 BlockPos.Mutable mutable2 = new BlockPos.Mutable();
 
-                for(int s = m; s <= n; ++s) {
+                for (int s = m; s <= n; ++s) {
                     int t = chunkPos.getOffsetX(s);
-                    double g = ((double)t + 0.5D - x) / horizontalScale;
+                    double g = ((double) t + 0.5D - x) / horizontalScale;
 
-                    for(int u = q; u <= r; ++u) {
+                    for (int u = q; u <= r; ++u) {
                         int v = chunkPos.getOffsetZ(u);
-                        double h = ((double)v + 0.5D - z) / horizontalScale;
+                        double h = ((double) v + 0.5D - z) / horizontalScale;
                         if (!(g * g + h * h >= 1.0D)) {
                             MutableBoolean mutableBoolean = new MutableBoolean(false);
 
-                            for(int w = p; w > o; --w) {
-                                double aa = ((double)w - 0.5D - y) / verticalScale;
+                            for (int w = p; w > o; --w) {
+                                double aa = ((double) w - 0.5D - y) / verticalScale;
                                 if (!skipPredicate.shouldSkip(context, g, aa, h, w)) {
                                     int ab = w - context.getMinY();
                                     int ac = s | u << 4 | ab << 8;
@@ -239,7 +243,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
                 if (foundSurface.isTrue()) {
                     downPos.set(pos, Direction.DOWN);
                     if (chunk.getBlockState(downPos).isOf(Blocks.DIRT)) {
-                        chunk.setBlockState(downPos, ((Biome)posToBiome.apply(pos)).getGenerationSettings().getSurfaceConfig().getTopMaterial(), false);
+                        chunk.setBlockState(downPos, posToBiome.apply(pos).getGenerationSettings().getSurfaceConfig().getTopMaterial(), false);
                     }
                 }
 
@@ -256,9 +260,5 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     @Override
     protected boolean canCarveBlock(BlockState state, BlockState stateAbove) {
         return state.isAir();
-    }
-
-    private static boolean isPositionExcluded(double scaledRelativeX, double scaledRelativeY, double scaledRelativeZ) {
-        return scaledRelativeX * scaledRelativeX + scaledRelativeY * scaledRelativeY + scaledRelativeZ * scaledRelativeZ >= 0.85D;
     }
 }

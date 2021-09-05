@@ -21,10 +21,6 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 public class AetherFeatures {
-    public static final StructurePieceType WELL_PIECE = register(WellGenerator.Piece::new, "well");
-    public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.Piece::new, "skyroot_tower");
-    public static final StructurePieceType ORANGE_RUIN_PIECE = register(OrangeRuinGenerator.Piece::new, "orange_ruin");
-
     public static void registerFeatures() {
         register("lake", new AetherLakeFeature());
         register("aercloud", new AercloudFeature());
@@ -37,16 +33,15 @@ public class AetherFeatures {
         register("well", new WellFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
         register("skyroot_tower", new SkyrootTowerFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
         register("orange_ruin", new OrangeRuinFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
-    }
+    }    public static final StructurePieceType WELL_PIECE = register(WellGenerator.Piece::new, "well");
 
     private static <T extends FeatureConfig> void register(String id, StructureFeature<T> structure, GenerationStep.Feature genStep) {
         StructureFeatureAccessor.callRegister(Aether.locate(id).toString(), structure, genStep);
-    }
+    }    public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.Piece::new, "skyroot_tower");
 
     static StructurePieceType register(StructurePieceType pieceType, String id) {
         return Registry.register(Registry.STRUCTURE_PIECE, Aether.locate(id), pieceType);
-    }
-
+    }    public static final StructurePieceType ORANGE_RUIN_PIECE = register(OrangeRuinGenerator.Piece::new, "orange_ruin");
 
     @SuppressWarnings("UnusedReturnValue")
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {
@@ -56,4 +51,11 @@ public class AetherFeatures {
     private static <T extends DecoratorConfig, G extends Decorator<T>> G register(String id, G decorator) {
         return Registry.register(Registry.DECORATOR, Aether.locate(id), decorator);
     }
+
+
+
+
+
+
+
 }

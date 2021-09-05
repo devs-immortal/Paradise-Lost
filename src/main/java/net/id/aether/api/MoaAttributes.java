@@ -20,14 +20,14 @@ public enum MoaAttributes {
 
     public float fromBreeding(MoaGenes parentA, MoaGenes parentB, boolean increase) {
         float stat = (parentA.getAttribute(this) / 2) + (parentB.getAttribute(this) / 2);
-        if(parentA.getAffinity() == this) {
+        if (parentA.getAffinity() == this) {
             stat += gradeInterval / 3;
         }
-        if(parentB.getAffinity() == this) {
+        if (parentB.getAffinity() == this) {
             stat += gradeInterval / 3;
         }
-        if(increase) {
-           stat += gradeInterval / 4;
+        if (increase) {
+            stat += gradeInterval / 4;
         }
         return stat;
     }

@@ -110,15 +110,14 @@ public class AerbunnyEntity extends AetherAnimalEntity {
     public void tick() {
         super.tick();
         int puff = getPuffiness();
-        if(puff > 0 && world.getTime() % 4 == 0) {
+        if (puff > 0 && world.getTime() % 4 == 0) {
             Vec3d pos = getPos();
             world.addParticle(ParticleTypes.CLOUD, pos.x, pos.y + 0.2, pos.z, 0, 0, 0);
-        }
-        else if(isOnGround() && puff > 0) {
+        } else if (isOnGround() && puff > 0) {
             setPuffiness(0);
         }
 
-        if(random.nextFloat() <= 0.03F) {
+        if (random.nextFloat() <= 0.03F) {
             AerbunnyEntity.this.playSound(SoundEvents.ENTITY_FOX_SNIFF, 1.0F, 2.0F);
         }
     }
@@ -126,7 +125,7 @@ public class AerbunnyEntity extends AetherAnimalEntity {
     @Override
     public void tickMovement() {
         super.tickMovement();
-        if(this.isOnGround() && ((getVelocity().x > 0.025 || getVelocity().z > 0.025) && random.nextInt(4) == 0)) {
+        if (this.isOnGround() && ((getVelocity().x > 0.025 || getVelocity().z > 0.025) && random.nextInt(4) == 0)) {
             jump();
         }
     }

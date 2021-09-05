@@ -18,15 +18,15 @@ public class BoatEntityTypeMixin {
     @Final
     private static BoatEntity.Type[] field_7724;
 
-    private BoatEntityTypeMixin(String valueName, int ordinal, Block baseBlock, String name) {
-        throw new AssertionError();
-    }
-
     static {
         EnumExtender.register(BoatEntity.Type.class, (name, args) -> {
             BoatEntity.Type entry = (BoatEntity.Type) (Object) new BoatEntityTypeMixin(name, field_7724.length, (Block) args[0], (String) args[1]);
             field_7724 = Arrays.copyOf(field_7724, field_7724.length + 1);
             return field_7724[field_7724.length - 1] = entry;
         });
+    }
+
+    private BoatEntityTypeMixin(String valueName, int ordinal, Block baseBlock, String name) {
+        throw new AssertionError();
     }
 }

@@ -21,26 +21,26 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
 
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         int checkSize = 4;
-        for(int x = -checkSize; x >= checkSize; x++) {
-            for(int y = -5; y >= 8; y++) {
-                for(int z = -checkSize; z >= checkSize; z++) {
-                    if (!context.getWorld().getBlockState(context.getOrigin().add(x,y,z)).isOf(Blocks.AIR)) {
+        for (int x = -checkSize; x >= checkSize; x++) {
+            for (int y = -5; y >= 8; y++) {
+                for (int z = -checkSize; z >= checkSize; z++) {
+                    if (!context.getWorld().getBlockState(context.getOrigin().add(x, y, z)).isOf(Blocks.AIR)) {
                         return false;
                     }
                 }
             }
         }
 
-        float f = (float)(context.getRandom().nextInt(3) + 3);
+        float f = (float) (context.getRandom().nextInt(3) + 3);
 
-        for(int y = 0; f > 0.5F; --y) {
-            for(int x = MathHelper.floor(-f); x <= MathHelper.ceil(f); ++x) {
-                for(int z = MathHelper.floor(-f); z <= MathHelper.ceil(f); ++z) {
-                    if ((float)(x * x + z * z) <= (f + 1.0F) * (f + 1.0F)) {
+        for (int y = 0; f > 0.5F; --y) {
+            for (int x = MathHelper.floor(-f); x <= MathHelper.ceil(f); ++x) {
+                for (int z = MathHelper.floor(-f); z <= MathHelper.ceil(f); ++z) {
+                    if ((float) (x * x + z * z) <= (f + 1.0F) * (f + 1.0F)) {
                         if (y == 0) {
                             this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), AetherBlocks.AETHER_GRASS_BLOCK.getDefaultState());
                             if (context.getRandom().nextInt(6) == 0) {
-                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y+1, z), AetherBlocks.AETHER_GRASS.getDefaultState());
+                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y + 1, z), AetherBlocks.AETHER_GRASS.getDefaultState());
                             }
                         } else if (y == -1) {
                             this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), AetherBlocks.AETHER_DIRT.getDefaultState());
@@ -57,12 +57,12 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
                     }
                 }
             }
-            f = (float)((double)f - ((double)context.getRandom().nextInt(2) + 0.5D));
+            f = (float) ((double) f - ((double) context.getRandom().nextInt(2) + 0.5D));
         }
-        int[] leafRadii = new int[] {0, 3, 2, 1, 2, 1, 0, 1};
+        int[] leafRadii = new int[]{0, 3, 2, 1, 2, 1, 0, 1};
 
         for (int y = 1; y < 9; y++) {
-            this.generateTreeCircle(context.getWorld(), context.getRandom(), context.getOrigin().up(y), leafRadii[y-1], AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
+            this.generateTreeCircle(context.getWorld(), context.getRandom(), context.getOrigin().up(y), leafRadii[y - 1], AetherBlocks.CRYSTAL_LEAVES.getDefaultState().with(AetherLeavesBlock.DISTANCE, 1));
             this.setBlockState(context.getWorld(), context.getOrigin().up(y), AetherBlocks.CRYSTAL_LOG.getDefaultState());
         }
 
@@ -72,7 +72,9 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
     }
 
     private void generateTreeCircle(StructureWorldAccess structureWorldAccess, Random random, BlockPos blockPos, int radius, BlockState state) {
-        if (radius < 1) { return; }
+        if (radius < 1) {
+            return;
+        }
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 if (!(Math.abs(x) == radius && Math.abs(z) == radius) || (x == 0 && z == 0)) {

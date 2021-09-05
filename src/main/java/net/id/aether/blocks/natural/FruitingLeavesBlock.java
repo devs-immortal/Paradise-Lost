@@ -41,24 +41,22 @@ public class FruitingLeavesBlock extends AetherLeavesBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(!state.get(NATURAL)) {
+        if (!state.get(NATURAL)) {
             int growth = state.get(GROWTH);
-            if(!state.get(CAPPED)) {
-                if(random.nextInt(60) == 0 && growth < 2) {
-                    if(growth == 1) {
+            if (!state.get(CAPPED)) {
+                if (random.nextInt(60) == 0 && growth < 2) {
+                    if (growth == 1) {
                         spawnPetalBurst(world, random, pos);
                     }
                     state = state.with(GROWTH, growth + 1).with(CAPPED, random.nextDouble() < 0.45 || growth + 1 == 2);
                     world.playSound(null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 1.25F, 1.5F);
                     world.setBlockState(pos, state);
                 }
-            }
-            else {
-                if(random.nextInt(240) == 0) {
-                    if(growth == 1) {
+            } else {
+                if (random.nextInt(240) == 0) {
+                    if (growth == 1) {
                         spawnPetalBurst(world, random, pos);
-                    }
-                    else {
+                    } else {
                         int dropBlocks = 0;
                         while (!world.isAir(pos.down(dropBlocks + 1)) && dropBlocks < 16 && world.getBlockState(pos.down(dropBlocks)).isOf(this)) {
                             dropBlocks++;
@@ -83,17 +81,16 @@ public class FruitingLeavesBlock extends AetherLeavesBlock {
         Random random = world.getRandom();
         int growth = state.get(GROWTH);
 
-        if(growth > 0) {
+        if (growth > 0) {
             world.setBlockState(pos, state.with(GROWTH, 0).with(CAPPED, false));
             world.playSound(null, pos, SoundEvents.BLOCK_CROP_BREAK, SoundCategory.BLOCKS, 1F, 2F);
 
-            if(growth == 1) {
+            if (growth == 1) {
                 spawnPetalBurst(world, random, pos);
-            }
-            else {
+            } else {
                 int fortune = EnchantmentHelper.get(player.getStackInHand(hand)).getOrDefault(Enchantments.FORTUNE, 0);
                 ItemStack drops = new ItemStack(fruit.get(), random.nextInt(fortune + 1 + random.nextInt(1)) + 1);
-                if(!player.giveItemStack(drops)) {
+                if (!player.giveItemStack(drops)) {
                     ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), drops);
                 }
             }

@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 public class PhoenixArmorRenderer implements ArmorRenderer {
     private static final Identifier TEXTURE = new Identifier("minecraft", "textures/models/armor/aether_phoenix_layer_1.png");
     private static PhoenixArmorModel phoenixArmorModel;
+
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {
         if (phoenixArmorModel == null) {

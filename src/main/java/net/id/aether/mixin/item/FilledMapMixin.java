@@ -27,9 +27,11 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(FilledMapItem.class)
 public abstract class FilledMapMixin {
 
-    @Shadow protected abstract BlockState getFluidStateIfVisible(World world, BlockState state, BlockPos pos);
+    @Unique
+    private final MapColor AETHER_BACKGROUND = MapColorCreator.createMapColor(62, 0xe3fffd);
 
-    @Unique private final MapColor AETHER_BACKGROUND = MapColorCreator.createMapColor(62, 0xe3fffd);
+    @Shadow
+    protected abstract BlockState getFluidStateIfVisible(World world, BlockState state, BlockPos pos);
 
     /**
      * @author You're mom
@@ -41,23 +43,23 @@ public abstract class FilledMapMixin {
             int i = 1 << state.scale;
             int j = state.centerX;
             int k = state.centerZ;
-            int l = MathHelper.floor(entity.getX() - (double)j) / i + 64;
-            int m = MathHelper.floor(entity.getZ() - (double)k) / i + 64;
+            int l = MathHelper.floor(entity.getX() - (double) j) / i + 64;
+            int m = MathHelper.floor(entity.getZ() - (double) k) / i + 64;
             int n = 128 / i;
             if (world.getDimension().hasCeiling()) {
                 n /= 2;
             }
 
-            MapState.PlayerUpdateTracker playerUpdateTracker = state.getPlayerSyncData((PlayerEntity)entity);
+            MapState.PlayerUpdateTracker playerUpdateTracker = state.getPlayerSyncData((PlayerEntity) entity);
             ++playerUpdateTracker.field_131;
             boolean bl = false;
 
-            for(int o = l - n + 1; o < l + n; ++o) {
+            for (int o = l - n + 1; o < l + n; ++o) {
                 if ((o & 15) == (playerUpdateTracker.field_131 & 15) || bl) {
                     bl = false;
                     double d = 0.0D;
 
-                    for(int p = m - n - 1; p < m + n; ++p) {
+                    for (int p = m - n - 1; p < m + n; ++p) {
                         if (o >= 0 && p >= -1 && o < 128 && p < 128) {
                             int q = o - l;
                             int r = p - m;
@@ -86,8 +88,8 @@ public abstract class FilledMapMixin {
                                     BlockPos.Mutable mutable = new BlockPos.Mutable();
                                     BlockPos.Mutable mutable2 = new BlockPos.Mutable();
 
-                                    for(int y = 0; y < i; ++y) {
-                                        for(int z = 0; z < i; ++z) {
+                                    for (int y = 0; y < i; ++y) {
+                                        for (int z = 0; z < i; ++z) {
                                             int aa = worldChunk.sampleHeightmap(Heightmap.Type.WORLD_SURFACE, y + u, z + v) + 1;
                                             BlockState blockState;
                                             if (aa <= world.getBottomY() + 1) {
@@ -97,7 +99,7 @@ public abstract class FilledMapMixin {
                                                     --aa;
                                                     mutable.set(chunkPos.getStartX() + y + u, aa, chunkPos.getStartZ() + z + v);
                                                     blockState = worldChunk.getBlockState(mutable);
-                                                } while(blockState.getMapColor(world, mutable) == MapColor.CLEAR && aa > world.getBottomY());
+                                                } while (blockState.getMapColor(world, mutable) == MapColor.CLEAR && aa > world.getBottomY());
 
                                                 if (aa > world.getBottomY() && !blockState.getFluidState().isEmpty()) {
                                                     int ab = aa - 1;
@@ -108,21 +110,21 @@ public abstract class FilledMapMixin {
                                                         mutable2.setY(ab--);
                                                         blockState2 = worldChunk.getBlockState(mutable2);
                                                         ++w;
-                                                    } while(ab > world.getBottomY() && !blockState2.getFluidState().isEmpty());
+                                                    } while (ab > world.getBottomY() && !blockState2.getFluidState().isEmpty());
 
                                                     blockState = this.getFluidStateIfVisible(world, blockState, mutable);
                                                 }
                                             }
 
                                             state.removeBanner(world, chunkPos.getStartX() + y + u, chunkPos.getStartZ() + z + v);
-                                            e += (double)aa / (double)(i * i);
+                                            e += (double) aa / (double) (i * i);
                                             multiset.add((aa <= world.getBottomY() + 1 && world.getRegistryKey().equals(AetherDimension.AETHER_WORLD_KEY)) ? AETHER_BACKGROUND : blockState.getMapColor(world, mutable));
                                         }
                                     }
                                 }
 
                                 w /= i * i;
-                                double f = (e - d) * 4.0D / (double)(i + 4) + ((double)(o + p & 1) - 0.5D) * 0.4D;
+                                double f = (e - d) * 4.0D / (double) (i + 4) + ((double) (o + p & 1) - 0.5D) * 0.4D;
                                 int ac = 1;
                                 if (f > 0.6D) {
                                     ac = 2;
@@ -132,9 +134,9 @@ public abstract class FilledMapMixin {
                                     ac = 0;
                                 }
 
-                                MapColor mapColor = (MapColor) Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MapColor.CLEAR);
+                                MapColor mapColor = Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MapColor.CLEAR);
                                 if (mapColor == MapColor.WATER_BLUE) {
-                                    f = (double)w * 0.1D + (double)(o + p & 1) * 0.2D;
+                                    f = (double) w * 0.1D + (double) (o + p & 1) * 0.2D;
                                     ac = 1;
                                     if (f < 0.5D) {
                                         ac = 2;
@@ -147,7 +149,7 @@ public abstract class FilledMapMixin {
 
                                 d = e;
                                 if (p >= 0 && q * q + r * r < n * n && (!bl2 || (o + p & 1) != 0)) {
-                                    bl |= state.putColor(o, p, (byte)(mapColor.id * 4 + ac));
+                                    bl |= state.putColor(o, p, (byte) (mapColor.id * 4 + ac));
                                 }
                             }
                         }

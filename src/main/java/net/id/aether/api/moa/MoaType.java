@@ -5,8 +5,8 @@ import net.minecraft.util.Identifier;
 
 public class MoaType {
 
-    private final MoaProperties properties;
     public final int hexColor;
+    private final MoaProperties properties;
     private Identifier registryName;
     private ItemGroup group;
 

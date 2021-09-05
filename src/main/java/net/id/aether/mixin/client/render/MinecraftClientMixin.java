@@ -16,7 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
 
-    @Shadow @Final private BlockColors blockColors;
+    @Shadow
+    @Final
+    private BlockColors blockColors;
 
     @Inject(method = "<init>*", at = @At("TAIL"))
     private void registerDynamicColorProvs(RunArgs args, CallbackInfo ci) {

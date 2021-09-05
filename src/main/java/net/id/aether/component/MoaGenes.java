@@ -27,7 +27,40 @@ public class MoaGenes implements AutoSyncedComponent {
     private UUID owner;
     private float hunger = 100F;
 
-    public MoaGenes() {}
+    public MoaGenes() {
+    }
+
+    public static ItemStack getEggForCommand(MoaAPI.Race race, World world, boolean baby) {
+        ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
+        NbtCompound nbt = stack.getOrCreateSubNbt("genes");
+        Random random = world.getRandom();
+        MoaGenes genes = new MoaGenes();
+
+        for (MoaAttributes attribute : MoaAttributes.values()) {
+            genes.attributeMap.addTo(attribute, race.statWeighting().configure(attribute, race, random));
+        }
+        genes.race = race;
+        genes.affinity = race.defaultAffinity();
+        genes.initialized = true;
+
+        genes.writeToNbt(nbt);
+        nbt.putBoolean("baby", baby);
+        return stack;
+    }
+
+    public static MoaEntity getMoaFromEgg(World world, ItemStack stack) {
+        MoaEntity moa = AetherEntityTypes.MOA.create(world);
+        MoaGenes genes = moa.getGenes();
+        if (stack.isOf(AetherItems.MOA_EGG)) {
+            genes.readFromNbt(stack.getOrCreateSubNbt("genes"));
+        }
+        moa.setBreedingAge(-43200);
+        return moa;
+    }
+
+    public static MoaGenes get(@NotNull MoaEntity moa) {
+        return AetherComponents.MOA_GENETICS_KEY.get(moa);
+    }
 
     public void initMoa(@NotNull MoaEntity moa) {
         World world = moa.world;
@@ -53,7 +86,7 @@ public class MoaGenes implements AutoSyncedComponent {
         for (MoaAttributes attribute : MoaAttributes.values()) {
             boolean increase = random.nextFloat() <= increaseChance;
             genes.attributeMap.addTo(attribute, attribute.fromBreeding(this, otherParent, increase));
-            if(increase) {
+            if (increase) {
                 increaseChance /= 2;
             }
         }
@@ -65,34 +98,6 @@ public class MoaGenes implements AutoSyncedComponent {
         genes.writeToNbt(nbt);
         nbt.putBoolean("baby", true);
         return stack;
-    }
-
-    public static ItemStack getEggForCommand(MoaAPI.Race race, World world, boolean baby) {
-        ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
-        NbtCompound nbt = stack.getOrCreateSubNbt("genes");
-        Random random = world.getRandom();
-        MoaGenes genes = new MoaGenes();
-
-        for (MoaAttributes attribute : MoaAttributes.values()) {
-            genes.attributeMap.addTo(attribute, race.statWeighting().configure(attribute, race, random));
-        }
-        genes.race = race;
-        genes.affinity = race.defaultAffinity();
-        genes.initialized = true;
-
-        genes.writeToNbt(nbt);
-        nbt.putBoolean("baby", baby);
-        return stack;
-    }
-
-    public static MoaEntity getMoaFromEgg(World world, ItemStack stack) {
-        MoaEntity moa = AetherEntityTypes.MOA.create(world);
-        MoaGenes genes = moa.getGenes();
-        if(stack.isOf(AetherItems.MOA_EGG)) {
-            genes.readFromNbt(stack.getOrCreateSubNbt("genes"));
-        }
-        moa.setBreedingAge(-43200);
-        return moa;
     }
 
     public float getAttribute(MoaAttributes attribute) {
@@ -139,19 +144,15 @@ public class MoaGenes implements AutoSyncedComponent {
         return owner;
     }
 
-    public static MoaGenes get(@NotNull MoaEntity moa) {
-        return AetherComponents.MOA_GENETICS_KEY.get(moa);
-    }
-
     @Override
     public void readFromNbt(NbtCompound tag) {
         initialized = tag.getBoolean("initialized");
-        if(initialized) {
+        if (initialized) {
             race = MoaAPI.getRace(Identifier.tryParse(tag.getString("raceId")));
             affinity = MoaAttributes.valueOf(tag.getString("affinity"));
             legendary = tag.getBoolean("legendary");
             hunger = tag.getFloat("hunger");
-            if(tag.getBoolean("tamed")) {
+            if (tag.getBoolean("tamed")) {
                 owner = tag.getUuid("owner");
             }
             Arrays.stream(MoaAttributes.values()).forEach(attribute -> attributeMap.put(attribute, tag.getFloat(attribute.name())));
@@ -161,13 +162,13 @@ public class MoaGenes implements AutoSyncedComponent {
     @Override
     public void writeToNbt(NbtCompound tag) {
         tag.putBoolean("initialized", initialized);
-        if(initialized) {
+        if (initialized) {
             tag.putString("raceId", race.id().toString());
             tag.putString("affinity", affinity.name());
             tag.putBoolean("legendary", legendary);
             tag.putFloat("hunger", hunger);
             tag.putBoolean("tamed", isTamed());
-            if(isTamed()) {
+            if (isTamed()) {
                 tag.putUuid("owner", owner);
             }
             Arrays.stream(MoaAttributes.values()).forEach(attribute -> tag.putFloat(attribute.name(), attributeMap.getFloat(attribute)));

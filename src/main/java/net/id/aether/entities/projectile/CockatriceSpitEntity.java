@@ -32,9 +32,12 @@ public class CockatriceSpitEntity extends LlamaSpitEntity {
             boolean successfulHit = !hit.getEntity().isInvulnerableTo(DamageSource.mobProjectile(this, owner).setProjectile());
             if (successfulHit && hit.getEntity() instanceof LivingEntity target) {
                 int seconds = switch (this.world.getDifficulty()) {
-                    default: yield 0;
-                    case NORMAL: yield 7;
-                    case HARD: yield 15;
+                    default:
+                        yield 0;
+                    case NORMAL:
+                        yield 7;
+                    case HARD:
+                        yield 15;
                 };
 
                 target.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, seconds * 20), owner);

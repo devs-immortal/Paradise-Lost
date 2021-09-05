@@ -50,11 +50,11 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
                                 reader.getBlockState(pos).isOf(AetherBlocks.AETHER_DIRT))
         );
         if (doesProtrude) {
-            for(int x = pos.getX() - 4; x < pos.getX() + 5; x++) {
-                for(int z = pos.getZ() - 4; z < pos.getZ() + 5; z++) {
+            for (int x = pos.getX() - 4; x < pos.getX() + 5; x++) {
+                for (int z = pos.getZ() - 4; z < pos.getZ() + 5; z++) {
                     BlockPos newPos = new BlockPos(x, pos.getY(), z);
 
-                    if((x - pos.getX()) * (x - pos.getX()) + (z - pos.getZ()) * (z - pos.getZ()) < 12) {
+                    if ((x - pos.getX()) * (x - pos.getX()) + (z - pos.getZ()) * (z - pos.getZ()) < 12) {
                         reader.setBlockState(newPos, state.with(AetherBlockProperties.DOUBLE_DROPS, true), 0);
                     }
                 }
@@ -90,7 +90,7 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
 
         Collection<BlockPos> centers = new HashSet<>();
 
-        Direction[] directions = new Direction[] {Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
+        Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 
         Collection<BlockPos> visited = new HashSet<>();
         Collection<BlockPos> nextStops = new HashSet<>();
@@ -129,7 +129,7 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
         int radius;
         if (centers.size() > 10) {
             for (BlockPos center : centers) {
-                radius = context.getRandom().nextInt(2)+4;
+                radius = context.getRandom().nextInt(2) + 4;
 
                 for (int x = center.getX() - radius; x < center.getX() + radius; x++) {
                     for (int z = center.getZ() - radius; z < center.getZ() + radius; z++) {
@@ -137,7 +137,7 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
 
                         if (region.isChunkLoaded(mut.getX() >> 4, mut.getZ() >> 4)) {
                             if (context.getWorld().getBlockState(mut).isAir() && mut.isWithinDistance(center, radius)) {
-                                positions.add(new int[] {mut.getX(), mut.getY(), mut.getZ()});
+                                positions.add(new int[]{mut.getX(), mut.getY(), mut.getZ()});
                             }
                         } else {
                             return false;

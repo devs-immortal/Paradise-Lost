@@ -33,7 +33,7 @@ import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import java.util.OptionalInt;
 
 @SuppressWarnings("unchecked")
-public class AetherConfiguredFeatures extends ConfiguredFeatures{
+public class AetherConfiguredFeatures extends ConfiguredFeatures {
 
     public static Feature<SingleStateFeatureConfig> BOULDER;
 
@@ -105,28 +105,24 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures{
         public static final TreeFeatureConfig FANCY_BOREAL_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.WISTERIA_LOG.getDefaultState()), new WisteriaTrunkPlacer(11, 6, 3), new SimpleBlockStateProvider(AetherBlocks.BOREAL_WISTERIA_LEAVES.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.BOREAL_WISTERIA_SAPLING.getDefaultState()), new WisteriaFoliagePlacer(UniformIntProvider.create(4, 9), UniformIntProvider.create(0, 1)), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
         public static final TreeFeatureConfig GOLDEN_OAK_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.GOLDEN_OAK_LOG.getDefaultState()), new LargeOakTrunkPlacer(4, 8, 0), new SimpleBlockStateProvider(AetherBlocks.GOLDEN_OAK_LEAVES.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.GOLDEN_OAK_SAPLING.getDefaultState()), new BlobFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(3), 3), new TwoLayersFeatureSize(3, 0, 3, OptionalInt.of(2)))).ignoreVines().build();
         public static final TreeFeatureConfig FANCY_SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LOG.getDefaultState()), new LargeOakTrunkPlacer(4, 11, 0), new SimpleBlockStateProvider(AetherBlocks.SKYROOT_LEAVES.getDefaultState()), new SimpleBlockStateProvider(AetherBlocks.SKYROOT_SAPLING.getDefaultState()), new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().build();
-
-        public static final RandomFeatureConfig SCATTERED_TREES_CONFIG = new RandomFeatureConfig(
-                ImmutableList.of(Feature.TREE.configure(FANCY_SKYROOT_CONFIG).withChance(0.05F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.002F)),
-                Feature.TREE.configure(Configs.SKYROOT_CONFIG)
-        );
-
-        public static final RandomFeatureConfig THICKET_TREES_CONFIG = new RandomFeatureConfig(
-                ImmutableList.of(Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(GOLDEN_OAK_CONFIG).withChance(0.0025F), Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.1F)),
-                Feature.TREE.configure(Configs.FANCY_SKYROOT_CONFIG)
-        );
-
         public static final RandomFeatureConfig RAINBOW_FOREST_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.33F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FANCY_LAVENDER_WISTERIA_CONFIG).withChance(0.025F), Feature.TREE.configure(FANCY_ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FROST_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.2F), Feature.TREE.configure(ORANGE_TREE_WILD_CONFIG).withChance(0.0125F)),
                 Feature.TREE.configure(Configs.ROSE_WISTERIA_CONFIG)
         );
-
         public static final RandomFeatureConfig SPARSE_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
                         Feature.TREE.configure(FANCY_SKYROOT_CONFIG).withChance(0.1F),
                         Feature.TREE.configure(ORANGE_TREE_WILD_CONFIG).withChance(0.02F)
                 ),
                 Feature.TREE.configure(Configs.SKYROOT_CONFIG)
+        );
+        public static final RandomFeatureConfig SCATTERED_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(Feature.TREE.configure(FANCY_SKYROOT_CONFIG).withChance(0.05F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.002F)),
+                Feature.TREE.configure(Configs.SKYROOT_CONFIG)
+        );
+        public static final RandomFeatureConfig THICKET_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(GOLDEN_OAK_CONFIG).withChance(0.0025F), Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.1F)),
+                Feature.TREE.configure(Configs.FANCY_SKYROOT_CONFIG)
         );
     }
 }

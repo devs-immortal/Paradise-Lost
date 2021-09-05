@@ -58,7 +58,8 @@ public class FloatingBlockEntity extends Entity {
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityType, World world) {
         super(entityType, world);
-        this.setOnEndFloating((impact, landed) -> {});
+        this.setOnEndFloating((impact, landed) -> {
+        });
         this.floatTime = 0;
         this.setDropState(() -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this));
     }
@@ -80,8 +81,16 @@ public class FloatingBlockEntity extends Entity {
         this.partOfStructure = partOfStructure;
     }
 
+    public static boolean canMakeBlock(boolean shouldDrop, BlockState below, BlockState above) {
+        if (shouldDrop) {
+            return FallingBlock.canFallThrough(below);
+        } else {
+            return FallingBlock.canFallThrough(above);
+        }
+    }
+
     @Override
-    protected Box calculateBoundingBox(){
+    protected Box calculateBoundingBox() {
         if (this.dataTracker == null || this.floatTile == null) {
             return super.calculateBoundingBox();
         }
@@ -115,7 +124,7 @@ public class FloatingBlockEntity extends Entity {
         this.setPosition(getX(), getY(), getZ());
     }
 
-    public void markPartOfStructure(){
+    public void markPartOfStructure() {
         partOfStructure = true;
     }
 
@@ -140,7 +149,8 @@ public class FloatingBlockEntity extends Entity {
     }
 
     @Override
-    public void tick() {}
+    public void tick() {
+    }
 
     @SuppressWarnings("deprecation")
     public void postTickEntities() {
@@ -179,7 +189,7 @@ public class FloatingBlockEntity extends Entity {
 
             // Take flight, my child!
             if (!FallingBlock.canFallThrough(this.floatTile)) {
-                List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0,1 + -2 * this.getVelocity().getY(),0)));
+                List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0)));
                 for (Entity entity : otherEntities) {
                     if (!(entity instanceof FloatingBlockEntity) && !entity.noClip && this.collides()) {
                         entity.fallDistance = 0F;
@@ -246,8 +256,7 @@ public class FloatingBlockEntity extends Entity {
                     BlockState blockstate = AnvilBlock.getLandingState(this.floatTile);
                     if (blockstate == null) {
                         this.dontSetBlock = true;
-                    }
-                    else this.floatTile = blockstate;
+                    } else this.floatTile = blockstate;
                 }
             }
         }
@@ -317,12 +326,12 @@ public class FloatingBlockEntity extends Entity {
         return dropState;
     }
 
-    public boolean shouldBeginDropping() {
-        return getDropState().get();
-    }
-
     public void setDropState(Supplier<Boolean> supplier) {
         dropState = supplier;
+    }
+
+    public boolean shouldBeginDropping() {
+        return getDropState().get();
     }
 
     public boolean isDropping() {
@@ -333,7 +342,7 @@ public class FloatingBlockEntity extends Entity {
         this.dropping = dropping;
     }
 
-    public boolean isFastFloater(){
+    public boolean isFastFloater() {
         return AetherBlockTags.FAST_FLOATERS.contains(this.floatTile.getBlock()) && !this.partOfStructure;
     }
 
@@ -357,24 +366,20 @@ public class FloatingBlockEntity extends Entity {
         double d = packet.getX();
         double e = packet.getY();
         double f = packet.getZ();
-        this.setPosition(d, e + (double)((1.0F - this.getHeight()) / 2.0F), f);
+        this.setPosition(d, e + (double) ((1.0F - this.getHeight()) / 2.0F), f);
         this.setOrigin(this.getBlockPos());
     }
 
-    public interface PostTickEntity {
-        void postTick();
-    }
-
-    public BiConsumer<Double, Boolean> getOnEndFloating(){
+    public BiConsumer<Double, Boolean> getOnEndFloating() {
         return this.onEndFloating;
     }
 
-    public void setOnEndFloating(BiConsumer<Double, Boolean> consumer){
+    public void setOnEndFloating(BiConsumer<Double, Boolean> consumer) {
         this.onEndFloating = consumer;
     }
 
     public void land(double impact) {
-        if (this.isRemoved()){
+        if (this.isRemoved()) {
             return;
         }
         BlockPos blockPos = this.getBlockPos();
@@ -419,19 +424,15 @@ public class FloatingBlockEntity extends Entity {
         }
     }
 
-    public void crashLand(double impact){
+    public void crashLand(double impact) {
         this.discard();
         if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
             Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
         }
         this.getOnEndFloating().accept(impact, false);
     }
-    
-    public static boolean canMakeBlock(boolean shouldDrop, BlockState below, BlockState above){
-        if(shouldDrop){
-            return FallingBlock.canFallThrough(below);
-        } else {
-            return FallingBlock.canFallThrough(above);
-        }
+
+    public interface PostTickEntity {
+        void postTick();
     }
 }

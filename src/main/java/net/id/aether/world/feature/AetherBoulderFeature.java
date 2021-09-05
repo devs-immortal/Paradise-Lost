@@ -24,14 +24,14 @@ public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
         blockPos = structureWorldAccess.getTopPosition(Heightmap.Type.WORLD_SURFACE_WG, blockPos);
         Random random = context.getRandom();
 
-        if(random.nextFloat() >= 0.02F) {
+        if (random.nextFloat() >= 0.02F) {
             return false;
         }
 
         blockPos = blockPos.add(random.nextInt(16) - 8, 0, random.nextInt(16) - 8);
 
         SingleStateFeatureConfig singleStateFeatureConfig;
-        for(singleStateFeatureConfig = context.getConfig(); blockPos.getY() > structureWorldAccess.getBottomY() + 3; blockPos = blockPos.down()) {
+        for (singleStateFeatureConfig = context.getConfig(); blockPos.getY() > structureWorldAccess.getBottomY() + 3; blockPos = blockPos.down()) {
             if (!structureWorldAccess.isAir(blockPos.down())) {
                 BlockState blockState = structureWorldAccess.getBlockState(blockPos.down());
                 if ((isSoil(blockState) || isStone(blockState)) && random.nextBoolean()) {
@@ -43,16 +43,16 @@ public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
         if (blockPos.getY() <= structureWorldAccess.getBottomY() + 3) {
             return false;
         } else {
-            for(int i = 0; i < 3; ++i) {
+            for (int i = 0; i < 3; ++i) {
                 int j = random.nextInt(5);
                 int k = random.nextInt(5);
                 int l = random.nextInt(5);
-                float f = (float)(j + k + l) * 0.333F + 0.5F;
+                float f = (float) (j + k + l) * 0.333F + 0.5F;
                 Iterator<BlockPos> var11 = BlockPos.iterate(blockPos.add(-j, -k, -l), blockPos.add(j, k, l)).iterator();
 
-                while(var11.hasNext()) {
-                    BlockPos blockPos2 = (BlockPos)var11.next();
-                    if (blockPos2.getSquaredDistance(blockPos) <= (double)(f * f)) {
+                while (var11.hasNext()) {
+                    BlockPos blockPos2 = var11.next();
+                    if (blockPos2.getSquaredDistance(blockPos) <= (double) (f * f)) {
                         structureWorldAccess.setBlockState(blockPos2, singleStateFeatureConfig.state, 4);
                     }
                 }

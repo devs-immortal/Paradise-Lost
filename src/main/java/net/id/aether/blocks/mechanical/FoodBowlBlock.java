@@ -35,7 +35,7 @@ public class FoodBowlBlock extends AetherBlockWithEntity {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if(!player.isSneaking() && world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
+        if (!player.isSneaking() && world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
             return ActionResult.success(foodBowl.handleUse(player, hand, player.getStackInHand(hand)) && world.isClient());
         }
         return super.onUse(state, world, pos, player, hand, hit);
@@ -48,7 +48,7 @@ public class FoodBowlBlock extends AetherBlockWithEntity {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return switch(state.get(AXIS)) {
+        return switch (state.get(AXIS)) {
             case X -> shapeX;
             case Z -> shapeZ;
             default -> throw new IllegalStateException("Unexpected value: " + state.get(AXIS));

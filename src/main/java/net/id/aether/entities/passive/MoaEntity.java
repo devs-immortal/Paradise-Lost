@@ -85,7 +85,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
-        if(!genes.isInitialized()) {
+        if (!genes.isInitialized()) {
             genes.initMoa(this);
             setHealth(genes.getAttribute(MoaAttributes.MAX_HEALTH));
         }
@@ -104,15 +104,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     public float getWingRoll() {
-        if(!isGliding()) {
+        if (!isGliding()) {
             float baseWingRoll = 1.39626F;
 
             float lDif = -baseWingRoll - curWingRoll;
-            if(Math.abs(lDif) > 0.005F) {
+            if (Math.abs(lDif) > 0.005F) {
                 curWingRoll += lDif / 6;
             }
-        }
-        else {
+        } else {
             curWingRoll = (MathHelper.sin(age / 1.75F) * 0.725F + 0.1F);
         }
         return curWingRoll;
@@ -122,7 +121,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         float baseWingYaw = isGliding() ? 0.95626F : 0.174533F;
 
         float lDif = -baseWingYaw - curWingYaw;
-        if(Math.abs(lDif) > 0.005F) {
+        if (Math.abs(lDif) > 0.005F) {
             curWingYaw += lDif / 12.75;
         }
         return curWingYaw;
@@ -132,7 +131,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         float baseLegPitch = isGliding() ? -1.5708F : 0.0174533F;
 
         float lDif = -baseLegPitch - curLegPitch;
-        if(Math.abs(lDif) > 0.005F) {
+        if (Math.abs(lDif) > 0.005F) {
             curLegPitch += lDif / 6;
         }
         return curLegPitch;
@@ -153,16 +152,15 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         isInAir = !onGround;
 
-        if(isInAir)
+        if (isInAir)
             dataTracker.set(AIR_TICKS, dataTracker.get(AIR_TICKS) + 1);
         else
             dataTracker.set(AIR_TICKS, 0);
 
         if (age % 15 == 0) {
-            if(isGliding()) {
+            if (isGliding()) {
                 this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_PHANTOM_FLAP, SoundCategory.NEUTRAL, 4.5F, MathHelper.clamp(this.random.nextFloat(), 0.85f, 1.2f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.35f));
-            }
-            else if(random.nextFloat() < 0.057334F) {
+            } else if (random.nextFloat() < 0.057334F) {
                 this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_PARROT_AMBIENT, SoundCategory.NEUTRAL, 1.5F + random.nextFloat() * 2, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.25f));
             }
         }
@@ -171,33 +169,32 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         this.fall();
 
-        if(hasPassengers()) {
+        if (hasPassengers()) {
             streamPassengersAndSelf().forEach(entity -> entity.fallDistance = 0);
         }
 
         MoaGenes genes = getGenes();
         float hunger = genes.getHunger();
-        if(genes.isTamed()) {
-            if(random.nextBoolean()) {
+        if (genes.isTamed()) {
+            if (random.nextBoolean()) {
                 genes.setHunger(hunger - (1F / 12000F));
             }
         }
-        if(getHealth() < getMaxHealth() && hunger > 65F && world.getTime() % 20 == 0 && random.nextBoolean()) {
+        if (getHealth() < getMaxHealth() && hunger > 65F && world.getTime() % 20 == 0 && random.nextBoolean()) {
             heal(1);
             genes.setHunger(hunger - 0.5F);
         }
-        if(hunger < 20F && world.getTime() % 10 + random.nextInt(4) == 0) {
+        if (hunger < 20F && world.getTime() % 10 + random.nextInt(4) == 0) {
             produceParticles(ParticleTypes.ANGRY_VILLAGER);
-            if(hunger < 10F) {
+            if (hunger < 10F) {
                 removeAllPassengers();
             }
         }
-        if(getGenes().getRace().legendary() && getVelocity().lengthSquared() <= 0.02 && random.nextFloat() < 0.1F && random.nextBoolean()) {
+        if (getGenes().getRace().legendary() && getVelocity().lengthSquared() <= 0.02 && random.nextFloat() < 0.1F && random.nextBoolean()) {
             produceParticles((ParticleEffect) getGenes().getRace().particles(), 5, 0.25F);
         }
 
     }
-
 
 
     @Override
@@ -227,7 +224,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void travel(Vec3d movementInput) {
         if (this.isAlive()) {
             if (this.hasPassengers() && this.canBeControlledByRider() && this.isSaddled()) {
-                LivingEntity livingEntity = (LivingEntity)this.getPrimaryPassenger();
+                LivingEntity livingEntity = (LivingEntity) this.getPrimaryPassenger();
                 this.prevYaw = this.getYaw();
                 this.setYaw(livingEntity.getYaw());
                 this.setPitch(livingEntity.getPitch() * 0.5F);
@@ -240,12 +237,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     g *= 0.25F;
                 }
 
-                if(isLogicalSideForUpdatingMovement()) {
+                if (isLogicalSideForUpdatingMovement()) {
                     if (this.jumpStrength > 0.0F && !this.isInAir) {
-                        double d = 0.1F * (double)this.jumpStrength * (double)this.getJumpVelocityMultiplier();
+                        double d = 0.1F * (double) this.jumpStrength * (double) this.getJumpVelocityMultiplier();
                         double h;
                         if (this.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
-                            h = d + (double)((float)(this.getStatusEffect(StatusEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1F);
+                            h = d + (double) ((float) (this.getStatusEffect(StatusEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1F);
                         } else {
                             h = d;
                         }
@@ -264,7 +261,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     }
                 }
 
-                if(jumpStrength <= 0.01F && onGround)
+                if (jumpStrength <= 0.01F && onGround)
                     isInAir = false;
 
                 this.flyingSpeed = getFlyingSpeed();
@@ -280,7 +277,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 this.flyingSpeed = getFlyingSpeed();
                 super.travel(movementInput);
             }
-            if(getGenes().getRace().legendary() && getVelocity().lengthSquared() > 0.02 && random.nextFloat() < 0.55F) {
+            if (getGenes().getRace().legendary() && getVelocity().lengthSquared() > 0.02 && random.nextFloat() < 0.55F) {
                 produceParticles((ParticleEffect) getGenes().getRace().particles(), 3, 0.25F);
             }
         }
@@ -302,12 +299,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if(!world.isClient()) {
+        if (!world.isClient()) {
             ItemStack heldStack = player.getStackInHand(hand);
             Item heldItem = heldStack.getItem();
-            if(heldItem.isFood() && heldItem.getFoodComponent().isMeat()) {
-                if(!getGenes().isTamed()) {
-                    if(random.nextFloat() < 0.15F) {
+            if (heldItem.isFood() && heldItem.getFoodComponent().isMeat()) {
+                if (!getGenes().isTamed()) {
+                    if (random.nextFloat() < 0.15F) {
                         getGenes().tame(player.getUuid());
                         produceParticles(ParticleTypes.HEART);
                         playSound(SoundEvents.ENTITY_PARROT_AMBIENT, 2F, 2F);
@@ -315,12 +312,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     heldStack.decrement(1);
                     playSound(SoundEvents.ENTITY_PARROT_EAT, 1F, 0.8F);
                     produceParticles(ParticleTypes.ELECTRIC_SPARK);
-                }
-                else {
+                } else {
                     float hungerRestored = heldItem.getFoodComponent().getHunger() * 4;
                     float satiation = getGenes().getHunger();
                     float hunger = 100 - satiation;
-                    if(hunger > 1) {
+                    if (hunger > 1) {
                         int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), heldStack.getCount());
                         spawnConsumptionEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
                         heldStack.decrement(consumption);
@@ -355,7 +351,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     public void breed(ServerWorld world, AnimalEntity other) {
         MoaGenes genes = getGenes();
-        if(genes.getHunger() > 80F && genes.isTamed() && other instanceof MoaEntity moa && moa.getGenes().isTamed()) {
+        if (genes.getHunger() > 80F && genes.isTamed() && other instanceof MoaEntity moa && moa.getGenes().isTamed()) {
             ItemStack egg = genes.getEggForBreeding(((MoaEntity) other).genes, world, getBlockPos());
             playSound(SoundEvents.ENTITY_TURTLE_LAY_EGG, 0.8F, 1.5F);
 
@@ -364,7 +360,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             other.setBreedingAge(6000);
             this.resetLoveTicks();
             other.resetLoveTicks();
-            world.sendEntityStatus(this, (byte)18);
+            world.sendEntityStatus(this, (byte) 18);
             if (world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
                 world.spawnEntity(new ExperienceOrbEntity(world, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(16) + 4));
             }
@@ -378,7 +374,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     public void fall() {
         if (this.getVelocity().y < 0.0D && !this.isSneaking())
-            this.setVelocity(this.getVelocity().multiply(1.0D,  isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) * 1.4 : 1D, 1.0D));
+            this.setVelocity(this.getVelocity().multiply(1.0D, isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) * 1.4 : 1D, 1.0D));
     }
 
     @Override
@@ -404,7 +400,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     protected void dropLoot(DamageSource source, boolean causedByPlayer) {
         dropStack(new ItemStack(AetherItems.MOA_MEAT, (int) Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER))));
-        if(random.nextBoolean()) {
+        if (random.nextBoolean()) {
             dropStack(new ItemStack(Items.FEATHER, (int) (Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER)) / 2)));
         }
     }
@@ -429,7 +425,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     public MoaGenes getGenes() {
-        if(genes == null) {
+        if (genes == null) {
             genes = MoaGenes.get(this);
         }
         return genes;
@@ -481,7 +477,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
 
         protected boolean isTargetPos(WorldView world, BlockPos pos) {
-            if(world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
+            if (world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
                 ItemStack foodStack = foodBowl.getStack(0);
                 Item foodItem = foodStack.getItem();
                 return foodItem.isFood() && foodItem.getFoodComponent().isMeat();
@@ -503,14 +499,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
 
         protected void tryEat() {
-            if(world.getBlockEntity(targetPos) instanceof FoodBowlBlockEntity foodBowl) {
+            if (world.getBlockEntity(targetPos) instanceof FoodBowlBlockEntity foodBowl) {
                 ItemStack foodStack = foodBowl.getStack(0);
                 Item foodItem = foodStack.getItem();
-                if(foodItem.isFood() && foodItem.getFoodComponent().isMeat()) {
+                if (foodItem.isFood() && foodItem.getFoodComponent().isMeat()) {
                     float hungerRestored = foodItem.getFoodComponent().getHunger() * 4;
                     float satiation = getGenes().getHunger();
                     float hunger = 100 - satiation;
-                    if(hunger > 1) {
+                    if (hunger > 1) {
                         int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), foodStack.getCount());
                         spawnConsumptionEffects(foodStack, 10 + random.nextInt(consumption * 2 + 1));
                         foodStack.decrement(consumption);

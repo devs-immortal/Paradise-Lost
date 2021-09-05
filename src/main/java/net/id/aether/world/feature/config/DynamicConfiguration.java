@@ -18,7 +18,8 @@ public class DynamicConfiguration implements FeatureConfig {
         GeneratorType genType = GeneratorType.NORMAL;
         try {
             genType = GeneratorType.valueOf(genString);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         this.genType = genType;
     }
 

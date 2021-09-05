@@ -16,7 +16,7 @@ public class LightningSwordItem extends SwordItem {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity victim, LivingEntity attacker) {
         LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, attacker.world);
-        if (attacker instanceof ServerPlayerEntity player){
+        if (attacker instanceof ServerPlayerEntity player) {
             lightning.setChanneler(player);
         }
         return super.postHit(stack, victim, attacker);

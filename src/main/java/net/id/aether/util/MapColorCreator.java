@@ -9,6 +9,12 @@ public class MapColorCreator {
 
     private static final Constructor<MapColor> CONSTRUCTOR;
 
+    static {
+        //noinspection unchecked
+        CONSTRUCTOR = (Constructor<MapColor>) MapColor.class.getDeclaredConstructors()[0];
+        CONSTRUCTOR.setAccessible(true);
+    }
+
     public static MapColor createMapColor(int id, int color) {
         try {
             return CONSTRUCTOR.newInstance(id, color);
@@ -16,11 +22,5 @@ public class MapColorCreator {
             e.printStackTrace();
         }
         return null;
-    }
-
-    static {
-        //noinspection unchecked
-        CONSTRUCTOR = (Constructor<MapColor>) MapColor.class.getDeclaredConstructors()[0];
-        CONSTRUCTOR.setAccessible(true);
     }
 }

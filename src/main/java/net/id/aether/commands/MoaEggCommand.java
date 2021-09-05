@@ -40,14 +40,13 @@ public class MoaEggCommand {
     private static int execute(ServerCommandSource source, Collection<ServerPlayerEntity> targets, Identifier raceId, boolean baby) {
         var race = MoaAPI.getRace(raceId);
 
-        if(race == MoaAPI.FALLBACK_MOA) {
+        if (race == MoaAPI.FALLBACK_MOA) {
             source.sendError(new TranslatableText("commands.aether.moaegg.failure", raceId.toString()));
-        }
-        else {
+        } else {
             ItemStack template = MoaGenes.getEggForCommand(race, source.getWorld(), baby);
             targets.forEach(player -> {
                 ItemStack egg = template.copy();
-                if(!player.getInventory().insertStack(template)) {
+                if (!player.getInventory().insertStack(template)) {
                     ItemScatterer.spawn(source.getWorld(), player.getX(), player.getY(), player.getZ(), egg);
                 }
                 source.sendFeedback(new TranslatableText("commands.aether.moaegg.success", egg.toHoverableText(), targets.iterator().next().getDisplayName()), true);

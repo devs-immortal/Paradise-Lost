@@ -37,7 +37,7 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
         if (state.get(AGE) > 0 && entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
             entity.slowMovement(state, new Vec3d(0.900000011920929D, 0.75D, 0.900000011920929D));
         }
-        if (entity instanceof SwetEntity){
+        if (entity instanceof SwetEntity) {
             if (state.get(AGE) == 3) {
                 if (entity instanceof TransformableSwetEntity swet && swet.suggestTypeChange(state)) {
                     world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
@@ -63,7 +63,7 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
         }
     }
 
-    private void tryPickBerries(World world, BlockPos pos, BlockState state){
+    private void tryPickBerries(World world, BlockPos pos, BlockState state) {
         boolean mature = state.get(AGE) == 3;
         BlockState floor = world.getBlockState(pos.down());
         double mod = floor.isOf(AetherBlocks.AETHER_ENCHANTED_GRASS) ? 2 : floor.isOf(AetherBlocks.AETHER_FARMLAND) ? 1.5 : 1;
