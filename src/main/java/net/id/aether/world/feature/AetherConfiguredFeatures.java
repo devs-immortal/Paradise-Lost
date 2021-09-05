@@ -33,7 +33,7 @@ import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import java.util.OptionalInt;
 
 @SuppressWarnings("unchecked")
-public class AetherConfiguredFeatures {
+public class AetherConfiguredFeatures extends ConfiguredFeatures{
 
     public static Feature<SingleStateFeatureConfig> BOULDER;
 
@@ -47,20 +47,20 @@ public class AetherConfiguredFeatures {
 
         BOULDER = Registry.register(Registry.FEATURE, Aether.locate("boulder"), new AetherBoulderFeature(SingleStateFeatureConfig.CODEC));
 
-        AETHER_BUSH = register("aether_bush", Feature.RANDOM_PATCH.configure(Configs.AETHER_BUSH_CONFIG).decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(5))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeatRandomly(4));
+        AETHER_BUSH = register("aether_bush", Feature.RANDOM_PATCH.configure(Configs.AETHER_BUSH_CONFIG).decorate(Decorators.SPREAD_32_ABOVE).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(5))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeatRandomly(4));
         SKYROOT_TREE = register("skyroot_tree", Feature.TREE.configure(Configs.SKYROOT_CONFIG));
-        GOLDEN_OAK_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("golden_oak_tree", Feature.TREE.configure(Configs.GOLDEN_OAK_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        CRYSTAL_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("crystal_tree", Feature.TREE.configure(Configs.CRYSTAL_TREE_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        ORANGE_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("orange_tree", Feature.TREE.configure(Configs.ORANGE_TREE_SAPLING_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        ROSE_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("rose_wisteria_tree", Feature.TREE.configure(Configs.ROSE_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        LAVENDER_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("lavender_wisteria_tree", Feature.TREE.configure(Configs.LAVENDER_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        FROST_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("frost_wisteria_tree", Feature.TREE.configure(Configs.FROST_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        BOREAL_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("boreal_wisteria_tree", Feature.TREE.configure(Configs.BOREAL_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        FANCY_ROSE_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_rose_wisteria_tree", Feature.TREE.configure(Configs.FANCY_ROSE_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        FANCY_LAVENDER_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_lavender_wisteria_tree", Feature.TREE.configure(Configs.FANCY_LAVENDER_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        FANCY_FROST_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_frost_wisteria_tree", Feature.TREE.configure(Configs.FANCY_FROST_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        FANCY_BOREAL_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_boreal_wisteria_tree", Feature.TREE.configure(Configs.FANCY_BOREAL_WISTERIA_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
-        FANCY_SKYROOT_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_skyroot_tree", Feature.TREE.configure(Configs.FANCY_SKYROOT_CONFIG).decorate(ConfiguredFeatures.Decorators.HEIGHTMAP));
+        GOLDEN_OAK_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("golden_oak_tree", Feature.TREE.configure(Configs.GOLDEN_OAK_CONFIG).decorate(Decorators.HEIGHTMAP));
+        CRYSTAL_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("crystal_tree", Feature.TREE.configure(Configs.CRYSTAL_TREE_CONFIG).decorate(Decorators.HEIGHTMAP));
+        ORANGE_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("orange_tree", Feature.TREE.configure(Configs.ORANGE_TREE_SAPLING_CONFIG).decorate(Decorators.HEIGHTMAP));
+        ROSE_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("rose_wisteria_tree", Feature.TREE.configure(Configs.ROSE_WISTERIA_CONFIG).decorate(Decorators.HEIGHTMAP));
+        LAVENDER_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("lavender_wisteria_tree", Feature.TREE.configure(Configs.LAVENDER_WISTERIA_CONFIG).decorate(Decorators.HEIGHTMAP));
+        FROST_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("frost_wisteria_tree", Feature.TREE.configure(Configs.FROST_WISTERIA_CONFIG).decorate(Decorators.HEIGHTMAP));
+        BOREAL_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("boreal_wisteria_tree", Feature.TREE.configure(Configs.BOREAL_WISTERIA_CONFIG).decorate(Decorators.HEIGHTMAP));
+        FANCY_ROSE_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_rose_wisteria_tree", Feature.TREE.configure(Configs.FANCY_ROSE_WISTERIA_CONFIG).decorate(Decorators.HEIGHTMAP));
+        FANCY_LAVENDER_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_lavender_wisteria_tree", Feature.TREE.configure(Configs.FANCY_LAVENDER_WISTERIA_CONFIG).decorate(Decorators.HEIGHTMAP));
+        FANCY_FROST_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_frost_wisteria_tree", Feature.TREE.configure(Configs.FANCY_FROST_WISTERIA_CONFIG).decorate(Decorators.HEIGHTMAP));
+        FANCY_BOREAL_WISTERIA_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_boreal_wisteria_tree", Feature.TREE.configure(Configs.FANCY_BOREAL_WISTERIA_CONFIG).decorate(Decorators.HEIGHTMAP));
+        FANCY_SKYROOT_TREE = (ConfiguredFeature<TreeFeatureConfig, ?>) register("fancy_skyroot_tree", Feature.TREE.configure(Configs.FANCY_SKYROOT_CONFIG).decorate(Decorators.HEIGHTMAP));
         SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Configs.SCATTERED_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(10)))).spreadHorizontally().repeatRandomly(8);
         SHIELD_TREES = register("shield_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(18))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(10)))).repeatRandomly(3);
         SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR.configure(Configs.SPARSE_TREES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(14))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(50)))).repeatRandomly(2);
@@ -68,13 +68,13 @@ public class AetherConfiguredFeatures {
         RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(Configs.RAINBOW_FOREST_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(17)))).spreadHorizontally().repeatRandomly(4);
 
         // Used in json
-        HOLYSTONE_BOULDER = register("holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.COBBLED_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).repeatRandomly(6);
-        MOSSY_HOLYSTONE_BOULDER = register("mossy_holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.MOSSY_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).repeatRandomly(12);
-        GOLDEN_MOSSY_HOLYSTONE_BOULDER = register("golden_mossy_holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.GOLDEN_MOSSY_HOLYSTONE.getDefaultState()))).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).repeatRandomly(1);
+        HOLYSTONE_BOULDER = register("holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.COBBLED_HOLYSTONE.getDefaultState()))).decorate(Decorators.SQUARE_HEIGHTMAP).repeatRandomly(6);
+        MOSSY_HOLYSTONE_BOULDER = register("mossy_holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.MOSSY_HOLYSTONE.getDefaultState()))).decorate(Decorators.SQUARE_HEIGHTMAP).repeatRandomly(12);
+        GOLDEN_MOSSY_HOLYSTONE_BOULDER = register("golden_mossy_holystone_boulder", BOULDER.configure(new SingleStateFeatureConfig(AetherBlocks.GOLDEN_MOSSY_HOLYSTONE.getDefaultState()))).decorate(Decorators.SQUARE_HEIGHTMAP).repeatRandomly(1);
 
-        FALLEN_LEAVES = register("fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
-        ALT_FALLEN_LEAVES = register("alt_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
-        FALLEN_RAINBOW_LEAVES = register("rainbow_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.RAINBOW_LEAVES_CONFIG).decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
+        FALLEN_LEAVES = register("fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(Decorators.SPREAD_32_ABOVE).decorate(Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
+        ALT_FALLEN_LEAVES = register("alt_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(Decorators.SPREAD_32_ABOVE).decorate(Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
+        FALLEN_RAINBOW_LEAVES = register("rainbow_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.RAINBOW_LEAVES_CONFIG).decorate(Decorators.SPREAD_32_ABOVE).decorate(Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
     }
 
     private static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String id, ConfiguredFeature<FC, ?> configuredFeature) {
