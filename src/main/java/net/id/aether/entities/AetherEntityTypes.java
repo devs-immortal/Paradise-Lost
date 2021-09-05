@@ -14,7 +14,6 @@ import net.id.aether.registry.RegistryQueue;
 import net.id.aether.registry.RegistryQueue.Action;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.DefaultAttributeRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.world.Heightmap;

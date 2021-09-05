@@ -9,7 +9,6 @@ import net.id.aether.client.model.armor.PhoenixArmorModel;
 import net.id.aether.client.model.entity.*;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.util.Identifier;
 
 import java.util.Map;

@@ -5,7 +5,6 @@ import net.fabricmc.api.Environment;
 import net.id.aether.client.rendering.block.FluidRenderSetup;
 import net.id.aether.mixin.client.RenderLayersAccessor;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.util.registry.Registry;
 
