@@ -1,5 +1,6 @@
 package net.id.aether.world.feature;
 
+import net.fabricmc.fabric.mixin.structure.StructureFeatureAccessor;
 import net.id.aether.Aether;
 import net.id.aether.world.feature.generator.OrangeRuinGenerator;
 import net.id.aether.world.feature.generator.SkyrootTowerGenerator;
@@ -39,7 +40,7 @@ public class AetherFeatures {
     }
 
     private static <T extends FeatureConfig> void register(String id, StructureFeature<T> structure, GenerationStep.Feature genStep) {
-        StructureFeature.register(Aether.locate(id).toString(), structure, genStep);
+        StructureFeatureAccessor.callRegister(Aether.locate(id).toString(), structure, genStep);
     }
 
     static StructurePieceType register(StructurePieceType pieceType, String id) {
