@@ -1,6 +1,5 @@
 accessWidener	v1	named
 accessible    class     net/minecraft/world/gen/feature/ConfiguredFeatures$Decorators
-accessible    method    net/minecraft/world/gen/feature/ConfiguredFeatures          pool                         ()Lnet/minecraft/util/collection/DataPool$Builder;
 accessible    method    net/minecraft/entity/SpawnRestriction                       register                     (Lnet/minecraft/entity/EntityType;Lnet/minecraft/entity/SpawnRestriction$Location;Lnet/minecraft/world/Heightmap$Type;Lnet/minecraft/entity/SpawnRestriction$SpawnPredicate;)V
 accessible    method    net/minecraft/world/gen/feature/StructureFeature            register                     (Ljava/lang/String;Lnet/minecraft/world/gen/feature/StructureFeature;Lnet/minecraft/world/gen/GenerationStep$Feature;)Lnet/minecraft/world/gen/feature/StructureFeature;
 accessible    method    net/minecraft/entity/projectile/ProjectileEntity            <init>                       (Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V
