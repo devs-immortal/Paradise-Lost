@@ -2,6 +2,7 @@ package net.id.aether.client.rendering.entity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.id.aether.entities.AetherEntityTypes;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.EntityRenderers;
@@ -39,6 +40,6 @@ public class AetherEntityRenderers {
     }
 
     private static <T extends Entity> void register(EntityType<? extends T> clazz, EntityRendererFactory<T> factory) {
-        EntityRenderers.register(clazz, factory);
+        EntityRendererRegistry.register(clazz, factory);
     }
 }

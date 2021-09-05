@@ -21,7 +21,9 @@ import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
 import net.id.aether.mixin.block.BlockEntityTypeAccessor;
 import net.id.aether.mixin.block.BlocksAccessor;
+import net.id.aether.mixin.client.RenderLayersAccessor;
 import net.id.aether.registry.RegistryQueue;
+import net.id.aether.registry.RegistryQueue.Action;
 import net.id.aether.util.AetherSignType;
 import net.id.aether.world.feature.tree.*;
 import net.minecraft.block.AbstractBlock.ContextPredicate;
@@ -30,7 +32,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.Direction;
@@ -50,15 +51,15 @@ public class AetherBlocks {
     private static Settings unbreakable(Settings settings) { return settings.strength(-1f, 3600000f); }
     private static Settings flowerPot() { return copy(POTTED_OAK_SAPLING); }
 
-    private static RegistryQueue.Action<Block> flammable(int spread, int burn) { return (id, block) -> FlammableBlockRegistry.getDefaultInstance().add(block, spread, burn);}
-    private static final RegistryQueue.Action<Block> flammableLog = flammable(5, 5);
-    private static final RegistryQueue.Action<Block> flammablePlanks = flammable(20, 5);
-    private static final RegistryQueue.Action<Block> flammableLeaves = flammable(60, 30);
-    private static final RegistryQueue.Action<Block> flammablePlant = flammable(60, 100);
-    private static final RegistryQueue.Action<Block> translucentRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayers.BLOCKS.put(block, RenderLayer.getTranslucent()));
-    private static final RegistryQueue.Action<Block> cutoutRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayers.BLOCKS.put(block, RenderLayer.getCutout()));
-    private static final RegistryQueue.Action<Block> cutoutMippedRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayers.BLOCKS.put(block, RenderLayer.getCutoutMipped()));
-    private static final RegistryQueue.Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
+    private static Action<Block> flammable(int spread, int burn) { return (id, block) -> FlammableBlockRegistry.getDefaultInstance().add(block, spread, burn);}
+    private static final Action<Block> flammableLog = flammable(5, 5);
+    private static final Action<Block> flammablePlanks = flammable(20, 5);
+    private static final Action<Block> flammableLeaves = flammable(60, 30);
+    private static final Action<Block> flammablePlant = flammable(60, 100);
+    private static final Action<Block> translucentRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayersAccessor.getBLOCKS().put(block, RenderLayer.getTranslucent()));
+    private static final Action<Block> cutoutRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayersAccessor.getBLOCKS().put(block, RenderLayer.getCutout()));
+    private static final Action<Block> cutoutMippedRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayersAccessor.getBLOCKS().put(block, RenderLayer.getCutoutMipped()));
+    private static final Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
     
 
     
@@ -348,7 +349,7 @@ public class AetherBlocks {
 
 
     @SafeVarargs
-    private static <V extends Block> V add(String id, V block, RegistryQueue.Action<? super V>... additionalActions) {
+    private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {
         return RegistryQueue.BLOCK.add(locate(id), block, additionalActions);
     }
 

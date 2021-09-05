@@ -48,6 +48,7 @@
     "client.ItemStackMixin",
     "client.MapRendererMixin",
     "client.WorldRendererMixin",
+    "client.RenderLayersAccessor",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
     "client.render.FluidRendererMixin",

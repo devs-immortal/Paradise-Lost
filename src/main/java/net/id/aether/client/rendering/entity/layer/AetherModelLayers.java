@@ -3,6 +3,7 @@ package net.id.aether.client.rendering.entity.layer;
 import com.google.common.collect.Maps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.mixin.client.rendering.EntityModelLayersAccessor;
 import net.id.aether.Aether;
 import net.id.aether.client.model.armor.PhoenixArmorModel;
 import net.id.aether.client.model.entity.*;
@@ -27,7 +28,7 @@ public class AetherModelLayers {
 
     public static EntityModelLayer register(Identifier id, String layer, TexturedModelData data) {
         EntityModelLayer entityModelLayer = new EntityModelLayer(id, layer);
-        if (!EntityModelLayers.LAYERS.add(entityModelLayer)) {
+        if (!EntityModelLayersAccessor.getLayers().add(entityModelLayer)) {
             throw new IllegalStateException("Duplicate registration for " + entityModelLayer);
         } else {
             ENTRIES.put(entityModelLayer, data);
