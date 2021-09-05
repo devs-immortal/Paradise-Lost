@@ -1,2 +1,2 @@
 accessWidener	v1	named
-accessible    method    net/minecraft/entity/projectile/ProjectileEntity            <init>                       (Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V
+#accessible    method    net/minecraft/entity/projectile/ProjectileEntity            <init>                       (Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V
