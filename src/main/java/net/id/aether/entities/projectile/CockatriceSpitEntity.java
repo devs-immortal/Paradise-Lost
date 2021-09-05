@@ -38,7 +38,7 @@ public class CockatriceSpitEntity extends LlamaSpitEntity {
         super.onEntityHit(hit);
         Entity entity = this.getOwner();
         if (entity instanceof LivingEntity owner) {
-            boolean successfulHit = !this.isInvulnerableTo(DamageSource.mobProjectile(this, owner).setProjectile());
+            boolean successfulHit = !hit.getEntity().isInvulnerableTo(DamageSource.mobProjectile(this, owner).setProjectile());
             if (successfulHit && hit.getEntity() instanceof LivingEntity target) {
                 int seconds = switch (this.world.getDifficulty()) {
                     default: yield 0;
