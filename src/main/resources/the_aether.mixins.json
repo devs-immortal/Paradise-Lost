@@ -25,7 +25,6 @@
     "item.ItemMixin",
     "item.ItemStackMixin",
     "item.MapStateMixin",
-    "item.ShovelItemMixin",
     "item.SwordItemAccessor",
     "item.ToolMaterialsAccessor",
     "server.EntityTrackerEntryMixin",

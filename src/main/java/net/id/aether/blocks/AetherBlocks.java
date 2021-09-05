@@ -2,6 +2,7 @@ package net.id.aether.blocks;
 
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
@@ -70,15 +71,16 @@ public class AetherBlocks {
 
     private static Action<Block> tillable() { return (id, block) -> addTillAction(block);}
 
+    private static Action<Block> flattenable() { return (id, block) -> addFlattenAction(block);}
     /*
     Begin blocks
      */
 
     private static Settings grassBlock() { return copy(GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f); }
-    public static final AetherGrassBlock AETHER_GRASS_BLOCK = add("aether_grass", new AetherGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable());
+    public static final AetherGrassBlock AETHER_GRASS_BLOCK = add("aether_grass", new AetherGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable());
     public static final EnchantedAetherGrassBlock AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", new EnchantedAetherGrassBlock(grassBlock().mapColor(MapColor.GOLD)));
 
-    public static final Block AETHER_DIRT = add("aether_dirt", new Block(copy(DIRT).strength(0.3f)), tillable());
+    public static final Block AETHER_DIRT = add("aether_dirt", new Block(copy(DIRT).strength(0.3f)), tillable(), flattenable());
     public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new AetherFarmlandBlock(copy(FARMLAND)));
     public static final AetherDirtPathBlock AETHER_DIRT_PATH = add("aether_grass_path", new AetherDirtPathBlock(copy(DIRT_PATH)));
     public static final Block QUICKSOIL = add("quicksoil", new Block(of(Material.AGGREGATE).strength(0.5f, -1f).slipperiness(1F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)));
@@ -360,8 +362,12 @@ public class AetherBlocks {
         return RegistryQueue.BLOCK.add(locate(id), block, additionalActions);
     }
 
-    public static void addTillAction(Block block){
+    private static void addTillAction(Block block){
         TillableBlockRegistry.register(block, HoeItem::canTillFarmland, AETHER_FARMLAND.getDefaultState());
+    }
+
+    private static void addFlattenAction(Block block){
+        FlattenableBlockRegistry.register(block, AETHER_DIRT_PATH.getDefaultState());
     }
 
     public static void init() {
