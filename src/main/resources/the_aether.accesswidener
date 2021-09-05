@@ -1,4 +1,3 @@
 accessWidener	v1	named
 accessible    class     net/minecraft/world/gen/feature/ConfiguredFeatures$Decorators
-accessible    method    net/minecraft/world/gen/feature/StructureFeature            register                     (Ljava/lang/String;Lnet/minecraft/world/gen/feature/StructureFeature;Lnet/minecraft/world/gen/GenerationStep$Feature;)Lnet/minecraft/world/gen/feature/StructureFeature;
 accessible    method    net/minecraft/entity/projectile/ProjectileEntity            <init>                       (Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V
