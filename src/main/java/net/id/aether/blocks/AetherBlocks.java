@@ -3,6 +3,7 @@ package net.id.aether.blocks;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
+import net.id.aether.blocks.accessor.*;
 import net.id.aether.blocks.aercloud.AercloudBlock;
 import net.id.aether.blocks.aercloud.BlueAercloudBlock;
 import net.id.aether.blocks.aercloud.GoldenAercloudBlock;
@@ -70,13 +71,13 @@ public class AetherBlocks {
     public static final EnchantedAetherGrassBlock AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", new EnchantedAetherGrassBlock(grassBlock().mapColor(MapColor.GOLD)));
 
     public static final Block AETHER_DIRT = add("aether_dirt", new Block(copy(DIRT).strength(0.3f)));
-    public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new FarmlandBlock(copy(FARMLAND)));
+    public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new AetherFarmlandBlock(copy(FARMLAND)));
     public static final AetherDirtPathBlock AETHER_DIRT_PATH = add("aether_grass_path", new AetherDirtPathBlock(copy(DIRT_PATH)));
     public static final Block QUICKSOIL = add("quicksoil", new Block(of(Material.AGGREGATE).strength(0.5f, -1f).slipperiness(1F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)));
 
     private static Settings quicksoilGlass() { return copy(GLASS).strength(0.2f, -1f).slipperiness(1f).velocityMultiplier(1.102f).luminance(state -> 14); }
     public static final GlassBlock QUICKSOIL_GLASS = add("quicksoil_glass", new GlassBlock(quicksoilGlass()), translucentRenderLayer);
-    public static final PaneBlock QUICKSOIL_GLASS_PANE = add("quicksoil_glass_pane", new PaneBlock(quicksoilGlass()), translucentRenderLayer);
+    public static final PaneBlock QUICKSOIL_GLASS_PANE = add("quicksoil_glass_pane", new AetherPaneBlock(quicksoilGlass()), translucentRenderLayer);
 
     private static Settings aercloud() { return of(Material.ICE).strength(0.2F).sounds(BlockSoundGroup.WOOL).nonOpaque().solidBlock(never).suffocates(never).blockVision(never); }
     public static final AercloudBlock COLD_AERCLOUD = add("cold_aercloud", new AercloudBlock(aercloud().mapColor(MapColor.WHITE)), translucentRenderLayer);
@@ -92,40 +93,40 @@ public class AetherBlocks {
     private static Settings holystone() { return of(Material.STONE, MapColor.WHITE_GRAY).requiresTool().strength(0.5f, 1f).sounds(BlockSoundGroup.STONE); }
     public static final Block HOLYSTONE = add("holystone", new Block(holystone()));
     public static final SlabBlock HOLYSTONE_SLAB = add("holystone_slab", new SlabBlock(holystone()));
-    public static final StairsBlock HOLYSTONE_STAIRS = add("holystone_stairs", new StairsBlock(HOLYSTONE.getDefaultState(), holystone()));
+    public static final AetherStairsBlock HOLYSTONE_STAIRS = add("holystone_stairs", new AetherStairsBlock(HOLYSTONE.getDefaultState(), holystone()));
     public static final WallBlock HOLYSTONE_WALL = add("holystone_wall", new WallBlock(holystone()));
 
     private static Settings cobbledHolystone() { return holystone().strength(0.4f, 8f); }
     public static final Block COBBLED_HOLYSTONE = add("cobbled_holystone", new Block(cobbledHolystone()));
     public static final SlabBlock COBBLED_HOLYSTONE_SLAB = add("cobbled_holystone_slab", new SlabBlock(cobbledHolystone()));
-    public static final StairsBlock COBBLED_HOLYSTONE_STAIRS = add("cobbled_holystone_stairs", new StairsBlock(COBBLED_HOLYSTONE.getDefaultState(), cobbledHolystone()));
+    public static final AetherStairsBlock COBBLED_HOLYSTONE_STAIRS = add("cobbled_holystone_stairs", new AetherStairsBlock(COBBLED_HOLYSTONE.getDefaultState(), cobbledHolystone()));
     public static final WallBlock COBBLED_HOLYSTONE_WALL = add("cobbled_holystone_wall", new WallBlock(cobbledHolystone()));
 
     private static Settings mossyCobbledHolystone() { return cobbledHolystone().mapColor(MapColor.PALE_GREEN); }
     public static final Block MOSSY_HOLYSTONE = add("mossy_holystone", new Block(mossyCobbledHolystone()));
     public static final Block GOLDEN_MOSSY_HOLYSTONE = add("golden_mossy_holystone", new Block(mossyCobbledHolystone().strength(2f, 6f).mapColor(MapColor.GOLD)));
     public static final SlabBlock MOSSY_HOLYSTONE_SLAB = add("mossy_holystone_slab", new SlabBlock(mossyCobbledHolystone()));
-    public static final StairsBlock MOSSY_HOLYSTONE_STAIRS = add("mossy_holystone_stairs", new StairsBlock(MOSSY_HOLYSTONE.getDefaultState(), mossyCobbledHolystone()));
+    public static final AetherStairsBlock MOSSY_HOLYSTONE_STAIRS = add("mossy_holystone_stairs", new AetherStairsBlock(MOSSY_HOLYSTONE.getDefaultState(), mossyCobbledHolystone()));
     public static final WallBlock MOSSY_HOLYSTONE_WALL = add("mossy_holystone_wall", new WallBlock(mossyCobbledHolystone()));
 
     private static Settings holystoneBrick() { return holystone().strength(1.5f, 6f); }
     public static final Block HOLYSTONE_BRICK = add("holystone_brick", new Block(holystoneBrick()));
     public static final SlabBlock HOLYSTONE_BRICK_SLAB = add("holystone_brick_slab", new SlabBlock(holystoneBrick()));
-    public static final StairsBlock HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", new StairsBlock(HOLYSTONE_BRICK.getDefaultState(), holystoneBrick()));
+    public static final AetherStairsBlock HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", new AetherStairsBlock(HOLYSTONE_BRICK.getDefaultState(), holystoneBrick()));
     public static final WallBlock HOLYSTONE_BRICK_WALL = add("holystone_brick_wall", new WallBlock(holystoneBrick()));
 /*
     private static Settings angelicStone() { return of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE); }
     public static final Block ANGELIC_STONE = add("angelic_stone", new Block(angelicStone()));
     public static final Block ANGELIC_CRACKED_STONE = add("angelic_stone_cracked", new Block(angelicStone()));
     public static final SlabBlock ANGELIC_SLAB = add("angelic_slab", new SlabBlock(angelicStone()));
-    public static final StairsBlock ANGELIC_STAIRS = add("angelic_stairs", new StairsBlock(ANGELIC_STONE.getDefaultState(), angelicStone()));
+    public static final AetherStairsBlock ANGELIC_STAIRS = add("angelic_stairs", new AetherStairsBlock(ANGELIC_STONE.getDefaultState(), angelicStone()));
     public static final WallBlock ANGELIC_WALL = add("angelic_wall", new WallBlock(angelicStone()));
 
     private static Settings lightAngelicStone() { return angelicStone().luminance(state -> 11); }
     public static final Block LIGHT_ANGELIC_STONE = add("light_angelic_stone", new Block(lightAngelicStone()));
     public static final Block LIGHT_ANGELIC_STONE_TRAP = add("light_angelic_stone_trap", new Block(unbreakable(lightAngelicStone())));
     public static final SlabBlock LIGHT_ANGELIC_SLAB = add("light_angelic_slab", new SlabBlock(lightAngelicStone()));
-    public static final StairsBlock LIGHT_ANGELIC_STAIRS = add("light_angelic_stairs", new StairsBlock(LIGHT_ANGELIC_STONE.getDefaultState(), lightAngelicStone()));
+    public static final AetherStairsBlock LIGHT_ANGELIC_STAIRS = add("light_angelic_stairs", new AetherStairsBlock(LIGHT_ANGELIC_STONE.getDefaultState(), lightAngelicStone()));
     public static final WallBlock LIGHT_ANGELIC_WALL = add("light_angelic_wall", new WallBlock(lightAngelicStone()));
 
     private static Settings hellfireStone() { return of(Material.STONE).hardness(0.5f).resistance(1f).sounds(BlockSoundGroup.STONE); }
@@ -133,28 +134,28 @@ public class AetherBlocks {
     public static final Block HELLFIRE_CRACKED_STONE = add("hellfire_stone_cracked", new Block(hellfireStone()));
     public static final Block HELLFIRE_STONE_TRAP = add("hellfire_stone_trap", new Block(unbreakable(hellfireStone())));
     public static final SlabBlock HELLFIRE_SLAB = add("hellfire_slab", new SlabBlock(hellfireStone()));
-    public static final StairsBlock HELLFIRE_STAIRS = add("hellfire_stairs", new StairsBlock(HELLFIRE_STONE.getDefaultState(), hellfireStone()));
+    public static final AetherStairsBlock HELLFIRE_STAIRS = add("hellfire_stairs", new AetherStairsBlock(HELLFIRE_STONE.getDefaultState(), hellfireStone()));
     public static final WallBlock HELLFIRE_WALL = add("hellfire_wall", new WallBlock(hellfireStone()));
 
     private static Settings lightHellfireStone() { return hellfireStone(); }
     public static final Block LIGHT_HELLFIRE_STONE = add("light_hellfire_stone", new Block(lightHellfireStone()));
     public static final Block LIGHT_HELLFIRE_STONE_TRAP = add("light_hellfire_stone_trap", new Block(unbreakable(lightHellfireStone())));
     public static final SlabBlock LIGHT_HELLFIRE_SLAB = add("light_hellfire_slab", new SlabBlock(lightHellfireStone()));
-    public static final StairsBlock LIGHT_HELLFIRE_STAIRS = add("light_hellfire_stairs", new StairsBlock(LIGHT_HELLFIRE_STONE.getDefaultState(), lightHellfireStone()));
+    public static final AetherStairsBlock LIGHT_HELLFIRE_STAIRS = add("light_hellfire_stairs", new AetherStairsBlock(LIGHT_HELLFIRE_STONE.getDefaultState(), lightHellfireStone()));
     public static final WallBlock LIGHT_HELLFIRE_WALL = add("light_hellfire_wall", new WallBlock(lightHellfireStone()));
 
     private static Settings carvedStone() { return of(Material.STONE).hardness(0.5f).resistance(1f).sounds(BlockSoundGroup.STONE); }
     public static final Block CARVED_STONE = add("carved_stone", new Block(carvedStone()));
     public static final Block CARVED_STONE_TRAP = add("carved_stone_trap", new Block(unbreakable(carvedStone())));
     public static final SlabBlock CARVED_SLAB = add("carved_slab", new SlabBlock(carvedStone()));
-    public static final StairsBlock CARVED_STAIRS = add("carved_stairs", new StairsBlock(CARVED_STONE.getDefaultState(), carvedStone()));
+    public static final AetherStairsBlock CARVED_STAIRS = add("carved_stairs", new AetherStairsBlock(CARVED_STONE.getDefaultState(), carvedStone()));
     public static final WallBlock CARVED_WALL = add("carved_wall", new WallBlock(carvedStone()));
 
     private static Settings lightCarvedStone() { return carvedStone().luminance(state -> 11); }
     public static final Block LIGHT_CARVED_STONE = add("light_carved_stone", new Block(lightCarvedStone()));
     public static final Block LIGHT_CARVED_STONE_TRAP = add("light_carved_stone_trap", new Block(unbreakable(lightCarvedStone())));
     public static final SlabBlock LIGHT_CARVED_SLAB = add("light_carved_slab", new SlabBlock(lightCarvedStone()));
-    public static final StairsBlock LIGHT_CARVED_STAIRS = add("light_carved_stairs", new StairsBlock(LIGHT_CARVED_STONE.getDefaultState(), lightCarvedStone()));
+    public static final AetherStairsBlock LIGHT_CARVED_STAIRS = add("light_carved_stairs", new AetherStairsBlock(LIGHT_CARVED_STONE.getDefaultState(), lightCarvedStone()));
     public static final WallBlock LIGHT_CARVED_WALL = add("light_carved_wall", new WallBlock(lightCarvedStone()));
 
     private static Settings sentryStone() { return of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE); }
@@ -162,13 +163,13 @@ public class AetherBlocks {
     public static final Block SENTRY_CRACKED_STONE = add("sentry_stone_cracked", new Block(sentryStone()));
     public static final Block SENTRY_STONE_TRAP = add("sentry_stone_trap", new Block(unbreakable(sentryStone())));
     public static final SlabBlock SENTRY_SLAB = add("sentry_slab", new SlabBlock(sentryStone()));
-    public static final StairsBlock SENTRY_STAIRS = add("sentry_stairs", new StairsBlock(SENTRY_STONE.getDefaultState(), sentryStone()));
+    public static final AetherStairsBlock SENTRY_STAIRS = add("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState(), sentryStone()));
     public static final WallBlock SENTRY_WALL = add("sentry_wall", new WallBlock(sentryStone()));
 
     private static Settings lightSentryStone() { return sentryStone().luminance(state -> 10); }
     public static final Block LIGHT_SENTRY_STONE = add("light_sentry_stone", new Block(lightSentryStone()));
     public static final SlabBlock LIGHT_SENTRY_SLAB = add("light_sentry_slab", new SlabBlock(lightSentryStone()));
-    public static final StairsBlock LIGHT_SENTRY_STAIRS = add("light_sentry_stairs", new StairsBlock(LIGHT_SENTRY_STONE.getDefaultState(), lightSentryStone()));
+    public static final AetherStairsBlock LIGHT_SENTRY_STAIRS = add("light_sentry_stairs", new AetherStairsBlock(LIGHT_SENTRY_STONE.getDefaultState(), lightSentryStone()));
     public static final WallBlock LIGHT_SENTRY_WALL = add("light_sentry_wall", new WallBlock(lightSentryStone()));
 */
     private static final WoodTypeFactory skyroot = new WoodTypeFactory(MapColor.GREEN, MapColor.TERRACOTTA_GREEN);
@@ -185,11 +186,11 @@ public class AetherBlocks {
     public static final FenceBlock SKYROOT_FENCE = add("skyroot_fence", new FenceBlock(skyroot.planks()), flammablePlanks);
     public static final FenceGateBlock SKYROOT_FENCE_GATE = add("skyroot_fence_gate", new FenceGateBlock(skyroot.planks()), flammablePlanks);
     public static final SlabBlock SKYROOT_SLAB = add("skyroot_slab", new SlabBlock(skyroot.planks()), flammablePlanks);
-    public static final StairsBlock SKYROOT_STAIRS = add("skyroot_stairs", new StairsBlock(SKYROOT_PLANKS.getDefaultState(), skyroot.planks()), flammablePlanks);
-    public static final TrapdoorBlock SKYROOT_TRAPDOOR = add("skyroot_trapdoor", new TrapdoorBlock(skyroot.trapdoor()), cutoutRenderLayer);
-    public static final DoorBlock SKYROOT_DOOR = add("skyroot_door", new DoorBlock(skyroot.door()), cutoutRenderLayer);
+    public static final AetherStairsBlock SKYROOT_STAIRS = add("skyroot_stairs", new AetherStairsBlock(SKYROOT_PLANKS.getDefaultState(), skyroot.planks()), flammablePlanks);
+    public static final AetherTrapdoorBlock SKYROOT_TRAPDOOR = add("skyroot_trapdoor", new AetherTrapdoorBlock(skyroot.trapdoor()), cutoutRenderLayer);
+    public static final AetherDoorBlock SKYROOT_DOOR = add("skyroot_door", new AetherDoorBlock(skyroot.door()), cutoutRenderLayer);
     public static final WoodenButtonBlock SKYROOT_BUTTON = add("skyroot_button", new AetherWoodenButtonBlock(skyroot.button()));
-    public static final PressurePlateBlock SKYROOT_PRESSURE_PLATE = add("skyroot_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, skyroot.pressurePlate()));
+    public static final AetherPressurePlateBlock SKYROOT_PRESSURE_PLATE = add("skyroot_pressure_plate", new AetherPressurePlateBlock(ActivationRule.EVERYTHING, skyroot.pressurePlate()));
     public static final SignBlock SKYROOT_SIGN = add("skyroot_sign", new SignBlock(skyroot.sign(), AetherSignType.SKYROOT), signBlockEntity);
     public static final WallSignBlock SKYROOT_WALL_SIGN = add("skyroot_wall_sign", new WallSignBlock(skyroot.sign().dropsLike(SKYROOT_SIGN), AetherSignType.SKYROOT), signBlockEntity);
 
@@ -205,11 +206,11 @@ public class AetherBlocks {
     public static final FenceBlock GOLDEN_OAK_FENCE = add("golden_oak_fence", new FenceBlock(goldenOak.planks()), flammablePlanks);
     public static final FenceGateBlock GOLDEN_OAK_FENCE_GATE = add("golden_oak_fence_gate", new FenceGateBlock(goldenOak.planks()), flammablePlanks);
     public static final SlabBlock GOLDEN_OAK_SLAB = add("golden_oak_slab", new SlabBlock(goldenOak.planks()), flammablePlanks);
-    public static final StairsBlock GOLDEN_OAK_STAIRS = add("golden_oak_stairs", new StairsBlock(GOLDEN_OAK_PLANKS.getDefaultState(), goldenOak.planks()), flammablePlanks);
-    public static final TrapdoorBlock GOLDEN_OAK_TRAPDOOR = add("golden_oak_trapdoor", new TrapdoorBlock(goldenOak.trapdoor()), cutoutRenderLayer);
-    public static final DoorBlock GOLDEN_OAK_DOOR = add("golden_oak_door", new DoorBlock(goldenOak.door()), cutoutRenderLayer);
+    public static final AetherStairsBlock GOLDEN_OAK_STAIRS = add("golden_oak_stairs", new AetherStairsBlock(GOLDEN_OAK_PLANKS.getDefaultState(), goldenOak.planks()), flammablePlanks);
+    public static final AetherTrapdoorBlock GOLDEN_OAK_TRAPDOOR = add("golden_oak_trapdoor", new AetherTrapdoorBlock(goldenOak.trapdoor()), cutoutRenderLayer);
+    public static final AetherDoorBlock GOLDEN_OAK_DOOR = add("golden_oak_door", new AetherDoorBlock(goldenOak.door()), cutoutRenderLayer);
     public static final WoodenButtonBlock GOLDEN_OAK_BUTTON = add("golden_oak_button", new AetherWoodenButtonBlock(goldenOak.button()));
-    public static final PressurePlateBlock GOLDEN_OAK_PRESSURE_PLATE = add("golden_oak_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, goldenOak.pressurePlate()));
+    public static final AetherPressurePlateBlock GOLDEN_OAK_PRESSURE_PLATE = add("golden_oak_pressure_plate", new AetherPressurePlateBlock(ActivationRule.EVERYTHING, goldenOak.pressurePlate()));
     public static final SignBlock GOLDEN_OAK_SIGN = add("golden_oak_sign", new SignBlock(goldenOak.sign(), AetherSignType.GOLDEN_OAK), signBlockEntity);
     public static final WallSignBlock GOLDEN_OAK_WALL_SIGN = add("golden_oak_wall_sign", new WallSignBlock(goldenOak.sign().dropsLike(GOLDEN_OAK_SIGN), AetherSignType.GOLDEN_OAK), signBlockEntity);
 
@@ -225,11 +226,11 @@ public class AetherBlocks {
     public static final FenceBlock ORANGE_FENCE = add("orange_fence", new FenceBlock(orange.planks()), flammablePlanks);
     public static final FenceGateBlock ORANGE_FENCE_GATE = add("orange_fence_gate", new FenceGateBlock(orange.planks()), flammablePlanks);
     public static final SlabBlock ORANGE_SLAB = add("orange_slab", new SlabBlock(orange.planks()), flammablePlanks);
-    public static final StairsBlock ORANGE_STAIRS = add("orange_stairs", new StairsBlock(ORANGE_PLANKS.getDefaultState(), orange.planks()), flammablePlanks);
-    public static final TrapdoorBlock ORANGE_TRAPDOOR = add("orange_trapdoor", new TrapdoorBlock(orange.trapdoor()), cutoutRenderLayer);
-    public static final DoorBlock ORANGE_DOOR = add("orange_door", new DoorBlock(orange.door()), cutoutRenderLayer);
+    public static final AetherStairsBlock ORANGE_STAIRS = add("orange_stairs", new AetherStairsBlock(ORANGE_PLANKS.getDefaultState(), orange.planks()), flammablePlanks);
+    public static final AetherTrapdoorBlock ORANGE_TRAPDOOR = add("orange_trapdoor", new AetherTrapdoorBlock(orange.trapdoor()), cutoutRenderLayer);
+    public static final AetherDoorBlock ORANGE_DOOR = add("orange_door", new AetherDoorBlock(orange.door()), cutoutRenderLayer);
     public static final WoodenButtonBlock ORANGE_BUTTON = add("orange_button", new AetherWoodenButtonBlock(orange.button()));
-    public static final PressurePlateBlock ORANGE_PRESSURE_PLATE = add("orange_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, orange.pressurePlate()));
+    public static final AetherPressurePlateBlock ORANGE_PRESSURE_PLATE = add("orange_pressure_plate", new AetherPressurePlateBlock(ActivationRule.EVERYTHING, orange.pressurePlate()));
     public static final SignBlock ORANGE_SIGN = add("orange_sign", new SignBlock(orange.sign(), AetherSignType.ORANGE), signBlockEntity);
     public static final WallSignBlock ORANGE_WALL_SIGN = add("orange_wall_sign", new WallSignBlock(orange.sign().dropsLike(ORANGE_SIGN), AetherSignType.ORANGE), signBlockEntity);
 
@@ -245,11 +246,11 @@ public class AetherBlocks {
     public static final FenceBlock CRYSTAL_FENCE = add("crystal_fence", new FenceBlock(crystal.planks()), flammablePlanks);
     public static final FenceGateBlock CRYSTAL_FENCE_GATE = add("crystal_fence_gate", new FenceGateBlock(crystal.planks()), flammablePlanks);
     public static final SlabBlock CRYSTAL_SLAB = add("crystal_slab", new SlabBlock(crystal.planks()), flammablePlanks);
-    public static final StairsBlock CRYSTAL_STAIRS = add("crystal_stairs", new StairsBlock(CRYSTAL_PLANKS.getDefaultState(), crystal.planks()), flammablePlanks);
-    public static final TrapdoorBlock CRYSTAL_TRAPDOOR = add("crystal_trapdoor", new TrapdoorBlock(crystal.trapdoor()), cutoutRenderLayer);
-    public static final DoorBlock CRYSTAL_DOOR = add("crystal_door", new DoorBlock(crystal.door()), cutoutRenderLayer);
+    public static final AetherStairsBlock CRYSTAL_STAIRS = add("crystal_stairs", new AetherStairsBlock(CRYSTAL_PLANKS.getDefaultState(), crystal.planks()), flammablePlanks);
+    public static final AetherTrapdoorBlock CRYSTAL_TRAPDOOR = add("crystal_trapdoor", new AetherTrapdoorBlock(crystal.trapdoor()), cutoutRenderLayer);
+    public static final AetherDoorBlock CRYSTAL_DOOR = add("crystal_door", new AetherDoorBlock(crystal.door()), cutoutRenderLayer);
     public static final WoodenButtonBlock CRYSTAL_BUTTON = add("crystal_button", new AetherWoodenButtonBlock(crystal.button()));
-    public static final PressurePlateBlock CRYSTAL_PRESSURE_PLATE = add("crystal_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, crystal.pressurePlate()));
+    public static final AetherPressurePlateBlock CRYSTAL_PRESSURE_PLATE = add("crystal_pressure_plate", new AetherPressurePlateBlock(ActivationRule.EVERYTHING, crystal.pressurePlate()));
     public static final SignBlock CRYSTAL_SIGN = add("crystal_sign", new SignBlock(crystal.sign(), AetherSignType.CRYSTAL), signBlockEntity);
     public static final WallSignBlock CRYSTAL_WALL_SIGN = add("crystal_wall_sign", new WallSignBlock(crystal.wallSign().dropsLike(CRYSTAL_SIGN), AetherSignType.CRYSTAL), signBlockEntity);
 
@@ -262,11 +263,11 @@ public class AetherBlocks {
     public static final FenceBlock WISTERIA_FENCE = add("wisteria_fence", new FenceBlock(wisteria.planks()), flammablePlanks);
     public static final FenceGateBlock WISTERIA_FENCE_GATE = add("wisteria_fence_gate", new FenceGateBlock(wisteria.planks()), flammablePlanks);
     public static final SlabBlock WISTERIA_SLAB = add("wisteria_slab", new SlabBlock(wisteria.planks()), flammablePlanks);
-    public static final StairsBlock WISTERIA_STAIRS = add("wisteria_stairs", new StairsBlock(WISTERIA_PLANKS.getDefaultState(), wisteria.planks()), flammablePlanks);
-    public static final TrapdoorBlock WISTERIA_TRAPDOOR = add("wisteria_trapdoor", new TrapdoorBlock(wisteria.trapdoor()), cutoutRenderLayer);
-    public static final DoorBlock WISTERIA_DOOR = add("wisteria_door", new DoorBlock(wisteria.door()), cutoutRenderLayer);
+    public static final AetherStairsBlock WISTERIA_STAIRS = add("wisteria_stairs", new AetherStairsBlock(WISTERIA_PLANKS.getDefaultState(), wisteria.planks()), flammablePlanks);
+    public static final AetherTrapdoorBlock WISTERIA_TRAPDOOR = add("wisteria_trapdoor", new AetherTrapdoorBlock(wisteria.trapdoor()), cutoutRenderLayer);
+    public static final AetherDoorBlock WISTERIA_DOOR = add("wisteria_door", new AetherDoorBlock(wisteria.door()), cutoutRenderLayer);
     public static final WoodenButtonBlock WISTERIA_BUTTON = add("wisteria_button", new AetherWoodenButtonBlock(wisteria.button()));
-    public static final PressurePlateBlock WISTERIA_PRESSURE_PLATE = add("wisteria_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, wisteria.pressurePlate()));
+    public static final AetherPressurePlateBlock WISTERIA_PRESSURE_PLATE = add("wisteria_pressure_plate", new AetherPressurePlateBlock(ActivationRule.EVERYTHING, wisteria.pressurePlate()));
     public static final SignBlock WISTERIA_SIGN = add("wisteria_sign", new SignBlock(wisteria.sign(), AetherSignType.WISTERIA), signBlockEntity);
     public static final WallSignBlock WISTERIA_WALL_SIGN = add("wisteria_wall_sign", new WallSignBlock(wisteria.wallSign().dropsLike(WISTERIA_SIGN), AetherSignType.WISTERIA), signBlockEntity);
 
