@@ -24,7 +24,7 @@ public class GoldenOakLeafParticle extends SpriteBillboardParticle {
 
         this.collidesWithWorld = true;
         this.gravityStrength = 0.09F;
-        this.maxAge = 350;
+        this.maxAge = 1200;
 
         this.velocityX *= 0.325F;
         this.velocityY *= 0.0F;

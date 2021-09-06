@@ -23,7 +23,7 @@ public class FallingOrangePetalParticle extends SpriteBillboardParticle {
 
         this.collidesWithWorld = true;
         this.gravityStrength = 0.07F;
-        this.maxAge = 300;
+        this.maxAge = 600;
 
         this.velocityX *= 0.375F;
         this.velocityY *= 0.0F;
