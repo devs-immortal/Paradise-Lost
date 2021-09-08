@@ -21,10 +21,12 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);
         register(AetherEntityTypes.COCKATRICE_SPIT, CockatriceSpitRenderer::new);
 
-        register(AetherEntityTypes.ENCHANTED_DART, DartRenderer::new);
-        register(AetherEntityTypes.GOLDEN_DART, DartRenderer::new);
-        register(AetherEntityTypes.POISON_DART, DartRenderer::new);
-        register(AetherEntityTypes.POISON_NEEDLE, DartRenderer::new);
+        register(DartRenderer::new,
+            AetherEntityTypes.ENCHANTED_DART,
+            AetherEntityTypes.GOLDEN_DART,
+            AetherEntityTypes.POISON_DART,
+            AetherEntityTypes.POISON_NEEDLE
+        );
         register(AetherEntityTypes.AERWHALE, AerwhaleRenderer::new);
 
 
@@ -32,12 +34,21 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
         //entityRenderMap.put(EntityWhirlwind.class, new WhirlwindRenderer(renderManager));
         //entityRenderMap.put(EntityPhoenixArrow.class, new PhoenixArrowRenderer(renderManager));
-        register(AetherEntityTypes.BLUE_SWET, SwetRenderer::new);
-        register(AetherEntityTypes.PURPLE_SWET, SwetRenderer::new);
-        register(AetherEntityTypes.WHITE_SWET, SwetRenderer::new);
-        register(AetherEntityTypes.GOLDEN_SWET, SwetRenderer::new);
+        register(SwetRenderer::new,
+            AetherEntityTypes.BLUE_SWET,
+            AetherEntityTypes.PURPLE_SWET,
+            AetherEntityTypes.WHITE_SWET,
+            AetherEntityTypes.GOLDEN_SWET
+        );
     }
-
+    
+    @SafeVarargs
+    private static <T extends Entity> void register(EntityRendererFactory<T> factory, EntityType<? extends T>... types) {
+        for(var type : types){
+            register(type, factory);
+        }
+    }
+    
     private static <T extends Entity> void register(EntityType<? extends T> clazz, EntityRendererFactory<T> factory) {
         EntityRendererRegistry.register(clazz, factory);
     }
