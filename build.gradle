@@ -89,6 +89,9 @@ dependencies {
 
     modImplementation(include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cardinal_version}"))
 
+    // Most important of the libraries :smug:
+    modImplementation include("com.github.devs-immortal:Incubus-Core:${project.incubus_version}")
+
     // Implement the required portions of FAPI
     // Remember to maintain these, and add the modular bits as needed. 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
