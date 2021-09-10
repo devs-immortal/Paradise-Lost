@@ -8,7 +8,7 @@ import net.id.aether.entities.vehicle.AetherBoatTypes;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.armor.AetherArmorMaterials;
 import net.id.aether.items.food.AetherFoodComponent;
-import net.id.aether.items.food.HealingStoneItem;
+import net.id.aether.items.misc.HealingStoneItem;
 import net.id.aether.items.food.ValkyrieMilkItem;
 import net.id.aether.items.food.WhiteAppleItem;
 import net.id.aether.items.resources.AmbrosiumShardItem;
@@ -284,7 +284,6 @@ public class AetherItems {
     public static final Item BLUE_GUMMY_SWET = add("blue_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
     public static final Item GOLDEN_GUMMY_SWET = add("golden_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
     public static final ValkyrieMilkItem VALKYRIE_MILK = add("valkyrie_milk", new ValkyrieMilkItem(food(AetherFoodComponent.VALKYRIE_MILK, EPIC).maxCount(1)));
-    public static final HealingStoneItem HEALING_STONE = add("healing_stone", new HealingStoneItem(food(AetherFoodComponent.HEALING_STONE, RARE)));
     public static final Item CANDY_CANE = add("candy_cane", new Item(food(AetherFoodComponent.GENERIC)), compostable30);
     public static final Item GINGERBREAD_MAN = add("ginger_bread_man", new Item(food(AetherFoodComponent.GENERIC)), compostable30);
     public static final Item MOA_MEAT = add("moa_meat", new Item(food(AetherFoodComponent.MOA_MEAT)));
@@ -304,6 +303,7 @@ public class AetherItems {
     public static final BookOfLoreItem LORE_BOOK = add("lore_book", new BookOfLoreItem(misc().maxCount(1)));
     public static final BlockItem INCUBATOR = add("incubator", AetherBlocks.INCUBATOR, misc, fuel(300));
     public static final BlockItem FOOD_BOWL = add("food_bowl", AetherBlocks.FOOD_BOWL, misc, fuel(300));
+    public static final HealingStoneItem HEALING_STONE = add("healing_stone", new HealingStoneItem(misc.rarity(RARE)));
 
     public static final SkyrootBucketItem SKYROOT_BUCKET = add("skyroot_bucket", new SkyrootBucketItem(misc().maxCount(16)), fuel(200), emptyBucketDispenserBehavior);
 
