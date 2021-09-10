@@ -1,4 +1,4 @@
-package net.id.aether.blocks.natural;
+package net.id.aether.blocks.natural.crop;
 
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.hostile.swet.SwetEntity;

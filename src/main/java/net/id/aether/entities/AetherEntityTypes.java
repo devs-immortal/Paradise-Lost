@@ -10,8 +10,8 @@ import net.id.aether.entities.hostile.CockatriceEntity;
 import net.id.aether.entities.hostile.swet.*;
 import net.id.aether.entities.passive.*;
 import net.id.aether.entities.projectile.*;
-import net.id.aether.registry.RegistryQueue;
-import net.id.aether.registry.RegistryQueue.Action;
+import net.id.aether.registry.AetherRegistryQueues;
+import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.mob.HostileEntity;
@@ -81,12 +81,12 @@ public class AetherEntityTypes {
     }
 
     public static void init() {
-        RegistryQueue.ENTITY_TYPE.register();
+        AetherRegistryQueues.ENTITY_TYPE.register();
     }
 
     @SafeVarargs
     private static <V extends EntityType<?>> V add(String id, V type, Action<? super V>... additionalActions) {
-        return RegistryQueue.ENTITY_TYPE.add(locate(id), type, additionalActions);
+        return AetherRegistryQueues.ENTITY_TYPE.add(locate(id), type, additionalActions);
     }
 
     @SafeVarargs

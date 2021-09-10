@@ -19,14 +19,17 @@ import net.id.aether.blocks.decorative.AmbrosiumTorchWallBlock;
 import net.id.aether.blocks.mechanical.FoodBowlBlock;
 import net.id.aether.blocks.mechanical.IncubatorBlock;
 import net.id.aether.blocks.natural.*;
+import net.id.aether.blocks.natural.crop.AmadrysCropBlock;
+import net.id.aether.blocks.natural.crop.BlueberryBushBlock;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.util.RenderUtils;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
 import net.id.aether.mixin.block.BlocksAccessor;
 import net.id.aether.mixin.client.RenderLayersAccessor;
-import net.id.aether.registry.RegistryQueue;
-import net.id.aether.registry.RegistryQueue.Action;
+import net.id.aether.registry.AetherRegistryQueues;
+import net.id.incubus_core.util.RegistryQueue;
+import net.id.incubus_core.util.RegistryQueue.Action;
 import net.id.aether.util.AetherSignType;
 import net.id.aether.world.feature.tree.*;
 import net.minecraft.block.AbstractBlock.ContextPredicate;
@@ -315,6 +318,8 @@ public class AetherBlocks {
     public static final AetherBrushBlock AETHER_BUSH = add("aether_bush", new AetherBrushBlock(shrub()), flammablePlant, cutoutRenderLayer);
     public static final AetherBrushBlock FLUTEGRASS = add("flutegrass", new AetherBrushBlock(shrub().mapColor(MapColor.GOLD), ImmutableSet.of(QUICKSOIL), true), flammablePlant, cutoutRenderLayer);
 
+    public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(shrub().mapColor(MapColor.PINK)), flammablePlant, cutoutRenderLayer);
+
     public static final BlueberryBushBlock BLUEBERRY_BUSH = add("blueberry_bush", new BlueberryBushBlock(of(Material.PLANT).strength(0.2f)
             .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(BlocksAccessor::callCanSpawnOnLeaves)
             .suffocates(never).blockVision(never).noCollision()), flammablePlant, cutoutRenderLayer);
@@ -357,7 +362,7 @@ public class AetherBlocks {
 
     @SafeVarargs
     private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {
-        return RegistryQueue.BLOCK.add(locate(id), block, additionalActions);
+        return AetherRegistryQueues.BLOCK.add(locate(id), block, additionalActions);
     }
 
     private static void addTillAction(Block block){
@@ -369,7 +374,7 @@ public class AetherBlocks {
     }
 
     public static void init() {
-        RegistryQueue.BLOCK.register();
+        AetherRegistryQueues.BLOCK.register();
     }
 
     /**

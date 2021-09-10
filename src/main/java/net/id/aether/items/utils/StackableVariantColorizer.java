@@ -1,7 +1,7 @@
 package net.id.aether.items.utils;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.id.aether.registry.RegistryQueue.Action;
+import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
