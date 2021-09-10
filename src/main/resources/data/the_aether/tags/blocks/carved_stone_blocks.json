@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:carved_stone",
+    "the_aether:mossy_carved_stone",
+    "the_aether:cracked_carved_stone",
+    "the_aether:glyphed_carved_stone",
+    "the_aether:carved_stone_panel",
+    "the_aether:carved_stone_panel_lit",
+    "the_aether:carved_stone_eye",
+    "the_aether:carved_stone_eye_lit"
+  ]
+}

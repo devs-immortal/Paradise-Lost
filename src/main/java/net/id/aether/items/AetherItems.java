@@ -413,13 +413,25 @@ public class AetherItems {
     public static final BlockItem LIGHT_HELLFIRE_SLAB = add("light_hellfire_slab", AetherBlocks.LIGHT_HELLFIRE_SLAB, block);
     public static final BlockItem LIGHT_HELLFIRE_STAIRS = add("light_hellfire_stairs", AetherBlocks.LIGHT_HELLFIRE_STAIRS, block);
     public static final BlockItem LIGHT_HELLFIRE_WALL = add("light_hellfire_wall", AetherBlocks.LIGHT_HELLFIRE_WALL, block);
-
+    */
     public static final BlockItem CARVED_STONE = add("carved_stone", AetherBlocks.CARVED_STONE, block);
-    //public static final BlockItem CARVED_STONE_TRAP = add("carved_stone_trap", AetherBlocks.CARVED_STONE_TRAP, block);
-    public static final BlockItem CARVED_SLAB = add("carved_slab", AetherBlocks.CARVED_SLAB, block);
-    public static final BlockItem CARVED_STAIRS = add("carved_stairs", AetherBlocks.CARVED_STAIRS, block);
-    public static final BlockItem CARVED_WALL = add("carved_wall", AetherBlocks.CARVED_WALL, block);
+    public static final BlockItem CARVED_SLAB = add("carved_stone_slab", AetherBlocks.CARVED_STONE_SLAB, block);
+    public static final BlockItem CARVED_STAIRS = add("carved_stone_stairs", AetherBlocks.CARVED_STONE_STAIRS, block);
+    public static final BlockItem CARVED_WALL = add("carved_stone_wall", AetherBlocks.CARVED_STONE_WALL, block);
 
+    public static final BlockItem MOSSY_CARVED_STONE = add("mossy_carved_stone", AetherBlocks.MOSSY_CARVED_STONE, block);
+    public static final BlockItem MOSSY_CARVED_SLAB = add("mossy_carved_stone_slab", AetherBlocks.MOSSY_CARVED_STONE_SLAB, block);
+    public static final BlockItem MOSSY_CARVED_STAIRS = add("mossy_carved_stone_stairs", AetherBlocks.MOSSY_CARVED_STONE_STAIRS, block);
+    public static final BlockItem MOSSY_CARVED_WALL = add("mossy_carved_stone_wall", AetherBlocks.MOSSY_CARVED_STONE_WALL, block);
+
+    public static final BlockItem CRACKED_CARVED_STONE = add("cracked_carved_stone", AetherBlocks.CRACKED_CARVED_STONE, block);
+    public static final BlockItem GLYPHED_CARVED_STONE = add("glyphed_carved_stone", AetherBlocks.GLYPHED_CARVED_STONE, block);
+    public static final BlockItem CARVED_STONE_PANEL = add("carved_stone_panel", AetherBlocks.CARVED_STONE_PANEL, block);
+    public static final BlockItem CARVED_STONE_PANEL_LIT = add("carved_stone_panel_lit", AetherBlocks.CARVED_STONE_PANEL_LIT, block);
+    public static final BlockItem CARVED_STONE_EYE = add("carved_stone_eye", AetherBlocks.CARVED_STONE_EYE, block);
+    public static final BlockItem CARVED_STONE_EYE_LIT = add("carved_stone_eye_lit", AetherBlocks.CARVED_STONE_EYE_LIT, block);
+
+    /*
     public static final BlockItem LIGHT_CARVED_STONE = add("light_carved_stone", AetherBlocks.LIGHT_CARVED_STONE, block);
     //public static final BlockItem LIGHT_CARVED_STONE_TRAP = add("light_carved_stone_trap", AetherBlocks.LIGHT_CARVED_STONE_TRAP, block);
     public static final BlockItem LIGHT_CARVED_SLAB = add("light_carved_slab", AetherBlocks.LIGHT_CARVED_SLAB, block);
