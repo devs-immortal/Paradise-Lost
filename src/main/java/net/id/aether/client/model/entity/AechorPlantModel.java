@@ -1,10 +1,16 @@
 package net.id.aether.client.model.entity;
 
 import net.id.aether.entities.hostile.AechorPlantEntity;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.ModelData;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.ModelPartBuilder;
+import net.minecraft.client.model.ModelPartData;
+import net.minecraft.client.model.ModelTransform;
+import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.MathHelper;
 
 public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
     private final ModelPart root;
@@ -99,7 +105,25 @@ public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
 
     @Override
     public void setAngles(AechorPlantEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.setRotationAngle(petals[0], 0, 2.8274F, 0.2618F);
+        this.setRotationAngle(petals[1], 0, 0.3142F, -0.2618F);
+        this.setRotationAngle(petals[2], 0.2618F, -0.6283F, 0.0F);
+        this.setRotationAngle(petals[3], 0.2618F, 3.1416F, 0);
+        this.setRotationAngle(petals[4], 0.2618F, 0.6283F, 0);
 
+        for (ModelPart petal : this.petals) {
+            petal.pitch *= 1 + 0.3F * MathHelper.sin(ageInTicks / 20);
+            petal.roll *= 1 + 0.3F * MathHelper.sin(ageInTicks / 20);
+        }
+
+        //        for (ModelPart petal : new ModelPart[] { this.petals[0], this.petals[1] }) {
+        //            petal.pitch = MathHelper.sin(petal.yaw) * (-0.2618F + 0.2F * MathHelper.sin(ageInTicks / 20));
+        //            petal.roll = MathHelper.cos(petal.yaw) * (-0.2618F + 0.2F * MathHelper.sin(ageInTicks / 20));
+        //        }
+        //        for (ModelPart petal : new ModelPart[] { this.petals[2], this.petals[3], this.petals[4] }) {
+        //            petal.pitch = MathHelper.cos(petal.yaw) * (-0.2618F + 0.2F * MathHelper.sin(ageInTicks / 20));
+        //            petal.roll = MathHelper.sin(petal.yaw) * (-0.2618F + 0.2F * MathHelper.sin(ageInTicks / 20));
+        //        }
     }
 
     @Override
