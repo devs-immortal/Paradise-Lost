@@ -1,5 +1,6 @@
 package net.id.aether.items;
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.id.aether.blocks.AetherBlocks;
@@ -26,6 +27,7 @@ import net.minecraft.block.FluidDrainable;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -52,6 +54,7 @@ public class AetherItems {
     private static final Action<ItemConvertible> compostable30 = compostable(0.3f);
     private static final Action<ItemConvertible> compostable50 = compostable(0.5f);
     private static final Action<ItemConvertible> compostable65 = compostable(0.65f);
+    private static final Action<ItemConvertible> compostable100 = compostable(1f);
 
 
     //TODO: clean up dispenser behaviors
@@ -345,12 +348,13 @@ public class AetherItems {
     public static final BlockItem PURPLE_SWET_DROP = add("purple_swet_drop", AetherBlocks.PURPLE_SWET_DROP, misc);
     */
 
-    private static Settings block() {
-        return new Settings().group(AetherItemGroups.AETHER_BLOCKS);
+    private static FabricItemSettings block() {
+        return new FabricItemSettings().group(AetherItemGroups.AETHER_BLOCKS);
     }
 
-    private static final Settings block = block();
-    private static final Settings sign = block().maxCount(16);
+    private static final FabricItemSettings block = block();
+    private static final FabricItemSettings sign = block().maxCount(16);
+    private static final FabricItemSettings hat = block.equipmentSlot(stack -> HEAD);
     public static final BlockItem AETHER_GRASS_BLOCK = add("aether_grass", AetherBlocks.AETHER_GRASS_BLOCK, block);
     public static final BlockItem AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", AetherBlocks.AETHER_ENCHANTED_GRASS, block);
 
@@ -568,6 +572,7 @@ public class AetherItems {
     public static final BlockItem FLUTEGRASS = add("flutegrass", AetherBlocks.FLUTEGRASS, block, compostable30);
     public static final BlockItem HONEY_NETTLE = add("honey_nettle", AetherBlocks.HONEY_NETTLE, block, compostable50);
     public static final BlockItem HALOPHIA = add("halophia", AetherBlocks.HALOPHIA, block, compostable30);
+    public static final BlockItem GIANT_LILY = add("giant_lily", new LilyPadItem(AetherBlocks.GIANT_LILY, hat), compostable100);
 
     public static final BlockItem ANCIENT_FLOWER = add("ancient_flower", AetherBlocks.ANCIENT_FLOWER, block, compostable65);
     public static final BlockItem ATARAXIA = add("ataraxia", AetherBlocks.ATARAXIA, block, compostable65);

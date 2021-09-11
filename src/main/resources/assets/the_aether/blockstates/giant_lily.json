@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "flowering=false": [
+      {
+        "model": "the_aether:block/giant_lilypad"
+      },
+      {
+        "model": "the_aether:block/giant_lilypad",
+        "y": 90
+      },
+      {
+        "model": "the_aether:block/giant_lilypad",
+        "y": 180
+      },
+      {
+        "model": "the_aether:block/giant_lilypad",
+        "y": 270
+      }
+    ],
+    "flowering=true": [
+      {
+        "model": "the_aether:block/giant_lotus"
+      },
+      {
+        "model": "the_aether:block/giant_lotus",
+        "y": 90
+      },
+      {
+        "model": "the_aether:block/giant_lotus",
+        "y": 180
+      },
+      {
+        "model": "the_aether:block/giant_lotus",
+        "y": 270
+      }
+    ]
+  }
+}

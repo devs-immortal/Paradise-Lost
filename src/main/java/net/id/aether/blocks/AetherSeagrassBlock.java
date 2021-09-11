@@ -1,6 +1,8 @@
 package net.id.aether.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SeagrassBlock;
+import net.minecraft.util.shape.VoxelShape;
 
 public class AetherSeagrassBlock extends SeagrassBlock {
 
