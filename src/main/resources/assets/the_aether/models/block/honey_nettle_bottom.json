@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "the_aether:block/honey_nettle_bottom"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "the_aether:block/honey_nettle_bottom"
+    },
+    "half=upper": {
+      "model": "the_aether:block/honey_nettle_top"
+    }
+  }
+}
