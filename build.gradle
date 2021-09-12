@@ -60,14 +60,14 @@ repositories {
         url = "https://maven.kyrptonaught.dev/"
     }
     maven {
-        name = "gudenau\'s maven"
-        url = "https://maven.gudenau.net"
-    }
-    maven {
         url = "https://jitpack.io"
     }
     maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
     mavenCentral()
+    maven {
+        name = "gudenau\'s maven"
+        url = "https://maven.gudenau.net"
+    }
 }
 
 loom {

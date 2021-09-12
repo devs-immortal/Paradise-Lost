@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "section=bottom": {
+      "model": "the_aether:block/weeping_cloudburst_bottom"
+    },
+    "section=body": {
+      "model": "the_aether:block/weeping_cloudburst_body"
+    },
+    "section=top": {
+      "model": "the_aether:block/weeping_cloudburst_top"
+    }
+  }
+}

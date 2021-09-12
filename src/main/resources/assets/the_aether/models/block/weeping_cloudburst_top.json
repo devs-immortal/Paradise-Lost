@@ -1,0 +1,7 @@
+{
+  "parent": "the_aether:template/bilayer_stellated",
+  "textures": {
+    "face": "the_aether:block/weeping_cloudburst_top_flower",
+    "face_tint": "the_aether:block/weeping_cloudburst_top_stalk"
+  }
+}
