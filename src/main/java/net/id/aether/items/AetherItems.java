@@ -27,7 +27,6 @@ import net.minecraft.block.FluidDrainable;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -573,7 +572,7 @@ public class AetherItems {
     public static final BlockItem HONEY_NETTLE = add("honey_nettle", AetherBlocks.HONEY_NETTLE, block, compostable50);
     public static final BlockItem HALOPHIA = add("halophia", AetherBlocks.HALOPHIA, block, compostable30);
     public static final BlockItem GIANT_LILY = add("giant_lily", new LilyPadItem(AetherBlocks.GIANT_LILY, hat), compostable100);
-    public static final BlockItem ZANITE_ROSE = add("zanite_rose", AetherBlocks.ZANITE_ROSE, block, compostable30);
+    public static final BlockItem ZANITE_ROSE = add("zanite_rose", AetherBlocks.WEEPING_CLOUDBURST, block, compostable30);
     public static final BlockItem MOSS_STAR = add("moss_star", AetherBlocks.MOSS_STAR, block, compostable50);
     public static final BlockItem MOSS_BALL = add("moss_ball", AetherBlocks.MOSS_BALL, block, compostable30);
 
