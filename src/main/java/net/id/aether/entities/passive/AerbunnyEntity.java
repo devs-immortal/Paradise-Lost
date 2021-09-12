@@ -128,6 +128,10 @@ public class AerbunnyEntity extends AetherAnimalEntity {
         if (this.isOnGround() && ((getVelocity().x > 0.025 || getVelocity().z > 0.025) && random.nextInt(4) == 0)) {
             jump();
         }
+        // Slows down Aerbunny while falling
+        if (!this.isOnGround() && getVelocity().y < 0.0D) {
+            this.setVelocity(getVelocity().multiply(1.0D, 0.65D, 1.0D));
+        }
     }
 
     @Override

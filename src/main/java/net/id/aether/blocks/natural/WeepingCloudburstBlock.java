@@ -20,13 +20,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class ZaniteRoseBlock extends PlantBlock implements Waterloggable {
+public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable {
 
     public static final EnumProperty<Section> SECTION = EnumProperty.of("section", Section.class);
     public static final BooleanProperty NOGROW = BooleanProperty.of("nogrow");
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    public ZaniteRoseBlock(Settings settings) {
+    public WeepingCloudburstBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(SECTION, Section.BOTTOM).with(NOGROW, false).with(WATERLOGGED, false));
     }
