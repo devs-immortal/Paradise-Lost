@@ -1,0 +1,7 @@
+{
+  "parent": "the_aether:template/bilayer_cross",
+  "textures": {
+    "cross_tint": "the_aether:block/aether_grass",
+    "cross": "the_aether:block/aether_grass_flowers"
+  }
+}
