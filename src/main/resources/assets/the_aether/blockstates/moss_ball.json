@@ -1,0 +1,39 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "the_aether:block/moss_ball_large"
+      },
+      {
+        "model": "the_aether:block/moss_ball_medium"
+      },
+      {
+        "model": "the_aether:block/moss_ball_medium",
+        "y": 90
+      },
+      {
+        "model": "the_aether:block/moss_ball_medium",
+        "y": 180
+      },
+      {
+        "model": "the_aether:block/moss_ball_medium",
+        "y": 270
+      },
+      {
+        "model": "the_aether:block/moss_ball_small"
+      },
+      {
+        "model": "the_aether:block/moss_ball_small",
+        "y": 90
+      },
+      {
+        "model": "the_aether:block/moss_ball_small",
+        "y": 180
+      },
+      {
+        "model": "the_aether:block/moss_ball_small",
+        "y": 270
+      }
+    ]
+  }
+}

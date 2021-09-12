@@ -1,0 +1,6 @@
+{
+  "parent": "the_aether:template/stellated_tint",
+  "textures": {
+    "face": "the_aether:block/zanite_rose_bottom"
+  }
+}

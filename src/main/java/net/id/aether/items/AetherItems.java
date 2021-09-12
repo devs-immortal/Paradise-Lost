@@ -573,6 +573,9 @@ public class AetherItems {
     public static final BlockItem HONEY_NETTLE = add("honey_nettle", AetherBlocks.HONEY_NETTLE, block, compostable50);
     public static final BlockItem HALOPHIA = add("halophia", AetherBlocks.HALOPHIA, block, compostable30);
     public static final BlockItem GIANT_LILY = add("giant_lily", new LilyPadItem(AetherBlocks.GIANT_LILY, hat), compostable100);
+    public static final BlockItem ZANITE_ROSE = add("zanite_rose", AetherBlocks.ZANITE_ROSE, block, compostable30);
+    public static final BlockItem MOSS_STAR = add("moss_star", AetherBlocks.MOSS_STAR, block, compostable50);
+    public static final BlockItem MOSS_BALL = add("moss_ball", AetherBlocks.MOSS_BALL, block, compostable30);
 
     public static final BlockItem ANCIENT_FLOWER = add("ancient_flower", AetherBlocks.ANCIENT_FLOWER, block, compostable65);
     public static final BlockItem ATARAXIA = add("ataraxia", AetherBlocks.ATARAXIA, block, compostable65);

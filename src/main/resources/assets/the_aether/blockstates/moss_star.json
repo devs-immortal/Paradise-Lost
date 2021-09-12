@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "waterlogged=false": {
+      "model": "the_aether:block/dry_moss_star"
+    },
+    "waterlogged=true": {
+      "model": "the_aether:block/moss_star"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "the_aether:template/bilayer_cross",
   "textures": {
-    "cross": "the_aether:block/honey_nettle_top"
+    "cross": "the_aether:block/honey_nettle_top_flower",
+    "cross_tint": "the_aether:block/honey_nettle_top_stalk"
   }
 }
