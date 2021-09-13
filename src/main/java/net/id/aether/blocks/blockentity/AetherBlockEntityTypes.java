@@ -1,6 +1,6 @@
 package net.id.aether.blocks.blockentity;
 
-import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.client.rendering.block.IncubatorBlockEntityRenderer;
 import net.minecraft.block.entity.BlockEntityType;
@@ -19,6 +19,6 @@ public class AetherBlockEntityTypes {
     }
 
     public static void initClient() {
-        BlockEntityRendererRegistry.INSTANCE.register(INCUBATOR, IncubatorBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(INCUBATOR, IncubatorBlockEntityRenderer::new);
     }
 }
