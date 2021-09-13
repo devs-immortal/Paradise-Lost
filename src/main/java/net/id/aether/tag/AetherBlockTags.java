@@ -15,4 +15,6 @@ public class AetherBlockTags {
     public static final Tag<Block> SWET_TRANSFORMERS_GOLDEN = TagFactory.BLOCK.create(new Identifier(Aether.MOD_ID, "swet_transformers/golden"));
     public static final Tag<Block> SWET_TRANSFORMERS_PURPLE = TagFactory.BLOCK.create(new Identifier(Aether.MOD_ID, "swet_transformers/purple"));
     public static final Tag<Block> SWET_TRANSFORMERS_VERMILION = TagFactory.BLOCK.create(new Identifier(Aether.MOD_ID, "swet_transformers/vermilion"));
+    public static final Tag<Block> BASE_AETHER_STONE = TagFactory.BLOCK.create(new Identifier(Aether.MOD_ID, "base_aether_stone"));
+
 }

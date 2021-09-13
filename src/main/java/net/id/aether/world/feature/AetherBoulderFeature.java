@@ -1,6 +1,7 @@
 package net.id.aether.world.feature;
 
 import com.mojang.serialization.Codec;
+import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
@@ -34,7 +35,7 @@ public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
         for (singleStateFeatureConfig = context.getConfig(); blockPos.getY() > structureWorldAccess.getBottomY() + 3; blockPos = blockPos.down()) {
             if (!structureWorldAccess.isAir(blockPos.down())) {
                 BlockState blockState = structureWorldAccess.getBlockState(blockPos.down());
-                if ((isSoil(blockState) || isStone(blockState)) && random.nextBoolean()) {
+                if ((isSoil(blockState) || AetherBlockTags.BASE_AETHER_STONE.contains(blockState.getBlock())) && random.nextBoolean()) {
                     break;
                 }
             }

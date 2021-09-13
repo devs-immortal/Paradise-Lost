@@ -29,7 +29,6 @@
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
-    "structure.FeatureMixin",
     "util.RarityMixin",
     "util.SignTypeAccessor"
   ],
