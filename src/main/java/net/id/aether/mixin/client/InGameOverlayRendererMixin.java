@@ -31,7 +31,7 @@ public abstract class InGameOverlayRendererMixin {
 
     @Shadow
     @Nullable
-    protected static BlockState getInWallBlockState(PlayerEntity player) {
+    private static BlockState getInWallBlockState(PlayerEntity player) {
         return null;
     }
 

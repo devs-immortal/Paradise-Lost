@@ -1,13 +1,12 @@
 package net.id.aether.mixin.entity;
 
-import com.google.common.collect.Sets;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.id.aether.api.MoaAttributes;
 import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.entities.passive.MoaEntity;
-import net.id.aether.items.AetherItems;
 import net.id.aether.items.tools.AetherToolMaterials;
+import net.id.aether.tag.AetherItemTags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -28,7 +27,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
-import java.util.Set;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements AetherEntityExtensions {
@@ -56,22 +54,19 @@ public abstract class LivingEntityMixin extends Entity implements AetherEntityEx
     @SuppressWarnings("ConstantConditions")
     @ModifyVariable(method = "travel", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/entity/LivingEntity;isTouchingWater()Z"))
     private double changeGravity(double gravity) {
-        boolean isFalling = this.getVelocity().y <= 0.0D;
+        LivingEntity entity = (LivingEntity) (Object) this;
+        Optional<TrinketComponent> componentOptional = TrinketsApi.getTrinketComponent(entity);
 
-        if ((Object) this instanceof PlayerEntity playerEntity) {
-            Optional<TrinketComponent> componentOptional = TrinketsApi.getTrinketComponent(playerEntity);
-
-            if (componentOptional.isPresent()) {
-                // Get parachutes from trinket slots
-                final Set<Item> validItems = Sets.newHashSet(AetherItems.CLOUD_PARACHUTE, AetherItems.GOLDEN_CLOUD_PARACHUTE);
-                for (Item item : validItems) {
-                    if (componentOptional.get().isEquipped(item)) {
-                        if (isFalling && !this.hasStatusEffect(StatusEffects.SLOW_FALLING) && !isTouchingWater() && !playerEntity.isSneaking()) {
-                            gravity -= 0.07;
-                            this.fallDistance = 0;
-                        }
-                        break;
+        if (componentOptional.isPresent()) {
+            // Get parachutes from trinket slots
+            for (Item item : AetherItemTags.PARACHUTES.values()) {
+                if (componentOptional.get().isEquipped(item)) {
+                    boolean isFalling = this.getVelocity().y <= 0.0D;
+                    if (isFalling && !this.hasStatusEffect(StatusEffects.SLOW_FALLING) && !isTouchingWater() && !isSneaking()) {
+                        gravity -= 0.07;
+                        this.fallDistance = 0;
                     }
+                    break;
                 }
             }
         }

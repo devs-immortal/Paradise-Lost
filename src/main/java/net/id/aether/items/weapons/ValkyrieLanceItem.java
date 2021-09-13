@@ -3,6 +3,7 @@ package net.id.aether.items.weapons;
 import com.google.common.collect.ImmutableMultimap;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.id.aether.mixin.item.SwordItemAccessor;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.SwordItem;
@@ -17,7 +18,7 @@ public class ValkyrieLanceItem extends SwordItem {
     public ValkyrieLanceItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, float reach, float attackRange, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-        builder.putAll(((SwordItemAccessor) this).getAttributeModifiers());
+        builder.putAll(this.getAttributeModifiers(EquipmentSlot.MAINHAND));
         builder.put(ReachEntityAttributes.REACH, new EntityAttributeModifier(REACH_MODIFIER_ID, "Weapon modifier", reach, EntityAttributeModifier.Operation.ADDITION));
         builder.put(ReachEntityAttributes.ATTACK_RANGE, new EntityAttributeModifier(ATTACK_RANGE_MODIFIER_ID, "Weapon modifier", attackRange, EntityAttributeModifier.Operation.ADDITION));
         ((SwordItemAccessor) this).setAttributeModifiers(builder.build());

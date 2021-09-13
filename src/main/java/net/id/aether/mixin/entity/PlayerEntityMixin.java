@@ -25,9 +25,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements AetherEntityExtensions {
 
-    @Shadow
-    @Final
-    private PlayerAbilities abilities;
     private boolean aetherFallen = false;
 
     public PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
@@ -36,6 +33,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements AetherEn
 
     @Shadow
     public abstract void increaseStat(Identifier stat, int amount);
+
+    @Shadow public abstract PlayerAbilities getAbilities();
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
@@ -70,7 +69,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements AetherEn
     public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (isAetherFallen()) {
             aetherFallen = false;
-            if (abilities.allowFlying) {
+            if (getAbilities().allowFlying) {
                 cir.setReturnValue(false);
             } else {
                 if (fallDistance >= 2.0F) {

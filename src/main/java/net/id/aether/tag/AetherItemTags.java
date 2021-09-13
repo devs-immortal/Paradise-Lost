@@ -12,4 +12,5 @@ public class AetherItemTags {
     public static final Tag<Item> SWET_TRANSFORMERS_GOLDEN = TagRegistry.item(new Identifier(Aether.MOD_ID, "swet_transformers/golden"));
     public static final Tag<Item> SWET_TRANSFORMERS_PURPLE = TagRegistry.item(new Identifier(Aether.MOD_ID, "swet_transformers/purple"));
     public static final Tag<Item> SWET_TRANSFORMERS_VERMILION = TagRegistry.item(new Identifier(Aether.MOD_ID, "swet_transformers/vermilion"));
+    public static final Tag<Item> PARACHUTES = TagRegistry.item(new Identifier(Aether.MOD_ID, "parachutes"));
 }

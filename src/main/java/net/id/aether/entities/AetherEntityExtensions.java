@@ -23,5 +23,6 @@ public interface AetherEntityExtensions {
 
     void setFlipped();
 
-    void tick();
+    default void tick(){
+    }
 }

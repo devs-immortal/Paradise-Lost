@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MapRendererMixin {
 
     @Shadow
-    @Final
     private MapState state;
 
     @Shadow

@@ -25,7 +25,6 @@ import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.util.RenderUtils;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
-import net.id.aether.mixin.block.BlocksAccessor;
 import net.id.aether.mixin.client.RenderLayersAccessor;
 import net.id.aether.registry.AetherRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue;
@@ -348,8 +347,7 @@ public class AetherBlocks {
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(shrub().mapColor(MapColor.PINK)), flammablePlant, cutoutRenderLayer);
 
     public static final BlueberryBushBlock BLUEBERRY_BUSH = add("blueberry_bush", new BlueberryBushBlock(of(Material.PLANT).strength(0.2f)
-            .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(BlocksAccessor::callCanSpawnOnLeaves)
-            .suffocates(never).blockVision(never).noCollision()), flammablePlant, cutoutRenderLayer);
+            .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision()), flammablePlant, cutoutRenderLayer);
     // Flowers
     private static Settings flower() { return copy(DANDELION); }
     public static final FlowerBlock ANCIENT_FLOWER = add("ancient_flower", new FlowerBlock(StatusEffects.ABSORPTION, 20, flower()), flammablePlant, cutoutRenderLayer);
