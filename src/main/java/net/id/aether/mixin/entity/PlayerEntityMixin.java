@@ -41,7 +41,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements AetherEn
         if (source.isOutOfWorld() && getY() < world.getBottomY() - 1 && world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
             if (!world.isClient()) {
                 setAetherFallen(true);
-                ((ServerPlayerEntity) (Object) this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() * 16, world.getTopY() + 320, this.getZ() * 16, this.getYaw(), this.getPitch());
+                ((ServerPlayerEntity) (Object) this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() * 10, world.getTopY() + 128, this.getZ() * 10, this.getYaw(), this.getPitch());
                 CustomStatusEffectInstance ef = new CustomStatusEffectInstance(StatusEffect.byRawId(9), 160, 2);
                 ef.ShowParticles = false;
                 this.addStatusEffect(ef);

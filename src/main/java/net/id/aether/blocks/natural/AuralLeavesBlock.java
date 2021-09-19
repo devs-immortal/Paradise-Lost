@@ -56,11 +56,11 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         Vec3i color2 = colorRGBs[1];
         Vec3i color3 = colorRGBs[2];
         Vec3i color4 = colorRGBs[3];
-        float clumpSize = 13;
+        float clumpSize = 27;
 
         // First, we mix color 1 and color 2 using noise
         // Sample simplex noise (and change bounds from [-1, 1] to [0, 1])
-        double simplex = sampleNoise(pos.up(3300), clumpSize, 0.002f);
+        double simplex = sampleNoise(pos.up(3300), clumpSize, 0.003f);
         // Reshape contrast curve
         double percent = contrastCurve(36, simplex);
         percent = percent * (2 - percent);
@@ -73,7 +73,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         // Now we mix colors 3 and 4 together using noise
         // Rinse, repeat as seen above.
         // Sample & reshape
-        double simplex2 = MathHelper.clamp(sampleNoise(pos.west(1337), clumpSize, 0.002f), 0, 1);
+        double simplex2 = MathHelper.clamp(sampleNoise(pos.west(1337), clumpSize, 0.003f), 0, 1);
         double percent2 = simplex2 * (2 - simplex2);
         // Interpolate
         double r2, g2, b2;
@@ -82,7 +82,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         b2 = (MathHelper.lerp(percent2, color3.getZ(), color4.getZ()));
 
         // This last section interpolates between r1, g1, b1, and r2, g2, b2, finally mixing all the colors together.
-        double simplex3 = sampleNoise(pos.east(1738), clumpSize, 0.002f);
+        double simplex3 = sampleNoise(pos.east(1738), clumpSize, 0.003f);
         double finalPercent = contrastCurve(25, simplex3);
         // Interpolate
         int finalR, finalG, finalB;
