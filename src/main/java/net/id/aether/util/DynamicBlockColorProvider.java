@@ -11,7 +11,7 @@ public interface DynamicBlockColorProvider {
     @Environment(EnvType.CLIENT)
     BlockColorProvider getProvider();
 
-    static void handleFastGraphics(BlockPos pos){
+    public static void handleFastGraphics(BlockPos pos){
         if (!isFastGraphics()) {
             MinecraftClient.getInstance().worldRenderer.scheduleBlockRenders(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
         }

@@ -2,7 +2,7 @@ package net.id.aether.blocks.natural;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.aether.util.DynamicBlockColorProvider;
+import net.id.aether.util.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +22,7 @@ public class AuralHangerBlock extends AetherHangerBlock implements DynamicBlockC
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        this.handleFabulousGraphics(pos);
+        DynamicBlockColorProvider.handleFastGraphics(pos);
         super.randomDisplayTick(state, world, pos, random);
     }
 
