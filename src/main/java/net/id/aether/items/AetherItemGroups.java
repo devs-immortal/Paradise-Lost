@@ -9,9 +9,13 @@ import net.minecraft.item.Items;
 import static net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder.build;
 
 public class AetherItemGroups {
-    public static final ItemGroup AETHER_BLOCKS = build(
-            Aether.locate("aether_blocks"),
+    public static final ItemGroup AETHER_BUILDING_BLOCKS = build(
+            Aether.locate("aether_building_blocks"),
             () -> new ItemStack(AetherBlocks.AETHER_GRASS_BLOCK));
+
+    public static final ItemGroup AETHER_DECORATIONS = build(
+            Aether.locate("aether_decorations"),
+            () -> new ItemStack(AetherBlocks.WEEPING_CLOUDBURST));
 
     public static final ItemGroup AETHER_TOOLS = build(
             Aether.locate("aether_tools"),

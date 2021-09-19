@@ -73,6 +73,7 @@ public class AetherBlocks {
     private static Action<Block> tillable() { return (id, block) -> addTillAction(block);}
 
     private static Action<Block> flattenable() { return (id, block) -> addFlattenAction(block);}
+
     /*
     Begin blocks
      */
@@ -126,6 +127,7 @@ public class AetherBlocks {
     public static final SlabBlock HOLYSTONE_BRICK_SLAB = add("holystone_brick_slab", new SlabBlock(holystoneBrick()));
     public static final AetherStairsBlock HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", new AetherStairsBlock(HOLYSTONE_BRICK.getDefaultState(), holystoneBrick()));
     public static final WallBlock HOLYSTONE_BRICK_WALL = add("holystone_brick_wall", new WallBlock(holystoneBrick()));
+    // Dungeon Blocks
     /*
         private static Settings angelicStone() { return of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE); }
         public static final Block ANGELIC_STONE = add("angelic_stone", new Block(angelicStone()));
