@@ -21,7 +21,9 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        MinecraftClient.getInstance().worldRenderer.scheduleBlockRenders(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
+        if (isFabulousGraphics()) {
+            MinecraftClient.getInstance().worldRenderer.scheduleBlockRenders(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
+        }
         super.randomDisplayTick(state, world, pos, random);
     }
 
