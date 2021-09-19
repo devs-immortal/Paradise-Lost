@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.LivingEntity;
@@ -76,7 +77,7 @@ public class LichenBlock extends FallingBlock {
 
     @Override
     public void onSteppedOn(World world, BlockPos topPos, BlockState state, Entity entity) {
-        var pos = topPos.down(venomous ? 2 : 4);
+        BlockPos pos = topPos.down(venomous ? 2 : 4);
         while(pos.getY() != topPos.getY() + 1) {
             tryFall(world, pos);
             pos = pos.up();
@@ -92,6 +93,9 @@ public class LichenBlock extends FallingBlock {
 
     public void tryFall(World world, BlockPos pos) {
         if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY()) {
+            if (world.getBlockState(pos).getPistonBehavior().equals(PistonBehavior.BLOCK) || world.getBlockState(pos).getBlock().getHardness() == -1F){
+                return;
+            }
             FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(world, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, world.getBlockState(pos));
             this.configureFallingBlockEntity(fallingBlockEntity);
             world.spawnEntity(fallingBlockEntity);
