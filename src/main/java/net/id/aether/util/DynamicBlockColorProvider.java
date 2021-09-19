@@ -11,13 +11,13 @@ public interface DynamicBlockColorProvider {
     @Environment(EnvType.CLIENT)
     BlockColorProvider getProvider();
 
-    default void handleFabulousGraphics(BlockPos pos){
-        if (isFabulousGraphics()) {
+    static void handleFastGraphics(BlockPos pos){
+        if (!isFastGraphics()) {
             MinecraftClient.getInstance().worldRenderer.scheduleBlockRenders(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
         }
     }
 
-    static boolean isFabulousGraphics(){
-        return MinecraftClient.getInstance().options.graphicsMode.equals(GraphicsMode.FABULOUS);
+    static boolean isFastGraphics(){
+        return MinecraftClient.getInstance().options.graphicsMode.equals(GraphicsMode.FAST);
     }
 }
