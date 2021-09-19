@@ -484,42 +484,74 @@ public class AetherItems {
     private static FabricItemSettings building_block() {
         return new FabricItemSettings().group(AetherItemGroups.AETHER_BUILDING_BLOCKS);
     }
-    // todo: reorganize item group (not urgent, can be done after 1.6)
     private static final FabricItemSettings block = building_block();
 
+    // stone
+    public static final BlockItem HOLYSTONE = add("holystone", AetherBlocks.HOLYSTONE, block);
+    public static final BlockItem COBBLED_HOLYSTONE = add("cobbled_holystone", AetherBlocks.COBBLED_HOLYSTONE, block);
+    public static final BlockItem ICESTONE = add("icestone", AetherBlocks.ICESTONE, block);
+    public static final BlockItem AEROGEL = add("aerogel", AetherBlocks.AEROGEL, block);
+    // nature
     public static final BlockItem AETHER_GRASS_BLOCK = add("aether_grass", AetherBlocks.AETHER_GRASS_BLOCK, block);
     public static final BlockItem AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", AetherBlocks.AETHER_ENCHANTED_GRASS, block);
-
     public static final BlockItem AETHER_DIRT = add("aether_dirt", AetherBlocks.AETHER_DIRT, block);
     public static final BlockItem QUICKSOIL = add("quicksoil", AetherBlocks.QUICKSOIL, block);
-
-    public static final BlockItem QUICKSOIL_GLASS = add("quicksoil_glass", AetherBlocks.QUICKSOIL_GLASS, block);
-
     public static final BlockItem COLD_AERCLOUD = add("cold_aercloud", AetherBlocks.COLD_AERCLOUD, block);
     public static final BlockItem BLUE_AERCLOUD = add("blue_aercloud", AetherBlocks.BLUE_AERCLOUD, block);
     public static final BlockItem PINK_AERCLOUD = add("pink_aercloud", AetherBlocks.PINK_AERCLOUD, block);
     public static final BlockItem GOLDEN_AERCLOUD = add("golden_aercloud", AetherBlocks.GOLDEN_AERCLOUD, block);
-
-    public static final BlockItem ICESTONE = add("icestone", AetherBlocks.ICESTONE, block);
-    public static final BlockItem AEROGEL = add("aerogel", AetherBlocks.AEROGEL, block);
-
-    public static final BlockItem HOLYSTONE = add("holystone", AetherBlocks.HOLYSTONE, block);
-    public static final BlockItem HOLYSTONE_SLAB = add("holystone_slab", AetherBlocks.HOLYSTONE_SLAB, block);
-    public static final BlockItem HOLYSTONE_STAIRS = add("holystone_stairs", AetherBlocks.HOLYSTONE_STAIRS, block);
-
-    public static final BlockItem COBBLED_HOLYSTONE = add("cobbled_holystone", AetherBlocks.COBBLED_HOLYSTONE, block);
-    public static final BlockItem COBBLED_HOLYSTONE_SLAB = add("cobbled_holystone_slab", AetherBlocks.COBBLED_HOLYSTONE_SLAB, block);
-    public static final BlockItem COBBLED_HOLYSTONE_STAIRS = add("cobbled_holystone_stairs", AetherBlocks.COBBLED_HOLYSTONE_STAIRS, block);
-
+    // planks
+    public static final BlockItem SKYROOT_PLANKS = add("skyroot_planks", AetherBlocks.SKYROOT_PLANKS, block);
+    public static final BlockItem GOLDEN_OAK_PLANKS = add("golden_oak_planks", AetherBlocks.GOLDEN_OAK_PLANKS, block);
+    public static final BlockItem ORANGE_PLANKS = add("orange_planks", AetherBlocks.ORANGE_PLANKS, block);
+    public static final BlockItem CRYSTAL_PLANKS = add("crystal_planks", AetherBlocks.CRYSTAL_PLANKS, block);
+    public static final BlockItem WISTERIA_PLANKS = add("wisteria_planks", AetherBlocks.WISTERIA_PLANKS, block);
+    public static final BlockItem SKYROOT_BOOKSHELF = add("skyroot_bookshelf", AetherBlocks.SKYROOT_BOOKSHELF, block);
+    // ores
+    public static final BlockItem AMBROSIUM_ORE = add("ambrosium_ore", AetherBlocks.AMBROSIUM_ORE, block);
+    public static final BlockItem ZANITE_ORE = add("zanite_ore", AetherBlocks.ZANITE_ORE, block);
+    public static final BlockItem GRAVITITE_ORE = add("gravitite_ore", AetherBlocks.GRAVITITE_ORE, block);
+    // ore blocks
+    public static final BlockItem ZANITE_BLOCK = add("zanite_block", AetherBlocks.ZANITE_BLOCK, block);
+    public static final BlockItem BLOCK_OF_GRAVITITE = add("block_of_gravitite", AetherBlocks.BLOCK_OF_GRAVITITE, block);
+    // move this somewhere else
+    public static final BlockItem GRAVITITE_LEVITATOR = add("gravitite_levitator", AetherBlocks.GRAVITITE_LEVITATOR, block);
+    // logs
+    public static final BlockItem SKYROOT_LOG = add("skyroot_log", AetherBlocks.SKYROOT_LOG, block);
+    public static final BlockItem GOLDEN_OAK_LOG = add("golden_oak_log", AetherBlocks.GOLDEN_OAK_LOG, block);
+    public static final BlockItem ORANGE_LOG = add("orange_log", AetherBlocks.ORANGE_LOG, block);
+    public static final BlockItem CRYSTAL_LOG = add("crystal_log", AetherBlocks.CRYSTAL_LOG, block);
+    public static final BlockItem WISTERIA_LOG = add("wisteria_log", AetherBlocks.WISTERIA_LOG, block);
+    // stripped logs
+    public static final BlockItem STRIPPED_SKYROOT_LOG = add("stripped_skyroot_log", AetherBlocks.STRIPPED_SKYROOT_LOG, block);
+    public static final BlockItem STRIPPED_GOLDEN_OAK_LOG = add("stripped_golden_oak_log", AetherBlocks.STRIPPED_GOLDEN_OAK_LOG, block);
+    public static final BlockItem STRIPPED_ORANGE_LOG = add("stripped_orange_log", AetherBlocks.STRIPPED_ORANGE_LOG, block);
+    public static final BlockItem STRIPPED_CRYSTAL_LOG = add("stripped_crystal_log", AetherBlocks.STRIPPED_CRYSTAL_LOG, block);
+    public static final BlockItem STRIPPED_WISTERIA_LOG = add("stripped_wisteria_log", AetherBlocks.STRIPPED_WISTERIA_LOG, block);
+    // stripped wood
+    public static final BlockItem STRIPPED_SKYROOT_WOOD = add("stripped_skyroot_wood", AetherBlocks.STRIPPED_SKYROOT_WOOD, block);
+    public static final BlockItem STRIPPED_GOLDEN_OAK_WOOD = add("stripped_golden_oak_wood", AetherBlocks.STRIPPED_GOLDEN_OAK_WOOD, block);
+    public static final BlockItem STRIPPED_ORANGE_WOOD = add("stripped_orange_wood", AetherBlocks.STRIPPED_ORANGE_WOOD, block);
+    public static final BlockItem STRIPPED_CRYSTAL_WOOD = add("stripped_crystal_wood", AetherBlocks.STRIPPED_CRYSTAL_WOOD, block);
+    public static final BlockItem STRIPPED_WISTERIA_WOOD = add("stripped_wisteria_wood", AetherBlocks.STRIPPED_WISTERIA_WOOD, block);
+    // wood
+    public static final BlockItem SKYROOT_WOOD = add("skyroot_wood", AetherBlocks.SKYROOT_WOOD, block);
+    public static final BlockItem GOLDEN_OAK_WOOD = add("golden_oak_wood", AetherBlocks.GOLDEN_OAK_WOOD, block);
+    public static final BlockItem ORANGE_WOOD = add("orange_wood", AetherBlocks.ORANGE_WOOD, block);
+    public static final BlockItem CRYSTAL_WOOD = add("crystal_wood", AetherBlocks.CRYSTAL_WOOD, block);
+    public static final BlockItem WISTERIA_WOOD = add("wisteria_wood", AetherBlocks.WISTERIA_WOOD, block);
+    // glass
+    public static final BlockItem QUICKSOIL_GLASS = add("quicksoil_glass", AetherBlocks.QUICKSOIL_GLASS, block);
+    // slabs
+    public static final BlockItem SKYROOT_SLAB = add("skyroot_slab", AetherBlocks.SKYROOT_SLAB, block);
+    public static final BlockItem GOLDEN_OAK_SLAB = add("golden_oak_slab", AetherBlocks.GOLDEN_OAK_SLAB, block);
+    public static final BlockItem ORANGE_SLAB = add("orange_slab", AetherBlocks.ORANGE_SLAB, block);
+    public static final BlockItem CRYSTAL_SLAB = add("crystal_slab", AetherBlocks.CRYSTAL_SLAB, block);
+    public static final BlockItem WISTERIA_SLAB = add("wisteria_slab", AetherBlocks.WISTERIA_SLAB, block);
+    // smooth stuff
+    // cobble variants
     public static final BlockItem MOSSY_HOLYSTONE = add("mossy_holystone", AetherBlocks.MOSSY_HOLYSTONE, block);
-    public static final BlockItem GOLDEN_MOSSY_HOLYSTONE = add("golden_mossy_holystone", AetherBlocks.GOLDEN_MOSSY_HOLYSTONE, block);
-    public static final BlockItem MOSSY_HOLYSTONE_SLAB = add("mossy_holystone_slab", AetherBlocks.MOSSY_HOLYSTONE_SLAB, block);
-    public static final BlockItem MOSSY_HOLYSTONE_STAIRS = add("mossy_holystone_stairs", AetherBlocks.MOSSY_HOLYSTONE_STAIRS, block);
-
-    public static final BlockItem HOLYSTONE_BRICK = add("holystone_brick", AetherBlocks.HOLYSTONE_BRICK, block);
-    public static final BlockItem HOLYSTONE_BRICK_SLAB = add("holystone_brick_slab", AetherBlocks.HOLYSTONE_BRICK_SLAB, block);
-    public static final BlockItem HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", AetherBlocks.HOLYSTONE_BRICK_STAIRS, block);
-    /*
+    public static final BlockItem GOLDEN_MOSSY_HOLYSTONE = add("golden_mossy_holystone", AetherBlocks.GOLDEN_MOSSY_HOLYSTONE, block);/*
     public static final BlockItem ANGELIC_STONE = add("angelic_stone", AetherBlocks.ANGELIC_STONE, block);
     public static final BlockItem ANGELIC_CRACKED_STONE = add("angelic_stone_cracked", AetherBlocks.ANGELIC_CRACKED_STONE, block);
     public static final BlockItem ANGELIC_SLAB = add("angelic_slab", AetherBlocks.ANGELIC_SLAB, block);
@@ -545,14 +577,10 @@ public class AetherItems {
     public static final BlockItem LIGHT_HELLFIRE_STAIRS = add("light_hellfire_stairs", AetherBlocks.LIGHT_HELLFIRE_STAIRS, block);
     public static final BlockItem LIGHT_HELLFIRE_WALL = add("light_hellfire_wall", AetherBlocks.LIGHT_HELLFIRE_WALL, block);
     */
+    // bricks
+    public static final BlockItem HOLYSTONE_BRICK = add("holystone_brick", AetherBlocks.HOLYSTONE_BRICK, block);
     public static final BlockItem CARVED_STONE = add("carved_stone", AetherBlocks.CARVED_STONE, block);
-    public static final BlockItem CARVED_SLAB = add("carved_stone_slab", AetherBlocks.CARVED_STONE_SLAB, block);
-    public static final BlockItem CARVED_STAIRS = add("carved_stone_stairs", AetherBlocks.CARVED_STONE_STAIRS, block);
-
     public static final BlockItem MOSSY_CARVED_STONE = add("mossy_carved_stone", AetherBlocks.MOSSY_CARVED_STONE, block);
-    public static final BlockItem MOSSY_CARVED_SLAB = add("mossy_carved_stone_slab", AetherBlocks.MOSSY_CARVED_STONE_SLAB, block);
-    public static final BlockItem MOSSY_CARVED_STAIRS = add("mossy_carved_stone_stairs", AetherBlocks.MOSSY_CARVED_STONE_STAIRS, block);
-
     public static final BlockItem CRACKED_CARVED_STONE = add("cracked_carved_stone", AetherBlocks.CRACKED_CARVED_STONE, block);
     public static final BlockItem GLYPHED_CARVED_STONE = add("glyphed_carved_stone", AetherBlocks.GLYPHED_CARVED_STONE, block);
     public static final BlockItem CARVED_STONE_PANEL = add("carved_stone_panel", AetherBlocks.CARVED_STONE_PANEL, block);
@@ -578,53 +606,27 @@ public class AetherItems {
     public static final BlockItem LIGHT_SENTRY_STAIRS = add("light_sentry_stairs", AetherBlocks.LIGHT_SENTRY_STAIRS, block);
     public static final BlockItem LIGHT_SENTRY_WALL = add("light_sentry_wall", AetherBlocks.LIGHT_SENTRY_WALL, block);
     */
-    public static final BlockItem SKYROOT_LOG = add("skyroot_log", AetherBlocks.SKYROOT_LOG, block);
-    public static final BlockItem SKYROOT_WOOD = add("skyroot_wood", AetherBlocks.SKYROOT_WOOD, block);
-    public static final BlockItem STRIPPED_SKYROOT_LOG = add("stripped_skyroot_log", AetherBlocks.STRIPPED_SKYROOT_LOG, block);
-    public static final BlockItem STRIPPED_SKYROOT_WOOD = add("stripped_skyroot_wood", AetherBlocks.STRIPPED_SKYROOT_WOOD, block);
-    public static final BlockItem SKYROOT_PLANKS = add("skyroot_planks", AetherBlocks.SKYROOT_PLANKS, block);
-    public static final BlockItem SKYROOT_BOOKSHELF = add("skyroot_bookshelf", AetherBlocks.SKYROOT_BOOKSHELF, block);
-    public static final BlockItem SKYROOT_SLAB = add("skyroot_slab", AetherBlocks.SKYROOT_SLAB, block);
+    // stairs
     public static final BlockItem SKYROOT_STAIRS = add("skyroot_stairs", AetherBlocks.SKYROOT_STAIRS, block);
-
-    public static final BlockItem GOLDEN_OAK_LOG = add("golden_oak_log", AetherBlocks.GOLDEN_OAK_LOG, block);
-    public static final BlockItem GOLDEN_OAK_WOOD = add("golden_oak_wood", AetherBlocks.GOLDEN_OAK_WOOD, block);
-    public static final BlockItem STRIPPED_GOLDEN_OAK_LOG = add("stripped_golden_oak_log", AetherBlocks.STRIPPED_GOLDEN_OAK_LOG, block);
-    public static final BlockItem STRIPPED_GOLDEN_OAK_WOOD = add("stripped_golden_oak_wood", AetherBlocks.STRIPPED_GOLDEN_OAK_WOOD, block);
-    public static final BlockItem GOLDEN_OAK_PLANKS = add("golden_oak_planks", AetherBlocks.GOLDEN_OAK_PLANKS, block);
-    public static final BlockItem GOLDEN_OAK_SLAB = add("golden_oak_slab", AetherBlocks.GOLDEN_OAK_SLAB, block);
     public static final BlockItem GOLDEN_OAK_STAIRS = add("golden_oak_stairs", AetherBlocks.GOLDEN_OAK_STAIRS, block);
-
-    public static final BlockItem ORANGE_LOG = add("orange_log", AetherBlocks.ORANGE_LOG, block);
-    public static final BlockItem ORANGE_WOOD = add("orange_wood", AetherBlocks.ORANGE_WOOD, block);
-    public static final BlockItem STRIPPED_ORANGE_LOG = add("stripped_orange_log", AetherBlocks.STRIPPED_ORANGE_LOG, block);
-    public static final BlockItem STRIPPED_ORANGE_WOOD = add("stripped_orange_wood", AetherBlocks.STRIPPED_ORANGE_WOOD, block);
-    public static final BlockItem ORANGE_PLANKS = add("orange_planks", AetherBlocks.ORANGE_PLANKS, block);
-    public static final BlockItem ORANGE_SLAB = add("orange_slab", AetherBlocks.ORANGE_SLAB, block);
     public static final BlockItem ORANGE_STAIRS = add("orange_stairs", AetherBlocks.ORANGE_STAIRS, block);
-
-    public static final BlockItem CRYSTAL_LOG = add("crystal_log", AetherBlocks.CRYSTAL_LOG, block);
-    public static final BlockItem CRYSTAL_WOOD = add("crystal_wood", AetherBlocks.CRYSTAL_WOOD, block);
-    public static final BlockItem STRIPPED_CRYSTAL_LOG = add("stripped_crystal_log", AetherBlocks.STRIPPED_CRYSTAL_LOG, block);
-    public static final BlockItem STRIPPED_CRYSTAL_WOOD = add("stripped_crystal_wood", AetherBlocks.STRIPPED_CRYSTAL_WOOD, block);
-    public static final BlockItem CRYSTAL_PLANKS = add("crystal_planks", AetherBlocks.CRYSTAL_PLANKS, block);
-    public static final BlockItem CRYSTAL_SLAB = add("crystal_slab", AetherBlocks.CRYSTAL_SLAB, block);
     public static final BlockItem CRYSTAL_STAIRS = add("crystal_stairs", AetherBlocks.CRYSTAL_STAIRS, block);
-
-    public static final BlockItem WISTERIA_LOG = add("wisteria_log", AetherBlocks.WISTERIA_LOG, block);
-    public static final BlockItem WISTERIA_WOOD = add("wisteria_wood", AetherBlocks.WISTERIA_WOOD, block);
-    public static final BlockItem STRIPPED_WISTERIA_LOG = add("stripped_wisteria_log", AetherBlocks.STRIPPED_WISTERIA_LOG, block);
-    public static final BlockItem STRIPPED_WISTERIA_WOOD = add("stripped_wisteria_wood", AetherBlocks.STRIPPED_WISTERIA_WOOD, block);
-    public static final BlockItem WISTERIA_PLANKS = add("wisteria_planks", AetherBlocks.WISTERIA_PLANKS, block);
-    public static final BlockItem WISTERIA_SLAB = add("wisteria_slab", AetherBlocks.WISTERIA_SLAB, block);
     public static final BlockItem WISTERIA_STAIRS = add("wisteria_stairs", AetherBlocks.WISTERIA_STAIRS, block);
+    // stone stairs + slabs
+    public static final BlockItem HOLYSTONE_STAIRS = add("holystone_stairs", AetherBlocks.HOLYSTONE_STAIRS, block);
+    public static final BlockItem COBBLED_HOLYSTONE_STAIRS = add("cobbled_holystone_stairs", AetherBlocks.COBBLED_HOLYSTONE_STAIRS, block);
+    public static final BlockItem MOSSY_HOLYSTONE_STAIRS = add("mossy_holystone_stairs", AetherBlocks.MOSSY_HOLYSTONE_STAIRS, block);
+    public static final BlockItem HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", AetherBlocks.HOLYSTONE_BRICK_STAIRS, block);
+    public static final BlockItem CARVED_STAIRS = add("carved_stone_stairs", AetherBlocks.CARVED_STONE_STAIRS, block);
+    public static final BlockItem MOSSY_CARVED_STAIRS = add("mossy_carved_stone_stairs", AetherBlocks.MOSSY_CARVED_STONE_STAIRS, block);
+    public static final BlockItem HOLYSTONE_SLAB = add("holystone_slab", AetherBlocks.HOLYSTONE_SLAB, block);
 
-    public static final BlockItem AMBROSIUM_ORE = add("ambrosium_ore", AetherBlocks.AMBROSIUM_ORE, block);
-    public static final BlockItem ZANITE_ORE = add("zanite_ore", AetherBlocks.ZANITE_ORE, block);
-    public static final BlockItem GRAVITITE_ORE = add("gravitite_ore", AetherBlocks.GRAVITITE_ORE, block);
-    public static final BlockItem ZANITE_BLOCK = add("zanite_block", AetherBlocks.ZANITE_BLOCK, block);
-    public static final BlockItem BLOCK_OF_GRAVITITE = add("block_of_gravitite", AetherBlocks.BLOCK_OF_GRAVITITE, block);
-    public static final BlockItem GRAVITITE_LEVITATOR = add("gravitite_levitator", AetherBlocks.GRAVITITE_LEVITATOR, block);
+    public static final BlockItem COBBLED_HOLYSTONE_SLAB = add("cobbled_holystone_slab", AetherBlocks.COBBLED_HOLYSTONE_SLAB, block);
+    public static final BlockItem MOSSY_HOLYSTONE_SLAB = add("mossy_holystone_slab", AetherBlocks.MOSSY_HOLYSTONE_SLAB, block);
+    public static final BlockItem HOLYSTONE_BRICK_SLAB = add("holystone_brick_slab", AetherBlocks.HOLYSTONE_BRICK_SLAB, block);
+    public static final BlockItem CARVED_SLAB = add("carved_stone_slab", AetherBlocks.CARVED_STONE_SLAB, block);
+    public static final BlockItem MOSSY_CARVED_SLAB = add("mossy_carved_stone_slab", AetherBlocks.MOSSY_CARVED_STONE_SLAB, block);
+    // colorfuls
 
     public static void init() {
         AetherRegistryQueues.ITEM.register();
