@@ -22,9 +22,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (isFabulousGraphics()) {
-            MinecraftClient.getInstance().worldRenderer.scheduleBlockRenders(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
-        }
+        this.handleFabulousGraphics(pos);
         super.randomDisplayTick(state, world, pos, random);
     }
 
@@ -36,24 +34,21 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         this.gradientColors = gradientColors;
     }
 
+    // todo (eventually): Move contrast contrastCurve and sampleNoise to some sort of util, as they will be useful elsewhere.
     // Sigmoid
     protected static double contrastCurve(double contrast, double percent) {
         percent = percent - 0.5;
         return MathHelper.clamp(percent * Math.sqrt((4 + contrast) / (4 + 4 * contrast * percent * percent)) + 0.5, 0, 1);
     }
 
-    protected static double sampleNoise(BlockPos pos, float clumpSize){
-        if (!isFabulousGraphics()) {
+    protected static double sampleNoise(BlockPos pos, float clumpSize, float timescale){
+        if (!DynamicBlockColorProvider.isFabulousGraphics()) {
             return 0.5 * (1 + SimplexNoise.noise(pos.getX() / clumpSize, pos.getY() / clumpSize, pos.getZ() / clumpSize));
         } else {
             clumpSize += 3;
             World world = MinecraftClient.getInstance().world;
-            return 0.5 * (1 + SimplexNoise.noise(pos.getX() / clumpSize + world.getTime()/100F, pos.getY() / clumpSize + world.getTime()/100F, pos.getZ() / clumpSize + world.getTime()/100F));
+            return 0.5 * (1 + SimplexNoise.noise(pos.getX() / clumpSize + world.getTime() * timescale, pos.getY() / clumpSize + world.getTime() * timescale, pos.getZ() / clumpSize + world.getTime() * timescale));
         }
-    }
-
-    private static boolean isFabulousGraphics(){
-        return MinecraftClient.getInstance().options.graphicsMode.equals(GraphicsMode.FABULOUS);
     }
 
     public static int getAuralColor(BlockPos pos, Vec3i[] colorRGBs) {
@@ -65,7 +60,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
 
         // First, we mix color 1 and color 2 using noise
         // Sample simplex noise (and change bounds from [-1, 1] to [0, 1])
-        double simplex = sampleNoise(pos.up(3300), clumpSize);
+        double simplex = sampleNoise(pos.up(3300), clumpSize, 0.002f);
         // Reshape contrast curve
         double percent = contrastCurve(36, simplex);
         percent = percent * (2 - percent);
@@ -78,7 +73,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         // Now we mix colors 3 and 4 together using noise
         // Rinse, repeat as seen above.
         // Sample & reshape
-        double simplex2 = MathHelper.clamp(sampleNoise(pos.west(1337), clumpSize), 0, 1);
+        double simplex2 = MathHelper.clamp(sampleNoise(pos.west(1337), clumpSize, 0.002f), 0, 1);
         double percent2 = simplex2 * (2 - simplex2);
         // Interpolate
         double r2, g2, b2;
@@ -87,7 +82,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
         b2 = (MathHelper.lerp(percent2, color3.getZ(), color4.getZ()));
 
         // This last section interpolates between r1, g1, b1, and r2, g2, b2, finally mixing all the colors together.
-        double simplex3 = sampleNoise(pos.east(1738), clumpSize);
+        double simplex3 = sampleNoise(pos.east(1738), clumpSize, 0.002f);
         double finalPercent = contrastCurve(25, simplex3);
         // Interpolate
         int finalR, finalG, finalB;
