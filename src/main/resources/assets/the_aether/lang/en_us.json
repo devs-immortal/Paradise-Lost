@@ -470,5 +470,13 @@
   "info.aether.bloodstone.ambrosium": "peer into the heart",
   "info.aether.bloodstone.zanite": "peer into the mind",
   "info.aether.bloodstone.gravitite": "peer into the will",
-  "info.aether.bloodstone.abstentine": "peer into the soul"
+  "info.aether.bloodstone.abstentine": "peer into the soul",
+  "condition.persistance.temporary": "Passing",
+  "condition.persistance.chronic": "Chronic",
+  "condition.persistance.constant": "Lingering",
+  "condition.severity.negligible": "Negligible",
+  "condition.severity.mild": "Mild",
+  "condition.severity.acute": "Acute",
+  "condition.severity.dire": "Dire",
+  "condition.severity.extreme": "Extreme"
 }

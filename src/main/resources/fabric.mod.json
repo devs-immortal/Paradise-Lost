@@ -57,7 +57,8 @@
   },
   "custom": {
     "cardinal-components": [
-      "the_aether:moa_genetics"
+      "the_aether:moa_genetics",
+      "the_aether:condition_manager"
     ],
     "modmenu": {
       "links": {

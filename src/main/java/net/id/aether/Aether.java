@@ -5,6 +5,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
+import net.id.aether.api.ConditionAPI;
 import net.id.aether.api.MoaAPI;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
@@ -19,6 +20,7 @@ import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
 import net.id.aether.loot.AetherLootNumberProviderTypes;
+import net.id.aether.registry.AetherRegistries;
 import net.id.aether.registry.TrinketSlotRegistry;
 import net.id.aether.world.AetherGameRules;
 import net.id.aether.world.dimension.AetherDimension;
@@ -40,6 +42,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitialize() {
+        AetherRegistries.init();
         TrinketSlotRegistry.init();
         AetherCarvers.init();
         AetherTreeHell.init();
@@ -54,6 +57,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherCommands.init();
         AetherGameRules.init();
         AetherLootNumberProviderTypes.init();
+        ConditionAPI.init();
         MoaAPI.init();
     }
 

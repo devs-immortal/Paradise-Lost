@@ -1,6 +1,7 @@
 package net.id.aether.tag;
 
 import net.fabricmc.fabric.api.tag.TagFactory;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.id.aether.Aether;
 import net.minecraft.item.Item;
 import net.minecraft.tag.Tag;
@@ -12,5 +13,5 @@ public class AetherItemTags {
     public static final Tag<Item> SWET_TRANSFORMERS_GOLDEN = TagFactory.ITEM.create(new Identifier(Aether.MOD_ID, "swet_transformers/golden"));
     public static final Tag<Item> SWET_TRANSFORMERS_PURPLE = TagFactory.ITEM.create(new Identifier(Aether.MOD_ID, "swet_transformers/purple"));
     public static final Tag<Item> SWET_TRANSFORMERS_VERMILION = TagFactory.ITEM.create(new Identifier(Aether.MOD_ID, "swet_transformers/vermilion"));
-    public static final Tag<Item> PARACHUTES = TagFactory.ITEM.create(new Identifier(Aether.MOD_ID, "parachutes"));
+    public static final Tag<Item> PARACHUTES = TagRegistry.item(new Identifier(Aether.MOD_ID, "parachutes"));
 }

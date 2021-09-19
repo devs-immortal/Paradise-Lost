@@ -1,6 +1,7 @@
 package net.id.aether.tag;
 
 import net.fabricmc.fabric.api.tag.TagFactory;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.id.aether.Aether;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.tag.Tag;
