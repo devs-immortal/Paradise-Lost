@@ -34,6 +34,6 @@ public class AetherColorProviders {
                     DynamicColorBlock dynamic = (DynamicColorBlock) block;
                     ColorProviderRegistryImpl.BLOCK.register(dynamic.getBlockColorProvider(), block);
                     ColorProviderRegistryImpl.ITEM.register(dynamic.getBlockItemColorProvider(), block.asItem());
-                }).;
+                });
     }
 }
