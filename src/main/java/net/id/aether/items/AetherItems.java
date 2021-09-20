@@ -14,6 +14,7 @@ import net.id.aether.items.food.ValkyrieMilkItem;
 import net.id.aether.items.food.WhiteAppleItem;
 import net.id.aether.items.resources.AmbrosiumShardItem;
 import net.id.aether.items.tools.*;
+import net.id.aether.items.utils.AetherDispenserBehaviors;
 import net.id.aether.items.utils.StackableVariantColorizer;
 import net.id.aether.items.weapons.*;
 import net.id.aether.registry.AetherRegistryQueues;
@@ -21,23 +22,11 @@ import net.id.incubus_core.util.RegistryQueue;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.id.aether.util.item.AetherRarity;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.FluidDrainable;
-import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.block.entity.DispenserBlockEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.event.GameEvent;
 
 import static net.id.aether.Aether.locate;
 import static net.minecraft.entity.EquipmentSlot.*;
@@ -55,78 +44,9 @@ public class AetherItems {
     private static final Action<ItemConvertible> compostable65 = compostable(0.65f);
     private static final Action<ItemConvertible> compostable100 = compostable(1f);
 
-
-    //TODO: clean up dispenser behaviors
-    private static final Action<ItemConvertible> emptiableBucketDispenserBehavior = (id, item) -> DispenserBlock.registerBehavior(item, new ItemDispenserBehavior() {
-        private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
-
-        @Override
-        public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            if (!(stack.getItem() instanceof SkyrootBucketItem bucket)) {
-                return this.fallbackBehavior.dispense(pointer, stack);
-            }
-            BlockPos blockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
-            World world = pointer.getWorld();
-            if (bucket.placeLiquid(null, world, blockPos, null)) {
-                return new ItemStack(SKYROOT_BUCKET);
-            } else {
-                return this.fallbackBehavior.dispense(pointer, stack);
-            }
-        }
-    });
-
-    private static final Action<ItemConvertible> spawnEggDispenserBehavior = (id, item) -> DispenserBlock.registerBehavior(item, new ItemDispenserBehavior() {
-
-        @Override
-        public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            Direction direction = pointer.getBlockState().get(DispenserBlock.FACING);
-            EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getNbt());
-
-            try {
-                entityType.spawnFromItemStack(pointer.getWorld(), stack, null, pointer.getPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
-            } catch (Exception var6) {
-                LOGGER.error("Error while dispensing spawn egg from dispenser at {}", pointer.getPos(), var6);
-                return ItemStack.EMPTY;
-            }
-
-            stack.decrement(1);
-            pointer.getWorld().emitGameEvent(GameEvent.ENTITY_PLACE, pointer.getPos());
-            return stack;
-        }
-    });
-
-    private static final Action<ItemConvertible> emptyBucketDispenserBehavior = (id, item) -> DispenserBlock.registerBehavior(item, new ItemDispenserBehavior() {
-        private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
-
-        @Override
-        public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            if (!(stack.getItem() instanceof SkyrootBucketItem bucket)) {
-                return this.fallbackBehavior.dispense(pointer, stack);
-            }
-            WorldAccess worldAccess = pointer.getWorld();
-            BlockPos blockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
-            BlockState blockState = worldAccess.getBlockState(blockPos);
-            Block block = blockState.getBlock();
-            if (block instanceof FluidDrainable && blockState.getFluidState().getFluid() == Fluids.WATER) {
-                ItemStack itemStack = ((FluidDrainable) block).tryDrainFluid(worldAccess, blockPos, blockState);
-                if (itemStack.isEmpty()) {
-                    return super.dispenseSilently(pointer, stack);
-                } else {
-                    worldAccess.emitGameEvent(null, GameEvent.FLUID_PICKUP, blockPos);
-                    stack.decrement(1);
-                    if (stack.isEmpty()) {
-                        return new ItemStack(SKYROOT_WATER_BUCKET);
-                    } else {
-                        if (((DispenserBlockEntity) pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(SKYROOT_WATER_BUCKET)) < 0) {
-                            this.fallbackBehavior.dispense(pointer, new ItemStack(SKYROOT_WATER_BUCKET));
-                        }
-                        return stack;
-                    }
-                }
-            }
-            return super.dispenseSilently(pointer, stack);
-        }
-    });
+    private static final Action<ItemConvertible> emptiableBucketBehavior = (id, item) -> DispenserBlock.registerBehavior(item, AetherDispenserBehaviors.emptiableBucket);
+    private static final Action<ItemConvertible> emptyBucketBehavior = (id, item) -> DispenserBlock.registerBehavior(item, AetherDispenserBehaviors.emptyBucket);
+    private static final Action<ItemConvertible> spawnEggBehavior = (id, item) -> DispenserBlock.registerBehavior(item, AetherDispenserBehaviors.spawnEgg);
 
     private static Action<ItemConvertible> fuel(int ticks) {
         return (id, item) -> FuelRegistry.INSTANCE.add(item, ticks);
@@ -309,10 +229,10 @@ public class AetherItems {
     public static final BlockItem FOOD_BOWL = add("food_bowl", AetherBlocks.FOOD_BOWL, misc, fuel(300));
     public static final HealingStoneItem HEALING_STONE = add("healing_stone", new HealingStoneItem(misc.rarity(RARE)));
 
-    public static final SkyrootBucketItem SKYROOT_BUCKET = add("skyroot_bucket", new SkyrootBucketItem(misc().maxCount(16)), fuel(200), emptyBucketDispenserBehavior);
+    public static final SkyrootBucketItem SKYROOT_BUCKET = add("skyroot_bucket", new SkyrootBucketItem(misc().maxCount(16)), fuel(200), emptyBucketBehavior);
 
     private static final Settings skyrootBucket = misc().maxCount(1).recipeRemainder(SKYROOT_BUCKET);
-    public static final SkyrootBucketItem SKYROOT_WATER_BUCKET = add("skyroot_water_bucket", new SkyrootBucketItem(Fluids.WATER, skyrootBucket), emptiableBucketDispenserBehavior);
+    public static final SkyrootBucketItem SKYROOT_WATER_BUCKET = add("skyroot_water_bucket", new SkyrootBucketItem(Fluids.WATER, skyrootBucket), emptiableBucketBehavior);
     public static final SkyrootBucketItem SKYROOT_MILK_BUCKET = add("skyroot_milk_bucket", new SkyrootBucketItem(skyrootBucket));
     public static final SkyrootBucketItem SKYROOT_POISON_BUCKET = add("skyroot_poison_bucket", new SkyrootBucketItem(skyrootBucket));
     public static final SkyrootBucketItem SKYROOT_REMEDY_BUCKET = add("skyroot_remedy_bucket", new SkyrootBucketItem(skyrootBucket));
@@ -326,17 +246,17 @@ public class AetherItems {
     */
     public static final AetherPortalItem AETHER_PORTAL = add("aether_portal", new AetherPortalItem(misc));
 
-    public static final SpawnEggItem AECHOR_PLANT_SPAWN_EGG = add("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x97DED4, 0x31897D, misc), spawnEggDispenserBehavior);
+    public static final SpawnEggItem AECHOR_PLANT_SPAWN_EGG = add("aechor_plant_spawn_egg", new SpawnEggItem(AetherEntityTypes.AECHOR_PLANT, 0x97DED4, 0x31897D, misc), spawnEggBehavior);
     //    public static final SpawnEggItem CHEST_MIMIC_SPAWN_EGG = null;
-    public static final SpawnEggItem COCKATRICE_SPAWN_EGG = add("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9FC3F7, 0x3D2338, misc), spawnEggDispenserBehavior);
-    public static final SpawnEggItem AERBUNNY_SPAWN_EGG = add("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xC5D6ED, 0x82A6D9, misc), spawnEggDispenserBehavior);
-    public static final SpawnEggItem AERWHALE_SPAWN_EGG = add("aerwhale_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERWHALE, 0x5C6D91, 0xDEDBCE, misc), spawnEggDispenserBehavior);
+    public static final SpawnEggItem COCKATRICE_SPAWN_EGG = add("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9FC3F7, 0x3D2338, misc), spawnEggBehavior);
+    public static final SpawnEggItem AERBUNNY_SPAWN_EGG = add("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xC5D6ED, 0x82A6D9, misc), spawnEggBehavior);
+    public static final SpawnEggItem AERWHALE_SPAWN_EGG = add("aerwhale_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERWHALE, 0x5C6D91, 0xDEDBCE, misc), spawnEggBehavior);
     //    public static final SpawnEggItem FLYING_COW_SPAWN_EGG = null;
-    public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(AetherEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc), spawnEggDispenserBehavior);
-    public static final SpawnEggItem SWET_SPAWN_EGG = add("swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.WHITE_SWET, 0x8F9294, 0xE6EAEB, misc), spawnEggDispenserBehavior);
-    public static final SpawnEggItem BLUE_SWET_SPAWN_EGG = add("blue_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.BLUE_SWET, 0x46699E, 0xE6EAEB, misc), spawnEggDispenserBehavior);
-    public static final SpawnEggItem PURPLE_SWET_SPAWN_EGG = add("purple_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.PURPLE_SWET, 0x5D548C, 0xE6EAEB, misc), spawnEggDispenserBehavior);
-    public static final SpawnEggItem GOLDEN_SWET_SPAWN_EGG = add("golden_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.GOLDEN_SWET, 0xC99D36, 0xE6EAEB, misc), spawnEggDispenserBehavior);
+    public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(AetherEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc), spawnEggBehavior);
+    public static final SpawnEggItem SWET_SPAWN_EGG = add("swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.WHITE_SWET, 0x8F9294, 0xE6EAEB, misc), spawnEggBehavior);
+    public static final SpawnEggItem BLUE_SWET_SPAWN_EGG = add("blue_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.BLUE_SWET, 0x46699E, 0xE6EAEB, misc), spawnEggBehavior);
+    public static final SpawnEggItem PURPLE_SWET_SPAWN_EGG = add("purple_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.PURPLE_SWET, 0x5D548C, 0xE6EAEB, misc), spawnEggBehavior);
+    public static final SpawnEggItem GOLDEN_SWET_SPAWN_EGG = add("golden_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.GOLDEN_SWET, 0xC99D36, 0xE6EAEB, misc), spawnEggBehavior);
     //    public static final SpawnEggItem PHYG_SPAWN_EGG = null;
     //    public static final SpawnEggItem SHEEPUFF_SPAWN_EGG = null;
 
