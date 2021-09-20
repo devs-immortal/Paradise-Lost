@@ -79,7 +79,7 @@ public class VenomCondition extends ConditionProcessor {
             var random = world.getRandom();
             var self = MinecraftClient.getInstance().player == entity;
             if(random.nextFloat() < ((severity.isAsOrMoreSevere(Severity.DIRE) ? 0.6 : 0.2) / (self ? 3 : 1))) {
-                world.addImportantParticle(AetherParticles.VENOM_BUBBLE, entity.getParticleX(1), entity.getRandomBodyY(), entity.getParticleZ(1), entity.getVelocity().x + ((random.nextDouble() * 0.005) - 0.0025),  0.025 + random.nextDouble() * 0.035, entity.getVelocity().z + ((random.nextDouble() * 0.005) - 0.0025));
+                world.addImportantParticle(AetherParticles.VENOM_BUBBLE, entity.getParticleX(1), entity.getRandomBodyY(), entity.getParticleZ(1), (entity.getVelocity().x / 15) + ((random.nextDouble() * 0.005) - 0.0025),  0.025 + random.nextDouble() * 0.035, (entity.getVelocity().z / 15) + ((random.nextDouble() * 0.005) - 0.0025));
             }
         }
     }

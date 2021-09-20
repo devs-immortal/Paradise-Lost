@@ -40,6 +40,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class ConditionCommand {
 
     public static final ConditionProcessorSuggester REGISTERED_CONDITIONS = new ConditionProcessorSuggester();
+    public static final PermanenceSuggester PERMANENCE_SUGGESTER = new PermanenceSuggester();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
@@ -50,7 +51,7 @@ public class ConditionCommand {
                                         .then(argument("processor", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
                                                 .executes((context -> printCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"))))))
                                 .then(literal("assign").then(argument("processor", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
-                                        .then(argument("value", FloatArgumentType.floatArg()).then(argument("permanence", StringArgumentType.word())
+                                        .then(argument("value", FloatArgumentType.floatArg()).then(argument("permanence", StringArgumentType.word()).suggests(PERMANENCE_SUGGESTER)
                                                 .executes(context -> setCondition(context.getSource(), EntityArgumentType.getEntity(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"), FloatArgumentType.getFloat(context, "value"), StringArgumentType.getString(context, "permanence"))))))))
         );
     }
