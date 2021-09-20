@@ -3,8 +3,7 @@ package net.id.aether.blocks.natural;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.entities.util.RenderUtils;
-import net.id.aether.util.DynamicBlockColorProvider;
-import net.id.aether.util.SimplexNoise;
+import net.id.aether.util.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.block.BlockColorProvider;
@@ -22,7 +21,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        this.handleFabulousGraphics(pos);
+        DynamicBlockColorProvider.handleFastGraphics(pos);
         super.randomDisplayTick(state, world, pos, random);
     }
 
@@ -42,7 +41,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicBlockC
     }
 
     protected static double sampleNoise(BlockPos pos, float clumpSize, float timescale){
-        if (!DynamicBlockColorProvider.isFabulousGraphics()) {
+        if (DynamicBlockColorProvider.isFastGraphics()) {
             return 0.5 * (1 + SimplexNoise.noise(pos.getX() / clumpSize, pos.getY() / clumpSize, pos.getZ() / clumpSize));
         } else {
             clumpSize += 3;
