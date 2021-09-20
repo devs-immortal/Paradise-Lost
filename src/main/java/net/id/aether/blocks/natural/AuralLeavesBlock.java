@@ -21,7 +21,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicColorB
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        DynamicColorBlock.handleFastGraphics(pos);
+        DynamicColorBlock.updateBlockColor(pos);
         super.randomDisplayTick(state, world, pos, random);
     }
 

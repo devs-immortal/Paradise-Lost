@@ -23,7 +23,7 @@ public class AuralHangerBlock extends AetherHangerBlock implements DynamicColorB
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        DynamicColorBlock.handleFastGraphics(pos);
+        DynamicColorBlock.updateBlockColor(pos);
         super.randomDisplayTick(state, world, pos, random);
     }
 
