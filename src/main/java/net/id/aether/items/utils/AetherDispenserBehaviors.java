@@ -64,7 +64,7 @@ public class AetherDispenserBehaviors {
 
         @Override
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            if (!(stack.getItem() instanceof SkyrootBucketItem bucket)) {
+            if (!(stack.getItem() instanceof SkyrootBucketItem)) {
                 return this.fallbackBehavior.dispense(pointer, stack);
             }
             WorldAccess worldAccess = pointer.getWorld();
