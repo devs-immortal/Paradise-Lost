@@ -5,13 +5,14 @@ import net.fabricmc.api.Environment;
 import net.id.aether.util.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.color.block.BlockColorProvider;
+import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class AuralHangerBlock extends AetherHangerBlock implements DynamicBlockColorProvider {
+public class AuralHangerBlock extends AetherHangerBlock implements DynamicColorBlock {
 
     private final Vec3i[] gradientColors;
 
@@ -22,14 +23,19 @@ public class AuralHangerBlock extends AetherHangerBlock implements DynamicBlockC
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        DynamicBlockColorProvider.handleFastGraphics(pos);
+        DynamicColorBlock.handleFastGraphics(pos);
         super.randomDisplayTick(state, world, pos, random);
     }
 
     @Override
     @Environment(EnvType.CLIENT)
-    public BlockColorProvider getProvider() {
+    public BlockColorProvider getBlockColorProvider() {
         return (state, world, pos, tintIndex) -> AuralLeavesBlock.getAuralColor(pos, gradientColors);
     }
 
+    @Override
+    @Environment(EnvType.CLIENT)
+    public ItemColorProvider getBlockItemColorProvider() {
+        return (state, tintIndex) -> AuralLeavesBlock.getAuralColor(BlockPos.ORIGIN, gradientColors);
+    }
 }
