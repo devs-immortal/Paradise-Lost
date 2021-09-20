@@ -11,6 +11,7 @@ public class AetherCommands {
     public static void init() {
         register(MoaEggCommand::register);
         register(MoaStatCommand::register);
+        register(ConditionCommand::register);
     }
 
     private static void register(Consumer<CommandDispatcher<ServerCommandSource>> command) {

@@ -1,7 +1,13 @@
 package net.id.aether.api.condition;
 
 import net.id.aether.Aether;
+import net.id.aether.api.ConditionAPI;
+import net.id.aether.client.rendering.particle.AetherParticles;
+import net.id.aether.client.rendering.ui.AetherOverlayRegistrar;
+import net.id.aether.component.AetherComponents;
 import net.id.aether.tag.AetherEntityTypeTags;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -14,6 +20,14 @@ public class VenomCondition extends ConditionProcessor {
 
     public VenomCondition(Identifier id) {
         super(id, AetherEntityTypeTags.VENOM_IMMUNITY, 300, 300, 0.5F, 0.025F,400, 0.05F);
+        AetherOverlayRegistrar.register(new AetherOverlayRegistrar.Overlay(
+                Aether.locate("textures/hud/condition/venom.png"),
+                player -> ConditionAPI.isVisible(this, player),
+                player -> {
+                    var manager = ConditionAPI.getConditionManager(player);
+                    return manager.getScaledSeverity(this) / 2F;
+                }
+        ));
     }
 
     @Override
@@ -61,6 +75,12 @@ public class VenomCondition extends ConditionProcessor {
 
     @Override
     public void processClient(ClientWorld world, LivingEntity entity, Severity severity, float rawSeverity) {
-
+        if(severity.isAsOrMoreSevere(Severity.MILD)) {
+            var random = world.getRandom();
+            var self = MinecraftClient.getInstance().player == entity;
+            if(random.nextFloat() < ((severity.isAsOrMoreSevere(Severity.DIRE) ? 0.6 : 0.2) / (self ? 3 : 1))) {
+                world.addImportantParticle(AetherParticles.VENOM_BUBBLE, entity.getParticleX(1), entity.getRandomBodyY(), entity.getParticleZ(1), entity.getVelocity().x + ((random.nextDouble() * 0.005) - 0.0025),  0.025 + random.nextDouble() * 0.035, entity.getVelocity().z + ((random.nextDouble() * 0.005) - 0.0025));
+            }
+        }
     }
 }

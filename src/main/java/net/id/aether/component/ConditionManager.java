@@ -76,6 +76,35 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         });
     }
 
+    public boolean set(Identifier processorId, Persistance persistance, float value) {
+        return Optional.ofNullable(conditionTrackers.get(processorId)).map(tracker -> {
+            switch (persistance) {
+                case TEMPORARY -> tracker.tempVal = value;
+                case CHRONIC -> tracker.chronVal = value;
+                case CONSTANT -> throw new IllegalArgumentException("Constant condition values may not be directly edited");
+            }
+            return true;
+        }).orElse(false);
+    }
+
+    public void add(Identifier processorId, Persistance persistance, float amount) {
+        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> tracker.add(persistance, amount));
+    }
+
+    public void remove(Identifier processorId, Persistance persistance, float amount) {
+        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> tracker.remove(persistance, amount));
+    }
+
+    public void removeScaled(Identifier processorId, float amount) {
+        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> {
+            float partial = tracker.getPartialCondition();
+            float tempPart = tracker.tempVal / partial;
+            float chronPart = tracker.chronVal / partial;
+            tracker.remove(Persistance.TEMPORARY, amount * tempPart);
+            tracker.remove(Persistance.CHRONIC, amount * chronPart);
+        });
+    }
+
     public boolean isImmuneTo(Identifier processorId) {
         return !processors.contains(processorId);
     }

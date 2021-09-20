@@ -23,4 +23,8 @@ public enum Severity {
         }
         return severity;
     }
+
+    public boolean isAsOrMoreSevere(Severity severity) {
+        return this.triggerPercent >= severity.triggerPercent;
+    }
 }

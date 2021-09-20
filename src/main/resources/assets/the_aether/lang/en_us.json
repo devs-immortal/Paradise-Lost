@@ -467,6 +467,9 @@
   "commands.aether.moastat.failure.entity": "Invalid entity - %1$s",
   "commands.aether.moastat.name": "Name: %1$s",
   "commands.aether.moastat.race": "Race: %1$s",
+  "commands.aether.condition.failure": "Entity is immune to %1$s",
+  "commands.aether.condition.success.query": "%1$s: %2$s - %3$s",
+  "commands.aether.condition.success.assign": "%1$s is now: %2$s - %3$s",
   "info.aether.bloodstone.ambrosium": "peer into the heart",
   "info.aether.bloodstone.zanite": "peer into the mind",
   "info.aether.bloodstone.gravitite": "peer into the will",
@@ -478,5 +481,6 @@
   "condition.severity.mild": "Mild",
   "condition.severity.acute": "Acute",
   "condition.severity.dire": "Dire",
-  "condition.severity.extreme": "Extreme"
+  "condition.severity.extreme": "Extreme",
+  "condition.processor.venom": "Venom"
 }
