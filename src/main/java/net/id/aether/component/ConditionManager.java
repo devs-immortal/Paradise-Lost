@@ -110,7 +110,7 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
     }
 
     public boolean isImmuneTo(ConditionProcessor processor) {
-        return !processors.contains(processor.id);
+        return !processors.contains(processor.getId());
     }
 
     public boolean tryApply(Persistance persistance, Identifier processorId, float amount) {
@@ -157,11 +157,11 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
     }
 
     public float getRawCondition(@NotNull ConditionProcessor condition) {
-        return Optional.ofNullable(conditionTrackers.get(condition.id)).map(tracker -> {
+        return Optional.ofNullable(conditionTrackers.get(condition.getId())).map(tracker -> {
             float partial = tracker.getPartialCondition();
             partial += getActiveModifiers().stream().mapToDouble(mod -> mod.getConstantCondition(condition)).sum();
             return partial;
-        }).orElseThrow(() -> new IllegalStateException("HOW in the FUCK do you get an invalid condition here: " + condition.id));
+        }).orElseThrow(() -> new IllegalStateException("HOW in the FUCK do you get an invalid condition here: " + condition.getId()));
     }
 
     public List<ConditionModifier> getActiveModifiers() {

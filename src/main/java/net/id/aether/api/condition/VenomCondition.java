@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 
 public class VenomCondition extends ConditionProcessor {
 
-    public VenomCondition(Identifier id) {
-        super(id, AetherEntityTypeTags.VENOM_IMMUNITY, 300, 300, 0.5F, 0.025F,400, 0.05F);
+    public VenomCondition() {
+        super(AetherEntityTypeTags.VENOM_IMMUNITY, 300, 300, 0.5F, 0.025F,400, 0.05F);
         AetherOverlayRegistrar.register(new AetherOverlayRegistrar.Overlay(
                 Aether.locate("textures/hud/condition/venom.png"),
                 player -> ConditionAPI.isVisible(this, player),

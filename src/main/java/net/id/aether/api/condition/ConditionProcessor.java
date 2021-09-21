@@ -2,6 +2,7 @@ package net.id.aether.api.condition;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.id.aether.registry.AetherRegistries;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,15 +19,13 @@ import net.minecraft.world.World;
  */
 public abstract class ConditionProcessor {
 
-    public final Identifier id;
     public final Tag<EntityType<?>> exempt;
     public final float maxTemp, maxChron;
     public final float tempDecay, chronDecay;
     public final float scalingValue;
     public final float visThreshold;
 
-    public ConditionProcessor(Identifier id, Tag<EntityType<?>> exempt, float maxTemp, float maxChron, float tempDecay, float chronDecay, float scalingValue, float visThreshold) {
-        this.id = id;
+    public ConditionProcessor(Tag<EntityType<?>> exempt, float maxTemp, float maxChron, float tempDecay, float chronDecay, float scalingValue, float visThreshold) {
         this.exempt = exempt;
         this.maxTemp = maxTemp;
         this.maxChron = maxChron;
@@ -34,6 +33,10 @@ public abstract class ConditionProcessor {
         this.chronDecay = chronDecay;
         this.scalingValue = scalingValue;
         this.visThreshold = visThreshold;
+    }
+
+    public Identifier getId(){
+        return AetherRegistries.CONDITION_REGISTRY.getId(this);
     }
 
     public boolean isExempt(LivingEntity entity) {

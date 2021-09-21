@@ -17,11 +17,10 @@ import java.util.stream.Collectors;
 
 public class ConditionAPI {
 
-    public static final Identifier VENOM_ID = Aether.locate("venom");
-    public static final ConditionProcessor VENOM = register(VENOM_ID, new VenomCondition(VENOM_ID));
+    public static final ConditionProcessor VENOM = register("venom", new VenomCondition());
 
-    private static ConditionProcessor register(Identifier id, ConditionProcessor processor) {
-        return Registry.register(AetherRegistries.CONDITION_REGISTRY, id, processor);
+    private static ConditionProcessor register(String id, ConditionProcessor processor) {
+        return Registry.register(AetherRegistries.CONDITION_REGISTRY,Aether.locate(id),processor);
     }
 
     public static void init() {}
@@ -54,6 +53,6 @@ public class ConditionAPI {
     }
 
     public static String getTranslationString(ConditionProcessor condition) {
-        return "condition.processor." + condition.id.getPath();
+        return "condition.processor." + condition.getId().getPath();
     }
 }
