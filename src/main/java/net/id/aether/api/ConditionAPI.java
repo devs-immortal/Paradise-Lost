@@ -20,7 +20,7 @@ public class ConditionAPI {
     public static final ConditionProcessor VENOM = register("venom", new VenomCondition());
 
     private static ConditionProcessor register(String id, ConditionProcessor processor) {
-        return Registry.register(AetherRegistries.CONDITION_REGISTRY,Aether.locate(id),processor);
+        return Registry.register(AetherRegistries.CONDITION_REGISTRY, Aether.locate(id), processor);
     }
 
     public static void init() {}
