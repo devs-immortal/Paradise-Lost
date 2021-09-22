@@ -59,17 +59,23 @@ public class ConditionCommand {
     }
 
     private static int clearConditions(ServerCommandSource source, Collection<? extends Entity> entities) {
-        entities.forEach(entity -> {
+        if (entities.stream().allMatch(entity -> {
             if(entity instanceof LivingEntity target) {
                 var manager = ConditionAPI.getConditionManager(target);
-                if (!manager.removeAll()){
-                    source.sendError(new LiteralText("Command failed. This should be impossible."));
-                } else {
-                    source.sendFeedback(new LiteralText("Successfully cleared all conditions."), true);
+                if (manager.removeAll()) {
                     ConditionAPI.trySync(target);
+                    return true;
+                } else {
+                    return false;
                 }
+            } else {
+                return true; // This lets @e work
             }
-        });
+        })) {
+            source.sendFeedback(new LiteralText("Successfully cleared all conditions."), true);
+        } else {
+            source.sendError(new LiteralText("Command couldn't complete. This should be impossible. Please report this bug."));
+        }
         return 1;
     }
 
