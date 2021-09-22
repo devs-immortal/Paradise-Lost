@@ -95,6 +95,12 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> tracker.remove(persistance, amount));
     }
 
+    public boolean removeAll(){
+        return conditionTrackers.values().stream().allMatch((tracker) ->
+                set(tracker.parent.getId(), Persistance.TEMPORARY, 0)
+                && set(tracker.parent.getId(), Persistance.CHRONIC, 0));
+    }
+
     public void removeScaled(Identifier processorId, float amount) {
         Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> {
             float partial = tracker.getPartialCondition();

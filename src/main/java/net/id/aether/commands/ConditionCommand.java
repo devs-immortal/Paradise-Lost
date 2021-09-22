@@ -52,8 +52,25 @@ public class ConditionCommand {
                                                 .executes((context -> printCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"))))))
                                 .then(literal("assign").then(argument("processor", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
                                         .then(argument("value", FloatArgumentType.floatArg()).then(argument("permanence", StringArgumentType.word()).suggests(PERMANENCE_SUGGESTER)
-                                                .executes(context -> setCondition(context.getSource(), EntityArgumentType.getEntity(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"), FloatArgumentType.getFloat(context, "value"), StringArgumentType.getString(context, "permanence"))))))))
+                                                .executes(context -> setCondition(context.getSource(), EntityArgumentType.getEntity(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"), FloatArgumentType.getFloat(context, "value"), StringArgumentType.getString(context, "permanence")))))))
+                                .then(literal("clear")
+                                        .executes(context -> clearConditions(context.getSource(), EntityArgumentType.getEntities(context, "target")))))
         );
+    }
+
+    private static int clearConditions(ServerCommandSource source, Collection<? extends Entity> entities) {
+        entities.forEach(entity -> {
+            if(entity instanceof LivingEntity target) {
+                var manager = ConditionAPI.getConditionManager(target);
+                if (!manager.removeAll()){
+                    source.sendError(new LiteralText("Command failed. This should be impossible."));
+                } else {
+                    source.sendFeedback(new LiteralText("Successfully cleared all conditions."), true);
+                    ConditionAPI.trySync(target);
+                }
+            }
+        });
+        return 1;
     }
 
     private static int printCondition(ServerCommandSource source, Collection<? extends Entity> entities, Identifier attributeId) {
