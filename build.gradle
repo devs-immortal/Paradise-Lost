@@ -65,7 +65,7 @@ repositories {
     maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
     mavenCentral()
     maven {
-        name = "gudenau\'s maven"
+        name = "gudenau's maven"
         url = "https://maven.gudenau.net"
     }
 }
