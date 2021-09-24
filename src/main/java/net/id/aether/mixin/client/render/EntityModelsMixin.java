@@ -1,7 +1,7 @@
 package net.id.aether.mixin.client.render;
 
 import com.google.common.collect.ImmutableMap;
-import net.id.aether.client.rendering.entity.layer.AetherModelLayers;
+import net.id.aether.client.model.AetherModelLayers;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.EntityModels;

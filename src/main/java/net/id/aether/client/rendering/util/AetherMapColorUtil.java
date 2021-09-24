@@ -1,8 +1,8 @@
-package net.id.aether.client.rendering.map;
+package net.id.aether.client.rendering.util;
 
 import net.minecraft.block.MapColor;
 
-public class AetherMap {
+public class AetherMapColorUtil {
 
     public static int getColor(MapColor material, int shade) {
         int newColor = recolor(material.id) == -1 ? material.color : recolor(material.id);

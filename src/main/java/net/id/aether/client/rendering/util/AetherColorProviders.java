@@ -1,4 +1,4 @@
-package net.id.aether.client.rendering;
+package net.id.aether.client.rendering.util;
 
 import net.fabricmc.fabric.impl.client.rendering.ColorProviderRegistryImpl;
 import net.id.aether.blocks.AetherBlocks;

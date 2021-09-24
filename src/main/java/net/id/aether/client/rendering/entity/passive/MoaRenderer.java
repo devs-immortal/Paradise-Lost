@@ -1,7 +1,7 @@
-package net.id.aether.client.rendering.entity;
+package net.id.aether.client.rendering.entity.passive;
 
 import net.id.aether.client.model.entity.MoaModel;
-import net.id.aether.client.rendering.entity.layer.AetherModelLayers;
+import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.entities.passive.moa.MoaEntity;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.VertexConsumerProvider;

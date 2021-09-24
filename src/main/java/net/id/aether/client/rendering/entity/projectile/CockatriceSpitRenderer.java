@@ -1,4 +1,4 @@
-package net.id.aether.client.rendering.entity;
+package net.id.aether.client.rendering.entity.projectile;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -1,4 +1,4 @@
-package net.id.aether.client.rendering.entity;
+package net.id.aether.client.rendering.entity.projectile;
 
 import net.id.aether.Aether;
 import net.id.aether.entities.projectile.DartEntity;

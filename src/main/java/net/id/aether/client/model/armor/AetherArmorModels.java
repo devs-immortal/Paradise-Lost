@@ -1,4 +1,4 @@
-package net.id.aether.client.model;
+package net.id.aether.client.model.armor;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.id.aether.client.rendering.armor.PhoenixArmorRenderer;

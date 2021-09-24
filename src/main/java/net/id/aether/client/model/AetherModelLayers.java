@@ -1,4 +1,4 @@
-package net.id.aether.client.rendering.entity.layer;
+package net.id.aether.client.model;
 
 import com.google.common.collect.Maps;
 import net.fabricmc.api.EnvType;

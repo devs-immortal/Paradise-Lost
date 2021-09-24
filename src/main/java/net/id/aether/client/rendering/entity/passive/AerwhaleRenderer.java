@@ -1,8 +1,8 @@
-package net.id.aether.client.rendering.entity;
+package net.id.aether.client.rendering.entity.passive;
 
 import net.id.aether.Aether;
 import net.id.aether.client.model.entity.AerwhaleModel;
-import net.id.aether.client.rendering.entity.layer.AetherModelLayers;
+import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.entities.passive.AerwhaleEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;

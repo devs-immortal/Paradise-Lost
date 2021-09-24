@@ -1,6 +1,6 @@
 package net.id.aether.mixin.client;
 
-import net.id.aether.client.rendering.map.AetherMap;
+import net.id.aether.client.rendering.util.AetherMapColorUtil;
 import net.id.aether.world.dimension.AetherDimension;
 import net.minecraft.block.MapColor;
 import net.minecraft.client.texture.NativeImageBackedTexture;
@@ -35,7 +35,7 @@ public class MapRendererMixin {
                 } else {
                     int color;
                     if (isAether) {
-                        color = AetherMap.getColor(MapColor.COLORS[int_4 / 4], int_4 & 3);
+                        color = AetherMapColorUtil.getColor(MapColor.COLORS[int_4 / 4], int_4 & 3);
                     } else {
                         color = MapColor.COLORS[int_4 / 4].getRenderColor(int_4 & 3);
                     }
