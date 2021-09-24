@@ -1,4 +1,4 @@
-package net.id.aether.entities.util;
+package net.id.aether.util;
 
 import net.minecraft.util.math.Vec3i;
 

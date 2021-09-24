@@ -5,7 +5,7 @@
 // Paste this class into your mod and generate all required imports
 package net.id.aether.client.model.entity;
 
-import net.id.aether.entities.passive.MoaEntity;
+import net.id.aether.entities.passive.moa.MoaEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;

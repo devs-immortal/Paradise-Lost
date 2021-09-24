@@ -1,8 +1,8 @@
 package net.id.aether.items.tools;
 
 import com.google.common.collect.ImmutableList;
-import net.id.aether.api.MoaAttributes;
-import net.id.aether.entities.passive.MoaEntity;
+import net.id.aether.entities.passive.moa.MoaAttributes;
+import net.id.aether.entities.passive.moa.MoaEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;

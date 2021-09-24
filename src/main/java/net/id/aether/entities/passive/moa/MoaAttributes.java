@@ -1,4 +1,4 @@
-package net.id.aether.api;
+package net.id.aether.entities.passive.moa;
 
 import net.id.aether.component.MoaGenes;
 

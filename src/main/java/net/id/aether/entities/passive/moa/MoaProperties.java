@@ -1,4 +1,4 @@
-package net.id.aether.api.moa;
+package net.id.aether.entities.passive.moa;
 
 import net.minecraft.util.Identifier;
 

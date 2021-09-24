@@ -41,6 +41,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+// TODO: remove
 public class SheepuffEntity extends AetherAnimalEntity {
     private static final TrackedData<Boolean> PUFFY = DataTracker.registerData(SheepuffEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Byte> COLOR = DataTracker.registerData(SheepuffEntity.class, TrackedDataHandlerRegistry.BYTE);

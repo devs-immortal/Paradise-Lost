@@ -23,8 +23,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-//import com.aether.world.storage.loot.AetherLootTableList;
-
+// TODO: remove
 public class FlyingCowEntity extends SaddleMountEntity {
     public float wingFold;
 

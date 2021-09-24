@@ -9,6 +9,7 @@ import net.id.aether.entities.hostile.ChestMimicEntity;
 import net.id.aether.entities.hostile.CockatriceEntity;
 import net.id.aether.entities.hostile.swet.*;
 import net.id.aether.entities.passive.*;
+import net.id.aether.entities.passive.moa.MoaEntity;
 import net.id.aether.entities.projectile.*;
 import net.id.aether.registry.AetherRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue.Action;

@@ -19,6 +19,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+// TODO: remove
 public class PhygEntity extends SaddleMountEntity {
     public float wingFold;
     public float wingAngle;

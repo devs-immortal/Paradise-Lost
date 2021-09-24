@@ -1,9 +1,8 @@
-package net.id.aether.entities.passive;
+package net.id.aether.entities.passive.moa;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.api.MoaAPI;
-import net.id.aether.api.MoaAttributes;
 import net.id.aether.blocks.blockentity.FoodBowlBlockEntity;
 import net.id.aether.component.MoaGenes;
 import net.id.aether.entities.AetherEntityTypes;

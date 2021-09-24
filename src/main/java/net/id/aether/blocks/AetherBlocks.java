@@ -23,7 +23,7 @@ import net.id.aether.blocks.natural.crop.BlueberryBushBlock;
 import net.id.aether.blocks.natural.tree.*;
 import net.id.aether.blocks.natural.plant.*;
 import net.id.aether.entities.AetherEntityTypes;
-import net.id.aether.entities.util.RenderUtils;
+import net.id.aether.util.RenderUtils;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
 import net.id.aether.mixin.client.RenderLayersAccessor;

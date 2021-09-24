@@ -2,7 +2,7 @@ package net.id.aether.items.tools;
 
 import com.google.common.collect.ImmutableList;
 import net.id.aether.api.MoaAPI;
-import net.id.aether.entities.passive.MoaEntity;
+import net.id.aether.entities.passive.moa.MoaEntity;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.LiteralText;

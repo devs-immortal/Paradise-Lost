@@ -129,7 +129,7 @@ public class FloatingBlockHelper {
     }
 
     public static class FloatingBlockPusherHandler {
-        public static int MAX_MOVABLE_BLOCKS = PistonHandler.MAX_MOVABLE_BLOCKS;
+        public static final int MAX_MOVABLE_BLOCKS = PistonHandler.MAX_MOVABLE_BLOCKS;
 
         @Nullable
         public static FloatingBlockStructure construct(World world, BlockPos pos) {

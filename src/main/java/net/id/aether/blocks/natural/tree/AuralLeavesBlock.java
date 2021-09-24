@@ -3,7 +3,7 @@ package net.id.aether.blocks.natural.tree;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.blocks.util.DynamicColorBlock;
-import net.id.aether.entities.util.RenderUtils;
+import net.id.aether.util.RenderUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.block.BlockColorProvider;
