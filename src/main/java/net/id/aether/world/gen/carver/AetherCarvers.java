@@ -1,4 +1,4 @@
-package net.id.aether.world.gen;
+package net.id.aether.world.gen.carver;
 
 import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;

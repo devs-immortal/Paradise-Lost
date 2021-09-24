@@ -4,6 +4,7 @@ import net.minecraft.block.BlockState;
 
 import java.util.Optional;
 
+// TODO: decide what to do with this
 public class AercloudConfig extends DynamicConfiguration {
     public final boolean isFlat;
     public final int maxRadius;

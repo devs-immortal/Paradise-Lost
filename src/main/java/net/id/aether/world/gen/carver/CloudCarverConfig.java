@@ -1,4 +1,4 @@
-package net.id.aether.world.gen;
+package net.id.aether.world.gen.carver;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

@@ -1,4 +1,4 @@
-package net.id.aether.world.feature.structure;
+package net.id.aether.world.feature.generator;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
