@@ -1,4 +1,4 @@
-package net.id.aether.util;
+package net.id.aether.effect;
 
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;

@@ -1,4 +1,4 @@
-package net.id.aether.api.condition;
+package net.id.aether.effect.condition;
 
 public enum Severity {
     NEGLIGIBLE(0.0F, "condition.severity.negligible"),

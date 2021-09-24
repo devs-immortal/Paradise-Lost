@@ -1,8 +1,8 @@
 package net.id.aether.api;
 
 import net.id.aether.Aether;
-import net.id.aether.api.condition.ConditionProcessor;
-import net.id.aether.api.condition.VenomCondition;
+import net.id.aether.effect.condition.ConditionProcessor;
+import net.id.aether.effect.condition.VenomCondition;
 import net.id.aether.component.AetherComponents;
 import net.id.aether.component.ConditionManager;
 import net.id.aether.registry.AetherRegistries;

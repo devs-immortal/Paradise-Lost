@@ -1,4 +1,4 @@
-package net.id.aether.api.condition;
+package net.id.aether.effect.condition;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

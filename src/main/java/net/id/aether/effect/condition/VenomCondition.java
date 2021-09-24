@@ -1,19 +1,16 @@
-package net.id.aether.api.condition;
+package net.id.aether.effect.condition;
 
 import net.id.aether.Aether;
 import net.id.aether.api.ConditionAPI;
 import net.id.aether.client.rendering.particle.AetherParticles;
 import net.id.aether.client.rendering.ui.AetherOverlayRegistrar;
-import net.id.aether.component.AetherComponents;
 import net.id.aether.tag.AetherEntityTypeTags;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class VenomCondition extends ConditionProcessor {

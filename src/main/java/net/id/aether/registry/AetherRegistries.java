@@ -2,8 +2,7 @@ package net.id.aether.registry;
 
 import com.mojang.serialization.Lifecycle;
 import net.id.aether.Aether;
-import net.id.aether.api.condition.ConditionProcessor;
-import net.id.incubus_core.systems.Material;
+import net.id.aether.effect.condition.ConditionProcessor;
 import net.minecraft.util.registry.MutableRegistry;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;

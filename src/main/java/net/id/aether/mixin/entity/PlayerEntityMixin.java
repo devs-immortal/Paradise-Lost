@@ -2,19 +2,18 @@ package net.id.aether.mixin.entity;
 
 import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.util.AetherDamageSources;
-import net.id.aether.util.CustomStatusEffectInstance;
 import net.id.aether.world.dimension.AetherDimension;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -42,8 +41,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements AetherEn
             if (!world.isClient()) {
                 setAetherFallen(true);
                 ((ServerPlayerEntity) (Object) this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() * 10, world.getTopY() + 128, this.getZ() * 10, this.getYaw(), this.getPitch());
-                CustomStatusEffectInstance ef = new CustomStatusEffectInstance(StatusEffect.byRawId(9), 160, 2);
-                ef.ShowParticles = false;
+                StatusEffectInstance ef = new StatusEffectInstance(StatusEffect.byRawId(9), 160, 2, false, false, true);
                 this.addStatusEffect(ef);
             }
             cir.setReturnValue(false);
