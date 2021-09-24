@@ -3,7 +3,7 @@ package net.id.aether.mixin.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.aether.blocks.aercloud.AercloudBlock;
+import net.id.aether.blocks.natural.aercloud.AercloudBlock;
 import net.id.aether.fluids.DenseAercloudFluid;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;

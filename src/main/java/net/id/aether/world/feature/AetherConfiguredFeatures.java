@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
-import net.id.aether.blocks.natural.FruitingLeavesBlock;
+import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
 import net.minecraft.block.BlockState;

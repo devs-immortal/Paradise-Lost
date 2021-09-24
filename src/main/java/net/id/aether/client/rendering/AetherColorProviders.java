@@ -2,7 +2,7 @@ package net.id.aether.client.rendering;
 
 import net.fabricmc.fabric.impl.client.rendering.ColorProviderRegistryImpl;
 import net.id.aether.blocks.AetherBlocks;
-import net.id.aether.util.DynamicColorBlock;
+import net.id.aether.blocks.util.DynamicColorBlock;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;

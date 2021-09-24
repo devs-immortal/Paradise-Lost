@@ -20,12 +20,13 @@ import net.id.aether.items.weapons.*;
 import net.id.aether.registry.AetherRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue;
 import net.id.incubus_core.util.RegistryQueue.Action;
-import net.id.aether.util.item.AetherRarity;
+import net.id.aether.items.utils.AetherRarity;
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Rarity;
 
 import static net.id.aether.Aether.locate;
@@ -204,7 +205,7 @@ public class AetherItems {
     public static final Item ENCHANTED_BLUEBERRY = add("enchanted_blueberry", new Item(food(AetherFoodComponent.ENCHANTED_BLUEBERRY, RARE)), compostable50);
     public static final Item ORANGE = add("orange", new Item(food(AetherFoodComponent.ORANGE)), compostable65);
     public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(AetherFoodComponent.WHITE_APPLE)), compostable(0f));
-    public static final Item AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(AetherBlocks.AMADRYS, food(AetherFoodComponent.GENERIC_WORSE)), compostable30);
+    public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(AetherBlocks.AMADRYS, food(AetherFoodComponent.GENERIC_WORSE)), compostable30);
     public static final Item BLUE_GUMMY_SWET = add("blue_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
     public static final Item GOLDEN_GUMMY_SWET = add("golden_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
     public static final ValkyrieMilkItem VALKYRIE_MILK = add("valkyrie_milk", new ValkyrieMilkItem(food(AetherFoodComponent.VALKYRIE_MILK, EPIC).maxCount(1)));
@@ -562,6 +563,8 @@ public class AetherItems {
         return add(id, new BlockItem(block, settings), additionalActions);
     }
 
+    // For access to protected constructors:
+
     private static class AetherPickaxeItem extends PickaxeItem {
         protected AetherPickaxeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
             super(material, attackDamage, attackSpeed, settings);
@@ -577,6 +580,12 @@ public class AetherItems {
     private static class AetherHoeItem extends HoeItem {
         protected AetherHoeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
             super(material, attackDamage, attackSpeed, settings);
+        }
+    }
+
+    private static class AetherMusicDiscItem extends MusicDiscItem {
+        protected AetherMusicDiscItem(int comparatorValueIn, SoundEvent soundIn, Settings settings) {
+            super(comparatorValueIn, soundIn, settings);
         }
     }
 }

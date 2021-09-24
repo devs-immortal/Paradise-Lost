@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
+// TODO: deliberate whether to put this at the end of AetherBlocks
 public class AetherDirtPathBlock extends DirtPathBlock {
     public AetherDirtPathBlock(Settings settings) {
         super(settings);

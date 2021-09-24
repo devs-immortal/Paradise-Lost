@@ -2,7 +2,7 @@ package net.id.aether.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.blocks.AetherBlocks;
-import net.id.aether.blocks.natural.AetherLeavesBlock;
+import net.id.aether.blocks.natural.tree.AetherLeavesBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;

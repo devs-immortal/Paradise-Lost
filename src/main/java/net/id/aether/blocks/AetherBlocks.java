@@ -7,20 +7,21 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.fabric.mixin.lookup.BlockEntityTypeAccessor;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
-import net.id.aether.blocks.accessor.*;
-import net.id.aether.blocks.aercloud.AercloudBlock;
-import net.id.aether.blocks.aercloud.BlueAercloudBlock;
-import net.id.aether.blocks.aercloud.GoldenAercloudBlock;
-import net.id.aether.blocks.aercloud.PinkAercloudBlock;
+import net.id.aether.blocks.natural.aercloud.AercloudBlock;
+import net.id.aether.blocks.natural.aercloud.BlueAercloudBlock;
+import net.id.aether.blocks.natural.aercloud.GoldenAercloudBlock;
+import net.id.aether.blocks.natural.aercloud.PinkAercloudBlock;
 import net.id.aether.blocks.decorative.AetherDirtPathBlock;
 import net.id.aether.blocks.decorative.AmbrosiumLanternBlock;
 import net.id.aether.blocks.decorative.AmbrosiumTorchBlock;
-import net.id.aether.blocks.decorative.AmbrosiumTorchWallBlock;
+import net.id.aether.blocks.decorative.AmbrosiumWallTorchBlock;
 import net.id.aether.blocks.mechanical.FoodBowlBlock;
 import net.id.aether.blocks.mechanical.IncubatorBlock;
 import net.id.aether.blocks.natural.*;
 import net.id.aether.blocks.natural.crop.AmadrysCropBlock;
 import net.id.aether.blocks.natural.crop.BlueberryBushBlock;
+import net.id.aether.blocks.natural.tree.*;
+import net.id.aether.blocks.natural.plant.*;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.util.RenderUtils;
 import net.id.aether.fluids.AetherFluids;
@@ -81,7 +82,7 @@ public class AetherBlocks {
     // Grass Blocks
     private static Settings grassBlock() { return copy(GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f); }
     public static final AetherGrassBlock AETHER_GRASS_BLOCK = add("aether_grass", new AetherGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable());
-    public static final EnchantedAetherGrassBlock AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", new EnchantedAetherGrassBlock(grassBlock().mapColor(MapColor.GOLD)));
+    public static final AetherGrassBlock AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", new AetherGrassBlock(grassBlock().mapColor(MapColor.GOLD)));
     // Soil Blocks
     public static final Block AETHER_DIRT = add("aether_dirt", new Block(copy(DIRT).strength(0.3f)), tillable(), flattenable());
     public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new AetherFarmlandBlock(copy(FARMLAND)));
@@ -223,7 +224,7 @@ public class AetherBlocks {
     private static final WoodTypeFactory goldenOak = new WoodTypeFactory(MapColor.OAK_TAN, MapColor.TERRACOTTA_RED, MapColor.GOLD, MapColor.TERRACOTTA_RED);
     public static final SaplingBlock GOLDEN_OAK_SAPLING = add("golden_oak_sapling", new AetherSaplingBlock(new GoldenOakSaplingGenerator(), goldenOak.sapling().luminance(state -> 7)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_GOLDEN_OAK_SAPLING = add("potted_golden_oak_sapling", new FlowerPotBlock(GOLDEN_OAK_SAPLING, flowerPot().luminance(state -> 7)), cutoutRenderLayer);
-    public static final PillarBlock GOLDEN_OAK_LOG = add("golden_oak_log", new PillarBlock(goldenOak.log()), flammableLog);
+    public static final GoldenOakLogBlock GOLDEN_OAK_LOG = add("golden_oak_log", new GoldenOakLogBlock(goldenOak.log()), flammableLog);
     public static final PillarBlock GOLDEN_OAK_WOOD = add("golden_oak_wood", new PillarBlock(goldenOak.log()), flammableLog);
     public static final PillarBlock STRIPPED_GOLDEN_OAK_LOG = add("stripped_golden_oak_log", new PillarBlock(goldenOak.strippedLog()), flammableLog, strippedFrom(GOLDEN_OAK_LOG));
     public static final PillarBlock STRIPPED_GOLDEN_OAK_WOOD = add("stripped_golden_oak_wood", new PillarBlock(goldenOak.strippedWood()), flammableLog, strippedFrom(GOLDEN_OAK_WOOD));
@@ -376,7 +377,7 @@ public class AetherBlocks {
     // Torches
     private static Settings ambrosiumTorch() { return copy(TORCH).ticksRandomly().luminance(state -> 15); }
     public static final AmbrosiumTorchBlock AMBROSIUM_TORCH = add("ambrosium_torch", new AmbrosiumTorchBlock(ambrosiumTorch()), cutoutRenderLayer);
-    public static final AmbrosiumTorchWallBlock AMBROSIUM_TORCH_WALL = add("ambrosium_wall_torch", new AmbrosiumTorchWallBlock(ambrosiumTorch().dropsLike(AMBROSIUM_TORCH)), cutoutRenderLayer);
+    public static final AmbrosiumWallTorchBlock AMBROSIUM_TORCH_WALL = add("ambrosium_wall_torch", new AmbrosiumWallTorchBlock(ambrosiumTorch().dropsLike(AMBROSIUM_TORCH)), cutoutRenderLayer);
     // Swet Drops
     private static Settings swetDrop() { return of(Material.SOLID_ORGANIC, MapColor.CLEAR).breakInstantly().noCollision(); }
     public static final SwetDropBlock SWET_DROP = add("swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.WHITE_SWET));
@@ -503,6 +504,48 @@ public class AetherBlocks {
     private static class AetherWoodenButtonBlock extends WoodenButtonBlock {
         protected AetherWoodenButtonBlock(Settings settings) {
             super(settings);
+        }
+    }
+
+    private static class AetherDoorBlock extends DoorBlock {
+        public AetherDoorBlock(Settings settings) {
+            super(settings);
+        }
+    }
+
+    private static class AetherFarmlandBlock extends FarmlandBlock {
+        public AetherFarmlandBlock(Settings settings) {
+            super(settings);
+        }
+    }
+
+    private static class AetherPaneBlock extends PaneBlock {
+        public AetherPaneBlock(Settings settings) {
+            super(settings);
+        }
+    }
+
+    private static class AetherPressurePlateBlock extends PressurePlateBlock {
+        public AetherPressurePlateBlock(ActivationRule type, Settings settings) {
+            super(type, settings);
+        }
+    }
+
+    private static class AetherStairsBlock extends StairsBlock {
+        public AetherStairsBlock(BlockState baseBlockState, Settings settings) {
+            super(baseBlockState, settings);
+        }
+    }
+
+    private static class AetherTrapdoorBlock extends TrapdoorBlock {
+        public AetherTrapdoorBlock(Settings settings) {
+            super(settings);
+        }
+    }
+
+    private static class AetherWeightedPressurePlateBlock extends WeightedPressurePlateBlock {
+        public AetherWeightedPressurePlateBlock(int weight, Settings settings) {
+            super(weight, settings);
         }
     }
 }

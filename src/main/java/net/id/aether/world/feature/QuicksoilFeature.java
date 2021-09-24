@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.aether.blocks.AetherBlockProperties;
 import net.id.aether.blocks.AetherBlocks;
-import net.id.aether.blocks.aercloud.AercloudBlock;
+import net.id.aether.blocks.natural.aercloud.AercloudBlock;
 import net.id.aether.world.feature.config.DynamicConfiguration;
 import net.id.aether.world.feature.config.QuicksoilConfig;
 import net.minecraft.block.BlockState;
