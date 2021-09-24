@@ -3,6 +3,7 @@ package net.id.aether.entities.util.floatingblock;
 import net.gudenau.minecraft.moretags.MoreTags;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.block.FloatingBlockEntity;
+import net.id.aether.entities.util.floatingblock.FloatingBlockStructure.FloatingBlockInfoWrapper;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class FloatingBlockHelper {
     public static final Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = (entity) -> {
@@ -128,6 +130,49 @@ public class FloatingBlockHelper {
                 && !AetherBlockTags.NON_FLOATERS.contains(state.getBlock());
     }
 
+    public static class FloatingBlockStructureBuilder {
+        private final World world;
+        private final FloatingBlockStructure structure;
+        private final BlockPos origin;
+
+        public FloatingBlockStructureBuilder(World world, BlockPos initial) {
+            this.world = world;
+            this.structure = new FloatingBlockStructure(new ArrayList<>(0));
+            this.origin = initial;
+            this.add(initial);
+        }
+
+        public FloatingBlockStructureBuilder add(BlockPos pos){
+            FloatingBlockEntity entity = new FloatingBlockEntity(this.world, pos, world.getBlockState(pos), true);
+            this.structure.blockInfos.add(new FloatingBlockInfoWrapper(entity, pos.subtract(this.origin)));
+            return this;
+        }
+
+        public FloatingBlockStructureBuilder addIf(BlockPos pos, Predicate<ArrayList<FloatingBlockInfoWrapper>> p){
+            if (p.test(this.structure.blockInfos)){
+                return this.add(pos);
+            }
+            return this;
+        }
+
+        public int size(){
+            return structure.blockInfos.size();
+        }
+
+        public ArrayList<FloatingBlockInfoWrapper> list(){
+            return structure.blockInfos;
+        }
+
+        public FloatingBlockStructure build(){
+            return this.structure;
+        }
+
+        public boolean isInStructure(BlockPos pos) {
+            return this.structure.blockInfos.stream().anyMatch(wrapper ->
+                    wrapper.offset.equals(pos.subtract(origin)));
+        }
+    }
+
     public static class FloatingBlockPusherHandler {
         public static final int MAX_MOVABLE_BLOCKS = PistonHandler.MAX_MOVABLE_BLOCKS;
 
@@ -136,69 +181,57 @@ public class FloatingBlockHelper {
             if (!world.getBlockState(pos).isOf(AetherBlocks.GRAVITITE_LEVITATOR)) {
                 return null;
             }
-            ArrayList<FloatingBlockStructure.FloatingBlockInfoWrapper> infos = new ArrayList<>(0);
-            Vec3i offset = Vec3i.ZERO;
-            if (continueTree(world, pos, offset, infos)) {
-                return new FloatingBlockStructure(infos);
+            FloatingBlockStructureBuilder builder = new FloatingBlockStructureBuilder(world, pos);
+            if (continueTree(world, pos.up(), builder)) {
+                return builder.build();
             } else {
                 return null;
             }
         }
 
         // returns false if the tree is unable to move. returns true otherwise.
-        private static boolean continueTree(World world, BlockPos origin, Vec3i offset, ArrayList<FloatingBlockStructure.FloatingBlockInfoWrapper> infos) {
-            if (infos.size() > MAX_MOVABLE_BLOCKS + 1) {
+        private static boolean continueTree(World world, BlockPos pos, FloatingBlockStructureBuilder builder) {
+            if (builder.size() > MAX_MOVABLE_BLOCKS + 1) {
                 return false;
             }
-            BlockPos pos = origin.add(offset);
             BlockState state = world.getBlockState(pos);
 
             if (state.isAir()
                     || !PistonBlock.isMovable(state, world, pos, Direction.UP, false, Direction.UP)
-                    || alreadyCounted(infos, offset)) {
+                    || builder.isInStructure(pos)) {
                 return true;
             }
             // adds the block to the structure
-            FloatingBlockEntity newBlock = new FloatingBlockEntity(world, pos, state, true);
-            infos.add(new FloatingBlockStructure.FloatingBlockInfoWrapper(newBlock, offset));
+            builder.add(pos);
             // check if above block is movable
             if (!PistonBlock.isMovable(world.getBlockState(pos.up()), world, pos.up(), Direction.UP, true, Direction.UP)) {
                 return false;
             }
             // check if rest of tree above is movable
-            if (!continueTree(world, origin, offset.up(), infos)) {
+            if (!continueTree(world, pos.up(), builder)) {
                 return false;
             }
             // sides and bottom (sticky blocks)
             if (MoreTags.STICKY_BLOCKS.contains(state.getBlock())) {
                 // checks each of the sides
-                for (Vec3i newOff : new Vec3i[]{
-                        offset.north(),
-                        offset.east(),
-                        offset.south(),
-                        offset.west(),
-                        offset.down()
+                for (var newPos : new BlockPos[]{
+                        pos.north(),
+                        pos.east(),
+                        pos.south(),
+                        pos.west(),
+                        pos.down()
                         /* up has already been checked */
                 }) {
-                    BlockState adjacentState = world.getBlockState(origin.add(newOff));
+                    BlockState adjacentState = world.getBlockState(newPos);
                     if (isAdjacentBlockStuck(state, adjacentState)) {
                         // check the rest of the tree above the side block
-                        if (!continueTree(world, origin, newOff, infos)) {
+                        if (!continueTree(world, newPos, builder)) {
                             return false;
                         }
                     }
                 }
             }
             return true;
-        }
-
-        private static boolean alreadyCounted(ArrayList<FloatingBlockStructure.FloatingBlockInfoWrapper> infos, Vec3i offset1) {
-            for (FloatingBlockStructure.FloatingBlockInfoWrapper info : infos) {
-                if (info.offset.equals(offset1)) {
-                    return true;
-                }
-            }
-            return false;
         }
 
         private static boolean isAdjacentBlockStuck(BlockState state, BlockState adjacentState) {
