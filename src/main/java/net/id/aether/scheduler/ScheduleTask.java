@@ -1,26 +1,27 @@
 package net.id.aether.scheduler;
 
+// this has never been used
 public abstract class ScheduleTask {
-    public int Delay;
-    public int CurrentTick;
-    public boolean Paused;
-    public boolean EveryTick;
+    public int delay;
+    public int currentTick;
+    public boolean paused;
+    public boolean everyTick;
 
-    public abstract void Execute();
+    public abstract void execute();
 
     public int getDelay() {
-        return Delay;
+        return delay;
     }
 
     public boolean getPaused() {
-        return Paused;
+        return paused;
     }
 
     public int getCurrentTick() {
-        return CurrentTick;
+        return currentTick;
     }
 
     public boolean isEveryTick() {
-        return EveryTick;
+        return everyTick;
     }
 }
