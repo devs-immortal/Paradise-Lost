@@ -11,34 +11,32 @@ import net.minecraft.entity.EntityType;
 @Environment(EnvType.CLIENT)
 public class AetherEntityRenderers {
     public static void initClient() {
-        register(AetherEntityTypes.MOA, MoaRenderer::new);
+        // block
         register(AetherEntityTypes.FLOATING_BLOCK, FloatingBlockRenderer::new);
-        //register(AetherEntityTypes.FLYING_COW, FlyingCowRenderer::new);
-        //register(AetherEntityTypes.SHEEPUFF, SheepuffRenderer::new);
-        register(AetherEntityTypes.AERBUNNY, AerbunnyRenderer::new);
-        register(AetherEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
-        register(AetherEntityTypes.PHYG, PhygRenderer::new);
-        register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);
-        register(AetherEntityTypes.COCKATRICE_SPIT, CockatriceSpitRenderer::new);
-
-        register(DartRenderer::new,
-            AetherEntityTypes.ENCHANTED_DART,
-            AetherEntityTypes.GOLDEN_DART,
-            AetherEntityTypes.POISON_DART,
-            AetherEntityTypes.POISON_NEEDLE
-        );
-        register(AetherEntityTypes.AERWHALE, AerwhaleRenderer::new);
-
-
-        //entityRenderMap.put(EntityMiniCloud.class, new MiniCloudRenderer(renderManager));
-        register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
-        //entityRenderMap.put(EntityWhirlwind.class, new WhirlwindRenderer(renderManager));
-        //entityRenderMap.put(EntityPhoenixArrow.class, new PhoenixArrowRenderer(renderManager));
+        // hostile
         register(SwetRenderer::new,
-            AetherEntityTypes.BLUE_SWET,
-            AetherEntityTypes.PURPLE_SWET,
-            AetherEntityTypes.WHITE_SWET,
-            AetherEntityTypes.GOLDEN_SWET
+                AetherEntityTypes.BLUE_SWET,
+                AetherEntityTypes.PURPLE_SWET,
+                AetherEntityTypes.WHITE_SWET,
+                AetherEntityTypes.GOLDEN_SWET
+        );
+        register(AetherEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
+        register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
+        register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);
+        // passive
+        register(AetherEntityTypes.MOA, MoaRenderer::new);
+        register(AetherEntityTypes.AERBUNNY, AerbunnyRenderer::new);
+        register(AetherEntityTypes.AERWHALE, AerwhaleRenderer::new);
+//        register(AetherEntityTypes.FLYING_COW, FlyingCowRenderer::new);
+//        register(AetherEntityTypes.PHYG, PhygRenderer::new);
+//        register(AetherEntityTypes.SHEEPUFF, SheepuffRenderer::new);
+        // projectile
+        register(AetherEntityTypes.COCKATRICE_SPIT, CockatriceSpitRenderer::new);
+        register(DartRenderer::new,
+                AetherEntityTypes.ENCHANTED_DART,
+                AetherEntityTypes.GOLDEN_DART,
+                AetherEntityTypes.POISON_DART,
+                AetherEntityTypes.POISON_NEEDLE
         );
     }
     

@@ -245,9 +245,12 @@ public abstract class SwetEntity extends SlimeEntity {
         }
     }
 
+    // todo: make a generic particle for swets, or make a custom one for each variant
+    // (it doesn't make sense for all of them to use 'splash')
+    // temporarily set to "snowflake"
     @Override
     protected ParticleEffect getParticles() {
-        return ParticleTypes.SPLASH;
+        return ParticleTypes.SNOWFLAKE;
     }
 
     @Override
