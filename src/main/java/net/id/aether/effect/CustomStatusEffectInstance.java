@@ -4,7 +4,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import org.jetbrains.annotations.Nullable;
 
-// Never used
+// unused
 public class CustomStatusEffectInstance extends StatusEffectInstance {
 
     public boolean ShowParticles = false;

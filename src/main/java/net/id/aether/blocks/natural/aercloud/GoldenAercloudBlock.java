@@ -18,7 +18,7 @@ public class GoldenAercloudBlock extends AercloudBlock {
 
     protected static VoxelShape SHAPE = VoxelShapes.empty();
 
-    public GoldenAercloudBlock(AbstractBlock.Settings properties) {
+    public GoldenAercloudBlock(Settings properties) {
         super(properties);
     }
 

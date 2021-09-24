@@ -15,7 +15,7 @@ public class PinkAercloudBlock extends AercloudBlock {
 
     private static final ParticleEffect pinkFluff = new DustParticleEffect(new Vec3f(0.89F, 0.65F, 0.9F), 1F);
 
-    public PinkAercloudBlock(AbstractBlock.Settings properties) {
+    public PinkAercloudBlock(Settings properties) {
         super(properties);
     }
 

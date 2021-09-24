@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class AetherPortalBlock extends CustomPortalBlock {
-    public AetherPortalBlock(AbstractBlock.Settings settings) {
+    public AetherPortalBlock(Settings settings) {
         super(settings);
     }
 

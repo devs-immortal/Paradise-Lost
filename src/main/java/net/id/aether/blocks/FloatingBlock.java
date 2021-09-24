@@ -1,7 +1,6 @@
 package net.id.aether.blocks;
 
 import net.id.aether.entities.util.floatingblock.FloatingBlockHelper;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.OreBlock;
 import net.minecraft.server.world.ServerWorld;
@@ -17,12 +16,12 @@ import java.util.Random;
 public class FloatingBlock extends OreBlock {
     private final boolean powered;
 
-    public FloatingBlock(boolean powered, AbstractBlock.Settings properties, UniformIntProvider experienceDropped) {
+    public FloatingBlock(boolean powered, Settings properties, UniformIntProvider experienceDropped) {
         super(properties, experienceDropped);
         this.powered = powered;
     }
 
-    public FloatingBlock(boolean powered, AbstractBlock.Settings properties) {
+    public FloatingBlock(boolean powered, Settings properties) {
         this(powered, properties, UniformIntProvider.create(0, 0));
     }
 

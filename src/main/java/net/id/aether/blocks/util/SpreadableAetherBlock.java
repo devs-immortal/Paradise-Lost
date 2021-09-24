@@ -12,7 +12,7 @@ import net.minecraft.world.chunk.light.ChunkLightProvider;
 import java.util.Random;
 
 public abstract class SpreadableAetherBlock extends SnowyBlock {
-    protected SpreadableAetherBlock(AbstractBlock.Settings settings) {
+    protected SpreadableAetherBlock(Settings settings) {
         super(settings);
     }
 
