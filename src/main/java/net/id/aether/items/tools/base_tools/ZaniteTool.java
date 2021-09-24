@@ -1,4 +1,4 @@
-package net.id.aether.items.tools;
+package net.id.aether.items.tools.base_tools;
 
 import net.minecraft.item.ItemStack;
 

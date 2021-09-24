@@ -5,9 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+// unused
 public class AetherAccessory {
 
-    private final Identifier registryName;
     private final ItemStack accessoryStack;
     private final AccessoryType accessoryType;
     private final AccessoryType extraType;
@@ -20,12 +20,11 @@ public class AetherAccessory {
         this.accessoryType = type;
         this.accessoryStack = stack;
 
-        this.registryName = Registry.ITEM.getId(stack.getItem());
         this.extraType = type == AccessoryType.RING ? AccessoryType.EXTRA_RING : type == AccessoryType.MISC ? AccessoryType.EXTRA_MISC : null;
     }
 
     public Identifier getRegistryName() {
-        return this.registryName;
+        return Registry.ITEM.getId(accessoryStack.getItem());
     }
 
     public AccessoryType getAccessoryType() {

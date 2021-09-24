@@ -1,4 +1,4 @@
-package net.id.aether.items.tools;
+package net.id.aether.items.tools.bloodstone;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

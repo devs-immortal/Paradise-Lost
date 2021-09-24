@@ -1,4 +1,4 @@
-package net.id.aether.items.tools;
+package net.id.aether.items.tools.bloodstone;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.LivingEntity;

@@ -1,4 +1,4 @@
-package net.id.aether.items;
+package net.id.aether.items.misc;
 
 import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;
 import net.kyrptonaught.customportalapi.portal.PortalPlacer;

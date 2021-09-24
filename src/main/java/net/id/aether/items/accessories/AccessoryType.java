@@ -1,5 +1,6 @@
 package net.id.aether.items.accessories;
 
+// unused
 public enum AccessoryType {
     RING("ring", 11, 3),
     EXTRA_RING("ring", 11, 3),

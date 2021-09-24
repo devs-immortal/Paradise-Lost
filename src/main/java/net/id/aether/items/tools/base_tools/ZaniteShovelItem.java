@@ -1,12 +1,12 @@
-package net.id.aether.items.tools;
+package net.id.aether.items.tools.base_tools;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ToolMaterial;
 
-public class ZaniteAxeItem extends AxeItem {
-    public ZaniteAxeItem(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
+public class ZaniteShovelItem extends ShovelItem {
+    public ZaniteShovelItem(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
 

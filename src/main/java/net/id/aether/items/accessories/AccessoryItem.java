@@ -4,6 +4,7 @@ import net.id.aether.Aether;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
+// unused
 public class AccessoryItem extends Item {
     private final AccessoryType type;
     private final Identifier texture, texture_slim;

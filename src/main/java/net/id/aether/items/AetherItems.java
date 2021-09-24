@@ -1,5 +1,6 @@
 package net.id.aether.items;
 
+import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -9,11 +10,19 @@ import net.id.aether.entities.vehicle.AetherBoatTypes;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.armor.AetherArmorMaterials;
 import net.id.aether.items.food.AetherFoodComponent;
+import net.id.aether.items.misc.AetherPortalItem;
+import net.id.aether.items.misc.BookOfLoreItem;
 import net.id.aether.items.misc.HealingStoneItem;
 import net.id.aether.items.food.ValkyrieMilkItem;
 import net.id.aether.items.food.WhiteAppleItem;
+import net.id.aether.items.misc.MoaEggItem;
 import net.id.aether.items.resources.AmbrosiumShardItem;
 import net.id.aether.items.tools.*;
+import net.id.aether.items.tools.base_tools.*;
+import net.id.aether.items.tools.bloodstone.AbstentineBloodstoneItem;
+import net.id.aether.items.tools.bloodstone.AmbrosiumBloodstoneItem;
+import net.id.aether.items.tools.bloodstone.GravititeBloodstoneItem;
+import net.id.aether.items.tools.bloodstone.ZaniteBloodstoneItem;
 import net.id.aether.items.utils.AetherDispenserBehaviors;
 import net.id.aether.items.utils.StackableVariantColorizer;
 import net.id.aether.items.weapons.*;
@@ -112,8 +121,8 @@ public class AetherItems {
     public static final PigSlayerItem PIG_SLAYER = add("pig_slayer", new PigSlayerItem(AetherToolMaterials.LEGENDARY, 3, -2.4f, aetherLootTool));
     public static final CandyCaneSwordItem CANDY_CANE_SWORD = add("candy_cane_sword", new CandyCaneSwordItem(AetherToolMaterials.CANDY, 3, -2f, aetherLootTool));
 
-    public static final ParachuteItem CLOUD_PARACHUTE = add("cold_parachute", new ParachuteItem(unstackableTool));
-    public static final ParachuteItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new ParachuteItem(tool().maxCount(1).maxDamage(20)));
+    public static final TrinketItem CLOUD_PARACHUTE = add("cold_parachute", new TrinketItem(unstackableTool));
+    public static final TrinketItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new TrinketItem(tool().maxCount(1).maxDamage(20)));
 
     public static final AmbrosiumBloodstoneItem AMBROSIUM_BLOODSTONE = add("ambrosium_bloodstone", new AmbrosiumBloodstoneItem(unstackableTool));
     public static final ZaniteBloodstoneItem ZANITE_BLOODSTONE = add("zanite_bloodstone", new ZaniteBloodstoneItem(unstackableTool));

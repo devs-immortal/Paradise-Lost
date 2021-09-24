@@ -1,13 +1,13 @@
-package net.id.aether.items.tools;
+package net.id.aether.items.tools.base_tools;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 
-public class ZaniteSwordItem extends SwordItem {
-    public ZaniteSwordItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
-        super(toolMaterial, attackDamage, attackSpeed, settings);
+public class ZaniteHoeItem extends HoeItem {
+    public ZaniteHoeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
+        super(material, attackDamage, attackSpeed, settings);
     }
 
     @Override

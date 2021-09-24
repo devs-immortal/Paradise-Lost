@@ -1,4 +1,4 @@
-package net.id.aether.items.staff;
+package net.id.aether.items.tools.staff;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

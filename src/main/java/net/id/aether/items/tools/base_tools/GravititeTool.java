@@ -1,4 +1,4 @@
-package net.id.aether.items.tools;
+package net.id.aether.items.tools.base_tools;
 
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityExtensions;

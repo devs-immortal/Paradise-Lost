@@ -1,4 +1,4 @@
-package net.id.aether.items;
+package net.id.aether.items.misc;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
