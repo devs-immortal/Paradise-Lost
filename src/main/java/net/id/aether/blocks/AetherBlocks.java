@@ -57,27 +57,26 @@ public class AetherBlocks {
     private static final ContextPredicate always = (state, view, pos) -> true;
 
     private static Settings unbreakable(Settings settings) { return settings.strength(-1f, 3600000f); }
-    private static Settings flowerPot() { return copy(POTTED_OAK_SAPLING); }
 
     private static Action<Block> flammable(int spread, int burn) { return (id, block) -> FlammableBlockRegistry.getDefaultInstance().add(block, spread, burn);}
     private static final Action<Block> flammableLog = flammable(5, 5);
     private static final Action<Block> flammablePlanks = flammable(20, 5);
     private static final Action<Block> flammableLeaves = flammable(60, 30);
     private static final Action<Block> flammablePlant = flammable(60, 100);
+
     private static final Action<Block> translucentRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayersAccessor.getBLOCKS().put(block, RenderLayer.getTranslucent()));
     private static final Action<Block> cutoutRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayersAccessor.getBLOCKS().put(block, RenderLayer.getCutout()));
     private static final Action<Block> cutoutMippedRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayersAccessor.getBLOCKS().put(block, RenderLayer.getCutoutMipped()));
+
     private static final Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
+
+    private static Settings flowerPot() { return copy(POTTED_OAK_SAPLING); }
 
     private static Action<Block> strippedFrom(Block original) { return (id, stripped) -> StrippableBlockRegistry.register(original, stripped);}
 
     private static Action<Block> tillable() { return (id, block) -> addTillAction(block);}
 
     private static Action<Block> flattenable() { return (id, block) -> addFlattenAction(block);}
-
-    /*
-    Begin blocks
-     */
 
     // Grass Blocks
     private static Settings grassBlock() { return copy(GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f); }

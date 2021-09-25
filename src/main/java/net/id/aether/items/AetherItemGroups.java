@@ -15,7 +15,7 @@ public class AetherItemGroups {
 
     public static final ItemGroup AETHER_DECORATIONS = build(
             Aether.locate("aether_decorations"),
-            () -> new ItemStack(AetherBlocks.WEEPING_CLOUDBURST));
+            () -> new ItemStack(AetherBlocks.GIANT_LILY));
 
     public static final ItemGroup AETHER_TOOLS = build(
             Aether.locate("aether_tools"),
@@ -32,7 +32,7 @@ public class AetherItemGroups {
     // TODO: find a new icon for this item group, or change it to the bronze key when implemented
     public static final ItemGroup AETHER_MISC = build(
             Aether.locate("aether_misc"),
-            () -> new ItemStack(Items.BARRIER));
+            () -> new ItemStack(Items.AIR));
 
     public static final ItemGroup AETHER_WEARABLES = build(
             Aether.locate("aether_wearables"),
