@@ -41,7 +41,6 @@
     "client.InGameOverlayRendererMixin",
     "client.ItemStackMixin",
     "client.MapRendererMixin",
-    "client.RenderLayersAccessor",
     "client.WorldRendererMixin",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",

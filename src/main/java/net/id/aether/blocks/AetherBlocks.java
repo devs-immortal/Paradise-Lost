@@ -1,6 +1,7 @@
 package net.id.aether.blocks;
 
 import com.google.common.collect.ImmutableSet;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
@@ -26,7 +27,6 @@ import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.util.RenderUtils;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
-import net.id.aether.mixin.client.RenderLayersAccessor;
 import net.id.aether.registry.AetherRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue;
 import net.id.incubus_core.util.RegistryQueue.Action;
@@ -64,9 +64,10 @@ public class AetherBlocks {
     private static final Action<Block> flammableLeaves = flammable(60, 30);
     private static final Action<Block> flammablePlant = flammable(60, 100);
 
-    private static final Action<Block> translucentRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayersAccessor.getBLOCKS().put(block, RenderLayer.getTranslucent()));
-    private static final Action<Block> cutoutRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayersAccessor.getBLOCKS().put(block, RenderLayer.getCutout()));
-    private static final Action<Block> cutoutMippedRenderLayer = RegistryQueue.onClient((id, block) -> RenderLayersAccessor.getBLOCKS().put(block, RenderLayer.getCutoutMipped()));
+    private static Action<Block> renderLayer(RenderLayer layer) { return RegistryQueue.onClient((id, block) -> BlockRenderLayerMap.INSTANCE.putBlock(block, layer));}
+    private static final Action<Block> translucentRenderLayer = renderLayer(RenderLayer.getTranslucent());
+    private static final Action<Block> cutoutRenderLayer = renderLayer(RenderLayer.getCutout());
+    private static final Action<Block> cutoutMippedRenderLayer = renderLayer(RenderLayer.getCutoutMipped());
 
     private static final Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
 

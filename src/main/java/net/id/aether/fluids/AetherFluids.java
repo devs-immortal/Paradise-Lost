@@ -2,8 +2,8 @@ package net.id.aether.fluids;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.id.aether.client.rendering.block.FluidRenderSetup;
-import net.id.aether.mixin.client.RenderLayersAccessor;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.util.registry.Registry;
@@ -19,7 +19,7 @@ public class AetherFluids {
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        RenderLayersAccessor.getFLUIDS().put(DENSE_AERCLOUD, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putFluid(DENSE_AERCLOUD, RenderLayer.getTranslucent());
         FluidRenderSetup.setupFluidRendering(AetherFluids.DENSE_AERCLOUD, null, locate("dense_aercloud"), 0xFFFFFF);
     }
 }
