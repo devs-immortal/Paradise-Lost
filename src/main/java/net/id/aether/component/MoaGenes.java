@@ -21,7 +21,7 @@ import java.util.UUID;
 public class MoaGenes implements AutoSyncedComponent {
 
     private final Object2FloatOpenHashMap<MoaAttributes> attributeMap = new Object2FloatOpenHashMap<>();
-    private MoaAPI.Race race = MoaAPI.FALLBACK_MOA;
+    private MoaAPI.MoaRace race = MoaAPI.FALLBACK_MOA;
     private MoaAttributes affinity;
     private boolean legendary, initialized;
     private UUID owner;
@@ -30,7 +30,7 @@ public class MoaGenes implements AutoSyncedComponent {
     public MoaGenes() {
     }
 
-    public static ItemStack getEggForCommand(MoaAPI.Race race, World world, boolean baby) {
+    public static ItemStack getEggForCommand(MoaAPI.MoaRace race, World world, boolean baby) {
         ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
         NbtCompound nbt = stack.getOrCreateSubNbt("genes");
         Random random = world.getRandom();
@@ -116,7 +116,7 @@ public class MoaGenes implements AutoSyncedComponent {
         return initialized;
     }
 
-    public MoaAPI.Race getRace() {
+    public MoaAPI.MoaRace getRace() {
         return race;
     }
 

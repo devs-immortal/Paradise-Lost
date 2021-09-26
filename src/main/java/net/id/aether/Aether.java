@@ -5,7 +5,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
-import net.id.aether.api.ConditionAPI;
 import net.id.aether.api.MoaAPI;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
@@ -18,7 +17,7 @@ import net.id.aether.client.rendering.particle.AetherParticles;
 import net.id.aether.commands.AetherCommands;
 import net.id.aether.effect.condition.Conditions;
 import net.id.aether.entities.AetherEntityTypes;
-import net.id.aether.entities.passive.moa.Moas;
+import net.id.aether.entities.passive.moa.MoaRaces;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
 import net.id.aether.loot.AetherLootNumberProviderTypes;
@@ -61,7 +60,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherLootNumberProviderTypes.init();
         Conditions.init();
         MoaAPI.init();
-        Moas.init();
+        MoaRaces.init();
     }
 
     @Override

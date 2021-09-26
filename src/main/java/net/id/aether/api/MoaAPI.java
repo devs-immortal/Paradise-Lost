@@ -24,14 +24,14 @@ import java.util.function.BiPredicate;
 public class MoaAPI {
 
     public static final Identifier FALLBACK_ID = Aether.locate("fallback");
-    public static final Race FALLBACK_MOA = new Race(FALLBACK_ID, Aether.locate("textures/entity/moas/highlands/blue.png"), MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
+    public static final MoaRace FALLBACK_MOA = new MoaRace(FALLBACK_ID, Aether.locate("textures/entity/moas/highlands/blue.png"), MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
 
-    private static final Object2ObjectOpenHashMap<Identifier, Race> MOA_RACE_REGISTRY = new Object2ObjectOpenHashMap<>();
+    private static final Object2ObjectOpenHashMap<Identifier, MoaRace> MOA_RACE_REGISTRY = new Object2ObjectOpenHashMap<>();
     private static final Object2ObjectOpenHashMap<RegistryKey<Biome>, SpawnBucket> MOA_SPAWN_REGISTRY = new Object2ObjectOpenHashMap<>();
     private static final List<MatingEntry> MOA_BREEDING_REGISTRY = new ArrayList<>();
 
-    public static Race register(Identifier name, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles, Identifier texturePath){
-        final Race race = new Race(name, texturePath, affinity, spawnStats, glowing, legendary, particles);
+    public static MoaRace register(Identifier name, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles, Identifier texturePath){
+        final MoaRace race = new MoaRace(name, texturePath, affinity, spawnStats, glowing, legendary, particles);
         MOA_RACE_REGISTRY.put(name, race);
 
         return race;
@@ -39,11 +39,11 @@ public class MoaAPI {
 
     public static void init() {}
 
-    public static void registerBreedingChance(Identifier raceId, Race parentA, Race parentB, float chance) {
+    public static void registerBreedingChance(Identifier raceId, MoaRace parentA, MoaRace parentB, float chance) {
         registerBreedingPredicate(raceId, parentA, parentB, createChanceCheck(chance));
     }
 
-    public static void registerBreedingPredicate(Identifier raceId, Race parentA, Race parentB, Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> breedingPredicate) {
+    public static void registerBreedingPredicate(Identifier raceId, MoaRace parentA, MoaRace parentB, Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> breedingPredicate) {
         registerBreeding(new MatingEntry(raceId, createIdentityCheck(parentA, parentB), breedingPredicate));
     }
 
@@ -55,7 +55,7 @@ public class MoaAPI {
         MOA_BREEDING_REGISTRY.add(entry);
     }
 
-    public static Race getRace(Identifier raceId) {
+    public static MoaRace getRace(Identifier raceId) {
         return MOA_RACE_REGISTRY.getOrDefault(raceId, FALLBACK_MOA);
     }
 
@@ -67,7 +67,7 @@ public class MoaAPI {
         return Optional.ofNullable(MOA_SPAWN_REGISTRY.get(biome));
     }
 
-    public static Race getMoaForBiome(RegistryKey<Biome> biome, Random random) {
+    public static MoaRace getMoaForBiome(RegistryKey<Biome> biome, Random random) {
         Optional<Identifier> raceOptional =
                 Optional.ofNullable(getSpawnBucket(biome)
                         .map(bucket -> bucket.get(random))
@@ -75,7 +75,7 @@ public class MoaAPI {
         return raceOptional.map(MoaAPI::getRace).orElse(FALLBACK_MOA);
     }
 
-    public static Race getMoaForBreeding(MoaGenes parentA, MoaGenes parentB, World world, BlockPos pos) {
+    public static MoaRace getMoaForBreeding(MoaGenes parentA, MoaGenes parentB, World world, BlockPos pos) {
         var childRace =
                 MOA_BREEDING_REGISTRY.stream()
                         .filter(matingEntry -> matingEntry.identityCheck.test(parentA.getRace(), parentB.getRace()) && matingEntry.additionalChecks.apply(parentA, parentB, world, pos))
@@ -93,7 +93,7 @@ public class MoaAPI {
         return attribute != null ? "moa.attribute." + attribute.name().toLowerCase() : "???";
     }
 
-    public static BiPredicate<Race, Race> createIdentityCheck(Race raceA, Race raceB) {
+    public static BiPredicate<MoaRace, MoaRace> createIdentityCheck(MoaRace raceA, MoaRace raceB) {
         return (parentA, parentB) -> (raceA == parentA && raceB == parentB) || (raceB == parentA && raceA == parentB);
     }
 
@@ -125,15 +125,15 @@ public class MoaAPI {
             data = builder.build();
         }
 
-        public float configure(MoaAttributes attribute, Race race, Random random) {
+        public float configure(MoaAttributes attribute, MoaRace race, Random random) {
             SpawnStatData statData = data.get(attribute);
             return Math.min(attribute.max, attribute.min + (statData.base + (random.nextFloat() * statData.variance) * (race.defaultAffinity == attribute ? (attribute == MoaAttributes.DROP_MULTIPLIER ? 2F : 1.05F) : 1F)));
         }
     }
 
-    public static record Race(Identifier id, Identifier texturePath, MoaAttributes defaultAffinity,
-                              SpawnStatWeighting statWeighting, boolean glowing, boolean legendary,
-                              ParticleType<?> particles) {
+    public static record MoaRace(Identifier id, Identifier texturePath, MoaAttributes defaultAffinity,
+                                 SpawnStatWeighting statWeighting, boolean glowing, boolean legendary,
+                                 ParticleType<?> particles) {
     }
 
     private static record SpawnBucketEntry(Identifier id, int weight) {
@@ -175,9 +175,9 @@ public class MoaAPI {
 
     }
 
-    private static record MatingEntry(Identifier race, BiPredicate<Race, Race> identityCheck,
+    private static record MatingEntry(Identifier race, BiPredicate<MoaRace, MoaRace> identityCheck,
                                       Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> additionalChecks) {
-        public Race get() {
+        public MoaRace get() {
             return getRace(race);
         }
     }
