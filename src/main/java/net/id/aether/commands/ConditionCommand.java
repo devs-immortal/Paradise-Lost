@@ -11,7 +11,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.id.aether.api.ConditionAPI;
 import net.id.aether.effect.condition.ConditionProcessor;
-import net.id.aether.effect.condition.Persistance;
+import net.id.aether.effect.condition.Persistence;
 import net.id.aether.effect.condition.Severity;
 import net.id.aether.registry.AetherRegistries;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -33,7 +33,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class ConditionCommand {
 
     public static final ConditionProcessorSuggester REGISTERED_CONDITIONS = new ConditionProcessorSuggester();
-    public static final PermanenceSuggester PERMANENCE_SUGGESTER = new PermanenceSuggester();
+    public static final PersistenceSuggester PERSISTENCE_SUGGESTER = new PersistenceSuggester();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
@@ -44,8 +44,8 @@ public class ConditionCommand {
                                         .then(argument("processor", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
                                                 .executes((context -> printCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"))))))
                                 .then(literal("assign").then(argument("processor", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
-                                        .then(argument("value", FloatArgumentType.floatArg()).then(argument("permanence", StringArgumentType.word()).suggests(PERMANENCE_SUGGESTER)
-                                                .executes(context -> setCondition(context.getSource(), EntityArgumentType.getEntity(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"), FloatArgumentType.getFloat(context, "value"), StringArgumentType.getString(context, "permanence")))))))
+                                        .then(argument("value", FloatArgumentType.floatArg()).then(argument("persistence", StringArgumentType.word()).suggests(PERSISTENCE_SUGGESTER)
+                                                .executes(context -> setCondition(context.getSource(), EntityArgumentType.getEntity(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"), FloatArgumentType.getFloat(context, "value"), StringArgumentType.getString(context, "persistence")))))))
                                 .then(literal("clear")
                                         .executes(context -> clearConditions(context.getSource(), EntityArgumentType.getEntities(context, "target")))))
         );
@@ -98,14 +98,14 @@ public class ConditionCommand {
         return 1;
     }
 
-    private static int setCondition(ServerCommandSource source, Entity entity, Identifier attributeId, float value, String permanence) {
+    private static int setCondition(ServerCommandSource source, Entity entity, Identifier attributeId, float value, String persistenceString) {
         if(entity instanceof LivingEntity target) {
             ConditionProcessor condition;
-            Persistance persistance;
+            Persistence persistence;
 
             try {
                 condition = ConditionAPI.getOrThrow(attributeId);
-                persistance = Persistance.valueOf(permanence);
+                persistence = Persistence.valueOf(persistenceString);
             } catch (NoSuchElementException e) {
                 source.sendError(new LiteralText(e.getMessage()));
                 return 0;
@@ -114,7 +114,7 @@ public class ConditionCommand {
             var manager = ConditionAPI.getConditionManager(target);
 
             if(!condition.isExempt(target)) {
-                if(manager.set(attributeId, persistance, value)) {
+                if(manager.set(attributeId, persistence, value)) {
                     var rawSeverity = ConditionAPI.getConditionManager(target).getScaledSeverity(condition);
                     var severity = Severity.getSeverity(rawSeverity);
 
@@ -137,11 +137,11 @@ public class ConditionCommand {
         }
     }
 
-    public static class PermanenceSuggester implements SuggestionProvider<ServerCommandSource> {
+    public static class PersistenceSuggester implements SuggestionProvider<ServerCommandSource> {
         @Override
         public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
-            builder.suggest(Persistance.TEMPORARY.name());
-            builder.suggest(Persistance.CHRONIC.name());
+            builder.suggest(Persistence.TEMPORARY.name());
+            builder.suggest(Persistence.CHRONIC.name());
             return builder.buildFuture();
         }
     }

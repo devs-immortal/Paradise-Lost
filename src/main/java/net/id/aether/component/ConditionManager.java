@@ -9,7 +9,7 @@ import net.fabricmc.api.Environment;
 import net.id.aether.api.ConditionAPI;
 import net.id.aether.effect.condition.ConditionModifier;
 import net.id.aether.effect.condition.ConditionProcessor;
-import net.id.aether.effect.condition.Persistance;
+import net.id.aether.effect.condition.Persistence;
 import net.id.aether.effect.condition.Severity;
 import net.id.aether.registry.AetherRegistries;
 import net.minecraft.client.world.ClientWorld;
@@ -57,8 +57,8 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
                 condition.process(target.world, target, severity, rawSeverity);
             }
 
-            tracker.remove(Persistance.TEMPORARY, getScaledDecay(Persistance.TEMPORARY, condition));
-            tracker.remove(Persistance.CHRONIC, getScaledDecay(Persistance.CHRONIC, condition));
+            tracker.remove(Persistence.TEMPORARY, getScaledDecay(Persistence.TEMPORARY, condition));
+            tracker.remove(Persistence.CHRONIC, getScaledDecay(Persistence.CHRONIC, condition));
         });
     }
 
@@ -76,9 +76,9 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         });
     }
 
-    public boolean set(Identifier processorId, Persistance persistance, float value) {
+    public boolean set(Identifier processorId, Persistence persistence, float value) {
         return Optional.ofNullable(conditionTrackers.get(processorId)).map(tracker -> {
-            switch (persistance) {
+            switch (persistence) {
                 case TEMPORARY -> tracker.tempVal = value;
                 case CHRONIC -> tracker.chronVal = value;
                 case CONSTANT -> throw new IllegalArgumentException("Constant condition values may not be directly edited");
@@ -87,18 +87,18 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         }).orElse(false);
     }
 
-    public void add(Identifier processorId, Persistance persistance, float amount) {
-        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> tracker.add(persistance, amount));
+    public void add(Identifier processorId, Persistence persistence, float amount) {
+        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> tracker.add(persistence, amount));
     }
 
-    public void remove(Identifier processorId, Persistance persistance, float amount) {
-        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> tracker.remove(persistance, amount));
+    public void remove(Identifier processorId, Persistence persistence, float amount) {
+        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> tracker.remove(persistence, amount));
     }
 
     public boolean removeAll(){
         return conditionTrackers.values().stream().allMatch((tracker) ->
-                set(tracker.parent.getId(), Persistance.TEMPORARY, 0)
-                && set(tracker.parent.getId(), Persistance.CHRONIC, 0));
+                set(tracker.parent.getId(), Persistence.TEMPORARY, 0)
+                && set(tracker.parent.getId(), Persistence.CHRONIC, 0));
     }
 
     public void removeScaled(Identifier processorId, float amount) {
@@ -106,8 +106,8 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
             float partial = tracker.getPartialCondition();
             float tempPart = tracker.tempVal / partial;
             float chronPart = tracker.chronVal / partial;
-            tracker.remove(Persistance.TEMPORARY, amount * tempPart);
-            tracker.remove(Persistance.CHRONIC, amount * chronPart);
+            tracker.remove(Persistence.TEMPORARY, amount * tempPart);
+            tracker.remove(Persistence.CHRONIC, amount * chronPart);
         });
     }
 
@@ -119,17 +119,17 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         return !processors.contains(processor.getId());
     }
 
-    public boolean tryApply(Persistance persistance, Identifier processorId, float amount) {
-        if(persistance != Persistance.CONSTANT && !isImmuneTo(processorId)) {
+    public boolean tryApply(Persistence persistence, Identifier processorId, float amount) {
+        if(persistence != Persistence.CONSTANT && !isImmuneTo(processorId)) {
             var tracker = conditionTrackers.get(processorId);
-            tracker.add(persistance, amount);
+            tracker.add(persistence, amount);
             return true;
         }
         return false;
     }
 
-    public float getScaledDecay(Persistance persistance, @NotNull ConditionProcessor processor) {
-        return switch (persistance) {
+    public float getScaledDecay(Persistence persistence, @NotNull ConditionProcessor processor) {
+        return switch (persistence) {
             case TEMPORARY -> processor.tempDecay;
             case CHRONIC -> processor.chronDecay;
             default -> 0;
@@ -249,15 +249,15 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
             this.parent = parent;
         }
 
-        public void add(Persistance persistance, float amount) {
-            switch (persistance) {
+        public void add(Persistence persistence, float amount) {
+            switch (persistence) {
                 case TEMPORARY -> tempVal = Math.min(parent.maxTemp, tempVal + amount);
                 case CHRONIC -> chronVal = Math.min(parent.maxChron, chronVal + amount);
             }
         }
 
-        public void remove(Persistance persistance, float amount) {
-            switch (persistance) {
+        public void remove(Persistence persistence, float amount) {
+            switch (persistence) {
                 case TEMPORARY -> tempVal = Math.max(0, tempVal - amount);
                 case CHRONIC -> chronVal = Math.max(0, chronVal - amount);
             }
