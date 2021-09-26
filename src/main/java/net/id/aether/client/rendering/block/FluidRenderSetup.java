@@ -22,7 +22,6 @@ import java.util.function.Function;
 
 public class FluidRenderSetup {
 
-    // TODO: This should end up being replaced with a FluidRenderer mixin, among other things
     public static void setupFluidRendering(final Fluid still, @Nullable final Fluid flowing, final Identifier textureFluidId, final int color) {
         final Identifier stillSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_still");
         final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_flow");

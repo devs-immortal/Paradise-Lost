@@ -70,7 +70,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherModelLayers.initClient();
         AetherEntityRenderers.initClient();
         AetherBlockEntityTypes.initClient();
-        AetherFluids.initClient();
         AetherParticles.initClient();
         AetherColorProviders.initClient();
     }
