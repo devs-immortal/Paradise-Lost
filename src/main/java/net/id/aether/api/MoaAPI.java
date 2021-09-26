@@ -30,63 +30,28 @@ public class MoaAPI {
     private static final Object2ObjectOpenHashMap<RegistryKey<Biome>, SpawnBucket> MOA_SPAWN_REGISTRY = new Object2ObjectOpenHashMap<>();
     private static final List<MatingEntry> MOA_BREEDING_REGISTRY = new ArrayList<>();
 
-    public static void init() {
-        //  Highlands
-        final Race highlandsBlue = registerForBiome("highlands_blue", AetherDimension.HIGHLANDS_PLAINS, MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, 50, false, false, ParticleTypes.ENCHANT, "textures/entity/moas/highlands/blue.png");
-        final Race goldenrod = registerForBiome("goldenrod", AetherDimension.HIGHLANDS_PLAINS, MoaAttributes.JUMPING_STRENGTH, SpawnStatWeighting.ENDURANCE, 10, false, false, ParticleTypes.ENCHANT, "textures/entity/moas/highlands/goldenrod.png");
-        final Race mintgrass = registerForBiome("mintgrass", AetherDimension.HIGHLANDS_PLAINS, MoaAttributes.GLIDING_SPEED, SpawnStatWeighting.SPEED, 40, false, false, ParticleTypes.ENCHANT, "textures/entity/moas/highlands/mintgrass.png");
+    public static Race register(Identifier name, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles, Identifier texturePath){
+        final Race race = new Race(name, texturePath, affinity, spawnStats, glowing, legendary, particles);
+        MOA_RACE_REGISTRY.put(name, race);
 
-        final Race tangerine = registerForBiome("tangerine", AetherDimension.HIGHLANDS_FOREST, MoaAttributes.JUMPING_STRENGTH, SpawnStatWeighting.SPEED, 15, false, false, ParticleTypes.ENCHANT, "textures/entity/moas/highlands/tangerine.png");
-        appendBiome(AetherDimension.HIGHLANDS_FOREST, highlandsBlue.id, 50);
-        appendBiome(AetherDimension.HIGHLANDS_FOREST, goldenrod.id, 35);
-
-        final Race foxtrot = registerForBiome("foxtrot", AetherDimension.HIGHLANDS_THICKET, MoaAttributes.DROP_MULTIPLIER, SpawnStatWeighting.TANK, 5, false, false, ParticleTypes.ENCHANT, "textures/entity/moas/highlands/foxtrot.png");
-        appendBiome(AetherDimension.HIGHLANDS_THICKET, tangerine.id, 50);
-        appendBiome(AetherDimension.HIGHLANDS_THICKET, mintgrass.id, 45);
-
-        final Race strawberryWistar = registerForBiome("strawberry_wistar", AetherDimension.WISTERIA_WOODS, MoaAttributes.GLIDING_DECAY, SpawnStatWeighting.SPEED, 49, false, false, ParticleTypes.ENCHANT, "textures/entity/moas/highlands/strawberry_wistar.png");
-        final Race scarlet = registerForBiome("scarlet", AetherDimension.WISTERIA_WOODS, MoaAttributes.GLIDING_SPEED, SpawnStatWeighting.ENDURANCE, 2, false, false, ParticleTypes.ENCHANT, "textures/entity/moas/highlands/scarlet.png");
-        appendBiome(AetherDimension.WISTERIA_WOODS, goldenrod.id, 49);
-
-
-        //  Breeding
-        final Race redhood = registerForBreedingChance("redhood", foxtrot, highlandsBlue, MoaAttributes.MAX_HEALTH, SpawnStatWeighting.TANK, 0.1F, false, false, ParticleTypes.ENCHANT, "textures/entity/moas/highlands/redhood.png");
-        final Race moonstruck = registerForBreedingPredicate("moonstruck", redhood, strawberryWistar, MoaAttributes.GLIDING_SPEED, SpawnStatWeighting.SPEED, true, true, ParticleTypes.GLOW, "textures/entity/moas/highlands/moonstruck.png", ((moaGenes, moaGenes2, world, pos) -> world.isNight() && world.getRandom().nextFloat() <= 0.25F));
-
-        appendBreeding(new MatingEntry(foxtrot.id, createIdentityCheck(tangerine, goldenrod), createChanceCheck(0.2F)));
-        appendBreeding(new MatingEntry(tangerine.id, createIdentityCheck(goldenrod, strawberryWistar), createChanceCheck(0.5F)));
-        appendBreeding(new MatingEntry(scarlet.id, createIdentityCheck(strawberryWistar, highlandsBlue), createChanceCheck(0.075F)));
-    }
-
-    public static Race registerForBiome(String name, RegistryKey<Biome> spawnBiome, MoaAttributes affinity, SpawnStatWeighting spawnStats, int weight, boolean glowing, boolean legendary, ParticleType<?> particles, String texturePath) {
-        Identifier raceId = Aether.locate(name);
-        Identifier texture = Aether.locate(texturePath);
-
-        final Race race = new Race(raceId, texture, affinity, spawnStats, glowing, legendary, particles);
-        MOA_RACE_REGISTRY.put(raceId, race);
-        appendBiome(spawnBiome, raceId, weight);
         return race;
     }
 
-    public static Race registerForBreedingChance(String name, Race parentA, Race parentB, MoaAttributes affinity, SpawnStatWeighting spawnStats, float chance, boolean glowing, boolean legendary, ParticleType<?> particles, String texturePath) {
-        return registerForBreedingPredicate(name, parentA, parentB, affinity, spawnStats, glowing, legendary, particles, texturePath, createChanceCheck(chance));
+    public static void init() {}
+
+    public static void registerBreedingChance(Identifier raceId, Race parentA, Race parentB, float chance) {
+        registerBreedingPredicate(raceId, parentA, parentB, createChanceCheck(chance));
     }
 
-    public static Race registerForBreedingPredicate(String name, Race parentA, Race parentB, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles, String texturePath, Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> breedingPredicate) {
-        Identifier raceId = Aether.locate(name);
-        Identifier texture = Aether.locate(texturePath);
-
-        final Race race = new Race(raceId, texture, affinity, spawnStats, glowing, legendary, particles);
-        MOA_RACE_REGISTRY.put(raceId, race);
-        appendBreeding(new MatingEntry(raceId, createIdentityCheck(parentA, parentB), breedingPredicate));
-        return race;
+    public static void registerBreedingPredicate(Identifier raceId, Race parentA, Race parentB, Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> breedingPredicate) {
+        registerBreeding(new MatingEntry(raceId, createIdentityCheck(parentA, parentB), breedingPredicate));
     }
 
-    public static void appendBiome(RegistryKey<Biome> spawnBiome, Identifier raceId, int weight) {
+    public static void registerBiomeSpawnWeighting(RegistryKey<Biome> spawnBiome, Identifier raceId, int weight) {
         MOA_SPAWN_REGISTRY.computeIfAbsent(spawnBiome, key -> new SpawnBucket()).put(raceId, weight);
     }
 
-    public static void appendBreeding(MatingEntry entry) {
+    private static void registerBreeding(MatingEntry entry) {
         MOA_BREEDING_REGISTRY.add(entry);
     }
 
