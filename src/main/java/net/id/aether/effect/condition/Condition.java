@@ -29,8 +29,7 @@ import net.minecraft.world.World;
  * maxChron is the maximum value for the chronic persistence.
  * tempDecay and chronDecay are how fast these persistences decay.
  * scalingValue is what these maxes are scaled to, for some reason.
- * I've never used visThreshold, so it can't be all too important -
- * If you really want to know, ask Azzy.
+ * visThreshold is the threshold after which signs of the condition start to show.
  *
  * See the Persistence class for a description of temporary,
  * chronic, and constant persistences are.

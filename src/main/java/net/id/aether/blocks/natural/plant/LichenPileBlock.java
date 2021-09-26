@@ -26,7 +26,7 @@ public class LichenPileBlock extends FallingBlock implements Fertilizable {
         super(settings);
         this.venomous = venomous;
     }
-
+    // todo: replace poison effect with venom effect
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if(venomous) {
             entity.slowMovement(state, new Vec3d(0.925D, 1D, 0.925D));
