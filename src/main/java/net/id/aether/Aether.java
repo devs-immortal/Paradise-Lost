@@ -16,6 +16,7 @@ import net.id.aether.client.rendering.entity.AetherEntityRenderers;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.rendering.particle.AetherParticles;
 import net.id.aether.commands.AetherCommands;
+import net.id.aether.effect.condition.Conditions;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
@@ -57,7 +58,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherCommands.init();
         AetherGameRules.init();
         AetherLootNumberProviderTypes.init();
-        ConditionAPI.init();
+        Conditions.init();
         MoaAPI.init();
     }
 

@@ -1,30 +1,18 @@
 package net.id.aether.api;
 
-import net.id.aether.Aether;
 import net.id.aether.effect.condition.ConditionProcessor;
-import net.id.aether.effect.condition.VenomCondition;
 import net.id.aether.component.AetherComponents;
 import net.id.aether.component.ConditionManager;
 import net.id.aether.registry.AetherRegistries;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class ConditionAPI {
-
-    public static final ConditionProcessor VENOM = register("venom", new VenomCondition());
-
-    private static ConditionProcessor register(String id, ConditionProcessor processor) {
-        return Registry.register(AetherRegistries.CONDITION_REGISTRY, Aether.locate(id), processor);
-    }
-
-    public static void init() {}
-
     public static List<Identifier> getValidProcessors(EntityType<?> type) {
         //noinspection ConstantConditions
         return AetherRegistries.CONDITION_REGISTRY.getIds()
