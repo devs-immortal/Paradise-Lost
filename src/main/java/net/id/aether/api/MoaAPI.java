@@ -20,10 +20,9 @@ import net.minecraft.world.biome.Biome;
 import java.util.*;
 import java.util.function.BiPredicate;
 
-@SuppressWarnings("unused")
 public class MoaAPI {
     public static final Identifier FALLBACK_ID = Aether.locate("fallback");
-    public static final MoaRace FALLBACK_MOA = new MoaRace(FALLBACK_ID, Aether.locate("textures/entity/moas/highlands/blue.png"), MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
+    public static final MoaRace FALLBACK_MOA = new MoaRace(FALLBACK_ID, Aether.locate("textures/entity/moa/highlands/blue.png"), MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
 
     private static final Object2ObjectOpenHashMap<Identifier, MoaRace> MOA_RACE_REGISTRY = new Object2ObjectOpenHashMap<>();
     private static final Object2ObjectOpenHashMap<RegistryKey<Biome>, SpawnBucket> MOA_SPAWN_REGISTRY = new Object2ObjectOpenHashMap<>();
