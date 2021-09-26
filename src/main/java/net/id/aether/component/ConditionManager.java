@@ -8,7 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.api.ConditionAPI;
 import net.id.aether.effect.condition.ConditionModifier;
-import net.id.aether.effect.condition.ConditionProcessor;
+import net.id.aether.effect.condition.Condition;
 import net.id.aether.effect.condition.Persistence;
 import net.id.aether.effect.condition.Severity;
 import net.id.aether.registry.AetherRegistries;
@@ -115,7 +115,7 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         return !processors.contains(processorId);
     }
 
-    public boolean isImmuneTo(ConditionProcessor processor) {
+    public boolean isImmuneTo(Condition processor) {
         return !processors.contains(processor.getId());
     }
 
@@ -128,7 +128,7 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         return false;
     }
 
-    public float getScaledDecay(Persistence persistence, @NotNull ConditionProcessor processor) {
+    public float getScaledDecay(Persistence persistence, @NotNull Condition processor) {
         return switch (persistence) {
             case TEMPORARY -> processor.tempDecay;
             case CHRONIC -> processor.chronDecay;
@@ -136,7 +136,7 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         } * getDecayMultiplier(processor);
     }
 
-    public float getDecayMultiplier(@NotNull ConditionProcessor processor) {
+    public float getDecayMultiplier(@NotNull Condition processor) {
         var modifiers = getActiveModifiers();
         if(!modifiers.isEmpty()) {
             return (float) modifiers.stream()
@@ -146,15 +146,15 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         return 1;
     }
 
-    public float getScaledSeverity(@NotNull ConditionProcessor condition) {
+    public float getScaledSeverity(@NotNull Condition condition) {
         return MathHelper.clamp((getRawCondition(condition) / getScalingValueForCondition(condition)) * getSeverityMultiplier(condition), 0, 1);
     }
 
-    public float getSeverityMultiplier(@NotNull ConditionProcessor condition) {
+    public float getSeverityMultiplier(@NotNull Condition condition) {
         return (float) getActiveModifiers().stream().mapToDouble(mod -> mod.getSeverityMultiplier(condition)).average().orElse(1);
     }
 
-    public float getScalingValueForCondition(@NotNull ConditionProcessor condition) {
+    public float getScalingValueForCondition(@NotNull Condition condition) {
         var modifiers = getActiveModifiers();
         float scalingValue = condition.scalingValue;
         scalingValue *= modifiers.stream().mapToDouble(mod -> mod.getScalingMultiplier(condition)).average().orElse(1);
@@ -162,7 +162,7 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         return scalingValue;
     }
 
-    public float getRawCondition(@NotNull ConditionProcessor condition) {
+    public float getRawCondition(@NotNull Condition condition) {
         return Optional.ofNullable(conditionTrackers.get(condition.getId())).map(tracker -> {
             float partial = tracker.getPartialCondition();
             partial += getActiveModifiers().stream().mapToDouble(mod -> mod.getConstantCondition(condition)).sum();
@@ -240,12 +240,12 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
 
     private static class Tracker {
 
-        private final ConditionProcessor parent;
+        private final Condition parent;
 
         private float tempVal;
         private float chronVal;
 
-        public Tracker(ConditionProcessor parent) {
+        public Tracker(Condition parent) {
             this.parent = parent;
         }
 

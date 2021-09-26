@@ -5,9 +5,9 @@ import net.id.aether.registry.AetherRegistries;
 import net.minecraft.util.registry.Registry;
 
 public class Conditions {
-    public static final ConditionProcessor VENOM = register("venom", new VenomCondition());
+    public static final Condition VENOM = register("venom", new VenomCondition());
 
-    private static ConditionProcessor register(String id, ConditionProcessor processor) {
+    private static Condition register(String id, Condition processor) {
         return Registry.register(AetherRegistries.CONDITION_REGISTRY, Aether.locate(id), processor);
     }
 

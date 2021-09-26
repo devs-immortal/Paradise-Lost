@@ -13,7 +13,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-public class VenomCondition extends ConditionProcessor {
+public class VenomCondition extends Condition {
 
     public VenomCondition() {
         super(AetherEntityTypeTags.VENOM_IMMUNITY, 300, 300, 0.5F, 0.025F,400, 0.05F);

@@ -10,7 +10,7 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.id.aether.api.ConditionAPI;
-import net.id.aether.effect.condition.ConditionProcessor;
+import net.id.aether.effect.condition.Condition;
 import net.id.aether.effect.condition.Persistence;
 import net.id.aether.effect.condition.Severity;
 import net.id.aether.registry.AetherRegistries;
@@ -81,7 +81,7 @@ public class ConditionCommand {
     private static int printCondition(ServerCommandSource source, Collection<? extends Entity> entities, Identifier attributeId) {
         entities.forEach(entity -> {
             if(entity instanceof LivingEntity target) {
-                ConditionProcessor condition;
+                Condition condition;
 
                 try {
                     condition = ConditionAPI.getOrThrow(attributeId);
@@ -106,7 +106,7 @@ public class ConditionCommand {
 
     private static int setCondition(ServerCommandSource source, Entity entity, Identifier attributeId, float value, String persistenceString) {
         if(entity instanceof LivingEntity target) {
-            ConditionProcessor condition;
+            Condition condition;
             Persistence persistence;
 
             try {
@@ -146,7 +146,7 @@ public class ConditionCommand {
     public static class SeveritySuggester implements SuggestionProvider<ServerCommandSource> {
         @Override
         public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
-            ConditionProcessor condition;
+            Condition condition;
 
             try {
                 condition = ConditionAPI.getOrThrow(IdentifierArgumentType.getIdentifier(context, "processor"));
