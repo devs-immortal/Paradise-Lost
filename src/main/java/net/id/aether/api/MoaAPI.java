@@ -22,7 +22,6 @@ import java.util.function.BiPredicate;
 
 @SuppressWarnings("unused")
 public class MoaAPI {
-
     public static final Identifier FALLBACK_ID = Aether.locate("fallback");
     public static final MoaRace FALLBACK_MOA = new MoaRace(FALLBACK_ID, Aether.locate("textures/entity/moas/highlands/blue.png"), MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
 
@@ -36,8 +35,6 @@ public class MoaAPI {
 
         return race;
     }
-
-    public static void init() {}
 
     public static void registerBreedingChance(Identifier raceId, MoaRace parentA, MoaRace parentB, float chance) {
         registerBreedingPredicate(raceId, parentA, parentB, createChanceCheck(chance));

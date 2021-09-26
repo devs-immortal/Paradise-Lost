@@ -59,7 +59,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherGameRules.init();
         AetherLootNumberProviderTypes.init();
         Conditions.init();
-        MoaAPI.init();
         MoaRaces.init();
     }
 
