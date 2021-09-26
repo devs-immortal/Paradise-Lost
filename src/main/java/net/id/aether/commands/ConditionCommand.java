@@ -23,6 +23,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 import java.util.concurrent.CompletableFuture;
@@ -33,20 +34,25 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class ConditionCommand {
 
     public static final ConditionProcessorSuggester REGISTERED_CONDITIONS = new ConditionProcessorSuggester();
+    public static final ConditionValueSuggester VALUE_SUGGESTER = new ConditionValueSuggester();
     public static final PersistenceSuggester PERSISTENCE_SUGGESTER = new PersistenceSuggester();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 literal("condition")
                         .requires((source) -> source.hasPermissionLevel(2))
-                        .then(argument("target", EntityArgumentType.entities())
-                                .then(literal("query")
+                        .then(literal("query")
+                                .then(argument("target", EntityArgumentType.entities())
                                         .then(argument("processor", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
-                                                .executes((context -> printCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"))))))
-                                .then(literal("assign").then(argument("processor", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
-                                        .then(argument("value", FloatArgumentType.floatArg()).then(argument("persistence", StringArgumentType.word()).suggests(PERSISTENCE_SUGGESTER)
-                                                .executes(context -> setCondition(context.getSource(), EntityArgumentType.getEntity(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"), FloatArgumentType.getFloat(context, "value"), StringArgumentType.getString(context, "persistence")))))))
-                                .then(literal("clear")
+                                                .executes((context -> printCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor")))))))
+                        .then(literal("assign")
+                                .then(argument("target", EntityArgumentType.entities())
+                                        .then(argument("processor", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
+                                                .then(argument("persistence", StringArgumentType.word()).suggests(PERSISTENCE_SUGGESTER)
+                                                        .then(argument("value", FloatArgumentType.floatArg()).suggests(VALUE_SUGGESTER)
+                                                                .executes(context -> setCondition(context.getSource(), EntityArgumentType.getEntity(context, "target"), IdentifierArgumentType.getIdentifier(context, "processor"), FloatArgumentType.getFloat(context, "value"), StringArgumentType.getString(context, "persistence"))))))))
+                        .then(literal("clear")
+                                .then(argument("target", EntityArgumentType.entities())
                                         .executes(context -> clearConditions(context.getSource(), EntityArgumentType.getEntities(context, "target")))))
         );
     }
@@ -133,6 +139,26 @@ public class ConditionCommand {
         @Override
         public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
             AetherRegistries.CONDITION_REGISTRY.getIds().forEach(id -> builder.suggest(id.toString()));
+            return builder.buildFuture();
+        }
+    }
+
+    public static class ConditionValueSuggester implements SuggestionProvider<ServerCommandSource> {
+        @Override
+        public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
+            ConditionProcessor condition;
+
+            try {
+                condition = ConditionAPI.getOrThrow(IdentifierArgumentType.getIdentifier(context, "processor"));
+            } catch (Exception e){
+                return builder.suggest(0).buildFuture();
+            }
+
+            float max = condition.scalingValue;
+
+            Arrays.stream(Severity.values()).sorted().forEach((severity) -> builder.suggest(Float.toString(Math.round(max * severity.triggerPercent))));
+            builder.suggest(Float.toString(max));
+
             return builder.buildFuture();
         }
     }
