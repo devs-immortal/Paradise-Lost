@@ -120,7 +120,7 @@ public class ConditionCommand {
             var manager = ConditionAPI.getConditionManager(target);
 
             if(!condition.isExempt(target)) {
-                if(manager.set(attributeId, persistence, value)) {
+                if(manager.set(condition, persistence, value)) {
                     var rawSeverity = ConditionAPI.getConditionManager(target).getScaledSeverity(condition);
                     var severity = Severity.getSeverity(rawSeverity);
 

@@ -13,11 +13,10 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class ConditionAPI {
-    public static List<Identifier> getValidProcessors(EntityType<?> type) {
-        //noinspection ConstantConditions
-        return AetherRegistries.CONDITION_REGISTRY.getIds()
+    public static List<Condition> getValidProcessors(EntityType<?> type) {
+        return AetherRegistries.CONDITION_REGISTRY
                 .stream()
-                .filter(id -> !AetherRegistries.CONDITION_REGISTRY.get(id).exempt.contains(type))
+                .filter(condition -> !condition.exempt.contains(type))
                 .collect(Collectors.toList());
     }
 

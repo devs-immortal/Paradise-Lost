@@ -11,18 +11,15 @@ import net.id.aether.effect.condition.ConditionModifier;
 import net.id.aether.effect.condition.Condition;
 import net.id.aether.effect.condition.Persistence;
 import net.id.aether.effect.condition.Severity;
-import net.id.aether.registry.AetherRegistries;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,23 +27,19 @@ import java.util.stream.Collectors;
 public class ConditionManager implements AutoSyncedComponent, CommonTickingComponent, PlayerComponent<ConditionManager> {
 
     private final LivingEntity target;
-    private final List<Identifier> processors;
-    private final HashMap<Identifier, Tracker> conditionTrackers = new HashMap<>();
+    private final List<ConditionTracker> conditionTrackers = new ArrayList<>();
 
     public ConditionManager(LivingEntity target) {
         this.target = target;
-        processors = ConditionAPI.getValidProcessors(target.getType());
-        processors.forEach(id -> {
-            conditionTrackers.put(id, new Tracker(AetherRegistries.CONDITION_REGISTRY.get(id)));
-        });
+        var processors = ConditionAPI.getValidProcessors(target.getType());
+        processors.forEach(condition -> conditionTrackers.add(new ConditionTracker(condition)));
     }
 
     @Override
     public void tick() {
-        processors.forEach(id -> {
-            var condition = ConditionAPI.getOrThrow(id);
+        conditionTrackers.forEach(tracker -> {
+            var condition = tracker.getCondition();
 
-            var tracker = conditionTrackers.get(id);
             float rawSeverity = getScaledSeverity(condition);
             var severity = Severity.getSeverity(rawSeverity);
 
@@ -66,8 +59,8 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
     @Environment(EnvType.CLIENT)
     public void clientTick() {
         CommonTickingComponent.super.clientTick();
-        processors.forEach(id -> {
-            var condition = ConditionAPI.getOrThrow(id);
+        conditionTrackers.forEach(tracker -> {
+            var condition = tracker.getCondition();
 
             float rawSeverity = getScaledSeverity(condition);
             var severity = Severity.getSeverity(rawSeverity);
@@ -76,8 +69,8 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         });
     }
 
-    public boolean set(Identifier processorId, Persistence persistence, float value) {
-        return Optional.ofNullable(conditionTrackers.get(processorId)).map(tracker -> {
+    public boolean set(Condition processor, Persistence persistence, float value) {
+        return Optional.ofNullable(this.getConditionTracker(processor)).map(tracker -> {
             switch (persistence) {
                 case TEMPORARY -> tracker.tempVal = value;
                 case CHRONIC -> tracker.chronVal = value;
@@ -87,22 +80,22 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         }).orElse(false);
     }
 
-    public void add(Identifier processorId, Persistence persistence, float amount) {
-        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> tracker.add(persistence, amount));
+    public void add(Condition condition, Persistence persistence, float amount) {
+        Optional.ofNullable(this.getConditionTracker(condition)).ifPresent(tracker -> tracker.add(persistence, amount));
     }
 
-    public void remove(Identifier processorId, Persistence persistence, float amount) {
-        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> tracker.remove(persistence, amount));
+    public void remove(Condition condition, Persistence persistence, float amount) {
+        Optional.ofNullable(this.getConditionTracker(condition)).ifPresent(tracker -> tracker.remove(persistence, amount));
     }
 
     public boolean removeAll(){
-        return conditionTrackers.values().stream().allMatch((tracker) ->
-                set(tracker.parent.getId(), Persistence.TEMPORARY, 0)
-                && set(tracker.parent.getId(), Persistence.CHRONIC, 0));
+        return conditionTrackers.stream().allMatch((tracker) ->
+                set(tracker.parent, Persistence.TEMPORARY, 0)
+                && set(tracker.parent, Persistence.CHRONIC, 0));
     }
 
-    public void removeScaled(Identifier processorId, float amount) {
-        Optional.ofNullable(conditionTrackers.get(processorId)).ifPresent(tracker -> {
+    public void removeScaled(Condition processor, float amount) {
+        Optional.ofNullable(this.getConditionTracker(processor)).ifPresent(tracker -> {
             float partial = tracker.getPartialCondition();
             float tempPart = tracker.tempVal / partial;
             float chronPart = tracker.chronVal / partial;
@@ -111,17 +104,22 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         });
     }
 
-    public boolean isImmuneTo(Identifier processorId) {
-        return !processors.contains(processorId);
-    }
-
     public boolean isImmuneTo(Condition processor) {
-        return !processors.contains(processor.getId());
+        return conditionTrackers.stream().noneMatch(tracker -> tracker.getCondition() == processor);
     }
 
-    public boolean tryApply(Persistence persistence, Identifier processorId, float amount) {
-        if(persistence != Persistence.CONSTANT && !isImmuneTo(processorId)) {
-            var tracker = conditionTrackers.get(processorId);
+    private ConditionTracker getConditionTracker(Condition condition){
+        for (var tracker : conditionTrackers) {
+            if (tracker.getCondition() == condition){
+                return tracker;
+            }
+        }
+        return null;
+    }
+
+    public boolean tryApply(Condition processor, Persistence persistence, float amount) {
+        var tracker = this.getConditionTracker(processor);
+        if(tracker != null && persistence != Persistence.CONSTANT && !isImmuneTo(processor)) {
             tracker.add(persistence, amount);
             return true;
         }
@@ -163,7 +161,7 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
     }
 
     public float getRawCondition(@NotNull Condition condition) {
-        return Optional.ofNullable(conditionTrackers.get(condition.getId())).map(tracker -> {
+        return Optional.ofNullable(this.getConditionTracker(condition)).map(tracker -> {
             float partial = tracker.getPartialCondition();
             partial += getActiveModifiers().stream().mapToDouble(mod -> mod.getConstantCondition(condition)).sum();
             return partial;
@@ -203,21 +201,20 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
 
     @Override
     public void readFromNbt(NbtCompound tag) {
-        processors.forEach(id -> {
-            var tracker = conditionTrackers.get(id);
-            if(tag.contains(id.toString())) {
-                tracker.fromNbt((NbtCompound) tag.get(id.toString()));
+        conditionTrackers.forEach(tracker -> {
+            var condition = tracker.getCondition();
+            if(tag.contains(condition.getId().toString())) {
+                tracker.fromNbt((NbtCompound) tag.get(condition.getId().toString()));
             }
         });
     }
 
     @Override
     public void writeToNbt(NbtCompound tag) {
-        processors.forEach(id -> {
-            var tracker = conditionTrackers.get(id);
+        conditionTrackers.forEach(tracker -> {
             var nbt = new NbtCompound();
             tracker.writeToNbt(nbt);
-            tag.put(id.toString(), nbt);
+            tag.put(tracker.getCondition().getId().toString(), nbt);
         });
     }
 
@@ -238,15 +235,19 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         return true;
     }
 
-    private static class Tracker {
+    private static class ConditionTracker {
 
         private final Condition parent;
 
         private float tempVal;
         private float chronVal;
 
-        public Tracker(Condition parent) {
+        public ConditionTracker(Condition parent) {
             this.parent = parent;
+        }
+
+        public Condition getCondition(){
+            return parent;
         }
 
         public void add(Persistence persistence, float amount) {
