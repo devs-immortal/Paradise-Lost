@@ -26,7 +26,7 @@ public class AetherDimension {
     public static final SurfaceBuilder<AetherSurfaceBuilderConfig> AETHER_SURFACE_BUILDER =
             Registry.register(Registry.SURFACE_BUILDER, Aether.locate("surface_builder"), new AetherSurfaceBuilder());
 
-    public static void setupDimension() {
+    public static void init() {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.GLOWSTONE)
                 .customPortalBlock(AetherBlocks.BLUE_PORTAL)

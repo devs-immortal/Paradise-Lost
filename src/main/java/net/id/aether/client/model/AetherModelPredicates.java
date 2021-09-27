@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class AetherModelPredicates {
 
-    public static void init() {
+    public static void initClient() {
         FabricModelPredicateProviderRegistry.register(AetherItems.PHOENIX_BOW, Aether.locate("pull"), ((stack, world, entity, seed) -> {
             if (entity == null) {
                 return 0F;

@@ -25,7 +25,7 @@ public class AetherFeatures {
     public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.Piece::new, "skyroot_tower");
     public static final StructurePieceType ORANGE_RUIN_PIECE = register(OrangeRuinGenerator.Piece::new, "orange_ruin");
 
-    public static void registerFeatures() {
+    public static void init() {
         register("lake", new AetherLakeFeature());
         register("aercloud", new AercloudFeature());
         register("quicksoil", new QuicksoilFeature());

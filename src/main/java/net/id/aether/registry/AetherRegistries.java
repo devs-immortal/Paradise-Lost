@@ -8,6 +8,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.registry.SimpleRegistry;
 
+@SuppressWarnings("unchecked")
 public class AetherRegistries {
 
     public static void init() {}

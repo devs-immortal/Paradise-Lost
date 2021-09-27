@@ -6,7 +6,7 @@ import net.id.aether.items.AetherItems;
 
 public class AetherArmorModels {
 
-    public static void registerArmorModels() {
+    public static void initClient() {
         ArmorRenderer.register(new PhoenixArmorRenderer(), AetherItems.PHOENIX_HELMET);
     }
 }
