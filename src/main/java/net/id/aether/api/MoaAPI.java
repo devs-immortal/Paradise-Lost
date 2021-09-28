@@ -20,51 +20,143 @@ import net.minecraft.world.biome.Biome;
 import java.util.*;
 import java.util.function.BiPredicate;
 
-// todo: Since this is an api intended to be easy-to-use for others, we should add docs here.
+/**
+ * An API intended to aid creation of {@code MoaRace}s, and register
+ * spawn probabilities based on biome and mating. It also has several
+ * other useful tools regarding Moas.
+ * <br><br>
+ * ~ Jack
+ * @author AzazelTheDemonLord
+ */
 public class MoaAPI {
+
+    /**
+     * If a {@code MoaRace} cannot be found by some method, it is recommended to use this in its place.
+     */
     public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED);
 
+    /**
+     * Rather than a {@code Registry} registry, this uses a
+     * {@link Object2ObjectOpenHashMap} registry, as a full
+     * {@code Registry} is not necessary for our purposes.
+     * @see MoaRace
+     */
     private static final Object2ObjectOpenHashMap<Identifier, MoaRace> MOA_RACE_REGISTRY = new Object2ObjectOpenHashMap<>();
+
+    /**
+     * The registry for storing {@code MoaRace} biome spawning information.
+     * @see SpawnBucket
+     */
     private static final Object2ObjectOpenHashMap<RegistryKey<Biome>, SpawnBucket> MOA_SPAWN_REGISTRY = new Object2ObjectOpenHashMap<>();
+
+    /**
+     * The "registry" for storing {@code MoaRace} breeding information.
+     * It's really just a list of all {@code MatingEntries}.
+     * @see MoaAPI.MatingEntry
+     */
     private static final List<MatingEntry> MOA_BREEDING_REGISTRY = new ArrayList<>();
 
-    public static MoaRace register(Identifier name, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles){
-        return register(name, new MoaRace(affinity, spawnStats, glowing, legendary, particles));
+    /**
+     * This method creates and registers a new {@code MoaRace} with the given parameters.
+     * @param id The unique {@code Identifier} identifying this particular {@code MoaRace}
+     * @param affinity @todo ask Azzy how these work
+     * @param spawnStats @todo ask Azzy how this works.
+     * @param glowing Whether the created {@code MoaRace} will glow.
+     * @param legendary Whether the created {@code MoaRace} will be legendary
+     * @param particles The particles emitted when ... @todo
+     * @return The newly created {@code MoaRace}
+     */
+    @Deprecated
+    public static MoaRace register(Identifier id, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles){
+        return register(id, new MoaRace(affinity, spawnStats, glowing, legendary, particles));
     }
 
+    /**
+     * @param name The unique {@code Identifier} identifying this particular {@code MoaRace}
+     * @param race The {@code MoaRace} to register
+     * @return The registered {@code MoaRace}. This is always equal to {@code race}.
+     */
     public static MoaRace register(Identifier name, MoaRace race){
         MOA_RACE_REGISTRY.put(name, race);
         return race;
     }
 
+    /**
+     * Registers a new {@link MoaAPI.MatingEntry} based on the input parameters.
+     * @param child The {@code MoaRace} to be created by the breeding of {@code parentA} and
+     *              {@code parentB}, with a {@code chance} probability
+     * @param parentA The {@code MoaRace} that when bred with {@code parentB}, has a {@code chance}
+     *                probability of creating a {@code child} {@code MoaRace}
+     * @param parentB The {@code MoaRace} that when bred with {@code parentA}, has a {@code chance}
+     *                probability of creating a {@code child} {@code MoaRace}
+     * @param chance The percent probability that this race is created by breeding.
+     */
     public static void registerBreedingChance(MoaRace child, MoaRace parentA, MoaRace parentB, float chance) {
         registerBreedingPredicate(child, parentA, parentB, createChanceCheck(chance));
     }
 
+    /**
+     * Registers a new {@link MoaAPI.MatingEntry} based on the input parameters.
+     * @param child The {@code MoaRace} to be created by the breeding of {@code parentA} and
+     *              {@code parentB} if the {@code breedingPredicate} is met.
+     * @param parentA The {@code MoaRace} that when bred with {@code parentB}, creates a
+     *                {@code child} {@code MoaRace} if the {@code breedingPredicate} is met.
+     * @param parentB The {@code MoaRace} that when bred with {@code parentA}, creates a
+     *                {@code child} {@code MoaRace} if the {@code breedingPredicate} is met.
+     * @param breedingPredicate The predicate that determines whether {@code child} is created by
+     *                          the breeding of a moa of race {@code parentA} and of race
+     *                          {@code parentB}.
+     */
     public static void registerBreedingPredicate(MoaRace child, MoaRace parentA, MoaRace parentB, Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> breedingPredicate) {
         registerBreeding(new MatingEntry(child, createIdentityCheck(parentA, parentB), breedingPredicate));
     }
 
+    /**
+     * @param spawnBiome The biome to register the spawn weighting in.
+     * @param child The {@code MoaRace} to register the spawn weighting of in the {@code spawnBiome} biome.
+     * @param weight The spawn weight.
+     */
     public static void registerBiomeSpawnWeighting(RegistryKey<Biome> spawnBiome, MoaRace child, int weight) {
         MOA_SPAWN_REGISTRY.computeIfAbsent(spawnBiome, key -> new SpawnBucket()).put(child, weight);
     }
 
+    /**
+     * Registers {@code MatingEntry} {@code entry} into the {@code MOA_BREEDING_REGISTRY}.
+     * @param entry The {@link MoaAPI.MatingEntry} to register
+     */
     private static void registerBreeding(MatingEntry entry) {
         MOA_BREEDING_REGISTRY.add(entry);
     }
 
+    /**
+     * @param raceId The {@code Identifier} of the {@code MoaRace}
+     * @return The unique {@code MoaRace} of a given {@code Identifier}
+     */
     public static MoaRace getRace(Identifier raceId) {
         return MOA_RACE_REGISTRY.getOrDefault(raceId, FALLBACK_MOA);
     }
 
+    /**
+     * @return All registered {@code MoaRaces} as an {@code Iterator}
+     */
     public static Iterator<MoaRace> getRegisteredRaces() {
         return MOA_RACE_REGISTRY.values().iterator();
     }
 
+    /**
+     * @param biome The biome to get the SpawnBucket of
+     * @return The SpawnBucket of the given biome.
+     * @see SpawnBucket
+     */
     public static Optional<SpawnBucket> getSpawnBucket(RegistryKey<Biome> biome) {
         return Optional.ofNullable(MOA_SPAWN_REGISTRY.get(biome));
     }
 
+    /**
+     * @param biome The biome to get a random {@code MoaRace} from
+     * @return A {@code MoaRace} registered to spawn in the given biome,
+     * distributed proportionally based on percent chance of spawning.
+     */
     public static MoaRace getMoaForBiome(RegistryKey<Biome> biome, Random random) {
         Optional<MoaRace> raceOptional =
                 Optional.ofNullable(getSpawnBucket(biome)
@@ -73,6 +165,9 @@ public class MoaAPI {
         return raceOptional.orElse(FALLBACK_MOA);
     }
 
+    /**
+     * Returns a random {@code MoaRace} generated by the breeding of {@code parentA} and {@code parentB}
+     */
     public static MoaRace getMoaForBreeding(MoaGenes parentA, MoaGenes parentB, World world, BlockPos pos) {
         var childRace =
                 MOA_BREEDING_REGISTRY.stream()
@@ -91,14 +186,25 @@ public class MoaAPI {
         return attribute != null ? "moa.attribute." + attribute.name().toLowerCase() : "???";
     }
 
+    /**
+     * @return A {@code BiPredicate} which tests whether raceA and raceB are
+     * equal to a given parentA and parentB, respectively.
+     */
     public static BiPredicate<MoaRace, MoaRace> createIdentityCheck(MoaRace raceA, MoaRace raceB) {
         return (parentA, parentB) -> (raceA == parentA && raceB == parentB) || (raceB == parentA && raceA == parentB);
     }
 
+    /**
+     * @return A {@code Function4} which tests whether a random {@code float}
+     * is less than a given {@code float} {@code chance}.
+     */
     public static Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> createChanceCheck(float chance) {
         return (parentA, parentB, world, pos) -> world.getRandom().nextFloat() < chance;
     }
 
+    /**
+     * todo
+     */
     public enum SpawnStatWeighting {
         SPEED(0.08F, 0.1F, 0.02F, 0.03F, 0F, -0.1F, 0F, -0.01F, 0, 8),
         GLIDE(0.013F, 0.08F, 0.035F, 0.039F, -0.04F, -0.08F, 0F, -0.01F, 0, 6),
@@ -129,6 +235,9 @@ public class MoaAPI {
         }
     }
 
+    /**
+     * A container for all stats pertaining to a certain {@code MoaRace}
+     */
     public static record MoaRace(MoaAttributes defaultAffinity,
                                  SpawnStatWeighting statWeighting, boolean glowing, boolean legendary,
                                  ParticleType<?> particles) {
@@ -137,6 +246,9 @@ public class MoaAPI {
             this(defaultAffinity, statWeighting, false, false, ParticleTypes.ENCHANT);
         }
 
+        /**
+         * @return The ID of this {@code MoaRace} as provided by {@code MOA_RACE_REGISTRY}.
+         */
         public Identifier getId(){
             if (this == FALLBACK_MOA) {
                 return Aether.locate("fallback");
@@ -151,12 +263,18 @@ public class MoaAPI {
         }
     }
 
+    /**
+     * todo
+     */
     private static record SpawnBucketEntry(MoaRace race, int weight) {
         public boolean test(Random random, int whole) {
             return random.nextInt(whole) < weight;
         }
     }
 
+    /**
+     * todo
+     */
     private static class SpawnBucket {
 
         private final List<SpawnBucketEntry> entries = new ArrayList<>();
@@ -190,6 +308,9 @@ public class MoaAPI {
 
     }
 
+    /**
+     * todo
+     */
     private static record MatingEntry(MoaRace race, BiPredicate<MoaRace, MoaRace> identityCheck,
                                       Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> additionalChecks) {
         public MoaRace get() {
@@ -197,6 +318,9 @@ public class MoaAPI {
         }
     }
 
+    /**
+     * todo
+     */
     private static record SpawnStatData(float base, float variance) {
     }
 }
