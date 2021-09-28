@@ -2,11 +2,9 @@ package net.id.aether.entities.passive.moa;
 
 import com.mojang.datafixers.util.Function4;
 import net.id.aether.Aether;
-import net.id.aether.api.MoaAPI;
 import net.id.aether.api.MoaAPI.MoaRace;
 import net.id.aether.component.MoaGenes;
 import net.id.incubus_core.util.RegistryQueue.Action;
-import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
