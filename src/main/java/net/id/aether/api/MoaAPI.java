@@ -20,8 +20,9 @@ import net.minecraft.world.biome.Biome;
 import java.util.*;
 import java.util.function.BiPredicate;
 
+// todo: Since this is an api intended to be easy-to-use for others, we should add docs here.
 public class MoaAPI {
-    public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
+    public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED);
 
     private static final Object2ObjectOpenHashMap<Identifier, MoaRace> MOA_RACE_REGISTRY = new Object2ObjectOpenHashMap<>();
     private static final Object2ObjectOpenHashMap<RegistryKey<Biome>, SpawnBucket> MOA_SPAWN_REGISTRY = new Object2ObjectOpenHashMap<>();
@@ -131,6 +132,10 @@ public class MoaAPI {
     public static record MoaRace(MoaAttributes defaultAffinity,
                                  SpawnStatWeighting statWeighting, boolean glowing, boolean legendary,
                                  ParticleType<?> particles) {
+
+        public MoaRace(MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting){
+            this(defaultAffinity, statWeighting, false, false, ParticleTypes.ENCHANT);
+        }
 
         public Identifier getId(){
             if (this == FALLBACK_MOA) {
