@@ -33,7 +33,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class ConditionCommand {
 
-    public static final ConditionSuggester REGISTERED_CONDITIONS = new ConditionSuggester();
+    public static final ConditionSuggester CONDITION_SUGGESTER = new ConditionSuggester();
     public static final SeveritySuggester SEVERITY_SUGGESTER = new SeveritySuggester();
     public static final PersistenceSuggester PERSISTENCE_SUGGESTER = new PersistenceSuggester();
 
@@ -43,11 +43,11 @@ public class ConditionCommand {
                         .requires((source) -> source.hasPermissionLevel(2))
                         .then(literal("query")
                                 .then(argument("target", EntityArgumentType.entities())
-                                        .then(argument("condition", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
+                                        .then(argument("condition", IdentifierArgumentType.identifier()).suggests(CONDITION_SUGGESTER)
                                                 .executes((context -> printCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), IdentifierArgumentType.getIdentifier(context, "condition")))))))
                         .then(literal("assign")
                                 .then(argument("target", EntityArgumentType.entities())
-                                        .then(argument("condition", IdentifierArgumentType.identifier()).suggests(REGISTERED_CONDITIONS)
+                                        .then(argument("condition", IdentifierArgumentType.identifier()).suggests(CONDITION_SUGGESTER)
                                                 .then(argument("persistence", StringArgumentType.word()).suggests(PERSISTENCE_SUGGESTER)
                                                         .then(argument("value", FloatArgumentType.floatArg()).suggests(SEVERITY_SUGGESTER)
                                                                 .executes(context -> setCondition(context.getSource(), EntityArgumentType.getEntity(context, "target"), IdentifierArgumentType.getIdentifier(context, "condition"), FloatArgumentType.getFloat(context, "value"), StringArgumentType.getString(context, "persistence"))))))))
