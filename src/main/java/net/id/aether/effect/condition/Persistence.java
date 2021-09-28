@@ -18,9 +18,10 @@ public enum Persistence {
      */
     TEMPORARY("condition.persistence.temporary"),
     /**
-     * This is like the {@link Persistence#TEMPORARY} {@code Persistence},
-     * but it doesn't go down with time (in theory). It is reduced by
-     * consumables.
+     * This is similar to the {@link Persistence#TEMPORARY} {@code Persistence}.
+     * Depending on the {@code Condition}, it may be reduced only through
+     * consumables, or it may just go down slower. {@link VenomCondition} uses
+     * the latter implementation, for example.
      */
     CHRONIC("condition.persistence.chronic"),
     /**
