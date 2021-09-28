@@ -5,7 +5,14 @@ package net.id.aether.effect.condition;
  * <br> {@code Condition}s may use these to apply certain affects when
  * the {@code Severity} is greater than {@code Severity.EXTREME}, rather
  * than a lower {@code Severity}, for example.
+ * <br><br>
+ * ~ Jack
  * @author AzazelTheDemonLord
+ * @see Severity#NEGLIGIBLE
+ * @see Severity#MILD
+ * @see Severity#ACUTE
+ * @see Severity#DIRE
+ * @see Severity#EXTREME
  */
 public enum Severity {
     /**
