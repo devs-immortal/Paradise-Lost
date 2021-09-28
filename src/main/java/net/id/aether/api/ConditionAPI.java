@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class ConditionAPI {
-    public static List<Condition> getValidProcessors(EntityType<?> type) {
+    public static List<Condition> getValidConditions(EntityType<?> type) {
         return AetherRegistries.CONDITION_REGISTRY
                 .stream()
                 .filter(condition -> !condition.exempt.contains(type))
@@ -40,6 +40,6 @@ public class ConditionAPI {
     }
 
     public static String getTranslationString(Condition condition) {
-        return "condition.processor." + condition.getId().getPath();
+        return "condition.condition." + condition.getId().getPath();
     }
 }

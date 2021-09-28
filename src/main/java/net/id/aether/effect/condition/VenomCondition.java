@@ -28,7 +28,7 @@ public class VenomCondition extends Condition {
     }
 
     @Override
-    public void process(World world, LivingEntity entity, Severity severity, float rawSeverity) {
+    public void tick(World world, LivingEntity entity, Severity severity, float rawSeverity) {
         if(rawSeverity > visThreshold && world.getTime() % 20 == 0) {
             var poisonEffect = switch (severity) {
                 case MILD -> new StatusEffectInstance(StatusEffects.POISON, 100, 1, true, false, true);
@@ -49,7 +49,7 @@ public class VenomCondition extends Condition {
     }
 
     @Override
-    public void processPlayer(World world, PlayerEntity player, Severity severity, float rawSeverity) {
+    public void tickPlayer(World world, PlayerEntity player, Severity severity, float rawSeverity) {
         if(rawSeverity > visThreshold && world.getTime() % 20 == 0) {
             var poisonEffect = switch (severity) {
                 case MILD -> new StatusEffectInstance(StatusEffects.POISON, 100, 1, true, false, true);
@@ -71,7 +71,7 @@ public class VenomCondition extends Condition {
     }
 
     @Override
-    public void processClient(ClientWorld world, LivingEntity entity, Severity severity, float rawSeverity) {
+    public void clientTick(ClientWorld world, LivingEntity entity, Severity severity, float rawSeverity) {
         if(severity.isAsOrMoreSevere(Severity.MILD)) {
             var random = world.getRandom();
             var self = MinecraftClient.getInstance().player == entity;

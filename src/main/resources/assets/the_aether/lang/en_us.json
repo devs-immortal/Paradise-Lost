@@ -482,5 +482,5 @@
   "condition.severity.acute": "Acute",
   "condition.severity.dire": "Dire",
   "condition.severity.extreme": "Extreme",
-  "condition.processor.venom": "Venom"
+  "condition.condition.venom": "Venom"
 }

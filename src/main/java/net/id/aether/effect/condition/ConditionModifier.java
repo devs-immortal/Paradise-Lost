@@ -11,5 +11,5 @@ public interface ConditionModifier {
 
     float getSeverityMultiplier(Condition condition);
 
-    float getConstantCondition(Condition conditionProcessor);
+    float getConstantCondition(Condition condition);
 }

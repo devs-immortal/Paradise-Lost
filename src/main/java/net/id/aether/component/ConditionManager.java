@@ -31,8 +31,8 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
 
     public ConditionManager(LivingEntity target) {
         this.target = target;
-        var processors = ConditionAPI.getValidProcessors(target.getType());
-        processors.forEach(condition -> conditionTrackers.add(new ConditionTracker(condition)));
+        var conditions = ConditionAPI.getValidConditions(target.getType());
+        conditions.forEach(condition -> conditionTrackers.add(new ConditionTracker(condition)));
     }
 
     @Override
@@ -44,10 +44,10 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
             var severity = Severity.getSeverity(rawSeverity);
 
             if(target instanceof PlayerEntity player) {
-                condition.processPlayer(player.world, player, severity, rawSeverity);
+                condition.tickPlayer(player.world, player, severity, rawSeverity);
             }
             else {
-                condition.process(target.world, target, severity, rawSeverity);
+                condition.tick(target.world, target, severity, rawSeverity);
             }
 
             tracker.remove(Persistence.TEMPORARY, getScaledDecay(Persistence.TEMPORARY, condition));
@@ -65,12 +65,12 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
             float rawSeverity = getScaledSeverity(condition);
             var severity = Severity.getSeverity(rawSeverity);
 
-            condition.processClient((ClientWorld) target.world, target, severity, rawSeverity);
+            condition.clientTick((ClientWorld) target.world, target, severity, rawSeverity);
         });
     }
 
-    public boolean set(Condition processor, Persistence persistence, float value) {
-        return Optional.ofNullable(this.getConditionTracker(processor)).map(tracker -> {
+    public boolean set(Condition condition, Persistence persistence, float value) {
+        return Optional.ofNullable(this.getConditionTracker(condition)).map(tracker -> {
             switch (persistence) {
                 case TEMPORARY -> tracker.tempVal = value;
                 case CHRONIC -> tracker.chronVal = value;
@@ -94,8 +94,8 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
                 && set(tracker.parent, Persistence.CHRONIC, 0));
     }
 
-    public void removeScaled(Condition processor, float amount) {
-        Optional.ofNullable(this.getConditionTracker(processor)).ifPresent(tracker -> {
+    public void removeScaled(Condition condition, float amount) {
+        Optional.ofNullable(this.getConditionTracker(condition)).ifPresent(tracker -> {
             float partial = tracker.getPartialCondition();
             float tempPart = tracker.tempVal / partial;
             float chronPart = tracker.chronVal / partial;
@@ -104,8 +104,8 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         });
     }
 
-    public boolean isImmuneTo(Condition processor) {
-        return conditionTrackers.stream().noneMatch(tracker -> tracker.getCondition() == processor);
+    public boolean isImmuneTo(Condition condition) {
+        return conditionTrackers.stream().noneMatch(tracker -> tracker.getCondition() == condition);
     }
 
     private ConditionTracker getConditionTracker(Condition condition){
@@ -117,28 +117,28 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
         return null;
     }
 
-    public boolean tryApply(Condition processor, Persistence persistence, float amount) {
-        var tracker = this.getConditionTracker(processor);
-        if(tracker != null && persistence != Persistence.CONSTANT && !isImmuneTo(processor)) {
+    public boolean tryApply(Condition condition, Persistence persistence, float amount) {
+        var tracker = this.getConditionTracker(condition);
+        if(tracker != null && persistence != Persistence.CONSTANT && !isImmuneTo(condition)) {
             tracker.add(persistence, amount);
             return true;
         }
         return false;
     }
 
-    public float getScaledDecay(Persistence persistence, @NotNull Condition processor) {
+    public float getScaledDecay(Persistence persistence, @NotNull Condition condition) {
         return switch (persistence) {
-            case TEMPORARY -> processor.tempDecay;
-            case CHRONIC -> processor.chronDecay;
+            case TEMPORARY -> condition.tempDecay;
+            case CHRONIC -> condition.chronDecay;
             default -> 0;
-        } * getDecayMultiplier(processor);
+        } * getDecayMultiplier(condition);
     }
 
-    public float getDecayMultiplier(@NotNull Condition processor) {
+    public float getDecayMultiplier(@NotNull Condition condition) {
         var modifiers = getActiveModifiers();
         if(!modifiers.isEmpty()) {
             return (float) modifiers.stream()
-                    .mapToDouble(mod -> mod.getDecayMultiplier(processor))
+                    .mapToDouble(mod -> mod.getDecayMultiplier(condition))
                     .average().orElse(1);
         }
         return 1;
