@@ -2,6 +2,7 @@ package net.id.aether.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
+import net.id.aether.Aether;
 import net.id.aether.api.MoaAPI;
 import net.id.aether.entities.passive.moa.MoaAttributes;
 import net.id.aether.entities.AetherEntityTypes;
@@ -18,10 +19,12 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 
+import static net.id.aether.api.MoaAPI.FALLBACK_MOA;
+
 public class MoaGenes implements AutoSyncedComponent {
 
     private final Object2FloatOpenHashMap<MoaAttributes> attributeMap = new Object2FloatOpenHashMap<>();
-    private MoaAPI.MoaRace race = MoaAPI.FALLBACK_MOA;
+    private MoaAPI.MoaRace race = FALLBACK_MOA;
     private MoaAttributes affinity;
     private boolean legendary, initialized;
     private UUID owner;
@@ -121,7 +124,13 @@ public class MoaGenes implements AutoSyncedComponent {
     }
 
     public Identifier getTexture() {
-        return race.texturePath();
+        if (this.race == FALLBACK_MOA){
+            return Aether.locate("textures/entity/moa/highlands_blue.png");
+        }
+        Identifier id = this.race.getId();
+        String name = id.getPath();
+        String namespace = id.getNamespace();
+        return new Identifier(namespace, "textures/entity/moa/" + name + ".png");
     }
 
     public float getHunger() {

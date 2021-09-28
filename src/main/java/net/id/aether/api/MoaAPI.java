@@ -21,14 +21,14 @@ import java.util.*;
 import java.util.function.BiPredicate;
 
 public class MoaAPI {
-    public static final MoaRace FALLBACK_MOA = new MoaRace(Aether.locate("textures/entity/moa/highlands_blue.png"), MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
+    public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
 
     private static final Object2ObjectOpenHashMap<Identifier, MoaRace> MOA_RACE_REGISTRY = new Object2ObjectOpenHashMap<>();
     private static final Object2ObjectOpenHashMap<RegistryKey<Biome>, SpawnBucket> MOA_SPAWN_REGISTRY = new Object2ObjectOpenHashMap<>();
     private static final List<MatingEntry> MOA_BREEDING_REGISTRY = new ArrayList<>();
 
-    public static MoaRace register(Identifier name, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles, Identifier texturePath){
-        return register(name, new MoaRace(texturePath, affinity, spawnStats, glowing, legendary, particles));
+    public static MoaRace register(Identifier name, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles){
+        return register(name, new MoaRace(affinity, spawnStats, glowing, legendary, particles));
     }
 
     public static MoaRace register(Identifier name, MoaRace race){
@@ -128,7 +128,7 @@ public class MoaAPI {
         }
     }
 
-    public static record MoaRace(Identifier texturePath, MoaAttributes defaultAffinity,
+    public static record MoaRace(MoaAttributes defaultAffinity,
                                  SpawnStatWeighting statWeighting, boolean glowing, boolean legendary,
                                  ParticleType<?> particles) {
 

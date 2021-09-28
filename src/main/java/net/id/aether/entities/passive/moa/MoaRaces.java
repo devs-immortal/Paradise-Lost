@@ -35,7 +35,7 @@ public class MoaRaces {
 
     @SafeVarargs
     private static MoaRace addRace(String name, MoaAttributes affinity, MoaAPI.SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles, Action<MoaRace>... additionalActions){
-        MoaRace race = register(Aether.locate(name), affinity, spawnStats, glowing, legendary, particles, Aether.locate("textures/entity/moa/" + name + ".png"));
+        MoaRace race = register(Aether.locate(name), affinity, spawnStats, glowing, legendary, particles);
         for(var action : additionalActions){
             action.accept(Aether.locate(name), race);
         }
