@@ -21,30 +21,29 @@ import java.util.*;
 import java.util.function.BiPredicate;
 
 public class MoaAPI {
-    public static final Identifier FALLBACK_ID = Aether.locate("fallback");
-    public static final MoaRace FALLBACK_MOA = new MoaRace(FALLBACK_ID, Aether.locate("textures/entity/moa/highlands/blue.png"), MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
+    public static final MoaRace FALLBACK_MOA = new MoaRace(Aether.locate("textures/entity/moa/highlands_blue.png"), MoaAttributes.GROUND_SPEED, SpawnStatWeighting.SPEED, false, false, ParticleTypes.ENCHANT);
 
     private static final Object2ObjectOpenHashMap<Identifier, MoaRace> MOA_RACE_REGISTRY = new Object2ObjectOpenHashMap<>();
     private static final Object2ObjectOpenHashMap<RegistryKey<Biome>, SpawnBucket> MOA_SPAWN_REGISTRY = new Object2ObjectOpenHashMap<>();
     private static final List<MatingEntry> MOA_BREEDING_REGISTRY = new ArrayList<>();
 
     public static MoaRace register(Identifier name, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles, Identifier texturePath){
-        final MoaRace race = new MoaRace(name, texturePath, affinity, spawnStats, glowing, legendary, particles);
+        final MoaRace race = new MoaRace(texturePath, affinity, spawnStats, glowing, legendary, particles);
         MOA_RACE_REGISTRY.put(name, race);
 
         return race;
     }
 
-    public static void registerBreedingChance(Identifier raceId, MoaRace parentA, MoaRace parentB, float chance) {
-        registerBreedingPredicate(raceId, parentA, parentB, createChanceCheck(chance));
+    public static void registerBreedingChance(MoaRace child, MoaRace parentA, MoaRace parentB, float chance) {
+        registerBreedingPredicate(child, parentA, parentB, createChanceCheck(chance));
     }
 
-    public static void registerBreedingPredicate(Identifier raceId, MoaRace parentA, MoaRace parentB, Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> breedingPredicate) {
-        registerBreeding(new MatingEntry(raceId, createIdentityCheck(parentA, parentB), breedingPredicate));
+    public static void registerBreedingPredicate(MoaRace child, MoaRace parentA, MoaRace parentB, Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> breedingPredicate) {
+        registerBreeding(new MatingEntry(child, createIdentityCheck(parentA, parentB), breedingPredicate));
     }
 
-    public static void registerBiomeSpawnWeighting(RegistryKey<Biome> spawnBiome, Identifier raceId, int weight) {
-        MOA_SPAWN_REGISTRY.computeIfAbsent(spawnBiome, key -> new SpawnBucket()).put(raceId, weight);
+    public static void registerBiomeSpawnWeighting(RegistryKey<Biome> spawnBiome, MoaRace child, int weight) {
+        MOA_SPAWN_REGISTRY.computeIfAbsent(spawnBiome, key -> new SpawnBucket()).put(child, weight);
     }
 
     private static void registerBreeding(MatingEntry entry) {
@@ -55,8 +54,8 @@ public class MoaAPI {
         return MOA_RACE_REGISTRY.getOrDefault(raceId, FALLBACK_MOA);
     }
 
-    public static Iterator<Identifier> getRegisteredRaces() {
-        return MOA_RACE_REGISTRY.keySet().iterator();
+    public static Iterator<MoaRace> getRegisteredRaces() {
+        return MOA_RACE_REGISTRY.values().iterator();
     }
 
     public static Optional<SpawnBucket> getSpawnBucket(RegistryKey<Biome> biome) {
@@ -64,11 +63,11 @@ public class MoaAPI {
     }
 
     public static MoaRace getMoaForBiome(RegistryKey<Biome> biome, Random random) {
-        Optional<Identifier> raceOptional =
+        Optional<MoaRace> raceOptional =
                 Optional.ofNullable(getSpawnBucket(biome)
                         .map(bucket -> bucket.get(random))
                         .orElse(MOA_SPAWN_REGISTRY.get(AetherDimension.HIGHLANDS_PLAINS).get(random)));
-        return raceOptional.map(MoaAPI::getRace).orElse(FALLBACK_MOA);
+        return raceOptional.orElse(FALLBACK_MOA);
     }
 
     public static MoaRace getMoaForBreeding(MoaGenes parentA, MoaGenes parentB, World world, BlockPos pos) {
@@ -80,8 +79,8 @@ public class MoaAPI {
     }
 
     @Environment(EnvType.CLIENT)
-    public static String formatForTranslation(Identifier raceId) {
-        return "moa.race." + raceId.getPath();
+    public static String formatForTranslation(MoaRace race) {
+        return "moa.race." + race.getId().getPath();
     }
 
     @Environment(EnvType.CLIENT)
@@ -127,12 +126,25 @@ public class MoaAPI {
         }
     }
 
-    public static record MoaRace(Identifier id, Identifier texturePath, MoaAttributes defaultAffinity,
+    public static record MoaRace(Identifier texturePath, MoaAttributes defaultAffinity,
                                  SpawnStatWeighting statWeighting, boolean glowing, boolean legendary,
                                  ParticleType<?> particles) {
+
+        public Identifier getId(){
+            if (this == FALLBACK_MOA) {
+                return Aether.locate("fallback");
+            }
+            for (var entry : MOA_RACE_REGISTRY.entrySet()){
+                if (entry.getValue() == this){
+                    return entry.getKey();
+                }
+            }
+            System.out.println("getId() called before race was registered. You had to mess up so bad to get this error.");
+            return FALLBACK_MOA.getId();
+        }
     }
 
-    private static record SpawnBucketEntry(Identifier id, int weight) {
+    private static record SpawnBucketEntry(MoaRace race, int weight) {
         public boolean test(Random random, int whole) {
             return random.nextInt(whole) < weight;
         }
@@ -141,16 +153,16 @@ public class MoaAPI {
     private static class SpawnBucket {
 
         private final List<SpawnBucketEntry> entries = new ArrayList<>();
-        private SpawnBucketEntry heaviest = new SpawnBucketEntry(FALLBACK_ID, 0);
+        private SpawnBucketEntry heaviest = new SpawnBucketEntry(FALLBACK_MOA, 0);
         private int totalWeight;
 
-        public void put(Identifier raceId, int weight) {
+        public void put(MoaRace race, int weight) {
 
             if (weight < 1) {
-                throw new IllegalArgumentException(raceId.toString() + " has an invalid weight, must be 1 or higher!");
+                throw new IllegalArgumentException(race.getId().toString() + " has an invalid weight, must be 1 or higher!");
             }
 
-            SpawnBucketEntry entry = new SpawnBucketEntry(raceId, weight);
+            SpawnBucketEntry entry = new SpawnBucketEntry(race, weight);
 
             if (weight > heaviest.weight) {
                 heaviest = entry;
@@ -160,21 +172,21 @@ public class MoaAPI {
             totalWeight += weight;
         }
 
-        public Identifier get(Random random) {
+        public MoaRace get(Random random) {
             if (entries.size() == 1) {
-                return entries.get(0).id;
+                return entries.get(0).race;
             }
             Collections.shuffle(entries);
             Optional<SpawnBucketEntry> entryOptional = entries.stream().filter(entry -> entry.test(random, totalWeight)).findFirst();
-            return entryOptional.map(SpawnBucketEntry::id).orElse(heaviest.id);
+            return entryOptional.map(SpawnBucketEntry::race).orElse(heaviest.race);
         }
 
     }
 
-    private static record MatingEntry(Identifier race, BiPredicate<MoaRace, MoaRace> identityCheck,
+    private static record MatingEntry(MoaRace race, BiPredicate<MoaRace, MoaRace> identityCheck,
                                       Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> additionalChecks) {
         public MoaRace get() {
-            return getRace(race);
+            return race;
         }
     }
 

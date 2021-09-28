@@ -42,7 +42,7 @@ public class MoaStatCommand {
             if (entity instanceof MoaEntity moa) {
                 MoaGenes genes = moa.getGenes();
                 source.sendFeedback(new TranslatableText("commands.aether.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
-                source.sendFeedback(new TranslatableText("commands.aether.moastat.race", new TranslatableText(MoaAPI.formatForTranslation(genes.getRace().id()))).formatted(Formatting.LIGHT_PURPLE), false);
+                source.sendFeedback(new TranslatableText("commands.aether.moastat.race", new TranslatableText(MoaAPI.formatForTranslation(genes.getRace()))).formatted(Formatting.LIGHT_PURPLE), false);
                 if (attributeId.equals("HUNGER")) {
                     source.sendFeedback(new LiteralText("Hunger: " + String.format("%.2f", genes.getHunger())).formatted(Formatting.GOLD, Formatting.ITALIC), false);
                 } else if (attributeId.equals("ALL")) {
@@ -68,7 +68,7 @@ public class MoaStatCommand {
         if (entity instanceof MoaEntity moa) {
             MoaGenes genes = moa.getGenes();
             source.sendFeedback(new TranslatableText("commands.aether.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
-            source.sendFeedback(new TranslatableText("commands.aether.moastat.race", new TranslatableText(MoaAPI.formatForTranslation(genes.getRace().id()))).formatted(Formatting.LIGHT_PURPLE), false);
+            source.sendFeedback(new TranslatableText("commands.aether.moastat.race", new TranslatableText(MoaAPI.formatForTranslation(genes.getRace()))).formatted(Formatting.LIGHT_PURPLE), false);
             if (attributeId.equals("HUNGER")) {
                 genes.setHunger(Math.min(Math.max(value, 100), 0));
                 source.sendFeedback(new LiteralText("SET Hunger TO " + String.format("%.2f", genes.getHunger())).formatted(Formatting.AQUA, Formatting.ITALIC), false);

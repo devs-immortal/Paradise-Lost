@@ -163,7 +163,7 @@ public class MoaGenes implements AutoSyncedComponent {
     public void writeToNbt(NbtCompound tag) {
         tag.putBoolean("initialized", initialized);
         if (initialized) {
-            tag.putString("raceId", race.id().toString());
+            tag.putString("raceId", race.getId().toString());
             tag.putString("affinity", affinity.name());
             tag.putBoolean("legendary", legendary);
             tag.putFloat("hunger", hunger);

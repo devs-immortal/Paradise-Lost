@@ -199,7 +199,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     @Environment(EnvType.CLIENT)
     protected Text getDefaultName() {
-        return new TranslatableText(MoaAPI.formatForTranslation(getGenes().getRace().id()), "Moa");
+        return new TranslatableText(MoaAPI.formatForTranslation(getGenes().getRace()), "Moa");
     }
 
     @Override
