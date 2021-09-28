@@ -75,6 +75,7 @@ public class MoaAPI {
      * @param name The unique {@code Identifier} identifying this particular {@code MoaRace}
      * @param race The {@code MoaRace} to register
      * @return The registered {@code MoaRace}. This is always equal to {@code race}.
+     * @author Jack Papel
      */
     public static MoaRace register(Identifier name, MoaRace race){
         MOA_RACE_REGISTRY.put(name, race);

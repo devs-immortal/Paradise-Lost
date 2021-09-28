@@ -31,6 +31,24 @@ import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Docs for The Aether Reborn are sometimes written long after
+ * the code itself has been written, and oftentimes by different
+ * authors than the author of the code itself.
+ * If you have any questions or concerns regarding documentation,
+ * please contact either the doc author or the code author, or
+ * both, via our <a, href="https://discord.gg/eRsJ6F3Wng">Discord</a>.
+ * <br><br>
+ * The doc author can usually be found at the end of the first doc
+ * of the class, next to a tilde.
+ * <br><br>
+ * The person(s) next to the @author tag are, as expected, the people
+ * who have written the code.
+ * <br><br>
+ * ~ Jack
+ * <br><br>
+ * A list of developers can be found in {@code resources/fabric.mod.json}.
+ */
 public class Aether implements ModInitializer, ClientModInitializer {
     public static final String MOD_ID = "the_aether";
     public static final Logger LOG = LogManager.getLogger(MOD_ID);
