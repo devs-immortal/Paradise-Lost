@@ -31,10 +31,13 @@ public enum Persistence {
      */
     CONSTANT("condition.persistence.constant");
 
+    /**
+     * The translation key. <br> e.g. {@code "condition.persistence.temporary"}.
+     */
     public final String translation;
 
     /**
-     * @param translation The translation key for the {@code Persistence}
+     * @param translation {@link Persistence#translation}
      */
     Persistence(String translation) {
         this.translation = translation;
