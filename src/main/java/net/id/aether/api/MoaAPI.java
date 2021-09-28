@@ -28,9 +28,11 @@ public class MoaAPI {
     private static final List<MatingEntry> MOA_BREEDING_REGISTRY = new ArrayList<>();
 
     public static MoaRace register(Identifier name, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles, Identifier texturePath){
-        final MoaRace race = new MoaRace(texturePath, affinity, spawnStats, glowing, legendary, particles);
-        MOA_RACE_REGISTRY.put(name, race);
+        return register(name, new MoaRace(texturePath, affinity, spawnStats, glowing, legendary, particles));
+    }
 
+    public static MoaRace register(Identifier name, MoaRace race){
+        MOA_RACE_REGISTRY.put(name, race);
         return race;
     }
 
