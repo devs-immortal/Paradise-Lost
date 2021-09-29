@@ -2,8 +2,6 @@ package net.id.aether.items;
 
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.vehicle.AetherBoatTypes;
@@ -23,15 +21,11 @@ import net.id.aether.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.aether.items.tools.bloodstone.AmbrosiumBloodstoneItem;
 import net.id.aether.items.tools.bloodstone.GravititeBloodstoneItem;
 import net.id.aether.items.tools.bloodstone.ZaniteBloodstoneItem;
-import net.id.aether.items.utils.AetherDispenserBehaviors;
-import net.id.aether.items.utils.StackableVariantColorizer;
 import net.id.aether.items.weapons.*;
 import net.id.aether.registry.AetherRegistryQueues;
-import net.id.incubus_core.util.RegistryQueue;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.id.aether.items.utils.AetherRarity;
 import net.minecraft.block.Block;
-import net.minecraft.block.DispenserBlock;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
@@ -39,31 +33,13 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Rarity;
 
 import static net.id.aether.Aether.locate;
+import static net.id.aether.items.AetherItemActions.*;
 import static net.minecraft.entity.EquipmentSlot.*;
 import static net.minecraft.util.Rarity.EPIC;
 import static net.minecraft.util.Rarity.RARE;
 
 @SuppressWarnings("unused")
 public class AetherItems {
-    private static Action<ItemConvertible> compostable(float chance) {
-        return (id, item) -> CompostingChanceRegistry.INSTANCE.add(item, chance);
-    }
-
-    private static final Action<ItemConvertible> compostable30 = compostable(0.3f);
-    private static final Action<ItemConvertible> compostable50 = compostable(0.5f);
-    private static final Action<ItemConvertible> compostable65 = compostable(0.65f);
-    private static final Action<ItemConvertible> compostable100 = compostable(1f);
-
-    private static final Action<ItemConvertible> emptiableBucketBehavior = (id, item) -> DispenserBlock.registerBehavior(item, AetherDispenserBehaviors.emptiableBucket);
-    private static final Action<ItemConvertible> emptyBucketBehavior = (id, item) -> DispenserBlock.registerBehavior(item, AetherDispenserBehaviors.emptyBucket);
-    private static final Action<ItemConvertible> spawnEggBehavior = (id, item) -> DispenserBlock.registerBehavior(item, AetherDispenserBehaviors.spawnEgg);
-
-    private static Action<ItemConvertible> fuel(int ticks) {
-        return (id, item) -> FuelRegistry.INSTANCE.add(item, ticks);
-    }
-
-    private static final Action<ItemConvertible> swetColor = RegistryQueue.onClient(new StackableVariantColorizer(0xDADADA, 0x939393, 0x4F4F4F));
-
     /*
     Begin items
      */

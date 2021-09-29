@@ -1,12 +1,8 @@
 package net.id.aether.blocks;
 
 import com.google.common.collect.ImmutableSet;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
-import net.fabricmc.fabric.mixin.lookup.BlockEntityTypeAccessor;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.id.aether.blocks.natural.aercloud.AercloudBlock;
 import net.id.aether.blocks.natural.aercloud.BlueAercloudBlock;
@@ -28,16 +24,12 @@ import net.id.aether.util.RenderUtils;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
 import net.id.aether.registry.AetherRegistryQueues;
-import net.id.incubus_core.util.RegistryQueue;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.id.aether.util.AetherSignType;
 import net.id.aether.world.feature.tree.*;
-import net.minecraft.block.AbstractBlock.ContextPredicate;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.HoeItem;
 import net.minecraft.sound.BlockSoundGroup;
@@ -48,37 +40,12 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 import static net.id.aether.Aether.locate;
 import static net.minecraft.block.AbstractBlock.Settings.copy;
+import static net.id.aether.blocks.AetherBlockActions.*;
 import static net.minecraft.block.AbstractBlock.Settings.of;
 import static net.minecraft.block.Blocks.*;
 
 @SuppressWarnings("unused")
 public class AetherBlocks {
-    private static final ContextPredicate never = (state, view, pos) -> false;
-    private static final ContextPredicate always = (state, view, pos) -> true;
-
-    private static Settings unbreakable(Settings settings) { return settings.strength(-1f, 3600000f); }
-
-    private static Action<Block> flammable(int spread, int burn) { return (id, block) -> FlammableBlockRegistry.getDefaultInstance().add(block, spread, burn);}
-    private static final Action<Block> flammableLog = flammable(5, 5);
-    private static final Action<Block> flammablePlanks = flammable(20, 5);
-    private static final Action<Block> flammableLeaves = flammable(60, 30);
-    private static final Action<Block> flammablePlant = flammable(60, 100);
-
-    private static Action<Block> renderLayer(RenderLayer layer) { return RegistryQueue.onClient((id, block) -> BlockRenderLayerMap.INSTANCE.putBlock(block, layer));}
-    private static final Action<Block> translucentRenderLayer = renderLayer(RenderLayer.getTranslucent());
-    private static final Action<Block> cutoutRenderLayer = renderLayer(RenderLayer.getCutout());
-    private static final Action<Block> cutoutMippedRenderLayer = renderLayer(RenderLayer.getCutoutMipped());
-
-    private static final Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
-
-    private static Settings flowerPot() { return copy(POTTED_OAK_SAPLING); }
-
-    private static Action<Block> strippedFrom(Block original) { return (id, stripped) -> StrippableBlockRegistry.register(original, stripped);}
-
-    private static Action<Block> tillable() { return (id, block) -> addTillAction(block);}
-
-    private static Action<Block> flattenable() { return (id, block) -> addFlattenAction(block);}
-
     // Grass Blocks
     private static Settings grassBlock() { return copy(GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f); }
     public static final AetherGrassBlock AETHER_GRASS_BLOCK = add("aether_grass", new AetherGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable());
