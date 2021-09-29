@@ -7,6 +7,7 @@ import net.id.aether.registry.AetherRegistries;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
  * ~ Jack
  * @author AzazelTheDemonLord
  */
+@ApiStatus.Experimental
 public class ConditionAPI {
     /**
      * @param type The {@code EntityType} to test
@@ -67,6 +69,10 @@ public class ConditionAPI {
         AetherComponents.CONDITION_MANAGER_KEY.sync(entity);
     }
 
+    /**
+     * @param condition The {@code Condition} you want the translation string of
+     * @return The translation string of the given {@code Condition}
+     */
     public static String getTranslationString(Condition condition) {
         return "condition.condition." + condition.getId().getPath();
     }

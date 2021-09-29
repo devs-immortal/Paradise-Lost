@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.*;
 import java.util.function.BiPredicate;
@@ -28,6 +29,7 @@ import java.util.function.BiPredicate;
  * ~ Jack
  * @author AzazelTheDemonLord
  */
+@ApiStatus.Experimental
 public class MoaAPI {
 
     /**
