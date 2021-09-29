@@ -1,37 +1,29 @@
 package net.id.aether.blocks;
 
 import com.google.common.collect.ImmutableSet;
-import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
-import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
-import net.id.aether.blocks.natural.aercloud.AercloudBlock;
-import net.id.aether.blocks.natural.aercloud.BlueAercloudBlock;
-import net.id.aether.blocks.natural.aercloud.GoldenAercloudBlock;
-import net.id.aether.blocks.natural.aercloud.PinkAercloudBlock;
-import net.id.aether.blocks.decorative.AetherDirtPathBlock;
-import net.id.aether.blocks.decorative.AmbrosiumLanternBlock;
-import net.id.aether.blocks.decorative.AmbrosiumTorchBlock;
-import net.id.aether.blocks.decorative.AmbrosiumWallTorchBlock;
+import net.id.aether.blocks.decorative.*;
 import net.id.aether.blocks.mechanical.FoodBowlBlock;
 import net.id.aether.blocks.mechanical.IncubatorBlock;
-import net.id.aether.blocks.natural.*;
-import net.id.aether.blocks.natural.crop.AmadrysCropBlock;
-import net.id.aether.blocks.natural.crop.BlueberryBushBlock;
-import net.id.aether.blocks.natural.tree.*;
+import net.id.aether.blocks.natural.AetherGrassBlock;
+import net.id.aether.blocks.natural.AetherSaplingBlock;
+import net.id.aether.blocks.natural.SwetDropBlock;
+import net.id.aether.blocks.natural.aercloud.*;
+import net.id.aether.blocks.natural.crop.*;
 import net.id.aether.blocks.natural.plant.*;
+import net.id.aether.blocks.natural.tree.*;
 import net.id.aether.entities.AetherEntityTypes;
-import net.id.aether.util.RenderUtils;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
 import net.id.aether.registry.AetherRegistryQueues;
-import net.id.incubus_core.util.RegistryQueue.Action;
 import net.id.aether.util.AetherSignType;
+import net.id.aether.util.RenderUtils;
 import net.id.aether.world.feature.tree.*;
+import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.HoeItem;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
@@ -39,8 +31,8 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 import static net.id.aether.Aether.locate;
-import static net.minecraft.block.AbstractBlock.Settings.copy;
 import static net.id.aether.blocks.AetherBlockActions.*;
+import static net.minecraft.block.AbstractBlock.Settings.copy;
 import static net.minecraft.block.AbstractBlock.Settings.of;
 import static net.minecraft.block.Blocks.*;
 
@@ -359,14 +351,6 @@ public class AetherBlocks {
     @SafeVarargs
     private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {
         return AetherRegistryQueues.BLOCK.add(locate(id), block, additionalActions);
-    }
-
-    private static void addTillAction(Block block){
-        TillableBlockRegistry.register(block, HoeItem::canTillFarmland, AETHER_FARMLAND.getDefaultState());
-    }
-
-    private static void addFlattenAction(Block block){
-        FlattenableBlockRegistry.register(block, AETHER_DIRT_PATH.getDefaultState());
     }
 
     public static void init() {
