@@ -21,8 +21,6 @@ class AetherBlockActions {
     protected static final AbstractBlock.ContextPredicate never = (state, view, pos) -> false;
     protected static final AbstractBlock.ContextPredicate always = (state, view, pos) -> true;
 
-    protected static AbstractBlock.Settings unbreakable(AbstractBlock.Settings settings) { return settings.strength(-1f, 3600000f); }
-
     protected static RegistryQueue.Action<Block> flammable(int spread, int burn) { return (id, block) -> FlammableBlockRegistry.getDefaultInstance().add(block, spread, burn);}
     protected static final RegistryQueue.Action<Block> flammableLog = flammable(5, 5);
     protected static final RegistryQueue.Action<Block> flammablePlanks = flammable(20, 5);
@@ -35,8 +33,6 @@ class AetherBlockActions {
     protected static final RegistryQueue.Action<Block> cutoutMippedRenderLayer = renderLayer(RenderLayer.getCutoutMipped());
 
     protected static final RegistryQueue.Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
-
-    protected static AbstractBlock.Settings flowerPot() { return copy(POTTED_OAK_SAPLING); }
 
     protected static RegistryQueue.Action<Block> strippedFrom(Block original) { return (id, stripped) -> StrippableBlockRegistry.register(original, stripped);}
     protected static RegistryQueue.Action<Block> tillable() { return (id, block) -> TillableBlockRegistry.register(block, HoeItem::canTillFarmland, AetherBlocks.AETHER_FARMLAND.getDefaultState());}

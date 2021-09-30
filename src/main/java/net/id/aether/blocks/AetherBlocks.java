@@ -38,6 +38,9 @@ import static net.minecraft.block.Blocks.*;
 
 @SuppressWarnings("unused")
 public class AetherBlocks {
+
+    protected static Settings unbreakable(AbstractBlock.Settings settings) { return settings.strength(-1f, 3600000f); }
+
     // Grass Blocks
     private static Settings grassBlock() { return copy(GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f); }
     public static final AetherGrassBlock AETHER_GRASS_BLOCK = add("aether_grass", new AetherGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable());
@@ -157,6 +160,8 @@ public class AetherBlocks {
         public static final AetherStairsBlock LIGHT_SENTRY_STAIRS = add("light_sentry_stairs", new AetherStairsBlock(LIGHT_SENTRY_STONE.getDefaultState(), lightSentryStone()));
         public static final WallBlock LIGHT_SENTRY_WALL = add("light_sentry_wall", new WallBlock(lightSentryStone()));
     */
+    protected static Settings flowerPot() { return copy(POTTED_OAK_SAPLING); }
+
     // Skyroot Wood
     private static final WoodTypeFactory skyroot = new WoodTypeFactory(MapColor.GREEN, MapColor.TERRACOTTA_GREEN);
     public static final SaplingBlock SKYROOT_SAPLING = add("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), skyroot.sapling()), cutoutRenderLayer);
