@@ -91,36 +91,6 @@ public class AetherBlocks {
     public static final AetherStairsBlock HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", new AetherStairsBlock(HOLYSTONE_BRICK.getDefaultState(), holystoneBrick()));
     public static final WallBlock HOLYSTONE_BRICK_WALL = add("holystone_brick_wall", new WallBlock(holystoneBrick()));
     // Dungeon Blocks
-    /*
-        private static Settings angelicStone() { return of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE); }
-        public static final Block ANGELIC_STONE = add("angelic_stone", new Block(angelicStone()));
-        public static final Block ANGELIC_CRACKED_STONE = add("angelic_stone_cracked", new Block(angelicStone()));
-        public static final SlabBlock ANGELIC_SLAB = add("angelic_slab", new SlabBlock(angelicStone()));
-        public static final AetherStairsBlock ANGELIC_STAIRS = add("angelic_stairs", new AetherStairsBlock(ANGELIC_STONE.getDefaultState(), angelicStone()));
-        public static final WallBlock ANGELIC_WALL = add("angelic_wall", new WallBlock(angelicStone()));
-
-        private static Settings lightAngelicStone() { return angelicStone().luminance(state -> 11); }
-        public static final Block LIGHT_ANGELIC_STONE = add("light_angelic_stone", new Block(lightAngelicStone()));
-        public static final Block LIGHT_ANGELIC_STONE_TRAP = add("light_angelic_stone_trap", new Block(unbreakable(lightAngelicStone())));
-        public static final SlabBlock LIGHT_ANGELIC_SLAB = add("light_angelic_slab", new SlabBlock(lightAngelicStone()));
-        public static final AetherStairsBlock LIGHT_ANGELIC_STAIRS = add("light_angelic_stairs", new AetherStairsBlock(LIGHT_ANGELIC_STONE.getDefaultState(), lightAngelicStone()));
-        public static final WallBlock LIGHT_ANGELIC_WALL = add("light_angelic_wall", new WallBlock(lightAngelicStone()));
-
-        private static Settings hellfireStone() { return of(Material.STONE).hardness(0.5f).resistance(1f).sounds(BlockSoundGroup.STONE); }
-        public static final Block HELLFIRE_STONE = add("hellfire_stone", new Block(hellfireStone()));
-        public static final Block HELLFIRE_CRACKED_STONE = add("hellfire_stone_cracked", new Block(hellfireStone()));
-        public static final Block HELLFIRE_STONE_TRAP = add("hellfire_stone_trap", new Block(unbreakable(hellfireStone())));
-        public static final SlabBlock HELLFIRE_SLAB = add("hellfire_slab", new SlabBlock(hellfireStone()));
-        public static final AetherStairsBlock HELLFIRE_STAIRS = add("hellfire_stairs", new AetherStairsBlock(HELLFIRE_STONE.getDefaultState(), hellfireStone()));
-        public static final WallBlock HELLFIRE_WALL = add("hellfire_wall", new WallBlock(hellfireStone()));
-
-        private static Settings lightHellfireStone() { return hellfireStone(); }
-        public static final Block LIGHT_HELLFIRE_STONE = add("light_hellfire_stone", new Block(lightHellfireStone()));
-        public static final Block LIGHT_HELLFIRE_STONE_TRAP = add("light_hellfire_stone_trap", new Block(unbreakable(lightHellfireStone())));
-        public static final SlabBlock LIGHT_HELLFIRE_SLAB = add("light_hellfire_slab", new SlabBlock(lightHellfireStone()));
-        public static final AetherStairsBlock LIGHT_HELLFIRE_STAIRS = add("light_hellfire_stairs", new AetherStairsBlock(LIGHT_HELLFIRE_STONE.getDefaultState(), lightHellfireStone()));
-        public static final WallBlock LIGHT_HELLFIRE_WALL = add("light_hellfire_wall", new WallBlock(lightHellfireStone()));
-    */
     private static Settings carvedStone() { return of(Material.STONE).hardness(0.5f).resistance(1f).sounds(BlockSoundGroup.STONE); }
     public static final Block CARVED_STONE = add("carved_stone", new Block(carvedStone()));
     public static final SlabBlock CARVED_STONE_SLAB = add("carved_stone_slab", new SlabBlock(carvedStone()));
@@ -138,28 +108,7 @@ public class AetherBlocks {
     public static final Block CARVED_STONE_PANEL_LIT = add("carved_stone_panel_lit", new Block(carvedStone().luminance(value -> 12)));
     public static final Block CARVED_STONE_EYE = add("carved_stone_eye", new Block(carvedStone()));
     public static final Block CARVED_STONE_EYE_LIT = add("carved_stone_eye_lit", new Block(carvedStone().luminance(value -> 8)));
-    /*
-        private static Settings lightCarvedStone() { return carvedStone().luminance(state -> 11); }
-        public static final Block LIGHT_CARVED_STONE = add("light_carved_stone", new Block(lightCarvedStone()));
-        public static final Block LIGHT_CARVED_STONE_TRAP = add("light_carved_stone_trap", new Block(unbreakable(lightCarvedStone())));
-        public static final SlabBlock LIGHT_CARVED_SLAB = add("light_carved_slab", new SlabBlock(lightCarvedStone()));
-        public static final AetherStairsBlock LIGHT_CARVED_STAIRS = add("light_carved_stairs", new AetherStairsBlock(LIGHT_CARVED_STONE.getDefaultState(), lightCarvedStone()));
-        public static final WallBlock LIGHT_CARVED_WALL = add("light_carved_wall", new WallBlock(lightCarvedStone()));
 
-        private static Settings sentryStone() { return of(Material.STONE).hardness(0.5f).resistance(1.0f).sounds(BlockSoundGroup.STONE); }
-        public static final Block SENTRY_STONE = add("sentry_stone", new Block(sentryStone()));
-        public static final Block SENTRY_CRACKED_STONE = add("sentry_stone_cracked", new Block(sentryStone()));
-        public static final Block SENTRY_STONE_TRAP = add("sentry_stone_trap", new Block(unbreakable(sentryStone())));
-        public static final SlabBlock SENTRY_SLAB = add("sentry_slab", new SlabBlock(sentryStone()));
-        public static final AetherStairsBlock SENTRY_STAIRS = add("sentry_stairs", new AetherStairsBlock(SENTRY_STONE.getDefaultState(), sentryStone()));
-        public static final WallBlock SENTRY_WALL = add("sentry_wall", new WallBlock(sentryStone()));
-
-        private static Settings lightSentryStone() { return sentryStone().luminance(state -> 10); }
-        public static final Block LIGHT_SENTRY_STONE = add("light_sentry_stone", new Block(lightSentryStone()));
-        public static final SlabBlock LIGHT_SENTRY_SLAB = add("light_sentry_slab", new SlabBlock(lightSentryStone()));
-        public static final AetherStairsBlock LIGHT_SENTRY_STAIRS = add("light_sentry_stairs", new AetherStairsBlock(LIGHT_SENTRY_STONE.getDefaultState(), lightSentryStone()));
-        public static final WallBlock LIGHT_SENTRY_WALL = add("light_sentry_wall", new WallBlock(lightSentryStone()));
-    */
     protected static Settings flowerPot() { return copy(POTTED_OAK_SAPLING); }
 
     // Skyroot Wood
@@ -351,7 +300,6 @@ public class AetherBlocks {
     // Usables
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
-
 
     @SafeVarargs
     private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {
