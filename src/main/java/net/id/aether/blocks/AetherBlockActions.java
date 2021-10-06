@@ -1,21 +1,17 @@
 package net.id.aether.blocks;
 
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.fabricmc.fabric.mixin.lookup.BlockEntityTypeAccessor;
+import net.id.aether.util.RenderUtils;
 import net.id.incubus_core.util.RegistryQueue;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.HoeItem;
-
-import static net.minecraft.block.AbstractBlock.Settings.copy;
-import static net.minecraft.block.Blocks.POTTED_OAK_SAPLING;
 
 class AetherBlockActions {
     protected static final AbstractBlock.ContextPredicate never = (state, view, pos) -> false;
@@ -27,10 +23,9 @@ class AetherBlockActions {
     protected static final RegistryQueue.Action<Block> flammableLeaves = flammable(60, 30);
     protected static final RegistryQueue.Action<Block> flammablePlant = flammable(60, 100);
 
-    protected static RegistryQueue.Action<Block> renderLayer(RenderLayer layer) { return RegistryQueue.onClient((id, block) -> BlockRenderLayerMap.INSTANCE.putBlock(block, layer));}
-    protected static final RegistryQueue.Action<Block> translucentRenderLayer = renderLayer(RenderLayer.getTranslucent());
-    protected static final RegistryQueue.Action<Block> cutoutRenderLayer = renderLayer(RenderLayer.getCutout());
-    protected static final RegistryQueue.Action<Block> cutoutMippedRenderLayer = renderLayer(RenderLayer.getCutoutMipped());
+    protected static final RegistryQueue.Action<Block> translucentRenderLayer = RegistryQueue.onClient((id, block) -> RenderUtils.transparentRenderLayer(block));
+    protected static final RegistryQueue.Action<Block> cutoutRenderLayer = RegistryQueue.onClient((id, block) -> RenderUtils.cutoutRenderLayer(block));
+    protected static final RegistryQueue.Action<Block> cutoutMippedRenderLayer = RegistryQueue.onClient((id, block) -> RenderUtils.cutoutMippedRenderLayer(block));
 
     protected static final RegistryQueue.Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
 

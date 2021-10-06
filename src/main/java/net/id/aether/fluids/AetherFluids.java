@@ -3,6 +3,7 @@ package net.id.aether.fluids;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.id.aether.client.rendering.block.FluidRenderSetup;
 import net.id.aether.registry.AetherRegistryQueues;
+import net.id.aether.util.RenderUtils;
 import net.id.incubus_core.util.RegistryQueue;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.FlowableFluid;
@@ -11,7 +12,7 @@ import net.minecraft.fluid.Fluid;
 import static net.id.aether.Aether.locate;
 
 public class AetherFluids {
-    private static final RegistryQueue.Action<Fluid> translucent = (id, fluid) -> BlockRenderLayerMap.INSTANCE.putFluid(fluid, RenderLayer.getTranslucent());
+    private static final RegistryQueue.Action<Fluid> translucent = RegistryQueue.onClient((id, fluid) -> RenderUtils.transparentRenderLayer(fluid));
 
     private static RegistryQueue.Action<Fluid> renderSetup(Fluid flowing, int color){ return RegistryQueue.onClient((id, fluid) -> FluidRenderSetup.setupFluidRendering(fluid, flowing, id, color));}
     private static RegistryQueue.Action<Fluid> onlyStillRenderSetup(int color) {return renderSetup(null, color);}
