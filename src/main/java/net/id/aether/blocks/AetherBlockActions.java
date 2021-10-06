@@ -1,5 +1,7 @@
 package net.id.aether.blocks;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
@@ -14,9 +16,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.HoeItem;
 
-import static net.minecraft.block.AbstractBlock.Settings.copy;
-import static net.minecraft.block.Blocks.POTTED_OAK_SAPLING;
-
 class AetherBlockActions {
     protected static final AbstractBlock.ContextPredicate never = (state, view, pos) -> false;
     protected static final AbstractBlock.ContextPredicate always = (state, view, pos) -> true;
@@ -27,9 +26,13 @@ class AetherBlockActions {
     protected static final RegistryQueue.Action<Block> flammableLeaves = flammable(60, 30);
     protected static final RegistryQueue.Action<Block> flammablePlant = flammable(60, 100);
 
+    @Environment(EnvType.CLIENT)
     protected static RegistryQueue.Action<Block> renderLayer(RenderLayer layer) { return RegistryQueue.onClient((id, block) -> BlockRenderLayerMap.INSTANCE.putBlock(block, layer));}
+    @Environment(EnvType.CLIENT)
     protected static final RegistryQueue.Action<Block> translucentRenderLayer = renderLayer(RenderLayer.getTranslucent());
+    @Environment(EnvType.CLIENT)
     protected static final RegistryQueue.Action<Block> cutoutRenderLayer = renderLayer(RenderLayer.getCutout());
+    @Environment(EnvType.CLIENT)
     protected static final RegistryQueue.Action<Block> cutoutMippedRenderLayer = renderLayer(RenderLayer.getCutoutMipped());
 
     protected static final RegistryQueue.Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
