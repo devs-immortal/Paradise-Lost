@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_wood",
+    "the_aether:orange_wood",
+    "the_aether:crystal_wood",
+    "the_aether:golden_oak_wood",
+    "the_aether:wisteria_wood"
+  ]
+}

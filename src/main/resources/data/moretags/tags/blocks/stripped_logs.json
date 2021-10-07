@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:stripped_skyroot_log",
+    "the_aether:stripped_golden_oak_log",
+    "the_aether:stripped_orange_log",
+    "the_aether:stripped_crystal_log",
+    "the_aether:stripped_wisteria_log"
+  ]
+}
