@@ -1,4 +1,4 @@
-package net.id.aether.mixin.client;
+package net.id.aether.mixin.client.render;
 
 import net.id.aether.world.dimension.AetherDimension;
 import net.minecraft.client.MinecraftClient;

@@ -1,4 +1,4 @@
-package net.id.aether.mixin.client;
+package net.id.aether.mixin.client.render;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

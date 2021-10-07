@@ -1,4 +1,4 @@
-package net.id.aether.mixin.client.render;
+package net.id.aether.mixin.client;
 
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;

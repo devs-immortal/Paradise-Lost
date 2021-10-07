@@ -33,20 +33,20 @@
     "util.SignTypeAccessor"
   ],
   "client": [
-    "client.BackgroundRendererMixin",
     "client.ClientPlayerEntityMixin",
     "client.ClientPlayNetworkHandlerMixin",
     "client.ClientWorldMixin",
-    "client.InGameHudMixin",
-    "client.InGameOverlayRendererMixin",
     "client.ItemStackMixin",
-    "client.MapRendererMixin",
-    "client.WorldRendererMixin",
+    "client.MinecraftClientMixin",
+    "client.render.BackgroundRendererMixin",
+    "client.render.InGameHudMixin",
+    "client.render.InGameOverlayRendererMixin",
+    "client.render.MapRendererMixin",
+    "client.render.WorldRendererMixin",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
     "client.render.FluidRendererMixin",
-    "client.render.LivingEntityRendererMixin",
-    "client.render.MinecraftClientMixin"
+    "client.render.LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,4 +1,4 @@
-package net.id.aether.mixin.client;
+package net.id.aether.mixin.client.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
