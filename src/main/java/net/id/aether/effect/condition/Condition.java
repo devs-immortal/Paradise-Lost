@@ -20,14 +20,14 @@ import net.minecraft.world.World;
  * <br>  Jack here, these are conditions.
  * <br>  In general, these can all be explained by seeing what {@link VenomCondition} does with them,
  *       but I'll provide an explanation here anyway.
- * <br>  {@code tick()} is ticked for every {@code LivingEntity} once every tick, as provided by {@link dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent}
- * <br>  {@code tickPlayer()} is similarly ticked, but only if the entity is a {@code PlayerEntity}
- * <br>  {@code clientTick()} is also similarly ticked, but only if the game is the client
+ * <br>  {@link Condition#tick} is ticked for every not-exempt {@code LivingEntity} once every tick, as provided by {@link dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent}
+ * <br>  {@link Condition#tickPlayer} is similarly ticked, but only if the entity is a {@code PlayerEntity}
+ * <br>  {@link Condition#clientTick} is also similarly ticked, but only if the game is the client
  * <br>  All conditions, which extend this class, override these methods with their own effects.
  *       e.g. {@link VenomCondition#tick} applies a poison status effect.
  *
- * <br>  See the {@link Persistence} class for a description of {@code temporary},
- *       {@code chronic}, and constant {@code persistences} are.
+ * <br>  See the {@link Persistence} class for a description of {@link Persistence#TEMPORARY},
+ *       {@link Persistence#CHRONIC}, and {@link Persistence#CONSTANT} {@code persistences} are.
  * <br>
  * <br>  Hope this helps!
  * <br>  ~ Jack. </p>
@@ -39,27 +39,31 @@ import net.minecraft.world.World;
 public abstract class Condition {
 
     /**
-     * {@code exempt} is the tag containing all {@code EntityType}s which cannot get this condition.
+     * A tag containing all {@code EntityType}s which cannot get this condition.
      */
     public final Tag<EntityType<?>> exempt;
     /**
-     * {@code maxTemp} is the maximum value for the {@code Temporary} {@link Persistence}.
-     * <br>{@code maxChron} is the maximum value for the {@code Chronic} {@link Persistence}.
+     * The maximum value for the {@code Temporary} {@link Persistence}.
      */
-    public final float maxTemp, maxChron;
+    public final float maxTemp;
     /**
-     * {@code tempDecay} is the decay rate of the {@code Temporary} {@link Persistence}.
-     * <br>{@code chronDecay} is the decay rate of the {@code Chronic} {@link Persistence}.
+     * The maximum value for the {@code Chronic} {@link Persistence}.
      */
-    public final float tempDecay, chronDecay;
-
+    public final float maxChron;
     /**
-     * {@code scalingValue} is the value {@code maxTemp} and {@code maxChron} are normalized to.
+     * The decay rate of the {@code Temporary} {@link Persistence}.
+     */
+    public final float tempDecay;
+    /**
+     * The decay rate of the {@code Chronic} {@link Persistence}.
+     */
+    public final float chronDecay;
+    /**
+     * The value {@link Condition#maxTemp} and {@link Condition#maxChron} are normalized to.
      */
     public final float scalingValue;
-
     /**
-     * {@code visThreshold} is the severity threshold after which the effects of the condition become visible.
+     * The severity threshold after which the effects of the condition become visible.
      */
     public final float visThreshold;
 
