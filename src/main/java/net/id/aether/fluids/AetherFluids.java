@@ -5,7 +5,6 @@ import net.id.aether.client.rendering.block.FluidRenderSetup;
 import net.id.aether.registry.AetherRegistryQueues;
 import net.id.aether.util.RenderUtils;
 import net.id.incubus_core.util.RegistryQueue;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 
