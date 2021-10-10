@@ -67,6 +67,9 @@ repositories {
     maven {
         name = "gudenau's maven"
         url = "https://maven.gudenau.net"
+        content {
+            includeGroup 'net.gudenau.minecraft'
+        }
     }
 }
 
