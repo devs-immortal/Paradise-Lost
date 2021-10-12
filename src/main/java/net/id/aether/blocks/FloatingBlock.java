@@ -1,6 +1,7 @@
 package net.id.aether.blocks;
 
 import net.id.aether.entities.util.floatingblock.FloatingBlockHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.OreBlock;
 import net.minecraft.server.world.ServerWorld;
@@ -34,6 +35,11 @@ public class FloatingBlock extends OreBlock {
     public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facingIn, BlockState facingState, WorldAccess worldIn, BlockPos posIn, BlockPos facingPosIn) {
         worldIn.getBlockTickScheduler().schedule(posIn, this, this.getFallDelay());
         return super.getStateForNeighborUpdate(stateIn, facingIn, facingState, worldIn, posIn, facingPosIn);
+    }
+
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        checkFloatable(world, pos);
     }
 
     @Override
