@@ -6,10 +6,7 @@
     "#the_aether:aether_stone_walls",
     "#the_aether:aether_stone_traps",
     "#the_aether:carved_stone_blocks",
-    "the_aether:holystone",
-    "the_aether:cobbled_holystone",
-    "the_aether:holystone_brick",
-    "the_aether:mossy_holystone",
-    "the_aether:golden_mossy_holystone"
+    "#the_aether:aether_natural_stone",
+    "the_aether:holystone_brick"
   ]
 }

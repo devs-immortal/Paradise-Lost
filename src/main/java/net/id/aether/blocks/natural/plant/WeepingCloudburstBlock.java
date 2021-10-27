@@ -34,7 +34,24 @@ public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable 
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(WATERLOGGED, true);
+        var state = getDefaultState();
+        var pos = ctx.getBlockPos();
+        var world = ctx.getWorld();
+
+        state = state.with(WATERLOGGED, world.isWater(pos));
+
+        var floor = world.getBlockState(pos.down());
+
+        if(floor.isOf(this)) {
+
+            state = state.with(SECTION, Section.TOP).with(NOGROW, true);
+
+            if(floor.get(SECTION) != Section.BOTTOM) {
+                world.setBlockState(pos.down(), floor.with(SECTION, Section.BODY));
+            }
+        }
+
+        return state;
     }
 
     @Override

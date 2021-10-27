@@ -7,6 +7,7 @@ import net.id.aether.blocks.mechanical.FoodBowlBlock;
 import net.id.aether.blocks.mechanical.IncubatorBlock;
 import net.id.aether.blocks.natural.AetherGrassBlock;
 import net.id.aether.blocks.natural.AetherSaplingBlock;
+import net.id.aether.blocks.natural.AetherSnowyBlock;
 import net.id.aether.blocks.natural.SwetDropBlock;
 import net.id.aether.blocks.natural.aercloud.*;
 import net.id.aether.blocks.natural.crop.*;
@@ -16,6 +17,7 @@ import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
 import net.id.aether.registry.AetherRegistryQueues;
+import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.util.AetherSignType;
 import net.id.aether.util.RenderUtils;
 import net.id.aether.world.feature.tree.*;
@@ -45,6 +47,7 @@ public class AetherBlocks {
     private static Settings grassBlock() { return copy(GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f); }
     public static final AetherGrassBlock AETHER_GRASS_BLOCK = add("aether_grass", new AetherGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable());
     public static final AetherGrassBlock AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", new AetherGrassBlock(grassBlock().mapColor(MapColor.GOLD)));
+    public static final AetherSnowyBlock AETHER_PODZOL = add("aether_podzol", new AetherSnowyBlock(grassBlock()), tillable(), flattenable());
     // Soil Blocks
     public static final Block AETHER_DIRT = add("aether_dirt", new Block(copy(DIRT).strength(0.3f)), tillable(), flattenable());
     public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new AetherFarmlandBlock(copy(FARMLAND)));
@@ -116,6 +119,8 @@ public class AetherBlocks {
     public static final SaplingBlock SKYROOT_SAPLING = add("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), skyroot.sapling()), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_SKYROOT_SAPLING = add("potted_skyroot_sapling", new FlowerPotBlock(SKYROOT_SAPLING, flowerPot()), cutoutRenderLayer);
     public static final PillarBlock SKYROOT_LOG = add("skyroot_log", new PillarBlock(skyroot.log()), flammableLog);
+    public static final PillarBlock MOTTLED_SKYROOT_LOG = add("mottled_skyroot_log", new PillarBlock(skyroot.log()), flammableLog);
+    public static final ChuteBlock MOTTLED_SKYROOT_FALLEN_LOG = add("mottled_skyroot_fallen_log", new ChuteBlock(skyroot.log()), flammableLog, cutoutRenderLayer);
     public static final PillarBlock SKYROOT_WOOD = add("skyroot_wood", new PillarBlock(skyroot.wood()), flammableLog);
     public static final PillarBlock STRIPPED_SKYROOT_LOG = add("stripped_skyroot_log", new PillarBlock(skyroot.strippedLog()), flammableLog, strippedFrom(SKYROOT_LOG));
     public static final PillarBlock STRIPPED_SKYROOT_WOOD = add("stripped_skyroot_wood", new PillarBlock(skyroot.strippedWood()), flammableLog, strippedFrom(SKYROOT_WOOD));
@@ -259,6 +264,8 @@ public class AetherBlocks {
     public static final LichenPileBlock LICHEN_PILE = add("lichen_pile", new LichenPileBlock(lichen(), false));
     public static final LichenBlock LUCATIEL_LICHEN = add("lucatiel_lichen", new LichenBlock(lichen().ticksRandomly(), true));
     public static final LichenPileBlock LUCATIEL_LICHEN_PILE = add("lucatiel_lichen_pile", new LichenPileBlock(lichen(), true));
+
+    public static final WallClingingPlantBlock ROOTCAP = add("rootcap", new WallClingingPlantBlock(copy(BROWN_MUSHROOM), AetherBlockTags.FUNGI_CLINGABLES), cutoutRenderLayer);
 
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(shrub().mapColor(MapColor.PINK)), flammablePlant, cutoutRenderLayer);
 

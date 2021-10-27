@@ -17,11 +17,11 @@
   "carvers": {
     "air": [
       "cave",
-      "the_aether:cold_aercloud_giant",
       "the_aether:cold_aercloud_upper",
       "the_aether:cold_aercloud_lower",
       "the_aether:blue_aercloud_upper",
-      "the_aether:blue_aercloud_lower"
+      "the_aether:blue_aercloud_lower",
+      "the_aether:golden_aercloud"
     ]
   },
   "features": [
@@ -33,13 +33,13 @@
       "the_aether:river"
     ],
     [
-      "the_aether:quicksoil"
+      "the_aether:quicksoil",
+      "the_aether:holystone_boulder"
     ],
     [],
     [],
     [],
     [
-      "the_aether:holystone_boulder",
       "the_aether:ore_ambrosium",
       "the_aether:ore_gravitite",
       "the_aether:ore_zanite"

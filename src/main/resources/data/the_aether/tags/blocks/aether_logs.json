@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "the_aether:skyroot_log",
+    "the_aether:mottled_skyroot_log",
     "the_aether:golden_oak_log",
     "the_aether:crystal_log",
     "the_aether:wisteria_log",
@@ -20,6 +21,7 @@
     "the_aether:stripped_golden_oak_wood",
     "the_aether:stripped_crystal_wood",
     "the_aether:stripped_wisteria_wood",
-    "the_aether:stripped_orange_wood"
+    "the_aether:stripped_orange_wood",
+    "#the_aether:aether_hollow_logs"
   ]
 }

@@ -2,6 +2,7 @@ package net.id.aether.world.feature.tree;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.Aether;
+import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
 import net.minecraft.util.registry.Registry;
@@ -18,6 +19,7 @@ public class AetherTreeHell {
 
     public static FoliagePlacerType<WisteriaFoliagePlacer> WISTERIA_FOLIAGE;
     public static TrunkPlacerType<WisteriaTrunkPlacer> WISTERIA_TRUNK;
+    public static TrunkPlacerType<OvergrownTrunkPlacer> OVERGROWN_TRUNK;
     private static Constructor<FoliagePlacerType> foliageConstructor;
     private static Constructor<TrunkPlacerType> trunkConstructor;
 
@@ -44,6 +46,7 @@ public class AetherTreeHell {
         try {
             WISTERIA_FOLIAGE = registerFoliage("wisteria_folliage_placer", WisteriaFoliagePlacer.CODEC);
             WISTERIA_TRUNK = registerTrunk("wisteria_trunk_placer", WisteriaTrunkPlacer.CODEC);
+            OVERGROWN_TRUNK = registerTrunk("overgrown_trunk_placer", OvergrownTrunkPlacer.CODEC);
             foliageConstructor.setAccessible(false);
             trunkConstructor.setAccessible(false);
         } catch (Exception ex) {

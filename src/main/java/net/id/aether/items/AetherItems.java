@@ -260,6 +260,7 @@ public class AetherItems {
     // nature
     public static final BlockItem AETHER_GRASS_BLOCK = add("aether_grass", AetherBlocks.AETHER_GRASS_BLOCK, building_block);
     public static final BlockItem AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", AetherBlocks.AETHER_ENCHANTED_GRASS, building_block);
+    public static final BlockItem AETHER_PODZOL = add("aether_podzol", AetherBlocks.AETHER_PODZOL, building_block);
     public static final BlockItem AETHER_DIRT = add("aether_dirt", AetherBlocks.AETHER_DIRT, building_block);
     public static final BlockItem QUICKSOIL = add("quicksoil", AetherBlocks.QUICKSOIL, building_block);
     public static final BlockItem COLD_AERCLOUD = add("cold_aercloud", AetherBlocks.COLD_AERCLOUD, building_block);
@@ -284,6 +285,8 @@ public class AetherItems {
     public static final BlockItem GRAVITITE_LEVITATOR = add("gravitite_levitator", AetherBlocks.GRAVITITE_LEVITATOR, building_block);
     // logs
     public static final BlockItem SKYROOT_LOG = add("skyroot_log", AetherBlocks.SKYROOT_LOG, building_block);
+    public static final BlockItem MOTTLED_SKYROOT_LOG = add("mottled_skyroot_log", AetherBlocks.MOTTLED_SKYROOT_LOG, building_block);
+    public static final BlockItem MOTTLED_SKYROOT_FALLEN_LOG = add("mottled_skyroot_fallen_log", AetherBlocks.MOTTLED_SKYROOT_FALLEN_LOG, building_block);
     public static final BlockItem GOLDEN_OAK_LOG = add("golden_oak_log", AetherBlocks.GOLDEN_OAK_LOG, building_block);
     public static final BlockItem ORANGE_LOG = add("orange_log", AetherBlocks.ORANGE_LOG, building_block);
     public static final BlockItem CRYSTAL_LOG = add("crystal_log", AetherBlocks.CRYSTAL_LOG, building_block);
@@ -399,9 +402,9 @@ public class AetherItems {
     }
 
     private static final FabricItemSettings decoration = decoration();
-    private static final FabricItemSettings sign = decoration.maxCount(16);
-    private static final FabricItemSettings boat = decoration.maxCount(1);
-    private static final FabricItemSettings hat = decoration.equipmentSlot(stack -> HEAD);
+    private static final FabricItemSettings sign = decoration().maxCount(16);
+    private static final FabricItemSettings boat = decoration().maxCount(1);
+    private static final FabricItemSettings hat = decoration().equipmentSlot(stack -> HEAD);
 
     // saplings
     public static final BlockItem SKYROOT_SAPLING = add("skyroot_sapling", AetherBlocks.SKYROOT_SAPLING, decoration, compostable30);
@@ -451,11 +454,14 @@ public class AetherItems {
     // tall plants
     public static final BlockItem AETHER_TALL_GRASS = add("aether_tall_grass", AetherBlocks.AETHER_TALL_GRASS, decoration, compostable50);
     public static final BlockItem HONEY_NETTLE = add("honey_nettle", AetherBlocks.HONEY_NETTLE, decoration, compostable50);
-    // full block plants
+
+    // FUNGI BAYBEEE
     public static final BlockItem LICHEN = add("lichen", AetherBlocks.LICHEN, decoration, compostable50);
     public static final BlockItem LUCATIEL_LICHEN = add("lucatiel_lichen", AetherBlocks.LUCATIEL_LICHEN, decoration, compostable50);
     public static final BlockItem LICHEN_PILE = add("lichen_pile", AetherBlocks.LICHEN_PILE, decoration, compostable30);
     public static final BlockItem LUCATIEL_LICHEN_PILE = add("lucatiel_lichen_pile", AetherBlocks.LUCATIEL_LICHEN_PILE, decoration, compostable100);
+    public static final BlockItem ROOTCAP = add("rootcap", AetherBlocks.ROOTCAP, decoration(), compostable100);
+
     // lights
     public static final BlockItem AMBROSIUM_LANTERN = add("ambrosium_lantern", AetherBlocks.AMBROSIUM_LANTERN, decoration);
     public static final WallStandingBlockItem AMBROSIUM_TORCH = add("ambrosium_torch", new WallStandingBlockItem(AetherBlocks.AMBROSIUM_TORCH, AetherBlocks.AMBROSIUM_TORCH_WALL, decoration));

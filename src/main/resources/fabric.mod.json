@@ -28,8 +28,7 @@
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/aether",
     "sources": "https://github.com/devs-immortal/The-Aether",
-    "issues": "https://github.com/devs-immortal/The-Aether/issues",
-    "irc": "https://discord.gg/vAa35wQ2ZP"
+    "issues": "https://github.com/devs-immortal/The-Aether/issues"
   },
   "depends": {
     "fabricloader": ">=0.11.3",

@@ -17,45 +17,51 @@
   "carvers": {
     "air": [
       "cave",
-      "the_aether:cold_aercloud_giant",
       "the_aether:cold_aercloud_upper",
       "the_aether:cold_aercloud_lower",
       "the_aether:blue_aercloud_upper",
-      "the_aether:blue_aercloud_lower"
+      "the_aether:blue_aercloud_lower",
+      "the_aether:golden_aercloud"
     ]
   },
   "features": [
     [],
     [
+      "the_aether:shield_pond",
       "the_aether:lake_water",
       "the_aether:dense_water",
       "the_aether:large_lake"
     ],
     [
-      "the_aether:quicksoil"
+      "the_aether:quicksoil",
+      "the_aether:holystone_boulder"
     ],
     [],
     [],
-    [],
     [
-      "the_aether:holystone_boulder",
+      "the_aether:shield_stone"
+    ],
+    [
       "the_aether:ore_ambrosium",
       "the_aether:ore_gravitite",
       "the_aether:ore_zanite"
     ],
     [],
     [
+      "the_aether:shield_stumps",
+      "the_aether:shield_hollow_stumps",
       "the_aether:aether_flowers",
+      "the_aether:shield_foliage",
       "the_aether:aether_grass",
       "the_aether:aether_tall_grass",
       "the_aether:water_spring",
-      "the_aether:patch_blueberry",
       "the_aether:shield_trees",
+      "the_aether:dense_shield_trees",
+      "the_aether:shield_rocks",
+      "the_aether:shield_fallen_leaves",
       "the_aether:flutegrass"
     ],
-    [
-      "the_aether:crystal_tree_island_decorated"
-    ]
+    []
   ],
   "starts": [
     "the_aether:well",

@@ -22,6 +22,7 @@
     "item.ItemMixin",
     "item.ItemStackMixin",
     "item.MapStateMixin",
+    "item.ShearsMixin",
     "item.SwordItemAccessor",
     "item.ToolMaterialsAccessor",
     "server.EntityTrackerEntryMixin",
@@ -39,14 +40,14 @@
     "client.ItemStackMixin",
     "client.MinecraftClientMixin",
     "client.render.BackgroundRendererMixin",
-    "client.render.InGameHudMixin",
-    "client.render.InGameOverlayRendererMixin",
-    "client.render.MapRendererMixin",
-    "client.render.WorldRendererMixin",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
     "client.render.FluidRendererMixin",
-    "client.render.LivingEntityRendererMixin"
+    "client.render.InGameHudMixin",
+    "client.render.InGameOverlayRendererMixin",
+    "client.render.LivingEntityRendererMixin",
+    "client.render.MapRendererMixin",
+    "client.render.WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
