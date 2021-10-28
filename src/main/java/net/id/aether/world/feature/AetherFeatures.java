@@ -8,6 +8,7 @@ import net.id.aether.world.feature.generator.WellGenerator;
 import net.id.aether.world.feature.structure.OrangeRuinFeature;
 import net.id.aether.world.feature.structure.SkyrootTowerFeature;
 import net.id.aether.world.feature.structure.WellFeature;
+import net.id.aether.world.feature.structure.sliderdungeon.SliderDungeonFeature;
 import net.id.aether.world.gen.decorator.CrystalTreeIslandDecorator;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.registry.Registry;
@@ -37,6 +38,8 @@ public class AetherFeatures {
         register("well", new WellFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
         register("skyroot_tower", new SkyrootTowerFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
         register("orange_ruin", new OrangeRuinFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
+    
+        SliderDungeonFeature.register();
     }
 
     private static <T extends FeatureConfig> void register(String id, StructureFeature<T> structure, GenerationStep.Feature genStep) {
