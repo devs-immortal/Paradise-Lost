@@ -15,8 +15,10 @@ public class AetherBlockTags {
     public static final Tag<Block> NON_FLOATERS = TagFactory.BLOCK.create(locate("non_floaters"));
 
     //Plants
-    public static final Tag<Block> LICHEN_SPREADABLES = TagFactory.BLOCK.create(locate("world/lichen_spreadable"));
-    public static final Tag<Block> FUNGI_CLINGABLES = TagFactory.BLOCK.create(locate("world/fungi_clingable"));
+    public static final Tag<Block> LICHEN_SPREADABLES = TagFactory.BLOCK.create(locate("plants/lichen_spreadable"));
+    public static final Tag<Block> FUNGI_CLINGABLES = TagFactory.BLOCK.create(locate("plants/fungi_clingable"));
+    public static final Tag<Block> GENERIC_VALID_GROUND = TagFactory.BLOCK.create(locate("plants/generic_valid_ground"));
+    public static final Tag<Block> FLUTEGRASS_VALID_GROUND = TagFactory.BLOCK.create(locate("plants/flutegrass_valid_ground"));
 
     //Swets
     public static final Tag<Block> SWET_TRANSFORMERS_BLUE = TagFactory.BLOCK.create(locate("swet_transformers/blue"));
@@ -25,9 +27,9 @@ public class AetherBlockTags {
     public static final Tag<Block> SWET_TRANSFORMERS_VERMILION = TagFactory.BLOCK.create(locate("swet_transformers/vermilion"));
 
     //Worldgen
-    public static final Tag<Block> BASE_AETHER_STONE = TagFactory.BLOCK.create(locate("base_aether_stone"));
-    public static final Tag<Block> FLUID_IRREPLACEABLES = TagFactory.BLOCK.create(locate("fluid_irreplaceable"));
-    public static final Tag<Block> BASE_REPLACEABLES = TagFactory.BLOCK.create(locate("base_replaceables"));
+    public static final Tag<Block> BASE_AETHER_STONE = TagFactory.BLOCK.create(locate("worldgen/base_aether_stone"));
+    public static final Tag<Block> FLUID_REPLACEABLES = TagFactory.BLOCK.create(locate("worldgen/fluid_replaceable"));
+    public static final Tag<Block> BASE_REPLACEABLES = TagFactory.BLOCK.create(locate("worldgen/base_replaceables"));
 
     //JEB, WHY ARE SHEARS HARDCODED
     public static final Tag<Block> AETHER_SHEARABLE = TagFactory.BLOCK.create(locate("mineable_by_shears"));

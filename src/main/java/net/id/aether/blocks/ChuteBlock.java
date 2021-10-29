@@ -2,10 +2,11 @@ package net.id.aether.blocks;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PillarBlock;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -16,17 +17,36 @@ import net.minecraft.world.BlockView;
 import java.util.List;
 import java.util.Map;
 
-public class ChuteBlock extends PillarBlock {
+import static net.minecraft.state.property.Properties.WATERLOGGED;
+
+public class ChuteBlock extends PillarBlock implements Waterloggable {
 
     protected static final Map<Direction.Axis, VoxelShape> SHAPES;
 
     public ChuteBlock(Settings settings) {
         super(settings);
+        setDefaultState(getDefaultState().with(WATERLOGGED, false));
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return super.getPlacementState(ctx).with(WATERLOGGED, ctx.getWorld().isWater(ctx.getBlockPos()));
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPES.get(state.get(AXIS));
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
+        builder.add(WATERLOGGED);
     }
 
     static {

@@ -2,12 +2,15 @@ package net.id.aether.blocks.natural.plant;
 
 import com.google.common.collect.ImmutableSet;
 import net.id.aether.blocks.AetherBlocks;
+import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FernBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 
 import java.util.Random;
@@ -15,14 +18,14 @@ import java.util.Set;
 
 public class AetherBrushBlock extends FernBlock {
 
-    private final Set<Block> validFloors;
+    private final Tag<Block> validFloors;
     private final boolean override;
 
     public AetherBrushBlock(Settings settings) {
-        this(settings, ImmutableSet.of(), false);
+        this(settings, AetherBlockTags.GENERIC_VALID_GROUND, false);
     }
 
-    public AetherBrushBlock(Settings settings, Set<Block> validFloors, boolean override) {
+    public AetherBrushBlock(Settings settings, Tag<Block> validFloors, boolean override) {
         super(settings);
         this.validFloors = validFloors;
         this.override = override;
@@ -48,7 +51,7 @@ public class AetherBrushBlock extends FernBlock {
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         if (override)
             return validFloors.contains(floor.getBlock());
-        return super.canPlantOnTop(floor, world, pos) || validFloors.contains(floor.getBlock());
+        return (super.canPlantOnTop(floor, world, pos) || validFloors.contains(floor.getBlock())) && floor.isSideSolidFullSquare(world, pos, Direction.UP);
     }
 
     @Override

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:logs",
+    "#the_aether:aether_natural_stone",
+    "#the_aether:aether_dirt_blocks"
+  ]
+}

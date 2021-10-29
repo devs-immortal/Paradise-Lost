@@ -6,11 +6,10 @@ import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.world.feature.config.GroundcoverFeatureConfig;
-import net.id.aether.world.feature.config.PillarFeatureConfig;
+import net.id.aether.world.feature.config.LongFeatureConfig;
 import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
-import net.id.incubus_core.worldgen.BiFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
@@ -31,6 +30,7 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.foliage.RandomSpreadFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
+import net.minecraft.world.gen.placer.DoublePlantPlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
@@ -54,7 +54,8 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
     public static ConfiguredFeature<?, ?> HOLYSTONE_BOULDER, MOSSY_HOLYSTONE_BOULDER, GOLDEN_MOSSY_HOLYSTONE_BOULDER;
     public static ConfiguredFeature<?, ?> SHIELD_FOLIAGE, SHIELD_ROCKS, AETHER_BUSH;
     public static ConfiguredFeature<?, ?> FALLEN_LEAVES, FALLEN_RAINBOW_LEAVES, ALT_FALLEN_LEAVES, SHIELD_FALLEN_LEAVES;
-    public static ConfiguredFeature<?, ?> SHIELD_PONDS, SHIELD_PODZOL, SHIELD_STONE, SHIELD_STUMPS, SHIELD_HOLLOW_STUMPS;
+    public static ConfiguredFeature<?, ?> SHIELD_PONDS, SHIELD_PODZOL, SHIELD_STONE, SHIELD_STUMPS, SHIELD_HOLLOW_STUMPS, SHIELD_FLAX, SHIELD_NETTLES;
+    public static ConfiguredFeature<?, ?> MOTTLED_FALLEN_LOG, MOTTLED_HOLLOW_FALLEN_LOG;
 
     public static void init() {
 
@@ -90,17 +91,26 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
         ALT_FALLEN_LEAVES = register("alt_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(Decorators.SPREAD_32_ABOVE).decorate(Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
         FALLEN_RAINBOW_LEAVES = register("rainbow_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.RAINBOW_LEAVES_CONFIG).decorate(Decorators.SPREAD_32_ABOVE).decorate(Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
 
-        SHIELD_FOLIAGE = register("shield_foliage", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(AETHER_GRASS.getDefaultState(), 20).add(AETHER_FERN.getDefaultState(), 15).add(AetherBlocks.AETHER_BUSH.getDefaultState(), 13).build()), new SimpleBlockPlacer()).build()).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(5))).repeatRandomly(2));
+        SHIELD_FOLIAGE = register("shield_foliage", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(AETHER_GRASS.getDefaultState(), 20).add(AETHER_FERN.getDefaultState(), 15).add(AetherBlocks.AETHER_BUSH.getDefaultState(), 13).add(AETHER_GRASS_FLOWERING.getDefaultState(), 5).build()), new SimpleBlockPlacer()).build()).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(5))).repeatRandomly(2));
         SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2)).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(4))).spreadHorizontally().repeatRandomly(3)));
         SHIELD_ROCKS = register("shield_rocks", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM), 10).add(COBBLED_HOLYSTONE.getDefaultState(), 4).build()), new SimpleBlockPlacer()).whitelist(Set.of(HOLYSTONE, COBBLED_HOLYSTONE, MOSSY_HOLYSTONE)).spreadX(9).spreadZ(9).tries(96).cannotProject().build()).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(3)).repeatRandomly(3).spreadHorizontally()));
 
-        SHIELD_STUMPS = register("shield_stumps", Configs.PILLAR_FEATURE.configure(new PillarFeatureConfig(UniformIntProvider.create(1, 2), new SimpleBlockStateProvider(MOTTLED_SKYROOT_LOG.getDefaultState()), new SimpleBlockStateProvider(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 0.1F, 0.225F, List.of(AETHER_GRASS.getDefaultState(), HOLYSTONE.getDefaultState()))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2)).repeatRandomly(3).spreadHorizontally()));
-        SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", Configs.PILLAR_FEATURE.configure(new PillarFeatureConfig(ConstantIntProvider.create(1), new SimpleBlockStateProvider(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), new SimpleBlockStateProvider(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 0.015F, 0.3F, List.of(AETHER_GRASS.getDefaultState(), HOLYSTONE.getDefaultState()))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2)).repeatRandomly(1)));
+        final var GENERIC_FLOOR_WHITELIST = List.of(AETHER_GRASS_BLOCK.getDefaultState(), HOLYSTONE.getDefaultState(), COBBLED_HOLYSTONE.getDefaultState());
+
+        SHIELD_FLAX = register("shield_flax", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(WILD_FLAX.getDefaultState()), new DoublePlantPlacer()).spreadX(12).spreadZ(12).spreadY(5).tries(96).whitelist(Set.of(HOLYSTONE, COBBLED_HOLYSTONE, MOSSY_HOLYSTONE)).build()).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5)).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2)).repeatRandomly(4).spreadHorizontally())));
+        SHIELD_NETTLES = register("shield_nettles", Configs.HONEY_NETTLE_FEATURE.configure(new DefaultFeatureConfig()).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(20)).repeatRandomly(12).spreadHorizontally()));
+
+        MOTTLED_FALLEN_LOG = register("mottled_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), new SimpleBlockStateProvider(MOTTLED_SKYROOT_LOG.getDefaultState()), new SimpleBlockStateProvider(AETHER_GRASS.getDefaultState()), new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 0.3F, 0.15F, GENERIC_FLOOR_WHITELIST)).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(3))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))));
+        MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), new SimpleBlockStateProvider(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), new SimpleBlockStateProvider(AETHER_GRASS_FLOWERING.getDefaultState()), new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 0.4F, 0.25F, GENERIC_FLOOR_WHITELIST)).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(3))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))));
+
+        SHIELD_STUMPS = register("shield_stumps", Configs.PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(1, 2), new SimpleBlockStateProvider(MOTTLED_SKYROOT_LOG.getDefaultState()), new SimpleBlockStateProvider(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 0.1F, 0.225F, GENERIC_FLOOR_WHITELIST)).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1)).repeatRandomly(1).spreadHorizontally()));
+        SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", Configs.PILLAR_FEATURE.configure(new LongFeatureConfig(ConstantIntProvider.create(1), new SimpleBlockStateProvider(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), new SimpleBlockStateProvider(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 0.015F, 0.3F, GENERIC_FLOOR_WHITELIST)).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))));
 
         SHIELD_PONDS = register("shield_pond", Configs.AETHER_DELTA_FEATURE.configure(new DeltaFeatureConfig(Blocks.WATER.getDefaultState(), COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM).with(Properties.WATERLOGGED, true), UniformIntProvider.create(2, 7), UniformIntProvider.create(1, 2))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(30))));
 
         SHIELD_STONE = register("shield_stone", Configs.GROUNDCOVER_FEATURE.configure(new GroundcoverFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(HOLYSTONE.getDefaultState(), 7).add(COBBLED_HOLYSTONE.getDefaultState(), 5).add(MOSSY_HOLYSTONE.getDefaultState(), 2).build()), UniformIntProvider.create(1, 4), UniformIntProvider.create(0, 0))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2)))).repeatRandomly(2).spreadHorizontally();
         SHIELD_PODZOL = register("shield_podzol", Configs.GROUNDCOVER_FEATURE.configure(new GroundcoverFeatureConfig(new SimpleBlockStateProvider(AETHER_PODZOL.getDefaultState()), UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 0))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2)))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(15))).repeatRandomly(2).spreadHorizontally();
+
     }
 
     private static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String id, ConfiguredFeature<FC, ?> configuredFeature) {
@@ -121,15 +131,13 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
         //Skyroots
         public static final TreeFeatureConfig SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(SKYROOT_LOG.getDefaultState()), new StraightTrunkPlacer(4, 2, 0), new SimpleBlockStateProvider(SKYROOT_LEAVES.getDefaultState()), new SimpleBlockStateProvider(SKYROOT_SAPLING.getDefaultState()), new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
         public static final TreeFeatureConfig FANCY_SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(SKYROOT_LOG.getDefaultState()), new LargeOakTrunkPlacer(4, 11, 0), new SimpleBlockStateProvider(SKYROOT_LEAVES.getDefaultState()), new SimpleBlockStateProvider(SKYROOT_SAPLING.getDefaultState()), new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().build();
-        public static final TreeFeatureConfig MOTTLED_SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(MOTTLED_SKYROOT_LOG.getDefaultState()), new OvergrownTrunkPlacer(5, 10, 0, new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 1 / 14F), new SimpleBlockStateProvider(SKYROOT_LEAVES.getDefaultState()), new SimpleBlockStateProvider(SKYROOT_SAPLING.getDefaultState()), new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
+        public static final TreeFeatureConfig MOTTLED_SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(MOTTLED_SKYROOT_LOG.getDefaultState()), new OvergrownTrunkPlacer(5, 10, 0, new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 1 / 14F), new SimpleBlockStateProvider(SKYROOT_LEAVES.getDefaultState()), new SimpleBlockStateProvider(SKYROOT_SAPLING.getDefaultState()), new BlobFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
         public static final TreeFeatureConfig DWARF_MOTTLED_SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(MOTTLED_SKYROOT_LOG.getDefaultState()), new BendingTrunkPlacer(5, 3, 2, 4, UniformIntProvider.create(1, 3)), new SimpleBlockStateProvider(SKYROOT_LEAVES.getDefaultState()), new SimpleBlockStateProvider(SKYROOT_SAPLING.getDefaultState()), new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 68), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
 
         //Fruit trees
         public static final TreeFeatureConfig CRYSTAL_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(CRYSTAL_LOG.getDefaultState()), new StraightTrunkPlacer(5, 2, 2), new SimpleBlockStateProvider(CRYSTAL_LEAVES.getDefaultState()), new SimpleBlockStateProvider(CRYSTAL_SAPLING.getDefaultState()), new SpruceFoliagePlacer(UniformIntProvider.create(1, 2), UniformIntProvider.create(0, 2), UniformIntProvider.create(1, 1)), new TwoLayersFeatureSize(2, 0, 2))).ignoreVines().build();
         public static final TreeFeatureConfig ORANGE_TREE_SAPLING_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ORANGE_LOG.getDefaultState()), new BendingTrunkPlacer(3, 2, 1, 3, UniformIntProvider.create(1, 2)), new SimpleBlockStateProvider(ORANGE_LEAVES.getDefaultState()), new SimpleBlockStateProvider(ORANGE_SAPLING.getDefaultState()), new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 63), new TwoLayersFeatureSize(1, 0, 1))).build();
         public static final TreeFeatureConfig ORANGE_TREE_WILD_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ORANGE_LOG.getDefaultState()), new BendingTrunkPlacer(3, 2, 1, 3, UniformIntProvider.create(1, 2)), new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ORANGE_LEAVES_BASIC, 2).add(ORANGE_LEAVES_FLOWERING, 2).add(ORANGE_LEAVES_FRUITING, 1)), new SimpleBlockStateProvider(ORANGE_SAPLING.getDefaultState()), new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 63), new TwoLayersFeatureSize(1, 0, 1))).build();
-
-
 
         //Wisterias
         public static final TreeFeatureConfig ROSE_WISTERIA_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(WISTERIA_LOG.getDefaultState()), new WisteriaTrunkPlacer(6, 3, 2), new SimpleBlockStateProvider(ROSE_WISTERIA_LEAVES.getDefaultState()), new SimpleBlockStateProvider(ROSE_WISTERIA_SAPLING.getDefaultState()), new WisteriaFoliagePlacer(UniformIntProvider.create(1, 2), UniformIntProvider.create(0, 1)), new TwoLayersFeatureSize(3, 0, 3))).ignoreVines().build();
@@ -147,7 +155,9 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
         //Misc
         public static final Feature<DeltaFeatureConfig> AETHER_DELTA_FEATURE = register("aether_delta_feature", new AetherDeltaFeature(DeltaFeatureConfig.CODEC));
         public static final Feature<GroundcoverFeatureConfig> GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeature.CODEC));
-        public static final Feature<PillarFeatureConfig> PILLAR_FEATURE = register("pillar_feature", new PillarFeature(PillarFeature.CODEC));
+        public static final Feature<LongFeatureConfig> PILLAR_FEATURE = register("pillar_feature", new PillarFeature(LongFeatureConfig.CODEC));
+        public static final Feature<LongFeatureConfig> FALLEN_PILLAR_FEATURE = register("fallen_pillar_feature", new FallenPillarFeature(LongFeatureConfig.CODEC));
+        public static final Feature<DefaultFeatureConfig> HONEY_NETTLE_FEATURE = register("honey_nettle_feature", new HoneyNettleFeature(DefaultFeatureConfig.CODEC));
 
         public static final RandomFeatureConfig RAINBOW_FOREST_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(Feature.TREE.configure(LAVENDER_WISTERIA_CONFIG).withChance(0.33F), Feature.TREE.configure(ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FANCY_LAVENDER_WISTERIA_CONFIG).withChance(0.025F), Feature.TREE.configure(FANCY_ROSE_WISTERIA_CONFIG).withChance(0.075F), Feature.TREE.configure(FROST_WISTERIA_CONFIG).withChance(0.0001F), Feature.TREE.configure(SKYROOT_CONFIG).withChance(0.2F), Feature.TREE.configure(ORANGE_TREE_WILD_CONFIG).withChance(0.0125F)),

@@ -442,6 +442,8 @@ public class AetherItems {
     public static final BlockItem DRIGEAN = add("drigean", AetherBlocks.DRIGEAN, decoration, compostable65);
     public static final BlockItem LUMINAR = add("luminar", AetherBlocks.LUMINAR, decoration, compostable65);
 
+    public static final BlockItem WILD_FLAX = add("wild_flax", AetherBlocks.WILD_FLAX, decoration, compostable100);
+
     public static final BlockItem ROSE_WISTERIA_HANGER = add("rose_wisteria_hanger", AetherBlocks.ROSE_WISTERIA_HANGER, decoration, compostable30);
     public static final BlockItem FROST_WISTERIA_HANGER = add("frost_wisteria_hanger", AetherBlocks.FROST_WISTERIA_HANGER, decoration, compostable30);
     public static final BlockItem LAVENDER_WISTERIA_HANGER = add("lavender_wisteria_hanger", AetherBlocks.LAVENDER_WISTERIA_HANGER, decoration, compostable30);

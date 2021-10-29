@@ -11,7 +11,6 @@ import net.minecraft.world.gen.feature.DeltaFeature;
 import net.minecraft.world.gen.feature.DeltaFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
-import java.util.Iterator;
 import java.util.Random;
 
 public class AetherDeltaFeature extends DeltaFeature {
@@ -59,9 +58,13 @@ public class AetherDeltaFeature extends DeltaFeature {
 
     private static boolean canPlace(WorldAccess world, BlockPos pos, DeltaFeatureConfig config) {
         BlockState blockState = world.getBlockState(pos);
+
+        if(!AetherBlockTags.FLUID_REPLACEABLES.contains(blockState.getBlock()))
+            return false;
+
         if (blockState.isOf(config.getContents().getBlock())) {
             return false;
-        } else if (blockState.getHardness(world, pos) <= -1 || AetherBlockTags.FLUID_IRREPLACEABLES.contains(blockState.getBlock())) {
+        } else if (blockState.getHardness(world, pos) <= -1) {
             return false;
         } else {
             Direction[] var4 = Direction.values();
