@@ -15,8 +15,8 @@ If one or more of these items fit your match. Please see our supported versions.
 | Version 	| Supported? 	| End of Support Date 	|
 |---------	|------------	|---------------------	|
 | DEV\*     |  ✅       	| Never               	|
-| ALPHA   	|  ✅        	| Not Decided Yet     	|
 | BETA   	|  ✅        	| Not Decided Yet     	|
+| ALPHA   	|  ✅        	| Not Decided Yet     	|
 
 
 ## Reporting a Vulnerability
