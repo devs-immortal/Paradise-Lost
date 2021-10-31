@@ -44,8 +44,6 @@ import java.util.Set;
 
 import static net.id.aether.blocks.AetherBlocks.*;
 
-//Test
-
 @SuppressWarnings("unchecked")
 public class AetherConfiguredFeatures extends ConfiguredFeatures {
 
