@@ -59,10 +59,6 @@ public abstract class LivingEntityMixin extends Entity implements AetherEntityEx
 
         boolean isFalling = this.getVelocity().y <= 0.0D;
         if (isFalling && !this.hasStatusEffect(StatusEffects.SLOW_FALLING) && !isTouchingWater() && !isSneaking()) {
-            if (entity.hasPassengers() && entity.getFirstPassenger().getType().equals(AetherEntityTypes.AERBUNNY)) {
-                gravity -= 0.07;
-                this.fallDistance = 0;
-            }
             if (componentOptional.isPresent()) {
                 // Get parachutes from trinket slots
                 for (Item item : AetherItemTags.PARACHUTES.values()) {
@@ -72,6 +68,9 @@ public abstract class LivingEntityMixin extends Entity implements AetherEntityEx
                         break;
                     }
                 }
+            } else if (entity.hasPassengers() && entity.getFirstPassenger().getType().equals(AetherEntityTypes.AERBUNNY)) {
+                gravity -= 0.07;
+                this.fallDistance = 0;
             }
         }
 
