@@ -536,6 +536,9 @@ public class AetherItems {
     public static final BlockItem CRYSTAL_PRESSURE_PLATE = add("crystal_pressure_plate", AetherBlocks.CRYSTAL_PRESSURE_PLATE, decoration);
     public static final BlockItem WISTERIA_PRESSURE_PLATE = add("wisteria_pressure_plate", AetherBlocks.WISTERIA_PRESSURE_PLATE, decoration);
 
+    //dungeon
+    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", AetherBlocks.DUNGEON_SWITCH, decoration);
+
     // these should be moved... somewhere?
     public static final BoatItem SKYROOT_BOAT = add("skyroot_boat", new BoatItem(AetherBoatTypes.SKYROOT, boat));
     public static final BoatItem GOLDEN_OAK_BOAT = add("golden_oak_boat", new BoatItem(AetherBoatTypes.GOLDEN_OAK, boat));

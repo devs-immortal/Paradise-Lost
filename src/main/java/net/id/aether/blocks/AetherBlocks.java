@@ -2,6 +2,7 @@ package net.id.aether.blocks;
 
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.id.aether.blocks.decorative.*;
+import net.id.aether.blocks.dungeon.DungeonSwitchBlock;
 import net.id.aether.blocks.mechanical.FoodBowlBlock;
 import net.id.aether.blocks.mechanical.IncubatorBlock;
 import net.id.aether.blocks.natural.AetherGrassBlock;
@@ -41,10 +42,15 @@ import static net.minecraft.block.Blocks.*;
 @SuppressWarnings("unused")
 public class AetherBlocks {
 
-    protected static Settings unbreakable(AbstractBlock.Settings settings) { return settings.strength(-1f, 3600000f); }
+    protected static Settings unbreakable(AbstractBlock.Settings settings) {
+        return settings.strength(-1f, 3600000f);
+    }
 
     // Grass Blocks
-    private static Settings grassBlock() { return copy(GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f); }
+    private static Settings grassBlock() {
+        return copy(GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f);
+    }
+
     public static final AetherGrassBlock AETHER_GRASS_BLOCK = add("aether_grass", new AetherGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable());
     public static final AetherGrassBlock AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", new AetherGrassBlock(grassBlock().mapColor(MapColor.GOLD)));
     public static final AetherSnowyBlock AETHER_PODZOL = add("aether_podzol", new AetherSnowyBlock(grassBlock()), tillable(), flattenable());
@@ -53,48 +59,77 @@ public class AetherBlocks {
     public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new AetherFarmlandBlock(copy(FARMLAND)));
     public static final AetherDirtPathBlock AETHER_DIRT_PATH = add("aether_grass_path", new AetherDirtPathBlock(copy(DIRT_PATH)));
     public static final Block QUICKSOIL = add("quicksoil", new Block(of(Material.AGGREGATE).strength(0.5f, -1f).slipperiness(1F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)));
+
     // Glass Blocks
-    private static Settings quicksoilGlass() { return copy(GLASS).strength(0.2f, -1f).slipperiness(1f).velocityMultiplier(1.102f).luminance(state -> 14); }
+    private static Settings quicksoilGlass() {
+        return copy(GLASS).strength(0.2f, -1f).slipperiness(1f).velocityMultiplier(1.102f).luminance(state -> 14);
+    }
+
     public static final GlassBlock QUICKSOIL_GLASS = add("quicksoil_glass", new GlassBlock(quicksoilGlass()), translucentRenderLayer);
     public static final PaneBlock QUICKSOIL_GLASS_PANE = add("quicksoil_glass_pane", new AetherPaneBlock(quicksoilGlass()), translucentRenderLayer);
+
     // Aerclouds
-    private static Settings aercloud() { return of(Material.ICE).strength(0.2F).sounds(BlockSoundGroup.WOOL).nonOpaque().solidBlock(never).suffocates(never).blockVision(never); }
+    private static Settings aercloud() {
+        return of(Material.ICE).strength(0.2F).sounds(BlockSoundGroup.WOOL).nonOpaque().solidBlock(never).suffocates(never).blockVision(never);
+    }
+
     public static final AercloudBlock COLD_AERCLOUD = add("cold_aercloud", new AercloudBlock(aercloud().mapColor(MapColor.WHITE)), translucentRenderLayer);
     public static final BlueAercloudBlock BLUE_AERCLOUD = add("blue_aercloud", new BlueAercloudBlock(aercloud().mapColor(MapColor.LIGHT_BLUE)), translucentRenderLayer);
     public static final PinkAercloudBlock PINK_AERCLOUD = add("pink_aercloud", new PinkAercloudBlock(aercloud().mapColor(MapColor.PINK)), translucentRenderLayer);
     public static final GoldenAercloudBlock GOLDEN_AERCLOUD = add("golden_aercloud", new GoldenAercloudBlock(aercloud().mapColor(MapColor.GOLD)), translucentRenderLayer);
     // Fluids
-    public static final FluidBlock DENSE_AERCLOUD = add("dense_aercloud", new FluidBlock(AetherFluids.DENSE_AERCLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()) {});
+    public static final FluidBlock DENSE_AERCLOUD = add("dense_aercloud", new FluidBlock(AetherFluids.DENSE_AERCLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()) {
+    });
     // Organic Extra
     public static final Block ICESTONE = add("icestone", new Block(of(Material.DENSE_ICE).requiresTool().hardness(0.5f).sounds(BlockSoundGroup.GLASS)));
     public static final Block AEROGEL = add("aerogel", new Block(of(Material.SOIL).strength(1f, 1200f).sounds(BlockSoundGroup.GLASS).solidBlock(never).nonOpaque()), translucentRenderLayer);
+
     // Smooth Holystone
-    private static Settings holystone() { return of(Material.STONE, MapColor.WHITE_GRAY).requiresTool().strength(0.5f, 1f).sounds(BlockSoundGroup.STONE); }
+    private static Settings holystone() {
+        return of(Material.STONE, MapColor.WHITE_GRAY).requiresTool().strength(0.5f, 1f).sounds(BlockSoundGroup.STONE);
+    }
+
     public static final Block HOLYSTONE = add("holystone", new Block(holystone()));
     public static final SlabBlock HOLYSTONE_SLAB = add("holystone_slab", new SlabBlock(holystone()));
     public static final AetherStairsBlock HOLYSTONE_STAIRS = add("holystone_stairs", new AetherStairsBlock(HOLYSTONE.getDefaultState(), holystone()));
     public static final WallBlock HOLYSTONE_WALL = add("holystone_wall", new WallBlock(holystone()));
+
     // Cobbled Holystone
-    private static Settings cobbledHolystone() { return holystone().strength(0.4f, 8f); }
+    private static Settings cobbledHolystone() {
+        return holystone().strength(0.4f, 8f);
+    }
+
     public static final Block COBBLED_HOLYSTONE = add("cobbled_holystone", new Block(cobbledHolystone()));
     public static final SlabBlock COBBLED_HOLYSTONE_SLAB = add("cobbled_holystone_slab", new SlabBlock(cobbledHolystone()));
     public static final AetherStairsBlock COBBLED_HOLYSTONE_STAIRS = add("cobbled_holystone_stairs", new AetherStairsBlock(COBBLED_HOLYSTONE.getDefaultState(), cobbledHolystone()));
     public static final WallBlock COBBLED_HOLYSTONE_WALL = add("cobbled_holystone_wall", new WallBlock(cobbledHolystone()));
+
     // Mossy Holystone
-    private static Settings mossyCobbledHolystone() { return cobbledHolystone().mapColor(MapColor.PALE_GREEN); }
+    private static Settings mossyCobbledHolystone() {
+        return cobbledHolystone().mapColor(MapColor.PALE_GREEN);
+    }
+
     public static final Block MOSSY_HOLYSTONE = add("mossy_holystone", new Block(mossyCobbledHolystone()));
     public static final Block GOLDEN_MOSSY_HOLYSTONE = add("golden_mossy_holystone", new Block(mossyCobbledHolystone().strength(2f, 6f).mapColor(MapColor.GOLD)));
     public static final SlabBlock MOSSY_HOLYSTONE_SLAB = add("mossy_holystone_slab", new SlabBlock(mossyCobbledHolystone()));
     public static final AetherStairsBlock MOSSY_HOLYSTONE_STAIRS = add("mossy_holystone_stairs", new AetherStairsBlock(MOSSY_HOLYSTONE.getDefaultState(), mossyCobbledHolystone()));
     public static final WallBlock MOSSY_HOLYSTONE_WALL = add("mossy_holystone_wall", new WallBlock(mossyCobbledHolystone()));
+
     // Holystone Bricks
-    private static Settings holystoneBrick() { return holystone().strength(1.5f, 6f); }
+    private static Settings holystoneBrick() {
+        return holystone().strength(1.5f, 6f);
+    }
+
     public static final Block HOLYSTONE_BRICK = add("holystone_brick", new Block(holystoneBrick()));
     public static final SlabBlock HOLYSTONE_BRICK_SLAB = add("holystone_brick_slab", new SlabBlock(holystoneBrick()));
     public static final AetherStairsBlock HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", new AetherStairsBlock(HOLYSTONE_BRICK.getDefaultState(), holystoneBrick()));
     public static final WallBlock HOLYSTONE_BRICK_WALL = add("holystone_brick_wall", new WallBlock(holystoneBrick()));
+
     // Dungeon Blocks
-    private static Settings carvedStone() { return of(Material.STONE).hardness(0.5f).resistance(1f).sounds(BlockSoundGroup.STONE); }
+    private static Settings carvedStone() {
+        return of(Material.STONE).hardness(0.5f).resistance(1f).sounds(BlockSoundGroup.STONE);
+    }
+
     public static final Block CARVED_STONE = add("carved_stone", new Block(carvedStone()));
     public static final SlabBlock CARVED_STONE_SLAB = add("carved_stone_slab", new SlabBlock(carvedStone()));
     public static final AetherStairsBlock CARVED_STONE_STAIRS = add("carved_stone_stairs", new AetherStairsBlock(CARVED_STONE.getDefaultState(), carvedStone()));
@@ -112,7 +147,9 @@ public class AetherBlocks {
     public static final Block CARVED_STONE_EYE = add("carved_stone_eye", new Block(carvedStone()));
     public static final Block CARVED_STONE_EYE_LIT = add("carved_stone_eye_lit", new Block(carvedStone().luminance(value -> 8)));
 
-    protected static Settings flowerPot() { return copy(POTTED_OAK_SAPLING); }
+    protected static Settings flowerPot() {
+        return copy(POTTED_OAK_SAPLING);
+    }
 
     // Skyroot Wood
     private static final WoodTypeFactory skyroot = new WoodTypeFactory(MapColor.GREEN, MapColor.TERRACOTTA_GREEN);
@@ -243,8 +280,12 @@ public class AetherBlocks {
     public static final SaplingBlock BOREAL_WISTERIA_SAPLING = add("boreal_wisteria_sapling", new AetherSaplingBlock(new BorealWisteriaSaplingGenerator(), borealWisteria.sapling().luminance(state -> 5)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_BOREAL_WISTERIA_SAPLING = add("potted_boreal_wisteria_sapling", new FlowerPotBlock(BOREAL_WISTERIA_SAPLING, flowerPot().luminance(state -> 5)), cutoutRenderLayer);
     public static final AuralHangerBlock BOREAL_WISTERIA_HANGER = add("boreal_wisteria_hanger", new AuralHangerBlock(borealWisteria.auralHanger(), borealWisteriaColors), flammableLeaves, cutoutRenderLayer);
+
     // Grasses
-    private static Settings shrub() { return copy(GRASS).mapColor(MapColor.PALE_GREEN); }
+    private static Settings shrub() {
+        return copy(GRASS).mapColor(MapColor.PALE_GREEN);
+    }
+
     public static final AetherBrushBlock AETHER_GRASS = add("aether_grass_plant", new AetherBrushBlock(shrub()), flammablePlant, cutoutRenderLayer);
     public static final AetherBrushBlock AETHER_GRASS_FLOWERING = add("aether_grass_flowering", new AetherBrushBlock(shrub().mapColor(MapColor.WHITE)), flammablePlant, cutoutRenderLayer);
     public static final AetherTallBrushBlock AETHER_TALL_GRASS = add("aether_tall_grass", new AetherTallBrushBlock(shrub()), flammablePlant, cutoutRenderLayer);
@@ -259,7 +300,10 @@ public class AetherBlocks {
     public static final MossStarBlock MOSS_STAR = add("moss_star", new MossStarBlock(copy(MOSS_BLOCK).dynamicBounds().luminance(state -> state.get(Properties.WATERLOGGED) ? 5 : 0)), cutoutRenderLayer);
     public static final MossBallBlock MOSS_BALL = add("moss_ball", new MossBallBlock(copy(MOSS_BLOCK).dynamicBounds()), flammablePlant);
 
-    private static Settings lichen() { return copy(OAK_WOOD).mapColor(MapColor.DULL_RED).sounds(BlockSoundGroup.MOSS_BLOCK); }
+    private static Settings lichen() {
+        return copy(OAK_WOOD).mapColor(MapColor.DULL_RED).sounds(BlockSoundGroup.MOSS_BLOCK);
+    }
+
     public static final LichenBlock LICHEN = add("lichen", new LichenBlock(lichen().ticksRandomly(), false));
     public static final LichenPileBlock LICHEN_PILE = add("lichen_pile", new LichenPileBlock(lichen(), false));
     public static final LichenBlock LUCATIEL_LICHEN = add("lucatiel_lichen", new LichenBlock(lichen().ticksRandomly(), true));
@@ -271,8 +315,12 @@ public class AetherBlocks {
 
     public static final BlueberryBushBlock BLUEBERRY_BUSH = add("blueberry_bush", new BlueberryBushBlock(of(Material.PLANT).strength(0.2f)
             .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision()), flammablePlant, cutoutRenderLayer);
+
     // Flowers
-    private static Settings flower() { return copy(DANDELION); }
+    private static Settings flower() {
+        return copy(DANDELION);
+    }
+
     public static final FlowerBlock ANCIENT_FLOWER = add("ancient_flower", new FlowerBlock(StatusEffects.ABSORPTION, 20, flower()), flammablePlant, cutoutRenderLayer);
     //todo public static final FlowerPotBlock POTTED_ANCIENT_FLOWER = add("potted_ancient_flower", new FlowerPotBlock(ANCIENT_FLOWER, flowerPot()), cutoutRenderLayer);
     public static final FlowerBlock ATARAXIA = add("ataraxia", new FlowerBlock(StatusEffects.INSTANT_DAMAGE, 1, flower()), flammablePlant, cutoutRenderLayer);
@@ -298,12 +346,20 @@ public class AetherBlocks {
     public static final ChainBlock ZANITE_CHAIN = add("zanite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
     public static final AmbrosiumLanternBlock AMBROSIUM_LANTERN = add("ambrosium_lantern", new AmbrosiumLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);
     public static final AetherPortalBlock BLUE_PORTAL = add("blue_portal", new AetherPortalBlock(copy(NETHER_PORTAL).nonOpaque().blockVision(never).mapColor(MapColor.BLUE)), translucentRenderLayer);
+
     // Torches
-    private static Settings ambrosiumTorch() { return copy(TORCH).ticksRandomly().luminance(state -> 15); }
+    private static Settings ambrosiumTorch() {
+        return copy(TORCH).ticksRandomly().luminance(state -> 15);
+    }
+
     public static final AmbrosiumTorchBlock AMBROSIUM_TORCH = addImmediately("ambrosium_torch", new AmbrosiumTorchBlock(ambrosiumTorch()), cutoutRenderLayer);
     public static final AmbrosiumWallTorchBlock AMBROSIUM_TORCH_WALL = addImmediately("ambrosium_wall_torch", new AmbrosiumWallTorchBlock(ambrosiumTorch().dropsLike(AMBROSIUM_TORCH)), cutoutRenderLayer);
+
     // Swet Drops
-    private static Settings swetDrop() { return of(Material.SOLID_ORGANIC, MapColor.CLEAR).breakInstantly().noCollision(); }
+    private static Settings swetDrop() {
+        return of(Material.SOLID_ORGANIC, MapColor.CLEAR).breakInstantly().noCollision();
+    }
+
     public static final SwetDropBlock SWET_DROP = add("swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.WHITE_SWET));
     public static final SwetDropBlock BLUE_SWET_DROP = add("blue_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.BLUE_SWET));
     public static final SwetDropBlock GOLDEN_SWET_DROP = add("golden_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.GOLDEN_SWET));
@@ -312,21 +368,25 @@ public class AetherBlocks {
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
 
+    //dungeon
+    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
+
+
     @SafeVarargs
     private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {
         return AetherRegistryQueues.BLOCK.add(locate(id), block, additionalActions);
     }
-    
+
     /*
        This is the same thing the add method above, but it doesn't wait to register or perform the actions.
        This is required because some of the block settings code uses ID caches, so without it some blocks
        behave like air.
      */
     @SafeVarargs
-    private static <T extends Block> T addImmediately(String name, T block, Action<? super T>... actions){
+    private static <T extends Block> T addImmediately(String name, T block, Action<? super T>... actions) {
         var id = locate(name);
         Registry.register(Registry.BLOCK, id, block);
-        for(var action : actions){
+        for (var action : actions) {
             action.accept(id, block);
         }
         return block;
@@ -339,7 +399,8 @@ public class AetherBlocks {
     /**
      * Takes tree colours, and produces various block settings for that tree to ease the creation of wooden block sets
      */
-    private static record WoodTypeFactory(MapColor woodColor, MapColor barkColor, MapColor leafColor, MapColor plankColor) {
+    private static record WoodTypeFactory(MapColor woodColor, MapColor barkColor, MapColor leafColor,
+                                          MapColor plankColor) {
         public WoodTypeFactory(MapColor woodColor, MapColor barkColor, MapColor leafColor) {
             this(woodColor, barkColor, leafColor, woodColor);
         }

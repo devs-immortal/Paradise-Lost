@@ -48,7 +48,7 @@ public class AetherPortalBlock extends CustomPortalBlock {
     }
 
     @Override
-    public Block getPortalBase(BlockView world, BlockPos pos) {
+    public Block getPortalBase(World world, BlockPos pos) {
         return Blocks.GLOWSTONE;
     }
 }
