@@ -1,6 +1,5 @@
 package net.id.aether.blocks;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
@@ -14,7 +13,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
-import java.util.List;
 import java.util.Map;
 
 import static net.minecraft.state.property.Properties.WATERLOGGED;

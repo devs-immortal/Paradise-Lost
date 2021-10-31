@@ -428,6 +428,9 @@ public class FloatingBlockEntity extends Entity {
         if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
             Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
         }
+        // spawn break particles
+        world.syncWorldEvent(null, 2001, getBlockPos(), Block.getRawIdFromState(floatTile));
+
         this.getOnEndFloating().accept(impact, false);
     }
 
