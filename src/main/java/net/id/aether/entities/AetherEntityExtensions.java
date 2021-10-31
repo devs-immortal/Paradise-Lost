@@ -4,6 +4,7 @@ public interface AetherEntityExtensions {
 
     boolean flipped = false;
     boolean aetherFallen = false;
+    boolean aerbunnyFallen = false;
     int gravFlipTime = 0;
 
     default int getFlipTime() {
@@ -19,6 +20,13 @@ public interface AetherEntityExtensions {
     }
 
     default void setAetherFallen(boolean aetherFallen) {
+    }
+
+    default boolean isAerbunnyFallen() {
+        return aerbunnyFallen;
+    }
+
+    default void setAerbunnyFallen(boolean aerbunnyFallen) {
     }
 
     void setFlipped();

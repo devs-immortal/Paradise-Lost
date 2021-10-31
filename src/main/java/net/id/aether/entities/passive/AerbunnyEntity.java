@@ -3,6 +3,7 @@ package net.id.aether.entities.passive;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.blocks.AetherBlocks;
+import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.items.AetherItems;
 import net.minecraft.block.BlockState;
@@ -119,6 +120,11 @@ public class AerbunnyEntity extends AetherAnimalEntity {
 
         if (random.nextFloat() <= 0.03F) {
             AerbunnyEntity.this.playSound(SoundEvents.ENTITY_FOX_SNIFF, 1.0F, 2.0F);
+        }
+
+        if (this.hasVehicle() && (this.getVehicle().isSneaking() || this.getVehicle().getVelocity().y < -0.3)){
+            ((AetherEntityExtensions)this.getVehicle()).setAerbunnyFallen(true);
+            this.dismountVehicle();
         }
     }
 

@@ -25,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerEntityMixin extends LivingEntity implements AetherEntityExtensions {
 
     private boolean aetherFallen = false;
+    public boolean aerbunnyFallen = false;
 
     public PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
         super(type, world);
@@ -63,6 +64,16 @@ public abstract class PlayerEntityMixin extends LivingEntity implements AetherEn
         this.aetherFallen = aetherFallen;
     }
 
+    @Override
+    public boolean isAerbunnyFallen() {
+        return aerbunnyFallen;
+    }
+
+    @Override
+    public void setAerbunnyFallen(boolean aerbunnyFallen) {
+        this.aerbunnyFallen = aerbunnyFallen;
+    }
+
     @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
     public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (isAetherFallen()) {
@@ -74,6 +85,18 @@ public abstract class PlayerEntityMixin extends LivingEntity implements AetherEn
                     increaseStat(Stats.FALL_ONE_CM, (int) Math.round((double) fallDistance * 100.0D));
                 }
                 cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, AetherDamageSources.AETHER_FALL));
+            }
+            cir.cancel();
+        }
+        if (aerbunnyFallen) {
+            aerbunnyFallen = false;
+            if (getAbilities().allowFlying) {
+                cir.setReturnValue(false);
+            } else {
+                if (fallDistance >= 2.0F) {
+                    increaseStat(Stats.FALL_ONE_CM, (int) Math.round((double) fallDistance * 100.0D));
+                }
+                cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, AetherDamageSources.AERBUNNY_FALL));
             }
             cir.cancel();
         }

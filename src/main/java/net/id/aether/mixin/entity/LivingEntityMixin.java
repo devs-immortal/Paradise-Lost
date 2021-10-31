@@ -2,6 +2,7 @@ package net.id.aether.mixin.entity;
 
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
+import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.passive.moa.MoaAttributes;
 import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.entities.passive.moa.MoaEntity;
@@ -56,16 +57,20 @@ public abstract class LivingEntityMixin extends Entity implements AetherEntityEx
         LivingEntity entity = (LivingEntity) (Object) this;
         Optional<TrinketComponent> componentOptional = TrinketsApi.getTrinketComponent(entity);
 
-        if (componentOptional.isPresent()) {
-            // Get parachutes from trinket slots
-            for (Item item : AetherItemTags.PARACHUTES.values()) {
-                if (componentOptional.get().isEquipped(item)) {
-                    boolean isFalling = this.getVelocity().y <= 0.0D;
-                    if (isFalling && !this.hasStatusEffect(StatusEffects.SLOW_FALLING) && !isTouchingWater() && !isSneaking()) {
+        boolean isFalling = this.getVelocity().y <= 0.0D;
+        if (isFalling && !this.hasStatusEffect(StatusEffects.SLOW_FALLING) && !isTouchingWater() && !isSneaking()) {
+            if (entity.hasPassengers() && entity.getFirstPassenger().getType().equals(AetherEntityTypes.AERBUNNY)) {
+                gravity -= 0.07;
+                this.fallDistance = 0;
+            }
+            if (componentOptional.isPresent()) {
+                // Get parachutes from trinket slots
+                for (Item item : AetherItemTags.PARACHUTES.values()) {
+                    if (componentOptional.get().isEquipped(item)) {
                         gravity -= 0.07;
                         this.fallDistance = 0;
+                        break;
                     }
-                    break;
                 }
             }
         }

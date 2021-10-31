@@ -450,6 +450,8 @@
   "trinkets.slot.chest.parachute": "Parachute",
   "death.attack.aether_fall": "%1$s plummeted from the heavens",
   "death.attack.aether_fall.player": "%1$s was thrown off the heavens above by %2$s",
+  "death.attack.aerbunny_fall": "%1$s got dumped",
+  "death.attack.aerbunny_fall.player": "%1$s got dumped whilst trying to escape %2$s",
   "moa.egg.adult": "pre-grown",
   "moa.race.highlands_blue": "Common Blue %1$s",
   "moa.race.goldenrod": "Goldenrod %1$s",
