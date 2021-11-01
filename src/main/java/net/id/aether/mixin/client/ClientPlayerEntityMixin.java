@@ -3,6 +3,7 @@ package net.id.aether.mixin.client;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.util.AetherSoundEvents;
+import net.kyrptonaught.customportalapi.interfaces.EntityInCustomPortal;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
