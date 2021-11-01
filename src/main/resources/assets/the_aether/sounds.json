@@ -23,5 +23,51 @@
 		"sounds": [
 			"the_aether:soaring"
 		]
+	},
+	"block.portal.ambient": {
+		"subtitle": "subtitles.the_aether.block.portal.ambient",
+		"sounds": [
+			"the_aether:block/portal/portal"
+		]
+	},
+	"block.portal.travel": {
+		"subtitle": "subtitles.the_aether.block.portal.travel",
+		"sounds": [
+			"the_aether:block/portal/travel"
+		]
+	},
+	"block.portal.trigger": {
+		"subtitle": "subtitles.the_aether.block.portal.trigger",
+		"sounds": [
+			"the_aether:block/portal/trigger"
+		]
+	},
+	"music.aether": {
+		"sounds": [
+			{
+				"name": "the_aether:music/aether/cloud_ocean",
+				"stream": true
+			},
+			{
+				"name": "the_aether:music/aether/floating",
+				"stream": true
+			},
+			{
+				"name": "the_aether:music/aether/spirit_sunset",
+				"stream": true
+			},
+			{
+				"name": "the_aether:music/aether/constellation",
+				"stream": true
+			},
+			{
+				"name": "the_aether:music/aether/overcast",
+				"stream": true
+			},
+			{
+				"name": "the_aether:music/aether/sullen_lullaby",
+				"stream": true
+			}
+		]
 	}
 }

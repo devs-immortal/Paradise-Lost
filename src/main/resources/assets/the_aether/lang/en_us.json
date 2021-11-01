@@ -488,5 +488,9 @@
   "condition.severity.acute": "Acute",
   "condition.severity.dire": "Dire",
   "condition.severity.extreme": "Extreme",
-  "condition.condition.venom": "Venom"
+  "condition.condition.venom": "Venom",
+
+  "subtitles.the_aether.block.portal.ambient": "Aether portal whooshes",
+  "subtitles.the_aether.block.portal.travel": "Aether portal noise fades",
+  "subtitles.the_aether.block.portal.trigger": "Aether portal noise intensifies"
 }
