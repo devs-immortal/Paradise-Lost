@@ -55,22 +55,21 @@ public abstract class LivingEntityMixin extends Entity implements AetherEntityEx
     @ModifyVariable(method = "travel", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/entity/LivingEntity;isTouchingWater()Z"))
     private double changeGravity(double gravity) {
         LivingEntity entity = (LivingEntity) (Object) this;
-        Optional<TrinketComponent> componentOptional = TrinketsApi.getTrinketComponent(entity);
 
         boolean isFalling = this.getVelocity().y <= 0.0D;
         if (isFalling && !this.hasStatusEffect(StatusEffects.SLOW_FALLING) && !isTouchingWater() && !isSneaking()) {
-            if (componentOptional.isPresent()) {
-                // Get parachutes from trinket slots
-                for (Item item : AetherItemTags.PARACHUTES.values()) {
-                    if (componentOptional.get().isEquipped(item)) {
-                        gravity -= 0.07;
-                        this.fallDistance = 0;
-                        break;
-                    }
-                }
-            } else if (entity.hasPassengers() && entity.getFirstPassenger().getType().equals(AetherEntityTypes.AERBUNNY)) {
+            // Get parachutes from trinket slots
+            Optional<TrinketComponent> componentOptional = TrinketsApi.getTrinketComponent(entity);
+            boolean isWearingParachute = componentOptional.isPresent()
+                    && AetherItemTags.PARACHUTES.values().stream().anyMatch(componentOptional.get()::isEquipped);
+
+            if (isWearingParachute) {
                 gravity -= 0.07;
                 this.fallDistance = 0;
+            } else if (entity.hasPassengers() && entity.getPassengerList().stream().anyMatch(passenger ->
+                    passenger.getType().equals(AetherEntityTypes.AERBUNNY))) {
+                gravity -= 0.05;
+                this.fallDistance = 0; // alternatively, remove & replace with fall damage dampener
             }
         }
 

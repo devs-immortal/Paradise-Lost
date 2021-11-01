@@ -122,7 +122,7 @@ public class AerbunnyEntity extends AetherAnimalEntity {
             AerbunnyEntity.this.playSound(SoundEvents.ENTITY_FOX_SNIFF, 1.0F, 2.0F);
         }
 
-        if (this.hasVehicle() && (this.getVehicle().isSneaking() || this.getVehicle().getVelocity().y < -0.3)){
+        if (this.hasVehicle() && (this.getVehicle().isSneaking() || this.getVehicle().getVelocity().y < -0.7)){
             ((AetherEntityExtensions)this.getVehicle()).setAerbunnyFallen(true);
             this.dismountVehicle();
         }
