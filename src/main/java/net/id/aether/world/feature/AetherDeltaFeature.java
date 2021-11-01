@@ -1,7 +1,9 @@
 package net.id.aether.world.feature;
 
 import com.mojang.serialization.Codec;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -34,21 +36,28 @@ public class AetherDeltaFeature extends DeltaFeature{
         int zSize = featureConfig.getSize().get(random);
         int size = Math.max(xSize, zSize);
         
+        Set<BlockPos> filledPositions = new HashSet<>();
+        
+        var rim = featureConfig.getRim();
+        var contents = featureConfig.getContents();
+        
         for(BlockPos currentPos : BlockPos.iterateOutwards(origin, xSize, 0, zSize)){
             if(currentPos.getManhattanDistance(origin) > size){
                 break;
             }
             
-            if(canPlace(world, currentPos, featureConfig)){
+            if(canPlace(world, currentPos, contents, filledPositions)){
                 if(bl3){
                     modified = true;
-                    setBlockState(world, currentPos, featureConfig.getRim());
+                    setBlockState(world, currentPos, rim);
+                    filledPositions.add(currentPos);
                 }
                 
                 BlockPos blockPos3 = currentPos.add(i, 0, j);
-                if(canPlace(world, blockPos3, featureConfig)){
+                if(canPlace(world, blockPos3, contents, filledPositions)){
                     modified = true;
-                    setBlockState(world, blockPos3, featureConfig.getContents());
+                    setBlockState(world, blockPos3, contents);
+                    filledPositions.add(blockPos3);
                 }
             }
         }
@@ -56,20 +65,24 @@ public class AetherDeltaFeature extends DeltaFeature{
         return modified;
     }
     
-    private static boolean canPlace(WorldAccess world, BlockPos pos, DeltaFeatureConfig config){
+    private static boolean canPlace(WorldAccess world, BlockPos pos, BlockState contents, Set<BlockPos> filledPositions){
         BlockState blockState = world.getBlockState(pos);
     
         if(!AetherBlockTags.FLUID_REPLACEABLES.contains(blockState.getBlock())){
             return false;
         }
         
-        if(blockState.isOf(config.getContents().getBlock())){
+        if(blockState.isOf(contents.getBlock())){
             return false;
         }else if(blockState.getHardness(world, pos) <= -1){
             return false;
         }else{
             for(Direction direction : Direction.values()){
-                boolean isAir = !world.getBlockState(pos.offset(direction)).getMaterial().isSolid();
+                var currentPos = pos.offset(direction);
+                if(filledPositions.contains(currentPos)){
+                    continue;
+                }
+                boolean isAir = !world.getBlockState(currentPos).getMaterial().isSolid();
                 if(isAir && direction != Direction.UP || !isAir && direction == Direction.UP){
                     return false;
                 }
