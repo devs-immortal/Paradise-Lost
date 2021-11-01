@@ -20,7 +20,7 @@ public class AetherPortalBlock extends CustomPortalBlock {
 
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (random.nextInt(100) == 0) {
+        if (random.nextInt(200) == 0) {
             world.getProfiler().push("portal");
             world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, AetherSoundEvents.BLOCK_AETHER_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
             world.getProfiler().pop();
