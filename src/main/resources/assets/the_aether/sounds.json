@@ -69,5 +69,10 @@
 				"stream": true
 			}
 		]
+	},
+	"misc.silence": {
+		"sounds": [
+			"the_aether:misc/silence"
+		]
 	}
 }

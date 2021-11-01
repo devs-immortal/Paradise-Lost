@@ -16,6 +16,7 @@ public final class AetherSoundEvents{
     public static final SoundEvent BLOCK_AETHER_PORTAL_TRAVEL = new SoundEvent(locate("block.portal.travel"));
     public static final SoundEvent BLOCK_AETHER_PORTAL_TRIGGER = new SoundEvent(locate("block.portal.trigger"));
     public static final SoundEvent MUSIC_AETHER = new SoundEvent(locate("music.aether"));
+    public static final SoundEvent MISC_SILENCE = new SoundEvent(locate("misc.silence"));
     
     public static final class Music{
         public static final MusicSound AETHER = new MusicSound(MUSIC_AETHER, 12000, 24000, false);
@@ -28,6 +29,8 @@ public final class AetherSoundEvents{
         register(BLOCK_AETHER_PORTAL_AMBIENT);
         register(BLOCK_AETHER_PORTAL_TRAVEL);
         register(BLOCK_AETHER_PORTAL_TRIGGER);
+        register(MUSIC_AETHER);
+        register(MISC_SILENCE);
         
         Music.init();
     }

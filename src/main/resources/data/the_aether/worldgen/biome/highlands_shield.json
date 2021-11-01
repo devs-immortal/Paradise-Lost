@@ -5,13 +5,7 @@
     "grass_color": 14483376,
     "fog_color": 16777215,
     "water_color": 5826047,
-    "water_fog_color": 5826047,
-    "music": {
-      "sound": "the_aether:above",
-      "min_delay": 280,
-      "max_delay": 14400,
-      "replace_current_music": true
-    }
+    "water_fog_color": 5826047
   },
   "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {
