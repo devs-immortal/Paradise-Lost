@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
+import net.id.aether.client.AetherTextures;
 import net.id.aether.client.model.armor.AetherArmorModels;
 import net.id.aether.client.model.AetherModelPredicates;
 import net.id.aether.client.rendering.ui.BloodstoneHUDRenderer;
@@ -102,10 +103,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherBlockEntityTypes.initClient();
         AetherParticles.initClient();
         AetherNetworking.initClient();
-        //todo move this to somewhere?
-        ClientSpriteRegistryCallback.event(new Identifier("textures/atlas/mob_effects.png")).register((atlasTexture, registry) -> {
-            registry.register(locate("hud/bloodstone/affinity"));
-            registry.register(locate("hud/bloodstone/race"));
-        });
+        AetherTextures.init();
     }
 }
