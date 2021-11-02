@@ -1,6 +1,8 @@
 package net.id.aether.blocks;
 
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
+import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
+import net.id.aether.blocks.blockentity.AetherChestBlock;
 import net.id.aether.blocks.decorative.*;
 import net.id.aether.blocks.dungeon.DungeonSwitchBlock;
 import net.id.aether.blocks.mechanical.FoodBowlBlock;
@@ -16,6 +18,7 @@ import net.id.aether.blocks.natural.tree.*;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.AetherItems;
+import net.id.aether.mixin.block.ChestBlockAccessor;
 import net.id.aether.registry.AetherRegistryQueues;
 import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.util.AetherSignType;
@@ -25,6 +28,7 @@ import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
@@ -35,8 +39,8 @@ import net.minecraft.util.registry.Registry;
 
 import static net.id.aether.Aether.locate;
 import static net.id.aether.blocks.AetherBlockActions.*;
-import static net.minecraft.block.AbstractBlock.Settings.copy;
-import static net.minecraft.block.AbstractBlock.Settings.of;
+import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.of;
+import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.copy;
 import static net.minecraft.block.Blocks.*;
 
 @SuppressWarnings("unused")
@@ -371,6 +375,12 @@ public class AetherBlocks {
     //dungeon
     public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
 
+    // Chests
+    public static final AetherChestBlock SKYROOT_CHEST = add("skyroot_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.SKYROOT_CHEST));
+    public static final AetherChestBlock GOLDEN_OAK_CHEST = add("golden_oak_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.GOLDEN_OAK_CHEST));
+    public static final AetherChestBlock ORANGE_CHEST = add("orange_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.ORANGE_CHEST));
+    public static final AetherChestBlock CRYSTAL_CHEST = add("crystal_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.CRYSTAL_CHEST));
+    public static final AetherChestBlock WISTERIA_CHEST = add("wisteria_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.WISTERIA_CHEST));
 
     @SafeVarargs
     private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {

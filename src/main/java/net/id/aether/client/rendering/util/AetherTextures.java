@@ -1,8 +1,10 @@
 package net.id.aether.client.rendering.util;
 
+import java.util.function.Consumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 
 import static net.id.aether.Aether.locate;
@@ -16,5 +18,11 @@ public final class AetherTextures{
             registry.register(locate("hud/bloodstone/affinity"));
             registry.register(locate("hud/bloodstone/race"));
         });
+    }
+    
+    public static void addDefaultTextures(Consumer<SpriteIdentifier> adder){
+        for(var texture : AetherChestTexture.values()){
+            texture.textures().forEach(adder);
+        }
     }
 }

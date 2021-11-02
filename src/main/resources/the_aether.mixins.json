@@ -6,6 +6,7 @@
   "mixins": [
     "block.BlockEntityTypeMixin",
     "block.BlockMixin",
+    "block.ChestBlockEntityAccessor",
     "block.FarmlandBlockMixin",
     "entity.BoatEntityMixin",
     "entity.BoatEntityTypeMixin",
@@ -47,6 +48,7 @@
     "client.render.InGameOverlayRendererMixin",
     "client.render.LivingEntityRendererMixin",
     "client.render.MapRendererMixin",
+    "client.render.TexturedRenderLayersMixin",
     "client.render.WorldRendererMixin"
   ],
   "injectors": {
