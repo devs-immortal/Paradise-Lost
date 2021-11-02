@@ -1,4 +1,4 @@
-package net.id.aether.client;
+package net.id.aether.client.rendering.util;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
