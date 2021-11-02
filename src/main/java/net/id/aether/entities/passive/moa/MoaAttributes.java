@@ -1,6 +1,7 @@
 package net.id.aether.entities.passive.moa;
 
 import net.id.aether.component.MoaGenes;
+import net.minecraft.util.math.MathHelper;
 
 public enum MoaAttributes {
     GROUND_SPEED(0.24F, 1F, 0.152F),
@@ -16,6 +17,31 @@ public enum MoaAttributes {
         this.min = min;
         this.max = max;
         this.gradeInterval = gradeInterval;
+    }
+
+    private static final String[] tiers = new String[]{"F", "D", "C", "B", "A", "S", "S+"};
+
+    public String getRatingTier(MoaEntity moa) {
+        if (min > max) return getRatingTierInverse(moa);
+        float attribute = getAttribute(moa);
+        if (attribute <= min) return tiers[0];
+        if (attribute >= max) return tiers[tiers.length - 1];
+        double lerp = (MathHelper.getLerpProgress(attribute, min, max) * (tiers.length - 2));
+        return tiers[(int) lerp + 1];
+    }
+
+    //used when smaller is better
+    public String getRatingTierInverse(MoaEntity moa) {
+        if (min < max) return getRatingTier(moa);
+        float attribute = getAttribute(moa);
+        if (attribute >= min) return tiers[0];
+        if (attribute <= max) return tiers[tiers.length - 1];
+        double lerp = (MathHelper.getLerpProgress(attribute, min, max) * (tiers.length - 2));
+        return tiers[(int) lerp + 1];
+    }
+
+    public float getAttribute(MoaEntity moa) {
+        return moa.getGenes().getAttribute(this);
     }
 
     public float fromBreeding(MoaGenes parentA, MoaGenes parentB, boolean increase) {

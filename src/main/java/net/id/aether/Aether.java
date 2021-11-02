@@ -5,10 +5,13 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.client.model.armor.AetherArmorModels;
 import net.id.aether.client.model.AetherModelPredicates;
+import net.id.aether.client.rendering.ui.BloodstoneHUDRenderer;
 import net.id.aether.client.rendering.util.AetherColorProviders;
 import net.id.aether.client.rendering.entity.AetherEntityRenderers;
 import net.id.aether.client.model.AetherModelLayers;
@@ -29,6 +32,12 @@ import net.id.aether.world.feature.AetherConfiguredFeatures;
 import net.id.aether.world.feature.AetherFeatures;
 import net.id.aether.world.feature.tree.AetherTreeHell;
 import net.id.aether.world.gen.carver.AetherCarvers;
+import net.minecraft.client.render.model.SpriteAtlasManager;
+import net.minecraft.client.texture.Sprite;
+import net.minecraft.client.texture.SpriteAtlasHolder;
+import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.client.texture.StatusEffectSpriteManager;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -93,5 +102,10 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherBlockEntityTypes.initClient();
         AetherParticles.initClient();
         AetherNetworking.initClient();
+        //todo move this to somewhere?
+        ClientSpriteRegistryCallback.event(new Identifier("textures/atlas/mob_effects.png")).register((atlasTexture, registry) -> {
+            registry.register(locate("hud/bloodstone/affinity"));
+            registry.register(locate("hud/bloodstone/race"));
+        });
     }
 }
