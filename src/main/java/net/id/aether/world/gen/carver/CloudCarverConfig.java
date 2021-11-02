@@ -26,8 +26,8 @@ public class CloudCarverConfig extends CarverConfig {
             return carverConfig.yawMultiplier;
         }), IntProvider.VALUE_CODEC.fieldOf("size_multiplier").forGetter((carverConfig) -> {
             return carverConfig.sizeMultiplier;
-        }), IntProvider.VALUE_CODEC.fieldOf("max_systems").forGetter((carverConfig) -> {
-            return carverConfig.maxSystems;
+        }), FloatProvider.VALUE_CODEC.fieldOf("max_yaw").forGetter((carverConfig) -> {
+            return carverConfig.maxYaw;
         }), IntProvider.VALUE_CODEC.fieldOf("engorged_chance").forGetter((carverConfig) -> {
             return carverConfig.engorgementChance;
         }), FloatProvider.VALUE_CODEC.fieldOf("width_multiplier").forGetter((carverConfig) -> {
@@ -41,11 +41,11 @@ public class CloudCarverConfig extends CarverConfig {
     public final FloatProvider yawPitchRatio;
     public final FloatProvider widthMultiplier;
     public final IntProvider sizeMultiplier;
-    public final IntProvider maxSystems;
+    public final FloatProvider maxYaw;
     public final IntProvider engorgementChance;
     public final BlockState cloudState;
 
-    public CloudCarverConfig(float probability, HeightProvider y, FloatProvider yScale, YOffset lavaLevel, boolean aquifers, CarverDebugConfig debugConfig, FloatProvider horizontalRadiusMultiplier, FloatProvider verticalRadiusMultiplier, BlockState cloudState, FloatProvider yawMultiplier, FloatProvider yawPitchRatio, IntProvider sizeMultiplier, IntProvider maxSystems, IntProvider engorgementChance, FloatProvider widthMultiplier) {
+    public CloudCarverConfig(float probability, HeightProvider y, FloatProvider yScale, YOffset lavaLevel, boolean aquifers, CarverDebugConfig debugConfig, FloatProvider horizontalRadiusMultiplier, FloatProvider verticalRadiusMultiplier, BlockState cloudState, FloatProvider yawMultiplier, FloatProvider yawPitchRatio, IntProvider sizeMultiplier, FloatProvider maxYaw, IntProvider engorgementChance, FloatProvider widthMultiplier) {
         super(probability, y, yScale, lavaLevel, aquifers, debugConfig);
         this.horizontalRadiusMultiplier = horizontalRadiusMultiplier;
         this.verticalRadiusMultiplier = verticalRadiusMultiplier;
@@ -53,16 +53,16 @@ public class CloudCarverConfig extends CarverConfig {
         this.yawPitchRatio = yawPitchRatio;
         this.widthMultiplier = widthMultiplier;
         this.sizeMultiplier = sizeMultiplier;
-        this.maxSystems = maxSystems;
+        this.maxYaw = maxYaw;
         this.engorgementChance = engorgementChance;
         this.cloudState = cloudState;
     }
 
-    public CloudCarverConfig(float probability, HeightProvider y, FloatProvider yScale, YOffset lavaLevel, boolean aquifers, FloatProvider horizontalRadiusMultiplier, FloatProvider verticalRadiusMultiplier, BlockState cloudState, FloatProvider yawMultiplier, FloatProvider yawPitchRatio, IntProvider sizeMultiplier, IntProvider maxSystems, IntProvider engorgementChance, FloatProvider widthMultiplier) {
-        this(probability, y, yScale, lavaLevel, aquifers, CarverDebugConfig.DEFAULT, horizontalRadiusMultiplier, verticalRadiusMultiplier, cloudState, yawMultiplier, yawPitchRatio, sizeMultiplier, maxSystems, engorgementChance, widthMultiplier);
+    public CloudCarverConfig(float probability, HeightProvider y, FloatProvider yScale, YOffset lavaLevel, boolean aquifers, FloatProvider horizontalRadiusMultiplier, FloatProvider verticalRadiusMultiplier, BlockState cloudState, FloatProvider yawMultiplier, FloatProvider yawPitchRatio, IntProvider sizeMultiplier, FloatProvider maxYaw, IntProvider engorgementChance, FloatProvider widthMultiplier) {
+        this(probability, y, yScale, lavaLevel, aquifers, CarverDebugConfig.DEFAULT, horizontalRadiusMultiplier, verticalRadiusMultiplier, cloudState, yawMultiplier, yawPitchRatio, sizeMultiplier, maxYaw, engorgementChance, widthMultiplier);
     }
 
-    public CloudCarverConfig(CarverConfig config, FloatProvider horizontalRadiusMultiplier, FloatProvider verticalRadiusMultiplier, BlockState cloudState, FloatProvider yawMultiplier, FloatProvider yawPitchRatio, IntProvider sizeMultiplier, IntProvider maxSystems, IntProvider engorgementChance, FloatProvider widthMultiplier) {
-        this(config.probability, config.y, config.yScale, config.lavaLevel, config.aquifers, config.debugConfig, horizontalRadiusMultiplier, verticalRadiusMultiplier, cloudState, yawMultiplier, yawPitchRatio, sizeMultiplier, maxSystems, engorgementChance, widthMultiplier);
+    public CloudCarverConfig(CarverConfig config, FloatProvider horizontalRadiusMultiplier, FloatProvider verticalRadiusMultiplier, BlockState cloudState, FloatProvider yawMultiplier, FloatProvider yawPitchRatio, IntProvider sizeMultiplier, FloatProvider maxYaw, IntProvider engorgementChance, FloatProvider widthMultiplier) {
+        this(config.probability, config.y, config.yScale, config.lavaLevel, config.aquifers, config.debugConfig, horizontalRadiusMultiplier, verticalRadiusMultiplier, cloudState, yawMultiplier, yawPitchRatio, sizeMultiplier, maxYaw, engorgementChance, widthMultiplier);
     }
 }

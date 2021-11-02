@@ -43,7 +43,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
 
         int size = (int) Math.round((4 * 2 - 1) * (random.nextInt(4) + 1) * config.sizeMultiplier.get(random) * 1.5);
 
-        int systemCount = random.nextInt(random.nextInt(random.nextInt(config.maxSystems.get(random)) + 1) + 1);
+        int systemCount = 1; // formerly: random.nextInt(random.nextInt(random.nextInt(config.maxSystems.get(random)) + 1) + 1);
 
         // Generate each cave system
         for (int i = 0; i < systemCount; ++i) {
@@ -142,7 +142,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
             yawChange *= 0.75F;
             // Add some more values onto the change values, to modify it for the next iteration
             pitchChange += (random.nextFloat() - random.nextFloat()) * random.nextFloat();
-            yawChange += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
+            yawChange += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * config.maxYaw.get(random);
 
             // Split the cave off into 2 more tunnels and end this tunnel.
             // The width > 1.0 check makes it so only the first tunnel can split.
