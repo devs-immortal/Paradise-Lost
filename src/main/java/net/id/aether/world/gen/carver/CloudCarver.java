@@ -142,15 +142,15 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
             yawChange *= 0.75F;
             // Add some more values onto the change values, to modify it for the next iteration
             pitchChange += (random.nextFloat() - random.nextFloat()) * random.nextFloat();
-            yawChange += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * config.maxYaw.get(random);
+            yawChange += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * random.nextFloat() * config.maxYaw.get(random);
 
             // Split the cave off into 2 more tunnels and end this tunnel.
             // The width > 1.0 check makes it so only the first tunnel can split.
             if (i == nextBranch && width > 1.0F && random.nextBoolean()) {
                 // Change the yaw by pi/2 with different sign for both tunnels, to split them off at a fork and make them go opposite ways.
                 // Reduce the pitch by a factor of 3 to flatten out cave tunnel forks.
-                this.carveTunnels(context, config, chunk, posToBiome, carvingMask, random.nextLong(), sampler, mainChunkX, mainChunkZ, x, y, z, width * (random.nextFloat() / 4 + 0.75F), yaw - (random.nextFloat() / 3), pitch / 3, yawToPitchRatio, i, branchCount, skipPredicate);
-                this.carveTunnels(context, config, chunk, posToBiome, carvingMask, random.nextLong(), sampler, mainChunkX, mainChunkZ, x, y, z, width * (random.nextFloat() / 4 + 0.75F), yaw + (random.nextFloat() / 3), pitch / 3, yawToPitchRatio, i, branchCount, skipPredicate);
+//                this.carveTunnels(context, config, chunk, posToBiome, carvingMask, random.nextLong(), sampler, mainChunkX, mainChunkZ, x, y, z, width * (random.nextFloat() / 4 + 0.75F), yaw - (random.nextFloat() / 3), pitch / 3, yawToPitchRatio, i, branchCount, skipPredicate);
+//                this.carveTunnels(context, config, chunk, posToBiome, carvingMask, random.nextLong(), sampler, mainChunkX, mainChunkZ, x, y, z, width * (random.nextFloat() / 4 + 0.75F), yaw + (random.nextFloat() / 3), pitch / 3, yawToPitchRatio, i, branchCount, skipPredicate);
                 return;
             }
 

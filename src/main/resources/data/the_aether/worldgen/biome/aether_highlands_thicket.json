@@ -12,11 +12,15 @@
   "carvers": {
     "air": [
       "cave",
-      "the_aether:cold_aercloud_upper",
-      "the_aether:cold_aercloud_lower",
-      "the_aether:blue_aercloud_upper",
-      "the_aether:blue_aercloud_lower",
-      "the_aether:golden_aercloud"
+      "the_aether:large_cold_aercloud",
+      "the_aether:cold_aercloud",
+      "the_aether:tiny_cold_aercloud",
+      "the_aether:large_blue_aercloud",
+      "the_aether:blue_aercloud",
+      "the_aether:tiny_blue_aercloud",
+      "the_aether:large_golden_aercloud",
+      "the_aether:golden_aercloud",
+      "the_aether:tiny_golden_aercloud"
     ]
   },
   "features": [
