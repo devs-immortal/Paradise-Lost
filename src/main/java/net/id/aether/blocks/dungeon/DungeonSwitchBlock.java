@@ -1,11 +1,11 @@
 package net.id.aether.blocks.dungeon;
 
+import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.blocks.blockentity.dungeon.DungeonSwitchBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.SculkSensorBlockEntity;
-import net.minecraft.block.enums.WallMountLocation;
-import net.minecraft.entity.Entity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.state.StateManager;
@@ -15,11 +15,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.listener.GameEventListener;
-import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 
 public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
@@ -116,6 +113,11 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new DungeonSwitchBlockEntity(pos, state);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return world.isClient & type == AetherBlockEntityTypes.DUNGEON_SWITCH ? (world1, pos, state1, blockEntity) -> ((DungeonSwitchBlockEntity) blockEntity).clientTick() : null;
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {

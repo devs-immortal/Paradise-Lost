@@ -8,6 +8,7 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.dungeon.DungeonSwitchBlockEntity;
 import net.id.aether.blocks.dungeon.DungeonSwitchBlock;
 import net.id.aether.client.rendering.block.AetherChestBlockEntityRenderer;
+import net.id.aether.client.rendering.block.DungeonSwitchBlockEntityRenderer;
 import net.id.aether.client.rendering.block.IncubatorBlockEntityRenderer;
 import net.id.aether.client.rendering.util.AetherChestTexture;
 import net.id.aether.mixin.block.ChestBlockEntityAccessor;
@@ -48,7 +49,8 @@ public class AetherBlockEntityTypes {
     @Environment(EnvType.CLIENT)
     public static void initClient() {
         BlockEntityRendererRegistry.register(INCUBATOR, IncubatorBlockEntityRenderer::new);
-    
+        BlockEntityRendererRegistry.register(DUNGEON_SWITCH, DungeonSwitchBlockEntityRenderer::new);
+
         BlockEntityRendererRegistry.register(SKYROOT_CHEST, ctx->new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.SKYROOT));
         BlockEntityRendererRegistry.register(GOLDEN_OAK_CHEST, ctx->new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.GOLDEN_OAK));
         BlockEntityRendererRegistry.register(ORANGE_CHEST, ctx->new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.ORANGE));

@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.mixin.client.rendering.EntityModelLayersAccessor;
 import net.id.aether.Aether;
 import net.id.aether.client.model.armor.PhoenixArmorModel;
+import net.id.aether.client.model.block.DungeonSwitchModel;
 import net.id.aether.client.model.entity.*;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
@@ -24,6 +25,8 @@ public class AetherModelLayers {
     public static final EntityModelLayer MIMIC = register("mimic", "main", ChestMimicModel.getTexturedModelData());
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer PHOENIX_ARMOR = register("phoenix_armor", "main", PhoenixArmorModel.getTexturedModelData());
+
+    public static final EntityModelLayer DUNGEON_SWITCH = register("dungeon_switch", "main", DungeonSwitchModel.getTexturedModelData());
 
     public static EntityModelLayer register(Identifier id, String layer, TexturedModelData data) {
         EntityModelLayer entityModelLayer = new EntityModelLayer(id, layer);

@@ -1,5 +1,7 @@
 package net.id.aether.blocks.blockentity.dungeon;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.blocks.dungeon.DungeonSwitchBlock;
 import net.minecraft.block.BlockState;
@@ -13,12 +15,11 @@ import net.minecraft.world.event.BlockPositionSource;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.PositionSource;
 import net.minecraft.world.event.listener.GameEventListener;
-import net.minecraft.world.event.listener.SculkSensorListener;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
 
 public class DungeonSwitchBlockEntity extends BlockEntity implements GameEventListener {
     private BlockPos linkedPos;
+    private int animationDelta;
 
     public DungeonSwitchBlockEntity(BlockPos pos, BlockState state) {
         this(AetherBlockEntityTypes.DUNGEON_SWITCH, pos, state);
@@ -70,5 +71,16 @@ public class DungeonSwitchBlockEntity extends BlockEntity implements GameEventLi
                 dungeonSwitchBlock.onExplosionEvent(world, this.getPos());
             }
         return false;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public void clientTick() {
+        animationDelta++;
+        if (animationDelta > 360)
+            animationDelta = 1;
+    }
+
+    public int getAnimationDelta() {
+        return animationDelta;
     }
 }
