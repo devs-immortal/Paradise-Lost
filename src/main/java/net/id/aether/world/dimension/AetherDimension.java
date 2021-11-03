@@ -2,10 +2,13 @@ package net.id.aether.world.dimension;
 
 import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
+import net.id.aether.util.AetherSoundEvents;
 import net.id.aether.world.gen.AetherSurfaceBuilder;
 import net.id.aether.world.gen.AetherSurfaceBuilderConfig;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
+import net.kyrptonaught.customportalapi.util.CPAEvent;
+import net.kyrptonaught.customportalapi.util.CPASoundEventData;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -34,6 +37,8 @@ public class AetherDimension {
                 .tintColor(55, 89, 195)
                 .lightWithWater()
                 .onlyLightInOverworld()
+                .registerInPortalAmbienceSound(player -> new CPASoundEventData(AetherSoundEvents.BLOCK_AETHER_PORTAL_TRIGGER, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
+                .registerPostTPPortalAmbience(player -> new CPASoundEventData(AetherSoundEvents.BLOCK_AETHER_PORTAL_TRAVEL, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
                 .registerPortal();
     }
 }
