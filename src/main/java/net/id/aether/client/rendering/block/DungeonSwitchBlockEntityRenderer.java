@@ -23,21 +23,20 @@ public class DungeonSwitchBlockEntityRenderer implements BlockEntityRenderer<Dun
     @Override
     public void render(DungeonSwitchBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         float yOffset = getYOffset(entity.getAnimationDelta(), tickDelta);
+        float spin = entity.getAnimationDelta() * 4 * 0.017453F;
+
         matrices.push();
-        matrices.translate(0.0D, 1 + yOffset / 2.0F, 0.0D);
-
-        model.cube.roll = entity.getAnimationDelta() / 10f;
-        model.cube.yaw = entity.getAnimationDelta() / 10f;
-        model.cube.pitch = entity.getAnimationDelta() / 10f;
+        matrices.translate(0.0D, .5 + yOffset, 0.0D);
+        //matrices.scale(.75f, .75f, .75f);
+        model.cube.roll = spin;
+        model.cube.yaw = spin;
+        model.cube.pitch = spin;
         model.cube.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityAlpha(CUBE_TEXTURE)), light, overlay);
-
         matrices.pop();
     }
 
     public float getYOffset(int ticks, float tickDelta) {
         float f = (float) ticks + tickDelta;
-        float g = MathHelper.sin(f * 0.2F) / 2.0F + 0.5F;
-        g = (g * g + g) * 0.4F;
-        return g - 1.4F;
+        return MathHelper.sin((float) Math.toRadians(f) * 4) / 4;
     }
 }
