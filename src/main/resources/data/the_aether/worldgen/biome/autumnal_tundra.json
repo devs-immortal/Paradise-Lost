@@ -2,12 +2,12 @@
   "effects": {
     "sky_color": 12632319,
     "foliage_color": 16757893,
-    "grass_color": 16375992,
+    "grass_color": 16777215,
     "fog_color": 16777215,
-    "water_color": 5826047,
-    "water_fog_color": 5826047
+    "water_color": 9234175,
+    "water_fog_color": 9234175
   },
-  "surface_builder": "the_aether:aether_surface_builder",
+  "surface_builder": "the_aether:frozen_surface_builder",
   "carvers": {
     "air": [
       "cave",
@@ -27,7 +27,8 @@
     [
       "the_aether:lake_water",
       "the_aether:dense_water",
-      "the_aether:large_lake"
+      "the_aether:tundra_pond",
+      "the_aether:tundra_snow"
     ],
     [
       "the_aether:quicksoil"
@@ -43,16 +44,14 @@
     ],
     [],
     [
-      "the_aether:aether_flowers",
-      "the_aether:aether_grass",
-      "the_aether:aether_tall_grass",
+      "the_aether:tundra_spires",
+      "the_aether:tundra_foliage",
       "the_aether:water_spring",
-      "the_aether:patch_blueberry",
-      "the_aether:shield_trees",
+      "the_aether:mixed_trees",
       "the_aether:flutegrass"
     ],
     [
-      "the_aether:crystal_tree_island_decorated"
+      "freeze_top_layer"
     ]
   ],
   "starts": [
@@ -101,7 +100,7 @@
   },
   "player_spawn_friendly": false,
   "precipitation": "rain",
-  "temperature": 0.25,
+  "temperature": 0.1,
   "downfall": 2.0,
   "category": "taiga",
   "depth": 0.1,

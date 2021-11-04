@@ -260,8 +260,9 @@ public class AetherItems {
     // nature
     public static final BlockItem AETHER_GRASS_BLOCK = add("aether_grass", AetherBlocks.AETHER_GRASS_BLOCK, building_block);
     public static final BlockItem AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", AetherBlocks.AETHER_ENCHANTED_GRASS, building_block);
-    public static final BlockItem AETHER_PODZOL = add("aether_podzol", AetherBlocks.AETHER_PODZOL, building_block);
+    public static final BlockItem AETHER_FROZEN_GRASS = add("aether_frozen_grass", AetherBlocks.AETHER_FROZEN_GRASS, building_block);
     public static final BlockItem AETHER_DIRT = add("aether_dirt", AetherBlocks.AETHER_DIRT, building_block);
+    public static final BlockItem PERMAFROST = add("permafrost", AetherBlocks.PERMAFROST, building_block);
     public static final BlockItem QUICKSOIL = add("quicksoil", AetherBlocks.QUICKSOIL, building_block);
     public static final BlockItem COLD_AERCLOUD = add("cold_aercloud", AetherBlocks.COLD_AERCLOUD, building_block);
     public static final BlockItem BLUE_AERCLOUD = add("blue_aercloud", AetherBlocks.BLUE_AERCLOUD, building_block);
@@ -427,6 +428,7 @@ public class AetherItems {
     // plants
     public static final BlockItem AETHER_GRASS = add("aether_grass_plant", AetherBlocks.AETHER_GRASS, decoration, compostable30);
     public static final BlockItem AETHER_GRASS_FLOWERING = add("aether_grass_flowering", AetherBlocks.AETHER_GRASS_FLOWERING, decoration, compostable30);
+    public static final BlockItem AETHER_SHORT_GRASS = add("aether_short_grass", AetherBlocks.AETHER_SHORT_GRASS, decoration, compostable30);
     public static final BlockItem AETHER_FERN = add("aether_fern", AetherBlocks.AETHER_FERN, decoration, compostable30);
     public static final BlockItem AETHER_BUSH = add("aether_bush", AetherBlocks.AETHER_BUSH, decoration, compostable30);
     public static final BlockItem FLUTEGRASS = add("flutegrass", AetherBlocks.FLUTEGRASS, decoration, compostable30);
