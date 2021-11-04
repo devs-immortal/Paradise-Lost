@@ -56,7 +56,11 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public static final Logger LOG = LogManager.getLogger(MOD_ID);
 
     public static Identifier locate(String location) {
-        return new Identifier(MOD_ID, location);
+        if(location.contains(":")){
+            return new Identifier(location);
+        }else{
+            return new Identifier(MOD_ID, location);
+        }
     }
 
     @Override
