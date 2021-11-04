@@ -42,6 +42,60 @@
 			"the_aether:block/portal/trigger"
 		]
 	},
+	"entity.cockatrice.ambient": {
+		"subtitle": "subtitles.the_aether.entity.cockatrice.ambient",
+		"sounds": [
+			{
+				"name": "entity.hostile.ambient",
+				"type": "event"
+			}
+		]
+	},
+	"entity.cockatrice.hurt": {
+		"subtitle": "subtitles.the_aether.entity.cockatrice.hurt",
+		"sounds": [
+			{
+				"name": "entity.hostile.hurt",
+				"type": "event"
+			}
+		]
+	},
+	"entity.cockatrice.death": {
+		"subtitle": "subtitles.the_aether.entity.cockatrice.death",
+		"sounds": [
+			{
+				"name": "entity.hostile.death",
+				"type": "event"
+			}
+		]
+	},
+	"entity.moa.ambient": {
+		"subtitle": "subtitles.the_aether.entity.moa.ambient",
+		"sounds": [
+			{
+				"name": "entity.hostile.ambient",
+				"type": "event"
+			}
+		]
+	},
+	"entity.moa.hurt": {
+		"subtitle": "subtitles.the_aether.entity.moa.hurt",
+		"sounds": [
+			{
+				"name": "entity.hostile.hurt",
+				"type": "event"
+			}
+		]
+	},
+	"entity.moa.death": {
+		"subtitle": "subtitles.the_aether.entity.moa.death",
+		"sounds": [
+			{
+				"name": "entity.hostile.death",
+				"type": "event"
+			}
+		]
+	},
 	"music.aether": {
 		"sounds": [
 			{

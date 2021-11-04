@@ -1,6 +1,7 @@
 package net.id.aether.entities.hostile;
 
 import net.id.aether.entities.projectile.CockatriceSpitEntity;
+import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -13,7 +14,9 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -142,20 +145,20 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         return 1;
     }
 
-    //    @Override
-    //    protected SoundEvent getAmbientSound() {
-    //        return AetherSounds.MOA_SAY;
-    //    }
-    //
-    //    @Override
-    //    protected SoundEvent getHurtSound(DamageSource source) {
-    //        return AetherSounds.MOA_SAY;
-    //    }
-    //
-    //    @Override
-    //    protected SoundEvent getDeathSound() {
-    //        return AetherSounds.MOA_SAY;
-    //    }
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return AetherSoundEvents.ENTITY_COCKATRICE_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return AetherSoundEvents.ENTITY_COCKATRICE_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return AetherSoundEvents.ENTITY_COCKATRICE_DEATH;
+    }
 
     public static class CockatriceAttackGoal extends ProjectileAttackGoal {
         private final CockatriceEntity cockatrice;
