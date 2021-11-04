@@ -1,12 +1,16 @@
 package net.id.aether.items.tools.bloodstone;
 
+import net.id.aether.api.ConditionAPI;
 import net.id.aether.api.MoaAPI;
+import net.id.aether.component.ConditionManager;
+import net.id.aether.effect.condition.Severity;
 import net.id.aether.entities.passive.moa.MoaAttributes;
 import net.id.aether.entities.passive.moa.MoaEntity;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -14,6 +18,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,6 +42,8 @@ public class BloodstoneCapturedData {
     public String HP = "???";
     public String DF = "???";
     public String TF = "???";
+
+    public List<ConditionData> conditionDataList = new ArrayList<>();
 
     public BloodstoneCapturedData() {
     }
@@ -63,6 +71,12 @@ public class BloodstoneCapturedData {
         nbt.putString("HP", HP);
         nbt.putString("DF", DF);
         nbt.putString("TF", TF);
+
+        if (conditionDataList.size() > 0) {
+            NbtList condNBTList = new NbtList();
+            conditionDataList.forEach(conditionData -> condNBTList.add(conditionData.toNBT()));
+            nbt.put("condNBTList", condNBTList);
+        }
         return nbt;
     }
 
@@ -87,6 +101,11 @@ public class BloodstoneCapturedData {
         bloodstoneCapturedData.HP = nbt.getString("HP");
         bloodstoneCapturedData.DF = nbt.getString("DF");
         bloodstoneCapturedData.TF = nbt.getString("TF");
+
+        if (nbt.contains("condNBTList")) {
+            NbtList condNBTList = (NbtList) nbt.get("condNBTList");
+            condNBTList.forEach(nbtElement -> bloodstoneCapturedData.conditionDataList.add(ConditionData.fromNBT((NbtCompound) nbtElement)));
+        }
         return bloodstoneCapturedData;
     }
 
@@ -114,6 +133,14 @@ public class BloodstoneCapturedData {
         bloodstoneCapturedData.DF = "" + entity.getArmor();
         bloodstoneCapturedData.TF = "" + MathHelper.floor(entity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
 
+        //abstentine
+        ConditionManager condMan = ConditionAPI.getConditionManager(entity);
+        ConditionAPI.getValidConditions(entity.getType()).forEach(condition -> {
+            float severity = condMan.getScaledSeverity(condition);
+            if (severity > 0)
+                bloodstoneCapturedData.conditionDataList.add(new ConditionData(condition.getId().getPath(), severity));
+
+        });
         return bloodstoneCapturedData;
     }
 
@@ -129,5 +156,18 @@ public class BloodstoneCapturedData {
             case "S+" -> text.formatted(Formatting.GOLD);
             default -> text;
         };
+    }
+
+    public static record ConditionData(String id, float severity) {
+        public static ConditionData fromNBT(NbtCompound nbt) {
+            return new ConditionData(nbt.getString("id"), nbt.getFloat("severity"));
+        }
+
+        public NbtCompound toNBT() {
+            NbtCompound nbt = new NbtCompound();
+            nbt.putString("id", id);
+            nbt.putFloat("severity", severity);
+            return nbt;
+        }
     }
 }

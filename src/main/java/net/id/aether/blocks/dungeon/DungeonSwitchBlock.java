@@ -58,9 +58,8 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
         }
     }
 
-    //called from be even listener
+    //called from BE event listener
     public void onExplosionEvent(World world, BlockPos pos) {
-        System.out.println("boom");
         if (!world.isClient && explosionActivates) {
             BlockState state = world.getBlockState(pos);
             BlockState newState = this.togglePower(state, world, pos);

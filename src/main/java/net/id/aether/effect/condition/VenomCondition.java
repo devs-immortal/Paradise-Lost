@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class VenomCondition extends Condition {
 
     public VenomCondition() {
-        super(AetherEntityTypeTags.VENOM_IMMUNITY, 300, 300, 0.5F, 0.025F,400, 0.05F);
+        super(AetherEntityTypeTags.VENOM_IMMUNITY, 300, 300, 0.5F, 0.025F, 400, 0.05F);
         AetherOverlayRegistrar.register(new AetherOverlayRegistrar.Overlay(
                 Aether.locate("textures/hud/condition/venom.png"),
                 player -> ConditionAPI.isVisible(this, player),
@@ -29,7 +29,7 @@ public class VenomCondition extends Condition {
 
     @Override
     public void tick(World world, LivingEntity entity, Severity severity, float rawSeverity) {
-        if(rawSeverity > visThreshold && world.getTime() % 20 == 0) {
+        if (rawSeverity > visThreshold && world.getTime() % 20 == 0) {
             var poisonEffect = switch (severity) {
                 case MILD -> new StatusEffectInstance(StatusEffects.POISON, 100, 1, true, false, true);
                 case ACUTE -> new StatusEffectInstance(StatusEffects.POISON, 100, 2, true, false, true);
@@ -42,7 +42,7 @@ public class VenomCondition extends Condition {
             };
 
             entity.addStatusEffect(poisonEffect);
-            if(witherEffect != null) {
+            if (witherEffect != null) {
                 entity.addStatusEffect(witherEffect);
             }
         }
@@ -50,7 +50,7 @@ public class VenomCondition extends Condition {
 
     @Override
     public void tickPlayer(World world, PlayerEntity player, Severity severity, float rawSeverity) {
-        if(rawSeverity > visThreshold && world.getTime() % 20 == 0) {
+        if (rawSeverity > visThreshold && world.getTime() % 20 == 0) {
             var poisonEffect = switch (severity) {
                 case MILD -> new StatusEffectInstance(StatusEffects.POISON, 100, 1, true, false, true);
                 case ACUTE -> new StatusEffectInstance(StatusEffects.POISON, 200, 1, true, false, true);
@@ -64,7 +64,7 @@ public class VenomCondition extends Condition {
             };
 
             player.addStatusEffect(poisonEffect);
-            if(witherEffect != null) {
+            if (witherEffect != null) {
                 player.addStatusEffect(witherEffect);
             }
         }
@@ -72,11 +72,11 @@ public class VenomCondition extends Condition {
 
     @Override
     public void clientTick(ClientWorld world, LivingEntity entity, Severity severity, float rawSeverity) {
-        if(severity.isAsOrMoreSevere(Severity.MILD)) {
+        if (severity.isAsOrMoreSevere(Severity.MILD)) {
             var random = world.getRandom();
             var self = MinecraftClient.getInstance().player == entity;
-            if(random.nextFloat() < ((severity.isAsOrMoreSevere(Severity.DIRE) ? 0.6 : 0.2) / (self ? 3 : 1))) {
-                world.addImportantParticle(AetherParticles.VENOM_BUBBLE, entity.getParticleX(1), entity.getRandomBodyY(), entity.getParticleZ(1), (entity.getVelocity().x / 15) + ((random.nextDouble() * 0.005) - 0.0025),  0.025 + random.nextDouble() * 0.035, (entity.getVelocity().z / 15) + ((random.nextDouble() * 0.005) - 0.0025));
+            if (random.nextFloat() < ((severity.isAsOrMoreSevere(Severity.DIRE) ? 0.6 : 0.2) / (self ? 3 : 1))) {
+                world.addImportantParticle(AetherParticles.VENOM_BUBBLE, entity.getParticleX(1), entity.getRandomBodyY(), entity.getParticleZ(1), (entity.getVelocity().x / 15) + ((random.nextDouble() * 0.005) - 0.0025), 0.025 + random.nextDouble() * 0.035, (entity.getVelocity().z / 15) + ((random.nextDouble() * 0.005) - 0.0025));
             }
         }
     }

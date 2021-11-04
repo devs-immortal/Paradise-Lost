@@ -1,10 +1,14 @@
 package net.id.aether.client.rendering.ui;
 
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
+import it.unimi.dsi.fastutil.Arrays;
 import net.id.aether.Aether;
+import net.id.aether.effect.condition.Severity;
 import net.id.aether.items.tools.bloodstone.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
 import net.minecraft.client.util.math.MatrixStack;
@@ -14,10 +18,19 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Pair;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.MathHelper;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 //probably can be cleaned up
 public class BloodstoneHUDRenderer {
@@ -39,6 +52,8 @@ public class BloodstoneHUDRenderer {
                         renderZanite(matrixStack, client, capturedData, centerX, centerY);
                     else if (stack.getItem() instanceof GravititeBloodstoneItem)
                         renderGravitite(matrixStack, client, capturedData, centerX, centerY);
+                    else if (stack.getItem() instanceof AbstentineBloodstoneItem)
+                        renderAbstentine(matrixStack, client, capturedData, centerX, centerY);
                 }
             }
         }
@@ -52,6 +67,13 @@ public class BloodstoneHUDRenderer {
 
     private static boolean doUUIDMatch(LivingEntity entity, BloodstoneCapturedData capturedData) {
         return capturedData.uuid.equals(entity.getUuid());
+    }
+
+    private static void renderAbstentine(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData, int centerX, int centerY) {
+        renderRing(matrixStack, centerX, centerY);
+        renderTextCentered(matrixStack, bloodstoneCapturedData.name, centerX, centerY - 80);
+        for (int i = 0; i < bloodstoneCapturedData.conditionDataList.size(); i++)
+            renderCondition(matrixStack, bloodstoneCapturedData.conditionDataList.get(i), centerX, centerY, getCircularPosition(80, i + 1, bloodstoneCapturedData.conditionDataList.size()));
     }
 
     private static void renderAmbrosium(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData, int centerX, int centerY) {
@@ -87,13 +109,43 @@ public class BloodstoneHUDRenderer {
         renderText(matrixStack, new LiteralText("Max Health: ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), centerX, centerY, getCircularPosition(80, 6, 7));
     }
 
+    private static void renderCondition(MatrixStack matrixStack, BloodstoneCapturedData.ConditionData conditionData, int centerX, int centerY, Pair<Integer, Integer> circleOffsets) {
+        centerX += circleOffsets.getLeft();
+        centerY += circleOffsets.getRight() - 7;
+        if (circleOffsets.getLeft() == 0) {
+            centerX -= 130 / 2;
+            centerY += 11;
+        } else if (circleOffsets.getLeft() < 0)
+            centerX -= 130;
+        int renderWidth = (int) MathHelper.clamp(114 * conditionData.severity(), 0, 114);
+        RenderSystem.setShaderTexture(0, Aether.locate("textures/hud/bloodstone/" + conditionData.id() + "_bar.png"));
+        DrawableHelper.drawTexture(matrixStack, centerX, centerY, 0, 0, 18 + renderWidth, 14, 130, 14);
+        RenderSystem.setShaderTexture(0, Aether.locate("textures/hud/bloodstone/condition_bar.png"));
+        DrawableHelper.drawTexture(matrixStack, centerX, centerY, 0, 0, 130, 14, 130, 14);
+
+        Text title = new TranslatableText("condition.condition." + conditionData.id()).append(" - ").append(getSeverityWithColor(conditionData.severity()));
+        renderText(matrixStack, title, centerX + 17, centerY - 4, true);
+    }
+
+    public static Text getSeverityWithColor(Float rawSeverity) {
+        Severity sev = Severity.getSeverity(rawSeverity);
+        MutableText text = new TranslatableText(sev.translation);
+        return switch (sev) {
+            case EXTREME -> text.formatted(Formatting.GRAY);
+            case DIRE -> text.formatted(Formatting.RED);
+            case ACUTE -> text.formatted(Formatting.YELLOW);
+            case MILD -> text.formatted(Formatting.GREEN);
+            case NEGLIGIBLE -> text.formatted(Formatting.AQUA);
+        };
+    }
+
     private static void renderRing(MatrixStack matrixStack, int centerX, int centerY) {
         RenderSystem.setShaderTexture(0, Aether.locate("textures/hud/bloodstone/bloodstone_ring.png"));
         DrawableHelper.drawTexture(matrixStack, centerX - 75, centerY - 75, 0, 0, 150, 150, 150, 150);
     }
 
     private static void renderIconWText(MatrixStack matrixStack, MinecraftClient client, Sprite sprite, Text text, int centerX, int centerY, Pair<Integer, Integer> circleOffsets) {
-        renderIconWText(matrixStack, client, sprite, text, centerX + circleOffsets.getRight(), centerY - circleOffsets.getLeft(), circleOffsets.getRight() > 0);
+        renderIconWText(matrixStack, client, sprite, text, centerX + circleOffsets.getLeft(), centerY + circleOffsets.getRight(), circleOffsets.getLeft() > 0);
     }
 
     private static void renderIconWText(MatrixStack matrixStack, MinecraftClient client, Sprite sprite, Text text, int x, int y, boolean rightSide) {
@@ -135,11 +187,15 @@ public class BloodstoneHUDRenderer {
         MinecraftClient.getInstance().textRenderer.drawWithShadow(matrixStack, text, x, y - textHeight, 14737632);
     }
 
+    private final static Pair<Integer, Integer>[] basicPositions = ArrayUtils.toArray(new Pair<>(0, -80), new Pair<>(80, 0), new Pair<>(-80, 0), new Pair<>(0, 80));
+
     private static Pair<Integer, Integer> getCircularPosition(int radius, int itemNum, int totalItems) {
-        double angle = (360d / totalItems) * itemNum;
-        angle = Math.toRadians(angle);
-        int x = (int) Math.round(Math.cos(angle) * radius);
-        int y = (int) Math.round(Math.sin(angle) * radius);
-        return new Pair<>(x, y);
+        if (totalItems < 5)
+            return basicPositions[itemNum];
+
+        double angle = ((2 * Math.PI) / totalItems) * itemNum;
+        int y = (int) Math.round(Math.cos(angle) * radius);
+        int x = (int) Math.round(Math.sin(angle) * radius);
+        return new Pair<>(x, -y);
     }
 }
