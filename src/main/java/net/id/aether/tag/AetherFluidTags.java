@@ -12,4 +12,5 @@ public class AetherFluidTags {
     public static final Tag<Fluid> SWET_TRANSFORMERS_GOLDEN = TagFactory.FLUID.create(new Identifier(Aether.MOD_ID, "swet_transformers/golden"));
     public static final Tag<Fluid> SWET_TRANSFORMERS_PURPLE = TagFactory.FLUID.create(new Identifier(Aether.MOD_ID, "swet_transformers/purple"));
     public static final Tag<Fluid> SWET_TRANSFORMERS_VERMILION = TagFactory.FLUID.create(new Identifier(Aether.MOD_ID, "swet_transformers/vermilion"));
+    public static final Tag<Fluid> SPRING_WATER = TagFactory.FLUID.create(new Identifier(Aether.MOD_ID, "spring_water"));
 }

@@ -3,13 +3,23 @@ package net.id.aether.effect.condition;
 
 public interface ConditionModifier {
 
-    float getDecayMultiplier(Condition condition);
+    default float getDecayMultiplier(Condition condition) {
+        return 1;
+    }
 
-    float getScalingMultiplier(Condition condition);
+    default float getScalingMultiplier(Condition condition) {
+        return 1;
+    }
 
-    float getScalingOffset(Condition condition);
+    default float getScalingOffset(Condition condition) {
+        return 0;
+    }
 
-    float getSeverityMultiplier(Condition condition);
+    default float getSeverityMultiplier(Condition condition) {
+        return 1;
+    }
 
-    float getConstantCondition(Condition condition);
+    default float getConstantCondition(Condition condition) {
+        return 0;
+    }
 }
