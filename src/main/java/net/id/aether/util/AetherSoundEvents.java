@@ -281,10 +281,6 @@ public final class AetherSoundEvents{
             builder.append("""
                 "music.aether": {
                   "sounds": [
-                    {
-                      "name": "the_aether:music/aether/cloud_ocean",
-                      "stream": true
-                    },
                 """);
             for(Identifier track : tracks){
                 builder.append("""
