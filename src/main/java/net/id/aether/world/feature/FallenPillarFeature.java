@@ -2,6 +2,7 @@ package net.id.aether.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.world.feature.config.LongFeatureConfig;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
@@ -68,7 +69,7 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
                     body = body.with(Properties.WATERLOGGED, true);
                 }
 
-                world.setBlockState(placement, body, 3);
+                world.setBlockState(placement, body, Block.NOTIFY_ALL);
 
                 for (Direction dir : Direction.values()) {
 
@@ -82,7 +83,7 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
                         else if(shellState.contains(Properties.FACING)) {
                             shellState = shellState.with(Properties.FACING, dir.getOpposite());
                         }
-                        world.setBlockState(shell, shellState, 3);
+                        world.setBlockState(shell, shellState, Block.NOTIFY_ALL);
                     }
 
                 }
@@ -90,7 +91,7 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
                 var top = placement.up();
 
                 if(world.isAir(top) && random.nextFloat() < config.topChance()) {
-                    world.setBlockState(top, config.top().getBlockState(random, top), 3);
+                    world.setBlockState(top, config.top().getBlockState(random, top), Block.NOTIFY_ALL);
                 }
 
             }

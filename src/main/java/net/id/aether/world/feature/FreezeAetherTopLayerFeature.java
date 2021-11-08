@@ -2,9 +2,7 @@ package net.id.aether.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.blocks.natural.aercloud.AercloudBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SnowyBlock;
+import net.minecraft.block.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.Heightmap;
@@ -51,14 +49,14 @@ public class FreezeAetherTopLayerFeature extends Feature<DefaultFeatureConfig> {
 
                 Biome biome = world.getBiome(surface);
                 if (biome.canSetIce(world, floor, false)) {
-                    world.setBlockState(floor, Blocks.ICE.getDefaultState(), 2);
+                    world.setBlockState(floor, Blocks.ICE.getDefaultState(), Block.NOTIFY_LISTENERS);
                 }
 
                 if (biome.canSetSnow(world, surface)) {
-                    world.setBlockState(surface, Blocks.SNOW.getDefaultState(), 2);
+                    world.setBlockState(surface, Blocks.SNOW.getDefaultState(), Block.NOTIFY_LISTENERS);
                     BlockState blockState = world.getBlockState(floor);
                     if (blockState.contains(SnowyBlock.SNOWY)) {
-                        world.setBlockState(floor, blockState.with(SnowyBlock.SNOWY, true), 2);
+                        world.setBlockState(floor, blockState.with(SnowyBlock.SNOWY, true), Block.NOTIFY_LISTENERS);
                     }
                 }
             }

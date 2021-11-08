@@ -6,6 +6,7 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.items.AetherItems;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.EntityType;
@@ -258,7 +259,7 @@ public class AerbunnyEntity extends AetherAnimalEntity {
                 AerbunnyEntity.this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 10, 2));
                 AerbunnyEntity.this.playSound(SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, 1.0F, 1.0F);
                 AerbunnyEntity.this.playSound(SoundEvents.ENTITY_LLAMA_EAT, 0.8F, 2.0F);
-                AerbunnyEntity.this.world.setBlockState(this.targetPos, blockState.with(SweetBerryBushBlock.AGE, 1), 2);
+                AerbunnyEntity.this.world.setBlockState(this.targetPos, blockState.with(SweetBerryBushBlock.AGE, 1), Block.NOTIFY_LISTENERS);
             }
         }
 

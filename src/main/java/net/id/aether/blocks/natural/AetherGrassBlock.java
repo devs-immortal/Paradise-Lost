@@ -1,9 +1,7 @@
 package net.id.aether.blocks.natural;
 
 import net.id.aether.blocks.util.SpreadableAetherBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Fertilizable;
+import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
@@ -60,7 +58,7 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
                     blockState4 = blockState;
                 }
 
-                if (blockState4.canPlaceAt(world, blockPos2)) world.setBlockState(blockPos2, blockState4, 3);
+                if (blockState4.canPlaceAt(world, blockPos2)) world.setBlockState(blockPos2, blockState4, Block.NOTIFY_ALL);
             }
         }
     }

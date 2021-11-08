@@ -2,10 +2,7 @@ package net.id.aether.items.tools;
 
 import net.id.aether.items.AetherItems;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FluidDrainable;
-import net.minecraft.block.FluidFillable;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
@@ -174,7 +171,7 @@ public class SkyrootBucketItem extends Item {
                     }
 
                     this.playEmptySound(playerIn, worldIn, posIn);
-                    worldIn.setBlockState(posIn, this.containedBlock.getDefaultState().getBlockState(), 11);
+                    worldIn.setBlockState(posIn, this.containedBlock.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
                 }
 
                 return true;

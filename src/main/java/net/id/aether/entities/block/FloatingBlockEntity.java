@@ -397,7 +397,7 @@ public class FloatingBlockEntity extends Entity {
                     this.floatTile = this.floatTile.with(Properties.WATERLOGGED, true);
                 }
 
-                if (this.world.setBlockState(blockPos, this.floatTile, 3)) {
+                if (this.world.setBlockState(blockPos, this.floatTile, Block.NOTIFY_ALL)) {
                     landingSuccessful = true;
                     this.discard();
                     if (this.blockEntityData != null && this.floatTile.hasBlockEntity()) {

@@ -3,6 +3,7 @@ package net.id.aether.world.feature;
 import com.mojang.serialization.Codec;
 import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.state.property.Properties;
@@ -33,8 +34,8 @@ public class HoneyNettleFeature extends Feature<DefaultFeatureConfig> {
         var adjustedPos = origin.withY(k);
 
         if(world.getBlockState(adjustedPos).isOf(Blocks.WATER) && world.getBlockState(adjustedPos.up()).isAir()) {
-            world.setBlockState(adjustedPos, AetherBlocks.HONEY_NETTLE.getDefaultState().with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER).with(Properties.WATERLOGGED, true), 3);
-            world.setBlockState(adjustedPos.up(), AetherBlocks.HONEY_NETTLE.getDefaultState().with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.UPPER).with(Properties.WATERLOGGED, false), 3);
+            world.setBlockState(adjustedPos, AetherBlocks.HONEY_NETTLE.getDefaultState().with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER).with(Properties.WATERLOGGED, true), Block.NOTIFY_ALL);
+            world.setBlockState(adjustedPos.up(), AetherBlocks.HONEY_NETTLE.getDefaultState().with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.UPPER).with(Properties.WATERLOGGED, false), Block.NOTIFY_ALL);
 
             return true;
         }

@@ -2,6 +2,7 @@ package net.id.aether.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.tag.AetherBlockTags;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
@@ -54,7 +55,7 @@ public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
                 while (var11.hasNext()) {
                     BlockPos blockPos2 = var11.next();
                     if (blockPos2.getSquaredDistance(blockPos) <= (double) (f * f)) {
-                        structureWorldAccess.setBlockState(blockPos2, singleStateFeatureConfig.state, 4);
+                        structureWorldAccess.setBlockState(blockPos2, singleStateFeatureConfig.state, Block.NO_REDRAW);
                     }
                 }
 

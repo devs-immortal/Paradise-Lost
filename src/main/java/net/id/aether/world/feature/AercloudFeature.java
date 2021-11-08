@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.aether.world.feature.config.AercloudConfig;
 import net.id.aether.world.feature.config.DynamicConfiguration;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -88,7 +89,7 @@ public class AercloudFeature extends Feature<AercloudConfig> {
                         if (!((x == center.getX() - stuffsize || x == center.getX() + stuffsize) && (y == center.getY() - stuffsize + 1 || y == center.getY() + stuffsize - 1))) {
                             if (world.getBlockState(new BlockPos(x, y, center.getZ() + z)).isOf(Blocks.AIR)) {
                                 if (origin.isWithinDistance(new BlockPos(x, y, center.getZ() + z), 16))
-                                    world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, 2);
+                                    world.setBlockState(new BlockPos(x, y, center.getZ() + z), state, Block.NOTIFY_LISTENERS);
                             }
                         }
                     }

@@ -60,7 +60,7 @@ public abstract class AetherBlockWithEntity extends BlockWithEntity implements W
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         boolean powered = world.isReceivingRedstonePower(pos);
         if (powered != state.get(POWERED)) {
-            world.setBlockState(pos, state.with(POWERED, powered), 3);
+            world.setBlockState(pos, state.with(POWERED, powered), Block.NOTIFY_ALL);
             pulseUpdate(state, world, pos, powered);
         }
         super.neighborUpdate(state, world, pos, block, fromPos, notify);

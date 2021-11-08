@@ -78,7 +78,7 @@ public class CinnabarRoseBlock extends AetherMushroomBlock {
             }
 
             if (world.isAir(blockPos2) && state.canPlaceAt(world, blockPos2)) {
-                world.setBlockState(blockPos2, state, 2);
+                world.setBlockState(blockPos2, state, Block.NOTIFY_LISTENERS);
             }
             world.setBlockState(pos, state.with(BLOOMING, false));
         }

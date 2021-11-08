@@ -92,7 +92,7 @@ public class MossBallBlock extends PlantBlock implements Waterloggable, Fertiliz
                 for(int r = q - 2; r < q; ++r) {
                     BlockPos blockPos = new BlockPos(m + o, r, pos.getZ() - n + p);
                     if (blockPos != pos && random.nextInt(6) == 0 && world.getBlockState(blockPos).isOf(Blocks.WATER)) {
-                        world.setBlockState(blockPos, getDefaultState(), 3);
+                        world.setBlockState(blockPos, getDefaultState(), Block.NOTIFY_ALL);
                     }
                 }
             }

@@ -3,6 +3,7 @@ package net.id.aether.world.feature;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.aether.world.feature.config.LongFeatureConfig;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
@@ -42,7 +43,7 @@ public class PillarFeature extends Feature<LongFeatureConfig> {
                 for (int i = 0; i < height; i++) {
                     var pillar = pos.up(i);
 
-                    world.setBlockState(pillar, config.body().getBlockState(random, pillar), 3);
+                    world.setBlockState(pillar, config.body().getBlockState(random, pillar), Block.NOTIFY_ALL);
 
                     for (Direction dir : Direction.values()) {
                         var shell = pillar.offset(dir);
@@ -57,14 +58,14 @@ public class PillarFeature extends Feature<LongFeatureConfig> {
                                 shellState = shellState.with(Properties.FACING, dir.getOpposite());
                             }
 
-                            world.setBlockState(shell, shellState, 3);
+                            world.setBlockState(shell, shellState, Block.NOTIFY_ALL);
                         }
                     }
                 }
 
                 if(random.nextFloat() < config.topChance()) {
                     var tip = pos.up(height);
-                    world.setBlockState(tip, config.top().getBlockState(random, tip), 3);
+                    world.setBlockState(tip, config.top().getBlockState(random, tip), Block.NOTIFY_ALL);
                 }
             }
 

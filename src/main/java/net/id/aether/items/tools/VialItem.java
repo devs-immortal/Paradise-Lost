@@ -109,7 +109,7 @@ public class VialItem extends Item {
                 }
 
                 //                    this.playEmptyingSound(player, world, pos);
-                return world.setBlockState(pos, this.fluid.getDefaultState().getBlockState(), 11) || blockState.getFluidState().isStill();
+                return world.setBlockState(pos, this.fluid.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD) || blockState.getFluidState().isStill();
             }
         }
     }

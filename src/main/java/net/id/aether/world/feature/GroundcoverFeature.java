@@ -6,6 +6,7 @@ import net.id.aether.Aether;
 import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.world.feature.config.GroundcoverFeatureConfig;
 import net.id.incubus_core.worldgen.BiFeatureConfig;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.Tag;
@@ -107,7 +108,7 @@ public class GroundcoverFeature extends Feature<GroundcoverFeatureConfig> {
 
                 var state = config.states().getBlockState(random, placement);
 
-                world.setBlockState(placement, state, 2);
+                world.setBlockState(placement, state, Block.NOTIFY_LISTENERS);
                 world.getBlockTickScheduler().schedule(placement, state.getBlock(), 0);
             }
         });

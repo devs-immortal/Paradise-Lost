@@ -4,6 +4,7 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.hostile.swet.SwetEntity;
 import net.id.aether.entities.hostile.swet.TransformableSwetEntity;
 import net.id.aether.items.AetherItems;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.Entity;
@@ -41,7 +42,7 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
             if (state.get(AGE) == 3) {
                 if (entity instanceof TransformableSwetEntity swet && swet.suggestTypeChange(state)) {
                     world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
-                    world.setBlockState(pos, state.with(AGE, 1), 2);
+                    world.setBlockState(pos, state.with(AGE, 1), Block.NOTIFY_LISTENERS);
                 } else {
                     tryPickBerries(world, pos, state);
                 }
@@ -70,7 +71,7 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
         int berries = world.random.nextInt(2) + 1;
         dropStack(world, pos, new ItemStack(AetherItems.BLUEBERRY, (int) (berries + (mature ? 1 : 0) * mod)));
         world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
-        world.setBlockState(pos, state.with(AGE, 1), 2);
+        world.setBlockState(pos, state.with(AGE, 1), Block.NOTIFY_LISTENERS);
     }
 
     @Override

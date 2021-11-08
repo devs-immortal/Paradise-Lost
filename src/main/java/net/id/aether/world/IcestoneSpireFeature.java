@@ -3,6 +3,7 @@ package net.id.aether.world;
 import com.mojang.serialization.Codec;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.tag.AetherBlockTags;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.Direction;
@@ -36,7 +37,7 @@ public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
             var height = random.nextInt(3) + 1;
 
             for (int i = 0; i <= height; i++) {
-                world.setBlockState(origin.up(i), AetherBlocks.ICESTONE.getDefaultState(), 2);
+                world.setBlockState(origin.up(i), AetherBlocks.ICESTONE.getDefaultState(), Block.NOTIFY_LISTENERS);
             }
 
             for (Direction dir : Direction.values()) {
@@ -50,16 +51,16 @@ public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
                     if(world.getBlockState(offset).getMaterial().isReplaceable()) {
 
                         if(world.getBlockState(offset.down()).isAir()) {
-                            world.setBlockState(offset.down(), state, 2);
+                            world.setBlockState(offset.down(), state, Block.NOTIFY_LISTENERS);
 
                             if(world.getBlockState(offset.down(2)).isAir()) {
-                                world.setBlockState(offset.down(2), state, 2);
+                                world.setBlockState(offset.down(2), state, Block.NOTIFY_LISTENERS);
                             }
                         }
 
                         int secHeight = random.nextInt(height);
                         for (int i = 0; i <= secHeight - random.nextInt(2); i++) {
-                            world.setBlockState(offset.up(i), state, 2);
+                            world.setBlockState(offset.up(i), state, Block.NOTIFY_LISTENERS);
                         }
 
                         if(secHeight > 0 && random.nextBoolean()) {
@@ -72,12 +73,12 @@ public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
                                     if(world.getBlockState(secOffset).getMaterial().isReplaceable()) {
 
                                         if(world.getBlockState(secOffset.down()).isAir()) {
-                                            world.setBlockState(secOffset.down(), state, 2);
+                                            world.setBlockState(secOffset.down(), state, Block.NOTIFY_LISTENERS);
                                         }
 
                                         int tertHeight = random.nextInt(secHeight + random.nextInt(2));
                                         for (int i = 0; i <= tertHeight; i++) {
-                                            world.setBlockState(secOffset.up(i), secState, 2);
+                                            world.setBlockState(secOffset.up(i), secState, Block.NOTIFY_LISTENERS);
                                         }
                                     }
                                 }

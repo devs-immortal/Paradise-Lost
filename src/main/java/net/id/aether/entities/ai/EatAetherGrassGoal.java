@@ -73,7 +73,7 @@ public class EatAetherGrassGoal extends Goal {
                 if (this.world.getBlockState(downPos).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK) {
                     if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
                         this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(AetherBlocks.AETHER_GRASS_BLOCK.getDefaultState()));
-                        this.world.setBlockState(downPos, AetherBlocks.AETHER_DIRT.getDefaultState(), 2);
+                        this.world.setBlockState(downPos, AetherBlocks.AETHER_DIRT.getDefaultState(), Block.NOTIFY_LISTENERS);
                     }
 
                     this.owner.onEatingGrass();
