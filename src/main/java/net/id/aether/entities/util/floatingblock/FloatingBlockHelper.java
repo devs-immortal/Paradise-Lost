@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PistonBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.block.piston.PistonHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -110,7 +111,8 @@ public class FloatingBlockHelper {
     }
 
     private static boolean canCreateGeneric(World world, BlockPos pos, boolean dropping) {
-        return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
+        return PistonBlock.isMovable(world.getBlockState(pos), world, pos, Direction.UP, false, Direction.UP) &&
+                FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
     }
 
     public static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfStructure) {
