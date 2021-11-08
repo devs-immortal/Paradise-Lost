@@ -39,10 +39,13 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
     @Override
     protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
         Set<BlockPos> leaves = Sets.newHashSet();
-        if (radius <= 3)
+        if (radius < 3)
             radius = 3;
 
         radius -= treeNode.getFoliageRadius();
+        if (radius > 7)
+            radius = 7;
+
         BlockPos nodePos = treeNode.getCenter();
         BlockPos altNodePos = nodePos.up(offset);
 
@@ -56,7 +59,7 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
         for (int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
                 for (int k = 0; k < radius; k++) {
-                    BlockPos offPos = nodePos.add(Math.signum(i) * Math.abs(i) - k, k, Math.signum(j) * Math.abs(j) - k);
+                    BlockPos offPos = nodePos.add(i - k, k, j - k);
                     if ((world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir) || TreeFeature.canReplace(world, offPos)) && offPos.isWithinDistance(random.nextBoolean() ? nodePos : altNodePos, radius)) {
                         replacer.accept(offPos, leafBlock);
                         leaves.add(offPos);
