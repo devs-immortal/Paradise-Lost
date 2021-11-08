@@ -390,7 +390,21 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     // todo: right now this only returns a blue moa.
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity matingAnimal) {
-        return AetherEntityTypes.MOA.create(world);
+        if(!(matingAnimal instanceof MoaEntity matingMoa)){
+            return null;
+        }
+        
+        var genesA = getGenes();
+        var genesB = matingMoa.getGenes();
+        
+        var eggStack = genesA.getEggForBreeding(genesB, world, getBlockPos());
+        var baby = AetherEntityTypes.MOA.create(world);
+        if(baby == null){
+            return null;
+        }
+        var babyGenes = baby.getGenes();
+        babyGenes.readFromNbt(eggStack.getOrCreateSubNbt("genes"));
+        return baby;
     }
 
     @Override
