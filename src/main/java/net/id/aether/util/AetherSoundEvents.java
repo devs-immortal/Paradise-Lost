@@ -115,7 +115,9 @@ public final class AetherSoundEvents{
      * @return The new sound event
      */
     private static SoundEvent music(String... songs){
-        return new MusicSoundEvent(Stream.of(songs).map((track)->locate("music/aether/" + track)).collect(Collectors.toUnmodifiableSet()));
+        var event = new MusicSoundEvent(Stream.of(songs).map((track)->locate("music/aether/" + track)).collect(Collectors.toUnmodifiableSet()));
+        SOUNDS.add(event);
+        return event;
     }
     
     /**
@@ -176,20 +178,15 @@ public final class AetherSoundEvents{
      * @return The resource
      */
     public static Resource createResource(){
-        StringBuilder builder = new StringBuilder("""
-            {
-            """);
+        StringBuilder builder = new StringBuilder("{");
     
         for(var sound : SOUNDS){
-            builder.append(sound.toJson()).append(",\n");
+            builder.append(sound.toJson()).append(',');
         }
-        builder.setLength(builder.length() - 2);
+        builder.setLength(builder.length() - 1);
         
-        builder.append("""
-            
-            }
-            """);
-        
+        builder.append('}');
+
         var payload = builder.toString().getBytes(StandardCharsets.UTF_8);
         
         return new Resource(){
@@ -246,23 +243,11 @@ public final class AetherSoundEvents{
         @Override
         public String toJson(){
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("""
-                "%s": {
-                """.formatted(getId().getPath()));
+            stringBuilder.append("\"%s\":{".formatted(getId().getPath()));
             if(subtitle != null){
-                stringBuilder.append("""
-                        "subtitle": "%s",
-                    """.formatted(subtitle));
+                stringBuilder.append("\"subtitle\":\"%s\",".formatted(subtitle));
             }
-            stringBuilder.append("""
-                  "sounds": [
-                    {
-                      "name": "%s",
-                      "type": "event"
-                    }
-                  ]
-                }
-                """.formatted(parent.toString()));
+            stringBuilder.append("\"sounds\":[{\"name\":\"%s\",\"type\":\"event\"}]}".formatted(parent.toString()));
             return stringBuilder.toString();
         }
     }
@@ -278,23 +263,12 @@ public final class AetherSoundEvents{
         @Override
         public String toJson(){
             StringBuilder builder = new StringBuilder();
-            builder.append("""
-                "music.aether": {
-                  "sounds": [
-                """);
+            builder.append("\"music.aether\":{\"sounds\":[");
             for(Identifier track : tracks){
-                builder.append("""
-                        {
-                          "name": "%s",
-                          "stream": true
-                        },
-                    """.formatted(track.toString()));
+                builder.append("{\"name\":\"%s\",\"stream\":true},".formatted(track.toString()));
             }
             builder.setLength(builder.length() - 1);
-            builder.append("""
-                  ]
-                }
-                """);
+            builder.append("]}");
             return builder.toString();
         }
     }
@@ -310,26 +284,15 @@ public final class AetherSoundEvents{
         @Override
         public String toJson(){
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("""
-                "%s": {
-                """.formatted(getId().getPath()));
+            stringBuilder.append("\"%s\":{".formatted(getId().getPath()));
             if(subtitle != null){
-                stringBuilder.append("""
-                        "subtitle": "%s",
-                    """.formatted(subtitle));
+                stringBuilder.append("\"subtitle\":\"%s\",".formatted(subtitle));
             }
-            stringBuilder.append("""
-                  "sounds": [
-                """);
+            stringBuilder.append("\"sounds\":[");
             for(Identifier sound : sounds){
-                stringBuilder.append("""
-                        "%s"
-                    """.formatted(sound.toString()));
+                stringBuilder.append("\"%s\"".formatted(sound.toString()));
             }
-            stringBuilder.append("""
-                  ]
-                }
-                """);
+            stringBuilder.append("]}");
             return stringBuilder.toString();
         }
     }
