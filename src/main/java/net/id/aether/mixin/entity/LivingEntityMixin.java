@@ -52,7 +52,14 @@ public abstract class LivingEntityMixin extends Entity implements AetherEntityEx
     public abstract boolean hasStatusEffect(StatusEffect effect);
 
     @SuppressWarnings("ConstantConditions")
-    @ModifyVariable(method = "travel", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/entity/LivingEntity;isTouchingWater()Z"))
+    @ModifyVariable(
+        method = "travel",
+        at = @At(
+            value = "INVOKE_ASSIGN",
+            ordinal = 0,
+            target = "Lnet/minecraft/world/World;getFluidState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/fluid/FluidState;"
+        )
+    )
     private double changeGravity(double gravity) {
         LivingEntity entity = (LivingEntity) (Object) this;
 
