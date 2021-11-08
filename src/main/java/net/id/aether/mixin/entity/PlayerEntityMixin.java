@@ -11,9 +11,14 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.border.WorldBorder;
+import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,7 +46,16 @@ public abstract class PlayerEntityMixin extends LivingEntity implements AetherEn
         if (source.isOutOfWorld() && getY() < world.getBottomY() - 1 && world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
             if (!world.isClient()) {
                 setAetherFallen(true);
-                ((ServerPlayerEntity) (Object) this).teleport(getServer().getWorld(World.OVERWORLD), this.getX() * 10, world.getTopY() + 128, this.getZ() * 10, this.getYaw(), this.getPitch());
+                ServerWorld overworld = getServer().getWorld(World.OVERWORLD);
+                WorldBorder worldBorder = overworld.getWorldBorder();
+                double xMin = Math.max(-2.9999872E7D, worldBorder.getBoundWest() + 16.0D);
+                double zMin = Math.max(-2.9999872E7D, worldBorder.getBoundNorth() + 16.0D);
+                double xMax = Math.min(2.9999872E7D, worldBorder.getBoundEast() - 16.0D);
+                double zMax = Math.min(2.9999872E7D, worldBorder.getBoundSouth() - 16.0D);
+                double scaleFactor = DimensionType.getCoordinateScaleFactor(world.getDimension(), overworld.getDimension());
+                BlockPos blockPos3 = new BlockPos(MathHelper.clamp(getX() * scaleFactor, xMin, xMax), world.getTopY() + 128, MathHelper.clamp(getZ() * scaleFactor, zMin, zMax));
+
+                ((ServerPlayerEntity) (Object) this).teleport(overworld, blockPos3.getX(), blockPos3.getY(), blockPos3.getZ(), getYaw(), getPitch());
                 StatusEffectInstance ef = new StatusEffectInstance(StatusEffect.byRawId(9), 160, 2, false, false, true);
                 this.addStatusEffect(ef);
             }
