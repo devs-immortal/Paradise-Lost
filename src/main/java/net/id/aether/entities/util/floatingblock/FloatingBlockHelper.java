@@ -9,7 +9,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PistonBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.block.piston.PistonHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -25,6 +24,7 @@ import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+// todo(jack) whoo boy, these method names...
 public class FloatingBlockHelper {
     public static final Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = (entity) -> {
         World world = entity.world;
@@ -33,6 +33,18 @@ public class FloatingBlockHelper {
         return !entity.isFastFloater() && distFromTop <= 50;
     };
 
+    public static boolean tryCreate(World world, BlockPos pos) {
+        return tryCreate(world, pos, false);
+    }
+
+    public static boolean tryCreate(World world, BlockPos pos, boolean force) {
+        BlockState state = world.getBlockState(pos);
+        // try making a pusher, then a double, then a generic
+        return (state.isIn(AetherBlockTags.PUSH_FLOATERS) && FloatingBlockHelper.tryCreatePusher(world, pos))
+                || (state.getProperties().contains(Properties.DOUBLE_BLOCK_HALF) && FloatingBlockHelper.tryCreateDouble(world, pos))
+                || (FloatingBlockHelper.tryCreateGeneric(world, pos, force));
+    }
+
     public static boolean tryCreatePusher(World world, BlockPos pos) {
         boolean dropping = willBlockDrop(world, pos, world.getBlockState(pos), true);
         if (dropping) {
@@ -40,16 +52,16 @@ public class FloatingBlockHelper {
         }
 
         FloatingBlockStructure structure = FloatingBlockPusherHandler.construct(world, pos);
-        if (structure != null) {
-            if (structure.blockInfos.size() == 1) {
-                world.spawnEntity(structure.blockInfos.get(0).block);
-            } else {
+        if (structure != null && structure.blockInfos.size() != 0) {
+            if (structure.blockInfos.size() != 1) {
                 structure.spawn(world);
+                return true;
+            } else if (canCreateGeneric(world, pos, false)) {
+                world.spawnEntity(structure.blockInfos.get(0).block);
+                return true;
             }
-            return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public static boolean tryCreateDouble(World world, BlockPos pos) {
@@ -72,9 +84,13 @@ public class FloatingBlockHelper {
     }
 
     public static boolean tryCreateGeneric(World world, BlockPos pos) {
+        return tryCreateGeneric(world, pos, false);
+    }
+
+    public static boolean tryCreateGeneric(World world, BlockPos pos, boolean force) {
         BlockState state = world.getBlockState(pos);
         boolean dropping = willBlockDrop(world, pos, state, false);
-        if (!canCreateGeneric(world, pos, dropping)) {
+        if (!(force || isBlockFloatable(world, pos)) || !canCreateGeneric(world, pos, dropping)) {
             return false;
         }
         FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, false);
@@ -111,8 +127,12 @@ public class FloatingBlockHelper {
     }
 
     private static boolean canCreateGeneric(World world, BlockPos pos, boolean dropping) {
-        return PistonBlock.isMovable(world.getBlockState(pos), world, pos, Direction.UP, false, Direction.UP) &&
-                FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
+        return FloatingBlockEntity.canMakeBlock(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
+    }
+
+    public static boolean isBlockFloatable(World world, BlockPos pos){
+        BlockState state = world.getBlockState(pos);
+        return !state.isIn(AetherBlockTags.NON_FLOATERS) && PistonBlock.isMovable(state, world, pos, Direction.UP, true, Direction.UP);
     }
 
     public static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfStructure) {
@@ -180,7 +200,7 @@ public class FloatingBlockHelper {
 
         @Nullable
         public static FloatingBlockStructure construct(World world, BlockPos pos) {
-            if (!world.getBlockState(pos).isOf(AetherBlocks.GRAVITITE_LEVITATOR)) {
+            if (!world.getBlockState(pos).isIn(AetherBlockTags.PUSH_FLOATERS)) {
                 return null;
             }
             FloatingBlockStructureBuilder builder = new FloatingBlockStructureBuilder(world, pos);
@@ -198,15 +218,13 @@ public class FloatingBlockHelper {
             }
             BlockState state = world.getBlockState(pos);
 
-            if (state.isAir()
-                    || !PistonBlock.isMovable(state, world, pos, Direction.UP, false, Direction.UP)
-                    || builder.isInStructure(pos)) {
+            if (state.isAir() || !isBlockFloatable(world, pos) || builder.isInStructure(pos)) {
                 return true;
             }
             // adds the block to the structure
             builder.add(pos);
             // check if above block is movable
-            if (!PistonBlock.isMovable(world.getBlockState(pos.up()), world, pos.up(), Direction.UP, true, Direction.UP)) {
+            if (!isBlockFloatable(world, pos.up())) {
                 return false;
             }
             // check if rest of tree above is movable

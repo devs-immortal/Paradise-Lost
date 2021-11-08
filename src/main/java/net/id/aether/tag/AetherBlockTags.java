@@ -13,6 +13,7 @@ public class AetherBlockTags {
     //Gravitite
     public static final Tag<Block> FAST_FLOATERS = TagFactory.BLOCK.create(locate("fast_floaters"));
     public static final Tag<Block> NON_FLOATERS = TagFactory.BLOCK.create(locate("non_floaters"));
+    public static final Tag<Block> PUSH_FLOATERS = TagFactory.BLOCK.create(locate("push_floaters"));
 
     //Plants
     public static final Tag<Block> LICHEN_SPREADABLES = TagFactory.BLOCK.create(locate("plants/lichen_spreadable"));

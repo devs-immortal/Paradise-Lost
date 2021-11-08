@@ -12,6 +12,7 @@ public class AetherCommands {
         register(MoaEggCommand::register);
         register(MoaStatCommand::register);
         register(ConditionCommand::register);
+        register(FloatingBlockCommand::register);
     }
 
     private static void register(Consumer<CommandDispatcher<ServerCommandSource>> command) {
