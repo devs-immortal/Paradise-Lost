@@ -10,6 +10,7 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.id.aether.api.ConditionAPI;
+import net.id.aether.component.ConditionManager;
 import net.id.aether.effect.condition.Condition;
 import net.id.aether.effect.condition.Persistence;
 import net.id.aether.effect.condition.Severity;
@@ -22,9 +23,11 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.CompletableFuture;
 
@@ -42,7 +45,9 @@ public class ConditionCommand {
                 literal("condition")
                         .requires((source) -> source.hasPermissionLevel(2))
                         .then(literal("query")
+                                .executes(context -> printCondition(context.getSource(), null, null))
                                 .then(argument("target", EntityArgumentType.entities())
+                                        .executes(context -> printCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), null))
                                         .then(argument("condition", IdentifierArgumentType.identifier()).suggests(CONDITION_SUGGESTER)
                                                 .executes((context -> printCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), IdentifierArgumentType.getIdentifier(context, "condition")))))))
                         .then(literal("assign")
@@ -52,53 +57,49 @@ public class ConditionCommand {
                                                         .then(argument("value", FloatArgumentType.floatArg()).suggests(SEVERITY_SUGGESTER)
                                                                 .executes(context -> setCondition(context.getSource(), EntityArgumentType.getEntity(context, "target"), IdentifierArgumentType.getIdentifier(context, "condition"), FloatArgumentType.getFloat(context, "value"), StringArgumentType.getString(context, "persistence"))))))))
                         .then(literal("clear")
+                                .executes(context -> clearCondition(context.getSource(), null, null))
                                 .then(argument("target", EntityArgumentType.entities())
-                                        .executes(context -> clearConditions(context.getSource(), EntityArgumentType.getEntities(context, "target")))))
+                                        .executes(context -> clearCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), null))
+                                        .then(argument("condition", IdentifierArgumentType.identifier()).suggests(CONDITION_SUGGESTER)
+                                                .executes(context -> clearCondition(context.getSource(), EntityArgumentType.getEntities(context, "target"), IdentifierArgumentType.getIdentifier(context, "condition"))))))
         );
     }
 
-    private static int clearConditions(ServerCommandSource source, Collection<? extends Entity> entities) {
-        if (entities.stream().allMatch(entity -> {
+    private static int clearCondition(ServerCommandSource source, Collection<? extends Entity> entities, Identifier attributeId) {
+        entities = handleNullEntity(source, entities);
+        entities.forEach(entity -> {
             if(entity instanceof LivingEntity target) {
-                var manager = ConditionAPI.getConditionManager(target);
-                if (manager.removeAll()) {
+                var conditions = handleNullCondition(source, attributeId, target);
+                conditions.forEach(condition -> {
+                    ConditionManager manager = ConditionAPI.getConditionManager(target);
+                    manager.set(condition, Persistence.TEMPORARY, 0);
+                    manager.set(condition, Persistence.CHRONIC, 0);
+
                     ConditionAPI.trySync(target);
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return true; // This lets @e work
+                });
             }
-        })) {
-            source.sendFeedback(new LiteralText("Successfully cleared all conditions."), true);
-        } else {
-            source.sendError(new LiteralText("Command couldn't complete. This should be impossible. Please report this bug."));
-        }
+        });
+        // todo: also print whose conditions are being cleared
+        source.sendFeedback(new LiteralText("Successfully cleared condition(s)."), true);
         return 1;
     }
 
-    private static int printCondition(ServerCommandSource source, Collection<? extends Entity> entities, Identifier attributeId) {
+    private static int printCondition(ServerCommandSource source, @Nullable Collection<? extends Entity> entities, Identifier attributeId) {
+        entities = handleNullEntity(source, entities);
         entities.forEach(entity -> {
             if(entity instanceof LivingEntity target) {
-                Condition condition;
+                var conditions = handleNullCondition(source, attributeId, target);
+                conditions.forEach(condition -> {
+                    var rawSeverity = ConditionAPI.getConditionManager(target).getScaledSeverity(condition);
+                    var severity = Severity.getSeverity(rawSeverity);
 
-                try {
-                    condition = ConditionAPI.getOrThrow(attributeId);
-                } catch (NoSuchElementException e) {
-                    source.sendError(new LiteralText(e.getMessage()));
-                    return;
-                }
-
-                var rawSeverity = ConditionAPI.getConditionManager(target).getScaledSeverity(condition);
-                var severity = Severity.getSeverity(rawSeverity);
-
-                if (!condition.isExempt(target)) {
-                    source.sendFeedback(new TranslatableText("commands.aether.condition.success.query", new TranslatableText(ConditionAPI.getTranslationString(condition)), new TranslatableText(severity.translation), rawSeverity), false);
-                }
-                else {
-                    source.sendError(new TranslatableText("commands.aether.condition.failure", new TranslatableText(ConditionAPI.getTranslationString(condition))));
-                }
+                    if (!condition.isExempt(target)) {
+                        // todo: also print who is being queried
+                        source.sendFeedback(new TranslatableText("commands.aether.condition.success.query", new TranslatableText(ConditionAPI.getTranslationString(condition)), new TranslatableText(severity.translation), rawSeverity), false);
+                    } else {
+                        source.sendError(new TranslatableText("commands.aether.condition.failure", new TranslatableText(ConditionAPI.getTranslationString(condition))));
+                    }
+                });
             }
         });
         return 1;
@@ -124,6 +125,7 @@ public class ConditionCommand {
                     var rawSeverity = ConditionAPI.getConditionManager(target).getScaledSeverity(condition);
                     var severity = Severity.getSeverity(rawSeverity);
 
+                    // todo: also print who the condition is being assigned to
                     source.sendFeedback(new TranslatableText("commands.aether.condition.success.assign", new TranslatableText(ConditionAPI.getTranslationString(condition)), new TranslatableText(severity.translation), rawSeverity), false);
                     ConditionAPI.trySync(target);
                 }
@@ -133,6 +135,33 @@ public class ConditionCommand {
             }
         }
         return 1;
+    }
+
+    private static Collection<? extends Entity> handleNullEntity(ServerCommandSource source, Collection<? extends Entity> entities){
+        if (entities == null) {
+            try {
+                entities = List.of(source.getEntityOrThrow());
+            } catch (Exception e) {
+                source.sendError(new LiteralText(e.getMessage()));
+                entities = List.of();
+            }
+        }
+        return entities;
+    }
+
+    private static Collection<Condition> handleNullCondition(ServerCommandSource source, Identifier attributeId, LivingEntity target){
+        Collection<Condition> conditions;
+        if (attributeId != null) {
+            try {
+                conditions = List.of(ConditionAPI.getOrThrow(attributeId));
+            } catch (NoSuchElementException e) {
+                source.sendError(new LiteralText(e.getMessage()));
+                conditions = List.of();
+            }
+        } else {
+            conditions = ConditionAPI.getValidConditions(target.getType());
+        }
+        return conditions;
     }
 
     public static class ConditionSuggester implements SuggestionProvider<ServerCommandSource> {
