@@ -1,5 +1,9 @@
 package net.id.aether.entities.hostile;
 
+import net.id.aether.api.ConditionAPI;
+import net.id.aether.component.ConditionManager;
+import net.id.aether.effect.condition.Conditions;
+import net.id.aether.effect.condition.Persistence;
 import net.id.aether.entities.projectile.CockatriceSpitEntity;
 import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.entity.Entity;
@@ -122,7 +126,8 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
                 }
 
                 if (seconds > 0) {
-                    victim.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, seconds * 20), this);
+                    ConditionManager manager = ConditionAPI.getConditionManager(victim);
+                    manager.add(Conditions.VENOM, Persistence.TEMPORARY, 40F);
                 }
             }
 

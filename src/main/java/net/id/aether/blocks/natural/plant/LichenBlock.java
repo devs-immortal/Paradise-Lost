@@ -1,5 +1,9 @@
 package net.id.aether.blocks.natural.plant;
 
+import net.id.aether.api.ConditionAPI;
+import net.id.aether.component.ConditionManager;
+import net.id.aether.effect.condition.Conditions;
+import net.id.aether.effect.condition.Persistence;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -9,8 +13,6 @@ import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -42,7 +44,8 @@ public class LichenBlock extends FallingBlock {
         if(venomous) {
             entity.slowMovement(state, new Vec3d(0.65D, 0.875D, 0.65D));
             if(entity instanceof LivingEntity livingEntity) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 200, 1));
+                ConditionManager manager = ConditionAPI.getConditionManager(livingEntity);
+                manager.add(Conditions.VENOM, Persistence.TEMPORARY, 1F);
             }
         }
         else {

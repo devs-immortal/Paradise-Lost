@@ -1,13 +1,15 @@
 package net.id.aether.entities.projectile;
 
+import net.id.aether.api.ConditionAPI;
+import net.id.aether.component.ConditionManager;
+import net.id.aether.effect.condition.Conditions;
+import net.id.aether.effect.condition.Persistence;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.hostile.CockatriceEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.LlamaSpitEntity;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
@@ -40,7 +42,8 @@ public class CockatriceSpitEntity extends LlamaSpitEntity {
                         yield 15;
                 };
 
-                target.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, seconds * 20), owner);
+                ConditionManager manager = ConditionAPI.getConditionManager(target);
+                manager.add(Conditions.VENOM, Persistence.TEMPORARY, 100F);
             }
         }
     }

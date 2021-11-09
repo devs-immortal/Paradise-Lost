@@ -1,11 +1,13 @@
 package net.id.aether.blocks.natural.plant;
 
+import net.id.aether.api.ConditionAPI;
+import net.id.aether.component.ConditionManager;
+import net.id.aether.effect.condition.Conditions;
+import net.id.aether.effect.condition.Persistence;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -26,12 +28,13 @@ public class LichenPileBlock extends FallingBlock implements Fertilizable {
         super(settings);
         this.venomous = venomous;
     }
-    // todo: replace poison effect with venom effect
+
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if(venomous) {
             entity.slowMovement(state, new Vec3d(0.925D, 1D, 0.925D));
             if(entity instanceof LivingEntity livingEntity) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 0));
+                ConditionManager manager = ConditionAPI.getConditionManager(livingEntity);
+                manager.add(Conditions.VENOM, Persistence.TEMPORARY, 0.6F);
             }
         }
         else {
