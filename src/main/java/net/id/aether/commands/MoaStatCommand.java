@@ -4,6 +4,11 @@ package net.id.aether.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.suggestion.SuggestionProvider;
+import com.mojang.brigadier.suggestion.Suggestions;
+import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.id.aether.api.MoaAPI;
 import net.id.aether.entities.passive.moa.MoaAttributes;
 import net.id.aether.component.AetherComponents;
@@ -16,12 +21,16 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class MoaStatCommand {
+
+    public static final AttributeSuggester ATTRIBUTE_SUGGESTER = new AttributeSuggester();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
@@ -29,7 +38,8 @@ public class MoaStatCommand {
                         .requires((source) -> source.hasPermissionLevel(2))
                         .then(argument("target", EntityArgumentType.entities())
                                 .then(literal("query")
-                                        .then(argument("attribute", StringArgumentType.word())
+                                        .executes(context -> printStat(context.getSource(), EntityArgumentType.getEntities(context, "target"), null))
+                                        .then(argument("attribute", StringArgumentType.word()).suggests(ATTRIBUTE_SUGGESTER)
                                                 .executes((context -> printStat(context.getSource(), EntityArgumentType.getEntities(context, "target"), StringArgumentType.getString(context, "attribute"))))))
                                 .then(literal("assign").then(argument("attribute", StringArgumentType.word())
                                         .then(argument("value", FloatArgumentType.floatArg())
@@ -37,7 +47,8 @@ public class MoaStatCommand {
         );
     }
 
-    private static int printStat(ServerCommandSource source, Collection<? extends Entity> entities, String attributeId) {
+    private static int printStat(ServerCommandSource source, Collection<? extends Entity> entities, String rawAttribute) {
+        String attributeId = rawAttribute == null ? "ALL" : rawAttribute;
         entities.forEach(entity -> {
             if (entity instanceof MoaEntity moa) {
                 MoaGenes genes = moa.getGenes();
@@ -91,5 +102,15 @@ public class MoaStatCommand {
             source.sendError(new TranslatableText("commands.aether.moastat.failure.entity", entity.getType().getName()));
         }
         return 1;
+    }
+
+    public static class AttributeSuggester implements SuggestionProvider<ServerCommandSource> {
+        @Override
+        public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
+            Arrays.stream(MoaAttributes.values()).forEach(attribute -> builder.suggest(attribute.name()));
+            builder.suggest("HUNGER");
+            builder.suggest("ALL");
+            return builder.buildFuture();
+        }
     }
 }
