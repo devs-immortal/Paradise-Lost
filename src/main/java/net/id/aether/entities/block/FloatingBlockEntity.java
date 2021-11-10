@@ -5,7 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityTypes;
-import net.id.aether.entities.util.floatingblock.FloatingBlockHelper;
+import net.id.aether.api.FloatingBlockHelper;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -78,14 +78,6 @@ public class FloatingBlockEntity extends Entity {
     public FloatingBlockEntity(World world, BlockPos pos, BlockState floatingBlockState, boolean partOfStructure) {
         this(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, floatingBlockState);
         this.partOfStructure = partOfStructure;
-    }
-
-    public static boolean canMakeBlock(boolean shouldDrop, BlockState below, BlockState above) {
-        if (shouldDrop) {
-            return FallingBlock.canFallThrough(below);
-        } else {
-            return FallingBlock.canFallThrough(above);
-        }
     }
 
     @Override

@@ -2,7 +2,7 @@ package net.id.aether.commands;
 
 
 import com.mojang.brigadier.CommandDispatcher;
-import net.id.aether.entities.util.floatingblock.FloatingBlockHelper;
+import net.id.aether.api.FloatingBlockHelper;
 import net.minecraft.command.argument.*;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
@@ -14,6 +14,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class FloatingBlockCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+        // make this work for entities too, eventually.
         dispatcher.register(
                 literal("gravitate")
                         .requires((source) -> source.hasPermissionLevel(2))
@@ -25,7 +26,7 @@ public class FloatingBlockCommand {
     }
 
     private static int floatBlock(ServerCommandSource source, BlockPos pos, boolean force) {
-        if (!source.getWorld().getBlockState(pos).isAir() && FloatingBlockHelper.tryCreate(source.getWorld(), pos, force)) {
+        if (!source.getWorld().getBlockState(pos).isAir() && FloatingBlockHelper.ANY.tryCreate(source.getWorld(), pos, force)) {
             source.sendFeedback(new LiteralText("Successfully floated the block(s)."), true);
         } else {
             source.sendError(new LiteralText("Couldn't float the block(s)."));

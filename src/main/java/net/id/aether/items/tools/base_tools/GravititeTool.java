@@ -1,15 +1,13 @@
 package net.id.aether.items.tools.base_tools;
 
-import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityExtensions;
-import net.id.aether.entities.util.floatingblock.FloatingBlockHelper;
+import net.id.aether.api.FloatingBlockHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -43,7 +41,7 @@ public class GravititeTool {
                 return ActionResult.PASS;
             }
 
-            if (!FloatingBlockHelper.tryCreate(world, pos)) {
+            if (!FloatingBlockHelper.ANY.tryCreate(world, pos)) {
                 return ActionResult.PASS;
             }
         }

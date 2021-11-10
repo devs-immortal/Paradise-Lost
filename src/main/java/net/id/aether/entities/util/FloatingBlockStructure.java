@@ -1,4 +1,4 @@
-package net.id.aether.entities.util.floatingblock;
+package net.id.aether.entities.util;
 
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.minecraft.block.BlockState;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class FloatingBlockStructure {
     private static final ArrayList<FloatingBlockStructure> allStructures = new ArrayList<>(0);
-    protected ArrayList<FloatingBlockInfoWrapper> blockInfos = new ArrayList<>(0);
+    public ArrayList<FloatingBlockInfoWrapper> blockInfos = new ArrayList<>(0);
 
     public FloatingBlockStructure(FloatingBlockEntity entity1, FloatingBlockEntity entity2, Vec3i offset) {
         this.blockInfos.add(new FloatingBlockInfoWrapper(entity1, Vec3i.ZERO));
@@ -50,7 +50,7 @@ public class FloatingBlockStructure {
         }
     }
 
-    protected void alignToMaster(FloatingBlockInfoWrapper blockInfo) {
+    private void alignToMaster(FloatingBlockInfoWrapper blockInfo) {
         FloatingBlockInfoWrapper master = blockInfos.get(0);
         Vec3d newPos = master.block.getPos().add(Vec3d.of(blockInfo.offset));
         blockInfo.block.setPos(newPos.x, newPos.y, newPos.z);
@@ -75,13 +75,17 @@ public class FloatingBlockStructure {
         allStructures.remove(this);
     }
 
-    protected void init() {
+    private void init() {
         allStructures.add(this);
     }
 
+    public boolean remove() {
+        return allStructures.remove(this);
+    }
+
     public static class FloatingBlockInfoWrapper {
-        FloatingBlockEntity block;
-        Vec3i offset;
+        public FloatingBlockEntity block;
+        public Vec3i offset;
 
         public FloatingBlockInfoWrapper(FloatingBlockEntity block, Vec3i offset) {
             this.block = block;
