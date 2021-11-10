@@ -1,16 +1,8 @@
 package net.id.aether.blocks.blockentity;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
-import net.id.aether.Aether;
+
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.dungeon.DungeonSwitchBlockEntity;
-import net.id.aether.blocks.dungeon.DungeonSwitchBlock;
-import net.id.aether.client.rendering.block.AetherChestBlockEntityRenderer;
-import net.id.aether.client.rendering.block.DungeonSwitchBlockEntityRenderer;
-import net.id.aether.client.rendering.block.IncubatorBlockEntityRenderer;
-import net.id.aether.client.rendering.util.AetherChestTexture;
 import net.id.aether.mixin.block.ChestBlockEntityAccessor;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -44,17 +36,5 @@ public class AetherBlockEntityTypes {
     
     private static void register(String name, BlockEntityType<?> type){
         Registry.register(Registry.BLOCK_ENTITY_TYPE, locate(name), type);
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static void initClient() {
-        BlockEntityRendererRegistry.register(INCUBATOR, IncubatorBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(DUNGEON_SWITCH, DungeonSwitchBlockEntityRenderer::new);
-
-        BlockEntityRendererRegistry.register(SKYROOT_CHEST, ctx->new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.SKYROOT));
-        BlockEntityRendererRegistry.register(GOLDEN_OAK_CHEST, ctx->new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.GOLDEN_OAK));
-        BlockEntityRendererRegistry.register(ORANGE_CHEST, ctx->new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.ORANGE));
-        BlockEntityRendererRegistry.register(CRYSTAL_CHEST, ctx->new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.CRYSTAL));
-        BlockEntityRendererRegistry.register(WISTERIA_CHEST, ctx->new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.WISTERIA));
     }
 }

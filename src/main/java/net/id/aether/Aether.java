@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
+import net.id.aether.client.rendering.block.AetherBlockEntityRenderers;
 import net.id.aether.client.rendering.util.AetherTextures;
 import net.id.aether.client.model.armor.AetherArmorModels;
 import net.id.aether.client.model.AetherModelPredicates;
@@ -56,9 +57,9 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public static final Logger LOG = LogManager.getLogger(MOD_ID);
 
     public static Identifier locate(String location) {
-        if(location.contains(":")){
+        if (location.contains(":")) {
             return new Identifier(location);
-        }else{
+        } else {
             return new Identifier(MOD_ID, location);
         }
     }
@@ -93,7 +94,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherModelLayers.initClient();
         AetherEntityRenderers.initClient();
         AetherColorProviders.initClient();
-        AetherBlockEntityTypes.initClient();
+        AetherBlockEntityRenderers.initClient();
         AetherParticles.initClient();
         AetherTextures.init();
     }
