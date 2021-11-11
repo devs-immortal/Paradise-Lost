@@ -1,7 +1,6 @@
 package net.id.aether.mixin.client;
 
-import net.id.aether.entities.block.FloatingBlockEntity;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.id.aether.entities.util.PostTickEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -10,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin  implements FloatingBlockEntity.PostTickEntity {
+public abstract class ClientPlayerEntityMixin  implements PostTickEntity {
     @Unique
     boolean sendMovement = false;
 

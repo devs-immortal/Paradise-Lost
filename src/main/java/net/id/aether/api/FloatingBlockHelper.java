@@ -3,7 +3,7 @@ package net.id.aether.api;
 import net.gudenau.minecraft.moretags.MoreTags;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.entities.util.FloatingBlockStructure;
-import net.id.aether.entities.util.FloatingBlockStructure.FloatingBlockInfoWrapper;
+import net.id.aether.entities.util.FloatingBlockStructure.FloatingBlockInfo;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -30,26 +30,6 @@ import java.util.function.Predicate;
  * @author Jack Papel
  */
 public interface FloatingBlockHelper {
-    /**
-     * A general purpose floating block helper.
-     */
-    FloatingBlockHelper ANY = new GeneralFloatingBlockHelper();
-
-    /**
-     * A standard floating block helper.
-     */
-    FloatingBlockHelper STANDARD = new GenericFloatingBlockHelper();
-
-    /**
-     * A double floating block helper, such as a door or tall grass plant.
-     */
-    FloatingBlockHelper DOUBLE = new DoubleFloatingBlockHelper();
-
-    /**
-     * A piston-like floating block structure helper.
-     */
-    FloatingBlockHelper PUSHER = new PusherFloatingBlockHelper();
-
     /**
      * The default conditions under which a floating block goes from floating to falling.
      * By default, this is when a floating block is 50 blocks from the height limit, and
@@ -134,6 +114,263 @@ public interface FloatingBlockHelper {
     }
 
     /**
+     * A general purpose floating block helper.
+     */
+    FloatingBlockHelper ANY = new FloatingBlockHelper(){
+        /**
+         * Try to create whatever floating block type is appropriate for the given position.
+         * @param pos The position of the block that should be floated.
+         * @return Whether a floating block could be created.
+         */
+        public boolean tryCreate(World world, BlockPos pos) {
+            return tryCreate(world, pos, false);
+        }
+
+        /**
+         * Try to create whatever floating block type is appropriate for the given position.
+         *
+         * @param pos   The position of the block that should be floated.
+         * @param force If true, the block will be floated even if it is on the blacklist
+         *              ({@code AetherBlockTags.NON_FLOATERS}) or immovable by pistons.
+         * @return Whether a floating block could be created.
+         */
+        public boolean tryCreate(World world, BlockPos pos, boolean force) {
+            // try making a pusher, then a double, then a generic
+            return PUSHER.tryCreate(world, pos)
+                    || DOUBLE.tryCreate(world, pos)
+                    || STANDARD.tryCreate(world, pos, force);
+        }
+
+        @Override
+        public boolean isSuitableFor(BlockState state) {
+            return true;
+        }
+
+    };
+
+    /**
+     * A standard floating block helper.
+     */
+    FloatingBlockHelper STANDARD = new FloatingBlockHelper(){
+        /**
+         * Try to create a standard floating block at the given position.
+         *
+         * @param pos The position of the block that should be floated.
+         * @return Whether a floating block could be created.
+         */
+        @Override
+        public boolean tryCreate(World world, BlockPos pos) {
+            return tryCreate(world, pos, false);
+        }
+
+        /**
+         * Try to create a standard floating block at the given position.
+         *
+         * @param pos   The position of the block that should be floated.
+         * @param force If true, the block will be floated even if it is on the blacklist
+         *              ({@code AetherBlockTags.NON_FLOATERS}) or immovable by pistons.
+         * @return Whether a floating block could be created.
+         */
+        @Override
+        public boolean tryCreate(World world, BlockPos pos, boolean force) {
+            BlockState state = world.getBlockState(pos);
+            boolean dropping = FloatingBlockHelper.willBlockDrop(world, pos, state, false);
+            if (!(force || FloatingBlockHelper.isBlockFloatable(world, pos)) || !isNotBlocked(world, pos, dropping)) {
+                return false;
+            }
+            FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, false);
+
+            if (state.isOf(Blocks.TNT)) {
+                entity.setOnEndFloating((impact, landed) -> {
+                    if (impact >= 0.8) {
+                        BlockPos landingPos = entity.getBlockPos();
+                        world.breakBlock(landingPos, false);
+                        world.createExplosion(entity, landingPos.getX(), landingPos.getY(), landingPos.getZ(), (float) MathHelper.clamp(impact * 5.5, 0, 10), Explosion.DestructionType.BREAK);
+                    }
+                });
+            }
+            if (state.isOf(Blocks.LIGHTNING_ROD)) {
+                entity.setOnEndFloating((impact, landed) -> {
+                    if (world.isThundering() && landed && impact >= 1.1) {
+                        LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
+                        lightning.setPosition(Vec3d.ofCenter(entity.getBlockPos()));
+                        world.spawnEntity(lightning);
+                    }
+                });
+            }
+            world.spawnEntity(entity);
+            return true;
+        }
+
+        @Override
+        public boolean isSuitableFor(BlockState state) {
+            return true;
+        }
+
+        public boolean isNotBlocked(World world, BlockPos pos, boolean dropping) {
+            return ANY.isNotBlocked(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
+        }
+    };
+
+    /**
+     * A double floating block helper, such as a door or tall grass plant.
+     */
+    FloatingBlockHelper DOUBLE = new FloatingBlockHelper(){
+        /**
+         * Try to create a double floating block, such as a door or tall grass plant.
+         * @param pos The position of the block that should be floated. It doesn't matter which
+         *            half of the block is given.
+         * @return Whether a double floating block could be created.
+         */
+        @Override
+        public boolean tryCreate(World world, BlockPos pos) {
+            BlockState state = world.getBlockState(pos);
+            boolean dropping = FloatingBlockHelper.willBlockDrop(world, pos, state, true);
+            if (!isSuitableFor(state) || !isNotBlocked(world, pos, dropping)) {
+                return false;
+            }
+            if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER) {
+                pos = pos.down();
+                state = world.getBlockState(pos);
+                if (!isSuitableFor(state)) {
+                    return false;
+                }
+            } else {
+                if (!isSuitableFor(world.getBlockState(pos.up()))) {
+                    return false;
+                }
+            }
+            BlockState upperState = world.getBlockState(pos.up());
+            FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.up(), upperState, true);
+            FloatingBlockEntity lower = new FloatingBlockEntity(world, pos, state, true);
+            upper.dropItem = false;
+            FloatingBlockStructure structure = new FloatingBlockStructure(lower, upper, Vec3i.ZERO.up());
+            structure.spawn(world);
+            return true;
+        }
+
+        @Override
+        public boolean tryCreate(World world, BlockPos pos, boolean force) {
+            return tryCreate(world, pos);
+        }
+
+        public boolean isNotBlocked(World world, BlockPos pos, boolean dropping) {
+            BlockState state = world.getBlockState(pos);
+            if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
+                return ANY.isNotBlocked(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up().up()));
+            } else {
+                return ANY.isNotBlocked(dropping, world.getBlockState(pos.down().down()), world.getBlockState(pos.up()));
+            }
+        }
+
+        public boolean isSuitableFor(BlockState state) {
+            return state.getProperties().contains(Properties.DOUBLE_BLOCK_HALF);
+        }
+    };
+
+    /**
+     * A piston-like floating block structure helper.
+     */
+    FloatingBlockHelper PUSHER = new FloatingBlockHelper(){
+        public static final int MAX_MOVABLE_BLOCKS = PistonHandler.MAX_MOVABLE_BLOCKS;
+
+        /**
+         * Try to create a floating block pusher, which is a piston-like floating block structure.
+         * @param pos The position of the block that should be the pusher.
+         * @return Whether a floating block could be created.
+         */
+        @Override
+        public boolean tryCreate(World world, BlockPos pos) {
+            boolean dropping = FloatingBlockHelper.willBlockDrop(world, pos, world.getBlockState(pos), true);
+            if (dropping || !isSuitableFor(world.getBlockState(pos))) {
+                return STANDARD.tryCreate(world, pos);
+            }
+
+            FloatingBlockStructure structure = construct(world, pos);
+            if (structure != null) {
+                structure.spawn(world);
+                return true;
+            } else {
+                return STANDARD.tryCreate(world, pos);
+            }
+        }
+
+        @Override
+        public boolean tryCreate(World world, BlockPos pos, boolean force) {
+            return tryCreate(world, pos);
+        }
+
+        public boolean isSuitableFor(BlockState state) {
+            return state.isIn(AetherBlockTags.PUSH_FLOATERS);
+        }
+
+        @Nullable
+        private static FloatingBlockStructure construct(World world, BlockPos pos) {
+            FloatingBlockStructureBuilder builder = new FloatingBlockStructureBuilder(world, pos);
+            if (world.getBlockState(pos).isIn(AetherBlockTags.PUSH_FLOATERS)
+                    && continueTree(world, pos.up(), builder)
+                    && builder.size() > 1) {
+                return builder.build();
+            }
+            builder.cancel();
+            return null;
+        }
+
+        // returns false if the tree is unable to move. returns true otherwise.
+        private static boolean continueTree(World world, BlockPos pos, FloatingBlockStructureBuilder builder) {
+            if (builder.size() > MAX_MOVABLE_BLOCKS + 1) {
+                return false;
+            }
+            BlockState state = world.getBlockState(pos);
+
+            if (state.isAir() || !FloatingBlockHelper.isBlockFloatable(world, pos) || builder.isInStructure(pos)) {
+                return true;
+            }
+            // adds the block to the structure
+            builder.add(pos);
+            // check if above block is movable
+            if (!FloatingBlockHelper.isBlockFloatable(world, pos.up())) {
+                return false;
+            }
+            // check if rest of tree above is movable
+            if (!continueTree(world, pos.up(), builder)) {
+                return false;
+            }
+            // sides and bottom (sticky blocks)
+            if (MoreTags.STICKY_BLOCKS.contains(state.getBlock())) {
+                // checks each of the sides
+                for (var newPos : new BlockPos[]{
+                        pos.north(),
+                        pos.east(),
+                        pos.south(),
+                        pos.west(),
+                        pos.down()
+                        /* up has already been checked */
+                }) {
+                    BlockState adjacentState = world.getBlockState(newPos);
+                    if (isAdjacentBlockStuck(state, adjacentState)) {
+                        // check the rest of the tree above the side block
+                        if (!continueTree(world, newPos, builder)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        private static boolean isAdjacentBlockStuck(BlockState state, BlockState adjacentState) {
+            if (MoreTags.HONEY_BLOCKS.contains(state.getBlock()) && MoreTags.SLIME_BLOCKS.contains(adjacentState.getBlock())) {
+                return false;
+            } else if (MoreTags.SLIME_BLOCKS.contains(state.getBlock()) && MoreTags.HONEY_BLOCKS.contains(adjacentState.getBlock())) {
+                return false;
+            } else {
+                return MoreTags.STICKY_BLOCKS.contains(state.getBlock()) || MoreTags.STICKY_BLOCKS.contains(adjacentState.getBlock());
+            }
+        }
+    };
+
+    /**
      * A structure builder intended to aid the creation of floating block structures.
      */
     class FloatingBlockStructureBuilder {
@@ -156,16 +393,16 @@ public interface FloatingBlockHelper {
          */
         public FloatingBlockStructureBuilder add(BlockPos pos){
             FloatingBlockEntity entity = new FloatingBlockEntity(this.world, pos, world.getBlockState(pos), true);
-            this.structure.blockInfos.add(new FloatingBlockInfoWrapper(entity, pos.subtract(this.origin)));
+            this.structure.blockInfos.add(new FloatingBlockInfo(entity, pos.subtract(this.origin)));
             return this;
         }
 
         /**
          * @param pos The position of the block that should be added to the structure.
-         * @param p A predicate to test whether the block should be added.
+         * @param predicate A predicate to test whether the block should be added.
          */
-        public FloatingBlockStructureBuilder addIf(BlockPos pos, Predicate<ArrayList<FloatingBlockInfoWrapper>> p){
-            if (p.test(this.structure.blockInfos)){
+        public FloatingBlockStructureBuilder addIf(BlockPos pos, Predicate<ArrayList<FloatingBlockInfo>> predicate){
+            if (predicate.test(this.structure.blockInfos)){
                 return this.add(pos);
             }
             return this;
@@ -179,9 +416,9 @@ public interface FloatingBlockHelper {
         }
 
         /**
-         * @return The list of {@link FloatingBlockInfoWrapper}s so far
+         * @return The list of {@link FloatingBlockInfo}s so far
          */
-        public ArrayList<FloatingBlockInfoWrapper> list(){
+        public ArrayList<FloatingBlockInfo> list(){
             return structure.blockInfos;
         }
 
@@ -198,7 +435,7 @@ public interface FloatingBlockHelper {
          */
         public boolean isInStructure(BlockPos pos) {
             return this.structure.blockInfos.stream().anyMatch(wrapper ->
-                    wrapper.offset.equals(pos.subtract(origin)));
+                    wrapper.offset().equals(pos.subtract(origin)));
         }
 
         /**
@@ -206,247 +443,6 @@ public interface FloatingBlockHelper {
          */
         public boolean cancel() {
             return structure.remove();
-        }
-    }
-}
-
-class GeneralFloatingBlockHelper implements FloatingBlockHelper {
-    /**
-     * Try to create whatever floating block type is appropriate for the given position.
-     *
-     * @param pos The position of the block that should be floated.
-     * @return Whether a floating block could be created.
-     */
-    public boolean tryCreate(World world, BlockPos pos) {
-        return tryCreate(world, pos, false);
-    }
-
-    /**
-     * Try to create whatever floating block type is appropriate for the given position.
-     *
-     * @param pos   The position of the block that should be floated.
-     * @param force If true, the block will be floated even if it is on the blacklist
-     *              ({@code AetherBlockTags.NON_FLOATERS}) or immovable by pistons.
-     * @return Whether a floating block could be created.
-     */
-    public boolean tryCreate(World world, BlockPos pos, boolean force) {
-        BlockState state = world.getBlockState(pos);
-        // try making a pusher, then a double, then a generic
-        return (PUSHER.isSuitableFor(state) && PUSHER.tryCreate(world, pos))
-                || (DOUBLE.isSuitableFor(state) && DOUBLE.tryCreate(world, pos))
-                || (STANDARD.tryCreate(world, pos, force));
-    }
-
-    @Override
-    public boolean isSuitableFor(BlockState state) {
-        return true;
-    }
-
-}
-
-class GenericFloatingBlockHelper implements FloatingBlockHelper {
-    /**
-     * Try to create a standard floating block at the given position.
-     *
-     * @param pos The position of the block that should be floated.
-     * @return Whether a floating block could be created.
-     */
-    @Override
-    public boolean tryCreate(World world, BlockPos pos) {
-        return tryCreate(world, pos, false);
-    }
-
-    /**
-     * Try to create a standard floating block at the given position.
-     *
-     * @param pos   The position of the block that should be floated.
-     * @param force If true, the block will be floated even if it is on the blacklist
-     *              ({@code AetherBlockTags.NON_FLOATERS}) or immovable by pistons.
-     * @return Whether a floating block could be created.
-     */
-    @Override
-    public boolean tryCreate(World world, BlockPos pos, boolean force) {
-        BlockState state = world.getBlockState(pos);
-        boolean dropping = FloatingBlockHelper.willBlockDrop(world, pos, state, false);
-        if (!(force || FloatingBlockHelper.isBlockFloatable(world, pos)) || !isNotBlocked(world, pos, dropping)) {
-            return false;
-        }
-        FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, false);
-
-        if (state.isOf(Blocks.TNT)) {
-            entity.setOnEndFloating((impact, landed) -> {
-                if (impact >= 0.8) {
-                    BlockPos landingPos = entity.getBlockPos();
-                    world.breakBlock(landingPos, false);
-                    world.createExplosion(entity, landingPos.getX(), landingPos.getY(), landingPos.getZ(), (float) MathHelper.clamp(impact * 5.5, 0, 10), Explosion.DestructionType.BREAK);
-                }
-            });
-        }
-        if (state.isOf(Blocks.LIGHTNING_ROD)) {
-            entity.setOnEndFloating((impact, landed) -> {
-                if (world.isThundering() && landed && impact >= 1.1) {
-                    LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
-                    lightning.setPosition(Vec3d.ofCenter(entity.getBlockPos()));
-                    world.spawnEntity(lightning);
-                }
-            });
-        }
-        world.spawnEntity(entity);
-        return true;
-    }
-
-    @Override
-    public boolean isSuitableFor(BlockState state) {
-        return true;
-    }
-
-    public boolean isNotBlocked(World world, BlockPos pos, boolean dropping) {
-        return ANY.isNotBlocked(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up()));
-    }
-}
-
-class DoubleFloatingBlockHelper implements FloatingBlockHelper {
-    /**
-     * Try to create a double floating block, such as a door or tall grass plant.
-     *
-     * @param pos The position of the block that should be floated. It doesn't matter which
-     *            half of the block is given.
-     * @return Whether a double floating block could be created.
-     */
-    @Override
-    public boolean tryCreate(World world, BlockPos pos) {
-        BlockState state = world.getBlockState(pos);
-        boolean dropping = FloatingBlockHelper.willBlockDrop(world, pos, state, true);
-        if (!isNotBlocked(world, pos, dropping)) {
-            return false;
-        }
-        if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER) {
-            pos = pos.down();
-            state = world.getBlockState(pos);
-        }
-        BlockState upperState = world.getBlockState(pos.up());
-        FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.up(), upperState, true);
-        FloatingBlockEntity lower = new FloatingBlockEntity(world, pos, state, true);
-        upper.dropItem = false;
-        FloatingBlockStructure structure = new FloatingBlockStructure(lower, upper, Vec3i.ZERO.up());
-        structure.spawn(world);
-        return true;
-    }
-
-    @Override
-    public boolean tryCreate(World world, BlockPos pos, boolean force) {
-        return tryCreate(world, pos);
-    }
-
-    public boolean isNotBlocked(World world, BlockPos pos, boolean dropping) {
-        BlockState state = world.getBlockState(pos);
-        if (state.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
-            return ANY.isNotBlocked(dropping, world.getBlockState(pos.down()), world.getBlockState(pos.up().up()));
-        } else {
-            return ANY.isNotBlocked(dropping, world.getBlockState(pos.down().down()), world.getBlockState(pos.up()));
-        }
-    }
-
-    public boolean isSuitableFor(BlockState state) {
-        return state.getProperties().contains(Properties.DOUBLE_BLOCK_HALF);
-    }
-}
-
-class PusherFloatingBlockHelper implements FloatingBlockHelper {
-    public static final int MAX_MOVABLE_BLOCKS = PistonHandler.MAX_MOVABLE_BLOCKS;
-
-    /**
-     * Try to create a floating block pusher, which is a piston-like floating block structure.
-     * @param pos The position of the block that should be the pusher.
-     * @return Whether a floating block could be created.
-     */
-    @Override
-    public boolean tryCreate(World world, BlockPos pos) {
-        boolean dropping = FloatingBlockHelper.willBlockDrop(world, pos, world.getBlockState(pos), true);
-        if (dropping) {
-            return STANDARD.tryCreate(world, pos);
-        }
-
-        FloatingBlockStructure structure = construct(world, pos);
-        if (structure != null) {
-            structure.spawn(world);
-            return true;
-        } else {
-            return STANDARD.tryCreate(world, pos);
-        }
-    }
-
-    @Override
-    public boolean tryCreate(World world, BlockPos pos, boolean force) {
-        return tryCreate(world, pos);
-    }
-
-    public boolean isSuitableFor(BlockState state) {
-        return state.isIn(AetherBlockTags.PUSH_FLOATERS);
-    }
-
-    @Nullable
-    private static FloatingBlockStructure construct(World world, BlockPos pos) {
-        FloatingBlockStructureBuilder builder = new FloatingBlockStructureBuilder(world, pos);
-        if (world.getBlockState(pos).isIn(AetherBlockTags.PUSH_FLOATERS)
-                && continueTree(world, pos.up(), builder)
-                && builder.size() > 1) {
-            return builder.build();
-        }
-        builder.cancel();
-        return null;
-    }
-
-    // returns false if the tree is unable to move. returns true otherwise.
-    private static boolean continueTree(World world, BlockPos pos, FloatingBlockStructureBuilder builder) {
-        if (builder.size() > MAX_MOVABLE_BLOCKS + 1) {
-            return false;
-        }
-        BlockState state = world.getBlockState(pos);
-
-        if (state.isAir() || !FloatingBlockHelper.isBlockFloatable(world, pos) || builder.isInStructure(pos)) {
-            return true;
-        }
-        // adds the block to the structure
-        builder.add(pos);
-        // check if above block is movable
-        if (!FloatingBlockHelper.isBlockFloatable(world, pos.up())) {
-            return false;
-        }
-        // check if rest of tree above is movable
-        if (!continueTree(world, pos.up(), builder)) {
-            return false;
-        }
-        // sides and bottom (sticky blocks)
-        if (MoreTags.STICKY_BLOCKS.contains(state.getBlock())) {
-            // checks each of the sides
-            for (var newPos : new BlockPos[]{
-                    pos.north(),
-                    pos.east(),
-                    pos.south(),
-                    pos.west(),
-                    pos.down()
-                    /* up has already been checked */
-            }) {
-                BlockState adjacentState = world.getBlockState(newPos);
-                if (isAdjacentBlockStuck(state, adjacentState)) {
-                    // check the rest of the tree above the side block
-                    if (!continueTree(world, newPos, builder)) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    private static boolean isAdjacentBlockStuck(BlockState state, BlockState adjacentState) {
-        if (MoreTags.HONEY_BLOCKS.contains(state.getBlock()) && MoreTags.SLIME_BLOCKS.contains(adjacentState.getBlock())) {
-            return false;
-        } else if (MoreTags.SLIME_BLOCKS.contains(state.getBlock()) && MoreTags.HONEY_BLOCKS.contains(adjacentState.getBlock())) {
-            return false;
-        } else {
-            return MoreTags.STICKY_BLOCKS.contains(state.getBlock()) || MoreTags.STICKY_BLOCKS.contains(adjacentState.getBlock());
         }
     }
 }

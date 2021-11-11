@@ -2,6 +2,7 @@ package net.id.aether.mixin.client;
 
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.entities.util.FloatingBlockStructure;
+import net.id.aether.entities.util.PostTickEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.world.EntityList;
 import org.spongepowered.asm.mixin.Final;
@@ -20,11 +21,9 @@ public class ClientWorldMixin {
 
     @Inject(method = "tickEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;tickBlockEntities()V"))
     void postEntityTick(CallbackInfo ci) {
-        entityList.forEach(entityObj -> {
-            if (entityObj instanceof FloatingBlockEntity entity) {
-                entity.postTickEntities();
-            } else if (entityObj instanceof FloatingBlockEntity.PostTickEntity entity) {
-                entity.postTick();
+        entityList.forEach(entity -> {
+            if (entity instanceof PostTickEntity postTickEntity) {
+                postTickEntity.postTick();
             }
         });
         FloatingBlockStructure[] structures = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);

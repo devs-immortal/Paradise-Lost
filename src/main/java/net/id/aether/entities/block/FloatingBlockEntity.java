@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.api.FloatingBlockHelper;
+import net.id.aether.entities.util.PostTickEntity;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -40,7 +41,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-public class FloatingBlockEntity extends Entity {
+public class FloatingBlockEntity extends Entity implements PostTickEntity {
     protected static final TrackedData<BlockPos> ORIGIN = DataTracker.registerData(FloatingBlockEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     public int floatTime;
     public boolean dropItem = true;
@@ -144,7 +145,7 @@ public class FloatingBlockEntity extends Entity {
     }
 
     @SuppressWarnings("deprecation")
-    public void postTickEntities() {
+    public void postTick() {
         if (this.floatTile.isAir()) {
             this.discard();
         } else {
@@ -187,7 +188,9 @@ public class FloatingBlockEntity extends Entity {
                         entity.setPosition(entity.getPos().x, getBoundingBox().maxY, entity.getPos().z);
                         entity.setOnGround(true);
                     }
-                    this.floatTile.getBlock().onEntityCollision(floatTile, world, this.getBlockPos(), entity);
+                    if (!(entity instanceof FloatingBlockEntity fbe && fbe.partOfStructure)) {
+                        this.floatTile.getBlock().onEntityCollision(floatTile, world, this.getBlockPos(), entity);
+                    }
                 }
             }
 
@@ -426,7 +429,4 @@ public class FloatingBlockEntity extends Entity {
         this.getOnEndFloating().accept(impact, false);
     }
 
-    public interface PostTickEntity {
-        void postTick();
-    }
 }

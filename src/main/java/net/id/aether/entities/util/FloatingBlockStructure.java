@@ -8,21 +8,26 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
+/**
+ * An object designed to hold floating block entities together.
+ * @author Jack Papel
+ */
 public class FloatingBlockStructure {
-    private static final ArrayList<FloatingBlockStructure> allStructures = new ArrayList<>(0);
-    public ArrayList<FloatingBlockInfoWrapper> blockInfos = new ArrayList<>(0);
+    private static final ArrayList<FloatingBlockStructure> structures = new ArrayList<>(0);
+    // Maybe find a better name for this variable. It's fine for now, though.
+    public ArrayList<FloatingBlockInfo> blockInfos = new ArrayList<>(0);
 
     public FloatingBlockStructure(FloatingBlockEntity entity1, FloatingBlockEntity entity2, Vec3i offset) {
-        this.blockInfos.add(new FloatingBlockInfoWrapper(entity1, Vec3i.ZERO));
-        this.blockInfos.add(new FloatingBlockInfoWrapper(entity2, offset));
+        this.blockInfos.add(new FloatingBlockInfo(entity1, Vec3i.ZERO));
+        this.blockInfos.add(new FloatingBlockInfo(entity2, offset));
     }
 
-    public FloatingBlockStructure(ArrayList<FloatingBlockInfoWrapper> arr) {
+    public FloatingBlockStructure(ArrayList<FloatingBlockInfo> arr) {
         this.blockInfos.addAll(arr);
     }
 
     public static ArrayList<FloatingBlockStructure> getAllStructures() {
-        return allStructures;
+        return structures;
     }
 
     public void spawn(World world) {
@@ -35,8 +40,8 @@ public class FloatingBlockStructure {
     }
 
     public void postTick() {
-        FloatingBlockInfoWrapper master = blockInfos.get(0);
-        for (FloatingBlockInfoWrapper blockInfo : blockInfos) {
+        FloatingBlockInfo master = blockInfos.get(0);
+        for (FloatingBlockInfo blockInfo : blockInfos) {
             if (!blockInfo.equals(master)) {
                 this.alignToMaster(blockInfo);
             }
@@ -50,16 +55,16 @@ public class FloatingBlockStructure {
         }
     }
 
-    private void alignToMaster(FloatingBlockInfoWrapper blockInfo) {
-        FloatingBlockInfoWrapper master = blockInfos.get(0);
+    private void alignToMaster(FloatingBlockInfo blockInfo) {
+        FloatingBlockInfo master = blockInfos.get(0);
         Vec3d newPos = master.block.getPos().add(Vec3d.of(blockInfo.offset));
         blockInfo.block.setPos(newPos.x, newPos.y, newPos.z);
         blockInfo.block.setVelocity(master.block.getVelocity());
         blockInfo.block.setDropping(master.block.isDropping());
     }
 
-    public void land(FloatingBlockInfoWrapper lander, boolean success) {
-        for (FloatingBlockInfoWrapper blockInfo : blockInfos) {
+    public void land(FloatingBlockInfo lander, boolean success) {
+        for (FloatingBlockInfo blockInfo : blockInfos) {
             alignToMaster(blockInfo);
             if (!blockInfo.equals(lander)) {
                 double impact = blockInfos.get(0).block.getVelocity().length();
@@ -72,24 +77,21 @@ public class FloatingBlockStructure {
             blockInfo.block.dropItem = false;
         }
         this.blockInfos.clear();
-        allStructures.remove(this);
+        structures.remove(this);
     }
 
     private void init() {
-        allStructures.add(this);
+        structures.add(this);
     }
 
     public boolean remove() {
-        return allStructures.remove(this);
+        return structures.remove(this);
     }
 
-    public static class FloatingBlockInfoWrapper {
-        public FloatingBlockEntity block;
-        public Vec3i offset;
-
-        public FloatingBlockInfoWrapper(FloatingBlockEntity block, Vec3i offset) {
-            this.block = block;
-            this.offset = offset;
-        }
+    /**
+     * A wrapper class for a floating block entity and its offset
+     * from the origin of a {@link FloatingBlockStructure}.
+     */
+    public record FloatingBlockInfo(FloatingBlockEntity block, Vec3i offset) {
     }
 }

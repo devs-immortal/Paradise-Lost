@@ -28,7 +28,7 @@ public class ServerWorldMixin {
         if (this.idleTimeout < 300) {
             entityList.forEach(entityObj -> {
                 if (entityObj instanceof FloatingBlockEntity entity) {
-                    entity.postTickEntities();
+                    entity.postTick();
                 } else if (entityObj == null) {
                     Aether.LOG.error("Started checking null entities in ServerWorldMixin::postEntityTick");
                 }
