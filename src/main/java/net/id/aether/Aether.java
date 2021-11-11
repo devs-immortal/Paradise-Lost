@@ -8,6 +8,7 @@ import net.fabricmc.api.ModInitializer;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.client.rendering.block.AetherBlockEntityRenderers;
+import net.id.aether.client.rendering.item.AetherItemRenderers;
 import net.id.aether.client.rendering.util.AetherTextures;
 import net.id.aether.client.model.armor.AetherArmorModels;
 import net.id.aether.client.model.AetherModelPredicates;
@@ -97,5 +98,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherBlockEntityRenderers.initClient();
         AetherParticles.initClient();
         AetherTextures.init();
+        AetherItemRenderers.init();
     }
 }
