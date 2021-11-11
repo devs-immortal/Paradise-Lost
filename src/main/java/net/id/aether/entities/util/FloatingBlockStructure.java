@@ -14,7 +14,6 @@ import java.util.ArrayList;
  */
 public class FloatingBlockStructure {
     private static final ArrayList<FloatingBlockStructure> structures = new ArrayList<>(0);
-    // Maybe find a better name for this variable. It's fine for now, though.
     public ArrayList<FloatingBlockInfo> blockInfos = new ArrayList<>(0);
 
     public FloatingBlockStructure(FloatingBlockEntity entity1, FloatingBlockEntity entity2, Vec3i offset) {
