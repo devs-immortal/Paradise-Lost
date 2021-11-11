@@ -1,6 +1,6 @@
 package net.id.aether.blocks;
 
-import net.id.aether.entities.util.floatingblock.FloatingBlockHelper;
+import net.id.aether.api.FloatingBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.OreBlock;
@@ -50,7 +50,7 @@ public class FloatingBlock extends OreBlock {
     private void checkFloatable(World worldIn, BlockPos pos) {
         if (!this.powered || worldIn.isReceivingRedstonePower(pos)) {
             if (!worldIn.isClient) {
-                FloatingBlockHelper.tryCreate(worldIn, pos);
+                FloatingBlockHelper.ANY.tryCreate(worldIn, pos);
             }
         }
     }

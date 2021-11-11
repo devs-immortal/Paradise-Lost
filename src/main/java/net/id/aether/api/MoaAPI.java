@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import org.jetbrains.annotations.ApiStatus;
 
 import java.util.*;
 import java.util.function.BiPredicate;
@@ -29,7 +28,7 @@ import java.util.function.BiPredicate;
  * ~ Jack
  * @author AzazelTheDemonLord
  */
-@ApiStatus.Experimental
+
 public class MoaAPI {
 
     /**
@@ -57,21 +56,6 @@ public class MoaAPI {
      * @see MoaAPI.MatingEntry
      */
     private static final List<MatingEntry> MOA_BREEDING_REGISTRY = new ArrayList<>();
-
-    /**
-     * This method creates and registers a new {@code MoaRace} with the given parameters.
-     * @param id The unique {@code Identifier} identifying this particular {@code MoaRace}
-     * @param affinity @todo ask Azzy how these work
-     * @param spawnStats @todo ask Azzy how this works.
-     * @param glowing Whether the created {@code MoaRace} will glow.
-     * @param legendary Whether the created {@code MoaRace} will be legendary
-     * @param particles The particles emitted when ... @todo
-     * @return The newly created {@code MoaRace}
-     */
-    @Deprecated
-    public static MoaRace register(Identifier id, MoaAttributes affinity, SpawnStatWeighting spawnStats, boolean glowing, boolean legendary, ParticleType<?> particles){
-        return register(id, new MoaRace(affinity, spawnStats, glowing, legendary, particles));
-    }
 
     /**
      * @param name The unique {@code Identifier} identifying this particular {@code MoaRace}
@@ -240,6 +224,11 @@ public class MoaAPI {
 
     /**
      * A container for all stats pertaining to a certain {@code MoaRace}
+     * @param defaultAffinity @todo ask Azzy how these work
+     * @param statWeighting @todo ask Azzy how this works.
+     * @param glowing Whether the created {@code MoaRace} will glow.
+     * @param legendary Whether the created {@code MoaRace} will be legendary
+     * @param particles The particles emitted when ... @todo
      */
     public static record MoaRace(MoaAttributes defaultAffinity,
                                  SpawnStatWeighting statWeighting, boolean glowing, boolean legendary,

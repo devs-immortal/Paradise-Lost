@@ -2,7 +2,7 @@ package net.id.aether.mixin.server;
 
 import net.id.aether.Aether;
 import net.id.aether.entities.block.FloatingBlockEntity;
-import net.id.aether.entities.util.floatingblock.FloatingBlockStructure;
+import net.id.aether.entities.util.FloatingBlockStructure;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.EntityList;
 import org.spongepowered.asm.mixin.Final;
