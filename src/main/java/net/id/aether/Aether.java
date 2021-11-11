@@ -5,6 +5,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.client.rendering.block.AetherBlockEntityRenderers;
@@ -17,6 +18,7 @@ import net.id.aether.client.rendering.entity.AetherEntityRenderers;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.rendering.particle.AetherParticles;
 import net.id.aether.commands.AetherCommands;
+import net.id.aether.devel.AetherDevel;
 import net.id.aether.effect.condition.Conditions;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.passive.moa.MoaRaces;
@@ -84,6 +86,9 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherSoundEvents.init();
         Conditions.init();
         MoaRaces.init();
+        if(FabricLoader.getInstance().isDevelopmentEnvironment()){
+            AetherDevel.init();
+        }
     }
 
     @Override
@@ -99,5 +104,8 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherParticles.initClient();
         AetherTextures.init();
         AetherItemRenderers.init();
+        if(FabricLoader.getInstance().isDevelopmentEnvironment()){
+            AetherDevel.Client.init();
+        }
     }
 }

@@ -50,9 +50,11 @@
     "client.render.LivingEntityRendererMixin",
     "client.render.MapRendererMixin",
     "client.render.TexturedRenderLayersMixin",
-    "client.render.WorldRendererMixin"
+    "client.render.WorldRendererMixin",
+    "devel.client.SpriteAtlasTextureMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "plugin": "net.id.aether.mixin.devel.Plugin"
 }
