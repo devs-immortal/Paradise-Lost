@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.id.aether.fluids.SpringWaterFluid;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.fluid.Fluid;
@@ -15,15 +16,17 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockRenderView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
 public class FluidRenderSetup {
 
-    public static void setupFluidRendering(final Fluid still, @Nullable final Fluid flowing, final Identifier textureFluidId, final int color) {
+    public static void setupFluidRendering(final Fluid still, @Nullable final Fluid flowing, final Identifier textureFluidId, final FluidColorProvider color) {
         final Identifier stillSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_still");
         final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_flow");
 
@@ -65,7 +68,7 @@ public class FluidRenderSetup {
 
             @Override
             public int getFluidColor(BlockRenderView view, BlockPos pos, FluidState state) {
-                return color;
+                return color.getColor(view, pos, state);
             }
         };
 
@@ -73,5 +76,10 @@ public class FluidRenderSetup {
         if (flowing != null) {
             FluidRenderHandlerRegistry.INSTANCE.register(flowing, renderHandler);
         }
+    }
+    
+    @FunctionalInterface
+    public interface FluidColorProvider{
+        int getColor(BlockRenderView view, BlockPos pos, FluidState state);
     }
 }
