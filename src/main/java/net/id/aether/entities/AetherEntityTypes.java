@@ -45,8 +45,8 @@ public class AetherEntityTypes {
     //todo: why is this an animal? should extend hostile to allow hostile spawn restrictions, and inherit hostile behviour
     public static final EntityType<AechorPlantEntity> AECHOR_PLANT = add("aechor_plant", of(AechorPlantEntity::new, MONSTER, changing(1f, 1f), 5),
             attributes(AechorPlantEntity::createAechorPlantAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
-    public static final EntityType<ChestMimicEntity> CHEST_MIMIC = add("chest_mimic", of(ChestMimicEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
-            attributes(ChestMimicEntity::createChestMimicAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
+//    public static final EntityType<ChestMimicEntity> CHEST_MIMIC = add("chest_mimic", of(ChestMimicEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
+//            attributes(ChestMimicEntity::createChestMimicAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
     public static final EntityType<CockatriceEntity> COCKATRICE = add("cockatrice", of(CockatriceEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
             attributes(CockatriceEntity::createCockatriceAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
     // passive
@@ -56,12 +56,6 @@ public class AetherEntityTypes {
             attributes(AerbunnyEntity::createAerbunnyAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
     public static final EntityType<AerwhaleEntity> AERWHALE = add("aerwhale", of(AerwhaleEntity::new, CREATURE, changing(3.0F, 1.2F), 5),
             attributes(AerwhaleEntity::createAerwhaleAttributes), spawnRestrictions(MobEntity::canMobSpawn));
-    public static final EntityType<FlyingCowEntity> FLYING_COW = add("flying_cow", of(FlyingCowEntity::new, CREATURE, changing(0.9F, 1.3F), 5),
-            attributes(FlyingCowEntity::createFlyingCowAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
-    public static final EntityType<PhygEntity> PHYG = add("phyg", of(PhygEntity::new, CREATURE, changing(0.9F, 1.3F), 5),
-            attributes(PhygEntity::createPhygAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
-    public static final EntityType<SheepuffEntity> SHEEPUFF = add("sheepuff", of(SheepuffEntity::new, CREATURE, changing(0.9F, 1.3F), 5),
-            attributes(SheepuffEntity::createSheepuffAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
     // projectile
     public static final EntityType<CockatriceSpitEntity> COCKATRICE_SPIT = add("cockatrice_spit", of(CockatriceSpitEntity::new, MISC, changing(0.5F, 0.5F), 5));
     public static final EntityType<GoldenDartEntity> GOLDEN_DART = add("golden_dart", of(GoldenDartEntity::new, MISC, changing(0.5F, 0.5F), 5));

@@ -238,14 +238,11 @@ public class AetherItems {
     public static final SpawnEggItem COCKATRICE_SPAWN_EGG = add("cockatrice_spawn_egg", new SpawnEggItem(AetherEntityTypes.COCKATRICE, 0x9FC3F7, 0x3D2338, misc), spawnEggBehavior);
     public static final SpawnEggItem AERBUNNY_SPAWN_EGG = add("aerbunny_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERBUNNY, 0xC5D6ED, 0x82A6D9, misc), spawnEggBehavior);
     public static final SpawnEggItem AERWHALE_SPAWN_EGG = add("aerwhale_spawn_egg", new SpawnEggItem(AetherEntityTypes.AERWHALE, 0x5C6D91, 0xDEDBCE, misc), spawnEggBehavior);
-    //    public static final SpawnEggItem FLYING_COW_SPAWN_EGG = null;
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(AetherEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc), spawnEggBehavior);
-    public static final SpawnEggItem SWET_SPAWN_EGG = add("swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.WHITE_SWET, 0x8F9294, 0xE6EAEB, misc), spawnEggBehavior);
-    public static final SpawnEggItem BLUE_SWET_SPAWN_EGG = add("blue_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.BLUE_SWET, 0x46699E, 0xE6EAEB, misc), spawnEggBehavior);
-    public static final SpawnEggItem PURPLE_SWET_SPAWN_EGG = add("purple_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.PURPLE_SWET, 0x5D548C, 0xE6EAEB, misc), spawnEggBehavior);
-    public static final SpawnEggItem GOLDEN_SWET_SPAWN_EGG = add("golden_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.GOLDEN_SWET, 0xC99D36, 0xE6EAEB, misc), spawnEggBehavior);
-    //    public static final SpawnEggItem PHYG_SPAWN_EGG = null;
-    //    public static final SpawnEggItem SHEEPUFF_SPAWN_EGG = null;
+    public static final SpawnEggItem SWET_SPAWN_EGG = add("swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.WHITE_SWET, 0x717375, 0xffffff, misc), spawnEggBehavior);
+    public static final SpawnEggItem BLUE_SWET_SPAWN_EGG = add("blue_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.BLUE_SWET, 0x46699E, 0xf2f2f2, misc), spawnEggBehavior);
+    public static final SpawnEggItem PURPLE_SWET_SPAWN_EGG = add("purple_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.PURPLE_SWET, 0x5D548C, 0xf2f2f2, misc), spawnEggBehavior);
+    public static final SpawnEggItem GOLDEN_SWET_SPAWN_EGG = add("golden_swet_spawn_egg", new SpawnEggItem(AetherEntityTypes.GOLDEN_SWET, 0xC99D36, 0xf2f2f2, misc), spawnEggBehavior);
 
     private static FabricItemSettings building_block() {
         return new FabricItemSettings().group(AetherItemGroups.AETHER_BUILDING_BLOCKS);

@@ -1,4 +1,4 @@
-package net.id.aether.client.rendering.entity;
+package net.id.aether.client.rendering.entity.block;
 
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.minecraft.block.BlockRenderType;

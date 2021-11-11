@@ -3,8 +3,8 @@ package net.id.aether.client.rendering.entity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.id.aether.client.rendering.entity.block.FloatingBlockRenderer;
 import net.id.aether.client.rendering.entity.hostile.AechorPlantRenderer;
-import net.id.aether.client.rendering.entity.hostile.ChestMimicRenderer;
 import net.id.aether.client.rendering.entity.hostile.CockatriceRenderer;
 import net.id.aether.client.rendering.entity.hostile.SwetRenderer;
 import net.id.aether.client.rendering.entity.passive.AerbunnyRenderer;
@@ -30,15 +30,12 @@ public class AetherEntityRenderers {
                 AetherEntityTypes.GOLDEN_SWET
         );
         register(AetherEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
-        register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
+        //register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
         register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);
         // passive
         register(AetherEntityTypes.MOA, MoaRenderer::new);
         register(AetherEntityTypes.AERBUNNY, AerbunnyRenderer::new);
         register(AetherEntityTypes.AERWHALE, AerwhaleRenderer::new);
-//        register(AetherEntityTypes.FLYING_COW, FlyingCowRenderer::new);
-//        register(AetherEntityTypes.PHYG, PhygRenderer::new);
-//        register(AetherEntityTypes.SHEEPUFF, SheepuffRenderer::new);
         // projectile
         register(AetherEntityTypes.COCKATRICE_SPIT, CockatriceSpitRenderer::new);
         register(DartRenderer::new,
