@@ -250,7 +250,7 @@ public abstract class SwetEntity extends SlimeEntity {
     // temporarily set to "snowflake"
     @Override
     protected ParticleEffect getParticles() {
-        return ParticleTypes.SNOWFLAKE;
+        return ParticleTypes.SPLASH;
     }
 
     @Override
