@@ -259,6 +259,7 @@ public class AetherItems {
     public static final BlockItem AETHER_ENCHANTED_GRASS = add("enchanted_aether_grass", AetherBlocks.AETHER_ENCHANTED_GRASS, building_block);
     public static final BlockItem AETHER_FROZEN_GRASS = add("aether_frozen_grass", AetherBlocks.AETHER_FROZEN_GRASS, building_block);
     public static final BlockItem AETHER_DIRT = add("aether_dirt", AetherBlocks.AETHER_DIRT, building_block);
+    public static final BlockItem COARSE_AETHER_DIRT = add("coarse_aether_dirt", AetherBlocks.COARSE_AETHER_DIRT, building_block);
     public static final BlockItem PERMAFROST = add("permafrost", AetherBlocks.PERMAFROST, building_block);
     public static final BlockItem QUICKSOIL = add("quicksoil", AetherBlocks.QUICKSOIL, building_block);
     public static final BlockItem COLD_AERCLOUD = add("cold_aercloud", AetherBlocks.COLD_AERCLOUD, building_block);

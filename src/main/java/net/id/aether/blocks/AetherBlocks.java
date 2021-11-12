@@ -58,6 +58,7 @@ public class AetherBlocks {
     public static final AetherSnowyBlock AETHER_FROZEN_GRASS = add("aether_frozen_grass", new AetherSnowyBlock(grassBlock().mapColor(MapColor.WHITE).strength(2F).sounds(BlockSoundGroup.GILDED_BLACKSTONE)), flattenable());
     // Soil Blocks
     public static final Block AETHER_DIRT = add("aether_dirt", new Block(copy(DIRT).strength(0.3f)), tillable(), flattenable());
+    public static final Block COARSE_AETHER_DIRT = add("coarse_aether_dirt", new Block(copy(DIRT).strength(0.3f)), coarseTillable(), flattenable());
     public static final Block PERMAFROST = add("permafrost", new Block(copy(DIRT).strength(2f).sounds(BlockSoundGroup.GILDED_BLACKSTONE)), flattenable());
     public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new AetherFarmlandBlock(copy(FARMLAND)));
     public static final AetherDirtPathBlock AETHER_DIRT_PATH = add("aether_grass_path", new AetherDirtPathBlock(copy(DIRT_PATH)));

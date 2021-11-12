@@ -33,5 +33,6 @@ class AetherBlockActions {
 
     protected static Action<Block> strippedFrom(Block original) { return (id, stripped) -> StrippableBlockRegistry.register(original, stripped);}
     protected static Action<Block> tillable() { return (id, block) -> TillableBlockRegistry.register(block, HoeItem::canTillFarmland, AetherBlocks.AETHER_FARMLAND.getDefaultState());}
+    protected static Action<Block> coarseTillable() { return (id, block) -> TillableBlockRegistry.register(block, HoeItem::canTillFarmland, AetherBlocks.AETHER_DIRT.getDefaultState());}
     protected static Action<Block> flattenable() { return (id, block) -> FlattenableBlockRegistry.register(block, AetherBlocks.AETHER_DIRT_PATH.getDefaultState());}
 }
