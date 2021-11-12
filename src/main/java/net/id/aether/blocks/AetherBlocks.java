@@ -280,10 +280,10 @@ public class AetherBlocks {
 
     private static final WoodTypeFactory borealWisteria = wisteria.withLeafColor(MapColor.CYAN);
     private static final Vec3i[] borealWisteriaColors = new Vec3i[]{RenderUtils.toRGB(0x42cdff), RenderUtils.toRGB(0x3dffcb), RenderUtils.toRGB(0xac4dff), RenderUtils.toRGB(0xff5cd6)};
-    public static final AuralLeavesBlock BOREAL_WISTERIA_LEAVES = add("boreal_wisteria_leaves", new AuralLeavesBlock(borealWisteria.auralWisteriaLeaves(), false, borealWisteriaColors), flammableLeaves, cutoutMippedRenderLayer);
+    public static final AuralLeavesBlock BOREAL_WISTERIA_LEAVES = add("boreal_wisteria_leaves", new AuralLeavesBlock(borealWisteria.auralWisteriaLeaves(), false, borealWisteriaColors), flammableLeaves);
     public static final SaplingBlock BOREAL_WISTERIA_SAPLING = add("boreal_wisteria_sapling", new AetherSaplingBlock(new BorealWisteriaSaplingGenerator(), borealWisteria.sapling().luminance(state -> 5)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_BOREAL_WISTERIA_SAPLING = add("potted_boreal_wisteria_sapling", new FlowerPotBlock(BOREAL_WISTERIA_SAPLING, flowerPot().luminance(state -> 5)), cutoutRenderLayer);
-    public static final AuralHangerBlock BOREAL_WISTERIA_HANGER = add("boreal_wisteria_hanger", new AuralHangerBlock(borealWisteria.auralHanger(), borealWisteriaColors), flammableLeaves, cutoutRenderLayer);
+    public static final AuralHangerBlock BOREAL_WISTERIA_HANGER = add("boreal_wisteria_hanger", new AuralHangerBlock(borealWisteria.auralHanger(), borealWisteriaColors), flammableLeaves, auralCutoutMippedRenderLayer);
 
     // Grasses
     private static Settings shrub() {

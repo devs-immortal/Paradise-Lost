@@ -1,2 +1,10 @@
 accessWidener	v1	named
 #accessible    method    net/minecraft/entity/projectile/ProjectileEntity            <init>                       (Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V
+
+accessible    class     net/minecraft/client/render/RenderPhase$Shader
+accessible    class     net/minecraft/client/render/RenderLayer$MultiPhaseParameters
+accessible    class     net/minecraft/client/render/RenderLayer$MultiPhase
+accessible    class     net/minecraft/client/render/RenderPhase$Lightmap
+accessible    class     net/minecraft/client/render/RenderPhase$Shader
+accessible    class     net/minecraft/client/render/RenderPhase$TextureBase
+accessible    class     net/minecraft/client/render/RenderPhase$Texture

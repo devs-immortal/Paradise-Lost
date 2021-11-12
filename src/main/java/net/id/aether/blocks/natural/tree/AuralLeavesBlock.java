@@ -2,12 +2,17 @@ package net.id.aether.blocks.natural.tree;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.api.EnvironmentInterface;
 import net.id.aether.blocks.util.DynamicColorBlock;
+import net.id.aether.client.rendering.block.RenderLayerOverride;
+import net.id.aether.client.rendering.shader.AetherRenderLayers;
+import net.id.aether.devel.AetherDevel;
 import net.id.aether.util.RenderUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
@@ -15,13 +20,16 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicColorBlock {
+@EnvironmentInterface(value = EnvType.CLIENT, itf = RenderLayerOverride.class)
+public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicColorBlock, RenderLayerOverride{
 
     private final Vec3i[] gradientColors;
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        DynamicColorBlock.updateBlockColor(pos);
+        if(!AetherDevel.isDevel()){
+            DynamicColorBlock.updateBlockColor(pos);
+        }
         super.randomDisplayTick(state, world, pos, random);
     }
 
@@ -38,7 +46,12 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicColorB
         Vec3i color2 = colorRGBs[1];
         Vec3i color3 = colorRGBs[2];
         Vec3i color4 = colorRGBs[3];
-        float timeOffset = MinecraftClient.getInstance().world.getTime() * 0.003F;
+        float timeOffset;
+        if(AetherDevel.isDevel()){
+            timeOffset = 0;
+        }else{
+            timeOffset = MinecraftClient.getInstance().world.getTime() * 0.003F;
+        }
 
         // First, we mix color 1 and color 2 using noise
         double simplex;
@@ -101,5 +114,15 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicColorB
     @Environment(EnvType.CLIENT)
     public ItemColorProvider getBlockItemColorProvider() {
         return (stack, tintIndex) -> getAuralColor(BlockPos.ORIGIN, gradientColors);
+    }
+    
+    @Environment(EnvType.CLIENT)
+    @Override
+    public RenderLayer getRenderLayerOverride(boolean fancy){
+        if(AetherDevel.isDevel()){
+            return fancy ? AetherRenderLayers.AURAL_CUTOUT_MIPPED : AetherRenderLayers.AURAL;
+        }else{
+            return fancy ? RenderLayer.getCutoutMipped() : RenderLayer.getSolid();
+        }
     }
 }

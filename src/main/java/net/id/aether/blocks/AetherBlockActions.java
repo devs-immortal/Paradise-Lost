@@ -28,7 +28,9 @@ class AetherBlockActions {
     protected static final Action<Block> translucentRenderLayer = onClient((id, block) -> RenderUtils.transparentRenderLayer(block));
     protected static final Action<Block> cutoutRenderLayer = onClient((id, block) -> RenderUtils.cutoutRenderLayer(block));
     protected static final Action<Block> cutoutMippedRenderLayer = onClient((id, block) -> RenderUtils.cutoutMippedRenderLayer(block));
-
+    protected static final Action<Block> auralRenderLayer = onClient((id, block) -> RenderUtils.auralRenderLayer(block));
+    protected static final Action<Block> auralCutoutMippedRenderLayer = onClient((id, block) -> RenderUtils.auralCutoutMippedRenderLayer(block));
+    
     protected static final Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
 
     protected static Action<Block> strippedFrom(Block original) { return (id, stripped) -> StrippableBlockRegistry.register(original, stripped);}

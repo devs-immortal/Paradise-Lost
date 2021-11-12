@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.id.aether.util.UncheckedWriter;
 import net.minecraft.util.Identifier;
 
@@ -18,6 +19,14 @@ public final class AetherDevel{
     
     public static void init(){
         System.out.print("\n".repeat(5) + "The Aether Reborn is in debug mode!" + "\n".repeat(6));
+    }
+    
+    private static final boolean isDevel = FabricLoader.getInstance().isDevelopmentEnvironment();
+    
+    // Just to make things that should be removed at some point, this isn't going anywhere
+    @Deprecated(forRemoval = true)
+    public static boolean isDevel(){
+        return isDevel;
     }
     
     @Environment(EnvType.CLIENT)
