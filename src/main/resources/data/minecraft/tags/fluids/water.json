@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "the_aether:dense_aercloud",
+    "the_aether:spring_water",
+    "the_aether:flowing_spring_water",
     "minecraft:water",
     "minecraft:flowing_water"
   ]

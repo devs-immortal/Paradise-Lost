@@ -23,8 +23,17 @@ public class SpringWaterFluid extends WaterFluid {
             if (random.nextInt(64) == 0) {
                 world.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
             }
-        } else if (random.nextInt(10) == 0) {
-            world.addParticle(ParticleTypes.BUBBLE, (double)pos.getX() + random.nextDouble(), (double)pos.getY() + random.nextDouble(), (double)pos.getZ() + random.nextDouble(), 0.0D, 0.0D, 0.0D);
+
+        } else if (random.nextInt(4) == 0) {
+            world.addParticle(ParticleTypes.BUBBLE_COLUMN_UP, (double)pos.getX() + random.nextDouble(), (double)pos.getY() + random.nextDouble(), (double)pos.getZ() + random.nextDouble(), random.nextDouble() / 25 - 0.02, 0.05, random.nextDouble() / 25 - 0.02);
+
+            if(random.nextInt(3) == 0 && !world.isWater(pos.up())) {
+                world.addParticle(ParticleTypes.CLOUD, (double)pos.getX() + random.nextDouble(), (double)pos.getY() + 0.925 + random.nextDouble() / 100, (double)pos.getZ() + random.nextDouble(), 0.0D, random.nextDouble() / 25 + 0.01, 0.0D);
+            }
+
+            if (random.nextInt(12) == 0) {
+                world.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.35F, random.nextFloat() + 0.5F, true);
+            }
         }
     }
 

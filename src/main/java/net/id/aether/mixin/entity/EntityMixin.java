@@ -34,7 +34,7 @@ public abstract class EntityMixin {
             if(entity.world.getStatesInBoxIfLoaded(entity.getBoundingBox().contract(1.0E-6D)).anyMatch(
                 (state)->state.getBlock().equals(AetherBlocks.SPRING_WATER))
             ){
-                livingEntity.addStatusEffect(new StatusEffectInstance(AetherStatusEffects.SIMMERING, 6000000));
+                livingEntity.addStatusEffect(new StatusEffectInstance(AetherStatusEffects.SIMMERING, 6000000, 0, true, false, true));
             }else if(livingEntity.hasStatusEffect(AetherStatusEffects.SIMMERING)){
                 livingEntity.removeStatusEffect(AetherStatusEffects.SIMMERING);
             }

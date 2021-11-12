@@ -19,6 +19,7 @@ import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.rendering.particle.AetherParticles;
 import net.id.aether.commands.AetherCommands;
 import net.id.aether.devel.AetherDevel;
+import net.id.aether.effect.AetherStatusEffects;
 import net.id.aether.effect.condition.Conditions;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.passive.moa.MoaRaces;
@@ -75,6 +76,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherFeatures.init();
         AetherConfiguredFeatures.init();
         AetherDimension.init();
+        AetherStatusEffects.init();
         AetherBlocks.init();
         AetherFluids.init();
         AetherEntityTypes.init();
