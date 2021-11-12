@@ -4,6 +4,7 @@
 .vscode
 
 todo.md
+.dummy
 
 *.iml
 *.ipr

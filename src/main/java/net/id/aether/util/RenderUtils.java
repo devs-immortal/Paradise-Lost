@@ -6,6 +6,7 @@ import net.id.aether.devel.AetherDevel;
 import net.minecraft.block.Block;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 
@@ -59,5 +60,9 @@ public class RenderUtils {
 
     public static void cutoutMippedRenderLayer(Block block) {
         blockRenderLayer(block, RenderLayer.getCutoutMipped());
+    }
+    
+    public static void cubemapRenderLayer(Block block, Identifier texture){
+        blockRenderLayer(block, AetherRenderLayers.getCubemapLayer(texture));
     }
 }

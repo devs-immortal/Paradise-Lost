@@ -3,7 +3,7 @@ package net.id.aether.mixin.client.render;
 import java.util.function.Consumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.aether.client.rendering.util.AetherTextures;
+import net.id.aether.client.rendering.texture.AetherTextures;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.util.SpriteIdentifier;
 import org.spongepowered.asm.mixin.Mixin;

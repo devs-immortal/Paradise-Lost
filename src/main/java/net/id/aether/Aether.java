@@ -10,7 +10,7 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.client.rendering.block.AetherBlockEntityRenderers;
 import net.id.aether.client.rendering.item.AetherItemRenderers;
-import net.id.aether.client.rendering.util.AetherTextures;
+import net.id.aether.client.rendering.texture.AetherTextures;
 import net.id.aether.client.model.armor.AetherArmorModels;
 import net.id.aether.client.model.AetherModelPredicates;
 import net.id.aether.client.rendering.util.AetherColorProviders;

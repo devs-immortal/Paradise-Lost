@@ -410,8 +410,8 @@ public class AetherBlocks {
     /**
      * Takes tree colours, and produces various block settings for that tree to ease the creation of wooden block sets
      */
-    private static record WoodTypeFactory(MapColor woodColor, MapColor barkColor, MapColor leafColor,
-                                          MapColor plankColor) {
+    private record WoodTypeFactory(MapColor woodColor, MapColor barkColor, MapColor leafColor,
+                                   MapColor plankColor) {
         public WoodTypeFactory(MapColor woodColor, MapColor barkColor, MapColor leafColor) {
             this(woodColor, barkColor, leafColor, woodColor);
         }

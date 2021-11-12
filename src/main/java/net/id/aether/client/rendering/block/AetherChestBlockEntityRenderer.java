@@ -1,7 +1,6 @@
 package net.id.aether.client.rendering.block;
 
-import java.util.Calendar;
-import net.id.aether.client.rendering.util.AetherChestTexture;
+import net.id.aether.client.rendering.texture.AetherChestTexture;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.enums.ChestType;

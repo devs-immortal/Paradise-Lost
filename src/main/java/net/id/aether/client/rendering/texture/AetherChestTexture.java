@@ -1,4 +1,4 @@
-package net.id.aether.client.rendering.util;
+package net.id.aether.client.rendering.texture;
 
 import java.util.Calendar;
 import java.util.Locale;

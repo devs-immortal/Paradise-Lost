@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
-import net.id.aether.client.rendering.util.AetherChestTexture;
+import net.id.aether.client.rendering.texture.AetherChestTexture;
 
 public class AetherBlockEntityRenderers {
 
