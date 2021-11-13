@@ -7,7 +7,7 @@
     "water_color": 5826047,
     "water_fog_color": 5826047
   },
-  "surface_builder": "the_aether:aether_surface_builder",
+  "surface_builder": "the_aether:aether_coarse_surface_builder",
   "carvers": {
     "air": [
       "cave",
@@ -30,7 +30,8 @@
       "the_aether:large_lake"
     ],
     [
-      "the_aether:quicksoil"
+      "the_aether:quicksoil",
+      "the_aether:holystone_boulder"
     ],
     [],
     [],
@@ -43,11 +44,12 @@
     [
     ],
     [
+      "the_aether:forest_grass_patch",
+      "the_aether:forest_grass_patch_small",
       "the_aether:aether_flowers",
       "the_aether:aether_tall_grass",
-      "the_aether:aether_grass",
+      "the_aether:tundra_foliage",
       "the_aether:aether_bush",
-      "the_aether:aether_dense_tall_grass",
       "the_aether:patch_blueberry",
       "the_aether:scattered_trees",
       "the_aether:water_spring",
