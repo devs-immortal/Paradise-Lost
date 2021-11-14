@@ -42,16 +42,15 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicColorB
     }
 
     public static int getAuralColor(BlockPos pos, Vec3i[] colorRGBs) {
+        if (AetherDevel.isDevel()) {
+            // evil hack to send the shader the block pos
+            return MathHelper.packRgb(pos.getX(), pos.getY(), pos.getZ()) | ((2*(pos.getY() / 256 % 2) - 1) << 24);
+        }
         Vec3i color1 = colorRGBs[0];
         Vec3i color2 = colorRGBs[1];
         Vec3i color3 = colorRGBs[2];
         Vec3i color4 = colorRGBs[3];
-        float timeOffset;
-        if(AetherDevel.isDevel()){
-            timeOffset = 0;
-        }else{
-            timeOffset = MinecraftClient.getInstance().world.getTime() * 0.003F;
-        }
+        float timeOffset = MinecraftClient.getInstance().world.getTime() * 0.003F;
 
         // First, we mix color 1 and color 2 using noise
         double simplex;
@@ -101,7 +100,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicColorB
         finalG = (int) (MathHelper.lerp(finalPercent, g1, g2));
         finalB = (int) (MathHelper.lerp(finalPercent, b1, b2));
 
-        return RenderUtils.toHex(finalR, finalG, finalB);
+        return MathHelper.packRgb(finalR, finalG, finalB);
     }
 
     @Override
@@ -121,7 +120,7 @@ public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicColorB
     public RenderLayer getRenderLayerOverride(boolean fancy){
         if(AetherDevel.isDevel()){
             return fancy ? AetherRenderLayers.AURAL_CUTOUT_MIPPED : AetherRenderLayers.AURAL;
-        }else{
+        } else {
             return fancy ? RenderLayer.getCutoutMipped() : RenderLayer.getSolid();
         }
     }

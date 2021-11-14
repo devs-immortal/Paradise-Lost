@@ -4,7 +4,6 @@ import net.id.aether.Aether;
 import net.id.aether.registry.AetherRegistryQueues;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.util.registry.Registry;
 
 public class AetherStatusEffects {
 
