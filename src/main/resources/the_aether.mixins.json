@@ -31,6 +31,7 @@
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
+    "util.NbtCompoundAccessor",
     "util.RarityMixin",
     "util.SignTypeAccessor"
   ],
@@ -44,8 +45,8 @@
     "client.render.BackgroundRendererMixin",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
-    "client.render.GameRendererMixin",
     "client.render.FluidRendererMixin",
+    "client.render.GameRendererMixin",
     "client.render.InGameHudMixin",
     "client.render.InGameOverlayRendererMixin",
     "client.render.LivingEntityRendererMixin",

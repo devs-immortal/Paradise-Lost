@@ -2,10 +2,14 @@ package net.id.aether.items.misc;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.id.aether.screen.handler.LoreHandler;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -31,9 +35,17 @@ public class BookOfLoreItem extends Item {
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-
-        // TODO: Open the book
-
+        user.openHandledScreen(new NamedScreenHandlerFactory(){
+            @Override
+            public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player){
+                return new LoreHandler(syncId, inv);
+            }
+    
+            @Override
+            public Text getDisplayName(){
+                return Text.of("asdf");
+            }
+        });
         return TypedActionResult.pass(itemStack);
     }
 }
