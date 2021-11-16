@@ -19,7 +19,7 @@ public record LoreEntry<T>(
     @NotNull ItemStack stack,
     @NotNull LoreTriggerType triggerType,
     @NotNull Predicate<T> trigger,
-    @NotNull Set<@NotNull Identifier> prerequisites
+    @NotNull Set<@NotNull LoreEntry<?>> prerequisites
 ){
     public LoreEntry{
         Objects.requireNonNull(stack, "stack was null");
@@ -34,8 +34,6 @@ public record LoreEntry<T>(
             new ItemStack(Objects.requireNonNull(item, "item was null")),
             LoreTriggerType.NONE, (ignored)->false,
             Stream.of(Objects.requireNonNull(prerequisites, "prerequisites was null"))
-                .map(AetherRegistries.LORE_REGISTRY::getId)
-                .filter(Objects::nonNull)
                 .collect(Collectors.toUnmodifiableSet())
         );
     }
@@ -46,8 +44,6 @@ public record LoreEntry<T>(
             new ItemStack(Objects.requireNonNull(item, "item was null")),
             triggerType, trigger,
             Stream.of(Objects.requireNonNull(prerequisites, "prerequisites was null"))
-                .map(AetherRegistries.LORE_REGISTRY::getId)
-                .filter(Objects::nonNull)
                 .collect(Collectors.toUnmodifiableSet())
         );
     }
@@ -56,8 +52,13 @@ public record LoreEntry<T>(
         Identifier id = AetherRegistries.LORE_REGISTRY.getId(this);
         return new TranslatableText("lore." + id.getNamespace() + "." + id.getPath() + ".title");
     }
+
     public Text getDescriptionText(){
         Identifier id = AetherRegistries.LORE_REGISTRY.getId(this);
         return new TranslatableText("lore." + id.getNamespace() + "." + id.getPath() + ".description");
+    }
+
+    public Identifier getId(){
+        return AetherRegistries.LORE_REGISTRY.getId(this);
     }
 }

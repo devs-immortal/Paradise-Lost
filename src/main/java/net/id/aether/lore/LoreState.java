@@ -26,32 +26,32 @@ import org.jetbrains.annotations.NotNull;
 import static net.id.aether.registry.AetherRegistries.LORE_REGISTRY;
 
 public interface LoreState extends AutoSyncedComponent{
-    @NotNull LoreStatus getLoreStatus(@NotNull Identifier identifier);
-    
-    void setLoreStatus(@NotNull Identifier identifier, @NotNull LoreStatus status);
-    
-    default @NotNull LoreStatus getLoreStatus(@NotNull LoreEntry<?> lore){
-        Objects.requireNonNull(lore, "lore was null");
-        Identifier id = LORE_REGISTRY.getId(lore);
-        if(id == null){
-            throw new RuntimeException("Unknown lore entry: " + lore);
+    default @NotNull LoreStatus getLoreStatus(@NotNull Identifier id){
+        Objects.requireNonNull(id, "Identifier was null");
+        LoreEntry<?> lore = LORE_REGISTRY.get(id);
+        if(lore == null){
+            throw new RuntimeException("Unknown lore entry: " + id);
         }
-        return getLoreStatus(id);
+        return getLoreStatus(lore);
     }
-    
-    default void setLoreStatus(@NotNull LoreEntry<?> lore, @NotNull LoreStatus status){
-        Objects.requireNonNull(lore, "lore was null");
+
+    default void setLoreStatus(@NotNull Identifier id, @NotNull LoreStatus status){
+        Objects.requireNonNull(id, "id was null");
         Objects.requireNonNull(status, "status was null");
-        Identifier id = LORE_REGISTRY.getId(lore);
-        if(id == null){
-            throw new RuntimeException("Unknown lore entry: " + lore);
+        LoreEntry<?> lore = LORE_REGISTRY.get(id);
+        if(lore == null){
+            throw new RuntimeException("Unknown lore entry: " + id);
         }
-        setLoreStatus(id, status);
+        setLoreStatus(lore, status);
     }
+    
+    @NotNull LoreStatus getLoreStatus(@NotNull LoreEntry<?> lore);
+    
+    void setLoreStatus(@NotNull LoreEntry<?> lore, @NotNull LoreStatus status);
     
     final class Impl implements LoreState{
-        private final Map<Identifier, LoreStatus> loreStates = new Object2ObjectOpenHashMap<>();
-        private final Set<Identifier> dirtyLore = new HashSet<>();
+        private final Map<LoreEntry<?>, LoreStatus> loreStates = new Object2ObjectOpenHashMap<>();
+        private final Set<LoreEntry<?>> dirtyLore = new HashSet<>();
         private final PlayerEntity player;
         private final boolean isClient;
     
@@ -65,7 +65,7 @@ public interface LoreState extends AutoSyncedComponent{
             var statuses = tag.getCompound("statuses");
             loreStates.clear();
             ((NbtCompoundAccessor)statuses).getEntries().forEach((key, value)->
-                loreStates.put(new Identifier(key), LoreStatus.ofValue(value.asString()))
+                loreStates.put(LORE_REGISTRY.get(new Identifier(key)), LoreStatus.ofValue(value.asString()))
             );
             dirtyLore.addAll(loreStates.keySet());
             validate();
@@ -86,9 +86,9 @@ public interface LoreState extends AutoSyncedComponent{
         @Override
         public void writeSyncPacket(PacketByteBuf buf, ServerPlayerEntity recipient){
             buf.writeVarInt(dirtyLore.size());
-            for(Identifier identifier : dirtyLore){
-                buf.writeIdentifier(identifier);
-                buf.writeVarInt(loreStates.getOrDefault(identifier, LoreStatus.HIDDEN).ordinal());
+            for(LoreEntry<?> lore : dirtyLore){
+                buf.writeIdentifier(lore.getId());
+                buf.writeVarInt(loreStates.getOrDefault(lore, LoreStatus.HIDDEN).ordinal());
             }
             dirtyLore.clear();
         }
@@ -99,7 +99,7 @@ public interface LoreState extends AutoSyncedComponent{
             for(int i = 0; i < count; i++){
                 var id = buf.readIdentifier();
                 var status = LoreStatus.ofValue(buf.readVarInt());
-                var oldStatus = loreStates.put(id, status);
+                var oldStatus = loreStates.put(LORE_REGISTRY.get(id), status);
                 if(isClient && oldStatus != status && status == LoreStatus.COMPLETED){
                     // Fingers crossed this gets by the validator
                     triggerToast(id);
@@ -133,7 +133,7 @@ public interface LoreState extends AutoSyncedComponent{
                                 int var10001 = list.size();
                                 Objects.requireNonNull(manager.getGame().textRenderer);
                                 int m = var10000 - var10001 * 9 / 2;
-                                
+
                                 for(Iterator<OrderedText> var12 = list.iterator(); var12.hasNext(); m += 9){
                                     OrderedText orderedText = var12.next();
                                     manager.getGame().textRenderer.draw(matrices, orderedText, 30.0F, (float)m, 16777215 | l);
@@ -141,7 +141,7 @@ public interface LoreState extends AutoSyncedComponent{
                                 }
                             }
                         }
-        
+
 /*
                             if (!soundPlayed && startTime > 0L) {
                                 soundPlayed = true;
@@ -150,7 +150,7 @@ public interface LoreState extends AutoSyncedComponent{
                                 }
                             }
 */
-    
+
                         manager.getGame().getItemRenderer().renderInGui(lore.stack(), 8, 8);
                         return startTime >= 5000L ? Visibility.HIDE : Visibility.SHOW;
                     }
@@ -159,8 +159,8 @@ public interface LoreState extends AutoSyncedComponent{
         }
         
         @Override
-        public @NotNull LoreStatus getLoreStatus(@NotNull Identifier lore){
-            if(lore.equals(AetherLore.ROOT_ID)){
+        public @NotNull LoreStatus getLoreStatus(@NotNull LoreEntry<?> lore){
+            if(lore.equals(AetherLore.ROOT)){
                 return LoreStatus.COMPLETED;
             }
             
@@ -168,20 +168,20 @@ public interface LoreState extends AutoSyncedComponent{
         }
         
         @Override
-        public void setLoreStatus(@NotNull Identifier identifier, @NotNull LoreStatus status){
-            Objects.requireNonNull(identifier, "identifier was null");
+        public void setLoreStatus(@NotNull LoreEntry<?> lore, @NotNull LoreStatus status){
+            Objects.requireNonNull(lore, "lore was null");
             Objects.requireNonNull(status, "status was null");
             
             if(!isClient){
                 throw new IllegalStateException("setLoreStatus was called on the client");
             }
             
-            var existing = loreStates.put(identifier, status);
+            var existing = loreStates.put(lore, status);
             if(existing != status){
-                dirtyLore.add(identifier);
+                dirtyLore.add(lore);
                 
                 if(status == LoreStatus.COMPLETED){
-                    getChildren(identifier).forEach((child)->{
+                    getChildren(lore).forEach((child)->{
                         if(getLoreStatus(child) == LoreStatus.HIDDEN){
                             setLoreStatus(child, LoreStatus.LOCKED);
                         }
@@ -192,23 +192,23 @@ public interface LoreState extends AutoSyncedComponent{
             }
         }
     
-        private static final Map<Identifier, Set<Identifier>> CHILDREN = new HashMap<>();
-        public Set<Identifier> getChildren(Identifier identifier){
-            var children = CHILDREN.get(identifier);
+        private static final Map<Identifier, Set<LoreEntry<?>>> CHILDREN = new HashMap<>();
+        public Set<LoreEntry<?>> getChildren(LoreEntry<?> lore){
+            var children = CHILDREN.get(lore.getId());
             if(children != null){
                 return children;
             }
         
-            Set<Identifier> newChildren = new HashSet<>();
+            Set<LoreEntry<?>> newChildren = new HashSet<>();
         
             LORE_REGISTRY.forEach((entry)->{
-                if(entry.prerequisites().contains(identifier)){
-                    newChildren.add(LORE_REGISTRY.getId(entry));
+                if(entry.prerequisites().contains(lore)){
+                    newChildren.add(entry);
                 }
             });
     
             children = newChildren.isEmpty() ? Set.of() : Collections.unmodifiableSet(newChildren);
-            CHILDREN.put(identifier, children);
+            CHILDREN.put(lore.getId(), children);
             return children;
         }
     }
