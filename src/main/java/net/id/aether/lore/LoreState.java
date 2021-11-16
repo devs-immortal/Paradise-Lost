@@ -117,7 +117,7 @@ public interface LoreState extends AutoSyncedComponent{
                         RenderSystem.setShaderTexture(0, TEXTURE);
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         manager.drawTexture(matrices, 0, 0, 0, 0, this.getWidth(), this.getHeight());
-                        List<OrderedText> list = manager.getGame().textRenderer.wrapLines(lore.title(), 125);
+                        List<OrderedText> list = manager.getGame().textRenderer.wrapLines(lore.getTitleText(), 125);
                         int color = 0xFFFF00;
                         if(list.size() == 1){
                             manager.getGame().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 7.0F, color | 0xFF000000);

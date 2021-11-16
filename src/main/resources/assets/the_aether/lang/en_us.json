@@ -468,6 +468,11 @@
   "death.attack.aerbunny_fall": "%1$s got dumped",
   "death.attack.aerbunny_fall.player": "%1$s got dumped whilst trying to escape %2$s",
 
+  "lore.the_aether.root.title" : "Root title",
+  "lore.the_aether.root.description" : "Lorem ipsum dolor asmet or whatever",
+  "lore.the_aether.test_item.title" : "Diamond!!",
+  "lore.the_aether.test_item.description" : "You found a diamond! And this translatable text is working!",
+
   "moa.egg.adult": "pre-grown",
   "moa.race.highlands_blue": "Common Blue %1$s",
   "moa.race.goldenrod": "Goldenrod %1$s",

@@ -20,8 +20,8 @@ public final class AetherLore{
     private static final Map<LoreTriggerType, Set<Pair<Identifier, LoreEntry<?>>>> TRIGGER_MAP = new Object2ObjectOpenHashMap<>();
 
     public static final Identifier ROOT_ID = locate("root");
-    public static final LoreEntry<Void> ROOT = register(ROOT_ID, new LoreEntry<>(0, 0, AetherItems.LORE_BOOK, "lore.the_aether.root.title", "lore.the_aether.root.description"));
-    public static final LoreEntry<ItemStack> ITEM_TEST = register("item_test", new LoreEntry<>(0, 0, Items.DIAMOND, "lore.the_aether.item_test.title", "lore.the_aether.item_test.description", LoreTriggerType.ITEM, (stack)->stack.getItem().equals(Items.DIAMOND)));
+    public static final LoreEntry<Void> ROOT = register(ROOT_ID, new LoreEntry<>(0, 0, AetherItems.LORE_BOOK));
+    public static final LoreEntry<ItemStack> ITEM_TEST = register("item_test", new LoreEntry<>(0, 0, Items.DIAMOND, LoreTriggerType.ITEM, (stack)->stack.getItem().equals(Items.DIAMOND)));
 
     public static void init(){}
     

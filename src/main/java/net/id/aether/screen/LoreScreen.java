@@ -323,7 +323,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
         }
     
         public LoreEntry(net.id.aether.lore.LoreEntry<?> entry){
-            this(entry.x(), entry.y(), LoreType.NORMAL, entry.stack(), entry.title(), entry.description());
+            this(entry.x(), entry.y(), LoreType.NORMAL, entry.stack(), entry.getTitleText(), entry.getDescriptionText());
         }
     
         public void setHovered(boolean hovered){
