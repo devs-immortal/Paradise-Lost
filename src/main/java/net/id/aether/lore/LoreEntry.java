@@ -17,8 +17,8 @@ public record LoreEntry<T>(
     int x,
     int y,
     @NotNull ItemStack stack,
-    @NotNull Text title,
-    @NotNull Text description,
+    @NotNull Text title, // translatable text string should be gotten from en_us.json, rather than inputted.
+    @NotNull Text description, // see above comment
     @NotNull LoreTriggerType triggerType,
     @NotNull Predicate<T> trigger,
     @NotNull Set<@NotNull Identifier> prerequisites
