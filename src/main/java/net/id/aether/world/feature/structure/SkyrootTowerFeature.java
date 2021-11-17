@@ -58,7 +58,7 @@ public class SkyrootTowerFeature extends StructureFeature<DefaultFeatureConfig> 
             int y = chunkGenerator.getHeight(pos.getStartPos().getX() - 4, pos.getStartPos().getZ() - 4, Heightmap.Type.WORLD_SURFACE_WG, world);
             BlockPos newPos = new BlockPos(pos.getStartPos().getX() - 4, y, pos.getStartPos().getZ() - 4);
             SkyrootTowerGenerator.addPieces(manager, this, blockRotation, newPos);
-            this.setBoundingBoxFromChildren();
+            this.getBoundingBox();
         }
     }
 }

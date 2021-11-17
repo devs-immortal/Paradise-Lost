@@ -129,7 +129,7 @@ public final class CloudRendererMixin {
                     }
 
                     Shader shader = RenderSystem.getShader();
-                    this.cloudsBuffer.setShader(matrices.peek().getModel(), model, shader);
+                    this.cloudsBuffer.setShader(matrices.peek().getPositionMatrix(), model, shader);
                 }
             }
 

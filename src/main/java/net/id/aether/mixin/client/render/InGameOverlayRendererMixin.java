@@ -50,7 +50,7 @@ public abstract class InGameOverlayRendererMixin {
             RenderSystem.setShaderColor(f, f, f, 0.775F);
             float yaw = client.player.getYaw() / 192.0F;
             float pitch = client.player.getPitch() / 192.0F;
-            Matrix4f matrix4f = matrices.peek().getModel();
+            Matrix4f matrix4f = matrices.peek().getPositionMatrix();
             bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
             bufferBuilder.vertex(matrix4f, -1.0F, -1.0F, -0.5F).texture(1.0F - yaw, 1.0F + pitch).next();
             bufferBuilder.vertex(matrix4f, 1.0F, -1.0F, -0.5F).texture(0.0F - yaw, 1.0F + pitch).next();
@@ -95,7 +95,7 @@ public abstract class InGameOverlayRendererMixin {
             RenderSystem.setShaderColor(f, f, f, 0.8F);
             float m = -client.player.getYaw() / 64.0F;
             float n = client.player.getPitch() / 64.0F;
-            Matrix4f matrix4f = matrices.peek().getModel();
+            Matrix4f matrix4f = matrices.peek().getPositionMatrix();
             bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
             bufferBuilder.vertex(matrix4f, -1.0F, -1.0F, -0.5F).texture(4.0F + m, 4.0F + n).next();
             bufferBuilder.vertex(matrix4f, 1.0F, -1.0F, -0.5F).texture(0.0F + m, 4.0F + n).next();

@@ -43,7 +43,7 @@ public class WellFeature extends StructureFeature<DefaultFeatureConfig> {
             int y = chunkGenerator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, world);
             BlockPos newPos = new BlockPos(x, y, z);
             WellGenerator.addPieces(manager, this, random, newPos);
-            this.setBoundingBoxFromChildren();
+            this.getBoundingBox();
         }
     }
 }

@@ -349,8 +349,8 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
                 int startX = this.x + x;
                 int startY = this.y + y;
                 var entry = matrices.peek();
-                var model = entry.getModel();
-                var normal = entry.getNormal();
+                var model = entry.getPositionMatrix();
+                var normal = entry.getNormalMatrix();
                 for(var child : requirements){
                     lineBuffer.vertex(model, startX, startY, 0).color(1, 0, 1, 0).normal(normal, 0, 1, 0).next();
                     lineBuffer.vertex(model, child.x + x, child.y + y, 0).color(1, 0, 1, 0).normal(normal, 0, 1, 0).next();

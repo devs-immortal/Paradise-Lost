@@ -43,7 +43,7 @@ public class OrangeRuinFeature extends StructureFeature<DefaultFeatureConfig> {
             int y = chunkGenerator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, world);
             BlockPos newPos = new BlockPos(x, y, z);
             OrangeRuinGenerator.addPieces(manager, this, random, newPos);
-            this.setBoundingBoxFromChildren();
+            this.getBoundingBox();
         }
     }
 }

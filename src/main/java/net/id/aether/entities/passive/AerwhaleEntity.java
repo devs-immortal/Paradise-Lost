@@ -112,7 +112,7 @@ public class AerwhaleEntity extends FlyingEntity {
                 this.stepHeight = 1.0F;
 
                 if (!this.world.isClient()) {
-                    this.flyingSpeed = this.getMovementSpeed() * 0.6F;
+                    this.airStrafingSpeed = this.getMovementSpeed() * 0.6F;
                     super.travel(positionIn);
                 }
 
@@ -130,7 +130,7 @@ public class AerwhaleEntity extends FlyingEntity {
             }
         } else {
             this.stepHeight = 0.5F;
-            this.flyingSpeed = 0.02F;
+            this.airStrafingSpeed = 0.02F;
             super.travel(positionIn);
         }
     }
