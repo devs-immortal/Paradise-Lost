@@ -163,16 +163,6 @@ public class MoaAPI {
         return childRace.map(MatingEntry::get).orElse(world.getRandom().nextBoolean() ? parentA.getRace() : parentB.getRace());
     }
 
-    @Environment(EnvType.CLIENT)
-    public static String formatForTranslation(MoaRace race) {
-        return "moa.race." + race.getId().getPath();
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static String formatForTranslation(MoaAttributes attribute) {
-        return attribute != null ? "moa.attribute." + attribute.name().toLowerCase() : "???";
-    }
-
     /**
      * @return A {@code BiPredicate} which tests whether raceA and raceB are
      * equal to a given parentA and parentB, respectively.
@@ -252,6 +242,11 @@ public class MoaAPI {
             }
             System.out.println("getId() called before race was registered. You had to mess up so bad to get this error.");
             return FALLBACK_MOA.getId();
+        }
+
+        public String getTranslationKey() {
+            Identifier id = this.getId();
+            return "moa.race." + id.getNamespace() + "." + id.getPath();
         }
     }
 

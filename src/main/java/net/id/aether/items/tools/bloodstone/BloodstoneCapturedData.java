@@ -3,7 +3,6 @@ package net.id.aether.items.tools.bloodstone;
 import net.id.aether.api.ConditionAPI;
 import net.id.aether.api.MoaAPI;
 import net.id.aether.component.ConditionManager;
-import net.id.aether.effect.condition.Severity;
 import net.id.aether.entities.passive.moa.MoaAttributes;
 import net.id.aether.entities.passive.moa.MoaEntity;
 import net.minecraft.client.resource.language.I18n;
@@ -13,8 +12,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
 
@@ -25,9 +24,9 @@ import java.util.UUID;
 
 public class BloodstoneCapturedData {
     boolean isMoa = false;
-    public String Race = "???";
+    public String Race = "???"; // translation key
     public String Hunger = "???";
-    public String Affinity = "???";
+    public String Affinity = "???"; // translation key
     public String Owner = "???";
 
     public String GROUND_SPEED = "???";
@@ -114,17 +113,17 @@ public class BloodstoneCapturedData {
         if (entity instanceof MoaEntity moa) {
             bloodstoneCapturedData.isMoa = true;
             //zanite
-            bloodstoneCapturedData.Race = I18n.translate(MoaAPI.formatForTranslation(moa.getGenes().getRace()), "");
+            bloodstoneCapturedData.Race = moa.getGenes().getRace().getTranslationKey();
             bloodstoneCapturedData.Hunger = String.format("%.1f", moa.getGenes().getHunger()) + "/" + 100.0;
-            bloodstoneCapturedData.Affinity = I18n.translate(MoaAPI.formatForTranslation(moa.getGenes().getAffinity()));
+            bloodstoneCapturedData.Affinity = moa.getGenes().getAffinity().getTranslationKey();
             bloodstoneCapturedData.Owner = Optional.ofNullable(moa.getOwner()).map(owner -> owner.getName().asString()).orElse("none");
             //gravitite
-            bloodstoneCapturedData.GROUND_SPEED = MoaAttributes.GROUND_SPEED.getRatingTier(moa);
-            bloodstoneCapturedData.GLIDING_SPEED = MoaAttributes.GLIDING_SPEED.getRatingTier(moa);
-            bloodstoneCapturedData.GLIDING_DECAY = MoaAttributes.GLIDING_DECAY.getRatingTier(moa);
-            bloodstoneCapturedData.JUMPING_STRENGTH = MoaAttributes.JUMPING_STRENGTH.getRatingTier(moa);
-            bloodstoneCapturedData.DROP_MULTIPLIER = MoaAttributes.DROP_MULTIPLIER.getRatingTier(moa);
-            bloodstoneCapturedData.MAX_HEALTH = MoaAttributes.MAX_HEALTH.getRatingTier(moa);
+            bloodstoneCapturedData.GROUND_SPEED = MoaAttributes.GROUND_SPEED.getRatingTierTranslationKey(moa);
+            bloodstoneCapturedData.GLIDING_SPEED = MoaAttributes.GLIDING_SPEED.getRatingTierTranslationKey(moa);
+            bloodstoneCapturedData.GLIDING_DECAY = MoaAttributes.GLIDING_DECAY.getRatingTierTranslationKey(moa);
+            bloodstoneCapturedData.JUMPING_STRENGTH = MoaAttributes.JUMPING_STRENGTH.getRatingTierTranslationKey(moa);
+            bloodstoneCapturedData.DROP_MULTIPLIER = MoaAttributes.DROP_MULTIPLIER.getRatingTierTranslationKey(moa);
+            bloodstoneCapturedData.MAX_HEALTH = MoaAttributes.MAX_HEALTH.getRatingTierTranslationKey(moa);
         }
         //Ambrosium
         bloodstoneCapturedData.uuid = entity.getUuid();
@@ -145,15 +144,15 @@ public class BloodstoneCapturedData {
     }
 
     public Text getRatingWithColor(String rating) {
-        MutableText text = new LiteralText(rating);
+        MutableText text = new TranslatableText(rating);
         return switch (rating) {
-            case "F" -> text.formatted(Formatting.DARK_RED);
-            case "D" -> text.formatted(Formatting.RED);
-            case "C" -> text.formatted(Formatting.YELLOW);
-            case "B" -> text.formatted(Formatting.GREEN);
-            case "A" -> text.formatted(Formatting.AQUA);
-            case "S" -> text.formatted(Formatting.LIGHT_PURPLE);
-            case "S+" -> text.formatted(Formatting.GOLD);
+            case "moa.attribute.tier.7" -> text.formatted(Formatting.DARK_RED);
+            case "moa.attribute.tier.6" -> text.formatted(Formatting.RED);
+            case "moa.attribute.tier.5" -> text.formatted(Formatting.YELLOW);
+            case "moa.attribute.tier.4" -> text.formatted(Formatting.GREEN);
+            case "moa.attribute.tier.3" -> text.formatted(Formatting.AQUA);
+            case "moa.attribute.tier.2" -> text.formatted(Formatting.LIGHT_PURPLE);
+            case "moa.attribute.tier.1" -> text.formatted(Formatting.GOLD);
             default -> text;
         };
     }

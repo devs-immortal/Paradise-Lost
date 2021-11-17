@@ -92,21 +92,21 @@ public class BloodstoneHUDRenderer {
 
         renderRing(matrixStack, centerX, centerY);
         renderTextCentered(matrixStack, bloodstoneCapturedData.name, centerX, centerY - 80);
-        renderIconWText(matrixStack, client, affinitySprite, new LiteralText(bloodstoneCapturedData.Affinity), centerX, centerY, getCircularPosition(80, 1, 5));
+        renderIconWText(matrixStack, client, affinitySprite, new TranslatableText(bloodstoneCapturedData.Affinity), centerX, centerY, getCircularPosition(80, 1, 5));
         renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), new LiteralText(bloodstoneCapturedData.Owner), centerX, centerY, getCircularPosition(80, 2, 5));
         renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), new LiteralText(bloodstoneCapturedData.Hunger), centerX, centerY, getCircularPosition(80, 3, 5));
-        renderIconWText(matrixStack, client, raceSprite, new LiteralText(bloodstoneCapturedData.Race), centerX + 5, centerY, getCircularPosition(80, 4, 5));
+        renderIconWText(matrixStack, client, raceSprite, new TranslatableText(bloodstoneCapturedData.Race), centerX + 5, centerY, getCircularPosition(80, 4, 5));
     }
 
     private static void renderGravitite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData, int centerX, int centerY) {
         renderRing(matrixStack, centerX, centerY);
         renderTextCentered(matrixStack, bloodstoneCapturedData.name, centerX, centerY - 80);
-        renderText(matrixStack, new LiteralText("Ground Speed: ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), centerX, centerY, getCircularPosition(80, 1, 7));
-        renderText(matrixStack, new LiteralText("Gliding Speed: ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)), centerX, centerY, getCircularPosition(80, 2, 7));
-        renderText(matrixStack, new LiteralText("Gliding Decay: ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)), centerX, centerY, getCircularPosition(80, 3, 7));
-        renderText(matrixStack, new LiteralText("Jump Strength: ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)), centerX, centerY, getCircularPosition(80, 4, 7));
-        renderText(matrixStack, new LiteralText("Drop Multiplier: ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)), centerX, centerY, getCircularPosition(80, 5, 7));
-        renderText(matrixStack, new LiteralText("Max Health: ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), centerX, centerY, getCircularPosition(80, 6, 7));
+        renderText(matrixStack, new TranslatableText("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), centerX, centerY, getCircularPosition(80, 1, 7));
+        renderText(matrixStack, new TranslatableText("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)), centerX, centerY, getCircularPosition(80, 2, 7));
+        renderText(matrixStack, new TranslatableText("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)), centerX, centerY, getCircularPosition(80, 3, 7));
+        renderText(matrixStack, new TranslatableText("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)), centerX, centerY, getCircularPosition(80, 4, 7));
+        renderText(matrixStack, new TranslatableText("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)), centerX, centerY, getCircularPosition(80, 5, 7));
+        renderText(matrixStack, new TranslatableText("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), centerX, centerY, getCircularPosition(80, 6, 7));
     }
 
     private static void renderCondition(MatrixStack matrixStack, BloodstoneCapturedData.ConditionData conditionData, int centerX, int centerY, Pair<Integer, Integer> circleOffsets) {
@@ -129,7 +129,7 @@ public class BloodstoneHUDRenderer {
 
     public static Text getSeverityWithColor(Float rawSeverity) {
         Severity sev = Severity.getSeverity(rawSeverity);
-        MutableText text = new TranslatableText(sev.translation);
+        MutableText text = new TranslatableText(sev.getTranslationKey());
         return switch (sev) {
             case EXTREME -> text.formatted(Formatting.GRAY);
             case DIRE -> text.formatted(Formatting.RED);

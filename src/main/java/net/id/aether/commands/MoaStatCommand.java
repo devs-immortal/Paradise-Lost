@@ -9,7 +9,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import net.id.aether.api.MoaAPI;
 import net.id.aether.entities.passive.moa.MoaAttributes;
 import net.id.aether.component.AetherComponents;
 import net.id.aether.component.MoaGenes;
@@ -17,7 +16,6 @@ import net.id.aether.entities.passive.moa.MoaEntity;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
@@ -52,24 +50,24 @@ public class MoaStatCommand {
         entities.forEach(entity -> {
             if (entity instanceof MoaEntity moa) {
                 MoaGenes genes = moa.getGenes();
-                source.sendFeedback(new TranslatableText("commands.aether.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
-                source.sendFeedback(new TranslatableText("commands.aether.moastat.race", new TranslatableText(MoaAPI.formatForTranslation(genes.getRace()))).formatted(Formatting.LIGHT_PURPLE), false);
+                source.sendFeedback(new TranslatableText("commands.the_aether.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
+                source.sendFeedback(new TranslatableText("commands.the_aether.moastat.race", new TranslatableText(genes.getRace().getTranslationKey())).formatted(Formatting.LIGHT_PURPLE), false);
                 if (attributeId.equals("HUNGER")) {
-                    source.sendFeedback(new LiteralText("Hunger: " + String.format("%.2f", genes.getHunger())).formatted(Formatting.GOLD, Formatting.ITALIC), false);
+                    source.sendFeedback(new TranslatableText("commands.the_aether.moastat.print", new TranslatableText("commands.the_aether.moastat.hunger"), String.format("%.2f", genes.getHunger())).formatted(Formatting.GOLD, Formatting.ITALIC), false);
                 } else if (attributeId.equals("ALL")) {
                     for (MoaAttributes attribute : MoaAttributes.values()) {
-                        source.sendFeedback(new LiteralText(attribute.name() + " = " + genes.getAttribute(attribute)).formatted(Formatting.GOLD, Formatting.ITALIC), false);
+                        source.sendFeedback(new TranslatableText("commands.the_aether.moastat.print", new TranslatableText(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.GOLD, Formatting.ITALIC), false);
                     }
                 } else {
                     try {
                         MoaAttributes attribute = MoaAttributes.valueOf(attributeId);
-                        source.sendFeedback(new LiteralText(attribute.name() + " = " + genes.getAttribute(attribute)).formatted(Formatting.GOLD, Formatting.ITALIC), false);
+                        source.sendFeedback(new TranslatableText("commands.the_aether.moastat.print", new TranslatableText(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.GOLD, Formatting.ITALIC), false);
                     } catch (IllegalArgumentException e) {
-                        source.sendError(new TranslatableText("commands.aether.moastat.failure.attribute"));
+                        source.sendError(new TranslatableText("commands.the_aether.moastat.failure.attribute"));
                     }
                 }
             } else {
-                source.sendError(new TranslatableText("commands.aether.moastat.failure.entity", entity.getType().getName()));
+                source.sendError(new TranslatableText("commands.the_aether.moastat.failure.entity", entity.getType().getName()));
             }
         });
         return 1;
@@ -78,28 +76,28 @@ public class MoaStatCommand {
     private static int setStat(ServerCommandSource source, Entity entity, String attributeId, float value) {
         if (entity instanceof MoaEntity moa) {
             MoaGenes genes = moa.getGenes();
-            source.sendFeedback(new TranslatableText("commands.aether.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
-            source.sendFeedback(new TranslatableText("commands.aether.moastat.race", new TranslatableText(MoaAPI.formatForTranslation(genes.getRace()))).formatted(Formatting.LIGHT_PURPLE), false);
+            source.sendFeedback(new TranslatableText("commands.the_aether.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
+            source.sendFeedback(new TranslatableText("commands.the_aether.moastat.race", new TranslatableText(genes.getRace().getTranslationKey())).formatted(Formatting.LIGHT_PURPLE), false);
             if (attributeId.equals("HUNGER")) {
                 genes.setHunger(Math.min(Math.max(value, 100), 0));
-                source.sendFeedback(new LiteralText("SET Hunger TO " + String.format("%.2f", genes.getHunger())).formatted(Formatting.AQUA, Formatting.ITALIC), false);
+                source.sendFeedback(new TranslatableText("commands.the_aether.moastat.set", new TranslatableText("commands.the_aether.moastat.hunger"), String.format("%.2f", genes.getHunger())).formatted(Formatting.AQUA, Formatting.ITALIC), false);
             } else if (attributeId.equals("ALL")) {
                 for (MoaAttributes attribute : MoaAttributes.values()) {
                     genes.setAttribute(attribute, value);
-                    source.sendFeedback(new LiteralText("SET " + attribute.name() + " TO " + genes.getAttribute(attribute)).formatted(Formatting.AQUA, Formatting.ITALIC), false);
+                    source.sendFeedback(new TranslatableText("commands.the_aether.moastat.set", new TranslatableText(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.AQUA, Formatting.ITALIC), false);
                 }
             } else {
                 try {
                     MoaAttributes attribute = MoaAttributes.valueOf(attributeId);
                     genes.setAttribute(attribute, value);
-                    source.sendFeedback(new LiteralText("SET " + attribute.name() + " TO " + genes.getAttribute(attribute)).formatted(Formatting.AQUA, Formatting.ITALIC), false);
+                    source.sendFeedback(new TranslatableText("commands.the_aether.moastat.set", new TranslatableText(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.AQUA, Formatting.ITALIC), false);
                 } catch (IllegalArgumentException e) {
-                    source.sendError(new TranslatableText("commands.aether.moastat.failure.attribute"));
+                    source.sendError(new TranslatableText("commands.the_aether.moastat.failure.attribute"));
                 }
             }
             AetherComponents.MOA_GENETICS_KEY.sync(moa);
         } else {
-            source.sendError(new TranslatableText("commands.aether.moastat.failure.entity", entity.getType().getName()));
+            source.sendError(new TranslatableText("commands.the_aether.moastat.failure.entity", entity.getType().getName()));
         }
         return 1;
     }

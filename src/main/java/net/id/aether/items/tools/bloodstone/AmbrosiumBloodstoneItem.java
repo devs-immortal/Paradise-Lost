@@ -14,6 +14,6 @@ public class AmbrosiumBloodstoneItem extends BloodstoneItem {
 
     @Override
     protected List<Text> getDefaultText() {
-        return ImmutableList.of(new TranslatableText("info.aether.bloodstone.ambrosium").formatted(Formatting.GOLD));
+        return ImmutableList.of(new TranslatableText("info.the_aether.bloodstone.ambrosium").formatted(Formatting.GOLD));
     }
 }

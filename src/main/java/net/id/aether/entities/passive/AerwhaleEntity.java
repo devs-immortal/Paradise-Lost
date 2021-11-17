@@ -11,6 +11,7 @@ import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.BaseText;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -137,10 +138,11 @@ public class AerwhaleEntity extends FlyingEntity {
 
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
+        // todo change to be the uuids in the cape list in Incubus / patreon reward?
         if (player.getUuid().getMostSignificantBits() == 220717875589366683L && player.getUuid().getLeastSignificantBits() == -7181826737698904209L) {
             player.startRiding(this);
             if (!this.world.isClient()) {
-                BaseText msg = new LiteralText("Serenity is the queen of W(h)ales!!");
+                BaseText msg = new TranslatableText("easteregg.the_aether.aerwhale");
                 player.world.getPlayers().forEach(p -> p.sendSystemMessage(msg, player.getUuid()));
             }
             return ActionResult.success(this.world.isClient());

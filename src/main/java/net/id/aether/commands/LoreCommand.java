@@ -74,6 +74,7 @@ final class LoreCommand{
         var player = source.getPlayer();
         var state = AetherComponents.LORE_STATE.get(player);
         var status = state.getLoreStatus(id);
+        // make this translatable
         source.sendFeedback(Text.of(switch(status){
             case LOCKED -> "locked";
             case HIDDEN -> "hidden";

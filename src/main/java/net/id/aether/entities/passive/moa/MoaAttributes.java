@@ -19,25 +19,27 @@ public enum MoaAttributes {
         this.gradeInterval = gradeInterval;
     }
 
-    private static final String[] tiers = new String[]{"F", "D", "C", "B", "A", "S", "S+"};
-
-    public String getRatingTier(MoaEntity moa) {
+    public String getRatingTierTranslationKey(MoaEntity moa) {
         if (min > max) return getRatingTierInverse(moa);
         float attribute = getAttribute(moa);
-        if (attribute <= min) return tiers[0];
-        if (attribute >= max) return tiers[tiers.length - 1];
-        double lerp = (MathHelper.getLerpProgress(attribute, min, max) * (tiers.length - 2));
-        return tiers[(int) lerp + 1];
+        if (attribute <= min) return getRatingTierTranslationKey(1);
+        if (attribute >= max) return getRatingTierTranslationKey(7);
+        double lerp = (MathHelper.getLerpProgress(attribute, min, max) * 5);
+        return getRatingTierTranslationKey((int) lerp + 1);
+    }
+
+    private String getRatingTierTranslationKey(int tier) {
+        return "moa.attribute.tier." + tier;
     }
 
     //used when smaller is better
     public String getRatingTierInverse(MoaEntity moa) {
-        if (min < max) return getRatingTier(moa);
+        if (min < max) return getRatingTierTranslationKey(moa);
         float attribute = getAttribute(moa);
-        if (attribute >= min) return tiers[0];
-        if (attribute <= max) return tiers[tiers.length - 1];
-        double lerp = (MathHelper.getLerpProgress(attribute, min, max) * (tiers.length - 2));
-        return tiers[(int) lerp + 1];
+        if (attribute >= min) return getRatingTierTranslationKey(1);
+        if (attribute <= max) return getRatingTierTranslationKey(7);
+        double lerp = (MathHelper.getLerpProgress(attribute, min, max) * 5);
+        return getRatingTierTranslationKey((int) lerp + 1);
     }
 
     public float getAttribute(MoaEntity moa) {
@@ -56,5 +58,9 @@ public enum MoaAttributes {
             stat += gradeInterval / 4;
         }
         return stat;
+    }
+
+    public String getTranslationKey(){
+        return "moa.attribute." + this.name().toLowerCase();
     }
 }
