@@ -37,7 +37,7 @@ public interface FloatyDrawableHelper{
     }
     
     default void fill(MatrixStack matrices, float x1, float y1, float x2, float y2, int color){
-        fill(matrices.peek().getModel(), x1, y1, x2, y2, color);
+        fill(matrices.peek().getPositionMatrix(), x1, y1, x2, y2, color);
     }
     
     default void fill(Matrix4f matrix, float x1, float y1, float x2, float y2, int color){
@@ -86,7 +86,7 @@ public interface FloatyDrawableHelper{
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
-        fillGradient(matrices.peek().getModel(), bufferBuilder, startX, startY, endX, endY, z, colorStart, colorEnd);
+        fillGradient(matrices.peek().getPositionMatrix(), bufferBuilder, startX, startY, endX, endY, z, colorStart, colorEnd);
         tessellator.draw();
         RenderSystem.disableBlend();
         RenderSystem.enableTexture();
@@ -146,7 +146,7 @@ public interface FloatyDrawableHelper{
     }
     
     default void drawSprite(MatrixStack matrices, float x, float y, float z, float width, float height, Sprite sprite){
-        drawTexturedQuad(matrices.peek().getModel(), x, x + width, y, y + height, z, sprite.getMinU(), sprite.getMaxU(), sprite.getMinV(), sprite.getMaxV());
+        drawTexturedQuad(matrices.peek().getPositionMatrix(), x, x + width, y, y + height, z, sprite.getMinU(), sprite.getMaxU(), sprite.getMinV(), sprite.getMaxV());
     }
     
     /**
@@ -230,7 +230,7 @@ public interface FloatyDrawableHelper{
     }
     
     default void drawTexture(MatrixStack matrices, float x0, float y0, float x1, float y1, float z, float regionWidth, float regionHeight, float u, float v, float textureWidth, float textureHeight){
-        drawTexturedQuad(matrices.peek().getModel(), x0, y0, x1, y1, z, (u + 0.0F) / textureWidth, (u + regionWidth) / textureWidth, (v + 0.0F) / textureHeight, (v + regionHeight) / textureHeight);
+        drawTexturedQuad(matrices.peek().getPositionMatrix(), x0, y0, x1, y1, z, (u + 0.0F) / textureWidth, (u + regionWidth) / textureWidth, (v + 0.0F) / textureHeight, (v + regionHeight) / textureHeight);
     }
     
     default void drawTexturedQuad(Matrix4f matrices, float x0, float x1, float y0, float y1, float z, float u0, float u1, float v0, float v1){

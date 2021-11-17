@@ -1,6 +1,5 @@
 package net.id.aether.blocks.blockentity;
 
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.id.aether.util.InventoryWrapper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -14,7 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AetherBlockEntity extends BlockEntity implements InventoryWrapper, SidedInventory, BlockEntityClientSerializable {
+// TODO: See https://github.com/FabricMC/fabric/discussions/1779#discussioncomment-1502791 to fix this class
+public abstract class AetherBlockEntity extends BlockEntity implements InventoryWrapper, SidedInventory {
 
     protected final DefaultedList<ItemStack> inventory;
     protected HopperStrategy hopperStrategy;

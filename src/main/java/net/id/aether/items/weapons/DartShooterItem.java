@@ -47,7 +47,7 @@ public class DartShooterItem extends Item {
             PersistentProjectileEntity projectile = this.ammo.createDart(worldIn, heldItem, playerIn);
 
             if (!worldIn.isClient) {
-                projectile.setProperties(playerIn, playerIn.getPitch(), playerIn.getYaw(), 0.0F, 1.0F, 1.0F);
+                projectile.setVelocity(playerIn, playerIn.getPitch(), playerIn.getYaw(), 0.0F, 1.0F, 1.0F);
                 worldIn.spawnEntity(projectile);
 
                 if (!playerIn.isCreative()) {

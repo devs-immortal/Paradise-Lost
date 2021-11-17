@@ -8,3 +8,5 @@ accessible    class     net/minecraft/client/render/RenderPhase$Lightmap
 accessible    class     net/minecraft/client/render/RenderPhase$Shader
 accessible    class     net/minecraft/client/render/RenderPhase$TextureBase
 accessible    class     net/minecraft/client/render/RenderPhase$Texture
+
+accessible    field     net/minecraft/block/MapColor    COLORS    [Lnet/minecraft/block/MapColor;
