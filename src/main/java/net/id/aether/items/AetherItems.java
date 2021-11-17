@@ -548,10 +548,11 @@ public class AetherItems {
 
     // Chests
     public static final BlockItem SKYROOT_CHEST = add("skyroot_chest", AetherBlocks.SKYROOT_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    public static final BlockItem GOLDEN_OAK_CHEST = add("golden_oak_chest", AetherBlocks.GOLDEN_OAK_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    public static final BlockItem ORANGE_CHEST = add("orange_chest", AetherBlocks.ORANGE_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    public static final BlockItem CRYSTAL_CHEST = add("crystal_chest", AetherBlocks.CRYSTAL_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    public static final BlockItem WISTERIA_CHEST = add("wisteria_chest", AetherBlocks.WISTERIA_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
+    // 24Chrome: removed these from creative menu
+    public static final BlockItem GOLDEN_OAK_CHEST = add("golden_oak_chest", AetherBlocks.GOLDEN_OAK_CHEST, new FabricItemSettings());
+    public static final BlockItem ORANGE_CHEST = add("orange_chest", AetherBlocks.ORANGE_CHEST, new FabricItemSettings());
+    public static final BlockItem CRYSTAL_CHEST = add("crystal_chest", AetherBlocks.CRYSTAL_CHEST, new FabricItemSettings());
+    public static final BlockItem WISTERIA_CHEST = add("wisteria_chest", AetherBlocks.WISTERIA_CHEST, new FabricItemSettings());
     
     public static void init() {
         AetherRegistryQueues.ITEM.register();
