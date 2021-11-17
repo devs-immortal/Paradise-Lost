@@ -21,7 +21,7 @@ crowdintranslate.crowdinProjectName = 'aether'
 crowdintranslate.minecraftProjectName = 'the_aether'
 crowdintranslate.verbose = true
 
-JavaLanguageVersion targetVersion = JavaLanguageVersion.of(16)
+JavaLanguageVersion targetVersion = JavaLanguageVersion.of(17)
 
 allprojects {
     // Allow more then 100 errors to be displayed.
