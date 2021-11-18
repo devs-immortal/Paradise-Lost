@@ -60,7 +60,7 @@ public class MoaEggCommand {
 
         @Override
         public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) {
-            MoaAPI.getRegisteredRaces().forEachRemaining(raceId -> builder.suggest(raceId.toString()));
+            MoaAPI.getRegisteredRaces().forEachRemaining(race -> builder.suggest(race.getId().toString()));
             return builder.buildFuture();
         }
     }

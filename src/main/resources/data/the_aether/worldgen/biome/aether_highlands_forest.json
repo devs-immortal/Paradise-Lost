@@ -1,8 +1,8 @@
 {
   "effects": {
     "sky_color": 12632319,
-    "foliage_color": 14483329,
-    "grass_color": 10088367,
+    "foliage_color": 14090091,
+    "grass_color": 8973217,
     "fog_color": 16777215,
     "water_color": 5826047,
     "water_fog_color": 5826047
@@ -45,6 +45,7 @@
     [
       "the_aether:forest_grass_patch",
       "the_aether:forest_grass_patch_small",
+      "the_aether:forest_mossy_cobbled_holystone_patch",
       "the_aether:aether_flowers",
       "the_aether:aether_tall_grass",
       "the_aether:tundra_foliage",

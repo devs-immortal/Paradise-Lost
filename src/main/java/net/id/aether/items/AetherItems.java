@@ -431,7 +431,6 @@ public class AetherItems {
     public static final BlockItem AETHER_FERN = add("aether_fern", AetherBlocks.AETHER_FERN, decoration, compostable30);
     public static final BlockItem AETHER_BUSH = add("aether_bush", AetherBlocks.AETHER_BUSH, decoration, compostable30);
     public static final BlockItem FLUTEGRASS = add("flutegrass", AetherBlocks.FLUTEGRASS, decoration, compostable30);
-    public static final BlockItem SHAMROCK = add("shamrock", AetherBlocks.SHAMROCK, decoration, compostable50);
     public static final BlockItem HALOPHIA = add("halophia", AetherBlocks.HALOPHIA, decoration, compostable30);
     public static final BlockItem GIANT_LILY = add("giant_lily", new LilyPadItem(AetherBlocks.GIANT_LILY, hat), compostable100);
     public static final BlockItem WEEPING_CLOUDBURST = add("weeping_cloudburst", AetherBlocks.WEEPING_CLOUDBURST, decoration, compostable30);
@@ -550,14 +549,15 @@ public class AetherItems {
 
     // Chests
     public static final BlockItem SKYROOT_CHEST = add("skyroot_chest", AetherBlocks.SKYROOT_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    public static final BlockItem GOLDEN_OAK_CHEST = add("golden_oak_chest", AetherBlocks.GOLDEN_OAK_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    public static final BlockItem ORANGE_CHEST = add("orange_chest", AetherBlocks.ORANGE_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    public static final BlockItem CRYSTAL_CHEST = add("crystal_chest", AetherBlocks.CRYSTAL_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    public static final BlockItem WISTERIA_CHEST = add("wisteria_chest", AetherBlocks.WISTERIA_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
+    // 24Chrome: removed these from creative menu
+    public static final BlockItem GOLDEN_OAK_CHEST = add("golden_oak_chest", AetherBlocks.GOLDEN_OAK_CHEST, new FabricItemSettings());
+    public static final BlockItem ORANGE_CHEST = add("orange_chest", AetherBlocks.ORANGE_CHEST, new FabricItemSettings());
+    public static final BlockItem CRYSTAL_CHEST = add("crystal_chest", AetherBlocks.CRYSTAL_CHEST, new FabricItemSettings());
+    public static final BlockItem WISTERIA_CHEST = add("wisteria_chest", AetherBlocks.WISTERIA_CHEST, new FabricItemSettings());
 
     // Devel
     public static final PathTestingTool PATH_TESTING_TOOL = add("path_testing_tool", new PathTestingTool(new FabricItemSettings().maxCount(1)));
-
+    
     public static void init() {
         AetherRegistryQueues.ITEM.register();
     }
