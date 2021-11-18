@@ -1,0 +1,9 @@
+{
+  "parent": "the_aether:template/generic_groundcover",
+  "textures": {
+    "top_lower": "the_aether:block/shamrock",
+    "top_upper": "the_aether:block/shamrock",
+    "stalk": "the_aether:block/shamrock_stalks",
+    "stalk_inner": "the_aether:block/shamrock_stalks_inner"
+  }
+}

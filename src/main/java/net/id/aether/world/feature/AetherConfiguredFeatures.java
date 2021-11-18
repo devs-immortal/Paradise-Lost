@@ -6,6 +6,7 @@ import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.world.IcestoneSpireFeature;
+import net.id.aether.world.feature.config.BoulderFeatureConfig;
 import net.id.aether.world.feature.config.GroundcoverFeatureConfig;
 import net.id.aether.world.feature.config.LongFeatureConfig;
 import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
@@ -16,6 +17,7 @@ import net.minecraft.block.enums.SlabType;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -72,9 +74,10 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(Configs.RAINBOW_FOREST_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(17)))).spreadHorizontally().repeatRandomly(4);
 
     // Used in json
-    public static final ConfiguredFeature<?, ?> HOLYSTONE_BOULDER = register("holystone_boulder", Configs.BOULDER.configure(new SingleStateFeatureConfig(COBBLED_HOLYSTONE.getDefaultState()))).decorate(Decorators.SQUARE_HEIGHTMAP).repeatRandomly(6);
-    public static final ConfiguredFeature<?, ?> MOSSY_HOLYSTONE_BOULDER = register("mossy_holystone_boulder", Configs.BOULDER.configure(new SingleStateFeatureConfig(MOSSY_HOLYSTONE.getDefaultState()))).decorate(Decorators.SQUARE_HEIGHTMAP).repeatRandomly(12);
-    public static final ConfiguredFeature<?, ?> GOLDEN_MOSSY_HOLYSTONE_BOULDER = register("golden_mossy_holystone_boulder", Configs.BOULDER.configure(new SingleStateFeatureConfig(GOLDEN_MOSSY_HOLYSTONE.getDefaultState()))).decorate(Decorators.SQUARE_HEIGHTMAP).repeatRandomly(1);
+    public static final ConfiguredFeature<?, ?> GENERIC_BOULDER = register("generic_boulder", Configs.BOULDER.configure(new BoulderFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(MOSSY_HOLYSTONE.getDefaultState(), 1).add(COBBLED_HOLYSTONE.getDefaultState(), 3).build()), ConstantIntProvider.create(4), UniformIntProvider.create(3, 6))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(15))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))).repeatRandomly(1));
+    public static final ConfiguredFeature<?, ?> PLAINS_BOULDER = register("plains_boulder", Configs.BOULDER.configure(new BoulderFeatureConfig(new SimpleBlockStateProvider(COBBLED_HOLYSTONE.getDefaultState()), ConstantIntProvider.create(3), UniformIntProvider.create(3, 5))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(8))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))));
+    public static final ConfiguredFeature<?, ?> THICKET_BOULDER = register("thicket_boulder", Configs.BOULDER.configure(new BoulderFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(MOSSY_HOLYSTONE.getDefaultState(), 4).add(COBBLED_HOLYSTONE.getDefaultState(), 1).build()), ConstantIntProvider.create(6), UniformIntProvider.create(2, 5))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(2))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))).repeatRandomly(2));
+    public static final ConfiguredFeature<?, ?> GOLDEN_BOULDER = register("golden_boulder", Configs.BOULDER.configure(new BoulderFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(GOLDEN_MOSSY_HOLYSTONE.getDefaultState(), 4).add(COBBLED_HOLYSTONE.getDefaultState(), 1).build()), ConstantIntProvider.create(4), UniformIntProvider.create(3, 5))).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(30))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))));
 
     public static final ConfiguredFeature<?, ?> FALLEN_LEAVES = register("fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(Decorators.SPREAD_32_ABOVE).decorate(Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
     public static final ConfiguredFeature<?, ?> ALT_FALLEN_LEAVES = register("alt_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(Decorators.SPREAD_32_ABOVE).decorate(Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))).repeat(3));
@@ -84,10 +87,14 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2)).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(4))).spreadHorizontally().repeatRandomly(3)));
     public static final ConfiguredFeature<?, ?> SHIELD_ROCKS = register("shield_rocks", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM), 10).add(COBBLED_HOLYSTONE.getDefaultState(), 4).build()), new SimpleBlockPlacer()).whitelist(Set.of(HOLYSTONE, COBBLED_HOLYSTONE, MOSSY_HOLYSTONE)).spreadX(9).spreadZ(9).tries(96).cannotProject().build()).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(3)).repeatRandomly(3).spreadHorizontally()));
 
-    final static List<BlockState> GENERIC_FLOOR_WHITELIST = List.of(AETHER_GRASS_BLOCK.getDefaultState(), HOLYSTONE.getDefaultState(), COBBLED_HOLYSTONE.getDefaultState());
+    final static List<BlockState> GENERIC_FLOOR_WHITELIST = List.of(AETHER_GRASS_BLOCK.getDefaultState(), COARSE_AETHER_DIRT.getDefaultState(), HOLYSTONE.getDefaultState(), COBBLED_HOLYSTONE.getDefaultState());
 
     public static final ConfiguredFeature<?, ?> SHIELD_FLAX = register("shield_flax", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(WILD_FLAX.getDefaultState()), new DoublePlantPlacer()).spreadX(12).spreadZ(12).spreadY(5).tries(96).whitelist(Set.of(HOLYSTONE, COBBLED_HOLYSTONE, MOSSY_HOLYSTONE)).build()).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5)).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2)).repeatRandomly(4).spreadHorizontally())));
     public static final ConfiguredFeature<?, ?> SHIELD_NETTLES = register("shield_nettles", Configs.HONEY_NETTLE_FEATURE.configure(new DefaultFeatureConfig()).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(20)).repeatRandomly(12).spreadHorizontally()));
+
+    public static final ConfiguredFeature<?, ?> THICKET_FALLEN_LOG = register("thicket_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 6), new SimpleBlockStateProvider(SKYROOT_LOG.getDefaultState()), new SimpleBlockStateProvider(Blocks.MOSS_CARPET.getDefaultState()), new SimpleBlockStateProvider(Blocks.MOSS_CARPET.getDefaultState()), 0.5F, 0.35F, GENERIC_FLOOR_WHITELIST)).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(3))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(2))).repeatRandomly(2).spreadHorizontally());
+
+    public static final ConfiguredFeature<?, ?> THICKET_COARSE_DIRT = register("thicket_coarse_dirt", Configs.GROUNDCOVER_FEATURE.configure(new GroundcoverFeatureConfig(new SimpleBlockStateProvider(Blocks.MOSS_BLOCK.getDefaultState()), UniformIntProvider.create(0, 3), UniformIntProvider.create(0, 2))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))).repeatRandomly(2).spreadHorizontally());
 
     public static final ConfiguredFeature<?, ?> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), new SimpleBlockStateProvider(MOTTLED_SKYROOT_LOG.getDefaultState()), new SimpleBlockStateProvider(AETHER_GRASS.getDefaultState()), new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 0.3F, 0.15F, GENERIC_FLOOR_WHITELIST)).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(3))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))));
     public static final ConfiguredFeature<?, ?> MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), new SimpleBlockStateProvider(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), new SimpleBlockStateProvider(AETHER_GRASS_FLOWERING.getDefaultState()), new SimpleBlockStateProvider(ROOTCAP.getDefaultState()), 0.4F, 0.25F, GENERIC_FLOOR_WHITELIST)).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(3))).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(1))));
@@ -159,7 +166,7 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
         public static final Feature<DeltaFeatureConfig> AETHER_DELTA_FEATURE = register("aether_delta_feature", new AetherDeltaFeature(DeltaFeatureConfig.CODEC));
         public static final Feature<GroundcoverFeatureConfig> GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeature.CODEC));
 
-        public static final Feature<SingleStateFeatureConfig> BOULDER = register("boulder", new AetherBoulderFeature(SingleStateFeatureConfig.CODEC));
+        public static final Feature<BoulderFeatureConfig> BOULDER = register("boulder", new AetherBoulderFeature(BoulderFeatureConfig.CODEC));
         public static final Feature<LongFeatureConfig> PILLAR_FEATURE = register("pillar_feature", new PillarFeature(LongFeatureConfig.CODEC));
         public static final Feature<LongFeatureConfig> FALLEN_PILLAR_FEATURE = register("fallen_pillar_feature", new FallenPillarFeature(LongFeatureConfig.CODEC));
 

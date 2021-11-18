@@ -31,14 +31,14 @@
       "the_aether:dense_water"
     ],
     [
-      "the_aether:mossy_holystone_boulder",
-      "the_aether:mossy_holystone_boulder",
-      "the_aether:mossy_holystone_boulder",
-      "the_aether:golden_mossy_holystone_boulder"
+      "the_aether:thicket_boulder",
+      "the_aether:golden_boulder"
     ],
     [],
     [],
-    [],
+    [
+      "the_aether:thicket_coarse_dirt"
+    ],
     [
       "the_aether:ore_ambrosium",
       "the_aether:ore_gravitite",
@@ -46,6 +46,7 @@
     ],
     [],
     [
+      "the_aether:thicket_fallen_log",
       "the_aether:aether_flowers",
       "the_aether:aether_grass",
       "the_aether:fallen_leaves",

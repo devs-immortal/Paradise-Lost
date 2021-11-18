@@ -197,10 +197,10 @@ float contrast(float contrast, float percent) {
 void main() {
     // this does exactly the same thing as AuralLeavesBlock, just in glsl.
 
-    const vec3 color1 = vec3(66,205,255);
-    const vec3 color2 = vec3(61,255,203);
-    const vec3 color3 = vec3(172,77,255);
-    const vec3 color4 = vec3(255,92,214);
+    const vec3 color1 = vec3(166,255,221);
+    const vec3 color2 = vec3(150,229,255);
+    const vec3 color3 = vec3(214,179,255);
+    const vec3 color4 = vec3(255,173,198);
 
     float noise1 = contrast(26, sampleNoise(vertexColor, 3, 0.419));
     vec3 rgb1 = lerp(color1, color2, noise1 * (1 - noise1));

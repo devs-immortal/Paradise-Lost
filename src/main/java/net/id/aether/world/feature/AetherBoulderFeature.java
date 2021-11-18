@@ -2,38 +2,32 @@ package net.id.aether.world.feature;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.tag.AetherBlockTags;
+import net.id.aether.world.feature.config.BoulderFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Iterator;
 import java.util.Random;
 
-public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
+public class AetherBoulderFeature extends Feature<BoulderFeatureConfig> {
 
-    public AetherBoulderFeature(Codec<SingleStateFeatureConfig> configCodec) {
+    public AetherBoulderFeature(Codec<BoulderFeatureConfig> configCodec) {
         super(configCodec);
     }
 
-    public boolean generate(FeatureContext<SingleStateFeatureConfig> context) {
+    public boolean generate(FeatureContext<BoulderFeatureConfig> context) {
         BlockPos blockPos = context.getOrigin();
         StructureWorldAccess structureWorldAccess = context.getWorld();
-        blockPos = structureWorldAccess.getTopPosition(Heightmap.Type.WORLD_SURFACE_WG, blockPos);
         Random random = context.getRandom();
 
-        if (random.nextFloat() >= 0.02F) {
-            return false;
-        }
+        var config = context.getConfig();
 
-        blockPos = blockPos.add(random.nextInt(16) - 8, 0, random.nextInt(16) - 8);
-
-        SingleStateFeatureConfig singleStateFeatureConfig;
-        for (singleStateFeatureConfig = context.getConfig(); blockPos.getY() > structureWorldAccess.getBottomY() + 3; blockPos = blockPos.down()) {
+        for (; blockPos.getY() > structureWorldAccess.getBottomY() + 3; blockPos = blockPos.down()) {
             if (!structureWorldAccess.isAir(blockPos.down())) {
                 BlockState blockState = structureWorldAccess.getBlockState(blockPos.down());
                 if ((isSoil(blockState) || AetherBlockTags.BASE_AETHER_STONE.contains(blockState.getBlock())) && random.nextBoolean()) {
@@ -45,17 +39,19 @@ public class AetherBoulderFeature extends Feature<SingleStateFeatureConfig> {
         if (blockPos.getY() <= structureWorldAccess.getBottomY() + 3) {
             return false;
         } else {
-            for (int i = 0; i < 3; ++i) {
-                int j = random.nextInt(5);
-                int k = random.nextInt(5);
-                int l = random.nextInt(5);
-                float f = (float) (j + k + l) * 0.333F + 0.5F;
-                Iterator<BlockPos> var11 = BlockPos.iterate(blockPos.add(-j, -k, -l), blockPos.add(j, k, l)).iterator();
 
-                while (var11.hasNext()) {
-                    BlockPos blockPos2 = var11.next();
-                    if (blockPos2.getSquaredDistance(blockPos) <= (double) (f * f)) {
-                        structureWorldAccess.setBlockState(blockPos2, singleStateFeatureConfig.state, Block.NO_REDRAW);
+            var tries = config.tries().get(random);
+            var size = config.size().get(random);
+
+            for (int i = 0; i < 3; ++i) {
+                int j = random.nextInt(size);
+                int k = random.nextInt(size);
+                int l = random.nextInt(size);
+                float f = (float) (j + k + l) * 0.333F + 0.5F;
+
+                for (BlockPos bodyPos : BlockPos.iterate(blockPos.add(-j, -k, -l), blockPos.add(j, k, l))) {
+                    if (bodyPos.getSquaredDistance(blockPos) <= (double) (f * f)) {
+                        structureWorldAccess.setBlockState(bodyPos, config.body().getBlockState(random, bodyPos), Block.NO_REDRAW);
                     }
                 }
 

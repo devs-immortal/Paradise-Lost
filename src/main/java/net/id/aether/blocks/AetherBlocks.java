@@ -298,6 +298,7 @@ public class AetherBlocks {
     public static final FlowerPotBlock POTTED_AETHER_FERN = add("potted_aether_fern", new FlowerPotBlock(AETHER_FERN, flowerPot()), cutoutRenderLayer);
     public static final AetherBrushBlock AETHER_BUSH = add("aether_bush", new AetherBrushBlock(shrub()), flammablePlant, cutoutRenderLayer);
     public static final AetherBrushBlock FLUTEGRASS = add("flutegrass", new AetherBrushBlock(shrub().mapColor(MapColor.GOLD), AetherBlockTags.FLUTEGRASS_VALID_GROUND, true), flammablePlant, cutoutRenderLayer);
+    public static final GroundcoverBlock SHAMROCK = add("shamrock", new GroundcoverBlock(shrub().sounds(BlockSoundGroup.AZALEA_LEAVES), 0.98), flammablePlant, cutoutRenderLayer);
     public static final TallWaterPlantBlock HONEY_NETTLE = add("honey_nettle", new TallWaterPlantBlock(shrub().sounds(BlockSoundGroup.SMALL_DRIPLEAF)), cutoutRenderLayer);
     public static final AetherSeagrassBlock HALOPHIA = add("halophia", new AetherSeagrassBlock(shrub().sounds(BlockSoundGroup.WET_GRASS)), cutoutRenderLayer);
     public static final GiantLilypadBlock GIANT_LILY = add("giant_lily", new GiantLilypadBlock(copy(LILY_PAD).mapColor(MapColor.PALE_GREEN)), cutoutMippedRenderLayer);
@@ -499,7 +500,7 @@ public class AetherBlocks {
         }
 
         private static Settings aural(Settings settings) {
-            return settings.strength(0.05f).luminance(state -> 7).emissiveLighting(always).postProcess(always);
+            return settings.strength(0.05f).luminance(state -> 12).emissiveLighting(always).postProcess(always);
         }
     }
 
