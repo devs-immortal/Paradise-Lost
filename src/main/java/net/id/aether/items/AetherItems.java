@@ -442,6 +442,7 @@ public class AetherItems {
     public static final BlockItem AETHER_FERN = add("aether_fern", AetherBlocks.AETHER_FERN, decoration, compostable30);
     public static final BlockItem AETHER_BUSH = add("aether_bush", AetherBlocks.AETHER_BUSH, decoration, compostable30);
     public static final BlockItem FLUTEGRASS = add("flutegrass", AetherBlocks.FLUTEGRASS, decoration, compostable30);
+    public static final BlockItem SHAMROCK = add("shamrock", AetherBlocks.SHAMROCK, decoration, compostable50);
     public static final BlockItem HALOPHIA = add("halophia", AetherBlocks.HALOPHIA, decoration, compostable30);
     public static final BlockItem GIANT_LILY = add("giant_lily", new LilyPadItem(AetherBlocks.GIANT_LILY, hat), compostable100);
     public static final BlockItem WEEPING_CLOUDBURST = add("weeping_cloudburst", AetherBlocks.WEEPING_CLOUDBURST, decoration, compostable30);
@@ -469,6 +470,9 @@ public class AetherItems {
     // tall plants
     public static final BlockItem AETHER_TALL_GRASS = add("aether_tall_grass", AetherBlocks.AETHER_TALL_GRASS, decoration, compostable50);
     public static final BlockItem HONEY_NETTLE = add("honey_nettle", AetherBlocks.HONEY_NETTLE, decoration, compostable50);
+
+    public static final BlockItem LIVERWORT = add("liverwort", AetherBlocks.LIVERWORT, decoration, compostable100);
+    public static final BlockItem LIVERWORT_CARPET = add("liverwort_carpet", AetherBlocks.LIVERWORT_CARPET, decoration, compostable65);
 
     // FUNGI BAYBEEE
     public static final BlockItem LICHEN = add("lichen", AetherBlocks.LICHEN, decoration, compostable50);

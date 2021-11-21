@@ -37,7 +37,7 @@
     [],
     [],
     [
-      "the_aether:thicket_coarse_dirt"
+      "the_aether:thicket_liverwort"
     ],
     [
       "the_aether:ore_ambrosium",
@@ -46,6 +46,8 @@
     ],
     [],
     [
+      "the_aether:thicket_shamrock",
+      "the_aether:thicket_liverwort_carpet",
       "the_aether:thicket_fallen_log",
       "the_aether:aether_flowers",
       "the_aether:aether_grass",
