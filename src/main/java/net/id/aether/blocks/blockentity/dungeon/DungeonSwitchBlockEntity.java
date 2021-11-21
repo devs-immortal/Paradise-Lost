@@ -22,8 +22,8 @@ public class DungeonSwitchBlockEntity extends BlockEntity implements GameEventLi
     private int animationDelta;
 
     public DungeonSwitchBlockEntity(BlockPos pos, BlockState state) {
-        this(AetherBlockEntityTypes.DUNGEON_SWITCH, pos, state);
-
+//        this(AetherBlockEntityTypes.DUNGEON_SWITCH, pos, state);
+        this(AetherBlockEntityTypes.FOOD_BOWL, pos, state); // temp
     }
 
     public DungeonSwitchBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {

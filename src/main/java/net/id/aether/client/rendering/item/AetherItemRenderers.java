@@ -19,11 +19,11 @@ public final class AetherItemRenderers{
     private AetherItemRenderers(){}
     
     public static void init(){
-        registerChest(AetherBlocks.CRYSTAL_CHEST, AetherBlockEntityTypes.CRYSTAL_CHEST);
-        registerChest(AetherBlocks.GOLDEN_OAK_CHEST, AetherBlockEntityTypes.GOLDEN_OAK_CHEST);
-        registerChest(AetherBlocks.ORANGE_CHEST, AetherBlockEntityTypes.ORANGE_CHEST);
+//        registerChest(AetherBlocks.CRYSTAL_CHEST, AetherBlockEntityTypes.CRYSTAL_CHEST);
+//        registerChest(AetherBlocks.GOLDEN_OAK_CHEST, AetherBlockEntityTypes.GOLDEN_OAK_CHEST);
+//        registerChest(AetherBlocks.ORANGE_CHEST, AetherBlockEntityTypes.ORANGE_CHEST);
         registerChest(AetherBlocks.SKYROOT_CHEST, AetherBlockEntityTypes.SKYROOT_CHEST);
-        registerChest(AetherBlocks.WISTERIA_CHEST, AetherBlockEntityTypes.WISTERIA_CHEST);
+//        registerChest(AetherBlocks.WISTERIA_CHEST, AetherBlockEntityTypes.WISTERIA_CHEST);
     }
 
     private static void registerChest(ChestBlock block, BlockEntityType<ChestBlockEntity> type){

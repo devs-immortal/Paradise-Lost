@@ -116,8 +116,10 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient & type == AetherBlockEntityTypes.DUNGEON_SWITCH ? (world1, pos, state1, blockEntity) -> ((DungeonSwitchBlockEntity) blockEntity).clientTick() : null;
+//        return world.isClient & type == AetherBlockEntityTypes.DUNGEON_SWITCH ? (world1, pos, state1, blockEntity) -> ((DungeonSwitchBlockEntity) blockEntity).clientTick() : null;
+        return null;
     }
+
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(POWERED);
