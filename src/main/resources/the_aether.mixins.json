@@ -60,7 +60,8 @@
     "client.render.TexturedRenderLayersMixin",
     "client.render.VertexBufferMixin",
     "client.render.WorldRendererMixin",
-    "devel.client.SpriteAtlasTextureMixin"
+    "devel.client.SpriteAtlasTextureMixin",
+    "devel.client.TranslationStorageMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -33,6 +33,7 @@ public final class AetherDevel{
     public static final class Client{
         private static final Set<Identifier> MISSING_TEXTURES = new HashSet<>();
         private static final Set<Identifier> BAD_TEXTURES = new HashSet<>();
+        private static final Set<String> MISSING_LANGUAGE_KEYS = new HashSet<>();
         
         private Client(){}
         
@@ -52,12 +53,25 @@ public final class AetherDevel{
             }
         }
         
+        @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
+        private static void dumpStrings(UncheckedWriter writer, String message, Collection<String> strings){
+            synchronized(strings){
+                if(!strings.isEmpty()){
+                    writer.write(message + ":\n");
+                    strings.stream()
+                        .sorted(String::compareTo)
+                        .forEachOrdered((id)->writer.write("    " + id + '\n'));
+                }
+            }
+        }
+        
         private static void save(){
             var logFile = Path.of("./aether_todo.txt");
             
             try(var writer = new UncheckedWriter(Files.newBufferedWriter(logFile, StandardCharsets.UTF_8))){
                 dumpIds(writer, "Missing textures", MISSING_TEXTURES);
                 dumpIds(writer, "Textures with broken metadata", BAD_TEXTURES);
+                dumpStrings(writer, "Missing language keys", MISSING_LANGUAGE_KEYS);
             }catch(UncheckedIOException | IOException e){
                 System.err.println("Failed to write Aether devel log");
                 e.printStackTrace();
@@ -73,6 +87,12 @@ public final class AetherDevel{
         public static void logBadTexture(Identifier identifier){
             synchronized(BAD_TEXTURES){
                 BAD_TEXTURES.add(identifier);
+            }
+        }
+    
+        public static void logMissingLanguageKey(String key){
+            synchronized(MISSING_LANGUAGE_KEYS){
+                MISSING_LANGUAGE_KEYS.add(key);
             }
         }
     }

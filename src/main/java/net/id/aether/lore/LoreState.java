@@ -7,6 +7,7 @@ import java.util.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.component.AetherComponents;
+import net.id.aether.devel.AetherDevel;
 import net.id.aether.mixin.util.NbtCompoundAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
