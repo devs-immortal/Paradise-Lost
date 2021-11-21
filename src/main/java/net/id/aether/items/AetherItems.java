@@ -552,7 +552,7 @@ public class AetherItems {
     public static final BlockItem WISTERIA_PRESSURE_PLATE = add("wisteria_pressure_plate", AetherBlocks.WISTERIA_PRESSURE_PLATE, decoration);
 
     //dungeon
-    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", AetherBlocks.DUNGEON_SWITCH, decoration);
+//    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", AetherBlocks.DUNGEON_SWITCH, decoration);
 
     // these should be moved... somewhere?
     public static final BoatItem SKYROOT_BOAT = add("skyroot_boat", new BoatItem(AetherBoatTypes.SKYROOT, boat));
@@ -564,10 +564,10 @@ public class AetherItems {
     // Chests
     public static final BlockItem SKYROOT_CHEST = add("skyroot_chest", AetherBlocks.SKYROOT_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
     // 24Chrome: removed these from creative menu
-    public static final BlockItem GOLDEN_OAK_CHEST = add("golden_oak_chest", AetherBlocks.GOLDEN_OAK_CHEST, new FabricItemSettings());
-    public static final BlockItem ORANGE_CHEST = add("orange_chest", AetherBlocks.ORANGE_CHEST, new FabricItemSettings());
-    public static final BlockItem CRYSTAL_CHEST = add("crystal_chest", AetherBlocks.CRYSTAL_CHEST, new FabricItemSettings());
-    public static final BlockItem WISTERIA_CHEST = add("wisteria_chest", AetherBlocks.WISTERIA_CHEST, new FabricItemSettings());
+//    public static final BlockItem GOLDEN_OAK_CHEST = add("golden_oak_chest", AetherBlocks.GOLDEN_OAK_CHEST, new FabricItemSettings());
+//    public static final BlockItem ORANGE_CHEST = add("orange_chest", AetherBlocks.ORANGE_CHEST, new FabricItemSettings());
+//    public static final BlockItem CRYSTAL_CHEST = add("crystal_chest", AetherBlocks.CRYSTAL_CHEST, new FabricItemSettings());
+//    public static final BlockItem WISTERIA_CHEST = add("wisteria_chest", AetherBlocks.WISTERIA_CHEST, new FabricItemSettings());
 
     // Devel
     public static final PathTestingTool PATH_TESTING_TOOL = add("path_testing_tool", new PathTestingTool(new FabricItemSettings().maxCount(1)));

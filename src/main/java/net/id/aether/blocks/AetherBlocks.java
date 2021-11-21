@@ -371,24 +371,24 @@ public class AetherBlocks {
         return of(Material.SOLID_ORGANIC, MapColor.CLEAR).breakInstantly().noCollision();
     }
 
-    public static final SwetDropBlock SWET_DROP = add("swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.WHITE_SWET));
-    public static final SwetDropBlock BLUE_SWET_DROP = add("blue_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.BLUE_SWET));
-    public static final SwetDropBlock GOLDEN_SWET_DROP = add("golden_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.GOLDEN_SWET));
-    public static final SwetDropBlock PURPLE_SWET_DROP = add("purple_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.PURPLE_SWET));
+//    public static final SwetDropBlock SWET_DROP = add("swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.WHITE_SWET));
+//    public static final SwetDropBlock BLUE_SWET_DROP = add("blue_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.BLUE_SWET));
+//    public static final SwetDropBlock GOLDEN_SWET_DROP = add("golden_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.GOLDEN_SWET));
+//    public static final SwetDropBlock PURPLE_SWET_DROP = add("purple_swet_drop", new SwetDropBlock(swetDrop(), () -> AetherEntityTypes.PURPLE_SWET));
     // Usables
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
 
     //dungeon
-    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
+//    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
 
     // Chests
     /* 24Chrome: I removed all but skyroot from the creative menu, maybe we'll add them later but for now only skyroot will have textures! */
-    public static final AetherChestBlock CRYSTAL_CHEST = add("crystal_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.CRYSTAL_CHEST));
-    public static final AetherChestBlock GOLDEN_OAK_CHEST = add("golden_oak_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.GOLDEN_OAK_CHEST));
-    public static final AetherChestBlock ORANGE_CHEST = add("orange_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.ORANGE_CHEST));
+//    public static final AetherChestBlock CRYSTAL_CHEST = add("crystal_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.CRYSTAL_CHEST));
+//    public static final AetherChestBlock GOLDEN_OAK_CHEST = add("golden_oak_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.GOLDEN_OAK_CHEST));
+//    public static final AetherChestBlock ORANGE_CHEST = add("orange_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.ORANGE_CHEST));
     public static final AetherChestBlock SKYROOT_CHEST = add("skyroot_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.SKYROOT_CHEST));
-    public static final AetherChestBlock WISTERIA_CHEST = add("wisteria_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.WISTERIA_CHEST));
+//    public static final AetherChestBlock WISTERIA_CHEST = add("wisteria_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.WISTERIA_CHEST));
 
     @SafeVarargs
     private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {
