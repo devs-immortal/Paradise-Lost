@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "the_aether:block/flax_bottom_5"
+  }
+}

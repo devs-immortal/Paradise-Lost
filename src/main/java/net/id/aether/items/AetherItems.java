@@ -54,6 +54,11 @@ public class AetherItems {
     public static final Item ZANITE_GEM = add("zanite_gemstone", new Item(resource));
     public static final Item ZANITE_FRAGMENT = add("zanite_fragment", new Item(resource));
     public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource));
+    public static final Item FLAX_THREAD = add("flax_thread", new Item(resource));
+    public static final Item FLAXWEAVE = add("flaxweave", new Item(resource));
+    public static final Item GROUND_SWETROOT = add("ground_swetroot", new Item(resource));
+    public static final Item SPROUTING_SWETROOT = add("sprouting_swetroot", new Item(resource));
+
 
     private static Settings tool() {
         return new Settings().group(AetherItemGroups.AETHER_TOOLS);
@@ -178,6 +183,10 @@ public class AetherItems {
     public static final AccessoryItem IRON_BUBBLE = add("iron_bubble", new AccessoryItem(AccessoryType.MISC, aetherLootWearable));
     */
 
+    private static Settings food() {
+        return new Settings().group(AetherItemGroups.AETHER_FOOD);
+    }
+
     private static Settings food(FoodComponent foodComponent) {
         return new Settings().group(AetherItemGroups.AETHER_FOOD).food(foodComponent);
     }
@@ -191,6 +200,8 @@ public class AetherItems {
     public static final Item ORANGE = add("orange", new Item(food(AetherFoodComponent.ORANGE)), compostable65);
     public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(AetherFoodComponent.WHITE_APPLE)), compostable(0f));
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(AetherBlocks.AMADRYS, food(AetherFoodComponent.GENERIC_WORSE)), compostable30);
+    public static final AliasedBlockItem SWETROOT = add("swetroot", new AliasedBlockItem(AetherBlocks.SWETROOT, food(AetherFoodComponent.GENERIC)), compostable30);
+//    public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(AetherBlocks.FLAX, food()), compostable30);
     public static final Item BLUE_GUMMY_SWET = add("blue_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
     public static final Item GOLDEN_GUMMY_SWET = add("golden_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
     public static final ValkyrieMilkItem VALKYRIE_MILK = add("valkyrie_milk", new ValkyrieMilkItem(food(AetherFoodComponent.VALKYRIE_MILK, EPIC).maxCount(1)));
@@ -436,6 +447,7 @@ public class AetherItems {
     public static final BlockItem WEEPING_CLOUDBURST = add("weeping_cloudburst", AetherBlocks.WEEPING_CLOUDBURST, decoration, compostable30);
     public static final BlockItem MOSS_STAR = add("moss_star", AetherBlocks.MOSS_STAR, decoration, compostable50);
     public static final BlockItem MOSS_BALL = add("moss_ball", AetherBlocks.MOSS_BALL, decoration, compostable30);
+    public static final BlockItem WILD_SWETROOT = add("wild_swetroot", AetherBlocks.WILD_SWETROOT, decoration, compostable30);
 
     public static final BlockItem ANCIENT_FLOWER = add("ancient_flower", AetherBlocks.ANCIENT_FLOWER, decoration, compostable65);
     public static final BlockItem ATARAXIA = add("ataraxia", AetherBlocks.ATARAXIA, decoration, compostable65);
@@ -464,6 +476,8 @@ public class AetherItems {
     public static final BlockItem LICHEN_PILE = add("lichen_pile", AetherBlocks.LICHEN_PILE, decoration, compostable30);
     public static final BlockItem LUCATIEL_LICHEN_PILE = add("lucatiel_lichen_pile", AetherBlocks.LUCATIEL_LICHEN_PILE, decoration, compostable100);
     public static final BlockItem ROOTCAP = add("rootcap", AetherBlocks.ROOTCAP, decoration(), compostable100);
+
+    public static final BlockItem FLAXWEAVE_BLOCK = add("flaxweave_block", AetherBlocks.FLAXWEAVE_BLOCK, decoration, fuel(300));
 
     // lights
     public static final BlockItem AMBROSIUM_LANTERN = add("ambrosium_lantern", AetherBlocks.AMBROSIUM_LANTERN, decoration);

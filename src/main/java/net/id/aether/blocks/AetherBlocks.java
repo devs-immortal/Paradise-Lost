@@ -318,6 +318,11 @@ public class AetherBlocks {
     public static final WallClingingPlantBlock ROOTCAP = add("rootcap", new WallClingingPlantBlock(copy(BROWN_MUSHROOM), AetherBlockTags.FUNGI_CLINGABLES), cutoutRenderLayer);
 
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(shrub().mapColor(MapColor.PINK)), flammablePlant, cutoutRenderLayer);
+//    public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(shrub().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
+    public static final AetherHangingRootsBlock WILD_SWETROOT = add("wild_swetroot", new AetherHangingRootsBlock(shrub().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
+    public static final SwetrootCropBlock SWETROOT = add("swetroot", new SwetrootCropBlock(shrub().mapColor(MapColor.BLUE)), flammablePlant, cutoutRenderLayer);
+
+    public static final Block FLAXWEAVE_BLOCK = add("flaxweave_block", new Block(Settings.of(Material.WOOL).mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));
 
     public static final BlueberryBushBlock BLUEBERRY_BUSH = add("blueberry_bush", new BlueberryBushBlock(of(Material.PLANT).strength(0.2f)
             .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision()), flammablePlant, cutoutRenderLayer);
@@ -550,6 +555,12 @@ public class AetherBlocks {
     private static class AetherWeightedPressurePlateBlock extends WeightedPressurePlateBlock {
         public AetherWeightedPressurePlateBlock(int weight, Settings settings) {
             super(weight, settings);
+        }
+    }
+
+    private static class AetherHangingRootsBlock extends HangingRootsBlock {
+        protected AetherHangingRootsBlock(Settings settings) {
+            super(settings);
         }
     }
 }

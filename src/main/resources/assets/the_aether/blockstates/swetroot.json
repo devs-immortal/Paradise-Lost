@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "the_aether:block/swetroot_0"
+    },
+    "age=1": {
+      "model": "the_aether:block/swetroot_1"
+    },
+    "age=2": {
+      "model": "the_aether:block/swetroot_2"
+    },
+    "age=3": {
+      "model": "the_aether:block/swetroot_3"
+    }
+  }
+}
