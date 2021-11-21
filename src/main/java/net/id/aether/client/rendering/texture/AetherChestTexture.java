@@ -11,10 +11,10 @@ import static net.minecraft.client.render.TexturedRenderLayers.CHEST_ATLAS_TEXTU
 
 public enum AetherChestTexture{
     SKYROOT,
-    GOLDEN_OAK,
-    ORANGE,
-    CRYSTAL,
-    WISTERIA,
+//    GOLDEN_OAK,
+//    ORANGE,
+//    CRYSTAL,
+//    WISTERIA,
     ;
     
     public final SpriteIdentifier single;
@@ -47,7 +47,7 @@ public enum AetherChestTexture{
     }
     
     public enum Holiday{
-        NONE("normal", (calander)->false),
+        NONE("normal", (calendar)->false),
         CHRISTMAS("christmas", (calendar)->{
             int date = calendar.get(Calendar.DATE);
             return calendar.get(Calendar.MONTH) == Calendar.DECEMBER && date >= 24 && date <= 26;

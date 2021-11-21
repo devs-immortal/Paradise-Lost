@@ -570,7 +570,7 @@ public class AetherItems {
 //    public static final BlockItem WISTERIA_CHEST = add("wisteria_chest", AetherBlocks.WISTERIA_CHEST, new FabricItemSettings());
 
     // Devel
-    public static final PathTestingTool PATH_TESTING_TOOL = add("path_testing_tool", new PathTestingTool(new FabricItemSettings().maxCount(1)));
+//    public static final PathTestingTool PATH_TESTING_TOOL = add("path_testing_tool", new PathTestingTool(new FabricItemSettings().maxCount(1)));
     
     public static void init() {
         AetherRegistryQueues.ITEM.register();

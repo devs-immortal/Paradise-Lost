@@ -11,6 +11,18 @@
     },
     "age=3": {
       "model": "the_aether:block/swetroot_3"
+    },
+    "age=4": {
+      "model": "the_aether:block/swetroot_3"
+    },
+    "age=5": {
+      "model": "the_aether:block/swetroot_3"
+    },
+    "age=6": {
+      "model": "the_aether:block/swetroot_3"
+    },
+    "age=7": {
+      "model": "the_aether:block/swetroot_3"
     }
   }
 }
