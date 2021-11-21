@@ -232,7 +232,7 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
 
     @Override
     public boolean shouldCopyForRespawn(boolean lossless, boolean keepInventory, boolean sameCharacter) {
-        return true;
+        return false;
     }
 
     private static class ConditionTracker {
