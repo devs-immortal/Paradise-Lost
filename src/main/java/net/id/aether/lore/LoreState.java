@@ -7,7 +7,6 @@ import java.util.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.component.AetherComponents;
-import net.id.aether.devel.AetherDevel;
 import net.id.aether.mixin.util.NbtCompoundAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
@@ -103,60 +102,9 @@ public interface LoreState extends AutoSyncedComponent{
                 var oldStatus = loreStates.put(LORE_REGISTRY.get(id), status);
                 if(isClient && oldStatus != status && status == LoreStatus.COMPLETED){
                     // Fingers crossed this gets by the validator
-                    triggerToast(id);
+                    ToastTriggerer.triggerToast(id);
                 }
             }
-        }
-        
-        @Environment(EnvType.CLIENT)
-        private void triggerToast(Identifier id){
-            LORE_REGISTRY.getOrEmpty(id).ifPresent((lore)->{
-                MinecraftClient.getInstance().getToastManager().add(new Toast(){
-                    @Override
-                    public Visibility draw(MatrixStack matrices, ToastManager manager, long startTime){
-                        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                        RenderSystem.setShaderTexture(0, TEXTURE);
-                        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                        manager.drawTexture(matrices, 0, 0, 0, 0, this.getWidth(), this.getHeight());
-                        List<OrderedText> list = manager.getGame().textRenderer.wrapLines(lore.getTitleText(), 125);
-                        int color = 0xFFFF00;
-                        if(list.size() == 1){
-                            manager.getGame().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 7.0F, color | 0xFF000000);
-                            manager.getGame().textRenderer.draw(matrices, list.get(0), 30.0F, 18.0F, -1);
-                        }else{
-                            int l;
-                            if(startTime < 1500L){
-                                l = MathHelper.floor(MathHelper.clamp((float)(1500L - startTime) / 300.0F, 0.0F, 1.0F) * 255.0F) << 24 | 67108864;
-                                manager.getGame().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 11.0F, color | l);
-                            }else{
-                                l = MathHelper.floor(MathHelper.clamp((float)(startTime - 1500L) / 300.0F, 0.0F, 1.0F) * 252.0F) << 24 | 67108864;
-                                int var10000 = this.getHeight() / 2;
-                                int var10001 = list.size();
-                                Objects.requireNonNull(manager.getGame().textRenderer);
-                                int m = var10000 - var10001 * 9 / 2;
-
-                                for(Iterator<OrderedText> var12 = list.iterator(); var12.hasNext(); m += 9){
-                                    OrderedText orderedText = var12.next();
-                                    manager.getGame().textRenderer.draw(matrices, orderedText, 30.0F, (float)m, 16777215 | l);
-                                    Objects.requireNonNull(manager.getGame().textRenderer);
-                                }
-                            }
-                        }
-
-/*
-                            if (!soundPlayed && startTime > 0L) {
-                                soundPlayed = true;
-                                if(advancementDisplay.getFrame() == AdvancementFrame.CHALLENGE) {
-                                    manager.getGame().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F));
-                                }
-                            }
-*/
-
-                        manager.getGame().getItemRenderer().renderInGui(lore.stack(), 8, 8);
-                        return startTime >= 5000L ? Visibility.HIDE : Visibility.SHOW;
-                    }
-                });
-            });
         }
         
         @Override
@@ -212,5 +160,59 @@ public interface LoreState extends AutoSyncedComponent{
             CHILDREN.put(lore.getId(), children);
             return children;
         }
+    }
+}
+
+// This class is here solely so that the server does not crash.
+class ToastTriggerer {
+    @Environment(EnvType.CLIENT)
+    public static void triggerToast(Identifier id){
+        LORE_REGISTRY.getOrEmpty(id).ifPresent((lore)->{
+            MinecraftClient.getInstance().getToastManager().add(new Toast(){
+                @Override
+                public Visibility draw(MatrixStack matrices, ToastManager manager, long startTime){
+                    RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                    RenderSystem.setShaderTexture(0, TEXTURE);
+                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                    manager.drawTexture(matrices, 0, 0, 0, 0, this.getWidth(), this.getHeight());
+                    List<OrderedText> list = manager.getGame().textRenderer.wrapLines(lore.getTitleText(), 125);
+                    int color = 0xFFFF00;
+                    if(list.size() == 1){
+                        manager.getGame().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 7.0F, color | 0xFF000000);
+                        manager.getGame().textRenderer.draw(matrices, list.get(0), 30.0F, 18.0F, -1);
+                    }else{
+                        int l;
+                        if(startTime < 1500L){
+                            l = MathHelper.floor(MathHelper.clamp((float)(1500L - startTime) / 300.0F, 0.0F, 1.0F) * 255.0F) << 24 | 67108864;
+                            manager.getGame().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 11.0F, color | l);
+                        }else{
+                            l = MathHelper.floor(MathHelper.clamp((float)(startTime - 1500L) / 300.0F, 0.0F, 1.0F) * 252.0F) << 24 | 67108864;
+                            int var10000 = this.getHeight() / 2;
+                            int var10001 = list.size();
+                            Objects.requireNonNull(manager.getGame().textRenderer);
+                            int m = var10000 - var10001 * 9 / 2;
+
+                            for(Iterator<OrderedText> var12 = list.iterator(); var12.hasNext(); m += 9){
+                                OrderedText orderedText = var12.next();
+                                manager.getGame().textRenderer.draw(matrices, orderedText, 30.0F, (float)m, 16777215 | l);
+                                Objects.requireNonNull(manager.getGame().textRenderer);
+                            }
+                        }
+                    }
+
+/*
+                            if (!soundPlayed && startTime > 0L) {
+                                soundPlayed = true;
+                                if(advancementDisplay.getFrame() == AdvancementFrame.CHALLENGE) {
+                                    manager.getGame().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F));
+                                }
+                            }
+*/
+
+                    manager.getGame().getItemRenderer().renderInGui(lore.stack(), 8, 8);
+                    return startTime >= 5000L ? Visibility.HIDE : Visibility.SHOW;
+                }
+            });
+        });
     }
 }
