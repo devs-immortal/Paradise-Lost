@@ -76,16 +76,19 @@ public class ConditionManager implements AutoSyncedComponent, CommonTickingCompo
                 case CHRONIC -> tracker.chronVal = value;
                 case CONSTANT -> throw new IllegalArgumentException("Constant condition values may not be directly edited");
             }
+            ConditionAPI.trySync(this.target);
             return true;
         }).orElse(false);
     }
 
     public void add(Condition condition, Persistence persistence, float amount) {
         Optional.ofNullable(this.getConditionTracker(condition)).ifPresent(tracker -> tracker.add(persistence, amount));
+        ConditionAPI.trySync(this.target);
     }
 
     public void remove(Condition condition, Persistence persistence, float amount) {
         Optional.ofNullable(this.getConditionTracker(condition)).ifPresent(tracker -> tracker.remove(persistence, amount));
+        ConditionAPI.trySync(this.target);
     }
 
     public boolean removeAll(){
