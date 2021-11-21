@@ -33,7 +33,7 @@ public final class AetherSoundEvents{
      */
     private static final Set<AbstractSoundEvent> SOUNDS = new HashSet<>();
     
-    public static final SoundEvent BLOCK_AETHER_PORTAL_AMBIENT = event("block.portal.portal");
+    public static final SoundEvent BLOCK_AETHER_PORTAL_AMBIENT = event("block.portal.ambient");
     public static final SoundEvent BLOCK_AETHER_PORTAL_TRAVEL = event("block.portal.travel");
     public static final SoundEvent BLOCK_AETHER_PORTAL_TRIGGER = event("block.portal.trigger");
     
