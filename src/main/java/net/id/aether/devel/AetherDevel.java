@@ -19,6 +19,7 @@ public final class AetherDevel{
     
     public static void init(){
         System.out.print("\n".repeat(5) + "The Aether Reborn is in debug mode!" + "\n".repeat(6));
+        Runtime.getRuntime().addShutdownHook(new Thread(AetherDevel::save));
     }
     
     private static final boolean isDevel = FabricLoader.getInstance().isDevelopmentEnvironment();
@@ -27,6 +28,49 @@ public final class AetherDevel{
     @Deprecated(forRemoval = true)
     public static boolean isDevel(){
         return isDevel;
+    }
+    
+    private static void save(){
+        var logFile = Path.of("./aether_todo_server.txt");
+        
+        try(var writer = new UncheckedWriter(Files.newBufferedWriter(logFile, StandardCharsets.UTF_8))){
+            dumpStrings(writer, "Bad features", BAD_FEATURES);
+        }catch(UncheckedIOException | IOException e){
+            System.err.println("Failed to write Aether devel log");
+            e.printStackTrace();
+        }
+    }
+    
+    @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
+    private static void dumpIds(UncheckedWriter writer, String message, Collection<Identifier> ids){
+        synchronized(ids){
+            if(!ids.isEmpty()){
+                writer.write(message + ":\n");
+                ids.stream()
+                    .sorted(Identifier::compareTo)
+                    .forEachOrdered((id)->writer.write("    " + id + '\n'));
+            }
+        }
+    }
+    
+    @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
+    private static void dumpStrings(UncheckedWriter writer, String message, Collection<String> strings){
+        synchronized(strings){
+            if(!strings.isEmpty()){
+                writer.write(message + ":\n");
+                strings.stream()
+                    .sorted(String::compareTo)
+                    .forEachOrdered((id)->writer.write("    " + id + '\n'));
+            }
+        }
+    }
+    
+    private static final Set<String> BAD_FEATURES = new HashSet<>();
+    
+    public static void logBadFeature(String feature){
+        synchronized(BAD_FEATURES){
+            BAD_FEATURES.add(feature);
+        }
     }
     
     @Environment(EnvType.CLIENT)
@@ -40,33 +84,9 @@ public final class AetherDevel{
         public static void init(){
             Runtime.getRuntime().addShutdownHook(new Thread(Client::save));
         }
-    
-        @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
-        private static void dumpIds(UncheckedWriter writer, String message, Collection<Identifier> ids){
-            synchronized(ids){
-                if(!ids.isEmpty()){
-                    writer.write(message + ":\n");
-                    ids.stream()
-                        .sorted(Identifier::compareTo)
-                        .forEachOrdered((id)->writer.write("    " + id + '\n'));
-                }
-            }
-        }
-        
-        @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
-        private static void dumpStrings(UncheckedWriter writer, String message, Collection<String> strings){
-            synchronized(strings){
-                if(!strings.isEmpty()){
-                    writer.write(message + ":\n");
-                    strings.stream()
-                        .sorted(String::compareTo)
-                        .forEachOrdered((id)->writer.write("    " + id + '\n'));
-                }
-            }
-        }
         
         private static void save(){
-            var logFile = Path.of("./aether_todo.txt");
+            var logFile = Path.of("./aether_todo_client.txt");
             
             try(var writer = new UncheckedWriter(Files.newBufferedWriter(logFile, StandardCharsets.UTF_8))){
                 dumpIds(writer, "Missing textures", MISSING_TEXTURES);
