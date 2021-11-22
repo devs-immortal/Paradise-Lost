@@ -72,7 +72,7 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
                 BlockPos offPos = nodePos.add(i, 0, j);
                 if (leaves.contains(offPos) && random.nextBoolean()) {
                     offPos = offPos.down();
-                    int hangerLength = random.nextInt(3);
+                    int hangerLength = random.nextInt((int) Math.max(3, trunkHeight / 3.0 * 2));
                     int step = 0;
                     while (step <= hangerLength && world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir)) {
                         replacer.accept(offPos, hanger.with(AetherHangerBlock.TIP, false));

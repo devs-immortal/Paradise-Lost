@@ -443,6 +443,7 @@ public class AetherItems {
     public static final BlockItem AETHER_BUSH = add("aether_bush", AetherBlocks.AETHER_BUSH, decoration, compostable30);
     public static final BlockItem FLUTEGRASS = add("flutegrass", AetherBlocks.FLUTEGRASS, decoration, compostable30);
     public static final BlockItem SHAMROCK = add("shamrock", AetherBlocks.SHAMROCK, decoration, compostable50);
+    public static final BlockItem MALT_SPRIG = add("malt_sprig", AetherBlocks.MALT_SPRIG, decoration, compostable30);
     public static final BlockItem HALOPHIA = add("halophia", AetherBlocks.HALOPHIA, decoration, compostable30);
     public static final BlockItem GIANT_LILY = add("giant_lily", new LilyPadItem(AetherBlocks.GIANT_LILY, hat), compostable100);
     public static final BlockItem WEEPING_CLOUDBURST = add("weeping_cloudburst", AetherBlocks.WEEPING_CLOUDBURST, decoration, compostable30);

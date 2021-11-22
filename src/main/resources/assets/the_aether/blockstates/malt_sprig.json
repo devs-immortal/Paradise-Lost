@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "the_aether:block/malt_sprig"
+      },
+      {
+        "model": "the_aether:block/malt_sprig",
+        "y": 180
+      },
+      {
+        "model": "the_aether:block/malt_sprig_tall"
+      },
+      {
+        "model": "the_aether:block/malt_sprig_tall",
+        "y": 180
+      }
+    ]
+  }
+}

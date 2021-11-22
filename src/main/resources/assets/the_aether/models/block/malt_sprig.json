@@ -1,0 +1,9 @@
+{
+  "parent": "the_aether:template/generic_groundcover",
+  "textures": {
+    "top_lower": "the_aether:block/malt_sprig",
+    "top_upper": "the_aether:block/blank",
+    "stalk": "the_aether:block/malt_sprig_stalks_small",
+    "stalk_inner": "the_aether:block/malt_sprig_stalks_small_inner"
+  }
+}

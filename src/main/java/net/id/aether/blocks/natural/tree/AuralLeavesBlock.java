@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 @EnvironmentInterface(value = EnvType.CLIENT, itf = RenderLayerOverride.class)
-public class AuralLeavesBlock extends AetherLeavesBlock implements DynamicColorBlock, RenderLayerOverride{
+public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColorBlock, RenderLayerOverride{
 
     private final Vec3i[] gradientColors;
 

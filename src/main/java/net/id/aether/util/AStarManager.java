@@ -29,13 +29,14 @@ public class AStarManager {
         private final Function5<BlockPos, BlockPos, WorldView, BlockPos, Double, Integer> costMapper;
         private final BiPredicate<WorldView, Optional<Node>> outputValidator;
         private final boolean allowRecompute;
+        private final boolean allowDiagionalMovement;
         private final int expectedPathLength;
         private final double heuristic;
 
         private Optional<PathingOutput> lastOutput;
         private boolean complete;
 
-        private APather(WorldView world, BlockPosProvider start, BlockPosProvider goal, BiFunction<WorldView, BlockPos, BlockPos> checkAdjuster, BiPredicate<WorldView, BlockPos> validator, Function5<BlockPos, BlockPos, WorldView, BlockPos, Double, Integer> costMapper, BiPredicate<WorldView, Optional<Node>> outputValidator, int expectedPathLength, boolean allowRecompute, double heuristic) {
+        private APather(WorldView world, BlockPosProvider start, BlockPosProvider goal, BiFunction<WorldView, BlockPos, BlockPos> checkAdjuster, BiPredicate<WorldView, BlockPos> validator, Function5<BlockPos, BlockPos, WorldView, BlockPos, Double, Integer> costMapper, BiPredicate<WorldView, Optional<Node>> outputValidator, int expectedPathLength, boolean allowDiagionalMovement, boolean allowRecompute, double heuristic) {
             this.heuristic = heuristic;
             Comparator<Node> comparator = Comparator.comparing(node -> node.cost);
             this.queue = new PriorityQueue<>(expectedPathLength, comparator);
@@ -46,6 +47,7 @@ public class AStarManager {
             this.validator = validator;
             this.costMapper = costMapper;
             this.outputValidator = outputValidator;
+            this.allowDiagionalMovement = allowDiagionalMovement;
             this.allowRecompute = allowRecompute;
             this.expectedPathLength = expectedPathLength;
         }
@@ -92,13 +94,32 @@ public class AStarManager {
             var curPos = current.pos;
 
             for (Direction direction : Direction.values()) {
-                var testPos = checkAdjuster.apply(world, curPos.offset(direction));
 
-                if(!pastNodes.contains(testPos) && validator.test(world, testPos)) {
+                var testPos = curPos.offset(direction);
 
-                    var cost = costMapper.apply(start, goal, world, testPos, heuristic);
+                if(allowDiagionalMovement) {
+                    for (Direction diagonal : Direction.values()) {
+                        if(diagonal.getAxis() != direction.getAxis()) {
+                            var diagonalPos = checkAdjuster.apply(world, testPos.offset(diagonal));
 
-                    queue.add(new Node(testPos, cost, current, false));
+                            if(!pastNodes.contains(diagonalPos) && validator.test(world, diagonalPos)) {
+
+                                var cost = costMapper.apply(start, goal, world, diagonalPos, heuristic);
+
+                                queue.add(new Node(diagonalPos, cost, current, false));
+                            }
+                        }
+                    }
+                }
+                else {
+                    testPos = checkAdjuster.apply(world, testPos);
+
+                    if(!pastNodes.contains(testPos) && validator.test(world, testPos)) {
+
+                        var cost = costMapper.apply(start, goal, world, testPos, heuristic);
+
+                        queue.add(new Node(testPos, cost, current, false));
+                    }
                 }
             }
         }
@@ -136,6 +157,7 @@ public class AStarManager {
         private BiPredicate<WorldView, BlockPos> validator = v_alwaysTrue;
         private Function5<BlockPos, BlockPos, WorldView, BlockPos, Double, Integer> costMapper = c_simple;
         private BiPredicate<WorldView, Optional<Node>> outputValidator = o_pass;
+        private boolean allowDiagonalMovement;
         private boolean allowRecompute;
         private int expectedPathLength = 32;
         private double heuristic = 1.334;
@@ -178,6 +200,10 @@ public class AStarManager {
             this.allowRecompute = true;
         }
 
+        public void allowDiagonalMovement() {
+            this.allowDiagonalMovement = true;
+        }
+
         public APather build(@NotNull WorldView world) {
             if(start == null) {
                 throw new IllegalArgumentException("start must not be null");
@@ -186,7 +212,7 @@ public class AStarManager {
                 throw new IllegalArgumentException("goal must not be null");
             }
 
-            return new APather(world, start, goal, checkAdjuster, validator, costMapper, outputValidator, expectedPathLength, allowRecompute, heuristic);
+            return new APather(world, start, goal, checkAdjuster, validator, costMapper, outputValidator, expectedPathLength, allowDiagonalMovement, allowRecompute, heuristic);
         }
 
         public static final BiFunction<WorldView, BlockPos, BlockPos> a_noop = (worldView, pos) -> pos;

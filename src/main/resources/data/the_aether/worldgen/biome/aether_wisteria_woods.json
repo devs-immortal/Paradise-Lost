@@ -43,10 +43,12 @@
     [
     ],
     [
+      "the_aether:rainbow_malt_sprigs",
       "the_aether:aether_flowers",
       "the_aether:aether_grass",
-      "the_aether:aether_fern",      
-      "the_aether:rainbow_fallen_leaves",
+      "the_aether:aether_fern",
+      "the_aether:fallen_rose_leaves",
+      "the_aether:fallen_lavender_leaves",
       "the_aether:aether_bush",
       "the_aether:patch_blueberry",
       "the_aether:wisteria_woods_trees"

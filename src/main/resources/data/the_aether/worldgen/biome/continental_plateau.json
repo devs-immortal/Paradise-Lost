@@ -48,8 +48,10 @@
       "the_aether:aether_tall_grass",
       "the_aether:water_spring",
       "the_aether:patch_blueberry",
-      "the_aether:shield_trees",
-      "the_aether:sparse_trees",
+      "the_aether:plateau_foliage",
+      "the_aether:plateau_shamrock",
+      "the_aether:plateau_flowering_grass",
+      "the_aether:plateau_trees",
       "the_aether:flutegrass"
     ],
     [
