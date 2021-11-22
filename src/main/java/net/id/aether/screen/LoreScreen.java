@@ -273,7 +273,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
         private float hoverTime = 0;
         
         private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemStack stack, @NotNull Text title, @NotNull Text description, @NotNull Set<@NotNull LoreEntry> requirements){
-            Objects.requireNonNull(type, "ascension was null");
+            Objects.requireNonNull(type, "type was null");
             Objects.requireNonNull(stack, "stack was null");
             Objects.requireNonNull(title, "title was null");
             Objects.requireNonNull(description, "description was null");

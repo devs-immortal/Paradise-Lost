@@ -54,7 +54,7 @@ public final class CloudRendererMixin {
     private VertexBuffer cloudsBuffer;
 
     public CloudRendererMixin() {
-        throw new NullPointerException("null cannot be cast to non-null ascension net.minecraft.client.world.ClientWorld");
+        throw new NullPointerException("null cannot be cast to non-null type net.minecraft.client.world.ClientWorld");
     }
 
     @Inject(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FDDD)V", at = @At("HEAD"), cancellable = true)

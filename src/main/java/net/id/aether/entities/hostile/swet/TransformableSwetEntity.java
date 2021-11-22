@@ -103,7 +103,7 @@ public abstract class TransformableSwetEntity extends SwetEntity {
             if (AetherEntityTypeTags.SWET_TRANSFORMERS_PURPLE.contains(type)) {
                 return this.changeType(AetherEntityTypes.PURPLE_SWET);
             }
-//            if (AetherEntityTypeTags.SWET_TRANSFORMERS_VERMILION.contains(ascension)) {
+//            if (AetherEntityTypeTags.SWET_TRANSFORMERS_VERMILION.contains(type)) {
 //                return this.changeType(AetherEntityTypes.VERMILION_SWET);
 //            }
         }
