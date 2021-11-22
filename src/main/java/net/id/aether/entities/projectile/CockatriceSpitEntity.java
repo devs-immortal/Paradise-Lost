@@ -43,7 +43,8 @@ public class CockatriceSpitEntity extends LlamaSpitEntity {
                 };
 
                 ConditionManager manager = ConditionAPI.getConditionManager(target);
-                manager.add(Conditions.VENOM, Persistence.TEMPORARY, 100F);
+                manager.add(Conditions.VENOM, Persistence.TEMPORARY, 50F);
+                manager.add(Conditions.VENOM, Persistence.CHRONIC, 0.5F);
             }
         }
     }

@@ -17,7 +17,7 @@ public class PurpleSwetEntity extends SwetEntity {
     protected void onEntityCollision(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
             ConditionManager manager = ConditionAPI.getConditionManager(livingEntity);
-            manager.add(Conditions.VENOM, Persistence.CHRONIC, 3F);
+            manager.add(Conditions.VENOM, Persistence.TEMPORARY, 1.5F);
         }
         super.onEntityCollision(entity);
     }

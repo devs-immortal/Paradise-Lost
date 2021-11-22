@@ -25,8 +25,6 @@ public class RookEntity extends MobEntity {
 
     public RookEntity(EntityType<? extends RookEntity> type, World world) {
         super(type, world);
-        this.setInvulnerable(true);
-        this.setNoGravity(true);
     }
 
     public static DefaultAttributeContainer.Builder createRookAttributes() {

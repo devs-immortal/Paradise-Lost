@@ -31,11 +31,15 @@ public class RookModel extends EntityModel<RookEntity> {
 
     @Override
     public void setAngles(RookEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        var cameraPos = MinecraftClient.getInstance().getCameraEntity().getEyePos();
-        var relativeX = cameraPos.getX() - entity.getX();
-        var relativeZ = cameraPos.getZ() - entity.getZ();
-        var angle = (float) (Math.atan(relativeZ / relativeX) + 1.5708);
+        var cameraEntity = MinecraftClient.getInstance().getCameraEntity();
+        var cameraPos = cameraEntity.getEyePos();
+        var relativeX = cameraEntity.getX() - entity.getX();
+        var relativeZ = cameraEntity.getZ() - entity.getZ();
+        var angle = (float) (Math.atan2(relativeZ, relativeX) - Math.PI);
         var cameraFacing = MinecraftClient.getInstance().getBlockEntityRenderDispatcher().camera.getYaw();
+
+
+
         while (Math.abs(cameraFacing) > 360) {
             if(cameraFacing < 0) {
                 cameraFacing += 360;
@@ -45,11 +49,16 @@ public class RookModel extends EntityModel<RookEntity> {
             }
         }
 
-        var radianFacing = Math.toRadians(cameraFacing);
+        var radianFacing = Math.abs(Math.toRadians(cameraFacing));
 
-        lookAlpha = (float) (1 - MathHelper.clamp(Math.abs(angle - radianFacing) / Math.PI, 0, 1));
+        if(entity.world.getTime() % 30 == 0) {
+            Aether.LOG.error("ROOK: " + angle);
+            Aether.LOG.error("PLAYER: " + radianFacing);
+        }
 
-        body.setAngles(0, angle, 0);
+        lookAlpha = (float) MathHelper.clamp((0.95 - MathHelper.clamp(Math.abs(angle - radianFacing) / Math.PI, 0, 1)), 0, 1);
+
+        //body.setAngles(0, (float) (angle + (Math.PI / 2 + Math.PI)), 0);
     }
 
     @Override
