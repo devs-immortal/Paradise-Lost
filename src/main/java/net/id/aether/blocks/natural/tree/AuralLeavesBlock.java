@@ -27,9 +27,6 @@ public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColo
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if(!AetherDevel.isDevel()){
-            DynamicColorBlock.updateBlockColor(pos);
-        }
         super.randomDisplayTick(state, world, pos, random);
     }
 
@@ -42,10 +39,6 @@ public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColo
     }
 
     public static int getAuralColor(BlockPos pos, Vec3i[] colorRGBs) {
-        if (AetherDevel.isDevel()) {
-            // evil hack to send the shader the block pos
-            return MathHelper.packRgb(pos.getX(), pos.getY(), pos.getZ()) | ((2*(pos.getY() / 256 % 2) - 1) << 24);
-        }
         Vec3i color1 = colorRGBs[0];
         Vec3i color2 = colorRGBs[1];
         Vec3i color3 = colorRGBs[2];
@@ -106,7 +99,8 @@ public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColo
     @Override
     @Environment(EnvType.CLIENT)
     public BlockColorProvider getBlockColorProvider() {
-        return (state, world, pos, tintIndex) -> getAuralColor(pos, gradientColors);
+        // evil hack to send the shader the blockpos
+        return (state, world, pos, tintIndex) -> MathHelper.packRgb(pos.getX(), pos.getY(), pos.getZ()) | ((2*(pos.getY() / 256 % 2) - 1) << 24);
     }
 
     @Override
@@ -118,10 +112,6 @@ public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColo
     @Environment(EnvType.CLIENT)
     @Override
     public RenderLayer getRenderLayerOverride(boolean fancy){
-        if(AetherDevel.isDevel()){
-            return fancy ? AetherRenderLayers.AURAL_CUTOUT_MIPPED : AetherRenderLayers.AURAL;
-        } else {
-            return fancy ? RenderLayer.getCutoutMipped() : RenderLayer.getSolid();
-        }
+        return fancy ? AetherRenderLayers.AURAL_CUTOUT_MIPPED : AetherRenderLayers.AURAL;
     }
 }

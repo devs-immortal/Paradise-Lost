@@ -110,7 +110,6 @@ dependencies {
 
     // Implement Trinkets for parachutes, rings etc.
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
-//    modImplementation(include("com.github.CDAGaming:trinkets:${project.trinkets_version}"))
 
     modImplementation(include("net.gudenau.minecraft:MoreTags:${project.moretags_version}"))
     modImplementation(include("net.gudenau.minecraft:RecipeConfidence:${project.recipeconfidence_version}"))
