@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.id.aether.blocks.natural.tree.LeafPileBlock;
 import net.id.aether.util.AStarManager;
 import net.id.aether.world.feature.config.ProjectedOrganicCoverConfig;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -70,7 +71,7 @@ public class ProjectedOrganicCoverFeature extends Feature<ProjectedOrganicCoverC
                 pos = floor;
             }
             else if(state.canPlaceAt(world, pos) && world.getBlockState(floor).isFullCube(world, floor)) {
-                world.setBlockState(pos, state, 2);
+                world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
                 break;
             }
 
