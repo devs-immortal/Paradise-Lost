@@ -8,6 +8,7 @@ import net.id.aether.entities.hostile.AechorPlantEntity;
 import net.id.aether.entities.hostile.ChestMimicEntity;
 import net.id.aether.entities.hostile.CockatriceEntity;
 import net.id.aether.entities.hostile.swet.*;
+import net.id.aether.entities.misc.RookEntity;
 import net.id.aether.entities.passive.*;
 import net.id.aether.entities.passive.moa.MoaEntity;
 import net.id.aether.entities.projectile.*;
@@ -23,6 +24,7 @@ import java.util.function.Supplier;
 
 import static net.id.aether.Aether.locate;
 import static net.minecraft.entity.EntityDimensions.changing;
+import static net.minecraft.entity.EntityDimensions.fixed;
 import static net.minecraft.entity.SpawnGroup.*;
 
 @SuppressWarnings({"unused", "SameParameterValue"})
@@ -56,6 +58,9 @@ public class AetherEntityTypes {
             attributes(AerbunnyEntity::createAerbunnyAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
     public static final EntityType<AerwhaleEntity> AERWHALE = add("aerwhale", of(AerwhaleEntity::new, CREATURE, changing(3.0F, 1.2F), 5),
             attributes(AerwhaleEntity::createAerwhaleAttributes), spawnRestrictions(MobEntity::canMobSpawn));
+
+    public static final EntityType<RookEntity> ROOK = add("rook", of(RookEntity::new, MISC, fixed(0.75F, 1.8F), 5),
+            attributes(RookEntity::createRookAttributes), spawnRestrictions((type, world, spawnReason, pos, random) -> false));
     // projectile
     public static final EntityType<CockatriceSpitEntity> COCKATRICE_SPIT = add("cockatrice_spit", of(CockatriceSpitEntity::new, MISC, changing(0.5F, 0.5F), 5));
     public static final EntityType<GoldenDartEntity> GOLDEN_DART = add("golden_dart", of(GoldenDartEntity::new, MISC, changing(0.5F, 0.5F), 5));

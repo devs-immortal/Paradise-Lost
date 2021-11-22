@@ -4,11 +4,13 @@ import net.id.aether.client.model.entity.MoaModel;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.entities.passive.moa.MoaEntity;
 import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 

@@ -45,7 +45,7 @@ public interface FloatingBlockHelper {
     };
 
     /**
-     * Try to create a floating block of this type
+     * Try to create a floating block of this ascension
      * @param pos The position of the (root) block you want to float.
      * @return Whether the block(s) were successfully floated.
      */
@@ -54,7 +54,7 @@ public interface FloatingBlockHelper {
     }
 
     /**
-     * Try to create a floating block of this type
+     * Try to create a floating block of this ascension
      * @param pos The position of the (root) block you want to float.
      * @param force Whether to override the non-floaters blacklist.
      * @return Whether the block(s) were successfully floated.
@@ -62,7 +62,7 @@ public interface FloatingBlockHelper {
     boolean tryCreate(World world, BlockPos pos, boolean force);
 
     /**
-     * @return Whether this type of floating block is suitable for this block.
+     * @return Whether this ascension of floating block is suitable for this block.
      */
     boolean isSuitableFor(BlockState state);
 
@@ -115,7 +115,7 @@ public interface FloatingBlockHelper {
      */
     FloatingBlockHelper ANY = new FloatingBlockHelper(){
         /**
-         * Try to create whatever floating block type is appropriate for the given position.
+         * Try to create whatever floating block ascension is appropriate for the given position.
          * @param pos   The position of the block that should be floated.
          * @param force If true, the block will be floated even if it is on the blacklist
          *              ({@code AetherBlockTags.NON_FLOATERS}) or immovable by pistons.

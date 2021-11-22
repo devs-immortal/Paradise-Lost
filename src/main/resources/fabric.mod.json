@@ -60,6 +60,7 @@
     "cardinal-components": [
       "the_aether:moa_genetics",
       "the_aether:condition_manager",
+      "the_aether:luv",
       "the_aether:lore_state"
     ],
     "modmenu": {

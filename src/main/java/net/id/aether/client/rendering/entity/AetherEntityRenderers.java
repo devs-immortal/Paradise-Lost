@@ -7,6 +7,7 @@ import net.id.aether.client.rendering.entity.block.FloatingBlockRenderer;
 import net.id.aether.client.rendering.entity.hostile.AechorPlantRenderer;
 import net.id.aether.client.rendering.entity.hostile.CockatriceRenderer;
 import net.id.aether.client.rendering.entity.hostile.SwetRenderer;
+import net.id.aether.client.rendering.entity.misc.RookRenderer;
 import net.id.aether.client.rendering.entity.passive.AerbunnyRenderer;
 import net.id.aether.client.rendering.entity.passive.AerwhaleRenderer;
 import net.id.aether.client.rendering.entity.passive.MoaRenderer;
@@ -22,6 +23,7 @@ public class AetherEntityRenderers {
     public static void initClient() {
         // block
         register(AetherEntityTypes.FLOATING_BLOCK, FloatingBlockRenderer::new);
+
         // hostile
         register(SwetRenderer::new,
                 AetherEntityTypes.BLUE_SWET,
@@ -32,10 +34,12 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
         //register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
         register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);
+
         // passive
         register(AetherEntityTypes.MOA, MoaRenderer::new);
         register(AetherEntityTypes.AERBUNNY, AerbunnyRenderer::new);
         register(AetherEntityTypes.AERWHALE, AerwhaleRenderer::new);
+
         // projectile
         register(AetherEntityTypes.COCKATRICE_SPIT, CockatriceSpitRenderer::new);
         register(DartRenderer::new,
@@ -44,6 +48,9 @@ public class AetherEntityRenderers {
                 AetherEntityTypes.POISON_DART,
                 AetherEntityTypes.POISON_NEEDLE
         );
+
+        // other
+        register(AetherEntityTypes.ROOK, RookRenderer::new);
     }
     
     @SafeVarargs

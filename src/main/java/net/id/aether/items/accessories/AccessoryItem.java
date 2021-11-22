@@ -31,28 +31,28 @@ public class AccessoryItem extends Item {
     }
 
 //
-//    public AccessoryItem(AccessoryType type) {
-//        this(type, Rarity.COMMON, 0xDDDDDD);
+//    public AccessoryItem(AccessoryType ascension) {
+//        this(ascension, Rarity.COMMON, 0xDDDDDD);
 //    }
 
-//    public AccessoryItem(AccessoryType type, Settings settings) {
-//        this(type, rarity, 0xDDDDDD);
+//    public AccessoryItem(AccessoryType ascension, Settings settings) {
+//        this(ascension, rarity, 0xDDDDDD);
 //    }
 
-//    public AccessoryItem(AccessoryType type, int color) {
-//        this(type, Rarity.COMMON, color);
+//    public AccessoryItem(AccessoryType ascension, int color) {
+//        this(ascension, Rarity.COMMON, color);
 //    }
 
-//    public AccessoryItem(String material, AccessoryType type) {
-//        this(material, type, Rarity.COMMON, 0xDDDDDD);
+//    public AccessoryItem(String material, AccessoryType ascension) {
+//        this(material, ascension, Rarity.COMMON, 0xDDDDDD);
 //    }
 //
-//    public AccessoryItem(String material, AccessoryType type, Settings settings) {
-//        this(material, type, rarity, 0xDDDDDD);
+//    public AccessoryItem(String material, AccessoryType ascension, Settings settings) {
+//        this(material, ascension, rarity, 0xDDDDDD);
 //    }
 //
-//    public AccessoryItem(String material, AccessoryType type, int color) {
-//        this(material, type, Rarity.COMMON, color);
+//    public AccessoryItem(String material, AccessoryType ascension, int color) {
+//        this(material, ascension, Rarity.COMMON, color);
 //    }
 
     public Identifier getTexture() {
