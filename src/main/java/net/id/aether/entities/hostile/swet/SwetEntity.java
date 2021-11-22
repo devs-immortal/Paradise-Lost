@@ -4,7 +4,7 @@ import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.items.AetherItems;
 import net.id.aether.tag.AetherItemTags;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -258,7 +258,7 @@ public abstract class SwetEntity extends SlimeEntity {
         return this.getType().getLootTableId();
     }
 
-    protected static class FollowUnabsorbedTargetGoal<T extends LivingEntity> extends FollowTargetGoal<T> {
+    protected static class FollowUnabsorbedTargetGoal<T extends LivingEntity> extends ActiveTargetGoal<T> {
         public FollowUnabsorbedTargetGoal(MobEntity mob, Class<T> targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, @Nullable Predicate<LivingEntity> targetPredicate) {
             super(mob, targetClass, reciprocalChance, checkVisibility, checkCanNavigate, targetPredicate);
         }

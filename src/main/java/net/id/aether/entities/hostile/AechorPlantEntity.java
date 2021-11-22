@@ -6,7 +6,7 @@ import net.id.aether.entities.projectile.PoisonNeedleEntity;
 import net.id.aether.items.AetherItems;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -54,7 +54,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
 
         this.goalSelector.add(4, new ProjectileAttackGoal(this, 0.0D, 30, 1.0F));
         this.targetSelector.add(1, new RevengeGoal(this, AechorPlantEntity.class));
-        this.targetSelector.add(2, new FollowTargetGoal<>(this, LivingEntity.class, 10, true, false,
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, LivingEntity.class, 10, true, false,
                 entity -> !(entity instanceof AechorPlantEntity)));
     }
 
