@@ -108,8 +108,8 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherColorProviders.initClient();
         AetherBlockEntityRenderers.initClient();
         AetherParticles.initClient();
-        AetherTextures.init();
-        AetherItemRenderers.init();
+        AetherTextures.initClient();
+        AetherItemRenderers.initClient();
         AetherScreens.initClient();
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.Client.init();

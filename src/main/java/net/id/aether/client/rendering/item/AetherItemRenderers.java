@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 public final class AetherItemRenderers{
     private AetherItemRenderers(){}
     
-    public static void init(){
+    public static void initClient(){
 //        registerChest(AetherBlocks.CRYSTAL_CHEST, AetherBlockEntityTypes.CRYSTAL_CHEST);
 //        registerChest(AetherBlocks.GOLDEN_OAK_CHEST, AetherBlockEntityTypes.GOLDEN_OAK_CHEST);
 //        registerChest(AetherBlocks.ORANGE_CHEST, AetherBlockEntityTypes.ORANGE_CHEST);

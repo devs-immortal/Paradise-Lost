@@ -347,7 +347,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return Math.abs(getVelocity().multiply(1, 0, 1).length()) > 0 && !isTouchingWater() && !isGliding();
     }
 
-    // todo: this doesn't actually summon the child.
     @Override
     public void breed(ServerWorld world, AnimalEntity other) {
         MoaGenes genes = getGenes();
@@ -387,7 +386,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return 1.03;
     }
 
-    // todo: right now this only returns a blue moa.
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity matingAnimal) {
         if(!(matingAnimal instanceof MoaEntity matingMoa)){

@@ -29,10 +29,9 @@ public class AetherItemGroups {
             Aether.locate("aether_resources"),
             () -> new ItemStack(AetherItems.AMBROSIUM_SHARD));
 
-    // TODO: find a new icon for this item group, or change it to the bronze key when implemented
     public static final ItemGroup AETHER_MISC = build(
             Aether.locate("aether_misc"),
-            () -> new ItemStack(Items.AIR));
+            () -> new ItemStack(AetherItems.LORE_BOOK));
 
     public static final ItemGroup AETHER_WEARABLES = build(
             Aether.locate("aether_wearables"),

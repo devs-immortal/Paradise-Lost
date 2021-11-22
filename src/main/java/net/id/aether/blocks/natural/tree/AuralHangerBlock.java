@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
@@ -24,16 +25,13 @@ public class AuralHangerBlock extends AetherHangerBlock implements DynamicColorB
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if(!AetherDevel.isDevel()){
-            DynamicColorBlock.updateBlockColor(pos);
-        }
         super.randomDisplayTick(state, world, pos, random);
     }
 
     @Override
     @Environment(EnvType.CLIENT)
     public BlockColorProvider getBlockColorProvider() {
-        return (state, world, pos, tintIndex) -> AuralLeavesBlock.getAuralColor(pos, gradientColors);
+        return (state, world, pos, tintIndex) -> MathHelper.packRgb(pos.getX(), pos.getY(), pos.getZ()) | ((2*(pos.getY() / 256 % 2) - 1) << 24);
     }
 
     @Override

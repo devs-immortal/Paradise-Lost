@@ -51,11 +51,11 @@ public class RenderUtils {
     }
     
     public static void auralRenderLayer(Block block){
-        blockRenderLayer(block, AetherDevel.isDevel() ? AetherRenderLayers.AURAL : RenderLayer.getSolid());
+        blockRenderLayer(block, AetherRenderLayers.AURAL);
     }
     
     public static void auralCutoutMippedRenderLayer(Block block){
-        blockRenderLayer(block, AetherDevel.isDevel() ? AetherRenderLayers.AURAL_CUTOUT_MIPPED : RenderLayer.getCutoutMipped());
+        blockRenderLayer(block, AetherRenderLayers.AURAL_CUTOUT_MIPPED);
     }
 
     public static void cutoutMippedRenderLayer(Block block) {
