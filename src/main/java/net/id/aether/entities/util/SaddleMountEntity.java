@@ -61,6 +61,7 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getStackInHand(hand);
+        ActionResult returnValue = super.interactMob(player, hand);
 
         // TODO: Saddle code here may be able to be removed, due to the implement
         if (!this.canBeSaddled()) return super.interactMob(player, hand);
@@ -86,7 +87,7 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
                 return ActionResult.SUCCESS;
             }
         }
-        return super.interactMob(player, hand);
+        return returnValue;
     }
 
     @Override

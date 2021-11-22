@@ -27,7 +27,7 @@ public final class AetherTextures{
     
     );
     
-    public static void init(){
+    public static void initClient(){
         ClientSpriteRegistryCallback.event(new Identifier("textures/atlas/mob_effects.png")).register((atlasTexture, registry) -> {
             registry.register(locate("hud/bloodstone/affinity"));
             registry.register(locate("hud/bloodstone/race"));

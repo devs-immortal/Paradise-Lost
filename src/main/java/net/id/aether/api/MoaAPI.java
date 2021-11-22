@@ -180,7 +180,8 @@ public class MoaAPI {
     }
 
     /**
-     * todo
+     * An enum of various default weightings of spawn stats. Such that a Moa that could
+     * be considered a "tank" would be fairly slow, for example.
      */
     public enum SpawnStatWeighting {
         SPEED(0.08F, 0.1F, 0.02F, 0.03F, 0F, -0.1F, 0F, -0.01F, 0, 8),
@@ -214,11 +215,12 @@ public class MoaAPI {
 
     /**
      * A container for all stats pertaining to a certain {@code MoaRace}
-     * @param defaultAffinity @todo ask Azzy how these work
-     * @param statWeighting @todo ask Azzy how this works.
+     * @param defaultAffinity The default "affinity" of the MoaRace. What it's good at.
+     *                        <a, href="https://discord.gg/eRsJ6F3Wng">Ask Azzy</a> how this is different to {@link SpawnStatWeighting}.
+     * @param statWeighting How the well MoaEntity is predisposed at certain things. See {@link SpawnStatWeighting}.
      * @param glowing Whether the created {@code MoaRace} will glow.
      * @param legendary Whether the created {@code MoaRace} will be legendary
-     * @param particles The particles emitted when ... @todo
+     * @param particles The particles emitted by this MoaRace, if it is legendary
      */
     public static record MoaRace(MoaAttributes defaultAffinity,
                                  SpawnStatWeighting statWeighting, boolean glowing, boolean legendary,
@@ -251,7 +253,8 @@ public class MoaAPI {
     }
 
     /**
-     * todo
+     * A record of a MoaRace's weight in a specific SpawnBucket.
+     * Weight in a random number sense, that is - not a mass sense.
      */
     private static record SpawnBucketEntry(MoaRace race, int weight) {
         public boolean test(Random random, int whole) {
@@ -260,7 +263,7 @@ public class MoaAPI {
     }
 
     /**
-     * todo
+     * A collection of MoaRaces and their weights in the form of a {@link SpawnBucketEntry} for a specific biome.
      */
     private static class SpawnBucket {
 
@@ -296,7 +299,8 @@ public class MoaAPI {
     }
 
     /**
-     * todo
+     * This records how a MoaRace can result from breeding. There isn't a limit
+     * on the number of MatingEntries per MoaRace.
      */
     private static record MatingEntry(MoaRace race, BiPredicate<MoaRace, MoaRace> identityCheck,
                                       Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> additionalChecks) {
@@ -306,7 +310,7 @@ public class MoaAPI {
     }
 
     /**
-     * todo
+     * <a, href="https://discord.gg/eRsJ6F3Wng">Ask Azzy</a> about this. It's a lower bound and a variance for spawn stat data, it seems.
      */
     private static record SpawnStatData(float base, float variance) {
     }
