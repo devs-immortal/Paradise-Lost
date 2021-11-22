@@ -1,14 +1,11 @@
 package net.id.aether.client.rendering.ui;
 
-import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
-import it.unimi.dsi.fastutil.Arrays;
 import net.id.aether.Aether;
 import net.id.aether.effect.condition.Severity;
 import net.id.aether.items.tools.bloodstone.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
 import net.minecraft.client.util.math.MatrixStack;
@@ -28,9 +25,6 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 //probably can be cleaned up
 public class BloodstoneHUDRenderer {
@@ -42,10 +36,13 @@ public class BloodstoneHUDRenderer {
             if (nbt.contains(BloodstoneCapturedData.NBT_TAG)) {
                 MinecraftClient client = MinecraftClient.getInstance();
                 BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromNBT(nbt.getCompound(BloodstoneCapturedData.NBT_TAG));
-                if (isLookingAtMatchingEntity(client, capturedData) || doUUIDMatch(player, capturedData)) {
+                if (client.currentScreen == null && isLookingAtMatchingEntity(client, capturedData) || doUUIDMatch(player, capturedData)) {
                     int centerX = client.getWindow().getScaledWidth() / 2;
                     int centerY = client.getWindow().getScaledHeight() / 2;
 
+                    matrixStack.push();
+                    RenderSystem.enableBlend();
+                    RenderSystem.defaultBlendFunc();
                     if (stack.getItem() instanceof AmbrosiumBloodstoneItem)
                         renderAmbrosium(matrixStack, client, capturedData, centerX, centerY);
                     else if (stack.getItem() instanceof ZaniteBloodstoneItem)
@@ -54,6 +51,8 @@ public class BloodstoneHUDRenderer {
                         renderGravitite(matrixStack, client, capturedData, centerX, centerY);
                     else if (stack.getItem() instanceof AbstentineBloodstoneItem)
                         renderAbstentine(matrixStack, client, capturedData, centerX, centerY);
+                    RenderSystem.disableBlend();
+                    matrixStack.pop();
                 }
             }
         }
@@ -101,27 +100,33 @@ public class BloodstoneHUDRenderer {
     private static void renderGravitite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData, int centerX, int centerY) {
         renderRing(matrixStack, centerX, centerY);
         renderTextCentered(matrixStack, bloodstoneCapturedData.name, centerX, centerY - 80);
-        renderText(matrixStack, new TranslatableText("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), centerX, centerY, getCircularPosition(80, 1, 7));
-        renderText(matrixStack, new TranslatableText("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)), centerX, centerY, getCircularPosition(80, 2, 7));
-        renderText(matrixStack, new TranslatableText("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)), centerX, centerY, getCircularPosition(80, 3, 7));
-        renderText(matrixStack, new TranslatableText("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)), centerX, centerY, getCircularPosition(80, 4, 7));
-        renderText(matrixStack, new TranslatableText("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)), centerX, centerY, getCircularPosition(80, 5, 7));
-        renderText(matrixStack, new TranslatableText("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), centerX, centerY, getCircularPosition(80, 6, 7));
-    }
+        renderText(matrixStack, new TranslatableText("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)) , centerX + 63, centerY - 50, true);
+        renderText(matrixStack, new TranslatableText("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)) , centerX + 80, centerY, true);
+        renderText(matrixStack, new TranslatableText("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)) , centerX + 63, centerY + 50, true);
+        renderText(matrixStack, new TranslatableText("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)) , centerX - 63, centerY - 50, false);
+        renderText(matrixStack, new TranslatableText("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)) , centerX - 80, centerY, false);
+        renderText(matrixStack, new TranslatableText("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)) , centerX - 63, centerY + 50, false);
+
+           }
 
     private static void renderCondition(MatrixStack matrixStack, BloodstoneCapturedData.ConditionData conditionData, int centerX, int centerY, Pair<Integer, Integer> circleOffsets) {
         centerX += circleOffsets.getLeft();
         centerY += circleOffsets.getRight() - 7;
         if (circleOffsets.getLeft() == 0) {
-            centerX -= 130 / 2;
+            centerX -= 109 / 2;
             centerY += 11;
         } else if (circleOffsets.getLeft() < 0)
-            centerX -= 130;
-        int renderWidth = (int) MathHelper.clamp(114 * conditionData.severity(), 0, 114);
+            centerX -= 109;
+        int renderWidth = (int) MathHelper.clamp((109 - 13) * conditionData.severity(), 0, (109 - 13));
+        //matrixStack.push();
+        //matrixStack.translate(-centerX,-centerY,1);
+        //matrixStack.scale(1.2f, 1.2f,1);
+        //matrixStack.translate(centerX,centerY,1);
         RenderSystem.setShaderTexture(0, Aether.locate("textures/hud/bloodstone/" + conditionData.id() + "_bar.png"));
-        DrawableHelper.drawTexture(matrixStack, centerX, centerY, 0, 0, 18 + renderWidth, 14, 130, 14);
+        DrawableHelper.drawTexture(matrixStack, centerX, centerY, 0, 0, 13 + renderWidth, 12, 109, 12);
         RenderSystem.setShaderTexture(0, Aether.locate("textures/hud/bloodstone/condition_bar.png"));
-        DrawableHelper.drawTexture(matrixStack, centerX, centerY, 0, 0, 130, 14, 130, 14);
+        DrawableHelper.drawTexture(matrixStack, centerX, centerY, 0, 0, 109, 12, 109, 12);
+        //matrixStack.pop();
 
         Text title = new TranslatableText("condition.condition." + conditionData.id()).append(" - ").append(getSeverityWithColor(conditionData.severity()));
         renderText(matrixStack, title, centerX + 17, centerY - 4, true);
@@ -188,7 +193,6 @@ public class BloodstoneHUDRenderer {
     }
 
     private final static Pair<Integer, Integer>[] basicPositions = ArrayUtils.toArray(new Pair<>(0, -80), new Pair<>(80, 0), new Pair<>(-80, 0), new Pair<>(0, 80));
-
     private static Pair<Integer, Integer> getCircularPosition(int radius, int itemNum, int totalItems) {
         if (totalItems < 5)
             return basicPositions[itemNum];

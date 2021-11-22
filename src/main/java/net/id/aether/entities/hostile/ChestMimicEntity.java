@@ -38,7 +38,7 @@ public class ChestMimicEntity extends HostileEntity {
         this.goalSelector.add(5, new GoToWalkTargetGoal(this, 1.0D));
         this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0D));
         this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override

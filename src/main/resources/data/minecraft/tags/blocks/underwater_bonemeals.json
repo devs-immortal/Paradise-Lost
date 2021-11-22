@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:seagrass",
+    "#minecraft:corals",
+    "#minecraft:wall_corals",
+    "#the_aether:aether_underwater_bonemeals"
+  ]
+}

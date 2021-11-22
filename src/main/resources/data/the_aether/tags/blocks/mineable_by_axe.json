@@ -3,8 +3,11 @@
   "values": [
     "the_aether:skyroot_bookshelf",
     "the_aether:food_bowl",
+    "the_aether:giant_lily",
+    "the_aether:wild_swetroot",
     "#the_aether:aether_leaf_piles",
     "#the_aether:aether_bushes",
-    "#the_aether:aether_hangers"
+    "#the_aether:aether_hangers",
+    "#the_aether:aether_wooden_chests"
   ]
 }

@@ -11,7 +11,7 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.9.+'
+    id 'fabric-loom' version '0.10-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "1.2.1"
 }
@@ -93,7 +93,7 @@ dependencies {
     modImplementation(include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cardinal_version}"))
 
     // Most important of the libraries :smug:
-    modImplementation include("com.github.devs-immortal:Incubus-Core:${project.incubus_version}")
+    modImplementation(include("com.github.devs-immortal:Incubus-Core:${project.incubus_version}"))
 
     // Implement the required portions of FAPI
     // Remember to maintain these, and add the modular bits as needed. 
@@ -109,7 +109,7 @@ dependencies {
     modImplementation(include("dev.hephaestus:seedy-behavior:${project.seedy_version}"))
 
     // Implement Trinkets for parachutes, rings etc.
-    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    modImplementation(include("dev.emi:trinkets:${project.trinkets_version}"))
 
     modImplementation(include("net.gudenau.minecraft:MoreTags:${project.moretags_version}"))
     modImplementation(include("net.gudenau.minecraft:RecipeConfidence:${project.recipeconfidence_version}"))
@@ -176,13 +176,7 @@ jar {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
+            from components.java
         }
     }
 

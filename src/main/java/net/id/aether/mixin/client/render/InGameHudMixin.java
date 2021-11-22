@@ -36,6 +36,10 @@ public abstract class InGameHudMixin {
                 }
             });
         }
+    }
+
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;render(Lnet/minecraft/client/util/math/MatrixStack;)V"))
+    public void renderBloodstone(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         //todo probably move this inject to somewhere else
         BloodstoneHUDRenderer.render(matrices, tickDelta);
     }
