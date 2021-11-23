@@ -28,6 +28,9 @@ import net.id.aether.items.weapons.*;
 import net.id.aether.registry.AetherRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.block.Block;
+import net.minecraft.block.DoorBlock;
+import net.minecraft.block.TallFlowerBlock;
+import net.minecraft.block.TallPlantBlock;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
@@ -591,7 +594,14 @@ public class AetherItems {
 
     @SafeVarargs
     private static BlockItem add(String id, Block block, Settings settings, Action<? super BlockItem>... additionalActions) {
-        return add(id, new BlockItem(block, settings), additionalActions);
+        return add(id,
+                (block instanceof DoorBlock ||
+                        block instanceof TallPlantBlock ||
+                        block instanceof TallFlowerBlock
+                ) ?
+                        new TallBlockItem(block, settings) :
+                        new BlockItem(block, settings),
+                additionalActions);
     }
 
     // For access to protected constructors:
