@@ -1,10 +1,11 @@
 package net.id.aether.client.rendering.texture;
 
+import net.minecraft.client.util.SpriteIdentifier;
+
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Set;
 import java.util.function.Predicate;
-import net.minecraft.client.util.SpriteIdentifier;
 
 import static net.id.aether.Aether.locate;
 import static net.minecraft.client.render.TexturedRenderLayers.CHEST_ATLAS_TEXTURE;

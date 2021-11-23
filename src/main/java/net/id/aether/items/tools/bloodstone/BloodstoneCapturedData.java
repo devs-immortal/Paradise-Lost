@@ -1,11 +1,9 @@
 package net.id.aether.items.tools.bloodstone;
 
 import net.id.aether.api.ConditionAPI;
-import net.id.aether.api.MoaAPI;
 import net.id.aether.component.ConditionManager;
 import net.id.aether.entities.passive.moa.MoaAttributes;
 import net.id.aether.entities.passive.moa.MoaEntity;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.nbt.NbtCompound;

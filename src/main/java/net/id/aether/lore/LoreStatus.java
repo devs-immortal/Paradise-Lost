@@ -1,6 +1,7 @@
 package net.id.aether.lore;
 
 import com.google.common.collect.ImmutableMap;
+
 import java.util.Locale;
 import java.util.Map;
 

@@ -1,6 +1,5 @@
 package net.id.aether.blocks.natural.plant;
 
-import com.google.common.collect.ImmutableSet;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.Block;
@@ -14,7 +13,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 
 import java.util.Random;
-import java.util.Set;
 
 public class AetherBrushBlock extends FernBlock {
 

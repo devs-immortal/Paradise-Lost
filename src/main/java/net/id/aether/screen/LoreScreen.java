@@ -1,13 +1,11 @@
 package net.id.aether.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.component.AetherComponents;
-import net.id.aether.lore.*;
+import net.id.aether.lore.LoreStatus;
+import net.id.aether.lore.LoreType;
 import net.id.aether.registry.AetherRegistries;
 import net.id.aether.screen.handler.LoreHandler;
 import net.id.aether.screen.util.FloatyDrawableHelper;
@@ -26,6 +24,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import static net.id.aether.Aether.locate;
 

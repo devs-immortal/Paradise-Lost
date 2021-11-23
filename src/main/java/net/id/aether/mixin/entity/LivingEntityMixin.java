@@ -2,9 +2,9 @@ package net.id.aether.mixin.entity;
 
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
+import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.passive.moa.MoaAttributes;
-import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.entities.passive.moa.MoaEntity;
 import net.id.aether.items.tools.AetherToolMaterials;
 import net.id.aether.tag.AetherItemTags;

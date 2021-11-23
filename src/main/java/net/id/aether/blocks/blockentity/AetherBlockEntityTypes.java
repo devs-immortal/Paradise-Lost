@@ -2,7 +2,6 @@ package net.id.aether.blocks.blockentity;
 
 
 import net.id.aether.blocks.AetherBlocks;
-import net.id.aether.blocks.blockentity.dungeon.DungeonSwitchBlockEntity;
 import net.id.aether.mixin.block.ChestBlockEntityAccessor;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;

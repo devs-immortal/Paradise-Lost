@@ -1,8 +1,6 @@
 package net.id.aether.lore;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import java.util.*;
-
 import net.id.aether.component.AetherComponents;
 import net.id.aether.items.AetherItems;
 import net.id.aether.registry.AetherRegistries;
@@ -10,9 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import static net.id.aether.Aether.locate;
 

@@ -1,8 +1,8 @@
 package net.id.aether.client.rendering.entity.hostile;
 
 import net.id.aether.Aether;
-import net.id.aether.client.model.entity.AechorPlantModel;
 import net.id.aether.client.model.AetherModelLayers;
+import net.id.aether.client.model.entity.AechorPlantModel;
 import net.id.aether.entities.hostile.AechorPlantEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;

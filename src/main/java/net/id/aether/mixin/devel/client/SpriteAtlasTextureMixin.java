@@ -1,6 +1,5 @@
 package net.id.aether.mixin.devel.client;
 
-import java.util.Queue;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
@@ -14,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Queue;
 
 @Environment(EnvType.CLIENT)
 @Mixin(SpriteAtlasTexture.class)

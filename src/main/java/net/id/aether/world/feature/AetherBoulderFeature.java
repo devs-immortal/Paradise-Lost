@@ -6,12 +6,10 @@ import net.id.aether.world.feature.config.BoulderFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
-import java.util.Iterator;
 import java.util.Random;
 
 public class AetherBoulderFeature extends Feature<BoulderFeatureConfig> {

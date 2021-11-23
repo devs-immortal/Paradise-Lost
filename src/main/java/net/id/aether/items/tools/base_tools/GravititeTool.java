@@ -1,7 +1,7 @@
 package net.id.aether.items.tools.base_tools;
 
-import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.api.FloatingBlockHelper;
+import net.id.aether.entities.AetherEntityExtensions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;

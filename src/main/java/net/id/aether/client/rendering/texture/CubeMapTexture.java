@@ -3,8 +3,6 @@ package net.id.aether.client.rendering.texture;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMaps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import java.io.IOException;
-import java.util.Set;
 import net.id.aether.mixin.client.render.NativeImageAccessor;
 import net.minecraft.client.texture.AbstractTexture;
 import net.minecraft.client.texture.NativeImage;
@@ -12,6 +10,9 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
+
+import java.io.IOException;
+import java.util.Set;
 
 import static org.lwjgl.opengl.GL33.*;
 

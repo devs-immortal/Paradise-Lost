@@ -2,7 +2,6 @@ package net.id.aether.util;
 
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.id.aether.client.rendering.shader.AetherRenderLayers;
-import net.id.aether.devel.AetherDevel;
 import net.minecraft.block.Block;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.Fluid;

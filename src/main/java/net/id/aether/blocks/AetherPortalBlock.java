@@ -1,6 +1,5 @@
 package net.id.aether.blocks;
 
-import java.util.Random;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.util.AetherSoundEvents;
@@ -14,6 +13,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class AetherPortalBlock extends CustomPortalBlock {
     public AetherPortalBlock(Settings settings) {

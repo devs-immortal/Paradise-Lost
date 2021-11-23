@@ -1,8 +1,8 @@
 package net.id.aether.api;
 
-import net.id.aether.effect.condition.Condition;
 import net.id.aether.component.AetherComponents;
 import net.id.aether.component.ConditionManager;
+import net.id.aether.effect.condition.Condition;
 import net.id.aether.registry.AetherRegistries;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

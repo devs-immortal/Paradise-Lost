@@ -1,6 +1,5 @@
 package net.id.aether.mixin.client;
 
-import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.entities.util.FloatingBlockStructure;
 import net.id.aether.entities.util.PostTickEntity;
 import net.minecraft.client.world.ClientWorld;

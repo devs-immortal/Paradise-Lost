@@ -3,8 +3,6 @@ package net.id.aether.api;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Function4;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.component.MoaGenes;
 import net.id.aether.entities.passive.moa.MoaAttributes;

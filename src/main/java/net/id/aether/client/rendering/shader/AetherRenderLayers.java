@@ -1,15 +1,22 @@
 package net.id.aether.client.rendering.shader;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Stream;
 import net.id.aether.mixin.client.render.RenderLayerAccessor;
 import net.id.aether.mixin.client.render.RenderPhaseAccessor;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderPhase;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.util.Identifier;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import static net.id.aether.client.rendering.shader.AetherShaders.locate;
 

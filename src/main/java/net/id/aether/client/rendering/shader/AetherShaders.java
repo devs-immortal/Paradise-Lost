@@ -1,14 +1,15 @@
 package net.id.aether.client.rendering.shader;
 
 import com.mojang.datafixers.util.Pair;
-import java.io.IOException;
-import java.util.List;
-import java.util.function.Consumer;
 import net.id.aether.Aether;
 import net.id.aether.duck.client.ShaderDuck;
 import net.minecraft.client.render.Shader;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.resource.ResourceManager;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.function.Consumer;
 
 public final class AetherShaders{
     private AetherShaders(){}

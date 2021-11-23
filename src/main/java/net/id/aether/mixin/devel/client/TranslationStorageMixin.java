@@ -1,7 +1,5 @@
 package net.id.aether.mixin.devel.client;
 
-import java.util.Locale;
-import java.util.Map;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.devel.AetherDevel;
@@ -12,6 +10,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Locale;
+import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 @Mixin(TranslationStorage.class)

@@ -1,7 +1,6 @@
 package net.id.aether.blocks.natural.aercloud;
 
 import net.id.aether.blocks.AetherBlocks;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.block.ShapeContext;

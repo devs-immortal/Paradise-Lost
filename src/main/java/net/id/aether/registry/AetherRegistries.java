@@ -3,7 +3,6 @@ package net.id.aether.registry;
 import com.mojang.serialization.Lifecycle;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
-import net.id.aether.Aether;
 import net.id.aether.effect.condition.Condition;
 import net.id.aether.lore.LoreEntry;
 import net.minecraft.util.registry.MutableRegistry;

@@ -1,8 +1,6 @@
 package net.id.aether.mixin.client.render;
 
 import com.google.common.collect.ImmutableList;
-import java.util.List;
-import java.util.stream.Stream;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.client.rendering.shader.AetherRenderLayers;
@@ -11,6 +9,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 @Environment(EnvType.CLIENT)
 @Mixin(RenderLayer.class)

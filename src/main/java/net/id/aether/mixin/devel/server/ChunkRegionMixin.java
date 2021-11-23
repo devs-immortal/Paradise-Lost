@@ -1,6 +1,5 @@
 package net.id.aether.mixin.devel.server;
 
-import java.util.function.Supplier;
 import net.id.aether.Aether;
 import net.id.aether.devel.AetherDevel;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +10,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.function.Supplier;
 
 @Mixin(ChunkRegion.class)
 public abstract class ChunkRegionMixin{

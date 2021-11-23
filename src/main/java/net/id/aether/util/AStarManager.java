@@ -1,6 +1,5 @@
 package net.id.aether.util;
 
-import com.mojang.datafixers.util.Function4;
 import com.mojang.datafixers.util.Function5;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

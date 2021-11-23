@@ -1,8 +1,8 @@
 package net.id.aether.client.rendering.armor;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
-import net.id.aether.client.model.armor.PhoenixArmorModel;
 import net.id.aether.client.model.AetherModelLayers;
+import net.id.aether.client.model.armor.PhoenixArmorModel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.model.BipedEntityModel;

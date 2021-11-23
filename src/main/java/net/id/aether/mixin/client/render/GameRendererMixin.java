@@ -1,9 +1,6 @@
 package net.id.aether.mixin.client.render;
 
 import com.mojang.datafixers.util.Pair;
-import java.io.IOException;
-import java.util.List;
-import java.util.function.Consumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.client.rendering.shader.AetherShaders;
@@ -16,6 +13,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
 @Mixin(GameRenderer.class)

@@ -1,6 +1,5 @@
 package net.id.aether.entities.misc;
 
-import net.id.aether.entities.AetherEntityTypes;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;

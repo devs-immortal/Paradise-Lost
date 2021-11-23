@@ -6,8 +6,6 @@ import net.fabricmc.api.EnvironmentInterface;
 import net.id.aether.blocks.util.DynamicColorBlock;
 import net.id.aether.client.rendering.block.RenderLayerOverride;
 import net.id.aether.client.rendering.shader.AetherRenderLayers;
-import net.id.aether.devel.AetherDevel;
-import net.id.aether.util.RenderUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.block.BlockColorProvider;

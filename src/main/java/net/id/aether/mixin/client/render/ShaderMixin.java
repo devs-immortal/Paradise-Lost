@@ -18,7 +18,8 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import static org.lwjgl.opengl.GL33.*;
+import static org.lwjgl.opengl.GL33.GL_TEXTURE_CUBE_MAP;
+import static org.lwjgl.opengl.GL33.glBindTexture;
 
 @Environment(EnvType.CLIENT)
 @Mixin(Shader.class)

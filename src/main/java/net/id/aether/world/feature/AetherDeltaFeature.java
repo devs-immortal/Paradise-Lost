@@ -1,9 +1,6 @@
 package net.id.aether.world.feature;
 
 import com.mojang.serialization.Codec;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +10,10 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.DeltaFeature;
 import net.minecraft.world.gen.feature.DeltaFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class AetherDeltaFeature extends DeltaFeature{
     

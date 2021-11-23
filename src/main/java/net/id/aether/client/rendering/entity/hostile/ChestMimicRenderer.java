@@ -1,8 +1,8 @@
 package net.id.aether.client.rendering.entity.hostile;
 
 import net.id.aether.Aether;
-import net.id.aether.client.model.entity.ChestMimicModel;
 import net.id.aether.client.model.AetherModelLayers;
+import net.id.aether.client.model.entity.ChestMimicModel;
 import net.id.aether.entities.hostile.ChestMimicEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;

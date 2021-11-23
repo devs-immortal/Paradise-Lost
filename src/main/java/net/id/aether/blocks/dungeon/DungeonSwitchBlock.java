@@ -1,8 +1,10 @@
 package net.id.aether.blocks.dungeon;
 
-import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.blocks.blockentity.dungeon.DungeonSwitchBlockEntity;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.DoorBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;

@@ -3,7 +3,6 @@ package net.id.aether.lore;
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import java.util.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.component.AetherComponents;
@@ -22,6 +21,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.*;
 
 import static net.id.aether.registry.AetherRegistries.LORE_REGISTRY;
 

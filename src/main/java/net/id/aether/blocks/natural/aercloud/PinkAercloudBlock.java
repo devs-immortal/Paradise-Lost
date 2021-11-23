@@ -1,6 +1,5 @@
 package net.id.aether.blocks.natural.aercloud;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

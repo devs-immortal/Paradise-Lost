@@ -1,5 +1,11 @@
 package net.id.aether.devel;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
+import net.id.aether.util.UncheckedWriter;
+import net.minecraft.util.Identifier;
+
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
@@ -8,11 +14,6 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
-import net.id.aether.util.UncheckedWriter;
-import net.minecraft.util.Identifier;
 
 public final class AetherDevel{
     private AetherDevel(){}

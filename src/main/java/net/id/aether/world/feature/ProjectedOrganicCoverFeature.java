@@ -1,13 +1,11 @@
 package net.id.aether.world.feature;
 
 import com.mojang.serialization.Codec;
-import net.id.aether.blocks.natural.tree.LeafPileBlock;
 import net.id.aether.util.AStarManager;
 import net.id.aether.world.feature.config.ProjectedOrganicCoverConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;

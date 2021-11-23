@@ -1,12 +1,10 @@
 package net.id.aether.tag;
 
 import net.fabricmc.fabric.api.tag.TagFactory;
-import net.id.aether.Aether;
 import net.minecraft.block.Block;
 import net.minecraft.tag.Tag;
-import net.minecraft.util.Identifier;
 
-import static net.id.aether.Aether.*;
+import static net.id.aether.Aether.locate;
 
 public class AetherBlockTags {
 

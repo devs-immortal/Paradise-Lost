@@ -1,7 +1,5 @@
 package net.id.aether.mixin.client;
 
-import java.util.Iterator;
-import java.util.List;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
@@ -16,6 +14,9 @@ import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+
+import java.util.Iterator;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 @Mixin(SoundManager.class)

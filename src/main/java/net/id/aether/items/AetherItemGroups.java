@@ -4,7 +4,6 @@ import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 
 import static net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder.build;
 
