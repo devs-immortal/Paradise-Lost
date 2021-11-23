@@ -26,6 +26,13 @@ JavaVersion targetVersion = JavaVersion.VERSION_16
 allprojects {
     sourceCompatibility = targetVersion
     targetCompatibility = targetVersion
+
+    // Allow more then 100 errors to be displayed.
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xmaxerrs" << "${project.max_errors}"
+        }
+    }
 }
 
 archivesBaseName = project.archives_base_name
