@@ -1,7 +1,6 @@
 package net.id.aether.blocks.natural;
 
 import net.id.aether.blocks.AetherBlocks;
-import net.id.aether.blocks.util.SpreadableAetherBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
@@ -9,16 +8,11 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.FlowerFeature;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 
-import java.util.List;
 import java.util.Random;
 
-@SuppressWarnings("unchecked")
-public class AetherGrassBlock extends SpreadableAetherBlock implements Fertilizable {
-    public AetherGrassBlock(Settings settings) {
+public class AetherQuicksoilBlock extends Block implements Fertilizable {
+    public AetherQuicksoilBlock(Settings settings) {
         super(settings);
     }
 
@@ -32,7 +26,7 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
 
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockPos blockPos = pos.up();
-        BlockState blockState = AetherBlocks.AETHER_GRASS.getDefaultState();
+        BlockState blockState = AetherBlocks.FLUTEGRASS.getDefaultState();
 
         label48:
         for (int i = 0; i < 128; ++i) {
@@ -48,20 +42,8 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
             if (blockState2.isOf(blockState.getBlock()) && random.nextInt(10) == 0)
                 ((Fertilizable) blockState.getBlock()).grow(world, random, blockPos2, blockState2);
 
-            if (blockState2.isAir()) {
-                BlockState blockState4;
-                if (random.nextInt(8) == 0) {
-                    List<ConfiguredFeature<?, ?>> list = world.getBiome(blockPos2).getGenerationSettings().getFlowerFeatures();
-                    if (list.isEmpty()) continue;
-
-                    ConfiguredFeature<?, ?> configuredFeature = list.get(0);
-                    FlowerFeature<RandomPatchFeatureConfig> flowerFeature = (FlowerFeature<RandomPatchFeatureConfig>) configuredFeature.feature;
-                    blockState4 = flowerFeature.getFlowerState(random, blockPos2, (RandomPatchFeatureConfig) configuredFeature.getConfig());
-                } else {
-                    blockState4 = blockState;
-                }
-
-                if (blockState4.canPlaceAt(world, blockPos2)) world.setBlockState(blockPos2, blockState4, Block.NOTIFY_ALL);
+            if (blockState2.isAir() && blockState.canPlaceAt(world, blockPos2)) {
+                world.setBlockState(blockPos2, blockState, Block.NOTIFY_ALL);
             }
         }
     }

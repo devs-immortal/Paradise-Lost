@@ -10,6 +10,7 @@ import net.id.aether.blocks.decorative.AmbrosiumWallTorchBlock;
 import net.id.aether.blocks.mechanical.FoodBowlBlock;
 import net.id.aether.blocks.mechanical.IncubatorBlock;
 import net.id.aether.blocks.natural.AetherGrassBlock;
+import net.id.aether.blocks.natural.AetherQuicksoilBlock;
 import net.id.aether.blocks.natural.AetherSaplingBlock;
 import net.id.aether.blocks.natural.AetherSnowyBlock;
 import net.id.aether.blocks.natural.aercloud.AercloudBlock;
@@ -67,7 +68,7 @@ public class AetherBlocks {
     public static final Block PERMAFROST = add("permafrost", new Block(copy(DIRT).strength(2f).sounds(BlockSoundGroup.GILDED_BLACKSTONE)), flattenable());
     public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new AetherFarmlandBlock(copy(FARMLAND)));
     public static final AetherDirtPathBlock AETHER_DIRT_PATH = add("aether_grass_path", new AetherDirtPathBlock(copy(DIRT_PATH)));
-    public static final Block QUICKSOIL = add("quicksoil", new Block(of(Material.AGGREGATE).strength(0.5f, -1f).slipperiness(1F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)));
+    public static final Block QUICKSOIL = add("quicksoil", new AetherQuicksoilBlock(of(Material.AGGREGATE).strength(0.5f, -1f).slipperiness(1F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)));
 
     // Glass Blocks
     private static Settings quicksoilGlass() {
