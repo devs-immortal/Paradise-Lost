@@ -5,6 +5,7 @@ import net.id.aether.items.AetherItems;
 import net.id.aether.tag.AetherItemTags;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -82,6 +83,51 @@ public abstract class SwetEntity extends SlimeEntity {
 
     public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return world.getDifficulty() != Difficulty.PEACEFUL && HostileEntity.isSpawnDark(world, pos, random) && canMobSpawn(type, world, spawnReason, pos, random);
+    }
+
+    // TODO: Use PathAwareEntity at some point
+    @Override
+    public boolean canBeLeashedBy(PlayerEntity player) {
+        return !this.isLeashed();
+    }
+
+    @Override
+    protected void updateLeash() {
+        super.updateLeash();
+        Entity entity = this.getHoldingEntity();
+        if (entity != null && entity.world == this.world) {
+            this.setPositionTarget(entity.getBlockPos(), 5);
+            float f = this.distanceTo(entity);
+//            if (this instanceof TameableEntity && ((TameableEntity)this).isInSittingPose()) {
+//                if (f > 10.0f) {
+//                    this.detachLeash(true, true);
+//                }
+//                return;
+//            }
+            this.updateForLeashLength(f);
+            if (f > 10.0f) {
+                this.detachLeash(true, true);
+                this.goalSelector.disableControl(Goal.Control.MOVE);
+            } else if (f > 6.0f) {
+                double d = (entity.getX() - this.getX()) / (double)f;
+                double e = (entity.getY() - this.getY()) / (double)f;
+                double g = (entity.getZ() - this.getZ()) / (double)f;
+                this.setVelocity(this.getVelocity().add(Math.copySign(d * d * 0.4, d), Math.copySign(e * e * 0.4, e), Math.copySign(g * g * 0.4, g)));
+            } else {
+                this.goalSelector.enableControl(Goal.Control.MOVE);
+                Vec3d vec3d = new Vec3d(entity.getX() - this.getX(), entity.getY() - this.getY(), entity.getZ() - this.getZ()).normalize().multiply(Math.max(f - 2.0f, 0.0f));
+                this.getNavigation().startMovingTo(this.getX() + vec3d.x, this.getY() + vec3d.y, this.getZ() + vec3d.z, this.getRunFromLeashSpeed());
+            }
+        }
+    }
+
+    protected double getRunFromLeashSpeed() {
+        return 1.0;
+    }
+
+    protected void updateForLeashLength(float leashLength) {
+        // This would contain circumstances for cutting off activities after certain lengths
+        // Swets dont do much so....do nothing here?
     }
 
     @Override
