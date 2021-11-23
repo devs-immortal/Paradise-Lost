@@ -296,8 +296,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (!world.isClient()) {
             ItemStack heldStack = player.getStackInHand(hand);
-            Item heldItem = heldStack.getItem();
-            if (heldItem.isFood() && heldItem.getFoodComponent().isMeat()) {
+            if (heldStack.isFood() && heldStack.getItem().getFoodComponent().isMeat()) {
                 if (!getGenes().isTamed()) {
                     if (random.nextFloat() < 0.15F) {
                         getGenes().tame(player.getUuid());
@@ -308,22 +307,26 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     playSound(SoundEvents.ENTITY_PARROT_EAT, 1F, 0.8F);
                     produceParticles(ParticleTypes.ELECTRIC_SPARK);
                 } else {
-                    float hungerRestored = heldItem.getFoodComponent().getHunger() * 4;
-                    float satiation = getGenes().getHunger();
-                    float hunger = 100 - satiation;
-                    if (hunger > 1) {
-                        int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), heldStack.getCount());
-                        spawnConsumptionEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
-                        heldStack.decrement(consumption);
-                        getGenes().setHunger(satiation + (consumption * hungerRestored));
-                        playSound(SoundEvents.ENTITY_PARROT_EAT, 1.5F, 0.8F);
-                        produceParticles(ParticleTypes.HAPPY_VILLAGER);
-                    }
+                    feedMob(heldStack);
                 }
                 return ActionResult.success(world.isClient());
             }
         }
         return super.interactMob(player, hand);
+    }
+
+    private void feedMob(ItemStack heldStack) {
+        float hungerRestored = heldStack.getItem().getFoodComponent().getHunger() * 4;
+        float satiation = getGenes().getHunger();
+        float hunger = 100 - satiation;
+        if (hunger > 1) {
+            int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), heldStack.getCount());
+            spawnConsumptionEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
+            heldStack.decrement(consumption);
+            getGenes().setHunger(satiation + (consumption * hungerRestored));
+            playSound(SoundEvents.ENTITY_PARROT_EAT, 1.5F, 0.8F);
+            produceParticles(ParticleTypes.HAPPY_VILLAGER);
+        }
     }
 
     @Override
@@ -483,8 +486,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         protected boolean isTargetPos(WorldView world, BlockPos pos) {
             if (world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
                 ItemStack foodStack = foodBowl.getStack(0);
-                Item foodItem = foodStack.getItem();
-                return foodItem.isFood() && foodItem.getFoodComponent().isMeat();
+                return foodStack.isFood() && foodStack.getItem().getFoodComponent().isMeat();
             }
             return false;
         }
@@ -505,19 +507,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         protected void tryEat() {
             if (world.getBlockEntity(targetPos) instanceof FoodBowlBlockEntity foodBowl) {
                 ItemStack foodStack = foodBowl.getStack(0);
-                Item foodItem = foodStack.getItem();
-                if (foodItem.isFood() && foodItem.getFoodComponent().isMeat()) {
-                    float hungerRestored = foodItem.getFoodComponent().getHunger() * 4;
-                    float satiation = getGenes().getHunger();
-                    float hunger = 100 - satiation;
-                    if (hunger > 1) {
-                        int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), foodStack.getCount());
-                        spawnConsumptionEffects(foodStack, 10 + random.nextInt(consumption * 2 + 1));
-                        foodStack.decrement(consumption);
-                        getGenes().setHunger(satiation + (consumption * hungerRestored));
-                        playSound(SoundEvents.ENTITY_PARROT_EAT, 1.5F, 0.8F);
-                        produceParticles(ParticleTypes.HAPPY_VILLAGER);
-                    }
+                if (foodStack.isFood() && foodStack.getItem().getFoodComponent().isMeat()) {
+                    feedMob(foodStack);
                 }
             }
         }
