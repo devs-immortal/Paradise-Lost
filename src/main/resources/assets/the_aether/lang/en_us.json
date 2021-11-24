@@ -392,6 +392,8 @@
   "item.the_aether.neptune_gloves": "Neptune Gloves",
   "item.the_aether.neptune_helmet": "Neptune Helmet",
   "item.the_aether.neptune_leggings": "Neptune Leggings",
+  "item.the_aether.nightmare_fuel": "Nightmare Fuel",
+  "item.the_aether.nightmare_fuel.tooltip": "warm to the touch",
   "item.the_aether.notch_hammer": "Hammer of Notch",
   "item.the_aether.obsidian_boots": "Obsidian Boots",
   "item.the_aether.obsidian_chestplate": "Obsidian Chestplate",
@@ -554,6 +556,9 @@
   "subtitles.the_aether.entity.moa.ambient": "Moa ambiences",
   "subtitles.the_aether.entity.moa.death": "Moa dies",
   "subtitles.the_aether.entity.moa.hurt": "Moa hurts",
+  "subtitles.the_aether.entity.nightmare.hurt": "Nightmare hurts",
+  "subtitles.the_aether.entity.nightmare.ambient": "Magpie Coos",
+  "subtitles.the_aether.entity.nightmare.death": "Nightmare... dies?",
 
   "easteregg.the_aether.aerwhale": "Serenity is the queen of W(h)ales!!"
 }

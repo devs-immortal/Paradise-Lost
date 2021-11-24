@@ -48,6 +48,10 @@ public final class AetherSoundEvents{
     public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", "minecraft:entity.hostile.ambient");
     public static final SoundEvent ENTITY_MOA_DEATH = childEvent("entity.moa.death", "minecraft:entity.hostile.death");
     public static final SoundEvent ENTITY_MOA_HURT = childEvent("entity.moa.hurt", "minecraft:entity.hostile.hurt");
+
+    public static final SoundEvent ENTITY_NIGHTMARE_HURT = event("entity.nightmare.hurt");
+    public static final SoundEvent ENTITY_NIGHTMARE_DEATH = event("entity.nightmare.death");
+    public static final SoundEvent ENTITY_NIGHTMARE_AMBIENT = event("entity.nightmare.ambient");
     
     public static final class Music{
         public static final MusicSound AETHER = new MusicSound(MUSIC_AETHER, 12000, 24000, false);

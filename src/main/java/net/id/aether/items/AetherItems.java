@@ -1,5 +1,6 @@
 package net.id.aether.items;
 
+import com.google.common.collect.ImmutableList;
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.id.aether.blocks.AetherBlocks;
@@ -10,10 +11,7 @@ import net.id.aether.items.armor.AetherArmorMaterials;
 import net.id.aether.items.food.AetherFoodComponent;
 import net.id.aether.items.food.ValkyrieMilkItem;
 import net.id.aether.items.food.WhiteAppleItem;
-import net.id.aether.items.misc.AetherPortalItem;
-import net.id.aether.items.misc.BookOfLoreItem;
-import net.id.aether.items.misc.HealingStoneItem;
-import net.id.aether.items.misc.MoaEggItem;
+import net.id.aether.items.misc.*;
 import net.id.aether.items.resources.AmbrosiumShardItem;
 import net.id.aether.items.tools.AetherToolMaterials;
 import net.id.aether.items.tools.SkyrootBucketItem;
@@ -35,13 +33,14 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 
 import static net.id.aether.Aether.locate;
 import static net.id.aether.items.AetherItemActions.*;
 import static net.minecraft.entity.EquipmentSlot.*;
-import static net.minecraft.util.Rarity.EPIC;
-import static net.minecraft.util.Rarity.RARE;
+import static net.minecraft.util.Rarity.*;
 
 @SuppressWarnings("unused")
 public class AetherItems {
@@ -49,10 +48,14 @@ public class AetherItems {
     Begin items
      */
 
-    private static final Settings resource = new Settings().group(AetherItemGroups.AETHER_RESOURCES);
+    private static FabricItemSettings resource() {
+        return new FabricItemSettings().group(AetherItemGroups.AETHER_RESOURCES);
+    }
+    private static final Settings resource = resource();
 
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource));
     public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
+    public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(resource.rarity(UNCOMMON), ImmutableList.of(new TranslatableText("item.the_aether.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
     public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
     public static final AmbrosiumShardItem AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShardItem(resource), fuel(500));
     public static final Item ZANITE_GEM = add("zanite_gemstone", new Item(resource));

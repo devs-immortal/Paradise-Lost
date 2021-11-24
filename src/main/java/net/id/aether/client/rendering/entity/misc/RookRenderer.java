@@ -5,6 +5,7 @@ import net.id.aether.Aether;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.model.entity.RookModel;
 import net.id.aether.entities.misc.RookEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -21,7 +22,7 @@ public class RookRenderer extends MobEntityRenderer<RookEntity, RookModel> {
 
     public RookRenderer(EntityRendererFactory.Context context) {
         super(context, new RookModel(context.getPart(AetherModelLayers.ROOK)), 0);
-        addFeature(new RookEyeFeatureRenderer(this));
+        //addFeature(new RookEyeFeatureRenderer(this));
     }
 
     @Override
