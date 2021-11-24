@@ -26,8 +26,11 @@ public class RookEyeFeatureRenderer extends EyesFeatureRenderer<RookEntity, Rook
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, RookEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.getEyesTexture(entity));
-        this.getContextModel().render(matrices, vertexConsumer, 15728640, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, getContextModel().lookAlpha);
+        var model = getContextModel();
+        if(model.blinkTicks <= 0 && model.lookAlpha > 0.185F) {
+            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.getEyesTexture(entity));
+            this.getContextModel().render(matrices, vertexConsumer, 15728640, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1);
+        }
     }
 
     @Override

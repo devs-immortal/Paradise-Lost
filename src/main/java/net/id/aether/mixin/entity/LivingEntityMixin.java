@@ -4,6 +4,7 @@ import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.entities.AetherEntityTypes;
+import net.id.aether.entities.misc.RookEntity;
 import net.id.aether.entities.passive.moa.MoaAttributes;
 import net.id.aether.entities.passive.moa.MoaEntity;
 import net.id.aether.items.tools.AetherToolMaterials;
@@ -16,6 +17,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolItem;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -116,6 +118,29 @@ public abstract class LivingEntityMixin extends Entity implements AetherEntityEx
             var genes = moa.getGenes();
             cir.setReturnValue(genes.isInitialized() ? genes.getAttribute(MoaAttributes.MAX_HEALTH) : 40F);
             cir.cancel();
+        }
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Inject(method = "addDeathParticles", at = @At("HEAD"), cancellable = true)
+    private void applyCustomDeathParticles(CallbackInfo ci) {
+        if(((LivingEntity) ((Object) this)) instanceof RookEntity) {
+            for(int i = 0; i < 20 + random.nextInt(20); ++i) {
+                double d = this.random.nextGaussian() * 0.02D;
+                double e = this.random.nextGaussian() * 0.02D;
+                double f = this.random.nextGaussian() * 0.02D;
+                if(random.nextInt( 3) == 0) {
+                    this.world.addParticle(ParticleTypes.LARGE_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
+                }
+                else {
+                    this.world.addParticle(ParticleTypes.SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
+                }
+
+                if(random.nextInt(3) == 0) {
+                    this.world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d / 3, e, f / 3);
+                }
+            }
+            ci.cancel();
         }
     }
 }

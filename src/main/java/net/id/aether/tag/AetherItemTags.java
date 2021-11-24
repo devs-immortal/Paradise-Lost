@@ -13,4 +13,6 @@ public class AetherItemTags {
     public static final Tag<Item> SWET_TRANSFORMERS_PURPLE = TagFactory.ITEM.create(new Identifier(Aether.MOD_ID, "swet_transformers/purple"));
     public static final Tag<Item> SWET_TRANSFORMERS_VERMILION = TagFactory.ITEM.create(new Identifier(Aether.MOD_ID, "swet_transformers/vermilion"));
     public static final Tag<Item> PARACHUTES = TagFactory.ITEM.create(new Identifier(Aether.MOD_ID, "parachutes"));
+    public static final Tag<Item> RIGHTEOUS_WEAPONS = TagFactory.ITEM.create(Aether.locate("tool/righteous_weapons"));
+    public static final Tag<Item> SACRED_WEAPONS = TagFactory.ITEM.create(Aether.locate("tool/sacred_weapons"));
 }

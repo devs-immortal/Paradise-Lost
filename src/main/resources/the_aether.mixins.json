@@ -61,6 +61,7 @@
     "client.render.TexturedRenderLayersMixin",
     "client.render.VertexBufferMixin",
     "client.render.WorldRendererMixin",
+    "client.render.EntityRenderDispatcherMixin",
     "devel.client.SpriteAtlasTextureMixin",
     "devel.client.TranslationStorageMixin"
   ],
