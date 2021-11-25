@@ -26,7 +26,7 @@ public class ProjectedOrganicCoverFeature extends Feature<ProjectedOrganicCoverC
         var config = context.getConfig();
 
         var lengthProvider = config.branchLength();
-        var  tries = config.tries().get(random);
+        var tries = config.tries().get(random);
 
         var builder = AStarManager.createBuilder();
         builder.heuristic(config.heuristic());
