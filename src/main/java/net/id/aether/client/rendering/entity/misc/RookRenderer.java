@@ -5,7 +5,6 @@ import net.id.aether.Aether;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.model.entity.RookModel;
 import net.id.aether.entities.misc.RookEntity;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;

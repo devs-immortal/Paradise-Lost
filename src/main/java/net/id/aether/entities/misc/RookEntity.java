@@ -1,6 +1,5 @@
 package net.id.aether.entities.misc;
 
-import net.id.aether.tag.AetherItemTags;
 import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -14,7 +13,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +24,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 
-import static net.id.aether.tag.AetherItemTags.*;
+import static net.id.aether.tag.AetherItemTags.RIGHTEOUS_WEAPONS;
+import static net.id.aether.tag.AetherItemTags.SACRED_WEAPONS;
 
 public class RookEntity extends MobEntity {
 
