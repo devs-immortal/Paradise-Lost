@@ -23,7 +23,6 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
-import org.apache.commons.lang3.ArrayUtils;
 
 
 //probably can be cleaned up
@@ -37,20 +36,18 @@ public class BloodstoneHUDRenderer {
                 MinecraftClient client = MinecraftClient.getInstance();
                 BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromNBT(nbt.getCompound(BloodstoneCapturedData.NBT_TAG));
                 if (client.currentScreen == null && isLookingAtMatchingEntity(client, capturedData) || doUUIDMatch(player, capturedData)) {
-                    int centerX = client.getWindow().getScaledWidth() / 2;
-                    int centerY = client.getWindow().getScaledHeight() / 2;
-
                     matrixStack.push();
                     RenderSystem.enableBlend();
                     RenderSystem.defaultBlendFunc();
+                    matrixStack.translate(client.getWindow().getScaledWidth() / 2f, client.getWindow().getScaledHeight() / 2f, 0);
                     if (stack.getItem() instanceof AmbrosiumBloodstoneItem)
-                        renderAmbrosium(matrixStack, client, capturedData, centerX, centerY);
+                        renderAmbrosium(matrixStack, client, capturedData);
                     else if (stack.getItem() instanceof ZaniteBloodstoneItem)
-                        renderZanite(matrixStack, client, capturedData, centerX, centerY);
+                        renderZanite(matrixStack, client, capturedData);
                     else if (stack.getItem() instanceof GravititeBloodstoneItem)
-                        renderGravitite(matrixStack, client, capturedData, centerX, centerY);
+                        renderGravitite(matrixStack, client, capturedData);
                     else if (stack.getItem() instanceof AbstentineBloodstoneItem)
-                        renderAbstentine(matrixStack, client, capturedData, centerX, centerY);
+                        renderAbstentine(matrixStack, client, capturedData);
                     RenderSystem.disableBlend();
                     matrixStack.pop();
                 }
@@ -68,68 +65,67 @@ public class BloodstoneHUDRenderer {
         return capturedData.uuid.equals(entity.getUuid());
     }
 
-    private static void renderAbstentine(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData, int centerX, int centerY) {
-        renderRing(matrixStack, centerX, centerY);
-        renderTextCentered(matrixStack, bloodstoneCapturedData.name, centerX, centerY - 80);
-        for (int i = 0; i < bloodstoneCapturedData.conditionDataList.size(); i++)
-            renderCondition(matrixStack, bloodstoneCapturedData.conditionDataList.get(i), centerX, centerY, getCircularPosition(80, i + 1, bloodstoneCapturedData.conditionDataList.size()));
-    }
-
-    private static void renderAmbrosium(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData, int centerX, int centerY) {
+    private static void renderAmbrosium(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
-        renderRing(matrixStack, centerX, centerY);
-        renderTextCentered(matrixStack, bloodstoneCapturedData.name, centerX, centerY - 80);
-        renderIconWTextCentered(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.REGENERATION), new LiteralText(bloodstoneCapturedData.HP), centerX, centerY + 80);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.RESISTANCE), new LiteralText(bloodstoneCapturedData.DF), centerX - 80, centerY, false);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), new LiteralText(bloodstoneCapturedData.TF), centerX + 80, centerY, true);
+        renderRing(matrixStack, 0, 0);
+        renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.REGENERATION), new LiteralText(bloodstoneCapturedData.HP), 0, 80);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.RESISTANCE), new LiteralText(bloodstoneCapturedData.DF), -80, 0);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), new LiteralText(bloodstoneCapturedData.TF), 80, 0);
     }
 
-    private static void renderZanite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData, int centerX, int centerY) {
+    private static void renderZanite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
         Sprite affinitySprite = statusEffectSpriteManager.getSprite(StatusEffects.BAD_OMEN).getAtlas().getSprite(Aether.locate("hud/bloodstone/affinity"));
         Sprite raceSprite = statusEffectSpriteManager.getSprite(StatusEffects.BAD_OMEN).getAtlas().getSprite(Aether.locate("hud/bloodstone/race"));
 
-        renderRing(matrixStack, centerX, centerY);
-        renderTextCentered(matrixStack, bloodstoneCapturedData.name, centerX, centerY - 80);
-        renderIconWText(matrixStack, client, affinitySprite, new TranslatableText(bloodstoneCapturedData.Affinity), centerX, centerY, getCircularPosition(80, 1, 5));
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), new LiteralText(bloodstoneCapturedData.Owner), centerX, centerY, getCircularPosition(80, 2, 5));
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), new LiteralText(bloodstoneCapturedData.Hunger), centerX, centerY, getCircularPosition(80, 3, 5));
-        renderIconWText(matrixStack, client, raceSprite, new TranslatableText(bloodstoneCapturedData.Race), centerX + 5, centerY, getCircularPosition(80, 4, 5));
+        renderRing(matrixStack, 0, 0);
+        renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
+
+        renderIconWText(matrixStack, client, affinitySprite, new TranslatableText(bloodstoneCapturedData.Affinity), 76, -25);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), new LiteralText(bloodstoneCapturedData.Owner), 47, 65);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), new LiteralText(bloodstoneCapturedData.Hunger), -47, 65);
+        renderIconWText(matrixStack, client, raceSprite, new TranslatableText(bloodstoneCapturedData.Race), -76, -25);
     }
 
-    private static void renderGravitite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData, int centerX, int centerY) {
-        renderRing(matrixStack, centerX, centerY);
-        renderTextCentered(matrixStack, bloodstoneCapturedData.name, centerX, centerY - 80);
-        renderText(matrixStack, new TranslatableText("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)) , centerX + 63, centerY - 50, true);
-        renderText(matrixStack, new TranslatableText("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)) , centerX + 80, centerY, true);
-        renderText(matrixStack, new TranslatableText("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)) , centerX + 63, centerY + 50, true);
-        renderText(matrixStack, new TranslatableText("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)) , centerX - 63, centerY - 50, false);
-        renderText(matrixStack, new TranslatableText("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)) , centerX - 80, centerY, false);
-        renderText(matrixStack, new TranslatableText("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)) , centerX - 63, centerY + 50, false);
+    private static void renderGravitite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+        renderRing(matrixStack, 0, 0);
+        renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
+        renderText(matrixStack, client, new TranslatableText("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), 63, -50);
+        renderText(matrixStack, client, new TranslatableText("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)), 80, 0);
+        renderText(matrixStack, client, new TranslatableText("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)), 63, 50);
+        renderText(matrixStack, client, new TranslatableText("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)), -63, -50);
+        renderText(matrixStack, client, new TranslatableText("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)), -80, 0);
+        renderText(matrixStack, client, new TranslatableText("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), -63, 50);
+    }
 
-           }
+    private static void renderAbstentine(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+        renderRing(matrixStack, 0, 0);
+        renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
+        for (int i = 0; i < bloodstoneCapturedData.conditionDataList.size(); i++) {
+            Pair<Integer, Integer> offset = getCircularPosition(80, i + 1, bloodstoneCapturedData.conditionDataList.size());
+            renderCondition(matrixStack, client, bloodstoneCapturedData.conditionDataList.get(i), offset.getLeft(), offset.getRight());
+        }
+    }
 
-    private static void renderCondition(MatrixStack matrixStack, BloodstoneCapturedData.ConditionData conditionData, int centerX, int centerY, Pair<Integer, Integer> circleOffsets) {
-        centerX += circleOffsets.getLeft();
-        centerY += circleOffsets.getRight() - 7;
-        if (circleOffsets.getLeft() == 0) {
-            centerX -= 109 / 2;
-            centerY += 11;
-        } else if (circleOffsets.getLeft() < 0)
-            centerX -= 109;
-        int renderWidth = (int) MathHelper.clamp((109 - 13) * conditionData.severity(), 0, (109 - 13));
-        //matrixStack.push();
-        //matrixStack.translate(-centerX,-centerY,1);
-        //matrixStack.scale(1.2f, 1.2f,1);
-        //matrixStack.translate(centerX,centerY,1);
+    private static void renderCondition(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData.ConditionData conditionData, int offsetX, int offsetY) {
+        if (offsetX == 0) offsetX = 109 / 2;
+        else if (offsetX < 0) offsetX = offsetX - (109 / 2);
+
+        int renderWidth = (int) MathHelper.clamp((109 - 15) * conditionData.severity(), 0, (109 - 15));
+        matrixStack.push();
+        matrixStack.translate(offsetX, offsetY, 0);
+        matrixStack.translate(-54.5, -6, 0);
+        matrixStack.scale(1.15f, 1.15f, 1);
+        matrixStack.translate(54.5, 6, 0);
         RenderSystem.setShaderTexture(0, Aether.locate("textures/hud/bloodstone/" + conditionData.id() + "_bar.png"));
-        DrawableHelper.drawTexture(matrixStack, centerX, centerY, 0, 0, 13 + renderWidth, 12, 109, 12);
+        DrawableHelper.drawTexture(matrixStack, -7, -7, 0, 0, 15 + renderWidth, 12, 109, 12);
         RenderSystem.setShaderTexture(0, Aether.locate("textures/hud/bloodstone/condition_bar.png"));
-        DrawableHelper.drawTexture(matrixStack, centerX, centerY, 0, 0, 109, 12, 109, 12);
-        //matrixStack.pop();
+        DrawableHelper.drawTexture(matrixStack, -7, -7, 0, 0, 109, 12, 109, 12);
+        matrixStack.pop();
 
         Text title = new TranslatableText("condition.condition." + conditionData.id()).append(" - ").append(getSeverityWithColor(conditionData.severity()));
-        renderText(matrixStack, title, centerX + 17, centerY - 4, true);
+        renderText(matrixStack, client, title, offsetX + 17, offsetY - 9);
     }
 
     public static Text getSeverityWithColor(Float rawSeverity) {
@@ -144,59 +140,46 @@ public class BloodstoneHUDRenderer {
         };
     }
 
-    private static void renderRing(MatrixStack matrixStack, int centerX, int centerY) {
+    private static void renderRing(MatrixStack matrixStack, int offsetX, int offsetY) {
         RenderSystem.setShaderTexture(0, Aether.locate("textures/hud/bloodstone/bloodstone_ring.png"));
-        DrawableHelper.drawTexture(matrixStack, centerX - 75, centerY - 75, 0, 0, 150, 150, 150, 150);
+        DrawableHelper.drawTexture(matrixStack, offsetX - 75, offsetY - 75, 0, 0, 150, 150, 150, 150);
     }
 
-    private static void renderIconWText(MatrixStack matrixStack, MinecraftClient client, Sprite sprite, Text text, int centerX, int centerY, Pair<Integer, Integer> circleOffsets) {
-        renderIconWText(matrixStack, client, sprite, text, centerX + circleOffsets.getLeft(), centerY + circleOffsets.getRight(), circleOffsets.getLeft() > 0);
-    }
-
-    private static void renderIconWText(MatrixStack matrixStack, MinecraftClient client, Sprite sprite, Text text, int x, int y, boolean rightSide) {
+    private static void renderIconWText(MatrixStack matrixStack, MinecraftClient client, Sprite sprite, Text text, int offsetX, int offsetY) {
         int totalWidth = ((sprite.getWidth() + 2 + client.textRenderer.getWidth(text)));
-        int textHeight = client.textRenderer.fontHeight / 2;
+        int totalHeight = client.textRenderer.fontHeight / 2;
+
+        int startX = offsetX;
+        if (offsetX == 0) startX = offsetX - (totalWidth / 2);
+        else if (offsetX < 0) startX = (offsetX - totalWidth);
 
         RenderSystem.setShaderTexture(0, sprite.getAtlas().getId());
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1);
-        int startX = rightSide ? x : (x - totalWidth);
-        DrawableHelper.drawSprite(matrixStack, startX, y - 9, client.inGameHud.getZOffset(), 18, 18, sprite);
-        client.textRenderer.drawWithShadow(matrixStack, text, startX + sprite.getWidth() + 2, y - textHeight, 14737632);
+        DrawableHelper.drawSprite(matrixStack, startX, offsetY - 9, client.inGameHud.getZOffset(), 18, 18, sprite);
+        client.textRenderer.drawWithShadow(matrixStack, text, startX + sprite.getWidth() + 2, offsetY - totalHeight, 14737632);
     }
 
-    private static void renderIconWTextCentered(MatrixStack matrixStack, MinecraftClient client, Sprite sprite, Text text, int x, int y) {
-        int totalWidth = ((sprite.getWidth() + 2 + client.textRenderer.getWidth(text)));
-        int textHeight = client.textRenderer.fontHeight / 2;
+    private static void renderText(MatrixStack matrixStack, MinecraftClient client, Text text, int offsetX, int offsetY) {
+        int totalWidth = client.textRenderer.getWidth(text);
+        int totalHeight = client.textRenderer.fontHeight / 2;
 
-        RenderSystem.setShaderTexture(0, sprite.getAtlas().getId());
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1);
-        int startX = x - (totalWidth / 2);
-        DrawableHelper.drawSprite(matrixStack, startX, y - 9, client.inGameHud.getZOffset(), 18, 18, sprite);
-        client.textRenderer.drawWithShadow(matrixStack, text, startX + sprite.getWidth() + 2, y - textHeight, 14737632);
+        int startX = offsetX;
+        if (offsetX == 0) startX = offsetX - (totalWidth / 2);
+        else if (offsetX < 0) startX = (offsetX - totalWidth);
+
+        client.textRenderer.drawWithShadow(matrixStack, text, startX, offsetY - totalHeight, 14737632);
     }
 
-    private static void renderTextCentered(MatrixStack matrixStack, Text text, int x, int y) {
-        int textWidth = MinecraftClient.getInstance().textRenderer.getWidth(text) / 2;
-        int textHeight = MinecraftClient.getInstance().textRenderer.fontHeight / 2;
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrixStack, text, x - textWidth, y - textHeight, 14737632);
-    }
-
-    private static void renderText(MatrixStack matrixStack, Text text, int centerX, int centerY, Pair<Integer, Integer> circleOffsets) {
-        renderText(matrixStack, text, centerX + circleOffsets.getRight(), centerY - circleOffsets.getLeft(), circleOffsets.getRight() > 0);
-    }
-
-    private static void renderText(MatrixStack matrixStack, Text text, int x, int y, boolean rightSide) {
-        int textWidth = MinecraftClient.getInstance().textRenderer.getWidth(text);
-        int textHeight = MinecraftClient.getInstance().textRenderer.fontHeight / 2;
-        x = rightSide ? x : (x - textWidth);
-        MinecraftClient.getInstance().textRenderer.drawWithShadow(matrixStack, text, x, y - textHeight, 14737632);
-    }
-
-    private final static Pair<Integer, Integer>[] basicPositions = ArrayUtils.toArray(new Pair<>(0, -80), new Pair<>(80, 0), new Pair<>(-80, 0), new Pair<>(0, 80));
     private static Pair<Integer, Integer> getCircularPosition(int radius, int itemNum, int totalItems) {
-        if (totalItems < 5)
-            return basicPositions[itemNum];
-
+        if (totalItems < 5) {
+            return switch (itemNum) {
+                case 0 -> new Pair<>(0, -80);
+                case 1 -> new Pair<>(80, 0);
+                case 2 -> new Pair<>(-80, 0);
+                case 3 -> new Pair<>(0, 80);
+                default -> new Pair<>(0, 0);
+            };
+        }
         double angle = ((2 * Math.PI) / totalItems) * itemNum;
         int y = (int) Math.round(Math.cos(angle) * radius);
         int x = (int) Math.round(Math.sin(angle) * radius);
