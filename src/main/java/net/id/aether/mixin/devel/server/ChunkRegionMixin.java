@@ -26,12 +26,14 @@ public abstract class ChunkRegionMixin{
         )
     )
     private void isValidForSetBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir){
-        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-        for(StackTraceElement traceElement : trace){
-            if(traceElement.getModuleName() != null){
-                continue;
+        if(AetherDevel.Config.SETBLOCK_STACK_TRACE){
+            StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+            for(StackTraceElement traceElement : trace){
+                if(traceElement.getModuleName() != null){
+                    continue;
+                }
+                System.err.println("\tat " + traceElement);
             }
-            System.err.println("\tat " + traceElement);
         }
         if(field_33756 != null){
             var feature = field_33756.get();

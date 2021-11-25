@@ -1,5 +1,6 @@
 package net.id.aether.devel;
 
+import java.util.function.Function;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
@@ -14,6 +15,8 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import static net.id.aether.Aether.MOD_ID;
 
 public final class AetherDevel{
     private AetherDevel(){}
@@ -115,6 +118,27 @@ public final class AetherDevel{
             synchronized(MISSING_LANGUAGE_KEYS){
                 MISSING_LANGUAGE_KEYS.add(key);
             }
+        }
+    }
+    
+    public static final class Config{
+        public static final boolean SETBLOCK_STACK_TRACE = getBoolean("setblockStackTrace", false);
+        
+        private static boolean getBoolean(String key, boolean defaultValue){
+            return getKey(key, Boolean::parseBoolean, defaultValue);
+        }
+        
+        private static <T> T getKey(String key, Function<String, T> parser, T defaultValue){
+            String value = System.getProperty(MOD_ID + '.' + key);
+            if(value != null && !value.isBlank()){
+                try{
+                    return parser.apply(value);
+                }catch(Throwable t){
+                    System.err.println("Failed to parse " + MOD_ID + '.' + key + ": " + value);
+                    t.printStackTrace();
+                }
+            }
+            return defaultValue;
         }
     }
 }
