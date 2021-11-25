@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:flaxweave_block"
+          "name": "the_aether:flaxweave_cushion"
         }
       ],
       "conditions": [
