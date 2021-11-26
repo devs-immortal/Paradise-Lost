@@ -46,6 +46,7 @@
     "client.render.BackgroundRendererMixin",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
+    "client.render.EntityRenderDispatcherMixin",
     "client.render.FluidRendererMixin",
     "client.render.GameRendererMixin",
     "client.render.InGameHudMixin",
@@ -61,7 +62,6 @@
     "client.render.TexturedRenderLayersMixin",
     "client.render.VertexBufferMixin",
     "client.render.WorldRendererMixin",
-    "client.render.EntityRenderDispatcherMixin",
     "devel.client.SpriteAtlasTextureMixin",
     "devel.client.TranslationStorageMixin"
   ],

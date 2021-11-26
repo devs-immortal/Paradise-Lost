@@ -30,7 +30,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 
-import static net.id.aether.tag.AetherItemTags.*;
+import static net.id.aether.tag.AetherItemTags.RIGHTEOUS_WEAPONS;
+import static net.id.aether.tag.AetherItemTags.SACRED_WEAPONS;
 
 public class RookEntity extends MobEntity {
 
