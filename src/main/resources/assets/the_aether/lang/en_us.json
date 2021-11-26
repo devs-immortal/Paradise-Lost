@@ -328,6 +328,8 @@
   "item.the_aether.cockatrice_spawn_egg": "Cockatrice Spawn Egg",
   "item.the_aether.cold_parachute": "Cold Parachute",
   "item.the_aether.crystal_boat": "Crystal Boat",
+  "item.the_aether.crow_eye": "Crow's Eye",
+  "item.the_aether.crow_eye.tooltip": "???",
   "item.the_aether.diamond_gloves": "Diamond Gloves",
   "item.the_aether.enchanted_blueberry": "Enchanted Blueberry",
   "item.the_aether.enchanted_dart": "Enchanted Dart",
@@ -481,6 +483,8 @@
   "death.attack.aether_fall.player": "%1$s was thrown off the heavens above by %2$s",
   "death.attack.aerbunny_fall": "%1$s got dumped",
   "death.attack.aerbunny_fall.player": "%1$s got dumped whilst trying to escape %2$s",
+  "death.attack.nightmare": "%1$s was consumed by shifting shadows",
+  "death.attack.nightmare.player": "%1$s was fed to them by %2$s",
 
   "lore.the_aether.root.title" : "Root title",
   "lore.the_aether.root.description" : "Lorem ipsum dolor asmet or whatever",

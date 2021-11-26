@@ -1,12 +1,15 @@
 package net.id.aether.client.model.entity;
 
+import dev.emi.trinkets.api.TrinketsApi;
 import net.id.aether.Aether;
+import net.id.aether.component.LUV;
 import net.id.aether.entities.misc.RookEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
 
@@ -33,6 +36,13 @@ public class RookModel extends EntityModel<RookEntity> {
         var cameraPos = cameraEntity.getEyePos();
         var rookPos = rook.getPos();
 
+        byte luv = 127;
+
+        if(cameraEntity instanceof PlayerEntity player) {
+            luv = LUV.getLUV(player).getValue();
+        }
+
+
         var difX = rook.getX() - cameraEntity.getX();
         var difZ = rook.getZ() - cameraEntity.getZ();
         var angle = (float) MathHelper.wrapDegrees(Math.toDegrees(Math.atan2(difZ, difX)) + 90);
@@ -46,7 +56,12 @@ public class RookModel extends EntityModel<RookEntity> {
         if(lookAlpha < 0.075F || cameraPos.distanceTo(rookPos) < 4.5F)
             lookAlpha = 0F;
 
-
+        if(luv >= 0 && luv < 48) {
+            lookAlpha = 0F;
+        }
+        else if(luv == 127 || luv < 0) {
+            lookAlpha = 0.7F;
+        }
 
         var time = rook.age + MinecraftClient.getInstance().getTickDelta();
         translation = (float) (Math.sin(time / 25) / 8 + 0.125);

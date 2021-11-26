@@ -3,8 +3,17 @@ package net.id.aether.component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
+import net.id.aether.entities.AetherEntityTypes;
+import net.id.aether.entities.misc.RookEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.LightType;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * What are you doing here?
@@ -20,12 +29,80 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
     private byte value;
 
     public LUV(PlayerEntity player) {
-        value = (byte) player.getRandom().nextInt(127);
+        value = (byte) player.getRandom().nextInt(128);
         this.player = player;
+    }
+
+    public static LUV getLUV(PlayerEntity player) {
+        return AetherComponents.LUV.get(player);
     }
 
     @Override
     public void tick() {
+        var playerPos = player.getBlockPos();
+        var world = player.getEntityWorld();
+        var random = player.getRandom();
+
+        if(value >= 48 || world.getMoonPhase() == 0) {
+            handleRookSpawning(world, playerPos, random);
+        }
+    }
+
+    public void handleRookSpawning(World world, BlockPos pos, Random random) {
+        var dayTime = world.getTimeOfDay();
+
+        var rookCount = (long) world.getEntitiesByClass(RookEntity.class, Box.of(Vec3d.ofCenter(pos), 64, 64, 64), entity -> true).size();
+        var rookCap = (value == 48 || value == 100 || value >= 126) ? Integer.MAX_VALUE : 32;
+
+        var scaling = 0.5 + Math.sqrt(rookCount) / 2;
+        var luvModifier = 1.0;
+        if(value == 48 || (value >= 0 && value < 30))
+            luvModifier = 2;
+        else if(value > 100 && value < 110)
+            luvModifier = 0.5;
+        else if(value < 0)
+            luvModifier = 0.25;
+
+        if(rookCount < rookCap && world.getTime() % 20 == 0 && (dayTime > 14000 && dayTime < 22000)) {
+            var posStream = BlockPos.streamOutwards(pos, 32, 32, 32);
+            double finalLuvModifier = luvModifier;
+            posStream
+                    .filter(blockPos -> blockPos.getManhattanDistance(pos) > 22)
+                    .forEach(blockPos -> {
+                        var upPos = blockPos.up();
+                        var floorPos = blockPos.down();
+                        var state = world.getBlockState(blockPos);
+                        var upState = world.getBlockState(upPos);
+                        var floorState = blockPos.down();
+
+                        if(world.getLightLevel(LightType.BLOCK, blockPos) > 4 || state.isFullCube(world, blockPos) || upState.isFullCube(world, upPos) || world.isAir(floorPos))
+                            return;
+
+                        var roofed = 3;
+
+                        for (int i = 1; i <= 4; i++) {
+                            var checkPos = upPos.up(i);
+                            if(!world.getBlockState(checkPos).isTranslucent(world, checkPos)) {
+                                roofed = 1;
+                                break;
+                            }
+                        }
+
+                        if(random.nextInt((int) (20000 * roofed * scaling / finalLuvModifier)) == 0) {
+                            var rook = new RookEntity(AetherEntityTypes.ROOK, world);
+                            rook.setPos(blockPos.getX() + 0.5, blockPos.getY() + 0.1, blockPos.getZ() + 0.5);
+                            world.spawnEntity(rook);
+                        }
+                    });
+        }
+    }
+
+    public byte getValue() {
+        return value;
+    }
+
+    public void setValue(byte value) {
+        this.value = value;
     }
 
     @Override
@@ -40,6 +117,6 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
 
     @Override
     public boolean shouldCopyForRespawn(boolean lossless, boolean keepInventory, boolean sameCharacter) {
-        return true;
+        return sameCharacter;
     }
 }

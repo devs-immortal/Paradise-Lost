@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_aether:holy_sword"
+    "the_aether:holy_sword",
+    "minecraft:golden_sword",
+    "minecraft:netherite_sword"
   ]
 }

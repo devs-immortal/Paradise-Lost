@@ -1,6 +1,8 @@
 package net.id.aether.entities.misc;
 
+import net.id.aether.component.LUV;
 import net.id.aether.tag.AetherItemTags;
+import net.id.aether.util.AetherDamageSources;
 import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -15,10 +17,12 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.LightType;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -64,7 +68,28 @@ public class RookEntity extends MobEntity {
         world.getPlayers()
                 .stream()
                 .min(Comparator.comparing(player -> player.getPos().distanceTo(getPos())))
-                .ifPresent(player -> getLookControl().lookAt(player, 15, 15));
+                .ifPresent(player -> {
+                    getLookControl().lookAt(player, 15, 15);
+
+                    byte luv = LUV.getLUV(player).getValue();
+                    if(!player.isSpectator() && world.getLightLevel(LightType.BLOCK, player.getBlockPos()) < 7 && world.getTime() % 10 == 0 && (luv > 50 || luv < 0)) {
+                        if(random.nextInt(luv < 0 ? 150 : 800) == 0) {
+                            player.damage(AetherDamageSources.NIGHTMARE, 9);
+                            for(int i = 0; i < 15 + random.nextInt(15); ++i) {
+                                double d = this.random.nextGaussian() * 0.02D;
+                                double e = this.random.nextGaussian() * 0.02D;
+                                double f = this.random.nextGaussian() * 0.02D;
+                                if(random.nextInt( 3) == 0) {
+                                    this.world.addParticle(ParticleTypes.LARGE_SMOKE, player.getParticleX(1.0D), player.getRandomBodyY(), player.getParticleZ(1.0D), d, e, f);
+                                }
+                                else {
+                                    this.world.addParticle(ParticleTypes.SMOKE, player.getParticleX(1.0D), player.getRandomBodyY(), player.getParticleZ(1.0D), d, e, f);
+                                }
+                            }
+                            player.playSound(AetherSoundEvents.ENTITY_NIGHTMARE_HURT, 1, 0.85F + random.nextFloat() * 0.25F);
+                        }
+                    }
+                });
         bodyYaw = headYaw;
 
         if(world.getTime() % 20 == 0 && random.nextBoolean()) {
@@ -122,6 +147,10 @@ public class RookEntity extends MobEntity {
 
         if(success) {
             return super.damage(source, amount);
+        }
+
+        if(source.isOutOfWorld()) {
+            remove(RemovalReason.DISCARDED);
         }
 
         return false;
