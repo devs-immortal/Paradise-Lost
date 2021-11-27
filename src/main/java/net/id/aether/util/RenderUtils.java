@@ -50,19 +50,11 @@ public class RenderUtils {
     }
     
     public static void auralRenderLayer(Block block){
-        if(Config.SODIUM_WORKAROUND){
-            blockRenderLayer(block, RenderLayer.getSolid());
-        }else{
-            blockRenderLayer(block, AetherRenderLayers.AURAL);
-        }
+        blockRenderLayer(block, AetherRenderLayers.AURAL);
     }
     
     public static void auralCutoutMippedRenderLayer(Block block){
-        if(Config.SODIUM_WORKAROUND){
-            blockRenderLayer(block, RenderLayer.getCutoutMipped());
-        }else{
-            blockRenderLayer(block, AetherRenderLayers.AURAL_CUTOUT_MIPPED);
-        }
+        blockRenderLayer(block, AetherRenderLayers.AURAL_CUTOUT_MIPPED);
     }
 
     public static void cutoutMippedRenderLayer(Block block) {
