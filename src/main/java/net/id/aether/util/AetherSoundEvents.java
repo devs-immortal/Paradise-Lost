@@ -252,7 +252,7 @@ public final class AetherSoundEvents{
             if(subtitle != null){
                 stringBuilder.append("\"subtitle\":\"%s\",".formatted(subtitle));
             }
-            stringBuilder.append("\"sounds\":[{\"name\":\"%s\",\"ascension\":\"event\"}]}".formatted(parent.toString()));
+            stringBuilder.append("\"sounds\":[{\"name\":\"%s\",\"type\":\"event\"}]}".formatted(parent.toString()));
             return stringBuilder.toString();
         }
     }
