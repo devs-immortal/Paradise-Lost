@@ -3,8 +3,10 @@ package net.id.aether.component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
+import net.id.aether.Aether;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.misc.RookEntity;
+import net.id.aether.world.dimension.AetherDimension;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
@@ -43,7 +45,7 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
         var world = player.getEntityWorld();
         var random = player.getRandom();
 
-        if(value >= 48 || world.getMoonPhase() == 0) {
+        if(value >= 36 || world.getMoonPhase() == 0) {
             handleRookSpawning(world, playerPos, random);
         }
     }
@@ -56,12 +58,19 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
 
         var scaling = 0.5 + Math.sqrt(rookCount) / 2;
         var luvModifier = 1.0;
-        if(value == 48 || (value >= 0 && value < 30))
-            luvModifier = 2;
-        else if(value > 100 && value < 110)
-            luvModifier = 0.5;
-        else if(value < 0)
-            luvModifier = 0.25;
+
+        if(world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
+            Aether.LOG.error("Cum");
+            if(value == 48 || (value >= 0 && value < 30))
+                luvModifier = 2;
+            else if(value > 100 && value < 110)
+                luvModifier = 0.5;
+            else if(value < 0)
+                luvModifier = 0.25;
+        }
+        else {
+            luvModifier = 4;
+        }
 
         if(rookCount < rookCap && world.getTime() % 20 == 0 && (dayTime > 14000 && dayTime < 22000)) {
             var posStream = BlockPos.streamOutwards(pos, 32, 32, 32);

@@ -59,7 +59,7 @@ public class RookModel extends EntityModel<RookEntity> {
         if(lookAlpha < 0.075F || cameraPos.distanceTo(rookPos) < 4.5F)
             lookAlpha = 0F;
 
-        if(luv >= 0 && luv < 48) {
+        if(luv >= 0 && luv < 40) {
             lookAlpha = 0F;
         }
         else if(luv == 127 || luv < 0) {
