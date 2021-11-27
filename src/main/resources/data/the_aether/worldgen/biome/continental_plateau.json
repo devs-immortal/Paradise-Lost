@@ -105,7 +105,7 @@
   "precipitation": "rain",
   "temperature": 0.25,
   "downfall": 0.0,
-  "category": "mesa",
-  "depth": 0.35,
-  "scale": 0.0145
+  "category": "plains",
+  "depth": 0.0,
+  "scale": 0.05
 }

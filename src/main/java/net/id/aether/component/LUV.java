@@ -96,7 +96,7 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
                             }
                         }
 
-                        if(random.nextInt((int) (20000 * roofed * scaling / finalLuvModifier)) == 0) {
+                        if(random.nextInt((int) (30000 * roofed * scaling / finalLuvModifier)) == 0) {
                             var rook = new RookEntity(AetherEntityTypes.ROOK, world);
                             rook.setPos(blockPos.getX() + 0.5, blockPos.getY() + 0.1, blockPos.getZ() + 0.5);
                             world.spawnEntity(rook);

@@ -182,7 +182,7 @@ public class RookEntity extends MobEntity {
 
     @Override
     public int getMinAmbientSoundDelay() {
-        return 200;
+        return 250;
     }
 
     @Override
