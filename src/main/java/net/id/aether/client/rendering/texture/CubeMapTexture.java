@@ -3,6 +3,8 @@ package net.id.aether.client.rendering.texture;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMaps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.mixin.client.render.NativeImageAccessor;
 import net.minecraft.client.texture.AbstractTexture;
 import net.minecraft.client.texture.NativeImage;
@@ -16,6 +18,7 @@ import java.util.Set;
 
 import static org.lwjgl.opengl.GL33.*;
 
+@Environment(EnvType.CLIENT)
 public final class CubeMapTexture extends AbstractTexture{
     private static final Object2IntMap<Direction> DIRECTION_IDS;
     static{

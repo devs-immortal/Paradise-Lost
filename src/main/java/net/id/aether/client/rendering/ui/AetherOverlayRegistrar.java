@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.ui;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+@Environment(EnvType.CLIENT)
 public class AetherOverlayRegistrar {
 
     private static final List<Overlay> OVERLAYS = new ArrayList<>();

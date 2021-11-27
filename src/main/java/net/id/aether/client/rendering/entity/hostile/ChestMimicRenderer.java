@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.entity.hostile;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.model.entity.ChestMimicModel;
@@ -10,6 +12,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class ChestMimicRenderer extends MobEntityRenderer<ChestMimicEntity, ChestMimicModel> {
 
     private static final Identifier TEXTURE_HEAD = Aether.locate("textures/entity/mimic/mimic_head.png");

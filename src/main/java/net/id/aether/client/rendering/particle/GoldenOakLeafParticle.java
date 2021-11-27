@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import java.util.SplittableRandom;
 
 //I did not steal this from that one falling leaves mod, you have no proof!
+@Environment(EnvType.CLIENT)
 public class GoldenOakLeafParticle extends SpriteBillboardParticle {
 
     private static final SplittableRandom random = new SplittableRandom();

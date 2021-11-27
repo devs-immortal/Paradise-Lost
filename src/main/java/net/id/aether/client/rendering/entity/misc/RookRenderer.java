@@ -1,6 +1,8 @@
 package net.id.aether.client.rendering.entity.misc;
 
 import com.google.common.collect.ImmutableList;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.model.entity.RookModel;
@@ -15,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 public class RookRenderer extends MobEntityRenderer<RookEntity, RookModel> {
 
     public static final List<Identifier> TEXTURES;

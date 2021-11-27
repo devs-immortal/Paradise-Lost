@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.blocks.blockentity.IncubatorBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -8,6 +10,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 
+@Environment(EnvType.CLIENT)
 public class IncubatorBlockEntityRenderer implements BlockEntityRenderer<IncubatorBlockEntity> {
 
     public IncubatorBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {

@@ -1,6 +1,8 @@
 package net.id.aether.client.rendering.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.effect.condition.Severity;
 import net.id.aether.items.tools.bloodstone.*;
@@ -24,7 +26,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
 
-
+@Environment(EnvType.CLIENT)
 //probably can be cleaned up
 public class BloodstoneHUDRenderer {
     public static void render(MatrixStack matrixStack, float delta) {

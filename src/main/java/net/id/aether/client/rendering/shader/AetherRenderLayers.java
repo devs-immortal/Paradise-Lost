@@ -1,6 +1,8 @@
 package net.id.aether.client.rendering.shader;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.mixin.client.render.RenderLayerAccessor;
 import net.id.aether.mixin.client.render.RenderPhaseAccessor;
 import net.id.aether.util.Config;
@@ -21,6 +23,7 @@ import java.util.stream.Stream;
 
 import static net.id.aether.client.rendering.shader.AetherShaders.locate;
 
+@Environment(EnvType.CLIENT)
 public final class AetherRenderLayers{
     private AetherRenderLayers(){}
     

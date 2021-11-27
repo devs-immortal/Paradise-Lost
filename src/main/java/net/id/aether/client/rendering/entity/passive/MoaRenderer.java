@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.entity.passive;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.model.entity.MoaModel;
 import net.id.aether.entities.passive.moa.MoaEntity;
@@ -10,6 +12,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 
     public MoaRenderer(EntityRendererFactory.Context renderManager) {

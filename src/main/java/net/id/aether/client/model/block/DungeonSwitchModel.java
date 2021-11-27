@@ -1,5 +1,7 @@
 package net.id.aether.client.model.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.client.model.AetherModelLayers;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
@@ -7,6 +9,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 
+@Environment(EnvType.CLIENT)
 public class DungeonSwitchModel extends Model {
 
     public ModelPart cube;

@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.entity.hostile;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.model.entity.CockatriceModel;
@@ -9,6 +11,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
+@Environment(EnvType.CLIENT)
 public class CockatriceRenderer extends MobEntityRenderer<CockatriceEntity, CockatriceModel> {
     private static final Identifier TEXTURE = Aether.locate("textures/entity/cockatrice.png");
 

@@ -1,6 +1,8 @@
 package net.id.aether.client.rendering.entity.misc;
 
 import com.google.common.collect.ImmutableList;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.client.model.entity.RookModel;
 import net.id.aether.entities.misc.RookEntity;
@@ -14,6 +16,7 @@ import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 public class RookEyeFeatureRenderer extends EyesFeatureRenderer<RookEntity, RookModel> {
 
     public static final List<RenderLayer> EYES;

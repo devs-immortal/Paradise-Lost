@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.SplittableRandom;
 
+@Environment(EnvType.CLIENT)
 public class FallingOrangePetalParticle extends SpriteBillboardParticle {
 
     private static final SplittableRandom random = new SplittableRandom();

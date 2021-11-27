@@ -1,7 +1,10 @@
 package net.id.aether.client.rendering.shader;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderPhase;
 
+@Environment(EnvType.CLIENT)
 public final class AetherRenderPhases{
     private AetherRenderPhases(){}
     

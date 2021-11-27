@@ -1,5 +1,7 @@
 package net.id.aether.client.model;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.id.aether.Aether;
 import net.id.aether.items.AetherItems;
@@ -9,6 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+@Environment(EnvType.CLIENT)
 public class AetherModelPredicates {
 
     public static void initClient() {

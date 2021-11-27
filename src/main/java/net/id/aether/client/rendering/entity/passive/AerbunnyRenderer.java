@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.entity.passive;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.model.entity.AerbunnyModel;
@@ -9,6 +11,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class AerbunnyRenderer extends MobEntityRenderer<AerbunnyEntity, AerbunnyModel> {
 
     private static final Identifier TEXTURE = Aether.locate("textures/entity/aerbunny.png");

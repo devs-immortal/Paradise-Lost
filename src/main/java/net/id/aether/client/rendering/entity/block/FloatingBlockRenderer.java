@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.entity.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -18,6 +20,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+@Environment(EnvType.CLIENT)
 public class FloatingBlockRenderer extends EntityRenderer<FloatingBlockEntity> {
 
     public FloatingBlockRenderer(EntityRendererFactory.Context renderManager) {

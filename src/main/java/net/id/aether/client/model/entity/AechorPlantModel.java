@@ -1,5 +1,7 @@
 package net.id.aether.client.model.entity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.entities.hostile.AechorPlantEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -7,6 +9,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
+@Environment(EnvType.CLIENT)
 public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
     private final ModelPart root;
     private final ModelPart[] petals;

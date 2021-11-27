@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.client.rendering.texture.AetherChestTexture;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -18,6 +20,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 
+@Environment(EnvType.CLIENT)
 public final class AetherChestBlockEntityRenderer implements BlockEntityRenderer<ChestBlockEntity>{
     private final ModelPart singleChestLid;
     private final ModelPart singleChestBase;

@@ -5,6 +5,8 @@
 // Paste this class into your mod and generate all required imports
 package net.id.aether.client.model.entity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.entities.passive.moa.MoaEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -13,6 +15,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
+@Environment(EnvType.CLIENT)
 public class MoaModel extends EntityModel<MoaEntity> {
     private final ModelPart beak;
     private final ModelPart neck;

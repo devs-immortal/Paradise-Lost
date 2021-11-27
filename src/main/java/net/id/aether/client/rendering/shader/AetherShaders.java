@@ -1,6 +1,8 @@
 package net.id.aether.client.rendering.shader;
 
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.duck.client.ShaderDuck;
 import net.minecraft.client.render.Shader;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.Consumer;
 
+@Environment(EnvType.CLIENT)
 public final class AetherShaders{
     private AetherShaders(){}
     

@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.entity.hostile;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.entities.hostile.swet.BlueSwetEntity;
 import net.id.aether.entities.hostile.swet.GoldenSwetEntity;
@@ -15,6 +17,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
+@Environment(EnvType.CLIENT)
 public class SwetRenderer extends MobEntityRenderer<SwetEntity, SlimeEntityModel<SwetEntity>> {
 
     public SwetRenderer(EntityRendererFactory.Context renderManager) {

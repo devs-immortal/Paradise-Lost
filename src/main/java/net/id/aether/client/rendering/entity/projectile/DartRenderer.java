@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.entity.projectile;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.entities.projectile.DartEntity;
 import net.id.aether.entities.projectile.EnchantedDartEntity;
@@ -9,6 +11,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class DartRenderer extends ProjectileEntityRenderer<DartEntity> {
 
     public DartRenderer(EntityRendererFactory.Context renderManager) {

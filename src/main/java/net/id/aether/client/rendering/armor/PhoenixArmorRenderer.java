@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.armor;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.model.armor.PhoenixArmorModel;
@@ -12,6 +14,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class PhoenixArmorRenderer implements ArmorRenderer {
     private static final Identifier TEXTURE = new Identifier("minecraft", "textures/models/armor/aether_phoenix_layer_1.png");
     private static PhoenixArmorModel phoenixArmorModel;

@@ -1,10 +1,13 @@
 package net.id.aether.client.model.armor;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.entity.LivingEntity;
 
+@Environment(EnvType.CLIENT)
 public class PhoenixArmorModel extends BipedEntityModel<LivingEntity> {
 
     public ModelPart head;

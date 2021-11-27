@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.texture;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.util.SpriteIdentifier;
 
 import java.util.Calendar;
@@ -10,6 +12,7 @@ import java.util.function.Predicate;
 import static net.id.aether.Aether.locate;
 import static net.minecraft.client.render.TexturedRenderLayers.CHEST_ATLAS_TEXTURE;
 
+@Environment(EnvType.CLIENT)
 public enum AetherChestTexture{
     SKYROOT,
 //    GOLDEN_OAK,

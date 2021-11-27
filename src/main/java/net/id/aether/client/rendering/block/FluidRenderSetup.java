@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
@@ -20,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
+@Environment(EnvType.CLIENT)
 public class FluidRenderSetup {
 
     public static void setupFluidRendering(final Fluid still, @Nullable final Fluid flowing, final Identifier textureFluidId, final FluidColorProvider color) {

@@ -5,6 +5,8 @@
 // Paste this class into your mod and generate all required imports
 package net.id.aether.client.model.entity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.entities.passive.AerbunnyEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -12,6 +14,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
+@Environment(EnvType.CLIENT)
 public class AerbunnyModel extends EntityModel<AerbunnyEntity> {
     private final ModelPart body;
     private final ModelPart fluff;

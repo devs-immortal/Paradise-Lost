@@ -1,7 +1,10 @@
 package net.id.aether.client.rendering.util;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.MapColor;
 
+@Environment(EnvType.CLIENT)
 public class AetherMapColorUtil {
 
     public static int getColor(MapColor material, int shade) {

@@ -1,6 +1,8 @@
 package net.id.aether.client.rendering.block;
 
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
 import net.id.aether.blocks.blockentity.dungeon.DungeonSwitchBlockEntity;
 import net.id.aether.client.model.block.DungeonSwitchModel;
@@ -12,6 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
+@Environment(EnvType.CLIENT)
 public class DungeonSwitchBlockEntityRenderer implements BlockEntityRenderer<DungeonSwitchBlockEntity> {
     private static final Identifier CUBE_TEXTURE = Aether.locate("textures/block/hellfire_stone.png");
     private final DungeonSwitchModel model;

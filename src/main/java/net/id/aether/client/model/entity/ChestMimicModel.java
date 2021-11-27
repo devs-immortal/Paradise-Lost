@@ -1,11 +1,14 @@
 package net.id.aether.client.model.entity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.entities.hostile.ChestMimicEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 
+@Environment(EnvType.CLIENT)
 public class ChestMimicModel extends EntityModel<ChestMimicEntity> {
 
     public final ModelPart box, boxLid, leftLeg, rightLeg;

@@ -1,5 +1,7 @@
 package net.id.aether.client.rendering.util;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.impl.client.rendering.ColorProviderRegistryImpl;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.util.DynamicColorBlock;
@@ -8,6 +10,7 @@ import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.util.registry.Registry;
 
+@Environment(EnvType.CLIENT)
 public class AetherColorProviders {
     public static void initClient() {
         initBlocks();

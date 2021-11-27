@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.client.rendering.texture.AetherChestTexture;
 
+@Environment(EnvType.CLIENT)
 public class AetherBlockEntityRenderers {
 
     @Environment(EnvType.CLIENT)

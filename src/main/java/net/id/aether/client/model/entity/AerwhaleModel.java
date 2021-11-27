@@ -5,6 +5,8 @@
 // Paste this class into your mod and generate all required imports
 package net.id.aether.client.model.entity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.id.aether.entities.passive.AerwhaleEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -12,6 +14,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
+@Environment(EnvType.CLIENT)
 public class AerwhaleModel extends EntityModel<AerwhaleEntity> {
     final float pi = 3.1415927F;
     private final ModelPart aerwhale_head;
