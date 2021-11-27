@@ -49,7 +49,7 @@ public class RookModel extends EntityModel<RookEntity> {
 
         var faceValue = MathHelper.angleBetween(angle, MathHelper.wrapDegrees(cameraEntity.getHeadYaw())) / 180;
 
-        lookAlpha = MathHelper.lerp(faceValue, 0.7F, 0);
+        lookAlpha = MathHelper.lerp(faceValue, 0.8F, 0);
 
         lookAlpha = (float) MathHelper.lerp(cameraPos.distanceTo(rookPos) / 12F, 0, lookAlpha);
 

@@ -33,7 +33,7 @@ public class PoisonDartEntity extends DartEntity {
         super.onHit(target);
 
         ConditionManager manager = ConditionAPI.getConditionManager(target);
-        manager.add(Conditions.VENOM, Persistence.CHRONIC, 95F); // this is probably an appropriate value
+        manager.add(Conditions.VENOM, Persistence.TEMPORARY, 120F); // this is probably an appropriate value
     }
 
     @Override

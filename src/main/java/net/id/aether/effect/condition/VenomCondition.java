@@ -22,7 +22,7 @@ public class VenomCondition extends Condition {
                 player -> ConditionAPI.isVisible(this, player),
                 player -> {
                     var manager = ConditionAPI.getConditionManager(player);
-                    return manager.getScaledSeverity(this) / 2F;
+                    return manager.getScaledSeverity(this) / 1.8F;
                 }
         ));
     }

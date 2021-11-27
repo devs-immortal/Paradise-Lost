@@ -65,9 +65,15 @@
     "monster": [
       {
         "type": "the_aether:blue_swet",
+        "weight": 30,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "the_aether:aechor_plant",
         "weight": 100,
-        "minCount": 2,
-        "maxCount": 6
+        "minCount": 3,
+        "maxCount": 7
       }
     ],
     "creature": [
@@ -98,6 +104,10 @@
       "the_aether:blue_swet": {
       "energy_budget": 0.12,
       "charge": 1.0
+    },
+    "the_aether:aechor_plant": {
+      "energy_budget": 0.1,
+      "charge": 0.7
     }
   },
   "parent": "the_aether:aether_highlands_forest",
