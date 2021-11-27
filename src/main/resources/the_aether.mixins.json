@@ -8,6 +8,7 @@
     "block.BlockMixin",
     "block.ChestBlockEntityAccessor",
     "block.FarmlandBlockMixin",
+    "client.render.ShaderIdFixMixin",
     "devel.server.ChunkRegionMixin",
     "entity.BoatEntityMixin",
     "entity.BoatEntityTypeMixin",
@@ -68,5 +69,5 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "plugin": "net.id.aether.mixin.devel.Plugin"
+  "plugin": "net.id.aether.mixin.Plugin"
 }
