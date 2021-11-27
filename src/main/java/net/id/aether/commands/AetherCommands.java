@@ -2,7 +2,6 @@ package net.id.aether.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.id.aether.commands.devel.LUVCommand;
 import net.id.aether.devel.AetherDevel;
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -16,10 +15,7 @@ public class AetherCommands {
         register(ConditionCommand::register);
         register(FloatingBlockCommand::register);
         register(LoreCommand::register);
-
-        if(AetherDevel.isDevel()) {
-            register(LUVCommand::register);
-        }
+        register(LUVCommand::register);
     }
 
     private static void register(Consumer<CommandDispatcher<ServerCommandSource>> command) {

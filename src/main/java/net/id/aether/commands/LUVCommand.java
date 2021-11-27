@@ -1,8 +1,10 @@
-package net.id.aether.commands.devel;
+package net.id.aether.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.id.aether.component.LUV;
+import net.id.aether.devel.AetherDevel;
+import net.id.incubus_core.misc.WorthinessChecker;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
@@ -37,7 +39,12 @@ public class LUVCommand {
     }
 
     public static int setLUV(ServerCommandSource source, PlayerEntity target, byte value) {
-        LUV.getLUV(target).setValue(value);
+        if(WorthinessChecker.isPlayerWorthy(target.getUuid()) || AetherDevel.isDevel()){
+            LUV.getLUV(target).setValue(value);
+        }
+        else {
+            source.sendError(new LiteralText("You have no right!"));
+        }
         return 1;
     }
 }
