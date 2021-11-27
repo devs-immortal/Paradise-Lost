@@ -46,7 +46,9 @@ public class FruitingLeavesBlock extends AetherLeavesBlock {
             if (!state.get(CAPPED)) {
                 if (random.nextInt(60) == 0 && growth < 2) {
                     if (growth == 1) {
-                        spawnPetalBurst(world, random, pos);
+                        if(world.isClient()){
+                            spawnPetalBurst(world, random, pos);
+                        }
                     }
                     state = state.with(GROWTH, growth + 1).with(CAPPED, random.nextDouble() < 0.45 || growth + 1 == 2);
                     world.playSound(null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 1.25F, 1.5F);
