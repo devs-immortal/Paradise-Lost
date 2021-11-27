@@ -32,11 +32,10 @@ body:
       description: What version of our mod were you running?
       options:
         - Dev
-        - b1.5.0 (1.17, Latest)
-        - b1.4.1 (1.16)
-        - b1.0.4 (1.16)
+        - 1.6.2 (Upcoming)
+        - 1.6.1 (Latest)
+        - 1.6.0
         - Older
-        - Unsure
     validations:
       required: true
   - type: input
