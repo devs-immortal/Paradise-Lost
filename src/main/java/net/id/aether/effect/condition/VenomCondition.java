@@ -1,9 +1,6 @@
 package net.id.aether.effect.condition;
 
-import net.id.aether.Aether;
-import net.id.aether.api.ConditionAPI;
 import net.id.aether.client.rendering.particle.AetherParticles;
-import net.id.aether.client.rendering.ui.AetherOverlayRegistrar;
 import net.id.aether.tag.AetherEntityTypeTags;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
@@ -17,14 +14,6 @@ public class VenomCondition extends Condition {
 
     public VenomCondition() {
         super(AetherEntityTypeTags.VENOM_IMMUNITY, 300, 300, 0.5F, 0.025F, 400, 0.05F);
-        AetherOverlayRegistrar.register(new AetherOverlayRegistrar.Overlay(
-                Aether.locate("textures/hud/condition/venom.png"),
-                player -> ConditionAPI.isVisible(this, player),
-                player -> {
-                    var manager = ConditionAPI.getConditionManager(player);
-                    return manager.getScaledSeverity(this) / 1.8F;
-                }
-        ));
     }
 
     @Override
