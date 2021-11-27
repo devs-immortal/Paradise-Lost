@@ -60,7 +60,6 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
         var luvModifier = 1.0;
 
         if(world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
-            Aether.LOG.error("Cum");
             if(value == 48 || (value >= 0 && value < 30))
                 luvModifier = 2;
             else if(value > 100 && value < 110)
