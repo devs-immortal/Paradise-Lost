@@ -23,7 +23,7 @@ public class WisteriaLeavesBlock extends AetherLeavesBlock{
         Queue<BlockPos> next = new LinkedList<>();
         next.add(pos);
 
-        while(!next.isEmpty()) {
+        while(!next.isEmpty() && next.size() < 1000) {
             var checkPos = next.poll();
             checkedBlocks.add(checkPos);
 
@@ -33,7 +33,8 @@ public class WisteriaLeavesBlock extends AetherLeavesBlock{
 
             for (Direction direction : DIRECTIONS) {
                 var nextPos = checkPos.offset(direction);
-                if(!checkedBlocks.contains(nextPos)) {
+                if(!checkedBlocks.contains(nextPos) &&
+                        world.getBlockState(nextPos).getBlock() instanceof WisteriaLeavesBlock) {
                     next.add(nextPos);
                 }
             }
