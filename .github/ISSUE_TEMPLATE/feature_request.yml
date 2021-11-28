@@ -42,7 +42,9 @@ body:
       options:
         - Dev
         - 1.6.1.2 (Latest)
-        - 1.6.x
+        - 1.6.1.1
+        - 1.6.1
+        - 1.6.0
         - Older
         - Unsure
     validations:
