@@ -62,7 +62,7 @@ public class RookEntity extends MobEntity {
             blinkTicks--;
         }
 
-        if(world.getTimeOfDay() < 13000) {
+        if(world.getTimeOfDay() % 24000 < 13000) {
             this.remove(RemovalReason.DISCARDED);
         }
 
