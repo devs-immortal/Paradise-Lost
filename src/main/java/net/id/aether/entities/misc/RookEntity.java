@@ -73,7 +73,7 @@ public class RookEntity extends MobEntity {
                     getLookControl().lookAt(player, 15, 15);
 
                     byte luv = LUV.getLUV(player).getValue();
-                    if(!player.isSpectator() && world.getLightLevel(LightType.BLOCK, player.getBlockPos()) < 7 && world.getTime() % 10 == 0 && (luv > 50 || luv < 0)) {
+                    if(!player.isSpectator() && world.getLightLevel(LightType.BLOCK, player.getBlockPos()) < 7 && world.isNight() && world.getTime() % 10 == 0 && (luv > 50 || luv < 0)) {
                         if(random.nextInt(luv < 0 ? 150 : 800) == 0) {
                             player.damage(AetherDamageSources.NIGHTMARE, 9);
                             for(int i = 0; i < 15 + random.nextInt(15); ++i) {
