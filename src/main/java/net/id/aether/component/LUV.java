@@ -54,7 +54,7 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
         var dayTime = world.getTimeOfDay();
 
         var rookCount = (long) world.getEntitiesByClass(RookEntity.class, Box.of(Vec3d.ofCenter(pos), 64, 64, 64), entity -> true).size();
-        var rookCap = (value == 48 || value == 100 || value >= 126) ? Integer.MAX_VALUE : 32;
+        var rookCap = (value == 48 || value == 100 || value >= 126) ? 64 : 16;
 
         var scaling = 0.5 + Math.sqrt(rookCount) / 2;
         var luvModifier = 1.0;
@@ -96,7 +96,7 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
                             }
                         }
 
-                        if(random.nextInt((int) (30000 * roofed * scaling / finalLuvModifier)) == 0) {
+                        if(random.nextInt((int) (30000 * roofed * scaling * finalLuvModifier)) == 0) {
                             var rook = new RookEntity(AetherEntityTypes.ROOK, world);
                             rook.setPos(blockPos.getX() + 0.5, blockPos.getY() + 0.1, blockPos.getZ() + 0.5);
                             world.spawnEntity(rook);
