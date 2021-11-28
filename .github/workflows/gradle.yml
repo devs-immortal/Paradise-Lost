@@ -23,9 +23,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          body_path: CHANGELOG.txt
+          body_path: CHANGELOG.md
           files: "./build/libs/**"
-          name: Aether Reborn - ${{ github.event.release.tag_name }}
       - name: Build Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
