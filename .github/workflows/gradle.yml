@@ -24,7 +24,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: CHANGELOG.txt
-          files: "artifacts/**"
+          files: "./build/libs/**"
           name: Aether Reborn - ${{ github.event.release.tag_name }}
       - name: Build Success
         uses: rjstone/discord-webhook-notify@v1
