@@ -72,22 +72,25 @@ public class RookEntity extends MobEntity {
                 .ifPresent(player -> {
                     getLookControl().lookAt(player, 15, 15);
 
-                    byte luv = LUV.getLUV(player).getValue();
-                    if(!player.isSpectator() && world.getLightLevel(LightType.BLOCK, player.getBlockPos()) < 7 && world.isNight() && world.getTime() % 10 == 0 && (luv > 50 || luv < 0)) {
-                        if(random.nextInt(luv < 0 ? 150 : 800) == 0) {
-                            player.damage(AetherDamageSources.NIGHTMARE, 9);
-                            for(int i = 0; i < 15 + random.nextInt(15); ++i) {
-                                double d = this.random.nextGaussian() * 0.02D;
-                                double e = this.random.nextGaussian() * 0.02D;
-                                double f = this.random.nextGaussian() * 0.02D;
-                                if(random.nextInt( 3) == 0) {
-                                    this.world.addParticle(ParticleTypes.LARGE_SMOKE, player.getParticleX(1.0D), player.getRandomBodyY(), player.getParticleZ(1.0D), d, e, f);
+                    if(player.distanceTo(this) < 14) {
+
+                        byte luv = LUV.getLUV(player).getValue();
+                        if(!player.isSpectator() && world.getLightLevel(LightType.BLOCK, player.getBlockPos()) < 7 && world.isNight() && world.getTime() % 10 == 0 && (luv > 50 || luv < 0)) {
+                            if(random.nextInt(luv < 0 ? 20 : 100) == 0) {
+                                player.damage(AetherDamageSources.NIGHTMARE, 9);
+                                for(int i = 0; i < 15 + random.nextInt(15); ++i) {
+                                    double d = this.random.nextGaussian() * 0.02D;
+                                    double e = this.random.nextGaussian() * 0.02D;
+                                    double f = this.random.nextGaussian() * 0.02D;
+                                    if(random.nextInt( 3) == 0) {
+                                        this.world.addParticle(ParticleTypes.LARGE_SMOKE, player.getParticleX(1.0D), player.getRandomBodyY(), player.getParticleZ(1.0D), d, e, f);
+                                    }
+                                    else {
+                                        this.world.addParticle(ParticleTypes.SMOKE, player.getParticleX(1.0D), player.getRandomBodyY(), player.getParticleZ(1.0D), d, e, f);
+                                    }
                                 }
-                                else {
-                                    this.world.addParticle(ParticleTypes.SMOKE, player.getParticleX(1.0D), player.getRandomBodyY(), player.getParticleZ(1.0D), d, e, f);
-                                }
+                                player.playSound(AetherSoundEvents.ENTITY_NIGHTMARE_HURT, 1, 0.85F + random.nextFloat() * 0.25F);
                             }
-                            player.playSound(AetherSoundEvents.ENTITY_NIGHTMARE_HURT, 1, 0.85F + random.nextFloat() * 0.25F);
                         }
                     }
                 });

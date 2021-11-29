@@ -56,7 +56,7 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
         var rookCount = (long) world.getEntitiesByClass(RookEntity.class, Box.of(Vec3d.ofCenter(pos), 64, 64, 64), entity -> true).size();
         var rookCap = (value == 48 || value == 100 || value >= 126) ? 64 : 16;
 
-        var scaling = 0.5 + Math.sqrt(rookCount) / 2;
+        var scaling = 0.5 + Math.sqrt(rookCount);
         var luvModifier = 1.0;
 
         if(world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
