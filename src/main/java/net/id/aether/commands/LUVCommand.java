@@ -8,7 +8,7 @@ import net.id.incubus_core.misc.WorthinessChecker;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -16,7 +16,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class LUVCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher){
-        dispatcher.register(literal("LUVdevel")
+        dispatcher.register(literal("LUV")
                 .requires((source)->source.hasPermissionLevel(2))
                 .then(literal("query")
                         .then(argument("target", EntityArgumentType.player())
@@ -34,16 +34,17 @@ public class LUVCommand {
     }
 
     public static int queryLUV(ServerCommandSource source, PlayerEntity target) {
-        source.sendFeedback(new LiteralText("LUV" + LUV.getLUV(target).getValue()), false);
+        source.sendFeedback(new TranslatableText("commands.the_aether.LUV.success.query", LUV.getLUV(target).getValue()), false);
         return 1;
     }
 
     public static int setLUV(ServerCommandSource source, PlayerEntity target, byte value) {
         if(WorthinessChecker.isPlayerWorthy(target.getUuid()) || AetherDevel.isDevel()){
             LUV.getLUV(target).setValue(value);
+            source.sendFeedback(new TranslatableText("commands.the_aether.LUV.success.set", target.getDisplayName(), LUV.getLUV(target).getValue()), false);
         }
         else {
-            source.sendError(new LiteralText("You have no right!"));
+            source.sendError(new TranslatableText("commands.the_aether.LUV.failure.set"));
         }
         return 1;
     }

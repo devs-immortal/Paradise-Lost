@@ -395,7 +395,7 @@
   "item.the_aether.neptune_helmet": "Neptune Helmet",
   "item.the_aether.neptune_leggings": "Neptune Leggings",
   "item.the_aether.nightmare_fuel": "Nightmare Fuel",
-  "item.the_aether.nightmare_fuel.tooltip": "warm to the touch",
+  "item.the_aether.nightmare_fuel.tooltip": "Warm to the touch",
   "item.the_aether.notch_hammer": "Hammer of Notch",
   "item.the_aether.obsidian_boots": "Obsidian Boots",
   "item.the_aether.obsidian_chestplate": "Obsidian Chestplate",
@@ -533,6 +533,9 @@
   "commands.the_aether.condition.success.clear" : "Successfully cleared condition(s)",
   "commands.the_aether.gravitate.failure" : "Couldn't float the block(s)",
   "commands.the_aether.gravitate.success" : "Successfully floated the block(s)",
+  "commands.the_aether.LUV.success.query" : "LUV%1$s",
+  "commands.the_aether.LUV.success.set" : "%1$s's LUV is now %2$s",
+  "commands.the_aether.LUV.failure.set" : "You have no right!",
 
   "info.the_aether.bloodstone.ambrosium": "Peer into the heart",
   "info.the_aether.bloodstone.zanite": "Peer into the mind",

@@ -1,7 +1,6 @@
 package net.id.aether.entities.misc;
 
 import net.id.aether.component.LUV;
-import net.id.aether.tag.AetherItemTags;
 import net.id.aether.util.AetherDamageSources;
 import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.block.BlockState;
@@ -17,7 +16,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -143,8 +141,7 @@ public class RookEntity extends MobEntity {
             if(weapon.isIn(RIGHTEOUS_WEAPONS)) {
                 amount /= 4;
                 success = true;
-            }
-            else if(weapon.isIn(SACRED_WEAPONS)) {
+            } else if(weapon.isIn(SACRED_WEAPONS)) {
                 success = true;
             }
         }
