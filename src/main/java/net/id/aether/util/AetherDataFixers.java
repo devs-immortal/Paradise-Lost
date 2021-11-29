@@ -32,6 +32,7 @@ public final class AetherDataFixers{
     
     ), BLOCKS);
     
+    @SafeVarargs
     private static <T> Map<T, T> createMap(T... values){
         if((values.length & 1) != 0){
             throw new IllegalArgumentException("Odd number of values");
