@@ -1,9 +1,6 @@
 package net.id.aether.blocks.natural;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CropBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.LivingEntity;
@@ -15,6 +12,8 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
@@ -104,6 +103,18 @@ public class TallCropBlock extends CropBlock {
 
     protected DoubleBlockHalf getHalf(BlockState state) {
         return state.get(HALF);
+    }
+
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        if (state.get(HALF) == DoubleBlockHalf.LOWER) {
+            if (state.get(AGE) <= 3) {
+                return super.getOutlineShape(state, world, pos, context);
+            } else {
+                return Block.createCuboidShape(0, 0, 0,16, 16, 16);
+            }
+        } else {
+            return super.getOutlineShape(this.withAge(state.get(AGE) - 4), world, pos, context);
+        }
     }
 
     // below code is (mostly) copied from TallPlantBlock

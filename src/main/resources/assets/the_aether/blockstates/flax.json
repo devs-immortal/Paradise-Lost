@@ -35,6 +35,21 @@
     },
     "age=7,half=upper": {
       "model": "the_aether:block/flax_top_3"
+    },
+
+
+
+    "age=0,half=upper": {
+      "model": "the_aether:block/flax_top_0"
+    },
+    "age=1,half=upper": {
+      "model": "the_aether:block/flax_top_0"
+    },
+    "age=2,half=upper": {
+      "model": "the_aether:block/flax_top_0"
+    },
+    "age=3,half=upper": {
+      "model": "the_aether:block/flax_top_0"
     }
   }
 }
