@@ -24,21 +24,6 @@
     "age=7,half=lower": {
       "model": "the_aether:block/flax_bottom_7"
     },
-    "age=4,half=upper": {
-      "model": "the_aether:block/flax_top_0"
-    },
-    "age=5,half=upper": {
-      "model": "the_aether:block/flax_top_1"
-    },
-    "age=6,half=upper": {
-      "model": "the_aether:block/flax_top_2"
-    },
-    "age=7,half=upper": {
-      "model": "the_aether:block/flax_top_3"
-    },
-
-
-
     "age=0,half=upper": {
       "model": "the_aether:block/flax_top_0"
     },
@@ -50,6 +35,18 @@
     },
     "age=3,half=upper": {
       "model": "the_aether:block/flax_top_0"
+    },
+    "age=4,half=upper": {
+      "model": "the_aether:block/flax_top_0"
+    },
+    "age=5,half=upper": {
+      "model": "the_aether:block/flax_top_1"
+    },
+    "age=6,half=upper": {
+      "model": "the_aether:block/flax_top_2"
+    },
+    "age=7,half=upper": {
+      "model": "the_aether:block/flax_top_3"
     }
   }
 }
