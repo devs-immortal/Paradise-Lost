@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropBlock;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -37,6 +38,13 @@ public class TallCropBlock extends CropBlock {
 
     @Override
     public void applyGrowth(World world, BlockPos pos, BlockState state) {
+        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
+            pos = pos.down();
+            state = world.getBlockState(pos);
+        }
+        if (!state.isOf(this)){
+            return;
+        }
         int i = this.getAge(state) + this.getGrowthAmount(world);
         int j = this.getMaxAge();
         if (i > j) {
@@ -44,9 +52,13 @@ public class TallCropBlock extends CropBlock {
         }
 
         world.setBlockState(pos, this.withAge(i), 2);
-        if (i > 3) {
-            world.setBlockState(pos.up(), this.withAge(i), 2);
+        if (i > 3 && canGrowUp(world, pos, state, i)) {
+            world.setBlockState(pos.up(), this.withAgeAndHalf(i, DoubleBlockHalf.UPPER), 2);
         }
+    }
+
+    private boolean canGrowUp(World world, BlockPos pos, BlockState state, int age) {
+        return world.getBlockState(pos.up()).isOf(this) || world.getBlockState(pos.up()).getMaterial().isReplaceable();
     }
 
     protected void tryGrow(BlockState state, ServerWorld world, BlockPos pos, Random random, float upperBound) {
@@ -55,13 +67,21 @@ public class TallCropBlock extends CropBlock {
             if (i < this.getMaxAge()) {
                 float f = getAvailableMoisture(this, world, pos);
                 if (random.nextInt((int) (upperBound / f) + 1) == 0) {
-                    world.setBlockState(pos, this.withAge(i + 1), 2);
                     if (i + 1 > 3) {
-                        world.setBlockState(pos.up(), this.withAgeAndHalf(i + 1, DoubleBlockHalf.UPPER), 2);
+                        if (world.getBlockState(pos.up()).isOf(this) || world.getBlockState(pos.up()).getMaterial().isReplaceable()) {
+                            world.setBlockState(pos, this.withAge(i + 1), 2);
+                            world.setBlockState(pos.up(), this.withAgeAndHalf(i + 1, DoubleBlockHalf.UPPER), 2);
+                        }
+                    } else {
+                        world.setBlockState(pos, this.withAge(i + 1), 2);
                     }
                 }
             }
         }
+    }
+
+    public BlockState withAge(int age) {
+        return this.withAgeAndHalf(age, DoubleBlockHalf.LOWER);
     }
 
     public BlockState withAgeAndHalf(int age, DoubleBlockHalf half) {
@@ -74,7 +94,8 @@ public class TallCropBlock extends CropBlock {
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         if (state.get(HALF) != DoubleBlockHalf.UPPER) {
-            return super.canPlaceAt(state, world, pos);
+            BlockPos blockPos = pos.down();
+            return this.canPlantOnTop(world.getBlockState(blockPos), world, blockPos);
         } else {
             BlockState blockState = world.getBlockState(pos.down());
             return blockState.isOf(this) && blockState.get(HALF) == DoubleBlockHalf.LOWER && blockState.get(AGE) > 3;
@@ -103,12 +124,17 @@ public class TallCropBlock extends CropBlock {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockPos blockPos = ctx.getBlockPos();
         World world = ctx.getWorld();
-        return blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos.up()).canReplace(ctx) ? super.getPlacementState(ctx) : null;
+        return blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos.up()).canReplace(ctx) ? this.withAgeAndHalf(0, DoubleBlockHalf.LOWER) : null;
     }
 
-    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        BlockPos blockPos = pos.up();
-        world.setBlockState(blockPos, withWaterloggedState(world, blockPos, this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER)), 3);
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
+            world.setBlockState(pos.down(), this.withAgeAndHalf(state.get(AGE), DoubleBlockHalf.LOWER), 3);
+        } else {
+            if (state.get(AGE) > 3) {
+                world.setBlockState(pos.up(), this.withAgeAndHalf(state.get(AGE), DoubleBlockHalf.UPPER), 3);
+            }
+        }
     }
 
     protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -126,9 +152,8 @@ public class TallCropBlock extends CropBlock {
 
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient) {
-            if (player.isCreative()) {
-                onBreakInCreative(world, pos, state, player);
-            } else {
+            onBreakInCreative(world, pos, state, player);
+            if (!player.isCreative()) {
                 dropStacks(state, world, pos, null, player, player.getMainHandStack());
             }
         }
@@ -136,4 +161,7 @@ public class TallCropBlock extends CropBlock {
         super.onBreak(world, pos, state, player);
     }
 
+    public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
+        super.afterBreak(world, player, pos, Blocks.AIR.getDefaultState(), blockEntity, stack);
+    }
 }

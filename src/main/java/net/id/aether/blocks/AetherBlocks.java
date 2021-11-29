@@ -19,6 +19,7 @@ import net.id.aether.blocks.natural.aercloud.GoldenAercloudBlock;
 import net.id.aether.blocks.natural.aercloud.PinkAercloudBlock;
 import net.id.aether.blocks.natural.crop.AmadrysCropBlock;
 import net.id.aether.blocks.natural.crop.BlueberryBushBlock;
+import net.id.aether.blocks.natural.crop.FlaxCropBlock;
 import net.id.aether.blocks.natural.crop.SwetrootCropBlock;
 import net.id.aether.blocks.natural.plant.*;
 import net.id.aether.blocks.natural.tree.*;
@@ -327,7 +328,7 @@ public class AetherBlocks {
     public static final WallClingingPlantBlock ROOTCAP = add("rootcap", new WallClingingPlantBlock(copy(BROWN_MUSHROOM), AetherBlockTags.FUNGI_CLINGABLES), cutoutRenderLayer);
 
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(shrub().mapColor(MapColor.PINK)), flammablePlant, cutoutRenderLayer);
-//    public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(shrub().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
+    public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(shrub().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
     public static final AetherHangingRootsBlock WILD_SWETROOT = add("wild_swetroot", new AetherHangingRootsBlock(shrub().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
     public static final SwetrootCropBlock SWETROOT = add("swetroot", new SwetrootCropBlock(shrub().mapColor(MapColor.BLUE)), flammablePlant, cutoutRenderLayer);
 

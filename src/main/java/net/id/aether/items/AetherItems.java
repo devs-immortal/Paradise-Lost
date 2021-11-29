@@ -216,7 +216,7 @@ public class AetherItems {
     public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(AetherFoodComponent.WHITE_APPLE)), compostable(0f));
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(AetherBlocks.AMADRYS, food(AetherFoodComponent.GENERIC_WORSE)), compostable30);
     public static final AliasedBlockItem SWETROOT = add("swetroot", new AliasedBlockItem(AetherBlocks.SWETROOT, food(AetherFoodComponent.GENERIC)), compostable30);
-//    public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(AetherBlocks.FLAX, food()), compostable30);
+    public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(AetherBlocks.FLAX, food()), compostable30);
     public static final Item BLUE_GUMMY_SWET = add("blue_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
     public static final Item GOLDEN_GUMMY_SWET = add("golden_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
     public static final ValkyrieMilkItem VALKYRIE_MILK = add("valkyrie_milk", new ValkyrieMilkItem(food(AetherFoodComponent.VALKYRIE_MILK, EPIC).maxCount(1)));
@@ -591,7 +591,7 @@ public class AetherItems {
 
     // Devel
 //    public static final PathTestingTool PATH_TESTING_TOOL = add("path_testing_tool", new PathTestingTool(new FabricItemSettings().maxCount(1)));
-    
+
     public static void init() {
         AetherRegistryQueues.ITEM.register();
     }
