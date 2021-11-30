@@ -40,10 +40,10 @@ public class DungeonSwitchBlockEntity extends BlockEntity implements GameEventLi
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
         if (linkedPos != null)
             nbt.putLong("linkedpos", linkedPos.asLong());
-        return super.writeNbt(nbt);
     }
 
     @Override

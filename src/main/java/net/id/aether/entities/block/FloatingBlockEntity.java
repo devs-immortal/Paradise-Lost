@@ -398,7 +398,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
                     if (this.blockEntityData != null && this.floatTile.hasBlockEntity()) {
                         BlockEntity blockEntity = this.world.getBlockEntity(blockPos);
                         if (blockEntity != null) {
-                            NbtCompound compoundTag = blockEntity.writeNbt(new NbtCompound());
+                            NbtCompound compoundTag = blockEntity.createNbt();
                             for (String keyName : this.blockEntityData.getKeys()) {
                                 NbtElement tag = this.blockEntityData.get(keyName);
                                 if (tag != null && !"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName)) {

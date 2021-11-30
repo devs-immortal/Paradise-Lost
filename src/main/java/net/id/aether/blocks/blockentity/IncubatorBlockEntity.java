@@ -50,9 +50,9 @@ public class IncubatorBlockEntity extends AetherBlockEntity {
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
         nbt.putInt("hatchTicks", hatchTicks);
-        return super.writeNbt(nbt);
     }
 
     @Override

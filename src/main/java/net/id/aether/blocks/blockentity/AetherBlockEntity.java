@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-// TODO: See https://github.com/FabricMC/fabric/discussions/1779#discussioncomment-1502791 to fix this class
 public abstract class AetherBlockEntity extends BlockEntity implements InventoryWrapper, SidedInventory {
 
     protected final DefaultedList<ItemStack> inventory;
@@ -55,26 +54,15 @@ public abstract class AetherBlockEntity extends BlockEntity implements Inventory
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
-        return super.writeNbt(nbt);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, inventory);
         super.readNbt(nbt);
-    }
-
-    @Override
-    public void fromClientTag(NbtCompound nbt) {
-        Inventories.writeNbt(nbt, inventory);
-    }
-
-    @Override
-    public NbtCompound toClientTag(NbtCompound nbt) {
         Inventories.readNbt(nbt, inventory);
-        return nbt;
     }
 
     public enum HopperStrategy {
