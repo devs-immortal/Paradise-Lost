@@ -1,12 +1,10 @@
 # Changes
 
-- Tweaked the spawn rate for nightly birds (again)
-- Branding updates
-- Modernized build scripts
-- Added a flax crop
-- Renamed LUVdevel command to LUV
+- Stopped rooks from spawning. They'll be adjusted for 1.7
+- Began work on datafixers behind-the-scenes
+- Swet jiggle physics have been slightly changed
 
 # Fixes
 
-- Fixed a bug that prevented Wisteria Leaves from not crashing the game
-- Added translatable text for the LUV command
+- Removed "setblock in far chunk" logging errors
+- Swets will now grow upon consuming any item that grows them, not just swet balls.
