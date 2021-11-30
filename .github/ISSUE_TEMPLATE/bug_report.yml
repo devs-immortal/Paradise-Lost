@@ -22,10 +22,10 @@ body:
       description: What version of our mod are you running?
       options:
         - Dev
-        - 1.6.1.2 (Latest)
-        - 1.6.1.1
-        - 1.6.1
-        - 1.6.0
+        - 1.6.3.1 (Latest)
+        - 1.6.3
+        - 1.6.2
+        - 1.6.x
         - Older
         - Unsure
     validations:
