@@ -82,6 +82,7 @@ public abstract class SwetEntity extends SlimeEntity {
     }
 
     public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        // todo: eventually change to not care about lightness, rather y height.
         return world.getDifficulty() != Difficulty.PEACEFUL && HostileEntity.isSpawnDark(world, pos, random) && canMobSpawn(type, world, spawnReason, pos, random);
     }
 
@@ -200,7 +201,7 @@ public abstract class SwetEntity extends SlimeEntity {
         }
         // Make items ride the swet. They often shake free with the jiggle physics
         if (entity instanceof ItemEntity item) {
-            if (item.getStack().getItem() == AetherItems.SWET_BALL) {
+            if (AetherItemTags.GROWS_SWETS.contains(item.getStack().getItem())) {
                 this.setSize(this.getSize() + 1, false);
                 item.remove(RemovalReason.KILLED);
                 return;
@@ -214,21 +215,23 @@ public abstract class SwetEntity extends SlimeEntity {
             if (massStuck < 1) {
                 massStuck = 1;
             }
-            // dampened oscillator (nonlinear restoring force)
-            Vec3d suckVelocity =
-                    this.getBoundingBox().getCenter().subtract(entity.getPos()) // entity displacement
-                            .multiply(MathHelper.clamp(0.25 + massStuck / 100, 0, 1)) // coefficient
+            // dampened oscillator (nonlinear restoring force): x'' = -μx' - kx
+            Vec3d center = this.getBoundingBox().getCenter().add(0,0.45F * this.getBoundingBox().getYLength() - (getSize() == 0 ? -0.25F : 1),0);
+            Vec3d suckVelocity = // acceleration (x'')
+                    center.subtract(entity.getPos()) // entity displacement (-x)
+                            .multiply(MathHelper.clamp(0.25 + massStuck / 100, 0, 1)) // coefficient (k)
                             .add(
-                                    this.getVelocity().subtract(entity.getVelocity()) // (difference in) velocity
-                                            .multiply(0.45 / massStuck / this.getSize()) // coefficient
+                                    this.getVelocity().subtract(entity.getVelocity()) // delta velocity (-x')
+                                            .multiply(0.45 / massStuck / this.getSize()) // coefficient (μ)
                             );
-            Vec3d newVelocity = entity.getVelocity().add(suckVelocity);
-            double velocityClamp = this.getSize() * 0.1 + 0.25;
-            entity.setVelocity(
-                    MathHelper.clamp(newVelocity.getX(), -velocityClamp, velocityClamp),
-                    Math.min(newVelocity.getY(), 0.25),
-                    MathHelper.clamp(newVelocity.getZ(), -velocityClamp, velocityClamp)
-            );
+
+            double maxSpeed = this.getSize() * 0.1 + 0.25;
+            if (suckVelocity.length() != 0) {
+                // clamp the suck velocity
+                suckVelocity = suckVelocity.multiply(Math.min(1, maxSpeed / suckVelocity.length()));
+            }
+
+            entity.setVelocity(entity.getVelocity().add(suckVelocity));
             entity.velocityDirty = true;
             entity.fallDistance = 0;
         }
