@@ -176,27 +176,27 @@ class ToastTriggerer {
                     RenderSystem.setShaderTexture(0, TEXTURE);
                     RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                     manager.drawTexture(matrices, 0, 0, 0, 0, this.getWidth(), this.getHeight());
-                    List<OrderedText> list = manager.getGame().textRenderer.wrapLines(lore.getTitleText(), 125);
+                    List<OrderedText> list = manager.getClient().textRenderer.wrapLines(lore.getTitleText(), 125);
                     int color = 0xFFFF00;
                     if(list.size() == 1){
-                        manager.getGame().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 7.0F, color | 0xFF000000);
-                        manager.getGame().textRenderer.draw(matrices, list.get(0), 30.0F, 18.0F, -1);
+                        manager.getClient().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 7.0F, color | 0xFF000000);
+                        manager.getClient().textRenderer.draw(matrices, list.get(0), 30.0F, 18.0F, -1);
                     }else{
                         int l;
                         if(startTime < 1500L){
                             l = MathHelper.floor(MathHelper.clamp((float)(1500L - startTime) / 300.0F, 0.0F, 1.0F) * 255.0F) << 24 | 67108864;
-                            manager.getGame().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 11.0F, color | l);
+                            manager.getClient().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 11.0F, color | l);
                         }else{
                             l = MathHelper.floor(MathHelper.clamp((float)(startTime - 1500L) / 300.0F, 0.0F, 1.0F) * 252.0F) << 24 | 67108864;
                             int var10000 = this.getHeight() / 2;
                             int var10001 = list.size();
-                            Objects.requireNonNull(manager.getGame().textRenderer);
+                            Objects.requireNonNull(manager.getClient().textRenderer);
                             int m = var10000 - var10001 * 9 / 2;
 
                             for(Iterator<OrderedText> var12 = list.iterator(); var12.hasNext(); m += 9){
                                 OrderedText orderedText = var12.next();
-                                manager.getGame().textRenderer.draw(matrices, orderedText, 30.0F, (float)m, 16777215 | l);
-                                Objects.requireNonNull(manager.getGame().textRenderer);
+                                manager.getClient().textRenderer.draw(matrices, orderedText, 30.0F, (float)m, 16777215 | l);
+                                Objects.requireNonNull(manager.getClient().textRenderer);
                             }
                         }
                     }
@@ -210,7 +210,7 @@ class ToastTriggerer {
                             }
 */
 
-                    manager.getGame().getItemRenderer().renderInGui(lore.stack(), 8, 8);
+                    manager.getClient().getItemRenderer().renderInGui(lore.stack(), 8, 8);
                     return startTime >= 5000L ? Visibility.HIDE : Visibility.SHOW;
                 }
             });
