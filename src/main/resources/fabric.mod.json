@@ -29,7 +29,7 @@
     "issues": "https://github.com/devs-immortal/The-Aether/issues"
   },
   "depends": {
-    "fabricloader": ">=0.12.6",
+    "fabricloader": ">=0.12.5",
     "minecraft": ">=1.17",
     "java": ">=16",
     "fabric-api-base": "*",
