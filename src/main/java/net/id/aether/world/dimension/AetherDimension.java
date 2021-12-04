@@ -24,8 +24,8 @@ public class AetherDimension {
     public static final RegistryKey<Biome> HIGHLANDS_THICKET = RegistryKey.of(Registry.BIOME_KEY, Aether.locate("aether_highlands_thicket"));
     public static final RegistryKey<Biome> WISTERIA_WOODS = RegistryKey.of(Registry.BIOME_KEY, Aether.locate("aether_wisteria_woods"));
 
-    public static final SurfaceBuilder<AetherSurfaceBuilderConfig> AETHER_SURFACE_BUILDER =
-            Registry.register(Registry.SURFACE_BUILDER, Aether.locate("surface_builder"), new AetherSurfaceBuilder());
+    public static final SurfaceBuilder AETHER_SURFACE_BUILDER =
+            /*Registry.register(Registry.SURFACE_BUILDER, Aether.locate("surface_builder"), */new AetherSurfaceBuilder();
 
     public static void init() {
         CustomPortalBuilder.beginPortal()
