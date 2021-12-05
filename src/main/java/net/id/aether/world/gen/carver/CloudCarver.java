@@ -11,10 +11,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.carver.CarverContext;
+import net.minecraft.world.gen.carver.CarvingMask;
 import net.minecraft.world.gen.chunk.AquiferSampler;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.BitSet;
 import java.util.Random;
 import java.util.function.Function;
 
@@ -30,7 +30,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     }
 
     @Override
-    public boolean carve(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, Random random, AquiferSampler sampler, ChunkPos pos, BitSet carvingMask) {
+    public boolean carve(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, Random random, AquiferSampler sampler, ChunkPos pos, CarvingMask carvingMask) {
         int mainChunkX = chunk.getPos().x;
         int mainChunkZ = chunk.getPos().z;
 
@@ -101,7 +101,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     //    this.carveRegion(chunk, config, random, seaLevel, mainChunkX, mainChunkZ, x + 1.0, y, z, scaledYaw, scaledPitch);
     //}
 
-    protected void carveTunnels(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, BitSet carvingMask, long seed, AquiferSampler sampler, int mainChunkX, int mainChunkZ, double x, double y, double z, float width, float yaw, float pitch, float yawToPitchRatio, int branchStartIndex, int branchCount, SkipPredicate skipPredicate) {
+    protected void carveTunnels(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, CarvingMask carvingMask, long seed, AquiferSampler sampler, int mainChunkX, int mainChunkZ, double x, double y, double z, float width, float yaw, float pitch, float yawToPitchRatio, int branchStartIndex, int branchCount, SkipPredicate skipPredicate) {
         // Get the position for starting the next branch, from 25% of the total length to 75% to ensure it doesn't branch near the ends
 
         Random random = new Random(seed);
@@ -154,7 +154,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
             // 25% of generation is skipped for a more random feeling
             if (random.nextInt(4) != 0) {
                 // Carve the region at this position
-                carveRegion(context, config, chunk, posToBiome, random.nextLong(), sampler, x, y, z, scaledYaw, scaledPitch, carvingMask, skipPredicate);
+                carveRegion(context, config, chunk, posToBiome, sampler, x, y, z, scaledYaw, scaledPitch, carvingMask, skipPredicate);
             }
         }
     }
@@ -171,7 +171,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     }
 
     @Override
-    protected boolean canCarveBlock(BlockState state, BlockState stateAbove) {
+    protected boolean canAlwaysCarveBlock(BlockState state) {
         return state.isAir();
     }
 }
