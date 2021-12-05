@@ -4,10 +4,7 @@ import net.id.aether.Aether;
 import net.id.aether.world.feature.AetherFeatures;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.structure.SimpleStructurePiece;
-import net.minecraft.structure.StructureManager;
-import net.minecraft.structure.StructurePiecesHolder;
-import net.minecraft.structure.StructurePlacementData;
+import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -36,30 +33,34 @@ public class SkyrootTowerGenerator {
             super(AetherFeatures.SKYROOT_TOWER_PIECE, 0, manager, template, template.toString(), createPlacementData(rotation), pos);
         }
 
-        public Piece(ServerWorld world, NbtCompound nbt) {
-            super(AetherFeatures.SKYROOT_TOWER_PIECE, nbt, world, (identifier) -> createPlacementData(BlockRotation.valueOf(nbt.getString("Rot"))));
+        public Piece(StructureManager manager, NbtCompound nbt) {
+            super(AetherFeatures.SKYROOT_TOWER_PIECE, nbt, manager, (identifier) -> createPlacementData(BlockRotation.valueOf(nbt.getString("Rot"))));
+        }
+
+        public Piece(StructureContext context, NbtCompound nbtCompound) {
+            this(context.structureManager(), nbtCompound);
         }
 
         private static StructurePlacementData createPlacementData(BlockRotation rotation) {
             return (new StructurePlacementData()).setRotation(rotation).setMirror(BlockMirror.NONE).addProcessor(BlockIgnoreStructureProcessor.IGNORE_AIR_AND_STRUCTURE_BLOCKS);
         }
 
-        protected void writeNbt(ServerWorld world, NbtCompound nbt) {
-            super.writeNbt(world, nbt);
+        protected void writeNbt(StructureContext ctx, NbtCompound nbt) {
+            super.writeNbt(ctx, nbt);
             nbt.putString("Rot", this.placementData.getRotation().name());
         }
 
         protected void handleMetadata(String metadata, BlockPos pos, ServerWorldAccess world, Random random, BlockBox boundingBox) {
         }
 
-        public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             //if (this.pos.getY() > 2) {
             if (!shifted) {
                 this.pos = this.pos.down(1);
                 shifted = true;
             }
             boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
-            return super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
+            super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
             //}
             //return false;
         }
