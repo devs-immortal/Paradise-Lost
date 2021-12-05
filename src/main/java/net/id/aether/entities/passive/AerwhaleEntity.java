@@ -222,7 +222,7 @@ public class AerwhaleEntity extends FlyingEntity {
 
             for (int i = 1; i < p_220673_2_; ++i) {
                 axisalignedbb = axisalignedbb.offset(vec);
-                if (!this.parentEntity.world.hasBlockCollision(this.parentEntity, axisalignedbb, (state, posx) -> state.shouldSuffocate(this.parentEntity.world, posx))) {
+                if (!this.parentEntity.world.canCollide(this.parentEntity, axisalignedbb)) {
                     return false;
                 }
             }
