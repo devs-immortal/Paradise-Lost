@@ -7,7 +7,6 @@
     "water_color": 9234175,
     "water_fog_color": 9234175
   },
-  "surface_builder": "the_aether:frozen_surface_builder",
   "carvers": {
     "air": [
       "cave",
