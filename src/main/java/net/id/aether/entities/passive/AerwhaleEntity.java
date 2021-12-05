@@ -53,7 +53,8 @@ public class AerwhaleEntity extends FlyingEntity {
     public boolean canSpawn(WorldAccess worldIn, SpawnReason spawnReasonIn) {
         BlockPos pos = new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getBoundingBox().minY), MathHelper.floor(this.getZ()));
 
-        return this.random.nextInt(65) == 0 && !worldIn.getBlockCollisions(this, this.getBoundingBox()).findAny().isPresent()
+        // TODO: Verify findAny().present() replacement for 1.18
+        return this.random.nextInt(65) == 0 && !worldIn.getBlockCollisions(this, this.getBoundingBox()).iterator().hasNext()
                 && !worldIn.containsFluid(this.getBoundingBox()) && worldIn.getLightLevel(pos) > 8
                 && super.canSpawn(worldIn, spawnReasonIn);
     }
