@@ -12,6 +12,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.carver.CarverContext;
+import net.minecraft.world.gen.carver.CarvingMask;
 import net.minecraft.world.gen.chunk.AquiferSampler;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +33,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     }
 
     @Override
-    public boolean carve(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, Random random, AquiferSampler sampler, ChunkPos pos, BitSet carvingMask) {
+    public boolean carve(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, Random random, AquiferSampler sampler, ChunkPos pos, CarvingMask carvingMask) {
 
         int mainChunkX = chunk.getPos().x;
         int mainChunkZ = chunk.getPos().z;
@@ -104,7 +105,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     //    this.carveRegion(chunk, config, random, seaLevel, mainChunkX, mainChunkZ, x + 1.0, y, z, scaledYaw, scaledPitch);
     //}
 
-    protected void carveTunnels(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, BitSet carvingMask, long seed, AquiferSampler sampler, int mainChunkX, int mainChunkZ, double x, double y, double z, float width, float yaw, float pitch, float yawToPitchRatio, int branchStartIndex, int branchCount, SkipPredicate skipPredicate) {
+    protected void carveTunnels(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, CarvingMask carvingMask, long seed, AquiferSampler sampler, int mainChunkX, int mainChunkZ, double x, double y, double z, float width, float yaw, float pitch, float yawToPitchRatio, int branchStartIndex, int branchCount, SkipPredicate skipPredicate) {
         // Get the position for starting the next branch, from 25% of the total length to 75% to ensure it doesn't branch near the ends
 
         Random random = new Random(seed);
@@ -162,7 +163,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
         }
     }
 
-    protected boolean carveRegion(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, long seed, AquiferSampler sampler, double x, double y, double z, double horizontalScale, double verticalScale, BitSet carvingMask, Carver.SkipPredicate skipPredicate) {
+    protected boolean carveRegion(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, long seed, AquiferSampler sampler, double x, double y, double z, double horizontalScale, double verticalScale, CarvingMask carvingMask, Carver.SkipPredicate skipPredicate) {
         ChunkPos chunkPos = chunk.getPos();
         int i = chunkPos.x;
         int j = chunkPos.z;
@@ -179,41 +180,42 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
             int p = Math.min(MathHelper.floor(y + verticalScale) + 1, chunk.getHeight());
             int q = Math.max(MathHelper.floor(z - horizontalScale) - l - 1, 0);
             int r = Math.min(MathHelper.floor(z + horizontalScale) - l, 15);
-            if (!config.aquifers && this.isRegionUncarvable(chunk, m, n, o, p, q, r)) {
+            /*if (!config.aquifers && this.isRegionUncarvable(chunk, m, n, o, p, q, r)) {
                 return false;
             } else {
-                boolean bl = false;
-                BlockPos.Mutable mutable = new BlockPos.Mutable();
-                BlockPos.Mutable mutable2 = new BlockPos.Mutable();
 
-                for (int s = m; s <= n; ++s) {
-                    int t = chunkPos.getOffsetX(s);
-                    double g = ((double) t + 0.5D - x) / horizontalScale;
+            }*/
+            boolean bl = false;
+            BlockPos.Mutable mutable = new BlockPos.Mutable();
+            BlockPos.Mutable mutable2 = new BlockPos.Mutable();
 
-                    for (int u = q; u <= r; ++u) {
-                        int v = chunkPos.getOffsetZ(u);
-                        double h = ((double) v + 0.5D - z) / horizontalScale;
-                        if (!(g * g + h * h >= 1.0D)) {
-                            MutableBoolean mutableBoolean = new MutableBoolean(false);
+            for (int s = m; s <= n; ++s) {
+                int t = chunkPos.getOffsetX(s);
+                double g = ((double) t + 0.5D - x) / horizontalScale;
 
-                            for (int w = p; w > o; --w) {
-                                double aa = ((double) w - 0.5D - y) / verticalScale;
-                                if (!skipPredicate.shouldSkip(context, g, aa, h, w)) {
-                                    int ab = w - context.getMinY();
-                                    int ac = s | u << 4 | ab << 8;
-                                    if (!carvingMask.get(ac)) {
-                                        carvingMask.set(ac);
-                                        mutable.set(t, w, v);
-                                        bl |= this.carveAtPoint(context, config, chunk, posToBiome, carvingMask, random, mutable, mutable2, sampler, mutableBoolean);
-                                    }
+                for (int u = q; u <= r; ++u) {
+                    int v = chunkPos.getOffsetZ(u);
+                    double h = ((double) v + 0.5D - z) / horizontalScale;
+                    if (!(g * g + h * h >= 1.0D)) {
+                        MutableBoolean mutableBoolean = new MutableBoolean(false);
+
+                        for (int w = p; w > o; --w) {
+                            double aa = ((double) w - 0.5D - y) / verticalScale;
+                            if (!skipPredicate.shouldSkip(context, g, aa, h, w)) {
+                                int ab = w - context.getMinY();
+                                int ac = s | u << 4 | ab << 8;
+                                if (!carvingMask.get(s, ac, u)) {
+                                    carvingMask.set(s, ac, u);
+                                    mutable.set(t, w, v);
+                                    bl |= this.carveAtPoint(context, config, chunk, posToBiome, carvingMask, mutable, mutable2, sampler, mutableBoolean);
                                 }
                             }
                         }
                     }
                 }
-
-                return bl;
             }
+
+            return bl;
         } else {
             return false;
         }
@@ -225,14 +227,14 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     }
 
     @Override
-    protected boolean carveAtPoint(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, BitSet carvingMask, Random random, BlockPos.Mutable pos, BlockPos.Mutable downPos, AquiferSampler sampler, MutableBoolean foundSurface) {
+    protected boolean carveAtPoint(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, Biome> posToBiome, CarvingMask carvingMask, BlockPos.Mutable pos, BlockPos.Mutable downPos, AquiferSampler sampler, MutableBoolean foundSurface) {
         BlockState blockState = chunk.getBlockState(pos);
-        BlockState blockState2 = chunk.getBlockState(downPos.set(pos, Direction.UP));
+        //BlockState blockState2 = chunk.getBlockState(downPos.set(pos, Direction.UP));
         if (blockState.isOf(Blocks.GRASS_BLOCK) || blockState.isOf(Blocks.MYCELIUM)) {
             foundSurface.setTrue();
         }
 
-        if (!this.canCarveBlock(blockState, blockState2)) {
+        if (!this.canAlwaysCarveBlock(blockState)) {
             return false;
         } else {
             BlockState blockState3 = this.getState(context, config, pos, sampler);
@@ -240,10 +242,18 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
                 return false;
             } else {
                 chunk.setBlockState(pos, blockState3, false);
+                if (sampler.needsFluidTick() && !blockState3.getFluidState().isEmpty()) {
+                    chunk.markBlockForPostProcessing(pos);
+                }
                 if (foundSurface.isTrue()) {
                     downPos.set(pos, Direction.DOWN);
                     if (chunk.getBlockState(downPos).isOf(Blocks.DIRT)) {
-                        chunk.setBlockState(downPos, posToBiome.apply(pos).getGenerationSettings().getSurfaceConfig().getTopMaterial(), false);
+                        context.applyMaterialRule(posToBiome, chunk, downPos, !blockState3.getFluidState().isEmpty()).ifPresent(state -> {
+                            chunk.setBlockState(downPos, state, false);
+                            if (!state.getFluidState().isEmpty()) {
+                                chunk.markBlockForPostProcessing(downPos);
+                            }
+                        });
                     }
                 }
 
@@ -258,7 +268,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     }
 
     @Override
-    protected boolean canCarveBlock(BlockState state, BlockState stateAbove) {
+    protected boolean canAlwaysCarveBlock(BlockState state) {
         return state.isAir();
     }
 }
