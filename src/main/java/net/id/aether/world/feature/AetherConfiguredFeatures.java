@@ -47,7 +47,7 @@ import static net.id.aether.blocks.AetherBlocks.*;
 // todo split into AetherConfiguredFeatures and AetherPlacedFeatures?
 // The way mojang does it is have every placed feature have a corresponding configured feature,
 // which they put in a separate class. We might need to do that too - or might not.
-@SuppressWarnings({"unchecked", "unused"})
+@SuppressWarnings("unused")
 public class AetherConfiguredFeatures extends ConfiguredFeatures {
 
     // todo all ".spreadHorizontally()"s have been commented out because they were shown to cause errors in 1.17.

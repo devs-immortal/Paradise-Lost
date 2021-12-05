@@ -47,7 +47,7 @@ public class AetherLakeFeature extends Feature<DynamicConfiguration>{
             blockPos = blockPos.down(4);
             
             // Bail if there is a village in the current chunk.
-            if(context.getWorld().getStructures(ChunkSectionPos.from(blockPos), StructureFeature.VILLAGE).findAny().isPresent()){
+            if(context.getWorld().getStructures(ChunkSectionPos.from(blockPos), StructureFeature.VILLAGE).stream().findAny().isPresent()){
                 return false;
             }else{
                 boolean[] waterMap = new boolean[2048];
