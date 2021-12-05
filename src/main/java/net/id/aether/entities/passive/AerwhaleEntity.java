@@ -23,6 +23,7 @@ import net.minecraft.world.WorldAccess;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.StreamSupport;
 
 public class AerwhaleEntity extends FlyingEntity {
     public float motionYaw, motionPitch;
@@ -53,8 +54,7 @@ public class AerwhaleEntity extends FlyingEntity {
     public boolean canSpawn(WorldAccess worldIn, SpawnReason spawnReasonIn) {
         BlockPos pos = new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getBoundingBox().minY), MathHelper.floor(this.getZ()));
 
-        // TODO: Verify findAny().present() replacement for 1.18
-        return this.random.nextInt(65) == 0 && !worldIn.getBlockCollisions(this, this.getBoundingBox()).iterator().hasNext()
+        return this.random.nextInt(65) == 0 && !StreamSupport.stream(worldIn.getBlockCollisions(this, this.getBoundingBox()).spliterator(), false).findAny().isPresent()
                 && !worldIn.containsFluid(this.getBoundingBox()) && worldIn.getLightLevel(pos) > 8
                 && super.canSpawn(worldIn, spawnReasonIn);
     }
