@@ -8,7 +8,6 @@
     "water_fog_color": 5826047,
     "grass_color_modifier": "dark_forest"
   },
-  "surface_builder": "the_aether:aether_surface_builder",
   "carvers": {
     "air": [
       "cave",

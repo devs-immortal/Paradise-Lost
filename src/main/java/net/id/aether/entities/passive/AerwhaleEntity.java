@@ -23,6 +23,7 @@ import net.minecraft.world.WorldAccess;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.StreamSupport;
 
 public class AerwhaleEntity extends FlyingEntity {
     public float motionYaw, motionPitch;
@@ -53,7 +54,7 @@ public class AerwhaleEntity extends FlyingEntity {
     public boolean canSpawn(WorldAccess worldIn, SpawnReason spawnReasonIn) {
         BlockPos pos = new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getBoundingBox().minY), MathHelper.floor(this.getZ()));
 
-        return this.random.nextInt(65) == 0 && !worldIn.getBlockCollisions(this, this.getBoundingBox()).findAny().isPresent()
+        return this.random.nextInt(65) == 0 && !StreamSupport.stream(worldIn.getBlockCollisions(this, this.getBoundingBox()).spliterator(), false).findAny().isPresent()
                 && !worldIn.containsFluid(this.getBoundingBox()) && worldIn.getLightLevel(pos) > 8
                 && super.canSpawn(worldIn, spawnReasonIn);
     }
@@ -222,7 +223,7 @@ public class AerwhaleEntity extends FlyingEntity {
 
             for (int i = 1; i < p_220673_2_; ++i) {
                 axisalignedbb = axisalignedbb.offset(vec);
-                if (!this.parentEntity.world.hasBlockCollision(this.parentEntity, axisalignedbb, (state, posx) -> state.shouldSuffocate(this.parentEntity.world, posx))) {
+                if (!this.parentEntity.world.canCollide(this.parentEntity, axisalignedbb)) {
                     return false;
                 }
             }

@@ -2,48 +2,30 @@ package net.id.aether.world.feature.structure;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.world.feature.generator.OrangeRuinGenerator;
-import net.minecraft.structure.StructureManager;
-import net.minecraft.structure.StructureStart;
+import net.minecraft.structure.StructureGeneratorFactory;
+import net.minecraft.structure.StructurePiecesCollector;
+import net.minecraft.structure.StructurePiecesGenerator;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 public class OrangeRuinFeature extends StructureFeature<DefaultFeatureConfig> {
     public OrangeRuinFeature(Codec<DefaultFeatureConfig> codec) {
-        super(codec);
+        super(codec, StructureGeneratorFactory.simple(StructureGeneratorFactory.checkForBiomeOnTop(Heightmap.Type.WORLD_SURFACE_WG), OrangeRuinFeature::addPieces));
     }
 
-    @Override
-    public StructureStartFactory<DefaultFeatureConfig> getStructureStartFactory() {
-        return OrangeRuinFeature.Start::new;
+    private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<DefaultFeatureConfig> context) {
+        int x = context.chunkPos().x * 16;
+        int z = context.chunkPos().z * 16;
+        int y = context.chunkGenerator().getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, context.world());
+        BlockPos newPos = new BlockPos(x, y, z);
+        OrangeRuinGenerator.addPieces(context.structureManager(), collector, context.random(), newPos);
     }
 
     @Override
     public GenerationStep.Feature getGenerationStep() {
         return GenerationStep.Feature.SURFACE_STRUCTURES;
-    }
-
-    public static class Start extends StructureStart<DefaultFeatureConfig> {
-
-        public Start(StructureFeature<DefaultFeatureConfig> feature, ChunkPos pos, int references, long seed) {
-            super(feature, pos, references, seed);
-        }
-
-        @Override
-        public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager manager, ChunkPos pos, Biome biome, DefaultFeatureConfig config, HeightLimitView world) {
-            int x = pos.x * 16;
-            int z = pos.z * 16;
-            int y = chunkGenerator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, world);
-            BlockPos newPos = new BlockPos(x, y, z);
-            OrangeRuinGenerator.addPieces(manager, this, random, newPos);
-            this.getBoundingBox();
-        }
     }
 }
