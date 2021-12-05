@@ -12,6 +12,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.tick.OrderedTick;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -101,7 +102,7 @@ public class GroundcoverFeature extends Feature<GroundcoverFeatureConfig> {
                 var state = config.states().getBlockState(random, placement);
 
                 world.setBlockState(placement, state, Block.NOTIFY_LISTENERS);
-                world.getBlockTickScheduler().schedule(placement, state.getBlock(), 0);
+                world.getBlockTickScheduler().scheduleTick(OrderedTick.create(state.getBlock(), placement));
             }
         });
         return centers;
