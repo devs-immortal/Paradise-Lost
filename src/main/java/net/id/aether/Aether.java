@@ -34,6 +34,7 @@ import net.id.aether.world.AetherGameRules;
 import net.id.aether.world.dimension.AetherDimension;
 import net.id.aether.world.feature.AetherConfiguredFeatures;
 import net.id.aether.world.feature.AetherFeatures;
+import net.id.aether.world.feature.AetherPlacedFeatures;
 import net.id.aether.world.feature.tree.AetherTreeHell;
 import net.id.aether.world.gen.carver.AetherCarvers;
 import net.minecraft.util.Identifier;
@@ -77,6 +78,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherTreeHell.init();
         AetherFeatures.init();
         AetherConfiguredFeatures.init();
+        AetherPlacedFeatures.init();
         AetherDimension.init();
         AetherStatusEffects.init();
         AetherBlocks.init();
