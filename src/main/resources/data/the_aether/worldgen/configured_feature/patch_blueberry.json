@@ -1,60 +1,35 @@
 {
   "config": {
+    "tries": 42,
+    "xz_spread": 5,
+    "y_spread": 5,
     "feature": {
-      "config": {
-        "feature": {
-          "config": {
-            "can_replace": false,
-            "project": true,
-            "need_water": false,
-            "xspread": 5,
-            "yspread": 5,
-            "zspread": 5,
-            "whitelist": [
-            ],
-            "blacklist": [],
-            "tries": 42,
-            "state_provider": {
-              "state": {
-                "Name": "the_aether:blueberry_bush",
-                "Properties": {
-                  "age": "3"
-                }
-              },
-              "type": "minecraft:simple_state_provider"
+      "feature": {
+        "config": {
+          "to_place": {
+            "state": {
+              "Name": "the_aether:blueberry_bush",
+              "Properties": {
+                "age": "3"
+              }
             },
-            "block_placer": {
-              "type": "minecraft:simple_block_placer"
-            }
-          },
-          "type": "minecraft:random_patch"
+            "type": "minecraft:simple_state_provider"
+          }
         },
-        "decorator": {
-          "config": {
-            "outer": {
-              "config": {},
-              "type": "minecraft:square"
-            },
-            "inner": {
-              "config": {
-                "heightmap": "MOTION_BLOCKING"
-              },
-              "type": "minecraft:heightmap_spread_double"
-            }
+        "type": "minecraft:simple_block"
+      },
+      "placement": [
+        {
+          "predicate": {
+            "blocks": [
+              "minecraft:air"
+            ],
+            "type": "minecraft:matching_blocks"
           },
-          "type": "minecraft:decorated"
+          "type": "minecraft:block_predicate_filter"
         }
-      },
-      "type": "minecraft:decorated"
-    },
-    "decorator": {
-      "config": {
-        "noise_level": -0.8,
-        "below_noise": 0,
-        "above_noise": 1
-      },
-      "type": "minecraft:count_noise"
+      ]
     }
   },
-  "type": "minecraft:decorated"
+  "type": "minecraft:random_patch"
 }

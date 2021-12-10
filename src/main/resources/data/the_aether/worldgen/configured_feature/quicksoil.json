@@ -1,16 +1,4 @@
 {
-  "type": "minecraft:decorated",
-  "config": {
-    "feature": {
-      "type": "the_aether:quicksoil",
-      "config": {
-      }
-    },
-    "decorator": {
-      "type": "minecraft:count",
-      "config": {
-        "count": 5
-      }
-    }
-  }
+  "config": {},
+  "type": "the_aether:quicksoil"
 }

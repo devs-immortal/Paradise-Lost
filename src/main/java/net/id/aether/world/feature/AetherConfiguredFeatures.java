@@ -55,7 +55,7 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
 
     public static final ConfiguredFeature<?, ?> AETHER_BUSH = register("aether_bush", Feature.RANDOM_PATCH.configure(Configs.AETHER_BUSH_CONFIG));
 
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> SKYROOT_TREE = register("skyroot_tree", Feature.TREE.configure(Configs.SKYROOT_CONFIG));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> SKYROOT_TREE = register("skyroot_tree", Feature.TREE.configure(Configs.SKYROOT_CONFIG)); // TODO REPLACED WITH JSON //
     public static final ConfiguredFeature<TreeFeatureConfig, ?> GOLDEN_OAK_TREE = register("golden_oak_tree", Feature.TREE.configure(Configs.GOLDEN_OAK_CONFIG));
     public static final ConfiguredFeature<TreeFeatureConfig, ?> CRYSTAL_TREE = register("crystal_tree", Feature.TREE.configure(Configs.CRYSTAL_TREE_CONFIG));
     public static final ConfiguredFeature<TreeFeatureConfig, ?> ORANGE_TREE = register("orange_tree", Feature.TREE.configure(Configs.ORANGE_TREE_SAPLING_CONFIG));
@@ -73,7 +73,7 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
 
     // Used in json
     public static final ConfiguredFeature<?, ?> GENERIC_BOULDER = register("generic_boulder", Configs.BOULDER.configure(new BoulderFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(MOSSY_HOLYSTONE.getDefaultState(), 1).add(COBBLED_HOLYSTONE.getDefaultState(), 3).build()), ConstantIntProvider.create(4), UniformIntProvider.create(3, 6))));
-    public static final ConfiguredFeature<?, ?> PLAINS_BOULDER = register("plains_boulder", Configs.BOULDER.configure(new BoulderFeatureConfig(SimpleBlockStateProviderAccessor.callInit(COBBLED_HOLYSTONE.getDefaultState()), ConstantIntProvider.create(3), UniformIntProvider.create(3, 5))));
+    public static final ConfiguredFeature<?, ?> PLAINS_BOULDER = register("plains_boulder", Configs.BOULDER.configure(new BoulderFeatureConfig(SimpleBlockStateProviderAccessor.callInit(COBBLED_HOLYSTONE.getDefaultState()), ConstantIntProvider.create(3), UniformIntProvider.create(3, 5)))); // TODO REPLACED WITH JSON //
     public static final ConfiguredFeature<?, ?> THICKET_BOULDER = register("thicket_boulder", Configs.BOULDER.configure(new BoulderFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(MOSSY_HOLYSTONE.getDefaultState(), 4).add(COBBLED_HOLYSTONE.getDefaultState(), 1).build()), ConstantIntProvider.create(6), UniformIntProvider.create(2, 5))));
     public static final ConfiguredFeature<?, ?> GOLDEN_BOULDER = register("golden_boulder", Configs.BOULDER.configure(new BoulderFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(GOLDEN_MOSSY_HOLYSTONE.getDefaultState(), 4).add(COBBLED_HOLYSTONE.getDefaultState(), 1).build()), ConstantIntProvider.create(4), UniformIntProvider.create(3, 5))));
 
@@ -144,8 +144,14 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
         public static final RandomPatchFeatureConfig RAINBOW_LEAVES_CONFIG = (new RandomPatchFeatureConfig(256, 10, 7, () -> RAINBOW_LEAVES_SINGLE_BLOCK))/*.cannotProject()*/;
 
         //Skyroots
-        public static final TreeFeatureConfig SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(SimpleBlockStateProviderAccessor.callInit(SKYROOT_LOG.getDefaultState()), new StraightTrunkPlacer(4, 2, 0), SimpleBlockStateProviderAccessor.callInit(SKYROOT_LEAVES.getDefaultState()),  new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
-        public static final TreeFeatureConfig FANCY_SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(SimpleBlockStateProviderAccessor.callInit(SKYROOT_LOG.getDefaultState()), new LargeOakTrunkPlacer(4, 11, 0), SimpleBlockStateProviderAccessor.callInit(SKYROOT_LEAVES.getDefaultState()),  new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().build();
+        public static final TreeFeatureConfig SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(SimpleBlockStateProviderAccessor.callInit(SKYROOT_LOG.getDefaultState()), new StraightTrunkPlacer(4, 2, 0), SimpleBlockStateProviderAccessor.callInit(SKYROOT_LEAVES.getDefaultState()), new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build(); // TODO REPLACED WITH JSON //
+        public static final TreeFeatureConfig FANCY_SKYROOT_CONFIG = (
+                new TreeFeatureConfig.Builder(
+                        SimpleBlockStateProviderAccessor.callInit(SKYROOT_LOG.getDefaultState()),
+                        new LargeOakTrunkPlacer(4, 11, 0),
+                        SimpleBlockStateProviderAccessor.callInit(SKYROOT_LEAVES.getDefaultState()),
+                        new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
+                        new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().build();
         public static final TreeFeatureConfig SKYROOT_SHRUB_CONFIG = (new TreeFeatureConfig.Builder(SimpleBlockStateProviderAccessor.callInit(SKYROOT_LOG.getDefaultState()), new StraightTrunkPlacer(1, 1, 0), SimpleBlockStateProviderAccessor.callInit(SKYROOT_LEAVES.getDefaultState()),  new BlobFoliagePlacer(UniformIntProvider.create(2, 4), ConstantIntProvider.create(0), 2), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
         public static final TreeFeatureConfig MOTTLED_SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_LOG.getDefaultState()), new OvergrownTrunkPlacer(5, 10, 0, SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 1 / 14F), SimpleBlockStateProviderAccessor.callInit(SKYROOT_LEAVES.getDefaultState()),  new BlobFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();
         public static final TreeFeatureConfig DWARF_MOTTLED_SKYROOT_CONFIG = (new TreeFeatureConfig.Builder(SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_LOG.getDefaultState()), new BendingTrunkPlacer(5, 3, 2, 4, UniformIntProvider.create(1, 3)), SimpleBlockStateProviderAccessor.callInit(SKYROOT_LEAVES.getDefaultState()),  new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 68), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();

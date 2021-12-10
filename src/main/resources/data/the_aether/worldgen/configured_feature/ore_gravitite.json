@@ -1,48 +1,18 @@
 {
   "config": {
-    "feature": {
-      "config": {
-        "feature": {
-          "config": {
-            "discard_chance_on_air_exposure": 0,
-            "targets": [
-              {
-                "target": {
-                  "predicate_type": "block_match",
-                  "block": "the_aether:holystone"
-                },
-                "state": {
-                  "Name": "the_aether:gravitite_ore"
-                }
-              }
-            ],
-            "size": 6
-          },
-          "type": "minecraft:ore"
+    "targets": [
+      {
+        "target": {
+          "block": "the_aether:holystone",
+          "predicate_type": "minecraft:block_match"
         },
-        "decorator": {
-          "config": {
-            "height": {
-              "type": "minecraft:uniform",
-              "min_inclusive": {
-                "type": "minecraft:constant",
-                "above_bottom":32
-              },
-              "max_inclusive": {
-                "type": "minecraft:constant",
-                "below_top":79
-              }
-            }
-          },
-          "type": "minecraft:range"
+        "state": {
+          "Name": "the_aether:gravitite_ore"
         }
-      },
-      "type": "minecraft:decorated"
-    },
-    "decorator": {
-      "config": {},
-      "type": "minecraft:square"
-    }
+      }
+    ],
+    "size": 6,
+    "discard_chance_on_air_exposure": 0.0
   },
-  "type": "minecraft:decorated"
+  "type": "minecraft:ore"
 }

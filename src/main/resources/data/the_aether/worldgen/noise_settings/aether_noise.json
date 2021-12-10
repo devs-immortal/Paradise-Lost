@@ -1,63 +1,14 @@
 {
-  "bedrock_roof_position": -2147483648,
-  "bedrock_floor_position": -2147483648,
-  "sea_level": 0,
-  "noise_caves_enabled": false,
-  "noodle_caves_enabled": false,
-  "deepslate_enabled": false,
   "ore_veins_enabled": false,
-  "aquifers_enabled": false,
-  "min_surface_level": 0,
+  "noodle_caves_enabled": false,
+  "legacy_random_source": false,
   "disable_mob_generation": false,
-  "structures": {
-    "structures": {
-      "the_aether:well": {
-        "spacing": 32,
-        "separation": 8,
-        "salt": 42069
-      },
-      "the_aether:skyroot_tower": {
-        "spacing": 48,
-        "separation": 10,
-        "salt": 123123
-      }
-    }
-  },
-  "default_block": {
-    "Name": "the_aether:holystone"
-  },
+  "aquifers_enabled": false,
+  "noise_caves_enabled": false,
   "default_fluid": {
     "Name": "minecraft:water",
     "Properties": {
       "level": "8"
-    }
-  },
-  "noise": {
-    "min_y": 0,
-    "height": 128,
-    "size_horizontal": 2,
-    "size_vertical": 1,
-    "density_factor": 0,
-    "density_offset": 0,
-    "simplex_surface_noise": false,
-    "random_density_offset": false,
-    "island_noise_override": false,
-    "amplified": false,
-    "sampling": {
-      "xz_scale": 1.8,
-      "xz_factor": 60,
-      "y_scale": 1.0,
-      "y_factor": 90
-    },
-    "top_slide": {
-      "target": -16,
-      "size": 20,
-      "offset": 4
-    },
-    "bottom_slide": {
-      "target": -20,
-      "size": 8,
-      "offset": 0
     }
   },
   "surface_rule": {
@@ -252,6 +203,51 @@
         }
       }
     ]
+  },
+  "sea_level": 0,
+  "structures": {
+    "structures": {
+      "the_aether:well": {
+        "spacing": 32,
+        "separation": 8,
+        "salt": 42069
+      },
+      "the_aether:skyroot_tower": {
+        "spacing": 48,
+        "separation": 10,
+        "salt": 123123
+      }
+    }
+  },
+  "noise": {
+    "terrain_shaper": {
+      "offset": 0.0,
+      "factor": 1.0,
+      "jaggedness": 0.0
+    },
+    "size_horizontal": 2,
+    "size_vertical": 1,
+    "island_noise_override": true,
+    "sampling": {
+      "xz_scale": 1.8,
+      "y_scale": 1.0,
+      "xz_factor": 60.0,
+      "y_factor": 90.0
+    },
+    "top_slide": {
+      "target": -16,
+      "size": 64,
+      "offset": -56
+    },
+    "bottom_slide": {
+      "target": -20,
+      "size": 8,
+      "offset": 5
+    },
+    "min_y": 0,
+    "height": 128
+  },
+  "default_block": {
+    "Name": "the_aether:holystone"
   }
-  
 }

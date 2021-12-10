@@ -1,0 +1,27 @@
+{
+  "feature": "the_aether:ore_zanite",
+  "placement": [
+    {
+      "count": 16,
+      "type": "minecraft:count"
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "height": {
+        "min_inclusive": {
+          "above_bottom": 0
+        },
+        "max_inclusive": {
+          "above_bottom": 127
+        },
+        "type": "minecraft:trapezoid"
+      },
+      "type": "minecraft:height_range"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

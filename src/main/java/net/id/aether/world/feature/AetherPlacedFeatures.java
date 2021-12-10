@@ -90,7 +90,7 @@ public class AetherPlacedFeatures extends PlacedFeatures {
 
     // Used in json
     public static final PlacedFeature GENERIC_BOULDER = register("generic_boulder", AetherConfiguredFeatures.GENERIC_BOULDER.withPlacement(new ChancePlacementModifier(ConstantIntProvider.create(15)), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1))));
-    public static final PlacedFeature PLAINS_BOULDER = register("plains_boulder", AetherConfiguredFeatures.PLAINS_BOULDER.withPlacement(new ChancePlacementModifier(ConstantIntProvider.create(8)), CountMultilayerPlacementModifier.of(1)));
+    public static final PlacedFeature PLAINS_BOULDER = register("plains_boulder", AetherConfiguredFeatures.PLAINS_BOULDER.withPlacement(new ChancePlacementModifier(ConstantIntProvider.create(8)), CountMultilayerPlacementModifier.of(1))); // TODO REPLACED WITH JSON //
     public static final PlacedFeature THICKET_BOULDER = register("thicket_boulder", AetherConfiguredFeatures.THICKET_BOULDER.withPlacement(new ChancePlacementModifier(ConstantIntProvider.create(2)), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 2))));
     public static final PlacedFeature GOLDEN_BOULDER = register("golden_boulder", AetherConfiguredFeatures.GOLDEN_BOULDER.withPlacement(new ChancePlacementModifier(ConstantIntProvider.create(30)), CountMultilayerPlacementModifier.of(1)));
 

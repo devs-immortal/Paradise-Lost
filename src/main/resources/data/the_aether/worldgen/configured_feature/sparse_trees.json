@@ -1,0 +1,12 @@
+{
+  "config": {
+    "features": [
+      {
+        "feature": "the_aether:fancy_skyroot_tree",
+        "chance": 0.1
+      }
+    ],
+    "default": "the_aether:skyroot_tree"
+  },
+  "type": "minecraft:random_selector"
+}

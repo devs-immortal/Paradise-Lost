@@ -1,57 +1,18 @@
 {
   "config": {
-    "feature": {
-      "config": {
-        "feature": {
-          "config": {
-            "feature": {
-              "config": {
-                "discard_chance_on_air_exposure": 0,
-                "targets": [
-                  {
-                    "target": {
-                      "predicate_type": "block_match",
-                      "block": "the_aether:holystone"
-                    },
-                    "state": {
-                      "Name": "the_aether:ambrosium_ore"
-                    }
-                  }
-                ],
-                "size": 14
-              },
-              "type": "minecraft:ore"
-            },
-            "decorator": {
-              "config": {
-                "height": {
-                  "min_inclusive": {
-                    "above_bottom": 0
-                  },
-                  "max_inclusive": {
-                    "absolute": 127
-                  },
-                  "type": "minecraft:uniform"
-                }
-              },
-              "type": "minecraft:range"
-            }
-          },
-          "type": "minecraft:decorated"
+    "targets": [
+      {
+        "target": {
+          "block": "the_aether:holystone",
+          "predicate_type": "minecraft:block_match"
         },
-        "decorator": {
-          "config": {},
-          "type": "minecraft:square"
+        "state": {
+          "Name": "the_aether:ambrosium_ore"
         }
-      },
-      "type": "minecraft:decorated"
-    },
-    "decorator": {
-      "config": {
-        "count": 20
-      },
-      "type": "minecraft:count"
-    }
+      }
+    ],
+    "size": 14,
+    "discard_chance_on_air_exposure": 0.0
   },
-  "type": "minecraft:decorated"
+  "type": "minecraft:ore"
 }
