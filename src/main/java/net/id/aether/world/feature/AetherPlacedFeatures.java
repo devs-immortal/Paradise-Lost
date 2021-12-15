@@ -165,6 +165,13 @@ public class AetherPlacedFeatures {
 
         public static final PlacedFeature AETHER_BUSH_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AetherBlocks.AETHER_BUSH.getDefaultState()))).withPlacement();
         public static final RandomPatchFeatureConfig AETHER_BUSH_CONFIG = (new RandomPatchFeatureConfig(128, 16, 7, () -> AETHER_BUSH_SINGLE_BLOCK));
+        public static final RandomPatchFeatureConfig AETHER_DENSE_BUSH_CONFIG = new RandomPatchFeatureConfig(16, 7, 3, () -> AETHER_BUSH_SINGLE_BLOCK);
+
+        public static final PlacedFeature AETHER_GRASS_PLANT_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AETHER_GRASS.getDefaultState()))).withPlacement();
+        public static final RandomPatchFeatureConfig AETHER_GRASS_BUSH_CONFIG = new RandomPatchFeatureConfig(32, 7, 3, () -> AETHER_GRASS_PLANT_SINGLE_BLOCK);
+
+        public static final PlacedFeature AETHER_TALL_GRASS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AETHER_TALL_GRASS.getDefaultState()))).withPlacement();
+        public static final RandomPatchFeatureConfig AETHER_TALL_GRASS_BUSH_CONFIG = new RandomPatchFeatureConfig(32, 7, 3, () -> AETHER_TALL_GRASS_SINGLE_BLOCK);
 
         public static final PlacedFeature FALLEN_LEAVES_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(SKYROOT_LEAF_PILE.getDefaultState(), 8).add(SKYROOT_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 1)))).withPlacement();
         public static final RandomPatchFeatureConfig FALLEN_LEAVES_CONFIG = (new RandomPatchFeatureConfig(96, 10, 7, () -> FALLEN_LEAVES_SINGLE_BLOCK))/*.cannotProject()*/;
