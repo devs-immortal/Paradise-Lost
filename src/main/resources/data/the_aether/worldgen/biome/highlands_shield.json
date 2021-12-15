@@ -24,42 +24,117 @@
   "features": [
     [],
     [
-      "the_aether:shield_pond",
-      "the_aether:lake_water",
-      "the_aether:dense_water"
+      {
+        "feature": "the_aether:shield_pond",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:lake_water",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:dense_water",
+        "placement": []
+      }
     ],
     [
-      "the_aether:quicksoil",
-      "the_aether:generic_boulder"
+      {
+        "feature": "the_aether:quicksoil",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:generic_boulder",
+        "placement": []
+      }
     ],
     [],
     [],
     [
-      "the_aether:shield_stone"
+      {
+        "feature": "the_aether:shield_stone",
+        "placement": []
+      }
     ],
     [
-      "the_aether:ore_ambrosium",
-      "the_aether:ore_gravitite",
-      "the_aether:ore_zanite"
+      {
+        "feature": "the_aether:ore_ambrosium",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_gravitite",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_zanite",
+        "placement": []
+      }
     ],
     [],
     [
-      "the_aether:shield_stumps",
-      "the_aether:shield_hollow_stumps",
-      "the_aether:mottled_fallen_log",
-      "the_aether:mottled_hollow_fallen_log",
-      "the_aether:aether_flowers",
-      "the_aether:shield_flax",
-      "the_aether:shield_nettles",
-      "the_aether:shield_foliage",
-      "the_aether:aether_grass",
-      "the_aether:aether_tall_grass",
-      "the_aether:water_spring",
-      "the_aether:shield_trees",
-      "the_aether:dense_shield_trees",
-      "the_aether:shield_rocks",
-      "the_aether:shield_fallen_leaves",
-      "the_aether:flutegrass"
+      {
+        "feature": "the_aether:shield_stumps",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:shield_hollow_stumps",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:mottled_fallen_log",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:mottled_hollow_fallen_log",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_flowers",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:shield_flax",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:shield_nettles",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:shield_foliage",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_tall_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:water_spring",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:shield_trees",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:dense_shield_trees",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:shield_rocks",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:shield_fallen_leaves",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:flutegrass",
+        "placement": []
+      }
     ],
     []
   ],

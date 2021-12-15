@@ -24,35 +24,83 @@
   "features": [
     [],
     [
-      "the_aether:lake_water",
-      "the_aether:dense_water"
+      {
+        "feature": "the_aether:lake_water",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:dense_water",
+        "placement": []
+      }
     ],
     [
-      "the_aether:quicksoil"
+      {
+        "feature": "the_aether:quicksoil",
+        "placement": []
+      }
     ],
     [],
     [],
     [],
     [
-      "the_aether:ore_ambrosium",
-      "the_aether:ore_gravitite",
-      "the_aether:ore_zanite"
+      {
+        "feature": "the_aether:ore_ambrosium",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_gravitite",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_zanite",
+        "placement": []
+      }
     ],
     [
     ],
     [
-      "the_aether:rainbow_malt_sprigs",
-      "the_aether:aether_flowers",
-      "the_aether:aether_grass",
-      "the_aether:aether_fern",
-      "the_aether:fallen_rose_leaves",
-      "the_aether:fallen_lavender_leaves",
-      "the_aether:aether_bush",
-      "the_aether:patch_blueberry",
-      "the_aether:wisteria_woods_trees"
+      {
+        "feature": "the_aether:rainbow_malt_sprigs",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_flowers",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_fern",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:fallen_rose_leaves",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:fallen_lavender_leaves",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_bush",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:patch_blueberry",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:wisteria_woods_trees",
+        "placement": []
+      }
     ],
     [
-      "the_aether:crystal_tree_island_decorated"
+      {
+        "feature": "the_aether:crystal_tree_island_decorated",
+        "placement": []
+      }
     ]
   ],
   "starts": [

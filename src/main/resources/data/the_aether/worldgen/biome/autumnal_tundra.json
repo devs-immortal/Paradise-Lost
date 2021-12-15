@@ -24,33 +24,78 @@
   "features": [
     [],
     [
-      "the_aether:lake_water",
-      "the_aether:dense_water",
-      "the_aether:tundra_pond",
-      "the_aether:tundra_snow"
+      {
+        "feature": "the_aether:lake_water",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:dense_water",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:tundra_pond",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:tundra_snow",
+        "placement": []
+      }
     ],
     [
-      "the_aether:quicksoil",
-      "the_aether:generic_boulder"
+      {
+        "feature": "the_aether:quicksoil",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:generic_boulder",
+        "placement": []
+      }
     ],
     [],
     [],
     [],
     [
-      "the_aether:ore_ambrosium",
-      "the_aether:ore_gravitite",
-      "the_aether:ore_zanite"
+      {
+        "feature": "the_aether:ore_ambrosium",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_gravitite",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_zanite",
+        "placement": []
+      }
     ],
     [],
     [
-      "the_aether:tundra_spires",
-      "the_aether:tundra_foliage",
-      "the_aether:water_spring",
-      "the_aether:mixed_trees",
-      "the_aether:flutegrass"
+      {
+        "feature": "the_aether:tundra_spires",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:tundra_foliage",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:water_spring",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:mixed_trees",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:flutegrass",
+        "placement": []
+      }
     ],
     [
-      "freeze_top_layer"
+      {
+        "feature": "freeze_top_layer",
+        "placement": []
+      }
     ]
   ],
   "starts": [

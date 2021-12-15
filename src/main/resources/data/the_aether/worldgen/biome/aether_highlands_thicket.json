@@ -25,40 +25,103 @@
   "features": [
     [],
     [
-      "the_aether:lake_water",
-      "the_aether:dense_water"
+      {
+        "feature": "the_aether:lake_water",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:dense_water",
+        "placement": []
+      }
     ],
     [
-      "the_aether:thicket_boulder",
-      "the_aether:golden_boulder"
+      {
+        "feature": "the_aether:thicket_boulder",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:golden_boulder",
+        "placement": []
+      }
     ],
     [],
     [],
     [
-      "the_aether:thicket_liverwort"
+      {
+        "feature": "the_aether:thicket_liverwort",
+        "placement": []
+      }
     ],
     [
-      "the_aether:ore_ambrosium",
-      "the_aether:ore_gravitite",
-      "the_aether:ore_zanite"
+      {
+        "feature": "the_aether:ore_ambrosium",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_gravitite",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_zanite",
+        "placement": []
+      }
     ],
     [],
     [
-      "the_aether:thicket_shamrock",
-      "the_aether:thicket_liverwort_carpet",
-      "the_aether:thicket_fallen_log",
-      "the_aether:aether_flowers",
-      "the_aether:aether_grass",
-      "the_aether:fallen_leaves",
-      "the_aether:aether_tall_grass",
-      "the_aether:water_spring",
-      "the_aether:aether_dense_bush",
-      "the_aether:aether_dense_fern",
-      "the_aether:thicket_trees",
-      "the_aether:sparse_trees"
+      {
+        "feature": "the_aether:thicket_shamrock",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:thicket_liverwort_carpet",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:thicket_fallen_log",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_flowers",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:fallen_leaves",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_tall_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:water_spring",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_dense_bush",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_dense_fern",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:thicket_trees",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:sparse_trees",
+        "placement": []
+      }
     ],
     [
-      "the_aether:crystal_tree_island_decorated"
+      {
+        "feature": "the_aether:crystal_tree_island_decorated",
+        "placement": []
+      }
     ]
   ],
   "starts": [

@@ -24,39 +24,99 @@
   "features": [
     [],
     [
-      "the_aether:lake_water",
-      "the_aether:dense_water"
+      {
+        "feature": "the_aether:lake_water",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:dense_water",
+        "placement": []
+      }
     ],
     [
-      "the_aether:quicksoil"
+      {
+        "feature": "the_aether:quicksoil",
+        "placement": []
+      }
     ],
     [],
     [],
     [],
     [
-      "the_aether:ore_ambrosium",
-      "the_aether:ore_gravitite",
-      "the_aether:ore_zanite"
+      {
+        "feature": "the_aether:ore_ambrosium",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_gravitite",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_zanite",
+        "placement": []
+      }
     ],
     [
     ],
     [
-      "the_aether:forest_grass_patch",
-      "the_aether:forest_grass_patch_small",
-      "the_aether:forest_mossy_cobbled_holystone_patch",
-      "the_aether:aether_flowers",
-      "the_aether:aether_tall_grass",
-      "the_aether:tundra_foliage",
-      "the_aether:aether_bush",
-      "the_aether:patch_blueberry",
-      "the_aether:scattered_trees",
-      "the_aether:water_spring",
-      "the_aether:aether_fern",
-      "the_aether:alt_fallen_leaves",
-      "the_aether:flutegrass"
+      {
+        "feature": "the_aether:forest_grass_patch",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:forest_grass_patch_small",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:forest_mossy_cobbled_holystone_patch",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_flowers",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_tall_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:tundra_foliage",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_bush",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:patch_blueberry",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:scattered_trees",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:water_spring",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_fern",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:alt_fallen_leaves",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:flutegrass",
+        "placement": []
+      }
     ],
     [
-      "the_aether:crystal_tree_island_decorated"
+      {
+        "feature": "the_aether:crystal_tree_island_decorated",
+        "placement": []
+      }
     ]
   ],
   "starts": [

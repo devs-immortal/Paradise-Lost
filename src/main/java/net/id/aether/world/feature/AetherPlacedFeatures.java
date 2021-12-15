@@ -21,6 +21,7 @@ import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
@@ -40,10 +41,11 @@ import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import java.util.List;
 import java.util.OptionalInt;
 
+import static net.id.aether.Aether.locate;
 import static net.id.aether.blocks.AetherBlocks.*;
 
 @SuppressWarnings("unused")
-public class AetherPlacedFeatures extends PlacedFeatures {
+public class AetherPlacedFeatures {
 
     // todo all ".spreadHorizontally()"s have been commented out because they were shown to cause errors in 1.17.
     // if this is not the case anymore, add them back in (however that is done).
@@ -144,9 +146,12 @@ public class AetherPlacedFeatures extends PlacedFeatures {
 
     public static final PlacedFeature TUNDRA_PONDS = register("tundra_pond", AetherConfiguredFeatures.TUNDRA_PONDS.withPlacement(CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1))));
     public static final PlacedFeature TUNDRA_SNOW = register("tundra_snow", AetherConfiguredFeatures.TUNDRA_SNOW.withPlacement(CountMultilayerPlacementModifier.of(2), CountPlacementModifier.of(UniformIntProvider.create(0, 2))));
-
-    public static void init() {
+    
+    private static PlacedFeature register(String id, PlacedFeature feature) {
+        return Registry.register(BuiltinRegistries.PLACED_FEATURE, locate(id), feature);
     }
+    
+    public static void init() {}
 
     public static class Configs {
 

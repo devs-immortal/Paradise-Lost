@@ -37,6 +37,7 @@ import net.id.aether.world.feature.AetherFeatures;
 import net.id.aether.world.feature.AetherPlacedFeatures;
 import net.id.aether.world.feature.tree.AetherTreeHell;
 import net.id.aether.world.gen.carver.AetherCarvers;
+import net.id.aether.world.gen.decorator.AetherDecorators;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -94,6 +95,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         MoaRaces.init();
         AetherScreens.init();
         AetherLore.init();
+        AetherDecorators.init();
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.init();
         }

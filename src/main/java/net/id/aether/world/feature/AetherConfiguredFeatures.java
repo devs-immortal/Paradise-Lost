@@ -1,16 +1,11 @@
 package net.id.aether.world.feature;
 
-import com.google.common.collect.ImmutableList;
-import net.id.aether.Aether;
-import net.id.aether.blocks.AetherBlocks;
+import java.util.List;
+import java.util.OptionalInt;
 import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
 import net.id.aether.world.IcestoneSpireFeature;
-import net.id.aether.world.feature.config.BoulderFeatureConfig;
-import net.id.aether.world.feature.config.GroundcoverFeatureConfig;
-import net.id.aether.world.feature.config.LongFeatureConfig;
-import net.id.aether.world.feature.config.ProjectedOrganicCoverConfig;
-import net.id.aether.world.feature.decorators.ChancePlacementModifier;
+import net.id.aether.world.feature.config.*;
 import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
@@ -24,29 +19,25 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.blockpredicate.BlockPredicate;
-import net.minecraft.world.gen.decorator.*;
+import net.minecraft.world.gen.decorator.HeightRangePlacementModifier;
+import net.minecraft.world.gen.decorator.PlacementModifier;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
-import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
-import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
-import net.minecraft.world.gen.foliage.RandomSpreadFoliagePlacer;
-import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
-import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.foliage.*;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.trunk.BendingTrunkPlacer;
 import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
-import java.util.List;
-import java.util.OptionalInt;
-
+import static net.id.aether.Aether.locate;
 import static net.id.aether.blocks.AetherBlocks.*;
+import static net.id.aether.world.feature.AetherPlacedFeatures.Configs.AETHER_BUSH_SINGLE_BLOCK;
+import static net.id.aether.world.feature.AetherPlacedFeatures.Configs.FALLEN_LEAVES_SINGLE_BLOCK;
+import static net.id.aether.world.feature.AetherPlacedFeatures.Configs.RAINBOW_LEAVES_SINGLE_BLOCK;
 import static net.id.aether.world.feature.AetherPlacedFeatures.*;
-import static net.id.aether.world.feature.AetherPlacedFeatures.Configs.*;
 
 @SuppressWarnings("unused")
-public class AetherConfiguredFeatures extends ConfiguredFeatures {
+public class AetherConfiguredFeatures {
 
     // todo all ".spreadHorizontally()"s have been commented out because they were shown to cause errors in 1.17.
     // if this is not the case anymore, add them back in (however that is done).
@@ -123,7 +114,11 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> TUNDRA_SNOW = register("tundra_snow", Configs.AETHER_DELTA_FEATURE.configure(new DeltaFeatureConfig(Blocks.POWDER_SNOW.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), UniformIntProvider.create(3, 8), UniformIntProvider.create(0, 1))));
 
     public static final ConfiguredFeature<?, ?> FREEZE_AETHER_TOP_LAYER = register("freeze_aether_top_layer", Configs.FREEZE_AETHER_TOP_LAYER_FEATURE_FEATURE.configure(FeatureConfig.DEFAULT));
-
+    
+    public static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String id, ConfiguredFeature<FC, ?> configuredFeature) {
+        return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, locate(id), configuredFeature);
+    }
+    
     public static void init() {
     }
 
@@ -191,7 +186,7 @@ public class AetherConfiguredFeatures extends ConfiguredFeatures {
         public static final ProjectedOrganicCoverFeature ORGANIC_GROUNDCOVER_FEATURE = register("organic_groundcover_feature", new ProjectedOrganicCoverFeature(ProjectedOrganicCoverConfig.CODEC));
 
         private static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature) {
-            return Registry.register(Registry.FEATURE, Aether.locate(name), feature);
+            return Registry.register(Registry.FEATURE, locate(name), feature);
         }
     }
 }

@@ -24,36 +24,90 @@
   "features": [
     [],
     [
-      "the_aether:lake_water",
-      "the_aether:dense_water"
+      {
+        "feature": "the_aether:lake_water",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:dense_water",
+        "placement": []
+      }
     ],
     [
-      "the_aether:quicksoil",
-      "the_aether:plains_boulder"
+      {
+        "feature": "the_aether:quicksoil",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:plains_boulder",
+        "placement": []
+      }
     ],
     [],
     [],
     [],
     [
-      "the_aether:ore_ambrosium",
-      "the_aether:ore_gravitite",
-      "the_aether:ore_zanite"
+      {
+        "feature": "the_aether:ore_ambrosium",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_gravitite",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_zanite",
+        "placement": []
+      }
     ],
     [],
     [
-      "the_aether:aether_flowers",
-      "the_aether:aether_grass",
-      "the_aether:aether_tall_grass",
-      "the_aether:water_spring",
-      "the_aether:patch_blueberry",
-      "the_aether:plateau_foliage",
-      "the_aether:plateau_shamrock",
-      "the_aether:plateau_flowering_grass",
-      "the_aether:plateau_trees",
-      "the_aether:flutegrass"
+      {
+        "feature": "the_aether:aether_flowers",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_tall_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:water_spring",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:patch_blueberry",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:plateau_foliage",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:plateau_shamrock",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:plateau_flowering_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:plateau_trees",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:flutegrass",
+        "placement": []
+      }
     ],
     [
-      "the_aether:crystal_tree_island_decorated"
+      {
+        "feature": "the_aether:crystal_tree_island_decorated",
+        "placement": []
+      }
     ]
   ],
   "starts": [

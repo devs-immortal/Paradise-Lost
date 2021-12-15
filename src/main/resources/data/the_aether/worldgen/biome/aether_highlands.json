@@ -25,29 +25,68 @@
     [],
     [],
     [
-      "the_aether:quicksoil",
-      "the_aether:plains_boulder"
+      {
+        "feature": "the_aether:quicksoil",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:plains_boulder",
+        "placement": []
+      }
     ],
     [],
     [],
     [],
     [
-      "the_aether:ore_ambrosium",
-      "the_aether:ore_gravitite",
-      "the_aether:ore_zanite"
+      {
+        "feature": "the_aether:ore_ambrosium",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_gravitite",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:ore_zanite",
+        "placement": []
+      }
     ],
     [],
     [
-      "the_aether:aether_flowers",
-      "the_aether:aether_grass",
-      "the_aether:aether_tall_grass",
-      "the_aether:water_spring",
-      "the_aether:patch_blueberry",
-      "the_aether:sparse_trees",
-      "the_aether:flutegrass"
+      {
+        "feature": "the_aether:aether_flowers",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:aether_tall_grass",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:water_spring",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:patch_blueberry",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:sparse_trees",
+        "placement": []
+      },
+      {
+        "feature": "the_aether:flutegrass",
+        "placement": []
+      }
     ],
     [
-      "the_aether:crystal_tree_island_decorated"
+      {
+        "feature": "the_aether:crystal_tree_island_decorated",
+        "placement": []
+      }
     ]
   ],
   "starts": [
