@@ -5,6 +5,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 
 import java.util.Optional;
 
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class DynamicConfiguration implements FeatureConfig {
     public final BlockState state;
     public final Optional<String> genTypeRaw;

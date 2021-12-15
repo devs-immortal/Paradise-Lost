@@ -49,6 +49,7 @@ public class AetherConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> AETHER_DENSE_BUSH = register("aether_dense_bush", Feature.RANDOM_PATCH.configure(AETHER_DENSE_BUSH_CONFIG));
     public static final ConfiguredFeature<?, ?> AETHER_GRASS_BUSH = register("aether_grass", Feature.RANDOM_PATCH.configure(AETHER_GRASS_BUSH_CONFIG));
     public static final ConfiguredFeature<?, ?> AETHER_TALL_GRASS_BUSH = register("aether_tall_grass", Feature.RANDOM_PATCH.configure(AETHER_TALL_GRASS_BUSH_CONFIG));
+    public static final ConfiguredFeature<?, ?> FLUTEGRASS = register("flutegrass", Feature.RANDOM_PATCH.configure(FLUTEGRASS_CONFIG));
     
     public static final ConfiguredFeature<?, ?> AETHER_FLOWERS = register("aether_flowers", Feature.FLOWER.configure(Configs.AETHER_FLOWERS));
 
