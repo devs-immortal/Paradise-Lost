@@ -51,6 +51,8 @@ public class AetherConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> AETHER_TALL_GRASS_BUSH = register("aether_tall_grass", Feature.RANDOM_PATCH.configure(AETHER_TALL_GRASS_BUSH_CONFIG));
     
     public static final ConfiguredFeature<?, ?> AETHER_FLOWERS = register("aether_flowers", Feature.FLOWER.configure(Configs.AETHER_FLOWERS));
+
+    public static final ConfiguredFeature<?, ?> QUICKSOIL = register("quicksoil", AetherFeatures.QUICKSOIL.configure(QUICKSOIL_CONFIG));
     
     public static final ConfiguredFeature<TreeFeatureConfig, ?> SKYROOT_TREE = register("skyroot_tree", Feature.TREE.configure(Configs.SKYROOT_CONFIG)); // TODO REPLACED WITH JSON //
     public static final ConfiguredFeature<TreeFeatureConfig, ?> GOLDEN_OAK_TREE = register("golden_oak_tree", Feature.TREE.configure(Configs.GOLDEN_OAK_CONFIG));

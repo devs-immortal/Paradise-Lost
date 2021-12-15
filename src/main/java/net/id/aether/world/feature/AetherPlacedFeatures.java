@@ -6,10 +6,7 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
 import net.id.aether.world.IcestoneSpireFeature;
-import net.id.aether.world.feature.config.BoulderFeatureConfig;
-import net.id.aether.world.feature.config.GroundcoverFeatureConfig;
-import net.id.aether.world.feature.config.LongFeatureConfig;
-import net.id.aether.world.feature.config.ProjectedOrganicCoverConfig;
+import net.id.aether.world.feature.config.*;
 import net.id.aether.world.feature.decorators.ChancePlacementModifier;
 import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
@@ -266,6 +263,10 @@ public class AetherPlacedFeatures {
                         new RandomFeatureEntry(placedTree(DWARF_MOTTLED_SKYROOT_CONFIG), 0.4F)),
                 SKYROOT_TREE
         );
+
+        // Other Special Things
+        public static final PlacedFeature QUICKSOIL = AetherConfiguredFeatures.QUICKSOIL.withPlacement();
+        public static final QuicksoilConfig QUICKSOIL_CONFIG = new QuicksoilConfig();
 
         private static PlacedFeature placedTree(TreeFeatureConfig cfg) {
             return Feature.TREE.configure(cfg).withPlacement();
