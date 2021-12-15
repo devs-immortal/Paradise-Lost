@@ -143,6 +143,11 @@ public class AetherPlacedFeatures {
 
     public static final PlacedFeature TUNDRA_PONDS = register("tundra_pond", AetherConfiguredFeatures.TUNDRA_PONDS.withPlacement(CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1))));
     public static final PlacedFeature TUNDRA_SNOW = register("tundra_snow", AetherConfiguredFeatures.TUNDRA_SNOW.withPlacement(CountMultilayerPlacementModifier.of(2), CountPlacementModifier.of(UniformIntProvider.create(0, 2))));
+
+    // Other Special Things
+    public static final PlacedFeature QUICKSOIL = register("quicksoil", AetherConfiguredFeatures.QUICKSOIL.withPlacement());
+    public static final PlacedFeature WATER_SPRING = register("water_spring", AetherConfiguredFeatures.WATER_SPRING.withPlacement());
+    public static final PlacedFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", AetherConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement());
     
     private static PlacedFeature register(String id, PlacedFeature feature) {
         return Registry.register(BuiltinRegistries.PLACED_FEATURE, locate(id), feature);
@@ -260,9 +265,6 @@ public class AetherPlacedFeatures {
                         new RandomFeatureEntry(placedTree(DWARF_MOTTLED_SKYROOT_CONFIG), 0.4F)),
                 SKYROOT_TREE
         );
-
-        // Other Special Things
-        public static final PlacedFeature QUICKSOIL = AetherConfiguredFeatures.QUICKSOIL.withPlacement();
 
         private static PlacedFeature placedTree(TreeFeatureConfig cfg) {
             return Feature.TREE.configure(cfg).withPlacement();
