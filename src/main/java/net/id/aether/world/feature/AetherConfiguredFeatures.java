@@ -1,12 +1,11 @@
 package net.id.aether.world.feature;
 
+import com.google.common.collect.ImmutableSet;
 import java.util.List;
 import java.util.OptionalInt;
-
-import com.google.common.collect.ImmutableSet;
-import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
+import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.world.IcestoneSpireFeature;
 import net.id.aether.world.feature.config.*;
 import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
@@ -16,11 +15,13 @@ import net.minecraft.block.*;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.property.Properties;
+import net.minecraft.structure.rule.BlockMatchRuleTest;
+import net.minecraft.structure.rule.RuleTest;
+import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.YOffset;
@@ -29,7 +30,7 @@ import net.minecraft.world.gen.decorator.PlacementModifier;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.*;
-import net.minecraft.world.gen.stateprovider.NoiseBlockStateProvider;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.trunk.BendingTrunkPlacer;
 import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
@@ -37,8 +38,8 @@ import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import static net.id.aether.Aether.locate;
 import static net.id.aether.blocks.AetherBlocks.*;
-import static net.id.aether.world.feature.AetherPlacedFeatures.*;
 import static net.id.aether.world.feature.AetherPlacedFeatures.Configs.*;
+import static net.id.aether.world.feature.AetherPlacedFeatures.*;
 
 @SuppressWarnings("unused")
 public class AetherConfiguredFeatures {
@@ -66,7 +67,7 @@ public class AetherConfiguredFeatures {
     public static final ConfiguredFeature<TreeFeatureConfig, ?> GOLDEN_OAK_TREE = register("golden_oak_tree", Feature.TREE.configure(Configs.GOLDEN_OAK_CONFIG));
     public static final ConfiguredFeature<TreeFeatureConfig, ?> CRYSTAL_TREE = register("crystal_tree", Feature.TREE.configure(Configs.CRYSTAL_TREE_CONFIG));
     public static final ConfiguredFeature<TreeFeatureConfig, ?> ORANGE_TREE = register("orange_tree", Feature.TREE.configure(Configs.ORANGE_TREE_SAPLING_CONFIG));
-
+    
     public static final ConfiguredFeature<TreeFeatureConfig, ?> ROSE_WISTERIA_TREE = register("rose_wisteria_tree", Feature.TREE.configure(Configs.ROSE_WISTERIA_CONFIG));
     public static final ConfiguredFeature<TreeFeatureConfig, ?> LAVENDER_WISTERIA_TREE = register("lavender_wisteria_tree", Feature.TREE.configure(Configs.LAVENDER_WISTERIA_CONFIG));
     public static final ConfiguredFeature<TreeFeatureConfig, ?> FROST_WISTERIA_TREE = register("frost_wisteria_tree", Feature.TREE.configure(Configs.FROST_WISTERIA_CONFIG));
@@ -130,6 +131,17 @@ public class AetherConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> TUNDRA_SNOW = register("tundra_snow", Configs.AETHER_DELTA_FEATURE.configure(new DeltaFeatureConfig(Blocks.POWDER_SNOW.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), UniformIntProvider.create(3, 8), UniformIntProvider.create(0, 1))));
 
     public static final ConfiguredFeature<?, ?> FREEZE_AETHER_TOP_LAYER = register("freeze_aether_top_layer", Configs.FREEZE_AETHER_TOP_LAYER_FEATURE_FEATURE.configure(FeatureConfig.DEFAULT));
+    
+    //FIXME Make this a tag
+    public static final RuleTest AETHER_STONE_REPLACEABLES = new BlockMatchRuleTest(HOLYSTONE);
+    public static final List<OreFeatureConfig.Target> AMBROSIUM_ORES = List.of(OreFeatureConfig.createTarget(AETHER_STONE_REPLACEABLES, AMBROSIUM_ORE.getDefaultState()));
+    public static final List<OreFeatureConfig.Target> GRAVITITE_ORES = List.of(OreFeatureConfig.createTarget(AETHER_STONE_REPLACEABLES, GRAVITITE_ORE.getDefaultState()));
+    public static final List<OreFeatureConfig.Target> ZANITE_ORES = List.of(OreFeatureConfig.createTarget(AETHER_STONE_REPLACEABLES, GRAVITITE_ORE.getDefaultState()));
+    public static final ConfiguredFeature<OreFeatureConfig, ?> ORE_AMBROSIUM = register("ore_ambrosium", Feature.ORE.configure(new OreFeatureConfig(AMBROSIUM_ORES, 14)));
+    public static final ConfiguredFeature<OreFeatureConfig, ?> ORE_GRAVITITE = register("ore_gravitite", Feature.ORE.configure(new OreFeatureConfig(GRAVITITE_ORES, 6)));
+    public static final ConfiguredFeature<OreFeatureConfig, ?> ORE_ZANITE = register("ore_zanite", Feature.ORE.configure(new OreFeatureConfig(ZANITE_ORES, 9)));
+    
+    public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(42, 5, 5, ()->Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(BLUEBERRY_BUSH.getDefaultState().with(Properties.AGE_3, 3)))).withPlacement())));
     
     public static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String id, ConfiguredFeature<FC, ?> configuredFeature) {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, locate(id), configuredFeature);

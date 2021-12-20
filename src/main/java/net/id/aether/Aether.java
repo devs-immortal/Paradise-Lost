@@ -29,6 +29,7 @@ import net.id.aether.loot.AetherLootNumberProviderTypes;
 import net.id.aether.lore.AetherLore;
 import net.id.aether.registry.AetherRegistries;
 import net.id.aether.screen.AetherScreens;
+import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.util.AetherSoundEvents;
 import net.id.aether.world.AetherGameRules;
 import net.id.aether.world.dimension.AetherDimension;
@@ -83,6 +84,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherDimension.init();
         AetherStatusEffects.init();
         AetherBlocks.init();
+        AetherBlockTags.init();
         AetherFluids.init();
         AetherEntityTypes.init();
         AetherItems.init();

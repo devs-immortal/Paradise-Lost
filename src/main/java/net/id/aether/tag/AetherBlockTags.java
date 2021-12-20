@@ -7,7 +7,6 @@ import net.minecraft.tag.Tag;
 import static net.id.aether.Aether.locate;
 
 public class AetherBlockTags {
-
     //Gravitite
     public static final Tag<Block> FAST_FLOATERS = TagFactory.BLOCK.create(locate("fast_floaters"));
     public static final Tag<Block> NON_FLOATERS = TagFactory.BLOCK.create(locate("non_floaters"));
@@ -32,4 +31,6 @@ public class AetherBlockTags {
 
     //JEB, WHY ARE SHEARS HARDCODED
     public static final Tag<Block> AETHER_SHEARABLE = TagFactory.BLOCK.create(locate("mineable_by_shears"));
+    
+    public static void init(){}
 }
