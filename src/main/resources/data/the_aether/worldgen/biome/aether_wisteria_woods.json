@@ -23,16 +23,7 @@
   },
   "features": [
     [],
-    [
-      {
-        "feature": "the_aether:lake_water",
-        "placement": []
-      },
-      {
-        "feature": "the_aether:dense_water",
-        "placement": []
-      }
-    ],
+    [],
     [
       {
         "feature": "the_aether:quicksoil",
@@ -72,10 +63,6 @@
         "placement": []
       },
       {
-        "feature": "the_aether:aether_fern",
-        "placement": []
-      },
-      {
         "feature": "the_aether:fallen_rose_leaves",
         "placement": []
       },
@@ -96,12 +83,7 @@
         "placement": []
       }
     ],
-    [
-      {
-        "feature": "the_aether:crystal_tree_island_decorated",
-        "placement": []
-      }
-    ]
+    []
   ],
   "starts": [
     "the_aether:well",

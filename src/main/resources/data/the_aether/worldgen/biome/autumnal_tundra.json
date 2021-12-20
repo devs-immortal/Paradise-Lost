@@ -25,14 +25,6 @@
     [],
     [
       {
-        "feature": "the_aether:lake_water",
-        "placement": []
-      },
-      {
-        "feature": "the_aether:dense_water",
-        "placement": []
-      },
-      {
         "feature": "the_aether:tundra_pond",
         "placement": []
       },

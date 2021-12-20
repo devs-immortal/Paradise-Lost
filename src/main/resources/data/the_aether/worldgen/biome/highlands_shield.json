@@ -27,14 +27,6 @@
       {
         "feature": "the_aether:shield_pond",
         "placement": []
-      },
-      {
-        "feature": "the_aether:lake_water",
-        "placement": []
-      },
-      {
-        "feature": "the_aether:dense_water",
-        "placement": []
       }
     ],
     [

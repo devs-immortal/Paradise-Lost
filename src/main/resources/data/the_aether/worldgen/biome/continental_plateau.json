@@ -23,16 +23,7 @@
   },
   "features": [
     [],
-    [
-      {
-        "feature": "the_aether:lake_water",
-        "placement": []
-      },
-      {
-        "feature": "the_aether:dense_water",
-        "placement": []
-      }
-    ],
+    [],
     [
       {
         "feature": "the_aether:quicksoil",
@@ -103,12 +94,7 @@
         "placement": []
       }
     ],
-    [
-      {
-        "feature": "the_aether:crystal_tree_island_decorated",
-        "placement": []
-      }
-    ]
+    []
   ],
   "starts": [
     "the_aether:well",
