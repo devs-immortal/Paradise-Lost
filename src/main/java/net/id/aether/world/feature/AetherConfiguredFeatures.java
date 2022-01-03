@@ -3,6 +3,8 @@ package net.id.aether.world.feature;
 import com.google.common.collect.ImmutableSet;
 import java.util.List;
 import java.util.OptionalInt;
+
+import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
 import net.id.aether.tag.AetherBlockTags;
@@ -112,7 +114,7 @@ public class AetherConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> THICKET_LIVERWORT_CARPET = register("thicket_liverwort_carpet", Configs.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(SimpleBlockStateProviderAccessor.callInit(LIVERWORT_CARPET.getDefaultState()), UniformIntProvider.create(1, 4), ConstantIntProvider.create(5), UniformIntProvider.create(5, 8), 1.3)));
     public static final ConfiguredFeature<?, ?> THICKET_SHAMROCK = register("thicket_shamrock", Configs.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(SimpleBlockStateProviderAccessor.callInit(SHAMROCK.getDefaultState()), UniformIntProvider.create(2, 6), ConstantIntProvider.create(5), UniformIntProvider.create(4, 7), 1.3)));
 
-    public static final ConfiguredFeature<?, ?> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(AETHER_GRASS.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 0.3F, 0.15F, GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(AetherBlocks.AETHER_GRASS.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 0.3F, 0.15F, GENERIC_FLOOR_WHITELIST)));
     public static final ConfiguredFeature<?, ?> MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(AETHER_GRASS_FLOWERING.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 0.4F, 0.25F, GENERIC_FLOOR_WHITELIST)));
 
     public static final ConfiguredFeature<?, ?> SHIELD_STUMPS = register("shield_stumps", Configs.PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(1, 2), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 0.1F, 0.225F, GENERIC_FLOOR_WHITELIST)));

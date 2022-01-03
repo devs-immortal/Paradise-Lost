@@ -20,6 +20,7 @@ import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.decorator.*;
@@ -102,13 +103,13 @@ public class AetherPlacedFeatures {
     public static final PlacedFeature RAINBOW_MALT_SPRIGS = register("rainbow_malt_sprigs", AetherConfiguredFeatures.RAINBOW_MALT_SPRIGS.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, new ChancePlacementModifier(ConstantIntProvider.create(2)), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1))/*.spreadHorizontally()*/));
 
     // These "single block" features might also need to be registered in configured features, but also maybe not.
-    public static final PlacedFeature SHIELD_FOLIAGE_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(AETHER_GRASS.getDefaultState(), 20).add(AETHER_FERN.getDefaultState(), 15).add(AetherBlocks.AETHER_BUSH.getDefaultState(), 13).add(AETHER_GRASS_FLOWERING.getDefaultState(), 5)))).withPlacement();
+    public static final PlacedFeature SHIELD_FOLIAGE_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(AetherBlocks.AETHER_GRASS.getDefaultState(), 20).add(AETHER_FERN.getDefaultState(), 15).add(AetherBlocks.AETHER_BUSH.getDefaultState(), 13).add(AETHER_GRASS_FLOWERING.getDefaultState(), 5)))).withPlacement();
     public static final PlacedFeature SHIELD_FOLIAGE = register("shield_foliage", AetherConfiguredFeatures.SHIELD_FOLIAGE.withPlacement(CountMultilayerPlacementModifier.of(5), CountPlacementModifier.of(UniformIntProvider.create(0, 2))));
     public static final PlacedFeature SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", AetherConfiguredFeatures.SHIELD_FALLEN_LEAVES.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(2), new ChancePlacementModifier(ConstantIntProvider.create(4)), CountPlacementModifier.of(UniformIntProvider.create(0, 3)), BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(Configs.AETHER_GROUD)))/*.spreadHorizontally()*/);
     public static final PlacedFeature SHIELD_ROCKS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM), 10).add(COBBLED_HOLYSTONE.getDefaultState(), 4).build()))).withPlacement();
     public static final PlacedFeature SHIELD_ROCKS = register("shield_rocks", AetherConfiguredFeatures.SHIELD_ROCKS.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(3), CountPlacementModifier.of(UniformIntProvider.create(0, 3)))/*.spreadHorizontally()*/);
 
-    public static final PlacedFeature PLATEAU_FOLIAGE_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(AETHER_GRASS.getDefaultState(), 20).add(AETHER_FERN.getDefaultState(), 15).add(AetherBlocks.AETHER_BUSH.getDefaultState(), 13).add(AETHER_GRASS_FLOWERING.getDefaultState(), 5)))).withPlacement();
+    public static final PlacedFeature PLATEAU_FOLIAGE_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(AetherBlocks.AETHER_GRASS.getDefaultState(), 20).add(AETHER_FERN.getDefaultState(), 15).add(AetherBlocks.AETHER_BUSH.getDefaultState(), 13).add(AETHER_GRASS_FLOWERING.getDefaultState(), 5)))).withPlacement();
     public static final PlacedFeature PLATEAU_FOLIAGE = register("plateau_foliage", AetherConfiguredFeatures.PLATEAU_FOLIAGE.withPlacement(CountMultilayerPlacementModifier.of(3), CountPlacementModifier.of(UniformIntProvider.create(0, 4)))/*.spreadHorizontally()*/);
     public static final PlacedFeature PLATEAU_FLOWERING_GRASS = register("plateau_flowering_grass", AetherConfiguredFeatures.PLATEAU_FLOWERING_GRASS.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 5)))/*.spreadHorizontally()*/);
     public static final PlacedFeature PLATEAU_SHAMROCK = register("plateau_shamrock", AetherConfiguredFeatures.PLATEAU_SHAMROCK.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, new ChancePlacementModifier(ConstantIntProvider.create(6)), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 2))/*.spreadHorizontally()*/));
@@ -136,7 +137,7 @@ public class AetherPlacedFeatures {
     public static final PlacedFeature SHIELD_STONE = register("shield_stone", AetherConfiguredFeatures.SHIELD_STONE.withPlacement(CountMultilayerPlacementModifier.of(2), CountPlacementModifier.of(UniformIntProvider.create(0, 2))))/*.spreadHorizontally()*/;
     public static final PlacedFeature SHIELD_PODZOL = register("shield_podzol", AetherConfiguredFeatures.SHIELD_PODZOL.withPlacement(CountMultilayerPlacementModifier.of(2), new ChancePlacementModifier(ConstantIntProvider.create(15)), CountPlacementModifier.of(UniformIntProvider.create(0, 2))))/*.spreadHorizontally()*/;
 
-    public static final PlacedFeature TUNDRA_FOLIAGE_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(AETHER_SHORT_GRASS.getDefaultState(), 30).add(AETHER_GRASS.getDefaultState(), 10).add(AetherBlocks.AETHER_BUSH.getDefaultState(), 3)))).withPlacement();
+    public static final PlacedFeature TUNDRA_FOLIAGE_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(AETHER_SHORT_GRASS.getDefaultState(), 30).add(AetherBlocks.AETHER_GRASS.getDefaultState(), 10).add(AetherBlocks.AETHER_BUSH.getDefaultState(), 3)))).withPlacement();
     public static final PlacedFeature TUNDRA_FOLIAGE = register("tundra_foliage", AetherConfiguredFeatures.TUNDRA_FOLIAGE.withPlacement(CountMultilayerPlacementModifier.of(3), CountPlacementModifier.of(UniformIntProvider.create(0, 3)))/*.spreadHorizontally()*/);
 
     public static final PlacedFeature TUNDRA_SPIRES = register("tundra_spires", AetherConfiguredFeatures.TUNDRA_SPIRES.withPlacement(new ChancePlacementModifier(ConstantIntProvider.create(9)), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 10))/*.spreadHorizontally()*/));
@@ -148,6 +149,35 @@ public class AetherPlacedFeatures {
     public static final PlacedFeature QUICKSOIL = register("quicksoil", AetherConfiguredFeatures.QUICKSOIL.withPlacement());
     public static final PlacedFeature WATER_SPRING = register("water_spring", AetherConfiguredFeatures.WATER_SPRING.withPlacement());
     public static final PlacedFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", AetherConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement());
+    
+    public static final PlacedFeature AETHER_DENSE_BUSH = register("aether_dense_bush", AetherConfiguredFeatures.AETHER_DENSE_BUSH.withPlacement(CountMultilayerPlacementModifier.of(6), BiomePlacementModifier.of()));
+    public static final PlacedFeature AETHER_FLOWERS = register("aether_flowers", AetherConfiguredFeatures.AETHER_FLOWERS.withPlacement(CountPlacementModifier.of(5), RarityFilterPlacementModifier.of(32), SquarePlacementModifier.of(), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of()));
+    public static final PlacedFeature AETHER_GRASS = register("aether_grass", AetherConfiguredFeatures.AETHER_GRASS_BUSH.withPlacement(CountPlacementModifier.of(45), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), BiomePlacementModifier.of()));
+    public static final PlacedFeature AETHER_TALL_GRASS = register("aether_tall_grass", AetherConfiguredFeatures.AETHER_TALL_GRASS_BUSH.withPlacement(CountPlacementModifier.of(20), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), BiomePlacementModifier.of()));
+    /*
+        {
+      "count": {
+        "distribution": [
+          {
+            "data": 1,
+            "weight": 3
+          },
+          {
+            "data": 0,
+            "weight": 1
+          }
+        ],
+        "type": "minecraft:weighted_list"
+      },
+      "type": "minecraft:count"
+    },
+     */
+    public static final PlacedFeature CRYSTAL_TREE_ISLAND_DECORATED = register("crystal_tree_island_decorated", AetherConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement(RarityFilterPlacementModifier.of(80), /*TODO See above comment, */ SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.fixed(55), YOffset.fixed(70)), BiomePlacementModifier.of()));
+    public static final PlacedFeature FLUTEGRASS = register("flutegrass", AetherConfiguredFeatures.FLUTEGRASS.withPlacement(CountPlacementModifier.of(30), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), BiomePlacementModifier.of()));
+    public static final PlacedFeature ORE_AMBROSIUM = register("ore_ambrosium", AetherConfiguredFeatures.ORE_AMBROSIUM.withPlacement(CountPlacementModifier.of(20), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(127)), BiomePlacementModifier.of()));
+    public static final PlacedFeature ORE_GRAVITITE = register("ore_gravitite", AetherConfiguredFeatures.ORE_GRAVITITE.withPlacement(CountPlacementModifier.of(1), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(32), YOffset.aboveBottom(79)), BiomePlacementModifier.of()));
+    public static final PlacedFeature ORE_ZANITE = register("ore_zanite", AetherConfiguredFeatures.ORE_ZANITE.withPlacement(CountPlacementModifier.of(16), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(128)), BiomePlacementModifier.of()));
+    public static final PlacedFeature PATCH_BLUEBERRY = register("patch_blueberry", AetherConfiguredFeatures.PATCH_BLUEBERRY.withPlacement(CountPlacementModifier.of(10), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), BiomePlacementModifier.of()));
     
     private static PlacedFeature register(String id, PlacedFeature feature) {
         return Registry.register(BuiltinRegistries.PLACED_FEATURE, locate(id), feature);
@@ -167,11 +197,11 @@ public class AetherPlacedFeatures {
 
         public static final PlacedFeature AETHER_BUSH_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AetherBlocks.AETHER_BUSH.getDefaultState()))).withPlacement();
 
-        public static final PlacedFeature AETHER_GRASS_PLANT_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AETHER_GRASS.getDefaultState()))).withPlacement();
+        public static final PlacedFeature AETHER_GRASS_PLANT_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AetherBlocks.AETHER_GRASS.getDefaultState()))).withPlacement();
 
-        public static final PlacedFeature AETHER_TALL_GRASS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AETHER_TALL_GRASS.getDefaultState()))).withPlacement();
+        public static final PlacedFeature AETHER_TALL_GRASS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AetherBlocks.AETHER_TALL_GRASS.getDefaultState()))).withPlacement();
 
-        public static final PlacedFeature FLUTEGRASS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(FLUTEGRASS.getDefaultState()))).withPlacement();
+        public static final PlacedFeature FLUTEGRASS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AetherBlocks.FLUTEGRASS.getDefaultState()))).withPlacement();
 
         public static final PlacedFeature FALLEN_LEAVES_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(SKYROOT_LEAF_PILE.getDefaultState(), 8).add(SKYROOT_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 1)))).withPlacement();
 
