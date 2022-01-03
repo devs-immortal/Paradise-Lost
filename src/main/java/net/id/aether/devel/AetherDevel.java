@@ -22,7 +22,7 @@ public final class AetherDevel{
     private AetherDevel(){}
     
     public static void init(){
-        System.out.print("\n".repeat(5) + "The Aether Reborn is in debug mode!" + "\n".repeat(6));
+        System.out.print("\n".repeat(5) + "Paradise Lost is in debug mode!" + "\n".repeat(6));
         Runtime.getRuntime().addShutdownHook(new Thread(AetherDevel::save));
     }
     

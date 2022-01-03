@@ -10,19 +10,10 @@
               1.0
             ],
             "depth": 0.0,
-            "weirdness": [
-              -1.0,
-              1.0
-            ],
+            "weirdness": 0.0,
             "offset": 0.0,
-            "temperature": [
-              -1.0,
-              1.0
-            ],
-            "humidity": [
-              -1.0,
-              1.0
-            ],
+            "temperature": 0.0,
+            "humidity": 0.0,
             "continentalness": [
               -1.0,
               1.0
@@ -37,19 +28,10 @@
               1.0
             ],
             "depth": 0.0,
-            "weirdness": [
-              -1.0,
-              1.0
-            ],
+            "weirdness": 0.0,
             "offset": 0.0,
-            "temperature": [
-              -1.0,
-              1.0
-            ],
-            "humidity": [
-              -1.0,
-              1.0
-            ],
+            "temperature": -0.15,
+            "humidity": 0.1,
             "continentalness": [
               -1.0,
               1.0
@@ -64,19 +46,10 @@
               1.0
             ],
             "depth": 0.0,
-            "weirdness": [
-              -1.0,
-              1.0
-            ],
+            "weirdness": 0.0,
             "offset": 0.0,
-            "temperature": [
-              -1.0,
-              1.0
-            ],
-            "humidity": [
-              -1.0,
-              1.0
-            ],
+            "temperature": -0.25,
+            "humidity": 0.02,
             "continentalness": [
               -1.0,
               1.0
@@ -91,19 +64,10 @@
               1.0
             ],
             "depth": 0.0,
-            "weirdness": [
-              -1.0,
-              1.0
-            ],
+            "weirdness": 0.0,
             "offset": 0.0,
-            "temperature": [
-              -1.0,
-              1.0
-            ],
-            "humidity": [
-              -1.0,
-              1.0
-            ],
+            "temperature": -0.35,
+            "humidity": 0.075,
             "continentalness": [
               -1.0,
               1.0
@@ -118,19 +82,10 @@
               1.0
             ],
             "depth": 0.0,
-            "weirdness": [
-              -1.0,
-              1.0
-            ],
-            "offset": 0.0,
-            "temperature": [
-              -1.0,
-              1.0
-            ],
-            "humidity": [
-              -1.0,
-              1.0
-            ],
+            "weirdness": 0.0,
+            "offset": 0.05,
+            "temperature": 0.35,
+            "humidity": -0.05,
             "continentalness": [
               -1.0,
               1.0
@@ -145,19 +100,10 @@
               1.0
             ],
             "depth": 0.0,
-            "weirdness": [
-              -1.0,
-              1.0
-            ],
+            "weirdness": 0.0,
             "offset": 0.0,
-            "temperature": [
-              -1.0,
-              1.0
-            ],
-            "humidity": [
-              -1.0,
-              1.0
-            ],
+            "temperature": 0.225,
+            "humidity": -0.015,
             "continentalness": [
               -1.0,
               1.0
@@ -172,19 +118,10 @@
               1.0
             ],
             "depth": 0.0,
-            "weirdness": [
-              -1.0,
-              1.0
-            ],
-            "offset": 0.0,
-            "temperature": [
-              -1.0,
-              1.0
-            ],
-            "humidity": [
-              -1.0,
-              1.0
-            ],
+            "weirdness": 0.0,
+            "offset": 0.125,
+            "temperature": 0.1,
+            "humidity": 0.0,
             "continentalness": [
               -1.0,
               1.0
