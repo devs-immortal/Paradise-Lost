@@ -70,6 +70,7 @@ public class AetherPlacedFeatures {
     public static final PlacedFeature FANCY_SKYROOT_TREE = register("fancy_skyroot_tree", AetherConfiguredFeatures.FANCY_SKYROOT_TREE.withPlacement(SPREAD_32_ABOVE));
 
     // TCF_ese are here because if these are not here, it doesn't work.
+    // Why doesn't it work though? There has to be a better way to handle this.
     public static final ConfiguredFeature<?, ?> CF_SCATTERED_TREES = AetherConfiguredFeatures.register("scattered_trees", Feature.RANDOM_SELECTOR.configure(AetherPlacedFeatures.Configs.SCATTERED_TREES_CONFIG));
     public static final ConfiguredFeature<?, ?> CF_SHIELD_TREES = AetherConfiguredFeatures.register("shield_trees", Feature.RANDOM_SELECTOR.configure(AetherPlacedFeatures.Configs.SHIELD_TREES_CONFIG));
     public static final ConfiguredFeature<?, ?> CF_DENSE_SHIELD_TREES = AetherConfiguredFeatures.register("dense_shield_trees", Feature.RANDOM_SELECTOR.configure(AetherPlacedFeatures.Configs.DENSE_SHIELD_TREES_CONFIG));
