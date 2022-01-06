@@ -25,8 +25,8 @@
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/aether",
-    "sources": "https://github.com/devs-immortal/The-Aether",
-    "issues": "https://github.com/devs-immortal/The-Aether/issues"
+    "sources": "https://github.com/devs-immortal/Paradise-Lost",
+    "issues": "https://github.com/devs-immortal/Paradise-Lost/issues"
   },
   "depends": {
     "fabricloader": ">=0.12.7",

@@ -45,7 +45,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Docs for The Aether Reborn are sometimes written long after
+ * Docs for Paradise Lost are sometimes written long after
  * the code itself has been written, and oftentimes by different
  * authors than the author of the code itself.
  * If you have any questions or concerns regarding documentation,
