@@ -218,7 +218,7 @@ public final class AetherSoundEvents{
     
             @Override
             public String getResourcePackName(){
-                return "The Aether Reborn";
+                return "Paradise Lost";
             }
     
             @Override
