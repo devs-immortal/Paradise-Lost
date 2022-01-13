@@ -48,10 +48,10 @@ public final class AetherBiomes {
     public static final Biome HIGHLANDS_SHIELD;
     
     static{
-        HIGHLANDS_PLAINS = register(HIGHLANDS_PLAINS_KEY, createAetherHighlands());
-        HIGHLANDS_FOREST = register(HIGHLANDS_FOREST_KEY, createAetherHighlandsForest());
-        HIGHLANDS_THICKET = register(HIGHLANDS_THICKET_KEY, createAetherHighlandsThicket());
-        WISTERIA_WOODS = register(WISTERIA_WOODS_KEY, createAetherWisteriaWoods());
+        HIGHLANDS_PLAINS = register(HIGHLANDS_PLAINS_KEY, createHighlandsPlains());
+        HIGHLANDS_FOREST = register(HIGHLANDS_FOREST_KEY, createHighlandsForest());
+        HIGHLANDS_THICKET = register(HIGHLANDS_THICKET_KEY, createHighlandsThicket());
+        WISTERIA_WOODS = register(WISTERIA_WOODS_KEY, createWisteriaWoods());
         AUTUMNAL_TUNDRA = register(AUTUMNAL_TUNDRA_KEY, createAutumnalTundra());
         CONTINENTAL_PLATEAU = register(CONTINENTAL_PLATEAU_KEY, createContinentalPlateau());
         HIGHLANDS_SHIELD = register(HIGHLANDS_SHIELD_KEY, createHighlandsShield());
@@ -218,7 +218,7 @@ public final class AetherBiomes {
         );
     }
     
-    private static Biome createAetherHighlands(){
+    private static Biome createHighlandsPlains(){
         /*
         TODO
         {
@@ -278,7 +278,7 @@ public final class AetherBiomes {
             .build();
     }
     
-    private static Biome createAetherHighlandsForest(){
+    private static Biome createHighlandsForest(){
         /*
         TODO
         {
@@ -340,7 +340,7 @@ public final class AetherBiomes {
             .build();
     }
     
-    private static Biome createAetherHighlandsThicket(){
+    private static Biome createHighlandsThicket(){
         /*
         TODO
          {
@@ -410,7 +410,7 @@ public final class AetherBiomes {
             .build();
     }
     
-    private static Biome createAetherWisteriaWoods(){
+    private static Biome createWisteriaWoods(){
         /*
         TODO
         {

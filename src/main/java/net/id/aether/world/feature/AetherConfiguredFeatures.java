@@ -6,6 +6,7 @@ import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
 import net.id.aether.world.IcestoneSpireFeature;
 import net.id.aether.world.feature.config.*;
+import net.id.aether.world.feature.features.*;
 import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaTrunkPlacer;

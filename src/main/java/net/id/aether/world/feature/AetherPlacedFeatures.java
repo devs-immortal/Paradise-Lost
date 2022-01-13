@@ -5,17 +5,10 @@ import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
-import net.id.aether.world.IcestoneSpireFeature;
-import net.id.aether.world.feature.config.*;
 import net.id.aether.world.feature.decorators.ChancePlacementModifier;
-import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
-import net.id.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
-import net.id.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.collection.DataPool;
-import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -25,16 +18,8 @@ import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
-import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
-import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
-import net.minecraft.world.gen.foliage.RandomSpreadFoliagePlacer;
-import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
-import net.minecraft.world.gen.trunk.BendingTrunkPlacer;
-import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
-import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
 import java.util.OptionalInt;
@@ -52,7 +37,6 @@ public class AetherPlacedFeatures {
 
     public static final PlacedFeature AETHER_BUSH = register("aether_bush", AetherConfiguredFeatures.AETHER_BUSH.withPlacement(SPREAD_32_ABOVE, CountMultilayerPlacementModifier.of(5), new ChancePlacementModifier(ConstantIntProvider.create(4))));
 
-    // TODO: figure out whether to register placed features or configured features. Or both.
     public static final PlacedFeature SKYROOT_TREE = register("skyroot_tree", AetherConfiguredFeatures.SKYROOT_TREE.withPlacement());
     public static final PlacedFeature GOLDEN_OAK_TREE = register("golden_oak_tree", AetherConfiguredFeatures.GOLDEN_OAK_TREE.withPlacement(SPREAD_32_ABOVE));
     public static final PlacedFeature CRYSTAL_TREE = register("crystal_tree", AetherConfiguredFeatures.CRYSTAL_TREE.withPlacement(SPREAD_32_ABOVE));
