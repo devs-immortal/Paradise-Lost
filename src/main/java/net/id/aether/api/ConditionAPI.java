@@ -60,7 +60,7 @@ public class ConditionAPI {
     }
 
     /**
-     * Sync's a given entities {@code ConditionManager}.
+     * Syncs a given entity's {@code ConditionManager}.
      * @param entity The entity whose {@code ConditionManager} you wish to sync.
      */
     public static void trySync(LivingEntity entity) {

@@ -28,29 +28,30 @@ import static net.id.aether.Aether.locate;
 /**
  * Generates the Aether biome instances and registers them with Minecraft. Things in here don't have to be particularly
  * speedy because they are only done once.
+ * @author Gudenau
  */
 public final class AetherBiomes {
-    public static final RegistryKey<Biome> AETHER_HIGHLANDS_KEY = register("aether_highlands");
-    public static final RegistryKey<Biome> AETHER_HIGHLANDS_FOREST_KEY = register("aether_highlands_forest");
-    public static final RegistryKey<Biome> AETHER_HIGHLANDS_THICKET_KEY = register("aether_highlands_thicket");
-    public static final RegistryKey<Biome> AETHER_WISTERIA_WOODS_KEY = register("aether_wisteria_woods");
+    public static final RegistryKey<Biome> HIGHLANDS_PLAINS_KEY = register("aether_highlands");
+    public static final RegistryKey<Biome> HIGHLANDS_FOREST_KEY = register("aether_highlands_forest");
+    public static final RegistryKey<Biome> HIGHLANDS_THICKET_KEY = register("aether_highlands_thicket");
+    public static final RegistryKey<Biome> WISTERIA_WOODS_KEY = register("aether_wisteria_woods");
     public static final RegistryKey<Biome> AUTUMNAL_TUNDRA_KEY = register("autumnal_tundra");
     public static final RegistryKey<Biome> CONTINENTAL_PLATEAU_KEY = register("continental_plateau");
     public static final RegistryKey<Biome> HIGHLANDS_SHIELD_KEY = register("highlands_shield");
     
-    public static final Biome AETHER_HIGHLANDS;
-    public static final Biome AETHER_HIGHLANDS_FOREST;
-    public static final Biome AETHER_HIGHLANDS_THICKET;
-    public static final Biome AETHER_WISTERIA_WOODS;
+    public static final Biome HIGHLANDS_PLAINS;
+    public static final Biome HIGHLANDS_FOREST;
+    public static final Biome HIGHLANDS_THICKET;
+    public static final Biome WISTERIA_WOODS;
     public static final Biome AUTUMNAL_TUNDRA;
     public static final Biome CONTINENTAL_PLATEAU;
     public static final Biome HIGHLANDS_SHIELD;
     
     static{
-        AETHER_HIGHLANDS = register(AETHER_HIGHLANDS_KEY, createAetherHighlands());
-        AETHER_HIGHLANDS_FOREST = register(AETHER_HIGHLANDS_FOREST_KEY, createAetherHighlandsForest());
-        AETHER_HIGHLANDS_THICKET = register(AETHER_HIGHLANDS_THICKET_KEY, createAetherHighlandsThicket());
-        AETHER_WISTERIA_WOODS = register(AETHER_WISTERIA_WOODS_KEY, createAetherWisteriaWoods());
+        HIGHLANDS_PLAINS = register(HIGHLANDS_PLAINS_KEY, createAetherHighlands());
+        HIGHLANDS_FOREST = register(HIGHLANDS_FOREST_KEY, createAetherHighlandsForest());
+        HIGHLANDS_THICKET = register(HIGHLANDS_THICKET_KEY, createAetherHighlandsThicket());
+        WISTERIA_WOODS = register(WISTERIA_WOODS_KEY, createAetherWisteriaWoods());
         AUTUMNAL_TUNDRA = register(AUTUMNAL_TUNDRA_KEY, createAutumnalTundra());
         CONTINENTAL_PLATEAU = register(CONTINENTAL_PLATEAU_KEY, createContinentalPlateau());
         HIGHLANDS_SHIELD = register(HIGHLANDS_SHIELD_KEY, createHighlandsShield());

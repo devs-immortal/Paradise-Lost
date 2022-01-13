@@ -17,11 +17,6 @@ public class AetherDimension {
     public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.WORLD_KEY, Aether.locate(Aether.MOD_ID));
     public static final RegistryKey<DimensionType> TYPE = RegistryKey.of(Registry.DIMENSION_TYPE_KEY, Aether.locate("the_aether"));
 
-    public static final RegistryKey<Biome> HIGHLANDS_PLAINS = RegistryKey.of(Registry.BIOME_KEY, Aether.locate("aether_highlands"));
-    public static final RegistryKey<Biome> HIGHLANDS_FOREST = RegistryKey.of(Registry.BIOME_KEY, Aether.locate("aether_highlands_forest"));
-    public static final RegistryKey<Biome> HIGHLANDS_THICKET = RegistryKey.of(Registry.BIOME_KEY, Aether.locate("aether_highlands_thicket"));
-    public static final RegistryKey<Biome> WISTERIA_WOODS = RegistryKey.of(Registry.BIOME_KEY, Aether.locate("aether_wisteria_woods"));
-
     public static void init() {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.GLOWSTONE)
