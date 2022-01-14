@@ -44,7 +44,7 @@ public class AetherVegetationConfiguredFeatures extends AetherConfiguredFeatures
 
     public static final ConfiguredFeature<?, ?> TUNDRA_FOLIAGE = register("tundra_foliage", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(32, 7, 3, () -> TUNDRA_FOLIAGE_SINGLE_BLOCK)));
 
-    public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(42, 5, 5, ()->Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(BLUEBERRY_BUSH.getDefaultState().with(Properties.AGE_3, 3)))).withPlacement())));
+    public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(42, 5, 5, ()->Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(BLUEBERRY_BUSH.getDefaultState().with(Properties.AGE_3, 3)))).withInAirFilter())));
 
     public static class Configs extends AetherConfiguredFeatures.Configs{
 

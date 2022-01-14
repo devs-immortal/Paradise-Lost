@@ -4,6 +4,7 @@ import net.id.aether.Aether;
 import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.world.feature.features.configured.AetherTreeConfiguredFeatures;
 import net.minecraft.block.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -23,6 +24,8 @@ public class AetherPlacedFeatures {
     // todo all ".spreadHorizontally()"s have been commented out because they were shown to cause errors in 1.17.
     // if this is not the case anymore, add them back in (however that is done).
 
+    // this does what .withInAirFilter() does, if ever needed
+    public static final PlacementModifier IN_AIR = BlockFilterPlacementModifier.of(BlockPredicate.matchingBlock(Blocks.AIR, BlockPos.ORIGIN));
     // for ease of familiarity with how 1.17 did it.
     public static final PlacementModifier SPREAD_32_ABOVE = HeightRangePlacementModifier.uniform(YOffset.aboveBottom(32), YOffset.getTop());
 
