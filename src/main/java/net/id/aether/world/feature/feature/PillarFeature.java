@@ -1,4 +1,4 @@
-package net.id.aether.world.feature.features;
+package net.id.aether.world.feature.feature;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.world.feature.config.LongFeatureConfig;

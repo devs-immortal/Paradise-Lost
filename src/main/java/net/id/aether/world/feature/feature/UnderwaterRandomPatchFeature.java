@@ -1,16 +1,13 @@
-package net.id.aether.world.feature.features;
+package net.id.aether.world.feature.feature;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.mixin.world.BlockFilterPlacementModifierAccessor;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.decorator.BlockFilterPlacementModifier;
 import net.minecraft.world.gen.decorator.DecoratorContext;
 import net.minecraft.world.gen.decorator.PlacementModifier;
-import net.minecraft.world.gen.decorator.PlacementModifierType;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;

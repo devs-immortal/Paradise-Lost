@@ -1,9 +1,8 @@
 package net.id.aether.world.feature.generator;
 
 import net.id.aether.Aether;
-import net.id.aether.world.feature.AetherFeatures;
+import net.id.aether.world.feature.features.AetherFeatures;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
 import net.minecraft.util.BlockMirror;

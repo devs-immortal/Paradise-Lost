@@ -1,7 +1,6 @@
 package net.id.aether.world.dimension;
 
 import net.id.aether.entities.AetherEntityTypes;
-import net.id.aether.world.feature.AetherPlacedFeatures;
 import net.id.aether.world.gen.carver.AetherCarvers;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -24,6 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 import static net.id.aether.Aether.locate;
+import static net.id.aether.world.feature.features.placed.AetherTreePlacedFeatures.*;
+import static net.id.aether.world.feature.features.placed.AetherVegetationPlacedFeatures.*;
+import static net.id.aether.world.feature.features.placed.AetherMiscPlacedFeatures.*;
 
 /**
  * Generates the Aether biome instances and registers them with Minecraft. Things in here don't have to be particularly
@@ -211,9 +213,9 @@ public final class AetherBiomes {
     private static Map<GenerationStep.Feature, List<PlacedFeature>> getStandardAetherFeatures() {
         return Map.of(
             GenerationStep.Feature.UNDERGROUND_ORES, List.of(
-                AetherPlacedFeatures.ORE_AMBROSIUM,
-                AetherPlacedFeatures.ORE_GRAVITITE,
-                AetherPlacedFeatures.ORE_ZANITE
+                ORE_AMBROSIUM,
+                ORE_GRAVITITE,
+                ORE_ZANITE
             )
         );
     }
@@ -241,19 +243,19 @@ public final class AetherBiomes {
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            AetherPlacedFeatures.QUICKSOIL,
-                            AetherPlacedFeatures.PLAINS_BOULDER
+                            QUICKSOIL,
+                            PLAINS_BOULDER
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
-                            AetherPlacedFeatures.WATER_SPRING
+                            WATER_SPRING
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            AetherPlacedFeatures.AETHER_FLOWERS,
-                            AetherPlacedFeatures.AETHER_GRASS,
-                            AetherPlacedFeatures.AETHER_TALL_GRASS,
-                            AetherPlacedFeatures.PATCH_BLUEBERRY,
-                            AetherPlacedFeatures.SPARSE_TREES,
-                            AetherPlacedFeatures.FLUTEGRASS
+                            AETHER_FLOWERS,
+                            AETHER_GRASS,
+                            AETHER_TALL_GRASS,
+                            PATCH_BLUEBERRY,
+                            SPARSE_TREES,
+                            FLUTEGRASS
                         )
                     )
                 )
@@ -301,20 +303,20 @@ public final class AetherBiomes {
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            AetherPlacedFeatures.QUICKSOIL
+                            QUICKSOIL
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
-                            AetherPlacedFeatures.WATER_SPRING
+                            WATER_SPRING
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            AetherPlacedFeatures.AETHER_FLOWERS,
-                            AetherPlacedFeatures.AETHER_TALL_GRASS,
-                            AetherPlacedFeatures.TUNDRA_FOLIAGE,
-                            AetherPlacedFeatures.AETHER_BUSH,
-                            AetherPlacedFeatures.PATCH_BLUEBERRY,
-                            AetherPlacedFeatures.SCATTERED_TREES,
-                            AetherPlacedFeatures.ALT_FALLEN_LEAVES,
-                            AetherPlacedFeatures.FLUTEGRASS
+                            AETHER_FLOWERS,
+                            AETHER_TALL_GRASS,
+                            TUNDRA_FOLIAGE,
+                            AETHER_BUSH,
+                            PATCH_BLUEBERRY,
+                            SCATTERED_TREES,
+                            ALT_FALLEN_LEAVES,
+                            FLUTEGRASS
                         )
                     )
                 )
@@ -363,26 +365,26 @@ public final class AetherBiomes {
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            AetherPlacedFeatures.THICKET_BOULDER,
-                            AetherPlacedFeatures.GOLDEN_BOULDER
+                            THICKET_BOULDER,
+                            GOLDEN_BOULDER
                         ),
                         GenerationStep.Feature.STRONGHOLDS, List.of(
-                            AetherPlacedFeatures.THICKET_LIVERWORT
+                            THICKET_LIVERWORT
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
-                            AetherPlacedFeatures.WATER_SPRING
+                            WATER_SPRING
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            AetherPlacedFeatures.THICKET_SHAMROCK,
-                            AetherPlacedFeatures.THICKET_LIVERWORT_CARPET,
-                            AetherPlacedFeatures.THICKET_FALLEN_LOG,
-                            AetherPlacedFeatures.AETHER_FLOWERS,
-                            AetherPlacedFeatures.AETHER_GRASS,
-                            AetherPlacedFeatures.FALLEN_LEAVES,
-                            AetherPlacedFeatures.AETHER_TALL_GRASS,
-                            AetherPlacedFeatures.AETHER_DENSE_BUSH,
-                            AetherPlacedFeatures.THICKET_TREES,
-                            AetherPlacedFeatures.SPARSE_TREES
+                            THICKET_SHAMROCK,
+                            THICKET_LIVERWORT_CARPET,
+                            THICKET_FALLEN_LOG,
+                            AETHER_FLOWERS,
+                            AETHER_GRASS,
+                            FALLEN_LEAVES,
+                            AETHER_TALL_GRASS,
+                            AETHER_DENSE_BUSH,
+                            THICKET_TREES,
+                            SPARSE_TREES
                         )
                     )
                 )
@@ -434,17 +436,17 @@ public final class AetherBiomes {
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            AetherPlacedFeatures.QUICKSOIL
+                            QUICKSOIL
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            AetherPlacedFeatures.RAINBOW_MALT_SPRIGS,
-                            AetherPlacedFeatures.AETHER_FLOWERS,
-                            AetherPlacedFeatures.AETHER_GRASS,
-                            AetherPlacedFeatures.FALLEN_ROSE_LEAVES,
-                            AetherPlacedFeatures.FALLEN_LAVENDER_LEAVES,
-                            AetherPlacedFeatures.AETHER_BUSH,
-                            AetherPlacedFeatures.PATCH_BLUEBERRY,
-                            AetherPlacedFeatures.RAINBOW_FOREST_TREES
+                            RAINBOW_MALT_SPRIGS,
+                            AETHER_FLOWERS,
+                            AETHER_GRASS,
+                            FALLEN_ROSE_LEAVES,
+                            FALLEN_LAVENDER_LEAVES,
+                            AETHER_BUSH,
+                            PATCH_BLUEBERRY,
+                            RAINBOW_FOREST_TREES
                         )
                     )
                 )
@@ -496,21 +498,21 @@ public final class AetherBiomes {
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LAKES, List.of(
-                            AetherPlacedFeatures.TUNDRA_PONDS,
-                            AetherPlacedFeatures.TUNDRA_SNOW
+                            TUNDRA_PONDS,
+                            TUNDRA_SNOW
                         ),
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            AetherPlacedFeatures.QUICKSOIL,
-                            AetherPlacedFeatures.GENERIC_BOULDER
+                            QUICKSOIL,
+                            GENERIC_BOULDER
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
-                            AetherPlacedFeatures.WATER_SPRING
+                            WATER_SPRING
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            AetherPlacedFeatures.TUNDRA_SPIRES,
-                            AetherPlacedFeatures.TUNDRA_FOLIAGE,
-                            AetherPlacedFeatures.MIXED_TREES,
-                            AetherPlacedFeatures.FLUTEGRASS
+                            TUNDRA_SPIRES,
+                            TUNDRA_FOLIAGE,
+                            MIXED_TREES,
+                            FLUTEGRASS
                         ),
                         GenerationStep.Feature.TOP_LAYER_MODIFICATION, List.of(
                             MiscPlacedFeatures.FREEZE_TOP_LAYER
@@ -562,22 +564,22 @@ public final class AetherBiomes {
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            AetherPlacedFeatures.QUICKSOIL,
-                            AetherPlacedFeatures.PLAINS_BOULDER
+                            QUICKSOIL,
+                            PLAINS_BOULDER
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
-                            AetherPlacedFeatures.WATER_SPRING
+                            WATER_SPRING
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            AetherPlacedFeatures.AETHER_FLOWERS,
-                            AetherPlacedFeatures.AETHER_GRASS,
-                            AetherPlacedFeatures.AETHER_TALL_GRASS,
-                            AetherPlacedFeatures.PATCH_BLUEBERRY,
-                            AetherPlacedFeatures.PLATEAU_FOLIAGE,
-                            AetherPlacedFeatures.PLATEAU_SHAMROCK,
-                            AetherPlacedFeatures.PLATEAU_FLOWERING_GRASS,
-                            AetherPlacedFeatures.PLATEAU_TREES,
-                            AetherPlacedFeatures.FLUTEGRASS
+                            AETHER_FLOWERS,
+                            AETHER_GRASS,
+                            AETHER_TALL_GRASS,
+                            PATCH_BLUEBERRY,
+                            PLATEAU_FOLIAGE,
+                            PLATEAU_SHAMROCK,
+                            PLATEAU_FLOWERING_GRASS,
+                            PLATEAU_TREES,
+                            FLUTEGRASS
                         )
                     )
                 )
@@ -626,35 +628,35 @@ public final class AetherBiomes {
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LAKES, List.of(
-                            AetherPlacedFeatures.SHIELD_PONDS
+                            SHIELD_PONDS
                         ),
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            AetherPlacedFeatures.QUICKSOIL,
-                            AetherPlacedFeatures.GENERIC_BOULDER
+                            QUICKSOIL,
+                            GENERIC_BOULDER
                         ),
                         GenerationStep.Feature.STRONGHOLDS, List.of(
-                            AetherPlacedFeatures.SHIELD_STONE
+                            SHIELD_STONE
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
-                            AetherPlacedFeatures.WATER_SPRING
+                            WATER_SPRING
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            AetherPlacedFeatures.SHIELD_STUMPS,
-                            AetherPlacedFeatures.SHIELD_HOLLOW_STUMPS,
-                            AetherPlacedFeatures.MOTTLED_FALLEN_LOG,
-                            AetherPlacedFeatures.MOTTLED_HOLLOW_FALLEN_LOG,
-                            AetherPlacedFeatures.AETHER_FLOWERS,
-                            AetherPlacedFeatures.SHIELD_FLAX,
-                            AetherPlacedFeatures.SHIELD_NETTLES,
-                            AetherPlacedFeatures.SHIELD_FOLIAGE,
-                            AetherPlacedFeatures.AETHER_GRASS,
-                            AetherPlacedFeatures.AETHER_TALL_GRASS,
-                            AetherPlacedFeatures.WATER_SPRING,
-                            AetherPlacedFeatures.SHIELD_TREES,
-                            AetherPlacedFeatures.DENSE_SHIELD_TREES,
-                            AetherPlacedFeatures.SHIELD_ROCKS,
-                            AetherPlacedFeatures.SHIELD_FALLEN_LEAVES,
-                            AetherPlacedFeatures.FLUTEGRASS
+                            SHIELD_STUMPS,
+                            SHIELD_HOLLOW_STUMPS,
+                            MOTTLED_FALLEN_LOG,
+                            MOTTLED_HOLLOW_FALLEN_LOG,
+                            AETHER_FLOWERS,
+                            SHIELD_FLAX,
+                            SHIELD_NETTLES,
+                            SHIELD_FOLIAGE,
+                            AETHER_GRASS,
+                            AETHER_TALL_GRASS,
+                            WATER_SPRING,
+                            SHIELD_TREES,
+                            DENSE_SHIELD_TREES,
+                            SHIELD_ROCKS,
+                            SHIELD_FALLEN_LEAVES,
+                            FLUTEGRASS
                         )
                     )
                 )

@@ -1,14 +1,14 @@
-package net.id.aether.world.feature;
+package net.id.aether.world.feature.features;
 
 import net.fabricmc.fabric.mixin.structure.StructureFeatureAccessor;
 import net.id.aether.Aether;
 import net.id.aether.world.feature.config.AercloudConfig;
 import net.id.aether.world.feature.config.DynamicConfiguration;
 import net.id.aether.world.feature.config.QuicksoilConfig;
-import net.id.aether.world.feature.features.AercloudFeature;
-import net.id.aether.world.feature.features.AetherLakeFeature;
-import net.id.aether.world.feature.features.CrystalTreeIslandFeature;
-import net.id.aether.world.feature.features.QuicksoilFeature;
+import net.id.aether.world.feature.feature.AercloudFeature;
+import net.id.aether.world.feature.feature.AetherLakeFeature;
+import net.id.aether.world.feature.feature.CrystalTreeIslandFeature;
+import net.id.aether.world.feature.feature.QuicksoilFeature;
 import net.id.aether.world.feature.generator.OrangeRuinGenerator;
 import net.id.aether.world.feature.generator.SkyrootTowerGenerator;
 import net.id.aether.world.feature.generator.WellGenerator;
