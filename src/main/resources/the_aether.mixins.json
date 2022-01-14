@@ -35,8 +35,7 @@
     "util.NbtCompoundAccessor",
     "util.RarityMixin",
     "util.SignTypeAccessor",
-    "world.PlacementModifierTypeAccessor",
-    "world.SimpleBlockStateProviderAccessor"
+    "world.PlacementModifierTypeAccessor"
   ],
   "client": [
     "client.ClientPlayerEntityMixin",
