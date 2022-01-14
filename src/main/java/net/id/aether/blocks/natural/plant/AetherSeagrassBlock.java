@@ -14,7 +14,7 @@ public class AetherSeagrassBlock extends SeagrassBlock {
     }
 
     @Override
-    public float getMaxModelOffset() {
+    public float getMaxHorizontalModelOffset() {
         return 0.125F;
     }
 }

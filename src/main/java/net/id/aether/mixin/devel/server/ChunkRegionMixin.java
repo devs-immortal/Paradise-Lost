@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 @Mixin(ChunkRegion.class)
 public abstract class ChunkRegionMixin{
-    @Shadow private @Nullable Supplier<String> field_33756;
+    @Shadow private @Nullable Supplier<String> currentlyGeneratingStructureName;
     
     @Inject(
         method = "isValidForSetBlock",
@@ -35,8 +35,8 @@ public abstract class ChunkRegionMixin{
                 System.err.println("\tat " + traceElement);
             }
         }
-        if(field_33756 != null){
-            var feature = field_33756.get();
+        if(currentlyGeneratingStructureName != null){
+            var feature = currentlyGeneratingStructureName.get();
             if(feature != null && feature.contains(Aether.MOD_ID)){
                 AetherDevel.logBadFeature(feature);
             }

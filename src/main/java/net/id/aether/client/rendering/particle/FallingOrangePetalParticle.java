@@ -46,8 +46,8 @@ public class FallingOrangePetalParticle extends SpriteBillboardParticle {
             this.velocityY = 0;
         }
         if (this.age > this.maxAge - 1 / 0.06F) {
-            if (this.colorAlpha > 0.06F) {
-                this.colorAlpha -= 0.06F;
+            if (this.alpha > 0.06F) {
+                this.alpha -= 0.06F;
             } else {
                 this.markDead();
             }
