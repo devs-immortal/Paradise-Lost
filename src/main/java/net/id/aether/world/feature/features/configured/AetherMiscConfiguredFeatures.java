@@ -16,6 +16,7 @@ import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class AetherMiscConfiguredFeatures extends AetherConfiguredFeatures{
 
     // Used in json
     public static final ConfiguredFeature<?, ?> GENERIC_BOULDER = register("generic_boulder", AetherConfiguredFeatures.Configs.BOULDER.configure(new BoulderFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(MOSSY_HOLYSTONE.getDefaultState(), 1).add(COBBLED_HOLYSTONE.getDefaultState(), 3).build()), ConstantIntProvider.create(4), UniformIntProvider.create(3, 6))));
-    public static final ConfiguredFeature<?, ?> PLAINS_BOULDER = register("plains_boulder", AetherConfiguredFeatures.Configs.BOULDER.configure(new BoulderFeatureConfig(SimpleBlockStateProviderAccessor.callInit(COBBLED_HOLYSTONE.getDefaultState()), ConstantIntProvider.create(3), UniformIntProvider.create(3, 5)))); // TODO REPLACED WITH JSON //
+    public static final ConfiguredFeature<?, ?> PLAINS_BOULDER = register("plains_boulder", AetherConfiguredFeatures.Configs.BOULDER.configure(new BoulderFeatureConfig(BlockStateProvider.of(COBBLED_HOLYSTONE), ConstantIntProvider.create(3), UniformIntProvider.create(3, 5)))); // TODO REPLACED WITH JSON //
     public static final ConfiguredFeature<?, ?> THICKET_BOULDER = register("thicket_boulder", AetherConfiguredFeatures.Configs.BOULDER.configure(new BoulderFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(MOSSY_HOLYSTONE.getDefaultState(), 4).add(COBBLED_HOLYSTONE.getDefaultState(), 1).build()), ConstantIntProvider.create(6), UniformIntProvider.create(2, 5))));
     public static final ConfiguredFeature<?, ?> GOLDEN_BOULDER = register("golden_boulder", AetherConfiguredFeatures.Configs.BOULDER.configure(new BoulderFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(GOLDEN_MOSSY_HOLYSTONE.getDefaultState(), 4).add(COBBLED_HOLYSTONE.getDefaultState(), 1).build()), ConstantIntProvider.create(4), UniformIntProvider.create(3, 5))));
 
@@ -40,7 +41,7 @@ public class AetherMiscConfiguredFeatures extends AetherConfiguredFeatures{
     public static final ConfiguredFeature<?, ?> SHIELD_PONDS = register("shield_pond", AetherConfiguredFeatures.Configs.AETHER_DELTA_FEATURE.configure(new DeltaFeatureConfig(Blocks.WATER.getDefaultState(), COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM).with(Properties.WATERLOGGED, true), UniformIntProvider.create(2, 7), UniformIntProvider.create(1, 2))));
 
     public static final ConfiguredFeature<?, ?> SHIELD_STONE = register("shield_stone", AetherConfiguredFeatures.Configs.GROUNDCOVER_FEATURE.configure(new GroundcoverFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(HOLYSTONE.getDefaultState(), 7).add(COBBLED_HOLYSTONE.getDefaultState(), 5).add(MOSSY_HOLYSTONE.getDefaultState(), 2).build()), UniformIntProvider.create(1, 4), UniformIntProvider.create(0, 0))));
-    public static final ConfiguredFeature<?, ?> SHIELD_PODZOL = register("shield_podzol", AetherConfiguredFeatures.Configs.GROUNDCOVER_FEATURE.configure(new GroundcoverFeatureConfig(SimpleBlockStateProviderAccessor.callInit(AETHER_FROZEN_GRASS.getDefaultState()), UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 0))));
+    public static final ConfiguredFeature<?, ?> SHIELD_PODZOL = register("shield_podzol", AetherConfiguredFeatures.Configs.GROUNDCOVER_FEATURE.configure(new GroundcoverFeatureConfig(BlockStateProvider.of(AETHER_FROZEN_GRASS), UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 0))));
 
     public static final ConfiguredFeature<?, ?> TUNDRA_SPIRES = register("tundra_spires", AetherConfiguredFeatures.Configs.ICESTONE_SPIRE_FEATURE.configure(FeatureConfig.DEFAULT));
 

@@ -61,13 +61,13 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
 
     public static final ConfiguredFeature<?, ?> SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG));
 
-    public static final ConfiguredFeature<?, ?> THICKET_FALLEN_LOG = register("thicket_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 6), SimpleBlockStateProviderAccessor.callInit(SKYROOT_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(LIVERWORT_CARPET.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(LIVERWORT_CARPET.getDefaultState()), 0.5F, 0.35F, GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> THICKET_FALLEN_LOG = register("thicket_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 6), BlockStateProvider.of(SKYROOT_LOG), BlockStateProvider.of(LIVERWORT_CARPET), BlockStateProvider.of(LIVERWORT_CARPET), 0.5F, 0.35F, GENERIC_FLOOR_WHITELIST)));
 
-    public static final ConfiguredFeature<?, ?> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(AetherBlocks.AETHER_GRASS.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 0.3F, 0.15F, GENERIC_FLOOR_WHITELIST)));
-    public static final ConfiguredFeature<?, ?> MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(AETHER_GRASS_FLOWERING.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 0.4F, 0.25F, GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), BlockStateProvider.of(MOTTLED_SKYROOT_LOG), BlockStateProvider.of(AetherBlocks.AETHER_GRASS), BlockStateProvider.of(ROOTCAP), 0.3F, 0.15F, GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(AETHER_GRASS_FLOWERING), BlockStateProvider.of(ROOTCAP), 0.4F, 0.25F, GENERIC_FLOOR_WHITELIST)));
 
-    public static final ConfiguredFeature<?, ?> SHIELD_STUMPS = register("shield_stumps", Configs.PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(1, 2), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 0.1F, 0.225F, GENERIC_FLOOR_WHITELIST)));
-    public static final ConfiguredFeature<?, ?> SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", Configs.PILLAR_FEATURE.configure(new LongFeatureConfig(ConstantIntProvider.create(1), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(MOTTLED_SKYROOT_FALLEN_LOG.getDefaultState()), SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 0.015F, 0.3F, GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> SHIELD_STUMPS = register("shield_stumps", Configs.PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(1, 2), BlockStateProvider.of(MOTTLED_SKYROOT_LOG), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(ROOTCAP), 0.1F, 0.225F, GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", Configs.PILLAR_FEATURE.configure(new LongFeatureConfig(ConstantIntProvider.create(1), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(ROOTCAP), 0.015F, 0.3F, GENERIC_FLOOR_WHITELIST)));
 
     public static class Configs extends AetherConfiguredFeatures.Configs{
 
@@ -76,9 +76,9 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                                                       FoliagePlacer foliagePlacer, FeatureSize minimumSize,
                                                       boolean ignoreVines, boolean forceDirt) {
             return generateTree(
-                    SimpleBlockStateProviderAccessor.callInit(logState),
-                    SimpleBlockStateProviderAccessor.callInit(foliageState),
-                    SimpleBlockStateProviderAccessor.callInit(dirtState),
+                    BlockStateProvider.of(logState),
+                    BlockStateProvider.of(foliageState),
+                    BlockStateProvider.of(dirtState),
                     trunkPlacer, foliagePlacer, minimumSize,
                     ignoreVines, forceDirt
             );
@@ -136,7 +136,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
         );
         public static final TreeFeatureConfig MOTTLED_SKYROOT_CONFIG = generateTree(
                 MOTTLED_SKYROOT_LOG.getDefaultState(), SKYROOT_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
-                new OvergrownTrunkPlacer(5, 10, 0, SimpleBlockStateProviderAccessor.callInit(ROOTCAP.getDefaultState()), 1 / 14F),
+                new OvergrownTrunkPlacer(5, 10, 0, BlockStateProvider.of(ROOTCAP), 1 / 14F),
                 new BlobFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0), 3),
                 new TwoLayersFeatureSize(1, 0, 1),
                 true, false
@@ -165,14 +165,14 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                 false, false
         );
         public static final TreeFeatureConfig ORANGE_TREE_WILD_CONFIG = generateTree(
-                SimpleBlockStateProviderAccessor.callInit(ORANGE_LOG.getDefaultState()),
+                BlockStateProvider.of(ORANGE_LOG),
                 new WeightedBlockStateProvider(
                         DataPool.<BlockState>builder()
                                 .add(ORANGE_LEAVES_BASIC, 2)
                                 .add(ORANGE_LEAVES_FLOWERING, 2)
                                 .add(ORANGE_LEAVES_FRUITING, 1)
                 ),
-                SimpleBlockStateProviderAccessor.callInit(AETHER_DIRT.getDefaultState()),
+                BlockStateProvider.of(AETHER_DIRT),
                 new BendingTrunkPlacer(3, 2, 1, 3, UniformIntProvider.create(1, 2)),
                 new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 63),
                 new TwoLayersFeatureSize(1, 0, 1),
