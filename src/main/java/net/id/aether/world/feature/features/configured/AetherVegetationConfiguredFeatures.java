@@ -1,6 +1,5 @@
 package net.id.aether.world.feature.features.configured;
 
-import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
 import net.id.aether.world.feature.config.GroundcoverFeatureConfig;
 import net.id.aether.world.feature.config.ProjectedOrganicCoverConfig;
 import net.id.aether.world.feature.feature.HoneyNettleFeature;
@@ -39,8 +38,8 @@ public class AetherVegetationConfiguredFeatures extends AetherConfiguredFeatures
     public static final ConfiguredFeature<?, ?> SHIELD_NETTLES = register("shield_nettles", Configs.HONEY_NETTLE_FEATURE.configure(new DefaultFeatureConfig()));
 
     public static final ConfiguredFeature<?, ?> THICKET_LIVERWORT = register("thicket_liverwort", Configs.GROUNDCOVER_FEATURE.configure(new GroundcoverFeatureConfig(BlockStateProvider.of(LIVERWORT), UniformIntProvider.create(0, 2), UniformIntProvider.create(0, 1))));
-    public static final ConfiguredFeature<?, ?> THICKET_LIVERWORT_CARPET = register("thicket_liverwort_carpet", Configs.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(SimpleBlockStateProviderAccessor.callInit(LIVERWORT_CARPET.getDefaultState()), UniformIntProvider.create(1, 4), ConstantIntProvider.create(5), UniformIntProvider.create(5, 8), 1.3)));
-    public static final ConfiguredFeature<?, ?> THICKET_SHAMROCK = register("thicket_shamrock", Configs.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(SimpleBlockStateProviderAccessor.callInit(SHAMROCK.getDefaultState()), UniformIntProvider.create(2, 6), ConstantIntProvider.create(5), UniformIntProvider.create(4, 7), 1.3)));
+    public static final ConfiguredFeature<?, ?> THICKET_LIVERWORT_CARPET = register("thicket_liverwort_carpet", Configs.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(BlockStateProvider.of(LIVERWORT_CARPET), UniformIntProvider.create(1, 4), ConstantIntProvider.create(5), UniformIntProvider.create(5, 8), 1.3)));
+    public static final ConfiguredFeature<?, ?> THICKET_SHAMROCK = register("thicket_shamrock", Configs.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(BlockStateProvider.of(SHAMROCK), UniformIntProvider.create(2, 6), ConstantIntProvider.create(5), UniformIntProvider.create(4, 7), 1.3)));
 
     public static final ConfiguredFeature<?, ?> TUNDRA_FOLIAGE = register("tundra_foliage", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(32, 7, 3, () -> TUNDRA_FOLIAGE_SINGLE_BLOCK)));
 

@@ -9,8 +9,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 

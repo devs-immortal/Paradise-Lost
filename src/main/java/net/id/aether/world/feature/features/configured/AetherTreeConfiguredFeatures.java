@@ -2,7 +2,6 @@ package net.id.aether.world.feature.features.configured;
 
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
-import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
 import net.id.aether.world.feature.config.LongFeatureConfig;
 import net.id.aether.world.feature.config.ProjectedOrganicCoverConfig;
 import net.id.aether.world.feature.feature.FallenPillarFeature;
@@ -31,7 +30,6 @@ import net.minecraft.world.gen.trunk.TrunkPlacer;
 import java.util.OptionalInt;
 
 import static net.id.aether.blocks.AetherBlocks.*;
-import static net.id.aether.blocks.AetherBlocks.LAVENDER_WISTERIA_LEAVES;
 
 public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
 

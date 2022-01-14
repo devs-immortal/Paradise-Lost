@@ -1,7 +1,6 @@
 package net.id.aether.world.feature.features.placed;
 
 import net.id.aether.blocks.AetherBlocks;
-import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
 import net.id.aether.world.feature.decorators.ChancePlacementModifier;
 import net.id.aether.world.feature.features.configured.AetherVegetationConfiguredFeatures;
 import net.minecraft.block.BlockState;
@@ -12,14 +11,16 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.decorator.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.feature.PlacedFeatures;
+import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 import java.util.List;
 
 import static net.id.aether.blocks.AetherBlocks.*;
-import static net.id.aether.blocks.AetherBlocks.MOSSY_HOLYSTONE;
 import static net.minecraft.world.gen.feature.VegetationPlacedFeatures.NOT_IN_SURFACE_WATER_MODIFIER;
 
 public class AetherVegetationPlacedFeatures extends AetherPlacedFeatures{

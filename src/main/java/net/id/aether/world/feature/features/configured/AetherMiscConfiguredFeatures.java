@@ -1,6 +1,5 @@
 package net.id.aether.world.feature.features.configured;
 
-import net.id.aether.mixin.world.SimpleBlockStateProviderAccessor;
 import net.id.aether.world.feature.config.BoulderFeatureConfig;
 import net.id.aether.world.feature.config.GroundcoverFeatureConfig;
 import net.id.aether.world.feature.features.AetherFeatures;
@@ -22,7 +21,6 @@ import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import java.util.List;
 
 import static net.id.aether.blocks.AetherBlocks.*;
-import static net.id.aether.blocks.AetherBlocks.GRAVITITE_ORE;
 
 public class AetherMiscConfiguredFeatures extends AetherConfiguredFeatures{
 

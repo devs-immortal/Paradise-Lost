@@ -2,7 +2,10 @@ package net.id.aether.world.feature.features.configured;
 
 import com.google.common.collect.ImmutableSet;
 import net.id.aether.world.IcestoneSpireFeature;
-import net.id.aether.world.feature.config.*;
+import net.id.aether.world.feature.config.BoulderFeatureConfig;
+import net.id.aether.world.feature.config.GroundcoverFeatureConfig;
+import net.id.aether.world.feature.config.ProjectedOrganicCoverConfig;
+import net.id.aether.world.feature.config.QuicksoilConfig;
 import net.id.aether.world.feature.feature.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluids;

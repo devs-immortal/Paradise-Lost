@@ -9,9 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class AetherDimension {
     public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.WORLD_KEY, Aether.locate(Aether.MOD_ID));

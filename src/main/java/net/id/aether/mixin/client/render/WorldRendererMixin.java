@@ -1,8 +1,5 @@
 package net.id.aether.mixin.client.render;
 
-import net.id.aether.client.rendering.shader.AetherRenderLayers;
-import net.id.aether.client.rendering.shader.AetherShaders;
-import net.id.aether.util.Config;
 import net.id.aether.world.dimension.AetherDimension;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
@@ -10,16 +7,12 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.profiler.Profiler;
 import net.minecraft.world.HeightLimitView;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin {

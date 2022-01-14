@@ -16,10 +16,8 @@ import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
-import java.util.List;
-
-import static net.id.aether.blocks.AetherBlocks.*;
 import static net.id.aether.blocks.AetherBlocks.COBBLED_HOLYSTONE;
+import static net.id.aether.blocks.AetherBlocks.COBBLED_HOLYSTONE_SLAB;
 
 public class AetherMiscPlacedFeatures extends AetherPlacedFeatures{
 

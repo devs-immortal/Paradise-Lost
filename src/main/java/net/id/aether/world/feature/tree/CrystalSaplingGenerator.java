@@ -1,6 +1,5 @@
 package net.id.aether.world.feature.tree;
 
-import net.id.aether.world.feature.features.configured.AetherConfiguredFeatures;
 import net.id.aether.world.feature.features.configured.AetherTreeConfiguredFeatures;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;

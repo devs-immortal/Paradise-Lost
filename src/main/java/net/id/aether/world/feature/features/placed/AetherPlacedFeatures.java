@@ -1,17 +1,20 @@
 package net.id.aether.world.feature.features.placed;
 
 import net.id.aether.Aether;
-import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.world.feature.features.configured.AetherTreeConfiguredFeatures;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
-import net.minecraft.world.gen.decorator.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.decorator.BlockFilterPlacementModifier;
+import net.minecraft.world.gen.decorator.HeightRangePlacementModifier;
+import net.minecraft.world.gen.decorator.PlacementModifier;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.PlacedFeature;
 
 import java.util.List;
 

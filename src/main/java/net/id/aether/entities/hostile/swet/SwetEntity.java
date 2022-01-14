@@ -1,7 +1,6 @@
 package net.id.aether.entities.hostile.swet;
 
 import net.id.aether.entities.block.FloatingBlockEntity;
-import net.id.aether.items.AetherItems;
 import net.id.aether.tag.AetherItemTags;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;

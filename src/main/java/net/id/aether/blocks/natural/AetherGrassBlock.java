@@ -2,7 +2,6 @@ package net.id.aether.blocks.natural;
 
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.util.SpreadableAetherBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.server.world.ServerWorld;
