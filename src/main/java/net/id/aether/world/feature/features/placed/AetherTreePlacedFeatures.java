@@ -20,22 +20,27 @@ import static net.id.aether.blocks.AetherBlocks.*;
 
 public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
 
-    public static final PlacedFeature SKYROOT_TREE = register("skyroot_tree", AetherTreeConfiguredFeatures.SKYROOT_TREE.withPlacement());
-    public static final PlacedFeature GOLDEN_OAK_TREE = register("golden_oak_tree", AetherTreeConfiguredFeatures.GOLDEN_OAK_TREE.withPlacement(SPREAD_32_ABOVE));
-    public static final PlacedFeature CRYSTAL_TREE = register("crystal_tree", AetherTreeConfiguredFeatures.CRYSTAL_TREE.withPlacement(SPREAD_32_ABOVE));
-    public static final PlacedFeature ORANGE_TREE = register("orange_tree", AetherTreeConfiguredFeatures.ORANGE_TREE.withPlacement(SPREAD_32_ABOVE));
+    public static final PlacedFeature SKYROOT_TREE = register("skyroot_tree", AetherTreeConfiguredFeatures.SKYROOT_TREE.withWouldSurviveFilter(SKYROOT_SAPLING));
+    public static final PlacedFeature GOLDEN_OAK_TREE = register("golden_oak_tree", AetherTreeConfiguredFeatures.GOLDEN_OAK_TREE.withWouldSurviveFilter(GOLDEN_OAK_SAPLING));
+    public static final PlacedFeature CRYSTAL_TREE = register("crystal_tree", AetherTreeConfiguredFeatures.CRYSTAL_TREE.withWouldSurviveFilter(CRYSTAL_SAPLING));
+    public static final PlacedFeature ORANGE_TREE = register("orange_tree", AetherTreeConfiguredFeatures.ORANGE_TREE.withWouldSurviveFilter(ORANGE_SAPLING));
 
-    public static final PlacedFeature ROSE_WISTERIA_TREE = register("rose_wisteria_tree", AetherTreeConfiguredFeatures.ROSE_WISTERIA_TREE.withPlacement(SPREAD_32_ABOVE));
-    public static final PlacedFeature LAVENDER_WISTERIA_TREE = register("lavender_wisteria_tree", AetherTreeConfiguredFeatures.LAVENDER_WISTERIA_TREE.withPlacement(SPREAD_32_ABOVE));
-    public static final PlacedFeature FROST_WISTERIA_TREE = register("frost_wisteria_tree", AetherTreeConfiguredFeatures.FROST_WISTERIA_TREE.withPlacement(SPREAD_32_ABOVE));
-    public static final PlacedFeature BOREAL_WISTERIA_TREE = register("boreal_wisteria_tree", AetherTreeConfiguredFeatures.BOREAL_WISTERIA_TREE.withPlacement(SPREAD_32_ABOVE));
+    public static final PlacedFeature ROSE_WISTERIA_TREE = register("rose_wisteria_tree", AetherTreeConfiguredFeatures.ROSE_WISTERIA_TREE.withWouldSurviveFilter(ROSE_WISTERIA_SAPLING));
+    public static final PlacedFeature LAVENDER_WISTERIA_TREE = register("lavender_wisteria_tree", AetherTreeConfiguredFeatures.LAVENDER_WISTERIA_TREE.withWouldSurviveFilter(LAVENDER_WISTERIA_SAPLING));
+    public static final PlacedFeature FROST_WISTERIA_TREE = register("frost_wisteria_tree", AetherTreeConfiguredFeatures.FROST_WISTERIA_TREE.withWouldSurviveFilter(FROST_WISTERIA_SAPLING));
+    public static final PlacedFeature BOREAL_WISTERIA_TREE = register("boreal_wisteria_tree", AetherTreeConfiguredFeatures.BOREAL_WISTERIA_TREE.withWouldSurviveFilter(BOREAL_WISTERIA_SAPLING));
 
-    public static final PlacedFeature FANCY_ROSE_WISTERIA_TREE = register("fancy_rose_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_ROSE_WISTERIA_TREE.withPlacement(SPREAD_32_ABOVE));
-    public static final PlacedFeature FANCY_LAVENDER_WISTERIA_TREE = register("fancy_lavender_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_LAVENDER_WISTERIA_TREE.withPlacement(SPREAD_32_ABOVE));
-    public static final PlacedFeature FANCY_FROST_WISTERIA_TREE = register("fancy_frost_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_FROST_WISTERIA_TREE.withPlacement(SPREAD_32_ABOVE));
-    public static final PlacedFeature FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_BOREAL_WISTERIA_TREE.withPlacement(SPREAD_32_ABOVE));
-    public static final PlacedFeature FANCY_SKYROOT_TREE = register("fancy_skyroot_tree", AetherTreeConfiguredFeatures.FANCY_SKYROOT_TREE.withPlacement(SPREAD_32_ABOVE));
+    public static final PlacedFeature FANCY_ROSE_WISTERIA_TREE = register("fancy_rose_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_ROSE_WISTERIA_TREE.withWouldSurviveFilter(ROSE_WISTERIA_SAPLING));
+    public static final PlacedFeature FANCY_LAVENDER_WISTERIA_TREE = register("fancy_lavender_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_LAVENDER_WISTERIA_TREE.withWouldSurviveFilter(LAVENDER_WISTERIA_SAPLING));
+    public static final PlacedFeature FANCY_FROST_WISTERIA_TREE = register("fancy_frost_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_FROST_WISTERIA_TREE.withWouldSurviveFilter(FROST_WISTERIA_SAPLING));
+    public static final PlacedFeature FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_BOREAL_WISTERIA_TREE.withWouldSurviveFilter(BOREAL_WISTERIA_SAPLING));
+    public static final PlacedFeature FANCY_SKYROOT_TREE = register("fancy_skyroot_tree", AetherTreeConfiguredFeatures.FANCY_SKYROOT_TREE.withWouldSurviveFilter(SKYROOT_SAPLING));
 
+    /*
+        // These are here because if these are not here, it doesn't work.
+        // Why doesn't it work though? There has to be a better way to handle this.
+     */
+    // I'm changing like everything up now so out of fear of breaking something, these will remain here for now.
     public static final ConfiguredFeature<?, ?> CF_SCATTERED_TREES = AetherConfiguredFeatures.register("scattered_trees", Feature.RANDOM_SELECTOR.configure(AetherTreePlacedFeatures.Configs.SCATTERED_TREES_CONFIG));
     public static final ConfiguredFeature<?, ?> CF_SHIELD_TREES = AetherConfiguredFeatures.register("shield_trees", Feature.RANDOM_SELECTOR.configure(AetherTreePlacedFeatures.Configs.SHIELD_TREES_CONFIG));
     public static final ConfiguredFeature<?, ?> CF_DENSE_SHIELD_TREES = AetherConfiguredFeatures.register("dense_shield_trees", Feature.RANDOM_SELECTOR.configure(AetherTreePlacedFeatures.Configs.DENSE_SHIELD_TREES_CONFIG));
@@ -91,12 +96,6 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
     },
      */
     public static final PlacedFeature CRYSTAL_TREE_ISLAND_DECORATED = register("crystal_tree_island_decorated", AetherTreeConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement(RarityFilterPlacementModifier.of(80), /*TODO See above comment, */ SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.fixed(55), YOffset.fixed(70)), BiomePlacementModifier.of()));
-
-    /*
-        // TCF_ese are here because if these are not here, it doesn't work.
-        // Why doesn't it work though? There has to be a better way to handle this.
-     */
-    // I'm changing like everything up now so out of fear of breaking something, these will remain here for now.
 
     public static class Configs extends AetherPlacedFeatures.Configs{
 
