@@ -9,8 +9,6 @@ import net.minecraft.world.gen.decorator.PlacementModifierType;
 
 import java.util.Random;
 
-//import static net.id.aether.mixin.world.PlacementModifierTypeAccessor.callRegister;
-
 // They removed the chance decorator in 1.18, so I've added it here.
 public class ChancePlacementModifier extends AbstractCountPlacementModifier {
     public static final Codec<ChancePlacementModifier> MODIFIER_CODEC = IntProvider.createValidatingCodec(0, 256)

@@ -23,12 +23,6 @@ import static net.id.aether.blocks.AetherBlocks.*;
  */
 @SuppressWarnings("unused")
 public class AetherConfiguredFeatures {
-
-    // todo all ".spreadHorizontally()"s have been commented out because they were shown to cause errors in 1.17.
-    // if this is not the case anymore, add them back in (however that is done).
-
-    final static List<BlockState> GENERIC_FLOOR_WHITELIST = List.of(AETHER_GRASS_BLOCK.getDefaultState(), COARSE_AETHER_DIRT.getDefaultState(), HOLYSTONE.getDefaultState(), COBBLED_HOLYSTONE.getDefaultState());
-
     public static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String id, ConfiguredFeature<FC, ?> configuredFeature) {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, locate(id), configuredFeature);
     }
@@ -40,6 +34,8 @@ public class AetherConfiguredFeatures {
     }
 
     public static class Configs {
+        // This is incorrect, also convert this and AetherPlacedFeature's AETHER_GROUD to tag
+        final static List<BlockState> GENERIC_FLOOR_WHITELIST = List.of(AETHER_GRASS_BLOCK.getDefaultState(), COARSE_AETHER_DIRT.getDefaultState(), HOLYSTONE.getDefaultState(), COBBLED_HOLYSTONE.getDefaultState());
 
         protected static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature) {
             return Registry.register(Registry.FEATURE, locate(name), feature);

@@ -19,17 +19,21 @@ import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import static net.id.aether.blocks.AetherBlocks.*;
 
 public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
-
+    // Reorganize according to biome, eventually
+    /*
+    Highlands
+     */
+    // Default
     public static final PlacedFeature SKYROOT_TREE = register("skyroot_tree", AetherTreeConfiguredFeatures.SKYROOT_TREE.withWouldSurviveFilter(SKYROOT_SAPLING));
     public static final PlacedFeature GOLDEN_OAK_TREE = register("golden_oak_tree", AetherTreeConfiguredFeatures.GOLDEN_OAK_TREE.withWouldSurviveFilter(GOLDEN_OAK_SAPLING));
     public static final PlacedFeature CRYSTAL_TREE = register("crystal_tree", AetherTreeConfiguredFeatures.CRYSTAL_TREE.withWouldSurviveFilter(CRYSTAL_SAPLING));
     public static final PlacedFeature ORANGE_TREE = register("orange_tree", AetherTreeConfiguredFeatures.ORANGE_TREE.withWouldSurviveFilter(ORANGE_SAPLING));
-
+    // Wisteria
     public static final PlacedFeature ROSE_WISTERIA_TREE = register("rose_wisteria_tree", AetherTreeConfiguredFeatures.ROSE_WISTERIA_TREE.withWouldSurviveFilter(ROSE_WISTERIA_SAPLING));
     public static final PlacedFeature LAVENDER_WISTERIA_TREE = register("lavender_wisteria_tree", AetherTreeConfiguredFeatures.LAVENDER_WISTERIA_TREE.withWouldSurviveFilter(LAVENDER_WISTERIA_SAPLING));
     public static final PlacedFeature FROST_WISTERIA_TREE = register("frost_wisteria_tree", AetherTreeConfiguredFeatures.FROST_WISTERIA_TREE.withWouldSurviveFilter(FROST_WISTERIA_SAPLING));
     public static final PlacedFeature BOREAL_WISTERIA_TREE = register("boreal_wisteria_tree", AetherTreeConfiguredFeatures.BOREAL_WISTERIA_TREE.withWouldSurviveFilter(BOREAL_WISTERIA_SAPLING));
-
+    // Fancy
     public static final PlacedFeature FANCY_ROSE_WISTERIA_TREE = register("fancy_rose_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_ROSE_WISTERIA_TREE.withWouldSurviveFilter(ROSE_WISTERIA_SAPLING));
     public static final PlacedFeature FANCY_LAVENDER_WISTERIA_TREE = register("fancy_lavender_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_LAVENDER_WISTERIA_TREE.withWouldSurviveFilter(LAVENDER_WISTERIA_SAPLING));
     public static final PlacedFeature FANCY_FROST_WISTERIA_TREE = register("fancy_frost_wisteria_tree", AetherTreeConfiguredFeatures.FANCY_FROST_WISTERIA_TREE.withWouldSurviveFilter(FROST_WISTERIA_SAPLING));
@@ -41,6 +45,7 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
         // Why doesn't it work though? There has to be a better way to handle this.
      */
     // I'm changing like everything up now so out of fear of breaking something, these will remain here for now.
+    // Todo move these way to AetherTreeConfiguredFeatures
     public static final ConfiguredFeature<?, ?> CF_SCATTERED_TREES = AetherConfiguredFeatures.register("scattered_trees", Feature.RANDOM_SELECTOR.configure(AetherTreePlacedFeatures.Configs.SCATTERED_TREES_CONFIG));
     public static final ConfiguredFeature<?, ?> CF_SHIELD_TREES = AetherConfiguredFeatures.register("shield_trees", Feature.RANDOM_SELECTOR.configure(AetherTreePlacedFeatures.Configs.SHIELD_TREES_CONFIG));
     public static final ConfiguredFeature<?, ?> CF_DENSE_SHIELD_TREES = AetherConfiguredFeatures.register("dense_shield_trees", Feature.RANDOM_SELECTOR.configure(AetherTreePlacedFeatures.Configs.DENSE_SHIELD_TREES_CONFIG));
@@ -49,7 +54,7 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
     public static final ConfiguredFeature<?, ?> CF_SPARSE_TREES = AetherConfiguredFeatures.register("sparse_trees", Feature.RANDOM_SELECTOR.configure(AetherTreePlacedFeatures.Configs.SPARSE_TREES_CONFIG));
     public static final ConfiguredFeature<?, ?> CF_THICKET_TREES = AetherConfiguredFeatures.register("thicket_trees", Feature.RANDOM_SELECTOR.configure(AetherTreePlacedFeatures.Configs.THICKET_TREES_CONFIG));
     public static final ConfiguredFeature<?, ?> CF_RAINBOW_FOREST_TREES = AetherConfiguredFeatures.register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(AetherTreePlacedFeatures.Configs.RAINBOW_FOREST_CONFIG));
-
+    // Tree Assortments
     public static final PlacedFeature SCATTERED_TREES = register("scattered_trees", CF_SCATTERED_TREES.withPlacement(CountMultilayerPlacementModifier.of(10), CountPlacementModifier.of(UniformIntProvider.create(0, 7))))/*.spreadHorizontally()*/;
     public static final PlacedFeature SHIELD_TREES = register("shield_trees", CF_SHIELD_TREES.withPlacement(CountMultilayerPlacementModifier.of(6), CountPlacementModifier.of(UniformIntProvider.create(0, 5))))/*.spreadHorizontally()*/;
     public static final PlacedFeature DENSE_SHIELD_TREES = register("dense_shield_trees", CF_DENSE_SHIELD_TREES.withPlacement(CountMultilayerPlacementModifier.of(16), new ChancePlacementModifier(ConstantIntProvider.create(10))));
@@ -58,13 +63,13 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
     public static final PlacedFeature SPARSE_TREES = register("sparse_trees", CF_SPARSE_TREES.withPlacement(CountMultilayerPlacementModifier.of(14), new ChancePlacementModifier(ConstantIntProvider.create(50)), CountPlacementModifier.of(UniformIntProvider.create(0, 2))));
     public static final PlacedFeature THICKET_TREES = register("thicket_trees", CF_THICKET_TREES.withPlacement(CountMultilayerPlacementModifier.of(20), CountPlacementModifier.of(UniformIntProvider.create(0, 5))))/*.spreadHorizontally()*/;
     public static final PlacedFeature RAINBOW_FOREST_TREES = register("wisteria_woods_trees", CF_RAINBOW_FOREST_TREES.withPlacement(CountMultilayerPlacementModifier.of(17), CountPlacementModifier.of(UniformIntProvider.create(0, 4))))/*.spreadHorizontally()*/;
-
+    // Fallen leaves
     public static final PlacedFeature FALLEN_LEAVES = register("fallen_leaves", AetherTreeConfiguredFeatures.FALLEN_LEAVES.withPlacement(SPREAD_32_ABOVE, PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, CountPlacementModifier.of(3), new ChancePlacementModifier(ConstantIntProvider.create(5)), BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(Configs.AETHER_GROUD))));
     public static final PlacedFeature ALT_FALLEN_LEAVES = register("alt_fallen_leaves", AetherTreeConfiguredFeatures.ALT_FALLEN_LEAVES.withPlacement(SPREAD_32_ABOVE, PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, CountPlacementModifier.of(3), new ChancePlacementModifier(ConstantIntProvider.create(5)), BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(Configs.AETHER_GROUD))));
 
     public static final PlacedFeature FALLEN_ROSE_LEAVES = register("fallen_rose_leaves", AetherTreeConfiguredFeatures.FALLEN_ROSE_LEAVES.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, new ChancePlacementModifier(ConstantIntProvider.create(2)), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 3)))/*.spreadHorizontally()*/);
     public static final PlacedFeature FALLEN_LAVENDER_LEAVES = register("fallen_lavender_leaves", AetherTreeConfiguredFeatures.FALLEN_LAVENDER_LEAVES.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, new ChancePlacementModifier(ConstantIntProvider.create(2)), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 3)))/*.spreadHorizontally()*/);
-
+    // Logs & Stumps
     public static final PlacedFeature THICKET_FALLEN_LOG = register("thicket_fallen_log", AetherTreeConfiguredFeatures.THICKET_FALLEN_LOG.withPlacement(new ChancePlacementModifier(ConstantIntProvider.create(3)), CountMultilayerPlacementModifier.of(2), CountPlacementModifier.of(UniformIntProvider.create(0, 2)))/*.spreadHorizontally()*/);
 
     public static final PlacedFeature MOTTLED_FALLEN_LOG = register("mottled_fallen_log", AetherTreeConfiguredFeatures.MOTTLED_FALLEN_LOG.withPlacement(new ChancePlacementModifier(ConstantIntProvider.create(3)), CountMultilayerPlacementModifier.of(1)));
@@ -74,7 +79,7 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
     public static final PlacedFeature SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", AetherTreeConfiguredFeatures.SHIELD_HOLLOW_STUMPS.withPlacement(CountMultilayerPlacementModifier.of(1)));
 
     public static final PlacedFeature SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", AetherTreeConfiguredFeatures.SHIELD_FALLEN_LEAVES.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(2), new ChancePlacementModifier(ConstantIntProvider.create(4)), CountPlacementModifier.of(UniformIntProvider.create(0, 3)), BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(Configs.AETHER_GROUD)))/*.spreadHorizontally()*/);
-
+    // Crystal Tree Island
     public static final PlacedFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", AetherTreeConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement());
 
     /*

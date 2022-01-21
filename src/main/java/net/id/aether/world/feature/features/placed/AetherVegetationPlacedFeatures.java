@@ -61,6 +61,16 @@ public class AetherVegetationPlacedFeatures extends AetherPlacedFeatures{
         public static final PlacedFeature AETHER_GRASS_PLANT_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(AetherBlocks.AETHER_GRASS))).withInAirFilter();
         public static final PlacedFeature AETHER_TALL_GRASS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(AetherBlocks.AETHER_TALL_GRASS))).withInAirFilter();
         public static final PlacedFeature FLUTEGRASS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(AetherBlocks.FLUTEGRASS))).withInAirFilter();
+
+        public static final PlacedFeature AETHER_FLOWER_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(
+                new DataPool.Builder<BlockState>()
+                        .add(ATARAXIA.getDefaultState(), 20)
+                        .add(CLOUDSBLUFF.getDefaultState(), 20)
+                        .add(DRIGEAN.getDefaultState(), 3)
+                        .add(LUMINAR.getDefaultState(), 8)
+                        .add(ANCIENT_FLOWER.getDefaultState(), 1)
+                        .build()
+        ))).withInAirFilter();
         // Plato
         public static final PlacedFeature PLATEAU_FOLIAGE_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(AetherBlocks.AETHER_GRASS.getDefaultState(), 20).add(AETHER_FERN.getDefaultState(), 15).add(AetherBlocks.AETHER_BUSH.getDefaultState(), 13).add(AETHER_GRASS_FLOWERING.getDefaultState(), 5)))).withInAirFilter();
         // Shield

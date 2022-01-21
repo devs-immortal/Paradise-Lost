@@ -24,6 +24,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 public class AetherFeatures {
+    // todo move things that belong here here, and move structures to their own file
     public static final StructurePieceType WELL_PIECE = register(WellGenerator.Piece::new, "well");
     public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.Piece::new, "skyroot_tower");
     public static final StructurePieceType ORANGE_RUIN_PIECE = register(OrangeRuinGenerator.Piece::new, "orange_ruin");
@@ -46,7 +47,6 @@ public class AetherFeatures {
     static StructurePieceType register(StructurePieceType pieceType, String id) {
         return Registry.register(Registry.STRUCTURE_PIECE, Aether.locate(id), pieceType);
     }
-
 
     @SuppressWarnings("UnusedReturnValue")
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {

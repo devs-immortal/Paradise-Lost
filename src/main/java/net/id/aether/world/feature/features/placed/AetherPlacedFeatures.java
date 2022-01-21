@@ -23,12 +23,6 @@ import static net.id.aether.blocks.AetherBlocks.*;
 
 @SuppressWarnings("unused")
 public class AetherPlacedFeatures {
-
-    // todo all ".spreadHorizontally()"s have been commented out because they were shown to cause errors in 1.17.
-    // if this is not the case anymore, add them back in (however that is done).
-
-    // this does what .withInAirFilter() does, if ever needed
-    public static final PlacementModifier IN_AIR = BlockFilterPlacementModifier.of(BlockPredicate.matchingBlock(Blocks.AIR, BlockPos.ORIGIN));
     // for ease of familiarity with how 1.17 did it.
     public static final PlacementModifier SPREAD_32_ABOVE = HeightRangePlacementModifier.uniform(YOffset.aboveBottom(32), YOffset.getTop());
 
@@ -43,15 +37,8 @@ public class AetherPlacedFeatures {
     }
 
     public static class Configs {
-
-        // pre 1.18 : public static final RandomPatchFeatureConfig FLOWER_CONFIG = (new RandomPatchFeatureConfig.Builder((new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(PURPLE_FLOWER.getDefaultState(), 2).add(WHITE_FLOWER.getDefaultState(), 1)), new SimpleBlockPlacer())).tries(64).build();
-
         // make this into a tag instead
         // trees care about this
         public static final List<Block> AETHER_GROUD = List.of(AETHER_GRASS_BLOCK, HOLYSTONE, MOSSY_HOLYSTONE, AETHER_DIRT, COARSE_AETHER_DIRT, PERMAFROST);
-
-        private static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature) {
-            return Registry.register(Registry.FEATURE, Aether.locate(name), feature);
-        }
     }
 }
