@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 import static net.id.aether.Aether.locate;
-import static net.id.aether.world.feature.features.placed.AetherMiscPlacedFeatures.*;
-import static net.id.aether.world.feature.features.placed.AetherTreePlacedFeatures.*;
-import static net.id.aether.world.feature.features.placed.AetherVegetationPlacedFeatures.*;
+import static net.id.aether.world.feature.placed_features.AetherMiscPlacedFeatures.*;
+import static net.id.aether.world.feature.placed_features.AetherTreePlacedFeatures.*;
+import static net.id.aether.world.feature.placed_features.AetherVegetationPlacedFeatures.*;
 
 /**
  * Generates the Aether biome instances and registers them with Minecraft. Things in here don't have to be particularly

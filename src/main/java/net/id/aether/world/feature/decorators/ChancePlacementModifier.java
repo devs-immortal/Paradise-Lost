@@ -1,7 +1,6 @@
 package net.id.aether.world.feature.decorators;
 
 import com.mojang.serialization.Codec;
-import net.id.aether.world.gen.decorator.AetherDecorators;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.world.gen.decorator.AbstractCountPlacementModifier;
