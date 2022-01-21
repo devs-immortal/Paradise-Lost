@@ -41,7 +41,7 @@ public class AetherMiscConfiguredFeatures extends AetherConfiguredFeatures{
     public static final ConfiguredFeature<OreFeatureConfig, ?> ORE_ZANITE = register("ore_zanite", Feature.ORE.configure(new OreFeatureConfig(Configs.ZANITE_ORES, 9)));
     // Plato
     // Shield
-    public static final ConfiguredFeature<?, ?> SHIELD_ROCKS = register("shield_rocks", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(96, 9, 3, () -> AetherMiscPlacedFeatures.SHIELD_ROCKS_SINGLE_BLOCK)/*.cannotProject()*/));
+    public static final ConfiguredFeature<?, ?> SHIELD_ROCKS = register("shield_rocks", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(96, 9, 3, () -> AetherMiscPlacedFeatures.Configs.SHIELD_ROCKS_SINGLE_BLOCK)/*.cannotProject()*/));
 
     public static final ConfiguredFeature<?, ?> SHIELD_PONDS = register("shield_pond", AetherConfiguredFeatures.Configs.AETHER_DELTA_FEATURE.configure(new DeltaFeatureConfig(Blocks.WATER.getDefaultState(), COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM).with(Properties.WATERLOGGED, true), UniformIntProvider.create(2, 7), UniformIntProvider.create(1, 2))));
 

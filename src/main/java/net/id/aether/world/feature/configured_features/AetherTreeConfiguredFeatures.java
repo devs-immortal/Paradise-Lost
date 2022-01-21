@@ -7,6 +7,7 @@ import net.id.aether.world.feature.configs.ProjectedOrganicCoverConfig;
 import net.id.aether.world.feature.features.FallenPillarFeature;
 import net.id.aether.world.feature.features.PillarFeature;
 import net.id.aether.world.feature.AetherFeatures;
+import net.id.aether.world.feature.placed_features.AetherPlacedFeatures;
 import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
@@ -108,7 +109,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
         public static final BlockState ORANGE_LEAVES_FRUITING = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 2);
 
         // Find a way to move this to Placed Features
-        public static final PlacedFeature FALLEN_LEAVES_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(SKYROOT_LEAF_PILE.getDefaultState(), 8).add(SKYROOT_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 1)))).withInAirFilter();
+        public static final PlacedFeature FALLEN_LEAVES_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(SKYROOT_LEAF_PILE.getDefaultState(), 8).add(SKYROOT_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 1)))).withPlacement(AetherPlacedFeatures.ON_SOLID_GROUND);
         public static final RandomPatchFeatureConfig FALLEN_LEAVES_CONFIG = (new RandomPatchFeatureConfig(96, 10, 7, () -> FALLEN_LEAVES_SINGLE_BLOCK))/*.cannotProject()*/;
 
         public static final Feature<LongFeatureConfig> PILLAR_FEATURE = register("pillar_feature", new PillarFeature(LongFeatureConfig.CODEC));

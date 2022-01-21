@@ -3,6 +3,7 @@ package net.id.aether.world.feature.configured_features;
 import net.id.aether.world.feature.configs.GroundcoverFeatureConfig;
 import net.id.aether.world.feature.configs.ProjectedOrganicCoverConfig;
 import net.id.aether.world.feature.features.HoneyNettleFeature;
+import net.id.aether.world.feature.placed_features.AetherPlacedFeatures;
 import net.id.aether.world.feature.placed_features.AetherVegetationPlacedFeatures;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
@@ -23,7 +24,7 @@ public class AetherVegetationConfiguredFeatures extends AetherConfiguredFeatures
     public static final ConfiguredFeature<?, ?> AETHER_TALL_GRASS_BUSH = register("aether_tall_grass", Feature.RANDOM_PATCH.configure(Configs.AETHER_TALL_GRASS_BUSH_CONFIG));
     public static final ConfiguredFeature<?, ?> FLUTEGRASS = register("flutegrass", Feature.RANDOM_PATCH.configure(Configs.FLUTEGRASS_CONFIG));
     public static final ConfiguredFeature<?, ?> AETHER_FLOWERS = register("aether_flowers", Feature.FLOWER.configure(Configs.AETHER_FLOWER_CONFIG));
-    public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(42, 5, 5, ()->Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(BLUEBERRY_BUSH.getDefaultState().with(Properties.AGE_3, 3)))).withInAirFilter())));
+    public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(42, 5, 5, ()->Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(BLUEBERRY_BUSH.getDefaultState().with(Properties.AGE_3, 3)))).withPlacement(AetherPlacedFeatures.ON_SOLID_GROUND))));
     // Plato
     public static final ConfiguredFeature<?, ?> PLATEAU_FOLIAGE = register("plateau_foliage", Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig(96, 7, 3, () -> AetherVegetationPlacedFeatures.Configs.PLATEAU_FOLIAGE_SINGLE_BLOCK)));
     public static final ConfiguredFeature<?, ?> PLATEAU_FLOWERING_GRASS = register("plateau_flowering_grass", Configs.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(BlockStateProvider.of(AETHER_GRASS_FLOWERING), UniformIntProvider.create(3, 10), ConstantIntProvider.create(5), UniformIntProvider.create(3, 6), 1.5)));

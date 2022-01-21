@@ -6,9 +6,12 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.YOffset;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.PlacedFeature;
@@ -16,8 +19,7 @@ import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
-import static net.id.aether.blocks.AetherBlocks.COBBLED_HOLYSTONE;
-import static net.id.aether.blocks.AetherBlocks.COBBLED_HOLYSTONE_SLAB;
+import static net.id.aether.blocks.AetherBlocks.*;
 
 public class AetherMiscPlacedFeatures extends AetherPlacedFeatures{
     /*
@@ -37,7 +39,6 @@ public class AetherMiscPlacedFeatures extends AetherPlacedFeatures{
     public static final PlacedFeature ORE_ZANITE = register("ore_zanite", AetherMiscConfiguredFeatures.ORE_ZANITE.withPlacement(CountPlacementModifier.of(16), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(128)), BiomePlacementModifier.of()));
     // Plato
     // Shield
-    public static final PlacedFeature SHIELD_ROCKS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM), 10).add(COBBLED_HOLYSTONE.getDefaultState(), 4).build()))).withPlacement();
     public static final PlacedFeature SHIELD_ROCKS = register("shield_rocks", AetherMiscConfiguredFeatures.SHIELD_ROCKS.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(3), CountPlacementModifier.of(UniformIntProvider.create(0, 3)))/*.spreadHorizontally()*/);
 
     public static final PlacedFeature SHIELD_PONDS = register("shield_pond", AetherMiscConfiguredFeatures.SHIELD_PONDS.withPlacement(CountMultilayerPlacementModifier.of(30)));
@@ -51,4 +52,9 @@ public class AetherMiscPlacedFeatures extends AetherPlacedFeatures{
     public static final PlacedFeature TUNDRA_SNOW = register("tundra_snow", AetherMiscConfiguredFeatures.TUNDRA_SNOW.withPlacement(CountMultilayerPlacementModifier.of(2), CountPlacementModifier.of(UniformIntProvider.create(0, 2))));
 
     public static void init(){}
+
+    public static class Configs extends AetherPlacedFeatures.Configs {
+
+        public static final PlacedFeature SHIELD_ROCKS_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM), 10).add(COBBLED_HOLYSTONE.getDefaultState(), 4).build()))).withPlacement(BlockFilterPlacementModifier.of(IN_OR_ON_GROUND));
+    }
 }

@@ -5,6 +5,7 @@ import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.world.feature.decorators.ChancePlacementModifier;
 import net.id.aether.world.feature.configured_features.AetherConfiguredFeatures;
 import net.id.aether.world.feature.configured_features.AetherTreeConfiguredFeatures;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.collection.DataPool;
@@ -119,14 +120,14 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
                         new RandomFeatureEntry(FANCY_ROSE_WISTERIA_TREE, 0.075F),
                         new RandomFeatureEntry(FROST_WISTERIA_TREE, 0.0001F),
                         new RandomFeatureEntry(SKYROOT_TREE, 0.2F),
-                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.ORANGE_TREE_WILD_CONFIG), 0.0125F)),
+                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.ORANGE_TREE_WILD_CONFIG, ORANGE_SAPLING), 0.0125F)),
                 ROSE_WISTERIA_TREE
         );
 
         public static final RandomFeatureConfig SPARSE_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
                         new RandomFeatureEntry(FANCY_SKYROOT_TREE, 0.1F),
-                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.ORANGE_TREE_WILD_CONFIG), 0.02F)
+                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.ORANGE_TREE_WILD_CONFIG, ORANGE_SAPLING), 0.02F)
                 ),
                 SKYROOT_TREE
         );
@@ -143,39 +144,39 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
                         new RandomFeatureEntry(ROSE_WISTERIA_TREE, 0.0001F),
                         new RandomFeatureEntry(LAVENDER_WISTERIA_TREE, 0.0001F),
                         new RandomFeatureEntry(GOLDEN_OAK_TREE, 0.0025F),
-                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.SKYROOT_SHRUB_CONFIG), 0.15F), // convert to feature
+                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.SKYROOT_SHRUB_CONFIG, SKYROOT_SAPLING), 0.15F), // convert to feature
                         new RandomFeatureEntry(SKYROOT_TREE, 0.75F)),
                 FANCY_SKYROOT_TREE
         );
 
         public static final RandomFeatureConfig DENSE_SHIELD_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.DWARF_MOTTLED_SKYROOT_CONFIG), 0.1F),
+                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.DWARF_MOTTLED_SKYROOT_CONFIG, SKYROOT_SAPLING), 0.1F),
                         new RandomFeatureEntry(SKYROOT_TREE, 0.05F)),
-                placedTree(AetherTreeConfiguredFeatures.Configs.MOTTLED_SKYROOT_CONFIG)
+                placedTree(AetherTreeConfiguredFeatures.Configs.MOTTLED_SKYROOT_CONFIG, SKYROOT_SAPLING)
         );
 
         public static final RandomFeatureConfig SHIELD_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.DWARF_MOTTLED_SKYROOT_CONFIG), 0.15F)),
-                placedTree(AetherTreeConfiguredFeatures.Configs.MOTTLED_SKYROOT_CONFIG)
+                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.DWARF_MOTTLED_SKYROOT_CONFIG, SKYROOT_SAPLING), 0.15F)),
+                placedTree(AetherTreeConfiguredFeatures.Configs.MOTTLED_SKYROOT_CONFIG, SKYROOT_SAPLING)
         );
 
         public static final RandomFeatureConfig PLATEAU_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.ORANGE_TREE_WILD_CONFIG), 0.05F),
-                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.DWARF_MOTTLED_SKYROOT_CONFIG), 0.225F)),
-                placedTree(AetherTreeConfiguredFeatures.Configs.SKYROOT_SHRUB_CONFIG)
+                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.ORANGE_TREE_WILD_CONFIG, ORANGE_SAPLING), 0.05F),
+                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.DWARF_MOTTLED_SKYROOT_CONFIG, SKYROOT_SAPLING), 0.225F)),
+                placedTree(AetherTreeConfiguredFeatures.Configs.SKYROOT_SHRUB_CONFIG, SKYROOT_SAPLING)
         );
 
         public static final RandomFeatureConfig MIXED_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.DWARF_MOTTLED_SKYROOT_CONFIG), 0.4F)),
+                        new RandomFeatureEntry(placedTree(AetherTreeConfiguredFeatures.Configs.DWARF_MOTTLED_SKYROOT_CONFIG, SKYROOT_SAPLING), 0.4F)),
                 SKYROOT_TREE
         );
 
-        private static PlacedFeature placedTree(TreeFeatureConfig cfg) {
-            return Feature.TREE.configure(cfg).withPlacement();
+        private static PlacedFeature placedTree(TreeFeatureConfig cfg, Block sapling) {
+            return Feature.TREE.configure(cfg).withWouldSurviveFilter(sapling);
         }
 
     }
