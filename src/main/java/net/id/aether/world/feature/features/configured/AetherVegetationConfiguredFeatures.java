@@ -14,7 +14,7 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 import static net.id.aether.blocks.AetherBlocks.*;
-import static net.id.aether.world.feature.features.placed.AetherVegetationPlacedFeatures.*;
+import static net.id.aether.world.feature.features.placed.AetherVegetationPlacedFeatures.Configs.*;
 
 public class AetherVegetationConfiguredFeatures extends AetherConfiguredFeatures{
 
