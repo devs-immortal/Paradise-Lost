@@ -34,7 +34,7 @@ public abstract class WorldRendererMixin {
     /**
      * Disables the void fog in the Aether. Used to be a pair of redirects.
      *
-     * @author gudenau 
+     * @author gudenau
      */
     @ModifyVariable(
         method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FLjava/lang/Runnable;)V",
