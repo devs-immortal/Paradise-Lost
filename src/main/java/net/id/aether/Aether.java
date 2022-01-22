@@ -81,7 +81,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherDimension.init();
         AetherStatusEffects.init();
         AetherBlocks.init();
-        AetherBlockTags.init();
         AetherFluids.init();
         AetherEntityTypes.init();
         AetherItems.init();
