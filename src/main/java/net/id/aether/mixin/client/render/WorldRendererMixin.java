@@ -31,6 +31,11 @@ public abstract class WorldRendererMixin {
     
     @Shadow @Nullable private ClientWorld world;
     
+    /**
+     * Disables the void fog in the Aether. Used to be a pair of redirects.
+     *
+     * @author gudenau 
+     */
     @ModifyVariable(
         method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FLjava/lang/Runnable;)V",
         at = @At(
@@ -44,6 +49,12 @@ public abstract class WorldRendererMixin {
         return world != null && world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY ? 0 : original;
     }
     
+    /**
+     * This injection is critical for the proper rendering of our custom render layers. Without this some of our blocks
+     * will never render.
+     *
+     * @author gudenau
+     */
     @Inject(
         method = "render",
         at = @At(
@@ -54,14 +65,12 @@ public abstract class WorldRendererMixin {
         ),
         locals = LocalCapture.CAPTURE_FAILHARD
     )
-    //MatrixStack matrices, float tickDelta, long var3, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f positionMatrix,
-    // CallbackInfo ci,
-    // Profiler profiler, boolean bl, Vec3d vec3d, double d, double e, double f, Matrix4f matrix4f, boolean bl2, Frustum frustum, float g, boolean bl3
     private void render(
         MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f,
         CallbackInfo ci,
         Profiler profiler, boolean hasNoUpdaters, Vec3d camPos, double camX, double camY, double camZ
     ){
+        // Sodium doesn't support custom render layers, if we try to render ours Sodium crashes.
         if(Config.SODIUM_WORKAROUND){
             return;
         }
