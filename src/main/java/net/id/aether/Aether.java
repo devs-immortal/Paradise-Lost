@@ -15,6 +15,7 @@ import net.id.aether.client.rendering.block.AetherBlockEntityRenderers;
 import net.id.aether.client.rendering.entity.AetherEntityRenderers;
 import net.id.aether.client.rendering.item.AetherItemRenderers;
 import net.id.aether.client.rendering.particle.AetherParticles;
+import net.id.aether.client.rendering.shader.AetherShaders;
 import net.id.aether.client.rendering.texture.AetherTextures;
 import net.id.aether.client.rendering.util.AetherColorProviders;
 import net.id.aether.commands.AetherCommands;
@@ -113,6 +114,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherItemRenderers.initClient();
         AetherScreens.initClient();
         Conditions.clientInit();
+        AetherShaders.init();
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.Client.init();
         }
