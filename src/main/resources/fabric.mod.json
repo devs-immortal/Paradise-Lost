@@ -36,7 +36,8 @@
     "fabric-registry-sync-v0": "*",
     "fabric-networking-v0": "*",
     "trinkets": "*",
-    "gud_recipe_confidence": "*"
+    "gud_recipe_confidence": "*",
+    "moretags": ">=2.0.0"
   },
   "mixins": [
     "the_aether.mixins.json"
