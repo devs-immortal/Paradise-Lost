@@ -1,6 +1,6 @@
 package net.id.aether.executable;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class InstallerGUI {
     public static void main(String[] args) {

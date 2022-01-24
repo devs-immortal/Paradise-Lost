@@ -3,16 +3,9 @@ package net.id.aether.component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
-import net.id.aether.Aether;
-import net.id.aether.entities.AetherEntityTypes;
-import net.id.aether.entities.misc.RookEntity;
-import net.id.aether.world.dimension.AetherDimension;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
 import java.util.Random;

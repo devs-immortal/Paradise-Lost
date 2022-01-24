@@ -2,7 +2,7 @@ package net.id.aether.world.feature.structure;
 
 import com.mojang.serialization.Codec;
 import net.id.aether.Aether;
-import net.id.aether.world.feature.generator.SkyrootTowerGenerator;
+import net.id.aether.world.feature.structure.generator.SkyrootTowerGenerator;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructureGeneratorFactory;
 import net.minecraft.structure.StructurePiecesCollector;

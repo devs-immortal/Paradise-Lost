@@ -47,7 +47,7 @@ public class MossBallBlock extends PlantBlock implements Waterloggable, Fertiliz
     }
 
     @Override
-    public float getMaxModelOffset() {
+    public float getMaxHorizontalModelOffset() {
         return 0.09F;
     }
 

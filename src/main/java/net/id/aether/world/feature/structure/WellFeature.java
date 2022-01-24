@@ -1,7 +1,7 @@
 package net.id.aether.world.feature.structure;
 
 import com.mojang.serialization.Codec;
-import net.id.aether.world.feature.generator.WellGenerator;
+import net.id.aether.world.feature.structure.generator.WellGenerator;
 import net.minecraft.structure.StructureGeneratorFactory;
 import net.minecraft.structure.StructurePiecesCollector;
 import net.minecraft.structure.StructurePiecesGenerator;

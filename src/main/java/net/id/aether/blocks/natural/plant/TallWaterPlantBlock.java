@@ -36,7 +36,7 @@ public class TallWaterPlantBlock extends TallPlantBlock implements Waterloggable
     }
 
     @Override
-    public float getMaxModelOffset() {
+    public float getMaxHorizontalModelOffset() {
         return 0.15F;
     }
 

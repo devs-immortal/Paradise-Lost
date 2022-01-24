@@ -14,6 +14,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -50,7 +51,7 @@ public final class CloudRendererMixin {
     @Shadow
     private boolean cloudsDirty;
     @Shadow
-    @NotNull
+    @Nullable
     private VertexBuffer cloudsBuffer;
 
     public CloudRendererMixin() {
@@ -69,8 +70,7 @@ public final class CloudRendererMixin {
 
     // TODO: Replace this mostly copy-pasted code with some redirects or injections
     private void internalCloudRender(MatrixStack matrices, Matrix4f model, float tickDelta, double cameraX, double cameraY, double cameraZ, float cloudOffset, float cloudScale, float speedMod) {
-        DimensionEffects properties = this.world.getDimensionEffects();
-        float cloudHeight = properties.getCloudsHeight();
+        float cloudHeight = this.world.getDimensionEffects().getCloudsHeight();
         if (!Float.isNaN(cloudHeight)) {
             RenderSystem.disableCull();
             RenderSystem.enableBlend();
@@ -78,9 +78,9 @@ public final class CloudRendererMixin {
             RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.depthMask(true);
             double speed = ((this.ticks + tickDelta) * (0.03F * speedMod));
-            double posX = (cameraX + speed) / 12.0D;
-            double posY = cloudHeight - (float) cameraY + cloudOffset;
-            double posZ = cameraZ / 12.0D + 0.33000001311302185D;
+            double posX = (cameraX + speed) / 12.0D / cloudScale;
+            double posY = (cloudHeight - cameraY + cloudOffset) / cloudScale + 0.33F;
+            double posZ = cameraZ / 12.0D / cloudScale + 0.33000001311302185D;
             posX -= MathHelper.floor(posX / 2048.0D) * 2048;
             posZ -= MathHelper.floor(posZ / 2048.0D) * 2048;
             float adjustedX = (float) (posX - (double) MathHelper.floor(posX));
@@ -101,8 +101,7 @@ public final class CloudRendererMixin {
 
             if (this.cloudsDirty) {
                 this.cloudsDirty = false;
-                Tessellator tessellator = Tessellator.getInstance();
-                BufferBuilder bufferBuilder = tessellator.getBuffer();
+                BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
                 if (this.cloudsBuffer != null) this.cloudsBuffer.close();
 
                 this.cloudsBuffer = new VertexBuffer();
@@ -121,8 +120,8 @@ public final class CloudRendererMixin {
             if (this.cloudsBuffer != null) {
                 int cloudMainIndex = this.lastCloudsRenderMode == CloudRenderMode.FANCY ? 0 : 1;
 
-                for (int cloudIndex = 1; cloudMainIndex <= cloudIndex; ++cloudMainIndex) {
-                    if (cloudMainIndex == 0) {
+                for (int cloudIndex = cloudMainIndex; cloudIndex < 2; ++cloudIndex) {
+                    if (cloudIndex == 0) {
                         RenderSystem.colorMask(false, false, false, false);
                     } else {
                         RenderSystem.colorMask(true, true, true, true);

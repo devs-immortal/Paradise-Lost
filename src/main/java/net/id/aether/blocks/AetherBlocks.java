@@ -29,7 +29,7 @@ import net.id.aether.registry.AetherRegistryQueues;
 import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.util.AetherSignType;
 import net.id.aether.util.RenderUtils;
-import net.id.aether.world.feature.tree.*;
+import net.id.aether.world.feature.tree.generator.*;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;

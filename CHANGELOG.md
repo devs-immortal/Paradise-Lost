@@ -1,4 +1,4 @@
-# Fixes
+# Changes
 
-- Fixed incorrect bumping of Fabric Loader (Wasn't meant to be applied to the mod.json)
-- Fixed Boreal Wisteria Loot Tables
+- **Updated for Minecraft 1.18.1**
+  - (Version bumped due to dependency updates, breaking binary compatibility)

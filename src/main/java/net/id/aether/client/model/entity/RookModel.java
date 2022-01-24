@@ -1,9 +1,7 @@
 package net.id.aether.client.model.entity;
 
-import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.aether.Aether;
 import net.id.aether.component.LUV;
 import net.id.aether.entities.misc.RookEntity;
 import net.minecraft.client.MinecraftClient;
@@ -13,7 +11,6 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
 
 @Environment(EnvType.CLIENT)
 public class RookModel extends EntityModel<RookEntity> {

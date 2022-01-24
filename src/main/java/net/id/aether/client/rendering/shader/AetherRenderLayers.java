@@ -3,8 +3,9 @@ package net.id.aether.client.rendering.shader;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.aether.mixin.client.render.RenderLayerAccessor;
-import net.id.aether.mixin.client.render.RenderPhaseAccessor;
+import net.gudenau.minecraft.csl.api.v0.CustomRenderLayers;
+import net.gudenau.minecraft.csl.api.v0.CustomShaderTexture;
+import net.gudenau.minecraft.csl.api.v0.RenderLayerBuilder;
 import net.id.aether.util.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
@@ -12,16 +13,15 @@ import net.minecraft.client.render.RenderPhase;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.TextureManager;
+import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
+import org.lwjgl.opengl.GL33;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
-import static net.id.aether.client.rendering.shader.AetherShaders.locate;
+import static net.id.aether.Aether.locate;
 
 @Environment(EnvType.CLIENT)
 public final class AetherRenderLayers{
@@ -37,8 +37,25 @@ public final class AetherRenderLayers{
             AURAL = RenderLayer.getSolid();
             AURAL_CUTOUT_MIPPED = RenderLayer.getCutoutMipped();
         }else{
-            AURAL = RenderLayerAccessor.invokeOf(locate("aural"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 0x20000, true, false, RenderLayer.MultiPhaseParameters.builder().lightmap(RenderPhaseAccessor.getEnableLightmap()).shader(AetherRenderPhases.AURAL).texture(RenderPhaseAccessor.getMipmapBlockAtlasTexture()).build(true));
-            AURAL_CUTOUT_MIPPED = RenderLayerAccessor.invokeOf(locate("aural_cutout_mipped"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 0x20000, true, false, RenderLayer.MultiPhaseParameters.builder().lightmap(RenderPhaseAccessor.getEnableLightmap()).shader(AetherRenderPhases.AURAL_CUTOUT_MIPPED).texture(RenderPhaseAccessor.getMipmapBlockAtlasTexture()).build(true));
+            var builder = RenderLayerBuilder.createBuilder();
+            builder.vertexFormat(VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL)
+                .drawMode(VertexFormat.DrawMode.QUADS)
+                .expectedBufferSize(0x20000)
+                .hasCrumbling(true)
+                .translucent(false)
+                .outlineMode(RenderLayerBuilder.OutlineMode.AFFECTS_OUTLINE)
+                .lightmap(true)
+                .texture(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, false, true);
+            
+            AURAL = builder.shader(AetherShaders::getAural)
+                .build(locate("aural"));
+            AURAL_CUTOUT_MIPPED = builder.shader(AetherShaders::getAuralCutoutMipped)
+                .build(locate("aural_cutout_mipped"));
+    
+            CustomRenderLayers.getInstance().registerBlockRenderLayers(
+                AURAL,
+                AURAL_CUTOUT_MIPPED
+            );
         }
     }
     
@@ -51,30 +68,22 @@ public final class AetherRenderLayers{
     }
     
     private static RenderLayer createCubeMap(Identifier identifier){
-        return RenderLayerAccessor.invokeOf(
-            identifier.getNamespace() + ":cubemap/" + identifier.getPath(),
-            AetherVertexFormats.POSITION_COLOR_LIGHT_NORMAL,
-            VertexFormat.DrawMode.QUADS,
-            0x20000, true, false,
-            RenderLayer.MultiPhaseParameters.builder()
-                .lightmap(RenderPhaseAccessor.getEnableLightmap())
-                .shader(AetherRenderPhases.CUBEMAP)
-                .texture(CUBEMAP_TEXTURES.computeIfAbsent(identifier, (key)->new CubemapTexture(identifier)))
-                .build(true)
-        );
+        var layer = RenderLayerBuilder.createBuilder()
+            .vertexFormat(AetherVertexFormats.POSITION_COLOR_LIGHT_NORMAL)
+            .drawMode(VertexFormat.DrawMode.QUADS)
+            .expectedBufferSize(0x20000)
+            .hasCrumbling(true)
+            .translucent(false)
+            .outlineMode(RenderLayerBuilder.OutlineMode.AFFECTS_OUTLINE)
+            .lightmap(true)
+            .shader(AetherShaders::getCubemap)
+            .texture(CUBEMAP_TEXTURES.computeIfAbsent(identifier, (key)->new CubemapTexture(identifier)))
+            .build(new Identifier(identifier.getNamespace(), "cubemap/" + identifier.getPath()));
+        CustomRenderLayers.getInstance().registerBlockRenderLayer(layer);
+        return layer;
     }
     
-    public static List<RenderLayer> getBlockLayers(){
-        if(Config.SODIUM_WORKAROUND){
-            return List.of();
-        }
-        return Stream.of(
-            Stream.of(AURAL, AURAL_CUTOUT_MIPPED),
-            CUBEMAPS.values().stream()
-        ).flatMap(Function.identity()).toList();
-    }
-    
-    private static final class CubemapTexture extends RenderPhase.TextureBase{
+    private static final class CubemapTexture extends RenderPhase.TextureBase implements CustomShaderTexture {
         private final Optional<Identifier> id;
     
         public CubemapTexture(Identifier id){
@@ -93,6 +102,11 @@ public final class AetherRenderLayers{
     
         protected Optional<Identifier> getId(){
             return id;
+        }
+    
+        @Override
+        public void bindTexture(int texture) {
+            GL33.glBindTexture(GL33.GL_TEXTURE_CUBE_MAP, texture);
         }
     }
 }

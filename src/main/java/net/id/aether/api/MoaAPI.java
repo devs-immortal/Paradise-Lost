@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.id.aether.Aether;
 import net.id.aether.component.MoaGenes;
 import net.id.aether.entities.passive.moa.MoaAttributes;
-import net.id.aether.world.dimension.AetherDimension;
+import net.id.aether.world.dimension.AetherBiomes;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
@@ -146,7 +146,7 @@ public class MoaAPI {
         Optional<MoaRace> raceOptional =
                 Optional.ofNullable(getSpawnBucket(biome)
                         .map(bucket -> bucket.get(random))
-                        .orElse(MOA_SPAWN_REGISTRY.get(AetherDimension.HIGHLANDS_PLAINS).get(random)));
+                        .orElse(MOA_SPAWN_REGISTRY.get(AetherBiomes.HIGHLANDS_PLAINS_KEY).get(random)));
         return raceOptional.orElse(FALLBACK_MOA);
     }
 

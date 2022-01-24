@@ -12,8 +12,6 @@ public final class Plugin implements IMixinConfigPlugin{
     private static final boolean isDevel = FabricLoader.getInstance().isDevelopmentEnvironment();
     
     private static final class Compat{
-        private static final boolean satin = isLoaded("satin");
-        
         private static boolean isLoaded(String id){
             return FabricLoader.getInstance().isModLoaded(id);
         }
@@ -29,10 +27,6 @@ public final class Plugin implements IMixinConfigPlugin{
     
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName){
-        if(Compat.satin && mixinClassName.equals("net.id.aether.mixin.client.render.ShaderIdFixMixin")){
-            return false;
-        }
-        
         if(isDevel){
             return true;
         }

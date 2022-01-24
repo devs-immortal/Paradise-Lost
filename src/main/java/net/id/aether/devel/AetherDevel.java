@@ -27,9 +27,7 @@ public final class AetherDevel{
     }
     
     private static final boolean isDevel = FabricLoader.getInstance().isDevelopmentEnvironment();
-    
-    // Just to make things that should be removed at some point, this isn't going anywhere
-    @Deprecated(forRemoval = true)
+
     public static boolean isDevel(){
         return isDevel;
     }

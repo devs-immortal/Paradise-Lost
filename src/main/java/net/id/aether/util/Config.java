@@ -1,7 +1,8 @@
 package net.id.aether.util;
 
-import java.util.function.Function;
 import net.fabricmc.loader.api.FabricLoader;
+
+import java.util.function.Function;
 
 import static net.id.aether.Aether.MOD_ID;
 

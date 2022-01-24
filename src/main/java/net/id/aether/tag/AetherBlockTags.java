@@ -31,6 +31,4 @@ public class AetherBlockTags {
 
     //JEB, WHY ARE SHEARS HARDCODED
     public static final Tag<Block> AETHER_SHEARABLE = TagFactory.BLOCK.create(locate("mineable_by_shears"));
-    
-    public static void init(){}
 }

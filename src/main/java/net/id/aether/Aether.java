@@ -15,6 +15,7 @@ import net.id.aether.client.rendering.block.AetherBlockEntityRenderers;
 import net.id.aether.client.rendering.entity.AetherEntityRenderers;
 import net.id.aether.client.rendering.item.AetherItemRenderers;
 import net.id.aether.client.rendering.particle.AetherParticles;
+import net.id.aether.client.rendering.shader.AetherShaders;
 import net.id.aether.client.rendering.texture.AetherTextures;
 import net.id.aether.client.rendering.util.AetherColorProviders;
 import net.id.aether.commands.AetherCommands;
@@ -34,12 +35,10 @@ import net.id.aether.util.AetherSoundEvents;
 import net.id.aether.world.AetherGameRules;
 import net.id.aether.world.dimension.AetherBiomes;
 import net.id.aether.world.dimension.AetherDimension;
-import net.id.aether.world.feature.AetherConfiguredFeatures;
 import net.id.aether.world.feature.AetherFeatures;
-import net.id.aether.world.feature.AetherPlacedFeatures;
 import net.id.aether.world.feature.tree.AetherTreeHell;
 import net.id.aether.world.gen.carver.AetherCarvers;
-import net.id.aether.world.gen.decorator.AetherDecorators;
+import net.id.aether.world.feature.decorators.AetherDecorators;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -78,15 +77,11 @@ public class Aether implements ModInitializer, ClientModInitializer {
     public void onInitialize() {
         AetherRegistries.init();
         AetherCarvers.init();
-        AetherTreeHell.init();
         AetherFeatures.init();
-        AetherConfiguredFeatures.init();
-        AetherPlacedFeatures.init();
         AetherBiomes.init();
         AetherDimension.init();
         AetherStatusEffects.init();
         AetherBlocks.init();
-        AetherBlockTags.init();
         AetherFluids.init();
         AetherEntityTypes.init();
         AetherItems.init();
@@ -99,7 +94,6 @@ public class Aether implements ModInitializer, ClientModInitializer {
         MoaRaces.init();
         AetherScreens.init();
         AetherLore.init();
-        AetherDecorators.init();
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.init();
         }
@@ -120,6 +114,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherItemRenderers.initClient();
         AetherScreens.initClient();
         Conditions.clientInit();
+        AetherShaders.init();
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.Client.init();
         }
