@@ -34,8 +34,7 @@
     "server.ServerWorldMixin",
     "util.NbtCompoundAccessor",
     "util.RarityMixin",
-    "util.SignTypeAccessor",
-    "world.PlacementModifierTypeAccessor"
+    "util.SignTypeAccessor"
   ],
   "client": [
     "client.ClientPlayerEntityMixin",

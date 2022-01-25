@@ -33,7 +33,7 @@ public class AetherFeatures {
         AetherTreeHell.init();
         AetherStructureFeatures.init();
         AetherConfiguredFeatures.init();
-        AetherPlacedFeatures.init();
         AetherDecorators.init();
+        AetherPlacedFeatures.init();
     }
 }

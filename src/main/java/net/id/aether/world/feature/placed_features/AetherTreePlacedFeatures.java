@@ -5,13 +5,13 @@ import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.world.feature.decorators.ChancePlacementModifier;
 import net.id.aether.world.feature.configured_features.AetherConfiguredFeatures;
 import net.id.aether.world.feature.configured_features.AetherTreeConfiguredFeatures;
+import net.id.aether.world.feature.decorators.CrystalTreeIslandDecorator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
@@ -81,27 +81,7 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
 
     public static final PlacedFeature SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", AetherTreeConfiguredFeatures.SHIELD_FALLEN_LEAVES.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(2), new ChancePlacementModifier(ConstantIntProvider.create(4)), CountPlacementModifier.of(UniformIntProvider.create(0, 3)), BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(Configs.AETHER_GROUD))));
     // Crystal Tree Island
-    public static final PlacedFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", AetherTreeConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement());
-
-    /*
-        {
-      "count": {
-        "distribution": [
-          {
-            "data": 1,
-            "weight": 3
-          },
-          {
-            "data": 0,
-            "weight": 1
-          }
-        ],
-        "type": "minecraft:weighted_list"
-      },
-      "type": "minecraft:count"
-    },
-     */
-    public static final PlacedFeature CRYSTAL_TREE_ISLAND_DECORATED = register("crystal_tree_island_decorated", AetherTreeConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement(RarityFilterPlacementModifier.of(80), /*TODO See above comment, */ SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.fixed(55), YOffset.fixed(70)), BiomePlacementModifier.of()));
+    public static final PlacedFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", AetherTreeConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement(CrystalTreeIslandDecorator.of()));
 
     public static class Configs extends AetherPlacedFeatures.Configs{
 

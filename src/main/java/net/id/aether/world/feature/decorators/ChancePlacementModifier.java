@@ -12,7 +12,7 @@ import java.util.Random;
 public class ChancePlacementModifier extends AbstractCountPlacementModifier {
     public static final Codec<ChancePlacementModifier> MODIFIER_CODEC = IntProvider.createValidatingCodec(0, 256)
         .fieldOf("chance")
-        .xmap(ChancePlacementModifier::new, (chance) ->chance.chance)
+        .xmap(ChancePlacementModifier::new, (chance) -> chance.chance)
         .codec();
 
     private final IntProvider chance;
