@@ -60,7 +60,7 @@ public class AetherMiscConfiguredFeatures extends AetherConfiguredFeatures{
         public static final RuleTest AETHER_STONE_REPLACEABLES = new BlockMatchRuleTest(HOLYSTONE);
         public static final List<OreFeatureConfig.Target> AMBROSIUM_ORES = List.of(OreFeatureConfig.createTarget(AETHER_STONE_REPLACEABLES, AMBROSIUM_ORE.getDefaultState()));
         public static final List<OreFeatureConfig.Target> GRAVITITE_ORES = List.of(OreFeatureConfig.createTarget(AETHER_STONE_REPLACEABLES, GRAVITITE_ORE.getDefaultState()));
-        public static final List<OreFeatureConfig.Target> ZANITE_ORES = List.of(OreFeatureConfig.createTarget(AETHER_STONE_REPLACEABLES, GRAVITITE_ORE.getDefaultState()));
+        public static final List<OreFeatureConfig.Target> ZANITE_ORES = List.of(OreFeatureConfig.createTarget(AETHER_STONE_REPLACEABLES, ZANITE_ORE.getDefaultState()));
     }
     public static void init(){}
 }
