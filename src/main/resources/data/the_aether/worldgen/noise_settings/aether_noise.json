@@ -38,8 +38,8 @@
                 "type": "minecraft:condition",
                 "if_true": {
                   "type": "minecraft:noise_threshold",
-                  "noise": "minecraft:calcite",
-                  "min_threshold": -0.5,
+                  "noise": "the_aether:aether_forest_noise",
+                  "min_threshold": 0,
                   "max_threshold": 0.5
                 },
                 "then_run": {
