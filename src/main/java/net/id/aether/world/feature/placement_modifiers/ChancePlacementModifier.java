@@ -1,4 +1,4 @@
-package net.id.aether.world.feature.decorators;
+package net.id.aether.world.feature.placement_modifiers;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
@@ -33,6 +33,6 @@ public class ChancePlacementModifier extends AbstractCountPlacementModifier {
 
     @Override
     public PlacementModifierType<?> getType() {
-        return AetherDecorators.CHANCE;
+        return AetherPlacementModifiers.CHANCE;
     }
 }

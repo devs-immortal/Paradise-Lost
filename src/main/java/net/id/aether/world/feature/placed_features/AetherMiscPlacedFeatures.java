@@ -1,8 +1,7 @@
 package net.id.aether.world.feature.placed_features;
 
 import net.id.aether.world.feature.configured_features.AetherMiscConfiguredFeatures;
-import net.id.aether.world.feature.decorators.ChancePlacementModifier;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.id.aether.world.feature.placement_modifiers.ChancePlacementModifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.decorator.*;

@@ -1,10 +1,9 @@
 package net.id.aether.world.feature.placed_features;
 
-import net.id.aether.world.feature.decorators.ChancePlacementModifier;
+import net.id.aether.world.feature.placement_modifiers.ChancePlacementModifier;
 import net.id.aether.world.feature.configured_features.AetherTreeConfiguredFeatures;
-import net.id.aether.world.feature.decorators.CrystalTreeIslandDecorator;
+import net.id.aether.world.feature.placement_modifiers.CrystalTreeIslandPlacementModifier;
 import net.minecraft.block.Block;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.decorator.*;
@@ -62,7 +61,7 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
 
     public static final PlacedFeature SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", AetherTreeConfiguredFeatures.SHIELD_FALLEN_LEAVES.withPlacement(PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(2), ChancePlacementModifier.of(4), CountPlacementModifier.of(UniformIntProvider.create(0, 3)), BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(AETHER_GROUD))));
     // Crystal Tree Island
-    public static final PlacedFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", AetherTreeConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement(CrystalTreeIslandDecorator.of()));
+    public static final PlacedFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", AetherTreeConfiguredFeatures.CRYSTAL_TREE_ISLAND.withPlacement(CrystalTreeIslandPlacementModifier.of()));
 
     private static PlacedFeature placed(ConfiguredFeature<?, ?> cfg, Block sapling){
         return cfg.withWouldSurviveFilter(sapling);

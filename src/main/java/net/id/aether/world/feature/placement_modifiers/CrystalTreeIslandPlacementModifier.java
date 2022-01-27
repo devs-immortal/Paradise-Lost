@@ -1,4 +1,4 @@
-package net.id.aether.world.feature.decorators;
+package net.id.aether.world.feature.placement_modifiers;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
@@ -9,12 +9,12 @@ import net.minecraft.world.gen.decorator.PlacementModifierType;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class CrystalTreeIslandDecorator extends PlacementModifier {
+public class CrystalTreeIslandPlacementModifier extends PlacementModifier {
     // Copied from BiomePlacementModifier. I don't understand it, but it works.
-    private static final CrystalTreeIslandDecorator INSTANCE = new CrystalTreeIslandDecorator();
-    public static Codec<CrystalTreeIslandDecorator> MODIFIER_CODEC = Codec.unit(() -> INSTANCE);
+    private static final CrystalTreeIslandPlacementModifier INSTANCE = new CrystalTreeIslandPlacementModifier();
+    public static Codec<CrystalTreeIslandPlacementModifier> MODIFIER_CODEC = Codec.unit(() -> INSTANCE);
 
-    public static CrystalTreeIslandDecorator of() {
+    public static CrystalTreeIslandPlacementModifier of() {
         return INSTANCE;
     }
 
@@ -30,6 +30,6 @@ public class CrystalTreeIslandDecorator extends PlacementModifier {
 
     @Override
     public PlacementModifierType<?> getType() {
-        return AetherDecorators.CRYSTAL_TREE_ISLAND;
+        return AetherPlacementModifiers.CRYSTAL_TREE_ISLAND;
     }
 }

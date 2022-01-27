@@ -3,7 +3,7 @@ package net.id.aether.world.feature;
 import net.id.aether.Aether;
 import net.id.aether.world.feature.configs.*;
 import net.id.aether.world.feature.configured_features.AetherConfiguredFeatures;
-import net.id.aether.world.feature.decorators.AetherDecorators;
+import net.id.aether.world.feature.placement_modifiers.AetherPlacementModifiers;
 import net.id.aether.world.feature.features.*;
 import net.id.aether.world.feature.placed_features.AetherPlacedFeatures;
 import net.id.aether.world.feature.structure.AetherStructureFeatures;
@@ -44,7 +44,7 @@ public class AetherFeatures {
         AetherTreeHell.init();
         AetherStructureFeatures.init();
         AetherConfiguredFeatures.init();
-        AetherDecorators.init();
+        AetherPlacementModifiers.init();
         AetherPlacedFeatures.init();
     }
 }
