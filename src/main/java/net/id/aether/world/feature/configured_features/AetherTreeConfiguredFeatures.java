@@ -348,18 +348,18 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
         private static final RandomFeatureConfig SCATTERED_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
                         entry(FANCY_SKYROOT_TREE, SKYROOT_SAPLING, 0.05F),
-                        entry(FANCY_ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.002F)
+                        entry(FANCY_ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.0002F)
                 ),
                 placed(SKYROOT_TREE, SKYROOT_SAPLING)
         );
 
         private static final RandomFeatureConfig THICKET_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.0001F),
-                        entry(LAVENDER_WISTERIA_TREE, LAVENDER_WISTERIA_SAPLING, 0.0001F),
-                        entry(GOLDEN_OAK_TREE, GOLDEN_OAK_SAPLING, 0.0025F),
+                        entry(ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.00005F),
+                        entry(LAVENDER_WISTERIA_TREE, LAVENDER_WISTERIA_SAPLING, 0.00005F),
+                        entry(GOLDEN_OAK_TREE, GOLDEN_OAK_SAPLING, 0.00035F),
                         entry(SKYROOT_SHRUB, SKYROOT_SAPLING, 0.15F), // convert to feature
-                        entry(SKYROOT_TREE, SKYROOT_SAPLING, 0.75F)
+                        entry(SKYROOT_TREE, SKYROOT_SAPLING, 0.25F)
                 ),
                 placed(FANCY_SKYROOT_TREE, SKYROOT_SAPLING)
         );

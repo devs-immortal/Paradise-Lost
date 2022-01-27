@@ -61,9 +61,9 @@ public final class CloudRendererMixin {
     @Inject(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FDDD)V", at = @At("HEAD"), cancellable = true)
     public void renderClouds(MatrixStack matrices, Matrix4f model, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
         if (world.getRegistryKey() == AetherDimension.AETHER_WORLD_KEY) {
-            internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, 96, 1f, 1f);
-            internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, 32, 1.25f, -2f);
-            internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, -128, 2f, 1.5f);
+            internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, 160, 1f, 1f);
+            internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, 64, 1.25f, -2f);
+            internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, -196, 2f, 1.5f);
             ci.cancel();
         }
     }
