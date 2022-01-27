@@ -22,7 +22,7 @@ public class CrystalTreeIslandPlacementModifier extends PlacementModifier {
     public Stream<BlockPos> getPositions(DecoratorContext context, Random random, BlockPos blockPos) {
         Stream<BlockPos> stream = Stream.empty();
         if (random.nextInt(300) == 0) {
-            return Stream.concat(stream, Stream.of(blockPos.add(random.nextInt(16), 137 + random.nextInt(16), random.nextInt(16))));
+            return Stream.concat(stream, Stream.of(blockPos.add(random.nextInt(16), 107 + random.nextInt(15) - context.getBottomY(), random.nextInt(16))));
         } else {
             return Stream.empty();
         }
