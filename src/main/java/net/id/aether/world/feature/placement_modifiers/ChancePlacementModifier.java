@@ -1,7 +1,8 @@
-package net.id.aether.world.feature.decorators;
+package net.id.aether.world.feature.placement_modifiers;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.world.gen.decorator.AbstractCountPlacementModifier;
 import net.minecraft.world.gen.decorator.PlacementModifierType;
@@ -12,13 +13,17 @@ import java.util.Random;
 public class ChancePlacementModifier extends AbstractCountPlacementModifier {
     public static final Codec<ChancePlacementModifier> MODIFIER_CODEC = IntProvider.createValidatingCodec(0, 256)
         .fieldOf("chance")
-        .xmap(ChancePlacementModifier::new, (chance) ->chance.chance)
+        .xmap(ChancePlacementModifier::new, (chance) -> chance.chance)
         .codec();
 
     private final IntProvider chance;
 
-    public ChancePlacementModifier (IntProvider chance) {
+    public ChancePlacementModifier(IntProvider chance) {
         this.chance = chance;
+    }
+
+    public static ChancePlacementModifier of(int chance){
+        return new ChancePlacementModifier(ConstantIntProvider.create(chance));
     }
 
     @Override
@@ -28,6 +33,6 @@ public class ChancePlacementModifier extends AbstractCountPlacementModifier {
 
     @Override
     public PlacementModifierType<?> getType() {
-        return AetherDecorators.CHANCE;
+        return AetherPlacementModifiers.CHANCE;
     }
 }

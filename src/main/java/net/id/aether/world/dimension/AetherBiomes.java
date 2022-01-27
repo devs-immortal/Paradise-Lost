@@ -216,6 +216,10 @@ public final class AetherBiomes {
                 ORE_AMBROSIUM,
                 ORE_GRAVITITE,
                 ORE_ZANITE
+            ),
+            // cursed generation step, but it stops trees from generating inside of these
+            GenerationStep.Feature.TOP_LAYER_MODIFICATION, List.of(
+                CRYSTAL_TREE_ISLAND
             )
         );
     }

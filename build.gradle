@@ -11,7 +11,7 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.10-SNAPSHOT'
+    id 'fabric-loom' version '0.11-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "1.2.1"
 }
@@ -145,9 +145,8 @@ tasks.withType(JavaCompile).configureEach {
 // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 // if it is present.
 // If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-    archiveClassifier.set("sources")
-    from sourceSets.main.allSource
+java {
+    withSourcesJar()
 }
 
 //task publishModrinth (type: TaskModrinthUpload){
