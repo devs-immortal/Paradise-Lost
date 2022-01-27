@@ -14,8 +14,11 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.UUID;
+
 public class IncubatorBlockEntity extends AetherBlockEntity {
 
+    private UUID owner;
     private int hatchTicks = 100;
 
     public IncubatorBlockEntity(BlockPos pos, BlockState state) {
@@ -28,7 +31,7 @@ public class IncubatorBlockEntity extends AetherBlockEntity {
             incubator.hatchTicks--;
             if (incubator.hatchTicks <= 0) {
                 incubator.hatchTicks = 0;
-                var moa = MoaGenes.getMoaFromEgg(world, incubator.inventory.get(0));
+                var moa = MoaGenes.getMoaFromEgg(world, incubator.inventory.get(0), incubator.owner);
                 moa.refreshPositionAndAngles(pos.getX() + 0.25, pos.getY() + 0.65, pos.getZ() + 0.25, world.getRandom().nextFloat() * 360 - 180, 0);
                 world.playSound(null, pos, SoundEvents.ENTITY_TURTLE_EGG_HATCH, SoundCategory.BLOCKS, 2F, 0.5F);
                 world.spawnEntity(moa);
@@ -38,6 +41,7 @@ public class IncubatorBlockEntity extends AetherBlockEntity {
     }
 
     public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
+        owner = player.getUuid();
         ItemStack stored = inventory.get(0);
         inventory.set(0, handStack);
         player.setStackInHand(hand, stored);

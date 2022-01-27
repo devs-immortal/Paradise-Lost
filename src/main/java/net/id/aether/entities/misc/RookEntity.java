@@ -15,7 +15,10 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -71,23 +74,13 @@ public class RookEntity extends MobEntity {
                     getLookControl().lookAt(player, 15, 15);
 
                     if(player.distanceTo(this) < 14) {
-
                         byte luv = LUV.getLUV(player).getValue();
-                        if(!player.isSpectator() && world.getLightLevel(LightType.BLOCK, player.getBlockPos()) < 7 && world.isNight() && world.getTime() % 10 == 0 && (luv > 50 || luv < 0)) {
-                            if(random.nextInt(luv < 0 ? 20 : 100) == 0) {
-                                player.damage(AetherDamageSources.NIGHTMARE, 9);
-                                for(int i = 0; i < 15 + random.nextInt(15); ++i) {
-                                    double d = this.random.nextGaussian() * 0.02D;
-                                    double e = this.random.nextGaussian() * 0.02D;
-                                    double f = this.random.nextGaussian() * 0.02D;
-                                    if(random.nextInt( 3) == 0) {
-                                        this.world.addParticle(ParticleTypes.LARGE_SMOKE, player.getParticleX(1.0D), player.getRandomBodyY(), player.getParticleZ(1.0D), d, e, f);
-                                    }
-                                    else {
-                                        this.world.addParticle(ParticleTypes.SMOKE, player.getParticleX(1.0D), player.getRandomBodyY(), player.getParticleZ(1.0D), d, e, f);
-                                    }
-                                }
-                                player.playSound(AetherSoundEvents.ENTITY_NIGHTMARE_HURT, 1, 0.85F + random.nextFloat() * 0.25F);
+                        if(!player.isSpectator() && world.getLightLevel(LightType.BLOCK, player.getBlockPos()) < 5 && world.isNight() && world.getTime() % 10 == 0 && (luv > 50 || luv < 0)) {
+                            if(random.nextInt(luv < 0 ? 40 : 200) == 0) {
+                                //player.damage(AetherDamageSources.NIGHTMARE, 9);
+                                produceParticlesServer(ParticleTypes.SMOKE, random.nextInt(19), 0, 0);
+                                produceParticlesServer(ParticleTypes.LARGE_SMOKE, random.nextInt(8), 0, 0);
+                                player.playSound(AetherSoundEvents.ENTITY_NIGHTMARE_HURT, SoundCategory.AMBIENT, 1, 0.85F + random.nextFloat() * 0.25F);
                             }
                         }
                     }
@@ -96,6 +89,18 @@ public class RookEntity extends MobEntity {
 
         if(world.getTime() % 20 == 0 && random.nextBoolean()) {
             blinkTicks = random.nextInt(5);
+        }
+    }
+
+    public void produceParticlesServer(ParticleEffect parameters, int rolls, int maxAmount, float yOffset) {
+        if(world instanceof ServerWorld server) {
+            maxAmount = maxAmount + 1;
+            for (int i = 0; i < rolls; ++i) {
+                double d = this.random.nextGaussian() * 0.02D;
+                double e = this.random.nextGaussian() * 0.02D;
+                double f = this.random.nextGaussian() * 0.02D;
+                server.spawnParticles(parameters, this.getParticleX(1.0D), this.getRandomBodyY() + yOffset, this.getParticleZ(1.0D), 1 + random.nextInt(maxAmount), d, e, f, 0);
+            }
         }
     }
 

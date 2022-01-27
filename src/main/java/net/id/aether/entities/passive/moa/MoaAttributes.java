@@ -21,11 +21,15 @@ public enum MoaAttributes {
 
     public String getRatingTierTranslationKey(MoaEntity moa) {
         if (min > max) return getRatingTierInverse(moa);
+
         float attribute = getAttribute(moa);
+
         if (attribute <= min) return getRatingTierTranslationKey(1);
         if (attribute >= max) return getRatingTierTranslationKey(7);
-        double lerp = (MathHelper.getLerpProgress(attribute, min, max) * 5);
-        return getRatingTierTranslationKey((int) lerp + 1);
+
+        double out = (attribute - min) / gradeInterval;
+
+        return getRatingTierTranslationKey((int) (out + 2));
     }
 
     private String getRatingTierTranslationKey(int tier) {
@@ -34,12 +38,14 @@ public enum MoaAttributes {
 
     //used when smaller is better
     public String getRatingTierInverse(MoaEntity moa) {
-        if (min < max) return getRatingTierTranslationKey(moa);
         float attribute = getAttribute(moa);
-        if (attribute >= min) return getRatingTierTranslationKey(1);
-        if (attribute <= max) return getRatingTierTranslationKey(7);
-        double lerp = (MathHelper.getLerpProgress(attribute, min, max) * 5);
-        return getRatingTierTranslationKey((int) lerp + 1);
+
+        if (attribute <= min) return getRatingTierTranslationKey(1);
+        if (attribute >= max) return getRatingTierTranslationKey(7);
+
+        double out = (attribute - min) / gradeInterval;
+
+        return getRatingTierTranslationKey((int) (out + 1));
     }
 
     public float getAttribute(MoaEntity moa) {

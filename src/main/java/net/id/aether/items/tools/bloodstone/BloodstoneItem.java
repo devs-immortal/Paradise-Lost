@@ -37,13 +37,10 @@ public abstract class BloodstoneItem extends Item {
     @Override
     public ActionResult useOnEntity(ItemStack unused, PlayerEntity user, LivingEntity entity, Hand hand) {
         var stack = user.getStackInHand(hand);
-        if (!user.isSneaking()) {
-            BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromEntity(entity);
-            stack.getOrCreateNbt().put(BloodstoneCapturedData.NBT_TAG, capturedData.toNBT());
-            playPrickEffects(user.world, entity.getBlockPos());
-            return ActionResult.success(user.world.isClient());
-        }
-        return super.useOnEntity(stack, user, entity, hand);
+        BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromEntity(entity);
+        stack.getOrCreateNbt().put(BloodstoneCapturedData.NBT_TAG, capturedData.toNBT());
+        playPrickEffects(user.world, entity.getBlockPos());
+        return ActionResult.success(user.world.isClient());
     }
 
     @Override

@@ -7,6 +7,8 @@ import net.id.aether.component.MoaGenes;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.entities.util.SaddleMountEntity;
 import net.id.aether.items.AetherItems;
+import net.id.aether.items.tools.bloodstone.BloodstoneItem;
+import net.id.aether.tag.AetherItemTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -26,6 +28,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -70,7 +73,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         this.goalSelector.add(1, new MoaEscapeDangerGoal(this, 2));
         this.goalSelector.add(2, new EatFromBowlGoal(1, 24, 16));
         this.goalSelector.add(3, new AnimalMateGoal(this, 0.25F));
-//        this.goalSelector.add(4, new TemptGoal(this, 1.0D, Ingredient.ofItems(AetherItems.NATURE_STAFF), false));
+        this.goalSelector.add(4, new TemptGoal(this, 1.0D, Ingredient.fromTag(AetherItemTags.MOA_TEMPTABLES), false));
         this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));
         this.goalSelector.add(6, new WanderAroundFarGoal(this, 0.65F, 0.1F)); //WanderGoal
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 4.5F));
@@ -178,10 +181,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             heal(1);
             genes.setHunger(hunger - 0.5F);
         }
-        if (hunger < 20F && world.getTime() % 10 + random.nextInt(4) == 0) {
-            produceParticles(ParticleTypes.ANGRY_VILLAGER);
-            if (hunger < 10F) {
+        if (hunger < 20F && world.getTime() % 10 == 0) {
+            produceParticlesServer(ParticleTypes.ANGRY_VILLAGER, random.nextInt(3), 1, 0);
+            if (hunger < 10F && hasPassengers()) {
                 removeAllPassengers();
+                playSound(SoundEvents.ENTITY_PARROT_DEATH, 1, 1.5F + random.nextFloat() * 0.5F);
             }
         }
         if (getGenes().getRace().legendary() && getVelocity().lengthSquared() <= 0.02 && random.nextFloat() < 0.1F && random.nextBoolean()) {
@@ -293,19 +297,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        if(player.getStackInHand(hand).getItem() instanceof BloodstoneItem) {
+            return ActionResult.PASS;
+        }
+
         if (!world.isClient()) {
             ItemStack heldStack = player.getStackInHand(hand);
             if (heldStack.isFood() && heldStack.getItem().getFoodComponent().isMeat()) {
-                if (!getGenes().isTamed()) {
-                    if (random.nextFloat() < 0.15F) {
-                        getGenes().tame(player.getUuid());
-                        produceParticles(ParticleTypes.HEART);
-                        playSound(SoundEvents.ENTITY_PARROT_AMBIENT, 2F, 2F);
-                    }
-                    heldStack.decrement(1);
-                    playSound(SoundEvents.ENTITY_PARROT_EAT, 1F, 0.8F);
-                    produceParticles(ParticleTypes.ELECTRIC_SPARK);
-                } else {
+                if (getGenes().isTamed()) {
                     feedMob(heldStack);
                 }
                 return ActionResult.success(world.isClient());
@@ -348,7 +347,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     public void breed(ServerWorld world, AnimalEntity other) {
         MoaGenes genes = getGenes();
-        if (genes.getHunger() > 80F && genes.isTamed() && other instanceof MoaEntity moa && moa.getGenes().isTamed()) {
+        if (genes.getHunger() > 80F) {
             ItemStack egg = genes.getEggForBreeding(((MoaEntity) other).genes, world, getBlockPos());
             playSound(SoundEvents.ENTITY_TURTLE_LAY_EGG, 0.8F, 1.5F);
 
@@ -361,6 +360,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             if (world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
                 world.spawnEntity(new ExperienceOrbEntity(world, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(16) + 4));
             }
+
+            produceParticlesServer(ParticleTypes.HAPPY_VILLAGER, 6 + random.nextInt(7), 1, 0);
+            ((MoaEntity) other).produceParticlesServer(ParticleTypes.HAPPY_VILLAGER, 6 + random.nextInt(7), 1, 0);
         }
     }
 

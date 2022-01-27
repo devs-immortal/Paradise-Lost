@@ -51,11 +51,12 @@ public class MoaGenes implements AutoSyncedComponent {
         return stack;
     }
 
-    public static MoaEntity getMoaFromEgg(World world, ItemStack stack) {
+    public static MoaEntity getMoaFromEgg(World world, ItemStack stack, UUID owner) {
         MoaEntity moa = AetherEntityTypes.MOA.create(world);
         MoaGenes genes = moa.getGenes();
         if (stack.isOf(AetherItems.MOA_EGG)) {
             genes.readFromNbt(stack.getOrCreateSubNbt("genes"));
+            genes.owner = owner == null ? UUID.randomUUID() : owner;
         }
         moa.setBreedingAge(-43200);
         return moa;
