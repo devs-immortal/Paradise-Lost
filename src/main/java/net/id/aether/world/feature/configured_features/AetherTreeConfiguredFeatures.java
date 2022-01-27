@@ -1,16 +1,16 @@
 package net.id.aether.world.feature.configured_features;
 
+import com.google.common.collect.ImmutableList;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.aether.world.feature.configs.LongFeatureConfig;
 import net.id.aether.world.feature.configs.ProjectedOrganicCoverConfig;
-import net.id.aether.world.feature.features.FallenPillarFeature;
-import net.id.aether.world.feature.features.PillarFeature;
 import net.id.aether.world.feature.AetherFeatures;
 import net.id.aether.world.feature.placed_features.AetherPlacedFeatures;
 import net.id.aether.world.feature.tree.placers.OvergrownTrunkPlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaFoliagePlacer;
 import net.id.aether.world.feature.tree.placers.WisteriaTrunkPlacer;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.collection.DataPool;
@@ -33,46 +33,59 @@ import java.util.OptionalInt;
 import static net.id.aether.blocks.AetherBlocks.*;
 
 public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
-    // Reorganize per biome
-    /*
-    Highlands
-     */
     // Default
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> SKYROOT_TREE = register("skyroot_tree", Feature.TREE.configure(Configs.SKYROOT_CONFIG)); // TODO REPLACED WITH JSON //
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> GOLDEN_OAK_TREE = register("golden_oak_tree", Feature.TREE.configure(Configs.GOLDEN_OAK_CONFIG));
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> CRYSTAL_TREE = register("crystal_tree", Feature.TREE.configure(Configs.CRYSTAL_TREE_CONFIG));
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> ORANGE_TREE = register("orange_tree", Feature.TREE.configure(Configs.ORANGE_TREE_SAPLING_CONFIG));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> SKYROOT_TREE = register("skyroot_tree", configure(Configs.SKYROOT_CONFIG));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> GOLDEN_OAK_TREE = register("golden_oak_tree", configure(Configs.GOLDEN_OAK_CONFIG));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> CRYSTAL_TREE = register("crystal_tree", configure(Configs.CRYSTAL_TREE_CONFIG));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> ORANGE_TREE = register("orange_tree", configure(Configs.ORANGE_TREE_SAPLING_CONFIG));
     // Wisteria
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> ROSE_WISTERIA_TREE = register("rose_wisteria_tree", Feature.TREE.configure(Configs.ROSE_WISTERIA_CONFIG));
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> LAVENDER_WISTERIA_TREE = register("lavender_wisteria_tree", Feature.TREE.configure(Configs.LAVENDER_WISTERIA_CONFIG));
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> FROST_WISTERIA_TREE = register("frost_wisteria_tree", Feature.TREE.configure(Configs.FROST_WISTERIA_CONFIG));
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> BOREAL_WISTERIA_TREE = register("boreal_wisteria_tree", Feature.TREE.configure(Configs.BOREAL_WISTERIA_CONFIG));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> ROSE_WISTERIA_TREE = register("rose_wisteria_tree", configure(Configs.ROSE_WISTERIA_CONFIG));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> LAVENDER_WISTERIA_TREE = register("lavender_wisteria_tree", configure(Configs.LAVENDER_WISTERIA_CONFIG));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> FROST_WISTERIA_TREE = register("frost_wisteria_tree", configure(Configs.FROST_WISTERIA_CONFIG));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> BOREAL_WISTERIA_TREE = register("boreal_wisteria_tree", configure(Configs.BOREAL_WISTERIA_CONFIG));
+    // Variants
+    public static final ConfiguredFeature<?, ?> WILD_ORANGE_TREE = register("wild_orange_tree", configure(Configs.ORANGE_TREE_WILD_CONFIG));
+    public static final ConfiguredFeature<?, ?> SKYROOT_SHRUB = register("skyroot_shrub", configure(Configs.SKYROOT_SHRUB_CONFIG));
+    public static final ConfiguredFeature<?, ?> MOTTLED_SKYROOT = register("mottled_skyroot_tree", configure(Configs.MOTTLED_SKYROOT_CONFIG));
+    public static final ConfiguredFeature<?, ?> DWARF_MOTTLED_SKYROOT = register("dwarf_mottled_skyroot_tree", configure(Configs.DWARF_MOTTLED_SKYROOT_CONFIG));
     // Fancy
-    public static final ConfiguredFeature<?, ?> FANCY_ROSE_WISTERIA_TREE = register("fancy_rose_wisteria_tree", Feature.TREE.configure(Configs.FANCY_ROSE_WISTERIA_CONFIG));
-    public static final ConfiguredFeature<?, ?> FANCY_LAVENDER_WISTERIA_TREE = register("fancy_lavender_wisteria_tree", Feature.TREE.configure(Configs.FANCY_LAVENDER_WISTERIA_CONFIG));
-    public static final ConfiguredFeature<?, ?> FANCY_FROST_WISTERIA_TREE = register("fancy_frost_wisteria_tree", Feature.TREE.configure(Configs.FANCY_FROST_WISTERIA_CONFIG));
-    public static final ConfiguredFeature<?, ?> FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", Feature.TREE.configure(Configs.FANCY_BOREAL_WISTERIA_CONFIG));
-    public static final ConfiguredFeature<?, ?> FANCY_SKYROOT_TREE = register("fancy_skyroot_tree", Feature.TREE.configure(Configs.FANCY_SKYROOT_CONFIG));
+    public static final ConfiguredFeature<?, ?> FANCY_ROSE_WISTERIA_TREE = register("fancy_rose_wisteria_tree", configure(Configs.FANCY_ROSE_WISTERIA_CONFIG));
+    public static final ConfiguredFeature<?, ?> FANCY_LAVENDER_WISTERIA_TREE = register("fancy_lavender_wisteria_tree", configure(Configs.FANCY_LAVENDER_WISTERIA_CONFIG));
+    public static final ConfiguredFeature<?, ?> FANCY_FROST_WISTERIA_TREE = register("fancy_frost_wisteria_tree", configure(Configs.FANCY_FROST_WISTERIA_CONFIG));
+    public static final ConfiguredFeature<?, ?> FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", configure(Configs.FANCY_BOREAL_WISTERIA_CONFIG));
+    public static final ConfiguredFeature<?, ?> FANCY_SKYROOT_TREE = register("fancy_skyroot_tree", configure(Configs.FANCY_SKYROOT_CONFIG));
     // Crystal
-    public static final ConfiguredFeature<?, ?> CRYSTAL_TREE_ISLAND = register("crystal_tree_island", AetherFeatures.CRYSTAL_TREE_ISLAND.configure(AetherConfiguredFeatures.Configs.DEFAULT_CONFIG));
+    public static final ConfiguredFeature<?, ?> CRYSTAL_TREE_ISLAND = register("crystal_tree_island", AetherFeatures.CRYSTAL_TREE_ISLAND.configure(Configs.DEFAULT_CONFIG));
     // Fallen leaves
     public static final ConfiguredFeature<?, ?> FALLEN_LEAVES = register("fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG));
     public static final ConfiguredFeature<?, ?> ALT_FALLEN_LEAVES = register("alt_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG));
-
-    public static final ConfiguredFeature<?, ?> FALLEN_ROSE_LEAVES = register("fallen_rose_leaves", Configs.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ROSE_WISTERIA_LEAF_PILE.getDefaultState(), 10).add(ROSE_WISTERIA_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 2).build()), UniformIntProvider.create(4, 10), ConstantIntProvider.create(7), UniformIntProvider.create(3, 6), 1.2)));
-    public static final ConfiguredFeature<?, ?> FALLEN_LAVENDER_LEAVES = register("fallen_lavender_leaves", Configs.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(LAVENDER_WISTERIA_LEAF_PILE.getDefaultState(), 10).add(LAVENDER_WISTERIA_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 2).build()), UniformIntProvider.create(4, 10), ConstantIntProvider.create(7), UniformIntProvider.create(3, 6), 1.2)));
-
+    public static final ConfiguredFeature<?, ?> FALLEN_ROSE_LEAVES = register("fallen_rose_leaves", AetherFeatures.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ROSE_WISTERIA_LEAF_PILE.getDefaultState(), 10).add(ROSE_WISTERIA_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 2).build()), UniformIntProvider.create(4, 10), ConstantIntProvider.create(7), UniformIntProvider.create(3, 6), 1.2)));
+    public static final ConfiguredFeature<?, ?> FALLEN_LAVENDER_LEAVES = register("fallen_lavender_leaves", AetherFeatures.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(LAVENDER_WISTERIA_LEAF_PILE.getDefaultState(), 10).add(LAVENDER_WISTERIA_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 2).build()), UniformIntProvider.create(4, 10), ConstantIntProvider.create(7), UniformIntProvider.create(3, 6), 1.2)));
     public static final ConfiguredFeature<?, ?> SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", Feature.RANDOM_PATCH.configure(Configs.FALLEN_LEAVES_CONFIG));
     // Logs
-    public static final ConfiguredFeature<?, ?> THICKET_FALLEN_LOG = register("thicket_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 6), BlockStateProvider.of(SKYROOT_LOG), BlockStateProvider.of(LIVERWORT_CARPET), BlockStateProvider.of(LIVERWORT_CARPET), 0.5F, 0.35F, Configs.GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> THICKET_FALLEN_LOG = register("thicket_fallen_log", AetherFeatures.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 6), BlockStateProvider.of(SKYROOT_LOG), BlockStateProvider.of(LIVERWORT_CARPET), BlockStateProvider.of(LIVERWORT_CARPET), 0.5F, 0.35F, Configs.GENERIC_FLOOR_WHITELIST)));
 
-    public static final ConfiguredFeature<?, ?> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), BlockStateProvider.of(MOTTLED_SKYROOT_LOG), BlockStateProvider.of(AetherBlocks.AETHER_GRASS), BlockStateProvider.of(ROOTCAP), 0.3F, 0.15F, Configs.GENERIC_FLOOR_WHITELIST)));
-    public static final ConfiguredFeature<?, ?> MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", Configs.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(AETHER_GRASS_FLOWERING), BlockStateProvider.of(ROOTCAP), 0.4F, 0.25F, Configs.GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", AetherFeatures.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), BlockStateProvider.of(MOTTLED_SKYROOT_LOG), BlockStateProvider.of(AetherBlocks.AETHER_GRASS), BlockStateProvider.of(ROOTCAP), 0.3F, 0.15F, Configs.GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", AetherFeatures.FALLEN_PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(3, 5), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(AETHER_GRASS_FLOWERING), BlockStateProvider.of(ROOTCAP), 0.4F, 0.25F, Configs.GENERIC_FLOOR_WHITELIST)));
 
-    public static final ConfiguredFeature<?, ?> SHIELD_STUMPS = register("shield_stumps", Configs.PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(1, 2), BlockStateProvider.of(MOTTLED_SKYROOT_LOG), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(ROOTCAP), 0.1F, 0.225F, Configs.GENERIC_FLOOR_WHITELIST)));
-    public static final ConfiguredFeature<?, ?> SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", Configs.PILLAR_FEATURE.configure(new LongFeatureConfig(ConstantIntProvider.create(1), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(ROOTCAP), 0.015F, 0.3F, Configs.GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> SHIELD_STUMPS = register("shield_stumps", AetherFeatures.PILLAR_FEATURE.configure(new LongFeatureConfig(UniformIntProvider.create(1, 2), BlockStateProvider.of(MOTTLED_SKYROOT_LOG), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(ROOTCAP), 0.1F, 0.225F, Configs.GENERIC_FLOOR_WHITELIST)));
+    public static final ConfiguredFeature<?, ?> SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", AetherFeatures.PILLAR_FEATURE.configure(new LongFeatureConfig(ConstantIntProvider.create(1), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(MOTTLED_SKYROOT_FALLEN_LOG), BlockStateProvider.of(ROOTCAP), 0.015F, 0.3F, Configs.GENERIC_FLOOR_WHITELIST)));
+    // Assortments
+    public static final ConfiguredFeature<?, ?> SCATTERED_TREES = register("scattered_trees", Feature.RANDOM_SELECTOR.configure(Assortments.SCATTERED_TREES_CONFIG));
+    public static final ConfiguredFeature<?, ?> SHIELD_TREES = register("shield_trees", Feature.RANDOM_SELECTOR.configure(Assortments.SHIELD_TREES_CONFIG));
+    public static final ConfiguredFeature<?, ?> DENSE_SHIELD_TREES = register("dense_shield_trees", Feature.RANDOM_SELECTOR.configure(Assortments.DENSE_SHIELD_TREES_CONFIG));
+    public static final ConfiguredFeature<?, ?> PLATEAU_TREES = register("plateau_trees", Feature.RANDOM_SELECTOR.configure(Assortments.PLATEAU_TREES_CONFIG));
+    public static final ConfiguredFeature<?, ?> MIXED_TREES = register("mixed_trees", Feature.RANDOM_SELECTOR.configure(Assortments.MIXED_TREES_CONFIG));
+    public static final ConfiguredFeature<?, ?> SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR.configure(Assortments.SPARSE_TREES_CONFIG));
+    public static final ConfiguredFeature<?, ?> THICKET_TREES = register("thicket_trees", Feature.RANDOM_SELECTOR.configure(Assortments.THICKET_TREES_CONFIG));
+    public static final ConfiguredFeature<?, ?> RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR.configure(Assortments.RAINBOW_FOREST_CONFIG));
 
-    public static class Configs extends AetherConfiguredFeatures.Configs{
+    private static ConfiguredFeature<TreeFeatureConfig, ?> configure(TreeFeatureConfig cfg){
+        return Feature.TREE.configure(cfg);
+    }
+
+    private static class Configs extends AetherConfiguredFeatures.Configs{
+        private static final DefaultFeatureConfig DEFAULT_CONFIG = new DefaultFeatureConfig();
 
         private static TreeFeatureConfig generateTree(BlockState logState, BlockState foliageState,
                                                       BlockState dirtState, TrunkPlacer trunkPlacer,
@@ -104,47 +117,46 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
             return builder.build();
         }
 
-        public static final BlockState ORANGE_LEAVES_BASIC = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true);
-        public static final BlockState ORANGE_LEAVES_FLOWERING = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 1);
-        public static final BlockState ORANGE_LEAVES_FRUITING = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 2);
+        // Fallen leaves
+        private static final RandomPatchFeatureConfig FALLEN_LEAVES_CONFIG = blockPatch(96, 10, 7, new WeightedBlockStateProvider(
+                DataPool.<BlockState>builder()
+                        .add(SKYROOT_LEAF_PILE.getDefaultState(), 8)
+                        .add(SKYROOT_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 1)
+        ));
 
-        // Find a way to move this to Placed Features
-        public static final PlacedFeature FALLEN_LEAVES_SINGLE_BLOCK = Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(SKYROOT_LEAF_PILE.getDefaultState(), 8).add(SKYROOT_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 1)))).withPlacement(AetherPlacedFeatures.ON_SOLID_GROUND);
-        public static final RandomPatchFeatureConfig FALLEN_LEAVES_CONFIG = (new RandomPatchFeatureConfig(96, 10, 7, () -> FALLEN_LEAVES_SINGLE_BLOCK))/*.cannotProject()*/;
-
-        public static final Feature<LongFeatureConfig> PILLAR_FEATURE = register("pillar_feature", new PillarFeature(LongFeatureConfig.CODEC));
-        public static final Feature<LongFeatureConfig> FALLEN_PILLAR_FEATURE = register("fallen_pillar_feature", new FallenPillarFeature(LongFeatureConfig.CODEC));
-
+        /*
+        Tree feature configs
+         */
         //Skyroots
-        public static final TreeFeatureConfig SKYROOT_CONFIG = generateTree(
+        private static final TreeFeatureConfig SKYROOT_CONFIG = generateTree(
                 SKYROOT_LOG.getDefaultState(), SKYROOT_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new StraightTrunkPlacer(4, 2, 0),
                 new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
                 new TwoLayersFeatureSize(1, 0, 1),
                 true, false
         );
-        public static final TreeFeatureConfig FANCY_SKYROOT_CONFIG = generateTree(
+        private static final TreeFeatureConfig FANCY_SKYROOT_CONFIG = generateTree(
                 SKYROOT_LOG.getDefaultState(), SKYROOT_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new LargeOakTrunkPlacer(4, 11, 0),
                 new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
                 new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)),
                 true, false
         );
-        public static final TreeFeatureConfig SKYROOT_SHRUB_CONFIG = generateTree(
+        private static final TreeFeatureConfig SKYROOT_SHRUB_CONFIG = generateTree(
                 SKYROOT_LOG.getDefaultState(), SKYROOT_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new StraightTrunkPlacer(1, 1, 0),
                 new BlobFoliagePlacer(UniformIntProvider.create(2, 4), ConstantIntProvider.create(0), 2),
                 new TwoLayersFeatureSize(1, 0, 1),
                 true, false
         );
-        public static final TreeFeatureConfig MOTTLED_SKYROOT_CONFIG = generateTree(
+        private static final TreeFeatureConfig MOTTLED_SKYROOT_CONFIG = generateTree(
                 MOTTLED_SKYROOT_LOG.getDefaultState(), SKYROOT_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new OvergrownTrunkPlacer(5, 10, 0, BlockStateProvider.of(ROOTCAP), 1 / 14F),
                 new BlobFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0), 3),
                 new TwoLayersFeatureSize(1, 0, 1),
                 true, false
         );
-        public static final TreeFeatureConfig DWARF_MOTTLED_SKYROOT_CONFIG = generateTree(
+        private static final TreeFeatureConfig DWARF_MOTTLED_SKYROOT_CONFIG = generateTree(
                 MOTTLED_SKYROOT_LOG.getDefaultState(), SKYROOT_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new BendingTrunkPlacer(5, 3, 2, 4, UniformIntProvider.create(1, 3)),
                 new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 68),
@@ -153,21 +165,26 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
         );
 
         //Fruit trees
-        public static final TreeFeatureConfig CRYSTAL_TREE_CONFIG = generateTree(
+        private static final TreeFeatureConfig CRYSTAL_TREE_CONFIG = generateTree(
                 CRYSTAL_LOG.getDefaultState(), CRYSTAL_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new StraightTrunkPlacer(5, 2, 2),
                 new SpruceFoliagePlacer(UniformIntProvider.create(1, 2), UniformIntProvider.create(0, 2), UniformIntProvider.create(1, 1)),
                 new TwoLayersFeatureSize(2, 0, 2),
                 true, false
         );
-        public static final TreeFeatureConfig ORANGE_TREE_SAPLING_CONFIG = generateTree(
+        private static final TreeFeatureConfig ORANGE_TREE_SAPLING_CONFIG = generateTree(
                 ORANGE_LOG.getDefaultState(), ORANGE_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new BendingTrunkPlacer(3, 2, 1, 3, UniformIntProvider.create(1, 2)),
                 new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 63),
                 new TwoLayersFeatureSize(1, 0, 1),
                 false, false
         );
-        public static final TreeFeatureConfig ORANGE_TREE_WILD_CONFIG = generateTree(
+
+        private static final BlockState ORANGE_LEAVES_BASIC = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true);
+        private static final BlockState ORANGE_LEAVES_FLOWERING = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 1);
+        private static final BlockState ORANGE_LEAVES_FRUITING = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 2);
+
+        private static final TreeFeatureConfig ORANGE_TREE_WILD_CONFIG = generateTree(
                 BlockStateProvider.of(ORANGE_LOG),
                 new WeightedBlockStateProvider(
                         DataPool.<BlockState>builder()
@@ -183,7 +200,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
         );
 
         //Wisterias
-        public static final TreeFeatureConfig ROSE_WISTERIA_CONFIG = generateTree(
+        private static final TreeFeatureConfig ROSE_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), ROSE_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(5, 9),
@@ -195,7 +212,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
-        public static final TreeFeatureConfig LAVENDER_WISTERIA_CONFIG = generateTree(
+        private static final TreeFeatureConfig LAVENDER_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), LAVENDER_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(5, 9),
@@ -207,7 +224,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
-        public static final TreeFeatureConfig FROST_WISTERIA_CONFIG = generateTree(
+        private static final TreeFeatureConfig FROST_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), FROST_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(5, 9),
@@ -219,7 +236,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
-        public static final TreeFeatureConfig BOREAL_WISTERIA_CONFIG = generateTree(
+        private static final TreeFeatureConfig BOREAL_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), BOREAL_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(7, 11),
@@ -231,7 +248,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
-        public static final TreeFeatureConfig FANCY_ROSE_WISTERIA_CONFIG = generateTree(
+        private static final TreeFeatureConfig FANCY_ROSE_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), ROSE_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(10, 17),
@@ -243,7 +260,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
-        public static final TreeFeatureConfig FANCY_LAVENDER_WISTERIA_CONFIG = generateTree(
+        private static final TreeFeatureConfig FANCY_LAVENDER_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), LAVENDER_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(10, 17),
@@ -255,7 +272,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
-        public static final TreeFeatureConfig FANCY_FROST_WISTERIA_CONFIG = generateTree(
+        private static final TreeFeatureConfig FANCY_FROST_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), FROST_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(10, 17),
@@ -267,7 +284,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
-        public static final TreeFeatureConfig FANCY_BOREAL_WISTERIA_CONFIG = generateTree(
+        private static final TreeFeatureConfig FANCY_BOREAL_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), BOREAL_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(13, 21),
@@ -281,7 +298,7 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
         );
 
         //Special trees
-        public static final TreeFeatureConfig GOLDEN_OAK_CONFIG = generateTree(
+        private static final TreeFeatureConfig GOLDEN_OAK_CONFIG = generateTree(
                 GOLDEN_OAK_LOG.getDefaultState(), GOLDEN_OAK_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new LargeOakTrunkPlacer(4, 8, 0),
                 new BlobFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(3), 3),
@@ -289,6 +306,93 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
                 true, false
         );
 
+
+    }
+
+    /**
+     * This is a separate inner class to prevent things loading in the wrong order.
+     */
+    public static class Assortments {
+        private static PlacedFeature placed(ConfiguredFeature<?, ?> feature, Block sapling) {
+            return feature.withWouldSurviveFilter(sapling);
+        }
+
+        private static RandomFeatureEntry entry(ConfiguredFeature<?, ?> feature, Block sapling, float chance) {
+            return new RandomFeatureEntry(placed(feature, sapling), chance);
+        }
+
+        /*
+        Tree Assortments
+         */
+        private static final RandomFeatureConfig RAINBOW_FOREST_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(
+                        entry(LAVENDER_WISTERIA_TREE, LAVENDER_WISTERIA_SAPLING, 0.33F),
+                        entry(ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.075F),
+                        entry(FANCY_LAVENDER_WISTERIA_TREE, LAVENDER_WISTERIA_SAPLING, 0.025F),
+                        entry(FANCY_ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.075F),
+                        entry(FROST_WISTERIA_TREE, FROST_WISTERIA_SAPLING, 0.0001F),
+                        entry(SKYROOT_TREE, SKYROOT_SAPLING, 0.2F),
+                        entry(WILD_ORANGE_TREE, ORANGE_SAPLING, 0.0125F)
+                ),
+                placed(ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING)
+        );
+
+        private static final RandomFeatureConfig SPARSE_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(
+                        entry(FANCY_SKYROOT_TREE, SKYROOT_SAPLING, 0.1F),
+                        entry(WILD_ORANGE_TREE, ORANGE_SAPLING, 0.02F)
+                ),
+                placed(SKYROOT_TREE, SKYROOT_SAPLING)
+        );
+
+        private static final RandomFeatureConfig SCATTERED_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(
+                        entry(FANCY_SKYROOT_TREE, SKYROOT_SAPLING, 0.05F),
+                        entry(FANCY_ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.002F)
+                ),
+                placed(SKYROOT_TREE, SKYROOT_SAPLING)
+        );
+
+        private static final RandomFeatureConfig THICKET_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(
+                        entry(ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.0001F),
+                        entry(LAVENDER_WISTERIA_TREE, LAVENDER_WISTERIA_SAPLING, 0.0001F),
+                        entry(GOLDEN_OAK_TREE, GOLDEN_OAK_SAPLING, 0.0025F),
+                        entry(SKYROOT_SHRUB, SKYROOT_SAPLING, 0.15F), // convert to feature
+                        entry(SKYROOT_TREE, SKYROOT_SAPLING, 0.75F)
+                ),
+                placed(FANCY_SKYROOT_TREE, SKYROOT_SAPLING)
+        );
+
+        private static final RandomFeatureConfig DENSE_SHIELD_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(
+                        entry(DWARF_MOTTLED_SKYROOT, SKYROOT_SAPLING, 0.1F),
+                        entry(SKYROOT_TREE, SKYROOT_SAPLING, 0.05F)
+                ),
+                placed(MOTTLED_SKYROOT, SKYROOT_SAPLING)
+        );
+
+        private static final RandomFeatureConfig SHIELD_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(
+                        entry(DWARF_MOTTLED_SKYROOT, SKYROOT_SAPLING, 0.15F)
+                ),
+                placed(MOTTLED_SKYROOT, SKYROOT_SAPLING)
+        );
+
+        private static final RandomFeatureConfig PLATEAU_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(
+                        entry(WILD_ORANGE_TREE, ORANGE_SAPLING, 0.05F),
+                        entry(DWARF_MOTTLED_SKYROOT, SKYROOT_SAPLING, 0.225F)
+                ),
+                placed(SKYROOT_SHRUB, SKYROOT_SAPLING)
+        );
+
+        private static final RandomFeatureConfig MIXED_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(
+                        entry(DWARF_MOTTLED_SKYROOT, SKYROOT_SAPLING, 0.4F)
+                ),
+                placed(SKYROOT_TREE, SKYROOT_SAPLING)
+        );
     }
 
     public static void init(){}

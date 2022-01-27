@@ -14,8 +14,6 @@ public class CrystalTreeIslandDecorator extends PlacementModifier {
     private static final CrystalTreeIslandDecorator INSTANCE = new CrystalTreeIslandDecorator();
     public static Codec<CrystalTreeIslandDecorator> MODIFIER_CODEC = Codec.unit(() -> INSTANCE);
 
-    private CrystalTreeIslandDecorator() {}
-
     public static CrystalTreeIslandDecorator of() {
         return INSTANCE;
     }

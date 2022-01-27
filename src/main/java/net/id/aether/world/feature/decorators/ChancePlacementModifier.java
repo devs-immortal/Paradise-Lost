@@ -2,6 +2,7 @@ package net.id.aether.world.feature.decorators;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.world.gen.decorator.AbstractCountPlacementModifier;
 import net.minecraft.world.gen.decorator.PlacementModifierType;
@@ -17,8 +18,12 @@ public class ChancePlacementModifier extends AbstractCountPlacementModifier {
 
     private final IntProvider chance;
 
-    public ChancePlacementModifier (IntProvider chance) {
+    public ChancePlacementModifier(IntProvider chance) {
         this.chance = chance;
+    }
+
+    public static ChancePlacementModifier of(int chance){
+        return new ChancePlacementModifier(ConstantIntProvider.create(chance));
     }
 
     @Override
