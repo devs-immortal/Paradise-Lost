@@ -35,7 +35,7 @@ public class AetherMiscPlacedFeatures extends AetherPlacedFeatures{
     public static final PlacedFeature WATER_SPRING = register("water_spring", AetherMiscConfiguredFeatures.WATER_SPRING.withPlacement());
 
     public static final PlacedFeature ORE_AMBROSIUM = register("ore_ambrosium", AetherMiscConfiguredFeatures.ORE_AMBROSIUM.withPlacement(CountPlacementModifier.of(20), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(127)), BiomePlacementModifier.of()));
-    public static final PlacedFeature ORE_GRAVITITE = register("ore_gravitite", AetherMiscConfiguredFeatures.ORE_GRAVITITE.withPlacement(CountPlacementModifier.of(1), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(32), YOffset.aboveBottom(79)), BiomePlacementModifier.of()));
+    public static final PlacedFeature ORE_GRAVITITE = register("ore_gravitite", AetherMiscConfiguredFeatures.ORE_GRAVITITE.withPlacement(CountPlacementModifier.of(3), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(32), YOffset.aboveBottom(79)), BiomePlacementModifier.of()));
     public static final PlacedFeature ORE_ZANITE = register("ore_zanite", AetherMiscConfiguredFeatures.ORE_ZANITE.withPlacement(CountPlacementModifier.of(16), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(128)), BiomePlacementModifier.of()));
     // Plato
     // Shield
