@@ -1,5 +1,6 @@
 package net.id.aether.blocks.natural.aercloud;
 
+import net.id.aether.client.rendering.particle.AetherParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
@@ -46,7 +47,7 @@ public class BlueAercloudBlock extends AercloudBlock {
                 double yOffset = pos.getY() + world.random.nextDouble();
                 double zOffset = pos.getZ() + world.random.nextDouble();
 
-                world.addParticle(ParticleTypes.SPLASH, xOffset, yOffset, zOffset, 0.0, 0.0, 0.0);
+                world.addParticle(AetherParticles.BLUE_SPLASH, xOffset, yOffset, zOffset, 0.0, 0.0, 0.0);
             }
         }
     }

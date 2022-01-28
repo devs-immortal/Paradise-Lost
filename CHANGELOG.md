@@ -5,6 +5,8 @@
 - World generation for islands have seen updates to reduce the gaps between islands and aid in further diversification
 - `/condition clear` now displays how many conditions were removed, and from whom
 - Some presets have been added for superflat worlds
+- All Swets now have their own custom colored particle effect
+  - Blue Aerclouds also now have a custom colored effect
 
 # Fixes
 
