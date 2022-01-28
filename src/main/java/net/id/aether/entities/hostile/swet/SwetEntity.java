@@ -1,5 +1,6 @@
 package net.id.aether.entities.hostile.swet;
 
+import net.id.aether.client.rendering.particle.AetherParticles;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.tag.AetherItemTags;
 import net.minecraft.entity.*;
@@ -298,7 +299,7 @@ public abstract class SwetEntity extends SlimeEntity {
     // temporarily set to "snowflake"
     @Override
     protected ParticleEffect getParticles() {
-        return ParticleTypes.SPLASH;
+        return AetherParticles.BLUE_SPLASH;
     }
 
     @Override
