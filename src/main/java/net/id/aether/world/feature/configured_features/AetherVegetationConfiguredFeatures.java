@@ -44,6 +44,9 @@ public class AetherVegetationConfiguredFeatures extends AetherConfiguredFeatures
     // ?
     public static final ConfiguredFeature<?, ?> RAINBOW_MALT_SPRIGS = register("rainbow_malt_sprigs", AetherFeatures.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(BlockStateProvider.of(MALT_SPRIG), UniformIntProvider.create(3, 13), ConstantIntProvider.create(5), UniformIntProvider.create(3, 4), 1.4)));
 
+    public static final ConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_PIECE_OF_AETHER_GRASS = register("single_piece_of_aether_grass", Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(AETHER_GRASS.getDefaultState()))));
+    public static final ConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_PIECE_OF_FLUTEGRASS = register("single_piece_of_flutegrass", Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(AetherBlocks.FLUTEGRASS.getDefaultState()))));
+
     private static class Configs extends AetherConfiguredFeatures.Configs{
         /*
         Highlands
