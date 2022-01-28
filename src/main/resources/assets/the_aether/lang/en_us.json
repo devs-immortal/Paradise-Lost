@@ -7,6 +7,16 @@
   "itemGroup.the_aether.aether_tools": "Aether Tools",
   "itemGroup.the_aether.aether_wearables": "Aether Wearables",
 
+  "createWorld.customize.preset.the_aether.sandbox": "Aether - Sandbox",
+
+  "biome.the_aether.aether_highlands": "Highlands Plains",
+  "biome.the_aether.aether_highlands_forest": "Highlands Forest",
+  "biome.the_aether.aether_highlands_thicket": "Highlands Thicket",
+  "biome.the_aether.aether_wisteria_woods": "Wisteria Woods",
+  "biome.the_aether.autumnal_tundra": "Autumnal Tundra",
+  "biome.the_aether.continental_plateau": "Continental Plateau",
+  "biome.the_aether.highlands_shield": "Highlands Shield",
+
   "block.the_aether.aerogel": "Aerogel",
   "block.the_aether.aerogel_slab": "Aerogel Slab",
   "block.the_aether.aerogel_stairs": "Aerogel Stairs",
