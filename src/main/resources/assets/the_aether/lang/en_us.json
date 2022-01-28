@@ -532,6 +532,7 @@
   "commands.the_aether.condition.success.query": "%1$s: %2$s - %3$s",
   "commands.the_aether.condition.success.assign": "%1$s is now: %2$s - %3$s",
   "commands.the_aether.condition.success.clear" : "Successfully cleared condition(s)",
+  "commands.the_aether.condition.success.clear.individual": "Cleared %1$s condition(s) from %2$s",
   "commands.the_aether.gravitate.failure" : "Couldn't float the block(s)",
   "commands.the_aether.gravitate.success" : "Successfully floated the block(s)",
   "commands.the_aether.LUV.success.query" : "LUV%1$s",

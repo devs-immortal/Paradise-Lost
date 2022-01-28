@@ -69,16 +69,25 @@ public class ConditionCommand {
         entities.forEach(entity -> {
             if(entity instanceof LivingEntity target) {
                 var conditions = handleNullCondition(source, attributeId, target);
-                conditions.forEach(condition -> {
-                    ConditionManager manager = ConditionAPI.getConditionManager(target);
-                    manager.set(condition, Persistence.TEMPORARY, 0);
-                    manager.set(condition, Persistence.CHRONIC, 0);
+                if (!conditions.isEmpty()) {
+                    conditions.forEach(condition -> {
+                        ConditionManager manager = ConditionAPI.getConditionManager(target);
+                        manager.set(condition, Persistence.TEMPORARY, 0);
+                        manager.set(condition, Persistence.CHRONIC, 0);
 
-                    ConditionAPI.trySync(target);
-                });
+                        ConditionAPI.trySync(target);
+                    });
+
+                    source.sendFeedback(
+                            new TranslatableText(
+                                    "commands.the_aether.condition.success.clear.individual",
+                                    conditions.size(), entity.getDisplayName()
+                            ),
+                            true
+                    );
+                }
             }
         });
-        // todo: also print whose conditions are being cleared
         source.sendFeedback(new TranslatableText("commands.the_aether.condition.success.clear"), true);
         return 1;
     }
