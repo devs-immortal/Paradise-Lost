@@ -16,6 +16,7 @@
     "entity.LivingEntityMixin",
     "entity.PlayerEntityMixin",
     "entity.SlimeEntity$RandomLookGoalMixin",
+    "entity.SlimeEntityMixin",
     "entity.SlimeMoveControlMixin",
     "fluid.FlowableFluidMixin",
     "item.ArmorMaterialsAccessor",

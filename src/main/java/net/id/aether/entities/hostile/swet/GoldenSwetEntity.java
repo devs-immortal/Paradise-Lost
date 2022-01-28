@@ -1,6 +1,7 @@
 package net.id.aether.entities.hostile.swet;
 
 import net.id.aether.client.rendering.particle.AetherParticles;
+import net.id.aether.client.rendering.particle.ColoredSplashParticleEffect;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -22,9 +23,8 @@ public class GoldenSwetEntity extends SwetEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 40);
     }
-
     @Override
-    protected ParticleEffect getParticles() {
-        return AetherParticles.GOLD_SPLASH;
+    protected ParticleEffect createParticle() {
+        return AetherParticles.coloredSplash(0xAC_9E_35);
     }
 }

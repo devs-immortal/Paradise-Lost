@@ -2,6 +2,7 @@ package net.id.aether.entities.hostile.swet;
 
 import net.id.aether.api.ConditionAPI;
 import net.id.aether.client.rendering.particle.AetherParticles;
+import net.id.aether.client.rendering.particle.ColoredSplashParticleEffect;
 import net.id.aether.component.ConditionManager;
 import net.id.aether.effect.condition.Conditions;
 import net.id.aether.effect.condition.Persistence;
@@ -25,7 +26,7 @@ public class PurpleSwetEntity extends SwetEntity {
     }
 
     @Override
-    protected ParticleEffect getParticles() {
-        return AetherParticles.PURPLE_SPLASH;
+    protected ParticleEffect createParticle() {
+        return AetherParticles.coloredSplash(0x71_52_8E);
     }
 }

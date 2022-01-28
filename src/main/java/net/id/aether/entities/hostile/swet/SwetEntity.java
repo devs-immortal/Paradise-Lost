@@ -1,6 +1,5 @@
 package net.id.aether.entities.hostile.swet;
 
-import net.id.aether.client.rendering.particle.AetherParticles;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.tag.AetherItemTags;
 import net.minecraft.entity.*;
@@ -19,7 +18,6 @@ import net.minecraft.entity.vehicle.TntMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -182,6 +180,7 @@ public abstract class SwetEntity extends SlimeEntity {
             });
             world.getOtherEntities(this, this.getBoundingBox()).forEach(this::onEntityCollision);
         }
+        
         super.tick();
     }
 
@@ -295,15 +294,32 @@ public abstract class SwetEntity extends SlimeEntity {
     }
 
     @Override
-    protected ParticleEffect getParticles() {
-        return ParticleTypes.SPLASH;
-    }
-
-    @Override
     protected Identifier getLootTableId() {
         return this.getType().getLootTableId();
     }
-
+    
+    /**
+     * Called from {@link net.id.aether.mixin.entity.SlimeEntityMixin the mixin} to override the slime particles.
+     */
+    public void spawnSwetParticles() {
+        int size = getSize();
+        for(int i = 0; i < size * 8; i++) {
+            float trig = random.nextFloat() * 6.2831855F;
+            float mag = random.nextFloat() * 0.5F + 0.5F;
+            float offset = size * 0.5F * mag;
+            float xOff = MathHelper.sin(trig) * offset;
+            float zOff = MathHelper.cos(trig) * offset;
+            world.addParticle(createParticle(), getX() + xOff, getY(), getZ() + zOff, 0, 0, 0);
+        }
+    }
+    
+    /**
+     * Creates a particle for this swet. This replaces the vanilla slime effect.
+     *
+     * @return The particle effect to use
+     */
+    protected abstract ParticleEffect createParticle();
+    
     protected static class FollowUnabsorbedTargetGoal<T extends LivingEntity> extends ActiveTargetGoal<T> {
         public FollowUnabsorbedTargetGoal(MobEntity mob, Class<T> targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, @Nullable Predicate<LivingEntity> targetPredicate) {
             super(mob, targetClass, reciprocalChance, checkVisibility, checkCanNavigate, targetPredicate);
