@@ -4,14 +4,20 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.world.feature.AetherFeatures;
 import net.id.aether.world.feature.configs.GroundcoverFeatureConfig;
 import net.id.aether.world.feature.configs.ProjectedOrganicCoverConfig;
+import net.id.aether.world.feature.placed_features.AetherPlacedFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
+import net.minecraft.world.gen.decorator.BlockFilterPlacementModifier;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
+
+import java.util.List;
 
 import static net.id.aether.blocks.AetherBlocks.*;
 
@@ -85,7 +91,9 @@ public class AetherVegetationConfiguredFeatures extends AetherConfiguredFeatures
                         .add(AETHER_GRASS_FLOWERING.getDefaultState(), 5)
         ));
 
-        private static final RandomPatchFeatureConfig SHIELD_FLAX_CONFIG = blockPatch(96, 12, 5, WILD_FLAX);
+        private static final RandomPatchFeatureConfig SHIELD_FLAX_CONFIG = new RandomPatchFeatureConfig(96, 12, 5,
+                () -> singleBlock(WILD_FLAX).withPlacement(BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(List.of(HOLYSTONE, COBBLED_HOLYSTONE, MOSSY_HOLYSTONE), Vec3i.ZERO.down())), AetherPlacedFeatures.ON_SOLID_GROUND)
+        );
         // Tundra
         private static final RandomPatchFeatureConfig TUNDRA_FOLIAGE_CONFIG = blockPatch(32, 7, 3, new WeightedBlockStateProvider(
                 DataPool.<BlockState>builder()
