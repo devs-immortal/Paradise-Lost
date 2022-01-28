@@ -38,8 +38,14 @@ public class AetherConfiguredFeatures {
         static RandomPatchFeatureConfig blockPatch(int tries, int hSpread, int ySpread, BlockStateProvider provider){
             return new RandomPatchFeatureConfig(
                     tries, hSpread, ySpread,
-                    () -> Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(provider)).withPlacement(AetherPlacedFeatures.ON_SOLID_GROUND)
+                    () -> singleBlock(provider).withPlacement(AetherPlacedFeatures.ON_SOLID_GROUND)
             );
+        }
+        static ConfiguredFeature<SimpleBlockFeatureConfig, ?> singleBlock(BlockStateProvider provider){
+            return Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(provider));
+        }
+        static ConfiguredFeature<SimpleBlockFeatureConfig, ?> singleBlock(Block block){
+            return singleBlock(BlockStateProvider.of(block));
         }
         // TODO This is incorrect, also convert this to tag
         final static List<BlockState> GENERIC_FLOOR_WHITELIST = List.of(AETHER_GRASS_BLOCK.getDefaultState(), COARSE_AETHER_DIRT.getDefaultState(), HOLYSTONE.getDefaultState(), COBBLED_HOLYSTONE.getDefaultState());
