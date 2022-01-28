@@ -67,7 +67,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
     public FloatingBlockEntity(World world, double x, double y, double z, BlockState floatingBlockState) {
         this(AetherEntityTypes.FLOATING_BLOCK, world);
         this.floatTile = floatingBlockState;
-        this.inanimate = true;
+        this.intersectionChecked = true;
         this.setPosition(x, y, z);
         this.setVelocity(Vec3d.ZERO);
         this.prevX = x;
@@ -356,7 +356,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
         int data = packet.getEntityData();
         this.partOfStructure = data < 0;
         this.floatTile = Block.getStateFromRawId(packet.getEntityData() * (this.partOfStructure ? -1 : 1));
-        this.inanimate = true;
+        this.intersectionChecked = true;
         double d = packet.getX();
         double e = packet.getY();
         double f = packet.getZ();

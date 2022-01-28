@@ -110,8 +110,6 @@ dependencies {
     // Custom Portal Api
     modImplementation(include("net.kyrptonaught:customportalapi:${project.customportalapi_version}"))
 
-    //modImplementation(include("dev.hephaestus:seedy-behavior:${project.seedy_version}"))
-
     // Implement Trinkets for parachutes, rings etc.
     modImplementation(include("dev.emi:trinkets:${project.trinkets_version}"))
 

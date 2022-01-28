@@ -129,7 +129,6 @@
       ],
       "type": "minecraft:multi_noise"
     },
-    "seed": 0,
     "settings": "the_aether:aether_noise",
     "type": "minecraft:noise"
   }
