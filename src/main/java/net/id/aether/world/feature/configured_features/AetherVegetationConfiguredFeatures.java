@@ -23,8 +23,10 @@ public class AetherVegetationConfiguredFeatures extends AetherConfiguredFeatures
     public static final ConfiguredFeature<?, ?> AETHER_BUSH = register("aether_bush", Feature.RANDOM_PATCH.configure(Configs.AETHER_BUSH_CONFIG));
     public static final ConfiguredFeature<?, ?> AETHER_DENSE_BUSH = register("aether_dense_bush", Feature.RANDOM_PATCH.configure(Configs.AETHER_DENSE_BUSH_CONFIG));
     public static final ConfiguredFeature<?, ?> AETHER_GRASS_BUSH = register("aether_grass", Feature.RANDOM_PATCH.configure(Configs.AETHER_GRASS_BUSH_CONFIG));
+    public static final ConfiguredFeature<?, ?> AETHER_GRASS_BONEMEAL = register("aether_grass_bonemeal", Configs.singleBlock(AETHER_GRASS));
     public static final ConfiguredFeature<?, ?> AETHER_TALL_GRASS_BUSH = register("aether_tall_grass", Feature.RANDOM_PATCH.configure(Configs.AETHER_TALL_GRASS_BUSH_CONFIG));
     public static final ConfiguredFeature<?, ?> FLUTEGRASS = register("flutegrass", Feature.RANDOM_PATCH.configure(Configs.FLUTEGRASS_CONFIG));
+    public static final ConfiguredFeature<?, ?> FLUTEGRASS_BONEMEAL = register("flutegrass_bonemeal", Configs.singleBlock(AetherBlocks.FLUTEGRASS));
     public static final ConfiguredFeature<?, ?> AETHER_FLOWERS = register("aether_flowers", Feature.FLOWER.configure(Configs.AETHER_FLOWER_CONFIG));
     public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH.configure(Configs.BLUEBERRY_PATCH_CONFIG));
     // Plato
@@ -44,8 +46,6 @@ public class AetherVegetationConfiguredFeatures extends AetherConfiguredFeatures
     // ?
     public static final ConfiguredFeature<?, ?> RAINBOW_MALT_SPRIGS = register("rainbow_malt_sprigs", AetherFeatures.ORGANIC_GROUNDCOVER_FEATURE.configure(new ProjectedOrganicCoverConfig(BlockStateProvider.of(MALT_SPRIG), UniformIntProvider.create(3, 13), ConstantIntProvider.create(5), UniformIntProvider.create(3, 4), 1.4)));
 
-    public static final ConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_PIECE_OF_AETHER_GRASS = register("single_piece_of_aether_grass", Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(AETHER_GRASS.getDefaultState()))));
-    public static final ConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_PIECE_OF_FLUTEGRASS = register("single_piece_of_flutegrass", Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(BlockStateProvider.of(AetherBlocks.FLUTEGRASS.getDefaultState()))));
 
     private static class Configs extends AetherConfiguredFeatures.Configs{
         /*
