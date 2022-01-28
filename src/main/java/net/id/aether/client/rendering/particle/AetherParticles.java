@@ -14,7 +14,10 @@ public class AetherParticles {
     public static DefaultParticleType GOLDEN_OAK_LEAF = register("golden_leaf", GoldenOakLeafParticle.DefaultFactory::new);
     public static DefaultParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal", FallingOrangePetalParticle.DefaultFactory::new);
     public static DefaultParticleType VENOM_BUBBLE= register("venom_bubble", VenomBubbleParticle.DefaultFactory::new);
-    public static DefaultParticleType BLUE_SPLASH = register("blue_splash", provider -> new ColoredSplashParticle.SplashFactory(provider, 0x55FFFF));
+    public static DefaultParticleType BLUE_SPLASH = register("blue_splash", provider -> new ColoredSplashParticle.SplashFactory(provider, 0x5555FF));
+    public static DefaultParticleType GOLD_SPLASH = register("gold_splash", provider -> new ColoredSplashParticle.SplashFactory(provider, 0xFFAA00));
+    public static DefaultParticleType PURPLE_SPLASH = register("purple_splash", provider -> new ColoredSplashParticle.SplashFactory(provider, 0xAA00AA));
+    public static DefaultParticleType WHITE_SPLASH = register("white_splash", provider -> new ColoredSplashParticle.SplashFactory(provider, 0xFFFFFF));
 
     private static DefaultParticleType register(String id, PendingParticleFactory<DefaultParticleType> factory){
         DefaultParticleType particle = Registry.register(Registry.PARTICLE_TYPE, Aether.locate(id), FabricParticleTypes.simple(true));

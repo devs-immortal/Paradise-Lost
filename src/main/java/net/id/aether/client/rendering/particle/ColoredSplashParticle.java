@@ -23,11 +23,6 @@ public class ColoredSplashParticle extends RainSplashParticle {
     }
 
     @Override
-    public void tick() {
-        //super.tick();
-    }
-
-    @Override
     public ParticleTextureSheet getType() {
         return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
     }
