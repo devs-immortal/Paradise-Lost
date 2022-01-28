@@ -31,7 +31,7 @@ public abstract class MountableEntity extends AetherAnimalEntity {
         this.dataTracker.startTracking(RIDER_SNEAKING, false);
     }
 
-    // TODO: Patch this or remove it, pick one.
+    // TODO: Patch this or remove it, pick one. (PL-1.7)
     //@Override
     //public void travel(Vec3d motion) {
     //    Entity entity = this.getPassengerList().isEmpty() ? null : this.getPassengerList().get(0);

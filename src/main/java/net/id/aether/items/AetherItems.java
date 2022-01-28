@@ -149,21 +149,22 @@ public class AetherItems {
     public static final ArmorItem PHOENIX_CHESTPLATE = add("phoenix_chestplate", new ArmorItem(AetherArmorMaterials.PHOENIX, CHEST, aetherLootWearable));
     public static final ArmorItem PHOENIX_LEGGINGS = add("phoenix_leggings", new ArmorItem(AetherArmorMaterials.PHOENIX, LEGS, aetherLootWearable));
     public static final ArmorItem PHOENIX_BOOTS = add("phoenix_boots", new ArmorItem(AetherArmorMaterials.PHOENIX, FEET, aetherLootWearable));
-    /*
+    /* TODO: Implement obsidian armor
     public static final ArmorItem OBSIDIAN_HELMET = add("obsidian_helmet", new ArmorItem(AetherArmorMaterials.OBSIDIAN, HEAD, aetherLootWearable));
     public static final ArmorItem OBSIDIAN_CHESTPLATE = add("obsidian_chestplate", new ArmorItem(AetherArmorMaterials.OBSIDIAN, CHEST, aetherLootWearable));
     public static final ArmorItem OBSIDIAN_LEGGINGS = add("obsidian_leggings", new ArmorItem(AetherArmorMaterials.OBSIDIAN, LEGS, aetherLootWearable));
     public static final ArmorItem OBSIDIAN_BOOTS = add("obsidian_boots", new ArmorItem(AetherArmorMaterials.OBSIDIAN, FEET, aetherLootWearable));
     */
-    /*
+    /* TODO: Implement valkyrie armor
     public static final ArmorItem VALKYRIE_HELMET = add("valkyrie_helmet", new ArmorItem(AetherArmorMaterials.VALKYRIE, HEAD, aetherLootWearable));
     public static final ArmorItem VALKYRIE_CHESTPLATE = add("valkyrie_chestplate", new ArmorItem(AetherArmorMaterials.VALKYRIE, CHEST, aetherLootWearable));
     public static final ArmorItem VALKYRIE_LEGGINGS = add("valkyrie_leggings", new ArmorItem(AetherArmorMaterials.VALKYRIE, LEGS, aetherLootWearable));
     public static final ArmorItem VALKYRIE_BOOTS = add("valkyrie_boots", new ArmorItem(AetherArmorMaterials.VALKYRIE, FEET, aetherLootWearable));
     */
-    /*
+    /* TODO: Implement sentry boots
     public static final ArmorItem SENTRY_BOOTS = add("sentry_boots", new ArmorItem(AetherArmorMaterials.SENTRY, FEET, aetherLootWearable));
 
+    // TODO: Implement Gloves
     public static final AccessoryItem LEATHER_GLOVES = add("leather_gloves", new AccessoryItem(AccessoryType.GLOVES, 1.5f, wearable));
     public static final AccessoryItem IRON_GLOVES = add("iron_gloves", new AccessoryItem(AccessoryType.GLOVES, 2.5f, wearable));
     public static final AccessoryItem GOLDEN_GLOVES = add("golden_gloves", new AccessoryItem(AccessoryType.GLOVES, 2f, wearable));
@@ -176,15 +177,18 @@ public class AetherItems {
     public static final AccessoryItem OBSIDIAN_GLOVES = add("obsidian_gloves", new AccessoryItem(AccessoryType.GLOVES, 5f, aetherLootWearable));
     public static final AccessoryItem VALKYRIE_GLOVES = add("valkyrie_gloves", new AccessoryItem(AccessoryType.GLOVES, "valkyrie", 5f, aetherLootWearable));
 
+    // TODO: Implement Rings
     public static final AccessoryItem IRON_RING = add("iron_ring", new AccessoryItem(AccessoryType.RING, wearable));
     public static final AccessoryItem GOLDEN_RING = add("golden_ring", new AccessoryItem(AccessoryType.RING, wearable));
     public static final AccessoryItem ZANITE_RING = add("zanite_ring", new AccessoryItem(AccessoryType.RING, wearable));
     public static final AccessoryItem ICE_RING = add("ice_ring", new AccessoryItem(AccessoryType.RING, rareWearable));
 
+    // TODO: Implement Pendants
     public static final AccessoryItem GOLDEN_PENDANT = add("golden_pendant", new AccessoryItem(AccessoryType.PENDANT, wearable));
     public static final AccessoryItem ZANITE_PENDANT = add("zanite_pendant", new AccessoryItem(AccessoryType.PENDANT, wearable));
     public static final AccessoryItem ICE_PENDANT = add("ice_pendant", new AccessoryItem(AccessoryType.PENDANT, rareWearable));
 
+    // TODO: Implement Capes
     public static final AccessoryItem WHITE_CAPE = add("white_cape", new AccessoryItem(AccessoryType.CAPE, wearable));
     public static final AccessoryItem RED_CAPE = add("red_cape", new AccessoryItem(AccessoryType.CAPE, wearable));
     public static final AccessoryItem BLUE_CAPE = add("blue_cape", new AccessoryItem(AccessoryType.CAPE, wearable));
@@ -193,6 +197,7 @@ public class AetherItems {
     public static final AccessoryItem AGILITY_CAPE = add("agility_cape", new AccessoryItem(AccessoryType.CAPE, "agility", aetherLootWearable));
     public static final AccessoryItem INVISIBILITY_CAPE = add("invisibility_cape", new AccessoryItem(AccessoryType.CAPE, aetherLootWearable));
 
+    // TODO: Implement misc. accessories
     public static final AccessoryItem GOLDEN_FEATHER = add("golden_feather", new AccessoryItem(AccessoryType.MISC, aetherLootWearable));
     public static final AccessoryItem REGENERATION_STONE = add("regeneration_stone", new AccessoryItem(AccessoryType.MISC, aetherLootWearable));
     public static final AccessoryItem IRON_BUBBLE = add("iron_bubble", new AccessoryItem(AccessoryType.MISC, aetherLootWearable));
@@ -232,7 +237,7 @@ public class AetherItems {
     private static final Settings misc = misc();
 
     public static final AetherPortalItem AETHER_PORTAL = add("aether_portal", new AetherPortalItem(misc));
-    /*
+    /* TODO: Implement magical items
     public static final LifeShardItem LIFE_SHARD = add("life_shard", new LifeShardItem(misc().rarity(AetherRarity.AETHER_LOOT).maxCount(1)));
     public static final CloudStaffItem CLOUD_STAFF = add("cloud_staff", new CloudStaffItem(misc().maxCount(1).maxDamage(60)));
     public static final NatureStaffItem NATURE_STAFF = add("nature_staff", new NatureStaffItem(misc().maxCount(1).maxDamage(100)));
@@ -254,7 +259,7 @@ public class AetherItems {
 
     public static final VialItem QUICKSOIL_VIAL = add("quicksoil_vial", new VialItem(Fluids.EMPTY, misc().maxCount(32)));
     public static final VialItem AERCLOUD_VIAL = add("aercloud_vial", new VialItem(AetherFluids.DENSE_AERCLOUD, misc().maxCount(32)));
-    /*
+    /* TODO: Implement dungeon keys
     public static final Item BRONZE_KEY = add("bronze_key", new Item(misc().rarity(AetherRarity.AETHER_LOOT)));
     public static final Item SILVER_KEY = add("silver_key", new Item(misc().rarity(AetherRarity.AETHER_LOOT)));
     public static final Item GOLDEN_KEY = add("golden_key", new Item(misc().rarity(AetherRarity.AETHER_LOOT)));
@@ -346,7 +351,8 @@ public class AetherItems {
     // smooth stuff
     // cobble variants
     public static final BlockItem MOSSY_HOLYSTONE = add("mossy_holystone", AetherBlocks.MOSSY_HOLYSTONE, building_block);
-    public static final BlockItem GOLDEN_MOSSY_HOLYSTONE = add("golden_mossy_holystone", AetherBlocks.GOLDEN_MOSSY_HOLYSTONE, building_block);/*
+    public static final BlockItem GOLDEN_MOSSY_HOLYSTONE = add("golden_mossy_holystone", AetherBlocks.GOLDEN_MOSSY_HOLYSTONE, building_block);
+    /* TODO: Implement Angelic and hellfire blocks
     public static final BlockItem ANGELIC_STONE = add("angelic_stone", AetherBlocks.ANGELIC_STONE, block);
     public static final BlockItem ANGELIC_CRACKED_STONE = add("angelic_stone_cracked", AetherBlocks.ANGELIC_CRACKED_STONE, block);
     public static final BlockItem ANGELIC_SLAB = add("angelic_slab", AetherBlocks.ANGELIC_SLAB, block);
@@ -354,20 +360,20 @@ public class AetherItems {
     public static final BlockItem ANGELIC_WALL = add("angelic_wall", AetherBlocks.ANGELIC_WALL, block);
 
     public static final BlockItem LIGHT_ANGELIC_STONE = add("light_angelic_stone", AetherBlocks.LIGHT_ANGELIC_STONE, block);
-    //todo public static final BlockItem LIGHT_ANGELIC_STONE_TRAP = add("light_angelic_stone_trap", AetherBlocks.LIGHT_ANGELIC_STONE_TRAP, block);
+    public static final BlockItem LIGHT_ANGELIC_STONE_TRAP = add("light_angelic_stone_trap", AetherBlocks.LIGHT_ANGELIC_STONE_TRAP, block);
     public static final BlockItem LIGHT_ANGELIC_SLAB = add("light_angelic_slab", AetherBlocks.LIGHT_ANGELIC_SLAB, block);
     public static final BlockItem LIGHT_ANGELIC_STAIRS = add("light_angelic_stairs", AetherBlocks.LIGHT_ANGELIC_STAIRS, block);
     public static final BlockItem LIGHT_ANGELIC_WALL = add("light_angelic_wall", AetherBlocks.LIGHT_ANGELIC_WALL, block);
 
     public static final BlockItem HELLFIRE_STONE = add("hellfire_stone", AetherBlocks.HELLFIRE_STONE, block);
     public static final BlockItem HELLFIRE_CRACKED_STONE = add("hellfire_stone_cracked", AetherBlocks.HELLFIRE_CRACKED_STONE, block);
-    //public static final BlockItem HELLFIRE_STONE_TRAP = add("hellfire_stone_trap", AetherBlocks.HELLFIRE_STONE_TRAP, block);
+    public static final BlockItem HELLFIRE_STONE_TRAP = add("hellfire_stone_trap", AetherBlocks.HELLFIRE_STONE_TRAP, block);
     public static final BlockItem HELLFIRE_SLAB = add("hellfire_slab", AetherBlocks.HELLFIRE_SLAB, block);
     public static final BlockItem HELLFIRE_STAIRS = add("hellfire_stairs", AetherBlocks.HELLFIRE_STAIRS, block);
     public static final BlockItem HELLFIRE_WALL = add("hellfire_wall", AetherBlocks.HELLFIRE_WALL, block);
 
     public static final BlockItem LIGHT_HELLFIRE_STONE = add("light_hellfire_stone", AetherBlocks.LIGHT_HELLFIRE_STONE, block);
-    //public static final BlockItem LIGHT_HELLFIRE_STONE_TRAP = add("light_hellfire_stone_trap", AetherBlocks.LIGHT_HELLFIRE_STONE_TRAP, block);
+    public static final BlockItem LIGHT_HELLFIRE_STONE_TRAP = add("light_hellfire_stone_trap", AetherBlocks.LIGHT_HELLFIRE_STONE_TRAP, block);
     public static final BlockItem LIGHT_HELLFIRE_SLAB = add("light_hellfire_slab", AetherBlocks.LIGHT_HELLFIRE_SLAB, block);
     public static final BlockItem LIGHT_HELLFIRE_STAIRS = add("light_hellfire_stairs", AetherBlocks.LIGHT_HELLFIRE_STAIRS, block);
     public static final BlockItem LIGHT_HELLFIRE_WALL = add("light_hellfire_wall", AetherBlocks.LIGHT_HELLFIRE_WALL, block);
@@ -382,16 +388,16 @@ public class AetherItems {
     public static final BlockItem CARVED_STONE_PANEL_LIT = add("carved_stone_panel_lit", AetherBlocks.CARVED_STONE_PANEL_LIT, building_block);
     public static final BlockItem CARVED_STONE_EYE = add("carved_stone_eye", AetherBlocks.CARVED_STONE_EYE, building_block);
     public static final BlockItem CARVED_STONE_EYE_LIT = add("carved_stone_eye_lit", AetherBlocks.CARVED_STONE_EYE_LIT, building_block);
-    /*
+    /* TODO: Implement carved and sentry blocks
     public static final BlockItem LIGHT_CARVED_STONE = add("light_carved_stone", AetherBlocks.LIGHT_CARVED_STONE, block);
-    //public static final BlockItem LIGHT_CARVED_STONE_TRAP = add("light_carved_stone_trap", AetherBlocks.LIGHT_CARVED_STONE_TRAP, block);
+    public static final BlockItem LIGHT_CARVED_STONE_TRAP = add("light_carved_stone_trap", AetherBlocks.LIGHT_CARVED_STONE_TRAP, block);
     public static final BlockItem LIGHT_CARVED_SLAB = add("light_carved_slab", AetherBlocks.LIGHT_CARVED_SLAB, block);
     public static final BlockItem LIGHT_CARVED_STAIRS = add("light_carved_stairs", AetherBlocks.LIGHT_CARVED_STAIRS, block);
     public static final BlockItem LIGHT_CARVED_WALL = add("light_carved_wall", AetherBlocks.LIGHT_CARVED_WALL, block);
 
     public static final BlockItem SENTRY_STONE = add("sentry_stone", AetherBlocks.SENTRY_STONE, block);
     public static final BlockItem SENTRY_CRACKED_STONE = add("sentry_stone_cracked", AetherBlocks.SENTRY_CRACKED_STONE, block);
-    //public static final BlockItem SENTRY_STONE_TRAP = add("sentry_stone_trap", AetherBlocks.SENTRY_STONE_TRAP, block);
+    public static final BlockItem SENTRY_STONE_TRAP = add("sentry_stone_trap", AetherBlocks.SENTRY_STONE_TRAP, block);
     public static final BlockItem SENTRY_SLAB = add("sentry_slab", AetherBlocks.SENTRY_SLAB, block);
     public static final BlockItem SENTRY_STAIRS = add("sentry_stairs", AetherBlocks.SENTRY_STAIRS, block);
     public static final BlockItem SENTRY_WALL = add("sentry_wall", AetherBlocks.SENTRY_WALL, block);
@@ -536,7 +542,7 @@ public class AetherItems {
     public static final BlockItem CARVED_WALL = add("carved_stone_wall", AetherBlocks.CARVED_STONE_WALL, decoration);
     public static final BlockItem MOSSY_CARVED_WALL = add("mossy_carved_stone_wall", AetherBlocks.MOSSY_CARVED_STONE_WALL, decoration);
     // infested blocks
-    /* todo swet drop block items
+    /* TODO: Implement swet drop block items
     public static final BlockItem SWET_DROP = add("swet_drop", AetherBlocks.SWET_DROP, misc);
     public static final BlockItem BLUE_SWET_DROP = add("blue_swet_drop", AetherBlocks.BLUE_SWET_DROP, misc);
     public static final BlockItem GOLDEN_SWET_DROP = add("golden_swet_drop", AetherBlocks.GOLDEN_SWET_DROP, misc);
@@ -571,7 +577,7 @@ public class AetherItems {
     public static final BlockItem CRYSTAL_PRESSURE_PLATE = add("crystal_pressure_plate", AetherBlocks.CRYSTAL_PRESSURE_PLATE, decoration);
     public static final BlockItem WISTERIA_PRESSURE_PLATE = add("wisteria_pressure_plate", AetherBlocks.WISTERIA_PRESSURE_PLATE, decoration);
 
-    //dungeon
+    //TODO: Implement dungeon switch block
 //    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", AetherBlocks.DUNGEON_SWITCH, decoration);
 
     // these should be moved... somewhere?
@@ -583,14 +589,11 @@ public class AetherItems {
 
     // Chests
     public static final BlockItem SKYROOT_CHEST = add("skyroot_chest", AetherBlocks.SKYROOT_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    // 24Chrome: removed these from creative menu
+    // TODO: Implement remaining chests (PL-1.7)
 //    public static final BlockItem GOLDEN_OAK_CHEST = add("golden_oak_chest", AetherBlocks.GOLDEN_OAK_CHEST, new FabricItemSettings());
 //    public static final BlockItem ORANGE_CHEST = add("orange_chest", AetherBlocks.ORANGE_CHEST, new FabricItemSettings());
 //    public static final BlockItem CRYSTAL_CHEST = add("crystal_chest", AetherBlocks.CRYSTAL_CHEST, new FabricItemSettings());
 //    public static final BlockItem WISTERIA_CHEST = add("wisteria_chest", AetherBlocks.WISTERIA_CHEST, new FabricItemSettings());
-
-    // Devel
-//    public static final PathTestingTool PATH_TESTING_TOOL = add("path_testing_tool", new PathTestingTool(new FabricItemSettings().maxCount(1)));
 
     public static void init() {
         AetherRegistryQueues.ITEM.register();

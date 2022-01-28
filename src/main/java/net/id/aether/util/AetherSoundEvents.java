@@ -19,12 +19,12 @@ import java.util.stream.Stream;
 
 import static net.id.aether.Aether.locate;
 
-//TODO Is this the best place for this?
+// TODO: Is this the best place for this?
 
 /**
  * The home for all Aether sounds.
  */
-public final class AetherSoundEvents{
+public final class AetherSoundEvents {
     private AetherSoundEvents(){
         throw new RuntimeException();
     }

@@ -7,15 +7,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-//TODO Make this work, for now this is a reference to names that need changing.
-public final class AetherDataFixers{
+// TODO: Make this work, for now this is a reference to names that need changing. (PL-1.8)
+public final class AetherDataFixers {
     private AetherDataFixers(){}
     
     private static final String OLD_NAMESPACE = "the_aether";
-    private static final String NEW_NAMESPACE = "aether";
+    private static final String NEW_NAMESPACE = "paradise_lost";
     
     private static final Map<String, String> BLOCKS = createMap(
-        "aether_grass", "grass",
+        "aether_grass", "grass_block",
         "enchanted_aether_grass", "enchanted_grass",
         "aether_frozen_grass", "frozen_grass",
         "aether_dirt", "dirt",

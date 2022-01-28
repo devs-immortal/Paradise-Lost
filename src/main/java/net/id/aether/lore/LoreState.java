@@ -73,7 +73,7 @@ public interface LoreState extends AutoSyncedComponent{
         }
     
         private void validate(){
-            //TODO
+            // TODO: Implement logic
         }
     
         @Override

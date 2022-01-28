@@ -68,7 +68,7 @@ public final class CloudRendererMixin {
         }
     }
 
-    // TODO: Replace this mostly copy-pasted code with some redirects or injections
+    // TODO: Replace this mostly copy-pasted code with some redirects or injections (PL-1.7)
     private void internalCloudRender(MatrixStack matrices, Matrix4f model, float tickDelta, double cameraX, double cameraY, double cameraZ, float cloudOffset, float cloudScale, float speedMod) {
         float cloudHeight = this.world.getDimensionEffects().getCloudsHeight();
         if (!Float.isNaN(cloudHeight)) {

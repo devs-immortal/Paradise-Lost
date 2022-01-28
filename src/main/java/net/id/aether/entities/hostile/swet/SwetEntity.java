@@ -81,11 +81,11 @@ public abstract class SwetEntity extends SlimeEntity {
     }
 
     public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        // todo: eventually change to not care about lightness, rather y height.
+        // TODO: eventually change to not care about lightness, rather y height. (PL-1.7)
         return world.getDifficulty() != Difficulty.PEACEFUL && HostileEntity.isSpawnDark(world, pos, random) && canMobSpawn(type, world, spawnReason, pos, random);
     }
 
-    // TODO: Use PathAwareEntity at some point
+    // TODO: Use PathAwareEntity at some point (PL-1.7)
     @Override
     public boolean canBeLeashedBy(PlayerEntity player) {
         return !this.isLeashed();

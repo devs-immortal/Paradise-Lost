@@ -31,7 +31,7 @@ import java.util.Set;
 
 import static net.id.aether.Aether.locate;
 
-//TODO Requirements, requirement lines and status
+// TODO: Requirements, requirement lines and status
 @Environment(EnvType.CLIENT)
 public final class LoreScreen extends HandledScreen<LoreHandler>{
     public static final Identifier WIDGET_TEXTURE = locate("textures/gui/lore/widgets.png");

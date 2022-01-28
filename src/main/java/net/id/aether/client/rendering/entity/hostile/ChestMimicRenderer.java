@@ -28,7 +28,7 @@ public class ChestMimicRenderer extends MobEntityRenderer<ChestMimicEntity, Ches
     public void render(ChestMimicEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
         matrices.translate(entity.getX(), entity.getY(), entity.getZ());
-        // TODO: Fix rotate call (1.17)
+        // TODO: Fix rotate call (1.17, 1.18)
         //GlStateManager.rotatef(180.0F - entity.getPitch(), 0.0F, 1.0F, 0.0F);
         matrices.scale(-1.0F, -1.0F, 1.0F);
 
