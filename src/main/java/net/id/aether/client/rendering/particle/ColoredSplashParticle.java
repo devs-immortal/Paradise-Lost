@@ -3,6 +3,7 @@ package net.id.aether.client.rendering.particle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
+import net.id.aether.devel.AetherDevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
@@ -19,6 +20,11 @@ public class ColoredSplashParticle extends RainSplashParticle {
             this.velocityY = 0.1;
             this.velocityZ = i;
         }
+    }
+
+    @Override
+    public void tick() {
+        //super.tick();
     }
 
     @Override
@@ -67,22 +73,21 @@ public class ColoredSplashParticle extends RainSplashParticle {
             float g = (float)((rgbHex & 0xFF00) >> 8) / 255.0f;
             float h = (float)((rgbHex & 0xFF) >> 0) / 255.0f;
             float i = 1.0f;
-            //this.setColor(f * 1.0f, g * 1.0f, h * 1.0f);
-            //this.setAlpha(i);
+
             this.red = f * 1.0f;
             this.green = g * 1.0f;
             this.blue = h * 1.0f;
             this.alpha = i;
         }
 
-        public static float randomNumberGenerator()
+        /*public static float randomNumberGenerator()
         {
             float rangeMin = 0.0f;
             float rangeMax = 1.0f;
             Random r = new Random();
             float createdRanNum = rangeMin + (rangeMax - rangeMin) * r.nextFloat();
             return createdRanNum;
-        }
+        }*/
 
         @Override
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double g, double h, double i) {
@@ -91,10 +96,17 @@ public class ColoredSplashParticle extends RainSplashParticle {
             if (this.usingHex) {
                 setColor(this.hexCode);
             }
-//            splashParticle.setColor(this.red, this.green, this.blue);
-            splashParticle.setColor(randomNumberGenerator(), randomNumberGenerator(), randomNumberGenerator());
+
+            /*if (AetherDevel.isDevel()) {
+                this.red = randomNumberGenerator();
+                this.green = randomNumberGenerator();
+                this.blue = randomNumberGenerator();
+            }*/
+
+            splashParticle.setColor(this.red, this.green, this.blue);
             splashParticle.setAlpha(this.alpha);
-            Aether.LOG.info("Color {} {} {} {} ({})", red, green, blue, alpha, hexCode);
+
+            //Aether.LOG.debug("Color {} {} {} {} ({})", red, green, blue, alpha, usingHex ? hexCode : "N/A");
             return splashParticle;
         }
     }

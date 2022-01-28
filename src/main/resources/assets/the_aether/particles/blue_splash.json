@@ -1,8 +1,8 @@
 {
   "textures": [
-    "minecraft:splash_0",
-    "minecraft:splash_1",
-    "minecraft:splash_2",
-    "minecraft:splash_3"
+    "the_aether:splash_0",
+    "the_aether:splash_1",
+    "the_aether:splash_2",
+    "the_aether:splash_3"
   ]
 }
