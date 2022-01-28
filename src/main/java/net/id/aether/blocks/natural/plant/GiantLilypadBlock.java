@@ -31,11 +31,6 @@ public class GiantLilypadBlock extends LilyPadBlock implements Fertilizable {
     }
 
     @Override
-    public VoxelShape getRaycastShape(BlockState state, BlockView world, BlockPos pos) {
-        return super.getRaycastShape(state, world, pos);
-    }
-
-    @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return BlockPos.stream(pos.add(-1, 0, -1), pos.add(1, 0, 1)).allMatch(floorPos -> {
             var upFluid = world.getFluidState(floorPos.up());
