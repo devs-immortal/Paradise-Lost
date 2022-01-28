@@ -226,10 +226,10 @@ public final class AetherSoundEvents{
         };
     }
     
-    private static abstract class AbstractSoundEvent extends SoundEvent{
+    private static abstract class AbstractSoundEvent extends SoundEvent {
         protected final String subtitle;
         
-        private AbstractSoundEvent(Identifier id, String subtitle){
+        private AbstractSoundEvent(Identifier id, String subtitle) {
             super(id);
             this.subtitle = subtitle;
         }
