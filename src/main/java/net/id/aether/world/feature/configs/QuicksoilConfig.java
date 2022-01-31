@@ -1,5 +1,7 @@
 package net.id.aether.world.feature.configs;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.aether.blocks.AetherBlocks;
 import net.minecraft.block.BlockState;
 
@@ -7,6 +9,11 @@ import java.util.Optional;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class QuicksoilConfig extends DynamicConfiguration {
+    public static final Codec<QuicksoilConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            BlockState.CODEC.optionalFieldOf("state").forGetter(QuicksoilConfig::getOptionalState),
+            Codec.STRING.optionalFieldOf("genType").forGetter(QuicksoilConfig::getGenString)
+    ).apply(instance, QuicksoilConfig::new));
+
     private final Optional<BlockState> optionalState;
 
     public QuicksoilConfig(Optional<BlockState> state, Optional<String> type) {

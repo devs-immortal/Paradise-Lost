@@ -1,17 +1,14 @@
 package net.id.aether.world.feature.features;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.world.feature.configs.GroundcoverFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.tick.OrderedTick;
 
 import java.util.LinkedList;
@@ -19,12 +16,6 @@ import java.util.Queue;
 import java.util.Random;
 
 public class GroundcoverFeature extends Feature<GroundcoverFeatureConfig> {
-
-    public static final Codec<GroundcoverFeatureConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BlockStateProvider.TYPE_CODEC.fieldOf("states").forGetter(GroundcoverFeatureConfig::states),
-            IntProvider.VALUE_CODEC.fieldOf("size").forGetter(GroundcoverFeatureConfig::size),
-            IntProvider.VALUE_CODEC.fieldOf("spacing").forGetter(GroundcoverFeatureConfig::spacing)
-    ).apply(instance, GroundcoverFeatureConfig::new));
 
     public GroundcoverFeature(Codec<GroundcoverFeatureConfig> configCodec) {
         super(configCodec);

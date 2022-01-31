@@ -17,18 +17,13 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class AetherLakeFeature extends Feature<DynamicConfiguration>{
     private static final BlockState CAVE_AIR;
-    
-    private static final Codec<DynamicConfiguration> CODEC = RecordCodecBuilder.create(instance->instance.group(
-        BlockState.CODEC.fieldOf("state").forGetter(DynamicConfiguration::getState),
-        Codec.STRING.optionalFieldOf("genType").forGetter(DynamicConfiguration::getGenString)
-    ).apply(instance, DynamicConfiguration::new));
-    
+
     static{
         CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
     }
     
-    public AetherLakeFeature(){
-        super(CODEC);
+    public AetherLakeFeature(Codec<DynamicConfiguration> codec){
+        super(codec);
     }
     
     public boolean generate(FeatureContext<DynamicConfiguration> context){

@@ -1,7 +1,6 @@
 package net.id.aether.world.feature.features;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.aether.blocks.AetherBlockProperties;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.natural.aercloud.AercloudBlock;
@@ -22,13 +21,8 @@ import java.util.List;
 
 public class QuicksoilFeature extends Feature<QuicksoilConfig> {
 
-    private static final Codec<QuicksoilConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BlockState.CODEC.optionalFieldOf("state").forGetter(QuicksoilConfig::getOptionalState),
-            Codec.STRING.optionalFieldOf("genType").forGetter(QuicksoilConfig::getGenString)
-    ).apply(instance, QuicksoilConfig::new));
-
-    public QuicksoilFeature() {
-        super(CODEC);
+    public QuicksoilFeature(Codec<QuicksoilConfig> codec) {
+        super(codec);
     }
 
     @Override

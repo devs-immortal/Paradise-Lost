@@ -62,8 +62,9 @@ public final class AetherDataFixers {
 
     /*
     TODO FEATURES OF A BLOCK SHOULD SHARE STRING ID
-        e.g PlacedFeature AETHER_GRASS_BUSH id: (aether_grass) -> GRASS_PLANT id: (grass_plant)
+        e.g PlacedFeature AETHER_GRASS_BUSH (id: paradise_lost:aether_grass) -> GRASS_PLANT (id: paradise_lost:grass_plant)
         And ConfiguredFeatures too.
+    And remove the aether_ prefix from stuff. paradise_lost:aether_delta_feature -> paradise_lost:delta_feature
      */
     
     @SafeVarargs

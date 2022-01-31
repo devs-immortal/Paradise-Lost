@@ -15,12 +15,12 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 
 public class AetherFeatures {
-    public static final AetherLakeFeature AETHER_LAKE = register("lake", new AetherLakeFeature());
-    public static final QuicksoilFeature QUICKSOIL = register("quicksoil", new QuicksoilFeature());
+    public static final AetherLakeFeature AETHER_LAKE = register("lake", new AetherLakeFeature(DynamicConfiguration.CODEC));
+    public static final QuicksoilFeature QUICKSOIL = register("quicksoil", new QuicksoilFeature(QuicksoilConfig.CODEC));
     public static final CrystalTreeIslandFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", new CrystalTreeIslandFeature(DefaultFeatureConfig.CODEC));
 
     public static final AetherDeltaFeature AETHER_DELTA_FEATURE = register("aether_delta_feature", new AetherDeltaFeature(DeltaFeatureConfig.CODEC));
-    public static final GroundcoverFeature GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeature.CODEC));
+    public static final GroundcoverFeature GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeatureConfig.CODEC));
     public static final AetherBoulderFeature BOULDER = register("boulder", new AetherBoulderFeature(BoulderFeatureConfig.CODEC));
     public static final IcestoneSpireFeature ICESTONE_SPIRE_FEATURE = register("icestone_spire_feature", new IcestoneSpireFeature(DefaultFeatureConfig.CODEC));
     public static final FreezeAetherTopLayerFeature FREEZE_AETHER_TOP_LAYER_FEATURE_FEATURE = register("freeze_aether_top_layer_feature", new FreezeAetherTopLayerFeature(DefaultFeatureConfig.CODEC));
