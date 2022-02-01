@@ -1,5 +1,6 @@
 package net.id.aether.blocks.natural;
 
+import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.util.SpreadableAetherBlock;
 import net.id.aether.world.feature.placed_features.AetherVegetationPlacedFeatures;
 import net.minecraft.block.BlockState;
@@ -33,7 +34,7 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockPos blockPos = pos.up();
-        BlockState blockState = getDefaultState();
+        BlockState blockState = AetherBlocks.AETHER_GRASS.getDefaultState();
         block0: for (int i = 0; i < 128; ++i) {
             PlacedFeature placedFeature;
             BlockPos blockPos2 = blockPos;

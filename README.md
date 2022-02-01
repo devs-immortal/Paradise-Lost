@@ -6,7 +6,7 @@
 **Is this official?**
 
 Paradise Lost is an unofficial reimagining of the original Aether mod, developed by Gilded Games (GG). 
-We are a team separate from GG looking to adapt the original concepts of The Aether to modern Minecraft's updated design concepts, and give the mod a fresh set of textures to match. As a Fabric mod we're looking to take advantage of Fabric's quick updates to the latest versions to keep The Aether usable with the newest Minecraft and stay up-to-date.
+We are a team separate from GG looking to adapt the original concepts of The Aether to modern Minecraft's updated design concepts, and give the mod a fresh set of textures to match. As a Fabric mod we're looking to take advantage of Fabric's quick updates to the latest versions to keep Paradise Lost usable with the newest Minecraft and stay up-to-date.
 
 **What is The Aether?**
 
@@ -14,7 +14,7 @@ The Aether is a dimension high in the sky composed of floating islands.
 Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, structures to explore, mythical creatures, and perilous dungeons. Build a Glowstone frame and add water to light the mystical portal, step in and be transported to the beautiful but hostile paradise known as the Aether.
 This tranquil oasis is the polar opposite of the Nether, filled with lush trees and foliage, and populated by unique and exotic mobs, both hostile and friendly. The Aether is deceptively charming, and the further you explore, the darker its secrets get. Mine new ores, craft new gear, explore hidden temples and dungeons, and battle to claim The Aether as your own.
 
-You can download the mod on [Modrinth](https://modrinth.com/mod/aether), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/aether), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
+You can download the mod on [Modrinth](https://modrinth.com/mod/aether), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
 
 **Original repo:** [GildedGames/The-Aether](https://gitea.gildedgames.com/GildedGames/The-Aether)
 
