@@ -3,6 +3,7 @@ package net.id.aether.mixin.client.render;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.id.aether.Aether;
 import net.id.aether.blocks.natural.aercloud.AercloudBlock;
 import net.id.aether.fluids.DenseAercloudFluid;
 import net.minecraft.block.BlockState;
@@ -12,7 +13,6 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.registry.Registry;
@@ -42,7 +42,7 @@ public abstract class InGameOverlayRendererMixin {
         if (overlayState != null && overlayState.getBlock() instanceof AercloudBlock) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableTexture();
-            RenderSystem.setShaderTexture(0, new Identifier("the_aether", "textures/block/" + Registry.BLOCK.getId(overlayState.getBlock()).getPath() + ".png"));
+            RenderSystem.setShaderTexture(0, Aether.locate("textures/block/" + Registry.BLOCK.getId(overlayState.getBlock()).getPath() + ".png"));
             BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
             float f = client.player.getBrightnessAtEyes();
             RenderSystem.enableBlend();
@@ -87,7 +87,7 @@ public abstract class InGameOverlayRendererMixin {
         if (world.getFluidState(pos).getFluid() instanceof DenseAercloudFluid) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableTexture();
-            RenderSystem.setShaderTexture(0, new Identifier("the_aether", "textures/block/dense_aercloud_still.png"));
+            RenderSystem.setShaderTexture(0, Aether.locate("textures/block/dense_aercloud_still.png"));
             BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
             float f = client.player.getBrightnessAtEyes();
             RenderSystem.enableBlend();

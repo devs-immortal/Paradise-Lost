@@ -4,6 +4,7 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.gamerule.v1.rule.DoubleRule;
+import net.id.aether.Aether;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
@@ -11,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.GameRules;
 
 public class AetherGameRules {
-    public static final Identifier MAX_QUICKSOIL_SPEED_ID = new Identifier("the_aether", "max_quicksoil_speed");
+    public static final Identifier MAX_QUICKSOIL_SPEED_ID = Aether.locate("max_quicksoil_speed");
 
     public static final GameRules.Key<DoubleRule> MAX_QUICKSOIL_SPEED = GameRuleRegistry.register("maxQuicksoilVelocity",
             GameRules.Category.MOBS,
