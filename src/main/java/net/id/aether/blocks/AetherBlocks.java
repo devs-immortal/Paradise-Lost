@@ -185,7 +185,7 @@ public class AetherBlocks {
     public static final WoodenButtonBlock SKYROOT_BUTTON = add("skyroot_button", new AetherWoodenButtonBlock(skyroot.button()));
     public static final AetherPressurePlateBlock SKYROOT_PRESSURE_PLATE = add("skyroot_pressure_plate", new AetherPressurePlateBlock(ActivationRule.EVERYTHING, skyroot.pressurePlate()));
     public static final SignBlock SKYROOT_SIGN = addImmediately("skyroot_sign", new SignBlock(skyroot.sign(), AetherSignType.SKYROOT), signBlockEntity);
-    public static final WallSignBlock SKYROOT_WALL_SIGN = addImmediately("skyroot_wall_sign", new WallSignBlock(skyroot.sign().dropsLike(SKYROOT_SIGN), AetherSignType.SKYROOT), signBlockEntity);
+    public static final WallSignBlock SKYROOT_WALL_SIGN = addImmediately("skyroot_wall_sign", new WallSignBlock(skyroot.wallSign().dropsLike(SKYROOT_SIGN), AetherSignType.SKYROOT), signBlockEntity);
     // Golden Oak Wood
     private static final WoodTypeFactory goldenOak = new WoodTypeFactory(MapColor.OAK_TAN, MapColor.TERRACOTTA_RED, MapColor.GOLD, MapColor.TERRACOTTA_RED);
     public static final SaplingBlock GOLDEN_OAK_SAPLING = add("golden_oak_sapling", new AetherSaplingBlock(new GoldenOakSaplingGenerator(), goldenOak.sapling().luminance(state -> 7)), cutoutRenderLayer);
@@ -205,7 +205,7 @@ public class AetherBlocks {
     public static final WoodenButtonBlock GOLDEN_OAK_BUTTON = add("golden_oak_button", new AetherWoodenButtonBlock(goldenOak.button()));
     public static final AetherPressurePlateBlock GOLDEN_OAK_PRESSURE_PLATE = add("golden_oak_pressure_plate", new AetherPressurePlateBlock(ActivationRule.EVERYTHING, goldenOak.pressurePlate()));
     public static final SignBlock GOLDEN_OAK_SIGN = addImmediately("golden_oak_sign", new SignBlock(goldenOak.sign(), AetherSignType.GOLDEN_OAK), signBlockEntity);
-    public static final WallSignBlock GOLDEN_OAK_WALL_SIGN = addImmediately("golden_oak_wall_sign", new WallSignBlock(goldenOak.sign().dropsLike(GOLDEN_OAK_SIGN), AetherSignType.GOLDEN_OAK), signBlockEntity);
+    public static final WallSignBlock GOLDEN_OAK_WALL_SIGN = addImmediately("golden_oak_wall_sign", new WallSignBlock(goldenOak.wallSign().dropsLike(GOLDEN_OAK_SIGN), AetherSignType.GOLDEN_OAK), signBlockEntity);
     // Orange Wood
     private static final WoodTypeFactory orange = new WoodTypeFactory(MapColor.RAW_IRON_PINK, MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.GREEN);
     public static final SaplingBlock ORANGE_SAPLING = add("orange_sapling", new AetherSaplingBlock(new OrangeSaplingGenerator(), orange.sapling()), cutoutRenderLayer);
@@ -225,7 +225,7 @@ public class AetherBlocks {
     public static final WoodenButtonBlock ORANGE_BUTTON = add("orange_button", new AetherWoodenButtonBlock(orange.button()));
     public static final AetherPressurePlateBlock ORANGE_PRESSURE_PLATE = add("orange_pressure_plate", new AetherPressurePlateBlock(ActivationRule.EVERYTHING, orange.pressurePlate()));
     public static final SignBlock ORANGE_SIGN = addImmediately("orange_sign", new SignBlock(orange.sign(), AetherSignType.ORANGE), signBlockEntity);
-    public static final WallSignBlock ORANGE_WALL_SIGN = addImmediately("orange_wall_sign", new WallSignBlock(orange.sign().dropsLike(ORANGE_SIGN), AetherSignType.ORANGE), signBlockEntity);
+    public static final WallSignBlock ORANGE_WALL_SIGN = addImmediately("orange_wall_sign", new WallSignBlock(orange.wallSign().dropsLike(ORANGE_SIGN), AetherSignType.ORANGE), signBlockEntity);
     // Crystal Wood
     private static final WoodTypeFactory crystal = new WoodTypeFactory(MapColor.IRON_GRAY, MapColor.LICHEN_GREEN, MapColor.LIGHT_BLUE);
     public static final SaplingBlock CRYSTAL_SAPLING = add("crystal_sapling", new AetherSaplingBlock(new CrystalSaplingGenerator(), crystal.sapling().sounds(BlockSoundGroup.LARGE_AMETHYST_BUD)), cutoutRenderLayer);
