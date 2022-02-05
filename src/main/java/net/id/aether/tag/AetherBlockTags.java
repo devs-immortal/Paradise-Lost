@@ -17,6 +17,7 @@ public class AetherBlockTags {
     public static final Tag<Block> FUNGI_CLINGABLES = TagFactory.BLOCK.create(locate("plants/fungi_clingable"));
     public static final Tag<Block> GENERIC_VALID_GROUND = TagFactory.BLOCK.create(locate("plants/generic_valid_ground"));
     public static final Tag<Block> FLUTEGRASS_VALID_GROUND = TagFactory.BLOCK.create(locate("plants/flutegrass_valid_ground"));
+    public static final Tag<Block> AECHOR_PLANT_VALID_GROUND = TagFactory.BLOCK.create(locate("plants/aechor_plant_valid_ground"));
 
     //Swets
     public static final Tag<Block> SWET_TRANSFORMERS_BLUE = TagFactory.BLOCK.create(locate("swet_transformers/blue"));

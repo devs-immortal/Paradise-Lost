@@ -1,9 +1,9 @@
 package net.id.aether.entities.hostile;
 
-import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.passive.AetherAnimalEntity;
 import net.id.aether.entities.projectile.PoisonNeedleEntity;
 import net.id.aether.items.AetherItems;
+import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
@@ -62,7 +62,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     public void tick() {
         super.tick();
 
-        if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK) {
+        if (!this.world.getBlockState(this.getBlockPos().down(1)).isIn(AetherBlockTags.AECHOR_PLANT_VALID_GROUND)) {
             this.kill();
         }
 
@@ -83,7 +83,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
 
     @Override
     public boolean canSpawn(WorldAccess worldIn, SpawnReason SpawnReason) {
-        return worldIn.getBlockState(this.getBlockPos().down(1)).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK
+        return worldIn.getBlockState(this.getBlockPos().down(1)).isIn(AetherBlockTags.AECHOR_PLANT_VALID_GROUND)
                 && worldIn.getBaseLightLevel(this.getBlockPos(), 0) > 8;
     }
 
