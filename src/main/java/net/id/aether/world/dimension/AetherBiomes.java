@@ -349,7 +349,7 @@ public final class AetherBiomes {
     private static Biome createHighlandsThicket(){
         /*
         TODO
-         {
+        {
           "starts": [
             "the_aether:well",
             "the_aether:skyroot_tower",
