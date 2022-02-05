@@ -58,7 +58,7 @@ New assets are unlicensed and all rights are reserved to them by Immortal Devs.
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
 You can find more about GNU GPLv3 on [this website](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
