@@ -62,17 +62,17 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     public void tick() {
         super.tick();
 
-        if (this.hurtTime > 0)
+        if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK) {
+            this.kill();
+        }
+
+        if (this.hurtTime > 0) {
             this.sinage += 0.9F;
-
-        this.sinage += (this.getAttacker() != null ? 0.3f : 0.1f);
-
+        } else {
+            this.sinage += (this.getAttacker() != null ? 0.3f : 0.1f);
+        }
         if (this.sinage > 3.141593F * 2F)
             this.sinage -= (3.141593F * 2F);
-
-        if (this.world.getBlockState(this.getBlockPos().down(1)).getBlock() != AetherBlocks.AETHER_GRASS_BLOCK) {
-            this.tickInVoid();
-        }
     }
 
     @Override
