@@ -2,14 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "planks",
   "ingredients": [
-    [
-      {
-        "item": "the_aether:golden_oak_log"
-      },
-      {
-        "item": "the_aether:stripped_golden_oak_log"
-      }
-    ]
+    {
+      "tag": "the_aether:golden_oak_logs"
+    }
   ],
   "result": {
     "item": "the_aether:golden_oak_planks",

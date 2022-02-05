@@ -2,14 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "planks",
   "ingredients": [
-    [
-      {
-        "item": "the_aether:wisteria_log"
-      },
-      {
-        "item": "the_aether:stripped_wisteria_log"
-      }
-    ]
+    {
+      "tag": "the_aether:wisteria_logs"
+    }
   ],
   "result": {
     "item": "the_aether:wisteria_planks",
