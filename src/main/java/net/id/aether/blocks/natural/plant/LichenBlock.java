@@ -82,7 +82,7 @@ public class LichenBlock extends FallingBlock {
     public void onSteppedOn(World world, BlockPos topPos, BlockState state, Entity entity) {
         BlockPos pos = topPos.down(venomous ? 2 : 4);
         while(pos.getY() != topPos.getY() + 1) {
-            tryFall(world, pos);
+            tryFall(world, pos, state);
             pos = pos.up();
         }
     }
@@ -90,18 +90,18 @@ public class LichenBlock extends FallingBlock {
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (state.get(ALLOW_FALL)) {
-            tryFall(world, pos);
+            tryFall(world, pos, state);
         }
     }
 
-    public void tryFall(World world, BlockPos pos) {
+    public void tryFall(World world, BlockPos pos, BlockState state) {
         if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY()) {
-            if (world.getBlockState(pos).getPistonBehavior().equals(PistonBehavior.BLOCK) || world.getBlockState(pos).getBlock().getHardness() == -1F){
+            if (state.getPistonBehavior().equals(PistonBehavior.BLOCK) || state.getBlock().getHardness() == -1F){
                 return;
             }
-            FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(world, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, world.getBlockState(pos));
-            this.configureFallingBlockEntity(fallingBlockEntity);
+            FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(world, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, state);
             world.spawnEntity(fallingBlockEntity);
+            this.configureFallingBlockEntity(fallingBlockEntity);
 
             BlockPos.iterateOutwards(pos, 1, 0, 1).forEach(checkPos -> {
                 var checkState = world.getBlockState(checkPos);
