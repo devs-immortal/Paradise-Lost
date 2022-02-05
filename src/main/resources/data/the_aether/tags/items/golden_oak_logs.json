@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:golden_oak_log",
+    "the_aether:golden_oak_wood",
+    "the_aether:stripped_golden_oak_log",
+    "the_aether:stripped_golden_oak_wood"
+  ]
+}

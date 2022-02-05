@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "the_aether:skyroot_log",
+    "the_aether:skyroot_wood",
+    "the_aether:stripped_skyroot_log",
+    "the_aether:stripped_skyroot_wood"
+  ]
+}
