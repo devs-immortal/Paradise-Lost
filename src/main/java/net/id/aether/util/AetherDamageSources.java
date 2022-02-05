@@ -1,6 +1,8 @@
 package net.id.aether.util;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.EntityDamageSource;
 
 public class AetherDamageSources extends DamageSource {
 
@@ -11,5 +13,9 @@ public class AetherDamageSources extends DamageSource {
 
     protected AetherDamageSources(String name) {
         super(name);
+    }
+
+    public static DamageSource swet(LivingEntity attacker) {
+        return new EntityDamageSource("swet", attacker);
     }
 }

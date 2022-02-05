@@ -495,7 +495,9 @@
   "death.attack.aerbunny_fall": "%1$s got dumped",
   "death.attack.aerbunny_fall.player": "%1$s got dumped whilst trying to escape %2$s",
   "death.attack.nightmare": "%1$s was consumed by shifting shadows",
-  "death.attack.nightmare.player": "%1$s was fed to them by %2$s",
+  "death.attack.nightmare.player": "%1$s was fed to the shadows by %2$s",
+  "death.attack.swet": "%1$s was absorbed by %2$s",
+  "death.attack.swet.player": "%1$s was absorbed by %2$s whilst trying to escape %3$s",
 
   "lore.the_aether.root.title" : "Root title",
   "lore.the_aether.root.description" : "Lorem ipsum dolor asmet or whatever",

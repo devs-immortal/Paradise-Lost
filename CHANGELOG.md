@@ -12,6 +12,7 @@
   - Aechor Plants will now instantly die if the block below them is not a valid surface
   - The 1/400 random check for spawning has been replaced by a base light level check for > 8
   - Several aspects of the attack vector have been modified to match Aether Is standards (In addition to a divergence factor that scales based on difficulty)
+- Swets now have custom death messages for its basic death and death whilst escaping player damage
 
 # Fixes
 
