@@ -84,19 +84,18 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
     @Override
     public boolean canSpawn(WorldAccess worldIn, SpawnReason SpawnReason) {
         return worldIn.getBlockState(this.getBlockPos().down(1)).getBlock() == AetherBlocks.AETHER_GRASS_BLOCK
-                && this.random.nextInt(400) == 0;
+                && worldIn.getBaseLightLevel(this.getBlockPos(), 0) > 8;
     }
 
     @Override
-    public void attack(LivingEntity targetIn, float arg1) {
-        double x = targetIn.getX() - this.getX();
-        double z = targetIn.getZ() - this.getZ();
-        final double sqrt = Math.sqrt((x * x) + (z * z) + 0.1D);
-        double y = 0.1D + (sqrt * 0.5D) + ((this.getY() - targetIn.getY()) * 0.25D);
-        double distance = 5.0D / sqrt;
-
+    public void attack(LivingEntity targetIn, float distFactor) {
         PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
-        needle.setVelocity(x * distance, y, z * distance, 0.285F + ((float) y * 0.05F), 1.0F);
+        double x = targetIn.getX() - this.getX();
+        double y = targetIn.getBoundingBox().minY + (double)(targetIn.getHeight() / 3.0F) - needle.getY();
+        double z = targetIn.getZ() - this.getZ();
+        double distance = Math.sqrt((float) (x * x + z * z));
+
+        needle.setVelocity(x, y + distance * 0.20000000298023224D, z, 1.0F, (float)(14 - this.world.getDifficulty().getId() * 4));
         this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
         this.world.spawnEntity(needle);
     }
