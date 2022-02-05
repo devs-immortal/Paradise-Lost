@@ -7,6 +7,11 @@
 - [1.18+] Some presets have been added for superflat worlds
 - All Swets now have their own custom colored particle effect
   - Blue Aerclouds also now have a custom colored effect
+- Aechor Plants have been revised to be more consistent and reliable
+  - Valid surfaces it can spawn on can now be controlled via the `plants/aechor_palnt_valid_ground` block tag
+  - Aechor Plants will now instantly die if the block below them is not a valid surface
+  - The 1/400 random check for spawning has been replaced by a base light level check for > 8
+  - Several aspects of the attack vector have been modified to match Aether Is standards (In addition to a divergence factor that scales based on difficulty)
 
 # Fixes
 
