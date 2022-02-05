@@ -27,18 +27,15 @@ public abstract class DartEntity extends PersistentProjectileEntity {
 
     @Override
     public void tick() {
-        if (!this.world.isClient) {
-            if (!this.onGround) {
-                this.ticksInAir++;
-            }
+        super.tick();
 
-            if (this.ticksInAir == 500) {
-                this.discard();
-                return;
-            }
+        if (!this.onGround) {
+            this.ticksInAir++;
         }
 
-        super.tick();
+        if (this.ticksInAir > 500) {
+            this.discard();
+        }
     }
 
     @Override
