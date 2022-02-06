@@ -36,6 +36,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 
 import java.util.List;
 import java.util.function.BiConsumer;
