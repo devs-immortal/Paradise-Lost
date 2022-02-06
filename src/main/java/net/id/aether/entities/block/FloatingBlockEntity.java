@@ -238,15 +238,13 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
         if (this.hurtEntities) {
             int i = MathHelper.ceil(distance - 1.0F);
             if (i > 0) {
-                List<Entity> list = Lists.newArrayList(this.world.getOtherEntities(this, this.getBoundingBox()));
                 boolean flag = this.floatTile.isIn(BlockTags.ANVIL);
-                DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
+                DamageSource damageSource2 = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
+                float f = Math.min(MathHelper.floor((float)i * this.floatHurtAmount), this.floatHurtMax);
 
-                for (Entity entity : list) {
-                    entity.damage(damagesource, Math.min(MathHelper.floor(i * this.floatHurtAmount), this.floatHurtMax));
-                }
+                this.world.getOtherEntities(this, this.getBoundingBox()).forEach(entity -> entity.damage(damageSource2, f));
 
-                if (flag && this.random.nextFloat() < 0.05F + i * 0.05F) {
+                if (flag && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
                     BlockState blockstate = AnvilBlock.getLandingState(this.floatTile);
                     if (blockstate == null) {
                         this.dontSetBlock = true;
@@ -337,7 +335,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
     }
 
     public boolean isFastFloater() {
-        return AetherBlockTags.FAST_FLOATERS.contains(this.floatTile.getBlock()) && !this.partOfStructure;
+        return this.floatTile.isIn(AetherBlockTags.FAST_FLOATERS) && !this.partOfStructure;
     }
 
     @Override
@@ -424,7 +422,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
             Block.dropStacks(this.floatTile, this.world, this.getBlockPos());
         }
         // spawn break particles
-        world.syncWorldEvent(null, 2001, getBlockPos(), Block.getRawIdFromState(floatTile));
+        world.syncWorldEvent(null, WorldEvents.BLOCK_BROKEN, getBlockPos(), Block.getRawIdFromState(floatTile));
 
         this.getOnEndFloating().accept(impact, false);
     }
