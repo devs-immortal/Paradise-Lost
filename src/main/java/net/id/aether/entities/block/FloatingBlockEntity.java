@@ -1,6 +1,5 @@
 package net.id.aether.entities.block;
 
-import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.api.FloatingBlockHelper;
@@ -25,7 +24,6 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
-import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
@@ -150,8 +148,8 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
                 verticalVel = Math.abs(verticalVel);
             }
             this.hurtEntities = true;
-            this.floatHurtAmount = (float) (this.floatTile.getBlock().getHardness() * verticalVel);
-            this.floatHurtMax = (int) floatHurtAmount;
+            this.floatHurtAmount = this.floatTile.getBlock().getHardness() * (float)verticalVel;
+            this.floatHurtMax = Math.max(Math.round(this.floatHurtAmount), this.floatHurtMax);
         }
     }
 
