@@ -1,7 +1,6 @@
 package net.id.aether.entities.hostile.swet;
 
 import net.id.aether.client.rendering.particle.AetherParticles;
-import net.id.aether.client.rendering.particle.ColoredSplashParticleEffect;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.particle.ParticleEffect;

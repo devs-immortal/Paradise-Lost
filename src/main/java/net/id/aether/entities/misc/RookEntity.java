@@ -1,7 +1,6 @@
 package net.id.aether.entities.misc;
 
 import net.id.aether.component.LUV;
-import net.id.aether.util.AetherDamageSources;
 import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;

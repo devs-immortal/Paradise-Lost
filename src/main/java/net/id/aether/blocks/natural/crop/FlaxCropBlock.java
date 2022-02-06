@@ -3,7 +3,6 @@ package net.id.aether.blocks.natural.crop;
 import net.id.aether.blocks.natural.TallCropBlock;
 import net.id.aether.items.AetherItems;
 import net.id.aether.tag.AetherBlockTags;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;

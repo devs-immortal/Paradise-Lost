@@ -4,7 +4,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.FabricSpriteProvider;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.particle.RainSplashParticle;
 import net.minecraft.client.world.ClientWorld;
 
 /**

@@ -1,7 +1,6 @@
 package net.id.aether.entities.passive.moa;
 
 import net.id.aether.component.MoaGenes;
-import net.minecraft.util.math.MathHelper;
 
 public enum MoaAttributes {
     GROUND_SPEED(0.24F, 1F, 0.152F),

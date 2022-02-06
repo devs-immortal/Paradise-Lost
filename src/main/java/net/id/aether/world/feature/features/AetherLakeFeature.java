@@ -1,7 +1,6 @@
 package net.id.aether.world.feature.features;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.world.feature.configs.DynamicConfiguration;
 import net.minecraft.block.Block;
