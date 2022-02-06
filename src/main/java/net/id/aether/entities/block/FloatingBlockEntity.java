@@ -253,7 +253,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
                 DamageSource damageSource2 = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
                 float f = Math.min(MathHelper.floor((float)i * this.floatHurtAmount), this.floatHurtMax);
 
-                this.world.getOtherEntities(this, this.getBoundingBox()).forEach(entity -> entity.damage(damageSource2, f));
+                this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0))).forEach(entity -> entity.damage(damageSource2, f));
 
                 if (flag && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
                     BlockState blockstate = AnvilBlock.getLandingState(this.floatTile);
