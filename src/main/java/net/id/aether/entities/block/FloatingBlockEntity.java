@@ -25,6 +25,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
@@ -36,6 +37,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -142,6 +144,15 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
 
     @Override
     public void tick() {
+        if (this.floatTile.isIn(AetherBlockTags.HURTABLE_FLOATERS)) {
+            double verticalVel = this.getVelocity().getY();
+            if (verticalVel < 0.0D) {
+                verticalVel = Math.abs(verticalVel);
+            }
+            this.hurtEntities = true;
+            this.floatHurtAmount = (float) (this.floatTile.getBlock().getHardness() * verticalVel);
+            this.floatHurtMax = (int) floatHurtAmount;
+        }
     }
 
     @SuppressWarnings("deprecation")
