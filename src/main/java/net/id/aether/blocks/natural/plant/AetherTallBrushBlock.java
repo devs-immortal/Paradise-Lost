@@ -27,7 +27,7 @@ public class AetherTallBrushBlock extends TallPlantBlock {
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         if (override)
-            return validFloors.contains(floor.getBlock());
-        return (super.canPlantOnTop(floor, world, pos) || validFloors.contains(floor.getBlock())) && floor.isSideSolidFullSquare(world, pos, Direction.UP);
+            return floor.isIn(validFloors);
+        return (super.canPlantOnTop(floor, world, pos) || floor.isIn(validFloors)) && floor.isSideSolidFullSquare(world, pos, Direction.UP);
     }
 }

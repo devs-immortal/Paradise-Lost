@@ -45,7 +45,7 @@ public class WallClingingPlantBlock extends PlantBlock {
     }
 
     public boolean canClingTo(BlockState state) {
-        return clingableBlocks == null || clingableBlocks.contains(state.getBlock());
+        return clingableBlocks == null || state.isIn(clingableBlocks);
     }
 
     @Override

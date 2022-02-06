@@ -107,7 +107,7 @@ public interface FloatingBlockHelper {
         Item heldItem = context.getStack().getItem();
         return world.getBlockEntity(pos) == null && state.getHardness(world, pos) != -1.0F
                 && (!state.isToolRequired() || heldItem.isSuitableFor(state))
-                && !AetherBlockTags.NON_FLOATERS.contains(state.getBlock());
+                && !state.isIn(AetherBlockTags.NON_FLOATERS);
     }
 
     /**
@@ -257,7 +257,7 @@ public interface FloatingBlockHelper {
 
         @Override
         public boolean isSuitableFor(BlockState state) {
-            return state.getProperties().contains(Properties.DOUBLE_BLOCK_HALF);
+            return state.contains(Properties.DOUBLE_BLOCK_HALF);
         }
     };
 
@@ -339,7 +339,7 @@ public interface FloatingBlockHelper {
                 return false;
             }
             // sides and bottom (sticky blocks)
-            if (MoreTags.STICKY_BLOCKS.contains(state.getBlock())) {
+            if (state.isIn(MoreTags.STICKY_BLOCKS)) {
                 // checks each of the sides
                 for (var newPos : new BlockPos[]{
                         pos.north(),
@@ -362,12 +362,12 @@ public interface FloatingBlockHelper {
         }
 
         private static boolean isAdjacentBlockStuck(BlockState state, BlockState adjacentState) {
-            if (MoreTags.HONEY_BLOCKS.contains(state.getBlock()) && MoreTags.SLIME_BLOCKS.contains(adjacentState.getBlock())) {
+            if (state.isIn(MoreTags.HONEY_BLOCKS) && adjacentState.isIn(MoreTags.SLIME_BLOCKS)) {
                 return false;
-            } else if (MoreTags.SLIME_BLOCKS.contains(state.getBlock()) && MoreTags.HONEY_BLOCKS.contains(adjacentState.getBlock())) {
+            } else if (state.isIn(MoreTags.SLIME_BLOCKS) && adjacentState.isIn(MoreTags.HONEY_BLOCKS)) {
                 return false;
             } else {
-                return MoreTags.STICKY_BLOCKS.contains(state.getBlock()) || MoreTags.STICKY_BLOCKS.contains(adjacentState.getBlock());
+                return state.isIn(MoreTags.STICKY_BLOCKS) || adjacentState.isIn(MoreTags.STICKY_BLOCKS);
             }
         }
     };

@@ -69,7 +69,7 @@ public class AetherDeltaFeature extends DeltaFeature{
     private static boolean canPlace(WorldAccess world, BlockPos pos, BlockState contents, Set<BlockPos> filledPositions){
         BlockState blockState = world.getBlockState(pos);
     
-        if(!AetherBlockTags.FLUID_REPLACEABLES.contains(blockState.getBlock())){
+        if(!blockState.isIn(AetherBlockTags.FLUID_REPLACEABLES)) {
             return false;
         }
         

@@ -57,7 +57,7 @@ public class LichenBlock extends FallingBlock {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         for(int i = random.nextInt(2); i < 3; i++) {
             BlockPos.streamOutwards(pos, 3, 2, 3)
-                    .filter(temp -> AetherBlockTags.LICHEN_SPREADABLES.contains(world.getBlockState(temp).getBlock()))
+                    .filter(temp -> world.getBlockState(temp).isIn(AetherBlockTags.LICHEN_SPREADABLES))
                     .filter(temp -> world.isAir(temp.up()) && world.getLightLevel(temp.up()) <= 9)
                     .filter(temp -> random.nextBoolean())
                     .findFirst()

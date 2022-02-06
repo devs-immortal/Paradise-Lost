@@ -28,7 +28,7 @@ public class AetherBoulderFeature extends Feature<BoulderFeatureConfig> {
         for (; blockPos.getY() > structureWorldAccess.getBottomY() + 3; blockPos = blockPos.down()) {
             if (!structureWorldAccess.isAir(blockPos.down())) {
                 BlockState blockState = structureWorldAccess.getBlockState(blockPos.down());
-                if ((isSoil(blockState) || AetherBlockTags.BASE_AETHER_STONE.contains(blockState.getBlock())) && random.nextBoolean()) {
+                if ((isSoil(blockState) || blockState.isIn(AetherBlockTags.BASE_AETHER_STONE)) && random.nextBoolean()) {
                     break;
                 }
             }

@@ -118,7 +118,7 @@ public class CinnabarRoseBlock extends AetherMushroomBlock {
 
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return (BlockTags.LOGS.contains(floor.getBlock()) && ((WorldView) world).getBaseLightLevel(pos, 0) < 13) || floor.isOf(Blocks.REDSTONE_ORE);
+        return (floor.isIn(BlockTags.LOGS) && ((WorldView) world).getBaseLightLevel(pos, 0) < 13) || floor.isOf(Blocks.REDSTONE_ORE);
     }
 
     @Override

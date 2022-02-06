@@ -18,8 +18,9 @@
 
 # Fixes
 
-- Resolved potential issues with Darts failing to be discarded after 500 ticks
+- Resolved potential issues with darts failing to be discarded after 500 ticks
 - Resolved potential mod incompatibilities due to Issues within Log Type tags
+- Fixed issues pertaining to Flax Growth being incorrectly calculated
 - Quicksoil and Grass Blocks now have proper bonemeal events (IE using bonemeal on them will place proper blocks)
 - Fixed a translation issue causing biome names to show up incorrectly (An example being the single biome interface)
 - Code optimizations and minor bug fixes

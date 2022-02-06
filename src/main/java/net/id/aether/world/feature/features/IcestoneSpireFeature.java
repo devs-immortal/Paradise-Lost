@@ -33,7 +33,7 @@ public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
             origin = origin.down();
         }
 
-        if(AetherBlockTags.BASE_REPLACEABLES.contains(world.getBlockState(origin.down()).getBlock())) {
+        if(world.getBlockState(origin.down()).isIn(AetherBlockTags.BASE_REPLACEABLES)) {
             var height = random.nextInt(3) + 1;
 
             for (int i = 0; i <= height; i++) {

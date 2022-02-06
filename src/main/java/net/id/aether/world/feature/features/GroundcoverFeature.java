@@ -86,7 +86,7 @@ public class GroundcoverFeature extends Feature<GroundcoverFeatureConfig> {
 
             BlockPos placement = new BlockPos(pos.getX(), context.getGenerator().getHeight(pos.getX(), pos.getZ(), Heightmap.Type.WORLD_SURFACE_WG, world) - 1, pos.getZ());
 
-            if(world.testBlockState(placement, state -> AetherBlockTags.BASE_REPLACEABLES.contains(state.getBlock()))) {
+            if(world.testBlockState(placement, state -> state.isIn(AetherBlockTags.BASE_REPLACEABLES))) {
                 if(add)
                     centers.add(placement);
 

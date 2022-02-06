@@ -34,7 +34,7 @@ public class AetherWallMushroomBlock extends AetherMushroomBlock {
 
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return BlockTags.LOGS.contains(floor.getBlock());
+        return floor.isIn(BlockTags.LOGS);
     }
 
     @Override
