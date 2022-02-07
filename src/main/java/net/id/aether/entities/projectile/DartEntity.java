@@ -37,9 +37,4 @@ public abstract class DartEntity extends PersistentProjectileEntity {
             this.discard();
         }
     }
-
-    @Override
-    public Packet<?> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this, 1 + (this.getOwner() == null ? this.getId() : this.getOwner().getId()));
-    }
 }
