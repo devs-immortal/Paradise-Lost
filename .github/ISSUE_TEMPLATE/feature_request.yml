@@ -1,15 +1,17 @@
 name: Feature request
 description: Suggest an idea for this project
-labels: [Feature, triage]
+title: "Feature: "
+labels: [Feature]
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for helping us improve our mod!
+        Make sure to leave a helpful title.
   - type: textarea
     id: problem
     attributes:
-      label: Problem
+      label: Problem (Optional)
       description: "If your feature is related to a problem, let us know:"
       placeholder: ex. I'm always frustrated when...
     validations:
@@ -17,12 +19,12 @@ body:
   - type: markdown
     attributes:
       value: |
-        If your feature is not related to a problem, it might be better suited for our [discord server](https://discord.com/invite/wmMa47n).
+        If your feature is not related to a problem, it might be better suited for our [discord server](https://discord.com/invite/wmMa47n), though we won't stop you from asking it here.
   - type: textarea
     id: feature
     attributes:
       label: Feature
-      description: What solution did you come up with?
+      description: What solution/feature did you come up with?
       placeholder: ex. There should be a...
     validations:
       required: true
@@ -40,13 +42,14 @@ body:
       label: Version
       description: What version of our mod are you running?
       options:
-        - Dev
-        - 1.6.3.1 (Latest)
-        - 1.6.3
-        - 1.6.2
-        - 1.6.x
-        - Older
-        - Unsure
+        # Figure out how to make this automatic.
+        - "1.6.5 - 1.18"
+        - "1.6.5 - 1.17"
+        - "1.6.3"
+        - "1.6.x"
+        - "Older"
+        - "Unsure"
+        - "Dev"
     validations:
       required: true
   - type: textarea

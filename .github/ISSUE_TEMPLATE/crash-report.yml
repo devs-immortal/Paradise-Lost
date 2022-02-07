@@ -1,28 +1,33 @@
 name: Crash Report
 description: Report a crash
 title: "Crash: "
-labels: [Bug, triage]
+labels: [Bug]
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for helping us improve our mod!
+        Make sure to leave a helpful title.
   - type: textarea
     id: what-happened
     attributes:
       label: What were you doing when the crash occured?
+      value: |
+        1. First, ...
+        1. Next, ...
+        1. Finally, ...
     validations:
       required: true
   - type: dropdown
     id: client-server
     attributes:
       label: Did it crash the client or server?
-      description: If you don't know what this means, pick "Not sure".
+      description: If you don't know what this means, pick "Unsure".
       options:
         - Client
         - Server
         - Both
-        - Not sure
+        - Unsure
     validations:
       required: true
   - type: dropdown
@@ -31,13 +36,14 @@ body:
       label: Mod Version
       description: What version of our mod were you running?
       options:
-        - Dev
-        - 1.6.3.1 (Latest)
-        - 1.6.3
-        - 1.6.2
-        - 1.6.x
-        - Older
-        - Unsure
+        # Figure out how to make this automatic.
+        - "1.6.5 - 1.18"
+        - "1.6.5 - 1.17"
+        - "1.6.3"
+        - "1.6.x"
+        - "Other"
+        - "Unsure"
+        - "Dev"
     validations:
       required: true
   - type: input
@@ -48,19 +54,12 @@ body:
       placeholder: ex. 0.xx.x
     validations:
       required: false
-  - type: input
-    id: trinkets-version
-    attributes:
-      label: Trinkets Version
-      description: What version of Trinkets were you using?
-      placeholder: ex. 3.x.x
-    validations:
-      required: false
   - type: textarea
     id: crash-report
     attributes:
       label: Crash Report
-      description: Please copy and paste the crash report here. If there was none provided, the latest log can be found in .minecraft/logs/latest.log.
+      description: |
+        Please copy and paste the crash report here. If there was none provided, the latest log can be found in `.minecraft/logs/latest.log.`
       render: shell
     validations:
       required: true
@@ -68,8 +67,7 @@ body:
     id: mods
     attributes:
       label: Other mods
-      description: If you're using other mods, please share them here. If you're not, you can leave this blank.
-      render: shell
+      description: If you're using other mods, please share a zip of your mods folder here. If you're not, you can leave this blank.
     validations:
       required: false
   - type: textarea

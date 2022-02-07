@@ -1,33 +1,42 @@
 name: Bug Report
 description: Create a report to help us improve
 title: "Bug: "
-labels: [Bug, triage]
+labels: [Bug]
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for helping us improve our mod!
+        Make sure to leave a helpful title.
+        If your issue crashed your game, instead issue a [crash report](https://github.com/devs-immortal/Paradise-Lost/issues/new?assignees=&labels=Bug&template=crash-report.yml&title=Crash%3A+).
   - type: textarea
     id: what-happened
     attributes:
       label: What happened?
-      description: Also tell us what you expected to happen
-      placeholder: A bug!
+      description: Also tell us what you expected to happen and how to replicate it
+      value: |
+        A bug!
+
+        To replicate:
+        1. First, I ...
+        1. Next, ...
+        1. Finally, ...
     validations:
       required: true
   - type: dropdown
     id: version
     attributes:
-      label: Version
+      label: Mod Version
       description: What version of our mod are you running?
       options:
-        - Dev
-        - 1.6.3.1 (Latest)
-        - 1.6.3
-        - 1.6.2
-        - 1.6.x
-        - Older
-        - Unsure
+        # Figure out how to make this automatic.
+        - "1.6.5 - 1.18"
+        - "1.6.5 - 1.17"
+        - "1.6.3"
+        - "1.6.x"
+        - "Older"
+        - "Unsure"
+        - "Dev"
     validations:
       required: true
   - type: input
@@ -38,19 +47,12 @@ body:
       placeholder: ex. 0.xx.x
     validations:
       required: false
-  - type: input
-    id: trinkets-version
-    attributes:
-      label: Trinkets Version
-      description: What version of Trinkets are you using?
-      placeholder: ex. 3.x.x
-    validations:
-      required: false
   - type: textarea
     id: logs
     attributes:
       label: Relevant log output
-      description: Please copy and paste the logs from the event of the bug. The latest log can be found in .minecraft/logs/latest.log.
+      description: |
+        Please copy and paste the logs from the event of the bug. The latest log can be found in `.minecraft/logs/latest.log.`
       render: shell
     validations:
       required: false
@@ -58,8 +60,7 @@ body:
     id: mods
     attributes:
       label: Other mods
-      description: If you're using other mods, please share them here. If you're not, you can leave this blank.
-      render: shell
+      description: If you're using other mods, please share a zip of your mods folder here. If you're not, you can leave this blank.
     validations:
       required: false
   - type: textarea
