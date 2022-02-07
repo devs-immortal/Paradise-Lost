@@ -40,3 +40,11 @@ as even if this component is stabilized, **there is no chunk blending in place f
 
 Efforts are currently ongoing to determine the feasibility of getting this component working, to ensure a smoother migration to 1.18.x.
 Further news regarding this effort can be found on our [discord server](https://discord.com/invite/wmMa47n).
+
+# Advisory: Snapshot Support
+
+For this release, we are allowing support for the 22w05a Build of Minecraft, which is classed as a snapshot for 1.18.2
+
+Understandably, snapshot builds may provide more instability, and in the case here, support for them may be limited/non-existent.
+
+Any issues reported under these snapshot builds may not receive fixes, until the related versions release, so please be mindful of this while experimenting.

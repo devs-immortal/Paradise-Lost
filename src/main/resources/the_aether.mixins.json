@@ -63,7 +63,8 @@
     "devel.client.TranslationStorageMixin"
   ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 1,
+    "maxShiftBy": 5
   },
   "plugin": "net.id.aether.mixin.Plugin"
 }
