@@ -2,17 +2,21 @@ package net.id.aether.client.rendering.util;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.id.aether.util.MapColorCreator;
 import net.minecraft.block.MapColor;
 
 @Environment(EnvType.CLIENT)
 public class AetherMapColorUtil {
+    public static final MapColor AETHER_BACKGROUND = MapColorCreator.createMapColor(62, 0xe3fffd);
+
     public static int getColor(MapColor material, int shade) {
         int newColor = recolor(material.id) == -1 ? material.color : recolor(material.id);
 
         int value = 220;
 
         // From here on out, standard brightness and color calculations.
-        if      (shade == 3) value = 135;
+        if (material == AETHER_BACKGROUND) value = 220;
+        else if (shade == 3) value = 135;
         else if (shade == 2) value = 255;
         else if (shade == 1) value = 220;
         else if (shade == 0) value = 180;
