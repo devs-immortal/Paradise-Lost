@@ -22,28 +22,36 @@ public class MapRendererMixin {
     @Final
     private NativeImageBackedTexture texture;
 
-    @Inject(method = "updateTexture()V", at = @At(value = "RETURN", target = "net/minecraft/client/render/MapRenderer$MapTexture.updateTexture()V"))
+    /**
+     * Recolors map colors in the aether dimension to look nicer.
+     * Could be a redirect, but that would actually probably be less compatible with other mods.
+     * However, if the game updates this won't break, which is a bad thing
+     */
+    @Inject(
+            method = "updateTexture()V",
+            at = @At(
+                    value = "HEAD",
+                    target = "net/minecraft/client/render/MapRenderer$MapTexture.updateTexture()V"
+            ),
+            cancellable = true)
     private void updateAetherTexture(CallbackInfo ci) {
-        boolean isAether = this.state.dimension == AetherDimension.AETHER_WORLD_KEY;
-        for (int int_1 = 0; int_1 < 128; ++int_1) {
-            for (int int_2 = 0; int_2 < 128; ++int_2) {
-                int int_3 = int_2 + int_1 * 128;
-                int int_4 = this.state.colors[int_3] & 255;
+        if (this.state.dimension == AetherDimension.AETHER_WORLD_KEY){
+            for (int i = 0; i < 128; ++i) {
+                for (int j = 0; j < 128; ++j) {
+                    int k = j + i * 128;
+                    int l = this.state.colors[k] & 255;
 
-                if (int_4 / 4 == 0) {
-                    this.texture.getImage().setColor(int_2, int_1, (int_3 + int_3 / 128 & 1) * 8 + 16 << 24);
-                } else {
-                    int color;
-                    if (isAether) {
-                        color = AetherMapColorUtil.getColor(MapColor.COLORS[int_4 / 4], int_4 & 3);
+                    if (l >> 2 == 0) { // MapColor.CLEAR
+                        // Who knows what this does? Nothing, it seems. But just in case I'll let it stick around.
+                        // Comment your code please!
+                        this.texture.getImage().setColor(j, i, (k + k / 128 & 1) * 8 + 16 << 24);
                     } else {
-                        color = MapColor.COLORS[int_4 / 4].getRenderColor(int_4 & 3);
+                        this.texture.getImage().setColor(j, i, AetherMapColorUtil.getColor(MapColor.COLORS[l >> 2], l & 3));
                     }
-
-                    this.texture.getImage().setColor(int_2, int_1, color);
                 }
             }
+            this.texture.upload();
+            ci.cancel();
         }
-        this.texture.upload();
     }
 }
