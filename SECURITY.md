@@ -4,8 +4,8 @@
 
 Found a very dangerous bug that could cause serious harm to users? Use this little checklist to see if its lethal!
 
-- It allows access to the user's PC by joining a minecraft server or network.
-- It can cause BSOD or serious corruption to the user's PC.
+- It allows access to the user's PC when joining a minecraft server or network.
+- It can cause a blue screen of death or serious corruption to the user's PC.
 - It can cause a lawsuit or other legal issue.
 
 If one or more of these items fit your match. Please see our supported versions.
@@ -14,9 +14,9 @@ If one or more of these items fit your match. Please see our supported versions.
 
 | Version 	| Supported? 	| End of Support Date 	|
 |---------	|------------	|---------------------	|
-| DEV\*     |  ✅       	| Never               	|
+| DEV\*         |  ✅       	| Never               	|
 | BETA   	|  ✅        	| Not Decided Yet     	|
-| ALPHA   	|  ✅        	| Not Decided Yet     	|
+| ALPHA   	|  ✅        	| 2/5/2022            	|
 
 
 ## Reporting a Vulnerability
