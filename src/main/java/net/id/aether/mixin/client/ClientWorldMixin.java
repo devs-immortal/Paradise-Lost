@@ -1,6 +1,6 @@
 package net.id.aether.mixin.client;
 
-import net.id.aether.entities.util.FloatingBlockStructure;
+import net.id.aether.entities.util.FloatingBlockSet;
 import net.id.aether.entities.util.PostTickEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.world.EntityList;
@@ -25,9 +25,6 @@ public class ClientWorldMixin {
                 postTickEntity.postTick();
             }
         });
-        FloatingBlockStructure[] structures = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
-        for (FloatingBlockStructure structure : structures) {
-            structure.postTick();
-        }
+        FloatingBlockSet.getActiveSets().forEachRemaining(FloatingBlockSet::postTick);
     }
 }

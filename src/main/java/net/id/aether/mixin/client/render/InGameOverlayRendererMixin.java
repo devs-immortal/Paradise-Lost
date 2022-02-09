@@ -35,6 +35,7 @@ public abstract class InGameOverlayRendererMixin {
         return null;
     }
 
+    // This code is mostly copy-pasted from renderUnderWaterOverlay
     @Inject(method = "renderInWallOverlay", at = @At("HEAD"), cancellable = true)
     private static void renderAercloudOverlay(Sprite sprite, MatrixStack matrices, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();

@@ -2,7 +2,7 @@ package net.id.aether.mixin.server;
 
 import net.id.aether.Aether;
 import net.id.aether.entities.block.FloatingBlockEntity;
-import net.id.aether.entities.util.FloatingBlockStructure;
+import net.id.aether.entities.util.FloatingBlockSet;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.EntityList;
 import org.spongepowered.asm.mixin.Final;
@@ -33,10 +33,7 @@ public class ServerWorldMixin {
                     Aether.LOG.error("Started checking null entities in ServerWorldMixin::postEntityTick");
                 }
             });
-            FloatingBlockStructure[] structures = FloatingBlockStructure.getAllStructures().toArray(new FloatingBlockStructure[0]);
-            for (FloatingBlockStructure structure : structures) {
-                structure.postTick();
-            }
+            FloatingBlockSet.getActiveSets().forEachRemaining(FloatingBlockSet::postTick);
         }
     }
 }

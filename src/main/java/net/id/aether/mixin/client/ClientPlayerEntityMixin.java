@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin  implements PostTickEntity {
+public abstract class ClientPlayerEntityMixin implements PostTickEntity {
     @Unique
     boolean sendMovement = false;
 
@@ -20,7 +20,6 @@ public abstract class ClientPlayerEntityMixin  implements PostTickEntity {
      * Since the player can be moved by FloatingBlockEntity after ClientPlayerEntity.tick()
      * the call to sendMovementPackets() needs to be delayed till after all FloatingBlockEntities have ticked
      */
-
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;sendMovementPackets()V"))
     void redirectSendMovementPackets(ClientPlayerEntity clientPlayerEntity) {
         sendMovement = true;

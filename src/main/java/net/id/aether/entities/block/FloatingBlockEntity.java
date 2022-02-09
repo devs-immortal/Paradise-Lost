@@ -54,7 +54,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
     private Supplier<Boolean> dropState = () -> false;
     private boolean dropping = false;
     private boolean collides;
-    private boolean partOfStructure = false;
+    private boolean partOfSet = false;
     private BiConsumer<Double, Boolean> onEndFloating;
 
     public FloatingBlockEntity(EntityType<? extends FloatingBlockEntity> entityType, World world) {
@@ -76,9 +76,9 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
         this.setOrigin(new BlockPos(this.getPos()));
     }
 
-    public FloatingBlockEntity(World world, BlockPos pos, BlockState floatingBlockState, boolean partOfStructure) {
+    public FloatingBlockEntity(World world, BlockPos pos, BlockState floatingBlockState, boolean partOfSet) {
         this(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, floatingBlockState);
-        this.partOfStructure = partOfStructure;
+        this.partOfSet = partOfSet;
     }
 
     @Override
@@ -116,8 +116,8 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
         this.setPosition(getX(), getY(), getZ());
     }
 
-    public void markPartOfStructure() {
-        partOfStructure = true;
+    public void markPartOfSet() {
+        partOfSet = true;
     }
 
     @Override
@@ -167,7 +167,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
                 Block block = this.floatTile.getBlock();
                 if (this.world.getBlockState(blockPos).isOf(block)) {
                     this.world.removeBlock(blockPos, false);
-                } else if (!this.world.isClient && !this.partOfStructure) {
+                } else if (!this.world.isClient && !this.partOfSet) {
                     this.discard();
                     return;
                 }
@@ -197,7 +197,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
                         entity.setPosition(entity.getPos().x, getBoundingBox().maxY, entity.getPos().z);
                         entity.setOnGround(true);
                     }
-                    if (!(entity instanceof FloatingBlockEntity fbe && fbe.partOfStructure)) {
+                    if (!(entity instanceof FloatingBlockEntity fbe && fbe.partOfSet)) {
                         this.floatTile.getBlock().onEntityCollision(floatTile, world, this.getBlockPos(), entity);
                     }
                 }
@@ -344,7 +344,7 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
     }
 
     public boolean isFastFloater() {
-        return this.floatTile.isIn(AetherBlockTags.FAST_FLOATERS) && !this.partOfStructure;
+        return this.floatTile.isIn(AetherBlockTags.FAST_FLOATERS) && !this.partOfSet;
     }
 
     @Override
@@ -354,15 +354,15 @@ public class FloatingBlockEntity extends Entity implements PostTickEntity {
 
     @Override
     public Packet<?> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this, Block.getRawIdFromState(this.getBlockState()) * (this.partOfStructure ? -1 : 1));
+        return new EntitySpawnS2CPacket(this, Block.getRawIdFromState(this.getBlockState()) * (this.partOfSet ? -1 : 1));
     }
 
     @Override
     public void onSpawnPacket(EntitySpawnS2CPacket packet) {
         super.onSpawnPacket(packet);
         int data = packet.getEntityData();
-        this.partOfStructure = data < 0;
-        this.floatTile = Block.getStateFromRawId(packet.getEntityData() * (this.partOfStructure ? -1 : 1));
+        this.partOfSet = data < 0;
+        this.floatTile = Block.getStateFromRawId(packet.getEntityData() * (this.partOfSet ? -1 : 1));
         this.intersectionChecked = true;
         double d = packet.getX();
         double e = packet.getY();
