@@ -15,9 +15,9 @@ public class AetherBlockEntityRenderers {
 //        BlockEntityRendererRegistry.register(AetherBlockEntityTypes.DUNGEON_SWITCH, DungeonSwitchBlockEntityRenderer::new);
 
         BlockEntityRendererRegistry.register(AetherBlockEntityTypes.SKYROOT_CHEST, ctx -> new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.SKYROOT));
-//        BlockEntityRendererRegistry.register(AetherBlockEntityTypes.GOLDEN_OAK_CHEST, ctx -> new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.GOLDEN_OAK));
-//        BlockEntityRendererRegistry.register(AetherBlockEntityTypes.ORANGE_CHEST, ctx -> new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.ORANGE));
-//        BlockEntityRendererRegistry.register(AetherBlockEntityTypes.CRYSTAL_CHEST, ctx -> new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.CRYSTAL));
-//        BlockEntityRendererRegistry.register(AetherBlockEntityTypes.WISTERIA_CHEST, ctx -> new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.WISTERIA));
+        BlockEntityRendererRegistry.register(AetherBlockEntityTypes.GOLDEN_OAK_CHEST, ctx -> new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.GOLDEN_OAK));
+        BlockEntityRendererRegistry.register(AetherBlockEntityTypes.ORANGE_CHEST, ctx -> new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.ORANGE));
+        BlockEntityRendererRegistry.register(AetherBlockEntityTypes.CRYSTAL_CHEST, ctx -> new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.CRYSTAL));
+        BlockEntityRendererRegistry.register(AetherBlockEntityTypes.WISTERIA_CHEST, ctx -> new AetherChestBlockEntityRenderer(ctx, AetherChestTexture.WISTERIA));
     }
 }

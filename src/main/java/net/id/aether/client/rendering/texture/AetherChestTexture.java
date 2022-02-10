@@ -15,10 +15,10 @@ import static net.minecraft.client.render.TexturedRenderLayers.CHEST_ATLAS_TEXTU
 @Environment(EnvType.CLIENT)
 public enum AetherChestTexture{
     SKYROOT,
-//    GOLDEN_OAK,
-//    ORANGE,
-//    CRYSTAL,
-//    WISTERIA,
+    GOLDEN_OAK,
+    ORANGE,
+    CRYSTAL,
+    WISTERIA,
     ;
     
     public final SpriteIdentifier single;

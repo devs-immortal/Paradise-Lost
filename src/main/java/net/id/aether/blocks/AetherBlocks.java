@@ -394,11 +394,11 @@ public class AetherBlocks {
 
     // Chests
     /* 24Chrome: I removed all but skyroot from the creative menu, maybe we'll add them later but for now only skyroot will have textures! */
-//    public static final AetherChestBlock CRYSTAL_CHEST = add("crystal_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.CRYSTAL_CHEST));
-//    public static final AetherChestBlock GOLDEN_OAK_CHEST = add("golden_oak_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.GOLDEN_OAK_CHEST));
-//    public static final AetherChestBlock ORANGE_CHEST = add("orange_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.ORANGE_CHEST));
+    public static final AetherChestBlock CRYSTAL_CHEST = add("crystal_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.CRYSTAL_CHEST));
+    public static final AetherChestBlock GOLDEN_OAK_CHEST = add("golden_oak_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.GOLDEN_OAK_CHEST));
+    public static final AetherChestBlock ORANGE_CHEST = add("orange_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.ORANGE_CHEST));
     public static final AetherChestBlock SKYROOT_CHEST = add("skyroot_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.SKYROOT_CHEST));
-//    public static final AetherChestBlock WISTERIA_CHEST = add("wisteria_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.WISTERIA_CHEST));
+    public static final AetherChestBlock WISTERIA_CHEST = add("wisteria_chest", new AetherChestBlock(of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD), ()->AetherBlockEntityTypes.WISTERIA_CHEST));
 
     @SafeVarargs
     private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {
