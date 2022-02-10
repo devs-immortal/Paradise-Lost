@@ -16,6 +16,7 @@
 - Swets now have custom death messages for its basic death and death whilst escaping player damage
 - You can now determine whether a FloatingBlockEntity can hurt you via the `hurtable_floaters` block tag
   - Using this tag will give entities damages based on the strength of the block and vertical velocity upon impact
+- Implemented Crystal, Golden Oak, Orange, ands Wisteria Chests
 
 # Fixes
 
