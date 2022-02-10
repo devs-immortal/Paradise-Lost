@@ -2,7 +2,9 @@ package net.id.aether.mixin.item;
 
 import net.id.aether.client.rendering.util.AetherMapColorUtil;
 import net.id.aether.world.dimension.AetherDimension;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.item.FilledMapItem;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;

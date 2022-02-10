@@ -19,6 +19,7 @@
 
 # Fixes
 
+- Reverted a change to a custom shader, causing crashes when paired with DashLoader
 - Resolved potential issues with darts failing to be discarded after 500 ticks
 - Resolved potential mod incompatibilities due to Issues within Log Type tags
 - Fixed issues pertaining to Flax Growth being incorrectly calculated
