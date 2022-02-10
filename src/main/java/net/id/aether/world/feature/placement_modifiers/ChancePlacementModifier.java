@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.world.gen.decorator.AbstractCountPlacementModifier;
-import net.minecraft.world.gen.decorator.PlacementModifierType;
+import net.minecraft.world.gen.placementmodifier.AbstractCountPlacementModifier;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
 import java.util.Random;
 
