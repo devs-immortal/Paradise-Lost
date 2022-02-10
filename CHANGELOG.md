@@ -1,32 +1,23 @@
 # Changes
 
-- **Updated for Minecraft 1.18.1**
-  - 1.17.1 will remain supported until the end of the b1.6.x pipeline
+- **Updated for Minecraft 1.18.2**
+  - 1.17.1 has been marked as DEPRECATED for this release, it is strongly recommended to upgrade.
   - !! Please see the advisory below regarding world migration from 1.17.x -> 1.18.x !!
-- [1.18+] World generation for islands have seen updates to reduce the gaps between islands and aid in further diversification
-- `/condition clear` now displays how many conditions were removed, and from whom
-- [1.18+] Some presets have been added for superflat worlds
-- All Swets now have their own custom colored particle effect
-  - Blue Aerclouds also now have a custom colored effect
-- Aechor Plants have been revised to be more consistent and reliable
-  - Valid surfaces it can spawn on can now be controlled via the `plants/aechor_plant_valid_ground` block tag
-  - Aechor Plants will now instantly die if the block below them is not a valid surface
-  - The 1/400 random check for spawning has been replaced by a base light level check for > 8
-  - Several aspects of the attack vector have been modified to match Aether Is standards (In addition to a divergence factor that scales based on difficulty)
-- Swets now have custom death messages for its basic death and death whilst escaping player damage
-- You can now determine whether a FloatingBlockEntity can hurt you via the `hurtable_floaters` block tag
-  - Using this tag will give entities damages based on the strength of the block and vertical velocity upon impact
+- Implemented the Slider Dungeon, with more dungeons to come soon!
+  - Chest Mimics, as a result, have also been implemented!
+- `/condition assign` and `/condition query` now displays appropriate player-based logging
+- Swets no longer care about light level; now are more dependent on altitude (y-height)
+  - Leashing mechanics for Swets have also been improved to be more responsive
+- Aerwhales and Whirlwinds have been implemented, and will now naturally frequent the world
+- The cloudstaff has now been implemented into the game, and is now usable
+- Oh the lore! The Lore Book has also now been implemented (Now where did I leave my trivia card?)
+
 
 # Fixes
 
-- Reverted a change to a custom shader, causing crashes when paired with DashLoader
-- Resolved potential issues with darts failing to be discarded after 500 ticks
-- Resolved potential mod incompatibilities due to Issues within Log Type tags
-- Fixed issues pertaining to Flax Growth being incorrectly calculated
-- Fixed issues pertaining to Dart Entities having an incorrect owner assignment (In some cases, causing a ClassCastException)
-- Quicksoil and Grass Blocks now have proper bonemeal events (IE using bonemeal on them will place proper blocks)
-- Fixed a translation issue causing biome names to show up incorrectly (An example being the single biome interface)
-- Code optimizations and minor bug fixes
+- Adjusted Spawn Rates for Cockatrices to naturally spawn within the world
+- Adjusted spawn rates for Blue Swets; Other types of swets are also now able to naturally spawn
+- Performance optimisations for Mount Systems, Bloodstone Rendering, and Cloud Rendering
 
 # Advisory: 1.17 -> 1.18 World Migration
 
