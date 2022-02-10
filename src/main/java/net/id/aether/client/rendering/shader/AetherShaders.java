@@ -32,8 +32,7 @@ public final class AetherShaders{
                         auralCutoutMipped = shader;
                         ShaderDuck duck = (ShaderDuck)shader;
                         auralCutoutTimeUniform = duck.getCustomUniform("Time");
-                    }),
-                    Pair.of(new Shader(manager, locate("cubemap"), AetherVertexFormats.POSITION_COLOR_LIGHT_NORMAL), (shader)->cubemap = shader)
+                    })
                 );
             }catch(IOException e){
                 System.err.print("Failed to load Aether shaders\n");
@@ -51,8 +50,6 @@ public final class AetherShaders{
     private static Shader auralCutoutMipped;
     private static GlUniform auralCutoutTimeUniform;
     
-    private static Shader cubemap;
-    
     static String locate(String name){
         return Aether.MOD_ID + ':' + name;
     }
@@ -63,10 +60,6 @@ public final class AetherShaders{
     
     public static Shader getAuralCutoutMipped(){
         return auralCutoutMipped;
-    }
-    
-    public static Shader getCubemap(){
-        return cubemap;
     }
     
     private static float auralTime = 0;

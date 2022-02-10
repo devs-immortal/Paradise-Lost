@@ -11,7 +11,6 @@ import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.HoeItem;
-import net.minecraft.util.Identifier;
 
 import static net.id.incubus_core.util.RegistryQueue.Action;
 import static net.id.incubus_core.util.RegistryQueue.onClient;
@@ -31,7 +30,6 @@ class AetherBlockActions {
     protected static final Action<Block> cutoutMippedRenderLayer = onClient((id, block) -> RenderUtils.cutoutMippedRenderLayer(block));
     protected static final Action<Block> auralRenderLayer = onClient((id, block) -> RenderUtils.auralRenderLayer(block));
     protected static final Action<Block> auralCutoutMippedRenderLayer = onClient((id, block) -> RenderUtils.auralCutoutMippedRenderLayer(block));
-    protected static Action<Block> cubemapRenderLayer(Identifier texture){ return onClient((id, block) -> RenderUtils.cubemapRenderLayer(block, texture)); }
     
     protected static final Action<AbstractSignBlock> signBlockEntity = (id, block) -> ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(block);
 
