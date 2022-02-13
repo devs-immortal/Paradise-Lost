@@ -122,6 +122,10 @@ public interface FloatingBlockHelper {
                 && !isBlockBlacklisted(world, pos, state);
     }
 
+
+    /**
+     * A builder intended to aid the creation of FloatingBlockEntity {@link BlockLikeEntitySet}s.
+     */
     @SuppressWarnings("unused")
     class SetBuilder extends BlockLikeEntitySet.Builder {
         protected final World world;
