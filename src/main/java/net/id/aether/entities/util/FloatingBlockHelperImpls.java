@@ -146,7 +146,7 @@ public class FloatingBlockHelperImpls {
             FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.up(), upperState, true);
             FloatingBlockEntity lower = new FloatingBlockEntity(world, pos, state, true);
             upper.dropItem = false;
-            FloatingBlockSet set = new FloatingBlockSet(lower, upper, Vec3i.ZERO.up());
+            BlockLikeEntitySet set = new BlockLikeEntitySet(lower, upper, Vec3i.ZERO.up());
             set.spawn(world);
             return true;
         }
@@ -173,7 +173,7 @@ public class FloatingBlockHelperImpls {
     }
 
     /**
-     * A piston-like {@link FloatingBlockSet} helper.
+     * A piston-like {@link BlockLikeEntitySet} helper.
      */
     public static class Pusher implements FloatingBlockHelper {
         /**
@@ -189,7 +189,7 @@ public class FloatingBlockHelperImpls {
                 return false;
             }
 
-            FloatingBlockSet set = construct(world, pos, force);
+            BlockLikeEntitySet set = construct(world, pos, force);
             if (set != null) {
                 set.spawn(world);
                 return true;
@@ -209,7 +209,7 @@ public class FloatingBlockHelperImpls {
             if (shouldDrop) {
                 return !FallingBlock.canFallThrough(world.getBlockState(pos.down()));
             }
-            FloatingBlockSet set = construct(world, pos, false);
+            BlockLikeEntitySet set = construct(world, pos, false);
             if (set == null) {
                 return true;
             } else {
@@ -219,8 +219,8 @@ public class FloatingBlockHelperImpls {
         }
 
         @Nullable
-        private static FloatingBlockSet construct(World world, BlockPos pos, boolean force) {
-            var builder = new FloatingBlockSet.Builder(world, pos);
+        private static BlockLikeEntitySet construct(World world, BlockPos pos, boolean force) {
+            var builder = new SetBuilder(world, pos);
             if (world.getBlockState(pos).isIn(AetherBlockTags.PUSH_FLOATERS)
                     && continueTree(world, pos.up(), builder, force)
                     && builder.size() > 1) {
@@ -230,7 +230,7 @@ public class FloatingBlockHelperImpls {
         }
 
         // returns false if the tree is unable to move. returns true otherwise.
-        private static boolean continueTree(World world, BlockPos pos, FloatingBlockSet.Builder builder, boolean overrideBlacklist) {
+        private static boolean continueTree(World world, BlockPos pos, SetBuilder builder, boolean overrideBlacklist) {
             if (builder.size() > MAX_MOVABLE_BLOCKS + 1) {
                 return false;
             }

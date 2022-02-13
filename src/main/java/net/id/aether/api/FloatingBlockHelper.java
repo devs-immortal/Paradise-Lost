@@ -1,8 +1,9 @@
 package net.id.aether.api;
 
+import net.id.aether.entities.block.BlockLikeEntity;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.entities.util.FloatingBlockHelperImpls;
-import net.id.aether.entities.util.FloatingBlockSet;
+import net.id.aether.entities.util.BlockLikeEntitySet;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PistonBlock;
@@ -14,10 +15,12 @@ import net.minecraft.world.World;
 
 import static net.id.aether.entities.util.FloatingBlockHelperImpls.*;
 
+import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
- * A helper class designed to aid in the creation of floating blocks and {@link FloatingBlockSet}s.
+ * A helper class designed to aid in the creation of floating blocks and {@link BlockLikeEntitySet}s.
  * @author Jack Papel
  */
 public interface FloatingBlockHelper {
@@ -95,7 +98,7 @@ public interface FloatingBlockHelper {
      * Notice: This does create and discard a floating block entity for this test.
      * @param pos The position of the block
      * @param state The blockstate of the block
-     * @param partOfSet Whether the block is part of a {@link FloatingBlockSet}
+     * @param partOfSet Whether the block is part of a {@link BlockLikeEntitySet}
      * @return Whether a floating block created at the given position will drop.
      */
     static boolean willBlockDrop(World world, BlockPos pos, BlockState state, boolean partOfSet) {
@@ -119,16 +122,38 @@ public interface FloatingBlockHelper {
                 && !isBlockBlacklisted(world, pos, state);
     }
 
-    /**
-     * This class is now deprecated. Instead, use {@link FloatingBlockSet.Builder}.
-     */
-    @Deprecated(forRemoval = true, since = "1.7")
-    class StructureBuilder extends FloatingBlockSet.Builder {
+    @SuppressWarnings("unused")
+    class SetBuilder extends BlockLikeEntitySet.Builder {
+        protected final World world;
+
         /**
-         * @param origin The position of the first block in the {@link FloatingBlockSet}.
+         * @param origin The position of the first block in the {@link BlockLikeEntitySet}.
          */
-        public StructureBuilder(World world, BlockPos origin) {
-            super(world, origin);
+        public SetBuilder(World world, BlockPos origin) {
+            super(origin);
+            this.world = world;
+            this.add(origin);
+        }
+
+        /**
+         * @param pos The position of the block that should be added to the {@link BlockLikeEntitySet}.
+         */
+        public SetBuilder add(BlockPos pos){
+            super.add(new FloatingBlockEntity(world, pos, world.getBlockState(pos), true));
+            return this;
+        }
+
+        /**
+         * Allows one to add to a {@link BlockLikeEntitySet} only if a certain condition is met.
+         * The predicate acts on an immutable copy of the entries so far.
+         * @param pos The position of the block that should be added to the {@link BlockLikeEntitySet}.
+         * @param predicate A {@link Predicate} to test whether the block should be added.
+         */
+        public SetBuilder addIf(BlockPos pos, Predicate<Map<Vec3i, BlockLikeEntity>> predicate){
+            if (predicate.test(Map.copyOf(entries))){
+                return this.add(pos);
+            }
+            return this;
         }
     }
 }

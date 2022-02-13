@@ -1,6 +1,6 @@
 package net.id.aether.mixin.client;
 
-import net.id.aether.entities.util.FloatingBlockSet;
+import net.id.aether.entities.util.BlockLikeEntitySet;
 import net.id.aether.entities.util.PostTickEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.world.EntityList;
@@ -25,6 +25,6 @@ public class ClientWorldMixin {
                 postTickEntity.postTick();
             }
         });
-        FloatingBlockSet.getActiveSets().forEachRemaining(FloatingBlockSet::postTick);
+        BlockLikeEntitySet.getActiveSets().forEachRemaining(BlockLikeEntitySet::postTick);
     }
 }
