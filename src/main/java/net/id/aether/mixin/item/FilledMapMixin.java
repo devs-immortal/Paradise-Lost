@@ -1,6 +1,6 @@
 package net.id.aether.mixin.item;
 
-import net.id.aether.client.rendering.util.AetherMapColorUtil;
+import net.id.aether.util.AetherMapColorUtil;
 import net.id.aether.world.dimension.AetherDimension;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

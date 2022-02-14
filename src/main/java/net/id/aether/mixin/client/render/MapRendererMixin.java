@@ -1,6 +1,6 @@
 package net.id.aether.mixin.client.render;
 
-import net.id.aether.client.rendering.util.AetherMapColorUtil;
+import net.id.aether.util.AetherMapColorUtil;
 import net.id.aether.world.dimension.AetherDimension;
 import net.minecraft.block.MapColor;
 import net.minecraft.client.texture.NativeImageBackedTexture;

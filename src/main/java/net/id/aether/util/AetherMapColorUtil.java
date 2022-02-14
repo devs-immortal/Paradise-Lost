@@ -1,11 +1,7 @@
-package net.id.aether.client.rendering.util;
+package net.id.aether.util;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.id.aether.util.MapColorCreator;
 import net.minecraft.block.MapColor;
 
-@Environment(EnvType.CLIENT)
 public class AetherMapColorUtil {
     public static final MapColor AETHER_BACKGROUND = MapColorCreator.createMapColor(62, 0xe3fffd);
 

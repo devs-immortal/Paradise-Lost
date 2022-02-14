@@ -1,33 +1,6 @@
-# Changes
-
-- **Updated for Minecraft 1.18.1**
-  - 1.17.1 will remain supported until the end of the b1.6.x pipeline
-  - !! Please see the advisory below regarding world migration from 1.17.x -> 1.18.x !!
-- [1.18+] World generation for islands have seen updates to reduce the gaps between islands and aid in further diversification
-- `/condition clear` now displays how many conditions were removed, and from whom
-- [1.18+] Some presets have been added for superflat worlds
-- All Swets now have their own custom colored particle effect
-  - Blue Aerclouds also now have a custom colored effect
-- Aechor Plants have been revised to be more consistent and reliable
-  - Valid surfaces it can spawn on can now be controlled via the `plants/aechor_plant_valid_ground` block tag
-  - Aechor Plants will now instantly die if the block below them is not a valid surface
-  - The 1/400 random check for spawning has been replaced by a base light level check for > 8
-  - Several aspects of the attack vector have been modified to match Aether Is standards (In addition to a divergence factor that scales based on difficulty)
-- Swets now have custom death messages for its basic death and death whilst escaping player damage
-- You can now determine whether a FloatingBlockEntity can hurt you via the `hurtable_floaters` block tag
-  - Using this tag will give entities damages based on the strength of the block and vertical velocity upon impact
-- Implemented Crystal, Golden Oak, Orange, ands Wisteria Chests
-
 # Fixes
 
-- Reverted a change to a custom shader, causing crashes when paired with DashLoader
-- Resolved potential issues with darts failing to be discarded after 500 ticks
-- Resolved potential mod incompatibilities due to Issues within Log Type tags
-- Fixed issues pertaining to Flax Growth being incorrectly calculated
-- Fixed issues pertaining to Dart Entities having an incorrect owner assignment (In some cases, causing a ClassCastException)
-- Quicksoil and Grass Blocks now have proper bonemeal events (IE using bonemeal on them will place proper blocks)
-- Fixed a translation issue causing biome names to show up incorrectly (An example being the single biome interface)
-- Code optimizations and minor bug fixes
+- Resolved a server-sided crash caused from loading a client class on server-side
 
 # Advisory: 1.17 -> 1.18 World Migration
 
@@ -42,11 +15,3 @@ as even if this component is stabilized, **there is no chunk blending in place f
 
 Efforts are currently ongoing to determine the feasibility of getting this component working, to ensure a smoother migration to 1.18.x.
 Further news regarding this effort can be found on our [discord server](https://discord.com/invite/wmMa47n).
-
-# Advisory: Snapshot Support
-
-For this release, we are allowing support for the 22w05a Build of Minecraft, which is classed as a snapshot for 1.18.2
-
-Understandably, snapshot builds may provide more instability, and in the case here, support for them may be limited/non-existent.
-
-Any issues reported under these snapshot builds may not receive fixes, until the related versions release, so please be mindful of this while experimenting.
