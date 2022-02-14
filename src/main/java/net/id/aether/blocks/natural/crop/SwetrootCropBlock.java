@@ -22,7 +22,7 @@ public class SwetrootCropBlock extends CropBlock {
         final int[] swetrootSpots = {0};
         BlockPos.iterateOutwards(pos, 1, 0, 1).iterator().forEachRemaining(check -> {
             Block block = world.getBlockState(pos).getBlock();
-            if(block.equals(AetherBlocks.SWETROOT)) {
+            if(block.equals(AetherBlocks.SWEDROOT)) {
                 swetrootSpots[0]++;
             }
         });
@@ -47,6 +47,6 @@ public class SwetrootCropBlock extends CropBlock {
 
     @Override
     protected ItemConvertible getSeedsItem() {
-        return AetherItems.SWETROOT;
+        return AetherItems.SWEDROOT;
     }
 }
