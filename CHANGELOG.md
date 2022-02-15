@@ -1,6 +1,7 @@
 # Fixes
 
-- Resolved a server-sided crash caused from loading a client class on server-side
+- Resolved a server-sided crash caused from loading a client class on server-side (again)
+- Resolved several inconsistencies with Moas
 
 # Advisory: 1.17 -> 1.18 World Migration
 
