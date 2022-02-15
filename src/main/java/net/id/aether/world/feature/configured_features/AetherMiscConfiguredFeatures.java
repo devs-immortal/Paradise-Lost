@@ -63,7 +63,7 @@ public class AetherMiscConfiguredFeatures extends AetherConfiguredFeatures{
         private static final QuicksoilConfig QUICKSOIL_CONFIG = new QuicksoilConfig();
         private static final SpringFeatureConfig WATER_SPRING_CONFIG = new SpringFeatureConfig(Fluids.WATER.getDefaultState(), true, 4, 1, ImmutableSet.of(HOLYSTONE));
 
-        private static final RandomPatchFeatureConfig SHIELD_ROCKS_CONFIG = new RandomPatchFeatureConfig(96, 9, 3, () -> Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(
+        private static final RandomPatchFeatureConfig SHIELD_ROCKS_CONFIG = new RandomPatchFeatureConfig(48, 9, 3, () -> Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(
                 DataPool.<BlockState>builder()
                         .add(COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM), 10)
                         .add(COBBLED_HOLYSTONE.getDefaultState(), 4)

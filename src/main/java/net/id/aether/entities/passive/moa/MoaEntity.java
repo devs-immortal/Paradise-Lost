@@ -26,6 +26,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
@@ -303,11 +304,27 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         if (!world.isClient()) {
             ItemStack heldStack = player.getStackInHand(hand);
-            if (heldStack.isFood() && heldStack.getItem().getFoodComponent().isMeat()) {
-                if (getGenes().isTamed()) {
+            if(getGenes().isTamed()) {
+                if (heldStack.isFood() && heldStack.getItem().getFoodComponent().isMeat()) {
                     feedMob(heldStack);
+                    return ActionResult.success(world.isClient());
                 }
-                return ActionResult.success(world.isClient());
+            }
+            else {
+                if(heldStack.getItem() != AetherItems.ORANGE && heldStack.isIn(AetherItemTags.MOA_TEMPTABLES)) {
+                    eat(player, hand, heldStack);
+                    playSound(SoundEvents.ENTITY_PARROT_EAT, 1, 0.5F + random.nextFloat() / 3F);
+                    produceParticlesServer(new ItemStackParticleEffect(ParticleTypes.ITEM, heldStack), 2 + random.nextInt(4), 7, 0);
+                    //spawnConsumptionEffects(heldStack, 7 + random.nextInt(13));
+
+                    if(random.nextFloat() < 0.04F * (heldStack.isFood() ? heldStack.getItem().getFoodComponent().getHunger() : 2)) {
+                        getGenes().tame(player.getUuid());
+                        playSound(SoundEvents.ENTITY_PARROT_AMBIENT, 2, 0.75F);
+                        produceParticlesServer(ParticleTypes.HAPPY_VILLAGER, 2 + random.nextInt(4), 7, 0);
+                    }
+
+                    return ActionResult.CONSUME;
+                }
             }
         }
         return super.interactMob(player, hand);

@@ -41,8 +41,8 @@ public class AetherTreePlacedFeatures extends AetherPlacedFeatures{
     public static final PlacedFeature FANCY_SKYROOT_TREE = register("fancy_skyroot_tree", placed(AetherTreeConfiguredFeatures.FANCY_SKYROOT_TREE, SKYROOT_SAPLING));
     // Tree Assortments
     public static final PlacedFeature SCATTERED_TREES = register("scattered_trees", AetherTreeConfiguredFeatures.SCATTERED_TREES.withPlacement(CountMultilayerPlacementModifier.of(6), CountPlacementModifier.of(UniformIntProvider.create(0, 6))));
-    public static final PlacedFeature SHIELD_TREES = register("shield_trees", AetherTreeConfiguredFeatures.SHIELD_TREES.withPlacement(CountMultilayerPlacementModifier.of(6), CountPlacementModifier.of(UniformIntProvider.create(0, 5))));
-    public static final PlacedFeature DENSE_SHIELD_TREES = register("dense_shield_trees", AetherTreeConfiguredFeatures.DENSE_SHIELD_TREES.withPlacement(CountMultilayerPlacementModifier.of(12), ChancePlacementModifier.of(15)));
+    public static final PlacedFeature SHIELD_TREES = register("shield_trees", AetherTreeConfiguredFeatures.SHIELD_TREES.withPlacement(CountMultilayerPlacementModifier.of(5), CountPlacementModifier.of(UniformIntProvider.create(0, 6))));
+    public static final PlacedFeature DENSE_SHIELD_TREES = register("dense_shield_trees", AetherTreeConfiguredFeatures.DENSE_SHIELD_TREES.withPlacement(CountMultilayerPlacementModifier.of(12), ChancePlacementModifier.of(18)));
     public static final PlacedFeature PLATEAU_TREES = register("plateau_trees", AetherTreeConfiguredFeatures.PLATEAU_TREES.withPlacement(ChancePlacementModifier.of(3), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1))));
     public static final PlacedFeature MIXED_TREES = register("mixed_trees", AetherTreeConfiguredFeatures.MIXED_TREES.withPlacement(CountMultilayerPlacementModifier.of(1), ChancePlacementModifier.of(30)));
     public static final PlacedFeature SPARSE_TREES = register("sparse_trees", AetherTreeConfiguredFeatures.SPARSE_TREES.withPlacement(CountMultilayerPlacementModifier.of(7), ChancePlacementModifier.of(100), CountPlacementModifier.of(UniformIntProvider.create(0, 2))));

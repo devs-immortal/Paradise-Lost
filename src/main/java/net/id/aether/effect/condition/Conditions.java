@@ -24,7 +24,7 @@ public class Conditions {
             (player)->ConditionAPI.isVisible(VENOM, player),
             (player)->{
                 var manager = ConditionAPI.getConditionManager(player);
-                return manager.getScaledSeverity(VENOM) / 1.8F;
+                return manager.getScaledSeverity(VENOM);
             }
         ));
     }
