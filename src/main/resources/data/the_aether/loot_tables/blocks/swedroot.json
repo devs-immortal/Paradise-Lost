@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:swetroot"
+          "name": "the_aether:swedroot"
         }
       ]
     },
@@ -23,45 +23,20 @@
               "enchantment": "minecraft:fortune",
               "formula": "minecraft:binomial_with_bonus_count",
               "parameters": {
-                "extra": 3,
+                "extra": 2,
                 "probability": 0.5714286
               }
             }
           ],
-          "name": "the_aether:swetroot"
+          "name": "the_aether:swedroot"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "the_aether:swetroot",
+          "block": "the_aether:swedroot",
           "properties": {
-            "age": "7"
-          }
-        }
-      ]
-    },
-    {
-      "rolls": 1.0,
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:random_chance",
-              "chance": 0.02
-            }
-          ],
-          "name": "the_aether:swetroot"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "the_aether:swetroot",
-          "properties": {
-            "age": "7"
+            "age": "3"
           }
         }
       ]

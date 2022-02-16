@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "the_aether:block/swedroot_stage0"
+    },
+    "age=1": {
+      "model": "the_aether:block/swedroot_stage0"
+    },
+    "age=2": {
+      "model": "the_aether:block/swedroot_stage1"
+    },
+    "age=3": {
+      "model": "the_aether:block/swedroot_stage1"
+    },
+    "age=4": {
+      "model": "the_aether:block/swedroot_stage2"
+    },
+    "age=5": {
+      "model": "the_aether:block/swedroot_stage2"
+    },
+    "age=6": {
+      "model": "the_aether:block/swedroot_stage3"
+    },
+    "age=7": {
+      "model": "the_aether:block/swedroot_stage3"
+    }
+  }
+}

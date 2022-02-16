@@ -28,10 +28,6 @@ public class SwetrootCropBlock extends CropBlock {
         }
     }
 
-    public int getMaxAge() {
-        return 3;
-    }
-
     @Override
     protected ItemConvertible getSeedsItem() {
         return AetherItems.SWEDROOT;
