@@ -36,7 +36,7 @@
           "condition": "minecraft:block_state_property",
           "block": "the_aether:swedroot",
           "properties": {
-            "age": "3"
+            "age": "7"
           }
         }
       ]
