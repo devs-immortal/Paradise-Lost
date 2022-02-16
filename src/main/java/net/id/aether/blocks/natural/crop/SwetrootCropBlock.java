@@ -2,12 +2,16 @@ package net.id.aether.blocks.natural.crop;
 
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.items.AetherItems;
+import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CropBlock;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldView;
 
 import java.util.Random;
 
@@ -19,25 +23,8 @@ public class SwetrootCropBlock extends CropBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        final int[] swetrootSpots = {0};
-        BlockPos.iterateOutwards(pos, 1, 0, 1).iterator().forEachRemaining(check -> {
-            Block block = world.getBlockState(pos).getBlock();
-            if(block.equals(AetherBlocks.SWEDROOT)) {
-                swetrootSpots[0]++;
-            }
-        });
-        int upperBound = 25;
-        if(swetrootSpots[0] < 4) {
-            upperBound = 15;
-        }
-        if (world.getLightLevel(pos) <= 5) {
-            int i = this.getAge(state);
-            if (i < this.getMaxAge()) {
-                float f = getAvailableMoisture(this, world, pos);
-                if (random.nextInt((int)(upperBound / f) + 1) == 0) {
-                    world.setBlockState(pos, this.withAge(i + 1), 2);
-                }
-            }
+        if (world.getBlockState(pos.up().up()).isOf(Blocks.WATER)) {
+            super.randomTick(state, world, pos, random);
         }
     }
 
@@ -48,5 +35,15 @@ public class SwetrootCropBlock extends CropBlock {
     @Override
     protected ItemConvertible getSeedsItem() {
         return AetherItems.SWEDROOT;
+    }
+
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return canPlantOnTop(Blocks.AIR.getDefaultState(), world, pos);
+    }
+
+    @Override
+    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
+        return world.getBlockState(pos.up()).isIn(AetherBlockTags.SWEDROOT_PLANTABLE);
     }
 }
