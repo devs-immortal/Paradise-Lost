@@ -1,7 +1,7 @@
 # Fixes
 
-- Resolved a server-sided crash caused from loading a client class on server-side (again)
-- Resolved several inconsistencies with Moas
+- Resolved an incompatibility with Spectrum
+- Optimized Image file sizes
 
 # Advisory: 1.17 -> 1.18 World Migration
 
