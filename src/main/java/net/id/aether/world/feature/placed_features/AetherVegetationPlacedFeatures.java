@@ -5,9 +5,8 @@ import net.id.aether.world.feature.placement_modifiers.ChancePlacementModifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.decorator.*;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.placementmodifier.*;
 
 import static net.minecraft.world.gen.feature.VegetationPlacedFeatures.NOT_IN_SURFACE_WATER_MODIFIER;
 

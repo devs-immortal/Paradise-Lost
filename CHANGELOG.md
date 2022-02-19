@@ -1,6 +1,23 @@
+# Changes
+
+- **Updated for Minecraft 1.18.2**
+  - 1.17.1 has been marked as DEPRECATED for this release, it is strongly recommended to upgrade.
+  - !! Please see the advisory below regarding world migration from 1.17.x -> 1.18.x !!
+- Implemented the Slider Dungeon, with more dungeons to come soon!
+  - Chest Mimics, as a result, have also been implemented!
+- `/condition assign` and `/condition query` now displays appropriate player-based logging
+- Swets no longer care about light level; now are more dependent on altitude (y-height)
+  - Leashing mechanics for Swets have also been improved to be more responsive
+- Aerwhales and Whirlwinds have been implemented, and will now naturally frequent the world
+- The cloudstaff has now been implemented into the game, and is now usable
+- Oh the lore! The Lore Book has also now been implemented (Now where did I leave my trivia card?)
+
+
 # Fixes
 
-- Resolved a server-sided crash caused from loading a client class on server-side
+- Adjusted Spawn Rates for Cockatrices to naturally spawn within the world
+- Adjusted spawn rates for Blue Swets; Other types of swets are also now able to naturally spawn
+- Performance optimisations for Mount Systems, Bloodstone Rendering, and Cloud Rendering
 
 # Advisory: 1.17 -> 1.18 World Migration
 
