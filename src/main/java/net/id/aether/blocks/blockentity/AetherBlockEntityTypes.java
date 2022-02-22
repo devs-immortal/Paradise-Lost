@@ -27,10 +27,10 @@ public class AetherBlockEntityTypes {
 //        register("dungeonswitch", DUNGEON_SWITCH);
     
         register("skyroot_chest", SKYROOT_CHEST);
-//        register("golden_oak_chest", GOLDEN_OAK_CHEST);
-//        register("orange_chest", ORANGE_CHEST);
-//        register("crystal_chest", CRYSTAL_CHEST);
-//        register("wisteria_chest", WISTERIA_CHEST);
+        register("golden_oak_chest", GOLDEN_OAK_CHEST);
+        register("orange_chest", ORANGE_CHEST);
+        register("crystal_chest", CRYSTAL_CHEST);
+        register("wisteria_chest", WISTERIA_CHEST);
     }
     
     private static void register(String name, BlockEntityType<?> type){
