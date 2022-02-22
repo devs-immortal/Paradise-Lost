@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "I've been falling, for 30 minutes!"
+      "translate": "advancements.the_aether.void_aether.title"
     },
     "description": {
-      "text": "Fall into the Overworld from the Aether"
+      "translate": "advancements.the_aether.void_aether.description"
     },
     "icon": {
       "item": "the_aether:aerogel"

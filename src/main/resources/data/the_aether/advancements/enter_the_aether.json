@@ -5,10 +5,10 @@
       "item": "minecraft:glowstone"
     },
     "title": {
-      "text": "We need to go higher"
+      "translate": "advancements.the_aether.enter_the_aether.title"
     },
     "description": {
-      "text": "Build and a flood a frame of shimmering glowstone, then step into the light"
+      "translate": "advancements.the_aether.enter_the_aether.description"
     },
     "frame": "goal",
     "show_toast": true,

@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Shiny Wood?"
+      "translate": "advancements.the_aether.shiny_wood.title"
     },
     "description": {
-      "text": "Collect wood from a Golden Oak Tree"
+      "translate": "advancements.the_aether.shiny_wood.description"
     },
     "icon": {
       "item": "the_aether:golden_oak_log"

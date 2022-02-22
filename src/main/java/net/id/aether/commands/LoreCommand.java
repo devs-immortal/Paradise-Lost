@@ -8,7 +8,9 @@ import net.id.aether.lore.LoreStatus;
 import net.id.aether.registry.AetherRegistries;
 import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 import static net.minecraft.server.command.CommandManager.argument;
@@ -75,7 +77,7 @@ final class LoreCommand{
         var state = AetherComponents.LORE_STATE.get(player);
         var status = state.getLoreStatus(id);
         // make this translatable
-        source.sendFeedback(Text.of(switch(status){
+        source.sendFeedback(new TranslatableText("commands.the_aether.lore.get." + switch(status){
             case LOCKED -> "locked";
             case HIDDEN -> "hidden";
             case FREE -> "free";

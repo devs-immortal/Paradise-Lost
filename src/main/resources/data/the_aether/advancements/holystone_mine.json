@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "What clouds are made of..."
+      "translate": "advancements.the_aether.holystone_mine.title"
     },
     "description": {
-      "text": "Mine some holystone"
+      "translate": "advancements.the_aether.holystone_mine.description"
     },
     "icon": {
       "item": "the_aether:holystone"

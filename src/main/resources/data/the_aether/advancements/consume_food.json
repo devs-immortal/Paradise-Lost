@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Exotic Starter"
+      "translate": "advancements.the_aether.consume_food.title"
     },
     "description": {
-      "text": "Consume food that has come from the Aether."
+      "translate": "advancements.the_aether.consume_food.description"
     },
     "icon": {
       "item": "the_aether:white_apple"

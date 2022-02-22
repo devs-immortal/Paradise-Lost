@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Shiny Planks!"
+      "translate": "advancements.the_aether.shiny_planks.title"
     },
     "description": {
-      "text": "Turn your golden oak logs into golden oak planks!"
+      "translate": "advancements.the_aether.shiny_planks.description"
     },
     "icon": {
       "item": "the_aether:golden_oak_planks"

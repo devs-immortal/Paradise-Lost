@@ -3,16 +3,19 @@
     "icon": {
       "item": "the_aether:swet_ball"
     },
-    "title": "World of Goo",
-    "description": "Grow a swet",
+    "title": {
+      "translate": "advancements.the_aether.world_of_goo.title"
+    },
+    "description": {
+      "translate": "advancements.the_aether.world_of_goo.description"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "the_aether:root",
   "criteria": {
-    "requirement": {
+    "growswet": {
       "trigger": "minecraft:player_interacted_with_entity",
       "conditions": {
         "item": {
@@ -24,5 +27,11 @@
         }
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "growswet"
+    ]
+  ],
+  "parent": "the_aether:root"
 }
