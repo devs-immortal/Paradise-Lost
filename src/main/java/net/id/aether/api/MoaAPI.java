@@ -312,8 +312,4 @@ public class MoaAPI {
      */
     private static record SpawnStatData(float base, float variance) {
     }
-
-    static {
-        register(Aether.locate("fallback"), FALLBACK_MOA);
-    }
 }
