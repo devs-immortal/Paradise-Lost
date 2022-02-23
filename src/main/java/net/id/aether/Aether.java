@@ -11,6 +11,7 @@ import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.client.model.AetherModelLayers;
 import net.id.aether.client.model.AetherModelPredicates;
 import net.id.aether.client.model.armor.AetherArmorModels;
+import net.id.aether.client.model.block.HolidayBlockModel;
 import net.id.aether.client.rendering.block.AetherBlockEntityRenderers;
 import net.id.aether.client.rendering.entity.AetherEntityRenderers;
 import net.id.aether.client.rendering.item.AetherItemRenderers;
@@ -61,7 +62,16 @@ import org.apache.logging.log4j.Logger;
 public class Aether implements ModInitializer, ClientModInitializer {
     public static final String MOD_ID = "the_aether";
     public static final Logger LOG = LogManager.getLogger(MOD_ID);
-
+    
+    /**
+     * Creates a new {@link Identifier} based on the passed location.
+     * <p>
+     * If the location contains a collin `:` it will be split and handled like normal, otherwise it will use the default
+     * namespace contained in {@link #MOD_ID} instead of the default "minecraft" namespace.
+     *
+     * @param location The location to use
+     * @return The new {@link Identifier} instance
+     */
     public static Identifier locate(String location) {
         if (location.contains(":")) {
             return new Identifier(location);
@@ -113,6 +123,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         AetherScreens.initClient();
         Conditions.clientInit();
         AetherShaders.init();
+        HolidayBlockModel.init();
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.Client.init();
         }

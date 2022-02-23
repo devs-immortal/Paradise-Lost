@@ -8,6 +8,7 @@
     "block.BlockMixin",
     "block.ChestBlockEntityAccessor",
     "block.FarmlandBlockMixin",
+    "client.MinecraftClientAccessor",
     "devel.server.ChunkRegionMixin",
     "entity.BoatEntityMixin",
     "entity.BoatEntityTypeMixin",

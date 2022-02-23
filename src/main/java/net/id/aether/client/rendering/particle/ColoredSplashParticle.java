@@ -39,7 +39,7 @@ public class ColoredSplashParticle extends RainSplashParticle {
      * @param velocityX The X velocity of the particle
      * @param velocityY The Y velocity of the particle
      * @param velocityZ The Z velocity of the particle
-     * @param provider The sprite provider for this particle
+     * @param provider The particle provider for this particle
      */
     ColoredSplashParticle(ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ, FabricSpriteProvider provider) {
         super(clientWorld, x, y, z);
