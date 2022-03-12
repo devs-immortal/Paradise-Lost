@@ -1,19 +1,23 @@
 package net.id.aether.tag;
 
-import net.fabricmc.fabric.api.tag.TagFactory;
 import net.id.aether.Aether;
 import net.minecraft.entity.EntityType;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
+import net.minecraft.util.registry.Registry;
 
 public class AetherEntityTypeTags {
-    public static final Tag<EntityType<?>> SWET_TRANSFORMERS_BLUE = TagFactory.ENTITY_TYPE.create(Aether.locate("swet_transformers/blue"));
-    public static final Tag<EntityType<?>> SWET_TRANSFORMERS_GOLDEN = TagFactory.ENTITY_TYPE.create(Aether.locate("swet_transformers/golden"));
-    public static final Tag<EntityType<?>> SWET_TRANSFORMERS_PURPLE = TagFactory.ENTITY_TYPE.create(Aether.locate("swet_transformers/purple"));
-    public static final Tag<EntityType<?>> SWET_TRANSFORMERS_VERMILION = TagFactory.ENTITY_TYPE.create(Aether.locate("swet_transformers/vermilion"));
+    public static final TagKey<EntityType<?>> SWET_TRANSFORMERS_BLUE = register("swet_transformers/blue");
+    public static final TagKey<EntityType<?>> SWET_TRANSFORMERS_GOLDEN = register("swet_transformers/golden");
+    public static final TagKey<EntityType<?>> SWET_TRANSFORMERS_PURPLE = register("swet_transformers/purple");
+    public static final TagKey<EntityType<?>> SWET_TRANSFORMERS_VERMILION = register("swet_transformers/vermilion");
 
-    public static final Tag<EntityType<?>> VENOM_IMMUNITY = TagFactory.ENTITY_TYPE.create(Aether.locate("condition_immunities/venom"));
-    public static final Tag<EntityType<?>> ABSTENTINE_TOXICITY_IMMUNITY = TagFactory.ENTITY_TYPE.create(Aether.locate("condition_immunities/abstentine_toxicity"));
-    public static final Tag<EntityType<?>> BLOODTINGE_IMMUNITY = TagFactory.ENTITY_TYPE.create(Aether.locate("condition_immunities/bloodtinge"));
-    public static final Tag<EntityType<?>> ENTRANCEMENT_IMMUNITY = TagFactory.ENTITY_TYPE.create(Aether.locate("condition_immunities/entrancement"));
-    public static final Tag<EntityType<?>> FROSTBITE_IMMUNITY = TagFactory.ENTITY_TYPE.create(Aether.locate("condition_immunities/frostbite"));
+    public static final TagKey<EntityType<?>> VENOM_IMMUNITY = register("condition_immunities/venom");
+    public static final TagKey<EntityType<?>> ABSTENTINE_TOXICITY_IMMUNITY = register("condition_immunities/abstentine_toxicity");
+    public static final TagKey<EntityType<?>> BLOODTINGE_IMMUNITY = register("condition_immunities/bloodtinge");
+    public static final TagKey<EntityType<?>> ENTRANCEMENT_IMMUNITY = register("condition_immunities/entrancement");
+    public static final TagKey<EntityType<?>> FROSTBITE_IMMUNITY = register("condition_immunities/frostbite");
+
+    private static TagKey<EntityType<?>> register(String id) {
+        return TagKey.of(Registry.ENTITY_TYPE_KEY, Aether.locate(id));
+    }
 }

@@ -22,7 +22,7 @@ public abstract class MinecraftClientMixin {
     
     @Shadow public abstract CompletableFuture<Void> reloadResources();
     
-    @ModifyVariable(method = "startIntegratedServer(Ljava/lang/String;Lnet/minecraft/util/registry/DynamicRegistryManager$Impl;Ljava/util/function/Function;Lcom/mojang/datafixers/util/Function4;ZLnet/minecraft/client/MinecraftClient$WorldLoadAction;)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/MinecraftClient$WorldLoadAction;NONE:Lnet/minecraft/client/MinecraftClient$WorldLoadAction;", ordinal = 0), ordinal = 2, index = 11, name = "bl2", require = 1)
+    @ModifyVariable(method = "startIntegratedServer(Ljava/lang/String;Ljava/util/function/Function;Ljava/util/function/Function;ZLnet/minecraft/client/MinecraftClient$WorldLoadAction;)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/MinecraftClient$WorldLoadAction;NONE:Lnet/minecraft/client/MinecraftClient$WorldLoadAction;", ordinal = 0), ordinal = 2, index = 11, name = "bl2", require = 1)
     private boolean replaceBl2(boolean bl2) {
         return false;
     }
@@ -39,7 +39,7 @@ public abstract class MinecraftClientMixin {
     private void getMusicType(CallbackInfoReturnable<MusicSound> cir){
         var world = player.world;
         if(world.getRegistryKey().equals(AetherDimension.AETHER_WORLD_KEY)){
-            cir.setReturnValue(world.getBiomeAccess().getBiomeForNoiseGen(this.player.getBlockPos()).getMusic().orElse(AetherSoundEvents.Music.AETHER));
+            cir.setReturnValue(world.getBiomeAccess().getBiomeForNoiseGen(this.player.getBlockPos()).value().getMusic().orElse(AetherSoundEvents.Music.AETHER));
         }
     }
 }

@@ -45,7 +45,7 @@ public class IncubatorBlockEntity extends AetherBlockEntity {
         ItemStack stored = inventory.get(0);
         inventory.set(0, handStack);
         player.setStackInHand(hand, stored);
-        hatchTicks = (int) (12000 / world.getBiome(pos).getTemperature());
+        hatchTicks = (int) (12000 / world.getBiome(pos).value().getTemperature());
     }
 
     @Override

@@ -26,7 +26,7 @@ public class ConditionAPI {
     public static List<Condition> getValidConditions(EntityType<?> type) {
         return AetherRegistries.CONDITION_REGISTRY
                 .stream()
-                .filter(condition -> !condition.exempt.contains(type))
+                .filter(condition -> !type.isIn(condition.exempt))
                 .collect(Collectors.toList());
     }
 

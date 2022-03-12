@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -36,7 +37,7 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
         BlockPos blockPos = pos.up();
         BlockState blockState = AetherBlocks.AETHER_GRASS.getDefaultState();
         block0: for (int i = 0; i < 128; ++i) {
-            PlacedFeature placedFeature;
+            RegistryEntry<PlacedFeature> placedFeature;
             BlockPos blockPos2 = blockPos;
 
             for (int j = 0; j < i / 16; ++j) {
@@ -56,13 +57,13 @@ public class AetherGrassBlock extends SpreadableAetherBlock implements Fertiliza
 
             if (!blockState2.isAir()) continue;
             if (random.nextInt(8) == 0) {
-                List<ConfiguredFeature<?, ?>> list = world.getBiome(blockPos2).getGenerationSettings().getFlowerFeatures();
+                List<ConfiguredFeature<?, ?>> list = world.getBiome(blockPos2).value().getGenerationSettings().getFlowerFeatures();
                 if (list.isEmpty()) continue;
-                placedFeature = ((RandomPatchFeatureConfig)list.get(0).getConfig()).feature().get();
+                placedFeature = ((RandomPatchFeatureConfig)list.get(0).config()).feature();
             } else {
                 placedFeature = AetherVegetationPlacedFeatures.AETHER_GRASS_BONEMEAL;
             }
-            placedFeature.generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
+            placedFeature.value().generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
         }
     }
 }

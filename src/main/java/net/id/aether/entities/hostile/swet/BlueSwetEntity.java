@@ -21,7 +21,7 @@ public class BlueSwetEntity extends SwetEntity {
             int j = MathHelper.floor(this.getY());
             int k = MathHelper.floor(this.getZ());
             BlockPos blockPos = new BlockPos(i, j, k);
-            if (this.world.getBiome(blockPos).getTemperature() > 1.0f) {
+            if (this.world.getBiome(blockPos).value().getTemperature() > 1.0f) {
                 this.damage(DamageSource.ON_FIRE, 1.0f);
             }
         }

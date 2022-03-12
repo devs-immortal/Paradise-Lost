@@ -77,8 +77,8 @@ public class LichenPileBlock extends FallingBlock implements Fertilizable {
         BlockPos.streamOutwards(pos, 3, 1, 3)
                 .filter(world::isAir)
                 .filter(temp -> {
-                    var floor = world.getBlockState(temp).getBlock();
-                    return floor instanceof LichenBlock || AetherBlockTags.LICHEN_SPREADABLES.contains(floor);
+                    var floor = world.getBlockState(temp);
+                    return floor.getBlock() instanceof LichenBlock || floor.isIn(AetherBlockTags.LICHEN_SPREADABLES);
                 })
                 .filter(temp -> random.nextInt(60) == 0)
                 .forEach(spreadPoint -> world.setBlockState(spreadPoint, getDefaultState()));

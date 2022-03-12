@@ -1,6 +1,5 @@
 package net.id.aether.world.feature.configured_features;
 
-import com.google.common.collect.ImmutableSet;
 import net.id.aether.world.feature.AetherFeatures;
 import net.id.aether.world.feature.configs.BoulderFeatureConfig;
 import net.id.aether.world.feature.configs.GroundcoverFeatureConfig;
@@ -18,8 +17,10 @@ import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.gen.decorator.BlockFilterPlacementModifier;
+import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.util.registry.RegistryEntryList;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
@@ -32,43 +33,45 @@ public class AetherMiscConfiguredFeatures extends AetherConfiguredFeatures{
     Highlands
      */
     // Default
-    public static final ConfiguredFeature<?, ?> QUICKSOIL = register("quicksoil", AetherFeatures.QUICKSOIL.configure(Configs.QUICKSOIL_CONFIG));
-    public static final ConfiguredFeature<?, ?> WATER_SPRING = register("water_spring", Feature.SPRING_FEATURE.configure(Configs.WATER_SPRING_CONFIG));
+    public static final RegistryEntry<ConfiguredFeature<QuicksoilConfig, ?>> QUICKSOIL = register("quicksoil", AetherFeatures.QUICKSOIL, Configs.QUICKSOIL_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<SpringFeatureConfig, ?>> WATER_SPRING = register("water_spring", Feature.SPRING_FEATURE, Configs.WATER_SPRING_CONFIG);
 
-    public static final ConfiguredFeature<?, ?> GENERIC_BOULDER = register("generic_boulder", AetherFeatures.BOULDER.configure(Configs.GENERIC_BOULDER_CONFIG));
-    public static final ConfiguredFeature<?, ?> PLAINS_BOULDER = register("plains_boulder", AetherFeatures.BOULDER.configure(Configs.PLAINS_BOULDER_CONFIG));
-    public static final ConfiguredFeature<?, ?> THICKET_BOULDER = register("thicket_boulder", AetherFeatures.BOULDER.configure(Configs.THICKET_BOULDER_CONFIG));
-    public static final ConfiguredFeature<?, ?> GOLDEN_BOULDER = register("golden_boulder", AetherFeatures.BOULDER.configure(Configs.GOLDEN_BOULDER_CONFIG));
+    public static final RegistryEntry<ConfiguredFeature<BoulderFeatureConfig, ?>> GENERIC_BOULDER = register("generic_boulder", AetherFeatures.BOULDER, Configs.GENERIC_BOULDER_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<BoulderFeatureConfig, ?>> PLAINS_BOULDER = register("plains_boulder", AetherFeatures.BOULDER, Configs.PLAINS_BOULDER_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<BoulderFeatureConfig, ?>> THICKET_BOULDER = register("thicket_boulder", AetherFeatures.BOULDER, Configs.THICKET_BOULDER_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<BoulderFeatureConfig, ?>> GOLDEN_BOULDER = register("golden_boulder", AetherFeatures.BOULDER, Configs.GOLDEN_BOULDER_CONFIG);
 
-    public static final ConfiguredFeature<OreFeatureConfig, ?> ORE_AMBROSIUM = register("ore_ambrosium", Feature.ORE.configure(Configs.ore(AMBROSIUM_ORE, 14)));
-    public static final ConfiguredFeature<OreFeatureConfig, ?> ORE_GRAVITITE = register("ore_gravitite", Feature.ORE.configure(Configs.ore(GRAVITITE_ORE, 6)));
-    public static final ConfiguredFeature<OreFeatureConfig, ?> ORE_ZANITE = register("ore_zanite", Feature.ORE.configure(Configs.ore(ZANITE_ORE, 9)));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_AMBROSIUM = register("ore_ambrosium", Feature.ORE, Configs.ore(AMBROSIUM_ORE, 14));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_GRAVITITE = register("ore_gravitite", Feature.ORE, Configs.ore(GRAVITITE_ORE, 6));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_ZANITE = register("ore_zanite", Feature.ORE, Configs.ore(ZANITE_ORE, 9));
     // Plato
     // Shield
-    public static final ConfiguredFeature<?, ?> SHIELD_ROCKS = register("shield_rocks", Feature.RANDOM_PATCH.configure(Configs.SHIELD_ROCKS_CONFIG));
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> SHIELD_ROCKS = register("shield_rocks", Feature.RANDOM_PATCH, Configs.SHIELD_ROCKS_CONFIG);
 
-    public static final ConfiguredFeature<?, ?> SHIELD_PONDS = register("shield_pond", AetherFeatures.AETHER_DELTA_FEATURE.configure(new DeltaFeatureConfig(Blocks.WATER.getDefaultState(), COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM).with(Properties.WATERLOGGED, true), UniformIntProvider.create(2, 7), UniformIntProvider.create(1, 2))));
+    public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> SHIELD_PONDS = register("shield_pond", AetherFeatures.AETHER_DELTA_FEATURE, new DeltaFeatureConfig(Blocks.WATER.getDefaultState(), COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM).with(Properties.WATERLOGGED, true), UniformIntProvider.create(2, 7), UniformIntProvider.create(1, 2)));
 
-    public static final ConfiguredFeature<?, ?> SHIELD_STONE = register("shield_stone", AetherFeatures.GROUNDCOVER_FEATURE.configure(new GroundcoverFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(HOLYSTONE.getDefaultState(), 7).add(COBBLED_HOLYSTONE.getDefaultState(), 5).add(MOSSY_HOLYSTONE.getDefaultState(), 2).build()), UniformIntProvider.create(1, 4), UniformIntProvider.create(0, 0))));
-    public static final ConfiguredFeature<?, ?> SHIELD_PODZOL = register("shield_podzol", AetherFeatures.GROUNDCOVER_FEATURE.configure(new GroundcoverFeatureConfig(BlockStateProvider.of(AETHER_FROZEN_GRASS), UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 0))));
+    public static final RegistryEntry<ConfiguredFeature<GroundcoverFeatureConfig, ?>> SHIELD_STONE = register("shield_stone", AetherFeatures.GROUNDCOVER_FEATURE, new GroundcoverFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(HOLYSTONE.getDefaultState(), 7).add(COBBLED_HOLYSTONE.getDefaultState(), 5).add(MOSSY_HOLYSTONE.getDefaultState(), 2).build()), UniformIntProvider.create(1, 4), UniformIntProvider.create(0, 0)));
+    public static final RegistryEntry<ConfiguredFeature<GroundcoverFeatureConfig, ?>> SHIELD_PODZOL = register("shield_podzol", AetherFeatures.GROUNDCOVER_FEATURE, new GroundcoverFeatureConfig(BlockStateProvider.of(AETHER_FROZEN_GRASS), UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 0)));
     // Tundra
-    public static final ConfiguredFeature<?, ?> TUNDRA_SPIRES = register("tundra_spires", AetherFeatures.ICESTONE_SPIRE_FEATURE.configure(FeatureConfig.DEFAULT));
+    public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> TUNDRA_SPIRES = register("tundra_spires", AetherFeatures.ICESTONE_SPIRE_FEATURE, FeatureConfig.DEFAULT);
 
-    public static final ConfiguredFeature<?, ?> TUNDRA_PONDS = register("tundra_pond", AetherFeatures.AETHER_DELTA_FEATURE.configure(new DeltaFeatureConfig(Blocks.ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), UniformIntProvider.create(4, 9), UniformIntProvider.create(0, 1))));
-    public static final ConfiguredFeature<?, ?> TUNDRA_SNOW = register("tundra_snow", AetherFeatures.AETHER_DELTA_FEATURE.configure(new DeltaFeatureConfig(Blocks.POWDER_SNOW.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), UniformIntProvider.create(3, 8), UniformIntProvider.create(0, 1))));
+    public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> TUNDRA_PONDS = register("tundra_pond", AetherFeatures.AETHER_DELTA_FEATURE, new DeltaFeatureConfig(Blocks.ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), UniformIntProvider.create(4, 9), UniformIntProvider.create(0, 1)));
+    public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> TUNDRA_SNOW = register("tundra_snow", AetherFeatures.AETHER_DELTA_FEATURE, new DeltaFeatureConfig(Blocks.POWDER_SNOW.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), UniformIntProvider.create(3, 8), UniformIntProvider.create(0, 1)));
 
-    public static final ConfiguredFeature<?, ?> FREEZE_AETHER_TOP_LAYER = register("freeze_aether_top_layer", AetherFeatures.FREEZE_AETHER_TOP_LAYER_FEATURE_FEATURE.configure(FeatureConfig.DEFAULT));
+    public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> FREEZE_AETHER_TOP_LAYER = register("freeze_aether_top_layer", AetherFeatures.FREEZE_AETHER_TOP_LAYER_FEATURE_FEATURE, FeatureConfig.DEFAULT);
+
+    // TODO 1.7 uncomment public static final RegistryEntry<ConfiguredFeature<DynamicConfiguration, ?>> AETHER_LAKE = register("aether_lake", AetherFeatures.AETHER_LAKE, new DynamicConfiguration(Blocks.WATER.getDefaultState(), Optional.of("normal")));
 
     private static class Configs extends AetherConfiguredFeatures.Configs{
         private static final QuicksoilConfig QUICKSOIL_CONFIG = new QuicksoilConfig();
-        private static final SpringFeatureConfig WATER_SPRING_CONFIG = new SpringFeatureConfig(Fluids.WATER.getDefaultState(), true, 4, 1, ImmutableSet.of(HOLYSTONE));
+        private static final SpringFeatureConfig WATER_SPRING_CONFIG = new SpringFeatureConfig(Fluids.WATER.getDefaultState(), true, 4, 1, RegistryEntryList.of(Block::getRegistryEntry, HOLYSTONE));
 
-        private static final RandomPatchFeatureConfig SHIELD_ROCKS_CONFIG = new RandomPatchFeatureConfig(48, 9, 3, () -> Feature.SIMPLE_BLOCK.configure(new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(
+        private static final RandomPatchFeatureConfig SHIELD_ROCKS_CONFIG = new RandomPatchFeatureConfig(48, 9, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(
                 DataPool.<BlockState>builder()
                         .add(COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM), 10)
                         .add(COBBLED_HOLYSTONE.getDefaultState(), 4)
                         .build())
-        )).withPlacement(BlockFilterPlacementModifier.of(AetherPlacedFeatures.IN_OR_ON_GROUND)));
+        ), BlockFilterPlacementModifier.of(AetherPlacedFeatures.IN_OR_ON_GROUND)));
 
         private static BoulderFeatureConfig boulder(BlockStateProvider provider, int tries, IntProvider size){
             return new BoulderFeatureConfig(BlockStateProvider.of(COBBLED_HOLYSTONE), ConstantIntProvider.create(tries), size);

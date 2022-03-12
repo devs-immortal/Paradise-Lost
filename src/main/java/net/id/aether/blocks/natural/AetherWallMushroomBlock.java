@@ -9,6 +9,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -20,7 +21,7 @@ public class AetherWallMushroomBlock extends AetherMushroomBlock {
 
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    public AetherWallMushroomBlock(Settings settings, Supplier<ConfiguredFeature<?, ?>> feature) {
+    public AetherWallMushroomBlock(Settings settings, Supplier<RegistryEntry<? extends ConfiguredFeature<?, ?>>> feature) {
         super(settings, feature, AetherMushroomBlock.HangType.WALL);
     }
 

@@ -1,7 +1,7 @@
 package net.id.aether.world.feature.structure;
 
-import net.fabricmc.fabric.mixin.structure.StructureFeatureAccessor;
 import net.id.aether.Aether;
+import net.id.aether.mixin.structure.StructureFeatureAccessor;
 import net.id.aether.world.feature.structure.generator.OrangeRuinGenerator;
 import net.id.aether.world.feature.structure.generator.SkyrootTowerGenerator;
 import net.id.aether.world.feature.structure.generator.WellGenerator;

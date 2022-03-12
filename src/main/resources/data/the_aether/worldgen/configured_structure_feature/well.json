@@ -1,4 +1,6 @@
 {
   "config": {},
-  "type": "the_aether:well"
+  "type": "the_aether:well",
+  "spawn_overrides": {},
+  "biomes": []
 }

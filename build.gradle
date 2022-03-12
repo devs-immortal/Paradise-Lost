@@ -1,11 +1,14 @@
 buildscript {
     dependencies {
-        classpath "de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"
+        classpath "com.github.CDAGaming.CrowdinTranslate:crowdin-translate:${project.crowdin_translate_version}"
     }
     repositories {
         maven {
             name = 'CrowdinTranslate source'
             url = "https://minecraft.guntram.de/maven/"
+        }
+        maven {
+            url = "https://jitpack.io"
         }
     }
 }
@@ -90,11 +93,11 @@ dependencies {
     // Libraries
     modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:${project.entity_attributes_version}"))
 
-    modImplementation(include("de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}"))
+    modImplementation(include("com.github.CDAGaming.CrowdinTranslate:crowdin-translate:${project.crowdin_translate_version}"))
 
-    modImplementation(include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_version}"))
+    modImplementation(include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_version}"))
 
-    modImplementation(include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cardinal_version}"))
+    modImplementation(include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cardinal_version}"))
 
     // Most important of the libraries :smug:
     modImplementation(include("com.github.devs-immortal:Incubus-Core:${project.incubus_version}"))

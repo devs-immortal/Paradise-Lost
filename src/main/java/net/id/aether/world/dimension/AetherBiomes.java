@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
@@ -41,13 +42,13 @@ public final class AetherBiomes {
     public static final RegistryKey<Biome> CONTINENTAL_PLATEAU_KEY = register("continental_plateau");
     public static final RegistryKey<Biome> HIGHLANDS_SHIELD_KEY = register("highlands_shield");
     
-    public static final Biome HIGHLANDS_PLAINS;
-    public static final Biome HIGHLANDS_FOREST;
-    public static final Biome HIGHLANDS_THICKET;
-    public static final Biome WISTERIA_WOODS;
-    public static final Biome AUTUMNAL_TUNDRA;
-    public static final Biome CONTINENTAL_PLATEAU;
-    public static final Biome HIGHLANDS_SHIELD;
+    public static final RegistryEntry<Biome> HIGHLANDS_PLAINS;
+    public static final RegistryEntry<Biome> HIGHLANDS_FOREST;
+    public static final RegistryEntry<Biome> HIGHLANDS_THICKET;
+    public static final RegistryEntry<Biome> WISTERIA_WOODS;
+    public static final RegistryEntry<Biome> AUTUMNAL_TUNDRA;
+    public static final RegistryEntry<Biome> CONTINENTAL_PLATEAU;
+    public static final RegistryEntry<Biome> HIGHLANDS_SHIELD;
     
     static{
         HIGHLANDS_PLAINS = register(HIGHLANDS_PLAINS_KEY, createHighlandsPlains());
@@ -65,8 +66,8 @@ public final class AetherBiomes {
         return RegistryKey.of(Registry.BIOME_KEY, locate(name));
     }
     
-    private static Biome register(RegistryKey<Biome> key, Biome biome) {
-        return BuiltinRegistries.set(BuiltinRegistries.BIOME, key, biome);
+    private static RegistryEntry<Biome> register(RegistryKey<Biome> key, Biome biome) {
+        return BuiltinRegistries.add(BuiltinRegistries.BIOME, key, biome);
     }
     
     /**
@@ -115,7 +116,7 @@ public final class AetherBiomes {
      * @param features The features to use
      * @return The new {@link GenerationSettings} instance
      */
-    private static GenerationSettings createGenerationSettings(Map<GenerationStep.Carver, List<ConfiguredCarver<?>>> carvers, Map<GenerationStep.Feature, List<PlacedFeature>> features) {
+    private static GenerationSettings createGenerationSettings(Map<GenerationStep.Carver, List<RegistryEntry<? extends ConfiguredCarver<?>>>> carvers, Map<GenerationStep.Feature, List<RegistryEntry<PlacedFeature>>> features) {
         var builder = new GenerationSettings.Builder();
         for (var step : GenerationStep.Carver.values()) {
             for (var carver : carvers.getOrDefault(step, List.of())) {
@@ -190,7 +191,7 @@ public final class AetherBiomes {
      *
      * @return The default Aether carvers
      */
-    private static Map<GenerationStep.Carver, List<ConfiguredCarver<?>>> getAetherCarvers() {
+    private static Map<GenerationStep.Carver, List<RegistryEntry<? extends ConfiguredCarver<?>>>> getAetherCarvers() {
         return Map.of(GenerationStep.Carver.AIR, List.of(
             ConfiguredCarvers.CAVE,
             AetherCarvers.LARGE_COLD_AERCLOUD_CARVER,
@@ -210,7 +211,7 @@ public final class AetherBiomes {
      * 
      * @return A map of features suitable for use with {@link #createGenerationSettings}
      */
-    private static Map<GenerationStep.Feature, List<PlacedFeature>> getStandardAetherFeatures() {
+    private static Map<GenerationStep.Feature, List<RegistryEntry<PlacedFeature>>> getStandardAetherFeatures() {
         return Map.of(
             GenerationStep.Feature.UNDERGROUND_ORES, List.of(
                 ORE_AMBROSIUM,

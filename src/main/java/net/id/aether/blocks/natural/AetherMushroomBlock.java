@@ -6,6 +6,7 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -19,7 +20,7 @@ public class AetherMushroomBlock extends MushroomPlantBlock {
 
     private final HangType type;
 
-    public AetherMushroomBlock(Settings settings, Supplier<ConfiguredFeature<?, ?>> feature, HangType type) {
+    public AetherMushroomBlock(Settings settings, Supplier<RegistryEntry<? extends ConfiguredFeature<?, ?>>> feature, HangType type) {
         super(settings, feature);
         this.type = type;
     }

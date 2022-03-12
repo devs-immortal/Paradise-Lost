@@ -49,7 +49,7 @@ public class FreezeAetherTopLayerFeature extends Feature<DefaultFeatureConfig> {
 
                 floor.set(surface).move(Direction.DOWN, 1);
 
-                Biome biome = world.getBiome(surface);
+                Biome biome = world.getBiome(surface).value();
                 if (biome.canSetIce(world, floor, false)) {
                     world.setBlockState(floor, Blocks.ICE.getDefaultState(), Block.NOTIFY_LISTENERS);
                 }

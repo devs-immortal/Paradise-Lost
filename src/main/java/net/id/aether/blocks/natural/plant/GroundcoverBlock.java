@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
@@ -24,7 +25,7 @@ public class GroundcoverBlock extends AetherBrushBlock {
         this.slowdown = slowdown;
     }
 
-    public GroundcoverBlock(Settings settings, Tag<Block> validFloors, boolean override, double slowdown) {
+    public GroundcoverBlock(Settings settings, TagKey<Block> validFloors, boolean override, double slowdown) {
         super(settings, validFloors, override);
         this.slowdown = slowdown;
     }

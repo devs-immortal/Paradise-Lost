@@ -1,7 +1,6 @@
-# Fixes
+# Changes
 
-- Resolved an incompatibility with Spectrum
-- Optimized Image file sizes
+- Ported to 1.18.2
 
 # Advisory: 1.17 -> 1.18 World Migration
 

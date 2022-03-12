@@ -1,4 +1,6 @@
 {
   "config": {},
-  "type": "the_aether:skyroot_tower"
+  "type": "the_aether:skyroot_tower",
+  "spawn_overrides": {},
+  "biomes": []
 }

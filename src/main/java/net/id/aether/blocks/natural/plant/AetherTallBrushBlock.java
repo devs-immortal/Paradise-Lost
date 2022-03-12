@@ -5,20 +5,21 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 
 public class AetherTallBrushBlock extends TallPlantBlock {
 
-    private final Tag<Block> validFloors;
+    private final TagKey<Block> validFloors;
     private final boolean override;
 
     public AetherTallBrushBlock(Settings settings) {
         this(settings, AetherBlockTags.GENERIC_VALID_GROUND, false);
     }
 
-    public AetherTallBrushBlock(Settings settings, Tag<Block> validFloors, boolean override) {
+    public AetherTallBrushBlock(Settings settings, TagKey<Block> validFloors, boolean override) {
         super(settings);
         this.validFloors = validFloors;
         this.override = override;

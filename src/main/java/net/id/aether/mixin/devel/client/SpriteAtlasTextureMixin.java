@@ -23,7 +23,7 @@ public abstract class SpriteAtlasTextureMixin{
         method = "method_18160",
         at = @At(
             value = "INVOKE",
-            target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+            target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
             ordinal = 0
         )
     )
@@ -37,7 +37,7 @@ public abstract class SpriteAtlasTextureMixin{
         method = "method_18160",
         at = @At(
             value = "INVOKE",
-            target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+            target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
             ordinal = 1
         )
     )
@@ -51,7 +51,7 @@ public abstract class SpriteAtlasTextureMixin{
         method = "loadSprite",
         at = @At(
             value = "INVOKE",
-            target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+            target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
             ordinal = 0
         )
     )
@@ -66,7 +66,7 @@ public abstract class SpriteAtlasTextureMixin{
         method = "loadSprite",
         at = @At(
             value = "INVOKE",
-            target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+            target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
             ordinal = 1
         )
     )

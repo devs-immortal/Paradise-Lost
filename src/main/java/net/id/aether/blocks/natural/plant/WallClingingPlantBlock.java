@@ -8,6 +8,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
@@ -16,9 +17,9 @@ import org.jetbrains.annotations.Nullable;
 public class WallClingingPlantBlock extends PlantBlock {
 
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-    private final @Nullable Tag<Block> clingableBlocks;
+    private final @Nullable TagKey<Block> clingableBlocks;
 
-    public WallClingingPlantBlock(Settings settings, @Nullable Tag<Block> clingableBlocks) {
+    public WallClingingPlantBlock(Settings settings, @Nullable TagKey<Block> clingableBlocks) {
         super(settings);
         this.clingableBlocks = clingableBlocks;
     }

@@ -1,18 +1,22 @@
 package net.id.aether.tag;
 
-import net.fabricmc.fabric.api.tag.TagFactory;
 import net.id.aether.Aether;
 import net.minecraft.item.Item;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
+import net.minecraft.util.registry.Registry;
 
 public class AetherItemTags {
-    public static final Tag<Item> GROWS_SWETS = TagFactory.ITEM.create(Aether.locate("grows_swets"));
-    public static final Tag<Item> SWET_TRANSFORMERS_BLUE = TagFactory.ITEM.create(Aether.locate("swet_transformers/blue"));
-    public static final Tag<Item> SWET_TRANSFORMERS_GOLDEN = TagFactory.ITEM.create(Aether.locate("swet_transformers/golden"));
-    public static final Tag<Item> SWET_TRANSFORMERS_PURPLE = TagFactory.ITEM.create(Aether.locate("swet_transformers/purple"));
-    public static final Tag<Item> SWET_TRANSFORMERS_VERMILION = TagFactory.ITEM.create(Aether.locate("swet_transformers/vermilion"));
-    public static final Tag<Item> PARACHUTES = TagFactory.ITEM.create(Aether.locate("parachutes"));
-    public static final Tag<Item> MOA_TEMPTABLES = TagFactory.ITEM.create(Aether.locate("entity/moa_temptables"));
-    public static final Tag<Item> RIGHTEOUS_WEAPONS = TagFactory.ITEM.create(Aether.locate("tool/righteous_weapons"));
-    public static final Tag<Item> SACRED_WEAPONS = TagFactory.ITEM.create(Aether.locate("tool/sacred_weapons"));
+    public static final TagKey<Item> GROWS_SWETS = register("grows_swets");
+    public static final TagKey<Item> SWET_TRANSFORMERS_BLUE = register("swet_transformers/blue");
+    public static final TagKey<Item> SWET_TRANSFORMERS_GOLDEN = register("swet_transformers/golden");
+    public static final TagKey<Item> SWET_TRANSFORMERS_PURPLE = register("swet_transformers/purple");
+    public static final TagKey<Item> SWET_TRANSFORMERS_VERMILION = register("swet_transformers/vermilion");
+    public static final TagKey<Item> PARACHUTES = register("parachutes");
+    public static final TagKey<Item> MOA_TEMPTABLES = register("entity/moa_temptables");
+    public static final TagKey<Item> RIGHTEOUS_WEAPONS = register("tool/righteous_weapons");
+    public static final TagKey<Item> SACRED_WEAPONS = register("tool/sacred_weapons");
+
+    private static TagKey<Item> register(String id) {
+        return TagKey.of(Registry.ITEM_KEY, Aether.locate(id));
+    }
 }

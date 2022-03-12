@@ -1,4 +1,6 @@
 {
   "config": {},
-  "type": "the_aether:orange_ruin"
+  "type": "the_aether:orange_ruin",
+  "spawn_overrides": {},
+  "biomes": []
 }
