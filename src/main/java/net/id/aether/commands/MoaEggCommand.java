@@ -40,7 +40,8 @@ public class MoaEggCommand {
     private static int execute(ServerCommandSource source, Collection<ServerPlayerEntity> targets, Identifier raceId, boolean baby) {
         var race = MoaAPI.getRace(raceId);
 
-        if (race == MoaAPI.FALLBACK_MOA) {
+        // If the player intends to get the fallback, let them get it. Otherwise, fail.
+        if (race == MoaAPI.FALLBACK_MOA && raceId.compareTo(MoaAPI.FALLBACK_MOA.getId()) != 0) {
             source.sendError(new TranslatableText("commands.the_aether.moaegg.failure", raceId.toString()));
         } else {
             ItemStack template = MoaGenes.getEggForCommand(race, source.getWorld(), baby);
@@ -57,7 +58,6 @@ public class MoaEggCommand {
     }
 
     public static class RaceSuggester implements SuggestionProvider<ServerCommandSource> {
-
         @Override
         public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) {
             MoaAPI.getRegisteredRaces().forEachRemaining(race -> builder.suggest(race.getId().toString()));
