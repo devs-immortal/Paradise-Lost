@@ -1,0 +1,51 @@
+name: Accessibility
+description: Report accessibility issues and / or suggestions
+title: "Accessibility: "
+labels: [Feature, Accessibility]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us improve our mod!
+        Make sure to leave a helpful title.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Let us know what is causing you trouble / what may cause someone trouble.
+      placeholder: ex. It's hard to ...
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        If you'd like to have a real-time conversation for more detail or privacy, we recommend joining our [discord server](https://discord.com/invite/wmMa47n).
+        It's not required, but a conversation is easier to hold there than on Github.
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggestions (Optional)
+      description: Have any suggestions for how we can improve the problem?
+      placeholder: ex. It would be much easier if there was ...
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: Mod Version
+      description: What version of our mod are you running?
+      placeholder: Beta x.x.x
+    validations:
+      required: true
+  - type: textarea
+    id: other
+    attributes:
+      label: Additional Information
+      description: Is there anything else we should know?
+      placeholder: ex. I'm using several other mods ...
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        Have any relevant screenshots or other media? Share them!
