@@ -69,7 +69,7 @@ public class MoaGenes implements AutoSyncedComponent {
     public void initMoa(@NotNull MoaEntity moa) {
         World world = moa.world;
         Random random = moa.getRandom();
-        race = MoaAPI.getMoaForBiome(world.getBiome(moa.getBlockPos()).getKey().get(), random);
+        race = MoaAPI.getMoaFromSpawning(world.getBiome(moa.getBlockPos()).getKey().get(), random);
         affinity = race.defaultAffinity();
 
         for (MoaAttributes attribute : MoaAttributes.values()) {
@@ -79,7 +79,7 @@ public class MoaGenes implements AutoSyncedComponent {
     }
 
     public ItemStack getEggForBreeding(MoaGenes otherParent, World world, BlockPos pos) {
-        var childRace = MoaAPI.getMoaForBreeding(this, otherParent, world, pos);
+        var childRace = MoaAPI.getMoaFromBreeding(this, otherParent, world, pos);
 
         ItemStack stack = new ItemStack(AetherItems.MOA_EGG);
         NbtCompound nbt = stack.getOrCreateSubNbt("genes");
@@ -125,9 +125,6 @@ public class MoaGenes implements AutoSyncedComponent {
     }
 
     public Identifier getTexture() {
-        if (this.race == FALLBACK_MOA){
-            return Aether.locate("textures/entity/moa/highlands_blue.png");
-        }
         Identifier id = this.race.getId();
         String name = id.getPath();
         String namespace = id.getNamespace();
