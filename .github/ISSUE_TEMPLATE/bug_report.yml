@@ -9,34 +9,27 @@ body:
         Thanks for helping us improve our mod!
         Make sure to leave a helpful title.
         If your issue crashed your game, instead issue a [crash report](https://github.com/devs-immortal/Paradise-Lost/issues/new?assignees=&labels=Bug&template=crash-report.yml&title=Crash%3A+).
+        If your issue is related to accessibility, instead issue an an [accessibility report](https://github.com/devs-immortal/Paradise-Lost/issues/new?assignees=&labels=Feature&template=accessibility_report.yml&title=Accessibility%3A+).
   - type: textarea
     id: what-happened
     attributes:
       label: What happened?
       description: Also tell us what you expected to happen and how to replicate it
       value: |
-        A bug!
+        A bug happened!
 
         To replicate:
-        1. First, I ...
-        2. Next, ...
-        3. Finally, ...
+        1. First,
+        2. Next,
+        3. Finally,
     validations:
       required: true
-  - type: dropdown
+  - type: input
     id: version
     attributes:
       label: Mod Version
       description: What version of our mod are you running?
-      options:
-        # Figure out how to make this automatic.
-        - "1.6.5 - 1.18"
-        - "1.6.5 - 1.17"
-        - "1.6.3"
-        - "1.6.x"
-        - "Older"
-        - "Unsure"
-        - "Dev"
+      placeholder: Beta x.x.x
     validations:
       required: true
   - type: input
@@ -53,7 +46,7 @@ body:
       label: Relevant log output
       description: |
         Please copy and paste the logs from the event of the bug. The latest log can be found in `.minecraft/logs/latest.log.`
-      render: shell
+      render: Shell
     validations:
       required: false
   - type: textarea

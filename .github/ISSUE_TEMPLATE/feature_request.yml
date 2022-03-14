@@ -8,11 +8,12 @@ body:
       value: |
         Thanks for helping us improve our mod!
         Make sure to leave a helpful title.
+        If your request is for an accessibility feature, instead issue an [accessibility report](https://github.com/devs-immortal/Paradise-Lost/issues/new?assignees=&labels=Feature&template=accessibility_report.yml&title=Accessibility%3A+).
   - type: textarea
     id: problem
     attributes:
       label: Problem (Optional)
-      description: "If your feature is related to a problem, let us know:"
+      description: If your feature is related to a problem, let us know.
       placeholder: ex. I'm always frustrated when...
     validations:
       required: false
@@ -36,20 +37,12 @@ body:
       placeholder: ex. You could also...
     validations:
       required: false
-  - type: dropdown
+  - type: input
     id: version
     attributes:
-      label: Version
+      label: Mod Version
       description: What version of our mod are you running?
-      options:
-        # Figure out how to make this automatic.
-        - "1.6.5 - 1.18"
-        - "1.6.5 - 1.17"
-        - "1.6.3"
-        - "1.6.x"
-        - "Older"
-        - "Unsure"
-        - "Dev"
+      placeholder: Beta x.x.x
     validations:
       required: true
   - type: textarea
