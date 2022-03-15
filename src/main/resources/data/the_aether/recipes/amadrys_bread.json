@@ -1,16 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "##",
-    "##"
+    "BBB"
   ],
   "key": {
-    "#": {
-      "item": "the_aether:swedroot"
+    "B": {
+      "item": "the_aether:amadrys_bushel"
     }
   },
   "result": {
-    "item": "the_aether:packed_swedroot",
+    "item": "the_aether:amadrys_bread",
     "count": 1
   }
 }
