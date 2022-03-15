@@ -1,7 +1,11 @@
 package net.id.aether.world.feature.structure.generator;
 
 import net.id.aether.Aether;
+import net.id.aether.blocks.AetherBlocks;
+import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.world.feature.structure.AetherStructureFeatures;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
@@ -26,7 +30,6 @@ public class SkyrootTowerGenerator {
     }
 
     public static class Piece extends SimpleStructurePiece {
-        private boolean shifted = false;
 
         public Piece(StructureManager manager, Identifier template, BlockPos pos, BlockRotation rotation) {
             super(AetherStructureFeatures.SKYROOT_TOWER_PIECE, 0, manager, template, template.toString(), createPlacementData(rotation), pos);
@@ -53,15 +56,39 @@ public class SkyrootTowerGenerator {
         }
 
         public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
-            //if (this.pos.getY() > 2) {
-            if (!shifted) {
-                this.pos = this.pos.down(1);
-                shifted = true;
+            // Fill in pillars
+            fillSupport(world, pos.down().north(2).east(2), AetherBlocks.SKYROOT_LOG.getDefaultState());
+            fillSupport(world, pos.down().north(2).east(-2), AetherBlocks.SKYROOT_LOG.getDefaultState());
+            fillSupport(world, pos.down().north(-2).east(2), AetherBlocks.SKYROOT_LOG.getDefaultState());
+            fillSupport(world, pos.down().north(-2).east(-2), AetherBlocks.SKYROOT_LOG.getDefaultState());
+            fillSupport(world, pos.down(), AetherBlocks.STRIPPED_SKYROOT_LOG.getDefaultState());
+            // Add path blocks
+            for (int x = -2; x <= 2; x++) {
+                for (int z = -2; z <= 2; z++) {
+                    if ((Math.abs(x) < 2 && Math.abs(z) < 2) || random.nextBoolean())
+                        pathGround(world, new BlockPos(pos.getX()+x, pos.getY()+1, pos.getZ()+z));
+                }
             }
             boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
             super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
-            //}
-            //return false;
+        }
+
+        private void fillSupport(StructureWorldAccess world, BlockPos pillarBottom, BlockState block) {
+            int offset = 0;
+            while (offset < 7 && !world.getBlockState(pillarBottom.down(offset)).isFullCube(world, pillarBottom.down(offset))) {
+                world.setBlockState(pillarBottom.down(offset), block, 0);
+                offset++;
+            }
+        }
+
+        private void pathGround(StructureWorldAccess world, BlockPos pos) {
+            int offset = 0;
+            while (offset < 3 && world.getBlockState(pos.down(offset)).isAir()) {
+                offset++;
+            }
+            if (world.getBlockState(pos.down(offset)).isIn(AetherBlockTags.DIRT_BLOCKS) && world.getBlockState(pos.down(offset-1)).isAir()) {
+                world.setBlockState(pos.down(offset), AetherBlocks.AETHER_DIRT_PATH.getDefaultState(), 0);
+            }
         }
     }
 }

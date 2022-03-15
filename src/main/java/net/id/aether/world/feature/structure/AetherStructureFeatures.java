@@ -21,6 +21,7 @@ public class AetherStructureFeatures {
         register("well", new WellFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
         register("skyroot_tower", new SkyrootTowerFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
         register("orange_ruin", new OrangeRuinFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
+        
     }
 
     private static <T extends FeatureConfig> void register(String id, StructureFeature<T> structure, GenerationStep.Feature genStep) {

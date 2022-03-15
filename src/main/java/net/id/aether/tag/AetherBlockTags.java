@@ -6,6 +6,9 @@ import net.minecraft.tag.TagKey;
 import net.minecraft.util.registry.Registry;
 
 public class AetherBlockTags {
+
+    public static final TagKey<Block> DIRT_BLOCKS = register("aether_dirt_blocks");
+
     //Gravitite
     public static final TagKey<Block> FAST_FLOATERS = register("fast_floaters");
     public static final TagKey<Block> NON_FLOATERS = register("non_floaters");
