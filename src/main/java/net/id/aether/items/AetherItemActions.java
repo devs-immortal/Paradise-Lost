@@ -12,6 +12,7 @@ class AetherItemActions {
     protected static final RegistryQueue.Action<ItemConvertible> compostable30 = compostable(0.3f);
     protected static final RegistryQueue.Action<ItemConvertible> compostable50 = compostable(0.5f);
     protected static final RegistryQueue.Action<ItemConvertible> compostable65 = compostable(0.65f);
+    protected static final RegistryQueue.Action<ItemConvertible> compostable85 = compostable(0.85f);
     protected static final RegistryQueue.Action<ItemConvertible> compostable100 = compostable(1f);
 
     protected static final RegistryQueue.Action<ItemConvertible> emptiableBucketBehavior = (id, item) -> DispenserBlock.registerBehavior(item, AetherDispenserBehaviors.emptiableBucket);
