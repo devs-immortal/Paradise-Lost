@@ -18,6 +18,7 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -65,7 +66,7 @@ public class FruitingLeavesBlock extends AetherLeavesBlock {
                         while (!world.isAir(pos.down(dropBlocks + 1)) && dropBlocks < 16 && world.getBlockState(pos.down(dropBlocks)).isOf(this)) {
                             dropBlocks++;
                         }
-                        world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() - (dropBlocks + 0.25), pos.getZ() + 0.5, new ItemStack(fruit.get()), 0, 0, 0));
+                        ItemScatterer.spawn(world, pos.getX() + 0.5, pos.getY() - (dropBlocks + 0.25), pos.getZ() + 0.5, new ItemStack(fruit.get()));
                         world.playSound(null, pos, SoundEvents.BLOCK_CANDLE_BREAK, SoundCategory.BLOCKS, 1F, 1F);
                     }
                     world.setBlockState(pos, getDefaultState().with(DISTANCE, state.get(DISTANCE)));
