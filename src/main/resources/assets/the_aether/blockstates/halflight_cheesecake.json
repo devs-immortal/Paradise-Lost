@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "bites=0": {
+      "model": "the_aether:block/halflight_cheesecake"
+    },
+    "bites=1": {
+      "model": "the_aether:block/halflight_cheesecake_slice1"
+    },
+    "bites=2": {
+      "model": "the_aether:block/halflight_cheesecake_slice2"
+    },
+    "bites=3": {
+      "model": "the_aether:block/halflight_cheesecake_slice3"
+    }
+  }
+}
