@@ -14,6 +14,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
+import net.minecraft.util.math.floatprovider.UniformFloatProvider;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
@@ -199,96 +200,104 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
         private static final TreeFeatureConfig ROSE_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), ROSE_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(5, 9),
-                        UniformIntProvider.create(1, 3), UniformIntProvider.create(2, 5), UniformIntProvider.create(1, 3),
-                        ConstantFloatProvider.create(0.334F),
-                        3, 3, 2
+                        UniformIntProvider.create(3, 4),
+                        UniformIntProvider.create(3, 4), // branch count
+                        UniformFloatProvider.create(1.5F, 3F), // branch height
+                        UniformFloatProvider.create(6F, 10F), // branch width
+                        4, 3, 2
                 ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 4), UniformIntProvider.create(0, 1)),
+                new WisteriaFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0)),
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
         private static final TreeFeatureConfig LAVENDER_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), LAVENDER_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(5, 9),
-                        UniformIntProvider.create(1, 3), UniformIntProvider.create(2, 5), UniformIntProvider.create(1, 3),
-                        ConstantFloatProvider.create(0.334F),
-                        3, 3, 2
+                        UniformIntProvider.create(3, 4),
+                        UniformIntProvider.create(3, 4), // branch count
+                        UniformFloatProvider.create(1.5F, 3F), // branch height
+                        UniformFloatProvider.create(6F, 10F), // branch width
+                        4, 3, 2
                 ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 4), UniformIntProvider.create(0, 1)),
+                new WisteriaFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0)),
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
         private static final TreeFeatureConfig FROST_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), FROST_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(5, 9),
-                        UniformIntProvider.create(1, 3), UniformIntProvider.create(2, 5), UniformIntProvider.create(1, 3),
-                        ConstantFloatProvider.create(0.334F),
-                        3, 3, 2
+                        UniformIntProvider.create(3, 4),
+                        UniformIntProvider.create(3, 4), // branch count
+                        UniformFloatProvider.create(1.5F, 3F), // branch height
+                        UniformFloatProvider.create(6F, 10F), // branch width
+                        4, 3, 2
                 ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 4), UniformIntProvider.create(0, 1)),
+                new WisteriaFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0)),
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
         private static final TreeFeatureConfig BOREAL_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), BOREAL_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(7, 11),
-                        UniformIntProvider.create(2, 4), UniformIntProvider.create(2, 5), UniformIntProvider.create(2, 4),
-                        ConstantFloatProvider.create(0.334F),
-                        4, 5, 2
+                        UniformIntProvider.create(3, 4),
+                        UniformIntProvider.create(3, 4), // branch count
+                        UniformFloatProvider.create(1.5F, 3F), // branch height
+                        UniformFloatProvider.create(6F, 10F), // branch width
+                        4, 3, 2
                 ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 5), UniformIntProvider.create(0, 1)),
+                new WisteriaFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0)),
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
         private static final TreeFeatureConfig FANCY_ROSE_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), ROSE_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(10, 17),
-                        UniformIntProvider.create(3, 7), UniformIntProvider.create(3, 6), UniformIntProvider.create(3, 7),
-                        ConstantFloatProvider.create(0.334F),
-                        6, 5, 3
+                        UniformIntProvider.create(3, 4),
+                        UniformIntProvider.create(3, 4), // branch count
+                        UniformFloatProvider.create(1.5F, 3F), // branch height
+                        UniformFloatProvider.create(6F, 10F), // branch width
+                        4, 3, 2
                 ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 5), UniformIntProvider.create(0, 1)),
+                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 5), ConstantIntProvider.create(0)),
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
         private static final TreeFeatureConfig FANCY_LAVENDER_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), LAVENDER_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(10, 17),
-                        UniformIntProvider.create(3, 7), UniformIntProvider.create(3, 6), UniformIntProvider.create(3, 7),
-                        ConstantFloatProvider.create(0.334F),
-                        6, 5, 3
+                        UniformIntProvider.create(3, 4),
+                        UniformIntProvider.create(3, 4), // branch count
+                        UniformFloatProvider.create(1.5F, 3F), // branch height
+                        UniformFloatProvider.create(6F, 10F), // branch width
+                        4, 3, 2
                 ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 5), UniformIntProvider.create(0, 1)),
+                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 5), ConstantIntProvider.create(0)),
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
         private static final TreeFeatureConfig FANCY_FROST_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), FROST_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(10, 17),
-                        UniformIntProvider.create(3, 7), UniformIntProvider.create(3, 6), UniformIntProvider.create(3, 7),
-                        ConstantFloatProvider.create(0.334F),
-                        6, 5, 3
+                        UniformIntProvider.create(3, 4),
+                        UniformIntProvider.create(3, 4), // branch count
+                        UniformFloatProvider.create(1.5F, 3F), // branch height
+                        UniformFloatProvider.create(6F, 10F), // branch width
+                        4, 3, 2
                 ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 5), UniformIntProvider.create(0, 1)),
+                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 5), ConstantIntProvider.create(0)),
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
         private static final TreeFeatureConfig FANCY_BOREAL_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), BOREAL_WISTERIA_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(13, 21),
-                        UniformIntProvider.create(3, 9), UniformIntProvider.create(4, 10), UniformIntProvider.create(3, 9),
-                        ConstantFloatProvider.create(0.334F),
-                        7, 6, 3
+                        UniformIntProvider.create(3, 4),
+                        UniformIntProvider.create(3, 4), // branch count
+                        UniformFloatProvider.create(1.5F, 3F), // branch height
+                        UniformFloatProvider.create(6F, 10F), // branch width
+                        4, 3, 2
                 ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 6), UniformIntProvider.create(0, 1)),
+                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 6), ConstantIntProvider.create(0)),
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
