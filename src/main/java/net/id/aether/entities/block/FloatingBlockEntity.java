@@ -6,25 +6,22 @@ import net.id.aether.entities.util.PostTickEntity;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MovementType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class FloatingBlockEntity extends BlockLikeEntity implements PostTickEntity {
-    private Supplier<Boolean> dropState = () -> false;
+    private Supplier<Boolean> dropState = () -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this);
     private boolean dropping = false;
-    private BiConsumer<Float, Boolean> onEndFloating;
+    private BiConsumer<Float, Boolean> onEndFloating = (f, b) -> {};
     public float lastYVelocity = 0;
-
 
     public FloatingBlockEntity(EntityType<? extends BlockLikeEntity> entityType, World world) {
         super(entityType, world);
-        this.setOnEndFloating((impact, landed) -> {});
-        this.setDropState(() -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this));
     }
 
     public FloatingBlockEntity(World world, double x, double y, double z, BlockState floatingBlockState) {
@@ -51,14 +48,12 @@ public class FloatingBlockEntity extends BlockLikeEntity implements PostTickEnti
                 this.setVelocity(this.getVelocity().add(0.0D, -0.03D, 0.0D));
             }
         }
-
-        this.move(MovementType.SELF, this.getVelocity());
     }
 
     @Override
     public boolean shouldCease(double impact) {
         return super.shouldCease(impact) ||
-                (this.isDropping() || this.getVelocity().getY() == 0) && this.isOnGround();
+                (this.isOnGround() && (this.isDropping() || this.getVelocity().getY() == 0));
     }
 
     public Supplier<Boolean> getDropState() {
@@ -116,5 +111,13 @@ public class FloatingBlockEntity extends BlockLikeEntity implements PostTickEnti
 
     public boolean isFastFloater() {
         return this.getBlockState().isIn(AetherBlockTags.FAST_FLOATERS) && !this.partOfSet;
+    }
+
+    @Override
+    public void alignWith(BlockLikeEntity other, Vec3i offset) {
+        super.alignWith(other, offset);
+        if (other instanceof FloatingBlockEntity fbe) {
+            this.setDropping(fbe.isDropping());
+        }
     }
 }
