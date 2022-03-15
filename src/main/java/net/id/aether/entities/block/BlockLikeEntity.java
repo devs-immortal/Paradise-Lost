@@ -2,12 +2,14 @@ package net.id.aether.entities.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -105,7 +107,7 @@ public class BlockLikeEntity extends Entity {
         this.setPosition(getX(), getY(), getZ());
     }
 
-    public void markPartOfStructure() {
+    public void markPartOfSet() {
         partOfSet = true;
     }
 
@@ -179,17 +181,17 @@ public class BlockLikeEntity extends Entity {
             }
         }
 
-        if ((!this.verticalCollision || this.onGround) && !shouldSolidify) {
-            if (!this.world.isClient && (blockPos.getY() < this.world.getBottomY() || blockPos.getY() > this.world.getTopY())) {
-                if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-                    Block.dropStacks(this.blockState, this.world, this.getBlockPos());
-                }
-                this.discard();
-            }
-            return false;
+        if ((this.verticalCollision && !this.onGround) || shouldSolidify) {
+            return true;
         }
 
-        return true;
+        if (blockPos.getY() < this.world.getBottomY() || blockPos.getY() > this.world.getTopY()) {
+            if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+                Block.dropStacks(this.blockState, this.world, this.getBlockPos());
+            }
+            this.discard();
+        }
+        return false;
     }
 
     public void postTick() {
@@ -214,6 +216,8 @@ public class BlockLikeEntity extends Entity {
         }
 
         this.postTickMovement();
+
+        this.move(MovementType.SELF, this.getVelocity());
 
         if (!FallingBlock.canFallThrough(this.blockState)) {
             List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0)));
@@ -394,5 +398,12 @@ public class BlockLikeEntity extends Entity {
         double f = packet.getZ();
         this.setPosition(d, e + (double) ((1.0F - this.getHeight()) / 2.0F), f);
         this.setOrigin(this.getBlockPos());
+    }
+
+    public void alignWith(BlockLikeEntity other, Vec3i offset) {
+        if (this == other) return;
+        Vec3d newPos = other.getPos().add(Vec3d.of(offset));
+        this.setPos(newPos.x, newPos.y, newPos.z);
+        this.setVelocity(other.getVelocity());
     }
 }
