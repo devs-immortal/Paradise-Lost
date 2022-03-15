@@ -2,7 +2,6 @@ package net.id.aether.entities.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.*;
