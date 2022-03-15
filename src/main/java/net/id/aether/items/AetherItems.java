@@ -220,7 +220,9 @@ public class AetherItems {
     public static final Item ORANGE = add("orange", new Item(food(AetherFoodComponent.ORANGE)), compostable65);
     public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(AetherFoodComponent.WHITE_APPLE)), compostable(0f));
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(AetherBlocks.AMADRYS, food(AetherFoodComponent.GENERIC_WORSE)), compostable30);
-    public static final AliasedBlockItem SWETROOT = add("swetroot", new AliasedBlockItem(AetherBlocks.SWETROOT, food(AetherFoodComponent.GENERIC)), compostable30);
+    public static final Item AMADRYS_BREAD = add("amadrys_bread", new Item(food(AetherFoodComponent.AMADRYS_BREAD)));
+    public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(AetherFoodComponent.AMADRYS_BREAD_GLAZED)));
+    public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(AetherBlocks.SWEDROOT, food(AetherFoodComponent.GENERIC)), compostable30);
     public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(AetherBlocks.FLAX, food()), compostable30);
     public static final Item BLUE_GUMMY_SWET = add("blue_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
     public static final Item GOLDEN_GUMMY_SWET = add("golden_gummy_swet", new Item(food(AetherFoodComponent.GUMMY_SWET, AetherRarity.AETHER_LOOT)));
@@ -310,6 +312,7 @@ public class AetherItems {
     public static final BlockItem ZANITE_ORE = add("zanite_ore", AetherBlocks.ZANITE_ORE, building_block);
     public static final BlockItem GRAVITITE_ORE = add("gravitite_ore", AetherBlocks.GRAVITITE_ORE, building_block);
     // ore blocks
+    public static final BlockItem AMBROSIUM_BLOCK = add("ambrosium_block", AetherBlocks.AMBROSIUM_BLOCK, building_block);
     public static final BlockItem ZANITE_BLOCK = add("zanite_block", AetherBlocks.ZANITE_BLOCK, building_block);
     public static final BlockItem BLOCK_OF_GRAVITITE = add("block_of_gravitite", AetherBlocks.BLOCK_OF_GRAVITITE, building_block);
     // move this somewhere else
@@ -504,6 +507,10 @@ public class AetherItems {
     public static final BlockItem ROOTCAP = add("rootcap", AetherBlocks.ROOTCAP, decoration(), compostable100);
 
     public static final BlockItem FLAXWEAVE_CUSHION = add("flaxweave_cushion", AetherBlocks.FLAXWEAVE_CUSHION, decoration, fuel(300));
+
+    public static final BlockItem CHEESECAKE = add("halflight_cheesecake", AetherBlocks.CHEESECAKE, food());
+
+    public static final BlockItem AMADRYS_BUNDLE = add("amadrys_bundle", AetherBlocks.AMADRYS_BUNDLE, decoration());
 
     // lights
     public static final BlockItem AMBROSIUM_LANTERN = add("ambrosium_lantern", AetherBlocks.AMBROSIUM_LANTERN, decoration);

@@ -225,6 +225,10 @@
   "block.the_aether.flaxweave_cushion" : "Flaxweave Cushion",
 
   "block.the_aether.blueberry_bush": "Blueberry Bush",
+  
+  "block.the_aether.halflight_cheesecake": "Halflight Cheesecake",
+  
+  "block.the_aether.amadrys_bundle": "Amadrys Bundle",
 
   "block.the_aether.ancient_flower": "Ancient Flower",
   "block.the_aether.ataraxia": "Ataraxia",
@@ -237,6 +241,7 @@
   "block.the_aether.ambrosium_ore": "Ambrosium Ore",
   "block.the_aether.zanite_ore": "Zanite Ore",
   "block.the_aether.gravitite_ore": "Gravitite Ore",
+  "block.the_aether.ambrosium_block": "Block of Ambrosium",
   "block.the_aether.zanite_block": "Block of Zanite",
   "block.the_aether.block_of_gravitite": "Block of Gravitite",
 
@@ -369,6 +374,8 @@
   "item.the_aether.orange": "Orange",
   "item.the_aether.white_apple": "White Apple",
   "item.the_aether.amadrys_bushel": "Amadrys Bushel",
+  "item.the_aether.amadrys_bread": "Amadrys Loaf",
+  "item.the_aether.amadrys_bread_glazed": "Glazed Amadrys Loaf",
   "item.the_aether.swedroot": "Swedroot",
   "item.the_aether.flaxseed" : "Flaxseed",
   "item.the_aether.blue_gummy_swet": "Blue Gummy Swet",
