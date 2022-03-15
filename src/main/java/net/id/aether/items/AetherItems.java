@@ -312,7 +312,7 @@ public class AetherItems {
     public static final BlockItem ZANITE_ORE = add("zanite_ore", AetherBlocks.ZANITE_ORE, building_block);
     public static final BlockItem GRAVITITE_ORE = add("gravitite_ore", AetherBlocks.GRAVITITE_ORE, building_block);
     // ore blocks
-    public static final BlockItem AMBROSIUM_BLOCK = add("ambrosium_block", AetherBlocks.AMBROSIUM_BLOCK, building_block);
+    public static final BlockItem AMBROSIUM_BLOCK = add("ambrosium_block", AetherBlocks.AMBROSIUM_BLOCK, building_block, fuel(5000));
     public static final BlockItem ZANITE_BLOCK = add("zanite_block", AetherBlocks.ZANITE_BLOCK, building_block);
     public static final BlockItem BLOCK_OF_GRAVITITE = add("block_of_gravitite", AetherBlocks.BLOCK_OF_GRAVITITE, building_block);
     // move this somewhere else
