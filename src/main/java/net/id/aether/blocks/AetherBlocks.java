@@ -7,7 +7,9 @@ import net.id.aether.blocks.decorative.AetherDirtPathBlock;
 import net.id.aether.blocks.decorative.AmbrosiumLanternBlock;
 import net.id.aether.blocks.decorative.AmbrosiumTorchBlock;
 import net.id.aether.blocks.decorative.AmbrosiumWallTorchBlock;
+import net.id.aether.blocks.decorative.SixFacingBlock;
 import net.id.aether.blocks.mechanical.FoodBowlBlock;
+import net.id.aether.blocks.mechanical.FourBiteCakeBlock;
 import net.id.aether.blocks.mechanical.IncubatorBlock;
 import net.id.aether.blocks.natural.AetherGrassBlock;
 import net.id.aether.blocks.natural.AetherQuicksoilBlock;
@@ -337,6 +339,11 @@ public class AetherBlocks {
     public static final BlueberryBushBlock BLUEBERRY_BUSH = add("blueberry_bush", new BlueberryBushBlock(of(Material.PLANT).strength(0.2f)
             .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision()), flammablePlant, cutoutRenderLayer);
 
+    public static final FourBiteCakeBlock CHEESECAKE = add("halflight_cheesecake", new FourBiteCakeBlock(Settings.copy(CAKE)));
+
+    public static final SixFacingBlock AMADRYS_BUNDLE = add("amadrys_bundle", new SixFacingBlock(Settings.copy(HAY_BLOCK)));
+
+
     // Flowers
     private static Settings flower() {
         return copy(DANDELION);
@@ -360,6 +367,7 @@ public class AetherBlocks {
     public static final OreBlock AMBROSIUM_ORE = add("ambrosium_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
     public static final OreBlock ZANITE_ORE = add("zanite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
     public static final FloatingBlock GRAVITITE_ORE = add("gravitite_ore", new FloatingBlock(false, of(Material.STONE).requiresTool().strength(5f).sounds(BlockSoundGroup.STONE), UniformIntProvider.create(0, 2)));
+    public static final Block AMBROSIUM_BLOCK = add("ambrosium_block", new Block(of(Material.METAL).strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
     public static final Block ZANITE_BLOCK = add("zanite_block", new Block(of(Material.METAL).strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     public static final FloatingBlock BLOCK_OF_GRAVITITE = add("block_of_gravitite", new FloatingBlock(false, of(Material.METAL).strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
