@@ -3,6 +3,7 @@ package net.id.aether.blocks.natural.tree;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
@@ -14,7 +15,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-public class AetherHangerBlock extends PlantBlock {
+import java.util.Random;
+
+public class AetherHangerBlock extends PlantBlock implements Fertilizable {
     public static final BooleanProperty TIP = BooleanProperty.of("tip");
     protected static final VoxelShape FULL_SHAPE;
     protected static final VoxelShape TIP_SHAPE;
@@ -74,5 +77,21 @@ public class AetherHangerBlock extends PlantBlock {
         } else {
             return FULL_SHAPE;
         }
+    }
+
+    @Override
+    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+        return world.getBlockState(pos.down()).isAir();
+    }
+
+    @Override
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+        return world.getBlockState(pos.down()).isAir();
+    }
+
+    @Override
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        world.setBlockState(pos, this.getDefaultState().with(TIP, false));
+        world.setBlockState(pos.down(), this.getDefaultState());
     }
 }

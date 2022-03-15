@@ -11,6 +11,7 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -58,7 +59,7 @@ public class BloodstoneHUDRenderer {
     }
 
     private static boolean isLookingAtMatchingEntity(MinecraftClient client, BloodstoneCapturedData capturedData) {
-        if (client.crosshairTarget == null || client.crosshairTarget.getType() != HitResult.Type.ENTITY)
+        if (client.crosshairTarget == null || client.crosshairTarget.getType() != HitResult.Type.ENTITY || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity))
             return false;
         return doUUIDMatch((LivingEntity) ((EntityHitResult) client.crosshairTarget).getEntity(), capturedData);
     }

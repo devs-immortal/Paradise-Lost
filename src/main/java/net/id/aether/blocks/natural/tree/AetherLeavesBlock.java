@@ -3,12 +3,10 @@ package net.id.aether.blocks.natural.tree;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.client.rendering.particle.AetherParticles;
 import net.id.aether.entities.hostile.swet.TransformableSwetEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -19,7 +17,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class AetherLeavesBlock extends LeavesBlock {
+public class AetherLeavesBlock extends LeavesBlock implements Fertilizable {
 
     protected final boolean collidable;
     protected int speed = 0;
@@ -105,5 +103,20 @@ public class AetherLeavesBlock extends LeavesBlock {
     @Override
     public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.fullCube();
+    }
+
+    @Override
+    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+        return !getHanger(state).isAir() && world.getBlockState(pos.down()).isAir();
+    }
+
+    @Override
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+        return !getHanger(state).isAir() && world.getBlockState(pos.down()).isAir();
+    }
+
+    @Override
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        world.setBlockState(pos.down(), getHanger(state));
     }
 }
