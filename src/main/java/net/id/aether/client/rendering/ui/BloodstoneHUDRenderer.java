@@ -59,7 +59,7 @@ public class BloodstoneHUDRenderer {
     }
 
     private static boolean isLookingAtMatchingEntity(MinecraftClient client, BloodstoneCapturedData capturedData) {
-        if (client.crosshairTarget == null || client.crosshairTarget.getType() != HitResult.Type.ENTITY)
+        if (client.crosshairTarget == null || client.crosshairTarget.getType() != HitResult.Type.ENTITY || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity))
             return false;
 
         if(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity entity)
