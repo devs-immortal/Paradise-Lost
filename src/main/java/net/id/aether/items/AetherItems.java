@@ -69,8 +69,7 @@ public class AetherItems {
     public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource));
     public static final Item FLAX_THREAD = add("flax_thread", new Item(resource));
     public static final Item FLAXWEAVE = add("flaxweave", new Item(resource));
-    public static final Item GROUND_SWETROOT = add("ground_swetroot", new Item(resource));
-    public static final Item SPROUTING_SWETROOT = add("sprouting_swetroot", new Item(resource));
+    public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource), compostable30);
 
 
     private static Settings tool() {
@@ -296,6 +295,7 @@ public class AetherItems {
     public static final BlockItem COARSE_AETHER_DIRT = add("coarse_aether_dirt", AetherBlocks.COARSE_AETHER_DIRT, building_block);
     public static final BlockItem PERMAFROST = add("permafrost", AetherBlocks.PERMAFROST, building_block);
     public static final BlockItem QUICKSOIL = add("quicksoil", AetherBlocks.QUICKSOIL, building_block);
+    public static final BlockItem PACKED_SWEDROOT = add("packed_swedroot", AetherBlocks.PACKED_SWEDROOT, building_block, compostable85);
     public static final BlockItem COLD_AERCLOUD = add("cold_aercloud", AetherBlocks.COLD_AERCLOUD, building_block);
     public static final BlockItem BLUE_AERCLOUD = add("blue_aercloud", AetherBlocks.BLUE_AERCLOUD, building_block);
     public static final BlockItem PINK_AERCLOUD = add("pink_aercloud", AetherBlocks.PINK_AERCLOUD, building_block);
@@ -473,7 +473,6 @@ public class AetherItems {
     public static final BlockItem WEEPING_CLOUDBURST = add("weeping_cloudburst", AetherBlocks.WEEPING_CLOUDBURST, decoration, compostable30);
     public static final BlockItem MOSS_STAR = add("moss_star", AetherBlocks.MOSS_STAR, decoration, compostable50);
     public static final BlockItem MOSS_BALL = add("moss_ball", AetherBlocks.MOSS_BALL, decoration, compostable30);
-    public static final BlockItem WILD_SWETROOT = add("wild_swetroot", AetherBlocks.WILD_SWETROOT, decoration, compostable30);
 
     public static final BlockItem ANCIENT_FLOWER = add("ancient_flower", AetherBlocks.ANCIENT_FLOWER, decoration, compostable65);
     public static final BlockItem ATARAXIA = add("ataraxia", AetherBlocks.ATARAXIA, decoration, compostable65);
@@ -505,6 +504,8 @@ public class AetherItems {
     public static final BlockItem LICHEN_PILE = add("lichen_pile", AetherBlocks.LICHEN_PILE, decoration, compostable30);
     public static final BlockItem LUCATIEL_LICHEN_PILE = add("lucatiel_lichen_pile", AetherBlocks.LUCATIEL_LICHEN_PILE, decoration, compostable100);
     public static final BlockItem ROOTCAP = add("rootcap", AetherBlocks.ROOTCAP, decoration(), compostable100);
+
+    public static final BlockItem SWEDROOT_SPREAD = add("swedroot_spread", AetherBlocks.SWEDROOT_SPREAD, decoration(), compostable65);
 
     public static final BlockItem FLAXWEAVE_CUSHION = add("flaxweave_cushion", AetherBlocks.FLAXWEAVE_CUSHION, decoration, fuel(300));
 
