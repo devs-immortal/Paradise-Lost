@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-public class FloatingBlockEntity extends BlockLikeEntity implements PostTickEntity {
+public class FloatingBlockEntity extends BlockLikeEntity {
     private Supplier<Boolean> dropState = () -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this);
     private boolean dropping = false;
     private BiConsumer<Float, Boolean> onEndFloating = (f, b) -> {};
@@ -51,9 +51,10 @@ public class FloatingBlockEntity extends BlockLikeEntity implements PostTickEnti
     }
 
     @Override
-    public boolean shouldCease(double impact) {
-        return super.shouldCease(impact) ||
-                (this.isOnGround() && (this.isDropping() || this.getVelocity().getY() == 0));
+    public boolean shouldCease() {
+        return super.shouldCease()
+                || (this.isOnGround() && (this.isDropping() || this.getVelocity().getY() == 0)
+                || (this.verticalCollision && !this.onGround));
     }
 
     public Supplier<Boolean> getDropState() {
