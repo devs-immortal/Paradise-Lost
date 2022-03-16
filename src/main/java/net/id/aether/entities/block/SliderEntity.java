@@ -16,10 +16,9 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     // Move in a circle. This is obviously not the final behavior.
-    // It's also very jerky for reasons I cannot ascertain.
     @Override
     public void postTickMovement() {
-        this.updateVelocity(0.1F, new Vec3d(1D, 0, 0));
+        this.updateVelocity(0.01F, new Vec3d(1D, 0, 0));
         this.setYaw((this.getYaw() + 6F) % 360.0F);
     }
 }
