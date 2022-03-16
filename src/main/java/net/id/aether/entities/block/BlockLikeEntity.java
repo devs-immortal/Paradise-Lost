@@ -3,6 +3,7 @@ package net.id.aether.entities.block;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.blocks.AetherBlocks;
+import net.id.aether.entities.util.PostTickEntity;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -36,12 +37,12 @@ import net.minecraft.world.WorldEvents;
 
 import java.util.List;
 
-public class BlockLikeEntity extends Entity {
-    protected static final TrackedData<BlockPos> ORIGIN = DataTracker.registerData(BlockLikeEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
+public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
+    private static final TrackedData<BlockPos> ORIGIN = DataTracker.registerData(BlockLikeEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     public int moveTime;
     public boolean dropItem = true;
-    public NbtCompound blockEntityData;
-    private BlockState blockState = Blocks.DIRT.getDefaultState();
+    private NbtCompound blockEntityData;
+    private BlockState blockState = AetherBlocks.GRAVITITE_ORE.getDefaultState();
     private boolean dontSetBlock;
     private boolean hurtEntities;
     private int fallHurtMax = 40;
@@ -71,6 +72,13 @@ public class BlockLikeEntity extends Entity {
         this.partOfSet = partOfSet;
     }
 
+    /**
+     * Calculates the bounding box based on the blockstate's collision shape.
+     * If the blockstate doesn't have collision, this method turns collision
+     * off for this entity and sets the bounding box to the outline shape instead.
+     * Note: Complex bounding boxes are not supported. These are all rectangular prisms.
+     * @return The bounding box of this entity
+     */
     @Override
     protected Box calculateBoundingBox() {
         if (this.dataTracker == null || this.blockState == null) {
@@ -92,117 +100,80 @@ public class BlockLikeEntity extends Entity {
     }
 
     @Override
-    public boolean isAttackable() {
-        return false;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public BlockPos getOrigin() {
-        return this.dataTracker.get(ORIGIN);
-    }
-
-    public void setOrigin(BlockPos origin) {
-        this.dataTracker.set(ORIGIN, origin);
-        this.setPosition(getX(), getY(), getZ());
-    }
-
-    public void markPartOfSet() {
-        partOfSet = true;
-    }
-
-    @Override
-    protected void initDataTracker() {
-        this.dataTracker.startTracking(ORIGIN, BlockPos.ORIGIN);
-    }
-
-    @Override
-    public boolean collides() {
-        return !this.isRemoved() && collides;
-    }
-
-    @Override
-    public boolean isCollidable() {
-        return this.collides();
-    }
-
-    @Override
-    public boolean collidesWith(Entity other) {
-        return !(other instanceof BlockLikeEntity) && super.collidesWith(other);
-    }
-
-    @Override
     public void tick() {
+        // recalculate fall damage
         if (this.blockState.isIn(AetherBlockTags.HURTABLE_FLOATERS)) {
             double verticalVel = this.getVelocity().getY();
-            if (verticalVel < 0.0D) {
-                verticalVel = Math.abs(verticalVel);
-            }
+            verticalVel = Math.abs(verticalVel);
             this.hurtEntities = true;
             this.fallHurtAmount = this.blockState.getBlock().getHardness() * (float)verticalVel;
             this.fallHurtMax = Math.max(Math.round(this.fallHurtAmount), this.fallHurtMax);
         }
     }
 
-    public void postTickMovement() {
-    }
+    /**
+     * Override me! Calculate velocity. The actual move is already handled in postTick().
+     */
+    public abstract void postTickMovement();
 
+    /**
+     * Take actions on entities on "collision".
+     * By default, it replicates the blockstate's behavior on collision.
+     */
     public void postTickEntityCollision(Entity entity) {
-        if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
-            entity.fallDistance = 0F;
-            entity.setPosition(entity.getPos().x, getBoundingBox().maxY, entity.getPos().z);
-            entity.setOnGround(true);
-        }
-        if (!(entity instanceof BlockLikeEntity fbe && fbe.partOfSet)) {
-            this.blockState.getBlock().onEntityCollision(blockState, world, this.getBlockPos(), entity);
+        if (!(entity instanceof BlockLikeEntity ble && ble.partOfSet)) {
+            this.blockState.onEntityCollision(world, this.getBlockPos(), entity);
         }
     }
 
-    public boolean shouldCease(double impact) {
-        if (this.world.isClient) {
-            return false;
-        }
+    /**
+     * @return Whether this entity should cease and return to being a block in the world.
+     */
+    public boolean shouldCease() {
+        if (this.world.isClient) return false;
 
         BlockPos blockPos = this.getBlockPos();
         boolean isConcrete = this.blockState.getBlock() instanceof ConcretePowderBlock;
-        boolean shouldSolidify = isConcrete && this.world.getFluidState(blockPos).isIn(FluidTags.WATER);
-        double speed = this.getVelocity().lengthSquared();
 
-        if (isConcrete && speed > 1.0D) {
-            BlockHitResult blockHitResult = this.world
-                    .raycast(new RaycastContext(new Vec3d(this.prevX, this.prevY, this.prevZ),
-                            new Vec3d(this.getX(), this.getY(), this.getZ()), RaycastContext.ShapeType.COLLIDER,
-                            RaycastContext.FluidHandling.SOURCE_ONLY, this));
-
-            if (blockHitResult.getType() != HitResult.Type.MISS
-                    && this.world.getFluidState(blockHitResult.getBlockPos()).isIn(FluidTags.WATER)) {
-                blockPos = blockHitResult.getBlockPos();
-                shouldSolidify = true;
-            }
-        }
-
-        if ((this.verticalCollision && !this.onGround) || shouldSolidify) {
+        if (isConcrete && this.world.getFluidState(blockPos).isIn(FluidTags.WATER)) {
             return true;
         }
 
-        if (blockPos.getY() < this.world.getBottomY() || blockPos.getY() > this.world.getTopY()) {
-            if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-                Block.dropStacks(this.blockState, this.world, this.getBlockPos());
+        double speed = this.getVelocity().lengthSquared();
+
+        if (isConcrete && speed > 1.0D) {
+            BlockHitResult blockHitResult = this.world.raycast(new RaycastContext(
+                    new Vec3d(this.prevX, this.prevY, this.prevZ),
+                    new Vec3d(this.getX(), this.getY(), this.getZ()),
+                    RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.SOURCE_ONLY, this)
+            );
+
+            if (blockHitResult.getType() != HitResult.Type.MISS
+                    && this.world.getFluidState(blockHitResult.getBlockPos()).isIn(FluidTags.WATER)) {
+                return true;
             }
-            this.discard();
         }
-        return false;
+
+        // Check if it is outside of the world
+        return this.moveTime > 100 && (blockPos.getY() < this.world.getBottomY() || blockPos.getY() > this.world.getTopY());
     }
 
+    /**
+     * The big kahuna. You likely don't need to override this method.
+     * Instead, override the methods that it calls.
+     */
     public void postTick() {
         if (this.blockState.isAir()) {
             this.discard();
             return;
         }
 
-        double impact = this.getVelocity().length();
         this.prevX = this.getX();
         this.prevY = this.getY();
         this.prevZ = this.getZ();
+
+        // Destroy the block in the world that this is spawned from
+        // If no block exists, remove this entity (unless part of a set)
         if (this.moveTime++ == 0) {
             BlockPos blockPos = this.getBlockPos();
             Block block = this.blockState.getBlock();
@@ -215,20 +186,32 @@ public class BlockLikeEntity extends Entity {
         }
 
         this.postTickMovement();
-
         this.move(MovementType.SELF, this.getVelocity());
 
-        if (!FallingBlock.canFallThrough(this.blockState)) {
-            List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0)));
-            otherEntities.forEach(this::postTickEntityCollision);
-        }
+        this.postTickMoveEntities();
 
-        if (this.shouldCease(impact)) {
-            this.cease();
-        }
+        if (this.shouldCease()) this.cease();
 
         // Drag
         this.setVelocity(this.getVelocity().multiply(0.98D));
+    }
+
+    // Maybe use modified shulker code instead
+    /**
+     * You likely won't need to override this method, but it moves entities to the top of this block.
+     */
+    public void postTickMoveEntities() {
+        if (FallingBlock.canFallThrough(this.blockState)) return;
+
+        List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0)));
+        for (var entity : otherEntities) {
+            if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
+                entity.fallDistance = 0F;
+                entity.setPosition(entity.getPos().x, getBoundingBox().maxY, entity.getPos().z);
+                entity.setOnGround(true);
+            }
+            this.postTickEntityCollision(entity);
+        }
     }
 
     @Override
@@ -357,6 +340,7 @@ public class BlockLikeEntity extends Entity {
                             compoundTag.put(keyName, tag.copy());
                         }
                     }
+
                     blockEntity.readNbt(compoundTag);
                     blockEntity.markDirty();
                 }
@@ -366,6 +350,9 @@ public class BlockLikeEntity extends Entity {
         return false;
     }
 
+    /**
+     * Break the block, spawn break particles, and drop stacks if it can.
+     */
     public void breakApart() {
         this.discard();
         if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
@@ -399,10 +386,55 @@ public class BlockLikeEntity extends Entity {
         this.setOrigin(this.getBlockPos());
     }
 
+    /**
+     * Aligns this block to another.
+     * @param other The other block to align with
+     * @param offset The offset from the other block. this pos - other pos.
+     * @see net.id.aether.entities.util.BlockLikeSet
+     */
     public void alignWith(BlockLikeEntity other, Vec3i offset) {
         if (this == other) return;
         Vec3d newPos = other.getPos().add(Vec3d.of(offset));
         this.setPos(newPos.x, newPos.y, newPos.z);
         this.setVelocity(other.getVelocity());
+    }
+
+    @Override
+    public boolean isAttackable() {
+        return false;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public BlockPos getOrigin() {
+        return this.dataTracker.get(ORIGIN);
+    }
+
+    public void setOrigin(BlockPos origin) {
+        this.dataTracker.set(ORIGIN, origin);
+        this.setPosition(getX(), getY(), getZ());
+    }
+
+    public void markPartOfSet() {
+        this.partOfSet = true;
+    }
+
+    @Override
+    protected void initDataTracker() {
+        this.dataTracker.startTracking(ORIGIN, BlockPos.ORIGIN);
+    }
+
+    @Override
+    public boolean collides() {
+        return !this.isRemoved() && this.collides;
+    }
+
+    @Override
+    public boolean isCollidable() {
+        return this.collides();
+    }
+
+    @Override
+    public boolean collidesWith(Entity other) {
+        return !(other instanceof BlockLikeEntity) && super.collidesWith(other);
     }
 }
