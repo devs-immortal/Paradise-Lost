@@ -2,15 +2,16 @@ package net.id.aether.entities.block;
 
 import net.id.aether.api.FloatingBlockHelper;
 import net.id.aether.entities.AetherEntityTypes;
-import net.id.aether.entities.util.PostTickEntity;
 import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -30,6 +31,24 @@ public class FloatingBlockEntity extends BlockLikeEntity {
 
     public FloatingBlockEntity(World world, BlockPos pos, BlockState floatingBlockState, boolean partOfSet) {
         super(AetherEntityTypes.FLOATING_BLOCK, world, pos, floatingBlockState, partOfSet);
+    }
+
+    @Override
+    public void postTickEntityCollision(Entity entity) {
+        super.postTickEntityCollision(entity);
+        if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
+            entity.fallDistance = 0F;
+        }
+    }
+
+    @Override
+    public void postTickMoveEntities() {
+        super.postTickMoveEntities();
+
+        List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 3 * (this.prevY - this.getY()), 0)));
+        for (Entity entity : otherEntities) {
+            entity.setPosition(entity.getX(), this.getBoundingBox().maxY, entity.getZ());
+        }
     }
 
     @Override
@@ -87,11 +106,13 @@ public class FloatingBlockEntity extends BlockLikeEntity {
 
     @Override
     public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
         compound.putBoolean("Dropping", this.isDropping());
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
         if (compound.contains("Dropping", 99)) this.setDropping(compound.getBoolean("Dropping"));
     }
 

@@ -196,19 +196,22 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         this.setVelocity(this.getVelocity().multiply(0.98D));
     }
 
-    // Maybe use modified shulker code instead
     /**
      * You likely won't need to override this method, but it moves entities to the top of this block.
      */
     public void postTickMoveEntities() {
         if (FallingBlock.canFallThrough(this.blockState)) return;
 
-        List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0)));
+        List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 0.5, 0)));
         for (var entity : otherEntities) {
             if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
-                entity.fallDistance = 0F;
-                entity.setPosition(entity.getPos().x, getBoundingBox().maxY, entity.getPos().z);
+                entity.move(MovementType.SHULKER_BOX, this.getVelocity());
                 entity.setOnGround(true);
+
+                // If we're about to stop touching, give the entity momentum.
+                if (!entity.getBoundingBox().offset(entity.getVelocity().multiply(2)).intersects(this.getBoundingBox())) {
+                    entity.setVelocity(entity.getVelocity().add(this.getVelocity()));
+                }
             }
             this.postTickEntityCollision(entity);
         }
