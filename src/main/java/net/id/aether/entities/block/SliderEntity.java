@@ -2,7 +2,9 @@ package net.id.aether.entities.block;
 
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityTypes;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -20,5 +22,10 @@ public class SliderEntity extends BlockLikeEntity {
     public void postTickMovement() {
         this.updateVelocity(0.01F, new Vec3d(1D, 0, 0));
         this.setYaw((this.getYaw() + 6F) % 360.0F);
+    }
+
+    // temporary
+    public void setBlockState(BlockState state) {
+        this.blockState = state;
     }
 }
