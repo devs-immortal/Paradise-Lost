@@ -165,6 +165,8 @@ public class AetherBlocks {
         return copy(POTTED_OAK_SAPLING);
     }
 
+    public static final CampfireBlock AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", new CampfireBlock(false, 1, Settings.copy(CAMPFIRE)), cutoutRenderLayer);
+
     // Skyroot Wood
     private static final WoodTypeFactory skyroot = new WoodTypeFactory(MapColor.GREEN, MapColor.TERRACOTTA_GREEN);
     public static final SaplingBlock SKYROOT_SAPLING = add("skyroot_sapling", new AetherSaplingBlock(new SkyrootSaplingGenerator(), skyroot.sapling()), cutoutRenderLayer);
