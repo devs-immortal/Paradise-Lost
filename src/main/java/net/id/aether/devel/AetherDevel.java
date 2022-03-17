@@ -24,6 +24,7 @@ public final class AetherDevel{
     public static void init(){
         System.out.print("\n".repeat(5) + "Paradise Lost is in debug mode!" + "\n".repeat(6));
         Runtime.getRuntime().addShutdownHook(new Thread(AetherDevel::save));
+        AetherDevTools.init();
     }
     
     private static final boolean isDevel = FabricLoader.getInstance().isDevelopmentEnvironment();

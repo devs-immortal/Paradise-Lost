@@ -42,7 +42,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     public int moveTime;
     public boolean dropItem = true;
     private NbtCompound blockEntityData;
-    private BlockState blockState = AetherBlocks.GRAVITITE_ORE.getDefaultState();
+    protected BlockState blockState = AetherBlocks.GRAVITITE_ORE.getDefaultState();
     private boolean dontSetBlock;
     private boolean hurtEntities;
     private int fallHurtMax = 40;
