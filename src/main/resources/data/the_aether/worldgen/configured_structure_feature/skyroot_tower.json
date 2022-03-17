@@ -1,6 +1,7 @@
 {
   "config": {},
-  "type": "the_aether:skyroot_tower",
+  "biomes": "#the_aether:has_structure/skyroot_tower",
+  "adapt_noise": false,
   "spawn_overrides": {},
-  "biomes": []
+  "type": "the_aether:skyroot_tower"
 }

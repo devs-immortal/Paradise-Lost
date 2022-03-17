@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "the_aether:skyroot_tower",
+      "weight": 1
+    } 
+  ],
+  "placement": {
+    "salt": 42069,
+    "spacing": 32,
+    "separation": 26,
+    "type": "minecraft:random_spread"
+  }
+}
