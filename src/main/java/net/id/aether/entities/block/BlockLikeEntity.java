@@ -2,9 +2,7 @@ package net.id.aether.entities.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.util.PostTickEntity;
-import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
@@ -41,13 +39,13 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     private static final TrackedData<BlockPos> ORIGIN = DataTracker.registerData(BlockLikeEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     public int moveTime;
     public boolean dropItem = true;
-    private NbtCompound blockEntityData;
-    protected BlockState blockState = AetherBlocks.GRAVITITE_ORE.getDefaultState();
-    private boolean dontSetBlock;
-    private boolean hurtEntities;
-    private int fallHurtMax = 40;
-    private float fallHurtAmount = 2.0f;
-    private boolean collides;
+    protected NbtCompound blockEntityData;
+    protected BlockState blockState = Blocks.STONE.getDefaultState();
+    protected boolean canSetBlock;
+    protected boolean hurtEntities = false;
+    protected int fallHurtMax = 40;
+    protected float fallHurtAmount = 2.0f;
+    protected boolean collides;
     protected boolean partOfSet = false;
 
     public BlockLikeEntity(EntityType<? extends BlockLikeEntity> entityType, World world) {
@@ -102,11 +100,9 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     @Override
     public void tick() {
         // recalculate fall damage
-        if (this.blockState.isIn(AetherBlockTags.HURTABLE_FLOATERS)) {
-            double verticalVel = this.getVelocity().getY();
-            verticalVel = Math.abs(verticalVel);
-            this.hurtEntities = true;
-            this.fallHurtAmount = this.blockState.getBlock().getHardness() * (float)verticalVel;
+        if (this.hurtEntities) {
+            double verticalSpeed = Math.abs(this.getVelocity().getY());
+            this.fallHurtAmount = this.blockState.getBlock().getHardness() * (float)verticalSpeed;
             this.fallHurtMax = Math.max(Math.round(this.fallHurtAmount), this.fallHurtMax);
         }
     }
@@ -234,7 +230,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         if (flag && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
             BlockState blockstate = AnvilBlock.getLandingState(this.blockState);
             if (blockstate == null) {
-                this.dontSetBlock = true;
+                this.canSetBlock = false;
             } else this.blockState = blockstate;
         }
         return false;
@@ -269,7 +265,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
         if (compound.contains("TileEntityData", 10)) this.blockEntityData = compound.getCompound("TileEntityData");
 
-        if (this.blockState.isAir()) this.blockState = AetherBlocks.GRAVITITE_ORE.getDefaultState();
+        if (this.blockState.isAir()) this.blockState = Blocks.STONE.getDefaultState();
     }
 
     @Environment(EnvType.CLIENT)
@@ -305,6 +301,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         }
         BlockPos blockPos = this.getBlockPos();
         BlockState blockState = this.world.getBlockState(blockPos);
+        // I don't like this
         if (blockState.isOf(Blocks.MOVING_PISTON)) {
             this.setVelocity(this.getVelocity().multiply(0.7, 0.5, 0.7));
             return;
@@ -324,7 +321,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         boolean canReplace = blockState.canReplace(new AutomaticItemPlacementContext(this.world, blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
         boolean canPlace = this.blockState.canPlaceAt(this.world, blockPos);
 
-        if (this.dontSetBlock || !canPlace || !canReplace)
+        if (!this.canSetBlock || !canPlace || !canReplace)
             return false;
 
         if (this.blockState.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockPos).getFluid() == Fluids.WATER) {
@@ -362,7 +359,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             Block.dropStacks(this.blockState, this.world, this.getBlockPos());
         }
         // spawn break particles
-        world.syncWorldEvent(null, WorldEvents.BLOCK_BROKEN, getBlockPos(), Block.getRawIdFromState(blockState));
+        world.syncWorldEvent(null, WorldEvents.BLOCK_BROKEN, this.getBlockPos(), Block.getRawIdFromState(blockState));
     }
 
     @Override
