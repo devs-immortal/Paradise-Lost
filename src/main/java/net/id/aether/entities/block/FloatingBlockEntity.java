@@ -18,8 +18,8 @@ import java.util.function.Supplier;
 public class FloatingBlockEntity extends BlockLikeEntity {
     private Supplier<Boolean> dropState = () -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this);
     private boolean dropping = false;
-    private BiConsumer<Float, Boolean> onEndFloating = (f, b) -> {};
-    public float lastYVelocity = 0;
+    private BiConsumer<Double, Boolean> onEndFloating = (f, b) -> {};
+    public double lastYVelocity = 0;
 
     public FloatingBlockEntity(EntityType<? extends BlockLikeEntity> entityType, World world) {
         super(entityType, world);
@@ -27,10 +27,12 @@ public class FloatingBlockEntity extends BlockLikeEntity {
 
     public FloatingBlockEntity(World world, double x, double y, double z, BlockState floatingBlockState) {
         super(AetherEntityTypes.FLOATING_BLOCK, world, x, y, z, floatingBlockState);
+        this.setHurtEntities(floatingBlockState.isIn(AetherBlockTags.HURTABLE_FLOATERS));
     }
 
     public FloatingBlockEntity(World world, BlockPos pos, BlockState floatingBlockState, boolean partOfSet) {
         super(AetherEntityTypes.FLOATING_BLOCK, world, pos, floatingBlockState, partOfSet);
+        this.setHurtEntities(floatingBlockState.isIn(AetherBlockTags.HURTABLE_FLOATERS));
     }
 
     @Override
@@ -55,7 +57,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
 
     @Override
     public void postTickMovement() {
-        this.lastYVelocity = 0;
+        this.lastYVelocity = this.getVelocity().y;
 
         if (!this.hasNoGravity()) {
             if (!isDropping() && !shouldBeginDropping()) {
@@ -98,11 +100,12 @@ public class FloatingBlockEntity extends BlockLikeEntity {
         this.dropping = dropping;
     }
 
-    public BiConsumer<Float, Boolean> getOnEndFloating() {
+    public BiConsumer<Double, Boolean> getOnEndFloating() {
         return this.onEndFloating;
     }
 
-    public void setOnEndFloating(BiConsumer<Float, Boolean> consumer) {
+    // It's fine if this isn't properly synced
+    public void setOnEndFloating(BiConsumer<Double, Boolean> consumer) {
         this.onEndFloating = consumer;
     }
 
@@ -121,7 +124,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
     @Override
     public boolean trySetBlock() {
         if (super.trySetBlock()) {
-            this.getOnEndFloating().accept(this.lastYVelocity, true);
+            this.getOnEndFloating().accept(Math.abs(this.lastYVelocity), true);
             return true;
         }
         return false;
@@ -130,7 +133,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
     @Override
     public void breakApart() {
         super.breakApart();
-        this.getOnEndFloating().accept(this.lastYVelocity, false);
+        this.getOnEndFloating().accept(Math.abs(this.lastYVelocity), false);
     }
 
     public boolean isFastFloater() {
