@@ -518,6 +518,8 @@ public class AetherItems {
     public static final WallStandingBlockItem AMBROSIUM_TORCH = add("ambrosium_torch", new WallStandingBlockItem(AetherBlocks.AMBROSIUM_TORCH, AetherBlocks.AMBROSIUM_TORCH_WALL, decoration));
     // util blocks (enchanter, freezer, etc.)
 
+    public static final BlockItem AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", AetherBlocks.AMBROSIUM_CAMPFIRE, decoration);
+
     // door-like things
     public static final BlockItem SKYROOT_DOOR = add("skyroot_door", AetherBlocks.SKYROOT_DOOR, decoration);
     public static final BlockItem GOLDEN_OAK_DOOR = add("golden_oak_door", AetherBlocks.GOLDEN_OAK_DOOR, decoration);
