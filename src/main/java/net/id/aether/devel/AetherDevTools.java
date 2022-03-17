@@ -26,10 +26,10 @@ class AetherDevTools {
             }
             SliderEntity slider;
             if (!sneaking) {
-                slider = new SliderEntity(context.getWorld(), context.getBlockPos().getX() + 0.5D, context.getBlockPos().getY(), context.getBlockPos().getZ() + 0.5D);
+                slider = new SliderEntity(context.getWorld(), context.getBlockPos().getX() + 0.5D, context.getBlockPos().getY(), context.getBlockPos().getZ() + 0.5D, context.getPlayerFacing().getOpposite());
                 slider.setBlockState(context.getWorld().getBlockState(context.getBlockPos()));
             } else {
-                slider = new SliderEntity(context.getWorld(), context.getHitPos().getX(), context.getHitPos().getY(), context.getHitPos().getZ());
+                slider = new SliderEntity(context.getWorld(), context.getHitPos().getX(), context.getHitPos().getY(), context.getHitPos().getZ(), context.getPlayerFacing().getOpposite());
                 slider.moveTime = 1;
             }
             context.getWorld().spawnEntity(slider);
