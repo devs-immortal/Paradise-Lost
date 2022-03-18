@@ -3,26 +3,11 @@ package net.id.aether.blocks;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
 import net.id.aether.blocks.blockentity.AetherChestBlock;
-import net.id.aether.blocks.decorative.AetherDirtPathBlock;
-import net.id.aether.blocks.decorative.AmbrosiumLanternBlock;
-import net.id.aether.blocks.decorative.AmbrosiumTorchBlock;
-import net.id.aether.blocks.decorative.AmbrosiumWallTorchBlock;
-import net.id.aether.blocks.decorative.SixFacingBlock;
-import net.id.aether.blocks.mechanical.FoodBowlBlock;
-import net.id.aether.blocks.mechanical.FourBiteCakeBlock;
-import net.id.aether.blocks.mechanical.IncubatorBlock;
-import net.id.aether.blocks.natural.AetherGrassBlock;
-import net.id.aether.blocks.natural.AetherQuicksoilBlock;
-import net.id.aether.blocks.natural.AetherSaplingBlock;
-import net.id.aether.blocks.natural.AetherSnowyBlock;
-import net.id.aether.blocks.natural.aercloud.AercloudBlock;
-import net.id.aether.blocks.natural.aercloud.BlueAercloudBlock;
-import net.id.aether.blocks.natural.aercloud.GoldenAercloudBlock;
-import net.id.aether.blocks.natural.aercloud.PinkAercloudBlock;
-import net.id.aether.blocks.natural.crop.AmadrysCropBlock;
-import net.id.aether.blocks.natural.crop.BlueberryBushBlock;
-import net.id.aether.blocks.natural.crop.FlaxCropBlock;
-import net.id.aether.blocks.natural.crop.SwetrootCropBlock;
+import net.id.aether.blocks.decorative.*;
+import net.id.aether.blocks.mechanical.*;
+import net.id.aether.blocks.natural.*;
+import net.id.aether.blocks.natural.aercloud.*;
+import net.id.aether.blocks.natural.crop.*;
 import net.id.aether.blocks.natural.plant.*;
 import net.id.aether.blocks.natural.tree.*;
 import net.id.aether.fluids.AetherFluids;
@@ -72,7 +57,7 @@ public class AetherBlocks {
     public static final FarmlandBlock AETHER_FARMLAND = add("aether_farmland", new AetherFarmlandBlock(copy(FARMLAND)));
     public static final AetherDirtPathBlock AETHER_DIRT_PATH = add("aether_grass_path", new AetherDirtPathBlock(copy(DIRT_PATH)));
     public static final Block QUICKSOIL = add("quicksoil", new AetherQuicksoilBlock(of(Material.AGGREGATE).strength(0.5f, -1f).slipperiness(1F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)));
-    public static final Block PACKED_SWEDROOT = add("packed_swedroot", new Block(of(Material.WOOD).strength(2f).sounds(BlockSoundGroup.SHROOMLIGHT)), flattenable());
+    public static final Block PACKED_SWEDROOT = add("packed_swedroot", new Block(of(Material.WOOD).strength(2f).sounds(BlockSoundGroup.SHROOMLIGHT)));
 
     // Glass Blocks
     private static Settings quicksoilGlass() {
@@ -165,7 +150,7 @@ public class AetherBlocks {
         return copy(POTTED_OAK_SAPLING);
     }
 
-    public static final CampfireBlock AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", new CampfireBlock(false, 1, Settings.copy(CAMPFIRE)), cutoutRenderLayer);
+    public static final CampfireBlock AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", new AmbrosiumCampfireBlock(false, 1, Settings.copy(CAMPFIRE)), cutoutRenderLayer);
 
     // Skyroot Wood
     private static final WoodTypeFactory skyroot = new WoodTypeFactory(MapColor.GREEN, MapColor.TERRACOTTA_GREEN);
@@ -371,9 +356,9 @@ public class AetherBlocks {
     public static final OreBlock AMBROSIUM_ORE = add("ambrosium_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
     public static final OreBlock ZANITE_ORE = add("zanite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
     public static final FloatingBlock GRAVITITE_ORE = add("gravitite_ore", new FloatingBlock(false, of(Material.STONE).requiresTool().strength(5f).sounds(BlockSoundGroup.STONE), UniformIntProvider.create(0, 2)));
-    public static final Block AMBROSIUM_BLOCK = add("ambrosium_block", new Block(of(Material.METAL).strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
-    public static final Block ZANITE_BLOCK = add("zanite_block", new Block(of(Material.METAL).strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
-    public static final FloatingBlock BLOCK_OF_GRAVITITE = add("block_of_gravitite", new FloatingBlock(false, of(Material.METAL).strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
+    public static final Block AMBROSIUM_BLOCK = add("ambrosium_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
+    public static final Block ZANITE_BLOCK = add("zanite_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
+    public static final FloatingBlock BLOCK_OF_GRAVITITE = add("block_of_gravitite", new FloatingBlock(false, of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
     public static final FloatingBlock GRAVITITE_LEVITATOR = add("gravitite_levitator", new FloatingBlock(true, of(Material.WOOD).strength(3f, 3f).sounds(BlockSoundGroup.WOOD)));
     public static final ChainBlock ZANITE_CHAIN = add("zanite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
@@ -577,12 +562,6 @@ public class AetherBlocks {
     private static class AetherWeightedPressurePlateBlock extends WeightedPressurePlateBlock {
         public AetherWeightedPressurePlateBlock(int weight, Settings settings) {
             super(weight, settings);
-        }
-    }
-
-    private static class AetherHangingRootsBlock extends HangingRootsBlock {
-        protected AetherHangingRootsBlock(Settings settings) {
-            super(settings);
         }
     }
 }

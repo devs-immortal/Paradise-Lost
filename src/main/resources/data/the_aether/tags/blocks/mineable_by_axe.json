@@ -9,6 +9,7 @@
     "#the_aether:aether_leaf_piles",
     "#the_aether:aether_bushes",
     "#the_aether:aether_hangers",
-    "#the_aether:aether_wooden_chests"
+    "#the_aether:aether_wooden_chests",
+    "the_aether:ambrosium_campfire"
   ]
 }
