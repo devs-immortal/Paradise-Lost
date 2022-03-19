@@ -1,9 +1,6 @@
 package net.id.aether.entities.hostile;
 
-import net.id.aether.api.ConditionAPI;
-import net.id.aether.component.ConditionManager;
 import net.id.aether.effect.condition.Conditions;
-import net.id.aether.effect.condition.Persistence;
 import net.id.aether.entities.projectile.CockatriceSpitEntity;
 import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.entity.Entity;

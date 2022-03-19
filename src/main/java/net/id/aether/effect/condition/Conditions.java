@@ -3,7 +3,6 @@ package net.id.aether.effect.condition;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
-import net.id.aether.api.ConditionAPI;
 import net.id.aether.client.rendering.ui.AetherOverlayRegistrar;
 import net.id.aether.registry.AetherRegistries;
 import net.minecraft.util.registry.Registry;

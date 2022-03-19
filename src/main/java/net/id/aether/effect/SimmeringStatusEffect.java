@@ -1,7 +1,5 @@
 package net.id.aether.effect;
 
-import net.id.aether.effect.condition.Condition;
-import net.id.aether.effect.condition.ConditionModifier;
 import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
