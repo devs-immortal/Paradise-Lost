@@ -219,6 +219,7 @@ public class AetherItems {
     public static final Item ORANGE = add("orange", new Item(food(AetherFoodComponent.ORANGE)), compostable65);
     public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(AetherFoodComponent.WHITE_APPLE)), compostable(0f));
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(AetherBlocks.AMADRYS, food(AetherFoodComponent.GENERIC_WORSE)), compostable30);
+    public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new StewItem(food(AetherFoodComponent.AMADRYS_NOODLES)));
     public static final Item AMADRYS_BREAD = add("amadrys_bread", new Item(food(AetherFoodComponent.AMADRYS_BREAD)));
     public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(AetherFoodComponent.AMADRYS_BREAD_GLAZED)));
     public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(AetherBlocks.SWEDROOT, food(AetherFoodComponent.GENERIC)), compostable30);
@@ -503,7 +504,10 @@ public class AetherItems {
     public static final BlockItem LUCATIEL_LICHEN = add("lucatiel_lichen", AetherBlocks.LUCATIEL_LICHEN, decoration, compostable50);
     public static final BlockItem LICHEN_PILE = add("lichen_pile", AetherBlocks.LICHEN_PILE, decoration, compostable30);
     public static final BlockItem LUCATIEL_LICHEN_PILE = add("lucatiel_lichen_pile", AetherBlocks.LUCATIEL_LICHEN_PILE, decoration, compostable100);
-    public static final BlockItem ROOTCAP = add("rootcap", AetherBlocks.ROOTCAP, decoration(), compostable100);
+
+    public static final BlockItem ROOTCAP = add("rootcap", AetherBlocks.ROOTCAP, decoration(), compostable65);
+    public static final BlockItem BROWN_SPORECAP = add("brown_sporecap", AetherBlocks.BROWN_SPORECAP, decoration(), compostable65);
+    public static final BlockItem PINK_SPORECAP = add("pink_sporecap", AetherBlocks.PINK_SPORECAP, decoration(), compostable65);
 
     public static final BlockItem SWEDROOT_SPREAD = add("swedroot_spread", AetherBlocks.SWEDROOT_SPREAD, decoration(), compostable65);
 
