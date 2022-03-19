@@ -22,6 +22,7 @@ public class AetherFoodComponent {
             .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1200, 2), 1F)
             .statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 3600, 4), 1F)
             .statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 3600, 1), 1F).build();
+    public static final FoodComponent AMADRYS_NOODLES = new FoodComponent.Builder().hunger(7).saturationModifier(3F).build();
     public static final FoodComponent AMADRYS_BREAD = new FoodComponent.Builder().hunger(5).saturationModifier(6F).build();
     public static final FoodComponent AMADRYS_BREAD_GLAZED = new FoodComponent.Builder().hunger(8).saturationModifier(6.5F).build();
 }
