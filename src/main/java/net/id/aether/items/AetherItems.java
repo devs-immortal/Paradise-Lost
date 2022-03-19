@@ -99,9 +99,9 @@ public class AetherItems {
     public static final ValkyrieLanceItem VALKYRIE_LANCE = add("valkyrie_lance", new ValkyrieLanceItem(AetherToolMaterials.VALKYRIE, 10, -3f, 6f, 4f, aetherLootTool));
     public static final AetherHoeItem VALKYRIE_HOE = add("valkyrie_hoe", new AetherHoeItem(AetherToolMaterials.VALKYRIE, 1, 5f, aetherLootTool));
 
-    public static final DartItem GOLDEN_DART = add("golden_dart", new DartItem(tool));
-    public static final DartItem ENCHANTED_DART = add("enchanted_dart", new DartItem(rareTool));
-    public static final DartItem POISON_DART = add("poison_dart", new DartItem(tool));
+    public static final DartItem GOLDEN_DART = add("golden_dart", new DartItem(tool()));
+    public static final DartItem ENCHANTED_DART = add("enchanted_dart", new DartItem(tool().rarity(RARE)));
+    public static final DartItem POISON_DART = add("poison_dart", new DartItem(tool()));
     public static final DartShooterItem GOLDEN_DART_SHOOTER = add("golden_dart_shooter", new DartShooterItem(GOLDEN_DART, unstackableTool));
     public static final DartShooterItem ENCHANTED_DART_SHOOTER = add("enchanted_dart_shooter", new DartShooterItem(ENCHANTED_DART, unstackableRareTool));
     public static final DartShooterItem POISON_DART_SHOOTER = add("poison_dart_shooter", new DartShooterItem(POISON_DART, unstackableTool));
