@@ -223,6 +223,8 @@
   "block.the_aether.swedroot_spread": "Swedroot Spread",
 
   "block.the_aether.rootcap": "Rootcap",
+  "block.the_aether.brown_sporecap": "Brown Sporecap",
+  "block.the_aether.pink_sporecap": "Pink Sporecap",
 
   "block.the_aether.flaxweave_cushion" : "Flaxweave Cushion",
 
@@ -375,6 +377,7 @@
   "item.the_aether.orange": "Orange",
   "item.the_aether.white_apple": "White Apple",
   "item.the_aether.amadrys_bushel": "Amadrys Bushel",
+  "item.the_aether.amadrys_noodles": "Amadrys Noodle Soup",
   "item.the_aether.amadrys_bread": "Amadrys Loaf",
   "item.the_aether.amadrys_bread_glazed": "Glazed Amadrys Loaf",
   "item.the_aether.swedroot": "Swedroot",
