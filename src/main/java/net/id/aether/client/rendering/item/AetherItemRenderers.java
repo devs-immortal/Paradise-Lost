@@ -1,10 +1,13 @@
 package net.id.aether.client.rendering.item;
 
+import dev.emi.trinkets.api.client.TrinketRenderer;
+import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
+import net.id.aether.items.AetherItems;
 import net.id.aether.mixin.block.ChestBlockEntityAccessor;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
@@ -24,6 +27,8 @@ public final class AetherItemRenderers{
         registerChest(AetherBlocks.ORANGE_CHEST, AetherBlockEntityTypes.ORANGE_CHEST);
         registerChest(AetherBlocks.SKYROOT_CHEST, AetherBlockEntityTypes.SKYROOT_CHEST);
         registerChest(AetherBlocks.WISTERIA_CHEST, AetherBlockEntityTypes.WISTERIA_CHEST);
+        TrinketRendererRegistry.registerRenderer(AetherItems.CLOUD_PARACHUTE, (TrinketRenderer) AetherItems.CLOUD_PARACHUTE);
+        TrinketRendererRegistry.registerRenderer(AetherItems.GOLDEN_CLOUD_PARACHUTE, (TrinketRenderer) AetherItems.GOLDEN_CLOUD_PARACHUTE);
     }
 
     private static void registerChest(ChestBlock block, BlockEntityType<ChestBlockEntity> type){
