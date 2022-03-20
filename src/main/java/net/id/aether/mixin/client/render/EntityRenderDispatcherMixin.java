@@ -1,6 +1,5 @@
 package net.id.aether.mixin.client.render;
 
-import net.id.aether.devel.AetherDevel;
 import net.id.aether.entities.misc.RookEntity;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;

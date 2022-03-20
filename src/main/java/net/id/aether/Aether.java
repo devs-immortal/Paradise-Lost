@@ -19,7 +19,6 @@ import net.id.aether.client.rendering.shader.AetherShaders;
 import net.id.aether.client.rendering.texture.AetherTextures;
 import net.id.aether.client.rendering.util.AetherColorProviders;
 import net.id.aether.commands.AetherCommands;
-import net.id.aether.devel.AetherDevel;
 import net.id.aether.effect.AetherStatusEffects;
 import net.id.aether.effect.condition.Conditions;
 import net.id.aether.entities.AetherEntityTypes;
@@ -30,7 +29,6 @@ import net.id.aether.loot.AetherLootNumberProviderTypes;
 import net.id.aether.lore.AetherLore;
 import net.id.aether.registry.AetherRegistries;
 import net.id.aether.screen.AetherScreens;
-import net.id.aether.util.AetherSignType;
 import net.id.aether.util.AetherSoundEvents;
 import net.id.aether.world.AetherGameRules;
 import net.id.aether.world.dimension.AetherBiomes;
@@ -101,9 +99,7 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
         AetherScreens.init();
         AetherLore.init();
         AetherParticles.init();
-        if(FabricLoader.getInstance().isDevelopmentEnvironment()){
-            AetherDevel.init();
-        }
+        // TODO MIGRATION: DEVEL
     }
 
     @Override
@@ -123,24 +119,20 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
         Conditions.clientInit();
         AetherShaders.init();
         HolidayBlockModel.init();
-        AetherSignType.clientInit();
         AetherScreens.clientInit();
-        if(FabricLoader.getInstance().isDevelopmentEnvironment()){
-            AetherDevel.Client.init();
-        }
     }
-    
+
     // FIXME This is really really really stupid.
     @Environment(EnvType.SERVER)
     private static final String DISABLE_WORLD_CHECK = "PARADISE_LOST_DISABLE_WORLD_CHECK";
-    
+
     @Override
     public void onInitializeServer() {
         ServerLifecycleEvents.SERVER_STARTED.register((server)->{
             if(System.getProperty(DISABLE_WORLD_CHECK) != null){
                 return;
             }
-            
+
             var world = server.getWorld(AetherDimension.AETHER_WORLD_KEY);
             if(world == null){
                 var message = """
@@ -165,7 +157,7 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
                         DISABLE_WORLD_CHECK,
                         DISABLE_WORLD_CHECK
                     );
-                
+
                 Runtime.getRuntime().addShutdownHook(new Thread(()->{
                     // To people who might want to change this to use the Logger class, don't.
                     // It will not print the message when you do that. I tried.

@@ -3,7 +3,6 @@ package net.id.aether.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.id.aether.component.LUV;
-import net.id.aether.devel.AetherDevel;
 import net.id.incubus_core.misc.WorthinessChecker;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
