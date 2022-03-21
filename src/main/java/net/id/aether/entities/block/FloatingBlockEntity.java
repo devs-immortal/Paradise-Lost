@@ -6,6 +6,7 @@ import net.id.aether.tag.AetherBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
@@ -71,6 +72,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
                 this.setVelocity(this.getVelocity().add(0.0D, -0.03D, 0.0D));
             }
         }
+        this.move(MovementType.SELF, this.getVelocity());
     }
 
     @Override
