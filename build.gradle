@@ -150,6 +150,35 @@ java {
     withSourcesJar()
 }
 
+loom {
+    runs {
+        client {
+            programArg((String)('--username=' + System.getProperty('user.name')))
+            runDir = 'run/client'
+            client()
+        }
+
+        server {
+            runDir = 'run/server'
+            server()
+        }
+
+        clientDebug {
+            inherit client
+
+            vmArgs '-Dmixin.debug.export=true'
+            configName = 'Minecraft Client (Mixin Debug)'
+        }
+
+        serverDebug {
+            inherit server
+
+            vmArgs '-Dmixin.debug.export=true'
+            configName = 'Minecraft Server (Mixin Debug)'
+        }
+    }
+}
+
 //task publishModrinth (type: TaskModrinthUpload){
 //    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 //    System.out.println("Enter the modrinth auth token: ");
