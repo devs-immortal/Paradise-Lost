@@ -5,6 +5,7 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -31,6 +32,7 @@ public class SliderEntity extends BlockLikeEntity {
             this.setDirection(this.getDirection().getOpposite());
         }
         this.updateVelocity(0.01F, Vec3d.of(this.getDirection().getVector()));
+        this.move(MovementType.SELF, this.getVelocity());
     }
 
     // temporary
