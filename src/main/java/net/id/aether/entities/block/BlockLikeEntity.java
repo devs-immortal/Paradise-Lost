@@ -108,7 +108,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     }
 
     /**
-     * Override me! Calculate velocity. The actual move is already handled in postTick().
+     * Override me! Calculate movement.
      */
     public abstract void postTickMovement();
 
@@ -182,7 +182,6 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         }
 
         this.postTickMovement();
-        this.move(MovementType.SELF, this.getVelocity());
 
         this.postTickMoveEntities();
 
