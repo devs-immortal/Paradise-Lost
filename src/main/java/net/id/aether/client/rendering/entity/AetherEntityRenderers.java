@@ -3,7 +3,7 @@ package net.id.aether.client.rendering.entity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.id.aether.client.rendering.entity.block.FloatingBlockRenderer;
+import net.id.aether.client.rendering.entity.block.BlockLikeEntityRenderer;
 import net.id.aether.client.rendering.entity.hostile.AechorPlantRenderer;
 import net.id.aether.client.rendering.entity.hostile.CockatriceRenderer;
 import net.id.aether.client.rendering.entity.hostile.SwetRenderer;
@@ -22,7 +22,8 @@ import net.minecraft.entity.EntityType;
 public class AetherEntityRenderers {
     public static void initClient() {
         // block
-        register(AetherEntityTypes.FLOATING_BLOCK, FloatingBlockRenderer::new);
+        register(AetherEntityTypes.FLOATING_BLOCK, BlockLikeEntityRenderer::new);
+        register(AetherEntityTypes.SLIDER, BlockLikeEntityRenderer::new);
 
         // hostile
         register(SwetRenderer::new,

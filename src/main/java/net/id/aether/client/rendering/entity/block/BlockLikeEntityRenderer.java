@@ -2,7 +2,7 @@ package net.id.aether.client.rendering.entity.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.aether.entities.block.FloatingBlockEntity;
+import net.id.aether.entities.block.BlockLikeEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -21,15 +21,15 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 @Environment(EnvType.CLIENT)
-public class FloatingBlockRenderer extends EntityRenderer<FloatingBlockEntity> {
+public class BlockLikeEntityRenderer extends EntityRenderer<BlockLikeEntity> {
 
-    public FloatingBlockRenderer(EntityRendererFactory.Context renderManager) {
+    public BlockLikeEntityRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager);
         this.shadowRadius = 0.5F;
     }
 
     @Override
-    public void render(FloatingBlockEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+    public void render(BlockLikeEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         BlockState blockState = entity.getBlockState();
 
         if (blockState.getRenderType() == BlockRenderType.MODEL) {
@@ -50,7 +50,7 @@ public class FloatingBlockRenderer extends EntityRenderer<FloatingBlockEntity> {
 
     @SuppressWarnings("deprecation")
     @Override
-    public Identifier getTexture(FloatingBlockEntity entityIn) {
+    public Identifier getTexture(BlockLikeEntity entityIn) {
         return SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE;
     }
 }
