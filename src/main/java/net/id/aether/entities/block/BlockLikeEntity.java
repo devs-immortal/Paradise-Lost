@@ -41,7 +41,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     public boolean dropItem = true;
     protected NbtCompound blockEntityData;
     protected BlockState blockState = Blocks.STONE.getDefaultState();
-    protected boolean canSetBlock;
+    protected boolean canSetBlock = true;
     protected boolean hurtEntities = false;
     protected int fallHurtMax = 40;
     protected float fallHurtAmount = 2.0f;
@@ -344,6 +344,8 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
                     blockEntity.markDirty();
                 }
             }
+            // Stop entities from clipping through the block when it's set
+            this.postTickMoveEntities();
             return true;
         }
         return false;
