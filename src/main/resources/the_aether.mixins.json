@@ -31,7 +31,6 @@
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
-    "server.ServerWorldMixin",
     "structure.StructureFeatureAccessor",
     "util.NbtCompoundAccessor",
     "util.RarityMixin",
@@ -39,10 +38,8 @@
     "util.SlotAccessor"
   ],
   "client": [
-    "client.ClientPlayerEntityMixin",
     "client.ClientPlayerInteractionManagerMixin",
     "client.ClientPlayNetworkHandlerMixin",
-    "client.ClientWorldMixin",
     "client.ItemStackMixin",
     "client.MinecraftClientAccessor",
     "client.MinecraftClientMixin",
