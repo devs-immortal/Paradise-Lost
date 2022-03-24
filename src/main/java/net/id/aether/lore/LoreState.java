@@ -164,6 +164,7 @@ public interface LoreState extends AutoSyncedComponent{
     }
 }
 
+// TODO this is a silly solution.
 // This class is here solely so that the server does not crash.
 class ToastTriggerer {
     @Environment(EnvType.CLIENT)
