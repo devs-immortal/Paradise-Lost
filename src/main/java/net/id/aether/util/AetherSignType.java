@@ -14,11 +14,11 @@ public class AetherSignType extends SignType {
     public static final SignType WISTERIA = register(new AetherSignType("aether_wisteria"));
     public static final SignType GOLDEN_OAK = register(new AetherSignType("aether_golden_oak"));
     public static final SignType CRYSTAL = register(new AetherSignType("aether_crystal"));
-    
+
     protected AetherSignType(String name) {
         super(name);
     }
-    
+
     private static SignType register(AetherSignType type) {
         return SignTypeAccessor.callRegister(type);
     }
