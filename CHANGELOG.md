@@ -2,6 +2,8 @@
 
 - Fixed fatal issues that prevented servers from starting
 - Updated Moretags - Should fix some issues with shears and some incompatibilities
+- Re-added structures
+- Updated leaves textures
 
 ## Advisory: 1.17 ➝ 1.18 World Migration
 
