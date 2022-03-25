@@ -51,6 +51,9 @@
     "client": [
       "net.id.aether.Aether"
     ],
+    "server": [
+      "net.id.aether.Aether"
+    ],
     "cardinal-components": [
       "net.id.aether.component.AetherComponents"
     ]
