@@ -22,7 +22,7 @@ public class AetherSignType extends SignType {
     private static SignType register(AetherSignType type) {
         return SignTypeAccessor.callRegister(type);
     }
-    
+
     @Environment(EnvType.CLIENT)
     public static void clientInit() {
         registerTexture(SKYROOT);
@@ -31,7 +31,7 @@ public class AetherSignType extends SignType {
         registerTexture(GOLDEN_OAK);
         registerTexture(CRYSTAL);
     }
-    
+
     @Environment(EnvType.CLIENT)
     private static void registerTexture(SignType type) {
         TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(
