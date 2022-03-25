@@ -8,9 +8,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 // TODO: Make this work, for now this is a reference to names that need changing. (PL-1.8)
-public final class AetherDataFixers {
+public final class AetherDataFixers /*implements DataFixerAdder*/ {
     private static final String OLD_NAMESPACE = "the_aether";
     private static final String NEW_NAMESPACE = "paradise_lost";
+    private static final String OLD_PREFIX = OLD_NAMESPACE + ':';
+    private static final String NEW_PREFIX = NEW_NAMESPACE + ':';
     
     private static final Map<String, String> BLOCKS = createMap(
             "aether_grass",             "grass_block",
@@ -86,4 +88,28 @@ public final class AetherDataFixers {
             .flatMap(Collection::stream)
             .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
+    
+    /*
+    @Override
+    public void addDataFixers(@NotNull DataFixerApi dataFixerApi) {
+        var builder = new DataFixerBuilder(2);
+        
+        builder.addSchema(0, BaseSchemas.BASE_SCHEMA);
+        
+        var theDarkAges = builder.addSchema(1, BaseSchemas.IDENTIFIER_NORMALIZING_SCHEMA);
+        builder.addFixer(new BlockNameFix(theDarkAges, "Aether -> Paradise Lost Blocks") {
+            @Override
+            protected String rename(String oldName) {
+                if(!oldName.startsWith(OLD_PREFIX)){
+                    return oldName;
+                }
+                
+                var path = oldName.split(":", 2)[1];
+                return NEW_PREFIX + BLOCKS.getOrDefault(path, path);
+            }
+        });
+        
+        dataFixerApi.register(locate("fixer"), 2, builder.build(Util.getBootstrapExecutor()));
+    }
+     */
 }
