@@ -305,8 +305,8 @@ public class AetherTreeConfiguredFeatures extends AetherConfiguredFeatures{
         //Special trees
         private static final TreeFeatureConfig GOLDEN_OAK_CONFIG = generateTree(
                 GOLDEN_OAK_LOG.getDefaultState(), GOLDEN_OAK_LEAVES.getDefaultState(), AETHER_DIRT.getDefaultState(),
-                new LargeOakTrunkPlacer(4, 8, 0),
-                new BlobFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(3), 3),
+                new StraightTrunkPlacer(5, 2, 0),
+                new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(1), 4),
                 new TwoLayersFeatureSize(3, 0, 3, OptionalInt.of(2)),
                 true, false
         );
