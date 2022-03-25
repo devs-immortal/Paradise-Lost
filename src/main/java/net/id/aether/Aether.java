@@ -31,6 +31,7 @@ import net.id.aether.loot.AetherLootNumberProviderTypes;
 import net.id.aether.lore.AetherLore;
 import net.id.aether.registry.AetherRegistries;
 import net.id.aether.screen.AetherScreens;
+import net.id.aether.util.AetherSignType;
 import net.id.aether.util.AetherSoundEvents;
 import net.id.aether.world.AetherGameRules;
 import net.id.aether.world.dimension.AetherBiomes;
@@ -124,6 +125,7 @@ public class Aether implements ModInitializer, ClientModInitializer {
         Conditions.clientInit();
         AetherShaders.init();
         HolidayBlockModel.init();
+        AetherSignType.clientInit();
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.Client.init();
         }
