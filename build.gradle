@@ -118,7 +118,9 @@ dependencies {
 
     modImplementation(include("net.gudenau.minecraft:MoreTags:${project.moretags_version}"))
     modImplementation(include("net.gudenau.minecraft:RecipeConfidence:${project.recipeconfidence_version}"))
-    modImplementation(include("net.gudenau.minecraft:CustomShaderLib:${project.customshaderlib_version}"))
+
+    // Required for the funny rainbow tree leaves
+    modImplementation(include("io.github.ladysnake:satin:${project.satin_version}"))
 }
 
 processResources {

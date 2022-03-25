@@ -1,77 +1,51 @@
 package net.id.aether.client.rendering.shader;
 
-import com.mojang.datafixers.util.Pair;
+import ladysnake.satin.api.event.EntitiesPreRenderCallback;
+import ladysnake.satin.api.managed.ManagedCoreShader;
+import ladysnake.satin.api.managed.ShaderEffectManager;
+import ladysnake.satin.api.managed.uniform.Uniform1f;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.gudenau.minecraft.csl.api.v0.duck.ShaderDuck;
-import net.gudenau.minecraft.csl.api.v0.event.ShaderEvents;
-import net.id.aether.Aether;
-import net.minecraft.client.gl.GlUniform;
-import net.minecraft.client.render.Shader;
+import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.VertexFormats;
 
-import java.io.IOException;
-import java.util.List;
+import static net.id.aether.Aether.locate;
 
 @Environment(EnvType.CLIENT)
 public final class AetherShaders{
     private AetherShaders(){}
     
+    static final ManagedCoreShader AURAL;
+    private static final Uniform1f AURAL_TIME;
+    
+    static final ManagedCoreShader AURAL_CUTOUT;
+    private static final Uniform1f AURAL_CUTOUT_TIME;
+    
+    static {
+        var manager = ShaderEffectManager.getInstance();
+        AURAL = manager.manageCoreShader(locate("aural"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL);
+        AURAL_TIME = AURAL.findUniform1f("Time");
+        
+        AURAL_CUTOUT = manager.manageCoreShader(locate("aural_cutout_mipped"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL);
+        AURAL_CUTOUT_TIME = AURAL.findUniform1f("Time");
+    }
+    
     public static void init(){
         AetherRenderLayers.init();
-    
-        ShaderEvents.CREATE.register((manager)->{
-            try{
-                return List.of(
-                    Pair.of(new Shader(manager, locate("aural"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL), (shader)->{
-                        aural = shader;
-                        ShaderDuck duck = (ShaderDuck)shader;
-                        auralTimeUniform = duck.getCustomUniform("Time");
-                    }),
-                    Pair.of(new Shader(manager, locate("aural_cutout_mipped"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL), (shader)->{
-                        auralCutoutMipped = shader;
-                        ShaderDuck duck = (ShaderDuck)shader;
-                        auralCutoutTimeUniform = duck.getCustomUniform("Time");
-                    })
-                );
-            }catch(IOException e){
-                System.err.print("Failed to load Aether shaders\n");
-                e.printStackTrace();
-                System.exit(1);
-                return List.of();
-            }
-        });
-        ShaderEvents.PRE_RENDER_BLOCKS.register(AetherShaders::preRender);
-    }
-    
-    private static Shader aural;
-    private static GlUniform auralTimeUniform;
-    
-    private static Shader auralCutoutMipped;
-    private static GlUniform auralCutoutTimeUniform;
-    
-    static String locate(String name){
-        return Aether.MOD_ID + ':' + name;
-    }
-    
-    public static Shader getAural(){
-        return aural;
-    }
-    
-    public static Shader getAuralCutoutMipped(){
-        return auralCutoutMipped;
+        EntitiesPreRenderCallback.EVENT.register(AetherShaders::preRender);
     }
     
     private static float auralTime = 0;
     
-    public static void preRender(float tickDelta){
+    public static void preRender(Camera camera, Frustum frustum, float tickDelta){
         auralTime += tickDelta;
         
-        if(auralTimeUniform != null){
-            auralTimeUniform.set(auralTime);
+        if(AURAL_TIME != null){
+            AURAL_TIME.set(auralTime);
         }
-        if(auralCutoutTimeUniform != null){
-            auralCutoutTimeUniform.set(auralTime);
+        if(AURAL_CUTOUT_TIME != null){
+            AURAL_CUTOUT_TIME.set(auralTime);
         }
     }
 }
