@@ -1,6 +1,5 @@
 package net.id.aether.world.dimension;
 
-import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.util.AetherSoundEvents;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
@@ -11,15 +10,18 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
+import static net.id.aether.Aether.MOD_ID;
+import static net.id.aether.Aether.locate;
+
 public class AetherDimension {
-    public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.WORLD_KEY, Aether.locate(Aether.MOD_ID));
-    public static final RegistryKey<DimensionType> TYPE = RegistryKey.of(Registry.DIMENSION_TYPE_KEY, Aether.locate("the_aether"));
+    public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.WORLD_KEY, locate(MOD_ID));
+    public static final RegistryKey<DimensionType> DIMENSION_TYPE = RegistryKey.of(Registry.DIMENSION_TYPE_KEY, locate(MOD_ID));
 
     public static void init() {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.GLOWSTONE)
                 .customPortalBlock(AetherBlocks.BLUE_PORTAL)
-                .destDimID(Aether.locate(Aether.MOD_ID))
+                .destDimID(locate(MOD_ID))
                 .tintColor(55, 89, 195)
                 .lightWithWater()
                 .onlyLightInOverworld()

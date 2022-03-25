@@ -1,10 +1,8 @@
 package net.id.aether;
 
 import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.blocks.blockentity.AetherBlockEntityTypes;
@@ -60,7 +58,7 @@ import org.slf4j.LoggerFactory;
  * <br><br>
  * A list of developers can be found in {@code resources/fabric.mod.json}.
  */
-public class Aether implements ModInitializer, ClientModInitializer {
+public class Aether implements ModInitializer, ClientModInitializer, DedicatedServerModInitializer {
     public static final String MOD_ID = "the_aether";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
     
@@ -129,5 +127,32 @@ public class Aether implements ModInitializer, ClientModInitializer {
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.Client.init();
         }
+    }
+    
+    // FIXME This is really really really stupid.
+    @Override
+    public void onInitializeServer() {
+        ServerLifecycleEvents.SERVER_STARTED.register((server)->{
+            var world = server.getWorld(AetherDimension.AETHER_WORLD_KEY);
+            if(world == null){
+                var message = """
+                    This crash was intentional. This is because of a bug in Minecraft that prevented Paradise Lost
+                    to be unable to add the world.
+                    
+                    Please restart the server, this should solve this error.
+                    
+                    The related issue on Mojang's issue tracker is MC-195468 at https://bugs.mojang.com/browse/MC-195468
+                    """;
+                
+                Runtime.getRuntime().addShutdownHook(new Thread(()->{
+                    System.err.println(
+                        "\n".repeat(10) +
+                        message +
+                        "\n".repeat(10)
+                    );
+                }));
+                throw new RuntimeException(message);
+            }
+        });
     }
 }
