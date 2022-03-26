@@ -136,12 +136,15 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
             var world = server.getWorld(AetherDimension.AETHER_WORLD_KEY);
             if(world == null){
                 var message = """
-                    This crash was intentional. This is because of a bug in Minecraft that prevented Paradise Lost
-                    to be unable to add the world.
+                    This crash is intentional. This is because of a bug in vanilla Minecraft that caused Paradise Lost
+                    to be unable to add the Aether dimension.
                     
-                    Please restart the server, this should solve this error.
+                    Please restart the server. This should solve this error.
                     
                     The related issue on Mojang's issue tracker is MC-195468 at https://bugs.mojang.com/browse/MC-195468
+                    
+                    You should only ever see this error message once per world.
+                    If restarting the server doesn't solve the issue, then please contact us at https://discord.gg/eRsJ6F3Wng
                     """;
                 
                 Runtime.getRuntime().addShutdownHook(new Thread(()->{
