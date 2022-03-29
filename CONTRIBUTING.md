@@ -2,7 +2,7 @@
 
 ### If you found an issue:
 
-* **If the issue is a security vulnerability, DO NOT OPEN AN ISSUE ON GITHUB**. Instead, to refer to our [security policy](https://github.com/devs-immortal/Paradise-Lost/SECURITY.md).
+* **If the issue is a security vulnerability, DO NOT OPEN AN ISSUE ON GITHUB**. Instead, to refer to our [security policy](https://github.com/devs-immortal/Paradise-Lost/blob/b1.7/SECURITY.md).
 
 * **Check that the issue was not already reported** by searching on GitHub under [Issues](https://github.com/devs-immortal/paradise-lost/issues). If an issue already exists, feel free to leave a comment on it with any important information.
 
