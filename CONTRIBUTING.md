@@ -1,10 +1,10 @@
 ## How to contribute to Paradise Lost
 
-#### **Did you find a bug?**
+### If you found an issue:
 
-* **If the bug is a security vulnerability, DO NOT OPEN AN ISSUE ON GITHUB**. Instead, to refer to our [security policy](https://github.com/devs-immortal/Paradise-Lost/SECURITY.md).
+* **If the issue is a security vulnerability, DO NOT OPEN AN ISSUE ON GITHUB**. Instead, to refer to our [security policy](https://github.com/devs-immortal/Paradise-Lost/SECURITY.md).
 
-* **Check that the bug was not already reported** by searching on GitHub under [Issues](https://github.com/devs-immortal/paradise-lost/issues). If an issue already exists, feel free to leave a comment on it with any important information.
+* **Check that the issue was not already reported** by searching on GitHub under [Issues](https://github.com/devs-immortal/paradise-lost/issues). If an issue already exists, feel free to leave a comment on it with any important information.
 
 * If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/devs-immortal/Paradise-Lost/issues/new/choose).
 
@@ -13,6 +13,8 @@
   * [**Bug Report** for other issues](https://github.com/devs-immortal/Paradise-Lost/issues/new?assignees=&labels=Bug&template=bug_report.yml&title=Bug%3A+)
   * [**Accessibility** for accessibility requests](https://github.com/devs-immortal/Paradise-Lost/issues/new?assignees=&labels=Feature%2CAccessibility&template=accessibility_report.yml&title=Accessibility%3A+)
   * [**Feature Request** for other suggestions](https://github.com/devs-immortal/Paradise-Lost/issues/new?assignees=&labels=Feature&template=feature_request.yml&title=Feature%3A+)
+
+### For code contributions:
 
 #### **Did you write a patch that fixes a bug?**
 
@@ -24,12 +26,6 @@
 ```java
     /**
      * This code is actually gibberish. It's a mishmash of things intended to show our code style.
-     * Write reasonable documentation for non-obvious methods.
-     * <br>For public facing APIs, like {@link net.id.aether.api.MoaAPI} or {@link net.id.aether.api.FloatingBlockHelper}, 
-     * document everything that is public.
-     * <br>Use @param and @return tags if non-obvious or if specific values may give strange results.
-     * <br>If you didn't write the code and you're just adding docs, end your docs with a tilde and your
-     * name/username. If you did write it, end your docs with the @author tag.
      * <br>~ Jack
      */
     @Inject(
@@ -55,7 +51,6 @@
 
 * **MAKE A PULL REQUEST FOR NEW FEATURES**.
 * Refer to CDA's details on contribution and branch names:
-
 ```
 **<MCVER>**: Assume these are production/live branches unless otherwise written or stated.
   - Only push code here that is tested and expected to ship in the next applicable update
@@ -87,10 +82,20 @@
 
 #### **Do you want to contribute to documentation?**
 
-* Please see [this file](https://github.com/devs-immortal/Paradise-Lost/blob/2425948c10ba869fd0365568e7cfe5635ec66317/src/main/java/net/id/aether/Aether.java#L45-L62) about documentation
-
+* Please see [this file](https://github.com/devs-immortal/Paradise-Lost/blob/2425948c10ba869fd0365568e7cfe5635ec66317/src/main/java/net/id/aether/Aether.java#L45-L62) and the following example about documentation:
+```java
+    /**
+     * Write reasonable documentation for non-obvious methods.
+     * For public facing APIs, like {@link net.id.aether.api.MoaAPI} or {@link net.id.aether.api.FloatingBlockHelper}, 
+     * fully document everything that is public. ^ (Also, use these @link tags when possible)
+     * <br>Use @param and @return tags if non-obvious or if specific values may give strange results.
+     * <br>If you didn't write the code and you're just adding docs, end your docs with a tilde and your
+     * name/username. If you did write it, then just the @author tag is alright.
+     * <br>~ Jack
+     */
+```
 Paradise Lost is nothing without its community. We encourage you to pitch in and help out or join the team!
 
 Thanks for reading! :heart: :heart: :heart:
 
-Immortal Devs
+-Immortal Devs
