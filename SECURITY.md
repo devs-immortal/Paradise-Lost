@@ -35,4 +35,4 @@ Please provide as much information as you can, and we prefer Discord as we can r
 
 Thank you for helping us keep our code safe.
 
-*\* DEV is the master branch on github.*
+*\* DEV is the default branch on github.*
