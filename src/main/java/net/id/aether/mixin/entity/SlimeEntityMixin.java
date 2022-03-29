@@ -6,7 +6,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +21,6 @@ import static org.objectweb.asm.Opcodes.ISTORE;
  * - Swet flag
  * - Overrides vanilla particle generation if this is a swet
  */
-@Debug(export = true)
 @Mixin(SlimeEntity.class)
 public abstract class SlimeEntityMixin extends MobEntity implements Monster {
     @Unique private boolean aether_isSwet;
