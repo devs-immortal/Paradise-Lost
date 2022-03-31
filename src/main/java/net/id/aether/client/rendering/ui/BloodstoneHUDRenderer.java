@@ -59,9 +59,13 @@ public class BloodstoneHUDRenderer {
     }
 
     private static boolean isLookingAtMatchingEntity(MinecraftClient client, BloodstoneCapturedData capturedData) {
-        if (client.crosshairTarget == null || client.crosshairTarget.getType() != HitResult.Type.ENTITY || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity))
+        if (client.crosshairTarget == null || client.crosshairTarget.getType() != HitResult.Type.ENTITY)
             return false;
-        return doUUIDMatch((LivingEntity) ((EntityHitResult) client.crosshairTarget).getEntity(), capturedData);
+
+        if(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity entity)
+            return doUUIDMatch(entity, capturedData);
+
+        return false;
     }
 
     private static boolean doUUIDMatch(LivingEntity entity, BloodstoneCapturedData capturedData) {
