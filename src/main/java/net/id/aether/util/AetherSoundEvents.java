@@ -5,6 +5,7 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.metadata.ResourceMetadataReader;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
@@ -36,51 +37,54 @@ public final class AetherSoundEvents {
      */
     private static final Set<AbstractSoundEvent> SOUNDS = new HashSet<>();
 
-    public static final SoundEvent BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES = childEvent("block.blueberry_bush.pick_blueberries", "block.sweet_berry_bush.pick_berries");
+    public static final SoundEvent BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES = childEvent("block.blueberry_bush.pick_blueberries", SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES);
 
-    public static final SoundEvent BLOCK_AETHER_PORTAL_AMBIENT = event("block.portal.ambient");
-    public static final SoundEvent BLOCK_AETHER_PORTAL_TRAVEL = event("block.portal.travel");
-    public static final SoundEvent BLOCK_AETHER_PORTAL_TRIGGER = event("block.portal.trigger");
-    
+    public static final SoundEvent BLOCK_AETHER_PORTAL_AMBIENT = event(SoundEvents.BLOCK_PORTAL_AMBIENT);
+    public static final SoundEvent BLOCK_AETHER_PORTAL_TRAVEL = event(SoundEvents.BLOCK_PORTAL_TRAVEL);
+    public static final SoundEvent BLOCK_AETHER_PORTAL_TRIGGER = event(SoundEvents.BLOCK_PORTAL_TRIGGER);
+
+
     public static final SoundEvent MUSIC_AETHER = music("cloud_ocean", "floating", "spirit_sunset", "constellation", "overcast", "sullen_lullaby");
     
     public static final SoundEvent MISC_SILENCE = event("misc.silence", false);
 
-    public static final SoundEvent ENTITY_SWET_ATTACK = childEvent("entity.swet.attack", "entity.slime.attack");
 
-    public static final SoundEvent ENTITY_AECHOR_PLANT_DEATH = childEvent("entity.aechor_plant.death", "minecraft:entity.generic.big_fall");
-    public static final SoundEvent ENTITY_AECHOR_PLANT_SHOOT = childEvent("entity.aechor_plant.shoot", "minecraft:entity.skeleton.shoot");
+    public static final SoundEvent ENTITY_SWET_ATTACK = childEvent("entity.swet.attack", SoundEvents.ENTITY_SLIME_ATTACK);
+
+    public static final SoundEvent ENTITY_AECHOR_PLANT_DEATH = childEvent("entity.aechor_plant.death", SoundEvents.ENTITY_GENERIC_BIG_FALL);
+    public static final SoundEvent ENTITY_AECHOR_PLANT_SHOOT = childEvent("entity.aechor_plant.shoot", SoundEvents.ENTITY_SKELETON_SHOOT);
 
     public static final SoundEvent ENTITY_COCKATRICE_AMBIENT = childEvent("entity.cockatrice.ambient", "minecraft:entity.hostile.ambient");
-    public static final SoundEvent ENTITY_COCKATRICE_DEATH = childEvent("entity.cockatrice.death", "minecraft:entity.hostile.death");
-    public static final SoundEvent ENTITY_COCKATRICE_HURT = childEvent("entity.cockatrice.hurt", "minecraft:entity.hostile.hurt");
+    public static final SoundEvent ENTITY_COCKATRICE_DEATH = childEvent("entity.cockatrice.death", SoundEvents.ENTITY_HOSTILE_DEATH);
+    public static final SoundEvent ENTITY_COCKATRICE_HURT = childEvent("entity.cockatrice.hurt", SoundEvents.ENTITY_HOSTILE_HURT);
 
-    public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", "minecraft:entity.parrot.ambient");
-    public static final SoundEvent ENTITY_MOA_GLIDING = childEvent("entity.moa.gliding", "minecraft:entity.phantom.flap");
-    public static final SoundEvent ENTITY_MOA_DEATH = childEvent("entity.moa.death", "minecraft:entity.parrot.death");
-    public static final SoundEvent ENTITY_MOA_HURT = childEvent("entity.moa.hurt", "minecraft:entity.bat.death");
-    public static final SoundEvent ENTITY_MOA_EAT = childEvent("entity.moa.eat", "minecraft:entity.parrot.eat");
-    public static final SoundEvent ENTITY_MOA_LAY_EGG = childEvent("entity.moa.lay_egg", "minecraft:entity.turtle.lay_egg");
-    public static final SoundEvent ENTITY_MOA_EGG_HATCH = childEvent("entity.moa.egg_hatch", "minecraft:entity.turtle.egg_hatch");
-    public static final SoundEvent ENTITY_MOA_STEP = childEvent("entity.moa.step", "minecraft:entity.pig.step");
+    public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", SoundEvents.ENTITY_PARROT_AMBIENT);
+    public static final SoundEvent ENTITY_MOA_GLIDING = childEvent("entity.moa.gliding", SoundEvents.ENTITY_PHANTOM_FLAP);
+    public static final SoundEvent ENTITY_MOA_DEATH = childEvent("entity.moa.death", SoundEvents.ENTITY_PARROT_DEATH);
+    public static final SoundEvent ENTITY_MOA_HURT = childEvent("entity.moa.hurt", SoundEvents.ENTITY_BAT_DEATH);
+    public static final SoundEvent ENTITY_MOA_EAT = childEvent("entity.moa.eat", SoundEvents.ENTITY_PARROT_EAT);
+    public static final SoundEvent ENTITY_MOA_LAY_EGG = childEvent("entity.moa.lay_egg", SoundEvents.ENTITY_TURTLE_LAY_EGG);
+    public static final SoundEvent ENTITY_MOA_EGG_HATCH = childEvent("entity.moa.egg_hatch", SoundEvents.ENTITY_TURTLE_EGG_HATCH);
+    public static final SoundEvent ENTITY_MOA_STEP = childEvent("entity.moa.step", SoundEvents.ENTITY_PIG_STEP);
 
-    public static final SoundEvent ENTITY_AERBUNNY_SNIFF = childEvent("entity.aerbunny.sniff", "minecraft:entity.fox.sniff");
-    public static final SoundEvent ENTITY_AERBUNNY_JUMP = childEvent("entity.aerbunny.jump", "minecraft:entity.rabbit.jump");
-    public static final SoundEvent ENTITY_AERBUNNY_HURT = childEvent("entity.aerbunny.hurt", "minecraft:entity.rabbit.hurt");
-    public static final SoundEvent ENTITY_AERBUNNY_DEATH = childEvent("entity.aerbunny.death", "minecraft:entity.rabbit.death");
-    public static final SoundEvent ENTITY_AERBUNNY_EAT = childEvent("entity.aerbunny.eat", "minecraft:entity.llama.eat");
+    public static final SoundEvent ENTITY_AERBUNNY_SNIFF = childEvent("entity.aerbunny.sniff", SoundEvents.ENTITY_FOX_SNIFF);
+    public static final SoundEvent ENTITY_AERBUNNY_JUMP = childEvent("entity.aerbunny.jump", SoundEvents.ENTITY_RABBIT_JUMP);
+    public static final SoundEvent ENTITY_AERBUNNY_HURT = childEvent("entity.aerbunny.hurt", SoundEvents.ENTITY_RABBIT_HURT);
+    public static final SoundEvent ENTITY_AERBUNNY_DEATH = childEvent("entity.aerbunny.death", SoundEvents.ENTITY_RABBIT_DEATH);
+    public static final SoundEvent ENTITY_AERBUNNY_EAT = childEvent("entity.aerbunny.eat", SoundEvents.ENTITY_LLAMA_EAT);
 
     public static final SoundEvent ENTITY_NIGHTMARE_HURT = event("entity.nightmare.hurt");
     public static final SoundEvent ENTITY_NIGHTMARE_DEATH = event("entity.nightmare.death");
     public static final SoundEvent ENTITY_NIGHTMARE_AMBIENT = event("entity.nightmare.ambient");
 
-    public static final SoundEvent ITEM_ARMOR_EQUIP_ZANITE = childEvent("item.armor.equip.zanite", "minecraft:item.armor.equip_iron");
-    public static final SoundEvent ITEM_ARMOR_EQUIP_GRAVITITE = childEvent("item.armor.equip.gravitite", "minecraft:item.armor.equip_diamond");
-    public static final SoundEvent ITEM_ARMOR_EQUIP_NEPTUNE = childEvent("item.armor.equip.neptune", "minecraft:item.armor.equip_diamond");
-    public static final SoundEvent ITEM_ARMOR_EQUIP_PHOENIX = childEvent("item.armor.equip.phoenix", "minecraft:item.armor.equip_diamond");
-    public static final SoundEvent ITEM_ARMOR_EQUIP_OBSIDIAN = childEvent("item.armor.equip.obsidian", "minecraft:item.armor.equip_netherite");
-    public static final SoundEvent ITEM_ARMOR_EQUIP_VALKYRIE = childEvent("item.armor.equip.valkyrie", "minecraft:item.armor.equip_netherite");
-    public static final SoundEvent ITEM_ARMOR_EQUIP_SENTRY = childEvent("item.armor.equip.sentry", "minecraft:item.armor.equip_turtle");
+
+    public static final SoundEvent ITEM_ARMOR_EQUIP_ZANITE = childEvent("item.armor.equip.zanite", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_GRAVITITE = childEvent("item.armor.equip.gravitite", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_NEPTUNE = childEvent("item.armor.equip.neptune", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_PHOENIX = childEvent("item.armor.equip.phoenix", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_OBSIDIAN = childEvent("item.armor.equip.obsidian", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_VALKYRIE = childEvent("item.armor.equip.valkyrie", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_SENTRY = childEvent("item.armor.equip.sentry", SoundEvents.ITEM_ARMOR_EQUIP_TURTLE);
 
     public static final class Music{
         public static final MusicSound AETHER = new MusicSound(MUSIC_AETHER, 12000, 24000, false);
@@ -88,7 +92,7 @@ public final class AetherSoundEvents {
         //Triggers <clinit>()V
         private static void init(){}
     }
-    
+
     /**
      * Creates a new sound event with the sound and subtitle key based off of the name.
      *
@@ -97,6 +101,16 @@ public final class AetherSoundEvents {
      */
     private static SoundEvent event(String name){
         return event(name, true);
+    }
+
+    /**
+     * Creates a new sound event with the sound and subtitle key based off of the name.
+     *
+     * @param event The sound event
+     * @return The new event
+     */
+    private static SoundEvent event(SoundEvent event){
+        return event(event.getId().toString(), true);
     }
     
     /**
