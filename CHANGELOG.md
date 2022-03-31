@@ -1,9 +1,18 @@
+## Changes
+
+- Added a warning message for server owners about world creation.
+- Wisteria foliage is now bonemeal-able
+- Orange fruit items are now scattered instead of spawned from leaves
+- Modified wisteria & golden oak trunk generation
+- Renamed logger
+
 ## Fixes
 
-- Fixed fatal issues that prevented servers from starting
-- Updated Moretags - Should fix some issues with shears and some incompatibilities
-- Re-added structures
-- Updated leaves textures
+- Fixed several subtitles. e.g. "Phantom flaps" -> "Moa glides"
+- Bloodstones no longer crash upon use on a non-living entity.
+- Fixed several incompatibilities related to shaders and performance mods
+- Improved client-side sign registration
+- Fixed a bug that prevented the user from customizing a superflat world
 
 ## Advisory: 1.17 ➝ 1.18 World Migration
 
