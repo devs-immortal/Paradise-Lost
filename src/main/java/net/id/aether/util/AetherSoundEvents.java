@@ -26,6 +26,7 @@ import static net.id.aether.Aether.locate;
  * The home for all Aether sounds.
  */
 public final class AetherSoundEvents {
+
     private AetherSoundEvents(){
         throw new RuntimeException();
     }
@@ -34,7 +35,9 @@ public final class AetherSoundEvents {
      * Used internally to track sounds, needs to be the first field.
      */
     private static final Set<AbstractSoundEvent> SOUNDS = new HashSet<>();
-    
+
+    public static final SoundEvent BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES = childEvent("block.blueberry_bush.pick_blueberries", "block.sweet_berry_bush.pick_berries");
+
     public static final SoundEvent BLOCK_AETHER_PORTAL_AMBIENT = event("block.portal.ambient");
     public static final SoundEvent BLOCK_AETHER_PORTAL_TRAVEL = event("block.portal.travel");
     public static final SoundEvent BLOCK_AETHER_PORTAL_TRIGGER = event("block.portal.trigger");
@@ -42,7 +45,12 @@ public final class AetherSoundEvents {
     public static final SoundEvent MUSIC_AETHER = music("cloud_ocean", "floating", "spirit_sunset", "constellation", "overcast", "sullen_lullaby");
     
     public static final SoundEvent MISC_SILENCE = event("misc.silence", false);
-    
+
+    public static final SoundEvent ENTITY_SWET_ATTACK = childEvent("entity.swet.attack", "entity.slime.attack");
+
+    public static final SoundEvent ENTITY_AECHOR_PLANT_DEATH = childEvent("entity.aechor_plant.death", "minecraft:entity.generic.big_fall");
+    public static final SoundEvent ENTITY_AECHOR_PLANT_SHOOT = childEvent("entity.aechor_plant.shoot", "minecraft:entity.skeleton.shoot");
+
     public static final SoundEvent ENTITY_COCKATRICE_AMBIENT = childEvent("entity.cockatrice.ambient", "minecraft:entity.hostile.ambient");
     public static final SoundEvent ENTITY_COCKATRICE_DEATH = childEvent("entity.cockatrice.death", "minecraft:entity.hostile.death");
     public static final SoundEvent ENTITY_COCKATRICE_HURT = childEvent("entity.cockatrice.hurt", "minecraft:entity.hostile.hurt");
@@ -53,7 +61,14 @@ public final class AetherSoundEvents {
     public static final SoundEvent ENTITY_MOA_HURT = childEvent("entity.moa.hurt", "minecraft:entity.bat.death");
     public static final SoundEvent ENTITY_MOA_EAT = childEvent("entity.moa.eat", "minecraft:entity.parrot.eat");
     public static final SoundEvent ENTITY_MOA_LAY_EGG = childEvent("entity.moa.lay_egg", "minecraft:entity.turtle.lay_egg");
+    public static final SoundEvent ENTITY_MOA_EGG_HATCH = childEvent("entity.moa.egg_hatch", "minecraft:entity.turtle.egg_hatch");
     public static final SoundEvent ENTITY_MOA_STEP = childEvent("entity.moa.step", "minecraft:entity.pig.step");
+
+    public static final SoundEvent ENTITY_AERBUNNY_SNIFF = childEvent("entity.aerbunny.sniff", "minecraft:entity.fox.sniff");
+    public static final SoundEvent ENTITY_AERBUNNY_JUMP = childEvent("entity.aerbunny.jump", "minecraft:entity.rabbit.jump");
+    public static final SoundEvent ENTITY_AERBUNNY_HURT = childEvent("entity.aerbunny.hurt", "minecraft:entity.rabbit.hurt");
+    public static final SoundEvent ENTITY_AERBUNNY_DEATH = childEvent("entity.aerbunny.death", "minecraft:entity.rabbit.death");
+    public static final SoundEvent ENTITY_AERBUNNY_EAT = childEvent("entity.aerbunny.eat", "minecraft:entity.llama.eat");
 
     public static final SoundEvent ENTITY_NIGHTMARE_HURT = event("entity.nightmare.hurt");
     public static final SoundEvent ENTITY_NIGHTMARE_DEATH = event("entity.nightmare.death");
@@ -138,7 +153,7 @@ public final class AetherSoundEvents {
         SOUNDS.add(event);
         return event;
     }
-    
+
     /**
      * Creates a new sound event that uses another as it's sound. The subtitle key is based off of the name.
      *
@@ -148,6 +163,17 @@ public final class AetherSoundEvents {
      */
     private static SoundEvent childEvent(String name, String parent){
         return childEvent(name, true, parent);
+    }
+
+    /**
+     * Creates a new sound event that uses another as it's sound. The subtitle key is based off of the name.
+     *
+     * @param name The name of the event
+     * @param parent The source of the sounds
+     * @return The new sound event
+     */
+    private static SoundEvent childEvent(String name, SoundEvent parent){
+        return childEvent(name, true, parent.getId().toString());
     }
     
     /**

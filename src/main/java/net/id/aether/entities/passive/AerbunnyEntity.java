@@ -6,6 +6,7 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityExtensions;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.items.AetherItems;
+import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
@@ -29,7 +30,6 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -120,7 +120,7 @@ public class AerbunnyEntity extends AetherAnimalEntity {
         }
 
         if (random.nextFloat() <= 0.03F) {
-            AerbunnyEntity.this.playSound(SoundEvents.ENTITY_FOX_SNIFF, 1.0F, 2.0F);
+            AerbunnyEntity.this.playSound(AetherSoundEvents.ENTITY_AERBUNNY_SNIFF, 1.0F, 2.0F);
         }
 
         if (this.hasVehicle() && (this.getVehicle().isSneaking() || this.getVehicle().getVelocity().y < -0.7)){
@@ -164,7 +164,7 @@ public class AerbunnyEntity extends AetherAnimalEntity {
         for (int i = 0; i < 4; i++) {
             world.addParticle(ParticleTypes.CLOUD, pos.x + (random.nextGaussian() * 0.2), pos.y + (random.nextGaussian() * 0.2), pos.z + (random.nextGaussian() * 0.2), 0, 0, 0);
         }
-        world.playSoundFromEntity(null, this, SoundEvents.ENTITY_RABBIT_JUMP, SoundCategory.NEUTRAL, 1, 1);
+        world.playSoundFromEntity(null, this, AetherSoundEvents.ENTITY_AERBUNNY_JUMP, SoundCategory.NEUTRAL, 1, 1);
         super.jump();
     }
 
@@ -206,12 +206,12 @@ public class AerbunnyEntity extends AetherAnimalEntity {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_RABBIT_HURT;
+        return AetherSoundEvents.ENTITY_AERBUNNY_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_RABBIT_DEATH;
+        return AetherSoundEvents.ENTITY_AERBUNNY_DEATH;
     }
 
     @Override
@@ -247,7 +247,7 @@ public class AerbunnyEntity extends AetherAnimalEntity {
                     ++this.timer;
                 }
             } else if (!this.hasReached() && AerbunnyEntity.this.random.nextFloat() < 0.05F) {
-                AerbunnyEntity.this.playSound(SoundEvents.ENTITY_FOX_SNIFF, 1.0F, 2.0F);
+                AerbunnyEntity.this.playSound(AetherSoundEvents.ENTITY_AERBUNNY_SNIFF, 1.0F, 2.0F);
             }
             super.tick();
         }
@@ -257,8 +257,8 @@ public class AerbunnyEntity extends AetherAnimalEntity {
             if (blockState.isOf(AetherBlocks.BLUEBERRY_BUSH) && blockState.get(SweetBerryBushBlock.AGE) == 3) {
                 AerbunnyEntity.this.setLoveTicks(40);
                 AerbunnyEntity.this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 10, 2));
-                AerbunnyEntity.this.playSound(SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, 1.0F, 1.0F);
-                AerbunnyEntity.this.playSound(SoundEvents.ENTITY_LLAMA_EAT, 0.8F, 2.0F);
+                AerbunnyEntity.this.playSound(AetherSoundEvents.BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES, 1.0F, 1.0F);
+                AerbunnyEntity.this.playSound(AetherSoundEvents.ENTITY_AERBUNNY_EAT, 0.8F, 2.0F);
                 AerbunnyEntity.this.world.setBlockState(this.targetPos, blockState.with(SweetBerryBushBlock.AGE, 1), Block.NOTIFY_LISTENERS);
             }
         }

@@ -2,13 +2,13 @@ package net.id.aether.blocks.blockentity;
 
 import net.id.aether.component.MoaGenes;
 import net.id.aether.items.AetherItems;
+import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -33,7 +33,7 @@ public class IncubatorBlockEntity extends AetherBlockEntity {
                 incubator.hatchTicks = 0;
                 var moa = MoaGenes.getMoaFromEgg(world, incubator.inventory.get(0), incubator.owner);
                 moa.refreshPositionAndAngles(pos.getX() + 0.25, pos.getY() + 0.65, pos.getZ() + 0.25, world.getRandom().nextFloat() * 360 - 180, 0);
-                world.playSound(null, pos, SoundEvents.ENTITY_TURTLE_EGG_HATCH, SoundCategory.BLOCKS, 2F, 0.5F);
+                world.playSound(null, pos, AetherSoundEvents.ENTITY_MOA_EGG_HATCH, SoundCategory.BLOCKS, 2F, 0.5F);
                 world.spawnEntity(moa);
                 incubator.inventory.clear();
             }

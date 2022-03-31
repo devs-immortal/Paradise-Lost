@@ -3,6 +3,7 @@ package net.id.aether.entities.hostile.swet;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.tag.AetherItemTags;
 import net.id.aether.util.AetherDamageSources;
+import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.Goal;
@@ -19,7 +20,6 @@ import net.minecraft.entity.vehicle.TntMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -196,7 +196,7 @@ public abstract class SwetEntity extends SlimeEntity {
         if (this.isAlive()) {
             int i = this.getSize();
             if (this.squaredDistanceTo(target) < 0.6 * (double)i * (0.6 * (double)i) && this.canSee(target) && target.damage(AetherDamageSources.swet(this), this.getDamageAmount())) {
-                this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
+                this.playSound(AetherSoundEvents.ENTITY_SWET_ATTACK, 1.0f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
                 this.applyDamageEffects(this, target);
             }
         }

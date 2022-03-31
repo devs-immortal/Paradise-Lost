@@ -4,6 +4,7 @@ import net.id.aether.entities.passive.AetherAnimalEntity;
 import net.id.aether.entities.projectile.PoisonNeedleEntity;
 import net.id.aether.items.AetherItems;
 import net.id.aether.tag.AetherBlockTags;
+import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
@@ -18,7 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -96,7 +96,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
         double distance = Math.sqrt((float) (x * x + z * z));
 
         needle.setVelocity(x, y + distance * 0.20000000298023224D, z, 1.0F, (float)(14 - this.world.getDifficulty().getId() * 4));
-        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
+        this.playSound(AetherSoundEvents.ENTITY_AECHOR_PLANT_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
         this.world.spawnEntity(needle);
     }
 
@@ -149,7 +149,7 @@ public class AechorPlantEntity extends AetherAnimalEntity implements RangedAttac
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_GENERIC_BIG_FALL;
+        return AetherSoundEvents.ENTITY_AECHOR_PLANT_DEATH;
     }
 
     @Override
