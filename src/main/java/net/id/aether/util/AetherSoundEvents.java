@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static net.id.aether.Aether.MOD_ID;
 import static net.id.aether.Aether.locate;
 
 // TODO: Is this the best place for this?
@@ -45,9 +46,14 @@ public final class AetherSoundEvents {
     public static final SoundEvent ENTITY_COCKATRICE_AMBIENT = childEvent("entity.cockatrice.ambient", "minecraft:entity.hostile.ambient");
     public static final SoundEvent ENTITY_COCKATRICE_DEATH = childEvent("entity.cockatrice.death", "minecraft:entity.hostile.death");
     public static final SoundEvent ENTITY_COCKATRICE_HURT = childEvent("entity.cockatrice.hurt", "minecraft:entity.hostile.hurt");
-    public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", "minecraft:entity.hostile.ambient");
-    public static final SoundEvent ENTITY_MOA_DEATH = childEvent("entity.moa.death", "minecraft:entity.hostile.death");
-    public static final SoundEvent ENTITY_MOA_HURT = childEvent("entity.moa.hurt", "minecraft:entity.hostile.hurt");
+
+    public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", "minecraft:entity.parrot.ambient");
+    public static final SoundEvent ENTITY_MOA_GLIDING = childEvent("entity.moa.gliding", "minecraft:entity.phantom.flap");
+    public static final SoundEvent ENTITY_MOA_DEATH = childEvent("entity.moa.death", "minecraft:entity.parrot.death");
+    public static final SoundEvent ENTITY_MOA_HURT = childEvent("entity.moa.hurt", "minecraft:entity.bat.death");
+    public static final SoundEvent ENTITY_MOA_EAT = childEvent("entity.moa.eat", "minecraft:entity.parrot.eat");
+    public static final SoundEvent ENTITY_MOA_LAY_EGG = childEvent("entity.moa.lay_egg", "minecraft:entity.turtle.lay_egg");
+    public static final SoundEvent ENTITY_MOA_STEP = childEvent("entity.moa.step", "minecraft:entity.pig.step");
 
     public static final SoundEvent ENTITY_NIGHTMARE_HURT = event("entity.nightmare.hurt");
     public static final SoundEvent ENTITY_NIGHTMARE_DEATH = event("entity.nightmare.death");
@@ -104,7 +110,7 @@ public final class AetherSoundEvents {
     private static SoundEvent event(String name, boolean subtitles, String... sounds){
         var event = new AetherSoundEvent(
             locate(name),
-            subtitles ? "subtitles.the_aether." + name : null,
+            subtitles ? "subtitles." + MOD_ID + "." + name : null,
             Stream.of(sounds)
                 .map(Aether::locate)
                 .collect(Collectors.toUnmodifiableSet())
@@ -147,7 +153,7 @@ public final class AetherSoundEvents {
     private static SoundEvent childEvent(String name, boolean subtitles, String parent){
         var event = new ChildSoundEvent(
             locate(name),
-            subtitles ? "subtitles.the_aether." + name : null,
+            subtitles ? "subtitles." + MOD_ID + "." + name : null,
             locate(parent)
         );
         SOUNDS.add(event);
@@ -175,7 +181,7 @@ public final class AetherSoundEvents {
     /**
      * The identifier for our sounds.json resource.
      */
-    private static final Identifier RESOURCE_SOUNDS = locate("the_aether:sounds.json");
+    private static final Identifier RESOURCE_SOUNDS = locate("sounds.json");
     
     /**
      * Creates a resource for the sound system to read, allowing for laziness and one less JSON file.

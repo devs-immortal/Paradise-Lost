@@ -9,6 +9,7 @@ import net.id.aether.entities.util.SaddleMountEntity;
 import net.id.aether.items.AetherItems;
 import net.id.aether.items.tools.bloodstone.BloodstoneItem;
 import net.id.aether.tag.AetherItemTags;
+import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -32,7 +33,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -141,7 +141,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     protected void playHurtSound(DamageSource source) {
-        this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_BAT_DEATH, SoundCategory.NEUTRAL, 0.225F, MathHelper.clamp(this.random.nextFloat(), 0.5f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.15f));
+        this.world.playSound(null, this.getX(), this.getY(), this.getZ(), AetherSoundEvents.ENTITY_MOA_HURT, SoundCategory.NEUTRAL, 0.225F, MathHelper.clamp(this.random.nextFloat(), 0.5f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.15f));
     }
 
     @Override
@@ -157,9 +157,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         if (age % 15 == 0) {
             if (isGliding()) {
-                this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_PHANTOM_FLAP, SoundCategory.NEUTRAL, 4.5F, MathHelper.clamp(this.random.nextFloat(), 0.85f, 1.2f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.35f));
+                this.world.playSound(null, this.getX(), this.getY(), this.getZ(), AetherSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 4.5F, MathHelper.clamp(this.random.nextFloat(), 0.85f, 1.2f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.35f));
             } else if (random.nextFloat() < 0.057334F) {
-                this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_PARROT_AMBIENT, SoundCategory.NEUTRAL, 1.5F + random.nextFloat() * 2, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.25f));
+                this.world.playSound(null, this.getX(), this.getY(), this.getZ(), AetherSoundEvents.ENTITY_MOA_AMBIENT, SoundCategory.NEUTRAL, 1.5F + random.nextFloat() * 2, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.25f));
             }
         }
 
@@ -186,7 +186,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             produceParticlesServer(ParticleTypes.ANGRY_VILLAGER, random.nextInt(3), 1, 0);
             if (hunger < 10F && hasPassengers()) {
                 removeAllPassengers();
-                playSound(SoundEvents.ENTITY_PARROT_DEATH, 1, 1.5F + random.nextFloat() * 0.5F);
+                playSound(AetherSoundEvents.ENTITY_MOA_DEATH, 1, 1.5F + random.nextFloat() * 0.5F);
             }
         }
         if (getGenes().getRace().legendary() && getVelocity().lengthSquared() <= 0.02 && random.nextFloat() < 0.1F && random.nextBoolean()) {
@@ -313,13 +313,13 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             else {
                 if(heldStack.getItem() != AetherItems.ORANGE && heldStack.isIn(AetherItemTags.MOA_TEMPTABLES)) {
                     eat(player, hand, heldStack);
-                    playSound(SoundEvents.ENTITY_PARROT_EAT, 1, 0.5F + random.nextFloat() / 3F);
+                    playSound(AetherSoundEvents.ENTITY_MOA_EAT, 1, 0.5F + random.nextFloat() / 3F);
                     produceParticlesServer(new ItemStackParticleEffect(ParticleTypes.ITEM, heldStack), 2 + random.nextInt(4), 7, 0);
                     //spawnConsumptionEffects(heldStack, 7 + random.nextInt(13));
 
                     if(random.nextFloat() < 0.04F * (heldStack.isFood() ? heldStack.getItem().getFoodComponent().getHunger() : 2)) {
                         getGenes().tame(player.getUuid());
-                        playSound(SoundEvents.ENTITY_PARROT_AMBIENT, 2, 0.75F);
+                        playSound(AetherSoundEvents.ENTITY_MOA_AMBIENT, 2, 0.75F);
                         produceParticlesServer(ParticleTypes.HAPPY_VILLAGER, 2 + random.nextInt(4), 7, 0);
                     }
 
@@ -339,7 +339,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             spawnConsumptionEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
             heldStack.decrement(consumption);
             getGenes().setHunger(satiation + (consumption * hungerRestored));
-            playSound(SoundEvents.ENTITY_PARROT_EAT, 1.5F, 0.8F);
+            playSound(AetherSoundEvents.ENTITY_MOA_EAT, 1.5F, 0.8F);
             produceParticles(ParticleTypes.HAPPY_VILLAGER);
         }
     }
@@ -366,7 +366,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         MoaGenes genes = getGenes();
         if (genes.getHunger() > 80F) {
             ItemStack egg = genes.getEggForBreeding(((MoaEntity) other).genes, world, getBlockPos());
-            playSound(SoundEvents.ENTITY_TURTLE_LAY_EGG, 0.8F, 1.5F);
+            playSound(AetherSoundEvents.ENTITY_MOA_LAY_EGG, 0.8F, 1.5F);
 
             ItemScatterer.spawn(world, getX(), getY(), getZ(), egg);
             this.setBreedingAge(6000);
@@ -385,7 +385,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     protected void playStepSound(BlockPos posIn, BlockState stateIn) {
-        this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_PIG_STEP, SoundCategory.NEUTRAL, 0.15F, 1F);
+        this.world.playSound(null, this.getX(), this.getY(), this.getZ(), AetherSoundEvents.ENTITY_MOA_STEP, SoundCategory.NEUTRAL, 0.15F, 1F);
     }
 
     public void fall() {
@@ -447,7 +447,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public void startJumping(int height) {
-        this.world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_PHANTOM_FLAP, SoundCategory.NEUTRAL, 7.5F, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.8f));
+        this.world.playSound(null, this.getX(), this.getY(), this.getZ(), AetherSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 7.5F, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.8f));
     }
 
     @Override
@@ -517,7 +517,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     ++this.timer;
                 }
             } else if (!this.hasReached() && MoaEntity.this.random.nextFloat() < 0.025F) {
-                MoaEntity.this.playSound(SoundEvents.ENTITY_PARROT_DEATH, 0.5F, 2.0F);
+                MoaEntity.this.playSound(AetherSoundEvents.ENTITY_MOA_DEATH, 0.5F, 2.0F);
             }
             super.tick();
         }

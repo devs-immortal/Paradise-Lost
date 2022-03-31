@@ -514,12 +514,19 @@
   "subtitles.the_aether.block.portal.ambient": "Aether portal whooshes",
   "subtitles.the_aether.block.portal.travel": "Aether portal noise fades",
   "subtitles.the_aether.block.portal.trigger": "Aether portal noise intensifies",
+
   "subtitles.the_aether.entity.cockatrice.ambient": "Cockatrice ambiences",
   "subtitles.the_aether.entity.cockatrice.death": "Cockatrice dies",
   "subtitles.the_aether.entity.cockatrice.hurt": "Cockatrice hurts",
-  "subtitles.the_aether.entity.moa.ambient": "Moa ambiences",
+
+  "subtitles.the_aether.entity.moa.ambient": "Moa chirps",
+  "subtitles.the_aether.entity.moa.gliding": "Moa glides",
   "subtitles.the_aether.entity.moa.death": "Moa dies",
   "subtitles.the_aether.entity.moa.hurt": "Moa hurts",
+  "subtitles.the_aether.entity.moa.eat": "Moa eats",
+  "subtitles.the_aether.entity.moa.lay_egg": "Moa lays egg",
+  "subtitles.the_aether.entity.moa.step": "Moa walks",
+
   "subtitles.the_aether.entity.nightmare.hurt": "Nightmare hurts",
   "subtitles.the_aether.entity.nightmare.ambient": "Magpie Coos",
   "subtitles.the_aether.entity.nightmare.death": "Nightmare... dies?",
