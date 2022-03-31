@@ -38,15 +38,25 @@ public final class AetherSoundEvents {
     private static final Set<AbstractSoundEvent> SOUNDS = new HashSet<>();
 
     public static final SoundEvent BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES = childEvent("block.blueberry_bush.pick_blueberries", SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES);
-
     public static final SoundEvent BLOCK_AETHER_PORTAL_AMBIENT = event(SoundEvents.BLOCK_PORTAL_AMBIENT);
     public static final SoundEvent BLOCK_AETHER_PORTAL_TRAVEL = event(SoundEvents.BLOCK_PORTAL_TRAVEL);
     public static final SoundEvent BLOCK_AETHER_PORTAL_TRIGGER = event(SoundEvents.BLOCK_PORTAL_TRIGGER);
+
+    public static final SoundEvent BLOCK_ORANGE_LEAVES_BREAK = childEvent("block.orange_leaves.break", SoundEvents.BLOCK_MOSS_BREAK);
+    public static final SoundEvent BLOCK_ORANGE_LEAVES_DROP_FRUIT = childEvent("block.orange_leaves.drop_fruit", SoundEvents.BLOCK_CANDLE_BREAK);
+    public static final SoundEvent BLOCK_ORANGE_LEAVES_BREAK_DIFFERENTLY = childEvent("block.orange_leaves.break_differently", SoundEvents.BLOCK_CROP_BREAK);
+    public static final SoundEvent BLOCK_LICHEN_SPREADS = childEvent("block.lichen.spreads", SoundEvents.BLOCK_CHORUS_FLOWER_DEATH);
+
+    public static final SoundEvent BLOCK_SPRING_WATER_AMBIENT = childEvent("block.spring_water.ambient", SoundEvents.BLOCK_WATER_AMBIENT);
+    public static final SoundEvent BLOCK_SPRING_WATER_AMBIENT_2 = childEvent("block.spring_water.ambient.2", SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT);
 
 
     public static final SoundEvent MUSIC_AETHER = music("cloud_ocean", "floating", "spirit_sunset", "constellation", "overcast", "sullen_lullaby");
     
     public static final SoundEvent MISC_SILENCE = event("misc.silence", false);
+
+
+    public static final SoundEvent EFFECT_SIMMERING_SIMMER = childEvent("effect.simmering.simmer", SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT);
 
 
     public static final SoundEvent ENTITY_SWET_ATTACK = childEvent("entity.swet.attack", SoundEvents.ENTITY_SLIME_ATTACK);
@@ -57,6 +67,7 @@ public final class AetherSoundEvents {
     public static final SoundEvent ENTITY_COCKATRICE_AMBIENT = childEvent("entity.cockatrice.ambient", "minecraft:entity.hostile.ambient");
     public static final SoundEvent ENTITY_COCKATRICE_DEATH = childEvent("entity.cockatrice.death", SoundEvents.ENTITY_HOSTILE_DEATH);
     public static final SoundEvent ENTITY_COCKATRICE_HURT = childEvent("entity.cockatrice.hurt", SoundEvents.ENTITY_HOSTILE_HURT);
+    public static final SoundEvent ENTITY_COCKATRICE_SPIT = childEvent("entity.cockatrice.spit", SoundEvents.ENTITY_LLAMA_SPIT);
 
     public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", SoundEvents.ENTITY_PARROT_AMBIENT);
     public static final SoundEvent ENTITY_MOA_GLIDING = childEvent("entity.moa.gliding", SoundEvents.ENTITY_PHANTOM_FLAP);
@@ -85,6 +96,9 @@ public final class AetherSoundEvents {
     public static final SoundEvent ITEM_ARMOR_EQUIP_OBSIDIAN = childEvent("item.armor.equip.obsidian", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
     public static final SoundEvent ITEM_ARMOR_EQUIP_VALKYRIE = childEvent("item.armor.equip.valkyrie", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
     public static final SoundEvent ITEM_ARMOR_EQUIP_SENTRY = childEvent("item.armor.equip.sentry", SoundEvents.ITEM_ARMOR_EQUIP_TURTLE);
+
+    public static final SoundEvent ITEM_DART_SHOOTER_SHOOT = childEvent("item.dart_shooter.shoot", SoundEvents.ITEM_CROSSBOW_SHOOT);
+    public static final SoundEvent ITEM_BLOODSTONE_PRICK = childEvent("item.bloodstone.prick", SoundEvents.ENTITY_BEE_STING);
 
     public static final class Music{
         public static final MusicSound AETHER = new MusicSound(MUSIC_AETHER, 12000, 24000, false);

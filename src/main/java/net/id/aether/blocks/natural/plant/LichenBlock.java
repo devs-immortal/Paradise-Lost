@@ -5,6 +5,7 @@ import net.id.aether.component.ConditionManager;
 import net.id.aether.effect.condition.Conditions;
 import net.id.aether.effect.condition.Persistence;
 import net.id.aether.tag.AetherBlockTags;
+import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
@@ -15,7 +16,6 @@ import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
@@ -63,7 +63,7 @@ public class LichenBlock extends FallingBlock {
                     .findFirst()
                     .ifPresent(spreadPoint -> {
                         world.setBlockState(spreadPoint, getDefaultState());
-                        world.playSound(null, spreadPoint, SoundEvents.BLOCK_CHORUS_FLOWER_DEATH, SoundCategory.BLOCKS, 1, 0.9F + random.nextFloat() / 10);
+                        world.playSound(null, spreadPoint, AetherSoundEvents.BLOCK_LICHEN_SPREADS, SoundCategory.BLOCKS, 1, 0.9F + random.nextFloat() / 10);
                     });
         }
     }

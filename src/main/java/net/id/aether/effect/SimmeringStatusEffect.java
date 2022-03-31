@@ -2,11 +2,11 @@ package net.id.aether.effect;
 
 import net.id.aether.effect.condition.Condition;
 import net.id.aether.effect.condition.ConditionModifier;
+import net.id.aether.util.AetherSoundEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundEvents;
 
 public class SimmeringStatusEffect extends StatusEffect implements ConditionModifier {
 
@@ -22,7 +22,7 @@ public class SimmeringStatusEffect extends StatusEffect implements ConditionModi
         if(world.getTime() % (random.nextInt(10) + 6) == 0) {
             if(random.nextBoolean()) {
                 entity.heal(1F);
-                entity.playSound(SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, random.nextFloat() * 0.4F + 0.4F, random.nextFloat() * 0.5F + 1);
+                entity.playSound(AetherSoundEvents.EFFECT_SIMMERING_SIMMER, random.nextFloat() * 0.4F + 0.4F, random.nextFloat() * 0.5F + 1);
             }
             world.addParticle(ParticleTypes.CLOUD, entity.getParticleX(1), entity.getRandomBodyY(), entity.getParticleZ(1), 0.0D, 0.1, 0.0D);
         }

@@ -21,7 +21,6 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
@@ -108,7 +107,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         needle.setVelocity(dx, dy + distance * 0.2D, dz, 1.5F, 14.0F - this.world.getDifficulty().getId() * 4);
 
         if (!this.isSilent()) {
-            this.playSound(SoundEvents.ENTITY_LLAMA_SPIT, 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+            this.playSound(AetherSoundEvents.ENTITY_COCKATRICE_SPIT, 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
         }
 
         this.world.spawnEntity(needle);

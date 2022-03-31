@@ -510,10 +510,22 @@
   "condition.severity.extreme": "Extreme",
   "condition.condition.venom": "Venom",
 
+  "subtitles.the_aether.block.blueberry_bush.pick_blueberries": "Blueberries pop",
 
   "subtitles.the_aether.block.portal.ambient": "Aether portal whooshes",
   "subtitles.the_aether.block.portal.travel": "Aether portal noise fades",
   "subtitles.the_aether.block.portal.trigger": "Aether portal noise intensifies",
+
+  "subtitles.the_aether.block.orange_leaves.break": "Orange leaves break",
+  "subtitles.the_aether.block.orange_leaves.drop_fruit": "Orange leaves drop fruit",
+  "subtitles.the_aether.block.orange_leaves.break_differently": "Orange leaves broken",
+
+  "subtitles.the_aether.block.lichen.spreads": "Lichen spreads",
+
+  "subtitles.the_aether.block.spring_water.ambient": "Spring water flows",
+  "subtitles.the_aether.block.spring_water.ambient.2": "Spring water bubbles",
+
+  "subtitles.the_aether.effect.simmering.simmer": "Entity simmers",
 
   "subtitles.the_aether.entity.swet.attacks": "Swet absorbs",
 
@@ -523,6 +535,7 @@
   "subtitles.the_aether.entity.cockatrice.ambient": "Cockatrice ambiences",
   "subtitles.the_aether.entity.cockatrice.death": "Cockatrice dies",
   "subtitles.the_aether.entity.cockatrice.hurt": "Cockatrice hurts",
+  "subtitles.the_aether.entity.cockatrice.spit": "Cockatrice spits",
 
   "subtitles.the_aether.entity.moa.ambient": "Moa chirps",
   "subtitles.the_aether.entity.moa.gliding": "Moa glides",
@@ -550,6 +563,9 @@
   "subtitles.item.armor.equip.obsidian": "Obsidian armor clanks",
   "subtitles.item.armor.equip.valkyrie": "Valkyrie armor clanks",
   "subtitles.item.armor.equip.sentry": "Sentry armor thunks",
+
+  "subtitles.item.dart_shooter.shoot": "Dart shooter fires",
+  "subtitles.item.bloodstone.prick": "Bloodstone pricks",
 
 
   "easteregg.the_aether.aerwhale": "Serenity is the queen of W(h)ales!!",
