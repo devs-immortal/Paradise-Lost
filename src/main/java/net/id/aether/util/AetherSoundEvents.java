@@ -58,7 +58,15 @@ public final class AetherSoundEvents {
     public static final SoundEvent ENTITY_NIGHTMARE_HURT = event("entity.nightmare.hurt");
     public static final SoundEvent ENTITY_NIGHTMARE_DEATH = event("entity.nightmare.death");
     public static final SoundEvent ENTITY_NIGHTMARE_AMBIENT = event("entity.nightmare.ambient");
-    
+
+    public static final SoundEvent ITEM_ARMOR_EQUIP_ZANITE = childEvent("item.armor.equip.zanite", "minecraft:item.armor.equip_iron");
+    public static final SoundEvent ITEM_ARMOR_EQUIP_GRAVITITE = childEvent("item.armor.equip.gravitite", "minecraft:item.armor.equip_diamond");
+    public static final SoundEvent ITEM_ARMOR_EQUIP_NEPTUNE = childEvent("item.armor.equip.neptune", "minecraft:item.armor.equip_diamond");
+    public static final SoundEvent ITEM_ARMOR_EQUIP_PHOENIX = childEvent("item.armor.equip.phoenix", "minecraft:item.armor.equip_diamond");
+    public static final SoundEvent ITEM_ARMOR_EQUIP_OBSIDIAN = childEvent("item.armor.equip.obsidian", "minecraft:item.armor.equip_netherite");
+    public static final SoundEvent ITEM_ARMOR_EQUIP_VALKYRIE = childEvent("item.armor.equip.valkyrie", "minecraft:item.armor.equip_netherite");
+    public static final SoundEvent ITEM_ARMOR_EQUIP_SENTRY = childEvent("item.armor.equip.sentry", "minecraft:item.armor.equip_turtle");
+
     public static final class Music{
         public static final MusicSound AETHER = new MusicSound(MUSIC_AETHER, 12000, 24000, false);
 
