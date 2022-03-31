@@ -511,18 +511,62 @@
   "condition.condition.venom": "spider man 3",
 
 
+  "subtitles.the_aether.block.blueberry_bush.pick_blueberries": "Bloobery pickd",
+
   "subtitles.the_aether.block.portal.ambient": "Aethr portel whooshes",
   "subtitles.the_aether.block.portal.travel": "Aethr portel fades",
   "subtitles.the_aether.block.portal.trigger": "Aethr portel grows",
+
+  "subtitles.the_aether.block.orange_leaves.break": "Ornge leavz breakd",
+  "subtitles.the_aether.block.orange_leaves.drop_fruit": "ornge leavz giv froot",
+  "subtitles.the_aether.block.orange_leaves.break_differently": "orang leavz broke 💯",
+
+  "subtitles.the_aether.block.lichen.spreads": "tha lichen spredding",
+
+  "subtitles.the_aether.block.spring_water.ambient": "sping water flows",
+  "subtitles.the_aether.block.spring_water.ambient.2": "spring water bubblz",
+
+  "subtitles.the_aether.effect.simmering.simmer": "guy simmers down",
+
+  "subtitles.the_aether.entity.swet.attacks": "swet makes luvv <3",
+
+  "subtitles.the_aether.entity.aechor_plant.death": "poisy plant dies :(",
+  "subtitles.the_aether.entity.aechor_plant.shoot": "Poisy plant shoot",
+
   "subtitles.the_aether.entity.cockatrice.ambient": "coctrise ambiences",
   "subtitles.the_aether.entity.cockatrice.death": "coctrise dies",
   "subtitles.the_aether.entity.cockatrice.hurt": "coctrise hurts",
-  "subtitles.the_aether.entity.moa.ambient": "Moa ambiences",
-  "subtitles.the_aether.entity.moa.death": "Moa dies",
-  "subtitles.the_aether.entity.moa.hurt": "Moa hurts",
+  "subtitles.the_aether.entity.cockatrice.spit": "coctrise spitting",
+
+  "subtitles.the_aether.entity.moa.ambient": "moa chirp :))",
+  "subtitles.the_aether.entity.moa.death": "Moa dies :(",
+  "subtitles.the_aether.entity.moa.hurt": "Moa hurty",
+  "subtitles.the_aether.entity.moa.gliding": "Moa soar!!",
+  "subtitles.the_aether.entity.moa.eat": "Moa eating",
+  "subtitles.the_aether.entity.moa.lay_egg": "Moa lay egg",
+  "subtitles.the_aether.entity.moa.egg_hatch": "Moa egg become baby moa !!",
+  "subtitles.the_aether.entity.moa.step": "Moa walky",
+
   "subtitles.the_aether.entity.nightmare.hurt": "shadow guy hurts",
   "subtitles.the_aether.entity.nightmare.ambient": "bird sing a song",
   "subtitles.the_aether.entity.nightmare.death": "shadow guy go away",
+
+  "subtitles.the_aether.entity.aerbunny.sniff": "cute bunnny sniffs",
+  "subtitles.the_aether.entity.aerbunny.jump": "aww bunny is hoppin",
+  "subtitles.the_aether.entity.aerbunny.hurt": "bunny gets hurt!",
+  "subtitles.the_aether.entity.aerbunny.death": "bunny dies :..(",
+  "subtitles.the_aether.entity.aerbunny.eat": "bunny eating",
+
+  "subtitles.item.armor.equip.zanite": "zanite armor clanks",
+  "subtitles.item.armor.equip.gravitite": "gravitite armor clangs",
+  "subtitles.item.armor.equip.neptune": "neptune armor clangs",
+  "subtitles.item.armor.equip.phoenix": "phoenix armor fwooshes on",
+  "subtitles.item.armor.equip.obsidian": "obsidian armor clanks",
+  "subtitles.item.armor.equip.valkyrie": "valkyrie armor clanks",
+  "subtitles.item.armor.equip.sentry": "sentry armor thunks",
+
+  "subtitles.item.dart_shooter.shoot": "dart shooty",
+  "subtitles.item.bloodstone.prick": "bloodstone ouchies",
 
 
   "easteregg.the_aether.aerwhale": "waow! u ridin a aerwhale!!1!",
