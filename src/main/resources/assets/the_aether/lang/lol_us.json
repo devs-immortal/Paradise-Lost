@@ -528,7 +528,7 @@
 
   "subtitles.the_aether.effect.simmering.simmer": "guy simmers down",
 
-  "subtitles.the_aether.entity.swet.attacks": "swet makes luvv <3",
+  "subtitles.the_aether.entity.swet.attack": "swet makes luvv <3",
 
   "subtitles.the_aether.entity.aechor_plant.death": "poisy plant dies :(",
   "subtitles.the_aether.entity.aechor_plant.shoot": "Poisy plant shoot",
@@ -557,16 +557,16 @@
   "subtitles.the_aether.entity.aerbunny.death": "bunny dies :..(",
   "subtitles.the_aether.entity.aerbunny.eat": "bunny eating",
 
-  "subtitles.item.armor.equip.zanite": "zanite armor clanks",
-  "subtitles.item.armor.equip.gravitite": "gravitite armor clangs",
-  "subtitles.item.armor.equip.neptune": "neptune armor clangs",
-  "subtitles.item.armor.equip.phoenix": "phoenix armor fwooshes on",
-  "subtitles.item.armor.equip.obsidian": "obsidian armor clanks",
-  "subtitles.item.armor.equip.valkyrie": "valkyrie armor clanks",
-  "subtitles.item.armor.equip.sentry": "sentry armor thunks",
+  "subtitles.the_aether.item.armor.equip.zanite": "zanite armor clanks",
+  "subtitles.the_aether.item.armor.equip.gravitite": "gravitite armor clangs",
+  "subtitles.the_aether.item.armor.equip.neptune": "neptune armor clangs",
+  "subtitles.the_aether.item.armor.equip.phoenix": "phoenix armor fwooshes on",
+  "subtitles.the_aether.item.armor.equip.obsidian": "obsidian armor clanks",
+  "subtitles.the_aether.item.armor.equip.valkyrie": "valkyrie armor clanks",
+  "subtitles.the_aether.item.armor.equip.sentry": "sentry armor thunks",
 
-  "subtitles.item.dart_shooter.shoot": "dart shooty",
-  "subtitles.item.bloodstone.prick": "bloodstone ouchies",
+  "subtitles.the_aether.item.dart_shooter.shoot": "dart shooty",
+  "subtitles.the_aether.item.bloodstone.prick": "bloodstone ouchies",
 
 
   "easteregg.the_aether.aerwhale": "waow! u ridin a aerwhale!!1!",

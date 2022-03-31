@@ -38,9 +38,9 @@ public final class AetherSoundEvents {
     private static final Set<AbstractSoundEvent> SOUNDS = new HashSet<>();
 
     public static final SoundEvent BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES = childEvent("block.blueberry_bush.pick_blueberries", SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES);
-    public static final SoundEvent BLOCK_AETHER_PORTAL_AMBIENT = event(SoundEvents.BLOCK_PORTAL_AMBIENT);
-    public static final SoundEvent BLOCK_AETHER_PORTAL_TRAVEL = event(SoundEvents.BLOCK_PORTAL_TRAVEL);
-    public static final SoundEvent BLOCK_AETHER_PORTAL_TRIGGER = event(SoundEvents.BLOCK_PORTAL_TRIGGER);
+    public static final SoundEvent BLOCK_AETHER_PORTAL_AMBIENT = event("block.portal.ambient");
+    public static final SoundEvent BLOCK_AETHER_PORTAL_TRAVEL = event("block.portal.travel");
+    public static final SoundEvent BLOCK_AETHER_PORTAL_TRIGGER = event("block.portal.trigger");
 
     public static final SoundEvent BLOCK_ORANGE_LEAVES_BREAK = childEvent("block.orange_leaves.break", SoundEvents.BLOCK_MOSS_BREAK);
     public static final SoundEvent BLOCK_ORANGE_LEAVES_DROP_FRUIT = childEvent("block.orange_leaves.drop_fruit", SoundEvents.BLOCK_CANDLE_BREAK);

@@ -527,7 +527,7 @@
 
   "subtitles.the_aether.effect.simmering.simmer": "Entity simmers",
 
-  "subtitles.the_aether.entity.swet.attacks": "Swet absorbs",
+  "subtitles.the_aether.entity.swet.attack": "Swet absorbs",
 
   "subtitles.the_aether.entity.aechor_plant.death": "Aechor Plant dies",
   "subtitles.the_aether.entity.aechor_plant.shoot": "Aechor Plant shoots",
@@ -556,16 +556,16 @@
   "subtitles.the_aether.entity.nightmare.ambient": "Magpie Coos",
   "subtitles.the_aether.entity.nightmare.death": "Nightmare... dies?",
 
-  "subtitles.item.armor.equip.zanite": "Zanite armor clanks",
-  "subtitles.item.armor.equip.gravitite": "Gravitite armor clangs",
-  "subtitles.item.armor.equip.neptune": "Neptune armor clangs",
-  "subtitles.item.armor.equip.phoenix": "Phoenix armor clangs",
-  "subtitles.item.armor.equip.obsidian": "Obsidian armor clanks",
-  "subtitles.item.armor.equip.valkyrie": "Valkyrie armor clanks",
-  "subtitles.item.armor.equip.sentry": "Sentry armor thunks",
+  "subtitles.the_aether.item.armor.equip.zanite": "Zanite armor clanks",
+  "subtitles.the_aether.item.armor.equip.gravitite": "Gravitite armor clangs",
+  "subtitles.the_aether.item.armor.equip.neptune": "Neptune armor clangs",
+  "subtitles.the_aether.item.armor.equip.phoenix": "Phoenix armor clangs",
+  "subtitles.the_aether.item.armor.equip.obsidian": "Obsidian armor clanks",
+  "subtitles.the_aether.item.armor.equip.valkyrie": "Valkyrie armor clanks",
+  "subtitles.the_aether.item.armor.equip.sentry": "Sentry armor thunks",
 
-  "subtitles.item.dart_shooter.shoot": "Dart shooter fires",
-  "subtitles.item.bloodstone.prick": "Bloodstone pricks",
+  "subtitles.the_aether.item.dart_shooter.shoot": "Dart shooter fires",
+  "subtitles.the_aether.item.bloodstone.prick": "Bloodstone pricks",
 
 
   "easteregg.the_aether.aerwhale": "Serenity is the queen of W(h)ales!!",
