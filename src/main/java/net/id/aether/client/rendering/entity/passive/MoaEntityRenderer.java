@@ -13,9 +13,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class MoaRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
+public class MoaEntityRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 
-    public MoaRenderer(EntityRendererFactory.Context renderManager) {
+    public MoaEntityRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager, new MoaModel(renderManager.getPart(AetherModelLayers.MOA)), 0.7f);
     }
 

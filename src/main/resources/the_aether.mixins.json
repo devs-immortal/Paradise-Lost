@@ -8,6 +8,7 @@
     "block.BlockMixin",
     "block.ChestBlockEntityAccessor",
     "block.FarmlandBlockMixin",
+    "devel.client.HandledScreenMixin",
     "devel.server.ChunkRegionMixin",
     "entity.BoatEntityMixin",
     "entity.BoatEntityTypeMixin",
@@ -36,10 +37,12 @@
     "structure.StructureFeatureAccessor",
     "util.NbtCompoundAccessor",
     "util.RarityMixin",
-    "util.SignTypeAccessor"
+    "util.SignTypeAccessor",
+    "util.SlotAccessor"
   ],
   "client": [
     "client.ClientPlayerEntityMixin",
+    "client.ClientPlayerInteractionManagerMixin",
     "client.ClientPlayNetworkHandlerMixin",
     "client.ClientWorldMixin",
     "client.ItemStackMixin",

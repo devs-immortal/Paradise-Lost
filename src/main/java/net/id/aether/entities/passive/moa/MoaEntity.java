@@ -2,14 +2,18 @@ package net.id.aether.entities.passive.moa;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.id.aether.blocks.blockentity.FoodBowlBlockEntity;
 import net.id.aether.component.MoaGenes;
 import net.id.aether.entities.AetherEntityTypes;
+import net.id.aether.entities.util.CustomInventoryEntity;
 import net.id.aether.entities.util.SaddleMountEntity;
 import net.id.aether.items.AetherItems;
 import net.id.aether.items.tools.bloodstone.BloodstoneItem;
+import net.id.aether.screen.handler.MoaScreenHandler;
 import net.id.aether.tag.AetherItemTags;
 import net.id.aether.util.AetherSoundEvents;
+import net.minecraft.block.AbstractChestBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -24,13 +28,22 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.InventoryChangedListener;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
@@ -43,23 +56,30 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameable {
+public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameable, InventoryChangedListener, CustomInventoryEntity {
+    private static final SimpleInventory DUMMY = new SimpleInventory(0);
+    
     public static final TrackedData<Integer> AIR_TICKS = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<ItemStack> CHEST = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
     public float curWingRoll, curWingYaw, curLegPitch;
     public float jumpStrength;
     public boolean isInAir;
     protected int secsUntilEgg;
     private MoaGenes genes;
+    
+    @NotNull private SimpleInventory inventory = DUMMY;
 
     public MoaEntity(EntityType<? extends MoaEntity> entityType, World world) {
         super(entityType, world);
         this.stepHeight = 1.0F;
         this.secsUntilEgg = this.getRandomEggTime();
+        refreshChest(false);
     }
 
     public static DefaultAttributeContainer.Builder createMoaAttributes() {
@@ -98,9 +118,78 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        this.dataTracker.startTracking(AIR_TICKS, 0);
+        dataTracker.startTracking(AIR_TICKS, 0);
+        dataTracker.startTracking(CHEST, ItemStack.EMPTY);
     }
-
+    
+    /**
+     * Gets the {@link ItemStack} of the chest on this Moa.
+     *
+     * @return The chest stack
+     */
+    public ItemStack getChest() {
+        return dataTracker.get(CHEST);
+    }
+    
+    /**
+     * Checks if this Moa is wearing a chest.
+     *
+     * @return True if there is a chest
+     */
+    public boolean hasChest() {
+        return !getChest().isEmpty();
+    }
+    
+    /**
+     * Sets a new chest for this Moa from the provided {@link ItemStack}.
+     *
+     * This will drop the items if the chest is removed.
+     *
+     * @param stack The new stack
+     * @throws IllegalArgumentException If the stack was not a chest
+     */
+    public void setChest(ItemStack stack) {
+        if(!stack.isEmpty() && (!(stack.getItem() instanceof BlockItem blockItem) || !(blockItem.getBlock() instanceof AbstractChestBlock<?>))){
+            throw new IllegalArgumentException("Can not set a Moa chest to be a non-chest or empty item stack!");
+        }
+        dataTracker.set(CHEST, stack);
+        refreshChest(true);
+    }
+    
+    /**
+     * Refreshes the inventory of this Moa when the chest changes.
+     *
+     * @param scatterItems True if the inventory should be scattered
+     */
+    public void refreshChest(boolean scatterItems) {
+        if(hasChest()) {
+            if(inventory.size() != 20) {
+                inventory = new SimpleInventory(20);
+                inventory.addListener(this);
+            }
+        }else{
+            if(inventory.size() != 0) {
+                inventory.removeListener(this);
+                if(scatterItems && !world.isClient) {
+                    ItemScatterer.spawn(world, this, inventory);
+                }
+                inventory.clear();
+                inventory = DUMMY;
+            }
+        }
+    }
+    
+    @Override
+    protected void dropInventory() {
+        super.dropInventory();
+        if(hasChest()){
+            if(!world.isClient){
+                dropStack(getChest());
+            }
+            setChest(ItemStack.EMPTY);
+        }
+    }
+    
     public float getWingRoll() {
         if (!isGliding()) {
             float baseWingRoll = 1.39626F;
@@ -150,10 +239,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         isInAir = !onGround;
 
-        if (isInAir)
+        if (isInAir) {
             dataTracker.set(AIR_TICKS, dataTracker.get(AIR_TICKS) + 1);
-        else
+        } else {
             dataTracker.set(AIR_TICKS, 0);
+        }
 
         if (age % 15 == 0) {
             if (isGliding()) {
@@ -163,7 +253,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             }
         }
 
-        if (this.jumping) this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
+        if (this.jumping) {
+            this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
+        }
 
         this.fall();
 
@@ -260,8 +352,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     }
                 }
 
-                if (jumpStrength <= 0.01F && onGround)
+                if (jumpStrength <= 0.01F && onGround) {
                     isInAir = false;
+                }
 
                 this.airStrafingSpeed = getFlyingSpeed();
                 if (this.isLogicalSideForUpdatingMovement()) {
@@ -305,12 +398,32 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         if (!world.isClient()) {
             ItemStack heldStack = player.getStackInHand(hand);
             if(getGenes().isTamed()) {
-                if (heldStack.isFood() && heldStack.getItem().getFoodComponent().isMeat()) {
+                // Allow the player to open the GUI at any time
+                if(player.isSneaking()){
+                    openInventory(player);
+                    return ActionResult.SUCCESS;
+                }
+                
+                // Short circuit to hopefully save a few cycles.
+                if(heldStack.isEmpty()){
+                    return super.interactMob(player, hand);
+                }
+                
+                var item = heldStack.getItem();
+                if (item.isFood() && item.getFoodComponent().isMeat()) {
                     feedMob(heldStack);
                     return ActionResult.success(world.isClient());
+                }else if(!hasChest() && item instanceof BlockItem blockItem && blockItem.getBlock() instanceof AbstractChestBlock) {
+                    // Set a new chest, if there is none.
+                    var chestStack = heldStack.copy();
+                    chestStack.setCount(1);
+                    if(!player.isCreative()) {
+                        heldStack.decrement(1);
+                    }
+                    setChest(heldStack);
+                    return ActionResult.success(world.isClient);
                 }
-            }
-            else {
+            } else {
                 if(heldStack.getItem() != AetherItems.ORANGE && heldStack.isIn(AetherItemTags.MOA_TEMPTABLES)) {
                     eat(player, hand, heldStack);
                     playSound(AetherSoundEvents.ENTITY_MOA_EAT, 1, 0.5F + random.nextFloat() / 3F);
@@ -348,12 +461,21 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
         compound.putInt("airTicks", dataTracker.get(AIR_TICKS));
+        compound.put("chest", dataTracker.get(CHEST).writeNbt(new NbtCompound()));
+        if(inventory != DUMMY){
+            compound.put("chestContents", inventory.toNbtList());
+        }
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound compound) {
         super.readCustomDataFromNbt(compound);
         dataTracker.set(AIR_TICKS, compound.getInt("airTicks"));
+        dataTracker.set(CHEST, ItemStack.fromNbt(compound.getCompound("chest")));
+        refreshChest(false);
+        if(inventory != DUMMY){
+            inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE));
+        }
     }
 
     @Override
@@ -389,8 +511,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     public void fall() {
-        if (this.getVelocity().y < 0.0D && !this.isSneaking())
+        if (this.getVelocity().y < 0.0D && !this.isSneaking()) {
             this.setVelocity(this.getVelocity().multiply(1.0D, isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) * 1.4 : 1D, 1.0D));
+        }
     }
 
     @Override
@@ -472,7 +595,43 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public Entity getOwner() {
         return Optional.ofNullable(getOwnerUuid()).map(world::getPlayerByUuid).orElse(null);
     }
-
+    
+    @Override
+    public void onInventoryChanged(Inventory sender) {
+        //TODO
+    }
+    
+    @Override
+    public void openInventory(PlayerEntity player) {
+        if (!world.isClient && (!hasPassengers() || hasPassenger(player)) && getGenes().isTamed()) {
+            player.openHandledScreen(new ExtendedScreenHandlerFactory() {
+                @Override
+                public Text getDisplayName() {
+                    return new TranslatableText("container.the_aether.moa");
+                }
+    
+                @Override
+                public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+                    return new MoaScreenHandler(syncId, inv, inventory, MoaEntity.this);
+                }
+    
+                @Override
+                public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+                    buf.writeVarInt(MoaEntity.this.getId());
+                }
+            });
+        }
+    }
+    
+    /**
+     * Gets the current {@link Inventory} of this Moa, may be empty.
+     *
+     * @return The current inventory
+     */
+    public Inventory getInventory() {
+        return inventory;
+    }
+    
     private class MoaEscapeDangerGoal extends EscapeDangerGoal {
 
         public MoaEscapeDangerGoal(PathAwareEntity mob, double speed) {

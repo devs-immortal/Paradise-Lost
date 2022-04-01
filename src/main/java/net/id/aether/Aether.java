@@ -124,6 +124,7 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
         AetherShaders.init();
         HolidayBlockModel.init();
         AetherSignType.clientInit();
+        AetherScreens.clientInit();
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.Client.init();
         }

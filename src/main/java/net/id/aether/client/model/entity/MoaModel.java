@@ -78,7 +78,7 @@ public class MoaModel extends EntityModel<MoaEntity> {
     @Override
     public void setAngles(MoaEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         saddle.visible = entity.isSaddled();
-        chest.visible = entity.isSaddled();
+        chest.visible = entity.hasChest();
         float netYaw = netHeadYaw * 0.017453292F;
         head.yaw = netYaw / 4;
         neck.yaw = (netYaw / 4) * 3;

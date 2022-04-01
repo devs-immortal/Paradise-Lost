@@ -10,7 +10,7 @@ import net.id.aether.client.rendering.entity.hostile.SwetRenderer;
 import net.id.aether.client.rendering.entity.misc.RookRenderer;
 import net.id.aether.client.rendering.entity.passive.AerbunnyRenderer;
 import net.id.aether.client.rendering.entity.passive.AerwhaleRenderer;
-import net.id.aether.client.rendering.entity.passive.MoaRenderer;
+import net.id.aether.client.rendering.entity.passive.MoaEntityRenderer;
 import net.id.aether.client.rendering.entity.projectile.CockatriceSpitRenderer;
 import net.id.aether.client.rendering.entity.projectile.DartRenderer;
 import net.id.aether.entities.AetherEntityTypes;
@@ -36,7 +36,7 @@ public class AetherEntityRenderers {
         register(AetherEntityTypes.COCKATRICE, CockatriceRenderer::new);
 
         // passive
-        register(AetherEntityTypes.MOA, MoaRenderer::new);
+        register(AetherEntityTypes.MOA, MoaEntityRenderer::new);
         register(AetherEntityTypes.AERBUNNY, AerbunnyRenderer::new);
         register(AetherEntityTypes.AERWHALE, AerwhaleRenderer::new);
 

@@ -119,7 +119,13 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     }
 
     public void setSaddled(boolean saddled) {
-        this.dataTracker.set(SADDLED, saddled);
+        dataTracker.set(SADDLED, saddled);
+        // Kick riding entities off if we lose the saddle
+        if(!saddled){
+            for (Entity entity : getPassengerList()) {
+                entity.stopRiding();
+            }
+        }
     }
 
     public boolean canBeSaddled() {
@@ -128,6 +134,8 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
 
     public void saddle(@Nullable SoundCategory sound) {
         //this.items.setStack(0, new ItemStack(Items.SADDLE));
-        if (sound != null) this.world.playSoundFromEntity(null, this, SoundEvents.ENTITY_PIG_SADDLE, sound, 0.5F, 1.0F);
+        if (sound != null) {
+            world.playSoundFromEntity(null, this, SoundEvents.ENTITY_PIG_SADDLE, sound, 0.5F, 1.0F);
+        }
     }
 }
