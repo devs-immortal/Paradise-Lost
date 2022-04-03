@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:overworld",
+  "type": "the_aether:the_aether",
   "generator": {
     "biome_source": {
       "biomes": [
