@@ -57,26 +57,6 @@ public class FloatingBlockEntity extends BlockLikeEntity {
     }
 
     @Override
-    public void postTickEntityCollision(Entity entity) {
-        super.postTickEntityCollision(entity);
-        if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
-            entity.fallDistance = 0F;
-        }
-    }
-
-    @Override
-    public void postTickMoveEntities() {
-        super.postTickMoveEntities();
-
-        List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 3 * (this.prevY - this.getY()), 0)));
-        for (Entity entity : otherEntities) {
-            if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
-                entity.setPosition(entity.getX(), this.getBoundingBox().maxY, entity.getZ());
-            }
-        }
-    }
-
-    @Override
     public void postTickMovement() {
         this.lastYVelocity = this.getVelocity().y;
 
