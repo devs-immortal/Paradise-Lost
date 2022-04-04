@@ -512,8 +512,6 @@ public class AetherItems {
 
     public static final BlockItem SWEDROOT_SPREAD = add("swedroot_spread", AetherBlocks.SWEDROOT_SPREAD, decoration(), compostable65);
 
-    public static final BlockItem SWEDROOT_SPREAD = add("swedroot_spread", AetherBlocks.SWEDROOT_SPREAD, decoration(), compostable65);
-
     public static final BlockItem FLAXWEAVE_CUSHION = add("flaxweave_cushion", AetherBlocks.FLAXWEAVE_CUSHION, decoration, fuel(300));
 
     public static final BlockItem CHEESECAKE = add("halflight_cheesecake", AetherBlocks.CHEESECAKE, food());
