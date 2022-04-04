@@ -2,6 +2,7 @@ package net.id.aether.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.id.aether.Aether;
 import net.id.aether.api.MoaAPI;
 import net.id.aether.entities.AetherEntityTypes;
@@ -159,13 +160,28 @@ public class MoaGenes implements AutoSyncedComponent {
         initialized = tag.getBoolean("initialized");
         if (initialized) {
             race = MoaAPI.getRace(Identifier.tryParse(tag.getString("raceId")));
-            affinity = MoaAttributes.valueOf(tag.getString("affinity"));
+            String affinityStr = tag.getString("affinity");
+            affinity = affinityStr.isEmpty() ? race.defaultAffinity() : MoaAttributes.valueOf(affinityStr);
             legendary = tag.getBoolean("legendary");
-            hunger = tag.getFloat("hunger");
+            if (tag.contains("hunger", NbtType.FLOAT)) {
+                hunger = tag.getFloat("hunger");
+            }
             if (tag.getBoolean("tamed")) {
                 owner = tag.getUuid("owner");
             }
-            Arrays.stream(MoaAttributes.values()).forEach(attribute -> attributeMap.put(attribute, tag.getFloat(attribute.name())));
+            Arrays.stream(MoaAttributes.values()).forEach(attribute -> {
+                if (tag.contains(attribute.name(), NbtType.FLOAT)) {
+                    attributeMap.put(attribute, tag.getFloat(attribute.name()));
+                } else {
+                    // AZZY THIS IS SO CURSED WHY IS JUMPING BACKWARDSSSSSSS
+                    // TODO b1.7 make this not be so weird
+                    if (attribute.equals(MoaAttributes.JUMPING_STRENGTH)) {
+                        attributeMap.put(attribute, attribute.max);
+                    } else {
+                        attributeMap.put(attribute, attribute.min);
+                    }
+                }
+            });
         }
     }
 
