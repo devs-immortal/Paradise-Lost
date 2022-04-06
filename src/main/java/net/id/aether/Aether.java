@@ -131,9 +131,16 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
     }
     
     // FIXME This is really really really stupid.
+    @Environment(EnvType.SERVER)
+    private static final String DISABLE_WORLD_CHECK = "PARADISE_LOST_DISABLE_WORLD_CHECK";
+    
     @Override
     public void onInitializeServer() {
         ServerLifecycleEvents.SERVER_STARTED.register((server)->{
+            if(System.getProperty(DISABLE_WORLD_CHECK) != null){
+                return;
+            }
+            
             var world = server.getWorld(AetherDimension.AETHER_WORLD_KEY);
             if(world == null){
                 var message = """
@@ -146,9 +153,22 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
                     
                     You should only ever see this error message once per world.
                     If restarting the server doesn't solve the issue, then please contact us at https://discord.gg/eRsJ6F3Wng
-                    """;
+                    
+                    If you would like to suppress this crash add -D%s to your arguments.
+                    For example, if you have:
+                    java -jar fabric-server.jar nogui
+                    you would want to add -D%s after the `java` part, like so:
+                    java -D%s -jar fabric-server.jar nogui
+                    """
+                    .formatted(
+                        DISABLE_WORLD_CHECK,
+                        DISABLE_WORLD_CHECK,
+                        DISABLE_WORLD_CHECK
+                    );
                 
                 Runtime.getRuntime().addShutdownHook(new Thread(()->{
+                    // To people who might want to change this to use the Logger class, don't.
+                    // It will not print the message when you do that. I tried.
                     System.err.println(
                         "\n".repeat(10) +
                         message +
