@@ -8,7 +8,6 @@
     "block.BlockMixin",
     "block.ChestBlockEntityAccessor",
     "block.FarmlandBlockMixin",
-    "devel.client.HandledScreenMixin",
     "devel.server.ChunkRegionMixin",
     "entity.BoatEntityMixin",
     "entity.BoatEntityTypeMixin",
@@ -64,6 +63,7 @@
     "client.render.TexturedRenderLayersMixin",
     "client.render.VertexBufferMixin",
     "client.render.WorldRendererMixin",
+    "devel.client.HandledScreenMixin",
     "devel.client.SpriteAtlasTextureMixin",
     "devel.client.TranslationStorageMixin"
   ],
