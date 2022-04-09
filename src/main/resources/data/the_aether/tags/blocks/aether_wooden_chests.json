@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "the_aether:skyroot_chest"
+    "the_aether:skyroot_chest",
+    "the_aether:golden_oak_chest",
+    "the_aether:orange_chest",
+    "the_aether:crystal_chest",
+    "the_aether:wisteria_chest"
   ]
 }
