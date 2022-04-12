@@ -4,12 +4,8 @@
   "package": "net.id.aether.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "block.BlockEntityTypeMixin",
     "block.BlockMixin",
-    "block.ChestBlockEntityAccessor",
     "block.FarmlandBlockMixin",
-    "entity.BoatEntityMixin",
-    "entity.BoatEntityTypeMixin",
     "entity.CowEntityMixin",
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
@@ -38,6 +34,7 @@
     "util.SlotAccessor"
   ],
   "client": [
+    "client.ClientPlayerEntityMixin",
     "client.ClientPlayerInteractionManagerMixin",
     "client.ClientPlayNetworkHandlerMixin",
     "client.ItemStackMixin",

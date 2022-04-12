@@ -2,9 +2,7 @@ package net.id.aether.blocks.blockentity;
 
 
 import net.id.aether.blocks.AetherBlocks;
-import net.id.aether.mixin.block.ChestBlockEntityAccessor;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.util.registry.Registry;
 
@@ -28,12 +26,6 @@ public class AetherBlockEntityTypes {
         register("incubator", INCUBATOR);
         register("ambrosium_campfire", AMBROSIUM_CAMPFIRE);
 //        register("dungeonswitch", DUNGEON_SWITCH);
-    
-        register("skyroot_chest", SKYROOT_CHEST);
-        register("golden_oak_chest", GOLDEN_OAK_CHEST);
-        register("orange_chest", ORANGE_CHEST);
-        register("crystal_chest", CRYSTAL_CHEST);
-        register("wisteria_chest", WISTERIA_CHEST);
     }
     
     private static void register(String name, BlockEntityType<?> type){
