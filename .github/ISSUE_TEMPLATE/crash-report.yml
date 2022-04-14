@@ -13,9 +13,9 @@ body:
     attributes:
       label: What were you doing when the crash occured? How can we replicate it?
       value: |
-        1. First, ...
-        2. Next, ...
-        3. Finally, ...
+        1. First,
+        2. Next,
+        3. Finally,
     validations:
       required: true
   - type: dropdown
@@ -30,20 +30,12 @@ body:
         - Unsure
     validations:
       required: true
-  - type: dropdown
+  - type: input
     id: version
     attributes:
       label: Mod Version
       description: What version of our mod were you running?
-      options:
-        # Figure out how to make this automatic.
-        - "1.6.5 - 1.18"
-        - "1.6.5 - 1.17"
-        - "1.6.3"
-        - "1.6.x"
-        - "Other"
-        - "Unsure"
-        - "Dev"
+      placeholder: Beta x.x.x
     validations:
       required: true
   - type: input
@@ -60,7 +52,7 @@ body:
       label: Crash Report
       description: |
         Please copy and paste the crash report here. If there was none provided, the latest log can be found in `.minecraft/logs/latest.log.`
-      render: shell
+      render: Shell
     validations:
       required: true
   - type: textarea
