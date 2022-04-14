@@ -3,6 +3,7 @@ package net.id.aether.entities.block;
 import net.id.aether.api.FloatingBlockHelper;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.tag.AetherBlockTags;
+import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

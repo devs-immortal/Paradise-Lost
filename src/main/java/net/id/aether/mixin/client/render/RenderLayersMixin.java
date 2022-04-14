@@ -3,7 +3,7 @@ package net.id.aether.mixin.client.render;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.client.rendering.block.RenderLayerOverride;
-import net.id.aether.util.Holiday;
+import net.id.incubus_core.util.IncubusHoliday;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
@@ -21,8 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(RenderLayers.class)
 public class RenderLayersMixin{
     @Shadow private static boolean fancyGraphicsOrBetter;
-    
-    @Unique private static final boolean the_aether$overrideLeavesLayer = Holiday.get() == Holiday.CHRISTMAS;
+
+    @Unique private static final boolean the_aether$overrideLeavesLayer = IncubusHoliday.get() == IncubusHoliday.CHRISTMAS;
     
     @Inject(
         method = "getBlockLayer",

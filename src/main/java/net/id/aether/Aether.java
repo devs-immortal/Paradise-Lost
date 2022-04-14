@@ -35,6 +35,7 @@ import net.id.aether.world.dimension.AetherBiomes;
 import net.id.aether.world.dimension.AetherDimension;
 import net.id.aether.world.feature.AetherFeatures;
 import net.id.aether.world.gen.carver.AetherCarvers;
+import net.id.incubus_core.devel.Devel;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 
@@ -99,7 +100,6 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
         AetherScreens.init();
         AetherLore.init();
         AetherParticles.init();
-        // TODO MIGRATION: DEVEL
     }
 
     @Override
@@ -114,6 +114,7 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
         AetherBlockEntityRenderers.initClient();
         AetherParticles.Client.init();
         AetherTextures.initClient();
+        AetherBlocks.initClient();
         AetherItemRenderers.initClient();
         AetherScreens.initClient();
         Conditions.clientInit();

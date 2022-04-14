@@ -1,10 +1,10 @@
 package net.id.aether.api;
 
-import net.id.aether.entities.block.BlockLikeEntity;
 import net.id.aether.entities.block.FloatingBlockEntity;
-import net.id.aether.entities.util.BlockLikeSet;
 import net.id.aether.entities.util.FloatingBlockHelperImpls;
 import net.id.aether.tag.AetherBlockTags;
+import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
+import net.id.incubus_core.blocklikeentities.api.BlockLikeSet;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PistonBlock;
 import net.minecraft.block.piston.PistonHandler;

@@ -1,6 +1,7 @@
 package net.id.aether.mixin.client.render;
 
 import net.id.aether.entities.misc.RookEntity;
+import net.id.incubus_core.devel.Devel;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
@@ -15,7 +16,7 @@ public class EntityRenderDispatcherMixin {
 
     @Inject(method = "renderHitbox", at = @At("HEAD"), cancellable = true)
     private static void renderHitbox(MatrixStack matrices, VertexConsumer vertices, Entity entity, float tickDelta, CallbackInfo ci) {
-        if(!AetherDevel.isDevel() && entity instanceof RookEntity) {
+        if(!Devel.isDevel() && entity instanceof RookEntity) {
             ci.cancel();
         }
     }

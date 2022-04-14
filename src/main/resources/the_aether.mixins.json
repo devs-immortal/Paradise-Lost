@@ -30,11 +30,9 @@
     "structure.StructureFeatureAccessor",
     "util.NbtCompoundAccessor",
     "util.RarityMixin",
-    "util.SignTypeAccessor",
     "util.SlotAccessor"
   ],
   "client": [
-    "client.ClientPlayerEntityMixin",
     "client.ClientPlayerInteractionManagerMixin",
     "client.ClientPlayNetworkHandlerMixin",
     "client.ItemStackMixin",
@@ -53,7 +51,6 @@
     "client.render.NativeImageAccessor",
     "client.render.PresetsScreenMixin",
     "client.render.RenderLayersMixin",
-    "client.render.TexturedRenderLayersMixin",
     "client.render.VertexBufferMixin",
     "client.render.WorldRendererMixin",
     "devel.client.HandledScreenMixin"

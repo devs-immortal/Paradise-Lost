@@ -1,6 +1,8 @@
 package net.id.aether.effect;
 
 import net.id.aether.util.AetherSoundEvents;
+import net.id.incubus_core.condition.api.Condition;
+import net.id.incubus_core.condition.api.ConditionModifier;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;

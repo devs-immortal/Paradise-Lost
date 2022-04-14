@@ -14,12 +14,6 @@ public class AetherBlockEntityTypes {
     public static final BlockEntityType<IncubatorBlockEntity> INCUBATOR = create(IncubatorBlockEntity::new, AetherBlocks.INCUBATOR).build();
     public static final BlockEntityType<AmbrosiumCampfireBlockEntity> AMBROSIUM_CAMPFIRE = create(AmbrosiumCampfireBlockEntity::new, AetherBlocks.AMBROSIUM_CAMPFIRE).build();
 //    public static final BlockEntityType<DungeonSwitchBlockEntity> DUNGEON_SWITCH = create(DungeonSwitchBlockEntity::new, AetherBlocks.DUNGEON_SWITCH).build();
-    
-    public static final BlockEntityType<ChestBlockEntity> SKYROOT_CHEST = create((pos, state)->ChestBlockEntityAccessor.init(AetherBlockEntityTypes.SKYROOT_CHEST, pos, state), AetherBlocks.SKYROOT_CHEST).build();
-    public static final BlockEntityType<ChestBlockEntity> GOLDEN_OAK_CHEST = create((pos, state)->ChestBlockEntityAccessor.init(AetherBlockEntityTypes.GOLDEN_OAK_CHEST, pos, state), AetherBlocks.GOLDEN_OAK_CHEST).build();
-    public static final BlockEntityType<ChestBlockEntity> ORANGE_CHEST = create((pos, state)->ChestBlockEntityAccessor.init(AetherBlockEntityTypes.ORANGE_CHEST, pos, state), AetherBlocks.ORANGE_CHEST).build();
-    public static final BlockEntityType<ChestBlockEntity> CRYSTAL_CHEST = create((pos, state)->ChestBlockEntityAccessor.init(AetherBlockEntityTypes.CRYSTAL_CHEST, pos, state), AetherBlocks.CRYSTAL_CHEST).build();
-    public static final BlockEntityType<ChestBlockEntity> WISTERIA_CHEST = create((pos, state)->ChestBlockEntityAccessor.init(AetherBlockEntityTypes.WISTERIA_CHEST, pos, state), AetherBlocks.WISTERIA_CHEST).build();
 
     public static void init() {
         register("food_bowl", FOOD_BOWL);

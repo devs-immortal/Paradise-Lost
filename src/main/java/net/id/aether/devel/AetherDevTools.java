@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.id.aether.Aether;
 import net.id.aether.entities.block.SliderEntity;
 import net.id.aether.items.AetherItemGroups;
+import net.id.incubus_core.devel.Devel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
@@ -42,7 +43,7 @@ class AetherDevTools {
     }
 
     static {
-        if (!AetherDevel.isDevel()) {
+        if (!Devel.isDevel()) {
             Aether.LOG.error(LogUtils.FATAL_MARKER, "!!\n!!\n!!\n!!AetherDevItems called in production environment! Please report this to Paradise Lost developers!");
             new RuntimeException("").printStackTrace();
         }
