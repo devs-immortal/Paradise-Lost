@@ -9,6 +9,7 @@ pluginManagement {
             url = "https://minecraft.guntram.de/maven/"
         }
         maven {
+            name = "jitpack"
             url = "https://jitpack.io"
         }
         gradlePluginPortal()
