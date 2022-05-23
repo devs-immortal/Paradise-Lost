@@ -1,12 +1,17 @@
 pluginManagement {
     repositories {
-        jcenter()
         maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
+            name = "fabric"
+            url = "https://maven.fabricmc.net/"
+        }
+        maven {
+            name = "crowdin source"
+            url = "https://minecraft.guntram.de/maven/"
+        }
+        maven {
+            url = "https://jitpack.io"
         }
         gradlePluginPortal()
         mavenCentral()
-        maven { url 'https://plugins.gradle.org/m2/' }
     }
 }
