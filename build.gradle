@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "0.11-SNAPSHOT"
+    id "fabric-loom" version "0.12-SNAPSHOT"
     id "maven-publish"
     id "com.modrinth.minotaur" version "2.+"
     id "de.guntram.mcmod.crowdin-translate" version "1.4+1.18.2"
@@ -13,7 +13,7 @@ crowdintranslate.verbose = true
 JavaLanguageVersion targetVersion = JavaLanguageVersion.of(17)
 
 allprojects {
-    // Allow more then 100 errors to be displayed.
+    // allow more then 100 errors to be displayed
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
             options.compilerArgs << "-Xmaxerrs" << "${project.max_errors}"
@@ -26,14 +26,6 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-    maven {
-        name = "guntram"
-        url = "https://minecraft.guntram.de/maven/"
-    }
-    maven {
-        name = "modmenu-legacy"
-        url = "https://maven.fabricmc.net/io/github/prospector/modmenu/"
-    }
     maven {
         name = "fabric"
         url = "https://maven.fabricmc.net/"
