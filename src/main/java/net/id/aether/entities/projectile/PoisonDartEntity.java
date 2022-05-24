@@ -1,11 +1,11 @@
 package net.id.aether.entities.projectile;
 
-import net.id.aether.api.ConditionAPI;
-import net.id.aether.component.ConditionManager;
 import net.id.aether.effect.condition.Conditions;
-import net.id.aether.effect.condition.Persistence;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.items.AetherItems;
+import net.id.incubus_core.condition.api.ConditionAPI;
+import net.id.incubus_core.condition.api.Persistence;
+import net.id.incubus_core.condition.base.ConditionManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;

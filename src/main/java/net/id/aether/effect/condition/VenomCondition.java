@@ -2,6 +2,8 @@ package net.id.aether.effect.condition;
 
 import net.id.aether.client.rendering.particle.AetherParticles;
 import net.id.aether.tag.AetherEntityTypeTags;
+import net.id.incubus_core.condition.api.Condition;
+import net.id.incubus_core.condition.api.Severity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;

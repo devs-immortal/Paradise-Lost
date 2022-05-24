@@ -4,13 +4,8 @@
   "package": "net.id.aether.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "block.BlockEntityTypeMixin",
     "block.BlockMixin",
-    "block.ChestBlockEntityAccessor",
     "block.FarmlandBlockMixin",
-    "devel.server.ChunkRegionMixin",
-    "entity.BoatEntityMixin",
-    "entity.BoatEntityTypeMixin",
     "entity.CowEntityMixin",
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
@@ -32,18 +27,14 @@
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
-    "server.ServerWorldMixin",
     "structure.StructureFeatureAccessor",
     "util.NbtCompoundAccessor",
     "util.RarityMixin",
-    "util.SignTypeAccessor",
     "util.SlotAccessor"
   ],
   "client": [
-    "client.ClientPlayerEntityMixin",
     "client.ClientPlayerInteractionManagerMixin",
     "client.ClientPlayNetworkHandlerMixin",
-    "client.ClientWorldMixin",
     "client.ItemStackMixin",
     "client.MinecraftClientAccessor",
     "client.MinecraftClientMixin",
@@ -60,12 +51,9 @@
     "client.render.NativeImageAccessor",
     "client.render.PresetsScreenMixin",
     "client.render.RenderLayersMixin",
-    "client.render.TexturedRenderLayersMixin",
     "client.render.VertexBufferMixin",
     "client.render.WorldRendererMixin",
-    "devel.client.HandledScreenMixin",
-    "devel.client.SpriteAtlasTextureMixin",
-    "devel.client.TranslationStorageMixin"
+    "devel.client.HandledScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1,

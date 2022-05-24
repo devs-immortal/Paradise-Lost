@@ -3,6 +3,7 @@ package net.id.aether.entities.block;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityTypes;
+import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
