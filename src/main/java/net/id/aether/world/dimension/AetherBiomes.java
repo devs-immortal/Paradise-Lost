@@ -211,7 +211,8 @@ public final class AetherBiomes {
                 new SpawnSettings.SpawnEntry(AetherEntityTypes.BLUE_SWET, weight, minGroup, maxGroup),
                 new SpawnSettings.SpawnEntry(AetherEntityTypes.WHITE_SWET, weight, minGroup, maxGroup),
                 new SpawnSettings.SpawnEntry(AetherEntityTypes.GOLDEN_SWET, weight, minGroup, maxGroup),
-                new SpawnSettings.SpawnEntry(AetherEntityTypes.PURPLE_SWET, weight, minGroup, maxGroup)
+                new SpawnSettings.SpawnEntry(AetherEntityTypes.PURPLE_SWET, weight, minGroup, maxGroup),
+                new SpawnSettings.SpawnEntry(AetherEntityTypes.VERMILION_SWET, weight, minGroup, maxGroup)
         ));
     }
     

@@ -28,6 +28,10 @@ public class VermilionSwetEntity extends SwetEntity {
                 tnt.prime();
             }
         }
+        if (isAbsorbable(entity, world)) {
+            entity.setOnFireFor(2/*seconds*/);
+        }
+
         super.onEntityCollision(entity);
     }
 

@@ -48,6 +48,8 @@ public class AetherEntityTypes {
             attributes(WhiteSwetEntity::createSwetAttributes), spawnRestrictions(WhiteSwetEntity::canSpawn));
     public static final EntityType<GoldenSwetEntity> GOLDEN_SWET = add("golden_swet", of(GoldenSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
             attributes(GoldenSwetEntity::createSwetAttributes), spawnRestrictions(GoldenSwetEntity::canSpawn));
+    public static final EntityType<VermilionSwetEntity> VERMILION_SWET = add("vermilion_swet", of(VermilionSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
+            attributes(VermilionSwetEntity::createSwetAttributes), spawnRestrictions(VermilionSwetEntity::canSpawn));
     //todo: why is this an animal? should extend hostile to allow hostile spawn restrictions, and inherit hostile behviour
     public static final EntityType<AechorPlantEntity> AECHOR_PLANT = add("aechor_plant", of(AechorPlantEntity::new, MONSTER, changing(1f, 1f), 5),
             attributes(AechorPlantEntity::createAechorPlantAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));

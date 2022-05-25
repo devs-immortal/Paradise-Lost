@@ -30,7 +30,8 @@ public class AetherEntityRenderers {
                 AetherEntityTypes.BLUE_SWET,
                 AetherEntityTypes.PURPLE_SWET,
                 AetherEntityTypes.WHITE_SWET,
-                AetherEntityTypes.GOLDEN_SWET
+                AetherEntityTypes.GOLDEN_SWET,
+                AetherEntityTypes.VERMILION_SWET
         );
         register(AetherEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
         //register(AetherEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
