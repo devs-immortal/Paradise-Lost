@@ -1,10 +1,10 @@
 package net.id.aether.blocks.natural.plant;
 
-import net.id.aether.api.ConditionAPI;
-import net.id.aether.component.ConditionManager;
 import net.id.aether.effect.condition.Conditions;
-import net.id.aether.effect.condition.Persistence;
 import net.id.aether.tag.AetherBlockTags;
+import net.id.incubus_core.condition.api.ConditionAPI;
+import net.id.incubus_core.condition.api.Persistence;
+import net.id.incubus_core.condition.base.ConditionManager;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

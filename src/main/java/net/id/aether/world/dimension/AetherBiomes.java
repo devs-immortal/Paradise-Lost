@@ -161,7 +161,7 @@ public final class AetherBiomes {
         }
         return builder.build();
     }
-    
+
     /**
      * Merges two or more feature maps together.
      *
@@ -171,11 +171,11 @@ public final class AetherBiomes {
      * @return A map that contains all features
      */
     @SafeVarargs
-    public static <A, B> Map<A, List<B>> mergeFeatures(Map<A, List<B>>... maps){
+    public static <A, B> Map<A, List<B>> merge(Map<A, List<B>>... maps){
         if(maps.length == 1){
             return maps[0];
         }
-        
+
         Map<A, List<B>> result = new HashMap<>();
         for (var map : maps) {
             for (Map.Entry<A, List<B>> entry : map.entrySet()) {
@@ -203,6 +203,16 @@ public final class AetherBiomes {
             AetherCarvers.LARGE_GOLDEN_AERCLOUD_CARVER,
             AetherCarvers.GOLDEN_AERCLOUD_CARVER,
             AetherCarvers.TINY_GOLDEN_AERCLOUD_CARVER
+        ));
+    }
+
+    private static Map<SpawnGroup, List<SpawnSettings.SpawnEntry>> getStandardSwetEntries(int weight, int minGroup, int maxGroup) {
+        return Map.of(SpawnGroup.MONSTER, List.of(
+                new SpawnSettings.SpawnEntry(AetherEntityTypes.BLUE_SWET, weight, minGroup, maxGroup),
+                new SpawnSettings.SpawnEntry(AetherEntityTypes.WHITE_SWET, weight, minGroup, maxGroup),
+                new SpawnSettings.SpawnEntry(AetherEntityTypes.GOLDEN_SWET, weight, minGroup, maxGroup),
+                new SpawnSettings.SpawnEntry(AetherEntityTypes.PURPLE_SWET, weight, minGroup, maxGroup),
+                new SpawnSettings.SpawnEntry(AetherEntityTypes.VERMILION_SWET, weight, minGroup, maxGroup)
         ));
     }
     
@@ -244,7 +254,7 @@ public final class AetherBiomes {
             .generationSettings(createGenerationSettings(
                 getAetherCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -266,14 +276,14 @@ public final class AetherBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.BLUE_SWET, 100, 2, 6)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 5, 13),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERWHALE, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 5, 13),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERWHALE, 6, 1, 3)
+                        )
                     )
                 ),
                 Map.of(
@@ -304,7 +314,7 @@ public final class AetherBiomes {
             .generationSettings(createGenerationSettings(
                 getAetherCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -327,17 +337,16 @@ public final class AetherBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.BLUE_SWET, 100, 2, 6)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 3, 7),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERWHALE, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 3, 7),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERWHALE, 6, 1, 3)
+                        )
                     )
                 ),
-                
                 Map.of(
                     AetherEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12F)
                 )
@@ -366,7 +375,7 @@ public final class AetherBiomes {
             .generationSettings(createGenerationSettings(
                 getAetherCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -395,18 +404,20 @@ public final class AetherBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.BLUE_SWET, 100, 2, 6),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AECHOR_PLANT, 50, 1, 2)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 10, 1, 5),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERWHALE, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AECHOR_PLANT, 50, 1, 2)
+                        ),
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 10, 1, 5),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERWHALE, 6, 1, 3)
+                        )
                     )
                 ),
-                
+
                 Map.of(
                     AetherEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12),
                     AetherEntityTypes.AECHOR_PLANT, SpawnCost.of(0.75, 0.07)
@@ -437,7 +448,7 @@ public final class AetherBiomes {
             .generationSettings(createGenerationSettings(
                 getAetherCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -457,16 +468,18 @@ public final class AetherBiomes {
                 )
                 ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.BLUE_SWET, 30, 1, 3),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AECHOR_PLANT, 100, 3, 7)
-                    ),
-                    
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 10, 1, 5),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERWHALE, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(2, 1, 3),
+                    Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AECHOR_PLANT, 100, 3, 7)
+                        ),
+
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 10, 1, 5),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERWHALE, 6, 1, 3)
+                        )
                     )
                 ),
                 
@@ -499,7 +512,7 @@ public final class AetherBiomes {
             .generationSettings(createGenerationSettings(
                 getAetherCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LAKES, List.of(
@@ -526,14 +539,14 @@ public final class AetherBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.BLUE_SWET, 100, 2, 6)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 5, 13),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 5, 13),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 6, 1, 3)
+                        )
                     )
                 ),
                 
@@ -565,7 +578,7 @@ public final class AetherBiomes {
             .generationSettings(createGenerationSettings(
                 getAetherCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -590,14 +603,14 @@ public final class AetherBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.BLUE_SWET, 100, 2, 6)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 5, 13),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 5, 13),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 6, 1, 3)
+                        )
                     )
                 ),
             
@@ -629,7 +642,7 @@ public final class AetherBiomes {
             .generationSettings(createGenerationSettings(
                 getAetherCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardAetherFeatures(),
                     Map.of(
                         GenerationStep.Feature.LAKES, List.of(
@@ -667,15 +680,17 @@ public final class AetherBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.BLUE_SWET, 100, 2, 6),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AECHOR_PLANT, 50, 1, 3)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 5, 13),
-                        new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AECHOR_PLANT, 50, 1, 3)
+                        ),
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.MOA, 6, 5, 13),
+                            new SpawnSettings.SpawnEntry(AetherEntityTypes.AERBUNNY, 6, 1, 3)
+                        )
                     )
                 ),
                 Map.of(

@@ -3,7 +3,9 @@ package net.id.aether.entities.block;
 import net.id.aether.api.FloatingBlockHelper;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.aether.tag.AetherBlockTags;
+import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FallingBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
@@ -37,27 +39,27 @@ public class FloatingBlockEntity extends BlockLikeEntity {
     }
 
     @Override
-    public void postTickEntityCollision(Entity entity) {
-        super.postTickEntityCollision(entity);
-        if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
-            entity.fallDistance = 0F;
-        }
-    }
-
-    @Override
     public void postTickMoveEntities() {
-        super.postTickMoveEntities();
+        if (FallingBlock.canFallThrough(this.blockState)) return;
 
         List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 3 * (this.prevY - this.getY()), 0)));
         for (Entity entity : otherEntities) {
             if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
+                entity.move(MovementType.SHULKER_BOX, this.getVelocity());
+                entity.setOnGround(true);
+
                 entity.setPosition(entity.getX(), this.getBoundingBox().maxY, entity.getZ());
+                entity.fallDistance = 0F;
             }
+            this.postTickEntityCollision(entity);
         }
     }
 
     @Override
     public void postTickMovement() {
+        // Drag
+        this.setVelocity(this.getVelocity().multiply(0.98D));
+
         this.lastYVelocity = this.getVelocity().y;
 
         if (!this.hasNoGravity()) {

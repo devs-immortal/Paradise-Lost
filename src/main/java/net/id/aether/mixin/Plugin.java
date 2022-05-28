@@ -1,7 +1,7 @@
 package net.id.aether.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.id.aether.util.Config;
+import net.id.aether.util.CompatConfig;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -23,7 +23,7 @@ public final class Plugin implements IMixinConfigPlugin{
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName){
         if(mixinClassName.equals("net.id.aether.mixin.client.ClientPlayerEntityMixin")){
-            return !Config.SPECTRUM_WORKAROUND;
+            return !CompatConfig.SPECTRUM_WORKAROUND;
         }
         if(isDevel){
             return true;

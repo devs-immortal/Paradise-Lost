@@ -5,7 +5,6 @@ import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.entities.AetherEntityTypes;
-import net.id.aether.entities.vehicle.AetherBoatTypes;
 import net.id.aether.fluids.AetherFluids;
 import net.id.aether.items.accessories.ParachuteTrinketItem;
 import net.id.aether.items.armor.AetherArmorMaterials;
@@ -596,15 +595,14 @@ public class AetherItems {
 //    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", AetherBlocks.DUNGEON_SWITCH, decoration);
 
     // these should be moved... somewhere?
-    public static final BoatItem SKYROOT_BOAT = add("skyroot_boat", new BoatItem(AetherBoatTypes.SKYROOT, boat));
-    public static final BoatItem GOLDEN_OAK_BOAT = add("golden_oak_boat", new BoatItem(AetherBoatTypes.GOLDEN_OAK, boat));
-    public static final BoatItem ORANGE_BOAT = add("orange_boat", new BoatItem(AetherBoatTypes.ORANGE, boat));
-    public static final BoatItem CRYSTAL_BOAT = add("crystal_boat", new BoatItem(AetherBoatTypes.CRYSTAL, boat));
-    public static final BoatItem WISTERIA_BOAT = add("wisteria_boat", new BoatItem(AetherBoatTypes.WISTERIA, boat));
+    public static final BoatItem SKYROOT_BOAT = AetherBlocks.SKYROOT.boatFactory(boat).item;
+    public static final BoatItem GOLDEN_OAK_BOAT = AetherBlocks.GOLDEN_OAK.boatFactory(boat).item;
+    public static final BoatItem ORANGE_BOAT = AetherBlocks.ORANGE.boatFactory(boat).item;
+    public static final BoatItem CRYSTAL_BOAT = AetherBlocks.CRYSTAL.boatFactory(boat).item;
+    public static final BoatItem WISTERIA_BOAT = AetherBlocks.WISTERIA.boatFactory(boat).item;
 
     // Chests
     public static final BlockItem SKYROOT_CHEST = add("skyroot_chest", AetherBlocks.SKYROOT_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
-    // TODO: Implement remaining chests (PL-1.7)
     public static final BlockItem GOLDEN_OAK_CHEST = add("golden_oak_chest", AetherBlocks.GOLDEN_OAK_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
     public static final BlockItem ORANGE_CHEST = add("orange_chest", AetherBlocks.ORANGE_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
     public static final BlockItem CRYSTAL_CHEST = add("crystal_chest", AetherBlocks.CRYSTAL_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));
