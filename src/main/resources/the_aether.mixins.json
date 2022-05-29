@@ -28,6 +28,7 @@
     "item.ShearsMixin",
     "item.SwordItemAccessor",
     "item.ToolMaterialsAccessor",
+    "server.DimensionTypeMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",

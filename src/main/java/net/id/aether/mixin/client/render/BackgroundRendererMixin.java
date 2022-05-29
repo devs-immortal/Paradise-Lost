@@ -31,7 +31,7 @@ public class BackgroundRendererMixin {
 
     @Redirect(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/util/math/Vec3d;y:D", opcode = Opcodes.GETFIELD, ordinal = 1))
     private static double adjustVoidVector(Vec3d vec3d) {
-        return RegistryUtil.dimensionMatches(MinecraftClient.getInstance().world, AetherDimension.DIMENSION_TYPE) ? Double.MAX_VALUE : vec3d.y;
+        return RegistryUtil.dimensionMatches(MinecraftClient.getInstance().world, AetherDimension.DIMENSION_TYPE_KEY) ? Double.MAX_VALUE : vec3d.y;
     }
 
     @Environment(EnvType.CLIENT)
