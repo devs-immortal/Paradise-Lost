@@ -53,6 +53,9 @@ repositories {
     maven {
         name = "Jitpack"
         url = "https://jitpack.io"
+        metadataSources {
+            artifact()
+        }
     }
     maven {
         name = "Jamieswhiteshirt"
