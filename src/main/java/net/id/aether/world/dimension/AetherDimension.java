@@ -34,6 +34,56 @@ public class AetherDimension {
     
     private static final DimensionType DIMENSION_TYPE = DimensionType.create(OptionalLong.empty(), true, false, false, true, 10, false, false, true, false, false, -64, 384, 384, BlockTags.INFINIBURN_OVERWORLD, OVERWORLD_ID, 0.06F);
     
+    private static final MultiNoiseBiomeSource.Preset AETHER_PRESET = new MultiNoiseBiomeSource.Preset(
+        locate(MOD_ID),
+        (registry)->new MultiNoiseUtil.Entries<>(ImmutableList.of(
+            Pair.of(
+                createNoiseHyperCube(0, 0, 0, 1, 0.2F, 1, 0, 0, 0),
+                registry.getOrCreateEntry(AetherBiomes.HIGHLANDS_PLAINS_KEY)
+            ),
+            Pair.of(
+                createNoiseHyperCube(-0.15F, 0.1F, -0.8F, 0.5F, -1, 1, 0, 0, 0),
+                registry.getOrCreateEntry(AetherBiomes.HIGHLANDS_SHIELD_KEY)
+            ),
+            Pair.of(
+                createNoiseHyperCube(-0.25F, 0.02F, 0.8F, 1, -0.2F, 0.96F, 0, 0, 0),
+                registry.getOrCreateEntry(AetherBiomes.CONTINENTAL_PLATEAU_KEY)
+            ),
+            // Autumnal Tundra is special, adding a special case overload would be a little silly
+            Pair.of(
+                MultiNoiseUtil.createNoiseHypercube(
+                    // Temperature
+                    MultiNoiseUtil.ParameterRange.of(-0.35F),
+                    // Humidity
+                    MultiNoiseUtil.ParameterRange.of(0.075F),
+                    // Continetalness
+                    MultiNoiseUtil.ParameterRange.of(0.84F),
+                    // Erosion
+                    MultiNoiseUtil.ParameterRange.of(-0.23F, 0.86F),
+                    // Depth
+                    MultiNoiseUtil.ParameterRange.of(0),
+                    // Weirdness
+                    MultiNoiseUtil.ParameterRange.of(0),
+                    // Offset
+                    0
+                ),
+                registry.getOrCreateEntry(AetherBiomes.AUTUMNAL_TUNDRA_KEY)
+            ),
+            Pair.of(
+                createNoiseHyperCube(0.35F, -0.05F, -1, 1, -1, 1, 0, 0, 0.05F),
+                registry.getOrCreateEntry(AetherBiomes.HIGHLANDS_THICKET_KEY)
+            ),
+            Pair.of(
+                createNoiseHyperCube(0.225F, -0.015F, -1, 0.23F, -1, 1, 0, 0, 0),
+                registry.getOrCreateEntry(AetherBiomes.HIGHLANDS_FOREST_KEY)
+            ),
+            Pair.of(
+                createNoiseHyperCube(0.1F, 0, -0.4F, 0.82F, -1, 1, 0, 0, 0.125F),
+                registry.getOrCreateEntry(AetherBiomes.WISTERIA_WOODS_KEY)
+            )
+        ))
+    );
+    
     public static void init() {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.GLOWSTONE)
@@ -71,61 +121,17 @@ public class AetherDimension {
         var chunkGeneratorSettingsRegistry = registryManager.get(Registry.CHUNK_GENERATOR_SETTINGS_KEY);
         var noiseWorldgenRegistry = registryManager.get(Registry.NOISE_WORLDGEN);
         
-        var biomeSource = new MultiNoiseBiomeSource.Preset(
-            locate(MOD_ID),
-            (registry)->new MultiNoiseUtil.Entries<>(ImmutableList.of(
-                Pair.of(
-                    createNoiseHyperCube(0, 0, 0, 1, 0.2F, 1, 0, 0, 0),
-                    registry.getOrCreateEntry(AetherBiomes.HIGHLANDS_PLAINS_KEY)
-                ),
-                Pair.of(
-                    createNoiseHyperCube(-0.15F, 0.1F, -0.8F, 0.5F, -1, 1, 0, 0, 0),
-                    registry.getOrCreateEntry(AetherBiomes.HIGHLANDS_SHIELD_KEY)
-                ),
-                Pair.of(
-                    createNoiseHyperCube(-0.25F, 0.02F, 0.8F, 1, -0.2F, 0.96F, 0, 0, 0),
-                    registry.getOrCreateEntry(AetherBiomes.CONTINENTAL_PLATEAU_KEY)
-                ),
-                // Autumnal Tundra is special, adding a special case overload would be a little silly
-                Pair.of(
-                    MultiNoiseUtil.createNoiseHypercube(
-                        // Temperature
-                        MultiNoiseUtil.ParameterRange.of(-0.35F),
-                        // Humidity
-                        MultiNoiseUtil.ParameterRange.of(0.075F),
-                        // Continetalness
-                        MultiNoiseUtil.ParameterRange.of(0.84F),
-                        // Erosion
-                        MultiNoiseUtil.ParameterRange.of(-0.23F, 0.86F),
-                        // Depth
-                        MultiNoiseUtil.ParameterRange.of(0),
-                        // Weirdness
-                        MultiNoiseUtil.ParameterRange.of(0),
-                        // Offset
-                        0
-                    ),
-                    registry.getOrCreateEntry(AetherBiomes.AUTUMNAL_TUNDRA_KEY)
-                ),
-                Pair.of(
-                    createNoiseHyperCube(0.35F, -0.05F, -1, 1, -1, 1, 0, 0, 0.05F),
-                    registry.getOrCreateEntry(AetherBiomes.HIGHLANDS_THICKET_KEY)
-                ),
-                Pair.of(
-                    createNoiseHyperCube(0.225F, -0.015F, -1, 0.23F, -1, 1, 0, 0, 0),
-                    registry.getOrCreateEntry(AetherBiomes.HIGHLANDS_FOREST_KEY)
-                ),
-                Pair.of(
-                    createNoiseHyperCube(0.1F, 0, -0.4F, 0.82F, -1, 1, 0, 0, 0.125F),
-                    registry.getOrCreateEntry(AetherBiomes.WISTERIA_WOODS_KEY)
-                )
-            ))
-        ).getBiomeSource(biomeRegistry, useInstance);
-        
         dimRegistry.add(
             AETHER_OPTIONS_KEY,
             new DimensionOptions(
                 dimensionTypeRegistry.getOrCreateEntry(DIMENSION_TYPE_KEY),
-                new NoiseChunkGenerator(structureSetRegistry, noiseWorldgenRegistry, biomeSource, seed, chunkGeneratorSettingsRegistry.getOrCreateEntry(AETHER_CHUNK_GENERATOR_SETTINGS_KEY))
+                new NoiseChunkGenerator(
+                    structureSetRegistry,
+                    noiseWorldgenRegistry,
+                    AETHER_PRESET.getBiomeSource(biomeRegistry, useInstance),
+                    seed,
+                    chunkGeneratorSettingsRegistry.getOrCreateEntry(AETHER_CHUNK_GENERATOR_SETTINGS_KEY)
+                )
             ),
             Lifecycle.stable()
         );
