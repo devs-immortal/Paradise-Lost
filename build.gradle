@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "0.12-SNAPSHOT"
+    id "fabric-loom" version "0.12.46"
     id "maven-publish"
     id "com.modrinth.minotaur" version "2.+"
     id "de.guntram.mcmod.crowdin-translate" version "1.4+1.18.2"
