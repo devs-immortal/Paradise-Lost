@@ -28,6 +28,8 @@
     "item.ShearsMixin",
     "item.SwordItemAccessor",
     "item.ToolMaterialsAccessor",
+    "server.ChunkGeneratorSettingsMixin",
+    "server.DensityFunctionsAccessor",
     "server.DimensionTypeMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
