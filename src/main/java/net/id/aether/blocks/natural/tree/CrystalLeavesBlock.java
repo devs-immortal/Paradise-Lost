@@ -8,8 +8,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 public class CrystalLeavesBlock extends LeavesBlock {
     public static final BooleanProperty FRUITY = BooleanProperty.of("fruity");

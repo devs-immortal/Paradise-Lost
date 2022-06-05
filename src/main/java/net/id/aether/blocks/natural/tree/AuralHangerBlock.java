@@ -9,9 +9,8 @@ import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class AuralHangerBlock extends AetherHangerBlock implements DynamicColorBlock {
 

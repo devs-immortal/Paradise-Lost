@@ -5,8 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.DirtPathBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 public class AetherDirtPathBlock extends DirtPathBlock {
     public AetherDirtPathBlock(Settings settings) {

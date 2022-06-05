@@ -17,10 +17,8 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Pair;
 import net.minecraft.util.hit.EntityHitResult;
@@ -76,9 +74,9 @@ public class BloodstoneHUDRenderer {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
         renderRing(matrixStack, 0, 0);
         renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.REGENERATION), new LiteralText(bloodstoneCapturedData.HP), 0, 80);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.RESISTANCE), new LiteralText(bloodstoneCapturedData.DF), -80, 0);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), new LiteralText(bloodstoneCapturedData.TF), 80, 0);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.REGENERATION), Text.literal(bloodstoneCapturedData.HP), 0, 80);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.RESISTANCE), Text.literal(bloodstoneCapturedData.DF), -80, 0);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), Text.literal(bloodstoneCapturedData.TF), 80, 0);
     }
 
     private static void renderZanite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
@@ -89,21 +87,21 @@ public class BloodstoneHUDRenderer {
         renderRing(matrixStack, 0, 0);
         renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
 
-        renderIconWText(matrixStack, client, affinitySprite, new TranslatableText(bloodstoneCapturedData.Affinity), 76, -25);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), new LiteralText(bloodstoneCapturedData.Owner), 47, 65);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), new LiteralText(bloodstoneCapturedData.Hunger), -47, 65);
-        renderIconWText(matrixStack, client, raceSprite, new TranslatableText(bloodstoneCapturedData.Race), -76, -25);
+        renderIconWText(matrixStack, client, affinitySprite, Text.translatable(bloodstoneCapturedData.Affinity), 76, -25);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), Text.literal(bloodstoneCapturedData.Owner), 47, 65);
+        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), Text.literal(bloodstoneCapturedData.Hunger), -47, 65);
+        renderIconWText(matrixStack, client, raceSprite, Text.translatable(bloodstoneCapturedData.Race), -76, -25);
     }
 
     private static void renderGravitite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         renderRing(matrixStack, 0, 0);
         renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
-        renderText(matrixStack, client, new TranslatableText("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), 63, -50);
-        renderText(matrixStack, client, new TranslatableText("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)), 80, 0);
-        renderText(matrixStack, client, new TranslatableText("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)), 63, 50);
-        renderText(matrixStack, client, new TranslatableText("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)), -63, -50);
-        renderText(matrixStack, client, new TranslatableText("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)), -80, 0);
-        renderText(matrixStack, client, new TranslatableText("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), -63, 50);
+        renderText(matrixStack, client, Text.translatable("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), 63, -50);
+        renderText(matrixStack, client, Text.translatable("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)), 80, 0);
+        renderText(matrixStack, client, Text.translatable("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)), 63, 50);
+        renderText(matrixStack, client, Text.translatable("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)), -63, -50);
+        renderText(matrixStack, client, Text.translatable("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)), -80, 0);
+        renderText(matrixStack, client, Text.translatable("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), -63, 50);
     }
 
     private static void renderAbstentine(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
@@ -131,13 +129,13 @@ public class BloodstoneHUDRenderer {
         DrawableHelper.drawTexture(matrixStack, -7, -7, 0, 0, 109, 12, 109, 12);
         matrixStack.pop();
 
-        Text title = new TranslatableText("condition.condition." + conditionData.id()).append(" - ").append(getSeverityWithColor(conditionData.severity()));
+        Text title = Text.translatable("condition.condition." + conditionData.id()).append(" - ").append(getSeverityWithColor(conditionData.severity()));
         renderText(matrixStack, client, title, offsetX + 17, offsetY - 9);
     }
 
     public static Text getSeverityWithColor(Float rawSeverity) {
         Severity sev = Severity.getSeverity(rawSeverity);
-        MutableText text = new TranslatableText(sev.getTranslationKey());
+        MutableText text = Text.translatable(sev.getTranslationKey());
         return switch (sev) {
             case EXTREME -> text.formatted(Formatting.GRAY);
             case DIRE -> text.formatted(Formatting.RED);

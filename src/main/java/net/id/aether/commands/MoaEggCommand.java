@@ -12,7 +12,7 @@ import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 
@@ -41,7 +41,7 @@ public class MoaEggCommand {
         var race = MoaAPI.getRace(raceId);
 
         if (race == MoaAPI.FALLBACK_MOA) {
-            source.sendError(new TranslatableText("commands.the_aether.moaegg.failure", raceId.toString()));
+            source.sendError(Text.translatable("commands.the_aether.moaegg.failure", raceId.toString()));
         } else {
             ItemStack template = MoaGenes.getEggForCommand(race, source.getWorld(), baby);
             targets.forEach(player -> {
@@ -49,7 +49,7 @@ public class MoaEggCommand {
                 if (!player.getInventory().insertStack(template)) {
                     ItemScatterer.spawn(source.getWorld(), player.getX(), player.getY(), player.getZ(), egg);
                 }
-                source.sendFeedback(new TranslatableText("commands.the_aether.moaegg.success", egg.toHoverableText(), targets.iterator().next().getDisplayName()), true);
+                source.sendFeedback(Text.translatable("commands.the_aether.moaegg.success", egg.toHoverableText(), targets.iterator().next().getDisplayName()), true);
             });
         }
 

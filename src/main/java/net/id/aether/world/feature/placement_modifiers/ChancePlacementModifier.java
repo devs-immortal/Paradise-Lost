@@ -4,10 +4,9 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.placementmodifier.AbstractCountPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
-
-import java.util.Random;
 
 // They removed the chance decorator in 1.18, so I've added it here.
 public class ChancePlacementModifier extends AbstractCountPlacementModifier {

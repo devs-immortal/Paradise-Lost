@@ -7,12 +7,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.PlacedFeature;
-
-import java.util.Random;
 
 public class AetherQuicksoilBlock extends Block implements Fertilizable {
     public AetherQuicksoilBlock(Settings settings) {

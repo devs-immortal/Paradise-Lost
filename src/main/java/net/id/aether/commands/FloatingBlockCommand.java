@@ -5,7 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import net.id.aether.api.FloatingBlockHelper;
 import net.minecraft.command.argument.BlockPosArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 
 import static net.minecraft.server.command.CommandManager.argument;
@@ -27,9 +27,9 @@ public class FloatingBlockCommand {
 
     private static int floatBlock(ServerCommandSource source, BlockPos pos, boolean force) {
         if (!source.getWorld().getBlockState(pos).isAir() && FloatingBlockHelper.ANY.tryCreate(source.getWorld(), pos, force)) {
-            source.sendFeedback(new TranslatableText("commands.the_aether.gravitate.success"), true);
+            source.sendFeedback(Text.translatable("commands.the_aether.gravitate.success"), true);
         } else {
-            source.sendError(new TranslatableText("commands.the_aether.gravitate.failure"));
+            source.sendError(Text.translatable("commands.the_aether.gravitate.failure"));
         }
         return 1;
     }

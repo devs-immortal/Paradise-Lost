@@ -18,8 +18,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 @Environment(EnvType.CLIENT)
 public class FloatingBlockRenderer extends EntityRenderer<FloatingBlockEntity> {
 
@@ -41,7 +39,7 @@ public class FloatingBlockRenderer extends EntityRenderer<FloatingBlockEntity> {
                 BlockPos blockpos = new BlockPos(entity.getX(), entity.getBoundingBox().maxY, entity.getZ());
                 matrices.translate(-0.5, 0.0, -0.5);
                 BlockRenderManager blockRenderManager = MinecraftClient.getInstance().getBlockRenderManager();
-                blockRenderManager.getModelRenderer().render(world, blockRenderManager.getModel(blockState), blockState, blockpos, matrices, vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(blockState)), false, new Random(), blockState.getRenderingSeed(entity.getOrigin()), OverlayTexture.DEFAULT_UV);
+                blockRenderManager.getModelRenderer().render(world, blockRenderManager.getModel(blockState), blockState, blockpos, matrices, vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(blockState)), false, world.getRandom(), blockState.getRenderingSeed(entity.getOrigin()), OverlayTexture.DEFAULT_UV);
                 matrices.pop();
                 super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
             }

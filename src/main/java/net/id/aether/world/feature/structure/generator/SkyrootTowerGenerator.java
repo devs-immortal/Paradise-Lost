@@ -15,32 +15,31 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 
-import java.util.Random;
-
 public class SkyrootTowerGenerator {
     private static final Identifier SKYROOT_TOWER = Aether.locate("skyroot_tower");
 
-    public static void addPieces(StructureManager manager, StructurePiecesHolder structurePiecesHolder, BlockRotation blockRotation, BlockPos pos) {
+    public static void addPieces(StructureTemplateManager manager, StructurePiecesHolder structurePiecesHolder, BlockRotation blockRotation, BlockPos pos) {
         structurePiecesHolder.addPiece(new SkyrootTowerGenerator.Piece(manager, SKYROOT_TOWER, pos, blockRotation));
     }
 
     public static class Piece extends SimpleStructurePiece {
 
-        public Piece(StructureManager manager, Identifier template, BlockPos pos, BlockRotation rotation) {
+        public Piece(StructureTemplateManager manager, Identifier template, BlockPos pos, BlockRotation rotation) {
             super(AetherStructureFeatures.SKYROOT_TOWER_PIECE, 0, manager, template, template.toString(), createPlacementData(rotation), pos);
         }
 
-        public Piece(StructureManager manager, NbtCompound nbt) {
+        public Piece(StructureTemplateManager manager, NbtCompound nbt) {
             super(AetherStructureFeatures.SKYROOT_TOWER_PIECE, nbt, manager, (identifier) -> createPlacementData(BlockRotation.valueOf(nbt.getString("Rot"))));
         }
 
         public Piece(StructureContext context, NbtCompound nbtCompound) {
-            this(context.structureManager(), nbtCompound);
+            this(context.structureTemplateManager(), nbtCompound);
         }
 
         private static StructurePlacementData createPlacementData(BlockRotation rotation) {
@@ -69,7 +68,7 @@ public class SkyrootTowerGenerator {
                         pathGround(world, new BlockPos(pos.getX()+x, pos.getY()+1, pos.getZ()+z));
                 }
             }
-            boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
+            boundingBox.encompass(this.template.calculateBoundingBox(this.placementData, this.pos));
             super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
         }
 

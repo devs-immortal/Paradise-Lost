@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
@@ -16,7 +17,6 @@ import net.minecraft.world.gen.carver.CarvingMask;
 import net.minecraft.world.gen.chunk.AquiferSampler;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
 import java.util.function.Function;
 
 public class CloudCarver extends Carver<CloudCarverConfig> {

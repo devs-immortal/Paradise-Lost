@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -28,9 +27,9 @@ public class BookOfLoreItem extends Item {
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.clear();
-        tooltip.add((new TranslatableText("item.the_aether.lore_book")).formatted(Formatting.YELLOW));
-        tooltip.add((new TranslatableText("book.edition", "1")).formatted(Formatting.GOLD));
-        tooltip.add((new TranslatableText("book.byAuthor", "Immortal Devs")).formatted(Formatting.GRAY));
+        tooltip.add((Text.translatable("item.the_aether.lore_book")).formatted(Formatting.YELLOW));
+        tooltip.add((Text.translatable("book.edition", "1")).formatted(Formatting.GOLD));
+        tooltip.add((Text.translatable("book.byAuthor", "Immortal Devs")).formatted(Formatting.GRAY));
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {

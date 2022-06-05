@@ -11,6 +11,7 @@ import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -142,7 +143,7 @@ public class MoaAPI {
      * @return A {@code MoaRace} registered to spawn in the given biome,
      * distributed proportionally based on percent chance of spawning.
      */
-    public static MoaRace getMoaForBiome(RegistryKey<Biome> biome, Random random) {
+    public static MoaRace getMoaForBiome(RegistryKey<Biome> biome, net.minecraft.util.math.random.Random random) {
         Optional<MoaRace> raceOptional =
                 Optional.ofNullable(getSpawnBucket(biome)
                         .map(bucket -> bucket.get(random))
@@ -205,7 +206,7 @@ public class MoaAPI {
             data = builder.build();
         }
 
-        public float configure(MoaAttributes attribute, MoaRace race, Random random) {
+        public float configure(MoaAttributes attribute, MoaRace race, net.minecraft.util.math.random.Random random) {
             SpawnStatData statData = data.get(attribute);
             return Math.min(attribute.max, attribute.min + (statData.base + (random.nextFloat() * statData.variance) * (race.defaultAffinity == attribute ? (attribute == MoaAttributes.DROP_MULTIPLIER ? 2F : 1.05F) : 1F)));
         }
@@ -255,7 +256,7 @@ public class MoaAPI {
      * Weight in a random number sense, that is - not a mass sense.
      */
     private static record SpawnBucketEntry(MoaRace race, int weight) {
-        public boolean test(Random random, int whole) {
+        public boolean test(net.minecraft.util.math.random.Random random, int whole) {
             return random.nextInt(whole) < weight;
         }
     }

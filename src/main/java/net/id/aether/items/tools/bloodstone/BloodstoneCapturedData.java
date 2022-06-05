@@ -8,10 +8,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
 
@@ -35,7 +33,7 @@ public class BloodstoneCapturedData {
     public String MAX_HEALTH = "???";
 
     public UUID uuid;
-    public Text name = new LiteralText("Unknown Entity");
+    public Text name = Text.literal("Unknown Entity");
     public String HP = "???";
     public String DF = "???";
     public String TF = "???";
@@ -114,7 +112,7 @@ public class BloodstoneCapturedData {
             bloodstoneCapturedData.Race = moa.getGenes().getRace().getTranslationKey();
             bloodstoneCapturedData.Hunger = String.format("%.1f", moa.getGenes().getHunger()) + "/" + 100.0;
             bloodstoneCapturedData.Affinity = moa.getGenes().getAffinity().getTranslationKey();
-            bloodstoneCapturedData.Owner = Optional.ofNullable(moa.getOwner()).map(owner -> owner.getName().asString()).orElse("none");
+            bloodstoneCapturedData.Owner = Optional.ofNullable(moa.getOwner()).map(owner -> owner.getName().getString()).orElse("none");
             //gravitite
             bloodstoneCapturedData.GROUND_SPEED = MoaAttributes.GROUND_SPEED.getRatingTierTranslationKey(moa);
             bloodstoneCapturedData.GLIDING_SPEED = MoaAttributes.GLIDING_SPEED.getRatingTierTranslationKey(moa);
@@ -142,7 +140,7 @@ public class BloodstoneCapturedData {
     }
 
     public Text getRatingWithColor(String rating) {
-        MutableText text = new TranslatableText(rating);
+        MutableText text = Text.translatable(rating);
         return switch (rating) {
             case "moa.attribute.tier.1" -> text.formatted(Formatting.DARK_RED);
             case "moa.attribute.tier.2" -> text.formatted(Formatting.RED);

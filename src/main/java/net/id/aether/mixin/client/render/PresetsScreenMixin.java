@@ -8,7 +8,6 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.structure.StructureSet;
 import net.minecraft.structure.StructureSetKeys;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.FlatChunkGeneratorLayer;
@@ -29,6 +28,6 @@ public class PresetsScreenMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void extendPresetList(CallbackInfo ci) {
-        addPreset(new TranslatableText("createWorld.customize.preset.the_aether.sandbox"), AetherBlocks.AETHER_GRASS_BLOCK, AetherBiomes.HIGHLANDS_PLAINS_KEY, Set.of(StructureSetKeys.VILLAGES), false, false, new FlatChunkGeneratorLayer(1, AetherBlocks.AETHER_GRASS_BLOCK), new FlatChunkGeneratorLayer(2, AetherBlocks.AETHER_DIRT), new FlatChunkGeneratorLayer(1, Blocks.BEDROCK));
+        addPreset(Text.translatable("createWorld.customize.preset.the_aether.sandbox"), AetherBlocks.AETHER_GRASS_BLOCK, AetherBiomes.HIGHLANDS_PLAINS_KEY, Set.of(StructureSetKeys.VILLAGES), false, false, new FlatChunkGeneratorLayer(1, AetherBlocks.AETHER_GRASS_BLOCK), new FlatChunkGeneratorLayer(2, AetherBlocks.AETHER_DIRT), new FlatChunkGeneratorLayer(1, Blocks.BEDROCK));
     }
 }

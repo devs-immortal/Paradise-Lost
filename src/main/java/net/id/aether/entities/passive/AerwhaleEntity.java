@@ -9,20 +9,19 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.BaseText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.StreamSupport;
 
 public class AerwhaleEntity extends FlyingEntity {
@@ -142,8 +141,8 @@ public class AerwhaleEntity extends FlyingEntity {
         if (player.getUuid().getMostSignificantBits() == 220717875589366683L && player.getUuid().getLeastSignificantBits() == -7181826737698904209L) {
             player.startRiding(this);
             if (!this.world.isClient()) {
-                BaseText msg = new TranslatableText("easteregg.the_aether.aerwhale");
-                player.world.getPlayers().forEach(p -> p.sendSystemMessage(msg, player.getUuid()));
+                Text msg = Text.translatable("easteregg.the_aether.aerwhale");
+                player.world.getPlayers().forEach(p -> p.sendMessage(msg));
             }
             return ActionResult.success(this.world.isClient());
         }

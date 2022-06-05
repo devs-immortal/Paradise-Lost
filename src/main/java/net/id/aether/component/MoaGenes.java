@@ -13,11 +13,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.Random;
 import java.util.UUID;
 
 import static net.id.aether.api.MoaAPI.FALLBACK_MOA;

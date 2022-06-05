@@ -33,7 +33,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 
@@ -60,8 +60,8 @@ public class AetherItems {
 
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource));
     public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
-    public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(new TranslatableText("item.the_aether.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
-    public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(new TranslatableText("item.the_aether.crow_eye.tooltip").formatted(Formatting.GRAY))));
+    public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.the_aether.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
+    public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.the_aether.crow_eye.tooltip").formatted(Formatting.GRAY))));
     public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
     public static final AmbrosiumShardItem AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShardItem(resource), fuel(500));
     public static final Item ZANITE_GEM = add("zanite_gemstone", new Item(resource));
@@ -581,11 +581,11 @@ public class AetherItems {
 //    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", AetherBlocks.DUNGEON_SWITCH, decoration);
 
     // these should be moved... somewhere?
-    public static final BoatItem SKYROOT_BOAT = add("skyroot_boat", new BoatItem(AetherBoatTypes.SKYROOT, boat));
-    public static final BoatItem GOLDEN_OAK_BOAT = add("golden_oak_boat", new BoatItem(AetherBoatTypes.GOLDEN_OAK, boat));
-    public static final BoatItem ORANGE_BOAT = add("orange_boat", new BoatItem(AetherBoatTypes.ORANGE, boat));
-    public static final BoatItem CRYSTAL_BOAT = add("crystal_boat", new BoatItem(AetherBoatTypes.CRYSTAL, boat));
-    public static final BoatItem WISTERIA_BOAT = add("wisteria_boat", new BoatItem(AetherBoatTypes.WISTERIA, boat));
+    public static final BoatItem SKYROOT_BOAT = add("skyroot_boat", new BoatItem(false, AetherBoatTypes.SKYROOT, boat));
+    public static final BoatItem GOLDEN_OAK_BOAT = add("golden_oak_boat", new BoatItem(false, AetherBoatTypes.GOLDEN_OAK, boat));
+    public static final BoatItem ORANGE_BOAT = add("orange_boat", new BoatItem(false, AetherBoatTypes.ORANGE, boat));
+    public static final BoatItem CRYSTAL_BOAT = add("crystal_boat", new BoatItem(false, AetherBoatTypes.CRYSTAL, boat));
+    public static final BoatItem WISTERIA_BOAT = add("wisteria_boat", new BoatItem(false, AetherBoatTypes.WISTERIA, boat));
 
     // Chests
     public static final BlockItem SKYROOT_CHEST = add("skyroot_chest", AetherBlocks.SKYROOT_CHEST, new FabricItemSettings().group(AetherItemGroups.AETHER_DECORATIONS));

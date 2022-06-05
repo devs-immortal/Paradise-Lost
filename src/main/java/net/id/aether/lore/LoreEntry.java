@@ -4,7 +4,6 @@ import net.id.aether.registry.AetherRegistries;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
@@ -51,12 +50,12 @@ public record LoreEntry<T>(
 
     public Text getTitleText(){
         Identifier id = AetherRegistries.LORE_REGISTRY.getId(this);
-        return new TranslatableText("lore." + id.getNamespace() + "." + id.getPath() + ".title");
+        return Text.translatable("lore." + id.getNamespace() + "." + id.getPath() + ".title");
     }
 
     public Text getDescriptionText(){
         Identifier id = AetherRegistries.LORE_REGISTRY.getId(this);
-        return new TranslatableText("lore." + id.getNamespace() + "." + id.getPath() + ".description");
+        return Text.translatable("lore." + id.getNamespace() + "." + id.getPath() + ".description");
     }
 
     public Identifier getId(){

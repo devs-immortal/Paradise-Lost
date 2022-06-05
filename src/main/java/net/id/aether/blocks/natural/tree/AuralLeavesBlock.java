@@ -14,9 +14,8 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 @EnvironmentInterface(value = EnvType.CLIENT, itf = RenderLayerOverride.class)
 public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColorBlock, RenderLayerOverride{

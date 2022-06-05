@@ -11,17 +11,16 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 
-import java.util.Random;
-
 public class OrangeRuinGenerator {
     private static final Identifier ORANGE_RUIN = Aether.locate("orange_ruin");
 
-    public static void addPieces(StructureManager manager, StructurePiecesHolder structurePiecesHolder, Random random, BlockPos pos) {
+    public static void addPieces(StructureTemplateManager manager, StructurePiecesHolder structurePiecesHolder, Random random, BlockPos pos) {
         BlockRotation blockRotation = BlockRotation.random(random);
         structurePiecesHolder.addPiece(new OrangeRuinGenerator.Piece(manager, ORANGE_RUIN, pos, blockRotation));
     }
@@ -29,16 +28,16 @@ public class OrangeRuinGenerator {
     public static class Piece extends SimpleStructurePiece {
         private boolean shifted = false;
 
-        public Piece(StructureManager manager, Identifier template, BlockPos pos, BlockRotation rotation) {
+        public Piece(StructureTemplateManager manager, Identifier template, BlockPos pos, BlockRotation rotation) {
             super(AetherStructureFeatures.ORANGE_RUIN_PIECE, 0, manager, template, template.toString(), createPlacementData(rotation), pos);
         }
 
-        public Piece(StructureManager manager, NbtCompound nbt) {
+        public Piece(StructureTemplateManager manager, NbtCompound nbt) {
             super(AetherStructureFeatures.ORANGE_RUIN_PIECE, nbt, manager, (identifier) -> createPlacementData(BlockRotation.valueOf(nbt.getString("Rot"))));
         }
 
         public Piece(StructureContext context, NbtCompound nbtCompound) {
-            this(context.structureManager(), nbtCompound);
+            this(context.structureTemplateManager(), nbtCompound);
         }
 
         private static StructurePlacementData createPlacementData(BlockRotation rotation) {
@@ -59,7 +58,7 @@ public class OrangeRuinGenerator {
                     this.pos = this.pos.down(1);
                     shifted = true;
                 }
-                boundingBox.encompass(this.structure.calculateBoundingBox(this.placementData, this.pos));
+                boundingBox.encompass(this.template.calculateBoundingBox(this.placementData, this.pos));
                 super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
             }
         }

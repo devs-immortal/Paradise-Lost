@@ -7,8 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.particle.ParticleTypes;
-
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 public class PigSlayerItem extends SwordItem {
     public PigSlayerItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {

@@ -5,6 +5,7 @@ import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.world.feature.configs.GroundcoverFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
@@ -13,7 +14,6 @@ import net.minecraft.world.tick.OrderedTick;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Random;
 
 public class GroundcoverFeature extends Feature<GroundcoverFeatureConfig> {
 

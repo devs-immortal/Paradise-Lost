@@ -12,9 +12,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class AetherPortalBlock extends CustomPortalBlock {
     public AetherPortalBlock(Settings settings) {

@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -56,10 +55,10 @@ public class MoaEggItem extends Item {
             Identifier raceId = Identifier.tryParse(geneTag.getString("raceId"));
             var race = MoaAPI.getRace(raceId);
             if (raceId != null) {
-                tooltip.add(new TranslatableText(race.getTranslationKey()).formatted(race.legendary() ? Formatting.LIGHT_PURPLE : Formatting.DARK_AQUA));
+                tooltip.add(Text.translatable(race.getTranslationKey()).formatted(race.legendary() ? Formatting.LIGHT_PURPLE : Formatting.DARK_AQUA));
             }
             if (!geneTag.getBoolean("baby")) {
-                tooltip.add(new TranslatableText("moa.egg.adult").formatted(Formatting.DARK_PURPLE, Formatting.ITALIC));
+                tooltip.add(Text.translatable("moa.egg.adult").formatted(Formatting.DARK_PURPLE, Formatting.ITALIC));
             }
         }
         super.appendTooltip(stack, world, tooltip, context);

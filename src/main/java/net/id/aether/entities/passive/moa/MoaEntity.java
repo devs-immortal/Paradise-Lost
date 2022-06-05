@@ -47,7 +47,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -291,7 +290,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     @Environment(EnvType.CLIENT)
     protected Text getDefaultName() {
-        return new TranslatableText(getGenes().getRace().getTranslationKey(), "Moa");
+        return Text.translatable(getGenes().getRace().getTranslationKey(), "Moa");
     }
 
     @Override
@@ -607,7 +606,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             player.openHandledScreen(new ExtendedScreenHandlerFactory() {
                 @Override
                 public Text getDisplayName() {
-                    return new TranslatableText("container.the_aether.moa");
+                    return Text.translatable("container.the_aether.moa");
                 }
     
                 @Override
