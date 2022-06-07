@@ -29,6 +29,7 @@ public class AetherBlockTags {
     public static final TagKey<Block> SWET_TRANSFORMERS_VERMILION = register("swet_transformers/vermilion");
 
     //Worldgen
+    public static final TagKey<Block> CLOUD_CARVER_REPLACEABLES = register("worldgen/cloud_carver_replaceables");
     public static final TagKey<Block> BASE_AETHER_STONE = register("worldgen/base_aether_stone");
     public static final TagKey<Block> FLUID_REPLACEABLES = register("worldgen/fluid_replaceable");
     public static final TagKey<Block> BASE_REPLACEABLES = register("worldgen/base_replaceables");

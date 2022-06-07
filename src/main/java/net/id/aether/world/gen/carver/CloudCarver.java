@@ -1,9 +1,7 @@
 package net.id.aether.world.gen.carver;
 
-import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -23,7 +21,6 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
 
     public CloudCarver(Codec<CloudCarverConfig> configCodec) {
         super(configCodec);
-        this.alwaysCarvableBlocks = ImmutableSet.of(Blocks.AIR, Blocks.VOID_AIR, Blocks.CAVE_AIR);
     }
 
     private static boolean isPositionExcluded(double scaledRelativeX, double scaledRelativeY, double scaledRelativeZ) {
@@ -105,7 +102,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     protected void carveTunnels(CarverContext context, CloudCarverConfig config, Chunk chunk, Function<BlockPos, RegistryEntry<Biome>> posToBiome, CarvingMask carvingMask, long seed, AquiferSampler sampler, int mainChunkX, int mainChunkZ, double x, double y, double z, float width, float yaw, float pitch, float yawToPitchRatio, int branchStartIndex, int branchCount, SkipPredicate skipPredicate) {
         // Get the position for starting the next branch, from 25% of the total length to 75% to ensure it doesn't branch near the ends
 
-        Random random = new Random(seed);
+        Random random = Random.create(seed);
 
         int nextBranch = random.nextInt(branchCount / 2) + branchCount / 4;
 
@@ -169,10 +166,5 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     @Override
     protected BlockState getState(CarverContext context, CloudCarverConfig config, BlockPos pos, AquiferSampler sampler) {
         return config.cloudState;
-    }
-
-    @Override
-    protected boolean canAlwaysCarveBlock(BlockState state) {
-        return state.isAir();
     }
 }

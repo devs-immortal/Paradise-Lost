@@ -9,6 +9,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.BlockPositionSource;
@@ -65,8 +66,8 @@ public class DungeonSwitchBlockEntity extends BlockEntity implements GameEventLi
     }
 
     @Override
-    public boolean listen(World world, GameEvent event, @Nullable Entity entity, BlockPos pos) {
-        if (event == GameEvent.EXPLODE)
+    public boolean listen(ServerWorld world, GameEvent.Message event) {
+        if (event.getEvent() == GameEvent.EXPLODE)
             if (world != null && world.getBlockState(this.getPos()).getBlock() instanceof DungeonSwitchBlock dungeonSwitchBlock) {
                 dungeonSwitchBlock.onExplosionEvent(world, this.getPos());
             }
