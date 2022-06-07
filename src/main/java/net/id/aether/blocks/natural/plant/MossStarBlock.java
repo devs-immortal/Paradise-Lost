@@ -20,7 +20,7 @@ public class MossStarBlock extends PlantBlock implements Waterloggable, Fertiliz
     public static final VoxelShape SHAPE = Block.createCuboidShape(5, 0, 5, 11, 5, 11);
 
     public MossStarBlock(Settings settings) {
-        super(settings);
+        super(settings.offsetType(OffsetType.XZ));
     }
 
     @Nullable
@@ -32,11 +32,6 @@ public class MossStarBlock extends PlantBlock implements Waterloggable, Fertiliz
     @Override
     public float getMaxHorizontalModelOffset() {
         return 0.2F;
-    }
-
-    @Override
-    public OffsetType getOffsetType() {
-        return OffsetType.XZ;
     }
 
     @Override

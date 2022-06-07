@@ -20,7 +20,7 @@ public class GroundcoverBlock extends AetherBrushBlock {
     private final double slowdown;
 
     public GroundcoverBlock(Settings settings, double slowdown) {
-        super(settings);
+        super(settings.offsetType(OffsetType.NONE));
         this.slowdown = slowdown;
     }
 
@@ -43,10 +43,5 @@ public class GroundcoverBlock extends AetherBrushBlock {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
-    }
-
-    @Override
-    public OffsetType getOffsetType() {
-        return OffsetType.NONE;
     }
 }

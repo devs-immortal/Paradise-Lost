@@ -24,7 +24,7 @@ public interface DynamicColorBlock {
     }
 
     static boolean isFastGraphics(){
-        return MinecraftClient.getInstance().options.graphicsMode.equals(GraphicsMode.FAST);
+        return MinecraftClient.getInstance().options.getGraphicsMode().getValue().equals(GraphicsMode.FAST);
     }
 
     // Sigmoid

@@ -15,7 +15,7 @@ import net.minecraft.world.WorldView;
 public class TallWaterPlantBlock extends TallPlantBlock implements Waterloggable {
 
     public TallWaterPlantBlock(Settings settings) {
-        super(settings);
+        super(settings.offsetType(OffsetType.XYZ));
     }
 
     public FluidState getFluidState(BlockState state) {
@@ -28,11 +28,6 @@ public class TallWaterPlantBlock extends TallPlantBlock implements Waterloggable
             return world.isWater(pos) &&  super.canPlaceAt(state, world, pos);
         }
         return super.canPlaceAt(state, world, pos);
-    }
-
-    @Override
-    public OffsetType getOffsetType() {
-        return OffsetType.XYZ;
     }
 
     @Override

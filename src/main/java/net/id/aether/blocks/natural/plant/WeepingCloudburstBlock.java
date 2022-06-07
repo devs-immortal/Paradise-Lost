@@ -26,7 +26,7 @@ public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable 
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     public WeepingCloudburstBlock(Settings settings) {
-        super(settings);
+        super(settings.offsetType(OffsetType.XZ));
         setDefaultState(getDefaultState().with(SECTION, Section.BOTTOM).with(NOGROW, false).with(WATERLOGGED, false));
     }
 
@@ -108,11 +108,6 @@ public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable 
     @Override
     public float getMaxHorizontalModelOffset() {
         return 0.2F;
-    }
-
-    @Override
-    public OffsetType getOffsetType() {
-        return OffsetType.XZ;
     }
 
     @Override

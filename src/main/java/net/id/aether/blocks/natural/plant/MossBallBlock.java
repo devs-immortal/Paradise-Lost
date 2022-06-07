@@ -20,7 +20,7 @@ public class MossBallBlock extends PlantBlock implements Waterloggable, Fertiliz
     public static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 12, 14);
 
     public MossBallBlock(Settings settings) {
-        super(settings);
+        super(settings.offsetType(OffsetType.XYZ));
     }
 
     @Nullable
@@ -38,11 +38,6 @@ public class MossBallBlock extends PlantBlock implements Waterloggable, Fertiliz
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(Properties.WATERLOGGED);
-    }
-
-    @Override
-    public OffsetType getOffsetType() {
-        return OffsetType.XYZ;
     }
 
     @Override

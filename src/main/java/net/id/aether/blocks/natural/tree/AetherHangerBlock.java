@@ -27,7 +27,7 @@ public class AetherHangerBlock extends PlantBlock implements Fertilizable {
     }
 
     public AetherHangerBlock(Settings settings) {
-        super(settings);
+        super(settings.offsetType(OffsetType.XZ));
         this.setDefaultState((this.stateManager.getDefaultState()).with(TIP, true));
     }
 
@@ -46,11 +46,6 @@ public class AetherHangerBlock extends PlantBlock implements Fertilizable {
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return this.canPlantOnTop(world.getBlockState(pos.up()), world, pos.up());
-    }
-
-    @Override
-    public OffsetType getOffsetType() {
-        return OffsetType.XZ;
     }
 
     @Override

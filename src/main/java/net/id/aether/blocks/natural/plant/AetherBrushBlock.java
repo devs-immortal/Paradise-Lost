@@ -19,7 +19,7 @@ public class AetherBrushBlock extends FernBlock {
     private final boolean override;
 
     public AetherBrushBlock(Settings settings) {
-        this(settings, AetherBlockTags.GENERIC_VALID_GROUND, false);
+        this(settings.offsetType(OffsetType.XZ), AetherBlockTags.GENERIC_VALID_GROUND, false);
     }
 
     public AetherBrushBlock(Settings settings, TagKey<Block> validFloors, boolean override) {
@@ -49,10 +49,5 @@ public class AetherBrushBlock extends FernBlock {
         if (override)
             return floor.isIn(validFloors);
         return (super.canPlantOnTop(floor, world, pos) || floor.isIn(validFloors)) && floor.isSideSolidFullSquare(world, pos, Direction.UP);
-    }
-
-    @Override
-    public OffsetType getOffsetType() {
-        return OffsetType.XZ;
     }
 }
