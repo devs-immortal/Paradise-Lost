@@ -54,7 +54,7 @@ public class AetherDispenserBehaviors {
             }
 
             stack.decrement(1);
-            pointer.getWorld().emitGameEvent(GameEvent.ENTITY_PLACE, pointer.getPos());
+            pointer.getWorld().emitGameEvent(GameEvent.ENTITY_PLACE, pointer.getPos(), GameEvent.Emitter.of(pointer.getBlockState()));
             return stack;
         }
     };

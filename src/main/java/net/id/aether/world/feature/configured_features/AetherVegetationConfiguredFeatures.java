@@ -93,7 +93,7 @@ public class AetherVegetationConfiguredFeatures extends AetherConfiguredFeatures
         ));
 
         private static final RandomPatchFeatureConfig SHIELD_FLAX_CONFIG = new RandomPatchFeatureConfig(96, 12, 5,
-                singleBlock(WILD_FLAX, BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(List.of(HOLYSTONE, COBBLED_HOLYSTONE, MOSSY_HOLYSTONE), Vec3i.ZERO.down())), AetherPlacedFeatures.ON_SOLID_GROUND)
+                singleBlock(WILD_FLAX, BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(Vec3i.ZERO.down(), List.of(HOLYSTONE, COBBLED_HOLYSTONE, MOSSY_HOLYSTONE))), AetherPlacedFeatures.ON_SOLID_GROUND)
         );
         // Tundra
         private static final RandomPatchFeatureConfig TUNDRA_FOLIAGE_CONFIG = blockPatch(32, 7, 3, new WeightedBlockStateProvider(

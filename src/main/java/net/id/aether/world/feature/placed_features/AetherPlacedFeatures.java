@@ -29,9 +29,9 @@ public class AetherPlacedFeatures {
     public static final BlockPredicate IN_OR_ON_GROUND = BlockPredicate.allOf(
             BlockPredicate.hasSturdyFace(Vec3i.ZERO.down(), Direction.UP),
             BlockPredicate.solid(Vec3i.ZERO.down()),
-            BlockPredicate.matchingFluid(Fluids.EMPTY, Vec3i.ZERO.down()),
-            BlockPredicate.matchingFluid(Fluids.EMPTY, Vec3i.ZERO),
-            BlockPredicate.matchingBlock(Blocks.AIR, Vec3i.ZERO.up())
+            BlockPredicate.matchingFluids(Vec3i.ZERO.down(), Fluids.EMPTY),
+            BlockPredicate.matchingFluids(Fluids.EMPTY),
+            BlockPredicate.matchingBlocks(Vec3i.ZERO.up(), Blocks.AIR)
     );
     // This also makes it so that there must be a block of air above where the feature begins.
     public static final PlacementModifier ON_SOLID_GROUND = BlockFilterPlacementModifier.of(BlockPredicate.bothOf(IN_OR_ON_GROUND, IN_AIR));

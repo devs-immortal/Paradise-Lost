@@ -88,7 +88,7 @@ public class VialItem extends Item {
             boolean bl2 = blockState.isAir() || bl || block instanceof FluidFillable && ((FluidFillable) block).canFillWithFluid(world, pos, blockState, this.fluid);
             if (!bl2) {
                 return hitResult != null && this.placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null);
-            } else if (world.getDimension().isUltrawarm() && this.fluid.equals(AetherFluids.DENSE_AERCLOUD)) {
+            } else if (world.getDimension().ultrawarm() && this.fluid.equals(AetherFluids.DENSE_AERCLOUD)) {
                 int i = pos.getX();
                 int j = pos.getY();
                 int k = pos.getZ();

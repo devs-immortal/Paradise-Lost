@@ -302,7 +302,7 @@ public abstract class SwetEntity extends SlimeEntity {
     public void remove(RemovalReason reason) {
         this.setRemoved(reason);
         if (reason == Entity.RemovalReason.KILLED) {
-            this.emitGameEvent(GameEvent.ENTITY_KILLED);
+            this.emitGameEvent(GameEvent.ENTITY_DIE);
         }
     }
 
