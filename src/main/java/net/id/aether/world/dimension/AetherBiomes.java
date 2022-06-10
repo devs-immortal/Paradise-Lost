@@ -362,7 +362,7 @@ public final class AetherBiomes {
         }
          */
         return new Biome.Builder()
-            .effects(createBiomeEffects(0xC0C0FF, 0xC8E67A, 0x85DDAF, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.DARK_FOREST))
+            .effects(createBiomeEffects(0xC0C0FF, 0xC8E67A, 0x88EBA1, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
                 getAetherCarvers(),
     
