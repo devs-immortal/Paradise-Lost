@@ -46,7 +46,7 @@ import org.slf4j.Logger;
  * authors than the author of the code itself.
  * If you have any questions or concerns regarding documentation,
  * please contact either the doc author or the code author, or
- * both, via our <a, href="https://discord.gg/eRsJ6F3Wng">Discord</a>.
+ * both, via our <a href="https://discord.gg/eRsJ6F3Wng">Discord</a>.
  * <br><br>
  * The doc author can usually be found at the end of the first doc
  * of the class, next to a tilde.
