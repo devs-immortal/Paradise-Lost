@@ -39,6 +39,6 @@ public class WellFeature extends Structure {
     
     @Override
     public StructureType<?> getType() {
-        return AetherStructureFeatures.WELL_PIECE;
+        return AetherStructureFeatures.WELL;
     }
 }

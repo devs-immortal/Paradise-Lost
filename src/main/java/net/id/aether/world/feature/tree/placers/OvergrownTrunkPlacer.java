@@ -64,7 +64,7 @@ public class OvergrownTrunkPlacer extends TrunkPlacer {
                     if(dir.getHorizontal() >= 0 && random.nextFloat() <= chance) {
                         var tempPos = curPos.offset(dir);
 
-                        if(TreeFeature.canTreeReplace(world, tempPos)) {
+                        if(TreeFeature.canReplace(world, tempPos)) {
                             getAndSetState(world, replacer, random, tempPos, config, (state -> {
                                 var overgrowth = overgrowthProvider.getBlockState(random, tempPos);
 

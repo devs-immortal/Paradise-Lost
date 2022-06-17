@@ -50,6 +50,6 @@ public class SkyrootTowerFeature extends Structure {
     
     @Override
     public StructureType<?> getType() {
-        return AetherStructureFeatures.SKYROOT_TOWER_PIECE;
+        return AetherStructureFeatures.SKYROOT_TOWER;
     }
 }

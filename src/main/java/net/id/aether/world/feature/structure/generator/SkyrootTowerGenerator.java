@@ -5,7 +5,6 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.tag.AetherBlockTags;
 import net.id.aether.world.feature.structure.AetherStructureFeatures;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;

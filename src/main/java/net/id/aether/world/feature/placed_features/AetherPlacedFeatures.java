@@ -25,7 +25,7 @@ import static net.id.aether.Aether.locate;
 @SuppressWarnings("unused")
 public class AetherPlacedFeatures {
     // this does what .withInAirFilter() does
-    static final BlockPredicate IN_AIR = BlockPredicate.matchingBlock(Blocks.AIR, BlockPos.ORIGIN);
+    static final BlockPredicate IN_AIR = BlockPredicate.matchingBlocks(BlockPos.ORIGIN, Blocks.AIR);
     public static final BlockPredicate IN_OR_ON_GROUND = BlockPredicate.allOf(
             BlockPredicate.hasSturdyFace(Vec3i.ZERO.down(), Direction.UP),
             BlockPredicate.solid(Vec3i.ZERO.down()),
