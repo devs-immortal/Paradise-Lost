@@ -31,6 +31,10 @@ import static net.id.aether.world.feature.placed_features.AetherVegetationPlaced
 /**
  * Generates the Aether biome instances and registers them with Minecraft. Things in here don't have to be particularly
  * speedy because they are only done once.
+ *
+ * 1.19 update notes:
+ * - Biome categories appear to be gone, verify that they have not been replaced.
+ *
  * @author Gudenau
  */
 public final class AetherBiomes {
@@ -281,7 +285,7 @@ public final class AetherBiomes {
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
-            .category(Biome.Category.PLAINS)
+            // .category(Biome.Category.PLAINS)
             .build();
     }
     
@@ -343,7 +347,7 @@ public final class AetherBiomes {
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
-            .category(Biome.Category.FOREST)
+            // .category(Biome.Category.FOREST)
             .build();
     }
     
@@ -413,7 +417,7 @@ public final class AetherBiomes {
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.4F).downfall(2)
-            .category(Biome.Category.FOREST)
+            // .category(Biome.Category.FOREST)
             .build();
     }
     
@@ -476,7 +480,7 @@ public final class AetherBiomes {
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
-            .category(Biome.Category.FOREST)
+            // .category(Biome.Category.FOREST)
             .build();
     }
     
@@ -542,7 +546,7 @@ public final class AetherBiomes {
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.1F).downfall(2)
-            .category(Biome.Category.TAIGA)
+            // .category(Biome.Category.TAIGA)
             .build();
     }
     
@@ -606,7 +610,7 @@ public final class AetherBiomes {
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.25F).downfall(0)
-            .category(Biome.Category.PLAINS)
+            // .category(Biome.Category.PLAINS)
             .build();
     }
     
@@ -684,7 +688,7 @@ public final class AetherBiomes {
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.35F).downfall(2)
-            .category(Biome.Category.PLAINS)
+            // .category(Biome.Category.PLAINS)
             .build();
     }
 }
