@@ -68,8 +68,7 @@ public interface FloatyDrawableHelper{
         bufferBuilder.vertex(matrix, x2, y2, 0.0F).color(g, h, k, f).next();
         bufferBuilder.vertex(matrix, x2, y1, 0.0F).color(g, h, k, f).next();
         bufferBuilder.vertex(matrix, x1, y1, 0.0F).color(g, h, k, f).next();
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
         RenderSystem.enableTexture();
         RenderSystem.disableBlend();
     }
@@ -241,8 +240,7 @@ public interface FloatyDrawableHelper{
         bufferBuilder.vertex(matrices, x1, y1, z).texture(u1, v1).next();
         bufferBuilder.vertex(matrices, x1, y0, z).texture(u1, v0).next();
         bufferBuilder.vertex(matrices, x0, y0, z).texture(u0, v0).next();
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
     }
     
     default int getZOffset(){
