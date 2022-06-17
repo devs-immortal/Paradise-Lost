@@ -2,6 +2,7 @@ package net.id.aether.util;
 
 import net.id.aether.Aether;
 import net.minecraft.resource.Resource;
+import net.minecraft.resource.metadata.ResourceMetadata;
 import net.minecraft.resource.metadata.ResourceMetadataReader;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
@@ -262,36 +263,11 @@ public final class AetherSoundEvents {
 
         var payload = builder.toString().getBytes(StandardCharsets.UTF_8);
         
-        return new Resource(){
-            @Override
-            public Identifier getId(){
-                return RESOURCE_SOUNDS;
-            }
-    
-            @Override
-            public InputStream getInputStream(){
-                return new ByteArrayInputStream(payload);
-            }
-    
-            @Override
-            public boolean hasMetadata(){
-                return false;
-            }
-    
-            @Nullable
-            @Override
-            public <T> T getMetadata(ResourceMetadataReader<T> metaReader){
-                return null;
-            }
-    
-            @Override
-            public String getResourcePackName(){
-                return "Paradise Lost";
-            }
-    
-            @Override
-            public void close(){}
-        };
+        return new Resource(
+            "Paradise Lost",
+            ()->new ByteArrayInputStream(payload),
+            ()->null
+        );
     }
     
     private static abstract class AbstractSoundEvent extends SoundEvent {
