@@ -10,6 +10,7 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -70,7 +71,7 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
     }
 
     @Override
-    public <T extends BlockEntity> GameEventListener getGameEventListener(World world, T blockEntity) {
+    public <T extends BlockEntity> GameEventListener getGameEventListener(ServerWorld world, T blockEntity) {
         if (blockEntity instanceof DungeonSwitchBlockEntity dungeonSwitchBlockEntity)
             return dungeonSwitchBlockEntity;
         return null;
