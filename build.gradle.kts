@@ -5,26 +5,6 @@
 //    }
 //}
 
-val paradiseLostVersion: String by properties
-
-val minecraftVersion: String by properties
-val yarnVersion: String by properties
-val loaderVersion: String by properties
-val javaVersion: String by properties
-
-val fabricApiVersion: String by properties
-val incubusCoreVersion: String by properties
-val customportalapiVersion: String by properties
-val cardinalComponentsVersion: String by properties
-val trinketsVersion: String by properties
-val crowdinTranslateVersion: String by properties
-val entityAttributesVersion: String by properties
-val modmenuVersion: String by properties
-val reiVersion: String by properties
-val moreTagsVersion: String by properties
-val recipeConfidenceVersion: String by properties
-val satinVersion: String by properties
-
 plugins {
     id("fabric-loom") version "0.12-SNAPSHOT"
     id("com.modrinth.minotaur") version "1.2.1"
@@ -32,7 +12,7 @@ plugins {
     `maven-publish`
 }
 
-version = paradiseLostVersion
+version = properties["paradise_lost_version"]!!
 group = "com.aether" //TODO: change this
 
 repositories {
@@ -94,110 +74,103 @@ repositories {
     }
 }
 
-val includeModImplementation: Configuration by configurations.creating
-
 dependencies {
     minecraft(
             group = "com.mojang",
             name = "minecraft",
-            version = minecraftVersion,
+            version = properties["minecraft_version"].toString(),
     )
 
     mappings(
             group = "net.fabricmc",
             name = "yarn",
-            version = yarnVersion,
+            version = "${properties["yarn_version"]}",
             classifier = "v2",
     )
 
     modImplementation(
             group = "net.fabricmc",
             name = "fabric-loader",
-            version = loaderVersion,
+            version = properties["loader_version"].toString(),
     )
 
-    includeModImplementation(
-            group = "dev.onyxstudios.cardinal-components-api",
-            name = "cardinal-components-base",
-            version = cardinalComponentsVersion,
-    )
+    modImplementation(
+            group = "com.jamieswhiteshirt",
+            name = "reach-entity-attributes",
+            version = properties["entity_attributes_version"].toString(),
+    ).also(::include)
 
-    includeModImplementation(
-            group = "dev.onyxstudios.cardinal-components-api",
-            name = "cardinal-components-entity",
-            version = cardinalComponentsVersion,
-    )
-
-    includeModImplementation(
+    modImplementation(
             group = "com.github.CDAGaming.CrowdinTranslate",
             name = "crowdin-translate",
-            version = crowdinTranslateVersion,
-    )
+            version = properties["crowdin_translate_version"].toString(),
+    ).also(::include)
 
-    includeModImplementation(
-            group = "net.kyrptonaught",
-            name = "customportalapi",
-            version = customportalapiVersion,
-    )
+    modImplementation(
+            group = "dev.onyxstudios.cardinal-components-api",
+            name = "cardinal-components-base",
+            version = properties["cardinal_components_version"].toString(),
+    ).also(::include)
+
+    modImplementation(
+            group = "dev.onyxstudios.cardinal-components-api",
+            name = "cardinal-components-entity",
+            version = properties["cardinal_components_version"].toString(),
+    ).also(::include)
+
+    modImplementation(
+            group = "com.github.devs-immortal",
+            name = "Incubus-Core",
+            version = properties["incubus_core_version"].toString(),
+    ).also(::include)
 
     modImplementation(
             group = "net.fabricmc.fabric-api",
             name = "fabric-api",
-            version = fabricApiVersion,
+            version = properties["fabric_api_version"].toString(),
     )
 
-    includeModImplementation(
-            group = "com.github.devs-immortal",
-            name = "Incubus-Core",
-            version = incubusCoreVersion,
-    )
+    modImplementation(
+            group = "net.kyrptonaught",
+            name = "customportalapi",
+            version = properties["customportalapi_version"].toString(),
+    ).also(::include)
 
-    includeModImplementation(
-            group = "net.gudenau.minecraft",
-            name = "MoreTags",
-            version = moreTagsVersion,
-    )
-
-    includeModImplementation(
-            group = "com.jamieswhiteshirt",
-            name = "reach-entity-attributes",
-            version = entityAttributesVersion,
-    )
-
-    includeModImplementation(
-            group = "net.gudenau.minecraft",
-            name = "RecipeConfidence",
-            version = recipeConfidenceVersion,
-    )
-
-    includeModImplementation(
-            group = "io.github.ladysnake",
-            name = "satin",
-            version = satinVersion,
-    )
-
-    includeModImplementation(
+    modImplementation(
             group = "dev.emi",
             name = "trinkets",
-            version = trinketsVersion,
-    )
+            version = properties["trinkets_version"].toString(),
+    ).also(::include)
+
+    modImplementation(
+            group = "net.gudenau.minecraft",
+            name = "MoreTags",
+            version = properties["moretags_version"].toString(),
+    ).also(::include)
+
+    modImplementation(
+            group = "net.gudenau.minecraft",
+            name = "RecipeConfidence",
+            version = properties["recipeconfidence_version"].toString(),
+    ).also(::include)
+
+    modImplementation(
+            group = "io.github.ladysnake",
+            name = "satin",
+            version = properties["satin_version"].toString(),
+    ).also(::include)
 
     modRuntimeOnly(
             group = "com.terraformersmc",
             name = "modmenu",
-            version = modmenuVersion,
+            version = properties["modmenu_version"].toString(),
     )
 
     modRuntimeOnly(
             group = "me.shedaniel",
             name = "RoughlyEnoughItems-fabric",
-            version = reiVersion,
+            version = properties["rei_version"].toString(),
     )
-}
-
-configurations {
-    include.get().extendsFrom(includeModImplementation)
-    modImplementation.get().extendsFrom(includeModImplementation)
 }
 
 tasks {
@@ -217,7 +190,7 @@ tasks {
         manifest {
             attributes(
                     "Implementation-Title" to "ParadiseLost",
-                    "Implementation-Version" to paradiseLostVersion,
+                    "Implementation-Version" to project.version,
                     "Main-Class" to "com.aether.executable.InstallerGUI",
             )
         }
@@ -226,7 +199,7 @@ tasks {
     }
 
     withType<JavaCompile> {
-        options.compilerArgs.addAll(listOf("-Xmaxerrs", "400"))
+        options.compilerArgs.add("-Xmaxerrs400")
     }
 }
 
@@ -235,7 +208,7 @@ base {
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion(javaVersion)
+    sourceCompatibility = JavaVersion.toVersion(properties["java_version"]!!)
     withSourcesJar()
 }
 
