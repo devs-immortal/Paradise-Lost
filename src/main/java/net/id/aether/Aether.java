@@ -1,7 +1,7 @@
 package net.id.aether;
 
 import com.mojang.logging.LogUtils;
-import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
+import com.mojang.serialization.JsonOps;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
@@ -38,7 +38,13 @@ import net.id.aether.world.dimension.AetherDimension;
 import net.id.aether.world.feature.AetherFeatures;
 import net.id.aether.world.gen.carver.AetherCarvers;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.biome.source.util.MultiNoiseUtil;
+import net.minecraft.world.biome.source.util.VanillaBiomeParameters;
 import org.slf4j.Logger;
+
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
+import java.util.function.Consumer;
 
 /**
  * Docs for Paradise Lost are sometimes written long after
@@ -78,7 +84,7 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
             return new Identifier(MOD_ID, location);
         }
     }
-
+    
     @Override
     public void onInitialize() {
         AetherRegistries.init();
@@ -109,7 +115,7 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
     @Override
     @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
-        CrowdinTranslate.downloadTranslations("aether", MOD_ID);
+        initializeCrowdin();
         AetherModelPredicates.initClient();
         AetherArmorModels.initClient();
         AetherModelLayers.initClient();
@@ -127,6 +133,21 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
         AetherScreens.clientInit();
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             AetherDevel.Client.init();
+        }
+    }
+    
+    @Environment(EnvType.CLIENT)
+    private void initializeCrowdin() {
+        // No code changes for when the mod isn't present. :-)
+        if(FabricLoader.getInstance().isModLoaded("crowdin-translate")) {
+            try {
+                var CrowdinTranslate = Class.forName("de.guntram.mcmod.crowdintranslate.CrowdinTranslate");
+                var lookup = MethodHandles.lookup();
+                var downloadTranslations = lookup.findStatic(CrowdinTranslate, "downloadTranslations", MethodType.methodType(void.class, String.class, String.class));
+                downloadTranslations.invokeExact("aether", MOD_ID);
+            }catch (Throwable e){
+                LOG.warn("Failed to setup Crowdin Translate", e);
+            }
         }
     }
     

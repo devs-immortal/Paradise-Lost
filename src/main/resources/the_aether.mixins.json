@@ -28,6 +28,7 @@
     "item.ShearsMixin",
     "item.SwordItemAccessor",
     "item.ToolMaterialsAccessor",
+    "server.DimensionOptionsMixin",
     "server.DimensionTypeMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
@@ -41,7 +42,6 @@
   ],
   "client": [
     "client.ClientPlayerEntityMixin",
-    "client.ClientPlayerInteractionManagerMixin",
     "client.ClientPlayNetworkHandlerMixin",
     "client.ClientWorldMixin",
     "client.ItemStackMixin",

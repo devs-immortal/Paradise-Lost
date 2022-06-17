@@ -62,7 +62,7 @@ public abstract class SlimeEntityMixin extends MobEntity implements Monster {
             ),
             to = @At(
                 value = "INVOKE",
-                target = "Ljava/util/Random;nextFloat()F"
+                target = "Lnet/minecraft/util/math/random/Random;nextFloat()F"
             )
         )
     )

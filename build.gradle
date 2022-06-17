@@ -89,7 +89,8 @@ dependencies {
     modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:${project.entity_attributes_version}"))
 
     // Crowdin: translations
-    modImplementation(include("com.github.CDAGaming.CrowdinTranslate:crowdin-translate:${project.crowdin_translate_version}"))
+    // FIXME Prevents loading, missing a new/changed method.
+    // modImplementation(include("com.github.CDAGaming.CrowdinTranslate:crowdin-translate:${project.crowdin_translate_version}"))
 
     // Cardinal Components, entity and base
     modImplementation(include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_version}"))

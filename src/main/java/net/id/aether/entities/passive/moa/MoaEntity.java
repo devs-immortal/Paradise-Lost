@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.id.aether.blocks.blockentity.FoodBowlBlockEntity;
 import net.id.aether.component.MoaGenes;
 import net.id.aether.entities.AetherEntityTypes;
-import net.id.aether.entities.util.CustomInventoryEntity;
 import net.id.aether.entities.util.SaddleMountEntity;
 import net.id.aether.items.AetherItems;
 import net.id.aether.items.tools.bloodstone.BloodstoneItem;
@@ -61,7 +60,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.UUID;
 
-public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameable, InventoryChangedListener, CustomInventoryEntity {
+public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameable, InventoryChangedListener, RideableInventory {
     private static final SimpleInventory DUMMY = new SimpleInventory(0);
     
     public static final TrackedData<Integer> AIR_TICKS = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);

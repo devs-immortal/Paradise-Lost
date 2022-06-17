@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(DimensionType.class)
 public abstract class DimensionTypeMixin {
+    /*
     @Inject(
         method = "addRegistryDefaults",
         at = @At("RETURN"),
@@ -40,4 +41,5 @@ public abstract class DimensionTypeMixin {
     ) {
         AetherDimension.registerDefaultOptions(registryManager, (SimpleRegistry<DimensionOptions>) registry, seed, useInstance);
     }
+    */
 }
