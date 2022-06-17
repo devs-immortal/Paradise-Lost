@@ -1,34 +1,33 @@
 package net.id.aether.world.feature.structure;
 
-import net.id.aether.Aether;
-import net.id.aether.mixin.structure.StructureFeatureAccessor;
-import net.id.aether.world.feature.structure.generator.OrangeRuinGenerator;
-import net.id.aether.world.feature.structure.generator.SkyrootTowerGenerator;
-import net.id.aether.world.feature.structure.generator.WellGenerator;
-import net.minecraft.structure.StructurePieceType;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.structure.Structure;
+import net.minecraft.world.gen.structure.StructureType;
+
+import static net.id.aether.Aether.locate;
 
 public class AetherStructureFeatures {
-    public static final StructurePieceType WELL_PIECE = register(WellGenerator.Piece::new, "well");
-    public static final StructurePieceType SKYROOT_TOWER_PIECE = register(SkyrootTowerGenerator.Piece::new, "skyroot_tower");
-    public static final StructurePieceType ORANGE_RUIN_PIECE = register(OrangeRuinGenerator.Piece::new, "orange_ruin");
-
+    public static final TagKey<Structure> WELL_PIECE_KEY = tagKey("well");
+    public static final StructureType<WellFeature> WELL_PIECE = ()->WellFeature.CODEC;
+    
+    public static final TagKey<Structure> SKYROOT_TOWER_PIECE_KEY = tagKey("skyroot_tower");
+    public static final StructureType<SkyrootTowerFeature> SKYROOT_TOWER_PIECE = ()->SkyrootTowerFeature.CODEC;
+    
+    public static final TagKey<Structure> ORANGE_RUIN_KEY = tagKey("orange_ruin");
+    public static final StructureType<OrangeRuinFeature> ORANGE_RUIN = ()->OrangeRuinFeature.CODEC;
+    
+    private static TagKey<Structure> tagKey(String name) {
+        return TagKey.of(Registry.STRUCTURE_KEY, locate(name));
+    }
+    
     public static void init() {
-        register("well", new WellFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
-        register("skyroot_tower", new SkyrootTowerFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
-        register("orange_ruin", new OrangeRuinFeature(DefaultFeatureConfig.CODEC), GenerationStep.Feature.SURFACE_STRUCTURES);
-        
+        register("well", WELL_PIECE);
+        register("skyroot_tower", SKYROOT_TOWER_PIECE);
+        register("orange_ruin", ORANGE_RUIN);
     }
-
-    private static <T extends FeatureConfig> void register(String id, StructureFeature<T> structure, GenerationStep.Feature genStep) {
-        StructureFeatureAccessor.callRegister(Aether.locate(id).toString(), structure, genStep);
-    }
-
-    private static StructurePieceType register(StructurePieceType pieceType, String id) {
-        return Registry.register(Registry.STRUCTURE_PIECE, Aether.locate(id), pieceType);
+    
+    private static void register(String name, StructureType<?> type) {
+        Registry.register(Registry.STRUCTURE_TYPE, locate(name), type);
     }
 }

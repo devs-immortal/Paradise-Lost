@@ -1,31 +1,44 @@
 package net.id.aether.world.feature.structure;
 
+import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import net.id.aether.world.feature.structure.generator.WellGenerator;
-import net.minecraft.structure.StructureGeneratorFactory;
 import net.minecraft.structure.StructurePiecesCollector;
-import net.minecraft.structure.StructurePiecesGenerator;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.structure.Structure;
+import net.minecraft.world.gen.structure.StructureType;
 
-public class WellFeature extends StructureFeature<DefaultFeatureConfig> {
-    public WellFeature(Codec<DefaultFeatureConfig> codec) {
-        super(codec, StructureGeneratorFactory.simple(StructureGeneratorFactory.checkForBiomeOnTop(Heightmap.Type.WORLD_SURFACE_WG), WellFeature::addPieces));
+import java.util.Optional;
+
+public class WellFeature extends Structure {
+    public static final Codec<WellFeature> CODEC = createCodec(WellFeature::new);
+    
+    public WellFeature(Structure.Config config) {
+        super(config);
     }
 
-    private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<DefaultFeatureConfig> context) {
+    private static void addPieces(StructurePiecesCollector collector, Context context) {
         int x = context.chunkPos().x * 16;
         int z = context.chunkPos().z * 16;
-        int y = context.chunkGenerator().getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, context.world());
+        int y = context.chunkGenerator().getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, context.world(), context.noiseConfig());
         BlockPos newPos = new BlockPos(x, y, z);
-        WellGenerator.addPieces(context.structureManager(), collector, context.random(), newPos);
+        WellGenerator.addPieces(context.structureTemplateManager(), collector, context.random(), newPos);
     }
-
+    
     @Override
-    public GenerationStep.Feature getGenerationStep() {
-        return GenerationStep.Feature.SURFACE_STRUCTURES;
+    public Optional<StructurePosition> getStructurePosition(Context context) {
+        context.random().nextDouble();
+        ChunkPos chunkPos = context.chunkPos();
+        BlockPos blockPos = new BlockPos(chunkPos.getCenterX(), 50, chunkPos.getStartZ());
+        StructurePiecesCollector structurePiecesCollector = new StructurePiecesCollector();
+        addPieces(structurePiecesCollector, context);
+        return Optional.of(new Structure.StructurePosition(blockPos, Either.right(structurePiecesCollector)));
+    }
+    
+    @Override
+    public StructureType<?> getType() {
+        return AetherStructureFeatures.WELL_PIECE;
     }
 }
