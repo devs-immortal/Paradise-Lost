@@ -199,7 +199,7 @@ tasks {
     }
 
     withType<JavaCompile> {
-        options.compilerArgs.add("-Xmaxerrs400")
+        options.compilerArgs.addAll(listOf("-Xmaxerrs", "400"))
     }
 }
 
