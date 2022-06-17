@@ -24,35 +24,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
 public final class CloudRendererMixin {
-    @Final
-    @Shadow
-    private static Identifier CLOUDS;
-    @Shadow
-    @NotNull
-    private final ClientWorld world;
-    @Shadow
-    private final int ticks;
-    @Final
-    @Shadow
-    @NotNull
-    private final MinecraftClient client;
-    @Shadow
-    private int lastCloudsBlockX;
-    @Shadow
-    private int lastCloudsBlockY;
-    @Shadow
-    private int lastCloudsBlockZ;
-    @Shadow
-    @NotNull
-    private Vec3d lastCloudsColor;
-    @Shadow
-    @NotNull
-    private CloudRenderMode lastCloudsRenderMode;
-    @Shadow
-    private boolean cloudsDirty;
-    @Shadow
-    @Nullable
-    private VertexBuffer cloudsBuffer;
+    @Final @Shadow private static Identifier CLOUDS;
+    @Shadow @NotNull private final ClientWorld world;
+    @Shadow private final int ticks;
+    @Final @Shadow @NotNull private final MinecraftClient client;
+    @Shadow private int lastCloudsBlockX;
+    @Shadow private int lastCloudsBlockY;
+    @Shadow private int lastCloudsBlockZ;
+    @Shadow @NotNull private Vec3d lastCloudsColor;
+    @Shadow @NotNull private CloudRenderMode lastCloudsRenderMode;
+    @Shadow private boolean cloudsDirty;
+    @Shadow @Nullable private VertexBuffer cloudsBuffer;
+    
+    @Shadow private BufferBuilder.BuiltBuffer renderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color) { throw new AssertionError(); }
 
     public CloudRendererMixin() {
         throw new NullPointerException("null cannot be cast to non-null type net.minecraft.client.world.ClientWorld");
@@ -69,7 +53,7 @@ public final class CloudRendererMixin {
     }
 
     // TODO: Replace this mostly copy-pasted code with some redirects or injections (PL-1.7)
-    private void internalCloudRender(MatrixStack matrices, Matrix4f model, float tickDelta, double cameraX, double cameraY, double cameraZ, float cloudOffset, float cloudScale, float speedMod) {
+    private void internalCloudRender(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, double cameraX, double cameraY, double cameraZ, float cloudOffset, float cloudScale, float speedMod) {
         float cloudHeight = this.world.getDimensionEffects().getCloudsHeight();
         if (!Float.isNaN(cloudHeight)) {
             RenderSystem.disableCull();
@@ -99,15 +83,18 @@ public final class CloudRendererMixin {
                 this.cloudsDirty = true;
             }
 
-            if (this.cloudsDirty) {
-                this.cloudsDirty = false;
+            if (cloudsDirty) {
+                cloudsDirty = false;
                 BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
-                if (this.cloudsBuffer != null) this.cloudsBuffer.close();
-
-                this.cloudsBuffer = new VertexBuffer();
-                this.renderClouds(bufferBuilder, posX, posY, posZ, cloudColor);
-                bufferBuilder.end();
-                this.cloudsBuffer.upload(bufferBuilder);
+                if (cloudsBuffer != null) {
+                    cloudsBuffer.close();
+                }
+                
+                cloudsBuffer = new VertexBuffer();
+                BufferBuilder.BuiltBuffer builtBuffer = renderClouds(bufferBuilder, posX, posY, posZ, cloudColor);
+                cloudsBuffer.bind();
+                cloudsBuffer.upload(builtBuffer);
+                VertexBuffer.unbind();
             }
 
             RenderSystem.setShader(GameRenderer::getPositionTexColorNormalShader);
@@ -117,19 +104,22 @@ public final class CloudRendererMixin {
             matrices.scale(12.0F, 1.0F, 12.0F);
             matrices.scale(cloudScale, cloudScale, cloudScale);
             matrices.translate(-adjustedX, adjustedY, -adjustedZ);
-            if (this.cloudsBuffer != null) {
-                int cloudMainIndex = this.lastCloudsRenderMode == CloudRenderMode.FANCY ? 0 : 1;
-
-                for (int cloudIndex = cloudMainIndex; cloudIndex < 2; ++cloudIndex) {
-                    if (cloudIndex == 0) {
+            
+            if (cloudsBuffer != null) {
+                cloudsBuffer.bind();
+                
+                //TODO Double check bytecode, this feels really weird. If this is correct, pure Mojank.
+                int passes = lastCloudsRenderMode == CloudRenderMode.FANCY ? 0 : 1;
+                for (int pass = passes; pass < 2; pass++) {
+                    if (pass == 0) {
                         RenderSystem.colorMask(false, false, false, false);
                     } else {
                         RenderSystem.colorMask(true, true, true, true);
                     }
-
                     Shader shader = RenderSystem.getShader();
-                    this.cloudsBuffer.setShader(matrices.peek().getPositionMatrix(), model, shader);
+                    cloudsBuffer.draw(matrices.peek().getPositionMatrix(), projectionMatrix, shader);
                 }
+                VertexBuffer.unbind();
             }
 
             matrices.pop();
@@ -137,9 +127,5 @@ public final class CloudRendererMixin {
             RenderSystem.enableCull();
             RenderSystem.disableBlend();
         }
-    }
-
-    @Shadow
-    private void renderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color) {
     }
 }
