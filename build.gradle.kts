@@ -9,6 +9,7 @@ plugins {
     id("fabric-loom") version "0.12-SNAPSHOT"
     id("com.modrinth.minotaur") version "1.2.1"
     id("de.guntram.mcmod.crowdin-translate") version "1.4+1.18.2"
+    checkstyle
     `maven-publish`
 }
 
