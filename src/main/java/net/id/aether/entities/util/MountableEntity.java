@@ -30,6 +30,11 @@ public abstract class MountableEntity extends AetherAnimalEntity {
         super.initDataTracker();
         this.dataTracker.startTracking(RIDER_SNEAKING, false);
     }
+    
+    //TODO Should this do more than just `return false;`?
+    protected boolean canBeControlledByRider() {
+        return false;
+    }
 
     // TODO: Patch this or remove it, pick one. (PL-1.7)
     //@Override

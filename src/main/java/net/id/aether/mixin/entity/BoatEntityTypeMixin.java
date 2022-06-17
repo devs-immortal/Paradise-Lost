@@ -12,17 +12,13 @@ import java.util.Arrays;
 
 @Mixin(BoatEntity.Type.class)
 public class BoatEntityTypeMixin {
-    @SuppressWarnings("ShadowTarget")
-    @Shadow
-    @Mutable
-    @Final
-    private static BoatEntity.Type[] field_7724;
+    @Shadow(aliases = "field_7724") @Mutable @Final private static BoatEntity.Type[] VALUES;
 
     static {
         EnumExtender.register(BoatEntity.Type.class, (name, args) -> {
-            BoatEntity.Type entry = (BoatEntity.Type) (Object) new BoatEntityTypeMixin(name, field_7724.length, (Block) args[0], (String) args[1]);
-            field_7724 = Arrays.copyOf(field_7724, field_7724.length + 1);
-            return field_7724[field_7724.length - 1] = entry;
+            BoatEntity.Type entry = (BoatEntity.Type) (Object) new BoatEntityTypeMixin(name, VALUES.length, (Block) args[0], (String) args[1]);
+            VALUES = Arrays.copyOf(VALUES, VALUES.length + 1);
+            return VALUES[VALUES.length - 1] = entry;
         });
     }
 
