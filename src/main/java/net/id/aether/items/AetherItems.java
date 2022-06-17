@@ -466,7 +466,9 @@ public class AetherItems {
     public static final BlockItem SHAMROCK = add("shamrock", AetherBlocks.SHAMROCK, decoration, compostable50);
     public static final BlockItem MALT_SPRIG = add("malt_sprig", AetherBlocks.MALT_SPRIG, decoration, compostable30);
     public static final BlockItem HALOPHIA = add("halophia", AetherBlocks.HALOPHIA, decoration, compostable30);
-    public static final BlockItem GIANT_LILY = add("giant_lily", new LilyPadItem(AetherBlocks.GIANT_LILY, hat), compostable100);
+    // LilyPadItem disappeared?
+    // public static final BlockItem GIANT_LILY = add("giant_lily", new LilyPadItem(AetherBlocks.GIANT_LILY, hat), compostable100);
+    public static final BlockItem GIANT_LILY = add("giant_lily", new BlockItem(AetherBlocks.GIANT_LILY, hat), compostable100);
     public static final BlockItem WEEPING_CLOUDBURST = add("weeping_cloudburst", AetherBlocks.WEEPING_CLOUDBURST, decoration, compostable30);
     public static final BlockItem MOSS_STAR = add("moss_star", AetherBlocks.MOSS_STAR, decoration, compostable50);
     public static final BlockItem MOSS_BALL = add("moss_ball", AetherBlocks.MOSS_BALL, decoration, compostable30);
