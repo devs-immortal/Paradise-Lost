@@ -1,0 +1,228 @@
+buildscript {
+    dependencies {
+        classpath "com.github.CDAGaming.CrowdinTranslate:crowdin-translate:${project.crowdin_translate_version}"
+    }
+    repositories {
+        maven {
+            name = 'CrowdinTranslate source'
+            url = 'https://minecraft.guntram.de/maven/'
+        }
+        maven {
+            url = 'https://jitpack.io'
+        }
+    }
+}
+
+plugins {
+    id 'fabric-loom' version '0.11-SNAPSHOT'
+    id 'maven-publish'
+    id 'com.modrinth.minotaur' version '1.2.1'
+    id 'checkstyle'
+}
+
+apply plugin: 'de.guntram.mcmod.crowdin-translate'
+crowdintranslate.crowdinProjectName = 'aether'
+crowdintranslate.minecraftProjectName = 'the_aether'
+crowdintranslate.verbose = true
+
+JavaLanguageVersion targetVersion = JavaLanguageVersion.of(17)
+
+allprojects {
+    // Allow more then 100 errors to be displayed.
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << '-Xmaxerrs' << "${project.max_errors}"
+        }
+    }
+}
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
+
+repositories {
+    maven {
+        url = 'https://minecraft.guntram.de/maven/'
+    }
+    maven {
+        name = 'Modmenu-Legacy'
+        url = 'https://maven.fabricmc.net/io/github/prospector/modmenu/'
+    }
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven { url = 'https://hephaestus.dev/release' }
+    maven {
+        name = 'TerraformersMC'
+        url = 'https://maven.terraformersmc.com/releases/'
+    }
+    maven {
+        name = 'Ladysnake Libs'
+        url = 'https://ladysnake.jfrog.io/artifactory/mods'
+    }
+    maven {
+        url = 'https://maven.shedaniel.me/'
+    }
+    maven {
+        url = 'https://maven.kyrptonaught.dev/'
+    }
+    maven {
+        url = 'https://jitpack.io'
+    }
+    maven { url 'https://maven.jamieswhiteshirt.com/libs-release/' }
+    mavenCentral()
+    maven {
+        name = 'gudenau\'s maven'
+        url = 'https://maven.gudenau.net'
+        content {
+            includeGroup 'net.gudenau.minecraft'
+        }
+    }
+}
+
+loom {
+    accessWidenerPath = file('src/main/resources/the_aether.accesswidener')
+}
+
+dependencies {
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.mappings_version}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Libraries
+    modImplementation(include("com.jamieswhiteshirt:reach-entity-attributes:${project.entity_attributes_version}"))
+
+    modImplementation(include("com.github.CDAGaming.CrowdinTranslate:crowdin-translate:${project.crowdin_translate_version}"))
+
+    modImplementation(include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_version}"))
+
+    modImplementation(include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cardinal_version}"))
+
+    // Most important of the libraries :smug:
+    modImplementation(include("com.github.devs-immortal:Incubus-Core:${project.incubus_version}"))
+
+    // Implement the required portions of FAPI
+    // Remember to maintain these, and add the modular bits as needed. 
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    // Testing only, do not JiJ
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modImplementation "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+
+    // Custom Portal Api
+    modImplementation(include("net.kyrptonaught:customportalapi:${project.customportalapi_version}"))
+
+    // Implement Trinkets for parachutes, rings etc.
+    modImplementation(include("dev.emi:trinkets:${project.trinkets_version}"))
+
+    modImplementation(include("net.gudenau.minecraft:MoreTags:${project.moretags_version}"))
+    modImplementation(include("net.gudenau.minecraft:RecipeConfidence:${project.recipeconfidence_version}"))
+
+    // Required for the funny rainbow tree leaves
+    modImplementation(include("io.github.ladysnake:satin:${project.satin_version}"))
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = targetVersion
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    // ensure that the encoding is set to UTF-8, no matter what the system default is
+    // this fixes some edge cases with special characters not displaying correctly
+    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+    // If Javadoc is generated, this must be specified in that task too.
+    it.options.encoding = 'UTF-8'
+}
+
+// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+// if it is present.
+// If you remove this task, sources will not be generated.
+java {
+    withSourcesJar()
+}
+
+loom {
+    runs {
+        client {
+            programArg((String)('--username=' + System.getProperty('user.name')))
+            runDir = 'run/client'
+            client()
+        }
+
+        server {
+            runDir = 'run/server'
+            server()
+        }
+
+        clientDebug {
+            inherit client
+
+            vmArgs '-Dmixin.debug.export=true'
+            configName = 'Minecraft Client (Mixin Debug)'
+        }
+
+        serverDebug {
+            inherit server
+
+            vmArgs '-Dmixin.debug.export=true'
+            configName = 'Minecraft Server (Mixin Debug)'
+        }
+    }
+}
+
+//task publishModrinth (type: TaskModrinthUpload){
+//    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//    System.out.println('Enter the modrinth auth token: ');
+//    token = br.readLine(); // Get password
+//    projectId = 'IKpsG0nF'
+//    System.out.println('Enter the version number:');
+//    versionNumber = br.readLine();
+//    System.out.println('Enter the version name:');
+//    versionName = br.readLine();
+//    uploadFile = jar // This is the java jar task
+//    System.out.println('Enter the game version number: (See minotaur docs for valids)');
+//    addGameVersion(br.readLine());
+//    System.out.println('Enter changelog:');
+//    changelog = br.readLine();
+//    addLoader('fabric')
+//}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'ParadiseLost',
+                'Implementation-Version': project.version,
+                'Main-Class': 'com.aether.executable.InstallerGUI'
+    }
+    from 'LICENSE.md'
+}
+
+// configure the maven publication
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    // select the repositories you want to publish to
+    repositories {
+        // uncomment to publish to the local maven
+        // mavenLocal()
+    }
+}
+
+build {
+    dependsOn downloadTranslations
+}
