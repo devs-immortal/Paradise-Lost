@@ -24,7 +24,6 @@
             <property name="tokens" value="LITERAL_ELSE, METHOD_DEF"/>
         </module>
         <module name="FinalClass"/>
-<!--        <module name="HideUtilityClassConstructor"/>-->
         <module name="InnerTypeLast"/>
         <module name="OneTopLevelClass"/>
         <module name="DeclarationOrder">
