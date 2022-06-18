@@ -74,6 +74,8 @@ repositories {
     }
 }
 
+val includeModImplementation: Configuration by configurations.creating
+
 dependencies {
     minecraft(
             group = "com.mojang",
@@ -94,35 +96,35 @@ dependencies {
             version = properties["loader_version"].toString(),
     )
 
-    modImplementation(
+    includeModImplementation(
             group = "com.jamieswhiteshirt",
             name = "reach-entity-attributes",
             version = properties["entity_attributes_version"].toString(),
-    ).also(::include)
+    )
 
-    modImplementation(
+    includeModImplementation(
             group = "com.github.CDAGaming.CrowdinTranslate",
             name = "crowdin-translate",
             version = properties["crowdin_translate_version"].toString(),
-    ).also(::include)
+    )
 
-    modImplementation(
+    includeModImplementation(
             group = "dev.onyxstudios.cardinal-components-api",
             name = "cardinal-components-base",
             version = properties["cardinal_components_version"].toString(),
-    ).also(::include)
+    )
 
-    modImplementation(
+    includeModImplementation(
             group = "dev.onyxstudios.cardinal-components-api",
             name = "cardinal-components-entity",
             version = properties["cardinal_components_version"].toString(),
-    ).also(::include)
+    )
 
-    modImplementation(
+    includeModImplementation(
             group = "com.github.devs-immortal",
             name = "Incubus-Core",
             version = properties["incubus_core_version"].toString(),
-    ).also(::include)
+    )
 
     modImplementation(
             group = "net.fabricmc.fabric-api",
@@ -130,35 +132,35 @@ dependencies {
             version = properties["fabric_api_version"].toString(),
     )
 
-    modImplementation(
+    includeModImplementation(
             group = "net.kyrptonaught",
             name = "customportalapi",
             version = properties["customportalapi_version"].toString(),
-    ).also(::include)
+    )
 
-    modImplementation(
+    includeModImplementation(
             group = "dev.emi",
             name = "trinkets",
             version = properties["trinkets_version"].toString(),
-    ).also(::include)
+    )
 
-    modImplementation(
+    includeModImplementation(
             group = "net.gudenau.minecraft",
             name = "MoreTags",
             version = properties["moretags_version"].toString(),
-    ).also(::include)
+    )
 
-    modImplementation(
+    includeModImplementation(
             group = "net.gudenau.minecraft",
             name = "RecipeConfidence",
             version = properties["recipeconfidence_version"].toString(),
-    ).also(::include)
+    )
 
-    modImplementation(
+    includeModImplementation(
             group = "io.github.ladysnake",
             name = "satin",
             version = properties["satin_version"].toString(),
-    ).also(::include)
+    )
 
     modRuntimeOnly(
             group = "com.terraformersmc",
@@ -171,6 +173,11 @@ dependencies {
             name = "RoughlyEnoughItems-fabric",
             version = properties["rei_version"].toString(),
     )
+}
+
+configurations {
+    include.get().extendsFrom(includeModImplementation)
+    modImplementation.get().extendsFrom(includeModImplementation)
 }
 
 tasks {
