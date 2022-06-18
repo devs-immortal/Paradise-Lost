@@ -30,6 +30,7 @@ plugins {
     id("com.modrinth.minotaur") version "1.2.1"
     id("de.guntram.mcmod.crowdin-translate") version "1.4+1.18.2"
     `maven-publish`
+    checkstyle
 }
 
 version = paradiseLostVersion
@@ -94,8 +95,6 @@ repositories {
     }
 }
 
-val includeModImplementation: Configuration by configurations.creating
-
 dependencies {
     minecraft(
             group = "com.mojang",
@@ -116,29 +115,29 @@ dependencies {
             version = loaderVersion,
     )
 
-    includeModImplementation(
+    modImplementation(
             group = "dev.onyxstudios.cardinal-components-api",
             name = "cardinal-components-base",
             version = cardinalComponentsVersion,
-    )
+    ).also(::include)
 
-    includeModImplementation(
+    modImplementation(
             group = "dev.onyxstudios.cardinal-components-api",
             name = "cardinal-components-entity",
             version = cardinalComponentsVersion,
-    )
+    ).also(::include)
 
-    includeModImplementation(
+    modImplementation(
             group = "com.github.CDAGaming.CrowdinTranslate",
             name = "crowdin-translate",
             version = crowdinTranslateVersion,
-    )
+    ).also(::include)
 
-    includeModImplementation(
+    modImplementation(
             group = "net.kyrptonaught",
             name = "customportalapi",
             version = customportalapiVersion,
-    )
+    ).also(::include)
 
     modImplementation(
             group = "net.fabricmc.fabric-api",
@@ -146,41 +145,41 @@ dependencies {
             version = fabricApiVersion,
     )
 
-    includeModImplementation(
+    modImplementation(
             group = "com.github.devs-immortal",
             name = "Incubus-Core",
             version = incubusCoreVersion,
-    )
+    ).also(::include)
 
-    includeModImplementation(
+    modImplementation(
             group = "net.gudenau.minecraft",
             name = "MoreTags",
             version = moreTagsVersion,
-    )
+    ).also(::include)
 
-    includeModImplementation(
+    modImplementation(
             group = "com.jamieswhiteshirt",
             name = "reach-entity-attributes",
             version = entityAttributesVersion,
-    )
+    ).also(::include)
 
-    includeModImplementation(
+    modImplementation(
             group = "net.gudenau.minecraft",
             name = "RecipeConfidence",
             version = recipeConfidenceVersion,
-    )
+    ).also(::include)
 
-    includeModImplementation(
+    modImplementation(
             group = "io.github.ladysnake",
             name = "satin",
             version = satinVersion,
-    )
+    ).also(::include)
 
-    includeModImplementation(
+    modImplementation(
             group = "dev.emi",
             name = "trinkets",
             version = trinketsVersion,
-    )
+    ).also(::include)
 
     modRuntimeOnly(
             group = "com.terraformersmc",
@@ -193,11 +192,6 @@ dependencies {
             name = "RoughlyEnoughItems-fabric",
             version = reiVersion,
     )
-}
-
-configurations {
-    include.get().extendsFrom(includeModImplementation)
-    modImplementation.get().extendsFrom(includeModImplementation)
 }
 
 tasks {
@@ -297,4 +291,8 @@ publishing {
             from(components["java"])
         }
     }
+}
+
+checkstyle {
+    sourceSets = emptyList()
 }
