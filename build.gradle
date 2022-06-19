@@ -208,6 +208,10 @@ jar {
     from 'LICENSE.md'
 }
 
+checkstyle {
+    sourceSets = []
+}
+
 // configure the maven publication
 publishing {
     publications {
