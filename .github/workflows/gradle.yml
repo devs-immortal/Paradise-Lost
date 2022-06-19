@@ -44,6 +44,25 @@ jobs:
         if: cancelled()
         with:
           severity: warn
-          details: Build Canceled!
+          details: Build Cancelled!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      
+  checkstyle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Checkstyle with Gradle
+        run: ./gradlew checkstyleMain
+      - name: Checkstyle Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          color: '#ff5500'
+          details: Checkstyle Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
