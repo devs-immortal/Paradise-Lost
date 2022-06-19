@@ -17,6 +17,7 @@ plugins {
     id 'fabric-loom' version '0.11-SNAPSHOT'
     id 'maven-publish'
     id 'com.modrinth.minotaur' version '1.2.1'
+    id 'checkstyle'
 }
 
 apply plugin: 'de.guntram.mcmod.crowdin-translate'
@@ -205,6 +206,10 @@ jar {
                 'Main-Class': 'com.aether.executable.InstallerGUI'
     }
     from 'LICENSE.md'
+}
+
+checkstyle {
+    sourceSets = []
 }
 
 // configure the maven publication
