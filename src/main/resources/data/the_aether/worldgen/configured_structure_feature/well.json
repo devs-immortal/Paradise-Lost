@@ -1,7 +1,0 @@
-{
-  "config": {},
-  "biomes": "#the_aether:has_structure/well",
-  "adapt_noise": false,
-  "spawn_overrides": {},
-  "type": "the_aether:well"
-}
