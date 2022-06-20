@@ -113,7 +113,7 @@ public class TallCropBlock extends CropBlock {
                 return Block.createCuboidShape(0, 0, 0,16, 16, 16);
             }
         } else {
-            return super.getOutlineShape(this.withAge(state.get(AGE) - 4), world, pos, context);
+            return super.getOutlineShape(this.withAge(Math.max(state.get(AGE) - 4, 0)), world, pos, context);
         }
     }
 
