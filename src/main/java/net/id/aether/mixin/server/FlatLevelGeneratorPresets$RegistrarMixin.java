@@ -25,7 +25,6 @@ import java.util.Set;
 /**
  * Responsible for adding the Aether superflat preset.
  */
-@Debug(export = true)
 @Mixin(targets = "net/minecraft/world/gen/FlatLevelGeneratorPresets$Registrar")
 public abstract class FlatLevelGeneratorPresets$RegistrarMixin {
     @Shadow protected abstract RegistryEntry<FlatLevelGeneratorPreset> createAndRegister(RegistryKey<FlatLevelGeneratorPreset> registryKey, ItemConvertible icon, RegistryKey<Biome> biome, Set<RegistryKey<StructureSet>> structureSets, boolean hasFeatures, boolean hasLakes, FlatChunkGeneratorLayer... layers);
