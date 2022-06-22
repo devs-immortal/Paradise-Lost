@@ -11,12 +11,14 @@ import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.kyrptonaught.customportalapi.util.CPASoundEventData;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.registry.*;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.dimension.DimensionTypes;
+import net.minecraft.world.gen.FlatLevelGeneratorPreset;
 
 import java.io.IOException;
 
@@ -24,11 +26,16 @@ import static net.id.aether.Aether.MOD_ID;
 import static net.id.aether.Aether.locate;
 
 public class AetherDimension {
-    public static final RegistryKey<World> AETHER_WORLD_KEY = RegistryKey.of(Registry.WORLD_KEY, locate(MOD_ID));
-    public static final RegistryKey<DimensionType> DIMENSION_TYPE = RegistryKey.of(Registry.DIMENSION_TYPE_KEY, locate(MOD_ID));
-    public static final RegistryKey<DimensionOptions> AETHER_OPTIONS_KEY = RegistryKey.of(Registry.DIMENSION_KEY, locate(MOD_ID));
-
+    public static final RegistryKey<World> AETHER_WORLD_KEY = key(Registry.WORLD_KEY, MOD_ID);
+    public static final RegistryKey<DimensionType> DIMENSION_TYPE = key(Registry.DIMENSION_TYPE_KEY, MOD_ID);
+    public static final RegistryKey<DimensionOptions> AETHER_OPTIONS_KEY = key(Registry.DIMENSION_KEY, MOD_ID);
+    public static final RegistryKey<FlatLevelGeneratorPreset> SUPERFLAT_PRESET = key(Registry.FLAT_LEVEL_GENERATOR_PRESET_KEY, MOD_ID);
+    
     private static DimensionType dimensionType;
+    
+    private static <T> RegistryKey<T> key(RegistryKey<? extends Registry<T>> registry, String name) {
+        return RegistryKey.of(registry, locate(name));
+    }
     
     public static void init() {
         try {
