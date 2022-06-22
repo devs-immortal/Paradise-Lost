@@ -1,10 +1,3 @@
-// Not sure why this is here
-//buildscript {
-//    dependencies {
-//        classpath("com.github.CDAGaming.CrowdinTranslate:crowdin-translate:${project.crowdin_translate_version}")
-//    }
-//}
-
 val paradiseLostVersion: String by properties
 
 val minecraftVersion: String by properties
