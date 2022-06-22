@@ -38,16 +38,6 @@ repositories {
     }
 
     maven {
-        name = "Guntram"
-        url = uri("https://minecraft.guntram.de/maven/")
-    }
-
-    maven {
-        name = "Modmenu Legacy"
-        url = uri("https://maven.fabricmc.net/io/github/prospector/modmenu/")
-    }
-
-    maven {
         name = "Hephaestus"
         url = uri("https://hephaestus.dev/release")
     }
