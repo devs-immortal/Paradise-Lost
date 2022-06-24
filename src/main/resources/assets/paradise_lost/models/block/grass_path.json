@@ -1,0 +1,9 @@
+{
+  "parent": "block/dirt_path",
+  "textures": {
+    "particle": "paradise_lost:block/paradise_lost_dirt",
+    "top": "paradise_lost:block/paradise_lost_grass_path_top",
+    "side": "paradise_lost:block/paradise_lost_grass_path_side",
+    "bottom": "paradise_lost:block/paradise_lost_dirt"
+  }
+}

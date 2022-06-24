@@ -128,7 +128,7 @@ run/
 !gradle-wrapper.jar
 
 # Assets that are unlicensed and all rights are reserved to them by Gilded Games.
-src/main/resources/assets/legacy_aether/
+src/main/resources/assets/legacy_paradise_lost/
 src/main/resources/assets/minecraft/textures/*
 
 # Need to allow armor textures to be placed in this folder

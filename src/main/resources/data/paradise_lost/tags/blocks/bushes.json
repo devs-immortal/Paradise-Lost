@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:grass_plant",
+    "paradise_lost:grass_flowering",
+    "paradise_lost:fern",
+    "paradise_lost:tall_grass",
+    "paradise_lost:short_grass",
+    "paradise_lost:bush",
+    "paradise_lost:flutegrass",
+    "paradise_lost:blueberry_bush"
+  ]
+}

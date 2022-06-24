@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "paradise_lost:block/frozen_grass_top",
+    "bottom": "paradise_lost:block/permafrost",
+    "side": "paradise_lost:block/frozen_grass_side"
+  }
+}

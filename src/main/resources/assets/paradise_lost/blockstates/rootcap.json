@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "paradise_lost:block/rootcap",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "paradise_lost:block/rootcap",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "paradise_lost:block/rootcap"
+    },
+    "facing=west": {
+      "model": "paradise_lost:block/rootcap",
+      "y": 90
+    }
+  }
+}

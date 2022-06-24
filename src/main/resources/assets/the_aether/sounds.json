@@ -1,7 +1,0 @@
-{
-  "this.is.a.dummy.sound.to.trigger.other.code.this.file.should.not.be.used": {
-    "sounds": [
-      "the_aether:misc/silence"
-    ]
-  }
-}

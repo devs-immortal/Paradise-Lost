@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:grass_path",
+    "paradise_lost:quicksoil",
+    "paradise_lost:farmland",
+    "#paradise_lost:dirt_blocks",
+    "#paradise_lost:aerclouds"
+  ]
+}

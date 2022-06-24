@@ -1,0 +1,6 @@
+{
+  "parent": "paradise_lost:item/handheld_small",
+  "textures": {
+    "layer0": "paradise_lost:item/tool/gravitite_bloodstone"
+  }
+}

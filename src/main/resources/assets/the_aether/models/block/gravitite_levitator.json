@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_bottom_top",
-  "textures": {
-    "top": "the_aether:block/gravitite_levitator_top",
-    "bottom": "the_aether:block/gravitite_levitator_bottom",
-    "side": "the_aether:block/gravitite_levitator_side"
-  }
-}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "blooming=true": {
+      "model": "paradise_lost:block/cinnabar_rose_on"
+    },
+    "blooming=false": {
+      "model": "paradise_lost:block/cinnabar_rose"
+    }
+  }
+}

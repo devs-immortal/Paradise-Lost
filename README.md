@@ -14,7 +14,7 @@ The Aether is a dimension high in the sky composed of floating islands.
 Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, structures to explore, mythical creatures, and perilous dungeons. Build a Glowstone frame and add water to light the mystical portal, step in and be transported to the beautiful but hostile paradise known as the Aether.
 This tranquil oasis is the polar opposite of the Nether, filled with lush trees and foliage, and populated by unique and exotic mobs, both hostile and friendly. The Aether is deceptively charming, and the further you explore, the darker its secrets get. Mine new ores, craft new gear, explore hidden temples and dungeons, and battle to claim The Aether as your own.
 
-You can download the mod on [Modrinth](https://modrinth.com/mod/aether), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
+You can download the mod on [Modrinth](https://modrinth.com/mod/paradise_lost), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
 
 **Original repo:** [GildedGames/The-Aether](https://gitea.gildedgames.com/GildedGames/The-Aether)
 
@@ -26,11 +26,11 @@ You can download the mod on [Modrinth](https://modrinth.com/mod/aether), [CurseF
 You can support our work by [making a pledge](https://www.patreon.com/kalucky0) today helping fund development and gaining access to special perks. You can also support the Aether project and **Gilded Games** on [their Patreon](https://www.patreon.com/GildedGames).
 
 ## Translations
-[![Crowdin](https://badges.crowdin.net/aether/localized.svg)](https://crowdin.com/project/aether)
+[![Crowdin](https://badges.crowdin.net/paradise_lost/localized.svg)](https://crowdin.com/project/paradise_lost)
 
 Paradise Lost makes use of crowd sourced translations. 
 
-**You can help translate Paradise Lost to additional languages here: [crowdin.com](https://crowdin.com/project/aether).**
+**You can help translate Paradise Lost to additional languages here: [crowdin.com](https://crowdin.com/project/paradise_lost).**
 
 ## Gallery
 

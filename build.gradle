@@ -6,8 +6,8 @@ plugins {
 }
 
 // Configure Crowdin
-crowdintranslate.crowdinProjectName = "aether"
-crowdintranslate.minecraftProjectName = "the_aether"
+crowdintranslate.crowdinProjectName = "paradise_lost"
+crowdintranslate.minecraftProjectName = "the_paradise_lost"
 crowdintranslate.verbose = true
 
 JavaLanguageVersion targetVersion = JavaLanguageVersion.of(17)
@@ -73,7 +73,7 @@ repositories {
 
 // Set location of access widener
 loom {
-    accessWidenerPath = file("src/main/resources/the_aether.accesswidener")
+    accessWidenerPath = file("src/main/resources/paradise_lost.accesswidener")
 }
 
 dependencies {
@@ -173,8 +173,8 @@ java {
 jar {
     manifest {
         attributes "Implementation-Title": "ParadiseLost",
-                "Implementation-Version": project.version,
-                "Main-Class": "com.aether.executable.InstallerGUI"
+            "Implementation-Version": project.version,
+            "Main-Class": "net.id.paradiselost.executable.InstallerGUI"
     }
     from "LICENSE.md"
 }

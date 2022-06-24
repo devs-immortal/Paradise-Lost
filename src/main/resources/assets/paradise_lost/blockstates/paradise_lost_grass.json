@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "paradise_lost:block/paradise_lost_grass"
+      },
+      {
+        "model": "paradise_lost:block/paradise_lost_grass",
+        "y": 90
+      },
+      {
+        "model": "paradise_lost:block/paradise_lost_grass",
+        "y": 180
+      },
+      {
+        "model": "paradise_lost:block/paradise_lost_grass",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "paradise_lost:block/paradise_lost_grass_snowy"
+    }
+  }
+}

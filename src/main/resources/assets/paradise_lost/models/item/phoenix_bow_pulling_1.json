@@ -1,0 +1,6 @@
+{
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "paradise_lost:item/weapon/phoenix_bow_pulling_1"
+  }
+}

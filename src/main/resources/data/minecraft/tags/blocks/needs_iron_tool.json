@@ -13,6 +13,6 @@
     "minecraft:deepslate_gold_ore",
     "minecraft:redstone_ore",
     "minecraft:deepslate_redstone_ore",
-    "#the_aether:requires_iron_tool"
+    "#paradise_lost:requires_iron_tool"
   ]
 }

@@ -1,5 +1,5 @@
 import os
-mod_id = "the_aether"
+mod_id = "paradise_lost"
   
 def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
     stair_file = open(parent_id + "_stairs.json", "x")
@@ -27,11 +27,11 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
   ],
   "key": {
     "#": {
-      "item": "the_aether:"""+parent_id+"""_planks"
+      "item": "paradise_lost:"""+parent_id+"""_planks"
     }
   },
   "result": {
-    "item": "the_aether:"""+parent_id+"""_stairs",
+    "item": "paradise_lost:"""+parent_id+"""_stairs",
     "count": 4
   }
 }
@@ -47,14 +47,14 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
   ],
   "key": {
     "W": {
-      "item": "the_aether:"""+parent_id+"""_planks"
+      "item": "paradise_lost:"""+parent_id+"""_planks"
     },
     "#": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "the_aether:"""+parent_id+"""_fence",
+    "item": "paradise_lost:"""+parent_id+"""_fence",
     "count": 3
   }
 }
@@ -73,11 +73,11 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
       "item": "minecraft:stick"
     },
     "W": {
-      "item": "the_aether:"""+parent_id+"""_planks"
+      "item": "paradise_lost:"""+parent_id+"""_planks"
     }
   },
   "result": {
-    "item": "the_aether:"""+parent_id+"""_fence_gate"
+    "item": "paradise_lost:"""+parent_id+"""_fence_gate"
   }
 }
         """)
@@ -93,11 +93,11 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
   ],
   "key": {
     "#": {
-      "item": "the_aether:"""+parent_id+"""_planks"
+      "item": "paradise_lost:"""+parent_id+"""_planks"
     }
   },
   "result": {
-    "item": "the_aether:"""+parent_id+"""_door",
+    "item": "paradise_lost:"""+parent_id+"""_door",
     "count": 3
   }
 }
@@ -113,11 +113,11 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
   ],
   "key": {
     "#": {
-      "item": "the_aether:"""+parent_id+"""_planks"
+      "item": "paradise_lost:"""+parent_id+"""_planks"
     }
   },
   "result": {
-    "item": "the_aether:"""+parent_id+"""_trapdoor",
+    "item": "paradise_lost:"""+parent_id+"""_trapdoor",
     "count": 2
   }
 }
@@ -134,11 +134,11 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
   ],
   "key": {
     "#": {
-      "item": "the_aether:"""+parent_id+""""
+      "item": "paradise_lost:"""+parent_id+""""
     }
   },
   "result": {
-    "item": "the_aether:"""+parent_id+"""_stairs",
+    "item": "paradise_lost:"""+parent_id+"""_stairs",
     "count": 4
   }
 }
@@ -154,11 +154,11 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
   ],
   "key": {
     "#": {
-      "item": "the_aether:"""+parent_id+"""_planks"
+      "item": "paradise_lost:"""+parent_id+"""_planks"
     }
   },
   "result": {
-    "item": "the_aether:"""+parent_id+"""_slab",
+    "item": "paradise_lost:"""+parent_id+"""_slab",
     "count": 6
   }
 }
@@ -173,11 +173,11 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
   ],
   "key": {
     "#": {
-      "item": "the_aether:"""+parent_id+""""
+      "item": "paradise_lost:"""+parent_id+""""
     }
   },
   "result": {
-    "item": "the_aether:"""+parent_id+"""_slab",
+    "item": "paradise_lost:"""+parent_id+"""_slab",
     "count": 6
   }
 }
@@ -193,11 +193,11 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
   ],
   "key": {
     "#": {
-      "item": "the_aether:"""+parent_id+""""
+      "item": "paradise_lost:"""+parent_id+""""
     }
   },
   "result": {
-    "item": "the_aether:"""+parent_id+"""_wall",
+    "item": "paradise_lost:"""+parent_id+"""_wall",
     "count": 6
   }
 }
@@ -208,9 +208,9 @@ def pop_block_set(parent_id, fence_bool, wall_bool, cracked_bool):
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "the_aether:"""+parent_id+""""
+    "item": "paradise_lost:"""+parent_id+""""
   },
-  "result": "the_aether:cracked_"""+parent_id+"""",
+  "result": "paradise_lost:cracked_"""+parent_id+"""",
   "experience": 0.1,
   "cookingtime": 200
 }        

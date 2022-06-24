@@ -1,5 +1,5 @@
-const resourcesFolder = './main/resources/assets/the_aether/models/block';
-const lootTableFolder = './main/resources/data/the_aether/loot_tables/blocks'
+const resourcesFolder = './main/resources/assets/paradise_lost/models/block';
+const lootTableFolder = './main/resources/data/paradise_lost/loot_tables/blocks'
 const fs = require('fs');
 
 models = [];

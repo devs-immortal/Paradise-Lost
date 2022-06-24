@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "axis=z,full=false": {
+      "model": "paradise_lost:block/food_bowl"
+    },
+    "axis=z,full=true": {
+      "model": "paradise_lost:block/food_bowl_full"
+    },
+    "axis=x,full=false": {
+      "model": "paradise_lost:block/food_bowl",
+      "y": 90
+    },
+    "axis=x,full=true": {
+      "model": "paradise_lost:block/food_bowl_full",
+      "y": 90
+    }
+  }
+}

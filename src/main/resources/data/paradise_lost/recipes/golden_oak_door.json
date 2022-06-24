@@ -1,0 +1,19 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:golden_oak_planks"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:golden_oak_door",
+    "count": 3
+  }
+}

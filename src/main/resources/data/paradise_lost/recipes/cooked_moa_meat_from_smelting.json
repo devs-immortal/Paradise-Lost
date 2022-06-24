@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "paradise_lost:moa_meat"
+  },
+  "result": "paradise_lost:moa_meat_cooked",
+  "experience": 0.3,
+  "cookingtime": 200
+}

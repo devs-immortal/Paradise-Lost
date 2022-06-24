@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "paradise_lost:well",
+      "weight": 1
+    } 
+  ],
+  "placement": {
+    "salt": 123141,
+    "spacing": 40,
+    "separation": 33,
+    "type": "minecraft:random_spread"
+  }
+}

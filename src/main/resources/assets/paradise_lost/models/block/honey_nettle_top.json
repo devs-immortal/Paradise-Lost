@@ -1,0 +1,7 @@
+{
+  "parent": "paradise_lost:template/bilayer_cross",
+  "textures": {
+    "cross": "paradise_lost:block/honey_nettle_top_flower",
+    "cross_tint": "paradise_lost:block/honey_nettle_top_stalk"
+  }
+}

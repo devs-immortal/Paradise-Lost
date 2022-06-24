@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "age=0,half=lower": {
+      "model": "paradise_lost:block/flax_bottom_0"
+    },
+    "age=1,half=lower": {
+      "model": "paradise_lost:block/flax_bottom_1"
+    },
+    "age=2,half=lower": {
+      "model": "paradise_lost:block/flax_bottom_2"
+    },
+    "age=3,half=lower": {
+      "model": "paradise_lost:block/flax_bottom_3"
+    },
+    "age=4,half=lower": {
+      "model": "paradise_lost:block/flax_bottom_4"
+    },
+    "age=5,half=lower": {
+      "model": "paradise_lost:block/flax_bottom_5"
+    },
+    "age=6,half=lower": {
+      "model": "paradise_lost:block/flax_bottom_6"
+    },
+    "age=7,half=lower": {
+      "model": "paradise_lost:block/flax_bottom_7"
+    },
+    "age=0,half=upper": {
+      "model": "paradise_lost:block/flax_top_0"
+    },
+    "age=1,half=upper": {
+      "model": "paradise_lost:block/flax_top_0"
+    },
+    "age=2,half=upper": {
+      "model": "paradise_lost:block/flax_top_0"
+    },
+    "age=3,half=upper": {
+      "model": "paradise_lost:block/flax_top_0"
+    },
+    "age=4,half=upper": {
+      "model": "paradise_lost:block/flax_top_0"
+    },
+    "age=5,half=upper": {
+      "model": "paradise_lost:block/flax_top_1"
+    },
+    "age=6,half=upper": {
+      "model": "paradise_lost:block/flax_top_2"
+    },
+    "age=7,half=upper": {
+      "model": "paradise_lost:block/flax_top_3"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "paradise_lost:gravitite_gemstone"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:gravitite_leggings"
+  }
+}

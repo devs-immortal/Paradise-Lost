@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "paradise_lost:item/cinnabar_rose_spore"
+  }
+}

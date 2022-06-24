@@ -1,0 +1,6 @@
+{
+  "parent": "paradise_lost:block/wisteria_hanger",
+  "textures": {
+    "leaves": "paradise_lost:block/frost_wisteria_hanger_tip"
+  }
+}

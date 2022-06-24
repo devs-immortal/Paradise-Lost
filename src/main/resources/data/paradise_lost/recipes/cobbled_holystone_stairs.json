@@ -1,0 +1,18 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:cobbled_holystone"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:cobbled_holystone_stairs",
+    "count": 4
+  }
+}

@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_aether:zanite_hoe",
-    "the_aether:gravitite_hoe",
-    "the_aether:valkyrie_hoe"
+    "paradise_lost:zanite_hoe",
+    "paradise_lost:gravitite_hoe",
+    "paradise_lost:valkyrie_hoe"
   ]
 }

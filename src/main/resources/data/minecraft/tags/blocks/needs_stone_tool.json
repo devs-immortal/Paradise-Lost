@@ -44,6 +44,6 @@
     "minecraft:waxed_oxidized_cut_copper_stairs",
     "minecraft:waxed_oxidized_cut_copper",
     "minecraft:lightning_rod",
-    "#the_aether:requires_stone_tool"
+    "#paradise_lost:requires_stone_tool"
   ]
 }

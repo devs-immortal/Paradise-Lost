@@ -1,6 +1,0 @@
-{
-  "parent": "the_aether:template/stellated_tint",
-  "textures": {
-    "face": "the_aether:block/weeping_cloudburst_bottom"
-  }
-}

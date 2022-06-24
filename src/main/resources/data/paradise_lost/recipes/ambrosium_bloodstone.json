@@ -1,0 +1,19 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X",
+    "# "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "paradise_lost:ambrosium_shard"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:ambrosium_bloodstone"
+  }
+}

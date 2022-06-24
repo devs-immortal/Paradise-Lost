@@ -1,0 +1,76 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "paradise_lost:item/weapon/valkyrie_lance"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        -90,
+        45
+      ],
+      "translation": [
+        0,
+        12.6,
+        1.6
+      ],
+      "scale": [
+        3.4,
+        3.4,
+        1.4
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        90,
+        -45
+      ],
+      "translation": [
+        0,
+        12.6,
+        1.6
+      ],
+      "scale": [
+        3.4,
+        3.4,
+        1.4
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -90,
+        25
+      ],
+      "translation": [
+        1.13,
+        10.2,
+        2.6
+      ],
+      "scale": [
+        2.72,
+        2.72,
+        0.68
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        90,
+        -25
+      ],
+      "translation": [
+        1.13,
+        10.2,
+        1.13
+      ],
+      "scale": [
+        2.72,
+        2.72,
+        0.68
+      ]
+    }
+  }
+}

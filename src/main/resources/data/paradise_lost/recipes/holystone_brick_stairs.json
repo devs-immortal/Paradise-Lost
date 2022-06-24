@@ -1,0 +1,18 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:holystone_brick"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:holystone_brick_stairs",
+    "count": 4
+  }
+}

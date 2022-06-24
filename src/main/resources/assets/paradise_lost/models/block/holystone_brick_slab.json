@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "paradise_lost:block/holystone_brick",
+    "top": "paradise_lost:block/holystone_brick",
+    "side": "paradise_lost:block/holystone_brick"
+  }
+}

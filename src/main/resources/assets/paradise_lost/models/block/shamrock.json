@@ -1,0 +1,9 @@
+{
+  "parent": "paradise_lost:template/generic_groundcover",
+  "textures": {
+    "top_lower": "paradise_lost:block/shamrock",
+    "top_upper": "paradise_lost:block/shamrock",
+    "stalk": "paradise_lost:block/shamrock_stalks",
+    "stalk_inner": "paradise_lost:block/shamrock_stalks_inner"
+  }
+}

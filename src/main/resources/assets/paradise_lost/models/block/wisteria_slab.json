@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "paradise_lost:block/wisteria_planks",
+    "top": "paradise_lost:block/wisteria_planks",
+    "side": "paradise_lost:block/wisteria_planks"
+  }
+}

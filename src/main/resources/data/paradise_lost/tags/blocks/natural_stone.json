@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:holystone",
+    "paradise_lost:cobbled_holystone",
+    "paradise_lost:mossy_holystone",
+    "paradise_lost:golden_mossy_holystone"
+  ]
+}

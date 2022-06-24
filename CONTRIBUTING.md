@@ -82,11 +82,11 @@
 
 #### **Do you want to contribute to documentation?**
 
-* Please see [this file](https://github.com/devs-immortal/Paradise-Lost/blob/2425948c10ba869fd0365568e7cfe5635ec66317/src/main/java/net/id/aether/Aether.java#L45-L62) and the following example about documentation:
+* Please see [this file](https://github.com/devs-immortal/Paradise-Lost/blob/2425948c10ba869fd0365568e7cfe5635ec66317/src/main/java/net/id/paradise_lost/Aether.java#L45-L62) and the following example about documentation:
 ```java
     /**
      * Write reasonable documentation for non-obvious methods.
-     * For public facing APIs, like {@link net.id.aether.api.MoaAPI} or {@link net.id.aether.api.FloatingBlockHelper}, 
+     * For public facing APIs, like {@link net.id.paradiselost.api.MoaAPI} or {@link net.id.paradiselost.api.FloatingBlockHelper}, 
      * fully document everything that is public. ^ (Also, use these @link tags when possible)
      * <br>Use @param and @return tags if non-obvious or if specific values may give strange results.
      * <br>If you didn't write the code and you're just adding docs, end your docs with a tilde and your

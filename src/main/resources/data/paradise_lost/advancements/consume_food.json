@@ -1,0 +1,96 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.paradise_lost.consume_food.title"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.consume_food.description"
+    },
+    "icon": {
+      "item": "paradise_lost:white_apple"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "whiteapple": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:white_apple"]
+        }
+      }
+    },
+    "blueberry": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:blue_berry"]
+        }
+      }
+    },
+    "eblueberry": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:enchanted_blueberry"]
+        }
+      }
+    },
+    "bluegswet": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:blue_gummy_swet"]
+        }
+      }
+    },
+    "goldgswet": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:golden_gummy_swet"]
+        }
+      }
+    },
+    "healstone": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:healing_stone"]
+        }
+      }
+    },
+    "candycane": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:candy_cane"]
+        }
+      }
+    },
+    "gingyman": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:ginger_bread_man"]
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "whiteapple",
+      "blueberry",
+      "eblueberry",
+      "bluegswet",
+      "goldgswet",
+      "healstone",
+      "candycane",
+      "gingyman"
+    ]
+  ],
+  "parent": "paradise_lost:root"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "paradise_lost:block/swetroot_3"
+  }
+}

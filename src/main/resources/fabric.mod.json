@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "the_aether",
+  "id": "paradise_lost",
   "version": "${version}",
   "name": "Paradise Lost",
   "description": "Ascend to paradise lost, seek the half blood valkyrie. Venture forth through heavens reborn, and at the break of dawn find the secret of the moon. ... And let you not be deceived by the lullaby's sweet nothings, for it tells forthwith and uncouth a truth most perverse.",
@@ -40,29 +40,29 @@
     "satin": "*"
   },
   "mixins": [
-    "the_aether.mixins.json"
+    "paradise_lost.mixins.json"
   ],
-  "accessWidener": "the_aether.accesswidener",
+  "accessWidener": "paradise_lost.accesswidener",
   "entrypoints": {
     "main": [
-      "net.id.aether.Aether"
+      "net.id.paradiselost.ParadiseLost"
     ],
     "client": [
-      "net.id.aether.Aether"
+      "net.id.paradiselost.ParadiseLost"
     ],
     "server": [
-      "net.id.aether.Aether"
+      "net.id.paradiselost.ParadiseLost"
     ],
     "cardinal-components": [
-      "net.id.aether.component.AetherComponents"
+      "net.id.paradiselost.component.ParadiseLostComponents"
     ]
   },
   "custom": {
     "cardinal-components": [
-      "the_aether:moa_genetics",
-      "the_aether:condition_manager",
-      "the_aether:luv",
-      "the_aether:lore_state"
+      "paradise_lost:moa_genetics",
+      "paradise_lost:condition_manager",
+      "paradise_lost:luv",
+      "paradise_lost:lore_state"
     ],
     "modmenu": {
       "links": {

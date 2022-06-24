@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "the_aether:skyroot_log",
-    "the_aether:golden_oak_log",
-    "the_aether:orange_log",
-    "the_aether:crystal_log",
-    "the_aether:wisteria_log"
+    "paradise_lost:skyroot_log",
+    "paradise_lost:golden_oak_log",
+    "paradise_lost:orange_log",
+    "paradise_lost:crystal_log",
+    "paradise_lost:wisteria_log"
   ]
 }

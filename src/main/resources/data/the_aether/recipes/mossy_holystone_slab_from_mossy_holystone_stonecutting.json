@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "the_aether:mossy_holystone"
-  },
-  "result": "the_aether:mossy_holystone_slab",
-  "count": 2
-}

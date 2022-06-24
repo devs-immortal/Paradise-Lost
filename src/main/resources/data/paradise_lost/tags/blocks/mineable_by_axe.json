@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:skyroot_bookshelf",
+    "paradise_lost:food_bowl",
+    "paradise_lost:giant_lily",
+    "paradise_lost:wild_swetroot",
+    "#paradise_lost:leaf_piles",
+    "#paradise_lost:bushes",
+    "#paradise_lost:hangers",
+    "#paradise_lost:wooden_chests"
+  ]
+}

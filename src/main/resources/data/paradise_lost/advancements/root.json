@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "paradise_lost:crystal_log"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.root.title",
+      "color": "aqua"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.root.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "paradise_lost:textures/block/skyroot_planks.png"
+  },
+  "criteria": {
+    "entered_paradise_lost": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "paradise_lost:paradise_lost"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "entered_paradise_lost"
+    ]
+  ]
+}

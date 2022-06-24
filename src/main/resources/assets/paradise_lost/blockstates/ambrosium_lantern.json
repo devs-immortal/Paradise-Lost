@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "paradise_lost:block/ambrosium_lantern"
+    },
+    "hanging=true": {
+      "model": "paradise_lost:block/ambrosium_lantern_hanging"
+    }
+  }
+}

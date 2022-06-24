@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:skyroot_leaves"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:skyroot_leaf_pile",
+    "count": 3
+  }
+}

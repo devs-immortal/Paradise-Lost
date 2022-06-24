@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BB"
+  ],
+  "key": {
+    "B": {
+      "item": "paradise_lost:liverwort"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:liverwort_carpet",
+    "count": 1
+  }
+}

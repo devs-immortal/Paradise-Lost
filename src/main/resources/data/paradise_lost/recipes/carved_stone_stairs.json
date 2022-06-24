@@ -1,0 +1,18 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:carved_stone"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:carved_stone_stairs",
+    "count": 4
+  }
+}
