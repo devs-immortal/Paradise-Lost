@@ -432,7 +432,7 @@ public class AetherBlocks {
     public static void init() {
         AetherRegistryQueues.BLOCK.register();
         for (var woodType : new WoodTypeFactory[]{SKYROOT, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA}) {
-            woodType.registerRemainingBlocks();
+            woodType.registerCreatedBlocks();
             woodType.registerFlammability();
             woodType.registerStripping();
         }
@@ -441,7 +441,7 @@ public class AetherBlocks {
     @Environment(EnvType.CLIENT)
     public static void initClient() {
         for (var woodType : new WoodTypeFactory[]{SKYROOT, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA}) {
-            woodType.registerClient();
+            woodType.registerBlockEntityRenderers();
             woodType.registerRenderLayers();
         }
     }

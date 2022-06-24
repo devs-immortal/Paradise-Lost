@@ -12,8 +12,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
-import java.util.Random;
-
 public class SwetrootCropBlock extends CropBlock {
     private static final VoxelShape[] AGE_TO_SHAPE;
 

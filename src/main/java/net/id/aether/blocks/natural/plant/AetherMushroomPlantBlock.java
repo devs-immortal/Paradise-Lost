@@ -3,7 +3,6 @@ package net.id.aether.blocks.natural.plant;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.Tag;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -70,10 +69,4 @@ public class AetherMushroomPlantBlock extends PlantBlock {
             return world.getBaseLightLevel(pos, 0) < 11 && this.canPlantOnTop(blockState, world, blockPos);
         }
     }
-
-    @Override
-    public OffsetType getOffsetType() {
-        return OffsetType.XZ;
-    }
-
 }
