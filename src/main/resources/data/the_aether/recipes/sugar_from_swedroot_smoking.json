@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "the_aether:swedroot_pulp"
+  },
+  "result": "minecraft:sugar",
+  "experience": 0.1,
+  "cookingtime": 100
+}

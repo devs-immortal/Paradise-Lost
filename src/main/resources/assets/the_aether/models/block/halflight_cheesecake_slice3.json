@@ -1,0 +1,24 @@
+{
+	"credit": "Made by 24Chrome",
+	"textures": {
+		"bottom": "the_aether:block/halflight_cheesecake_bottom",
+		"top": "the_aether:block/halflight_cheesecake_top",
+		"particle": "the_aether:block/halflight_cheesecake_side",
+		"side": "the_aether:block/halflight_cheesecake_side",
+		"inside": "the_aether:block/halflight_cheesecake_inner"
+	},
+	"elements": [
+		{
+			"from": [8, 0, 8],
+			"to": [15, 8, 15],
+			"faces": {
+				"north": {"uv": [1, 8, 9, 16], "texture": "#inside"},
+				"east": {"uv": [1, 8, 9, 16], "texture": "#side"},
+				"south": {"uv": [7, 8, 15, 16], "texture": "#side"},
+				"west": {"uv": [7, 8, 15, 16], "texture": "#inside"},
+				"up": {"uv": [8, 8, 15, 15], "texture": "#top"},
+				"down": {"uv": [7, 1, 15, 9], "texture": "#bottom", "cullface": "down"}
+			}
+		}
+	]
+}

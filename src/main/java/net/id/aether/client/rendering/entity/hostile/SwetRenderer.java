@@ -16,6 +16,7 @@ import net.minecraft.client.render.entity.model.SlimeEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.registry.Registry;
 
 @Environment(EnvType.CLIENT)
 public class SwetRenderer extends MobEntityRenderer<SwetEntity, SlimeEntityModel<SwetEntity>> {
@@ -41,12 +42,7 @@ public class SwetRenderer extends MobEntityRenderer<SwetEntity, SlimeEntityModel
     }
 
     public Identifier getTexture(SwetEntity slimeEntity) {
-        if (slimeEntity instanceof BlueSwetEntity)
-            return Aether.locate("textures/entity/swet/blue_swet.png");
-        if (slimeEntity instanceof PurpleSwetEntity)
-            return Aether.locate("textures/entity/swet/purple_swet.png");
-        if (slimeEntity instanceof GoldenSwetEntity)
-            return Aether.locate("textures/entity/swet/golden_swet.png");
-        return Aether.locate("textures/entity/swet/white_swet.png");
+        Identifier id = Registry.ENTITY_TYPE.getId(slimeEntity.getType());
+        return new Identifier(id.getNamespace(), "textures/entity/swet/" + id.getPath() + ".png");
     }
 }

@@ -23,6 +23,9 @@ public class SkyrootTowerFeature extends Structure {
         super(config);
     }
 
+    private static final int X_OFFSET = 4;
+    private static final int Z_OFFSET = 4;
+
     private static void addPieces(StructurePiecesCollector collector, Context context) {
         StructureTemplate structure = context.structureTemplateManager().getTemplateOrBlank(Aether.locate("skyroot_tower"));
         BlockRotation blockRotation = BlockRotation.NONE;
@@ -30,12 +33,12 @@ public class SkyrootTowerFeature extends Structure {
         BlockPos pivot = new BlockPos(structure.getSize().getX() / 2, 0, structure.getSize().getZ() / 2);
         BlockBox boundingBox = structure.calculateBoundingBox(pos.getStartPos(), blockRotation, pivot, BlockMirror.NONE);
         BlockPos center = boundingBox.getCenter();
-        int y = context.chunkGenerator().getHeight(pos.getStartPos().getX() - 4, pos.getStartPos().getZ() - 4, Heightmap.Type.WORLD_SURFACE_WG, context.world(), context.noiseConfig());
+        int y = context.chunkGenerator().getHeight(pos.getStartPos().getX() - X_OFFSET, pos.getStartPos().getZ() - Z_OFFSET, Heightmap.Type.WORLD_SURFACE_WG, context.world(), context.noiseConfig());
         if (y < 0) { // DON'T PLACE ON THE BOTTOM OF THE WORLD
             return;
         }
-        BlockPos newPos = new BlockPos(pos.getStartPos().getX() - 4, y, pos.getStartPos().getZ() - 4);
-        SkyrootTowerGenerator.addPieces(context.structureTemplateManager(), collector, blockRotation, newPos);
+        BlockPos newPos = new BlockPos(pos.getStartPos().getX() - X_OFFSET, y, pos.getStartPos().getZ() - Z_OFFSET);
+        SkyrootTowerGenerator.addPieces(context.structureTemplateManager(), collector, BlockRotation.NONE, newPos);
     }
     
     @Override

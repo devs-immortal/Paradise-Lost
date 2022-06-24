@@ -84,6 +84,8 @@
   "block.the_aether.carved_stone_eye": "Carved Stone Eye",
   "block.the_aether.carved_stone_eye_lit": "Lit Carved Stone Eye",
 
+  "block.the_aether.ambrosium_campfire": "Ambrosium Campfire",
+
   "block.the_aether.skyroot_sapling": "Skyroot Sapling",
   "block.the_aether.skyroot_log": "Skyroot Log",
   "block.the_aether.mottled_skyroot_log": "Mottled Skyroot Log",
@@ -221,10 +223,16 @@
   "block.the_aether.swedroot_spread": "Swedroot Spread",
 
   "block.the_aether.rootcap": "Rootcap",
+  "block.the_aether.brown_sporecap": "Brown Sporecap",
+  "block.the_aether.pink_sporecap": "Pink Sporecap",
 
   "block.the_aether.flaxweave_cushion" : "Flaxweave Cushion",
 
   "block.the_aether.blueberry_bush": "Blueberry Bush",
+  
+  "block.the_aether.halflight_cheesecake": "Halflight Cheesecake",
+  
+  "block.the_aether.amadrys_bundle": "Amadrys Bundle",
 
   "block.the_aether.ancient_flower": "Ancient Flower",
   "block.the_aether.ataraxia": "Ataraxia",
@@ -237,6 +245,7 @@
   "block.the_aether.ambrosium_ore": "Ambrosium Ore",
   "block.the_aether.zanite_ore": "Zanite Ore",
   "block.the_aether.gravitite_ore": "Gravitite Ore",
+  "block.the_aether.ambrosium_block": "Block of Ambrosium",
   "block.the_aether.zanite_block": "Block of Zanite",
   "block.the_aether.block_of_gravitite": "Block of Gravitite",
 
@@ -369,6 +378,9 @@
   "item.the_aether.orange": "Orange",
   "item.the_aether.white_apple": "White Apple",
   "item.the_aether.amadrys_bushel": "Amadrys Bushel",
+  "item.the_aether.amadrys_noodles": "Amadrys Noodle Soup",
+  "item.the_aether.amadrys_bread": "Amadrys Loaf",
+  "item.the_aether.amadrys_bread_glazed": "Glazed Amadrys Loaf",
   "item.the_aether.swedroot": "Swedroot",
   "item.the_aether.flaxseed" : "Flaxseed",
   "item.the_aether.blue_gummy_swet": "Blue Gummy Swet",
@@ -471,15 +483,6 @@
   "commands.the_aether.moastat.hunger": "Hunger",
   "commands.the_aether.moastat.print": "%1$s = %2$s",
   "commands.the_aether.moastat.set": "Set %1$s to %2$s",
-  "commands.the_aether.condition.failure.query": "Entity is immune to %1$s",
-  "commands.the_aether.condition.failure.assign": "...you tried setting a constant condition, didn't you?",
-  "commands.the_aether.condition.failure.get_condition" : "No condition manager found registered for entry: %1$s",
-  "commands.the_aether.condition.failure.get_persistence" : "%1$s is not a valid persistence",
-  "commands.the_aether.condition.failure.get_entity" : "No entity was specified",
-  "commands.the_aether.condition.success.query": "%1$s: %2$s - %3$s",
-  "commands.the_aether.condition.success.assign": "%1$s is now: %2$s - %3$s",
-  "commands.the_aether.condition.success.clear" : "Successfully cleared condition(s)",
-  "commands.the_aether.condition.success.clear.individual": "Cleared %1$s condition(s) from %2$s",
   "commands.the_aether.gravitate.failure" : "Couldn't float the block(s)",
   "commands.the_aether.gravitate.success" : "Successfully floated the block(s)",
   "commands.the_aether.LUV.success.query" : "LUV%1$s",
@@ -501,15 +504,7 @@
   "effect.the_aether.simmering": "Simmering",
 
 
-  "condition.persistence.temporary": "Passing",
-  "condition.persistence.chronic": "Chronic",
-  "condition.persistence.constant": "Lingering",
-  "condition.severity.negligible": "Negligible",
-  "condition.severity.mild": "Mild",
-  "condition.severity.acute": "Acute",
-  "condition.severity.dire": "Dire",
-  "condition.severity.extreme": "Extreme",
-  "condition.condition.venom": "Venom",
+  "condition.the_aether.condition.venom": "Venom",
 
   "subtitles.the_aether.block.blueberry_bush.pick_blueberries": "Blueberries pop",
 

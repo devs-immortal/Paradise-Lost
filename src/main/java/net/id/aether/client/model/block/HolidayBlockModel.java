@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
 import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.id.aether.mixin.client.MinecraftClientAccessor;
-import net.id.aether.util.Holiday;
+import net.id.incubus_core.util.IncubusHoliday;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.client.MinecraftClient;
@@ -59,7 +59,7 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
     static {
         // To add holiday blocks add the case here with the amount of overlay models and add a matching case in the
         // MODEL_OVERRIDE switch a few lines down.
-        var holiday = Holiday.get();
+        var holiday = IncubusHoliday.get();
         SEED_OFFSET = holiday.ordinal();
         int modelCount = switch (holiday) {
             case CHRISTMAS -> 2;
@@ -75,7 +75,7 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
                 ))
                 .toList();
         
-            MODEL_OVERRIDES = switch(Holiday.get()){
+            MODEL_OVERRIDES = switch(IncubusHoliday.get()){
                 // Grab all of the leaves
                 case CHRISTMAS -> Registry.BLOCK.stream()
                     .filter((block) -> block instanceof LeavesBlock)

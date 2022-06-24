@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.id.aether.entities.block.FloatingBlockEntity;
+import net.id.aether.entities.block.SliderEntity;
 import net.id.aether.entities.hostile.AechorPlantEntity;
 import net.id.aether.entities.hostile.CockatriceEntity;
 import net.id.aether.entities.hostile.swet.*;
@@ -36,15 +37,19 @@ public class AetherEntityTypes {
     // block
     public static final EntityType<FloatingBlockEntity> FLOATING_BLOCK = add("floating_block",
             AetherEntityTypes.<FloatingBlockEntity>of(FloatingBlockEntity::new, MISC, changing(0.98F, 0.98F), 10).trackedUpdateRate(20));
+    public static final EntityType<SliderEntity> SLIDER = add("slider",
+            AetherEntityTypes.<SliderEntity>of(SliderEntity::new, MISC, changing(0.98F, 0.98F), 10).trackedUpdateRate(20));
     // hostile
     public static final EntityType<BlueSwetEntity> BLUE_SWET = add("blue_swet", of(BlueSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
-            attributes(BlueSwetEntity::createSwetAttributes), spawnRestrictions(SwetEntity::canSpawn));
+            attributes(BlueSwetEntity::createSwetAttributes), spawnRestrictions(BlueSwetEntity::canSpawn));
     public static final EntityType<PurpleSwetEntity> PURPLE_SWET = add("purple_swet", of(PurpleSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
-            attributes(PurpleSwetEntity::createSwetAttributes), spawnRestrictions(SwetEntity::canSpawn));
+            attributes(PurpleSwetEntity::createSwetAttributes), spawnRestrictions(PurpleSwetEntity::canSpawn));
     public static final EntityType<WhiteSwetEntity> WHITE_SWET = add("white_swet", of(WhiteSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
-            attributes(WhiteSwetEntity::createSwetAttributes), spawnRestrictions(SwetEntity::canSpawn));
+            attributes(WhiteSwetEntity::createSwetAttributes), spawnRestrictions(WhiteSwetEntity::canSpawn));
     public static final EntityType<GoldenSwetEntity> GOLDEN_SWET = add("golden_swet", of(GoldenSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
-            attributes(GoldenSwetEntity::createSwetAttributes), spawnRestrictions(SwetEntity::canSpawn));
+            attributes(GoldenSwetEntity::createSwetAttributes), spawnRestrictions(GoldenSwetEntity::canSpawn));
+    public static final EntityType<VermilionSwetEntity> VERMILION_SWET = add("vermilion_swet", of(VermilionSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
+            attributes(VermilionSwetEntity::createSwetAttributes), spawnRestrictions(VermilionSwetEntity::canSpawn));
     //todo: why is this an animal? should extend hostile to allow hostile spawn restrictions, and inherit hostile behviour
     public static final EntityType<AechorPlantEntity> AECHOR_PLANT = add("aechor_plant", of(AechorPlantEntity::new, MONSTER, changing(1f, 1f), 5),
             attributes(AechorPlantEntity::createAechorPlantAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));

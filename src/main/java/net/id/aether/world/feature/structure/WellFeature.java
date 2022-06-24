@@ -23,6 +23,9 @@ public class WellFeature extends Structure {
         int x = context.chunkPos().x * 16;
         int z = context.chunkPos().z * 16;
         int y = context.chunkGenerator().getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, context.world(), context.noiseConfig());
+        if (y < 0) { // DON'T PLACE ON THE BOTTOM OF THE WORLD
+            return;
+        }
         BlockPos newPos = new BlockPos(x, y, z);
         WellGenerator.addPieces(context.structureTemplateManager(), collector, context.random(), newPos);
     }

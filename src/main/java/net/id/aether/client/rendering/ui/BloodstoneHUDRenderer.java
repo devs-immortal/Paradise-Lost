@@ -4,8 +4,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.Aether;
-import net.id.aether.effect.condition.Severity;
 import net.id.aether.items.tools.bloodstone.*;
+import net.id.incubus_core.condition.api.Severity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.texture.Sprite;
@@ -57,7 +57,7 @@ public class BloodstoneHUDRenderer {
     }
 
     private static boolean isLookingAtMatchingEntity(MinecraftClient client, BloodstoneCapturedData capturedData) {
-        if (client.crosshairTarget == null || client.crosshairTarget.getType() != HitResult.Type.ENTITY)
+        if (client.crosshairTarget == null || client.crosshairTarget.getType() != HitResult.Type.ENTITY || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity))
             return false;
 
         if(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity entity)

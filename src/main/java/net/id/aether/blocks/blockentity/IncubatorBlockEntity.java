@@ -3,6 +3,7 @@ package net.id.aether.blocks.blockentity;
 import net.id.aether.component.MoaGenes;
 import net.id.aether.items.AetherItems;
 import net.id.aether.util.AetherSoundEvents;
+import net.id.incubus_core.be.InventoryBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,16 +14,19 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class IncubatorBlockEntity extends AetherBlockEntity {
+public class IncubatorBlockEntity extends BlockEntity implements InventoryBlockEntity {
 
     private UUID owner;
     private int hatchTicks = 100;
+    private final DefaultedList<ItemStack> inventory;
 
     public IncubatorBlockEntity(BlockPos pos, BlockState state) {
-        super(AetherBlockEntityTypes.INCUBATOR, pos, state, 1, HopperStrategy.ALL_PASS);
+        super(AetherBlockEntityTypes.INCUBATOR, pos, state);
+        this.inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     }
 
     public static <T extends BlockEntity> void tickServer(World world, BlockPos pos, BlockState state, T entity) {
@@ -63,5 +67,10 @@ public class IncubatorBlockEntity extends AetherBlockEntity {
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         hatchTicks = nbt.getInt("hatchTicks");
+    }
+
+    @Override
+    public @NotNull HopperStrategy getHopperStrategy() {
+        return HopperStrategy.ALL_PASS;
     }
 }

@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "Paradise Lost",
   "description": "Ascend to paradise lost, seek the half blood valkyrie. Venture forth through heavens reborn, and at the break of dawn find the secret of the moon. ... And let you not be deceived by the lullaby's sweet nothings, for it tells forthwith and uncouth a truth most perverse.",
-  "license": "GNU GPLv3",
+  "license": "MIT",
   "authors": [
     "Immortal Devs - parent organization",
     "kalucky0 - head of project",
@@ -13,9 +13,7 @@
     "Jack Papel - lead developer",
     "sunsette - lead sound designer",
     "CDAGaming - developer / very based person",
-    "Reoseah - developer",
     "SollyW - developer",
-    "Ms.Random (Ash) - developer",
     "gudenau - developer",
     "Kyrptonaught - developer",
     "yelldow - sound designer / composer",
@@ -60,7 +58,6 @@
   "custom": {
     "cardinal-components": [
       "the_aether:moa_genetics",
-      "the_aether:condition_manager",
       "the_aether:luv",
       "the_aether:lore_state"
     ],

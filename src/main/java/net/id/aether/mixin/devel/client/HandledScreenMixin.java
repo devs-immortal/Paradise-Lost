@@ -38,6 +38,6 @@ public abstract class HandledScreenMixin<T extends ScreenHandler> extends Screen
         CallbackInfo ci,
         int a, int b, MatrixStack stack2, int index, Slot slot
     ){
-        textRenderer.draw(matrices, String.valueOf(index), slot.x, slot.y, 0x00000000);
+        //textRenderer.draw(matrices, String.valueOf(index), slot.x, slot.y, 0x00000000);
     }
 }

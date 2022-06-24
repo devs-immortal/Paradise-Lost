@@ -1,6 +1,6 @@
 package net.id.aether.items.utils;
 
-import net.id.aether.util.EnumExtender;
+import net.id.incubus_core.util.EnumExtender;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 

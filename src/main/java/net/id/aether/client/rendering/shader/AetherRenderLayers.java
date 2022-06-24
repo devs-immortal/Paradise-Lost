@@ -3,7 +3,7 @@ package net.id.aether.client.rendering.shader;
 import ladysnake.satin.api.util.RenderLayerHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.aether.util.Config;
+import net.id.aether.util.CompatConfig;
 import net.minecraft.client.render.RenderLayer;
 
 @Environment(EnvType.CLIENT)
@@ -14,7 +14,7 @@ public final class AetherRenderLayers{
     public static final RenderLayer AURAL_CUTOUT_MIPPED;
     
     static{
-        if(Config.SODIUM_WORKAROUND){
+        if(CompatConfig.SODIUM_WORKAROUND){
             AURAL = RenderLayer.getSolid();
             AURAL_CUTOUT_MIPPED = RenderLayer.getCutoutMipped();
         }else{

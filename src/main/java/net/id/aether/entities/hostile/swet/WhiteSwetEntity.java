@@ -1,12 +1,21 @@
 package net.id.aether.entities.hostile.swet;
 
+import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.client.rendering.particle.AetherParticles;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class WhiteSwetEntity extends TransformableSwetEntity {
     public WhiteSwetEntity(EntityType<? extends WhiteSwetEntity> entityType, World world) {
@@ -23,6 +32,10 @@ public class WhiteSwetEntity extends TransformableSwetEntity {
             }
         }
         super.onEntityCollision(entity);
+    }
+
+    public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return SwetEntity.canSpawn(type, world, spawnReason, pos, random) && (world.getBiome(pos).value().getTemperature() <= 0.4 || world.getRandom().nextFloat() < 0.3);
     }
     
     @Override

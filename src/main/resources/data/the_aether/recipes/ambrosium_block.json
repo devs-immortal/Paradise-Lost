@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "the_aether:ambrosium_shard"
+    }
+  },
+  "result": {
+    "item": "the_aether:ambrosium_block"
+  }
+}

@@ -20,10 +20,4 @@ public final class AetherTextures{
             registry.register(locate("hud/bloodstone/race"));
         });
     }
-    
-    public static void addDefaultTextures(Consumer<SpriteIdentifier> adder){
-        for(var texture : AetherChestTexture.values()){
-            texture.textures().forEach(adder);
-        }
-    }
 }
