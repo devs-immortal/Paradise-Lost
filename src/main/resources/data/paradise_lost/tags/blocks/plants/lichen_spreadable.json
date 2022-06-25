@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:dirt",
+    "minecraft:stone",
+    "minecraft:blackstone",
+    "minecraft:deepslate",
+    "paradise_lost:holystone"
+  ]
+}

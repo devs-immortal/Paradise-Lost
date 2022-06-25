@@ -605,7 +605,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             player.openHandledScreen(new ExtendedScreenHandlerFactory() {
                 @Override
                 public Text getDisplayName() {
-                    return Text.translatable("container.the_aether.moa");
+                    return Text.translatable("container.paradise_lost.moa");
                 }
     
                 @Override

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:golden_oak_log",
+    "paradise_lost:golden_oak_leaves",
+    "paradise_lost:golden_oak_sapling",
+    "paradise_lost:stripped_golden_oak_log",
+    "paradise_lost:potted_golden_oak_sapling"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:holystone"
+    },
+    "X": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:food_bowl"
+  }
+}
+    

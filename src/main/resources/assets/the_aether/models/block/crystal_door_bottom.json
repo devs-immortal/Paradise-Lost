@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom",
-  "textures": {
-    "top": "the_aether:block/crystal_door_top",
-    "bottom": "the_aether:block/crystal_door_bottom"
-  }
-}

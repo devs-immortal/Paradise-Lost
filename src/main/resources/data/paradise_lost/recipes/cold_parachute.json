@@ -1,0 +1,20 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:string"
+    },
+    "X": {
+      "item": "paradise_lost:cold_aercloud"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:cold_parachute"
+  }
+}
+    

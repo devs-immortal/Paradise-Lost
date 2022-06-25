@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "paradise_lost:block/wild_flax_bottom"
+    },
+    "half=upper": {
+      "model": "paradise_lost:block/wild_flax_top"
+    }
+  }
+}

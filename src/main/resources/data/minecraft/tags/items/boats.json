@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "the_aether:skyroot_boat",
-    "the_aether:golden_oak_boat",
-    "the_aether:orange_boat",
-    "the_aether:crystal_boat",
-    "the_aether:wisteria_boat"
+    "paradise_lost:skyroot_boat",
+    "paradise_lost:golden_oak_boat",
+    "paradise_lost:orange_boat",
+    "paradise_lost:crystal_boat",
+    "paradise_lost:wisteria_boat"
   ]
 }

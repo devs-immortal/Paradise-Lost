@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "paradise_lost:block/amadrys_bundle",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "paradise_lost:block/amadrys_bundle",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "paradise_lost:block/amadrys_bundle"
+    },
+    "facing=south": {
+      "model": "paradise_lost:block/amadrys_bundle",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "paradise_lost:block/amadrys_bundle",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "paradise_lost:block/amadrys_bundle",
+      "y": 270
+    }
+  }
+}

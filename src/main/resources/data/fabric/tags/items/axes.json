@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_aether:zanite_axe",
-    "the_aether:gravitite_axe",
-    "the_aether:valkyrie_axe"
+    "paradise_lost:zanite_axe",
+    "paradise_lost:gravitite_axe",
+    "paradise_lost:valkyrie_axe"
   ]
 }

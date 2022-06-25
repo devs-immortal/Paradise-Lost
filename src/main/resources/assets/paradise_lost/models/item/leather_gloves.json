@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "paradise_lost:item/accessories/leather_gloves",
+    "layer1": "paradise_lost:item/accessories/leather_gloves_overlay"
+  }
+}

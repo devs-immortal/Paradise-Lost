@@ -1,0 +1,18 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:holystone"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:holystone_wall",
+    "count": 6
+  }
+}
+        

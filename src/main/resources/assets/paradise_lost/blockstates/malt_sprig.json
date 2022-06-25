@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "paradise_lost:block/malt_sprig"
+      },
+      {
+        "model": "paradise_lost:block/malt_sprig",
+        "y": 180
+      },
+      {
+        "model": "paradise_lost:block/malt_sprig_tall"
+      },
+      {
+        "model": "paradise_lost:block/malt_sprig_tall",
+        "y": 180
+      }
+    ]
+  }
+}

@@ -42,7 +42,7 @@ public class MoaEggCommand {
 
         // If the player intends to get the fallback, let them get it. Otherwise, fail.
         if (race == MoaAPI.FALLBACK_MOA && raceId.compareTo(MoaAPI.FALLBACK_MOA.getId()) != 0) {
-            source.sendError(Text.translatable("commands.the_aether.moaegg.failure", raceId.toString()));
+            source.sendError(Text.translatable("commands.paradise_lost.moaegg.failure", raceId.toString()));
         } else {
             ItemStack template = MoaGenes.getEggForCommand(race, source.getWorld(), baby);
             targets.forEach(player -> {
@@ -50,7 +50,7 @@ public class MoaEggCommand {
                 if (!player.getInventory().insertStack(template)) {
                     ItemScatterer.spawn(source.getWorld(), player.getX(), player.getY(), player.getZ(), egg);
                 }
-                source.sendFeedback(Text.translatable("commands.the_aether.moaegg.success", egg.toHoverableText(), targets.iterator().next().getDisplayName()), true);
+                source.sendFeedback(Text.translatable("commands.paradise_lost.moaegg.success", egg.toHoverableText(), targets.iterator().next().getDisplayName()), true);
             });
         }
 

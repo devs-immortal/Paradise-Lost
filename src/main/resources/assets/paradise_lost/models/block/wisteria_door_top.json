@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "top": "paradise_lost:block/wisteria_door_top",
+    "bottom": "paradise_lost:block/wisteria_door_bottom"
+  }
+}

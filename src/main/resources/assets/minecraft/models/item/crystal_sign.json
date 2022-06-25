@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "the_aether:item/crystal_sign"
+    "layer0": "paradise_lost:item/crystal_sign"
   }
 }

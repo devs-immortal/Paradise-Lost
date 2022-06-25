@@ -1,0 +1,6 @@
+{
+  "parent": "paradise_lost:block/leaf_pile",
+  "textures": {
+    "leaves": "paradise_lost:block/skyroot_leaves"
+  }
+}

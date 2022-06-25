@@ -244,9 +244,9 @@ public final class AetherBiomes {
         TODO
         {
           "starts": [
-            "the_aether:well",
-            "the_aether:skyroot_tower",
-            "the_aether:orange_ruin"
+            "paradise_lost:well",
+            "paradise_lost:skyroot_tower",
+            "paradise_lost:orange_ruin"
           ],
           "player_spawn_friendly": false,
           "depth": 0.0,
@@ -304,9 +304,9 @@ public final class AetherBiomes {
         TODO
         {
           "starts": [
-            "the_aether:well",
-            "the_aether:skyroot_tower",
-            "the_aether:orange_ruin"
+            "paradise_lost:well",
+            "paradise_lost:skyroot_tower",
+            "paradise_lost:orange_ruin"
           ],
           "player_spawn_friendly": false,
           "depth": 0.1,
@@ -365,9 +365,9 @@ public final class AetherBiomes {
         TODO
         {
           "starts": [
-            "the_aether:well",
-            "the_aether:skyroot_tower",
-            "the_aether:orange_ruin"
+            "paradise_lost:well",
+            "paradise_lost:skyroot_tower",
+            "paradise_lost:orange_ruin"
           ],
           "player_spawn_friendly": false,
           "depth": 0.125,
@@ -437,11 +437,11 @@ public final class AetherBiomes {
         TODO
         {
           "starts": [
-            "the_aether:well",
-            "the_aether:skyroot_tower",
-            "the_aether:orange_ruin"
+            "paradise_lost:well",
+            "paradise_lost:skyroot_tower",
+            "paradise_lost:orange_ruin"
           ],
-          "parent": "the_aether:aether_highlands_forest",
+          "parent": "paradise_lost:aether_highlands_forest",
           "player_spawn_friendly": false,
           "depth": 0.155,
           "scale": 0.15
@@ -502,9 +502,9 @@ public final class AetherBiomes {
         TODO
         {
           "starts": [
-            "the_aether:well",
-            "the_aether:skyroot_tower",
-            "the_aether:orange_ruin"
+            "paradise_lost:well",
+            "paradise_lost:skyroot_tower",
+            "paradise_lost:orange_ruin"
           ],
           "player_spawn_friendly": false,
           "depth": 0.1,
@@ -568,9 +568,9 @@ public final class AetherBiomes {
         TODO
         {
           "starts": [
-            "the_aether:well",
-            "the_aether:skyroot_tower",
-            "the_aether:orange_ruin"
+            "paradise_lost:well",
+            "paradise_lost:skyroot_tower",
+            "paradise_lost:orange_ruin"
           ],
           "player_spawn_friendly": false,
           "depth": 0.0,
@@ -632,9 +632,9 @@ public final class AetherBiomes {
         TODO
         {
           "starts": [
-            "the_aether:well",
-            "the_aether:skyroot_tower",
-            "the_aether:orange_ruin"
+            "paradise_lost:well",
+            "paradise_lost:skyroot_tower",
+            "paradise_lost:orange_ruin"
           ],
           "player_spawn_friendly": false,
           "depth": 0.0,

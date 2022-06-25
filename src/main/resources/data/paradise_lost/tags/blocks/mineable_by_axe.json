@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:skyroot_bookshelf",
+    "paradise_lost:food_bowl",
+    "paradise_lost:giant_lily",
+    "paradise_lost:packed_swedroot",
+    "paradise_lost:swedroot_spread",
+    "#paradise_lost:aether_leaf_piles",
+    "#paradise_lost:aether_bushes",
+    "#paradise_lost:aether_hangers",
+    "#paradise_lost:aether_wooden_chests",
+    "paradise_lost:ambrosium_campfire"
+  ]
+}

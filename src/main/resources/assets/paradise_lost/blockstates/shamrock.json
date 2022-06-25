@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "paradise_lost:block/shamrock"
+      },
+      {
+        "model": "paradise_lost:block/shamrock",
+        "y": 90
+      },
+      {
+        "model": "paradise_lost:block/shamrock",
+        "y": 180
+      },
+      {
+        "model": "paradise_lost:block/shamrock",
+        "y": 270
+      }
+    ]
+  }
+}

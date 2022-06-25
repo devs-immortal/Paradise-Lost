@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "the_aether:golden_amber"
-  },
-  "result": "minecraft:gold_nugget",
-  "experience": 0.3,
-  "cookingtime": 200
-}

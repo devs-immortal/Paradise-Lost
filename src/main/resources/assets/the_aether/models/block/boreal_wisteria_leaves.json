@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/leaves",
-  "textures": {
-    "all": "the_aether:block/boreal_wisteria_leaves"
-  }
-}

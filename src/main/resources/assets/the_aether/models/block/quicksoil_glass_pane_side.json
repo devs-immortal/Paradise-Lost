@@ -1,7 +1,0 @@
-{
-  "parent": "block/template_glass_pane_side",
-  "textures": {
-    "edge": "the_aether:block/quicksoil_glass_pane_top",
-    "pane": "the_aether:block/quicksoil_glass"
-  }
-}

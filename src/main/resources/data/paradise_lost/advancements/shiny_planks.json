@@ -1,0 +1,35 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.paradise_lost.shiny_planks.title"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.shiny_planks.description"
+    },
+    "icon": {
+      "item": "paradise_lost:golden_oak_planks"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "craftplank": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["paradise_lost:golden_oak_planks"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "craftplank"
+    ]
+  ],
+  "parent": "paradise_lost:shiny_wood"
+}

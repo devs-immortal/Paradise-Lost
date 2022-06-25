@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "the_aether:block/golden_oak_planks",
-    "top": "the_aether:block/golden_oak_planks",
-    "side": "the_aether:block/golden_oak_planks"
-  }
-}

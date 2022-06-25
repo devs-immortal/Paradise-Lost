@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paradise_lost:amadrys_bundle"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:amadrys_bushel",
+    "count": 9
+  }
+}

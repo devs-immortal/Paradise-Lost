@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "paradise_lost:block/aether_portal_ew"
+    },
+    "axis=x": {
+      "model": "paradise_lost:block/aether_portal_ns"
+    }
+  }
+}

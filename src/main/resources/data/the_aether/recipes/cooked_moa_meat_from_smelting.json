@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "the_aether:moa_meat"
-  },
-  "result": "the_aether:moa_meat_cooked",
-  "experience": 0.3,
-  "cookingtime": 200
-}

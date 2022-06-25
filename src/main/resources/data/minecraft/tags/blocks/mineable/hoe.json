@@ -20,6 +20,6 @@
     "minecraft:sculk_sensor",
     "minecraft:moss_block",
     "minecraft:moss_carpet",
-    "#the_aether:mineable_by_hoe"
+    "#paradise_lost:mineable_by_hoe"
   ]
 }

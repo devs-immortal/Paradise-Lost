@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "paradise_lost:block/aether_grass_path"
+      },
+      {
+        "model": "paradise_lost:block/aether_grass_path",
+        "y": 90
+      },
+      {
+        "model": "paradise_lost:block/aether_grass_path",
+        "y": 180
+      },
+      {
+        "model": "paradise_lost:block/aether_grass_path",
+        "y": 270
+      }
+    ]
+  }
+}

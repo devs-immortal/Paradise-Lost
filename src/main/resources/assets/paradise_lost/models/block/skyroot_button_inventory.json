@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "paradise_lost:block/skyroot_planks"
+  }
+}

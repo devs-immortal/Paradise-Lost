@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "paradise_lost:skyroot_logs"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:skyroot_planks",
+    "count": 4
+  }
+}

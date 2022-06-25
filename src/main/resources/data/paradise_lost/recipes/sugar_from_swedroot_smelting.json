@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "paradise_lost:swedroot_pulp"
+  },
+  "result": "minecraft:sugar",
+  "experience": 0.1,
+  "cookingtime": 200
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paradise_lost:ambrosium_block"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:ambrosium_shard",
+    "count": 9
+  }
+}

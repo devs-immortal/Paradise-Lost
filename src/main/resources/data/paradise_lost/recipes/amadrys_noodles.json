@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "paradise_lost:amadrys_bushel"
+    },
+    {
+      "item": "paradise_lost:orange"
+    },
+    {
+      "tag": "paradise_lost:aether_mushrooms"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:amadrys_noodles",
+    "count": 1
+  }
+}

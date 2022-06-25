@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "paradise_lost:block/skyroot_wood"
+    },
+    "axis=z": {
+      "model": "paradise_lost:block/skyroot_wood",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "paradise_lost:block/skyroot_wood",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

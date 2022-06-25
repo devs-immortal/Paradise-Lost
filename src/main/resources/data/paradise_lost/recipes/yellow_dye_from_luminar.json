@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paradise_lost:luminar"
+    }
+  ],
+  "result": {
+    "item": "minecraft:yellow_dye"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "paradise_lost:block/skyroot_planks"
+  }
+}

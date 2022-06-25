@@ -10,14 +10,11 @@ import net.id.aether.util.MiscUtil;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.kyrptonaught.customportalapi.util.CPASoundEventData;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.registry.*;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.dimension.DimensionTypes;
 import net.minecraft.world.gen.FlatLevelGeneratorPreset;
 
 import java.io.IOException;
@@ -26,15 +23,15 @@ import static net.id.aether.Aether.MOD_ID;
 import static net.id.aether.Aether.locate;
 
 public class AetherDimension {
-    public static final RegistryKey<World> AETHER_WORLD_KEY = key(Registry.WORLD_KEY, MOD_ID);
-    public static final RegistryKey<DimensionType> DIMENSION_TYPE = key(Registry.DIMENSION_TYPE_KEY, MOD_ID);
-    public static final RegistryKey<DimensionOptions> AETHER_OPTIONS_KEY = key(Registry.DIMENSION_KEY, MOD_ID);
-    public static final RegistryKey<FlatLevelGeneratorPreset> SUPERFLAT_PRESET = key(Registry.FLAT_LEVEL_GENERATOR_PRESET_KEY, MOD_ID);
+    public static final RegistryKey<World> AETHER_WORLD_KEY = key(Registry.WORLD_KEY);
+    public static final RegistryKey<DimensionType> DIMENSION_TYPE = key(Registry.DIMENSION_TYPE_KEY);
+    public static final RegistryKey<DimensionOptions> AETHER_OPTIONS_KEY = key(Registry.DIMENSION_KEY);
+    public static final RegistryKey<FlatLevelGeneratorPreset> SUPERFLAT_PRESET = key(Registry.FLAT_LEVEL_GENERATOR_PRESET_KEY);
     
     private static DimensionType dimensionType;
     
-    private static <T> RegistryKey<T> key(RegistryKey<? extends Registry<T>> registry, String name) {
-        return RegistryKey.of(registry, locate(name));
+    private static <T> RegistryKey<T> key(RegistryKey<? extends Registry<T>> registry) {
+        return RegistryKey.of(registry, locate("the_aether"));
     }
     
     public static void init() {
@@ -47,7 +44,7 @@ public class AetherDimension {
         CustomPortalBuilder.beginPortal()
                 .frameBlock(Blocks.GLOWSTONE)
                 .customPortalBlock(AetherBlocks.BLUE_PORTAL)
-                .destDimID(locate(MOD_ID))
+                .destDimID(locate("the_aether"))
                 .tintColor(55, 89, 195)
                 .lightWithWater()
                 .onlyLightInOverworld()

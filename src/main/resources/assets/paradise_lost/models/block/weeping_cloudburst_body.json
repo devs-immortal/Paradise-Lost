@@ -1,0 +1,6 @@
+{
+  "parent": "paradise_lost:template/stellated_tint",
+  "textures": {
+    "face": "paradise_lost:block/weeping_cloudburst_body"
+  }
+}

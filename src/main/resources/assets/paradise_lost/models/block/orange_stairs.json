@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "paradise_lost:block/orange_planks",
+    "top": "paradise_lost:block/orange_planks",
+    "side": "paradise_lost:block/orange_planks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "paradise_lost:block/light_angelic_stone"
+  }
+}

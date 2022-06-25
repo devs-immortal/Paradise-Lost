@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "paradise_lost:block/crystal_pressure_plate"
+    },
+    "powered=true": {
+      "model": "paradise_lost:block/crystal_pressure_plate_down"
+    }
+  }
+}
