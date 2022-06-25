@@ -17,18 +17,18 @@ public enum AccessoryType {
     AccessoryType(String displayName, int durability, int damageReduced) {
         this.displayName = displayName;
         this.durability = durability;
-        this.damagedReduced = damageReduced;
+        damagedReduced = damageReduced;
     }
 
     public int getDurability() {
-        return this.durability;
+        return durability;
     }
 
     public int getDamageReduced() {
-        return this.damagedReduced;
+        return damagedReduced;
     }
 
     public String getDisplayName() {
-        return this.displayName;
+        return displayName;
     }
 }

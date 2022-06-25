@@ -46,10 +46,12 @@ public class OvergrownTrunkPlacer extends TrunkPlacer {
         this.overgrowthChance = overgrowthChance;
     }
 
+    @Override
     protected TrunkPlacerType<?> getType() {
         return ParadiseLostTreeHell.OVERGROWN_TRUNK;
     }
 
+    @Override
     public List<FoliagePlacer.TreeNode> generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, int height, BlockPos startPos, TreeFeatureConfig config) {
         setToDirt(world, replacer, random, startPos.down(), config);
 

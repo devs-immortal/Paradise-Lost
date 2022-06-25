@@ -62,12 +62,8 @@ public class GroundcoverFeature extends Feature<GroundcoverFeatureConfig> {
                 return;
             }
 
-            boolean add = false;
-
-            if(pos.getManhattanDistance(center) == radius && random.nextFloat() < 0.1F) {
-                add = true;
-            }
-
+            boolean add = pos.getManhattanDistance(center) == radius && random.nextFloat() < 0.1F;
+    
             //if(world.isAir(pos) || world.isWater(pos) || !world.isWater(pos.up()) || !world.isAir(pos.up())) {
             //    boolean fail = true;
             //    int tries = 5;

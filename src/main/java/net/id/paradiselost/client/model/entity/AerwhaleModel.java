@@ -26,13 +26,13 @@ public class AerwhaleModel extends EntityModel<AerwhaleEntity> {
     private final ModelPart r_fin;
 
     public AerwhaleModel(ModelPart root) {
-        this.aerwhale_head = root.getChild("aerwhale_head");
-        this.r_fin = this.aerwhale_head.getChild("r_fin");
-        this.l_fin = this.aerwhale_head.getChild("l_fin");
-        this.aerwhale_body1 = this.aerwhale_head.getChild("aerwhale_body1");
-        this.aerwhale_body2 = this.aerwhale_body1.getChild("aerwhale_body2");
-        this.r_tail = this.aerwhale_body2.getChild("r_tail");
-        this.l_tail = this.aerwhale_body2.getChild("l_tail");
+        aerwhale_head = root.getChild("aerwhale_head");
+        r_fin = aerwhale_head.getChild("r_fin");
+        l_fin = aerwhale_head.getChild("l_fin");
+        aerwhale_body1 = aerwhale_head.getChild("aerwhale_body1");
+        aerwhale_body2 = aerwhale_body1.getChild("aerwhale_body2");
+        r_tail = aerwhale_body2.getChild("r_tail");
+        l_tail = aerwhale_body2.getChild("l_tail");
     }
 
     public static TexturedModelData getTexturedModelData() {

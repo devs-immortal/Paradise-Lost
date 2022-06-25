@@ -20,6 +20,7 @@ public class ParadiseLostPortalBlock extends CustomPortalBlock {
         super(settings);
     }
 
+    @Override
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if(!(MinecraftClient.getInstance().player instanceof EntityInCustomPortal entity && entity.didTeleport()) && random.nextInt(200) == 0){

@@ -32,7 +32,7 @@ public class ChestMimicRenderer extends MobEntityRenderer<ChestMimicEntity, Ches
         //GlStateManager.rotatef(180.0F - entity.getPitch(), 0.0F, 1.0F, 0.0F);
         matrices.scale(-1.0F, -1.0F, 1.0F);
 
-        this.model.setAngles(entity, 0, 0F, 0.0F, 0.0F, 0.0F);
+        model.setAngles(entity, 0, 0F, 0.0F, 0.0F, 0.0F);
 
         // TODO: FIXME Please!
         /*Calendar calendar = Calendar.getInstance();

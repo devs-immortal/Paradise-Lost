@@ -11,7 +11,6 @@ public class ParadiseLostCommands {
     public static void init() {
         register(MoaEggCommand::register);
         register(MoaStatCommand::register);
-        register(ConditionCommand::register);
         register(FloatingBlockCommand::register);
         register(LoreCommand::register);
         register(LUVCommand::register);

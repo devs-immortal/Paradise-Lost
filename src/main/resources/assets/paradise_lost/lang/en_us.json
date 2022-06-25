@@ -84,6 +84,8 @@
   "block.paradise_lost.carved_stone_eye": "Carved Stone Eye",
   "block.paradise_lost.carved_stone_eye_lit": "Lit Carved Stone Eye",
 
+  "block.paradise_list.ambrosium_campfire": "Ambrosium Campfire",
+
   "block.paradise_lost.skyroot_sapling": "Skyroot Sapling",
   "block.paradise_lost.skyroot_log": "Skyroot Log",
   "block.paradise_lost.mottled_skyroot_log": "Mottled Skyroot Log",
@@ -221,10 +223,16 @@
   "block.paradise_lost.swedroot_spread": "Swedroot Spread",
 
   "block.paradise_lost.rootcap": "Rootcap",
+  "block.paradise_lost.brown_sporecap": "Brown Sporecap",
+  "block.paradise_lost.pink_sporecap": "Pink Sporecap",
 
   "block.paradise_lost.flaxweave_cushion" : "Flaxweave Cushion",
 
   "block.paradise_lost.blueberry_bush": "Blueberry Bush",
+
+  "block.paradise_lost.halflight_cheesecake": "Halflight Cheesecake",
+
+  "block.paradise_lost.amadrys_bundle": "Amadrys Bundle",
 
   "block.paradise_lost.ancient_flower": "Ancient Flower",
   "block.paradise_lost.ataraxia": "Ataraxia",
@@ -237,6 +245,7 @@
   "block.paradise_lost.ambrosium_ore": "Ambrosium Ore",
   "block.paradise_lost.zanite_ore": "Zanite Ore",
   "block.paradise_lost.gravitite_ore": "Gravitite Ore",
+  "block.paradise_lost.ambrosium_block": "Block of Ambrosium",
   "block.paradise_lost.zanite_block": "Block of Zanite",
   "block.paradise_lost.block_of_gravitite": "Block of Gravitite",
 
@@ -369,6 +378,9 @@
   "item.paradise_lost.orange": "Orange",
   "item.paradise_lost.white_apple": "White Apple",
   "item.paradise_lost.amadrys_bushel": "Amadrys Bushel",
+  "item.paradise_lost.amadrys_noodles": "Amadrys Noodle Soup",
+  "item.paradise_lost.amadrys_bread": "Amadrys Loaf",
+  "item.paradise_lost.amadrys_bread_glazed": "Glazed Amadrys Loaf",
   "item.paradise_lost.swedroot": "Swedroot",
   "item.paradise_lost.flaxseed" : "Flaxseed",
   "item.paradise_lost.blue_gummy_swet": "Blue Gummy Swet",
@@ -471,15 +483,6 @@
   "commands.paradise_lost.moastat.hunger": "Hunger",
   "commands.paradise_lost.moastat.print": "%1$s = %2$s",
   "commands.paradise_lost.moastat.set": "Set %1$s to %2$s",
-  "commands.paradise_lost.condition.failure.query": "Entity is immune to %1$s",
-  "commands.paradise_lost.condition.failure.assign": "...you tried setting a constant condition, didn't you?",
-  "commands.paradise_lost.condition.failure.get_condition" : "No condition manager found registered for entry: %1$s",
-  "commands.paradise_lost.condition.failure.get_persistence" : "%1$s is not a valid persistence",
-  "commands.paradise_lost.condition.failure.get_entity" : "No entity was specified",
-  "commands.paradise_lost.condition.success.query": "%1$s: %2$s - %3$s",
-  "commands.paradise_lost.condition.success.assign": "%1$s is now: %2$s - %3$s",
-  "commands.paradise_lost.condition.success.clear" : "Successfully cleared condition(s)",
-  "commands.paradise_lost.condition.success.clear.individual": "Cleared %1$s condition(s) from %2$s",
   "commands.paradise_lost.gravitate.failure" : "Couldn't float the block(s)",
   "commands.paradise_lost.gravitate.success" : "Successfully floated the block(s)",
   "commands.paradise_lost.LUV.success.query" : "LUV%1$s",
@@ -500,16 +503,6 @@
 
   "effect.paradise_lost.simmering": "Simmering",
 
-
-  "condition.persistence.temporary": "Passing",
-  "condition.persistence.chronic": "Chronic",
-  "condition.persistence.constant": "Lingering",
-  "condition.severity.negligible": "Negligible",
-  "condition.severity.mild": "Mild",
-  "condition.severity.acute": "Acute",
-  "condition.severity.dire": "Dire",
-  "condition.severity.extreme": "Extreme",
-  "condition.condition.venom": "Venom",
 
   "subtitles.paradise_lost.block.blueberry_bush.pick_blueberries": "Blueberries pop",
 

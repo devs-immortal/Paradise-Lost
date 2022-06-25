@@ -14,10 +14,10 @@ public class ChestMimicModel extends EntityModel<ChestMimicEntity> {
     public final ModelPart box, boxLid, leftLeg, rightLeg;
 
     public ChestMimicModel(ModelPart root) {
-        this.box = root.getChild("box");
-        this.boxLid = root.getChild("boxLid");
-        this.leftLeg = root.getChild("leftLeg");
-        this.rightLeg = root.getChild("rightLeg");
+        box = root.getChild("box");
+        boxLid = root.getChild("boxLid");
+        leftLeg = root.getChild("leftLeg");
+        rightLeg = root.getChild("rightLeg");
     }
 
     public static TexturedModelData getTexturedModelData() {
@@ -33,9 +33,9 @@ public class ChestMimicModel extends EntityModel<ChestMimicEntity> {
 
     @Override
     public void setAngles(ChestMimicEntity entityIn, float f, float f1, float f2, float f3, float f4) {
-        this.boxLid.pivotX = 3.14159265F - entityIn.mouth;
-        this.rightLeg.pivotX = entityIn.legs;
-        this.leftLeg.pivotX = -entityIn.legs;
+        boxLid.pivotX = 3.14159265F - entityIn.mouth;
+        rightLeg.pivotX = entityIn.legs;
+        leftLeg.pivotX = -entityIn.legs;
     }
 
     @Override

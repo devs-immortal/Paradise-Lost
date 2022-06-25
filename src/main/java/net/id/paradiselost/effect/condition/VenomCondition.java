@@ -1,5 +1,7 @@
 package net.id.paradiselost.effect.condition;
 
+import net.id.incubus_core.condition.api.Condition;
+import net.id.incubus_core.condition.api.Severity;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.tag.ParadiseLostEntityTypeTags;
 import net.minecraft.client.MinecraftClient;

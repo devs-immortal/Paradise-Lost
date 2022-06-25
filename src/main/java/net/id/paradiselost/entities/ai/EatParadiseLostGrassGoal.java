@@ -21,73 +21,73 @@ public class EatParadiseLostGrassGoal extends Goal {
     private int timer;
 
     public EatParadiseLostGrassGoal(MobEntity entity) {
-        this.owner = entity;
-        this.world = entity.world;
+        owner = entity;
+        world = entity.world;
 
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK, Goal.Control.JUMP));
+        setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK, Goal.Control.JUMP));
     }
 
     @Override
     public boolean canStart() {
-        if (this.owner.getRandom().nextInt(this.owner.isBaby() ? 50 : 1000) != 0) {
+        if (owner.getRandom().nextInt(owner.isBaby() ? 50 : 1000) != 0) {
             return false;
         } else {
-            BlockPos pos = new BlockPos(this.owner.getBlockPos());
+            BlockPos pos = new BlockPos(owner.getBlockPos());
 
-            if (grass.test(this.world.getBlockState(pos))) {
+            if (grass.test(world.getBlockState(pos))) {
                 return true;
             } else {
-                return this.world.getBlockState(pos.down()).getBlock() == ParadiseLostBlocks.GRASS_BLOCK;
+                return world.getBlockState(pos.down()).getBlock() == ParadiseLostBlocks.GRASS_BLOCK;
             }
         }
     }
 
     @Override
     public void start() {
-        this.timer = 40;
-        this.world.sendEntityStatus(this.owner, (byte) 10);
-        this.owner.getNavigation().stop();
+        timer = 40;
+        world.sendEntityStatus(owner, (byte) 10);
+        owner.getNavigation().stop();
     }
 
     @Override
     public void stop() {
-        this.timer = 0;
+        timer = 0;
     }
 
     @Override
     public boolean shouldContinue() {
-        return this.timer > 0;
+        return timer > 0;
     }
 
     @Override
     public void tick() {
-        this.timer = Math.max(0, this.timer - 1);
+        timer = Math.max(0, timer - 1);
 
-        if (this.timer == 4) {
-            BlockPos pos = new BlockPos(this.owner.getBlockPos());
+        if (timer == 4) {
+            BlockPos pos = new BlockPos(owner.getBlockPos());
 
-            if (grass.test(this.world.getBlockState(pos))) {
-                if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-                    this.world.breakBlock(pos, false);
+            if (grass.test(world.getBlockState(pos))) {
+                if (world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+                    world.breakBlock(pos, false);
                 }
 
-                this.owner.onEatingGrass();
+                owner.onEatingGrass();
             } else {
                 BlockPos downPos = pos.down();
 
-                if (this.world.getBlockState(downPos).getBlock() == ParadiseLostBlocks.GRASS_BLOCK) {
-                    if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-                        this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(ParadiseLostBlocks.GRASS_BLOCK.getDefaultState()));
-                        this.world.setBlockState(downPos, ParadiseLostBlocks.DIRT.getDefaultState(), Block.NOTIFY_LISTENERS);
+                if (world.getBlockState(downPos).getBlock() == ParadiseLostBlocks.GRASS_BLOCK) {
+                    if (world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+                        world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(ParadiseLostBlocks.GRASS_BLOCK.getDefaultState()));
+                        world.setBlockState(downPos, ParadiseLostBlocks.DIRT.getDefaultState(), Block.NOTIFY_LISTENERS);
                     }
 
-                    this.owner.onEatingGrass();
+                    owner.onEatingGrass();
                 }
             }
         }
     }
 
     public int getTimer() {
-        return this.timer;
+        return timer;
     }
 }

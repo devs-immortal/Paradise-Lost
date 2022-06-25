@@ -1,9 +1,9 @@
 package net.id.paradiselost.blocks.natural.plant;
 
-import net.id.paradiselost.api.ConditionAPI;
-import net.id.paradiselost.component.ConditionManager;
+import net.id.incubus_core.condition.api.ConditionAPI;
+import net.id.incubus_core.condition.api.Persistence;
+import net.id.incubus_core.condition.base.ConditionManager;
 import net.id.paradiselost.effect.condition.Conditions;
-import net.id.paradiselost.effect.condition.Persistence;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.block.Block;
@@ -38,6 +38,7 @@ public class LichenBlock extends FallingBlock {
         setDefaultState(getDefaultState().with(ALLOW_FALL, false));
     }
 
+    @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         entity.fallDistance = 0;
         if(venomous) {
@@ -99,7 +100,7 @@ public class LichenBlock extends FallingBlock {
                 return;
             }
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, pos, state);
-            this.configureFallingBlockEntity(fallingBlockEntity);
+            configureFallingBlockEntity(fallingBlockEntity);
 
             BlockPos.iterateOutwards(pos, 1, 0, 1).forEach(checkPos -> {
                 var checkState = world.getBlockState(checkPos);

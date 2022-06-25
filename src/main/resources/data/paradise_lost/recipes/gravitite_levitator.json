@@ -7,16 +7,16 @@
   ],
   "key": {
     "G": {
-      "item": "paradise_lost:gravitite_gemstone"
+      "item": "the_aether:gravitite_gemstone"
     },
     "S": {
-      "item": "paradise_lost:holystone"
+      "item": "the_aether:holystone_brick"
     },
     "W": {
       "tag": "minecraft:planks"
     }
   },
   "result": {
-    "item": "paradise_lost:gravitite_levitator"
+    "item": "the_aether:gravitite_levitator"
   }
 }

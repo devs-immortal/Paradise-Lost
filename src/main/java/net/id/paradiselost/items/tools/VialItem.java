@@ -39,7 +39,7 @@ public class VialItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        BlockHitResult hitResult = raycast(world, user, this.fluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
+        BlockHitResult hitResult = raycast(world, user, fluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
         if (hitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos blockPos = hitResult.getBlockPos();
             Direction direction = hitResult.getSide();
@@ -47,7 +47,7 @@ public class VialItem extends Item {
             if (world.canPlayerModifyAt(user, blockPos) && user.canPlaceOn(blockPos2, direction, itemStack)) {
                 BlockState blockState;
                 // Originally, vials couldn't pick up dense aercloud. If this was intended, remove this if statement
-                if (this.fluid == Fluids.EMPTY) {
+                if (fluid == Fluids.EMPTY) {
                     blockState = world.getBlockState(blockPos);
                     if (blockState.getBlock() instanceof FluidDrainable && blockState.getFluidState().getFluid().equals(ParadiseLostFluids.DENSE_AERCLOUD)) {
                         FluidDrainable fluidDrainable = (FluidDrainable) blockState.getBlock();
@@ -63,7 +63,7 @@ public class VialItem extends Item {
                     return TypedActionResult.fail(itemStack);
                 } else {
                     blockState = world.getBlockState(blockPos);
-                    BlockPos blockPos3 = blockState.getBlock() instanceof FluidFillable && this.fluid == ParadiseLostFluids.DENSE_AERCLOUD ? blockPos : blockPos2;
+                    BlockPos blockPos3 = blockState.getBlock() instanceof FluidFillable && fluid == ParadiseLostFluids.DENSE_AERCLOUD ? blockPos : blockPos2;
                     if (placeFluid(user, world, blockPos3, hitResult)) {
                         return TypedActionResult.success(getEmptiedStack(itemStack, user), world.isClient());
                     } else {
@@ -78,17 +78,17 @@ public class VialItem extends Item {
     }
 
     private boolean placeFluid(PlayerEntity player, World world, BlockPos pos, BlockHitResult hitResult) {
-        if (!(this.fluid instanceof FlowableFluid)) {
+        if (!(fluid instanceof FlowableFluid)) {
             return false;
         } else {
             BlockState blockState = world.getBlockState(pos);
             Block block = blockState.getBlock();
             Material material = blockState.getMaterial();
-            boolean bl = blockState.canBucketPlace(this.fluid);
-            boolean bl2 = blockState.isAir() || bl || block instanceof FluidFillable && ((FluidFillable) block).canFillWithFluid(world, pos, blockState, this.fluid);
+            boolean bl = blockState.canBucketPlace(fluid);
+            boolean bl2 = blockState.isAir() || bl || block instanceof FluidFillable && ((FluidFillable) block).canFillWithFluid(world, pos, blockState, fluid);
             if (!bl2) {
-                return hitResult != null && this.placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null);
-            } else if (world.getDimension().ultrawarm() && this.fluid.equals(ParadiseLostFluids.DENSE_AERCLOUD)) {
+                return hitResult != null && placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null);
+            } else if (world.getDimension().ultrawarm() && fluid.equals(ParadiseLostFluids.DENSE_AERCLOUD)) {
                 int i = pos.getX();
                 int j = pos.getY();
                 int k = pos.getZ();
@@ -99,8 +99,8 @@ public class VialItem extends Item {
                 }
 
                 return true;
-            } else if (block instanceof FluidFillable && this.fluid == ParadiseLostFluids.DENSE_AERCLOUD) {
-                ((FluidFillable) block).tryFillWithFluid(world, pos, blockState, ((FlowableFluid) this.fluid).getStill(false));
+            } else if (block instanceof FluidFillable && fluid == ParadiseLostFluids.DENSE_AERCLOUD) {
+                ((FluidFillable) block).tryFillWithFluid(world, pos, blockState, ((FlowableFluid) fluid).getStill(false));
 //                this.playEmptyingSound(player, world, pos);
                 return true;
             } else {
@@ -109,7 +109,7 @@ public class VialItem extends Item {
                 }
 
                 //                    this.playEmptyingSound(player, world, pos);
-                return world.setBlockState(pos, this.fluid.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD) || blockState.getFluidState().isStill();
+                return world.setBlockState(pos, fluid.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD) || blockState.getFluidState().isStill();
             }
         }
     }

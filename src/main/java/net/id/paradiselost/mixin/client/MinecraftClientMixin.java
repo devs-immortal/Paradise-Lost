@@ -51,7 +51,7 @@ public abstract class MinecraftClientMixin {
     private void getMusicType(CallbackInfoReturnable<MusicSound> cir){
         var world = player.world;
         if(world.getRegistryKey().equals(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY)){
-            cir.setReturnValue(world.getBiomeAccess().getBiomeForNoiseGen(this.player.getBlockPos()).value().getMusic().orElse(ParadiseLostSoundEvents.Music.PARADISE_LOST));
+            cir.setReturnValue(world.getBiomeAccess().getBiomeForNoiseGen(player.getBlockPos()).value().getMusic().orElse(ParadiseLostSoundEvents.Music.PARADISE_LOST));
         }
     }
 }

@@ -22,14 +22,14 @@ public class DartShooterItem extends Item {
     }
 
     protected ItemStack findDartStack(PlayerEntity playerIn) {
-        if (playerIn.getStackInHand(Hand.OFF_HAND).getItem() == this.ammo) {
+        if (playerIn.getStackInHand(Hand.OFF_HAND).getItem() == ammo) {
             return playerIn.getStackInHand(Hand.OFF_HAND);
-        } else if (playerIn.getStackInHand(Hand.MAIN_HAND).getItem() == this.ammo) {
+        } else if (playerIn.getStackInHand(Hand.MAIN_HAND).getItem() == ammo) {
             return playerIn.getStackInHand(Hand.MAIN_HAND);
         } else {
             for (int index = 0; index < playerIn.getInventory().size(); ++index) {
                 ItemStack stack = playerIn.getInventory().getStack(index);
-                if (stack.getItem() == this.ammo) {
+                if (stack.getItem() == ammo) {
                     return stack;
                 }
             }
@@ -42,13 +42,13 @@ public class DartShooterItem extends Item {
         ItemStack heldItem = playerIn.getStackInHand(handIn);
         boolean bypassDartCheck = playerIn.isCreative() || EnchantmentHelper.getLevel(Enchantments.INFINITY, heldItem) > 0;
 
-        ItemStack stack = this.findDartStack(playerIn);
+        ItemStack stack = findDartStack(playerIn);
         if (!stack.isEmpty() || bypassDartCheck) {
             if (stack.isEmpty()) {
-                stack = new ItemStack(this.ammo);
+                stack = new ItemStack(ammo);
             }
 
-            PersistentProjectileEntity projectile = this.ammo.createDart(worldIn, heldItem, playerIn);
+            PersistentProjectileEntity projectile = ammo.createDart(worldIn, heldItem, playerIn);
 
             if (!worldIn.isClient) {
                 projectile.setVelocity(playerIn, playerIn.getPitch(), playerIn.getYaw(), 0.0F, 1.0F, 1.0F);

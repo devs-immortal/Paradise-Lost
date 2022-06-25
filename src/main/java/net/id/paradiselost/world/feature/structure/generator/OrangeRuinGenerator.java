@@ -44,21 +44,24 @@ public class OrangeRuinGenerator {
             return (new StructurePlacementData()).setRotation(rotation).setMirror(BlockMirror.NONE).addProcessor(BlockIgnoreStructureProcessor.IGNORE_AIR_AND_STRUCTURE_BLOCKS);
         }
 
+        @Override
         protected void writeNbt(StructureContext ctx, NbtCompound nbt) {
             super.writeNbt(ctx, nbt);
-            nbt.putString("Rot", this.placementData.getRotation().name());
+            nbt.putString("Rot", placementData.getRotation().name());
         }
 
+        @Override
         protected void handleMetadata(String metadata, BlockPos pos, ServerWorldAccess world, Random random, BlockBox boundingBox) {
         }
 
+        @Override
         public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             if (this.pos.getY() > 2) {
                 if (!shifted) {
                     this.pos = this.pos.down(1);
                     shifted = true;
                 }
-                boundingBox.encompass(this.template.calculateBoundingBox(this.placementData, this.pos));
+                boundingBox.encompass(template.calculateBoundingBox(placementData, this.pos));
                 super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
             }
         }

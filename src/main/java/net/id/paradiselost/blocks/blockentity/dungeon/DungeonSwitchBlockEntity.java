@@ -67,8 +67,8 @@ public class DungeonSwitchBlockEntity extends BlockEntity implements GameEventLi
     @Override
     public boolean listen(ServerWorld world, GameEvent.Message event) {
         if (event.getEvent() == GameEvent.EXPLODE) {
-            if (world != null && world.getBlockState(this.getPos()).getBlock() instanceof DungeonSwitchBlock dungeonSwitchBlock) {
-                dungeonSwitchBlock.onExplosionEvent(world, this.getPos());
+            if (world != null && world.getBlockState(getPos()).getBlock() instanceof DungeonSwitchBlock dungeonSwitchBlock) {
+                dungeonSwitchBlock.onExplosionEvent(world, getPos());
             }
         }
         return false;

@@ -1,9 +1,9 @@
 package net.id.paradiselost.blocks.natural.plant;
 
-import net.id.paradiselost.api.ConditionAPI;
-import net.id.paradiselost.component.ConditionManager;
+import net.id.incubus_core.condition.api.ConditionAPI;
+import net.id.incubus_core.condition.api.Persistence;
+import net.id.incubus_core.condition.base.ConditionManager;
 import net.id.paradiselost.effect.condition.Conditions;
-import net.id.paradiselost.effect.condition.Persistence;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -28,6 +28,7 @@ public class LichenPileBlock extends FallingBlock implements Fertilizable {
         this.venomous = venomous;
     }
 
+    @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if(venomous) {
             entity.slowMovement(state, new Vec3d(0.925D, 1D, 0.925D));

@@ -1,44 +1,68 @@
 package net.id.paradiselost.entities.passive.moa;
 
-import com.mojang.datafixers.util.Function4;
 import net.id.paradiselost.ParadiseLost;
-import net.id.paradiselost.component.MoaGenes;
-import net.id.incubus_core.util.RegistryQueue.Action;
+import net.id.paradiselost.api.MoaAPI;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
+
+import java.util.function.Predicate;
 
 import static net.id.paradiselost.api.MoaAPI.*;
 import static net.id.paradiselost.api.MoaAPI.SpawnStatWeighting.*;
 import static net.id.paradiselost.entities.passive.moa.MoaAttributes.*;
 import static net.id.paradiselost.world.dimension.ParadiseLostBiomes.*;
 
+/**
+ * An example class demonstrating how to use the Moa API.
+ * I say demonstration, but this is actually how we use it. It's more like a lead-by-example.
+ * <br> If you're viewing this in the javadocs preview, you're going to want to pull up
+ * the actual code to get a look at things.
+ * @author Jack Papel
+ */
 public class MoaRaces {
-    private static Action<MoaRace> biome(RegistryKey<Biome> biome, int weight) { return (id, race) -> registerBiomeSpawnWeighting(biome, race, weight); }
-    private static Action<MoaRace> breeding(MoaRace parentA, MoaRace parentB, Function4<MoaGenes, MoaGenes, World, BlockPos, Boolean> predicate) { return (id, race) -> registerBreedingPredicate(race, parentA, parentB, predicate); }
-    private static Action<MoaRace> breeding(MoaRace parentA, MoaRace parentB, float chance){ return (id, race) -> registerBreedingChance(race, parentA, parentB, chance); }
-
-    public static final MoaRace HIGHLANDS_BLUE = addRace("highlands_blue", new MoaRace(GROUND_SPEED, SPEED), biome(HIGHLANDS_PLAINS_KEY, 50), biome(HIGHLANDS_FOREST_KEY, 50));
-    public static final MoaRace GOLDENROD = addRace("goldenrod", new MoaRace(JUMPING_STRENGTH, ENDURANCE), biome(HIGHLANDS_PLAINS_KEY, 10), biome(HIGHLANDS_FOREST_KEY, 35), biome(WISTERIA_WOODS_KEY, 49));
-    public static final MoaRace MINTGRASS = addRace("mintgrass", new MoaRace(GLIDING_SPEED, SPEED), biome(HIGHLANDS_PLAINS_KEY, 40), biome(HIGHLANDS_THICKET_KEY, 45));
-    public static final MoaRace STRAWBERRY_WISTAR = addRace("strawberry_wistar", new MoaRace(GLIDING_DECAY, SPEED), biome(WISTERIA_WOODS_KEY, 49));
-    public static final MoaRace TANGERINE = addRace("tangerine", new MoaRace(JUMPING_STRENGTH, SPEED), biome(HIGHLANDS_FOREST_KEY, 15), biome(HIGHLANDS_THICKET_KEY, 50), breeding(GOLDENROD, STRAWBERRY_WISTAR, 0.5F));
-    public static final MoaRace FOXTROT = addRace("foxtrot", new MoaRace(DROP_MULTIPLIER, TANK), biome(HIGHLANDS_THICKET_KEY, 5), breeding(TANGERINE, GOLDENROD, 0.2F));
-    public static final MoaRace SCARLET = addRace("scarlet", new MoaRace(GLIDING_SPEED, ENDURANCE), biome(WISTERIA_WOODS_KEY, 2), breeding(STRAWBERRY_WISTAR, HIGHLANDS_BLUE, 0.075F));
-    public static final MoaRace REDHOOD = addRace("redhood", new MoaRace(MAX_HEALTH, TANK), breeding(FOXTROT, HIGHLANDS_BLUE, 0.1F));
-    public static final MoaRace MOONSTRUCK = addRace("moonstruck", new MoaRace(GLIDING_SPEED, SPEED, true, true, ParticleTypes.GLOW), breeding(REDHOOD, STRAWBERRY_WISTAR, ((moaGenes, moaGenes2, world, pos) -> world.isNight() && world.getRandom().nextFloat() <= 0.25F)));
-
-    @SafeVarargs
-    private static MoaRace addRace(String name, MoaRace race, Action<MoaRace>... additionalActions){
-        for(var action : additionalActions){
-            action.accept(ParadiseLost.locate(name), race);
-        }
-        return register(ParadiseLost.locate(name), race);
+    public static final MoaRace HIGHLANDS_BLUE = register("highlands_blue", new MoaRace(GROUND_SPEED, SPEED));
+    public static final MoaRace GOLDENROD = register("goldenrod", new MoaRace(JUMPING_STRENGTH, ENDURANCE));
+    public static final MoaRace MINTGRASS = register("mintgrass", new MoaRace(GLIDING_SPEED, SPEED));
+    public static final MoaRace STRAWBERRY_WISTAR = register("strawberry_wistar", new MoaRace(GLIDING_DECAY, SPEED));
+    public static final MoaRace TANGERINE = register("tangerine", new MoaRace(JUMPING_STRENGTH, SPEED));
+    public static final MoaRace FOXTROT = register("foxtrot", new MoaRace(DROP_MULTIPLIER, TANK));
+    public static final MoaRace SCARLET = register("scarlet", new MoaRace(GLIDING_SPEED, ENDURANCE));
+    public static final MoaRace REDHOOD = register("redhood", new MoaRace(MAX_HEALTH, TANK));
+    public static final MoaRace MOONSTRUCK = register("moonstruck", new MoaRace(GLIDING_SPEED, SPEED, true, true, ParticleTypes.GLOW));
+    
+    private static MoaRace register(String name, MoaRace race){
+        return MoaAPI.register(ParadiseLost.locate(name), race);
     }
-
+    
+    // Register breeding and spawning.
     public static void init(){
-        // empty method, just like my heart...
+        registerSpawning(HIGHLANDS_BLUE, 50, HIGHLANDS_PLAINS_KEY);
+        registerSpawning(HIGHLANDS_BLUE, 50, HIGHLANDS_FOREST_KEY);
+    
+        registerSpawning(GOLDENROD, 10, HIGHLANDS_PLAINS_KEY);
+        registerSpawning(GOLDENROD, 25, HIGHLANDS_FOREST_KEY);
+        registerSpawning(GOLDENROD, 49, WISTERIA_WOODS_KEY);
+    
+        registerSpawning(MINTGRASS, 40, HIGHLANDS_PLAINS_KEY);
+        registerSpawning(MINTGRASS, 45, HIGHLANDS_THICKET_KEY);
+    
+        registerSpawning(STRAWBERRY_WISTAR, 49, WISTERIA_WOODS_KEY);
+    
+        registerSpawning(TANGERINE, 15, HIGHLANDS_FOREST_KEY);
+        registerSpawning(TANGERINE, 50, HIGHLANDS_THICKET_KEY);
+        registerBreeding(TANGERINE, 0.5F, GOLDENROD, STRAWBERRY_WISTAR);
+    
+        registerSpawning(FOXTROT, 5, HIGHLANDS_THICKET_KEY);
+        registerBreeding(FOXTROT, 0.2F, TANGERINE, GOLDENROD);
+    
+        registerSpawning(SCARLET, 2, WISTERIA_WOODS_KEY);
+        registerBreeding(SCARLET, 0.075F, STRAWBERRY_WISTAR, HIGHLANDS_BLUE);
+    
+        registerSpawning(REDHOOD, 5, HIGHLANDS_THICKET_KEY);
+        registerBreeding(REDHOOD, 0.1F, FOXTROT, HIGHLANDS_BLUE);
+    
+        Predicate<MoaBreedingContext> moonstruckRequirements = ctx -> ctx.world().isNight() && ctx.world().getRandom().nextFloat() <= 0.25F;
+    
+        registerSpawning(MOONSTRUCK, 5, HIGHLANDS_THICKET_KEY);
+        registerBreeding(MOONSTRUCK, moonstruckRequirements, REDHOOD, STRAWBERRY_WISTAR);
     }
 }

@@ -18,6 +18,7 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
         super(codec);
     }
 
+    @Override
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         int checkSize = 4;
         for (int x = -checkSize; x >= checkSize; x++) {
@@ -37,20 +38,20 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
                 for (int z = MathHelper.floor(-f); z <= MathHelper.ceil(f); ++z) {
                     if ((float) (x * x + z * z) <= (f + 1.0F) * (f + 1.0F)) {
                         if (y == 0) {
-                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.GRASS_BLOCK.getDefaultState());
+                            setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.GRASS_BLOCK.getDefaultState());
                             if (context.getRandom().nextInt(6) == 0) {
-                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y + 1, z), ParadiseLostBlocks.GRASS.getDefaultState());
+                                setBlockState(context.getWorld(), context.getOrigin().add(x, y + 1, z), ParadiseLostBlocks.GRASS.getDefaultState());
                             }
                         } else if (y == -1) {
-                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.DIRT.getDefaultState());
+                            setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.DIRT.getDefaultState());
                         } else if (y == -2) {
                             if (context.getRandom().nextBoolean()) {
-                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.DIRT.getDefaultState());
+                                setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.DIRT.getDefaultState());
                             } else {
-                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.HOLYSTONE.getDefaultState());
+                                setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.HOLYSTONE.getDefaultState());
                             }
                         } else {
-                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.HOLYSTONE.getDefaultState());
+                            setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.HOLYSTONE.getDefaultState());
                         }
 
                     }
@@ -61,11 +62,11 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
         int[] leafRadii = new int[]{0, 3, 2, 1, 2, 1, 0, 1};
 
         for (int y = 1; y < 9; y++) {
-            this.generateTreeCircle(context.getWorld(), context.getRandom(), context.getOrigin().up(y), leafRadii[y - 1], ParadiseLostBlocks.CRYSTAL_LEAVES.getDefaultState().with(ParadiseLostLeavesBlock.DISTANCE, 1));
-            this.setBlockState(context.getWorld(), context.getOrigin().up(y), ParadiseLostBlocks.CRYSTAL_LOG.getDefaultState());
+            generateTreeCircle(context.getWorld(), context.getRandom(), context.getOrigin().up(y), leafRadii[y - 1], ParadiseLostBlocks.CRYSTAL_LEAVES.getDefaultState().with(ParadiseLostLeavesBlock.DISTANCE, 1));
+            setBlockState(context.getWorld(), context.getOrigin().up(y), ParadiseLostBlocks.CRYSTAL_LOG.getDefaultState());
         }
 
-        this.setBlockState(context.getWorld(), context.getOrigin().up(9), ParadiseLostBlocks.CRYSTAL_LEAVES.getDefaultState().with(ParadiseLostLeavesBlock.DISTANCE, 1));
+        setBlockState(context.getWorld(), context.getOrigin().up(9), ParadiseLostBlocks.CRYSTAL_LEAVES.getDefaultState().with(ParadiseLostLeavesBlock.DISTANCE, 1));
 
         return true;
     }
@@ -78,7 +79,7 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
             for (int z = -radius; z <= radius; z++) {
                 if (!(Math.abs(x) == radius && Math.abs(z) == radius) || (x == 0 && z == 0)) {
                     if (structureWorldAccess.getBlockState(blockPos.add(x, 0, z)).isOf(Blocks.AIR)) {
-                        this.setBlockState(structureWorldAccess, blockPos.add(x, 0, z), ParadiseLostBlocks.CRYSTAL_LEAVES.getDefaultState().with(ParadiseLostLeavesBlock.DISTANCE, 1));
+                        setBlockState(structureWorldAccess, blockPos.add(x, 0, z), ParadiseLostBlocks.CRYSTAL_LEAVES.getDefaultState().with(ParadiseLostLeavesBlock.DISTANCE, 1));
                     }
                 }
             }

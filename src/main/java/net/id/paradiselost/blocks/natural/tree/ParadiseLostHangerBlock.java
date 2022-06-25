@@ -28,7 +28,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
 
     public ParadiseLostHangerBlock(Settings settings) {
         super(settings.offsetType(OffsetType.XZ));
-        this.setDefaultState((this.stateManager.getDefaultState()).with(TIP, true));
+        setDefaultState((stateManager.getDefaultState()).with(TIP, true));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return this.canPlantOnTop(world.getBlockState(pos.up()), world, pos.up());
+        return canPlantOnTop(world.getBlockState(pos.up()), world, pos.up());
     }
 
     @Override
@@ -53,9 +53,9 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
         if (!state.canPlaceAt(world, pos)) {
             return Blocks.AIR.getDefaultState();
         } else if (!(world.getBlockState(pos.down()).getBlock() instanceof ParadiseLostHangerBlock)) {
-            return this.getDefaultState().with(TIP, true);
+            return getDefaultState().with(TIP, true);
         } else {
-            return this.getDefaultState().with(TIP, false);
+            return getDefaultState().with(TIP, false);
         }
     }
 
@@ -65,6 +65,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
         builder.add(TIP);
     }
 
+    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         if (state.get(TIP)) {
             return TIP_SHAPE;
@@ -85,7 +86,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        world.setBlockState(pos, this.getDefaultState().with(TIP, false));
-        world.setBlockState(pos.down(), this.getDefaultState());
+        world.setBlockState(pos, getDefaultState().with(TIP, false));
+        world.setBlockState(pos.down(), getDefaultState());
     }
 }

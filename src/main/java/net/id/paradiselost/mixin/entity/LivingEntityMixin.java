@@ -65,8 +65,8 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     private double changeGravity(double gravity) {
         LivingEntity entity = (LivingEntity) (Object) this;
 
-        boolean isFalling = this.getVelocity().y <= 0.0D;
-        if (isFalling && !this.hasStatusEffect(StatusEffects.SLOW_FALLING) && !isTouchingWater() && !isSneaking()) {
+        boolean isFalling = getVelocity().y <= 0.0D;
+        if (isFalling && !hasStatusEffect(StatusEffects.SLOW_FALLING) && !isTouchingWater() && !isSneaking()) {
             // Get parachutes from trinket slots
             Optional<TrinketComponent> componentOptional = TrinketsApi.getTrinketComponent(entity);
             boolean isWearingParachute = componentOptional.isPresent()
@@ -74,11 +74,11 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
             if (isWearingParachute) {
                 gravity -= 0.07;
-                this.fallDistance = 0;
+                fallDistance = 0;
             } else if (entity.hasPassengers() && entity.getPassengerList().stream().anyMatch(passenger ->
                     passenger.getType().equals(ParadiseLostEntityTypes.AERBUNNY))) {
                 gravity -= 0.05;
-                this.fallDistance = 0; // alternatively, remove & replace with fall damage dampener
+                fallDistance = 0; // alternatively, remove & replace with fall damage dampener
             }
         }
 
@@ -91,7 +91,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         if (cir.getReturnValue() && attacker instanceof LivingEntity) {
             Item item = ((LivingEntity) attacker).getMainHandStack().getItem();
             if (item instanceof ToolItem tool && tool.getMaterial() == ParadiseLostToolMaterials.GRAVITITE) {
-                this.addVelocity(0, amount / 20 + 0.1, 0);
+                addVelocity(0, amount / 20 + 0.1, 0);
             }
         }
     }
@@ -102,11 +102,11 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
             gravFlipTime++;
             if (gravFlipTime > 20) {
                 flipped = false;
-                this.fallDistance = 0;
+                fallDistance = 0;
             }
-            if (!this.hasNoGravity()) {
+            if (!hasNoGravity()) {
                 Vec3d antiGravity = new Vec3d(0, 0.12D, 0);
-                this.setVelocity(this.getVelocity().add(antiGravity));
+                setVelocity(getVelocity().add(antiGravity));
             }
         }
     }
@@ -126,18 +126,18 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     private void applyCustomDeathParticles(CallbackInfo ci) {
         if(((LivingEntity) ((Object) this)) instanceof RookEntity) {
             for(int i = 0; i < 20 + random.nextInt(20); ++i) {
-                double d = this.random.nextGaussian() * 0.02D;
-                double e = this.random.nextGaussian() * 0.02D;
-                double f = this.random.nextGaussian() * 0.02D;
+                double d = random.nextGaussian() * 0.02D;
+                double e = random.nextGaussian() * 0.02D;
+                double f = random.nextGaussian() * 0.02D;
                 if(random.nextInt( 3) == 0) {
-                    this.world.addParticle(ParticleTypes.LARGE_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
+                    world.addParticle(ParticleTypes.LARGE_SMOKE, getParticleX(1.0D), getRandomBodyY(), getParticleZ(1.0D), d, e, f);
                 }
                 else {
-                    this.world.addParticle(ParticleTypes.SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
+                    world.addParticle(ParticleTypes.SMOKE, getParticleX(1.0D), getRandomBodyY(), getParticleZ(1.0D), d, e, f);
                 }
 
                 if(random.nextInt(3) == 0) {
-                    this.world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d / 3, e, f / 3);
+                    world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, getParticleX(1.0D), getRandomBodyY(), getParticleZ(1.0D), d / 3, e, f / 3);
                 }
             }
             ci.cancel();

@@ -176,7 +176,7 @@ class ToastTriggerer {
                     RenderSystem.setShader(GameRenderer::getPositionTexShader);
                     RenderSystem.setShaderTexture(0, TEXTURE);
                     RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                    manager.drawTexture(matrices, 0, 0, 0, 0, this.getWidth(), this.getHeight());
+                    manager.drawTexture(matrices, 0, 0, 0, 0, getWidth(), getHeight());
                     List<OrderedText> list = manager.getClient().textRenderer.wrapLines(lore.getTitleText(), 125);
                     int color = 0xFFFF00;
                     if(list.size() == 1){
@@ -189,7 +189,7 @@ class ToastTriggerer {
                             manager.getClient().textRenderer.draw(matrices, Text.of("TODO"), 30.0F, 11.0F, color | l);
                         }else{
                             l = MathHelper.floor(MathHelper.clamp((float)(startTime - 1500L) / 300.0F, 0.0F, 1.0F) * 252.0F) << 24 | 67108864;
-                            int var10000 = this.getHeight() / 2;
+                            int var10000 = getHeight() / 2;
                             int var10001 = list.size();
                             Objects.requireNonNull(manager.getClient().textRenderer);
                             int m = var10000 - var10001 * 9 / 2;

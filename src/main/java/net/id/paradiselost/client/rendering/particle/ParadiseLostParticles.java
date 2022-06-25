@@ -21,6 +21,7 @@ import net.minecraft.util.registry.Registry;
 public class ParadiseLostParticles {
     public static DefaultParticleType GOLDEN_OAK_LEAF = register("golden_leaf");
     public static DefaultParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal");
+    public static DefaultParticleType AMBROSIUM_FLAME = register("ambrosium_flame");
     public static DefaultParticleType VENOM_BUBBLE = register("venom_bubble");
     /**
      * A super fancy RGB splash particle.
@@ -77,6 +78,7 @@ public class ParadiseLostParticles {
             register(GOLDEN_OAK_LEAF, GoldenOakLeafParticle.DefaultFactory::new);
             register(FALLING_ORANGE_PETAL, FallingOrangePetalParticle.DefaultFactory::new);
             register(VENOM_BUBBLE, VenomBubbleParticle.DefaultFactory::new);
+            register(AMBROSIUM_FLAME, AmbrosiumFlameParticle.DefaultFactory::new);
             register(COLORED_SPLASH, ColoredSplashParticle.FACTORY);
         }
         

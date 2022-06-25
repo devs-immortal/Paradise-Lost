@@ -21,13 +21,13 @@ public class CockatriceModel extends EntityModel<CockatriceEntity> {
     private final ModelPart head;
 
     public CockatriceModel(ModelPart root) {
-        this.torso = root.getChild(EntityModelPartNames.BODY);
-        this.leftWing = this.torso.getChild(EntityModelPartNames.LEFT_WING);
-        this.rightWing = this.torso.getChild(EntityModelPartNames.RIGHT_WING);
-        this.leftLeg = torso.getChild(EntityModelPartNames.LEFT_LEG);
-        this.rightLeg = torso.getChild(EntityModelPartNames.RIGHT_LEG);
-        this.neck = this.torso.getChild(EntityModelPartNames.NECK);
-        this.head = neck.getChild(EntityModelPartNames.HEAD);
+        torso = root.getChild(EntityModelPartNames.BODY);
+        leftWing = torso.getChild(EntityModelPartNames.LEFT_WING);
+        rightWing = torso.getChild(EntityModelPartNames.RIGHT_WING);
+        leftLeg = torso.getChild(EntityModelPartNames.LEFT_LEG);
+        rightLeg = torso.getChild(EntityModelPartNames.RIGHT_LEG);
+        neck = torso.getChild(EntityModelPartNames.NECK);
+        head = neck.getChild(EntityModelPartNames.HEAD);
     }
 
     public static TexturedModelData getTexturedModelData() {
@@ -109,22 +109,22 @@ public class CockatriceModel extends EntityModel<CockatriceEntity> {
 
     @Override
     public void setAngles(CockatriceEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        this.head.pitch = 0.2182F + headPitch * 0.017453292F;
-        this.head.yaw = headYaw * 0.017453292F;
-        this.rightLeg.pitch = 0.9163F + MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance;
-        this.leftLeg.pitch = 0.9163F + MathHelper.cos(limbAngle * 0.6662F + 3.1415927F) * 1.4F * limbDistance;
+        head.pitch = 0.2182F + headPitch * 0.017453292F;
+        head.yaw = headYaw * 0.017453292F;
+        rightLeg.pitch = 0.9163F + MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance;
+        leftLeg.pitch = 0.9163F + MathHelper.cos(limbAngle * 0.6662F + 3.1415927F) * 1.4F * limbDistance;
 
-        this.leftWing.roll = -1.3348F + animationProgress;
-        this.rightWing.roll = 1.3348F - animationProgress;
+        leftWing.roll = -1.3348F + animationProgress;
+        rightWing.roll = 1.3348F - animationProgress;
     }
 
     @Override
     public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        this.torso.render(matrixStack, buffer, packedLight, packedOverlay);
+        torso.render(matrixStack, buffer, packedLight, packedOverlay);
     }
 
     public ModelPart getHead() {
-        return this.head;
+        return head;
     }
 
     public void setRotationAngle(ModelPart bone, float x, float y, float z) {

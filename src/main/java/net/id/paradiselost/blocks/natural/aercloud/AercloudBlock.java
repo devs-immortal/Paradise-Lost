@@ -23,7 +23,7 @@ public class AercloudBlock extends TransparentBlock {
 
     public AercloudBlock(Settings properties) {
         super(properties);
-        this.setDefaultState(this.getDefaultState().with(DOUBLE_DROPS, false));
+        setDefaultState(getDefaultState().with(DOUBLE_DROPS, false));
     }
 
     @Override

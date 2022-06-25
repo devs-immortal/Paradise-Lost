@@ -17,6 +17,7 @@ public class ParadiseLostBoulderFeature extends Feature<BoulderFeatureConfig> {
         super(configCodec);
     }
 
+    @Override
     public boolean generate(FeatureContext<BoulderFeatureConfig> context) {
         BlockPos blockPos = context.getOrigin();
         StructureWorldAccess structureWorldAccess = context.getWorld();

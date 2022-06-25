@@ -25,7 +25,7 @@ public class SlimeMoveControlMixin {
     @SuppressWarnings("UnnecessaryQualifiedMemberReference")
     @Inject(method = "Lnet/minecraft/entity/mob/SlimeEntity$SlimeMoveControl;tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ai/control/JumpControl;setActive()V"), cancellable = true)
     private void cancelIfUnsafe(CallbackInfo ci) {
-        if (this.slime instanceof SwetEntity swet && !this.jumpOften) {
+        if (slime instanceof SwetEntity swet && !jumpOften) {
             float yaw = (float) Math.toRadians(swet.getYaw());
             Vec3d facing = new Vec3d(-MathHelper.sin(yaw), 0, MathHelper.cos(yaw)).multiply(swet.getSize() * 0.2 + 0.6);
             Vec3d raytraceStart = swet.getPos().add(facing).add(0, 0.5, 0);

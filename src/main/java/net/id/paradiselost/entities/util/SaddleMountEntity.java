@@ -33,12 +33,12 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
 
     @Override
     public Entity getPrimaryPassenger() {
-        return this.getFirstPassenger();
+        return getFirstPassenger();
     }
 
     @Override
     public boolean damage(DamageSource damagesource, float i) {
-        if ((damagesource.getAttacker() instanceof PlayerEntity) && (!this.getPassengerList().isEmpty() && this.getPassengerList().get(0) == damagesource.getSource())) {
+        if ((damagesource.getAttacker() instanceof PlayerEntity) && (!getPassengerList().isEmpty() && getPassengerList().get(0) == damagesource.getSource())) {
             return false;
         }
 
@@ -48,14 +48,14 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        this.dataTracker.startTracking(SADDLED, false);
+        dataTracker.startTracking(SADDLED, false);
     }
 
     @Override
     protected void dropInventory() {
         super.dropInventory();
-        if (this.isSaddled()) {
-            this.dropItem(Items.SADDLE);
+        if (isSaddled()) {
+            dropItem(Items.SADDLE);
         }
     }
 
@@ -65,12 +65,12 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
         ActionResult returnValue = super.interactMob(player, hand);
 
         // TODO: Saddle code here may be able to be removed, due to the implement
-        if (!this.canBeSaddled()) {
+        if (!canBeSaddled()) {
             return super.interactMob(player, hand);
         }
 
-        if (!this.isSaddled()) {
-            if (heldItem.getItem() == Items.SADDLE && !this.isBaby()) {
+        if (!isSaddled()) {
+            if (heldItem.getItem() == Items.SADDLE && !isBaby()) {
                 if (!player.isCreative()) {
                     player.setStackInHand(hand, ItemStack.EMPTY);
                 }
@@ -79,15 +79,15 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
                     player.world.playSound(player, player.getBlockPos(), SoundEvents.ENTITY_PIG_SADDLE, SoundCategory.AMBIENT, 1.0F, 1.0F);
                 }
 
-                this.setSaddled(true);
+                setSaddled(true);
                 return ActionResult.SUCCESS;
             }
         } else {
-            if (this.getPassengerList().isEmpty()) {
+            if (getPassengerList().isEmpty()) {
                 if (!player.world.isClient) {
                     player.startRiding(this);
                     player.prevYaw = player.getYaw();
-                    player.setYaw(this.getYaw());
+                    player.setYaw(getYaw());
                 }
 
                 return ActionResult.SUCCESS;
@@ -104,7 +104,7 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
 
     @Override
     public boolean isInsideWall() {
-        if (!this.getPassengerList().isEmpty()) {
+        if (!getPassengerList().isEmpty()) {
             return false;
         }
         return super.isInsideWall();
@@ -113,17 +113,18 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putBoolean("saddled", this.isSaddled());
+        nbt.putBoolean("saddled", isSaddled());
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        this.setSaddled(nbt.getBoolean("saddled"));
+        setSaddled(nbt.getBoolean("saddled"));
     }
 
+    @Override
     public boolean isSaddled() {
-        return this.dataTracker.get(SADDLED);
+        return dataTracker.get(SADDLED);
     }
 
     public void setSaddled(boolean saddled) {
@@ -136,10 +137,12 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
         }
     }
 
+    @Override
     public boolean canBeSaddled() {
-        return this.isAlive() && !this.isBaby();
+        return isAlive() && !isBaby();
     }
 
+    @Override
     public void saddle(@Nullable SoundCategory sound) {
         //this.items.setStack(0, new ItemStack(Items.SADDLE));
         if (sound != null) {

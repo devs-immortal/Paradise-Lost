@@ -1,7 +1,6 @@
 package net.id.paradiselost.blocks.natural.tree;
 
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
-import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -11,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
@@ -50,7 +50,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
                         }
                     }
                     state = state.with(GROWTH, growth + 1).with(CAPPED, random.nextDouble() < 0.45 || growth + 1 == 2);
-                    world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_ORANGE_LEAVES_BREAK, SoundCategory.BLOCKS, 1.25F, 1.5F);
+                    world.playSound(null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 1.25F, 1.5F);
                     world.setBlockState(pos, state);
                 }
             } else {
@@ -65,7 +65,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
                             dropBlocks++;
                         }
                         ItemScatterer.spawn(world, pos.getX() + 0.5, pos.getY() - (dropBlocks + 0.25), pos.getZ() + 0.5, new ItemStack(fruit.get()));
-                        world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_ORANGE_LEAVES_DROP_FRUIT, SoundCategory.BLOCKS, 1F, 1F);
+                        world.playSound(null, pos, SoundEvents.BLOCK_CANDLE_BREAK, SoundCategory.BLOCKS, 1F, 1F);
                     }
                     world.setBlockState(pos, getDefaultState().with(DISTANCE, state.get(DISTANCE)));
                 }
@@ -86,7 +86,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
 
         if (growth > 0) {
             world.setBlockState(pos, state.with(GROWTH, 0).with(CAPPED, false));
-            world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_ORANGE_LEAVES_BREAK_DIFFERENTLY, SoundCategory.BLOCKS, 1F, 2F);
+            world.playSound(null, pos, SoundEvents.BLOCK_CROP_BREAK, SoundCategory.BLOCKS, 1F, 2F);
 
             if (growth == 1) {
                 if(world.isClient()){

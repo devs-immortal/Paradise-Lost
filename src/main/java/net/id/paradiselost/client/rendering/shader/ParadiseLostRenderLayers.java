@@ -3,7 +3,7 @@ package net.id.paradiselost.client.rendering.shader;
 import ladysnake.satin.api.util.RenderLayerHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.paradiselost.util.Config;
+import net.id.paradiselost.util.CompatConfig;
 import net.minecraft.client.render.RenderLayer;
 
 @Environment(EnvType.CLIENT)
@@ -14,7 +14,7 @@ public final class ParadiseLostRenderLayers {
     public static final RenderLayer AURAL_CUTOUT_MIPPED;
     
     static{
-        if(Config.SODIUM_WORKAROUND){
+        if(CompatConfig.SODIUM_WORKAROUND){
             AURAL = RenderLayer.getSolid();
             AURAL_CUTOUT_MIPPED = RenderLayer.getCutoutMipped();
         }else{

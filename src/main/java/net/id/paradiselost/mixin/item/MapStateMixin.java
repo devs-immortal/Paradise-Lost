@@ -25,7 +25,7 @@ public class MapStateMixin {
         Packet<?> packetData = cir.getReturnValue();
 
         if (packetData instanceof MapDimensionData) {
-            ((MapDimensionData) packetData).setDimension(this.dimension);
+            ((MapDimensionData) packetData).setDimension(dimension);
         }
     }
 }

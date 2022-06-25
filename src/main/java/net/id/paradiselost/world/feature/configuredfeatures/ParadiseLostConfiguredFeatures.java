@@ -25,7 +25,7 @@ public class ParadiseLostConfiguredFeatures {
     }
 
     private static <V extends T, T> RegistryEntry<V> register(Registry<T> registry, String id, V value) {
-        return (RegistryEntry<V>) BuiltinRegistries.<T>add(registry, locate(id), value);
+        return (RegistryEntry<V>) BuiltinRegistries.add(registry, locate(id), value);
     }
 
     public static void init() {

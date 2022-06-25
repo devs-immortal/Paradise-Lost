@@ -19,9 +19,9 @@ public abstract class TransformableSwetEntity extends SwetEntity {
     }
 
     protected boolean changeType(EntityType<? extends SwetEntity> type) {
-        if (!this.getType().equals(type) && !this.isRemoved()) {
-            SwetEntity swet = (this.convertTo(type, true));
-            swet.setSize(this.getSize(), false);
+        if (!getType().equals(type) && !isRemoved()) {
+            SwetEntity swet = (convertTo(type, true));
+            swet.setSize(getSize(), false);
             world.spawnEntity(swet);
             return true;
         }
@@ -36,13 +36,13 @@ public abstract class TransformableSwetEntity extends SwetEntity {
 
     public boolean suggestTypeChange(BlockState state) {
         if (state.isIn(ParadiseLostBlockTags.SWET_TRANSFORMERS_GOLDEN)) {
-            return this.changeType(ParadiseLostEntityTypes.GOLDEN_SWET);
+            return changeType(ParadiseLostEntityTypes.GOLDEN_SWET);
         }
         if (state.isIn(ParadiseLostBlockTags.SWET_TRANSFORMERS_BLUE)) {
-            return this.changeType(ParadiseLostEntityTypes.BLUE_SWET);
+            return changeType(ParadiseLostEntityTypes.BLUE_SWET);
         }
         if (state.isIn(ParadiseLostBlockTags.SWET_TRANSFORMERS_PURPLE)) {
-            return this.changeType(ParadiseLostEntityTypes.PURPLE_SWET);
+            return changeType(ParadiseLostEntityTypes.PURPLE_SWET);
         }
 //        if (state.isIn(ParadiseLostBlockTags.SWET_TRANSFORMERS_VERMILION)) {
 //            return this.changeType(ParadiseLostEntityTypes.VERMILION_SWET);
@@ -52,13 +52,13 @@ public abstract class TransformableSwetEntity extends SwetEntity {
 
     public boolean suggestTypeChange(FluidState state) {
         if (state.isIn(ParadiseLostFluidTags.SWET_TRANSFORMERS_GOLDEN)) {
-            return this.changeType(ParadiseLostEntityTypes.GOLDEN_SWET);
+            return changeType(ParadiseLostEntityTypes.GOLDEN_SWET);
         }
         if (state.isIn(ParadiseLostFluidTags.SWET_TRANSFORMERS_BLUE)) {
-            return this.changeType(ParadiseLostEntityTypes.BLUE_SWET);
+            return changeType(ParadiseLostEntityTypes.BLUE_SWET);
         }
         if (state.isIn(ParadiseLostFluidTags.SWET_TRANSFORMERS_PURPLE)) {
-            return this.changeType(ParadiseLostEntityTypes.PURPLE_SWET);
+            return changeType(ParadiseLostEntityTypes.PURPLE_SWET);
         }
 //        if (state.isIn(ParadiseLostFluidTags.SWET_TRANSFORMERS_VERMILION)) {
 //            return this.changeType(ParadiseLostEntityTypes.VERMILION_SWET);
@@ -68,13 +68,13 @@ public abstract class TransformableSwetEntity extends SwetEntity {
 
     public boolean suggestTypeChange(ItemStack state) {
         if (state.isIn(ParadiseLostItemTags.SWET_TRANSFORMERS_GOLDEN)) {
-            return this.changeType(ParadiseLostEntityTypes.GOLDEN_SWET);
+            return changeType(ParadiseLostEntityTypes.GOLDEN_SWET);
         }
         if (state.isIn(ParadiseLostItemTags.SWET_TRANSFORMERS_BLUE)) {
-            return this.changeType(ParadiseLostEntityTypes.BLUE_SWET);
+            return changeType(ParadiseLostEntityTypes.BLUE_SWET);
         }
         if (state.isIn(ParadiseLostItemTags.SWET_TRANSFORMERS_PURPLE)) {
-            return this.changeType(ParadiseLostEntityTypes.PURPLE_SWET);
+            return changeType(ParadiseLostEntityTypes.PURPLE_SWET);
         }
 //        if (state.isIn(ParadiseLostItemTags.SWET_TRANSFORMERS_VERMILION)) {
 //            return this.changeType(ParadiseLostEntityTypes.VERMILION_SWET);
@@ -90,16 +90,16 @@ public abstract class TransformableSwetEntity extends SwetEntity {
             }
             return false;
         }
-        if (entity.squaredDistanceTo(this) <= 1 && this.getSize() > 1) {
+        if (entity.squaredDistanceTo(this) <= 1 && getSize() > 1) {
             EntityType<?> state = entity.getType();
             if (state.isIn(ParadiseLostEntityTypeTags.SWET_TRANSFORMERS_GOLDEN)) {
-                return this.changeType(ParadiseLostEntityTypes.GOLDEN_SWET);
+                return changeType(ParadiseLostEntityTypes.GOLDEN_SWET);
             }
             if (state.isIn(ParadiseLostEntityTypeTags.SWET_TRANSFORMERS_BLUE)) {
-                return this.changeType(ParadiseLostEntityTypes.BLUE_SWET);
+                return changeType(ParadiseLostEntityTypes.BLUE_SWET);
             }
             if (state.isIn(ParadiseLostEntityTypeTags.SWET_TRANSFORMERS_PURPLE)) {
-                return this.changeType(ParadiseLostEntityTypes.PURPLE_SWET);
+                return changeType(ParadiseLostEntityTypes.PURPLE_SWET);
             }
 //        if (state.isIn(ParadiseLostEntityTypeTags.SWET_TRANSFORMERS_VERMILION)) {
 //            return this.changeType(ParadiseLostEntityTypes.VERMILION_SWET);

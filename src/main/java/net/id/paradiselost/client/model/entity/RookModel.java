@@ -67,7 +67,7 @@ public class RookModel extends EntityModel<RookEntity> {
         var time = rook.age + MinecraftClient.getInstance().getTickDelta();
         translation = (float) (Math.sin(time / 25) / 8 + 0.125);
 
-        this.blinkTicks = rook.blinkTicks;
+        blinkTicks = rook.blinkTicks;
     }
 
     @Override

@@ -19,7 +19,7 @@ import net.minecraft.world.World;
  */
 public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerComponent<LUV> {
 
-    private PlayerEntity player;
+    private final PlayerEntity player;
     private byte value;
 
     public LUV(PlayerEntity player) {

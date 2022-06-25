@@ -16,7 +16,7 @@ public enum LoreStatus{
     private final String name;
     
     LoreStatus(){
-        this.name = name().toLowerCase(Locale.ROOT);
+        name = name().toLowerCase(Locale.ROOT);
     }
     
     public String getName(){

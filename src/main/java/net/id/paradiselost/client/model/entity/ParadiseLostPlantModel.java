@@ -16,12 +16,12 @@ public class ParadiseLostPlantModel extends EntityModel<AechorPlantEntity> {
     private final ModelPart[] leafs;
 
     public ParadiseLostPlantModel(ModelPart modelRoot) {
-        this.root = modelRoot.getChild("root");
-        this.petals = new ModelPart[5];
-        this.leafs = new ModelPart[5];
+        root = modelRoot.getChild("root");
+        petals = new ModelPart[5];
+        leafs = new ModelPart[5];
         for (int i = 0; i < 5; i++) {
-            this.petals[i] = root.getChild("petal_" + (i + 1));
-            this.leafs[i] = root.getChild("leaf_" + (i + 1));
+            petals[i] = root.getChild("petal_" + (i + 1));
+            leafs[i] = root.getChild("leaf_" + (i + 1));
         }
     }
 
@@ -103,13 +103,13 @@ public class ParadiseLostPlantModel extends EntityModel<AechorPlantEntity> {
 
     @Override
     public void setAngles(AechorPlantEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.setRotationAngle(petals[0], 0, 2.8274F, 0.2618F);
-        this.setRotationAngle(petals[1], 0, 0.3142F, -0.2618F);
-        this.setRotationAngle(petals[2], 0.2618F, -0.6283F, 0.0F);
-        this.setRotationAngle(petals[3], 0.2618F, 3.1416F, 0);
-        this.setRotationAngle(petals[4], 0.2618F, 0.6283F, 0);
+        setRotationAngle(petals[0], 0, 2.8274F, 0.2618F);
+        setRotationAngle(petals[1], 0, 0.3142F, -0.2618F);
+        setRotationAngle(petals[2], 0.2618F, -0.6283F, 0.0F);
+        setRotationAngle(petals[3], 0.2618F, 3.1416F, 0);
+        setRotationAngle(petals[4], 0.2618F, 0.6283F, 0);
 
-        for (ModelPart petal : this.petals) {
+        for (ModelPart petal : petals) {
             petal.pitch *= 1 + 0.3F * MathHelper.sin(ageInTicks / 20);
             petal.roll *= 1 + 0.3F * MathHelper.sin(ageInTicks / 20);
         }
@@ -126,7 +126,7 @@ public class ParadiseLostPlantModel extends EntityModel<AechorPlantEntity> {
 
     @Override
     public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        this.root.render(matrixStack, buffer, packedLight, packedOverlay);
+        root.render(matrixStack, buffer, packedLight, packedOverlay);
     }
 
     public void setRotationAngle(ModelPart bone, float x, float y, float z) {

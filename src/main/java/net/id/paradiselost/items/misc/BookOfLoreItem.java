@@ -24,6 +24,7 @@ public class BookOfLoreItem extends Item {
         super(settings);
     }
 
+    @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.clear();
@@ -32,6 +33,7 @@ public class BookOfLoreItem extends Item {
         tooltip.add((Text.translatable("book.byAuthor", "Immortal Devs")).formatted(Formatting.GRAY));
     }
 
+    @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         user.openHandledScreen(new NamedScreenHandlerFactory(){

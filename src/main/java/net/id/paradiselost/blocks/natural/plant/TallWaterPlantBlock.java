@@ -18,8 +18,9 @@ public class TallWaterPlantBlock extends TallPlantBlock implements Waterloggable
         super(settings.offsetType(OffsetType.XYZ));
     }
 
+    @Override
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(Properties.WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(Properties.WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     @Override

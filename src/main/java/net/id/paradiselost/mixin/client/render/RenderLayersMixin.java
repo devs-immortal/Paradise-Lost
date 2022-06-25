@@ -2,8 +2,8 @@ package net.id.paradiselost.mixin.client.render;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.id.incubus_core.util.IncubusHoliday;
 import net.id.paradiselost.client.rendering.block.RenderLayerOverride;
-import net.id.paradiselost.util.Holiday;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public class RenderLayersMixin{
     @Shadow private static boolean fancyGraphicsOrBetter;
     
-    @Unique private static final boolean paradise_lost$overrideLeavesLayer = Holiday.get() == Holiday.CHRISTMAS;
+    @Unique private static final boolean paradise_lost$overrideLeavesLayer = IncubusHoliday.get() == IncubusHoliday.CHRISTMAS;
     
     @Inject(
         method = "getBlockLayer",

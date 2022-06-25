@@ -24,6 +24,7 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration>{
     }
 
     // FIXME 1.18.2-pre1
+    @Override
     public boolean generate(FeatureContext<DynamicConfiguration> context){
         BlockPos blockPos = context.getOrigin();
 

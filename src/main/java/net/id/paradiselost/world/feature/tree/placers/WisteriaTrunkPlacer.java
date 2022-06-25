@@ -111,7 +111,7 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
     }
 
     // Mojang, why isn't there a builtin function to do this?
-    private static Direction[] directions = new Direction[] {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
+    private static final Direction[] directions = new Direction[] {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
     private Direction randomDirection(Random random) {
         return directions[random.nextInt(directions.length)];
     }

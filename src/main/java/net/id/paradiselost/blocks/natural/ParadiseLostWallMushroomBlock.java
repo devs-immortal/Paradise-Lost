@@ -30,7 +30,7 @@ public class ParadiseLostWallMushroomBlock extends ParadiseLostMushroomBlock {
         Direction direction = state.get(FACING).getOpposite();
         BlockPos blockPos = pos.offset(direction);
         BlockState blockState = world.getBlockState(blockPos);
-        return this.canPlantOnTop(blockState, world, blockPos);
+        return canPlantOnTop(blockState, world, blockPos);
     }
 
     @Override

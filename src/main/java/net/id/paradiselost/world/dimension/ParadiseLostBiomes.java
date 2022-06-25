@@ -175,7 +175,7 @@ public final class ParadiseLostBiomes {
      * @return A map that contains all features
      */
     @SafeVarargs
-    public static <A, B> Map<A, List<B>> mergeFeatures(Map<A, List<B>>... maps){
+    public static <A, B> Map<A, List<B>> merge(Map<A, List<B>>... maps){
         if(maps.length == 1){
             return maps[0];
         }
@@ -207,6 +207,16 @@ public final class ParadiseLostBiomes {
             ParadiseLostCarvers.LARGE_GOLDEN_AERCLOUD_CARVER,
             ParadiseLostCarvers.GOLDEN_AERCLOUD_CARVER,
             ParadiseLostCarvers.TINY_GOLDEN_AERCLOUD_CARVER
+        ));
+    }
+    
+    private static Map<SpawnGroup, List<SpawnSettings.SpawnEntry>> getStandardSwetEntries(int weight, int minGroup, int maxGroup) {
+        return Map.of(SpawnGroup.MONSTER, List.of(
+            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, weight, minGroup, maxGroup),
+            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.WHITE_SWET, weight, minGroup, maxGroup),
+            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.GOLDEN_SWET, weight, minGroup, maxGroup),
+            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PURPLE_SWET, weight, minGroup, maxGroup),
+            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.VERMILION_SWET, weight, minGroup, maxGroup)
         ));
     }
     
@@ -248,7 +258,7 @@ public final class ParadiseLostBiomes {
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -270,14 +280,14 @@ public final class ParadiseLostBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, 100, 2, 6)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                        )
                     )
                 ),
                 Map.of(
@@ -308,7 +318,7 @@ public final class ParadiseLostBiomes {
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -331,14 +341,14 @@ public final class ParadiseLostBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, 100, 2, 6)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                        )
                     )
                 ),
                 
@@ -370,7 +380,7 @@ public final class ParadiseLostBiomes {
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -399,15 +409,17 @@ public final class ParadiseLostBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, 100, 2, 6),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 2)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 2)
+                        ),
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                        )
                     )
                 ),
                 
@@ -441,7 +453,7 @@ public final class ParadiseLostBiomes {
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -461,16 +473,18 @@ public final class ParadiseLostBiomes {
                 )
                 ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, 30, 1, 3),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 100, 3, 7)
-                    ),
-                    
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 100, 3, 7)
+                        ),
+                        
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                        )
                     )
                 ),
                 
@@ -503,7 +517,7 @@ public final class ParadiseLostBiomes {
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LAKES, List.of(
@@ -530,14 +544,14 @@ public final class ParadiseLostBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, 100, 2, 6)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 6, 1, 3)
+                        )
                     )
                 ),
                 
@@ -569,7 +583,7 @@ public final class ParadiseLostBiomes {
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
@@ -594,14 +608,17 @@ public final class ParadiseLostBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, 100, 2, 6)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, 100, 2, 6)
+                        ),
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 6, 1, 3)
+                        )
                     )
                 ),
             
@@ -633,7 +650,7 @@ public final class ParadiseLostBiomes {
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
-                mergeFeatures(
+                merge(
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LAKES, List.of(
@@ -671,15 +688,17 @@ public final class ParadiseLostBiomes {
                 )
             ))
             .spawnSettings(createSpawnSettings(
-                Map.of(
-                    SpawnGroup.MONSTER, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, 100, 2, 6),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 3)
-                    ),
-                    SpawnGroup.CREATURE, List.of(
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                        new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 6, 1, 3)
+                merge(
+                    getStandardSwetEntries(6, 2, 6),
+                    Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 3)
+                        ),
+                        SpawnGroup.CREATURE, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 6, 1, 3)
+                        )
                     )
                 ),
                 Map.of(

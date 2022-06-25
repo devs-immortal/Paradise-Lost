@@ -3,7 +3,7 @@ package net.id.paradiselost.client.rendering.entity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.id.paradiselost.client.rendering.entity.block.FloatingBlockRenderer;
+import net.id.incubus_core.blocklikeentities.api.client.BlockLikeEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.hostile.AechorPlantRenderer;
 import net.id.paradiselost.client.rendering.entity.hostile.CockatriceRenderer;
 import net.id.paradiselost.client.rendering.entity.hostile.SwetRenderer;
@@ -22,14 +22,16 @@ import net.minecraft.entity.EntityType;
 public class ParadiseLostEntityRenderers {
     public static void initClient() {
         // block
-        register(ParadiseLostEntityTypes.FLOATING_BLOCK, FloatingBlockRenderer::new);
+        register(ParadiseLostEntityTypes.FLOATING_BLOCK, BlockLikeEntityRenderer::new);
+        register(ParadiseLostEntityTypes.SLIDER, BlockLikeEntityRenderer::new);
 
         // hostile
         register(SwetRenderer::new,
                 ParadiseLostEntityTypes.BLUE_SWET,
                 ParadiseLostEntityTypes.PURPLE_SWET,
                 ParadiseLostEntityTypes.WHITE_SWET,
-                ParadiseLostEntityTypes.GOLDEN_SWET
+                ParadiseLostEntityTypes.GOLDEN_SWET,
+                ParadiseLostEntityTypes.VERMILION_SWET
         );
         register(ParadiseLostEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
         //register(ParadiseLostEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);

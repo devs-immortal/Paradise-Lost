@@ -81,7 +81,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
                 int maxBranches = size - random.nextInt(size / 4);
 
                 // Start the recursive tunnel carving
-                this.carveTunnels(context, config, chunk, posToBiome, carvingMask, random.nextLong(), sampler, mainChunkX, mainChunkZ, x, y, z, width, yaw, pitch, yawToPitchRatio, 0, maxBranches, ((context1, scaledRelativeX, scaledRelativeY, scaledRelativeZ, y1) -> isPositionExcluded(scaledRelativeX, scaledRelativeY, scaledRelativeZ)));
+                carveTunnels(context, config, chunk, posToBiome, carvingMask, random.nextLong(), sampler, mainChunkX, mainChunkZ, x, y, z, width, yaw, pitch, yawToPitchRatio, 0, maxBranches, ((context1, scaledRelativeX, scaledRelativeY, scaledRelativeZ, y1) -> isPositionExcluded(scaledRelativeX, scaledRelativeY, scaledRelativeZ)));
                 //carveRegion(context, config, chunk, posToBiome, random.nextLong(), seaLevel, x, y, z, 2, 0.5, carvingMask, ((context1, scaledRelativeX, scaledRelativeY, scaledRelativeZ, y1) -> false));
             }
         }

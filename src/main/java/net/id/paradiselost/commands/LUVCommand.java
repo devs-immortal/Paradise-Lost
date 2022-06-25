@@ -2,8 +2,8 @@ package net.id.paradiselost.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import net.id.incubus_core.devel.Devel;
 import net.id.paradiselost.component.LUV;
-import net.id.paradiselost.devel.ParadiseLostDevel;
 import net.id.incubus_core.misc.WorthinessChecker;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,19 +17,19 @@ public class LUVCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher){
         dispatcher.register(literal("LUV")
-                .requires((source)->source.hasPermissionLevel(2))
-                .then(literal("query")
-                        .then(argument("target", EntityArgumentType.player())
-                                .executes((context) -> queryLUV(context.getSource(), EntityArgumentType.getPlayer(context, "target")))
-                        )
+            .requires((source)->source.hasPermissionLevel(2))
+            .then(literal("query")
+                .then(argument("target", EntityArgumentType.player())
+                    .executes((context) -> queryLUV(context.getSource(), EntityArgumentType.getPlayer(context, "target")))
                 )
-                .then(literal("set")
-                        .then(argument("target", EntityArgumentType.player())
-                                .then(argument("value", IntegerArgumentType.integer(-128, 128))
-                                        .executes((context) -> setLUV(context.getSource(), EntityArgumentType.getPlayer(context, "target"), (byte) IntegerArgumentType.getInteger(context, "value")))
-                                )
-                        )
+            )
+            .then(literal("set")
+                .then(argument("target", EntityArgumentType.player())
+                    .then(argument("value", IntegerArgumentType.integer(-128, 128))
+                        .executes((context) -> setLUV(context.getSource(), EntityArgumentType.getPlayer(context, "target"), (byte) IntegerArgumentType.getInteger(context, "value")))
+                    )
                 )
+            )
         );
     }
 
@@ -39,7 +39,7 @@ public class LUVCommand {
     }
 
     public static int setLUV(ServerCommandSource source, PlayerEntity target, byte value) {
-        if(WorthinessChecker.isPlayerWorthy(target.getUuid()) || ParadiseLostDevel.isDevel()){
+        if(WorthinessChecker.isPlayerWorthy(target.getUuid()) || Devel.isDevel()){
             LUV.getLUV(target).setValue(value);
             source.sendFeedback(Text.translatable("commands.paradise_lost.LUV.success.set", target.getDisplayName(), LUV.getLUV(target).getValue()), false);
         }

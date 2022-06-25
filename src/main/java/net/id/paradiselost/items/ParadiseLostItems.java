@@ -5,8 +5,8 @@ import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
-import net.id.paradiselost.entities.vehicle.ParadiseLostBoatTypes;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
+import net.id.paradiselost.items.accessories.ParachuteTrinketItem;
 import net.id.paradiselost.items.armor.ParadiseLostArmorMaterials;
 import net.id.paradiselost.items.food.ParadiseLostFoodComponent;
 import net.id.paradiselost.items.food.ValkyrieMilkItem;
@@ -69,8 +69,7 @@ public class ParadiseLostItems {
     public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource));
     public static final Item FLAX_THREAD = add("flax_thread", new Item(resource));
     public static final Item FLAXWEAVE = add("flaxweave", new Item(resource));
-    public static final Item GROUND_SWETROOT = add("ground_swetroot", new Item(resource));
-    public static final Item SPROUTING_SWETROOT = add("sprouting_swetroot", new Item(resource));
+    public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource), compostable30);
 
 
     private static Settings tool() {
@@ -99,10 +98,10 @@ public class ParadiseLostItems {
     public static final ParadiseLostAxeItem VALKYRIE_AXE = add("valkyrie_axe", new ParadiseLostAxeItem(ParadiseLostToolMaterials.VALKYRIE, 4f, -2.9f, paradiseLostLootTool));
     public static final ValkyrieLanceItem VALKYRIE_LANCE = add("valkyrie_lance", new ValkyrieLanceItem(ParadiseLostToolMaterials.VALKYRIE, 10, -3f, 6f, 4f, paradiseLostLootTool));
     public static final ParadiseLostHoeItem VALKYRIE_HOE = add("valkyrie_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.VALKYRIE, 1, 5f, paradiseLostLootTool));
-
-    public static final DartItem GOLDEN_DART = add("golden_dart", new DartItem(tool));
-    public static final DartItem ENCHANTED_DART = add("enchanted_dart", new DartItem(rareTool));
-    public static final DartItem POISON_DART = add("poison_dart", new DartItem(tool));
+    
+    public static final DartItem GOLDEN_DART = add("golden_dart", new DartItem(tool()));
+    public static final DartItem ENCHANTED_DART = add("enchanted_dart", new DartItem(tool().rarity(RARE)));
+    public static final DartItem POISON_DART = add("poison_dart", new DartItem(tool()));
     public static final DartShooterItem GOLDEN_DART_SHOOTER = add("golden_dart_shooter", new DartShooterItem(GOLDEN_DART, unstackableTool));
     public static final DartShooterItem ENCHANTED_DART_SHOOTER = add("enchanted_dart_shooter", new DartShooterItem(ENCHANTED_DART, unstackableRareTool));
     public static final DartShooterItem POISON_DART_SHOOTER = add("poison_dart_shooter", new DartShooterItem(POISON_DART, unstackableTool));
@@ -114,9 +113,9 @@ public class ParadiseLostItems {
     public static final VampireBladeItem VAMPIRE_BLADE = add("vampire_blade", new VampireBladeItem(ParadiseLostToolMaterials.LEGENDARY, 3, -2.4f, paradiseLostLootTool));
     public static final PigSlayerItem PIG_SLAYER = add("pig_slayer", new PigSlayerItem(ParadiseLostToolMaterials.LEGENDARY, 3, -2.4f, paradiseLostLootTool));
     public static final CandyCaneSwordItem CANDY_CANE_SWORD = add("candy_cane_sword", new CandyCaneSwordItem(ParadiseLostToolMaterials.CANDY, 3, -2f, paradiseLostLootTool));
-
-    public static final TrinketItem CLOUD_PARACHUTE = add("cold_parachute", new TrinketItem(unstackableTool));
-    public static final TrinketItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new TrinketItem(tool().maxCount(1).maxDamage(20)));
+    
+    public static final TrinketItem CLOUD_PARACHUTE = add("cold_parachute", new ParachuteTrinketItem(unstackableTool, "cloud_parachute"));
+    public static final TrinketItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new ParachuteTrinketItem(tool().maxCount(1).maxDamage(20), "golden_parachute"));
 
     public static final AmbrosiumBloodstoneItem AMBROSIUM_BLOODSTONE = add("ambrosium_bloodstone", new AmbrosiumBloodstoneItem(unstackableTool));
     public static final ZaniteBloodstoneItem ZANITE_BLOODSTONE = add("zanite_bloodstone", new ZaniteBloodstoneItem(unstackableTool));
@@ -220,7 +219,10 @@ public class ParadiseLostItems {
     public static final Item ORANGE = add("orange", new Item(food(ParadiseLostFoodComponent.ORANGE)), compostable65);
     public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(ParadiseLostFoodComponent.WHITE_APPLE)), compostable(0f));
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(ParadiseLostBlocks.AMADRYS, food(ParadiseLostFoodComponent.GENERIC_WORSE)), compostable30);
-    public static final AliasedBlockItem SWETROOT = add("swetroot", new AliasedBlockItem(ParadiseLostBlocks.SWETROOT, food(ParadiseLostFoodComponent.GENERIC)), compostable30);
+    public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new StewItem(food(ParadiseLostFoodComponent.AMADRYS_NOODLES)));
+    public static final Item AMADRYS_BREAD = add("amadrys_bread", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD)));
+    public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED)));
+    public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.GENERIC)), compostable30);
     public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(ParadiseLostBlocks.FLAX, food()), compostable30);
     public static final Item BLUE_GUMMY_SWET = add("blue_gummy_swet", new Item(food(ParadiseLostFoodComponent.GUMMY_SWET, ParadiseLostRarity.PARADISE_LOST_LOOT)));
     public static final Item GOLDEN_GUMMY_SWET = add("golden_gummy_swet", new Item(food(ParadiseLostFoodComponent.GUMMY_SWET, ParadiseLostRarity.PARADISE_LOST_LOOT)));
@@ -472,7 +474,6 @@ public class ParadiseLostItems {
     public static final BlockItem WEEPING_CLOUDBURST = add("weeping_cloudburst", ParadiseLostBlocks.WEEPING_CLOUDBURST, decoration, compostable30);
     public static final BlockItem MOSS_STAR = add("moss_star", ParadiseLostBlocks.MOSS_STAR, decoration, compostable50);
     public static final BlockItem MOSS_BALL = add("moss_ball", ParadiseLostBlocks.MOSS_BALL, decoration, compostable30);
-    public static final BlockItem WILD_SWETROOT = add("wild_swetroot", ParadiseLostBlocks.WILD_SWETROOT, decoration, compostable30);
 
     public static final BlockItem ANCIENT_FLOWER = add("ancient_flower", ParadiseLostBlocks.ANCIENT_FLOWER, decoration, compostable65);
     public static final BlockItem ATARAXIA = add("ataraxia", ParadiseLostBlocks.ATARAXIA, decoration, compostable65);
@@ -503,15 +504,26 @@ public class ParadiseLostItems {
     public static final BlockItem LUCATIEL_LICHEN = add("lucatiel_lichen", ParadiseLostBlocks.LUCATIEL_LICHEN, decoration, compostable50);
     public static final BlockItem LICHEN_PILE = add("lichen_pile", ParadiseLostBlocks.LICHEN_PILE, decoration, compostable30);
     public static final BlockItem LUCATIEL_LICHEN_PILE = add("lucatiel_lichen_pile", ParadiseLostBlocks.LUCATIEL_LICHEN_PILE, decoration, compostable100);
-    public static final BlockItem ROOTCAP = add("rootcap", ParadiseLostBlocks.ROOTCAP, decoration(), compostable100);
-
+    
+    public static final BlockItem ROOTCAP = add("rootcap", ParadiseLostBlocks.ROOTCAP, decoration(), compostable65);
+    public static final BlockItem BROWN_SPORECAP = add("brown_sporecap", ParadiseLostBlocks.BROWN_SPORECAP, decoration(), compostable65);
+    public static final BlockItem PINK_SPORECAP = add("pink_sporecap", ParadiseLostBlocks.PINK_SPORECAP, decoration(), compostable65);
+    
+    public static final BlockItem SWEDROOT_SPREAD = add("swedroot_spread", ParadiseLostBlocks.SWEDROOT_SPREAD, decoration(), compostable65);
+    
     public static final BlockItem FLAXWEAVE_CUSHION = add("flaxweave_cushion", ParadiseLostBlocks.FLAXWEAVE_CUSHION, decoration, fuel(300));
-
+    
+    public static final BlockItem CHEESECAKE = add("halflight_cheesecake", ParadiseLostBlocks.CHEESECAKE, food());
+    
+    public static final BlockItem AMADRYS_BUNDLE = add("amadrys_bundle", ParadiseLostBlocks.AMADRYS_BUNDLE, decoration());
+    
     // lights
     public static final BlockItem AMBROSIUM_LANTERN = add("ambrosium_lantern", ParadiseLostBlocks.AMBROSIUM_LANTERN, decoration);
     public static final WallStandingBlockItem AMBROSIUM_TORCH = add("ambrosium_torch", new WallStandingBlockItem(ParadiseLostBlocks.AMBROSIUM_TORCH, ParadiseLostBlocks.AMBROSIUM_TORCH_WALL, decoration));
     // util blocks (enchanter, freezer, etc.)
-
+    
+    public static final BlockItem AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", ParadiseLostBlocks.AMBROSIUM_CAMPFIRE, decoration);
+    
     // door-like things
     public static final BlockItem SKYROOT_DOOR = add("skyroot_door", ParadiseLostBlocks.SKYROOT_DOOR, decoration);
     public static final BlockItem GOLDEN_OAK_DOOR = add("golden_oak_door", ParadiseLostBlocks.GOLDEN_OAK_DOOR, decoration);
@@ -583,11 +595,11 @@ public class ParadiseLostItems {
 //    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", ParadiseLostBlocks.DUNGEON_SWITCH, decoration);
 
     // these should be moved... somewhere?
-    public static final BoatItem SKYROOT_BOAT = add("skyroot_boat", new BoatItem(false, ParadiseLostBoatTypes.SKYROOT, boat));
-    public static final BoatItem GOLDEN_OAK_BOAT = add("golden_oak_boat", new BoatItem(false, ParadiseLostBoatTypes.GOLDEN_OAK, boat));
-    public static final BoatItem ORANGE_BOAT = add("orange_boat", new BoatItem(false, ParadiseLostBoatTypes.ORANGE, boat));
-    public static final BoatItem CRYSTAL_BOAT = add("crystal_boat", new BoatItem(false, ParadiseLostBoatTypes.CRYSTAL, boat));
-    public static final BoatItem WISTERIA_BOAT = add("wisteria_boat", new BoatItem(false, ParadiseLostBoatTypes.WISTERIA, boat));
+    public static final BoatItem SKYROOT_BOAT = ParadiseLostBlocks.SKYROOT.boatFactory(boat).item;
+    public static final BoatItem GOLDEN_OAK_BOAT = ParadiseLostBlocks.GOLDEN_OAK.boatFactory(boat).item;
+    public static final BoatItem ORANGE_BOAT = ParadiseLostBlocks.ORANGE.boatFactory(boat).item;
+    public static final BoatItem CRYSTAL_BOAT = ParadiseLostBlocks.CRYSTAL.boatFactory(boat).item;
+    public static final BoatItem WISTERIA_BOAT = ParadiseLostBlocks.WISTERIA.boatFactory(boat).item;
 
     // Chests
     public static final BlockItem SKYROOT_CHEST = add("skyroot_chest", ParadiseLostBlocks.SKYROOT_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));

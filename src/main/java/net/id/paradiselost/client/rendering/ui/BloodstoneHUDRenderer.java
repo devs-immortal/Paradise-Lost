@@ -3,8 +3,8 @@ package net.id.paradiselost.client.rendering.ui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.id.incubus_core.condition.api.Severity;
 import net.id.paradiselost.ParadiseLost;
-import net.id.paradiselost.effect.condition.Severity;
 import net.id.paradiselost.items.tools.bloodstone.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -57,7 +57,11 @@ public class BloodstoneHUDRenderer {
     }
 
     private static boolean isLookingAtMatchingEntity(MinecraftClient client, BloodstoneCapturedData capturedData) {
-        if (client.crosshairTarget == null || client.crosshairTarget.getType() != HitResult.Type.ENTITY) {
+        if (
+            client.crosshairTarget == null
+            || client.crosshairTarget.getType() != HitResult.Type.ENTITY
+            || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity)
+        ) {
             return false;
         }
 

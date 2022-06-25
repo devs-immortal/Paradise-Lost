@@ -17,20 +17,20 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteProvider;
     private int ticksUntilTextureChange, nextTexture = 2;
     private final double xMult = random.nextDouble();
-    private double zMult = random.nextDouble();
+    private final double zMult = random.nextDouble();
     private boolean dying;
 
 
     protected VenomBubbleParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider provider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
 
-        this.spriteProvider = provider;
+        spriteProvider = provider;
 
         setSprite(spriteProvider.getSprite(0, 4));
 
-        this.collidesWithWorld = true;
-        this.gravityStrength = 0.07F;
-        this.maxAge = 50 + random.nextInt(50);
+        collidesWithWorld = true;
+        gravityStrength = 0.07F;
+        maxAge = 50 + random.nextInt(50);
 
         ticksUntilTextureChange = 15 + random.nextInt(6);
 
@@ -38,9 +38,10 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
 
-        this.scale = (float) (0.05 + (random.nextDouble() * 0.05));
+        scale = (float) (0.05 + (random.nextDouble() * 0.05));
     }
 
+    @Override
     public void tick() {
         float lifeStage = getLifeProgress();
 
@@ -100,6 +101,7 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
         prevPosZ = z;
     }
 
+    @Override
     public int getBrightness(float tint) {
         return 200;
     }
@@ -119,7 +121,7 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
 
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new VenomBubbleParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.provider);
+            return new VenomBubbleParticle(world, x, y, z, velocityX, velocityY, velocityZ, provider);
         }
     }
 }

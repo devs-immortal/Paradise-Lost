@@ -29,10 +29,10 @@ public class AerwhaleEntity extends FlyingEntity {
 
     public AerwhaleEntity(EntityType<? extends AerwhaleEntity> type, World worldIn) {
         super(type, worldIn);
-        this.setYaw(360.0F * this.random.nextFloat());
-        this.setPitch(90.0F * this.random.nextFloat() - 45.0F);
-        this.ignoreCameraFrustum = true;
-        this.moveControl = new AerwhaleEntity.MoveHelperController(this);
+        setYaw(360.0F * random.nextFloat());
+        setPitch(90.0F * random.nextFloat() - 45.0F);
+        ignoreCameraFrustum = true;
+        moveControl = new AerwhaleEntity.MoveHelperController(this);
     }
 
     public static DefaultAttributeContainer.Builder createAerwhaleAttributes() {
@@ -43,7 +43,7 @@ public class AerwhaleEntity extends FlyingEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(5, new AerwhaleEntity.RandomFlyGoal(this));
+        goalSelector.add(5, new AerwhaleEntity.RandomFlyGoal(this));
 //		this.goalSelector.add(7, new AerwhaleEntity.LookAroundGoal(this));
 //		this.goalSelector.add(1, new AerwhaleEntity.UnstuckGoal(this));
 //		this.goalSelector.add(5, new AerwhaleEntity.TravelCourseGoal(this));
@@ -51,11 +51,11 @@ public class AerwhaleEntity extends FlyingEntity {
 
     @Override
     public boolean canSpawn(WorldAccess worldIn, SpawnReason spawnReasonIn) {
-        BlockPos pos = new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getBoundingBox().minY), MathHelper.floor(this.getZ()));
+        BlockPos pos = new BlockPos(MathHelper.floor(getX()), MathHelper.floor(getBoundingBox().minY), MathHelper.floor(getZ()));
 
-        return this.random.nextInt(65) == 0 && !StreamSupport.stream(worldIn.getBlockCollisions(this, this.getBoundingBox()).spliterator(), false).findAny().isPresent()
-                && !worldIn.containsFluid(this.getBoundingBox()) && worldIn.getLightLevel(pos) > 8
-                && super.canSpawn(worldIn, spawnReasonIn);
+        return random.nextInt(65) == 0 && !StreamSupport.stream(worldIn.getBlockCollisions(this, getBoundingBox()).spliterator(), false).findAny().isPresent()
+               && !worldIn.containsFluid(getBoundingBox()) && worldIn.getLightLevel(pos) > 8
+               && super.canSpawn(worldIn, spawnReasonIn);
     }
 
     @Override
@@ -66,30 +66,30 @@ public class AerwhaleEntity extends FlyingEntity {
     @Override
     public void tick() {
         super.tick();
-        this.extinguish();
+        extinguish();
 
-        if (this.getY() < this.world.getBottomY()) {
-            this.discard();
+        if (getY() < world.getBottomY()) {
+            discard();
         }
     }
 
     @Override
     public void travel(Vec3d positionIn) {
-        List<Entity> passengers = this.getPassengerList();
+        List<Entity> passengers = getPassengerList();
         if (!passengers.isEmpty()) {
             Entity entity = passengers.get(0);
             if (entity instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity) entity;
 
-                this.setYaw(player.getYaw());
-                this.prevYaw = this.getYaw();
-                this.motionYaw = this.prevYaw;
+                setYaw(player.getYaw());
+                prevYaw = getYaw();
+                motionYaw = prevYaw;
 
-                this.setPitch(player.getPitch());
-                this.prevPitch = this.getPitch();
-                this.motionPitch = this.prevPitch;
+                setPitch(player.getPitch());
+                prevPitch = getPitch();
+                motionPitch = prevPitch;
 
-                this.motionYaw = this.headYaw = player.headYaw;
+                motionYaw = headYaw = player.headYaw;
 
                 positionIn = new Vec3d(player.sidewaysSpeed, 0.0, (player.forwardSpeed <= 0.0F) ? player.forwardSpeed * 0.25F : player.forwardSpeed);
 
@@ -97,40 +97,40 @@ public class AerwhaleEntity extends FlyingEntity {
                 boolean isJumping = false;
 
                 if (isJumping) {
-                    this.setVelocity(new Vec3d(0.0, 0.0, 0.0));
+                    setVelocity(new Vec3d(0.0, 0.0, 0.0));
                 } else {
                     double d0 = Math.toRadians(player.getYaw() - 90.0);
                     double d1 = Math.toRadians(-player.getPitch());
                     double d2 = Math.cos(d1);
-                    this.setVelocity(
-                            0.98 * (this.getVelocity().x + 0.05 * Math.cos(d0) * d2),
-                            0.98 * (this.getVelocity().y + 0.02 * Math.sin(d1)),
-                            0.98 * (this.getVelocity().z + 0.05 * Math.sin(d0) * d2)
+                    setVelocity(
+                            0.98 * (getVelocity().x + 0.05 * Math.cos(d0) * d2),
+                            0.98 * (getVelocity().y + 0.02 * Math.sin(d1)),
+                            0.98 * (getVelocity().z + 0.05 * Math.sin(d0) * d2)
                     );
                 }
 
-                this.stepHeight = 1.0F;
+                stepHeight = 1.0F;
 
-                if (!this.world.isClient()) {
-                    this.airStrafingSpeed = this.getMovementSpeed() * 0.6F;
+                if (!world.isClient()) {
+                    airStrafingSpeed = getMovementSpeed() * 0.6F;
                     super.travel(positionIn);
                 }
 
-                this.lastLimbDistance = this.limbDistance;
-                double d0 = this.getX() - this.prevX;
-                double d1 = this.getZ() - this.prevZ;
+                lastLimbDistance = limbDistance;
+                double d0 = getX() - prevX;
+                double d1 = getZ() - prevZ;
                 float f4 = 4.0F * MathHelper.sqrt((float) (d0 * d0 + d1 * d1));
 
                 if (f4 > 1.0F) {
                     f4 = 1.0F;
                 }
 
-                this.limbDistance += 0.4F * (f4 - this.limbDistance);
-                this.limbAngle += this.limbDistance;
+                limbDistance += 0.4F * (f4 - limbDistance);
+                limbAngle += limbDistance;
             }
         } else {
-            this.stepHeight = 0.5F;
-            this.airStrafingSpeed = 0.02F;
+            stepHeight = 0.5F;
+            airStrafingSpeed = 0.02F;
             super.travel(positionIn);
         }
     }
@@ -140,11 +140,11 @@ public class AerwhaleEntity extends FlyingEntity {
         // todo change to be the uuids in the cape list in Incubus / patreon reward?
         if (player.getUuid().getMostSignificantBits() == 220717875589366683L && player.getUuid().getLeastSignificantBits() == -7181826737698904209L) {
             player.startRiding(this);
-            if (!this.world.isClient()) {
+            if (!world.isClient()) {
                 Text msg = Text.translatable("easteregg.paradise_lost.aerwhale");
                 player.world.getPlayers().forEach(p -> p.sendMessage(msg));
             }
-            return ActionResult.success(this.world.isClient());
+            return ActionResult.success(world.isClient());
         }
         return super.interactMob(player, hand);
     }
@@ -185,44 +185,44 @@ public class AerwhaleEntity extends FlyingEntity {
 
         public MoveHelperController(AerwhaleEntity aerwhale) {
             super(aerwhale);
-            this.parentEntity = aerwhale;
+            parentEntity = aerwhale;
         }
 
         @Override
         public void tick() {
-            if (this.state == MoveControl.State.MOVE_TO) {
-                if (this.courseChangeCooldown-- <= 0) {
-                    this.courseChangeCooldown += this.parentEntity.getRandom().nextInt(5) + 2;
-                    Vec3d Vector3d = new Vec3d(this.getTargetX() - this.parentEntity.getX(), this.getTargetY() - this.parentEntity.getY(), this.getTargetZ() - this.parentEntity.getZ());
+            if (state == MoveControl.State.MOVE_TO) {
+                if (courseChangeCooldown-- <= 0) {
+                    courseChangeCooldown += parentEntity.getRandom().nextInt(5) + 2;
+                    Vec3d Vector3d = new Vec3d(getTargetX() - parentEntity.getX(), getTargetY() - parentEntity.getY(), getTargetZ() - parentEntity.getZ());
                     double d0 = Vector3d.length();
                     Vector3d = Vector3d.normalize();
-                    if (this.canReach(Vector3d, MathHelper.ceil(d0))) {
-                        this.parentEntity.setVelocity(this.parentEntity.getVelocity().add(Vector3d.multiply(0.1D)));
-                        double dx = this.getTargetX() - this.entity.getX();
-                        double dz = this.getTargetZ() - this.entity.getZ();
-                        double dy = this.getTargetY() - this.entity.getY();
+                    if (canReach(Vector3d, MathHelper.ceil(d0))) {
+                        parentEntity.setVelocity(parentEntity.getVelocity().add(Vector3d.multiply(0.1D)));
+                        double dx = getTargetX() - entity.getX();
+                        double dz = getTargetZ() - entity.getZ();
+                        double dy = getTargetY() - entity.getY();
                         double d4 = dx * dx + dy * dy + dz * dz;
                         if (d4 < 2.5000003E-7F) {
-                            this.entity.setForwardSpeed(0.0F);
+                            entity.setForwardSpeed(0.0F);
                             return;
                         }
 
-                        this.parentEntity.prevYaw = this.parentEntity.getYaw();
-                        this.parentEntity.setYaw((float) (MathHelper.atan2(dz, dx) * (180F / (float) Math.PI)) - 90.0F);
-                        this.parentEntity.setPitch(-(float) (Math.atan(dy) * 73.0));
+                        parentEntity.prevYaw = parentEntity.getYaw();
+                        parentEntity.setYaw((float) (MathHelper.atan2(dz, dx) * (180F / (float) Math.PI)) - 90.0F);
+                        parentEntity.setPitch(-(float) (Math.atan(dy) * 73.0));
                     } else {
-                        this.state = MoveControl.State.WAIT;
+                        state = MoveControl.State.WAIT;
                     }
                 }
             }
         }
 
         private boolean canReach(Vec3d vec, int p_220673_2_) {
-            Box axisalignedbb = this.parentEntity.getBoundingBox();
+            Box axisalignedbb = parentEntity.getBoundingBox();
 
             for (int i = 1; i < p_220673_2_; ++i) {
                 axisalignedbb = axisalignedbb.offset(vec);
-                if (!this.parentEntity.world.canCollide(this.parentEntity, axisalignedbb)) {
+                if (!parentEntity.world.canCollide(parentEntity, axisalignedbb)) {
                     return false;
                 }
             }
@@ -235,8 +235,8 @@ public class AerwhaleEntity extends FlyingEntity {
         private final AerwhaleEntity parentEntity;
 
         public RandomFlyGoal(AerwhaleEntity aerwhale) {
-            this.parentEntity = aerwhale;
-            this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
+            parentEntity = aerwhale;
+            setControls(EnumSet.of(Control.MOVE, Control.LOOK));
         }
 
         /**
@@ -245,13 +245,13 @@ public class AerwhaleEntity extends FlyingEntity {
          */
         @Override
         public boolean canStart() {
-            MoveControl movementcontroller = this.parentEntity.getMoveControl();
+            MoveControl movementcontroller = parentEntity.getMoveControl();
             if (!movementcontroller.isMoving()) {
                 return true;
             } else {
-                double d0 = movementcontroller.getTargetX() - this.parentEntity.getX();
-                double d1 = movementcontroller.getTargetY() - this.parentEntity.getY();
-                double d2 = movementcontroller.getTargetZ() - this.parentEntity.getZ();
+                double d0 = movementcontroller.getTargetX() - parentEntity.getX();
+                double d1 = movementcontroller.getTargetY() - parentEntity.getY();
+                double d2 = movementcontroller.getTargetZ() - parentEntity.getZ();
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
                 return d3 < 1.0;
             }
@@ -271,14 +271,14 @@ public class AerwhaleEntity extends FlyingEntity {
         @Override
         public void start() {
             // Move somewhere within a 16x16x16 box around the entity
-            Random random = this.parentEntity.getRandom();
+            Random random = parentEntity.getRandom();
             float dx = (random.nextFloat() * 2.0F - 1.0F) * 32.0F;
             float dy = (random.nextFloat() * 2.0F - 1.0F) * 32.0F;
             float dz = (random.nextFloat() * 2.0F - 1.0F) * 32.0F;
-            double x = this.parentEntity.getX() + dx;
-            double y = this.parentEntity.getY() + dy;
-            double z = this.parentEntity.getZ() + dz;
-            this.parentEntity.getMoveControl().moveTo(x, y, z, 0.5);
+            double x = parentEntity.getX() + dx;
+            double y = parentEntity.getY() + dy;
+            double z = parentEntity.getZ() + dz;
+            parentEntity.getMoveControl().moveTo(x, y, z, 0.5);
 //			float pitch = (float)MathHelper.atan2(dx, -dz) * (180.0F / (float)Math.PI);
 //			float yaw = (float)MathHelper.atan2(MathHelper.sqrt(dx*dx + dz*dz), dy) * (180.0F / (float)Math.PI);
 //			this.parentEntity.rotationPitch = pitch;

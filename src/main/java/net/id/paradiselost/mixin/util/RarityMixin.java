@@ -1,6 +1,6 @@
 package net.id.paradiselost.mixin.util;
 
-import net.id.paradiselost.util.EnumExtender;
+import net.id.incubus_core.util.EnumExtender;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import org.spongepowered.asm.mixin.Final;
@@ -13,16 +13,13 @@ import java.util.Arrays;
 @Mixin(Rarity.class)
 public class RarityMixin {
     @SuppressWarnings("ShadowTarget")
-    @Shadow
-    @Mutable
-    @Final
-    private static Rarity[] field_8905;
+    @Shadow(aliases = "field_8905") @Mutable @Final private static Rarity[] VALUES;
 
     static {
         EnumExtender.register(Rarity.class, (name, args) -> {
-            Rarity entry = (Rarity) (Object) new RarityMixin(name, field_8905.length, (Formatting) args[0]);
-            field_8905 = Arrays.copyOf(field_8905, field_8905.length + 1);
-            return field_8905[field_8905.length - 1] = entry;
+            Rarity entry = (Rarity) (Object) new RarityMixin(name, VALUES.length, (Formatting) args[0]);
+            VALUES = Arrays.copyOf(VALUES, VALUES.length + 1);
+            return VALUES[VALUES.length - 1] = entry;
         });
     }
 

@@ -41,7 +41,7 @@ public abstract class SpreadableParadiseLostBlock extends SnowyBlock {
             world.setBlockState(pos, ParadiseLostBlocks.DIRT.getDefaultState());
         } else {
             if (world.getLightLevel(pos.up()) >= 9) {
-                BlockState blockState = this.getDefaultState();
+                BlockState blockState = getDefaultState();
 
                 for (int i = 0; i < 4; ++i) {
                     BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);

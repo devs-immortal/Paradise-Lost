@@ -28,14 +28,14 @@ public class AerbunnyModel extends EntityModel<AerbunnyEntity> {
     private float fluff_scale = 1;
 
     public AerbunnyModel(ModelPart root) {
-        this.body = root.getChild("body");
-        this.tail = this.body.getChild("tail");
-        this.back_left_leg = this.body.getChild("back_left_leg");
-        this.back_right_leg = this.body.getChild("back_right_leg");
-        this.right_front_leg = this.body.getChild("right_front_leg");
-        this.left_front_leg = this.body.getChild("left_front_leg");
-        this.head = this.body.getChild("head");
-        this.fluff = root.getChild("fluff");
+        body = root.getChild("body");
+        tail = body.getChild("tail");
+        back_left_leg = body.getChild("back_left_leg");
+        back_right_leg = body.getChild("back_right_leg");
+        right_front_leg = body.getChild("right_front_leg");
+        left_front_leg = body.getChild("left_front_leg");
+        head = body.getChild("head");
+        fluff = root.getChild("fluff");
     }
 
     public static TexturedModelData getTexturedModelData() {

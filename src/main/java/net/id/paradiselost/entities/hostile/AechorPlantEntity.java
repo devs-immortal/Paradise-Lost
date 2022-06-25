@@ -33,11 +33,11 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
     public AechorPlantEntity(EntityType<? extends AechorPlantEntity> entityType, World world) {
         super(entityType, world);
 
-        this.size = this.random.nextInt(4) + 1;
-        this.sinage = this.random.nextFloat() * 6F;
-        this.poisonRemaining = this.random.nextInt(4) + 2;
+        size = random.nextInt(4) + 1;
+        sinage = random.nextFloat() * 6F;
+        poisonRemaining = random.nextInt(4) + 2;
 
-        this.setPosition(this.getX(), this.getY(), this.getZ());
+        setPosition(getX(), getY(), getZ());
     }
 
     public static DefaultAttributeContainer.Builder createAechorPlantAttributes() {
@@ -45,16 +45,16 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
     }
 
     public EntityDimensions getSizeForStatus(EntityPose entityPose_1) {
-        return EntityDimensions.changing(0.75F + ((float) this.size * 0.125F), 0.5F + ((float) this.size * 0.075F));
+        return EntityDimensions.changing(0.75F + ((float) size * 0.125F), 0.5F + ((float) size * 0.075F));
     }
 
     @Override
     protected void initGoals() {
         super.initGoals();
 
-        this.goalSelector.add(4, new ProjectileAttackGoal(this, 0.0D, 30, 1.0F));
-        this.targetSelector.add(1, new RevengeGoal(this, AechorPlantEntity.class));
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, LivingEntity.class, 10, true, false,
+        goalSelector.add(4, new ProjectileAttackGoal(this, 0.0D, 30, 1.0F));
+        targetSelector.add(1, new RevengeGoal(this, AechorPlantEntity.class));
+        targetSelector.add(2, new ActiveTargetGoal<>(this, LivingEntity.class, 10, true, false,
                 entity -> !(entity instanceof AechorPlantEntity)));
     }
 
@@ -62,43 +62,43 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
     public void tick() {
         super.tick();
 
-        if (!this.world.getBlockState(this.getBlockPos().down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)) {
-            this.kill();
+        if (!world.getBlockState(getBlockPos().down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)) {
+            kill();
         }
 
-        if (this.hurtTime > 0) {
-            this.sinage += 0.9F;
+        if (hurtTime > 0) {
+            sinage += 0.9F;
         } else {
-            this.sinage += (this.getAttacker() != null ? 0.3f : 0.1f);
+            sinage += (getAttacker() != null ? 0.3f : 0.1f);
         }
-        if (this.sinage > 3.141593F * 2F) {
-            this.sinage -= (3.141593F * 2F);
+        if (sinage > 3.141593F * 2F) {
+            sinage -= (3.141593F * 2F);
         }
     }
 
     @Override
     public boolean canSee(Entity entity) {
-        double distance = this.distanceTo(entity);
+        double distance = distanceTo(entity);
         return distance <= 6.0F && super.canSee(entity);
     }
 
     @Override
     public boolean canSpawn(WorldAccess worldIn, SpawnReason SpawnReason) {
-        return worldIn.getBlockState(this.getBlockPos().down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)
-                && worldIn.getBaseLightLevel(this.getBlockPos(), 0) > 8;
+        return worldIn.getBlockState(getBlockPos().down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)
+                && worldIn.getBaseLightLevel(getBlockPos(), 0) > 8;
     }
 
     @Override
     public void attack(LivingEntity targetIn, float distFactor) {
-        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
-        double x = targetIn.getX() - this.getX();
+        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, world);
+        double x = targetIn.getX() - getX();
         double y = targetIn.getBoundingBox().minY + (double)(targetIn.getHeight() / 3.0F) - needle.getY();
-        double z = targetIn.getZ() - this.getZ();
+        double z = targetIn.getZ() - getZ();
         double distance = Math.sqrt((float) (x * x + z * z));
 
-        needle.setVelocity(x, y + distance * 0.20000000298023224D, z, 1.0F, (float)(14 - this.world.getDifficulty().getId() * 4));
-        this.playSound(ParadiseLostSoundEvents.ENTITY_AECHOR_PLANT_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
-        this.world.spawnEntity(needle);
+        needle.setVelocity(x, y + distance * 0.20000000298023224D, z, 1.0F, (float)(14 - world.getDifficulty().getId() * 4));
+        playSound(ParadiseLostSoundEvents.ENTITY_AECHOR_PLANT_SHOOT, 1.0F, 1.2F / (getRandom().nextFloat() * 0.2F + 0.9F));
+        world.spawnEntity(needle);
     }
 
     @Override
@@ -120,16 +120,18 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
         }
     }
 
+    @Override
     public Vec3d getVelocity() {
         return Vec3d.ZERO;
     }
 
+    @Override
     public void setVelocity(Vec3d velocity) {
     }
 
     @Override
     public void takeKnockback(double strength, double xRatio, double zRatio) {
-        if (this.getHealth() <= 0.0F) {
+        if (getHealth() <= 0.0F) {
             super.takeKnockback(strength, xRatio, zRatio);
         }
     }
@@ -137,13 +139,13 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
     @Override
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
-        compound.putInt("size", this.size);
+        compound.putInt("size", size);
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound compound) {
         super.readCustomDataFromNbt(compound);
-        this.size = compound.getInt("size");
+        size = compound.getInt("size");
     }
 
     @Override

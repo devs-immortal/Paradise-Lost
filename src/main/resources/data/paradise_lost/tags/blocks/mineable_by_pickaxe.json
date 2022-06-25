@@ -1,12 +1,13 @@
 {
   "replace": false,
   "values": [
-    "#paradise_lost:ores",
-    "#paradise_lost:ore_blocks",
-    "#paradise_lost:stone_blocks",
-    "paradise_lost:ambrosium_lantern",
-    "paradise_lost:zanite_chain",
-    "paradise_lost:gravitite_levitator",
-    "paradise_lost:icestone"
+    "#the_aether:aether_ores",
+    "#the_aether:aether_ore_blocks",
+    "#the_aether:aether_stone_blocks",
+    "the_aether:ambrosium_lantern",
+    "the_aether:zanite_chain",
+    "the_aether:gravitite_levitator",
+    "the_aether:icestone",
+    "the_aether:ambrosium_block"
   ]
 }

@@ -32,7 +32,7 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
 
     public DungeonSwitchBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(POWERED, false));
+        setDefaultState(stateManager.getDefaultState().with(POWERED, false));
 
     }
 
@@ -43,7 +43,7 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
                 setLinkedPos(world, pos, player.getBlockPos());
             } else {
                 if (interactActivates) {
-                    BlockState newState = this.togglePower(state, world, pos);
+                    BlockState newState = togglePower(state, world, pos);
                     triggerLinkedOpen(world, pos, newState.get(POWERED));
                 }
             }
@@ -56,7 +56,7 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
         super.onBlockBreakStart(state, world, pos, player);
         if (!world.isClient && hitActivates) {
-            BlockState newState = this.togglePower(state, world, pos);
+            BlockState newState = togglePower(state, world, pos);
             triggerLinkedOpen(world, pos, newState.get(POWERED));
         }
     }
@@ -65,7 +65,7 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
     public void onExplosionEvent(World world, BlockPos pos) {
         if (!world.isClient && explosionActivates) {
             BlockState state = world.getBlockState(pos);
-            BlockState newState = this.togglePower(state, world, pos);
+            BlockState newState = togglePower(state, world, pos);
             triggerLinkedOpen(world, pos, newState.get(POWERED));
         }
     }
@@ -82,7 +82,7 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
         super.onProjectileHit(world, state, hit, projectile);
         if (!world.isClient && projectileActivates) {
-            BlockState newState = this.togglePower(state, world, hit.getBlockPos());
+            BlockState newState = togglePower(state, world, hit.getBlockPos());
             triggerLinkedOpen(world, hit.getBlockPos(), newState.get(POWERED));
         }
     }
@@ -125,6 +125,7 @@ public class DungeonSwitchBlock extends Block implements BlockEntityProvider {
     }
 
 
+    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(POWERED);
     }

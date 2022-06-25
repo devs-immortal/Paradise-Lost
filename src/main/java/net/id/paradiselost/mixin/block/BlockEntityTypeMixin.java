@@ -22,6 +22,6 @@ public class BlockEntityTypeMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void makeBlocksMutable(CallbackInfo ci) {
-        this.blocks = new HashSet<>(this.blocks);
+        blocks = new HashSet<>(blocks);
     }
 }

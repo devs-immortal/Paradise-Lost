@@ -1,20 +1,26 @@
 package net.id.paradiselost.blocks.blockentity;
 
+import net.id.incubus_core.be.InventoryBlockEntity;
 import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FoodBowlBlockEntity extends ParadiseLostBlockEntity {
-
+public class FoodBowlBlockEntity extends BlockEntity implements InventoryBlockEntity {
+    private final DefaultedList<ItemStack> inventory;
+    
     public FoodBowlBlockEntity(BlockPos pos, BlockState state) {
-        super(ParadiseLostBlockEntityTypes.FOOD_BOWL, pos, state, 1, HopperStrategy.IN_ANY_OUT_BOTTOM);
+        super(ParadiseLostBlockEntityTypes.FOOD_BOWL, pos, state);
+        inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -50,10 +56,20 @@ public class FoodBowlBlockEntity extends ParadiseLostBlockEntity {
     private void updateState() {
         world.setBlockState(pos, getCachedState().with(FoodBowlBlock.FULL, !inventory.get(0).isEmpty()));
     }
-
+    
+    @Override
+    public @NotNull HopperStrategy getHopperStrategy() {
+        return HopperStrategy.IN_ANY_OUT_BOTTOM;
+    }
+    
     @SuppressWarnings("ConstantConditions")
     @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return super.canInsert(slot, stack, dir) && stack.isFood() && stack.getItem().getFoodComponent().isMeat();
+        return InventoryBlockEntity.super.canInsert(slot, stack, dir) && stack.isFood() && stack.getItem().getFoodComponent().isMeat();
+    }
+    
+    @Override
+    public DefaultedList<ItemStack> getItems() {
+        return inventory;
     }
 }

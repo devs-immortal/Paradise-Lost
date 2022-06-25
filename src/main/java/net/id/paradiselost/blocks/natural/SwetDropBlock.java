@@ -34,6 +34,7 @@ public class SwetDropBlock extends EntityBlockEgg {
         });
     }
 
+    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }

@@ -1,9 +1,9 @@
 package net.id.paradiselost.entities.projectile;
 
-import net.id.paradiselost.api.ConditionAPI;
-import net.id.paradiselost.component.ConditionManager;
+import net.id.incubus_core.condition.api.ConditionAPI;
+import net.id.incubus_core.condition.api.Persistence;
+import net.id.incubus_core.condition.base.ConditionManager;
 import net.id.paradiselost.effect.condition.Conditions;
-import net.id.paradiselost.effect.condition.Persistence;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.entity.EntityType;

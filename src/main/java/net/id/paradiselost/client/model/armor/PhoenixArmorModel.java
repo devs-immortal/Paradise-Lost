@@ -14,7 +14,7 @@ public class PhoenixArmorModel extends BipedEntityModel<LivingEntity> {
 
     public PhoenixArmorModel(ModelPart root) {
         super(root);
-        this.head = root.getChild(EntityModelPartNames.HEAD);
+        head = root.getChild(EntityModelPartNames.HEAD);
     }
 
     public static TexturedModelData getTexturedModelData() {

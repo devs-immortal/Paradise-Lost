@@ -1,6 +1,6 @@
 package net.id.paradiselost.mixin.client.render;
 
-import net.id.paradiselost.devel.ParadiseLostDevel;
+import net.id.incubus_core.devel.Devel;
 import net.id.paradiselost.entities.misc.RookEntity;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -13,10 +13,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityRenderDispatcher.class)
 public class EntityRenderDispatcherMixin {
-
-    @Inject(method = "renderHitbox", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method = "renderHitbox",
+        at = @At("HEAD"),
+        cancellable = true
+    )
     private static void renderHitbox(MatrixStack matrices, VertexConsumer vertices, Entity entity, float tickDelta, CallbackInfo ci) {
-        if(!ParadiseLostDevel.isDevel() && entity instanceof RookEntity) {
+        if(!Devel.isDevel() && entity instanceof RookEntity) {
             ci.cancel();
         }
     }

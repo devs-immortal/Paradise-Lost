@@ -37,10 +37,11 @@ public class ParadiseLostMushroomBlock extends MushroomPlantBlock {
         if (blockState.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
             return true;
         } else {
-            return world.getBaseLightLevel(pos, 0) < 13 && this.canPlantOnTop(blockState, world, blockPos);
+            return world.getBaseLightLevel(pos, 0) < 13 && canPlantOnTop(blockState, world, blockPos);
         }
     }
 
+    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.fullCube();
     }

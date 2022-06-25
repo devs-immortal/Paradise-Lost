@@ -21,50 +21,52 @@ public class GoldenOakLeafParticle extends SpriteBillboardParticle {
 
     protected GoldenOakLeafParticle(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, SpriteProvider provider) {
         super(clientWorld, d, e, f);
-        this.setSprite(provider);
+        setSprite(provider);
 
-        this.collidesWithWorld = true;
-        this.gravityStrength = 0.09F;
-        this.maxAge = 1200;
+        collidesWithWorld = true;
+        gravityStrength = 0.09F;
+        maxAge = 1200;
 
-        this.velocityX *= 0.325F;
-        this.velocityY *= 0.0F;
-        this.velocityZ *= 0.325F;
+        velocityX *= 0.325F;
+        velocityY *= 0.0F;
+        velocityZ *= 0.325F;
 
-        this.velocityComposite = g / 50;
+        velocityComposite = g / 50;
         velocityDown = h;
 
-        this.rotateFactor = ((float) Math.random() - 0.5F) * 0.01F;
-        this.scale = (float) (0.06 + (random.nextDouble() / 14));
+        rotateFactor = ((float) Math.random() - 0.5F) * 0.01F;
+        scale = (float) (0.06 + (random.nextDouble() / 14));
     }
 
+    @Override
     public void tick() {
         velocityY = velocityDown;
         super.tick();
-        this.velocityZ = velocityComposite / 2;
-        this.velocityX = velocityComposite / 2;
-        if (this.age < 2) {
-            this.velocityY = 0;
+        velocityZ = velocityComposite / 2;
+        velocityX = velocityComposite / 2;
+        if (age < 2) {
+            velocityY = 0;
         }
-        if (this.age > this.maxAge - 1 / 0.06F) {
-            if (this.alpha > 0.06F) {
-                this.alpha -= 0.06F;
+        if (age > maxAge - 1 / 0.06F) {
+            if (alpha > 0.06F) {
+                alpha -= 0.06F;
             } else {
-                this.markDead();
+                markDead();
             }
         }
-        this.prevAngle = this.angle;
-        if (!this.onGround && !this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
-            this.angle += Math.PI * Math.sin(this.rotateFactor * this.age) / 2;
+        prevAngle = angle;
+        if (!onGround && !world.getFluidState(new BlockPos(x, y, z)).isIn(FluidTags.WATER)) {
+            angle += Math.PI * Math.sin(rotateFactor * age) / 2;
         }
-        if (this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
-            this.velocityY = 0;
-            this.gravityStrength = 0;
+        if (world.getFluidState(new BlockPos(x, y, z)).isIn(FluidTags.WATER)) {
+            velocityY = 0;
+            gravityStrength = 0;
         } else {
-            this.gravityStrength = 0.1F;
+            gravityStrength = 0.1F;
         }
     }
 
+    @Override
     public int getBrightness(float tint) {
         return 200;
     }
@@ -84,7 +86,7 @@ public class GoldenOakLeafParticle extends SpriteBillboardParticle {
 
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new GoldenOakLeafParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.provider);
+            return new GoldenOakLeafParticle(world, x, y, z, velocityX, velocityY, velocityZ, provider);
         }
     }
 }

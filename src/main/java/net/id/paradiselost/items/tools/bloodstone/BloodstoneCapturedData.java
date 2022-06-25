@@ -1,7 +1,7 @@
 package net.id.paradiselost.items.tools.bloodstone;
 
-import net.id.paradiselost.api.ConditionAPI;
-import net.id.paradiselost.component.ConditionManager;
+import net.id.incubus_core.condition.api.ConditionAPI;
+import net.id.incubus_core.condition.base.ConditionManager;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.minecraft.entity.LivingEntity;
@@ -154,7 +154,7 @@ public class BloodstoneCapturedData {
         };
     }
 
-    public static record ConditionData(String id, float severity) {
+    public record ConditionData(String id, float severity) {
         public static ConditionData fromNBT(NbtCompound nbt) {
             return new ConditionData(nbt.getString("id"), nbt.getFloat("severity"));
         }

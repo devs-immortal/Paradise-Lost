@@ -35,22 +35,22 @@ public class MapRendererMixin {
             ),
             cancellable = true)
     private void updateTexture(CallbackInfo ci) {
-        if (this.state.dimension == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
+        if (state.dimension == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             for (int i = 0; i < 128; ++i) {
                 for (int j = 0; j < 128; ++j) {
                     int k = j + i * 128;
-                    int l = this.state.colors[k] & 255;
+                    int l = state.colors[k] & 255;
 
                     if (l >> 2 == 0) { // MapColor.CLEAR
                         // Who knows what this does? Nothing, it seems. But just in case I'll let it stick around.
                         // Comment your code please!
-                        this.texture.getImage().setColor(j, i, (k + k / 128 & 1) * 8 + 16 << 24);
+                        texture.getImage().setColor(j, i, (k + k / 128 & 1) * 8 + 16 << 24);
                     } else {
-                        this.texture.getImage().setColor(j, i, ParadiseLostMapColorUtil.getColor(MapColor.COLORS[l >> 2], l & 3));
+                        texture.getImage().setColor(j, i, ParadiseLostMapColorUtil.getColor(MapColor.COLORS[l >> 2], l & 3));
                     }
                 }
             }
-            this.texture.upload();
+            texture.upload();
             ci.cancel();
         }
     }

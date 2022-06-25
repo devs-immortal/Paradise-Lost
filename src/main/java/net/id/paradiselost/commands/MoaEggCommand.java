@@ -39,8 +39,9 @@ public class MoaEggCommand {
 
     private static int execute(ServerCommandSource source, Collection<ServerPlayerEntity> targets, Identifier raceId, boolean baby) {
         var race = MoaAPI.getRace(raceId);
-
-        if (race == MoaAPI.FALLBACK_MOA) {
+    
+        // If the player intends to get the fallback, let them get it. Otherwise, fail.
+        if (race == MoaAPI.FALLBACK_MOA && raceId.compareTo(MoaAPI.FALLBACK_MOA.getId()) != 0) {
             source.sendError(Text.translatable("commands.paradise_lost.moaegg.failure", raceId.toString()));
         } else {
             ItemStack template = MoaGenes.getEggForCommand(race, source.getWorld(), baby);

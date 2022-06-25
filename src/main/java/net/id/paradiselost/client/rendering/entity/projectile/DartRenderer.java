@@ -16,7 +16,7 @@ public class DartRenderer extends ProjectileEntityRenderer<DartEntity> {
 
     public DartRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager);
-        this.shadowOpacity = 0.0F;
+        shadowOpacity = 0.0F;
     }
 
     @Override

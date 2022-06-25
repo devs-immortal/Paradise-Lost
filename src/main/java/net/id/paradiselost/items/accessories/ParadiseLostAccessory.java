@@ -17,10 +17,10 @@ public class ParadiseLostAccessory {
     }
 
     public ParadiseLostAccessory(ItemStack stack, AccessoryType type) {
-        this.accessoryType = type;
-        this.accessoryStack = stack;
+        accessoryType = type;
+        accessoryStack = stack;
 
-        this.extraType = type == AccessoryType.RING ? AccessoryType.EXTRA_RING : type == AccessoryType.MISC ? AccessoryType.EXTRA_MISC : null;
+        extraType = type == AccessoryType.RING ? AccessoryType.EXTRA_RING : type == AccessoryType.MISC ? AccessoryType.EXTRA_MISC : null;
     }
 
     public Identifier getRegistryName() {
@@ -28,14 +28,14 @@ public class ParadiseLostAccessory {
     }
 
     public AccessoryType getAccessoryType() {
-        return this.accessoryType;
+        return accessoryType;
     }
 
     public AccessoryType getExtraType() {
-        return this.extraType;
+        return extraType;
     }
 
     public ItemStack getAccessoryStack() {
-        return this.accessoryStack;
+        return accessoryStack;
     }
 }

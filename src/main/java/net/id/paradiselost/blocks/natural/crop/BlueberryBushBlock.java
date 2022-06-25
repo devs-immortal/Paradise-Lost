@@ -34,6 +34,7 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
         return true;
     }
 
+    @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (state.get(AGE) > 0 && entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
             entity.slowMovement(state, new Vec3d(0.900000011920929D, 0.75D, 0.900000011920929D));
@@ -76,6 +77,6 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
 
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(this.asItem());
+        return new ItemStack(asItem());
     }
 }

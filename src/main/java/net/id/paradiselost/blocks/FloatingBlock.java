@@ -27,12 +27,12 @@ public class FloatingBlock extends OreBlock {
 
     @Override
     public void onBlockAdded(BlockState state, World worldIn, BlockPos posIn, BlockState oldState, boolean notify) {
-        worldIn.createAndScheduleBlockTick(posIn, this, this.getFallDelay());
+        worldIn.createAndScheduleBlockTick(posIn, this, getFallDelay());
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facingIn, BlockState facingState, WorldAccess worldIn, BlockPos posIn, BlockPos facingPosIn) {
-        worldIn.createAndScheduleBlockTick(posIn, this, this.getFallDelay());
+        worldIn.createAndScheduleBlockTick(posIn, this, getFallDelay());
         return super.getStateForNeighborUpdate(stateIn, facingIn, facingState, worldIn, posIn, facingPosIn);
     }
 
@@ -43,11 +43,11 @@ public class FloatingBlock extends OreBlock {
 
     @Override
     public void scheduledTick(BlockState stateIn, ServerWorld worldIn, BlockPos posIn, Random randIn) {
-        this.checkFloatable(worldIn, posIn);
+        checkFloatable(worldIn, posIn);
     }
 
     private void checkFloatable(World worldIn, BlockPos pos) {
-        if (!this.powered || worldIn.isReceivingRedstonePower(pos)) {
+        if (!powered || worldIn.isReceivingRedstonePower(pos)) {
             if (!worldIn.isClient) {
                 FloatingBlockHelper.ANY.tryCreate(worldIn, pos);
             }

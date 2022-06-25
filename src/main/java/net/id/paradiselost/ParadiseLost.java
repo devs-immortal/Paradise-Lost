@@ -18,7 +18,6 @@ import net.id.paradiselost.client.rendering.shader.ParadiseLostShaders;
 import net.id.paradiselost.client.rendering.texture.ParadiseLostTextures;
 import net.id.paradiselost.client.rendering.util.ParadiseLostColorProviders;
 import net.id.paradiselost.commands.ParadiseLostCommands;
-import net.id.paradiselost.devel.ParadiseLostDevel;
 import net.id.paradiselost.effect.ParadiseLostStatusEffects;
 import net.id.paradiselost.effect.condition.Conditions;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
@@ -29,7 +28,6 @@ import net.id.paradiselost.loot.ParadiseLostLootNumberProviderTypes;
 import net.id.paradiselost.lore.ParadiseLostLore;
 import net.id.paradiselost.registry.ParadiseLostRegistries;
 import net.id.paradiselost.screen.ParadiseLostScreens;
-import net.id.paradiselost.util.ParadiseLostSignType;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.world.ParadiseLostGameRules;
 import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
@@ -103,9 +101,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostScreens.init();
         ParadiseLostLore.init();
         ParadiseLostParticles.init();
-        if(FabricLoader.getInstance().isDevelopmentEnvironment()){
-            ParadiseLostDevel.init();
-        }
     }
 
     @Override
@@ -120,16 +115,13 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostBlockEntityRenderers.initClient();
         ParadiseLostParticles.Client.init();
         ParadiseLostTextures.initClient();
+        ParadiseLostBlocks.initClient();
         ParadiseLostItemRenderers.initClient();
         ParadiseLostScreens.initClient();
         Conditions.clientInit();
         ParadiseLostShaders.init();
         HolidayBlockModel.init();
-        ParadiseLostSignType.clientInit();
         ParadiseLostScreens.clientInit();
-        if(FabricLoader.getInstance().isDevelopmentEnvironment()){
-            ParadiseLostDevel.Client.init();
-        }
     }
     
     @Environment(EnvType.CLIENT)

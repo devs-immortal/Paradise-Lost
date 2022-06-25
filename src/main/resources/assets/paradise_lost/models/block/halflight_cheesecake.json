@@ -1,0 +1,21 @@
+{
+  "textures": {
+    "particle": "the_aether:block/halflight_cheesecake_side",
+    "bottom": "the_aether:block/halflight_cheesecake_bottom",
+    "top": "the_aether:block/halflight_cheesecake_top",
+    "side": "the_aether:block/halflight_cheesecake_side"
+  },
+  "elements": [
+    {   "from": [ 1, 0, 1 ],
+      "to": [ 15, 8, 15 ],
+      "faces": {
+        "down":  { "texture": "#bottom", "cullface": "down" },
+        "up":    { "texture": "#top" },
+        "north": { "texture": "#side" },
+        "south": { "texture": "#side" },
+        "west":  { "texture": "#side" },
+        "east":  { "texture": "#side" }
+      }
+    }
+  ]
+}

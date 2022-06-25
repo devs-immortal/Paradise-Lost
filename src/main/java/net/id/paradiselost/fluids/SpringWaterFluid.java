@@ -51,14 +51,17 @@ public class SpringWaterFluid extends WaterFluid {
         return 0;
     }
 
+    @Override
     public BlockState toBlockState(FluidState state) {
         return ParadiseLostBlocks.SPRING_WATER.getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
     }
 
+    @Override
     public Fluid getFlowing() {
         return ParadiseLostFluids.FLOWING_SPRING_WATER;
     }
 
+    @Override
     public Fluid getStill() {
         return ParadiseLostFluids.SPRING_WATER;
     }
@@ -74,15 +77,18 @@ public class SpringWaterFluid extends WaterFluid {
         public Flowing() {
         }
 
+        @Override
         protected void appendProperties(StateManager.Builder<Fluid, FluidState> builder) {
             super.appendProperties(builder);
             builder.add(LEVEL);
         }
 
+        @Override
         public int getLevel(FluidState state) {
             return state.get(LEVEL);
         }
 
+        @Override
         public boolean isStill(FluidState state) {
             return false;
         }
@@ -92,10 +98,12 @@ public class SpringWaterFluid extends WaterFluid {
         public Still() {
         }
 
+        @Override
         public int getLevel(FluidState state) {
             return 8;
         }
 
+        @Override
         public boolean isStill(FluidState state) {
             return true;
         }

@@ -18,7 +18,7 @@ public class QuicksoilConfig extends DynamicConfiguration {
 
     public QuicksoilConfig(Optional<BlockState> state, Optional<String> type) {
         super(state.orElse(ParadiseLostBlocks.QUICKSOIL.getDefaultState()), type);
-        this.optionalState = state;
+        optionalState = state;
     }
 
     public QuicksoilConfig() {
