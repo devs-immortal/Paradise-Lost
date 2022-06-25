@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:holystone_brick_slab",
+    "paradise_lost:holystone_slab",
+    "paradise_lost:mossy_holystone_slab",
+    "paradise_lost:cobbled_holystone_slab",
+    "paradise_lost:carved_stone_slab",
+    "paradise_lost:mossy_carved_stone_slab"
+  ]
+}

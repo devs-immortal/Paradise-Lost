@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "paradise_lost:gravitite_ore"
+  },
+  "result": "paradise_lost:gravitite_gemstone",
+  "experience": 1.0,
+  "cookingtime": 100
+}

@@ -325,6 +325,6 @@
     "#minecraft:anvil",
     "#minecraft:cauldrons",
     "#minecraft:rails",
-    "#the_aether:mineable_by_pickaxe"
+    "#paradise_lost:mineable_by_pickaxe"
   ]
 }

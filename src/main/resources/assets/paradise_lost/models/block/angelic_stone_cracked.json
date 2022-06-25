@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "paradise_lost:block/angelic_stone_cracked"
+  }
+}

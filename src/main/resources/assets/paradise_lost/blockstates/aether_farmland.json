@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "moisture=0": {
+      "model": "paradise_lost:block/aether_farmland"
+    },
+    "moisture=1": {
+      "model": "paradise_lost:block/aether_farmland"
+    },
+    "moisture=2": {
+      "model": "paradise_lost:block/aether_farmland"
+    },
+    "moisture=3": {
+      "model": "paradise_lost:block/aether_farmland"
+    },
+    "moisture=4": {
+      "model": "paradise_lost:block/aether_farmland"
+    },
+    "moisture=5": {
+      "model": "paradise_lost:block/aether_farmland"
+    },
+    "moisture=6": {
+      "model": "paradise_lost:block/aether_farmland"
+    },
+    "moisture=7": {
+      "model": "paradise_lost:block/aether_farmland_moist"
+    }
+  }
+}

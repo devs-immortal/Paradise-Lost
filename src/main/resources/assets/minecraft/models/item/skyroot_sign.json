@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "the_aether:item/skyroot_sign"
+    "layer0": "paradise_lost:item/skyroot_sign"
   }
 }

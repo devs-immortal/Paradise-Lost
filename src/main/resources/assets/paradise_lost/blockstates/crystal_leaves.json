@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "fruity=false": {
+      "model": "paradise_lost:block/crystal_leaves"
+    },
+    "fruity=true": {
+      "model": "paradise_lost:block/crystal_fruit_leaves"
+    }
+  }
+}

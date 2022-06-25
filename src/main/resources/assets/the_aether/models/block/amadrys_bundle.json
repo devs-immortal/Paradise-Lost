@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/template_piston",
-  "textures": {
-    "platform": "the_aether:block/amadrys_bundle_top",
-    "bottom": "the_aether:block/amadrys_bundle_bottom",
-    "side": "the_aether:block/amadrys_bundle_side"
-  }
-}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "paradise_lost:block/freezer_side",
+    "north": "paradise_lost:block/freezer_side",
+    "south": "paradise_lost:block/freezer_side",
+    "east": "paradise_lost:block/freezer_side",
+    "west": "paradise_lost:block/freezer_side",
+    "up": "paradise_lost:block/freezer_top",
+    "down": "paradise_lost:block/freezer_bottom"
+  }
+}

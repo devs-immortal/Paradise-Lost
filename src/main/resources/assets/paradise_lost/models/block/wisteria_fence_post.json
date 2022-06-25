@@ -1,0 +1,6 @@
+{
+  "parent": "block/fence_post",
+  "textures": {
+    "texture": "paradise_lost:block/wisteria_planks"
+  }
+}

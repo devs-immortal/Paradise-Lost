@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "paradise_lost:block/orange_sapling"
+  }
+}

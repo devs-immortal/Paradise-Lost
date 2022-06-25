@@ -1,0 +1,64 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "feature": {
+          "config": {
+            "feature": {
+              "config": {
+                "requires_block_below": true,
+                "rock_count": 4,
+                "hole_count": 1,
+                "valid_blocks": [
+                  "paradise_lost:holystone",
+                  "paradise_lost:aether_dirt",
+                  "paradise_lost:quicksoil",
+                  "paradise_lost:aether_grass",
+                  "paradise_lost:enchanted_aether_grass",
+                  "paradise_lost:aether_bush"
+                ],
+                "state": {
+                  "Properties": {
+                    "falling": "true"
+                  },
+                  "Name": "minecraft:water"
+                }
+              },
+              "type": "minecraft:spring_feature"
+            },
+            "decorator": {
+              "config": {
+                "height": {
+                  "min_inclusive": {
+                    "absolute": 1
+                  },
+                  "max_inclusive": {
+                    "absolute": 256
+                  },
+                  "inner": 1,
+                  "type": "minecraft:biased_to_bottom"
+                }
+              },
+              "type": "minecraft:range"
+            }
+          },
+          "type": "minecraft:decorated"
+        },
+        "decorator": {
+          "config": {},
+          "type": "minecraft:square"
+        }
+      },
+      "type": "minecraft:decorated"
+    },
+    "decorator": {
+      "config": {
+        "count": 32,
+        "extra_chance": 0,
+        "extra_count": 0
+      },
+      "type": "minecraft:count_extra"
+    }
+  },
+  "type": "minecraft:decorated"
+}

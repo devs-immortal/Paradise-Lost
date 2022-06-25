@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "the_aether:dense_aercloud",
-    "the_aether:spring_water",
-    "the_aether:flowing_spring_water",
+    "paradise_lost:dense_aercloud",
+    "paradise_lost:spring_water",
+    "paradise_lost:flowing_spring_water",
     "minecraft:water",
     "minecraft:flowing_water"
   ]

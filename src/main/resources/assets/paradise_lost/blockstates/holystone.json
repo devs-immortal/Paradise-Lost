@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "paradise_lost:block/holystone"
+      },
+      {
+        "model": "paradise_lost:block/holystone_mirrored"
+      }
+    ]
+  }
+}

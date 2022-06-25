@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "paradise_lost:block/aether_grass",
+    "layer1": "paradise_lost:block/aether_grass_flowers"
+  }
+}

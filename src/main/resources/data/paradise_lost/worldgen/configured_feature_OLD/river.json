@@ -1,0 +1,123 @@
+{
+  "type": "minecraft:decorated",
+  "config": {
+    "decorator": {
+      "type": "minecraft:count_extra",
+      "config": {
+        "count": 45000,
+        "extra_count": 0,
+        "extra_chance": 0
+      }
+    },
+    "feature": {
+      "type": "minecraft:decorated",
+      "config": {
+        "decorator": {
+          "type": "minecraft:decorated",
+          "config": {
+            "outer": {
+              "type": "minecraft:nope",
+              "config": {}
+            },
+            "inner": {
+              "type": "minecraft:square",
+              "config": {}
+            }
+          }
+        },
+        "feature": {
+          "type": "minecraft:decorated",
+          "config": {
+            "decorator": {
+              "type": "minecraft:count_noise_biased",
+              "config": {
+                "noise_to_count_ratio": 1,
+                "noise_factor": 225,
+                "noise_offset": 0.1
+              }
+            },
+            "feature": {
+              "type": "minecraft:decorated",
+              "config": {
+                "decorator": {
+                  "type": "minecraft:count_noise_biased",
+                  "config": {
+                    "noise_to_count_ratio": -1,
+                    "noise_factor": 225,
+                    "noise_offset": -0.1
+                  }
+                },
+                "feature": {
+                  "type": "minecraft:decorated",
+                  "config": {
+                    "decorator": {
+                      "type": "minecraft:range",
+                      "config": {
+                        "height": {
+                          "type": "minecraft:trapezoid",
+                          "min_inclusive": {
+                            "absolute": 118
+                          },
+                          "max_inclusive": {
+                            "absolute": 148
+                          }
+                        }
+                      }
+                    },
+                    "feature": {
+                      "type": "minecraft:simple_block",
+                      "config": {
+                        "to_place": {
+                          "state": {
+                            "Name": "minecraft:water",
+                            "Properties": {
+                              "level": "0"
+                            }
+                          },
+                          "type": "minecraft:simple_state_provider"
+                        },
+                        "place_on": [
+                          {
+                            "Name": "paradise_lost:holystone"
+                          }
+                        ],
+                        "place_in": [
+                          {
+                            "Name": "paradise_lost:aether_dirt"
+                          },
+                          {
+                            "Name": "paradise_lost:quicksoil"
+                          },
+                          {
+                            "Name": "paradise_lost:aether_grass"
+                          }
+                        ],
+                        "place_under": [
+                          {
+                            "Name": "paradise_lost:holystone"
+                          },
+                          {
+                            "Name": "paradise_lost:aether_dirt"
+                          },
+                          {
+                            "Name": "paradise_lost:quicksoil"
+                          },
+                          {
+                            "Name": "paradise_lost:aether_grass"
+                          },
+                          {
+                            "Name": "paradise_lost:enchanted_aether_grass"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

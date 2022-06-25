@@ -13,6 +13,6 @@ public class AbstentineBloodstoneItem extends BloodstoneItem {
 
     @Override
     protected List<Text> getDefaultText() {
-        return ImmutableList.of(Text.translatable("info.the_aether.bloodstone.abstentine").formatted(Formatting.GOLD));
+        return ImmutableList.of(Text.translatable("info.paradise_lost.bloodstone.abstentine").formatted(Formatting.GOLD));
     }
 }

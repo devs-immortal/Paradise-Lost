@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "paradise_lost:block/gravitite_levitator_top",
+    "bottom": "paradise_lost:block/gravitite_levitator_bottom",
+    "side": "paradise_lost:block/gravitite_levitator_side"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.paradise_lost.void_aether.title"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.void_aether.description"
+    },
+    "icon": {
+      "item": "paradise_lost:aerogel"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "invoid": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "dimension": "paradise_lost:the_aether",
+        "position": {
+          "y": {
+            "min": -100,
+            "max": -7
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "invoid"
+    ]
+  ],
+  "parent": "paradise_lost:root"
+}

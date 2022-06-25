@@ -1,15 +1,15 @@
 {
   "replace": false,
   "values": [
-    "the_aether:zanite_sword",
-    "the_aether:gravitite_sword",
-    "the_aether:valkyrie_lance",
-    "the_aether:lightning_sword",
-    "the_aether:holy_sword",
-    "the_aether:flaming_sword",
-    "the_aether:candy_cane_sword",
-    "the_aether:gravitite_sword",
-    "the_aether:vampire_blade",
-    "the_aether:pig_slayer"
+    "paradise_lost:zanite_sword",
+    "paradise_lost:gravitite_sword",
+    "paradise_lost:valkyrie_lance",
+    "paradise_lost:lightning_sword",
+    "paradise_lost:holy_sword",
+    "paradise_lost:flaming_sword",
+    "paradise_lost:candy_cane_sword",
+    "paradise_lost:gravitite_sword",
+    "paradise_lost:vampire_blade",
+    "paradise_lost:pig_slayer"
   ]
 }

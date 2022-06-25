@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "the_aether:zanite_pickaxe",
-    "the_aether:gravitite_pickaxe",
-    "the_aether:valkyrie_pickaxe"
+    "paradise_lost:zanite_pickaxe",
+    "paradise_lost:gravitite_pickaxe",
+    "paradise_lost:valkyrie_pickaxe"
   ]
 }

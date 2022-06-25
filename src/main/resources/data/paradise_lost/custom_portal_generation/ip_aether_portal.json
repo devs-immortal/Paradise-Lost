@@ -1,0 +1,6 @@
+{
+  "schema_version": "imm_ptl:v1",
+  "from": ["minecraft:overworld"],"to": "paradise_lost:the_aether",
+  "form": {"type": "imm_ptl:convert_conventional_portal","portal_block": "paradise_lost:blue_portal"},
+  "trigger": {"type": "imm_ptl:conventional_dimension_change"}
+}

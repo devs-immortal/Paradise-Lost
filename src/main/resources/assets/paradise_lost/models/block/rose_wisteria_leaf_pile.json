@@ -1,0 +1,6 @@
+{
+  "parent": "paradise_lost:block/leaf_pile",
+  "textures": {
+    "leaves": "paradise_lost:block/rose_wisteria_leaves"
+  }
+}

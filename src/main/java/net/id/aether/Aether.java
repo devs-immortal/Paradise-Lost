@@ -64,7 +64,7 @@ import java.util.function.Consumer;
  * A list of developers can be found in {@code resources/fabric.mod.json}.
  */
 public class Aether implements ModInitializer, ClientModInitializer, DedicatedServerModInitializer {
-    public static final String MOD_ID = "the_aether";
+    public static final String MOD_ID = "paradise_lost";
     public static final Logger LOG = LogUtils.getLogger();
     
     /**

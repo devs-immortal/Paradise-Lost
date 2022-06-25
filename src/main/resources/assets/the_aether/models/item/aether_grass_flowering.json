@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "the_aether:block/aether_grass",
-    "layer1": "the_aether:block/aether_grass_flowers"
-  }
-}

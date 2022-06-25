@@ -1,0 +1,135 @@
+{
+  "type": "paradise_lost:the_aether",
+  "generator": {
+    "biome_source": {
+      "biomes": [
+        {
+          "parameters": {
+            "erosion": [
+              0.2,
+              1.0
+            ],
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "humidity": 0.0,
+            "continentalness": [
+              0.0,
+              1.0
+            ]
+          },
+          "biome": "paradise_lost:aether_highlands"
+        },
+        {
+          "parameters": {
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0,
+            "temperature": -0.15,
+            "humidity": 0.1,
+            "continentalness": [
+              -0.8,
+              0.5
+            ]
+          },
+          "biome": "paradise_lost:highlands_shield"
+        },
+        {
+          "parameters": {
+            "erosion": [
+              -0.2,
+              0.96
+            ],
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0,
+            "temperature": -0.25,
+            "humidity": 0.02,
+            "continentalness": [
+              0.8,
+              1.0
+            ]
+          },
+          "biome": "paradise_lost:continental_plateau"
+        },
+        {
+          "parameters": {
+            "erosion": [
+              -0.23,
+              0.86
+            ],
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0,
+            "temperature": -0.35,
+            "humidity": 0.075,
+            "continentalness": 0.84
+          },
+          "biome": "paradise_lost:autumnal_tundra"
+        },
+        {
+          "parameters": {
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.05,
+            "temperature": 0.35,
+            "humidity": -0.05,
+            "continentalness": [
+              -1.0,
+              1.0
+            ]
+          },
+          "biome": "paradise_lost:aether_highlands_thicket"
+        },
+        {
+          "parameters": {
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0,
+            "temperature": 0.225,
+            "humidity": -0.015,
+            "continentalness": [
+              -1.0,
+              0.23
+            ]
+          },
+          "biome": "paradise_lost:aether_highlands_forest"
+        },
+        {
+          "parameters": {
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.125,
+            "temperature": 0.1,
+            "humidity": 0.0,
+            "continentalness": [
+              -0.4,
+              0.82
+            ]
+          },
+          "biome": "paradise_lost:aether_wisteria_woods"
+        }        
+      ],
+      "type": "minecraft:multi_noise"
+    },
+    "settings": "paradise_lost:aether_noise",
+    "type": "minecraft:noise"
+  }
+}

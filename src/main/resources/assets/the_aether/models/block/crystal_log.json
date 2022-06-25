@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "the_aether:block/crystal_log_top",
-    "side": "the_aether:block/crystal_log_side"
-  }
-}

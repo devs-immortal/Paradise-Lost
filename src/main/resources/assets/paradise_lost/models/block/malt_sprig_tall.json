@@ -1,0 +1,9 @@
+{
+  "parent": "paradise_lost:template/generic_groundcover",
+  "textures": {
+    "top_lower": "paradise_lost:block/blank",
+    "top_upper": "paradise_lost:block/malt_sprig",
+    "stalk": "paradise_lost:block/malt_sprig_stalks",
+    "stalk_inner": "paradise_lost:block/malt_sprig_stalks_inner"
+  }
+}

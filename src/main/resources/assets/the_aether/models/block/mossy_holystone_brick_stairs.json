@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "the_aether:block/mossy_holystone_brick",
-    "top": "the_aether:block/mossy_holystone_brick",
-    "side": "the_aether:block/mossy_holystone_brick"
-  }
-}

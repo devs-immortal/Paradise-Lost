@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#paradise_lost:aether_stone_slabs",
+    "#paradise_lost:aether_stone_stairs",
+    "#paradise_lost:aether_stone_walls",
+    "#paradise_lost:aether_stone_traps",
+    "#paradise_lost:carved_stone_blocks",
+    "#paradise_lost:aether_natural_stone",
+    "paradise_lost:holystone_brick"
+  ]
+}

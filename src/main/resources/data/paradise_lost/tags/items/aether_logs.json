@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#paradise_lost:skyroot_logs",
+    "#paradise_lost:golden_oak_logs",
+    "#paradise_lost:crystal_logs",
+    "#paradise_lost:wisteria_logs",
+    "#paradise_lost:orange_logs",
+    "#paradise_lost:aether_hollow_logs"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "paradise_lost:block/permafrost"
+      },
+      {
+        "model": "paradise_lost:block/permafrost",
+        "y": 90
+      },
+      {
+        "model": "paradise_lost:block/permafrost",
+        "y": 180
+      },
+      {
+        "model": "paradise_lost:block/permafrost",
+        "y": 270
+      }
+    ]
+  }
+}

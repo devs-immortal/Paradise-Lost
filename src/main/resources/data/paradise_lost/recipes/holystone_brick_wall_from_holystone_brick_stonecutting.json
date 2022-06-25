@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "paradise_lost:holystone_brick"
+  },
+  "result": "paradise_lost:holystone_brick_wall",
+  "count": 1
+}

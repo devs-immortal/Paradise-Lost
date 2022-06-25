@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:aether_grass",
+    "paradise_lost:aether_dirt",
+    "paradise_lost:coarse_aether_dirt",
+    "paradise_lost:permafrost",
+    "paradise_lost:enchanted_aether_grass",
+    "paradise_lost:aether_frozen_grass"
+  ]
+}

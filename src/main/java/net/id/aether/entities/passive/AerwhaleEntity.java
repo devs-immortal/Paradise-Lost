@@ -141,7 +141,7 @@ public class AerwhaleEntity extends FlyingEntity {
         if (player.getUuid().getMostSignificantBits() == 220717875589366683L && player.getUuid().getLeastSignificantBits() == -7181826737698904209L) {
             player.startRiding(this);
             if (!this.world.isClient()) {
-                Text msg = Text.translatable("easteregg.the_aether.aerwhale");
+                Text msg = Text.translatable("easteregg.paradise_lost.aerwhale");
                 player.world.getPlayers().forEach(p -> p.sendMessage(msg));
             }
             return ActionResult.success(this.world.isClient());

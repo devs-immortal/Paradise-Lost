@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "paradise_lost:block/skyroot_planks",
+    "side": "paradise_lost:block/skyroot_bookshelf"
+  }
+}

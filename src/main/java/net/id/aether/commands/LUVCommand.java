@@ -34,17 +34,17 @@ public class LUVCommand {
     }
 
     public static int queryLUV(ServerCommandSource source, PlayerEntity target) {
-        source.sendFeedback(Text.translatable("commands.the_aether.LUV.success.query", LUV.getLUV(target).getValue()), false);
+        source.sendFeedback(Text.translatable("commands.paradise_lost.LUV.success.query", LUV.getLUV(target).getValue()), false);
         return 1;
     }
 
     public static int setLUV(ServerCommandSource source, PlayerEntity target, byte value) {
         if(WorthinessChecker.isPlayerWorthy(target.getUuid()) || Devel.isDevel()){
             LUV.getLUV(target).setValue(value);
-            source.sendFeedback(Text.translatable("commands.the_aether.LUV.success.set", target.getDisplayName(), LUV.getLUV(target).getValue()), false);
+            source.sendFeedback(Text.translatable("commands.paradise_lost.LUV.success.set", target.getDisplayName(), LUV.getLUV(target).getValue()), false);
         }
         else {
-            source.sendError(Text.translatable("commands.the_aether.LUV.failure.set"));
+            source.sendError(Text.translatable("commands.paradise_lost.LUV.failure.set"));
         }
         return 1;
     }

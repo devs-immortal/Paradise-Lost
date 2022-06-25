@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "paradise_lost:orange_ruin",
+      "weight": 1
+    } 
+  ],
+  "placement": {
+    "salt": 99992,
+    "spacing": 64,
+    "separation": 59,
+    "type": "minecraft:random_spread"
+  }
+}

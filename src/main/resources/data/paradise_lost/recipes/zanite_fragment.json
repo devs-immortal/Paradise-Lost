@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paradise_lost:zanite_gemstone"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:zanite_fragment",
+    "count": 9
+  }
+}

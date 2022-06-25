@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "the_aether:block/blueberry_bush_stage0"
-  }
-}
