@@ -17,6 +17,7 @@ val reiVersion: String by properties
 val moreTagsVersion: String by properties
 val recipeConfidenceVersion: String by properties
 val satinVersion: String by properties
+val noChatReportsVersion: String by properties
 
 plugins {
     id("fabric-loom") version "0.12-SNAPSHOT"
@@ -70,6 +71,11 @@ repositories {
     maven {
         name = "Gudenau"
         url = uri("https://maven.gudenau.net")
+    }
+
+    maven {
+        name = "Modrinth"
+        url = uri("https://api.modrinth.com/maven")
     }
 
     maven {
@@ -174,6 +180,12 @@ dependencies {
             group = "me.shedaniel",
             name = "RoughlyEnoughItems-fabric",
             version = reiVersion,
+    )
+
+    include(
+            group = "maven.modrinth",
+            name = "no-chat-reports",
+            version = noChatReportsVersion,
     )
 }
 
