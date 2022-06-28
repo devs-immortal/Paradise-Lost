@@ -14,7 +14,7 @@ import net.minecraft.util.registry.Registry;
  * Tools for aether development, such as blocks and items
  */
 // Package-private to avoid being called in production
-class AetherDevTools {
+public class AetherDevTools {
     /**
      * Spawns a slider
      */
@@ -38,7 +38,7 @@ class AetherDevTools {
         }
     };
 
-    static void init() {
+    public static void init() {
         Registry.register(Registry.ITEM, Aether.locate("slider_test_item"), SLIDER_TEST_ITEM);
     }
 

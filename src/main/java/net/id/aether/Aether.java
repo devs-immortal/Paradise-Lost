@@ -19,6 +19,7 @@ import net.id.aether.client.rendering.shader.AetherShaders;
 import net.id.aether.client.rendering.texture.AetherTextures;
 import net.id.aether.client.rendering.util.AetherColorProviders;
 import net.id.aether.commands.AetherCommands;
+import net.id.aether.devel.AetherDevTools;
 import net.id.aether.effect.AetherStatusEffects;
 import net.id.aether.effect.condition.Conditions;
 import net.id.aether.entities.AetherEntityTypes;
@@ -106,6 +107,9 @@ public class Aether implements ModInitializer, ClientModInitializer, DedicatedSe
         AetherScreens.init();
         AetherLore.init();
         AetherParticles.init();
+        if (Devel.isDevel()) {
+            AetherDevTools.init();
+        }
     }
 
     @Override
