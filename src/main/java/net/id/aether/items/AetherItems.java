@@ -652,8 +652,8 @@ public class AetherItems {
     }
 
     private static class AetherMusicDiscItem extends MusicDiscItem {
-        protected AetherMusicDiscItem(int comparatorValueIn, SoundEvent soundIn, Settings settings) {
-            super(comparatorValueIn, soundIn, settings);
+        protected AetherMusicDiscItem(int comparatorValueIn, SoundEvent soundIn, Settings settings, int length) {
+            super(comparatorValueIn, soundIn, settings, length);
         }
     }
 }
