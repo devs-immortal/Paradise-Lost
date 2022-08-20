@@ -2,7 +2,6 @@ package net.id.aether.entities;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.entities.block.SliderEntity;
 import net.id.aether.entities.hostile.AechorPlantEntity;
@@ -79,7 +78,7 @@ public class AetherEntityTypes {
     }
 
     private static <T extends MobEntity> Action<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, Heightmap.Type heightmapType, SpawnRestriction.SpawnPredicate<T> predicate) {
-        return (id, entityType) -> SpawnRestrictionAccessor.callRegister(entityType, location, heightmapType, predicate);
+        return (id, entityType) -> SpawnRestriction.register(entityType, location, heightmapType, predicate);
     }
 
     private static <T extends MobEntity> Action<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, SpawnRestriction.SpawnPredicate<T> predicate) {

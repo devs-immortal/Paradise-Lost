@@ -44,7 +44,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
 
         List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 3 * (this.prevY - this.getY()), 0)));
         for (Entity entity : otherEntities) {
-            if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
+            if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides) {
                 entity.move(MovementType.SHULKER_BOX, this.getVelocity());
                 entity.setOnGround(true);
 

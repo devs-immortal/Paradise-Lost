@@ -32,7 +32,7 @@ public final class CloudRendererMixin {
     @Shadow private int lastCloudsBlockY;
     @Shadow private int lastCloudsBlockZ;
     @Shadow @NotNull private Vec3d lastCloudsColor;
-    @Shadow @NotNull private CloudRenderMode lastCloudsRenderMode;
+    @Shadow @NotNull private CloudRenderMode lastCloudRenderMode;
     @Shadow private boolean cloudsDirty;
     @Shadow @Nullable private VertexBuffer cloudsBuffer;
     
@@ -74,12 +74,12 @@ public final class CloudRendererMixin {
             int floorX = (int) Math.floor(posX);
             int floorY = (int) Math.floor(posY / 4.0D);
             int floorZ = (int) Math.floor(posZ);
-            if (floorX != this.lastCloudsBlockX || floorY != this.lastCloudsBlockY || floorZ != this.lastCloudsBlockZ || this.client.options.getCloudRenderMode() != this.lastCloudsRenderMode || this.lastCloudsColor.squaredDistanceTo(cloudColor) > 2.0E-4D) {
+            if (floorX != this.lastCloudsBlockX || floorY != this.lastCloudsBlockY || floorZ != this.lastCloudsBlockZ || this.client.options.getCloudRenderMode().getValue() != this.lastCloudRenderMode || this.lastCloudsColor.squaredDistanceTo(cloudColor) > 2.0E-4D) {
                 this.lastCloudsBlockX = floorX;
                 this.lastCloudsBlockY = floorY;
                 this.lastCloudsBlockZ = floorZ;
                 this.lastCloudsColor = cloudColor;
-                this.lastCloudsRenderMode = this.client.options.getCloudRenderMode();
+                this.lastCloudRenderMode = this.client.options.getCloudRenderMode().getValue();
                 this.cloudsDirty = true;
             }
 
@@ -109,7 +109,7 @@ public final class CloudRendererMixin {
                 cloudsBuffer.bind();
                 
                 //TODO Double check bytecode, this feels really weird. If this is correct, pure Mojank.
-                int passes = lastCloudsRenderMode == CloudRenderMode.FANCY ? 0 : 1;
+                int passes = lastCloudRenderMode == CloudRenderMode.FANCY ? 0 : 1;
                 for (int pass = passes; pass < 2; pass++) {
                     if (pass == 0) {
                         RenderSystem.colorMask(false, false, false, false);

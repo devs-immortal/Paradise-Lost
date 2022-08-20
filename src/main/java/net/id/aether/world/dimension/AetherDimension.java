@@ -8,7 +8,7 @@ import net.id.aether.blocks.AetherBlocks;
 import net.id.aether.util.AetherSoundEvents;
 import net.id.aether.util.MiscUtil;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
-import net.kyrptonaught.customportalapi.util.CPASoundEventData;
+import net.kyrptonaught.customportalapi.event.CPASoundEventData;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.registry.*;

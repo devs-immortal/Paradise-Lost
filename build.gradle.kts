@@ -69,11 +69,6 @@ repositories {
     }
 
     maven {
-        name = "Gudenau"
-        url = uri("https://maven.gudenau.net")
-    }
-
-    maven {
         name = "Modrinth"
         url = uri("https://api.modrinth.com/maven")
     }
@@ -81,6 +76,11 @@ repositories {
     maven {
         name = "Jitpack"
         url = uri("https://jitpack.io")
+    }
+
+    maven {
+        name = "Gudenau"
+        url = uri("https://maven.gudenau.net")
     }
 }
 
@@ -176,11 +176,11 @@ dependencies {
             version = modmenuVersion,
     )
 
-    modRuntimeOnly(
-            group = "me.shedaniel",
-            name = "RoughlyEnoughItems-fabric",
-            version = reiVersion,
-    )
+//    modRuntimeOnly(
+//            group = "me.shedaniel",
+//            name = "RoughlyEnoughItems-fabric",
+//            version = reiVersion,
+//    )
 
     include(
             group = "maven.modrinth",
