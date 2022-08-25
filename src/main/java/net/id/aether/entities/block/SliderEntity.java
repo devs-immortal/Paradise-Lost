@@ -6,7 +6,6 @@ import net.id.aether.blocks.dungeon.SliderBlock;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.minecraft.block.FallingBlock;
-import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
@@ -46,9 +45,7 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     public SliderEntity(World world, BlockPos pos) {
-        super(AetherEntityTypes.SLIDER, world, pos, AetherBlocks.SLIDER_BLOCK.getDefaultState(), false);
-        this.setDirection(Direction.NORTH);
-        this.setState(State.DORMANT);
+        this(AetherEntityTypes.SLIDER, world, pos);
     }
 
     @Override
@@ -120,11 +117,6 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     // TODO 0.2.0: Override shouldCease()
-
-    @Override
-    public boolean isAttackable() {
-        return false;
-    }
 
     public void alignToBlock() {
         this.setVelocity(0, 0, 0);

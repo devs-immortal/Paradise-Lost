@@ -1,7 +1,6 @@
 package net.id.aether.entities.block;
 
 import net.id.aether.entities.AetherEntityTypes;
-import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -20,11 +19,12 @@ public class SliderBossEntity extends SliderEntity {
 
     public SliderBossEntity(World world, BlockPos pos) {
         super(AetherEntityTypes.SLIDER_BOSS, world, pos);
-        calculateBoundingBox();
+        this.calculateBoundingBox();
     }
 
     @Override
     protected Box calculateBoundingBox() {
+        this.collides = true;
         return VoxelShapes.fullCube().getBoundingBox()
                 .expand(2)
                 .offset(getPos().subtract(new Vec3d(0.5, -2, 0.5)));
