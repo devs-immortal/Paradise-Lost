@@ -1,5 +1,5 @@
 # Paradise Lost
-[![Code license (GNU GPL 3.0)](https://img.shields.io/badge/code%20license-GNU%20GPLv3-green.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Code license (GNU GPL 3.0)](https://img.shields.io/github/license/devs-immortal/Paradise-Lost)](https://github.com/devs-immortal/Paradise-Lost/blob/0.2.0/1.19/master/LICENSE.md)
 [![Asset license (Unlicensed)](https://img.shields.io/badge/assets%20license-All%20Rights%20Reserved-red.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Github all releases](https://img.shields.io/github/downloads/kalucky0/The-Aether/total.svg?logoColor=FFFFFF&logo=github)](https://github.com/devs-immortal/The-Aether/releases/)
 
@@ -14,9 +14,9 @@ The Aether is a dimension high in the sky composed of floating islands.
 Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, structures to explore, mythical creatures, and perilous dungeons. Build a Glowstone frame and add water to light the mystical portal, step in and be transported to the beautiful but hostile paradise known as the Aether.
 This tranquil oasis is the polar opposite of the Nether, filled with lush trees and foliage, and populated by unique and exotic mobs, both hostile and friendly. The Aether is deceptively charming, and the further you explore, the darker its secrets get. Mine new ores, craft new gear, explore hidden temples and dungeons, and battle to claim The Aether as your own.
 
-You can download the mod on [Modrinth](https://modrinth.com/mod/aether), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
+You can download the mod on [Modrinth](https://modrinth.com/mod/paradise-lost), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
 
-**Original repo:** [GildedGames/The-Aether](https://gitea.gildedgames.com/GildedGames/The-Aether)
+**Original repo:** [GildedGames/The-Aether](https://github.com/Gilded-Games/The-Aether)
 
 ## Support
 [![Discord](https://img.shields.io/discord/770691727568404521.svg?logoColor=FFFFFF&logo=discord&color=7289DA)](https://discord.com/invite/wmMa47n)
@@ -44,6 +44,6 @@ Created by Immortal Devs.\
 Inspired by [Gilded Games' The Aether](https://github.com/Gilded-Games/The-Aether), which uses the GNU GPLv3 license.\
 Assets are all rights are reserved by Immortal Devs.
 
-You can find out more information about the license [here](https://github.com/devs-immortal/Paradise-Lost/LICENSE.md).
+You can find out more information about the license [here](https://github.com/devs-immortal/Paradise-Lost/blob/0.2.0/1.19/master/LICENSE.md).
 
-<a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api" target="_blank"><img alt="Fabric API - Mods - Minecraft - CurseForge" src="https://i.imgur.com/Ol1Tcf8.png" height="48"></a>&nbsp;&nbsp;<a href="https://www.curseforge.com/minecraft/mc-mods/trinkets-fabric" target="_blank"><img alt="Trinkets (Fabric) - Mods - Minecraft - CurseForge" src="https://kalucky0.b-cdn.net/trinkets.webp" height="48"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api" target="_blank"><img alt="Fabric API - Mods - Minecraft - CurseForge" src="https://i.imgur.com/Ol1Tcf8.png" height="48"></a>&nbsp;&nbsp;<a href="https://www.curseforge.com/minecraft/mc-mods/trinkets" target="_blank"><img alt="Trinkets (Fabric) - Mods - Minecraft - CurseForge" src="https://kalucky0.b-cdn.net/trinkets.webp" height="48"></a>
