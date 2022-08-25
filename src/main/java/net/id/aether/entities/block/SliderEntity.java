@@ -64,6 +64,7 @@ public class SliderEntity extends BlockLikeEntity {
         }
     }
 
+    // TODO 0.2.0: Split into different methods
     @Override
     public void postTickMovement() {
         switch (getState()) {
@@ -85,6 +86,7 @@ public class SliderEntity extends BlockLikeEntity {
                 }
             }
             case DORMANT -> {
+                // TODO 0.2.0: Consider looking for a more robust solution
                 for (Entity entity : this.world.getOtherEntities(this, this.getBoundingBox().expand(5))
                         .stream()
                         .filter(entity -> entity instanceof PlayerEntity && this.squaredDistanceTo(entity) < 25)
@@ -104,6 +106,8 @@ public class SliderEntity extends BlockLikeEntity {
             }
         }
     }
+
+    // TODO 0.2.0: Override shouldCease()
 
     @Override
     public boolean isAttackable() {
@@ -159,12 +163,8 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     public State getState() {
-        try {
-            return State.byName(this.dataTracker.get(STATE));
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return State.DORMANT;
-        }
+        var state = State.byName(this.dataTracker.get(STATE));
+        return state != null ? state : State.DORMANT;
     }
 
     @Override
