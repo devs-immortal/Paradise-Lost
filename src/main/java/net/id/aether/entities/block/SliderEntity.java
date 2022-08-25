@@ -123,7 +123,7 @@ public class SliderEntity extends BlockLikeEntity {
     @Override
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
-        compound.putString("Direction", this.getDirection().name());
+        compound.putString("Direction", this.getDirection().getName());
         compound.putString("State", this.getState().name());
     }
 
@@ -131,13 +131,8 @@ public class SliderEntity extends BlockLikeEntity {
     public void readCustomDataFromNbt(NbtCompound compound) {
         super.readCustomDataFromNbt(compound);
         if (compound.contains("Direction", NbtType.STRING)) {
-            Direction dir;
-            try {
-                dir = Direction.valueOf(compound.getString("Direction"));
-            } catch (IllegalArgumentException e) {
-                dir = Direction.NORTH;
-            }
-            this.setDirection(dir);
+            Direction dir = Direction.byName(compound.getString("Direction"));
+            this.setDirection(dir != null ? dir : Direction.NORTH);
         }
         if (compound.contains("State", NbtType.STRING)) {
             this.setState(compound.getString("State"));
@@ -145,7 +140,7 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     public void setDirection(Direction direction) {
-        this.dataTracker.set(DIRECTION, direction);
+        if (!this.world.isClient()) this.dataTracker.set(DIRECTION, direction);
     }
 
     public Direction getDirection() {
