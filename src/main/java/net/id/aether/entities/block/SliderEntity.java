@@ -29,13 +29,20 @@ public class SliderEntity extends BlockLikeEntity {
 
     private static final int MAX_WINDED_TICKS = 60;
     private static final int MAX_PRIMING_TICKS = 10;
+    private static final int PLAYER_DETECTION_RADIUS = 5;
     private int windedTicks = 0;
     private int primingTicks = 0;
     private int slideTicks = 0;
 
-    public SliderEntity(EntityType<? extends BlockLikeEntity> entityType, World world) {
+    public SliderEntity(EntityType<? extends SliderEntity> entityType, World world) {
         super(entityType, world);
         this.blockState = AetherBlocks.SLIDER_BLOCK.getDefaultState();
+    }
+
+    public SliderEntity(EntityType<? extends SliderEntity> entityType, World world, BlockPos pos) {
+        super(entityType, world, pos, AetherBlocks.SLIDER_BLOCK.getDefaultState(), false);
+        this.setDirection(Direction.NORTH);
+        this.setState(State.DORMANT);
     }
 
     public SliderEntity(World world, BlockPos pos) {
@@ -64,47 +71,52 @@ public class SliderEntity extends BlockLikeEntity {
         }
     }
 
-    // TODO 0.2.0: Split into different methods
     @Override
     public void postTickMovement() {
         switch (getState()) {
-            case SLIDING -> {
-                this.updateVelocity(0.01F, Vec3d.of(this.getDirection().getVector()));
-                this.move(MovementType.SELF, this.getVelocity());
-                if (this.horizontalCollision) {
-                    this.alignToBlock();
-                    this.setState(slideTicks == 0 ? State.DORMANT : State.WINDED);
-                    this.slideTicks = 0;
-                    break;
-                }
-                slideTicks++;
-            }
-            case WINDED -> {
-                if (++windedTicks > MAX_WINDED_TICKS) {
-                    windedTicks = 0;
-                    this.setState(State.DORMANT);
-                }
-            }
-            case DORMANT -> {
-                // TODO 0.2.0: Consider looking for a more robust solution
-                for (Entity entity : this.world.getOtherEntities(this, this.getBoundingBox().expand(5))
-                        .stream()
-                        .filter(entity -> entity instanceof PlayerEntity && this.squaredDistanceTo(entity) < 25)
-                        .toList()
-                ) {
-                    this.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET, entity.getPos());
-                    this.setDirection(Direction.fromRotation(this.getYaw()));
-                    this.setRotation(0, 0);
-                    this.setState(State.PRIMING);
-                }
-            }
-            case PRIMING -> {
-                if (++primingTicks > MAX_PRIMING_TICKS) {
-                    primingTicks = 0;
-                    this.setState(State.SLIDING);
-                }
-            }
+            case SLIDING -> tickSlide(0.01F);
+            case WINDED -> tickWinded(MAX_WINDED_TICKS);
+            case DORMANT -> tickDormant(PLAYER_DETECTION_RADIUS, false);
+            case PRIMING -> tickPriming(MAX_PRIMING_TICKS);
         }
+    }
+
+    protected void tickPriming(int maxPrimingTicks) {
+        if (++primingTicks > maxPrimingTicks) {
+            primingTicks = 0;
+            this.setState(State.SLIDING);
+        }
+    }
+
+    protected void tickDormant(int playerDetectionRadius, boolean canMoveVertically) {
+        for (Entity entity : this.world.getOtherEntities(this, this.getBoundingBox().expand(playerDetectionRadius))
+                .stream()
+                .filter(entity -> entity instanceof PlayerEntity && this.squaredDistanceTo(entity) < playerDetectionRadius * playerDetectionRadius)
+                .toList()
+        ) {
+            Vec3d displacement = entity.getPos().subtract(this.getPos());
+            this.setDirection(Direction.getFacing(displacement.x, canMoveVertically ? displacement.y : 0D, displacement.z));
+            this.setState(State.PRIMING);
+        }
+    }
+
+    protected void tickWinded(int maxWindedTicks) {
+        if (++windedTicks > maxWindedTicks) {
+            windedTicks = 0;
+            this.setState(State.DORMANT);
+        }
+    }
+
+    protected void tickSlide(float acceleration) {
+        this.updateVelocity(acceleration, Vec3d.of(this.getDirection().getVector()));
+        this.move(MovementType.SELF, this.getVelocity());
+        if (this.horizontalCollision) {
+            this.alignToBlock();
+            this.setState(slideTicks == 0 ? State.DORMANT : State.WINDED);
+            this.slideTicks = 0;
+            return;
+        }
+        slideTicks++;
     }
 
     // TODO 0.2.0: Override shouldCease()
@@ -158,6 +170,10 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     public void setState(String state) {
+        // Sanity check
+        if (!this.blockState.getProperties().contains(SliderBlock.STATE)) {
+            this.blockState = AetherBlocks.SLIDER_BLOCK.getDefaultState();
+        }
         this.blockState = this.blockState.with(SliderBlock.STATE, State.byName(state));
         this.dataTracker.set(STATE, state);
     }

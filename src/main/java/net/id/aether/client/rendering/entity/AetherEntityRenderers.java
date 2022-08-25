@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.id.aether.client.rendering.entity.hostile.AechorPlantRenderer;
 import net.id.aether.client.rendering.entity.hostile.CockatriceRenderer;
+import net.id.aether.client.rendering.entity.hostile.SliderBossEntityRenderer;
 import net.id.aether.client.rendering.entity.hostile.SwetRenderer;
 import net.id.aether.client.rendering.entity.misc.RookRenderer;
 import net.id.aether.client.rendering.entity.passive.AerbunnyRenderer;
@@ -24,6 +25,7 @@ public class AetherEntityRenderers {
         // block
         register(AetherEntityTypes.FLOATING_BLOCK, BlockLikeEntityRenderer::new);
         register(AetherEntityTypes.SLIDER, BlockLikeEntityRenderer::new);
+        register(AetherEntityTypes.SLIDER_BOSS, SliderBossEntityRenderer::new);
 
         // hostile
         register(SwetRenderer::new,

@@ -2,6 +2,7 @@ package net.id.aether.devel;
 
 import com.mojang.logging.LogUtils;
 import net.id.aether.Aether;
+import net.id.aether.entities.block.SliderBossEntity;
 import net.id.aether.entities.block.SliderEntity;
 import net.id.aether.items.AetherItemGroups;
 import net.id.incubus_core.devel.Devel;
@@ -23,9 +24,16 @@ public class AetherDevTools {
     private static final Item SLIDER_TEST_ITEM = new Item(new Item.Settings().group(AetherItemGroups.AETHER_MISC)) {
         @Override
         public ActionResult useOnBlock(ItemUsageContext context) {
-            var slider = new SliderEntity(context.getWorld(), new BlockPos(context.getHitPos()));
-            slider.moveTime = 1;
-            context.getWorld().spawnEntity(slider);
+            var sneaking = context.getPlayer() != null && context.getPlayer().isSneaking();
+            if (!sneaking) {
+                var slider = new SliderEntity(context.getWorld(), new BlockPos(context.getHitPos()));
+                slider.moveTime = 1;
+                context.getWorld().spawnEntity(slider);
+            } else {
+                var sliderBoss = new SliderBossEntity(context.getWorld(), new BlockPos(context.getHitPos()));
+                sliderBoss.moveTime = 1;
+                context.getWorld().spawnEntity(sliderBoss);
+            }
             return ActionResult.SUCCESS;
         }
     };

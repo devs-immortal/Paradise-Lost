@@ -3,6 +3,7 @@ package net.id.aether.entities;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.id.aether.entities.block.FloatingBlockEntity;
+import net.id.aether.entities.block.SliderBossEntity;
 import net.id.aether.entities.block.SliderEntity;
 import net.id.aether.entities.hostile.AechorPlantEntity;
 import net.id.aether.entities.hostile.CockatriceEntity;
@@ -38,6 +39,8 @@ public class AetherEntityTypes {
             AetherEntityTypes.<FloatingBlockEntity>of(FloatingBlockEntity::new, MISC, changing(0.98F, 0.98F), 10).trackedUpdateRate(20));
     public static final EntityType<SliderEntity> SLIDER = add("slider",
             AetherEntityTypes.<SliderEntity>of(SliderEntity::new, MISC, changing(0.98F, 0.98F), 10).trackedUpdateRate(20));
+    public static final EntityType<SliderBossEntity> SLIDER_BOSS = add("slider_boss",
+            AetherEntityTypes.<SliderBossEntity>of(SliderBossEntity::new, MISC, changing(4 * 0.98F, 4 * 0.98F), 10).trackedUpdateRate(20));
     // hostile
     public static final EntityType<BlueSwetEntity> BLUE_SWET = add("blue_swet", of(BlueSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
             attributes(BlueSwetEntity::createSwetAttributes), spawnRestrictions(BlueSwetEntity::canSpawn));
