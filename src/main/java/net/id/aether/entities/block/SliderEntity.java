@@ -28,7 +28,6 @@ public class SliderEntity extends BlockLikeEntity {
 
     private static final int MAX_WINDED_TICKS = 60;
     private static final int MAX_PRIMING_TICKS = 10;
-    private static final int PLAYER_DETECTION_RADIUS = 5;
     private int windedTicks = 0;
     private int primingTicks = 0;
     private int slideTicks = 0;
@@ -71,9 +70,9 @@ public class SliderEntity extends BlockLikeEntity {
     @Override
     public void postTickMovement() {
         switch (getState()) {
-            case SLIDING -> tickSlide(0.01F);
+            case SLIDING -> tickSlide();
             case WINDED -> tickWinded(MAX_WINDED_TICKS);
-            case DORMANT -> tickDormant(PLAYER_DETECTION_RADIUS, false);
+            case DORMANT -> tickDormant();
             case PRIMING -> tickPriming(MAX_PRIMING_TICKS);
         }
     }
@@ -85,29 +84,32 @@ public class SliderEntity extends BlockLikeEntity {
         }
     }
 
-    protected void tickDormant(int playerDetectionRadius, boolean canMoveVertically) {
-        for (Entity entity : this.world.getOtherEntities(this, this.getBoundingBox().expand(playerDetectionRadius))
+    protected void tickDormant() {
+        int radius = getPlayerDetectionRadius();
+
+        for (Entity entity : this.world.getOtherEntities(this, this.getBoundingBox().expand(radius))
                 .stream()
-                .filter(entity -> entity instanceof PlayerEntity && this.squaredDistanceTo(entity) < playerDetectionRadius * playerDetectionRadius)
+                .filter(entity -> entity instanceof PlayerEntity && this.squaredDistanceTo(entity) < radius * radius)
                 .toList()
         ) {
-            Vec3d displacement = entity.getPos().subtract(this.getPos());
-            this.setDirection(Direction.getFacing(displacement.x, canMoveVertically ? displacement.y : 0D, displacement.z));
+            Direction dir = this.getNextDirection(entity);
+            if (dir == null) continue;
+            this.setDirection(dir);
             this.setState(State.PRIMING);
         }
     }
 
-    protected void tickWinded(int maxWindedTicks) {
-        if (++windedTicks > maxWindedTicks) {
+    protected void tickWinded(int windedTimeout) {
+        if (++windedTicks > windedTimeout) {
             windedTicks = 0;
             this.setState(State.DORMANT);
         }
     }
 
-    protected void tickSlide(float acceleration) {
-        this.updateVelocity(acceleration, Vec3d.of(this.getDirection().getVector()));
+    protected void tickSlide() {
+        this.updateVelocity(this.getMoveSpeed(), Vec3d.of(this.getDirection().getVector()));
         this.move(MovementType.SELF, this.getVelocity());
-        if (this.horizontalCollision) {
+        if (this.horizontalCollision || this.verticalCollision) {
             this.alignToBlock();
             this.setState(slideTicks == 0 ? State.DORMANT : State.WINDED);
             this.slideTicks = 0;
@@ -147,6 +149,19 @@ public class SliderEntity extends BlockLikeEntity {
         this.slideTicks = compound.getInt("SlideTime");
         this.windedTicks = compound.getInt("WindedTime");
         this.primingTicks = compound.getInt("PrimeTime");
+    }
+
+    protected float getMoveSpeed() {
+        return 0.01F;
+    }
+
+    protected int getPlayerDetectionRadius() {
+        return 5;
+    }
+
+    protected Direction getNextDirection(Entity entity) {
+        Vec3d displacement = entity.getPos().subtract(this.getPos());
+        return Direction.getFacing(displacement.x, 0D, displacement.z);
     }
 
     public void setDirection(Direction direction) {
