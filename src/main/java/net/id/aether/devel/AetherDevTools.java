@@ -8,6 +8,8 @@ import net.id.incubus_core.devel.Devel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.registry.Registry;
 
 /**
@@ -21,19 +23,8 @@ public class AetherDevTools {
     private static final Item SLIDER_TEST_ITEM = new Item(new Item.Settings().group(AetherItemGroups.AETHER_MISC)) {
         @Override
         public ActionResult useOnBlock(ItemUsageContext context) {
-            boolean sneaking = false;
-            if (context.getPlayer() != null) {
-                sneaking = context.getPlayer().isSneaking();
-            }
-            SliderEntity slider;
-            if (sneaking) {
-                slider = new SliderEntity(context.getWorld(), context.getBlockPos().getX() + 0.5D, context.getBlockPos().getY(), context.getBlockPos().getZ() + 0.5D, context.getPlayerFacing().getOpposite());
-                slider.setBlockState(context.getWorld().getBlockState(context.getBlockPos()));
-            } else {
-                slider = new SliderEntity(context.getWorld(), context.getHitPos().getX(), context.getHitPos().getY(), context.getHitPos().getZ(), context.getPlayerFacing().getOpposite());
-                slider.alignToBlock();
-                slider.moveTime = 1;
-            }
+            var slider = new SliderEntity(context.getWorld(), new BlockPos(context.getHitPos()));
+            slider.moveTime = 1;
             context.getWorld().spawnEntity(slider);
             return ActionResult.SUCCESS;
         }

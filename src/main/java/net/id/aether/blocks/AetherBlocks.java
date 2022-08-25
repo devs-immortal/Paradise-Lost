@@ -3,6 +3,7 @@ package net.id.aether.blocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.aether.blocks.decorative.*;
+import net.id.aether.blocks.dungeon.SliderBlock;
 import net.id.aether.blocks.mechanical.*;
 import net.id.aether.blocks.natural.*;
 import net.id.aether.blocks.natural.aercloud.*;
@@ -408,6 +409,8 @@ public class AetherBlocks {
     public static final ChestBlock ORANGE_CHEST = ORANGE.chestFactory().chest;
     public static final ChestBlock SKYROOT_CHEST = SKYROOT.chestFactory().chest;
     public static final ChestBlock WISTERIA_CHEST = WISTERIA.chestFactory().chest;
+
+    public static final SliderBlock SLIDER_BLOCK = add("slider", new SliderBlock(carvedStone()));
 
     @SafeVarargs
     private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {

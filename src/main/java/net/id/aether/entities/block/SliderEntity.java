@@ -2,9 +2,9 @@ package net.id.aether.entities.block;
 
 import net.fabricmc.fabric.api.util.NbtType;
 import net.id.aether.blocks.AetherBlocks;
+import net.id.aether.blocks.dungeon.SliderBlock;
 import net.id.aether.entities.AetherEntityTypes;
 import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
@@ -15,6 +15,8 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -29,15 +31,17 @@ public class SliderEntity extends BlockLikeEntity {
     private static final int MAX_PRIMING_TICKS = 10;
     private int windedTicks = 0;
     private int primingTicks = 0;
-    private int moveTicks = 0;
+    private int slideTicks = 0;
 
     public SliderEntity(EntityType<? extends BlockLikeEntity> entityType, World world) {
         super(entityType, world);
+        this.blockState = AetherBlocks.SLIDER_BLOCK.getDefaultState();
     }
 
-    public SliderEntity(World world, double x, double y, double z, Direction direction) {
-        super(AetherEntityTypes.SLIDER, world, x, y, z, AetherBlocks.CRACKED_CARVED_STONE.getDefaultState());
-        this.setDirection(direction);
+    public SliderEntity(World world, BlockPos pos) {
+        super(AetherEntityTypes.SLIDER, world, pos, AetherBlocks.SLIDER_BLOCK.getDefaultState(), false);
+        this.setDirection(Direction.NORTH);
+        this.setState(State.DORMANT);
     }
 
     @Override
@@ -63,26 +67,24 @@ public class SliderEntity extends BlockLikeEntity {
     @Override
     public void postTickMovement() {
         switch (getState()) {
-            case MOVING -> {
+            case SLIDING -> {
                 this.updateVelocity(0.01F, Vec3d.of(this.getDirection().getVector()));
                 this.move(MovementType.SELF, this.getVelocity());
                 if (this.horizontalCollision) {
                     this.alignToBlock();
-                    this.setState(moveTicks == 0 ? State.DORMANT : State.WINDED);
-                    this.moveTicks = 0;
+                    this.setState(slideTicks == 0 ? State.DORMANT : State.WINDED);
+                    this.slideTicks = 0;
                     break;
                 }
-                moveTicks++;
+                slideTicks++;
             }
             case WINDED -> {
-                if (this.world.isClient()) return;
                 if (++windedTicks > MAX_WINDED_TICKS) {
                     windedTicks = 0;
                     this.setState(State.DORMANT);
                 }
             }
             case DORMANT -> {
-                if (this.world.isClient()) return;
                 for (Entity entity : this.world.getOtherEntities(this, this.getBoundingBox().expand(5))
                         .stream()
                         .filter(entity -> entity instanceof PlayerEntity && this.squaredDistanceTo(entity) < 25)
@@ -95,10 +97,9 @@ public class SliderEntity extends BlockLikeEntity {
                 }
             }
             case PRIMING -> {
-                if (this.world.isClient()) return;
                 if (++primingTicks > MAX_PRIMING_TICKS) {
                     primingTicks = 0;
-                    this.setState(State.MOVING);
+                    this.setState(State.SLIDING);
                 }
             }
         }
@@ -115,16 +116,14 @@ public class SliderEntity extends BlockLikeEntity {
         this.setDirection(this.getDirection().getOpposite());
     }
 
-    // temporary
-    public void setBlockState(BlockState state) {
-        this.blockState = state;
-    }
-
     @Override
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
         compound.putString("Direction", this.getDirection().getName());
-        compound.putString("State", this.getState().name());
+        compound.putString("State", this.getState().asString());
+        compound.putInt("SlideTime", this.slideTicks);
+        compound.putInt("WindedTime", this.windedTicks);
+        compound.putInt("PrimeTime", this.primingTicks);
     }
 
     @Override
@@ -137,6 +136,9 @@ public class SliderEntity extends BlockLikeEntity {
         if (compound.contains("State", NbtType.STRING)) {
             this.setState(compound.getString("State"));
         }
+        this.slideTicks = compound.getInt("SlideTime");
+        this.windedTicks = compound.getInt("WindedTime");
+        this.primingTicks = compound.getInt("PrimeTime");
     }
 
     public void setDirection(Direction direction) {
@@ -148,16 +150,17 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     public void setState(State state) {
-        this.setState(state.name());
+        this.setState(state.asString());
     }
 
     public void setState(String state) {
+        this.blockState = this.blockState.with(SliderBlock.STATE, State.byName(state));
         this.dataTracker.set(STATE, state);
     }
 
     public State getState() {
         try {
-            return State.valueOf(this.dataTracker.get(STATE));
+            return State.byName(this.dataTracker.get(STATE));
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return State.DORMANT;
@@ -168,13 +171,29 @@ public class SliderEntity extends BlockLikeEntity {
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(DIRECTION, Direction.NORTH);
-        this.dataTracker.startTracking(STATE, State.DORMANT.name());
+        this.dataTracker.startTracking(STATE, State.DORMANT.asString());
     }
 
-    private enum State {
-        MOVING,
-        WINDED,
-        DORMANT,
-        PRIMING
+    public enum State implements StringIdentifiable {
+        DORMANT("dormant"),
+        PRIMING("priming"),
+        SLIDING("moving"),
+        WINDED("winded");
+
+        private static final StringIdentifiable.Codec<State> CODEC = StringIdentifiable.createCodec(State::values);
+        private final String name;
+
+        State(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String asString() {
+            return this.name;
+        }
+
+        public static State byName(String id) {
+            return CODEC.byId(id);
+        }
     }
 }

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "slider_state=dormant": {
+      "model": "minecraft:block/light_gray_wool"
+    },
+    "slider_state=moving": {
+      "model": "minecraft:block/lime_wool"
+    },
+    "slider_state=winded": {
+      "model": "minecraft:block/yellow_wool"
+    },
+    "slider_state=priming": {
+      "model": "minecraft:block/green_wool"
+    }
+  }
+}
