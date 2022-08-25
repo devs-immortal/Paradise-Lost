@@ -25,7 +25,11 @@ public class SliderEntity extends BlockLikeEntity {
     private static final TrackedData<Direction> DIRECTION = DataTracker.registerData(SliderEntity.class, TrackedDataHandlerRegistry.FACING);
     private static final TrackedData<String> STATE = DataTracker.registerData(SliderEntity.class, TrackedDataHandlerRegistry.STRING);
 
-    private int windedTicks = 60;
+    private static final int MAX_WINDED_TICKS = 60;
+    private static final int MAX_PRIMING_TICKS = 10;
+    private int windedTicks = 0;
+    private int primingTicks = 0;
+    private int moveTicks = 0;
 
     public SliderEntity(EntityType<? extends BlockLikeEntity> entityType, World world) {
         super(entityType, world);
@@ -42,11 +46,13 @@ public class SliderEntity extends BlockLikeEntity {
 
         List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 0.5, 0)));
         for (Entity entity : otherEntities) {
-            if (entity instanceof SliderEntity slider && !entity.noClip && this.collides()) {
-                this.setState(State.HITTING_WALL);
-                slider.setState(State.HITTING_WALL);
+            if (entity instanceof SliderEntity slider && !entity.noClip && this.collides) {
+                this.alignToBlock();
+                this.setState(State.WINDED);
+                slider.alignToBlock();
+                slider.setState(State.WINDED);
             }
-            if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides()) {
+            if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides) {
                 entity.move(MovementType.SHULKER_BOX, this.getVelocity());
                 entity.setOnGround(true);
             }
@@ -56,42 +62,57 @@ public class SliderEntity extends BlockLikeEntity {
 
     @Override
     public void postTickMovement() {
-        // todo 2.0.0 Clean up, split into separate methods
         switch (getState()) {
             case MOVING -> {
                 this.updateVelocity(0.01F, Vec3d.of(this.getDirection().getVector()));
                 this.move(MovementType.SELF, this.getVelocity());
                 if (this.horizontalCollision) {
-                    this.setState(State.HITTING_WALL);
+                    this.alignToBlock();
+                    this.setState(moveTicks == 0 ? State.DORMANT : State.WINDED);
+                    this.moveTicks = 0;
+                    break;
                 }
-            }
-            case HITTING_WALL -> {
-                this.setVelocity(0, 0, 0);
-                this.setPosition(Vec3d.of(this.getBlockPos()).add(0.5, 0, 0.5));
-                this.setDirection(this.getDirection().getOpposite());
-                this.setState(State.WINDED);
+                moveTicks++;
             }
             case WINDED -> {
-                if (--windedTicks <= 0) {
-                    windedTicks = 60;
-                    handleAggravation();
+                if (this.world.isClient()) return;
+                if (++windedTicks > MAX_WINDED_TICKS) {
+                    windedTicks = 0;
+                    this.setState(State.DORMANT);
                 }
             }
-            case DORMANT -> handleAggravation();
+            case DORMANT -> {
+                if (this.world.isClient()) return;
+                for (Entity entity : this.world.getOtherEntities(this, this.getBoundingBox().expand(5))
+                        .stream()
+                        .filter(entity -> entity instanceof PlayerEntity && this.squaredDistanceTo(entity) < 25)
+                        .toList()
+                ) {
+                    this.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET, entity.getPos());
+                    this.setDirection(Direction.fromRotation(this.getYaw()));
+                    this.setRotation(0, 0);
+                    this.setState(State.PRIMING);
+                }
+            }
+            case PRIMING -> {
+                if (this.world.isClient()) return;
+                if (++primingTicks > MAX_PRIMING_TICKS) {
+                    primingTicks = 0;
+                    this.setState(State.MOVING);
+                }
+            }
         }
     }
 
-    // fixme 2.0.0 The result of this is sometimes different on the client vs. server.
-    private void handleAggravation() {
-        this.setState(State.DORMANT);
-        this.world.getOtherEntities(this, this.getBoundingBox().expand(5)).forEach(entity -> {
-            if (entity instanceof PlayerEntity player) {
-                this.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET, player.getPos());
-                this.setDirection(Direction.fromRotation(this.getYaw()));
-                this.setRotation(0, 0);
-                this.setState(State.MOVING);
-            }
-        });
+    @Override
+    public boolean isAttackable() {
+        return false;
+    }
+
+    public void alignToBlock() {
+        this.setVelocity(0, 0, 0);
+        this.setPosition(Vec3d.of(this.getBlockPos()).add(0.5, 0, 0.5));
+        this.setDirection(this.getDirection().getOpposite());
     }
 
     // temporary
@@ -103,6 +124,7 @@ public class SliderEntity extends BlockLikeEntity {
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
         compound.putString("Direction", this.getDirection().name());
+        compound.putString("State", this.getState().name());
     }
 
     @Override
@@ -117,7 +139,7 @@ public class SliderEntity extends BlockLikeEntity {
             }
             this.setDirection(dir);
         }
-        if (compound.contains("State", NbtType.BYTE)) {
+        if (compound.contains("State", NbtType.STRING)) {
             this.setState(compound.getString("State"));
         }
     }
@@ -142,6 +164,7 @@ public class SliderEntity extends BlockLikeEntity {
         try {
             return State.valueOf(this.dataTracker.get(STATE));
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             return State.DORMANT;
         }
     }
@@ -154,9 +177,9 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     private enum State {
-        DORMANT,
         MOVING,
-        HITTING_WALL,
-        WINDED
+        WINDED,
+        DORMANT,
+        PRIMING
     }
 }
