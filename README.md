@@ -41,25 +41,9 @@ Paradise Lost makes use of crowd sourced translations.
 
 ## License information
 Created by Immortal Devs.\
-Originally made by [Gilded Games](https://gildedgames.com/) under GNU GPLv3 license.\
-New assets are unlicensed and all rights are reserved to them by Immortal Devs.
+Inspired by [Gilded Games' The Aether](https://github.com/Gilded-Games/The-Aether), which uses the GNU GPLv3 license.\
+Assets are all rights are reserved by Immortal Devs.
 
-```
-    Copyright (C) 2021 Immortal Devs
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-```
-You can find more about GNU GPLv3 on [this website](https://www.gnu.org/licenses/gpl-3.0.en.html).
+You can find out more information about the license [here](https://github.com/devs-immortal/Paradise-Lost/LICENSE.md).
 
 <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api" target="_blank"><img alt="Fabric API - Mods - Minecraft - CurseForge" src="https://i.imgur.com/Ol1Tcf8.png" height="48"></a>&nbsp;&nbsp;<a href="https://www.curseforge.com/minecraft/mc-mods/trinkets-fabric" target="_blank"><img alt="Trinkets (Fabric) - Mods - Minecraft - CurseForge" src="https://kalucky0.b-cdn.net/trinkets.webp" height="48"></a>
