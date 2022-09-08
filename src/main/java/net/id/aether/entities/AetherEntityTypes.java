@@ -28,7 +28,6 @@ import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -48,29 +47,30 @@ public class AetherEntityTypes {
     /*
     Begin entity types
      */
-    // block
+    // Block
     public static final EntityType<FloatingBlockEntity> FLOATING_BLOCK = add("floating_block",
             AetherEntityTypes.<FloatingBlockEntity>of(FloatingBlockEntity::new, MISC, changing(0.98F, 0.98F), 10).trackedUpdateRate(20));
     public static final EntityType<SliderEntity> SLIDER = add("slider",
             AetherEntityTypes.<SliderEntity>of(SliderEntity::new, MISC, changing(0.98F, 0.98F), 10).trackedUpdateRate(20));
-    // hostile
+
+    // Hostile
     public static final EntityType<BlueSwetEntity> BLUE_SWET = add("blue_swet", of(BlueSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
-            attributes(BlueSwetEntity::createSwetAttributes), spawnRestrictions(BlueSwetEntity::canSpawn));
+            attributes(BlueSwetEntity::createSwetAttributes), spawnRestrictions(MobEntity::canMobSpawn));
     public static final EntityType<PurpleSwetEntity> PURPLE_SWET = add("purple_swet", of(PurpleSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
-            attributes(PurpleSwetEntity::createSwetAttributes), spawnRestrictions(PurpleSwetEntity::canSpawn));
+            attributes(PurpleSwetEntity::createSwetAttributes), spawnRestrictions(MobEntity::canMobSpawn));
     public static final EntityType<WhiteSwetEntity> WHITE_SWET = add("white_swet", of(WhiteSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
-            attributes(WhiteSwetEntity::createSwetAttributes), spawnRestrictions(WhiteSwetEntity::canSpawn));
+            attributes(WhiteSwetEntity::createSwetAttributes), spawnRestrictions(MobEntity::canMobSpawn));
     public static final EntityType<GoldenSwetEntity> GOLDEN_SWET = add("golden_swet", of(GoldenSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
-            attributes(GoldenSwetEntity::createSwetAttributes), spawnRestrictions(GoldenSwetEntity::canSpawn));
+            attributes(GoldenSwetEntity::createSwetAttributes), spawnRestrictions(MobEntity::canMobSpawn));
     public static final EntityType<VermilionSwetEntity> VERMILION_SWET = add("vermilion_swet", of(VermilionSwetEntity::new, MONSTER, changing(2.0F, 2.0F), 5),
             attributes(VermilionSwetEntity::createSwetAttributes), spawnRestrictions(VermilionSwetEntity::canSpawn));
-    //todo: why is this an animal? should extend hostile to allow hostile spawn restrictions, and inherit hostile behviour
+    // TODO: why is this an animal? should extend hostile to allow hostile spawn restrictions, and inherit hostile behviour
     public static final EntityType<AechorPlantEntity> AECHOR_PLANT = add("aechor_plant", of(AechorPlantEntity::new, MONSTER, changing(1f, 1f), 5),
-            attributes(AechorPlantEntity::createAechorPlantAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
-//    public static final EntityType<ChestMimicEntity> CHEST_MIMIC = add("chest_mimic", of(ChestMimicEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
-//            attributes(ChestMimicEntity::createChestMimicAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
+            attributes(AechorPlantEntity::createAechorPlantAttributes), spawnRestrictions(AechorPlantEntity::canSpawn));
+    // public static final EntityType<ChestMimicEntity> CHEST_MIMIC = add("chest_mimic", of(ChestMimicEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
+    //        attributes(ChestMimicEntity::createChestMimicAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
     public static final EntityType<CockatriceEntity> COCKATRICE = add("cockatrice", of(CockatriceEntity::new, MONSTER, changing(1.0F, 2.0F), 5),
-            attributes(CockatriceEntity::createCockatriceAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
+            attributes(CockatriceEntity::createCockatriceAttributes), spawnRestrictions(CockatriceEntity::canSpawn));
     // passive
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(1.0F, 2.0F), 5),
             attributes(MoaEntity::createMoaAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
@@ -80,9 +80,10 @@ public class AetherEntityTypes {
             attributes(AerwhaleEntity::createAerwhaleAttributes), spawnRestrictions(MobEntity::canMobSpawn));
     public static final EntityType<RookEntity> ROOK = add("rook", of(RookEntity::new, MISC, fixed(0.75F, 1.8F), 5),
             attributes(RookEntity::createRookAttributes), spawnRestrictions((type, world, spawnReason, pos, random) -> false));
-//    public static final EntityType<AmbystEntity> AMBYST = add("ambyst", of(AmbystEntity::new, CREATURE, changing(0.6F, 0.42F), 5),
-//            attributes(AmbystEntity::createAmbystAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
-    // projectile
+    // public static final EntityType<AmbystEntity> AMBYST = add("ambyst", of(AmbystEntity::new, CREATURE, changing(0.6F, 0.42F), 5),
+    //         attributes(AmbystEntity::createAmbystAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
+
+    // Projectile
     public static final EntityType<CockatriceSpitEntity> COCKATRICE_SPIT = add("cockatrice_spit", of(CockatriceSpitEntity::new, MISC, changing(0.5F, 0.5F), 5));
     public static final EntityType<GoldenDartEntity> GOLDEN_DART = add("golden_dart", of(GoldenDartEntity::new, MISC, changing(0.5F, 0.5F), 5));
     public static final EntityType<EnchantedDartEntity> ENCHANTED_DART = add("enchanted_dart", of(EnchantedDartEntity::new, MISC, changing(0.5F, 0.5F), 5));
@@ -97,8 +98,8 @@ public class AetherEntityTypes {
     public static final MemoryModuleType<BlockPos> LOG_MEMORY = MemoryModuleTypeInvoker.invokeRegister(Aether.locate("log").toString(), BlockPos.CODEC);
     public static final MemoryModuleType<BlockPos> LOG_OPENING_MEMORY = MemoryModuleTypeInvoker.invokeRegister(Aether.locate("log_opening").toString(), BlockPos.CODEC);
 
-    public static final SensorType<FindLogSensor> FINDLOG_SENSOR = SensorTypeInvoker.invokeRegister(Aether.locate("find_log").toString(),() -> new FindLogSensor(6,20));
-        public static final SensorType<Sensor<AnimalEntity>> WEATHER_SENSOR = SensorTypeInvoker.invokeRegister(Aether.locate("weather").toString(), () -> new Sensor<>(100) {
+    public static final SensorType<FindLogSensor> FINDLOG_SENSOR = SensorTypeInvoker.invokeRegister(Aether.locate("find_log").toString(), () -> new FindLogSensor(6, 20));
+    public static final SensorType<Sensor<AnimalEntity>> WEATHER_SENSOR = SensorTypeInvoker.invokeRegister(Aether.locate("weather").toString(), () -> new Sensor<>(100) {
         protected void sense(ServerWorld world, AnimalEntity entity) {
             entity.getBrain().remember(AetherEntityTypes.IS_RAINING_MEMORY, world.isRaining());
         }

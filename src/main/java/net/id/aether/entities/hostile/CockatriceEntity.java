@@ -3,6 +3,7 @@ package net.id.aether.entities.hostile;
 import net.id.aether.effect.condition.Conditions;
 import net.id.aether.entities.projectile.CockatriceSpitEntity;
 import net.id.aether.util.AetherSoundEvents;
+import net.id.aether.world.dimension.AetherBiomes;
 import net.id.incubus_core.condition.api.ConditionAPI;
 import net.id.incubus_core.condition.api.Persistence;
 import net.id.incubus_core.condition.base.ConditionManager;
@@ -11,7 +12,14 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.GoToWalkTargetGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -21,11 +29,13 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 
 public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     public float flapProgress;
@@ -135,9 +145,9 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         return false;
     }
 
-    @Override
-    public boolean canSpawn(WorldAccess world, SpawnReason SpawnReason) {
-        return world.getRandom().nextInt(25) == 0 && super.canSpawn(world, SpawnReason);
+    public static boolean canSpawn(EntityType<? extends CockatriceEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random) ||
+                world.getBiome(pos) == AetherBiomes.AUTUMNAL_TUNDRA;
     }
 
     @Override
