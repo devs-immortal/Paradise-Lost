@@ -26,6 +26,7 @@ public class AetherModelLayers {
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer ROOK = register("rook", "main", RookModel.getTexturedModelData());
     public static final EntityModelLayer ROOK_GLOW = register("rook_glow", "glow", RookModel.getTexturedModelData());
+    public static final EntityModelLayer AMBYST = register("ambyst", "main", AmbystModel.getTexturedModelData());
     public static final EntityModelLayer PHOENIX_ARMOR = register("phoenix_armor", "main", PhoenixArmorModel.getTexturedModelData());
 
     public static final EntityModelLayer DUNGEON_SWITCH = register("dungeon_switch", "main", DungeonSwitchModel.getTexturedModelData());

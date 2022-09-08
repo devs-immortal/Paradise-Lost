@@ -1,7 +1,10 @@
 package net.id.aether.entities;
 
+import com.google.common.collect.ImmutableSet;
+import com.mojang.serialization.Codec;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.id.aether.Aether;
 import net.id.aether.entities.block.FloatingBlockEntity;
 import net.id.aether.entities.block.SliderEntity;
 import net.id.aether.entities.hostile.AechorPlantEntity;
@@ -11,16 +14,28 @@ import net.id.aether.entities.misc.RookEntity;
 import net.id.aether.entities.passive.AerbunnyEntity;
 import net.id.aether.entities.passive.AerwhaleEntity;
 import net.id.aether.entities.passive.AetherAnimalEntity;
+import net.id.aether.entities.passive.ambyst.FindLogSensor;
 import net.id.aether.entities.passive.moa.MoaEntity;
 import net.id.aether.entities.projectile.*;
+import net.id.aether.mixin.brain.ActivityInvoker;
+import net.id.aether.mixin.brain.MemoryModuleTypeInvoker;
+import net.id.aether.mixin.brain.SensorTypeInvoker;
 import net.id.aether.registry.AetherRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.brain.Activity;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.ai.brain.sensor.Sensor;
+import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 
+import java.util.Set;
 import java.util.function.Supplier;
 
 import static net.id.aether.Aether.locate;
@@ -63,15 +78,35 @@ public class AetherEntityTypes {
             attributes(AerbunnyEntity::createAerbunnyAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
     public static final EntityType<AerwhaleEntity> AERWHALE = add("aerwhale", of(AerwhaleEntity::new, CREATURE, changing(3.0F, 1.2F), 5),
             attributes(AerwhaleEntity::createAerwhaleAttributes), spawnRestrictions(MobEntity::canMobSpawn));
-
     public static final EntityType<RookEntity> ROOK = add("rook", of(RookEntity::new, MISC, fixed(0.75F, 1.8F), 5),
             attributes(RookEntity::createRookAttributes), spawnRestrictions((type, world, spawnReason, pos, random) -> false));
+//    public static final EntityType<AmbystEntity> AMBYST = add("ambyst", of(AmbystEntity::new, CREATURE, changing(0.6F, 0.42F), 5),
+//            attributes(AmbystEntity::createAmbystAttributes), spawnRestrictions(AetherAnimalEntity::isValidNaturalAetherSpawn));
     // projectile
     public static final EntityType<CockatriceSpitEntity> COCKATRICE_SPIT = add("cockatrice_spit", of(CockatriceSpitEntity::new, MISC, changing(0.5F, 0.5F), 5));
     public static final EntityType<GoldenDartEntity> GOLDEN_DART = add("golden_dart", of(GoldenDartEntity::new, MISC, changing(0.5F, 0.5F), 5));
     public static final EntityType<EnchantedDartEntity> ENCHANTED_DART = add("enchanted_dart", of(EnchantedDartEntity::new, MISC, changing(0.5F, 0.5F), 5));
     public static final EntityType<PoisonDartEntity> POISON_DART = add("poison_dart", of(PoisonDartEntity::new, MISC, changing(0.5F, 0.5F), 5));
     public static final EntityType<PoisonNeedleEntity> POISON_NEEDLE = add("poison_needle", of(PoisonNeedleEntity::new, MISC, changing(0.5F, 0.5F), 5));
+
+
+    //Brain
+    public static final Activity HIDEINLOG = ActivityInvoker.invokeRegister(Aether.locate("hideinlog").toString());
+
+    public static final MemoryModuleType<Boolean> IS_RAINING_MEMORY = MemoryModuleTypeInvoker.invokeRegister(Aether.locate("is_raining").toString(), Codec.BOOL);
+    public static final MemoryModuleType<BlockPos> LOG_MEMORY = MemoryModuleTypeInvoker.invokeRegister(Aether.locate("log").toString(), BlockPos.CODEC);
+    public static final MemoryModuleType<BlockPos> LOG_OPENING_MEMORY = MemoryModuleTypeInvoker.invokeRegister(Aether.locate("log_opening").toString(), BlockPos.CODEC);
+
+    public static final SensorType<FindLogSensor> FINDLOG_SENSOR = SensorTypeInvoker.invokeRegister(Aether.locate("find_log").toString(),() -> new FindLogSensor(6,20));
+        public static final SensorType<Sensor<AnimalEntity>> WEATHER_SENSOR = SensorTypeInvoker.invokeRegister(Aether.locate("weather").toString(), () -> new Sensor<>(100) {
+        protected void sense(ServerWorld world, AnimalEntity entity) {
+            entity.getBrain().remember(AetherEntityTypes.IS_RAINING_MEMORY, world.isRaining());
+        }
+
+        public Set<MemoryModuleType<?>> getOutputMemoryModules() {
+            return ImmutableSet.of(AetherEntityTypes.IS_RAINING_MEMORY);
+        }
+    });
 
     private static Action<? super EntityType<? extends LivingEntity>> attributes(Supplier<DefaultAttributeContainer.Builder> builder) {
         return (id, entityType) -> FabricDefaultAttributeRegistry.register(entityType, builder.get());

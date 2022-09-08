@@ -32,7 +32,10 @@
     "server.ServerPlayNetworkHandlerMixin",
     "util.NbtCompoundAccessor",
     "util.RarityMixin",
-    "util.SlotAccessor"
+    "util.SlotAccessor",
+    "brain.MemoryModuleTypeInvoker",
+    "brain.ActivityInvoker",
+    "brain.SensorTypeInvoker"
   ],
   "client": [
     "client.ClientPlayNetworkHandlerMixin",
