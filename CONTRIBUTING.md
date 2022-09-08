@@ -20,56 +20,24 @@
 
 * Open a new GitHub pull request with the patch.
 
-* Ensure the PR description clearly describes the problem and solution. Use the PR template. Include the relevant issue number if applicable.
+* Ensure the PR description clearly describes the problem (or a link to the relevant issue, if applicable) and solution. Use the PR template.
 
-* Before submitting, please check that your code matches our code style (Example):
-```java
-    /**
-     * This code is actually gibberish. It's a mishmash of things intended to show our code style.
-     * <br>~ Jack
-     */
-    @Inject(
-        method = "tickEntities", 
-        at = @At(
-            value = "INVOKE", 
-            target = "Lnet/minecraft/client/world/ClientWorld;tickBlockEntities()V"
-        ),
-        cancellable = true
-    )
-    private void postEntityTick(CallbackInfo ci) {
-        for (Entity entity : entityList) {
-            if (entity instanceof PostTickEntity postTickEntity) {
-                postTickEntity.postTick();
-                ci.cancel();
-            }
-        }
-        BlockLikeSet.getAllStructures().forEachRemaining(BlockLikeSet::postTick);
-    }
-    // Oh, and use spaces, not tabs.
-```
+* Before submitting, please check that your code matches our code style. The repo contains a checkstyle, which you should try to follow.
+
 #### **Do you have write access to the repo and want to make a change?**
 
 * **MAKE A PULL REQUEST FOR NEW FEATURES**.
-* Refer to CDA's details on contribution and branch names:
+* Refer to these details on contribution and branch names:
 ```
-**<MCVER>**: Assume these are production/live branches unless otherwise written or stated.
+**<VER>/<MCVER>/master**: Assume these are production/live branches unless otherwise written or stated.
   - Only push code here that is tested and expected to ship in the next applicable update
-**experimental/<MCVER>**: Experimental Snapshot branches (Separate category due to mojang typically using different baseline versions)
-  - Only port changes are allowed to be pushed here, as this branch is typically rebased off the latest stable/matching **<MCVER>** baseline.
-**snapshots**: Primary snapshot branch, typically the next short-term minecraft update
-  - Same regulations as **experimental/<MCVER>**, only port changes should be in this branch.
-
-**feature/<TARGET>/<FEATURE_NAME>**: Feature branches designated for the specified upcoming release
-  - These branches get merged into **next** when applicable, ready, and tested enough to be accepted into **next**
-
-**next**: Branch designated for the next major revision to project, typically baselined off the latest game version (Or pre-release if applicable)
-  - Segment into **next/<VERSION>** if multiple releases are in active development
-  - In the case of the baseline being a snapshot/pre-releases, **Do not push port changes here -- they will eventually be baselined into next via rebase or merging the baseline into next**
+  
+**<VER>/<MCVER>/<FEATURE_NAME>**: Feature branches designated for the specified upcoming release
+  - These branches get merged into **<VER>/<MCVER>/master** when applicable, ready, and tested enough to be accepted.
 ```
 #### **Did you fix whitespace, format code, or make a purely cosmetic patch?**
 
 * Changes that are cosmetic in nature and do not add anything substantial to the project will likely not be accepted.
-
 * Documentation changes may be accepted if the changes are not just grammar fixes.
 
 #### **Do you intend to add a new feature or change an existing one?**
@@ -87,7 +55,7 @@
     /**
      * Write reasonable documentation for non-obvious methods.
      * For public facing APIs, like {@link net.id.aether.api.MoaAPI} or {@link net.id.aether.api.FloatingBlockHelper}, 
-     * fully document everything that is public. ^ (Also, use these @link tags when possible)
+     * fully document everything that is public. ^ (Also, use these @link tags to other things public)
      * <br>Use @param and @return tags if non-obvious or if specific values may give strange results.
      * <br>If you didn't write the code and you're just adding docs, end your docs with a tilde and your
      * name/username. If you did write it, then just the @author tag is alright.
