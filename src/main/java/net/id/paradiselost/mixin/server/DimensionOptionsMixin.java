@@ -25,7 +25,7 @@ public abstract class DimensionOptionsMixin {
     private static void staticInit(CallbackInfo ci) {
         var builder = ImmutableSet.<RegistryKey<DimensionOptions>>builder();
         builder.addAll(BASE_DIMENSIONS);
-        builder.add(ParadiseLostDimension.PARADISE_LOST_OPTIONS_KEY);
+        builder.add(ParadiseLostDimension.OPTIONS_KEY);
         BASE_DIMENSIONS = builder.build();
     }
 }

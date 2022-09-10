@@ -654,7 +654,8 @@ public class ParadiseLostItems {
 
     private static class ParadiseLostMusicDiscItem extends MusicDiscItem {
         protected ParadiseLostMusicDiscItem(int comparatorValueIn, SoundEvent soundIn, Settings settings) {
-            super(comparatorValueIn, soundIn, settings);
+            // TODO: Length will probably need to be changed
+            super(comparatorValueIn, soundIn, settings, 0);
         }
     }
 }

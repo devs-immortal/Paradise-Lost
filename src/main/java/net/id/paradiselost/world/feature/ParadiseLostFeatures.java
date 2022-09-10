@@ -23,7 +23,7 @@ public class ParadiseLostFeatures {
     public static final GroundcoverFeature GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeatureConfig.CODEC));
     public static final ParadiseLostBoulderFeature BOULDER = register("boulder", new ParadiseLostBoulderFeature(BoulderFeatureConfig.CODEC));
     public static final IcestoneSpireFeature ICESTONE_SPIRE_FEATURE = register("icestone_spire_feature", new IcestoneSpireFeature(DefaultFeatureConfig.CODEC));
-    public static final FreezeParadiseLostTopLayerFeature FREEZE_PARADISE_LOST_TOP_LAYER_FEATURE_FEATURE = register("freeze_paradise_lost_top_layer_feature", new FreezeParadiseLostTopLayerFeature(DefaultFeatureConfig.CODEC));
+    public static final FreezeParadiseLostTopLayerFeature FREEZE_TOP_LAYER_FEATURE_FEATURE = register("freeze_paradise_lost_top_layer_feature", new FreezeParadiseLostTopLayerFeature(DefaultFeatureConfig.CODEC));
 
     public static final ProjectedOrganicCoverFeature ORGANIC_GROUNDCOVER_FEATURE = register("organic_groundcover_feature", new ProjectedOrganicCoverFeature(ProjectedOrganicCoverConfig.CODEC));
 

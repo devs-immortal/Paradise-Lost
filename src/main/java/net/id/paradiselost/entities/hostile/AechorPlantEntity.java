@@ -1,11 +1,14 @@
 package net.id.paradiselost.entities.hostile;
 
+import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
 import net.id.paradiselost.entities.projectile.PoisonNeedleEntity;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
-import net.minecraft.entity.*;
+import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
@@ -15,19 +18,23 @@ import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public class AechorPlantEntity extends ParadiseLostAnimalEntity implements RangedAttackMob {
     public final int poisonRemaining;
@@ -86,10 +93,9 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
         return distance <= 6.0F && super.canSee(entity);
     }
 
-    @Override
-    public boolean canSpawn(WorldAccess worldIn, SpawnReason SpawnReason) {
-        return worldIn.getBlockState(getBlockPos().down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)
-                && worldIn.getBaseLightLevel(getBlockPos(), 0) > 8;
+    public static boolean canSpawn(EntityType<? extends AechorPlantEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)
+                && world.getBaseLightLevel(pos, 0) > 8;
     }
 
     @Override

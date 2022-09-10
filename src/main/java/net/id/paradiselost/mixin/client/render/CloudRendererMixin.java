@@ -32,7 +32,7 @@ public final class CloudRendererMixin {
     @Shadow private int lastCloudsBlockY;
     @Shadow private int lastCloudsBlockZ;
     @Shadow @NotNull private Vec3d lastCloudsColor;
-    @Shadow @NotNull private CloudRenderMode lastCloudsRenderMode;
+    @Shadow @NotNull private CloudRenderMode lastCloudRenderMode;
     @Shadow private boolean cloudsDirty;
     @Shadow @Nullable private VertexBuffer cloudsBuffer;
     
@@ -109,7 +109,7 @@ public final class CloudRendererMixin {
                 cloudsBuffer.bind();
                 
                 //TODO Double check bytecode, this feels really weird. If this is correct, pure Mojank.
-                int passes = lastCloudsRenderMode == CloudRenderMode.FANCY ? 0 : 1;
+                int passes = lastCloudRenderMode == CloudRenderMode.FANCY ? 0 : 1;
                 for (int pass = passes; pass < 2; pass++) {
                     if (pass == 0) {
                         RenderSystem.colorMask(false, false, false, false);

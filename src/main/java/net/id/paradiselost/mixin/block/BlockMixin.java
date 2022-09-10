@@ -17,7 +17,7 @@ public class BlockMixin {
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci) {
         if (entity instanceof ParadiseLostEntityExtensions extendedEntity) {
             extendedEntity.setParadiseLostFallen(false);
-            extendedEntity.setAerBunnyFallen(false);
+            extendedEntity.setAerbunnyFallen(false);
         }
     }
 }

@@ -269,9 +269,9 @@ public final class ParadiseLostBiomes {
                             WATER_SPRING
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            PARADISE_LOST_FLOWERS,
-                            PARADISE_LOST_GRASS,
-                            PARADISE_LOST_TALL_GRASS,
+                            FLOWERS,
+                            GRASS,
+                            TALL_GRASS,
                             PATCH_BLUEBERRY,
                             SPARSE_TREES,
                             FLUTEGRASS

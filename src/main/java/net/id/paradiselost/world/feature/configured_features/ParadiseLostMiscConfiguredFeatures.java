@@ -48,19 +48,19 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
     // Shield
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> SHIELD_ROCKS = register("shield_rocks", Feature.RANDOM_PATCH, Configs.SHIELD_ROCKS_CONFIG);
 
-    public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> SHIELD_PONDS = register("shield_pond", ParadiseLostFeatures.PARADISE_LOST_DELTA_FEATURE, new DeltaFeatureConfig(Blocks.WATER.getDefaultState(), COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM).with(Properties.WATERLOGGED, true), UniformIntProvider.create(2, 7), UniformIntProvider.create(1, 2)));
+    public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> SHIELD_PONDS = register("shield_pond", ParadiseLostFeatures.DELTA_FEATURE, new DeltaFeatureConfig(Blocks.WATER.getDefaultState(), COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM).with(Properties.WATERLOGGED, true), UniformIntProvider.create(2, 7), UniformIntProvider.create(1, 2)));
 
     public static final RegistryEntry<ConfiguredFeature<GroundcoverFeatureConfig, ?>> SHIELD_STONE = register("shield_stone", ParadiseLostFeatures.GROUNDCOVER_FEATURE, new GroundcoverFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(HOLYSTONE.getDefaultState(), 7).add(COBBLED_HOLYSTONE.getDefaultState(), 5).add(MOSSY_HOLYSTONE.getDefaultState(), 2).build()), UniformIntProvider.create(1, 4), UniformIntProvider.create(0, 0)));
     public static final RegistryEntry<ConfiguredFeature<GroundcoverFeatureConfig, ?>> SHIELD_PODZOL = register("shield_podzol", ParadiseLostFeatures.GROUNDCOVER_FEATURE, new GroundcoverFeatureConfig(BlockStateProvider.of(FROZEN_GRASS), UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 0)));
     // Tundra
     public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> TUNDRA_SPIRES = register("tundra_spires", ParadiseLostFeatures.ICESTONE_SPIRE_FEATURE, FeatureConfig.DEFAULT);
 
-    public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> TUNDRA_PONDS = register("tundra_pond", ParadiseLostFeatures.PARADISE_LOST_DELTA_FEATURE, new DeltaFeatureConfig(Blocks.ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), UniformIntProvider.create(4, 9), UniformIntProvider.create(0, 1)));
-    public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> TUNDRA_SNOW = register("tundra_snow", ParadiseLostFeatures.PARADISE_LOST_DELTA_FEATURE, new DeltaFeatureConfig(Blocks.POWDER_SNOW.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), UniformIntProvider.create(3, 8), UniformIntProvider.create(0, 1)));
+    public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> TUNDRA_PONDS = register("tundra_pond", ParadiseLostFeatures.DELTA_FEATURE, new DeltaFeatureConfig(Blocks.ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), UniformIntProvider.create(4, 9), UniformIntProvider.create(0, 1)));
+    public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> TUNDRA_SNOW = register("tundra_snow", ParadiseLostFeatures.DELTA_FEATURE, new DeltaFeatureConfig(Blocks.POWDER_SNOW.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), UniformIntProvider.create(3, 8), UniformIntProvider.create(0, 1)));
 
-    public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> FREEZE_PARADISE_LOST_TOP_LAYER = register("freeze_paradise_lost_top_layer", ParadiseLostFeatures.FREEZE_PARADISE_LOST_TOP_LAYER_FEATURE_FEATURE, FeatureConfig.DEFAULT);
+    public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> FREEZE_TOP_LAYER = register("freeze_paradise_lost_top_layer", ParadiseLostFeatures.FREEZE_TOP_LAYER_FEATURE_FEATURE, FeatureConfig.DEFAULT);
 
-    // TODO 1.7 uncomment public static final RegistryEntry<ConfiguredFeature<DynamicConfiguration, ?>> PARADISE_LOST_LAKE = register("paradise_lost_lake", ParadiseLostFeatures.PARADISE_LOST_LAKE, new DynamicConfiguration(Blocks.WATER.getDefaultState(), Optional.of("normal")));
+    // TODO 1.7 uncomment public static final RegistryEntry<ConfiguredFeature<DynamicConfiguration, ?>> LAKE = register("paradise_lost_lake", ParadiseLostFeatures.LAKE, new DynamicConfiguration(Blocks.WATER.getDefaultState(), Optional.of("normal")));
 
     private static class Configs extends ParadiseLostConfiguredFeatures.Configs{
         private static final QuicksoilConfig QUICKSOIL_CONFIG = new QuicksoilConfig();

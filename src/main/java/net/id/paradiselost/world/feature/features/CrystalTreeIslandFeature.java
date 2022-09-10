@@ -38,15 +38,15 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
                 for (int z = MathHelper.floor(-f); z <= MathHelper.ceil(f); ++z) {
                     if ((float) (x * x + z * z) <= (f + 1.0F) * (f + 1.0F)) {
                         if (y == 0) {
-                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.PARADISE_LOST_GRASS_BLOCK.getDefaultState());
+                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.GRASS_BLOCK.getDefaultState());
                             if (context.getRandom().nextInt(6) == 0) {
-                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y + 1, z), ParadiseLostBlocks.PARADISE_LOST_GRASS.getDefaultState());
+                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y + 1, z), ParadiseLostBlocks.GRASS.getDefaultState());
                             }
                         } else if (y == -1) {
-                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.PARADISE_LOST_DIRT.getDefaultState());
+                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.DIRT.getDefaultState());
                         } else if (y == -2) {
                             if (context.getRandom().nextBoolean()) {
-                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.PARADISE_LOST_DIRT.getDefaultState());
+                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.DIRT.getDefaultState());
                             } else {
                                 this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.HOLYSTONE.getDefaultState());
                             }

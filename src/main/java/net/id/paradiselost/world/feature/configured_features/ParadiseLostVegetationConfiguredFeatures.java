@@ -27,14 +27,14 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     Highlands
      */
     // Default
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PARADISE_LOST_BUSH = register("paradise_lost_bush", Feature.RANDOM_PATCH, Configs.PARADISE_LOST_BUSH_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PARADISE_LOST_DENSE_BUSH = register("paradise_lost_dense_bush", Feature.RANDOM_PATCH, Configs.PARADISE_LOST_DENSE_BUSH_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PARADISE_LOST_GRASS_BUSH = register("paradise_lost_grass", Feature.RANDOM_PATCH, Configs.PARADISE_LOST_GRASS_BUSH_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> PARADISE_LOST_GRASS_BONEMEAL = register("paradise_lost_grass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(GRASS));
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PARADISE_LOST_TALL_GRASS_BUSH = register("paradise_lost_tall_grass", Feature.RANDOM_PATCH, Configs.PARADISE_LOST_TALL_GRASS_BUSH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> BUSH = register("paradise_lost_bush", Feature.RANDOM_PATCH, Configs.BUSH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> DENSE_BUSH = register("paradise_lost_dense_bush", Feature.RANDOM_PATCH, Configs.DENSE_BUSH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> GRASS_BUSH = register("paradise_lost_grass", Feature.RANDOM_PATCH, Configs.GRASS_BUSH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> GRASS_BONEMEAL = register("paradise_lost_grass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(GRASS));
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> TALL_GRASS_BUSH = register("paradise_lost_tall_grass", Feature.RANDOM_PATCH, Configs.TALL_GRASS_BUSH_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLUTEGRASS = register("flutegrass", Feature.RANDOM_PATCH, Configs.FLUTEGRASS_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> FLUTEGRASS_BONEMEAL = register("flutegrass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(ParadiseLostBlocks.FLUTEGRASS));
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PARADISE_LOST_FLOWERS = register("paradise_lost_flowers", Feature.FLOWER, Configs.PARADISE_LOST_FLOWER_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLOWERS = register("paradise_lost_flowers", Feature.FLOWER, Configs.FLOWER_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH, Configs.BLUEBERRY_PATCH_CONFIG);
     // Plato
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PLATEAU_FOLIAGE = register("plateau_foliage", Feature.RANDOM_PATCH, Configs.PLATEAU_FOLIAGE_CONFIG);
@@ -59,13 +59,13 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
         Highlands
          */
         // Default
-        private static final RandomPatchFeatureConfig PARADISE_LOST_BUSH_CONFIG = blockPatch(128, 16, 7, ParadiseLostBlocks.BUSH);
-        private static final RandomPatchFeatureConfig PARADISE_LOST_DENSE_BUSH_CONFIG = blockPatch(16, 7, 3, ParadiseLostBlocks.BUSH);
-        private static final RandomPatchFeatureConfig PARADISE_LOST_GRASS_BUSH_CONFIG = blockPatch(32, 7, 3, GRASS);
-        private static final RandomPatchFeatureConfig PARADISE_LOST_TALL_GRASS_BUSH_CONFIG = blockPatch(32, 7, 3, TALL_GRASS);
+        private static final RandomPatchFeatureConfig BUSH_CONFIG = blockPatch(128, 16, 7, ParadiseLostBlocks.BUSH);
+        private static final RandomPatchFeatureConfig DENSE_BUSH_CONFIG = blockPatch(16, 7, 3, ParadiseLostBlocks.BUSH);
+        private static final RandomPatchFeatureConfig GRASS_BUSH_CONFIG = blockPatch(32, 7, 3, GRASS);
+        private static final RandomPatchFeatureConfig TALL_GRASS_BUSH_CONFIG = blockPatch(32, 7, 3, TALL_GRASS);
         private static final RandomPatchFeatureConfig FLUTEGRASS_CONFIG = blockPatch(32, 7, 3, ParadiseLostBlocks.FLUTEGRASS);
 
-        private static final RandomPatchFeatureConfig PARADISE_LOST_FLOWER_CONFIG = blockPatch(64, 7, 3, new WeightedBlockStateProvider(
+        private static final RandomPatchFeatureConfig FLOWER_CONFIG = blockPatch(64, 7, 3, new WeightedBlockStateProvider(
                 DataPool.<BlockState>builder()
                         .add(ATARAXIA.getDefaultState(), 20)
                         .add(CLOUDSBLUFF.getDefaultState(), 20)

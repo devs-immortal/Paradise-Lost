@@ -75,10 +75,10 @@ public class EatParadiseLostGrassGoal extends Goal {
             } else {
                 BlockPos downPos = pos.down();
 
-                if (this.world.getBlockState(downPos).getBlock() == ParadiseLostBlocks.PARADISE_LOST_GRASS_BLOCK) {
+                if (this.world.getBlockState(downPos).getBlock() == ParadiseLostBlocks.GRASS_BLOCK) {
                     if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-                        this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(ParadiseLostBlocks.PARADISE_LOST_GRASS_BLOCK.getDefaultState()));
-                        this.world.setBlockState(downPos, ParadiseLostBlocks.PARADISE_LOST_DIRT.getDefaultState(), Block.NOTIFY_LISTENERS);
+                        this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(ParadiseLostBlocks.GRASS_BLOCK.getDefaultState()));
+                        this.world.setBlockState(downPos, ParadiseLostBlocks.DIRT.getDefaultState(), Block.NOTIFY_LISTENERS);
                     }
 
                     this.owner.onEatingGrass();

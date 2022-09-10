@@ -5,7 +5,6 @@ import dev.emi.trinkets.api.TrinketItem;
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.client.model.item.ParachuteTrinketModel;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
@@ -16,6 +15,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+
+import static net.id.paradiselost.ParadiseLost.locate;
 
 public class ParachuteTrinketItem extends TrinketItem implements TrinketRenderer {
 

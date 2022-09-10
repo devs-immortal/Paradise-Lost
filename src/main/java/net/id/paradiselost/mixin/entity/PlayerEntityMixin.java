@@ -8,6 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -82,12 +83,10 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
         paradise_lost$fallen = value;
     }
 
-    @Override
     public boolean isParadise_lost$aerbunnyFallen() {
         return paradise_lost$aerbunnyFallen;
     }
 
-    @Override
     public void setAerBunnyFallen(boolean value) {
         paradise_lost$aerbunnyFallen = value;
     }
