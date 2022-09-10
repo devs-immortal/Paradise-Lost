@@ -2,6 +2,10 @@ package net.id.paradiselost.client.rendering.entity.hostile;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.id.paradiselost.ParadiseLost;
+import net.id.paradiselost.entities.hostile.swet.BlueSwetEntity;
+import net.id.paradiselost.entities.hostile.swet.GoldenSwetEntity;
+import net.id.paradiselost.entities.hostile.swet.PurpleSwetEntity;
 import net.id.paradiselost.entities.hostile.swet.SwetEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -19,12 +23,12 @@ public class SwetRenderer extends MobEntityRenderer<SwetEntity, SlimeEntityModel
 
     public SwetRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager, new SlimeEntityModel<>(renderManager.getPart(EntityModelLayers.SLIME)), 0.25F);
-        addFeature(new SlimeOverlayFeatureRenderer<>(this, renderManager.getModelLoader()));
+        this.addFeature(new SlimeOverlayFeatureRenderer<>(this, renderManager.getModelLoader()));
     }
 
     @Override
     public void render(SwetEntity slimeEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        shadowRadius = 0.25F * (float) slimeEntity.getSize();
+        this.shadowRadius = 0.25F * (float) slimeEntity.getSize();
         super.render(slimeEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
 

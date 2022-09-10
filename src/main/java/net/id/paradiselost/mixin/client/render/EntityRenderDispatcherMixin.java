@@ -1,7 +1,7 @@
 package net.id.paradiselost.mixin.client.render;
 
-import net.id.incubus_core.devel.Devel;
 import net.id.paradiselost.entities.misc.RookEntity;
+import net.id.incubus_core.devel.Devel;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;

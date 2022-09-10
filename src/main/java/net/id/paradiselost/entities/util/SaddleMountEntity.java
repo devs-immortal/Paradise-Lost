@@ -38,9 +38,8 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
 
     @Override
     public boolean damage(DamageSource damagesource, float i) {
-        if ((damagesource.getAttacker() instanceof PlayerEntity) && (!getPassengerList().isEmpty() && getPassengerList().get(0) == damagesource.getSource())) {
+        if ((damagesource.getAttacker() instanceof PlayerEntity) && (!this.getPassengerList().isEmpty() && this.getPassengerList().get(0) == damagesource.getSource()))
             return false;
-        }
 
         return super.damage(damagesource, i);
     }
@@ -48,14 +47,14 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        dataTracker.startTracking(SADDLED, false);
+        this.dataTracker.startTracking(SADDLED, false);
     }
 
     @Override
     protected void dropInventory() {
         super.dropInventory();
-        if (isSaddled()) {
-            dropItem(Items.SADDLE);
+        if (this.isSaddled()) {
+            this.dropItem(Items.SADDLE);
         }
     }
 
@@ -65,29 +64,24 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
         ActionResult returnValue = super.interactMob(player, hand);
 
         // TODO: Saddle code here may be able to be removed, due to the implement
-        if (!canBeSaddled()) {
-            return super.interactMob(player, hand);
-        }
+        if (!this.canBeSaddled()) return super.interactMob(player, hand);
 
-        if (!isSaddled()) {
-            if (heldItem.getItem() == Items.SADDLE && !isBaby()) {
-                if (!player.isCreative()) {
-                    player.setStackInHand(hand, ItemStack.EMPTY);
-                }
+        if (!this.isSaddled()) {
+            if (heldItem.getItem() == Items.SADDLE && !this.isBaby()) {
+                if (!player.isCreative()) player.setStackInHand(hand, ItemStack.EMPTY);
 
-                if (player.world.isClient) {
+                if (player.world.isClient)
                     player.world.playSound(player, player.getBlockPos(), SoundEvents.ENTITY_PIG_SADDLE, SoundCategory.AMBIENT, 1.0F, 1.0F);
-                }
 
-                setSaddled(true);
+                this.setSaddled(true);
                 return ActionResult.SUCCESS;
             }
         } else {
-            if (getPassengerList().isEmpty()) {
+            if (this.getPassengerList().isEmpty()) {
                 if (!player.world.isClient) {
                     player.startRiding(this);
                     player.prevYaw = player.getYaw();
-                    player.setYaw(getYaw());
+                    player.setYaw(this.getYaw());
                 }
 
                 return ActionResult.SUCCESS;
@@ -104,27 +98,25 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
 
     @Override
     public boolean isInsideWall() {
-        if (!getPassengerList().isEmpty()) {
-            return false;
-        }
+        if (!this.getPassengerList().isEmpty()) return false;
         return super.isInsideWall();
     }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putBoolean("saddled", isSaddled());
+        nbt.putBoolean("saddled", this.isSaddled());
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        setSaddled(nbt.getBoolean("saddled"));
+        this.setSaddled(nbt.getBoolean("saddled"));
     }
 
     @Override
     public boolean isSaddled() {
-        return dataTracker.get(SADDLED);
+        return this.dataTracker.get(SADDLED);
     }
 
     public void setSaddled(boolean saddled) {
@@ -139,7 +131,7 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
 
     @Override
     public boolean canBeSaddled() {
-        return isAlive() && !isBaby();
+        return this.isAlive() && !this.isBaby();
     }
 
     @Override

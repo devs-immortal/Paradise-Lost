@@ -48,7 +48,7 @@ public class SkyrootTowerGenerator {
         @Override
         protected void writeNbt(StructureContext ctx, NbtCompound nbt) {
             super.writeNbt(ctx, nbt);
-            nbt.putString("Rot", placementData.getRotation().name());
+            nbt.putString("Rot", this.placementData.getRotation().name());
         }
 
         @Override
@@ -71,7 +71,7 @@ public class SkyrootTowerGenerator {
                     }
                 }
             }
-            boundingBox.encompass(template.calculateBoundingBox(placementData, this.pos));
+            boundingBox.encompass(this.template.calculateBoundingBox(this.placementData, this.pos));
             super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
         }
 

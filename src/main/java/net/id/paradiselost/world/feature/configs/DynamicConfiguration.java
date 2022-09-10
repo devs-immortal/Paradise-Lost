@@ -20,7 +20,7 @@ public class DynamicConfiguration implements FeatureConfig {
 
     public DynamicConfiguration(BlockState state, Optional<String> type) {
         this.state = state;
-        genTypeRaw = type;
+        this.genTypeRaw = type;
 
         final String genString = (genTypeRaw.orElse("normal")).toUpperCase();
         GeneratorType genType = GeneratorType.NORMAL;
@@ -32,7 +32,7 @@ public class DynamicConfiguration implements FeatureConfig {
     }
 
     public BlockState getState() {
-        return state;
+        return this.state;
     }
 
     public Optional<String> getGenString() {

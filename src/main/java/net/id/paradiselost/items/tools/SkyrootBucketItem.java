@@ -27,18 +27,18 @@ public class SkyrootBucketItem extends Item {
 
     public SkyrootBucketItem(Settings settings) {
         super(settings);
-        containedBlock = Fluids.EMPTY;
+        this.containedBlock = Fluids.EMPTY;
     }
 
     public SkyrootBucketItem(Fluid containedFluidIn, Settings settings) {
         super(settings);
-        containedBlock = containedFluidIn;
+        this.containedBlock = containedFluidIn;
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack currentStack = playerIn.getStackInHand(handIn);
-        BlockHitResult hitResult = raycast(worldIn, playerIn, containedBlock == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
+        BlockHitResult hitResult = raycast(worldIn, playerIn, this.containedBlock == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
 
         if (currentStack.getItem() != ParadiseLostItems.SKYROOT_WATER_BUCKET && currentStack.getItem() != ParadiseLostItems.SKYROOT_BUCKET) {
             playerIn.setCurrentHand(handIn);
@@ -51,7 +51,7 @@ public class SkyrootBucketItem extends Item {
             BlockPos hitPos = hitResult.getBlockPos();
 
             if (worldIn.canPlayerModifyAt(playerIn, hitPos) && playerIn.canPlaceOn(hitPos, hitResult.getSide(), currentStack)) {
-                if (containedBlock == Fluids.EMPTY) {
+                if (this.containedBlock == Fluids.EMPTY) {
                     BlockState hitState = worldIn.getBlockState(hitPos);
 
                     if (hitState.getBlock() instanceof FluidDrainable) {
@@ -61,7 +61,7 @@ public class SkyrootBucketItem extends Item {
                             ((FluidDrainable) hitState.getBlock()).tryDrainFluid(worldIn, hitPos, hitState);
                             playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                             playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
-                            ItemStack fillStack = fillBucket(currentStack, playerIn, ParadiseLostItems.SKYROOT_WATER_BUCKET);
+                            ItemStack fillStack = this.fillBucket(currentStack, playerIn, ParadiseLostItems.SKYROOT_WATER_BUCKET);
 
                             return new TypedActionResult<>(ActionResult.SUCCESS, fillStack);
                         }
@@ -72,10 +72,10 @@ public class SkyrootBucketItem extends Item {
                     BlockState hitBlockState = worldIn.getBlockState(hitPos);
                     BlockPos adjustedPos = hitBlockState.getBlock() instanceof FluidFillable ? hitPos : hitResult.getBlockPos().offset(hitResult.getSide());
 
-                    placeLiquid(playerIn, worldIn, adjustedPos, hitResult);
+                    this.placeLiquid(playerIn, worldIn, adjustedPos, hitResult);
 
                     playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
-                    return new TypedActionResult<>(ActionResult.SUCCESS, emptyBucket(currentStack, playerIn));
+                    return new TypedActionResult<>(ActionResult.SUCCESS, this.emptyBucket(currentStack, playerIn));
                 }
             } else {
                 return new TypedActionResult<>(ActionResult.FAIL, currentStack);
@@ -151,7 +151,7 @@ public class SkyrootBucketItem extends Item {
     }
 
     public boolean placeLiquid(PlayerEntity playerIn, World worldIn, BlockPos posIn, BlockHitResult hitResult) {
-        if (!(containedBlock instanceof FlowableFluid)) {
+        if (!(this.containedBlock instanceof FlowableFluid)) {
             return false;
         } else {
             BlockState stateIn = worldIn.getBlockState(posIn);
@@ -159,7 +159,7 @@ public class SkyrootBucketItem extends Item {
             boolean flag = !material.isSolid();
             boolean flag1 = material.isReplaceable();
 
-            if (worldIn.isAir(posIn) || flag || flag1 || stateIn.getBlock() instanceof FluidFillable && ((FluidFillable) stateIn.getBlock()).canFillWithFluid(worldIn, posIn, stateIn, containedBlock)) {
+            if (worldIn.isAir(posIn) || flag || flag1 || stateIn.getBlock() instanceof FluidFillable && ((FluidFillable) stateIn.getBlock()).canFillWithFluid(worldIn, posIn, stateIn, this.containedBlock)) {
                 if (worldIn.getRegistryKey().equals(World.NETHER)) {
                     int i = posIn.getX();
                     int j = posIn.getY();
@@ -170,21 +170,21 @@ public class SkyrootBucketItem extends Item {
                         worldIn.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0D, 0.0D, 0.0D);
                     }
                 } else if (stateIn.getBlock() instanceof FluidFillable) {
-                    if (((FluidFillable) stateIn.getBlock()).tryFillWithFluid(worldIn, posIn, stateIn, ((FlowableFluid) containedBlock).getStill(false))) {
-                        playEmptySound(playerIn, worldIn, posIn);
+                    if (((FluidFillable) stateIn.getBlock()).tryFillWithFluid(worldIn, posIn, stateIn, ((FlowableFluid) this.containedBlock).getStill(false))) {
+                        this.playEmptySound(playerIn, worldIn, posIn);
                     }
                 } else {
                     if (!worldIn.isClient && (flag || flag1) && !material.isLiquid()) {
                         worldIn.breakBlock(posIn, true);
                     }
 
-                    playEmptySound(playerIn, worldIn, posIn);
-                    worldIn.setBlockState(posIn, containedBlock.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
+                    this.playEmptySound(playerIn, worldIn, posIn);
+                    worldIn.setBlockState(posIn, this.containedBlock.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
                 }
 
                 return true;
             } else {
-                return hitResult != null && placeLiquid(playerIn, worldIn, hitResult.getBlockPos().offset(hitResult.getSide()), null);
+                return hitResult != null && this.placeLiquid(playerIn, worldIn, hitResult.getBlockPos().offset(hitResult.getSide()), null);
             }
         }
     }

@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:brown_sporecap"
+          "name": "paradise_lost:brown_sporecap"
         }
       ],
       "conditions": [

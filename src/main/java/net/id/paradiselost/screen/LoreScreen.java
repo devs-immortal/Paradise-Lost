@@ -95,8 +95,8 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
         this.scrollLimitX1 = scrollLimitX1 + (viewportWidth >> 1);
         this.scrollLimitY1 = scrollLimitY1 + (viewportHeight >> 1);
         
-        scrollX = MathHelper.clamp(scrollX, scrollLimitX0, scrollLimitX1);
-        scrollY = MathHelper.clamp(scrollX, scrollLimitY0, scrollLimitY1);
+        this.scrollX = MathHelper.clamp(scrollX, scrollLimitX0, scrollLimitX1);
+        this.scrollY = MathHelper.clamp(scrollX, scrollLimitY0, scrollLimitY1);
     }
     
     @Override
@@ -123,8 +123,8 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
             int mouseX;
             int mouseY;
         };
-        filterState.mouseX = mouseX - x - scrollX;
-        filterState.mouseY = mouseY - y - scrollY;
+        filterState.mouseX = mouseX - this.x - scrollX;
+        filterState.mouseY = mouseY - this.y - scrollY;
         var currentlyHovered = loreEntries.stream().filter((entry)->
             filterState.mouseX >= entry.x && filterState.mouseX <= entry.x + entry.type.getWidth() &&
             filterState.mouseY >= entry.y && filterState.mouseY <= entry.y + entry.type.getHeight()
@@ -293,11 +293,11 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
             this.requirements = requirements;
             
             var textRenderer = MinecraftClient.getInstance().textRenderer;
-            width = Math.max(textRenderer.getWidth(this.title), 100) + 2;
+            this.width = Math.max(textRenderer.getWidth(this.title), 100) + 2;
     
             this.description = textRenderer.wrapLines(description, width);
             
-            height = 9 * (this.description.size() + 1);
+            this.height = 9 * (this.description.size() + 1);
         }
     
         private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemStack stack, @NotNull Text title, @NotNull Text description, @NotNull LoreEntry @NotNull ... requirements){

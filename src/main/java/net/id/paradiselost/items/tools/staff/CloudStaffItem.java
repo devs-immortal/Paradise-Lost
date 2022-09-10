@@ -17,9 +17,7 @@ public class CloudStaffItem extends Item {
     public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack heldItem = playerIn.getStackInHand(handIn);
 
-        if (worldIn.isClient) {
-            return super.use(worldIn, playerIn, handIn);
-        }
+        if (worldIn.isClient) return super.use(worldIn, playerIn, handIn);
 
         //TODO: Implement logic
 

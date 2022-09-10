@@ -1,4 +1,4 @@
-package net.id.paradiselost.world.feature.configuredfeatures;
+package net.id.paradiselost.world.feature.configured_features;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
@@ -35,7 +35,7 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLUTEGRASS = register("flutegrass", Feature.RANDOM_PATCH, Configs.FLUTEGRASS_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> FLUTEGRASS_BONEMEAL = register("flutegrass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(ParadiseLostBlocks.FLUTEGRASS));
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PARADISE_LOST_FLOWERS = register("paradise_lost_flowers", Feature.FLOWER, Configs.PARADISE_LOST_FLOWER_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PARADISE_LOST_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH, Configs.BLUEBERRY_PATCH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH, Configs.BLUEBERRY_PATCH_CONFIG);
     // Plato
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PLATEAU_FOLIAGE = register("plateau_foliage", Feature.RANDOM_PATCH, Configs.PLATEAU_FOLIAGE_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> PLATEAU_FLOWERING_GRASS = register("plateau_flowering_grass", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(GRASS_FLOWERING), UniformIntProvider.create(3, 10), ConstantIntProvider.create(5), UniformIntProvider.create(3, 6), 1.5));

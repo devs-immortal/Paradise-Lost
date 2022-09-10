@@ -2,8 +2,11 @@ package net.id.paradiselost.screen.slot;
 
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.SaddleItem;
 import net.minecraft.screen.slot.Slot;
 
+import java.security.Provider;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;

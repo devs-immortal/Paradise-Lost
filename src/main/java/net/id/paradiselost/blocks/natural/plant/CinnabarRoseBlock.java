@@ -114,7 +114,7 @@ public class CinnabarRoseBlock extends ParadiseLostMushroomBlock {
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return canPlantOnTop(world.getBlockState(pos.down()), world, pos.down());
+        return this.canPlantOnTop(world.getBlockState(pos.down()), world, pos.down());
     }
 
     @Override

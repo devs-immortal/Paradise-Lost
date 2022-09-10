@@ -28,9 +28,10 @@ public class SkyrootTowerFeature extends Structure {
 
     private static void addPieces(StructurePiecesCollector collector, Context context) {
         StructureTemplate structure = context.structureTemplateManager().getTemplateOrBlank(ParadiseLost.locate("skyroot_tower"));
+        BlockRotation blockRotation = BlockRotation.NONE;
         ChunkPos pos = context.chunkPos();
         BlockPos pivot = new BlockPos(structure.getSize().getX() / 2, 0, structure.getSize().getZ() / 2);
-        BlockBox boundingBox = structure.calculateBoundingBox(pos.getStartPos(), BlockRotation.NONE, pivot, BlockMirror.NONE);
+        BlockBox boundingBox = structure.calculateBoundingBox(pos.getStartPos(), blockRotation, pivot, BlockMirror.NONE);
         BlockPos center = boundingBox.getCenter();
         int y = context.chunkGenerator().getHeight(pos.getStartPos().getX() - X_OFFSET, pos.getStartPos().getZ() - Z_OFFSET, Heightmap.Type.WORLD_SURFACE_WG, context.world(), context.noiseConfig());
         if (y < 0) { // DON'T PLACE ON THE BOTTOM OF THE WORLD

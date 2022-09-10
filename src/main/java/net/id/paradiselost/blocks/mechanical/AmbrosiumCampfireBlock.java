@@ -1,11 +1,13 @@
 package net.id.paradiselost.blocks.mechanical;
 
+import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
 import net.id.paradiselost.blocks.blockentity.AmbrosiumCampfireBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.CampfireCookingRecipe;
@@ -18,8 +20,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
-
-import static net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes.AMBROSIUM_CAMPFIRE;
 
 public class AmbrosiumCampfireBlock extends CampfireBlock {
     public AmbrosiumCampfireBlock(boolean emitsParticles, int fireDamage, Settings settings) {
@@ -37,26 +37,26 @@ public class AmbrosiumCampfireBlock extends CampfireBlock {
                     player.incrementStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return ActionResult.SUCCESS;
                 }
-                
+
                 return ActionResult.CONSUME;
             }
         }
-        
+
         return ActionResult.PASS;
     }
-    
+
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new AmbrosiumCampfireBlockEntity(pos, state);
     }
-    
+
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         if (world.isClient) {
-            return state.get(LIT) ? checkType(type, AMBROSIUM_CAMPFIRE, AmbrosiumCampfireBlockEntity::clientTick) : null;
+            return state.get(LIT) ? checkType(type, ParadiseLostBlockEntityTypes.AMBROSIUM_CAMPFIRE, AmbrosiumCampfireBlockEntity::clientTick) : null;
         } else {
-            return state.get(LIT) ? checkType(type, AMBROSIUM_CAMPFIRE, AmbrosiumCampfireBlockEntity::litServerTick) : checkType(type, AMBROSIUM_CAMPFIRE, AmbrosiumCampfireBlockEntity::unlitServerTick);
+            return state.get(LIT) ? checkType(type, ParadiseLostBlockEntityTypes.AMBROSIUM_CAMPFIRE, AmbrosiumCampfireBlockEntity::litServerTick) : checkType(type, ParadiseLostBlockEntityTypes.AMBROSIUM_CAMPFIRE, AmbrosiumCampfireBlockEntity::unlitServerTick);
         }
     }
 }

@@ -1,6 +1,6 @@
 package net.id.paradiselost.world.feature.placed_features;
 
-import net.id.paradiselost.world.feature.configuredfeatures.ParadiseLostTreeConfiguredFeatures;
+import net.id.paradiselost.world.feature.configured_features.ParadiseLostTreeConfiguredFeatures;
 import net.id.paradiselost.world.feature.placement_modifiers.ChancePlacementModifier;
 import net.id.paradiselost.world.feature.placement_modifiers.CrystalTreeIslandPlacementModifier;
 import net.minecraft.block.Block;

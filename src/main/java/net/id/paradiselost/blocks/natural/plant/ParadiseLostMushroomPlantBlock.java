@@ -2,6 +2,7 @@ package net.id.paradiselost.blocks.natural.plant;
 
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -11,10 +12,10 @@ import net.minecraft.world.WorldView;
 import java.util.Iterator;
 import java.util.Random;
 
-public class AetherMushroomPlantBlock extends PlantBlock {
+public class ParadiseLostMushroomPlantBlock extends PlantBlock {
     protected final TagKey<Block> plantableOn;
     
-    public AetherMushroomPlantBlock(Settings settings, TagKey<Block> plantableOn) {
+    public ParadiseLostMushroomPlantBlock(Settings settings, TagKey<Block> plantableOn) {
         super(settings);
         this.plantableOn = plantableOn;
     }

@@ -84,7 +84,7 @@
   "block.paradise_lost.carved_stone_eye": "Carved Stone Eye",
   "block.paradise_lost.carved_stone_eye_lit": "Lit Carved Stone Eye",
 
-  "block.paradise_list.ambrosium_campfire": "Ambrosium Campfire",
+  "block.paradise_lost.ambrosium_campfire": "Ambrosium Campfire",
 
   "block.paradise_lost.skyroot_sapling": "Skyroot Sapling",
   "block.paradise_lost.skyroot_log": "Skyroot Log",
@@ -503,6 +503,8 @@
 
   "effect.paradise_lost.simmering": "Simmering",
 
+
+  "condition.paradise_lost.condition.venom": "Venom",
 
   "subtitles.paradise_lost.block.blueberry_bush.pick_blueberries": "Blueberries pop",
 

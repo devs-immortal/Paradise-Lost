@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "the_aether:swedroot"
+      "item": "paradise_lost:swedroot"
     }
   ],
   "result": {
-    "item": "the_aether:swedroot_pulp",
+    "item": "paradise_lost:swedroot_pulp",
     "count": 2
   }
 }

@@ -46,7 +46,7 @@ public abstract class SwetEntity extends SlimeEntity {
 
     public SwetEntity(EntityType<? extends SwetEntity> entityType, World world) {
         super(entityType, world);
-        init();
+        this.init();
     }
 
     public static DefaultAttributeContainer.Builder createSwetAttributes() {
@@ -88,35 +88,35 @@ public abstract class SwetEntity extends SlimeEntity {
     // TODO: Use PathAwareEntity at some point (PL-1.7)
     @Override
     public boolean canBeLeashedBy(PlayerEntity player) {
-        return !isLeashed();
+        return !this.isLeashed();
     }
 
     @Override
     protected void updateLeash() {
         super.updateLeash();
-        Entity entity = getHoldingEntity();
-        if (entity != null && entity.world == world) {
-            setPositionTarget(entity.getBlockPos(), 5);
-            float f = distanceTo(entity);
+        Entity entity = this.getHoldingEntity();
+        if (entity != null && entity.world == this.world) {
+            this.setPositionTarget(entity.getBlockPos(), 5);
+            float f = this.distanceTo(entity);
 //            if (this instanceof TameableEntity && ((TameableEntity)this).isInSittingPose()) {
 //                if (f > 10.0f) {
 //                    this.detachLeash(true, true);
 //                }
 //                return;
 //            }
-            updateForLeashLength(f);
+            this.updateForLeashLength(f);
             if (f > 10.0f) {
-                detachLeash(true, true);
-                goalSelector.disableControl(Goal.Control.MOVE);
+                this.detachLeash(true, true);
+                this.goalSelector.disableControl(Goal.Control.MOVE);
             } else if (f > 6.0f) {
-                double d = (entity.getX() - getX()) / (double)f;
-                double e = (entity.getY() - getY()) / (double)f;
-                double g = (entity.getZ() - getZ()) / (double)f;
-                setVelocity(getVelocity().add(Math.copySign(d * d * 0.4, d), Math.copySign(e * e * 0.4, e), Math.copySign(g * g * 0.4, g)));
+                double d = (entity.getX() - this.getX()) / (double)f;
+                double e = (entity.getY() - this.getY()) / (double)f;
+                double g = (entity.getZ() - this.getZ()) / (double)f;
+                this.setVelocity(this.getVelocity().add(Math.copySign(d * d * 0.4, d), Math.copySign(e * e * 0.4, e), Math.copySign(g * g * 0.4, g)));
             } else {
-                goalSelector.enableControl(Goal.Control.MOVE);
-                Vec3d vec3d = new Vec3d(entity.getX() - getX(), entity.getY() - getY(), entity.getZ() - getZ()).normalize().multiply(Math.max(f - 2.0f, 0.0f));
-                getNavigation().startMovingTo(getX() + vec3d.x, getY() + vec3d.y, getZ() + vec3d.z, getRunFromLeashSpeed());
+                this.goalSelector.enableControl(Goal.Control.MOVE);
+                Vec3d vec3d = new Vec3d(entity.getX() - this.getX(), entity.getY() - this.getY(), entity.getZ() - this.getZ()).normalize().multiply(Math.max(f - 2.0f, 0.0f));
+                this.getNavigation().startMovingTo(this.getX() + vec3d.x, this.getY() + vec3d.y, this.getZ() + vec3d.z, this.getRunFromLeashSpeed());
             }
         }
     }
@@ -137,7 +137,7 @@ public abstract class SwetEntity extends SlimeEntity {
             if (!player.isCreative()) {
                 stack.decrement(1);
             }
-            setSize(getSize() + 1, true);
+            this.setSize(this.getSize() + 1, true);
             return ActionResult.SUCCESS;
         }
         return super.interactMob(player, hand);
@@ -147,16 +147,16 @@ public abstract class SwetEntity extends SlimeEntity {
     protected void initGoals() {
         // Replace the inherited slime target selectors with one that avoids chasing absorbed players, and ignores iron golems
         super.initGoals();
-        targetSelector.clear();
-        targetSelector.add(1, new FollowUnabsorbedTargetGoal<>(
+        this.targetSelector.clear();
+        this.targetSelector.add(1, new FollowUnabsorbedTargetGoal<>(
                 this, PlayerEntity.class, 10, true, false, (player) ->
-                Math.abs(player.getY() - getY()) <= 4.0D &&
+                Math.abs(player.getY() - this.getY()) <= 4.0D &&
                         !(FollowUnabsorbedTargetGoal.canAbsorb(this, player))
         ));
     }
 
     protected void init() {
-        setHealth(getMaxHealth());
+        this.setHealth(getMaxHealth());
     }
 
     @Override
@@ -167,19 +167,19 @@ public abstract class SwetEntity extends SlimeEntity {
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putBoolean("Oversize", getSize() >= 20);
+        nbt.putBoolean("Oversize", this.getSize() >= 20);
     }
 
     @Override
     public void tick() {
         // Entities don't have onEntityCollision, so this does that
-        if (!isDead()) {
+        if (!this.isDead()) {
             massStuck = 0;
-            world.getOtherEntities(this, getBoundingBox().stretch(0.9, 0.9, 0.9)).forEach((entity) -> {
+            world.getOtherEntities(this, this.getBoundingBox().stretch(0.9, 0.9, 0.9)).forEach((entity) -> {
                 Box box = entity.getBoundingBox();
                 massStuck += box.getXLength() * box.getYLength() * box.getZLength();
             });
-            world.getOtherEntities(this, getBoundingBox()).forEach(this::onEntityCollision);
+            world.getOtherEntities(this, this.getBoundingBox()).forEach(this::onEntityCollision);
         }
         
         super.tick();
@@ -192,11 +192,11 @@ public abstract class SwetEntity extends SlimeEntity {
 
     @Override
     protected void damage(LivingEntity target) {
-        if (isAlive()) {
-            int i = getSize();
-            if (squaredDistanceTo(target) < 0.6 * (double)i * (0.6 * (double)i) && canSee(target) && target.damage(ParadiseLostDamageSources.swet(this), getDamageAmount())) {
-                playSound(ParadiseLostSoundEvents.ENTITY_SWET_ATTACK, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
-                applyDamageEffects(this, target);
+        if (this.isAlive()) {
+            int i = this.getSize();
+            if (this.squaredDistanceTo(target) < 0.6 * (double)i * (0.6 * (double)i) && this.canSee(target) && target.damage(ParadiseLostDamageSources.swet(this), this.getDamageAmount())) {
+                this.playSound(ParadiseLostSoundEvents.ENTITY_SWET_ATTACK, 1.0f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
+                this.applyDamageEffects(this, target);
             }
         }
     }
@@ -204,8 +204,8 @@ public abstract class SwetEntity extends SlimeEntity {
     protected void onEntityCollision(Entity entity) {
         // special absorption rules
         if (entity instanceof SwetEntity swet) {
-            if (getSize() >= swet.getSize() && !swet.isDead()) {
-                setSize(MathHelper.ceil(MathHelper.sqrt(getSize() * getSize() + swet.getSize() * swet.getSize())), true);
+            if (this.getSize() >= swet.getSize() && !swet.isDead()) {
+                this.setSize(MathHelper.ceil(MathHelper.sqrt(this.getSize() * this.getSize() + swet.getSize() * swet.getSize())), true);
                 swet.discard();
             }
             return;
@@ -213,7 +213,7 @@ public abstract class SwetEntity extends SlimeEntity {
         // Make items ride the swet. They often shake free with the jiggle physics
         if (entity instanceof ItemEntity item) {
             if (item.getStack().isIn(ParadiseLostItemTags.GROWS_SWETS)) {
-                setSize(getSize() + 1, false);
+                this.setSize(this.getSize() + 1, false);
                 item.remove(RemovalReason.KILLED);
                 return;
             }
@@ -227,16 +227,16 @@ public abstract class SwetEntity extends SlimeEntity {
                 massStuck = 1;
             }
             // dampened oscillator (nonlinear restoring force): x'' = -μx' - kx
-            Vec3d center = getBoundingBox().getCenter().add(0,0.45F * getBoundingBox().getYLength() - (getSize() == 0 ? -0.25F : 1),0);
+            Vec3d center = this.getBoundingBox().getCenter().add(0,0.45F * this.getBoundingBox().getYLength() - (getSize() == 0 ? -0.25F : 1),0);
             Vec3d suckVelocity = // acceleration (x'')
                     center.subtract(entity.getPos()) // entity displacement (-x)
                             .multiply(MathHelper.clamp(0.25 + massStuck / 100, 0, 1)) // coefficient (k)
                             .add(
-                                    getVelocity().subtract(entity.getVelocity()) // delta velocity (-x')
-                                            .multiply(0.45 / massStuck / getSize()) // coefficient (μ)
+                                    this.getVelocity().subtract(entity.getVelocity()) // delta velocity (-x')
+                                            .multiply(0.45 / massStuck / this.getSize()) // coefficient (μ)
                             );
 
-            double maxSpeed = getSize() * 0.1 + 0.25;
+            double maxSpeed = this.getSize() * 0.1 + 0.25;
             if (suckVelocity.length() != 0) {
                 // clamp the suck velocity
                 suckVelocity = suckVelocity.multiply(Math.min(1, maxSpeed / suckVelocity.length()));
@@ -252,10 +252,10 @@ public abstract class SwetEntity extends SlimeEntity {
             EntityAttributeInstance knockbackResistance = livingEntity.getAttributeInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
             if (absorbable && knockbackResistance != null) {
                 knockbackResistance.addTemporaryModifier(knockbackResistanceModifier);
-                damage(livingEntity);
+                this.damage(livingEntity);
                 knockbackResistance.removeModifier(knockbackResistanceModifier);
             } else {
-                damage(livingEntity);
+                this.damage(livingEntity);
             }
         }
     }
@@ -277,9 +277,9 @@ public abstract class SwetEntity extends SlimeEntity {
         super.setSize(size, heal);
         int clampedSize = MathHelper.clamp(size, 1, 127);
         float sqrtClampedSize = MathHelper.sqrt(clampedSize);
-        getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2 * sqrtClampedSize + 0.1);
-        getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(12 * sqrtClampedSize + 1);
-        getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(0.25 * clampedSize + sqrtClampedSize);
+        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.2 * sqrtClampedSize + 0.1);
+        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(12 * sqrtClampedSize + 1);
+        this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(0.25 * clampedSize + sqrtClampedSize);
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -287,11 +287,11 @@ public abstract class SwetEntity extends SlimeEntity {
     @Nullable
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         setSize(initialSize, true);
-        getAttributeInstance(EntityAttributes.GENERIC_FOLLOW_RANGE).addPersistentModifier(new EntityAttributeModifier(
+        this.getAttributeInstance(EntityAttributes.GENERIC_FOLLOW_RANGE).addPersistentModifier(new EntityAttributeModifier(
                 "Random spawn bonus",
-                random.nextGaussian() * 0.05D,
+                this.random.nextGaussian() * 0.05D,
                 EntityAttributeModifier.Operation.MULTIPLY_BASE));
-        setLeftHanded(random.nextFloat() < 0.05F);
+        this.setLeftHanded(this.random.nextFloat() < 0.05F);
 
         return entityData;
     }
@@ -299,15 +299,15 @@ public abstract class SwetEntity extends SlimeEntity {
     // Prevents duplicate entities
     @Override
     public void remove(RemovalReason reason) {
-        setRemoved(reason);
+        this.setRemoved(reason);
         if (reason == Entity.RemovalReason.KILLED) {
-            emitGameEvent(GameEvent.ENTITY_DIE);
+            this.emitGameEvent(GameEvent.ENTITY_DIE);
         }
     }
 
     @Override
     protected Identifier getLootTableId() {
-        return getType().getLootTableId();
+        return this.getType().getLootTableId();
     }
     
     /**
@@ -344,7 +344,7 @@ public abstract class SwetEntity extends SlimeEntity {
 
         @Override
         public boolean shouldContinue() {
-            return super.shouldContinue() && !(canAbsorb(mob, mob.getTarget()));
+            return super.shouldContinue() && !(canAbsorb(this.mob, this.mob.getTarget()));
         }
     }
 }

@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "the_aether:ambrosium_block"
+      "item": "paradise_lost:ambrosium_block"
     }
   ],
   "result": {
-    "item": "the_aether:ambrosium_shard",
+    "item": "paradise_lost:ambrosium_shard",
     "count": 9
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "the_aether:item/food/halflight_cheesecake"
+    "layer0": "paradise_lost:item/food/halflight_cheesecake"
   }
 }

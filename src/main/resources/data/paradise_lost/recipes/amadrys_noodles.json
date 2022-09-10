@@ -5,17 +5,17 @@
       "item": "minecraft:bowl"
     },
     {
-      "item": "the_aether:amadrys_bushel"
+      "item": "paradise_lost:amadrys_bushel"
     },
     {
-      "item": "the_aether:orange"
+      "item": "paradise_lost:orange"
     },
     {
-      "tag": "the_aether:aether_mushrooms"
+      "tag": "paradise_lost:paradise_lost_mushrooms"
     }
   ],
   "result": {
-    "item": "the_aether:amadrys_noodles",
+    "item": "paradise_lost:amadrys_noodles",
     "count": 1
   }
 }

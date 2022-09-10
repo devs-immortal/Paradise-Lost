@@ -9,8 +9,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
-public class AetherHangingMushroomPlantBlock extends AetherMushroomPlantBlock {
-    public AetherHangingMushroomPlantBlock(Settings settings, TagKey<Block> plantableOn) {
+public class ParadiseLostHangingMushroomPlantBlock extends ParadiseLostMushroomPlantBlock {
+    public ParadiseLostHangingMushroomPlantBlock(Settings settings, TagKey<Block> plantableOn) {
         super(settings, plantableOn);
     }
     

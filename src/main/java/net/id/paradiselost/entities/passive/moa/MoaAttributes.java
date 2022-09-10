@@ -76,6 +76,6 @@ public enum MoaAttributes {
     }
 
     public String getTranslationKey(){
-        return "moa.attribute." + name().toLowerCase();
+        return "moa.attribute." + this.name().toLowerCase();
     }
 }

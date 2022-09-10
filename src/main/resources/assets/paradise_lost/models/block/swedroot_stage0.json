@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "the_aether:block/swedroot_stage0"
+    "cross": "paradise_lost:block/swedroot_stage0"
   }
 }

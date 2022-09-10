@@ -35,22 +35,22 @@ public class MoaModel extends EntityModel<MoaEntity> {
     private final ModelPart tail;
 
     public MoaModel(ModelPart root) {
-        torso = root.getChild("torso");
-        tail = torso.getChild("tail");
-        neck = torso.getChild("neck");
-        head = neck.getChild("head");
-        beak = head.getChild("beak");
-        crest_up_r1 = head.getChild("crest_up_r1");
-        right_leg = torso.getChild("right_leg");
-        right_knee = right_leg.getChild("right_knee");
-        right_foot = right_knee.getChild("right_foot");
-        left_leg = torso.getChild("left_leg");
-        left_knee = left_leg.getChild("left_knee");
-        left_foot = left_knee.getChild("left_foot");
-        right_wing = torso.getChild("right_wing");
-        left_wing = torso.getChild("left_wing");
-        chest = torso.getChild("chest");
-        saddle = torso.getChild("saddle");
+        this.torso = root.getChild("torso");
+        this.tail = this.torso.getChild("tail");
+        this.neck = this.torso.getChild("neck");
+        this.head = this.neck.getChild("head");
+        this.beak = this.head.getChild("beak");
+        this.crest_up_r1 = this.head.getChild("crest_up_r1");
+        this.right_leg = this.torso.getChild("right_leg");
+        this.right_knee = this.right_leg.getChild("right_knee");
+        this.right_foot = this.right_knee.getChild("right_foot");
+        this.left_leg = this.torso.getChild("left_leg");
+        this.left_knee = this.left_leg.getChild("left_knee");
+        this.left_foot = this.left_knee.getChild("left_foot");
+        this.right_wing = this.torso.getChild("right_wing");
+        this.left_wing = this.torso.getChild("left_wing");
+        this.chest = this.torso.getChild("chest");
+        this.saddle = this.torso.getChild("saddle");
     }
 
     public static TexturedModelData getTexturedModelData() {

@@ -11,7 +11,7 @@ public final class LoreHandler extends ScreenHandler{
     
     public LoreHandler(int syncId, PlayerInventory playerInventory){
         super(ParadiseLostScreens.LORE, syncId);
-        player = playerInventory.player;
+        this.player = playerInventory.player;
     }
     
     @Override

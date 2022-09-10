@@ -3,6 +3,8 @@ package net.id.paradiselost.blocks.natural.crop;
 import net.id.incubus_core.block.TallCropBlock;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
+import net.id.incubus_core.block.TallCropBlock;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
@@ -20,7 +22,7 @@ public class FlaxCropBlock extends TallCropBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (getHalf(state) == DoubleBlockHalf.UPPER) {
+        if (this.getHalf(state) == DoubleBlockHalf.UPPER) {
             return;
         }
         var data = new Object() {

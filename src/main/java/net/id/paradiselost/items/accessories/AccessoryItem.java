@@ -13,8 +13,8 @@ public class AccessoryItem extends Item {
     public AccessoryItem(AccessoryType type, String material, float damageMultiplier, Settings settings) {
         super(settings.maxDamage(5 * type.getDurability()));
         this.type = type;
-        texture = ParadiseLost.locate("textures/armor/accessory_" + material + ".png");
-        texture_slim = ParadiseLost.locate("textures/armor/accessory_" + material + "_slim.png");
+        this.texture = ParadiseLost.locate("textures/armor/accessory_" + material + ".png");
+        this.texture_slim = ParadiseLost.locate("textures/armor/accessory_" + material + "_slim.png");
         this.damageMultiplier = damageMultiplier;
     }
 
@@ -56,18 +56,18 @@ public class AccessoryItem extends Item {
 //    }
 
     public Identifier getTexture() {
-        return getTexture(false);
+        return this.getTexture(false);
     }
 
     public Identifier getTexture(boolean isSlim) {
-        return isSlim ? texture_slim : texture;
+        return isSlim ? this.texture_slim : this.texture;
     }
 
     public AccessoryType getType() {
-        return type;
+        return this.type;
     }
 
     public float getDamageMultiplier() {
-        return damageMultiplier;
+        return this.damageMultiplier;
     }
 }

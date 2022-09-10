@@ -22,13 +22,13 @@ public final class Plugin implements IMixinConfigPlugin{
     
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName){
-        if(mixinClassName.equals("net.id.paradise_lost.mixin.client.ClientPlayerEntityMixin")){
+        if(mixinClassName.equals("net.id.paradiselost.mixin.client.ClientPlayerEntityMixin")){
             return !CompatConfig.SPECTRUM_WORKAROUND;
         }
         if(isDevel){
             return true;
         }
-        return !mixinClassName.startsWith("net.id.paradise_lost.mixin.devel.");
+        return !mixinClassName.startsWith("net.id.paradiselost.mixin.devel.");
     }
     
     @Override

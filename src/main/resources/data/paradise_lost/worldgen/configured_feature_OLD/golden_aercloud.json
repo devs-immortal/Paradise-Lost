@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:decorated",
+  "config": {
+    "feature": {
+      "type": "paradise_lost:aercloud",
+      "config": {
+        "state": {
+          "Name": "paradise_lost:golden_aercloud",
+          "Properties": {
+            "double_drops": "true"
+          }
+        },
+        "flat": false,
+        "maxRadius": 14,
+        "y": 96
+      }
+    },
+    "decorator": {
+      "type": "minecraft:decorated",
+      "config": {
+        "outer": {
+          "type": "minecraft:heightmap_spread_double",
+          "config": {
+            "heightmap": "MOTION_BLOCKING"
+          }
+        },
+        "inner": {
+          "type": "minecraft:chance",
+          "config": {
+            "chance": 60
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 package net.id.paradiselost.effect;
 
+import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.incubus_core.condition.api.Condition;
 import net.id.incubus_core.condition.api.ConditionModifier;
-import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;

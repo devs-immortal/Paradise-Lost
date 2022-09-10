@@ -128,12 +128,12 @@ public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable 
 
         @Override
         public String toString() {
-            return asString();
+            return this.asString();
         }
 
         @Override
         public String asString() {
-            return name().toLowerCase();
+            return this.name().toLowerCase();
         }
     }
 }

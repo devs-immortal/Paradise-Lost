@@ -1,17 +1,25 @@
 package net.id.paradiselost.entities.hostile;
 
-import net.id.incubus_core.condition.api.ConditionAPI;
-import net.id.incubus_core.condition.api.Persistence;
-import net.id.incubus_core.condition.base.ConditionManager;
 import net.id.paradiselost.effect.condition.Conditions;
 import net.id.paradiselost.entities.projectile.CockatriceSpitEntity;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
+import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
+import net.id.incubus_core.condition.api.ConditionAPI;
+import net.id.incubus_core.condition.api.Persistence;
+import net.id.incubus_core.condition.base.ConditionManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.GoToWalkTargetGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -21,11 +29,13 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 
 public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     public float flapProgress;
@@ -37,7 +47,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
 
     public CockatriceEntity(EntityType<? extends CockatriceEntity> entityType, World world) {
         super(entityType, world);
-        stepHeight = 1.0F;
+        this.stepHeight = 1.0F;
     }
 
     public static DefaultAttributeContainer.Builder createCockatriceAttributes() {
@@ -51,46 +61,46 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     protected void initGoals() {
         super.initGoals();
 
-        goalSelector.add(1, new SwimGoal(this));
-        goalSelector.add(3, new CockatriceAttackGoal(this, 1.0D, 30, 60, 12.0F));
-        goalSelector.add(4, new GoToWalkTargetGoal(this, 1.0D));
-        goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D, 0.01F));
-        goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        goalSelector.add(6, new LookAroundGoal(this));
-        targetSelector.add(1, new RevengeGoal(this, CockatriceEntity.class));
-        targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
+        this.goalSelector.add(1, new SwimGoal(this));
+        this.goalSelector.add(3, new CockatriceAttackGoal(this, 1.0D, 30, 60, 12.0F));
+        this.goalSelector.add(4, new GoToWalkTargetGoal(this, 1.0D));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D, 0.01F));
+        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(6, new LookAroundGoal(this));
+        this.targetSelector.add(1, new RevengeGoal(this, CockatriceEntity.class));
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
     }
 
     // copied from ChickenEntity
     @Override
     public void tickMovement() {
         super.tickMovement();
-        prevFlapProgress = flapProgress;
-        prevMaxWingDeviation = maxWingDeviation;
-        maxWingDeviation = maxWingDeviation + (onGround && !isAttacking() ? -1 : 4) * 0.3F;
-        maxWingDeviation = MathHelper.clamp(maxWingDeviation, 0.0F, 1.0F);
-        if ((!onGround || isAttacking()) && flapSpeed < 1.0F) {
-            flapSpeed = 1.0F;
+        this.prevFlapProgress = this.flapProgress;
+        this.prevMaxWingDeviation = this.maxWingDeviation;
+        this.maxWingDeviation = this.maxWingDeviation + (this.onGround && !this.isAttacking() ? -1 : 4) * 0.3F;
+        this.maxWingDeviation = MathHelper.clamp(this.maxWingDeviation, 0.0F, 1.0F);
+        if ((!this.onGround || this.isAttacking()) && this.flapSpeed < 1.0F) {
+            this.flapSpeed = 1.0F;
         }
 
-        flapSpeed = flapSpeed * 0.9F;
-        Vec3d velocity = getVelocity();
-        if (!onGround && velocity.y < 0.0D) {
-            setVelocity(velocity.multiply(1.0D, 0.6D, 1.0D));
+        this.flapSpeed = this.flapSpeed * 0.9F;
+        Vec3d velocity = this.getVelocity();
+        if (!this.onGround && velocity.y < 0.0D) {
+            this.setVelocity(velocity.multiply(1.0D, 0.6D, 1.0D));
         }
 
-        flapProgress += flapSpeed * 2.0F;
+        this.flapProgress += this.flapSpeed * 2.0F;
     }
 
     @Override
     protected boolean hasWings() {
-        return speed > field_28639;
+        return this.speed > this.field_28639;
     }
 
     @Override
     protected void addFlapEffects() {
-        field_28639 = speed + maxWingDeviation / 2.0F;
+        this.field_28639 = this.speed + this.maxWingDeviation / 2.0F;
     }
 
     @Override
@@ -100,19 +110,19 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
 
     @Override
     public void attack(LivingEntity target, float arg1) {
-        CockatriceSpitEntity needle = new CockatriceSpitEntity(world, this);
+        CockatriceSpitEntity needle = new CockatriceSpitEntity(this.world, this);
 
-        double dx = target.getX() - getX();
+        double dx = target.getX() - this.getX();
         double dy = target.getBodyY(0.3333333333333333D) - needle.getY();
-        double dz = target.getZ() - getZ();
+        double dz = target.getZ() - this.getZ();
         double distance = Math.sqrt(dx * dx + dz * dz);
-        needle.setVelocity(dx, dy + distance * 0.2D, dz, 1.5F, 14.0F - world.getDifficulty().getId() * 4);
+        needle.setVelocity(dx, dy + distance * 0.2D, dz, 1.5F, 14.0F - this.world.getDifficulty().getId() * 4);
 
-        if (!isSilent()) {
-            playSound(ParadiseLostSoundEvents.ENTITY_COCKATRICE_SPIT, 1.0F, 1.0F + (random.nextFloat() - random.nextFloat()) * 0.2F);
+        if (!this.isSilent()) {
+            this.playSound(ParadiseLostSoundEvents.ENTITY_COCKATRICE_SPIT, 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
         }
 
-        world.spawnEntity(needle);
+        this.world.spawnEntity(needle);
     }
 
     @Override
@@ -120,9 +130,9 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         if (super.tryAttack(target)) {
             if (target instanceof LivingEntity victim) {
                 int seconds = 0;
-                if (world.getDifficulty() == Difficulty.NORMAL) {
+                if (this.world.getDifficulty() == Difficulty.NORMAL) {
                     seconds = 7;
-                } else if (world.getDifficulty() == Difficulty.HARD) {
+                } else if (this.world.getDifficulty() == Difficulty.HARD) {
                     seconds = 15;
                 }
 
@@ -137,9 +147,9 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
         return false;
     }
 
-    @Override
-    public boolean canSpawn(WorldAccess world, SpawnReason SpawnReason) {
-        return world.getRandom().nextInt(25) == 0 && super.canSpawn(world, SpawnReason);
+    public static boolean canSpawn(EntityType<? extends CockatriceEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random) ||
+                world.getBiome(pos) == ParadiseLostBiomes.AUTUMNAL_TUNDRA;
     }
 
     @Override
@@ -174,59 +184,59 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
 
         public CockatriceAttackGoal(CockatriceEntity mob, double mobSpeed, int minIntervalTicks, int maxIntervalTicks, float maxShootRange) {
             super(mob, mobSpeed, minIntervalTicks, maxIntervalTicks, maxShootRange);
-            cockatrice = mob;
+            this.cockatrice = mob;
         }
 
         @Override
         public void tick() {
-            LivingEntity target = cockatrice.getTarget();
+            LivingEntity target = this.cockatrice.getTarget();
             if (target == null) {
                 return;
             }
 
-            if (ticksPlunging == 0 && plungingCooldown > 0) {
-                plungingCooldown--;
+            if (this.ticksPlunging == 0 && this.plungingCooldown > 0) {
+                this.plungingCooldown--;
             }
-            if (ticksPlunging > 0) {
-                if (!cockatrice.canSee(target)) {
-                    ticksPlunging = 0;
+            if (this.ticksPlunging > 0) {
+                if (!this.cockatrice.canSee(target)) {
+                    this.ticksPlunging = 0;
                 } else {
-                    ticksPlunging--;
+                    this.ticksPlunging--;
                 }
-                if (ticksPlunging == 0) {
-                    cockatrice.setAttacking(false);
-                    plungingCooldown = 50 + cockatrice.getRandom().nextInt(25);
+                if (this.ticksPlunging == 0) {
+                    this.cockatrice.setAttacking(false);
+                    this.plungingCooldown = 50 + this.cockatrice.getRandom().nextInt(25);
                 }
             }
-            double distSq = cockatrice.squaredDistanceTo(target);
+            double distSq = this.cockatrice.squaredDistanceTo(target);
 
-            if (ticksPlunging > 0 || plungingCooldown == 0) {
-                boolean shouldPlunge = ticksPlunging > 0 // continue plunging if already started
-                        || cockatrice.getRandom().nextInt(20) == 0 // rarely start from any distance
-                        || distSq < 10 * 10 && cockatrice.getRandom().nextInt(5) != 0; // normally start if we are close
+            if (this.ticksPlunging > 0 || this.plungingCooldown == 0) {
+                boolean shouldPlunge = this.ticksPlunging > 0 // continue plunging if already started
+                        || this.cockatrice.getRandom().nextInt(20) == 0 // rarely start from any distance
+                        || distSq < 10 * 10 && this.cockatrice.getRandom().nextInt(5) != 0; // normally start if we are close
                 if (shouldPlunge) {
-                    if (ticksPlunging == 0) {
-                        ticksPlunging = 50 + cockatrice.getRandom().nextInt(25);
+                    if (this.ticksPlunging == 0) {
+                        this.ticksPlunging = 50 + this.cockatrice.getRandom().nextInt(25);
                         // activates flapping wings
-                        cockatrice.setAttacking(true);
+                        this.cockatrice.setAttacking(true);
                     }
                     // move to target very quickly
-                    cockatrice.getMoveControl().moveTo(target.getX(), target.getY(), target.getZ(), 1.5D);
+                    this.cockatrice.getMoveControl().moveTo(target.getX(), target.getY(), target.getZ(), 1.5D);
 
                     if (distSq < 4.0D) {
-                        cockatrice.tryAttack(target);
+                        this.cockatrice.tryAttack(target);
                     }
                     return;
                 } else {
-                    ticksPlunging = 0;
-                    cockatrice.setAttacking(false);
-                    plungingCooldown = 50 + cockatrice.getRandom().nextInt(25);
+                    this.ticksPlunging = 0;
+                    this.cockatrice.setAttacking(false);
+                    this.plungingCooldown = 50 + this.cockatrice.getRandom().nextInt(25);
                 }
             }
             // normally ProjectileAttackGoal stays at attack range of its ranged attack
             // add some chance to start moving closer, thus allowing to enter range for plunge attack
-            if (distSq <= 12 * 12 && (cockatrice.getRandom().nextInt(3) == 0 || plungingCooldown < 10)) {
-                cockatrice.getMoveControl().moveTo(target.getX(), target.getY(), target.getZ(), 1D);
+            if (distSq <= 12 * 12 && (this.cockatrice.getRandom().nextInt(3) == 0 || this.plungingCooldown < 10)) {
+                this.cockatrice.getMoveControl().moveTo(target.getX(), target.getY(), target.getZ(), 1D);
             } else {
                 super.tick();
             }

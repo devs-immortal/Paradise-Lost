@@ -9,17 +9,17 @@ import net.minecraft.world.World;
 public class PoisonNeedleEntity extends PoisonDartEntity {
     public PoisonNeedleEntity(EntityType<? extends PoisonDartEntity> entityType, World world) {
         super(entityType, world);
-        setNoGravity(false);
+        this.setNoGravity(false);
     }
 
     public PoisonNeedleEntity(double x, double y, double z, World world) {
         super(ParadiseLostEntityTypes.POISON_NEEDLE, x, y, z, world);
-        setNoGravity(false);
+        this.setNoGravity(false);
     }
 
     public PoisonNeedleEntity(LivingEntity owner, World world) {
         super(ParadiseLostEntityTypes.POISON_NEEDLE, owner, world);
-        setNoGravity(false);
+        this.setNoGravity(false);
     }
 
     @Override

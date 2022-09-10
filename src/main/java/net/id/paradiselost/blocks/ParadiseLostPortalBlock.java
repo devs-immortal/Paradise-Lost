@@ -23,9 +23,9 @@ public class ParadiseLostPortalBlock extends CustomPortalBlock {
     @Override
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if(!(MinecraftClient.getInstance().player instanceof EntityInCustomPortal entity && entity.didTeleport()) && random.nextInt(200) == 0){
+        if (!(MinecraftClient.getInstance().player instanceof EntityInCustomPortal entity && entity.didTeleport()) && random.nextInt(200) == 0) {
             world.getProfiler().push("portal");
-            world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, ParadiseLostSoundEvents.BLOCK_PARADISE_LOST_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
+            world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, ParadiseLostSoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
             world.getProfiler().pop();
         }
 
@@ -43,11 +43,10 @@ public class ParadiseLostPortalBlock extends CustomPortalBlock {
             f = (double) pos.getZ() + 0.5D + 0.25D * (double) k;
             j = random.nextFloat() * 2.0F * (float) k;
         }
-        if (world.getRandom().nextInt(6) != 0) {
+        if (world.getRandom().nextInt(6) != 0)
             world.addParticle(ParticleTypes.DRIPPING_WATER, d, e, f, g, h, j);
-        } else {
+        else
             world.addParticle(ParticleTypes.CLOUD, d, e, f, 0, 0, 0);
-        }
     }
 
     @Override

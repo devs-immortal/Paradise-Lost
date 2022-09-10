@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:amadrys_bundle"
+          "name": "paradise_lost:amadrys_bundle"
         }
       ],
       "conditions": [

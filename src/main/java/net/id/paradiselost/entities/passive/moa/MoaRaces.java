@@ -28,40 +28,40 @@ public class MoaRaces {
     public static final MoaRace SCARLET = register("scarlet", new MoaRace(GLIDING_SPEED, ENDURANCE));
     public static final MoaRace REDHOOD = register("redhood", new MoaRace(MAX_HEALTH, TANK));
     public static final MoaRace MOONSTRUCK = register("moonstruck", new MoaRace(GLIDING_SPEED, SPEED, true, true, ParticleTypes.GLOW));
-    
+
     private static MoaRace register(String name, MoaRace race){
         return MoaAPI.register(ParadiseLost.locate(name), race);
     }
-    
+
     // Register breeding and spawning.
     public static void init(){
         registerSpawning(HIGHLANDS_BLUE, 50, HIGHLANDS_PLAINS_KEY);
         registerSpawning(HIGHLANDS_BLUE, 50, HIGHLANDS_FOREST_KEY);
-    
+
         registerSpawning(GOLDENROD, 10, HIGHLANDS_PLAINS_KEY);
         registerSpawning(GOLDENROD, 25, HIGHLANDS_FOREST_KEY);
         registerSpawning(GOLDENROD, 49, WISTERIA_WOODS_KEY);
-    
+
         registerSpawning(MINTGRASS, 40, HIGHLANDS_PLAINS_KEY);
         registerSpawning(MINTGRASS, 45, HIGHLANDS_THICKET_KEY);
-    
+
         registerSpawning(STRAWBERRY_WISTAR, 49, WISTERIA_WOODS_KEY);
-    
+
         registerSpawning(TANGERINE, 15, HIGHLANDS_FOREST_KEY);
         registerSpawning(TANGERINE, 50, HIGHLANDS_THICKET_KEY);
         registerBreeding(TANGERINE, 0.5F, GOLDENROD, STRAWBERRY_WISTAR);
-    
+
         registerSpawning(FOXTROT, 5, HIGHLANDS_THICKET_KEY);
         registerBreeding(FOXTROT, 0.2F, TANGERINE, GOLDENROD);
-    
+
         registerSpawning(SCARLET, 2, WISTERIA_WOODS_KEY);
         registerBreeding(SCARLET, 0.075F, STRAWBERRY_WISTAR, HIGHLANDS_BLUE);
-    
+
         registerSpawning(REDHOOD, 5, HIGHLANDS_THICKET_KEY);
         registerBreeding(REDHOOD, 0.1F, FOXTROT, HIGHLANDS_BLUE);
-    
+
         Predicate<MoaBreedingContext> moonstruckRequirements = ctx -> ctx.world().isNight() && ctx.world().getRandom().nextFloat() <= 0.25F;
-    
+
         registerSpawning(MOONSTRUCK, 5, HIGHLANDS_THICKET_KEY);
         registerBreeding(MOONSTRUCK, moonstruckRequirements, REDHOOD, STRAWBERRY_WISTAR);
     }

@@ -63,7 +63,7 @@ public class RookEntity extends MobEntity {
         }
 
         if(world.getTimeOfDay() % 24000 < 13000) {
-            remove(RemovalReason.DISCARDED);
+            this.remove(RemovalReason.DISCARDED);
         }
 
         world.getPlayers()
@@ -95,10 +95,10 @@ public class RookEntity extends MobEntity {
         if(world instanceof ServerWorld server) {
             maxAmount = maxAmount + 1;
             for (int i = 0; i < rolls; ++i) {
-                double d = random.nextGaussian() * 0.02D;
-                double e = random.nextGaussian() * 0.02D;
-                double f = random.nextGaussian() * 0.02D;
-                server.spawnParticles(parameters, getParticleX(1.0D), getRandomBodyY() + yOffset, getParticleZ(1.0D), 1 + random.nextInt(maxAmount), d, e, f, 0);
+                double d = this.random.nextGaussian() * 0.02D;
+                double e = this.random.nextGaussian() * 0.02D;
+                double f = this.random.nextGaussian() * 0.02D;
+                server.spawnParticles(parameters, this.getParticleX(1.0D), this.getRandomBodyY() + yOffset, this.getParticleZ(1.0D), 1 + random.nextInt(maxAmount), d, e, f, 0);
             }
         }
     }

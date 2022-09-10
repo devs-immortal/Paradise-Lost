@@ -1,6 +1,7 @@
 package net.id.paradiselost.entities.hostile.swet;
 
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
+import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -13,8 +14,6 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 
-import static net.id.paradiselost.tag.ParadiseLostBlockTags.SWET_TRANSFORMERS_VERMILION;
-
 // Not yet implemented, not planned for 1.6.0
 public class VermilionSwetEntity extends SwetEntity {
     public VermilionSwetEntity(EntityType<? extends VermilionSwetEntity> entityType, World world) {
@@ -24,22 +23,21 @@ public class VermilionSwetEntity extends SwetEntity {
     @Override
     protected void onEntityCollision(Entity entity) {
         if (entity instanceof TntMinecartEntity tnt) {
-            if (!tnt.isPrimed() && getSize() >= 4) {
+            if (!tnt.isPrimed() && this.getSize() >= 4) {
                 tnt.prime();
             }
         }
-    
         if (isAbsorbable(entity, world)) {
             entity.setOnFireFor(2/*seconds*/);
         }
-        
+
         super.onEntityCollision(entity);
     }
-    
+
     public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return SwetEntity.canSpawn(type, world, spawnReason, pos, random) &&
-               (world.getStatesInBoxIfLoaded(Box.of(Vec3d.of(pos), 4, 2, 4)).anyMatch(state -> state.isIn(SWET_TRANSFORMERS_VERMILION))
-                || world.getRandom().nextFloat() < 0.01);
+                (world.getStatesInBoxIfLoaded(Box.of(Vec3d.of(pos), 4, 2, 4)).anyMatch(state -> state.isIn(ParadiseLostBlockTags.SWET_TRANSFORMERS_VERMILION))
+                        || world.getRandom().nextFloat() < 0.01);
     }
     
     @Override

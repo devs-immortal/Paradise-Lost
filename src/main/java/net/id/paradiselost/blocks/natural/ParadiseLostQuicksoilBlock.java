@@ -44,9 +44,7 @@ public class ParadiseLostQuicksoilBlock extends Block implements Fertilizable {
                                 (random.nextInt(3) - 1) * random.nextInt(3) / 2,
                                 random.nextInt(3) - 1
                         )).down()
-                ).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) {
-                    continue block0;
-                }
+                ).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) continue block0;
             }
 
             BlockState blockState2 = world.getBlockState(blockPos2);

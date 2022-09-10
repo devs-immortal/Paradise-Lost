@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "the_aether:block/packed_swedroot"
+      "model": "paradise_lost:block/packed_swedroot"
     }
   }
 }

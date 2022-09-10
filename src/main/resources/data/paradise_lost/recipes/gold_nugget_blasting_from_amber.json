@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "the_aether:golden_amber"
+    "item": "paradise_lost:golden_amber"
   },
   "result": "minecraft:gold_nugget",
   "experience": 0.3,

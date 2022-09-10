@@ -50,7 +50,7 @@ public class MapRendererMixin {
                     }
                 }
             }
-            texture.upload();
+            this.texture.upload();
             ci.cancel();
         }
     }

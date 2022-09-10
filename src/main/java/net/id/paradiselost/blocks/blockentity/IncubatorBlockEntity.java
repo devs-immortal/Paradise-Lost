@@ -1,9 +1,9 @@
 package net.id.paradiselost.blocks.blockentity;
 
-import net.id.incubus_core.be.InventoryBlockEntity;
 import net.id.paradiselost.component.MoaGenes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
+import net.id.incubus_core.be.InventoryBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,8 +18,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-import static net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes.INCUBATOR;
-
 public class IncubatorBlockEntity extends BlockEntity implements InventoryBlockEntity {
 
     private UUID owner;
@@ -27,8 +25,8 @@ public class IncubatorBlockEntity extends BlockEntity implements InventoryBlockE
     private final DefaultedList<ItemStack> inventory;
 
     public IncubatorBlockEntity(BlockPos pos, BlockState state) {
-        super(INCUBATOR, pos, state);
-        inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
+        super(ParadiseLostBlockEntityTypes.INCUBATOR, pos, state);
+        this.inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     }
 
     public static <T extends BlockEntity> void tickServer(World world, BlockPos pos, BlockState state, T entity) {

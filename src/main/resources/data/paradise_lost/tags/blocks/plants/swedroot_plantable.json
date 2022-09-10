@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#the_aether:aether_dirt_blocks",
-    "the_aether:packed_swedroot"
+    "#paradise_lost:dirt_blocks",
+    "paradise_lost:packed_swedroot"
   ]
 }

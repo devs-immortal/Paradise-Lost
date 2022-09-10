@@ -11,6 +11,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -38,7 +40,7 @@ public class FourBiteCakeBlock extends Block {
     
     public FourBiteCakeBlock(Settings settings) {
         super(settings);
-        setDefaultState(stateManager.getDefaultState().with(BITES, 0));
+        this.setDefaultState(this.stateManager.getDefaultState().with(BITES, 0));
     }
     
     @Override
@@ -74,7 +76,7 @@ public class FourBiteCakeBlock extends Block {
                 world.removeBlock(pos, false);
                 world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos);
             }
-            
+
             return ActionResult.SUCCESS;
         }
     }
@@ -91,7 +93,7 @@ public class FourBiteCakeBlock extends Block {
     
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(BITES);
+        builder.add(new Property[]{BITES});
     }
     
     @Override

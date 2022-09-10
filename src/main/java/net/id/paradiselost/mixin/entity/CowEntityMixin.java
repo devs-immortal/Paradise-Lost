@@ -26,11 +26,11 @@ public abstract class CowEntityMixin extends AnimalEntity {
     @Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
     public void interactMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack itemStack = player.getStackInHand(hand);
-        if (itemStack.getItem() == ParadiseLostItems.SKYROOT_BUCKET && !isBaby()) {
+        if (itemStack.getItem() == ParadiseLostItems.SKYROOT_BUCKET && !this.isBaby()) {
             player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
             ItemStack itemStack2 = ItemUsage.exchangeStack(itemStack, player, ParadiseLostItems.SKYROOT_MILK_BUCKET.getDefaultStack());
             player.setStackInHand(hand, itemStack2);
-            cir.setReturnValue(ActionResult.success(world.isClient));
+            cir.setReturnValue(ActionResult.success(this.world.isClient));
         }
     }
 }

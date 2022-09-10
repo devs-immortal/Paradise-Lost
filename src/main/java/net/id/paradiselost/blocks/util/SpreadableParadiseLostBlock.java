@@ -41,13 +41,12 @@ public abstract class SpreadableParadiseLostBlock extends SnowyBlock {
             world.setBlockState(pos, ParadiseLostBlocks.DIRT.getDefaultState());
         } else {
             if (world.getLightLevel(pos.up()) >= 9) {
-                BlockState blockState = getDefaultState();
+                BlockState blockState = this.getDefaultState();
 
                 for (int i = 0; i < 4; ++i) {
                     BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                    if (world.getBlockState(blockPos).isOf(ParadiseLostBlocks.DIRT) && canSpread(blockState, world, blockPos)) {
+                    if (world.getBlockState(blockPos).isOf(ParadiseLostBlocks.DIRT) && canSpread(blockState, world, blockPos))
                         world.setBlockState(blockPos, blockState.with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
-                    }
                 }
             }
         }

@@ -11,6 +11,8 @@ import net.id.paradiselost.screen.handler.MoaScreenHandler;
 import net.id.paradiselost.screen.slot.PreviewSlot;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 

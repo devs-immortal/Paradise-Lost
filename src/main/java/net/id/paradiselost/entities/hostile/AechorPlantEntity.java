@@ -1,29 +1,33 @@
 package net.id.paradiselost.entities.hostile;
 
-import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
 import net.id.paradiselost.entities.projectile.PoisonNeedleEntity;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 
 public class AechorPlantEntity extends ParadiseLostAnimalEntity implements RangedAttackMob {
     public final int poisonRemaining;
@@ -33,11 +37,11 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
     public AechorPlantEntity(EntityType<? extends AechorPlantEntity> entityType, World world) {
         super(entityType, world);
 
-        size = random.nextInt(4) + 1;
-        sinage = random.nextFloat() * 6F;
-        poisonRemaining = random.nextInt(4) + 2;
+        this.size = this.random.nextInt(4) + 1;
+        this.sinage = this.random.nextFloat() * 6F;
+        this.poisonRemaining = this.random.nextInt(4) + 2;
 
-        setPosition(getX(), getY(), getZ());
+        this.setPosition(Math.floor(this.getX()) + 0.5, this.getY(), Math.floor(this.getZ()) + 0.5);
     }
 
     public static DefaultAttributeContainer.Builder createAechorPlantAttributes() {
@@ -62,12 +66,12 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
     public void tick() {
         super.tick();
 
-        if (!world.getBlockState(getBlockPos().down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)) {
-            kill();
+        if (!this.world.getBlockState(this.getBlockPos().down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)) {
+            this.kill();
         }
 
-        if (hurtTime > 0) {
-            sinage += 0.9F;
+        if (this.hurtTime > 0) {
+            this.sinage += 0.9F;
         } else {
             sinage += (getAttacker() != null ? 0.3f : 0.1f);
         }
@@ -90,15 +94,15 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
 
     @Override
     public void attack(LivingEntity targetIn, float distFactor) {
-        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, world);
-        double x = targetIn.getX() - getX();
-        double y = targetIn.getBoundingBox().minY + (double)(targetIn.getHeight() / 3.0F) - needle.getY();
-        double z = targetIn.getZ() - getZ();
+        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
+        double x = targetIn.getX() - this.getX();
+        double y = targetIn.getBoundingBox().minY + (double) (targetIn.getHeight() / 3.0F) - needle.getY();
+        double z = targetIn.getZ() - this.getZ();
         double distance = Math.sqrt((float) (x * x + z * z));
 
-        needle.setVelocity(x, y + distance * 0.20000000298023224D, z, 1.0F, (float)(14 - world.getDifficulty().getId() * 4));
-        playSound(ParadiseLostSoundEvents.ENTITY_AECHOR_PLANT_SHOOT, 1.0F, 1.2F / (getRandom().nextFloat() * 0.2F + 0.9F));
-        world.spawnEntity(needle);
+        needle.setVelocity(x, y + distance * 0.20000000298023224D, z, 1.0F, (float) (14 - this.world.getDifficulty().getId() * 4));
+        this.playSound(ParadiseLostSoundEvents.ENTITY_AECHOR_PLANT_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
+        this.world.spawnEntity(needle);
     }
 
     @Override
@@ -139,13 +143,47 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
     @Override
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
-        compound.putInt("size", size);
+        compound.putInt("size", this.size);
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound compound) {
         super.readCustomDataFromNbt(compound);
-        size = compound.getInt("size");
+        this.size = compound.getInt("size");
+    }
+
+    @Override
+    protected void pushAway(Entity entityIn) {
+        if (!entityIn.isConnectedThroughVehicle(this)) {
+            if (!this.noClip && !entityIn.noClip) {
+                double d0 = this.getX() - entityIn.getX();
+                double d1 = this.getZ() - entityIn.getZ();
+                double d2 = MathHelper.absMax(d0, d1);
+
+                if (d2 >= 0.009999999776482582D) {
+                    d2 = Math.sqrt((float) d2);
+                    d0 = d0 / d2;
+                    d1 = d1 / d2;
+
+                    double d3 = 1.0D / d2;
+
+                    if (d3 > 1.0D) {
+                        d3 = 1.0D;
+                    }
+
+                    d0 = d0 * d3;
+                    d1 = d1 * d3;
+                    d0 = d0 * 0.05000000074505806D;
+                    d1 = d1 * 0.05000000074505806D;
+//                    d0 = d0 * (double) (1.0F - entityIn.pushthrough); //TODO: What is pushthrough?
+//                    d1 = d1 * (double) (1.0F - entityIn.pushthrough);
+
+                    if (!entityIn.hasPassengers()) {
+                        entityIn.addVelocity(-d0, 0.0D, -d1);
+                    }
+                }
+            }
+        }
     }
 
     @Override

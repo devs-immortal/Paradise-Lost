@@ -33,33 +33,29 @@ public class ChestMimicEntity extends HostileEntity {
     protected void initGoals() {
         super.initGoals();
 
-        goalSelector.add(0, new SwimGoal(this));
-        goalSelector.add(2, new MeleeAttackGoal(this, 1.0D, false));
-        goalSelector.add(5, new GoToWalkTargetGoal(this, 1.0D));
-        goalSelector.add(7, new WanderAroundFarGoal(this, 1.0D));
-        targetSelector.add(1, new RevengeGoal(this));
-        targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.add(5, new GoToWalkTargetGoal(this, 1.0D));
+        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0D));
+        this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        mouth = (float) ((Math.cos((float) age / 10F * 3.14159265F)) + 1F) * 0.6F;
-        legs *= 0.9F;
+        this.mouth = (float) ((Math.cos((float) this.age / 10F * 3.14159265F)) + 1F) * 0.6F;
+        this.legs *= 0.9F;
 
-        if (prevX - getX() != 0 || prevZ - getZ() != 0) {
-            legs += legsDirection * 0.2F;
+        if (this.prevX - this.getX() != 0 || this.prevZ - this.getZ() != 0) {
+            this.legs += legsDirection * 0.2F;
 
-            if (legs > 1.0F) {
-                legsDirection = -1;
-            }
+            if (this.legs > 1.0F) this.legsDirection = -1;
 
-            if (legs < -1.0F) {
-                legsDirection = 1;
-            }
+            if (this.legs < -1.0F) this.legsDirection = 1;
         } else {
-            legs = 0.0F;
+            this.legs = 0.0F;
         }
     }
 

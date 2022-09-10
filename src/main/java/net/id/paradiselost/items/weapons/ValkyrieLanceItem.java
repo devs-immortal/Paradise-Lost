@@ -18,7 +18,7 @@ public class ValkyrieLanceItem extends SwordItem {
     public ValkyrieLanceItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, float reach, float attackRange, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-        builder.putAll(getAttributeModifiers(EquipmentSlot.MAINHAND));
+        builder.putAll(this.getAttributeModifiers(EquipmentSlot.MAINHAND));
         builder.put(ReachEntityAttributes.REACH, new EntityAttributeModifier(REACH_MODIFIER_ID, "Weapon modifier", reach, EntityAttributeModifier.Operation.ADDITION));
         builder.put(ReachEntityAttributes.ATTACK_RANGE, new EntityAttributeModifier(ATTACK_RANGE_MODIFIER_ID, "Weapon modifier", attackRange, EntityAttributeModifier.Operation.ADDITION));
         ((SwordItemAccessor) this).setAttributeModifiers(builder.build());

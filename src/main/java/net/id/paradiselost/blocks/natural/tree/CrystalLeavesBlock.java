@@ -15,7 +15,7 @@ public class CrystalLeavesBlock extends LeavesBlock {
 
     public CrystalLeavesBlock(Settings settings) {
         super(settings);
-        setDefaultState((stateManager.getDefaultState()).with(FRUITY, false).with(PERSISTENT, false));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(FRUITY, false).with(PERSISTENT, false));
     }
 
     @Override

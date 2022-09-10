@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "item": "the_aether:swedroot"
+      "item": "paradise_lost:swedroot"
     }
   },
   "result": {
-    "item": "the_aether:packed_swedroot",
+    "item": "paradise_lost:packed_swedroot",
     "count": 1
   }
 }

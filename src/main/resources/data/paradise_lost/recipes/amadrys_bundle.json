@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "the_aether:amadrys_bushel"
+      "item": "paradise_lost:amadrys_bushel"
     }
   },
   "result": {
-    "item": "the_aether:amadrys_bundle"
+    "item": "paradise_lost:amadrys_bundle"
   }
 }

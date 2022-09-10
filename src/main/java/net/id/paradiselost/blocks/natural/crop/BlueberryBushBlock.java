@@ -77,6 +77,6 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
 
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(asItem());
+        return new ItemStack(this.asItem());
     }
 }

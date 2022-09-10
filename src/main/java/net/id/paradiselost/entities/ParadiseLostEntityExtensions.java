@@ -22,11 +22,11 @@ public interface ParadiseLostEntityExtensions {
     default void setParadiseLostFallen(boolean value) {
     }
 
-    default boolean isParadise_lost$aerbunnyFallen() {
+    default boolean isAerbunnyFallen() {
         return aerbunnyFallen;
     }
 
-    default void setAerBunnyFallen(boolean value) {
+    default void setAerbunnyFallen(boolean aerbunnyFallen) {
     }
 
     void setFlipped();

@@ -17,7 +17,7 @@ public class SlimeEntity$RandomLookGoalMixin {
     @Inject(method = "Lnet/minecraft/entity/mob/SlimeEntity$RandomLookGoal;<init>(Lnet/minecraft/entity/mob/SlimeEntity;)V", at = @At("RETURN"))
     private void saveReference(SlimeEntity slime, CallbackInfo ci) {
         if (slime instanceof SwetEntity swet) {
-            swet.setRandomLookTimer = value -> timer = value;
+            swet.setRandomLookTimer = value -> this.timer = value;
         }
     }
 }

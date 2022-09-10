@@ -1,20 +1,26 @@
 package net.id.paradiselost.blocks.natural;
 
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ParadiseLostWallMushroomBlock extends ParadiseLostMushroomBlock {
@@ -30,7 +36,7 @@ public class ParadiseLostWallMushroomBlock extends ParadiseLostMushroomBlock {
         Direction direction = state.get(FACING).getOpposite();
         BlockPos blockPos = pos.offset(direction);
         BlockState blockState = world.getBlockState(blockPos);
-        return canPlantOnTop(blockState, world, blockPos);
+        return this.canPlantOnTop(blockState, world, blockPos);
     }
 
     @Override

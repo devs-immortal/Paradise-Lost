@@ -23,7 +23,7 @@ public class CockatriceSpitRenderer extends EntityRenderer<CockatriceSpitEntity>
 
     public CockatriceSpitRenderer(EntityRendererFactory.Context context) {
         super(context);
-        model = new LlamaSpitEntityModel<>(context.getPart(EntityModelLayers.LLAMA_SPIT));
+        this.model = new LlamaSpitEntityModel<>(context.getPart(EntityModelLayers.LLAMA_SPIT));
     }
 
     @Override
@@ -32,9 +32,9 @@ public class CockatriceSpitRenderer extends EntityRenderer<CockatriceSpitEntity>
         matrices.translate(0.0D, 0.15000000596046448D, 0.0D);
         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw()) - 90.0F));
         matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(MathHelper.lerp(tickDelta, entity.prevPitch, entity.getPitch())));
-        model.setAngles(entity, tickDelta, 0.0F, -0.1F, 0.0F, 0.0F);
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(model.getLayer(TEXTURE));
-        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.model.setAngles(entity, tickDelta, 0.0F, -0.1F, 0.0F, 0.0F);
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(TEXTURE));
+        this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         matrices.pop();
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }

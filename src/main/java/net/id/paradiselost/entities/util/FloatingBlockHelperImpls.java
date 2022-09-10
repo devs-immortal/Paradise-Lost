@@ -1,10 +1,10 @@
 package net.id.paradiselost.entities.util;
 
 import net.gudenau.minecraft.moretags.MoreBlockTags;
-import net.id.incubus_core.blocklikeentities.api.BlockLikeSet;
 import net.id.paradiselost.api.FloatingBlockHelper;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
+import net.id.incubus_core.blocklikeentities.api.BlockLikeSet;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FallingBlock;
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 
-import static net.id.paradiselost.api.FloatingBlockHelper.isBlockBlacklisted;
+import static net.id.paradiselost.api.FloatingBlockHelper.*;
 
 public class FloatingBlockHelperImpls {
     /**
@@ -28,13 +28,13 @@ public class FloatingBlockHelperImpls {
      */
     public static class Any implements FloatingBlockHelper {
         private static final Any INSTANCE = new Any();
-        
+
         private Any(){}
-        
+
         public static Any getInstance(){
             return INSTANCE;
         }
-        
+
         /**
          * Try to create whatever floating block type is appropriate for the given position.
          * @param pos   The position of the block that should be floated.
@@ -46,32 +46,32 @@ public class FloatingBlockHelperImpls {
         public boolean tryCreate(World world, BlockPos pos, boolean force) {
             // try making a pusher, then a double, then a generic
             return PUSHER.tryCreate(world, pos, force)
-                   || DOUBLE.tryCreate(world, pos, force)
-                   || STANDARD.tryCreate(world, pos, force);
+                    || DOUBLE.tryCreate(world, pos, force)
+                    || STANDARD.tryCreate(world, pos, force);
         }
-        
+
         @Override
         public boolean isSuitableFor(BlockState state) {
             return STANDARD.isSuitableFor(state) || DOUBLE.isSuitableFor(state) || PUSHER.isSuitableFor(state);
         }
-        
+
         @Override
         public boolean isBlocked(boolean shouldDrop, World world, BlockPos pos) {
             BlockState state = world.getBlockState(pos);
             return STANDARD.isBlocked(shouldDrop, world, pos)
-                   && (DOUBLE.isSuitableFor(state) && DOUBLE.isBlocked(shouldDrop, world, pos))
-                   && (PUSHER.isSuitableFor(state) && PUSHER.isBlocked(shouldDrop, world, pos));
+                    && (DOUBLE.isSuitableFor(state) && DOUBLE.isBlocked(shouldDrop, world, pos))
+                    && (PUSHER.isSuitableFor(state) && PUSHER.isBlocked(shouldDrop, world, pos));
         }
     }
-    
+
     /**
      * A standard floating block helper.
      */
     public static class Standard implements FloatingBlockHelper {
         private static final Standard INSTANCE = new Standard();
-        
+
         private Standard(){}
-        
+
         public static Standard getInstance(){
             return INSTANCE;
         }
@@ -90,7 +90,7 @@ public class FloatingBlockHelperImpls {
                 return false;
             }
             FloatingBlockEntity entity = new FloatingBlockEntity(world, pos, state, false);
-            
+
             if (state.isOf(Blocks.TNT)) {
                 entity.setOnEndFloating((impact, landed) -> {
                     if (impact >= 0.8) {
@@ -112,12 +112,12 @@ public class FloatingBlockHelperImpls {
             world.spawnEntity(entity);
             return true;
         }
-        
+
         @Override
         public boolean isSuitableFor(BlockState state) {
             return true;
         }
-        
+
         @Override
         public boolean isBlocked(boolean shouldDrop, World world, BlockPos pos) {
             BlockState above = world.getBlockState(pos.up());
@@ -129,15 +129,15 @@ public class FloatingBlockHelperImpls {
             }
         }
     }
-    
+
     /**
      * A double floating block helper, such as a door or tall grass plant.
      */
     public static class Double implements FloatingBlockHelper {
         private static final Double INSTANCE = new Double();
-        
+
         private Double(){}
-        
+
         public static Double getInstance(){
             return INSTANCE;
         }
@@ -173,7 +173,7 @@ public class FloatingBlockHelperImpls {
             structure.spawn(world);
             return true;
         }
-        
+
         @Override
         public boolean isBlocked(boolean shouldDrop, World world, BlockPos pos) {
             BlockState state = world.getBlockState(pos);
@@ -188,21 +188,21 @@ public class FloatingBlockHelperImpls {
                 return !FallingBlock.canFallThrough(above);
             }
         }
-        
+
         @Override
         public boolean isSuitableFor(BlockState state) {
             return state.contains(Properties.DOUBLE_BLOCK_HALF);
         }
     }
-    
+
     /**
      * A piston-like {@link BlockLikeSet} helper.
      */
     public static class Pusher implements FloatingBlockHelper {
         private static final Pusher INSTANCE = new Pusher();
-        
+
         private Pusher(){}
-        
+
         public static Pusher getInstance(){
             return INSTANCE;
         }
@@ -217,7 +217,7 @@ public class FloatingBlockHelperImpls {
             if ((!force && isBlockBlacklisted(world, pos)) || dropping || !isSuitableFor(world.getBlockState(pos))) {
                 return false;
             }
-            
+
             BlockLikeSet structure = construct(world, pos, force);
             if (structure != null) {
                 structure.spawn(world);
@@ -226,12 +226,12 @@ public class FloatingBlockHelperImpls {
                 return false;
             }
         }
-        
+
         @Override
         public boolean isSuitableFor(BlockState state) {
             return state.isIn(ParadiseLostBlockTags.PUSH_FLOATERS);
         }
-        
+
         @Deprecated(forRemoval = false)
         @Override
         public boolean isBlocked(boolean shouldDrop, World world, BlockPos pos) {
@@ -246,25 +246,25 @@ public class FloatingBlockHelperImpls {
                 return false;
             }
         }
-        
+
         @Nullable
         private static BlockLikeSet construct(World world, BlockPos pos, boolean force) {
             SetBuilder builder = new SetBuilder(world, pos);
             if (world.getBlockState(pos).isIn(ParadiseLostBlockTags.PUSH_FLOATERS)
-                && continueTree(world, pos.up(), builder, force)
-                && builder.size() > 1) {
+                    && continueTree(world, pos.up(), builder, force)
+                    && builder.size() > 1) {
                 return builder.build();
             }
             return null;
         }
-        
+
         // returns false if the tree is unable to move. returns true otherwise.
         private static boolean continueTree(World world, BlockPos pos, SetBuilder builder, boolean overrideBlacklist) {
             if (builder.size() > MAX_MOVABLE_BLOCKS + 1) {
                 return false;
             }
             BlockState state = world.getBlockState(pos);
-            
+
             if (state.isAir() || (!overrideBlacklist && isBlockBlacklisted(world, pos)) || builder.isAlreadyInSet(pos)) {
                 return true;
             }
@@ -282,12 +282,12 @@ public class FloatingBlockHelperImpls {
             if (state.isIn(MoreBlockTags.STICKY_BLOCKS)) {
                 // checks each of the sides
                 for (var newPos : new BlockPos[]{
-                    pos.north(),
-                    pos.east(),
-                    pos.south(),
-                    pos.west(),
-                    pos.down()
-                    /* up has already been checked */
+                        pos.north(),
+                        pos.east(),
+                        pos.south(),
+                        pos.west(),
+                        pos.down()
+                        /* up has already been checked */
                 }) {
                     BlockState adjacentState = world.getBlockState(newPos);
                     if (isAdjacentBlockStuck(state, adjacentState)) {
@@ -300,7 +300,7 @@ public class FloatingBlockHelperImpls {
             }
             return true;
         }
-        
+
         private static boolean isAdjacentBlockStuck(BlockState state, BlockState adjacentState) {
             if (state.isIn(MoreBlockTags.HONEY_BLOCKS) && adjacentState.isIn(MoreBlockTags.SLIME_BLOCKS)) {
                 return false;

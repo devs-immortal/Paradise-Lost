@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "the_aether:item/ambrosium_campfire"
+    "layer0": "paradise_lost:item/ambrosium_campfire"
   }
 }

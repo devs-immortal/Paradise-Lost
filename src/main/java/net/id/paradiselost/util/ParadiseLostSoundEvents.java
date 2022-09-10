@@ -2,13 +2,17 @@ package net.id.paradiselost.util;
 
 import net.id.paradiselost.ParadiseLost;
 import net.minecraft.resource.Resource;
+import net.minecraft.resource.metadata.ResourceMetadata;
+import net.minecraft.resource.metadata.ResourceMetadataReader;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,9 +39,9 @@ public final class ParadiseLostSoundEvents {
     private static final Set<AbstractSoundEvent> SOUNDS = new HashSet<>();
 
     public static final SoundEvent BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES = childEvent("block.blueberry_bush.pick_blueberries", SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES);
-    public static final SoundEvent BLOCK_PARADISE_LOST_PORTAL_AMBIENT = event("block.portal.ambient");
-    public static final SoundEvent BLOCK_PARADISE_LOST_PORTAL_TRAVEL = event("block.portal.travel");
-    public static final SoundEvent BLOCK_PARADISE_LOST_PORTAL_TRIGGER = event("block.portal.trigger");
+    public static final SoundEvent BLOCK_PORTAL_AMBIENT = event("block.portal.ambient");
+    public static final SoundEvent BLOCK_PORTAL_TRAVEL = event("block.portal.travel");
+    public static final SoundEvent BLOCK_PORTAL_TRIGGER = event("block.portal.trigger");
 
     public static final SoundEvent BLOCK_ORANGE_LEAVES_BREAK = childEvent("block.orange_leaves.break", SoundEvents.BLOCK_MOSS_BREAK);
     public static final SoundEvent BLOCK_ORANGE_LEAVES_DROP_FRUIT = childEvent("block.orange_leaves.drop_fruit", SoundEvents.BLOCK_CANDLE_BREAK);

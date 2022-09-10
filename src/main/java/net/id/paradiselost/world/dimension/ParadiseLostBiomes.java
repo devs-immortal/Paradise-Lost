@@ -35,7 +35,7 @@ import static net.id.paradiselost.world.feature.placed_features.ParadiseLostVege
  * 1.19 update notes:
  * - Biome categories appear to be gone, verify that they have not been replaced.
  *
- * @author gudenau
+ * @author Gudenau
  */
 public final class ParadiseLostBiomes {
     public static final RegistryKey<Biome> HIGHLANDS_PLAINS_KEY = register("paradise_lost_highlands");
@@ -212,11 +212,11 @@ public final class ParadiseLostBiomes {
     
     private static Map<SpawnGroup, List<SpawnSettings.SpawnEntry>> getStandardSwetEntries(int weight, int minGroup, int maxGroup) {
         return Map.of(SpawnGroup.MONSTER, List.of(
-            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, weight, minGroup, maxGroup),
-            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.WHITE_SWET, weight, minGroup, maxGroup),
-            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.GOLDEN_SWET, weight, minGroup, maxGroup),
-            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PURPLE_SWET, weight, minGroup, maxGroup),
-            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.VERMILION_SWET, weight, minGroup, maxGroup)
+                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, weight, minGroup, maxGroup),
+                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.WHITE_SWET, weight, minGroup, maxGroup),
+                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.GOLDEN_SWET, weight, minGroup, maxGroup),
+                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PURPLE_SWET, weight, minGroup, maxGroup),
+                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.VERMILION_SWET, weight, minGroup, maxGroup)
         ));
     }
     
@@ -328,10 +328,10 @@ public final class ParadiseLostBiomes {
                             WATER_SPRING
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            PARADISE_LOST_FLOWERS,
-                            PARADISE_LOST_TALL_GRASS,
+                            FLOWERS,
+                            TALL_GRASS,
                             TUNDRA_FOLIAGE,
-                            PARADISE_LOST_BUSH,
+                            BUSH,
                             PATCH_BLUEBERRY,
                             SCATTERED_TREES,
                             ALT_FALLEN_LEAVES,
@@ -397,11 +397,11 @@ public final class ParadiseLostBiomes {
                             THICKET_SHAMROCK,
                             THICKET_LIVERWORT_CARPET,
                             THICKET_FALLEN_LOG,
-                            PARADISE_LOST_FLOWERS,
-                            PARADISE_LOST_GRASS,
+                            FLOWERS,
+                            GRASS,
                             FALLEN_LEAVES,
-                            PARADISE_LOST_TALL_GRASS,
-                            PARADISE_LOST_DENSE_BUSH,
+                            TALL_GRASS,
+                            DENSE_BUSH,
                             THICKET_TREES,
                             SPARSE_TREES
                         )
@@ -461,11 +461,11 @@ public final class ParadiseLostBiomes {
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
                             RAINBOW_MALT_SPRIGS,
-                            PARADISE_LOST_FLOWERS,
-                            PARADISE_LOST_GRASS,
+                            FLOWERS,
+                            GRASS,
                             FALLEN_ROSE_LEAVES,
                             FALLEN_LAVENDER_LEAVES,
-                            PARADISE_LOST_BUSH,
+                            BUSH,
                             PATCH_BLUEBERRY,
                             RAINBOW_FOREST_TREES
                         )
@@ -474,7 +474,7 @@ public final class ParadiseLostBiomes {
                 ))
             .spawnSettings(createSpawnSettings(
                 merge(
-                    getStandardSwetEntries(6, 2, 6),
+                    getStandardSwetEntries(2, 1, 3),
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 100, 3, 7)
@@ -594,9 +594,9 @@ public final class ParadiseLostBiomes {
                             WATER_SPRING
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                            PARADISE_LOST_FLOWERS,
-                            PARADISE_LOST_GRASS,
-                            PARADISE_LOST_TALL_GRASS,
+                            FLOWERS,
+                            GRASS,
+                            TALL_GRASS,
                             PATCH_BLUEBERRY,
                             PLATEAU_FOLIAGE,
                             PLATEAU_SHAMROCK,
@@ -611,9 +611,6 @@ public final class ParadiseLostBiomes {
                 merge(
                     getStandardSwetEntries(6, 2, 6),
                     Map.of(
-                        SpawnGroup.MONSTER, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, 100, 2, 6)
-                        ),
                         SpawnGroup.CREATURE, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
@@ -671,12 +668,12 @@ public final class ParadiseLostBiomes {
                             SHIELD_HOLLOW_STUMPS,
                             MOTTLED_FALLEN_LOG,
                             MOTTLED_HOLLOW_FALLEN_LOG,
-                            PARADISE_LOST_FLOWERS,
+                            FLOWERS,
                             SHIELD_FLAX,
                             SHIELD_NETTLES,
                             SHIELD_FOLIAGE,
-                            PARADISE_LOST_GRASS,
-                            PARADISE_LOST_TALL_GRASS,
+                            GRASS,
+                            TALL_GRASS,
                             WATER_SPRING,
                             SHIELD_TREES,
                             DENSE_SHIELD_TREES,

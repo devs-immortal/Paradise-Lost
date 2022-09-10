@@ -8,7 +8,7 @@ import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.util.MiscUtil;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
-import net.kyrptonaught.customportalapi.util.CPASoundEventData;
+import net.kyrptonaught.customportalapi.event.CPASoundEventData;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.registry.*;
@@ -25,7 +25,7 @@ import static net.id.paradiselost.ParadiseLost.locate;
 public class ParadiseLostDimension {
     public static final RegistryKey<World> PARADISE_LOST_WORLD_KEY = key(Registry.WORLD_KEY, MOD_ID);
     public static final RegistryKey<DimensionType> DIMENSION_TYPE = key(Registry.DIMENSION_TYPE_KEY, MOD_ID);
-    public static final RegistryKey<DimensionOptions> PARADISE_LOST_OPTIONS_KEY = key(Registry.DIMENSION_KEY, MOD_ID);
+    public static final RegistryKey<DimensionOptions> OPTIONS_KEY = key(Registry.DIMENSION_KEY, MOD_ID);
     public static final RegistryKey<FlatLevelGeneratorPreset> SUPERFLAT_PRESET = key(Registry.FLAT_LEVEL_GENERATOR_PRESET_KEY, MOD_ID);
     
     private static DimensionType dimensionType;
@@ -48,8 +48,8 @@ public class ParadiseLostDimension {
                 .tintColor(55, 89, 195)
                 .lightWithWater()
                 .onlyLightInOverworld()
-                .registerInPortalAmbienceSound(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PARADISE_LOST_PORTAL_TRIGGER, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
-                .registerPostTPPortalAmbience(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PARADISE_LOST_PORTAL_TRAVEL, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
+                .registerInPortalAmbienceSound(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRIGGER, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
+                .registerPostTPPortalAmbience(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRAVEL, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
                 .registerPortal();
     }
     
@@ -74,7 +74,7 @@ public class ParadiseLostDimension {
     
         try {
             registry.add(
-                PARADISE_LOST_OPTIONS_KEY,
+                OPTIONS_KEY,
                 MiscUtil.deserializeDataJson(
                     RegistryOps.of(JsonOps.INSTANCE, registryManager),
                     DimensionOptions.CODEC,

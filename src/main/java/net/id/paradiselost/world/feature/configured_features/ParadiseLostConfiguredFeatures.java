@@ -1,8 +1,10 @@
-package net.id.paradiselost.world.feature.configuredfeatures;
+package net.id.paradiselost.world.feature.configured_features;
 
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.predicate.BlockPredicate;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
@@ -25,7 +27,7 @@ public class ParadiseLostConfiguredFeatures {
     }
 
     private static <V extends T, T> RegistryEntry<V> register(Registry<T> registry, String id, V value) {
-        return (RegistryEntry<V>) BuiltinRegistries.add(registry, locate(id), value);
+        return (RegistryEntry<V>) BuiltinRegistries.<T>add(registry, locate(id), value);
     }
 
     public static void init() {

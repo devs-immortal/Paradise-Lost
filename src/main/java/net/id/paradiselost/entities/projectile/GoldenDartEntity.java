@@ -10,17 +10,17 @@ import net.minecraft.world.World;
 public class GoldenDartEntity extends DartEntity {
     public GoldenDartEntity(EntityType<? extends GoldenDartEntity> entityType, World world) {
         super(entityType, world);
-        setDamage(4);
+        this.setDamage(4);
     }
 
     public GoldenDartEntity(double x, double y, double z, World world) {
         super(ParadiseLostEntityTypes.GOLDEN_DART, x, y, z, world);
-        setDamage(4);
+        this.setDamage(4);
     }
 
     public GoldenDartEntity(LivingEntity owner, World world) {
         super(ParadiseLostEntityTypes.GOLDEN_DART, owner, world);
-        setDamage(4);
+        this.setDamage(4);
     }
 
     @Override

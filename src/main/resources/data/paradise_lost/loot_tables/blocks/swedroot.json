@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:swedroot"
+          "name": "paradise_lost:swedroot"
         }
       ]
     },
@@ -28,13 +28,13 @@
               }
             }
           ],
-          "name": "the_aether:swedroot"
+          "name": "paradise_lost:swedroot"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "the_aether:swedroot",
+          "block": "paradise_lost:swedroot",
           "properties": {
             "age": "7"
           }

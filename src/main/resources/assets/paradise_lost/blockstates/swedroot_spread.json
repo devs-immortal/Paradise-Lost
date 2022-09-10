@@ -5,7 +5,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "x": 270,
         "uvlock": true
       }
@@ -20,7 +20,7 @@
         "down": "false"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "x": 270,
         "uvlock": true
       }
@@ -30,7 +30,7 @@
         "north": "true"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread"
+        "model": "paradise_lost:block/swedroot_spread"
       }
     },
     {
@@ -43,7 +43,7 @@
         "down": "false"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread"
+        "model": "paradise_lost:block/swedroot_spread"
       }
     },
     {
@@ -51,7 +51,7 @@
         "west": "true"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "y": 270,
         "uvlock": true
       }
@@ -66,7 +66,7 @@
         "down": "false"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "y": 270,
         "uvlock": true
       }
@@ -76,7 +76,7 @@
         "south": "true"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "y": 180,
         "uvlock": true
       }
@@ -91,7 +91,7 @@
         "down": "false"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "y": 180,
         "uvlock": true
       }
@@ -101,7 +101,7 @@
         "east": "true"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "y": 90,
         "uvlock": true
       }
@@ -116,7 +116,7 @@
         "down": "false"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "y": 90,
         "uvlock": true
       }
@@ -126,7 +126,7 @@
         "down": "true"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "x": 90,
         "uvlock": true
       }
@@ -141,7 +141,7 @@
         "down": "false"
       },
       "apply": {
-        "model": "the_aether:block/swedroot_spread",
+        "model": "paradise_lost:block/swedroot_spread",
         "x": 90,
         "uvlock": true
       }

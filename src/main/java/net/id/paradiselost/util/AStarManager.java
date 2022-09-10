@@ -38,7 +38,7 @@ public class AStarManager {
         private APather(WorldView world, BlockPosProvider start, BlockPosProvider goal, BiFunction<WorldView, BlockPos, BlockPos> checkAdjuster, BiPredicate<WorldView, BlockPos> validator, Function5<BlockPos, BlockPos, WorldView, BlockPos, Double, Integer> costMapper, BiPredicate<WorldView, Optional<Node>> outputValidator, int expectedPathLength, boolean allowDiagionalMovement, boolean allowRecompute, double heuristic) {
             this.heuristic = heuristic;
             Comparator<Node> comparator = Comparator.comparing(node -> node.cost);
-            queue = new PriorityQueue<>(expectedPathLength, comparator);
+            this.queue = new PriorityQueue<>(expectedPathLength, comparator);
             this.world = world;
             this.start = start;
             this.goal = goal;
@@ -197,11 +197,11 @@ public class AStarManager {
         }
 
         public void allowRecompute() {
-            allowRecompute = true;
+            this.allowRecompute = true;
         }
 
         public void allowDiagonalMovement() {
-            allowDiagonalMovement = true;
+            this.allowDiagonalMovement = true;
         }
 
         public APather build(@NotNull WorldView world) {

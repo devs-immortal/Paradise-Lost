@@ -54,22 +54,22 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
 
     @Override
     protected void initGoals() {
-        goalSelector.add(0, new SwimGoal(this));
-        goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
-        goalSelector.add(2, new WanderAroundFarGoal(this, 1.0D, 20));
-        goalSelector.add(2, new WanderAroundGoal(this, 1.0D, 15));
-        goalSelector.add(3, new EatBlueberriesGoal(0.9D, 40, 8));
-        goalSelector.add(4, new AnimalMateGoal(this, 1.0D));
-        goalSelector.add(5, new TemptGoal(this, 1.15D, Ingredient.ofItems(ParadiseLostItems.BLUEBERRY), false));
-        goalSelector.add(6, new LookAroundGoal(this));
-        goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F, 32));
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
+        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0D, 20));
+        this.goalSelector.add(2, new WanderAroundGoal(this, 1.0D, 15));
+        this.goalSelector.add(3, new EatBlueberriesGoal(0.9D, 40, 8));
+        this.goalSelector.add(4, new AnimalMateGoal(this, 1.0D));
+        this.goalSelector.add(5, new TemptGoal(this, 1.15D, Ingredient.ofItems(ParadiseLostItems.BLUEBERRY), false));
+        this.goalSelector.add(6, new LookAroundGoal(this));
+        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F, 32));
         //this.goalSelector.add(6, new EntityAIBunnyHop(this));
     }
 
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        dataTracker.startTracking(PUFF, (byte) 0);
+        this.dataTracker.startTracking(PUFF, (byte) 0);
     }
 
     @Override
@@ -85,27 +85,27 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
 
     @Override
     public void playSpawnEffects() {
-        if (world.isClient) {
+        if (this.world.isClient) {
             for (int i = 0; i < 5; ++i) {
-                double double_1 = random.nextGaussian() * 0.02D;
-                double double_2 = random.nextGaussian() * 0.02D;
-                double double_3 = random.nextGaussian() * 0.02D;
+                double double_1 = this.random.nextGaussian() * 0.02D;
+                double double_2 = this.random.nextGaussian() * 0.02D;
+                double double_3 = this.random.nextGaussian() * 0.02D;
 
-                world.addParticle(ParticleTypes.POOF, getX() + (double) (random.nextFloat() * getWidth() * 2.0F) - (double) getWidth() - double_1 * 10.0D, getY() + (double) (random.nextFloat() * getHeight()) - double_2 * 10.0D, getZ() + (double) (random.nextFloat() * getWidth() * 2.0F) - (double) getWidth() - double_3 * 10.0D, double_1, double_2, double_3);
+                this.world.addParticle(ParticleTypes.POOF, this.getX() + (double) (this.random.nextFloat() * this.getWidth() * 2.0F) - (double) this.getWidth() - double_1 * 10.0D, this.getY() + (double) (this.random.nextFloat() * this.getHeight()) - double_2 * 10.0D, this.getZ() + (double) (this.random.nextFloat() * this.getWidth() * 2.0F) - (double) this.getWidth() - double_3 * 10.0D, double_1, double_2, double_3);
             }
         } else {
-            world.sendEntityStatus(this, (byte) 20);
+            this.world.sendEntityStatus(this, (byte) 20);
         }
     }
 
     //@Override public boolean canRiderInteract() { return true; }
 
     public int getPuffiness() {
-        return (int) dataTracker.get(PUFF);
+        return (int) this.dataTracker.get(PUFF);
     }
 
     public void setPuffiness(int i) {
-        dataTracker.set(PUFF, (byte) i);
+        this.dataTracker.set(PUFF, (byte) i);
     }
 
     @Override
@@ -123,35 +123,35 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
             playSound(ParadiseLostSoundEvents.ENTITY_AERBUNNY_SNIFF, 1.0F, 2.0F);
         }
 
-        if (hasVehicle() && (getVehicle().isSneaking() || getVehicle().getVelocity().y < -0.7)){
-            ((ParadiseLostEntityExtensions) getVehicle()).setAerBunnyFallen(true);
-            dismountVehicle();
+        if (this.hasVehicle() && (this.getVehicle().isSneaking() || this.getVehicle().getVelocity().y < -0.7)){
+            ((ParadiseLostEntityExtensions)this.getVehicle()).setAerbunnyFallen(true);
+            this.dismountVehicle();
         }
     }
 
     @Override
     public void tickMovement() {
         super.tickMovement();
-        if (isOnGround() && ((getVelocity().x > 0.025 || getVelocity().z > 0.025) && random.nextInt(4) == 0)) {
+        if (this.isOnGround() && ((getVelocity().x > 0.025 || getVelocity().z > 0.025) && random.nextInt(4) == 0)) {
             jump();
         }
         // Slows down Aerbunny while falling
-        if (!isOnGround() && getVelocity().y < 0.0D) {
-            setVelocity(getVelocity().multiply(1.0D, 0.65D, 1.0D));
+        if (!this.isOnGround() && getVelocity().y < 0.0D) {
+            this.setVelocity(getVelocity().multiply(1.0D, 0.65D, 1.0D));
         }
     }
 
     @Override
     protected float getJumpVelocity() {
-        if (!horizontalCollision && (!moveControl.isMoving() || !(moveControl.getTargetY() > getY() + 0.5D))) {
-            Path path = navigation.getCurrentPath();
+        if (!this.horizontalCollision && (!this.moveControl.isMoving() || !(this.moveControl.getTargetY() > this.getY() + 0.5D))) {
+            Path path = this.navigation.getCurrentPath();
             if (path != null && !path.isFinished()) {
                 Vec3d vec3d = path.getNodePosition(this);
-                if (vec3d.y > getY() + 0.5D) {
+                if (vec3d.y > this.getY() + 0.5D) {
                     return 0.45F;
                 }
             }
-            return moveControl.getSpeed() <= 0.6D ? 0.3F : 0.4F;
+            return this.moveControl.getSpeed() <= 0.6D ? 0.3F : 0.4F;
         } else {
             return 0.45F;
         }
@@ -204,7 +204,7 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
 
     @Override
     public boolean damage(DamageSource source, float damage) {
-        return (getPrimaryPassenger() == null || source.getAttacker() != getPrimaryPassenger()) && super.damage(source, damage);
+        return (this.getPrimaryPassenger() == null || source.getAttacker() != this.getPrimaryPassenger()) && super.damage(source, damage);
     }
 
     @Override
@@ -235,7 +235,7 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
 
         @Override
         public boolean shouldResetPath() {
-            return tryingTime % 100 == 0;
+            return this.tryingTime % 100 == 0;
         }
 
         @Override
@@ -246,26 +246,26 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
 
         @Override
         public void tick() {
-            if (hasReached()) {
-                if (timer >= 40) {
-                    eatSweetBerry();
+            if (this.hasReached()) {
+                if (this.timer >= 40) {
+                    this.eatSweetBerry();
                 } else {
-                    ++timer;
+                    ++this.timer;
                 }
-            } else if (!hasReached() && random.nextFloat() < 0.05F) {
-                playSound(ParadiseLostSoundEvents.ENTITY_AERBUNNY_SNIFF, 1.0F, 2.0F);
+            } else if (!this.hasReached() && AerbunnyEntity.this.random.nextFloat() < 0.05F) {
+                AerbunnyEntity.this.playSound(ParadiseLostSoundEvents.ENTITY_AERBUNNY_SNIFF, 1.0F, 2.0F);
             }
             super.tick();
         }
 
         protected void eatSweetBerry() {
-            BlockState blockState = world.getBlockState(targetPos);
+            BlockState blockState = AerbunnyEntity.this.world.getBlockState(this.targetPos);
             if (blockState.isOf(ParadiseLostBlocks.BLUEBERRY_BUSH) && blockState.get(SweetBerryBushBlock.AGE) == 3) {
-                setLoveTicks(40);
-                addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 10, 2));
-                playSound(ParadiseLostSoundEvents.BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES, 1.0F, 1.0F);
-                playSound(ParadiseLostSoundEvents.ENTITY_AERBUNNY_EAT, 0.8F, 2.0F);
-                world.setBlockState(targetPos, blockState.with(SweetBerryBushBlock.AGE, 1), Block.NOTIFY_LISTENERS);
+                AerbunnyEntity.this.setLoveTicks(40);
+                AerbunnyEntity.this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 10, 2));
+                AerbunnyEntity.this.playSound(ParadiseLostSoundEvents.BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES, 1.0F, 1.0F);
+                AerbunnyEntity.this.playSound(ParadiseLostSoundEvents.ENTITY_AERBUNNY_EAT, 0.8F, 2.0F);
+                AerbunnyEntity.this.world.setBlockState(this.targetPos, blockState.with(SweetBerryBushBlock.AGE, 1), Block.NOTIFY_LISTENERS);
             }
         }
 
@@ -276,7 +276,7 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
 
         @Override
         public void start() {
-            timer = 0;
+            this.timer = 0;
             super.start();
         }
     }

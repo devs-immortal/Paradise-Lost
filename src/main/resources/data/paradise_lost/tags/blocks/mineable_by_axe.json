@@ -1,15 +1,15 @@
 {
   "replace": false,
   "values": [
-    "the_aether:skyroot_bookshelf",
-    "the_aether:food_bowl",
-    "the_aether:giant_lily",
-    "the_aether:packed_swedroot",
-    "the_aether:swedroot_spread",
-    "#the_aether:aether_leaf_piles",
-    "#the_aether:aether_bushes",
-    "#the_aether:aether_hangers",
-    "#the_aether:aether_wooden_chests",
-    "the_aether:ambrosium_campfire"
+    "paradise_lost:skyroot_bookshelf",
+    "paradise_lost:food_bowl",
+    "paradise_lost:giant_lily",
+    "paradise_lost:packed_swedroot",
+    "paradise_lost:swedroot_spread",
+    "#paradise_lost:leaf_piles",
+    "#paradise_lost:bushes",
+    "#paradise_lost:hangers",
+    "#paradise_lost:wooden_chests",
+    "paradise_lost:ambrosium_campfire"
   ]
 }

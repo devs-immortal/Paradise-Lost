@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:pink_sporecap"
+          "name": "paradise_lost:pink_sporecap"
         }
       ],
       "conditions": [

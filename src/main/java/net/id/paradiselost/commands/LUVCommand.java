@@ -2,8 +2,8 @@ package net.id.paradiselost.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import net.id.incubus_core.devel.Devel;
 import net.id.paradiselost.component.LUV;
+import net.id.incubus_core.devel.Devel;
 import net.id.incubus_core.misc.WorthinessChecker;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;

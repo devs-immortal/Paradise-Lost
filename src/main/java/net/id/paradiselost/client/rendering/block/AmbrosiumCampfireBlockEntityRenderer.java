@@ -14,7 +14,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3f;
 
 public class AmbrosiumCampfireBlockEntityRenderer implements BlockEntityRenderer<AmbrosiumCampfireBlockEntity> {
-    
+
     public AmbrosiumCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {}
     
     @Override

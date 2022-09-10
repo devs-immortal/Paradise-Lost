@@ -24,13 +24,13 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
     protected VenomBubbleParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider provider) {
         super(world, x, y, z, velocityX, velocityY, velocityZ);
 
-        spriteProvider = provider;
+        this.spriteProvider = provider;
 
         setSprite(spriteProvider.getSprite(0, 4));
 
-        collidesWithWorld = true;
-        gravityStrength = 0.07F;
-        maxAge = 50 + random.nextInt(50);
+        this.collidesWithWorld = true;
+        this.gravityStrength = 0.07F;
+        this.maxAge = 50 + random.nextInt(50);
 
         ticksUntilTextureChange = 15 + random.nextInt(6);
 
@@ -38,7 +38,7 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
 
-        scale = (float) (0.05 + (random.nextDouble() * 0.05));
+        this.scale = (float) (0.05 + (random.nextDouble() * 0.05));
     }
 
     @Override
@@ -121,7 +121,7 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
 
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new VenomBubbleParticle(world, x, y, z, velocityX, velocityY, velocityZ, provider);
+            return new VenomBubbleParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.provider);
         }
     }
 }

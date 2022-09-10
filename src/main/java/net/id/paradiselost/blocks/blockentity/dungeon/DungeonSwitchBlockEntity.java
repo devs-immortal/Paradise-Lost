@@ -7,13 +7,16 @@ import net.id.paradiselost.blocks.dungeon.DungeonSwitchBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.event.BlockPositionSource;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.PositionSource;
 import net.minecraft.world.event.listener.GameEventListener;
+import org.jetbrains.annotations.Nullable;
 
 public class DungeonSwitchBlockEntity extends BlockEntity implements GameEventListener {
     private BlockPos linkedPos;

@@ -10,10 +10,12 @@ import net.id.paradiselost.client.rendering.entity.hostile.SwetRenderer;
 import net.id.paradiselost.client.rendering.entity.misc.RookRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.AerbunnyRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.AerwhaleRenderer;
+import net.id.paradiselost.client.rendering.entity.passive.AmbystRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.MoaEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.projectile.CockatriceSpitRenderer;
 import net.id.paradiselost.client.rendering.entity.projectile.DartRenderer;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
+import net.id.incubus_core.blocklikeentities.api.client.BlockLikeEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -41,7 +43,7 @@ public class ParadiseLostEntityRenderers {
         register(ParadiseLostEntityTypes.MOA, MoaEntityRenderer::new);
         register(ParadiseLostEntityTypes.AERBUNNY, AerbunnyRenderer::new);
         register(ParadiseLostEntityTypes.AERWHALE, AerwhaleRenderer::new);
-
+//        register(ParadiseLostEntityTypes.AMBYST, AmbystRenderer::new);
         // projectile
         register(ParadiseLostEntityTypes.COCKATRICE_SPIT, CockatriceSpitRenderer::new);
         register(DartRenderer::new,

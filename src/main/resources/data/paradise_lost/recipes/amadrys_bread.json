@@ -5,11 +5,11 @@
   ],
   "key": {
     "B": {
-      "item": "the_aether:amadrys_bushel"
+      "item": "paradise_lost:amadrys_bushel"
     }
   },
   "result": {
-    "item": "the_aether:amadrys_bread",
+    "item": "paradise_lost:amadrys_bread",
     "count": 1
   }
 }

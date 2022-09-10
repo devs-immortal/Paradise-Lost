@@ -32,7 +32,7 @@ public class HealingStoneItem extends Item {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity player) {
-            int i = getMaxUseTime(stack) - remainingUseTicks;
+            int i = this.getMaxUseTime(stack) - remainingUseTicks;
             if (i >= 10) {
                 player.heal(8);
                 player.getItemCooldownManager().set(this, 20);

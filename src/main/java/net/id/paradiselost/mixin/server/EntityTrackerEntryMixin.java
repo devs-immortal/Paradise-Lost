@@ -26,9 +26,9 @@ public class EntityTrackerEntryMixin {
 
     @Inject(method = "sendPackets", at = @At("HEAD"))
     private void sendPackets(Consumer<Packet<?>> sender, CallbackInfo ci) {
-        if (entity instanceof LivingEntity) {
-            flipped = ((ParadiseLostEntityExtensions) entity).getFlipped();
-            gravFlippedTime = ((ParadiseLostEntityExtensions) entity).getFlipTime();
+        if (this.entity instanceof LivingEntity) {
+            this.flipped = ((ParadiseLostEntityExtensions) this.entity).getFlipped();
+            this.gravFlippedTime = ((ParadiseLostEntityExtensions) this.entity).getFlipTime();
         }
     }
 }

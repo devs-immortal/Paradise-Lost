@@ -1,4 +1,4 @@
-package net.id.paradiselost.world.feature.configuredfeatures;
+package net.id.paradiselost.world.feature.configured_features;
 
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.feature.configs.BoulderFeatureConfig;

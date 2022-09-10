@@ -54,14 +54,14 @@ public final class CloudRendererMixin {
 
     // TODO: Replace this mostly copy-pasted code with some redirects or injections (PL-1.7)
     private void internalCloudRender(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, double cameraX, double cameraY, double cameraZ, float cloudOffset, float cloudScale, float speedMod) {
-        float cloudHeight = world.getDimensionEffects().getCloudsHeight();
+        float cloudHeight = this.world.getDimensionEffects().getCloudsHeight();
         if (!Float.isNaN(cloudHeight)) {
             RenderSystem.disableCull();
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
             RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.depthMask(true);
-            double speed = ((ticks + tickDelta) * (0.03F * speedMod));
+            double speed = ((this.ticks + tickDelta) * (0.03F * speedMod));
             double posX = (cameraX + speed) / 12.0D / cloudScale;
             double posY = (cloudHeight - cameraY + cloudOffset) / cloudScale + 0.33F;
             double posZ = cameraZ / 12.0D / cloudScale + 0.33000001311302185D;
@@ -70,17 +70,17 @@ public final class CloudRendererMixin {
             float adjustedX = (float) (posX - (double) MathHelper.floor(posX));
             float adjustedY = (float) (posY / 4.0D - (double) MathHelper.floor(posY / 4.0D)) * 4.0F;
             float adjustedZ = (float) (posZ - (double) MathHelper.floor(posZ));
-            Vec3d cloudColor = world.getCloudsColor(tickDelta);
+            Vec3d cloudColor = this.world.getCloudsColor(tickDelta);
             int floorX = (int) Math.floor(posX);
             int floorY = (int) Math.floor(posY / 4.0D);
             int floorZ = (int) Math.floor(posZ);
-            if (floorX != lastCloudsBlockX || floorY != lastCloudsBlockY || floorZ != lastCloudsBlockZ || client.options.getCloudRenderMode() != lastCloudsRenderMode || lastCloudsColor.squaredDistanceTo(cloudColor) > 2.0E-4D) {
-                lastCloudsBlockX = floorX;
-                lastCloudsBlockY = floorY;
-                lastCloudsBlockZ = floorZ;
-                lastCloudsColor = cloudColor;
-                lastCloudsRenderMode = client.options.getCloudRenderMode();
-                cloudsDirty = true;
+            if (floorX != this.lastCloudsBlockX || floorY != this.lastCloudsBlockY || floorZ != this.lastCloudsBlockZ || this.client.options.getCloudRenderMode().getValue() != this.lastCloudRenderMode || this.lastCloudsColor.squaredDistanceTo(cloudColor) > 2.0E-4D) {
+                this.lastCloudsBlockX = floorX;
+                this.lastCloudsBlockY = floorY;
+                this.lastCloudsBlockZ = floorZ;
+                this.lastCloudsColor = cloudColor;
+                this.lastCloudRenderMode = this.client.options.getCloudRenderMode().getValue();
+                this.cloudsDirty = true;
             }
 
             if (cloudsDirty) {

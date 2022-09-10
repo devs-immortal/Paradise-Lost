@@ -28,7 +28,7 @@ public abstract class MountableEntity extends ParadiseLostAnimalEntity {
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        dataTracker.startTracking(RIDER_SNEAKING, false);
+        this.dataTracker.startTracking(RIDER_SNEAKING, false);
     }
     
     //TODO Should this do more than just `return false;`?
@@ -103,7 +103,7 @@ public abstract class MountableEntity extends ParadiseLostAnimalEntity {
 
     @Override
     public float getMovementSpeed() {
-        return getMountedMoveSpeed();
+        return this.getMountedMoveSpeed();
     }
 
     public float getMountedMoveSpeed() {
@@ -115,7 +115,7 @@ public abstract class MountableEntity extends ParadiseLostAnimalEntity {
     }
 
     protected boolean isMountJumping() {
-        return mountJumping;
+        return this.mountJumping;
     }
 
     protected void setMountJumping(boolean mountJumping) {
@@ -123,7 +123,7 @@ public abstract class MountableEntity extends ParadiseLostAnimalEntity {
     }
 
     public void onMountedJump(Vec3d motion) {
-        jumpPower = 0.4F;
+        this.jumpPower = 0.4F;
     }
 
 }

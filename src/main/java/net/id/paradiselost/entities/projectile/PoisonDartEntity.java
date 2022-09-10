@@ -1,11 +1,11 @@
 package net.id.paradiselost.entities.projectile;
 
-import net.id.incubus_core.condition.api.ConditionAPI;
-import net.id.incubus_core.condition.api.Persistence;
-import net.id.incubus_core.condition.base.ConditionManager;
 import net.id.paradiselost.effect.condition.Conditions;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.incubus_core.condition.api.ConditionAPI;
+import net.id.incubus_core.condition.api.Persistence;
+import net.id.incubus_core.condition.base.ConditionManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;

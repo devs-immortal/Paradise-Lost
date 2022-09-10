@@ -8,13 +8,13 @@ import net.minecraft.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
 public class ParachuteTrinketModel extends BipedEntityModel<LivingEntity> {
-    
+
     public ParachuteTrinketModel(ModelPart root) {
         super(root);
-        setVisible(false);
-        body.visible = true;
+        this.setVisible(false);
+        this.body.visible = true;
     }
-    
+
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = BipedEntityModel.getModelData(Dilation.NONE, 0f);
         ModelPartData modelPartData = modelData.getRoot();

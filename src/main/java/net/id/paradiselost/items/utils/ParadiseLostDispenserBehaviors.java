@@ -28,14 +28,14 @@ public class ParadiseLostDispenserBehaviors {
         @Override
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
             if (!(stack.getItem() instanceof SkyrootBucketItem bucket)) {
-                return fallbackBehavior.dispense(pointer, stack);
+                return this.fallbackBehavior.dispense(pointer, stack);
             }
             BlockPos blockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
             World world = pointer.getWorld();
             if (bucket.placeLiquid(null, world, blockPos, null)) {
                 return new ItemStack(ParadiseLostItems.SKYROOT_BUCKET);
             } else {
-                return fallbackBehavior.dispense(pointer, stack);
+                return this.fallbackBehavior.dispense(pointer, stack);
             }
         }
     };
@@ -65,7 +65,7 @@ public class ParadiseLostDispenserBehaviors {
         @Override
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
             if (!(stack.getItem() instanceof SkyrootBucketItem)) {
-                return fallbackBehavior.dispense(pointer, stack);
+                return this.fallbackBehavior.dispense(pointer, stack);
             }
             WorldAccess worldAccess = pointer.getWorld();
             BlockPos blockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
@@ -82,7 +82,7 @@ public class ParadiseLostDispenserBehaviors {
                         return new ItemStack(ParadiseLostItems.SKYROOT_WATER_BUCKET);
                     } else {
                         if (((DispenserBlockEntity) pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(ParadiseLostItems.SKYROOT_WATER_BUCKET)) < 0) {
-                            fallbackBehavior.dispense(pointer, new ItemStack(ParadiseLostItems.SKYROOT_WATER_BUCKET));
+                            this.fallbackBehavior.dispense(pointer, new ItemStack(ParadiseLostItems.SKYROOT_WATER_BUCKET));
                         }
                         return stack;
                     }

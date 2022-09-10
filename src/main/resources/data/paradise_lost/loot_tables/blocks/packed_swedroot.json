@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:packed_swedroot"
+          "name": "paradise_lost:packed_swedroot"
         }
       ],
       "conditions": [

@@ -17,11 +17,12 @@ val reiVersion: String by properties
 val moreTagsVersion: String by properties
 val recipeConfidenceVersion: String by properties
 val satinVersion: String by properties
+val noChatReportsVersion: String by properties
 
 plugins {
     id("fabric-loom") version "0.12-SNAPSHOT"
     id("com.modrinth.minotaur") version "1.2.1"
-    id("de.guntram.mcmod.crowdin-translate") version "1.4+1.18.2"
+    id("de.guntram.mcmod.crowdin-translate") version "1.4+1.19"
     `maven-publish`
     checkstyle
 }
@@ -68,112 +69,123 @@ repositories {
     }
 
     maven {
-        name = "Gudenau"
-        url = uri("https://maven.gudenau.net")
+        name = "Modrinth"
+        url = uri("https://api.modrinth.com/maven")
     }
 
     maven {
         name = "Jitpack"
         url = uri("https://jitpack.io")
     }
+
+    maven {
+        name = "Gudenau"
+        url = uri("https://maven.gudenau.net")
+    }
 }
 
 dependencies {
     minecraft(
-        group = "com.mojang",
-        name = "minecraft",
-        version = minecraftVersion,
+            group = "com.mojang",
+            name = "minecraft",
+            version = minecraftVersion,
     )
 
     mappings(
-        group = "net.fabricmc",
-        name = "yarn",
-        version = yarnVersion,
-        classifier = "v2",
+            group = "net.fabricmc",
+            name = "yarn",
+            version = yarnVersion,
+            classifier = "v2",
     )
 
     modImplementation(
-        group = "net.fabricmc",
-        name = "fabric-loader",
-        version = loaderVersion,
+            group = "net.fabricmc",
+            name = "fabric-loader",
+            version = loaderVersion,
     )
 
     modImplementation(
-        group = "dev.onyxstudios.cardinal-components-api",
-        name = "cardinal-components-base",
-        version = cardinalComponentsVersion,
+            group = "dev.onyxstudios.cardinal-components-api",
+            name = "cardinal-components-base",
+            version = cardinalComponentsVersion,
     ).also(::include)
 
     modImplementation(
-        group = "dev.onyxstudios.cardinal-components-api",
-        name = "cardinal-components-entity",
-        version = cardinalComponentsVersion,
+            group = "dev.onyxstudios.cardinal-components-api",
+            name = "cardinal-components-entity",
+            version = cardinalComponentsVersion,
+    ).also(::include)
+
+//    modImplementation(
+//            group = "com.github.CDAGaming.CrowdinTranslate",
+//            name = "crowdin-translate",
+//            version = crowdinTranslateVersion,
+//    ).also(::include)
+
+    modImplementation(
+            group = "net.kyrptonaught",
+            name = "customportalapi",
+            version = customportalapiVersion,
     ).also(::include)
 
     modImplementation(
-        group = "com.github.CDAGaming.CrowdinTranslate",
-        name = "crowdin-translate",
-        version = crowdinTranslateVersion,
-    ).also(::include)
-
-    modImplementation(
-        group = "net.kyrptonaught",
-        name = "customportalapi",
-        version = customportalapiVersion,
-    ).also(::include)
-
-    modImplementation(
-        group = "net.fabricmc.fabric-api",
-        name = "fabric-api",
-        version = fabricApiVersion,
+            group = "net.fabricmc.fabric-api",
+            name = "fabric-api",
+            version = fabricApiVersion,
     )
 
     modImplementation(
-        group = "com.github.devs-immortal",
-        name = "Incubus-Core",
-        version = incubusCoreVersion,
+            group = "com.github.devs-immortal",
+            name = "Incubus-Core",
+            version = incubusCoreVersion,
     ).also(::include)
 
     modImplementation(
-        group = "net.gudenau.minecraft",
-        name = "MoreTags",
-        version = moreTagsVersion,
+            group = "net.gudenau.minecraft",
+            name = "MoreTags",
+            version = moreTagsVersion,
     ).also(::include)
 
     modImplementation(
-        group = "com.jamieswhiteshirt",
-        name = "reach-entity-attributes",
-        version = entityAttributesVersion,
+            group = "com.jamieswhiteshirt",
+            name = "reach-entity-attributes",
+            version = entityAttributesVersion,
     ).also(::include)
 
     modImplementation(
-        group = "net.gudenau.minecraft",
-        name = "RecipeConfidence",
-        version = recipeConfidenceVersion,
+            group = "net.gudenau.minecraft",
+            name = "RecipeConfidence",
+            version = recipeConfidenceVersion,
     ).also(::include)
 
     modImplementation(
-        group = "io.github.ladysnake",
-        name = "satin",
-        version = satinVersion,
+            group = "io.github.ladysnake",
+            name = "satin",
+            version = satinVersion,
     ).also(::include)
 
     modImplementation(
-        group = "dev.emi",
-        name = "trinkets",
-        version = trinketsVersion,
+            group = "dev.emi",
+            name = "trinkets",
+            version = trinketsVersion,
     ).also(::include)
 
     modRuntimeOnly(
-        group = "com.terraformersmc",
-        name = "modmenu",
-        version = modmenuVersion,
+            group = "com.terraformersmc",
+            name = "modmenu",
+            version = modmenuVersion,
     )
 
-    modRuntimeOnly(
-        group = "me.shedaniel",
-        name = "RoughlyEnoughItems-fabric",
-        version = reiVersion,
+//    modRuntimeOnly(
+//            group = "me.shedaniel",
+//            name = "RoughlyEnoughItems-fabric",
+//            version = reiVersion,
+//    )
+
+    include(
+            group = "maven.modrinth",
+            name = "no-chat-reports",
+            version = noChatReportsVersion,
     )
 }
 
@@ -193,9 +205,9 @@ tasks {
     jar {
         manifest {
             attributes(
-                "Implementation-Title" to "ParadiseLost",
-                "Implementation-Version" to paradiseLostVersion,
-                "Main-Class" to "net.id.paradiselost.executable.InstallerGUI",
+                    "Implementation-Title" to "ParadiseLost",
+                    "Implementation-Version" to paradiseLostVersion,
+                    "Main-Class" to "net.id.paradiselost.executable.InstallerGUI",
             )
         }
 
@@ -264,7 +276,7 @@ loom {
 
 crowdintranslate {
     setCrowdinProjectname("aether")
-    minecraftProjectName = "the_aether"
+    minecraftProjectName = "paradise_lost"
     verbose = true
 }
 

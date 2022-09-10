@@ -296,6 +296,7 @@ public class ParadiseLostItems {
     public static final BlockItem COARSE_DIRT = add("coarse_dirt", ParadiseLostBlocks.COARSE_DIRT, building_block);
     public static final BlockItem PERMAFROST = add("permafrost", ParadiseLostBlocks.PERMAFROST, building_block);
     public static final BlockItem QUICKSOIL = add("quicksoil", ParadiseLostBlocks.QUICKSOIL, building_block);
+    public static final BlockItem PACKED_SWEDROOT = add("packed_swedroot", ParadiseLostBlocks.PACKED_SWEDROOT, building_block, compostable85);
     public static final BlockItem COLD_AERCLOUD = add("cold_aercloud", ParadiseLostBlocks.COLD_AERCLOUD, building_block);
     public static final BlockItem BLUE_AERCLOUD = add("blue_aercloud", ParadiseLostBlocks.BLUE_AERCLOUD, building_block);
     public static final BlockItem PINK_AERCLOUD = add("pink_aercloud", ParadiseLostBlocks.PINK_AERCLOUD, building_block);
@@ -312,6 +313,7 @@ public class ParadiseLostItems {
     public static final BlockItem ZANITE_ORE = add("zanite_ore", ParadiseLostBlocks.ZANITE_ORE, building_block);
     public static final BlockItem GRAVITITE_ORE = add("gravitite_ore", ParadiseLostBlocks.GRAVITITE_ORE, building_block);
     // ore blocks
+    public static final BlockItem AMBROSIUM_BLOCK = add("ambrosium_block", ParadiseLostBlocks.AMBROSIUM_BLOCK, building_block, fuel(5000));
     public static final BlockItem ZANITE_BLOCK = add("zanite_block", ParadiseLostBlocks.ZANITE_BLOCK, building_block);
     public static final BlockItem BLOCK_OF_GRAVITITE = add("block_of_gravitite", ParadiseLostBlocks.BLOCK_OF_GRAVITITE, building_block);
     // move this somewhere else
@@ -504,26 +506,26 @@ public class ParadiseLostItems {
     public static final BlockItem LUCATIEL_LICHEN = add("lucatiel_lichen", ParadiseLostBlocks.LUCATIEL_LICHEN, decoration, compostable50);
     public static final BlockItem LICHEN_PILE = add("lichen_pile", ParadiseLostBlocks.LICHEN_PILE, decoration, compostable30);
     public static final BlockItem LUCATIEL_LICHEN_PILE = add("lucatiel_lichen_pile", ParadiseLostBlocks.LUCATIEL_LICHEN_PILE, decoration, compostable100);
-    
+
     public static final BlockItem ROOTCAP = add("rootcap", ParadiseLostBlocks.ROOTCAP, decoration(), compostable65);
     public static final BlockItem BROWN_SPORECAP = add("brown_sporecap", ParadiseLostBlocks.BROWN_SPORECAP, decoration(), compostable65);
     public static final BlockItem PINK_SPORECAP = add("pink_sporecap", ParadiseLostBlocks.PINK_SPORECAP, decoration(), compostable65);
-    
+
     public static final BlockItem SWEDROOT_SPREAD = add("swedroot_spread", ParadiseLostBlocks.SWEDROOT_SPREAD, decoration(), compostable65);
-    
+
     public static final BlockItem FLAXWEAVE_CUSHION = add("flaxweave_cushion", ParadiseLostBlocks.FLAXWEAVE_CUSHION, decoration, fuel(300));
-    
+
     public static final BlockItem CHEESECAKE = add("halflight_cheesecake", ParadiseLostBlocks.CHEESECAKE, food());
-    
+
     public static final BlockItem AMADRYS_BUNDLE = add("amadrys_bundle", ParadiseLostBlocks.AMADRYS_BUNDLE, decoration());
-    
+
     // lights
     public static final BlockItem AMBROSIUM_LANTERN = add("ambrosium_lantern", ParadiseLostBlocks.AMBROSIUM_LANTERN, decoration);
     public static final WallStandingBlockItem AMBROSIUM_TORCH = add("ambrosium_torch", new WallStandingBlockItem(ParadiseLostBlocks.AMBROSIUM_TORCH, ParadiseLostBlocks.AMBROSIUM_TORCH_WALL, decoration));
     // util blocks (enchanter, freezer, etc.)
-    
+
     public static final BlockItem AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", ParadiseLostBlocks.AMBROSIUM_CAMPFIRE, decoration);
-    
+
     // door-like things
     public static final BlockItem SKYROOT_DOOR = add("skyroot_door", ParadiseLostBlocks.SKYROOT_DOOR, decoration);
     public static final BlockItem GOLDEN_OAK_DOOR = add("golden_oak_door", ParadiseLostBlocks.GOLDEN_OAK_DOOR, decoration);

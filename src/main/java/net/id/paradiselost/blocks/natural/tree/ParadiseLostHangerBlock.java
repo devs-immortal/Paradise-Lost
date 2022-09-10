@@ -28,7 +28,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
 
     public ParadiseLostHangerBlock(Settings settings) {
         super(settings.offsetType(OffsetType.XZ));
-        setDefaultState((stateManager.getDefaultState()).with(TIP, true));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(TIP, true));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return canPlantOnTop(world.getBlockState(pos.up()), world, pos.up());
+        return this.canPlantOnTop(world.getBlockState(pos.up()), world, pos.up());
     }
 
     @Override
@@ -53,9 +53,9 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
         if (!state.canPlaceAt(world, pos)) {
             return Blocks.AIR.getDefaultState();
         } else if (!(world.getBlockState(pos.down()).getBlock() instanceof ParadiseLostHangerBlock)) {
-            return getDefaultState().with(TIP, true);
+            return this.getDefaultState().with(TIP, true);
         } else {
-            return getDefaultState().with(TIP, false);
+            return this.getDefaultState().with(TIP, false);
         }
     }
 
@@ -86,7 +86,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        world.setBlockState(pos, getDefaultState().with(TIP, false));
-        world.setBlockState(pos.down(), getDefaultState());
+        world.setBlockState(pos, this.getDefaultState().with(TIP, false));
+        world.setBlockState(pos.down(), this.getDefaultState());
     }
 }

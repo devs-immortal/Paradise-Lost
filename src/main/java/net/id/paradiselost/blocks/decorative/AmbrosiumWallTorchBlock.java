@@ -25,7 +25,7 @@ public class AmbrosiumWallTorchBlock extends WallTorchBlock {
             double e = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.23D + 0.3D * (double) direction.getOffsetX();
             double f = (double) pos.getY() + 0.6D + (random.nextDouble() - 0.5D) * 0.25D + 0.22D;
             double g = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.23D + 0.3D * (double) direction.getOffsetZ();
-            world.addParticle(particle, e, f, g, 0.0D, -4.0D, 0.0D);
+            world.addParticle(this.particle, e, f, g, 0.0D, -4.0D, 0.0D);
         }
     }
 }

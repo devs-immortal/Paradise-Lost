@@ -28,9 +28,9 @@ public record StackableVariantColorizer(String[] tintFields, int[] defaultColors
 
     private int getFromTag(ItemStack stack, int tintIndex) {
         NbtCompound sv = stack.getSubNbt("stackableVariant");
-        if (sv != null && sv.contains(tintFields[tintIndex])) {
-            return sv.getInt(tintFields[tintIndex]);
+        if (sv != null && sv.contains(this.tintFields[tintIndex])) {
+            return sv.getInt(this.tintFields[tintIndex]);
         }
-        return defaultColors[tintIndex];
+        return this.defaultColors[tintIndex];
     }
 }

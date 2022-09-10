@@ -1,5 +1,6 @@
 package net.id.paradiselost.blocks.natural.plant;
 
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PlantBlock;

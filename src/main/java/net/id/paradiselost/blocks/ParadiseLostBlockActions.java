@@ -16,7 +16,10 @@ class ParadiseLostBlockActions {
     protected static final AbstractBlock.ContextPredicate never = (state, view, pos) -> false;
     protected static final AbstractBlock.ContextPredicate always = (state, view, pos) -> true;
 
-    protected static Action<Block> flammable(int spread, int burn) { return (id, block) -> FlammableBlockRegistry.getDefaultInstance().add(block, spread, burn);}
+    protected static Action<Block> flammable(int spread, int burn) {
+        return (id, block) -> FlammableBlockRegistry.getDefaultInstance().add(block, spread, burn);
+    }
+
     protected static final Action<Block> flammableLog = flammable(5, 5);
     protected static final Action<Block> flammablePlanks = flammable(20, 5);
     protected static final Action<Block> flammableLeaves = flammable(60, 30);
@@ -27,9 +30,20 @@ class ParadiseLostBlockActions {
     protected static final Action<Block> cutoutMippedRenderLayer = onClient((id, block) -> RenderUtils.cutoutMippedRenderLayer(block));
     protected static final Action<Block> auralRenderLayer = onClient((id, block) -> RenderUtils.auralRenderLayer(block));
     protected static final Action<Block> auralCutoutMippedRenderLayer = onClient((id, block) -> RenderUtils.auralCutoutMippedRenderLayer(block));
-    
-    protected static Action<Block> strippedFrom(Block original) { return (id, stripped) -> StrippableBlockRegistry.register(original, stripped);}
-    protected static Action<Block> tillable() { return (id, block) -> TillableBlockRegistry.register(block, HoeItem::canTillFarmland, ParadiseLostBlocks.FARMLAND.getDefaultState());}
-    protected static Action<Block> coarseTillable() { return (id, block) -> TillableBlockRegistry.register(block, HoeItem::canTillFarmland, ParadiseLostBlocks.DIRT.getDefaultState());}
-    protected static Action<Block> flattenable() { return (id, block) -> FlattenableBlockRegistry.register(block, ParadiseLostBlocks.DIRT_PATH.getDefaultState());}
+
+    protected static Action<Block> strippedFrom(Block original) {
+        return (id, stripped) -> StrippableBlockRegistry.register(original, stripped);
+    }
+
+    protected static Action<Block> tillable() {
+        return (id, block) -> TillableBlockRegistry.register(block, HoeItem::canTillFarmland, ParadiseLostBlocks.FARMLAND.getDefaultState());
+    }
+
+    protected static Action<Block> coarseTillable() {
+        return (id, block) -> TillableBlockRegistry.register(block, HoeItem::canTillFarmland, ParadiseLostBlocks.DIRT.getDefaultState());
+    }
+
+    protected static Action<Block> flattenable() {
+        return (id, block) -> FlattenableBlockRegistry.register(block, ParadiseLostBlocks.DIRT_PATH.getDefaultState());
+    }
 }

@@ -1,26 +1,26 @@
 {
   "variants": {
     "facing=down": {
-      "model": "the_aether:block/amadrys_bundle",
+      "model": "paradise_lost:block/amadrys_bundle",
       "x": 90
     },
     "facing=east": {
-      "model": "the_aether:block/amadrys_bundle",
+      "model": "paradise_lost:block/amadrys_bundle",
       "y": 90
     },
     "facing=north": {
-      "model": "the_aether:block/amadrys_bundle"
+      "model": "paradise_lost:block/amadrys_bundle"
     },
     "facing=south": {
-      "model": "the_aether:block/amadrys_bundle",
+      "model": "paradise_lost:block/amadrys_bundle",
       "y": 180
     },
     "facing=up": {
-      "model": "the_aether:block/amadrys_bundle",
+      "model": "paradise_lost:block/amadrys_bundle",
       "x": 270
     },
     "facing=west": {
-      "model": "the_aether:block/amadrys_bundle",
+      "model": "paradise_lost:block/amadrys_bundle",
       "y": 270
     }
   }

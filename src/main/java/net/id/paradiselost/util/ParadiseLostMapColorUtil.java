@@ -11,17 +11,11 @@ public class ParadiseLostMapColorUtil {
         int value = 220;
 
         // From here on out, standard brightness and color calculations.
-        if (material == PARADISE_LOST_BACKGROUND) {
-            value = 220;
-        } else if (shade == 3) {
-            value = 135;
-        } else if (shade == 2) {
-            value = 255;
-        } else if (shade == 1) {
-            value = 220;
-        } else if (shade == 0) {
-            value = 180;
-        }
+        if (material == PARADISE_LOST_BACKGROUND) value = 220;
+        else if (shade == 3) value = 135;
+        else if (shade == 2) value = 255;
+        else if (shade == 1) value = 220;
+        else if (shade == 0) value = 180;
 
         int r = (newColor >> 16 & 255) * value / 255;
         int g = (newColor >> 8 & 255) * value / 255;

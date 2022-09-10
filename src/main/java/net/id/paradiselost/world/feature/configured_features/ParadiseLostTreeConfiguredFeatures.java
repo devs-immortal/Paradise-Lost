@@ -1,6 +1,7 @@
-package net.id.paradiselost.world.feature.configuredfeatures;
+package net.id.paradiselost.world.feature.configured_features;
 
 import com.google.common.collect.ImmutableList;
+import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.feature.configs.LongFeatureConfig;
@@ -12,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
 import net.minecraft.util.math.floatprovider.UniformFloatProvider;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;

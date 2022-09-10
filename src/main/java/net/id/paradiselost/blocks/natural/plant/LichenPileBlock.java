@@ -1,5 +1,7 @@
 package net.id.paradiselost.blocks.natural.plant;
 
+import net.id.paradiselost.effect.condition.Conditions;
+import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.incubus_core.condition.api.ConditionAPI;
 import net.id.incubus_core.condition.api.Persistence;
 import net.id.incubus_core.condition.base.ConditionManager;

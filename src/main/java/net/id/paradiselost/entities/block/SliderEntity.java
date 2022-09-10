@@ -1,9 +1,9 @@
 package net.id.paradiselost.entities.block;
 
 import net.fabricmc.fabric.api.util.NbtType;
-import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
+import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
@@ -17,36 +17,36 @@ import net.minecraft.world.World;
 
 public class SliderEntity extends BlockLikeEntity {
     private static final TrackedData<Direction> DIRECTION = DataTracker.registerData(SliderEntity.class, TrackedDataHandlerRegistry.FACING);
-    
+
     public SliderEntity(EntityType<? extends BlockLikeEntity> entityType, World world) {
         super(entityType, world);
     }
-    
+
     public SliderEntity(World world, double x, double y, double z, Direction direction) {
         super(ParadiseLostEntityTypes.SLIDER, world, x, y, z, ParadiseLostBlocks.CRACKED_CARVED_STONE.getDefaultState());
-        setDirection(direction);
+        this.setDirection(direction);
     }
-    
+
     @Override
     public void postTickMovement() {
-        if (horizontalCollision) {
-            setDirection(getDirection().getOpposite());
+        if (this.horizontalCollision) {
+            this.setDirection(this.getDirection().getOpposite());
         }
-        updateVelocity(0.01F, Vec3d.of(getDirection().getVector()));
-        move(MovementType.SELF, getVelocity());
+        this.updateVelocity(0.01F, Vec3d.of(this.getDirection().getVector()));
+        this.move(MovementType.SELF, this.getVelocity());
     }
-    
+
     // temporary
     public void setBlockState(BlockState state) {
-        blockState = state;
+        this.blockState = state;
     }
-    
+
     @Override
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
-        compound.putString("Direction", getDirection().name());
+        compound.putString("Direction", this.getDirection().name());
     }
-    
+
     @Override
     public void readCustomDataFromNbt(NbtCompound compound) {
         super.readCustomDataFromNbt(compound);
@@ -57,21 +57,21 @@ public class SliderEntity extends BlockLikeEntity {
             } catch (IllegalArgumentException e) {
                 dir = Direction.NORTH;
             }
-            setDirection(dir);
+            this.setDirection(dir);
         }
     }
-    
+
     public void setDirection(Direction direction) {
-        dataTracker.set(DIRECTION, direction);
+        this.dataTracker.set(DIRECTION, direction);
     }
-    
+
     public Direction getDirection() {
-        return dataTracker.get(DIRECTION);
+        return this.dataTracker.get(DIRECTION);
     }
-    
+
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        dataTracker.startTracking(DIRECTION, Direction.NORTH);
+        this.dataTracker.startTracking(DIRECTION, Direction.NORTH);
     }
 }

@@ -10,29 +10,29 @@ public abstract class DartEntity extends PersistentProjectileEntity {
 
     public DartEntity(EntityType<? extends DartEntity> entityType, double x, double y, double z, World world) {
         super(entityType, x, y, z, world);
-        setNoGravity(true);
+        this.setNoGravity(true);
     }
 
     public DartEntity(EntityType<? extends DartEntity> entityType, LivingEntity owner, World world) {
         super(entityType, owner, world);
-        setNoGravity(true);
+        this.setNoGravity(true);
     }
 
     public DartEntity(EntityType<? extends DartEntity> entityType, World world) {
         super(entityType, world);
-        setNoGravity(true);
+        this.setNoGravity(true);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (!onGround) {
-            ticksInAir++;
+        if (!this.onGround) {
+            this.ticksInAir++;
         }
 
-        if (ticksInAir > 500) {
-            discard();
+        if (this.ticksInAir > 500) {
+            this.discard();
         }
     }
 }

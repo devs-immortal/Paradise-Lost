@@ -13,10 +13,10 @@
       "item": "minecraft:stick"
     },
     "C": {
-      "item": "the_aether:ambrosium_shard"
+      "item": "paradise_lost:ambrosium_shard"
     }
   },
   "result": {
-    "item": "the_aether:ambrosium_campfire"
+    "item": "paradise_lost:ambrosium_campfire"
   }
 }

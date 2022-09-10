@@ -1,7 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "the_aether:item/food/ground_swetroot"
-    "layer0": "the_aether:item/food/amadrys_bread"
+    "layer0": "paradise_lost:item/food/amadrys_bread"
   }
 }

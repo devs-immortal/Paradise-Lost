@@ -25,7 +25,7 @@ public class LeafPileBlock extends FallingBlock {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (canFallThrough(world.getBlockState(pos.down()))) {
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, pos, state);
-            configureFallingBlockEntity(fallingBlockEntity);
+            this.configureFallingBlockEntity(fallingBlockEntity);
         }
     }
 

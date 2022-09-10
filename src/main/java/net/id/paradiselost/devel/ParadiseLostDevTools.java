@@ -1,20 +1,20 @@
 package net.id.paradiselost.devel;
 
 import com.mojang.logging.LogUtils;
-import net.id.incubus_core.devel.Devel;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.entities.block.SliderEntity;
 import net.id.paradiselost.items.ParadiseLostItemGroups;
+import net.id.incubus_core.devel.Devel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.registry.Registry;
 
 /**
- * Tools for aether development, such as blocks and items
+ * Tools for paradise lost development, such as blocks and items
  */
 // Package-private to avoid being called in production
-class AetherDevTools {
+class ParadiseLostDevTools {
     /**
      * Spawns a slider
      */
@@ -37,21 +37,14 @@ class AetherDevTools {
             return ActionResult.SUCCESS;
         }
     };
-    
+
     static void init() {
         Registry.register(Registry.ITEM, ParadiseLost.locate("slider_test_item"), SLIDER_TEST_ITEM);
     }
-    
+
     static {
         if (!Devel.isDevel()) {
-            ParadiseLost.LOG.error(LogUtils.FATAL_MARKER, """
-                !!
-                !!
-                !!
-                !!
-                AetherDevItems called in production environment! Please report this to Paradise Lost developers!
-                """
-            );
+            ParadiseLost.LOG.error(LogUtils.FATAL_MARKER, "!!\n!!\n!!\n!!ParadiseLostDevItems called in production environment! Please report this to Paradise Lost developers!");
             new RuntimeException("").printStackTrace();
         }
     }

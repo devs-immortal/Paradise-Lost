@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.concurrent.CompletableFuture;
@@ -51,7 +52,7 @@ public abstract class MinecraftClientMixin {
     private void getMusicType(CallbackInfoReturnable<MusicSound> cir){
         var world = player.world;
         if(world.getRegistryKey().equals(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY)){
-            cir.setReturnValue(world.getBiomeAccess().getBiomeForNoiseGen(player.getBlockPos()).value().getMusic().orElse(ParadiseLostSoundEvents.Music.PARADISE_LOST));
+            cir.setReturnValue(world.getBiomeAccess().getBiomeForNoiseGen(this.player.getBlockPos()).value().getMusic().orElse(ParadiseLostSoundEvents.Music.PARADISE_LOST));
         }
     }
 }

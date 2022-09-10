@@ -2,7 +2,7 @@ package net.id.paradiselost.world.feature;
 
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.world.feature.configs.*;
-import net.id.paradiselost.world.feature.configuredfeatures.ParadiseLostConfiguredFeatures;
+import net.id.paradiselost.world.feature.configured_features.ParadiseLostConfiguredFeatures;
 import net.id.paradiselost.world.feature.features.*;
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
 import net.id.paradiselost.world.feature.placement_modifiers.ParadiseLostPlacementModifiers;
@@ -15,11 +15,11 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 
 public class ParadiseLostFeatures {
-    public static final ParadiseLostLakeFeature PARADISE_LOST_LAKE = register("lake", new ParadiseLostLakeFeature(DynamicConfiguration.CODEC));
+    public static final ParadiseLostLakeFeature LAKE = register("lake", new ParadiseLostLakeFeature(DynamicConfiguration.CODEC));
     public static final QuicksoilFeature QUICKSOIL = register("quicksoil", new QuicksoilFeature(QuicksoilConfig.CODEC));
     public static final CrystalTreeIslandFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", new CrystalTreeIslandFeature(DefaultFeatureConfig.CODEC));
 
-    public static final ParadiseLostDeltaFeature PARADISE_LOST_DELTA_FEATURE = register("paradise_lost_delta_feature", new ParadiseLostDeltaFeature(DeltaFeatureConfig.CODEC));
+    public static final ParadiseLostDeltaFeature DELTA_FEATURE = register("paradise_lost_delta_feature", new ParadiseLostDeltaFeature(DeltaFeatureConfig.CODEC));
     public static final GroundcoverFeature GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeatureConfig.CODEC));
     public static final ParadiseLostBoulderFeature BOULDER = register("boulder", new ParadiseLostBoulderFeature(BoulderFeatureConfig.CODEC));
     public static final IcestoneSpireFeature ICESTONE_SPIRE_FEATURE = register("icestone_spire_feature", new IcestoneSpireFeature(DefaultFeatureConfig.CODEC));

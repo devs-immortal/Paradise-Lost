@@ -6,6 +6,9 @@ import net.id.incubus_core.condition.base.ConditionManager;
 import net.id.paradiselost.effect.condition.Conditions;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
+import net.id.incubus_core.condition.api.ConditionAPI;
+import net.id.incubus_core.condition.api.Persistence;
+import net.id.incubus_core.condition.base.ConditionManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
@@ -100,7 +103,7 @@ public class LichenBlock extends FallingBlock {
                 return;
             }
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, pos, state);
-            configureFallingBlockEntity(fallingBlockEntity);
+            this.configureFallingBlockEntity(fallingBlockEntity);
 
             BlockPos.iterateOutwards(pos, 1, 0, 1).forEach(checkPos -> {
                 var checkState = world.getBlockState(checkPos);

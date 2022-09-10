@@ -48,7 +48,7 @@ public class WellGenerator {
         @Override
         protected void writeNbt(StructureContext context, NbtCompound nbt) {
             super.writeNbt(context, nbt);
-            nbt.putString("Rot", placementData.getRotation().name());
+            nbt.putString("Rot", this.placementData.getRotation().name());
         }
 
         @Override
@@ -62,7 +62,7 @@ public class WellGenerator {
                     this.pos = this.pos.down(3);
                     shifted = true;
                 }
-                boundingBox.encompass(template.calculateBoundingBox(placementData, this.pos));
+                boundingBox.encompass(this.template.calculateBoundingBox(this.placementData, this.pos));
                 super.generate(world, structureAccessor, chunkGenerator, random, boundingBox, chunkPos, pos);
             }
         }

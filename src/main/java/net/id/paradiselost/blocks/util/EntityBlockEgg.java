@@ -22,7 +22,7 @@ public class EntityBlockEgg extends Block {
 
     public EntityBlockEgg(Settings settings, EntityType<? extends LivingEntity> type) {
         super(settings);
-        function = (world, pos) -> {
+        this.function = (world, pos) -> {
             LivingEntity entity = type.create(world);
             if (entity != null) {
                 entity.setPosition(Vec3d.of(pos));

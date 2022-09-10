@@ -10,17 +10,17 @@ import net.minecraft.world.World;
 public class EnchantedDartEntity extends DartEntity {
     public EnchantedDartEntity(EntityType<? extends EnchantedDartEntity> entityType, World world) {
         super(entityType, world);
-        setDamage(6);
+        this.setDamage(6);
     }
 
     public EnchantedDartEntity(double x, double y, double z, World world) {
         super(ParadiseLostEntityTypes.ENCHANTED_DART, x, y, z, world);
-        setDamage(6);
+        this.setDamage(6);
     }
 
     public EnchantedDartEntity(LivingEntity owner, World world) {
         super(ParadiseLostEntityTypes.ENCHANTED_DART, owner, world);
-        setDamage(6);
+        this.setDamage(6);
     }
 
     @Override

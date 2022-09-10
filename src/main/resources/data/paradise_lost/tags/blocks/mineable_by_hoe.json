@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#the_aether:aether_leaves",
-    "the_aether:amadrys_bundle"
+    "#paradise_lost:leaves",
+    "paradise_lost:amadrys_bundle"
   ]
 }
