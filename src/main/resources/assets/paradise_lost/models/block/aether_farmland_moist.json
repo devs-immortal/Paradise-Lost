@@ -1,8 +1,0 @@
-{
-  "parent": "block/template_farmland",
-  "textures": {
-    "particle": "paradise_lost:block/aether_dirt",
-    "dirt": "paradise_lost:block/aether_dirt",
-    "top": "paradise_lost:block/aether_farmland_moist"
-  }
-}

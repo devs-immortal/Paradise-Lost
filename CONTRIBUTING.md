@@ -54,8 +54,8 @@
 ```java
     /**
      * Write reasonable documentation for non-obvious methods.
-     * For public facing APIs, like {@link net.id.aether.api.MoaAPI} or {@link net.id.aether.api.FloatingBlockHelper}, 
-     * fully document everything that is public. ^ (Also, use these @link tags to other things public)
+     * For public facing APIs, like {@link net.id.paradiselost.api.MoaAPI} or {@link net.id.paradiselost.api.FloatingBlockHelper}, 
+     * fully document everything that is public. ^ (Also, use these @link tags when possible)
      * <br>Use @param and @return tags if non-obvious or if specific values may give strange results.
      * <br>If you didn't write the code and you're just adding docs, end your docs with a tilde and your
      * name/username. If you did write it, then just the @author tag is alright.

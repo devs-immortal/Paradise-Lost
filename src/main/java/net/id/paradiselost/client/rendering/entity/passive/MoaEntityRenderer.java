@@ -1,0 +1,37 @@
+package net.id.paradiselost.client.rendering.entity.passive;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.id.paradiselost.client.model.ParadiseLostModelLayers;
+import net.id.paradiselost.client.model.entity.MoaModel;
+import net.id.paradiselost.entities.passive.moa.MoaEntity;
+import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
+
+@Environment(EnvType.CLIENT)
+public class MoaEntityRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
+
+    public MoaEntityRenderer(EntityRendererFactory.Context renderManager) {
+        super(renderManager, new MoaModel(renderManager.getPart(ParadiseLostModelLayers.MOA)), 0.7f);
+    }
+
+    @Override
+    protected void scale(MoaEntity moa, MatrixStack matrixStack, float partialTicks) {
+        float moaScale = moa.isBaby() ? 0.3334F : 1.0F;
+        matrixStack.scale(moaScale, moaScale, moaScale);
+    }
+
+    @Override
+    public void render(MoaEntity moa, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+        super.render(moa, f, g, matrixStack, vertexConsumerProvider, moa.getGenes().getRace().glowing() ? LightmapTextureManager.MAX_LIGHT_COORDINATE : i);
+    }
+
+    @Override
+    public Identifier getTexture(MoaEntity entity) {
+        return entity.getGenes().getTexture();
+    }
+}

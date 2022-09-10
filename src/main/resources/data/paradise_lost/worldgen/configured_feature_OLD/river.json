@@ -83,13 +83,13 @@
                         ],
                         "place_in": [
                           {
-                            "Name": "paradise_lost:aether_dirt"
+                            "Name": "paradise_lost:paradise_lost_dirt"
                           },
                           {
                             "Name": "paradise_lost:quicksoil"
                           },
                           {
-                            "Name": "paradise_lost:aether_grass"
+                            "Name": "paradise_lost:paradise_lost_grass"
                           }
                         ],
                         "place_under": [
@@ -97,16 +97,16 @@
                             "Name": "paradise_lost:holystone"
                           },
                           {
-                            "Name": "paradise_lost:aether_dirt"
+                            "Name": "paradise_lost:paradise_lost_dirt"
                           },
                           {
                             "Name": "paradise_lost:quicksoil"
                           },
                           {
-                            "Name": "paradise_lost:aether_grass"
+                            "Name": "paradise_lost:paradise_lost_grass"
                           },
                           {
-                            "Name": "paradise_lost:enchanted_aether_grass"
+                            "Name": "paradise_lost:enchanted_paradise_lost_grass"
                           }
                         ]
                       }

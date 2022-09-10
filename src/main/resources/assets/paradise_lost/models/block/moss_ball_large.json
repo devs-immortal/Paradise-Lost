@@ -1,22 +1,81 @@
 {
-	"credit": "Made by Azazelthedemonlord",
-	"texture_size": [32, 32],
-	"textures": {
-		"0": "paradise_lost:block/moss_ball_large",
-		"particle": "paradise_lost:block/moss_ball_large"
-	},
-	"elements": [
-		{
-			"from": [2, 0, 2],
-			"to": [14, 12, 14],
-			"faces": {
-				"north": {"uv": [1, 1, 7, 7], "texture": "#0"},
-				"east": {"uv": [1, 1, 7, 7], "texture": "#0"},
-				"south": {"uv": [1, 1, 7, 7], "texture": "#0"},
-				"west": {"uv": [1, 1, 7, 7], "texture": "#0"},
-				"up": {"uv": [9, 1, 15, 7], "texture": "#0"},
-				"down": {"uv": [1, 9, 7, 15], "texture": "#0"}
-			}
-		}
-	]
+  "credit": "Made by Azazelthedemonlord",
+  "texture_size": [
+    32,
+    32
+  ],
+  "textures": {
+    "0": "paradise_lost:block/moss_ball_large",
+    "particle": "paradise_lost:block/moss_ball_large"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        12,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            1,
+            7,
+            7
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            1,
+            1,
+            7,
+            7
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            1,
+            1,
+            7,
+            7
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            1,
+            1,
+            7,
+            7
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            9,
+            1,
+            15,
+            7
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            1,
+            9,
+            7,
+            15
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ]
 }

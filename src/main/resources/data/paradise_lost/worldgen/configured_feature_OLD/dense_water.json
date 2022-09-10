@@ -11,11 +11,11 @@
                 "hole_count": 1,
                 "valid_blocks": [
                   "paradise_lost:holystone",
-                  "paradise_lost:aether_dirt",
+                  "paradise_lost:paradise_lost_dirt",
                   "paradise_lost:quicksoil",
-                  "paradise_lost:aether_grass",
-                  "paradise_lost:enchanted_aether_grass",
-                  "paradise_lost:aether_bush"
+                  "paradise_lost:paradise_lost_grass",
+                  "paradise_lost:enchanted_paradise_lost_grass",
+                  "paradise_lost:paradise_lost_bush"
                 ],
                 "state": {
                   "Properties": {

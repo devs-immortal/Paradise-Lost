@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "paradise_lost:block/paradise_lost_grass_top",
+    "bottom": "paradise_lost:block/paradise_lost_dirt",
+    "side": "paradise_lost:block/paradise_lost_grass_side_snowy",
+    "particle": "paradise_lost:block/paradise_lost_dirt"
+  }
+}

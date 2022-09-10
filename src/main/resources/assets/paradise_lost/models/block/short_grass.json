@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/tinted_cross",
+  "textures": {
+    "cross": "paradise_lost:block/paradise_lost_short_grass"
+  }
+}

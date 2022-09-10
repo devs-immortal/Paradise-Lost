@@ -46,6 +46,6 @@
     "minecraft:exposed_cut_copper_slab",
     "minecraft:cut_copper_slab",
     "minecraft:waxed_oxidized_cut_copper_slab",
-    "#paradise_lost:aether_slabs"
+    "#paradise_lost:paradise_lost_slabs"
   ]
 }

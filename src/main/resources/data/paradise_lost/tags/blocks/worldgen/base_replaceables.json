@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#paradise_lost:aether_natural_stone",
-    "#paradise_lost:aether_dirt_blocks"
+    "#paradise_lost:natural_stone",
+    "#paradise_lost:dirt_blocks"
   ]
 }

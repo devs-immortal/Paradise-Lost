@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:story/enter_the_nether",
+  "display": {
+    "icon": {
+      "item": "minecraft:glowstone"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.enter_paradise_lost.title"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.enter_paradise_lost.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "entered_nether": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "paradise_lost:paradise_lost"
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:aether_highlands",
-    "paradise_lost:aether_highlands_forest",
-    "paradise_lost:aether_highlands_thicket"
+    "paradise_lost:paradise_lost_highlands",
+    "paradise_lost:paradise_lost_highlands_forest",
+    "paradise_lost:paradise_lost_highlands_thicket"
   ]
 }

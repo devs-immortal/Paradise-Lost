@@ -17,16 +17,16 @@
     "background": "paradise_lost:textures/block/skyroot_planks.png"
   },
   "criteria": {
-    "entered_aether": {
+    "entered_paradise_lost": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
-        "to": "paradise_lost:the_aether"
+        "to": "paradise_lost:paradise_lost"
       }
     }
   },
   "requirements": [
     [
-      "entered_aether"
+      "entered_paradise_lost"
     ]
   ]
 }

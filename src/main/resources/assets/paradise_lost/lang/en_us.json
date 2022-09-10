@@ -1,34 +1,34 @@
 {
-  "itemGroup.paradise_lost.aether_building_blocks": "Aether Blocks",
-  "itemGroup.paradise_lost.aether_decorations": "Aether Decorations",
-  "itemGroup.paradise_lost.aether_food": "Aether Foods",
-  "itemGroup.paradise_lost.aether_misc": "Aether Miscellaneous",
-  "itemGroup.paradise_lost.aether_resources": "Aether Materials",
-  "itemGroup.paradise_lost.aether_tools": "Aether Tools",
-  "itemGroup.paradise_lost.aether_wearables": "Aether Wearables",
+  "itemGroup.paradise_lost.building_blocks": "Paradise Blocks",
+  "itemGroup.paradise_lost.decorations": "Paradise Decorations",
+  "itemGroup.paradise_lost.food": "Paradise Foods",
+  "itemGroup.paradise_lost.misc": "Paradise Miscellaneous",
+  "itemGroup.paradise_lost.resources": "Paradise Materials",
+  "itemGroup.paradise_lost.tools": "Paradise Tools",
+  "itemGroup.paradise_lost.wearables": "Paradise Wearables",
 
 
-  "createWorld.customize.preset.paradise_lost.sandbox": "Aether - Sandbox",
+  "createWorld.customize.preset.paradise_lost.sandbox": "Paradise - Sandbox",
 
 
-  "biome.paradise_lost.aether_highlands": "Highlands Plains",
-  "biome.paradise_lost.aether_highlands_forest": "Highlands Forest",
-  "biome.paradise_lost.aether_highlands_thicket": "Highlands Thicket",
-  "biome.paradise_lost.aether_wisteria_woods": "Wisteria Woods",
+  "biome.paradise_lost.highlands": "Highlands Plains",
+  "biome.paradise_lost.highlands_forest": "Highlands Forest",
+  "biome.paradise_lost.highlands_thicket": "Highlands Thicket",
+  "biome.paradise_lost.wisteria_woods": "Wisteria Woods",
   "biome.paradise_lost.autumnal_tundra": "Autumnal Tundra",
   "biome.paradise_lost.continental_plateau": "Continental Plateau",
   "biome.paradise_lost.highlands_shield": "Highlands Shield",
 
 
-  "block.paradise_lost.aether_grass": "Aether Grass",
-  "block.paradise_lost.enchanted_aether_grass": "Enchanted Aether Grass",
-  "block.paradise_lost.aether_frozen_grass": "Frozen Grass",
+  "block.paradise_lost.grass": "Paradise Grass",
+  "block.paradise_lost.enchanted_grass": "Enchanted Paradise Grass",
+  "block.paradise_lost.frozen_grass": "Frozen Grass",
 
-  "block.paradise_lost.aether_dirt": "Aether Dirt",
-  "block.paradise_lost.coarse_aether_dirt": "Coarse Aether Dirt",
+  "block.paradise_lost.dirt": "Paradise Dirt",
+  "block.paradise_lost.coarse_dirt": "Coarse Paradise Dirt",
   "block.paradise_lost.permafrost": "Permafrost",
-  "block.paradise_lost.aether_farmland": "Aether Farmland",
-  "block.paradise_lost.aether_grass_path": "Aether Grass Path",
+  "block.paradise_lost.farmland": "Paradise Farmland",
+  "block.paradise_lost.grass_path": "Paradise Grass Path",
   "block.paradise_lost.quicksoil": "Quicksoil",
   "block.paradise_lost.packed_swedroot": "Packed Swedroot",
 
@@ -197,12 +197,12 @@
   "block.paradise_lost.boreal_wisteria_sapling": "Boreal Wisteria Sapling",
   "block.paradise_lost.boreal_wisteria_hanger": "Boreal Wisteria Hanger",
 
-  "block.paradise_lost.aether_grass_plant": "Gale Grass",
-  "block.paradise_lost.aether_grass_flowering": "Flowering Gale Grass",
-  "block.paradise_lost.aether_short_grass": "Stubby Gale Grass",
-  "block.paradise_lost.aether_tall_grass": "Gale Tall Grass",
-  "block.paradise_lost.aether_fern": "Sunwort",
-  "block.paradise_lost.aether_bush": "Puffin",
+  "block.paradise_lost.grass_plant": "Gale Grass",
+  "block.paradise_lost.grass_flowering": "Flowering Gale Grass",
+  "block.paradise_lost.short_grass": "Stubby Gale Grass",
+  "block.paradise_lost.tall_grass": "Gale Tall Grass",
+  "block.paradise_lost.fern": "Sunwort",
+  "block.paradise_lost.bush": "Puffin",
   "block.paradise_lost.flutegrass": "Flutegrass",
   "block.paradise_lost.shamrock": "Shamrock",
   "block.paradise_lost.malt_sprig": "Malt Sprig",
@@ -229,9 +229,9 @@
   "block.paradise_lost.flaxweave_cushion" : "Flaxweave Cushion",
 
   "block.paradise_lost.blueberry_bush": "Blueberry Bush",
-  
+
   "block.paradise_lost.halflight_cheesecake": "Halflight Cheesecake",
-  
+
   "block.paradise_lost.amadrys_bundle": "Amadrys Bundle",
 
   "block.paradise_lost.ancient_flower": "Ancient Flower",
@@ -252,7 +252,7 @@
   "block.paradise_lost.gravitite_levitator": "Gravitite Levitator",
   "block.paradise_lost.zanite_chain": "Zanite Chain",
   "block.paradise_lost.ambrosium_lantern": "Ambrosium Lantern",
-  "block.paradise_lost.blue_portal": "Aether Portal",
+  "block.paradise_lost.blue_portal": "Paradise Portal",
 
   "block.paradise_lost.ambrosium_torch": "Ambrosium Torch",
 
@@ -391,7 +391,7 @@
   "item.paradise_lost.moa_meat": "Moa Chop",
   "item.paradise_lost.moa_meat_cooked": "Cooked Moa Chop",
 
-  "item.paradise_lost.aether_portal": "Aether Portal",
+  "item.paradise_lost.portal": "Paradise Portal",
   "item.paradise_lost.life_shard": "Life Shard",
   "item.paradise_lost.cloud_staff": "Cloud Staff",
   "item.paradise_lost.nature_staff": "Nature Staff",
@@ -430,8 +430,8 @@
   "trinkets.slot.chest.parachute": "Parachute",
 
 
-  "death.attack.aether_fall": "%1$s plummeted from the heavens",
-  "death.attack.aether_fall.player": "%1$s was thrown off the heavens above by %2$s",
+  "death.attack.fall": "%1$s plummeted from the heavens",
+  "death.attack.fall.player": "%1$s was thrown off the heavens above by %2$s",
   "death.attack.aerbunny_fall": "%1$s got dumped",
   "death.attack.aerbunny_fall.player": "%1$s got dumped whilst trying to escape %2$s",
   "death.attack.nightmare": "%1$s was consumed by shifting shadows",
@@ -508,9 +508,9 @@
 
   "subtitles.paradise_lost.block.blueberry_bush.pick_blueberries": "Blueberries pop",
 
-  "subtitles.paradise_lost.block.portal.ambient": "Aether portal whooshes",
-  "subtitles.paradise_lost.block.portal.travel": "Aether portal noise fades",
-  "subtitles.paradise_lost.block.portal.trigger": "Aether portal noise intensifies",
+  "subtitles.paradise_lost.block.portal.ambient": "Paradise portal whooshes",
+  "subtitles.paradise_lost.block.portal.travel": "Paradise portal noise fades",
+  "subtitles.paradise_lost.block.portal.trigger": "Paradise portal noise intensifies",
 
   "subtitles.paradise_lost.block.orange_leaves.break": "Orange leaves break",
   "subtitles.paradise_lost.block.orange_leaves.drop_fruit": "Orange leaves drop fruit",
@@ -568,12 +568,12 @@
 
 
   "advancements.paradise_lost.consume_food.title": "Exotic Starter",
-  "advancements.paradise_lost.consume_food.description": "Consume food that has come from the Aether.",
-  "advancements.paradise_lost.enter_the_aether.title": "We need to go higher",
-  "advancements.paradise_lost.enter_the_aether.description": "Build and a flood a frame of shimmering glowstone, then step into the light",
+  "advancements.paradise_lost.consume_food.description": "Consume food that has come from the Paradise.",
+  "advancements.paradise_lost.enter_paradise_lost.title": "We need to go higher",
+  "advancements.paradise_lost.enter_paradise_lost.description": "Build and a flood a frame of shimmering glowstone, then step into the light",
   "advancements.paradise_lost.holystone_mine.title": "What clouds are made of...",
   "advancements.paradise_lost.holystone_mine.description": "Mine some holystone",
-  "advancements.paradise_lost.root.title": "The Aether",
+  "advancements.paradise_lost.root.title": "The Paradise",
   "advancements.paradise_lost.root.description": "A hostile paradise in the sky, full of mystery and surprises!",
   "advancements.paradise_lost.shiny_planks.title": "Shiny Planks!",
   "advancements.paradise_lost.shiny_planks.description": "Turn your golden oak logs into golden oak planks!",
@@ -581,8 +581,8 @@
   "advancements.paradise_lost.shiny_sapling.description": "Plant a golden oak sapling.",
   "advancements.paradise_lost.shiny_wood.title": "Shiny Wood?",
   "advancements.paradise_lost.shiny_wood.description": "Collect wood from a Golden Oak Tree",
-  "advancements.paradise_lost.void_aether.title": "I've been falling, for 30 minutes!",
-  "advancements.paradise_lost.void_aether.description": "Fall into the Overworld from the Aether",
+  "advancements.paradise_lost.void_paradise_lost.title": "I've been falling, for 30 minutes!",
+  "advancements.paradise_lost.void_paradise_lost.description": "Fall into the Overworld from the Paradise",
   "advancements.paradise_lost.world_of_goo.title": "World of Goo",
   "advancements.paradise_lost.world_of_goo.description": "Grow a swet"
 }

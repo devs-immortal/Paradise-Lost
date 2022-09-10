@@ -28,7 +28,7 @@ plugins {
 }
 
 version = paradiseLostVersion
-group = "com.aether" //TODO: change this
+group = "net.id"
 
 repositories {
     mavenCentral()
@@ -207,7 +207,7 @@ tasks {
             attributes(
                     "Implementation-Title" to "ParadiseLost",
                     "Implementation-Version" to paradiseLostVersion,
-                    "Main-Class" to "com.aether.executable.InstallerGUI",
+                    "Main-Class" to "net.id.paradiselost.executable.InstallerGUI",
             )
         }
 

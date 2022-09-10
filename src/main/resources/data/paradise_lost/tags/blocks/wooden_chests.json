@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:skyroot_chest",
+    "paradise_lost:golden_oak_chest",
+    "paradise_lost:orange_chest",
+    "paradise_lost:crystal_chest",
+    "paradise_lost:wisteria_chest"
+  ]
+}

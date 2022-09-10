@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.id.aether.mixin",
+  "package": "net.id.paradiselost.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "block.BlockMixin",
@@ -62,5 +62,5 @@
     "defaultRequire": 1,
     "maxShiftBy": 5
   },
-  "plugin": "net.id.aether.mixin.Plugin"
+  "plugin": "net.id.paradiselost.mixin.Plugin"
 }

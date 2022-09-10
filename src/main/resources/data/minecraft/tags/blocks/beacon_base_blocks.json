@@ -6,6 +6,6 @@
     "minecraft:diamond_block",
     "minecraft:gold_block",
     "minecraft:iron_block",
-    "#paradise_lost:aether_ore_blocks"
+    "#paradise_lost:paradise_lost_ore_blocks"
   ]
 }

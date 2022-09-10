@@ -22,7 +22,7 @@
     "Hugo Payn (DevilBringer) - GG design lead"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/paradise-lost",
+    "homepage": "https://immortaldevs.net/paradise-lost",
     "sources": "https://github.com/devs-immortal/Paradise-Lost",
     "issues": "https://github.com/devs-immortal/Paradise-Lost/issues"
   },
@@ -43,16 +43,16 @@
   "accessWidener": "paradise_lost.accesswidener",
   "entrypoints": {
     "main": [
-      "net.id.aether.Aether"
+      "net.id.paradiselost.ParadiseLost"
     ],
     "client": [
-      "net.id.aether.Aether"
+      "net.id.paradiselost.ParadiseLost"
     ],
     "server": [
-      "net.id.aether.Aether"
+      "net.id.paradiselost.ParadiseLost"
     ],
     "cardinal-components": [
-      "net.id.aether.component.AetherComponents"
+      "net.id.paradiselost.component.ParadiseLostComponents"
     ]
   },
   "custom": {

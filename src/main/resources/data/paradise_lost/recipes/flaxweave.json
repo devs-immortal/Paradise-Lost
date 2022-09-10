@@ -1,16 +1,16 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "##",
-        "##"
-    ],
-    "key": {
-        "#": {
-            "item": "paradise_lost:flax_thread"
-        }
-    },
-    "result": {
-        "item": "paradise_lost:flaxweave",
-        "count": 1
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:flax_thread"
     }
+  },
+  "result": {
+    "item": "paradise_lost:flaxweave",
+    "count": 1
+  }
 }

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:potted_fern",
+    "paradise_lost:potted_skyroot_sapling",
+    "paradise_lost:potted_golden_oak_sapling",
+    "paradise_lost:potted_crystal_sapling",
+    "paradise_lost:potted_rose_wisteria_sapling",
+    "paradise_lost:potted_frost_wisteria_sapling",
+    "paradise_lost:potted_lavender_wisteria_sapling",
+    "paradise_lost:potted_boreal_wisteria_sapling"
+  ]
+}

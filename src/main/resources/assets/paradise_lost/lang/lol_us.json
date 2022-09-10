@@ -1,34 +1,34 @@
 {
-  "itemGroup.paradise_lost.aether_building_blocks": "Aethr Blak",
-  "itemGroup.paradise_lost.aether_decorations": "Aethr Decorashuns",
-  "itemGroup.paradise_lost.aether_food": "Aethr Cheezburgrrs",
-  "itemGroup.paradise_lost.aether_misc": "Othr Aether stuffz",
-  "itemGroup.paradise_lost.aether_resources": "Aethr metlz n stuffz",
-  "itemGroup.paradise_lost.aether_tools": "Aethr Toolz",
-  "itemGroup.paradise_lost.aether_wearables": "Aethr Preshuz",
+  "itemGroup.paradise_lost.building_blocks": "Aethr Blak",
+  "itemGroup.paradise_lost.decorations": "Aethr Decorashuns",
+  "itemGroup.paradise_lost.food": "Aethr Cheezburgrrs",
+  "itemGroup.paradise_lost.misc": "Othr Paradise stuffz",
+  "itemGroup.paradise_lost.resources": "Aethr metlz n stuffz",
+  "itemGroup.paradise_lost.tools": "Aethr Toolz",
+  "itemGroup.paradise_lost.wearables": "Aethr Preshuz",
 
 
   "createWorld.customize.preset.paradise_lost.sandbox": "Aethr fun zone",
 
 
-  "biome.paradise_lost.aether_highlands": "comfy Plains",
-  "biome.paradise_lost.aether_highlands_forest": "Comfy Forest",
-  "biome.paradise_lost.aether_highlands_thicket": "Comftrble Thicket",
-  "biome.paradise_lost.aether_wisteria_woods": "WIzzy woodz",
+  "biome.paradise_lost.highlands": "comfy Plains",
+  "biome.paradise_lost.highlands_forest": "Comfy Forest",
+  "biome.paradise_lost.highlands_thicket": "Comftrble Thicket",
+  "biome.paradise_lost.wisteria_woods": "WIzzy woodz",
   "biome.paradise_lost.autumnal_tundra": "fall snowy Zone",
   "biome.paradise_lost.continental_plateau": "big Big Plato",
   "biome.paradise_lost.highlands_shield": "Comfy Protecshun",
 
 
-  "block.paradise_lost.aether_grass": "Aethr Gras blak",
-  "block.paradise_lost.enchanted_aether_grass": "Enchantd Aethr Gras",
-  "block.paradise_lost.aether_frozen_grass": "freezed Gras",
+  "block.paradise_lost.grass": "Aethr Gras blak",
+  "block.paradise_lost.enchanted_grass": "Enchantd Aethr Gras",
+  "block.paradise_lost.frozen_grass": "freezed Gras",
 
-  "block.paradise_lost.aether_dirt": "Aethr Durt",
-  "block.paradise_lost.coarse_aether_dirt": "Corse Aethr Durt",
+  "block.paradise_lost.dirt": "Aethr Durt",
+  "block.paradise_lost.coarse_dirt": "Corse Aethr Durt",
   "block.paradise_lost.permafrost": "freezen Durt",
-  "block.paradise_lost.aether_farmland": "Aethr fud hole",
-  "block.paradise_lost.aether_grass_path": "Aethr durt Road",
+  "block.paradise_lost.farmland": "Aethr fud hole",
+  "block.paradise_lost.grass_path": "Aethr durt Road",
   "block.paradise_lost.quicksoil": "fast durt",
   "block.paradise_lost.packed_swedroot": "Packd swet food",
 
@@ -195,12 +195,12 @@
   "block.paradise_lost.boreal_wisteria_sapling": "colerul baby wizzy",
   "block.paradise_lost.boreal_wisteria_hanger": "colerul wizzy Hanger",
 
-  "block.paradise_lost.aether_grass_plant": "wind Gras",
-  "block.paradise_lost.aether_grass_flowering": "wind Gras flowrs",
-  "block.paradise_lost.aether_short_grass": "smol wind gras",
-  "block.paradise_lost.aether_tall_grass": "big windy gras",
-  "block.paradise_lost.aether_fern": "ferny werny",
-  "block.paradise_lost.aether_bush": "pengin bush",
+  "block.paradise_lost.grass_plant": "wind Gras",
+  "block.paradise_lost.grass_flowering": "wind Gras flowrs",
+  "block.paradise_lost.short_grass": "smol wind gras",
+  "block.paradise_lost.tall_grass": "big windy gras",
+  "block.paradise_lost.fern": "ferny werny",
+  "block.paradise_lost.bush": "pengin bush",
   "block.paradise_lost.flutegrass": "fas gras",
   "block.paradise_lost.shamrock": "irish",
   "block.paradise_lost.malt_sprig": "vingar coverin",
@@ -378,7 +378,7 @@
   "item.paradise_lost.moa_meat": "ded moa :(",
   "item.paradise_lost.moa_meat_cooked": "yumy moa",
 
-  "item.paradise_lost.aether_portal": "Aethr Portel",
+  "item.paradise_lost.portal": "Aethr Portel",
   "item.paradise_lost.life_shard": "lyf bit",
   "item.paradise_lost.cloud_staff": "air stick",
   "item.paradise_lost.nature_staff": "natur stick",
@@ -417,8 +417,8 @@
   "trinkets.slot.chest.parachute": "slow fally",
 
 
-  "death.attack.aether_fall": "%1$s fell and DIED O.o from aethr",
-  "death.attack.aether_fall.player": "%1$s pushd frum aethr by %2$s",
+  "death.attack.fall": "%1$s fell and DIED O.o from aethr",
+  "death.attack.fall.player": "%1$s pushd frum aethr by %2$s",
   "death.attack.aerbunny_fall": "aerbuny hates %1$s",
   "death.attack.aerbunny_fall.player": "%1$s got dumped tryin to escape %2$s",
   "death.attack.nightmare": "%1$s died from crow ppl",
@@ -586,8 +586,8 @@
   "advancements.paradise_lost.shiny_sapling.description": "Plant a babeh shiny oak",
   "advancements.paradise_lost.shiny_wood.title": "Shiny wud",
   "advancements.paradise_lost.shiny_wood.description": "get wud from a shiny Oak tree",
-  "advancements.paradise_lost.void_aether.title": "aaaaaAAAAAHHHHH!",
-  "advancements.paradise_lost.void_aether.description": "fall frum da sky",
+  "advancements.paradise_lost.void_paradise_lost.title": "aaaaaAAAAAHHHHH!",
+  "advancements.paradise_lost.void_paradise_lost.description": "fall frum da sky",
   "advancements.paradise_lost.world_of_goo.title": "sticky situashun",
   "advancements.paradise_lost.world_of_goo.description": "grow some swetz"
 }

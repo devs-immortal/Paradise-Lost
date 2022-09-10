@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:aether_grass_path",
+    "paradise_lost:grass_path",
     "paradise_lost:quicksoil",
-    "paradise_lost:aether_farmland",
-    "#paradise_lost:aether_dirt_blocks",
-    "#paradise_lost:aether_aerclouds"
+    "paradise_lost:farmland",
+    "#paradise_lost:dirt_blocks",
+    "#paradise_lost:aerclouds"
   ]
 }

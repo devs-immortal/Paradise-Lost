@@ -1,4 +1,3 @@
-
 {
   "type": "minecraft:crafting_shaped",
   "group": "wooden_fence_gate",
@@ -18,4 +17,3 @@
     "item": "paradise_lost:golden_oak_fence_gate"
   }
 }
-        
