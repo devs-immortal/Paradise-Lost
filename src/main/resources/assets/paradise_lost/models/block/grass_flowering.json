@@ -1,7 +1,7 @@
 {
   "parent": "paradise_lost:template/bilayer_cross",
   "textures": {
-    "cross_tint": "paradise_lost:block/paradise_lost_grass",
-    "cross": "paradise_lost:block/paradise_lost_grass_flowers"
+    "cross_tint": "paradise_lost:block/grass",
+    "cross": "paradise_lost:block/grass_flowers"
   }
 }

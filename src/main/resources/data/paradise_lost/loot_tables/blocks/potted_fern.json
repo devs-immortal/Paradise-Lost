@@ -22,7 +22,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:paradise_lost_fern"
+          "name": "paradise_lost:fern"
         }
       ],
       "conditions": [

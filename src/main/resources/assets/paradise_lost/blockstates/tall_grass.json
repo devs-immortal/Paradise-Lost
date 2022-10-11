@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "paradise_lost:block/tall_grass_bottom"
+    },
+    "half=upper": {
+      "model": "paradise_lost:block/tall_grass_top"
+    }
+  }
+}

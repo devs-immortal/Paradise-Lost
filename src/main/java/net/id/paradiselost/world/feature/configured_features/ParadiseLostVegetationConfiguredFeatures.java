@@ -27,14 +27,14 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     Highlands
      */
     // Default
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> BUSH = register("paradise_lost_bush", Feature.RANDOM_PATCH, Configs.BUSH_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> DENSE_BUSH = register("paradise_lost_dense_bush", Feature.RANDOM_PATCH, Configs.DENSE_BUSH_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> GRASS_BUSH = register("paradise_lost_grass", Feature.RANDOM_PATCH, Configs.GRASS_BUSH_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> GRASS_BONEMEAL = register("paradise_lost_grass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(GRASS));
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> TALL_GRASS_BUSH = register("paradise_lost_tall_grass", Feature.RANDOM_PATCH, Configs.TALL_GRASS_BUSH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> BUSH = register("bush", Feature.RANDOM_PATCH, Configs.BUSH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> DENSE_BUSH = register("dense_bush", Feature.RANDOM_PATCH, Configs.DENSE_BUSH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> GRASS_BUSH = register("grass", Feature.RANDOM_PATCH, Configs.GRASS_BUSH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> GRASS_BONEMEAL = register("grass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(GRASS));
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> TALL_GRASS_BUSH = register("tall_grass", Feature.RANDOM_PATCH, Configs.TALL_GRASS_BUSH_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLUTEGRASS = register("flutegrass", Feature.RANDOM_PATCH, Configs.FLUTEGRASS_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> FLUTEGRASS_BONEMEAL = register("flutegrass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(ParadiseLostBlocks.FLUTEGRASS));
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLOWERS = register("paradise_lost_flowers", Feature.FLOWER, Configs.FLOWER_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLOWERS = register("flowers", Feature.FLOWER, Configs.FLOWER_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH, Configs.BLUEBERRY_PATCH_CONFIG);
     // Plato
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PLATEAU_FOLIAGE = register("plateau_foliage", Feature.RANDOM_PATCH, Configs.PLATEAU_FOLIAGE_CONFIG);

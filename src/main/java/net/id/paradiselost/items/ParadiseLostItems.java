@@ -238,7 +238,7 @@ public class ParadiseLostItems {
 
     private static final Settings misc = misc();
 
-    public static final ParadiseLostPortalItem PARADISE_LOST_PORTAL = add("paradise_lost_portal", new ParadiseLostPortalItem(misc));
+    public static final ParadiseLostPortalItem PARADISE_LOST_PORTAL = add("portal", new ParadiseLostPortalItem(misc));
     /* TODO: Implement magical items
     public static final LifeShardItem LIFE_SHARD = add("life_shard", new LifeShardItem(misc().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT).maxCount(1)));
     public static final CloudStaffItem CLOUD_STAFF = add("cloud_staff", new CloudStaffItem(misc().maxCount(1).maxDamage(60)));

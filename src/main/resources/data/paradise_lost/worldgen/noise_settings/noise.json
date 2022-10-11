@@ -336,21 +336,21 @@
               "if_true": {
                 "type": "minecraft:biome",
                 "biome_is": [
-                  "paradise_lost:paradise_lost_highlands_forest"
+                  "paradise_lost:highlands_forest"
                 ]
               },
               "then_run": {
                 "type": "minecraft:condition",
                 "if_true": {
                   "type": "minecraft:noise_threshold",
-                  "noise": "paradise_lost:paradise_lost_forest_noise",
+                  "noise": "paradise_lost:forest_noise",
                   "min_threshold": 0,
                   "max_threshold": 0.5
                 },
                 "then_run": {
                   "type": "minecraft:block",
                   "result_state": {
-                    "Name": "paradise_lost:coarse_paradise_lost_dirt"
+                    "Name": "paradise_lost:coarse_dirt"
                   }
                 }
               }
@@ -392,7 +392,7 @@
                     "then_run": {
                       "type": "minecraft:block",
                       "result_state": {
-                        "Name": "paradise_lost:paradise_lost_frozen_grass",
+                        "Name": "paradise_lost:frozen_grass",
                         "Properties": {
                           "snowy": ""
                         }
@@ -402,7 +402,7 @@
                   {
                     "type": "minecraft:block",
                     "result_state": {
-                      "Name": "paradise_lost:paradise_lost_grass",
+                      "Name": "paradise_lost:grass",
                       "Properties": {
                         "snowy": "false"
                       }
@@ -441,7 +441,7 @@
                   {
                     "type": "minecraft:block",
                     "result_state": {
-                      "Name": "paradise_lost:paradise_lost_dirt"
+                      "Name": "paradise_lost:dirt"
                     }
                   }
                 ]
@@ -451,7 +451,7 @@
               "type": "minecraft:condition",
               "if_true": {
                 "type": "minecraft:noise_threshold",
-                "noise": "paradise_lost:paradise_lost_dirt_layer",
+                "noise": "paradise_lost:dirt_layer",
                 "min_threshold": 0,
                 "max_threshold": 1
               },
@@ -485,7 +485,7 @@
                       {
                         "type": "minecraft:block",
                         "result_state": {
-                          "Name": "paradise_lost:paradise_lost_dirt"
+                          "Name": "paradise_lost:dirt"
                         }
                       }
                     ]
@@ -539,7 +539,7 @@
                   {
                     "type": "minecraft:block",
                     "result_state": {
-                      "Name": "paradise_lost:paradise_lost_dirt",
+                      "Name": "paradise_lost:dirt",
                       "Properties": {
                         "snowy": "false"
                       }

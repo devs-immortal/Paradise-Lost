@@ -16,7 +16,7 @@
             "tries": 8,
             "state_provider": {
               "state": {
-                "Name": "paradise_lost:paradise_lost_fern"
+                "Name": "paradise_lost:fern"
               },
               "type": "minecraft:simple_state_provider"
             },

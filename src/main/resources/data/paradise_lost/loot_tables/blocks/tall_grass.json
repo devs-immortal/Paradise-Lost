@@ -27,7 +27,7 @@
                   "add": false
                 }
               ],
-              "name": "paradise_lost:paradise_lost_grass_plant"
+              "name": "paradise_lost:grass_plant"
             },
             {
               "type": "minecraft:item",
@@ -48,7 +48,7 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "paradise_lost:paradise_lost_tall_grass",
+          "block": "paradise_lost:tall_grass",
           "properties": {
             "half": "lower"
           }
@@ -58,7 +58,7 @@
           "predicate": {
             "block": {
               "blocks": [
-                "paradise_lost:paradise_lost_tall_grass"
+                "paradise_lost:tall_grass"
               ],
               "state": {
                 "half": "upper"
@@ -95,7 +95,7 @@
                   "add": false
                 }
               ],
-              "name": "paradise_lost:paradise_lost_grass_plant"
+              "name": "paradise_lost:grass_plant"
             },
             {
               "type": "minecraft:item",
@@ -116,7 +116,7 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "paradise_lost:paradise_lost_tall_grass",
+          "block": "paradise_lost:tall_grass",
           "properties": {
             "half": "upper"
           }
@@ -126,7 +126,7 @@
           "predicate": {
             "block": {
               "blocks": [
-                "paradise_lost:paradise_lost_tall_grass"
+                "paradise_lost:tall_grass"
               ],
               "state": {
                 "half": "lower"

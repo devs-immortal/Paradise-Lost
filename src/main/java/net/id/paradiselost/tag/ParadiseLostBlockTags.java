@@ -31,7 +31,7 @@ public class ParadiseLostBlockTags {
 
     //Worldgen
     public static final TagKey<Block> CLOUD_CARVER_REPLACEABLES = register("worldgen/cloud_carver_replaceables");
-    public static final TagKey<Block> BASE_PARADISE_LOST_STONE = register("worldgen/base_paradise_lost_stone");
+    public static final TagKey<Block> BASE_PARADISE_LOST_STONE = register("worldgen/base_stone");
     public static final TagKey<Block> FLUID_REPLACEABLES = register("worldgen/fluid_replaceable");
     public static final TagKey<Block> BASE_REPLACEABLES = register("worldgen/base_replaceables");
 

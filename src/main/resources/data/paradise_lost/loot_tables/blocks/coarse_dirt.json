@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:coarse_paradise_lost_dirt"
+          "name": "paradise_lost:coarse_dirt"
         }
       ],
       "conditions": [

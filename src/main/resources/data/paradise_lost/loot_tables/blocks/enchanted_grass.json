@@ -25,7 +25,7 @@
                   }
                 }
               ],
-              "name": "paradise_lost:enchanted_paradise_lost_grass"
+              "name": "paradise_lost:enchanted_grass"
             },
             {
               "type": "minecraft:item",
@@ -34,7 +34,7 @@
                   "condition": "minecraft:survives_explosion"
                 }
               ],
-              "name": "paradise_lost:paradise_lost_dirt"
+              "name": "paradise_lost:dirt"
             }
           ]
         }

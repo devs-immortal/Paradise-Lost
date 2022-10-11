@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:paradise_lost_highlands",
-    "paradise_lost:paradise_lost_highlands_forest",
-    "paradise_lost:paradise_lost_highlands_thicket",
-    "paradise_lost:paradise_lost_wisteria_woods",
+    "paradise_lost:highlands",
+    "paradise_lost:highlands_forest",
+    "paradise_lost:highlands_thicket",
+    "paradise_lost:wisteria_woods",
     "paradise_lost:autumnal_tundra",
     "paradise_lost:continental_plateau",
     "paradise_lost:highlands_shield"

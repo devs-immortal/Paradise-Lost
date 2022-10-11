@@ -21,7 +21,7 @@
                     "Properties": {
                       "half": "lower"
                     },
-                    "Name": "paradise_lost:paradise_lost_tall_grass"
+                    "Name": "paradise_lost:tall_grass"
                   },
                   "type": "minecraft:simple_state_provider"
                 },

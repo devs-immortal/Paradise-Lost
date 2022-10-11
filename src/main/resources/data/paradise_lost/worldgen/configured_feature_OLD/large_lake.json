@@ -48,11 +48,11 @@
                     "max_inclusive": 25
                   }
                 },
-                "replaceable": "paradise_lost:paradise_lost_ground",
+                "replaceable": "paradise_lost:ground",
                 "ground_state": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
-                    "Name": "paradise_lost:paradise_lost_grass",
+                    "Name": "paradise_lost:grass",
                     "Properties": {
                       "snowy": "false"
                     }

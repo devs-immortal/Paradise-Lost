@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paradise_lost:block/paradise_lost_grass"
+    "layer0": "paradise_lost:block/grass"
   }
 }

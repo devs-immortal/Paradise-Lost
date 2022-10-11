@@ -38,10 +38,10 @@ import static net.id.paradiselost.world.feature.placed_features.ParadiseLostVege
  * @author Gudenau
  */
 public final class ParadiseLostBiomes {
-    public static final RegistryKey<Biome> HIGHLANDS_PLAINS_KEY = register("paradise_lost_highlands");
-    public static final RegistryKey<Biome> HIGHLANDS_FOREST_KEY = register("paradise_lost_highlands_forest");
-    public static final RegistryKey<Biome> HIGHLANDS_THICKET_KEY = register("paradise_lost_highlands_thicket");
-    public static final RegistryKey<Biome> WISTERIA_WOODS_KEY = register("paradise_lost_wisteria_woods");
+    public static final RegistryKey<Biome> HIGHLANDS_PLAINS_KEY = register("highlands");
+    public static final RegistryKey<Biome> HIGHLANDS_FOREST_KEY = register("highlands_forest");
+    public static final RegistryKey<Biome> HIGHLANDS_THICKET_KEY = register("highlands_thicket");
+    public static final RegistryKey<Biome> WISTERIA_WOODS_KEY = register("wisteria_woods");
     public static final RegistryKey<Biome> AUTUMNAL_TUNDRA_KEY = register("autumnal_tundra");
     public static final RegistryKey<Biome> CONTINENTAL_PLATEAU_KEY = register("continental_plateau");
     public static final RegistryKey<Biome> HIGHLANDS_SHIELD_KEY = register("highlands_shield");
@@ -442,7 +442,7 @@ public final class ParadiseLostBiomes {
             "paradise_lost:skyroot_tower",
             "paradise_lost:orange_ruin"
           ],
-          "parent": "paradise_lost:paradise_lost_highlands_forest",
+          "parent": "paradise_lost:highlands_forest",
           "player_spawn_friendly": false,
           "depth": 0.155,
           "scale": 0.15

@@ -19,11 +19,11 @@ public class ParadiseLostFeatures {
     public static final QuicksoilFeature QUICKSOIL = register("quicksoil", new QuicksoilFeature(QuicksoilConfig.CODEC));
     public static final CrystalTreeIslandFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", new CrystalTreeIslandFeature(DefaultFeatureConfig.CODEC));
 
-    public static final ParadiseLostDeltaFeature DELTA_FEATURE = register("paradise_lost_delta_feature", new ParadiseLostDeltaFeature(DeltaFeatureConfig.CODEC));
+    public static final ParadiseLostDeltaFeature DELTA_FEATURE = register("delta_feature", new ParadiseLostDeltaFeature(DeltaFeatureConfig.CODEC));
     public static final GroundcoverFeature GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeatureConfig.CODEC));
     public static final ParadiseLostBoulderFeature BOULDER = register("boulder", new ParadiseLostBoulderFeature(BoulderFeatureConfig.CODEC));
     public static final IcestoneSpireFeature ICESTONE_SPIRE_FEATURE = register("icestone_spire_feature", new IcestoneSpireFeature(DefaultFeatureConfig.CODEC));
-    public static final FreezeParadiseLostTopLayerFeature FREEZE_TOP_LAYER_FEATURE_FEATURE = register("freeze_paradise_lost_top_layer_feature", new FreezeParadiseLostTopLayerFeature(DefaultFeatureConfig.CODEC));
+    public static final FreezeParadiseLostTopLayerFeature FREEZE_TOP_LAYER_FEATURE_FEATURE = register("freeze_top_layer_feature", new FreezeParadiseLostTopLayerFeature(DefaultFeatureConfig.CODEC));
 
     public static final ProjectedOrganicCoverFeature ORGANIC_GROUNDCOVER_FEATURE = register("organic_groundcover_feature", new ProjectedOrganicCoverFeature(ProjectedOrganicCoverConfig.CODEC));
 

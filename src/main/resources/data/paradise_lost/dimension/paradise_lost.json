@@ -19,7 +19,7 @@
               1.0
             ]
           },
-          "biome": "paradise_lost:paradise_lost_highlands"
+          "biome": "paradise_lost:highlands"
         },
         {
           "parameters": {
@@ -88,7 +88,7 @@
               1.0
             ]
           },
-          "biome": "paradise_lost:paradise_lost_highlands_thicket"
+          "biome": "paradise_lost:highlands_thicket"
         },
         {
           "parameters": {
@@ -106,7 +106,7 @@
               0.23
             ]
           },
-          "biome": "paradise_lost:paradise_lost_highlands_forest"
+          "biome": "paradise_lost:highlands_forest"
         },
         {
           "parameters": {
@@ -124,12 +124,12 @@
               0.82
             ]
           },
-          "biome": "paradise_lost:paradise_lost_wisteria_woods"
+          "biome": "paradise_lost:wisteria_woods"
         }        
       ],
       "type": "minecraft:multi_noise"
     },
-    "settings": "paradise_lost:paradise_lost_noise",
+    "settings": "paradise_lost:noise",
     "type": "minecraft:noise"
   }
 }
