@@ -116,12 +116,6 @@ dependencies {
             version = cardinalComponentsVersion,
     ).also(::include)
 
-//    modImplementation(
-//            group = "com.github.CDAGaming.CrowdinTranslate",
-//            name = "crowdin-translate",
-//            version = crowdinTranslateVersion,
-//    ).also(::include)
-
     modImplementation(
             group = "net.kyrptonaught",
             name = "customportalapi",
