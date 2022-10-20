@@ -14,7 +14,7 @@ import java.util.EnumSet;
 import java.util.function.Predicate;
 
 public class EatParadiseLostGrassGoal extends Goal {
-    private static final Predicate<BlockState> grass = BlockStatePredicate.forBlock(ParadiseLostBlocks.GRASS_BLOCK);
+    private static final Predicate<BlockState> grass = BlockStatePredicate.forBlock(ParadiseLostBlocks.HIGHLANDS_GRASS);
 
     private final MobEntity owner;
     private final World world;
@@ -37,7 +37,7 @@ public class EatParadiseLostGrassGoal extends Goal {
             if (grass.test(world.getBlockState(pos))) {
                 return true;
             } else {
-                return world.getBlockState(pos.down()).getBlock() == ParadiseLostBlocks.GRASS_BLOCK;
+                return world.getBlockState(pos.down()).getBlock() == ParadiseLostBlocks.HIGHLANDS_GRASS;
             }
         }
     }
@@ -75,9 +75,9 @@ public class EatParadiseLostGrassGoal extends Goal {
             } else {
                 BlockPos downPos = pos.down();
 
-                if (this.world.getBlockState(downPos).getBlock() == ParadiseLostBlocks.GRASS_BLOCK) {
+                if (this.world.getBlockState(downPos).getBlock() == ParadiseLostBlocks.HIGHLANDS_GRASS) {
                     if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-                        this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(ParadiseLostBlocks.GRASS_BLOCK.getDefaultState()));
+                        this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(ParadiseLostBlocks.HIGHLANDS_GRASS.getDefaultState()));
                         this.world.setBlockState(downPos, ParadiseLostBlocks.DIRT.getDefaultState(), Block.NOTIFY_LISTENERS);
                     }
 

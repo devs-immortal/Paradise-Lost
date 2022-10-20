@@ -71,7 +71,7 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
                     mut.set(startPos);
                     mut.move(x, y, z);
 
-                    if (context.getWorld().getBlockState(mut).isAir() && context.getWorld().getBlockState(mut.up()).isOf(ParadiseLostBlocks.GRASS_BLOCK) && context.getWorld().getBlockState(mut.up(2)).isAir()) {
+                    if (context.getWorld().getBlockState(mut).isAir() && context.getWorld().getBlockState(mut.up()).isOf(ParadiseLostBlocks.HIGHLANDS_GRASS) && context.getWorld().getBlockState(mut.up(2)).isAir()) {
                         origin = new BlockPos(mut);
                     }
                 }

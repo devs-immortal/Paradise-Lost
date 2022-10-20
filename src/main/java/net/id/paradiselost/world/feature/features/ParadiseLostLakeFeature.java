@@ -116,7 +116,7 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration>{
                         if(waterMap[(xOff * 16 + zOff) * 8 + yOff]){
                             var blockPos3 = blockPos.add(xOff, yOff - 1, zOff);
                             if(isSoil(context.getWorld().getBlockState(blockPos3)) && context.getWorld().getLightLevel(LightType.SKY, blockPos.add(xOff, yOff, zOff)) > 0){
-                                context.getWorld().setBlockState(blockPos3, ParadiseLostBlocks.GRASS_BLOCK.getDefaultState(), Block.NOTIFY_LISTENERS);
+                                context.getWorld().setBlockState(blockPos3, ParadiseLostBlocks.HIGHLANDS_GRASS.getDefaultState(), Block.NOTIFY_LISTENERS);
                             }
                         }
                     }

@@ -69,7 +69,7 @@ public class ParadiseLostConfiguredFeatures {
             return singleBlock(BlockStateProvider.of(block), modifiers);
         }
         // TODO This is incorrect, also convert this to tag
-        final static List<BlockState> GENERIC_FLOOR_WHITELIST = List.of(GRASS_BLOCK.getDefaultState(), COARSE_DIRT.getDefaultState(), HOLYSTONE.getDefaultState(), COBBLED_HOLYSTONE.getDefaultState());
+        final static List<BlockState> GENERIC_FLOOR_WHITELIST = List.of(HIGHLANDS_GRASS.getDefaultState(), COARSE_DIRT.getDefaultState(), HOLYSTONE.getDefaultState(), COBBLED_HOLYSTONE.getDefaultState());
 
         protected static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature) {
             return Registry.register(Registry.FEATURE, locate(name), feature);

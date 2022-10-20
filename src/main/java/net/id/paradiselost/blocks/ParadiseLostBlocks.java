@@ -60,7 +60,8 @@ public class ParadiseLostBlocks {
         return copy(Blocks.GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f);
     }
 
-    public static final ParadiseLostGrassBlock GRASS_BLOCK = add("grass", new ParadiseLostGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable());
+    public static final ParadiseLostGrassBlock HIGHLANDS_GRASS = add("highlands_grass", new ParadiseLostGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable());
+
     public static final ParadiseLostGrassBlock ENCHANTED_GRASS = add("enchanted_grass", new ParadiseLostGrassBlock(grassBlock().mapColor(MapColor.GOLD)));
     public static final ParadiseLostSnowyBlock FROZEN_GRASS = add("frozen_grass", new ParadiseLostSnowyBlock(grassBlock().mapColor(MapColor.WHITE).strength(2F).sounds(BlockSoundGroup.GILDED_BLACKSTONE)), flattenable());
     // Soil Blocks

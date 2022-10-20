@@ -26,7 +26,6 @@
     "server.DimensionOptionsMixin",
     "server.DimensionTypeMixin",
     "server.EntityTrackerEntryMixin",
-    "server.FlatLevelGeneratorPresets$RegistrarMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",

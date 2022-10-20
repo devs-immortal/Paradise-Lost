@@ -18,7 +18,7 @@ public class AmbrosiumShardItem extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getWorld().getBlockState(context.getBlockPos()).getBlock() == ParadiseLostBlocks.GRASS_BLOCK) {
+        if (context.getWorld().getBlockState(context.getBlockPos()).getBlock() == ParadiseLostBlocks.HIGHLANDS_GRASS) {
             if (!context.getPlayer().isCreative()) {
                 context.getStack().setCount(context.getStack().getCount() - 1);
             }

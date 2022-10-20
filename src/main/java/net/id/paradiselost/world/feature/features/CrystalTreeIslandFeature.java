@@ -38,7 +38,7 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
                 for (int z = MathHelper.floor(-f); z <= MathHelper.ceil(f); ++z) {
                     if ((float) (x * x + z * z) <= (f + 1.0F) * (f + 1.0F)) {
                         if (y == 0) {
-                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.GRASS_BLOCK.getDefaultState());
+                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.HIGHLANDS_GRASS.getDefaultState());
                             if (context.getRandom().nextInt(6) == 0) {
                                 this.setBlockState(context.getWorld(), context.getOrigin().add(x, y + 1, z), ParadiseLostBlocks.GRASS.getDefaultState());
                             }

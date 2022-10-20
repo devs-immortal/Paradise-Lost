@@ -19,7 +19,7 @@ import static net.id.paradiselost.blocks.ParadiseLostBlocks.*;
 
 public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final List<Block> PARADISE_LOST_GROUND = List.of(
-        GRASS_BLOCK, HOLYSTONE, MOSSY_HOLYSTONE, DIRT, COARSE_DIRT, PERMAFROST
+        HIGHLANDS_GRASS, HOLYSTONE, MOSSY_HOLYSTONE, DIRT, COARSE_DIRT, PERMAFROST
     );
 
     /*

@@ -27,12 +27,12 @@ public class ParadiseLostAnimalEntity extends AnimalEntity {
     }
 
     public static boolean isValidNaturalParadiseLostSpawn(EntityType<? extends ParadiseLostAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isOf(ParadiseLostBlocks.GRASS_BLOCK) && world.getBaseLightLevel(pos, 0) > 8;
+        return world.getBlockState(pos.down()).isOf(ParadiseLostBlocks.HIGHLANDS_GRASS) && world.getBaseLightLevel(pos, 0) > 8;
     }
 
     @Override
     public float getPathfindingFavor(BlockPos pos, WorldView worldIn) {
-        return worldIn.getBlockState(pos.down()).getBlock() == ParadiseLostBlocks.GRASS_BLOCK ? 10.0F : worldIn.getLightLevel(pos) - 0.5F;
+        return worldIn.getBlockState(pos.down()).getBlock() == ParadiseLostBlocks.HIGHLANDS_GRASS ? 10.0F : worldIn.getLightLevel(pos) - 0.5F;
     }
 
     @Override

@@ -3,9 +3,9 @@
   "textures": {
     "particle": "paradise_lost:block/dirt",
     "bottom": "paradise_lost:block/dirt",
-    "top": "paradise_lost:block/grass_top",
-    "side": "paradise_lost:block/grass_side",
-    "overlay": "paradise_lost:block/grass_side_overlay"
+    "top": "paradise_lost:block/highlands_grass_top",
+    "side": "paradise_lost:block/highlands_grass_side",
+    "overlay": "paradise_lost:block/highlands_grass_side_overlay"
   },
   "elements": [
     {

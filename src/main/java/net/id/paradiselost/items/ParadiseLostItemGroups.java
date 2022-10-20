@@ -10,7 +10,7 @@ import static net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder.bu
 public class ParadiseLostItemGroups {
     public static final ItemGroup PARADISE_LOST_BUILDING_BLOCKS = build(
             ParadiseLost.locate("building_blocks"),
-            () -> new ItemStack(ParadiseLostBlocks.GRASS_BLOCK));
+            () -> new ItemStack(ParadiseLostBlocks.HIGHLANDS_GRASS));
 
     public static final ItemGroup PARADISE_LOST_DECORATIONS = build(
             ParadiseLost.locate("decorations"),

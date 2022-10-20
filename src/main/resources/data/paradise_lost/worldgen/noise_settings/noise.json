@@ -402,7 +402,7 @@
                   {
                     "type": "minecraft:block",
                     "result_state": {
-                      "Name": "paradise_lost:grass",
+                      "Name": "paradise_lost:highlands_grass",
                       "Properties": {
                         "snowy": "false"
                       }

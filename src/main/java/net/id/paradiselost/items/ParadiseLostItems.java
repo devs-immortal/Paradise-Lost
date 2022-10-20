@@ -3,6 +3,7 @@ package net.id.paradiselost.items;
 import com.google.common.collect.ImmutableList;
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
@@ -289,7 +290,8 @@ public class ParadiseLostItems {
     public static final BlockItem ICESTONE = add("icestone", ParadiseLostBlocks.ICESTONE, building_block);
     public static final BlockItem AEROGEL = add("aerogel", ParadiseLostBlocks.AEROGEL, building_block);
     // nature
-    public static final BlockItem GRASS_BLOCK = add("grass", ParadiseLostBlocks.GRASS_BLOCK, building_block);
+    public static final BlockItem HIGHLANDS_GRASS = add("highlands_grass", ParadiseLostBlocks.HIGHLANDS_GRASS, building_block);
+
     public static final BlockItem ENCHANTED_GRASS = add("enchanted_grass", ParadiseLostBlocks.ENCHANTED_GRASS, building_block);
     public static final BlockItem FROZEN_GRASS = add("frozen_grass", ParadiseLostBlocks.FROZEN_GRASS, building_block);
     public static final BlockItem DIRT = add("dirt", ParadiseLostBlocks.DIRT, building_block);
@@ -617,6 +619,8 @@ public class ParadiseLostItems {
 
     @SafeVarargs
     private static <V extends Item> V add(String id, V item, Action<? super V>... additionalActions) {
+        if (id.equals("grass"))
+            ParadiseLost.LOG.error("id");
         return ParadiseLostRegistryQueues.ITEM.add(locate(id), item, additionalActions);
     }
 
