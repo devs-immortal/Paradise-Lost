@@ -1,0 +1,20 @@
+{
+
+  "type": "add",
+  "argument1": 1,
+  "argument2": {
+
+    "type": "mul",
+    "argument1": 2,
+    "argument2": {
+
+      "type": "noise",
+      "noise": "paradise_lost:terrain/flat",
+      "xz_scale": 0.667,
+      "y_scale": 0.05
+
+    }
+
+  }
+
+}

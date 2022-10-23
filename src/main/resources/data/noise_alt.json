@@ -1,5 +1,5 @@
 {
-  "sea_level": -54,
+  "sea_level": -16,
   "disable_mob_generation": false,
   "noise_caves_enabled": false,
   "noodle_caves_enabled": false,
@@ -25,77 +25,263 @@
       "type": "squeeze",
       "argument": {
 
-        "type": "interpolated",
-        "argument": {
+        "type": "mul",
+        "argument1": 0.5,
+        "argument2": {
 
-          "type": "mul",
-          "argument1": 0.5,
-          "argument2": {
+          "type": "interpolated",
+          "argument": {
 
-            "type": "add",
-            "argument1": {
-
-              "type": "y_clamped_gradient",
-              "from_y": -48,
-              "to_y": 100,
-              "from_value": -1,
-              "to_value": 0
-
-            },
-            "argument2": {
+            "type": "blend_density",
+            "argument": {
 
               "type": "add",
-              "argument1": "paradise_lost:splines/bottoms",
-              "argument2": {
+              "argument1": {
 
-                "type": "add",
-                "argument1": "paradise_lost:modifiers/islandlets",
+                "type": "mul",
+                "argument1": {
+
+
+                  "Comment - BOTTOMS": "uwu, this bit chops off the bottoms of mountains, refer to ALTITUDE for the tops",
+
+                  "type": "range_choice",
+                  "input": {
+
+                    "type": "noise",
+                    "noise": "paradise_lost:mountains",
+                    "xz_scale": 1,
+                    "y_scale": 1
+
+                  },
+                  "when_out_of_range": {
+
+                    "type": "y_clamped_gradient",
+                    "from_y": -16,
+                    "to_y": 64,
+                    "from_value": 0,
+                    "to_value": 1
+
+                  },
+                  "when_in_range": {
+
+                    "type": "range_choice",
+                    "input": {
+
+                      "type": "noise",
+                      "noise": "paradise_lost:mountains",
+                      "xz_scale": 1,
+                      "y_scale": 1
+
+                    },
+                    "when_out_of_range": {
+
+                      "type": "y_clamped_gradient",
+                      "from_y": 16,
+                      "to_y": 92,
+                      "from_value": 0,
+                      "to_value": 1
+
+                    },
+                    "when_in_range": {
+
+                      "type": "range_choice",
+                      "input": {
+
+                        "type": "noise",
+                        "noise": "paradise_lost:mountains",
+                        "xz_scale": 1,
+                        "y_scale": 1
+
+                      },
+                      "when_out_of_range": {
+
+                        "type": "y_clamped_gradient",
+                        "from_y": 32,
+                        "to_y": 120,
+                        "from_value": 0,
+                        "to_value": 1
+
+                      },
+                      "when_in_range": {
+
+                        "type": "range_choice",
+                        "input": {
+
+                          "type": "noise",
+                          "noise": "paradise_lost:mountains",
+                          "xz_scale": 1,
+                          "y_scale": 1
+
+                        },
+                        "when_out_of_range": {
+
+                          "type": "y_clamped_gradient",
+                          "from_y": 48,
+                          "to_y": 132,
+                          "from_value": 0,
+                          "to_value": 1
+
+                        },
+                        "when_in_range": {
+
+                          "type": "y_clamped_gradient",
+                          "from_y": 64,
+                          "to_y": 148,
+                          "from_value": 0,
+                          "to_value": 1
+
+                        },
+                        "min_inclusive": -1,
+                        "max_exclusive": -0.7334
+
+                      },
+                      "min_inclusive": -1,
+                      "max_exclusive": -0.525
+
+                    },
+                    "min_inclusive": -1,
+                    "max_exclusive": -0.3
+
+                  },
+                  "min_inclusive": -1,
+                  "max_exclusive": -0.0665
+
+
+                },
                 "argument2": {
 
                   "type": "add",
-                  "argument1": "paradise_lost:splines/altitude",
-                  "argument2": {
+                  "argument1": {
 
-                    "type": "add",
-                    "argument1": "paradise_lost:splines/flatness",
+                    "type": "mul",
+                    "argument1": {
+
+                      "Comment - ALTITUDE": "This hell chain of range choices translates the altitude noise into upper bounds for terrain.",
+
+                      "type": "range_choice",
+                      "input": {
+
+                        "type": "noise",
+                        "noise": "paradise_lost:mountains",
+                        "xz_scale": 1,
+                        "y_scale": 0
+
+                      },
+                      "when_out_of_range": {
+
+                        "type": "y_clamped_gradient",
+                        "from_y": 132,
+                        "to_y": 200,
+                        "from_value": 1,
+                        "to_value": 0
+
+                      },
+                      "when_in_range": {
+
+                        "type": "range_choice",
+                        "input": {
+
+                          "type": "noise",
+                          "noise": "paradise_lost:mountains",
+                          "xz_scale": 1,
+                          "y_scale": 0
+
+                        },
+                        "when_out_of_range": {
+
+                          "type": "y_clamped_gradient",
+                          "from_y": 192,
+                          "to_y": 256,
+                          "from_value": 1,
+                          "to_value": 0
+
+                        },
+                        "when_in_range": {
+
+                          "type": "range_choice",
+                          "input": {
+
+                            "type": "noise",
+                            "noise": "paradise_lost:mountains",
+                            "xz_scale": 1,
+                            "y_scale": 0
+
+                          },
+                          "when_out_of_range": {
+
+                            "type": "y_clamped_gradient",
+                            "from_y": 225,
+                            "to_y": 320,
+                            "from_value": 1,
+                            "to_value": 0
+
+                          },
+                          "when_in_range": {
+
+                            "type": "range_choice",
+                            "input": {
+
+                              "type": "noise",
+                              "noise": "paradise_lost:mountains",
+                              "xz_scale": 1,
+                              "y_scale": 0
+
+                            },
+                            "when_out_of_range": {
+
+                              "type": "y_clamped_gradient",
+                              "from_y": 280,
+                              "to_y": 400,
+                              "from_value": 1,
+                              "to_value": 0
+
+                            },
+                            "when_in_range": {
+
+                              "type": "y_clamped_gradient",
+                              "from_y": 328,
+                              "to_y": 512,
+                              "from_value": 1,
+                              "to_value": 0
+
+                            },
+                            "min_inclusive": -1,
+                            "max_exclusive": -0.7334
+
+                          },
+                          "min_inclusive": -1,
+                          "max_exclusive": -0.525
+
+                        },
+                        "min_inclusive": -1,
+                        "max_exclusive": -0.3
+
+                      },
+                      "min_inclusive": -1,
+                      "max_exclusive": -0.0665
+
+                    },
                     "argument2": {
 
                       "type": "add",
-                      "argument1": "paradise_lost:modifiers/cutoffs",
+                      "argument1": "minecraft:overworld/base_3d_noise",
                       "argument2": {
 
                         "type": "add",
-                        "argument1": "paradise_lost:modifiers/oceans",
-                        "argument2": {
-
-                          "type": "add",
-                          "argument1": -1,
-                          "argument2": {
-
-                            "type": "add",
-                            "argument1": "paradise_lost:modifiers/bumps",
-                            "argument2": {
-
-                              "type": "noise",
-                              "noise": "paradise_lost:terrain/islands",
-                              "xz_scale": 0.425,
-                              "y_scale": 0.155
-
-                            }
-
-                          }
-
-                        }
+                        "argument1": "minecraft:end/base_3d_noise",
+                        "argument2": 9.9
 
                       }
 
                     }
 
-                  }
+                  },
+                  "argument2": -9.9
 
                 }
 
-              }
+              },
+              "argument2": -0.5
 
             }
 
@@ -236,8 +422,8 @@
     }
   },
   "noise": {
-    "min_y": -48,
-    "height": 448,
+    "min_y": -16,
+    "height": 320,
     "size_horizontal": 4,
     "size_vertical": 4,
     "island_noise_override": false
@@ -269,7 +455,7 @@
                 "type": "minecraft:condition",
                 "if_true": {
                   "type": "minecraft:noise_threshold",
-                  "noise": "paradise_lost:topsoil/forest_noise",
+                  "noise": "paradise_lost:forest_noise",
                   "min_threshold": 0,
                   "max_threshold": 0.5
                 },
@@ -377,7 +563,7 @@
               "type": "minecraft:condition",
               "if_true": {
                 "type": "minecraft:noise_threshold",
-                "noise": "paradise_lost:topsoil/dirt_layer",
+                "noise": "paradise_lost:dirt_layer",
                 "min_threshold": 0,
                 "max_threshold": 1
               },

@@ -1,5 +1,5 @@
 {
-  "sea_level": -54,
+  "sea_level": -16,
   "disable_mob_generation": false,
   "noise_caves_enabled": false,
   "noodle_caves_enabled": false,
@@ -21,90 +21,58 @@
   },
   "noise_router": {
     "final_density": {
-
-      "type": "squeeze",
-      "argument": {
-
-        "type": "interpolated",
+      "argument1": {
         "argument": {
-
-          "type": "mul",
           "argument1": 0.5,
           "argument2": {
-
-            "type": "add",
-            "argument1": {
-
-              "type": "y_clamped_gradient",
-              "from_y": -48,
-              "to_y": 100,
-              "from_value": -1,
-              "to_value": 0
-
-            },
-            "argument2": {
-
-              "type": "add",
-              "argument1": "paradise_lost:splines/bottoms",
-              "argument2": {
-
-                "type": "add",
-                "argument1": "paradise_lost:modifiers/islandlets",
-                "argument2": {
-
-                  "type": "add",
-                  "argument1": "paradise_lost:splines/altitude",
+            "argument": {
+              "argument": {
+                "type": "minecraft:add",
+                "argument1": {
+                  "type": "minecraft:mul",
+                  "argument1": {
+                    "type": "minecraft:y_clamped_gradient",
+                    "from_y": 4,
+                    "to_y": 32,
+                    "from_value": 0,
+                    "to_value": 1
+                  },
                   "argument2": {
-
-                    "type": "add",
-                    "argument1": "paradise_lost:splines/flatness",
-                    "argument2": {
-
-                      "type": "add",
-                      "argument1": "paradise_lost:modifiers/cutoffs",
-                      "argument2": {
-
-                        "type": "add",
-                        "argument1": "paradise_lost:modifiers/oceans",
+                    "type": "minecraft:add",
+                    "argument1": {
+                      "type": "minecraft:add",
+                      "argument1": {
+                        "type": "minecraft:mul",
+                        "argument1": {
+                          "type": "minecraft:y_clamped_gradient",
+                          "from_y": 248,
+                          "to_y": 332,
+                          "from_value": 1,
+                          "to_value": 0
+                        },
                         "argument2": {
-
-                          "type": "add",
-                          "argument1": -1,
-                          "argument2": {
-
-                            "type": "add",
-                            "argument1": "paradise_lost:modifiers/bumps",
-                            "argument2": {
-
-                              "type": "noise",
-                              "noise": "paradise_lost:terrain/islands",
-                              "xz_scale": 0.425,
-                              "y_scale": 0.155
-
-                            }
-
-                          }
-
+                          "type": "minecraft:add",
+                          "argument1": "minecraft:end/base_3d_noise",
+                          "argument2": 10.1425
                         }
-
-                      }
-
-                    }
-
+                      },
+                      "argument2": -10
+                    },
+                    "argument2": 0.1
                   }
-
-                }
-
-              }
-
-            }
-
-          }
-
-        }
-
-      }
-
+                },
+                "argument2": -0.5
+              },
+              "type": "minecraft:blend_density"
+            },
+            "type": "minecraft:interpolated"
+          },
+          "type": "minecraft:mul"
+        },
+        "type": "minecraft:squeeze"
+      },
+      "argument2": "minecraft:overworld/caves/noodle",
+      "type": "minecraft:min"
     },
     "vein_toggle": {
       "argument": {
@@ -236,10 +204,10 @@
     }
   },
   "noise": {
-    "min_y": -48,
-    "height": 448,
+    "min_y": -16,
+    "height": 320,
     "size_horizontal": 4,
-    "size_vertical": 4,
+    "size_vertical": 1.15,
     "island_noise_override": false
   },
   "surface_rule": {
@@ -269,7 +237,7 @@
                 "type": "minecraft:condition",
                 "if_true": {
                   "type": "minecraft:noise_threshold",
-                  "noise": "paradise_lost:topsoil/forest_noise",
+                  "noise": "paradise_lost:forest_noise",
                   "min_threshold": 0,
                   "max_threshold": 0.5
                 },
@@ -377,7 +345,7 @@
               "type": "minecraft:condition",
               "if_true": {
                 "type": "minecraft:noise_threshold",
-                "noise": "paradise_lost:topsoil/dirt_layer",
+                "noise": "paradise_lost:dirt_layer",
                 "min_threshold": 0,
                 "max_threshold": 1
               },

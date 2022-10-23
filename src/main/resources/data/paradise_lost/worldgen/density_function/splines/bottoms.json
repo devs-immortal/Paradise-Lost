@@ -1,0 +1,171 @@
+{
+  "type": "spline",
+  "spline": {
+
+    "coordinate": "paradise_lost:adjusted/elevation_noise_bottom",
+
+    "points": [
+      {
+
+        "location": -1,
+        "derivative": 0,
+        "value": {
+
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "location": -48,
+              "derivative": 0,
+              "value": -2
+            },
+            {
+              "location": 200,
+              "derivative": 0,
+              "value": 0.35
+            }
+          ]
+
+        }
+
+      },
+      {
+
+        "location": -0.7,
+        "derivative": 0,
+        "value": {
+
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "location": -48,
+              "derivative": 0,
+              "value": -2
+            },
+            {
+              "location": 180,
+              "derivative": 0,
+              "value": 0.2
+            }
+          ]
+
+        }
+
+      },
+      {
+
+        "location": -0.35,
+        "derivative": 0,
+        "value": {
+
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "location": -48,
+              "derivative": 0,
+              "value": -2
+            },
+            {
+              "location": 155,
+              "derivative": 0,
+              "value": 0.1
+            }
+          ]
+
+        }
+
+      },
+      {
+
+        "location": 0,
+        "derivative": 0,
+        "value": {
+
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "location": -48,
+              "derivative": 0,
+              "value": -2
+            },
+            {
+              "location": 130,
+              "derivative": 0,
+              "value": 0.25
+            }
+          ]
+
+        }
+
+      },
+      {
+
+        "location": 0.35,
+        "derivative": 0,
+        "value": {
+
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "location": -38,
+              "derivative": 0,
+              "value": -2
+            },
+            {
+              "location": 138,
+              "derivative": 0,
+              "value": 0.2
+            }
+          ]
+
+        }
+
+      },
+      {
+
+        "location": 0.7,
+        "derivative": 0,
+        "value": {
+
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "location": -20,
+              "derivative": 0,
+              "value": -2
+            },
+            {
+              "location": 150,
+              "derivative": 0,
+              "value": 0.1
+            }
+          ]
+
+        }
+
+      },
+      {
+
+        "location": 1,
+        "derivative": 0,
+        "value": {
+
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "location": 5,
+              "derivative": 0,
+              "value": -2
+            },
+            {
+              "location": 200,
+              "derivative": 0,
+              "value": 0.35
+            }
+          ]
+
+        }
+
+      }
+    ]
+  }
+}

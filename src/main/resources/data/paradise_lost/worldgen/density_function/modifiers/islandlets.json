@@ -1,0 +1,80 @@
+{
+
+ "type": "add",
+  "argument1": {
+
+    "type": "y_clamped_gradient",
+    "from_y": -32,
+    "to_y": 128,
+    "from_value": -1,
+    "to_value": 1
+
+  },
+  "argument2": {
+
+    "type": "mul",
+    "argument1": -1,
+    "argument2": {
+
+      "type": "mul",
+      "argument1": {
+
+        "type": "add",
+        "argument1": "paradise_lost:splines/flatness",
+        "argument2": {
+
+          "type": "add",
+          "argument1": {
+
+            "type": "add",
+            "argument1": {
+
+              "type": "minecraft:noise",
+              "noise": "minecraft:jagged",
+              "xz_scale": 1500.0,
+              "y_scale": 0.115
+
+            },
+            "argument2": {
+
+              "type": "noise",
+              "noise": "paradise_lost:terrain/islands",
+              "xz_scale": 1.9,
+              "y_scale": 0.334
+
+            }
+
+          },
+          "argument2": {
+
+            "type": "mul",
+            "argument1": -1,
+            "argument2": {
+
+              "type": "clamp",
+              "min": 0,
+              "max": 999,
+              "input": {
+
+                "type": "noise",
+                "noise": "paradise_lost:terrain/void",
+                "xz_scale": 1.225,
+                "y_scale": 0.6
+
+
+              }
+
+            }
+
+          }
+
+        }
+
+      },
+      "argument2": "paradise_lost:modifiers/oceans"
+
+    }
+
+  }
+
+}

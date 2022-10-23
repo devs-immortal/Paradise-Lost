@@ -1,0 +1,33 @@
+{
+  "type": "mul",
+  "argument1": -0.85,
+  "argument2": {
+
+    "type": "clamp",
+    "min": 0,
+    "max": 999,
+    "input": {
+
+      "type": "add",
+      "argument1": {
+
+        "type": "y_clamped_gradient",
+        "from_y": 16,
+        "to_y": 512,
+        "from_value": 1.2,
+        "to_value": 0.3
+
+      },
+      "argument2": {
+
+        "type": "noise",
+        "noise": "paradise_lost:terrain/void",
+        "xz_scale": 0.815,
+        "y_scale": 0.1
+
+      }
+
+    }
+
+  }
+}
