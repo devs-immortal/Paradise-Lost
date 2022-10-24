@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top",
-  "textures": {
-    "top": "paradise_lost:block/crystal_door_top",
-    "bottom": "paradise_lost:block/crystal_door_bottom"
-  }
-}
