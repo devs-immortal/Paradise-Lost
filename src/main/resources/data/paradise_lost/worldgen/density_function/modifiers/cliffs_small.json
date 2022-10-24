@@ -1,0 +1,58 @@
+{
+
+  "type": "add",
+  "argument1": {
+
+    "type": "mul",
+    "argument1": 0.75,
+    "argument2": "paradise_lost:splines/altitude"
+
+  },
+  "argument2": {
+
+    "type": "add",
+    "argument1": {
+
+      "type": "mul",
+      "argument1": 1.1,
+      "argument2": "paradise_lost:splines/flatness"
+
+    },
+    "argument2": {
+
+      "type": "add",
+      "argument1": {
+
+        "type": "y_clamped_gradient",
+        "from_y": 512,
+        "to_y": 128,
+        "from_value": 0.5,
+        "to_value": 0
+
+      },
+      "argument2": {
+
+        "type": "mul",
+        "argument1": {
+
+          "type": "y_clamped_gradient",
+          "from_y": -48,
+          "to_y": 132,
+          "from_value": 0,
+          "to_value": 1.2
+
+        },
+        "argument2": {
+
+          "type": "half_negative",
+          "argument": "paradise_lost:adjusted/cliff_noise_micro"
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

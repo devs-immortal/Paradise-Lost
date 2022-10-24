@@ -4,7 +4,7 @@
   "argument2": {
 
     "type": "mul",
-    "argument1": -0.725,
+    "argument1": -1,
     "argument2": {
 
       "type": "clamp",
@@ -14,8 +14,8 @@
 
         "type": "noise",
         "noise": "paradise_lost:terrain/oceans",
-        "xz_scale": 0.915,
-        "y_scale": 0
+        "xz_scale": 0.985,
+        "y_scale": 0.15
 
       }
 

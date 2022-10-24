@@ -1,6 +1,6 @@
 {
   "type": "mul",
-  "argument1": -0.85,
+  "argument1": -2,
   "argument2": {
 
     "type": "clamp",
@@ -9,20 +9,12 @@
     "input": {
 
       "type": "add",
-      "argument1": {
-
-        "type": "y_clamped_gradient",
-        "from_y": 16,
-        "to_y": 512,
-        "from_value": 1.2,
-        "to_value": 0.3
-
-      },
+      "argument1": 1.5,
       "argument2": {
 
         "type": "noise",
         "noise": "paradise_lost:terrain/void",
-        "xz_scale": 0.815,
+        "xz_scale": 0.7,
         "y_scale": 0.1
 
       }
