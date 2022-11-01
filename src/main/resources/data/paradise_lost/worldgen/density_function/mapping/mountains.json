@@ -1,0 +1,24 @@
+{
+
+  "type": "flat_cache",
+  "argument": {
+
+    "type": "mul",
+    "argument1": 2,
+    "argument2": {
+
+      "type": "add",
+      "argument1": {
+
+        "type": "mul",
+        "argument1": 0.1,
+        "argument2": "paradise_lost:adjusted/elevation_noise"
+
+      },
+      "argument2": "paradise_lost:adjusted/flat_noise"
+
+    }
+
+  }
+
+}

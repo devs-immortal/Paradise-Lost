@@ -55,6 +55,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_FROST_WISTERIA_TREE = register("fancy_frost_wisteria_tree", Feature.TREE, Configs.FANCY_FROST_WISTERIA_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", Feature.TREE, Configs.FANCY_BOREAL_WISTERIA_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_SKYROOT_TREE = register("fancy_skyroot_tree", Feature.TREE, Configs.FANCY_SKYROOT_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> THICKET_SKYROOT_TREE = register("thicket_skyroot_tree", Feature.TREE, Configs.THICKET_SKYROOT_CONFIG);
     // Crystal
     public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> CRYSTAL_TREE_ISLAND = register("crystal_tree_island", ParadiseLostFeatures.CRYSTAL_TREE_ISLAND, Configs.DEFAULT_CONFIG);
     // Fallen leaves
@@ -135,6 +136,13 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
         private static final TreeFeatureConfig FANCY_SKYROOT_CONFIG = generateTree(
                 SKYROOT_LOG.getDefaultState(), SKYROOT_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new LargeOakTrunkPlacer(4, 11, 0),
+                new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
+                new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)),
+                true, false
+        );
+        private static final TreeFeatureConfig THICKET_SKYROOT_CONFIG = generateTree(
+                SKYROOT_LOG.getDefaultState(), SKYROOT_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                new LargeOakTrunkPlacer(11, 24, 0),
                 new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
                 new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)),
                 true, false
@@ -362,11 +370,11 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                 ImmutableList.of(
                         entry(ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.00005F),
                         entry(LAVENDER_WISTERIA_TREE, LAVENDER_WISTERIA_SAPLING, 0.00005F),
-                        entry(GOLDEN_OAK_TREE, GOLDEN_OAK_SAPLING, 0.00035F),
-                        entry(SKYROOT_SHRUB, SKYROOT_SAPLING, 0.15F), // convert to feature
-                        entry(SKYROOT_TREE, SKYROOT_SAPLING, 0.25F)
+                        entry(GOLDEN_OAK_TREE, GOLDEN_OAK_SAPLING, 0.0015F),
+                        entry(SKYROOT_SHRUB, SKYROOT_SAPLING, 0.1F), // convert to feature
+                        entry(SKYROOT_TREE, SKYROOT_SAPLING, 0.1F)
                 ),
-                placed(FANCY_SKYROOT_TREE, SKYROOT_SAPLING)
+                placed(THICKET_SKYROOT_TREE, SKYROOT_SAPLING)
         );
 
         private static final RandomFeatureConfig DENSE_SHIELD_TREES_CONFIG = new RandomFeatureConfig(

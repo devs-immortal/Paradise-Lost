@@ -1,0 +1,13 @@
+{
+
+  "type": "flat_cache",
+  "argument": {
+
+    "type": "noise",
+    "noise": "paradise_lost:terrain/cliffiness",
+    "xz_scale": 1,
+    "y_scale": 0
+
+  }
+
+}

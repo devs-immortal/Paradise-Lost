@@ -1,7 +1,13 @@
 {
 
   "type": "add",
-  "argument1": "paradise_lost:modifiers/cliffs_small",
-  "argument2": "paradise_lost:modifiers/cliffs_large"
+  "argument1": {
+
+    "type": "add",
+    "argument1": "paradise_lost:modifiers/cliffs_small",
+    "argument2": "paradise_lost:modifiers/cliffs_large"
+
+  },
+  "argument2": "paradise_lost:mapping/cliffmap"
 
 }

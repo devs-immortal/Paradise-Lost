@@ -39,16 +39,20 @@ import static net.id.paradiselost.world.feature.placed_features.ParadiseLostVege
  */
 public final class ParadiseLostBiomes {
     public static final RegistryKey<Biome> HIGHLANDS_PLAINS_KEY = register("highlands");
+    public static final RegistryKey<Biome> TRADEWINDS_KEY = register("tradewinds");
     public static final RegistryKey<Biome> HIGHLANDS_FOREST_KEY = register("highlands_forest");
     public static final RegistryKey<Biome> HIGHLANDS_THICKET_KEY = register("highlands_thicket");
+    public static final RegistryKey<Biome> HIGHLANDS_GRAND_GLADE_KEY = register("highlands_grand_glade");
     public static final RegistryKey<Biome> WISTERIA_WOODS_KEY = register("wisteria_woods");
     public static final RegistryKey<Biome> AUTUMNAL_TUNDRA_KEY = register("autumnal_tundra");
     public static final RegistryKey<Biome> CONTINENTAL_PLATEAU_KEY = register("continental_plateau");
     public static final RegistryKey<Biome> HIGHLANDS_SHIELD_KEY = register("highlands_shield");
-    
+
     public static final RegistryEntry<Biome> HIGHLANDS_PLAINS;
+    public static final RegistryEntry<Biome> TRADEWINDS;
     public static final RegistryEntry<Biome> HIGHLANDS_FOREST;
     public static final RegistryEntry<Biome> HIGHLANDS_THICKET;
+    public static final RegistryEntry<Biome> HIGHLANDS_GRAND_GLADE;
     public static final RegistryEntry<Biome> WISTERIA_WOODS;
     public static final RegistryEntry<Biome> AUTUMNAL_TUNDRA;
     public static final RegistryEntry<Biome> CONTINENTAL_PLATEAU;
@@ -56,8 +60,10 @@ public final class ParadiseLostBiomes {
     
     static{
         HIGHLANDS_PLAINS = register(HIGHLANDS_PLAINS_KEY, createHighlandsPlains());
+        TRADEWINDS = register(TRADEWINDS_KEY, createTradewinds());
         HIGHLANDS_FOREST = register(HIGHLANDS_FOREST_KEY, createHighlandsForest());
         HIGHLANDS_THICKET = register(HIGHLANDS_THICKET_KEY, createHighlandsThicket());
+        HIGHLANDS_GRAND_GLADE = register(HIGHLANDS_GRAND_GLADE_KEY, createHighlandsGrandGlade());
         WISTERIA_WOODS = register(WISTERIA_WOODS_KEY, createWisteriaWoods());
         AUTUMNAL_TUNDRA = register(AUTUMNAL_TUNDRA_KEY, createAutumnalTundra());
         CONTINENTAL_PLATEAU = register(CONTINENTAL_PLATEAU_KEY, createContinentalPlateau());
@@ -360,6 +366,66 @@ public final class ParadiseLostBiomes {
             // .category(Biome.Category.FOREST)
             .build();
     }
+
+    private static Biome createTradewinds(){
+        /*
+        TODO
+        {
+          "starts": [
+            "paradise_lost:well",
+            "paradise_lost:skyroot_tower",
+            "paradise_lost:orange_ruin"
+          ],
+          "player_spawn_friendly": false,
+          "depth": 0.1,
+          "scale": 0.1
+        }
+         */
+        return new Biome.Builder()
+                .effects(createBiomeEffects(0xecebff, 0xbffff2, 0xa1f4de, 0xFFFFFF, 0xa8ffe1, 0x61ffbd))
+                .generationSettings(createGenerationSettings(
+                        getParadiseLostCarvers(),
+
+                        merge(
+                                getStandardParadiseLostFeatures(),
+                                Map.of(
+                                        GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
+                                                QUICKSOIL
+                                        ),
+                                        GenerationStep.Feature.FLUID_SPRINGS, List.of(
+                                                WATER_SPRING
+                                        ),
+                                        GenerationStep.Feature.VEGETAL_DECORATION, List.of(
+                                                TALL_GRASS,
+                                                BUSH,
+                                                PATCH_BLUEBERRY,
+                                                PLATEAU_TREES,
+                                                SPARSE_TREES,
+                                                FLUTEGRASS
+                                        )
+                                )
+                        )
+                ))
+                .spawnSettings(createSpawnSettings(
+                        merge(
+                                getStandardSwetEntries(6, 2, 6),
+                                Map.of(
+                                        SpawnGroup.CREATURE, List.of(
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7),
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                                        )
+                                )
+                        ),
+
+                        Map.of(
+                                ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12F)
+                        )
+                ))
+                .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
+                // .category(Biome.Category.FOREST)
+                .build();
+    }
     
     private static Biome createHighlandsThicket(){
         /*
@@ -431,6 +497,73 @@ public final class ParadiseLostBiomes {
             .precipitation(Biome.Precipitation.RAIN).temperature(0.4F).downfall(2)
             // .category(Biome.Category.FOREST)
             .build();
+    }
+
+    private static Biome createHighlandsGrandGlade(){
+        /*
+        TODO
+        {
+          "starts": [
+            "paradise_lost:well",
+            "paradise_lost:skyroot_tower",
+            "paradise_lost:orange_ruin"
+          ],
+          "player_spawn_friendly": false,
+          "depth": 0.125,
+          "scale": 0.05
+        }
+         */
+        return new Biome.Builder()
+                .effects(createBiomeEffects(0xC0C0FF, 0xC8E67A, 0x93cd67, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.NONE))
+                .generationSettings(createGenerationSettings(
+                        getParadiseLostCarvers(),
+
+                        merge(
+                                getStandardParadiseLostFeatures(),
+                                Map.of(
+                                        GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
+                                                THICKET_BOULDER
+                                        ),
+                                        GenerationStep.Feature.STRONGHOLDS, List.of(
+                                                THICKET_LIVERWORT
+                                        ),
+                                        GenerationStep.Feature.FLUID_SPRINGS, List.of(
+                                                WATER_SPRING
+                                        ),
+                                        GenerationStep.Feature.VEGETAL_DECORATION, List.of(
+                                                THICKET_FALLEN_LOG,
+                                                GRASS,
+                                                FALLEN_LEAVES,
+                                                TALL_GRASS,
+                                                DENSE_BUSH,
+                                                SPARSE_TREES
+                                        )
+                                )
+                        )
+                ))
+                .spawnSettings(createSpawnSettings(
+                        merge(
+                                getStandardSwetEntries(6, 2, 6),
+                                Map.of(
+                                        SpawnGroup.MONSTER, List.of(
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 2)
+                                        ),
+                                        SpawnGroup.CREATURE, List.of(
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5),
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                                        )
+                                )
+                        ),
+
+                        Map.of(
+                                ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12),
+                                ParadiseLostEntityTypes.AECHOR_PLANT, SpawnCost.of(0.75, 0.07)
+                        )
+                ))
+                .precipitation(Biome.Precipitation.RAIN).temperature(0.4F).downfall(2)
+                // .category(Biome.Category.FOREST)
+                .build();
     }
     
     private static Biome createWisteriaWoods(){
