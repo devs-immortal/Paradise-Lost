@@ -94,7 +94,8 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
     }
 
     public static boolean canSpawn(EntityType<? extends AechorPlantEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)
+        return world.getBlockState(pos.down()).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)
+                && world.getBlockState(pos).isAir()
                 && world.getBaseLightLevel(pos, 0) > 8;
     }
 

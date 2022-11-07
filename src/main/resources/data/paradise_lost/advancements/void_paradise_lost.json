@@ -18,11 +18,15 @@
     "invoid": {
       "trigger": "minecraft:location",
       "conditions": {
-        "dimension": "paradise_lost:paradise_lost",
-        "position": {
-          "y": {
-            "min": -100,
-            "max": -7
+        "player": {
+          "location": {
+            "position": {
+              "y": {
+                "min": -100,
+                "max": -7
+              }
+            },
+            "dimension": "paradise_lost:paradise_lost"
           }
         }
       }
