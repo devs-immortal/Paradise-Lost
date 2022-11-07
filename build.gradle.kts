@@ -17,7 +17,6 @@ val reiVersion: String by properties
 val moreTagsVersion: String by properties
 val recipeConfidenceVersion: String by properties
 val satinVersion: String by properties
-val noChatReportsVersion: String by properties
 
 plugins {
     id("fabric-loom") version "0.12-SNAPSHOT"
@@ -176,11 +175,6 @@ dependencies {
 //            version = reiVersion,
 //    )
 
-    include(
-            group = "maven.modrinth",
-            name = "no-chat-reports",
-            version = noChatReportsVersion,
-    )
 }
 
 tasks {
