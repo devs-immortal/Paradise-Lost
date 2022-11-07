@@ -10,11 +10,23 @@
           "children": [
             {
               "type": "minecraft:item",
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 4.0,
+                    "min": 1.0
+                  },
+                  "function": "minecraft:set_count"
+                }
+              ],
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
                   "block": "paradise_lost:flax",
                   "properties": {
+                    "half": "lower",
                     "age": "7"
                   }
                 }
@@ -27,6 +39,16 @@
             }
           ]
         }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "paradise_lost:flax",
+          "properties": {
+            "half": "lower",
+            "age": "7"
+          }
+        }
       ]
     },
     {
@@ -36,6 +58,15 @@
         {
           "type": "minecraft:item",
           "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
+            },
             {
               "function": "minecraft:apply_bonus",
               "enchantment": "minecraft:fortune",
@@ -54,6 +85,7 @@
           "condition": "minecraft:block_state_property",
           "block": "paradise_lost:flax",
           "properties": {
+            "half": "lower",
             "age": "7"
           }
         }

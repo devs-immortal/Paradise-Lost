@@ -3,8 +3,6 @@ package net.id.paradiselost.blocks.natural.crop;
 import net.id.incubus_core.block.TallCropBlock;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
-import net.id.incubus_core.block.TallCropBlock;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
