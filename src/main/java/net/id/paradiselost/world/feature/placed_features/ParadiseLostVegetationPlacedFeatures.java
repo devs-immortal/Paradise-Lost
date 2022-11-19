@@ -27,6 +27,7 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
     public static final RegistryEntry<PlacedFeature> FLUTEGRASS_BONEMEAL = register("flutegrass_bonemeal", ParadiseLostVegetationConfiguredFeatures.FLUTEGRASS_BONEMEAL, PlacedFeatures.isAir());
 
     public static final RegistryEntry<PlacedFeature> PATCH_BLUEBERRY = register("patch_blueberry", ParadiseLostVegetationConfiguredFeatures.PATCH_BLUEBERRY, NOT_IN_SURFACE_WATER_MODIFIER, CountPlacementModifier.of(10), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), BiomePlacementModifier.of());
+    public static final RegistryEntry<PlacedFeature> PATCH_BROWN_SPORECAP = register("patch_brown_sporecap", ParadiseLostVegetationConfiguredFeatures.PATCH_BROWN_SPORECAP, CountMultilayerPlacementModifier.of(3), CountPlacementModifier.of(UniformIntProvider.create(0, 2)), ON_SOLID_GROUND);
     // Plato
     public static final RegistryEntry<PlacedFeature> PLATEAU_FOLIAGE = register("plateau_foliage", ParadiseLostVegetationConfiguredFeatures.PLATEAU_FOLIAGE, CountMultilayerPlacementModifier.of(3), CountPlacementModifier.of(UniformIntProvider.create(0, 4)));
     public static final RegistryEntry<PlacedFeature> PLATEAU_FLOWERING_GRASS = register("plateau_flowering_grass", ParadiseLostVegetationConfiguredFeatures.PLATEAU_FLOWERING_GRASS, PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 5)), ON_SOLID_GROUND);
