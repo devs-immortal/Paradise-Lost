@@ -453,9 +453,6 @@ public final class ParadiseLostBiomes {
                             THICKET_BOULDER,
                             GOLDEN_BOULDER
                         ),
-                        GenerationStep.Feature.STRONGHOLDS, List.of(
-                            THICKET_LIVERWORT
-                        ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
                             WATER_SPRING
                         ),
@@ -523,9 +520,6 @@ public final class ParadiseLostBiomes {
                                 Map.of(
                                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
                                                 THICKET_BOULDER
-                                        ),
-                                        GenerationStep.Feature.STRONGHOLDS, List.of(
-                                                THICKET_LIVERWORT
                                         ),
                                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
                                                 WATER_SPRING
@@ -789,9 +783,6 @@ public final class ParadiseLostBiomes {
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
                             QUICKSOIL,
                             GENERIC_BOULDER
-                        ),
-                        GenerationStep.Feature.STRONGHOLDS, List.of(
-                            SHIELD_STONE
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
                             WATER_SPRING

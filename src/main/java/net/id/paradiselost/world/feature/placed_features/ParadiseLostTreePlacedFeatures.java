@@ -6,11 +6,13 @@ import net.id.paradiselost.world.feature.placement_modifiers.CrystalTreeIslandPl
 import net.minecraft.block.Block;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.CountMultilayerPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.CountPlacementModifier;
+import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 
 import java.util.List;
@@ -57,13 +59,13 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final RegistryEntry<PlacedFeature> FALLEN_ROSE_LEAVES = register("fallen_rose_leaves", ParadiseLostTreeConfiguredFeatures.FALLEN_ROSE_LEAVES, PlacedFeatures.BOTTOM_TO_TOP_RANGE, ChancePlacementModifier.of(2), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 3)));
     public static final RegistryEntry<PlacedFeature> FALLEN_LAVENDER_LEAVES = register("fallen_lavender_leaves", ParadiseLostTreeConfiguredFeatures.FALLEN_LAVENDER_LEAVES, PlacedFeatures.BOTTOM_TO_TOP_RANGE, ChancePlacementModifier.of(2), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 3)));
     // Logs & Stumps
-    public static final RegistryEntry<PlacedFeature> THICKET_FALLEN_LOG = register("thicket_fallen_log", ParadiseLostTreeConfiguredFeatures.THICKET_FALLEN_LOG, ChancePlacementModifier.of(3), CountMultilayerPlacementModifier.of(2), CountPlacementModifier.of(UniformIntProvider.create(0, 2)));
+    public static final RegistryEntry<PlacedFeature> THICKET_FALLEN_LOG = register("thicket_fallen_log", ParadiseLostTreeConfiguredFeatures.THICKET_FALLEN_LOG, ChancePlacementModifier.of(3), CountMultilayerPlacementModifier.of(2), CountPlacementModifier.of(UniformIntProvider.create(0, 2)), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE));
 
-    public static final RegistryEntry<PlacedFeature> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", ParadiseLostTreeConfiguredFeatures.MOTTLED_FALLEN_LOG, ChancePlacementModifier.of(3), CountMultilayerPlacementModifier.of(1));
-    public static final RegistryEntry<PlacedFeature> MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", ParadiseLostTreeConfiguredFeatures.MOTTLED_HOLLOW_FALLEN_LOG, ChancePlacementModifier.of(3), CountMultilayerPlacementModifier.of(1));
+    public static final RegistryEntry<PlacedFeature> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", ParadiseLostTreeConfiguredFeatures.MOTTLED_FALLEN_LOG, ChancePlacementModifier.of(3), CountMultilayerPlacementModifier.of(1), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE));
+    public static final RegistryEntry<PlacedFeature> MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", ParadiseLostTreeConfiguredFeatures.MOTTLED_HOLLOW_FALLEN_LOG, ChancePlacementModifier.of(3), CountMultilayerPlacementModifier.of(1), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE));
 
-    public static final RegistryEntry<PlacedFeature> SHIELD_STUMPS = register("shield_stumps", ParadiseLostTreeConfiguredFeatures.SHIELD_STUMPS, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1)));
-    public static final RegistryEntry<PlacedFeature> SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", ParadiseLostTreeConfiguredFeatures.SHIELD_HOLLOW_STUMPS, CountMultilayerPlacementModifier.of(1));
+    public static final RegistryEntry<PlacedFeature> SHIELD_STUMPS = register("shield_stumps", ParadiseLostTreeConfiguredFeatures.SHIELD_STUMPS, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1)), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE));
+    public static final RegistryEntry<PlacedFeature> SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", ParadiseLostTreeConfiguredFeatures.SHIELD_HOLLOW_STUMPS, CountMultilayerPlacementModifier.of(1), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE));
 
     public static final RegistryEntry<PlacedFeature> SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", ParadiseLostTreeConfiguredFeatures.SHIELD_FALLEN_LEAVES, PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(2), ChancePlacementModifier.of(4), CountPlacementModifier.of(UniformIntProvider.create(0, 3)), BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(PARADISE_LOST_GROUND)));
     // Crystal Tree Island

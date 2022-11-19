@@ -45,7 +45,6 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> SHIELD_FLAX = register("shield_flax", Feature.RANDOM_PATCH, Configs.SHIELD_FLAX_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> SHIELD_NETTLES = register("shield_nettles", ParadiseLostFeatures.HONEY_NETTLE_FEATURE, new DefaultFeatureConfig());
     // Thicket
-    public static final RegistryEntry<ConfiguredFeature<GroundcoverFeatureConfig, ?>> THICKET_LIVERWORT = register("thicket_liverwort", ParadiseLostFeatures.GROUNDCOVER_FEATURE, new GroundcoverFeatureConfig(BlockStateProvider.of(LIVERWORT), UniformIntProvider.create(0, 2), UniformIntProvider.create(0, 1)));
     public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> THICKET_LIVERWORT_CARPET = register("thicket_liverwort_carpet", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(LIVERWORT_CARPET), UniformIntProvider.create(1, 4), ConstantIntProvider.create(5), UniformIntProvider.create(5, 8), 1.3));
     public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> THICKET_SHAMROCK = register("thicket_shamrock", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(SHAMROCK), UniformIntProvider.create(2, 6), ConstantIntProvider.create(5), UniformIntProvider.create(4, 7), 1.3));
     // Tundra

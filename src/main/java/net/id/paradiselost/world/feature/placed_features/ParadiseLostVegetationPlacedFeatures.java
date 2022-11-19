@@ -38,7 +38,6 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
     // Tundra
     public static final RegistryEntry<PlacedFeature> TUNDRA_FOLIAGE = register("tundra_foliage", ParadiseLostVegetationConfiguredFeatures.TUNDRA_FOLIAGE, CountMultilayerPlacementModifier.of(3), CountPlacementModifier.of(UniformIntProvider.create(0, 3)));
     // Forest
-    public static final RegistryEntry<PlacedFeature> THICKET_LIVERWORT = register("thicket_liverwort", ParadiseLostVegetationConfiguredFeatures.THICKET_LIVERWORT, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 2)), ON_SOLID_GROUND);
     public static final RegistryEntry<PlacedFeature> THICKET_LIVERWORT_CARPET = register("thicket_liverwort_carpet", ParadiseLostVegetationConfiguredFeatures.THICKET_LIVERWORT_CARPET, PlacedFeatures.BOTTOM_TO_TOP_RANGE, ChancePlacementModifier.of(6), CountMultilayerPlacementModifier.of(1), ON_SOLID_GROUND);
     public static final RegistryEntry<PlacedFeature> THICKET_SHAMROCK = register("thicket_shamrock", ParadiseLostVegetationConfiguredFeatures.THICKET_SHAMROCK, PlacedFeatures.BOTTOM_TO_TOP_RANGE, ChancePlacementModifier.of(8), CountMultilayerPlacementModifier.of(1), ON_SOLID_GROUND);
 
