@@ -35,8 +35,13 @@ public class SwetrootCropBlock extends CropBlock {
     
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.getBlockState(pos.up().up()).isOf(Blocks.WATER)) {
-            super.randomTick(state, world, pos, random);
+        if (world.getBlockState(pos.up().up()).isOf(Blocks.WATER) && world.getBaseLightLevel(pos, 0) >= 9) {
+            int i = this.getAge(state);
+            if (i < this.getMaxAge()) {
+                if (random.nextInt(4) == 0) {
+                    world.setBlockState(pos, this.withAge(i + 1), 2);
+                }
+            }
         }
     }
     
