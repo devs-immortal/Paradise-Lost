@@ -243,7 +243,9 @@ public final class ParadiseLostBiomes {
                 CRYSTAL_TREE_ISLAND
             ),
             GenerationStep.Feature.VEGETAL_DECORATION, List.of(
-                PATCH_BROWN_SPORECAP
+                PATCH_BROWN_SPORECAP,
+                PATCH_PINK_SPORECAP,
+                NATURAL_SWEDROOT
             )
         );
     }
