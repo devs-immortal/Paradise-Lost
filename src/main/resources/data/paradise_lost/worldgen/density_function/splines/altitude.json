@@ -122,29 +122,6 @@
       },
       {
 
-        "location": 0,
-        "derivative": 0,
-        "value": {
-
-          "coordinate": "minecraft:y",
-          "points": [
-            {
-              "location": 100,
-              "derivative": 0,
-              "value": 1.4
-            },
-            {
-              "location": 170,
-              "derivative": 0,
-              "value": -2
-            }
-          ]
-
-        }
-
-      },
-      {
-
         "location": 0.175,
         "derivative": 0,
         "value": {
@@ -206,52 +183,6 @@
               "location": 278,
               "derivative": 0,
               "value": -1.35
-            }
-          ]
-
-        }
-
-      },
-      {
-
-        "location": 0.825,
-        "derivative": 0,
-        "value": {
-
-          "coordinate": "minecraft:y",
-          "points": [
-            {
-              "location": 180,
-              "derivative": 0,
-              "value": 1.4
-            },
-            {
-              "location": 352,
-              "derivative": 0,
-              "value": -1.65
-            }
-          ]
-
-        }
-
-      },
-      {
-
-        "location": 1,
-        "derivative": 0,
-        "value": {
-
-          "coordinate": "minecraft:y",
-          "points": [
-            {
-              "location": 228,
-              "derivative": 0,
-              "value": 1.65
-            },
-            {
-              "location": 448,
-              "derivative": 0,
-              "value": -2
             }
           ]
 

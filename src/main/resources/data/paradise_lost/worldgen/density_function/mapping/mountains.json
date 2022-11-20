@@ -4,7 +4,7 @@
   "argument": {
 
     "type": "mul",
-    "argument1": 2,
+    "argument1": 0.5,
     "argument2": {
 
       "type": "add",

@@ -29,7 +29,7 @@
         "argument": {
 
           "type": "mul",
-          "argument1": 0.5,
+          "argument1": 0.2,
           "argument2": {
 
             "type": "add",
@@ -37,7 +37,7 @@
 
               "type": "y_clamped_gradient",
               "from_y": -48,
-              "to_y": 100,
+              "to_y": 75,
               "from_value": -1,
               "to_value": 0
 
@@ -87,7 +87,7 @@
                                   "type": "noise",
                                   "noise": "paradise_lost:terrain/islands",
                                   "xz_scale": 0.715,
-                                  "y_scale": 0.155
+                                  "y_scale": 0.01
 
                                 }
 
@@ -249,10 +249,10 @@
     }
   },
   "noise": {
-    "min_y": -48,
-    "height": 448,
+    "min_y": -32,
+    "height": 256,
     "size_horizontal": 4,
-    "size_vertical": 4,
+    "size_vertical": 1,
     "island_noise_override": false
   },
   "surface_rule": {
