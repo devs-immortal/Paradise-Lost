@@ -12,7 +12,7 @@
       "argument2": {
 
         "type": "mul",
-        "argument1": 2,
+        "argument1": 1,
         "argument2": {
 
           "type": "add",

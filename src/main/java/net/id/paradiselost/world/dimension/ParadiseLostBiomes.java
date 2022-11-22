@@ -468,6 +468,7 @@ public final class ParadiseLostBiomes {
                                                 THICKET_FALLEN_LOG,
                                                 GRASS,
                                                 FALLEN_LEAVES,
+                                                PATCH_BROWN_SPORECAP_COMMON,
                                                 TALL_GRASS,
                                                 DENSE_BUSH,
                                                 SPARSE_TREES

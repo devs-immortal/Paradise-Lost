@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class ParadiseLostMushroomPlantBlock extends PlantBlock {
     protected final TagKey<Block> plantableOn;
-    
+
     public ParadiseLostMushroomPlantBlock(Settings settings, TagKey<Block> plantableOn) {
         super(settings);
         this.plantableOn = plantableOn;
@@ -69,7 +69,7 @@ public class ParadiseLostMushroomPlantBlock extends PlantBlock {
         if (blockState.isIn(plantableOn)) {
             return true;
         } else {
-            return world.getBaseLightLevel(pos, 0) < 11 && canPlantOnTop(blockState, world, blockPos);
+            return world.getBaseLightLevel(pos, 0) < 13 && canPlantOnTop(blockState, world, blockPos);
         }
     }
 }

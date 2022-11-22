@@ -6,6 +6,7 @@ import net.id.paradiselost.world.feature.configs.GroundcoverFeatureConfig;
 import net.id.paradiselost.world.feature.configs.ProjectedOrganicCoverConfig;
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CropBlock;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.Direction;
@@ -80,9 +81,9 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
         ));
 
         private static final RandomPatchFeatureConfig BLUEBERRY_PATCH_CONFIG = blockPatch(42, 5, 5, BLUEBERRY_BUSH.getDefaultState().with(Properties.AGE_3, 3));
-        private static final RandomPatchFeatureConfig BROWN_SPORECAP_PATCH_CONFIG = blockPatch(10, 10, 4, BROWN_SPORECAP.getDefaultState());
+        private static final RandomPatchFeatureConfig BROWN_SPORECAP_PATCH_CONFIG = blockPatch(8, 6, 4, BROWN_SPORECAP.getDefaultState());
         private static final BlockColumnFeatureConfig PINK_SPORECAP_PATCH_CONFIG = new BlockColumnFeatureConfig(List.of(BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(PINK_SPORECAP.getDefaultState()))), Direction.DOWN, BlockPredicate.IS_AIR, true);
-        private static final BlockColumnFeatureConfig SWEDROOT_CONFIG = new BlockColumnFeatureConfig(List.of(BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(DIRT.getDefaultState())), BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(SWEDROOT.getDefaultState()))), Direction.DOWN, BlockPredicate.IS_AIR, true);
+        private static final BlockColumnFeatureConfig SWEDROOT_CONFIG = new BlockColumnFeatureConfig(List.of(BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(DIRT.getDefaultState())), BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(SWEDROOT.getDefaultState().with(CropBlock.AGE, 7)))), Direction.DOWN, BlockPredicate.IS_AIR, true);
         // Plato
         private static final RandomPatchFeatureConfig PLATEAU_FOLIAGE_CONFIG = blockPatch(96, 7, 3, new WeightedBlockStateProvider(
                 DataPool.<BlockState>builder()

@@ -1,7 +1,7 @@
 {
 
   "type": "mul",
-  "argument1": 0.5,
+  "argument1": 0.1,
   "argument2": "paradise_lost:adjusted/elevation_noise"
 
 }
