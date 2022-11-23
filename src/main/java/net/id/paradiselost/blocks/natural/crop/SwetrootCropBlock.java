@@ -25,7 +25,7 @@ public class SwetrootCropBlock extends CropBlock {
     };
     
     public SwetrootCropBlock(Settings settings) {
-        super(settings);
+        super(settings.offsetType(OffsetType.XZ));
     }
     
     @Override
@@ -59,4 +59,5 @@ public class SwetrootCropBlock extends CropBlock {
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return world.getBlockState(pos.up()).isIn(ParadiseLostBlockTags.SWEDROOT_PLANTABLE);
     }
+
 }
