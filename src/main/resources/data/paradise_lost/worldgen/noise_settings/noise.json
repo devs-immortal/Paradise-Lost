@@ -45,35 +45,35 @@
             "argument2": {
 
               "type": "add",
-              "argument1": "paradise_lost:splines/bottoms",
+              "argument1": -1,
               "argument2": {
 
                 "type": "add",
-                "argument1": "paradise_lost:modifiers/ridges",
+                "argument1": "paradise_lost:splines/bottoms",
                 "argument2": {
 
                   "type": "add",
-                  "argument1": "paradise_lost:splines/altitude",
+                  "argument1": "paradise_lost:modifiers/ridges",
                   "argument2": {
 
                     "type": "add",
-                    "argument1": "paradise_lost:modifiers/islandlets",
+                    "argument1": "paradise_lost:splines/altitude",
                     "argument2": {
 
                       "type": "add",
-                      "argument1": "paradise_lost:splines/flatness",
+                      "argument1": "paradise_lost:modifiers/islandlets",
                       "argument2": {
 
                         "type": "add",
-                        "argument1": "paradise_lost:modifiers/cutoffs",
+                        "argument1": "paradise_lost:splines/flatness",
                         "argument2": {
 
                           "type": "add",
-                          "argument1": "paradise_lost:modifiers/oceans",
+                          "argument1": "paradise_lost:modifiers/cutoffs",
                           "argument2": {
 
                             "type": "add",
-                            "argument1": -0.5,
+                            "argument1": "paradise_lost:modifiers/oceans",
                             "argument2": {
 
                               "type": "add",
@@ -100,7 +100,7 @@
                   }
 
                 }
-
+                
               }
 
             }
@@ -186,7 +186,7 @@
     "temperature": {
       "xz_scale": 0.25,
       "y_scale": 0.0,
-      "noise": "minecraft:temperature",
+      "noise": "paradise_lost:generator/temperature",
       "shift_x": "minecraft:shift_x",
       "shift_y": 0.0,
       "shift_z": "minecraft:shift_z",
@@ -195,7 +195,7 @@
     "vegetation": {
       "xz_scale": 0.25,
       "y_scale": 0.0,
-      "noise": "minecraft:vegetation",
+      "noise": "paradise_lost:generator/vegetation",
       "shift_x": "minecraft:shift_x",
       "shift_y": 0.0,
       "shift_z": "minecraft:shift_z",
@@ -243,9 +243,9 @@
   },
   "noise": {
     "min_y": -32,
-    "height": 256,
+    "height": 320,
     "size_horizontal": 4,
-    "size_vertical": 1,
+    "size_vertical": 4,
     "island_noise_override": false
   },
   "surface_rule": {
