@@ -50,7 +50,6 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
 
     public static final RegistryEntry<ConfiguredFeature<DeltaFeatureConfig, ?>> SHIELD_PONDS = register("shield_pond", ParadiseLostFeatures.DELTA_FEATURE, new DeltaFeatureConfig(Blocks.WATER.getDefaultState(), COBBLED_HOLYSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM).with(Properties.WATERLOGGED, true), UniformIntProvider.create(2, 7), UniformIntProvider.create(1, 2)));
 
-    public static final RegistryEntry<ConfiguredFeature<GroundcoverFeatureConfig, ?>> SHIELD_STONE = register("shield_stone", ParadiseLostFeatures.GROUNDCOVER_FEATURE, new GroundcoverFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(HOLYSTONE.getDefaultState(), 7).add(COBBLED_HOLYSTONE.getDefaultState(), 5).add(MOSSY_HOLYSTONE.getDefaultState(), 2).build()), UniformIntProvider.create(1, 4), UniformIntProvider.create(0, 0)));
     public static final RegistryEntry<ConfiguredFeature<GroundcoverFeatureConfig, ?>> SHIELD_PODZOL = register("shield_podzol", ParadiseLostFeatures.GROUNDCOVER_FEATURE, new GroundcoverFeatureConfig(BlockStateProvider.of(FROZEN_GRASS), UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 0)));
     // Tundra
     public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> TUNDRA_SPIRES = register("tundra_spires", ParadiseLostFeatures.ICESTONE_SPIRE_FEATURE, FeatureConfig.DEFAULT);

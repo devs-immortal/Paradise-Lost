@@ -241,24 +241,16 @@ public final class ParadiseLostBiomes {
             // cursed generation step, but it stops trees from generating inside of these
             GenerationStep.Feature.TOP_LAYER_MODIFICATION, List.of(
                 CRYSTAL_TREE_ISLAND
+            ),
+            GenerationStep.Feature.VEGETAL_DECORATION, List.of(
+                PATCH_BROWN_SPORECAP,
+                PATCH_PINK_SPORECAP,
+                NATURAL_SWEDROOT
             )
         );
     }
     
     private static Biome createHighlandsPlains(){
-        /*
-        TODO
-        {
-          "starts": [
-            "paradise_lost:well",
-            "paradise_lost:skyroot_tower",
-            "paradise_lost:orange_ruin"
-          ],
-          "player_spawn_friendly": false,
-          "depth": 0.0,
-          "scale": 0.1
-        }
-         */
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xDCFF81, 0xB1FFCB, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -306,19 +298,6 @@ public final class ParadiseLostBiomes {
     }
     
     private static Biome createHighlandsForest(){
-        /*
-        TODO
-        {
-          "starts": [
-            "paradise_lost:well",
-            "paradise_lost:skyroot_tower",
-            "paradise_lost:orange_ruin"
-          ],
-          "player_spawn_friendly": false,
-          "depth": 0.1,
-          "scale": 0.1
-        }
-         */
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xD6FF6B, 0x88EBA1, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -368,19 +347,6 @@ public final class ParadiseLostBiomes {
     }
 
     private static Biome createTradewinds(){
-        /*
-        TODO
-        {
-          "starts": [
-            "paradise_lost:well",
-            "paradise_lost:skyroot_tower",
-            "paradise_lost:orange_ruin"
-          ],
-          "player_spawn_friendly": false,
-          "depth": 0.1,
-          "scale": 0.1
-        }
-         */
         return new Biome.Builder()
                 .effects(createBiomeEffects(0xecebff, 0xbffff2, 0xa1f4de, 0xFFFFFF, 0xa8ffe1, 0x61ffbd))
                 .generationSettings(createGenerationSettings(
@@ -428,19 +394,6 @@ public final class ParadiseLostBiomes {
     }
     
     private static Biome createHighlandsThicket(){
-        /*
-        TODO
-        {
-          "starts": [
-            "paradise_lost:well",
-            "paradise_lost:skyroot_tower",
-            "paradise_lost:orange_ruin"
-          ],
-          "player_spawn_friendly": false,
-          "depth": 0.125,
-          "scale": 0.05
-        }
-         */
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xC8E67A, 0x85DDAF, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.DARK_FOREST))
             .generationSettings(createGenerationSettings(
@@ -452,9 +405,6 @@ public final class ParadiseLostBiomes {
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
                             THICKET_BOULDER,
                             GOLDEN_BOULDER
-                        ),
-                        GenerationStep.Feature.STRONGHOLDS, List.of(
-                            THICKET_LIVERWORT
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
                             WATER_SPRING
@@ -500,19 +450,6 @@ public final class ParadiseLostBiomes {
     }
 
     private static Biome createHighlandsGrandGlade(){
-        /*
-        TODO
-        {
-          "starts": [
-            "paradise_lost:well",
-            "paradise_lost:skyroot_tower",
-            "paradise_lost:orange_ruin"
-          ],
-          "player_spawn_friendly": false,
-          "depth": 0.125,
-          "scale": 0.05
-        }
-         */
         return new Biome.Builder()
                 .effects(createBiomeEffects(0xC0C0FF, 0xC8E67A, 0x93cd67, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.NONE))
                 .generationSettings(createGenerationSettings(
@@ -524,9 +461,6 @@ public final class ParadiseLostBiomes {
                                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
                                                 THICKET_BOULDER
                                         ),
-                                        GenerationStep.Feature.STRONGHOLDS, List.of(
-                                                THICKET_LIVERWORT
-                                        ),
                                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
                                                 WATER_SPRING
                                         ),
@@ -534,6 +468,7 @@ public final class ParadiseLostBiomes {
                                                 THICKET_FALLEN_LOG,
                                                 GRASS,
                                                 FALLEN_LEAVES,
+                                                PATCH_BROWN_SPORECAP_COMMON,
                                                 TALL_GRASS,
                                                 DENSE_BUSH,
                                                 SPARSE_TREES
@@ -567,20 +502,6 @@ public final class ParadiseLostBiomes {
     }
     
     private static Biome createWisteriaWoods(){
-        /*
-        TODO
-        {
-          "starts": [
-            "paradise_lost:well",
-            "paradise_lost:skyroot_tower",
-            "paradise_lost:orange_ruin"
-          ],
-          "parent": "paradise_lost:highlands_forest",
-          "player_spawn_friendly": false,
-          "depth": 0.155,
-          "scale": 0.15
-        }
-         */
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xF3FF81, 0x88EF9D, 0xFFFFFF, 0xA9F7FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -632,19 +553,6 @@ public final class ParadiseLostBiomes {
     }
     
     private static Biome createAutumnalTundra(){
-        /*
-        TODO
-        {
-          "starts": [
-            "paradise_lost:well",
-            "paradise_lost:skyroot_tower",
-            "paradise_lost:orange_ruin"
-          ],
-          "player_spawn_friendly": false,
-          "depth": 0.1,
-          "scale": 0.025
-        }
-         */
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xFFB485, 0xFFFFFF, 0xFFFFFF, 0x8CE6FF, 0x8CE6FF))
             .generationSettings(createGenerationSettings(
@@ -698,19 +606,6 @@ public final class ParadiseLostBiomes {
     }
     
     private static Biome createContinentalPlateau(){
-        /*
-        TODO
-        {
-          "starts": [
-            "paradise_lost:well",
-            "paradise_lost:skyroot_tower",
-            "paradise_lost:orange_ruin"
-          ],
-          "player_spawn_friendly": false,
-          "depth": 0.0,
-          "scale": 0.05
-        }
-         */
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xDCFFCC, 0x91E2C8, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -762,19 +657,6 @@ public final class ParadiseLostBiomes {
     }
     
     private static Biome createHighlandsShield(){
-        /*
-        TODO
-        {
-          "starts": [
-            "paradise_lost:well",
-            "paradise_lost:skyroot_tower",
-            "paradise_lost:orange_ruin"
-          ],
-          "player_spawn_friendly": false,
-          "depth": 0.0,
-          "scale": 0.035
-        }
-         */
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xFFF781, 0xDCFFB0, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -789,9 +671,6 @@ public final class ParadiseLostBiomes {
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
                             QUICKSOIL,
                             GENERIC_BOULDER
-                        ),
-                        GenerationStep.Feature.STRONGHOLDS, List.of(
-                            SHIELD_STONE
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
                             WATER_SPRING

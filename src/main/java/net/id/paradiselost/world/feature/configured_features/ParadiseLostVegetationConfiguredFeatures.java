@@ -6,11 +6,15 @@ import net.id.paradiselost.world.feature.configs.GroundcoverFeatureConfig;
 import net.id.paradiselost.world.feature.configs.ProjectedOrganicCoverConfig;
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CropBlock;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.util.math.intprovider.WeightedListIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.*;
@@ -36,6 +40,9 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> FLUTEGRASS_BONEMEAL = register("flutegrass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(ParadiseLostBlocks.FLUTEGRASS));
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLOWERS = register("flowers", Feature.FLOWER, Configs.FLOWER_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH, Configs.BLUEBERRY_PATCH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BROWN_SPORECAP = register("patch_brown_sporecap", Feature.RANDOM_PATCH, Configs.BROWN_SPORECAP_PATCH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<BlockColumnFeatureConfig, ?>> PATCH_PINK_SPORECAP = register("patch_pink_sporecap", Feature.BLOCK_COLUMN, Configs.PINK_SPORECAP_PATCH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<BlockColumnFeatureConfig, ?>> NATURAL_SWEDROOT = register("natural_swedroot", Feature.BLOCK_COLUMN, Configs.SWEDROOT_CONFIG);
     // Plato
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PLATEAU_FOLIAGE = register("plateau_foliage", Feature.RANDOM_PATCH, Configs.PLATEAU_FOLIAGE_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> PLATEAU_FLOWERING_GRASS = register("plateau_flowering_grass", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(GRASS_FLOWERING), UniformIntProvider.create(3, 10), ConstantIntProvider.create(5), UniformIntProvider.create(3, 6), 1.5));
@@ -45,7 +52,6 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> SHIELD_FLAX = register("shield_flax", Feature.RANDOM_PATCH, Configs.SHIELD_FLAX_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> SHIELD_NETTLES = register("shield_nettles", ParadiseLostFeatures.HONEY_NETTLE_FEATURE, new DefaultFeatureConfig());
     // Thicket
-    public static final RegistryEntry<ConfiguredFeature<GroundcoverFeatureConfig, ?>> THICKET_LIVERWORT = register("thicket_liverwort", ParadiseLostFeatures.GROUNDCOVER_FEATURE, new GroundcoverFeatureConfig(BlockStateProvider.of(LIVERWORT), UniformIntProvider.create(0, 2), UniformIntProvider.create(0, 1)));
     public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> THICKET_LIVERWORT_CARPET = register("thicket_liverwort_carpet", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(LIVERWORT_CARPET), UniformIntProvider.create(1, 4), ConstantIntProvider.create(5), UniformIntProvider.create(5, 8), 1.3));
     public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> THICKET_SHAMROCK = register("thicket_shamrock", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(SHAMROCK), UniformIntProvider.create(2, 6), ConstantIntProvider.create(5), UniformIntProvider.create(4, 7), 1.3));
     // Tundra
@@ -75,6 +81,9 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
         ));
 
         private static final RandomPatchFeatureConfig BLUEBERRY_PATCH_CONFIG = blockPatch(42, 5, 5, BLUEBERRY_BUSH.getDefaultState().with(Properties.AGE_3, 3));
+        private static final RandomPatchFeatureConfig BROWN_SPORECAP_PATCH_CONFIG = blockPatch(8, 6, 4, BROWN_SPORECAP.getDefaultState());
+        private static final BlockColumnFeatureConfig PINK_SPORECAP_PATCH_CONFIG = new BlockColumnFeatureConfig(List.of(BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(PINK_SPORECAP.getDefaultState()))), Direction.DOWN, BlockPredicate.IS_AIR, true);
+        private static final BlockColumnFeatureConfig SWEDROOT_CONFIG = new BlockColumnFeatureConfig(List.of(BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(DIRT.getDefaultState())), BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(SWEDROOT.getDefaultState().with(CropBlock.AGE, 7)))), Direction.DOWN, BlockPredicate.IS_AIR, true);
         // Plato
         private static final RandomPatchFeatureConfig PLATEAU_FOLIAGE_CONFIG = blockPatch(96, 7, 3, new WeightedBlockStateProvider(
                 DataPool.<BlockState>builder()

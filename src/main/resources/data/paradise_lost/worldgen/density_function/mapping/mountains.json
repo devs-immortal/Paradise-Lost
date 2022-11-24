@@ -4,17 +4,11 @@
   "argument": {
 
     "type": "mul",
-    "argument1": 2,
+    "argument1": 0.8,
     "argument2": {
 
       "type": "add",
-      "argument1": {
-
-        "type": "mul",
-        "argument1": 0.1,
-        "argument2": "paradise_lost:adjusted/elevation_noise"
-
-      },
+      "argument1": "paradise_lost:adjusted/elevation_noise",
       "argument2": "paradise_lost:adjusted/flat_noise"
 
     }

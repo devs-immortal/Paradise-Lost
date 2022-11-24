@@ -29,7 +29,7 @@
         "argument": {
 
           "type": "mul",
-          "argument1": 0.5,
+          "argument1": 0.2,
           "argument2": {
 
             "type": "add",
@@ -45,11 +45,11 @@
             "argument2": {
 
               "type": "add",
-              "argument1": "paradise_lost:splines/bottoms",
+              "argument1": -1,
               "argument2": {
 
                 "type": "add",
-                "argument1": "paradise_lost:modifiers/cliffs",
+                "argument1": "paradise_lost:splines/bottoms",
                 "argument2": {
 
                   "type": "add",
@@ -77,19 +77,13 @@
                             "argument2": {
 
                               "type": "add",
-                              "argument1": -1,
+                              "argument1": "paradise_lost:modifiers/bumps",
                               "argument2": {
 
-                                "type": "add",
-                                "argument1": "paradise_lost:modifiers/bumps",
-                                "argument2": {
-
-                                  "type": "noise",
-                                  "noise": "paradise_lost:terrain/islands",
-                                  "xz_scale": 0.715,
-                                  "y_scale": 0.155
-
-                                }
+                                "type": "noise",
+                                "noise": "paradise_lost:terrain/islands",
+                                "xz_scale": 0.715,
+                                "y_scale": 0.05
 
                               }
 
@@ -103,11 +97,10 @@
 
                     }
 
-
                   }
 
                 }
-
+                
               }
 
             }
@@ -193,7 +186,7 @@
     "temperature": {
       "xz_scale": 0.25,
       "y_scale": 0.0,
-      "noise": "minecraft:temperature",
+      "noise": "paradise_lost:generator/temperature",
       "shift_x": "minecraft:shift_x",
       "shift_y": 0.0,
       "shift_z": "minecraft:shift_z",
@@ -202,7 +195,7 @@
     "vegetation": {
       "xz_scale": 0.25,
       "y_scale": 0.0,
-      "noise": "minecraft:vegetation",
+      "noise": "paradise_lost:generator/vegetation",
       "shift_x": "minecraft:shift_x",
       "shift_y": 0.0,
       "shift_z": "minecraft:shift_z",
@@ -249,8 +242,8 @@
     }
   },
   "noise": {
-    "min_y": -48,
-    "height": 448,
+    "min_y": -32,
+    "height": 320,
     "size_horizontal": 4,
     "size_vertical": 4,
     "island_noise_override": false
@@ -319,6 +312,170 @@
                           "type": "minecraft:block",
                           "result_state": {
                             "Name": "paradise_lost:coarse_dirt"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+
+              },
+              {
+
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:stone_depth",
+                  "offset": 0,
+                  "surface_type": "floor",
+                  "add_surface_depth": false,
+                  "secondary_depth_range": 0
+                },
+                "then_run": {
+                  "type": "minecraft:sequence",
+                  "sequence": [
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:biome",
+                        "biome_is": [
+                          "paradise_lost:highlands_thicket"
+                        ]
+                      },
+                      "then_run": {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "noise": "paradise_lost:topsoil/thicket_noise",
+                          "min_threshold": 0.85,
+                          "max_threshold": 2
+                        },
+                        "then_run": {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "paradise_lost:liverwort"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+
+              },
+              {
+
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:stone_depth",
+                  "offset": 0,
+                  "surface_type": "floor",
+                  "add_surface_depth": false,
+                  "secondary_depth_range": 0
+                },
+                "then_run": {
+                  "type": "minecraft:sequence",
+                  "sequence": [
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:biome",
+                        "biome_is": [
+                          "paradise_lost:highlands_grand_glade"
+                        ]
+                      },
+                      "then_run": {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "noise": "paradise_lost:topsoil/thicket_noise",
+                          "min_threshold": 0.7,
+                          "max_threshold": 2
+                        },
+                        "then_run": {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "paradise_lost:liverwort"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+
+              },
+              {
+
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:stone_depth",
+                  "offset": 3,
+                  "surface_type": "floor",
+                  "add_surface_depth": false,
+                  "secondary_depth_range": 0
+                },
+                "then_run": {
+                  "type": "minecraft:sequence",
+                  "sequence": [
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:biome",
+                        "biome_is": [
+                          "paradise_lost:highlands_shield"
+                        ]
+                      },
+                      "then_run": {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "noise": "paradise_lost:topsoil/shield_noise",
+                          "min_threshold": 0.4,
+                          "max_threshold": 2
+                        },
+                        "then_run": {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "paradise_lost:holystone"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+
+              },
+              {
+
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:stone_depth",
+                  "offset": 0,
+                  "surface_type": "floor",
+                  "add_surface_depth": false,
+                  "secondary_depth_range": 0
+                },
+                "then_run": {
+                  "type": "minecraft:sequence",
+                  "sequence": [
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:biome",
+                        "biome_is": [
+                          "paradise_lost:highlands_shield"
+                        ]
+                      },
+                      "then_run": {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "noise": "paradise_lost:topsoil/shield_noise",
+                          "min_threshold": 0.3,
+                          "max_threshold": 0.45
+                        },
+                        "then_run": {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "paradise_lost:cobbled_holystone"
                           }
                         }
                       }

@@ -2,7 +2,8 @@
   "replace": false,
   "values": [
     "#minecraft:logs",
-    "#paradise_lost:natural_stone",
-    "#paradise_lost:dirt_blocks"
+    "#paradise_lost:dirt_blocks",
+    "paradise_lost:cobbled_holystone",
+    "paradise_lost:mossy_holystone"
   ]
 }
