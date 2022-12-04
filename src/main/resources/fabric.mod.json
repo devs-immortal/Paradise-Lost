@@ -34,7 +34,6 @@
     "fabric-registry-sync-v0": "*",
     "trinkets": "*",
     "gud_recipe_confidence": "*",
-    "moretags": ">=2.0.0",
     "satin": "*"
   },
   "mixins": [
