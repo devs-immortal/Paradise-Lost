@@ -311,6 +311,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return getGenes().isTamed() && super.canBeSaddled();
     }
 
+     @Override
+     public boolean canBeControlledByRider() {
+         return true;
+     }
+
     @Override
     public void travel(Vec3d movementInput) {
         if (this.isAlive()) {
