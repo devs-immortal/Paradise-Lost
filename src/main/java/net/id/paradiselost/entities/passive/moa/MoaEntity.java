@@ -313,14 +313,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
      @Override
      public boolean canBeControlledByRider() {
-         return true;
+         return this.isSaddled();
      }
 
     @Override
     public void travel(Vec3d movementInput) {
         if (this.isAlive()) {
-            if (this.hasPassengers() && this.canBeControlledByRider() && this.isSaddled()) {
-                LivingEntity livingEntity = (LivingEntity) this.getPrimaryPassenger();
+            LivingEntity livingEntity = (LivingEntity) this.getPrimaryPassenger();
+            if (this.hasPassengers() && livingEntity != null && this.canBeControlledByRider()) {
                 this.prevYaw = this.getYaw();
                 this.setYaw(livingEntity.getYaw());
                 this.setPitch(livingEntity.getPitch() * 0.5F);
@@ -333,31 +333,31 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     g *= 0.25F;
                 }
 
-                if (isLogicalSideForUpdatingMovement()) {
-                    if (this.jumpStrength > 0.0F && !this.isInAir) {
-                        double d = 0.1F * (double) this.jumpStrength * (double) this.getJumpVelocityMultiplier();
-                        double h;
-                        if (this.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
-                            h = d + (double) ((float) (this.getStatusEffect(StatusEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1F);
-                        } else {
-                            h = d;
-                        }
-
-                        Vec3d vec3d = this.getVelocity();
-                        this.setVelocity(vec3d.x, h, vec3d.z);
-                        this.velocityDirty = true;
-                        if (g > 0.0F) {
-                            float adjVel = jumpStrength / 2F;
-                            float i = MathHelper.sin(this.getYaw() * 0.017453292F);
-                            float j = MathHelper.cos(this.getYaw() * 0.017453292F);
-                            this.setVelocity(this.getVelocity().add(-0.4F * i * adjVel, 0.0D, 0.4F * j * adjVel));
-                        }
-
-                        this.jumpStrength = 0.0F;
+                if (this.jumpStrength > 0.0F && !this.isInAir && this.onGround) {
+                    double d = 0.1F * (double) this.jumpStrength * (double) this.getJumpVelocityMultiplier();
+                    double h;
+                    if (this.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
+                        h = d + (double) ((float) (this.getStatusEffect(StatusEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1F);
+                    } else {
+                        h = d;
                     }
+
+                    Vec3d vec3d = this.getVelocity();
+                    this.setVelocity(vec3d.x, h, vec3d.z);
+                    this.velocityDirty = true;
+                    if (g > 0.0F) {
+                        float adjVel = jumpStrength / 2F;
+                        float i = MathHelper.sin(this.getYaw() * 0.017453292F);
+                        float j = MathHelper.cos(this.getYaw() * 0.017453292F);
+                        this.setVelocity(this.getVelocity().add(-0.4F * i * adjVel, 0.0D, 0.4F * j * adjVel));
+                    }
+
+                    this.jumpStrength = 0.0F;
                 }
 
                 if (jumpStrength <= 0.01F && onGround) {
+                    this.jumpStrength = 0.0F;
+                    this.jumping = false;
                     isInAir = false;
                 }
 
@@ -565,16 +565,24 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public void setJumpStrength(int strength) {
-        jumpStrength = strength * getGenes().getAttribute(MoaAttributes.JUMPING_STRENGTH) * 0.95F;
+        if (this.isSaddled()) {
+            if (strength < 0) {
+                strength = 0;
+            } else {
+                this.jumping = true;
+            }
+            jumpStrength = strength * getGenes().getAttribute(MoaAttributes.JUMPING_STRENGTH) * 0.95F;
+        }
     }
 
     @Override
     public boolean canJump() {
-        return true;
+        return this.isSaddled();
     }
 
     @Override
     public void startJumping(int height) {
+        this.jumping = true;
         this.world.playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 7.5F, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.8f));
     }
 
