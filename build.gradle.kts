@@ -14,7 +14,6 @@ val crowdinTranslateVersion: String by properties
 val entityAttributesVersion: String by properties
 val modmenuVersion: String by properties
 val reiVersion: String by properties
-val moreTagsVersion: String by properties
 val recipeConfidenceVersion: String by properties
 val satinVersion: String by properties
 
@@ -131,12 +130,6 @@ dependencies {
             group = "com.github.devs-immortal",
             name = "Incubus-Core",
             version = incubusCoreVersion,
-    ).also(::include)
-
-    modImplementation(
-            group = "net.gudenau.minecraft",
-            name = "MoreTags",
-            version = moreTagsVersion,
     ).also(::include)
 
     modImplementation(

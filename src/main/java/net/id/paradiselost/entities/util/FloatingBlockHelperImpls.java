@@ -1,6 +1,5 @@
 package net.id.paradiselost.entities.util;
 
-import net.gudenau.minecraft.moretags.MoreBlockTags;
 import net.id.paradiselost.api.FloatingBlockHelper;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
@@ -8,6 +7,7 @@ import net.id.incubus_core.blocklikeentities.api.BlockLikeSet;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FallingBlock;
+import net.minecraft.block.PistonBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -279,7 +279,7 @@ public class FloatingBlockHelperImpls {
                 return false;
             }
             // sides and bottom (sticky blocks)
-            if (state.isIn(MoreBlockTags.STICKY_BLOCKS)) {
+            if (state.isOf(Blocks.SLIME_BLOCK) || state.isOf(Blocks.HONEY_BLOCK)) {
                 // checks each of the sides
                 for (var newPos : new BlockPos[]{
                         pos.north(),
@@ -302,12 +302,12 @@ public class FloatingBlockHelperImpls {
         }
 
         private static boolean isAdjacentBlockStuck(BlockState state, BlockState adjacentState) {
-            if (state.isIn(MoreBlockTags.HONEY_BLOCKS) && adjacentState.isIn(MoreBlockTags.SLIME_BLOCKS)) {
+            if (state.isOf(Blocks.HONEY_BLOCK) && adjacentState.isOf(Blocks.SLIME_BLOCK)) {
                 return false;
-            } else if (state.isIn(MoreBlockTags.SLIME_BLOCKS) && adjacentState.isIn(MoreBlockTags.HONEY_BLOCKS)) {
+            } else if (state.isOf(Blocks.SLIME_BLOCK) && adjacentState.isOf(Blocks.HONEY_BLOCK)) {
                 return false;
             } else {
-                return state.isIn(MoreBlockTags.STICKY_BLOCKS) || adjacentState.isIn(MoreBlockTags.STICKY_BLOCKS);
+                return (state.isOf(Blocks.SLIME_BLOCK) || state.isOf(Blocks.HONEY_BLOCK)) || (adjacentState.isOf(Blocks.SLIME_BLOCK) || adjacentState.isOf(Blocks.HONEY_BLOCK));
             }
         }
     }
