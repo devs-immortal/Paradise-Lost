@@ -3,12 +3,13 @@ package net.id.paradiselost.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.id.paradiselost.component.LUV;
-import net.id.incubus_core.devel.Devel;
 import net.id.incubus_core.misc.WorthinessChecker;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
+
+import java.util.Optional;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -39,7 +40,7 @@ public class LUVCommand {
     }
 
     public static int setLUV(ServerCommandSource source, PlayerEntity target, byte value) {
-        if(WorthinessChecker.isPlayerWorthy(target.getUuid()) || Devel.isDevel()){
+        if(WorthinessChecker.isPlayerWorthy(target.getUuid(), Optional.of(target))){
             LUV.getLUV(target).setValue(value);
             source.sendFeedback(Text.translatable("commands.paradise_lost.LUV.success.set", target.getDisplayName(), LUV.getLUV(target).getValue()), false);
         }

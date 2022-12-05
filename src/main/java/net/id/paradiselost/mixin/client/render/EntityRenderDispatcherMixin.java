@@ -1,7 +1,6 @@
 package net.id.paradiselost.mixin.client.render;
 
 import net.id.paradiselost.entities.misc.RookEntity;
-import net.id.incubus_core.devel.Devel;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
@@ -19,7 +18,7 @@ public class EntityRenderDispatcherMixin {
         cancellable = true
     )
     private static void renderHitbox(MatrixStack matrices, VertexConsumer vertices, Entity entity, float tickDelta, CallbackInfo ci) {
-        if(!Devel.isDevel() && entity instanceof RookEntity) {
+        if(entity instanceof RookEntity) {
             ci.cancel();
         }
     }

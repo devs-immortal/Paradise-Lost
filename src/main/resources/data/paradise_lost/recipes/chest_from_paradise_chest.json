@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "paradise_lost:chests"
+    }
+  ],
+  "result": {
+    "item": "minecraft:chest"
+  }
+}
