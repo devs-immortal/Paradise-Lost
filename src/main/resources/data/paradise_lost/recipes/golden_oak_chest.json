@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:golden_oak_planks"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:golden_oak_chest"
+  }
+}
