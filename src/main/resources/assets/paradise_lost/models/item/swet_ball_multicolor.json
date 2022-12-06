@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paradise_lost:item/misc/swet_ball",
-    "layer1": "paradise_lost:item/misc/swet_ball_overlay_multicolor"
+    "layer0": "paradise_lost:item/swet_ball",
+    "layer1": "paradise_lost:item/swet_ball_overlay_multicolor"
   }
 }

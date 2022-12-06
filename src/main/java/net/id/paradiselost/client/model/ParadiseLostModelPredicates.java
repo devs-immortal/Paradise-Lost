@@ -15,19 +15,6 @@ import org.jetbrains.annotations.Nullable;
 public class ParadiseLostModelPredicates {
 
     public static void initClient() {
-        FabricModelPredicateProviderRegistry.register(ParadiseLostItems.PHOENIX_BOW, ParadiseLost.locate("pull"), ((stack, world, entity, seed) -> {
-            if (entity == null) {
-                return 0F;
-            }
-            return entity.getActiveItem() != stack ? 0F : (stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20F;
-        }));
-
-        FabricModelPredicateProviderRegistry.register(ParadiseLostItems.PHOENIX_BOW, ParadiseLost.locate("pulling"), (itemStack, clientWorld, livingEntity, seed) -> {
-            if (livingEntity == null) {
-                return 0.0F;
-            }
-            return livingEntity.isUsingItem() && livingEntity.getActiveItem() == itemStack ? 1.0F : 0.0F;
-        });
 
         FabricModelPredicateProviderRegistry.register(ParadiseLost.locate("stackable_variant"), (new UnclampedModelPredicateProvider() {
             @SuppressWarnings("deprecation")

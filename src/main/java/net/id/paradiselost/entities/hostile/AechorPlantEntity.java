@@ -119,11 +119,11 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
         if (heldItem.getItem() == ParadiseLostItems.SKYROOT_BUCKET && !player.getAbilities().creativeMode) {
             heldItem.setCount(heldItem.getCount() - 1);
 
-            if (heldItem.isEmpty()) {
-                player.setStackInHand(hand, new ItemStack(ParadiseLostItems.SKYROOT_POISON_BUCKET));
-            } else if (!player.getInventory().insertStack(new ItemStack(ParadiseLostItems.SKYROOT_POISON_BUCKET))) {
-                player.dropItem(new ItemStack(ParadiseLostItems.SKYROOT_POISON_BUCKET), false);
-            }
+//            if (heldItem.isEmpty()) {
+//                player.setStackInHand(hand, new ItemStack(ParadiseLostItems.SKYROOT_POISON_BUCKET));
+//            } else if (!player.getInventory().insertStack(new ItemStack(ParadiseLostItems.SKYROOT_POISON_BUCKET))) {
+//                player.dropItem(new ItemStack(ParadiseLostItems.SKYROOT_POISON_BUCKET), false);
+//            }
 
             return ActionResult.SUCCESS;
         } else {

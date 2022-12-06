@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "paradise_lost:item/tool/gravitite_shovel"
+    "layer0": "paradise_lost:item/gravitite_shovel"
   }
 }

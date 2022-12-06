@@ -9,6 +9,6 @@ import net.id.paradiselost.items.ParadiseLostItems;
 @Environment(EnvType.CLIENT)
 public class ParadiseLostArmorModels {
     public static void initClient() {
-        ArmorRenderer.register(new PhoenixArmorRenderer(), ParadiseLostItems.PHOENIX_HELMET);
+        //ArmorRenderer.register(new PhoenixArmorRenderer(), ParadiseLostItems.PHOENIX_HELMET);
     }
 }

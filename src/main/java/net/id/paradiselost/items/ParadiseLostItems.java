@@ -94,12 +94,6 @@ public class ParadiseLostItems {
     public static final SwordItem GRAVITITE_SWORD = add("gravitite_sword", new SwordItem(ParadiseLostToolMaterials.GRAVITITE, 3, -2.4f, rareTool));
     public static final GravititeHoeItem GRAVITITE_HOE = add("gravitite_hoe", new GravititeHoeItem(ParadiseLostToolMaterials.GRAVITITE, 1, 4f, rareTool));
 
-    public static final ShovelItem VALKYRIE_SHOVEL = add("valkyrie_shovel", new ShovelItem(ParadiseLostToolMaterials.VALKYRIE, 1.5f, -3f, paradiseLostLootTool));
-    public static final ParadiseLostPickaxeItem VALKYRIE_PICKAXE = add("valkyrie_pickaxe", new ParadiseLostPickaxeItem(ParadiseLostToolMaterials.VALKYRIE, 1, -2.8f, paradiseLostLootTool));
-    public static final ParadiseLostAxeItem VALKYRIE_AXE = add("valkyrie_axe", new ParadiseLostAxeItem(ParadiseLostToolMaterials.VALKYRIE, 4f, -2.9f, paradiseLostLootTool));
-    public static final ValkyrieLanceItem VALKYRIE_LANCE = add("valkyrie_lance", new ValkyrieLanceItem(ParadiseLostToolMaterials.VALKYRIE, 10, -3f, 6f, 4f, paradiseLostLootTool));
-    public static final ParadiseLostHoeItem VALKYRIE_HOE = add("valkyrie_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.VALKYRIE, 1, 5f, paradiseLostLootTool));
-    
     public static final DartItem GOLDEN_DART = add("golden_dart", new DartItem(tool()));
     public static final DartItem ENCHANTED_DART = add("enchanted_dart", new DartItem(tool().rarity(RARE)));
     public static final DartItem POISON_DART = add("poison_dart", new DartItem(tool()));
@@ -132,11 +126,6 @@ public class ParadiseLostItems {
     public static final ArmorItem GRAVITITE_LEGGINGS = add("gravitite_leggings", new ArmorItem(ParadiseLostArmorMaterials.GRAVITITE, LEGS, RARE_WEARABLE));
     public static final ArmorItem GRAVITITE_BOOTS = add("gravitite_boots", new ArmorItem(ParadiseLostArmorMaterials.GRAVITITE, FEET, RARE_WEARABLE));
 
-    public static final ArmorItem NEPTUNE_HELMET = add("neptune_helmet", new ArmorItem(ParadiseLostArmorMaterials.NEPTUNE, HEAD, PARADISE_LOST_LOOT_WEARABLE));
-    public static final ArmorItem NEPTUNE_CHESTPLATE = add("neptune_chestplate", new ArmorItem(ParadiseLostArmorMaterials.NEPTUNE, CHEST, PARADISE_LOST_LOOT_WEARABLE));
-    public static final ArmorItem NEPTUNE_LEGGINGS = add("neptune_leggings", new ArmorItem(ParadiseLostArmorMaterials.NEPTUNE, LEGS, PARADISE_LOST_LOOT_WEARABLE));
-    public static final ArmorItem NEPTUNE_BOOTS = add("neptune_boots", new ArmorItem(ParadiseLostArmorMaterials.NEPTUNE, FEET, PARADISE_LOST_LOOT_WEARABLE));
-
     private static Settings food() {
         return new Settings().group(ParadiseLostItemGroups.PARADISE_LOST_FOOD);
     }
@@ -150,8 +139,7 @@ public class ParadiseLostItems {
     }
 
     public static final AliasedBlockItem BLUEBERRY = add("blue_berry", new AliasedBlockItem(ParadiseLostBlocks.BLUEBERRY_BUSH, food(ParadiseLostFoodComponent.BLUEBERRY)), compostable30);
-    public static final Item ENCHANTED_BLUEBERRY = add("enchanted_blueberry", new Item(food(ParadiseLostFoodComponent.ENCHANTED_BLUEBERRY, RARE)), compostable50);
-    public static final Item ORANGE = add("orange", new Item(food(ParadiseLostFoodComponent.ORANGE)), compostable65);
+     public static final Item ORANGE = add("orange", new Item(food(ParadiseLostFoodComponent.ORANGE)), compostable65);
     public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(ParadiseLostFoodComponent.WHITE_APPLE)), compostable(0f));
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(ParadiseLostBlocks.AMADRYS, food(ParadiseLostFoodComponent.GENERIC_WORSE)), compostable30);
     public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new StewItem(food(ParadiseLostFoodComponent.AMADRYS_NOODLES)));
@@ -185,8 +173,6 @@ public class ParadiseLostItems {
     private static final Settings skyrootBucket = misc().maxCount(1).recipeRemainder(SKYROOT_BUCKET);
     public static final SkyrootBucketItem SKYROOT_WATER_BUCKET = add("skyroot_water_bucket", new SkyrootBucketItem(Fluids.WATER, skyrootBucket), emptiableBucketBehavior);
     public static final SkyrootBucketItem SKYROOT_MILK_BUCKET = add("skyroot_milk_bucket", new SkyrootBucketItem(skyrootBucket));
-    public static final SkyrootBucketItem SKYROOT_POISON_BUCKET = add("skyroot_poison_bucket", new SkyrootBucketItem(skyrootBucket));
-    public static final SkyrootBucketItem SKYROOT_REMEDY_BUCKET = add("skyroot_remedy_bucket", new SkyrootBucketItem(skyrootBucket));
 
     public static final VialItem QUICKSOIL_VIAL = add("quicksoil_vial", new VialItem(Fluids.EMPTY, misc().maxCount(32)));
     public static final VialItem AERCLOUD_VIAL = add("aercloud_vial", new VialItem(ParadiseLostFluids.DENSE_AERCLOUD, misc().maxCount(32)));

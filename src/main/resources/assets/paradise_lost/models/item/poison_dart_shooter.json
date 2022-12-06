@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paradise_lost:item/projectile/poison_dart_shooter"
+    "layer0": "paradise_lost:item/poison_dart_shooter"
   },
   "display": {
     "thirdperson_righthand": {

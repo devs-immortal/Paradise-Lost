@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paradise_lost:item/misc/zanite_fragment"
+    "layer0": "paradise_lost:item/zanite_fragment"
   }
 }

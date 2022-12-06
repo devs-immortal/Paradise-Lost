@@ -105,11 +105,7 @@ public class SkyrootBucketItem extends Item {
             stack.setCount(stack.getCount() - 1);
         }
 
-        if (stack.getItem() == ParadiseLostItems.SKYROOT_POISON_BUCKET) {
-            //player.inflictPoison(500);
-        } else if (stack.getItem() == ParadiseLostItems.SKYROOT_REMEDY_BUCKET) {
-            //player.inflictCure(200);
-        } else if (stack.getItem() == ParadiseLostItems.SKYROOT_MILK_BUCKET) {
+        if (stack.getItem() == ParadiseLostItems.SKYROOT_MILK_BUCKET) {
             if (!world.isClient) {
                 playerEntity.clearStatusEffects();
             }
@@ -193,8 +189,4 @@ public class SkyrootBucketItem extends Item {
         worldIn.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
     }
 
-    @Override
-    public Rarity getRarity(ItemStack stack) {
-        return stack.getItem() == ParadiseLostItems.SKYROOT_REMEDY_BUCKET ? Rarity.RARE : super.getRarity(stack);
-    }
 }

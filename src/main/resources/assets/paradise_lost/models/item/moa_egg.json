@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paradise_lost:item/misc/moa_egg"
+    "layer0": "paradise_lost:item/moa_egg"
   }
 }

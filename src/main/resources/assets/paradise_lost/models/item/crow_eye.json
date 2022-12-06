@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paradise_lost:item/accessories/crow_eye"
+    "layer0": "paradise_lost:item/crow_eye"
   }
 }
