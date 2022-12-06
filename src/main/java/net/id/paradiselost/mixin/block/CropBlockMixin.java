@@ -14,9 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CropBlockMixin {
     @Inject(
             method = "canPlantOnTop",
-            at = @At("TAIL")
+            at = @At("HEAD"),
+            cancellable = true
     )
     private void canPlantOnTop(BlockState floor, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(cir.getReturnValue() || floor.isOf(ParadiseLostBlocks.FARMLAND));
+        if (floor.isOf(ParadiseLostBlocks.FARMLAND)) {
+            cir.setReturnValue(true);
+        }
     }
 }
