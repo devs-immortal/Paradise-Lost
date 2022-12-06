@@ -107,14 +107,6 @@ public class ParadiseLostItems {
     public static final DartShooterItem ENCHANTED_DART_SHOOTER = add("enchanted_dart_shooter", new DartShooterItem(ENCHANTED_DART, unstackableRareTool));
     public static final DartShooterItem POISON_DART_SHOOTER = add("poison_dart_shooter", new DartShooterItem(POISON_DART, unstackableTool));
 
-    public static final BowItem PHOENIX_BOW = add("phoenix_bow", new BowItem(tool().maxDamage(384)));
-    public static final FlamingSwordItem FLAMING_SWORD = add("flaming_sword", new FlamingSwordItem(ParadiseLostToolMaterials.LEGENDARY, 4, -2.4f, paradiseLostLootTool));
-    public static final LightningSwordItem LIGHTNING_SWORD = add("lightning_sword", new LightningSwordItem(ParadiseLostToolMaterials.LEGENDARY, 4, -2.4f, paradiseLostLootTool));
-    public static final HolySwordItem HOLY_SWORD = add("holy_sword", new HolySwordItem(ParadiseLostToolMaterials.LEGENDARY, 4, -2.4f, paradiseLostLootTool));
-    public static final VampireBladeItem VAMPIRE_BLADE = add("vampire_blade", new VampireBladeItem(ParadiseLostToolMaterials.LEGENDARY, 3, -2.4f, paradiseLostLootTool));
-    public static final PigSlayerItem PIG_SLAYER = add("pig_slayer", new PigSlayerItem(ParadiseLostToolMaterials.LEGENDARY, 3, -2.4f, paradiseLostLootTool));
-    public static final CandyCaneSwordItem CANDY_CANE_SWORD = add("candy_cane_sword", new CandyCaneSwordItem(ParadiseLostToolMaterials.CANDY, 3, -2f, paradiseLostLootTool));
-    
     public static final TrinketItem CLOUD_PARACHUTE = add("cold_parachute", new ParachuteTrinketItem(unstackableTool, "cloud_parachute"));
     public static final TrinketItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new ParachuteTrinketItem(tool().maxCount(1).maxDamage(20), "golden_parachute"));
 
@@ -144,64 +136,6 @@ public class ParadiseLostItems {
     public static final ArmorItem NEPTUNE_CHESTPLATE = add("neptune_chestplate", new ArmorItem(ParadiseLostArmorMaterials.NEPTUNE, CHEST, PARADISE_LOST_LOOT_WEARABLE));
     public static final ArmorItem NEPTUNE_LEGGINGS = add("neptune_leggings", new ArmorItem(ParadiseLostArmorMaterials.NEPTUNE, LEGS, PARADISE_LOST_LOOT_WEARABLE));
     public static final ArmorItem NEPTUNE_BOOTS = add("neptune_boots", new ArmorItem(ParadiseLostArmorMaterials.NEPTUNE, FEET, PARADISE_LOST_LOOT_WEARABLE));
-
-    public static final ArmorItem PHOENIX_HELMET = add("phoenix_helmet", new ArmorItem(ParadiseLostArmorMaterials.PHOENIX, HEAD, PARADISE_LOST_LOOT_WEARABLE));
-    public static final ArmorItem PHOENIX_CHESTPLATE = add("phoenix_chestplate", new ArmorItem(ParadiseLostArmorMaterials.PHOENIX, CHEST, PARADISE_LOST_LOOT_WEARABLE));
-    public static final ArmorItem PHOENIX_LEGGINGS = add("phoenix_leggings", new ArmorItem(ParadiseLostArmorMaterials.PHOENIX, LEGS, PARADISE_LOST_LOOT_WEARABLE));
-    public static final ArmorItem PHOENIX_BOOTS = add("phoenix_boots", new ArmorItem(ParadiseLostArmorMaterials.PHOENIX, FEET, PARADISE_LOST_LOOT_WEARABLE));
-    /* TODO: Implement obsidian armor
-    public static final ArmorItem OBSIDIAN_HELMET = add("obsidian_helmet", new ArmorItem(ParadiseLostArmorMaterials.OBSIDIAN, HEAD, paradiseLostLootWearable));
-    public static final ArmorItem OBSIDIAN_CHESTPLATE = add("obsidian_chestplate", new ArmorItem(ParadiseLostArmorMaterials.OBSIDIAN, CHEST, paradiseLostLootWearable));
-    public static final ArmorItem OBSIDIAN_LEGGINGS = add("obsidian_leggings", new ArmorItem(ParadiseLostArmorMaterials.OBSIDIAN, LEGS, paradiseLostLootWearable));
-    public static final ArmorItem OBSIDIAN_BOOTS = add("obsidian_boots", new ArmorItem(ParadiseLostArmorMaterials.OBSIDIAN, FEET, paradiseLostLootWearable));
-    */
-    /* TODO: Implement valkyrie armor
-    public static final ArmorItem VALKYRIE_HELMET = add("valkyrie_helmet", new ArmorItem(ParadiseLostArmorMaterials.VALKYRIE, HEAD, paradiseLostLootWearable));
-    public static final ArmorItem VALKYRIE_CHESTPLATE = add("valkyrie_chestplate", new ArmorItem(ParadiseLostArmorMaterials.VALKYRIE, CHEST, paradiseLostLootWearable));
-    public static final ArmorItem VALKYRIE_LEGGINGS = add("valkyrie_leggings", new ArmorItem(ParadiseLostArmorMaterials.VALKYRIE, LEGS, paradiseLostLootWearable));
-    public static final ArmorItem VALKYRIE_BOOTS = add("valkyrie_boots", new ArmorItem(ParadiseLostArmorMaterials.VALKYRIE, FEET, paradiseLostLootWearable));
-    */
-    /* TODO: Implement sentry boots
-    public static final ArmorItem SENTRY_BOOTS = add("sentry_boots", new ArmorItem(ParadiseLostArmorMaterials.SENTRY, FEET, paradiseLostLootWearable));
-
-    // TODO: Implement Gloves
-    public static final AccessoryItem LEATHER_GLOVES = add("leather_gloves", new AccessoryItem(AccessoryType.GLOVES, 1.5f, wearable));
-    public static final AccessoryItem IRON_GLOVES = add("iron_gloves", new AccessoryItem(AccessoryType.GLOVES, 2.5f, wearable));
-    public static final AccessoryItem GOLDEN_GLOVES = add("golden_gloves", new AccessoryItem(AccessoryType.GLOVES, 2f, wearable));
-    public static final AccessoryItem CHAIN_GLOVES = add("chain_gloves", new AccessoryItem(AccessoryType.GLOVES, "chain", 2f, wearable));
-    public static final AccessoryItem DIAMOND_GLOVES = add("diamond_gloves", new AccessoryItem(AccessoryType.GLOVES, 4.5f, wearable));
-    public static final AccessoryItem ZANITE_GLOVES = add("zanite_gloves", new AccessoryItem(AccessoryType.GLOVES, 3.0f, wearable));
-    public static final AccessoryItem GRAVITITE_GLOVES = add("gravitite_gloves", new AccessoryItem(AccessoryType.GLOVES, 4f, rareWearable));
-    public static final AccessoryItem NEPTUNE_GLOVES = add("neptune_gloves", new AccessoryItem(AccessoryType.GLOVES, 4.5f, paradiseLostLootWearable));
-    public static final AccessoryItem PHOENIX_GLOVES = add("phoenix_gloves", new AccessoryItem(AccessoryType.GLOVES, "phoenix", 4f, paradiseLostLootWearable));
-    public static final AccessoryItem OBSIDIAN_GLOVES = add("obsidian_gloves", new AccessoryItem(AccessoryType.GLOVES, 5f, paradiseLostLootWearable));
-    public static final AccessoryItem VALKYRIE_GLOVES = add("valkyrie_gloves", new AccessoryItem(AccessoryType.GLOVES, "valkyrie", 5f, paradiseLostLootWearable));
-
-    // TODO: Implement Rings
-    public static final AccessoryItem IRON_RING = add("iron_ring", new AccessoryItem(AccessoryType.RING, wearable));
-    public static final AccessoryItem GOLDEN_RING = add("golden_ring", new AccessoryItem(AccessoryType.RING, wearable));
-    public static final AccessoryItem ZANITE_RING = add("zanite_ring", new AccessoryItem(AccessoryType.RING, wearable));
-    public static final AccessoryItem ICE_RING = add("ice_ring", new AccessoryItem(AccessoryType.RING, rareWearable));
-
-    // TODO: Implement Pendants
-    public static final AccessoryItem GOLDEN_PENDANT = add("golden_pendant", new AccessoryItem(AccessoryType.PENDANT, wearable));
-    public static final AccessoryItem ZANITE_PENDANT = add("zanite_pendant", new AccessoryItem(AccessoryType.PENDANT, wearable));
-    public static final AccessoryItem ICE_PENDANT = add("ice_pendant", new AccessoryItem(AccessoryType.PENDANT, rareWearable));
-
-    // TODO: Implement Capes
-    public static final AccessoryItem WHITE_CAPE = add("white_cape", new AccessoryItem(AccessoryType.CAPE, wearable));
-    public static final AccessoryItem RED_CAPE = add("red_cape", new AccessoryItem(AccessoryType.CAPE, wearable));
-    public static final AccessoryItem BLUE_CAPE = add("blue_cape", new AccessoryItem(AccessoryType.CAPE, wearable));
-    public static final AccessoryItem YELLOW_CAPE = add("yellow_cape", new AccessoryItem(AccessoryType.CAPE, wearable));
-    public static final AccessoryItem SWET_CAPE = add("swet_cape", new AccessoryItem(AccessoryType.CAPE, "swet", paradiseLostLootWearable));
-    public static final AccessoryItem AGILITY_CAPE = add("agility_cape", new AccessoryItem(AccessoryType.CAPE, "agility", paradiseLostLootWearable));
-    public static final AccessoryItem INVISIBILITY_CAPE = add("invisibility_cape", new AccessoryItem(AccessoryType.CAPE, paradiseLostLootWearable));
-
-    // TODO: Implement misc. accessories
-    public static final AccessoryItem GOLDEN_FEATHER = add("golden_feather", new AccessoryItem(AccessoryType.MISC, paradiseLostLootWearable));
-    public static final AccessoryItem REGENERATION_STONE = add("regeneration_stone", new AccessoryItem(AccessoryType.MISC, paradiseLostLootWearable));
-    public static final AccessoryItem IRON_BUBBLE = add("iron_bubble", new AccessoryItem(AccessoryType.MISC, paradiseLostLootWearable));
-    */
 
     private static Settings food() {
         return new Settings().group(ParadiseLostItemGroups.PARADISE_LOST_FOOD);
@@ -240,11 +174,7 @@ public class ParadiseLostItems {
     private static final Settings misc = misc();
 
     public static final ParadiseLostPortalItem PARADISE_LOST_PORTAL = add("portal", new ParadiseLostPortalItem(misc));
-    /* TODO: Implement magical items
-    public static final LifeShardItem LIFE_SHARD = add("life_shard", new LifeShardItem(misc().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT).maxCount(1)));
-    public static final CloudStaffItem CLOUD_STAFF = add("cloud_staff", new CloudStaffItem(misc().maxCount(1).maxDamage(60)));
-    public static final NatureStaffItem NATURE_STAFF = add("nature_staff", new NatureStaffItem(misc().maxCount(1).maxDamage(100)));
-     */
+
     public static final BookOfLoreItem LORE_BOOK = add("lore_book", new BookOfLoreItem(misc().maxCount(1)));
     public static final MoaEggItem MOA_EGG = add("moa_egg", new MoaEggItem(misc().maxCount(1)));
     public static final BlockItem INCUBATOR = add("incubator", ParadiseLostBlocks.INCUBATOR, misc, fuel(300));
@@ -257,8 +187,6 @@ public class ParadiseLostItems {
     public static final SkyrootBucketItem SKYROOT_MILK_BUCKET = add("skyroot_milk_bucket", new SkyrootBucketItem(skyrootBucket));
     public static final SkyrootBucketItem SKYROOT_POISON_BUCKET = add("skyroot_poison_bucket", new SkyrootBucketItem(skyrootBucket));
     public static final SkyrootBucketItem SKYROOT_REMEDY_BUCKET = add("skyroot_remedy_bucket", new SkyrootBucketItem(skyrootBucket));
-
-    public static final HealingStoneItem HEALING_STONE = add("healing_stone", new HealingStoneItem(misc.rarity(RARE)));
 
     public static final VialItem QUICKSOIL_VIAL = add("quicksoil_vial", new VialItem(Fluids.EMPTY, misc().maxCount(32)));
     public static final VialItem AERCLOUD_VIAL = add("aercloud_vial", new VialItem(ParadiseLostFluids.DENSE_AERCLOUD, misc().maxCount(32)));
@@ -358,32 +286,7 @@ public class ParadiseLostItems {
     // cobble variants
     public static final BlockItem MOSSY_HOLYSTONE = add("mossy_holystone", ParadiseLostBlocks.MOSSY_HOLYSTONE, building_block);
     public static final BlockItem GOLDEN_MOSSY_HOLYSTONE = add("golden_mossy_holystone", ParadiseLostBlocks.GOLDEN_MOSSY_HOLYSTONE, building_block);
-    /* TODO: Implement Angelic and hellfire blocks
-    public static final BlockItem ANGELIC_STONE = add("angelic_stone", ParadiseLostBlocks.ANGELIC_STONE, block);
-    public static final BlockItem ANGELIC_CRACKED_STONE = add("angelic_stone_cracked", ParadiseLostBlocks.ANGELIC_CRACKED_STONE, block);
-    public static final BlockItem ANGELIC_SLAB = add("angelic_slab", ParadiseLostBlocks.ANGELIC_SLAB, block);
-    public static final BlockItem ANGELIC_STAIRS = add("angelic_stairs", ParadiseLostBlocks.ANGELIC_STAIRS, block);
-    public static final BlockItem ANGELIC_WALL = add("angelic_wall", ParadiseLostBlocks.ANGELIC_WALL, block);
 
-    public static final BlockItem LIGHT_ANGELIC_STONE = add("light_angelic_stone", ParadiseLostBlocks.LIGHT_ANGELIC_STONE, block);
-    public static final BlockItem LIGHT_ANGELIC_STONE_TRAP = add("light_angelic_stone_trap", ParadiseLostBlocks.LIGHT_ANGELIC_STONE_TRAP, block);
-    public static final BlockItem LIGHT_ANGELIC_SLAB = add("light_angelic_slab", ParadiseLostBlocks.LIGHT_ANGELIC_SLAB, block);
-    public static final BlockItem LIGHT_ANGELIC_STAIRS = add("light_angelic_stairs", ParadiseLostBlocks.LIGHT_ANGELIC_STAIRS, block);
-    public static final BlockItem LIGHT_ANGELIC_WALL = add("light_angelic_wall", ParadiseLostBlocks.LIGHT_ANGELIC_WALL, block);
-
-    public static final BlockItem HELLFIRE_STONE = add("hellfire_stone", ParadiseLostBlocks.HELLFIRE_STONE, block);
-    public static final BlockItem HELLFIRE_CRACKED_STONE = add("hellfire_stone_cracked", ParadiseLostBlocks.HELLFIRE_CRACKED_STONE, block);
-    public static final BlockItem HELLFIRE_STONE_TRAP = add("hellfire_stone_trap", ParadiseLostBlocks.HELLFIRE_STONE_TRAP, block);
-    public static final BlockItem HELLFIRE_SLAB = add("hellfire_slab", ParadiseLostBlocks.HELLFIRE_SLAB, block);
-    public static final BlockItem HELLFIRE_STAIRS = add("hellfire_stairs", ParadiseLostBlocks.HELLFIRE_STAIRS, block);
-    public static final BlockItem HELLFIRE_WALL = add("hellfire_wall", ParadiseLostBlocks.HELLFIRE_WALL, block);
-
-    public static final BlockItem LIGHT_HELLFIRE_STONE = add("light_hellfire_stone", ParadiseLostBlocks.LIGHT_HELLFIRE_STONE, block);
-    public static final BlockItem LIGHT_HELLFIRE_STONE_TRAP = add("light_hellfire_stone_trap", ParadiseLostBlocks.LIGHT_HELLFIRE_STONE_TRAP, block);
-    public static final BlockItem LIGHT_HELLFIRE_SLAB = add("light_hellfire_slab", ParadiseLostBlocks.LIGHT_HELLFIRE_SLAB, block);
-    public static final BlockItem LIGHT_HELLFIRE_STAIRS = add("light_hellfire_stairs", ParadiseLostBlocks.LIGHT_HELLFIRE_STAIRS, block);
-    public static final BlockItem LIGHT_HELLFIRE_WALL = add("light_hellfire_wall", ParadiseLostBlocks.LIGHT_HELLFIRE_WALL, block);
-    */
     // bricks
     public static final BlockItem HOLYSTONE_BRICK = add("holystone_brick", ParadiseLostBlocks.HOLYSTONE_BRICK, building_block);
     public static final BlockItem CARVED_STONE = add("carved_stone", ParadiseLostBlocks.CARVED_STONE, building_block);
@@ -394,25 +297,7 @@ public class ParadiseLostItems {
     public static final BlockItem CARVED_STONE_PANEL_LIT = add("carved_stone_panel_lit", ParadiseLostBlocks.CARVED_STONE_PANEL_LIT, building_block);
     public static final BlockItem CARVED_STONE_EYE = add("carved_stone_eye", ParadiseLostBlocks.CARVED_STONE_EYE, building_block);
     public static final BlockItem CARVED_STONE_EYE_LIT = add("carved_stone_eye_lit", ParadiseLostBlocks.CARVED_STONE_EYE_LIT, building_block);
-    /* TODO: Implement carved and sentry blocks
-    public static final BlockItem LIGHT_CARVED_STONE = add("light_carved_stone", ParadiseLostBlocks.LIGHT_CARVED_STONE, block);
-    public static final BlockItem LIGHT_CARVED_STONE_TRAP = add("light_carved_stone_trap", ParadiseLostBlocks.LIGHT_CARVED_STONE_TRAP, block);
-    public static final BlockItem LIGHT_CARVED_SLAB = add("light_carved_slab", ParadiseLostBlocks.LIGHT_CARVED_SLAB, block);
-    public static final BlockItem LIGHT_CARVED_STAIRS = add("light_carved_stairs", ParadiseLostBlocks.LIGHT_CARVED_STAIRS, block);
-    public static final BlockItem LIGHT_CARVED_WALL = add("light_carved_wall", ParadiseLostBlocks.LIGHT_CARVED_WALL, block);
 
-    public static final BlockItem SENTRY_STONE = add("sentry_stone", ParadiseLostBlocks.SENTRY_STONE, block);
-    public static final BlockItem SENTRY_CRACKED_STONE = add("sentry_stone_cracked", ParadiseLostBlocks.SENTRY_CRACKED_STONE, block);
-    public static final BlockItem SENTRY_STONE_TRAP = add("sentry_stone_trap", ParadiseLostBlocks.SENTRY_STONE_TRAP, block);
-    public static final BlockItem SENTRY_SLAB = add("sentry_slab", ParadiseLostBlocks.SENTRY_SLAB, block);
-    public static final BlockItem SENTRY_STAIRS = add("sentry_stairs", ParadiseLostBlocks.SENTRY_STAIRS, block);
-    public static final BlockItem SENTRY_WALL = add("sentry_wall", ParadiseLostBlocks.SENTRY_WALL, block);
-
-    public static final BlockItem LIGHT_SENTRY_STONE = add("light_sentry_stone", ParadiseLostBlocks.LIGHT_SENTRY_STONE, block);
-    public static final BlockItem LIGHT_SENTRY_SLAB = add("light_sentry_slab", ParadiseLostBlocks.LIGHT_SENTRY_SLAB, block);
-    public static final BlockItem LIGHT_SENTRY_STAIRS = add("light_sentry_stairs", ParadiseLostBlocks.LIGHT_SENTRY_STAIRS, block);
-    public static final BlockItem LIGHT_SENTRY_WALL = add("light_sentry_wall", ParadiseLostBlocks.LIGHT_SENTRY_WALL, block);
-    */
     // stairs
     public static final BlockItem SKYROOT_STAIRS = add("skyroot_stairs", ParadiseLostBlocks.SKYROOT_STAIRS, building_block);
     public static final BlockItem GOLDEN_OAK_STAIRS = add("golden_oak_stairs", ParadiseLostBlocks.GOLDEN_OAK_STAIRS, building_block);
@@ -472,8 +357,6 @@ public class ParadiseLostItems {
     public static final BlockItem SHAMROCK = add("shamrock", ParadiseLostBlocks.SHAMROCK, decoration, compostable50);
     public static final BlockItem MALT_SPRIG = add("malt_sprig", ParadiseLostBlocks.MALT_SPRIG, decoration, compostable30);
     public static final BlockItem HALOPHIA = add("halophia", ParadiseLostBlocks.HALOPHIA, decoration, compostable30);
-    // LilyPadItem disappeared?
-    // public static final BlockItem GIANT_LILY = add("giant_lily", new LilyPadItem(ParadiseLostBlocks.GIANT_LILY, hat), compostable100);
     public static final BlockItem GIANT_LILY = add("giant_lily", new BlockItem(ParadiseLostBlocks.GIANT_LILY, hat), compostable100);
     public static final BlockItem WEEPING_CLOUDBURST = add("weeping_cloudburst", ParadiseLostBlocks.WEEPING_CLOUDBURST, decoration, compostable30);
     public static final BlockItem MOSS_STAR = add("moss_star", ParadiseLostBlocks.MOSS_STAR, decoration, compostable50);
