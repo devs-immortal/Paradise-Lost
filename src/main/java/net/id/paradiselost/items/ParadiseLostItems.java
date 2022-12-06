@@ -60,7 +60,7 @@ public class ParadiseLostItems {
     private static final Settings resource = resource();
 
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource));
-    public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
+        public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
     public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
     public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.crow_eye.tooltip").formatted(Formatting.GRAY))));
     public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
@@ -150,7 +150,6 @@ public class ParadiseLostItems {
     public static final Item BLUE_GUMMY_SWET = add("blue_gummy_swet", new Item(food(ParadiseLostFoodComponent.GUMMY_SWET, ParadiseLostRarity.PARADISE_LOST_LOOT)));
     public static final Item GOLDEN_GUMMY_SWET = add("golden_gummy_swet", new Item(food(ParadiseLostFoodComponent.GUMMY_SWET, ParadiseLostRarity.PARADISE_LOST_LOOT)));
     public static final ValkyrieMilkItem VALKYRIE_MILK = add("valkyrie_milk", new ValkyrieMilkItem(food(ParadiseLostFoodComponent.VALKYRIE_MILK, EPIC).maxCount(1)));
-    public static final Item CANDY_CANE = add("candy_cane", new Item(food(ParadiseLostFoodComponent.GENERIC)), compostable30);
     public static final Item GINGERBREAD_MAN = add("ginger_bread_man", new Item(food(ParadiseLostFoodComponent.GENERIC)), compostable30);
     public static final Item MOA_MEAT = add("moa_meat", new Item(food(ParadiseLostFoodComponent.MOA_MEAT)));
     public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", new Item(food(ParadiseLostFoodComponent.COOKED_MOA_MEAT)));
@@ -202,11 +201,9 @@ public class ParadiseLostItems {
     public static final BlockItem HOLYSTONE = add("holystone", ParadiseLostBlocks.HOLYSTONE, building_block);
     public static final BlockItem COBBLED_HOLYSTONE = add("cobbled_holystone", ParadiseLostBlocks.COBBLED_HOLYSTONE, building_block);
     public static final BlockItem ICESTONE = add("icestone", ParadiseLostBlocks.ICESTONE, building_block);
-    public static final BlockItem AEROGEL = add("aerogel", ParadiseLostBlocks.AEROGEL, building_block);
     // nature
     public static final BlockItem HIGHLANDS_GRASS = add("highlands_grass", ParadiseLostBlocks.HIGHLANDS_GRASS, building_block);
 
-    public static final BlockItem ENCHANTED_GRASS = add("enchanted_grass", ParadiseLostBlocks.ENCHANTED_GRASS, building_block);
     public static final BlockItem FROZEN_GRASS = add("frozen_grass", ParadiseLostBlocks.FROZEN_GRASS, building_block);
     public static final BlockItem DIRT = add("dirt", ParadiseLostBlocks.DIRT, building_block);
     public static final BlockItem COARSE_DIRT = add("coarse_dirt", ParadiseLostBlocks.COARSE_DIRT, building_block);

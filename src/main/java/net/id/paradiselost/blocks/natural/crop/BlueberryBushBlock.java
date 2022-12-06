@@ -68,7 +68,7 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
     private void tryPickBerries(World world, BlockPos pos, BlockState state) {
         boolean mature = state.get(AGE) == 3;
         BlockState floor = world.getBlockState(pos.down());
-        double mod = floor.isOf(ParadiseLostBlocks.ENCHANTED_GRASS) ? 2 : floor.isOf(ParadiseLostBlocks.FARMLAND) ? 1.5 : 1;
+        double mod = floor.isOf(ParadiseLostBlocks.FARMLAND) ? 1.5 : 1;
         int berries = world.random.nextInt(2) + 1;
         dropStack(world, pos, new ItemStack(ParadiseLostItems.BLUEBERRY, (int) (berries + (mature ? 1 : 0) * mod)));
         world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);

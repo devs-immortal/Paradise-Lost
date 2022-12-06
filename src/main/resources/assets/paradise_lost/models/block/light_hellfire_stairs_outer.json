@@ -1,8 +1,0 @@
-{
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "paradise_lost:block/light_hellfire_stone",
-    "top": "paradise_lost:block/light_hellfire_stone",
-    "side": "paradise_lost:block/light_hellfire_stone"
-  }
-}

@@ -31,14 +31,6 @@
         }
       }
     },
-    "eblueberry": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:enchanted_blueberry"]
-        }
-      }
-    },
     "bluegswet": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -55,22 +47,6 @@
         }
       }
     },
-    "healstone": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:healing_stone"]
-        }
-      }
-    },
-    "candycane": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:candy_cane"]
-        }
-      }
-    },
     "gingyman": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -84,11 +60,8 @@
     [
       "whiteapple",
       "blueberry",
-      "eblueberry",
       "bluegswet",
       "goldgswet",
-      "healstone",
-      "candycane",
       "gingyman"
     ]
   ],

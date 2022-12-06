@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "paradise_lost:block/light_sentry_stone",
-    "top": "paradise_lost:block/light_sentry_stone",
-    "side": "paradise_lost:block/light_sentry_stone"
-  }
-}

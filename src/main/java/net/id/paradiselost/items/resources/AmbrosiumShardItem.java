@@ -16,17 +16,17 @@ public class AmbrosiumShardItem extends Item {
         super(settings);
     }
 
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getWorld().getBlockState(context.getBlockPos()).getBlock() == ParadiseLostBlocks.HIGHLANDS_GRASS) {
-            if (!context.getPlayer().isCreative()) {
-                context.getStack().setCount(context.getStack().getCount() - 1);
-            }
-            context.getWorld().setBlockState(context.getBlockPos(), ParadiseLostBlocks.ENCHANTED_GRASS.getDefaultState());
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.PASS;
-    }
+//    @Override
+//    public ActionResult useOnBlock(ItemUsageContext context) {
+//        if (context.getWorld().getBlockState(context.getBlockPos()).getBlock() == ParadiseLostBlocks.HIGHLANDS_GRASS) {
+//            if (!context.getPlayer().isCreative()) {
+//                context.getStack().setCount(context.getStack().getCount() - 1);
+//            }
+//            context.getWorld().setBlockState(context.getBlockPos(), ParadiseLostBlocks.ENCHANTED_GRASS.getDefaultState());
+//            return ActionResult.SUCCESS;
+//        }
+//        return ActionResult.PASS;
+//    }
 
     @Override
     public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {

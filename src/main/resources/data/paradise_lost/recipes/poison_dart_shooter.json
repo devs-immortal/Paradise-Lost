@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "paradise_lost:skyroot_poison_bucket"
+      "item": "paradise_lost:aechor_petal"
     },
     {
       "item": "paradise_lost:golden_dart_shooter"

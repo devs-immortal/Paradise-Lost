@@ -11,9 +11,6 @@ public class ParadiseLostToolMaterials {
     public static final ToolMaterial ZANITE = ToolMaterialsAccessor.callInit("PARADISE_LOST_ZANITE", -1,
             MiningLevels.IRON, 250, 4.5f, 2f, 14, IngredientUtil.itemIngredient(ParadiseLostItems.ZANITE_GEM));
 
-    public static final ToolMaterial CANDY = ToolMaterialsAccessor.callInit("PARADISE_LOST_CANDY", -1,
-            MiningLevels.IRON, 520, 7f, 2.5f, 12, IngredientUtil.itemIngredient(ParadiseLostItems.CANDY_CANE));
-
     public static final ToolMaterial GRAVITITE = ToolMaterialsAccessor.callInit("PARADISE_LOST_GRAVITITE", -1,
             MiningLevels.DIAMOND, 1561, 8f, 3f, 10, IngredientUtil.EMPTY);
 
