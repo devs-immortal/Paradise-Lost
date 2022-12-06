@@ -21,7 +21,6 @@
 
 
   "block.paradise_lost.highlands_grass": "Highlands Grass",
-  "block.paradise_lost.enchanted_grass": "Enchanted Highlands Grass",
   "block.paradise_lost.frozen_grass": "Frozen Grass",
 
   "block.paradise_lost.dirt": "Paradise Dirt",
@@ -44,7 +43,6 @@
   "block.paradise_lost.spring_water": "Spring Water",
 
   "block.paradise_lost.icestone": "Icestone",
-  "block.paradise_lost.aerogel": "Aerogel",
 
   "block.paradise_lost.holystone": "Holystone",
   "block.paradise_lost.holystone_slab": "Holystone Slab",
@@ -264,14 +262,13 @@
   "block.paradise_lost.orange_chest": "Orange Chest",
   "block.paradise_lost.skyroot_chest": "Skyroot Chest",
   "block.paradise_lost.wisteria_chest": "Wisteria Chest",
-
-  "block.paradise_lost.enchanter": "Enchanter",
-  "block.paradise_lost.freezer": "Freezer",
-
+  
 
   "book.edition": "%dst Edition",
 
+
   "container.paradise_lost.moa": "Moa",
+
 
   "entity.paradise_lost.floating_block": "Floating Block",
   "entity.paradise_lost.blue_swet": "Blue Swet",
@@ -319,26 +316,12 @@
   "item.paradise_lost.gravitite_sword": "Gravitite Sword",
   "item.paradise_lost.gravitite_hoe": "Gravitite Hoe",
 
-  "item.paradise_lost.valkyrie_shovel": "Valkyrie Shovel",
-  "item.paradise_lost.valkyrie_pickaxe": "Valkyrie Pickaxe",
-  "item.paradise_lost.valkyrie_axe": "Valkyrie Axe",
-  "item.paradise_lost.valkyrie_lance": "Valkyrie Lance",
-  "item.paradise_lost.valkyrie_hoe": "Valkyrie Hoe",
-
   "item.paradise_lost.golden_dart": "Golden Dart",
   "item.paradise_lost.enchanted_dart": "Enchanted Dart",
   "item.paradise_lost.poison_dart": "Poison Dart",
   "item.paradise_lost.golden_dart_shooter": "Golden Dart Shooter",
   "item.paradise_lost.enchanted_dart_shooter": "Enchanted Dart Shooter",
   "item.paradise_lost.poison_dart_shooter": "Poison Dart Shooter",
-
-  "item.paradise_lost.phoenix_bow": "Phoenix Bow",
-  "item.paradise_lost.flaming_sword": "Flaming Sword",
-  "item.paradise_lost.lightning_sword": "Lightning Sword",
-  "item.paradise_lost.holy_sword": "Holy Sword",
-  "item.paradise_lost.vampire_blade": "Vampire Blade",
-  "item.paradise_lost.pig_slayer": "Pig Slayer",
-  "item.paradise_lost.candy_cane_sword": "Candy Cane Sword",
 
   "item.paradise_lost.cold_parachute": "Cold Parachute",
   "item.paradise_lost.golden_parachute": "Golden Parachute",
@@ -358,23 +341,7 @@
   "item.paradise_lost.gravitite_leggings": "Gravitite Leggings",
   "item.paradise_lost.gravitite_boots": "Gravitite Boots",
 
-  "item.paradise_lost.neptune_helmet": "Neptune Helmet",
-  "item.paradise_lost.neptune_chestplate": "Neptune Chestplate",
-  "item.paradise_lost.neptune_leggings": "Neptune Leggings",
-  "item.paradise_lost.neptune_boots": "Neptune Boots",
-
-  "item.paradise_lost.phoenix_helmet": "Phoenix Helmet",
-  "item.paradise_lost.phoenix_chestplate": "Phoenix Chestplate",
-  "item.paradise_lost.phoenix_leggings": "Phoenix Leggings",
-  "item.paradise_lost.phoenix_boots": "Phoenix Boots",
-
-  "item.paradise_lost.valkyrie_helmet": "Valkyrie Helmet",
-  "item.paradise_lost.valkyrie_chestplate": "Valkyrie Chestplate",
-  "item.paradise_lost.valkyrie_leggings": "Valkyrie Leggings",
-  "item.paradise_lost.valkyrie_boots": "Valkyrie Boots",
-
   "item.paradise_lost.blue_berry": "Blueberry",
-  "item.paradise_lost.enchanted_blueberry": "Enchanted Blueberry",
   "item.paradise_lost.orange": "Orange",
   "item.paradise_lost.white_apple": "White Apple",
   "item.paradise_lost.amadrys_bushel": "Amadrys Bushel",
@@ -386,15 +353,11 @@
   "item.paradise_lost.blue_gummy_swet": "Blue Gummy Swet",
   "item.paradise_lost.golden_gummy_swet": "Golden Gummy Swet",
   "item.paradise_lost.valkyrie_milk": "Valkyrie Milk",
-  "item.paradise_lost.candy_cane": "Candy Cane",
   "item.paradise_lost.ginger_bread_man": "Gingerbread Man",
   "item.paradise_lost.moa_meat": "Moa Chop",
   "item.paradise_lost.moa_meat_cooked": "Cooked Moa Chop",
 
   "item.paradise_lost.portal": "Paradise Portal",
-  "item.paradise_lost.life_shard": "Life Shard",
-  "item.paradise_lost.cloud_staff": "Cloud Staff",
-  "item.paradise_lost.nature_staff": "Nature Staff",
 
   "item.paradise_lost.lore_book": "Book of Lore",
   "item.paradise_lost.moa_egg": "Moa Egg",
@@ -402,10 +365,6 @@
   "item.paradise_lost.skyroot_bucket": "Skyroot Bucket",
   "item.paradise_lost.skyroot_water_bucket": "Skyroot Water Bucket",
   "item.paradise_lost.skyroot_milk_bucket": "Skyroot Milk Bucket",
-  "item.paradise_lost.skyroot_poison_bucket": "Skyroot Poison Bucket",
-  "item.paradise_lost.skyroot_remedy_bucket": "Skyroot Remedy Bucket",
-
-  "item.paradise_lost.healing_stone": "Healing Stone",
 
   "item.paradise_lost.quicksoil_vial": "Quicksoil Vial",
   "item.paradise_lost.aercloud_vial": "Aercloud Vial",
