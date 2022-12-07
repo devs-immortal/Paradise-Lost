@@ -27,8 +27,8 @@ public class FreezeParadiseLostTopLayerFeature extends Feature<DefaultFeatureCon
         BlockPos.Mutable surface = new BlockPos.Mutable();
         BlockPos.Mutable floor = new BlockPos.Mutable();
 
-        for(int i = 0; i < 16; ++i) {
-            for(int j = 0; j < 16; ++j) {
+        for (int i = 0; i < 16; ++i) {
+            for (int j = 0; j < 16; ++j) {
 
                 int x = origin.getX() + i;
                 int z = origin.getZ() + j;
@@ -38,7 +38,7 @@ public class FreezeParadiseLostTopLayerFeature extends Feature<DefaultFeatureCon
 
                 var testState = world.getBlockState(surface);
 
-                if(testState.getBlock() instanceof AercloudBlock) {
+                if (testState.getBlock() instanceof AercloudBlock) {
 
                     var testPos = surface.mutableCopy();
 

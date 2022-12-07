@@ -4,7 +4,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.id.paradiselost.ParadiseLost;
-import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.client.item.UnclampedModelPredicateProvider;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;

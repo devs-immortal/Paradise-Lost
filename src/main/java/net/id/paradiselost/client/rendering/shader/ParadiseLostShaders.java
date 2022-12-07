@@ -14,7 +14,8 @@ import static net.id.paradiselost.ParadiseLost.locate;
 
 @Environment(EnvType.CLIENT)
 public final class ParadiseLostShaders {
-    private ParadiseLostShaders(){}
+    private ParadiseLostShaders() {
+    }
     
     static final ManagedCoreShader AURAL;
     private static final Uniform1f AURAL_TIME;
@@ -31,20 +32,20 @@ public final class ParadiseLostShaders {
         AURAL_CUTOUT_TIME = AURAL.findUniform1f("Time");
     }
     
-    public static void init(){
+    public static void init() {
         ParadiseLostRenderLayers.init();
         EntitiesPreRenderCallback.EVENT.register(ParadiseLostShaders::preRender);
     }
     
     private static float auralTime = 0;
     
-    public static void preRender(Camera camera, Frustum frustum, float tickDelta){
+    public static void preRender(Camera camera, Frustum frustum, float tickDelta) {
         auralTime += tickDelta;
         
-        if(AURAL_TIME != null){
+        if (AURAL_TIME != null) {
             AURAL_TIME.set(auralTime);
         }
-        if(AURAL_CUTOUT_TIME != null){
+        if (AURAL_CUTOUT_TIME != null) {
             AURAL_CUTOUT_TIME.set(auralTime);
         }
     }

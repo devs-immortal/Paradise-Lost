@@ -1,6 +1,5 @@
 package net.id.paradiselost.devel;
 
-import com.mojang.logging.LogUtils;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.entities.block.SliderEntity;
 import net.id.paradiselost.items.ParadiseLostItemGroups;

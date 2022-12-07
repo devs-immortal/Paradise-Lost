@@ -30,8 +30,7 @@ public class FluidRenderSetup {
         final Identifier flowingSpriteId = new Identifier(textureFluidId.getNamespace(), "block/" + textureFluidId.getPath() + "_flow");
 
         // If they're not already present, add the sprites to the block atlas
-        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) ->
-        {
+        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
             registry.register(stillSpriteId);
             registry.register(flowingSpriteId);
         });
@@ -78,7 +77,7 @@ public class FluidRenderSetup {
     }
     
     @FunctionalInterface
-    public interface FluidColorProvider{
+    public interface FluidColorProvider {
         int getColor(BlockRenderView view, BlockPos pos, FluidState state);
     }
 }

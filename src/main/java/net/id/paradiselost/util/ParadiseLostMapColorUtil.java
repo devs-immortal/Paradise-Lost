@@ -25,12 +25,12 @@ public class ParadiseLostMapColorUtil {
 
     private static int recolor(int id) {
         return switch (id) {
-            case 1 ->   0x72A684;   // PALE_GREEN
-            case 5 ->   0x62767E;   // PALE_PURPLE
-            case 7 ->   0x7EA651;   // DARK_GREEN
-            case 12 ->  0x76ACB2;   // WATER_BLUE
-            case 30 ->  0xAAAB3C;   // GOLD
-            default ->  -1;         // No special color tweaking.
+        case 1 -> 0x72A684;     // PALE_GREEN
+        case 5 -> 0x62767E;     // PALE_PURPLE
+        case 7 -> 0x7EA651;     // DARK_GREEN
+        case 12 -> 0x76ACB2;    // WATER_BLUE
+        case 30 -> 0xAAAB3C;    // GOLD
+        default -> -1;         // No special color tweaking.
         };
     }
 }

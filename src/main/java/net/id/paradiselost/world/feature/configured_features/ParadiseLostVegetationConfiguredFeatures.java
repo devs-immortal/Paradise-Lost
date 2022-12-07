@@ -2,7 +2,6 @@ package net.id.paradiselost.world.feature.configured_features;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
-import net.id.paradiselost.world.feature.configs.GroundcoverFeatureConfig;
 import net.id.paradiselost.world.feature.configs.ProjectedOrganicCoverConfig;
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
 import net.minecraft.block.BlockState;
@@ -12,9 +11,7 @@ import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.math.intprovider.WeightedListIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.*;
@@ -59,8 +56,10 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     // ?
     public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> RAINBOW_MALT_SPRIGS = register("rainbow_malt_sprigs", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(MALT_SPRIG), UniformIntProvider.create(3, 13), ConstantIntProvider.create(5), UniformIntProvider.create(3, 4), 1.4));
 
+    public static void init() {
+    }
 
-    private static class Configs extends ParadiseLostConfiguredFeatures.Configs{
+    private static class Configs extends ParadiseLostConfiguredFeatures.Configs {
         /*
         Highlands
          */
@@ -114,5 +113,4 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
 
     }
 
-    public static void init(){}
 }

@@ -1,9 +1,7 @@
 package net.id.paradiselost.entities.hostile.swet;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.damage.DamageSource;
@@ -13,7 +11,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 

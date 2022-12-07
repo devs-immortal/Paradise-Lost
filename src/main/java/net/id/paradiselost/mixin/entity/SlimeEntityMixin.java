@@ -32,12 +32,12 @@ public abstract class SlimeEntityMixin extends MobEntity implements Monster {
     
     @SuppressWarnings("ConstantConditions")
     @Inject(
-        method = "<init>",
-        at = @At("TAIL")
+            method = "<init>",
+            at = @At("TAIL")
     )
-    private void init(EntityType<? extends SlimeEntity> entityType, World world, CallbackInfo ci){
+    private void init(EntityType<? extends SlimeEntity> entityType, World world, CallbackInfo ci) {
         // Only do this once
-        paradise_lost$isSwet = ((Object)this) instanceof SwetEntity;
+        paradise_lost$isSwet = ((Object) this) instanceof SwetEntity;
     }
     
     /**
@@ -50,28 +50,28 @@ public abstract class SlimeEntityMixin extends MobEntity implements Monster {
      * @return The original value or 0 if a swet
      */
     @ModifyVariable(
-        method = "tick",
-        at = @At(
-            value = "STORE",
-            opcode = ISTORE
-        ),
-        slice = @Slice(
-            from = @At(
-                value = "INVOKE",
-                target = "Lnet/minecraft/entity/mob/MobEntity;tick()V"
+            method = "tick",
+            at = @At(
+                value = "STORE",
+                opcode = ISTORE
             ),
-            to = @At(
-                value = "INVOKE",
-                target = "Lnet/minecraft/util/math/random/Random;nextFloat()F"
+            slice = @Slice(
+                from = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/mob/MobEntity;tick()V"
+                ),
+                to = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/util/math/random/Random;nextFloat()F"
+                )
             )
-        )
     )
-    private int overrideSize(int original){
-        if(paradise_lost$isSwet){
+    private int overrideSize(int original) {
+        if (paradise_lost$isSwet) {
             //noinspection ConstantConditions
-            ((SwetEntity)(Object)this).spawnSwetParticles();
+            ((SwetEntity) (Object) this).spawnSwetParticles();
             return 0;
-        }else{
+        } else {
             return original;
         }
     }

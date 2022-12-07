@@ -73,7 +73,7 @@ public class AmbystModel extends AnimalModel<AmbystEntity> {
 
     public void setAngles(AmbystEntity axolotlEntity, float f, float g, float h, float i, float j) {
         this.resetAngles(axolotlEntity, i, j);
-        if (true == false/*axolotlEntity.isPlayingDead()*/) {
+        if (false/*axolotlEntity.isPlayingDead()*/) { //24: this used to say "if (true == false)..." not sure what it was ever intended for
             this.setPlayingDeadAngles(i);
             this.updateAnglesCache(axolotlEntity);
         } else {

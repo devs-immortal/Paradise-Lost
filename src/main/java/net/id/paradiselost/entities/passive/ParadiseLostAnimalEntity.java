@@ -59,7 +59,7 @@ public class ParadiseLostAnimalEntity extends AnimalEntity {
     }
 
     public void produceParticlesServer(ParticleEffect parameters, int rolls, int maxAmount, float yOffset) {
-        if(world instanceof ServerWorld server) {
+        if (world instanceof ServerWorld server) {
             maxAmount = maxAmount + 1;
             for (int i = 0; i < rolls; ++i) {
                 double d = this.random.nextGaussian() * 0.02D;

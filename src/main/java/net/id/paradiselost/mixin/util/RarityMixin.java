@@ -11,9 +11,11 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.util.Arrays;
 
 @Mixin(Rarity.class)
-public class RarityMixin {
+public final class RarityMixin {
     @SuppressWarnings("ShadowTarget")
-    @Shadow(aliases = "field_8905") @Mutable @Final private static Rarity[] VALUES;
+    @Shadow(aliases = "field_8905")
+    @Mutable
+    @Final private static Rarity[] VALUES;
 
     static {
         EnumExtender.register(Rarity.class, (name, args) -> {

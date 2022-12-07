@@ -1,6 +1,5 @@
 package net.id.paradiselost.blocks.natural.crop;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.minecraft.block.*;

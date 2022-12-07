@@ -89,8 +89,8 @@ public class ParadiseLostBlocks {
     public static final PinkAercloudBlock PINK_AERCLOUD = add("pink_aercloud", new PinkAercloudBlock(aercloud().mapColor(MapColor.PINK)), translucentRenderLayer);
     public static final GoldenAercloudBlock GOLDEN_AERCLOUD = add("golden_aercloud", new GoldenAercloudBlock(aercloud().mapColor(MapColor.GOLD)), translucentRenderLayer);
     // Fluids
-    public static final FluidBlock DENSE_AERCLOUD = add("dense_aercloud", new FluidBlock(ParadiseLostFluids.DENSE_AERCLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()) {});
-    public static final FluidBlock SPRING_WATER = add("spring_water", new FluidBlock(ParadiseLostFluids.SPRING_WATER, of(Material.WATER).noCollision().strength(100f).dropsNothing()) {});
+    public static final FluidBlock DENSE_AERCLOUD = add("dense_aercloud", new FluidBlock(ParadiseLostFluids.DENSE_AERCLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
+    public static final FluidBlock SPRING_WATER = add("spring_water", new FluidBlock(ParadiseLostFluids.SPRING_WATER, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
     // Organic Extra
     public static final Block ICESTONE = add("icestone", new Block(of(Material.DENSE_ICE).requiresTool().hardness(0.5f).sounds(BlockSoundGroup.GLASS)));
 
@@ -461,19 +461,19 @@ public class ParadiseLostBlocks {
     }
 
     private static class ParadiseLostFarmlandBlock extends FarmlandBlock {
-        public ParadiseLostFarmlandBlock(Settings settings) {
+        ParadiseLostFarmlandBlock(Settings settings) {
             super(settings);
         }
     }
 
     private static class ParadiseLostPaneBlock extends PaneBlock {
-        public ParadiseLostPaneBlock(Settings settings) {
+        ParadiseLostPaneBlock(Settings settings) {
             super(settings);
         }
     }
 
     private static class ParadiseLostStairsBlock extends StairsBlock {
-        public ParadiseLostStairsBlock(BlockState baseBlockState, Settings settings) {
+        ParadiseLostStairsBlock(BlockState baseBlockState, Settings settings) {
             super(baseBlockState, settings);
         }
     }

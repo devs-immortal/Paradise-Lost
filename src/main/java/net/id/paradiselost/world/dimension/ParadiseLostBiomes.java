@@ -58,7 +58,7 @@ public final class ParadiseLostBiomes {
     public static final RegistryEntry<Biome> CONTINENTAL_PLATEAU;
     public static final RegistryEntry<Biome> HIGHLANDS_SHIELD;
     
-    static{
+    static {
         HIGHLANDS_PLAINS = register(HIGHLANDS_PLAINS_KEY, createHighlandsPlains());
         TRADEWINDS = register(TRADEWINDS_KEY, createTradewinds());
         HIGHLANDS_FOREST = register(HIGHLANDS_FOREST_KEY, createHighlandsForest());
@@ -70,7 +70,8 @@ public final class ParadiseLostBiomes {
         HIGHLANDS_SHIELD = register(HIGHLANDS_SHIELD_KEY, createHighlandsShield());
     }
     
-    public static void init(){}
+    public static void init() {
+    }
     
     private static RegistryKey<Biome> register(String name) {
         return RegistryKey.of(Registry.BIOME_KEY, locate(name));
@@ -92,7 +93,7 @@ public final class ParadiseLostBiomes {
      * @param grassModifier Modifies grass colors
      * @return The new {@link BiomeEffects} instance
      */
-    private static BiomeEffects createBiomeEffects(int skyColor, int foliageColor, int grassColor, int fogColor, int waterColor, int waterFogColor, BiomeEffects.GrassColorModifier grassModifier){
+    private static BiomeEffects createBiomeEffects(int skyColor, int foliageColor, int grassColor, int fogColor, int waterColor, int waterFogColor, BiomeEffects.GrassColorModifier grassModifier) {
         return new BiomeEffects.Builder()
             .skyColor(skyColor)
             .foliageColor(foliageColor)
@@ -115,7 +116,7 @@ public final class ParadiseLostBiomes {
      * @param waterFogColor The color of fog while in water
      * @return The new {@link BiomeEffects} instance
      */
-    private static BiomeEffects createBiomeEffects(int skyColor, int foliageColor, int grassColor, int fogColor, int waterColor, int waterFogColor){
+    private static BiomeEffects createBiomeEffects(int skyColor, int foliageColor, int grassColor, int fogColor, int waterColor, int waterFogColor) {
         return createBiomeEffects(skyColor, foliageColor, grassColor, fogColor, waterColor, waterFogColor, BiomeEffects.GrassColorModifier.NONE);
     }
     
@@ -133,21 +134,12 @@ public final class ParadiseLostBiomes {
                 builder.carver(step, carver);
             }
         }
-        for (var step : GenerationStep.Feature.values()){
-            for (var feature : features.getOrDefault(step, List.of())){
+        for (var step : GenerationStep.Feature.values()) {
+            for (var feature : features.getOrDefault(step, List.of())) {
                 builder.feature(step, feature);
             }
         }
         return builder.build();
-    }
-    
-    private record SpawnCost(
-        double charge,
-        double energyBudget
-    ){
-        static SpawnCost of(double charge, double energyBudget){
-            return new SpawnCost(charge, energyBudget);
-        }
     }
     
     /**
@@ -160,12 +152,12 @@ public final class ParadiseLostBiomes {
      */
     private static SpawnSettings createSpawnSettings(Map<SpawnGroup, List<SpawnSettings.SpawnEntry>> spawns, Map<EntityType<?>, SpawnCost> costs) {
         var builder = new SpawnSettings.Builder();
-        for(var group : SpawnGroup.values()){
-            for(var spawn : spawns.getOrDefault(group, List.of())){
+        for (var group : SpawnGroup.values()) {
+            for (var spawn : spawns.getOrDefault(group, List.of())) {
                 builder.spawn(group, spawn);
             }
         }
-        for(var entry : costs.entrySet()){
+        for (var entry : costs.entrySet()) {
             var cost = entry.getValue();
             builder.spawnCost(entry.getKey(), cost.charge(), cost.energyBudget());
         }
@@ -181,15 +173,15 @@ public final class ParadiseLostBiomes {
      * @return A map that contains all features
      */
     @SafeVarargs
-    public static <A, B> Map<A, List<B>> merge(Map<A, List<B>>... maps){
-        if(maps.length == 1){
+    public static <A, B> Map<A, List<B>> merge(Map<A, List<B>>... maps) {
+        if (maps.length == 1) {
             return maps[0];
         }
         
         Map<A, List<B>> result = new HashMap<>();
         for (var map : maps) {
             for (Map.Entry<A, List<B>> entry : map.entrySet()) {
-                result.computeIfAbsent(entry.getKey(), (ignored)->new ArrayList<>()).addAll(entry.getValue());
+                result.computeIfAbsent(entry.getKey(), (ignored) -> new ArrayList<>()).addAll(entry.getValue());
             }
         }
         return result;
@@ -250,7 +242,7 @@ public final class ParadiseLostBiomes {
         );
     }
     
-    private static Biome createHighlandsPlains(){
+    private static Biome createHighlandsPlains() {
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xDCFF81, 0xB1FFCB, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -297,7 +289,7 @@ public final class ParadiseLostBiomes {
             .build();
     }
     
-    private static Biome createHighlandsForest(){
+    private static Biome createHighlandsForest() {
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xD6FF6B, 0x88EBA1, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -346,7 +338,7 @@ public final class ParadiseLostBiomes {
             .build();
     }
 
-    private static Biome createTradewinds(){
+    private static Biome createTradewinds() {
         return new Biome.Builder()
                 .effects(createBiomeEffects(0xecebff, 0xbffff2, 0xa1f4de, 0xFFFFFF, 0xa8ffe1, 0x61ffbd))
                 .generationSettings(createGenerationSettings(
@@ -393,7 +385,7 @@ public final class ParadiseLostBiomes {
                 .build();
     }
     
-    private static Biome createHighlandsThicket(){
+    private static Biome createHighlandsThicket() {
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xC8E67A, 0x85DDAF, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.DARK_FOREST))
             .generationSettings(createGenerationSettings(
@@ -449,7 +441,7 @@ public final class ParadiseLostBiomes {
             .build();
     }
 
-    private static Biome createHighlandsGrandGlade(){
+    private static Biome createHighlandsGrandGlade() {
         return new Biome.Builder()
                 .effects(createBiomeEffects(0xC0C0FF, 0xC8E67A, 0x93cd67, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.NONE))
                 .generationSettings(createGenerationSettings(
@@ -501,7 +493,7 @@ public final class ParadiseLostBiomes {
                 .build();
     }
     
-    private static Biome createWisteriaWoods(){
+    private static Biome createWisteriaWoods() {
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xF3FF81, 0x88EF9D, 0xFFFFFF, 0xA9F7FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -552,7 +544,7 @@ public final class ParadiseLostBiomes {
             .build();
     }
     
-    private static Biome createAutumnalTundra(){
+    private static Biome createAutumnalTundra() {
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xFFB485, 0xFFFFFF, 0xFFFFFF, 0x8CE6FF, 0x8CE6FF))
             .generationSettings(createGenerationSettings(
@@ -605,7 +597,7 @@ public final class ParadiseLostBiomes {
             .build();
     }
     
-    private static Biome createContinentalPlateau(){
+    private static Biome createContinentalPlateau() {
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xDCFFCC, 0x91E2C8, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -656,7 +648,7 @@ public final class ParadiseLostBiomes {
             .build();
     }
     
-    private static Biome createHighlandsShield(){
+    private static Biome createHighlandsShield() {
         return new Biome.Builder()
             .effects(createBiomeEffects(0xC0C0FF, 0xFFF781, 0xDCFFB0, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
@@ -718,5 +710,14 @@ public final class ParadiseLostBiomes {
             .precipitation(Biome.Precipitation.RAIN).temperature(0.35F).downfall(2)
             // .category(Biome.Category.PLAINS)
             .build();
+    }
+
+    private record SpawnCost(
+            double charge,
+            double energyBudget
+    ) {
+        static SpawnCost of(double charge, double energyBudget) {
+            return new SpawnCost(charge, energyBudget);
+        }
     }
 }

@@ -1,13 +1,11 @@
 package net.id.paradiselost.entities.hostile.swet;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.effect.condition.Conditions;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.incubus_core.condition.api.ConditionAPI;
 import net.id.incubus_core.condition.api.Persistence;
 import net.id.incubus_core.condition.base.ConditionManager;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

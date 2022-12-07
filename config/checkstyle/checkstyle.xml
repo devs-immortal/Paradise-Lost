@@ -23,31 +23,18 @@
             <property name="option" value="alone"/>
             <property name="tokens" value="LITERAL_ELSE, METHOD_DEF"/>
         </module>
-        <module name="FinalClass"/>
-        <module name="InnerTypeLast"/>
-        <module name="OneTopLevelClass"/>
-        <module name="DeclarationOrder">
-            <property name="ignoreConstructors" value="true"/>
-        </module>
-        <module name="OverloadMethodsDeclarationOrder"/>
         <module name="RequireThis"/>
-        <module name="AvoidStarImport"/>
         <module name="ArrayTypeStyle"/>
         <module name="UpperEll"/>
         <module name="ModifierOrder"/>
         <module name="EmptyForInitializerPad"/>
         <module name="EmptyForIteratorPad"/>
-        <module name="EmptyLineSeparator">
-            <property name="allowMultipleEmptyLines" value="false"/>
-            <property name="allowMultipleEmptyLinesInsideClassMembers" value="false"/>
-        </module>
         <module name="GenericWhitespace"/>
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceAfter">
             <property name="tokens" value="AT,INC,DEC,UNARY_MINUS,UNARY_PLUS,BNOT,LNOT,DOT,ARRAY_DECLARATOR,INDEX_OP"/>
         </module>
         <module name="NoWhitespaceBefore"/>
-        <module name="OperatorWrap"/>
         <module name="ParenPad"/>
         <module name="SingleSpaceSeparator"/>
         <module name="TypecastParenPad"/>

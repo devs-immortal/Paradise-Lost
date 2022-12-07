@@ -67,7 +67,7 @@ public class SkyrootTowerGenerator {
             for (int x = -2; x <= 2; x++) {
                 for (int z = -2; z <= 2; z++) {
                     if ((Math.abs(x) < 2 && Math.abs(z) < 2) || random.nextBoolean()) {
-                        pathGround(world, new BlockPos(pos.getX()+x, pos.getY()+1, pos.getZ()+z));
+                        pathGround(world, new BlockPos(pos.getX() + x, pos.getY() + 1, pos.getZ() + z));
                     }
                 }
             }

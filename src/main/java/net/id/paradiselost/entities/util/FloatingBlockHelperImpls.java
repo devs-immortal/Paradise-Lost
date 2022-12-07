@@ -7,7 +7,6 @@ import net.id.incubus_core.blocklikeentities.api.BlockLikeSet;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FallingBlock;
-import net.minecraft.block.PistonBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -29,9 +28,10 @@ public class FloatingBlockHelperImpls {
     public static class Any implements FloatingBlockHelper {
         private static final Any INSTANCE = new Any();
 
-        private Any(){}
+        private Any() {
+        }
 
-        public static Any getInstance(){
+        public static Any getInstance() {
             return INSTANCE;
         }
 
@@ -70,9 +70,10 @@ public class FloatingBlockHelperImpls {
     public static class Standard implements FloatingBlockHelper {
         private static final Standard INSTANCE = new Standard();
 
-        private Standard(){}
+        private Standard() {
+        }
 
-        public static Standard getInstance(){
+        public static Standard getInstance() {
             return INSTANCE;
         }
         /**
@@ -136,9 +137,10 @@ public class FloatingBlockHelperImpls {
     public static class Double implements FloatingBlockHelper {
         private static final Double INSTANCE = new Double();
 
-        private Double(){}
+        private Double() {
+        }
 
-        public static Double getInstance(){
+        public static Double getInstance() {
             return INSTANCE;
         }
         /**
@@ -198,12 +200,13 @@ public class FloatingBlockHelperImpls {
     /**
      * A piston-like {@link BlockLikeSet} helper.
      */
-    public static class Pusher implements FloatingBlockHelper {
+    public static final class Pusher implements FloatingBlockHelper {
         private static final Pusher INSTANCE = new Pusher();
 
-        private Pusher(){}
+        private Pusher() {
+        }
 
-        public static Pusher getInstance(){
+        public static Pusher getInstance() {
             return INSTANCE;
         }
         /**
@@ -227,7 +230,6 @@ public class FloatingBlockHelperImpls {
             }
         }
 
-        @Override
         public boolean isSuitableFor(BlockState state) {
             return state.isIn(ParadiseLostBlockTags.PUSH_FLOATERS);
         }

@@ -28,11 +28,11 @@ public class RenderUtils {
         return new Vec3i((hex & 0xFF0000) >> 16, (hex & 0xFF00) >> 8, (hex & 0xFF));
     }
 
-    public static void blockRenderLayer(Block block, RenderLayer layer){
+    public static void blockRenderLayer(Block block, RenderLayer layer) {
         BlockRenderLayerMap.INSTANCE.putBlock(block, layer);
     }
 
-    public static void fluidRenderLayer(Fluid fluid, RenderLayer layer){
+    public static void fluidRenderLayer(Fluid fluid, RenderLayer layer) {
         BlockRenderLayerMap.INSTANCE.putFluid(fluid, layer);
     }
 
@@ -48,11 +48,11 @@ public class RenderUtils {
         blockRenderLayer(block, RenderLayer.getCutout());
     }
     
-    public static void auralRenderLayer(Block block){
+    public static void auralRenderLayer(Block block) {
         blockRenderLayer(block, ParadiseLostRenderLayers.AURAL);
     }
     
-    public static void auralCutoutMippedRenderLayer(Block block){
+    public static void auralCutoutMippedRenderLayer(Block block) {
         blockRenderLayer(block, ParadiseLostRenderLayers.AURAL_CUTOUT_MIPPED);
     }
 

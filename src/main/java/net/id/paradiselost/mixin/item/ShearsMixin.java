@@ -17,7 +17,7 @@ public class ShearsMixin {
 
     @Inject(method = "postMine", at = @At("RETURN"), cancellable = true)
     public void postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner, CallbackInfoReturnable<Boolean> cir) {
-        if(state.isIn(ParadiseLostBlockTags.PARADISE_LOST_SHEARABLE)) {
+        if (state.isIn(ParadiseLostBlockTags.PARADISE_LOST_SHEARABLE)) {
             cir.setReturnValue(true);
             cir.cancel();
         }

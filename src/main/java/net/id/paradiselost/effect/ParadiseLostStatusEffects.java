@@ -7,7 +7,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 
 public class ParadiseLostStatusEffects {
 
-    public static void init () {
+    public static void init() {
         ParadiseLostRegistryQueues.STATUS_EFFECT.register();
     }
 

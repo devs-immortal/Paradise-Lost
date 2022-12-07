@@ -66,9 +66,8 @@ public abstract class SwetEntity extends SlimeEntity {
         if (!((entity instanceof LivingEntity)
                 || (entity instanceof TntEntity)
                 || (entity instanceof TntMinecartEntity)
-                || (entity instanceof FloatingBlockEntity)
-                /* ArmorStands are LivingEntities */
-        )) {
+                || (entity instanceof FloatingBlockEntity))
+        ) {
             return false;
         }
 
@@ -109,9 +108,9 @@ public abstract class SwetEntity extends SlimeEntity {
                 this.detachLeash(true, true);
                 this.goalSelector.disableControl(Goal.Control.MOVE);
             } else if (f > 6.0f) {
-                double d = (entity.getX() - this.getX()) / (double)f;
-                double e = (entity.getY() - this.getY()) / (double)f;
-                double g = (entity.getZ() - this.getZ()) / (double)f;
+                double d = (entity.getX() - this.getX()) / (double) f;
+                double e = (entity.getY() - this.getY()) / (double) f;
+                double g = (entity.getZ() - this.getZ()) / (double) f;
                 this.setVelocity(this.getVelocity().add(Math.copySign(d * d * 0.4, d), Math.copySign(e * e * 0.4, e), Math.copySign(g * g * 0.4, g)));
             } else {
                 this.goalSelector.enableControl(Goal.Control.MOVE);
@@ -194,7 +193,7 @@ public abstract class SwetEntity extends SlimeEntity {
     protected void damage(LivingEntity target) {
         if (this.isAlive()) {
             int i = this.getSize();
-            if (this.squaredDistanceTo(target) < 0.6 * (double)i * (0.6 * (double)i) && this.canSee(target) && target.damage(ParadiseLostDamageSources.swet(this), this.getDamageAmount())) {
+            if (this.squaredDistanceTo(target) < 0.6 * (double) i * (0.6 * (double) i) && this.canSee(target) && target.damage(ParadiseLostDamageSources.swet(this), this.getDamageAmount())) {
                 this.playSound(ParadiseLostSoundEvents.ENTITY_SWET_ATTACK, 1.0f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
                 this.applyDamageEffects(this, target);
             }
@@ -227,7 +226,7 @@ public abstract class SwetEntity extends SlimeEntity {
                 massStuck = 1;
             }
             // dampened oscillator (nonlinear restoring force): x'' = -μx' - kx
-            Vec3d center = this.getBoundingBox().getCenter().add(0,0.45F * this.getBoundingBox().getYLength() - (getSize() == 0 ? -0.25F : 1),0);
+            Vec3d center = this.getBoundingBox().getCenter().add(0, 0.45F * this.getBoundingBox().getYLength() - (getSize() == 0 ? -0.25F : 1), 0);
             Vec3d suckVelocity = // acceleration (x'')
                     center.subtract(entity.getPos()) // entity displacement (-x)
                             .multiply(MathHelper.clamp(0.25 + massStuck / 100, 0, 1)) // coefficient (k)
@@ -315,7 +314,7 @@ public abstract class SwetEntity extends SlimeEntity {
      */
     public void spawnSwetParticles() {
         int size = getSize();
-        for(int i = 0; i < size * 8; i++) {
+        for (int i = 0; i < size * 8; i++) {
             float trig = random.nextFloat() * 6.2831855F;
             float mag = random.nextFloat() * 0.5F + 0.5F;
             float offset = size * 0.5F * mag;

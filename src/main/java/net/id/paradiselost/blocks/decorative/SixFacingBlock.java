@@ -26,14 +26,13 @@ public class SixFacingBlock extends Block {
 
     public static BlockState changeRotation(BlockState state, BlockRotation rotation) {
         return switch (rotation) {
-            case COUNTERCLOCKWISE_90, CLOCKWISE_90 ->
-                switch (state.get(FACING)) {
-                    case NORTH -> state.with(FACING, Direction.EAST);
-                    case EAST -> state.with(FACING, Direction.SOUTH);
-                    case SOUTH -> state.with(FACING, Direction.WEST);
-                    case WEST -> state.with(FACING, Direction.NORTH);
-                    default -> state;
-                };
+            case COUNTERCLOCKWISE_90, CLOCKWISE_90 -> switch (state.get(FACING)) {
+                case NORTH -> state.with(FACING, Direction.EAST);
+                case EAST -> state.with(FACING, Direction.SOUTH);
+                case SOUTH -> state.with(FACING, Direction.WEST);
+                case WEST -> state.with(FACING, Direction.NORTH);
+                default -> state;
+            };
             default -> state;
         };
     }

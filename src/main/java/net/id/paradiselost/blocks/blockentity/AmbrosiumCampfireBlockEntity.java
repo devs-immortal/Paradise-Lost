@@ -3,8 +3,6 @@ package net.id.paradiselost.blocks.blockentity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
@@ -88,7 +86,7 @@ public class AmbrosiumCampfireBlockEntity extends BlockEntity implements Clearab
             }
         }
 
-        i = ((Direction)state.get(CampfireBlock.FACING)).getHorizontal();
+        i = (state.get(CampfireBlock.FACING)).getHorizontal();
 
         for (int j = 0; j < campfire.itemsBeingCooked.size(); ++j) {
             if (!(campfire.itemsBeingCooked.get(j)).isEmpty() && random.nextFloat() < 0.2F) {

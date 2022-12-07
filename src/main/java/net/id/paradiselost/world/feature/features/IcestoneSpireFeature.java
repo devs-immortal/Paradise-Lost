@@ -29,11 +29,11 @@ public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
         var world = context.getWorld();
         var random = context.getRandom();
 
-        if(world.getBlockState(origin).isOf(Blocks.POWDER_SNOW)) {
+        if (world.getBlockState(origin).isOf(Blocks.POWDER_SNOW)) {
             origin = origin.down();
         }
 
-        if(world.getBlockState(origin.down()).isIn(ParadiseLostBlockTags.BASE_REPLACEABLES)) {
+        if (world.getBlockState(origin.down()).isIn(ParadiseLostBlockTags.BASE_REPLACEABLES)) {
             var height = random.nextInt(3) + 1;
 
             for (int i = 0; i <= height; i++) {
@@ -41,19 +41,19 @@ public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
             }
 
             for (Direction dir : Direction.values()) {
-                if(dir.getHorizontal() >= 0) {
+                if (dir.getHorizontal() >= 0) {
 
                     Collections.shuffle(secStates);
 
                     var state = secStates.get(0);
                     var offset = origin.offset(dir);
 
-                    if(world.getBlockState(offset).getMaterial().isReplaceable()) {
+                    if (world.getBlockState(offset).getMaterial().isReplaceable()) {
 
-                        if(world.getBlockState(offset.down()).isAir()) {
+                        if (world.getBlockState(offset.down()).isAir()) {
                             world.setBlockState(offset.down(), state, Block.NOTIFY_LISTENERS);
 
-                            if(world.getBlockState(offset.down(2)).isAir()) {
+                            if (world.getBlockState(offset.down(2)).isAir()) {
                                 world.setBlockState(offset.down(2), state, Block.NOTIFY_LISTENERS);
                             }
                         }
@@ -63,16 +63,16 @@ public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
                             world.setBlockState(offset.up(i), state, Block.NOTIFY_LISTENERS);
                         }
 
-                        if(secHeight > 0 && random.nextBoolean()) {
+                        if (secHeight > 0 && random.nextBoolean()) {
                             for (Direction secDir : Direction.values()) {
-                                if(secDir.getHorizontal() >= 0 && secDir.getAxis() != dir.getAxis()) {
+                                if (secDir.getHorizontal() >= 0 && secDir.getAxis() != dir.getAxis()) {
 
                                     var secState = random.nextBoolean() ? Blocks.SNOW_BLOCK.getDefaultState() : ParadiseLostBlocks.COBBLED_HOLYSTONE.getDefaultState();
                                     var secOffset = offset.offset(secDir);
 
-                                    if(world.getBlockState(secOffset).getMaterial().isReplaceable()) {
+                                    if (world.getBlockState(secOffset).getMaterial().isReplaceable()) {
 
-                                        if(world.getBlockState(secOffset.down()).isAir()) {
+                                        if (world.getBlockState(secOffset.down()).isAir()) {
                                             world.setBlockState(secOffset.down(), state, Block.NOTIFY_LISTENERS);
                                         }
 

@@ -23,7 +23,7 @@ public class ColoredSplashParticle extends RainSplashParticle {
     /**
      * The client side factory for this particle.
      */
-    public static final ParticleFactoryRegistry.PendingParticleFactory<ColoredSplashParticleEffect> FACTORY = (provider)->(parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
+    public static final ParticleFactoryRegistry.PendingParticleFactory<ColoredSplashParticleEffect> FACTORY = (provider) -> (parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
         var particle = new ColoredSplashParticle(world, x, y, z, velocityX, velocityY, velocityX, provider);
         particle.setColor(parameters.red() * BYTE_TO_FLOAT, parameters.green() * BYTE_TO_FLOAT, parameters.blue() * BYTE_TO_FLOAT);
         return particle;

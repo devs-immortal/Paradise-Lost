@@ -13,12 +13,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EntityRenderDispatcher.class)
 public class EntityRenderDispatcherMixin {
     @Inject(
-        method = "renderHitbox",
-        at = @At("HEAD"),
-        cancellable = true
+            method = "renderHitbox",
+            at = @At("HEAD"),
+            cancellable = true
     )
     private static void renderHitbox(MatrixStack matrices, VertexConsumer vertices, Entity entity, float tickDelta, CallbackInfo ci) {
-        if(entity instanceof RookEntity) {
+        if (entity instanceof RookEntity) {
             ci.cancel();
         }
     }

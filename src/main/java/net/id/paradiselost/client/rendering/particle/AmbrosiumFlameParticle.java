@@ -25,18 +25,18 @@ public class AmbrosiumFlameParticle extends AbstractSlowingParticle {
     
     @Override
     public float getSize(float tickDelta) {
-        float f = ((float)this.age + tickDelta) / (float)this.maxAge;
+        float f = ((float) this.age + tickDelta) / (float) this.maxAge;
         return this.scale * (1.0F - f * f * 0.5F);
     }
     
     @Override
     public int getBrightness(float tint) {
-        float f = ((float)this.age + tint) / (float)this.maxAge;
+        float f = ((float) this.age + tint) / (float) this.maxAge;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
         int i = super.getBrightness(tint);
         int j = i & 255;
         int k = i >> 16 & 255;
-        j += (int)(f * 15.0F * 16.0F);
+        j += (int) (f * 15.0F * 16.0F);
         if (j > 240) {
             j = 240;
         }

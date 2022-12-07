@@ -75,23 +75,23 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
                 ))
                 .toList();
         
-            MODEL_OVERRIDES = switch(IncubusHoliday.get()){
+            MODEL_OVERRIDES = switch (IncubusHoliday.get()) {
                 // Grab all of the leaves
-                case CHRISTMAS -> Registry.BLOCK.stream()
-                    .filter((block) -> block instanceof LeavesBlock)
-                    .map(Registry.BLOCK::getId)
-                    .flatMap((identifier) -> {
-                        var blockId = new Identifier(identifier.getNamespace(), "block/" + identifier.getPath());
-                        var itemId = new Identifier(identifier.getNamespace(), "item/" + identifier.getPath());
-                        var model = new HolidayBlockModel(identifier);
-                        return Stream.of(
-                            Map.entry(blockId, model),
-                            Map.entry(itemId, model)
-                        );
-                    })
-                    .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
-                
-                default -> throw new RuntimeException("This should not happen, double check HolidayBlockModel.<clinit>");
+            case CHRISTMAS -> Registry.BLOCK.stream()
+                .filter((block) -> block instanceof LeavesBlock)
+                .map(Registry.BLOCK::getId)
+                .flatMap((identifier) -> {
+                    var blockId = new Identifier(identifier.getNamespace(), "block/" + identifier.getPath());
+                    var itemId = new Identifier(identifier.getNamespace(), "item/" + identifier.getPath());
+                    var model = new HolidayBlockModel(identifier);
+                    return Stream.of(
+                        Map.entry(blockId, model),
+                        Map.entry(itemId, model)
+                    );
+                })
+                .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
+
+            default -> throw new RuntimeException("This should not happen, double check HolidayBlockModel.<clinit>");
             };
         } else {
             DECORATION_IDS = List.of();
@@ -100,7 +100,7 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
     }
     
     public static void init() {
-        if(!DECORATION_IDS.isEmpty() && !MODEL_OVERRIDES.isEmpty()) {
+        if (!DECORATION_IDS.isEmpty() && !MODEL_OVERRIDES.isEmpty()) {
             ModelLoadingRegistry.INSTANCE.registerResourceProvider((resourceManager) -> (identifier, context) -> MODEL_OVERRIDES.get(identifier));
         }
     }
@@ -116,7 +116,7 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
         baseSpriteId = new SpriteIdentifier(BLOCK_ATLAS_TEXTURE, new Identifier(identifier.getNamespace(), "block/" + identifier.getPath()));
         List<SpriteIdentifier> textureDependencies = new ArrayList<>();
         textureDependencies.add(baseSpriteId);
-        DECORATION_IDS.forEach((pair)->{
+        DECORATION_IDS.forEach((pair) -> {
             textureDependencies.add(pair.getFirst());
             textureDependencies.add(pair.getSecond());
         });
@@ -135,9 +135,9 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
     
     @Override
     public BakedModel bake(ModelLoader loader, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings rotationContainer, Identifier modelId) {
-        if(blockColors == null || itemColors == null){
+        if (blockColors == null || itemColors == null) {
             blockColors = MinecraftClient.getInstance().getBlockColors();
-            itemColors = ((MinecraftClientAccessor)MinecraftClient.getInstance()).getItemColors();
+            itemColors = ((MinecraftClientAccessor) MinecraftClient.getInstance()).getItemColors();
         }
         
         var defaultBlockModel = (JsonUnbakedModel) loader.getOrLoadModel(DEFAULT_BLOCK_MODEL);
@@ -145,11 +145,11 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
         
         var baseSprite = textureGetter.apply(baseSpriteId);
         List<Pair<Sprite, Sprite>> sprites = DECORATION_IDS.stream()
-            .map((pair) -> Pair.of(
-                textureGetter.apply(pair.getFirst()),
-                textureGetter.apply(pair.getSecond())
-            ))
-            .toList();
+                .map((pair) -> Pair.of(
+                    textureGetter.apply(pair.getFirst()),
+                    textureGetter.apply(pair.getSecond())
+                ))
+                .toList();
     
         Renderer renderer = RendererAccess.INSTANCE.getRenderer();
         MeshBuilder builder = renderer.meshBuilder();
@@ -159,13 +159,13 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
         
         var base = finder.find();
         var emissive = finder
-            .emissive(0, true)
-            .find();
+                .emissive(0, true)
+                .find();
         
         // Can we be dirty and share these between instances?
         List<Mesh> decoratedMeshes = new ArrayList<>();
         for (Pair<Sprite, Sprite> sprite : sprites) {
-            for(Direction face : Direction.values()){
+            for (Direction face : Direction.values()) {
                 emitter.square(face, 0, 0, 1, 1, 0);
                 emitter.material(base);
                 emitter.spriteBake(0, sprite.getFirst(), MutableQuadView.BAKE_LOCK_UV);
@@ -185,7 +185,7 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
         /* Why doesn't this work?
         var itemColor = ITEM_COLORS.getColor(new ItemStack(Blocks.SPRUCE_LEAVES), 0);
         
-        for(Direction face : Direction.values()){
+        for (Direction face : Direction.values()) {
             emitter.square(face, 0, 0, 1, 1, 0);
             emitter.material(base);
             emitter.spriteBake(0, baseSprite, MutableQuadView.BAKE_LOCK_UV);
@@ -200,7 +200,7 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
             var overrideList = defaultBlockModel.getOverrides();
             if (overrideList.isEmpty()) {
                 overrides = ModelOverrideList.EMPTY;
-            }else {
+            } else {
                 overrides = new ModelOverrideList(loader, parent, loader::getOrLoadModel, overrideList);
             }
         }
@@ -215,12 +215,11 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
     }
     
     private record BakedHolidayModel(
-        Sprite particle,
-        ModelTransformation transformations,
-        ModelOverrideList overrides,
-        List<Mesh> worldMeshes/*,
-        Mesh itemMesh*/
-    ) implements BakedModel, FabricBakedModel {
+            Sprite particle,
+            ModelTransformation transformations,
+            ModelOverrideList overrides,
+            List<Mesh> worldMeshes)
+            implements BakedModel, FabricBakedModel {
         // BakedModel
     
         @Override
@@ -276,7 +275,7 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
     
             var color = blockColors.getColor(state, blockView, pos, 0) | 0xFF000000;
             
-            for(var face : Direction.values()) {
+            for (var face : Direction.values()) {
                 emitter.square(face, 0, 0, 1, 1, 0);
                 emitter.spriteBake(0, particle, MutableQuadView.BAKE_LOCK_UV);
                 emitter.spriteColor(0, color, color, color, color);
@@ -285,10 +284,10 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
     
             var seed = MathHelper.hashCode(pos.getX(), pos.getY() ^ SEED_OFFSET, pos.getZ());
             // 1 in 4
-            if((seed & 0b11) == 0){
+            if ((seed & 0b11) == 0) {
                 seed >>>= 2;
                 // 1 in n
-                int number = (int)((seed & 0x7FFFFFFF) ^ (seed >> 31));
+                int number = (int) ((seed & 0x7FFFFFFF) ^ (seed >> 31));
                 context.meshConsumer().accept(worldMeshes.get(number % worldMeshes.size()));
             }
         }
@@ -301,7 +300,7 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
             var color = itemColors.getColor(stack, 0) | 0xFF000000;
     
             var emitter = context.getEmitter();
-            for(var face : Direction.values()) {
+            for (var face : Direction.values()) {
                 emitter.square(face, 0, 0, 1, 1, 0);
                 emitter.spriteBake(0, particle, MutableQuadView.BAKE_LOCK_UV);
                 emitter.spriteColor(0, color, color, color, color);

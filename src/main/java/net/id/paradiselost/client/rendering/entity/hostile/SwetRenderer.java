@@ -2,10 +2,6 @@ package net.id.paradiselost.client.rendering.entity.hostile;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.paradiselost.ParadiseLost;
-import net.id.paradiselost.entities.hostile.swet.BlueSwetEntity;
-import net.id.paradiselost.entities.hostile.swet.GoldenSwetEntity;
-import net.id.paradiselost.entities.hostile.swet.PurpleSwetEntity;
 import net.id.paradiselost.entities.hostile.swet.SwetEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;

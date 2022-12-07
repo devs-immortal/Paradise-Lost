@@ -1,10 +1,8 @@
 package net.id.paradiselost.items.resources;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;

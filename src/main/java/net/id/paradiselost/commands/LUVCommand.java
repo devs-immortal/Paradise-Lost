@@ -16,21 +16,21 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class LUVCommand {
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher){
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("LUV")
-            .requires((source)->source.hasPermissionLevel(2))
-            .then(literal("query")
-                .then(argument("target", EntityArgumentType.player())
-                    .executes((context) -> queryLUV(context.getSource(), EntityArgumentType.getPlayer(context, "target")))
-                )
-            )
-            .then(literal("set")
-                .then(argument("target", EntityArgumentType.player())
-                    .then(argument("value", IntegerArgumentType.integer(-128, 128))
-                        .executes((context) -> setLUV(context.getSource(), EntityArgumentType.getPlayer(context, "target"), (byte) IntegerArgumentType.getInteger(context, "value")))
+                .requires((source) -> source.hasPermissionLevel(2))
+                .then(literal("query")
+                    .then(argument("target", EntityArgumentType.player())
+                        .executes((context) -> queryLUV(context.getSource(), EntityArgumentType.getPlayer(context, "target")))
                     )
                 )
-            )
+                .then(literal("set")
+                    .then(argument("target", EntityArgumentType.player())
+                        .then(argument("value", IntegerArgumentType.integer(-128, 128))
+                            .executes((context) -> setLUV(context.getSource(), EntityArgumentType.getPlayer(context, "target"), (byte) IntegerArgumentType.getInteger(context, "value")))
+                        )
+                    )
+                )
         );
     }
 
@@ -40,7 +40,7 @@ public class LUVCommand {
     }
 
     public static int setLUV(ServerCommandSource source, PlayerEntity target, byte value) {
-        if(WorthinessChecker.isPlayerWorthy(target.getUuid(), Optional.of(target))){
+        if (WorthinessChecker.isPlayerWorthy(target.getUuid(), Optional.of(target))) {
             LUV.getLUV(target).setValue(value);
             source.sendFeedback(Text.translatable("commands.paradise_lost.LUV.success.set", target.getDisplayName(), LUV.getLUV(target).getValue()), false);
         }

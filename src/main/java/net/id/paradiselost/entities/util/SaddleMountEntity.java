@@ -122,7 +122,7 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     public void setSaddled(boolean saddled) {
         dataTracker.set(SADDLED, saddled);
         // Kick riding entities off if we lose the saddle
-        if(!saddled){
+        if (!saddled) {
             for (Entity entity : getPassengerList()) {
                 entity.stopRiding();
             }

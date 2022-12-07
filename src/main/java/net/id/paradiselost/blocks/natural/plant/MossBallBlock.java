@@ -77,11 +77,11 @@ public class MossBallBlock extends PlantBlock implements Waterloggable, Fertiliz
         int m = pos.getX() - 2;
         int n = 0;
 
-        for(int o = 0; o < 5; ++o) {
-            for(int p = 0; p < j; ++p) {
+        for (int o = 0; o < 5; ++o) {
+            for (int p = 0; p < j; ++p) {
                 int q = 2 + pos.getY() - 1;
 
-                for(int r = q - 2; r < q; ++r) {
+                for (int r = q - 2; r < q; ++r) {
                     BlockPos blockPos = new BlockPos(m + o, r, pos.getZ() - n + p);
                     if (blockPos != pos && random.nextInt(6) == 0 && world.getBlockState(blockPos).isOf(Blocks.WATER)) {
                         world.setBlockState(blockPos, getDefaultState(), Block.NOTIFY_ALL);

@@ -21,7 +21,7 @@ import static net.id.paradiselost.blocks.ParadiseLostBlocks.*;
 
 public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final List<Block> PARADISE_LOST_GROUND = List.of(
-        HIGHLANDS_GRASS, HOLYSTONE, MOSSY_HOLYSTONE, DIRT, COARSE_DIRT, PERMAFROST
+            HIGHLANDS_GRASS, HOLYSTONE, MOSSY_HOLYSTONE, DIRT, COARSE_DIRT, PERMAFROST
     );
 
     /*
@@ -71,9 +71,10 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     // Crystal Tree Island
     public static final RegistryEntry<PlacedFeature> CRYSTAL_TREE_ISLAND = register("crystal_tree_island", ParadiseLostTreeConfiguredFeatures.CRYSTAL_TREE_ISLAND, CrystalTreeIslandPlacementModifier.of());
 
-    private static PlacementModifier placed(Block sapling){
+    private static PlacementModifier placed(Block sapling) {
         return PlacedFeatures.wouldSurvive(sapling);
     }
 
-    public static void init(){}
+    public static void init() {
+    }
 }

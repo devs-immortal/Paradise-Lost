@@ -37,7 +37,7 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
         var world = player.getEntityWorld();
         var random = player.getRandom();
 
-        if(value >= 36 || world.getMoonPhase() == 0) {
+        if (value >= 36 || world.getMoonPhase() == 0) {
             handleRookSpawning(world, playerPos, random);
         }
     }
@@ -51,19 +51,19 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
 //        var scaling = 0.5 + Math.sqrt(rookCount);
 //        var luvModifier = 1.0;
 //
-//        if(world.getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
-//            if(value == 48 || (value >= 0 && value < 30))
+//        if (world.getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
+//            if (value == 48 || (value >= 0 && value < 30))
 //                luvModifier = 2;
-//            else if(value > 100 && value < 110)
+//            else if (value > 100 && value < 110)
 //                luvModifier = 0.5;
-//            else if(value < 0)
+//            else if (value < 0)
 //                luvModifier = 0.25;
 //        }
 //        else {
 //            luvModifier = 4;
 //        }
 //
-//        if(rookCount < rookCap && world.getTime() % 20 == 0 && (dayTime > 14000 && dayTime < 22000)) {
+//        if (rookCount < rookCap && world.getTime() % 20 == 0 && (dayTime > 14000 && dayTime < 22000)) {
 //            var posStream = BlockPos.streamOutwards(pos, 32, 32, 32);
 //            double finalLuvModifier = luvModifier;
 //            posStream
@@ -75,20 +75,20 @@ public class LUV implements AutoSyncedComponent, CommonTickingComponent, PlayerC
 //                        var upState = world.getBlockState(upPos);
 //                        var floorState = blockPos.down();
 //
-//                        if(world.getLightLevel(LightType.BLOCK, blockPos) > 4 || state.isFullCube(world, blockPos) || upState.isFullCube(world, upPos) || world.isAir(floorPos))
+//                        if (world.getLightLevel(LightType.BLOCK, blockPos) > 4 || state.isFullCube(world, blockPos) || upState.isFullCube(world, upPos) || world.isAir(floorPos))
 //                            return;
 //
 //                        var roofed = 3;
 //
 //                        for (int i = 1; i <= 4; i++) {
 //                            var checkPos = upPos.up(i);
-//                            if(!world.getBlockState(checkPos).isTranslucent(world, checkPos)) {
+//                            if (!world.getBlockState(checkPos).isTranslucent(world, checkPos)) {
 //                                roofed = 1;
 //                                break;
 //                            }
 //                        }
 //
-//                        if(random.nextInt((int) (30000 * roofed * scaling * finalLuvModifier)) == 0) {
+//                        if (random.nextInt((int) (30000 * roofed * scaling * finalLuvModifier)) == 0) {
 //                            var rook = new RookEntity(ParadiseLostEntityTypes.ROOK, world);
 //                            rook.setPos(blockPos.getX() + 0.5, blockPos.getY() + 0.1, blockPos.getZ() + 0.5);
 //                            world.spawnEntity(rook);

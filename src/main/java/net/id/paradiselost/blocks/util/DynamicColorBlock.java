@@ -17,13 +17,13 @@ public interface DynamicColorBlock {
     @Environment(EnvType.CLIENT)
     ItemColorProvider getBlockItemColorProvider();
 
-    static void updateBlockColor(BlockPos pos){
+    static void updateBlockColor(BlockPos pos) {
         if (!isFastGraphics()) {
             MinecraftClient.getInstance().worldRenderer.scheduleBlockRenders(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
         }
     }
 
-    static boolean isFastGraphics(){
+    static boolean isFastGraphics() {
         return MinecraftClient.getInstance().options.getGraphicsMode().getValue().equals(GraphicsMode.FAST);
     }
 
@@ -34,7 +34,7 @@ public interface DynamicColorBlock {
     }
 
     // Output range: [0, 1]. clumpSize cannot be 0.
-    static double sampleNoise(BlockPos pos, float clumpSize, float offset){
+    static double sampleNoise(BlockPos pos, float clumpSize, float offset) {
         return 0.5 * (1 + SimplexNoise.noise(pos.getX() / clumpSize + offset, pos.getY() / clumpSize + offset, pos.getZ() / clumpSize + offset));
     }
 }

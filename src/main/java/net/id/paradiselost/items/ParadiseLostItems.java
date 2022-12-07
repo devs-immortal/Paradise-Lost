@@ -60,7 +60,7 @@ public class ParadiseLostItems {
     private static final Settings resource = resource();
 
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource));
-        public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
+    public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
     public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
     public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.crow_eye.tooltip").formatted(Formatting.GRAY))));
     public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
@@ -139,7 +139,7 @@ public class ParadiseLostItems {
     }
 
     public static final AliasedBlockItem BLUEBERRY = add("blue_berry", new AliasedBlockItem(ParadiseLostBlocks.BLUEBERRY_BUSH, food(ParadiseLostFoodComponent.BLUEBERRY)), compostable30);
-     public static final Item ORANGE = add("orange", new Item(food(ParadiseLostFoodComponent.ORANGE)), compostable65);
+    public static final Item ORANGE = add("orange", new Item(food(ParadiseLostFoodComponent.ORANGE)), compostable65);
     public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(ParadiseLostFoodComponent.WHITE_APPLE)), compostable(0f));
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(ParadiseLostBlocks.AMADRYS, food(ParadiseLostFoodComponent.GENERIC_WORSE)), compostable30);
     public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new StewItem(food(ParadiseLostFoodComponent.AMADRYS_NOODLES)));

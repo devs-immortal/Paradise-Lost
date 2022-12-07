@@ -10,12 +10,10 @@ import net.id.paradiselost.client.rendering.entity.hostile.SwetRenderer;
 import net.id.paradiselost.client.rendering.entity.misc.RookRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.AerbunnyRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.AerwhaleRenderer;
-import net.id.paradiselost.client.rendering.entity.passive.AmbystRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.MoaEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.projectile.CockatriceSpitRenderer;
 import net.id.paradiselost.client.rendering.entity.projectile.DartRenderer;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
-import net.id.incubus_core.blocklikeentities.api.client.BlockLikeEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -59,7 +57,7 @@ public class ParadiseLostEntityRenderers {
     
     @SafeVarargs
     private static <T extends Entity> void register(EntityRendererFactory<T> factory, EntityType<? extends T>... types) {
-        for(var type : types){
+        for (var type : types) {
             register(type, factory);
         }
     }

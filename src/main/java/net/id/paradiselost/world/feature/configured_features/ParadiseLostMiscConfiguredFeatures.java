@@ -61,7 +61,10 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
 
     // TODO 1.7 uncomment public static final RegistryEntry<ConfiguredFeature<DynamicConfiguration, ?>> LAKE = register("lake", ParadiseLostFeatures.LAKE, new DynamicConfiguration(Blocks.WATER.getDefaultState(), Optional.of("normal")));
 
-    private static class Configs extends ParadiseLostConfiguredFeatures.Configs{
+    public static void init() {
+    }
+    
+    private static class Configs extends ParadiseLostConfiguredFeatures.Configs {
         private static final QuicksoilConfig QUICKSOIL_CONFIG = new QuicksoilConfig();
         private static final SpringFeatureConfig WATER_SPRING_CONFIG = new SpringFeatureConfig(Fluids.WATER.getDefaultState(), true, 4, 1, RegistryEntryList.of(Block::getRegistryEntry, HOLYSTONE));
 
@@ -72,10 +75,10 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
                         .build())
         ), BlockFilterPlacementModifier.of(ParadiseLostPlacedFeatures.IN_OR_ON_GROUND)));
 
-        private static BoulderFeatureConfig boulder(BlockStateProvider provider, int tries, IntProvider size){
+        private static BoulderFeatureConfig boulder(BlockStateProvider provider, int tries, IntProvider size) {
             return new BoulderFeatureConfig(BlockStateProvider.of(COBBLED_HOLYSTONE), ConstantIntProvider.create(tries), size);
         }
-        private static BoulderFeatureConfig boulder(Block block, int tries, IntProvider size){
+        private static BoulderFeatureConfig boulder(Block block, int tries, IntProvider size) {
             return boulder(BlockStateProvider.of(block), tries, size);
         }
 
@@ -98,9 +101,8 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
                         .add(COBBLED_HOLYSTONE.getDefaultState(), 1)
         ), 4, UniformIntProvider.create(3, 5));
 
-        private static OreFeatureConfig ore(Block ore, int size){
+        private static OreFeatureConfig ore(Block ore, int size) {
             return new OreFeatureConfig(List.of(OreFeatureConfig.createTarget(new BlockMatchRuleTest(HOLYSTONE), ore.getDefaultState())), size);
         }
     }
-    public static void init(){}
 }

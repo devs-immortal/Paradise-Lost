@@ -123,8 +123,8 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
             playSound(ParadiseLostSoundEvents.ENTITY_AERBUNNY_SNIFF, 1.0F, 2.0F);
         }
 
-        if (this.hasVehicle() && (this.getVehicle().isSneaking() || this.getVehicle().getVelocity().y < -0.7)){
-            ((ParadiseLostEntityExtensions)this.getVehicle()).setAerbunnyFallen(true);
+        if (this.hasVehicle() && (this.getVehicle().isSneaking() || this.getVehicle().getVelocity().y < -0.7)) {
+            ((ParadiseLostEntityExtensions) this.getVehicle()).setAerbunnyFallen(true);
             this.dismountVehicle();
         }
     }

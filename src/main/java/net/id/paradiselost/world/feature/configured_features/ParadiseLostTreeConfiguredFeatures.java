@@ -1,7 +1,6 @@
 package net.id.paradiselost.world.feature.configured_features;
 
 import com.google.common.collect.ImmutableList;
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.feature.configs.LongFeatureConfig;
@@ -13,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.collection.DataPool;
-import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
 import net.minecraft.util.math.floatprovider.UniformFloatProvider;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -82,7 +80,10 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryEntry<ConfiguredFeature<RandomFeatureConfig, ?>> THICKET_TREES = register("thicket_trees", Feature.RANDOM_SELECTOR, Assortments.THICKET_TREES_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomFeatureConfig, ?>> RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR, Assortments.RAINBOW_FOREST_CONFIG);
 
-    private static class Configs extends ParadiseLostConfiguredFeatures.Configs{
+    public static void init() {
+    }
+
+    private static class Configs extends ParadiseLostConfiguredFeatures.Configs {
         private static final DefaultFeatureConfig DEFAULT_CONFIG = new DefaultFeatureConfig();
 
         private static TreeFeatureConfig generateTree(BlockState logState, BlockState foliageState,
@@ -408,5 +409,4 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
         );
     }
 
-    public static void init(){}
 }

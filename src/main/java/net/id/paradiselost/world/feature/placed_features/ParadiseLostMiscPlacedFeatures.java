@@ -39,5 +39,6 @@ public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final RegistryEntry<PlacedFeature> TUNDRA_PONDS = register("tundra_pond", ParadiseLostMiscConfiguredFeatures.TUNDRA_PONDS, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1)));
     public static final RegistryEntry<PlacedFeature> TUNDRA_SNOW = register("tundra_snow", ParadiseLostMiscConfiguredFeatures.TUNDRA_SNOW, CountMultilayerPlacementModifier.of(2), CountPlacementModifier.of(UniformIntProvider.create(0, 2)));
 
-    public static void init(){}
+    public static void init() {
+    }
 }

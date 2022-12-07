@@ -58,11 +58,11 @@ public class RookEntity extends MobEntity {
     public void tick() {
         super.tick();
 
-        if(blinkTicks > 0) {
+        if (blinkTicks > 0) {
             blinkTicks--;
         }
 
-        if(world.getTimeOfDay() % 24000 < 13000) {
+        if (world.getTimeOfDay() % 24000 < 13000) {
             this.remove(RemovalReason.DISCARDED);
         }
 
@@ -72,10 +72,10 @@ public class RookEntity extends MobEntity {
                 .ifPresent(player -> {
                     getLookControl().lookAt(player, 15, 15);
 
-                    if(player.distanceTo(this) < 14) {
+                    if (player.distanceTo(this) < 14) {
                         byte luv = LUV.getLUV(player).getValue();
-                        if(!player.isSpectator() && world.getLightLevel(LightType.BLOCK, player.getBlockPos()) < 5 && world.isNight() && world.getTime() % 10 == 0 && (luv > 50 || luv < 0)) {
-                            if(random.nextInt(luv < 0 ? 40 : 200) == 0) {
+                        if (!player.isSpectator() && world.getLightLevel(LightType.BLOCK, player.getBlockPos()) < 5 && world.isNight() && world.getTime() % 10 == 0 && (luv > 50 || luv < 0)) {
+                            if (random.nextInt(luv < 0 ? 40 : 200) == 0) {
                                 //player.damage(ParadiseLostDamageSources.NIGHTMARE, 9);
                                 produceParticlesServer(ParticleTypes.SMOKE, random.nextInt(19), 0, 0);
                                 produceParticlesServer(ParticleTypes.LARGE_SMOKE, random.nextInt(8), 0, 0);
@@ -86,13 +86,13 @@ public class RookEntity extends MobEntity {
                 });
         bodyYaw = headYaw;
 
-        if(world.getTime() % 20 == 0 && random.nextBoolean()) {
+        if (world.getTime() % 20 == 0 && random.nextBoolean()) {
             blinkTicks = random.nextInt(5);
         }
     }
 
     public void produceParticlesServer(ParticleEffect parameters, int rolls, int maxAmount, float yOffset) {
-        if(world instanceof ServerWorld server) {
+        if (world instanceof ServerWorld server) {
             maxAmount = maxAmount + 1;
             for (int i = 0; i < rolls; ++i) {
                 double d = this.random.nextGaussian() * 0.02D;
@@ -119,7 +119,7 @@ public class RookEntity extends MobEntity {
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
-        if(nbt.contains("ascension")) {
+        if (nbt.contains("ascension")) {
             dataTracker.set(ASCENSION, nbt.getByte("ascension"));
         }
         super.readCustomDataFromNbt(nbt);
@@ -141,21 +141,21 @@ public class RookEntity extends MobEntity {
         var attacker = source.getAttacker();
         var success = false;
 
-        if(attacker instanceof LivingEntity entity) {
+        if (attacker instanceof LivingEntity entity) {
             var weapon = entity.getStackInHand(Hand.MAIN_HAND);
-            if(weapon.isIn(RIGHTEOUS_WEAPONS)) {
+            if (weapon.isIn(RIGHTEOUS_WEAPONS)) {
                 amount /= 4;
                 success = true;
-            } else if(weapon.isIn(SACRED_WEAPONS)) {
+            } else if (weapon.isIn(SACRED_WEAPONS)) {
                 success = true;
             }
         }
 
-        if(success) {
+        if (success) {
             return super.damage(source, amount);
         }
 
-        if(source.isOutOfWorld()) {
+        if (source.isOutOfWorld()) {
             remove(RemovalReason.DISCARDED);
         }
 
@@ -191,18 +191,22 @@ public class RookEntity extends MobEntity {
     }
 
     @Override
-    protected void pushAway(Entity entity) {}
+    protected void pushAway(Entity entity) {
+    }
 
     @Override
-    public void pushAwayFrom(Entity entity) {}
+    public void pushAwayFrom(Entity entity) {
+    }
 
     @Override
-    protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
+    protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {
+    }
 
     @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
         return false;
     }
 
-    public record RookData(byte ascension) implements EntityData {}
+    public record RookData(byte ascension) implements EntityData {
+    }
 }

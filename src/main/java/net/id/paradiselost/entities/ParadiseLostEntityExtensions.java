@@ -31,6 +31,6 @@ public interface ParadiseLostEntityExtensions {
 
     void setFlipped();
 
-    default void tick(){
+    default void tick() {
     }
 }

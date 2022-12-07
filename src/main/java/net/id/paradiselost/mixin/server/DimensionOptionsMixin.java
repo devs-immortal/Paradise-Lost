@@ -16,11 +16,13 @@ import java.util.Set;
 
 @Mixin(DimensionOptions.class)
 public abstract class DimensionOptionsMixin {
-    @Shadow @Mutable @Final private static Set<RegistryKey<DimensionOptions>> BASE_DIMENSIONS;
+    @Shadow
+    @Mutable
+    @Final private static Set<RegistryKey<DimensionOptions>> BASE_DIMENSIONS;
     
     @Inject(
-        method = "<clinit>",
-        at = @At("TAIL")
+            method = "<clinit>",
+            at = @At("TAIL")
     )
     private static void staticInit(CallbackInfo ci) {
         var builder = ImmutableSet.<RegistryKey<DimensionOptions>>builder();

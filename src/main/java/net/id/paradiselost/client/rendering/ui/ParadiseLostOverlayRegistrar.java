@@ -23,5 +23,6 @@ public class ParadiseLostOverlayRegistrar {
         return OVERLAYS;
     }
 
-    public record Overlay(Identifier path, Predicate<LivingEntity> renderPredicate, Function<LivingEntity, Float> opacityProvider) {}
+    public record Overlay(Identifier path, Predicate<LivingEntity> renderPredicate, Function<LivingEntity, Float> opacityProvider) {
+    }
 }

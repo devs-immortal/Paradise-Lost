@@ -55,26 +55,26 @@ public class OvergrownTrunkPlacer extends TrunkPlacer {
     public List<FoliagePlacer.TreeNode> generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, int height, BlockPos startPos, TreeFeatureConfig config) {
         setToDirt(world, replacer, random, startPos.down(), config);
 
-        for(int i = 0; i < height; ++i) {
+        for (int i = 0; i < height; ++i) {
             var curPos = startPos.up(i);
             getAndSetState(world, replacer, random, curPos, config);
 
-            if(i > 0 && i < (height * 0.7)) {
+            if (i > 0 && i < (height * 0.7)) {
                 var chance = overgrowthChance;
 
                 for (Direction dir : Direction.values()) {
-                    if(dir.getHorizontal() >= 0 && random.nextFloat() <= chance) {
+                    if (dir.getHorizontal() >= 0 && random.nextFloat() <= chance) {
                         var tempPos = curPos.offset(dir);
 
-                        if(TreeFeature.canReplace(world, tempPos)) {
+                        if (TreeFeature.canReplace(world, tempPos)) {
                             getAndSetState(world, replacer, random, tempPos, config, (state -> {
                                 var overgrowth = overgrowthProvider.getBlockState(random, tempPos);
 
-                                if(overgrowth.contains(Properties.HORIZONTAL_FACING)) {
+                                if (overgrowth.contains(Properties.HORIZONTAL_FACING)) {
                                     overgrowth = overgrowth.with(Properties.HORIZONTAL_FACING, dir.getOpposite());
                                 }
 
-                                return  overgrowth;
+                                return overgrowth;
                             }));
                             chance /= 4;
                         }

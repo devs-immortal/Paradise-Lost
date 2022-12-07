@@ -6,6 +6,6 @@ import net.minecraft.client.render.RenderLayer;
 
 // Workaround for some Mojank
 @Environment(EnvType.CLIENT)
-public interface RenderLayerOverride{
+public interface RenderLayerOverride {
     RenderLayer getRenderLayerOverride(boolean fancy);
 }

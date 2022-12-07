@@ -9,7 +9,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
@@ -50,7 +49,7 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
         int y = (height - backgroundHeight) >> 1;
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
         
-        if(handler.hasMoaInventory()) {
+        if (handler.hasMoaInventory()) {
             drawTexture(matrices, x + 79, y + 17, 0, 184, 90, 72);
         }
     

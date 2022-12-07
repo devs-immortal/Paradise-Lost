@@ -183,7 +183,7 @@ public class AerwhaleEntity extends FlyingEntity {
         private final AerwhaleEntity parentEntity;
         private int courseChangeCooldown;
 
-        public MoveHelperController(AerwhaleEntity aerwhale) {
+        MoveHelperController(AerwhaleEntity aerwhale) {
             super(aerwhale);
             this.parentEntity = aerwhale;
         }
@@ -234,7 +234,7 @@ public class AerwhaleEntity extends FlyingEntity {
     static class RandomFlyGoal extends Goal {
         private final AerwhaleEntity parentEntity;
 
-        public RandomFlyGoal(AerwhaleEntity aerwhale) {
+        RandomFlyGoal(AerwhaleEntity aerwhale) {
             this.parentEntity = aerwhale;
             this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
         }

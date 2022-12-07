@@ -3,7 +3,6 @@ package net.id.paradiselost.blocks.blockentity;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.util.registry.Registry;
 
 import static net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder.create;
@@ -22,7 +21,7 @@ public class ParadiseLostBlockEntityTypes {
 //        register("dungeonswitch", DUNGEON_SWITCH);
     }
     
-    private static void register(String name, BlockEntityType<?> type){
+    private static void register(String name, BlockEntityType<?> type) {
         Registry.register(Registry.BLOCK_ENTITY_TYPE, locate(name), type);
     }
 }

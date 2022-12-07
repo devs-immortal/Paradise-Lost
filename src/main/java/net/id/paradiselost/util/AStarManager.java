@@ -18,7 +18,7 @@ public class AStarManager {
         return new Builder();
     }
 
-    public static class APather {
+    public static final class APather {
 
         private final PriorityQueue<Node> queue;
         private final WorldView world;
@@ -52,7 +52,7 @@ public class AStarManager {
         }
 
         public void compute() {
-            if(complete && !allowRecompute) {
+            if (complete && !allowRecompute) {
                 throw new IllegalStateException("attempted to compute a completed path, did you forget to set allowRecompute?");
             }
 
@@ -67,15 +67,15 @@ public class AStarManager {
 
             int iterations = 0;
 
-            while(!queue.isEmpty()) {
-                if(iterations > expectedPathLength * 20) {
+            while (!queue.isEmpty()) {
+                if (iterations > expectedPathLength * 20) {
                     break;
                 }
 
                 var currentNode = queue.poll();
                 pastNodes.add(currentNode.pos);
 
-                if(currentNode.pos.equals(goalPos)) {
+                if (currentNode.pos.equals(goalPos)) {
                     endNode = Optional.of(currentNode);
                     break;
                 }
@@ -97,12 +97,12 @@ public class AStarManager {
 
                 var testPos = curPos.offset(direction);
 
-                if(allowDiagionalMovement) {
+                if (allowDiagionalMovement) {
                     for (Direction diagonal : Direction.values()) {
-                        if(diagonal.getAxis() != direction.getAxis()) {
+                        if (diagonal.getAxis() != direction.getAxis()) {
                             var diagonalPos = checkAdjuster.apply(world, testPos.offset(diagonal));
 
-                            if(!pastNodes.contains(diagonalPos) && validator.test(world, diagonalPos)) {
+                            if (!pastNodes.contains(diagonalPos) && validator.test(world, diagonalPos)) {
 
                                 var cost = costMapper.apply(start, goal, world, diagonalPos, heuristic);
 
@@ -114,7 +114,7 @@ public class AStarManager {
                 else {
                     testPos = checkAdjuster.apply(world, testPos);
 
-                    if(!pastNodes.contains(testPos) && validator.test(world, testPos)) {
+                    if (!pastNodes.contains(testPos) && validator.test(world, testPos)) {
 
                         var cost = costMapper.apply(start, goal, world, testPos, heuristic);
 
@@ -125,11 +125,11 @@ public class AStarManager {
         }
 
         private Optional<PathingOutput> constructOutput(BlockPos start, BlockPos goal, Optional<Node> endNode, Set<BlockPos> pastNodes) {
-            if(outputValidator.test(world, endNode) && endNode.isPresent()) {
+            if (outputValidator.test(world, endNode) && endNode.isPresent()) {
                 var node = endNode.get();
                 var path = new LinkedList<Node>();
 
-                while(!node.root) {
+                while (!node.root) {
                     path.add(node);
                     node = node.parent;
                 }
@@ -150,7 +150,7 @@ public class AStarManager {
         }
     }
 
-    public static class Builder {
+    public static final class Builder {
 
         private BlockPosProvider start, goal;
         private BiFunction<WorldView, BlockPos, BlockPos> checkAdjuster = a_noop;
@@ -162,7 +162,8 @@ public class AStarManager {
         private int expectedPathLength = 32;
         private double heuristic = 1.334;
 
-        private Builder() {}
+        private Builder() {
+        }
 
         public void checkAdjuster(@NotNull BiFunction<WorldView, BlockPos, BlockPos> checkAdjuster) {
             this.checkAdjuster = checkAdjuster;
@@ -205,10 +206,10 @@ public class AStarManager {
         }
 
         public APather build(@NotNull WorldView world) {
-            if(start == null) {
+            if (start == null) {
                 throw new IllegalArgumentException("start must not be null");
             }
-            if(goal == null) {
+            if (goal == null) {
                 throw new IllegalArgumentException("goal must not be null");
             }
 
@@ -217,7 +218,7 @@ public class AStarManager {
 
         public static final BiFunction<WorldView, BlockPos, BlockPos> a_noop = (worldView, pos) -> pos;
         public static final BiFunction<WorldView, BlockPos, BlockPos> a_simpleGround = (worldView, pos) -> {
-            if(worldView.isAir(pos.down())) {
+            if (worldView.isAir(pos.down())) {
                 return pos.down();
             }
             return pos;
@@ -232,9 +233,11 @@ public class AStarManager {
         public static final BiPredicate<WorldView, Optional<Node>> o_present = (worldView, node) -> node.isPresent();
     }
 
-    public record Node(BlockPos pos, int cost, @Nullable Node parent, boolean root) {}
+    public record Node(BlockPos pos, int cost, @Nullable Node parent, boolean root) {
+    }
 
-    public record PathingOutput(LinkedList<Node> path, BlockPos start, BlockPos goal, Set<BlockPos> checkedBlocks) {}
+    public record PathingOutput(LinkedList<Node> path, BlockPos start, BlockPos goal, Set<BlockPos> checkedBlocks) {
+    }
 
     @FunctionalInterface
     public interface BlockPosProvider {

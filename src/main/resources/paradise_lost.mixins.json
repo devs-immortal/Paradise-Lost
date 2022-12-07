@@ -26,7 +26,6 @@
     "item.SwordItemAccessor",
     "item.ToolMaterialsAccessor",
     "server.DimensionOptionsMixin",
-    "server.DimensionTypeMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
@@ -55,7 +54,6 @@
     "client.render.MapRendererMixin",
     "client.render.NativeImageAccessor",
     "client.render.RenderLayersMixin",
-    "client.render.VertexBufferMixin",
     "client.render.WorldRendererMixin",
     "devel.client.HandledScreenMixin"
   ],

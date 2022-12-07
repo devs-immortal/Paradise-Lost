@@ -15,15 +15,16 @@ import net.minecraft.util.math.Vec3f;
 
 public class AmbrosiumCampfireBlockEntityRenderer implements BlockEntityRenderer<AmbrosiumCampfireBlockEntity> {
 
-    public AmbrosiumCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {}
+    public AmbrosiumCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+    }
     
     @Override
     public void render(AmbrosiumCampfireBlockEntity campfireBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
         Direction direction = campfireBlockEntity.getCachedState().get(CampfireBlock.FACING);
         DefaultedList<ItemStack> defaultedList = campfireBlockEntity.getItemsBeingCooked();
-        int k = (int)campfireBlockEntity.getPos().asLong();
+        int k = (int) campfireBlockEntity.getPos().asLong();
         
-        for(int l = 0; l < defaultedList.size(); ++l) {
+        for (int l = 0; l < defaultedList.size(); ++l) {
             ItemStack itemStack = defaultedList.get(l);
             if (itemStack != ItemStack.EMPTY) {
                 matrixStack.push();

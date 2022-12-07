@@ -1,7 +1,6 @@
 package net.id.paradiselost.mixin.block;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

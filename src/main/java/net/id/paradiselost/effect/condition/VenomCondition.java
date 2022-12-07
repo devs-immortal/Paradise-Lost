@@ -42,12 +42,14 @@ public class VenomCondition extends Condition {
     @Override
     public void tickPlayer(World world, PlayerEntity player, Severity severity, float rawSeverity) {
         if (rawSeverity > visThreshold && world.getTime() % 20 == 0) {
+
             var poisonEffect = switch (severity) {
                 case MILD -> new StatusEffectInstance(StatusEffects.POISON, 100, 1, true, false, true);
                 case ACUTE -> new StatusEffectInstance(StatusEffects.POISON, 200, 1, true, false, true);
                 case DIRE, EXTREME -> new StatusEffectInstance(StatusEffects.POISON, 200, 2, true, false, true);
                 default -> new StatusEffectInstance(StatusEffects.POISON, 100, 0, true, false, true);
             };
+
             var witherEffect = switch (severity) {
                 case DIRE -> new StatusEffectInstance(StatusEffects.WITHER, 100, 0, true, false, true);
                 case EXTREME -> new StatusEffectInstance(StatusEffects.WITHER, 200, 2, true, false, true);

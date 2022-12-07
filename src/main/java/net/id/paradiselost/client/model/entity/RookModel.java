@@ -38,7 +38,7 @@ public class RookModel extends EntityModel<RookEntity> {
 
         byte luv = 127;
 
-        if(cameraEntity instanceof PlayerEntity player) {
+        if (cameraEntity instanceof PlayerEntity player) {
             luv = LUV.getLUV(player).getValue();
         }
 
@@ -53,14 +53,14 @@ public class RookModel extends EntityModel<RookEntity> {
 
         lookAlpha = (float) MathHelper.lerp(cameraPos.distanceTo(rookPos) / 12F, 0, lookAlpha);
 
-        if(lookAlpha < 0.075F || cameraPos.distanceTo(rookPos) < 4.5F) {
+        if (lookAlpha < 0.075F || cameraPos.distanceTo(rookPos) < 4.5F) {
             lookAlpha = 0F;
         }
 
-        if(luv >= 0 && luv < 40) {
+        if (luv >= 0 && luv < 40) {
             lookAlpha = 0F;
         }
-        else if(luv == 127 || luv < 0) {
+        else if (luv == 127 || luv < 0) {
             lookAlpha = 0.7F;
         }
 

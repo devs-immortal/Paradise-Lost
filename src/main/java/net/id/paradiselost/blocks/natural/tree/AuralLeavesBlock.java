@@ -18,7 +18,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 @EnvironmentInterface(value = EnvType.CLIENT, itf = RenderLayerOverride.class)
-public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColorBlock, RenderLayerOverride{
+public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColorBlock, RenderLayerOverride {
 
     private final Vec3i[] gradientColors;
 
@@ -97,7 +97,7 @@ public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColo
     @Environment(EnvType.CLIENT)
     public BlockColorProvider getBlockColorProvider() {
         // evil hack to send the shader the blockpos
-        return (state, world, pos, tintIndex) -> MathHelper.packRgb(pos.getX(), pos.getY(), pos.getZ()) | ((2*(pos.getY() / 256 % 2) - 1) << 24);
+        return (state, world, pos, tintIndex) -> MathHelper.packRgb(pos.getX(), pos.getY(), pos.getZ()) | ((2 * (pos.getY() / 256 % 2) - 1) << 24);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class AuralLeavesBlock extends WisteriaLeavesBlock implements DynamicColo
     
     @Environment(EnvType.CLIENT)
     @Override
-    public RenderLayer getRenderLayerOverride(boolean fancy){
+    public RenderLayer getRenderLayerOverride(boolean fancy) {
         return fancy ? ParadiseLostRenderLayers.AURAL_CUTOUT_MIPPED : ParadiseLostRenderLayers.AURAL;
     }
 }

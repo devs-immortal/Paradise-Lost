@@ -6,7 +6,6 @@ import net.id.paradiselost.world.feature.configs.GroundcoverFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
@@ -59,33 +58,33 @@ public class GroundcoverFeature extends Feature<GroundcoverFeatureConfig> {
 
         Queue<BlockPos> centers = new LinkedList<>();
         BlockPos.iterateOutwards(center, radius, 0, radius).forEach(pos -> {
-            if(pos.getSquaredDistance(center) > Math.pow(radius, 2)) {
+            if (pos.getSquaredDistance(center) > Math.pow(radius, 2)) {
                 return;
             }
 
             boolean add = pos.getManhattanDistance(center) == radius && random.nextFloat() < 0.1F;
     
-            //if(world.isAir(pos) || world.isWater(pos) || !world.isWater(pos.up()) || !world.isAir(pos.up())) {
+            //if (world.isAir(pos) || world.isWater(pos) || !world.isWater(pos.up()) || !world.isAir(pos.up())) {
             //    boolean fail = true;
             //    int tries = 5;
 //
-            //    while(tries >= -4) {
+            //    while (tries >= -4) {
             //        tries--;
             //        pos = pos.offset(Direction.Axis.Y, tries);
-            //        if(!world.isAir(pos) && !world.isWater(pos) && (world.isWater(pos.up()) || world.isAir(pos.up()))) {
+            //        if (!world.isAir(pos) && !world.isWater(pos) && (world.isWater(pos.up()) || world.isAir(pos.up()))) {
             //            fail = false;
             //            break;
             //        }
             //    }
 //
-            //    if(fail)
+            //    if (fail)
             //        return;
             //}
 
             BlockPos placement = pos.withY(0 /*context.getGenerator().getHeight(pos.getX(), pos.getZ(), Heightmap.Type.WORLD_SURFACE_WG, world) - 1*/);
 
-            if(world.testBlockState(placement, state -> state.isIn(ParadiseLostBlockTags.BASE_REPLACEABLES))) {
-                if(add) {
+            if (world.testBlockState(placement, state -> state.isIn(ParadiseLostBlockTags.BASE_REPLACEABLES))) {
+                if (add) {
                     centers.add(placement);
                 }
 

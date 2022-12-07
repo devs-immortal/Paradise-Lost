@@ -12,7 +12,6 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 
 import java.util.Optional;
 import java.util.Set;
@@ -70,7 +69,7 @@ public class FindLogSensor extends Sensor<AnimalEntity> {
         return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_SKYROOT_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) != Direction.Axis.Y;
     }
 
-    public static boolean isLogSameRotation(ServerWorld world, BlockPos testPos,Direction dir) {
+    public static boolean isLogSameRotation(ServerWorld world, BlockPos testPos, Direction dir) {
         return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_SKYROOT_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) == dir.getAxis();
     }
 

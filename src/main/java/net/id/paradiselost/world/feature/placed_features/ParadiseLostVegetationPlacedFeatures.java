@@ -1,15 +1,12 @@
 package net.id.paradiselost.world.feature.placed_features;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.world.feature.configured_features.ParadiseLostVegetationConfiguredFeatures;
 import net.id.paradiselost.world.feature.placement_modifiers.ChancePlacementModifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.BuiltinBiomes;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.*;
@@ -55,5 +52,6 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
     // ?
     public static final RegistryEntry<PlacedFeature> RAINBOW_MALT_SPRIGS = register("rainbow_malt_sprigs", ParadiseLostVegetationConfiguredFeatures.RAINBOW_MALT_SPRIGS, PlacedFeatures.BOTTOM_TO_TOP_RANGE, ChancePlacementModifier.of(2), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1)), ON_SOLID_GROUND);
 
-    public static void init(){}
+    public static void init() {
+    }
 }

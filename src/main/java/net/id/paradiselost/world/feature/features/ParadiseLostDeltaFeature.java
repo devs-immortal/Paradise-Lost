@@ -15,14 +15,14 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ParadiseLostDeltaFeature extends DeltaFeature{
+public class ParadiseLostDeltaFeature extends DeltaFeature {
     
-    public ParadiseLostDeltaFeature(Codec<DeltaFeatureConfig> codec){
+    public ParadiseLostDeltaFeature(Codec<DeltaFeatureConfig> codec) {
         super(codec);
     }
     
     @Override
-    public boolean generate(FeatureContext<DeltaFeatureConfig> context){
+    public boolean generate(FeatureContext<DeltaFeatureConfig> context) {
         boolean modified = false;
         Random random = context.getRandom();
         StructureWorldAccess world = context.getWorld();
@@ -42,20 +42,20 @@ public class ParadiseLostDeltaFeature extends DeltaFeature{
         var rim = featureConfig.getRim();
         var contents = featureConfig.getContents();
         
-        for(BlockPos currentPos : BlockPos.iterateOutwards(origin, xSize, 0, zSize)){
-            if(currentPos.getManhattanDistance(origin) > size){
+        for (BlockPos currentPos : BlockPos.iterateOutwards(origin, xSize, 0, zSize)) {
+            if (currentPos.getManhattanDistance(origin) > size) {
                 break;
             }
             
-            if(canPlace(world, currentPos, contents, filledPositions)){
-                if(bl3){
+            if (canPlace(world, currentPos, contents, filledPositions)) {
+                if (bl3) {
                     modified = true;
                     setBlockState(world, currentPos, rim);
                     filledPositions.add(currentPos);
                 }
                 
                 BlockPos blockPos3 = currentPos.add(i, 0, j);
-                if(canPlace(world, blockPos3, contents, filledPositions)){
+                if (canPlace(world, blockPos3, contents, filledPositions)) {
                     modified = true;
                     setBlockState(world, blockPos3, contents);
                     filledPositions.add(blockPos3);
@@ -66,25 +66,25 @@ public class ParadiseLostDeltaFeature extends DeltaFeature{
         return modified;
     }
     
-    private static boolean canPlace(WorldAccess world, BlockPos pos, BlockState contents, Set<BlockPos> filledPositions){
+    private static boolean canPlace(WorldAccess world, BlockPos pos, BlockState contents, Set<BlockPos> filledPositions) {
         BlockState blockState = world.getBlockState(pos);
     
-        if(!blockState.isIn(ParadiseLostBlockTags.FLUID_REPLACEABLES)) {
+        if (!blockState.isIn(ParadiseLostBlockTags.FLUID_REPLACEABLES)) {
             return false;
         }
         
-        if(blockState.isOf(contents.getBlock())){
+        if (blockState.isOf(contents.getBlock())) {
             return false;
-        }else if(blockState.getHardness(world, pos) <= -1){
+        } else if (blockState.getHardness(world, pos) <= -1) {
             return false;
-        }else{
-            for(Direction direction : Direction.values()){
+        } else {
+            for (Direction direction : Direction.values()) {
                 var currentPos = pos.offset(direction);
-                if(filledPositions.contains(currentPos)){
+                if (filledPositions.contains(currentPos)) {
                     continue;
                 }
                 boolean isAir = !world.getBlockState(currentPos).getMaterial().isSolid();
-                if(isAir && direction != Direction.UP || !isAir && direction == Direction.UP){
+                if (isAir && direction != Direction.UP || !isAir && direction == Direction.UP) {
                     return false;
                 }
             }

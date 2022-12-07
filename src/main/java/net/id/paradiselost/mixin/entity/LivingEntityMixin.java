@@ -55,12 +55,12 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @SuppressWarnings("ConstantConditions")
     @ModifyVariable(
-        method = "travel",
-        at = @At(
-            value = "INVOKE_ASSIGN",
-            ordinal = 0,
-            target = "Lnet/minecraft/world/World;getFluidState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/fluid/FluidState;"
-        )
+            method = "travel",
+            at = @At(
+                value = "INVOKE_ASSIGN",
+                ordinal = 0,
+                target = "Lnet/minecraft/world/World;getFluidState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/fluid/FluidState;"
+            )
     )
     private double changeGravity(double gravity) {
         LivingEntity entity = (LivingEntity) (Object) this;
@@ -124,19 +124,19 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     @SuppressWarnings("ConstantConditions")
     @Inject(method = "addDeathParticles", at = @At("HEAD"), cancellable = true)
     private void applyCustomDeathParticles(CallbackInfo ci) {
-        if(((LivingEntity) ((Object) this)) instanceof RookEntity) {
-            for(int i = 0; i < 20 + random.nextInt(20); ++i) {
+        if (((LivingEntity) ((Object) this)) instanceof RookEntity) {
+            for (int i = 0; i < 20 + random.nextInt(20); ++i) {
                 double d = this.random.nextGaussian() * 0.02D;
                 double e = this.random.nextGaussian() * 0.02D;
                 double f = this.random.nextGaussian() * 0.02D;
-                if(random.nextInt( 3) == 0) {
+                if (random.nextInt(3) == 0) {
                     this.world.addParticle(ParticleTypes.LARGE_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
                 }
                 else {
                     this.world.addParticle(ParticleTypes.SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
                 }
 
-                if(random.nextInt(3) == 0) {
+                if (random.nextInt(3) == 0) {
                     this.world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d / 3, e, f / 3);
                 }
             }

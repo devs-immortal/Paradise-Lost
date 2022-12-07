@@ -29,7 +29,7 @@ public class AuralHangerBlock extends ParadiseLostHangerBlock implements Dynamic
     @Override
     @Environment(EnvType.CLIENT)
     public BlockColorProvider getBlockColorProvider() {
-        return (state, world, pos, tintIndex) -> MathHelper.packRgb(pos.getX(), pos.getY(), pos.getZ()) | ((2*(pos.getY() / 256 % 2) - 1) << 24);
+        return (state, world, pos, tintIndex) -> MathHelper.packRgb(pos.getX(), pos.getY(), pos.getZ()) | ((2 * (pos.getY() / 256 % 2) - 1) << 24);
     }
 
     @Override

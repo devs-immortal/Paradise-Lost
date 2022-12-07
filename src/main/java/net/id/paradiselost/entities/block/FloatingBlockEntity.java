@@ -21,7 +21,8 @@ import java.util.function.Supplier;
 public class FloatingBlockEntity extends BlockLikeEntity {
     private Supplier<Boolean> dropState = () -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this);
     private boolean dropping = false;
-    private BiConsumer<Double, Boolean> onEndFloating = (f, b) -> {};
+    private BiConsumer<Double, Boolean> onEndFloating = (f, b) -> {
+    };
     public double lastYVelocity = 0;
 
     public FloatingBlockEntity(EntityType<? extends BlockLikeEntity> entityType, World world) {

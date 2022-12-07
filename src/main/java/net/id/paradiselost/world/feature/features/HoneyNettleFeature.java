@@ -30,7 +30,7 @@ public class HoneyNettleFeature extends Feature<DefaultFeatureConfig> {
 
         var adjustedPos = origin.withY(k);
 
-        if(world.getBlockState(adjustedPos).isOf(Blocks.WATER) && world.getBlockState(adjustedPos.up()).isAir()) {
+        if (world.getBlockState(adjustedPos).isOf(Blocks.WATER) && world.getBlockState(adjustedPos.up()).isAir()) {
             world.setBlockState(adjustedPos, ParadiseLostBlocks.HONEY_NETTLE.getDefaultState().with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER).with(Properties.WATERLOGGED, true), Block.NOTIFY_ALL);
             world.setBlockState(adjustedPos.up(), ParadiseLostBlocks.HONEY_NETTLE.getDefaultState().with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.UPPER).with(Properties.WATERLOGGED, false), Block.NOTIFY_ALL);
 

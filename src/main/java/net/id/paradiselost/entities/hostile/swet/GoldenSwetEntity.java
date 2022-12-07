@@ -1,6 +1,5 @@
 package net.id.paradiselost.entities.hostile.swet;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.minecraft.entity.EntityType;

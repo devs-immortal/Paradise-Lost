@@ -49,9 +49,9 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return switch (state.get(AXIS)) {
-            case X -> shapeX;
-            case Z -> shapeZ;
-            default -> throw new IllegalStateException("Unexpected value: " + state.get(AXIS));
+        case X -> shapeX;
+        case Z -> shapeZ;
+        default -> throw new IllegalStateException("Unexpected value: " + state.get(AXIS));
         };
     }
 

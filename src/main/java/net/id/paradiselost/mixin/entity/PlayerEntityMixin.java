@@ -6,7 +6,6 @@ import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerAbilities;
@@ -43,9 +42,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
     @Shadow public abstract PlayerAbilities getAbilities();
 
     @Inject(
-        method = "damage",
-        at = @At("HEAD"),
-        cancellable = true
+            method = "damage",
+            at = @At("HEAD"),
+            cancellable = true
     )
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (source.isOutOfWorld() && getY() < world.getBottomY() - 1 && world.getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
@@ -92,9 +91,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
     }
 
     @Inject(
-        method = "handleFallDamage",
-        at = @At("HEAD"),
-        cancellable = true
+            method = "handleFallDamage",
+            at = @At("HEAD"),
+            cancellable = true
     )
     public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (isParadiseLostFallen()) {

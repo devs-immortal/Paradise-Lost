@@ -20,7 +20,7 @@ public abstract class EntityMixin {
     @Redirect(method = "getVelocityMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;getVelocityMultiplier()F"), require = 2)
     private float getVelocityMultiplier(Block target) {
         if (target == ParadiseLostBlocks.QUICKSOIL || target == ParadiseLostBlocks.QUICKSOIL_GLASS || target == ParadiseLostBlocks.QUICKSOIL_GLASS_PANE) {
-            Entity entity = ((Entity)(Object)this);
+            Entity entity = ((Entity) (Object) this);
             boolean isVehicle = entity instanceof BoatEntity || entity instanceof MinecartEntity;
 
             double maxSpeed = entity.world.getGameRules().get(ParadiseLostGameRules.MAX_QUICKSOIL_SPEED).get();
@@ -38,14 +38,14 @@ public abstract class EntityMixin {
 
     @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;updateSwimming()V"))
     private void springWaterEffects(CallbackInfo ci) {
-        Entity entity = ((Entity)(Object)this);
+        Entity entity = ((Entity) (Object) this);
         
-        if (entity instanceof LivingEntity livingEntity){
-            if(entity.world.getStatesInBoxIfLoaded(entity.getBoundingBox().contract(1.0E-6D)).anyMatch(
-                (state)->state.getBlock().equals(ParadiseLostBlocks.SPRING_WATER))
-            ){
+        if (entity instanceof LivingEntity livingEntity) {
+            if (entity.world.getStatesInBoxIfLoaded(entity.getBoundingBox().contract(1.0E-6D)).anyMatch(
+                    (state) -> state.getBlock().equals(ParadiseLostBlocks.SPRING_WATER))
+            ) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ParadiseLostStatusEffects.SIMMERING, 6000000, 0, true, false, true));
-            }else if(livingEntity.hasStatusEffect(ParadiseLostStatusEffects.SIMMERING)){
+            } else if (livingEntity.hasStatusEffect(ParadiseLostStatusEffects.SIMMERING)) {
                 livingEntity.removeStatusEffect(ParadiseLostStatusEffects.SIMMERING);
             }
         }

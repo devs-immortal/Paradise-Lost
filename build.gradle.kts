@@ -238,7 +238,7 @@ loom {
     }
 }
 
-//task publishModrinth (type: TaskModrinthUpload){
+//task publishModrinth (type: TaskModrinthUpload) {
 //    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 //    System.out.println('Enter the modrinth auth token: ');
 //    token = br.readLine(); // Get password
