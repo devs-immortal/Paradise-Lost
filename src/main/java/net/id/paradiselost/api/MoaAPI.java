@@ -32,15 +32,6 @@ import java.util.function.Predicate;
 public class MoaAPI {
 
     /**
-     * If a {@code MoaRace} cannot be found by some method, it is recommended to use this in its place, rather than
-     * returning null.
-     */
-    public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.TANK);
-    static {
-        register(ParadiseLost.locate("fallback"), FALLBACK_MOA);
-    }
-
-    /**
      * A map of all registered {@link MoaRace}s.
      */
     private static final Map<Identifier, MoaRace> MOA_RACE_REGISTRY = new Object2ObjectOpenHashMap<>();
@@ -59,6 +50,15 @@ public class MoaAPI {
      * @see MoaAPI.MatingEntry
      */
     private static final Set<MatingEntry> MOA_BREEDING_REGISTRY = new ObjectOpenHashSet<>();
+
+    /**
+     * If a {@code MoaRace} cannot be found by some method, it is recommended to use this in its place, rather than
+     * returning null.
+     */
+    public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.TANK);
+    static {
+        register(ParadiseLost.locate("fallback"), FALLBACK_MOA);
+    }
 
     /**
      * @param name The unique {@code Identifier} identifying this particular {@code MoaRace}

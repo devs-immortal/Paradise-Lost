@@ -30,6 +30,7 @@
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
+    "util.DefaultedRegistryMixin",
     "util.NbtCompoundAccessor",
     "util.RarityMixin",
     "util.SlotAccessor",
