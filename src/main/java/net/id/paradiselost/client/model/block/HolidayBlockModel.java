@@ -61,10 +61,10 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
         // MODEL_OVERRIDE switch a few lines down.
         var holiday = IncubusHoliday.get();
         SEED_OFFSET = holiday.ordinal();
-        int modelCount = switch (holiday) {
-            case CHRISTMAS -> 2;
-            default -> 0;
-        };
+        int modelCount = 0;
+        if (holiday == IncubusHoliday.CHRISTMAS) {
+            modelCount = 2;
+        }
     
         if (modelCount != 0) {
             var name = holiday.getName();
@@ -77,21 +77,21 @@ public final class HolidayBlockModel extends JsonUnbakedModel implements Unbaked
         
             MODEL_OVERRIDES = switch (IncubusHoliday.get()) {
                 // Grab all of the leaves
-            case CHRISTMAS -> Registry.BLOCK.stream()
-                .filter((block) -> block instanceof LeavesBlock)
-                .map(Registry.BLOCK::getId)
-                .flatMap((identifier) -> {
-                    var blockId = new Identifier(identifier.getNamespace(), "block/" + identifier.getPath());
-                    var itemId = new Identifier(identifier.getNamespace(), "item/" + identifier.getPath());
-                    var model = new HolidayBlockModel(identifier);
-                    return Stream.of(
-                        Map.entry(blockId, model),
-                        Map.entry(itemId, model)
-                    );
-                })
-                .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
+                case CHRISTMAS -> Registry.BLOCK.stream()
+                    .filter((block) -> block instanceof LeavesBlock)
+                    .map(Registry.BLOCK::getId)
+                    .flatMap((identifier) -> {
+                        var blockId = new Identifier(identifier.getNamespace(), "block/" + identifier.getPath());
+                        var itemId = new Identifier(identifier.getNamespace(), "item/" + identifier.getPath());
+                        var model = new HolidayBlockModel(identifier);
+                        return Stream.of(
+                            Map.entry(blockId, model),
+                            Map.entry(itemId, model)
+                        );
+                    })
+                    .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
 
-            default -> throw new RuntimeException("This should not happen, double check HolidayBlockModel.<clinit>");
+                default -> throw new RuntimeException("This should not happen, double check HolidayBlockModel.<clinit>");
             };
         } else {
             DECORATION_IDS = List.of();

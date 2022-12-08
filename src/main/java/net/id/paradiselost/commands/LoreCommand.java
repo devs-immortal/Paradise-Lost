@@ -75,13 +75,7 @@ final class LoreCommand {
         var player = source.getPlayer();
         var state = ParadiseLostComponents.LORE_STATE.get(player);
         var status = state.getLoreStatus(id);
-        String sourceStr = switch (status) {
-            case LOCKED -> "locked";
-            case HIDDEN -> "hidden";
-            case FREE -> "free";
-            case UNLOCKED -> "unlocked";
-            case COMPLETED -> "completed";
-        };
+        String sourceStr = status.getName();
         // make this translatable
         source.sendFeedback(Text.translatable("commands.paradise_lost.lore.get." + sourceStr), false);
         return status.ordinal();

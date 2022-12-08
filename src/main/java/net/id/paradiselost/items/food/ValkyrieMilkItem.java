@@ -20,7 +20,7 @@ public class ValkyrieMilkItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        return user instanceof PlayerEntity player && player.getAbilities().creativeMode ?
-                super.finishUsing(stack, world, user) : new ItemStack(ParadiseLostItems.QUICKSOIL_VIAL);
+        return user instanceof PlayerEntity player && player.getAbilities().creativeMode
+                ? super.finishUsing(stack, world, user) : new ItemStack(ParadiseLostItems.QUICKSOIL_VIAL);
     }
 }

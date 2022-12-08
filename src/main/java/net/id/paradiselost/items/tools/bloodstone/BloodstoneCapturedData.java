@@ -142,14 +142,14 @@ public class BloodstoneCapturedData {
     public Text getRatingWithColor(String rating) {
         MutableText text = Text.translatable(rating);
         return switch (rating) {
-        case "moa.attribute.tier.1" -> text.formatted(Formatting.DARK_RED);
-        case "moa.attribute.tier.2" -> text.formatted(Formatting.RED);
-        case "moa.attribute.tier.3" -> text.formatted(Formatting.YELLOW);
-        case "moa.attribute.tier.4" -> text.formatted(Formatting.GREEN);
-        case "moa.attribute.tier.5" -> text.formatted(Formatting.AQUA);
-        case "moa.attribute.tier.6" -> text.formatted(Formatting.LIGHT_PURPLE);
-        case "moa.attribute.tier.7" -> text.formatted(Formatting.GOLD);
-        default -> text;
+            case "moa.attribute.tier.1" -> text.formatted(Formatting.DARK_RED);
+            case "moa.attribute.tier.2" -> text.formatted(Formatting.RED);
+            case "moa.attribute.tier.3" -> text.formatted(Formatting.YELLOW);
+            case "moa.attribute.tier.4" -> text.formatted(Formatting.GREEN);
+            case "moa.attribute.tier.5" -> text.formatted(Formatting.AQUA);
+            case "moa.attribute.tier.6" -> text.formatted(Formatting.LIGHT_PURPLE);
+            case "moa.attribute.tier.7" -> text.formatted(Formatting.GOLD);
+            default -> text;
         };
     }
 

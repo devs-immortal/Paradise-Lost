@@ -33,11 +33,11 @@ public class CockatriceSpitEntity extends LlamaSpitEntity {
         if (entity instanceof LivingEntity owner) {
             boolean successfulHit = !hit.getEntity().isInvulnerableTo(DamageSource.mobProjectile(this, owner).setProjectile());
             if (successfulHit && hit.getEntity() instanceof LivingEntity target) {
-                int seconds = switch (this.world.getDifficulty()) {
-                    case NORMAL -> 7;
-                    case HARD -> 15;
-                    default -> 0;
-                };
+//                int seconds = switch (this.world.getDifficulty()) {
+//                    case NORMAL -> 7;
+//                    case HARD -> 15;
+//                    default -> 0;
+//                }; // 24: This was never used, is it supposed to be?
 
                 ConditionManager manager = ConditionAPI.getConditionManager(target);
                 manager.add(Conditions.VENOM, Persistence.TEMPORARY, 50F);

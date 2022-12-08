@@ -146,11 +146,11 @@ public class BloodstoneHUDRenderer {
         Severity sev = Severity.getSeverity(rawSeverity);
         MutableText text = Text.translatable(sev.getTranslationKey());
         return switch (sev) {
-        case EXTREME -> text.formatted(Formatting.GRAY);
-        case DIRE -> text.formatted(Formatting.RED);
-        case ACUTE -> text.formatted(Formatting.YELLOW);
-        case MILD -> text.formatted(Formatting.GREEN);
-        case NEGLIGIBLE -> text.formatted(Formatting.AQUA);
+            case EXTREME -> text.formatted(Formatting.GRAY);
+            case DIRE -> text.formatted(Formatting.RED);
+            case ACUTE -> text.formatted(Formatting.YELLOW);
+            case MILD -> text.formatted(Formatting.GREEN);
+            case NEGLIGIBLE -> text.formatted(Formatting.AQUA);
         };
     }
 
@@ -193,11 +193,11 @@ public class BloodstoneHUDRenderer {
     private static Pair<Integer, Integer> getCircularPosition(int radius, int itemNum, int totalItems) {
         if (totalItems < 5) {
             return switch (itemNum) {
-            case 0 -> new Pair<>(0, -80);
-            case 1 -> new Pair<>(80, 0);
-            case 2 -> new Pair<>(-80, 0);
-            case 3 -> new Pair<>(0, 80);
-            default -> new Pair<>(0, 0);
+                case 0 -> new Pair<>(0, -80);
+                case 1 -> new Pair<>(80, 0);
+                case 2 -> new Pair<>(-80, 0);
+                case 3 -> new Pair<>(0, 80);
+                default -> new Pair<>(0, 0);
             };
         }
         double angle = ((2 * Math.PI) / totalItems) * itemNum;

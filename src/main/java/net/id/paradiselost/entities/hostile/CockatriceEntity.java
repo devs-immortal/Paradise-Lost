@@ -148,8 +148,7 @@ public class CockatriceEntity extends HostileEntity implements RangedAttackMob {
     }
 
     public static boolean canSpawn(EntityType<? extends CockatriceEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random) ||
-                world.getBiome(pos) == ParadiseLostBiomes.AUTUMNAL_TUNDRA;
+        return HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random) || world.getBiome(pos) == ParadiseLostBiomes.AUTUMNAL_TUNDRA;
     }
 
     @Override

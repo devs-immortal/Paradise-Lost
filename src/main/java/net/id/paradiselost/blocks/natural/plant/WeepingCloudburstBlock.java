@@ -94,9 +94,9 @@ public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         var floorPos = pos.down();
         return switch (state.get(SECTION)) {
-        case BOTTOM -> world.isWater(pos) && canPlantOnTop(world.getBlockState(floorPos), world, floorPos);
-        case BODY -> world.getBlockState(floorPos).isOf(this);
-        case TOP -> !world.isWater(pos) && world.getBlockState(floorPos).isOf(this);
+            case BOTTOM -> world.isWater(pos) && canPlantOnTop(world.getBlockState(floorPos), world, floorPos);
+            case BODY -> world.getBlockState(floorPos).isOf(this);
+            case TOP -> !world.isWater(pos) && world.getBlockState(floorPos).isOf(this);
         };
     }
 

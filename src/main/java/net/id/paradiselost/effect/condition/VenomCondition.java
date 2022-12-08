@@ -21,16 +21,20 @@ public class VenomCondition extends Condition {
     @Override
     public void tick(World world, LivingEntity entity, Severity severity, float rawSeverity) {
         if (rawSeverity > visThreshold && world.getTime() % 20 == 0) {
-            var poisonEffect = switch (severity) {
-                case MILD -> new StatusEffectInstance(StatusEffects.POISON, 100, 1, true, false, true);
-                case ACUTE -> new StatusEffectInstance(StatusEffects.POISON, 100, 2, true, false, true);
-                case DIRE, EXTREME -> new StatusEffectInstance(StatusEffects.POISON, 200, 2, true, false, true);
-                default -> new StatusEffectInstance(StatusEffects.POISON, 100, 0, true, false, true);
-            };
-            var witherEffect = switch (severity) {
-                case DIRE, EXTREME -> new StatusEffectInstance(StatusEffects.WITHER, 100, 1, true, false, true);
-                default -> null;
-            };
+
+            StatusEffectInstance poisonEffect = new StatusEffectInstance(StatusEffects.POISON, 100, 0, true, false, true);
+            if (severity == Severity.MILD) {
+                poisonEffect = new StatusEffectInstance(StatusEffects.POISON, 100, 1, true, false, true);
+            } else if (severity == Severity.ACUTE) {
+                poisonEffect = new StatusEffectInstance(StatusEffects.POISON, 100, 2, true, false, true);
+            } else if (severity == Severity.DIRE || severity == Severity.EXTREME) {
+                poisonEffect = new StatusEffectInstance(StatusEffects.POISON, 200, 2, true, false, true);
+            }
+
+            StatusEffectInstance witherEffect = null;
+            if (severity == Severity.DIRE || severity == Severity.EXTREME) {
+                witherEffect = new StatusEffectInstance(StatusEffects.WITHER, 100, 1, true, false, true);
+            }
 
             entity.addStatusEffect(poisonEffect);
             if (witherEffect != null) {
@@ -41,26 +45,7 @@ public class VenomCondition extends Condition {
 
     @Override
     public void tickPlayer(World world, PlayerEntity player, Severity severity, float rawSeverity) {
-        if (rawSeverity > visThreshold && world.getTime() % 20 == 0) {
-
-            var poisonEffect = switch (severity) {
-                case MILD -> new StatusEffectInstance(StatusEffects.POISON, 100, 1, true, false, true);
-                case ACUTE -> new StatusEffectInstance(StatusEffects.POISON, 200, 1, true, false, true);
-                case DIRE, EXTREME -> new StatusEffectInstance(StatusEffects.POISON, 200, 2, true, false, true);
-                default -> new StatusEffectInstance(StatusEffects.POISON, 100, 0, true, false, true);
-            };
-
-            var witherEffect = switch (severity) {
-                case DIRE -> new StatusEffectInstance(StatusEffects.WITHER, 100, 0, true, false, true);
-                case EXTREME -> new StatusEffectInstance(StatusEffects.WITHER, 200, 2, true, false, true);
-                default -> null;
-            };
-
-            player.addStatusEffect(poisonEffect);
-            if (witherEffect != null) {
-                player.addStatusEffect(witherEffect);
-            }
-        }
+        tick(world, player, severity, rawSeverity);
     }
 
     @Override

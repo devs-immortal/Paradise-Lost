@@ -34,8 +34,7 @@ public class WisteriaLeavesBlock extends ParadiseLostLeavesBlock {
 
             for (Direction direction : DIRECTIONS) {
                 var nextPos = checkPos.offset(direction);
-                if (!checkedBlocks.contains(nextPos) &&
-                        world.getBlockState(nextPos).getBlock() instanceof WisteriaLeavesBlock) {
+                if (!checkedBlocks.contains(nextPos) && world.getBlockState(nextPos).getBlock() instanceof WisteriaLeavesBlock) {
                     next.add(nextPos);
                 }
             }

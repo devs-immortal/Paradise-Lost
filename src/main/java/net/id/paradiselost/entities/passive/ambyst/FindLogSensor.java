@@ -29,8 +29,8 @@ public class FindLogSensor extends Sensor<AnimalEntity> {
         Optional<BlockPos> previousOpenPos = brain.getOptionalMemory(ParadiseLostEntityTypes.LOG_OPENING_MEMORY);
         Optional<BlockPos> previousLogPos = brain.getOptionalMemory(ParadiseLostEntityTypes.LOG_MEMORY);
 
-        if (previousOpenPos.isPresent() && isValidOpening(world, previousOpenPos.get()) &&
-                previousLogPos.isPresent() && isLog(world, previousLogPos.get()))
+        if (previousOpenPos.isPresent() && isValidOpening(world, previousOpenPos.get())
+                && previousLogPos.isPresent() && isLog(world, previousLogPos.get()))
             return;
 
         for (BlockPos testLogPos : BlockPos.iterateOutwards(entity.getBlockPos(), this.range, this.range, this.range)) {

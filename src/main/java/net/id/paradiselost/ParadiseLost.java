@@ -175,9 +175,9 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
                     // To people who might want to change this to use the Logger class, don't.
                     // It will not print the message when you do that. I tried.
                     System.err.println(
-                            "\n".repeat(10) +
-                                    message +
-                                    "\n".repeat(10)
+                            "\n".repeat(10)
+                                    + message
+                                    + "\n".repeat(10)
                     );
                 }));
                 throw new RuntimeException(message);

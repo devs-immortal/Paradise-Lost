@@ -127,8 +127,8 @@ public final class LoreScreen extends HandledScreen<LoreHandler> {
         filterState.mouseX = mouseX - this.x - scrollX;
         filterState.mouseY = mouseY - this.y - scrollY;
         var currentlyHovered = loreEntries.stream().filter((entry) ->
-                filterState.mouseX >= entry.x && filterState.mouseX <= entry.x + entry.type.getWidth() &&
-                filterState.mouseY >= entry.y && filterState.mouseY <= entry.y + entry.type.getHeight()
+                filterState.mouseX >= entry.x && filterState.mouseX <= entry.x + entry.type.getWidth()
+                        && filterState.mouseY >= entry.y && filterState.mouseY <= entry.y + entry.type.getHeight()
         ).findFirst().orElse(null);
         if (hoveredEntry != currentlyHovered) {
             if (hoveredEntry != null) {

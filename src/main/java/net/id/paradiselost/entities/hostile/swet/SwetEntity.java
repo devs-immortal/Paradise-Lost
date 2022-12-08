@@ -149,8 +149,7 @@ public abstract class SwetEntity extends SlimeEntity {
         this.targetSelector.clear();
         this.targetSelector.add(1, new FollowUnabsorbedTargetGoal<>(
                 this, PlayerEntity.class, 10, true, false, (player) ->
-                Math.abs(player.getY() - this.getY()) <= 4.0D &&
-                        !(FollowUnabsorbedTargetGoal.canAbsorb(this, player))
+                Math.abs(player.getY() - this.getY()) <= 4.0D && !(FollowUnabsorbedTargetGoal.canAbsorb(this, player))
         ));
     }
 
@@ -337,8 +336,8 @@ public abstract class SwetEntity extends SlimeEntity {
         }
 
         protected static boolean canAbsorb(Entity swet, Entity target) {
-            return !target.isSneaking() && !(target instanceof PlayerEntity player && player.getAbilities().flying) &&
-                    swet.getBoundingBox().expand(0, 0.5, 0).offset(0, 0.25, 0).intersects(target.getBoundingBox());
+            return !target.isSneaking() && !(target instanceof PlayerEntity player && player.getAbilities().flying)
+                    && swet.getBoundingBox().expand(0, 0.5, 0).offset(0, 0.25, 0).intersects(target.getBoundingBox());
         }
 
         @Override

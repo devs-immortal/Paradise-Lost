@@ -493,12 +493,12 @@ public class ParadiseLostItems {
     @SafeVarargs
     private static BlockItem add(String id, Block block, Settings settings, Action<? super BlockItem>... additionalActions) {
         return add(id,
-                (block instanceof DoorBlock ||
-                        block instanceof TallPlantBlock ||
-                        block instanceof TallFlowerBlock
-                ) ?
-                        new TallBlockItem(block, settings) :
-                        new BlockItem(block, settings),
+                (block instanceof DoorBlock
+                        || block instanceof TallPlantBlock
+                        || block instanceof TallFlowerBlock
+                )
+                        ? new TallBlockItem(block, settings)
+                        : new BlockItem(block, settings),
                 additionalActions);
     }
 

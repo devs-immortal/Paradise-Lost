@@ -23,6 +23,8 @@
             <property name="option" value="alone"/>
             <property name="tokens" value="LITERAL_ELSE, METHOD_DEF"/>
         </module>
+        <module name="InnerTypeLast"/>
+        <module name="OneTopLevelClass"/>
         <module name="RequireThis"/>
         <module name="ArrayTypeStyle"/>
         <module name="UpperEll"/>
@@ -35,6 +37,7 @@
             <property name="tokens" value="AT,INC,DEC,UNARY_MINUS,UNARY_PLUS,BNOT,LNOT,DOT,ARRAY_DECLARATOR,INDEX_OP"/>
         </module>
         <module name="NoWhitespaceBefore"/>
+        <module name="OperatorWrap"/>
         <module name="ParenPad"/>
         <module name="SingleSpaceSeparator"/>
         <module name="TypecastParenPad"/>
@@ -52,7 +55,7 @@
         </module>
         <module name="Indentation">
             <property name="basicOffset" value="4"/>
-            <property name="caseIndent" value="0"/>
+            <property name="caseIndent" value="4"/>
             <property name="throwsIndent" value="4"/>
             <property name="arrayInitIndent" value="4"/>
             <property name="lineWrappingIndentation" value="8"/>

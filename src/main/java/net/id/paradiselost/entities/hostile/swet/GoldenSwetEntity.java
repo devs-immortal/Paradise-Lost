@@ -31,8 +31,8 @@ public class GoldenSwetEntity extends SwetEntity {
     }
 
     public static boolean canSpawn(EntityType<? extends SwetEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return SwetEntity.canSpawn(type, world, spawnReason, pos, random) &&
-                (world.getStatesInBoxIfLoaded(Box.of(Vec3d.of(pos), 4, 2, 4)).anyMatch(state -> state.isIn(ParadiseLostBlockTags.SWET_TRANSFORMERS_GOLDEN))
+        return SwetEntity.canSpawn(type, world, spawnReason, pos, random)
+                && (world.getStatesInBoxIfLoaded(Box.of(Vec3d.of(pos), 4, 2, 4)).anyMatch(state -> state.isIn(ParadiseLostBlockTags.SWET_TRANSFORMERS_GOLDEN))
                         || world.getRandom().nextFloat() < 0.03);
     }
 

@@ -36,12 +36,12 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
 
     private boolean createLegacyBlob(StructureWorldAccess reader, BlockState state, BlockPos pos) {
         boolean doesProtrude = (
-                (reader.getBlockState(pos.west(3)).isAir() ||
-                        reader.getBlockState(pos.north(3)).isAir() ||
-                        reader.getBlockState(pos.south(3)).isAir() ||
-                        reader.getBlockState(pos.east(3)).isAir()) &&
-                        (reader.getBlockState(pos).isOf(ParadiseLostBlocks.HOLYSTONE) ||
-                         reader.getBlockState(pos).isOf(ParadiseLostBlocks.DIRT))
+                (reader.getBlockState(pos.west(3)).isAir()
+                        || reader.getBlockState(pos.north(3)).isAir()
+                        || reader.getBlockState(pos.south(3)).isAir()
+                        || reader.getBlockState(pos.east(3)).isAir())
+                        && (reader.getBlockState(pos).isOf(ParadiseLostBlocks.HOLYSTONE)
+                        || reader.getBlockState(pos).isOf(ParadiseLostBlocks.DIRT))
         );
         if (doesProtrude) {
             for (int x = pos.getX() - 4; x < pos.getX() + 5; x++) {

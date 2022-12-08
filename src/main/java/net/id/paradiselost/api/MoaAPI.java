@@ -30,11 +30,15 @@ import java.util.function.Predicate;
  * @see net.id.paradiselost.entities.passive.moa.MoaRaces
  */
 public class MoaAPI {
+
     /**
      * If a {@code MoaRace} cannot be found by some method, it is recommended to use this in its place, rather than
      * returning null.
      */
     public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.TANK);
+    static {
+        register(ParadiseLost.locate("fallback"), FALLBACK_MOA);
+    }
 
     /**
      * A map of all registered {@link MoaRace}s.
@@ -285,10 +289,6 @@ public class MoaAPI {
      * MoaRace.
      */
     private record MatingEntry(MoaRace race, Predicate<MoaBreedingContext> breedingRequirements) {
-    }
-
-    static {
-        register(ParadiseLost.locate("fallback"), FALLBACK_MOA);
     }
 
     /**
