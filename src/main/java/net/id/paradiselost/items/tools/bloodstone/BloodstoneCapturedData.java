@@ -108,7 +108,7 @@ public class BloodstoneCapturedData {
         BloodstoneCapturedData bloodstoneCapturedData = new BloodstoneCapturedData();
         if (entity instanceof MoaEntity moa) {
             bloodstoneCapturedData.isMoa = true;
-            //zanite
+            //olvite
             bloodstoneCapturedData.Race = moa.getGenes().getRace().getTranslationKey();
             bloodstoneCapturedData.Hunger = String.format("%.1f", moa.getGenes().getHunger()) + "/" + 100.0;
             bloodstoneCapturedData.Affinity = moa.getGenes().getAffinity().getTranslationKey();

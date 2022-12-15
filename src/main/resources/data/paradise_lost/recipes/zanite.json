@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "paradise_lost:zanite_block"
+      "item": "paradise_lost:olvite_block"
     }
   ],
   "result": {
-    "item": "paradise_lost:zanite_gemstone",
+    "item": "paradise_lost:olvite",
     "count": 9
   }
 }

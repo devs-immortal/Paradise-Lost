@@ -228,7 +228,7 @@ public final class ParadiseLostBiomes {
             GenerationStep.Feature.UNDERGROUND_ORES, List.of(
                 ORE_AMBROSIUM,
                 ORE_GRAVITITE,
-                ORE_ZANITE
+                ORE_OLVITE
             ),
             // cursed generation step, but it stops trees from generating inside of these
             GenerationStep.Feature.TOP_LAYER_MODIFICATION, List.of(

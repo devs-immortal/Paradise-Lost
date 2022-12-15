@@ -42,8 +42,8 @@ public class BloodstoneHUDRenderer {
                     matrixStack.translate(client.getWindow().getScaledWidth() / 2f, client.getWindow().getScaledHeight() / 2f, 0);
                     if (stack.getItem() instanceof AmbrosiumBloodstoneItem) {
                         renderAmbrosium(matrixStack, client, capturedData);
-                    } else if (stack.getItem() instanceof ZaniteBloodstoneItem) {
-                        renderZanite(matrixStack, client, capturedData);
+                    } else if (stack.getItem() instanceof OlviteBloodstoneItem) {
+                        renderOlvite(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof GravititeBloodstoneItem) {
                         renderGravitite(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof AbstentineBloodstoneItem) {
@@ -85,7 +85,7 @@ public class BloodstoneHUDRenderer {
         renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), Text.literal(bloodstoneCapturedData.TF), 80, 0);
     }
 
-    private static void renderZanite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+    private static void renderOlvite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
         Sprite affinitySprite = statusEffectSpriteManager.getSprite(StatusEffects.BAD_OMEN).getAtlas().getSprite(ParadiseLost.locate("hud/bloodstone/affinity"));
         Sprite raceSprite = statusEffectSpriteManager.getSprite(StatusEffects.BAD_OMEN).getAtlas().getSprite(ParadiseLost.locate("hud/bloodstone/race"));

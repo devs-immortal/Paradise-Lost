@@ -85,7 +85,7 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_NIGHTMARE_AMBIENT = event("entity.nightmare.ambient");
 
 
-    public static final SoundEvent ITEM_ARMOR_EQUIP_ZANITE = childEvent("item.armor.equip.zanite", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_OLVITE = childEvent("item.armor.equip.olvite", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
     public static final SoundEvent ITEM_ARMOR_EQUIP_GRAVITITE = childEvent("item.armor.equip.gravitite", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
     public static final SoundEvent ITEM_ARMOR_EQUIP_NEPTUNE = childEvent("item.armor.equip.neptune", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
     public static final SoundEvent ITEM_ARMOR_EQUIP_PHOENIX = childEvent("item.armor.equip.phoenix", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);

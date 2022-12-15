@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "paradise_lost:block/olvite_chain",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "paradise_lost:block/olvite_chain"
+    },
+    "axis=z": {
+      "model": "paradise_lost:block/olvite_chain",
+      "x": 90
+    }
+  }
+}

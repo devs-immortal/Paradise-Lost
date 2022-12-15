@@ -34,5 +34,5 @@ public class ParadiseLostItemGroups {
 
     public static final ItemGroup PARADISE_LOST_WEARABLES = build(
             ParadiseLost.locate("wearables"),
-            () -> new ItemStack(ParadiseLostItems.ZANITE_CHESTPLATE));
+            () -> new ItemStack(ParadiseLostItems.OLVITE_CHESTPLATE));
 }

@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "paradise_lost:zanite_gemstone"
+      "item": "paradise_lost:olvite"
     }
   },
   "result": {
-    "item": "paradise_lost:zanite_axe"
+    "item": "paradise_lost:olvite_axe"
   }
 }

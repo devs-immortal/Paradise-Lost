@@ -21,7 +21,7 @@ import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.AmbrosiumBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.GravititeBloodstoneItem;
-import net.id.paradiselost.items.tools.bloodstone.ZaniteBloodstoneItem;
+import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
 import net.id.paradiselost.items.utils.ParadiseLostRarity;
 import net.id.paradiselost.items.weapons.*;
 import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
@@ -65,8 +65,8 @@ public class ParadiseLostItems {
     public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.crow_eye.tooltip").formatted(Formatting.GRAY))));
     public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
     public static final AmbrosiumShardItem AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShardItem(resource), fuel(500));
-    public static final Item ZANITE_GEM = add("zanite_gemstone", new Item(resource));
-    public static final Item ZANITE_FRAGMENT = add("zanite_fragment", new Item(resource));
+    public static final Item OLVITE = add("olvite", new Item(resource));
+    public static final Item OLVITE_NUGGET = add("olvite_nugget", new Item(resource));
     public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource));
     public static final Item FLAX_THREAD = add("flax_thread", new Item(resource));
     public static final Item FLAXWEAVE = add("flaxweave", new Item(resource));
@@ -82,11 +82,11 @@ public class ParadiseLostItems {
     private static final Settings paradiseLostLootTool = tool().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT);
     private static final Settings unstackableTool = tool().maxCount(1);
     private static final Settings unstackableRareTool = tool().maxCount(1).rarity(RARE);
-    public static final ZaniteShovelItem ZANITE_SHOVEL = add("zanite_shovel", new ZaniteShovelItem(ParadiseLostToolMaterials.ZANITE, 1.5f, -3f, tool));
-    public static final ZanitePickaxeItem ZANITE_PICKAXE = add("zanite_pickaxe", new ZanitePickaxeItem(ParadiseLostToolMaterials.ZANITE, 1, -2.8f, tool));
-    public static final ZaniteAxeItem ZANITE_AXE = add("zanite_axe", new ZaniteAxeItem(ParadiseLostToolMaterials.ZANITE, 6f, -3.1f, tool));
-    public static final ZaniteSwordItem ZANITE_SWORD = add("zanite_sword", new ZaniteSwordItem(ParadiseLostToolMaterials.ZANITE, 3, -2.4f, tool));
-    public static final ZaniteHoeItem ZANITE_HOE = add("zanite_hoe", new ZaniteHoeItem(ParadiseLostToolMaterials.ZANITE, 1, 3f, tool));
+    public static final ShovelItem OLVITE_SHOVEL = add("olvite_shovel", new ShovelItem(ParadiseLostToolMaterials.OLVITE, 1.5f, -3f, tool));
+    public static final PickaxeItem OLVITE_PICKAXE = add("olvite_pickaxe", new PickaxeItem(ParadiseLostToolMaterials.OLVITE, 1, -2.8f, tool));
+    public static final AxeItem OLVITE_AXE = add("olvite_axe", new AxeItem(ParadiseLostToolMaterials.OLVITE, 6f, -3.1f, tool));
+    public static final SwordItem OLVITE_SWORD = add("olvite_sword", new SwordItem(ParadiseLostToolMaterials.OLVITE, 3, -2.4f, tool));
+    public static final HoeItem OLVITE_HOE = add("olvite_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.OLVITE, 1, 3f, tool));
 
     public static final GravititeShovelItem GRAVITITE_SHOVEL = add("gravitite_shovel", new GravititeShovelItem(ParadiseLostToolMaterials.GRAVITITE, 1.5f, -3f, rareTool));
     public static final GravititePickaxeItem GRAVITITE_PICKAXE = add("gravitite_pickaxe", new GravititePickaxeItem(ParadiseLostToolMaterials.GRAVITITE, 1, -2.8f, rareTool));
@@ -105,7 +105,7 @@ public class ParadiseLostItems {
     public static final TrinketItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new ParachuteTrinketItem(tool().maxCount(1).maxDamage(20), "golden_parachute"));
 
     public static final AmbrosiumBloodstoneItem AMBROSIUM_BLOODSTONE = add("ambrosium_bloodstone", new AmbrosiumBloodstoneItem(unstackableTool));
-    public static final ZaniteBloodstoneItem ZANITE_BLOODSTONE = add("zanite_bloodstone", new ZaniteBloodstoneItem(unstackableTool));
+    public static final OlviteBloodstoneItem OLVITE_BLOODSTONE = add("olvite_bloodstone", new OlviteBloodstoneItem(unstackableTool));
     public static final GravititeBloodstoneItem GRAVITITE_BLOODSTONE = add("gravitite_bloodstone", new GravititeBloodstoneItem(unstackableTool));
     public static final AbstentineBloodstoneItem ABSTENTINE_BLOODSTONE = add("abstentine_bloodstone", new AbstentineBloodstoneItem(unstackableTool));
 
@@ -116,10 +116,10 @@ public class ParadiseLostItems {
     private static final Settings WEARABLE = wearable();
     private static final Settings RARE_WEARABLE = wearable().rarity(RARE);
     private static final Settings PARADISE_LOST_LOOT_WEARABLE = wearable().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT);
-    public static final ArmorItem ZANITE_HELMET = add("zanite_helmet", new ArmorItem(ParadiseLostArmorMaterials.ZANITE, HEAD, WEARABLE));
-    public static final ArmorItem ZANITE_CHESTPLATE = add("zanite_chestplate", new ArmorItem(ParadiseLostArmorMaterials.ZANITE, CHEST, WEARABLE));
-    public static final ArmorItem ZANITE_LEGGINGS = add("zanite_leggings", new ArmorItem(ParadiseLostArmorMaterials.ZANITE, LEGS, WEARABLE));
-    public static final ArmorItem ZANITE_BOOTS = add("zanite_boots", new ArmorItem(ParadiseLostArmorMaterials.ZANITE, FEET, WEARABLE));
+    public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, HEAD, WEARABLE));
+    public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, CHEST, WEARABLE));
+    public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, LEGS, WEARABLE));
+    public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, FEET, WEARABLE));
 
     public static final ArmorItem GRAVITITE_HELMET = add("gravitite_helmet", new ArmorItem(ParadiseLostArmorMaterials.GRAVITITE, HEAD, RARE_WEARABLE));
     public static final ArmorItem GRAVITITE_CHESTPLATE = add("gravitite_chestplate", new ArmorItem(ParadiseLostArmorMaterials.GRAVITITE, CHEST, RARE_WEARABLE));
@@ -223,11 +223,11 @@ public class ParadiseLostItems {
     public static final BlockItem SKYROOT_BOOKSHELF = add("skyroot_bookshelf", ParadiseLostBlocks.SKYROOT_BOOKSHELF, building_block);
     // ores
     public static final BlockItem AMBROSIUM_ORE = add("ambrosium_ore", ParadiseLostBlocks.AMBROSIUM_ORE, building_block);
-    public static final BlockItem ZANITE_ORE = add("zanite_ore", ParadiseLostBlocks.ZANITE_ORE, building_block);
+    public static final BlockItem OLVITE_ORE = add("olvite_ore", ParadiseLostBlocks.OLVITE_ORE, building_block);
     public static final BlockItem GRAVITITE_ORE = add("gravitite_ore", ParadiseLostBlocks.GRAVITITE_ORE, building_block);
     // ore blocks
     public static final BlockItem AMBROSIUM_BLOCK = add("ambrosium_block", ParadiseLostBlocks.AMBROSIUM_BLOCK, building_block, fuel(5000));
-    public static final BlockItem ZANITE_BLOCK = add("zanite_block", ParadiseLostBlocks.ZANITE_BLOCK, building_block);
+    public static final BlockItem OLVITE_BLOCK = add("olvite_block", ParadiseLostBlocks.OLVITE_BLOCK, building_block);
     public static final BlockItem BLOCK_OF_GRAVITITE = add("block_of_gravitite", ParadiseLostBlocks.BLOCK_OF_GRAVITITE, building_block);
     // move this somewhere else
     public static final BlockItem GRAVITITE_LEVITATOR = add("gravitite_levitator", ParadiseLostBlocks.GRAVITITE_LEVITATOR, building_block);
@@ -433,7 +433,7 @@ public class ParadiseLostItems {
     public static final BlockItem PURPLE_SWET_DROP = add("purple_swet_drop", ParadiseLostBlocks.PURPLE_SWET_DROP, misc);
     */
     // panes & chains
-    public static final BlockItem ZANITE_CHAIN = add("zanite_chain", ParadiseLostBlocks.ZANITE_CHAIN, decoration);
+    public static final BlockItem OLVITE_CHAIN = add("olvite_chain", ParadiseLostBlocks.OLVITE_CHAIN, decoration);
     public static final BlockItem QUICKSOIL_GLASS_PANE = add("quicksoil_glass_pane", ParadiseLostBlocks.QUICKSOIL_GLASS_PANE, decoration);
     // carpets
 

@@ -7,13 +7,13 @@
   ],
   "key": {
     "I": {
-      "item": "paradise_lost:zanite_gemstone"
+      "item": "paradise_lost:olvite"
     },
     "N": {
-      "item": "paradise_lost:zanite_fragment"
+      "item": "paradise_lost:olvite_nugget"
     }
   },
   "result": {
-    "item": "paradise_lost:zanite_chain"
+    "item": "paradise_lost:olvite_chain"
   }
 }

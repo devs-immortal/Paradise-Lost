@@ -15,89 +15,90 @@ import java.util.Map;
 @Mixin(DefaultedRegistry.class)
 public class DefaultedRegistryMixin {
 
-    private static final Map<String, String> renames = createMap(
+    private static final Map<String, Identifier> renames = createMap(
             /* BLOCKS */
-            "quicksoil", "",
-            "quicksoil_glass", "",
-            "quicksoil_glass_pane", "",
-            "cold_aercloud", "",
-            "blue_aercloud", "",
-            "pink_aercloud", "",
-            "golden_aercloud", "",
-            "icestone", "",
-            "holystone", "",
-            "holystone_slab", "",
-            "holystone_stairs", "",
-            "holystone_wall", "",
-            "cobbled_holystone", "",
-            "cobbled_holystone_slab", "",
-            "cobbled_holystone_stairs", "",
-            "cobbled_holystone_wall", "",
-            "mossy_holystone", "",
-            "golden_mossy_holystone", "",
-            "mossy_holystone_slab", "",
-            "mossy_holystone_stairs", "",
-            "mossy_holystone_wall", "",
-            "holystone_brick", "",
-            "holystone_brick_slab", "",
-            "holystone_brick_stairs", "",
-            "holystone_brick_wall", "",
-            "ambrosium_campfire", "",
-            "ambrosium_ore", "",
-            "zanite_ore", "",
-            "gravitite_ore", "",
-            "ambrosium_block", "",
-            "zanite_block", "",
-            "block_of_gravitite", "",
-            "gravitite_levitator", "",
-            "zanite_chain", "",
-            "ambrosium_lantern", "",
-            "ambrosium_torch", "",
-            "ambrosium_wall_torch", "",
+            "quicksoil", ParadiseLost.locate(""),
+            "quicksoil_glass", ParadiseLost.locate(""),
+            "quicksoil_glass_pane", ParadiseLost.locate(""),
+            "cold_aercloud", ParadiseLost.locate(""),
+            "blue_aercloud", ParadiseLost.locate(""),
+            "pink_aercloud", ParadiseLost.locate(""),
+            "golden_aercloud", ParadiseLost.locate(""),
+            "icestone", ParadiseLost.locate(""),
+            "holystone", ParadiseLost.locate(""),
+            "holystone_slab", ParadiseLost.locate(""),
+            "holystone_stairs", ParadiseLost.locate(""),
+            "holystone_wall", ParadiseLost.locate(""),
+            "cobbled_holystone", ParadiseLost.locate(""),
+            "cobbled_holystone_slab", ParadiseLost.locate(""),
+            "cobbled_holystone_stairs", ParadiseLost.locate(""),
+            "cobbled_holystone_wall", ParadiseLost.locate(""),
+            "mossy_holystone", ParadiseLost.locate(""),
+            "golden_mossy_holystone", ParadiseLost.locate(""),
+            "mossy_holystone_slab", ParadiseLost.locate(""),
+            "mossy_holystone_stairs", ParadiseLost.locate(""),
+            "mossy_holystone_wall", ParadiseLost.locate(""),
+            "holystone_brick", ParadiseLost.locate(""),
+            "holystone_brick_slab", ParadiseLost.locate(""),
+            "holystone_brick_stairs", ParadiseLost.locate(""),
+            "holystone_brick_wall", ParadiseLost.locate(""),
+            "ambrosium_campfire", ParadiseLost.locate(""),
+            "ambrosium_ore", ParadiseLost.locate(""),
+            "zanite_ore", ParadiseLost.locate("olvite_ore"),
+            "gravitite_ore", ParadiseLost.locate(""),
+            "ambrosium_block", ParadiseLost.locate(""),
+            "zanite_block", ParadiseLost.locate("olvite_block"),
+            "block_of_gravitite", ParadiseLost.locate(""),
+            "gravitite_levitator", ParadiseLost.locate(""),
+            "zanite_chain", ParadiseLost.locate(""),
+            "ambrosium_lantern", ParadiseLost.locate(""),
+            "ambrosium_torch", ParadiseLost.locate(""),
+            "ambrosium_wall_torch", ParadiseLost.locate(""),
             //TODO: Add skyroot and golden oak blocks
             /* ITEMS */
-            "aechor_petal", "",
-            "ambrosium_shard", "",
-            "zanite_gemstone", "",
-            "zanite_fragment", "",
-            "gravitite_gemstone", "",
-            "zanite_shovel", "",
-            "zanite_pickaxe", "",
-            "zanite_axe", "",
-            "zanite_sword", "",
-            "zanite_hoe", "",
-            "gravitite_shovel", "",
-            "gravitite_pickaxe", "",
-            "gravitite_axe", "",
-            "gravitite_sword", "",
-            "gravitite_hoe", "",
-            "ambrosium_bloodstone", "",
-            "zanite_bloodstone", "",
-            "gravitite_bloodstone", "",
-            "zanite_helmet", "",
-            "zanite_chestplate", "",
-            "zanite_leggings", "",
-            "zanite_boots", "",
-            "gravitite_helmet", "",
-            "gravitite_chestplate", "",
-            "gravitite_leggings", "",
-            "gravitite_boots", "",
-            "blue_berry", "",
-            "blue_gummy_swet", "",
-            "golden_gummy_swet", "",
-            "skyroot_bucket", "",
-            "skyroot_water_bucket", "",
-            "skyroot_milk_bucket", ""
+            "aechor_petal", ParadiseLost.locate(""),
+            "ambrosium_shard", ParadiseLost.locate(""),
+            "zanite_gemstone", ParadiseLost.locate("olvite"),
+            "zanite_fragment", ParadiseLost.locate("olvite_nugget"),
+            "gravitite_gemstone", ParadiseLost.locate(""),
+            "zanite_shovel", ParadiseLost.locate("olvite_shovel"),
+            "zanite_pickaxe", ParadiseLost.locate("olvite_pickaxe"),
+            "zanite_axe", ParadiseLost.locate("olvite_axe"),
+            "zanite_sword", ParadiseLost.locate("olvite_sword"),
+            "zanite_hoe", ParadiseLost.locate("olvite_hoe"),
+            "gravitite_shovel", ParadiseLost.locate(""),
+            "gravitite_pickaxe", ParadiseLost.locate(""),
+            "gravitite_axe", ParadiseLost.locate(""),
+            "gravitite_sword", ParadiseLost.locate(""),
+            "gravitite_hoe", ParadiseLost.locate(""),
+            "ambrosium_bloodstone", ParadiseLost.locate(""),
+            "zanite_bloodstone", ParadiseLost.locate("olvite_bloodstone"),
+            "gravitite_bloodstone", ParadiseLost.locate(""),
+            "zanite_helmet", ParadiseLost.locate(""),
+            "zanite_chestplate", ParadiseLost.locate(""),
+            "zanite_leggings", ParadiseLost.locate(""),
+            "zanite_boots", ParadiseLost.locate(""),
+            "gravitite_helmet", ParadiseLost.locate(""),
+            "gravitite_chestplate", ParadiseLost.locate(""),
+            "gravitite_leggings", ParadiseLost.locate(""),
+            "gravitite_boots", ParadiseLost.locate(""),
+            "blue_berry", ParadiseLost.locate(""),
+            "blue_gummy_swet", ParadiseLost.locate(""),
+            "golden_gummy_swet", ParadiseLost.locate(""),
+            "skyroot_bucket", ParadiseLost.locate(""),
+            "skyroot_water_bucket", ParadiseLost.locate(""),
+            "skyroot_milk_bucket", ParadiseLost.locate(""),
+            "valkyrie_lance", new Identifier("minecraft", "netherite_sword")
     );
 
     @SafeVarargs
-    private static <T> Map<T, T> createMap(T... values) {
+    private static <T> Map<String, Identifier> createMap(T... values) {
         if ((values.length & 1) != 0) {
             throw new IllegalArgumentException("Odd number of values");
         }
-        Map<T, T> map = new HashMap<>();
+        Map<String, Identifier> map = new HashMap<>();
         for (int i = 0; i < values.length; i += 2) {
-            map.put(values[i], values[i + 1]);
+            map.put((String) values[i], (Identifier) values[i + 1]);
         }
         return Collections.unmodifiableMap(map);
     }
@@ -106,9 +107,10 @@ public class DefaultedRegistryMixin {
     Identifier fixMissingFromRegistry(@Nullable Identifier id) {
         if (id != null && id.getNamespace().equals(ParadiseLost.MOD_ID)) {
             String path = id.getPath();
-//            if (renames.containsKey(path)) {
-//                return ParadiseLost.locate(renames.get(id.getPath()));
-//            }
+            if (renames.containsKey(path)) {
+                Identifier newId = renames.get(id.getPath());
+                if (!newId.getPath().equals("")) return newId;
+            }
         }
         return id;
     }

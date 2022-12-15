@@ -8,8 +8,8 @@ import net.minecraft.item.ToolMaterial;
 
 @SuppressWarnings("unused")
 public class ParadiseLostToolMaterials {
-    public static final ToolMaterial ZANITE = ToolMaterialsAccessor.callInit("PARADISE_LOST_ZANITE", -1,
-            MiningLevels.IRON, 250, 4.5f, 2f, 14, IngredientUtil.itemIngredient(ParadiseLostItems.ZANITE_GEM));
+    public static final ToolMaterial OLVITE = ToolMaterialsAccessor.callInit("PARADISE_LOST_OLVITE", -1,
+            MiningLevels.IRON, 250, 4.5f, 2f, 14, IngredientUtil.itemIngredient(ParadiseLostItems.OLVITE));
 
     public static final ToolMaterial GRAVITITE = ToolMaterialsAccessor.callInit("PARADISE_LOST_GRAVITITE", -1,
             MiningLevels.DIAMOND, 1561, 8f, 3f, 10, IngredientUtil.EMPTY);

@@ -235,13 +235,13 @@
   "block.paradise_lost.wild_flax" : "wild aethr strin",
 
   "block.paradise_lost.ambrosium_ore": "appl Ore",
-  "block.paradise_lost.zanite_ore": "zanit Ore",
+  "block.paradise_lost.olvite_ore": "zanit Ore",
   "block.paradise_lost.gravitite_ore": "floty Ore",
-  "block.paradise_lost.zanite_block": "Blok of Zanit",
+  "block.paradise_lost.olvite_block": "Blok of Zanit",
   "block.paradise_lost.block_of_gravitite": "Blok of floty stuffz",
 
   "block.paradise_lost.gravitite_levitator": "floty elvatur",
-  "block.paradise_lost.zanite_chain": "zanit rope",
+  "block.paradise_lost.olvite_chain": "zanit rope",
   "block.paradise_lost.ambrosium_lantern": "appl light",
   "block.paradise_lost.blue_portal": "Aethr Portel",
 
@@ -290,18 +290,18 @@
   "item.paradise_lost.crow_eye.tooltip": "hmm ???",
   "item.paradise_lost.swet_ball": "Swetty ballz",
   "item.paradise_lost.ambrosium_shard": "apply Shard",
-  "item.paradise_lost.zanite_gemstone": "zanit gem",
-  "item.paradise_lost.zanite_fragment": "zanit bit",
+  "item.paradise_lost.olvite": "zanit gem",
+  "item.paradise_lost.olvite_nugget": "zanit bit",
   "item.paradise_lost.gravitite_gemstone": "floty gem",
   "item.paradise_lost.flax_thread" : "aethr strin",
   "item.paradise_lost.flaxweave" : "aethr fiber",
   "item.paradise_lost.swedroot_pulp": "swet food pulp",
 
-  "item.paradise_lost.zanite_shovel": "Zanit Shaval",
-  "item.paradise_lost.zanite_pickaxe": "Zanit Pikakse",
-  "item.paradise_lost.zanite_axe": "Zanit Aks",
-  "item.paradise_lost.zanite_sword": "Zanit Sord",
-  "item.paradise_lost.zanite_hoe": "Zanit Hoe",
+  "item.paradise_lost.olvite_shovel": "Zanit Shaval",
+  "item.paradise_lost.olvite_pickaxe": "Zanit Pikakse",
+  "item.paradise_lost.olvite_axe": "Zanit Aks",
+  "item.paradise_lost.olvite_sword": "Zanit Sord",
+  "item.paradise_lost.olvite_hoe": "Zanit Hoe",
 
   "item.paradise_lost.gravitite_shovel": "floty Shaval",
   "item.paradise_lost.gravitite_pickaxe": "floty Pikakse",
@@ -334,14 +334,14 @@
   "item.paradise_lost.golden_parachute": "shiny slow fallr",
 
   "item.paradise_lost.ambrosium_bloodstone": "appl info getr",
-  "item.paradise_lost.zanite_bloodstone": "zanit info getr",
+  "item.paradise_lost.olvite_bloodstone": "zanit info getr",
   "item.paradise_lost.gravitite_bloodstone": "floaty info getr",
   "item.paradise_lost.abstentine_bloodstone": "alchy info getr",
 
-  "item.paradise_lost.zanite_helmet": "zanit hat",
-  "item.paradise_lost.zanite_chestplate": "zanit shirt",
-  "item.paradise_lost.zanite_leggings": "zanit pantz",
-  "item.paradise_lost.zanite_boots": "zanit shooz",
+  "item.paradise_lost.olvite_helmet": "zanit hat",
+  "item.paradise_lost.olvite_chestplate": "zanit shirt",
+  "item.paradise_lost.olvite_leggings": "zanit pantz",
+  "item.paradise_lost.olvite_boots": "zanit shooz",
 
   "item.paradise_lost.gravitite_helmet": "floaty hat",
   "item.paradise_lost.gravitite_chestplate": "floaty shirt",
@@ -492,7 +492,7 @@
 
 
   "info.paradise_lost.bloodstone.ambrosium": "dos it luv u",
-  "info.paradise_lost.bloodstone.zanite": "many thoughts",
+  "info.paradise_lost.bloodstone.olvite": "many thoughts",
   "info.paradise_lost.bloodstone.gravitite": "what it want",
   "info.paradise_lost.bloodstone.abstentine": "look into soul",
 
@@ -557,7 +557,7 @@
   "subtitles.paradise_lost.entity.aerbunny.death": "bunny dies :..(",
   "subtitles.paradise_lost.entity.aerbunny.eat": "bunny eating",
 
-  "subtitles.paradise_lost.item.armor.equip.zanite": "zanite armor clanks",
+  "subtitles.paradise_lost.item.armor.equip.olvite": "olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.gravitite": "gravitite armor clangs",
   "subtitles.paradise_lost.item.armor.equip.neptune": "neptune armor clangs",
   "subtitles.paradise_lost.item.armor.equip.phoenix": "phoenix armor fwooshes on",

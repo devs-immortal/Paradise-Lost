@@ -55,7 +55,7 @@
               "add": false
             }
           ],
-          "name": "paradise_lost:zanite_fragment"
+          "name": "paradise_lost:olvite_nugget"
         },
         {
           "type": "minecraft:item",
@@ -87,7 +87,7 @@
               "add": false
             }
           ],
-          "name": "paradise_lost:zanite_gemstone"
+          "name": "paradise_lost:olvite"
         },
         {
           "type": "minecraft:item",

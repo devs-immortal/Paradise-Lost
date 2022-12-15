@@ -241,14 +241,14 @@
   "block.paradise_lost.wild_flax" : "Wild Flax",
 
   "block.paradise_lost.ambrosium_ore": "Ambrosium Ore",
-  "block.paradise_lost.zanite_ore": "Zanite Ore",
+  "block.paradise_lost.olvite_ore": "Olvite Ore",
   "block.paradise_lost.gravitite_ore": "Gravitite Ore",
   "block.paradise_lost.ambrosium_block": "Block of Ambrosium",
-  "block.paradise_lost.zanite_block": "Block of Zanite",
+  "block.paradise_lost.olvite_block": "Block of Olvite",
   "block.paradise_lost.block_of_gravitite": "Block of Gravitite",
 
   "block.paradise_lost.gravitite_levitator": "Gravitite Levitator",
-  "block.paradise_lost.zanite_chain": "Zanite Chain",
+  "block.paradise_lost.olvite_chain": "Olvite Chain",
   "block.paradise_lost.ambrosium_lantern": "Ambrosium Lantern",
   "block.paradise_lost.blue_portal": "Paradise Portal",
 
@@ -297,18 +297,18 @@
   "item.paradise_lost.crow_eye.tooltip": "???",
   "item.paradise_lost.swet_ball": "Swet Ball",
   "item.paradise_lost.ambrosium_shard": "Ambrosium Shard",
-  "item.paradise_lost.zanite_gemstone": "Zanite Gemstone",
-  "item.paradise_lost.zanite_fragment": "Zanite Fragment",
+  "item.paradise_lost.olvite": "Olvite",
+  "item.paradise_lost.olvite_nugget": "Olvite Nugget",
   "item.paradise_lost.gravitite_gemstone": "Gravitite Gemstone",
   "item.paradise_lost.flax_thread" : "Flax Thread",
   "item.paradise_lost.flaxweave" : "Flaxweave",
   "item.paradise_lost.swedroot_pulp": "Swedroot Pulp",
 
-  "item.paradise_lost.zanite_shovel": "Zanite Shovel",
-  "item.paradise_lost.zanite_pickaxe": "Zanite Pickaxe",
-  "item.paradise_lost.zanite_axe": "Zanite Axe",
-  "item.paradise_lost.zanite_sword": "Zanite Sword",
-  "item.paradise_lost.zanite_hoe": "Zanite Hoe",
+  "item.paradise_lost.olvite_shovel": "Olvite Shovel",
+  "item.paradise_lost.olvite_pickaxe": "Olvite Pickaxe",
+  "item.paradise_lost.olvite_axe": "Olvite Axe",
+  "item.paradise_lost.olvite_sword": "Olvite Sword",
+  "item.paradise_lost.olvite_hoe": "Olvite Hoe",
 
   "item.paradise_lost.gravitite_shovel": "Gravitite Shovel",
   "item.paradise_lost.gravitite_pickaxe": "Gravitite Pickaxe",
@@ -327,14 +327,14 @@
   "item.paradise_lost.golden_parachute": "Golden Parachute",
 
   "item.paradise_lost.ambrosium_bloodstone": "Ambrosium Bloodstone",
-  "item.paradise_lost.zanite_bloodstone": "Zanite Bloodstone",
+  "item.paradise_lost.olvite_bloodstone": "Olvite Bloodstone",
   "item.paradise_lost.gravitite_bloodstone": "Gravitite Bloodstone",
   "item.paradise_lost.abstentine_bloodstone": "Abstentine Bloodstone",
 
-  "item.paradise_lost.zanite_helmet": "Zanite Helmet",
-  "item.paradise_lost.zanite_chestplate": "Zanite Chestplate",
-  "item.paradise_lost.zanite_leggings": "Zanite Leggings",
-  "item.paradise_lost.zanite_boots": "Zanite Boots",
+  "item.paradise_lost.olvite_helmet": "Olvite Helmet",
+  "item.paradise_lost.olvite_chestplate": "Olvite Chestplate",
+  "item.paradise_lost.olvite_leggings": "Olvite Leggings",
+  "item.paradise_lost.olvite_boots": "Olvite Boots",
 
   "item.paradise_lost.gravitite_helmet": "Gravitite Helmet",
   "item.paradise_lost.gravitite_chestplate": "Gravitite Chestplate",
@@ -460,7 +460,7 @@
 
 
   "info.paradise_lost.bloodstone.ambrosium": "Peer into the heart",
-  "info.paradise_lost.bloodstone.zanite": "Peer into the mind",
+  "info.paradise_lost.bloodstone.olvite": "Peer into the mind",
   "info.paradise_lost.bloodstone.gravitite": "Peer into the will",
   "info.paradise_lost.bloodstone.abstentine": "Peer into the soul",
 
@@ -516,7 +516,7 @@
   "subtitles.paradise_lost.entity.nightmare.ambient": "Magpie Coos",
   "subtitles.paradise_lost.entity.nightmare.death": "Nightmare... dies?",
 
-  "subtitles.paradise_lost.item.armor.equip.zanite": "Zanite armor clanks",
+  "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.gravitite": "Gravitite armor clangs",
   "subtitles.paradise_lost.item.armor.equip.neptune": "Neptune armor clangs",
   "subtitles.paradise_lost.item.armor.equip.phoenix": "Phoenix armor clangs",
