@@ -59,6 +59,7 @@ public class DefaultedRegistryMixin {
             /* ITEMS */
             "aechor_petal", ParadiseLost.locate(""),
             "ambrosium_shard", ParadiseLost.locate(""),
+            "quicksoil_vial", ParadiseLost.locate("vial"),
             "aercloud_vial", ParadiseLost.locate("cloud_vial"),
             "zanite_gemstone", ParadiseLost.locate("olvite"),
             "zanite_fragment", ParadiseLost.locate("olvite_nugget"),
