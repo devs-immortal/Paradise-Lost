@@ -8,7 +8,6 @@ import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
 import net.id.paradiselost.blocks.mechanical.FourBiteCakeBlock;
 import net.id.paradiselost.blocks.mechanical.IncubatorBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostGrassBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostQuicksoilBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSnowyBlock;
 import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
@@ -68,16 +67,9 @@ public class ParadiseLostBlocks {
     public static final Block PERMAFROST = add("permafrost", new Block(copy(Blocks.DIRT).strength(2f).sounds(BlockSoundGroup.GILDED_BLACKSTONE)), flattenable());
     public static final FarmlandBlock FARMLAND = add("farmland", new ParadiseLostFarmlandBlock(copy(Blocks.FARMLAND)));
     public static final ParadiseLostDirtPathBlock DIRT_PATH = add("grass_path", new ParadiseLostDirtPathBlock(copy(Blocks.DIRT_PATH)));
-    public static final Block QUICKSOIL = add("quicksoil", new ParadiseLostQuicksoilBlock(of(Material.AGGREGATE).strength(0.5f, -1f).slipperiness(1F).velocityMultiplier(1.102F).sounds(BlockSoundGroup.SAND)));
     public static final Block PACKED_SWEDROOT = add("packed_swedroot", new Block(of(Material.WOOD).strength(2f).sounds(BlockSoundGroup.SHROOMLIGHT)));
 
     // Glass Blocks
-    private static Settings quicksoilGlass() {
-        return copy(GLASS).strength(0.2f, -1f).slipperiness(1f).velocityMultiplier(1.102f).luminance(state -> 14);
-    }
-
-    public static final GlassBlock QUICKSOIL_GLASS = add("quicksoil_glass", new GlassBlock(quicksoilGlass()), translucentRenderLayer);
-    public static final PaneBlock QUICKSOIL_GLASS_PANE = add("quicksoil_glass_pane", new ParadiseLostPaneBlock(quicksoilGlass()), translucentRenderLayer);
 
     // Clouds
     private static Settings cloud() {
@@ -319,7 +311,6 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostBrushBlock FERN = add("fern", new ParadiseLostBrushBlock(shrub()), flammablePlant, cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_FERN = add("potted_fern", new FlowerPotBlock(FERN, flowerPot()), cutoutRenderLayer);
     public static final ParadiseLostBrushBlock BUSH = add("bush", new ParadiseLostBrushBlock(shrub()), flammablePlant, cutoutRenderLayer);
-    public static final ParadiseLostBrushBlock FLUTEGRASS = add("flutegrass", new ParadiseLostBrushBlock(shrub().mapColor(MapColor.GOLD), ParadiseLostBlockTags.FLUTEGRASS_VALID_GROUND, true), flammablePlant, cutoutRenderLayer);
     public static final GroundcoverBlock SHAMROCK = add("shamrock", new GroundcoverBlock(shrub().sounds(BlockSoundGroup.AZALEA_LEAVES), 0.99999), flammablePlant, cutoutRenderLayer);
     public static final GroundcoverBlock MALT_SPRIG = add("malt_sprig", new GroundcoverBlock(shrub().sounds(BlockSoundGroup.AZALEA_LEAVES), 1), flammablePlant, cutoutRenderLayer);
     public static final TallWaterPlantBlock HONEY_NETTLE = add("honey_nettle", new TallWaterPlantBlock(shrub().sounds(BlockSoundGroup.SMALL_DRIPLEAF)), cutoutRenderLayer);

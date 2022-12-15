@@ -22,11 +22,11 @@ public class ClientPlayNetworkHandlerMixin {
     @Inject(method = "onCustomPayload", at = @At("HEAD"), cancellable = true)
     private void onCustomPayload(CustomPayloadS2CPacket packet, CallbackInfo ci) {
         // This seems quite hacky.
-        if (packet.getChannel().equals(ParadiseLostGameRules.MAX_QUICKSOIL_SPEED_ID)) {
+        if (packet.getChannel().equals(ParadiseLostGameRules.MAX_AUGMENTED_SPEED_ID)) {
             NetworkThreadUtils.forceMainThread(packet, ((ClientPlayNetworkHandler) (Object) this), this.client);
             ((ClientPlayNetworkHandler) (Object) this).getWorld()
                     .getGameRules()
-                    .get(ParadiseLostGameRules.MAX_QUICKSOIL_SPEED)
+                    .get(ParadiseLostGameRules.MAX_AUGMENTED_SPEED)
                     .setValue(GameRuleFactory.createDoubleRule(packet.getData().readDouble()).createRule(),
                             (((ClientPlayNetworkHandler) (Object) this).getWorld().getServer()));
             ci.cancel();

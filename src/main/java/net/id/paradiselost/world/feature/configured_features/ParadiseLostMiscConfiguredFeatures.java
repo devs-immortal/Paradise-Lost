@@ -3,7 +3,6 @@ package net.id.paradiselost.world.feature.configured_features;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.feature.configs.BoulderFeatureConfig;
 import net.id.paradiselost.world.feature.configs.GroundcoverFeatureConfig;
-import net.id.paradiselost.world.feature.configs.QuicksoilConfig;
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -33,7 +32,6 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
     Highlands
      */
     // Default
-    public static final RegistryEntry<ConfiguredFeature<QuicksoilConfig, ?>> QUICKSOIL = register("quicksoil", ParadiseLostFeatures.QUICKSOIL, Configs.QUICKSOIL_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<SpringFeatureConfig, ?>> WATER_SPRING = register("water_spring", Feature.SPRING_FEATURE, Configs.WATER_SPRING_CONFIG);
 
     public static final RegistryEntry<ConfiguredFeature<BoulderFeatureConfig, ?>> GENERIC_BOULDER = register("generic_boulder", ParadiseLostFeatures.BOULDER, Configs.GENERIC_BOULDER_CONFIG);
@@ -65,7 +63,6 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
     }
     
     private static class Configs extends ParadiseLostConfiguredFeatures.Configs {
-        private static final QuicksoilConfig QUICKSOIL_CONFIG = new QuicksoilConfig();
         private static final SpringFeatureConfig WATER_SPRING_CONFIG = new SpringFeatureConfig(Fluids.WATER.getDefaultState(), true, 4, 1, RegistryEntryList.of(Block::getRegistryEntry, HOLYSTONE));
 
         private static final RandomPatchFeatureConfig SHIELD_ROCKS_CONFIG = new RandomPatchFeatureConfig(48, 9, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(

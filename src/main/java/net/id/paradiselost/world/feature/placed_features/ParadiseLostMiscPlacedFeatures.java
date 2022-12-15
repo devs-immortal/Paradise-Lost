@@ -20,7 +20,6 @@ public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final RegistryEntry<PlacedFeature> THICKET_BOULDER = register("thicket_boulder", ParadiseLostMiscConfiguredFeatures.THICKET_BOULDER, ChancePlacementModifier.of(2), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 2)));
     public static final RegistryEntry<PlacedFeature> GOLDEN_BOULDER = register("golden_boulder", ParadiseLostMiscConfiguredFeatures.GOLDEN_BOULDER, ChancePlacementModifier.of(30), CountMultilayerPlacementModifier.of(1));
 
-    public static final RegistryEntry<PlacedFeature> QUICKSOIL = register("quicksoil", ParadiseLostMiscConfiguredFeatures.QUICKSOIL);
     public static final RegistryEntry<PlacedFeature> WATER_SPRING = register("water_spring", ParadiseLostMiscConfiguredFeatures.WATER_SPRING);
 
     public static final RegistryEntry<PlacedFeature> ORE_AMBROSIUM = register("ore_ambrosium", ParadiseLostMiscConfiguredFeatures.ORE_AMBROSIUM, CountPlacementModifier.of(20), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(320)), BiomePlacementModifier.of());

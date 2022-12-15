@@ -33,6 +33,6 @@ public class PlayerManagerMixin {
             at = @At("HEAD")
     )
     private void sendWorldInfo(ServerPlayerEntity player, ServerWorld world, CallbackInfo ci) {
-        player.networkHandler.sendPacket(ParadiseLostGameRules.getMaxQuicksoilSpeedSyncPacket(world.getGameRules().get(ParadiseLostGameRules.MAX_QUICKSOIL_SPEED).get()));
+        player.networkHandler.sendPacket(ParadiseLostGameRules.getMaxAugmentedSpeedSyncPacket(world.getGameRules().get(ParadiseLostGameRules.MAX_AUGMENTED_SPEED).get()));
     }
 }

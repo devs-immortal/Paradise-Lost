@@ -33,7 +33,7 @@ public class VialItem extends Item {
     }
 
     public static ItemStack getEmptiedStack(ItemStack stack, PlayerEntity player) {
-        return !player.getAbilities().creativeMode ? new ItemStack(ParadiseLostItems.QUICKSOIL_VIAL) : stack;
+        return !player.getAbilities().creativeMode ? new ItemStack(ParadiseLostItems.VIAL) : stack;
     }
 
     @Override

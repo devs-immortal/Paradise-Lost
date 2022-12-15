@@ -173,7 +173,7 @@ public class ParadiseLostItems {
     public static final SkyrootBucketItem SKYROOT_WATER_BUCKET = add("skyroot_water_bucket", new SkyrootBucketItem(Fluids.WATER, skyrootBucket), emptiableBucketBehavior);
     public static final SkyrootBucketItem SKYROOT_MILK_BUCKET = add("skyroot_milk_bucket", new SkyrootBucketItem(skyrootBucket));
 
-    public static final VialItem QUICKSOIL_VIAL = add("quicksoil_vial", new VialItem(Fluids.EMPTY, misc().maxCount(32)));
+    public static final VialItem VIAL = add("vial", new VialItem(Fluids.EMPTY, misc().maxCount(32)));
     public static final VialItem CLOUD_VIAL = add("cloud_vial", new VialItem(ParadiseLostFluids.DENSE_CLOUD, misc().maxCount(32)));
     /* TODO: Implement dungeon keys
     public static final Item BRONZE_KEY = add("bronze_key", new Item(misc().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT)));
@@ -208,7 +208,6 @@ public class ParadiseLostItems {
     public static final BlockItem DIRT = add("dirt", ParadiseLostBlocks.DIRT, building_block);
     public static final BlockItem COARSE_DIRT = add("coarse_dirt", ParadiseLostBlocks.COARSE_DIRT, building_block);
     public static final BlockItem PERMAFROST = add("permafrost", ParadiseLostBlocks.PERMAFROST, building_block);
-    public static final BlockItem QUICKSOIL = add("quicksoil", ParadiseLostBlocks.QUICKSOIL, building_block);
     public static final BlockItem PACKED_SWEDROOT = add("packed_swedroot", ParadiseLostBlocks.PACKED_SWEDROOT, building_block, compostable85);
     public static final BlockItem COLD_CLOUD = add("cold_cloud", ParadiseLostBlocks.COLD_CLOUD, building_block);
     public static final BlockItem BLUE_CLOUD = add("blue_cloud", ParadiseLostBlocks.BLUE_CLOUD, building_block);
@@ -258,7 +257,7 @@ public class ParadiseLostItems {
     public static final BlockItem CRYSTAL_WOOD = add("crystal_wood", ParadiseLostBlocks.CRYSTAL_WOOD, building_block);
     public static final BlockItem WISTERIA_WOOD = add("wisteria_wood", ParadiseLostBlocks.WISTERIA_WOOD, building_block);
     // glass
-    public static final BlockItem QUICKSOIL_GLASS = add("quicksoil_glass", ParadiseLostBlocks.QUICKSOIL_GLASS, building_block);
+
     // slabs
     public static final BlockItem SKYROOT_SLAB = add("skyroot_slab", ParadiseLostBlocks.SKYROOT_SLAB, building_block);
     public static final BlockItem GOLDEN_OAK_SLAB = add("golden_oak_slab", ParadiseLostBlocks.GOLDEN_OAK_SLAB, building_block);
@@ -336,7 +335,6 @@ public class ParadiseLostItems {
     public static final BlockItem SHORT_GRASS = add("short_grass", ParadiseLostBlocks.SHORT_GRASS, decoration, compostable30);
     public static final BlockItem FERN = add("fern", ParadiseLostBlocks.FERN, decoration, compostable30);
     public static final BlockItem BUSH = add("bush", ParadiseLostBlocks.BUSH, decoration, compostable30);
-    public static final BlockItem FLUTEGRASS = add("flutegrass", ParadiseLostBlocks.FLUTEGRASS, decoration, compostable30);
     public static final BlockItem SHAMROCK = add("shamrock", ParadiseLostBlocks.SHAMROCK, decoration, compostable50);
     public static final BlockItem MALT_SPRIG = add("malt_sprig", ParadiseLostBlocks.MALT_SPRIG, decoration, compostable30);
     public static final BlockItem HALOPHIA = add("halophia", ParadiseLostBlocks.HALOPHIA, decoration, compostable30);
@@ -434,7 +432,6 @@ public class ParadiseLostItems {
     */
     // panes & chains
     public static final BlockItem OLVITE_CHAIN = add("olvite_chain", ParadiseLostBlocks.OLVITE_CHAIN, decoration);
-    public static final BlockItem QUICKSOIL_GLASS_PANE = add("quicksoil_glass_pane", ParadiseLostBlocks.QUICKSOIL_GLASS_PANE, decoration);
     // carpets
 
     // path & farmland

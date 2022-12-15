@@ -33,8 +33,6 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> GRASS_BUSH = register("grass", Feature.RANDOM_PATCH, Configs.GRASS_BUSH_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> GRASS_BONEMEAL = register("grass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(GRASS));
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> TALL_GRASS_BUSH = register("tall_grass", Feature.RANDOM_PATCH, Configs.TALL_GRASS_BUSH_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLUTEGRASS = register("flutegrass", Feature.RANDOM_PATCH, Configs.FLUTEGRASS_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> FLUTEGRASS_BONEMEAL = register("flutegrass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(ParadiseLostBlocks.FLUTEGRASS));
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLOWERS = register("flowers", Feature.FLOWER, Configs.FLOWER_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH, Configs.BLUEBERRY_PATCH_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BROWN_SPORECAP = register("patch_brown_sporecap", Feature.RANDOM_PATCH, Configs.BROWN_SPORECAP_PATCH_CONFIG);
@@ -68,7 +66,6 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
         private static final RandomPatchFeatureConfig DENSE_BUSH_CONFIG = blockPatch(16, 7, 3, ParadiseLostBlocks.BUSH);
         private static final RandomPatchFeatureConfig GRASS_BUSH_CONFIG = blockPatch(32, 7, 3, GRASS);
         private static final RandomPatchFeatureConfig TALL_GRASS_BUSH_CONFIG = blockPatch(32, 7, 3, TALL_GRASS);
-        private static final RandomPatchFeatureConfig FLUTEGRASS_CONFIG = blockPatch(32, 7, 3, ParadiseLostBlocks.FLUTEGRASS);
 
         private static final RandomPatchFeatureConfig FLOWER_CONFIG = blockPatch(64, 7, 3, new WeightedBlockStateProvider(
                 DataPool.<BlockState>builder()

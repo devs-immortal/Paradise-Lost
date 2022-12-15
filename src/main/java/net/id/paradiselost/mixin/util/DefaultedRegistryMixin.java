@@ -17,9 +17,9 @@ public class DefaultedRegistryMixin {
 
     private static final Map<String, Identifier> renames = createMap(
             /* BLOCKS */
-            "quicksoil", ParadiseLost.locate(""),
-            "quicksoil_glass", ParadiseLost.locate(""),
-            "quicksoil_glass_pane", ParadiseLost.locate(""),
+            "quicksoil", ParadiseLost.locate("dirt"),
+            "quicksoil_glass", new Identifier("minecraft", "yellow_stained_glass"),
+            "quicksoil_glass_pane", new Identifier("minecraft", "yellow_stained_glass_pane"),
             "cold_aercloud", ParadiseLost.locate("cold_cloud"),
             "blue_aercloud", ParadiseLost.locate("blue_cloud"),
             "pink_aercloud", ParadiseLost.locate("pink_cloud"),
@@ -54,6 +54,7 @@ public class DefaultedRegistryMixin {
             "ambrosium_lantern", ParadiseLost.locate(""),
             "ambrosium_torch", ParadiseLost.locate(""),
             "ambrosium_wall_torch", ParadiseLost.locate(""),
+            "flutegrass", ParadiseLost.locate("grass_plant"),
             //TODO: Add skyroot and golden oak blocks
             /* ITEMS */
             "aechor_petal", ParadiseLost.locate(""),
@@ -93,13 +94,13 @@ public class DefaultedRegistryMixin {
     );
 
     @SafeVarargs
-    private static <T> Map<String, Identifier> createMap(T... values) {
+    private static <T, V> Map<T, V> createMap(Object... values) {
         if ((values.length & 1) != 0) {
             throw new IllegalArgumentException("Odd number of values");
         }
-        Map<String, Identifier> map = new HashMap<>();
+        Map<T, V> map = new HashMap<>();
         for (int i = 0; i < values.length; i += 2) {
-            map.put((String) values[i], (Identifier) values[i + 1]);
+            map.put((T) values[i], (V) values[i + 1]);
         }
         return Collections.unmodifiableMap(map);
     }

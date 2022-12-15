@@ -252,7 +252,6 @@ public final class ParadiseLostBiomes {
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            QUICKSOIL,
                             PLAINS_BOULDER
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
@@ -263,8 +262,7 @@ public final class ParadiseLostBiomes {
                             GRASS,
                             TALL_GRASS,
                             PATCH_BLUEBERRY,
-                            SPARSE_TREES,
-                            FLUTEGRASS
+                            SPARSE_TREES
                         )
                     )
                 )
@@ -299,7 +297,6 @@ public final class ParadiseLostBiomes {
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            QUICKSOIL
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
                             WATER_SPRING
@@ -311,8 +308,7 @@ public final class ParadiseLostBiomes {
                             BUSH,
                             PATCH_BLUEBERRY,
                             SCATTERED_TREES,
-                            ALT_FALLEN_LEAVES,
-                            FLUTEGRASS
+                            ALT_FALLEN_LEAVES
                         )
                     )
                 )
@@ -348,7 +344,6 @@ public final class ParadiseLostBiomes {
                                 getStandardParadiseLostFeatures(),
                                 Map.of(
                                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                                                QUICKSOIL
                                         ),
                                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
                                                 WATER_SPRING
@@ -358,8 +353,7 @@ public final class ParadiseLostBiomes {
                                                 BUSH,
                                                 PATCH_BLUEBERRY,
                                                 PLATEAU_TREES,
-                                                SPARSE_TREES,
-                                                FLUTEGRASS
+                                                SPARSE_TREES
                                         )
                                 )
                         )
@@ -503,7 +497,6 @@ public final class ParadiseLostBiomes {
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            QUICKSOIL
                         ),
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
                             RAINBOW_MALT_SPRIGS,
@@ -558,7 +551,6 @@ public final class ParadiseLostBiomes {
                             TUNDRA_SNOW
                         ),
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            QUICKSOIL,
                             GENERIC_BOULDER
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
@@ -567,8 +559,7 @@ public final class ParadiseLostBiomes {
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
                             TUNDRA_SPIRES,
                             TUNDRA_FOLIAGE,
-                            MIXED_TREES,
-                            FLUTEGRASS
+                            MIXED_TREES
                         ),
                         GenerationStep.Feature.TOP_LAYER_MODIFICATION, List.of(
                             MiscPlacedFeatures.FREEZE_TOP_LAYER
@@ -607,7 +598,6 @@ public final class ParadiseLostBiomes {
                     getStandardParadiseLostFeatures(),
                     Map.of(
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            QUICKSOIL,
                             PLAINS_BOULDER
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
@@ -621,8 +611,7 @@ public final class ParadiseLostBiomes {
                             PLATEAU_FOLIAGE,
                             PLATEAU_SHAMROCK,
                             PLATEAU_FLOWERING_GRASS,
-                            PLATEAU_TREES,
-                            FLUTEGRASS
+                            PLATEAU_TREES
                         )
                     )
                 )
@@ -661,7 +650,6 @@ public final class ParadiseLostBiomes {
                             SHIELD_PONDS
                         ),
                         GenerationStep.Feature.LOCAL_MODIFICATIONS, List.of(
-                            QUICKSOIL,
                             GENERIC_BOULDER
                         ),
                         GenerationStep.Feature.FLUID_SPRINGS, List.of(
@@ -682,8 +670,7 @@ public final class ParadiseLostBiomes {
                             SHIELD_TREES,
                             DENSE_SHIELD_TREES,
                             SHIELD_ROCKS,
-                            SHIELD_FALLEN_LEAVES,
-                            FLUTEGRASS
+                            SHIELD_FALLEN_LEAVES
                         )
                     )
                 )

@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paradise_lost:item/quicksoil_vial"
+    "layer0": "paradise_lost:item/vial"
   }
 }
 
