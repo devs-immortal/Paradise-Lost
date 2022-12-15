@@ -3,7 +3,7 @@ package net.id.paradiselost.world.feature.features;
 import com.mojang.serialization.Codec;
 import net.id.paradiselost.blocks.ParadiseLostBlockProperties;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
-import net.id.paradiselost.blocks.natural.aercloud.AercloudBlock;
+import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
 import net.id.paradiselost.world.feature.configs.DynamicConfiguration;
 import net.id.paradiselost.world.feature.configs.QuicksoilConfig;
 import net.minecraft.block.BlockState;
@@ -102,7 +102,7 @@ public class QuicksoilFeature extends Feature<QuicksoilConfig> {
 
                     if (!visited.contains(mut) && !centers.contains(mut)) {
                         BlockState up;
-                        if (context.getWorld().getBlockState(mut).isAir() && !(up = context.getWorld().getBlockState(mut.up())).isAir() && !(up.getBlock() instanceof AercloudBlock) && mut.isWithinDistance(startPos, 16)) {
+                        if (context.getWorld().getBlockState(mut).isAir() && !(up = context.getWorld().getBlockState(mut.up())).isAir() && !(up.getBlock() instanceof ParadiseLostCloudBlock) && mut.isWithinDistance(startPos, 16)) {
                             BlockPos p = new BlockPos(mut);
                             nextStops.add(p);
                             centers.add(p);

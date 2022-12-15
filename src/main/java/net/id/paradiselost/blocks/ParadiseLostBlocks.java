@@ -11,10 +11,10 @@ import net.id.paradiselost.blocks.natural.ParadiseLostGrassBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostQuicksoilBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSnowyBlock;
-import net.id.paradiselost.blocks.natural.aercloud.AercloudBlock;
-import net.id.paradiselost.blocks.natural.aercloud.BlueAercloudBlock;
-import net.id.paradiselost.blocks.natural.aercloud.GoldenAercloudBlock;
-import net.id.paradiselost.blocks.natural.aercloud.PinkAercloudBlock;
+import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
+import net.id.paradiselost.blocks.natural.cloud.BlueParadiseLostCloudBlock;
+import net.id.paradiselost.blocks.natural.cloud.GoldenParadiseLostCloudBlock;
+import net.id.paradiselost.blocks.natural.cloud.PinkParadiseLostCloudBlock;
 import net.id.paradiselost.blocks.natural.crop.AmadrysCropBlock;
 import net.id.paradiselost.blocks.natural.crop.BlueberryBushBlock;
 import net.id.paradiselost.blocks.natural.crop.FlaxCropBlock;
@@ -79,17 +79,17 @@ public class ParadiseLostBlocks {
     public static final GlassBlock QUICKSOIL_GLASS = add("quicksoil_glass", new GlassBlock(quicksoilGlass()), translucentRenderLayer);
     public static final PaneBlock QUICKSOIL_GLASS_PANE = add("quicksoil_glass_pane", new ParadiseLostPaneBlock(quicksoilGlass()), translucentRenderLayer);
 
-    // Aerclouds
-    private static Settings aercloud() {
+    // Clouds
+    private static Settings cloud() {
         return of(Material.ICE).strength(0.2F).sounds(BlockSoundGroup.WOOL).nonOpaque().solidBlock(never).suffocates(never).blockVision(never);
     }
 
-    public static final AercloudBlock COLD_AERCLOUD = add("cold_aercloud", new AercloudBlock(aercloud().mapColor(MapColor.WHITE)), translucentRenderLayer);
-    public static final BlueAercloudBlock BLUE_AERCLOUD = add("blue_aercloud", new BlueAercloudBlock(aercloud().mapColor(MapColor.LIGHT_BLUE)), translucentRenderLayer);
-    public static final PinkAercloudBlock PINK_AERCLOUD = add("pink_aercloud", new PinkAercloudBlock(aercloud().mapColor(MapColor.PINK)), translucentRenderLayer);
-    public static final GoldenAercloudBlock GOLDEN_AERCLOUD = add("golden_aercloud", new GoldenAercloudBlock(aercloud().mapColor(MapColor.GOLD)), translucentRenderLayer);
+    public static final ParadiseLostCloudBlock COLD_CLOUD = add("cold_cloud", new ParadiseLostCloudBlock(cloud().mapColor(MapColor.WHITE)), translucentRenderLayer);
+    public static final BlueParadiseLostCloudBlock BLUE_CLOUD = add("blue_cloud", new BlueParadiseLostCloudBlock(cloud().mapColor(MapColor.LIGHT_BLUE)), translucentRenderLayer);
+    public static final PinkParadiseLostCloudBlock PINK_CLOUD = add("pink_cloud", new PinkParadiseLostCloudBlock(cloud().mapColor(MapColor.PINK)), translucentRenderLayer);
+    public static final GoldenParadiseLostCloudBlock GOLDEN_CLOUD = add("golden_cloud", new GoldenParadiseLostCloudBlock(cloud().mapColor(MapColor.GOLD)), translucentRenderLayer);
     // Fluids
-    public static final FluidBlock DENSE_AERCLOUD = add("dense_aercloud", new FluidBlock(ParadiseLostFluids.DENSE_AERCLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
+    public static final FluidBlock DENSE_CLOUD = add("dense_cloud", new FluidBlock(ParadiseLostFluids.DENSE_CLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
     public static final FluidBlock SPRING_WATER = add("spring_water", new FluidBlock(ParadiseLostFluids.SPRING_WATER, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
     // Organic Extra
     public static final Block ICESTONE = add("icestone", new Block(of(Material.DENSE_ICE).requiresTool().hardness(0.5f).sounds(BlockSoundGroup.GLASS)));

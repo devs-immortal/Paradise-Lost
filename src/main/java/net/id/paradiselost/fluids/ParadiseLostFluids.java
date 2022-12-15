@@ -26,7 +26,7 @@ public class ParadiseLostFluids {
         return renderSetup(null, provider);
     }
 
-    public static final FlowableFluid DENSE_AERCLOUD = add("dense_aercloud", new DenseAercloudFluid(), translucent, onlyStillRenderSetup(0xFFFFFF));
+    public static final FlowableFluid DENSE_CLOUD = add("dense_cloud", new DenseCloudFluid(), translucent, onlyStillRenderSetup(0xFFFFFF));
     public static final FlowableFluid FLOWING_SPRING_WATER = add("flowing_spring_water", new SpringWaterFluid.Flowing(), translucent);
     public static final FlowableFluid SPRING_WATER = add("spring_water", new SpringWaterFluid.Still(), translucent, renderSetup(FLOWING_SPRING_WATER, (view, pos, state) -> view == null ? 0xFF8AC5D5 : BiomeColors.getWaterColor(view, pos)));
 

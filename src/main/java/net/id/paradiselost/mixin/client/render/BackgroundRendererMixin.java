@@ -2,7 +2,7 @@ package net.id.paradiselost.mixin.client.render;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.paradiselost.fluids.DenseAercloudFluid;
+import net.id.paradiselost.fluids.DenseCloudFluid;
 import net.id.paradiselost.util.RegistryUtil;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.minecraft.client.MinecraftClient;
@@ -36,10 +36,10 @@ public class BackgroundRendererMixin {
 
     @Environment(EnvType.CLIENT)
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/Camera;getPos()Lnet/minecraft/util/math/Vec3d;"))
-    private static void denseAercloudRenderColor(Camera camera, float tickDelta, ClientWorld world, int i, float f, CallbackInfo ci) {
+    private static void denseCloudRenderColor(Camera camera, float tickDelta, ClientWorld world, int i, float f, CallbackInfo ci) {
         BlockPos playerPos = new BlockPos(MinecraftClient.getInstance().player.getEyePos());
         if (camera.getSubmersionType() == CameraSubmersionType.WATER
-                && world.getFluidState(playerPos).getFluid() instanceof DenseAercloudFluid) {
+                && world.getFluidState(playerPos).getFluid() instanceof DenseCloudFluid) {
             red = 0.323F;
             green = 0.434F;
             blue = 0.485F;

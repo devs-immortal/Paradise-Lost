@@ -35,12 +35,12 @@
   "block.paradise_lost.quicksoil_glass": "fast Glas",
   "block.paradise_lost.quicksoil_glass_pane": "fast Glas Pan",
 
-  "block.paradise_lost.cold_aercloud": "brrr aircloud",
-  "block.paradise_lost.blue_aercloud": "bounci aircloud",
-  "block.paradise_lost.pink_aercloud": "lovly aircloud",
-  "block.paradise_lost.golden_aercloud": "mean aircloud",
+  "block.paradise_lost.cold_cloud": "brrr aircloud",
+  "block.paradise_lost.blue_cloud": "bounci aircloud",
+  "block.paradise_lost.pink_cloud": "lovly aircloud",
+  "block.paradise_lost.golden_cloud": "mean aircloud",
 
-  "block.paradise_lost.dense_aercloud": "Aircloud watr",
+  "block.paradise_lost.dense_cloud": "Aircloud watr",
   "block.paradise_lost.spring_water": "hot Watr",
 
   "block.paradise_lost.icestone": "freez stone",
@@ -395,7 +395,7 @@
   "item.paradise_lost.healing_stone": "heal mashin",
 
   "item.paradise_lost.quicksoil_vial": "fast durt Vial",
-  "item.paradise_lost.aercloud_vial": "aircloud Vial",
+  "item.paradise_lost.cloud_vial": "aircloud Vial",
 
   "item.paradise_lost.aechor_plant_spawn_egg": "poisy plant spawny",
   "item.paradise_lost.cockatrice_spawn_egg": "coctrise spawny",

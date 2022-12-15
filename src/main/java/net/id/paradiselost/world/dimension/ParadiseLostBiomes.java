@@ -196,15 +196,15 @@ public final class ParadiseLostBiomes {
     private static Map<GenerationStep.Carver, List<RegistryEntry<? extends ConfiguredCarver<?>>>> getParadiseLostCarvers() {
         return Map.of(GenerationStep.Carver.AIR, List.of(
             ConfiguredCarvers.CAVE,
-            ParadiseLostCarvers.LARGE_COLD_AERCLOUD_CARVER,
-            ParadiseLostCarvers.COLD_AERCLOUD_CARVER,
-            ParadiseLostCarvers.TINY_COLD_AERCLOUD_CARVER,
-            ParadiseLostCarvers.LARGE_BLUE_AERCLOUD_CARVER,
-            ParadiseLostCarvers.BLUE_AERCLOUD_CARVER,
-            ParadiseLostCarvers.TINY_BLUE_AERCLOUD_CARVER,
-            ParadiseLostCarvers.LARGE_GOLDEN_AERCLOUD_CARVER,
-            ParadiseLostCarvers.GOLDEN_AERCLOUD_CARVER,
-            ParadiseLostCarvers.TINY_GOLDEN_AERCLOUD_CARVER
+            ParadiseLostCarvers.LARGE_COLD_CLOUD_CARVER,
+            ParadiseLostCarvers.COLD_CLOUD_CARVER,
+            ParadiseLostCarvers.TINY_COLD_CLOUD_CARVER,
+            ParadiseLostCarvers.LARGE_BLUE_CLOUD_CARVER,
+            ParadiseLostCarvers.BLUE_CLOUD_CARVER,
+            ParadiseLostCarvers.TINY_BLUE_CLOUD_CARVER,
+            ParadiseLostCarvers.LARGE_GOLDEN_CLOUD_CARVER,
+            ParadiseLostCarvers.GOLDEN_CLOUD_CARVER,
+            ParadiseLostCarvers.TINY_GOLDEN_CLOUD_CARVER
         ));
     }
     

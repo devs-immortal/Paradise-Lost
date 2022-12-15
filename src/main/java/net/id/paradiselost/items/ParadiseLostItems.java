@@ -174,7 +174,7 @@ public class ParadiseLostItems {
     public static final SkyrootBucketItem SKYROOT_MILK_BUCKET = add("skyroot_milk_bucket", new SkyrootBucketItem(skyrootBucket));
 
     public static final VialItem QUICKSOIL_VIAL = add("quicksoil_vial", new VialItem(Fluids.EMPTY, misc().maxCount(32)));
-    public static final VialItem AERCLOUD_VIAL = add("aercloud_vial", new VialItem(ParadiseLostFluids.DENSE_AERCLOUD, misc().maxCount(32)));
+    public static final VialItem CLOUD_VIAL = add("cloud_vial", new VialItem(ParadiseLostFluids.DENSE_CLOUD, misc().maxCount(32)));
     /* TODO: Implement dungeon keys
     public static final Item BRONZE_KEY = add("bronze_key", new Item(misc().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT)));
     public static final Item SILVER_KEY = add("silver_key", new Item(misc().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT)));
@@ -210,10 +210,10 @@ public class ParadiseLostItems {
     public static final BlockItem PERMAFROST = add("permafrost", ParadiseLostBlocks.PERMAFROST, building_block);
     public static final BlockItem QUICKSOIL = add("quicksoil", ParadiseLostBlocks.QUICKSOIL, building_block);
     public static final BlockItem PACKED_SWEDROOT = add("packed_swedroot", ParadiseLostBlocks.PACKED_SWEDROOT, building_block, compostable85);
-    public static final BlockItem COLD_AERCLOUD = add("cold_aercloud", ParadiseLostBlocks.COLD_AERCLOUD, building_block);
-    public static final BlockItem BLUE_AERCLOUD = add("blue_aercloud", ParadiseLostBlocks.BLUE_AERCLOUD, building_block);
-    public static final BlockItem PINK_AERCLOUD = add("pink_aercloud", ParadiseLostBlocks.PINK_AERCLOUD, building_block);
-    public static final BlockItem GOLDEN_AERCLOUD = add("golden_aercloud", ParadiseLostBlocks.GOLDEN_AERCLOUD, building_block);
+    public static final BlockItem COLD_CLOUD = add("cold_cloud", ParadiseLostBlocks.COLD_CLOUD, building_block);
+    public static final BlockItem BLUE_CLOUD = add("blue_cloud", ParadiseLostBlocks.BLUE_CLOUD, building_block);
+    public static final BlockItem PINK_CLOUD = add("pink_cloud", ParadiseLostBlocks.PINK_CLOUD, building_block);
+    public static final BlockItem GOLDEN_CLOUD = add("golden_cloud", ParadiseLostBlocks.GOLDEN_CLOUD, building_block);
     // planks
     public static final BlockItem SKYROOT_PLANKS = add("skyroot_planks", ParadiseLostBlocks.SKYROOT_PLANKS, building_block);
     public static final BlockItem GOLDEN_OAK_PLANKS = add("golden_oak_planks", ParadiseLostBlocks.GOLDEN_OAK_PLANKS, building_block);

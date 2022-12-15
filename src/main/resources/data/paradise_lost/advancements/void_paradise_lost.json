@@ -7,7 +7,7 @@
       "translate": "advancements.paradise_lost.void_paradise_lost.description"
     },
     "icon": {
-      "item": "paradise_lost:cold_aercloud"
+      "item": "paradise_lost:cold_cloud"
     },
     "frame": "task",
     "show_toast": true,
