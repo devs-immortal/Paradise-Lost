@@ -168,7 +168,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     @Nullable
     @Override
     protected BlockState getState(CarverContext context, CloudCarverConfig config, BlockPos pos, AquiferSampler sampler) {
-        return config.cloudState;
+        return config.cloudState.getBlockState(new Random(), pos);
     }
 
     @Override

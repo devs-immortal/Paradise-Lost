@@ -36,9 +36,12 @@
   "block.the_aether.quicksoil_glass_pane": "Quicksoil Glass Pane",
 
   "block.the_aether.cold_aercloud": "Cold Aercloud",
+  "block.the_aether.storm_aercloud": "Storm Aercloud",
   "block.the_aether.blue_aercloud": "Blue Aercloud",
   "block.the_aether.pink_aercloud": "Pink Aercloud",
   "block.the_aether.golden_aercloud": "Golden Aercloud",
+  "block.the_aether.purple_aercloud": "Purple Aercloud",
+  "block.the_aether.green_aercloud": "Green Aercloud",
 
   "block.the_aether.dense_aercloud": "Dense Aercloud",
   "block.the_aether.spring_water": "Spring Water",

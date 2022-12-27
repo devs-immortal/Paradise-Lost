@@ -13,10 +13,7 @@ import net.id.aether.blocks.natural.AetherGrassBlock;
 import net.id.aether.blocks.natural.AetherQuicksoilBlock;
 import net.id.aether.blocks.natural.AetherSaplingBlock;
 import net.id.aether.blocks.natural.AetherSnowyBlock;
-import net.id.aether.blocks.natural.aercloud.AercloudBlock;
-import net.id.aether.blocks.natural.aercloud.BlueAercloudBlock;
-import net.id.aether.blocks.natural.aercloud.GoldenAercloudBlock;
-import net.id.aether.blocks.natural.aercloud.PinkAercloudBlock;
+import net.id.aether.blocks.natural.aercloud.*;
 import net.id.aether.blocks.natural.crop.AmadrysCropBlock;
 import net.id.aether.blocks.natural.crop.BlueberryBushBlock;
 import net.id.aether.blocks.natural.crop.FlaxCropBlock;
@@ -35,9 +32,11 @@ import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
@@ -85,9 +84,13 @@ public class AetherBlocks {
     }
 
     public static final AercloudBlock COLD_AERCLOUD = add("cold_aercloud", new AercloudBlock(aercloud().mapColor(MapColor.WHITE)), translucentRenderLayer);
+    public static final ParticleEmittingAercloudBlock STORM_AERCLOUD = add("storm_aercloud", new ParticleEmittingAercloudBlock(aercloud().mapColor(MapColor.LAPIS_BLUE), new DustParticleEffect(new Vec3f(0.15F, 0.29F, 0.48F), 1F)), translucentRenderLayer);
     public static final BlueAercloudBlock BLUE_AERCLOUD = add("blue_aercloud", new BlueAercloudBlock(aercloud().mapColor(MapColor.LIGHT_BLUE)), translucentRenderLayer);
-    public static final PinkAercloudBlock PINK_AERCLOUD = add("pink_aercloud", new PinkAercloudBlock(aercloud().mapColor(MapColor.PINK)), translucentRenderLayer);
+    public static final ParticleEmittingAercloudBlock PINK_AERCLOUD = add("pink_aercloud", new ParticleEmittingAercloudBlock(aercloud().mapColor(MapColor.PINK), new DustParticleEffect(new Vec3f(0.89F, 0.65F, 0.9F), 1F)), translucentRenderLayer);
     public static final GoldenAercloudBlock GOLDEN_AERCLOUD = add("golden_aercloud", new GoldenAercloudBlock(aercloud().mapColor(MapColor.GOLD)), translucentRenderLayer);
+    public static final PurpleAercloudBlock PURPLE_AERCLOUD = add("purple_aercloud", new PurpleAercloudBlock(aercloud().mapColor(MapColor.PURPLE)), translucentRenderLayer);
+    public static final GreenAercloudBlock GREEN_AERCLOUD = add("green_aercloud", new GreenAercloudBlock(aercloud().mapColor(MapColor.LIME)), translucentRenderLayer);
+
     // Fluids
     public static final FluidBlock DENSE_AERCLOUD = add("dense_aercloud", new FluidBlock(AetherFluids.DENSE_AERCLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()) {});
     public static final FluidBlock SPRING_WATER = add("spring_water", new FluidBlock(AetherFluids.SPRING_WATER, of(Material.WATER).noCollision().strength(100f).dropsNothing()) {});

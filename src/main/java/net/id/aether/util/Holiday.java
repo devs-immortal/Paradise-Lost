@@ -21,32 +21,21 @@ public enum Holiday {
      * <p>
      * Minecraft uses this for chests.
      */
-    CHRISTMAS("christmas", (calendar) -> {
-        int date = calendar.get(Calendar.DATE);
-        return calendar.get(Calendar.MONTH) == Calendar.DECEMBER && date >= 24 && date <= 26;
-    }),
+    CHRISTMAS("christmas", (calendar) -> false),
     
     /**
      * Halloween, October 31st
      * <p>
      * Minecraft uses this to spawn bipeds with carved pumpkin headgear.
      */
-    HALLOWEEN("holoween", (calendar) ->
-        calendar.get(Calendar.MONTH) == Calendar.OCTOBER && calendar.get(Calendar.DATE) == 31
-    ),
+    HALLOWEEN("holoween", (calendar) -> false),
     
     /**
      * Near Halloween, October 20 to November 3 (inclusive).
      * <p>
      * Minecraft uses this to spawn in more bats than normal.
      */
-    NEAR_HALLOWEEN("near_halloween", (calendar) -> {
-        var date = calendar.get(Calendar.DATE);
-        var month = calendar.get(Calendar.MONTH);
-        return (month == Calendar.OCTOBER && date >= 20) ||
-            (month == Calendar.NOVEMBER && date <= 3);
-    }),
-    ;
+    NEAR_HALLOWEEN("near_halloween", (calendar) -> false);
     
     private final String name;
     private final Predicate<Calendar> predicate;
