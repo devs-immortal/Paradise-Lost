@@ -37,14 +37,14 @@
 
   "block.the_aether.cold_aercloud": "Cold Aercloud",
   "block.the_aether.storm_aercloud": "Storm Aercloud",
-  "block.the_aether.ender_aercloud": "Ender Aercloud",
+  "block.the_aether.teal_aercloud": "Teal Aercloud",
   "block.the_aether.blue_aercloud": "Blue Aercloud",
   "block.the_aether.pink_aercloud": "Pink Aercloud",
   "block.the_aether.golden_aercloud": "Golden Aercloud",
   "block.the_aether.purple_aercloud": "Purple Aercloud",
   "block.the_aether.green_aercloud": "Green Aercloud",
-  "block.the_aether.warm_aercloud": "Warm Aercloud",
-  "block.the_aether.burning_aercloud": "Burning Aercloud",
+  "block.the_aether.irradiated_aercloud": "Irradiated Aercloud",
+  "block.the_aether.blazing_aercloud": "Blazing Aercloud",
 
   "block.the_aether.dense_aercloud": "Dense Aercloud",
   "block.the_aether.spring_water": "Spring Water",

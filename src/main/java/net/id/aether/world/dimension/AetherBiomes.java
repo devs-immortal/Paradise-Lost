@@ -196,14 +196,14 @@ public final class AetherBiomes {
                 ConfiguredCarvers.CAVE,
                 AetherCarvers.COLD_AERCLOUD_CARVER,
                 AetherCarvers.STORM_AERCLOUD_CARVER,
-                AetherCarvers.ENDER_AERCLOUD_CARVER,
+                AetherCarvers.TEAL_AERCLOUD_CARVER,
                 AetherCarvers.BLUE_AERCLOUD_CARVER,
                 AetherCarvers.PINK_AERCLOUD_CARVER,
                 AetherCarvers.GOLDEN_AERCLOUD_CARVER,
                 AetherCarvers.PURPLE_AERCLOUD_CARVER,
                 AetherCarvers.GREEN_AERCLOUD_CARVER,
-                AetherCarvers.WARM_AERCLOUD_CARVER,
-                AetherCarvers.BURNING_AERCLOUD_CARVER
+                AetherCarvers.IRRADIATED_AERCLOUD_CARVER,
+                AetherCarvers.BLAZING_AERCLOUD_CARVER
             )
         );
     }

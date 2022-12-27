@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:ender_aercloud"
+          "name": "the_aether:teal_aercloud"
         }
       ],
       "conditions": [

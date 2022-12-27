@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:burning_aercloud"
+          "name": "the_aether:blazing_aercloud"
         }
       ],
       "conditions": [

@@ -85,14 +85,14 @@ public class AetherBlocks {
 
     public static final AercloudBlock COLD_AERCLOUD = add("cold_aercloud", new AercloudBlock(aercloud().mapColor(MapColor.WHITE)), translucentRenderLayer);
     public static final AercloudBlock STORM_AERCLOUD = add("storm_aercloud", new AercloudBlock(aercloud().mapColor(MapColor.LAPIS_BLUE)), translucentRenderLayer);
-    public static final ChaoticAercloudBlock ENDER_AERCLOUD = add("ender_aercloud", new ChaoticAercloudBlock(aercloud().mapColor(MapColor.DARK_GREEN)), translucentRenderLayer);
+    public static final AercloudBlock TEAL_AERCLOUD = add("teal_aercloud", new AercloudBlock(aercloud().mapColor(MapColor.DARK_GREEN)), translucentRenderLayer);
     public static final BlueAercloudBlock BLUE_AERCLOUD = add("blue_aercloud", new BlueAercloudBlock(aercloud().mapColor(MapColor.LIGHT_BLUE)), translucentRenderLayer);
     public static final ParticleEmittingAercloudBlock PINK_AERCLOUD = add("pink_aercloud", new ParticleEmittingAercloudBlock(aercloud().mapColor(MapColor.PINK), new DustParticleEffect(new Vec3f(0.89F, 0.65F, 0.9F), 1F), true), translucentRenderLayer);
     public static final GoldenAercloudBlock GOLDEN_AERCLOUD = add("golden_aercloud", new GoldenAercloudBlock(aercloud().mapColor(MapColor.GOLD)), translucentRenderLayer);
     public static final DirectionalAercloudBlock PURPLE_AERCLOUD = add("purple_aercloud", new DirectionalAercloudBlock(aercloud().mapColor(MapColor.PURPLE)), translucentRenderLayer);
     public static final ChaoticAercloudBlock GREEN_AERCLOUD = add("green_aercloud", new ChaoticAercloudBlock(aercloud().mapColor(MapColor.LIME)), translucentRenderLayer);
-    public static final RedstoneAercloudBlock WARM_AERCLOUD = add("warm_aercloud", new RedstoneAercloudBlock(aercloud().mapColor(MapColor.RED)), translucentRenderLayer);
-    public static final ParticleEmittingAercloudBlock BURNING_AERCLOUD = add("burning_aercloud", new ParticleEmittingAercloudBlock(aercloud().mapColor(MapColor.ORANGE),new DustParticleEffect(new Vec3f(1.0F, 0.55F, 0.3F), 1F), false), translucentRenderLayer);
+    public static final RedstoneAercloudBlock IRRADIATED_AERCLOUD = add("irradiated_aercloud", new RedstoneAercloudBlock(aercloud().mapColor(MapColor.RED)), translucentRenderLayer);
+    public static final ParticleEmittingAercloudBlock BLAZING_AERCLOUD = add("blazing_aercloud", new ParticleEmittingAercloudBlock(aercloud().mapColor(MapColor.ORANGE),new DustParticleEffect(new Vec3f(1.0F, 0.55F, 0.3F), 1F), false), translucentRenderLayer);
 
     // Fluids
     public static final FluidBlock DENSE_AERCLOUD = add("dense_aercloud", new FluidBlock(AetherFluids.DENSE_AERCLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()) {});

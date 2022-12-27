@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "the_aether:warm_aercloud"
+          "name": "the_aether:irradiated_aercloud"
         }
       ],
       "conditions": [

@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "the_aether:block/burning_aercloud"
+    "all": "the_aether:block/irradiated_aercloud"
   }
 }
