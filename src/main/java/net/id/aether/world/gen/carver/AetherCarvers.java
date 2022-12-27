@@ -44,7 +44,7 @@ public class AetherCarvers {
     public static final RegistryEntry<ConfiguredCarver<?>> BLUE_AERCLOUD_CARVER = registerCloud("blue_aercloud", AetherBlocks.BLUE_AERCLOUD);
     public static final RegistryEntry<ConfiguredCarver<?>> PINK_AERCLOUD_CARVER = registerCloud("pink_aercloud", AetherBlocks.PINK_AERCLOUD);
     public static final RegistryEntry<ConfiguredCarver<?>> GOLDEN_AERCLOUD_CARVER = registerCloud("golden_aercloud", AetherBlocks.GOLDEN_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> PURPLE_AERCLOUD_CARVER = registerCloud("purple_aercloud", AetherBlocks.PURPLE_AERCLOUD);
+    public static final RegistryEntry<ConfiguredCarver<?>> PURPLE_AERCLOUD_CARVER = registerCloud("purple_aercloud", PURPLE_AERCLOUD_STATE_PROVIDER);
     public static final RegistryEntry<ConfiguredCarver<?>> GREEN_AERCLOUD_CARVER = registerCloud("green_aercloud", AetherBlocks.GREEN_AERCLOUD);
     public static final RegistryEntry<ConfiguredCarver<?>> IRRADIATED_AERCLOUD_CARVER = registerCloud("irradiated_aercloud", AetherBlocks.IRRADIATED_AERCLOUD);
     public static final RegistryEntry<ConfiguredCarver<?>> BLAZING_AERCLOUD_CARVER = registerCloud("blazing_aercloud", AetherBlocks.BLAZING_AERCLOUD);
@@ -59,6 +59,9 @@ public class AetherCarvers {
     }
 
     public static <B extends Block> RegistryEntry<ConfiguredCarver<?>> registerCloud(String id, B block) {
+        return registerCloud(id, BlockStateProvider.of(block));
+    }
+    public static <B extends BlockStateProvider> RegistryEntry<ConfiguredCarver<?>> registerCloud(String id, B stateProvider) {
         return register(
                 id,
                 AERCLOUD_CARVER.configure(
@@ -69,7 +72,7 @@ public class AetherCarvers {
                                 YOffset.aboveBottom(0),
                                 UniformFloatProvider.create(0F, 0.01F),
                                 UniformFloatProvider.create(1.5F, 2.25F),
-                                BlockStateProvider.of(block),
+                                stateProvider,
                                 ConstantFloatProvider.create(0.15F),
                                 UniformFloatProvider.create(0.785F, 1.25F),
                                 UniformIntProvider.create(3, 4),
