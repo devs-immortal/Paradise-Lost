@@ -10,7 +10,7 @@ import net.minecraft.world.BlockView;
 @SuppressWarnings("deprecation")
 public class RedstoneAercloudBlock extends ParticleEmittingAercloudBlock{
     public RedstoneAercloudBlock(Settings properties) {
-        super(properties, new DustParticleEffect(new Vec3f(0.5F, 0.05F, 0F), 1F), false);
+        super(properties, new DustParticleEffect(new Vec3f(0.8F, 0.12F, 0.12F), 1F), false);
     }
 
     @Override

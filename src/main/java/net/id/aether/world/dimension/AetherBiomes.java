@@ -194,36 +194,16 @@ public final class AetherBiomes {
     private static Map<GenerationStep.Carver, List<RegistryEntry<? extends ConfiguredCarver<?>>>> getAetherCarvers() {
         return Map.of(GenerationStep.Carver.AIR, List.of(
                 ConfiguredCarvers.CAVE,
-                AetherCarvers.LARGE_COLD_AERCLOUD_CARVER,
                 AetherCarvers.COLD_AERCLOUD_CARVER,
-                AetherCarvers.TINY_COLD_AERCLOUD_CARVER,
-                AetherCarvers.LARGE_STORM_AERCLOUD_CARVER,
                 AetherCarvers.STORM_AERCLOUD_CARVER,
-                AetherCarvers.TINY_STORM_AERCLOUD_CARVER,
-                AetherCarvers.LARGE_ENDER_AERCLOUD_CARVER,
                 AetherCarvers.ENDER_AERCLOUD_CARVER,
-                AetherCarvers.TINY_ENDER_AERCLOUD_CARVER,
-                AetherCarvers.LARGE_BLUE_AERCLOUD_CARVER,
                 AetherCarvers.BLUE_AERCLOUD_CARVER,
-                AetherCarvers.TINY_BLUE_AERCLOUD_CARVER,
-                AetherCarvers.LARGE_PINK_AERCLOUD_CARVER,
                 AetherCarvers.PINK_AERCLOUD_CARVER,
-                AetherCarvers.TINY_PINK_AERCLOUD_CARVER,
-                AetherCarvers.LARGE_GOLDEN_AERCLOUD_CARVER,
                 AetherCarvers.GOLDEN_AERCLOUD_CARVER,
-                AetherCarvers.TINY_GOLDEN_AERCLOUD_CARVER,
-                AetherCarvers.LARGE_PURPLE_AERCLOUD_CARVER,
                 AetherCarvers.PURPLE_AERCLOUD_CARVER,
-                AetherCarvers.TINY_PURPLE_AERCLOUD_CARVER,
-                AetherCarvers.LARGE_GREEN_AERCLOUD_CARVER,
                 AetherCarvers.GREEN_AERCLOUD_CARVER,
-                AetherCarvers.TINY_GREEN_AERCLOUD_CARVER,
-                AetherCarvers.LARGE_WARM_AERCLOUD_CARVER,
                 AetherCarvers.WARM_AERCLOUD_CARVER,
-                AetherCarvers.TINY_WARM_AERCLOUD_CARVER,
-                AetherCarvers.LARGE_BURNING_AERCLOUD_CARVER,
-                AetherCarvers.BURNING_AERCLOUD_CARVER,
-                AetherCarvers.TINY_BURNING_AERCLOUD_CARVER
+                AetherCarvers.BURNING_AERCLOUD_CARVER
             )
         );
     }

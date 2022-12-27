@@ -92,7 +92,7 @@ public class AetherBlocks {
     public static final DirectionalAercloudBlock PURPLE_AERCLOUD = add("purple_aercloud", new DirectionalAercloudBlock(aercloud().mapColor(MapColor.PURPLE)), translucentRenderLayer);
     public static final ChaoticAercloudBlock GREEN_AERCLOUD = add("green_aercloud", new ChaoticAercloudBlock(aercloud().mapColor(MapColor.LIME)), translucentRenderLayer);
     public static final RedstoneAercloudBlock WARM_AERCLOUD = add("warm_aercloud", new RedstoneAercloudBlock(aercloud().mapColor(MapColor.RED)), translucentRenderLayer);
-    public static final ParticleEmittingAercloudBlock BURNING_AERCLOUD = add("burning_aercloud", new ParticleEmittingAercloudBlock(aercloud().mapColor(MapColor.ORANGE),new DustParticleEffect(new Vec3f(1.0F, 0.5F, 0F), 1F), false), translucentRenderLayer);
+    public static final ParticleEmittingAercloudBlock BURNING_AERCLOUD = add("burning_aercloud", new ParticleEmittingAercloudBlock(aercloud().mapColor(MapColor.ORANGE),new DustParticleEffect(new Vec3f(1.0F, 0.55F, 0.3F), 1F), false), translucentRenderLayer);
 
     // Fluids
     public static final FluidBlock DENSE_AERCLOUD = add("dense_aercloud", new FluidBlock(AetherFluids.DENSE_AERCLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()) {});
