@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "the_aether:block/purple_aercloud"
+    },
+    "facing=down": {
+      "model": "the_aether:block/purple_aercloud",
+      "x": 180,
+      "y": 180
+    },
+    "facing=north": {
+      "model": "the_aether:block/purple_aercloud",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "the_aether:block/purple_aercloud",
+      "x": 90,
+      "z": 90,
+      "y": 90
+    },
+    "facing=south": {
+      "model": "the_aether:block/purple_aercloud",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "the_aether:block/purple_aercloud",
+      "x": 270,
+      "z": 270,
+      "y": 90
+    }
+  }
+}

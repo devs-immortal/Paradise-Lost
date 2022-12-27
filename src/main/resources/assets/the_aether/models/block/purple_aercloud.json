@@ -1,0 +1,21 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "axis_y": "the_aether:block/purple_aercloud",
+    "side": "the_aether:block/purple_aercloud_directional",
+    "particle": "the_aether:block/purple_aercloud"
+  },
+  "elements": [
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#axis_y", "cullface": "down" },
+        "up":    { "uv": [ 0, 16, 16, 0 ], "texture": "#axis_y", "cullface": "up" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "north" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "south" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "west" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "east" }
+      }
+    }
+  ]
+}
