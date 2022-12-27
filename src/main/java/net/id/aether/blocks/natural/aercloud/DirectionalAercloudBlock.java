@@ -19,12 +19,12 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class PurpleAercloudBlock extends AercloudBlock {
+public class DirectionalAercloudBlock extends AercloudBlock {
 
     protected static VoxelShape SHAPE = VoxelShapes.empty();
     public static final EnumProperty<Direction> FACING = Properties.FACING;
 
-    public PurpleAercloudBlock(Settings properties) {
+    public DirectionalAercloudBlock(Settings properties) {
         super(properties);
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.UP));
 

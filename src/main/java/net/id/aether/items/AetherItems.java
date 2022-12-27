@@ -297,11 +297,14 @@ public class AetherItems {
     //Aerclouds
     public static final BlockItem COLD_AERCLOUD = add("cold_aercloud", AetherBlocks.COLD_AERCLOUD, building_block);
     public static final BlockItem STORM_AERCLOUD = add("storm_aercloud", AetherBlocks.STORM_AERCLOUD, building_block);
+    public static final BlockItem ENDER_AERCLOUD = add("ender_aercloud", AetherBlocks.ENDER_AERCLOUD, building_block);
     public static final BlockItem BLUE_AERCLOUD = add("blue_aercloud", AetherBlocks.BLUE_AERCLOUD, building_block);
     public static final BlockItem PINK_AERCLOUD = add("pink_aercloud", AetherBlocks.PINK_AERCLOUD, building_block);
     public static final BlockItem GOLDEN_AERCLOUD = add("golden_aercloud", AetherBlocks.GOLDEN_AERCLOUD, building_block);
     public static final BlockItem PURPLE_AERCLOUD = add("purple_aercloud", AetherBlocks.PURPLE_AERCLOUD, building_block);
     public static final BlockItem GREEN_AERCLOUD = add("green_aercloud", AetherBlocks.GREEN_AERCLOUD, building_block);
+    public static final BlockItem WARM_AERCLOUD = add("warm_aercloud", AetherBlocks.WARM_AERCLOUD, building_block);
+    public static final BlockItem BURNING_AERCLOUD = add("burning_aercloud", AetherBlocks.BURNING_AERCLOUD, building_block);
     // planks
     public static final BlockItem SKYROOT_PLANKS = add("skyroot_planks", AetherBlocks.SKYROOT_PLANKS, building_block);
     public static final BlockItem GOLDEN_OAK_PLANKS = add("golden_oak_planks", AetherBlocks.GOLDEN_OAK_PLANKS, building_block);

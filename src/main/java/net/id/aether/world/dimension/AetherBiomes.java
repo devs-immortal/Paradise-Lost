@@ -200,6 +200,9 @@ public final class AetherBiomes {
                 AetherCarvers.LARGE_STORM_AERCLOUD_CARVER,
                 AetherCarvers.STORM_AERCLOUD_CARVER,
                 AetherCarvers.TINY_STORM_AERCLOUD_CARVER,
+                AetherCarvers.LARGE_ENDER_AERCLOUD_CARVER,
+                AetherCarvers.ENDER_AERCLOUD_CARVER,
+                AetherCarvers.TINY_ENDER_AERCLOUD_CARVER,
                 AetherCarvers.LARGE_BLUE_AERCLOUD_CARVER,
                 AetherCarvers.BLUE_AERCLOUD_CARVER,
                 AetherCarvers.TINY_BLUE_AERCLOUD_CARVER,
@@ -214,7 +217,13 @@ public final class AetherBiomes {
                 AetherCarvers.TINY_PURPLE_AERCLOUD_CARVER,
                 AetherCarvers.LARGE_GREEN_AERCLOUD_CARVER,
                 AetherCarvers.GREEN_AERCLOUD_CARVER,
-                AetherCarvers.TINY_GREEN_AERCLOUD_CARVER
+                AetherCarvers.TINY_GREEN_AERCLOUD_CARVER,
+                AetherCarvers.LARGE_WARM_AERCLOUD_CARVER,
+                AetherCarvers.WARM_AERCLOUD_CARVER,
+                AetherCarvers.TINY_WARM_AERCLOUD_CARVER,
+                AetherCarvers.LARGE_BURNING_AERCLOUD_CARVER,
+                AetherCarvers.BURNING_AERCLOUD_CARVER,
+                AetherCarvers.TINY_BURNING_AERCLOUD_CARVER
             )
         );
     }
