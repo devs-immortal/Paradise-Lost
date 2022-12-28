@@ -84,11 +84,30 @@ public class DirectionalAercloudBlock extends AercloudBlock {
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         super.randomDisplayTick(state, world, pos, random);
-        final float x = pos.getX() + (random.nextFloat() * 0.7f) + 0.15f;
-        final float y = pos.getY() + (random.nextFloat() * 0.7f) + 0.15f;
-        final float z = pos.getZ() + (random.nextFloat() * 0.7f) + 0.15f;
-
         final Direction facing = state.get(FACING);
+
+        switch (facing) {
+            case EAST -> pos = new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ());
+            case WEST ->  new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ());
+            case UP -> pos = new BlockPos(pos.getX() , pos.getY() - 1, pos.getZ());
+            case DOWN -> pos = new BlockPos(pos.getX() , pos.getY() + 1, pos.getZ());
+            case SOUTH -> pos = new BlockPos(pos.getX() , pos.getY(), pos.getZ() - 1);
+            case NORTH -> pos = new BlockPos(pos.getX() , pos.getY(), pos.getZ() + 1);
+        }
+
+        float x = pos.getX() + (random.nextFloat() * 0.7f) + 0.15f;
+        float y = pos.getY() + (random.nextFloat() * 0.7f) + 0.15f;
+        float z = pos.getZ() + (random.nextFloat() * 0.7f) + 0.15f;
+
+        final float offset = 0.25F;
+        switch (facing) {
+            case EAST -> x = x + offset;
+            case WEST ->  x = x - offset;
+            case UP -> y = y + offset;
+            case DOWN -> y = y - offset;
+            case SOUTH -> z = z + offset;
+            case NORTH -> z = z - offset;
+        }
 
         final float motionX = facing.getOffsetX() * ((random.nextFloat() * 0.75f) + 0.45f);
         final float motionZ = facing.getOffsetZ() * ((random.nextFloat() * 0.75f) + 0.45f);
@@ -110,6 +129,6 @@ public class DirectionalAercloudBlock extends AercloudBlock {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getSide());
+        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection().getOpposite());
     }
 }
