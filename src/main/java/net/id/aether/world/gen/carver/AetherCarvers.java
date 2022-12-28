@@ -22,17 +22,16 @@ public class AetherCarvers {
 
     public static final Carver<CloudCarverConfig> AERCLOUD_CARVER = register("aercloud_carver", new CloudCarver(CloudCarverConfig.CODEC));
 
-    //    public static final ConfiguredCarver<?> GIANT_COLD_AERCLOUD_CARVER = register("cold_aercloud_giant", AERCLOUD_CARVER.configure(new CloudCarverConfig(0.00105F, UniformHeightProvider.create(YOffset.aboveBottom(112), YOffset.fixed(240)), UniformFloatProvider.create(0.5F, 1.1F), YOffset.aboveBottom(32), UniformFloatProvider.create(1.0F, 1.75F), UniformFloatProvider.create(0.6F, 1.0F), AetherBlocks.COLD_AERCLOUD.getDefaultState(), ConstantFloatProvider.create(0.0125F), UniformFloatProvider.create(0.35F, 0.65F), UniformIntProvider.create(12, 18), ConstantFloatProvider.create(1), ConstantIntProvider.create(10), ConstantFloatProvider.create(2.75F))));
-    public static final RegistryEntry<ConfiguredCarver<?>> COLD_AERCLOUD_CARVER = registerCloud("cold_aercloud", AetherBlocks.COLD_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> STORM_AERCLOUD_CARVER = registerCloud("storm_aercloud", AetherBlocks.STORM_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> TEAL_AERCLOUD_CARVER = registerCloud("teal_aercloud", AetherBlocks.TEAL_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> BLUE_AERCLOUD_CARVER = registerCloud("blue_aercloud", AetherBlocks.BLUE_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> PINK_AERCLOUD_CARVER = registerCloud("pink_aercloud", AetherBlocks.PINK_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> GOLDEN_AERCLOUD_CARVER = registerCloud("golden_aercloud", AetherBlocks.GOLDEN_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> PURPLE_AERCLOUD_CARVER = registerCloud("purple_aercloud", AetherBlocks.PURPLE_AERCLOUD.DEFAULT_STATES);
-    public static final RegistryEntry<ConfiguredCarver<?>> GREEN_AERCLOUD_CARVER = registerCloud("green_aercloud", AetherBlocks.GREEN_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> IRRADIATED_AERCLOUD_CARVER = registerCloud("irradiated_aercloud", AetherBlocks.IRRADIATED_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> BLAZING_AERCLOUD_CARVER = registerCloud("blazing_aercloud", AetherBlocks.BLAZING_AERCLOUD);
+    public static final RegistryEntry<ConfiguredCarver<?>> COLD_AERCLOUD_CARVER = registerCloud("cold_aercloud", AetherBlocks.COLD_AERCLOUD, 0.05F);
+    public static final RegistryEntry<ConfiguredCarver<?>> STORM_AERCLOUD_CARVER = registerCloud("storm_aercloud", AetherBlocks.STORM_AERCLOUD, 0.02F);
+    public static final RegistryEntry<ConfiguredCarver<?>> TEAL_AERCLOUD_CARVER = registerCloud("teal_aercloud", AetherBlocks.TEAL_AERCLOUD, 0.02F);
+    public static final RegistryEntry<ConfiguredCarver<?>> BLUE_AERCLOUD_CARVER = registerCloud("blue_aercloud", AetherBlocks.BLUE_AERCLOUD, 0.02F);
+    public static final RegistryEntry<ConfiguredCarver<?>> PINK_AERCLOUD_CARVER = registerCloud("pink_aercloud", AetherBlocks.PINK_AERCLOUD, 0.002F);
+    public static final RegistryEntry<ConfiguredCarver<?>> GOLDEN_AERCLOUD_CARVER = registerCloud("golden_aercloud", AetherBlocks.GOLDEN_AERCLOUD, 0.02F);
+    public static final RegistryEntry<ConfiguredCarver<?>> PURPLE_AERCLOUD_CARVER = registerCloud("purple_aercloud", AetherBlocks.PURPLE_AERCLOUD.DEFAULT_STATES, 0.01F);
+    public static final RegistryEntry<ConfiguredCarver<?>> GREEN_AERCLOUD_CARVER = registerCloud("green_aercloud", AetherBlocks.GREEN_AERCLOUD, 0.02F);
+    public static final RegistryEntry<ConfiguredCarver<?>> IRRADIATED_AERCLOUD_CARVER = registerCloud("irradiated_aercloud", AetherBlocks.IRRADIATED_AERCLOUD, 0.02F);
+    public static final RegistryEntry<ConfiguredCarver<?>> BLAZING_AERCLOUD_CARVER = registerCloud("blazing_aercloud", AetherBlocks.BLAZING_AERCLOUD, 0.02F);
 
     @SuppressWarnings("unchecked")
     public static <T extends CarverConfig> Carver<T> register(String name, Carver<?> carver) {
@@ -43,15 +42,15 @@ public class AetherCarvers {
         return BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_CARVER, Aether.locate(name), carver);
     }
 
-    public static <B extends Block> RegistryEntry<ConfiguredCarver<?>> registerCloud(String id, B block) {
-        return registerCloud(id, BlockStateProvider.of(block));
+    public static <B extends Block> RegistryEntry<ConfiguredCarver<?>> registerCloud(String id, B block, float probability) {
+        return registerCloud(id, BlockStateProvider.of(block), probability);
     }
-    public static <B extends BlockStateProvider> RegistryEntry<ConfiguredCarver<?>> registerCloud(String id, B stateProvider) {
+    public static <B extends BlockStateProvider> RegistryEntry<ConfiguredCarver<?>> registerCloud(String id, B stateProvider, float probability) {
         return register(
                 id,
                 AERCLOUD_CARVER.configure(
                         new CloudCarverConfig(
-                                0.01F,
+                                probability,
                                 UniformHeightProvider.create(YOffset.aboveBottom(100), YOffset.fixed(260)),
                                 UniformFloatProvider.create(0.5F, 1.1F), YOffset.aboveBottom(0),
                                 UniformFloatProvider.create(0.3F, 0.75F),
