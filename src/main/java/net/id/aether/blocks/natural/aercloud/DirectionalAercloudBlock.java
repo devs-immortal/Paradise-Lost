@@ -9,6 +9,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -16,18 +17,46 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 import java.util.Random;
 
+
 public class DirectionalAercloudBlock extends AercloudBlock {
 
-    protected static VoxelShape SHAPE = VoxelShapes.empty();
-    public static final EnumProperty<Direction> FACING = Properties.FACING;
+    protected static VoxelShape SHAPE;
+    private static final EnumProperty<Direction> FACING;
+    public final BlockState DEFAULT_STATE;
+    public final BlockState[] ALL_STATES;
+    public final WeightedBlockStateProvider DEFAULT_STATES;
+
+    static {
+        SHAPE = VoxelShapes.empty();
+        FACING = Properties.FACING;
+    }
 
     public DirectionalAercloudBlock(Settings properties) {
         super(properties);
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.UP));
+        DEFAULT_STATE = this.getDefaultState();
+        ALL_STATES = new BlockState[] {
+                DEFAULT_STATE.with(FACING, Direction.UP),
+                DEFAULT_STATE.with(FACING, Direction.DOWN),
+                DEFAULT_STATE.with(FACING, Direction.NORTH),
+                DEFAULT_STATE.with(FACING, Direction.EAST),
+                DEFAULT_STATE.with(FACING, Direction.SOUTH),
+                DEFAULT_STATE.with(FACING, Direction.WEST)
+        };
+        DEFAULT_STATES = new WeightedBlockStateProvider(arrayToPool(ALL_STATES));
+    }
 
+    @SuppressWarnings("SameParameterValue")
+    public static <T> DataPool<T> arrayToPool(T[] array) {
+        DataPool.Builder<T> builder = DataPool.builder();
+        for (T element : array) {
+            builder.add(element, 1);
+        }
+        return builder.build();
     }
 
     @Override

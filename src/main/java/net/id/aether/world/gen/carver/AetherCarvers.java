@@ -2,11 +2,7 @@ package net.id.aether.world.gen.carver;
 
 import net.id.aether.Aether;
 import net.id.aether.blocks.AetherBlocks;
-import net.id.aether.blocks.natural.aercloud.DirectionalAercloudBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.collection.DataPool;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
 import net.minecraft.util.math.floatprovider.UniformFloatProvider;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
@@ -20,20 +16,9 @@ import net.minecraft.world.gen.carver.CarverConfig;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.heightprovider.UniformHeightProvider;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 @SuppressWarnings("unused")
 public class AetherCarvers {
-    private static final BlockState DEFAULT_PURPLE_AERCLOUD = AetherBlocks.PURPLE_AERCLOUD.getStateManager().getDefaultState();
-    private static final WeightedBlockStateProvider PURPLE_AERCLOUD_STATE_PROVIDER = new WeightedBlockStateProvider(
-            DataPool.<BlockState>builder()
-                    .add(DEFAULT_PURPLE_AERCLOUD.with(DirectionalAercloudBlock.FACING, Direction.UP), 1)
-                    .add(DEFAULT_PURPLE_AERCLOUD.with(DirectionalAercloudBlock.FACING, Direction.DOWN), 1)
-                    .add(DEFAULT_PURPLE_AERCLOUD.with(DirectionalAercloudBlock.FACING, Direction.NORTH), 1)
-                    .add(DEFAULT_PURPLE_AERCLOUD.with(DirectionalAercloudBlock.FACING, Direction.EAST), 1)
-                    .add(DEFAULT_PURPLE_AERCLOUD.with(DirectionalAercloudBlock.FACING, Direction.SOUTH), 1)
-                    .add(DEFAULT_PURPLE_AERCLOUD.with(DirectionalAercloudBlock.FACING, Direction.WEST), 1)
-                    .build());
 
     public static final Carver<CloudCarverConfig> AERCLOUD_CARVER = register("aercloud_carver", new CloudCarver(CloudCarverConfig.CODEC));
 
@@ -44,7 +29,7 @@ public class AetherCarvers {
     public static final RegistryEntry<ConfiguredCarver<?>> BLUE_AERCLOUD_CARVER = registerCloud("blue_aercloud", AetherBlocks.BLUE_AERCLOUD);
     public static final RegistryEntry<ConfiguredCarver<?>> PINK_AERCLOUD_CARVER = registerCloud("pink_aercloud", AetherBlocks.PINK_AERCLOUD);
     public static final RegistryEntry<ConfiguredCarver<?>> GOLDEN_AERCLOUD_CARVER = registerCloud("golden_aercloud", AetherBlocks.GOLDEN_AERCLOUD);
-    public static final RegistryEntry<ConfiguredCarver<?>> PURPLE_AERCLOUD_CARVER = registerCloud("purple_aercloud", PURPLE_AERCLOUD_STATE_PROVIDER);
+    public static final RegistryEntry<ConfiguredCarver<?>> PURPLE_AERCLOUD_CARVER = registerCloud("purple_aercloud", AetherBlocks.PURPLE_AERCLOUD.DEFAULT_STATES);
     public static final RegistryEntry<ConfiguredCarver<?>> GREEN_AERCLOUD_CARVER = registerCloud("green_aercloud", AetherBlocks.GREEN_AERCLOUD);
     public static final RegistryEntry<ConfiguredCarver<?>> IRRADIATED_AERCLOUD_CARVER = registerCloud("irradiated_aercloud", AetherBlocks.IRRADIATED_AERCLOUD);
     public static final RegistryEntry<ConfiguredCarver<?>> BLAZING_AERCLOUD_CARVER = registerCloud("blazing_aercloud", AetherBlocks.BLAZING_AERCLOUD);
@@ -68,17 +53,16 @@ public class AetherCarvers {
                         new CloudCarverConfig(
                                 0.01F,
                                 UniformHeightProvider.create(YOffset.aboveBottom(100), YOffset.fixed(260)),
-                                UniformFloatProvider.create(1F, 1.1F),
-                                YOffset.aboveBottom(0),
-                                UniformFloatProvider.create(0F, 0.01F),
-                                UniformFloatProvider.create(1.5F, 2.25F),
+                                UniformFloatProvider.create(0.5F, 1.1F), YOffset.aboveBottom(0),
+                                UniformFloatProvider.create(0.3F, 0.75F),
+                                UniformFloatProvider.create(0.36F, 0.6F),
                                 stateProvider,
                                 ConstantFloatProvider.create(0.15F),
                                 UniformFloatProvider.create(0.785F, 1.25F),
-                                UniformIntProvider.create(3, 4),
+                                UniformIntProvider.create(1, 2),
                                 ConstantFloatProvider.create(3),
                                 ConstantIntProvider.create(1),
-                                ConstantFloatProvider.create(0.1F)
+                                ConstantFloatProvider.create(0.065F)
                         )
                 )
         );
