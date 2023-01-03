@@ -44,6 +44,7 @@ public class AetherCarvers {
     public static <B extends Block> RegistryEntry<ConfiguredCarver<?>> register(String id, B block, float probability) {
         return register(id, BlockStateProvider.of(block), probability);
     }
+
     public static <B extends BlockStateProvider> RegistryEntry<ConfiguredCarver<?>> register(String id, B stateProvider, float probability) {
         return register(
                 id,
