@@ -28,7 +28,7 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     Highlands
      */
     // Default
-    public static final RegistryEntry<PlacedFeature> SKYROOT_TREE = register("skyroot_tree", ParadiseLostTreeConfiguredFeatures.SKYROOT_TREE, placed(SKYROOT_SAPLING));
+    public static final RegistryEntry<PlacedFeature> AUREL_TREE = register("aurel_tree", ParadiseLostTreeConfiguredFeatures.AUREL_TREE, placed(AUREL_SAPLING));
     public static final RegistryEntry<PlacedFeature> GOLDEN_OAK_TREE = register("golden_oak_tree", ParadiseLostTreeConfiguredFeatures.GOLDEN_OAK_TREE, placed(GOLDEN_OAK_SAPLING));
     public static final RegistryEntry<PlacedFeature> CRYSTAL_TREE = register("crystal_tree", ParadiseLostTreeConfiguredFeatures.CRYSTAL_TREE, placed(CRYSTAL_SAPLING));
     public static final RegistryEntry<PlacedFeature> ORANGE_TREE = register("orange_tree", ParadiseLostTreeConfiguredFeatures.ORANGE_TREE, placed(ORANGE_SAPLING));
@@ -42,7 +42,7 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final RegistryEntry<PlacedFeature> FANCY_LAVENDER_WISTERIA_TREE = register("fancy_lavender_wisteria_tree", ParadiseLostTreeConfiguredFeatures.FANCY_LAVENDER_WISTERIA_TREE, placed(LAVENDER_WISTERIA_SAPLING));
     public static final RegistryEntry<PlacedFeature> FANCY_FROST_WISTERIA_TREE = register("fancy_frost_wisteria_tree", ParadiseLostTreeConfiguredFeatures.FANCY_FROST_WISTERIA_TREE, placed(FROST_WISTERIA_SAPLING));
     public static final RegistryEntry<PlacedFeature> FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", ParadiseLostTreeConfiguredFeatures.FANCY_BOREAL_WISTERIA_TREE, placed(BOREAL_WISTERIA_SAPLING));
-    public static final RegistryEntry<PlacedFeature> FANCY_SKYROOT_TREE = register("fancy_skyroot_tree", ParadiseLostTreeConfiguredFeatures.FANCY_SKYROOT_TREE, placed(SKYROOT_SAPLING));
+    public static final RegistryEntry<PlacedFeature> FANCY_AUREL_TREE = register("fancy_aurel_tree", ParadiseLostTreeConfiguredFeatures.FANCY_AUREL_TREE, placed(AUREL_SAPLING));
     // Tree Assortments
     public static final RegistryEntry<PlacedFeature> SCATTERED_TREES = register("scattered_trees", ParadiseLostTreeConfiguredFeatures.SCATTERED_TREES, CountMultilayerPlacementModifier.of(6), CountPlacementModifier.of(UniformIntProvider.create(0, 6)));
     public static final RegistryEntry<PlacedFeature> SHIELD_TREES = register("shield_trees", ParadiseLostTreeConfiguredFeatures.SHIELD_TREES, CountMultilayerPlacementModifier.of(5), CountPlacementModifier.of(UniformIntProvider.create(0, 6)));

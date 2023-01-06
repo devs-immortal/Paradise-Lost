@@ -1,7 +1,7 @@
 package net.id.paradiselost.world.feature.structure;
 
 import net.id.paradiselost.world.feature.structure.generator.OrangeRuinGenerator;
-import net.id.paradiselost.world.feature.structure.generator.SkyrootTowerGenerator;
+import net.id.paradiselost.world.feature.structure.generator.AurelTowerGenerator;
 import net.id.paradiselost.world.feature.structure.generator.WellGenerator;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.tag.TagKey;
@@ -16,9 +16,9 @@ public class ParadiseLostStructureFeatures {
     public static final StructureType<WellFeature> WELL = () -> WellFeature.CODEC;
     public static final StructurePieceType WELL_PIECE = WellGenerator.Piece::new;
     
-    public static final TagKey<Structure> SKYROOT_TOWER_KEY = tagKey("skyroot_tower");
-    public static final StructureType<SkyrootTowerFeature> SKYROOT_TOWER = () -> SkyrootTowerFeature.CODEC;
-    public static final StructurePieceType SKYROOT_TOWER_PIECE = SkyrootTowerGenerator.Piece::new;
+    public static final TagKey<Structure> AUREL_TOWER_KEY = tagKey("aurel_tower");
+    public static final StructureType<AurelTowerFeature> AUREL_TOWER = () -> AurelTowerFeature.CODEC;
+    public static final StructurePieceType AUREL_TOWER_PIECE = AurelTowerGenerator.Piece::new;
     
     public static final TagKey<Structure> ORANGE_RUIN_KEY = tagKey("orange_ruin");
     public static final StructureType<OrangeRuinFeature> ORANGE_RUIN = () -> OrangeRuinFeature.CODEC;
@@ -30,7 +30,7 @@ public class ParadiseLostStructureFeatures {
     
     public static void init() {
         register(WELL_KEY, WELL, WELL_PIECE);
-        register(SKYROOT_TOWER_KEY, SKYROOT_TOWER, SKYROOT_TOWER_PIECE);
+        register(AUREL_TOWER_KEY, AUREL_TOWER, AUREL_TOWER_PIECE);
         register(ORANGE_RUIN_KEY, ORANGE_RUIN, ORANGE_RUIN_PIECE);
     }
     

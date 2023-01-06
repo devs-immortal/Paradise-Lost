@@ -78,7 +78,7 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
 
                         if (lakeEdge) {
                             var state = context.getWorld().getBlockState(blockPos.add(xOff, yOff, zOff));
-                            if (state.isOf(ParadiseLostBlocks.SKYROOT_LEAF_PILE)) {
+                            if (state.isOf(ParadiseLostBlocks.AUREL_LEAF_PILE)) {
                                 System.out.flush();
                             }
 

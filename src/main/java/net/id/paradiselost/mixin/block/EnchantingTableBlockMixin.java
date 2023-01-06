@@ -24,7 +24,7 @@ public abstract class EnchantingTableBlockMixin {
     private static void canAccessBookshelf(World world, BlockPos tablePos, BlockPos bookshelfOffset, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(
                 cir.getReturnValue()
-                        || world.getBlockState(tablePos.add(bookshelfOffset)).isOf(ParadiseLostBlocks.SKYROOT_BOOKSHELF)
+                        || world.getBlockState(tablePos.add(bookshelfOffset)).isOf(ParadiseLostBlocks.AUREL_BOOKSHELF)
                         && world.isAir(tablePos.add(bookshelfOffset.getX() / 2, bookshelfOffset.getY(), bookshelfOffset.getZ() / 2))
         );
     }

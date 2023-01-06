@@ -14,7 +14,7 @@
     "show_toast": false,
     "announce_to_chat": false,
     "hidden": false,
-    "background": "paradise_lost:textures/block/skyroot_planks.png"
+    "background": "paradise_lost:textures/block/aurel_planks.png"
   },
   "criteria": {
     "entered_paradise_lost": {

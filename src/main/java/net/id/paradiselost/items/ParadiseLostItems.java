@@ -15,7 +15,7 @@ import net.id.paradiselost.items.food.WhiteAppleItem;
 import net.id.paradiselost.items.misc.*;
 import net.id.paradiselost.items.resources.AmbrosiumShardItem;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
-import net.id.paradiselost.items.tools.SkyrootBucketItem;
+import net.id.paradiselost.items.tools.AurelBucketItem;
 import net.id.paradiselost.items.tools.VialItem;
 import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
@@ -167,11 +167,11 @@ public class ParadiseLostItems {
     public static final BlockItem INCUBATOR = add("incubator", ParadiseLostBlocks.INCUBATOR, misc, fuel(300));
     public static final BlockItem FOOD_BOWL = add("food_bowl", ParadiseLostBlocks.FOOD_BOWL, misc, fuel(300));
 
-    public static final SkyrootBucketItem SKYROOT_BUCKET = add("skyroot_bucket", new SkyrootBucketItem(misc().maxCount(16)), fuel(200), emptyBucketBehavior);
+    public static final AurelBucketItem AUREL_BUCKET = add("aurel_bucket", new AurelBucketItem(misc().maxCount(16)), fuel(200), emptyBucketBehavior);
 
-    private static final Settings skyrootBucket = misc().maxCount(1).recipeRemainder(SKYROOT_BUCKET);
-    public static final SkyrootBucketItem SKYROOT_WATER_BUCKET = add("skyroot_water_bucket", new SkyrootBucketItem(Fluids.WATER, skyrootBucket), emptiableBucketBehavior);
-    public static final SkyrootBucketItem SKYROOT_MILK_BUCKET = add("skyroot_milk_bucket", new SkyrootBucketItem(skyrootBucket));
+    private static final Settings aurelBucket = misc().maxCount(1).recipeRemainder(AUREL_BUCKET);
+    public static final AurelBucketItem AUREL_WATER_BUCKET = add("aurel_water_bucket", new AurelBucketItem(Fluids.WATER, aurelBucket), emptiableBucketBehavior);
+    public static final AurelBucketItem AUREL_MILK_BUCKET = add("aurel_milk_bucket", new AurelBucketItem(aurelBucket));
 
     public static final VialItem VIAL = add("vial", new VialItem(Fluids.EMPTY, misc().maxCount(32)));
     public static final VialItem CLOUD_VIAL = add("cloud_vial", new VialItem(ParadiseLostFluids.DENSE_CLOUD, misc().maxCount(32)));
@@ -214,12 +214,12 @@ public class ParadiseLostItems {
     public static final BlockItem PINK_CLOUD = add("pink_cloud", ParadiseLostBlocks.PINK_CLOUD, building_block);
     public static final BlockItem GOLDEN_CLOUD = add("golden_cloud", ParadiseLostBlocks.GOLDEN_CLOUD, building_block);
     // planks
-    public static final BlockItem SKYROOT_PLANKS = add("skyroot_planks", ParadiseLostBlocks.SKYROOT_PLANKS, building_block);
+    public static final BlockItem AUREL_PLANKS = add("aurel_planks", ParadiseLostBlocks.AUREL_PLANKS, building_block);
     public static final BlockItem GOLDEN_OAK_PLANKS = add("golden_oak_planks", ParadiseLostBlocks.GOLDEN_OAK_PLANKS, building_block);
     public static final BlockItem ORANGE_PLANKS = add("orange_planks", ParadiseLostBlocks.ORANGE_PLANKS, building_block);
     public static final BlockItem CRYSTAL_PLANKS = add("crystal_planks", ParadiseLostBlocks.CRYSTAL_PLANKS, building_block);
     public static final BlockItem WISTERIA_PLANKS = add("wisteria_planks", ParadiseLostBlocks.WISTERIA_PLANKS, building_block);
-    public static final BlockItem SKYROOT_BOOKSHELF = add("skyroot_bookshelf", ParadiseLostBlocks.SKYROOT_BOOKSHELF, building_block);
+    public static final BlockItem AUREL_BOOKSHELF = add("aurel_bookshelf", ParadiseLostBlocks.AUREL_BOOKSHELF, building_block);
     // ores
     public static final BlockItem AMBROSIUM_ORE = add("ambrosium_ore", ParadiseLostBlocks.AMBROSIUM_ORE, building_block);
     public static final BlockItem OLVITE_ORE = add("olvite_ore", ParadiseLostBlocks.OLVITE_ORE, building_block);
@@ -231,27 +231,27 @@ public class ParadiseLostItems {
     // move this somewhere else
     public static final BlockItem GRAVITITE_LEVITATOR = add("gravitite_levitator", ParadiseLostBlocks.GRAVITITE_LEVITATOR, building_block);
     // logs
-    public static final BlockItem SKYROOT_LOG = add("skyroot_log", ParadiseLostBlocks.SKYROOT_LOG, building_block);
-    public static final BlockItem MOTTLED_SKYROOT_LOG = add("mottled_skyroot_log", ParadiseLostBlocks.MOTTLED_SKYROOT_LOG, building_block);
-    public static final BlockItem MOTTLED_SKYROOT_FALLEN_LOG = add("mottled_skyroot_fallen_log", ParadiseLostBlocks.MOTTLED_SKYROOT_FALLEN_LOG, building_block);
+    public static final BlockItem AUREL_LOG = add("aurel_log", ParadiseLostBlocks.AUREL_LOG, building_block);
+    public static final BlockItem MOTTLED_AUREL_LOG = add("mottled_aurel_log", ParadiseLostBlocks.MOTTLED_AUREL_LOG, building_block);
+    public static final BlockItem MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", ParadiseLostBlocks.MOTTLED_AUREL_FALLEN_LOG, building_block);
     public static final BlockItem GOLDEN_OAK_LOG = add("golden_oak_log", ParadiseLostBlocks.GOLDEN_OAK_LOG, building_block);
     public static final BlockItem ORANGE_LOG = add("orange_log", ParadiseLostBlocks.ORANGE_LOG, building_block);
     public static final BlockItem CRYSTAL_LOG = add("crystal_log", ParadiseLostBlocks.CRYSTAL_LOG, building_block);
     public static final BlockItem WISTERIA_LOG = add("wisteria_log", ParadiseLostBlocks.WISTERIA_LOG, building_block);
     // stripped logs
-    public static final BlockItem STRIPPED_SKYROOT_LOG = add("stripped_skyroot_log", ParadiseLostBlocks.STRIPPED_SKYROOT_LOG, building_block);
+    public static final BlockItem STRIPPED_AUREL_LOG = add("stripped_aurel_log", ParadiseLostBlocks.STRIPPED_AUREL_LOG, building_block);
     public static final BlockItem STRIPPED_GOLDEN_OAK_LOG = add("stripped_golden_oak_log", ParadiseLostBlocks.STRIPPED_GOLDEN_OAK_LOG, building_block);
     public static final BlockItem STRIPPED_ORANGE_LOG = add("stripped_orange_log", ParadiseLostBlocks.STRIPPED_ORANGE_LOG, building_block);
     public static final BlockItem STRIPPED_CRYSTAL_LOG = add("stripped_crystal_log", ParadiseLostBlocks.STRIPPED_CRYSTAL_LOG, building_block);
     public static final BlockItem STRIPPED_WISTERIA_LOG = add("stripped_wisteria_log", ParadiseLostBlocks.STRIPPED_WISTERIA_LOG, building_block);
     // stripped wood
-    public static final BlockItem STRIPPED_SKYROOT_WOOD = add("stripped_skyroot_wood", ParadiseLostBlocks.STRIPPED_SKYROOT_WOOD, building_block);
+    public static final BlockItem STRIPPED_AUREL_WOOD = add("stripped_aurel_wood", ParadiseLostBlocks.STRIPPED_AUREL_WOOD, building_block);
     public static final BlockItem STRIPPED_GOLDEN_OAK_WOOD = add("stripped_golden_oak_wood", ParadiseLostBlocks.STRIPPED_GOLDEN_OAK_WOOD, building_block);
     public static final BlockItem STRIPPED_ORANGE_WOOD = add("stripped_orange_wood", ParadiseLostBlocks.STRIPPED_ORANGE_WOOD, building_block);
     public static final BlockItem STRIPPED_CRYSTAL_WOOD = add("stripped_crystal_wood", ParadiseLostBlocks.STRIPPED_CRYSTAL_WOOD, building_block);
     public static final BlockItem STRIPPED_WISTERIA_WOOD = add("stripped_wisteria_wood", ParadiseLostBlocks.STRIPPED_WISTERIA_WOOD, building_block);
     // wood
-    public static final BlockItem SKYROOT_WOOD = add("skyroot_wood", ParadiseLostBlocks.SKYROOT_WOOD, building_block);
+    public static final BlockItem AUREL_WOOD = add("aurel_wood", ParadiseLostBlocks.AUREL_WOOD, building_block);
     public static final BlockItem GOLDEN_OAK_WOOD = add("golden_oak_wood", ParadiseLostBlocks.GOLDEN_OAK_WOOD, building_block);
     public static final BlockItem ORANGE_WOOD = add("orange_wood", ParadiseLostBlocks.ORANGE_WOOD, building_block);
     public static final BlockItem CRYSTAL_WOOD = add("crystal_wood", ParadiseLostBlocks.CRYSTAL_WOOD, building_block);
@@ -259,7 +259,7 @@ public class ParadiseLostItems {
     // glass
 
     // slabs
-    public static final BlockItem SKYROOT_SLAB = add("skyroot_slab", ParadiseLostBlocks.SKYROOT_SLAB, building_block);
+    public static final BlockItem AUREL_SLAB = add("aurel_slab", ParadiseLostBlocks.AUREL_SLAB, building_block);
     public static final BlockItem GOLDEN_OAK_SLAB = add("golden_oak_slab", ParadiseLostBlocks.GOLDEN_OAK_SLAB, building_block);
     public static final BlockItem ORANGE_SLAB = add("orange_slab", ParadiseLostBlocks.ORANGE_SLAB, building_block);
     public static final BlockItem CRYSTAL_SLAB = add("crystal_slab", ParadiseLostBlocks.CRYSTAL_SLAB, building_block);
@@ -281,7 +281,7 @@ public class ParadiseLostItems {
     public static final BlockItem CARVED_STONE_EYE_LIT = add("carved_stone_eye_lit", ParadiseLostBlocks.CARVED_STONE_EYE_LIT, building_block);
 
     // stairs
-    public static final BlockItem SKYROOT_STAIRS = add("skyroot_stairs", ParadiseLostBlocks.SKYROOT_STAIRS, building_block);
+    public static final BlockItem AUREL_STAIRS = add("aurel_stairs", ParadiseLostBlocks.AUREL_STAIRS, building_block);
     public static final BlockItem GOLDEN_OAK_STAIRS = add("golden_oak_stairs", ParadiseLostBlocks.GOLDEN_OAK_STAIRS, building_block);
     public static final BlockItem ORANGE_STAIRS = add("orange_stairs", ParadiseLostBlocks.ORANGE_STAIRS, building_block);
     public static final BlockItem CRYSTAL_STAIRS = add("crystal_stairs", ParadiseLostBlocks.CRYSTAL_STAIRS, building_block);
@@ -312,7 +312,7 @@ public class ParadiseLostItems {
     private static final FabricItemSettings hat = decoration().equipmentSlot(stack -> HEAD);
 
     // saplings
-    public static final BlockItem SKYROOT_SAPLING = add("skyroot_sapling", ParadiseLostBlocks.SKYROOT_SAPLING, decoration, compostable30);
+    public static final BlockItem AUREL_SAPLING = add("aurel_sapling", ParadiseLostBlocks.AUREL_SAPLING, decoration, compostable30);
     public static final BlockItem GOLDEN_OAK_SAPLING = add("golden_oak_sapling", ParadiseLostBlocks.GOLDEN_OAK_SAPLING, decoration, compostable30);
     public static final BlockItem ORANGE_SAPLING = add("orange_sapling", ParadiseLostBlocks.ORANGE_SAPLING, decoration, compostable30);
     public static final BlockItem CRYSTAL_SAPLING = add("crystal_sapling", ParadiseLostBlocks.CRYSTAL_SAPLING, decoration, compostable50);
@@ -321,7 +321,7 @@ public class ParadiseLostItems {
     public static final BlockItem LAVENDER_WISTERIA_SAPLING = add("lavender_wisteria_sapling", ParadiseLostBlocks.LAVENDER_WISTERIA_SAPLING, decoration, compostable30);
     public static final BlockItem BOREAL_WISTERIA_SAPLING = add("boreal_wisteria_sapling", ParadiseLostBlocks.BOREAL_WISTERIA_SAPLING, decoration, compostable30);
     // leaves
-    public static final BlockItem SKYROOT_LEAVES = add("skyroot_leaves", ParadiseLostBlocks.SKYROOT_LEAVES, decoration, compostable30);
+    public static final BlockItem AUREL_LEAVES = add("aurel_leaves", ParadiseLostBlocks.AUREL_LEAVES, decoration, compostable30);
     public static final BlockItem GOLDEN_OAK_LEAVES = add("golden_oak_leaves", ParadiseLostBlocks.GOLDEN_OAK_LEAVES, decoration, compostable30);
     public static final BlockItem ORANGE_LEAVES = add("orange_leaves", ParadiseLostBlocks.ORANGE_LEAVES, decoration, compostable30);
     public static final BlockItem CRYSTAL_LEAVES = add("crystal_leaves", ParadiseLostBlocks.CRYSTAL_LEAVES, decoration, compostable50);
@@ -356,7 +356,7 @@ public class ParadiseLostItems {
     public static final BlockItem LAVENDER_WISTERIA_HANGER = add("lavender_wisteria_hanger", ParadiseLostBlocks.LAVENDER_WISTERIA_HANGER, decoration, compostable30);
     public static final BlockItem BOREAL_WISTERIA_HANGER = add("boreal_wisteria_hanger", ParadiseLostBlocks.BOREAL_WISTERIA_HANGER, decoration, compostable30);
 
-    public static final BlockItem SKYROOT_LEAF_PILE = add("skyroot_leaf_pile", ParadiseLostBlocks.SKYROOT_LEAF_PILE, decoration, compostable30);
+    public static final BlockItem AUREL_LEAF_PILE = add("aurel_leaf_pile", ParadiseLostBlocks.AUREL_LEAF_PILE, decoration, compostable30);
     public static final BlockItem ROSE_WISTERIA_LEAF_PILE = add("rose_wisteria_leaf_pile", ParadiseLostBlocks.ROSE_WISTERIA_LEAF_PILE, decoration, compostable30);
     public static final BlockItem FROST_WISTERIA_LEAF_PILE = add("frost_wisteria_leaf_pile", ParadiseLostBlocks.FROST_WISTERIA_LEAF_PILE, decoration, compostable30);
     public static final BlockItem LAVENDER_WISTERIA_LEAF_PILE = add("lavender_wisteria_leaf_pile", ParadiseLostBlocks.LAVENDER_WISTERIA_LEAF_PILE, decoration, compostable30);
@@ -393,25 +393,25 @@ public class ParadiseLostItems {
     public static final BlockItem AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", ParadiseLostBlocks.AMBROSIUM_CAMPFIRE, decoration);
 
     // door-like things
-    public static final BlockItem SKYROOT_DOOR = add("skyroot_door", ParadiseLostBlocks.SKYROOT_DOOR, decoration);
+    public static final BlockItem AUREL_DOOR = add("aurel_door", ParadiseLostBlocks.AUREL_DOOR, decoration);
     public static final BlockItem GOLDEN_OAK_DOOR = add("golden_oak_door", ParadiseLostBlocks.GOLDEN_OAK_DOOR, decoration);
     public static final BlockItem ORANGE_DOOR = add("orange_door", ParadiseLostBlocks.ORANGE_DOOR, decoration);
     public static final BlockItem CRYSTAL_DOOR = add("crystal_door", ParadiseLostBlocks.CRYSTAL_DOOR, decoration);
     public static final BlockItem WISTERIA_DOOR = add("wisteria_door", ParadiseLostBlocks.WISTERIA_DOOR, decoration);
 
-    public static final BlockItem SKYROOT_TRAPDOOR = add("skyroot_trapdoor", ParadiseLostBlocks.SKYROOT_TRAPDOOR, decoration);
+    public static final BlockItem AUREL_TRAPDOOR = add("aurel_trapdoor", ParadiseLostBlocks.AUREL_TRAPDOOR, decoration);
     public static final BlockItem GOLDEN_OAK_TRAPDOOR = add("golden_oak_trapdoor", ParadiseLostBlocks.GOLDEN_OAK_TRAPDOOR, decoration);
     public static final BlockItem ORANGE_TRAPDOOR = add("orange_trapdoor", ParadiseLostBlocks.ORANGE_TRAPDOOR, decoration);
     public static final BlockItem CRYSTAL_TRAPDOOR = add("crystal_trapdoor", ParadiseLostBlocks.CRYSTAL_TRAPDOOR, decoration);
     public static final BlockItem WISTERIA_TRAPDOOR = add("wisteria_trapdoor", ParadiseLostBlocks.WISTERIA_TRAPDOOR, decoration);
 
-    public static final BlockItem SKYROOT_FENCE_GATE = add("skyroot_fence_gate", ParadiseLostBlocks.SKYROOT_FENCE_GATE, decoration);
+    public static final BlockItem AUREL_FENCE_GATE = add("aurel_fence_gate", ParadiseLostBlocks.AUREL_FENCE_GATE, decoration);
     public static final BlockItem GOLDEN_OAK_FENCE_GATE = add("golden_oak_fence_gate", ParadiseLostBlocks.GOLDEN_OAK_FENCE_GATE, decoration);
     public static final BlockItem ORANGE_FENCE_GATE = add("orange_fence_gate", ParadiseLostBlocks.ORANGE_FENCE_GATE, decoration);
     public static final BlockItem CRYSTAL_FENCE_GATE = add("crystal_fence_gate", ParadiseLostBlocks.CRYSTAL_FENCE_GATE, decoration);
     public static final BlockItem WISTERIA_FENCE_GATE = add("wisteria_fence_gate", ParadiseLostBlocks.WISTERIA_FENCE_GATE, decoration);
     // fences
-    public static final BlockItem SKYROOT_FENCE = add("skyroot_fence", ParadiseLostBlocks.SKYROOT_FENCE, decoration);
+    public static final BlockItem AUREL_FENCE = add("aurel_fence", ParadiseLostBlocks.AUREL_FENCE, decoration);
     public static final BlockItem GOLDEN_OAK_FENCE = add("golden_oak_fence", ParadiseLostBlocks.GOLDEN_OAK_FENCE, decoration);
     public static final BlockItem ORANGE_FENCE = add("orange_fence", ParadiseLostBlocks.ORANGE_FENCE, decoration);
     public static final BlockItem CRYSTAL_FENCE = add("crystal_fence", ParadiseLostBlocks.CRYSTAL_FENCE, decoration);
@@ -438,7 +438,7 @@ public class ParadiseLostItems {
     public static final BlockItem FARMLAND = add("farmland", ParadiseLostBlocks.FARMLAND, decoration);
     public static final BlockItem DIRT_PATH = add("grass_path", ParadiseLostBlocks.DIRT_PATH, decoration);
     // signs, wall stuff.
-    public static final SignItem SKYROOT_SIGN = add("skyroot_sign", new SignItem(sign, ParadiseLostBlocks.SKYROOT_SIGN, ParadiseLostBlocks.SKYROOT_WALL_SIGN));
+    public static final SignItem AUREL_SIGN = add("aurel_sign", new SignItem(sign, ParadiseLostBlocks.AUREL_SIGN, ParadiseLostBlocks.AUREL_WALL_SIGN));
     public static final SignItem GOLDEN_OAK_SIGN = add("golden_oak_sign", new SignItem(sign, ParadiseLostBlocks.GOLDEN_OAK_SIGN, ParadiseLostBlocks.GOLDEN_OAK_WALL_SIGN));
     public static final SignItem ORANGE_SIGN = add("orange_sign", new SignItem(sign, ParadiseLostBlocks.ORANGE_SIGN, ParadiseLostBlocks.ORANGE_WALL_SIGN));
     public static final SignItem CRYSTAL_SIGN = add("crystal_sign", new SignItem(sign, ParadiseLostBlocks.CRYSTAL_SIGN, ParadiseLostBlocks.CRYSTAL_WALL_SIGN));
@@ -446,13 +446,13 @@ public class ParadiseLostItems {
     // beds
 
     // etc.
-    public static final BlockItem SKYROOT_BUTTON = add("skyroot_button", ParadiseLostBlocks.SKYROOT_BUTTON, decoration);
+    public static final BlockItem AUREL_BUTTON = add("aurel_button", ParadiseLostBlocks.AUREL_BUTTON, decoration);
     public static final BlockItem GOLDEN_OAK_BUTTON = add("golden_oak_button", ParadiseLostBlocks.GOLDEN_OAK_BUTTON, decoration);
     public static final BlockItem ORANGE_BUTTON = add("orange_button", ParadiseLostBlocks.ORANGE_BUTTON, decoration);
     public static final BlockItem CRYSTAL_BUTTON = add("crystal_button", ParadiseLostBlocks.CRYSTAL_BUTTON, decoration);
     public static final BlockItem WISTERIA_BUTTON = add("wisteria_button", ParadiseLostBlocks.WISTERIA_BUTTON, decoration);
 
-    public static final BlockItem SKYROOT_PRESSURE_PLATE = add("skyroot_pressure_plate", ParadiseLostBlocks.SKYROOT_PRESSURE_PLATE, decoration);
+    public static final BlockItem AUREL_PRESSURE_PLATE = add("aurel_pressure_plate", ParadiseLostBlocks.AUREL_PRESSURE_PLATE, decoration);
     public static final BlockItem GOLDEN_OAK_PRESSURE_PLATE = add("golden_oak_pressure_plate", ParadiseLostBlocks.GOLDEN_OAK_PRESSURE_PLATE, decoration);
     public static final BlockItem ORANGE_PRESSURE_PLATE = add("orange_pressure_plate", ParadiseLostBlocks.ORANGE_PRESSURE_PLATE, decoration);
     public static final BlockItem CRYSTAL_PRESSURE_PLATE = add("crystal_pressure_plate", ParadiseLostBlocks.CRYSTAL_PRESSURE_PLATE, decoration);
@@ -462,14 +462,14 @@ public class ParadiseLostItems {
 //    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", ParadiseLostBlocks.DUNGEON_SWITCH, decoration);
 
     // these should be moved... somewhere?
-    public static final BoatItem SKYROOT_BOAT = ParadiseLostBlocks.SKYROOT.boatFactory(boat).item;
+    public static final BoatItem AUREL_BOAT = ParadiseLostBlocks.AUREL.boatFactory(boat).item;
     public static final BoatItem GOLDEN_OAK_BOAT = ParadiseLostBlocks.GOLDEN_OAK.boatFactory(boat).item;
     public static final BoatItem ORANGE_BOAT = ParadiseLostBlocks.ORANGE.boatFactory(boat).item;
     public static final BoatItem CRYSTAL_BOAT = ParadiseLostBlocks.CRYSTAL.boatFactory(boat).item;
     public static final BoatItem WISTERIA_BOAT = ParadiseLostBlocks.WISTERIA.boatFactory(boat).item;
 
     // Chests
-    public static final BlockItem SKYROOT_CHEST = add("skyroot_chest", ParadiseLostBlocks.SKYROOT_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));
+    public static final BlockItem AUREL_CHEST = add("skyroot_chest", ParadiseLostBlocks.AUREL_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));
     // TODO: Implement remaining chests (PL-1.7)
     public static final BlockItem GOLDEN_OAK_CHEST = add("golden_oak_chest", ParadiseLostBlocks.GOLDEN_OAK_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));
     public static final BlockItem ORANGE_CHEST = add("orange_chest", ParadiseLostBlocks.ORANGE_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));

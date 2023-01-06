@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "paradise_lost:block/aurel_leaves"
+      },
+      {
+        "model": "paradise_lost:block/aurel_leaves_mirrored"
+      }
+    ]
+  }
+}

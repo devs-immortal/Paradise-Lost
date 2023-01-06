@@ -2,6 +2,11 @@ package net.id.paradiselost.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.id.incubus_core.mixin.woodtypefactory.chest.ChestBlockEntityAccessor;
+import net.id.incubus_core.woodtypefactory.access.IncubusChestBlock;
+import net.id.incubus_core.woodtypefactory.api.chest.ChestFactory;
+import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.decorative.*;
 import net.id.paradiselost.blocks.mechanical.AmbrosiumCampfireBlock;
 import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
@@ -31,10 +36,13 @@ import net.id.incubus_core.woodtypefactory.api.WoodSettingsFactory;
 import net.id.incubus_core.woodtypefactory.api.WoodTypeFactory;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
@@ -43,6 +51,7 @@ import java.util.List;
 
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.copy;
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.of;
+import static net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder.create;
 import static net.id.paradiselost.ParadiseLost.locate;
 import static net.id.paradiselost.blocks.ParadiseLostBlockActions.*;
 import static net.minecraft.block.Blocks.*;
@@ -155,32 +164,33 @@ public class ParadiseLostBlocks {
 
     public static final CampfireBlock AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", new AmbrosiumCampfireBlock(false, 1, Settings.copy(CAMPFIRE)), cutoutRenderLayer);
 
-    // Skyroot Wood
-    private static final WoodSettingsFactory skyrootColors = new WoodSettingsFactory(MapColor.GREEN, MapColor.TERRACOTTA_GREEN);
-    public static final WoodTypeFactory SKYROOT = new WoodTypeFactory(skyrootColors, locate("skyroot"), new SkyrootSaplingGenerator());
+    // Aurel Wood
+    private static final WoodSettingsFactory aurelColors = new WoodSettingsFactory(MapColor.DARK_RED, MapColor.DARK_RED);
+    public static final WoodTypeFactory AUREL = new WoodTypeFactory(aurelColors, locate("aurel"), new AurelSaplingGenerator());
+    public static final WoodTypeFactory SKYROOT_CHEST = new WoodTypeFactory(aurelColors, locate("skyroot"), null);
 
-    public static final SaplingBlock SKYROOT_SAPLING = SKYROOT.sapling();
-    public static final FlowerPotBlock POTTED_SKYROOT_SAPLING = SKYROOT.pottedSapling();
-    public static final PillarBlock SKYROOT_LOG = SKYROOT.log();
-    public static final PillarBlock MOTTLED_SKYROOT_LOG = add("mottled_skyroot_log", new PillarBlock(skyrootColors.log()), flammableLog);
-    public static final ChuteBlock MOTTLED_SKYROOT_FALLEN_LOG = add("mottled_skyroot_fallen_log", new ChuteBlock(skyrootColors.log()), flammableLog, cutoutRenderLayer);
-    public static final PillarBlock SKYROOT_WOOD = SKYROOT.wood();
-    public static final PillarBlock STRIPPED_SKYROOT_LOG = SKYROOT.strippedLog();
-    public static final PillarBlock STRIPPED_SKYROOT_WOOD = SKYROOT.strippedWood();
-    public static final LeavesBlock SKYROOT_LEAVES = SKYROOT.leaves();
-    public static final LeafPileBlock SKYROOT_LEAF_PILE = add("skyroot_leaf_pile", new LeafPileBlock(skyrootColors.leafPile()), flammableLeaves, cutoutMippedRenderLayer);
-    public static final Block SKYROOT_PLANKS = SKYROOT.planks();
-    public static final Block SKYROOT_BOOKSHELF = add("skyroot_bookshelf", new Block(copy(BOOKSHELF).mapColor(skyrootColors.plankColor())), flammable(30, 20));
-    public static final FenceBlock SKYROOT_FENCE = SKYROOT.fence();
-    public static final FenceGateBlock SKYROOT_FENCE_GATE = SKYROOT.fenceGate();
-    public static final SlabBlock SKYROOT_SLAB = SKYROOT.slab();
-    public static final StairsBlock SKYROOT_STAIRS = SKYROOT.stairs();
-    public static final TrapdoorBlock SKYROOT_TRAPDOOR = SKYROOT.trapdoor();
-    public static final DoorBlock SKYROOT_DOOR = SKYROOT.door();
-    public static final WoodenButtonBlock SKYROOT_BUTTON = SKYROOT.button();
-    public static final PressurePlateBlock SKYROOT_PRESSURE_PLATE = SKYROOT.pressurePlate();
-    public static final SignBlock SKYROOT_SIGN = SKYROOT.signFactory().signBlock;
-    public static final WallSignBlock SKYROOT_WALL_SIGN = SKYROOT.signFactory().wallSignBlock;
+    public static final SaplingBlock AUREL_SAPLING = AUREL.sapling();
+    public static final FlowerPotBlock POTTED_AUREL_SAPLING = AUREL.pottedSapling();
+    public static final PillarBlock AUREL_LOG = AUREL.log();
+    public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(aurelColors.log()), flammableLog);
+    public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(aurelColors.log()), flammableLog, cutoutRenderLayer);
+    public static final PillarBlock AUREL_WOOD = AUREL.wood();
+    public static final PillarBlock STRIPPED_AUREL_LOG = AUREL.strippedLog();
+    public static final PillarBlock STRIPPED_AUREL_WOOD = AUREL.strippedWood();
+    public static final LeavesBlock AUREL_LEAVES = AUREL.leaves();
+    public static final LeafPileBlock AUREL_LEAF_PILE = add("aurel_leaf_pile", new LeafPileBlock(aurelColors.leafPile()), flammableLeaves, cutoutMippedRenderLayer);
+    public static final Block AUREL_PLANKS = AUREL.planks();
+    public static final Block AUREL_BOOKSHELF = add("aurel_bookshelf", new Block(copy(BOOKSHELF).mapColor(aurelColors.plankColor())), flammable(30, 20));
+    public static final FenceBlock AUREL_FENCE = AUREL.fence();
+    public static final FenceGateBlock AUREL_FENCE_GATE = AUREL.fenceGate();
+    public static final SlabBlock AUREL_SLAB = AUREL.slab();
+    public static final StairsBlock AUREL_STAIRS = AUREL.stairs();
+    public static final TrapdoorBlock AUREL_TRAPDOOR = AUREL.trapdoor();
+    public static final DoorBlock AUREL_DOOR = AUREL.door();
+    public static final WoodenButtonBlock AUREL_BUTTON = AUREL.button();
+    public static final PressurePlateBlock AUREL_PRESSURE_PLATE = AUREL.pressurePlate();
+    public static final SignBlock AUREL_SIGN = AUREL.signFactory().signBlock;
+    public static final WallSignBlock AUREL_WALL_SIGN = AUREL.signFactory().wallSignBlock;
     // Golden Oak Wood
     private static final WoodSettingsFactory goldenOakColors = new WoodSettingsFactory(MapColor.OAK_TAN, MapColor.TERRACOTTA_RED, MapColor.GOLD, MapColor.TERRACOTTA_RED);
     public static final WoodTypeFactory GOLDEN_OAK = new WoodTypeFactory(goldenOakColors, locate("golden_oak"));
@@ -407,11 +417,10 @@ public class ParadiseLostBlocks {
 //    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
 
     // Chests
-    /* 24Chrome: I removed all but skyroot from the creative menu, maybe we'll add them later but for now only skyroot will have textures! */
     public static final ChestBlock CRYSTAL_CHEST = CRYSTAL.chestFactory().chest;
     public static final ChestBlock GOLDEN_OAK_CHEST = GOLDEN_OAK.chestFactory().chest;
     public static final ChestBlock ORANGE_CHEST = ORANGE.chestFactory().chest;
-    public static final ChestBlock SKYROOT_CHEST = SKYROOT.chestFactory().chest;
+    public static final ChestBlock AUREL_CHEST = SKYROOT_CHEST.chestFactory().chest;
     public static final ChestBlock WISTERIA_CHEST = WISTERIA.chestFactory().chest;
 
     @SafeVarargs
@@ -436,7 +445,7 @@ public class ParadiseLostBlocks {
 
     public static void init() {
         ParadiseLostRegistryQueues.BLOCK.register();
-        for (var woodType : List.of(SKYROOT, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
+        for (var woodType : List.of(AUREL, SKYROOT_CHEST, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
             woodType.registerCreatedBlocks();
             woodType.registerFlammability();
             woodType.registerStripping();
@@ -445,7 +454,7 @@ public class ParadiseLostBlocks {
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        for (var woodType : List.of(SKYROOT, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
+        for (var woodType : List.of(AUREL, SKYROOT_CHEST, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
             woodType.registerBlockEntityRenderers();
             woodType.registerRenderLayers();
         }

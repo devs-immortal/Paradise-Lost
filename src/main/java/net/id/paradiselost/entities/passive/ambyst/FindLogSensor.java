@@ -66,11 +66,11 @@ public class FindLogSensor extends Sensor<AnimalEntity> {
     }
 
     public static boolean isLog(ServerWorld world, BlockPos testPos) {
-        return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_SKYROOT_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) != Direction.Axis.Y;
+        return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_AUREL_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) != Direction.Axis.Y;
     }
 
     public static boolean isLogSameRotation(ServerWorld world, BlockPos testPos, Direction dir) {
-        return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_SKYROOT_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) == dir.getAxis();
+        return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_AUREL_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) == dir.getAxis();
     }
 
     public static boolean isValidOpening(ServerWorld world, BlockPos testPos) {

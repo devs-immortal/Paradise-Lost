@@ -1,7 +1,7 @@
 package net.id.paradiselost.items.utils;
 
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.items.tools.SkyrootBucketItem;
+import net.id.paradiselost.items.tools.AurelBucketItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
@@ -27,13 +27,13 @@ public class ParadiseLostDispenserBehaviors {
 
         @Override
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            if (!(stack.getItem() instanceof SkyrootBucketItem bucket)) {
+            if (!(stack.getItem() instanceof AurelBucketItem bucket)) {
                 return this.fallbackBehavior.dispense(pointer, stack);
             }
             BlockPos blockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
             World world = pointer.getWorld();
             if (bucket.placeLiquid(null, world, blockPos, null)) {
-                return new ItemStack(ParadiseLostItems.SKYROOT_BUCKET);
+                return new ItemStack(ParadiseLostItems.AUREL_BUCKET);
             } else {
                 return this.fallbackBehavior.dispense(pointer, stack);
             }
@@ -64,7 +64,7 @@ public class ParadiseLostDispenserBehaviors {
 
         @Override
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            if (!(stack.getItem() instanceof SkyrootBucketItem)) {
+            if (!(stack.getItem() instanceof AurelBucketItem)) {
                 return this.fallbackBehavior.dispense(pointer, stack);
             }
             WorldAccess worldAccess = pointer.getWorld();
@@ -79,10 +79,10 @@ public class ParadiseLostDispenserBehaviors {
                     worldAccess.emitGameEvent(null, GameEvent.FLUID_PICKUP, blockPos);
                     stack.decrement(1);
                     if (stack.isEmpty()) {
-                        return new ItemStack(ParadiseLostItems.SKYROOT_WATER_BUCKET);
+                        return new ItemStack(ParadiseLostItems.AUREL_WATER_BUCKET);
                     } else {
-                        if (((DispenserBlockEntity) pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(ParadiseLostItems.SKYROOT_WATER_BUCKET)) < 0) {
-                            this.fallbackBehavior.dispense(pointer, new ItemStack(ParadiseLostItems.SKYROOT_WATER_BUCKET));
+                        if (((DispenserBlockEntity) pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(ParadiseLostItems.AUREL_WATER_BUCKET)) < 0) {
+                            this.fallbackBehavior.dispense(pointer, new ItemStack(ParadiseLostItems.AUREL_WATER_BUCKET));
                         }
                         return stack;
                     }

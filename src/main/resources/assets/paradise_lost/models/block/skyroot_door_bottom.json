@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom",
-  "textures": {
-    "top": "paradise_lost:block/skyroot_door_top",
-    "bottom": "paradise_lost:block/skyroot_door_bottom"
-  }
-}

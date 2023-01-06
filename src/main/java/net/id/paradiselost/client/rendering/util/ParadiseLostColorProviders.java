@@ -19,14 +19,14 @@ public class ParadiseLostColorProviders {
     }
 
     private static void initBlocks() {
-        ColorProviderRegistryImpl.BLOCK.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor()), ParadiseLostBlocks.SKYROOT_LEAVES, ParadiseLostBlocks.SKYROOT_LEAF_PILE, ParadiseLostBlocks.SHAMROCK);
+        ColorProviderRegistryImpl.BLOCK.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor()), ParadiseLostBlocks.AUREL_LEAVES, ParadiseLostBlocks.AUREL_LEAF_PILE, ParadiseLostBlocks.SHAMROCK);
         ColorProviderRegistryImpl.BLOCK.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getColor(0.5D, 1.0D)), ParadiseLostBlocks.HIGHLANDS_GRASS, ParadiseLostBlocks.GRASS, ParadiseLostBlocks.GRASS_FLOWERING, ParadiseLostBlocks.SHORT_GRASS, ParadiseLostBlocks.TALL_GRASS, ParadiseLostBlocks.FERN, ParadiseLostBlocks.BUSH);
         ColorProviderRegistryImpl.BLOCK.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : -1), ParadiseLostBlocks.HONEY_NETTLE, ParadiseLostBlocks.WEEPING_CLOUDBURST);
         ColorProviderRegistryImpl.BLOCK.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getWaterColor(world, pos) : -1), ParadiseLostBlocks.SPRING_WATER);
     }
 
     private static void initItems() {
-        ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> 0xd0db37), ParadiseLostBlocks.SKYROOT_LEAVES.asItem(), ParadiseLostBlocks.SKYROOT_LEAF_PILE.asItem(), ParadiseLostBlocks.SHAMROCK.asItem());
+        ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> 0xd0db37), ParadiseLostBlocks.AUREL_LEAVES.asItem(), ParadiseLostBlocks.AUREL_LEAF_PILE.asItem(), ParadiseLostBlocks.SHAMROCK.asItem());
         ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> tintIndex == 0 ? 0xB1FFCB : -1), ParadiseLostBlocks.HIGHLANDS_GRASS.asItem(), ParadiseLostBlocks.GRASS.asItem(), ParadiseLostBlocks.GRASS_FLOWERING.asItem(), ParadiseLostBlocks.SHORT_GRASS.asItem(), ParadiseLostBlocks.TALL_GRASS.asItem(), ParadiseLostBlocks.FERN.asItem(), ParadiseLostBlocks.BUSH.asItem());
     }
 
