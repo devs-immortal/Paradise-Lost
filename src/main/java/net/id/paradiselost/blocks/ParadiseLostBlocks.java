@@ -84,7 +84,7 @@ public class ParadiseLostBlocks {
     public static final FluidBlock DENSE_CLOUD = add("dense_cloud", new FluidBlock(ParadiseLostFluids.DENSE_CLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
     public static final FluidBlock SPRING_WATER = add("spring_water", new FluidBlock(ParadiseLostFluids.SPRING_WATER, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
     // Organic Extra
-    public static final Block ICESTONE = add("icestone", new Block(of(Material.DENSE_ICE).requiresTool().hardness(0.5f).sounds(BlockSoundGroup.GLASS)));
+    public static final Block VITROULITE = add("vitroulite", new Block(of(Material.DENSE_ICE).requiresTool().hardness(0.5f).sounds(BlockSoundGroup.GLASS)));
 
     // Smooth Holystone
     private static Settings holystone() {

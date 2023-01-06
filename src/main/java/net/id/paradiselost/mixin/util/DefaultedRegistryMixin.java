@@ -24,7 +24,7 @@ public class DefaultedRegistryMixin {
             "blue_aercloud", ParadiseLost.locate("blue_cloud"),
             "pink_aercloud", ParadiseLost.locate("pink_cloud"),
             "golden_aercloud", ParadiseLost.locate("golden_cloud"),
-            "icestone", ParadiseLost.locate(""),
+            "icestone", ParadiseLost.locate("vitroulite"),
             "holystone", ParadiseLost.locate(""),
             "holystone_slab", ParadiseLost.locate(""),
             "holystone_stairs", ParadiseLost.locate(""),

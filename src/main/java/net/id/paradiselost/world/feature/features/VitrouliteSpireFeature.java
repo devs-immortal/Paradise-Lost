@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
+public class VitrouliteSpireFeature extends Feature<DefaultFeatureConfig> {
 
     private static final List<BlockState> secStates = new ArrayList<>();
 
-    public IcestoneSpireFeature(Codec<DefaultFeatureConfig> configCodec) {
+    public VitrouliteSpireFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }
 
@@ -37,7 +37,7 @@ public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
             var height = random.nextInt(3) + 1;
 
             for (int i = 0; i <= height; i++) {
-                world.setBlockState(origin.up(i), ParadiseLostBlocks.ICESTONE.getDefaultState(), Block.NOTIFY_LISTENERS);
+                world.setBlockState(origin.up(i), ParadiseLostBlocks.VITROULITE.getDefaultState(), Block.NOTIFY_LISTENERS);
             }
 
             for (Direction dir : Direction.values()) {
@@ -95,7 +95,7 @@ public class IcestoneSpireFeature extends Feature<DefaultFeatureConfig> {
     }
 
     static {
-        secStates.add(ParadiseLostBlocks.ICESTONE.getDefaultState());
+        secStates.add(ParadiseLostBlocks.VITROULITE.getDefaultState());
         secStates.add(ParadiseLostBlocks.COBBLED_HOLYSTONE.getDefaultState());
         secStates.add(ParadiseLostBlocks.HOLYSTONE.getDefaultState());
     }

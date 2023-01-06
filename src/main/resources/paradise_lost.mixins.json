@@ -54,7 +54,6 @@
     "client.render.LivingEntityRendererMixin",
     "client.render.MapRendererMixin",
     "client.render.NativeImageAccessor",
-    "client.render.RenderLayersMixin",
     "client.render.WorldRendererMixin",
     "devel.client.HandledScreenMixin"
   ],
