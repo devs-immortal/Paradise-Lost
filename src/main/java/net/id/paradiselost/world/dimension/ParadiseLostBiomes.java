@@ -244,7 +244,7 @@ public final class ParadiseLostBiomes {
     
     private static Biome createHighlandsPlains() {
         return new Biome.Builder()
-            .effects(createBiomeEffects(0xC0C0FF, 0xDCFF81, 0xB1FFCB, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
+            .effects(createBiomeEffects(0xC0C0FF, 0xd0e866, 0xB1FFCB, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
@@ -289,7 +289,7 @@ public final class ParadiseLostBiomes {
     
     private static Biome createHighlandsForest() {
         return new Biome.Builder()
-            .effects(createBiomeEffects(0xC0C0FF, 0xD6FF6B, 0x88EBA1, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
+            .effects(createBiomeEffects(0xC0C0FF, 0xd0e866, 0x88EBA1, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
@@ -336,7 +336,7 @@ public final class ParadiseLostBiomes {
 
     private static Biome createTradewinds() {
         return new Biome.Builder()
-                .effects(createBiomeEffects(0xecebff, 0xbffff2, 0xa1f4de, 0xFFFFFF, 0xa8ffe1, 0x61ffbd))
+                .effects(createBiomeEffects(0xecebff, 0xaae3bf, 0xa1f4de, 0xFFFFFF, 0xa8ffe1, 0x61ffbd))
                 .generationSettings(createGenerationSettings(
                         getParadiseLostCarvers(),
 
@@ -381,7 +381,7 @@ public final class ParadiseLostBiomes {
     
     private static Biome createHighlandsThicket() {
         return new Biome.Builder()
-            .effects(createBiomeEffects(0xC0C0FF, 0xC8E67A, 0x85DDAF, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.DARK_FOREST))
+            .effects(createBiomeEffects(0xC0C0FF, 0xc5d47d, 0x85DDAF, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.DARK_FOREST))
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
@@ -437,7 +437,7 @@ public final class ParadiseLostBiomes {
 
     private static Biome createHighlandsGrandGlade() {
         return new Biome.Builder()
-                .effects(createBiomeEffects(0xC0C0FF, 0xC8E67A, 0x93cd67, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.NONE))
+                .effects(createBiomeEffects(0xC0C0FF, 0xc5d47d, 0x93cd67, 0xFFFFFF, 0x58E5FF, 0x58E5FF, BiomeEffects.GrassColorModifier.NONE))
                 .generationSettings(createGenerationSettings(
                         getParadiseLostCarvers(),
 
@@ -489,7 +489,7 @@ public final class ParadiseLostBiomes {
     
     private static Biome createWisteriaWoods() {
         return new Biome.Builder()
-            .effects(createBiomeEffects(0xC0C0FF, 0xF3FF81, 0x88EF9D, 0xFFFFFF, 0xA9F7FF, 0x58E5FF))
+            .effects(createBiomeEffects(0xC0C0FF, 0xebeb86, 0x88EF9D, 0xFFFFFF, 0xA9F7FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     
@@ -590,7 +590,7 @@ public final class ParadiseLostBiomes {
     
     private static Biome createContinentalPlateau() {
         return new Biome.Builder()
-            .effects(createBiomeEffects(0xC0C0FF, 0xDCFFCC, 0x91E2C8, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
+            .effects(createBiomeEffects(0xC0C0FF, 0xd4ebb7, 0x91E2C8, 0xFFFFFF, 0x58E5FF, 0x58E5FF))
             .generationSettings(createGenerationSettings(
                 getParadiseLostCarvers(),
     

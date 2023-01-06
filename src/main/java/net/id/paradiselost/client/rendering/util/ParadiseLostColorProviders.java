@@ -26,7 +26,7 @@ public class ParadiseLostColorProviders {
     }
 
     private static void initItems() {
-        ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> 0xbce632), ParadiseLostBlocks.SKYROOT_LEAVES.asItem(), ParadiseLostBlocks.SKYROOT_LEAF_PILE.asItem(), ParadiseLostBlocks.SHAMROCK.asItem());
+        ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> 0xd0db37), ParadiseLostBlocks.SKYROOT_LEAVES.asItem(), ParadiseLostBlocks.SKYROOT_LEAF_PILE.asItem(), ParadiseLostBlocks.SHAMROCK.asItem());
         ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> tintIndex == 0 ? 0xB1FFCB : -1), ParadiseLostBlocks.HIGHLANDS_GRASS.asItem(), ParadiseLostBlocks.GRASS.asItem(), ParadiseLostBlocks.GRASS_FLOWERING.asItem(), ParadiseLostBlocks.SHORT_GRASS.asItem(), ParadiseLostBlocks.TALL_GRASS.asItem(), ParadiseLostBlocks.FERN.asItem(), ParadiseLostBlocks.BUSH.asItem());
     }
 
