@@ -7,7 +7,7 @@
   "ore_veins_enabled": false,
   "legacy_random_source": false,
   "default_block": {
-    "Name": "paradise_lost:holystone"
+    "Name": "paradise_lost:floestone"
   },
   "spawn_target": [
     {"erosion":[-1.0,1.0],"depth":0.0,"weirdness":[-1.0,-0.16],"offset":0.0,"temperature":[-1.0,1.0],"humidity":[-1.0,1.0],"continentalness":[-0.11,1.0]},
@@ -426,7 +426,7 @@
                     "then_run": {
                       "type": "minecraft:block",
                       "result_state": {
-                        "Name": "paradise_lost:cobbled_holystone"
+                        "Name": "paradise_lost:cobbled_floestone"
                       }
                     }
                   },

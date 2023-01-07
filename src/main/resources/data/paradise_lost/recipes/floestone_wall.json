@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:floestone"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:floestone_wall",
+    "count": 6
+  }
+}

@@ -67,7 +67,7 @@ public class VitrouliteSpireFeature extends Feature<DefaultFeatureConfig> {
                             for (Direction secDir : Direction.values()) {
                                 if (secDir.getHorizontal() >= 0 && secDir.getAxis() != dir.getAxis()) {
 
-                                    var secState = random.nextBoolean() ? Blocks.SNOW_BLOCK.getDefaultState() : ParadiseLostBlocks.COBBLED_HOLYSTONE.getDefaultState();
+                                    var secState = random.nextBoolean() ? Blocks.SNOW_BLOCK.getDefaultState() : ParadiseLostBlocks.COBBLED_FLOESTONE.getDefaultState();
                                     var secOffset = offset.offset(secDir);
 
                                     if (world.getBlockState(secOffset).getMaterial().isReplaceable()) {
@@ -96,7 +96,7 @@ public class VitrouliteSpireFeature extends Feature<DefaultFeatureConfig> {
 
     static {
         secStates.add(ParadiseLostBlocks.VITROULITE.getDefaultState());
-        secStates.add(ParadiseLostBlocks.COBBLED_HOLYSTONE.getDefaultState());
-        secStates.add(ParadiseLostBlocks.HOLYSTONE.getDefaultState());
+        secStates.add(ParadiseLostBlocks.COBBLED_FLOESTONE.getDefaultState());
+        secStates.add(ParadiseLostBlocks.FLOESTONE.getDefaultState());
     }
 }

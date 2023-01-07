@@ -122,7 +122,7 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
                 }
             }
 
-            // Replace 50% of lave lake edge blocks with holystone.
+            // Replace 50% of lave lake edge blocks with floestone.
             if (context.getConfig().state.getMaterial() == Material.LAVA) {
                 for (int xOff = 0; xOff < 16; xOff++) {
                     for (int zOff = 0; zOff < 16; zOff++) {
@@ -137,7 +137,7 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
                                         || yOff > 0 && waterMap[(xOff * 16 + zOff) * 8 + (yOff - 1)]
                                     );
                             if (lakeEdge && (yOff < 4 || context.getRandom().nextInt(2) != 0) && context.getWorld().getBlockState(blockPos.add(xOff, yOff, zOff)).getMaterial().isSolid()) {
-                                context.getWorld().setBlockState(blockPos.add(xOff, yOff, zOff), ParadiseLostBlocks.HOLYSTONE.getDefaultState(), Block.NOTIFY_LISTENERS);
+                                context.getWorld().setBlockState(blockPos.add(xOff, yOff, zOff), ParadiseLostBlocks.FLOESTONE.getDefaultState(), Block.NOTIFY_LISTENERS);
                             }
                         }
                     }

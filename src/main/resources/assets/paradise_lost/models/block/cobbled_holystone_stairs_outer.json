@@ -1,8 +1,0 @@
-{
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "paradise_lost:block/cobbled_holystone",
-    "top": "paradise_lost:block/cobbled_holystone",
-    "side": "paradise_lost:block/cobbled_holystone"
-  }
-}

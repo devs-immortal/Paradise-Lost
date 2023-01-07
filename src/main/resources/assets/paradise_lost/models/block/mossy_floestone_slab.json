@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "paradise_lost:block/mossy_floestone",
+    "top": "paradise_lost:block/mossy_floestone",
+    "side": "paradise_lost:block/mossy_floestone"
+  }
+}

@@ -98,7 +98,7 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
         ));
 
         private static final RandomPatchFeatureConfig SHIELD_FLAX_CONFIG = new RandomPatchFeatureConfig(96, 12, 5,
-                singleBlock(WILD_FLAX, BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(Vec3i.ZERO.down(), List.of(HOLYSTONE, COBBLED_HOLYSTONE, MOSSY_HOLYSTONE))), ParadiseLostPlacedFeatures.ON_SOLID_GROUND)
+                singleBlock(WILD_FLAX, BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(Vec3i.ZERO.down(), List.of(FLOESTONE, COBBLED_FLOESTONE, MOSSY_FLOESTONE))), ParadiseLostPlacedFeatures.ON_SOLID_GROUND)
         );
         // Tundra
         private static final RandomPatchFeatureConfig TUNDRA_FOLIAGE_CONFIG = blockPatch(32, 7, 3, new WeightedBlockStateProvider(

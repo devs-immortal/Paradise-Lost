@@ -198,8 +198,8 @@ public class ParadiseLostItems {
     private static final FabricItemSettings building_block = building_block();
 
     // stone
-    public static final BlockItem HOLYSTONE = add("holystone", ParadiseLostBlocks.HOLYSTONE, building_block);
-    public static final BlockItem COBBLED_HOLYSTONE = add("cobbled_holystone", ParadiseLostBlocks.COBBLED_HOLYSTONE, building_block);
+    public static final BlockItem FLOESTONE = add("floestone", ParadiseLostBlocks.FLOESTONE, building_block);
+    public static final BlockItem COBBLED_FLOESTONE = add("cobbled_floestone", ParadiseLostBlocks.COBBLED_FLOESTONE, building_block);
     public static final BlockItem VITROULITE = add("vitroulite", ParadiseLostBlocks.VITROULITE, building_block);
     // nature
     public static final BlockItem HIGHLANDS_GRASS = add("highlands_grass", ParadiseLostBlocks.HIGHLANDS_GRASS, building_block);
@@ -266,11 +266,11 @@ public class ParadiseLostItems {
     public static final BlockItem WISTERIA_SLAB = add("wisteria_slab", ParadiseLostBlocks.WISTERIA_SLAB, building_block);
     // smooth stuff
     // cobble variants
-    public static final BlockItem MOSSY_HOLYSTONE = add("mossy_holystone", ParadiseLostBlocks.MOSSY_HOLYSTONE, building_block);
-    public static final BlockItem GOLDEN_MOSSY_HOLYSTONE = add("golden_mossy_holystone", ParadiseLostBlocks.GOLDEN_MOSSY_HOLYSTONE, building_block);
+    public static final BlockItem MOSSY_FLOESTONE = add("mossy_floestone", ParadiseLostBlocks.MOSSY_FLOESTONE, building_block);
+    public static final BlockItem GOLDEN_MOSSY_FLOESTONE = add("golden_mossy_floestone", ParadiseLostBlocks.GOLDEN_MOSSY_FLOESTONE, building_block);
 
     // bricks
-    public static final BlockItem HOLYSTONE_BRICK = add("holystone_brick", ParadiseLostBlocks.HOLYSTONE_BRICK, building_block);
+    public static final BlockItem FLOESTONE_BRICK = add("floestone_brick", ParadiseLostBlocks.FLOESTONE_BRICK, building_block);
     public static final BlockItem CARVED_STONE = add("carved_stone", ParadiseLostBlocks.CARVED_STONE, building_block);
     public static final BlockItem MOSSY_CARVED_STONE = add("mossy_carved_stone", ParadiseLostBlocks.MOSSY_CARVED_STONE, building_block);
     public static final BlockItem CRACKED_CARVED_STONE = add("cracked_carved_stone", ParadiseLostBlocks.CRACKED_CARVED_STONE, building_block);
@@ -287,17 +287,17 @@ public class ParadiseLostItems {
     public static final BlockItem CRYSTAL_STAIRS = add("crystal_stairs", ParadiseLostBlocks.CRYSTAL_STAIRS, building_block);
     public static final BlockItem WISTERIA_STAIRS = add("wisteria_stairs", ParadiseLostBlocks.WISTERIA_STAIRS, building_block);
     // stone stairs + slabs
-    public static final BlockItem HOLYSTONE_STAIRS = add("holystone_stairs", ParadiseLostBlocks.HOLYSTONE_STAIRS, building_block);
-    public static final BlockItem COBBLED_HOLYSTONE_STAIRS = add("cobbled_holystone_stairs", ParadiseLostBlocks.COBBLED_HOLYSTONE_STAIRS, building_block);
-    public static final BlockItem MOSSY_HOLYSTONE_STAIRS = add("mossy_holystone_stairs", ParadiseLostBlocks.MOSSY_HOLYSTONE_STAIRS, building_block);
-    public static final BlockItem HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", ParadiseLostBlocks.HOLYSTONE_BRICK_STAIRS, building_block);
+    public static final BlockItem FLOESTONE_STAIRS = add("floestone_stairs", ParadiseLostBlocks.FLOESTONE_STAIRS, building_block);
+    public static final BlockItem COBBLED_FLOESTONE_STAIRS = add("cobbled_floestone_stairs", ParadiseLostBlocks.COBBLED_FLOESTONE_STAIRS, building_block);
+    public static final BlockItem MOSSY_FLOESTONE_STAIRS = add("mossy_floestone_stairs", ParadiseLostBlocks.MOSSY_FLOESTONE_STAIRS, building_block);
+    public static final BlockItem FLOESTONE_BRICK_STAIRS = add("floestone_brick_stairs", ParadiseLostBlocks.FLOESTONE_BRICK_STAIRS, building_block);
     public static final BlockItem CARVED_STAIRS = add("carved_stone_stairs", ParadiseLostBlocks.CARVED_STONE_STAIRS, building_block);
     public static final BlockItem MOSSY_CARVED_STAIRS = add("mossy_carved_stone_stairs", ParadiseLostBlocks.MOSSY_CARVED_STONE_STAIRS, building_block);
-    public static final BlockItem HOLYSTONE_SLAB = add("holystone_slab", ParadiseLostBlocks.HOLYSTONE_SLAB, building_block);
+    public static final BlockItem FLOESTONE_SLAB = add("floestone_slab", ParadiseLostBlocks.FLOESTONE_SLAB, building_block);
 
-    public static final BlockItem COBBLED_HOLYSTONE_SLAB = add("cobbled_holystone_slab", ParadiseLostBlocks.COBBLED_HOLYSTONE_SLAB, building_block);
-    public static final BlockItem MOSSY_HOLYSTONE_SLAB = add("mossy_holystone_slab", ParadiseLostBlocks.MOSSY_HOLYSTONE_SLAB, building_block);
-    public static final BlockItem HOLYSTONE_BRICK_SLAB = add("holystone_brick_slab", ParadiseLostBlocks.HOLYSTONE_BRICK_SLAB, building_block);
+    public static final BlockItem COBBLED_FLOESTONE_SLAB = add("cobbled_floestone_slab", ParadiseLostBlocks.COBBLED_FLOESTONE_SLAB, building_block);
+    public static final BlockItem MOSSY_FLOESTONE_SLAB = add("mossy_floestone_slab", ParadiseLostBlocks.MOSSY_FLOESTONE_SLAB, building_block);
+    public static final BlockItem FLOESTONE_BRICK_SLAB = add("floestone_brick_slab", ParadiseLostBlocks.FLOESTONE_BRICK_SLAB, building_block);
     public static final BlockItem CARVED_SLAB = add("carved_stone_slab", ParadiseLostBlocks.CARVED_STONE_SLAB, building_block);
     public static final BlockItem MOSSY_CARVED_SLAB = add("mossy_carved_stone_slab", ParadiseLostBlocks.MOSSY_CARVED_STONE_SLAB, building_block);
     // colorfuls
@@ -417,10 +417,10 @@ public class ParadiseLostItems {
     public static final BlockItem CRYSTAL_FENCE = add("crystal_fence", ParadiseLostBlocks.CRYSTAL_FENCE, decoration);
     public static final BlockItem WISTERIA_FENCE = add("wisteria_fence", ParadiseLostBlocks.WISTERIA_FENCE, decoration);
     // walls
-    public static final BlockItem HOLYSTONE_WALL = add("holystone_wall", ParadiseLostBlocks.HOLYSTONE_WALL, decoration);
-    public static final BlockItem COBBLED_HOLYSTONE_WALL = add("cobbled_holystone_wall", ParadiseLostBlocks.COBBLED_HOLYSTONE_WALL, decoration);
-    public static final BlockItem MOSSY_HOLYSTONE_WALL = add("mossy_holystone_wall", ParadiseLostBlocks.MOSSY_HOLYSTONE_WALL, decoration);
-    public static final BlockItem HOLYSTONE_BRICK_WALL = add("holystone_brick_wall", ParadiseLostBlocks.HOLYSTONE_BRICK_WALL, decoration);
+    public static final BlockItem FLOESTONE_WALL = add("floestone_wall", ParadiseLostBlocks.FLOESTONE_WALL, decoration);
+    public static final BlockItem COBBLED_FLOESTONE_WALL = add("cobbled_floestone_wall", ParadiseLostBlocks.COBBLED_FLOESTONE_WALL, decoration);
+    public static final BlockItem MOSSY_FLOESTONE_WALL = add("mossy_floestone_wall", ParadiseLostBlocks.MOSSY_FLOESTONE_WALL, decoration);
+    public static final BlockItem FLOESTONE_BRICK_WALL = add("floestone_brick_wall", ParadiseLostBlocks.FLOESTONE_BRICK_WALL, decoration);
     public static final BlockItem CARVED_WALL = add("carved_stone_wall", ParadiseLostBlocks.CARVED_STONE_WALL, decoration);
     public static final BlockItem MOSSY_CARVED_WALL = add("mossy_carved_stone_wall", ParadiseLostBlocks.MOSSY_CARVED_STONE_WALL, decoration);
     // infested blocks

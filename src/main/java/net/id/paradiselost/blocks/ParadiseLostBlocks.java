@@ -88,46 +88,46 @@ public class ParadiseLostBlocks {
     // Organic Extra
     public static final Block VITROULITE = add("vitroulite", new Block(of(Material.DENSE_ICE).requiresTool().hardness(0.5f).sounds(BlockSoundGroup.GLASS)));
 
-    // Smooth Holystone
-    private static Settings holystone() {
+    // Smooth Floestone
+    private static Settings floestone() {
         return of(Material.STONE, MapColor.WHITE_GRAY).requiresTool().strength(0.5f, 1f).sounds(BlockSoundGroup.STONE);
     }
 
-    public static final Block HOLYSTONE = add("holystone", new Block(holystone()));
-    public static final SlabBlock HOLYSTONE_SLAB = add("holystone_slab", new SlabBlock(holystone()));
-    public static final ParadiseLostStairsBlock HOLYSTONE_STAIRS = add("holystone_stairs", new ParadiseLostStairsBlock(HOLYSTONE.getDefaultState(), holystone()));
-    public static final WallBlock HOLYSTONE_WALL = add("holystone_wall", new WallBlock(holystone()));
+    public static final Block FLOESTONE = add("floestone", new Block(floestone()));
+    public static final SlabBlock FLOESTONE_SLAB = add("floestone_slab", new SlabBlock(floestone()));
+    public static final ParadiseLostStairsBlock FLOESTONE_STAIRS = add("floestone_stairs", new ParadiseLostStairsBlock(FLOESTONE.getDefaultState(), floestone()));
+    public static final WallBlock FLOESTONE_WALL = add("floestone_wall", new WallBlock(floestone()));
 
-    // Cobbled Holystone
-    private static Settings cobbledHolystone() {
-        return holystone().strength(0.4f, 8f);
+    // Cobbled Floestone
+    private static Settings cobbledFloestone() {
+        return floestone().strength(0.4f, 8f);
     }
 
-    public static final Block COBBLED_HOLYSTONE = add("cobbled_holystone", new Block(cobbledHolystone()));
-    public static final SlabBlock COBBLED_HOLYSTONE_SLAB = add("cobbled_holystone_slab", new SlabBlock(cobbledHolystone()));
-    public static final ParadiseLostStairsBlock COBBLED_HOLYSTONE_STAIRS = add("cobbled_holystone_stairs", new ParadiseLostStairsBlock(COBBLED_HOLYSTONE.getDefaultState(), cobbledHolystone()));
-    public static final WallBlock COBBLED_HOLYSTONE_WALL = add("cobbled_holystone_wall", new WallBlock(cobbledHolystone()));
+    public static final Block COBBLED_FLOESTONE = add("cobbled_floestone", new Block(cobbledFloestone()));
+    public static final SlabBlock COBBLED_FLOESTONE_SLAB = add("cobbled_floestone_slab", new SlabBlock(cobbledFloestone()));
+    public static final ParadiseLostStairsBlock COBBLED_FLOESTONE_STAIRS = add("cobbled_floestone_stairs", new ParadiseLostStairsBlock(COBBLED_FLOESTONE.getDefaultState(), cobbledFloestone()));
+    public static final WallBlock COBBLED_FLOESTONE_WALL = add("cobbled_floestone_wall", new WallBlock(cobbledFloestone()));
 
-    // Mossy Holystone
-    private static Settings mossyCobbledHolystone() {
-        return cobbledHolystone().mapColor(MapColor.PALE_GREEN);
+    // Mossy Floestone
+    private static Settings mossyCobbledFloestone() {
+        return cobbledFloestone().mapColor(MapColor.PALE_GREEN);
     }
 
-    public static final Block MOSSY_HOLYSTONE = add("mossy_holystone", new Block(mossyCobbledHolystone()));
-    public static final Block GOLDEN_MOSSY_HOLYSTONE = add("golden_mossy_holystone", new Block(mossyCobbledHolystone().strength(2f, 6f).mapColor(MapColor.GOLD)));
-    public static final SlabBlock MOSSY_HOLYSTONE_SLAB = add("mossy_holystone_slab", new SlabBlock(mossyCobbledHolystone()));
-    public static final ParadiseLostStairsBlock MOSSY_HOLYSTONE_STAIRS = add("mossy_holystone_stairs", new ParadiseLostStairsBlock(MOSSY_HOLYSTONE.getDefaultState(), mossyCobbledHolystone()));
-    public static final WallBlock MOSSY_HOLYSTONE_WALL = add("mossy_holystone_wall", new WallBlock(mossyCobbledHolystone()));
+    public static final Block MOSSY_FLOESTONE = add("mossy_floestone", new Block(mossyCobbledFloestone()));
+    public static final Block GOLDEN_MOSSY_FLOESTONE = add("golden_mossy_floestone", new Block(mossyCobbledFloestone().strength(2f, 6f).mapColor(MapColor.GOLD)));
+    public static final SlabBlock MOSSY_FLOESTONE_SLAB = add("mossy_floestone_slab", new SlabBlock(mossyCobbledFloestone()));
+    public static final ParadiseLostStairsBlock MOSSY_FLOESTONE_STAIRS = add("mossy_floestone_stairs", new ParadiseLostStairsBlock(MOSSY_FLOESTONE.getDefaultState(), mossyCobbledFloestone()));
+    public static final WallBlock MOSSY_FLOESTONE_WALL = add("mossy_floestone_wall", new WallBlock(mossyCobbledFloestone()));
 
-    // Holystone Bricks
-    private static Settings holystoneBrick() {
-        return holystone().strength(1.5f, 6f);
+    // Floestone Bricks
+    private static Settings floestoneBrick() {
+        return floestone().strength(1.5f, 6f);
     }
 
-    public static final Block HOLYSTONE_BRICK = add("holystone_brick", new Block(holystoneBrick()));
-    public static final SlabBlock HOLYSTONE_BRICK_SLAB = add("holystone_brick_slab", new SlabBlock(holystoneBrick()));
-    public static final ParadiseLostStairsBlock HOLYSTONE_BRICK_STAIRS = add("holystone_brick_stairs", new ParadiseLostStairsBlock(HOLYSTONE_BRICK.getDefaultState(), holystoneBrick()));
-    public static final WallBlock HOLYSTONE_BRICK_WALL = add("holystone_brick_wall", new WallBlock(holystoneBrick()));
+    public static final Block FLOESTONE_BRICK = add("floestone_brick", new Block(floestoneBrick()));
+    public static final SlabBlock FLOESTONE_BRICK_SLAB = add("floestone_brick_slab", new SlabBlock(floestoneBrick()));
+    public static final ParadiseLostStairsBlock FLOESTONE_BRICK_STAIRS = add("floestone_brick_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestoneBrick()));
+    public static final WallBlock FLOESTONE_BRICK_WALL = add("floestone_brick_wall", new WallBlock(floestoneBrick()));
 
     // Dungeon Blocks
     private static Settings carvedStone() {

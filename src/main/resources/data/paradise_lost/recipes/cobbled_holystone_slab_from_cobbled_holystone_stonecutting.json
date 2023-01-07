@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "paradise_lost:cobbled_holystone"
-  },
-  "result": "paradise_lost:cobbled_holystone_slab",
-  "count": 2
-}

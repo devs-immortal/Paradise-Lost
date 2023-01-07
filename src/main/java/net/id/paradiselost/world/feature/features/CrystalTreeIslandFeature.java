@@ -48,10 +48,10 @@ public class CrystalTreeIslandFeature extends Feature<DefaultFeatureConfig> {
                             if (context.getRandom().nextBoolean()) {
                                 this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.DIRT.getDefaultState());
                             } else {
-                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.HOLYSTONE.getDefaultState());
+                                this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.FLOESTONE.getDefaultState());
                             }
                         } else {
-                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.HOLYSTONE.getDefaultState());
+                            this.setBlockState(context.getWorld(), context.getOrigin().add(x, y, z), ParadiseLostBlocks.FLOESTONE.getDefaultState());
                         }
 
                     }
