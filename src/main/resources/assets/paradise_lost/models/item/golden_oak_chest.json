@@ -1,7 +1,7 @@
 {
   "parent": "builtin/entity",
   "textures": {
-    "particle": "paradise_lost:block/golden_oak_planks"
+    "particle": "paradise_lost:block/mother_aurel_planks"
   },
   "display": {
     "gui": {

@@ -34,7 +34,7 @@ import static net.id.paradiselost.blocks.ParadiseLostBlocks.*;
 public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFeatures {
     // Default
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> AUREL_TREE = register("aurel_tree", Feature.TREE, Configs.AUREL_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> GOLDEN_OAK_TREE = register("golden_oak_tree", Feature.TREE, Configs.GOLDEN_OAK_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> MOTHER_AUREL_TREE = register("mother_aurel_tree", Feature.TREE, Configs.MOTHER_AUREL_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> CRYSTAL_TREE = register("crystal_tree", Feature.TREE, Configs.CRYSTAL_TREE_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> ORANGE_TREE = register("orange_tree", Feature.TREE, Configs.ORANGE_TREE_SAPLING_CONFIG);
     // Wisteria
@@ -312,8 +312,8 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
         );
 
         //Special trees
-        private static final TreeFeatureConfig GOLDEN_OAK_CONFIG = generateTree(
-                GOLDEN_OAK_LOG.getDefaultState(), GOLDEN_OAK_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+        private static final TreeFeatureConfig MOTHER_AUREL_CONFIG = generateTree(
+                MOTHER_AUREL_LOG.getDefaultState(), MOTHER_AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new StraightTrunkPlacer(5, 2, 0),
                 new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(1), 4),
                 new TwoLayersFeatureSize(3, 0, 3, OptionalInt.of(2)),
@@ -371,7 +371,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                 ImmutableList.of(
                         entry(ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.00005F),
                         entry(LAVENDER_WISTERIA_TREE, LAVENDER_WISTERIA_SAPLING, 0.00005F),
-                        entry(GOLDEN_OAK_TREE, GOLDEN_OAK_SAPLING, 0.0015F),
+                        entry(MOTHER_AUREL_TREE, MOTHER_AUREL_SAPLING, 0.0015F),
                         entry(AUREL_SHRUB, AUREL_SAPLING, 0.1F), // convert to feature
                         entry(AUREL_TREE, AUREL_SAPLING, 0.1F)
                 ),

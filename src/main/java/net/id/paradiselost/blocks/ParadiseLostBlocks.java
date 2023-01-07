@@ -185,29 +185,30 @@ public class ParadiseLostBlocks {
     public static final PressurePlateBlock AUREL_PRESSURE_PLATE = AUREL.pressurePlate();
     public static final SignBlock AUREL_SIGN = AUREL.signFactory().signBlock;
     public static final WallSignBlock AUREL_WALL_SIGN = AUREL.signFactory().wallSignBlock;
-    // Golden Oak Wood
-    private static final WoodSettingsFactory goldenOakColors = new WoodSettingsFactory(MapColor.OAK_TAN, MapColor.TERRACOTTA_RED, MapColor.GOLD, MapColor.TERRACOTTA_RED);
-    public static final WoodTypeFactory GOLDEN_OAK = new WoodTypeFactory(goldenOakColors, locate("golden_oak"));
+    // Mother Aurel Wood
+    private static final WoodSettingsFactory motherAurelColors = new WoodSettingsFactory(MapColor.OAK_TAN, MapColor.TERRACOTTA_RED, MapColor.GOLD, MapColor.TERRACOTTA_RED);
+    public static final WoodTypeFactory MOTHER_AUREL = new WoodTypeFactory(motherAurelColors, locate("mother_aurel"));
+    public static final ChestFactory MOTHER_AUREL_CHEST_FACTORY = new ChestFactory(ParadiseLost.MOD_ID, "golden_oak", MOTHER_AUREL.settings.chest());
 
-    public static final SaplingBlock GOLDEN_OAK_SAPLING = add("golden_oak_sapling", new ParadiseLostSaplingBlock(new GoldenOakSaplingGenerator(), goldenOakColors.sapling().luminance(state -> 7)), cutoutRenderLayer);
-    public static final FlowerPotBlock POTTED_GOLDEN_OAK_SAPLING = add("potted_golden_oak_sapling", new FlowerPotBlock(GOLDEN_OAK_SAPLING, flowerPot().luminance(state -> 7)), cutoutRenderLayer);
-    public static final PillarBlock GOLDEN_OAK_LOG = add("golden_oak_log", new GoldenOakLogBlock(goldenOakColors.log()), flammableLog);
-    public static final PillarBlock GOLDEN_OAK_WOOD = GOLDEN_OAK.wood();
-    public static final PillarBlock STRIPPED_GOLDEN_OAK_LOG = GOLDEN_OAK.strippedLog();
-    public static final PillarBlock STRIPPED_GOLDEN_OAK_WOOD = GOLDEN_OAK.strippedWood();
-    public static final ParadiseLostLeavesBlock GOLDEN_OAK_LEAVES = add("golden_oak_leaves", new ParadiseLostLeavesBlock(goldenOakColors.leaves().luminance((value -> 11)), true), flammableLeaves, cutoutMippedRenderLayer);
-    public static final Block GOLDEN_OAK_PLANKS = GOLDEN_OAK.planks();
-    public static final FenceBlock GOLDEN_OAK_FENCE = GOLDEN_OAK.fence();
-    public static final FenceGateBlock GOLDEN_OAK_FENCE_GATE = GOLDEN_OAK.fenceGate();
-    public static final SlabBlock GOLDEN_OAK_SLAB = GOLDEN_OAK.slab();
-    public static final StairsBlock GOLDEN_OAK_STAIRS = GOLDEN_OAK.stairs();
-    public static final TrapdoorBlock GOLDEN_OAK_TRAPDOOR = GOLDEN_OAK.trapdoor();
-    public static final DoorBlock GOLDEN_OAK_DOOR = GOLDEN_OAK.door();
-    public static final WoodenButtonBlock GOLDEN_OAK_BUTTON = GOLDEN_OAK.button();
-    public static final PressurePlateBlock GOLDEN_OAK_PRESSURE_PLATE = GOLDEN_OAK.pressurePlate();
+    public static final SaplingBlock MOTHER_AUREL_SAPLING = add("mother_aurel_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), motherAurelColors.sapling().luminance(state -> 7)), cutoutRenderLayer);
+    public static final FlowerPotBlock POTTED_MOTHER_AUREL_SAPLING = add("potted_mother_aurel_sapling", new FlowerPotBlock(MOTHER_AUREL_SAPLING, flowerPot().luminance(state -> 7)), cutoutRenderLayer);
+    public static final PillarBlock MOTHER_AUREL_LOG = add("mother_aurel_log", new MotherAurelLogBlock(motherAurelColors.log()), flammableLog);
+    public static final PillarBlock MOTHER_AUREL_WOOD = MOTHER_AUREL.wood();
+    public static final PillarBlock STRIPPED_MOTHER_AUREL_LOG = MOTHER_AUREL.strippedLog();
+    public static final PillarBlock STRIPPED_MOTHER_AUREL_WOOD = MOTHER_AUREL.strippedWood();
+    public static final ParadiseLostLeavesBlock MOTHER_AUREL_LEAVES = add("mother_aurel_leaves", new ParadiseLostLeavesBlock(motherAurelColors.leaves().luminance((value -> 11)), true), flammableLeaves, cutoutMippedRenderLayer);
+    public static final Block MOTHER_AUREL_PLANKS = MOTHER_AUREL.planks();
+    public static final FenceBlock MOTHER_AUREL_FENCE = MOTHER_AUREL.fence();
+    public static final FenceGateBlock MOTHER_AUREL_FENCE_GATE = MOTHER_AUREL.fenceGate();
+    public static final SlabBlock MOTHER_AUREL_SLAB = MOTHER_AUREL.slab();
+    public static final StairsBlock MOTHER_AUREL_STAIRS = MOTHER_AUREL.stairs();
+    public static final TrapdoorBlock MOTHER_AUREL_TRAPDOOR = MOTHER_AUREL.trapdoor();
+    public static final DoorBlock MOTHER_AUREL_DOOR = MOTHER_AUREL.door();
+    public static final WoodenButtonBlock MOTHER_AUREL_BUTTON = MOTHER_AUREL.button();
+    public static final PressurePlateBlock MOTHER_AUREL_PRESSURE_PLATE = MOTHER_AUREL.pressurePlate();
     // TODO (b1.7): Fix with datafixer. Name change from <wood_type>_sign to the_<wood_type>_sign
-    public static final SignBlock GOLDEN_OAK_SIGN = GOLDEN_OAK.signFactory().signBlock;
-    public static final WallSignBlock GOLDEN_OAK_WALL_SIGN = GOLDEN_OAK.signFactory().wallSignBlock;
+    public static final SignBlock MOTHER_AUREL_SIGN = MOTHER_AUREL.signFactory().signBlock;
+    public static final WallSignBlock MOTHER_AUREL_WALL_SIGN = MOTHER_AUREL.signFactory().wallSignBlock;
     // Orange Wood
     private static final WoodSettingsFactory orangeColors = new WoodSettingsFactory(MapColor.RAW_IRON_PINK, MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.GREEN);
     public static final WoodTypeFactory ORANGE = new WoodTypeFactory(orangeColors, locate("orange"), new OrangeSaplingGenerator());
@@ -412,7 +413,7 @@ public class ParadiseLostBlocks {
 
     // Chests
     public static final ChestBlock CRYSTAL_CHEST = CRYSTAL.chestFactory().chest;
-    public static final ChestBlock GOLDEN_OAK_CHEST = GOLDEN_OAK.chestFactory().chest;
+    public static final ChestBlock MOTHER_AUREL_CHEST = add("golden_oak_chest", MOTHER_AUREL_CHEST_FACTORY.chest);
     public static final ChestBlock ORANGE_CHEST = ORANGE.chestFactory().chest;
     public static final ChestBlock AUREL_CHEST = add("skyroot_chest", AUREL_CHEST_FACTORY.chest);
     public static final ChestBlock WISTERIA_CHEST = WISTERIA.chestFactory().chest;
@@ -440,7 +441,7 @@ public class ParadiseLostBlocks {
     public static void init() {
         ParadiseLostRegistryQueues.BLOCK.register();
 
-        for (var woodType : List.of(AUREL, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
+        for (var woodType : List.of(AUREL, MOTHER_AUREL, CRYSTAL, ORANGE, WISTERIA)) {
             woodType.registerCreatedBlocks();
             woodType.registerFlammability();
             woodType.registerStripping();
@@ -449,11 +450,12 @@ public class ParadiseLostBlocks {
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        for (var woodType : List.of(AUREL, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
+        for (var woodType : List.of(AUREL, MOTHER_AUREL, CRYSTAL, ORANGE, WISTERIA)) {
             woodType.registerBlockEntityRenderers();
             woodType.registerRenderLayers();
         }
         AUREL_CHEST_FACTORY.registerChestRenderers();
+        MOTHER_AUREL_CHEST_FACTORY.registerChestRenderers();
     }
 
     private static class ParadiseLostFarmlandBlock extends FarmlandBlock {

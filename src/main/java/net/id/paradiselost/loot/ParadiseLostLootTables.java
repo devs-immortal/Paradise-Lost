@@ -8,13 +8,13 @@ import java.util.Collections;
 import java.util.Set;
 
 public class ParadiseLostLootTables {
-    public static final Identifier GOLDEN_OAK_STRIPPING;
+    public static final Identifier MOTHER_AUREL_STRIPPING;
     private static final Set<Identifier> LOOT_TABLES = Sets.newHashSet();
     private static final Set<Identifier> LOOT_TABLES_READ_ONLY;
 
     static {
         LOOT_TABLES_READ_ONLY = Collections.unmodifiableSet(LOOT_TABLES);
-        GOLDEN_OAK_STRIPPING = register("gameplay/golden_oak_log_strip");
+        MOTHER_AUREL_STRIPPING = register("gameplay/mother_aurel_log_strip");
     }
 
     public ParadiseLostLootTables() {

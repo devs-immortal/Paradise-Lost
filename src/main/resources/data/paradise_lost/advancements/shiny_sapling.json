@@ -7,7 +7,7 @@
       "translate": "advancements.paradise_lost.shiny_sapling.description"
     },
     "icon": {
-      "item": "paradise_lost:golden_oak_sapling"
+      "item": "paradise_lost:mother_aurel_sapling"
     },
     "frame": "task",
     "show_toast": true,
@@ -18,7 +18,7 @@
     "placesapling": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "block": "paradise_lost:golden_oak_sapling"
+        "block": "paradise_lost:mother_aurel_sapling"
       }
     }
   },

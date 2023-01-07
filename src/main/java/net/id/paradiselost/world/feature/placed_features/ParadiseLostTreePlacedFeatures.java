@@ -29,7 +29,7 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
      */
     // Default
     public static final RegistryEntry<PlacedFeature> AUREL_TREE = register("aurel_tree", ParadiseLostTreeConfiguredFeatures.AUREL_TREE, placed(AUREL_SAPLING));
-    public static final RegistryEntry<PlacedFeature> GOLDEN_OAK_TREE = register("golden_oak_tree", ParadiseLostTreeConfiguredFeatures.GOLDEN_OAK_TREE, placed(GOLDEN_OAK_SAPLING));
+    public static final RegistryEntry<PlacedFeature> MOTHER_AUREL_TREE = register("mother_aurel_tree", ParadiseLostTreeConfiguredFeatures.MOTHER_AUREL_TREE, placed(MOTHER_AUREL_SAPLING));
     public static final RegistryEntry<PlacedFeature> CRYSTAL_TREE = register("crystal_tree", ParadiseLostTreeConfiguredFeatures.CRYSTAL_TREE, placed(CRYSTAL_SAPLING));
     public static final RegistryEntry<PlacedFeature> ORANGE_TREE = register("orange_tree", ParadiseLostTreeConfiguredFeatures.ORANGE_TREE, placed(ORANGE_SAPLING));
     // Wisteria

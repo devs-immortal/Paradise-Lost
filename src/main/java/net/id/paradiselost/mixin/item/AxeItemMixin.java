@@ -34,9 +34,9 @@ public class AxeItemMixin extends MiningToolItem {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
 
-        if (world.getBlockState(blockPos).getBlock() == ParadiseLostBlocks.GOLDEN_OAK_LOG && !world.isClient) {
+        if (world.getBlockState(blockPos).getBlock() == ParadiseLostBlocks.MOTHER_AUREL_LOG && !world.isClient) {
             ServerWorld server = (ServerWorld) world;
-            LootTable supplier = server.getServer().getLootManager().getTable(ParadiseLostLootTables.GOLDEN_OAK_STRIPPING);
+            LootTable supplier = server.getServer().getLootManager().getTable(ParadiseLostLootTables.MOTHER_AUREL_STRIPPING);
             List<ItemStack> items = supplier.generateLoot(new LootContext.Builder(server)
                     .parameter(LootContextParameters.BLOCK_STATE, world.getBlockState(blockPos))
                     .parameter(LootContextParameters.ORIGIN, Vec3d.of(blockPos))

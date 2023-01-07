@@ -19,7 +19,7 @@ import net.minecraft.util.registry.Registry;
  * FIXME Refactor this for naming issues.
  */
 public class ParadiseLostParticles {
-    public static DefaultParticleType GOLDEN_OAK_LEAF = register("golden_leaf");
+    public static DefaultParticleType MOTHER_AUREL_LEAF = register("golden_leaf");
     public static DefaultParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal");
     public static DefaultParticleType AMBROSIUM_FLAME = register("ambrosium_flame");
     public static DefaultParticleType VENOM_BUBBLE = register("venom_bubble");
@@ -75,7 +75,7 @@ public class ParadiseLostParticles {
          * Registers the client half of this.
          */
         public static void init() {
-            register(GOLDEN_OAK_LEAF, GoldenOakLeafParticle.DefaultFactory::new);
+            register(MOTHER_AUREL_LEAF, MotherAurelLeafParticle.DefaultFactory::new);
             register(FALLING_ORANGE_PETAL, FallingOrangePetalParticle.DefaultFactory::new);
             register(VENOM_BUBBLE, VenomBubbleParticle.DefaultFactory::new);
             register(AMBROSIUM_FLAME, AmbrosiumFlameParticle.DefaultFactory::new);
