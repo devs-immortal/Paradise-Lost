@@ -2,9 +2,6 @@ package net.id.paradiselost.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.id.incubus_core.mixin.woodtypefactory.chest.ChestBlockEntityAccessor;
-import net.id.incubus_core.woodtypefactory.access.IncubusChestBlock;
 import net.id.incubus_core.woodtypefactory.api.chest.ChestFactory;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.decorative.*;
@@ -36,13 +33,10 @@ import net.id.incubus_core.woodtypefactory.api.WoodSettingsFactory;
 import net.id.incubus_core.woodtypefactory.api.WoodTypeFactory;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
@@ -51,7 +45,6 @@ import java.util.List;
 
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.copy;
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.of;
-import static net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder.create;
 import static net.id.paradiselost.ParadiseLost.locate;
 import static net.id.paradiselost.blocks.ParadiseLostBlockActions.*;
 import static net.minecraft.block.Blocks.*;
@@ -167,7 +160,8 @@ public class ParadiseLostBlocks {
     // Aurel Wood
     private static final WoodSettingsFactory aurelColors = new WoodSettingsFactory(MapColor.DARK_RED, MapColor.DARK_RED);
     public static final WoodTypeFactory AUREL = new WoodTypeFactory(aurelColors, locate("aurel"), new AurelSaplingGenerator());
-    public static final WoodTypeFactory SKYROOT_CHEST = new WoodTypeFactory(aurelColors, locate("skyroot"), null);
+    public static final ChestFactory AUREL_CHEST_FACTORY = new ChestFactory(ParadiseLost.MOD_ID, "skyroot", AUREL.settings.chest());
+
 
     public static final SaplingBlock AUREL_SAPLING = AUREL.sapling();
     public static final FlowerPotBlock POTTED_AUREL_SAPLING = AUREL.pottedSapling();
@@ -420,7 +414,7 @@ public class ParadiseLostBlocks {
     public static final ChestBlock CRYSTAL_CHEST = CRYSTAL.chestFactory().chest;
     public static final ChestBlock GOLDEN_OAK_CHEST = GOLDEN_OAK.chestFactory().chest;
     public static final ChestBlock ORANGE_CHEST = ORANGE.chestFactory().chest;
-    public static final ChestBlock AUREL_CHEST = SKYROOT_CHEST.chestFactory().chest;
+    public static final ChestBlock AUREL_CHEST = add("skyroot_chest", AUREL_CHEST_FACTORY.chest);
     public static final ChestBlock WISTERIA_CHEST = WISTERIA.chestFactory().chest;
 
     @SafeVarargs
@@ -445,7 +439,8 @@ public class ParadiseLostBlocks {
 
     public static void init() {
         ParadiseLostRegistryQueues.BLOCK.register();
-        for (var woodType : List.of(AUREL, SKYROOT_CHEST, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
+
+        for (var woodType : List.of(AUREL, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
             woodType.registerCreatedBlocks();
             woodType.registerFlammability();
             woodType.registerStripping();
@@ -454,10 +449,11 @@ public class ParadiseLostBlocks {
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        for (var woodType : List.of(AUREL, SKYROOT_CHEST, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
+        for (var woodType : List.of(AUREL, GOLDEN_OAK, CRYSTAL, ORANGE, WISTERIA)) {
             woodType.registerBlockEntityRenderers();
             woodType.registerRenderLayers();
         }
+        AUREL_CHEST_FACTORY.registerChestRenderers();
     }
 
     private static class ParadiseLostFarmlandBlock extends FarmlandBlock {
