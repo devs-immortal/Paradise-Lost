@@ -14,7 +14,7 @@
 
         "type": "noise",
         "noise": "paradise_lost:terrain/void",
-        "xz_scale": 0.7,
+        "xz_scale": 0.85,
         "y_scale": 0.1
 
       }
