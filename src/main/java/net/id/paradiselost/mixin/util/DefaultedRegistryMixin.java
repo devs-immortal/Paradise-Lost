@@ -96,7 +96,6 @@ public class DefaultedRegistryMixin {
             "golden_oak_wood", ParadiseLost.locate("mother_aurel_wood"),
             "stripped_golden_oak_log", ParadiseLost.locate("stripped_mother_aurel_log"),
             "stripped_golden_oak_wood", ParadiseLost.locate("stripped_mother_aurel_wood"),
-            //TODO: Add skyroot and golden oak blocks
             /* ITEMS */
             "aechor_petal", ParadiseLost.locate(""),
             "ambrosium_shard", ParadiseLost.locate("cherine"),
@@ -126,13 +125,21 @@ public class DefaultedRegistryMixin {
             "gravitite_leggings", new Identifier("minecraft", "diamond_leggings"),
             "gravitite_boots", new Identifier("minecraft", "diamond_boots"),
             "blue_berry", ParadiseLost.locate("blueberry"),
-            "blue_gummy_swet", ParadiseLost.locate(""),
-            "golden_gummy_swet", ParadiseLost.locate(""),
+            "blue_gummy_swet", ParadiseLost.locate("amadrys_bread_glazed"),
+            "golden_gummy_swet", ParadiseLost.locate("amadrys_bread_glazed"),
+            "valkyrie_milk", ParadiseLost.locate("mystery_milk"),
+            "ginger_bread_man", ParadiseLost.locate("gingerbread_man"),
             "skyroot_bucket", ParadiseLost.locate("aurel_bucket"),
             "skyroot_water_bucket", ParadiseLost.locate("aurel_water_bucket"),
             "skyroot_milk_bucket", ParadiseLost.locate("aurel_milk_bucket"),
             "skyroot_boat", ParadiseLost.locate("aurel_boat"),
             "skyroot_chest_boat", ParadiseLost.locate("aurel_chest_boat"),
+            "golden_dart", new Identifier("minecraft", "arrow"),
+            "enchanted_dart", new Identifier("minecraft", "arrow"),
+            "poison_dart", new Identifier("minecraft", "arrow"),
+            "golden_dart_shooter", new Identifier("minecraft", "bow"),
+            "enchanted_dart_shooter", new Identifier("minecraft", "bow"),
+            "poison_dart_shooter", new Identifier("minecraft", "bow"),
             "valkyrie_lance", new Identifier("minecraft", "netherite_sword")
     );
 

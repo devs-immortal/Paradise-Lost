@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-public class ValkyrieMilkItem extends Item {
-    public ValkyrieMilkItem(Settings settings) {
+public class MysteryMilkItem extends Item {
+    public MysteryMilkItem(Settings settings) {
         super(settings);
     }
 

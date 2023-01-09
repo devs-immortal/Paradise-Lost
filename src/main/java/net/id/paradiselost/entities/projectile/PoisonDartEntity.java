@@ -38,6 +38,6 @@ public class PoisonDartEntity extends DartEntity {
 
     @Override
     protected ItemStack asItemStack() {
-        return new ItemStack(ParadiseLostItems.POISON_DART);
+        return ItemStack.EMPTY;
     }
 }

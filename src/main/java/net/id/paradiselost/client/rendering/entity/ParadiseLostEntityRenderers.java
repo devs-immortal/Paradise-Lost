@@ -45,8 +45,6 @@ public class ParadiseLostEntityRenderers {
         // projectile
         register(ParadiseLostEntityTypes.COCKATRICE_SPIT, CockatriceSpitRenderer::new);
         register(DartRenderer::new,
-                ParadiseLostEntityTypes.ENCHANTED_DART,
-                ParadiseLostEntityTypes.GOLDEN_DART,
                 ParadiseLostEntityTypes.POISON_DART,
                 ParadiseLostEntityTypes.POISON_NEEDLE
         );

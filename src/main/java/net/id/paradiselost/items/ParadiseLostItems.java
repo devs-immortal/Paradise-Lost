@@ -10,19 +10,15 @@ import net.id.paradiselost.fluids.ParadiseLostFluids;
 import net.id.paradiselost.items.accessories.ParachuteTrinketItem;
 import net.id.paradiselost.items.armor.ParadiseLostArmorMaterials;
 import net.id.paradiselost.items.food.ParadiseLostFoodComponent;
-import net.id.paradiselost.items.food.ValkyrieMilkItem;
-import net.id.paradiselost.items.food.WhiteAppleItem;
+import net.id.paradiselost.items.food.MysteryMilkItem;
 import net.id.paradiselost.items.misc.*;
-import net.id.paradiselost.items.resources.CherineShardItem;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.items.tools.AurelBucketItem;
 import net.id.paradiselost.items.tools.VialItem;
-import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
 import net.id.paradiselost.items.utils.ParadiseLostRarity;
-import net.id.paradiselost.items.weapons.*;
 import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.block.Block;
@@ -63,7 +59,7 @@ public class ParadiseLostItems {
     public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
     public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.crow_eye.tooltip").formatted(Formatting.GRAY))));
     public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
-    public static final Item CHERINE = add("cherine", new CherineShardItem(resource), fuel(500));
+    public static final Item CHERINE = add("cherine", new Item(resource), fuel(500));
     public static final Item OLVITE = add("olvite", new Item(resource));
     public static final Item OLVITE_NUGGET = add("olvite_nugget", new Item(resource));
     public static final Item FLAX_THREAD = add("flax_thread", new Item(resource));
@@ -85,13 +81,6 @@ public class ParadiseLostItems {
     public static final AxeItem OLVITE_AXE = add("olvite_axe", new AxeItem(ParadiseLostToolMaterials.OLVITE, 6f, -3.1f, tool));
     public static final SwordItem OLVITE_SWORD = add("olvite_sword", new SwordItem(ParadiseLostToolMaterials.OLVITE, 3, -2.4f, tool));
     public static final HoeItem OLVITE_HOE = add("olvite_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.OLVITE, 1, 3f, tool));
-
-    public static final DartItem GOLDEN_DART = add("golden_dart", new DartItem(tool()));
-    public static final DartItem ENCHANTED_DART = add("enchanted_dart", new DartItem(tool().rarity(RARE)));
-    public static final DartItem POISON_DART = add("poison_dart", new DartItem(tool()));
-    public static final DartShooterItem GOLDEN_DART_SHOOTER = add("golden_dart_shooter", new DartShooterItem(GOLDEN_DART, unstackableTool));
-    public static final DartShooterItem ENCHANTED_DART_SHOOTER = add("enchanted_dart_shooter", new DartShooterItem(ENCHANTED_DART, unstackableRareTool));
-    public static final DartShooterItem POISON_DART_SHOOTER = add("poison_dart_shooter", new DartShooterItem(POISON_DART, unstackableTool));
 
     public static final TrinketItem CLOUD_PARACHUTE = add("cold_parachute", new ParachuteTrinketItem(unstackableTool, "cloud_parachute"));
     public static final TrinketItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new ParachuteTrinketItem(tool().maxCount(1).maxDamage(20), "golden_parachute"));
@@ -126,17 +115,14 @@ public class ParadiseLostItems {
 
     public static final AliasedBlockItem BLUEBERRY = add("blueberry", new AliasedBlockItem(ParadiseLostBlocks.BLUEBERRY_BUSH, food(ParadiseLostFoodComponent.BLUEBERRY)), compostable30);
     public static final Item ORANGE = add("orange", new Item(food(ParadiseLostFoodComponent.ORANGE)), compostable65);
-    public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(ParadiseLostFoodComponent.WHITE_APPLE)), compostable(0f));
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(ParadiseLostBlocks.AMADRYS, food(ParadiseLostFoodComponent.GENERIC_WORSE)), compostable30);
     public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new StewItem(food(ParadiseLostFoodComponent.AMADRYS_NOODLES)));
     public static final Item AMADRYS_BREAD = add("amadrys_bread", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD)));
     public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED)));
-    public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.GENERIC)), compostable30);
+    public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
     public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(ParadiseLostBlocks.FLAX, food()), compostable30);
-    public static final Item BLUE_GUMMY_SWET = add("blue_gummy_swet", new Item(food(ParadiseLostFoodComponent.GUMMY_SWET, ParadiseLostRarity.PARADISE_LOST_LOOT)));
-    public static final Item GOLDEN_GUMMY_SWET = add("golden_gummy_swet", new Item(food(ParadiseLostFoodComponent.GUMMY_SWET, ParadiseLostRarity.PARADISE_LOST_LOOT)));
-    public static final ValkyrieMilkItem VALKYRIE_MILK = add("valkyrie_milk", new ValkyrieMilkItem(food(ParadiseLostFoodComponent.VALKYRIE_MILK, EPIC).maxCount(1)));
-    public static final Item GINGERBREAD_MAN = add("ginger_bread_man", new Item(food(ParadiseLostFoodComponent.GENERIC)), compostable30);
+    public static final MysteryMilkItem MYSTERY_MILK = add("mystery_milk", new MysteryMilkItem(food(ParadiseLostFoodComponent.MYSTERY_MILK, EPIC).maxCount(1)));
+    public static final Item GINGERBREAD_MAN = add("gingerbread_man", new Item(food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
     public static final Item MOA_MEAT = add("moa_meat", new Item(food(ParadiseLostFoodComponent.MOA_MEAT)));
     public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", new Item(food(ParadiseLostFoodComponent.COOKED_MOA_MEAT)));
 

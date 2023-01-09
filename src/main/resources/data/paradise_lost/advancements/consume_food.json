@@ -51,7 +51,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "items": ["paradise_lost:ginger_bread_man"]
+          "items": ["paradise_lost:gingerbread_man"]
         }
       }
     }
