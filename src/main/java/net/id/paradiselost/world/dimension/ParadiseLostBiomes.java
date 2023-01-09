@@ -227,7 +227,6 @@ public final class ParadiseLostBiomes {
         return Map.of(
             GenerationStep.Feature.UNDERGROUND_ORES, List.of(
                 ORE_CHERINE,
-                ORE_GRAVITITE,
                 ORE_OLVITE
             ),
             // cursed generation step, but it stops trees from generating inside of these

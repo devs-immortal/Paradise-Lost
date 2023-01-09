@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:block_of_gravitite"
+          "name": "paradise_lost:levitator"
         }
       ],
       "conditions": [

@@ -247,7 +247,7 @@
   "block.paradise_lost.olvite_block": "Block of Olvite",
   "block.paradise_lost.block_of_gravitite": "Block of Gravitite",
 
-  "block.paradise_lost.gravitite_levitator": "Gravitite Levitator",
+  "block.paradise_lost.levitator": "Gravitite Levitator",
   "block.paradise_lost.olvite_chain": "Olvite Chain",
   "block.paradise_lost.cherine_lantern": "Cherine Lantern",
   "block.paradise_lost.blue_portal": "Paradise Portal",
@@ -341,7 +341,7 @@
   "item.paradise_lost.gravitite_leggings": "Gravitite Leggings",
   "item.paradise_lost.gravitite_boots": "Gravitite Boots",
 
-  "item.paradise_lost.blue_berry": "Blueberry",
+  "item.paradise_lost.blueberry": "Blueberry",
   "item.paradise_lost.orange": "Orange",
   "item.paradise_lost.white_apple": "White Apple",
   "item.paradise_lost.amadrys_bushel": "Amadrys Bushel",

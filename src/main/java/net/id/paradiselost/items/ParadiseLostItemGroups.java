@@ -18,7 +18,7 @@ public class ParadiseLostItemGroups {
 
     public static final ItemGroup PARADISE_LOST_TOOLS = build(
             ParadiseLost.locate("tools"),
-            () -> new ItemStack(ParadiseLostItems.GRAVITITE_PICKAXE));
+            () -> new ItemStack(ParadiseLostItems.OLVITE_PICKAXE));
 
     public static final ItemGroup PARADISE_LOST_FOOD = build(
             ParadiseLost.locate("food"),

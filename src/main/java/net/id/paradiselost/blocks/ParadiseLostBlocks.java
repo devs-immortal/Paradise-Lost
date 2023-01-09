@@ -377,12 +377,10 @@ public class ParadiseLostBlocks {
     // Ores
     public static final OreBlock CHERINE_ORE = add("cherine_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
     public static final OreBlock OLVITE_ORE = add("olvite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
-    public static final FloatingBlock GRAVITITE_ORE = add("gravitite_ore", new FloatingBlock(false, of(Material.STONE).requiresTool().strength(5f).sounds(BlockSoundGroup.STONE), UniformIntProvider.create(0, 2)));
     public static final Block CHERINE_BLOCK = add("cherine_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
     public static final Block OLVITE_BLOCK = add("olvite_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
-    public static final FloatingBlock BLOCK_OF_GRAVITITE = add("block_of_gravitite", new FloatingBlock(false, of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
-    public static final FloatingBlock GRAVITITE_LEVITATOR = add("gravitite_levitator", new FloatingBlock(true, of(Material.WOOD).strength(3f, 3f).sounds(BlockSoundGroup.WOOD)));
+    public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, of(Material.WOOD).strength(3f, 3f).sounds(BlockSoundGroup.WOOD)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
     public static final CherineLanternBlock CHERINE_LANTERN = add("cherine_lantern", new CherineLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);
     public static final ParadiseLostPortalBlock BLUE_PORTAL = add("blue_portal", new ParadiseLostPortalBlock(copy(NETHER_PORTAL).nonOpaque().blockVision(never).mapColor(MapColor.BLUE)), translucentRenderLayer);

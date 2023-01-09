@@ -9,7 +9,7 @@ public class ParadiseLostBlockTags {
 
     public static final TagKey<Block> DIRT_BLOCKS = register("dirt_blocks");
 
-    //Gravitite
+    //Gravity
     public static final TagKey<Block> FAST_FLOATERS = register("fast_floaters");
     public static final TagKey<Block> NON_FLOATERS = register("non_floaters");
     public static final TagKey<Block> PUSH_FLOATERS = register("push_floaters");

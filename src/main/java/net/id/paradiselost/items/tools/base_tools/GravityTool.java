@@ -13,7 +13,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class GravititeTool {
+public class GravityTool {
     public static ActionResult flipEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand) {
         ((ParadiseLostEntityExtensions) entity).setFlipped();
         return ActionResult.SUCCESS;

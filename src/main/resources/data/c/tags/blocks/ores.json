@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "paradise_lost:cherine_ore",
-    "paradise_lost:olvite_ore",
-    "paradise_lost:gravitite_ore"
+    "paradise_lost:olvite_ore"
   ]
 }

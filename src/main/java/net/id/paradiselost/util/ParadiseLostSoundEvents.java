@@ -86,12 +86,6 @@ public final class ParadiseLostSoundEvents {
 
 
     public static final SoundEvent ITEM_ARMOR_EQUIP_OLVITE = childEvent("item.armor.equip.olvite", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_GRAVITITE = childEvent("item.armor.equip.gravitite", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_NEPTUNE = childEvent("item.armor.equip.neptune", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_PHOENIX = childEvent("item.armor.equip.phoenix", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_OBSIDIAN = childEvent("item.armor.equip.obsidian", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_VALKYRIE = childEvent("item.armor.equip.valkyrie", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_SENTRY = childEvent("item.armor.equip.sentry", SoundEvents.ITEM_ARMOR_EQUIP_TURTLE);
 
     public static final SoundEvent ITEM_DART_SHOOTER_SHOOT = childEvent("item.dart_shooter.shoot", SoundEvents.ITEM_CROSSBOW_SHOOT);
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = childEvent("item.bloodstone.prick", SoundEvents.ENTITY_BEE_STING);

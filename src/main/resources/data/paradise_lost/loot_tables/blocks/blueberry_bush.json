@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:blue_berry"
+          "name": "paradise_lost:blueberry"
         }
       ],
       "conditions": [
@@ -42,7 +42,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:blue_berry"
+          "name": "paradise_lost:blueberry"
         }
       ],
       "conditions": [

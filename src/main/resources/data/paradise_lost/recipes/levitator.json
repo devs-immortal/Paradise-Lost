@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SGS",
-    "WWW",
+    "SWS",
+    "WGW",
     "SSS"
   ],
   "key": {
     "G": {
-      "item": "paradise_lost:gravitite_gemstone"
+      "item": "paradise_lost:blue_cloud"
     },
     "S": {
       "item": "paradise_lost:floestone_brick"
@@ -17,6 +17,6 @@
     }
   },
   "result": {
-    "item": "paradise_lost:gravitite_levitator"
+    "item": "paradise_lost:levitator"
   }
 }

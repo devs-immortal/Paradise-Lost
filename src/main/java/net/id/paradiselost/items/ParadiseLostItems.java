@@ -20,7 +20,6 @@ import net.id.paradiselost.items.tools.VialItem;
 import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
-import net.id.paradiselost.items.tools.bloodstone.GravititeBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
 import net.id.paradiselost.items.utils.ParadiseLostRarity;
 import net.id.paradiselost.items.weapons.*;
@@ -67,7 +66,6 @@ public class ParadiseLostItems {
     public static final Item CHERINE = add("cherine", new CherineShardItem(resource), fuel(500));
     public static final Item OLVITE = add("olvite", new Item(resource));
     public static final Item OLVITE_NUGGET = add("olvite_nugget", new Item(resource));
-    public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource));
     public static final Item FLAX_THREAD = add("flax_thread", new Item(resource));
     public static final Item FLAXWEAVE = add("flaxweave", new Item(resource));
     public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource), compostable30);
@@ -88,12 +86,6 @@ public class ParadiseLostItems {
     public static final SwordItem OLVITE_SWORD = add("olvite_sword", new SwordItem(ParadiseLostToolMaterials.OLVITE, 3, -2.4f, tool));
     public static final HoeItem OLVITE_HOE = add("olvite_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.OLVITE, 1, 3f, tool));
 
-    public static final GravititeShovelItem GRAVITITE_SHOVEL = add("gravitite_shovel", new GravititeShovelItem(ParadiseLostToolMaterials.GRAVITITE, 1.5f, -3f, rareTool));
-    public static final GravititePickaxeItem GRAVITITE_PICKAXE = add("gravitite_pickaxe", new GravititePickaxeItem(ParadiseLostToolMaterials.GRAVITITE, 1, -2.8f, rareTool));
-    public static final GravititeAxeItem GRAVITITE_AXE = add("gravitite_axe", new GravititeAxeItem(ParadiseLostToolMaterials.GRAVITITE, 5f, -3f, rareTool));
-    public static final SwordItem GRAVITITE_SWORD = add("gravitite_sword", new SwordItem(ParadiseLostToolMaterials.GRAVITITE, 3, -2.4f, rareTool));
-    public static final GravititeHoeItem GRAVITITE_HOE = add("gravitite_hoe", new GravititeHoeItem(ParadiseLostToolMaterials.GRAVITITE, 1, 4f, rareTool));
-
     public static final DartItem GOLDEN_DART = add("golden_dart", new DartItem(tool()));
     public static final DartItem ENCHANTED_DART = add("enchanted_dart", new DartItem(tool().rarity(RARE)));
     public static final DartItem POISON_DART = add("poison_dart", new DartItem(tool()));
@@ -106,7 +98,6 @@ public class ParadiseLostItems {
 
     public static final CherineBloodstoneItem CHERINE_BLOODSTONE = add("cherine_bloodstone", new CherineBloodstoneItem(unstackableTool));
     public static final OlviteBloodstoneItem OLVITE_BLOODSTONE = add("olvite_bloodstone", new OlviteBloodstoneItem(unstackableTool));
-    public static final GravititeBloodstoneItem GRAVITITE_BLOODSTONE = add("gravitite_bloodstone", new GravititeBloodstoneItem(unstackableTool));
     public static final AbstentineBloodstoneItem ABSTENTINE_BLOODSTONE = add("abstentine_bloodstone", new AbstentineBloodstoneItem(unstackableTool));
 
     private static Settings wearable() {
@@ -121,11 +112,6 @@ public class ParadiseLostItems {
     public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, LEGS, WEARABLE));
     public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, FEET, WEARABLE));
 
-    public static final ArmorItem GRAVITITE_HELMET = add("gravitite_helmet", new ArmorItem(ParadiseLostArmorMaterials.GRAVITITE, HEAD, RARE_WEARABLE));
-    public static final ArmorItem GRAVITITE_CHESTPLATE = add("gravitite_chestplate", new ArmorItem(ParadiseLostArmorMaterials.GRAVITITE, CHEST, RARE_WEARABLE));
-    public static final ArmorItem GRAVITITE_LEGGINGS = add("gravitite_leggings", new ArmorItem(ParadiseLostArmorMaterials.GRAVITITE, LEGS, RARE_WEARABLE));
-    public static final ArmorItem GRAVITITE_BOOTS = add("gravitite_boots", new ArmorItem(ParadiseLostArmorMaterials.GRAVITITE, FEET, RARE_WEARABLE));
-
     private static Settings food() {
         return new Settings().group(ParadiseLostItemGroups.PARADISE_LOST_FOOD);
     }
@@ -138,7 +124,7 @@ public class ParadiseLostItems {
         return food(foodComponent).rarity(rarity);
     }
 
-    public static final AliasedBlockItem BLUEBERRY = add("blue_berry", new AliasedBlockItem(ParadiseLostBlocks.BLUEBERRY_BUSH, food(ParadiseLostFoodComponent.BLUEBERRY)), compostable30);
+    public static final AliasedBlockItem BLUEBERRY = add("blueberry", new AliasedBlockItem(ParadiseLostBlocks.BLUEBERRY_BUSH, food(ParadiseLostFoodComponent.BLUEBERRY)), compostable30);
     public static final Item ORANGE = add("orange", new Item(food(ParadiseLostFoodComponent.ORANGE)), compostable65);
     public static final WhiteAppleItem WHITE_APPLE = add("white_apple", new WhiteAppleItem(food(ParadiseLostFoodComponent.WHITE_APPLE)), compostable(0f));
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(ParadiseLostBlocks.AMADRYS, food(ParadiseLostFoodComponent.GENERIC_WORSE)), compostable30);
@@ -223,13 +209,11 @@ public class ParadiseLostItems {
     // ores
     public static final BlockItem CHERINE_ORE = add("cherine_ore", ParadiseLostBlocks.CHERINE_ORE, building_block);
     public static final BlockItem OLVITE_ORE = add("olvite_ore", ParadiseLostBlocks.OLVITE_ORE, building_block);
-    public static final BlockItem GRAVITITE_ORE = add("gravitite_ore", ParadiseLostBlocks.GRAVITITE_ORE, building_block);
     // ore blocks
     public static final BlockItem CHERINE_BLOCK = add("cherine_block", ParadiseLostBlocks.CHERINE_BLOCK, building_block, fuel(5000));
     public static final BlockItem OLVITE_BLOCK = add("olvite_block", ParadiseLostBlocks.OLVITE_BLOCK, building_block);
-    public static final BlockItem BLOCK_OF_GRAVITITE = add("block_of_gravitite", ParadiseLostBlocks.BLOCK_OF_GRAVITITE, building_block);
     // move this somewhere else
-    public static final BlockItem GRAVITITE_LEVITATOR = add("gravitite_levitator", ParadiseLostBlocks.GRAVITITE_LEVITATOR, building_block);
+    public static final BlockItem LEVITATOR = add("levitator", ParadiseLostBlocks.LEVITATOR, building_block);
     // logs
     public static final BlockItem AUREL_LOG = add("aurel_log", ParadiseLostBlocks.AUREL_LOG, building_block);
     public static final BlockItem MOTTLED_AUREL_LOG = add("mottled_aurel_log", ParadiseLostBlocks.MOTTLED_AUREL_LOG, building_block);

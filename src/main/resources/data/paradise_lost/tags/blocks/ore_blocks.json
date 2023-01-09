@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:olvite_block",
-    "paradise_lost:block_of_gravitite"
+    "paradise_lost:olvite_block"
   ]
 }
