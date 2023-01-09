@@ -96,6 +96,7 @@ public class DefaultedRegistryMixin {
             "golden_oak_wood", ParadiseLost.locate("mother_aurel_wood"),
             "stripped_golden_oak_log", ParadiseLost.locate("stripped_mother_aurel_log"),
             "stripped_golden_oak_wood", ParadiseLost.locate("stripped_mother_aurel_wood"),
+            "blueberry_bush", ParadiseLost.locate("blackcurrant_bush"),
             /* ITEMS */
             "aechor_petal", ParadiseLost.locate(""),
             "ambrosium_shard", ParadiseLost.locate("cherine"),
@@ -124,7 +125,7 @@ public class DefaultedRegistryMixin {
             "gravitite_chestplate", new Identifier("minecraft", "diamond_chestplate"),
             "gravitite_leggings", new Identifier("minecraft", "diamond_leggings"),
             "gravitite_boots", new Identifier("minecraft", "diamond_boots"),
-            "blue_berry", ParadiseLost.locate("blueberry"),
+            "blue_berry", ParadiseLost.locate("blackcurrant"),
             "blue_gummy_swet", ParadiseLost.locate("amadrys_bread_glazed"),
             "golden_gummy_swet", ParadiseLost.locate("amadrys_bread_glazed"),
             "valkyrie_milk", ParadiseLost.locate("mystery_milk"),

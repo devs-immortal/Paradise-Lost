@@ -224,7 +224,7 @@
 
   "block.paradise_lost.flaxweave_cushion" : "futon",
 
-  "block.paradise_lost.blueberry_bush": "bloobery plant",
+  "block.paradise_lost.blackcurrant_bush": "bloobery plant",
 
   "block.paradise_lost.ancient_flower": "oldy flowr",
   "block.paradise_lost.ataraxia": "arachno flowr",
@@ -363,8 +363,8 @@
   "item.paradise_lost.valkyrie_leggings": "tomboy pantz",
   "item.paradise_lost.valkyrie_boots": "tomboy shooz",
 
-  "item.paradise_lost.blueberry": "bloobery",
-  "item.paradise_lost.enchanted_blueberry": "fancy bloobery",
+  "item.paradise_lost.blackcurrant": "bloobery",
+  "item.paradise_lost.enchanted_blackcurrant": "fancy bloobery",
   "item.paradise_lost.orange": "ornge",
   "item.paradise_lost.white_apple": "cum appl",
   "item.paradise_lost.amadrys_bushel": "Amadrys pak",
@@ -511,7 +511,7 @@
   "condition.condition.venom": "spider man 3",
 
 
-  "subtitles.paradise_lost.block.blueberry_bush.pick_blueberries": "Bloobery pickd",
+  "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries": "Bloobery pickd",
 
   "subtitles.paradise_lost.block.portal.ambient": "Aethr portel whooshes",
   "subtitles.paradise_lost.block.portal.travel": "Aethr portel fades",

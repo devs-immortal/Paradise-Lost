@@ -21,9 +21,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class BlueberryBushBlock extends SweetBerryBushBlock {
+public class BlackcurrantBushBlock extends SweetBerryBushBlock {
 
-    public BlueberryBushBlock(Settings settings) {
+    public BlackcurrantBushBlock(Settings settings) {
         super(settings);
     }
 
@@ -58,8 +58,8 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
         BlockState floor = world.getBlockState(pos.down());
         double mod = floor.isOf(ParadiseLostBlocks.FARMLAND) ? 1.5 : 1;
         int berries = world.random.nextInt(2) + 1;
-        dropStack(world, pos, new ItemStack(ParadiseLostItems.BLUEBERRY, (int) (berries + (mature ? 1 : 0) * mod)));
-        world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+        dropStack(world, pos, new ItemStack(ParadiseLostItems.BLACKCURRANT, (int) (berries + (mature ? 1 : 0) * mod)));
+        world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_BLACKCURRANT_BUSH_PICK_BLUEBERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
         world.setBlockState(pos, state.with(AGE, 1), Block.NOTIFY_LISTENERS);
     }
 

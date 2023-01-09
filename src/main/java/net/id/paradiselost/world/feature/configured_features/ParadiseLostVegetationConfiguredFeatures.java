@@ -34,7 +34,7 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     public static final RegistryEntry<ConfiguredFeature<SimpleBlockFeatureConfig, ?>> GRASS_BONEMEAL = register("grass_bonemeal", Feature.SIMPLE_BLOCK, Configs.singleBlockConfig(GRASS));
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> TALL_GRASS_BUSH = register("tall_grass", Feature.RANDOM_PATCH, Configs.TALL_GRASS_BUSH_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FLOWERS = register("flowers", Feature.FLOWER, Configs.FLOWER_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BLUEBERRY = register("patch_blueberry", Feature.RANDOM_PATCH, Configs.BLUEBERRY_PATCH_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BLACKCURRANT = register("patch_blackcurrant", Feature.RANDOM_PATCH, Configs.BLACKCURRANT_PATCH_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_BROWN_SPORECAP = register("patch_brown_sporecap", Feature.RANDOM_PATCH, Configs.BROWN_SPORECAP_PATCH_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<BlockColumnFeatureConfig, ?>> PATCH_PINK_SPORECAP = register("patch_pink_sporecap", Feature.BLOCK_COLUMN, Configs.PINK_SPORECAP_PATCH_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<BlockColumnFeatureConfig, ?>> NATURAL_SWEDROOT = register("natural_swedroot", Feature.BLOCK_COLUMN, Configs.SWEDROOT_CONFIG);
@@ -76,7 +76,7 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
                         .add(ANCIENT_FLOWER.getDefaultState(), 1)
         ));
 
-        private static final RandomPatchFeatureConfig BLUEBERRY_PATCH_CONFIG = blockPatch(42, 5, 5, BLUEBERRY_BUSH.getDefaultState().with(Properties.AGE_3, 3));
+        private static final RandomPatchFeatureConfig BLACKCURRANT_PATCH_CONFIG = blockPatch(42, 5, 5, BLACKCURRANT_BUSH.getDefaultState().with(Properties.AGE_3, 3));
         private static final RandomPatchFeatureConfig BROWN_SPORECAP_PATCH_CONFIG = blockPatch(8, 6, 4, BROWN_SPORECAP.getDefaultState());
         private static final BlockColumnFeatureConfig PINK_SPORECAP_PATCH_CONFIG = new BlockColumnFeatureConfig(List.of(BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(PINK_SPORECAP.getDefaultState()))), Direction.DOWN, BlockPredicate.IS_AIR, true);
         private static final BlockColumnFeatureConfig SWEDROOT_CONFIG = new BlockColumnFeatureConfig(List.of(BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(DIRT.getDefaultState())), BlockColumnFeatureConfig.createLayer(ConstantIntProvider.create(1), BlockStateProvider.of(SWEDROOT.getDefaultState().with(CropBlock.AGE, 7)))), Direction.DOWN, BlockPredicate.IS_AIR, true);

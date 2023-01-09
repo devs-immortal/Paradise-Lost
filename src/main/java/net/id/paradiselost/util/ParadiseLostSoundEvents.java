@@ -33,7 +33,7 @@ public final class ParadiseLostSoundEvents {
      */
     private static final Set<AbstractSoundEvent> SOUNDS = new HashSet<>();
 
-    public static final SoundEvent BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES = childEvent("block.blueberry_bush.pick_blueberries", SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES);
+    public static final SoundEvent BLOCK_BLACKCURRANT_BUSH_PICK_BLUEBERRIES = childEvent("block.blackcurrant_bush.pick_blueberries", SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES);
     public static final SoundEvent BLOCK_PORTAL_AMBIENT = event("block.portal.ambient");
     public static final SoundEvent BLOCK_PORTAL_TRAVEL = event("block.portal.travel");
     public static final SoundEvent BLOCK_PORTAL_TRIGGER = event("block.portal.trigger");

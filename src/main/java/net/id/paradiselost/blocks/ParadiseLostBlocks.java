@@ -17,7 +17,7 @@ import net.id.paradiselost.blocks.natural.cloud.BlueParadiseLostCloudBlock;
 import net.id.paradiselost.blocks.natural.cloud.GoldenParadiseLostCloudBlock;
 import net.id.paradiselost.blocks.natural.cloud.PinkParadiseLostCloudBlock;
 import net.id.paradiselost.blocks.natural.crop.AmadrysCropBlock;
-import net.id.paradiselost.blocks.natural.crop.BlueberryBushBlock;
+import net.id.paradiselost.blocks.natural.crop.BlackcurrantBushBlock;
 import net.id.paradiselost.blocks.natural.crop.FlaxCropBlock;
 import net.id.paradiselost.blocks.natural.crop.SwedrootCropBlock;
 import net.id.paradiselost.blocks.natural.plant.*;
@@ -348,7 +348,7 @@ public class ParadiseLostBlocks {
 
     public static final Block FLAXWEAVE_CUSHION = add("flaxweave_cushion", new Block(Settings.of(Material.WOOL).mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));
 
-    public static final BlueberryBushBlock BLUEBERRY_BUSH = add("blueberry_bush", new BlueberryBushBlock(of(Material.PLANT).strength(0.2f)
+    public static final BlackcurrantBushBlock BLACKCURRANT_BUSH = add("blackcurrant_bush", new BlackcurrantBushBlock(of(Material.PLANT).strength(0.2f)
             .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision()), flammablePlant, cutoutRenderLayer);
 
     public static final FourBiteCakeBlock CHEESECAKE = add("halflight_cheesecake", new FourBiteCakeBlock(Settings.copy(CAKE)));

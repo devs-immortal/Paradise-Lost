@@ -37,7 +37,7 @@ public class ParadiseLostAnimalEntity extends AnimalEntity {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.getItem() == ParadiseLostItems.BLUEBERRY;
+        return stack.getItem() == ParadiseLostItems.BLACKCURRANT;
     }
 
     @Override

@@ -250,7 +250,7 @@ public final class ParadiseLostBiomes {
                             FLOWERS,
                             GRASS,
                             TALL_GRASS,
-                            PATCH_BLUEBERRY,
+                            PATCH_BLACKCURRANT,
                             SPARSE_TREES
                         )
                     )
@@ -292,7 +292,7 @@ public final class ParadiseLostBiomes {
                             TALL_GRASS,
                             TUNDRA_FOLIAGE,
                             BUSH,
-                            PATCH_BLUEBERRY,
+                            PATCH_BLACKCURRANT,
                             SCATTERED_TREES,
                             ALT_FALLEN_LEAVES
                         )
@@ -334,7 +334,7 @@ public final class ParadiseLostBiomes {
                                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
                                                 TALL_GRASS,
                                                 BUSH,
-                                                PATCH_BLUEBERRY,
+                                                PATCH_BLACKCURRANT,
                                                 PLATEAU_TREES,
                                                 SPARSE_TREES
                                         )
@@ -479,7 +479,7 @@ public final class ParadiseLostBiomes {
                             FALLEN_ROSE_LEAVES,
                             FALLEN_LAVENDER_LEAVES,
                             BUSH,
-                            PATCH_BLUEBERRY,
+                            PATCH_BLACKCURRANT,
                             RAINBOW_FOREST_TREES
                         )
                     )
@@ -576,7 +576,7 @@ public final class ParadiseLostBiomes {
                             FLOWERS,
                             GRASS,
                             TALL_GRASS,
-                            PATCH_BLUEBERRY,
+                            PATCH_BLACKCURRANT,
                             PLATEAU_FOLIAGE,
                             PLATEAU_SHAMROCK,
                             PLATEAU_FLOWERING_GRASS,

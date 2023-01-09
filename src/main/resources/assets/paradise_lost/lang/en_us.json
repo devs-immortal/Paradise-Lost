@@ -226,7 +226,7 @@
 
   "block.paradise_lost.flaxweave_cushion" : "Flaxweave Cushion",
 
-  "block.paradise_lost.blueberry_bush": "Blueberry Bush",
+  "block.paradise_lost.blackcurrant_bush": "Blackcurrant Bush",
 
   "block.paradise_lost.halflight_cheesecake": "Halflight Cheesecake",
 
@@ -341,7 +341,7 @@
   "item.paradise_lost.gravitite_leggings": "Gravitite Leggings",
   "item.paradise_lost.gravitite_boots": "Gravitite Boots",
 
-  "item.paradise_lost.blueberry": "Blueberry",
+  "item.paradise_lost.blackcurrant": "Blackcurrant",
   "item.paradise_lost.orange": "Orange",
   "item.paradise_lost.white_apple": "White Apple",
   "item.paradise_lost.amadrys_bushel": "Amadrys Bushel",
@@ -470,7 +470,7 @@
 
   "condition.paradise_lost.condition.venom": "Venom",
 
-  "subtitles.paradise_lost.block.blueberry_bush.pick_blueberries": "Blueberries pop",
+  "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries": "Blueberries pop",
 
   "subtitles.paradise_lost.block.portal.ambient": "Paradise portal whooshes",
   "subtitles.paradise_lost.block.portal.travel": "Paradise portal noise fades",

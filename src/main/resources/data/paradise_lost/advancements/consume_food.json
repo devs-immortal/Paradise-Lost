@@ -7,7 +7,7 @@
       "translate": "advancements.paradise_lost.consume_food.description"
     },
     "icon": {
-      "item": "paradise_lost:blueberry"
+      "item": "paradise_lost:blackcurrant"
     },
     "frame": "task",
     "show_toast": true,
@@ -15,11 +15,11 @@
     "hidden": false
   },
   "criteria": {
-    "blueberry": {
+    "blackcurrant": {
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "items": ["paradise_lost:blueberry"]
+          "items": ["paradise_lost:blackcurrant"]
         }
       }
     },
@@ -34,7 +34,7 @@
   },
   "requirements": [
     [
-      "blueberry",
+      "blackcurrant",
       "gingyman"
     ]
   ],

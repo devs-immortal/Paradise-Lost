@@ -6,13 +6,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:blueberry"
+          "name": "paradise_lost:blackcurrant"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "paradise_lost:blueberry_bush",
+          "block": "paradise_lost:blackcurrant_bush",
           "properties": {
             "age": "3"
           }
@@ -42,13 +42,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:blueberry"
+          "name": "paradise_lost:blackcurrant"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "paradise_lost:blueberry_bush",
+          "block": "paradise_lost:blackcurrant_bush",
           "properties": {
             "age": "2"
           }

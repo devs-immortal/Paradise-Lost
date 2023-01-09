@@ -60,7 +60,7 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
         this.goalSelector.add(2, new WanderAroundGoal(this, 1.0D, 15));
         this.goalSelector.add(3, new EatBlueberriesGoal(0.9D, 40, 8));
         this.goalSelector.add(4, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(5, new TemptGoal(this, 1.15D, Ingredient.ofItems(ParadiseLostItems.BLUEBERRY), false));
+        this.goalSelector.add(5, new TemptGoal(this, 1.15D, Ingredient.ofItems(ParadiseLostItems.BLACKCURRANT), false));
         this.goalSelector.add(6, new LookAroundGoal(this));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F, 32));
         //this.goalSelector.add(6, new EntityAIBunnyHop(this));
@@ -241,7 +241,7 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
         @Override
         protected boolean isTargetPos(WorldView world, BlockPos pos) {
             BlockState blockState = world.getBlockState(pos);
-            return blockState.isOf(ParadiseLostBlocks.BLUEBERRY_BUSH) && blockState.get(SweetBerryBushBlock.AGE) >= 3;
+            return blockState.isOf(ParadiseLostBlocks.BLACKCURRANT_BUSH) && blockState.get(SweetBerryBushBlock.AGE) >= 3;
         }
 
         @Override
@@ -260,10 +260,10 @@ public class AerbunnyEntity extends ParadiseLostAnimalEntity {
 
         protected void eatSweetBerry() {
             BlockState blockState = AerbunnyEntity.this.world.getBlockState(this.targetPos);
-            if (blockState.isOf(ParadiseLostBlocks.BLUEBERRY_BUSH) && blockState.get(SweetBerryBushBlock.AGE) == 3) {
+            if (blockState.isOf(ParadiseLostBlocks.BLACKCURRANT_BUSH) && blockState.get(SweetBerryBushBlock.AGE) == 3) {
                 AerbunnyEntity.this.setLoveTicks(40);
                 AerbunnyEntity.this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 10, 2));
-                AerbunnyEntity.this.playSound(ParadiseLostSoundEvents.BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES, 1.0F, 1.0F);
+                AerbunnyEntity.this.playSound(ParadiseLostSoundEvents.BLOCK_BLACKCURRANT_BUSH_PICK_BLUEBERRIES, 1.0F, 1.0F);
                 AerbunnyEntity.this.playSound(ParadiseLostSoundEvents.ENTITY_AERBUNNY_EAT, 0.8F, 2.0F);
                 AerbunnyEntity.this.world.setBlockState(this.targetPos, blockState.with(SweetBerryBushBlock.AGE, 1), Block.NOTIFY_LISTENERS);
             }

@@ -22,7 +22,7 @@ public class ParadiseLostItemGroups {
 
     public static final ItemGroup PARADISE_LOST_FOOD = build(
             ParadiseLost.locate("food"),
-            () -> new ItemStack(ParadiseLostItems.BLUEBERRY));
+            () -> new ItemStack(ParadiseLostItems.BLACKCURRANT));
 
     public static final ItemGroup PARADISE_LOST_RESOURCES = build(
             ParadiseLost.locate("resources"),
