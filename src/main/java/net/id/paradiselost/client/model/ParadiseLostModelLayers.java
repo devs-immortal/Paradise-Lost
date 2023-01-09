@@ -20,9 +20,6 @@ public class ParadiseLostModelLayers {
 
     public static final EntityModelLayer AECHOR_PLANT = register("aechor_plant", "main", ParadiseLostPlantModel.getTexturedModelData());
     public static final EntityModelLayer AERBUNNY = register("aerbunny", "main", AerbunnyModel.getTexturedModelData());
-    public static final EntityModelLayer AERWHALE = register("aerwhale", "main", AerwhaleModel.getTexturedModelData());
-    public static final EntityModelLayer COCKATRICE = register("cockatrice", "main", CockatriceModel.getTexturedModelData());
-    public static final EntityModelLayer MIMIC = register("mimic", "main", ChestMimicModel.getTexturedModelData());
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer ROOK = register("rook", "main", RookModel.getTexturedModelData());
     public static final EntityModelLayer ROOK_GLOW = register("rook_glow", "glow", RookModel.getTexturedModelData());

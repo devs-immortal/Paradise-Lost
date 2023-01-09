@@ -58,7 +58,6 @@ public class ParadiseLostItems {
     public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
     public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
     public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.crow_eye.tooltip").formatted(Formatting.GRAY))));
-    public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
     public static final Item CHERINE = add("cherine", new Item(resource), fuel(500));
     public static final Item OLVITE = add("olvite", new Item(resource));
     public static final Item OLVITE_NUGGET = add("olvite_nugget", new Item(resource));
@@ -155,14 +154,8 @@ public class ParadiseLostItems {
 
     public static final SpawnEggItem AECHOR_PLANT_SPAWN_EGG = add("aechor_plant_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.AECHOR_PLANT, 0x97DED4, 0x31897D, misc), spawnEggBehavior);
     //    public static final SpawnEggItem CHEST_MIMIC_SPAWN_EGG = null;
-    public static final SpawnEggItem COCKATRICE_SPAWN_EGG = add("cockatrice_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.COCKATRICE, 0x9FC3F7, 0x3D2338, misc), spawnEggBehavior);
     public static final SpawnEggItem AERBUNNY_SPAWN_EGG = add("aerbunny_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.AERBUNNY, 0xC5D6ED, 0x82A6D9, misc), spawnEggBehavior);
-    public static final SpawnEggItem AERWHALE_SPAWN_EGG = add("aerwhale_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.AERWHALE, 0x5C6D91, 0xDEDBCE, misc), spawnEggBehavior);
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc), spawnEggBehavior);
-    public static final SpawnEggItem SWET_SPAWN_EGG = add("swet_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.WHITE_SWET, 0x717375, 0xffffff, misc), spawnEggBehavior);
-    public static final SpawnEggItem BLUE_SWET_SPAWN_EGG = add("blue_swet_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.BLUE_SWET, 0x46699E, 0xf2f2f2, misc), spawnEggBehavior);
-    public static final SpawnEggItem PURPLE_SWET_SPAWN_EGG = add("purple_swet_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.PURPLE_SWET, 0x5D548C, 0xf2f2f2, misc), spawnEggBehavior);
-    public static final SpawnEggItem GOLDEN_SWET_SPAWN_EGG = add("golden_swet_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.GOLDEN_SWET, 0xC99D36, 0xf2f2f2, misc), spawnEggBehavior);
 
     private static FabricItemSettings building_block() {
         return new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_BUILDING_BLOCKS);

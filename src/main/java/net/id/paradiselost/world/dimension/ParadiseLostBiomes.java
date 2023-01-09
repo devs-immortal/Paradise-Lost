@@ -208,16 +208,6 @@ public final class ParadiseLostBiomes {
         ));
     }
     
-    private static Map<SpawnGroup, List<SpawnSettings.SpawnEntry>> getStandardSwetEntries(int weight, int minGroup, int maxGroup) {
-        return Map.of(SpawnGroup.MONSTER, List.of(
-                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.BLUE_SWET, weight, minGroup, maxGroup),
-                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.WHITE_SWET, weight, minGroup, maxGroup),
-                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.GOLDEN_SWET, weight, minGroup, maxGroup),
-                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PURPLE_SWET, weight, minGroup, maxGroup),
-                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.VERMILION_SWET, weight, minGroup, maxGroup)
-        ));
-    }
-    
     /**
      * Returns a map of common placed features in all of the Paradise Lost biomes.
      * 
@@ -268,17 +258,14 @@ public final class ParadiseLostBiomes {
             ))
             .spawnSettings(createSpawnSettings(
                 merge(
-                    getStandardSwetEntries(6, 2, 6),
                     Map.of(
                         SpawnGroup.CREATURE, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
                 Map.of(
-                    ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12)
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
@@ -314,18 +301,15 @@ public final class ParadiseLostBiomes {
             ))
             .spawnSettings(createSpawnSettings(
                 merge(
-                    getStandardSwetEntries(6, 2, 6),
                     Map.of(
                         SpawnGroup.CREATURE, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7)
                         )
                     )
                 ),
                 
                 Map.of(
-                    ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12F)
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
@@ -359,18 +343,15 @@ public final class ParadiseLostBiomes {
                 ))
                 .spawnSettings(createSpawnSettings(
                         merge(
-                                getStandardSwetEntries(6, 2, 6),
                                 Map.of(
                                         SpawnGroup.CREATURE, List.of(
                                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7),
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7)
                                         )
                                 )
                         ),
 
                         Map.of(
-                                ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12F)
                         )
                 ))
                 .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
@@ -411,21 +392,18 @@ public final class ParadiseLostBiomes {
             ))
             .spawnSettings(createSpawnSettings(
                 merge(
-                    getStandardSwetEntries(6, 2, 6),
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 2)
                         ),
                         SpawnGroup.CREATURE, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5)
                         )
                     )
                 ),
                 
                 Map.of(
-                    ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12),
                     ParadiseLostEntityTypes.AECHOR_PLANT, SpawnCost.of(0.75, 0.07)
                 )
             ))
@@ -463,21 +441,18 @@ public final class ParadiseLostBiomes {
                 ))
                 .spawnSettings(createSpawnSettings(
                         merge(
-                                getStandardSwetEntries(6, 2, 6),
                                 Map.of(
                                         SpawnGroup.MONSTER, List.of(
                                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 2)
                                         ),
                                         SpawnGroup.CREATURE, List.of(
                                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5),
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5)
                                         )
                                 )
                         ),
 
                         Map.of(
-                                ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12),
                                 ParadiseLostEntityTypes.AECHOR_PLANT, SpawnCost.of(0.75, 0.07)
                         )
                 ))
@@ -512,7 +487,6 @@ public final class ParadiseLostBiomes {
                 ))
             .spawnSettings(createSpawnSettings(
                 merge(
-                    getStandardSwetEntries(2, 1, 3),
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 100, 3, 7)
@@ -520,14 +494,12 @@ public final class ParadiseLostBiomes {
                         
                         SpawnGroup.CREATURE, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERWHALE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5)
                         )
                     )
                 ),
                 
                 Map.of(
-                    ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12),
                     ParadiseLostEntityTypes.AECHOR_PLANT, SpawnCost.of(0.7, 0.1)
                 )
             ))
@@ -568,7 +540,6 @@ public final class ParadiseLostBiomes {
             ))
             .spawnSettings(createSpawnSettings(
                 merge(
-                    getStandardSwetEntries(6, 2, 6),
                     Map.of(
                         SpawnGroup.CREATURE, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
@@ -579,7 +550,6 @@ public final class ParadiseLostBiomes {
                 ),
                 
                 Map.of(
-                    ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12)
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.1F).downfall(2)
@@ -617,7 +587,6 @@ public final class ParadiseLostBiomes {
             ))
             .spawnSettings(createSpawnSettings(
                 merge(
-                    getStandardSwetEntries(6, 2, 6),
                     Map.of(
                         SpawnGroup.CREATURE, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
@@ -628,11 +597,9 @@ public final class ParadiseLostBiomes {
                 ),
             
                 Map.of(
-                    ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12)
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.25F).downfall(0)
-            // .category(Biome.Category.PLAINS)
             .build();
     }
     
@@ -676,7 +643,6 @@ public final class ParadiseLostBiomes {
             ))
             .spawnSettings(createSpawnSettings(
                 merge(
-                    getStandardSwetEntries(6, 2, 6),
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 3)
@@ -689,12 +655,10 @@ public final class ParadiseLostBiomes {
                     )
                 ),
                 Map.of(
-                    ParadiseLostEntityTypes.BLUE_SWET, SpawnCost.of(1, 0.12),
                     ParadiseLostEntityTypes.AECHOR_PLANT, SpawnCost.of(1, 0.1)
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.35F).downfall(2)
-            // .category(Biome.Category.PLAINS)
             .build();
     }
 

@@ -5,13 +5,9 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.id.incubus_core.blocklikeentities.api.client.BlockLikeEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.hostile.AechorPlantRenderer;
-import net.id.paradiselost.client.rendering.entity.hostile.CockatriceRenderer;
-import net.id.paradiselost.client.rendering.entity.hostile.SwetRenderer;
 import net.id.paradiselost.client.rendering.entity.misc.RookRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.AerbunnyRenderer;
-import net.id.paradiselost.client.rendering.entity.passive.AerwhaleRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.MoaEntityRenderer;
-import net.id.paradiselost.client.rendering.entity.projectile.CockatriceSpitRenderer;
 import net.id.paradiselost.client.rendering.entity.projectile.DartRenderer;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -26,24 +22,13 @@ public class ParadiseLostEntityRenderers {
         register(ParadiseLostEntityTypes.SLIDER, BlockLikeEntityRenderer::new);
 
         // hostile
-        register(SwetRenderer::new,
-                ParadiseLostEntityTypes.BLUE_SWET,
-                ParadiseLostEntityTypes.PURPLE_SWET,
-                ParadiseLostEntityTypes.WHITE_SWET,
-                ParadiseLostEntityTypes.GOLDEN_SWET,
-                ParadiseLostEntityTypes.VERMILION_SWET
-        );
         register(ParadiseLostEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
-        //register(ParadiseLostEntityTypes.CHEST_MIMIC, ChestMimicRenderer::new);
-        register(ParadiseLostEntityTypes.COCKATRICE, CockatriceRenderer::new);
 
         // passive
         register(ParadiseLostEntityTypes.MOA, MoaEntityRenderer::new);
         register(ParadiseLostEntityTypes.AERBUNNY, AerbunnyRenderer::new);
-        register(ParadiseLostEntityTypes.AERWHALE, AerwhaleRenderer::new);
 //        register(ParadiseLostEntityTypes.AMBYST, AmbystRenderer::new);
         // projectile
-        register(ParadiseLostEntityTypes.COCKATRICE_SPIT, CockatriceSpitRenderer::new);
         register(DartRenderer::new,
                 ParadiseLostEntityTypes.POISON_DART,
                 ParadiseLostEntityTypes.POISON_NEEDLE

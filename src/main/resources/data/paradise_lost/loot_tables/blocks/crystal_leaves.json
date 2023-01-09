@@ -130,25 +130,6 @@
           }
         }
       ]
-    },
-    {
-      "rolls": 1.0,
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:white_apple"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "paradise_lost:crystal_leaves",
-          "properties": {
-            "fruity": "true"
-          }
-        }
-      ]
     }
   ]
 }

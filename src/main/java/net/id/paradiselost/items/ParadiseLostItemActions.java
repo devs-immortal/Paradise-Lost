@@ -3,7 +3,6 @@ package net.id.paradiselost.items;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.id.paradiselost.items.utils.ParadiseLostDispenserBehaviors;
-import net.id.paradiselost.items.utils.StackableVariantColorizer;
 import net.id.incubus_core.util.RegistryQueue;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.item.ItemConvertible;
@@ -25,7 +24,5 @@ class ParadiseLostItemActions {
     protected static RegistryQueue.Action<ItemConvertible> compostable(float chance) {
         return (id, item) -> CompostingChanceRegistry.INSTANCE.add(item, chance);
     }
-
-    protected static final RegistryQueue.Action<ItemConvertible> swetColor = RegistryQueue.onClient(new StackableVariantColorizer(0xDADADA, 0x939393, 0x4F4F4F));
 
 }

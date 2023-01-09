@@ -2,7 +2,6 @@ package net.id.paradiselost.blocks.natural.tree;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
-import net.id.paradiselost.entities.hostile.swet.TransformableSwetEntity;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -45,9 +44,6 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
         if (!collidable && entity instanceof LivingEntity) {
             entity.fallDistance = 0;
             entity.slowMovement(state, new Vec3d(0.99D, 0.9D, 0.99D));
-        }
-        if (this == ParadiseLostBlocks.MOTHER_AUREL_LEAVES && entity instanceof TransformableSwetEntity swet) {
-            swet.suggestTypeChange(state);
         }
     }
 

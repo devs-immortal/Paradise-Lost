@@ -7,7 +7,7 @@
       "translate": "advancements.paradise_lost.consume_food.description"
     },
     "icon": {
-      "item": "paradise_lost:white_apple"
+      "item": "paradise_lost:blueberry"
     },
     "frame": "task",
     "show_toast": true,
@@ -15,35 +15,11 @@
     "hidden": false
   },
   "criteria": {
-    "whiteapple": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:white_apple"]
-        }
-      }
-    },
     "blueberry": {
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
           "items": ["paradise_lost:blueberry"]
-        }
-      }
-    },
-    "bluegswet": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:blue_gummy_swet"]
-        }
-      }
-    },
-    "goldgswet": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:golden_gummy_swet"]
         }
       }
     },
@@ -58,10 +34,7 @@
   },
   "requirements": [
     [
-      "whiteapple",
       "blueberry",
-      "bluegswet",
-      "goldgswet",
       "gingyman"
     ]
   ],

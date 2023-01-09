@@ -192,7 +192,7 @@ public class ParadiseLostBlocks {
 
     public static final SaplingBlock MOTHER_AUREL_SAPLING = add("mother_aurel_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), motherAurelColors.sapling().luminance(state -> 7)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_MOTHER_AUREL_SAPLING = add("potted_mother_aurel_sapling", new FlowerPotBlock(MOTHER_AUREL_SAPLING, flowerPot().luminance(state -> 7)), cutoutRenderLayer);
-    public static final PillarBlock MOTHER_AUREL_LOG = add("mother_aurel_log", new MotherAurelLogBlock(motherAurelColors.log()), flammableLog);
+    public static final PillarBlock MOTHER_AUREL_LOG = add("mother_aurel_log", new PillarBlock(motherAurelColors.log()), flammableLog);
     public static final PillarBlock MOTHER_AUREL_WOOD = MOTHER_AUREL.wood();
     public static final PillarBlock STRIPPED_MOTHER_AUREL_LOG = MOTHER_AUREL.strippedLog();
     public static final PillarBlock STRIPPED_MOTHER_AUREL_WOOD = MOTHER_AUREL.strippedWood();

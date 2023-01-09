@@ -1,8 +1,6 @@
 package net.id.paradiselost.blocks.natural.crop;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
-import net.id.paradiselost.entities.hostile.swet.SwetEntity;
-import net.id.paradiselost.entities.hostile.swet.TransformableSwetEntity;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.block.Block;
@@ -38,16 +36,6 @@ public class BlueberryBushBlock extends SweetBerryBushBlock {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (state.get(AGE) > 0 && entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
             entity.slowMovement(state, new Vec3d(0.900000011920929D, 0.75D, 0.900000011920929D));
-        }
-        if (entity instanceof SwetEntity) {
-            if (state.get(AGE) == 3) {
-                if (entity instanceof TransformableSwetEntity swet && swet.suggestTypeChange(state)) {
-                    world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
-                    world.setBlockState(pos, state.with(AGE, 1), Block.NOTIFY_LISTENERS);
-                } else {
-                    tryPickBerries(world, pos, state);
-                }
-            }
         }
     }
 
