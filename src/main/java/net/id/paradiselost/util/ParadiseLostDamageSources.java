@@ -15,7 +15,4 @@ public class ParadiseLostDamageSources extends DamageSource {
         super(name);
     }
 
-    public static DamageSource swet(LivingEntity attacker) {
-        return new EntityDamageSource("swet", attacker);
-    }
 }

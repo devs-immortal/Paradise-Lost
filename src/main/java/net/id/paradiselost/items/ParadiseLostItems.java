@@ -386,13 +386,7 @@ public class ParadiseLostItems {
     public static final BlockItem FLOESTONE_BRICK_WALL = add("floestone_brick_wall", ParadiseLostBlocks.FLOESTONE_BRICK_WALL, decoration);
     public static final BlockItem CARVED_WALL = add("carved_stone_wall", ParadiseLostBlocks.CARVED_STONE_WALL, decoration);
     public static final BlockItem MOSSY_CARVED_WALL = add("mossy_carved_stone_wall", ParadiseLostBlocks.MOSSY_CARVED_STONE_WALL, decoration);
-    // infested blocks
-    /* TODO: Implement swet drop block items
-    public static final BlockItem SWET_DROP = add("swet_drop", ParadiseLostBlocks.SWET_DROP, misc);
-    public static final BlockItem BLUE_SWET_DROP = add("blue_swet_drop", ParadiseLostBlocks.BLUE_SWET_DROP, misc);
-    public static final BlockItem GOLDEN_SWET_DROP = add("golden_swet_drop", ParadiseLostBlocks.GOLDEN_SWET_DROP, misc);
-    public static final BlockItem PURPLE_SWET_DROP = add("purple_swet_drop", ParadiseLostBlocks.PURPLE_SWET_DROP, misc);
-    */
+
     // panes & chains
     public static final BlockItem OLVITE_CHAIN = add("olvite_chain", ParadiseLostBlocks.OLVITE_CHAIN, decoration);
     // carpets

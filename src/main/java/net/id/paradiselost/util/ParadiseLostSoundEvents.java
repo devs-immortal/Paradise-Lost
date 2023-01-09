@@ -54,16 +54,8 @@ public final class ParadiseLostSoundEvents {
 
     public static final SoundEvent EFFECT_SIMMERING_SIMMER = childEvent("effect.simmering.simmer", SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT);
 
-
-    public static final SoundEvent ENTITY_SWET_ATTACK = childEvent("entity.swet.attack", SoundEvents.ENTITY_SLIME_ATTACK);
-
     public static final SoundEvent ENTITY_AECHOR_PLANT_DEATH = childEvent("entity.aechor_plant.death", SoundEvents.ENTITY_GENERIC_BIG_FALL);
     public static final SoundEvent ENTITY_AECHOR_PLANT_SHOOT = childEvent("entity.aechor_plant.shoot", SoundEvents.ENTITY_SKELETON_SHOOT);
-
-    public static final SoundEvent ENTITY_COCKATRICE_AMBIENT = childEvent("entity.cockatrice.ambient", "minecraft:entity.hostile.ambient");
-    public static final SoundEvent ENTITY_COCKATRICE_DEATH = childEvent("entity.cockatrice.death", SoundEvents.ENTITY_HOSTILE_DEATH);
-    public static final SoundEvent ENTITY_COCKATRICE_HURT = childEvent("entity.cockatrice.hurt", SoundEvents.ENTITY_HOSTILE_HURT);
-    public static final SoundEvent ENTITY_COCKATRICE_SPIT = childEvent("entity.cockatrice.spit", SoundEvents.ENTITY_LLAMA_SPIT);
 
     public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", SoundEvents.ENTITY_PARROT_AMBIENT);
     public static final SoundEvent ENTITY_MOA_GLIDING = childEvent("entity.moa.gliding", SoundEvents.ENTITY_PHANTOM_FLAP);

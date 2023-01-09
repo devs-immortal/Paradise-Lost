@@ -6,10 +6,6 @@ import net.minecraft.tag.TagKey;
 import net.minecraft.util.registry.Registry;
 
 public class ParadiseLostEntityTypeTags {
-    public static final TagKey<EntityType<?>> SWET_TRANSFORMERS_BLUE = register("swet_transformers/blue");
-    public static final TagKey<EntityType<?>> SWET_TRANSFORMERS_GOLDEN = register("swet_transformers/golden");
-    public static final TagKey<EntityType<?>> SWET_TRANSFORMERS_PURPLE = register("swet_transformers/purple");
-    public static final TagKey<EntityType<?>> SWET_TRANSFORMERS_VERMILION = register("swet_transformers/vermilion");
 
     public static final TagKey<EntityType<?>> VENOM_IMMUNITY = register("condition_immunities/venom");
     public static final TagKey<EntityType<?>> ABSTENTINE_TOXICITY_IMMUNITY = register("condition_immunities/abstentine_toxicity");

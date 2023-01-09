@@ -19,7 +19,7 @@ import net.id.paradiselost.blocks.natural.cloud.PinkParadiseLostCloudBlock;
 import net.id.paradiselost.blocks.natural.crop.AmadrysCropBlock;
 import net.id.paradiselost.blocks.natural.crop.BlueberryBushBlock;
 import net.id.paradiselost.blocks.natural.crop.FlaxCropBlock;
-import net.id.paradiselost.blocks.natural.crop.SwetrootCropBlock;
+import net.id.paradiselost.blocks.natural.crop.SwedrootCropBlock;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
@@ -344,7 +344,7 @@ public class ParadiseLostBlocks {
 
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(shrub().mapColor(MapColor.PINK)), flammablePlant, cutoutMippedRenderLayer);
     public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(crop().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
-    public static final SwetrootCropBlock SWEDROOT = add("swedroot", new SwetrootCropBlock(shrub().mapColor(MapColor.BLUE)), flammablePlant, cutoutRenderLayer);
+    public static final SwedrootCropBlock SWEDROOT = add("swedroot", new SwedrootCropBlock(shrub().mapColor(MapColor.BLUE)), flammablePlant, cutoutRenderLayer);
 
     public static final Block FLAXWEAVE_CUSHION = add("flaxweave_cushion", new Block(Settings.of(Material.WOOL).mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));
 
@@ -393,15 +393,6 @@ public class ParadiseLostBlocks {
     public static final CherineTorchBlock CHERINE_TORCH = addImmediately("cherine_torch", new CherineTorchBlock(cherineTorch()), cutoutRenderLayer);
     public static final CherineWallTorchBlock CHERINE_TORCH_WALL = addImmediately("cherine_wall_torch", new CherineWallTorchBlock(cherineTorch().dropsLike(CHERINE_TORCH)), cutoutRenderLayer);
 
-    // Swet Drops
-    private static Settings swetDrop() {
-        return of(Material.SOLID_ORGANIC, MapColor.CLEAR).breakInstantly().noCollision();
-    }
-
-//    public static final SwetDropBlock SWET_DROP = add("swet_drop", new SwetDropBlock(swetDrop(), () -> ParadiseLostEntityTypes.WHITE_SWET));
-//    public static final SwetDropBlock BLUE_SWET_DROP = add("blue_swet_drop", new SwetDropBlock(swetDrop(), () -> ParadiseLostEntityTypes.BLUE_SWET));
-//    public static final SwetDropBlock GOLDEN_SWET_DROP = add("golden_swet_drop", new SwetDropBlock(swetDrop(), () -> ParadiseLostEntityTypes.GOLDEN_SWET));
-//    public static final SwetDropBlock PURPLE_SWET_DROP = add("purple_swet_drop", new SwetDropBlock(swetDrop(), () -> ParadiseLostEntityTypes.PURPLE_SWET));
     // Usables
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);

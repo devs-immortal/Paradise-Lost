@@ -11,7 +11,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
-public class SwetrootCropBlock extends CropBlock {
+public class SwedrootCropBlock extends CropBlock {
     private static final VoxelShape[] AGE_TO_SHAPE = new VoxelShape[] {
         Block.createCuboidShape(0, 14, 0, 16, 16, 16),
         Block.createCuboidShape(0, 12, 0, 16, 16, 16),
@@ -23,7 +23,7 @@ public class SwetrootCropBlock extends CropBlock {
         Block.createCuboidShape(0, 0, 0, 16, 16, 16)
     };
     
-    public SwetrootCropBlock(Settings settings) {
+    public SwedrootCropBlock(Settings settings) {
         super(settings.offsetType(OffsetType.XZ));
     }
     
