@@ -14,9 +14,4 @@ public class ParadiseLostToolMaterials {
     public static final ToolMaterial GRAVITITE = ToolMaterialsAccessor.callInit("PARADISE_LOST_GRAVITITE", -1,
             MiningLevels.DIAMOND, 1561, 8f, 3f, 10, IngredientUtil.EMPTY);
 
-    public static final ToolMaterial VALKYRIE = ToolMaterialsAccessor.callInit("PARADISE_LOST_VALKYRIE", -1,
-            MiningLevels.NETHERITE, 2164, 10f, 4f, 8, IngredientUtil.EMPTY);
-
-    public static final ToolMaterial LEGENDARY = ToolMaterialsAccessor.callInit("PARADISE_LOST_LEGENDARY", -1,
-            MiningLevels.NETHERITE, 2164, 10f, 4f, 8, IngredientUtil.EMPTY);
 }

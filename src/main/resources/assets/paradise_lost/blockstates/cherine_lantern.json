@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "paradise_lost:block/cherine_lantern"
+    },
+    "hanging=true": {
+      "model": "paradise_lost:block/cherine_lantern_hanging"
+    }
+  }
+}

@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.id.incubus_core.woodtypefactory.api.chest.ChestFactory;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.decorative.*;
-import net.id.paradiselost.blocks.mechanical.AmbrosiumCampfireBlock;
+import net.id.paradiselost.blocks.mechanical.CherineCampfireBlock;
 import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
 import net.id.paradiselost.blocks.mechanical.FourBiteCakeBlock;
 import net.id.paradiselost.blocks.mechanical.IncubatorBlock;
@@ -155,7 +155,7 @@ public class ParadiseLostBlocks {
         return copy(POTTED_OAK_SAPLING);
     }
 
-    public static final CampfireBlock AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", new AmbrosiumCampfireBlock(false, 1, Settings.copy(CAMPFIRE)), cutoutRenderLayer);
+    public static final CampfireBlock CHERINE_CAMPFIRE = add("cherine_campfire", new CherineCampfireBlock(false, 1, Settings.copy(CAMPFIRE)), cutoutRenderLayer);
 
     // Aurel Wood
     private static final WoodSettingsFactory aurelColors = new WoodSettingsFactory(MapColor.DARK_RED, MapColor.DARK_RED);
@@ -375,25 +375,25 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostTallBrushBlock WILD_FLAX = add("wild_flax", new ParadiseLostTallBrushBlock(flower()), flammablePlant, cutoutMippedRenderLayer);
 
     // Ores
-    public static final OreBlock AMBROSIUM_ORE = add("ambrosium_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
+    public static final OreBlock CHERINE_ORE = add("cherine_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
     public static final OreBlock OLVITE_ORE = add("olvite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
     public static final FloatingBlock GRAVITITE_ORE = add("gravitite_ore", new FloatingBlock(false, of(Material.STONE).requiresTool().strength(5f).sounds(BlockSoundGroup.STONE), UniformIntProvider.create(0, 2)));
-    public static final Block AMBROSIUM_BLOCK = add("ambrosium_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
+    public static final Block CHERINE_BLOCK = add("cherine_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
     public static final Block OLVITE_BLOCK = add("olvite_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     public static final FloatingBlock BLOCK_OF_GRAVITITE = add("block_of_gravitite", new FloatingBlock(false, of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
     public static final FloatingBlock GRAVITITE_LEVITATOR = add("gravitite_levitator", new FloatingBlock(true, of(Material.WOOD).strength(3f, 3f).sounds(BlockSoundGroup.WOOD)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
-    public static final AmbrosiumLanternBlock AMBROSIUM_LANTERN = add("ambrosium_lantern", new AmbrosiumLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);
+    public static final CherineLanternBlock CHERINE_LANTERN = add("cherine_lantern", new CherineLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);
     public static final ParadiseLostPortalBlock BLUE_PORTAL = add("blue_portal", new ParadiseLostPortalBlock(copy(NETHER_PORTAL).nonOpaque().blockVision(never).mapColor(MapColor.BLUE)), translucentRenderLayer);
 
     // Torches
-    private static Settings ambrosiumTorch() {
+    private static Settings cherineTorch() {
         return copy(TORCH).ticksRandomly().luminance(state -> 15);
     }
 
-    public static final AmbrosiumTorchBlock AMBROSIUM_TORCH = addImmediately("ambrosium_torch", new AmbrosiumTorchBlock(ambrosiumTorch()), cutoutRenderLayer);
-    public static final AmbrosiumWallTorchBlock AMBROSIUM_TORCH_WALL = addImmediately("ambrosium_wall_torch", new AmbrosiumWallTorchBlock(ambrosiumTorch().dropsLike(AMBROSIUM_TORCH)), cutoutRenderLayer);
+    public static final CherineTorchBlock CHERINE_TORCH = addImmediately("cherine_torch", new CherineTorchBlock(cherineTorch()), cutoutRenderLayer);
+    public static final CherineWallTorchBlock CHERINE_TORCH_WALL = addImmediately("cherine_wall_torch", new CherineWallTorchBlock(cherineTorch().dropsLike(CHERINE_TORCH)), cutoutRenderLayer);
 
     // Swet Drops
     private static Settings swetDrop() {

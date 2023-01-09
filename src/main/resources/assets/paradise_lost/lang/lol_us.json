@@ -234,7 +234,7 @@
 
   "block.paradise_lost.wild_flax" : "wild aethr strin",
 
-  "block.paradise_lost.ambrosium_ore": "appl Ore",
+  "block.paradise_lost.cherine_ore": "appl Ore",
   "block.paradise_lost.olvite_ore": "zanit Ore",
   "block.paradise_lost.gravitite_ore": "floty Ore",
   "block.paradise_lost.olvite_block": "Blok of Zanit",
@@ -242,10 +242,10 @@
 
   "block.paradise_lost.gravitite_levitator": "floty elvatur",
   "block.paradise_lost.olvite_chain": "zanit rope",
-  "block.paradise_lost.ambrosium_lantern": "appl light",
+  "block.paradise_lost.cherine_lantern": "appl light",
   "block.paradise_lost.blue_portal": "Aethr Portel",
 
-  "block.paradise_lost.ambrosium_torch": "appl fir stick",
+  "block.paradise_lost.cherine_torch": "appl fir stick",
 
   "block.paradise_lost.incubator": "moa makr",
   "block.paradise_lost.food_bowl": "moa plate",
@@ -289,7 +289,7 @@
   "item.paradise_lost.crow_eye": "birdy eye",
   "item.paradise_lost.crow_eye.tooltip": "hmm ???",
   "item.paradise_lost.swet_ball": "Swetty ballz",
-  "item.paradise_lost.ambrosium_shard": "apply Shard",
+  "item.paradise_lost.cherine": "apply Shard",
   "item.paradise_lost.olvite": "zanit gem",
   "item.paradise_lost.olvite_nugget": "zanit bit",
   "item.paradise_lost.gravitite_gemstone": "floty gem",
@@ -333,7 +333,7 @@
   "item.paradise_lost.cold_parachute": "slow freezy fallr",
   "item.paradise_lost.golden_parachute": "shiny slow fallr",
 
-  "item.paradise_lost.ambrosium_bloodstone": "appl info getr",
+  "item.paradise_lost.cherine_bloodstone": "appl info getr",
   "item.paradise_lost.olvite_bloodstone": "zanit info getr",
   "item.paradise_lost.gravitite_bloodstone": "floaty info getr",
   "item.paradise_lost.abstentine_bloodstone": "alchy info getr",
@@ -491,7 +491,7 @@
   "commands.paradise_lost.lore.get.completed" : "compleded",
 
 
-  "info.paradise_lost.bloodstone.ambrosium": "dos it luv u",
+  "info.paradise_lost.bloodstone.cherine": "dos it luv u",
   "info.paradise_lost.bloodstone.olvite": "many thoughts",
   "info.paradise_lost.bloodstone.gravitite": "what it want",
   "info.paradise_lost.bloodstone.abstentine": "look into soul",

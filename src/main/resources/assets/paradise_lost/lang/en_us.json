@@ -82,7 +82,7 @@
   "block.paradise_lost.carved_stone_eye": "Carved Stone Eye",
   "block.paradise_lost.carved_stone_eye_lit": "Lit Carved Stone Eye",
 
-  "block.paradise_lost.ambrosium_campfire": "Ambrosium Campfire",
+  "block.paradise_lost.cherine_campfire": "Cherine Campfire",
 
   "block.paradise_lost.aurel_sapling": "Aurel Sapling",
   "block.paradise_lost.aurel_log": "Aurel Log",
@@ -240,19 +240,19 @@
 
   "block.paradise_lost.wild_flax" : "Wild Flax",
 
-  "block.paradise_lost.ambrosium_ore": "Ambrosium Ore",
+  "block.paradise_lost.cherine_ore": "Cherine Ore",
   "block.paradise_lost.olvite_ore": "Olvite Ore",
   "block.paradise_lost.gravitite_ore": "Gravitite Ore",
-  "block.paradise_lost.ambrosium_block": "Block of Ambrosium",
+  "block.paradise_lost.cherine_block": "Block of Cherine",
   "block.paradise_lost.olvite_block": "Block of Olvite",
   "block.paradise_lost.block_of_gravitite": "Block of Gravitite",
 
   "block.paradise_lost.gravitite_levitator": "Gravitite Levitator",
   "block.paradise_lost.olvite_chain": "Olvite Chain",
-  "block.paradise_lost.ambrosium_lantern": "Ambrosium Lantern",
+  "block.paradise_lost.cherine_lantern": "Cherine Lantern",
   "block.paradise_lost.blue_portal": "Paradise Portal",
 
-  "block.paradise_lost.ambrosium_torch": "Ambrosium Torch",
+  "block.paradise_lost.cherine_torch": "Cherine Torch",
 
   "block.paradise_lost.incubator": "Incubator",
   "block.paradise_lost.food_bowl": "Feeding Trough",
@@ -296,7 +296,7 @@
   "item.paradise_lost.crow_eye": "Crow's Eye",
   "item.paradise_lost.crow_eye.tooltip": "???",
   "item.paradise_lost.swet_ball": "Swet Ball",
-  "item.paradise_lost.ambrosium_shard": "Ambrosium Shard",
+  "item.paradise_lost.cherine": "Cherine Shard",
   "item.paradise_lost.olvite": "Olvite",
   "item.paradise_lost.olvite_nugget": "Olvite Nugget",
   "item.paradise_lost.gravitite_gemstone": "Gravitite Gemstone",
@@ -326,7 +326,7 @@
   "item.paradise_lost.cold_parachute": "Cold Parachute",
   "item.paradise_lost.golden_parachute": "Golden Parachute",
 
-  "item.paradise_lost.ambrosium_bloodstone": "Ambrosium Bloodstone",
+  "item.paradise_lost.cherine_bloodstone": "Cherine Bloodstone",
   "item.paradise_lost.olvite_bloodstone": "Olvite Bloodstone",
   "item.paradise_lost.gravitite_bloodstone": "Gravitite Bloodstone",
   "item.paradise_lost.abstentine_bloodstone": "Abstentine Bloodstone",
@@ -459,7 +459,7 @@
   "commands.paradise_lost.lore.get.completed" : "completed",
 
 
-  "info.paradise_lost.bloodstone.ambrosium": "Peer into the heart",
+  "info.paradise_lost.bloodstone.cherine": "Peer into the heart",
   "info.paradise_lost.bloodstone.olvite": "Peer into the mind",
   "info.paradise_lost.bloodstone.gravitite": "Peer into the will",
   "info.paradise_lost.bloodstone.abstentine": "Peer into the soul",

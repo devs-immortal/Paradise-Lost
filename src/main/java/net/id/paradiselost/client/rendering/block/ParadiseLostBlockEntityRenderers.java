@@ -11,7 +11,7 @@ public class ParadiseLostBlockEntityRenderers {
     @Environment(EnvType.CLIENT)
     public static void initClient() {
         BlockEntityRendererRegistry.register(ParadiseLostBlockEntityTypes.INCUBATOR, IncubatorBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ParadiseLostBlockEntityTypes.AMBROSIUM_CAMPFIRE, AmbrosiumCampfireBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntityRenderer::new);
 //        BlockEntityRendererRegistry.register(ParadiseLostBlockEntityTypes.DUNGEON_SWITCH, DungeonSwitchBlockEntityRenderer::new);
     }
 }

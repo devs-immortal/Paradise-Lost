@@ -26,7 +26,7 @@ public class ParadiseLostItemGroups {
 
     public static final ItemGroup PARADISE_LOST_RESOURCES = build(
             ParadiseLost.locate("resources"),
-            () -> new ItemStack(ParadiseLostItems.AMBROSIUM_SHARD));
+            () -> new ItemStack(ParadiseLostItems.CHERINE));
 
     public static final ItemGroup PARADISE_LOST_MISC = build(
             ParadiseLost.locate("misc"),

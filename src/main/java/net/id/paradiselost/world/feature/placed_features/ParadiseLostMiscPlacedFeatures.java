@@ -22,7 +22,7 @@ public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
 
     public static final RegistryEntry<PlacedFeature> WATER_SPRING = register("water_spring", ParadiseLostMiscConfiguredFeatures.WATER_SPRING);
 
-    public static final RegistryEntry<PlacedFeature> ORE_AMBROSIUM = register("ore_ambrosium", ParadiseLostMiscConfiguredFeatures.ORE_AMBROSIUM, CountPlacementModifier.of(20), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(320)), BiomePlacementModifier.of());
+    public static final RegistryEntry<PlacedFeature> ORE_CHERINE = register("ore_cherine", ParadiseLostMiscConfiguredFeatures.ORE_CHERINE, CountPlacementModifier.of(20), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(320)), BiomePlacementModifier.of());
     public static final RegistryEntry<PlacedFeature> ORE_GRAVITITE = register("ore_gravitite", ParadiseLostMiscConfiguredFeatures.ORE_GRAVITITE, CountPlacementModifier.of(3), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(32), YOffset.aboveBottom(128)), BiomePlacementModifier.of());
     public static final RegistryEntry<PlacedFeature> ORE_OLVITE = register("ore_olvite", ParadiseLostMiscConfiguredFeatures.ORE_OLVITE, CountPlacementModifier.of(16), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(384)), BiomePlacementModifier.of());
     // Plato

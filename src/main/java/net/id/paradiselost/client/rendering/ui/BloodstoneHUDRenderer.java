@@ -40,8 +40,8 @@ public class BloodstoneHUDRenderer {
                     RenderSystem.enableBlend();
                     RenderSystem.defaultBlendFunc();
                     matrixStack.translate(client.getWindow().getScaledWidth() / 2f, client.getWindow().getScaledHeight() / 2f, 0);
-                    if (stack.getItem() instanceof AmbrosiumBloodstoneItem) {
-                        renderAmbrosium(matrixStack, client, capturedData);
+                    if (stack.getItem() instanceof CherineBloodstoneItem) {
+                        renderCherine(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof OlviteBloodstoneItem) {
                         renderOlvite(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof GravititeBloodstoneItem) {
@@ -76,7 +76,7 @@ public class BloodstoneHUDRenderer {
         return capturedData.uuid.equals(entity.getUuid());
     }
 
-    private static void renderAmbrosium(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+    private static void renderCherine(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
         renderRing(matrixStack, 0, 0);
         renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);

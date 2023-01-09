@@ -121,7 +121,7 @@ public class BloodstoneCapturedData {
             bloodstoneCapturedData.DROP_MULTIPLIER = MoaAttributes.DROP_MULTIPLIER.getRatingTierTranslationKey(moa);
             bloodstoneCapturedData.MAX_HEALTH = MoaAttributes.MAX_HEALTH.getRatingTierTranslationKey(moa);
         }
-        //Ambrosium
+        //Cherine
         bloodstoneCapturedData.uuid = entity.getUuid();
         bloodstoneCapturedData.name = entity.getName();
         bloodstoneCapturedData.HP = String.format("%.1f", entity.getHealth()) + "/" + String.format("%.1f", entity.getMaxHealth());

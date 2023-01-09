@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:cherine_torch"
+    },
+    "X": {
+      "item": "paradise_lost:olvite_nugget"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:cherine_lantern"
+  }
+}

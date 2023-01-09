@@ -39,7 +39,7 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryEntry<ConfiguredFeature<BoulderFeatureConfig, ?>> THICKET_BOULDER = register("thicket_boulder", ParadiseLostFeatures.BOULDER, Configs.THICKET_BOULDER_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<BoulderFeatureConfig, ?>> GOLDEN_BOULDER = register("golden_boulder", ParadiseLostFeatures.BOULDER, Configs.GOLDEN_BOULDER_CONFIG);
 
-    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_AMBROSIUM = register("ore_ambrosium", Feature.ORE, Configs.ore(AMBROSIUM_ORE, 14));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_CHERINE = register("ore_cherine", Feature.ORE, Configs.ore(CHERINE_ORE, 14));
     public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_GRAVITITE = register("ore_gravitite", Feature.ORE, Configs.ore(GRAVITITE_ORE, 6));
     public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_OLVITE = register("ore_olvite", Feature.ORE, Configs.ore(OLVITE_ORE, 9));
     // Plato

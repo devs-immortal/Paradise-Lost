@@ -13,13 +13,13 @@ import net.id.paradiselost.items.food.ParadiseLostFoodComponent;
 import net.id.paradiselost.items.food.ValkyrieMilkItem;
 import net.id.paradiselost.items.food.WhiteAppleItem;
 import net.id.paradiselost.items.misc.*;
-import net.id.paradiselost.items.resources.AmbrosiumShardItem;
+import net.id.paradiselost.items.resources.CherineShardItem;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.items.tools.AurelBucketItem;
 import net.id.paradiselost.items.tools.VialItem;
 import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
-import net.id.paradiselost.items.tools.bloodstone.AmbrosiumBloodstoneItem;
+import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.GravititeBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
 import net.id.paradiselost.items.utils.ParadiseLostRarity;
@@ -64,7 +64,7 @@ public class ParadiseLostItems {
     public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
     public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.crow_eye.tooltip").formatted(Formatting.GRAY))));
     public static final Item SWET_BALL = add("swet_ball", new Item(resource), swetColor);
-    public static final AmbrosiumShardItem AMBROSIUM_SHARD = add("ambrosium_shard", new AmbrosiumShardItem(resource), fuel(500));
+    public static final Item CHERINE = add("cherine", new CherineShardItem(resource), fuel(500));
     public static final Item OLVITE = add("olvite", new Item(resource));
     public static final Item OLVITE_NUGGET = add("olvite_nugget", new Item(resource));
     public static final Item GRAVITITE_GEM = add("gravitite_gemstone", new Item(resource));
@@ -104,7 +104,7 @@ public class ParadiseLostItems {
     public static final TrinketItem CLOUD_PARACHUTE = add("cold_parachute", new ParachuteTrinketItem(unstackableTool, "cloud_parachute"));
     public static final TrinketItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new ParachuteTrinketItem(tool().maxCount(1).maxDamage(20), "golden_parachute"));
 
-    public static final AmbrosiumBloodstoneItem AMBROSIUM_BLOODSTONE = add("ambrosium_bloodstone", new AmbrosiumBloodstoneItem(unstackableTool));
+    public static final CherineBloodstoneItem CHERINE_BLOODSTONE = add("cherine_bloodstone", new CherineBloodstoneItem(unstackableTool));
     public static final OlviteBloodstoneItem OLVITE_BLOODSTONE = add("olvite_bloodstone", new OlviteBloodstoneItem(unstackableTool));
     public static final GravititeBloodstoneItem GRAVITITE_BLOODSTONE = add("gravitite_bloodstone", new GravititeBloodstoneItem(unstackableTool));
     public static final AbstentineBloodstoneItem ABSTENTINE_BLOODSTONE = add("abstentine_bloodstone", new AbstentineBloodstoneItem(unstackableTool));
@@ -221,11 +221,11 @@ public class ParadiseLostItems {
     public static final BlockItem WISTERIA_PLANKS = add("wisteria_planks", ParadiseLostBlocks.WISTERIA_PLANKS, building_block);
     public static final BlockItem AUREL_BOOKSHELF = add("aurel_bookshelf", ParadiseLostBlocks.AUREL_BOOKSHELF, building_block);
     // ores
-    public static final BlockItem AMBROSIUM_ORE = add("ambrosium_ore", ParadiseLostBlocks.AMBROSIUM_ORE, building_block);
+    public static final BlockItem CHERINE_ORE = add("cherine_ore", ParadiseLostBlocks.CHERINE_ORE, building_block);
     public static final BlockItem OLVITE_ORE = add("olvite_ore", ParadiseLostBlocks.OLVITE_ORE, building_block);
     public static final BlockItem GRAVITITE_ORE = add("gravitite_ore", ParadiseLostBlocks.GRAVITITE_ORE, building_block);
     // ore blocks
-    public static final BlockItem AMBROSIUM_BLOCK = add("ambrosium_block", ParadiseLostBlocks.AMBROSIUM_BLOCK, building_block, fuel(5000));
+    public static final BlockItem CHERINE_BLOCK = add("cherine_block", ParadiseLostBlocks.CHERINE_BLOCK, building_block, fuel(5000));
     public static final BlockItem OLVITE_BLOCK = add("olvite_block", ParadiseLostBlocks.OLVITE_BLOCK, building_block);
     public static final BlockItem BLOCK_OF_GRAVITITE = add("block_of_gravitite", ParadiseLostBlocks.BLOCK_OF_GRAVITITE, building_block);
     // move this somewhere else
@@ -386,11 +386,11 @@ public class ParadiseLostItems {
     public static final BlockItem AMADRYS_BUNDLE = add("amadrys_bundle", ParadiseLostBlocks.AMADRYS_BUNDLE, decoration());
 
     // lights
-    public static final BlockItem AMBROSIUM_LANTERN = add("ambrosium_lantern", ParadiseLostBlocks.AMBROSIUM_LANTERN, decoration);
-    public static final WallStandingBlockItem AMBROSIUM_TORCH = add("ambrosium_torch", new WallStandingBlockItem(ParadiseLostBlocks.AMBROSIUM_TORCH, ParadiseLostBlocks.AMBROSIUM_TORCH_WALL, decoration));
+    public static final BlockItem CHERINE_LANTERN = add("cherine_lantern", ParadiseLostBlocks.CHERINE_LANTERN, decoration);
+    public static final WallStandingBlockItem CHERINE_TORCH = add("cherine_torch", new WallStandingBlockItem(ParadiseLostBlocks.CHERINE_TORCH, ParadiseLostBlocks.CHERINE_TORCH_WALL, decoration));
     // util blocks (enchanter, freezer, etc.)
 
-    public static final BlockItem AMBROSIUM_CAMPFIRE = add("ambrosium_campfire", ParadiseLostBlocks.AMBROSIUM_CAMPFIRE, decoration);
+    public static final BlockItem CHERINE_CAMPFIRE = add("cherine_campfire", ParadiseLostBlocks.CHERINE_CAMPFIRE, decoration);
 
     // door-like things
     public static final BlockItem AUREL_DOOR = add("aurel_door", ParadiseLostBlocks.AUREL_DOOR, decoration);
