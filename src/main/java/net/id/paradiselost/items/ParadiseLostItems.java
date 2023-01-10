@@ -55,7 +55,7 @@ public class ParadiseLostItems {
     private static final Settings resource = resource();
 
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource));
-    public static final Item hellenrose_petal = add("hellenrose_petal", new Item(resource), compostable65);
+    public static final Item HELLENROSE_PETAL = add("hellenrose_petal", new Item(resource), compostable65);
     public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
     public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.crow_eye.tooltip").formatted(Formatting.GRAY))));
     public static final Item CHERINE = add("cherine", new Item(resource), fuel(500));
