@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.id.incubus_core.blocklikeentities.api.client.BlockLikeEntityRenderer;
-import net.id.paradiselost.client.rendering.entity.hostile.AechorPlantRenderer;
+import net.id.paradiselost.client.rendering.entity.hostile.HellenroseRenderer;
 import net.id.paradiselost.client.rendering.entity.misc.RookRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.ParadiseHareRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.MoaEntityRenderer;
@@ -22,7 +22,7 @@ public class ParadiseLostEntityRenderers {
         register(ParadiseLostEntityTypes.SLIDER, BlockLikeEntityRenderer::new);
 
         // hostile
-        register(ParadiseLostEntityTypes.AECHOR_PLANT, AechorPlantRenderer::new);
+        register(ParadiseLostEntityTypes.HELLENROSE, HellenroseRenderer::new);
 
         // passive
         register(ParadiseLostEntityTypes.MOA, MoaEntityRenderer::new);

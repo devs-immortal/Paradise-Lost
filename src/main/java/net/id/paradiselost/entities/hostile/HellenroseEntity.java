@@ -33,12 +33,12 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 
-public class AechorPlantEntity extends ParadiseLostAnimalEntity implements RangedAttackMob {
+public class HellenroseEntity extends ParadiseLostAnimalEntity implements RangedAttackMob {
     public final int poisonRemaining;
     public float sinage;
     public int size;
 
-    public AechorPlantEntity(EntityType<? extends AechorPlantEntity> entityType, World world) {
+    public HellenroseEntity(EntityType<? extends HellenroseEntity> entityType, World world) {
         super(entityType, world);
 
         this.size = this.random.nextInt(4) + 1;
@@ -48,7 +48,7 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
         this.setPosition(Math.floor(this.getX()) + 0.5, this.getY(), Math.floor(this.getZ()) + 0.5);
     }
 
-    public static DefaultAttributeContainer.Builder createAechorPlantAttributes() {
+    public static DefaultAttributeContainer.Builder createHellenroseAttributes() {
         return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0);
     }
 
@@ -61,16 +61,16 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
         super.initGoals();
 
         goalSelector.add(4, new ProjectileAttackGoal(this, 0.0D, 30, 1.0F));
-        targetSelector.add(1, new RevengeGoal(this, AechorPlantEntity.class));
+        targetSelector.add(1, new RevengeGoal(this, HellenroseEntity.class));
         targetSelector.add(2, new ActiveTargetGoal<>(this, LivingEntity.class, 10, true, false,
-                entity -> !(entity instanceof AechorPlantEntity)));
+                entity -> !(entity instanceof HellenroseEntity)));
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (!this.world.getBlockState(this.getBlockPos().down(1)).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)) {
+        if (!this.world.getBlockState(this.getBlockPos().down(1)).isIn(ParadiseLostBlockTags.HELLENROSE_VALID_GROUND)) {
             this.kill();
         }
 
@@ -90,8 +90,8 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
         return distance <= 6.0F && super.canSee(entity);
     }
 
-    public static boolean canSpawn(EntityType<? extends AechorPlantEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isIn(ParadiseLostBlockTags.AECHOR_PLANT_VALID_GROUND)
+    public static boolean canSpawn(EntityType<? extends HellenroseEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isIn(ParadiseLostBlockTags.HELLENROSE_VALID_GROUND)
                 && world.getBlockState(pos).isAir()
                 && world.getBaseLightLevel(pos, 0) > 8;
     }
@@ -105,7 +105,7 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
         double distance = Math.sqrt((float) (x * x + z * z));
 
         needle.setVelocity(x, y + distance * 0.20000000298023224D, z, 1.0F, (float) (14 - this.world.getDifficulty().getId() * 4));
-        this.playSound(ParadiseLostSoundEvents.ENTITY_AECHOR_PLANT_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
+        this.playSound(ParadiseLostSoundEvents.ENTITY_HELLENROSE_SHOOT, 1.0F, 1.2F / (this.getRandom().nextFloat() * 0.2F + 0.9F));
         this.world.spawnEntity(needle);
     }
 
@@ -197,7 +197,7 @@ public class AechorPlantEntity extends ParadiseLostAnimalEntity implements Range
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ParadiseLostSoundEvents.ENTITY_AECHOR_PLANT_DEATH;
+        return ParadiseLostSoundEvents.ENTITY_HELLENROSE_DEATH;
     }
 
     @Override

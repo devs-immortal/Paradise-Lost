@@ -18,7 +18,7 @@ import java.util.Map;
 public class ParadiseLostModelLayers {
     public static final Map<EntityModelLayer, TexturedModelData> ENTRIES = Maps.newHashMap();
 
-    public static final EntityModelLayer AECHOR_PLANT = register("aechor_plant", "main", ParadiseLostPlantModel.getTexturedModelData());
+    public static final EntityModelLayer HELLENROSE = register("hellenrose", "main", ParadiseLostPlantModel.getTexturedModelData());
     public static final EntityModelLayer PARADISE_HARE = register("corsican_hare", "main", ParadiseHareModel.getTexturedModelData());
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer ROOK = register("rook", "main", RookModel.getTexturedModelData());

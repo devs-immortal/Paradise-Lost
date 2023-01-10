@@ -54,8 +54,8 @@ public final class ParadiseLostSoundEvents {
 
     public static final SoundEvent EFFECT_SIMMERING_SIMMER = childEvent("effect.simmering.simmer", SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT);
 
-    public static final SoundEvent ENTITY_AECHOR_PLANT_DEATH = childEvent("entity.aechor_plant.death", SoundEvents.ENTITY_GENERIC_BIG_FALL);
-    public static final SoundEvent ENTITY_AECHOR_PLANT_SHOOT = childEvent("entity.aechor_plant.shoot", SoundEvents.ENTITY_SKELETON_SHOOT);
+    public static final SoundEvent ENTITY_HELLENROSE_DEATH = childEvent("entity.hellenrose.death", SoundEvents.ENTITY_GENERIC_BIG_FALL);
+    public static final SoundEvent ENTITY_HELLENROSE_SHOOT = childEvent("entity.hellenrose.shoot", SoundEvents.ENTITY_SKELETON_SHOOT);
 
     public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", SoundEvents.ENTITY_PARROT_AMBIENT);
     public static final SoundEvent ENTITY_MOA_GLIDING = childEvent("entity.moa.gliding", SoundEvents.ENTITY_PHANTOM_FLAP);

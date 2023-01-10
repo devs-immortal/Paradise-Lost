@@ -268,7 +268,7 @@
   "entity.paradise_lost.purple_swet": "poisy swet",
   "entity.paradise_lost.white_swet": "swet",
   "entity.paradise_lost.golden_swet": "shiny Swet",
-  "entity.paradise_lost.aechor_plant": "meanie plant",
+  "entity.paradise_lost.hellenrose": "meanie plant",
   "entity.paradise_lost.chest_mimic": "preten presnt",
   "entity.paradise_lost.cockatrice": "coctrise",
   "entity.paradise_lost.moa": "moa",
@@ -283,7 +283,7 @@
 
 
   "item.paradise_lost.golden_amber": "shiny sap",
-  "item.paradise_lost.aechor_petal": "aechor Petal",
+  "item.paradise_lost.hellenrose_petal": "Hellenrose Petal",
   "item.paradise_lost.nightmare_fuel": "scawy stufz",
   "item.paradise_lost.nightmare_fuel.tooltip": "frothy",
   "item.paradise_lost.crow_eye": "birdy eye",
@@ -397,7 +397,7 @@
   "item.paradise_lost.vial": "fast durt Vial",
   "item.paradise_lost.cloud_vial": "aircloud Vial",
 
-  "item.paradise_lost.aechor_plant_spawn_egg": "poisy plant spawny",
+  "item.paradise_lost.hellenrose_spawn_egg": "poisy plant spawny",
   "item.paradise_lost.cockatrice_spawn_egg": "coctrise spawny",
   "item.paradise_lost.corsican_hare_spawn_egg": "aethr rabbit spawny",
   "item.paradise_lost.aerwhale_spawn_egg": "aethr fish spawny",
@@ -530,8 +530,8 @@
 
   "subtitles.paradise_lost.entity.swet.attack": "swet makes luvv <3",
 
-  "subtitles.paradise_lost.entity.aechor_plant.death": "poisy plant dies :(",
-  "subtitles.paradise_lost.entity.aechor_plant.shoot": "Poisy plant shoot",
+  "subtitles.paradise_lost.entity.hellenrose.death": "poisy plant dies :(",
+  "subtitles.paradise_lost.entity.hellenrose.shoot": "Poisy plant shoot",
 
   "subtitles.paradise_lost.entity.cockatrice.ambient": "coctrise ambiences",
   "subtitles.paradise_lost.entity.cockatrice.death": "coctrise dies",

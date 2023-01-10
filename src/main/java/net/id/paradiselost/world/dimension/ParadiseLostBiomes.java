@@ -394,7 +394,7 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 2)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.HELLENROSE, 50, 1, 2)
                         ),
                         SpawnGroup.CREATURE, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
@@ -404,7 +404,7 @@ public final class ParadiseLostBiomes {
                 ),
                 
                 Map.of(
-                    ParadiseLostEntityTypes.AECHOR_PLANT, SpawnCost.of(0.75, 0.07)
+                    ParadiseLostEntityTypes.HELLENROSE, SpawnCost.of(0.75, 0.07)
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.4F).downfall(2)
@@ -443,7 +443,7 @@ public final class ParadiseLostBiomes {
                         merge(
                                 Map.of(
                                         SpawnGroup.MONSTER, List.of(
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 2)
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.HELLENROSE, 50, 1, 2)
                                         ),
                                         SpawnGroup.CREATURE, List.of(
                                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
@@ -453,7 +453,7 @@ public final class ParadiseLostBiomes {
                         ),
 
                         Map.of(
-                                ParadiseLostEntityTypes.AECHOR_PLANT, SpawnCost.of(0.75, 0.07)
+                                ParadiseLostEntityTypes.HELLENROSE, SpawnCost.of(0.75, 0.07)
                         )
                 ))
                 .precipitation(Biome.Precipitation.RAIN).temperature(0.4F).downfall(2)
@@ -489,7 +489,7 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 100, 3, 7)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.HELLENROSE, 100, 3, 7)
                         ),
                         
                         SpawnGroup.CREATURE, List.of(
@@ -500,7 +500,7 @@ public final class ParadiseLostBiomes {
                 ),
                 
                 Map.of(
-                    ParadiseLostEntityTypes.AECHOR_PLANT, SpawnCost.of(0.7, 0.1)
+                    ParadiseLostEntityTypes.HELLENROSE, SpawnCost.of(0.7, 0.1)
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
@@ -645,7 +645,7 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.HELLENROSE, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
@@ -655,7 +655,7 @@ public final class ParadiseLostBiomes {
                     )
                 ),
                 Map.of(
-                    ParadiseLostEntityTypes.AECHOR_PLANT, SpawnCost.of(1, 0.1)
+                    ParadiseLostEntityTypes.HELLENROSE, SpawnCost.of(1, 0.1)
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.35F).downfall(2)

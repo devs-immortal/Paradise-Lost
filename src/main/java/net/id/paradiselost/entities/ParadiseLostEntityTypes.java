@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.block.SliderEntity;
-import net.id.paradiselost.entities.hostile.AechorPlantEntity;
+import net.id.paradiselost.entities.hostile.HellenroseEntity;
 import net.id.paradiselost.entities.misc.RookEntity;
 import net.id.paradiselost.entities.passive.ParadiseHareEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
@@ -51,8 +51,8 @@ public class ParadiseLostEntityTypes {
             ParadiseLostEntityTypes.<SliderEntity>of(SliderEntity::new, MISC, changing(0.98F, 0.98F), 10).trackedUpdateRate(20));
 
     // Hostile
-    public static final EntityType<AechorPlantEntity> AECHOR_PLANT = add("aechor_plant", of(AechorPlantEntity::new, MONSTER, changing(1f, 1f), 5),
-            attributes(AechorPlantEntity::createAechorPlantAttributes), spawnRestrictions(AechorPlantEntity::canSpawn));
+    public static final EntityType<HellenroseEntity> HELLENROSE = add("hellenrose", of(HellenroseEntity::new, MONSTER, changing(1f, 1f), 5),
+            attributes(HellenroseEntity::createHellenroseAttributes), spawnRestrictions(HellenroseEntity::canSpawn));
 
     // passive
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(1.0F, 2.0F), 5),

@@ -2,7 +2,7 @@ package net.id.paradiselost.client.model.entity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.paradiselost.entities.hostile.AechorPlantEntity;
+import net.id.paradiselost.entities.hostile.HellenroseEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -10,12 +10,12 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
+public class HellenroseModel extends EntityModel<HellenroseEntity> {
     private final ModelPart root;
     private final ModelPart[] petals;
     private final ModelPart[] leafs;
 
-    public AechorPlantModel(ModelPart modelRoot) {
+    public HellenroseModel(ModelPart modelRoot) {
         this.root = modelRoot.getChild("root");
         this.petals = new ModelPart[5];
         this.leafs = new ModelPart[5];
@@ -102,7 +102,7 @@ public class AechorPlantModel extends EntityModel<AechorPlantEntity> {
     }
 
     @Override
-    public void setAngles(AechorPlantEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(HellenroseEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.setRotationAngle(petals[0], 0, 2.8274F, 0.2618F);
         this.setRotationAngle(petals[1], 0, 0.3142F, -0.2618F);
         this.setRotationAngle(petals[2], 0.2618F, -0.6283F, 0.0F);

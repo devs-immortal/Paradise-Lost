@@ -55,7 +55,7 @@ public class ParadiseLostItems {
     private static final Settings resource = resource();
 
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource));
-    public static final Item AECHOR_PETAL = add("aechor_petal", new Item(resource), compostable65);
+    public static final Item hellenrose_petal = add("hellenrose_petal", new Item(resource), compostable65);
     public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
     public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.crow_eye.tooltip").formatted(Formatting.GRAY))));
     public static final Item CHERINE = add("cherine", new Item(resource), fuel(500));
@@ -152,7 +152,7 @@ public class ParadiseLostItems {
     public static final Item GOLDEN_KEY = add("golden_key", new Item(misc().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT)));
     */
 
-    public static final SpawnEggItem AECHOR_PLANT_SPAWN_EGG = add("aechor_plant_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.AECHOR_PLANT, 0x97DED4, 0x31897D, misc), spawnEggBehavior);
+    public static final SpawnEggItem HELLENROSE_SPAWN_EGG = add("hellenrose_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.HELLENROSE, 0x97DED4, 0x31897D, misc), spawnEggBehavior);
     //    public static final SpawnEggItem CHEST_MIMIC_SPAWN_EGG = null;
     public static final SpawnEggItem PARADISE_HARE_SPAWN_EGG = add("corsican_hare_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.PARADISE_HARE, 0xC5D6ED, 0x82A6D9, misc), spawnEggBehavior);
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc), spawnEggBehavior);

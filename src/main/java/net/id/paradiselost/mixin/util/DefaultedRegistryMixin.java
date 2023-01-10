@@ -97,7 +97,7 @@ public class DefaultedRegistryMixin {
             "stripped_golden_oak_wood", ParadiseLost.locate("stripped_mother_aurel_wood"),
             "blueberry_bush", ParadiseLost.locate("blackcurrant_bush"),
             /* ITEMS */
-            "aechor_petal", ParadiseLost.locate(""),
+            "aechor_petal", ParadiseLost.locate("hellenrose_petal"),
             "ambrosium_shard", ParadiseLost.locate("cherine"),
             "quicksoil_vial", ParadiseLost.locate("vial"),
             "aercloud_vial", ParadiseLost.locate("cloud_vial"),
