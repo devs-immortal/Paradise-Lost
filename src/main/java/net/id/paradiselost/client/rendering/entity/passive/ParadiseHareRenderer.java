@@ -4,29 +4,29 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.client.model.ParadiseLostModelLayers;
-import net.id.paradiselost.client.model.entity.AerbunnyModel;
-import net.id.paradiselost.entities.passive.AerbunnyEntity;
+import net.id.paradiselost.client.model.entity.ParadiseHareModel;
+import net.id.paradiselost.entities.passive.ParadiseHareEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class AerbunnyRenderer extends MobEntityRenderer<AerbunnyEntity, AerbunnyModel> {
+public class ParadiseHareRenderer extends MobEntityRenderer<ParadiseHareEntity, ParadiseHareModel> {
 
-    private static final Identifier TEXTURE = ParadiseLost.locate("textures/entity/aerbunny.png");
+    private static final Identifier TEXTURE = ParadiseLost.locate("textures/entity/corsican_hare.png");
 
-    public AerbunnyRenderer(EntityRendererFactory.Context context) {
-        super(context, new AerbunnyModel(context.getPart(ParadiseLostModelLayers.AERBUNNY)), 0.3F);
+    public ParadiseHareRenderer(EntityRendererFactory.Context context) {
+        super(context, new ParadiseHareModel(context.getPart(ParadiseLostModelLayers.PARADISE_HARE)), 0.3F);
     }
 
     @Override
-    public AerbunnyModel getModel() {
+    public ParadiseHareModel getModel() {
         return super.getModel();
     }
 
     @Override
-    protected void setupTransforms(AerbunnyEntity entity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta) {
+    protected void setupTransforms(ParadiseHareEntity entity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta) {
         super.setupTransforms(entity, matrices, animationProgress, bodyYaw, tickDelta);
         if (entity.isBaby()) {
             matrices.scale(0.6F, 0.6F, 0.6F);
@@ -34,7 +34,7 @@ public class AerbunnyRenderer extends MobEntityRenderer<AerbunnyEntity, Aerbunny
     }
 
     @Override
-    public Identifier getTexture(AerbunnyEntity entity) {
+    public Identifier getTexture(ParadiseHareEntity entity) {
         return TEXTURE;
     }
 }

@@ -77,7 +77,6 @@ public class DefaultedRegistryMixin {
             "skyroot_wood", ParadiseLost.locate("aurel_wood"),
             "stripped_skyroot_log", ParadiseLost.locate("stripped_aurel_log"),
             "stripped_skyroot_wood", ParadiseLost.locate("stripped_aurel_wood"),
-
             "golden_oak_sign", ParadiseLost.locate("mother_aurel_sign"),
             "potted_golden_oak_sapling", ParadiseLost.locate("potted_mother_aurel_sapling"),
             "golden_oak_button", ParadiseLost.locate("mother_aurel_button"),

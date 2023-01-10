@@ -260,7 +260,7 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
@@ -303,7 +303,7 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7)
                         )
                     )
@@ -345,7 +345,7 @@ public final class ParadiseLostBiomes {
                         merge(
                                 Map.of(
                                         SpawnGroup.CREATURE, List.of(
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7)
                                         )
                                 )
@@ -397,7 +397,7 @@ public final class ParadiseLostBiomes {
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 2)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5)
                         )
                     )
@@ -446,7 +446,7 @@ public final class ParadiseLostBiomes {
                                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 2)
                                         ),
                                         SpawnGroup.CREATURE, List.of(
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5)
                                         )
                                 )
@@ -493,7 +493,7 @@ public final class ParadiseLostBiomes {
                         ),
                         
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5)
                         )
                     )
@@ -542,9 +542,9 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 6, 1, 3)
                         )
                     )
                 ),
@@ -589,9 +589,9 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 6, 1, 3)
                         )
                     )
                 ),
@@ -648,9 +648,9 @@ public final class ParadiseLostBiomes {
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AECHOR_PLANT, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 12, 4, 4),
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.AERBUNNY, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 6, 1, 3)
                         )
                     )
                 ),

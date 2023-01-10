@@ -154,7 +154,7 @@ public class ParadiseLostItems {
 
     public static final SpawnEggItem AECHOR_PLANT_SPAWN_EGG = add("aechor_plant_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.AECHOR_PLANT, 0x97DED4, 0x31897D, misc), spawnEggBehavior);
     //    public static final SpawnEggItem CHEST_MIMIC_SPAWN_EGG = null;
-    public static final SpawnEggItem AERBUNNY_SPAWN_EGG = add("aerbunny_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.AERBUNNY, 0xC5D6ED, 0x82A6D9, misc), spawnEggBehavior);
+    public static final SpawnEggItem PARADISE_HARE_SPAWN_EGG = add("corsican_hare_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.PARADISE_HARE, 0xC5D6ED, 0x82A6D9, misc), spawnEggBehavior);
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc), spawnEggBehavior);
 
     private static FabricItemSettings building_block() {

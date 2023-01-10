@@ -66,11 +66,11 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MOA_EGG_HATCH = childEvent("entity.moa.egg_hatch", SoundEvents.ENTITY_TURTLE_EGG_HATCH);
     public static final SoundEvent ENTITY_MOA_STEP = childEvent("entity.moa.step", SoundEvents.ENTITY_PIG_STEP);
 
-    public static final SoundEvent ENTITY_AERBUNNY_SNIFF = childEvent("entity.aerbunny.sniff", SoundEvents.ENTITY_FOX_SNIFF);
-    public static final SoundEvent ENTITY_AERBUNNY_JUMP = childEvent("entity.aerbunny.jump", SoundEvents.ENTITY_RABBIT_JUMP);
-    public static final SoundEvent ENTITY_AERBUNNY_HURT = childEvent("entity.aerbunny.hurt", SoundEvents.ENTITY_RABBIT_HURT);
-    public static final SoundEvent ENTITY_AERBUNNY_DEATH = childEvent("entity.aerbunny.death", SoundEvents.ENTITY_RABBIT_DEATH);
-    public static final SoundEvent ENTITY_AERBUNNY_EAT = childEvent("entity.aerbunny.eat", SoundEvents.ENTITY_LLAMA_EAT);
+    public static final SoundEvent ENTITY_PARADISE_HARE_SNIFF = childEvent("entity.corsican_hare.sniff", SoundEvents.ENTITY_FOX_SNIFF);
+    public static final SoundEvent ENTITY_PARADISE_HARE_JUMP = childEvent("entity.corsican_hare.jump", SoundEvents.ENTITY_RABBIT_JUMP);
+    public static final SoundEvent ENTITY_PARADISE_HARE_HURT = childEvent("entity.corsican_hare.hurt", SoundEvents.ENTITY_RABBIT_HURT);
+    public static final SoundEvent ENTITY_PARADISE_HARE_DEATH = childEvent("entity.corsican_hare.death", SoundEvents.ENTITY_RABBIT_DEATH);
+    public static final SoundEvent ENTITY_PARADISE_HARE_EAT = childEvent("entity.corsican_hare.eat", SoundEvents.ENTITY_LLAMA_EAT);
 
     public static final SoundEvent ENTITY_NIGHTMARE_HURT = event("entity.nightmare.hurt");
     public static final SoundEvent ENTITY_NIGHTMARE_DEATH = event("entity.nightmare.death");

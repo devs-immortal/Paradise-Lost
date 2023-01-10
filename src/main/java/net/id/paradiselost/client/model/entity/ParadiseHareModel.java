@@ -7,7 +7,7 @@ package net.id.paradiselost.client.model.entity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.paradiselost.entities.passive.AerbunnyEntity;
+import net.id.paradiselost.entities.passive.ParadiseHareEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -15,7 +15,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class AerbunnyModel extends EntityModel<AerbunnyEntity> {
+public class ParadiseHareModel extends EntityModel<ParadiseHareEntity> {
     private final ModelPart body;
     private final ModelPart fluff;
     private final ModelPart head;
@@ -27,7 +27,7 @@ public class AerbunnyModel extends EntityModel<AerbunnyEntity> {
 
     private float fluff_scale = 1;
 
-    public AerbunnyModel(ModelPart root) {
+    public ParadiseHareModel(ModelPart root) {
         this.body = root.getChild("body");
         this.tail = this.body.getChild("tail");
         this.back_left_leg = this.body.getChild("back_left_leg");
@@ -53,7 +53,7 @@ public class AerbunnyModel extends EntityModel<AerbunnyEntity> {
     }
 
     @Override
-    public void setAngles(AerbunnyEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(ParadiseHareEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         head.pitch = headPitch * 0.017453F;
         head.yaw = netHeadYaw * 0.017453292F;
         back_right_leg.pitch = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;

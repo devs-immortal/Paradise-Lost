@@ -9,7 +9,7 @@ import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.block.SliderEntity;
 import net.id.paradiselost.entities.hostile.AechorPlantEntity;
 import net.id.paradiselost.entities.misc.RookEntity;
-import net.id.paradiselost.entities.passive.AerbunnyEntity;
+import net.id.paradiselost.entities.passive.ParadiseHareEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
 import net.id.paradiselost.entities.passive.ambyst.FindLogSensor;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
@@ -57,8 +57,8 @@ public class ParadiseLostEntityTypes {
     // passive
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(1.0F, 2.0F), 5),
             attributes(MoaEntity::createMoaAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
-    public static final EntityType<AerbunnyEntity> AERBUNNY = add("aerbunny", of(AerbunnyEntity::new, CREATURE, changing(0.55F, 0.55F), 5),
-            attributes(AerbunnyEntity::createAerbunnyAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
+    public static final EntityType<ParadiseHareEntity> PARADISE_HARE = add("corsican_hare", of(ParadiseHareEntity::new, CREATURE, changing(0.55F, 0.55F), 5),
+            attributes(ParadiseHareEntity::createParadiseHareAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
     public static final EntityType<RookEntity> ROOK = add("rook", of(RookEntity::new, MISC, fixed(0.75F, 1.8F), 5),
             attributes(RookEntity::createRookAttributes), spawnRestrictions((type, world, spawnReason, pos, random) -> false));
     // public static final EntityType<AmbystEntity> AMBYST = add("ambyst", of(AmbystEntity::new, CREATURE, changing(0.6F, 0.42F), 5),

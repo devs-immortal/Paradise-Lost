@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerEntityMixin extends LivingEntity implements ParadiseLostEntityExtensions {
 
     private boolean paradise_lost$fallen = false;
-    public boolean paradise_lost$aerbunnyFallen = false;
+    public boolean paradise_lost$corsican_hareFallen = false;
 
     public PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
         super(type, world);
@@ -82,12 +82,12 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
         paradise_lost$fallen = value;
     }
 
-    public boolean isParadise_lost$aerbunnyFallen() {
-        return paradise_lost$aerbunnyFallen;
+    public boolean isParadise_lost$corsican_hareFallen() {
+        return paradise_lost$corsican_hareFallen;
     }
 
-    public void setAerBunnyFallen(boolean value) {
-        paradise_lost$aerbunnyFallen = value;
+    public void setPARADISE_HAREFallen(boolean value) {
+        paradise_lost$corsican_hareFallen = value;
     }
 
     @Inject(
@@ -108,15 +108,15 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             }
             cir.cancel();
         }
-        if (paradise_lost$aerbunnyFallen) {
-            paradise_lost$aerbunnyFallen = false;
+        if (paradise_lost$corsican_hareFallen) {
+            paradise_lost$corsican_hareFallen = false;
             if (getAbilities().allowFlying) {
                 cir.setReturnValue(false);
             } else {
                 if (fallDistance >= 2.0F) {
                     increaseStat(Stats.FALL_ONE_CM, (int) Math.round((double) fallDistance * 100.0D));
                 }
-                cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageSources.AERBUNNY_FALL));
+                cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageSources.PARADISE_HARE_FALL));
             }
             cir.cancel();
         }

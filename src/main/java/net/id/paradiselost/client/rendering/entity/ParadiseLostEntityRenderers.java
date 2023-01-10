@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.id.incubus_core.blocklikeentities.api.client.BlockLikeEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.hostile.AechorPlantRenderer;
 import net.id.paradiselost.client.rendering.entity.misc.RookRenderer;
-import net.id.paradiselost.client.rendering.entity.passive.AerbunnyRenderer;
+import net.id.paradiselost.client.rendering.entity.passive.ParadiseHareRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.MoaEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.projectile.DartRenderer;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
@@ -26,7 +26,7 @@ public class ParadiseLostEntityRenderers {
 
         // passive
         register(ParadiseLostEntityTypes.MOA, MoaEntityRenderer::new);
-        register(ParadiseLostEntityTypes.AERBUNNY, AerbunnyRenderer::new);
+        register(ParadiseLostEntityTypes.PARADISE_HARE, ParadiseHareRenderer::new);
 //        register(ParadiseLostEntityTypes.AMBYST, AmbystRenderer::new);
         // projectile
         register(DartRenderer::new,
