@@ -31,19 +31,19 @@
     "depth": "paradise_lost:generator/depth",
     "ridges": "paradise_lost:generator/ridges",
     "initial_density_without_jaggedness": {
-      "argument1": 4.0,
+      "type": "minecraft:add",
+      "argument1": -0.9,
       "argument2": {
+        "type": "minecraft:quarter_negative",
         "argument": {
+          "type": "minecraft:mul",
           "argument1": "minecraft:overworld/depth",
           "argument2": {
-            "argument": "minecraft:overworld/factor",
-            "type": "minecraft:cache_2d"
-          },
-          "type": "minecraft:mul"
-        },
-        "type": "minecraft:quarter_negative"
-      },
-      "type": "minecraft:mul"
+            "type": "minecraft:cache_2d",
+            "argument": "minecraft:overworld/factor"
+          }
+        }
+      }
     },
     "final_density": {
       "type": "minecraft:interpolated",
@@ -181,8 +181,8 @@
                           "if_true": {
                             "type": "minecraft:noise_threshold",
                             "noise": "paradise_lost:topsoil/forest_noise",
-                            "min_threshold": 0,
-                            "max_threshold": 0.5
+                            "min_threshold": 0.4,
+                            "max_threshold": 1
                           },
                           "then_run": {
                             "type": "minecraft:block",
