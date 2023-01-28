@@ -43,10 +43,13 @@
       "type": "minecraft:shifted_noise"
     },
     "continents": {
-      "type": "minecraft:noise",
-      "noise": "paradise_lost:generator/elevation",
-      "xz_scale": 1,
-      "y_scale": 1
+      "type": "minecraft:flat_cache",
+      "argument": {
+        "type": "minecraft:noise",
+        "noise": "paradise_lost:generator/elevation",
+        "xz_scale": 1,
+        "y_scale": 1
+      }
     },
     "erosion": {
       "type": "minecraft:noise",
@@ -55,18 +58,21 @@
       "y_scale": 1
     },
     "depth": {
-      "type": "minecraft:noise",
-      "noise": "minecraft:surface",
-      "xz_scale": 1,
-      "y_scale": 1
+      "type": "minecraft:flat_cache",
+      "argument": {
+        "type": "minecraft:noise",
+        "noise": "minecraft:surface",
+        "xz_scale": 1,
+        "y_scale": 1
+      }
     },
     "ridges": {
       "type": "minecraft:flat_cache",
       "argument": {
         "type": "minecraft:noise",
-        "noise": "paradise_lost:generator/ridges",
+        "noise": "paradise_lost:generator/weirdness",
         "xz_scale": 1,
-        "y_scale": 0
+        "y_scale": 1
       }
     },
     "initial_density_without_jaggedness": {
