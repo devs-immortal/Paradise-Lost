@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:clamp",
+  "input": {
+    "type": "minecraft:max",
+    "argument1": {
+      "type": "minecraft:y_clamped_gradient",
+      "from_y": 320,
+      "to_y": 70,
+      "from_value": -100,
+      "to_value": -1
+    },
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:y_clamped_gradient",
+        "from_y": 70,
+        "to_y": -200,
+        "from_value": 0,
+        "to_value": -3
+      },
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": -0.5,
+        "argument2": {
+          "type": "minecraft:flat_cache",
+          "argument": {
+            "type": "minecraft:noise",
+            "noise": "paradise_lost:generator/erosion",
+            "xz_scale": 0.5,
+            "y_scale": 1
+          }
+        }
+      }
+    }
+  },
+  "min": -1,
+  "max": 0.5
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:noise",
+    "noise": "minecraft:surface",
+    "xz_scale": 1,
+    "y_scale": 1
+  }
+}
