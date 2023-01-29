@@ -1,8 +1,6 @@
 package net.id.paradiselost.util;
 
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.EntityDamageSource;
 
 public class ParadiseLostDamageSources extends DamageSource {
 
