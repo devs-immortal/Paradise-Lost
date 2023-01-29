@@ -219,10 +219,6 @@ public final class ParadiseLostBiomes {
                 ORE_CHERINE,
                 ORE_OLVITE
             ),
-            // cursed generation step, but it stops trees from generating inside of these
-            GenerationStep.Feature.TOP_LAYER_MODIFICATION, List.of(
-                CRYSTAL_TREE_ISLAND
-            ),
             GenerationStep.Feature.VEGETAL_DECORATION, List.of(
                 PATCH_BROWN_SPORECAP,
                 PATCH_PINK_SPORECAP,

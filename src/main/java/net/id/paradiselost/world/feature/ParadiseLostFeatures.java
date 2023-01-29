@@ -16,7 +16,6 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 
 public class ParadiseLostFeatures {
     public static final ParadiseLostLakeFeature LAKE = register("lake", new ParadiseLostLakeFeature(DynamicConfiguration.CODEC));
-    public static final CrystalTreeIslandFeature CRYSTAL_TREE_ISLAND = register("crystal_tree_island", new CrystalTreeIslandFeature(DefaultFeatureConfig.CODEC));
 
     public static final ParadiseLostDeltaFeature DELTA_FEATURE = register("delta_feature", new ParadiseLostDeltaFeature(DeltaFeatureConfig.CODEC));
     public static final GroundcoverFeature GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeatureConfig.CODEC));

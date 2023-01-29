@@ -31,8 +31,8 @@ class ParadiseLostBlockActions {
     protected static final Action<Block> auralRenderLayer = onClient((id, block) -> RenderUtils.auralRenderLayer(block));
     protected static final Action<Block> auralCutoutMippedRenderLayer = onClient((id, block) -> RenderUtils.auralCutoutMippedRenderLayer(block));
 
-    protected static Action<Block> strippedFrom(Block original) {
-        return (id, stripped) -> StrippableBlockRegistry.register(original, stripped);
+    protected static Action<Block> stripsTo(Block stripped) {
+        return (id, original) -> StrippableBlockRegistry.register(original, stripped);
     }
 
     protected static Action<Block> tillable() {

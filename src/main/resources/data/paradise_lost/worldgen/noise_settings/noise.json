@@ -31,18 +31,13 @@
     "depth": "paradise_lost:generator/depth",
     "ridges": "paradise_lost:generator/ridges",
     "initial_density_without_jaggedness": {
-      "type": "minecraft:add",
-      "argument1": -0.9,
-      "argument2": {
-        "type": "minecraft:quarter_negative",
-        "argument": {
-          "type": "minecraft:mul",
-          "argument1": "minecraft:overworld/depth",
-          "argument2": {
-            "type": "minecraft:cache_2d",
-            "argument": "minecraft:overworld/factor"
-          }
-        }
+      "type": "minecraft:interpolated",
+      "argument": {
+        "type": "minecraft:y_clamped_gradient",
+        "from_y": 60,
+        "to_y": -64,
+        "from_value": 0,
+        "to_value": 1
       }
     },
     "final_density": {

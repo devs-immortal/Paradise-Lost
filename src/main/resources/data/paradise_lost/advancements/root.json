@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "paradise_lost:crystal_log"
+      "item": "paradise_lost:aurel_leaves"
     },
     "title": {
       "translate": "advancements.paradise_lost.root.title",
@@ -17,7 +17,7 @@
     "background": "paradise_lost:textures/block/aurel_planks.png"
   },
   "criteria": {
-    "entered_paradise_lost": {
+    "entered_paradise": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
         "to": "paradise_lost:paradise_lost"
@@ -26,7 +26,7 @@
   },
   "requirements": [
     [
-      "entered_paradise_lost"
+      "entered_paradise"
     ]
   ]
 }

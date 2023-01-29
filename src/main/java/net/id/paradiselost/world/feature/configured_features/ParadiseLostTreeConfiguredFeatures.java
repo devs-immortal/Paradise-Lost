@@ -35,7 +35,6 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     // Default
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> AUREL_TREE = register("aurel_tree", Feature.TREE, Configs.AUREL_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> MOTHER_AUREL_TREE = register("mother_aurel_tree", Feature.TREE, Configs.MOTHER_AUREL_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> CRYSTAL_TREE = register("crystal_tree", Feature.TREE, Configs.CRYSTAL_TREE_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> ORANGE_TREE = register("orange_tree", Feature.TREE, Configs.ORANGE_TREE_SAPLING_CONFIG);
     // Wisteria
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> ROSE_WISTERIA_TREE = register("rose_wisteria_tree", Feature.TREE, Configs.ROSE_WISTERIA_CONFIG);
@@ -54,8 +53,6 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", Feature.TREE, Configs.FANCY_BOREAL_WISTERIA_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_AUREL_TREE = register("fancy_aurel_tree", Feature.TREE, Configs.FANCY_AUREL_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> THICKET_AUREL_TREE = register("thicket_aurel_tree", Feature.TREE, Configs.THICKET_AUREL_CONFIG);
-    // Crystal
-    public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> CRYSTAL_TREE_ISLAND = register("crystal_tree_island", ParadiseLostFeatures.CRYSTAL_TREE_ISLAND, Configs.DEFAULT_CONFIG);
     // Fallen leaves
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> FALLEN_LEAVES = register("fallen_leaves", Feature.RANDOM_PATCH, Configs.FALLEN_LEAVES_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> ALT_FALLEN_LEAVES = register("alt_fallen_leaves", Feature.RANDOM_PATCH, Configs.FALLEN_LEAVES_CONFIG);
@@ -171,13 +168,6 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
         );
 
         //Fruit trees
-        private static final TreeFeatureConfig CRYSTAL_TREE_CONFIG = generateTree(
-                CRYSTAL_LOG.getDefaultState(), CRYSTAL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
-                new StraightTrunkPlacer(5, 2, 2),
-                new SpruceFoliagePlacer(UniformIntProvider.create(1, 2), UniformIntProvider.create(0, 2), UniformIntProvider.create(1, 1)),
-                new TwoLayersFeatureSize(2, 0, 2),
-                true, false
-        );
         private static final TreeFeatureConfig ORANGE_TREE_SAPLING_CONFIG = generateTree(
                 ORANGE_LOG.getDefaultState(), ORANGE_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new BendingTrunkPlacer(3, 2, 1, 3, UniformIntProvider.create(1, 2)),

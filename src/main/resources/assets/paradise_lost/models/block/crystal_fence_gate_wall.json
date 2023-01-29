@@ -1,6 +1,0 @@
-{
-  "parent": "block/template_fence_gate_wall",
-  "textures": {
-    "texture": "paradise_lost:block/crystal_planks"
-  }
-}

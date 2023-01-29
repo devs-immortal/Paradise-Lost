@@ -23,11 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(AxeItem.class)
-public class AxeItemMixin extends MiningToolItem {
-
-    protected AxeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
-        super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
-    }
+public class AxeItemMixin {
 
     @Inject(method = "useOnBlock", at = @At("HEAD"))
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {

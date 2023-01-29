@@ -166,11 +166,11 @@ public class ParadiseLostBlocks {
     public static final SaplingBlock AUREL_SAPLING = AUREL.sapling();
     public static final FlowerPotBlock POTTED_AUREL_SAPLING = AUREL.pottedSapling();
     public static final PillarBlock AUREL_LOG = AUREL.log();
-    public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(aurelColors.log()), flammableLog);
-    public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(aurelColors.log()), flammableLog, cutoutRenderLayer);
     public static final PillarBlock AUREL_WOOD = AUREL.wood();
     public static final PillarBlock STRIPPED_AUREL_LOG = AUREL.strippedLog();
     public static final PillarBlock STRIPPED_AUREL_WOOD = AUREL.strippedWood();
+    public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(aurelColors.log()), flammableLog, stripsTo(STRIPPED_AUREL_LOG));
+    public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(aurelColors.log()), flammableLog, cutoutRenderLayer);
     public static final LeavesBlock AUREL_LEAVES = AUREL.leaves();
     public static final LeafPileBlock AUREL_LEAF_PILE = add("aurel_leaf_pile", new LeafPileBlock(aurelColors.leafPile()), flammableLeaves, cutoutMippedRenderLayer);
     public static final Block AUREL_PLANKS = AUREL.planks();
@@ -192,7 +192,7 @@ public class ParadiseLostBlocks {
 
     public static final SaplingBlock MOTHER_AUREL_SAPLING = add("mother_aurel_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), motherAurelColors.sapling().luminance(state -> 7)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_MOTHER_AUREL_SAPLING = add("potted_mother_aurel_sapling", new FlowerPotBlock(MOTHER_AUREL_SAPLING, flowerPot().luminance(state -> 7)), cutoutRenderLayer);
-    public static final PillarBlock MOTHER_AUREL_LOG = add("mother_aurel_log", new PillarBlock(motherAurelColors.log()), flammableLog);
+    public static final PillarBlock MOTHER_AUREL_LOG = MOTHER_AUREL.log();
     public static final PillarBlock MOTHER_AUREL_WOOD = MOTHER_AUREL.wood();
     public static final PillarBlock STRIPPED_MOTHER_AUREL_LOG = MOTHER_AUREL.strippedLog();
     public static final PillarBlock STRIPPED_MOTHER_AUREL_WOOD = MOTHER_AUREL.strippedWood();
@@ -206,7 +206,6 @@ public class ParadiseLostBlocks {
     public static final DoorBlock MOTHER_AUREL_DOOR = MOTHER_AUREL.door();
     public static final WoodenButtonBlock MOTHER_AUREL_BUTTON = MOTHER_AUREL.button();
     public static final PressurePlateBlock MOTHER_AUREL_PRESSURE_PLATE = MOTHER_AUREL.pressurePlate();
-    // TODO (b1.7): Fix with datafixer. Name change from <wood_type>_sign to the_<wood_type>_sign
     public static final SignBlock MOTHER_AUREL_SIGN = MOTHER_AUREL.signFactory().signBlock;
     public static final WallSignBlock MOTHER_AUREL_WALL_SIGN = MOTHER_AUREL.signFactory().wallSignBlock;
     // Orange Wood
@@ -231,28 +230,6 @@ public class ParadiseLostBlocks {
     public static final PressurePlateBlock ORANGE_PRESSURE_PLATE = ORANGE.pressurePlate();
     public static final SignBlock ORANGE_SIGN = ORANGE.signFactory().signBlock;
     public static final WallSignBlock ORANGE_WALL_SIGN = ORANGE.signFactory().wallSignBlock;
-    // Crystal Wood
-    private static final WoodSettingsFactory crystalColors = new WoodSettingsFactory(MapColor.IRON_GRAY, MapColor.LICHEN_GREEN, MapColor.LIGHT_BLUE);
-    public static final WoodTypeFactory CRYSTAL = new WoodTypeFactory(crystalColors, locate("crystal"));
-
-    public static final SaplingBlock CRYSTAL_SAPLING = add("crystal_sapling", new ParadiseLostSaplingBlock(new CrystalSaplingGenerator(), crystalColors.sapling().sounds(BlockSoundGroup.LARGE_AMETHYST_BUD)), cutoutRenderLayer);
-    public static final FlowerPotBlock POTTED_CRYSTAL_SAPLING = add("potted_crystal_sapling", new FlowerPotBlock(CRYSTAL_SAPLING, flowerPot()), cutoutRenderLayer);
-    public static final PillarBlock CRYSTAL_LOG = CRYSTAL.log();
-    public static final PillarBlock CRYSTAL_WOOD = CRYSTAL.wood();
-    public static final PillarBlock STRIPPED_CRYSTAL_LOG = CRYSTAL.strippedLog();
-    public static final PillarBlock STRIPPED_CRYSTAL_WOOD = CRYSTAL.strippedWood();
-    public static final CrystalLeavesBlock CRYSTAL_LEAVES = add("crystal_leaves", new CrystalLeavesBlock(crystalColors.leaves().sounds(BlockSoundGroup.LARGE_AMETHYST_BUD)), flammableLeaves, cutoutMippedRenderLayer);
-    public static final Block CRYSTAL_PLANKS = CRYSTAL.planks();
-    public static final FenceBlock CRYSTAL_FENCE = CRYSTAL.fence();
-    public static final FenceGateBlock CRYSTAL_FENCE_GATE = CRYSTAL.fenceGate();
-    public static final SlabBlock CRYSTAL_SLAB = CRYSTAL.slab();
-    public static final StairsBlock CRYSTAL_STAIRS = CRYSTAL.stairs();
-    public static final TrapdoorBlock CRYSTAL_TRAPDOOR = CRYSTAL.trapdoor();
-    public static final DoorBlock CRYSTAL_DOOR = CRYSTAL.door();
-    public static final WoodenButtonBlock CRYSTAL_BUTTON = CRYSTAL.button();
-    public static final PressurePlateBlock CRYSTAL_PRESSURE_PLATE = CRYSTAL.pressurePlate();
-    public static final SignBlock CRYSTAL_SIGN = CRYSTAL.signFactory().signBlock;
-    public static final WallSignBlock CRYSTAL_WALL_SIGN = CRYSTAL.signFactory().wallSignBlock;
     // Wisteria Wood
     private static final WoodSettingsFactory wisteriaColors = new WoodSettingsFactory(MapColor.PALE_YELLOW, MapColor.BROWN);
     public static final WoodTypeFactory WISTERIA = new WoodTypeFactory(wisteriaColors, locate("wisteria"));
@@ -401,7 +378,9 @@ public class ParadiseLostBlocks {
 //    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
 
     // Chests
-    public static final ChestBlock CRYSTAL_CHEST = CRYSTAL.chestFactory().chest;
+    public static final ChestFactory CRYSTAL_CHEST_FACTORY = new ChestFactory(ParadiseLost.MOD_ID, "crystal", AUREL.settings.chest());
+
+    public static final ChestBlock CRYSTAL_CHEST = add("crystal_chest", CRYSTAL_CHEST_FACTORY.chest);
     public static final ChestBlock MOTHER_AUREL_CHEST = add("golden_oak_chest", MOTHER_AUREL_CHEST_FACTORY.chest);
     public static final ChestBlock ORANGE_CHEST = ORANGE.chestFactory().chest;
     public static final ChestBlock AUREL_CHEST = add("skyroot_chest", AUREL_CHEST_FACTORY.chest);
@@ -430,7 +409,7 @@ public class ParadiseLostBlocks {
     public static void init() {
         ParadiseLostRegistryQueues.BLOCK.register();
 
-        for (var woodType : List.of(AUREL, MOTHER_AUREL, CRYSTAL, ORANGE, WISTERIA)) {
+        for (var woodType : List.of(AUREL, MOTHER_AUREL, ORANGE, WISTERIA)) {
             woodType.registerCreatedBlocks();
             woodType.registerFlammability();
             woodType.registerStripping();
@@ -439,12 +418,13 @@ public class ParadiseLostBlocks {
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        for (var woodType : List.of(AUREL, MOTHER_AUREL, CRYSTAL, ORANGE, WISTERIA)) {
+        for (var woodType : List.of(AUREL, MOTHER_AUREL, ORANGE, WISTERIA)) {
             woodType.registerBlockEntityRenderers();
             woodType.registerRenderLayers();
         }
         AUREL_CHEST_FACTORY.registerChestRenderers();
         MOTHER_AUREL_CHEST_FACTORY.registerChestRenderers();
+        CRYSTAL_CHEST_FACTORY.registerChestRenderers();
     }
 
     private static class ParadiseLostFarmlandBlock extends FarmlandBlock {

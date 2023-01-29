@@ -2,7 +2,6 @@ package net.id.paradiselost.world.feature.placed_features;
 
 import net.id.paradiselost.world.feature.configured_features.ParadiseLostTreeConfiguredFeatures;
 import net.id.paradiselost.world.feature.placement_modifiers.ChancePlacementModifier;
-import net.id.paradiselost.world.feature.placement_modifiers.CrystalTreeIslandPlacementModifier;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
@@ -30,7 +29,6 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     // Default
     public static final RegistryEntry<PlacedFeature> AUREL_TREE = register("aurel_tree", ParadiseLostTreeConfiguredFeatures.AUREL_TREE, placed(AUREL_SAPLING));
     public static final RegistryEntry<PlacedFeature> MOTHER_AUREL_TREE = register("mother_aurel_tree", ParadiseLostTreeConfiguredFeatures.MOTHER_AUREL_TREE, placed(MOTHER_AUREL_SAPLING));
-    public static final RegistryEntry<PlacedFeature> CRYSTAL_TREE = register("crystal_tree", ParadiseLostTreeConfiguredFeatures.CRYSTAL_TREE, placed(CRYSTAL_SAPLING));
     public static final RegistryEntry<PlacedFeature> ORANGE_TREE = register("orange_tree", ParadiseLostTreeConfiguredFeatures.ORANGE_TREE, placed(ORANGE_SAPLING));
     // Wisteria
     public static final RegistryEntry<PlacedFeature> ROSE_WISTERIA_TREE = register("rose_wisteria_tree", ParadiseLostTreeConfiguredFeatures.ROSE_WISTERIA_TREE, placed(ROSE_WISTERIA_SAPLING));
@@ -68,8 +66,6 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final RegistryEntry<PlacedFeature> SHIELD_HOLLOW_STUMPS = register("shield_hollow_stumps", ParadiseLostTreeConfiguredFeatures.SHIELD_HOLLOW_STUMPS, CountMultilayerPlacementModifier.of(1), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE));
 
     public static final RegistryEntry<PlacedFeature> SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", ParadiseLostTreeConfiguredFeatures.SHIELD_FALLEN_LEAVES, PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(2), ChancePlacementModifier.of(4), CountPlacementModifier.of(UniformIntProvider.create(0, 3)), BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(PARADISE_LOST_GROUND)));
-    // Crystal Tree Island
-    public static final RegistryEntry<PlacedFeature> CRYSTAL_TREE_ISLAND = register("crystal_tree_island", ParadiseLostTreeConfiguredFeatures.CRYSTAL_TREE_ISLAND, CrystalTreeIslandPlacementModifier.of());
 
     private static PlacementModifier placed(Block sapling) {
         return PlacedFeatures.wouldSurvive(sapling);
