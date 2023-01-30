@@ -75,6 +75,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryEntry<ConfiguredFeature<RandomFeatureConfig, ?>> MIXED_TREES = register("mixed_trees", Feature.RANDOM_SELECTOR, Assortments.MIXED_TREES_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomFeatureConfig, ?>> SPARSE_TREES = register("sparse_trees", Feature.RANDOM_SELECTOR, Assortments.SPARSE_TREES_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomFeatureConfig, ?>> THICKET_TREES = register("thicket_trees", Feature.RANDOM_SELECTOR, Assortments.THICKET_TREES_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<RandomFeatureConfig, ?>> THICKET_MOTHER_AUREL_TREES = register("thicket_mother_aurel_trees", Feature.RANDOM_SELECTOR, Assortments.RARE_MOTHER_AUREL_TREES_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<RandomFeatureConfig, ?>> RAINBOW_FOREST_TREES = register("wisteria_woods_trees", Feature.RANDOM_SELECTOR, Assortments.RAINBOW_FOREST_CONFIG);
 
     public static void init() {
@@ -140,15 +141,15 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
         );
         private static final TreeFeatureConfig THICKET_AUREL_CONFIG = generateTree(
                 AUREL_LOG.getDefaultState(), AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
-                new LargeOakTrunkPlacer(11, 24, 0),
-                new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
+                new LargeOakTrunkPlacer(12, 4, 1),
+                new BlobFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(4), 3),
                 new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)),
                 true, false
         );
         private static final TreeFeatureConfig AUREL_SHRUB_CONFIG = generateTree(
                 AUREL_LOG.getDefaultState(), AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new StraightTrunkPlacer(1, 1, 0),
-                new BlobFoliagePlacer(UniformIntProvider.create(2, 4), ConstantIntProvider.create(0), 2),
+                new BlobFoliagePlacer(UniformIntProvider.create(1, 3), ConstantIntProvider.create(0), 1),
                 new TwoLayersFeatureSize(1, 0, 1),
                 true, false
         );
@@ -304,8 +305,8 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
         //Special trees
         private static final TreeFeatureConfig MOTHER_AUREL_CONFIG = generateTree(
                 MOTHER_AUREL_LOG.getDefaultState(), MOTHER_AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
-                new StraightTrunkPlacer(5, 2, 0),
-                new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(1), 4),
+                new LargeOakTrunkPlacer(8, 1, 1),
+                new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(2), 3),
                 new TwoLayersFeatureSize(3, 0, 3, OptionalInt.of(2)),
                 true, false
         );
@@ -359,13 +360,16 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
 
         private static final RandomFeatureConfig THICKET_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.00005F),
-                        entry(LAVENDER_WISTERIA_TREE, LAVENDER_WISTERIA_SAPLING, 0.00005F),
-                        entry(MOTHER_AUREL_TREE, MOTHER_AUREL_SAPLING, 0.0015F),
-                        entry(AUREL_SHRUB, AUREL_SAPLING, 0.1F), // convert to feature
-                        entry(AUREL_TREE, AUREL_SAPLING, 0.1F)
+                        entry(AUREL_SHRUB, AUREL_SAPLING, 0.1F)
                 ),
                 placed(THICKET_AUREL_TREE, AUREL_SAPLING)
+        );
+
+        private static final RandomFeatureConfig RARE_MOTHER_AUREL_TREES_CONFIG = new RandomFeatureConfig(
+                ImmutableList.of(
+                        entry(MOTHER_AUREL_TREE, MOTHER_AUREL_SAPLING, 1.0F)
+                ),
+                placed(MOTHER_AUREL_TREE, MOTHER_AUREL_SAPLING)
         );
 
         private static final RandomFeatureConfig DENSE_SHIELD_TREES_CONFIG = new RandomFeatureConfig(

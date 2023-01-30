@@ -374,14 +374,12 @@ public final class ParadiseLostBiomes {
                         GenerationStep.Feature.VEGETAL_DECORATION, List.of(
                             THICKET_SHAMROCK,
                             THICKET_LIVERWORT_CARPET,
-                            THICKET_FALLEN_LOG,
-                            FLOWERS,
                             GRASS,
                             FALLEN_LEAVES,
                             TALL_GRASS,
                             DENSE_BUSH,
                             THICKET_TREES,
-                            SPARSE_TREES
+                            THICKET_MOTHER_AUREL_TREES
                         )
                     )
                 )

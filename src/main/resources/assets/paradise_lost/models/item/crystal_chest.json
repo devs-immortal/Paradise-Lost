@@ -1,7 +1,7 @@
 {
   "parent": "builtin/entity",
   "textures": {
-    "particle": "paradise_lost:block/crystal_planks"
+    "particle": "paradise_lost:block/floestone"
   },
   "display": {
     "gui": {
