@@ -38,36 +38,36 @@ import static net.id.paradiselost.world.feature.placed_features.ParadiseLostVege
  * @author Gudenau
  */
 public final class ParadiseLostBiomes {
-    public static final RegistryKey<Biome> HIGHLANDS_PLAINS_KEY = register("highlands");
-    public static final RegistryKey<Biome> TRADEWINDS_KEY = register("tradewinds");
-    public static final RegistryKey<Biome> HIGHLANDS_FOREST_KEY = register("highlands_forest");
-    public static final RegistryKey<Biome> HIGHLANDS_THICKET_KEY = register("highlands_thicket");
-    public static final RegistryKey<Biome> HIGHLANDS_GRAND_GLADE_KEY = register("highlands_grand_glade");
-    public static final RegistryKey<Biome> WISTERIA_WOODS_KEY = register("wisteria_woods");
     public static final RegistryKey<Biome> AUTUMNAL_TUNDRA_KEY = register("autumnal_tundra");
     public static final RegistryKey<Biome> CONTINENTAL_PLATEAU_KEY = register("continental_plateau");
+    public static final RegistryKey<Biome> HIGHLANDS_PLAINS_KEY = register("highlands");
+    public static final RegistryKey<Biome> HIGHLANDS_FOREST_KEY = register("highlands_forest");
+    public static final RegistryKey<Biome> HIGHLANDS_GRAND_GLADE_KEY = register("highlands_grand_glade");
     public static final RegistryKey<Biome> HIGHLANDS_SHIELD_KEY = register("highlands_shield");
+    public static final RegistryKey<Biome> HIGHLANDS_THICKET_KEY = register("highlands_thicket");
+    public static final RegistryKey<Biome> TRADEWINDS_KEY = register("tradewinds");
+    public static final RegistryKey<Biome> WISTERIA_WOODS_KEY = register("wisteria_woods");
 
-    public static final RegistryEntry<Biome> HIGHLANDS_PLAINS;
-    public static final RegistryEntry<Biome> TRADEWINDS;
-    public static final RegistryEntry<Biome> HIGHLANDS_FOREST;
-    public static final RegistryEntry<Biome> HIGHLANDS_THICKET;
-    public static final RegistryEntry<Biome> HIGHLANDS_GRAND_GLADE;
-    public static final RegistryEntry<Biome> WISTERIA_WOODS;
     public static final RegistryEntry<Biome> AUTUMNAL_TUNDRA;
     public static final RegistryEntry<Biome> CONTINENTAL_PLATEAU;
+    public static final RegistryEntry<Biome> HIGHLANDS_PLAINS;
+    public static final RegistryEntry<Biome> HIGHLANDS_FOREST;
+    public static final RegistryEntry<Biome> HIGHLANDS_GRAND_GLADE;
     public static final RegistryEntry<Biome> HIGHLANDS_SHIELD;
-    
+    public static final RegistryEntry<Biome> HIGHLANDS_THICKET;
+    public static final RegistryEntry<Biome> TRADEWINDS;
+    public static final RegistryEntry<Biome> WISTERIA_WOODS;
+
     static {
-        HIGHLANDS_PLAINS = register(HIGHLANDS_PLAINS_KEY, createHighlandsPlains());
-        TRADEWINDS = register(TRADEWINDS_KEY, createTradewinds());
-        HIGHLANDS_FOREST = register(HIGHLANDS_FOREST_KEY, createHighlandsForest());
-        HIGHLANDS_THICKET = register(HIGHLANDS_THICKET_KEY, createHighlandsThicket());
-        HIGHLANDS_GRAND_GLADE = register(HIGHLANDS_GRAND_GLADE_KEY, createHighlandsGrandGlade());
-        WISTERIA_WOODS = register(WISTERIA_WOODS_KEY, createWisteriaWoods());
         AUTUMNAL_TUNDRA = register(AUTUMNAL_TUNDRA_KEY, createAutumnalTundra());
         CONTINENTAL_PLATEAU = register(CONTINENTAL_PLATEAU_KEY, createContinentalPlateau());
+        HIGHLANDS_PLAINS = register(HIGHLANDS_PLAINS_KEY, createHighlandsPlains());
+        HIGHLANDS_FOREST = register(HIGHLANDS_FOREST_KEY, createHighlandsForest());
+        HIGHLANDS_GRAND_GLADE = register(HIGHLANDS_GRAND_GLADE_KEY, createHighlandsGrandGlade());
         HIGHLANDS_SHIELD = register(HIGHLANDS_SHIELD_KEY, createHighlandsShield());
+        HIGHLANDS_THICKET = register(HIGHLANDS_THICKET_KEY, createHighlandsThicket());
+        TRADEWINDS = register(TRADEWINDS_KEY, createTradewinds());
+        WISTERIA_WOODS = register(WISTERIA_WOODS_KEY, createWisteriaWoods());
     }
     
     public static void init() {
