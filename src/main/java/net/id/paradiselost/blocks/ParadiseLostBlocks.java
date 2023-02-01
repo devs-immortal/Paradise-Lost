@@ -319,7 +319,7 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostMushroomPlantBlock BROWN_SPORECAP = add("brown_sporecap", new ParadiseLostMushroomPlantBlock(copy(BROWN_MUSHROOM), BlockTags.MUSHROOM_GROW_BLOCK), cutoutRenderLayer);
     public static final ParadiseLostHangingMushroomPlantBlock PINK_SPORECAP = add("pink_sporecap", new ParadiseLostHangingMushroomPlantBlock(copy(BROWN_MUSHROOM), BlockTags.MUSHROOM_GROW_BLOCK), cutoutRenderLayer);
 
-    public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(shrub().mapColor(MapColor.PINK)), flammablePlant, cutoutMippedRenderLayer);
+    public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(crop().mapColor(MapColor.PINK)), flammablePlant, cutoutMippedRenderLayer);
     public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(crop().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
     public static final SwedrootCropBlock SWEDROOT = add("swedroot", new SwedrootCropBlock(shrub().mapColor(MapColor.BLUE)), flammablePlant, cutoutRenderLayer);
 
