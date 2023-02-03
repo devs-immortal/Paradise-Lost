@@ -26,8 +26,8 @@ public class ParadiseLostColorProviders {
     }
 
     private static void initItems() {
-        ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> 0xd0db37), ParadiseLostBlocks.AUREL_LEAVES.asItem(), ParadiseLostBlocks.AUREL_LEAF_PILE.asItem(), ParadiseLostBlocks.SHAMROCK.asItem());
-        ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> tintIndex == 0 ? 0xB1FFCB : -1), ParadiseLostBlocks.HIGHLANDS_GRASS.asItem(), ParadiseLostBlocks.GRASS.asItem(), ParadiseLostBlocks.GRASS_FLOWERING.asItem(), ParadiseLostBlocks.SHORT_GRASS.asItem(), ParadiseLostBlocks.TALL_GRASS.asItem(), ParadiseLostBlocks.FERN.asItem(), ParadiseLostBlocks.BUSH.asItem());
+        ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> 0xf1ff99), ParadiseLostBlocks.AUREL_LEAVES.asItem(), ParadiseLostBlocks.AUREL_LEAF_PILE.asItem(), ParadiseLostBlocks.SHAMROCK.asItem());
+        ColorProviderRegistryImpl.ITEM.register(((stack, tintIndex) -> tintIndex == 0 ? 0xa2dbc2 : -1), ParadiseLostBlocks.HIGHLANDS_GRASS.asItem(), ParadiseLostBlocks.GRASS.asItem(), ParadiseLostBlocks.GRASS_FLOWERING.asItem(), ParadiseLostBlocks.SHORT_GRASS.asItem(), ParadiseLostBlocks.TALL_GRASS.asItem(), ParadiseLostBlocks.FERN.asItem(), ParadiseLostBlocks.BUSH.asItem());
     }
 
     private static void initDynamicColorBlocks() {

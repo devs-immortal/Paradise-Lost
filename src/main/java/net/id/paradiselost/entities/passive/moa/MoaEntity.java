@@ -441,7 +441,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                         playSound(ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, 2, 0.75F);
                         produceParticlesServer(ParticleTypes.HAPPY_VILLAGER, 2 + random.nextInt(4), 7, 0);
                         if (player instanceof ServerPlayerEntity) {
-                            Criteria.TAME_ANIMAL.trigger((ServerPlayerEntity)player, this);
+                            Criteria.TAME_ANIMAL.trigger((ServerPlayerEntity) player, this);
                         }
                     }
 
