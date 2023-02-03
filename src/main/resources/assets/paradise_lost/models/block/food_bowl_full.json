@@ -4,7 +4,8 @@
 		"0": "paradise_lost:block/food_bowl_bottom",
 		"1": "paradise_lost:block/food_bowl_full",
 		"4": "paradise_lost:block/food_bowl_top",
-		"5": "paradise_lost:block/food_bowl_side"
+		"5": "paradise_lost:block/food_bowl_side",
+    "particle": "paradise_lost:block/food_bowl_side"
 	},
 	"elements": [
 		{
