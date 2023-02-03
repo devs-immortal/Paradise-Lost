@@ -7,7 +7,7 @@
       "translate": "advancements.paradise_lost.consume_food.description"
     },
     "icon": {
-      "item": "paradise_lost:blackcurrant"
+      "item": "paradise_lost:amadrys_bread_glazed"
     },
     "frame": "task",
     "show_toast": true,
@@ -15,14 +15,6 @@
     "hidden": false
   },
   "criteria": {
-    "blackcurrant": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:blackcurrant"]
-        }
-      }
-    },
     "gingyman": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -30,12 +22,101 @@
           "items": ["paradise_lost:gingerbread_man"]
         }
       }
+    },
+    "blacurent": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:blackcurrant"]
+        }
+      }
+    },
+    "orang": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:orange"]
+        }
+      }
+    },
+    "bushin": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:amadrys_bushel"]
+        }
+      }
+    },
+    "modles": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:amadrys_noodles"]
+        }
+      }
+    },
+    "gred": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:amadrys_bread"]
+        }
+      }
+    },
+    "swatgred": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:amadrys_bread_glazed"]
+        }
+      }
+    },
+    "groot": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:swedroot"]
+        }
+      }
+    },
+    "malk": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:mystery_milk"]
+        }
+      }
+    },
+    "mert": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:moa_meat"]
+        }
+      }
+    },
+    "cokmert": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:moa_meat_cooked"]
+        }
+      }
     }
   },
   "requirements": [
     [
-      "blackcurrant",
-      "gingyman"
+      "gingyman",
+      "blacurent",
+      "orang",
+      "bushin",
+      "modles",
+      "gred",
+      "swatgred",
+      "groot",
+      "malk",
+      "mert",
+      "cokmert"
     ]
   ],
   "parent": "paradise_lost:root"

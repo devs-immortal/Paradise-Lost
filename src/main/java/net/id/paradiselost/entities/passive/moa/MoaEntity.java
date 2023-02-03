@@ -12,6 +12,7 @@ import net.id.paradiselost.items.tools.bloodstone.BloodstoneItem;
 import net.id.paradiselost.screen.handler.MoaScreenHandler;
 import net.id.paradiselost.tag.ParadiseLostItemTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.AbstractChestBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -439,6 +440,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                         getGenes().tame(player.getUuid());
                         playSound(ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, 2, 0.75F);
                         produceParticlesServer(ParticleTypes.HAPPY_VILLAGER, 2 + random.nextInt(4), 7, 0);
+                        if (player instanceof ServerPlayerEntity) {
+                            Criteria.TAME_ANIMAL.trigger((ServerPlayerEntity)player, this);
+                        }
                     }
 
                     return ActionResult.CONSUME;

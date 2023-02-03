@@ -443,8 +443,8 @@
   "subtitles.paradise_lost.entity.corsican_hare.eat": "Corsican Hare eats",
 
   "subtitles.paradise_lost.entity.nightmare.hurt": "Nightmare hurts",
-  "subtitles.paradise_lost.entity.nightmare.ambient": "Magpie Coos",
-  "subtitles.paradise_lost.entity.nightmare.death": "Nightmare... dies?",
+  "subtitles.paradise_lost.entity.nightmare.ambient": "Magpie coos",
+  "subtitles.paradise_lost.entity.nightmare.death": "Nightmare dissipates",
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
 
@@ -452,15 +452,21 @@
 
 
   "advancements.paradise_lost.consume_food.title": "Exotic Starter",
-  "advancements.paradise_lost.consume_food.description": "Consume food that has come from the Paradise.",
-  "advancements.paradise_lost.enter_paradise_lost.title": "We need to go higher",
-  "advancements.paradise_lost.enter_paradise_lost.description": "Build and a flood a frame of shimmering glowstone, then step into the light",
-  "advancements.paradise_lost.floestone_mine.title": "What clouds are made of...",
-  "advancements.paradise_lost.floestone_mine.description": "Mine some floestone",
+  "advancements.paradise_lost.consume_food.description": "Consume something from Paradise",
+  "advancements.paradise_lost.enter_paradise_lost.title": "We Need to Go Higher",
+  "advancements.paradise_lost.enter_paradise_lost.description": "Build a frame of shimmering glowstone, flood it with water, and step into the light",
+  "advancements.paradise_lost.food_bowl_fill.title": "Not Your Average Birdfeeder",
+  "advancements.paradise_lost.food_bowl_fill.description": "Fill a feeding trough with raw meat for your Moas",
+  "advancements.paradise_lost.float_up_paradise_lost.title": "To Infinity",
+  "advancements.paradise_lost.float_up_paradise_lost.description": "Ride a levitating block to the sky limit",
+  "advancements.paradise_lost.mother_aurel.title": "The Matriarch",
+  "advancements.paradise_lost.mother_aurel.description": "Find a Mother Aurel Tree in a Highlands Thicket",
+  "advancements.paradise_lost.mother_aurel_strip.title": "Stripping For Gold",
+  "advancements.paradise_lost.mother_aurel_strip.description": "Strip a Mother Aurel log to collect its amber",
   "advancements.paradise_lost.root.title": "Paradise Lost",
-  "advancements.paradise_lost.root.description": "A hostile paradise in the sky, full of mystery and surprises!",
+  "advancements.paradise_lost.root.description": "A hostile paradise in the sky, full of mystery and surprises",
+  "advancements.paradise_lost.tame_moa.title": "Air Superiority",
+  "advancements.paradise_lost.tame_moa.description": "Tame a wild Moa with raw meat",
   "advancements.paradise_lost.void_paradise_lost.title": "I've been falling, for 30 minutes!",
-  "advancements.paradise_lost.void_paradise_lost.description": "Fall into the Overworld from the Paradise",
-  "advancements.paradise_lost.world_of_goo.title": "World of Goo",
-  "advancements.paradise_lost.world_of_goo.description": "Grow a swet"
+  "advancements.paradise_lost.void_paradise_lost.description": "Fall into the Overworld from Paradise"
 }

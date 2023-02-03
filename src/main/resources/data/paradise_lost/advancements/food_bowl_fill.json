@@ -1,0 +1,40 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.paradise_lost.food_bowl_fill.title"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.food_bowl_fill.description"
+    },
+    "icon": {
+      "item": "paradise_lost:food_bowl"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "fill": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "item": {
+          "tag": "fabric:raw_meat"
+        },
+        "location": {
+          "block": {
+            "blocks": [
+              "paradise_lost:food_bowl"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "fill"
+    ]
+  ],
+  "parent": "paradise_lost:tame_moa"
+}

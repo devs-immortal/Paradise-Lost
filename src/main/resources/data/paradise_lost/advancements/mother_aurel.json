@@ -1,0 +1,76 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.paradise_lost.mother_aurel.title"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.mother_aurel.description"
+    },
+    "icon": {
+      "item": "paradise_lost:mother_aurel_log"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:mother_aurel_log"
+            ]
+          }
+        ]
+      }
+    },
+    "stripped_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:stripped_mother_aurel_log"
+            ]
+          }
+        ]
+      }
+    },
+    "leaves": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:mother_aurel_leaves"
+            ]
+          }
+        ]
+      }
+    },
+    "sapling": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:mother_aurel_sapling"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "log",
+      "stripped_log",
+      "leaves",
+      "sapling"
+    ]
+  ],
+  "parent": "paradise_lost:root"
+}

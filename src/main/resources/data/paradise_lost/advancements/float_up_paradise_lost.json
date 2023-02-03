@@ -1,0 +1,41 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.paradise_lost.float_up_paradise_lost.title"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.float_up_paradise_lost.description"
+    },
+    "icon": {
+      "item": "paradise_lost:levitator"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "worldtop": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "location": {
+            "position": {
+              "y": {
+                "min": 420,
+                "max": 450
+              }
+            },
+            "dimension": "paradise_lost:paradise_lost"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "worldtop"
+    ]
+  ],
+  "parent": "paradise_lost:root"
+}
