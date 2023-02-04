@@ -114,6 +114,7 @@ public class DefaultedRegistryMixin {
             "stripped_crystal_log", ParadiseLost.locate("stripped_aurel_log"),
             "stripped_crystal_wood", ParadiseLost.locate("stripped_aurel_wood"),
             "blueberry_bush", ParadiseLost.locate("blackcurrant_bush"),
+            "enchanted_grass", ParadiseLost.locate("highlands_grass"),
             /* ITEMS */
             "aechor_petal", ParadiseLost.locate("hellenrose_petal"),
             "ambrosium_shard", ParadiseLost.locate("cherine"),
@@ -143,6 +144,7 @@ public class DefaultedRegistryMixin {
             "gravitite_leggings", new Identifier("minecraft", "diamond_leggings"),
             "gravitite_boots", new Identifier("minecraft", "diamond_boots"),
             "blue_berry", ParadiseLost.locate("blackcurrant"),
+            "enchanted_blueberry", ParadiseLost.locate("blackcurrant"),
             "blue_gummy_swet", ParadiseLost.locate("amadrys_bread_glazed"),
             "golden_gummy_swet", ParadiseLost.locate("amadrys_bread_glazed"),
             "valkyrie_milk", ParadiseLost.locate("mystery_milk"),
@@ -158,7 +160,30 @@ public class DefaultedRegistryMixin {
             "golden_dart_shooter", new Identifier("minecraft", "bow"),
             "enchanted_dart_shooter", new Identifier("minecraft", "bow"),
             "poison_dart_shooter", new Identifier("minecraft", "bow"),
-            "valkyrie_lance", new Identifier("minecraft", "netherite_sword")
+            "valkyrie_lance", new Identifier("minecraft", "netherite_sword"),
+            "swet_ball", new Identifier("minecraft", "slime_ball"),
+            "valkyrie_axe", new Identifier("minecraft", "diamond_axe"),
+            "valkyrie_hoe", new Identifier("minecraft", "diamond_hoe"),
+            "valkyrie_pickaxe", new Identifier("minecraft", "diamond_pickaxe"),
+            "valkyrie_shovel", new Identifier("minecraft", "diamond_shovel"),
+            "flaming_sword", new Identifier("minecraft", "diamond_sword"),
+            "lightning_sword", new Identifier("minecraft", "diamond_sword"),
+            "holy_sword", new Identifier("minecraft", "diamond_sword"),
+            "vampire_blade", new Identifier("minecraft", "diamond_sword"),
+            "pig_slayer", new Identifier("minecraft", "diamond_sword"),
+            "candy_cane_sword", new Identifier("minecraft", "diamond_sword"),
+            "phoenix_bow", new Identifier("minecraft", "bow"),
+            "gravitite_bloodstone", ParadiseLost.locate("olvite_bloodstone"),
+            "white_apple", new Identifier("minecraft", "apple"),
+            "candy_cane", ParadiseLost.locate("gingerbread_man"),
+            "neptune_helmet", new Identifier("minecraft", "diamond_helmet"),
+            "neptune_chestplate", new Identifier("minecraft", "diamond_chestplate"),
+            "neptune_leggings", new Identifier("minecraft", "diamond_leggings"),
+            "neptune_boots", new Identifier("minecraft", "diamond_boots"),
+            "phoenix_helmet", new Identifier("minecraft", "diamond_helmet"),
+            "phoenix_chestplate", new Identifier("minecraft", "diamond_chestplate"),
+            "phoenix_leggings", new Identifier("minecraft", "diamond_leggings"),
+            "phoenix_boots", new Identifier("minecraft", "diamond_boots")
     );
 
     @SafeVarargs
