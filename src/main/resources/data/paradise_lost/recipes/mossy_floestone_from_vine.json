@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mossy_cobbled_floestone",
+  "ingredients": [
+    {
+      "item": "paradise_lost:cobbled_floestone"
+    },
+    {
+      "item": "minecraft:vine"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:mossy_floestone"
+  }
+}

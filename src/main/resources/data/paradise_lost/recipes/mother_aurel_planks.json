@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "paradise_lost:mother_aurel_logs"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:mother_aurel_planks",
+    "count": 4
+  }
+}

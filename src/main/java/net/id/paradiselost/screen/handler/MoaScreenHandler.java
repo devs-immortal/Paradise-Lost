@@ -45,10 +45,10 @@ public class MoaScreenHandler extends ScreenHandler {
         
         addSlot(new FakeSlot(
                 8, 18,
-                ()->moa.isSaddled() ? new ItemStack(Items.SADDLE) : ItemStack.EMPTY,
-                (stack)->moa.setSaddled(!stack.isEmpty() && stack.getItem() instanceof SaddleItem),
-                (stack)->stack.getItem() instanceof SaddleItem
-            ){
+                () -> moa.isSaddled() ? new ItemStack(Items.SADDLE) : ItemStack.EMPTY,
+                (stack) -> moa.setSaddled(!stack.isEmpty() && stack.getItem() instanceof SaddleItem),
+                (stack) -> stack.getItem() instanceof SaddleItem
+            ) {
                 @Override
                 public int getMaxItemCount() {
                     return 1;
@@ -64,8 +64,8 @@ public class MoaScreenHandler extends ScreenHandler {
                 8, 36,
                 moa::getChest,
                 moa::setChest,
-                (stack)->stack.getItem() instanceof BlockItem item && item.getBlock() instanceof AbstractChestBlock
-            ){
+                (stack) -> stack.getItem() instanceof BlockItem item && item.getBlock() instanceof AbstractChestBlock
+            ) {
                 @Override
                 public int getMaxItemCount() {
                     return 1;
@@ -84,7 +84,7 @@ public class MoaScreenHandler extends ScreenHandler {
         );
     
         //FIXME This needs a real fix, without this the client never sees that the Moa has an inventory
-        if(moa.world.isClient){
+        if (moa.world.isClient) {
             moa.refreshChest(false);
             moaInventory = moa.getInventory();
         }
@@ -93,10 +93,10 @@ public class MoaScreenHandler extends ScreenHandler {
         var chestInventory = enableMoaInventory ? moaInventory : dummy;
         
         Set<Slot> moaChestSlots = new HashSet<>();
-        for(int y = 0; y < 4; y++){
+        for (int y = 0; y < 4; y++) {
             int slotY = 18 + 18 * y;
-            for(int x = 0; x < 5; x++){
-                moaChestSlots.add(addSlot(new Slot(chestInventory, y * 5 + x, 80 + x * 18, slotY){
+            for (int x = 0; x < 5; x++) {
+                moaChestSlots.add(addSlot(new Slot(chestInventory, y * 5 + x, 80 + x * 18, slotY) {
                     @Override
                     public boolean isEnabled() {
                         return enableMoaInventory;
@@ -118,14 +118,14 @@ public class MoaScreenHandler extends ScreenHandler {
     
     private void updateChestState() {
         var hasChest = moa.hasChest();
-        if(hasChest == enableMoaInventory){
+        if (hasChest == enableMoaInventory) {
             return;
         }
         enableMoaInventory = hasChest;
         
         var inventory = hasChest ? moa.getInventory() : dummy;
-        for(var slot : moaChestSlots){
-            ((SlotAccessor)slot).setInventory(inventory);
+        for (var slot : moaChestSlots) {
+            ((SlotAccessor) slot).setInventory(inventory);
         }
     }
     
@@ -134,7 +134,7 @@ public class MoaScreenHandler extends ScreenHandler {
         return player.squaredDistanceTo(moa) <= 64;
     }
     
-    public boolean hasMoaInventory(){
+    public boolean hasMoaInventory() {
         return enableMoaInventory;
     }
     

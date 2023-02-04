@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "paradise_lost:olvite"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:olvite_pickaxe"
+  }
+}

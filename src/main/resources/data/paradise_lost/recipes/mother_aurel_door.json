@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:mother_aurel_planks"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:mother_aurel_door",
+    "count": 3
+  }
+}

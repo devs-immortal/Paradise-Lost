@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SRS",
+    "WGW",
+    "SRS"
+  ],
+  "key": {
+    "G": {
+      "item": "paradise_lost:blue_cloud"
+    },
+    "S": {
+      "item": "paradise_lost:floestone_brick"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:levitator"
+  }
+}

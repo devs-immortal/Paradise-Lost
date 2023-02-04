@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class PhoenixArmorRenderer implements ArmorRenderer {
+public class PhoenixArmorRenderer implements ArmorRenderer { //24: Left this in to repurpose it later because I liked it
     private static final Identifier TEXTURE = new Identifier("minecraft", "textures/models/armor/paradise_lost_phoenix_layer_1.png");
     private static PhoenixArmorModel phoenixArmorModel;
 

@@ -1,6 +1,0 @@
-{
-  "parent": "block/fence_side",
-  "textures": {
-    "texture": "paradise_lost:block/golden_oak_planks"
-  }
-}

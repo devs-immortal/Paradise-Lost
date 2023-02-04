@@ -1,21 +1,7 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "paradise_lost:block/dirt"
-      },
-      {
-        "model": "paradise_lost:block/dirt",
-        "y": 90
-      },
-      {
-        "model": "paradise_lost:block/dirt",
-        "y": 180
-      },
-      {
-        "model": "paradise_lost:block/dirt",
-        "y": 270
-      }
-    ]
+    "": {
+      "model": "paradise_lost:block/dirt"
+    }
   }
 }

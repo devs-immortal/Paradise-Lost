@@ -37,7 +37,7 @@ public class ParadiseLostDimension {
     public static void init() {
         try {
             dimensionType = MiscUtil.deserializeDataJson(DimensionType.CODEC, locate("dimension_type/paradise_lost"));
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Failed to read Paradise Lost dimension JSONs", e);
         }
         
@@ -68,19 +68,19 @@ public class ParadiseLostDimension {
          This still uses the normal JSON files, but it reads them here before the server has a chance to behave
          differently.
         */
-        if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             return;
         }
     
         try {
             registry.add(
-                OPTIONS_KEY,
-                MiscUtil.deserializeDataJson(
-                    RegistryOps.of(JsonOps.INSTANCE, registryManager),
-                    DimensionOptions.CODEC,
-                    locate("dimension/paradise_lost")
-                ),
-                Lifecycle.stable()
+                    OPTIONS_KEY,
+                    MiscUtil.deserializeDataJson(
+                        RegistryOps.of(JsonOps.INSTANCE, registryManager),
+                        DimensionOptions.CODEC,
+                        locate("dimension/paradise_lost")
+                    ),
+                    Lifecycle.stable()
             );
         } catch (IOException e) {
             throw new RuntimeException("Failed to read dimension options", e);

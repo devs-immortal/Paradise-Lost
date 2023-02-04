@@ -8,6 +8,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import java.util.Map;
 
 @Mixin(NbtCompound.class)
-public interface NbtCompoundAccessor{
+public interface NbtCompoundAccessor {
     @Accessor Map<String, NbtElement> getEntries();
 }

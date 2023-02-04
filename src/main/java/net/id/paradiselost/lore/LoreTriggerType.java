@@ -1,6 +1,6 @@
 package net.id.paradiselost.lore;
 
-public enum LoreTriggerType{
+public enum LoreTriggerType {
     NONE,
     ITEM,
 }

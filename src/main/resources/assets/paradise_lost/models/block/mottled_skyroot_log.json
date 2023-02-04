@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "paradise_lost:block/mottled_skyroot_log_top",
-    "side": "paradise_lost:block/mottled_skyroot_log_side"
-  }
-}

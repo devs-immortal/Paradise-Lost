@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab",
-  "textures": {
-    "bottom": "paradise_lost:block/icestone",
-    "top": "paradise_lost:block/icestone",
-    "side": "paradise_lost:block/icestone"
-  }
-}

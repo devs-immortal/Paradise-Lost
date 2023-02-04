@@ -8,7 +8,7 @@ import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
-public class PhoenixArmorModel extends BipedEntityModel<LivingEntity> {
+public class PhoenixArmorModel extends BipedEntityModel<LivingEntity> { //24: Left this in to repurpose it later because I liked it
 
     public ModelPart head;
 

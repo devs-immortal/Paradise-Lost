@@ -19,8 +19,8 @@ public class SimmeringStatusEffect extends StatusEffect implements ConditionModi
         var random = entity.getRandom();
         var world = entity.getEntityWorld();
 
-        if(world.getTime() % (random.nextInt(10) + 6) == 0) {
-            if(random.nextBoolean()) {
+        if (world.getTime() % (random.nextInt(10) + 6) == 0) {
+            if (random.nextBoolean()) {
                 entity.heal(1F);
                 entity.playSound(ParadiseLostSoundEvents.EFFECT_SIMMERING_SIMMER, random.nextFloat() * 0.4F + 0.4F, random.nextFloat() * 0.5F + 1);
             }

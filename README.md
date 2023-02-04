@@ -5,18 +5,26 @@
 
 **Is this official?**
 
-Paradise Lost is an unofficial reimagining of the original Aether mod, developed by Gilded Games (GG). 
-We are a team separate from GG looking to adapt the original concepts of The Aether to modern Minecraft's updated design concepts, and give the mod a fresh set of textures to match. As a Fabric mod we're looking to take advantage of Fabric's quick updates to the latest versions to keep Paradise Lost usable with the newest Minecraft and stay up-to-date.
+Paradise Lost stands to be a new Skylands Dimension mod, inspired by the legendary Aether mod and seeking to grant great, fresh adventures.
 
-**What is The Aether?**
+**What is Paradise Lost?**
 
-The Aether is a dimension high in the sky composed of floating islands. 
-Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, structures to explore, mythical creatures, and perilous dungeons. Build a Glowstone frame and add water to light the mystical portal, step in and be transported to the beautiful but hostile paradise known as the Aether.
-This tranquil oasis is the polar opposite of the Nether, filled with lush trees and foliage, and populated by unique and exotic mobs, both hostile and friendly. The Aether is deceptively charming, and the further you explore, the darker its secrets get. Mine new ores, craft new gear, explore hidden temples and dungeons, and battle to claim The Aether as your own.
+Let me tell you a tale of a land in the sky, a hostile paradise lost to time. ...
+
+These old skylands are shattered world set on a canvas of clouds, painted with dreamy colors, cast upon a new dawn.
+This world is a host to a great many creatures, peoples, and places, amidst the sea of clouds you may find
+landscapes unlike any you've seen before, dungeons filled with trap and treasure, and hamlets that may make a for a goody home.
+Gaze upon the horizon as a new dawn breaks over this olden land, allow yourself to get lost in the endless expanse, let your heart guide you.
+
+Gaze upon the moon as you wander amidst snow, song, and sand, remembering the home you left behind but never looking back.
+For what does homesickness say forthwith about a man when wonders lay abound at each crevice...
+Regardless, why are you still here? Go venture out! I am not going to tell you the whole story, go find it out yourself!
+After all...
+An explorer must explore.
 
 You can download the mod on [Modrinth](https://modrinth.com/mod/paradise-lost), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
 
-**Original repo:** [GildedGames/The-Aether](https://github.com/Gilded-Games/The-Aether)
+**The Aether repository:** [GildedGames/The-Aether](https://github.com/Gilded-Games/The-Aether)
 
 ## Support
 [![Discord](https://img.shields.io/discord/770691727568404521.svg?logoColor=FFFFFF&logo=discord&color=7289DA)](https://discord.com/invite/wmMa47n)
@@ -34,10 +42,10 @@ Paradise Lost makes use of crowd sourced translations.
 
 ## Gallery
 
-| <img src="https://user-images.githubusercontent.com/53229958/120235847-8faaa780-c220-11eb-98e5-c288cb01c475.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/120235855-92a59800-c220-11eb-994f-889c843beb5b.png" width="570"> |
+| <img src="https://user-images.githubusercontent.com/53229958/216715850-84a79b78-9def-419b-be31-eff317d8ca26.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/216715905-de7a097c-df7e-41d5-936b-339be2632a5b.png" width="570"> |
 | --- | --- |
-| <img src="https://user-images.githubusercontent.com/53229958/120235859-93d6c500-c220-11eb-86bc-5fac972ed2eb.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/120235863-946f5b80-c220-11eb-99e6-98c03a79a29a.png" width="570"> |
-| <img src="https://user-images.githubusercontent.com/53229958/120235865-95a08880-c220-11eb-8003-5904088b0fcf.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/120235868-96391f00-c220-11eb-9cd1-9186fc07d37a.png" width="570"> |
+| <img src="https://user-images.githubusercontent.com/53229958/216715924-f32b4a2d-5968-4cbe-8053-b61ec50b8609.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/216715944-887d2120-8c04-4bee-88eb-d37654e648eb.png" width="570"> |
+| <img src="https://user-images.githubusercontent.com/53229958/216715953-4177791b-32b2-4bb5-a1ab-571e93819d3f.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/216715966-197e1456-318a-4b59-a166-5d3a75ea02cd.png" width="570"> |
 
 ## License information
 Created by Immortal Devs.\

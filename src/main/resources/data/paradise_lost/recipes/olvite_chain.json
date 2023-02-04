@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "N",
+    "I",
+    "N"
+  ],
+  "key": {
+    "I": {
+      "item": "paradise_lost:olvite"
+    },
+    "N": {
+      "item": "paradise_lost:olvite_nugget"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:olvite_chain"
+  }
+}

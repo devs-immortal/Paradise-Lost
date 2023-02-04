@@ -2,8 +2,6 @@ package net.id.paradiselost.world.feature.tree.placers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.ints.IntSets;
-import net.id.paradiselost.util.AStarManager;
 import net.id.paradiselost.world.feature.tree.ParadiseLostTreeHell;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -12,13 +10,11 @@ import net.minecraft.util.math.floatprovider.FloatProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
-import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -63,11 +59,11 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
         int firstHeight = random.nextInt(baseHeight) + baseHeight / 2 + 1;
 
         // Create initial trunk
-        for (int i = 0; i <= firstHeight+1; i++) {
+        for (int i = 0; i <= firstHeight + 1; i++) {
             getAndSetState(world, replacer, random, startPos.up(i), config);
         }
         // Generate branches from slightly lower than the top
-        BlockPos trunkTop = startPos.up(firstHeight-2);
+        BlockPos trunkTop = startPos.up(firstHeight - 2);
         // Put leaf node on top of trunk
         nodes.add(new FoliagePlacer.TreeNode(trunkTop.up(3), 0, false));
 
@@ -93,17 +89,17 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
                     break;
                 }
                 if (previous == yOffset) { // If not moving upwards, don't fill
-                    getAndSetState(world, replacer, random, trunkTop.up(yOffset).offset(dir, offset).offset(dir2, offset/2), config);
+                    getAndSetState(world, replacer, random, trunkTop.up(yOffset).offset(dir, offset).offset(dir2, offset / 2), config);
                 } else { // But if we are, fill up to the point so everything is connected
-                    for (int y = previous+1; y <= yOffset; y++) {
-                        getAndSetState(world, replacer, random, trunkTop.up(y).offset(dir, offset).offset(dir2, offset/2), config);
+                    for (int y = previous + 1; y <= yOffset; y++) {
+                        getAndSetState(world, replacer, random, trunkTop.up(y).offset(dir, offset).offset(dir2, offset / 2), config);
                     }
                 }
                 offset++; // Move to next blockpos
                 previous = yOffset; // Save offset for above position check
             }
             trunkTop = trunkTop.up(); // At end of branch, add leaf node
-            nodes.add(new FoliagePlacer.TreeNode(trunkTop.up(previous-1).offset(dir, offset-2).offset(dir2, offset/4), 0, false));
+            nodes.add(new FoliagePlacer.TreeNode(trunkTop.up(previous - 1).offset(dir, offset - 2).offset(dir2, offset / 4), 0, false));
         }
 
         return nodes;
@@ -111,7 +107,7 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
 
     // Curve function for generating a branch
     private int trunkFunc(float x, float a, float b) {
-        return (int) Math.ceil(-Math.log((2*a / x) - b) + 3);
+        return (int) Math.ceil(-Math.log((2 * a / x) - b) + 3);
     }
 
     // Mojang, why isn't there a builtin function to do this?

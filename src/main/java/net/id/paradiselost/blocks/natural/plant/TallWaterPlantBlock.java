@@ -26,7 +26,7 @@ public class TallWaterPlantBlock extends TallPlantBlock implements Waterloggable
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         if (state.get(HALF) != DoubleBlockHalf.UPPER) {
-            return world.isWater(pos) &&  super.canPlaceAt(state, world, pos);
+            return world.isWater(pos) && super.canPlaceAt(state, world, pos);
         }
         return super.canPlaceAt(state, world, pos);
     }

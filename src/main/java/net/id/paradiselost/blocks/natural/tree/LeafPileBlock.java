@@ -52,5 +52,6 @@ public class LeafPileBlock extends FallingBlock {
     }
 
     @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {}
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+    }
 }

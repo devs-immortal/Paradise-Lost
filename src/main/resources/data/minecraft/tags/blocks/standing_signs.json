@@ -1,10 +1,9 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:skyroot_sign",
-    "paradise_lost:golden_oak_sign",
+    "paradise_lost:aurel_sign",
+    "paradise_lost:mother_aurel_sign",
     "paradise_lost:orange_sign",
-    "paradise_lost:crystal_sign",
     "paradise_lost:wisteria_sign"
   ]
 }

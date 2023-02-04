@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "paradise_lost:cherine_ore"
+  },
+  "result": "paradise_lost:cherine",
+  "experience": 0.1,
+  "cookingtime": 100
+}

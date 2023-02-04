@@ -62,13 +62,13 @@ public class ProjectedOrganicCoverFeature extends Feature<ProjectedOrganicCoverC
         while (adjustments <= maxProjection) {
             var floor = pos.down();
 
-            if(!world.getBlockState(pos).getMaterial().isReplaceable()) {
+            if (!world.getBlockState(pos).getMaterial().isReplaceable()) {
                 pos = pos.up();
             }
-            else if(world.getBlockState(floor).isAir()) {
+            else if (world.getBlockState(floor).isAir()) {
                 pos = floor;
             }
-            else if(state.canPlaceAt(world, pos) && world.getBlockState(floor).isFullCube(world, floor)) {
+            else if (state.canPlaceAt(world, pos) && world.getBlockState(floor).isFullCube(world, floor)) {
                 world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
                 break;
             }

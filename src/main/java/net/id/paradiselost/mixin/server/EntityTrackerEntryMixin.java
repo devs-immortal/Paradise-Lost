@@ -21,8 +21,7 @@ public class EntityTrackerEntryMixin {
     private int gravFlippedTime = 0;
     @Final
     @Shadow
-    private
-    Entity entity;
+    private Entity entity;
 
     @Inject(method = "sendPackets", at = @At("HEAD"))
     private void sendPackets(Consumer<Packet<?>> sender, CallbackInfo ci) {

@@ -6,10 +6,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 
-public final class LoreHandler extends ScreenHandler{
+public final class LoreHandler extends ScreenHandler {
     private final PlayerEntity player;
     
-    public LoreHandler(int syncId, PlayerInventory playerInventory){
+    public LoreHandler(int syncId, PlayerInventory playerInventory) {
         super(ParadiseLostScreens.LORE, syncId);
         this.player = playerInventory.player;
     }
@@ -20,7 +20,7 @@ public final class LoreHandler extends ScreenHandler{
     }
     
     @Override
-    public boolean canUse(PlayerEntity player){
+    public boolean canUse(PlayerEntity player) {
         return this.player.equals(player);
     }
 }

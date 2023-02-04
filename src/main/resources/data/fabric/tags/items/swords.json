@@ -1,15 +1,6 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:zanite_sword",
-    "paradise_lost:gravitite_sword",
-    "paradise_lost:valkyrie_lance",
-    "paradise_lost:lightning_sword",
-    "paradise_lost:holy_sword",
-    "paradise_lost:flaming_sword",
-    "paradise_lost:candy_cane_sword",
-    "paradise_lost:gravitite_sword",
-    "paradise_lost:vampire_blade",
-    "paradise_lost:pig_slayer"
+    "paradise_lost:olvite_sword"
   ]
 }

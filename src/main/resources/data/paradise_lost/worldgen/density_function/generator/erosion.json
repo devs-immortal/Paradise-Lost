@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:noise",
+  "noise": "paradise_lost:generator/erosion",
+  "xz_scale": 1,
+  "y_scale": 1
+}

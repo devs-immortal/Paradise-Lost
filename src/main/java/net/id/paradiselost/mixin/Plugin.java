@@ -9,39 +9,43 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
-public final class Plugin implements IMixinConfigPlugin{
+public final class Plugin implements IMixinConfigPlugin {
     private static final boolean isDevel = FabricLoader.getInstance().isDevelopmentEnvironment();
     
     @Override
-    public void onLoad(String mixinPackage){}
+    public void onLoad(String mixinPackage) {
+    }
     
     @Override
-    public String getRefMapperConfig(){
+    public String getRefMapperConfig() {
         return null;
     }
     
     @Override
-    public boolean shouldApplyMixin(String targetClassName, String mixinClassName){
-        if(mixinClassName.equals("net.id.paradiselost.mixin.client.ClientPlayerEntityMixin")){
+    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.equals("net.id.paradiselost.mixin.client.ClientPlayerEntityMixin")) {
             return !CompatConfig.SPECTRUM_WORKAROUND;
         }
-        if(isDevel){
+        if (isDevel) {
             return true;
         }
         return !mixinClassName.startsWith("net.id.paradiselost.mixin.devel.");
     }
     
     @Override
-    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets){}
+    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
+    }
     
     @Override
-    public List<String> getMixins(){
+    public List<String> getMixins() {
         return List.of();
     }
     
     @Override
-    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo){}
+    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+    }
     
     @Override
-    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo){}
+    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+    }
 }

@@ -6,9 +6,6 @@ import net.id.incubus_core.condition.base.ConditionManager;
 import net.id.paradiselost.effect.condition.Conditions;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
-import net.id.incubus_core.condition.api.ConditionAPI;
-import net.id.incubus_core.condition.api.Persistence;
-import net.id.incubus_core.condition.base.ConditionManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
@@ -44,9 +41,9 @@ public class LichenBlock extends FallingBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         entity.fallDistance = 0;
-        if(venomous) {
+        if (venomous) {
             entity.slowMovement(state, new Vec3d(0.65D, 0.875D, 0.65D));
-            if(entity instanceof LivingEntity livingEntity) {
+            if (entity instanceof LivingEntity livingEntity) {
                 ConditionManager manager = ConditionAPI.getConditionManager(livingEntity);
                 manager.add(Conditions.VENOM, Persistence.TEMPORARY, 1F);
             }
@@ -58,7 +55,7 @@ public class LichenBlock extends FallingBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        for(int i = random.nextInt(2); i < 3; i++) {
+        for (int i = random.nextInt(2); i < 3; i++) {
             BlockPos.streamOutwards(pos, 3, 2, 3)
                     .filter(temp -> world.getBlockState(temp).isIn(ParadiseLostBlockTags.LICHEN_SPREADABLES))
                     .filter(temp -> world.isAir(temp.up()) && world.getLightLevel(temp.up()) <= 9)
@@ -84,7 +81,7 @@ public class LichenBlock extends FallingBlock {
     @Override
     public void onSteppedOn(World world, BlockPos topPos, BlockState state, Entity entity) {
         BlockPos pos = topPos.down(venomous ? 2 : 4);
-        while(pos.getY() != topPos.getY() + 1) {
+        while (pos.getY() != topPos.getY() + 1) {
             tryFall(world, pos, state);
             pos = pos.up();
         }
@@ -99,7 +96,7 @@ public class LichenBlock extends FallingBlock {
 
     public void tryFall(World world, BlockPos pos, BlockState state) {
         if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY()) {
-            if (state.getPistonBehavior().equals(PistonBehavior.BLOCK) || state.getBlock().getHardness() == -1F){
+            if (state.getPistonBehavior().equals(PistonBehavior.BLOCK) || state.getBlock().getHardness() == -1F) {
                 return;
             }
             FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, pos, state);
@@ -107,7 +104,7 @@ public class LichenBlock extends FallingBlock {
 
             BlockPos.iterateOutwards(pos, 1, 0, 1).forEach(checkPos -> {
                 var checkState = world.getBlockState(checkPos);
-                if(!checkPos.equals(pos) && checkState.isOf(this)) {
+                if (!checkPos.equals(pos) && checkState.isOf(this)) {
                     world.setBlockState(checkPos, checkState.with(ALLOW_FALL, true));
                 }
             });

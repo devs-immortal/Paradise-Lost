@@ -3,7 +3,7 @@
   "values": [
     "#minecraft:logs",
     "#paradise_lost:dirt_blocks",
-    "paradise_lost:cobbled_holystone",
-    "paradise_lost:mossy_holystone"
+    "paradise_lost:cobbled_floestone",
+    "paradise_lost:mossy_floestone"
   ]
 }

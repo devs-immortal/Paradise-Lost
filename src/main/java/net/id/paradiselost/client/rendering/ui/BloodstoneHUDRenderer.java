@@ -6,13 +6,11 @@ import net.fabricmc.api.Environment;
 import net.id.incubus_core.condition.api.Severity;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.items.tools.bloodstone.*;
-import net.id.incubus_core.condition.api.Severity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -42,10 +40,10 @@ public class BloodstoneHUDRenderer {
                     RenderSystem.enableBlend();
                     RenderSystem.defaultBlendFunc();
                     matrixStack.translate(client.getWindow().getScaledWidth() / 2f, client.getWindow().getScaledHeight() / 2f, 0);
-                    if (stack.getItem() instanceof AmbrosiumBloodstoneItem) {
-                        renderAmbrosium(matrixStack, client, capturedData);
-                    } else if (stack.getItem() instanceof ZaniteBloodstoneItem) {
-                        renderZanite(matrixStack, client, capturedData);
+                    if (stack.getItem() instanceof CherineBloodstoneItem) {
+                        renderCherine(matrixStack, client, capturedData);
+                    } else if (stack.getItem() instanceof OlviteBloodstoneItem) {
+                        renderOlvite(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof GravititeBloodstoneItem) {
                         renderGravitite(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof AbstentineBloodstoneItem) {
@@ -60,14 +58,14 @@ public class BloodstoneHUDRenderer {
 
     private static boolean isLookingAtMatchingEntity(MinecraftClient client, BloodstoneCapturedData capturedData) {
         if (
-            client.crosshairTarget == null
-            || client.crosshairTarget.getType() != HitResult.Type.ENTITY
-            || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity)
+                client.crosshairTarget == null
+                || client.crosshairTarget.getType() != HitResult.Type.ENTITY
+                || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity)
         ) {
             return false;
         }
 
-        if(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity entity) {
+        if (((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity entity) {
             return doUUIDMatch(entity, capturedData);
         }
 
@@ -78,7 +76,7 @@ public class BloodstoneHUDRenderer {
         return capturedData.uuid.equals(entity.getUuid());
     }
 
-    private static void renderAmbrosium(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+    private static void renderCherine(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
         renderRing(matrixStack, 0, 0);
         renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
@@ -87,7 +85,7 @@ public class BloodstoneHUDRenderer {
         renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), Text.literal(bloodstoneCapturedData.TF), 80, 0);
     }
 
-    private static void renderZanite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+    private static void renderOlvite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
         Sprite affinitySprite = statusEffectSpriteManager.getSprite(StatusEffects.BAD_OMEN).getAtlas().getSprite(ParadiseLost.locate("hud/bloodstone/affinity"));
         Sprite raceSprite = statusEffectSpriteManager.getSprite(StatusEffects.BAD_OMEN).getAtlas().getSprite(ParadiseLost.locate("hud/bloodstone/race"));

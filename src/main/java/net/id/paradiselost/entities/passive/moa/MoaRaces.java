@@ -29,12 +29,12 @@ public class MoaRaces {
     public static final MoaRace REDHOOD = register("redhood", new MoaRace(MAX_HEALTH, TANK));
     public static final MoaRace MOONSTRUCK = register("moonstruck", new MoaRace(GLIDING_SPEED, SPEED, true, true, ParticleTypes.GLOW));
 
-    private static MoaRace register(String name, MoaRace race){
+    private static MoaRace register(String name, MoaRace race) {
         return MoaAPI.register(ParadiseLost.locate(name), race);
     }
 
     // Register breeding and spawning.
-    public static void init(){
+    public static void init() {
         registerSpawning(HIGHLANDS_BLUE, 50, HIGHLANDS_PLAINS_KEY);
         registerSpawning(HIGHLANDS_BLUE, 50, HIGHLANDS_FOREST_KEY);
 

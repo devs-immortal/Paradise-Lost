@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "paradise_lost:block/cherine_wall_torch"
+    },
+    "facing=south": {
+      "model": "paradise_lost:block/cherine_wall_torch",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "paradise_lost:block/cherine_wall_torch",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "paradise_lost:block/cherine_wall_torch",
+      "y": 270
+    }
+  }
+}

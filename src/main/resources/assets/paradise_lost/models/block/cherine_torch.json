@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_torch",
+  "textures": {
+    "torch": "paradise_lost:block/cherine_torch"
+  }
+}

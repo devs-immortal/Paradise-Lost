@@ -2,17 +2,12 @@ package net.id.paradiselost.util;
 
 import net.id.paradiselost.ParadiseLost;
 import net.minecraft.resource.Resource;
-import net.minecraft.resource.metadata.ResourceMetadata;
-import net.minecraft.resource.metadata.ResourceMetadataReader;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +24,7 @@ import static net.id.paradiselost.ParadiseLost.locate;
  */
 public final class ParadiseLostSoundEvents {
 
-    private ParadiseLostSoundEvents(){
+    private ParadiseLostSoundEvents() {
         throw new RuntimeException();
     }
     
@@ -38,7 +33,7 @@ public final class ParadiseLostSoundEvents {
      */
     private static final Set<AbstractSoundEvent> SOUNDS = new HashSet<>();
 
-    public static final SoundEvent BLOCK_BLUEBERRY_BUSH_PICK_BLUEBERRIES = childEvent("block.blueberry_bush.pick_blueberries", SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES);
+    public static final SoundEvent BLOCK_BLACKCURRANT_BUSH_PICK_BLUEBERRIES = childEvent("block.blackcurrant_bush.pick_blueberries", SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES);
     public static final SoundEvent BLOCK_PORTAL_AMBIENT = event("block.portal.ambient");
     public static final SoundEvent BLOCK_PORTAL_TRAVEL = event("block.portal.travel");
     public static final SoundEvent BLOCK_PORTAL_TRIGGER = event("block.portal.trigger");
@@ -59,16 +54,8 @@ public final class ParadiseLostSoundEvents {
 
     public static final SoundEvent EFFECT_SIMMERING_SIMMER = childEvent("effect.simmering.simmer", SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT);
 
-
-    public static final SoundEvent ENTITY_SWET_ATTACK = childEvent("entity.swet.attack", SoundEvents.ENTITY_SLIME_ATTACK);
-
-    public static final SoundEvent ENTITY_AECHOR_PLANT_DEATH = childEvent("entity.aechor_plant.death", SoundEvents.ENTITY_GENERIC_BIG_FALL);
-    public static final SoundEvent ENTITY_AECHOR_PLANT_SHOOT = childEvent("entity.aechor_plant.shoot", SoundEvents.ENTITY_SKELETON_SHOOT);
-
-    public static final SoundEvent ENTITY_COCKATRICE_AMBIENT = childEvent("entity.cockatrice.ambient", "minecraft:entity.hostile.ambient");
-    public static final SoundEvent ENTITY_COCKATRICE_DEATH = childEvent("entity.cockatrice.death", SoundEvents.ENTITY_HOSTILE_DEATH);
-    public static final SoundEvent ENTITY_COCKATRICE_HURT = childEvent("entity.cockatrice.hurt", SoundEvents.ENTITY_HOSTILE_HURT);
-    public static final SoundEvent ENTITY_COCKATRICE_SPIT = childEvent("entity.cockatrice.spit", SoundEvents.ENTITY_LLAMA_SPIT);
+    public static final SoundEvent ENTITY_HELLENROSE_DEATH = childEvent("entity.hellenrose.death", SoundEvents.ENTITY_GENERIC_BIG_FALL);
+    public static final SoundEvent ENTITY_HELLENROSE_SHOOT = childEvent("entity.hellenrose.shoot", SoundEvents.ENTITY_SKELETON_SHOOT);
 
     public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", SoundEvents.ENTITY_PARROT_AMBIENT);
     public static final SoundEvent ENTITY_MOA_GLIDING = childEvent("entity.moa.gliding", SoundEvents.ENTITY_PHANTOM_FLAP);
@@ -79,34 +66,22 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MOA_EGG_HATCH = childEvent("entity.moa.egg_hatch", SoundEvents.ENTITY_TURTLE_EGG_HATCH);
     public static final SoundEvent ENTITY_MOA_STEP = childEvent("entity.moa.step", SoundEvents.ENTITY_PIG_STEP);
 
-    public static final SoundEvent ENTITY_AERBUNNY_SNIFF = childEvent("entity.aerbunny.sniff", SoundEvents.ENTITY_FOX_SNIFF);
-    public static final SoundEvent ENTITY_AERBUNNY_JUMP = childEvent("entity.aerbunny.jump", SoundEvents.ENTITY_RABBIT_JUMP);
-    public static final SoundEvent ENTITY_AERBUNNY_HURT = childEvent("entity.aerbunny.hurt", SoundEvents.ENTITY_RABBIT_HURT);
-    public static final SoundEvent ENTITY_AERBUNNY_DEATH = childEvent("entity.aerbunny.death", SoundEvents.ENTITY_RABBIT_DEATH);
-    public static final SoundEvent ENTITY_AERBUNNY_EAT = childEvent("entity.aerbunny.eat", SoundEvents.ENTITY_LLAMA_EAT);
+    public static final SoundEvent ENTITY_PARADISE_HARE_SNIFF = childEvent("entity.corsican_hare.sniff", SoundEvents.ENTITY_FOX_SNIFF);
+    public static final SoundEvent ENTITY_PARADISE_HARE_JUMP = childEvent("entity.corsican_hare.jump", SoundEvents.ENTITY_RABBIT_JUMP);
+    public static final SoundEvent ENTITY_PARADISE_HARE_HURT = childEvent("entity.corsican_hare.hurt", SoundEvents.ENTITY_RABBIT_HURT);
+    public static final SoundEvent ENTITY_PARADISE_HARE_DEATH = childEvent("entity.corsican_hare.death", SoundEvents.ENTITY_RABBIT_DEATH);
+    public static final SoundEvent ENTITY_PARADISE_HARE_EAT = childEvent("entity.corsican_hare.eat", SoundEvents.ENTITY_LLAMA_EAT);
 
     public static final SoundEvent ENTITY_NIGHTMARE_HURT = event("entity.nightmare.hurt");
     public static final SoundEvent ENTITY_NIGHTMARE_DEATH = event("entity.nightmare.death");
     public static final SoundEvent ENTITY_NIGHTMARE_AMBIENT = event("entity.nightmare.ambient");
 
 
-    public static final SoundEvent ITEM_ARMOR_EQUIP_ZANITE = childEvent("item.armor.equip.zanite", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_GRAVITITE = childEvent("item.armor.equip.gravitite", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_NEPTUNE = childEvent("item.armor.equip.neptune", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_PHOENIX = childEvent("item.armor.equip.phoenix", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_OBSIDIAN = childEvent("item.armor.equip.obsidian", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_VALKYRIE = childEvent("item.armor.equip.valkyrie", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
-    public static final SoundEvent ITEM_ARMOR_EQUIP_SENTRY = childEvent("item.armor.equip.sentry", SoundEvents.ITEM_ARMOR_EQUIP_TURTLE);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_OLVITE = childEvent("item.armor.equip.olvite", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 
     public static final SoundEvent ITEM_DART_SHOOTER_SHOOT = childEvent("item.dart_shooter.shoot", SoundEvents.ITEM_CROSSBOW_SHOOT);
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = childEvent("item.bloodstone.prick", SoundEvents.ENTITY_BEE_STING);
 
-    public static final class Music{
-        public static final MusicSound PARADISE_LOST = new MusicSound(MUSIC_PARADISE_LOST, 12000, 24000, false);
-
-        //Triggers <clinit>()V
-        private static void init(){}
-    }
 
     /**
      * Creates a new sound event with the sound and subtitle key based off of the name.
@@ -114,7 +89,7 @@ public final class ParadiseLostSoundEvents {
      * @param name The name of the event
      * @return The new event
      */
-    private static SoundEvent event(String name){
+    private static SoundEvent event(String name) {
         return event(name, true);
     }
 
@@ -124,7 +99,7 @@ public final class ParadiseLostSoundEvents {
      * @param event The sound event
      * @return The new event
      */
-    private static SoundEvent event(SoundEvent event){
+    private static SoundEvent event(SoundEvent event) {
         return event(event.getId().toString(), true);
     }
     
@@ -135,7 +110,7 @@ public final class ParadiseLostSoundEvents {
      * @param sounds The sounds to randomly pick
      * @return The new event
      */
-    private static SoundEvent event(String name, String... sounds){
+    private static SoundEvent event(String name, String... sounds) {
         return event(name, true, sounds);
     }
     
@@ -147,7 +122,7 @@ public final class ParadiseLostSoundEvents {
      * @param subtitles Does this event have a subtitle?
      * @return The new event
      */
-    private static SoundEvent event(String name, boolean subtitles){
+    private static SoundEvent event(String name, boolean subtitles) {
         return event(name, subtitles, name.replaceAll("\\.", "/"));
     }
     
@@ -159,13 +134,13 @@ public final class ParadiseLostSoundEvents {
      * @param sounds The sounds to randomly pick
      * @return The new event
      */
-    private static SoundEvent event(String name, boolean subtitles, String... sounds){
+    private static SoundEvent event(String name, boolean subtitles, String... sounds) {
         var event = new ParadiseLostSoundEvent(
-            locate(name),
-            subtitles ? "subtitles." + MOD_ID + "." + name : null,
-            Stream.of(sounds)
-                .map(ParadiseLost::locate)
-                .collect(Collectors.toUnmodifiableSet())
+                locate(name),
+                subtitles ? "subtitles." + MOD_ID + "." + name : null,
+                Stream.of(sounds)
+                    .map(ParadiseLost::locate)
+                    .collect(Collectors.toUnmodifiableSet())
         );
         SOUNDS.add(event);
         return event;
@@ -177,8 +152,8 @@ public final class ParadiseLostSoundEvents {
      * @param songs The tracks to play
      * @return The new sound event
      */
-    private static SoundEvent music(String... songs){
-        var event = new MusicSoundEvent(Stream.of(songs).map((track)->locate("music/paradise_lost/" + track)).collect(Collectors.toUnmodifiableSet()));
+    private static SoundEvent music(String... songs) {
+        var event = new MusicSoundEvent(Stream.of(songs).map((track) -> locate("music/paradise_lost/" + track)).collect(Collectors.toUnmodifiableSet()));
         SOUNDS.add(event);
         return event;
     }
@@ -190,7 +165,7 @@ public final class ParadiseLostSoundEvents {
      * @param parent The source of the sounds
      * @return The new sound event
      */
-    private static SoundEvent childEvent(String name, String parent){
+    private static SoundEvent childEvent(String name, String parent) {
         return childEvent(name, true, parent);
     }
 
@@ -201,7 +176,7 @@ public final class ParadiseLostSoundEvents {
      * @param parent The source of the sounds
      * @return The new sound event
      */
-    private static SoundEvent childEvent(String name, SoundEvent parent){
+    private static SoundEvent childEvent(String name, SoundEvent parent) {
         return childEvent(name, true, parent.getId().toString());
     }
     
@@ -213,11 +188,11 @@ public final class ParadiseLostSoundEvents {
      * @param parent The source of the sounds
      * @return The new sound event
      */
-    private static SoundEvent childEvent(String name, boolean subtitles, String parent){
+    private static SoundEvent childEvent(String name, boolean subtitles, String parent) {
         var event = new ChildSoundEvent(
-            locate(name),
-            subtitles ? "subtitles." + MOD_ID + "." + name : null,
-            locate(parent)
+                locate(name),
+                subtitles ? "subtitles." + MOD_ID + "." + name : null,
+                locate(parent)
         );
         SOUNDS.add(event);
         return event;
@@ -226,7 +201,7 @@ public final class ParadiseLostSoundEvents {
     /**
      * Registers all the sounds.
      */
-    public static void init(){
+    public static void init() {
         SOUNDS.forEach(ParadiseLostSoundEvents::register);
         
         Music.init();
@@ -237,7 +212,7 @@ public final class ParadiseLostSoundEvents {
      *
      * @param event The event to register
      */
-    private static void register(SoundEvent event){
+    private static void register(SoundEvent event) {
         Registry.register(Registry.SOUND_EVENT, event.getId(), event);
     }
     
@@ -251,10 +226,10 @@ public final class ParadiseLostSoundEvents {
      *
      * @return The resource
      */
-    public static Resource createResource(){
+    public static Resource createResource() {
         StringBuilder builder = new StringBuilder("{");
     
-        for(var sound : SOUNDS){
+        for (var sound : SOUNDS) {
             builder.append(sound.toJson()).append(',');
         }
         builder.setLength(builder.length() - 1);
@@ -264,13 +239,21 @@ public final class ParadiseLostSoundEvents {
         var payload = builder.toString().getBytes(StandardCharsets.UTF_8);
         
         return new Resource(
-            "Paradise Lost",
-            ()->new ByteArrayInputStream(payload),
-            ()->null
+                "Paradise Lost",
+                () -> new ByteArrayInputStream(payload),
+                () -> null
         );
     }
-    
-    private static abstract class AbstractSoundEvent extends SoundEvent {
+
+    public static final class Music {
+        public static final MusicSound PARADISE_LOST = new MusicSound(MUSIC_PARADISE_LOST, 12000, 24000, false);
+
+        //Triggers <clinit>()V
+        private static void init() {
+        }
+    }
+
+    private abstract static class AbstractSoundEvent extends SoundEvent {
         protected final String subtitle;
         
         private AbstractSoundEvent(Identifier id, String subtitle) {
@@ -281,19 +264,19 @@ public final class ParadiseLostSoundEvents {
         public abstract String toJson();
     }
     
-    private static final class ChildSoundEvent extends AbstractSoundEvent{
+    private static final class ChildSoundEvent extends AbstractSoundEvent {
         private final Identifier parent;
         
-        private ChildSoundEvent(Identifier id, String subtitle, Identifier parent){
+        private ChildSoundEvent(Identifier id, String subtitle, Identifier parent) {
             super(id, subtitle);
             this.parent = parent;
         }
     
         @Override
-        public String toJson(){
+        public String toJson() {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("\"%s\":{".formatted(getId().getPath()));
-            if(subtitle != null){
+            if (subtitle != null) {
                 stringBuilder.append("\"subtitle\":\"%s\",".formatted(subtitle));
             }
             stringBuilder.append("\"sounds\":[{\"name\":\"%s\",\"type\":\"event\"}]}".formatted(parent.toString()));
@@ -301,19 +284,19 @@ public final class ParadiseLostSoundEvents {
         }
     }
     
-    private static final class MusicSoundEvent extends AbstractSoundEvent{
+    private static final class MusicSoundEvent extends AbstractSoundEvent {
         private final Set<Identifier> tracks;
         
-        private MusicSoundEvent(Set<Identifier> tracks){
+        private MusicSoundEvent(Set<Identifier> tracks) {
             super(locate("music.paradise_lost"), null);
             this.tracks = tracks;
         }
         
         @Override
-        public String toJson(){
+        public String toJson() {
             StringBuilder builder = new StringBuilder();
             builder.append("\"music.paradise_lost\":{\"sounds\":[");
-            for(Identifier track : tracks){
+            for (Identifier track : tracks) {
                 builder.append("{\"name\":\"%s\",\"stream\":true},".formatted(track.toString()));
             }
             builder.setLength(builder.length() - 1);
@@ -322,23 +305,23 @@ public final class ParadiseLostSoundEvents {
         }
     }
     
-    private static final class ParadiseLostSoundEvent extends AbstractSoundEvent{
+    private static final class ParadiseLostSoundEvent extends AbstractSoundEvent {
         private final Set<Identifier> sounds;
         
-        private ParadiseLostSoundEvent(Identifier id, String subtitle, Set<Identifier> sounds){
+        private ParadiseLostSoundEvent(Identifier id, String subtitle, Set<Identifier> sounds) {
             super(id, subtitle);
             this.sounds = sounds;
         }
     
         @Override
-        public String toJson(){
+        public String toJson() {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("\"%s\":{".formatted(getId().getPath()));
-            if(subtitle != null){
+            if (subtitle != null) {
                 stringBuilder.append("\"subtitle\":\"%s\",".formatted(subtitle));
             }
             stringBuilder.append("\"sounds\":[");
-            for(Identifier sound : sounds){
+            for (Identifier sound : sounds) {
                 stringBuilder.append("\"%s\"".formatted(sound.toString()));
             }
             stringBuilder.append("]}");

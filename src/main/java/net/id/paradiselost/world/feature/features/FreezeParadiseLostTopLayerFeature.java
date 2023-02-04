@@ -1,7 +1,7 @@
 package net.id.paradiselost.world.feature.features;
 
 import com.mojang.serialization.Codec;
-import net.id.paradiselost.blocks.natural.aercloud.AercloudBlock;
+import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -27,8 +27,8 @@ public class FreezeParadiseLostTopLayerFeature extends Feature<DefaultFeatureCon
         BlockPos.Mutable surface = new BlockPos.Mutable();
         BlockPos.Mutable floor = new BlockPos.Mutable();
 
-        for(int i = 0; i < 16; ++i) {
-            for(int j = 0; j < 16; ++j) {
+        for (int i = 0; i < 16; ++i) {
+            for (int j = 0; j < 16; ++j) {
 
                 int x = origin.getX() + i;
                 int z = origin.getZ() + j;
@@ -38,11 +38,11 @@ public class FreezeParadiseLostTopLayerFeature extends Feature<DefaultFeatureCon
 
                 var testState = world.getBlockState(surface);
 
-                if(testState.getBlock() instanceof AercloudBlock) {
+                if (testState.getBlock() instanceof ParadiseLostCloudBlock) {
 
                     var testPos = surface.mutableCopy();
 
-                    while (testPos.getY() > 0 && ((testState.getBlock() instanceof AercloudBlock || testState.isAir()) && !world.getBlockState(testPos.down()).isOpaque())) {
+                    while (testPos.getY() > 0 && ((testState.getBlock() instanceof ParadiseLostCloudBlock || testState.isAir()) && !world.getBlockState(testPos.down()).isOpaque())) {
                         testPos.move(Direction.DOWN);
                     }
                 }

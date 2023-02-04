@@ -18,15 +18,15 @@ public class ParadiseLostItemGroups {
 
     public static final ItemGroup PARADISE_LOST_TOOLS = build(
             ParadiseLost.locate("tools"),
-            () -> new ItemStack(ParadiseLostItems.GRAVITITE_PICKAXE));
+            () -> new ItemStack(ParadiseLostItems.OLVITE_PICKAXE));
 
     public static final ItemGroup PARADISE_LOST_FOOD = build(
             ParadiseLost.locate("food"),
-            () -> new ItemStack(ParadiseLostItems.BLUEBERRY));
+            () -> new ItemStack(ParadiseLostItems.BLACKCURRANT));
 
     public static final ItemGroup PARADISE_LOST_RESOURCES = build(
             ParadiseLost.locate("resources"),
-            () -> new ItemStack(ParadiseLostItems.AMBROSIUM_SHARD));
+            () -> new ItemStack(ParadiseLostItems.CHERINE));
 
     public static final ItemGroup PARADISE_LOST_MISC = build(
             ParadiseLost.locate("misc"),
@@ -34,5 +34,5 @@ public class ParadiseLostItemGroups {
 
     public static final ItemGroup PARADISE_LOST_WEARABLES = build(
             ParadiseLost.locate("wearables"),
-            () -> new ItemStack(ParadiseLostItems.ZANITE_CHESTPLATE));
+            () -> new ItemStack(ParadiseLostItems.OLVITE_CHESTPLATE));
 }

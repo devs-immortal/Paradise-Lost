@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:zanite_pickaxe",
-    "paradise_lost:gravitite_pickaxe",
-    "paradise_lost:valkyrie_pickaxe"
+    "paradise_lost:olvite_pickaxe"
   ]
 }

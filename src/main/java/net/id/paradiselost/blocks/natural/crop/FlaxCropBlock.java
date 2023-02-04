@@ -15,7 +15,7 @@ import net.minecraft.util.math.random.Random;
 public class FlaxCropBlock extends TallCropBlock {
     
     public FlaxCropBlock(Settings settings) {
-        super(settings, 3);
+        super(settings, 2);
     }
 
     @Override
@@ -28,14 +28,14 @@ public class FlaxCropBlock extends TallCropBlock {
         };
         BlockPos.iterateOutwards(pos, 1, 1, 1).iterator().forEachRemaining(check -> {
             BlockState checkState = world.getBlockState(check);
-            if(checkState.isIn(ParadiseLostBlockTags.BASE_PARADISE_LOST_STONE) || checkState.isIn(BlockTags.BASE_STONE_OVERWORLD) || checkState.isOf(Blocks.GRAVEL)) {
+            if (checkState.isIn(ParadiseLostBlockTags.BASE_PARADISE_LOST_STONE) || checkState.isIn(BlockTags.BASE_STONE_OVERWORLD) || checkState.isOf(Blocks.GRAVEL)) {
                 data.stoneSpots++;
             }
         });
-        if(data.stoneSpots == 0) {
-            tryGrow(state, world, pos, random, 40F);
+        if (data.stoneSpots == 0) {
+            tryGrow(state, world, pos, random, 20F);
         } else {
-            tryGrow(state, world, pos, random, 14F + 16F / data.stoneSpots);
+            tryGrow(state, world, pos, random, 7F + 16F / data.stoneSpots);
         }
     }
 

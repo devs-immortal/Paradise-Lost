@@ -1,10 +1,9 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:skyroot_wall_sign",
-    "paradise_lost:golden_oak_wall_sign",
+    "paradise_lost:aurel_wall_sign",
+    "paradise_lost:mother_aurel_wall_sign",
     "paradise_lost:orange_wall_sign",
-    "paradise_lost:crystal_wall_sign",
     "paradise_lost:wisteria_wall_sign"
   ]
 }

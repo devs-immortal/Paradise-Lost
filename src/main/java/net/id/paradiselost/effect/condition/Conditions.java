@@ -4,7 +4,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.client.rendering.ui.ParadiseLostOverlayRegistrar;
-import net.id.paradiselost.registry.ParadiseLostRegistries;
 import net.id.incubus_core.condition.IncubusCondition;
 import net.id.incubus_core.condition.api.Condition;
 import net.id.incubus_core.condition.api.ConditionAPI;
@@ -17,17 +16,18 @@ public class Conditions {
         return Registry.register(IncubusCondition.CONDITION_REGISTRY, ParadiseLost.locate(id), condition);
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 
     @Environment(EnvType.CLIENT)
-    public static void clientInit(){
+    public static void clientInit() {
         ParadiseLostOverlayRegistrar.register(new ParadiseLostOverlayRegistrar.Overlay(
-            ParadiseLost.locate("textures/hud/condition/venom.png"),
-            (player) -> ConditionAPI.isVisible(VENOM, player),
-            (player) -> {
-                var manager = ConditionAPI.getConditionManager(player);
-                return manager.getScaledSeverity(VENOM);
-            }
+                ParadiseLost.locate("textures/hud/condition/venom.png"),
+                (player) -> ConditionAPI.isVisible(VENOM, player),
+                (player) -> {
+                    var manager = ConditionAPI.getConditionManager(player);
+                    return manager.getScaledSeverity(VENOM);
+                }
         ));
     }
 }

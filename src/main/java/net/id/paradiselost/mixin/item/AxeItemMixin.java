@@ -2,7 +2,6 @@ package net.id.paradiselost.mixin.item;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.loot.ParadiseLostLootTables;
-import net.minecraft.block.Block;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.*;
 import net.minecraft.loot.LootTable;
@@ -10,7 +9,6 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -23,20 +21,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(AxeItem.class)
-public class AxeItemMixin extends MiningToolItem {
-
-    protected AxeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
-        super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
-    }
+public class AxeItemMixin {
 
     @Inject(method = "useOnBlock", at = @At("HEAD"))
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos();
 
-        if (world.getBlockState(blockPos).getBlock() == ParadiseLostBlocks.GOLDEN_OAK_LOG && !world.isClient) {
+        if (world.getBlockState(blockPos).getBlock() == ParadiseLostBlocks.MOTHER_AUREL_LOG && !world.isClient) {
             ServerWorld server = (ServerWorld) world;
-            LootTable supplier = server.getServer().getLootManager().getTable(ParadiseLostLootTables.GOLDEN_OAK_STRIPPING);
+            LootTable supplier = server.getServer().getLootManager().getTable(ParadiseLostLootTables.MOTHER_AUREL_STRIPPING);
             List<ItemStack> items = supplier.generateLoot(new LootContext.Builder(server)
                     .parameter(LootContextParameters.BLOCK_STATE, world.getBlockState(blockPos))
                     .parameter(LootContextParameters.ORIGIN, Vec3d.of(blockPos))

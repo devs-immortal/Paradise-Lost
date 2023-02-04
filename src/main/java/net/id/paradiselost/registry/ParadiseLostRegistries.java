@@ -11,10 +11,11 @@ import static net.id.paradiselost.ParadiseLost.locate;
 @SuppressWarnings("unchecked")
 public class ParadiseLostRegistries {
 
-    public static void init() {}
+    public static void init() {
+    }
 
     /**
      * The registry for {@link LoreEntry}, try not to use this directly. Use the methods in {@link ParadiseLostLore}.
      */
-    public static final Registry<LoreEntry<?>> LORE_REGISTRY = (Registry<LoreEntry<?>>)(Object)FabricRegistryBuilder.createDefaulted(LoreEntry.class, locate("lore"), locate("root")).attribute(RegistryAttribute.SYNCED).buildAndRegister();
+    public static final Registry<LoreEntry<?>> LORE_REGISTRY = (Registry<LoreEntry<?>>) (Object) FabricRegistryBuilder.createDefaulted(LoreEntry.class, locate("lore"), locate("root")).attribute(RegistryAttribute.SYNCED).buildAndRegister();
 }

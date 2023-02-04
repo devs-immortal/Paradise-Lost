@@ -1,6 +1,5 @@
 package net.id.paradiselost.blocks.natural.plant;
 
-import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PlantBlock;
@@ -21,10 +20,10 @@ import java.util.Map;
 
 public class WallClingingPlantBlock extends PlantBlock {
     protected static final Map<Direction, VoxelShape> SHAPES = Map.of(
-        Direction.NORTH, Block.createCuboidShape(0, 4, 0, 16, 12, 6),
-        Direction.EAST, Block.createCuboidShape(10, 4, 0, 16, 12, 16),
-        Direction.SOUTH, Block.createCuboidShape(0, 4, 10, 16, 12, 16),
-        Direction.WEST, Block.createCuboidShape(0, 4, 0, 6, 12, 16)
+            Direction.NORTH, Block.createCuboidShape(0, 4, 0, 16, 12, 6),
+            Direction.EAST, Block.createCuboidShape(10, 4, 0, 16, 12, 16),
+            Direction.SOUTH, Block.createCuboidShape(0, 4, 10, 16, 12, 16),
+            Direction.WEST, Block.createCuboidShape(0, 4, 0, 6, 12, 16)
     );
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     private final @Nullable TagKey<Block> clingableBlocks;
@@ -49,7 +48,7 @@ public class WallClingingPlantBlock extends PlantBlock {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         var side = ctx.getSide().getOpposite();
-        if(side.getHorizontal() >= 0) {
+        if (side.getHorizontal() >= 0) {
             return getDefaultState().with(FACING, ctx.getSide().getOpposite());
         }
         return null;

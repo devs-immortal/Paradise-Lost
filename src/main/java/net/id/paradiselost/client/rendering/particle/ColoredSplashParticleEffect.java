@@ -17,11 +17,11 @@ import net.minecraft.util.registry.Registry;
  * @param blue The amount of blue, 0-255
  */
 public record ColoredSplashParticleEffect(
-    ParticleType<ColoredSplashParticleEffect> type,
-    int red,
-    int green,
-    int blue
-) implements ParticleEffect {
+        ParticleType<ColoredSplashParticleEffect> type,
+        int red,
+        int green,
+        int blue
+        ) implements ParticleEffect {
     public static final Factory<ColoredSplashParticleEffect> FACTORY = new Factory<>() {
         // Parses the command that can be used to create this effect
         @Override
@@ -41,7 +41,7 @@ public record ColoredSplashParticleEffect(
         }
     };
     
-    public ColoredSplashParticleEffect(ParticleType<ColoredSplashParticleEffect> type, int color){
+    public ColoredSplashParticleEffect(ParticleType<ColoredSplashParticleEffect> type, int color) {
         this(type, (color >>> 16) & 0xFF, (color >>> 8) & 0xFF, color & 0xFF);
     }
     

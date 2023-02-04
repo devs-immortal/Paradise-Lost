@@ -4,10 +4,10 @@
     "#paradise_lost:stone_slabs",
     "#paradise_lost:stone_stairs",
     "#paradise_lost:stone_walls",
-    "paradise_lost:holystone",
-    "paradise_lost:cobbled_holystone",
-    "paradise_lost:holystone_brick",
-    "paradise_lost:mossy_holystone",
-    "paradise_lost:golden_mossy_holystone"
+    "paradise_lost:floestone",
+    "paradise_lost:cobbled_floestone",
+    "paradise_lost:floestone_brick",
+    "paradise_lost:mossy_floestone",
+    "paradise_lost:golden_mossy_floestone"
   ]
 }

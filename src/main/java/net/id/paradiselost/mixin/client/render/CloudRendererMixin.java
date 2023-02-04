@@ -24,19 +24,39 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
 public final class CloudRendererMixin {
-    @Final @Shadow private static Identifier CLOUDS;
-    @Shadow @NotNull private final ClientWorld world;
-    @Shadow private final int ticks;
-    @Final @Shadow @NotNull private final MinecraftClient client;
-    @Shadow private int lastCloudsBlockX;
-    @Shadow private int lastCloudsBlockY;
-    @Shadow private int lastCloudsBlockZ;
-    @Shadow @NotNull private Vec3d lastCloudsColor;
-    @Shadow @NotNull private CloudRenderMode lastCloudRenderMode;
-    @Shadow private boolean cloudsDirty;
-    @Shadow @Nullable private VertexBuffer cloudsBuffer;
+    @Final
+    @Shadow
+    private static Identifier CLOUDS;
+    @Shadow
+    @NotNull
+    private final ClientWorld world;
+    @Shadow
+    private final int ticks;
+    @Final
+    @Shadow
+    @NotNull
+    private final MinecraftClient client;
+    @Shadow
+    private int lastCloudsBlockX;
+    @Shadow
+    private int lastCloudsBlockY;
+    @Shadow
+    private int lastCloudsBlockZ;
+    @Shadow
+    @NotNull
+    private Vec3d lastCloudsColor;
+    @Shadow
+    @NotNull
+    private CloudRenderMode lastCloudRenderMode;
+    @Shadow
+    private boolean cloudsDirty;
+    @Shadow
+    @Nullable
+    private VertexBuffer cloudsBuffer;
     
-    @Shadow private BufferBuilder.BuiltBuffer renderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color) { throw new AssertionError(); }
+    @Shadow private BufferBuilder.BuiltBuffer renderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color) {
+        throw new AssertionError();
+    }
 
     public CloudRendererMixin() {
         throw new NullPointerException("null cannot be cast to non-null type net.minecraft.client.world.ClientWorld");

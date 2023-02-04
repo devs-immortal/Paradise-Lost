@@ -4,9 +4,8 @@
     "#paradise_lost:stone_slabs",
     "#paradise_lost:stone_stairs",
     "#paradise_lost:stone_walls",
-    "#paradise_lost:stone_traps",
     "#paradise_lost:carved_stone_blocks",
     "#paradise_lost:natural_stone",
-    "paradise_lost:holystone_brick"
+    "paradise_lost:floestone_brick"
   ]
 }

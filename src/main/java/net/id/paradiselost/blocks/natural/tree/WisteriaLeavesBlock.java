@@ -17,25 +17,24 @@ public class WisteriaLeavesBlock extends ParadiseLostLeavesBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(state.get(PERSISTENT)) {
+        if (state.get(PERSISTENT)) {
             return;
         }
         Set<BlockPos> checkedBlocks = new HashSet<>();
         Queue<BlockPos> next = new LinkedList<>();
         next.add(pos);
 
-        while(!next.isEmpty() && next.size() < 1000) {
+        while (!next.isEmpty() && next.size() < 1000) {
             var checkPos = next.poll();
             checkedBlocks.add(checkPos);
 
-            if(world.getBlockState(checkPos).isIn(BlockTags.LOGS)) {
+            if (world.getBlockState(checkPos).isIn(BlockTags.LOGS)) {
                 return;
             }
 
             for (Direction direction : DIRECTIONS) {
                 var nextPos = checkPos.offset(direction);
-                if(!checkedBlocks.contains(nextPos) &&
-                        world.getBlockState(nextPos).getBlock() instanceof WisteriaLeavesBlock) {
+                if (!checkedBlocks.contains(nextPos) && world.getBlockState(nextPos).getBlock() instanceof WisteriaLeavesBlock) {
                     next.add(nextPos);
                 }
             }

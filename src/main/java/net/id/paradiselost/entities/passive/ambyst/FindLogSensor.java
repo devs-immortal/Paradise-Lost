@@ -12,7 +12,6 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 
 import java.util.Optional;
 import java.util.Set;
@@ -30,8 +29,8 @@ public class FindLogSensor extends Sensor<AnimalEntity> {
         Optional<BlockPos> previousOpenPos = brain.getOptionalMemory(ParadiseLostEntityTypes.LOG_OPENING_MEMORY);
         Optional<BlockPos> previousLogPos = brain.getOptionalMemory(ParadiseLostEntityTypes.LOG_MEMORY);
 
-        if (previousOpenPos.isPresent() && isValidOpening(world, previousOpenPos.get()) &&
-                previousLogPos.isPresent() && isLog(world, previousLogPos.get()))
+        if (previousOpenPos.isPresent() && isValidOpening(world, previousOpenPos.get())
+                && previousLogPos.isPresent() && isLog(world, previousLogPos.get()))
             return;
 
         for (BlockPos testLogPos : BlockPos.iterateOutwards(entity.getBlockPos(), this.range, this.range, this.range)) {
@@ -67,11 +66,11 @@ public class FindLogSensor extends Sensor<AnimalEntity> {
     }
 
     public static boolean isLog(ServerWorld world, BlockPos testPos) {
-        return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_SKYROOT_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) != Direction.Axis.Y;
+        return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_AUREL_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) != Direction.Axis.Y;
     }
 
-    public static boolean isLogSameRotation(ServerWorld world, BlockPos testPos,Direction dir) {
-        return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_SKYROOT_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) == dir.getAxis();
+    public static boolean isLogSameRotation(ServerWorld world, BlockPos testPos, Direction dir) {
+        return world.getBlockState(testPos).isOf(ParadiseLostBlocks.MOTTLED_AUREL_FALLEN_LOG) && world.getBlockState(testPos).get(PillarBlock.AXIS) == dir.getAxis();
     }
 
     public static boolean isValidOpening(ServerWorld world, BlockPos testPos) {

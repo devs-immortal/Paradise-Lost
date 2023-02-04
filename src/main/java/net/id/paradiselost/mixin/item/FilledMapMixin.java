@@ -22,24 +22,24 @@ public abstract class FilledMapMixin {
      * @author Jack Papel
      */
     @Redirect(
-        method = "updateColors",
-        slice = @Slice(
-            from = @At(
+            method = "updateColors",
+            slice = @Slice(
+                from = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/item/map/MapState;removeBanner(Lnet/minecraft/world/BlockView;II)V"
+                )
+            ),
+            at = @At(
                 value = "INVOKE",
-                target = "Lnet/minecraft/item/map/MapState;removeBanner(Lnet/minecraft/world/BlockView;II)V"
+                target = "Lnet/minecraft/block/BlockState;getMapColor(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/MapColor;"
             )
-        ),
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/block/BlockState;getMapColor(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/MapColor;"
-        )
     )
     private MapColor updateColors(BlockState instance, BlockView world, BlockPos pos) {
         if (
-            ((World) world).getRegistryKey().equals(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY)
-            && pos.equals(Vec3i.ZERO)
-            && !world.getBlockState(pos).isOf(Blocks.BEDROCK)
-        ){
+                ((World) world).getRegistryKey().equals(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY)
+                && pos.equals(Vec3i.ZERO)
+                && !world.getBlockState(pos).isOf(Blocks.BEDROCK)
+        ) {
             return ParadiseLostMapColorUtil.PARADISE_LOST_BACKGROUND;
         } else {
             return instance.getMapColor(world, pos);

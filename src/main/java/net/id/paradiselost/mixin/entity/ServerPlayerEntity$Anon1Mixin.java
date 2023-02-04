@@ -11,15 +11,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = "net/minecraft/server/network/ServerPlayerEntity$2")
-public abstract class ServerPlayerEntity$Anon1Mixin{
+public abstract class ServerPlayerEntity$Anon1Mixin {
     @Inject(
-        method = "onSlotUpdate",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/advancement/criterion/InventoryChangedCriterion;trigger(Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/item/ItemStack;)V"
-        )
+            method = "onSlotUpdate",
+            at = @At(
+                value = "INVOKE",
+                target = "Lnet/minecraft/advancement/criterion/InventoryChangedCriterion;trigger(Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/item/ItemStack;)V"
+            )
     )
-    private void trigger(ScreenHandler handler, int slotId, ItemStack stack, CallbackInfo ci){
-        ParadiseLostLore.trigger(LoreTriggerType.ITEM, (ServerPlayerEntity)(Object)this, stack);
+    private void trigger(ScreenHandler handler, int slotId, ItemStack stack, CallbackInfo ci) {
+        ParadiseLostLore.trigger(LoreTriggerType.ITEM, (ServerPlayerEntity) (Object) this, stack);
     }
 }

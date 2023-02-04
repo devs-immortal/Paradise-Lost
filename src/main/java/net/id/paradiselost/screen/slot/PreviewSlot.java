@@ -30,15 +30,14 @@ public class PreviewSlot extends Slot {
     
     public enum Image {
         CHEST("item/slot/chest"),
-        SADDLE("item/slot/saddle"),
-        ;
+        SADDLE("item/slot/saddle");
     
         private final Identifier location;
     
         Image(String location) {
-            if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT){
+            if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
                 this.location = locate(location);
-            }else{
+            } else {
                 this.location = null;
             }
         }

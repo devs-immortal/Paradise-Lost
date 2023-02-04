@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "paradise_lost:block/aurel_leaves"
+  }
+}

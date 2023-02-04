@@ -20,12 +20,12 @@ public class ParachuteTrinketModel extends BipedEntityModel<LivingEntity> {
         ModelPartData modelPartData = modelData.getRoot();
         
         ModelPartData chute = modelPartData.addChild("body", ModelPartBuilder.create()
-            .uv(0, 0)
-            .cuboid(-16f, -24f, -8f, 32f, 12f, 16f), ModelTransform.NONE);
+                .uv(0, 0)
+                .cuboid(-16f, -24f, -8f, 32f, 12f, 16f), ModelTransform.NONE);
         
         chute.addChild("cable", ModelPartBuilder.create()
-            .uv(0, 32)
-            .cuboid(-8f, -12f, 0f, 16f, 12f, 0f), ModelTransform.NONE);
+                .uv(0, 32)
+                .cuboid(-8f, -12f, 0f, 16f, 12f, 0f), ModelTransform.NONE);
         
         return TexturedModelData.of(modelData, 96, 48);
     }

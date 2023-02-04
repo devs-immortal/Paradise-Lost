@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "paradise_lost:block/blueberry_bush_stage1"
-  }
-}

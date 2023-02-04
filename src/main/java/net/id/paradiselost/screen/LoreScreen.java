@@ -33,7 +33,7 @@ import static net.id.paradiselost.ParadiseLost.locate;
 
 // TODO: Requirements, requirement lines and status
 @Environment(EnvType.CLIENT)
-public final class LoreScreen extends HandledScreen<LoreHandler>{
+public final class LoreScreen extends HandledScreen<LoreHandler> {
     public static final Identifier WIDGET_TEXTURE = locate("textures/gui/lore/widgets.png");
     
     private static final LoreEntry LORE_TEST = new LoreEntry(0, 0, LoreType.NORMAL, Items.DIAMOND, Text.of("Test!"), Text.of("This is a test lore entry.\nWhat fun!"));
@@ -53,18 +53,18 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
     
     private LoreEntry hoveredEntry = null;
     
-    public LoreScreen(LoreHandler handler, PlayerInventory inventory, Text title){
+    public LoreScreen(LoreHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         
         backgroundWidth = viewportWidth;
         backgroundHeight = viewportHeight;
     
         var state = ParadiseLostComponents.LORE_STATE.get(MinecraftClient.getInstance().player);
-        loreEntries = ParadiseLostRegistries.LORE_REGISTRY.stream().map((entry)->{
+        loreEntries = ParadiseLostRegistries.LORE_REGISTRY.stream().map((entry) -> {
             var status = state.getLoreStatus(entry);
-            if(status == LoreStatus.FREE || status == LoreStatus.UNLOCKED || status == LoreStatus.COMPLETED){
+            if (status == LoreStatus.FREE || status == LoreStatus.UNLOCKED || status == LoreStatus.COMPLETED) {
                 return new LoreEntry(entry);
-            }else{
+            } else {
                 return null;
             }
         }).filter(Objects::nonNull).toList();
@@ -75,7 +75,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
     }
     
     @Override
-    protected void init(){
+    protected void init() {
         super.init();
     
         int scrollLimitX1 = 0;
@@ -83,7 +83,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
         int scrollLimitX0 = 0;
         int scrollLimitY0 = 0;
     
-        for(LoreEntry loreEntry : loreEntries){
+        for (LoreEntry loreEntry : loreEntries) {
             scrollLimitX0 = Math.min(scrollLimitX0, loreEntry.x);
             scrollLimitY0 = Math.min(scrollLimitY0, loreEntry.y);
             scrollLimitX1 = Math.max(scrollLimitX1, loreEntry.x + loreEntry.type.getWidth());
@@ -100,10 +100,11 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
     }
     
     @Override
-    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY){}
+    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
+    }
     
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY){
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         matrices.push();
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -113,28 +114,28 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
     
         var scaleFactor = MinecraftClient.getInstance().getWindow().getScaleFactor();
         RenderSystem.enableScissor(
-            (int)(x * scaleFactor),
-            (int)((height - y - backgroundHeight) * scaleFactor),
-            (int)((backgroundWidth) * scaleFactor),
-            (int)((backgroundHeight) * scaleFactor)
+                (int) (x * scaleFactor),
+                (int) ((height - y - backgroundHeight) * scaleFactor),
+                (int) ((backgroundWidth) * scaleFactor),
+                (int) ((backgroundHeight) * scaleFactor)
         );
     
-        var filterState = new Object(){
+        var filterState = new Object() {
             int mouseX;
             int mouseY;
         };
         filterState.mouseX = mouseX - this.x - scrollX;
         filterState.mouseY = mouseY - this.y - scrollY;
-        var currentlyHovered = loreEntries.stream().filter((entry)->
-            filterState.mouseX >= entry.x && filterState.mouseX <= entry.x + entry.type.getWidth() &&
-            filterState.mouseY >= entry.y && filterState.mouseY <= entry.y + entry.type.getHeight()
+        var currentlyHovered = loreEntries.stream().filter((entry) ->
+                filterState.mouseX >= entry.x && filterState.mouseX <= entry.x + entry.type.getWidth()
+                        && filterState.mouseY >= entry.y && filterState.mouseY <= entry.y + entry.type.getHeight()
         ).findFirst().orElse(null);
-        if(hoveredEntry != currentlyHovered){
-            if(hoveredEntry != null){
+        if (hoveredEntry != currentlyHovered) {
+            if (hoveredEntry != null) {
                 hoveredEntry.setHovered(false);
             }
             hoveredEntry = currentlyHovered;
-            if(hoveredEntry != null){
+            if (hoveredEntry != null) {
                 hoveredEntry.setHovered(true);
             }
         }
@@ -142,7 +143,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
         int offsetX = x + scrollX;
         int offsetY = y + scrollY;
     
-        loreEntries.forEach((entry)->entry.tick(delta));
+        loreEntries.forEach((entry) -> entry.tick(delta));
         
 //        RenderSystem.setShader(GameRenderer::getRenderTypeLinesShader);
 //        RenderSystem.setShaderColor(1.0F, 0.0F, 1.0F, 1.0F);
@@ -159,13 +160,13 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
         RenderSystem.setShaderTexture(0, WIDGET_TEXTURE);
         RenderSystem.enableBlend();
         drawBorder(matrices);
-        loreEntries.forEach((entry)->entry.drawBackground(matrices, offsetX, offsetY));
-        loreEntries.forEach((entry)->entry.drawForeground(matrices, offsetX, offsetY));
+        loreEntries.forEach((entry) -> entry.drawBackground(matrices, offsetX, offsetY));
+        loreEntries.forEach((entry) -> entry.drawForeground(matrices, offsetX, offsetY));
     
         setZOffset(200);
         itemRenderer.zOffset = 200;
         RenderSystem.enableDepthTest();
-        loreEntries.forEach((entry)->entry.drawStack(offsetX, offsetY));
+        loreEntries.forEach((entry) -> entry.drawStack(offsetX, offsetY));
         setZOffset(0);
         itemRenderer.zOffset = 0;
         RenderSystem.disableDepthTest();
@@ -179,9 +180,9 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
     private int scrollStartY;
     
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button){
-        dragStartX = (int)mouseX;
-        dragStartY = (int)mouseY;
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        dragStartX = (int) mouseX;
+        dragStartY = (int) mouseY;
         scrollStartX = scrollX;
         scrollStartY = scrollY;
         
@@ -189,14 +190,14 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
     }
     
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY){
-        scrollX = MathHelper.clamp((int)(scrollStartX + mouseX - dragStartX), scrollLimitX0, scrollLimitX1);
-        scrollY = MathHelper.clamp((int)(scrollStartY + mouseY - dragStartY), scrollLimitY0, scrollLimitY1);
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        scrollX = MathHelper.clamp((int) (scrollStartX + mouseX - dragStartX), scrollLimitX0, scrollLimitX1);
+        scrollY = MathHelper.clamp((int) (scrollStartY + mouseY - dragStartY), scrollLimitY0, scrollLimitY1);
         
         return true;
     }
     
-    private void drawFrame(MatrixStack matrices){
+    private void drawFrame(MatrixStack matrices) {
         int x = this.x;
         int y = this.y;
         int width = backgroundWidth;
@@ -230,7 +231,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
     }
     
     //FIXME Figure out why this is so far off.
-    private void drawBorder(MatrixStack matrices){
+    private void drawBorder(MatrixStack matrices) {
         matrices.push();
         matrices.translate(x + scrollLimitX0 + scrollX - 69, y + scrollLimitX0 + scrollY - 5, 0);
         int width = scrollLimitX1 - scrollLimitX0 + viewportWidth;
@@ -257,7 +258,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
         matrices.pop();
     }
     
-    private static final class LoreEntry implements FloatyDrawableHelper{
+    private static final class LoreEntry implements FloatyDrawableHelper {
         private static final int HOVER_LIMIT = 20;
         
         private final int x;
@@ -274,7 +275,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
         private boolean hover = false;
         private float hoverTime = 0;
         
-        private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemStack stack, @NotNull Text title, @NotNull Text description, @NotNull Set<@NotNull LoreEntry> requirements){
+        private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemStack stack, @NotNull Text title, @NotNull Text description, @NotNull Set<@NotNull LoreEntry> requirements) {
             Objects.requireNonNull(type, "type was null");
             Objects.requireNonNull(stack, "stack was null");
             Objects.requireNonNull(title, "title was null");
@@ -285,9 +286,9 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
             this.type = type;
             this.stack = stack;
             
-            if(title instanceof MutableText mutableTitle){
+            if (title instanceof MutableText mutableTitle) {
                 this.title = mutableTitle.setStyle(title.getStyle().withBold(true));
-            }else{
+            } else {
                 this.title = title;
             }
             this.requirements = requirements;
@@ -300,58 +301,58 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
             this.height = 9 * (this.description.size() + 1);
         }
     
-        private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemStack stack, @NotNull Text title, @NotNull Text description, @NotNull LoreEntry @NotNull ... requirements){
+        private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemStack stack, @NotNull Text title, @NotNull Text description, @NotNull LoreEntry @NotNull... requirements) {
             this(
-                x, y, type, stack, title, description,
-                Set.of(Objects.requireNonNull(requirements, "requirements was null"))
+                    x, y, type, stack, title, description,
+                    Set.of(Objects.requireNonNull(requirements, "requirements was null"))
             );
         }
     
-        private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemConvertible item, @NotNull Text title, @NotNull Text description){
+        private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemConvertible item, @NotNull Text title, @NotNull Text description) {
             this(
-                x, y, type,
-                new ItemStack(Objects.requireNonNull(item, "item was null")),
-                title, description, Set.of()
+                    x, y, type,
+                    new ItemStack(Objects.requireNonNull(item, "item was null")),
+                    title, description, Set.of()
             );
         }
     
-        private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemConvertible item, @NotNull Text title, @NotNull Text description, @NotNull LoreEntry @NotNull ... requirements){
+        private LoreEntry(int x, int y, @NotNull LoreType type, @NotNull ItemConvertible item, @NotNull Text title, @NotNull Text description, @NotNull LoreEntry @NotNull... requirements) {
             this(
-                x, y, type,
-                new ItemStack(Objects.requireNonNull(item, "item was null")),
-                title, description,
-                Set.of(Objects.requireNonNull(requirements, "requirements was null"))
+                    x, y, type,
+                    new ItemStack(Objects.requireNonNull(item, "item was null")),
+                    title, description,
+                    Set.of(Objects.requireNonNull(requirements, "requirements was null"))
             );
         }
     
-        public LoreEntry(net.id.paradiselost.lore.LoreEntry<?> entry){
+        LoreEntry(net.id.paradiselost.lore.LoreEntry<?> entry) {
             this(entry.x(), entry.y(), LoreType.NORMAL, entry.stack(), entry.getTitleText(), entry.getDescriptionText());
         }
     
-        public void setHovered(boolean hovered){
+        public void setHovered(boolean hovered) {
             hover = hovered;
         }
     
-        public void tick(float delta){
-            if(hover){
-                if(hoverTime < HOVER_LIMIT){
+        public void tick(float delta) {
+            if (hover) {
+                if (hoverTime < HOVER_LIMIT) {
                     hoverTime = Math.min(hoverTime + delta, HOVER_LIMIT);
                 }
-            }else{
-                if(hoverTime > 0){
+            } else {
+                if (hoverTime > 0) {
                     hoverTime = Math.max(hoverTime - delta, 0);
                 }
             }
         }
         
-        private void drawLines(MatrixStack matrices, VertexConsumer lineBuffer, int x, int y){
-            if(!requirements.isEmpty()){
+        private void drawLines(MatrixStack matrices, VertexConsumer lineBuffer, int x, int y) {
+            if (!requirements.isEmpty()) {
                 int startX = this.x + x;
                 int startY = this.y + y;
                 var entry = matrices.peek();
                 var model = entry.getPositionMatrix();
                 var normal = entry.getNormalMatrix();
-                for(var child : requirements){
+                for (var child : requirements) {
                     lineBuffer.vertex(model, startX, startY, 0).color(1, 0, 1, 0).normal(normal, 0, 1, 0).next();
                     lineBuffer.vertex(model, child.x + x, child.y + y, 0).color(1, 0, 1, 0).normal(normal, 0, 1, 0).next();
                 }
@@ -362,17 +363,17 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
             }
         }
         
-        private void drawBackground(MatrixStack matrices, int x, int y){
+        private void drawBackground(MatrixStack matrices, int x, int y) {
             x += this.x;
             y += this.y;
         
-            if(hover){
+            if (hover) {
                 drawTexture(matrices, x, y, type.getU() + type.getWidth(), type.getV(), type.getWidth(), type.getHeight());
-            }else{
+            } else {
                 drawTexture(matrices, x, y, type.getU(), type.getV(), type.getWidth(), type.getHeight());
             }
             
-            if(hoverTime > 0){
+            if (hoverTime > 0) {
                 float boxWidth = width;
                 boxWidth *= Math.min(hoverTime / HOVER_LIMIT, HOVER_LIMIT);
                 boxWidth += 8;
@@ -388,8 +389,8 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
             }
         }
         
-        private void drawForeground(MatrixStack matrices, int x, int y){
-            if(hoverTime > 0){
+        private void drawForeground(MatrixStack matrices, int x, int y) {
+            if (hoverTime > 0) {
                 matrices.push();
                 
                 float scale = hoverTime / HOVER_LIMIT;
@@ -404,7 +405,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
                 // public int draw(MatrixStack matrices, Text text, float x, float y, int color) {
                 textRenderer.drawWithShadow(matrices, title, 1, 1, 0xFFFFFF);
                 int yOff = 10;
-                for(var line : description){
+                for (var line : description) {
                     textRenderer.drawWithShadow(matrices, line, 1, yOff, 0xFFFFFF);
                     yOff += 9;
                 }
@@ -412,7 +413,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
             }
         }
     
-        private void drawStack(int x, int y){
+        private void drawStack(int x, int y) {
             x += this.x + type.getItemX();
             y += this.y + type.getItemY();
             
@@ -424,7 +425,7 @@ public final class LoreScreen extends HandledScreen<LoreHandler>{
             itemRenderer.renderGuiItemOverlay(textRenderer, stack, x, y, "");
         }
         
-        private void drawFrame(MatrixStack matrices, int x, int y, float width, float height){
+        private void drawFrame(MatrixStack matrices, int x, int y, float width, float height) {
             matrices.push();
             matrices.translate(x, y, 0);
     

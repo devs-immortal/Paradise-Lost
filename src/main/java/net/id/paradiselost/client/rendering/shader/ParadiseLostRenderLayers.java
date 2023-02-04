@@ -8,16 +8,17 @@ import net.minecraft.client.render.RenderLayer;
 
 @Environment(EnvType.CLIENT)
 public final class ParadiseLostRenderLayers {
-    private ParadiseLostRenderLayers(){}
+    private ParadiseLostRenderLayers() {
+    }
     
     public static final RenderLayer AURAL;
     public static final RenderLayer AURAL_CUTOUT_MIPPED;
     
-    static{
-        if(CompatConfig.SODIUM_WORKAROUND){
+    static {
+        if (CompatConfig.SODIUM_WORKAROUND) {
             AURAL = RenderLayer.getSolid();
             AURAL_CUTOUT_MIPPED = RenderLayer.getCutoutMipped();
-        }else{
+        } else {
             AURAL = ParadiseLostShaders.AURAL.getRenderLayer(RenderLayer.getSolid());
             AURAL_CUTOUT_MIPPED = ParadiseLostShaders.AURAL_CUTOUT.getRenderLayer(RenderLayer.getCutoutMipped());
             
@@ -29,5 +30,6 @@ public final class ParadiseLostRenderLayers {
         }
     }
     
-    static void init(){}
+    static void init() {
+    }
 }

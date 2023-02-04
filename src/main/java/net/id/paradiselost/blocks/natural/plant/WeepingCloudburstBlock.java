@@ -41,11 +41,11 @@ public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable 
 
         var floor = world.getBlockState(pos.down());
 
-        if(floor.isOf(this)) {
+        if (floor.isOf(this)) {
 
             state = state.with(SECTION, Section.TOP).with(NOGROW, true);
 
-            if(floor.get(SECTION) != Section.BOTTOM) {
+            if (floor.get(SECTION) != Section.BOTTOM) {
                 world.setBlockState(pos.down(), floor.with(SECTION, Section.BODY));
             }
         }
@@ -56,17 +56,17 @@ public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         var waterLogged = state.get(WATERLOGGED);
-        if(random.nextInt(6) == 0 && (waterLogged || random.nextBoolean())) {
+        if (random.nextInt(6) == 0 && (waterLogged || random.nextBoolean())) {
             var roofState = world.getBlockState(pos.up());
             var air = roofState.isAir();
-            if(air || roofState.getFluidState().getFluid() == Fluids.WATER) {
+            if (air || roofState.getFluidState().getFluid() == Fluids.WATER) {
 
                 int height = 0;
 
                 var bottomPos = pos.down();
                 var bottomState = world.getBlockState(bottomPos);
 
-                while(bottomState.isOf(this) && bottomState.get(SECTION) == Section.BODY && world.getFluidState(bottomPos).isEmpty()) {
+                while (bottomState.isOf(this) && bottomState.get(SECTION) == Section.BODY && world.getFluidState(bottomPos).isEmpty()) {
                     height++;
                     bottomPos = bottomPos.down();
                     bottomState = world.getBlockState(bottomPos);
@@ -74,7 +74,7 @@ public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable 
 
                 world.setBlockState(pos, state.with(NOGROW, true));
 
-                if(air && ((height > 0 && random.nextInt(3 - (height / 2)) <= random.nextInt(2)) || height > 4)) {
+                if (air && ((height > 0 && random.nextInt(3 - (height / 2)) <= random.nextInt(2)) || height > 4)) {
                     world.setBlockState(pos.up(), getDefaultState().with(NOGROW, true).with(SECTION, Section.TOP));
                 }
                 else {

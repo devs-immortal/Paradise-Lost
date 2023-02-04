@@ -48,23 +48,23 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
         double velocityXWaver = Math.sin(age) / 15 * xMult;
         double velocityZWaver = Math.cos(age) / 15 * zMult;
 
-        if((ticksUntilTextureChange <= 0 && nextTexture > 4)) {
+        if ((ticksUntilTextureChange <= 0 && nextTexture > 4)) {
             markDead();
             return;
         }
 
-        if(world.getTime() % 30 == 0 && random.nextBoolean()) {
+        if (world.getTime() % 30 == 0 && random.nextBoolean()) {
             velocityY += random.nextDouble(0.001, 0.025);
         }
 
-        if(ticksUntilTextureChange <= 0) {
-            if(!dying) {
+        if (ticksUntilTextureChange <= 0) {
+            if (!dying) {
                 ticksUntilTextureChange = 15 + random.nextInt(6);
                 setSprite(spriteProvider.getSprite(nextTexture, 4));
                 nextTexture = nextTexture == 2 ? 1 : 2;
             }
             else {
-                if(nextTexture < 2) {
+                if (nextTexture < 2) {
                     nextTexture = 2;
                 }
 
@@ -74,7 +74,7 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
             }
         }
 
-        if(!world.getFluidState(new BlockPos(x, y, z)).isEmpty()) {
+        if (!world.getFluidState(new BlockPos(x, y, z)).isEmpty()) {
             updatePos();
             move(velocityX + velocityXWaver, velocityY / 2.5, velocityZ + velocityZWaver);
             age += random.nextInt(3);
@@ -86,7 +86,7 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
         }
         ticksUntilTextureChange--;
 
-        if(age > maxAge) {
+        if (age > maxAge) {
             dying = true;
         }
     }

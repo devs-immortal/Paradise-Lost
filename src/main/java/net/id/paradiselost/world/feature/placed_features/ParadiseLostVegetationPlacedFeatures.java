@@ -1,15 +1,12 @@
 package net.id.paradiselost.world.feature.placed_features;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.world.feature.configured_features.ParadiseLostVegetationConfiguredFeatures;
 import net.id.paradiselost.world.feature.placement_modifiers.ChancePlacementModifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.BuiltinBiomes;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.*;
@@ -29,10 +26,7 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
     public static final RegistryEntry<PlacedFeature> GRASS_BONEMEAL = register("grass_bonemeal", ParadiseLostVegetationConfiguredFeatures.GRASS_BONEMEAL, PlacedFeatures.isAir());
     public static final RegistryEntry<PlacedFeature> TALL_GRASS = register("tall_grass", ParadiseLostVegetationConfiguredFeatures.TALL_GRASS_BUSH, CountPlacementModifier.of(3), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
 
-    public static final RegistryEntry<PlacedFeature> FLUTEGRASS = register("flutegrass", ParadiseLostVegetationConfiguredFeatures.FLUTEGRASS, CountPlacementModifier.of(30), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> FLUTEGRASS_BONEMEAL = register("flutegrass_bonemeal", ParadiseLostVegetationConfiguredFeatures.FLUTEGRASS_BONEMEAL, PlacedFeatures.isAir());
-
-    public static final RegistryEntry<PlacedFeature> PATCH_BLUEBERRY = register("patch_blueberry", ParadiseLostVegetationConfiguredFeatures.PATCH_BLUEBERRY, NOT_IN_SURFACE_WATER_MODIFIER, CountPlacementModifier.of(10), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), BiomePlacementModifier.of());
+    public static final RegistryEntry<PlacedFeature> PATCH_BLACKCURRANT = register("patch_blackcurrant", ParadiseLostVegetationConfiguredFeatures.PATCH_BLACKCURRANT, NOT_IN_SURFACE_WATER_MODIFIER, CountPlacementModifier.of(10), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), BiomePlacementModifier.of());
     public static final RegistryEntry<PlacedFeature> PATCH_BROWN_SPORECAP = register("patch_brown_sporecap", ParadiseLostVegetationConfiguredFeatures.PATCH_BROWN_SPORECAP, RarityFilterPlacementModifier.of(10), SquarePlacementModifier.of(), PlacedFeatures.BOTTOM_TO_TOP_RANGE, HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
     public static final RegistryEntry<PlacedFeature> PATCH_BROWN_SPORECAP_COMMON = register("patch_brown_sporecap_common", ParadiseLostVegetationConfiguredFeatures.PATCH_BROWN_SPORECAP, CountPlacementModifier.of(3), SquarePlacementModifier.of(), PlacedFeatures.BOTTOM_TO_TOP_RANGE, HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
     public static final RegistryEntry<PlacedFeature> PATCH_PINK_SPORECAP = register("patch_pink_sporecap", ParadiseLostVegetationConfiguredFeatures.PATCH_PINK_SPORECAP, CountPlacementModifier.of(3), SquarePlacementModifier.of(), PlacedFeatures.BOTTOM_TO_TOP_RANGE, EnvironmentScanPlacementModifier.of(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.IS_AIR, 12), RandomOffsetPlacementModifier.vertically(ConstantIntProvider.create(-1)), BiomePlacementModifier.of());
@@ -55,5 +49,6 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
     // ?
     public static final RegistryEntry<PlacedFeature> RAINBOW_MALT_SPRIGS = register("rainbow_malt_sprigs", ParadiseLostVegetationConfiguredFeatures.RAINBOW_MALT_SPRIGS, PlacedFeatures.BOTTOM_TO_TOP_RANGE, ChancePlacementModifier.of(2), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1)), ON_SOLID_GROUND);
 
-    public static void init(){}
+    public static void init() {
+    }
 }

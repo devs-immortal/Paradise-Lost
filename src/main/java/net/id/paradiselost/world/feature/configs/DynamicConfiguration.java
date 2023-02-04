@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class DynamicConfiguration implements FeatureConfig {
-    public static final Codec<DynamicConfiguration> CODEC = RecordCodecBuilder.create(instance->instance.group(
+    public static final Codec<DynamicConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BlockState.CODEC.fieldOf("state").forGetter(DynamicConfiguration::getState),
             Codec.STRING.optionalFieldOf("genType").forGetter(DynamicConfiguration::getGenString)
     ).apply(instance, DynamicConfiguration::new));

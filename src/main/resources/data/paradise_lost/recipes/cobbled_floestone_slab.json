@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:cobbled_floestone"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:cobbled_floestone_slab",
+    "count": 6
+  }
+}

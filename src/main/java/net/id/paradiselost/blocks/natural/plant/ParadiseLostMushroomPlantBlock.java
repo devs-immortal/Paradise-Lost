@@ -2,7 +2,6 @@ package net.id.paradiselost.blocks.natural.plant;
 
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -28,10 +27,10 @@ public class ParadiseLostMushroomPlantBlock extends PlantBlock {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (random.nextInt(25) == 0) {
             int i = 5;
-            Iterator var7 = BlockPos.iterate(pos    .add(-4, -1, -4), pos.add(4, 1, 4)).iterator();
+            Iterator var7 = BlockPos.iterate(pos.add(-4, -1, -4), pos.add(4, 1, 4)).iterator();
             
-            while(var7.hasNext()) {
-                BlockPos blockPos = (BlockPos)var7.next();
+            while (var7.hasNext()) {
+                BlockPos blockPos = (BlockPos) var7.next();
                 if (world.getBlockState(blockPos).isOf(this)) {
                     --i;
                     if (i <= 0) {
@@ -42,7 +41,7 @@ public class ParadiseLostMushroomPlantBlock extends PlantBlock {
             
             BlockPos blockPos2 = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
             
-            for(int k = 0; k < 4; ++k) {
+            for (int k = 0; k < 4; ++k) {
                 if (world.isAir(blockPos2) && state.canPlaceAt(world, blockPos2)) {
                     pos = blockPos2;
                 }

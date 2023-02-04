@@ -4,8 +4,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.ParadiseLost;
-import net.id.paradiselost.blocks.natural.aercloud.AercloudBlock;
-import net.id.paradiselost.fluids.DenseAercloudFluid;
+import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
+import net.id.paradiselost.fluids.DenseCloudFluid;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameOverlayRenderer;
@@ -36,10 +36,10 @@ public abstract class InGameOverlayRendererMixin {
     }
 
     @Inject(method = "renderInWallOverlay", at = @At("HEAD"), cancellable = true)
-    private static void renderAercloudOverlay(Sprite sprite, MatrixStack matrices, CallbackInfo ci) {
+    private static void renderCloudOverlay(Sprite sprite, MatrixStack matrices, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
         BlockState overlayState = getInWallBlockState(client.player);
-        if (overlayState != null && overlayState.getBlock() instanceof AercloudBlock) {
+        if (overlayState != null && overlayState.getBlock() instanceof ParadiseLostCloudBlock) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableTexture();
             RenderSystem.setShaderTexture(0, ParadiseLost.locate("textures/block/" + Registry.BLOCK.getId(overlayState.getBlock()).getPath() + ".png"));
@@ -73,7 +73,7 @@ public abstract class InGameOverlayRendererMixin {
             double f = player.getZ() + (double) (((float) ((i >> 2) % 2) - 0.5F) * player.getWidth() * 0.8F);
             mutable.set(d, e, f);
             BlockState blockState = player.world.getBlockState(mutable);
-            if (blockState.getBlock() instanceof AercloudBlock) {
+            if (blockState.getBlock() instanceof ParadiseLostCloudBlock) {
                 cir.setReturnValue(blockState);
                 cir.cancel();
             }
@@ -81,13 +81,13 @@ public abstract class InGameOverlayRendererMixin {
     }
 
     @Inject(method = "renderUnderwaterOverlay", at = @At("HEAD"), cancellable = true)
-    private static void renderDenseAercloudOverlay(MinecraftClient client, MatrixStack matrices, CallbackInfo ci) {
+    private static void renderDenseCloudOverlay(MinecraftClient client, MatrixStack matrices, CallbackInfo ci) {
         BlockPos pos = new BlockPos(client.player.getEyePos());
         World world = client.player.world;
-        if (world.getFluidState(pos).getFluid() instanceof DenseAercloudFluid) {
+        if (world.getFluidState(pos).getFluid() instanceof DenseCloudFluid) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableTexture();
-            RenderSystem.setShaderTexture(0, ParadiseLost.locate("textures/block/dense_aercloud_still.png"));
+            RenderSystem.setShaderTexture(0, ParadiseLost.locate("textures/block/dense_cloud_still.png"));
             BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
             float f = client.player.getBrightnessAtEyes();
             RenderSystem.enableBlend();

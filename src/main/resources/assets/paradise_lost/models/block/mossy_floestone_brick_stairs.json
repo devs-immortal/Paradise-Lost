@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "paradise_lost:block/mossy_floestone_brick",
+    "top": "paradise_lost:block/mossy_floestone_brick",
+    "side": "paradise_lost:block/mossy_floestone_brick"
+  }
+}

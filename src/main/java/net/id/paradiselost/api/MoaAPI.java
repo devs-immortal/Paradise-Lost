@@ -30,11 +30,6 @@ import java.util.function.Predicate;
  * @see net.id.paradiselost.entities.passive.moa.MoaRaces
  */
 public class MoaAPI {
-    /**
-     * If a {@code MoaRace} cannot be found by some method, it is recommended to use this in its place, rather than
-     * returning null.
-     */
-    public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.TANK);
 
     /**
      * A map of all registered {@link MoaRace}s.
@@ -55,6 +50,15 @@ public class MoaAPI {
      * @see MoaAPI.MatingEntry
      */
     private static final Set<MatingEntry> MOA_BREEDING_REGISTRY = new ObjectOpenHashSet<>();
+
+    /**
+     * If a {@code MoaRace} cannot be found by some method, it is recommended to use this in its place, rather than
+     * returning null.
+     */
+    public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.TANK);
+    static {
+        register(ParadiseLost.locate("fallback"), FALLBACK_MOA);
+    }
 
     /**
      * @param name The unique {@code Identifier} identifying this particular {@code MoaRace}
@@ -192,7 +196,7 @@ public class MoaAPI {
         return (ctx) -> ctx.world.getRandom().nextFloat() < chance;
     }
 
-    public static record MoaBreedingContext(MoaGenes parentA, MoaGenes parentB, World world, BlockPos pos) {
+    public record MoaBreedingContext(MoaGenes parentA, MoaGenes parentB, World world, BlockPos pos) {
     }
 
     // Ideally this shouldn't be an enum
@@ -252,7 +256,7 @@ public class MoaAPI {
      * @param legendary       Whether the created {@code MoaRace} will be legendary
      * @param particles       The particles emitted by this MoaRace, if it is legendary
      */
-    public static record MoaRace(MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting,
+    public record MoaRace(MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting,
                                  boolean glowing, boolean legendary, ParticleType<?> particles) {
         public MoaRace(MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting) {
             this(defaultAffinity, statWeighting, false, false, ParticleTypes.ENCHANT);
@@ -278,6 +282,13 @@ public class MoaAPI {
             Identifier id = this.getId();
             return "moa.race." + id.getNamespace() + "." + id.getPath();
         }
+    }
+
+    /**
+     * This records how a MoaRace can result from breeding. There isn't a limit on the number of MatingEntries per
+     * MoaRace.
+     */
+    private record MatingEntry(MoaRace race, Predicate<MoaBreedingContext> breedingRequirements) {
     }
 
     /**
@@ -316,16 +327,5 @@ public class MoaAPI {
             return entryOptional.map(Map.Entry::getKey).orElse(heaviest);
         }
 
-    }
-
-    /**
-     * This records how a MoaRace can result from breeding. There isn't a limit on the number of MatingEntries per
-     * MoaRace.
-     */
-    private static record MatingEntry(MoaRace race, Predicate<MoaBreedingContext> breedingRequirements) {
-    }
-
-    static {
-        register(ParadiseLost.locate("fallback"), FALLBACK_MOA);
     }
 }

@@ -1,9 +1,8 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:skyroot_stairs",
-    "paradise_lost:golden_oak_stairs",
-    "paradise_lost:crystal_stairs",
+    "paradise_lost:aurel_stairs",
+    "paradise_lost:mother_aurel_stairs",
     "paradise_lost:wisteria_stairs",
     "paradise_lost:orange_stairs"
   ]

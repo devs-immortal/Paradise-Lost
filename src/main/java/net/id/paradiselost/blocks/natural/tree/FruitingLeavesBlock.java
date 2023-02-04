@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,7 +17,6 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -47,7 +45,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
             if (!state.get(CAPPED)) {
                 if (random.nextInt(60) == 0 && growth < 2) {
                     if (growth == 1) {
-                        if(world.isClient()){
+                        if (world.isClient()) {
                             spawnPetalBurst(world, random, pos);
                         }
                     }
@@ -58,7 +56,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
             } else {
                 if (random.nextInt(240) == 0) {
                     if (growth == 1) {
-                        if(world.isClient()){
+                        if (world.isClient()) {
                             spawnPetalBurst(world, random, pos);
                         }
                     } else {
@@ -91,7 +89,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
             world.playSound(null, pos, SoundEvents.BLOCK_CROP_BREAK, SoundCategory.BLOCKS, 1F, 2F);
 
             if (growth == 1) {
-                if(world.isClient()){
+                if (world.isClient()) {
                     spawnPetalBurst(world, random, pos);
                 }
             } else {

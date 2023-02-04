@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right_open",
+  "textures": {
+    "bottom": "paradise_lost:block/aurel_door_bottom",
+    "top": "paradise_lost:block/aurel_door_top"
+  }
+}

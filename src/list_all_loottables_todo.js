@@ -7,12 +7,12 @@ alreadyDoneLoottables = [];
 
 async function run() {
     fs.readdir(resourcesFolder, (err, files) => {
-      if(err) throw err;
+      if (err) throw err;
       files.forEach(file => {
         models.push(file.replace(".json", ""))
       });
       fs.readdir(lootTableFolder, (err, files) => {
-              if(err) throw err;
+              if (err) throw err;
               files.forEach(file => {
                   alreadyDoneLoottables.push(file.replace(".json", ""));
               });

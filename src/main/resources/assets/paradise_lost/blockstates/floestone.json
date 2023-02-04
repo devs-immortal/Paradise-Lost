@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "paradise_lost:block/floestone"
+      },
+      {
+        "model": "paradise_lost:block/floestone_mirrored"
+      }
+    ]
+  }
+}

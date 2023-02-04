@@ -18,11 +18,11 @@ public class AmadrysCropBlock extends CropBlock {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         final int[] waterSpots = {0};
         BlockPos.iterateOutwards(pos, 1, 1, 1).iterator().forEachRemaining(check -> {
-            if(world.isWater(check)) {
+            if (world.isWater(check)) {
                 waterSpots[0]++;
             }
         });
-        if(waterSpots[0] > 1) {
+        if (waterSpots[0] > 1) {
             super.randomTick(state, world, pos, random);
         }
     }

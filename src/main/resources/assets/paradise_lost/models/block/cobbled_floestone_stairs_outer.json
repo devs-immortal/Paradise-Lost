@@ -1,0 +1,8 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "paradise_lost:block/cobbled_floestone",
+    "top": "paradise_lost:block/cobbled_floestone",
+    "side": "paradise_lost:block/cobbled_floestone"
+  }
+}

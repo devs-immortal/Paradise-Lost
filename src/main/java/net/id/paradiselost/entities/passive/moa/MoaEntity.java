@@ -12,6 +12,7 @@ import net.id.paradiselost.items.tools.bloodstone.BloodstoneItem;
 import net.id.paradiselost.screen.handler.MoaScreenHandler;
 import net.id.paradiselost.tag.ParadiseLostItemTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.AbstractChestBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -147,7 +148,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
      * @throws IllegalArgumentException If the stack was not a chest
      */
     public void setChest(ItemStack stack) {
-        if(!stack.isEmpty() && (!(stack.getItem() instanceof BlockItem blockItem) || !(blockItem.getBlock() instanceof AbstractChestBlock<?>))){
+        if (!stack.isEmpty() && (!(stack.getItem() instanceof BlockItem blockItem) || !(blockItem.getBlock() instanceof AbstractChestBlock<?>))) {
             throw new IllegalArgumentException("Can not set a Moa chest to be a non-chest or empty item stack!");
         }
         dataTracker.set(CHEST, stack);
@@ -160,15 +161,15 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
      * @param scatterItems True if the inventory should be scattered
      */
     public void refreshChest(boolean scatterItems) {
-        if(hasChest()) {
-            if(inventory.size() != 20) {
+        if (hasChest()) {
+            if (inventory.size() != 20) {
                 inventory = new SimpleInventory(20);
                 inventory.addListener(this);
             }
-        }else{
-            if(inventory.size() != 0) {
+        } else {
+            if (inventory.size() != 0) {
                 inventory.removeListener(this);
-                if(scatterItems && !world.isClient) {
+                if (scatterItems && !world.isClient) {
                     ItemScatterer.spawn(world, this, inventory);
                 }
                 inventory.clear();
@@ -180,8 +181,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     protected void dropInventory() {
         super.dropInventory();
-        if(hasChest()){
-            if(!world.isClient){
+        if (hasChest()) {
+            if (!world.isClient) {
                 dropStack(getChest());
             }
             setChest(ItemStack.EMPTY);
@@ -311,10 +312,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return getGenes().isTamed() && super.canBeSaddled();
     }
 
-     @Override
-     public boolean canBeControlledByRider() {
-         return this.isSaddled();
-     }
+    @Override
+    public boolean canBeControlledByRider() {
+        return this.isSaddled();
+    }
 
     @Override
     public void travel(Vec3d movementInput) {
@@ -396,21 +397,21 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if(player.getStackInHand(hand).getItem() instanceof BloodstoneItem) {
+        if (player.getStackInHand(hand).getItem() instanceof BloodstoneItem) {
             return ActionResult.PASS;
         }
 
         if (!world.isClient()) {
             ItemStack heldStack = player.getStackInHand(hand);
-            if(getGenes().isTamed()) {
+            if (getGenes().isTamed()) {
                 // Allow the player to open the GUI at any time
-                if(player.isSneaking()){
+                if (player.isSneaking()) {
                     openInventory(player);
                     return ActionResult.SUCCESS;
                 }
                 
                 // Short circuit to hopefully save a few cycles.
-                if(heldStack.isEmpty()){
+                if (heldStack.isEmpty()) {
                     return super.interactMob(player, hand);
                 }
                 
@@ -418,27 +419,30 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 if (item.isFood() && item.getFoodComponent().isMeat()) {
                     feedMob(heldStack);
                     return ActionResult.success(world.isClient());
-                }else if(!hasChest() && item instanceof BlockItem blockItem && blockItem.getBlock() instanceof AbstractChestBlock) {
+                } else if (!hasChest() && item instanceof BlockItem blockItem && blockItem.getBlock() instanceof AbstractChestBlock) {
                     // Set a new chest, if there is none.
                     var chestStack = heldStack.copy();
                     chestStack.setCount(1);
-                    if(!player.isCreative()) {
+                    if (!player.isCreative()) {
                         heldStack.decrement(1);
                     }
                     setChest(heldStack);
                     return ActionResult.success(world.isClient);
                 }
             } else {
-                if(heldStack.getItem() != ParadiseLostItems.ORANGE && heldStack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES)) {
+                if (heldStack.getItem() != ParadiseLostItems.ORANGE && heldStack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES)) {
                     eat(player, hand, heldStack);
                     playSound(ParadiseLostSoundEvents.ENTITY_MOA_EAT, 1, 0.5F + random.nextFloat() / 3F);
                     produceParticlesServer(new ItemStackParticleEffect(ParticleTypes.ITEM, heldStack), 2 + random.nextInt(4), 7, 0);
                     //spawnConsumptionEffects(heldStack, 7 + random.nextInt(13));
 
-                    if(random.nextFloat() < 0.04F * (heldStack.isFood() ? heldStack.getItem().getFoodComponent().getHunger() : 2)) {
+                    if (random.nextFloat() < 0.04F * (heldStack.isFood() ? heldStack.getItem().getFoodComponent().getHunger() : 2)) {
                         getGenes().tame(player.getUuid());
                         playSound(ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, 2, 0.75F);
                         produceParticlesServer(ParticleTypes.HAPPY_VILLAGER, 2 + random.nextInt(4), 7, 0);
+                        if (player instanceof ServerPlayerEntity) {
+                            Criteria.TAME_ANIMAL.trigger((ServerPlayerEntity) player, this);
+                        }
                     }
 
                     return ActionResult.CONSUME;
@@ -467,7 +471,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         super.writeCustomDataToNbt(compound);
         compound.putInt("airTicks", dataTracker.get(AIR_TICKS));
         compound.put("chest", dataTracker.get(CHEST).writeNbt(new NbtCompound()));
-        if(inventory != DUMMY){
+        if (inventory != DUMMY) {
             compound.put("chestContents", inventory.toNbtList());
         }
     }
@@ -478,7 +482,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         dataTracker.set(AIR_TICKS, compound.getInt("airTicks"));
         dataTracker.set(CHEST, ItemStack.fromNbt(compound.getCompound("chest")));
         refreshChest(false);
-        if(inventory != DUMMY){
+        if (inventory != DUMMY) {
             inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE));
         }
     }
@@ -533,7 +537,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity matingAnimal) {
-        if(!(matingAnimal instanceof MoaEntity matingMoa)){
+        if (!(matingAnimal instanceof MoaEntity matingMoa)) {
             return null;
         }
         
@@ -542,7 +546,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         
         var eggStack = genesA.getEggForBreeding(genesB, world, getBlockPos());
         var baby = ParadiseLostEntityTypes.MOA.create(world);
-        if(baby == null){
+        if (baby == null) {
             return null;
         }
         var babyGenes = baby.getGenes();
@@ -647,7 +651,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     
     private class MoaEscapeDangerGoal extends EscapeDangerGoal {
 
-        public MoaEscapeDangerGoal(PathAwareEntity mob, double speed) {
+        MoaEscapeDangerGoal(PathAwareEntity mob, double speed) {
             super(mob, speed);
         }
 

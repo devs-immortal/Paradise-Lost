@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "paradise_lost:block/mother_aurel_door_bottom",
+    "top": "paradise_lost:block/mother_aurel_door_top"
+  }
+}

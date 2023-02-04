@@ -19,8 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlayerManager.class)
 public class PlayerManagerMixin {
     @Inject(
-        method = "createPlayer",
-        at = @At("RETURN")
+            method = "createPlayer",
+            at = @At("RETURN")
     )
     private void createPlayer(GameProfile profile, @Nullable PlayerPublicKey publicKey, CallbackInfoReturnable<ServerPlayerEntity> cir) {
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
@@ -29,10 +29,10 @@ public class PlayerManagerMixin {
     }
 
     @Inject(
-        method = "sendWorldInfo",
-        at = @At("HEAD")
+            method = "sendWorldInfo",
+            at = @At("HEAD")
     )
     private void sendWorldInfo(ServerPlayerEntity player, ServerWorld world, CallbackInfo ci) {
-        player.networkHandler.sendPacket(ParadiseLostGameRules.getMaxQuicksoilSpeedSyncPacket(world.getGameRules().get(ParadiseLostGameRules.MAX_QUICKSOIL_SPEED).get()));
+        player.networkHandler.sendPacket(ParadiseLostGameRules.getMaxAugmentedSpeedSyncPacket(world.getGameRules().get(ParadiseLostGameRules.MAX_AUGMENTED_SPEED).get()));
     }
 }

@@ -8,7 +8,6 @@ import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.lore.LoreState;
-import net.minecraft.entity.LivingEntity;
 
 public class ParadiseLostComponents implements EntityComponentInitializer {
 

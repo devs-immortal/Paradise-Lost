@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "paradise_lost:block/floestone",
+    "top": "paradise_lost:block/floestone",
+    "side": "paradise_lost:block/floestone"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "paradise_lost:block/golden_oak_planks",
-    "top": "paradise_lost:block/golden_oak_planks",
-    "side": "paradise_lost:block/golden_oak_planks"
-  }
-}

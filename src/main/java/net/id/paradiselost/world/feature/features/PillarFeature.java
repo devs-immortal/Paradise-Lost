@@ -22,20 +22,20 @@ public class PillarFeature extends Feature<LongFeatureConfig> {
         var world = context.getWorld();
         var height = config.size().get(random);
 
-        if(config.validFloor().contains(world.getBlockState(pos.down()))) {
+        if (config.validFloor().contains(world.getBlockState(pos.down()))) {
             var valid = true;
             var check = 0;
 
             while (valid && check < height + 2) {
 
-                if(!world.isAir(pos.up(check))) {
+                if (!world.isAir(pos.up(check))) {
                     valid = false;
                 }
 
                 check++;
             }
 
-            if(valid) {
+            if (valid) {
                 for (int i = 0; i < height; i++) {
                     var pillar = pos.up(i);
 
@@ -43,14 +43,14 @@ public class PillarFeature extends Feature<LongFeatureConfig> {
 
                     for (Direction dir : Direction.values()) {
                         var shell = pillar.offset(dir);
-                        if(dir.getHorizontal() >= 0 && world.isAir(shell) && random.nextFloat() < config.shellChance()) {
+                        if (dir.getHorizontal() >= 0 && world.isAir(shell) && random.nextFloat() < config.shellChance()) {
 
                             var shellState = config.shell().getBlockState(random, shell);
 
-                            if(shellState.contains(Properties.HORIZONTAL_FACING)) {
+                            if (shellState.contains(Properties.HORIZONTAL_FACING)) {
                                 shellState = shellState.with(Properties.HORIZONTAL_FACING, dir.getOpposite());
                             }
-                            else if(shellState.contains(Properties.FACING)) {
+                            else if (shellState.contains(Properties.FACING)) {
                                 shellState = shellState.with(Properties.FACING, dir.getOpposite());
                             }
 
@@ -59,7 +59,7 @@ public class PillarFeature extends Feature<LongFeatureConfig> {
                     }
                 }
 
-                if(random.nextFloat() < config.topChance()) {
+                if (random.nextFloat() < config.topChance()) {
                     var tip = pos.up(height);
                     world.setBlockState(tip, config.top().getBlockState(random, tip), Block.NOTIFY_ALL);
                 }

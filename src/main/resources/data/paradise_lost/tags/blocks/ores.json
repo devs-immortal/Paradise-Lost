@@ -1,8 +1,7 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:gravitite_ore",
-    "paradise_lost:ambrosium_ore",
-    "paradise_lost:zanite_ore"
+    "paradise_lost:cherine_ore",
+    "paradise_lost:olvite_ore"
   ]
 }

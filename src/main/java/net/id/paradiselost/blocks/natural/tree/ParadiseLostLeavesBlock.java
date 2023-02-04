@@ -2,7 +2,6 @@ package net.id.paradiselost.blocks.natural.tree;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
-import net.id.paradiselost.entities.hostile.swet.TransformableSwetEntity;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -46,14 +45,11 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
             entity.fallDistance = 0;
             entity.slowMovement(state, new Vec3d(0.99D, 0.9D, 0.99D));
         }
-        if (this == ParadiseLostBlocks.GOLDEN_OAK_LEAVES && entity instanceof TransformableSwetEntity swet) {
-            swet.suggestTypeChange(state);
-        }
     }
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.isOf(ParadiseLostBlocks.GOLDEN_OAK_LEAVES) && random.nextInt(75) == 0) {
+        if (state.isOf(ParadiseLostBlocks.MOTHER_AUREL_LEAVES) && random.nextInt(75) == 0) {
             Direction direction = Direction.DOWN;
             BlockPos blockPos = pos.offset(direction);
             BlockState blockState = world.getBlockState(blockPos);
@@ -72,7 +68,7 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
                     if (world.random.nextInt(3) == 0) {
                         double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetX() * 0.6D;
                         double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetZ() * 0.6D;
-                        world.addParticle(ParadiseLostParticles.GOLDEN_OAK_LEAF, (double) pos.getX() + d, pos.getY(), (double) pos.getZ() + f, speed, world.getRandom().nextDouble() / -20.0, 0);
+                        world.addParticle(ParadiseLostParticles.MOTHER_AUREL_LEAF, (double) pos.getX() + d, pos.getY(), (double) pos.getZ() + f, speed, world.getRandom().nextDouble() / -20.0, 0);
                     }
                 }
             }

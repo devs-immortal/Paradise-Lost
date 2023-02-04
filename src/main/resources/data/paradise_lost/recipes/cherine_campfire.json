@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SCS",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "paradise_lost:cherine"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:cherine_campfire"
+  }
+}

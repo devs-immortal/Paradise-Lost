@@ -36,14 +36,14 @@ public class BookOfLoreItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        user.openHandledScreen(new NamedScreenHandlerFactory(){
+        user.openHandledScreen(new NamedScreenHandlerFactory() {
             @Override
-            public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player){
+            public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
                 return new LoreHandler(syncId, inv);
             }
     
             @Override
-            public Text getDisplayName(){
+            public Text getDisplayName() {
                 return Text.of("asdf");
             }
         });

@@ -161,7 +161,7 @@ public interface FloatingBlockHelper {
          * @param pos       The position of the block that should be added to the structure.
          * @param predicate A predicate to test whether the block should be added.
          */
-        public SetBuilder addIf(BlockPos pos, Predicate<Map<Vec3i, BlockLikeEntity>> predicate) {
+        public SetBuilder addif(BlockPos pos, Predicate<Map<Vec3i, BlockLikeEntity>> predicate) {
             if (predicate.test(Map.copyOf(this.entries))) {
                 return this.add(pos);
             }

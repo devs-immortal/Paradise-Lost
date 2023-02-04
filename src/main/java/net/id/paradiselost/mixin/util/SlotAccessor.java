@@ -8,5 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(Slot.class)
 public interface SlotAccessor {
-    @Mutable @Accessor void setInventory(Inventory inventory);
+    @Mutable
+    @Accessor
+    void setInventory(Inventory inventory);
 }

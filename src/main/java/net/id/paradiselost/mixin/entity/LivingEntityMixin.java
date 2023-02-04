@@ -7,16 +7,12 @@ import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.misc.RookEntity;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
-import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.tag.ParadiseLostItemTags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Item;
-import net.minecraft.item.ToolItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -55,12 +51,12 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @SuppressWarnings("ConstantConditions")
     @ModifyVariable(
-        method = "travel",
-        at = @At(
-            value = "INVOKE_ASSIGN",
-            ordinal = 0,
-            target = "Lnet/minecraft/world/World;getFluidState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/fluid/FluidState;"
-        )
+            method = "travel",
+            at = @At(
+                value = "INVOKE_ASSIGN",
+                ordinal = 0,
+                target = "Lnet/minecraft/world/World;getFluidState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/fluid/FluidState;"
+            )
     )
     private double changeGravity(double gravity) {
         LivingEntity entity = (LivingEntity) (Object) this;
@@ -76,7 +72,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
                 gravity -= 0.07;
                 this.fallDistance = 0;
             } else if (entity.hasPassengers() && entity.getPassengerList().stream().anyMatch(passenger ->
-                    passenger.getType().equals(ParadiseLostEntityTypes.AERBUNNY))) {
+                    passenger.getType().equals(ParadiseLostEntityTypes.PARADISE_HARE))) {
                 gravity -= 0.05;
                 this.fallDistance = 0; // alternatively, remove & replace with fall damage dampener
             }
@@ -85,16 +81,17 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         return gravity;
     }
 
-    @Inject(method = "damage", at = @At("RETURN"))
-    private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        Entity attacker = source.getAttacker();
-        if (cir.getReturnValue() && attacker instanceof LivingEntity) {
-            Item item = ((LivingEntity) attacker).getMainHandStack().getItem();
-            if (item instanceof ToolItem tool && tool.getMaterial() == ParadiseLostToolMaterials.GRAVITITE) {
-                this.addVelocity(0, amount / 20 + 0.1, 0);
-            }
-        }
-    }
+    // 24: Removed because of gravitite's removal
+//    @Inject(method = "damage", at = @At("RETURN"))
+//    private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+//        Entity attacker = source.getAttacker();
+//        if (cir.getReturnValue() && attacker instanceof LivingEntity) {
+//            Item item = ((LivingEntity) attacker).getMainHandStack().getItem();
+//            if (item instanceof ToolItem tool && tool.getMaterial() == ParadiseLostToolMaterials.GRAVITITE) {
+//                this.addVelocity(0, amount / 20 + 0.1, 0);
+//            }
+//        }
+//    }
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tick(CallbackInfo ci) {
@@ -124,19 +121,19 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     @SuppressWarnings("ConstantConditions")
     @Inject(method = "addDeathParticles", at = @At("HEAD"), cancellable = true)
     private void applyCustomDeathParticles(CallbackInfo ci) {
-        if(((LivingEntity) ((Object) this)) instanceof RookEntity) {
-            for(int i = 0; i < 20 + random.nextInt(20); ++i) {
+        if (((LivingEntity) ((Object) this)) instanceof RookEntity) {
+            for (int i = 0; i < 20 + random.nextInt(20); ++i) {
                 double d = this.random.nextGaussian() * 0.02D;
                 double e = this.random.nextGaussian() * 0.02D;
                 double f = this.random.nextGaussian() * 0.02D;
-                if(random.nextInt( 3) == 0) {
+                if (random.nextInt(3) == 0) {
                     this.world.addParticle(ParticleTypes.LARGE_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
                 }
                 else {
                     this.world.addParticle(ParticleTypes.SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
                 }
 
-                if(random.nextInt(3) == 0) {
+                if (random.nextInt(3) == 0) {
                     this.world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d / 3, e, f / 3);
                 }
             }

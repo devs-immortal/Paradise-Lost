@@ -9,7 +9,6 @@ import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
 import net.id.paradiselost.client.model.ParadiseLostModelLayers;
 import net.id.paradiselost.client.model.ParadiseLostModelPredicates;
 import net.id.paradiselost.client.model.armor.ParadiseLostArmorModels;
-import net.id.paradiselost.client.model.block.HolidayBlockModel;
 import net.id.paradiselost.client.rendering.block.ParadiseLostBlockEntityRenderers;
 import net.id.paradiselost.client.rendering.entity.ParadiseLostEntityRenderers;
 import net.id.paradiselost.client.rendering.item.ParadiseLostItemRenderers;
@@ -116,7 +115,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostScreens.initClient();
         Conditions.clientInit();
         ParadiseLostShaders.init();
-        HolidayBlockModel.init();
         ParadiseLostScreens.clientInit();
     }
 
@@ -175,9 +173,9 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
                     // To people who might want to change this to use the Logger class, don't.
                     // It will not print the message when you do that. I tried.
                     System.err.println(
-                            "\n".repeat(10) +
-                                    message +
-                                    "\n".repeat(10)
+                            "\n".repeat(10)
+                                    + message
+                                    + "\n".repeat(10)
                     );
                 }));
                 throw new RuntimeException(message);

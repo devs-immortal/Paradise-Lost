@@ -1,6 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "paradise_lost:block/skyroot_sapling"
-  }
-}

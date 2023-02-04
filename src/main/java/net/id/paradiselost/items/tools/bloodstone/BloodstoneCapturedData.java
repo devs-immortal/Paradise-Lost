@@ -108,7 +108,7 @@ public class BloodstoneCapturedData {
         BloodstoneCapturedData bloodstoneCapturedData = new BloodstoneCapturedData();
         if (entity instanceof MoaEntity moa) {
             bloodstoneCapturedData.isMoa = true;
-            //zanite
+            //olvite
             bloodstoneCapturedData.Race = moa.getGenes().getRace().getTranslationKey();
             bloodstoneCapturedData.Hunger = String.format("%.1f", moa.getGenes().getHunger()) + "/" + 100.0;
             bloodstoneCapturedData.Affinity = moa.getGenes().getAffinity().getTranslationKey();
@@ -121,7 +121,7 @@ public class BloodstoneCapturedData {
             bloodstoneCapturedData.DROP_MULTIPLIER = MoaAttributes.DROP_MULTIPLIER.getRatingTierTranslationKey(moa);
             bloodstoneCapturedData.MAX_HEALTH = MoaAttributes.MAX_HEALTH.getRatingTierTranslationKey(moa);
         }
-        //Ambrosium
+        //Cherine
         bloodstoneCapturedData.uuid = entity.getUuid();
         bloodstoneCapturedData.name = entity.getName();
         bloodstoneCapturedData.HP = String.format("%.1f", entity.getHealth()) + "/" + String.format("%.1f", entity.getMaxHealth());
