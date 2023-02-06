@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:golden_amber_tile"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:golden_amber_tile_stairs",
+    "count": 4
+  }
+}

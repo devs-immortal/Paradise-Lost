@@ -30,7 +30,6 @@
   "block.paradise_lost.permafrost": "Permafrost",
   "block.paradise_lost.farmland": "Paradise Farmland",
   "block.paradise_lost.grass_path": "Paradise Grass Path",
-  "block.paradise_lost.quicksoil": "Quicksoil",
   "block.paradise_lost.packed_swedroot": "Packed Swedroot",
 
   "block.paradise_lost.cold_cloud": "Cold Cloud",
@@ -80,6 +79,10 @@
   "block.paradise_lost.carved_stone_panel_lit": "Lit Carved Stone Panel",
   "block.paradise_lost.carved_stone_eye": "Carved Stone Eye",
   "block.paradise_lost.carved_stone_eye_lit": "Lit Carved Stone Eye",
+  
+  "block.paradise_lost.golden_amber_tile": "Golden Amber Tile",
+  "block.paradise_lost.golden_amber_tile_slab": "Golden Amber Tile Slab",
+  "block.paradise_lost.golden_amber_tile_stairs": "Golden Amber Tile Stairs",
 
   "block.paradise_lost.cherine_campfire": "Cherine Campfire",
 
@@ -275,6 +278,12 @@
   "item.paradise_lost.olvite_axe": "Olvite Axe",
   "item.paradise_lost.olvite_sword": "Olvite Sword",
   "item.paradise_lost.olvite_hoe": "Olvite Hoe",
+  
+  "item.paradise_lost.glazed_gold_shovel": "Glazed Gold Shovel",
+  "item.paradise_lost.glazed_gold_pickaxe": "Glazed Gold Pickaxe",
+  "item.paradise_lost.glazed_gold_axe": "Glazed Gold Axe",
+  "item.paradise_lost.glazed_gold_sword": "Glazed Gold Sword",
+  "item.paradise_lost.glazed_gold_hoe": "Glazed Gold Hoe",
 
   "item.paradise_lost.cold_parachute": "Cold Parachute",
   "item.paradise_lost.golden_parachute": "Golden Parachute",
@@ -282,6 +291,8 @@
   "item.paradise_lost.cherine_bloodstone": "Cherine Bloodstone",
   "item.paradise_lost.olvite_bloodstone": "Olvite Bloodstone",
   "item.paradise_lost.abstentine_bloodstone": "Abstentine Bloodstone",
+  
+  "item.paradise_lost.glazed_gold_upgrade_smithing_template": "Glazed Gold Upgrade",
 
   "item.paradise_lost.olvite_helmet": "Olvite Helmet",
   "item.paradise_lost.olvite_chestplate": "Olvite Chestplate",
