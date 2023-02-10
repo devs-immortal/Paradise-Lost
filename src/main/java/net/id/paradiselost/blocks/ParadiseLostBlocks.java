@@ -152,7 +152,7 @@ public class ParadiseLostBlocks {
     public static final Block CARVED_STONE_EYE_LIT = add("carved_stone_eye_lit", new Block(carvedStone().luminance(value -> 8)));
 
     private static Settings amberTiles() {
-        return of(Material.STONE).sounds(BlockSoundGroup.CALCITE).strength(2, 6);
+        return of(Material.STONE, MapColor.GOLD).requiresTool().sounds(BlockSoundGroup.CALCITE).strength(2, 6);
     }
 
     public static final Block GOLDEN_AMBER_TILE = add("golden_amber_tile", new Block(amberTiles()));
