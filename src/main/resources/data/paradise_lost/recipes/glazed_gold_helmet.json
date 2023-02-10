@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "paradise_lost:glazed_gold_upgrade_smithing_template"
+  },
+  "base": {
+    "item": "minecraft:golden_helmet"
+  },
+  "result": {
+    "item": "paradise_lost:glazed_gold_helmet"
+  }
+}

@@ -298,6 +298,11 @@
   "item.paradise_lost.olvite_chestplate": "Olvite Chestplate",
   "item.paradise_lost.olvite_leggings": "Olvite Leggings",
   "item.paradise_lost.olvite_boots": "Olvite Boots",
+  
+  "item.paradise_lost.glazed_gold_helmet": "Glazed Gold Helmet",
+  "item.paradise_lost.glazed_gold_chestplate": "Glazed Gold Chestplate",
+  "item.paradise_lost.glazed_gold_leggings": "Glazed Gold Leggings",
+  "item.paradise_lost.glazed_gold_boots": "Glazed Gold Boots",
 
   "item.paradise_lost.blackcurrant": "Blackcurrant",
   "item.paradise_lost.orange": "Orange",
@@ -458,6 +463,7 @@
   "subtitles.paradise_lost.entity.nightmare.death": "Nightmare dissipates",
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
+  "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",
 
   "subtitles.paradise_lost.item.bloodstone.prick": "Bloodstone pricks",
 
