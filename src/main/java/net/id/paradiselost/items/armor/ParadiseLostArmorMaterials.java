@@ -5,8 +5,6 @@ import net.id.paradiselost.items.utils.IngredientUtil;
 import net.id.paradiselost.mixin.item.ArmorMaterialsAccessor;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ArmorMaterials;
-import net.minecraft.sound.SoundEvents;
 
 @SuppressWarnings("unused")
 public class ParadiseLostArmorMaterials {
