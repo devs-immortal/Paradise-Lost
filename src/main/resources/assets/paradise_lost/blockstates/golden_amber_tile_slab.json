@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "paradise_lost:block/golden_amber_tile_slab"
+    },
+    "type=top": {
+      "model": "paradise_lost:block/golden_amber_tile_slab_top"
+    },
+    "type=double": {
+      "model": "paradise_lost:block/golden_amber_tile"
+    }
+  }
+}

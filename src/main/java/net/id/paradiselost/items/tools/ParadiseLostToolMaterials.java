@@ -10,5 +10,8 @@ import net.minecraft.item.ToolMaterial;
 public class ParadiseLostToolMaterials {
     public static final ToolMaterial OLVITE = ToolMaterialsAccessor.callInit("PARADISE_LOST_OLVITE", -1,
             MiningLevels.IRON, 250, 4.5f, 2f, 14, IngredientUtil.itemIngredient(ParadiseLostItems.OLVITE));
+    public static final ToolMaterial GLAZED_GOLD = ToolMaterialsAccessor.callInit("PARADISE_LOST_GLAZED_GOLD", -1,
+            MiningLevels.IRON, 131, 12f, 2f, 22, IngredientUtil.itemIngredient(ParadiseLostItems.GOLDEN_AMBER));
+
 
 }

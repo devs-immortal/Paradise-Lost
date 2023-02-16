@@ -151,6 +151,14 @@ public class ParadiseLostBlocks {
     public static final Block CARVED_STONE_EYE = add("carved_stone_eye", new Block(carvedStone()));
     public static final Block CARVED_STONE_EYE_LIT = add("carved_stone_eye_lit", new Block(carvedStone().luminance(value -> 8)));
 
+    private static Settings amberTiles() {
+        return of(Material.STONE, MapColor.GOLD).requiresTool().sounds(BlockSoundGroup.CALCITE).strength(2, 6);
+    }
+
+    public static final Block GOLDEN_AMBER_TILE = add("golden_amber_tile", new Block(amberTiles()));
+    public static final SlabBlock GOLDEN_AMBER_TILE_SLAB = add("golden_amber_tile_slab", new SlabBlock(amberTiles()));
+    public static final ParadiseLostStairsBlock GOLDEN_AMBER_TILE_STAIRS = add("golden_amber_tile_stairs", new ParadiseLostStairsBlock(GOLDEN_AMBER_TILE.getDefaultState(), amberTiles()));
+
     protected static Settings flowerPot() {
         return copy(POTTED_OAK_SAPLING);
     }

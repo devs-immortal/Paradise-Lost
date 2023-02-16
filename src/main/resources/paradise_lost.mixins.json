@@ -11,6 +11,7 @@
     "entity.CowEntityMixin",
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
+    "entity.PiglinBrainMixin",
     "entity.PlayerEntityMixin",
     "fluid.FlowableFluidMixin",
     "item.ArmorMaterialsAccessor",

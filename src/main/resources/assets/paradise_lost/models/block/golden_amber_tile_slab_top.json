@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "bottom": "paradise_lost:block/golden_amber_tile",
+    "top": "paradise_lost:block/golden_amber_tile",
+    "side": "paradise_lost:block/golden_amber_tile"
+  }
+}
