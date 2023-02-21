@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "paradise_lost:item/surtrum_axe"
+  }
+}

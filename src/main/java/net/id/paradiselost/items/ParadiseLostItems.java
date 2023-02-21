@@ -15,8 +15,10 @@ import net.id.paradiselost.items.misc.*;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.items.tools.AurelBucketItem;
 import net.id.paradiselost.items.tools.VialItem;
+import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
+import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
 import net.id.paradiselost.items.utils.ParadiseLostRarity;
 import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
@@ -61,6 +63,8 @@ public class ParadiseLostItems {
     public static final Item CHERINE = add("cherine", new Item(resource), fuel(500));
     public static final Item OLVITE = add("olvite", new Item(resource));
     public static final Item OLVITE_NUGGET = add("olvite_nugget", new Item(resource));
+    public static final Item REFINED_SURTRUM = add("refined_surtrum", new Item(resource));
+    public static final Item RAW_SURTRUM = add("raw_surtrum", new Item(resource));
     public static final Item FLAX_THREAD = add("flax_thread", new Item(resource));
     public static final Item FLAXWEAVE = add("flaxweave", new Item(resource));
     public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource), compostable30);
@@ -75,25 +79,34 @@ public class ParadiseLostItems {
     private static final Settings paradiseLostLootTool = tool().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT);
     private static final Settings unstackableTool = tool().maxCount(1);
     private static final Settings unstackableRareTool = tool().maxCount(1).rarity(RARE);
+
     // Olvite
     public static final ShovelItem OLVITE_SHOVEL = add("olvite_shovel", new ShovelItem(ParadiseLostToolMaterials.OLVITE, 1.5f, -3f, tool()));
     public static final PickaxeItem OLVITE_PICKAXE = add("olvite_pickaxe", new PickaxeItem(ParadiseLostToolMaterials.OLVITE, 1, -2.8f, tool()));
     public static final AxeItem OLVITE_AXE = add("olvite_axe", new AxeItem(ParadiseLostToolMaterials.OLVITE, 6f, -3.1f, tool()));
     public static final SwordItem OLVITE_SWORD = add("olvite_sword", new SwordItem(ParadiseLostToolMaterials.OLVITE, 3, -2.4f, tool()));
-    public static final HoeItem OLVITE_HOE = add("olvite_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.OLVITE, 1, 3f, tool()));
+    public static final HoeItem OLVITE_HOE = add("olvite_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.OLVITE, -2, -1f, tool()));
+
+    // Surtrum
+    public static final GravityShovelItem SURTRUM_SHOVEL = add("surtrum_shovel", new GravityShovelItem(ParadiseLostToolMaterials.SURTRUM, 2.5f, -3f, tool()));
+    public static final GravityPickaxeItem SURTRUM_PICKAXE = add("surtrum_pickaxe", new GravityPickaxeItem(ParadiseLostToolMaterials.SURTRUM, 2, -2.8f, tool()));
+    public static final GravityAxeItem SURTRUM_AXE = add("surtrum_axe", new GravityAxeItem(ParadiseLostToolMaterials.SURTRUM, 6f, -3.1f, tool()));
+    public static final SwordItem SURTRUM_SWORD = add("surtrum_sword", new SwordItem(ParadiseLostToolMaterials.SURTRUM, 4, -2.4f, tool()));
+    public static final GravityHoeItem SURTRUM_HOE = add("surtrum_hoe", new GravityHoeItem(ParadiseLostToolMaterials.SURTRUM, -3, 0f, tool()));
 
     // Glazed Gold
     public static final ShovelItem GLAZED_GOLD_SHOVEL = add("glazed_gold_shovel", new ShovelItem(ParadiseLostToolMaterials.GLAZED_GOLD, 1.5f, -3f, tool()));
     public static final PickaxeItem GLAZED_GOLD_PICKAXE = add("glazed_gold_pickaxe", new PickaxeItem(ParadiseLostToolMaterials.GLAZED_GOLD, 1, -2.8f, tool()));
     public static final AxeItem GLAZED_GOLD_AXE = add("glazed_gold_axe", new AxeItem(ParadiseLostToolMaterials.GLAZED_GOLD, 6f, -3.0f, tool()));
     public static final SwordItem GLAZED_GOLD_SWORD = add("glazed_gold_sword", new SwordItem(ParadiseLostToolMaterials.GLAZED_GOLD, 3, -2.4f, tool()));
-    public static final HoeItem GLAZED_GOLD_HOE = add("glazed_gold_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.GLAZED_GOLD, 0, -3.0f, tool()));
+    public static final HoeItem GLAZED_GOLD_HOE = add("glazed_gold_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.GLAZED_GOLD, -2, -2.0f, tool()));
 
     public static final TrinketItem CLOUD_PARACHUTE = add("cold_parachute", new ParachuteTrinketItem(unstackableTool, "cloud_parachute"));
     public static final TrinketItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new ParachuteTrinketItem(tool().maxCount(1).maxDamage(20), "golden_parachute"));
 
     public static final CherineBloodstoneItem CHERINE_BLOODSTONE = add("cherine_bloodstone", new CherineBloodstoneItem(unstackableTool));
     public static final OlviteBloodstoneItem OLVITE_BLOODSTONE = add("olvite_bloodstone", new OlviteBloodstoneItem(unstackableTool));
+    public static final SurtrumBloodstoneItem SURTRUM_BLOODSTONE = add("surtrum_bloodstone", new SurtrumBloodstoneItem(unstackableTool));
     public static final AbstentineBloodstoneItem ABSTENTINE_BLOODSTONE = add("abstentine_bloodstone", new AbstentineBloodstoneItem(unstackableTool));
 
     public static final Item GLAZED_GOLD_UPGRADE = add("glazed_gold_upgrade_smithing_template", new Item(tool()));
@@ -169,7 +182,6 @@ public class ParadiseLostItems {
     */
 
     public static final SpawnEggItem HELLENROSE_SPAWN_EGG = add("hellenrose_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.HELLENROSE, 0x97DED4, 0x31897D, misc), spawnEggBehavior);
-    //    public static final SpawnEggItem CHEST_MIMIC_SPAWN_EGG = null;
     public static final SpawnEggItem PARADISE_HARE_SPAWN_EGG = add("corsican_hare_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.PARADISE_HARE, 0xC5D6ED, 0x82A6D9, misc), spawnEggBehavior);
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc), spawnEggBehavior);
 
@@ -203,9 +215,11 @@ public class ParadiseLostItems {
     // ores
     public static final BlockItem CHERINE_ORE = add("cherine_ore", ParadiseLostBlocks.CHERINE_ORE, building_block);
     public static final BlockItem OLVITE_ORE = add("olvite_ore", ParadiseLostBlocks.OLVITE_ORE, building_block);
+    public static final BlockItem SURTRUM = add("surtrum", ParadiseLostBlocks.SURTRUM, building_block);
     // ore blocks
     public static final BlockItem CHERINE_BLOCK = add("cherine_block", ParadiseLostBlocks.CHERINE_BLOCK, building_block, fuel(5000));
     public static final BlockItem OLVITE_BLOCK = add("olvite_block", ParadiseLostBlocks.OLVITE_BLOCK, building_block);
+    public static final BlockItem REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", ParadiseLostBlocks.REFINED_SURTRUM_BLOCK, building_block);
     // move this somewhere else
     public static final BlockItem LEVITATOR = add("levitator", ParadiseLostBlocks.LEVITATOR, building_block);
     // logs

@@ -5,21 +5,10 @@ import net.fabricmc.api.Environment;
 import net.id.incubus_core.woodtypefactory.api.chest.ChestFactory;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.decorative.*;
-import net.id.paradiselost.blocks.mechanical.CherineCampfireBlock;
-import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
-import net.id.paradiselost.blocks.mechanical.FourBiteCakeBlock;
-import net.id.paradiselost.blocks.mechanical.IncubatorBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostGrassBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostSnowyBlock;
-import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.cloud.BlueParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.cloud.GoldenParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.cloud.PinkParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.crop.AmadrysCropBlock;
-import net.id.paradiselost.blocks.natural.crop.BlackcurrantBushBlock;
-import net.id.paradiselost.blocks.natural.crop.FlaxCropBlock;
-import net.id.paradiselost.blocks.natural.crop.SwedrootCropBlock;
+import net.id.paradiselost.blocks.mechanical.*;
+import net.id.paradiselost.blocks.natural.*;
+import net.id.paradiselost.blocks.natural.cloud.*;
+import net.id.paradiselost.blocks.natural.crop.*;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
@@ -361,9 +350,11 @@ public class ParadiseLostBlocks {
 
     // Ores
     public static final OreBlock CHERINE_ORE = add("cherine_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
-    public static final OreBlock OLVITE_ORE = add("olvite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
+    public static final OreBlock OLVITE_ORE = add("olvite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(1, 3)));
+    public static final OreBlock SURTRUM = add("surtrum", new SurtrumOreBlock(of(Material.STONE).sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 12f), UniformIntProvider.create(2, 5)));
     public static final Block CHERINE_BLOCK = add("cherine_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
     public static final Block OLVITE_BLOCK = add("olvite_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
+    public static final Block REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new Block(of(Material.METAL).requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
     public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, of(Material.WOOD).strength(3f, 3f).sounds(BlockSoundGroup.WOOD)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
