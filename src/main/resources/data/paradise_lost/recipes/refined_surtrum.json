@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paradise_lost:refined_surtrum_block"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:refined_surtrum",
+    "count": 9
+  }
+}

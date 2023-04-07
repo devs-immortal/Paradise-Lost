@@ -59,6 +59,7 @@
   "block.paradise_lost.mossy_floestone_wall": "Mossy Cobbled Floestone Wall",
 
   "block.paradise_lost.floestone_brick": "Floestone Brick",
+  "block.paradise_lost.chiseled_floestone": "Chiseled Floestone Brick",
   "block.paradise_lost.floestone_brick_slab": "Floestone Brick Slab",
   "block.paradise_lost.floestone_brick_stairs": "Floestone Brick Stairs",
   "block.paradise_lost.floestone_brick_wall": "Floestone Brick Wall",
@@ -226,11 +227,12 @@
   "block.paradise_lost.cherine_ore": "Cherine Ore",
   "block.paradise_lost.olvite_ore": "Olvite Ore",
   "block.paradise_lost.surtrum": "Surtrum",
+  "block.paradise_lost.metamorphic_shell": "Metamorphic Shell",
   "block.paradise_lost.cherine_block": "Block of Cherine",
   "block.paradise_lost.olvite_block": "Block of Olvite",
   "block.paradise_lost.refined_surtrum_block": "Block of Refined Surtrum",
 
-  "block.paradise_lost.levitator": "Cloud Levitator",
+  "block.paradise_lost.levitator": "Surtrum Levitator",
   "block.paradise_lost.olvite_chain": "Olvite Chain",
   "block.paradise_lost.cherine_lantern": "Cherine Lantern",
   "block.paradise_lost.blue_portal": "Paradise Portal",

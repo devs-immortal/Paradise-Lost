@@ -216,6 +216,7 @@ public class ParadiseLostItems {
     public static final BlockItem CHERINE_ORE = add("cherine_ore", ParadiseLostBlocks.CHERINE_ORE, building_block);
     public static final BlockItem OLVITE_ORE = add("olvite_ore", ParadiseLostBlocks.OLVITE_ORE, building_block);
     public static final BlockItem SURTRUM = add("surtrum", ParadiseLostBlocks.SURTRUM, building_block);
+    public static final BlockItem METAMORPHIC_SHELL = add("metamorphic_shell", ParadiseLostBlocks.METAMORPHIC_SHELL, building_block);
     // ore blocks
     public static final BlockItem CHERINE_BLOCK = add("cherine_block", ParadiseLostBlocks.CHERINE_BLOCK, building_block, fuel(5000));
     public static final BlockItem OLVITE_BLOCK = add("olvite_block", ParadiseLostBlocks.OLVITE_BLOCK, building_block);
@@ -258,6 +259,7 @@ public class ParadiseLostItems {
 
     // bricks
     public static final BlockItem FLOESTONE_BRICK = add("floestone_brick", ParadiseLostBlocks.FLOESTONE_BRICK, building_block);
+    public static final BlockItem CHISELED_FLOESTONE = add("chiseled_floestone", ParadiseLostBlocks.CHISELED_FLOESTONE, building_block);
     public static final BlockItem CARVED_STONE = add("carved_stone", ParadiseLostBlocks.CARVED_STONE, building_block);
     public static final BlockItem MOSSY_CARVED_STONE = add("mossy_carved_stone", ParadiseLostBlocks.MOSSY_CARVED_STONE, building_block);
     public static final BlockItem CRACKED_CARVED_STONE = add("cracked_carved_stone", ParadiseLostBlocks.CRACKED_CARVED_STONE, building_block);

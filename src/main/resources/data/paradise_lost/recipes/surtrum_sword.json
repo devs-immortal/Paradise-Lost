@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "X",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "paradise_lost:refined_surtrum"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:surtrum_sword"
+  }
+}
