@@ -353,7 +353,8 @@ public class ParadiseLostBlocks {
     public static final OreBlock CHERINE_ORE = add("cherine_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
     public static final OreBlock OLVITE_ORE = add("olvite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(1, 3)));
     public static final OreBlock SURTRUM = add("surtrum", new SurtrumOreBlock(of(Material.STONE).sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f), UniformIntProvider.create(2, 5)));
-    public static final Block METAMORPHIC_SHELL = add("metamorphic_shell", new Block(of(Material.STONE).sounds(BlockSoundGroup.STONE).requiresTool().strength(40f, 15f)));
+    public static final Block METAMORPHIC_SHELL = add("metamorphic_shell", new Block(of(Material.STONE).sounds(BlockSoundGroup.TUFF).requiresTool().strength(40f, 15f)));
+    public static final PoofBlock SURTRUM_AIR = add("surtrum_air", new PoofBlock(of(Material.FIRE).sounds(BlockSoundGroup.NETHER_GOLD_ORE)));
     public static final Block CHERINE_BLOCK = add("cherine_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
     public static final Block OLVITE_BLOCK = add("olvite_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     public static final FloatingBlock REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new FloatingBlock(false, of(Material.METAL).requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL)));

@@ -30,6 +30,8 @@ public class ParadiseLostFeatures {
     public static final PillarFeature PILLAR_FEATURE = register("pillar_feature", new PillarFeature(LongFeatureConfig.CODEC));
     public static final FallenPillarFeature FALLEN_PILLAR_FEATURE = register("fallen_pillar_feature", new FallenPillarFeature(LongFeatureConfig.CODEC));
 
+    public static final SurtrumMeteoriteFeature SURTRUM_METEORITE_FEATURE = register("surtrum_meteorite_feature", new SurtrumMeteoriteFeature(DefaultFeatureConfig.CODEC));
+
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {
         return Registry.register(Registry.FEATURE, ParadiseLost.locate(id), feature);
     }
