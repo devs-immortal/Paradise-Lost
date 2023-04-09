@@ -33,7 +33,7 @@ public class PoofBlock extends Block {
                 world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY(), pos.getZ(), rand.nextFloat()*0.5, rand.nextFloat()*0.5, rand.nextFloat()*0.5);
             }
             if (rand.nextBoolean()) world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.1F + rand.nextFloat()*0.2F, rand.nextFloat() * 0.7F + 0.3F);
-            var player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 4, false);
+            var player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
             if (player != null) player.setFireTicks(40);
             return Blocks.AIR.getDefaultState();
         }
