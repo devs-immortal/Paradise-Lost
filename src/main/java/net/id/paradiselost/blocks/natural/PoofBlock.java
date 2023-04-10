@@ -1,14 +1,11 @@
 package net.id.paradiselost.blocks.natural;
 
-import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FallingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -30,9 +27,9 @@ public class PoofBlock extends Block {
         Random rand = world.getRandom();
         if (neighborState.isAir()) {
             for (int i = 0; i < 4; i++) {
-                world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY(), pos.getZ(), rand.nextFloat()*0.5, rand.nextFloat()*0.5, rand.nextFloat()*0.5);
+                world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY(), pos.getZ(), rand.nextFloat() * 0.5, rand.nextFloat() * 0.5, rand.nextFloat() * 0.5);
             }
-            if (rand.nextBoolean()) world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.1F + rand.nextFloat()*0.2F, rand.nextFloat() * 0.7F + 0.3F);
+            if (rand.nextBoolean()) world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.1F + rand.nextFloat() * 0.2F, rand.nextFloat() * 0.7F + 0.3F);
             var player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
             if (player != null) player.setFireTicks(40);
             return Blocks.AIR.getDefaultState();
