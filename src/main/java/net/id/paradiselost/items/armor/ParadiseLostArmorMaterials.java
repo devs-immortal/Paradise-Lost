@@ -15,5 +15,9 @@ public class ParadiseLostArmorMaterials {
     public static final ArmorMaterial GLAZED_GOLD = ArmorMaterialsAccessor.callInit("PARADISE_LOST_GLAZED_GOLD", -1,
             "paradise_lost_glazed_gold", 14, new int[]{1, 3, 5, 2}, 25, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_GLAZED_GOLD,
             0f, 0f, IngredientUtil.itemIngredient(ParadiseLostItems.GOLDEN_AMBER));
+    public static final ArmorMaterial SURTRUM = ArmorMaterialsAccessor.callInit("PARADISE_LOST_SURTRUM", -1,
+            "paradise_lost_surtrum", 15, new int[]{3, 6, 8, 3}, 15, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_SURTRUM,
+            0f, 0.1f, IngredientUtil.itemIngredient(ParadiseLostItems.REFINED_SURTRUM));
+
 
 }

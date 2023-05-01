@@ -118,16 +118,25 @@ public class ParadiseLostItems {
     private static final Settings WEARABLE = wearable();
     private static final Settings RARE_WEARABLE = wearable().rarity(RARE);
     private static final Settings PARADISE_LOST_LOOT_WEARABLE = wearable().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT);
+
     // Olvite
     public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, HEAD, WEARABLE));
     public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, CHEST, WEARABLE));
     public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, LEGS, WEARABLE));
     public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, FEET, WEARABLE));
+
     // Glazed Gold
     public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, HEAD, WEARABLE));
     public static final ArmorItem GLAZED_GOLD_CHESTPLATE = add("glazed_gold_chestplate", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, CHEST, WEARABLE));
     public static final ArmorItem GLAZED_GOLD_LEGGINGS = add("glazed_gold_leggings", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, LEGS, WEARABLE));
     public static final ArmorItem GLAZED_GOLD_BOOTS = add("glazed_gold_boots", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, FEET, WEARABLE));
+
+    // Surtrum
+    public static final ArmorItem SURTRUM_HELMET = add("surtrum_helmet", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, HEAD, wearable()));
+    public static final ArmorItem SURTRUM_CHESTPLATE = add("surtrum_chestplate", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, CHEST, wearable()));
+    public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, LEGS, wearable()));
+    public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, FEET, wearable()));
+
 
     private static Settings food() {
         return new Settings().group(ParadiseLostItemGroups.PARADISE_LOST_FOOD);

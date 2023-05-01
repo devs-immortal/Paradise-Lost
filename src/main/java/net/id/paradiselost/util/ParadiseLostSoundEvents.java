@@ -79,6 +79,7 @@ public final class ParadiseLostSoundEvents {
 
     public static final SoundEvent ITEM_ARMOR_EQUIP_OLVITE = childEvent("item.armor.equip.olvite", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
     public static final SoundEvent ITEM_ARMOR_EQUIP_GLAZED_GOLD = childEvent("item.armor.equip.glazed_gold", SoundEvents.ITEM_ARMOR_EQUIP_GOLD);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_SURTRUM = childEvent("item.armor.equip.surtrum", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
 
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = childEvent("item.bloodstone.prick", SoundEvents.ENTITY_BEE_STING);
 
