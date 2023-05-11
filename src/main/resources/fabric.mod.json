@@ -34,7 +34,8 @@
     "fabric-registry-sync-v0": "*",
     "trinkets": "*",
     "gud_recipe_confidence": "*",
-    "satin": "*"
+    "satin": "*",
+    "cloth-config": "*"
   },
   "mixins": [
     "paradise_lost.mixins.json"
@@ -52,6 +53,9 @@
     ],
     "cardinal-components": [
       "net.id.paradiselost.component.ParadiseLostComponents"
+    ],
+    "modmenu": [
+      "net.id.paradiselost.config.ModMenuConfig"
     ]
   },
   "custom": {

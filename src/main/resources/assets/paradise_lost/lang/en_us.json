@@ -10,6 +10,8 @@
 
   "createWorld.customize.preset.paradise_lost.sandbox": "Paradise - Sandbox",
 
+  "text.autoconfig.Paradise_Lost.title": "Paradise Lost Config",
+  "text.autoconfig.Paradise_Lost.option.ParadiseLostPortalBaseBlock": "Portal Block",
 
   "biome.paradise_lost.autumnal_tundra": "Autumnal Tundra",
   "biome.paradise_lost.continental_plateau": "Continental Plateau",

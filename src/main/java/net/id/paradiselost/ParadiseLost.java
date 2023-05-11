@@ -17,6 +17,7 @@ import net.id.paradiselost.client.rendering.shader.ParadiseLostShaders;
 import net.id.paradiselost.client.rendering.texture.ParadiseLostTextures;
 import net.id.paradiselost.client.rendering.util.ParadiseLostColorProviders;
 import net.id.paradiselost.commands.ParadiseLostCommands;
+import net.id.paradiselost.config.ParadiseLostConfig;
 import net.id.paradiselost.effect.ParadiseLostStatusEffects;
 import net.id.paradiselost.effect.condition.Conditions;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
@@ -33,6 +34,7 @@ import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.gen.carver.ParadiseLostCarvers;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 
@@ -76,6 +78,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
 
     @Override
     public void onInitialize() {
+        ParadiseLostConfig.init();
         ParadiseLostRegistries.init();
         ParadiseLostCarvers.init();
         ParadiseLostFeatures.init();
@@ -96,6 +99,13 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostScreens.init();
         ParadiseLostLore.init();
         ParadiseLostParticles.init();
+
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			// since the portal can be configured to open with other mods blocks
+			// we have to wait until all mods have loaded
+			// and therefore have to register the portal late
+			ParadiseLostDimension.initPortal();
+		});
     }
 
     @Override

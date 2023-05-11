@@ -16,6 +16,7 @@ val modmenuVersion: String by properties
 val reiVersion: String by properties
 val recipeConfidenceVersion: String by properties
 val satinVersion: String by properties
+val clothConfigVersion: String by properties
 
 plugins {
     id("fabric-loom") version "0.12-SNAPSHOT"
@@ -155,6 +156,12 @@ dependencies {
             name = "trinkets",
             version = trinketsVersion,
     ).also(::include)
+
+    modImplementation(
+            group = "me.shedaniel.cloth",
+            name = "cloth-config-fabric",
+            version = clothConfigVersion,
+    )
 
     modRuntimeOnly(
             group = "com.terraformersmc",
