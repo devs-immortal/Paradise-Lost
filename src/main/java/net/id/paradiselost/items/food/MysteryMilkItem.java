@@ -20,7 +20,7 @@ public class MysteryMilkItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        return user instanceof PlayerEntity player && player.getAbilities().creativeMode
-                ? super.finishUsing(stack, world, user) : new ItemStack(ParadiseLostItems.VIAL);
+        super.finishUsing(stack, world, user);
+        return stack.isEmpty() ? new ItemStack(ParadiseLostItems.VIAL) : stack;
     }
 }
