@@ -22,7 +22,7 @@ public class AmadrysCropBlock extends CropBlock {
                 waterSpots[0]++;
             }
         });
-        if (waterSpots[0] > 1) {
+        if (waterSpots[0] >= 1) {
             super.randomTick(state, world, pos, random);
         }
     }
