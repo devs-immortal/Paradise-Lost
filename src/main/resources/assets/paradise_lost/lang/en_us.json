@@ -446,6 +446,8 @@
   "subtitles.paradise_lost.block.portal.ambient": "Paradise portal whooshes",
   "subtitles.paradise_lost.block.portal.travel": "Paradise portal noise fades",
   "subtitles.paradise_lost.block.portal.trigger": "Paradise portal noise intensifies",
+  
+  "subtitles.paradise_lost.block.surtrum_air.rush": "Hot air rushes out",
 
   "subtitles.paradise_lost.block.orange_leaves.break": "Orange leaves break",
   "subtitles.paradise_lost.block.orange_leaves.drop_fruit": "Orange leaves drop fruit",
@@ -482,6 +484,7 @@
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",
+  "subtitles.paradise_lost.item.armor.equip.surtrum": "Surtrum armor clunks",
 
   "subtitles.paradise_lost.item.bloodstone.prick": "Bloodstone pricks",
 

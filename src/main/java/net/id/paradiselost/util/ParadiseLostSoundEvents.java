@@ -37,6 +37,7 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent BLOCK_PORTAL_AMBIENT = event("block.portal.ambient");
     public static final SoundEvent BLOCK_PORTAL_TRAVEL = event("block.portal.travel");
     public static final SoundEvent BLOCK_PORTAL_TRIGGER = event("block.portal.trigger");
+    public static final SoundEvent BLOCK_SURTRUM_RUSH = childEvent("block.surtrum_air.rush", SoundEvents.BLOCK_FIRE_EXTINGUISH);
 
     public static final SoundEvent BLOCK_ORANGE_LEAVES_BREAK = childEvent("block.orange_leaves.break", SoundEvents.BLOCK_MOSS_BREAK);
     public static final SoundEvent BLOCK_ORANGE_LEAVES_DROP_FRUIT = childEvent("block.orange_leaves.drop_fruit", SoundEvents.BLOCK_CANDLE_BREAK);

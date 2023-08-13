@@ -1,14 +1,17 @@
 package net.id.paradiselost.blocks.natural;
 
+import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
@@ -16,6 +19,8 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+
+import java.util.List;
 
 public class PoofBlock extends Block {
     public PoofBlock(Settings settings) {
@@ -29,9 +34,11 @@ public class PoofBlock extends Block {
             for (int i = 0; i < 4; i++) {
                 world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY(), pos.getZ(), rand.nextFloat() * 0.5, rand.nextFloat() * 0.5, rand.nextFloat() * 0.5);
             }
-            if (rand.nextBoolean()) world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.1F + rand.nextFloat() * 0.2F, rand.nextFloat() * 0.7F + 0.3F);
-            var player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
-            if (player != null) player.setFireTicks(40);
+            if (rand.nextBoolean()) world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_SURTRUM_RUSH, SoundCategory.BLOCKS, 0.1F + rand.nextFloat() * 0.2F, rand.nextFloat() * 0.7F + 0.3F);
+            List<Entity> entities = world.getNonSpectatingEntities(Entity.class, new Box(pos.getX() - 5, pos.getY() - 5, pos.getZ() - 5, pos.getX() + 5, pos.getY() + 5, pos.getZ() + 5));
+            for (Entity p : entities) {
+                if (p != null && p.isAlive() && p.getBlockPos().isWithinDistance(pos, 5)) p.setFireTicks(60);
+            }
             return Blocks.AIR.getDefaultState();
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
