@@ -5,6 +5,7 @@ import com.mojang.serialization.Lifecycle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
+import net.id.paradiselost.config.ParadiseLostConfig;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.util.MiscUtil;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
@@ -40,17 +41,19 @@ public class ParadiseLostDimension {
         } catch (IOException e) {
             throw new RuntimeException("Failed to read Paradise Lost dimension JSONs", e);
         }
-        
-        CustomPortalBuilder.beginPortal()
-                .frameBlock(Blocks.GLOWSTONE)
-                .customPortalBlock(ParadiseLostBlocks.BLUE_PORTAL)
-                .destDimID(locate(MOD_ID))
-                .tintColor(55, 89, 195)
-                .lightWithWater()
-                .onlyLightInOverworld()
-                .registerInPortalAmbienceSound(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRIGGER, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
-                .registerPostTPPortalAmbience(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRAVEL, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
-                .registerPortal();
+    }
+
+    public static void initPortal() {
+		CustomPortalBuilder.beginPortal()
+				.frameBlock(ParadiseLostConfig.CONFIG.getPortalBaseBlock(Registry.BLOCK))
+				.customPortalBlock(ParadiseLostBlocks.BLUE_PORTAL)
+				.destDimID(locate(MOD_ID))
+				.tintColor(55, 89, 195)
+				.lightWithWater()
+				.onlyLightInOverworld()
+				.registerInPortalAmbienceSound(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRIGGER, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
+				.registerPostTPPortalAmbience(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRAVEL, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
+				.registerPortal();
     }
     
     public static void registerDimensionTypes(MutableRegistry<DimensionType> registry) {
