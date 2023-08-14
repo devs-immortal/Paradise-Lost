@@ -48,11 +48,6 @@ repositories {
     }
 
     maven {
-        name = "Ladysnake"
-        url = uri("https://maven.ladysnake.org/releases")
-    }
-
-    maven {
         name = "Shedaniel"
         url = uri("https://maven.shedaniel.me/")
     }
@@ -80,6 +75,10 @@ repositories {
     maven {
         name = "Gudenau"
         url = uri("https://maven.gudenau.net")
+    }
+    maven {
+        name = "Ladysnake Mods"
+        url = uri("https://maven.ladysnake.org/releases")
     }
 }
 
@@ -162,12 +161,19 @@ dependencies {
             name = "cloth-config-fabric",
             version = clothConfigVersion,
     )
+    modImplementation(
+            group = "dev.onyxstudios.cardinal-components-api",
+            name = "cardinal-components-base",
+            version = cardinalComponentsVersion,
+    )
 
     modRuntimeOnly(
             group = "com.terraformersmc",
             name = "modmenu",
             version = modmenuVersion,
     )
+    // Adds a dependency on the base cardinal components module (required by every other module)
+    // Replace modImplementation with modApi if you expose components in your own API
 
 //    modRuntimeOnly(
 //            group = "me.shedaniel",

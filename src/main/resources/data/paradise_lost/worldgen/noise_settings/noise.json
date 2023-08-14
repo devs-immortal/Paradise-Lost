@@ -1,5 +1,5 @@
 {
-  "sea_level": -54,
+  "sea_level": 0,
   "disable_mob_generation": false,
   "aquifers_enabled": false,
   "ore_veins_enabled": false,
@@ -8,7 +8,7 @@
     "Name": "paradise_lost:floestone"
   },
   "default_fluid": {
-    "Name": "minecraft:water",
+    "Name": "minecraft:air",
     "Properties": {
       "level": "8"
     }
@@ -16,8 +16,8 @@
   "noise": {
     "min_y": -32,
     "height": 320,
-    "size_horizontal": 1,
-    "size_vertical": 2
+    "size_horizontal": 4,
+    "size_vertical": 1
   },
   "noise_router": {
     "barrier": 0,
