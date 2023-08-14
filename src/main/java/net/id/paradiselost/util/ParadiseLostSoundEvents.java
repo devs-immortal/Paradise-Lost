@@ -37,6 +37,8 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent BLOCK_PORTAL_AMBIENT = event("block.portal.ambient");
     public static final SoundEvent BLOCK_PORTAL_TRAVEL = event("block.portal.travel");
     public static final SoundEvent BLOCK_PORTAL_TRIGGER = event("block.portal.trigger");
+    public static final SoundEvent BLOCK_SURTRUM_RUSH = childEvent("block.surtrum_air.rush", SoundEvents.BLOCK_FIRE_EXTINGUISH);
+    public static final SoundEvent BLOCK_SURTRUM_CRACKLE = childEvent("block.surtrum_air.crackle", SoundEvents.BLOCK_FIRE_AMBIENT);
 
     public static final SoundEvent BLOCK_ORANGE_LEAVES_BREAK = childEvent("block.orange_leaves.break", SoundEvents.BLOCK_MOSS_BREAK);
     public static final SoundEvent BLOCK_ORANGE_LEAVES_DROP_FRUIT = childEvent("block.orange_leaves.drop_fruit", SoundEvents.BLOCK_CANDLE_BREAK);
@@ -79,6 +81,7 @@ public final class ParadiseLostSoundEvents {
 
     public static final SoundEvent ITEM_ARMOR_EQUIP_OLVITE = childEvent("item.armor.equip.olvite", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
     public static final SoundEvent ITEM_ARMOR_EQUIP_GLAZED_GOLD = childEvent("item.armor.equip.glazed_gold", SoundEvents.ITEM_ARMOR_EQUIP_GOLD);
+    public static final SoundEvent ITEM_ARMOR_EQUIP_SURTRUM = childEvent("item.armor.equip.surtrum", SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
 
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = childEvent("item.bloodstone.prick", SoundEvents.ENTITY_BEE_STING);
 

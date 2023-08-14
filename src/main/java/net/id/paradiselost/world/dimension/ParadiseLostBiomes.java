@@ -215,6 +215,9 @@ public final class ParadiseLostBiomes {
      */
     private static Map<GenerationStep.Feature, List<RegistryEntry<PlacedFeature>>> getStandardParadiseLostFeatures() {
         return Map.of(
+            GenerationStep.Feature.RAW_GENERATION, List.of(
+                SURTRUM_METEORITE
+            ),
             GenerationStep.Feature.UNDERGROUND_ORES, List.of(
                 ORE_CHERINE,
                 ORE_OLVITE

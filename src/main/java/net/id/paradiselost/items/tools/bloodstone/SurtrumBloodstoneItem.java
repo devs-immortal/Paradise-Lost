@@ -6,13 +6,13 @@ import net.minecraft.util.Formatting;
 
 import java.util.List;
 
-public class GravititeBloodstoneItem extends BloodstoneItem {
-    public GravititeBloodstoneItem(Settings settings) {
+public class SurtrumBloodstoneItem extends BloodstoneItem {
+    public SurtrumBloodstoneItem(Settings settings) {
         super(settings);
     }
 
     @Override
     protected List<Text> getDefaultText() {
-        return ImmutableList.of(Text.translatable("info.paradise_lost.bloodstone.gravitite").formatted(Formatting.GOLD));
+        return ImmutableList.of(Text.translatable("info.paradise_lost.bloodstone.surtrum").formatted(Formatting.GOLD));
     }
 }

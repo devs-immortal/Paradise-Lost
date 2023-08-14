@@ -1,0 +1,14 @@
+{
+    "parent": "item/handheld_rod",
+    "textures": {
+        "layer0": "paradise_lost:item/glazed_gold_fishing_rod"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "cast": 1
+            },
+            "model": "paradise_lost:item/glazed_gold_fishing_rod_cast"
+        }
+    ]
+}

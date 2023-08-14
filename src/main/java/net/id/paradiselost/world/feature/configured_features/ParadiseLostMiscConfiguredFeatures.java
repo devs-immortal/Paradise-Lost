@@ -41,6 +41,7 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
 
     public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_CHERINE = register("ore_cherine", Feature.ORE, Configs.ore(CHERINE_ORE, 14));
     public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_OLVITE = register("ore_olvite", Feature.ORE, Configs.ore(OLVITE_ORE, 9));
+    public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> SURTRUM_METEORITE = register("surtrum_meteorite", ParadiseLostFeatures.SURTRUM_METEORITE_FEATURE, new DefaultFeatureConfig());
     // Plato
     // Shield
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> SHIELD_ROCKS = register("shield_rocks", Feature.RANDOM_PATCH, Configs.SHIELD_ROCKS_CONFIG);

@@ -1,0 +1,6 @@
+{
+  "parent": "item/fishing_rod",
+  "textures": {
+    "layer0": "paradise_lost:item/glazed_gold_fishing_rod_cast"
+  }
+}

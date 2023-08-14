@@ -47,11 +47,6 @@ repositories {
         url = uri("https://maven.terraformersmc.com/releases/")
     }
 
-    //maven {
-    //    name = "Ladysnake"
-    //    url = uri("https://ladysnake.jfrog.io/artifactory/mods")
-    //}
-
     maven {
         name = "Shedaniel"
         url = uri("https://maven.shedaniel.me/")

@@ -34,7 +34,6 @@ import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.gen.carver.ParadiseLostCarvers;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 

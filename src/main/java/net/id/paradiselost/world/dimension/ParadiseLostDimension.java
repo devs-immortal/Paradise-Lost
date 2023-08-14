@@ -10,7 +10,6 @@ import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.util.MiscUtil;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.kyrptonaught.customportalapi.event.CPASoundEventData;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.registry.*;
 import net.minecraft.world.World;

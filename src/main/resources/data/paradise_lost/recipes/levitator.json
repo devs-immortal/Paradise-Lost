@@ -2,18 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "SRS",
-    "WGW",
+    "GGG",
     "SRS"
   ],
   "key": {
     "G": {
-      "item": "paradise_lost:blue_cloud"
+      "item": "paradise_lost:refined_surtrum"
     },
     "S": {
       "item": "paradise_lost:floestone_brick"
-    },
-    "W": {
-      "tag": "minecraft:planks"
     },
     "R": {
       "item": "minecraft:redstone"

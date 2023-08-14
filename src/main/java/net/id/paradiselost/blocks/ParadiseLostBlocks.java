@@ -5,21 +5,10 @@ import net.fabricmc.api.Environment;
 import net.id.incubus_core.woodtypefactory.api.chest.ChestFactory;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.decorative.*;
-import net.id.paradiselost.blocks.mechanical.CherineCampfireBlock;
-import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
-import net.id.paradiselost.blocks.mechanical.FourBiteCakeBlock;
-import net.id.paradiselost.blocks.mechanical.IncubatorBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostGrassBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostSnowyBlock;
-import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.cloud.BlueParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.cloud.GoldenParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.cloud.PinkParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.crop.AmadrysCropBlock;
-import net.id.paradiselost.blocks.natural.crop.BlackcurrantBushBlock;
-import net.id.paradiselost.blocks.natural.crop.FlaxCropBlock;
-import net.id.paradiselost.blocks.natural.crop.SwedrootCropBlock;
+import net.id.paradiselost.blocks.mechanical.*;
+import net.id.paradiselost.blocks.natural.*;
+import net.id.paradiselost.blocks.natural.cloud.*;
+import net.id.paradiselost.blocks.natural.crop.*;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
@@ -125,6 +114,7 @@ public class ParadiseLostBlocks {
     }
 
     public static final Block FLOESTONE_BRICK = add("floestone_brick", new Block(floestoneBrick()));
+    public static final Block CHISELED_FLOESTONE = add("chiseled_floestone", new Block(floestoneBrick()));
     public static final SlabBlock FLOESTONE_BRICK_SLAB = add("floestone_brick_slab", new SlabBlock(floestoneBrick()));
     public static final ParadiseLostStairsBlock FLOESTONE_BRICK_STAIRS = add("floestone_brick_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestoneBrick()));
     public static final WallBlock FLOESTONE_BRICK_WALL = add("floestone_brick_wall", new WallBlock(floestoneBrick()));
@@ -361,9 +351,13 @@ public class ParadiseLostBlocks {
 
     // Ores
     public static final OreBlock CHERINE_ORE = add("cherine_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
-    public static final OreBlock OLVITE_ORE = add("olvite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
+    public static final OreBlock OLVITE_ORE = add("olvite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(1, 3)));
+    public static final OreBlock SURTRUM = add("surtrum", new SurtrumOreBlock(of(Material.STONE).sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f), UniformIntProvider.create(2, 5)));
+    public static final Block METAMORPHIC_SHELL = add("metamorphic_shell", new Block(of(Material.STONE).sounds(BlockSoundGroup.TUFF).requiresTool().strength(40f, 15f)));
+    public static final PoofBlock SURTRUM_AIR = add("surtrum_air", new PoofBlock(of(Material.FIRE).sounds(BlockSoundGroup.NETHER_GOLD_ORE)));
     public static final Block CHERINE_BLOCK = add("cherine_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
     public static final Block OLVITE_BLOCK = add("olvite_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
+    public static final FloatingBlock REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new FloatingBlock(false, of(Material.METAL).requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
     public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, of(Material.WOOD).strength(3f, 3f).sounds(BlockSoundGroup.WOOD)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
