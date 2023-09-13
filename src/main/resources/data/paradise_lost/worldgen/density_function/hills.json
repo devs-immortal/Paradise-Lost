@@ -8,7 +8,7 @@
         "type": "minecraft:noise",
         "noise": "paradise_lost:generator/elevation",
         "xz_scale": 1,
-        "y_scale": 1
+        "y_scale": 0.25
       }
     },
     "argument2": {
@@ -17,7 +17,7 @@
         "type": "minecraft:square",
         "argument": {
           "type": "minecraft:y_clamped_gradient",
-          "from_y": 130,
+          "from_y": 110,
           "to_y": 320,
           "from_value": 1,
           "to_value": 0
@@ -27,8 +27,8 @@
         "type": "minecraft:square",
         "argument": {
           "type": "minecraft:y_clamped_gradient",
-          "from_y": 0,
-          "to_y": 120,
+          "from_y": 64,
+          "to_y": 100,
           "from_value": 0,
           "to_value": 1
         }

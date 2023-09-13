@@ -44,7 +44,7 @@ public class BloodstoneHUDRenderer {
                         renderCherine(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof OlviteBloodstoneItem) {
                         renderOlvite(matrixStack, client, capturedData);
-                    } else if (stack.getItem() instanceof GravititeBloodstoneItem) {
+                    } else if (stack.getItem() instanceof SurtrumBloodstoneItem) {
                         renderGravitite(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof AbstentineBloodstoneItem) {
                         renderAbstentine(matrixStack, client, capturedData);

@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "paradise_lost:block/aurel_plank"
+    "all": "paradise_lost:block/surtrum"
   }
 }

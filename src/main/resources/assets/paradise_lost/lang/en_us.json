@@ -61,6 +61,7 @@
   "block.paradise_lost.mossy_floestone_wall": "Mossy Cobbled Floestone Wall",
 
   "block.paradise_lost.floestone_brick": "Floestone Brick",
+  "block.paradise_lost.chiseled_floestone": "Chiseled Floestone Brick",
   "block.paradise_lost.floestone_brick_slab": "Floestone Brick Slab",
   "block.paradise_lost.floestone_brick_stairs": "Floestone Brick Stairs",
   "block.paradise_lost.floestone_brick_wall": "Floestone Brick Wall",
@@ -227,10 +228,13 @@
 
   "block.paradise_lost.cherine_ore": "Cherine Ore",
   "block.paradise_lost.olvite_ore": "Olvite Ore",
+  "block.paradise_lost.surtrum": "Surtrum",
+  "block.paradise_lost.metamorphic_shell": "Metamorphic Shell",
   "block.paradise_lost.cherine_block": "Block of Cherine",
   "block.paradise_lost.olvite_block": "Block of Olvite",
+  "block.paradise_lost.refined_surtrum_block": "Block of Refined Surtrum",
 
-  "block.paradise_lost.levitator": "Cloud Levitator",
+  "block.paradise_lost.levitator": "Surtrum Levitator",
   "block.paradise_lost.olvite_chain": "Olvite Chain",
   "block.paradise_lost.cherine_lantern": "Cherine Lantern",
   "block.paradise_lost.blue_portal": "Paradise Portal",
@@ -272,6 +276,8 @@
   "item.paradise_lost.cherine": "Cherine Shard",
   "item.paradise_lost.olvite": "Olvite",
   "item.paradise_lost.olvite_nugget": "Olvite Nugget",
+  "item.paradise_lost.refined_surtrum": "Refined Surtrum",
+  "item.paradise_lost.raw_surtrum": "Surtrum Fragment",
   "item.paradise_lost.flax_thread" : "Flax Thread",
   "item.paradise_lost.flaxweave" : "Flaxweave",
   "item.paradise_lost.swedroot_pulp": "Swedroot Pulp",
@@ -281,6 +287,12 @@
   "item.paradise_lost.olvite_axe": "Olvite Axe",
   "item.paradise_lost.olvite_sword": "Olvite Sword",
   "item.paradise_lost.olvite_hoe": "Olvite Hoe",
+  
+  "item.paradise_lost.surtrum_shovel": "Surtrum Shovel",
+  "item.paradise_lost.surtrum_pickaxe": "Surtrum Pickaxe",
+  "item.paradise_lost.surtrum_axe": "Surtrum Axe",
+  "item.paradise_lost.surtrum_sword": "Surtrum Sword",
+  "item.paradise_lost.surtrum_hoe": "Surtrum Hoe",
   
   "item.paradise_lost.glazed_gold_shovel": "Glazed Gold Shovel",
   "item.paradise_lost.glazed_gold_pickaxe": "Glazed Gold Pickaxe",
@@ -293,6 +305,7 @@
 
   "item.paradise_lost.cherine_bloodstone": "Cherine Bloodstone",
   "item.paradise_lost.olvite_bloodstone": "Olvite Bloodstone",
+  "item.paradise_lost.surtrum_bloodstone": "Surtrum Bloodstone",
   "item.paradise_lost.abstentine_bloodstone": "Abstentine Bloodstone",
   
   "item.paradise_lost.glazed_gold_upgrade_smithing_template": "Glazed Gold Upgrade",
@@ -306,6 +319,11 @@
   "item.paradise_lost.glazed_gold_chestplate": "Glazed Gold Chestplate",
   "item.paradise_lost.glazed_gold_leggings": "Glazed Gold Leggings",
   "item.paradise_lost.glazed_gold_boots": "Glazed Gold Boots",
+  
+  "item.paradise_lost.surtrum_helmet": "Surtrum Helmet",
+  "item.paradise_lost.surtrum_chestplate": "Surtrum Chestplate",
+  "item.paradise_lost.surtrum_leggings": "Surtrum Leggings",
+  "item.paradise_lost.surtrum_boots": "Surtrum Boots",
 
   "item.paradise_lost.blackcurrant": "Blackcurrant",
   "item.paradise_lost.orange": "Orange",
@@ -417,7 +435,7 @@
 
   "info.paradise_lost.bloodstone.cherine": "Peer into the heart",
   "info.paradise_lost.bloodstone.olvite": "Peer into the mind",
-  "info.paradise_lost.bloodstone.unimplemented": "Peer into the will",
+  "info.paradise_lost.bloodstone.surtrum": "Peer into the will",
   "info.paradise_lost.bloodstone.abstentine": "Peer into the soul",
 
 
@@ -431,6 +449,9 @@
   "subtitles.paradise_lost.block.portal.ambient": "Paradise portal whooshes",
   "subtitles.paradise_lost.block.portal.travel": "Paradise portal noise fades",
   "subtitles.paradise_lost.block.portal.trigger": "Paradise portal noise intensifies",
+  
+  "subtitles.paradise_lost.block.surtrum_air.rush": "Hot air rushes out",
+  "subtitles.paradise_lost.block.surtrum_air.crackle": "Meteorite Crackles",
 
   "subtitles.paradise_lost.block.orange_leaves.break": "Orange leaves break",
   "subtitles.paradise_lost.block.orange_leaves.drop_fruit": "Orange leaves drop fruit",
@@ -467,6 +488,7 @@
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",
+  "subtitles.paradise_lost.item.armor.equip.surtrum": "Surtrum armor clunks",
 
   "subtitles.paradise_lost.item.bloodstone.prick": "Bloodstone pricks",
 
