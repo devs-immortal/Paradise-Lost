@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "paradise_lost:block/tree_tap",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "paradise_lost:block/tree_tap",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "paradise_lost:block/tree_tap",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "paradise_lost:block/tree_tap"
+    }
+  }
+}

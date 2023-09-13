@@ -9,6 +9,7 @@ import net.id.paradiselost.blocks.mechanical.CherineCampfireBlock;
 import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
 import net.id.paradiselost.blocks.mechanical.FourBiteCakeBlock;
 import net.id.paradiselost.blocks.mechanical.IncubatorBlock;
+import net.id.paradiselost.blocks.mechanical.TreeTapBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostGrassBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSnowyBlock;
@@ -52,7 +53,7 @@ import static net.minecraft.block.Blocks.*;
 @SuppressWarnings("unused")
 public class ParadiseLostBlocks {
 
-    protected static Settings unbreakable(AbstractBlock.Settings settings) {
+	protected static Settings unbreakable(AbstractBlock.Settings settings) {
         return settings.strength(-1f, 3600000f);
     }
 
@@ -381,6 +382,7 @@ public class ParadiseLostBlocks {
     // Usables
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
+	public static final Block TREE_TAP = add("tree_tap", new TreeTapBlock(of(Material.WOOD, MapColor.OAK_TAN).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque().ticksRandomly()), cutoutRenderLayer);
 
     //dungeon
 //    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
@@ -401,7 +403,7 @@ public class ParadiseLostBlocks {
 
     /*
        This is the same thing the add method above, but it doesn't wait to register or perform the actions.
-       This is required because some of the block settings code uses ID caches, so without it some blocks
+       This is required because some block settings code uses ID caches, so without it some blocks
        behave like air.
      */
     @SafeVarargs

@@ -4,14 +4,16 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
 @Environment(EnvType.CLIENT)
 public class ParadiseLostBlockEntityRenderers {
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        BlockEntityRendererRegistry.register(ParadiseLostBlockEntityTypes.INCUBATOR, IncubatorBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntityRenderer::new);
-//        BlockEntityRendererRegistry.register(ParadiseLostBlockEntityTypes.DUNGEON_SWITCH, DungeonSwitchBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.INCUBATOR, IncubatorBlockEntityRenderer::new);
+		BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntityRenderer::new);
+		BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.TREE_TAP, TreeTapBlockEntityRenderer::new);
+		// BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.DUNGEON_SWITCH, DungeonSwitchBlockEntityRenderer::new);
     }
 }
