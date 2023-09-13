@@ -13,6 +13,8 @@ import net.id.paradiselost.blocks.mechanical.TreeTapBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostGrassBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSnowyBlock;
+import net.id.paradiselost.blocks.natural.PoofBlock;
+import net.id.paradiselost.blocks.natural.SurtrumOreBlock;
 import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
 import net.id.paradiselost.blocks.natural.cloud.BlueParadiseLostCloudBlock;
 import net.id.paradiselost.blocks.natural.cloud.GoldenParadiseLostCloudBlock;
