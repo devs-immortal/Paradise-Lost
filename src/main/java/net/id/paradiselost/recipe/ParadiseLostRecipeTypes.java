@@ -20,7 +20,7 @@ public class ParadiseLostRecipeTypes {
 		return Registry.register(Registry.RECIPE_TYPE, ParadiseLost.locate(id), new RecipeType<T>() {
 			@Override
 			public String toString() {
-				return "spectrum:" + id;
+				return ParadiseLost.MOD_ID + ":" + id;
 			}
 		});
 	}
