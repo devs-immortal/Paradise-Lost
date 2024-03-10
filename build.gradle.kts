@@ -14,7 +14,7 @@ val crowdinTranslateVersion: String by properties
 val entityAttributesVersion: String by properties
 val modmenuVersion: String by properties
 val reiVersion: String by properties
-val recipeConfidenceVersion: String by properties
+// val recipeConfidenceVersion: String by properties
 val satinVersion: String by properties
 val clothConfigVersion: String by properties
 
@@ -143,11 +143,11 @@ dependencies {
             version = entityAttributesVersion,
     ).also(::include)
 
-    modImplementation(
+   /* modImplementation(
             group = "net.gudenau.minecraft",
             name = "RecipeConfidence",
             version = recipeConfidenceVersion,
-    ).also(::include)
+    ).also(::include)*/
 
     modImplementation(
             group = "io.github.ladysnake",
