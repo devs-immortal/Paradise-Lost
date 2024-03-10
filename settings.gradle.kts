@@ -7,7 +7,7 @@ pluginManagement {
             url = uri("https://maven.fabricmc.net/")
         }
         maven {
-            name = "Jigpack"
+            name = "Jitpack"
             url = uri("https://jitpack.io")
         }
         maven {
