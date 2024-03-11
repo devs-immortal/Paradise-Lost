@@ -23,7 +23,6 @@
             <property name="option" value="alone"/>
             <property name="tokens" value="LITERAL_ELSE, METHOD_DEF"/>
         </module>
-        <module name="InnerTypeLast"/>
         <module name="OneTopLevelClass"/>
         <module name="RequireThis"/>
         <module name="ArrayTypeStyle"/>

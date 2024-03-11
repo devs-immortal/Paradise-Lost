@@ -47,6 +47,11 @@ repositories {
     }
 
     maven {
+        name = "Ladysnake"
+        url = uri("https://maven.ladysnake.org/releases")
+    }
+
+    maven {
         name = "Shedaniel"
         url = uri("https://maven.shedaniel.me/")
     }

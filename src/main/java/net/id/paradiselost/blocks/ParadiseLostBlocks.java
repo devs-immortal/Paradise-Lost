@@ -5,10 +5,24 @@ import net.fabricmc.api.Environment;
 import net.id.incubus_core.woodtypefactory.api.chest.ChestFactory;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.decorative.*;
-import net.id.paradiselost.blocks.mechanical.*;
-import net.id.paradiselost.blocks.natural.*;
-import net.id.paradiselost.blocks.natural.cloud.*;
-import net.id.paradiselost.blocks.natural.crop.*;
+import net.id.paradiselost.blocks.mechanical.CherineCampfireBlock;
+import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
+import net.id.paradiselost.blocks.mechanical.FourBiteCakeBlock;
+import net.id.paradiselost.blocks.mechanical.IncubatorBlock;
+import net.id.paradiselost.blocks.mechanical.TreeTapBlock;
+import net.id.paradiselost.blocks.natural.ParadiseLostGrassBlock;
+import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
+import net.id.paradiselost.blocks.natural.ParadiseLostSnowyBlock;
+import net.id.paradiselost.blocks.natural.PoofBlock;
+import net.id.paradiselost.blocks.natural.SurtrumOreBlock;
+import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
+import net.id.paradiselost.blocks.natural.cloud.BlueParadiseLostCloudBlock;
+import net.id.paradiselost.blocks.natural.cloud.GoldenParadiseLostCloudBlock;
+import net.id.paradiselost.blocks.natural.cloud.PinkParadiseLostCloudBlock;
+import net.id.paradiselost.blocks.natural.crop.AmadrysCropBlock;
+import net.id.paradiselost.blocks.natural.crop.BlackcurrantBushBlock;
+import net.id.paradiselost.blocks.natural.crop.FlaxCropBlock;
+import net.id.paradiselost.blocks.natural.crop.SwedrootCropBlock;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
@@ -41,7 +55,7 @@ import static net.minecraft.block.Blocks.*;
 @SuppressWarnings("unused")
 public class ParadiseLostBlocks {
 
-    protected static Settings unbreakable(AbstractBlock.Settings settings) {
+	protected static Settings unbreakable(AbstractBlock.Settings settings) {
         return settings.strength(-1f, 3600000f);
     }
 
@@ -375,6 +389,7 @@ public class ParadiseLostBlocks {
     // Usables
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
+	public static final Block TREE_TAP = add("tree_tap", new TreeTapBlock(of(Material.WOOD, MapColor.OAK_TAN).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque().ticksRandomly()), cutoutRenderLayer);
 
     //dungeon
 //    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
@@ -395,7 +410,7 @@ public class ParadiseLostBlocks {
 
     /*
        This is the same thing the add method above, but it doesn't wait to register or perform the actions.
-       This is required because some of the block settings code uses ID caches, so without it some blocks
+       This is required because some block settings code uses ID caches, so without it some blocks
        behave like air.
      */
     @SafeVarargs

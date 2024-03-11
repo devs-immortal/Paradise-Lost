@@ -26,6 +26,7 @@ import net.id.paradiselost.fluids.ParadiseLostFluids;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.loot.ParadiseLostLootNumberProviderTypes;
 import net.id.paradiselost.lore.ParadiseLostLore;
+import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.registry.ParadiseLostRegistries;
 import net.id.paradiselost.screen.ParadiseLostScreens;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
@@ -89,6 +90,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostEntityTypes.init();
         ParadiseLostItems.init();
         ParadiseLostBlockEntityTypes.init();
+        ParadiseLostRecipeTypes.init();
         ParadiseLostCommands.init();
         ParadiseLostGameRules.init();
         ParadiseLostLootNumberProviderTypes.init();
