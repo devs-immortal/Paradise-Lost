@@ -4,21 +4,16 @@ import net.id.paradiselost.blocks.blockentity.TreeTapBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.block.TorchBlock;
-import net.minecraft.block.WallTorchBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemUsage;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -61,7 +56,7 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		Direction direction = state.get(FACING);
-		if(!direction.getAxis().isHorizontal()) {
+		if (!direction.getAxis().isHorizontal()) {
 			return false;
 		}
 
@@ -78,7 +73,7 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		Direction direction = ctx.getSide();
-		if(!direction.getAxis().isHorizontal()) {
+		if (!direction.getAxis().isHorizontal()) {
 			return null;
 		}
 
@@ -110,8 +105,8 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
 	}
 
 	@Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+	@Override
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new TreeTapBlockEntity(pos, state);
     }
 

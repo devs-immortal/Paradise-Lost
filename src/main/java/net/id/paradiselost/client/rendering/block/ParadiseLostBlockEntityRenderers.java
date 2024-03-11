@@ -2,7 +2,6 @@ package net.id.paradiselost.client.rendering.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 

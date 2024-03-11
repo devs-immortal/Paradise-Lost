@@ -29,7 +29,7 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
 
 	@Override
 	public boolean matches(TreeTapBlockEntity inventory, World world) {
-		if(!ingredient.test(inventory.getStack(0))) {
+		if (!ingredient.test(inventory.getStack(0))) {
 			return false;
 		}
 
