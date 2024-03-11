@@ -14,7 +14,6 @@ val crowdinTranslateVersion: String by properties
 val entityAttributesVersion: String by properties
 val modmenuVersion: String by properties
 val reiVersion: String by properties
-// val recipeConfidenceVersion: String by properties
 val satinVersion: String by properties
 val clothConfigVersion: String by properties
 
@@ -44,7 +43,7 @@ repositories {
 
     maven {
         name = "TerraformersMC"
-        url = uri("https://maven.terraformersmc.com/releases/")
+        url = uri("https://maven.terraformersmc.com/")
     }
 
     maven {
@@ -77,10 +76,6 @@ repositories {
         url = uri("https://jitpack.io")
     }
 
-    maven {
-        name = "Gudenau"
-        url = uri("https://maven.gudenau.net")
-    }
     maven {
         name = "Ladysnake Mods"
         url = uri("https://maven.ladysnake.org/releases")
@@ -142,12 +137,6 @@ dependencies {
             name = "reach-entity-attributes",
             version = entityAttributesVersion,
     ).also(::include)
-
-   /* modImplementation(
-            group = "net.gudenau.minecraft",
-            name = "RecipeConfidence",
-            version = recipeConfidenceVersion,
-    ).also(::include)*/
 
     modImplementation(
             group = "io.github.ladysnake",

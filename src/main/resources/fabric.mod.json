@@ -33,7 +33,6 @@
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*",
     "trinkets": "*",
-    "gud_recipe_confidence": "*",
     "satin": "*",
     "cloth-config": "*"
   },
