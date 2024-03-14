@@ -376,8 +376,8 @@ public class ParadiseLostBlocks {
         return copy(TORCH).ticksRandomly().luminance(state -> 15);
     }
 
-    public static final CherineTorchBlock CHERINE_TORCH = addImmediately("cherine_torch", new CherineTorchBlock(cherineTorch()), cutoutRenderLayer);
-    public static final CherineWallTorchBlock CHERINE_TORCH_WALL = addImmediately("cherine_wall_torch", new CherineWallTorchBlock(cherineTorch().dropsLike(CHERINE_TORCH)), cutoutRenderLayer);
+    public static final CherineTorchBlock CHERINE_TORCH = add("cherine_torch", new CherineTorchBlock(cherineTorch()), cutoutRenderLayer);
+    public static final CherineWallTorchBlock CHERINE_TORCH_WALL = add("cherine_wall_torch", new CherineWallTorchBlock(cherineTorch().dropsLike(CHERINE_TORCH)), cutoutRenderLayer);
 
     // Usables
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);

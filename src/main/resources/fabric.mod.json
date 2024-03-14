@@ -33,7 +33,6 @@
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*",
     "trinkets": "*",
-    "satin": "*",
     "cloth-config": "*"
   },
   "mixins": [
