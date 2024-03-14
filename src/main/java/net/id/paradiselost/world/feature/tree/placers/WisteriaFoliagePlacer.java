@@ -5,7 +5,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostHangerBlock;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
-import net.id.paradiselost.blocks.natural.tree.AuralLeavesBlock;
 import net.id.paradiselost.world.feature.tree.ParadiseLostTreeHell;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -54,7 +53,7 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
         BlockState leafBlock = config.foliageProvider.getBlockState(random, nodePos);
         BlockState hanger = Blocks.AIR.getDefaultState();
 
-        if (leafBlock.getBlock() instanceof ParadiseLostLeavesBlock || leafBlock.getBlock() instanceof AuralLeavesBlock) {
+        if (leafBlock.getBlock() instanceof ParadiseLostLeavesBlock) {
             hanger = ParadiseLostLeavesBlock.getHanger(leafBlock);
         }
 

@@ -32,8 +32,6 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
             return ParadiseLostBlocks.LAVENDER_WISTERIA_HANGER.getDefaultState();
         } else if (state.isOf(ParadiseLostBlocks.FROST_WISTERIA_LEAVES)) {
             return ParadiseLostBlocks.FROST_WISTERIA_HANGER.getDefaultState();
-        } else if (state.isOf(ParadiseLostBlocks.BOREAL_WISTERIA_LEAVES)) {
-            return ParadiseLostBlocks.BOREAL_WISTERIA_HANGER.getDefaultState();
         }
         return Blocks.AIR.getDefaultState();
     }

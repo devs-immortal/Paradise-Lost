@@ -1,7 +1,6 @@
 package net.id.paradiselost.util;
 
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.id.paradiselost.client.rendering.shader.ParadiseLostRenderLayers;
 import net.minecraft.block.Block;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.Fluid;
@@ -46,14 +45,6 @@ public class RenderUtils {
 
     public static void cutoutRenderLayer(Block block) {
         blockRenderLayer(block, RenderLayer.getCutout());
-    }
-    
-    public static void auralRenderLayer(Block block) {
-        blockRenderLayer(block, ParadiseLostRenderLayers.AURAL);
-    }
-    
-    public static void auralCutoutMippedRenderLayer(Block block) {
-        blockRenderLayer(block, ParadiseLostRenderLayers.AURAL_CUTOUT_MIPPED);
     }
 
     public static void cutoutMippedRenderLayer(Block block) {

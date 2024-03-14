@@ -40,7 +40,6 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> ROSE_WISTERIA_TREE = register("rose_wisteria_tree", Feature.TREE, Configs.ROSE_WISTERIA_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> LAVENDER_WISTERIA_TREE = register("lavender_wisteria_tree", Feature.TREE, Configs.LAVENDER_WISTERIA_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FROST_WISTERIA_TREE = register("frost_wisteria_tree", Feature.TREE, Configs.FROST_WISTERIA_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> BOREAL_WISTERIA_TREE = register("boreal_wisteria_tree", Feature.TREE, Configs.BOREAL_WISTERIA_CONFIG);
     // Variants
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> WILD_ORANGE_TREE = register("wild_orange_tree", Feature.TREE, Configs.ORANGE_TREE_WILD_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> AUREL_SHRUB = register("aurel_shrub", Feature.TREE, Configs.AUREL_SHRUB_CONFIG);
@@ -50,7 +49,6 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_ROSE_WISTERIA_TREE = register("fancy_rose_wisteria_tree", Feature.TREE, Configs.FANCY_ROSE_WISTERIA_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_LAVENDER_WISTERIA_TREE = register("fancy_lavender_wisteria_tree", Feature.TREE, Configs.FANCY_LAVENDER_WISTERIA_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_FROST_WISTERIA_TREE = register("fancy_frost_wisteria_tree", Feature.TREE, Configs.FANCY_FROST_WISTERIA_CONFIG);
-    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", Feature.TREE, Configs.FANCY_BOREAL_WISTERIA_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_AUREL_TREE = register("fancy_aurel_tree", Feature.TREE, Configs.FANCY_AUREL_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> THICKET_AUREL_TREE = register("thicket_aurel_tree", Feature.TREE, Configs.THICKET_AUREL_CONFIG);
     // Fallen leaves
@@ -236,19 +234,6 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
-        private static final TreeFeatureConfig BOREAL_WISTERIA_CONFIG = generateTree(
-                WISTERIA_LOG.getDefaultState(), BOREAL_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
-                new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(3, 4),
-                        UniformIntProvider.create(3, 4), // branch count
-                        UniformFloatProvider.create(1.5F, 3F), // branch height
-                        UniformFloatProvider.create(6F, 10F), // branch width
-                        4, 3, 2
-                ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0)),
-                new TwoLayersFeatureSize(3, 0, 3),
-                true, false
-        );
         private static final TreeFeatureConfig FANCY_ROSE_WISTERIA_CONFIG = generateTree(
                 WISTERIA_LOG.getDefaultState(), ROSE_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
@@ -285,19 +270,6 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                         4, 3, 2
                 ),
                 new WisteriaFoliagePlacer(UniformIntProvider.create(3, 5), ConstantIntProvider.create(0)),
-                new TwoLayersFeatureSize(3, 0, 3),
-                true, false
-        );
-        private static final TreeFeatureConfig FANCY_BOREAL_WISTERIA_CONFIG = generateTree(
-                WISTERIA_LOG.getDefaultState(), BOREAL_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
-                new WisteriaTrunkPlacer(
-                        UniformIntProvider.create(3, 4),
-                        UniformIntProvider.create(3, 4), // branch count
-                        UniformFloatProvider.create(1.5F, 3F), // branch height
-                        UniformFloatProvider.create(6F, 10F), // branch width
-                        4, 3, 2
-                ),
-                new WisteriaFoliagePlacer(UniformIntProvider.create(3, 6), ConstantIntProvider.create(0)),
                 new TwoLayersFeatureSize(3, 0, 3),
                 true, false
         );
