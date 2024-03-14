@@ -33,10 +33,14 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
     }
 
 	public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
-		ItemStack stored = inventory.get(0);
-		inventory.set(0, handStack);
-		player.setStackInHand(hand, stored);
-		markDirty();
+        ItemStack stored = inventory.get(0);
+        if (handStack.isEmpty()) {
+            player.setStackInHand(hand, stored);
+            inventory.set(0, ItemStack.EMPTY);
+        } else {
+            inventory.set(0, handStack.split(1));
+        }
+        markDirty();
 	}
 
     @Override

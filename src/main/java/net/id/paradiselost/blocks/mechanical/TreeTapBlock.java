@@ -76,7 +76,6 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
 		if (!direction.getAxis().isHorizontal()) {
 			return null;
 		}
-
 		return this.getDefaultState().with(FACING, direction);
 	}
 
@@ -98,7 +97,6 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
 	@Override
 	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 		super.randomTick(state, world, pos, random);
-
 		if (!world.isClient && world.getBlockEntity(pos) instanceof TreeTapBlockEntity treeTapBlockEntity) {
 			treeTapBlockEntity.tryCraft();
 		}
