@@ -3,6 +3,7 @@ package net.id.paradiselost.blocks.blockentity;
 import net.id.incubus_core.be.InventoryBlockEntity;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.recipe.TreeTapRecipe;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +19,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,14 +36,24 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
 
 	public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
         ItemStack stored = inventory.get(0);
-        if (handStack.isEmpty()) {
-            player.setStackInHand(hand, stored);
-            inventory.set(0, ItemStack.EMPTY);
-        } else {
+        if (!handStack.isEmpty() && inventory.get(0).isEmpty()) {
             inventory.set(0, handStack.split(1));
+        } else {
+            player.giveItemStack(stored);
+            inventory.set(0, ItemStack.EMPTY);
         }
         markDirty();
 	}
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        return this.getHopperStrategy().canInsert(dir) && this.inventory.get(0).isEmpty();
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return this.getHopperStrategy().canExtract(dir);
+    }
 
     @Override
     public @NotNull HopperStrategy getHopperStrategy() {
@@ -53,10 +65,38 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
         return inventory;
     }
 
+    @Override
+    public void setStack(int slot, ItemStack stack) {
+        getItems().set(slot, stack);
+        if (stack.getCount() > 1) {
+            stack.setCount(1);
+        }
+        inventoryChanged();
+        System.out.println(getItems());
+    }
+
+    @Override
+    public ItemStack removeStack(int slot, int count) {
+        ItemStack stack = Inventories.splitStack(getItems(), slot, count);
+        inventoryChanged();
+        return stack;
+    }
+
+    @Override
+    public ItemStack removeStack(int slot) {
+        var stack = Inventories.removeStack(getItems(), slot);
+        inventoryChanged();
+        return stack;
+    }
+
+    private void inventoryChanged() {
+        this.markDirty();
+        if (world != null && !world.isClient) updateInClientWorld();
+    }
+
 	@Override
 	public void readNbt(NbtCompound nbt) {
 		super.readNbt(nbt);
-
 		Inventories.readNbt(nbt, inventory);
 	}
 

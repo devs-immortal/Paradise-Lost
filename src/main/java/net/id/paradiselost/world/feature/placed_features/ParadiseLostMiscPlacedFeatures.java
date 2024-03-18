@@ -24,7 +24,7 @@ public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
 
     public static final RegistryEntry<PlacedFeature> ORE_CHERINE = register("ore_cherine", ParadiseLostMiscConfiguredFeatures.ORE_CHERINE, CountPlacementModifier.of(20), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(320)), BiomePlacementModifier.of());
     public static final RegistryEntry<PlacedFeature> ORE_OLVITE = register("ore_olvite", ParadiseLostMiscConfiguredFeatures.ORE_OLVITE, CountPlacementModifier.of(16), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(384)), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> SURTRUM_METEORITE = register("surtrum_meteorite", ParadiseLostMiscConfiguredFeatures.SURTRUM_METEORITE, SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.fixed(65), YOffset.fixed(85)), ChancePlacementModifier.of(150));
+    public static final RegistryEntry<PlacedFeature> SURTRUM_METEORITE = register("surtrum_meteorite", ParadiseLostMiscConfiguredFeatures.SURTRUM_METEORITE, SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.fixed(65), YOffset.fixed(85)), ChancePlacementModifier.of(255));
     // Plato
     // Shield
     public static final RegistryEntry<PlacedFeature> SHIELD_ROCKS = register("shield_rocks", ParadiseLostMiscConfiguredFeatures.SHIELD_ROCKS, PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 2)));
