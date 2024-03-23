@@ -5,7 +5,7 @@
   },
   "tapped_block": "minecraft:mushroom_stem",
   "result": {
-    "item": "minecraft:mushroom_stew",
+    "item": "minecraft:mushroom_stew"
   },
   "chance": 3
 }

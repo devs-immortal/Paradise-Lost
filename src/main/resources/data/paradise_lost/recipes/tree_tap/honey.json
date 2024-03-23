@@ -5,7 +5,7 @@
   },
   "tapped_block": "minecraft:bee_nest",
   "result": {
-    "item": "minecraft:honey_bottle",
+    "item": "minecraft:honey_bottle"
   },
   "chance": 4
 }
