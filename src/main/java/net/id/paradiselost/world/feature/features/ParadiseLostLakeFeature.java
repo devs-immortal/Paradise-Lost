@@ -78,9 +78,6 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
 
                         if (lakeEdge) {
                             var state = context.getWorld().getBlockState(blockPos.add(xOff, yOff, zOff));
-                            if (state.isOf(ParadiseLostBlocks.AUREL_LEAF_PILE)) {
-                                System.out.flush();
-                            }
 
                             Material material = state.getMaterial();
                             // There is a liquid above the lake, abort

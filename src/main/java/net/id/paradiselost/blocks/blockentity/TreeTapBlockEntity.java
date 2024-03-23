@@ -6,14 +6,18 @@ import net.id.paradiselost.recipe.TreeTapRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -103,13 +107,17 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
 		}
 
 		Optional<TreeTapRecipe> recipe = this.world.getRecipeManager().getFirstMatch(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE, this, this.world);
-		if (recipe.isPresent()) {
+		if (recipe.isPresent() && world.random.nextInt(recipe.get().getChance()) == 0) {
 			ItemStack output = recipe.get().craft(this);
 			stack.decrement(1);
 
-			// TODO: play a sound?
+            if (!world.isClient) world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
             this.inventory.set(0, ItemStack.EMPTY);
             inventoryChanged();
+            BlockEntity possibleHopper = world.getBlockEntity(pos.down());
+            if (possibleHopper instanceof HopperBlockEntity) {
+                output = HopperBlockEntity.transfer(this, (Inventory) possibleHopper, output, Direction.UP);
+            }
             ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), output);
 		}
 	}

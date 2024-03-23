@@ -7,5 +7,6 @@
   "result": {
     "item": "minecraft:potion",
     "nbt": "{Potion: \"minecraft:water\"}"
-  }
+  },
+  "chance": 1
 }
