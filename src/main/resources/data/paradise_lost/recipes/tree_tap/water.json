@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "minecraft:glass_bottle"
   },
-  "tapped_block": "paradise_lost:aurel_log",
+  "tapped_block": "paradise_lost:wisteria_log",
   "result": {
     "item": "minecraft:potion",
     "nbt": "{Potion: \"minecraft:water\"}"

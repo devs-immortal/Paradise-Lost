@@ -1,0 +1,11 @@
+{
+  "type": "paradise_lost:tree_tap",
+  "ingredient": {
+    "item": "minecraft:glass_bottle"
+  },
+  "tapped_block": "minecraft:bee_nest",
+  "result": {
+    "item": "minecraft:honey_bottle",
+  },
+  "chance": 4
+}
