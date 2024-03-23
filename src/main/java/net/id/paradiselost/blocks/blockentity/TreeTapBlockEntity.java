@@ -57,7 +57,7 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
 
     @Override
     public @NotNull HopperStrategy getHopperStrategy() {
-        return HopperStrategy.IN_ANY_OUT_BOTTOM;
+        return HopperStrategy.IN_ANY;
     }
 
     @Override
@@ -72,31 +72,17 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
             stack.setCount(1);
         }
         inventoryChanged();
-        System.out.println(getItems());
-    }
-
-    @Override
-    public ItemStack removeStack(int slot, int count) {
-        ItemStack stack = Inventories.splitStack(getItems(), slot, count);
-        inventoryChanged();
-        return stack;
-    }
-
-    @Override
-    public ItemStack removeStack(int slot) {
-        var stack = Inventories.removeStack(getItems(), slot);
-        inventoryChanged();
-        return stack;
     }
 
     private void inventoryChanged() {
-        this.markDirty();
+        markDirty();
         if (world != null && !world.isClient) updateInClientWorld();
     }
 
 	@Override
 	public void readNbt(NbtCompound nbt) {
 		super.readNbt(nbt);
+        this.inventory.clear();
 		Inventories.readNbt(nbt, inventory);
 	}
 
@@ -122,12 +108,9 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
 			stack.decrement(1);
 
 			// TODO: play a sound?
-			if (stack.isEmpty()) {
-				this.inventory.set(0, output);
-				updateInClientWorld();
-			} else {
-				ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), output);
-			}
+            this.inventory.set(0, ItemStack.EMPTY);
+            inventoryChanged();
+            ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), output);
 		}
 	}
 
