@@ -79,14 +79,6 @@
         }
       }
     },
-    "malk": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:mystery_milk"]
-        }
-      }
-    },
     "mert": {
       "trigger": "minecraft:consume_item",
       "conditions": {
