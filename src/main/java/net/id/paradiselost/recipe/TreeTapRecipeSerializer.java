@@ -14,7 +14,7 @@ import net.minecraft.util.registry.Registry;
 public record TreeTapRecipeSerializer(TreeTapRecipeSerializer.RecipeFactory recipeFactory) implements RecipeSerializer<TreeTapRecipe> {
 
 	public interface RecipeFactory {
-		TreeTapRecipe create(Identifier id, String group, Ingredient ingredient, ItemStack output, Block tappedBlock);
+		TreeTapRecipe create(Identifier id, String group, Ingredient ingredient, ItemStack output, Block tappedBlock, int chance);
 	}
 
 	@Override
@@ -22,9 +22,10 @@ public record TreeTapRecipeSerializer(TreeTapRecipeSerializer.RecipeFactory reci
 		String group = JsonHelper.getString(jsonObject, "group", "");
 		Ingredient ingredient = Ingredient.fromJson(JsonHelper.getObject(jsonObject, "ingredient"));
 		Block tappedBlock = Registry.BLOCK.get(Identifier.tryParse(JsonHelper.getString(jsonObject, "tapped_block")));
-		ItemStack output = RecipeParser.getItemStackWithNbtFromJson(JsonHelper.getObject(jsonObject, "result"));
+        ItemStack output = RecipeParser.getItemStackWithNbtFromJson(JsonHelper.getObject(jsonObject, "result"));
+        int chance = JsonHelper.getInt(jsonObject, "chance");
 
-		return this.recipeFactory.create(identifier, group, ingredient, output, tappedBlock);
+		return this.recipeFactory.create(identifier, group, ingredient, output, tappedBlock, chance);
 	}
 
 	@Override
@@ -33,6 +34,7 @@ public record TreeTapRecipeSerializer(TreeTapRecipeSerializer.RecipeFactory reci
 		recipe.ingredient.write(packetByteBuf);
 		packetByteBuf.writeIdentifier(Registry.BLOCK.getId(recipe.tappedBlock));
 		packetByteBuf.writeItemStack(recipe.output);
+        packetByteBuf.writeInt(recipe.chance);
 	}
 
 	@Override
@@ -41,8 +43,9 @@ public record TreeTapRecipeSerializer(TreeTapRecipeSerializer.RecipeFactory reci
 		Ingredient ingredient = Ingredient.fromPacket(packetByteBuf);
 		Block tappedBlock = Registry.BLOCK.get(packetByteBuf.readIdentifier());
 		ItemStack output = packetByteBuf.readItemStack();
+        int chance = packetByteBuf.readInt();
 
-		return this.recipeFactory.create(identifier, group, ingredient, output, tappedBlock);
+		return this.recipeFactory.create(identifier, group, ingredient, output, tappedBlock, chance);
 	}
 
 }

@@ -5,19 +5,23 @@ import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.recipe.TreeTapRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,15 +37,29 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
     }
 
 	public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
-		ItemStack stored = inventory.get(0);
-		inventory.set(0, handStack);
-		player.setStackInHand(hand, stored);
-		markDirty();
+        ItemStack stored = inventory.get(0);
+        if (!handStack.isEmpty() && inventory.get(0).isEmpty()) {
+            inventory.set(0, handStack.split(1));
+        } else {
+            player.giveItemStack(stored);
+            inventory.set(0, ItemStack.EMPTY);
+        }
+        markDirty();
 	}
 
     @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        return this.getHopperStrategy().canInsert(dir) && this.inventory.get(0).isEmpty();
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return this.getHopperStrategy().canExtract(dir);
+    }
+
+    @Override
     public @NotNull HopperStrategy getHopperStrategy() {
-        return HopperStrategy.IN_ANY_OUT_BOTTOM;
+        return HopperStrategy.IN_ANY;
     }
 
     @Override
@@ -49,10 +67,24 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
         return inventory;
     }
 
+    @Override
+    public void setStack(int slot, ItemStack stack) {
+        getItems().set(slot, stack);
+        if (stack.getCount() > 1) {
+            stack.setCount(1);
+        }
+        inventoryChanged();
+    }
+
+    private void inventoryChanged() {
+        markDirty();
+        if (world != null && !world.isClient) updateInClientWorld();
+    }
+
 	@Override
 	public void readNbt(NbtCompound nbt) {
 		super.readNbt(nbt);
-
+        this.inventory.clear();
 		Inventories.readNbt(nbt, inventory);
 	}
 
@@ -73,17 +105,18 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
 		}
 
 		Optional<TreeTapRecipe> recipe = this.world.getRecipeManager().getFirstMatch(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE, this, this.world);
-		if (recipe.isPresent()) {
+		if (recipe.isPresent() && world.random.nextInt(recipe.get().getChance()) == 0) {
 			ItemStack output = recipe.get().craft(this);
 			stack.decrement(1);
 
-			// TODO: play a sound?
-			if (stack.isEmpty()) {
-				this.inventory.set(0, output);
-				updateInClientWorld();
-			} else {
-				ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), output);
-			}
+            if (!world.isClient) world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
+
+            inventoryChanged();
+            BlockEntity possibleHopper = world.getBlockEntity(pos.down());
+            if (possibleHopper instanceof Inventory) {
+                output = HopperBlockEntity.transfer(this, (Inventory) possibleHopper, output, Direction.UP);
+            }
+            this.inventory.set(0, output);
 		}
 	}
 

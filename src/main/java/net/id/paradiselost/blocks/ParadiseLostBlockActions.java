@@ -28,8 +28,6 @@ class ParadiseLostBlockActions {
     protected static final Action<Block> translucentRenderLayer = onClient((id, block) -> RenderUtils.transparentRenderLayer(block));
     protected static final Action<Block> cutoutRenderLayer = onClient((id, block) -> RenderUtils.cutoutRenderLayer(block));
     protected static final Action<Block> cutoutMippedRenderLayer = onClient((id, block) -> RenderUtils.cutoutMippedRenderLayer(block));
-    protected static final Action<Block> auralRenderLayer = onClient((id, block) -> RenderUtils.auralRenderLayer(block));
-    protected static final Action<Block> auralCutoutMippedRenderLayer = onClient((id, block) -> RenderUtils.auralCutoutMippedRenderLayer(block));
 
     protected static Action<Block> stripsTo(Block stripped) {
         return (id, original) -> StrippableBlockRegistry.register(original, stripped);

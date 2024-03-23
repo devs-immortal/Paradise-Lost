@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
+
 val paradiseLostVersion: String by properties
 
 val minecraftVersion: String by properties
@@ -118,7 +120,7 @@ dependencies {
             group = "net.kyrptonaught",
             name = "customportalapi",
             version = customportalapiVersion,
-    ).also(::include)
+    ).also(::include).exclude(module = "sodium")
 
     modImplementation(
             group = "net.fabricmc.fabric-api",
@@ -136,12 +138,6 @@ dependencies {
             group = "com.jamieswhiteshirt",
             name = "reach-entity-attributes",
             version = entityAttributesVersion,
-    ).also(::include)
-
-    modImplementation(
-            group = "io.github.ladysnake",
-            name = "satin",
-            version = satinVersion,
     ).also(::include)
 
     modImplementation(

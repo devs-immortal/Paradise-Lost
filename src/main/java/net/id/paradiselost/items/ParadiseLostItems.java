@@ -6,15 +6,12 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
-import net.id.paradiselost.fluids.ParadiseLostFluids;
 import net.id.paradiselost.items.accessories.ParachuteTrinketItem;
 import net.id.paradiselost.items.armor.ParadiseLostArmorMaterials;
 import net.id.paradiselost.items.food.ParadiseLostFoodComponent;
-import net.id.paradiselost.items.food.MysteryMilkItem;
 import net.id.paradiselost.items.misc.*;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.items.tools.AurelBucketItem;
-import net.id.paradiselost.items.tools.VialItem;
 import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
@@ -158,7 +155,6 @@ public class ParadiseLostItems {
     public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED)));
     public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
     public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(ParadiseLostBlocks.FLAX, food()), compostable30);
-    public static final MysteryMilkItem MYSTERY_MILK = add("mystery_milk", new MysteryMilkItem(food(ParadiseLostFoodComponent.MYSTERY_MILK, EPIC).maxCount(1)));
     public static final Item GINGERBREAD_MAN = add("gingerbread_man", new Item(food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
     public static final Item MOA_MEAT = add("moa_meat", new Item(food(ParadiseLostFoodComponent.MOA_MEAT)));
     public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", new Item(food(ParadiseLostFoodComponent.COOKED_MOA_MEAT)));
@@ -182,14 +178,6 @@ public class ParadiseLostItems {
     private static final Settings aurelBucket = misc().maxCount(1).recipeRemainder(AUREL_BUCKET);
     public static final AurelBucketItem AUREL_WATER_BUCKET = add("aurel_water_bucket", new AurelBucketItem(Fluids.WATER, aurelBucket), emptiableBucketBehavior);
     public static final AurelBucketItem AUREL_MILK_BUCKET = add("aurel_milk_bucket", new AurelBucketItem(aurelBucket));
-
-    public static final VialItem VIAL = add("vial", new VialItem(Fluids.EMPTY, misc().maxCount(32)));
-    public static final VialItem CLOUD_VIAL = add("cloud_vial", new VialItem(ParadiseLostFluids.DENSE_CLOUD, misc().maxCount(32)));
-    /* TODO: Implement dungeon keys
-    public static final Item BRONZE_KEY = add("bronze_key", new Item(misc().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT)));
-    public static final Item SILVER_KEY = add("silver_key", new Item(misc().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT)));
-    public static final Item GOLDEN_KEY = add("golden_key", new Item(misc().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT)));
-    */
 
     public static final SpawnEggItem HELLENROSE_SPAWN_EGG = add("hellenrose_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.HELLENROSE, 0x97DED4, 0x31897D, misc), spawnEggBehavior);
     public static final SpawnEggItem PARADISE_HARE_SPAWN_EGG = add("corsican_hare_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.PARADISE_HARE, 0xC5D6ED, 0x82A6D9, misc), spawnEggBehavior);
@@ -320,7 +308,6 @@ public class ParadiseLostItems {
     public static final BlockItem ROSE_WISTERIA_SAPLING = add("rose_wisteria_sapling", ParadiseLostBlocks.ROSE_WISTERIA_SAPLING, decoration, compostable30);
     public static final BlockItem FROST_WISTERIA_SAPLING = add("frost_wisteria_sapling", ParadiseLostBlocks.FROST_WISTERIA_SAPLING, decoration, compostable30);
     public static final BlockItem LAVENDER_WISTERIA_SAPLING = add("lavender_wisteria_sapling", ParadiseLostBlocks.LAVENDER_WISTERIA_SAPLING, decoration, compostable30);
-    public static final BlockItem BOREAL_WISTERIA_SAPLING = add("boreal_wisteria_sapling", ParadiseLostBlocks.BOREAL_WISTERIA_SAPLING, decoration, compostable30);
     // leaves
     public static final BlockItem AUREL_LEAVES = add("aurel_leaves", ParadiseLostBlocks.AUREL_LEAVES, decoration, compostable30);
     public static final BlockItem MOTHER_AUREL_LEAVES = add("mother_aurel_leaves", ParadiseLostBlocks.MOTHER_AUREL_LEAVES, decoration, compostable30);
@@ -328,7 +315,6 @@ public class ParadiseLostItems {
     public static final BlockItem ROSE_WISTERIA_LEAVES = add("rose_wisteria_leaves", ParadiseLostBlocks.ROSE_WISTERIA_LEAVES, decoration, compostable30);
     public static final BlockItem FROST_WISTERIA_LEAVES = add("frost_wisteria_leaves", ParadiseLostBlocks.FROST_WISTERIA_LEAVES, decoration, compostable30);
     public static final BlockItem LAVENDER_WISTERIA_LEAVES = add("lavender_wisteria_leaves", ParadiseLostBlocks.LAVENDER_WISTERIA_LEAVES, decoration, compostable30);
-    public static final BlockItem BOREAL_WISTERIA_LEAVES = add("boreal_wisteria_leaves", ParadiseLostBlocks.BOREAL_WISTERIA_LEAVES, decoration, compostable30);
     // plants
     public static final BlockItem GRASS = add("grass_plant", ParadiseLostBlocks.GRASS, decoration, compostable30);
     public static final BlockItem GRASS_FLOWERING = add("grass_flowering", ParadiseLostBlocks.GRASS_FLOWERING, decoration, compostable30);
@@ -354,7 +340,6 @@ public class ParadiseLostItems {
     public static final BlockItem ROSE_WISTERIA_HANGER = add("rose_wisteria_hanger", ParadiseLostBlocks.ROSE_WISTERIA_HANGER, decoration, compostable30);
     public static final BlockItem FROST_WISTERIA_HANGER = add("frost_wisteria_hanger", ParadiseLostBlocks.FROST_WISTERIA_HANGER, decoration, compostable30);
     public static final BlockItem LAVENDER_WISTERIA_HANGER = add("lavender_wisteria_hanger", ParadiseLostBlocks.LAVENDER_WISTERIA_HANGER, decoration, compostable30);
-    public static final BlockItem BOREAL_WISTERIA_HANGER = add("boreal_wisteria_hanger", ParadiseLostBlocks.BOREAL_WISTERIA_HANGER, decoration, compostable30);
 
     public static final BlockItem AUREL_LEAF_PILE = add("aurel_leaf_pile", ParadiseLostBlocks.AUREL_LEAF_PILE, decoration, compostable30);
     public static final BlockItem ROSE_WISTERIA_LEAF_PILE = add("rose_wisteria_leaf_pile", ParadiseLostBlocks.ROSE_WISTERIA_LEAF_PILE, decoration, compostable30);

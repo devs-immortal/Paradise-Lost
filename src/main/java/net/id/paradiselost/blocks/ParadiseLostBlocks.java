@@ -29,7 +29,6 @@ import net.id.paradiselost.fluids.ParadiseLostFluids;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
-import net.id.paradiselost.util.RenderUtils;
 import net.id.paradiselost.world.feature.tree.generator.*;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.id.incubus_core.woodtypefactory.api.WoodSettingsFactory;
@@ -40,7 +39,6 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 
@@ -283,13 +281,6 @@ public class ParadiseLostBlocks {
     public static final FlowerPotBlock POTTED_LAVENDER_WISTERIA_SAPLING = add("potted_lavender_wisteria_sapling", new FlowerPotBlock(LAVENDER_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);
     public static final ParadiseLostHangerBlock LAVENDER_WISTERIA_HANGER = add("lavender_wisteria_hanger", new ParadiseLostHangerBlock(lavenderWisteriaColors.hanger()), flammableLeaves, cutoutRenderLayer);
 
-    private static final WoodSettingsFactory borealWisteriaColors = wisteriaColors.withLeafColor(MapColor.CYAN);
-    private static final Vec3i[] auralLeafColors = new Vec3i[]{RenderUtils.toRGB(0xa6ffdd), RenderUtils.toRGB(0x96e5ff), RenderUtils.toRGB(0xd6b3ff), RenderUtils.toRGB(0xffadc6)};
-    public static final AuralLeavesBlock BOREAL_WISTERIA_LEAVES = add("boreal_wisteria_leaves", new AuralLeavesBlock(borealWisteriaColors.auralNoCollideLeaves(), false, auralLeafColors), flammableLeaves);
-    public static final SaplingBlock BOREAL_WISTERIA_SAPLING = add("boreal_wisteria_sapling", new ParadiseLostSaplingBlock(new BorealWisteriaSaplingGenerator(), borealWisteriaColors.sapling().luminance(state -> 5)), cutoutRenderLayer);
-    public static final FlowerPotBlock POTTED_BOREAL_WISTERIA_SAPLING = add("potted_boreal_wisteria_sapling", new FlowerPotBlock(BOREAL_WISTERIA_SAPLING, flowerPot().luminance(state -> 5)), cutoutRenderLayer);
-    public static final AuralHangerBlock BOREAL_WISTERIA_HANGER = add("boreal_wisteria_hanger", new AuralHangerBlock(borealWisteriaColors.auralHanger(), auralLeafColors), flammableLeaves, auralCutoutMippedRenderLayer);
-
     // Grasses
     private static Settings shrub() {
         return copy(Blocks.GRASS).mapColor(MapColor.PALE_GREEN);
@@ -383,8 +374,8 @@ public class ParadiseLostBlocks {
         return copy(TORCH).ticksRandomly().luminance(state -> 15);
     }
 
-    public static final CherineTorchBlock CHERINE_TORCH = addImmediately("cherine_torch", new CherineTorchBlock(cherineTorch()), cutoutRenderLayer);
-    public static final CherineWallTorchBlock CHERINE_TORCH_WALL = addImmediately("cherine_wall_torch", new CherineWallTorchBlock(cherineTorch().dropsLike(CHERINE_TORCH)), cutoutRenderLayer);
+    public static final CherineTorchBlock CHERINE_TORCH = add("cherine_torch", new CherineTorchBlock(cherineTorch()), cutoutRenderLayer);
+    public static final CherineWallTorchBlock CHERINE_TORCH_WALL = add("cherine_wall_torch", new CherineWallTorchBlock(cherineTorch().dropsLike(CHERINE_TORCH)), cutoutRenderLayer);
 
     // Usables
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);

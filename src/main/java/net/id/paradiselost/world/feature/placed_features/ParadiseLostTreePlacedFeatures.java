@@ -34,12 +34,10 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final RegistryEntry<PlacedFeature> ROSE_WISTERIA_TREE = register("rose_wisteria_tree", ParadiseLostTreeConfiguredFeatures.ROSE_WISTERIA_TREE, placed(ROSE_WISTERIA_SAPLING));
     public static final RegistryEntry<PlacedFeature> LAVENDER_WISTERIA_TREE = register("lavender_wisteria_tree", ParadiseLostTreeConfiguredFeatures.LAVENDER_WISTERIA_TREE, placed(LAVENDER_WISTERIA_SAPLING));
     public static final RegistryEntry<PlacedFeature> FROST_WISTERIA_TREE = register("frost_wisteria_tree", ParadiseLostTreeConfiguredFeatures.FROST_WISTERIA_TREE, placed(FROST_WISTERIA_SAPLING));
-    public static final RegistryEntry<PlacedFeature> BOREAL_WISTERIA_TREE = register("boreal_wisteria_tree", ParadiseLostTreeConfiguredFeatures.BOREAL_WISTERIA_TREE, placed(BOREAL_WISTERIA_SAPLING));
     // Fancy
     public static final RegistryEntry<PlacedFeature> FANCY_ROSE_WISTERIA_TREE = register("fancy_rose_wisteria_tree", ParadiseLostTreeConfiguredFeatures.FANCY_ROSE_WISTERIA_TREE, placed(ROSE_WISTERIA_SAPLING));
     public static final RegistryEntry<PlacedFeature> FANCY_LAVENDER_WISTERIA_TREE = register("fancy_lavender_wisteria_tree", ParadiseLostTreeConfiguredFeatures.FANCY_LAVENDER_WISTERIA_TREE, placed(LAVENDER_WISTERIA_SAPLING));
     public static final RegistryEntry<PlacedFeature> FANCY_FROST_WISTERIA_TREE = register("fancy_frost_wisteria_tree", ParadiseLostTreeConfiguredFeatures.FANCY_FROST_WISTERIA_TREE, placed(FROST_WISTERIA_SAPLING));
-    public static final RegistryEntry<PlacedFeature> FANCY_BOREAL_WISTERIA_TREE = register("fancy_boreal_wisteria_tree", ParadiseLostTreeConfiguredFeatures.FANCY_BOREAL_WISTERIA_TREE, placed(BOREAL_WISTERIA_SAPLING));
     public static final RegistryEntry<PlacedFeature> FANCY_AUREL_TREE = register("fancy_aurel_tree", ParadiseLostTreeConfiguredFeatures.FANCY_AUREL_TREE, placed(AUREL_SAPLING));
     // Tree Assortments
     public static final RegistryEntry<PlacedFeature> SCATTERED_TREES = register("scattered_trees", ParadiseLostTreeConfiguredFeatures.SCATTERED_TREES, CountMultilayerPlacementModifier.of(6), CountPlacementModifier.of(UniformIntProvider.create(0, 6)));

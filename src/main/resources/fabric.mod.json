@@ -8,7 +8,7 @@
   "authors": [
     "Immortal Devs - parent organization",
     "kalucky0 - head of project",
-    "Azazelthedemonlord - lead designer / local nsfw artist",
+    "Azazelthedemonlord - lead designer",
     "24Chrome - lead artist",
     "Jack Papel - lead developer",
     "sunsette - lead sound designer",
@@ -33,7 +33,6 @@
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*",
     "trinkets": "*",
-    "satin": "*",
     "cloth-config": "*"
   },
   "mixins": [
