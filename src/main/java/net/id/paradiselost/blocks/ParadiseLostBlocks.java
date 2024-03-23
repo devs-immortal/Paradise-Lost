@@ -131,6 +131,15 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostStairsBlock FLOESTONE_BRICK_STAIRS = add("floestone_brick_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestoneBrick()));
     public static final WallBlock FLOESTONE_BRICK_WALL = add("floestone_brick_wall", new WallBlock(floestoneBrick()));
 
+    // Heliolith
+    public static final Block HELIOLITH = add("heliolith", new Block(floestone()));
+    public static final Block SMOOTH_HELIOLITH = add("smooth_heliolith", new Block(floestone()));
+    public static final SlabBlock HELIOLITH_SLAB = add("heliolith_slab", new SlabBlock(floestone()));
+    public static final SlabBlock SMOOTH_HELIOLITH_SLAB = add("smooth_heliolith_slab", new SlabBlock(floestone()));
+    public static final ParadiseLostStairsBlock HELIOLITH_STAIRS = add("heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone()));
+    public static final ParadiseLostStairsBlock SMOOTH_HELIOLITH_STAIRS = add("smooth_heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone()));
+    public static final WallBlock HELIOLITH_WALL = add("heliolith_wall", new WallBlock(floestone()));
+
     // Dungeon Blocks
     private static Settings carvedStone() {
         return of(Material.STONE).hardness(0.5f).resistance(1f).sounds(BlockSoundGroup.STONE);

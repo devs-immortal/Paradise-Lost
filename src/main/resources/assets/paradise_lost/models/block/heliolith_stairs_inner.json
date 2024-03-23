@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/inner_stairs",
+	"textures": {
+		"bottom": "paradise_lost:block/heliolith",
+		"top": "paradise_lost:block/heliolith",
+		"side": "paradise_lost:block/heliolith"
+	}
+}

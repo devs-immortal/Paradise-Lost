@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/stairs",
+	"textures": {
+		"bottom": "paradise_lost:block/smooth_heliolith",
+		"top": "paradise_lost:block/smooth_heliolith",
+		"side": "paradise_lost:block/smooth_heliolith"
+	}
+}

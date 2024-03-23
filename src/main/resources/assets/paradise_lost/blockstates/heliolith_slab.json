@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"type=bottom": {
+			"model": "paradise_lost:block/heliolith_slab"
+		},
+		"type=double": {
+			"model": "paradise_lost:block/heliolith"
+		},
+		"type=top": {
+			"model": "paradise_lost:block/heliolith_slab_top"
+		}
+	}
+}
