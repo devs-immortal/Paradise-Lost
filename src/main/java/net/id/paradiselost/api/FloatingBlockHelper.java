@@ -2,6 +2,7 @@ package net.id.paradiselost.api;
 
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.util.FloatingBlockHelperImpls;
+import net.id.paradiselost.items.tools.base_tools.GravityWandItem;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.id.incubus_core.blocklikeentities.api.BlockLikeSet;
@@ -10,6 +11,7 @@ import net.minecraft.block.PistonBlock;
 import net.minecraft.block.piston.PistonHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
@@ -126,9 +128,14 @@ public interface FloatingBlockHelper {
         BlockState state = world.getBlockState(pos);
         Item heldItem = context.getStack().getItem();
         return world.getBlockEntity(pos) == null && state.getHardness(world, pos) != -1.0F
-                && (!state.isToolRequired() || heldItem.isSuitableFor(state))
+                && (!state.isToolRequired() || heldItem.isSuitableFor(state) || (heldItem instanceof GravityWandItem && validForWand(state)))
                 && !state.isIn(ParadiseLostBlockTags.NON_FLOATERS);
     }
+
+    static boolean validForWand(BlockState bs) {
+        return !bs.isIn(BlockTags.NEEDS_DIAMOND_TOOL);
+    }
+
 
     /**
      * A structure builder intended to aid the creation of floating block structures.

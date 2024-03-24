@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "paradise_lost:levita_ore"
+  },
+  "result": "paradise_lost:levita_gem",
+  "experience": 1.2,
+  "cookingtime": 200
+}

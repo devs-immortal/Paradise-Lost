@@ -80,12 +80,10 @@ def generate_slab_block(block_id, base_block_id, texture):
     
 
 
-generate_standard_block("heliolith")
-generate_stairs_block("heliolith_stairs", "heliolith")
-generate_slab_block("heliolith_slab", "heliolith", "heliolith")
-generate_standard_block("smooth_heliolith")
-generate_stairs_block("smooth_heliolith_stairs", "smooth_heliolith")
-generate_slab_block("smooth_heliolith_slab", "smooth_heliolith", "smooth_heliolith")
+generate_standard_block("levita")
+generate_standard_block("levita_ore")
+generate_standard_item("levita_gem")
+generate_standard_item("levita_wand")
 
 
 
