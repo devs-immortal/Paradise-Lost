@@ -30,7 +30,7 @@
   "block.paradise_lost.dirt": "Paradise Dirt",
   "block.paradise_lost.coarse_dirt": "Coarse Paradise Dirt",
   "block.paradise_lost.permafrost": "Permafrost",
-  "block.paradise_lost.levita": "Levita Precipitate",
+  "block.paradise_lost.levita": "Levita",
   "block.paradise_lost.farmland": "Paradise Farmland",
   "block.paradise_lost.grass_path": "Paradise Grass Path",
   "block.paradise_lost.packed_swedroot": "Packed Swedroot",
@@ -245,7 +245,7 @@
   "block.paradise_lost.olvite_block": "Block of Olvite",
   "block.paradise_lost.refined_surtrum_block": "Block of Refined Surtrum",
 
-  "block.paradise_lost.levitator": "Surtrum Levitator",
+  "block.paradise_lost.levitator": "Redstone Levitator",
   "block.paradise_lost.olvite_chain": "Olvite Chain",
   "block.paradise_lost.cherine_lantern": "Cherine Lantern",
   "block.paradise_lost.blue_portal": "Paradise Portal",

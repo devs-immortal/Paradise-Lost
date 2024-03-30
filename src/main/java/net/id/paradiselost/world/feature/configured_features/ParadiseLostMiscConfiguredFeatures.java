@@ -1,8 +1,10 @@
 package net.id.paradiselost.world.feature.configured_features;
 
+import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.feature.configs.BoulderFeatureConfig;
 import net.id.paradiselost.world.feature.configs.GroundcoverFeatureConfig;
+import net.id.paradiselost.world.feature.configs.JaggedOreConfig;
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -39,8 +41,11 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryEntry<ConfiguredFeature<BoulderFeatureConfig, ?>> THICKET_BOULDER = register("thicket_boulder", ParadiseLostFeatures.BOULDER, Configs.THICKET_BOULDER_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<BoulderFeatureConfig, ?>> GOLDEN_BOULDER = register("golden_boulder", ParadiseLostFeatures.BOULDER, Configs.GOLDEN_BOULDER_CONFIG);
 
+    public static final RegistryEntry<ConfiguredFeature<JaggedOreConfig, ?>> HELIOLITH_BLOB = register("heliolith_blob", ParadiseLostFeatures.JAGGED_ORE, Configs.HELIOLITH_BLOB_CONFIG);
+    public static final RegistryEntry<ConfiguredFeature<JaggedOreConfig, ?>> LEVITA_BLOB = register("levita_blob", ParadiseLostFeatures.JAGGED_ORE, Configs.LEVITA_BLOB_CONFIG);
     public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_CHERINE = register("ore_cherine", Feature.ORE, Configs.ore(CHERINE_ORE, 14));
     public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_OLVITE = register("ore_olvite", Feature.ORE, Configs.ore(OLVITE_ORE, 9));
+    public static final RegistryEntry<ConfiguredFeature<OreFeatureConfig, ?>> ORE_LEVITA = register("ore_levita", Feature.ORE, Configs.ore(LEVITA_ORE, 3));
     public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> SURTRUM_METEORITE = register("surtrum_meteorite", ParadiseLostFeatures.SURTRUM_METEORITE_FEATURE, new DefaultFeatureConfig());
     // Plato
     // Shield
@@ -78,6 +83,15 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
         private static BoulderFeatureConfig boulder(Block block, int tries, IntProvider size) {
             return boulder(BlockStateProvider.of(block), tries, size);
         }
+
+        private static final JaggedOreConfig HELIOLITH_BLOB_CONFIG =
+                new JaggedOreConfig(BlockStateProvider.of(HELIOLITH), UniformIntProvider.create(4, 7), UniformIntProvider.create(7, 11), UniformIntProvider.create(5, 11), UniformIntProvider.create(1, 4));
+        private static final JaggedOreConfig LEVITA_BLOB_CONFIG =
+                new JaggedOreConfig(new WeightedBlockStateProvider(
+                        DataPool.<BlockState>builder()
+                                .add(LEVITA.getDefaultState(), 200)
+                                .add(LEVITA_ORE.getDefaultState(), 1)
+                ), UniformIntProvider.create(3, 5), UniformIntProvider.create(6, 10), UniformIntProvider.create(4, 10), UniformIntProvider.create(3, 6));
 
         private static final BoulderFeatureConfig GENERIC_BOULDER_CONFIG = boulder(new WeightedBlockStateProvider(
                 DataPool.<BlockState>builder()

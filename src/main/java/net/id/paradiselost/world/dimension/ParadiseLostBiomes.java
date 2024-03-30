@@ -219,8 +219,11 @@ public final class ParadiseLostBiomes {
                 SURTRUM_METEORITE
             ),
             GenerationStep.Feature.UNDERGROUND_ORES, List.of(
+                HELIOLITH_BLOB,
+                LEVITA_BLOB,
                 ORE_CHERINE,
-                ORE_OLVITE
+                ORE_OLVITE,
+                ORE_LEVITA
             ),
             GenerationStep.Feature.VEGETAL_DECORATION, List.of(
                 PATCH_BROWN_SPORECAP,
