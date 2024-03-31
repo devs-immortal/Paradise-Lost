@@ -81,18 +81,6 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         return gravity;
     }
 
-    // 24: Removed because of gravitite's removal
-//    @Inject(method = "damage", at = @At("RETURN"))
-//    private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-//        Entity attacker = source.getAttacker();
-//        if (cir.getReturnValue() && attacker instanceof LivingEntity) {
-//            Item item = ((LivingEntity) attacker).getMainHandStack().getItem();
-//            if (item instanceof ToolItem tool && tool.getMaterial() == ParadiseLostToolMaterials.GRAVITITE) {
-//                this.addVelocity(0, amount / 20 + 0.1, 0);
-//            }
-//        }
-//    }
-
     @Inject(method = "tick", at = @At("TAIL"))
     private void tick(CallbackInfo ci) {
         if (flipped) {

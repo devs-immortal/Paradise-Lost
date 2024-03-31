@@ -2,7 +2,6 @@ package net.id.paradiselost.world.feature.features;
 
 import com.mojang.serialization.Codec;
 import net.id.paradiselost.blocks.FloatingBlock;
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.world.feature.configs.JaggedOreConfig;
 import net.minecraft.block.Block;

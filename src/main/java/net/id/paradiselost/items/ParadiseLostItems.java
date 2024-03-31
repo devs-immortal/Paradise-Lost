@@ -73,8 +73,12 @@ public class ParadiseLostItems {
     private static final Settings tool = tool();
     private static final Settings rareTool = tool().rarity(RARE);
     private static final Settings paradiseLostLootTool = tool().rarity(ParadiseLostRarity.PARADISE_LOST_LOOT);
-    private static Settings unstackableTool() { return tool().maxCount(1); }
-    private static Settings unstackableRareTool() { return tool().maxCount(1).rarity(RARE); }
+    private static Settings unstackableTool() {
+        return tool().maxCount(1);
+    }
+    private static Settings unstackableRareTool() {
+        return tool().maxCount(1).rarity(RARE);
+    }
 
     // Olvite
     public static final ShovelItem OLVITE_SHOVEL = add("olvite_shovel", new ShovelItem(ParadiseLostToolMaterials.OLVITE, 1.5f, -3f, tool()));

@@ -1,6 +1,5 @@
 package net.id.paradiselost.world.feature.configured_features;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.feature.configs.BoulderFeatureConfig;
 import net.id.paradiselost.world.feature.configs.GroundcoverFeatureConfig;
