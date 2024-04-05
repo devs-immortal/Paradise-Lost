@@ -67,6 +67,7 @@ public class ParadiseLostBlocks {
     // Soil Blocks
     public static final Block DIRT = add("dirt", new Block(copy(Blocks.DIRT).strength(0.3f)), tillable(), flattenable());
     public static final Block COARSE_DIRT = add("coarse_dirt", new Block(copy(Blocks.DIRT).strength(0.3f)), coarseTillable(), flattenable());
+    public static final FloatingBlock LEVITA = add("levita", new FloatingBlock(false, copy(Blocks.GRAVEL).strength(0.3f)));
     public static final Block PERMAFROST = add("permafrost", new Block(copy(Blocks.DIRT).strength(2f).sounds(BlockSoundGroup.GILDED_BLACKSTONE)), flattenable());
     public static final FarmlandBlock FARMLAND = add("farmland", new ParadiseLostFarmlandBlock(copy(Blocks.FARMLAND)));
     public static final ParadiseLostDirtPathBlock DIRT_PATH = add("grass_path", new ParadiseLostDirtPathBlock(copy(Blocks.DIRT_PATH)));
@@ -130,6 +131,15 @@ public class ParadiseLostBlocks {
     public static final SlabBlock FLOESTONE_BRICK_SLAB = add("floestone_brick_slab", new SlabBlock(floestoneBrick()));
     public static final ParadiseLostStairsBlock FLOESTONE_BRICK_STAIRS = add("floestone_brick_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestoneBrick()));
     public static final WallBlock FLOESTONE_BRICK_WALL = add("floestone_brick_wall", new WallBlock(floestoneBrick()));
+
+    // Heliolith
+    public static final Block HELIOLITH = add("heliolith", new Block(floestone()));
+    public static final Block SMOOTH_HELIOLITH = add("smooth_heliolith", new Block(floestone()));
+    public static final SlabBlock HELIOLITH_SLAB = add("heliolith_slab", new SlabBlock(floestone()));
+    public static final SlabBlock SMOOTH_HELIOLITH_SLAB = add("smooth_heliolith_slab", new SlabBlock(floestone()));
+    public static final ParadiseLostStairsBlock HELIOLITH_STAIRS = add("heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone()));
+    public static final ParadiseLostStairsBlock SMOOTH_HELIOLITH_STAIRS = add("smooth_heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone()));
+    public static final WallBlock HELIOLITH_WALL = add("heliolith_wall", new WallBlock(floestone()));
 
     // Dungeon Blocks
     private static Settings carvedStone() {
@@ -360,9 +370,10 @@ public class ParadiseLostBlocks {
     public static final OreBlock SURTRUM = add("surtrum", new SurtrumOreBlock(of(Material.STONE).sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f), UniformIntProvider.create(2, 5)));
     public static final Block METAMORPHIC_SHELL = add("metamorphic_shell", new Block(of(Material.STONE).sounds(BlockSoundGroup.TUFF).requiresTool().strength(40f, 15f)));
     public static final PoofBlock SURTRUM_AIR = add("surtrum_air", new PoofBlock(of(Material.FIRE).sounds(BlockSoundGroup.NETHER_GOLD_ORE)));
+    public static final FloatingBlock LEVITA_ORE = add("levita_ore", new FloatingBlock(false, of(Material.STONE).requiresTool().strength(4f), UniformIntProvider.create(4, 7)));
     public static final Block CHERINE_BLOCK = add("cherine_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
     public static final Block OLVITE_BLOCK = add("olvite_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
-    public static final FloatingBlock REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new FloatingBlock(false, of(Material.METAL).requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL)));
+    public static final Block REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new Block(of(Material.METAL).requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
     public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, of(Material.WOOD).strength(3f, 3f).sounds(BlockSoundGroup.WOOD)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);

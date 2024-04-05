@@ -8,6 +8,7 @@
     "block.CropBlockMixin",
     "block.EnchantingTableBlockMixin",
     "block.FarmlandBlockMixin",
+    "enchantment.EnchantmentHelperMixin",
     "entity.CowEntityMixin",
     "entity.EntityMixin",
     "entity.LivingEntityMixin",

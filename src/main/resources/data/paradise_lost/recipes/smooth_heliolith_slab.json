@@ -1,0 +1,17 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:smooth_heliolith"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:smooth_heliolith_slab",
+    "count": 6
+  }
+}
+        
