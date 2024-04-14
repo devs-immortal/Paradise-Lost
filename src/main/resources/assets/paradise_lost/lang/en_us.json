@@ -255,6 +255,7 @@
   "block.paradise_lost.incubator": "Incubator",
   "block.paradise_lost.food_bowl": "Feeding Trough",
   "block.paradise_lost.tree_tap": "Tree Tap",
+  "block.paradise_lost.nitra_bunch": "Nitra Bunch",
 
   "block.paradise_lost.crystal_chest": "Crystal Chest",
   "block.paradise_lost.golden_oak_chest": "Mother Aurel Chest",
@@ -341,6 +342,7 @@
   "item.paradise_lost.blackcurrant": "Blackcurrant",
   "item.paradise_lost.orange": "Orange",
   "item.paradise_lost.amadrys_bushel": "Amadrys Bushel",
+  "item.paradise_lost.nitra": "Nitra Bulb",
   "item.paradise_lost.amadrys_noodles": "Amadrys Noodle Soup",
   "item.paradise_lost.amadrys_bread": "Amadrys Loaf",
   "item.paradise_lost.amadrys_bread_glazed": "Glazed Amadrys Loaf",

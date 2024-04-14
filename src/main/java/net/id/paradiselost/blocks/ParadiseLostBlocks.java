@@ -9,6 +9,7 @@ import net.id.paradiselost.blocks.mechanical.CherineCampfireBlock;
 import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
 import net.id.paradiselost.blocks.mechanical.FourBiteCakeBlock;
 import net.id.paradiselost.blocks.mechanical.IncubatorBlock;
+import net.id.paradiselost.blocks.mechanical.NitraBlock;
 import net.id.paradiselost.blocks.mechanical.TreeTapBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostGrassBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
@@ -335,6 +336,7 @@ public class ParadiseLostBlocks {
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(crop().mapColor(MapColor.PINK)), flammablePlant, cutoutMippedRenderLayer);
     public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(crop().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
     public static final SwedrootCropBlock SWEDROOT = add("swedroot", new SwedrootCropBlock(shrub().mapColor(MapColor.BLUE)), flammablePlant, cutoutRenderLayer);
+    public static final CropBlock NITRA = add("nitra", new CropBlock(crop().mapColor(MapColor.PALE_YELLOW)), flammablePlant, cutoutMippedRenderLayer);
 
     public static final Block FLAXWEAVE_CUSHION = add("flaxweave_cushion", new FlaxweaveCushionBlock(Settings.of(Material.WOOL).mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));
 
@@ -392,6 +394,7 @@ public class ParadiseLostBlocks {
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(of(Material.WOOD, MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
 	public static final Block TREE_TAP = add("tree_tap", new TreeTapBlock(of(Material.WOOD, MapColor.OAK_TAN).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque().ticksRandomly()), cutoutRenderLayer);
+    public static final NitraBlock NITRA_BUNCH = add("nitra_bunch", new NitraBlock(of(Material.PLANT, MapColor.PALE_YELLOW).strength(0.5f).sounds(BlockSoundGroup.WET_GRASS)));
 
     //dungeon
 //    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));

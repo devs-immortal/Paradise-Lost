@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paradise_lost:nitra_bunch"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:nitra",
+    "count": 4
+  }
+}
