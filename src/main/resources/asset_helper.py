@@ -80,8 +80,7 @@ def generate_slab_block(block_id, base_block_id, texture):
     
 
 
-generate_standard_block("nitra_bunch")
-generate_standard_item("nitra")
+generate_standard_item("nitra_bulb")
 
 
 
