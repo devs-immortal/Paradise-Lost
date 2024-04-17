@@ -1,7 +1,0 @@
-{
-  "parent": "paradise_lost:template/bilayer_stellated",
-  "textures": {
-    "face": "paradise_lost:block/weeping_cloudburst_top_flower",
-    "face_tint": "paradise_lost:block/weeping_cloudburst_top_stalk"
-  }
-}

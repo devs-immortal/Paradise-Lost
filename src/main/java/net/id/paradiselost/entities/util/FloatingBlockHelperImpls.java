@@ -45,22 +45,19 @@ public class FloatingBlockHelperImpls {
         @Override
         public boolean tryCreate(World world, BlockPos pos, boolean force) {
             // try making a pusher, then a double, then a generic
-            return PUSHER.tryCreate(world, pos, force)
-                    || DOUBLE.tryCreate(world, pos, force)
-                    || STANDARD.tryCreate(world, pos, force);
+            return DOUBLE.tryCreate(world, pos, force) || STANDARD.tryCreate(world, pos, force);
         }
 
         @Override
         public boolean isSuitableFor(BlockState state) {
-            return STANDARD.isSuitableFor(state) || DOUBLE.isSuitableFor(state) || PUSHER.isSuitableFor(state);
+            return STANDARD.isSuitableFor(state) || DOUBLE.isSuitableFor(state);
         }
 
         @Override
         public boolean isBlocked(boolean shouldDrop, World world, BlockPos pos) {
             BlockState state = world.getBlockState(pos);
             return STANDARD.isBlocked(shouldDrop, world, pos)
-                    && (DOUBLE.isSuitableFor(state) && DOUBLE.isBlocked(shouldDrop, world, pos))
-                    && (PUSHER.isSuitableFor(state) && PUSHER.isBlocked(shouldDrop, world, pos));
+                    && (DOUBLE.isSuitableFor(state) && DOUBLE.isBlocked(shouldDrop, world, pos));
         }
     }
 

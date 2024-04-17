@@ -337,11 +337,6 @@ public class ParadiseLostItems {
     public static final BlockItem BUSH = add("bush", ParadiseLostBlocks.BUSH, decoration, compostable30);
     public static final BlockItem SHAMROCK = add("shamrock", ParadiseLostBlocks.SHAMROCK, decoration, compostable50);
     public static final BlockItem MALT_SPRIG = add("malt_sprig", ParadiseLostBlocks.MALT_SPRIG, decoration, compostable30);
-    public static final BlockItem HALOPHIA = add("halophia", ParadiseLostBlocks.HALOPHIA, decoration, compostable30);
-    public static final BlockItem GIANT_LILY = add("giant_lily", new BlockItem(ParadiseLostBlocks.GIANT_LILY, hat), compostable100);
-    public static final BlockItem WEEPING_CLOUDBURST = add("weeping_cloudburst", ParadiseLostBlocks.WEEPING_CLOUDBURST, decoration, compostable30);
-    public static final BlockItem MOSS_STAR = add("moss_star", ParadiseLostBlocks.MOSS_STAR, decoration, compostable50);
-    public static final BlockItem MOSS_BALL = add("moss_ball", ParadiseLostBlocks.MOSS_BALL, decoration, compostable30);
 
     public static final BlockItem ANCIENT_FLOWER = add("ancient_flower", ParadiseLostBlocks.ANCIENT_FLOWER, decoration, compostable65);
     public static final BlockItem ATARAXIA = add("ataraxia", ParadiseLostBlocks.ATARAXIA, decoration, compostable65);
@@ -365,12 +360,6 @@ public class ParadiseLostItems {
 
     public static final BlockItem LIVERWORT = add("liverwort", ParadiseLostBlocks.LIVERWORT, decoration, compostable100);
     public static final BlockItem LIVERWORT_CARPET = add("liverwort_carpet", ParadiseLostBlocks.LIVERWORT_CARPET, decoration, compostable65);
-
-    // FUNGI BAYBEEE
-    public static final BlockItem LICHEN = add("lichen", ParadiseLostBlocks.LICHEN, decoration, compostable50);
-    public static final BlockItem LUCATIEL_LICHEN = add("lucatiel_lichen", ParadiseLostBlocks.LUCATIEL_LICHEN, decoration, compostable50);
-    public static final BlockItem LICHEN_PILE = add("lichen_pile", ParadiseLostBlocks.LICHEN_PILE, decoration, compostable30);
-    public static final BlockItem LUCATIEL_LICHEN_PILE = add("lucatiel_lichen_pile", ParadiseLostBlocks.LUCATIEL_LICHEN_PILE, decoration, compostable100);
 
     public static final BlockItem ROOTCAP = add("rootcap", ParadiseLostBlocks.ROOTCAP, decoration(), compostable65);
     public static final BlockItem BROWN_SPORECAP = add("brown_sporecap", ParadiseLostBlocks.BROWN_SPORECAP, decoration(), compostable65);
