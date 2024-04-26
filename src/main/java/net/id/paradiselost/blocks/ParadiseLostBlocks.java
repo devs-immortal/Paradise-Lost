@@ -322,13 +322,6 @@ public class ParadiseLostBlocks {
     //dungeon
 //    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
 
-    // Chests
-//    public static final ChestBlock CRYSTAL_CHEST = add("crystal_chest", CRYSTAL_CHEST_FACTORY.chest);
-//    public static final ChestBlock MOTHER_AUREL_CHEST = add("golden_oak_chest", MOTHER_AUREL_CHEST_FACTORY.chest);
-//    public static final ChestBlock ORANGE_CHEST = ORANGE.chestFactory().chest;
-//    public static final ChestBlock AUREL_CHEST = add("skyroot_chest", AUREL_CHEST_FACTORY.chest);
-//    public static final ChestBlock WISTERIA_CHEST = WISTERIA.chestFactory().chest;
-
     public static void init() {
         ParadiseLostRegistryQueues.BLOCK.register();
     }
@@ -342,9 +335,6 @@ public class ParadiseLostBlocks {
                     )
             );
         }
-//        AUREL_CHEST_FACTORY.registerChestRenderers();
-//        MOTHER_AUREL_CHEST_FACTORY.registerChestRenderers();
-//        CRYSTAL_CHEST_FACTORY.registerChestRenderers();
     }
 
 

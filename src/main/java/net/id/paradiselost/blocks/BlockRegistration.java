@@ -151,7 +151,7 @@ public class BlockRegistration {
                 add(leavesId, new LeavesBlock(leavesSettings), flammableLeaves, cutoutMippedRenderLayer),
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
                 add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings), flammablePlanks),
-                add(doorId, new DoorBlock(doorSettings)), add(trapdoorId, new TrapdoorBlock(trapdoorSettings)),
+                add(doorId, new DoorBlock(doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings), cutoutMippedRenderLayer),
                 add(buttonId, new WoodenButtonBlock(buttonSettings)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings))
         );
     }
@@ -182,7 +182,7 @@ public class BlockRegistration {
                 leaves,
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
                 add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings), flammablePlanks),
-                add(doorId, new DoorBlock(doorSettings)), add(trapdoorId, new TrapdoorBlock(trapdoorSettings)),
+                add(doorId, new DoorBlock(doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings), cutoutMippedRenderLayer),
                 add(buttonId, new WoodenButtonBlock(buttonSettings)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings))
         );
     }
@@ -216,7 +216,7 @@ public class BlockRegistration {
                 leaves,
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
                 add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings), flammablePlanks),
-                add(doorId, new DoorBlock(doorSettings)), add(trapdoorId, new TrapdoorBlock(trapdoorSettings)),
+                add(doorId, new DoorBlock(doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings), cutoutMippedRenderLayer),
                 add(buttonId, new WoodenButtonBlock(buttonSettings)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings))
         );
     }

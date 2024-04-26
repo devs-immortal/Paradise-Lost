@@ -19,10 +19,14 @@ import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
 import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue.Action;
+import net.id.paradiselost.util.EnumExtender;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
+import net.minecraft.block.SignBlock;
 import net.minecraft.block.TallFlowerBlock;
 import net.minecraft.block.TallPlantBlock;
+import net.minecraft.block.WallSignBlock;
+import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
@@ -30,7 +34,14 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.SignType;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Locale;
+
+import static net.id.paradiselost.ParadiseLost.MOD_ID;
 import static net.id.paradiselost.ParadiseLost.locate;
 import static net.id.paradiselost.items.ParadiseLostItemActions.*;
 import static net.minecraft.entity.EquipmentSlot.*;
@@ -309,7 +320,6 @@ public class ParadiseLostItems {
 
     private static final FabricItemSettings decoration = decoration();
     private static final FabricItemSettings sign = decoration().maxCount(16);
-    private static final FabricItemSettings boat = decoration().maxCount(1);
     private static final FabricItemSettings hat = decoration().equipmentSlot(stack -> HEAD);
 
     // saplings
@@ -434,12 +444,12 @@ public class ParadiseLostItems {
     //TODO: Implement dungeon switch block
 //    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", ParadiseLostBlocks.DUNGEON_SWITCH, decoration);
 
-    // Chests
-//    public static final BlockItem AUREL_CHEST = add("skyroot_chest", ParadiseLostBlocks.AUREL_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));
-//    public static final BlockItem MOTHER_AUREL_CHEST = add("golden_oak_chest", ParadiseLostBlocks.MOTHER_AUREL_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));
-//    public static final BlockItem ORANGE_CHEST = add("orange_chest", ParadiseLostBlocks.ORANGE_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));
-//    public static final BlockItem CRYSTAL_CHEST = add("crystal_chest", ParadiseLostBlocks.CRYSTAL_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));
-//    public static final BlockItem WISTERIA_CHEST = add("wisteria_chest", ParadiseLostBlocks.WISTERIA_CHEST, new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS));
+    public static final BoatSet AUREL_BOATS = addBoatItems("aurel", ParadiseLostBlocks.AUREL_WOODSTUFF.plank());
+    public static final BoatSet MOTHER_AUREL_BOATS = addBoatItems("mother_aurel", ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.plank());
+    public static final BoatSet ORANGE_BOATS = addBoatItems("orange", ParadiseLostBlocks.ORANGE_WOODSTUFF.plank());
+    public static final BoatSet WISTERIA_BOATS = addBoatItems("wisteria", ParadiseLostBlocks.WISTERIA_WOODSTUFF.plank());
+
+    public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, ORANGE_BOATS, WISTERIA_BOATS};
 
     public static void init() {
         ParadiseLostRegistryQueues.ITEM.register();
@@ -457,11 +467,21 @@ public class ParadiseLostItems {
         return add(id,
                 (block instanceof DoorBlock
                         || block instanceof TallPlantBlock
-                        || block instanceof TallFlowerBlock
                 )
                         ? new TallBlockItem(block, settings)
                         : new BlockItem(block, settings),
                 additionalActions);
+    }
+
+    private static BoatSet addBoatItems(String woodId, Block plankBlock) {
+        String boatId = (MOD_ID + "_" + woodId);
+
+        BoatEntity.Type boatType = EnumExtender.add(BoatEntity.Type.class, boatId.toUpperCase(Locale.ROOT), plankBlock, boatId);
+
+        BoatItem boat = add(woodId + "_boat", new BoatItem(false, boatType, decoration().maxCount(1)));
+        BoatItem chestBoat = add(woodId + "_chest_boat", new BoatItem(true, boatType, decoration().maxCount(1)));
+
+        return new BoatSet(boatType, boat, chestBoat);
     }
 
     // For access to protected constructors:
@@ -488,6 +508,16 @@ public class ParadiseLostItems {
         protected ParadiseLostMusicDiscItem(int comparatorValueIn, SoundEvent soundIn, Settings settings) {
             // TODO: Length will probably need to be changed
             super(comparatorValueIn, soundIn, settings, 0);
+        }
+    }
+
+    public record BoatSet(
+            BoatEntity.Type type,
+            BoatItem boat,
+            BoatItem chestBoat
+    ) implements Iterable<Item> {
+        public @NotNull Iterator<Item> iterator() {
+            return Arrays.stream(new Item[]{boat, chestBoat}).iterator();
         }
     }
 }
