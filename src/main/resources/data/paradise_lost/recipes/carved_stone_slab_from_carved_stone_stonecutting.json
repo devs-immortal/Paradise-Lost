@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "paradise_lost:carved_stone"
-  },
-  "result": "paradise_lost:carved_stone_slab",
-  "count": 2
-}

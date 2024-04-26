@@ -141,28 +141,6 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostStairsBlock SMOOTH_HELIOLITH_STAIRS = add("smooth_heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone()));
     public static final WallBlock HELIOLITH_WALL = add("heliolith_wall", new WallBlock(floestone()));
 
-    // Dungeon Blocks
-    private static Settings carvedStone() {
-        return of(Material.STONE).hardness(0.5f).resistance(1f).sounds(BlockSoundGroup.STONE);
-    }
-
-    public static final Block CARVED_STONE = add("carved_stone", new Block(carvedStone()));
-    public static final SlabBlock CARVED_STONE_SLAB = add("carved_stone_slab", new SlabBlock(carvedStone()));
-    public static final ParadiseLostStairsBlock CARVED_STONE_STAIRS = add("carved_stone_stairs", new ParadiseLostStairsBlock(CARVED_STONE.getDefaultState(), carvedStone()));
-    public static final WallBlock CARVED_STONE_WALL = add("carved_stone_wall", new WallBlock(carvedStone()));
-
-    public static final Block MOSSY_CARVED_STONE = add("mossy_carved_stone", new Block(carvedStone()));
-    public static final SlabBlock MOSSY_CARVED_STONE_SLAB = add("mossy_carved_stone_slab", new SlabBlock(carvedStone()));
-    public static final ParadiseLostStairsBlock MOSSY_CARVED_STONE_STAIRS = add("mossy_carved_stone_stairs", new ParadiseLostStairsBlock(CARVED_STONE.getDefaultState(), carvedStone()));
-    public static final WallBlock MOSSY_CARVED_STONE_WALL = add("mossy_carved_stone_wall", new WallBlock(carvedStone()));
-
-    public static final Block CRACKED_CARVED_STONE = add("cracked_carved_stone", new Block(carvedStone()));
-    public static final Block GLYPHED_CARVED_STONE = add("glyphed_carved_stone", new Block(carvedStone().luminance(value -> 3)));
-    public static final Block CARVED_STONE_PANEL = add("carved_stone_panel", new Block(carvedStone()));
-    public static final Block CARVED_STONE_PANEL_LIT = add("carved_stone_panel_lit", new Block(carvedStone().luminance(value -> 12)));
-    public static final Block CARVED_STONE_EYE = add("carved_stone_eye", new Block(carvedStone()));
-    public static final Block CARVED_STONE_EYE_LIT = add("carved_stone_eye_lit", new Block(carvedStone().luminance(value -> 8)));
-
     private static Settings amberTiles() {
         return of(Material.STONE, MapColor.GOLD).requiresTool().sounds(BlockSoundGroup.CALCITE).strength(2, 6);
     }
