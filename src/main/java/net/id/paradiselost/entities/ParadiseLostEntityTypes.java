@@ -8,12 +8,10 @@ import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.block.SliderEntity;
 import net.id.paradiselost.entities.hostile.HellenroseEntity;
-import net.id.paradiselost.entities.misc.RookEntity;
 import net.id.paradiselost.entities.passive.ParadiseHareEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
 import net.id.paradiselost.entities.passive.ambyst.FindLogSensor;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
-import net.id.paradiselost.entities.projectile.*;
 import net.id.paradiselost.mixin.brain.ActivityInvoker;
 import net.id.paradiselost.mixin.brain.MemoryModuleTypeInvoker;
 import net.id.paradiselost.mixin.brain.SensorTypeInvoker;
@@ -59,15 +57,8 @@ public class ParadiseLostEntityTypes {
             attributes(MoaEntity::createMoaAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
     public static final EntityType<ParadiseHareEntity> PARADISE_HARE = add("corsican_hare", of(ParadiseHareEntity::new, CREATURE, changing(0.55F, 0.55F), 5),
             attributes(ParadiseHareEntity::createParadiseHareAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
-    public static final EntityType<RookEntity> ROOK = add("rook", of(RookEntity::new, MISC, fixed(0.75F, 1.8F), 5),
-            attributes(RookEntity::createRookAttributes), spawnRestrictions((type, world, spawnReason, pos, random) -> false));
     // public static final EntityType<AmbystEntity> AMBYST = add("ambyst", of(AmbystEntity::new, CREATURE, changing(0.6F, 0.42F), 5),
     //         attributes(AmbystEntity::createAmbystAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
-
-    // Projectile
-    public static final EntityType<PoisonDartEntity> POISON_DART = add("poison_dart", of(PoisonDartEntity::new, MISC, changing(0.5F, 0.5F), 5));
-    public static final EntityType<PoisonNeedleEntity> POISON_NEEDLE = add("poison_needle", of(PoisonNeedleEntity::new, MISC, changing(0.5F, 0.5F), 5));
-
 
     //Brain
     public static final Activity HIDEINLOG = ActivityInvoker.invokeRegister(ParadiseLost.locate("hideinlog").toString());

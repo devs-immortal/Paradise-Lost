@@ -2,8 +2,6 @@ package net.id.paradiselost.items.tools.bloodstone;
 
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
-import net.id.incubus_core.condition.api.ConditionAPI;
-import net.id.incubus_core.condition.base.ConditionManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.nbt.NbtCompound;
@@ -128,14 +126,6 @@ public class BloodstoneCapturedData {
         bloodstoneCapturedData.DF = "" + entity.getArmor();
         bloodstoneCapturedData.TF = "" + MathHelper.floor(entity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
 
-        //abstentine
-        ConditionManager condMan = ConditionAPI.getConditionManager(entity);
-        ConditionAPI.getValidConditions(entity.getType()).forEach(condition -> {
-            float severity = condMan.getScaledSeverity(condition);
-            if (severity > 0)
-                bloodstoneCapturedData.conditionDataList.add(new ConditionData(condition.getId().getPath(), severity));
-
-        });
         return bloodstoneCapturedData;
     }
 

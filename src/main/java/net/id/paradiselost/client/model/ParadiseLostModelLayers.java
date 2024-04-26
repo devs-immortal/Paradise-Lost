@@ -21,8 +21,6 @@ public class ParadiseLostModelLayers {
     public static final EntityModelLayer HELLENROSE = register("hellenrose", "main", ParadiseLostPlantModel.getTexturedModelData());
     public static final EntityModelLayer PARADISE_HARE = register("corsican_hare", "main", ParadiseHareModel.getTexturedModelData());
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
-    public static final EntityModelLayer ROOK = register("rook", "main", RookModel.getTexturedModelData());
-    public static final EntityModelLayer ROOK_GLOW = register("rook_glow", "glow", RookModel.getTexturedModelData());
     public static final EntityModelLayer AMBYST = register("ambyst", "main", AmbystModel.getTexturedModelData());
     public static final EntityModelLayer PHOENIX_ARMOR = register("phoenix_armor", "main", PhoenixArmorModel.getTexturedModelData());
 

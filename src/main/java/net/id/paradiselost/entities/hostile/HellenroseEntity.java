@@ -1,7 +1,6 @@
 package net.id.paradiselost.entities.hostile;
 
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
-import net.id.paradiselost.entities.projectile.PoisonNeedleEntity;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
@@ -20,6 +19,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
@@ -98,7 +98,7 @@ public class HellenroseEntity extends ParadiseLostAnimalEntity implements Ranged
 
     @Override
     public void attack(LivingEntity targetIn, float distFactor) {
-        PoisonNeedleEntity needle = new PoisonNeedleEntity(this, this.world);
+        ArrowEntity needle = new ArrowEntity(this.world, this);
         double x = targetIn.getX() - this.getX();
         double y = targetIn.getBoundingBox().minY + (double) (targetIn.getHeight() / 3.0F) - needle.getY();
         double z = targetIn.getZ() - this.getZ();

@@ -13,7 +13,6 @@ public class ParadiseLostCommands {
         register(MoaStatCommand::register);
         register(FloatingBlockCommand::register);
         register(LoreCommand::register);
-        register(LUVCommand::register);
     }
 
     private static void register(Consumer<CommandDispatcher<ServerCommandSource>> command) {

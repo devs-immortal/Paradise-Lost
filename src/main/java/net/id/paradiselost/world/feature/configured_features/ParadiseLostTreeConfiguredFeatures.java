@@ -58,7 +58,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> FALLEN_LAVENDER_LEAVES = register("fallen_lavender_leaves", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(LAVENDER_WISTERIA_LEAF_PILE.getDefaultState(), 10).add(LAVENDER_WISTERIA_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 2).build()), UniformIntProvider.create(4, 10), ConstantIntProvider.create(7), UniformIntProvider.create(3, 6), 1.2));
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> SHIELD_FALLEN_LEAVES = register("shield_fallen_leaves", Feature.RANDOM_PATCH, Configs.FALLEN_LEAVES_CONFIG);
     // Logs
-    public static final RegistryEntry<ConfiguredFeature<LongFeatureConfig, ?>> THICKET_FALLEN_LOG = register("thicket_fallen_log", ParadiseLostFeatures.FALLEN_PILLAR_FEATURE, new LongFeatureConfig(UniformIntProvider.create(3, 6), BlockStateProvider.of(AUREL_LOG), BlockStateProvider.of(LIVERWORT_CARPET), BlockStateProvider.of(LIVERWORT_CARPET), 0.5F, 0.35F, Configs.GENERIC_FLOOR_WHITELIST));
+    public static final RegistryEntry<ConfiguredFeature<LongFeatureConfig, ?>> THICKET_FALLEN_LOG = register("thicket_fallen_log", ParadiseLostFeatures.FALLEN_PILLAR_FEATURE, new LongFeatureConfig(UniformIntProvider.create(3, 6), BlockStateProvider.of(AUREL_WOODSTUFF.log()), BlockStateProvider.of(LIVERWORT_CARPET), BlockStateProvider.of(LIVERWORT_CARPET), 0.5F, 0.35F, Configs.GENERIC_FLOOR_WHITELIST));
 
     public static final RegistryEntry<ConfiguredFeature<LongFeatureConfig, ?>> MOTTLED_FALLEN_LOG = register("mottled_fallen_log", ParadiseLostFeatures.FALLEN_PILLAR_FEATURE, new LongFeatureConfig(UniformIntProvider.create(3, 5), BlockStateProvider.of(MOTTLED_AUREL_LOG), BlockStateProvider.of(GRASS), BlockStateProvider.of(ROOTCAP), 0.3F, 0.15F, Configs.GENERIC_FLOOR_WHITELIST));
     public static final RegistryEntry<ConfiguredFeature<LongFeatureConfig, ?>> MOTTLED_HOLLOW_FALLEN_LOG = register("mottled_hollow_fallen_log", ParadiseLostFeatures.FALLEN_PILLAR_FEATURE, new LongFeatureConfig(UniformIntProvider.create(3, 5), BlockStateProvider.of(MOTTLED_AUREL_FALLEN_LOG), BlockStateProvider.of(GRASS_FLOWERING), BlockStateProvider.of(ROOTCAP), 0.4F, 0.25F, Configs.GENERIC_FLOOR_WHITELIST));
@@ -116,7 +116,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
         private static final RandomPatchFeatureConfig FALLEN_LEAVES_CONFIG = blockPatch(96, 10, 7, new WeightedBlockStateProvider(
                 DataPool.<BlockState>builder()
                         .add(AUREL_LEAF_PILE.getDefaultState(), 8)
-                        .add(AUREL_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 1)
+                        .add(AUREL_WOODSTUFF.leaves().getDefaultState().with(LeavesBlock.PERSISTENT, true), 1)
         ));
 
         /*
@@ -124,42 +124,42 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
          */
         //Aurels
         private static final TreeFeatureConfig AUREL_CONFIG = generateTree(
-                AUREL_LOG.getDefaultState(), AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                AUREL_WOODSTUFF.log().getDefaultState(), AUREL_WOODSTUFF.leaves().getDefaultState(), DIRT.getDefaultState(),
                 new StraightTrunkPlacer(4, 2, 0),
                 new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
                 new TwoLayersFeatureSize(1, 0, 1),
                 true, false
         );
         private static final TreeFeatureConfig FANCY_AUREL_CONFIG = generateTree(
-                AUREL_LOG.getDefaultState(), AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                AUREL_WOODSTUFF.log().getDefaultState(), AUREL_WOODSTUFF.leaves().getDefaultState(), DIRT.getDefaultState(),
                 new LargeOakTrunkPlacer(4, 11, 0),
                 new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
                 new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)),
                 true, false
         );
         private static final TreeFeatureConfig THICKET_AUREL_CONFIG = generateTree(
-                AUREL_LOG.getDefaultState(), AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                AUREL_WOODSTUFF.log().getDefaultState(), AUREL_WOODSTUFF.leaves().getDefaultState(), DIRT.getDefaultState(),
                 new LargeOakTrunkPlacer(12, 4, 1),
                 new BlobFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(4), 3),
                 new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)),
                 true, false
         );
         private static final TreeFeatureConfig AUREL_SHRUB_CONFIG = generateTree(
-                AUREL_LOG.getDefaultState(), AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                AUREL_WOODSTUFF.log().getDefaultState(), AUREL_WOODSTUFF.leaves().getDefaultState(), DIRT.getDefaultState(),
                 new StraightTrunkPlacer(1, 1, 0),
                 new BlobFoliagePlacer(UniformIntProvider.create(1, 3), ConstantIntProvider.create(0), 1),
                 new TwoLayersFeatureSize(1, 0, 1),
                 true, false
         );
         private static final TreeFeatureConfig MOTTLED_AUREL_CONFIG = generateTree(
-                MOTTLED_AUREL_LOG.getDefaultState(), AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                MOTTLED_AUREL_LOG.getDefaultState(), AUREL_WOODSTUFF.leaves().getDefaultState(), DIRT.getDefaultState(),
                 new OvergrownTrunkPlacer(5, 10, 0, BlockStateProvider.of(ROOTCAP), 1 / 14F),
                 new BlobFoliagePlacer(UniformIntProvider.create(2, 3), ConstantIntProvider.create(0), 3),
                 new TwoLayersFeatureSize(1, 0, 1),
                 true, false
         );
         private static final TreeFeatureConfig DWARF_MOTTLED_AUREL_CONFIG = generateTree(
-                MOTTLED_AUREL_LOG.getDefaultState(), AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                MOTTLED_AUREL_LOG.getDefaultState(), AUREL_WOODSTUFF.leaves().getDefaultState(), DIRT.getDefaultState(),
                 new BendingTrunkPlacer(5, 3, 2, 4, UniformIntProvider.create(1, 3)),
                 new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 68),
                 new TwoLayersFeatureSize(1, 0, 1),
@@ -168,19 +168,19 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
 
         //Fruit trees
         private static final TreeFeatureConfig ORANGE_TREE_SAPLING_CONFIG = generateTree(
-                ORANGE_LOG.getDefaultState(), ORANGE_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                ORANGE_WOODSTUFF.log().getDefaultState(), ORANGE_WOODSTUFF.leaves().getDefaultState(), DIRT.getDefaultState(),
                 new BendingTrunkPlacer(3, 2, 1, 3, UniformIntProvider.create(1, 2)),
                 new RandomSpreadFoliagePlacer(UniformIntProvider.create(3, 4), ConstantIntProvider.create(0), ConstantIntProvider.create(3), 63),
                 new TwoLayersFeatureSize(1, 0, 1),
                 false, false
         );
 
-        private static final BlockState ORANGE_LEAVES_BASIC = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true);
-        private static final BlockState ORANGE_LEAVES_FLOWERING = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 1);
-        private static final BlockState ORANGE_LEAVES_FRUITING = ORANGE_LEAVES.getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 2);
+        private static final BlockState ORANGE_LEAVES_BASIC = ORANGE_WOODSTUFF.leaves().getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true);
+        private static final BlockState ORANGE_LEAVES_FLOWERING = ORANGE_WOODSTUFF.leaves().getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 1);
+        private static final BlockState ORANGE_LEAVES_FRUITING = ORANGE_WOODSTUFF.leaves().getDefaultState().with(FruitingLeavesBlock.CAPPED, true).with(FruitingLeavesBlock.NATURAL, true).with(FruitingLeavesBlock.GROWTH, 2);
 
         private static final TreeFeatureConfig ORANGE_TREE_WILD_CONFIG = generateTree(
-                BlockStateProvider.of(ORANGE_LOG),
+                BlockStateProvider.of(ORANGE_WOODSTUFF.log()),
                 new WeightedBlockStateProvider(
                         DataPool.<BlockState>builder()
                                 .add(ORANGE_LEAVES_BASIC, 2)
@@ -196,7 +196,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
 
         //Wisterias
         private static final TreeFeatureConfig ROSE_WISTERIA_CONFIG = generateTree(
-                WISTERIA_LOG.getDefaultState(), ROSE_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                WISTERIA_WOODSTUFF.log().getDefaultState(), ROSE_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(3, 4),
                         UniformIntProvider.create(3, 4), // branch count
@@ -209,7 +209,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                 true, false
         );
         private static final TreeFeatureConfig LAVENDER_WISTERIA_CONFIG = generateTree(
-                WISTERIA_LOG.getDefaultState(), LAVENDER_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                WISTERIA_WOODSTUFF.log().getDefaultState(), LAVENDER_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(3, 4),
                         UniformIntProvider.create(3, 4), // branch count
@@ -222,7 +222,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                 true, false
         );
         private static final TreeFeatureConfig FROST_WISTERIA_CONFIG = generateTree(
-                WISTERIA_LOG.getDefaultState(), FROST_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                WISTERIA_WOODSTUFF.log().getDefaultState(), FROST_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(3, 4),
                         UniformIntProvider.create(3, 4), // branch count
@@ -235,7 +235,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                 true, false
         );
         private static final TreeFeatureConfig FANCY_ROSE_WISTERIA_CONFIG = generateTree(
-                WISTERIA_LOG.getDefaultState(), ROSE_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                WISTERIA_WOODSTUFF.log().getDefaultState(), ROSE_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(3, 4),
                         UniformIntProvider.create(3, 4), // branch count
@@ -248,7 +248,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                 true, false
         );
         private static final TreeFeatureConfig FANCY_LAVENDER_WISTERIA_CONFIG = generateTree(
-                WISTERIA_LOG.getDefaultState(), LAVENDER_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                WISTERIA_WOODSTUFF.log().getDefaultState(), LAVENDER_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(3, 4),
                         UniformIntProvider.create(3, 4), // branch count
@@ -261,7 +261,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                 true, false
         );
         private static final TreeFeatureConfig FANCY_FROST_WISTERIA_CONFIG = generateTree(
-                WISTERIA_LOG.getDefaultState(), FROST_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                WISTERIA_WOODSTUFF.log().getDefaultState(), FROST_WISTERIA_LEAVES.getDefaultState(), DIRT.getDefaultState(),
                 new WisteriaTrunkPlacer(
                         UniformIntProvider.create(3, 4),
                         UniformIntProvider.create(3, 4), // branch count
@@ -276,7 +276,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
 
         //Special trees
         private static final TreeFeatureConfig MOTHER_AUREL_CONFIG = generateTree(
-                MOTHER_AUREL_LOG.getDefaultState(), MOTHER_AUREL_LEAVES.getDefaultState(), DIRT.getDefaultState(),
+                MOTHER_AUREL_WOODSTUFF.log().getDefaultState(), MOTHER_AUREL_WOODSTUFF.leaves().getDefaultState(), DIRT.getDefaultState(),
                 new LargeOakTrunkPlacer(8, 1, 1),
                 new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(2), 3),
                 new TwoLayersFeatureSize(3, 0, 3, OptionalInt.of(2)),
@@ -308,70 +308,70 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
                         entry(FANCY_LAVENDER_WISTERIA_TREE, LAVENDER_WISTERIA_SAPLING, 0.025F),
                         entry(FANCY_ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.075F),
                         entry(FROST_WISTERIA_TREE, FROST_WISTERIA_SAPLING, 0.0001F),
-                        entry(AUREL_TREE, AUREL_SAPLING, 0.2F),
-                        entry(WILD_ORANGE_TREE, ORANGE_SAPLING, 0.0125F)
+                        entry(AUREL_TREE, AUREL_WOODSTUFF.sapling(), 0.2F),
+                        entry(WILD_ORANGE_TREE, ORANGE_WOODSTUFF.sapling(), 0.0125F)
                 ),
                 placed(ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING)
         );
 
         private static final RandomFeatureConfig SPARSE_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(FANCY_AUREL_TREE, AUREL_SAPLING, 0.1F),
-                        entry(WILD_ORANGE_TREE, ORANGE_SAPLING, 0.02F)
+                        entry(FANCY_AUREL_TREE, AUREL_WOODSTUFF.sapling(), 0.1F),
+                        entry(WILD_ORANGE_TREE, ORANGE_WOODSTUFF.sapling(), 0.02F)
                 ),
-                placed(AUREL_TREE, AUREL_SAPLING)
+                placed(AUREL_TREE, AUREL_WOODSTUFF.sapling())
         );
 
         private static final RandomFeatureConfig SCATTERED_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(FANCY_AUREL_TREE, AUREL_SAPLING, 0.05F),
+                        entry(FANCY_AUREL_TREE, AUREL_WOODSTUFF.sapling(), 0.05F),
                         entry(FANCY_ROSE_WISTERIA_TREE, ROSE_WISTERIA_SAPLING, 0.0002F)
                 ),
-                placed(AUREL_TREE, AUREL_SAPLING)
+                placed(AUREL_TREE, AUREL_WOODSTUFF.sapling())
         );
 
         private static final RandomFeatureConfig THICKET_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(AUREL_SHRUB, AUREL_SAPLING, 0.1F)
+                        entry(AUREL_SHRUB, AUREL_WOODSTUFF.sapling(), 0.1F)
                 ),
-                placed(THICKET_AUREL_TREE, AUREL_SAPLING)
+                placed(THICKET_AUREL_TREE, AUREL_WOODSTUFF.sapling())
         );
 
         private static final RandomFeatureConfig RARE_MOTHER_AUREL_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(MOTHER_AUREL_TREE, MOTHER_AUREL_SAPLING, 1.0F)
+                        entry(MOTHER_AUREL_TREE, MOTHER_AUREL_WOODSTUFF.sapling(), 1.0F)
                 ),
-                placed(MOTHER_AUREL_TREE, MOTHER_AUREL_SAPLING)
+                placed(MOTHER_AUREL_TREE, MOTHER_AUREL_WOODSTUFF.sapling())
         );
 
         private static final RandomFeatureConfig DENSE_SHIELD_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(DWARF_MOTTLED_AUREL, AUREL_SAPLING, 0.1F),
-                        entry(AUREL_TREE, AUREL_SAPLING, 0.05F)
+                        entry(DWARF_MOTTLED_AUREL, AUREL_WOODSTUFF.sapling(), 0.1F),
+                        entry(AUREL_TREE, AUREL_WOODSTUFF.sapling(), 0.05F)
                 ),
-                placed(MOTTLED_AUREL, AUREL_SAPLING)
+                placed(MOTTLED_AUREL, AUREL_WOODSTUFF.sapling())
         );
 
         private static final RandomFeatureConfig SHIELD_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(DWARF_MOTTLED_AUREL, AUREL_SAPLING, 0.15F)
+                        entry(DWARF_MOTTLED_AUREL, AUREL_WOODSTUFF.sapling(), 0.15F)
                 ),
-                placed(MOTTLED_AUREL, AUREL_SAPLING)
+                placed(MOTTLED_AUREL, AUREL_WOODSTUFF.sapling())
         );
 
         private static final RandomFeatureConfig PLATEAU_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(WILD_ORANGE_TREE, ORANGE_SAPLING, 0.05F),
-                        entry(DWARF_MOTTLED_AUREL, AUREL_SAPLING, 0.225F)
+                        entry(WILD_ORANGE_TREE, ORANGE_WOODSTUFF.sapling(), 0.05F),
+                        entry(DWARF_MOTTLED_AUREL, AUREL_WOODSTUFF.sapling(), 0.225F)
                 ),
-                placed(AUREL_SHRUB, AUREL_SAPLING)
+                placed(AUREL_SHRUB, AUREL_WOODSTUFF.sapling())
         );
 
         private static final RandomFeatureConfig MIXED_TREES_CONFIG = new RandomFeatureConfig(
                 ImmutableList.of(
-                        entry(DWARF_MOTTLED_AUREL, AUREL_SAPLING, 0.4F)
+                        entry(DWARF_MOTTLED_AUREL, AUREL_WOODSTUFF.sapling(), 0.4F)
                 ),
-                placed(AUREL_TREE, AUREL_SAPLING)
+                placed(AUREL_TREE, AUREL_WOODSTUFF.sapling())
         );
     }
 

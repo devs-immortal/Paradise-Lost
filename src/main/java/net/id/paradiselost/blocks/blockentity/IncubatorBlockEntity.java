@@ -3,7 +3,6 @@ package net.id.paradiselost.blocks.blockentity;
 import net.id.paradiselost.component.MoaGenes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
-import net.id.incubus_core.be.InventoryBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class IncubatorBlockEntity extends BlockEntity implements InventoryBlockEntity {
+public class IncubatorBlockEntity extends BlockEntity {
 
     private UUID owner;
     private int hatchTicks = 100;
@@ -52,9 +51,12 @@ public class IncubatorBlockEntity extends BlockEntity implements InventoryBlockE
         hatchTicks = (int) (12000 / world.getBiome(pos).value().getTemperature());
     }
 
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return inventory;
+    public boolean hasItem() {
+        return !inventory.isEmpty();
+    }
+
+    public ItemStack getItem() {
+        return inventory.get(0);
     }
 
     @Override
@@ -69,8 +71,4 @@ public class IncubatorBlockEntity extends BlockEntity implements InventoryBlockE
         hatchTicks = nbt.getInt("hatchTicks");
     }
     
-    @Override
-    public @NotNull HopperStrategy getHopperStrategy() {
-        return HopperStrategy.ALL_PASS;
-    }
 }

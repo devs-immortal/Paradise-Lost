@@ -3,7 +3,6 @@ package net.id.paradiselost.client.rendering.ui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.incubus_core.condition.api.Severity;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.items.tools.bloodstone.*;
 import net.minecraft.client.MinecraftClient;
@@ -137,21 +136,6 @@ public class BloodstoneHUDRenderer {
         RenderSystem.setShaderTexture(0, ParadiseLost.locate("textures/hud/bloodstone/condition_bar.png"));
         DrawableHelper.drawTexture(matrixStack, -7, -7, 0, 0, 109, 12, 109, 12);
         matrixStack.pop();
-
-        Text title = Text.translatable("condition.condition." + conditionData.id()).append(" - ").append(getSeverityWithColor(conditionData.severity()));
-        renderText(matrixStack, client, title, offsetX + 17, offsetY - 9);
-    }
-
-    public static Text getSeverityWithColor(Float rawSeverity) {
-        Severity sev = Severity.getSeverity(rawSeverity);
-        MutableText text = Text.translatable(sev.getTranslationKey());
-        return switch (sev) {
-            case EXTREME -> text.formatted(Formatting.GRAY);
-            case DIRE -> text.formatted(Formatting.RED);
-            case ACUTE -> text.formatted(Formatting.YELLOW);
-            case MILD -> text.formatted(Formatting.GREEN);
-            case NEGLIGIBLE -> text.formatted(Formatting.AQUA);
-        };
     }
 
     private static void renderRing(MatrixStack matrixStack, int offsetX, int offsetY) {

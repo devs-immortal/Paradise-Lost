@@ -1,7 +1,6 @@
 package net.id.paradiselost.blocks.blockentity;
 
 import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
-import net.id.incubus_core.be.InventoryBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
@@ -15,7 +14,7 @@ import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FoodBowlBlockEntity extends BlockEntity implements InventoryBlockEntity {
+public class FoodBowlBlockEntity extends BlockEntity {
     private final DefaultedList<ItemStack> inventory;
 
     public FoodBowlBlockEntity(BlockPos pos, BlockState state) {
@@ -57,19 +56,7 @@ public class FoodBowlBlockEntity extends BlockEntity implements InventoryBlockEn
         world.setBlockState(pos, getCachedState().with(FoodBowlBlock.FULL, !inventory.get(0).isEmpty()));
     }
 
-    @Override
-    public @NotNull HopperStrategy getHopperStrategy() {
-        return HopperStrategy.IN_ANY_OUT_BOTTOM;
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    @Override
-    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return InventoryBlockEntity.super.canInsert(slot, stack, dir) && stack.isFood() && stack.getItem().getFoodComponent().isMeat();
-    }
-
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return inventory;
+    public ItemStack getContainedItem() {
+        return inventory.get(0);
     }
 }

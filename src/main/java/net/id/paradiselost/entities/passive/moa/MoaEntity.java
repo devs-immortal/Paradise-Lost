@@ -679,7 +679,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         protected boolean isTargetPos(WorldView world, BlockPos pos) {
             if (world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
-                ItemStack foodStack = foodBowl.getStack(0);
+                ItemStack foodStack = foodBowl.getContainedItem();
                 return foodStack.isFood() && foodStack.getItem().getFoodComponent().isMeat();
             }
             return false;
@@ -700,7 +700,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         protected void tryEat() {
             if (world.getBlockEntity(targetPos) instanceof FoodBowlBlockEntity foodBowl) {
-                ItemStack foodStack = foodBowl.getStack(0);
+                ItemStack foodStack = foodBowl.getContainedItem();
                 if (foodStack.isFood() && foodStack.getItem().getFoodComponent().isMeat()) {
                     feedMob(foodStack);
                 }

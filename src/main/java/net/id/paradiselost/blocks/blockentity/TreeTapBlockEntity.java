@@ -1,12 +1,13 @@
 package net.id.paradiselost.blocks.blockentity;
 
-import net.id.incubus_core.be.InventoryBlockEntity;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.recipe.TreeTapRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.HopperBlockEntity;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -14,20 +15,21 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEntity {
+public class TreeTapBlockEntity extends LootableContainerBlockEntity {
 
     private final DefaultedList<ItemStack> inventory;
 
@@ -47,24 +49,13 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
         markDirty();
 	}
 
-    @Override
-    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return this.getHopperStrategy().canInsert(dir) && this.inventory.get(0).isEmpty();
-    }
-
-    @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return this.getHopperStrategy().canExtract(dir);
-    }
-
-    @Override
-    public @NotNull HopperStrategy getHopperStrategy() {
-        return HopperStrategy.IN_ANY;
-    }
-
-    @Override
     public DefaultedList<ItemStack> getItems() {
         return inventory;
+    }
+
+    @Override
+    public int size() {
+        return 1;
     }
 
     @Override
@@ -74,6 +65,16 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
             stack.setCount(1);
         }
         inventoryChanged();
+    }
+
+    @Override
+    protected DefaultedList<ItemStack> getInvStackList() {
+        return null;
+    }
+
+    @Override
+    protected void setInvStackList(DefaultedList<ItemStack> list) {
+
     }
 
     private void inventoryChanged() {
@@ -94,7 +95,17 @@ public class TreeTapBlockEntity extends BlockEntity implements InventoryBlockEnt
 		Inventories.writeNbt(nbt, inventory);
 	}
 
-	public BlockState getTappedState() {
+    @Override
+    protected Text getContainerName() {
+        return null;
+    }
+
+    @Override
+    protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
+        return null;
+    }
+
+    public BlockState getTappedState() {
 		return this.world.getBlockState(this.pos.offset(getCachedState().get(Properties.HORIZONTAL_FACING).getOpposite()));
 	}
 

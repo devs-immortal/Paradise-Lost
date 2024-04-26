@@ -2,7 +2,6 @@ package net.id.paradiselost.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.incubus_core.woodtypefactory.api.chest.ChestFactory;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.decorative.*;
 import net.id.paradiselost.blocks.mechanical.CherineCampfireBlock;
@@ -32,17 +31,16 @@ import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.world.feature.tree.generator.*;
 import net.id.incubus_core.util.RegistryQueue.Action;
-import net.id.incubus_core.woodtypefactory.api.WoodSettingsFactory;
-import net.id.incubus_core.woodtypefactory.api.WoodTypeFactory;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.client.render.TexturedRenderLayers;
+import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
-
 import java.util.List;
 
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.copy;
@@ -50,6 +48,7 @@ import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSetting
 import static net.id.paradiselost.ParadiseLost.locate;
 import static net.id.paradiselost.blocks.ParadiseLostBlockActions.*;
 import static net.minecraft.block.Blocks.*;
+import static net.id.paradiselost.blocks.BlockRegistration.*;
 
 @SuppressWarnings("unused")
 public class ParadiseLostBlocks {
@@ -178,119 +177,53 @@ public class ParadiseLostBlocks {
 
     public static final CampfireBlock CHERINE_CAMPFIRE = add("cherine_campfire", new CherineCampfireBlock(false, 1, Settings.copy(CAMPFIRE)), cutoutRenderLayer);
 
+    protected static Settings leafPile() {
+        return of(Material.REPLACEABLE_PLANT).strength(0.2f).sounds(BlockSoundGroup.VINE).nonOpaque().suffocates(never).blockVision(never);
+    }
     // Aurel Wood
-    private static final WoodSettingsFactory aurelColors = new WoodSettingsFactory(MapColor.DARK_RED, MapColor.DARK_RED);
-    public static final WoodTypeFactory AUREL = new WoodTypeFactory(aurelColors, locate("aurel"), new AurelSaplingGenerator());
-    public static final ChestFactory AUREL_CHEST_FACTORY = new ChestFactory(ParadiseLost.MOD_ID, "skyroot", AUREL.settings.chest());
-
-
-    public static final SaplingBlock AUREL_SAPLING = AUREL.sapling();
-    public static final FlowerPotBlock POTTED_AUREL_SAPLING = AUREL.pottedSapling();
-    public static final PillarBlock AUREL_LOG = AUREL.log();
-    public static final PillarBlock AUREL_WOOD = AUREL.wood();
-    public static final PillarBlock STRIPPED_AUREL_LOG = AUREL.strippedLog();
-    public static final PillarBlock STRIPPED_AUREL_WOOD = AUREL.strippedWood();
-    public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(aurelColors.log()), flammableLog, stripsTo(STRIPPED_AUREL_LOG));
-    public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(aurelColors.log()), flammableLog, cutoutRenderLayer);
-    public static final LeavesBlock AUREL_LEAVES = AUREL.leaves();
-    public static final LeafPileBlock AUREL_LEAF_PILE = add("aurel_leaf_pile", new LeafPileBlock(aurelColors.leafPile()), flammableLeaves, cutoutMippedRenderLayer);
-    public static final Block AUREL_PLANKS = AUREL.planks();
-    public static final Block AUREL_BOOKSHELF = add("aurel_bookshelf", new Block(copy(BOOKSHELF).mapColor(aurelColors.plankColor())), flammable(30, 20));
-    public static final FenceBlock AUREL_FENCE = AUREL.fence();
-    public static final FenceGateBlock AUREL_FENCE_GATE = AUREL.fenceGate();
-    public static final SlabBlock AUREL_SLAB = AUREL.slab();
-    public static final StairsBlock AUREL_STAIRS = AUREL.stairs();
-    public static final TrapdoorBlock AUREL_TRAPDOOR = AUREL.trapdoor();
-    public static final DoorBlock AUREL_DOOR = AUREL.door();
-    public static final WoodenButtonBlock AUREL_BUTTON = AUREL.button();
-    public static final PressurePlateBlock AUREL_PRESSURE_PLATE = AUREL.pressurePlate();
-    public static final SignBlock AUREL_SIGN = AUREL.signFactory().signBlock;
-    public static final WallSignBlock AUREL_WALL_SIGN = AUREL.signFactory().wallSignBlock;
+    public static final WoodBlockSet AUREL_WOODSTUFF = registerWoodBlockSet("aurel", new AurelSaplingGenerator(), MapColor.DARK_RED, MapColor.DARK_RED, MapColor.PALE_GREEN);
+    public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(copy(OAK_LOG).mapColor(MapColor.DARK_RED)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedLog()));
+    public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(copy(OAK_LOG).mapColor(MapColor.DARK_RED)), flammableLog, cutoutRenderLayer);
+    public static final LeafPileBlock AUREL_LEAF_PILE = add("aurel_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.PALE_GREEN)), flammableLeaves, cutoutMippedRenderLayer);
+    public static final Block AUREL_BOOKSHELF = add("aurel_bookshelf", new Block(copy(BOOKSHELF).mapColor(MapColor.DARK_RED)), flammable(30, 20));
+    public static final SignSet AUREL_SIGNS = registerSignSet("aurel");
     // Mother Aurel Wood
-    private static final WoodSettingsFactory motherAurelColors = new WoodSettingsFactory(MapColor.OAK_TAN, MapColor.TERRACOTTA_RED, MapColor.GOLD, MapColor.TERRACOTTA_RED);
-    public static final WoodTypeFactory MOTHER_AUREL = new WoodTypeFactory(motherAurelColors, locate("mother_aurel"));
-    public static final ChestFactory MOTHER_AUREL_CHEST_FACTORY = new ChestFactory(ParadiseLost.MOD_ID, "golden_oak", MOTHER_AUREL.settings.chest());
-
-    public static final SaplingBlock MOTHER_AUREL_SAPLING = add("mother_aurel_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), motherAurelColors.sapling().luminance(state -> 7)), cutoutRenderLayer);
-    public static final FlowerPotBlock POTTED_MOTHER_AUREL_SAPLING = add("potted_mother_aurel_sapling", new FlowerPotBlock(MOTHER_AUREL_SAPLING, flowerPot().luminance(state -> 7)), cutoutRenderLayer);
-    public static final PillarBlock MOTHER_AUREL_LOG = MOTHER_AUREL.log();
-    public static final PillarBlock MOTHER_AUREL_WOOD = MOTHER_AUREL.wood();
-    public static final PillarBlock STRIPPED_MOTHER_AUREL_LOG = MOTHER_AUREL.strippedLog();
-    public static final PillarBlock STRIPPED_MOTHER_AUREL_WOOD = MOTHER_AUREL.strippedWood();
-    public static final ParadiseLostLeavesBlock MOTHER_AUREL_LEAVES = add("mother_aurel_leaves", new ParadiseLostLeavesBlock(motherAurelColors.leaves().luminance((value -> 11)), true), flammableLeaves, cutoutMippedRenderLayer);
-    public static final Block MOTHER_AUREL_PLANKS = MOTHER_AUREL.planks();
-    public static final FenceBlock MOTHER_AUREL_FENCE = MOTHER_AUREL.fence();
-    public static final FenceGateBlock MOTHER_AUREL_FENCE_GATE = MOTHER_AUREL.fenceGate();
-    public static final SlabBlock MOTHER_AUREL_SLAB = MOTHER_AUREL.slab();
-    public static final StairsBlock MOTHER_AUREL_STAIRS = MOTHER_AUREL.stairs();
-    public static final TrapdoorBlock MOTHER_AUREL_TRAPDOOR = MOTHER_AUREL.trapdoor();
-    public static final DoorBlock MOTHER_AUREL_DOOR = MOTHER_AUREL.door();
-    public static final WoodenButtonBlock MOTHER_AUREL_BUTTON = MOTHER_AUREL.button();
-    public static final PressurePlateBlock MOTHER_AUREL_PRESSURE_PLATE = MOTHER_AUREL.pressurePlate();
-    public static final SignBlock MOTHER_AUREL_SIGN = MOTHER_AUREL.signFactory().signBlock;
-    public static final WallSignBlock MOTHER_AUREL_WALL_SIGN = MOTHER_AUREL.signFactory().wallSignBlock;
+    public static final WoodBlockSet MOTHER_AUREL_WOODSTUFF = registerWoodBlockSetMotherAurel();
+    public static final SignSet MOTHER_AUREL_SIGNS = registerSignSet("mother_aurel");
     // Orange Wood
-    private static final WoodSettingsFactory orangeColors = new WoodSettingsFactory(MapColor.RAW_IRON_PINK, MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.GREEN);
-    public static final WoodTypeFactory ORANGE = new WoodTypeFactory(orangeColors, locate("orange"), new OrangeSaplingGenerator());
-
-    public static final SaplingBlock ORANGE_SAPLING = ORANGE.sapling();
-    public static final FlowerPotBlock POTTED_ORANGE_SAPLING = ORANGE.pottedSapling();
-    public static final PillarBlock ORANGE_LOG = ORANGE.log();
-    public static final PillarBlock ORANGE_WOOD = ORANGE.wood();
-    public static final PillarBlock STRIPPED_ORANGE_LOG = ORANGE.strippedLog();
-    public static final PillarBlock STRIPPED_ORANGE_WOOD = ORANGE.strippedWood();
-    public static final FruitingLeavesBlock ORANGE_LEAVES = add("orange_leaves", new FruitingLeavesBlock(orangeColors.leaves().sounds(BlockSoundGroup.AZALEA_LEAVES), () -> ParadiseLostItems.ORANGE), flammableLeaves, cutoutMippedRenderLayer);
-    public static final Block ORANGE_PLANKS = ORANGE.planks();
-    public static final FenceBlock ORANGE_FENCE = ORANGE.fence();
-    public static final FenceGateBlock ORANGE_FENCE_GATE = ORANGE.fenceGate();
-    public static final SlabBlock ORANGE_SLAB = ORANGE.slab();
-    public static final StairsBlock ORANGE_STAIRS = ORANGE.stairs();
-    public static final TrapdoorBlock ORANGE_TRAPDOOR = ORANGE.trapdoor();
-    public static final DoorBlock ORANGE_DOOR = ORANGE.door();
-    public static final WoodenButtonBlock ORANGE_BUTTON = ORANGE.button();
-    public static final PressurePlateBlock ORANGE_PRESSURE_PLATE = ORANGE.pressurePlate();
-    public static final SignBlock ORANGE_SIGN = ORANGE.signFactory().signBlock;
-    public static final WallSignBlock ORANGE_WALL_SIGN = ORANGE.signFactory().wallSignBlock;
+    public static final WoodBlockSet ORANGE_WOODSTUFF = registerWoodBlockSetOrange();
+    public static final SignSet ORANGE_SIGNS = registerSignSet("orange");
     // Wisteria Wood
-    private static final WoodSettingsFactory wisteriaColors = new WoodSettingsFactory(MapColor.PALE_YELLOW, MapColor.BROWN);
-    public static final WoodTypeFactory WISTERIA = new WoodTypeFactory(wisteriaColors, locate("wisteria"));
+    public static final WoodBlockSet WISTERIA_WOODSTUFF = registerWoodBlockSetWisteria();
+    public static final SignSet WISTERIA_SIGNS = registerSignSet("wisteria");
 
-    public static final PillarBlock WISTERIA_LOG = WISTERIA.log();
-    public static final PillarBlock WISTERIA_WOOD = WISTERIA.wood();
-    public static final PillarBlock STRIPPED_WISTERIA_LOG = WISTERIA.strippedLog();
-    public static final PillarBlock STRIPPED_WISTERIA_WOOD = WISTERIA.strippedWood();
-    public static final Block WISTERIA_PLANKS = WISTERIA.planks();
-    public static final FenceBlock WISTERIA_FENCE = WISTERIA.fence();
-    public static final FenceGateBlock WISTERIA_FENCE_GATE = WISTERIA.fenceGate();
-    public static final SlabBlock WISTERIA_SLAB = WISTERIA.slab();
-    public static final StairsBlock WISTERIA_STAIRS = WISTERIA.stairs();
-    public static final TrapdoorBlock WISTERIA_TRAPDOOR = WISTERIA.trapdoor();
-    public static final DoorBlock WISTERIA_DOOR = WISTERIA.door();
-    public static final WoodenButtonBlock WISTERIA_BUTTON = WISTERIA.button();
-    public static final PressurePlateBlock WISTERIA_PRESSURE_PLATE = WISTERIA.pressurePlate();
-    public static final SignBlock WISTERIA_SIGN = WISTERIA.signFactory().signBlock;
-    public static final WallSignBlock WISTERIA_WALL_SIGN = WISTERIA.signFactory().wallSignBlock;
+    protected static Settings wisteriaLeaf() {
+        return copy(OAK_LEAVES);
+    }
+    protected static Settings wisteriaHanger() {
+        return of(Material.DECORATION).strength(0.2f).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).suffocates(never).blockVision(never);
+    }
+    protected static Settings wisteriaSapling() {
+        return copy(Blocks.OAK_SAPLING);
+    }
 
-    private static final WoodSettingsFactory roseWisteriaColors = wisteriaColors.withLeafColor(MapColor.PINK);
-    public static final WisteriaLeavesBlock ROSE_WISTERIA_LEAVES = add("rose_wisteria_leaves", new WisteriaLeavesBlock(roseWisteriaColors.noCollideLeaves(), false), flammableLeaves, cutoutMippedRenderLayer);
-    public static final LeafPileBlock ROSE_WISTERIA_LEAF_PILE = add("rose_wisteria_leaf_pile", new LeafPileBlock(roseWisteriaColors.leafPile()), flammableLeaves, cutoutMippedRenderLayer);
-    public static final SaplingBlock ROSE_WISTERIA_SAPLING = add("rose_wisteria_sapling", new ParadiseLostSaplingBlock(new RoseWisteriaSaplingGenerator(), roseWisteriaColors.sapling()), cutoutRenderLayer);
+    public static final WisteriaLeavesBlock ROSE_WISTERIA_LEAVES = add("rose_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.PINK), false), flammableLeaves, cutoutMippedRenderLayer);
+    public static final LeafPileBlock ROSE_WISTERIA_LEAF_PILE = add("rose_wisteria_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.PINK)), flammableLeaves, cutoutMippedRenderLayer);
+    public static final SaplingBlock ROSE_WISTERIA_SAPLING = add("rose_wisteria_sapling", new ParadiseLostSaplingBlock(new RoseWisteriaSaplingGenerator(), wisteriaSapling().mapColor(MapColor.PINK)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_ROSE_WISTERIA_SAPLING = add("potted_rose_wisteria_sapling", new FlowerPotBlock(ROSE_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);
-    public static final ParadiseLostHangerBlock ROSE_WISTERIA_HANGER = add("rose_wisteria_hanger", new ParadiseLostHangerBlock(roseWisteriaColors.hanger()), flammableLeaves, cutoutRenderLayer);
+    public static final ParadiseLostHangerBlock ROSE_WISTERIA_HANGER = add("rose_wisteria_hanger", new ParadiseLostHangerBlock(wisteriaHanger().mapColor(MapColor.PINK)), flammableLeaves, cutoutRenderLayer);
 
-    private static final WoodSettingsFactory frostWisteriaColors = wisteriaColors.withLeafColor(MapColor.LIGHT_BLUE);
-    public static final WisteriaLeavesBlock FROST_WISTERIA_LEAVES = add("frost_wisteria_leaves", new WisteriaLeavesBlock(frostWisteriaColors.noCollideLeaves(), false), flammableLeaves, cutoutMippedRenderLayer);
-    public static final LeafPileBlock FROST_WISTERIA_LEAF_PILE = add("frost_wisteria_leaf_pile", new LeafPileBlock(frostWisteriaColors.leafPile()), flammableLeaves, cutoutMippedRenderLayer);
-    public static final SaplingBlock FROST_WISTERIA_SAPLING = add("frost_wisteria_sapling", new ParadiseLostSaplingBlock(new FrostWisteriaSaplingGenerator(), frostWisteriaColors.sapling()), cutoutRenderLayer);
+    public static final WisteriaLeavesBlock FROST_WISTERIA_LEAVES = add("frost_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.LIGHT_BLUE), false), flammableLeaves, cutoutMippedRenderLayer);
+    public static final LeafPileBlock FROST_WISTERIA_LEAF_PILE = add("frost_wisteria_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.LIGHT_BLUE)), flammableLeaves, cutoutMippedRenderLayer);
+    public static final SaplingBlock FROST_WISTERIA_SAPLING = add("frost_wisteria_sapling", new ParadiseLostSaplingBlock(new FrostWisteriaSaplingGenerator(), wisteriaSapling().mapColor(MapColor.LIGHT_BLUE)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_FROST_WISTERIA_SAPLING = add("potted_frost_wisteria_sapling", new FlowerPotBlock(FROST_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);
-    public static final ParadiseLostHangerBlock FROST_WISTERIA_HANGER = add("frost_wisteria_hanger", new ParadiseLostHangerBlock(frostWisteriaColors.hanger()), flammableLeaves, cutoutRenderLayer);
+    public static final ParadiseLostHangerBlock FROST_WISTERIA_HANGER = add("frost_wisteria_hanger", new ParadiseLostHangerBlock(wisteriaHanger().mapColor(MapColor.LIGHT_BLUE)), flammableLeaves, cutoutRenderLayer);
 
-    private static final WoodSettingsFactory lavenderWisteriaColors = wisteriaColors.withLeafColor(MapColor.MAGENTA);
-    public static final WisteriaLeavesBlock LAVENDER_WISTERIA_LEAVES = add("lavender_wisteria_leaves", new WisteriaLeavesBlock(lavenderWisteriaColors.noCollideLeaves(), false), flammableLeaves, cutoutMippedRenderLayer);
-    public static final LeafPileBlock LAVENDER_WISTERIA_LEAF_PILE = add("lavender_wisteria_leaf_pile", new LeafPileBlock(lavenderWisteriaColors.leafPile()), flammableLeaves, cutoutMippedRenderLayer);
-    public static final SaplingBlock LAVENDER_WISTERIA_SAPLING = add("lavender_wisteria_sapling", new ParadiseLostSaplingBlock(new LavenderWisteriaSaplingGenerator(), lavenderWisteriaColors.sapling()), cutoutRenderLayer);
+    public static final WisteriaLeavesBlock LAVENDER_WISTERIA_LEAVES = add("lavender_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.MAGENTA), false), flammableLeaves, cutoutMippedRenderLayer);
+    public static final LeafPileBlock LAVENDER_WISTERIA_LEAF_PILE = add("lavender_wisteria_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.MAGENTA)), flammableLeaves, cutoutMippedRenderLayer);
+    public static final SaplingBlock LAVENDER_WISTERIA_SAPLING = add("lavender_wisteria_sapling", new ParadiseLostSaplingBlock(new LavenderWisteriaSaplingGenerator(), wisteriaSapling().mapColor(MapColor.MAGENTA)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_LAVENDER_WISTERIA_SAPLING = add("potted_lavender_wisteria_sapling", new FlowerPotBlock(LAVENDER_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);
-    public static final ParadiseLostHangerBlock LAVENDER_WISTERIA_HANGER = add("lavender_wisteria_hanger", new ParadiseLostHangerBlock(lavenderWisteriaColors.hanger()), flammableLeaves, cutoutRenderLayer);
+    public static final ParadiseLostHangerBlock LAVENDER_WISTERIA_HANGER = add("lavender_wisteria_hanger", new ParadiseLostHangerBlock(wisteriaHanger().mapColor(MapColor.MAGENTA)), flammableLeaves, cutoutRenderLayer);
 
     // Grasses
     private static Settings shrub() {
@@ -390,70 +323,29 @@ public class ParadiseLostBlocks {
 //    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
 
     // Chests
-    public static final ChestFactory CRYSTAL_CHEST_FACTORY = new ChestFactory(ParadiseLost.MOD_ID, "crystal", AUREL.settings.chest());
-
-    public static final ChestBlock CRYSTAL_CHEST = add("crystal_chest", CRYSTAL_CHEST_FACTORY.chest);
-    public static final ChestBlock MOTHER_AUREL_CHEST = add("golden_oak_chest", MOTHER_AUREL_CHEST_FACTORY.chest);
-    public static final ChestBlock ORANGE_CHEST = ORANGE.chestFactory().chest;
-    public static final ChestBlock AUREL_CHEST = add("skyroot_chest", AUREL_CHEST_FACTORY.chest);
-    public static final ChestBlock WISTERIA_CHEST = WISTERIA.chestFactory().chest;
-
-    @SafeVarargs
-    private static <V extends Block> V add(String id, V block, Action<? super V>... additionalActions) {
-        return ParadiseLostRegistryQueues.BLOCK.add(locate(id), block, additionalActions);
-    }
-
-    /*
-       This is the same thing the add method above, but it doesn't wait to register or perform the actions.
-       This is required because some block settings code uses ID caches, so without it some blocks
-       behave like air.
-     */
-    @SafeVarargs
-    private static <T extends Block> T addImmediately(String name, T block, Action<? super T>... actions) {
-        var id = locate(name);
-        Registry.register(Registry.BLOCK, id, block);
-        for (var action : actions) {
-            action.accept(id, block);
-        }
-        return block;
-    }
+//    public static final ChestBlock CRYSTAL_CHEST = add("crystal_chest", CRYSTAL_CHEST_FACTORY.chest);
+//    public static final ChestBlock MOTHER_AUREL_CHEST = add("golden_oak_chest", MOTHER_AUREL_CHEST_FACTORY.chest);
+//    public static final ChestBlock ORANGE_CHEST = ORANGE.chestFactory().chest;
+//    public static final ChestBlock AUREL_CHEST = add("skyroot_chest", AUREL_CHEST_FACTORY.chest);
+//    public static final ChestBlock WISTERIA_CHEST = WISTERIA.chestFactory().chest;
 
     public static void init() {
         ParadiseLostRegistryQueues.BLOCK.register();
-
-        for (var woodType : List.of(AUREL, MOTHER_AUREL, ORANGE, WISTERIA)) {
-            woodType.registerCreatedBlocks();
-            woodType.registerFlammability();
-            woodType.registerStripping();
-        }
     }
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        for (var woodType : List.of(AUREL, MOTHER_AUREL, ORANGE, WISTERIA)) {
-            woodType.registerBlockEntityRenderers();
-            woodType.registerRenderLayers();
+        for (var signSet : List.of(AUREL_SIGNS, MOTHER_AUREL_SIGNS, ORANGE_SIGNS, WISTERIA_SIGNS)) {
+            TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(
+                    signSet.type(), new SpriteIdentifier(
+                            TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, new Identifier("entity/signs/" + signSet.type().getName())
+                    )
+            );
         }
-        AUREL_CHEST_FACTORY.registerChestRenderers();
-        MOTHER_AUREL_CHEST_FACTORY.registerChestRenderers();
-        CRYSTAL_CHEST_FACTORY.registerChestRenderers();
+//        AUREL_CHEST_FACTORY.registerChestRenderers();
+//        MOTHER_AUREL_CHEST_FACTORY.registerChestRenderers();
+//        CRYSTAL_CHEST_FACTORY.registerChestRenderers();
     }
 
-    private static class ParadiseLostFarmlandBlock extends FarmlandBlock {
-        ParadiseLostFarmlandBlock(Settings settings) {
-            super(settings);
-        }
-    }
 
-    private static class ParadiseLostPaneBlock extends PaneBlock {
-        ParadiseLostPaneBlock(Settings settings) {
-            super(settings);
-        }
-    }
-
-    private static class ParadiseLostStairsBlock extends StairsBlock {
-        ParadiseLostStairsBlock(BlockState baseBlockState, Settings settings) {
-            super(baseBlockState, settings);
-        }
-    }
 }
