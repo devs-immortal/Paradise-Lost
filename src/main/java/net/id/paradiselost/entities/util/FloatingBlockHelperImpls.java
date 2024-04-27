@@ -168,6 +168,8 @@ public class FloatingBlockHelperImpls {
             FloatingBlockEntity upper = new FloatingBlockEntity(world, pos.up(), upperState, true);
             FloatingBlockEntity lower = new FloatingBlockEntity(world, pos, state, true);
             upper.dropItem = false;
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            world.setBlockState(pos.up(), Blocks.AIR.getDefaultState());
             BlockLikeSet structure = new BlockLikeSet(lower, upper, Vec3i.ZERO.up());
             structure.spawn(world);
             return true;
