@@ -19,8 +19,8 @@ public abstract class BoatEntityMixin {
     private void checkCustomBoats(CallbackInfoReturnable<Item> cir) {
         BoatEntity.Type type = this.getBoatType();
         if (type != BoatEntity.Type.OAK) {
-            for (var entry : ParadiseLostItems.BOAT_SETS){
-                if (type == entry.type()){
+            for (var entry : ParadiseLostItems.BOAT_SETS) {
+                if (type == entry.type()) {
                     cir.setReturnValue(entry.boat());
                 }
             }

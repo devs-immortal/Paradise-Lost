@@ -60,13 +60,13 @@ public class BlockRegistration {
 
     public static WoodBlockSet registerWoodBlockSet(String id, SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor, MapColor leafColor) {
         return registerWoodBlockSet(
-                id+"_sapling", "potted_"+id+"_sapling",
-                id+"_log", id+"_wood", "stripped_"+id+"_log", "stripped_"+id+"_wood",
-                id+"_leaves",
-                id+"_planks", id+"_stairs",id+"_slab",
-                id+"_fence",id+"_fence_gate",
-                id+"_door",id+"_trapdoor",
-                id+"_button",id+"_pressure_plate",
+                id + "_sapling", "potted_" + id + "_sapling",
+                id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
+                id + "_leaves",
+                id + "_planks", id + "_stairs", id + "_slab",
+                id + "_fence", id + "_fence_gate",
+                id + "_door", id + "_trapdoor",
+                id + "_button", id + "_pressure_plate",
                 saplingGenerator, woodColor, barkColor, leafColor
         );
     }
@@ -76,16 +76,16 @@ public class BlockRegistration {
         var saplingSettings = AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(MapColor.GOLD).luminance(state -> 3);
         var flowerPotSettings = AbstractBlock.Settings.copy(Blocks.POTTED_OAK_SAPLING).luminance(state -> 3);
         var leavesSettings = AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.GOLD).luminance(state -> 5);
-        SaplingBlock sapling = add(id+"_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), saplingSettings));
+        SaplingBlock sapling = add(id + "_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), saplingSettings));
         return registerWoodBlockSet(
                 sapling,
-                add("potted_"+id+"_sapling", new FlowerPotBlock(sapling, flowerPotSettings)),
-                id+"_log", id+"_wood", "stripped_"+id+"_log", "stripped_"+id+"_wood",
-                add(id+"_leaves", new ParadiseLostLeavesBlock(leavesSettings, true), flammableLeaves, cutoutMippedRenderLayer),
-                id+"_planks", id+"_stairs",id+"_slab",
-                id+"_fence",id+"_fence_gate",
-                id+"_door",id+"_trapdoor",
-                id+"_button",id+"_pressure_plate",
+                add("potted_" + id + "_sapling", new FlowerPotBlock(sapling, flowerPotSettings)),
+                id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
+                add(id + "_leaves", new ParadiseLostLeavesBlock(leavesSettings, true), flammableLeaves, cutoutMippedRenderLayer),
+                id + "_planks", id + "_stairs", id + "_slab",
+                id + "_fence", id + "_fence_gate",
+                id + "_door", id + "_trapdoor",
+                id + "_button", id + "_pressure_plate",
                 MapColor.GOLD, MapColor.TERRACOTTA_RED
         );
     }
@@ -93,15 +93,15 @@ public class BlockRegistration {
     public static WoodBlockSet registerWoodBlockSetOrange() {
         String id = "orange";
         var leavesSettings = AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.PALE_GREEN).sounds(BlockSoundGroup.AZALEA_LEAVES);
-        FruitingLeavesBlock leaves = add(id+"_leaves", new FruitingLeavesBlock(leavesSettings, () -> ParadiseLostItems.ORANGE), flammableLeaves, cutoutMippedRenderLayer);
+        FruitingLeavesBlock leaves = add(id + "_leaves", new FruitingLeavesBlock(leavesSettings, () -> ParadiseLostItems.ORANGE), flammableLeaves, cutoutMippedRenderLayer);
         return registerWoodBlockSet(
-                id+"_sapling", "potted_"+id+"_sapling",
-                id+"_log", id+"_wood", "stripped_"+id+"_log", "stripped_"+id+"_wood",
+                id + "_sapling", "potted_" + id + "_sapling",
+                id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
                 leaves,
-                id+"_planks", id+"_stairs",id+"_slab",
-                id+"_fence",id+"_fence_gate",
-                id+"_door",id+"_trapdoor",
-                id+"_button",id+"_pressure_plate",
+                id + "_planks", id + "_stairs", id + "_slab",
+                id + "_fence", id + "_fence_gate",
+                id + "_door", id + "_trapdoor",
+                id + "_button", id + "_pressure_plate",
                 new OrangeSaplingGenerator(), MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.RAW_IRON_PINK
         );
     }
@@ -110,12 +110,12 @@ public class BlockRegistration {
         String id = "wisteria";
         return registerWoodBlockSet(
                 null, null,
-                id+"_log", id+"_wood", "stripped_"+id+"_log", "stripped_"+id+"_wood",
+                id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
                 null,
-                id+"_planks", id+"_stairs",id+"_slab",
-                id+"_fence",id+"_fence_gate",
-                id+"_door",id+"_trapdoor",
-                id+"_button",id+"_pressure_plate",
+                id + "_planks", id + "_stairs", id + "_slab",
+                id + "_fence", id + "_fence_gate",
+                id + "_door", id + "_trapdoor",
+                id + "_button", id + "_pressure_plate",
                 MapColor.PALE_YELLOW, MapColor.BROWN
         );
     }
@@ -229,7 +229,7 @@ public class BlockRegistration {
             FenceBlock fence, FenceGateBlock fenceGate,
             DoorBlock door, TrapdoorBlock trapdoor,
             WoodenButtonBlock button, PressurePlateBlock pressurePlate
-    ) implements Iterable<Block> {
+            ) implements Iterable<Block> {
         public @NotNull Iterator<Block> iterator() {
             return Arrays.stream(new Block[]{
                     sapling, flowerPot,
@@ -266,7 +266,7 @@ public class BlockRegistration {
             SignType type,
             SignBlock sign,
             WallSignBlock wallSign
-    ) implements Iterable<Block> {
+            ) implements Iterable<Block> {
         public @NotNull Iterator<Block> iterator() {
             return Arrays.stream(new Block[]{sign, wallSign}).iterator();
         }

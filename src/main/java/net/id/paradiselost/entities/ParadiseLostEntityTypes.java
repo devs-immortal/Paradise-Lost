@@ -34,7 +34,6 @@ import java.util.function.Supplier;
 
 import static net.id.paradiselost.ParadiseLost.locate;
 import static net.minecraft.entity.EntityDimensions.changing;
-import static net.minecraft.entity.EntityDimensions.fixed;
 import static net.minecraft.entity.SpawnGroup.*;
 
 @SuppressWarnings({"unused", "SameParameterValue"})

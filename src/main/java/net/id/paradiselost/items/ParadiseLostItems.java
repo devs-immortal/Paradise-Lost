@@ -22,10 +22,7 @@ import net.id.incubus_core.util.RegistryQueue.Action;
 import net.id.paradiselost.util.EnumExtender;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
-import net.minecraft.block.SignBlock;
-import net.minecraft.block.TallFlowerBlock;
 import net.minecraft.block.TallPlantBlock;
-import net.minecraft.block.WallSignBlock;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -34,7 +31,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.SignType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -500,7 +496,7 @@ public class ParadiseLostItems {
             BoatEntity.Type type,
             BoatItem boat,
             BoatItem chestBoat
-    ) implements Iterable<Item> {
+            ) implements Iterable<Item> {
         public @NotNull Iterator<Item> iterator() {
             return Arrays.stream(new Item[]{boat, chestBoat}).iterator();
         }

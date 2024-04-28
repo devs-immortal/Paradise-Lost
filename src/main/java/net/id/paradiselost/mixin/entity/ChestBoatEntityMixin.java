@@ -8,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -24,8 +23,8 @@ public class ChestBoatEntityMixin extends BoatEntity {
     private void checkCustomBoats(CallbackInfoReturnable<Item> cir) {
         BoatEntity.Type type = this.getBoatType();
         if (type != BoatEntity.Type.OAK) {
-            for (var entry : ParadiseLostItems.BOAT_SETS){
-                if (type == entry.type()){
+            for (var entry : ParadiseLostItems.BOAT_SETS) {
+                if (type == entry.type()) {
                     cir.setReturnValue(entry.chestBoat());
                 }
             }

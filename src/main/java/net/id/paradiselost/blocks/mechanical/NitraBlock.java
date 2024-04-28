@@ -59,7 +59,7 @@ public class NitraBlock extends Block {
     }
 
     private static void ignite(World world, BlockPos pos, float power, @Nullable LivingEntity igniter) {
-        Explosion explosion = new Explosion(world, igniter, null, null, pos.getX(), pos.getY()+0.5D, pos.getZ(), power, false, Explosion.DestructionType.BREAK);
+        Explosion explosion = new Explosion(world, igniter, null, null, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, false, Explosion.DestructionType.BREAK);
         if (!world.isClient) {
             explosion.collectBlocksAndDamageEntities();
             world.emitGameEvent(igniter, GameEvent.PRIME_FUSE, pos);
@@ -95,7 +95,7 @@ public class NitraBlock extends Block {
             BlockPos blockPos = hit.getBlockPos();
             Entity entity = projectile.getOwner();
             if (projectile.isOnFire() && projectile.canModifyAt(world, blockPos)) {
-                ignite(world, blockPos, 2F, entity instanceof LivingEntity ? (LivingEntity)entity : null);
+                ignite(world, blockPos, 2F, entity instanceof LivingEntity ? (LivingEntity) entity : null);
                 world.removeBlock(blockPos, false);
             }
         }

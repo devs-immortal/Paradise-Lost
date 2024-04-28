@@ -12,7 +12,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
@@ -21,7 +20,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -31,11 +29,6 @@ import net.minecraft.world.explosion.Explosion;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.List;
 
 @Mixin(Explosion.class)
 public abstract class ExplosionMixin extends Object implements ExplosionExtensions {
@@ -105,17 +98,17 @@ public abstract class ExplosionMixin extends Object implements ExplosionExtensio
             Util.shuffle(this.affectedBlocks, this.world.random);
             ObjectListIterator var5 = this.affectedBlocks.iterator();
 
-            while(var5.hasNext()) {
-                BlockPos blockPos = (BlockPos)var5.next();
+            while (var5.hasNext()) {
+                BlockPos blockPos = (BlockPos) var5.next();
                 BlockState blockState = this.world.getBlockState(blockPos);
                 Block block = blockState.getBlock();
                 if (!blockState.isAir()) {
                     BlockPos blockPos2 = blockPos.toImmutable();
                     this.world.getProfiler().push("explosion_blocks");
-                    if (block.shouldDropItemsOnExplosion((Explosion) (Object)this)) {
+                    if (block.shouldDropItemsOnExplosion((Explosion) (Object) this)) {
                         World var11 = this.world;
                         if (var11 instanceof ServerWorld) {
-                            ServerWorld serverWorld = (ServerWorld)var11;
+                            ServerWorld serverWorld = (ServerWorld) var11;
                             BlockEntity blockEntity = blockState.hasBlockEntity() ? this.world.getBlockEntity(blockPos) : null;
                             LootContext.Builder builder = (new LootContext.Builder(serverWorld)).random(this.world.random).parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(blockPos)).parameter(LootContextParameters.TOOL, ItemStack.EMPTY).optionalParameter(LootContextParameters.BLOCK_ENTITY, blockEntity).optionalParameter(LootContextParameters.THIS_ENTITY, this.entity);
                             if (this.destructionType == Explosion.DestructionType.DESTROY) {
@@ -130,24 +123,22 @@ public abstract class ExplosionMixin extends Object implements ExplosionExtensio
                     }
 
                     this.world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                    block.onDestroyedByExplosion(this.world, blockPos, (Explosion) (Object)this);
+                    block.onDestroyedByExplosion(this.world, blockPos, (Explosion) (Object) this);
                     this.world.getProfiler().pop();
                 }
             }
 
             var5 = objectArrayList.iterator();
 
-            while(var5.hasNext()) {
-                Pair<ItemStack, BlockPos> pair = (Pair)var5.next();
-                Block.dropStack(this.world, (BlockPos)pair.getSecond(), (ItemStack)pair.getFirst());
+            while (var5.hasNext()) {
+                Pair<ItemStack, BlockPos> pair = (Pair) var5.next();
+                Block.dropStack(this.world, pair.getSecond(), pair.getFirst());
             }
         }
 
         if (this.createFire) {
-            ObjectListIterator var13 = this.affectedBlocks.iterator();
 
-            while(var13.hasNext()) {
-                BlockPos blockPos3 = (BlockPos)var13.next();
+            for (BlockPos blockPos3 : this.affectedBlocks) {
                 if (this.random.nextInt(3) == 0 && this.world.getBlockState(blockPos3).isAir() && this.world.getBlockState(blockPos3.down()).isOpaqueFullCube(this.world, blockPos3.down())) {
                     this.world.setBlockState(blockPos3, AbstractFireBlock.getState(this.world, blockPos3));
                 }
@@ -159,12 +150,12 @@ public abstract class ExplosionMixin extends Object implements ExplosionExtensio
     private static void tryMergeStack(ObjectArrayList<Pair<ItemStack, BlockPos>> stacks, ItemStack stack, BlockPos pos) {
         int i = stacks.size();
 
-        for(int j = 0; j < i; ++j) {
-            Pair<ItemStack, BlockPos> pair = (Pair)stacks.get(j);
-            ItemStack itemStack = (ItemStack)pair.getFirst();
+        for (int j = 0; j < i; ++j) {
+            Pair<ItemStack, BlockPos> pair = stacks.get(j);
+            ItemStack itemStack = pair.getFirst();
             if (ItemEntity.canMerge(itemStack, stack)) {
                 ItemStack itemStack2 = ItemEntity.merge(itemStack, stack, 16);
-                stacks.set(j, Pair.of(itemStack2, (BlockPos)pair.getSecond()));
+                stacks.set(j, Pair.of(itemStack2, pair.getSecond()));
                 if (stack.isEmpty()) {
                     return;
                 }
