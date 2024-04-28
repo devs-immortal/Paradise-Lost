@@ -25,6 +25,7 @@
     "item.ItemMixin",
     "item.ItemStackMixin",
     "item.MapStateMixin",
+    "item.PotionItemMixin",
     "item.ShearsMixin",
     "item.SwordItemAccessor",
     "item.ToolMaterialsAccessor",

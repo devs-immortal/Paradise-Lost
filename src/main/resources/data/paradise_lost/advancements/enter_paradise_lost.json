@@ -2,7 +2,7 @@
   "parent": "minecraft:story/enter_the_nether",
   "display": {
     "icon": {
-      "item": "minecraft:glowstone"
+      "item": "paradise_lost:bloomed_calcite"
     },
     "title": {
       "translate": "advancements.paradise_lost.enter_paradise_lost.title"

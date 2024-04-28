@@ -37,7 +37,7 @@ public class VitrouliteSpireFeature extends Feature<DefaultFeatureConfig> {
             var height = random.nextInt(3) + 1;
 
             for (int i = 0; i <= height; i++) {
-                world.setBlockState(origin.up(i), ParadiseLostBlocks.VITROULITE.getDefaultState(), Block.NOTIFY_LISTENERS);
+                world.setBlockState(origin.up(i), Blocks.PACKED_ICE.getDefaultState(), Block.NOTIFY_LISTENERS);
             }
 
             for (Direction dir : Direction.values()) {
@@ -95,7 +95,7 @@ public class VitrouliteSpireFeature extends Feature<DefaultFeatureConfig> {
     }
 
     static {
-        secStates.add(ParadiseLostBlocks.VITROULITE.getDefaultState());
+        secStates.add(Blocks.PACKED_ICE.getDefaultState());
         secStates.add(ParadiseLostBlocks.COBBLED_FLOESTONE.getDefaultState());
         secStates.add(ParadiseLostBlocks.FLOESTONE.getDefaultState());
     }

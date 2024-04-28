@@ -3,25 +3,10 @@ package net.id.paradiselost.blocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.blocks.decorative.*;
-import net.id.paradiselost.blocks.mechanical.CherineCampfireBlock;
-import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
-import net.id.paradiselost.blocks.mechanical.FourBiteCakeBlock;
-import net.id.paradiselost.blocks.mechanical.IncubatorBlock;
-import net.id.paradiselost.blocks.mechanical.NitraBlock;
-import net.id.paradiselost.blocks.mechanical.TreeTapBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostGrassBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
-import net.id.paradiselost.blocks.natural.ParadiseLostSnowyBlock;
-import net.id.paradiselost.blocks.natural.PoofBlock;
-import net.id.paradiselost.blocks.natural.SurtrumOreBlock;
-import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.cloud.BlueParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.cloud.GoldenParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.cloud.PinkParadiseLostCloudBlock;
-import net.id.paradiselost.blocks.natural.crop.AmadrysCropBlock;
-import net.id.paradiselost.blocks.natural.crop.BlackcurrantBushBlock;
-import net.id.paradiselost.blocks.natural.crop.FlaxCropBlock;
-import net.id.paradiselost.blocks.natural.crop.SwedrootCropBlock;
+import net.id.paradiselost.blocks.mechanical.*;
+import net.id.paradiselost.blocks.natural.*;
+import net.id.paradiselost.blocks.natural.cloud.*;
+import net.id.paradiselost.blocks.natural.crop.*;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
@@ -82,12 +67,10 @@ public class ParadiseLostBlocks {
     // Fluids
     public static final FluidBlock DENSE_CLOUD = add("dense_cloud", new FluidBlock(ParadiseLostFluids.DENSE_CLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
     public static final FluidBlock SPRING_WATER = add("spring_water", new FluidBlock(ParadiseLostFluids.SPRING_WATER, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
-    // Organic Extra
-    public static final Block VITROULITE = add("vitroulite", new Block(of(Material.DENSE_ICE).requiresTool().hardness(0.5f).sounds(BlockSoundGroup.GLASS)));
 
     // Smooth Floestone
     private static Settings floestone() {
-        return of(Material.STONE, MapColor.WHITE_GRAY).requiresTool().strength(0.5f, 1f).sounds(BlockSoundGroup.STONE);
+        return of(Material.STONE, MapColor.WHITE_GRAY).requiresTool().strength(0.5f, 5f).sounds(BlockSoundGroup.STONE);
     }
 
     public static final Block FLOESTONE = add("floestone", new Block(floestone()));
@@ -136,6 +119,9 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostStairsBlock SMOOTH_HELIOLITH_STAIRS = add("smooth_heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone()));
     public static final WallBlock HELIOLITH_WALL = add("heliolith_wall", new WallBlock(floestone()));
 
+    // LEVITA BRICK
+    public static final SimpleBlockSet LEVITA_BRICK_SET = registerSimpleBlockSet("levita_brick", of(Material.AGGREGATE, MapColor.LIGHT_BLUE_GRAY).requiresTool().strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE));
+
     private static Settings amberTiles() {
         return of(Material.STONE, MapColor.GOLD).requiresTool().sounds(BlockSoundGroup.CALCITE).strength(2, 6);
     }
@@ -143,6 +129,8 @@ public class ParadiseLostBlocks {
     public static final Block GOLDEN_AMBER_TILE = add("golden_amber_tile", new Block(amberTiles()));
     public static final SlabBlock GOLDEN_AMBER_TILE_SLAB = add("golden_amber_tile_slab", new SlabBlock(amberTiles()));
     public static final ParadiseLostStairsBlock GOLDEN_AMBER_TILE_STAIRS = add("golden_amber_tile_stairs", new ParadiseLostStairsBlock(GOLDEN_AMBER_TILE.getDefaultState(), amberTiles()));
+
+    public static final Block BLOOMED_CALCITE = add("bloomed_calcite", new CropGrowthBlock(copy(CALCITE).ticksRandomly(), 2));
 
     protected static Settings flowerPot() {
         return copy(POTTED_OAK_SAPLING);

@@ -243,6 +243,23 @@ public class BlockRegistration {
         }
     }
 
+    public static SimpleBlockSet registerSimpleBlockSet(String blockId, AbstractBlock.Settings settings) {
+        Block block = add(blockId, new Block(settings));
+        ParadiseLostStairsBlock stairs = add(blockId + "_stairs", new ParadiseLostStairsBlock(block.getDefaultState(), settings));
+        SlabBlock slab = add(blockId + "_slab", new SlabBlock(settings));
+        return new SimpleBlockSet(block, stairs, slab);
+    }
+
+    public record SimpleBlockSet(
+            Block block, StairsBlock stairs, SlabBlock slab
+            ) implements Iterable<Block> {
+        public @NotNull Iterator<Block> iterator() {
+            return Arrays.stream(new Block[]{
+                    block, stairs, slab
+            }).iterator();
+        }
+    }
+
     // SIGN SET
 
     public static SignSet registerSignSet(String woodId) {

@@ -43,7 +43,7 @@
   "block.paradise_lost.dense_cloud": "Dense Cloud",
   "block.paradise_lost.spring_water": "Spring Water",
 
-  "block.paradise_lost.vitroulite": "Vitroulite",
+  "block.paradise_lost.bloomed_calcite": "Bloomed Calcite",
 
   "block.paradise_lost.floestone": "Floestone",
   "block.paradise_lost.floestone_slab": "Floestone Slab",
@@ -76,22 +76,9 @@
   "block.paradise_lost.smooth_heliolith_slab": "Smooth Heliolith Slab",
   "block.paradise_lost.smooth_heliolith_stairs": "Smooth Heliolith Stairs",
   
-  "block.paradise_lost.carved_stone": "Carved Stone",
-  "block.paradise_lost.carved_stone_slab": "Carved Stone Slab",
-  "block.paradise_lost.carved_stone_stairs": "Carved Stone Stairs",
-  "block.paradise_lost.carved_stone_wall": "Carved Stone Wall",
-
-  "block.paradise_lost.mossy_carved_stone": "Mossy Carved Stone",
-  "block.paradise_lost.mossy_carved_stone_slab": "Mossy Carved Stone Slab",
-  "block.paradise_lost.mossy_carved_stone_stairs": "Mossy Carved Stone Stairs",
-  "block.paradise_lost.mossy_carved_stone_wall": "Mossy Carved Stone Wall",
-
-  "block.paradise_lost.cracked_carved_stone": "Cracked Carved Stone",
-  "block.paradise_lost.glyphed_carved_stone": "Glyphed Carved Stone",
-  "block.paradise_lost.carved_stone_panel": "Carved Stone Panel",
-  "block.paradise_lost.carved_stone_panel_lit": "Lit Carved Stone Panel",
-  "block.paradise_lost.carved_stone_eye": "Carved Stone Eye",
-  "block.paradise_lost.carved_stone_eye_lit": "Lit Carved Stone Eye",
+  "block.paradise_lost.levita_brick": "Levita Brick",
+  "block.paradise_lost.levita_brick_slab": "Levita Brick Slab",
+  "block.paradise_lost.levita_brick_stairs": "Levita Brick Stairs",
   
   "block.paradise_lost.golden_amber_tile": "Golden Amber Tile",
   "block.paradise_lost.golden_amber_tile_slab": "Golden Amber Tile Slab",
@@ -201,18 +188,8 @@
   "block.paradise_lost.shamrock": "Shamrock",
   "block.paradise_lost.malt_sprig": "Malt Sprig",
   "block.paradise_lost.honey_nettle": "Honey Nettle",
-  "block.paradise_lost.halophia": "Halophia",
-  "block.paradise_lost.giant_lily": "Giant's Lily",
-  "block.paradise_lost.weeping_cloudburst": "Weeping Cloudburst",
-  "block.paradise_lost.moss_star": "Moss Star",
-  "block.paradise_lost.moss_ball": "Moss Ball",
   "block.paradise_lost.liverwort": "Liverwort",
   "block.paradise_lost.liverwort_carpet": "Liverwort Carpet",
-
-  "block.paradise_lost.lichen": "Lichen",
-  "block.paradise_lost.lichen_pile": "Lichen Pile",
-  "block.paradise_lost.lucatiel_lichen": "Lucatiel Lichen",
-  "block.paradise_lost.lucatiel_lichen_pile": "Lucatiel Lichen Pile",
 
   "block.paradise_lost.swedroot_spread": "Swedroot Spread",
 
@@ -256,12 +233,6 @@
   "block.paradise_lost.food_bowl": "Feeding Trough",
   "block.paradise_lost.tree_tap": "Tree Tap",
   "block.paradise_lost.nitra_bunch": "Nitra Bunch",
-
-  "block.paradise_lost.crystal_chest": "Crystal Chest",
-  "block.paradise_lost.golden_oak_chest": "Mother Aurel Chest",
-  "block.paradise_lost.orange_chest": "Orange Chest",
-  "block.paradise_lost.skyroot_chest": "Aurel Chest",
-  "block.paradise_lost.wisteria_chest": "Wisteria Chest",
   
 
   "book.edition": "%dst Edition",

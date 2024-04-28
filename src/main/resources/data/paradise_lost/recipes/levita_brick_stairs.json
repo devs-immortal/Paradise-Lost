@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:levita_brick"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:levita_brick_stairs",
+    "count": 4
+  }
+}

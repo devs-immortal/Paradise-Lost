@@ -12,7 +12,7 @@ public class ParadiseLostConfig implements ConfigData {
 
 	public static ParadiseLostConfig CONFIG;
 
-	protected String ParadiseLostPortalBaseBlock = "minecraft:glowstone";
+	protected String ParadiseLostPortalBaseBlock = "paradise_lost:bloomed_calcite";
 
 
 	public static void init() {

@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"type=bottom": {
+			"model": "paradise_lost:block/levita_brick_slab"
+		},
+		"type=double": {
+			"model": "paradise_lost:block/levita_brick"
+		},
+		"type=top": {
+			"model": "paradise_lost:block/levita_brick_slab_top"
+		}
+	}
+}
