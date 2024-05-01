@@ -10,8 +10,10 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
@@ -33,6 +35,21 @@ public class EnvoyEntity extends SkeletonEntity {
     }
 
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
+    }
+
+    public boolean isShaking() {
+        return this.getEnlightened() || super.isShaking();
+    }
+
+
+    public void tick() {
+        if (this.world.isClient && this.getEnlightened() && this.random.nextInt(3) == 0) {
+            this.world.addParticle(ParticleTypes.CLOUD,
+                    this.getParticleX(0.2), (this.getY() + this.random.nextDouble() * 0.6) + 0.85, this.getParticleZ(0.2),
+                    (this.random.nextDouble() - 0.5) * 0.05, -this.random.nextDouble() * 0.025, (this.random.nextDouble() - 0.5) * 0.05
+            );
+        }
+        super.tick();
     }
 
     public boolean tryAttack(Entity target) {

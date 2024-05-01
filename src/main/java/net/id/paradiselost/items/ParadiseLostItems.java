@@ -191,6 +191,7 @@ public class ParadiseLostItems {
     public static final AurelBucketItem AUREL_MILK_BUCKET = add("aurel_milk_bucket", new AurelBucketItem(aurelBucket));
 
     public static final SpawnEggItem HELLENROSE_SPAWN_EGG = add("hellenrose_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.HELLENROSE, 0x97DED4, 0x31897D, misc), spawnEggBehavior);
+    public static final SpawnEggItem ENVOY_SPAWN_EGG = add("envoy_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.ENVOY, 0xc5b1af, 0x993c3c, misc), spawnEggBehavior);
     public static final SpawnEggItem PARADISE_HARE_SPAWN_EGG = add("corsican_hare_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.PARADISE_HARE, 0xC5D6ED, 0x82A6D9, misc), spawnEggBehavior);
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc), spawnEggBehavior);
 
