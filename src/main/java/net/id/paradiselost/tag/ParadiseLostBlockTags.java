@@ -19,7 +19,6 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> LICHEN_SPREADABLES = register("plants/lichen_spreadable");
     public static final TagKey<Block> FUNGI_CLINGABLES = register("plants/fungi_clingable");
     public static final TagKey<Block> GENERIC_VALID_GROUND = register("plants/generic_valid_ground");
-    public static final TagKey<Block> HELLENROSE_VALID_GROUND = register("plants/hellenrose_valid_ground");
     public static final TagKey<Block> SWEDROOT_PLANTABLE = register("plants/swedroot_plantable");
 
     //Worldgen

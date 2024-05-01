@@ -24,7 +24,6 @@ public class ParadiseLostModelLayers {
 
     public static final Map<EntityModelLayer, TexturedModelData> ENTRIES = Maps.newHashMap();
 
-    public static final EntityModelLayer HELLENROSE = register("hellenrose", "main", ParadiseLostPlantModel.getTexturedModelData());
     public static final EntityModelLayer ENVOY = register("envoy", "main", EnvoyEntityModel.getTexturedModelData());
     public static final EntityModelLayer ENVOY_INNER_ARMOR = register("envoy", "inner_armor", INNER_ARMOR_MODEL_DATA);
     public static final EntityModelLayer ENVOY_OUTER_ARMOR = register("envoy", "outer_armor", OUTER_ARMOR_MODEL_DATA);
