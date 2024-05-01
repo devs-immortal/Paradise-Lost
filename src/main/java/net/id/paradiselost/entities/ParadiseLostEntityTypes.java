@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.block.SliderEntity;
+import net.id.paradiselost.entities.hostile.EnvoyEntity;
 import net.id.paradiselost.entities.hostile.HellenroseEntity;
 import net.id.paradiselost.entities.passive.ParadiseHareEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
@@ -24,6 +25,7 @@ import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -50,6 +52,8 @@ public class ParadiseLostEntityTypes {
     // Hostile
     public static final EntityType<HellenroseEntity> HELLENROSE = add("hellenrose", of(HellenroseEntity::new, MONSTER, changing(1f, 1f), 5),
             attributes(HellenroseEntity::createHellenroseAttributes), spawnRestrictions(HellenroseEntity::canSpawn));
+    public static final EntityType<EnvoyEntity> ENVOY = add("envoy", of(EnvoyEntity::new, MONSTER, changing(1f, 2f), 7),
+            attributes(EnvoyEntity::createEnvoyAttributes), spawnRestrictions(EnvoyEntity::canMobSpawn));
 
     // passive
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(1.0F, 2.0F), 5),

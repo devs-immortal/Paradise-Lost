@@ -8,7 +8,9 @@ import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.client.model.armor.PhoenixArmorModel;
 import net.id.paradiselost.client.model.block.DungeonSwitchModel;
 import net.id.paradiselost.client.model.entity.*;
+import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.TexturedModelData;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 
@@ -16,9 +18,16 @@ import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class ParadiseLostModelLayers {
+
+    public static final TexturedModelData INNER_ARMOR_MODEL_DATA = TexturedModelData.of(BipedEntityModel.getModelData(new Dilation(0.5F), 0.0F), 64, 32);
+    public static final TexturedModelData OUTER_ARMOR_MODEL_DATA = TexturedModelData.of(BipedEntityModel.getModelData(new Dilation(1.0F), 0.0F), 64, 32);
+
     public static final Map<EntityModelLayer, TexturedModelData> ENTRIES = Maps.newHashMap();
 
     public static final EntityModelLayer HELLENROSE = register("hellenrose", "main", ParadiseLostPlantModel.getTexturedModelData());
+    public static final EntityModelLayer ENVOY = register("envoy", "main", EnvoyEntityModel.getTexturedModelData());
+    public static final EntityModelLayer ENVOY_INNER_ARMOR = register("envoy", "inner_armor", INNER_ARMOR_MODEL_DATA);
+    public static final EntityModelLayer ENVOY_OUTER_ARMOR = register("envoy", "outer_armor", OUTER_ARMOR_MODEL_DATA);
     public static final EntityModelLayer PARADISE_HARE = register("corsican_hare", "main", ParadiseHareModel.getTexturedModelData());
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer AMBYST = register("ambyst", "main", AmbystModel.getTexturedModelData());
