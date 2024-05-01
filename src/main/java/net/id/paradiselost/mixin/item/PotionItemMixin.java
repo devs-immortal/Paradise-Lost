@@ -1,18 +1,9 @@
 package net.id.paradiselost.mixin.item;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
-import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CauldronBlock;
-import net.minecraft.block.CryingObsidianBlock;
-import net.minecraft.block.RedstoneOreBlock;
-import net.minecraft.client.particle.FireworksSparkParticle;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireworkRocketEntity;
-import net.minecraft.entity.projectile.thrown.PotionEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.ItemUsageContext;
@@ -23,12 +14,10 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -53,7 +42,7 @@ public class PotionItemMixin {
                 double xOffset = random.nextDouble();
                 double yOffset = random.nextDouble();
                 double zOffset = random.nextDouble();
-                world.addParticle(ParticleTypes.ENTITY_EFFECT, blockPos.getX()+xOffset, blockPos.getY()+yOffset, blockPos.getZ()+zOffset, 0.97, 0.15, 0.14);
+                world.addParticle(ParticleTypes.ENTITY_EFFECT, blockPos.getX() + xOffset, blockPos.getY() + yOffset, blockPos.getZ() + zOffset, 0.97, 0.15, 0.14);
             }
             if (!world.isClient) {
                 // sound
