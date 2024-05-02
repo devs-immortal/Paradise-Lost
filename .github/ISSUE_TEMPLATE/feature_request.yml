@@ -9,18 +9,10 @@ body:
         Thanks for helping us improve our mod!
         Make sure to leave a helpful title.
         If your request is for an accessibility feature, instead issue an [accessibility report](https://github.com/devs-immortal/Paradise-Lost/issues/new?assignees=&labels=Feature&template=accessibility_report.yml&title=Accessibility%3A+).
-  - type: textarea
-    id: problem
-    attributes:
-      label: Problem (Optional)
-      description: If your feature is related to a problem, let us know.
-      placeholder: ex. I'm always frustrated when...
-    validations:
-      required: false
   - type: markdown
     attributes:
       value: |
-        If your feature is not related to a problem, it might be better suited for our [discord server](https://discord.com/invite/wmMa47n), though we won't stop you from asking it here.
+        If you haven't already, bring your idea to our [discord server](https://discord.com/invite/wmMa47n)!
   - type: textarea
     id: feature
     attributes:
@@ -29,30 +21,6 @@ body:
       placeholder: ex. There should be a...
     validations:
       required: true
-  - type: textarea
-    id: other-solutions
-    attributes:
-      label: Other Solutions
-      description: Did you come up with any other solutions?
-      placeholder: ex. You could also...
-    validations:
-      required: false
-  - type: input
-    id: version
-    attributes:
-      label: Mod Version
-      description: What version of our mod are you running?
-      placeholder: Beta x.x.x
-    validations:
-      required: true
-  - type: textarea
-    id: other
-    attributes:
-      label: Additional Information
-      description: Is there anything else we should know?
-      placeholder: ex. I'm using several other mods...
-    validations:
-      required: false
   - type: markdown
     attributes:
       value: |
