@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
@@ -27,9 +28,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
-public class TreeTapBlockEntity extends LootableContainerBlockEntity {
+public class TreeTapBlockEntity extends LootableContainerBlockEntity implements SidedInventory {
 
     private final DefaultedList<ItemStack> inventory;
 
@@ -48,6 +50,20 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity {
         }
         markDirty();
 	}
+
+    public int[] getAvailableSlots(Direction side) {
+        return new int[1];
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        return dir != Direction.DOWN && this.inventory.get(0).isEmpty();
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return false;
+    }
 
     public DefaultedList<ItemStack> getItems() {
         return inventory;
@@ -69,12 +85,12 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity {
 
     @Override
     protected DefaultedList<ItemStack> getInvStackList() {
-        return null;
+        return inventory;
     }
 
     @Override
     protected void setInvStackList(DefaultedList<ItemStack> list) {
-
+        inventory.set(0, list.get(0));
     }
 
     private void inventoryChanged() {
@@ -122,14 +138,26 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity {
 
             if (!world.isClient) world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
 
-            inventoryChanged();
-            BlockEntity possibleHopper = world.getBlockEntity(pos.down());
-            if (possibleHopper instanceof Inventory) {
-                output = HopperBlockEntity.transfer(this, (Inventory) possibleHopper, output, Direction.UP);
-            }
             this.inventory.set(0, output);
+            inventoryChanged();
 		}
+        tryTansferItemsOut();
 	}
+
+    public void tryTansferItemsOut() {
+        ItemStack stack = getStack(0);
+        if (stack.isEmpty()) {
+            return;
+        }
+
+        ItemStack contents = this.inventory.get(0);
+        BlockEntity possibleHopper = world.getBlockEntity(pos.down());
+        if (possibleHopper instanceof Inventory) {
+            contents = HopperBlockEntity.transfer(this, (Inventory) possibleHopper, contents, Direction.UP);
+        }
+        this.inventory.set(0, contents);
+        inventoryChanged();
+    }
 
 	@Override
 	public NbtCompound toInitialChunkDataNbt() {
