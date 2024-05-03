@@ -372,6 +372,10 @@ public class ParadiseLostItems {
     public static final WallStandingBlockItem CHERINE_TORCH = add("cherine_torch", new WallStandingBlockItem(ParadiseLostBlocks.CHERINE_TORCH, ParadiseLostBlocks.CHERINE_TORCH_WALL, decoration));
     // util blocks (enchanter, freezer, etc.)
 
+    // redstone
+    public static final BlockItem FLOESTONE_BUTTON = add("floestone_button", ParadiseLostBlocks.FLOESTONE_BUTTON, decoration);
+    public static final BlockItem FLOESTONE_PRESSURE_PLATE = add("floestone_pressure_plate", ParadiseLostBlocks.FLOESTONE_PRESSURE_PLATE, decoration);
+
     public static final BlockItem CHERINE_CAMPFIRE = add("cherine_campfire", ParadiseLostBlocks.CHERINE_CAMPFIRE, decoration);
 
     // door-like things

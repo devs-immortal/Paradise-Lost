@@ -261,6 +261,8 @@ public class ParadiseLostBlocks {
     public static final Block OLVITE_BLOCK = add("olvite_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     public static final Block REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new Block(of(Material.METAL).requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
+    public static final StoneButtonBlock FLOESTONE_BUTTON = add("floestone_button", new StoneButtonBlock(copy(Blocks.STONE_BUTTON)));
+    public static final PressurePlateBlock FLOESTONE_PRESSURE_PLATE = add("floestone_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, copy(STONE_PRESSURE_PLATE)));
     public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, of(Material.WOOD).strength(3f, 3f).sounds(BlockSoundGroup.WOOD)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
     public static final CherineLanternBlock CHERINE_LANTERN = add("cherine_lantern", new CherineLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);
