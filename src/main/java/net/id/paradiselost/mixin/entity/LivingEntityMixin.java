@@ -69,10 +69,6 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
             if (isWearingParachute) {
                 gravity -= 0.07;
                 this.fallDistance = 0;
-            } else if (entity.hasPassengers() && entity.getPassengerList().stream().anyMatch(passenger ->
-                    passenger.getType().equals(ParadiseLostEntityTypes.PARADISE_HARE))) {
-                gravity -= 0.05;
-                this.fallDistance = 0; // alternatively, remove & replace with fall damage dampener
             }
         }
 

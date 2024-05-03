@@ -5,7 +5,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.id.incubus_core.blocklikeentities.api.client.BlockLikeEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.hostile.EnvoyEntityRenderer;
-import net.id.paradiselost.client.rendering.entity.passive.ParadiseHareRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.MoaEntityRenderer;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -24,7 +23,6 @@ public class ParadiseLostEntityRenderers {
 
         // passive
         register(ParadiseLostEntityTypes.MOA, MoaEntityRenderer::new);
-        register(ParadiseLostEntityTypes.PARADISE_HARE, ParadiseHareRenderer::new);
 //        register(ParadiseLostEntityTypes.AMBYST, AmbystRenderer::new);
 
     }

@@ -265,7 +265,6 @@ public final class ParadiseLostBiomes {
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
@@ -312,7 +311,6 @@ public final class ParadiseLostBiomes {
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
@@ -357,7 +355,6 @@ public final class ParadiseLostBiomes {
                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                             ),
                             SpawnGroup.CREATURE, List.of(
-                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                             )
                         )
@@ -407,7 +404,6 @@ public final class ParadiseLostBiomes {
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
@@ -455,7 +451,6 @@ public final class ParadiseLostBiomes {
                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                             ),
                             SpawnGroup.CREATURE, List.of(
-                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                                 new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                             )
                         )
@@ -500,7 +495,6 @@ public final class ParadiseLostBiomes {
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
@@ -551,9 +545,7 @@ public final class ParadiseLostBiomes {
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
@@ -601,9 +593,7 @@ public final class ParadiseLostBiomes {
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
@@ -660,9 +650,7 @@ public final class ParadiseLostBiomes {
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),

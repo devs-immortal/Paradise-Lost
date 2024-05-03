@@ -244,7 +244,6 @@
   "entity.paradise_lost.floating_block": "Floating Block",
   "entity.paradise_lost.hellenrose": "Hellenrose",
   "entity.paradise_lost.moa": "Moa",
-  "entity.paradise_lost.corsican_hare": "Corsican Hare",
   "entity.paradise_lost.rook": "Rook",
   "entity.paradise_lost.poison_dart": "Poison Dart",
   "entity.paradise_lost.poison_needle": "Poison Needle",
@@ -339,7 +338,6 @@
 
   "item.paradise_lost.hellenrose_spawn_egg": "Hellenrose Spawn Egg",
   "item.paradise_lost.envoy_spawn_egg": "Envoy Spawn Egg",
-  "item.paradise_lost.corsican_hare_spawn_egg": "Corsican Hare Spawn Egg",
   "item.paradise_lost.moa_spawn_egg": "Moa Spawn Egg",
 
   "item.paradise_lost.aurel_boat": "Aurel Boat",
@@ -359,8 +357,6 @@
 
   "death.attack.fall": "%1$s plummeted from the heavens",
   "death.attack.fall.player": "%1$s was thrown off the heavens above by %2$s",
-  "death.attack.corsican_hare_fall": "%1$s got dumped",
-  "death.attack.corsican_hare_fall.player": "%1$s got dumped whilst trying to escape %2$s",
   "death.attack.nightmare": "%1$s was consumed by shifting shadows",
   "death.attack.nightmare.player": "%1$s was fed to the shadows by %2$s",
 
@@ -464,15 +460,11 @@
   "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
   "subtitles.paradise_lost.entity.moa.step": "Moa walks",
 
-  "subtitles.paradise_lost.entity.corsican_hare.sniff": "Corsican Hare sniffs",
-  "subtitles.paradise_lost.entity.corsican_hare.jump": "Corsican Hare hops",
-  "subtitles.paradise_lost.entity.corsican_hare.hurt": "Corsican Hare hurts",
-  "subtitles.paradise_lost.entity.corsican_hare.death": "Corsican Hare dies",
-  "subtitles.paradise_lost.entity.corsican_hare.eat": "Corsican Hare eats",
-
   "subtitles.paradise_lost.entity.nightmare.hurt": "Nightmare hurts",
   "subtitles.paradise_lost.entity.nightmare.ambient": "Magpie coos",
   "subtitles.paradise_lost.entity.nightmare.death": "Nightmare dissipates",
+  
+  "subtitles.paradise_lost.entity.envoy.damage": "Envoy Chimes",
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",

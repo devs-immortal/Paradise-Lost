@@ -1,23 +1,29 @@
 package net.id.paradiselost.entities.hostile;
 
+import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.GuardianEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 
 public class EnvoyEntity extends SkeletonEntity {
+
     private static final TrackedData<Boolean> ENLIGHTENED;
 
     public EnvoyEntity(EntityType<? extends EnvoyEntity> entityType, World world) {
@@ -49,6 +55,18 @@ public class EnvoyEntity extends SkeletonEntity {
             );
         }
         super.tick();
+    }
+
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_DAMAGE : super.getHurtSound(source);
+    }
+
+    public boolean damage(DamageSource source, float amount) {
+        float dmg = amount;
+        if (this.getEnlightened()) {
+            dmg /= 2;
+        }
+        return super.damage(source, dmg);
     }
 
     public boolean tryAttack(Entity target) {

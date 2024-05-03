@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "paradise_lost:vault",
+      "weight": 1
+    } 
+  ],
+  "placement": {
+    "salt": 60000,
+    "spacing": 40,
+    "separation": 25,
+    "type": "minecraft:random_spread"
+  }
+}
