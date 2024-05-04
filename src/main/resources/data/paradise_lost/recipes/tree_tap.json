@@ -1,16 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SSS",
-    "  S",
-    "PPP"
+    "PPP",
+    "  P"
   ],
   "key": {
     "P": {
-      "item": "paradise_lost:aurel_planks"
-    },
-    "S": {
-      "item": "minecraft:stick"
+      "tag": "minecraft:planks"
     }
   },
   "result": {
