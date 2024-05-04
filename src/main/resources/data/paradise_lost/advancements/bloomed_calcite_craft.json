@@ -1,0 +1,53 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.paradise_lost.bloomed_calcite_craft.title"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.bloomed_calcite_craft.description"
+    },
+    "icon": {
+      "item": "paradise_lost:bloomed_calcite"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "douse": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "item": {
+          "item": "minecraft:potion"
+        },
+        "location": {
+          "block": {
+            "blocks": [
+              "minecraft:calcite"
+            ]
+          }
+        }
+      }
+    },
+    "hold_bc": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:bloomed_calcite"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "douse",
+      "hold_bc"
+    ]
+  ],
+  "parent": "minecraft:nether/brew_potion"
+}

@@ -1,0 +1,37 @@
+{
+  "parent": "paradise_lost:nitra_find",
+  "criteria": {
+    "find": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:nitra_bunch"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.paradise_lost.nitra_bunch.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "paradise_lost:nitra_bunch"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.paradise_lost.nitra_bunch.title"
+    }
+  },
+  "requirements": [
+    [
+      "find"
+    ]
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "parent": "paradise_lost:nitra_bunch",
+  "criteria": {
+    "raw": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:raw_surtrum"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:surtrum"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.paradise_lost.surtrum_blast.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "paradise_lost:surtrum"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.paradise_lost.surtrum_blast.title"
+    }
+  },
+  "requirements": [
+    [
+      "raw",
+      "block"
+    ]
+  ]
+}

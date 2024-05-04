@@ -1,6 +1,7 @@
 package net.id.paradiselost.mixin.item;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,6 +13,7 @@ import net.minecraft.item.PotionItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -35,6 +37,9 @@ public class PotionItemMixin {
         BlockState blockState = world.getBlockState(blockPos);
         Random random = world.random;
         if (blockState.isOf(Blocks.CALCITE) && (PotionUtil.getPotion(itemStack) == Potions.HEALING || PotionUtil.getPotion(itemStack) == Potions.STRONG_HEALING)) {
+            if (playerEntity instanceof ServerPlayerEntity) {
+                Criteria.ITEM_USED_ON_BLOCK.trigger((ServerPlayerEntity)playerEntity, blockPos, itemStack);
+            }
             playerEntity.setStackInHand(context.getHand(), ItemUsage.exchangeStack(itemStack, playerEntity, new ItemStack(Items.GLASS_BOTTLE)));
             world.setBlockState(blockPos, ParadiseLostBlocks.BLOOMED_CALCITE.getDefaultState());
             // particles
