@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "paradise_lost:mossy_carved_stone"
-  },
-  "result": "paradise_lost:mossy_carved_stone_wall",
-  "count": 1
-}

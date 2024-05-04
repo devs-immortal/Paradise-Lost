@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "AGA",
+    "ATA",
     "AGA",
     "AAA"
   ],
@@ -10,7 +10,10 @@
       "item": "paradise_lost:golden_amber"
     },
     "G": {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:gold_block"
+    },
+    "T": {
+      "item": "paradise_lost:glazed_gold_upgrade_smithing_template"
     }
   },
   "result": {

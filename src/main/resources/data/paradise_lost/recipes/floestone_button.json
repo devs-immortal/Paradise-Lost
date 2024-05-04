@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paradise_lost:floestone"
+    }
+  ],
+  "result": {
+    "item": "paradise_lost:floestone_button"
+  }
+}

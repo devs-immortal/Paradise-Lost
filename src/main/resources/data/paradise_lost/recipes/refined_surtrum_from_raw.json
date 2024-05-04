@@ -1,15 +1,9 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "minecraft:lava_bucket"
-    },
-    {
-      "item": "paradise_lost:raw_surtrum"
-    }
-  ],
-  "result": {
-    "item": "paradise_lost:refined_surtrum",
-    "count": 1
-  }
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "paradise_lost:surtrum"
+  },
+  "result": "paradise_lost:refined_surtrum",
+  "experience": 0.8,
+  "cookingtime": 200
 }

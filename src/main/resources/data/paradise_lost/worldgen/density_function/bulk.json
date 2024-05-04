@@ -5,7 +5,7 @@
     "argument1": {
       "type": "minecraft:y_clamped_gradient",
       "from_y": 320,
-      "to_y": 90,
+      "to_y": 70,
       "from_value": -100,
       "to_value": -1
     },
@@ -13,8 +13,8 @@
       "type": "minecraft:add",
       "argument1": {
         "type": "minecraft:y_clamped_gradient",
-        "from_y": 90,
-        "to_y": 40,
+        "from_y": 70,
+        "to_y": -200,
         "from_value": 0,
         "to_value": -3
       },
@@ -26,7 +26,7 @@
           "argument": {
             "type": "minecraft:noise",
             "noise": "paradise_lost:generator/erosion",
-            "xz_scale": 2,
+            "xz_scale": 0.5,
             "y_scale": 1
           }
         }

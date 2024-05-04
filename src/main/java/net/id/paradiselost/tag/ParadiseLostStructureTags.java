@@ -7,9 +7,11 @@ import net.minecraft.world.biome.Biome;
 
 public class ParadiseLostStructureTags {
 
-    public static final TagKey<Biome> ORANGE_RUIN_HAS_STRUCTURE = register("has_structure/orange_ruin");
     public static final TagKey<Biome> AUREL_TOWER_HAS_STRUCTURE = register("has_structure/aurel_tower");
     public static final TagKey<Biome> WELL_HAS_STRUCTURE = register("has_structure/well");
+
+    // dungeon
+    public static final TagKey<Biome> VAULT_HAS_STRUCTURE = register("has_structure/vault");
 
     private static TagKey<Biome> register(String id) {
         return TagKey.of(Registry.BIOME_KEY, ParadiseLost.locate(id));

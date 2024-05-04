@@ -56,8 +56,6 @@ public final class ParadiseLostSoundEvents {
 
     public static final SoundEvent EFFECT_SIMMERING_SIMMER = childEvent("effect.simmering.simmer", SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT);
 
-    public static final SoundEvent ENTITY_HELLENROSE_DEATH = childEvent("entity.hellenrose.death", SoundEvents.ENTITY_GENERIC_BIG_FALL);
-    public static final SoundEvent ENTITY_HELLENROSE_SHOOT = childEvent("entity.hellenrose.shoot", SoundEvents.ENTITY_SKELETON_SHOOT);
 
     public static final SoundEvent ENTITY_MOA_AMBIENT = childEvent("entity.moa.ambient", SoundEvents.ENTITY_PARROT_AMBIENT);
     public static final SoundEvent ENTITY_MOA_GLIDING = childEvent("entity.moa.gliding", SoundEvents.ENTITY_PHANTOM_FLAP);
@@ -68,15 +66,11 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MOA_EGG_HATCH = childEvent("entity.moa.egg_hatch", SoundEvents.ENTITY_TURTLE_EGG_HATCH);
     public static final SoundEvent ENTITY_MOA_STEP = childEvent("entity.moa.step", SoundEvents.ENTITY_PIG_STEP);
 
-    public static final SoundEvent ENTITY_PARADISE_HARE_SNIFF = childEvent("entity.corsican_hare.sniff", SoundEvents.ENTITY_FOX_SNIFF);
-    public static final SoundEvent ENTITY_PARADISE_HARE_JUMP = childEvent("entity.corsican_hare.jump", SoundEvents.ENTITY_RABBIT_JUMP);
-    public static final SoundEvent ENTITY_PARADISE_HARE_HURT = childEvent("entity.corsican_hare.hurt", SoundEvents.ENTITY_RABBIT_HURT);
-    public static final SoundEvent ENTITY_PARADISE_HARE_DEATH = childEvent("entity.corsican_hare.death", SoundEvents.ENTITY_RABBIT_DEATH);
-    public static final SoundEvent ENTITY_PARADISE_HARE_EAT = childEvent("entity.corsican_hare.eat", SoundEvents.ENTITY_LLAMA_EAT);
-
     public static final SoundEvent ENTITY_NIGHTMARE_HURT = event("entity.nightmare.hurt");
     public static final SoundEvent ENTITY_NIGHTMARE_DEATH = event("entity.nightmare.death");
     public static final SoundEvent ENTITY_NIGHTMARE_AMBIENT = event("entity.nightmare.ambient");
+
+    public static final SoundEvent ENTITY_ENVOY_DAMAGE = childEvent("entity.envoy.damage", SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK);
 
 
     public static final SoundEvent ITEM_ARMOR_EQUIP_OLVITE = childEvent("item.armor.equip.olvite", SoundEvents.ITEM_ARMOR_EQUIP_IRON);

@@ -2,7 +2,7 @@
   "logical_height": 384,
   "infiniburn": "#minecraft:infiniburn_overworld",
   "effects": "minecraft:overworld",
-  "ambient_light": 0.06,
+  "ambient_light": 0.03,
   "respawn_anchor_works": false,
   "has_raids": false,
   "min_y": -64,
@@ -14,6 +14,6 @@
   "has_skylight": true,
   "has_ceiling": false,
   "ultrawarm": false,
-  "monster_spawn_light_level": 0,
-  "monster_spawn_block_light_limit": 0
+  "monster_spawn_light_level": 3,
+  "monster_spawn_block_light_limit": 3
 }

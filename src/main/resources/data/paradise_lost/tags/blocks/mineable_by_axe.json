@@ -3,13 +3,11 @@
   "values": [
     "paradise_lost:aurel_bookshelf",
     "paradise_lost:food_bowl",
-    "paradise_lost:giant_lily",
     "paradise_lost:packed_swedroot",
     "paradise_lost:swedroot_spread",
     "#paradise_lost:leaf_piles",
     "#paradise_lost:bushes",
     "#paradise_lost:hangers",
-    "#paradise_lost:wooden_chests",
     "paradise_lost:cherine_campfire"
   ]
 }

@@ -1,0 +1,141 @@
+{
+  "parent": "paradise_lost:glazed_upgrade_find",
+  "criteria": {
+    "shovel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:glazed_gold_shovel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:glazed_gold_pickaxe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "axe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:glazed_gold_axe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:glazed_gold_sword"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "hoe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:glazed_gold_hoe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:glazed_gold_helmet"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "chestplate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:glazed_gold_chestplate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:glazed_gold_leggings"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paradise_lost:glazed_gold_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.paradise_lost.glazed_upgrade_use.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "paradise_lost:glazed_gold_pickaxe"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.paradise_lost.glazed_upgrade_use.title"
+    }
+  },
+  "requirements": [
+    [
+      "shovel",
+      "pickaxe",
+      "axe",
+      "sword",
+      "hoe",
+      "helmet",
+      "chestplate",
+      "leggings",
+      "boots"
+    ]
+  ]
+}

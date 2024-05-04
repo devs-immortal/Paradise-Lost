@@ -4,7 +4,6 @@ public interface ParadiseLostEntityExtensions {
 
     boolean flipped = false;
     boolean paradiseLostFallen = false;
-    boolean corsican_hareFallen = false;
     int gravFlipTime = 0;
 
     default int getFlipTime() {
@@ -20,13 +19,6 @@ public interface ParadiseLostEntityExtensions {
     }
 
     default void setParadiseLostFallen(boolean value) {
-    }
-
-    default boolean isParadiseHareFallen() {
-        return corsican_hareFallen;
-    }
-
-    default void setParadiseHareFallen(boolean corsican_hareFallen) {
     }
 
     void setFlipped();

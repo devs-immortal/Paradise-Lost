@@ -14,7 +14,7 @@ public class ParadiseLostItemGroups {
 
     public static final ItemGroup PARADISE_LOST_DECORATIONS = build(
             ParadiseLost.locate("decorations"),
-            () -> new ItemStack(ParadiseLostBlocks.GIANT_LILY));
+            () -> new ItemStack(ParadiseLostBlocks.CHERINE_LANTERN));
 
     public static final ItemGroup PARADISE_LOST_TOOLS = build(
             ParadiseLost.locate("tools"),

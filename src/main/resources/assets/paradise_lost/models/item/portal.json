@@ -2,9 +2,9 @@
   "parent": "block/cube_all",
   "ambientocclusion": false,
   "textures": {
-    "0": "block/glowstone",
+    "0": "paradise_lost:block/bloomed_calcite",
     "1": "paradise_lost:block/blue_portal",
-    "particle": "block/glowstone"
+    "particle": "paradise_lost:block/bloomed_calcite"
   },
   "elements": [
     {

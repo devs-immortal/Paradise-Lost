@@ -2,112 +2,151 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": {
-        "type": "minecraft:uniform",
-        "min": 4.0,
-        "max": 8.0
-      },
-      "bonus_rolls": 0.0,
+      "rolls": 1,
+      "bonus_rolls": 2,
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 50,
+          "name": "minecraft:string",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "type": "minecraft:uniform",
-                "min": 5.0,
-                "max": 14.0
-              },
-              "add": false
+                "min": 1,
+                "max": 3
+              }
             }
-          ],
-          "name": "minecraft:stick"
+          ]
         },
         {
           "type": "minecraft:item",
-          "weight": 40,
+          "name": "minecraft:stick",
+          "weight": 3,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "type": "minecraft:uniform",
-                "min": 2.0,
-                "max": 7.0
-              },
-              "add": false
+                "min": 1,
+                "max": 10
+              }
             }
-          ],
-          "name": "minecraft:string"
+          ]
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
+          "name": "paradise_lost:cherine_torch",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 6.0
-              },
-              "add": false
+                "min": 1,
+                "max": 5
+              }
             }
-          ],
-          "name": "paradise_lost:olvite_nugget"
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:cold_parachute"
         },
         {
           "type": "minecraft:item",
-          "weight": 15,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 2.0,
-                "max": 4.0
-              },
-              "add": false
-            }
-          ],
-          "name": "paradise_lost:cherine"
+          "name": "minecraft:spyglass"
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 3.0
-              },
-              "add": false
-            }
-          ],
-          "name": "paradise_lost:olvite"
-        },
+          "name": "minecraft:saddle"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
         {
           "type": "minecraft:item",
-          "weight": 20,
           "name": "paradise_lost:aurel_bucket"
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
           "name": "paradise_lost:aurel_water_bucket"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:nitra",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:blackcurrant",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 5
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
-          "weight": 15,
-          "name": "minecraft:saddle"
+          "name": "paradise_lost:amadrys_bushel",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
-          "weight": 20,
-          "name": "paradise_lost:cold_parachute"
+          "name": "paradise_lost:cherine",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 3,
+                "max": 9
+              }
+            }
+          ]
         }
       ]
     }

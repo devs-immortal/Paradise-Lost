@@ -58,11 +58,11 @@ public class AurelTowerGenerator {
         @Override
         public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             // Fill in pillars
-            fillSupport(world, pos.down().north(2).east(2), ParadiseLostBlocks.AUREL_LOG.getDefaultState());
-            fillSupport(world, pos.down().north(2).east(-2), ParadiseLostBlocks.AUREL_LOG.getDefaultState());
-            fillSupport(world, pos.down().north(-2).east(2), ParadiseLostBlocks.AUREL_LOG.getDefaultState());
-            fillSupport(world, pos.down().north(-2).east(-2), ParadiseLostBlocks.AUREL_LOG.getDefaultState());
-            fillSupport(world, pos.down(), ParadiseLostBlocks.STRIPPED_AUREL_LOG.getDefaultState());
+            fillSupport(world, pos.down().north(2).east(2), ParadiseLostBlocks.AUREL_WOODSTUFF.log().getDefaultState());
+            fillSupport(world, pos.down().north(2).east(-2), ParadiseLostBlocks.AUREL_WOODSTUFF.log().getDefaultState());
+            fillSupport(world, pos.down().north(-2).east(2), ParadiseLostBlocks.AUREL_WOODSTUFF.log().getDefaultState());
+            fillSupport(world, pos.down().north(-2).east(-2), ParadiseLostBlocks.AUREL_WOODSTUFF.log().getDefaultState());
+            fillSupport(world, pos.down(), ParadiseLostBlocks.AUREL_WOODSTUFF.strippedLog().getDefaultState());
             // Add path blocks
             for (int x = -2; x <= 2; x++) {
                 for (int z = -2; z <= 2; z++) {

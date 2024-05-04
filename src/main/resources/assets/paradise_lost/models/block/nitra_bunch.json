@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "paradise_lost:block/nitra_bunch_bottom",
+    "side": "paradise_lost:block/nitra_bunch_side",
+    "top": "paradise_lost:block/nitra_bunch_top"
+  }
+}

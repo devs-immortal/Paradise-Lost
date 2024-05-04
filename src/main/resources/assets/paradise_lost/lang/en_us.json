@@ -43,7 +43,7 @@
   "block.paradise_lost.dense_cloud": "Dense Cloud",
   "block.paradise_lost.spring_water": "Spring Water",
 
-  "block.paradise_lost.vitroulite": "Vitroulite",
+  "block.paradise_lost.bloomed_calcite": "Bloomed Calcite",
 
   "block.paradise_lost.floestone": "Floestone",
   "block.paradise_lost.floestone_slab": "Floestone Slab",
@@ -76,27 +76,17 @@
   "block.paradise_lost.smooth_heliolith_slab": "Smooth Heliolith Slab",
   "block.paradise_lost.smooth_heliolith_stairs": "Smooth Heliolith Stairs",
   
-  "block.paradise_lost.carved_stone": "Carved Stone",
-  "block.paradise_lost.carved_stone_slab": "Carved Stone Slab",
-  "block.paradise_lost.carved_stone_stairs": "Carved Stone Stairs",
-  "block.paradise_lost.carved_stone_wall": "Carved Stone Wall",
-
-  "block.paradise_lost.mossy_carved_stone": "Mossy Carved Stone",
-  "block.paradise_lost.mossy_carved_stone_slab": "Mossy Carved Stone Slab",
-  "block.paradise_lost.mossy_carved_stone_stairs": "Mossy Carved Stone Stairs",
-  "block.paradise_lost.mossy_carved_stone_wall": "Mossy Carved Stone Wall",
-
-  "block.paradise_lost.cracked_carved_stone": "Cracked Carved Stone",
-  "block.paradise_lost.glyphed_carved_stone": "Glyphed Carved Stone",
-  "block.paradise_lost.carved_stone_panel": "Carved Stone Panel",
-  "block.paradise_lost.carved_stone_panel_lit": "Lit Carved Stone Panel",
-  "block.paradise_lost.carved_stone_eye": "Carved Stone Eye",
-  "block.paradise_lost.carved_stone_eye_lit": "Lit Carved Stone Eye",
+  "block.paradise_lost.levita_brick": "Levita Brick",
+  "block.paradise_lost.levita_brick_slab": "Levita Brick Slab",
+  "block.paradise_lost.levita_brick_stairs": "Levita Brick Stairs",
   
   "block.paradise_lost.golden_amber_tile": "Golden Amber Tile",
   "block.paradise_lost.golden_amber_tile_slab": "Golden Amber Tile Slab",
   "block.paradise_lost.golden_amber_tile_stairs": "Golden Amber Tile Stairs",
 
+  "block.paradise_lost.floestone_button": "Floestone Button",
+  "block.paradise_lost.floestone_pressure_plate": "Floestone Pressure Plate",
+  
   "block.paradise_lost.cherine_campfire": "Cherine Campfire",
 
   "block.paradise_lost.aurel_sapling": "Aurel Sapling",
@@ -201,18 +191,8 @@
   "block.paradise_lost.shamrock": "Shamrock",
   "block.paradise_lost.malt_sprig": "Malt Sprig",
   "block.paradise_lost.honey_nettle": "Honey Nettle",
-  "block.paradise_lost.halophia": "Halophia",
-  "block.paradise_lost.giant_lily": "Giant's Lily",
-  "block.paradise_lost.weeping_cloudburst": "Weeping Cloudburst",
-  "block.paradise_lost.moss_star": "Moss Star",
-  "block.paradise_lost.moss_ball": "Moss Ball",
   "block.paradise_lost.liverwort": "Liverwort",
   "block.paradise_lost.liverwort_carpet": "Liverwort Carpet",
-
-  "block.paradise_lost.lichen": "Lichen",
-  "block.paradise_lost.lichen_pile": "Lichen Pile",
-  "block.paradise_lost.lucatiel_lichen": "Lucatiel Lichen",
-  "block.paradise_lost.lucatiel_lichen_pile": "Lucatiel Lichen Pile",
 
   "block.paradise_lost.swedroot_spread": "Swedroot Spread",
 
@@ -255,12 +235,7 @@
   "block.paradise_lost.incubator": "Incubator",
   "block.paradise_lost.food_bowl": "Feeding Trough",
   "block.paradise_lost.tree_tap": "Tree Tap",
-
-  "block.paradise_lost.crystal_chest": "Crystal Chest",
-  "block.paradise_lost.golden_oak_chest": "Mother Aurel Chest",
-  "block.paradise_lost.orange_chest": "Orange Chest",
-  "block.paradise_lost.skyroot_chest": "Aurel Chest",
-  "block.paradise_lost.wisteria_chest": "Wisteria Chest",
+  "block.paradise_lost.nitra_bunch": "Nitra Bunch",
   
 
   "book.edition": "%dst Edition",
@@ -272,7 +247,6 @@
   "entity.paradise_lost.floating_block": "Floating Block",
   "entity.paradise_lost.hellenrose": "Hellenrose",
   "entity.paradise_lost.moa": "Moa",
-  "entity.paradise_lost.corsican_hare": "Corsican Hare",
   "entity.paradise_lost.rook": "Rook",
   "entity.paradise_lost.poison_dart": "Poison Dart",
   "entity.paradise_lost.poison_needle": "Poison Needle",
@@ -341,6 +315,8 @@
   "item.paradise_lost.blackcurrant": "Blackcurrant",
   "item.paradise_lost.orange": "Orange",
   "item.paradise_lost.amadrys_bushel": "Amadrys Bushel",
+  "item.paradise_lost.nitra": "Nitra Seed",
+  "item.paradise_lost.nitra_bulb": "Nitra Bulb",
   "item.paradise_lost.amadrys_noodles": "Amadrys Noodle Soup",
   "item.paradise_lost.amadrys_bread": "Amadrys Loaf",
   "item.paradise_lost.amadrys_bread_glazed": "Glazed Amadrys Loaf",
@@ -364,7 +340,7 @@
   "item.paradise_lost.cloud_vial": "Cloud Vial",
 
   "item.paradise_lost.hellenrose_spawn_egg": "Hellenrose Spawn Egg",
-  "item.paradise_lost.corsican_hare_spawn_egg": "Corsican Hare Spawn Egg",
+  "item.paradise_lost.envoy_spawn_egg": "Envoy Spawn Egg",
   "item.paradise_lost.moa_spawn_egg": "Moa Spawn Egg",
 
   "item.paradise_lost.aurel_boat": "Aurel Boat",
@@ -384,8 +360,6 @@
 
   "death.attack.fall": "%1$s plummeted from the heavens",
   "death.attack.fall.player": "%1$s was thrown off the heavens above by %2$s",
-  "death.attack.corsican_hare_fall": "%1$s got dumped",
-  "death.attack.corsican_hare_fall.player": "%1$s got dumped whilst trying to escape %2$s",
   "death.attack.nightmare": "%1$s was consumed by shifting shadows",
   "death.attack.nightmare.player": "%1$s was fed to the shadows by %2$s",
 
@@ -489,15 +463,11 @@
   "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
   "subtitles.paradise_lost.entity.moa.step": "Moa walks",
 
-  "subtitles.paradise_lost.entity.corsican_hare.sniff": "Corsican Hare sniffs",
-  "subtitles.paradise_lost.entity.corsican_hare.jump": "Corsican Hare hops",
-  "subtitles.paradise_lost.entity.corsican_hare.hurt": "Corsican Hare hurts",
-  "subtitles.paradise_lost.entity.corsican_hare.death": "Corsican Hare dies",
-  "subtitles.paradise_lost.entity.corsican_hare.eat": "Corsican Hare eats",
-
   "subtitles.paradise_lost.entity.nightmare.hurt": "Nightmare hurts",
   "subtitles.paradise_lost.entity.nightmare.ambient": "Magpie coos",
   "subtitles.paradise_lost.entity.nightmare.death": "Nightmare dissipates",
+  
+  "subtitles.paradise_lost.entity.envoy.damage": "Envoy Chimes",
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",
@@ -506,20 +476,32 @@
   "subtitles.paradise_lost.item.bloodstone.prick": "Bloodstone pricks",
 
 
+  "advancements.paradise_lost.bloomed_calcite_craft.title": "Healing Crystals",
+  "advancements.paradise_lost.bloomed_calcite_craft.description": "Douse a calcite block with a healing potion",
   "advancements.paradise_lost.consume_food.title": "Exotic Starter",
   "advancements.paradise_lost.consume_food.description": "Consume something from Paradise",
   "advancements.paradise_lost.enter_paradise_lost.title": "We Need to Go Higher",
-  "advancements.paradise_lost.enter_paradise_lost.description": "Build a frame of shimmering glowstone, flood it with water, and step into the light",
-  "advancements.paradise_lost.food_bowl_fill.title": "Not Your Average Birdfeeder",
-  "advancements.paradise_lost.food_bowl_fill.description": "Fill a feeding trough with raw meat for your Moas",
+  "advancements.paradise_lost.enter_paradise_lost.description": "Build a frame of Bloomed Calcite, flood it with water, and step into the light",
   "advancements.paradise_lost.float_up_paradise_lost.title": "To Infinity",
   "advancements.paradise_lost.float_up_paradise_lost.description": "Ride a levitating block to the sky limit",
+  "advancements.paradise_lost.food_bowl_fill.title": "Not Your Average Birdfeeder",
+  "advancements.paradise_lost.food_bowl_fill.description": "Fill a feeding trough with raw meat for your Moas",
+  "advancements.paradise_lost.glazed_upgrade_find.title": "Lost Art",
+  "advancements.paradise_lost.glazed_upgrade_find.description": "Find a Glazed Gold Upgrade in a Lost Vault",
+  "advancements.paradise_lost.glazed_upgrade_use.title": "Dunkin'",
+  "advancements.paradise_lost.glazed_upgrade_use.description": "Improve a piece of gold equipment with a Glazed Gold Upgrade",
   "advancements.paradise_lost.mother_aurel.title": "The Matriarch",
   "advancements.paradise_lost.mother_aurel.description": "Find a Mother Aurel Tree in a Highlands Thicket",
   "advancements.paradise_lost.mother_aurel_strip.title": "Stripping For Gold",
   "advancements.paradise_lost.mother_aurel_strip.description": "Strip a Mother Aurel log to collect its amber",
+  "advancements.paradise_lost.nitra_bunch.title": "Bundle of Joy",
+  "advancements.paradise_lost.nitra_bunch.description": "Create an explosive bundle of Nitra",
+  "advancements.paradise_lost.nitra_find.title": "Seeds of Wrath",
+  "advancements.paradise_lost.nitra_find.description": "Find a Nitra seed in an Aurel Tower",
   "advancements.paradise_lost.root.title": "Paradise Lost",
   "advancements.paradise_lost.root.description": "A hostile paradise in the sky, full of mystery and surprises",
+  "advancements.paradise_lost.surtrum_blast.title": "Is it getting hot in here?",
+  "advancements.paradise_lost.surtrum_blast.description": "Blast your way into a Meteorite and harvest some Surtrum",
   "advancements.paradise_lost.tame_moa.title": "Air Superiority",
   "advancements.paradise_lost.tame_moa.description": "Tame a wild Moa with raw meat",
   "advancements.paradise_lost.void_paradise_lost.title": "I've been falling, for 30 minutes!",

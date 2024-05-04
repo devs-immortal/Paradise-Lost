@@ -47,7 +47,7 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.isOf(ParadiseLostBlocks.MOTHER_AUREL_LEAVES) && random.nextInt(75) == 0) {
+        if (state.isOf(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.leaves()) && random.nextInt(75) == 0) {
             Direction direction = Direction.DOWN;
             BlockPos blockPos = pos.offset(direction);
             BlockState blockState = world.getBlockState(blockPos);

@@ -80,10 +80,10 @@ def generate_slab_block(block_id, base_block_id, texture):
     
 
 
-generate_standard_block("levita")
-generate_standard_block("levita_ore")
-generate_standard_item("levita_gem")
-generate_standard_item("levita_wand")
+generate_standard_block("bloomed_calcite")
+generate_standard_block("levita_brick")
+generate_stairs_block("levita_brick_stairs", "levita_brick")
+generate_slab_block("levita_brick_slab", "levita_brick", "levita_brick")
 
 
 

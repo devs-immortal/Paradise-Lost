@@ -18,11 +18,11 @@ public class IncubatorBlockEntityRenderer implements BlockEntityRenderer<Incubat
 
     @Override
     public void render(IncubatorBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if (!entity.isEmpty()) {
+        if (entity.hasItem()) {
             matrices.push();
             matrices.translate(0.5, 0.55, 0.5);
             matrices.scale(0.9F, 0.9F, 0.9F);
-            MinecraftClient.getInstance().getItemRenderer().renderItem(entity.getStack(0), ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumers, 0);
+            MinecraftClient.getInstance().getItemRenderer().renderItem(entity.getItem(), ModelTransformation.Mode.FIXED, light, overlay, matrices, vertexConsumers, 0);
             matrices.pop();
         }
     }

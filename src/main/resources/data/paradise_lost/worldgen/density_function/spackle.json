@@ -1,4 +1,4 @@
- {
+{
   "type": "minecraft:add",
   "argument1": {
     "type": "minecraft:y_clamped_gradient",

@@ -4,7 +4,6 @@ import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
-import net.id.paradiselost.entities.misc.RookEntity;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.tag.ParadiseLostItemTags;
@@ -13,7 +12,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -71,10 +69,6 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
             if (isWearingParachute) {
                 gravity -= 0.07;
                 this.fallDistance = 0;
-            } else if (entity.hasPassengers() && entity.getPassengerList().stream().anyMatch(passenger ->
-                    passenger.getType().equals(ParadiseLostEntityTypes.PARADISE_HARE))) {
-                gravity -= 0.05;
-                this.fallDistance = 0; // alternatively, remove & replace with fall damage dampener
             }
         }
 
@@ -103,29 +97,6 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
             var genes = moa.getGenes();
             cir.setReturnValue(genes.isInitialized() ? genes.getAttribute(MoaAttributes.MAX_HEALTH) : 40F);
             cir.cancel();
-        }
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    @Inject(method = "addDeathParticles", at = @At("HEAD"), cancellable = true)
-    private void applyCustomDeathParticles(CallbackInfo ci) {
-        if (((LivingEntity) ((Object) this)) instanceof RookEntity) {
-            for (int i = 0; i < 20 + random.nextInt(20); ++i) {
-                double d = this.random.nextGaussian() * 0.02D;
-                double e = this.random.nextGaussian() * 0.02D;
-                double f = this.random.nextGaussian() * 0.02D;
-                if (random.nextInt(3) == 0) {
-                    this.world.addParticle(ParticleTypes.LARGE_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
-                }
-                else {
-                    this.world.addParticle(ParticleTypes.SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d, e, f);
-                }
-
-                if (random.nextInt(3) == 0) {
-                    this.world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getParticleX(1.0D), this.getRandomBodyY(), this.getParticleZ(1.0D), d / 3, e, f / 3);
-                }
-            }
-            ci.cancel();
         }
     }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "paradise_lost:block/cross_crop",
+  "textures": {
+    "crop": "paradise_lost:block/nitra_stage0"
+  }
+}

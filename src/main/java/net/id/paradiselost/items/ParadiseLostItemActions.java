@@ -8,6 +8,7 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.item.ItemConvertible;
 
 class ParadiseLostItemActions {
+    protected static final RegistryQueue.Action<ItemConvertible> compostable15 = compostable(0.15f);
     protected static final RegistryQueue.Action<ItemConvertible> compostable30 = compostable(0.3f);
     protected static final RegistryQueue.Action<ItemConvertible> compostable50 = compostable(0.5f);
     protected static final RegistryQueue.Action<ItemConvertible> compostable65 = compostable(0.65f);

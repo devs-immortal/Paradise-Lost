@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:highlands",
+    "paradise_lost:highlands_forest",
+    "paradise_lost:highlands_thicket",
+    "paradise_lost:highlands_grand_glade",
+    "paradise_lost:wisteria_woods",
+    "paradise_lost:autumnal_tundra",
+    "paradise_lost:continental_plateau",
+    "paradise_lost:highlands_shield"
+  ]
+}

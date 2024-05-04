@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "paradise_lost:levita_brick_slab",
     "#paradise_lost:wooden_slabs",
     "#paradise_lost:stone_slabs"
   ]

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "paradise_lost:floestone"
+    },
+    "I": {
+      "item": "paradise_lost:olvite"
+    }
+  },
+  "pattern": [
+    " I ",
+    "###"
+  ],
+  "result": {
+    "item": "minecraft:stonecutter"
+  }
+}

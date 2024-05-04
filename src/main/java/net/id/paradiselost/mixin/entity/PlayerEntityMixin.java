@@ -30,7 +30,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerEntityMixin extends LivingEntity implements ParadiseLostEntityExtensions {
 
     private boolean paradise_lost$fallen = false;
-    public boolean paradise_lost$corsican_hareFallen = false;
 
     public PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
         super(type, world);
@@ -82,14 +81,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
         paradise_lost$fallen = value;
     }
 
-    public boolean isParadise_lost$corsican_hareFallen() {
-        return paradise_lost$corsican_hareFallen;
-    }
-
-    public void setPARADISE_HAREFallen(boolean value) {
-        paradise_lost$corsican_hareFallen = value;
-    }
-
     @Inject(
             method = "handleFallDamage",
             at = @At("HEAD"),
@@ -105,18 +96,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                     increaseStat(Stats.FALL_ONE_CM, (int) Math.round((double) fallDistance * 100.0D));
                 }
                 cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageSources.PARADISE_LOST_FALL));
-            }
-            cir.cancel();
-        }
-        if (paradise_lost$corsican_hareFallen) {
-            paradise_lost$corsican_hareFallen = false;
-            if (getAbilities().allowFlying) {
-                cir.setReturnValue(false);
-            } else {
-                if (fallDistance >= 2.0F) {
-                    increaseStat(Stats.FALL_ONE_CM, (int) Math.round((double) fallDistance * 100.0D));
-                }
-                cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageSources.PARADISE_HARE_FALL));
             }
             cir.cancel();
         }

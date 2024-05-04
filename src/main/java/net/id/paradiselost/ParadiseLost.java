@@ -17,8 +17,6 @@ import net.id.paradiselost.client.rendering.texture.ParadiseLostTextures;
 import net.id.paradiselost.client.rendering.util.ParadiseLostColorProviders;
 import net.id.paradiselost.commands.ParadiseLostCommands;
 import net.id.paradiselost.config.ParadiseLostConfig;
-import net.id.paradiselost.effect.ParadiseLostStatusEffects;
-import net.id.paradiselost.effect.condition.Conditions;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaRaces;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
@@ -83,7 +81,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostFeatures.init();
         ParadiseLostBiomes.init();
         ParadiseLostDimension.init();
-        ParadiseLostStatusEffects.init();
         ParadiseLostBlocks.init();
         ParadiseLostFluids.init();
         ParadiseLostEntityTypes.init();
@@ -94,7 +91,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostGameRules.init();
         ParadiseLostLootNumberProviderTypes.init();
         ParadiseLostSoundEvents.init();
-        Conditions.init();
         MoaRaces.init();
         ParadiseLostScreens.init();
         ParadiseLostLore.init();
@@ -123,7 +119,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostBlocks.initClient();
         ParadiseLostItemRenderers.initClient();
         ParadiseLostScreens.initClient();
-        Conditions.clientInit();
         ParadiseLostScreens.clientInit();
     }
 

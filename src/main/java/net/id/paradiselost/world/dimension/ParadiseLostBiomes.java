@@ -261,14 +261,17 @@ public final class ParadiseLostBiomes {
             .spawnSettings(createSpawnSettings(
                 merge(
                     Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
+                        ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
                             new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
-                Map.of(
-                )
+                    Map.of(
+                            ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
+                    )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
             // .category(Biome.Category.PLAINS)
@@ -304,15 +307,17 @@ public final class ParadiseLostBiomes {
             .spawnSettings(createSpawnSettings(
                 merge(
                     Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
+                        ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
-                
-                Map.of(
-                )
+                    Map.of(
+                            ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
+                    )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
             // .category(Biome.Category.FOREST)
@@ -344,16 +349,18 @@ public final class ParadiseLostBiomes {
                         )
                 ))
                 .spawnSettings(createSpawnSettings(
-                        merge(
-                                Map.of(
-                                        SpawnGroup.CREATURE, List.of(
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 3, 7)
-                                        )
-                                )
-                        ),
-
+                    merge(
                         Map.of(
+                            SpawnGroup.MONSTER, List.of(
+                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
+                            ),
+                            SpawnGroup.CREATURE, List.of(
+                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
+                            )
+                        )
+                    ),
+                        Map.of(
+                                ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
                         )
                 ))
                 .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
@@ -394,18 +401,16 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.HELLENROSE, 50, 1, 2)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
-                
-                Map.of(
-                    ParadiseLostEntityTypes.HELLENROSE, SpawnCost.of(0.75, 0.07)
-                )
+                    Map.of(
+                            ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
+                    )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.4F).downfall(2)
             // .category(Biome.Category.FOREST)
@@ -440,20 +445,18 @@ public final class ParadiseLostBiomes {
                         )
                 ))
                 .spawnSettings(createSpawnSettings(
-                        merge(
-                                Map.of(
-                                        SpawnGroup.MONSTER, List.of(
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.HELLENROSE, 50, 1, 2)
-                                        ),
-                                        SpawnGroup.CREATURE, List.of(
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5)
-                                        )
-                                )
-                        ),
-
+                    merge(
                         Map.of(
-                                ParadiseLostEntityTypes.HELLENROSE, SpawnCost.of(0.75, 0.07)
+                            SpawnGroup.MONSTER, List.of(
+                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
+                            ),
+                            SpawnGroup.CREATURE, List.of(
+                                new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
+                            )
+                        )
+                    ),
+                        Map.of(
+                                ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
                         )
                 ))
                 .precipitation(Biome.Precipitation.RAIN).temperature(0.4F).downfall(2)
@@ -489,19 +492,16 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.HELLENROSE, 100, 3, 7)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
-                        
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 10, 1, 5)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
-                
-                Map.of(
-                    ParadiseLostEntityTypes.HELLENROSE, SpawnCost.of(0.7, 0.1)
-                )
+                    Map.of(
+                            ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
+                    )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
             // .category(Biome.Category.FOREST)
@@ -541,16 +541,17 @@ public final class ParadiseLostBiomes {
             .spawnSettings(createSpawnSettings(
                 merge(
                     Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
+                        ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
-                
-                Map.of(
-                )
+                    Map.of(
+                            ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
+                    )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.1F).downfall(2)
             // .category(Biome.Category.TAIGA)
@@ -588,16 +589,17 @@ public final class ParadiseLostBiomes {
             .spawnSettings(createSpawnSettings(
                 merge(
                     Map.of(
+                        SpawnGroup.MONSTER, List.of(
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
+                        ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
-            
-                Map.of(
-                )
+                    Map.of(
+                            ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
+                    )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.25F).downfall(0)
             .build();
@@ -645,17 +647,15 @@ public final class ParadiseLostBiomes {
                 merge(
                     Map.of(
                         SpawnGroup.MONSTER, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.HELLENROSE, 50, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.ENVOY, 50, 1, 3)
                         ),
                         SpawnGroup.CREATURE, List.of(
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 12, 4, 4),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13),
-                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.PARADISE_HARE, 6, 1, 3)
+                            new SpawnSettings.SpawnEntry(ParadiseLostEntityTypes.MOA, 6, 5, 13)
                         )
                     )
                 ),
                 Map.of(
-                    ParadiseLostEntityTypes.HELLENROSE, SpawnCost.of(1, 0.1)
+                        ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
                 )
             ))
             .precipitation(Biome.Precipitation.RAIN).temperature(0.35F).downfall(2)

@@ -23,7 +23,7 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     public SliderEntity(World world, double x, double y, double z, Direction direction) {
-        super(ParadiseLostEntityTypes.SLIDER, world, x, y, z, ParadiseLostBlocks.CRACKED_CARVED_STONE.getDefaultState());
+        super(ParadiseLostEntityTypes.SLIDER, world, x, y, z, ParadiseLostBlocks.GOLDEN_AMBER_TILE.getDefaultState());
         this.setDirection(direction);
     }
 
