@@ -245,11 +245,8 @@
 
 
   "entity.paradise_lost.floating_block": "Floating Block",
-  "entity.paradise_lost.hellenrose": "Hellenrose",
   "entity.paradise_lost.moa": "Moa",
-  "entity.paradise_lost.rook": "Rook",
-  "entity.paradise_lost.poison_dart": "Poison Dart",
-  "entity.paradise_lost.poison_needle": "Poison Needle",
+  "entity.paradise_lost.envoy": "Rook",
 
 
   "item.paradise_lost.golden_amber": "Golden Amber",
