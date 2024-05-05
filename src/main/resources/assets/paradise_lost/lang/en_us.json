@@ -32,7 +32,8 @@
   "block.paradise_lost.permafrost": "Permafrost",
   "block.paradise_lost.levita": "Levita",
   "block.paradise_lost.farmland": "Paradise Farmland",
-  "block.paradise_lost.grass_path": "Paradise Grass Path",
+  "block.paradise_lost.grass_path": "Highlands Grass Path",
+  "block.paradise_lost.frozen_path": "Frozen Path",
   "block.paradise_lost.packed_swedroot": "Packed Swedroot",
 
   "block.paradise_lost.cold_cloud": "Cold Cloud",
