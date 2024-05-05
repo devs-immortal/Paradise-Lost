@@ -25,6 +25,8 @@ An explorer must explore.
 
 You can download the mod on [Modrinth](https://modrinth.com/mod/paradise-lost), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
 
+**Soundtrack:** [Aether Reborn - Volume 1](https://sunsette.bandcamp.com/album/aether-reborn-volume-1)
+
 **The Aether repository:** [GildedGames/The-Aether](https://github.com/Gilded-Games/The-Aether)
 
 ## Translations
