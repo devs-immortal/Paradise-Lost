@@ -14,9 +14,9 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> NON_FLOATERS = register("non_floaters");
     public static final TagKey<Block> PUSH_FLOATERS = register("push_floaters");
     public static final TagKey<Block> HURTABLE_FLOATERS = register("hurtable_floaters");
+    public static final TagKey<Block> DECAYING_FLOATERS = register("decaying_floaters");
 
     //Plants
-    public static final TagKey<Block> LICHEN_SPREADABLES = register("plants/lichen_spreadable");
     public static final TagKey<Block> FUNGI_CLINGABLES = register("plants/fungi_clingable");
     public static final TagKey<Block> GENERIC_VALID_GROUND = register("plants/generic_valid_ground");
     public static final TagKey<Block> SWEDROOT_PLANTABLE = register("plants/swedroot_plantable");
