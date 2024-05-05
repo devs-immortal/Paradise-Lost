@@ -47,7 +47,7 @@ public class ParadiseLostEntityTypes {
             ParadiseLostEntityTypes.<SliderEntity>of(SliderEntity::new, MISC, changing(0.98F, 0.98F), 10).trackedUpdateRate(20));
 
     // Hostile
-    public static final EntityType<EnvoyEntity> ENVOY = add("envoy", of(EnvoyEntity::new, MONSTER, changing(1f, 2f), 7),
+    public static final EntityType<EnvoyEntity> ENVOY = add("envoy", of(EnvoyEntity::new, MONSTER, changing(0.6F, 1.95F), 10),
             attributes(EnvoyEntity::createEnvoyAttributes), spawnRestrictions(EnvoyEntity::canMobSpawn));
 
     // passive
