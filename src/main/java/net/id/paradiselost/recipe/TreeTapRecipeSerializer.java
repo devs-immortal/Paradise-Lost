@@ -14,25 +14,27 @@ import net.minecraft.util.registry.Registry;
 public record TreeTapRecipeSerializer(TreeTapRecipeSerializer.RecipeFactory recipeFactory) implements RecipeSerializer<TreeTapRecipe> {
 
 	public interface RecipeFactory {
-		TreeTapRecipe create(Identifier id, String group, Ingredient ingredient, ItemStack output, Block tappedBlock, int chance);
+		TreeTapRecipe create(Identifier id, String group, Ingredient ingredient, ItemStack output, Block tappedBlock, Block resultBlock, int chance);
 	}
 
 	@Override
 	public TreeTapRecipe read(Identifier identifier, JsonObject jsonObject) {
 		String group = JsonHelper.getString(jsonObject, "group", "");
 		Ingredient ingredient = Ingredient.fromJson(JsonHelper.getObject(jsonObject, "ingredient"));
-		Block tappedBlock = Registry.BLOCK.get(Identifier.tryParse(JsonHelper.getString(jsonObject, "tapped_block")));
+        Block tappedBlock = Registry.BLOCK.get(Identifier.tryParse(JsonHelper.getString(jsonObject, "tapped_block")));
+        Block resultBlock = Registry.BLOCK.get(Identifier.tryParse(JsonHelper.getString(jsonObject, "result_block")));
         ItemStack output = RecipeParser.getItemStackWithNbtFromJson(JsonHelper.getObject(jsonObject, "result"));
         int chance = JsonHelper.getInt(jsonObject, "chance");
 
-		return this.recipeFactory.create(identifier, group, ingredient, output, tappedBlock, chance);
+		return this.recipeFactory.create(identifier, group, ingredient, output, tappedBlock, resultBlock, chance);
 	}
 
 	@Override
 	public void write(PacketByteBuf packetByteBuf, TreeTapRecipe recipe) {
 		packetByteBuf.writeString(recipe.group);
 		recipe.ingredient.write(packetByteBuf);
-		packetByteBuf.writeIdentifier(Registry.BLOCK.getId(recipe.tappedBlock));
+        packetByteBuf.writeIdentifier(Registry.BLOCK.getId(recipe.tappedBlock));
+        packetByteBuf.writeIdentifier(Registry.BLOCK.getId(recipe.resultBlock));
 		packetByteBuf.writeItemStack(recipe.output);
         packetByteBuf.writeInt(recipe.chance);
 	}
@@ -41,11 +43,12 @@ public record TreeTapRecipeSerializer(TreeTapRecipeSerializer.RecipeFactory reci
 	public TreeTapRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {
 		String group = packetByteBuf.readString();
 		Ingredient ingredient = Ingredient.fromPacket(packetByteBuf);
-		Block tappedBlock = Registry.BLOCK.get(packetByteBuf.readIdentifier());
+        Block tappedBlock = Registry.BLOCK.get(packetByteBuf.readIdentifier());
+        Block resultBlock = Registry.BLOCK.get(packetByteBuf.readIdentifier());
 		ItemStack output = packetByteBuf.readItemStack();
         int chance = packetByteBuf.readInt();
 
-		return this.recipeFactory.create(identifier, group, ingredient, output, tappedBlock, chance);
+		return this.recipeFactory.create(identifier, group, ingredient, output, tappedBlock, resultBlock, chance);
 	}
 
 }

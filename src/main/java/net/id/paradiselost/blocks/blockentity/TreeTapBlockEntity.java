@@ -1,8 +1,12 @@
 package net.id.paradiselost.blocks.blockentity;
 
+import net.id.paradiselost.blocks.mechanical.TreeTapBlock;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.recipe.TreeTapRecipe;
+import net.minecraft.block.BeehiveBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -28,7 +32,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Optional;
 
 public class TreeTapBlockEntity extends LootableContainerBlockEntity implements SidedInventory {
@@ -134,12 +137,29 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
 		Optional<TreeTapRecipe> recipe = this.world.getRecipeManager().getFirstMatch(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE, this, this.world);
 		if (recipe.isPresent() && world.random.nextInt(recipe.get().getChance()) == 0) {
 			ItemStack output = recipe.get().craft(this);
-			stack.decrement(1);
+            Block convertBlock = recipe.get().getOutputBlock();
+            BlockPos attachedPos = this.pos.offset(world.getBlockState(this.pos).get(TreeTapBlock.FACING).getOpposite());
+            BlockState attachedBlock = world.getBlockState(attachedPos);
+            if (convertBlock != Blocks.BEE_NEST) {
+                stack.decrement(1);
 
-            if (!world.isClient) world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
+                if (convertBlock != world.getBlockState(this.pos).getBlock()) {
+                    world.setBlockState(attachedPos, convertBlock.getDefaultState(), 0);
+                }
+                if (!world.isClient) world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
 
-            this.inventory.set(0, output);
-            inventoryChanged();
+                this.inventory.set(0, output);
+                inventoryChanged();
+            } else if (attachedBlock.get(BeehiveBlock.HONEY_LEVEL) == 5) {
+                stack.decrement(1);
+
+                world.setBlockState(attachedPos, attachedBlock.with(BeehiveBlock.HONEY_LEVEL, 0));
+
+                if (!world.isClient) world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
+
+                this.inventory.set(0, output);
+                inventoryChanged();
+            }
 		}
         tryTansferItemsOut();
 	}
