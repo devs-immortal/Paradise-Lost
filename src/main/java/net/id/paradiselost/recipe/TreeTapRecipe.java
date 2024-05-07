@@ -18,14 +18,16 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
 	protected final Ingredient ingredient;
 	protected final ItemStack output;
     protected final Block tappedBlock;
+    protected final Block resultBlock;
     protected final int chance;
 
-	public TreeTapRecipe(Identifier id, String group, Ingredient ingredient, ItemStack output, Block tappedBlock, int chance) {
+	public TreeTapRecipe(Identifier id, String group, Ingredient ingredient, ItemStack output, Block tappedBlock, Block resultBlock, int chance) {
 		this.id = id;
 		this.group = group;
 		this.ingredient = ingredient;
 		this.output = output;
         this.tappedBlock = tappedBlock;
+        this.resultBlock = resultBlock;
         this.chance = chance;
 	}
 
@@ -51,6 +53,10 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
     @Override
     public ItemStack getOutput() {
         return output;
+    }
+
+    public Block getOutputBlock() {
+        return resultBlock;
     }
 
 	@Override

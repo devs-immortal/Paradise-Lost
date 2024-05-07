@@ -41,7 +41,7 @@ class ParadiseLostBlockActions {
         return (id, block) -> TillableBlockRegistry.register(block, HoeItem::canTillFarmland, ParadiseLostBlocks.DIRT.getDefaultState());
     }
 
-    protected static Action<Block> flattenable() {
-        return (id, block) -> FlattenableBlockRegistry.register(block, ParadiseLostBlocks.DIRT_PATH.getDefaultState());
+    protected static Action<Block> flattenable(Block turnInto) {
+        return (id, block) -> FlattenableBlockRegistry.register(block, turnInto.getDefaultState());
     }
 }

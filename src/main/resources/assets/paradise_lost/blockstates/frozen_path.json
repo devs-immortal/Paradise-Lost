@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "paradise_lost:block/frozen_path"
+      },
+      {
+        "model": "paradise_lost:block/frozen_path",
+        "y": 180
+      }
+    ]
+  }
+}

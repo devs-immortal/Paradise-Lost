@@ -1,13 +1,12 @@
 {
   "type": "paradise_lost:tree_tap",
   "ingredient": {
-    "item": "minecraft:glass_bottle"
+    "item": "minecraft:bucket"
   },
   "tapped_block": "paradise_lost:wisteria_log",
   "result_block": "paradise_lost:wisteria_log",
   "result": {
-    "item": "minecraft:potion",
-    "nbt": "{Potion: \"minecraft:water\"}"
+    "item": "minecraft:water_bucket"
   },
-  "chance": 1
+  "chance": 2
 }

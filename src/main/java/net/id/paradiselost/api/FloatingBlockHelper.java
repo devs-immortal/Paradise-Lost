@@ -54,7 +54,7 @@ public interface FloatingBlockHelper {
         World world = entity.world;
         BlockPos pos = entity.getBlockPos();
         int distFromTop = world.getTopY() - pos.getY();
-        return !entity.isFastFloater() && distFromTop <= 50;
+        return !entity.isInTag(ParadiseLostBlockTags.DECAYING_FLOATERS) && distFromTop <= 50;
     };
 
     /**
