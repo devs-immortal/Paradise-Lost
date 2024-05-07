@@ -8,6 +8,8 @@ import net.id.paradiselost.client.rendering.entity.hostile.EnvoyEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.MoaEntityRenderer;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.EntityRenderers;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 
@@ -25,6 +27,8 @@ public class ParadiseLostEntityRenderers {
         register(ParadiseLostEntityTypes.MOA, MoaEntityRenderer::new);
 //        register(ParadiseLostEntityTypes.AMBYST, AmbystRenderer::new);
 
+        // projectile
+        register(ParadiseLostEntityTypes.THROWN_NITRA, FlyingItemEntityRenderer::new);
     }
     
     @SafeVarargs

@@ -434,7 +434,9 @@
   "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
   "subtitles.paradise_lost.entity.moa.step": "Moa walks",
   
-  "subtitles.paradise_lost.entity.envoy.damage": "Envoy Chimes",
+  "subtitles.paradise_lost.entity.nitra.throw": "Nitra Flies",
+  
+  "subtitles.paradise_lost.entity.moa.step": "Moa walks",
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",

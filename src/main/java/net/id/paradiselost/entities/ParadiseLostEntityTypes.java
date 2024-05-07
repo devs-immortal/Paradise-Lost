@@ -11,6 +11,7 @@ import net.id.paradiselost.entities.hostile.EnvoyEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
 import net.id.paradiselost.entities.passive.ambyst.FindLogSensor;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
+import net.id.paradiselost.entities.projectile.ThrownNitraEntity;
 import net.id.paradiselost.mixin.brain.ActivityInvoker;
 import net.id.paradiselost.mixin.brain.MemoryModuleTypeInvoker;
 import net.id.paradiselost.mixin.brain.SensorTypeInvoker;
@@ -55,6 +56,9 @@ public class ParadiseLostEntityTypes {
             attributes(MoaEntity::createMoaAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
     // public static final EntityType<AmbystEntity> AMBYST = add("ambyst", of(AmbystEntity::new, CREATURE, changing(0.6F, 0.42F), 5),
     //         attributes(AmbystEntity::createAmbystAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
+
+    // projectile
+    public static final EntityType<ThrownNitraEntity> THROWN_NITRA = add("thrown_nitra", of(ThrownNitraEntity::new, MISC, changing(0.5F, 0.5F), 5));
 
     //Brain
     public static final Activity HIDEINLOG = ActivityInvoker.invokeRegister(ParadiseLost.locate("hideinlog").toString());

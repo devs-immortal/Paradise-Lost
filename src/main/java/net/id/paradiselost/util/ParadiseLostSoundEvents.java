@@ -66,6 +66,8 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MOA_EGG_HATCH = childEvent("entity.moa.egg_hatch", SoundEvents.ENTITY_TURTLE_EGG_HATCH);
     public static final SoundEvent ENTITY_MOA_STEP = childEvent("entity.moa.step", SoundEvents.ENTITY_PIG_STEP);
 
+    public static final SoundEvent ENTITY_NITRA_THROW = childEvent("entity.nitra.throw", SoundEvents.ENTITY_SNOWBALL_THROW);
+
     public static final SoundEvent ENTITY_NIGHTMARE_HURT = event("entity.nightmare.hurt");
     public static final SoundEvent ENTITY_NIGHTMARE_DEATH = event("entity.nightmare.death");
     public static final SoundEvent ENTITY_NIGHTMARE_AMBIENT = event("entity.nightmare.ambient");
