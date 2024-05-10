@@ -4,6 +4,7 @@ import net.id.paradiselost.api.FloatingBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.OreBlock;
+import net.minecraft.block.RedstoneOreBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 @SuppressWarnings("deprecation")
-public class FloatingBlock extends OreBlock {
+public class FloatingBlock extends RedstoneOreBlock {
     private final boolean powered;
 
     public FloatingBlock(boolean powered, Settings properties, UniformIntProvider experienceDropped) {

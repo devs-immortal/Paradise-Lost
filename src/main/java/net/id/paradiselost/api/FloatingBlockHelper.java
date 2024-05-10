@@ -4,14 +4,12 @@ import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.util.FloatingBlockHelperImpls;
 import net.id.paradiselost.items.tools.base_tools.GravityWandItem;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
-import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
-import net.id.incubus_core.blocklikeentities.api.BlockLikeSet;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PistonBlock;
 import net.minecraft.block.piston.PistonHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 

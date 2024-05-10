@@ -1,9 +1,9 @@
 package net.id.paradiselost.entities.block;
 
+import net.id.paradiselost.api.BlockLikeEntity;
 import net.id.paradiselost.api.FloatingBlockHelper;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
-import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;

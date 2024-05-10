@@ -2,7 +2,7 @@ package net.id.paradiselost.blocks.natural.plant;
 
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;

@@ -3,11 +3,11 @@ package net.id.paradiselost.blocks.natural;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MushroomPlantBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -20,7 +20,7 @@ public class ParadiseLostMushroomBlock extends MushroomPlantBlock {
 
     private final HangType type;
 
-    public ParadiseLostMushroomBlock(Settings settings, Supplier<RegistryEntry<? extends ConfiguredFeature<?, ?>>> feature, HangType type) {
+    public ParadiseLostMushroomBlock(Settings settings, RegistryKey<ConfiguredFeature<?, ?>> feature, HangType type) {
         super(settings, feature);
         this.type = type;
     }
@@ -44,11 +44,6 @@ public class ParadiseLostMushroomBlock extends MushroomPlantBlock {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.fullCube();
-    }
-
-    @Override
-    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
-        return true;
     }
 
     @Override

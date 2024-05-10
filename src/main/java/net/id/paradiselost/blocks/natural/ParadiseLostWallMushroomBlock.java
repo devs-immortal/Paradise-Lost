@@ -3,13 +3,13 @@ package net.id.paradiselost.blocks.natural;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -21,7 +21,7 @@ public class ParadiseLostWallMushroomBlock extends ParadiseLostMushroomBlock {
 
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    public ParadiseLostWallMushroomBlock(Settings settings, Supplier<RegistryEntry<? extends ConfiguredFeature<?, ?>>> feature) {
+    public ParadiseLostWallMushroomBlock(Settings settings, RegistryKey<ConfiguredFeature<?, ?>> feature) {
         super(settings, feature, ParadiseLostMushroomBlock.HangType.WALL);
     }
 
@@ -40,7 +40,7 @@ public class ParadiseLostWallMushroomBlock extends ParadiseLostMushroomBlock {
 
     @Override
     public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+        return getDefaultState().with(FACING, ctx.getPlayerLookDirection().getOpposite());
     }
 
     @Override

@@ -1,9 +1,9 @@
 package net.id.paradiselost.entities.block;
 
 import net.fabricmc.fabric.api.util.NbtType;
+import net.id.paradiselost.api.BlockLikeEntity;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
-import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;

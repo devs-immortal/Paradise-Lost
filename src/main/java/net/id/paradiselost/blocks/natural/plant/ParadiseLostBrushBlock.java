@@ -6,8 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FernBlock;
 import net.minecraft.block.TallPlantBlock;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -19,7 +19,7 @@ public class ParadiseLostBrushBlock extends FernBlock {
     private final boolean override;
 
     public ParadiseLostBrushBlock(Settings settings) {
-        this(settings.offsetType(OffsetType.XZ), ParadiseLostBlockTags.GENERIC_VALID_GROUND, false);
+        this(settings.offset(OffsetType.XZ), ParadiseLostBlockTags.GENERIC_VALID_GROUND, false);
     }
 
     public ParadiseLostBrushBlock(Settings settings, TagKey<Block> validFloors, boolean override) {

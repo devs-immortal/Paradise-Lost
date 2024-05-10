@@ -2,7 +2,7 @@ package net.id.paradiselost.tag;
 
 import net.id.paradiselost.ParadiseLost;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.registry.Registry;
 
 public class ParadiseLostFluidTags {

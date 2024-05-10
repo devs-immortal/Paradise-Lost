@@ -3,7 +3,7 @@ package net.id.paradiselost.world.feature.structure;
 import net.id.paradiselost.world.feature.structure.generator.AurelTowerGenerator;
 import net.id.paradiselost.world.feature.structure.generator.WellGenerator;
 import net.minecraft.structure.StructurePieceType;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;

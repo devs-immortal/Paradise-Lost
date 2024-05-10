@@ -1,9 +1,9 @@
 package net.id.paradiselost.entities.util;
 
+import net.id.paradiselost.api.BlockLikeSet;
 import net.id.paradiselost.api.FloatingBlockHelper;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
-import net.id.incubus_core.blocklikeentities.api.BlockLikeSet;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FallingBlock;

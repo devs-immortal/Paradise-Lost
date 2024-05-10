@@ -8,7 +8,6 @@ val loaderVersion: String by properties
 val javaVersion: String by properties
 
 val fabricApiVersion: String by properties
-val incubusCoreVersion: String by properties
 val customportalapiVersion: String by properties
 val cardinalComponentsVersion: String by properties
 val trinketsVersion: String by properties
@@ -127,12 +126,6 @@ dependencies {
             name = "fabric-api",
             version = fabricApiVersion,
     )
-
-    modImplementation(
-            group = "com.github.devs-immortal",
-            name = "Incubus-Core",
-            version = incubusCoreVersion,
-    ).also(::include)
 
     modImplementation(
             group = "com.jamieswhiteshirt",
