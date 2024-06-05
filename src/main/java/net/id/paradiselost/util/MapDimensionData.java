@@ -1,6 +1,6 @@
 package net.id.paradiselost.util;
 
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
 
 // unused

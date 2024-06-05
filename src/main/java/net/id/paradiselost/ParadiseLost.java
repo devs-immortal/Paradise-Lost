@@ -16,7 +16,6 @@ import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.client.rendering.texture.ParadiseLostTextures;
 import net.id.paradiselost.client.rendering.util.ParadiseLostColorProviders;
 import net.id.paradiselost.commands.ParadiseLostCommands;
-import net.id.paradiselost.config.ParadiseLostConfig;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaRaces;
 import net.id.paradiselost.fluids.ParadiseLostFluids;

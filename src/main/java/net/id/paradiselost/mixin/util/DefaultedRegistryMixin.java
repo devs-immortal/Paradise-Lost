@@ -1,8 +1,8 @@
 package net.id.paradiselost.mixin.util;
 
 import net.id.paradiselost.ParadiseLost;
+import net.minecraft.registry.DefaultedRegistry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.DefaultedRegistry;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

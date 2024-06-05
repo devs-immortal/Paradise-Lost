@@ -63,7 +63,7 @@ import java.util.UUID;
 
 public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameable, InventoryChangedListener, RideableInventory {
     private static final SimpleInventory DUMMY = new SimpleInventory(0);
-    
+
     public static final TrackedData<Integer> AIR_TICKS = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<ItemStack> CHEST = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
     public float curWingRoll, curWingYaw, curLegPitch;
@@ -76,7 +76,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     public MoaEntity(EntityType<? extends MoaEntity> entityType, World world) {
         super(entityType, world);
-        this.stepHeight = 1.0F;
+        this.setStepHeight(1.0F);
         this.secsUntilEgg = this.getRandomEggTime();
         refreshChest(false);
     }
@@ -370,7 +370,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     this.setVelocity(Vec3d.ZERO);
                 }
 
-                this.updateLimbs(this, false);
+                this.updateLimbs(false);
             } else {
                 this.airStrafingSpeed = getFlyingSpeed();
                 super.travel(movementInput);
@@ -607,9 +607,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return getGenes().getOwner();
     }
 
+    @Override
+    public EntityView method_48926() {
+        return null;
+    }
+
     @Nullable
     @Override
-    public Entity getOwner() {
+    public LivingEntity getOwner() {
         return Optional.ofNullable(getOwnerUuid()).map(world::getPlayerByUuid).orElse(null);
     }
     

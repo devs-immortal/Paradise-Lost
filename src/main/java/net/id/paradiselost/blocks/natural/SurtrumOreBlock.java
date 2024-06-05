@@ -1,14 +1,15 @@
 package net.id.paradiselost.blocks.natural;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.OreBlock;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
-public class SurtrumOreBlock extends OreBlock {
+public class SurtrumOreBlock extends ExperienceDroppingBlock {
     public SurtrumOreBlock(Settings settings, IntProvider experience) {
         super(settings, experience);
     }

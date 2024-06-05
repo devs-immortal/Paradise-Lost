@@ -46,7 +46,7 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
                 if (campfire.cookingTimes[i] >= campfire.cookingTotalTimes[i]) {
                     Inventory inventory = new SimpleInventory(itemStack);
                     ItemStack itemStack2 = world.getRecipeManager().getFirstMatch(RecipeType.CAMPFIRE_COOKING, inventory, world)
-                            .map((recipe) -> recipe.craft(inventory))
+                            .map((recipe) -> recipe.craft(inventory, world.getRegistryManager()))
                             .orElse(itemStack);
                     ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), itemStack2);
                     campfire.itemsBeingCooked.set(i, ItemStack.EMPTY);

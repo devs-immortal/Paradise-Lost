@@ -2,7 +2,6 @@ package net.id.paradiselost.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.paradiselost.config.ParadiseLostConfig;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.kyrptonaught.customportalapi.interfaces.EntityInCustomPortal;
@@ -10,10 +9,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public class ParadiseLostPortalBlock extends CustomPortalBlock {
@@ -52,6 +51,6 @@ public class ParadiseLostPortalBlock extends CustomPortalBlock {
 
     @Override
     public Block getPortalBase(World world, BlockPos pos) {
-        return ParadiseLostConfig.CONFIG.getPortalBaseBlock(world.getRegistryManager().get(Registry.BLOCK_KEY));
+        return ParadiseLostBlocks.BLOOMED_CALCITE;
     }
 }

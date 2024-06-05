@@ -7,14 +7,15 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
@@ -27,7 +28,7 @@ public class CinnabarRoseBlock extends ParadiseLostMushroomBlock {
 
     public static final BooleanProperty BLOOMING = BooleanProperty.of("blooming");
 
-    public CinnabarRoseBlock(Settings settings, Supplier<RegistryEntry<? extends ConfiguredFeature<?, ?>>> feature) {
+    public CinnabarRoseBlock(Settings settings, RegistryKey<ConfiguredFeature<?, ?>> feature) {
         super(settings, feature, HangType.FLOOR);
         setDefaultState(getDefaultState().with(BLOOMING, false));
     }

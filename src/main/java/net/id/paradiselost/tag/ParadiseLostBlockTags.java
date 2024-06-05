@@ -2,9 +2,8 @@ package net.id.paradiselost.tag;
 
 import net.id.paradiselost.ParadiseLost;
 import net.minecraft.block.Block;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.registry.Registry;
 
 public class ParadiseLostBlockTags {
 
@@ -32,6 +31,6 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> PARADISE_LOST_SHEARABLE = register("mineable_by_shears");
 
     private static TagKey<Block> register(String id) {
-        return TagKey.of(Registry.BLOCK_KEY, ParadiseLost.locate(id));
+        return TagKey.of(RegistryKeys.BLOCK, ParadiseLost.locate(id));
     }
 }

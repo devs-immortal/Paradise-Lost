@@ -3,7 +3,7 @@ package net.id.paradiselost.mixin.server;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.server.network.EntityTrackerEntry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

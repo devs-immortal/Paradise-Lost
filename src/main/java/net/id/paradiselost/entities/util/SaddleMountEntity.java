@@ -31,7 +31,6 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
         this(null, world);
     }
 
-    @Override
     public Entity getPrimaryPassenger() {
         return getFirstPassenger();
     }

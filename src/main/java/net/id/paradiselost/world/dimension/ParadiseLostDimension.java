@@ -5,13 +5,16 @@ import com.mojang.serialization.Lifecycle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
-import net.id.paradiselost.config.ParadiseLostConfig;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.util.MiscUtil;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.kyrptonaught.customportalapi.event.CPASoundEventData;
-import net.minecraft.util.dynamic.RegistryOps;
-import net.minecraft.util.registry.*;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.MutableRegistry;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryOps;
+import net.minecraft.registry.SimpleRegistry;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.dimension.DimensionType;
@@ -44,7 +47,7 @@ public class ParadiseLostDimension {
 
     public static void initPortal() {
 		CustomPortalBuilder.beginPortal()
-				.frameBlock(ParadiseLostConfig.CONFIG.getPortalBaseBlock(Registry.BLOCK))
+				.frameBlock(ParadiseLostBlocks.BLOOMED_CALCITE)
 				.customPortalBlock(ParadiseLostBlocks.BLUE_PORTAL)
 				.destDimID(locate(MOD_ID))
 				.tintColor(55, 89, 195)

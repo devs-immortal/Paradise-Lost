@@ -2,7 +2,7 @@ package net.id.paradiselost.mixin.server;
 
 import com.google.common.collect.ImmutableSet;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.dimension.DimensionOptions;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

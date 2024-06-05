@@ -1,12 +1,13 @@
 package net.id.paradiselost.util;
 
 import net.id.paradiselost.ParadiseLost;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.resource.Resource;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
@@ -212,7 +213,7 @@ public final class ParadiseLostSoundEvents {
      * @param event The event to register
      */
     private static void register(SoundEvent event) {
-        Registry.register(Registry.SOUND_EVENT, event.getId(), event);
+        Registry.register(Registries.SOUND_EVENT, event.getId(), event);
     }
     
     /**

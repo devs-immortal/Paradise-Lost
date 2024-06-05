@@ -1,6 +1,5 @@
 package net.id.paradiselost.items.misc;
 
-import net.id.paradiselost.config.ParadiseLostConfig;
 import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;
 import net.kyrptonaught.customportalapi.portal.PortalPlacer;
 import net.minecraft.item.Item;
