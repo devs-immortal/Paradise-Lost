@@ -24,7 +24,7 @@ public class PhoenixArmorRenderer implements ArmorRenderer { //24: Left this in 
         if (phoenixArmorModel == null) {
             phoenixArmorModel = new PhoenixArmorModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(ParadiseLostModelLayers.PHOENIX_ARMOR));
         }
-        contextModel.setAttributes(phoenixArmorModel);
+        contextModel.copyBipedStateTo(phoenixArmorModel);
         phoenixArmorModel.setVisible(false);
         phoenixArmorModel.head.visible = slot == EquipmentSlot.HEAD;
         ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, phoenixArmorModel, TEXTURE);

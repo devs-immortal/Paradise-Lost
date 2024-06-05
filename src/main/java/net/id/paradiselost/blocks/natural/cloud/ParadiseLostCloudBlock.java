@@ -37,7 +37,7 @@ public class ParadiseLostCloudBlock extends TransparentBlock {
     }
 
     @Override
-    public boolean isTranslucent(BlockState state, BlockView reader, BlockPos pos) {
+    public boolean isTransparent(BlockState state, BlockView reader, BlockPos pos) {
         return true;
     }
 

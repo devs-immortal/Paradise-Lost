@@ -27,7 +27,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
     }
 
     public ParadiseLostHangerBlock(Settings settings) {
-        super(settings.offsetType(OffsetType.XZ));
+        super(settings.offset(OffsetType.XZ));
         this.setDefaultState((this.stateManager.getDefaultState()).with(TIP, true));
     }
 
@@ -75,7 +75,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return world.getBlockState(pos.down()).isAir();
     }
 

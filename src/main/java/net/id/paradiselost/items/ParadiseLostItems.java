@@ -17,7 +17,6 @@ import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
-import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.id.paradiselost.util.EnumExtender;
 import net.minecraft.block.Block;

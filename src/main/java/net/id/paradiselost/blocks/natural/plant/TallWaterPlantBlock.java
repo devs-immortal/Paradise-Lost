@@ -15,7 +15,7 @@ import net.minecraft.world.WorldView;
 public class TallWaterPlantBlock extends TallPlantBlock implements Waterloggable {
 
     public TallWaterPlantBlock(Settings settings) {
-        super(settings.offsetType(OffsetType.XYZ));
+        super(settings.offset(OffsetType.XYZ));
     }
 
     @Override

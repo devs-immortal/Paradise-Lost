@@ -4,10 +4,9 @@ import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.world.gen.carver.ParadiseLostCarvers;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
@@ -38,15 +37,15 @@ import static net.id.paradiselost.world.feature.placed_features.ParadiseLostVege
  * @author Gudenau
  */
 public final class ParadiseLostBiomes {
-    public static final RegistryKey<Biome> AUTUMNAL_TUNDRA_KEY = register("autumnal_tundra");
-    public static final RegistryKey<Biome> CONTINENTAL_PLATEAU_KEY = register("continental_plateau");
-    public static final RegistryKey<Biome> HIGHLANDS_PLAINS_KEY = register("highlands");
-    public static final RegistryKey<Biome> HIGHLANDS_FOREST_KEY = register("highlands_forest");
-    public static final RegistryKey<Biome> HIGHLANDS_GRAND_GLADE_KEY = register("highlands_grand_glade");
-    public static final RegistryKey<Biome> HIGHLANDS_SHIELD_KEY = register("highlands_shield");
-    public static final RegistryKey<Biome> HIGHLANDS_THICKET_KEY = register("highlands_thicket");
-    public static final RegistryKey<Biome> TRADEWINDS_KEY = register("tradewinds");
-    public static final RegistryKey<Biome> WISTERIA_WOODS_KEY = register("wisteria_woods");
+    public static final RegistryKey<Registry<Biome>> AUTUMNAL_TUNDRA_KEY = register("autumnal_tundra");
+    public static final RegistryKey<Registry<Biome>> CONTINENTAL_PLATEAU_KEY = register("continental_plateau");
+    public static final RegistryKey<Registry<Biome>> HIGHLANDS_PLAINS_KEY = register("highlands");
+    public static final RegistryKey<Registry<Biome>> HIGHLANDS_FOREST_KEY = register("highlands_forest");
+    public static final RegistryKey<Registry<Biome>> HIGHLANDS_GRAND_GLADE_KEY = register("highlands_grand_glade");
+    public static final RegistryKey<Registry<Biome>> HIGHLANDS_SHIELD_KEY = register("highlands_shield");
+    public static final RegistryKey<Registry<Biome>> HIGHLANDS_THICKET_KEY = register("highlands_thicket");
+    public static final RegistryKey<Registry<Biome>> TRADEWINDS_KEY = register("tradewinds");
+    public static final RegistryKey<Registry<Biome>> WISTERIA_WOODS_KEY = register("wisteria_woods");
 
     public static final RegistryEntry<Biome> AUTUMNAL_TUNDRA;
     public static final RegistryEntry<Biome> CONTINENTAL_PLATEAU;
@@ -69,15 +68,15 @@ public final class ParadiseLostBiomes {
         TRADEWINDS = register(TRADEWINDS_KEY, createTradewinds());
         WISTERIA_WOODS = register(WISTERIA_WOODS_KEY, createWisteriaWoods());
     }
-    
+
     public static void init() {
     }
-    
-    private static RegistryKey<Biome> register(String name) {
+
+    private static RegistryKey<Registry<Biome>> register(String name) {
         return RegistryKey.of(Registry.BIOME_KEY, locate(name));
     }
-    
-    private static RegistryEntry<Biome> register(RegistryKey<Biome> key, Biome biome) {
+
+    private static RegistryEntry<Biome> register(RegistryKey<Registry<Biome>> key, Biome biome) {
         return BuiltinRegistries.add(BuiltinRegistries.BIOME, key, biome);
     }
     
@@ -319,7 +318,7 @@ public final class ParadiseLostBiomes {
                             ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
                     )
             ))
-            .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
+            .precipitation(true).temperature(0.5F).downfall(1)
             // .category(Biome.Category.FOREST)
             .build();
     }
@@ -363,7 +362,7 @@ public final class ParadiseLostBiomes {
                                 ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
                         )
                 ))
-                .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
+                .precipitation(true).temperature(0.5F).downfall(1)
                 // .category(Biome.Category.FOREST)
                 .build();
     }
@@ -503,7 +502,7 @@ public final class ParadiseLostBiomes {
                             ParadiseLostEntityTypes.ENVOY, SpawnCost.of(1.0, 0.5)
                     )
             ))
-            .precipitation(Biome.Precipitation.RAIN).temperature(0.5F).downfall(1)
+            .precipitation(true).temperature(0.5F).downfall(1)
             // .category(Biome.Category.FOREST)
             .build();
     }

@@ -26,7 +26,7 @@ public class WeepingCloudburstBlock extends PlantBlock implements Waterloggable 
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     public WeepingCloudburstBlock(Settings settings) {
-        super(settings.offsetType(OffsetType.XZ));
+        super(settings.offset(OffsetType.XZ));
         setDefaultState(getDefaultState().with(SECTION, Section.BOTTOM).with(NOGROW, false).with(WATERLOGGED, false));
     }
 

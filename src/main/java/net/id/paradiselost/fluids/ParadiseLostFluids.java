@@ -1,7 +1,6 @@
 package net.id.paradiselost.fluids;
 
 import net.id.paradiselost.client.rendering.block.FluidRenderSetup;
-import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
 import net.id.paradiselost.util.RenderUtils;
 import net.id.incubus_core.util.RegistryQueue;
 import net.minecraft.client.color.world.BiomeColors;

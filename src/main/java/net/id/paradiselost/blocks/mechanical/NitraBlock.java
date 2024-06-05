@@ -37,7 +37,7 @@ public class NitraBlock extends Block {
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if (!oldState.isOf(state.getBlock())) {
             if (world.isReceivingRedstonePower(pos)) {
-                world.createAndScheduleBlockTick(pos, this, 1);
+                world.scheduleBlockTick(pos, this, 1);
             }
 
         }
@@ -45,7 +45,7 @@ public class NitraBlock extends Block {
 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (world.isReceivingRedstonePower(pos)) {
-            world.createAndScheduleBlockTick(pos, this, 1);
+            world.scheduleBlockTick(pos, this, 1);
         }
 
     }
@@ -69,7 +69,7 @@ public class NitraBlock extends Block {
     }
 
     private static void ignite(World world, BlockPos pos, float power, @Nullable LivingEntity igniter) {
-        Explosion explosion = new Explosion(world, igniter, null, null, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, false, Explosion.DestructionType.BREAK);
+        Explosion explosion = new Explosion(world, igniter, null, null, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, false, Explosion.DestructionType.DESTROY);
         System.out.println(world.isClient);
         if (!world.isClient) {
             explosion.collectBlocksAndDamageEntities();

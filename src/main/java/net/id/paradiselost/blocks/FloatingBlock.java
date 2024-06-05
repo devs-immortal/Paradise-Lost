@@ -3,8 +3,6 @@ package net.id.paradiselost.blocks;
 import net.id.paradiselost.api.FloatingBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.OreBlock;
-import net.minecraft.block.RedstoneOreBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -14,11 +12,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 @SuppressWarnings("deprecation")
-public class FloatingBlock extends RedstoneOreBlock {
+public class FloatingBlock extends Block {
     private final boolean powered;
 
     public FloatingBlock(boolean powered, Settings properties, UniformIntProvider experienceDropped) {
-        super(properties, experienceDropped);
+        super(properties);
         this.powered = powered;
     }
 
@@ -28,12 +26,12 @@ public class FloatingBlock extends RedstoneOreBlock {
 
     @Override
     public void onBlockAdded(BlockState state, World worldIn, BlockPos posIn, BlockState oldState, boolean notify) {
-        worldIn.createAndScheduleBlockTick(posIn, this, this.getFallDelay());
+        worldIn.scheduleBlockTick(posIn, this, this.getFallDelay());
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facingIn, BlockState facingState, WorldAccess worldIn, BlockPos posIn, BlockPos facingPosIn) {
-        worldIn.createAndScheduleBlockTick(posIn, this, this.getFallDelay());
+        worldIn.scheduleBlockTick(posIn, this, this.getFallDelay());
         return super.getStateForNeighborUpdate(stateIn, facingIn, facingState, worldIn, posIn, facingPosIn);
     }
 

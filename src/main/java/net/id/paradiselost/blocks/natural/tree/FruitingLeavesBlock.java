@@ -117,7 +117,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
             Direction direction = Direction.DOWN;
             BlockPos blockPos = pos.offset(direction);
             BlockState blockState = world.getBlockState(blockPos);
-            if (!(!blockState.isSideSolidFullSquare(world, blockPos, direction.getOpposite()) && !blockState.isTranslucent(world, blockPos))) {
+            if (!(!blockState.isSideSolidFullSquare(world, blockPos, direction.getOpposite()) && !blockState.isTransparent(world, blockPos))) {
 
                 if (speed == 0 || world.getTime() % 3000 == 0) {
                     speed = world.getRandom().nextInt(4);

@@ -15,7 +15,6 @@ import net.id.paradiselost.entities.projectile.ThrownNitraEntity;
 import net.id.paradiselost.mixin.brain.ActivityInvoker;
 import net.id.paradiselost.mixin.brain.MemoryModuleTypeInvoker;
 import net.id.paradiselost.mixin.brain.SensorTypeInvoker;
-import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
 import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.brain.Activity;

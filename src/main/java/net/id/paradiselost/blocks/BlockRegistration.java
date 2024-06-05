@@ -1,13 +1,11 @@
 package net.id.paradiselost.blocks;
 
 import net.fabricmc.fabric.mixin.lookup.BlockEntityTypeAccessor;
-import net.id.incubus_core.util.RegistryQueue;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.mixin.util.SignTypeAccessor;
-import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
 import net.id.paradiselost.util.ParadiseLostSignType;
 import net.id.paradiselost.world.feature.tree.generator.MotherAurelSaplingGenerator;
 import net.id.paradiselost.world.feature.tree.generator.OrangeSaplingGenerator;
@@ -15,7 +13,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.SignType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;

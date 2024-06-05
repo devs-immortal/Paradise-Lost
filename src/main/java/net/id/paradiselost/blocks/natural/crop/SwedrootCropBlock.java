@@ -24,7 +24,7 @@ public class SwedrootCropBlock extends CropBlock {
     };
     
     public SwedrootCropBlock(Settings settings) {
-        super(settings.offsetType(OffsetType.XZ));
+        super(settings.offset(OffsetType.XZ));
     }
     
     @Override

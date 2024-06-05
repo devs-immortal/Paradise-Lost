@@ -43,7 +43,7 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
 
     @Override
     public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(AXIS, ctx.getPlayerFacing().getAxis());
+        return getDefaultState().with(AXIS, ctx.getPlayerLookDirection().getAxis());
     }
 
     @Override

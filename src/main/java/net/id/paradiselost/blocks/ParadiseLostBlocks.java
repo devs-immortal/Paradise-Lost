@@ -10,7 +10,6 @@ import net.id.paradiselost.blocks.natural.crop.*;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
-import net.id.paradiselost.registry.ParadiseLostRegistryQueues;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.world.feature.tree.generator.*;
 import net.minecraft.block.*;

@@ -37,11 +37,6 @@ public class GroundcoverBlock extends ParadiseLostBrushBlock {
     }
 
     @Override
-    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        entity.handleFallDamage(fallDistance, 0.5F, DamageSource.FALL);
-    }
-
-    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }

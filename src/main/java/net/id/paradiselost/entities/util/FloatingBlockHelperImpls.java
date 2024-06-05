@@ -94,7 +94,7 @@ public class FloatingBlockHelperImpls {
                     if (impact >= 0.8) {
                         BlockPos landingPos = entity.getBlockPos();
                         world.breakBlock(landingPos, false);
-                        world.createExplosion(entity, landingPos.getX(), landingPos.getY(), landingPos.getZ(), (float) MathHelper.clamp(impact * 5.5, 0, 10), Explosion.DestructionType.BREAK);
+                        world.createExplosion(entity, landingPos.getX(), landingPos.getY(), landingPos.getZ(), (float) MathHelper.clamp(impact * 5.5, 0, 10), World.ExplosionSourceType.BLOCK);
                     }
                 });
             }

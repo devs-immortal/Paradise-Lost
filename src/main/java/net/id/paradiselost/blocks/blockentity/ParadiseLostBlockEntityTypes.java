@@ -3,7 +3,8 @@ package net.id.paradiselost.blocks.blockentity;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 import static net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder.create;
 import static net.id.paradiselost.ParadiseLost.locate;
@@ -24,6 +25,6 @@ public class ParadiseLostBlockEntityTypes {
     }
     
     private static void register(String name, BlockEntityType<?> type) {
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, locate(name), type);
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, locate(name), type);
     }
 }

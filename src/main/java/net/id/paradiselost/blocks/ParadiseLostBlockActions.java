@@ -9,9 +9,6 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.HoeItem;
 
-import static net.id.incubus_core.util.RegistryQueue.Action;
-import static net.id.incubus_core.util.RegistryQueue.onClient;
-
 class ParadiseLostBlockActions {
     protected static final AbstractBlock.ContextPredicate never = (state, view, pos) -> false;
     protected static final AbstractBlock.ContextPredicate always = (state, view, pos) -> true;
