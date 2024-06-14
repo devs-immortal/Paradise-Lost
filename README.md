@@ -40,11 +40,15 @@ Paradise Lost makes use of crowd sourced translations.
 
 **You can help translate Paradise Lost to additional languages here: [crowdin.com](https://crowdin.com/project/aether).**
 
+![2024-06-14_11 48 14](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/0a2cb8b8-1437-4141-ba40-872c1d7a8f1a)
+![2024-06-14_11 47 41](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/966c971b-5ce1-45fb-8371-32b61af618c0)
+
+
 ## Gallery
 
-| <img src="https://user-images.githubusercontent.com/53229958/216715850-84a79b78-9def-419b-be31-eff317d8ca26.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/216715905-de7a097c-df7e-41d5-936b-339be2632a5b.png" width="570"> |
+| <img src="[https://user-images.githubusercontent.com/53229958/216715850-84a79b78-9def-419b-be31-eff317d8ca26.png](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/ac9dfae3-57ef-4c36-9c22-74706c6a97d7)" width="570"> | <img src="[https://user-images.githubusercontent.com/53229958/216715905-de7a097c-df7e-41d5-936b-339be2632a5b.png](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/54295b7f-9e5a-4e80-b4b4-68ea6d574929)" width="570"> |
 | --- | --- |
-| <img src="https://user-images.githubusercontent.com/53229958/216715924-f32b4a2d-5968-4cbe-8053-b61ec50b8609.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/216715944-887d2120-8c04-4bee-88eb-d37654e648eb.png" width="570"> |
+| <img src="[https://user-images.githubusercontent.com/53229958/216715924-f32b4a2d-5968-4cbe-8053-b61ec50b8609.png](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/22c1190a-3ef9-4da2-9264-f24667b31636)" width="570"> | <img src="[https://user-images.githubusercontent.com/53229958/216715944-887d2120-8c04-4bee-88eb-d37654e648eb.png](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/580777f7-9d61-4c44-973c-331472e42838)" width="570"> |
 | <img src="https://user-images.githubusercontent.com/53229958/216715953-4177791b-32b2-4bb5-a1ab-571e93819d3f.png" width="570"> | <img src="https://user-images.githubusercontent.com/53229958/216715966-197e1456-318a-4b59-a166-5d3a75ea02cd.png" width="570"> |
 
 ## License information
