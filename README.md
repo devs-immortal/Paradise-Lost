@@ -40,16 +40,21 @@ Paradise Lost makes use of crowd sourced translations.
 
 **You can help translate Paradise Lost to additional languages here: [crowdin.com](https://crowdin.com/project/aether).**
 
-![2024-06-14_11 48 14](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/0a2cb8b8-1437-4141-ba40-872c1d7a8f1a)
-![2024-06-14_11 47 41](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/966c971b-5ce1-45fb-8371-32b61af618c0)
+
+
+
+
+
+
+
 
 
 ## Gallery
 
-| <img src="[https://user-images.githubusercontent.com/53229958/216715850-84a79b78-9def-419b-be31-eff317d8ca26](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/ac9dfae3-57ef-4c36-9c22-74706c6a97d7)" width="570"> | <img src="[https://user-images.githubusercontent.com/53229958/216715905-de7a097c-df7e-41d5-936b-339be2632a5b.png](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/54295b7f-9e5a-4e80-b4b4-68ea6d574929)" width="570"> |
+| ![2024-06-14_11 55 27](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/ae135e53-cb31-442d-a817-a16cb23b1b7c) | ![2024-06-14_11 54 26](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/bdd4f4c2-c48d-49d7-80e1-4f21d4d709bd) |
 | --- | --- |
-| <img src="[https://user-images.githubusercontent.com/53229958/216715924-f32b4a2d-5968-4cbe-8053-b61ec50b8609.png](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/22c1190a-3ef9-4da2-9264-f24667b31636)" width="570"> | <img src="[https://user-images.githubusercontent.com/53229958/216715944-887d2120-8c04-4bee-88eb-d37654e648eb.png](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/580777f7-9d61-4c44-973c-331472e42838)" width="570"> |
-| ![2024-06-14_11 48 14](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/0a2cb8b8-1437-4141-ba40-872c1d7a8f1a) | ![2024-06-14_11 47 41](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/966c971b-5ce1-45fb-8371-32b61af618c0) |
+| ![2024-06-14_11 53 19](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/9ac5cb23-1364-4867-8f56-fdfdb0e09903) | ![2024-06-14_11 52 11](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/0cd1c3c5-41b8-4807-9aeb-f2f3d59d5651) |
+| ![2024-06-14_11 48 14](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/e6691bc3-6d72-425b-bb6d-63cbb58afd84) | ![2024-06-14_11 47 41](https://github.com/devs-immortal/Paradise-Lost/assets/53229958/76650295-9cc1-444e-9186-8a017581f4d3) |
 
 ## License information
 Created by Immortal Devs.\
