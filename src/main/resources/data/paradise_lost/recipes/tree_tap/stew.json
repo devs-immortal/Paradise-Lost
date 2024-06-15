@@ -4,6 +4,7 @@
     "item": "minecraft:bowl"
   },
   "tapped_block": "minecraft:mushroom_stem",
+  "result_block": "minecraft:mushroom_stem",
   "result": {
     "item": "minecraft:mushroom_stew"
   },

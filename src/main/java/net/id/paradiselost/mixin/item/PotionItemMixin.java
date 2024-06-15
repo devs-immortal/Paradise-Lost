@@ -1,10 +1,13 @@
 package net.id.paradiselost.mixin.item;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
+import net.id.paradiselost.util.BloomedCalciteUtil;
+import net.kyrptonaught.customportalapi.mixin.portalLighters.PotionEntityMixin;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.ItemUsageContext;
@@ -36,21 +39,10 @@ public class PotionItemMixin {
         ItemStack itemStack = context.getStack();
         BlockState blockState = world.getBlockState(blockPos);
         Random random = world.random;
-        if (blockState.isOf(Blocks.CALCITE) && (PotionUtil.getPotion(itemStack) == Potions.HEALING || PotionUtil.getPotion(itemStack) == Potions.STRONG_HEALING)) {
-            if (playerEntity instanceof ServerPlayerEntity) {
-                Criteria.ITEM_USED_ON_BLOCK.trigger((ServerPlayerEntity)playerEntity, blockPos, itemStack);
-            }
+        if (blockState.isOf(Blocks.CALCITE) && itemStack.isOf(Items.POTION) && (PotionUtil.getPotion(itemStack) == Potions.HEALING || PotionUtil.getPotion(itemStack) == Potions.STRONG_HEALING)) {
             playerEntity.setStackInHand(context.getHand(), ItemUsage.exchangeStack(itemStack, playerEntity, new ItemStack(Items.GLASS_BOTTLE)));
-            world.setBlockState(blockPos, ParadiseLostBlocks.BLOOMED_CALCITE.getDefaultState());
-            // particles
-            for (int i = 0; i < 16; i++) {
-                double xOffset = random.nextDouble();
-                double yOffset = random.nextDouble();
-                double zOffset = random.nextDouble();
-                world.addParticle(ParticleTypes.ENTITY_EFFECT, blockPos.getX() + xOffset, blockPos.getY() + yOffset, blockPos.getZ() + zOffset, 0.97, 0.15, 0.14);
-            }
+            BloomedCalciteUtil.applyHealing(playerEntity, world, blockPos, random, itemStack);
             if (!world.isClient) {
-                // sound
                 world.playSound(null, blockPos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
             cir.setReturnValue(ActionResult.success(world.isClient));

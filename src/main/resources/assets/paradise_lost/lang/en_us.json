@@ -32,7 +32,8 @@
   "block.paradise_lost.permafrost": "Permafrost",
   "block.paradise_lost.levita": "Levita",
   "block.paradise_lost.farmland": "Paradise Farmland",
-  "block.paradise_lost.grass_path": "Paradise Grass Path",
+  "block.paradise_lost.grass_path": "Highlands Grass Path",
+  "block.paradise_lost.frozen_path": "Frozen Path",
   "block.paradise_lost.packed_swedroot": "Packed Swedroot",
 
   "block.paradise_lost.cold_cloud": "Cold Cloud",
@@ -178,10 +179,6 @@
   "block.paradise_lost.lavender_wisteria_sapling": "Lavender Wisteria Sapling",
   "block.paradise_lost.lavender_wisteria_hanger": "Lavender Wisteria Hangers",
 
-  "block.paradise_lost.boreal_wisteria_leaves": "Boreal Wisteria Leaves",
-  "block.paradise_lost.boreal_wisteria_sapling": "Boreal Wisteria Sapling",
-  "block.paradise_lost.boreal_wisteria_hanger": "Boreal Wisteria Hanger",
-
   "block.paradise_lost.grass_plant": "Gale Grass",
   "block.paradise_lost.grass_flowering": "Flowering Gale Grass",
   "block.paradise_lost.short_grass": "Stubby Gale Grass",
@@ -245,15 +242,11 @@
 
 
   "entity.paradise_lost.floating_block": "Floating Block",
-  "entity.paradise_lost.hellenrose": "Hellenrose",
   "entity.paradise_lost.moa": "Moa",
-  "entity.paradise_lost.rook": "Rook",
-  "entity.paradise_lost.poison_dart": "Poison Dart",
-  "entity.paradise_lost.poison_needle": "Poison Needle",
+  "entity.paradise_lost.envoy": "Envoy",
 
 
   "item.paradise_lost.golden_amber": "Golden Amber",
-  "item.paradise_lost.hellenrose_petal": "Hellenrose Petal",
   "item.paradise_lost.nightmare_fuel": "Nightmare Fuel",
   "item.paradise_lost.nightmare_fuel.tooltip": "Warm to the touch",
   "item.paradise_lost.crow_eye": "Crow's Eye",
@@ -322,7 +315,6 @@
   "item.paradise_lost.amadrys_bread_glazed": "Glazed Amadrys Loaf",
   "item.paradise_lost.swedroot": "Swedroot",
   "item.paradise_lost.flaxseed" : "Flaxseed",
-  "item.paradise_lost.mystery_milk": "Mystery Milk",
   "item.paradise_lost.gingerbread_man": "Gingerbread Man",
   "item.paradise_lost.moa_meat": "Moa Chop",
   "item.paradise_lost.moa_meat_cooked": "Cooked Moa Chop",
@@ -335,9 +327,6 @@
   "item.paradise_lost.aurel_bucket": "Aurel Bucket",
   "item.paradise_lost.aurel_water_bucket": "Aurel Water Bucket",
   "item.paradise_lost.aurel_milk_bucket": "Aurel Milk Bucket",
-
-  "item.paradise_lost.vial": "Quicksoil Vial",
-  "item.paradise_lost.cloud_vial": "Cloud Vial",
 
   "item.paradise_lost.hellenrose_spawn_egg": "Hellenrose Spawn Egg",
   "item.paradise_lost.envoy_spawn_egg": "Envoy Spawn Egg",
@@ -410,9 +399,6 @@
   "commands.paradise_lost.moastat.set": "Set %1$s to %2$s",
   "commands.paradise_lost.gravitate.failure" : "Couldn't float the block(s)",
   "commands.paradise_lost.gravitate.success" : "Successfully floated the block(s)",
-  "commands.paradise_lost.LUV.success.query" : "LUV%1$s",
-  "commands.paradise_lost.LUV.success.set" : "%1$s's LUV is now %2$s",
-  "commands.paradise_lost.LUV.failure.set" : "You have no right!",
   "commands.paradise_lost.lore.get.locked" : "locked",
   "commands.paradise_lost.lore.get.hidden" : "hidden",
   "commands.paradise_lost.lore.get.free" : "free",
@@ -425,11 +411,6 @@
   "info.paradise_lost.bloodstone.surtrum": "Peer into the will",
   "info.paradise_lost.bloodstone.abstentine": "Peer into the soul",
 
-
-  "effect.paradise_lost.simmering": "Simmering",
-
-
-  "condition.paradise_lost.condition.venom": "Venom",
 
   "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries": "Blackcurrants pop",
 
@@ -444,16 +425,6 @@
   "subtitles.paradise_lost.block.orange_leaves.drop_fruit": "Orange leaves drop fruit",
   "subtitles.paradise_lost.block.orange_leaves.break_differently": "Orange leaves broken",
 
-  "subtitles.paradise_lost.block.lichen.spreads": "Lichen spreads",
-
-  "subtitles.paradise_lost.block.spring_water.ambient": "Spring water flows",
-  "subtitles.paradise_lost.block.spring_water.ambient.2": "Spring water bubbles",
-
-  "subtitles.paradise_lost.effect.simmering.simmer": "Entity simmers",
-
-  "subtitles.paradise_lost.entity.hellenrose.death": "Hellenrose dies",
-  "subtitles.paradise_lost.entity.hellenrose.shoot": "Hellenrose shoots",
-
   "subtitles.paradise_lost.entity.moa.ambient": "Moa chirps",
   "subtitles.paradise_lost.entity.moa.gliding": "Moa glides",
   "subtitles.paradise_lost.entity.moa.death": "Moa dies",
@@ -462,12 +433,10 @@
   "subtitles.paradise_lost.entity.moa.lay_egg": "Moa lays egg",
   "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
   "subtitles.paradise_lost.entity.moa.step": "Moa walks",
-
-  "subtitles.paradise_lost.entity.nightmare.hurt": "Nightmare hurts",
-  "subtitles.paradise_lost.entity.nightmare.ambient": "Magpie coos",
-  "subtitles.paradise_lost.entity.nightmare.death": "Nightmare dissipates",
   
-  "subtitles.paradise_lost.entity.envoy.damage": "Envoy Chimes",
+  "subtitles.paradise_lost.entity.nitra.throw": "Nitra Flies",
+  
+  "subtitles.paradise_lost.entity.moa.step": "Moa walks",
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",

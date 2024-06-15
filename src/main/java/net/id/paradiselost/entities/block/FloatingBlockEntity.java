@@ -4,12 +4,14 @@ import net.id.paradiselost.api.FloatingBlockHelper;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.incubus_core.blocklikeentities.api.BlockLikeEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
@@ -65,7 +67,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
         
         if (!this.hasNoGravity()) {
             if (!isDropping() && !shouldBeginDropping()) {
-                if (isFastFloater()) {
+                if (isInTag(ParadiseLostBlockTags.FAST_FLOATERS)) {
                     this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
                 } else {
                     this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
@@ -140,9 +142,9 @@ public class FloatingBlockEntity extends BlockLikeEntity {
         super.breakApart();
         this.getOnEndFloating().accept(Math.abs(this.lastYVelocity), false);
     }
-    
-    public boolean isFastFloater() {
-        return this.getBlockState().isIn(ParadiseLostBlockTags.FAST_FLOATERS) && !this.partOfSet;
+
+    public boolean isInTag(TagKey<Block> tag) {
+        return this.getBlockState().isIn(tag) && !this.partOfSet;
     }
     
     @Override
