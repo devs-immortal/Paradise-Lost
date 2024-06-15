@@ -26,7 +26,7 @@ If one or more of these items fit your match. Please see our supported versions.
 You can report a bug or important issue at the following contacts:
 
 - Discord
-  + @kalucky0
+  + kalucky0
 - Email
   + contact@kalucky0.dev
 
