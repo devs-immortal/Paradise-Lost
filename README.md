@@ -38,10 +38,10 @@ Paradise Lost makes use of crowd sourced translations.
 
 ## Gallery
 
-| ![](https://user-images.githubusercontent.com/53229958/216715850-84a79b78-9def-419b-be31-eff317d8ca26.png) | ![](https://user-images.githubusercontent.com/53229958/216715905-de7a097c-df7e-41d5-936b-339be2632a5b.png) |
+| <img src="https://immortaldevs.net/2024-05-05_13.00.26.png" width="570"> | <img src="https://immortaldevs.net/2024-05-05_12.56.59.png" width="570"> |
 | --- | --- |
-| ![](https://user-images.githubusercontent.com/53229958/216715924-f32b4a2d-5968-4cbe-8053-b61ec50b8609.png) | ![](https://user-images.githubusercontent.com/53229958/216715944-887d2120-8c04-4bee-88eb-d37654e648eb.png) |
-| ![](https://user-images.githubusercontent.com/53229958/216715953-4177791b-32b2-4bb5-a1ab-571e93819d3f.png) | ![](https://user-images.githubusercontent.com/53229958/216715966-197e1456-318a-4b59-a166-5d3a75ea02cd.png) |
+| <img src="https://immortaldevs.net/2024-05-05_12.24.35.png" width="570"> | <img src="https://immortaldevs.net/2024-05-05_12.22.24.png" width="570"> |
+| <img src="https://immortaldevs.net/2024-05-05_13.04.22.png" width="570"> | <img src="https://immortaldevs.net/2024-05-05_13.04.12.png" width="570"> |
 
 ## License information
 Created by Immortal Devs.\
