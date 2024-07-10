@@ -37,7 +37,7 @@ public class SpringWaterFluid extends WaterFluid {
     }
 
     @Override
-    protected boolean isInfinite() {
+    protected boolean isInfinite(World world) {
         return false;
     }
 

@@ -10,6 +10,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
@@ -46,7 +47,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             cancellable = true
     )
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (source.isOutOfWorld() && getY() < world.getBottomY() - 1 && world.getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
+        if (source == world.getDamageSources().outOfWorld() && getY() < world.getBottomY() - 1 && world.getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             if (!world.isClient()) {
                 setParadiseLostFallen(true);
                 ServerWorld overworld = getServer().getWorld(World.OVERWORLD);
@@ -56,7 +57,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 double xMax = Math.min(2.9999872E7D, worldBorder.getBoundEast() - 16.0D);
                 double zMax = Math.min(2.9999872E7D, worldBorder.getBoundSouth() - 16.0D);
                 double scaleFactor = DimensionType.getCoordinateScaleFactor(world.getDimension(), overworld.getDimension());
-                BlockPos blockPos3 = new BlockPos(MathHelper.clamp(getX() * scaleFactor, xMin, xMax), world.getTopY() + 128, MathHelper.clamp(getZ() * scaleFactor, zMin, zMax));
+                BlockPos blockPos3 = new BlockPos((int) MathHelper.clamp(getX() * scaleFactor, xMin, xMax), world.getTopY() + 128, (int) MathHelper.clamp(getZ() * scaleFactor, zMin, zMax));
 
                 ((ServerPlayerEntity) (Object) this).teleport(overworld, blockPos3.getX(), blockPos3.getY(), blockPos3.getZ(), getYaw(), getPitch());
                 StatusEffectInstance ef = new StatusEffectInstance(StatusEffects.NAUSEA, 160, 2, false, false, true);

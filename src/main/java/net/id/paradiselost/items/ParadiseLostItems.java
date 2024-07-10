@@ -17,7 +17,6 @@ import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
-import net.id.incubus_core.util.RegistryQueue.Action;
 import net.id.paradiselost.util.EnumExtender;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
@@ -26,6 +25,8 @@ import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -35,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.function.Consumer;
 
 import static net.id.paradiselost.ParadiseLost.MOD_ID;
 import static net.id.paradiselost.ParadiseLost.locate;
@@ -123,22 +125,22 @@ public class ParadiseLostItems {
     private static final Settings RARE_WEARABLE = wearable().rarity(RARE);
 
     // Olvite
-    public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, HEAD, WEARABLE));
-    public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, CHEST, WEARABLE));
-    public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, LEGS, WEARABLE));
-    public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, FEET, WEARABLE));
+    public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.HELMET, WEARABLE));
+    public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.CHESTPLATE, WEARABLE));
+    public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.LEGGINGS, WEARABLE));
+    public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.BOOTS, WEARABLE));
 
     // Glazed Gold
-    public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, HEAD, WEARABLE));
-    public static final ArmorItem GLAZED_GOLD_CHESTPLATE = add("glazed_gold_chestplate", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, CHEST, WEARABLE));
-    public static final ArmorItem GLAZED_GOLD_LEGGINGS = add("glazed_gold_leggings", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, LEGS, WEARABLE));
-    public static final ArmorItem GLAZED_GOLD_BOOTS = add("glazed_gold_boots", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, FEET, WEARABLE));
+    public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.HELMET, WEARABLE));
+    public static final ArmorItem GLAZED_GOLD_CHESTPLATE = add("glazed_gold_chestplate", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.CHESTPLATE, WEARABLE));
+    public static final ArmorItem GLAZED_GOLD_LEGGINGS = add("glazed_gold_leggings", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.LEGGINGS, WEARABLE));
+    public static final ArmorItem GLAZED_GOLD_BOOTS = add("glazed_gold_boots", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.BOOTS, WEARABLE));
 
     // Surtrum
-    public static final ArmorItem SURTRUM_HELMET = add("surtrum_helmet", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, HEAD, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_CHESTPLATE = add("surtrum_chestplate", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, CHEST, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, LEGS, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, FEET, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_HELMET = add("surtrum_helmet", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.HELMET, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_CHESTPLATE = add("surtrum_chestplate", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.CHESTPLATE, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.LEGGINGS, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.BOOTS, wearable().fireproof()));
 
 
     private static Settings food() {
@@ -213,7 +215,6 @@ public class ParadiseLostItems {
     public static final BlockItem PACKED_SWEDROOT = add("packed_swedroot", ParadiseLostBlocks.PACKED_SWEDROOT, building_block(), compostable85);
     public static final BlockItem COLD_CLOUD = add("cold_cloud", ParadiseLostBlocks.COLD_CLOUD, building_block());
     public static final BlockItem BLUE_CLOUD = add("blue_cloud", ParadiseLostBlocks.BLUE_CLOUD, building_block());
-    public static final BlockItem PINK_CLOUD = add("pink_cloud", ParadiseLostBlocks.PINK_CLOUD, building_block());
     public static final BlockItem GOLDEN_CLOUD = add("golden_cloud", ParadiseLostBlocks.GOLDEN_CLOUD, building_block());
     // planks
     public static final BlockItem AUREL_PLANKS = add("aurel_planks", ParadiseLostBlocks.AUREL_WOODSTUFF.plank(), building_block());
@@ -440,19 +441,17 @@ public class ParadiseLostItems {
 
     public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, ORANGE_BOATS, WISTERIA_BOATS};
 
-    public static void init() {
-        ParadiseLostRegistryQueues.ITEM.register();
-    }
+    public static void init() {}
 
     @SafeVarargs
-    private static <V extends Item> V add(String id, V item, Action<? super V>... additionalActions) {
+    private static <V extends Item> V add(String id, V item, Consumer<ItemConvertible>... additionalActions) {
         if (id.equals("grass"))
             ParadiseLost.LOG.error("id");
-        return ParadiseLostRegistryQueues.ITEM.add(locate(id), item, additionalActions);
+        return Registry.register(Registries.ITEM, locate(id), item);
     }
 
     @SafeVarargs
-    private static BlockItem add(String id, Block block, Settings settings, Action<? super BlockItem>... additionalActions) {
+    private static BlockItem add(String id, Block block, Settings settings, Consumer<ItemConvertible>... additionalActions) {
         return add(id,
                 (block instanceof DoorBlock
                         || block instanceof TallPlantBlock

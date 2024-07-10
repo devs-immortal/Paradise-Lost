@@ -5,8 +5,6 @@ import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
-import static net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder.build;
-
 public class ParadiseLostItemGroups {
     public static final ItemGroup PARADISE_LOST_BUILDING_BLOCKS = build(
             ParadiseLost.locate("building_blocks"),

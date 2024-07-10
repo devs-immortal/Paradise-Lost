@@ -12,26 +12,25 @@ import net.id.paradiselost.world.feature.tree.generator.OrangeSaplingGenerator;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.sapling.SaplingGenerator;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.function.Consumer;
 
 import static net.id.paradiselost.ParadiseLost.MOD_ID;
 import static net.id.paradiselost.ParadiseLost.locate;
-import static net.id.paradiselost.blocks.ParadiseLostBlockActions.cutoutMippedRenderLayer;
-import static net.id.paradiselost.blocks.ParadiseLostBlockActions.cutoutRenderLayer;
-import static net.id.paradiselost.blocks.ParadiseLostBlockActions.flammableLeaves;
-import static net.id.paradiselost.blocks.ParadiseLostBlockActions.flammableLog;
-import static net.id.paradiselost.blocks.ParadiseLostBlockActions.flammablePlanks;
-import static net.id.paradiselost.blocks.ParadiseLostBlockActions.stripsTo;
+import static net.id.paradiselost.blocks.ParadiseLostBlockActions.*;
 
 public class BlockRegistration {
 
     @SafeVarargs
-    public static <V extends Block> V add(String id, V block, RegistryQueue.Action<? super V>... additionalActions) {
-        return ParadiseLostRegistryQueues.BLOCK.add(locate(id), block, additionalActions);
+    public static <V extends Block> V add(String id, V block, Consumer<Block>... additionalActions) {
+        return Registry.register(Registries.BLOCK, locate(id), block);
     }
 
     static class ParadiseLostFarmlandBlock extends FarmlandBlock {
@@ -214,7 +213,7 @@ public class BlockRegistration {
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
                 add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings), flammablePlanks),
                 add(doorId, new DoorBlock(doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings), cutoutMippedRenderLayer),
-                add(buttonId, new WoodenButtonBlock(buttonSettings)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings))
+                add(buttonId, new ButtonBlock(buttonSettings)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings))
         );
     }
 
@@ -225,7 +224,7 @@ public class BlockRegistration {
             Block plank, StairsBlock plankStairs, SlabBlock plankSlab,
             FenceBlock fence, FenceGateBlock fenceGate,
             DoorBlock door, TrapdoorBlock trapdoor,
-            WoodenButtonBlock button, PressurePlateBlock pressurePlate
+            ButtonBlock button, PressurePlateBlock pressurePlate
             ) implements Iterable<Block> {
         public @NotNull Iterator<Block> iterator() {
             return Arrays.stream(new Block[]{

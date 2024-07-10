@@ -83,7 +83,7 @@ public abstract class ExplosionMixin extends Object implements ExplosionExtensio
             this.world.playSound(this.x, this.y, this.z, customSound, SoundCategory.BLOCKS, 4.0F, (1.0F + (this.world.random.nextFloat() - this.world.random.nextFloat()) * 0.2F) * 0.7F, false);
         }
 
-        boolean bl = this.destructionType != Explosion.DestructionType.NONE;
+        boolean bl = this.destructionType != Explosion.DestructionType.KEEP;
         if (particles) {
             if (!(this.power < 2.0F) && bl) {
                 this.world.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.x, this.y, this.z, 1.0, 0.0, 0.0);

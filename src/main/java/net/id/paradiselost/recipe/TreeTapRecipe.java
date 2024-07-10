@@ -7,6 +7,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
@@ -40,10 +41,10 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
 		return inventory.getTappedState().isOf(this.tappedBlock);
 	}
 
-	@Override
-	public ItemStack craft(TreeTapBlockEntity inventory) {
-		return output.copy();
-	}
+    @Override
+    public ItemStack craft(TreeTapBlockEntity inventory, DynamicRegistryManager registryManager) {
+        return output.copy();
+    }
 
 	@Override
 	public boolean fits(int width, int height) {
@@ -51,7 +52,7 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
 	}
 
     @Override
-    public ItemStack getOutput() {
+    public ItemStack getOutput(DynamicRegistryManager registryManager) {
         return output;
     }
 

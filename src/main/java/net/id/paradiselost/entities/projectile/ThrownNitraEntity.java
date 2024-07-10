@@ -66,7 +66,7 @@ public class ThrownNitraEntity extends ThrownItemEntity {
         for (Entity e : hit) {
             Vec3d diff = this.getPos().subtract(e.getPos()).negate().normalize();
             e.addVelocity(diff.x, diff.y, diff.z);
-            e.damage(DamageSource.explosion((LivingEntity) null), 2);
+            e.damage(this.world.getDamageSources().explosion(null, e), 2);
         }
     }
 

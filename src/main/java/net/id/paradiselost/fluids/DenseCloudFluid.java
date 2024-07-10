@@ -12,6 +12,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
@@ -28,7 +29,7 @@ public class DenseCloudFluid extends FlowableFluid {
     }
 
     @Override
-    protected boolean isInfinite() {
+    protected boolean isInfinite(World world) {
         return false;
     }
 
@@ -88,6 +89,6 @@ public class DenseCloudFluid extends FlowableFluid {
     }
 
     @Override
-    protected void tryFlow(WorldAccess world, BlockPos fluidPos, FluidState state) {
+    protected void tryFlow(World world, BlockPos fluidPos, FluidState state) {
     }
 }

@@ -212,7 +212,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         }
 
         boolean flag = this.blockState.isIn(BlockTags.ANVIL);
-        DamageSource damageSource2 = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
+        DamageSource damageSource2 = flag ? this.world.getDamageSources().fallingAnvil(this) : this.world.getDamageSources().fallingBlock(this);
         float f = Math.min(MathHelper.floor((float)i * this.fallHurtAmount), this.fallHurtMax);
 
         this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0))).forEach(entity -> entity.damage(damageSource2, f));
