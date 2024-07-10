@@ -5,7 +5,8 @@ import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.world.feature.tree.placers.OvergrownTrunkPlacer;
 import net.id.paradiselost.world.feature.tree.placers.WisteriaFoliagePlacer;
 import net.id.paradiselost.world.feature.tree.placers.WisteriaTrunkPlacer;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import net.minecraft.world.gen.trunk.TrunkPlacer;
@@ -35,11 +36,11 @@ public class ParadiseLostTreeHell {
     }
 
     public static <P extends FoliagePlacer> FoliagePlacerType<P> registerFoliage(String name, Codec<P> codec) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return Registry.register(Registry.FOLIAGE_PLACER_TYPE, ParadiseLost.locate(name), foliageConstructor.newInstance(codec));
+        return Registry.register(Registries.FOLIAGE_PLACER_TYPE, ParadiseLost.locate(name), foliageConstructor.newInstance(codec));
     }
 
     public static <P extends TrunkPlacer> TrunkPlacerType<P> registerTrunk(String name, Codec<P> codec) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return Registry.register(Registry.TRUNK_PLACER_TYPE, ParadiseLost.locate(name), trunkConstructor.newInstance(codec));
+        return Registry.register(Registries.TRUNK_PLACER_TYPE, ParadiseLost.locate(name), trunkConstructor.newInstance(codec));
     }
 
     public static void init() {

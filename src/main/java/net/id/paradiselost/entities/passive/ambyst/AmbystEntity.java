@@ -21,16 +21,16 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.Map;
 
 public class AmbystEntity extends ParadiseLostAnimalEntity implements AngledModelEntity {
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super AmbystEntity>>> SENSORS;
     protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_MODULES;
-    private final Map<String, Vec3f> modelAngles = Maps.newHashMap();
+    private final Map<String, Vector3f> modelAngles = Maps.newHashMap();
 
     public AmbystEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -104,7 +104,7 @@ public class AmbystEntity extends ParadiseLostAnimalEntity implements AngledMode
     }
 
     @Override
-    public Map<String, Vec3f> getModelAngles() {
+    public Map<String, Vector3f> getModelAngles() {
         return this.modelAngles;
     }
 

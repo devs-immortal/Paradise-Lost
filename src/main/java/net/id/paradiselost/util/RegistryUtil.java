@@ -1,7 +1,5 @@
 package net.id.paradiselost.util;
 
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.RegistryWorldView;
 import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Nullable;

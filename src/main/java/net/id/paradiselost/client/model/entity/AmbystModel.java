@@ -8,7 +8,8 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.Vec3d;
+import org.joml.Vector3f;
 
 import java.util.Map;
 
@@ -101,7 +102,7 @@ public class AmbystModel extends AnimalModel<AmbystEntity> {
     }
 
     private void updateAnglesCache(AmbystEntity ambyst) {
-        Map<String, Vec3f> map = ambyst.getModelAngles();
+        Map<String, Vector3f> map = ambyst.getModelAngles();
         map.put("body", this.getAngles(this.body));
         map.put("head", this.getAngles(this.head));
         map.put("right_hind_leg", this.getAngles(this.rightHindLeg));
@@ -114,12 +115,12 @@ public class AmbystModel extends AnimalModel<AmbystEntity> {
         map.put("right_gills", this.getAngles(this.rightGills));
     }
 
-    private Vec3f getAngles(ModelPart part) {
-        return new Vec3f(part.pitch, part.yaw, part.roll);
+    private Vector3f getAngles(ModelPart part) {
+        return new Vector3f(part.pitch, part.yaw, part.roll);
     }
 
-    private void setAngles(ModelPart part, Vec3f angles) {
-        part.setAngles(angles.getX(), angles.getY(), angles.getZ());
+    private void setAngles(ModelPart part, Vector3f angles) {
+        part.setAngles(angles.x(), angles.y(), angles.z());
     }
 
     /**
@@ -129,7 +130,7 @@ public class AmbystModel extends AnimalModel<AmbystEntity> {
         this.body.pivotX = 0.0F;
         this.head.pivotY = 0.0F;
         this.body.pivotY = 20.0F;
-        Map<String, Vec3f> map = ambyst.getModelAngles();
+        Map<String, Vector3f> map = ambyst.getModelAngles();
         if (map.isEmpty()) {
             this.body.setAngles(headPitch * 0.017453292F, headYaw * 0.017453292F, 0.0F);
             this.head.setAngles(0.0F, 0.0F, 0.0F);

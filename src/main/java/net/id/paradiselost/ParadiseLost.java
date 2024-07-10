@@ -20,7 +20,6 @@ import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaRaces;
 import net.id.paradiselost.fluids.ParadiseLostFluids;
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.loot.ParadiseLostLootNumberProviderTypes;
 import net.id.paradiselost.lore.ParadiseLostLore;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.registry.ParadiseLostRegistries;
