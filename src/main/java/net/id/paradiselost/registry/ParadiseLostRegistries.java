@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
 import net.id.paradiselost.lore.LoreEntry;
 import net.id.paradiselost.lore.ParadiseLostLore;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registry;
 
 import static net.id.paradiselost.ParadiseLost.locate;
 

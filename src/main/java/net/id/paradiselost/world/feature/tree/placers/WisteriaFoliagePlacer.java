@@ -36,7 +36,7 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
+    protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
         Set<BlockPos> leaves = Sets.newHashSet();
         if (radius < 3) {
             radius = 3;
@@ -50,7 +50,7 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
         BlockPos nodePos = treeNode.getCenter();
         BlockPos altNodePos = nodePos.up(offset);
 
-        BlockState leafBlock = config.foliageProvider.getBlockState(random, nodePos);
+        BlockState leafBlock = config.foliageProvider.get(random, nodePos);
         BlockState hanger = Blocks.AIR.getDefaultState();
 
         if (leafBlock.getBlock() instanceof ParadiseLostLeavesBlock) {
@@ -62,7 +62,7 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
                 for (int k = 0; k < radius; k++) {
                     BlockPos offPos = nodePos.add(i - k, k, j - k);
                     if ((world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir) || TreeFeature.canReplace(world, offPos)) && offPos.isWithinDistance(random.nextBoolean() ? nodePos : altNodePos, radius)) {
-                        replacer.accept(offPos, leafBlock);
+                        placer.placeBlock(offPos, leafBlock);
                         leaves.add(offPos);
                     }
                 }
@@ -76,11 +76,11 @@ public class WisteriaFoliagePlacer extends FoliagePlacer {
                     int hangerLength = random.nextInt((int) Math.max(2, trunkHeight / 3.0 * 2));
                     int step = 0;
                     while (step <= hangerLength && world.testBlockState(offPos, AbstractBlock.AbstractBlockState::isAir)) {
-                        replacer.accept(offPos, hanger.with(ParadiseLostHangerBlock.TIP, false));
+                        placer.placeBlock(offPos, hanger.with(ParadiseLostHangerBlock.TIP, false));
                         offPos = offPos.down();
                         step++;
                     }
-                    replacer.accept(offPos.up(), hanger.with(ParadiseLostHangerBlock.TIP, true));
+                    placer.placeBlock(offPos.up(), hanger.with(ParadiseLostHangerBlock.TIP, true));
                 }
             }
         }

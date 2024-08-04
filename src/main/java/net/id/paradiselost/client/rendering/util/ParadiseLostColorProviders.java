@@ -8,7 +8,7 @@ import net.id.paradiselost.blocks.util.DynamicColorBlock;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
 
 @Environment(EnvType.CLIENT)
 public class ParadiseLostColorProviders {
@@ -31,7 +31,7 @@ public class ParadiseLostColorProviders {
 
     private static void initDynamicColorBlocks() {
         // Ideally we shouldn't go through the entire block registry, but it's almost instantaneous anyway
-        Registry.BLOCK.stream()
+        Registries.BLOCK.stream()
                 .filter(block -> block instanceof DynamicColorBlock)
                 .forEach(block -> {
                     DynamicColorBlock dynamic = (DynamicColorBlock) block;

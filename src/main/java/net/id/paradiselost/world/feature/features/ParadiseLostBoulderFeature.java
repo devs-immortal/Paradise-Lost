@@ -49,7 +49,7 @@ public class ParadiseLostBoulderFeature extends Feature<BoulderFeatureConfig> {
 
                 for (BlockPos bodyPos : BlockPos.iterate(blockPos.add(-j, -k, -l), blockPos.add(j, k, l))) {
                     if (bodyPos.getSquaredDistance(blockPos) <= (double) (f * f)) {
-                        structureWorldAccess.setBlockState(bodyPos, config.body().getBlockState(random, bodyPos), Block.NO_REDRAW);
+                        structureWorldAccess.setBlockState(bodyPos, config.body().get(random, bodyPos), Block.NO_REDRAW);
                     }
                 }
 

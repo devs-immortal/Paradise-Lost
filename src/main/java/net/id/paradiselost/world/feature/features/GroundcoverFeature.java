@@ -88,7 +88,7 @@ public class GroundcoverFeature extends Feature<GroundcoverFeatureConfig> {
                     centers.add(placement);
                 }
 
-                var state = config.states().getBlockState(random, placement);
+                var state = config.states().get(random, placement);
 
                 world.setBlockState(placement, state, Block.NOTIFY_LISTENERS);
                 world.getBlockTickScheduler().scheduleTick(OrderedTick.create(state.getBlock(), placement));

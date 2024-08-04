@@ -9,7 +9,8 @@ import net.id.paradiselost.ParadiseLost;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 /**
  * The server/common parts of the Paradise Lost particle system.
@@ -23,10 +24,6 @@ public class ParadiseLostParticles {
     public static DefaultParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal");
     public static DefaultParticleType CHERINE_FLAME = register("cherine_flame");
     public static DefaultParticleType VENOM_BUBBLE = register("venom_bubble");
-    /**
-     * A super fancy RGB splash particle.
-     */
-    public static ParticleType<ColoredSplashParticleEffect> COLORED_SPLASH = register("colored_splash", ColoredSplashParticleEffect.FACTORY);
     
     /**
      * Registers a simple particle type.
@@ -35,7 +32,7 @@ public class ParadiseLostParticles {
      * @return The new type
      */
     private static DefaultParticleType register(String id) {
-        return Registry.register(Registry.PARTICLE_TYPE, ParadiseLost.locate(id), FabricParticleTypes.simple(true));
+        return Registry.register(Registries.PARTICLE_TYPE, ParadiseLost.locate(id), FabricParticleTypes.simple(true));
     }
     
     /**
@@ -47,23 +44,13 @@ public class ParadiseLostParticles {
      * @return The new type
      */
     private static <T extends ParticleEffect> ParticleType<T> register(String id, ParticleEffect.Factory<T> factory) {
-        return Registry.register(Registry.PARTICLE_TYPE, ParadiseLost.locate(id), FabricParticleTypes.complex(true, factory));
+        return Registry.register(Registries.PARTICLE_TYPE, ParadiseLost.locate(id), FabricParticleTypes.complex(true, factory));
     }
     
     /**
      * Ensures that clinit ran.
      */
     public static void init() {
-    }
-    
-    /**
-     * Creates a colored particle effect.
-     *
-     * @param color The color to use
-     * @return The new effect
-     */
-    public static ColoredSplashParticleEffect coloredSplash(int color) {
-        return new ColoredSplashParticleEffect(COLORED_SPLASH, color);
     }
     
     /**
@@ -79,7 +66,6 @@ public class ParadiseLostParticles {
             register(FALLING_ORANGE_PETAL, FallingOrangePetalParticle.DefaultFactory::new);
             register(VENOM_BUBBLE, VenomBubbleParticle.DefaultFactory::new);
             register(CHERINE_FLAME, CherineFlameParticle.DefaultFactory::new);
-            register(COLORED_SPLASH, ColoredSplashParticle.FACTORY);
         }
         
         /**

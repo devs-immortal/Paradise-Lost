@@ -15,7 +15,6 @@ import net.id.paradiselost.entities.projectile.ThrownNitraEntity;
 import net.id.paradiselost.mixin.brain.ActivityInvoker;
 import net.id.paradiselost.mixin.brain.MemoryModuleTypeInvoker;
 import net.id.paradiselost.mixin.brain.SensorTypeInvoker;
-import net.id.incubus_core.util.RegistryQueue.Action;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.brain.Activity;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
@@ -24,11 +23,14 @@ import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static net.id.paradiselost.ParadiseLost.locate;
@@ -77,33 +79,31 @@ public class ParadiseLostEntityTypes {
         }
     });
 
-    private static Action<? super EntityType<? extends LivingEntity>> attributes(Supplier<DefaultAttributeContainer.Builder> builder) {
-        return (id, entityType) -> FabricDefaultAttributeRegistry.register(entityType, builder.get());
+    private static Consumer<? super EntityType<? extends LivingEntity>> attributes(Supplier<DefaultAttributeContainer.Builder> builder) {
+        return (entityType) -> FabricDefaultAttributeRegistry.register(entityType, builder.get());
     }
 
-    private static <T extends MobEntity> Action<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, Heightmap.Type heightmapType, SpawnRestriction.SpawnPredicate<T> predicate) {
-        return (id, entityType) -> SpawnRestriction.register(entityType, location, heightmapType, predicate);
+    private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, Heightmap.Type heightmapType, SpawnRestriction.SpawnPredicate<T> predicate) {
+        return (entityType) -> SpawnRestriction.register(entityType, location, heightmapType, predicate);
     }
 
-    private static <T extends MobEntity> Action<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, SpawnRestriction.SpawnPredicate<T> predicate) {
+    private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, SpawnRestriction.SpawnPredicate<T> predicate) {
         return spawnRestrictions(location, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate);
     }
 
-    private static <T extends MobEntity> Action<EntityType<T>> spawnRestrictions(SpawnRestriction.SpawnPredicate<T> predicate) {
+    private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnRestriction.SpawnPredicate<T> predicate) {
         return spawnRestrictions(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate);
     }
 
-    public static void init() {
-        ParadiseLostRegistryQueues.ENTITY_TYPE.register();
+    public static void init() {}
+
+    @SafeVarargs
+    private static <V extends EntityType<?>> V add(String id, V type, Consumer<? super V>... additionalActions) {
+        return Registry.register(Registries.ENTITY_TYPE, locate(id), type);
     }
 
     @SafeVarargs
-    private static <V extends EntityType<?>> V add(String id, V type, Action<? super V>... additionalActions) {
-        return ParadiseLostRegistryQueues.ENTITY_TYPE.add(locate(id), type, additionalActions);
-    }
-
-    @SafeVarargs
-    private static <E extends Entity> EntityType<E> add(String id, FabricEntityTypeBuilder<E> builder, Action<? super EntityType<E>>... additionalActions) {
+    private static <E extends Entity> EntityType<E> add(String id, FabricEntityTypeBuilder<E> builder, Consumer<? super EntityType<E>>... additionalActions) {
         return add(id, builder.build(), additionalActions);
     }
 

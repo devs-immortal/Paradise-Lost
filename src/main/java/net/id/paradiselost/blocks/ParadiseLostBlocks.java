@@ -253,9 +253,9 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostTallBrushBlock WILD_FLAX = add("wild_flax", new ParadiseLostTallBrushBlock(flower()), flammablePlant, cutoutMippedRenderLayer);
 
     // Ores
-    public static final OreBlock CHERINE_ORE = add("cherine_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
-    public static final OreBlock OLVITE_ORE = add("olvite_ore", new OreBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(1, 3)));
-    public static final OreBlock SURTRUM = add("surtrum", new SurtrumOreBlock(of(Material.STONE).sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f), UniformIntProvider.create(2, 5)));
+    public static final ExperienceDroppingBlock CHERINE_ORE = add("cherine_ore", new ExperienceDroppingBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
+    public static final ExperienceDroppingBlock OLVITE_ORE = add("olvite_ore", new ExperienceDroppingBlock(of(Material.STONE).requiresTool().strength(3f), UniformIntProvider.create(1, 3)));
+    public static final ExperienceDroppingBlock SURTRUM = add("surtrum", new SurtrumOreBlock(of(Material.STONE).sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f), UniformIntProvider.create(2, 5)));
     public static final Block METAMORPHIC_SHELL = add("metamorphic_shell", new Block(of(Material.STONE).sounds(BlockSoundGroup.TUFF).requiresTool().strength(40f, 6f)));
     public static final PoofBlock SURTRUM_AIR = add("surtrum_air", new PoofBlock(of(Material.FIRE).sounds(BlockSoundGroup.NETHER_GOLD_ORE)));
     public static final FloatingBlock LEVITA_ORE = add("levita_ore", new FloatingBlock(false, of(Material.STONE).requiresTool().strength(4f), UniformIntProvider.create(4, 7)));
@@ -287,9 +287,7 @@ public class ParadiseLostBlocks {
     //dungeon
 //    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
 
-    public static void init() {
-        ParadiseLostRegistryQueues.BLOCK.register();
-    }
+    public static void init() {}
 
     @Environment(EnvType.CLIENT)
     public static void initClient() {

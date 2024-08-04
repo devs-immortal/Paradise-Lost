@@ -39,13 +39,13 @@ public class PillarFeature extends Feature<LongFeatureConfig> {
                 for (int i = 0; i < height; i++) {
                     var pillar = pos.up(i);
 
-                    world.setBlockState(pillar, config.body().getBlockState(random, pillar), Block.NOTIFY_ALL);
+                    world.setBlockState(pillar, config.body().get(random, pillar), Block.NOTIFY_ALL);
 
                     for (Direction dir : Direction.values()) {
                         var shell = pillar.offset(dir);
                         if (dir.getHorizontal() >= 0 && world.isAir(shell) && random.nextFloat() < config.shellChance()) {
 
-                            var shellState = config.shell().getBlockState(random, shell);
+                            var shellState = config.shell().get(random, shell);
 
                             if (shellState.contains(Properties.HORIZONTAL_FACING)) {
                                 shellState = shellState.with(Properties.HORIZONTAL_FACING, dir.getOpposite());
@@ -61,7 +61,7 @@ public class PillarFeature extends Feature<LongFeatureConfig> {
 
                 if (random.nextFloat() < config.topChance()) {
                     var tip = pos.up(height);
-                    world.setBlockState(tip, config.top().getBlockState(random, tip), Block.NOTIFY_ALL);
+                    world.setBlockState(tip, config.top().get(random, tip), Block.NOTIFY_ALL);
                 }
             }
 

@@ -3,6 +3,7 @@ package net.id.paradiselost.blocks;
 import net.id.paradiselost.api.FloatingBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -12,11 +13,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 @SuppressWarnings("deprecation")
-public class FloatingBlock extends Block {
+public class FloatingBlock extends ExperienceDroppingBlock {
     private final boolean powered;
 
     public FloatingBlock(boolean powered, Settings properties, UniformIntProvider experienceDropped) {
-        super(properties);
+        super(properties, experienceDropped);
         this.powered = powered;
     }
 

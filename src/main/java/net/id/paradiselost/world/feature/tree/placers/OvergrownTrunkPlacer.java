@@ -68,7 +68,7 @@ public class OvergrownTrunkPlacer extends TrunkPlacer {
 
                         if (TreeFeature.canReplace(world, tempPos)) {
                             getAndSetState(world, replacer, random, tempPos, config, (state -> {
-                                var overgrowth = overgrowthProvider.getBlockState(random, tempPos);
+                                var overgrowth = overgrowthProvider.get(random, tempPos);
 
                                 if (overgrowth.contains(Properties.HORIZONTAL_FACING)) {
                                     overgrowth = overgrowth.with(Properties.HORIZONTAL_FACING, dir.getOpposite());

@@ -52,7 +52,7 @@ public class ProjectedOrganicCoverFeature extends Feature<ProjectedOrganicCoverC
 
         var maxProject = config.projection().get(random);
 
-        posSet.forEach(blockPos -> tryPlace(world, config.cover().getBlockState(random, blockPos), blockPos, maxProject));
+        posSet.forEach(blockPos -> tryPlace(world, config.cover().get(random, blockPos), blockPos, maxProject));
 
         return true;
     }

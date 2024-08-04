@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 
@@ -54,10 +55,10 @@ public class MotherAurelLeafParticle extends SpriteBillboardParticle {
             }
         }
         this.prevAngle = this.angle;
-        if (!this.onGround && !this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
-            this.angle += Math.PI * Math.sin(this.rotateFactor * this.age) / 2;
+        if (!this.onGround && !this.world.getFluidState(new BlockPos((int) this.x, (int) this.y, (int) this.z)).isIn(FluidTags.WATER)) {
+            this.angle += (float) (Math.PI * Math.sin(this.rotateFactor * this.age) / 2);
         }
-        if (this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        if (this.world.getFluidState(new BlockPos((int) this.x, (int) this.y, (int) this.z)).isIn(FluidTags.WATER)) {
             this.velocityY = 0;
             this.gravityStrength = 0;
         } else {

@@ -60,7 +60,7 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
                     }
                 }
 
-                var body = config.body().getBlockState(random, placement);
+                var body = config.body().get(random, placement);
 
 
                 if (body.contains(Properties.AXIS)) {
@@ -78,7 +78,7 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
                     var shell = placement.offset(dir);
 
                     if (dir.getHorizontal() >= 0 && dir.getAxis() != axis && world.isAir(shell) && random.nextFloat() < config.shellChance()) {
-                        var shellState = config.shell().getBlockState(random, shell);
+                        var shellState = config.shell().get(random, shell);
                         if (shellState.contains(Properties.HORIZONTAL_FACING)) {
                             shellState = shellState.with(Properties.HORIZONTAL_FACING, dir.getOpposite());
                         }
@@ -93,7 +93,7 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
                 var top = placement.up();
 
                 if (world.isAir(top) && random.nextFloat() < config.topChance()) {
-                    world.setBlockState(top, config.top().getBlockState(random, top), Block.NOTIFY_ALL);
+                    world.setBlockState(top, config.top().get(random, top), Block.NOTIFY_ALL);
                 }
 
             }
