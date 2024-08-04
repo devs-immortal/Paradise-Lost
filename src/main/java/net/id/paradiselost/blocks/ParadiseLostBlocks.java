@@ -1,7 +1,5 @@
 package net.id.paradiselost.blocks;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.id.paradiselost.blocks.decorative.*;
 import net.id.paradiselost.blocks.mechanical.*;
 import net.id.paradiselost.blocks.natural.*;
@@ -9,19 +7,14 @@ import net.id.paradiselost.blocks.natural.cloud.*;
 import net.id.paradiselost.blocks.natural.crop.*;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
-import net.id.paradiselost.fluids.ParadiseLostFluids;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.id.paradiselost.world.feature.tree.generator.*;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
-import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import java.util.List;
 
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.copy;
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.of;
@@ -66,9 +59,6 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostCloudBlock COLD_CLOUD = add("cold_cloud", new ParadiseLostCloudBlock(cloud().mapColor(MapColor.WHITE)), translucentRenderLayer);
     public static final BlueParadiseLostCloudBlock BLUE_CLOUD = add("blue_cloud", new BlueParadiseLostCloudBlock(cloud().mapColor(MapColor.LIGHT_BLUE)), translucentRenderLayer);
     public static final GoldenParadiseLostCloudBlock GOLDEN_CLOUD = add("golden_cloud", new GoldenParadiseLostCloudBlock(cloud().mapColor(MapColor.GOLD)), translucentRenderLayer);
-    // Fluids
-    public static final FluidBlock DENSE_CLOUD = add("dense_cloud", new FluidBlock(ParadiseLostFluids.DENSE_CLOUD, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
-    public static final FluidBlock SPRING_WATER = add("spring_water", new FluidBlock(ParadiseLostFluids.SPRING_WATER, of(Material.WATER).noCollision().strength(100f).dropsNothing()));
 
     // Smooth Floestone
     private static Settings floestone() {
@@ -144,21 +134,21 @@ public class ParadiseLostBlocks {
         return of(Material.REPLACEABLE_PLANT).strength(0.2f).sounds(BlockSoundGroup.VINE).nonOpaque().suffocates(never).blockVision(never);
     }
     // Aurel Wood
-    public static final WoodBlockSet AUREL_WOODSTUFF = registerWoodBlockSet("aurel", new AurelSaplingGenerator(), MapColor.DARK_RED, MapColor.DARK_RED, MapColor.PALE_GREEN);
+    public static final WoodBlockSet AUREL_WOODSTUFF = registerWoodBlockSet(ParadiseLostWoodTypes.AUREL, ParadiseLostBlockSets.AUREL, new AurelSaplingGenerator(), MapColor.DARK_RED, MapColor.DARK_RED, MapColor.PALE_GREEN);
     public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(copy(OAK_LOG).mapColor(MapColor.DARK_RED)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedLog()));
     public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(copy(OAK_LOG).mapColor(MapColor.DARK_RED)), flammableLog, cutoutRenderLayer);
     public static final LeafPileBlock AUREL_LEAF_PILE = add("aurel_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.PALE_GREEN)), flammableLeaves, cutoutMippedRenderLayer);
     public static final Block AUREL_BOOKSHELF = add("aurel_bookshelf", new Block(copy(BOOKSHELF).mapColor(MapColor.DARK_RED)), flammable(30, 20));
-    public static final SignSet AUREL_SIGNS = registerSignSet("aurel");
+    public static final SignSet AUREL_SIGNS = registerSignSet(ParadiseLostWoodTypes.AUREL);
     // Mother Aurel Wood
     public static final WoodBlockSet MOTHER_AUREL_WOODSTUFF = registerWoodBlockSetMotherAurel();
-    public static final SignSet MOTHER_AUREL_SIGNS = registerSignSet("mother_aurel");
+    public static final SignSet MOTHER_AUREL_SIGNS = registerSignSet(ParadiseLostWoodTypes.MOTHER_AUREL);
     // Orange Wood
     public static final WoodBlockSet ORANGE_WOODSTUFF = registerWoodBlockSetOrange();
-    public static final SignSet ORANGE_SIGNS = registerSignSet("orange");
+    public static final SignSet ORANGE_SIGNS = registerSignSet(ParadiseLostWoodTypes.ORANGE);
     // Wisteria Wood
     public static final WoodBlockSet WISTERIA_WOODSTUFF = registerWoodBlockSetWisteria();
-    public static final SignSet WISTERIA_SIGNS = registerSignSet("wisteria");
+    public static final SignSet WISTERIA_SIGNS = registerSignSet(ParadiseLostWoodTypes.WISTERIA);
 
     protected static Settings wisteriaLeaf() {
         return copy(OAK_LEAVES);
@@ -263,8 +253,8 @@ public class ParadiseLostBlocks {
     public static final Block OLVITE_BLOCK = add("olvite_block", new Block(of(Material.METAL).requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     public static final Block REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new Block(of(Material.METAL).requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
-    public static final ButtonBlock FLOESTONE_BUTTON = add("floestone_button", new ButtonBlock(copy(Blocks.STONE_BUTTON)));
-    public static final PressurePlateBlock FLOESTONE_PRESSURE_PLATE = add("floestone_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, copy(STONE_PRESSURE_PLATE)));
+    public static final ButtonBlock FLOESTONE_BUTTON = add("floestone_button", Blocks.createStoneButtonBlock());
+    public static final PressurePlateBlock FLOESTONE_PRESSURE_PLATE = add("floestone_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, copy(STONE_PRESSURE_PLATE), BlockSetType.STONE));
     public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, of(Material.WOOD).strength(3f, 3f).sounds(BlockSoundGroup.WOOD)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
     public static final CherineLanternBlock CHERINE_LANTERN = add("cherine_lantern", new CherineLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);
@@ -289,16 +279,16 @@ public class ParadiseLostBlocks {
 
     public static void init() {}
 
-    @Environment(EnvType.CLIENT)
-    public static void initClient() {
-        for (var signSet : List.of(AUREL_SIGNS, MOTHER_AUREL_SIGNS, ORANGE_SIGNS, WISTERIA_SIGNS)) {
-            TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(
-                    signSet.type(), new SpriteIdentifier(
-                            TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, new Identifier("entity/signs/" + signSet.type().getName())
-                    )
-            );
-        }
-    }
+//    @Environment(EnvType.CLIENT)
+//    public static void initClient() {
+//        for (var signSet : List.of(AUREL_SIGNS, MOTHER_AUREL_SIGNS, ORANGE_SIGNS, WISTERIA_SIGNS)) {
+//            TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(
+//                    signSet.type(), new SpriteIdentifier(
+//                            TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, new Identifier("entity/signs/" + signSet.type().getName())
+//                    )
+//            );
+//        }
+//    }
 
 
 }

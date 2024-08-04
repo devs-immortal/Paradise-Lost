@@ -74,7 +74,7 @@ public class VenomBubbleParticle extends SpriteBillboardParticle {
             }
         }
 
-        if (!world.getFluidState(new BlockPos(x, y, z)).isEmpty()) {
+        if (!world.getFluidState(new BlockPos((int) x, (int) y, (int) z)).isEmpty()) {
             updatePos();
             move(velocityX + velocityXWaver, velocityY / 2.5, velocityZ + velocityZWaver);
             age += random.nextInt(3);

@@ -54,8 +54,10 @@ public class BlockRegistration {
 
     // WOOD BLOCK SET
 
-    public static WoodBlockSet registerWoodBlockSet(String id, SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor, MapColor leafColor) {
+    public static WoodBlockSet registerWoodBlockSet(WoodType woodType, BlockSetType blockSetType, SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor, MapColor leafColor) {
+        var id = woodType.name();
         return registerWoodBlockSet(
+                woodType, blockSetType,
                 id + "_sapling", "potted_" + id + "_sapling",
                 id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
                 id + "_leaves",
@@ -74,6 +76,7 @@ public class BlockRegistration {
         var leavesSettings = AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.GOLD).luminance(state -> 5);
         SaplingBlock sapling = add(id + "_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), saplingSettings));
         return registerWoodBlockSet(
+                ParadiseLostWoodTypes.MOTHER_AUREL, ParadiseLostBlockSets.MOTHER_AUREL,
                 sapling,
                 add("potted_" + id + "_sapling", new FlowerPotBlock(sapling, flowerPotSettings)),
                 id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
@@ -91,6 +94,7 @@ public class BlockRegistration {
         var leavesSettings = AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.PALE_GREEN).sounds(BlockSoundGroup.AZALEA_LEAVES);
         FruitingLeavesBlock leaves = add(id + "_leaves", new FruitingLeavesBlock(leavesSettings, () -> ParadiseLostItems.ORANGE), flammableLeaves, cutoutMippedRenderLayer);
         return registerWoodBlockSet(
+                ParadiseLostWoodTypes.ORANGE, ParadiseLostBlockSets.ORANGE,
                 id + "_sapling", "potted_" + id + "_sapling",
                 id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
                 leaves,
@@ -105,6 +109,7 @@ public class BlockRegistration {
     public static WoodBlockSet registerWoodBlockSetWisteria() {
         String id = "wisteria";
         return registerWoodBlockSet(
+                ParadiseLostWoodTypes.WISTERIA, ParadiseLostBlockSets.WISTERIA,
                 null, null,
                 id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
                 null,
@@ -117,6 +122,7 @@ public class BlockRegistration {
     }
 
     private static WoodBlockSet registerWoodBlockSet(
+            WoodType woodType, BlockSetType blockSetType,
             String saplingId, String flowerPotId,
             String logId, String woodId, String strippedLogId, String strippedWoodId,
             String leavesId,
@@ -146,13 +152,14 @@ public class BlockRegistration {
                 add(logId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedLog)), add(woodId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedWood)), strippedLog, strippedWood,
                 add(leavesId, new LeavesBlock(leavesSettings), flammableLeaves, cutoutMippedRenderLayer),
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
-                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings), flammablePlanks),
-                add(doorId, new DoorBlock(doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings), cutoutMippedRenderLayer),
-                add(buttonId, new WoodenButtonBlock(buttonSettings)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings))
+                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings, woodType), flammablePlanks),
+                add(doorId, new DoorBlock(doorSettings, blockSetType), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings, blockSetType), cutoutMippedRenderLayer),
+                add(buttonId, new ButtonBlock(buttonSettings, blockSetType, 30, true)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings, blockSetType))
         );
     }
 
     private static WoodBlockSet registerWoodBlockSet(
+            WoodType woodType, BlockSetType blockSetType,
             SaplingBlock sapling, FlowerPotBlock flowerPot,
             String logId, String woodId, String strippedLogId, String strippedWoodId,
             LeavesBlock leaves,
@@ -177,13 +184,14 @@ public class BlockRegistration {
                 add(logId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedLog)), add(woodId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedWood)), strippedLog, strippedWood,
                 leaves,
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
-                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings), flammablePlanks),
-                add(doorId, new DoorBlock(doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings), cutoutMippedRenderLayer),
-                add(buttonId, new WoodenButtonBlock(buttonSettings)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings))
+                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings, woodType), flammablePlanks),
+                add(doorId, new DoorBlock(doorSettings, blockSetType), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings, blockSetType), cutoutMippedRenderLayer),
+                add(buttonId, new ButtonBlock(buttonSettings, blockSetType, 30, true)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings, blockSetType))
         );
     }
 
     private static WoodBlockSet registerWoodBlockSet(
+            WoodType woodType, BlockSetType blockSetType,
             String saplingId, String flowerPotId,
             String logId, String woodId, String strippedLogId, String strippedWoodId,
             LeavesBlock leaves,
@@ -211,9 +219,9 @@ public class BlockRegistration {
                 add(logId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedLog)), add(woodId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedWood)), strippedLog, strippedWood,
                 leaves,
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
-                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings), flammablePlanks),
-                add(doorId, new DoorBlock(doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings), cutoutMippedRenderLayer),
-                add(buttonId, new ButtonBlock(buttonSettings)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings))
+                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings, woodType), flammablePlanks),
+                add(doorId, new DoorBlock(doorSettings, blockSetType), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings, blockSetType), cutoutMippedRenderLayer),
+                add(buttonId, new ButtonBlock(buttonSettings, blockSetType, 30, true)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings, blockSetType))
         );
     }
 
@@ -258,25 +266,20 @@ public class BlockRegistration {
 
     // SIGN SET
 
-    public static SignSet registerSignSet(String woodId) {
-        SignType signType = SignTypeAccessor.callRegister(new ParadiseLostSignType(MOD_ID + "_" + woodId));
+    public static SignSet registerSignSet(WoodType woodType) {
 
         var signSettings = AbstractBlock.Settings.copy(Blocks.OAK_SIGN);
 
-        SignBlock signBlock = new SignBlock(signSettings, signType);
-        WallSignBlock wallSignBlock = new WallSignBlock(signSettings.dropsLike(signBlock), signType);
+        SignBlock signBlock = new SignBlock(signSettings, woodType);
+        WallSignBlock wallSignBlock = new WallSignBlock(signSettings.dropsLike(signBlock), woodType);
 
-        ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(signBlock);
-        ((BlockEntityTypeAccessor) BlockEntityType.SIGN).getBlocks().add(wallSignBlock);
+        add(woodType.name() + "_sign", signBlock);
+        add(woodType.name() + "_wall_sign", wallSignBlock);
 
-        add(woodId + "_sign", signBlock);
-        add(woodId + "_wall_sign", wallSignBlock);
-
-        return new SignSet(signType, signBlock, wallSignBlock);
+        return new SignSet(signBlock, wallSignBlock);
     }
 
     public record SignSet(
-            SignType type,
             SignBlock sign,
             WallSignBlock wallSign
             ) implements Iterable<Block> {

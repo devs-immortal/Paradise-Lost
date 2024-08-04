@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
@@ -46,7 +47,7 @@ public class BlueParadiseLostCloudBlock extends ParadiseLostCloudBlock {
                 double yOffset = pos.getY() + world.random.nextDouble();
                 double zOffset = pos.getZ() + world.random.nextDouble();
 
-                world.addParticle(ParadiseLostParticles.coloredSplash(0x60_89_9E), xOffset, yOffset, zOffset, 0.0, 0.0, 0.0);
+                world.addParticle(ParticleTypes.SPLASH, xOffset, yOffset, zOffset, 0.0, 0.0, 0.0);
             }
         }
     }

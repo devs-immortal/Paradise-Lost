@@ -4,7 +4,9 @@ import com.mojang.logging.LogUtils;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
+import net.id.paradiselost.blocks.ParadiseLostBlockSets;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
+import net.id.paradiselost.blocks.ParadiseLostWoodTypes;
 import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
 import net.id.paradiselost.client.model.ParadiseLostModelLayers;
 import net.id.paradiselost.client.model.ParadiseLostModelPredicates;
@@ -18,7 +20,6 @@ import net.id.paradiselost.client.rendering.util.ParadiseLostColorProviders;
 import net.id.paradiselost.commands.ParadiseLostCommands;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaRaces;
-import net.id.paradiselost.fluids.ParadiseLostFluids;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.lore.ParadiseLostLore;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
@@ -30,6 +31,7 @@ import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.gen.carver.ParadiseLostCarvers;
+import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 
@@ -73,21 +75,20 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
 
     @Override
     public void onInitialize() {
-        ParadiseLostConfig.init();
         ParadiseLostRegistries.init();
         ParadiseLostCarvers.init();
         ParadiseLostFeatures.init();
         ParadiseLostBiomes.init();
         ParadiseLostDimension.init();
+        ParadiseLostBlockSets.init();
+        ParadiseLostWoodTypes.init();
         ParadiseLostBlocks.init();
-        ParadiseLostFluids.init();
         ParadiseLostEntityTypes.init();
         ParadiseLostItems.init();
         ParadiseLostBlockEntityTypes.init();
         ParadiseLostRecipeTypes.init();
         ParadiseLostCommands.init();
         ParadiseLostGameRules.init();
-        ParadiseLostLootNumberProviderTypes.init();
         ParadiseLostSoundEvents.init();
         MoaRaces.init();
         ParadiseLostScreens.init();
@@ -114,7 +115,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostBlockEntityRenderers.initClient();
         ParadiseLostParticles.Client.init();
         ParadiseLostTextures.initClient();
-        ParadiseLostBlocks.initClient();
         ParadiseLostItemRenderers.initClient();
         ParadiseLostScreens.initClient();
         ParadiseLostScreens.clientInit();

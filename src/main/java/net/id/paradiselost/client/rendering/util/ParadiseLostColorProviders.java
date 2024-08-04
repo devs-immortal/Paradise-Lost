@@ -21,7 +21,6 @@ public class ParadiseLostColorProviders {
     private static void initBlocks() {
         ColorProviderRegistryImpl.BLOCK.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor()), ParadiseLostBlocks.AUREL_WOODSTUFF.leaves(), ParadiseLostBlocks.AUREL_LEAF_PILE, ParadiseLostBlocks.SHAMROCK);
         ColorProviderRegistryImpl.BLOCK.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getColor(0.5D, 1.0D)), ParadiseLostBlocks.HIGHLANDS_GRASS, ParadiseLostBlocks.GRASS, ParadiseLostBlocks.GRASS_FLOWERING, ParadiseLostBlocks.SHORT_GRASS, ParadiseLostBlocks.TALL_GRASS, ParadiseLostBlocks.FERN, ParadiseLostBlocks.BUSH);
-        ColorProviderRegistryImpl.BLOCK.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getWaterColor(world, pos) : -1), ParadiseLostBlocks.SPRING_WATER);
     }
 
     private static void initItems() {

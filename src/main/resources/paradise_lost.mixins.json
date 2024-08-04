@@ -19,7 +19,6 @@
     "entity.PiglinBrainMixin",
     "entity.PotionEntityMixin",
     "entity.PlayerEntityMixin",
-    "fluid.FlowableFluidMixin",
     "item.ArmorMaterialsAccessor",
     "item.AxeItemMixin",
     "item.FilledMapMixin",
