@@ -1,18 +1,13 @@
 package net.id.paradiselost.blocks;
 
-import net.fabricmc.fabric.mixin.lookup.BlockEntityTypeAccessor;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.mixin.util.SignTypeAccessor;
-import net.id.paradiselost.util.ParadiseLostSignType;
 import net.id.paradiselost.world.feature.tree.generator.MotherAurelSaplingGenerator;
 import net.id.paradiselost.world.feature.tree.generator.OrangeSaplingGenerator;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.sapling.SaplingGenerator;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -22,7 +17,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-import static net.id.paradiselost.ParadiseLost.MOD_ID;
 import static net.id.paradiselost.ParadiseLost.locate;
 import static net.id.paradiselost.blocks.ParadiseLostBlockActions.*;
 

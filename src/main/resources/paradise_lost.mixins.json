@@ -38,7 +38,6 @@
     "world.ExplosionMixin",
     "util.DefaultedRegistryMixin",
     "util.NbtCompoundAccessor",
-    "util.SignTypeAccessor",
     "util.SlotAccessor",
     "brain.MemoryModuleTypeInvoker",
     "brain.ActivityInvoker",
