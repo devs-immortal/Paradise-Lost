@@ -2,9 +2,11 @@ package net.id.paradiselost.world.feature.structure;
 
 import net.id.paradiselost.world.feature.structure.generator.AurelTowerGenerator;
 import net.id.paradiselost.world.feature.structure.generator.WellGenerator;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;
 
@@ -20,7 +22,7 @@ public class ParadiseLostStructureFeatures {
     public static final StructurePieceType AUREL_TOWER_PIECE = AurelTowerGenerator.Piece::new;
     
     private static TagKey<Structure> tagKey(String name) {
-        return TagKey.of(Registry.STRUCTURE_KEY, locate(name));
+        return TagKey.of(RegistryKeys.STRUCTURE, locate(name));
     }
     
     public static void init() {
@@ -30,7 +32,7 @@ public class ParadiseLostStructureFeatures {
     
     private static <T extends Structure> void register(TagKey<? extends T> name, StructureType<? extends T> type, StructurePieceType pieceType) {
         var id = name.id();
-        Registry.register(Registry.STRUCTURE_TYPE, id, type);
-        Registry.register(Registry.STRUCTURE_PIECE, id, pieceType);
+        Registry.register(Registries.STRUCTURE_TYPE, id, type);
+        Registry.register(Registries.STRUCTURE_PIECE, id, pieceType);
     }
 }

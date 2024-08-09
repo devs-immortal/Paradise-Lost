@@ -1,7 +1,7 @@
 package net.id.paradiselost.mixin.entity;
 
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
-import net.id.paradiselost.util.ParadiseLostDamageSources;
+import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -10,7 +10,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
@@ -96,7 +95,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 if (fallDistance >= 2.0F) {
                     increaseStat(Stats.FALL_ONE_CM, (int) Math.round((double) fallDistance * 100.0D));
                 }
-                cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageSources.PARADISE_LOST_FALL));
+                cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageTypes.of(world, ParadiseLostDamageTypes.FALL_FROM_PARADISE)));
             }
             cir.cancel();
         }

@@ -3,7 +3,6 @@ package net.id.paradiselost.tag;
 import net.id.paradiselost.ParadiseLost;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 
 public class ParadiseLostStructureTags {

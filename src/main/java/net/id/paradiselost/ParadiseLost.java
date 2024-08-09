@@ -20,18 +20,17 @@ import net.id.paradiselost.client.rendering.util.ParadiseLostColorProviders;
 import net.id.paradiselost.commands.ParadiseLostCommands;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaRaces;
+import net.id.paradiselost.items.ParadiseLostItemGroups;
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.lore.ParadiseLostLore;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
-import net.id.paradiselost.registry.ParadiseLostRegistries;
 import net.id.paradiselost.screen.ParadiseLostScreens;
+import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.world.ParadiseLostGameRules;
 import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.gen.carver.ParadiseLostCarvers;
-import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 
@@ -75,7 +74,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
 
     @Override
     public void onInitialize() {
-        ParadiseLostRegistries.init();
+        ParadiseLostDamageTypes.init();
         ParadiseLostCarvers.init();
         ParadiseLostFeatures.init();
         ParadiseLostBiomes.init();
@@ -85,6 +84,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostBlocks.init();
         ParadiseLostEntityTypes.init();
         ParadiseLostItems.init();
+        ParadiseLostItemGroups.init();
         ParadiseLostBlockEntityTypes.init();
         ParadiseLostRecipeTypes.init();
         ParadiseLostCommands.init();
@@ -92,7 +92,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostSoundEvents.init();
         MoaRaces.init();
         ParadiseLostScreens.init();
-        ParadiseLostLore.init();
         ParadiseLostParticles.init();
 
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {

@@ -246,7 +246,7 @@ public final class ParadiseLostSoundEvents {
     }
 
     public static final class Music {
-        public static final MusicSound PARADISE_LOST = new MusicSound(MUSIC_PARADISE_LOST, 12000, 24000, false);
+        public static final MusicSound PARADISE_LOST = new MusicSound(Registries.SOUND_EVENT.getEntry(MUSIC_PARADISE_LOST), 12000, 24000, false);
 
         //Triggers <clinit>()V
         private static void init() {

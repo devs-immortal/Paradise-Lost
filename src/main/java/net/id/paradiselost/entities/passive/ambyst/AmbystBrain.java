@@ -27,7 +27,16 @@ public class AmbystBrain {
     }
 
     private static void addIdleActivities(Brain<AmbystEntity> brain) {
-        brain.setTaskList(Activity.IDLE, ImmutableList.of(Pair.of(0, new TimeLimitedTask(new FollowMobTask(EntityType.PLAYER, 6.0F), UniformIntProvider.create(30, 60))), Pair.of(1, new BreedTask(EntityType.AXOLOTL, 0.2F)), Pair.of(3, new SeekWaterTask(6, 0.15F)), Pair.of(4, new CompositeTask(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryModuleState.VALUE_ABSENT), ImmutableSet.of(), CompositeTask.Order.ORDERED, CompositeTask.RunMode.TRY_ALL, ImmutableList.of(Pair.of(new AquaticStrollTask(0.5F), 2), Pair.of(new StrollTask(0.15F, false), 2))))));
+//        brain.setTaskList(Activity.IDLE, ImmutableList.of(
+//                Pair.of(0, new TimeLimitedTask(new FollowMobTask(EntityType.PLAYER, 6.0F), UniformIntProvider.create(30, 60))),
+//                Pair.of(1, new BreedTask(EntityType.AXOLOTL, 0.2F)),
+//                Pair.of(3, new SeekWaterTask(6, 0.15F)),
+//                Pair.of(4, new CompositeTask(
+//                        ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryModuleState.VALUE_ABSENT),
+//                        ImmutableSet.of(),
+//                        CompositeTask.Order.ORDERED,
+//                        CompositeTask.RunMode.TRY_ALL,
+//                        ImmutableList.of(Pair.of(new AquaticStrollTask(0.5F), 2), Pair.of(new StrollTask(0.15F, false), 2))))));
     }
 
     private static void addHideActivities(Brain<AmbystEntity> brain) {

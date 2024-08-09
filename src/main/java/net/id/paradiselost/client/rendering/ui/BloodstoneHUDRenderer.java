@@ -16,6 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -84,8 +85,9 @@ public class BloodstoneHUDRenderer {
 
     private static void renderOlvite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
-        Sprite affinitySprite = statusEffectSpriteManager.getSprite(StatusEffects.BAD_OMEN).getAtlas().getSprite(ParadiseLost.locate("hud/bloodstone/affinity"));
-        Sprite raceSprite = statusEffectSpriteManager.getSprite(StatusEffects.BAD_OMEN).getAtlas().getSprite(ParadiseLost.locate("hud/bloodstone/race"));
+        var effectAtlas = client.getSpriteAtlas(new Identifier("textures/atlas/mob_effects.png"));
+        Sprite affinitySprite = effectAtlas.apply(ParadiseLost.locate("affinity"));
+        Sprite raceSprite = effectAtlas.apply(ParadiseLost.locate("race"));
 
         renderRing(matrixStack, 0, 0);
         renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
@@ -142,7 +144,7 @@ public class BloodstoneHUDRenderer {
     }
 
     private static void renderIconWText(MatrixStack matrixStack, MinecraftClient client, Sprite sprite, Text text, int offsetX, int offsetY) {
-        int totalWidth = ((sprite.getWidth() + 2 + client.textRenderer.getWidth(text)));
+        int totalWidth = ((sprite.getContents().getWidth()) + 2 + client.textRenderer.getWidth(text));
         int totalHeight = client.textRenderer.fontHeight / 2;
 
         int startX = offsetX;
@@ -152,10 +154,10 @@ public class BloodstoneHUDRenderer {
             startX = (offsetX - totalWidth);
         }
 
-        RenderSystem.setShaderTexture(0, sprite.getAtlas().getId());
+        RenderSystem.setShaderTexture(0, sprite.getAtlasId());
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1);
-        DrawableHelper.drawSprite(matrixStack, startX, offsetY - 9, client.inGameHud.getZOffset(), 18, 18, sprite);
-        client.textRenderer.drawWithShadow(matrixStack, text, startX + sprite.getWidth() + 2, offsetY - totalHeight, 14737632);
+        DrawableHelper.drawSprite(matrixStack, startX, offsetY - 9, 0, 18, 18, sprite);  //  0 z correct?
+        client.textRenderer.drawWithShadow(matrixStack, text, startX + sprite.getContents().getWidth() + 2, offsetY - totalHeight, 14737632);
     }
 
     private static void renderText(MatrixStack matrixStack, MinecraftClient client, Text text, int offsetX, int offsetY) {

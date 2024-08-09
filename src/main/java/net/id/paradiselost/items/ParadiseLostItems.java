@@ -3,6 +3,7 @@ package net.id.paradiselost.items;
 import com.google.common.collect.ImmutableList;
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
@@ -31,6 +32,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -54,8 +56,8 @@ public class ParadiseLostItems {
         return new FabricItemSettings().fireproof();
     }
 
-    private static FabricItemSettings resource() {
-        return new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_RESOURCES);
+    private static Settings resource() {
+        return new Settings();
     }
 
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource()));
@@ -73,7 +75,7 @@ public class ParadiseLostItems {
 
 
     private static Settings tool() {
-        return new Settings().group(ParadiseLostItemGroups.PARADISE_LOST_TOOLS);
+        return new Settings();
     }
 
     private static final Settings tool = tool();
@@ -118,7 +120,7 @@ public class ParadiseLostItems {
     public static final Item GLAZED_GOLD_UPGRADE = add("glazed_gold_upgrade_smithing_template", new Item(tool()));
 
     private static Settings wearable() {
-        return new Settings().group(ParadiseLostItemGroups.PARADISE_LOST_WEARABLES);
+        return new Settings();
     }
 
     private static final Settings WEARABLE = wearable();
@@ -144,11 +146,11 @@ public class ParadiseLostItems {
 
 
     private static Settings food() {
-        return new Settings().group(ParadiseLostItemGroups.PARADISE_LOST_FOOD);
+        return new Settings();
     }
 
     private static Settings food(FoodComponent foodComponent) {
-        return new Settings().group(ParadiseLostItemGroups.PARADISE_LOST_FOOD).food(foodComponent);
+        return new Settings().food(foodComponent);
     }
 
     private static Settings food(FoodComponent foodComponent, Rarity rarity) {
@@ -170,14 +172,13 @@ public class ParadiseLostItems {
     public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", new Item(food(ParadiseLostFoodComponent.COOKED_MOA_MEAT)));
 
     private static Settings misc() {
-        return new Settings().group(ParadiseLostItemGroups.PARADISE_LOST_MISC);
+        return new Settings();
     }
 
     private static final Settings misc = misc();
 
     public static final ParadiseLostPortalItem PARADISE_LOST_PORTAL = add("portal", new ParadiseLostPortalItem(misc));
 
-    public static final BookOfLoreItem LORE_BOOK = add("lore_book", new BookOfLoreItem(misc().maxCount(1)));
     public static final MoaEggItem MOA_EGG = add("moa_egg", new MoaEggItem(misc().maxCount(1)));
     public static final BlockItem INCUBATOR = add("incubator", ParadiseLostBlocks.INCUBATOR, misc, fuel(300));
     public static final BlockItem FOOD_BOWL = add("food_bowl", ParadiseLostBlocks.FOOD_BOWL, misc, fuel(300));
@@ -194,7 +195,7 @@ public class ParadiseLostItems {
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, misc), spawnEggBehavior);
 
     private static FabricItemSettings building_block() {
-        return new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_BUILDING_BLOCKS);
+        return new FabricItemSettings();
     }
 
     public static final BlockItem BLOOMED_CALCITE = add("bloomed_calcite", ParadiseLostBlocks.BLOOMED_CALCITE, building_block());
@@ -301,7 +302,7 @@ public class ParadiseLostItems {
     // colorfuls
 
     private static FabricItemSettings decoration() {
-        return new FabricItemSettings().group(ParadiseLostItemGroups.PARADISE_LOST_DECORATIONS);
+        return new FabricItemSettings();
     }
 
     private static final FabricItemSettings decoration = decoration();
@@ -369,7 +370,7 @@ public class ParadiseLostItems {
 
     // lights
     public static final BlockItem CHERINE_LANTERN = add("cherine_lantern", ParadiseLostBlocks.CHERINE_LANTERN, decoration);
-    public static final WallStandingBlockItem CHERINE_TORCH = add("cherine_torch", new WallStandingBlockItem(ParadiseLostBlocks.CHERINE_TORCH, ParadiseLostBlocks.CHERINE_TORCH_WALL, decoration));
+    public static final VerticallyAttachableBlockItem CHERINE_TORCH = add("cherine_torch", new VerticallyAttachableBlockItem(ParadiseLostBlocks.CHERINE_TORCH, ParadiseLostBlocks.CHERINE_TORCH_WALL, decoration, Direction.DOWN));
     // util blocks (enchanter, freezer, etc.)
 
     // redstone

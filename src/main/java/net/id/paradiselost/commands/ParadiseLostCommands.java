@@ -12,7 +12,6 @@ public class ParadiseLostCommands {
         register(MoaEggCommand::register);
         register(MoaStatCommand::register);
         register(FloatingBlockCommand::register);
-        register(LoreCommand::register);
     }
 
     private static void register(Consumer<CommandDispatcher<ServerCommandSource>> command) {

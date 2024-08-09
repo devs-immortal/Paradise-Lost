@@ -4,12 +4,13 @@ import com.google.common.collect.ImmutableMap;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
+import net.minecraft.entity.ai.brain.task.MultiTickTask;
 import net.minecraft.entity.ai.brain.task.Task;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
-public class StayInLogTask extends Task<AnimalEntity> {
+public class StayInLogTask extends MultiTickTask<AnimalEntity> {
     public StayInLogTask() {
         super(ImmutableMap.of(ParadiseLostEntityTypes.IS_RAINING_MEMORY, MemoryModuleState.VALUE_PRESENT,
                 ParadiseLostEntityTypes.LOG_MEMORY, MemoryModuleState.VALUE_PRESENT,

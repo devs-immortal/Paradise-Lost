@@ -3,10 +3,8 @@ package net.id.paradiselost.screen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
-import net.id.paradiselost.screen.handler.LoreHandler;
 import net.id.paradiselost.screen.handler.MoaScreenHandler;
 import net.id.paradiselost.screen.slot.PreviewSlot;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -20,8 +18,7 @@ import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
 public final class ParadiseLostScreens {
     private ParadiseLostScreens() {
     }
-    
-    public static final ScreenHandlerType<LoreHandler> LORE = register("lore", LoreHandler::new);
+
     public static final ScreenHandlerType<MoaScreenHandler> MOA = register("moa", (syncId, inventory, buffer) -> {
         Entity entity = inventory.player.world.getEntityById(buffer.readVarInt());
         if (!(entity instanceof MoaEntity moa)) {
@@ -36,7 +33,6 @@ public final class ParadiseLostScreens {
     
     @Environment(EnvType.CLIENT)
     public static void initClient() {
-        register(LORE, LoreScreen::new);
         register(MOA, MoaScreen::new);
     }
     

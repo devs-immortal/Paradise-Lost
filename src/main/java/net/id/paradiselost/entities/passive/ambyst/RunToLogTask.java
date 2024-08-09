@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
+import net.minecraft.entity.ai.brain.task.MultiTickTask;
 import net.minecraft.entity.ai.brain.task.Task;
 import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.ai.pathing.PathNode;
@@ -14,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RunToLogTask extends Task<AnimalEntity> {
+public class RunToLogTask extends MultiTickTask<AnimalEntity> {
     private final float speed = .25f;
 
     public RunToLogTask() {
