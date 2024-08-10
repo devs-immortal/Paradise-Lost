@@ -3,7 +3,6 @@ package net.id.paradiselost.world.feature.placed_features;
 import net.id.paradiselost.world.feature.configured_features.ParadiseLostMiscConfiguredFeatures;
 import net.id.paradiselost.world.feature.placement_modifiers.ChancePlacementModifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.PlacedFeature;

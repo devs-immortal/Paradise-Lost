@@ -8,7 +8,8 @@ import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatu
 import net.id.paradiselost.world.feature.placement_modifiers.ParadiseLostPlacementModifiers;
 import net.id.paradiselost.world.feature.structure.ParadiseLostStructureFeatures;
 import net.id.paradiselost.world.feature.tree.ParadiseLostTreeHell;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.DeltaFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -34,7 +35,7 @@ public class ParadiseLostFeatures {
     public static final SurtrumMeteoriteFeature SURTRUM_METEORITE_FEATURE = register("surtrum_meteorite_feature", new SurtrumMeteoriteFeature(DefaultFeatureConfig.CODEC));
 
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {
-        return Registry.register(Registry.FEATURE, ParadiseLost.locate(id), feature);
+        return Registry.register(Registries.FEATURE, ParadiseLost.locate(id), feature);
     }
 
     public static void init() {

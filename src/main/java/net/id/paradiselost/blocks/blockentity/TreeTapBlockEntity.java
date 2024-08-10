@@ -136,7 +136,7 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
 
 		Optional<TreeTapRecipe> recipe = this.world.getRecipeManager().getFirstMatch(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE, this, this.world);
 		if (recipe.isPresent() && world.random.nextInt(recipe.get().getChance()) == 0) {
-			ItemStack output = recipe.get().craft(this);
+			ItemStack output = recipe.get().craft(this, world.getRegistryManager());
             Block convertBlock = recipe.get().getOutputBlock();
             BlockPos attachedPos = this.pos.offset(world.getBlockState(this.pos).get(TreeTapBlock.FACING).getOpposite());
             BlockState attachedBlock = world.getBlockState(attachedPos);

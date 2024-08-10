@@ -42,7 +42,7 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
     
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - backgroundWidth) >> 1;
@@ -57,7 +57,7 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
         var scale = MinecraftClient.getInstance().getWindow().getScaleFactor();
         //RenderSystem.enableScissor(this.x + (int) ((x + 26) * scale), this.y + (int) ((y + 18) * scale), (int) (52 * scale), (int) (52 * scale));
         try {
-            InventoryScreen.drawEntity(x + 51, y + 60, 17, x + 51 - mouseX, y + 25 - mouseY, moa);
+            InventoryScreen.drawEntity(matrices, x + 51, y + 60, 17, x + 51 - mouseX, y + 25 - mouseY, moa);
         } finally {
             RenderSystem.disableScissor();
         }

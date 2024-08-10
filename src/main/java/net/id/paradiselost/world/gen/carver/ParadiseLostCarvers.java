@@ -2,13 +2,13 @@ package net.id.paradiselost.world.gen.carver;
 
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
 import net.minecraft.util.math.floatprovider.UniformFloatProvider;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.carver.CarverConfig;
@@ -35,11 +35,11 @@ public class ParadiseLostCarvers {
 
     @SuppressWarnings("unchecked")
     public static <T extends CarverConfig> Carver<T> register(String name, Carver<?> carver) {
-        return (Carver<T>) Registry.register(Registry.CARVER, ParadiseLost.locate(name), carver);
+        return (Carver<T>) Registry.register(Registries.CARVER, ParadiseLost.locate(name), carver);
     }
 
     public static RegistryEntry<ConfiguredCarver<?>> register(String name, ConfiguredCarver<?> carver) {
-        return BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_CARVER, ParadiseLost.locate(name), carver);
+        return BuiltinRegistries.add(Registries.CONFIGURED_CARVER, ParadiseLost.locate(name), carver);
     }
 
     public static void init() {

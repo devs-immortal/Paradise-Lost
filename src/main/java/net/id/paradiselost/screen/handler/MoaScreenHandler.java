@@ -1,6 +1,7 @@
 package net.id.paradiselost.screen.handler;
 
 import com.mojang.datafixers.util.Pair;
+import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.mixin.util.SlotAccessor;
 import net.id.paradiselost.screen.ParadiseLostScreens;
@@ -15,6 +16,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SaddleItem;
+import net.minecraft.screen.EnchantmentScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.Identifier;
@@ -38,7 +40,7 @@ public class MoaScreenHandler extends ScreenHandler {
     private final MoaEntity moa;
     private final Set<Slot> moaChestSlots;
     private boolean enableMoaInventory;
-    
+
     public MoaScreenHandler(int syncId, PlayerInventory playerInventory, Inventory moaInventory, MoaEntity moa) {
         super(ParadiseLostScreens.MOA, syncId);
         this.moa = moa;
@@ -56,7 +58,7 @@ public class MoaScreenHandler extends ScreenHandler {
     
                 @Override
                 public Pair<Identifier, Identifier> getBackgroundSprite() {
-                    return Pair.of(BLOCK_ATLAS_TEXTURE, PreviewSlot.Image.SADDLE.location());
+                    return Pair.of(BLOCK_ATLAS_TEXTURE, ParadiseLost.locate("item/slot/empty_slot_saddle"));
                 }
             }
         );
@@ -78,7 +80,7 @@ public class MoaScreenHandler extends ScreenHandler {
     
                 @Override
                 public Pair<Identifier, Identifier> getBackgroundSprite() {
-                    return Pair.of(BLOCK_ATLAS_TEXTURE, PreviewSlot.Image.CHEST.location());
+                    return Pair.of(BLOCK_ATLAS_TEXTURE, ParadiseLost.locate("item/slot/empty_slot_chest"));
                 }
             }
         );
@@ -128,7 +130,7 @@ public class MoaScreenHandler extends ScreenHandler {
             ((SlotAccessor) slot).setInventory(inventory);
         }
     }
-    
+
     @Override
     public boolean canUse(PlayerEntity player) {
         return player.squaredDistanceTo(moa) <= 64;
@@ -143,7 +145,7 @@ public class MoaScreenHandler extends ScreenHandler {
     }
     
     @Override
-    public ItemStack transferSlot(PlayerEntity player, int sourceSlot) {
+    public ItemStack quickMove(PlayerEntity player, int sourceSlot) {
         ItemStack result = ItemStack.EMPTY;
         if (!moa.hasChest()) return result;
         Slot slot = slots.get(sourceSlot);

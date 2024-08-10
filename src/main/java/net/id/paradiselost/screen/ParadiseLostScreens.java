@@ -48,14 +48,4 @@ public final class ParadiseLostScreens {
     private static <T extends ScreenHandler, S extends HandledScreen<T>> void register(ScreenHandlerType<T> type, ScreenRegistry.Factory<T, S> factory) {
         ScreenRegistry.register(type, factory);
     }
-    
-    @Environment(EnvType.CLIENT)
-    public static void clientInit() {
-        // Registers the custom slot textures
-        ClientSpriteRegistryCallback.event(BLOCK_ATLAS_TEXTURE).register((atlas, registry) -> {
-            for (PreviewSlot.Image value : PreviewSlot.Image.values()) {
-                registry.register(value.location());
-            }
-        });
-    }
 }

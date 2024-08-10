@@ -15,9 +15,9 @@ import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
  * A slot with a custom item "preview", like the armor slots in the Player's inventory.
  */
 public class PreviewSlot extends Slot {
-    private final Image image;
+    private final Identifier image;
     
-    public PreviewSlot(Image image, Inventory inventory, int index, int x, int y) {
+    public PreviewSlot(Identifier image, Inventory inventory, int index, int x, int y) {
         super(inventory, index, x, y);
         this.image = image;
     }
@@ -25,25 +25,7 @@ public class PreviewSlot extends Slot {
     @Environment(EnvType.CLIENT)
     @Override
     public Pair<Identifier, Identifier> getBackgroundSprite() {
-        return Pair.of(BLOCK_ATLAS_TEXTURE, image.location);
+        return Pair.of(BLOCK_ATLAS_TEXTURE, image);
     }
-    
-    public enum Image {
-        CHEST("item/slot/chest"),
-        SADDLE("item/slot/saddle");
-    
-        private final Identifier location;
-    
-        Image(String location) {
-            if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-                this.location = locate(location);
-            } else {
-                this.location = null;
-            }
-        }
-    
-        public Identifier location() {
-            return location;
-        }
-    }
+
 }

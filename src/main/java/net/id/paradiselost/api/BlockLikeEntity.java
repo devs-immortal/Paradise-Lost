@@ -13,6 +13,8 @@ import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.*;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.state.property.Properties;
@@ -241,7 +243,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound compound) {
-        this.blockState = NbtHelper.toBlockState(compound.getCompound("BlockState"));
+        this.blockState = NbtHelper.toBlockState(BuiltinRegistries.createWrapperLookup().getWrapperOrThrow(RegistryKeys.BLOCK), compound.getCompound("BlockState"));
         this.moveTime = compound.getInt("Time");
         if (compound.contains("HurtEntities", 99)) {
             this.hurtEntities = compound.getBoolean("HurtEntities");
