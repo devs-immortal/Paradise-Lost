@@ -45,7 +45,7 @@ public class ParadiseLostTreeHell {
 
     public static void init() {
         try {
-            WISTERIA_FOLIAGE = registerFoliage("wisteria_folliage_placer", WisteriaFoliagePlacer.CODEC);
+            WISTERIA_FOLIAGE = registerFoliage("wisteria_foliage_placer", WisteriaFoliagePlacer.CODEC);
             WISTERIA_TRUNK = registerTrunk("wisteria_trunk_placer", WisteriaTrunkPlacer.CODEC);
             OVERGROWN_TRUNK = registerTrunk("overgrown_trunk_placer", OvergrownTrunkPlacer.CODEC);
             foliageConstructor.setAccessible(false);

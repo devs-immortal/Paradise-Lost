@@ -74,7 +74,7 @@ public class BlockRegistration {
                 sapling,
                 add("potted_" + id + "_sapling", new FlowerPotBlock(sapling, flowerPotSettings)),
                 id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
-                add(id + "_leaves", new ParadiseLostLeavesBlock(leavesSettings, true), flammableLeaves, cutoutMippedRenderLayer),
+                add(id + "_leaves", new ParadiseLostLeavesBlock(leavesSettings), flammableLeaves, cutoutMippedRenderLayer),
                 id + "_planks", id + "_stairs", id + "_slab",
                 id + "_fence", id + "_fence_gate",
                 id + "_door", id + "_trapdoor",

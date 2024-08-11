@@ -18,12 +18,10 @@ import net.minecraft.world.WorldView;
 
 public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable {
 
-    protected final boolean collidable;
     protected int speed = 0;
 
-    public ParadiseLostLeavesBlock(Settings settings, boolean collidable) {
+    public ParadiseLostLeavesBlock(Settings settings) {
         super(settings);
-        this.collidable = collidable;
     }
 
     public static BlockState getHanger(BlockState state) {
@@ -35,15 +33,6 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
             return ParadiseLostBlocks.FROST_WISTERIA_HANGER.getDefaultState();
         }
         return Blocks.AIR.getDefaultState();
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!collidable && entity instanceof LivingEntity) {
-            entity.fallDistance = 0;
-            entity.slowMovement(state, new Vec3d(0.99D, 0.9D, 0.99D));
-        }
     }
 
     @Override

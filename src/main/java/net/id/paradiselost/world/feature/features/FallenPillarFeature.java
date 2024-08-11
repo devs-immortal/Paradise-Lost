@@ -28,7 +28,7 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
             origin = origin.down();
         }
 
-        if (config.validFloor().contains(world.getBlockState(origin.down()))) {
+        if (config.validFloor().contains(world.getBlockState(origin.down()).getRegistryEntry())) {
 
             boolean shifted = false;
             var axis = (origin.getX() % 2 == 0) ^ (origin.getZ() % 2 == 0) ? Direction.Axis.X : Direction.Axis.Z;

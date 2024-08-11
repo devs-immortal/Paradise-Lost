@@ -160,19 +160,19 @@ public class ParadiseLostBlocks {
         return copy(Blocks.OAK_SAPLING);
     }
 
-    public static final WisteriaLeavesBlock ROSE_WISTERIA_LEAVES = add("rose_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.PINK), false), flammableLeaves, cutoutMippedRenderLayer);
+    public static final WisteriaLeavesBlock ROSE_WISTERIA_LEAVES = add("rose_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.PINK)), flammableLeaves, cutoutMippedRenderLayer);
     public static final LeafPileBlock ROSE_WISTERIA_LEAF_PILE = add("rose_wisteria_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.PINK)), flammableLeaves, cutoutMippedRenderLayer);
     public static final SaplingBlock ROSE_WISTERIA_SAPLING = add("rose_wisteria_sapling", new ParadiseLostSaplingBlock(new RoseWisteriaSaplingGenerator(), wisteriaSapling().mapColor(MapColor.PINK)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_ROSE_WISTERIA_SAPLING = add("potted_rose_wisteria_sapling", new FlowerPotBlock(ROSE_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);
     public static final ParadiseLostHangerBlock ROSE_WISTERIA_HANGER = add("rose_wisteria_hanger", new ParadiseLostHangerBlock(wisteriaHanger().mapColor(MapColor.PINK)), flammableLeaves, cutoutRenderLayer);
 
-    public static final WisteriaLeavesBlock FROST_WISTERIA_LEAVES = add("frost_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.LIGHT_BLUE), false), flammableLeaves, cutoutMippedRenderLayer);
+    public static final WisteriaLeavesBlock FROST_WISTERIA_LEAVES = add("frost_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.LIGHT_BLUE)), flammableLeaves, cutoutMippedRenderLayer);
     public static final LeafPileBlock FROST_WISTERIA_LEAF_PILE = add("frost_wisteria_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.LIGHT_BLUE)), flammableLeaves, cutoutMippedRenderLayer);
     public static final SaplingBlock FROST_WISTERIA_SAPLING = add("frost_wisteria_sapling", new ParadiseLostSaplingBlock(new FrostWisteriaSaplingGenerator(), wisteriaSapling().mapColor(MapColor.LIGHT_BLUE)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_FROST_WISTERIA_SAPLING = add("potted_frost_wisteria_sapling", new FlowerPotBlock(FROST_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);
     public static final ParadiseLostHangerBlock FROST_WISTERIA_HANGER = add("frost_wisteria_hanger", new ParadiseLostHangerBlock(wisteriaHanger().mapColor(MapColor.LIGHT_BLUE)), flammableLeaves, cutoutRenderLayer);
 
-    public static final WisteriaLeavesBlock LAVENDER_WISTERIA_LEAVES = add("lavender_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.MAGENTA), false), flammableLeaves, cutoutMippedRenderLayer);
+    public static final WisteriaLeavesBlock LAVENDER_WISTERIA_LEAVES = add("lavender_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.MAGENTA)), flammableLeaves, cutoutMippedRenderLayer);
     public static final LeafPileBlock LAVENDER_WISTERIA_LEAF_PILE = add("lavender_wisteria_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.MAGENTA)), flammableLeaves, cutoutMippedRenderLayer);
     public static final SaplingBlock LAVENDER_WISTERIA_SAPLING = add("lavender_wisteria_sapling", new ParadiseLostSaplingBlock(new LavenderWisteriaSaplingGenerator(), wisteriaSapling().mapColor(MapColor.MAGENTA)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_LAVENDER_WISTERIA_SAPLING = add("potted_lavender_wisteria_sapling", new FlowerPotBlock(LAVENDER_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);

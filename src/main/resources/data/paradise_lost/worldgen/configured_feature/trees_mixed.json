@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "paradise_lost:tree_aurel",
+    "features": [
+      {
+        "chance": 0.4,
+        "feature": "paradise_lost:tree_dwarf_mottled_aurel"
+      }
+    ]
+  }
+}

@@ -11,8 +11,8 @@ import java.util.*;
 
 public class WisteriaLeavesBlock extends ParadiseLostLeavesBlock {
 
-    public WisteriaLeavesBlock(Settings settings, boolean collidable) {
-        super(settings, collidable);
+    public WisteriaLeavesBlock(Settings settings) {
+        super(settings);
     }
 
     @Override

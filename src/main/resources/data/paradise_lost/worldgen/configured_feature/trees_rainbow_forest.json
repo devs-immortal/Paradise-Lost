@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "paradise_lost:tree_rose_wisteria",
+    "features": [
+      {
+        "chance": 0.33,
+        "feature": "paradise_lost:tree_lavender_wisteria"
+      },
+      {
+        "chance": 0.025,
+        "feature": "paradise_lost:tree_fancy_lavender_wisteria"
+      },
+      {
+        "chance": 0.075,
+        "feature": "paradise_lost:tree_fancy_rose_wisteria"
+      },
+      {
+        "chance": 0.005,
+        "feature": "paradise_lost:tree_frost_wisteria"
+      },
+      {
+        "chance": 0.2,
+        "feature": "paradise_lost:tree_aurel"
+      },
+      {
+        "chance": 0.0125,
+        "feature": "paradise_lost:tree_wild_orange"
+      }
+    ]
+  }
+}

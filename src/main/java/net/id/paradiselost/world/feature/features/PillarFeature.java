@@ -22,7 +22,7 @@ public class PillarFeature extends Feature<LongFeatureConfig> {
         var world = context.getWorld();
         var height = config.size().get(random);
 
-        if (config.validFloor().contains(world.getBlockState(pos.down()))) {
+        if (config.validFloor().contains(world.getBlockState(pos.down()).getRegistryEntry())) {
             var valid = true;
             var check = 0;
 

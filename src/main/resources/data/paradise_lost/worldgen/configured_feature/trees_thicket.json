@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "paradise_lost:tree_thicket_aurel",
+    "features": [
+      {
+        "chance": 0.1,
+        "feature": "paradise_lost:aurel_shrub"
+      }
+    ]
+  }
+}

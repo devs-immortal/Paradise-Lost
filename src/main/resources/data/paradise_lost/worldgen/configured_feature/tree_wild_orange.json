@@ -1,0 +1,103 @@
+{
+  "type": "minecraft:tree",
+  "config": {
+    "decorators": [],
+    "dirt_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:dirt"
+      }
+    },
+    "foliage_placer": {
+      "type": "minecraft:random_spread_foliage_placer",
+      "foliage_height": 3,
+      "leaf_placement_attempts": 63,
+      "offset": 0,
+      "radius": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 4,
+          "min_inclusive": 3
+        }
+      }
+    },
+    "foliage_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "paradise_lost:orange_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "growth": "0",
+              "capped": "true",
+              "natural": "true"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "paradise_lost:orange_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "growth": "1",
+              "capped": "true",
+              "natural": "true"
+            }
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "paradise_lost:orange_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "growth": "2",
+              "capped": "true",
+              "natural": "true"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "force_dirt": false,
+    "ignore_vines": false,
+    "minimum_size": {
+      "type": "minecraft:two_layers_feature_size",
+      "limit": 1,
+      "lower_size": 0,
+      "upper_size": 1
+    },
+    "trunk_placer": {
+      "type": "minecraft:bending_trunk_placer",
+      "base_height": 3,
+      "bend_length": {
+        "type": "minecraft:uniform",
+        "value": {
+          "max_inclusive": 1,
+          "min_inclusive": 2
+        }
+      },
+      "height_rand_a": 2,
+      "height_rand_b": 1,
+      "min_height_for_leaves": 3
+    },
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:orange_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

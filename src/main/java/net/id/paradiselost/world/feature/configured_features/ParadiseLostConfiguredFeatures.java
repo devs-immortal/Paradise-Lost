@@ -3,8 +3,12 @@ package net.id.paradiselost.world.feature.configured_features;
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.root.MangroveRootPlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 
 import java.util.List;
@@ -17,13 +21,18 @@ import static net.id.paradiselost.blocks.ParadiseLostBlocks.*;
  */
 @SuppressWarnings("unused")
 public class ParadiseLostConfiguredFeatures {
-    protected static <FC extends FeatureConfig, F extends Feature<FC>> RegistryEntry<ConfiguredFeature<FC, ?>> register(String id, F feature, FC featureConfig) {
-        return register(BuiltinRegistries.CONFIGURED_FEATURE, id, new ConfiguredFeature<>(feature, featureConfig));
+
+    public static RegistryKey<ConfiguredFeature<?, ?>> of(String id) {
+        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, locate(id));
     }
 
-    private static <V extends T, T> RegistryEntry<V> register(Registry<T> registry, String id, V value) {
-        return (RegistryEntry<V>) BuiltinRegistries.<T>add(registry, locate(id), value);
-    }
+//    protected static <FC extends FeatureConfig, F extends Feature<FC>> RegistryEntry<ConfiguredFeature<FC, ?>> register(String id, F feature, FC featureConfig) {
+//        return register(BuiltinRegistries.CONFIGURED_FEATURE, id, new ConfiguredFeature<>(feature, featureConfig));
+//    }
+//
+//    private static <V extends T, T> RegistryEntry<V> register(Registry<T> registry, String id, V value) {
+//        return (RegistryEntry<V>) BuiltinRegistries.<T>add(registry, locate(id), value);
+//    }
 
     public static void init() {
         ParadiseLostTreeConfiguredFeatures.init();
@@ -63,8 +72,6 @@ public class ParadiseLostConfiguredFeatures {
         static RegistryEntry<PlacedFeature> singleBlock(Block block, PlacementModifier... modifiers) {
             return singleBlock(BlockStateProvider.of(block), modifiers);
         }
-        // TODO This is incorrect, also convert this to tag
-        static final List<BlockState> GENERIC_FLOOR_WHITELIST = List.of(HIGHLANDS_GRASS.getDefaultState(), COARSE_DIRT.getDefaultState(), FLOESTONE.getDefaultState(), COBBLED_FLOESTONE.getDefaultState());
 
         protected static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature) {
             return Registry.register(Registry.FEATURE, locate(name), feature);

@@ -27,10 +27,10 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
      */
 
     public static final Codec<WisteriaTrunkPlacer> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            IntProvider.VALUE_CODEC.fieldOf("maxBranchRange").forGetter(placer -> placer.maxBranchRange),
-            IntProvider.VALUE_CODEC.fieldOf("branchCount").forGetter(placer -> placer.branchCount),
-            FloatProvider.VALUE_CODEC.fieldOf("branchRange").forGetter(placer -> placer.branchRange),
-            FloatProvider.VALUE_CODEC.fieldOf("branchHeight").forGetter(placer -> placer.branchHeight),
+            IntProvider.VALUE_CODEC.fieldOf("max_branch_range").forGetter(placer -> placer.maxBranchRange),
+            IntProvider.VALUE_CODEC.fieldOf("branch_count").forGetter(placer -> placer.branchCount),
+            FloatProvider.VALUE_CODEC.fieldOf("branch_range").forGetter(placer -> placer.branchRange),
+            FloatProvider.VALUE_CODEC.fieldOf("branch_height").forGetter(placer -> placer.branchHeight),
             Codec.INT.fieldOf("base_height").forGetter(placer -> placer.baseHeight),
             Codec.INT.fieldOf("height_rand_a").forGetter(placer -> placer.firstRandomHeight),
             Codec.INT.fieldOf("height_rand_b").forGetter(placer -> placer.secondRandomHeight)
