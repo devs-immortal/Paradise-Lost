@@ -1,33 +1,7 @@
 package net.id.paradiselost.world.feature.configured_features;
 
-import net.id.paradiselost.world.feature.ParadiseLostFeatures;
-import net.id.paradiselost.world.feature.configs.BoulderFeatureConfig;
-import net.id.paradiselost.world.feature.configs.GroundcoverFeatureConfig;
-import net.id.paradiselost.world.feature.configs.JaggedOreConfig;
-import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.state.property.Properties;
-import net.minecraft.structure.rule.BlockMatchRuleTest;
-import net.minecraft.util.collection.DataPool;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.util.registry.RegistryEntryList;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier;
-import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
-
-import java.util.List;
-
-import static net.id.paradiselost.blocks.ParadiseLostBlocks.*;
 
 public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFeatures {
     /*

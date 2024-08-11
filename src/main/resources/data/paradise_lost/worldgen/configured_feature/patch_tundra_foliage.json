@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "data": {
+              "Name": "paradise_lost:grass_plant"
+            },
+            "weight": 10
+          },
+          {
+            "data": {
+              "Name": "paradise_lost:short_grass"
+            },
+            "weight": 30
+          },
+          {
+            "data": {
+              "Name": "paradise_lost:bush"
+            },
+            "weight": 3
+          }
+        ]
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        }
+      ]
+    },
+    "tries": 32,
+    "xz_spread": 7,
+    "y_spread": 3
+  }
+}

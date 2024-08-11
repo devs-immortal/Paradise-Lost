@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:block_column",
+  "config": {
+    "allowed_placement": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:air"
+    },
+    "direction": "down",
+    "layers": [
+      {
+        "height": 1,
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "paradise_lost:pink_sporecap"
+          }
+        }
+      }
+    ],
+    "prioritize_tip": true
+  }
+}

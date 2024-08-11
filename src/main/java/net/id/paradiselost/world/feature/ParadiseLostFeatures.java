@@ -22,11 +22,10 @@ public class ParadiseLostFeatures {
     public static final GroundcoverFeature GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeatureConfig.CODEC));
     public static final ParadiseLostBoulderFeature BOULDER = register("boulder", new ParadiseLostBoulderFeature(BoulderFeatureConfig.CODEC));
     public static final VitrouliteSpireFeature VITROULITE_SPIRE_FEATURE = register("vitroulite_spire", new VitrouliteSpireFeature(DefaultFeatureConfig.CODEC));
-    public static final FreezeParadiseLostTopLayerFeature FREEZE_TOP_LAYER_FEATURE_FEATURE = register("freeze_top_layer_feature", new FreezeParadiseLostTopLayerFeature(DefaultFeatureConfig.CODEC));
 
     public static final ProjectedOrganicCoverFeature ORGANIC_GROUNDCOVER_FEATURE = register("organic_groundcover_feature", new ProjectedOrganicCoverFeature(ProjectedOrganicCoverConfig.CODEC));
 
-    public static final HoneyNettleFeature HONEY_NETTLE_FEATURE = register("honey_nettle_feature", new HoneyNettleFeature(DefaultFeatureConfig.CODEC));
+    public static final HoneyNettleFeature HONEY_NETTLE_FEATURE = register("honey_nettle", new HoneyNettleFeature(DefaultFeatureConfig.CODEC));
 
     public static final PillarFeature PILLAR_FEATURE = register("pillar_feature", new PillarFeature(LongFeatureConfig.CODEC));
     public static final FallenPillarFeature FALLEN_PILLAR_FEATURE = register("fallen_pillar_feature", new FallenPillarFeature(LongFeatureConfig.CODEC));

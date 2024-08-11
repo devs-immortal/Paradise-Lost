@@ -33,7 +33,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
     private final Supplier<Item> fruit;
 
     public FruitingLeavesBlock(Settings settings, Supplier<Item> fruit) {
-        super(settings, true);
+        super(settings);
         this.fruit = fruit;
         setDefaultState(getDefaultState().with(GROWTH, 0).with(CAPPED, false).with(NATURAL, false));
     }

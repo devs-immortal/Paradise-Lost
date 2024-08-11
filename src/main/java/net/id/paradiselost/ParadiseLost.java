@@ -116,7 +116,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostTextures.initClient();
         ParadiseLostItemRenderers.initClient();
         ParadiseLostScreens.initClient();
-        ParadiseLostScreens.clientInit();
     }
 
     @Environment(EnvType.CLIENT)

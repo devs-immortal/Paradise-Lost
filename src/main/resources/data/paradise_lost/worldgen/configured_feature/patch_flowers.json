@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "data": {
+              "Name": "paradise_lost:ataraxia"
+            },
+            "weight": 20
+          },
+          {
+            "data": {
+              "Name": "paradise_lost:cloudsbluff"
+            },
+            "weight": 20
+          },
+          {
+            "data": {
+              "Name": "paradise_lost:drigean"
+            },
+            "weight": 8
+          },
+          {
+            "data": {
+              "Name": "paradise_lost:luminar"
+            },
+            "weight": 3
+          },
+          {
+            "data": {
+              "Name": "paradise_lost:ancient_flower"
+            },
+            "weight": 1
+          }
+        ]
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        }
+      ]
+    },
+    "tries": 64,
+    "xz_spread": 7,
+    "y_spread": 3
+  }
+}
