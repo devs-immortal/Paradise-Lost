@@ -1,0 +1,39 @@
+{
+  "type": "paradise_lost:jagged_ore",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:heliolith"
+      }
+    },
+    "height": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 7,
+        "min_inclusive": 4
+      }
+    },
+    "width": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 11,
+        "min_inclusive": 7
+      }
+    },
+    "length": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 11,
+        "min_inclusive": 5
+      }
+    },
+    "length_offset": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 4,
+        "min_inclusive": 1
+      }
+    },
+  }
+}

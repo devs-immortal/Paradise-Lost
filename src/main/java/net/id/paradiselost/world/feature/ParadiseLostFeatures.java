@@ -21,7 +21,7 @@ public class ParadiseLostFeatures {
     public static final ParadiseLostDeltaFeature DELTA_FEATURE = register("delta_feature", new ParadiseLostDeltaFeature(DeltaFeatureConfig.CODEC));
     public static final GroundcoverFeature GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeatureConfig.CODEC));
     public static final ParadiseLostBoulderFeature BOULDER = register("boulder", new ParadiseLostBoulderFeature(BoulderFeatureConfig.CODEC));
-    public static final VitrouliteSpireFeature VITROULITE_SPIRE_FEATURE = register("vitroulite_spire_feature", new VitrouliteSpireFeature(DefaultFeatureConfig.CODEC));
+    public static final VitrouliteSpireFeature VITROULITE_SPIRE_FEATURE = register("vitroulite_spire", new VitrouliteSpireFeature(DefaultFeatureConfig.CODEC));
     public static final FreezeParadiseLostTopLayerFeature FREEZE_TOP_LAYER_FEATURE_FEATURE = register("freeze_top_layer_feature", new FreezeParadiseLostTopLayerFeature(DefaultFeatureConfig.CODEC));
 
     public static final ProjectedOrganicCoverFeature ORGANIC_GROUNDCOVER_FEATURE = register("organic_groundcover_feature", new ProjectedOrganicCoverFeature(ProjectedOrganicCoverConfig.CODEC));
@@ -31,8 +31,8 @@ public class ParadiseLostFeatures {
     public static final PillarFeature PILLAR_FEATURE = register("pillar_feature", new PillarFeature(LongFeatureConfig.CODEC));
     public static final FallenPillarFeature FALLEN_PILLAR_FEATURE = register("fallen_pillar_feature", new FallenPillarFeature(LongFeatureConfig.CODEC));
 
-    public static final JaggedOreFeature JAGGED_ORE = register("jagged_ore_feature", new JaggedOreFeature(JaggedOreConfig.CODEC));
-    public static final SurtrumMeteoriteFeature SURTRUM_METEORITE_FEATURE = register("surtrum_meteorite_feature", new SurtrumMeteoriteFeature(DefaultFeatureConfig.CODEC));
+    public static final JaggedOreFeature JAGGED_ORE = register("jagged_ore", new JaggedOreFeature(JaggedOreConfig.CODEC));
+    public static final SurtrumMeteoriteFeature SURTRUM_METEORITE_FEATURE = register("surtrum_meteorite", new SurtrumMeteoriteFeature(DefaultFeatureConfig.CODEC));
 
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {
         return Registry.register(Registries.FEATURE, ParadiseLost.locate(id), feature);

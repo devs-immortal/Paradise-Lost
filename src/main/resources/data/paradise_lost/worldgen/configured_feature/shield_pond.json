@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:delta_feature",
+  "config": {
+    "contents": {
+      "Name": "minecraft:water"
+    },
+    "rim": {
+      "Name": "minecraft:cobbled_floestone_slab",
+      "Properties": {
+        "type": "bottom",
+        "waterlogged": "true"
+      }
+    },
+    "rim_size": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 2,
+        "min_inclusive": 1
+      }
+    },
+    "size": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 7,
+        "min_inclusive": 2
+      }
+    }
+  }
+}

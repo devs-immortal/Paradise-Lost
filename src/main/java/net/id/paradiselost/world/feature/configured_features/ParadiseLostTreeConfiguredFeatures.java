@@ -23,7 +23,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryKey<ConfiguredFeature<?, ?>> FANCY_LAVENDER_WISTERIA_TREE = of("tree_fancy_lavender_wisteria");
     public static final RegistryKey<ConfiguredFeature<?, ?>> FANCY_FROST_WISTERIA_TREE = of("tree_fancy_frost_wisteria");
     public static final RegistryKey<ConfiguredFeature<?, ?>> AUREL_SHRUB = of("aurel_shrub");
-RandomPatchFeatureConfig
+
     // Fallen leaves
     public static final RegistryKey<ConfiguredFeature<?, ?>> FALLEN_LEAVES = of("fallen_leaves");
     public static final RegistryKey<ConfiguredFeature<?, ?>> FALLEN_ROSE_LEAVES = of("fallen_rose_leaves");

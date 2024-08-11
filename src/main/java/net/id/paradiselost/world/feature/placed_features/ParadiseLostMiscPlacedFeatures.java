@@ -34,7 +34,6 @@ public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
 
     public static final RegistryEntry<PlacedFeature> SHIELD_PONDS = register("shield_pond", ParadiseLostMiscConfiguredFeatures.SHIELD_PONDS, CountMultilayerPlacementModifier.of(19), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE));
 
-    public static final RegistryEntry<PlacedFeature> SHIELD_PODZOL = register("shield_podzol", ParadiseLostMiscConfiguredFeatures.SHIELD_PODZOL, CountMultilayerPlacementModifier.of(2), ChancePlacementModifier.of(15), CountPlacementModifier.of(UniformIntProvider.create(0, 2)));
     // Tundra
     public static final RegistryEntry<PlacedFeature> TUNDRA_SPIRES = register("tundra_spires", ParadiseLostMiscConfiguredFeatures.TUNDRA_SPIRES, ChancePlacementModifier.of(14), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 10)));
 

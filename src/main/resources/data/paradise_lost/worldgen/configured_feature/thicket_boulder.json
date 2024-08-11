@@ -1,0 +1,30 @@
+{
+  "type": "paradise_lost:boulder",
+  "config": {
+    "body": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "paradise_lost:cobbled_floestone"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "paradise_lost:mossy_floestone"
+          },
+          "weight": 4
+        }
+      ]
+    },
+    "tries": 6,
+    "size": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 5,
+        "min_inclusive": 2
+      }
+    }
+  }
+}

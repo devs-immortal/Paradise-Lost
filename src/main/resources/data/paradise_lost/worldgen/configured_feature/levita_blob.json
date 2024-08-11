@@ -1,0 +1,50 @@
+{
+  "type": "paradise_lost:jagged_ore",
+  "config": {
+    "block": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "paradise_lost:levita"
+          },
+          "weight": 150
+        },
+        {
+          "data": {
+            "Name": "paradise_lost:levita_ore"
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "height": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 5,
+        "min_inclusive": 3
+      }
+    },
+    "width": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 10,
+        "min_inclusive": 6
+      }
+    },
+    "length": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 10,
+        "min_inclusive": 4
+      }
+    },
+    "length_offset": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 6,
+        "min_inclusive": 3
+      }
+    },
+  }
+}

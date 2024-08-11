@@ -12,6 +12,6 @@ public record JaggedOreConfig(BlockStateProvider block, IntProvider height, IntP
             IntProvider.VALUE_CODEC.fieldOf("height").forGetter(JaggedOreConfig::height),
             IntProvider.VALUE_CODEC.fieldOf("width").forGetter(JaggedOreConfig::width),
             IntProvider.VALUE_CODEC.fieldOf("length").forGetter(JaggedOreConfig::length),
-            IntProvider.VALUE_CODEC.fieldOf("lengthOffset").forGetter(JaggedOreConfig::lengthOffset)
+            IntProvider.VALUE_CODEC.fieldOf("length_offset").forGetter(JaggedOreConfig::lengthOffset)
     ).apply(instance, JaggedOreConfig::new));
 }
