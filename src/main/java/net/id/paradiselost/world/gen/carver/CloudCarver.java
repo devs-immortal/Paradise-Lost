@@ -13,6 +13,7 @@ import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.carver.CarverContext;
 import net.minecraft.world.gen.carver.CarvingMask;
 import net.minecraft.world.gen.chunk.AquiferSampler;
+import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
@@ -165,6 +166,6 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
     @Nullable
     @Override
     protected BlockState getState(CarverContext context, CloudCarverConfig config, BlockPos pos, AquiferSampler sampler) {
-        return config.cloudState;
+        return config.cloudState.get(null, pos);
     }
 }

@@ -1,0 +1,76 @@
+{
+  "type": "paradise_lost:cloud_carver",
+  "config": {
+    "probability": 0.0003,
+    "y": {
+      "type": "minecraft:uniform",
+      "max_inclusive": {
+        "absolute": 340
+      },
+      "min_inclusive": {
+        "absolute": 260
+      }
+    },
+    "yScale": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_exclusive": 1.1,
+        "min_inclusive": 0.5
+      }
+    },
+    "lava_level": {
+      "above_bottom": 32
+    },
+    "replaceable": "#minecraft:overworld_carver_replaceables",
+    "horizontal_radius_multiplier": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_exclusive": 2.15,
+        "min_inclusive": 1.0
+      }
+    },
+    "vertical_radius_multiplier": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_exclusive": 1.0,
+        "min_inclusive": 0.6
+      }
+    },
+    "cloud_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:cold_cloud"
+      }
+    },
+    "yaw_multiplier": {
+      "type": "minecraft:constant",
+      "value": 0.1
+    },
+    "yaw_pitch_ratio": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_exclusive": 0.45,
+        "min_inclusive": 0.285
+      }
+    },
+    "size_multiplier": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 9,
+        "min_inclusive": 8
+      }
+    },
+    "max_yaw": {
+      "type": "minecraft:constant",
+      "value": 0.3
+    },
+    "engorged_chance": {
+      "type": "minecraft:constant",
+      "value": 16
+    },
+    "width_multiplier": {
+      "type": "minecraft:constant",
+      "value": 1.0
+    }
+  }
+}

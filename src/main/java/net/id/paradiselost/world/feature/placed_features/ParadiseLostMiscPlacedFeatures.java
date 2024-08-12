@@ -1,47 +1,35 @@
 package net.id.paradiselost.world.feature.placed_features;
 
-import net.id.paradiselost.world.feature.configured_features.ParadiseLostMiscConfiguredFeatures;
-import net.id.paradiselost.world.feature.placement_modifiers.ChancePlacementModifier;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
-import net.minecraft.world.gen.placementmodifier.*;
 
 public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
-    /*
-    Highlands
-     */
+
     // Default
-    public static final RegistryEntry<PlacedFeature> GENERIC_BOULDER = register("generic_boulder", ParadiseLostMiscConfiguredFeatures.GENERIC_BOULDER, ChancePlacementModifier.of(15), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1)));
-    public static final RegistryEntry<PlacedFeature> PLAINS_BOULDER = register("plains_boulder", ParadiseLostMiscConfiguredFeatures.PLAINS_BOULDER, ChancePlacementModifier.of(8), CountMultilayerPlacementModifier.of(1));
-    public static final RegistryEntry<PlacedFeature> THICKET_BOULDER = register("thicket_boulder", ParadiseLostMiscConfiguredFeatures.THICKET_BOULDER, ChancePlacementModifier.of(2), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 2)));
-    public static final RegistryEntry<PlacedFeature> GOLDEN_BOULDER = register("golden_boulder", ParadiseLostMiscConfiguredFeatures.GOLDEN_BOULDER, ChancePlacementModifier.of(30), CountMultilayerPlacementModifier.of(1));
+    public static final RegistryKey<PlacedFeature> GENERIC_BOULDER = of("generic_boulder");
+    public static final RegistryKey<PlacedFeature> PLAINS_BOULDER = of("plains_boulder");
+    public static final RegistryKey<PlacedFeature> THICKET_BOULDER = of("thicket_boulder");
+    public static final RegistryKey<PlacedFeature> GOLDEN_BOULDER = of("golden_boulder");
 
-    public static final RegistryEntry<PlacedFeature> WATER_SPRING = register("water_spring", ParadiseLostMiscConfiguredFeatures.WATER_SPRING);
+    public static final RegistryKey<PlacedFeature> WATER_SPRING = of("spring_water");
 
-    public static final RegistryEntry<PlacedFeature> HELIOLITH_BLOB = register("heliolith_blob", ParadiseLostMiscConfiguredFeatures.HELIOLITH_BLOB, CountPlacementModifier.of(3), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.aboveBottom(320)), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> LEVITA_BLOB = register("levita_blob", ParadiseLostMiscConfiguredFeatures.LEVITA_BLOB, CountPlacementModifier.of(1), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.aboveBottom(320)), BiomePlacementModifier.of());
+    public static final RegistryKey<PlacedFeature> HELIOLITH_BLOB = of("heliolith_blob");
+    public static final RegistryKey<PlacedFeature> LEVITA_BLOB = of("levita_blob");
 
-    public static final RegistryEntry<PlacedFeature> ORE_CHERINE = register("ore_cherine", ParadiseLostMiscConfiguredFeatures.ORE_CHERINE, CountPlacementModifier.of(20), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(320)), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> ORE_OLVITE = register("ore_olvite", ParadiseLostMiscConfiguredFeatures.ORE_OLVITE, CountPlacementModifier.of(16), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(384)), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> ORE_LEVITA = register("ore_levita", ParadiseLostMiscConfiguredFeatures.ORE_LEVITA, CountPlacementModifier.of(6), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(0), YOffset.aboveBottom(384)), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> SURTRUM_METEORITE = register("surtrum_meteorite", ParadiseLostMiscConfiguredFeatures.SURTRUM_METEORITE, SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.fixed(65), YOffset.fixed(85)), ChancePlacementModifier.of(255));
-    // Plato
+    public static final RegistryKey<PlacedFeature> ORE_CHERINE = of("ore_cherine");
+    public static final RegistryKey<PlacedFeature> ORE_OLVITE = of("ore_olvite");
+    public static final RegistryKey<PlacedFeature> ORE_LEVITA = of("ore_levita");
+    public static final RegistryKey<PlacedFeature> SURTRUM_METEORITE = of("surtrum_meteorite");
+
     // Shield
-    public static final RegistryEntry<PlacedFeature> SHIELD_ROCKS = register("shield_rocks", ParadiseLostMiscConfiguredFeatures.SHIELD_ROCKS, PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 2)));
-
-    public static final RegistryEntry<PlacedFeature> SHIELD_PONDS = register("shield_pond", ParadiseLostMiscConfiguredFeatures.SHIELD_PONDS, CountMultilayerPlacementModifier.of(19), HeightmapPlacementModifier.of(Heightmap.Type.WORLD_SURFACE));
+    public static final RegistryKey<PlacedFeature> SHIELD_ROCKS = of("shield_rocks");
+    public static final RegistryKey<PlacedFeature> SHIELD_PONDS = of("shield_pond");
 
     // Tundra
-    public static final RegistryEntry<PlacedFeature> TUNDRA_SPIRES = register("tundra_spires", ParadiseLostMiscConfiguredFeatures.TUNDRA_SPIRES, ChancePlacementModifier.of(14), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 10)));
+    public static final RegistryKey<PlacedFeature> TUNDRA_SPIRES = of("tundra_spires");
+    public static final RegistryKey<PlacedFeature> TUNDRA_PONDS = of("tundra_pond");
+    public static final RegistryKey<PlacedFeature> TUNDRA_SNOW = of("tundra_snow");
 
-    public static final RegistryEntry<PlacedFeature> TUNDRA_PONDS = register("tundra_pond", ParadiseLostMiscConfiguredFeatures.TUNDRA_PONDS, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 1)));
-    public static final RegistryEntry<PlacedFeature> TUNDRA_SNOW = register("tundra_snow", ParadiseLostMiscConfiguredFeatures.TUNDRA_SNOW, CountMultilayerPlacementModifier.of(2), CountPlacementModifier.of(UniformIntProvider.create(0, 2)));
+    public static void init() {}
 
-    public static void init() {
-    }
 }

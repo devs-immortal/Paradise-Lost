@@ -36,7 +36,6 @@
     "server.ServerPlayNetworkHandlerMixin",
     "world.gen.structure.JigsawStructureMixin",
     "world.ExplosionMixin",
-    "util.DefaultedRegistryMixin",
     "util.NbtCompoundAccessor",
     "util.SlotAccessor",
     "brain.MemoryModuleTypeInvoker",

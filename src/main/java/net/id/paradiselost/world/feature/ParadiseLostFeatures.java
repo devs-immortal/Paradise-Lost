@@ -5,7 +5,6 @@ import net.id.paradiselost.world.feature.configs.*;
 import net.id.paradiselost.world.feature.configured_features.ParadiseLostConfiguredFeatures;
 import net.id.paradiselost.world.feature.features.*;
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
-import net.id.paradiselost.world.feature.placement_modifiers.ParadiseLostPlacementModifiers;
 import net.id.paradiselost.world.feature.structure.ParadiseLostStructureFeatures;
 import net.id.paradiselost.world.feature.tree.ParadiseLostTreeHell;
 import net.minecraft.registry.Registries;
@@ -41,7 +40,6 @@ public class ParadiseLostFeatures {
         ParadiseLostTreeHell.init();
         ParadiseLostStructureFeatures.init();
         ParadiseLostConfiguredFeatures.init();
-        ParadiseLostPlacementModifiers.init();
         ParadiseLostPlacedFeatures.init();
     }
 }

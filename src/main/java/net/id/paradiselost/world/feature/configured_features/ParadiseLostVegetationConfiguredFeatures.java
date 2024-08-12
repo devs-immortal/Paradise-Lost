@@ -1,28 +1,7 @@
 package net.id.paradiselost.world.feature.configured_features;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
-import net.id.paradiselost.world.feature.ParadiseLostFeatures;
-import net.id.paradiselost.world.feature.configs.ProjectedOrganicCoverConfig;
-import net.id.paradiselost.world.feature.placed_features.ParadiseLostPlacedFeatures;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CropBlock;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.collection.DataPool;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier;
-import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
-
-import java.util.List;
-
-import static net.id.paradiselost.blocks.ParadiseLostBlocks.*;
 
 public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfiguredFeatures {
 

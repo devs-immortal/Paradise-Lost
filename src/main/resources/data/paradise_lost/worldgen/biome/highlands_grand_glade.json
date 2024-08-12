@@ -1,0 +1,88 @@
+{
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "paradise_lost:large_cold_cloud"
+    ]
+  },
+  "downfall": 0.8,
+  "effects": {
+    "fog_color": 16777215,
+    "foliage_color": 16769162,
+    "grass_color": 13562594,
+    "music": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "replace_current_music": false,
+      "sound": "paradise_lost:music.paradise"
+    },
+    "sky_color": 12632319,
+    "water_color": 9234175,
+    "water_fog_color": 10611455
+  },
+  "features": [
+    [
+      "paradise_lost:surtrum_meteorite"
+    ],
+    [],
+    [
+      "paradise_lost:thicket_boulder"
+    ],
+    [],
+    [],
+    [],
+    [
+      "paradise_lost:heliolith_blob",
+      "paradise_lost:levita_blob",
+      "paradise_lost:ore_cherine",
+      "paradise_lost:ore_levita",
+      "paradise_lost:ore_olvite"
+    ],
+    [],
+    [
+      "paradise_lost:spring_water"
+    ],
+    [
+      "paradise_lost:patch_brown_sporecap",
+      "paradise_lost:patch_pink_sporecap",
+      "paradise_lost:natural_swedroot",
+      "paradise_lost:thicket_fallen_log",
+      "paradise_lost:patch_grass",
+      "paradise_lost:fallen_leaves",
+      "paradise_lost:patch_brown_sporecap_common",
+      "paradise_lost:patch_tall_grass",
+      "paradise_lost:patch_dense_bush",
+      "paradise_lost:trees_sparse"
+    ],
+    [
+      "minecraft:freeze_top_layer"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "paradise_lost:moa",
+        "maxCount": 13,
+        "minCount": 5,
+        "weight": 6
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "paradise_lost:envoy",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 50
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.4
+}

@@ -5,6 +5,7 @@ import net.id.paradiselost.blocks.util.SpreadableParadiseLostBlock;
 import net.id.paradiselost.world.feature.placed_features.ParadiseLostVegetationPlacedFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -36,6 +37,7 @@ public class ParadiseLostGrassBlock extends SpreadableParadiseLostBlock implemen
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockPos blockPos = pos.up();
         BlockState blockState = ParadiseLostBlocks.GRASS.getDefaultState();
+
         block0: for (int i = 0; i < 128; ++i) {
             RegistryEntry<PlacedFeature> placedFeature;
             BlockPos blockPos2 = blockPos;
@@ -63,11 +65,11 @@ public class ParadiseLostGrassBlock extends SpreadableParadiseLostBlock implemen
                 if (list.isEmpty()) {
                     continue;
                 }
-                placedFeature = ((RandomPatchFeatureConfig) list.get(0).config()).feature();
+                placedFeature = ((RandomPatchFeatureConfig)((ConfiguredFeature)list.get(0)).config()).feature();
             } else {
-                placedFeature = ParadiseLostVegetationPlacedFeatures.GRASS;
+                placedFeature = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(ParadiseLostVegetationPlacedFeatures.GRASS).get();
             }
-            placedFeature.value().generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
+            (placedFeature.value()).generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
         }
     }
 }

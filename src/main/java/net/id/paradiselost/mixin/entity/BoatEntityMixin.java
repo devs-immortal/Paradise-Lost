@@ -13,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BoatEntity.class)
 public abstract class BoatEntityMixin {
     @Shadow
-    public abstract BoatEntity.Type getBoatType();
+    public abstract BoatEntity.Type getVariant();
 
     @Inject(method = "asItem", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;OAK_BOAT:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC), cancellable = true)
     private void checkCustomBoats(CallbackInfoReturnable<Item> cir) {
-        BoatEntity.Type type = this.getBoatType();
+        BoatEntity.Type type = this.getVariant();
         if (type != BoatEntity.Type.OAK) {
             for (var entry : ParadiseLostItems.BOAT_SETS) {
                 if (type == entry.type()) {

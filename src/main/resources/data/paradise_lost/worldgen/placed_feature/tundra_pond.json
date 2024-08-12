@@ -1,0 +1,12 @@
+{
+  "feature": "paradise_lost:tundra_pond",
+  "placement": [
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 19
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
