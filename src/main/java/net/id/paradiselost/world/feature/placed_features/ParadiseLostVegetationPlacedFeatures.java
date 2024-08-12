@@ -1,50 +1,40 @@
 package net.id.paradiselost.world.feature.placed_features;
 
-import net.id.paradiselost.world.feature.configured_features.ParadiseLostVegetationConfiguredFeatures;
-import net.id.paradiselost.world.feature.placement_modifiers.ChancePlacementModifier;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.blockpredicate.BlockPredicate;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placementmodifier.*;
-
-import static net.minecraft.world.gen.feature.VegetationPlacedFeatures.NOT_IN_SURFACE_WATER_MODIFIER;
 
 public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeatures {
-    /*
-    Highlands
-     */
-    // Default
-    public static final RegistryEntry<PlacedFeature> BUSH = register("bush", ParadiseLostVegetationConfiguredFeatures.BUSH, SPREAD_32_ABOVE, CountMultilayerPlacementModifier.of(2), ChancePlacementModifier.of(4));
-    public static final RegistryEntry<PlacedFeature> DENSE_BUSH = register("dense_bush", ParadiseLostVegetationConfiguredFeatures.DENSE_BUSH, CountMultilayerPlacementModifier.of(3), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> FLOWERS = register("flowers", ParadiseLostVegetationConfiguredFeatures.FLOWERS, CountPlacementModifier.of(3), RarityFilterPlacementModifier.of(32), SquarePlacementModifier.of(), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> GRASS = register("grass", ParadiseLostVegetationConfiguredFeatures.GRASS_BUSH, CountPlacementModifier.of(10), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> TALL_GRASS = register("tall_grass", ParadiseLostVegetationConfiguredFeatures.TALL_GRASS_BUSH, CountPlacementModifier.of(3), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
 
-    public static final RegistryEntry<PlacedFeature> PATCH_BLACKCURRANT = register("patch_blackcurrant", ParadiseLostVegetationConfiguredFeatures.PATCH_BLACKCURRANT, NOT_IN_SURFACE_WATER_MODIFIER, CountPlacementModifier.of(10), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> PATCH_BROWN_SPORECAP = register("patch_brown_sporecap", ParadiseLostVegetationConfiguredFeatures.PATCH_BROWN_SPORECAP, RarityFilterPlacementModifier.of(10), SquarePlacementModifier.of(), PlacedFeatures.BOTTOM_TO_TOP_RANGE, HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> PATCH_BROWN_SPORECAP_COMMON = register("patch_brown_sporecap_common", ParadiseLostVegetationConfiguredFeatures.PATCH_BROWN_SPORECAP, CountPlacementModifier.of(3), SquarePlacementModifier.of(), PlacedFeatures.BOTTOM_TO_TOP_RANGE, HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> PATCH_PINK_SPORECAP = register("patch_pink_sporecap", ParadiseLostVegetationConfiguredFeatures.PATCH_PINK_SPORECAP, CountPlacementModifier.of(3), SquarePlacementModifier.of(), PlacedFeatures.BOTTOM_TO_TOP_RANGE, EnvironmentScanPlacementModifier.of(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.IS_AIR, 12), RandomOffsetPlacementModifier.vertically(ConstantIntProvider.create(-1)), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> NATURAL_SWEDROOT = register("natural_swedroot", ParadiseLostVegetationConfiguredFeatures.NATURAL_SWEDROOT, CountPlacementModifier.of(1), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.fixed(80), YOffset.getTop()), EnvironmentScanPlacementModifier.of(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.IS_AIR, 12), BiomePlacementModifier.of());
+    // Default
+    public static final RegistryKey<PlacedFeature> BUSH = of("patch_bush");
+    public static final RegistryKey<PlacedFeature> DENSE_BUSH = of("patch_dense_bush");
+    public static final RegistryKey<PlacedFeature> FLOWERS = of("patch_flowers");
+    public static final RegistryKey<PlacedFeature> GRASS = of("patch_grass");
+    public static final RegistryKey<PlacedFeature> TALL_GRASS = of("patch_tall_grass");
+
+    public static final RegistryKey<PlacedFeature> PATCH_BLACKCURRANT = of("patch_blackcurrant");
+    public static final RegistryKey<PlacedFeature> PATCH_BROWN_SPORECAP = of("patch_brown_sporecap");
+    public static final RegistryKey<PlacedFeature> PATCH_BROWN_SPORECAP_COMMON = of("patch_brown_sporecap_common");
+    public static final RegistryKey<PlacedFeature> PATCH_PINK_SPORECAP = of("patch_pink_sporecap");
+    public static final RegistryKey<PlacedFeature> NATURAL_SWEDROOT = of("natural_swedroot");
 
     // Plato
-    public static final RegistryEntry<PlacedFeature> PLATEAU_FOLIAGE = register("plateau_foliage", ParadiseLostVegetationConfiguredFeatures.PLATEAU_FOLIAGE, CountMultilayerPlacementModifier.of(3), CountPlacementModifier.of(UniformIntProvider.create(0, 4)));
-    public static final RegistryEntry<PlacedFeature> PLATEAU_FLOWERING_GRASS = register("plateau_flowering_grass", ParadiseLostVegetationConfiguredFeatures.PLATEAU_FLOWERING_GRASS, PlacedFeatures.BOTTOM_TO_TOP_RANGE, CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 5)), ON_SOLID_GROUND);
-    public static final RegistryEntry<PlacedFeature> PLATEAU_SHAMROCK = register("plateau_shamrock", ParadiseLostVegetationConfiguredFeatures.PLATEAU_SHAMROCK, PlacedFeatures.BOTTOM_TO_TOP_RANGE, ChancePlacementModifier.of(6), CountMultilayerPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(0, 2)), ON_SOLID_GROUND);
-    // Shield
-    public static final RegistryEntry<PlacedFeature> SHIELD_FLAX = register("shield_flax", ParadiseLostVegetationConfiguredFeatures.SHIELD_FLAX, SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(0), YOffset.belowTop(0)), ChancePlacementModifier.of(3), HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING), BiomePlacementModifier.of());
-    public static final RegistryEntry<PlacedFeature> SHIELD_NETTLES = register("shield_nettles", ParadiseLostVegetationConfiguredFeatures.SHIELD_NETTLES, CountMultilayerPlacementModifier.of(30), CountPlacementModifier.of(UniformIntProvider.create(0, 12)), ON_SOLID_GROUND);
-    public static final RegistryEntry<PlacedFeature> SHIELD_FOLIAGE = register("shield_foliage", ParadiseLostVegetationConfiguredFeatures.SHIELD_FOLIAGE, CountMultilayerPlacementModifier.of(5), CountPlacementModifier.of(UniformIntProvider.create(0, 2)), ON_SOLID_GROUND);
-    // Tundra
-    public static final RegistryEntry<PlacedFeature> TUNDRA_FOLIAGE = register("tundra_foliage", ParadiseLostVegetationConfiguredFeatures.TUNDRA_FOLIAGE, CountMultilayerPlacementModifier.of(3), CountPlacementModifier.of(UniformIntProvider.create(0, 3)));
-    // Forest
-    public static final RegistryEntry<PlacedFeature> THICKET_LIVERWORT_CARPET = register("thicket_liverwort_carpet", ParadiseLostVegetationConfiguredFeatures.THICKET_LIVERWORT_CARPET, PlacedFeatures.BOTTOM_TO_TOP_RANGE, ChancePlacementModifier.of(6), CountMultilayerPlacementModifier.of(1), ON_SOLID_GROUND);
-    public static final RegistryEntry<PlacedFeature> THICKET_SHAMROCK = register("thicket_shamrock", ParadiseLostVegetationConfiguredFeatures.THICKET_SHAMROCK, PlacedFeatures.BOTTOM_TO_TOP_RANGE, ChancePlacementModifier.of(8), CountMultilayerPlacementModifier.of(1), ON_SOLID_GROUND);
+    public static final RegistryKey<PlacedFeature> PLATEAU_FOLIAGE = of("patch_plateau_foliage");
+    public static final RegistryKey<PlacedFeature> PLATEAU_FLOWERING_GRASS = of("patch_plateau_flowering_grass");
+    public static final RegistryKey<PlacedFeature> PLATEAU_SHAMROCK = of("patch_plateau_shamrock");
 
-    public static void init() {
-    }
+    // Shield
+    public static final RegistryKey<PlacedFeature> SHIELD_FLAX = of("patch_shield_flax");
+    public static final RegistryKey<PlacedFeature> SHIELD_NETTLES = of("patch_shield_nettles");
+    public static final RegistryKey<PlacedFeature> SHIELD_FOLIAGE = of("patch_shield_foliage");
+
+    // Tundra
+    public static final RegistryKey<PlacedFeature> TUNDRA_FOLIAGE = of("patch_tundra_foliage");
+
+    // Forest
+    public static final RegistryKey<PlacedFeature> THICKET_LIVERWORT_CARPET = of("patch_thicket_liverwort_carpet");
+    public static final RegistryKey<PlacedFeature> THICKET_SHAMROCK = of("patch_thicket_shamrock");
+
+    public static void init() {}
+
 }

@@ -47,6 +47,7 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     // Shield
     public static final RegistryKey<ConfiguredFeature<?, ?>> SHIELD_FOLIAGE = of("patch_shield_foliage");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SHIELD_FLAX = of("patch_shield_flax");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SHIELD_NETTLES = of("patch_shield_nettles");
 
     // Thicket
     public static final RegistryKey<ConfiguredFeature<?, ?>> THICKET_LIVERWORT_CARPET = of("patch_thicket_liverwort_carpet");
