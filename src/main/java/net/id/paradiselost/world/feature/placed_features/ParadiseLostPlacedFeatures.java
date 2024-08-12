@@ -3,6 +3,8 @@ package net.id.paradiselost.world.feature.placed_features;
 import net.id.paradiselost.world.feature.configured_features.ParadiseLostTreeConfiguredFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
@@ -34,8 +36,8 @@ public class ParadiseLostPlacedFeatures {
     // for ease of familiarity with how 1.17 did it.
     static final PlacementModifier SPREAD_32_ABOVE = HeightRangePlacementModifier.uniform(YOffset.aboveBottom(32), YOffset.getTop());
 
-    static RegistryEntry<PlacedFeature> register(String id, RegistryEntry<? extends ConfiguredFeature<?, ?>> feature, PlacementModifier... modifiers) {
-        return BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, locate(id), new PlacedFeature(RegistryEntry.upcast(feature), List.of(modifiers)));
+    public static RegistryKey<PlacedFeature> of(String id) {
+        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, locate(id));
     }
     
     public static void init() {

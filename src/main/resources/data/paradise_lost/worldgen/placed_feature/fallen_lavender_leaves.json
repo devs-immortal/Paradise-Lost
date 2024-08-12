@@ -1,0 +1,28 @@
+{
+  "feature": "paradise_lost:fallen_lavender_leaves",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 0
+        },
+        "min_inclusive": {
+          "above_bottom": 32
+        }
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 2
+    }
+  ]
+}
