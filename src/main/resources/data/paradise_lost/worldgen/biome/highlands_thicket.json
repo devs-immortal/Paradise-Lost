@@ -47,14 +47,14 @@
       "paradise_lost:patch_brown_sporecap",
       "paradise_lost:patch_pink_sporecap",
       "paradise_lost:natural_swedroot",
+      "paradise_lost:patch_grass",
       "paradise_lost:patch_thicket_shamrock",
       "paradise_lost:patch_thicket_liverwort_carpet",
-      "paradise_lost:patch_grass",
-      "paradise_lost:fallen_leaves",
       "paradise_lost:patch_tall_grass",
       "paradise_lost:patch_dense_bush",
       "paradise_lost:trees_thicket",
-      "paradise_lost:trees_thicket_mother_aurel"
+      "paradise_lost:trees_thicket_mother_aurel",
+      "paradise_lost:fallen_leaves"
     ],
     [
       "minecraft:freeze_top_layer"

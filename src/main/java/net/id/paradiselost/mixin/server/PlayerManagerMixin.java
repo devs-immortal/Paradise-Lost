@@ -22,7 +22,7 @@ public class PlayerManagerMixin {
             method = "createPlayer",
             at = @At("RETURN")
     )
-    private void createPlayer(GameProfile profile, @Nullable PlayerPublicKey publicKey, CallbackInfoReturnable<ServerPlayerEntity> cir) {
+    private void createPlayer(GameProfile profile, CallbackInfoReturnable<ServerPlayerEntity> cir) {
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             cir.getReturnValue().giveItemStack(new ItemStack(ParadiseLostItems.PARADISE_LOST_PORTAL));
         }

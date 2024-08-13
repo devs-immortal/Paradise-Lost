@@ -48,11 +48,11 @@
       "paradise_lost:natural_swedroot",
       "paradise_lost:thicket_fallen_log",
       "paradise_lost:patch_grass",
-      "paradise_lost:fallen_leaves",
       "paradise_lost:patch_brown_sporecap_common",
       "paradise_lost:patch_tall_grass",
       "paradise_lost:patch_dense_bush",
-      "paradise_lost:trees_sparse"
+      "paradise_lost:trees_sparse",
+      "paradise_lost:fallen_leaves"
     ],
     [
       "minecraft:freeze_top_layer"

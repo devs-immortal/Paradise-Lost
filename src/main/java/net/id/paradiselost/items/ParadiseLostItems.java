@@ -432,9 +432,6 @@ public class ParadiseLostItems {
     public static final BlockItem ORANGE_PRESSURE_PLATE = add("orange_pressure_plate", ParadiseLostBlocks.ORANGE_WOODSTUFF.pressurePlate(), decoration);
     public static final BlockItem WISTERIA_PRESSURE_PLATE = add("wisteria_pressure_plate", ParadiseLostBlocks.WISTERIA_WOODSTUFF.pressurePlate(), decoration);
 
-    //TODO: Implement dungeon switch block
-//    public static final BlockItem DUNGEON_SWITCH = add("dungeonswitch", ParadiseLostBlocks.DUNGEON_SWITCH, decoration);
-
     public static final BoatSet AUREL_BOATS = addBoatItems("aurel", ParadiseLostBlocks.AUREL_WOODSTUFF.plank());
     public static final BoatSet MOTHER_AUREL_BOATS = addBoatItems("mother_aurel", ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.plank());
     public static final BoatSet ORANGE_BOATS = addBoatItems("orange", ParadiseLostBlocks.ORANGE_WOODSTUFF.plank());
@@ -446,9 +443,11 @@ public class ParadiseLostItems {
 
     @SafeVarargs
     private static <V extends Item> V add(String id, V item, Consumer<ItemConvertible>... additionalActions) {
-        if (id.equals("grass"))
-            ParadiseLost.LOG.error("id");
-        return Registry.register(Registries.ITEM, locate(id), item);
+        var registeredItem = Registry.register(Registries.ITEM, locate(id), item);
+        for (var action : additionalActions) {
+            action.accept(registeredItem);
+        }
+        return registeredItem;
     }
 
     @SafeVarargs
@@ -465,7 +464,7 @@ public class ParadiseLostItems {
     private static BoatSet addBoatItems(String woodId, Block plankBlock) {
         String boatId = (MOD_ID + "_" + woodId);
 
-        BoatEntity.Type boatType = EnumExtender.add(BoatEntity.Type.class, boatId.toUpperCase(Locale.ROOT), plankBlock, boatId);
+        BoatEntity.Type boatType = EnumExtender.add(BoatEntity.Type.class, boatId, plankBlock, boatId);
 
         BoatItem boat = add(woodId + "_boat", new BoatItem(false, boatType, decoration().maxCount(1)));
         BoatItem chestBoat = add(woodId + "_chest_boat", new BoatItem(true, boatType, decoration().maxCount(1)));

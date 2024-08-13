@@ -37,6 +37,7 @@ public class ParadiseLostBlocks {
         return copy(Blocks.DIRT).strength(2f).sounds(BlockSoundGroup.GILDED_BLACKSTONE);
     }
 
+    public static final FarmlandBlock FARMLAND = add("farmland", new ParadiseLostFarmlandBlock(copy(Blocks.FARMLAND)));
     public static final ParadiseLostDirtPathBlock DIRT_PATH = add("grass_path", new ParadiseLostDirtPathBlock(copy(Blocks.DIRT_PATH), () -> ParadiseLostBlocks.DIRT));
     public static final ParadiseLostDirtPathBlock PERMAFROST_PATH = add("frozen_path", new ParadiseLostDirtPathBlock(permafrost(), () -> ParadiseLostBlocks.PERMAFROST));
     public static final ParadiseLostGrassBlock HIGHLANDS_GRASS = add("highlands_grass", new ParadiseLostGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
@@ -46,7 +47,6 @@ public class ParadiseLostBlocks {
     public static final Block COARSE_DIRT = add("coarse_dirt", new Block(copy(Blocks.DIRT).strength(0.3f)), coarseTillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
     public static final FloatingBlock LEVITA = add("levita", new FloatingBlock(false, copy(Blocks.GRAVEL).strength(0.3f)));
     public static final Block PERMAFROST = add("permafrost", new Block(permafrost()), flattenable(ParadiseLostBlocks.PERMAFROST_PATH));
-    public static final FarmlandBlock FARMLAND = add("farmland", new ParadiseLostFarmlandBlock(copy(Blocks.FARMLAND)));
     public static final Block PACKED_SWEDROOT = add("packed_swedroot", new Block(of(Material.WOOD).strength(2f).sounds(BlockSoundGroup.SHROOMLIGHT)));
 
     // Glass Blocks

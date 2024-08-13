@@ -43,7 +43,7 @@ public class BloodstoneHUDRenderer {
                     } else if (stack.getItem() instanceof OlviteBloodstoneItem) {
                         renderOlvite(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof SurtrumBloodstoneItem) {
-                        renderGravitite(matrixStack, client, capturedData);
+                        renderSurtrum(matrixStack, client, capturedData);
                     } else if (stack.getItem() instanceof AbstentineBloodstoneItem) {
                         renderAbstentine(matrixStack, client, capturedData);
                     }
@@ -85,9 +85,9 @@ public class BloodstoneHUDRenderer {
 
     private static void renderOlvite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
-        var effectAtlas = client.getSpriteAtlas(new Identifier("textures/atlas/mob_effects.png"));
-        Sprite affinitySprite = effectAtlas.apply(ParadiseLost.locate("affinity"));
-        Sprite raceSprite = effectAtlas.apply(ParadiseLost.locate("race"));
+        var effectAtlas = client.getSpriteAtlas(new Identifier("textures/atlas/blocks.png"));
+        Sprite affinitySprite = effectAtlas.apply(ParadiseLost.locate("item/icons/affinity"));
+        Sprite raceSprite = effectAtlas.apply(ParadiseLost.locate("item/icons/race"));
 
         renderRing(matrixStack, 0, 0);
         renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
@@ -98,7 +98,7 @@ public class BloodstoneHUDRenderer {
         renderIconWText(matrixStack, client, raceSprite, Text.translatable(bloodstoneCapturedData.Race), -76, -25);
     }
 
-    private static void renderGravitite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+    private static void renderSurtrum(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         renderRing(matrixStack, 0, 0);
         renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
         renderText(matrixStack, client, Text.translatable("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), 63, -50);

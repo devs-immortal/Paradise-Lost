@@ -24,7 +24,11 @@ public class BlockRegistration {
 
     @SafeVarargs
     public static <V extends Block> V add(String id, V block, Consumer<Block>... additionalActions) {
-        return Registry.register(Registries.BLOCK, locate(id), block);
+        var registeredBlock = Registry.register(Registries.BLOCK, locate(id), block);
+        for (var action : additionalActions) {
+            action.accept(registeredBlock);
+        }
+        return registeredBlock;
     }
 
     static class ParadiseLostFarmlandBlock extends FarmlandBlock {
@@ -49,7 +53,7 @@ public class BlockRegistration {
     // WOOD BLOCK SET
 
     public static WoodBlockSet registerWoodBlockSet(WoodType woodType, BlockSetType blockSetType, SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor, MapColor leafColor) {
-        var id = woodType.name();
+        var id = woodType.name().split(":")[1];
         return registerWoodBlockSet(
                 woodType, blockSetType,
                 id + "_sapling", "potted_" + id + "_sapling",

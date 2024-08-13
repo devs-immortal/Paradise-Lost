@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Environment(EnvType.CLIENT)
 public class ClientWorldPropertiesMixin {
 
-    @Inject(method = "getSkyDarknessHeight", at = @At("HEAD"))
+    @Inject(method = "getSkyDarknessHeight", at = @At("HEAD"), cancellable = true)
     private void getSkyDarknessHeight(HeightLimitView world, CallbackInfoReturnable<Double> ci) {
         if (((ClientWorld) world).getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             ci.setReturnValue(0.0D);

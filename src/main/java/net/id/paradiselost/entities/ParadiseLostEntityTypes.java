@@ -104,7 +104,11 @@ public class ParadiseLostEntityTypes {
 
     @SafeVarargs
     private static <E extends Entity> EntityType<E> add(String id, FabricEntityTypeBuilder<E> builder, Consumer<? super EntityType<E>>... additionalActions) {
-        return add(id, builder.build(), additionalActions);
+        var ent = add(id, builder.build(), additionalActions);
+        for (var action : additionalActions) {
+            action.accept(ent);
+        }
+        return ent;
     }
 
     public static <T extends Entity> FabricEntityTypeBuilder<T> of(EntityType.EntityFactory<T> factory, SpawnGroup spawnGroup, EntityDimensions dimensions, int trackingRange) {
