@@ -2,7 +2,15 @@
   "carvers": {
     "air": [
       "minecraft:cave",
-      "paradise_lost:large_cold_cloud"
+      "paradise_lost:large_cold_cloud",
+      "paradise_lost:cold_cloud",
+      "paradise_lost:tiny_cold_cloud",
+      "paradise_lost:large_blue_cloud",
+      "paradise_lost:blue_cloud",
+      "paradise_lost:tiny_blue_cloud",
+      "paradise_lost:large_golden_cloud",
+      "paradise_lost:golden_cloud",
+      "paradise_lost:tiny_golden_cloud"
     ]
   },
   "downfall": 0.8,
