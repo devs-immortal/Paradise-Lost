@@ -48,8 +48,8 @@
     "cardinal-components": [
       "net.id.paradiselost.component.ParadiseLostComponents"
     ],
-    "modmenu": [
-      "net.id.paradiselost.config.ModMenuConfig"
+    "mm:early_risers": [
+      "net.id.paradiselost.mixin.earlyrisers.CustomBoatEarlyRiser"
     ]
   },
   "custom": {

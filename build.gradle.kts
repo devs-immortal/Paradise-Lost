@@ -8,6 +8,7 @@ val loaderVersion: String by properties
 val javaVersion: String by properties
 
 val fabricApiVersion: String by properties
+val fabricAsmVersion: String by properties
 val customportalapiVersion: String by properties
 val cardinalComponentsVersion: String by properties
 val trinketsVersion: String by properties
@@ -121,6 +122,12 @@ dependencies {
     ).also(::include).exclude(module = "sodium")
 
     modImplementation(
+            group = "com.github.Chocohead",
+            name = "Fabric-ASM",
+            version = fabricAsmVersion,
+    ).also(::include)
+
+    modImplementation(
             group = "net.fabricmc.fabric-api",
             name = "fabric-api",
             version = fabricApiVersion,
@@ -147,12 +154,6 @@ dependencies {
             group = "dev.onyxstudios.cardinal-components-api",
             name = "cardinal-components-base",
             version = cardinalComponentsVersion,
-    )
-
-    modRuntimeOnly(
-            group = "com.terraformersmc",
-            name = "modmenu",
-            version = modmenuVersion,
     )
 
 

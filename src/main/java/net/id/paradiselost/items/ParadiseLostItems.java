@@ -1,10 +1,9 @@
 package net.id.paradiselost.items;
 
+import com.chocohead.mm.api.ClassTinkerers;
 import com.google.common.collect.ImmutableList;
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.accessories.ParachuteTrinketItem;
@@ -18,7 +17,6 @@ import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
-import net.id.paradiselost.util.EnumExtender;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.TallPlantBlock;
@@ -37,7 +35,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.function.Consumer;
 
 import static net.id.paradiselost.ParadiseLost.MOD_ID;
@@ -432,10 +429,10 @@ public class ParadiseLostItems {
     public static final BlockItem ORANGE_PRESSURE_PLATE = add("orange_pressure_plate", ParadiseLostBlocks.ORANGE_WOODSTUFF.pressurePlate(), decoration);
     public static final BlockItem WISTERIA_PRESSURE_PLATE = add("wisteria_pressure_plate", ParadiseLostBlocks.WISTERIA_WOODSTUFF.pressurePlate(), decoration);
 
-    public static final BoatSet AUREL_BOATS = addBoatItems("aurel", ParadiseLostBlocks.AUREL_WOODSTUFF.plank());
-    public static final BoatSet MOTHER_AUREL_BOATS = addBoatItems("mother_aurel", ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.plank());
-    public static final BoatSet ORANGE_BOATS = addBoatItems("orange", ParadiseLostBlocks.ORANGE_WOODSTUFF.plank());
-    public static final BoatSet WISTERIA_BOATS = addBoatItems("wisteria", ParadiseLostBlocks.WISTERIA_WOODSTUFF.plank());
+    public static final BoatSet AUREL_BOATS = addBoatItems("aurel", "PARADISE_LOST_AUREL");
+    public static final BoatSet MOTHER_AUREL_BOATS = addBoatItems("mother_aurel", "PARADISE_LOST_MOTHER_AUREL");
+    public static final BoatSet ORANGE_BOATS = addBoatItems("orange", "PARADISE_LOST_ORANGE");
+    public static final BoatSet WISTERIA_BOATS = addBoatItems("wisteria", "PARADISE_LOST_WISTERIA");
 
     public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, ORANGE_BOATS, WISTERIA_BOATS};
 
@@ -461,10 +458,10 @@ public class ParadiseLostItems {
                 additionalActions);
     }
 
-    private static BoatSet addBoatItems(String woodId, Block plankBlock) {
+    private static BoatSet addBoatItems(String woodId, String boatTypeId) {
         String boatId = (MOD_ID + "_" + woodId);
 
-        BoatEntity.Type boatType = EnumExtender.add(BoatEntity.Type.class, boatId, plankBlock, boatId);
+        BoatEntity.Type boatType = ClassTinkerers.getEnum(BoatEntity.Type.class, boatTypeId);
 
         BoatItem boat = add(woodId + "_boat", new BoatItem(false, boatType, decoration().maxCount(1)));
         BoatItem chestBoat = add(woodId + "_chest_boat", new BoatItem(true, boatType, decoration().maxCount(1)));

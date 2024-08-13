@@ -11,7 +11,6 @@
     "block.FarmlandBlockMixin",
     "enchantment.EnchantmentHelperMixin",
     "entity.BoatEntityMixin",
-    "entity.BoatEntityTypeMixin",
     "entity.ChestBoatEntityMixin",
     "entity.CowEntityMixin",
     "entity.EntityMixin",
