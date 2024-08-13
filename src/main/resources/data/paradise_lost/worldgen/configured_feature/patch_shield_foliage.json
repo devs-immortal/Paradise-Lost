@@ -3,33 +3,38 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "minecraft:weighted_state_provider",
-        "entries": [
-          {
-            "data": {
-              "Name": "paradise_lost:grass_plant"
-            },
-            "weight": 20
-          },
-          {
-            "data": {
-              "Name": "paradise_lost:fern"
-            },
-            "weight": 15
-          },
-          {
-            "data": {
-              "Name": "paradise_lost:bush"
-            },
-            "weight": 13
-          },
-          {
-            "data": {
-              "Name": "paradise_lost:grass_flowering"
-            },
-            "weight": 5
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "paradise_lost:grass_plant"
+                },
+                "weight": 20
+              },
+              {
+                "data": {
+                  "Name": "paradise_lost:fern"
+                },
+                "weight": 15
+              },
+              {
+                "data": {
+                  "Name": "paradise_lost:bush"
+                },
+                "weight": 13
+              },
+              {
+                "data": {
+                  "Name": "paradise_lost:grass_flowering"
+                },
+                "weight": 5
+              }
+            ]
           }
-        ]
+        }
       },
       "placement": [
         {

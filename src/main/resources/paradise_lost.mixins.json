@@ -19,7 +19,6 @@
     "entity.PiglinBrainMixin",
     "entity.PotionEntityMixin",
     "entity.PlayerEntityMixin",
-    "item.ArmorMaterialsAccessor",
     "item.AxeItemMixin",
     "item.FilledMapMixin",
     "item.ItemMixin",
@@ -29,7 +28,6 @@
     "item.ShearsMixin",
     "item.SwordItemAccessor",
     "item.ToolMaterialsAccessor",
-    "server.DimensionOptionsMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
@@ -45,8 +43,6 @@
   "client": [
     "client.ClientPlayNetworkHandlerMixin",
     "client.ItemStackMixin",
-    "client.MinecraftClientAccessor",
-    "client.MinecraftClientMixin",
     "client.render.BackgroundRendererMixin",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",
@@ -56,7 +52,7 @@
     "client.render.LivingEntityRendererMixin",
     "client.render.MapRendererMixin",
     "client.render.NativeImageAccessor",
-    "client.render.WorldRendererMixin",
+    "client.render.ClientWorldPropertiesMixin",
     "devel.client.HandledScreenMixin"
   ],
   "injectors": {

@@ -1,0 +1,17 @@
+{
+  "feature": "paradise_lost:tree_fancy_lavender_wisteria",
+  "placement": [
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "state": {
+          "Name": "paradise_lost:lavender_wisteria_sapling",
+          "Properties": {
+            "stage": "0"
+          }
+        }
+      }
+    }
+  ]
+}

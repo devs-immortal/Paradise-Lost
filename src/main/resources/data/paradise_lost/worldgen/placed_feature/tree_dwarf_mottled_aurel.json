@@ -1,0 +1,17 @@
+{
+  "feature": "paradise_lost:tree_dwarf_mottled_aurel",
+  "placement": [
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "state": {
+          "Name": "paradise_lost:aurel_sapling",
+          "Properties": {
+            "stage": "0"
+          }
+        }
+      }
+    }
+  ]
+}

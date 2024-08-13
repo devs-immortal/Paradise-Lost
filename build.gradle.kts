@@ -14,7 +14,6 @@ val trinketsVersion: String by properties
 val crowdinTranslateVersion: String by properties
 val entityAttributesVersion: String by properties
 val modmenuVersion: String by properties
-val reiVersion: String by properties
 val satinVersion: String by properties
 val clothConfigVersion: String by properties
 
@@ -155,14 +154,7 @@ dependencies {
             name = "modmenu",
             version = modmenuVersion,
     )
-    // Adds a dependency on the base cardinal components module (required by every other module)
-    // Replace modImplementation with modApi if you expose components in your own API
 
-//    modRuntimeOnly(
-//            group = "me.shedaniel",
-//            name = "RoughlyEnoughItems-fabric",
-//            version = reiVersion,
-//    )
 
 }
 

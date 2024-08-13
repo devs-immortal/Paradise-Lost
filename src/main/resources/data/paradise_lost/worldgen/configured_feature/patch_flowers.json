@@ -3,39 +3,44 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "minecraft:weighted_state_provider",
-        "entries": [
-          {
-            "data": {
-              "Name": "paradise_lost:ataraxia"
-            },
-            "weight": 20
-          },
-          {
-            "data": {
-              "Name": "paradise_lost:cloudsbluff"
-            },
-            "weight": 20
-          },
-          {
-            "data": {
-              "Name": "paradise_lost:drigean"
-            },
-            "weight": 8
-          },
-          {
-            "data": {
-              "Name": "paradise_lost:luminar"
-            },
-            "weight": 3
-          },
-          {
-            "data": {
-              "Name": "paradise_lost:ancient_flower"
-            },
-            "weight": 1
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "paradise_lost:ataraxia"
+                },
+                "weight": 20
+              },
+              {
+                "data": {
+                  "Name": "paradise_lost:cloudsbluff"
+                },
+                "weight": 20
+              },
+              {
+                "data": {
+                  "Name": "paradise_lost:drigean"
+                },
+                "weight": 8
+              },
+              {
+                "data": {
+                  "Name": "paradise_lost:luminar"
+                },
+                "weight": 3
+              },
+              {
+                "data": {
+                  "Name": "paradise_lost:ancient_flower"
+                },
+                "weight": 1
+              }
+            ]
           }
-        ]
+        }
       },
       "placement": [
         {

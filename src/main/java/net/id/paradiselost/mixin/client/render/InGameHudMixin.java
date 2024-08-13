@@ -23,7 +23,7 @@ import java.util.List;
 public abstract class InGameHudMixin {
 
     @Shadow
-    protected abstract void renderOverlay(Identifier texture, float opacity);
+    protected abstract void renderOverlay(MatrixStack matrices, Identifier texture, float opacity);
 
     @Inject(method = "renderHotbar", at = @At("HEAD"))
     public void renderOverlay(float tickDelta, MatrixStack matrices, CallbackInfo ci) {
@@ -32,7 +32,7 @@ public abstract class InGameHudMixin {
         if (entity instanceof LivingEntity player) {
             overlays.forEach(overlay -> {
                 if (overlay.renderPredicate().test(player)) {
-                    renderOverlay(overlay.path(), overlay.opacityProvider().apply(player));
+                    renderOverlay(matrices, overlay.path(), overlay.opacityProvider().apply(player));
                 }
             });
         }
