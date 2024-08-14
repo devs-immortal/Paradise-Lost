@@ -1,11 +1,10 @@
 {
   "itemGroup.paradise_lost.building_blocks": "Paradise Blocks",
-  "itemGroup.paradise_lost.decorations": "Paradise Decorations",
+  "itemGroup.paradise_lost.plants": "Paradise Plants",
+  "itemGroup.paradise_lost.decoration": "Paradise Decorations",
   "itemGroup.paradise_lost.food": "Paradise Foods",
-  "itemGroup.paradise_lost.misc": "Paradise Miscellaneous",
-  "itemGroup.paradise_lost.resources": "Paradise Materials",
-  "itemGroup.paradise_lost.tools": "Paradise Tools",
-  "itemGroup.paradise_lost.wearables": "Paradise Wearables",
+  "itemGroup.paradise_lost.resources": "Paradise Resources",
+  "itemGroup.paradise_lost.equipment": "Paradise Equipment",
 
 
   "createWorld.customize.preset.paradise_lost.sandbox": "Paradise - Sandbox",
@@ -233,9 +232,6 @@
   "block.paradise_lost.food_bowl": "Feeding Trough",
   "block.paradise_lost.tree_tap": "Tree Tap",
   "block.paradise_lost.nitra_bunch": "Nitra Bunch",
-  
-
-  "book.edition": "%dst Edition",
 
 
   "container.paradise_lost.moa": "Moa",
@@ -351,12 +347,6 @@
   "death.attack.fall.player": "%1$s was thrown off the heavens above by %2$s",
   "death.attack.nightmare": "%1$s was consumed by shifting shadows",
   "death.attack.nightmare.player": "%1$s was fed to the shadows by %2$s",
-
-
-  "lore.paradise_lost.root.title" : "Root title",
-  "lore.paradise_lost.root.description" : "Lorem ipsum dolor asmet or whatever",
-  "lore.paradise_lost.test_item.title" : "Diamond!!",
-  "lore.paradise_lost.test_item.description" : "You found a diamond! And this translatable text is working!",
 
 
   "moa.egg.adult": "pre-grown",

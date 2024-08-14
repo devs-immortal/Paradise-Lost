@@ -4,6 +4,7 @@ import net.id.paradiselost.api.FloatingBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ExperienceDroppingBlock;
+import net.minecraft.block.FallingBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -50,6 +51,7 @@ public class FloatingBlock extends ExperienceDroppingBlock {
         if (!this.powered || worldIn.isReceivingRedstonePower(pos)) {
             if (!worldIn.isClient) {
                 FloatingBlockHelper.ANY.tryCreate(worldIn, pos);
+                System.out.println("creating float block?");
             }
         }
     }

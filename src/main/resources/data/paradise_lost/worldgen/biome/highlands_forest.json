@@ -16,8 +16,8 @@
   "downfall": 0.8,
   "effects": {
     "fog_color": 16777215,
-    "foliage_color": 16769162,
-    "grass_color": 13562594,
+    "foliage_color": 15859609,
+    "grass_color": 10673090,
     "music": {
       "max_delay": 24000,
       "min_delay": 12000,
@@ -25,8 +25,8 @@
       "sound": "paradise_lost:music.paradise"
     },
     "sky_color": 12632319,
-    "water_color": 9234175,
-    "water_fog_color": 10611455
+    "water_color": 5826047,
+    "water_fog_color": 6547455
   },
   "features": [
     [

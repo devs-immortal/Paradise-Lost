@@ -72,7 +72,7 @@ public class BlockRegistration {
         var saplingSettings = AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(MapColor.GOLD).luminance(state -> 3);
         var flowerPotSettings = AbstractBlock.Settings.copy(Blocks.POTTED_OAK_SAPLING).luminance(state -> 3);
         var leavesSettings = AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.GOLD).luminance(state -> 5);
-        SaplingBlock sapling = add(id + "_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), saplingSettings));
+        SaplingBlock sapling = add(id + "_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), saplingSettings), cutoutRenderLayer);
         return registerWoodBlockSet(
                 ParadiseLostWoodTypes.MOTHER_AUREL, ParadiseLostBlockSets.MOTHER_AUREL,
                 sapling,

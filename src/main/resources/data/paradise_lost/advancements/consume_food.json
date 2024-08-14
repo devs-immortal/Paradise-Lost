@@ -15,14 +15,6 @@
     "hidden": false
   },
   "criteria": {
-    "gingyman": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:gingerbread_man"]
-        }
-      }
-    },
     "blacurent": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -98,7 +90,6 @@
   },
   "requirements": [
     [
-      "gingyman",
       "blacurent",
       "orang",
       "bushin",

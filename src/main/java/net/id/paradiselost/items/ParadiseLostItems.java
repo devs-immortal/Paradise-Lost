@@ -58,8 +58,6 @@ public class ParadiseLostItems {
     }
 
     public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource()));
-    public static final Item NIGTHMARE_FUEL = add("nightmare_fuel", new LoreItem(nightmare().rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.nightmare_fuel.tooltip").formatted(Formatting.GRAY))));
-    public static final Item CROW_EYE = add("crow_eye", new LoreItem(nightmare().maxCount(1).rarity(UNCOMMON), ImmutableList.of(Text.translatable("item.paradise_lost.crow_eye.tooltip").formatted(Formatting.GRAY))));
     public static final Item CHERINE = add("cherine", new Item(resource()), fuel(500));
     public static final Item OLVITE = add("olvite", new Item(resource()));
     public static final Item OLVITE_NUGGET = add("olvite_nugget", new Item(resource()));
@@ -160,11 +158,10 @@ public class ParadiseLostItems {
     public static final AliasedBlockItem NITRA_SEED = add("nitra", new AliasedBlockItem(ParadiseLostBlocks.NITRA, food()), compostable15);
     public static final Item NITRA_BULB = add("nitra_bulb", new NitraItem(food()), compostable50);
     public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new StewItem(food(ParadiseLostFoodComponent.AMADRYS_NOODLES)));
-    public static final Item AMADRYS_BREAD = add("amadrys_bread", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD)));
-    public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED)));
+    public static final Item AMADRYS_BREAD = add("amadrys_bread", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD)), compostable50);
+    public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED)), compostable50);
     public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
     public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(ParadiseLostBlocks.FLAX, food()), compostable30);
-    public static final Item GINGERBREAD_MAN = add("gingerbread_man", new Item(food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
     public static final Item MOA_MEAT = add("moa_meat", new Item(food(ParadiseLostFoodComponent.MOA_MEAT)));
     public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", new Item(food(ParadiseLostFoodComponent.COOKED_MOA_MEAT)));
 
@@ -360,10 +357,9 @@ public class ParadiseLostItems {
 
     public static final BlockItem FLAXWEAVE_CUSHION = add("flaxweave_cushion", ParadiseLostBlocks.FLAXWEAVE_CUSHION, decoration, fuel(300));
 
-    // TODO
-    //public static final BlockItem CHEESECAKE = add("halflight_cheesecake", ParadiseLostBlocks.CHEESECAKE, food());
+    public static final BlockItem CHEESECAKE = add("halflight_cheesecake", ParadiseLostBlocks.CHEESECAKE, food());
 
-    public static final BlockItem AMADRYS_BUNDLE = add("amadrys_bundle", ParadiseLostBlocks.AMADRYS_BUNDLE, decoration());
+    public static final BlockItem AMADRYS_BUNDLE = add("amadrys_bundle", ParadiseLostBlocks.AMADRYS_BUNDLE, decoration(), compostable85);
 
     // lights
     public static final BlockItem CHERINE_LANTERN = add("cherine_lantern", ParadiseLostBlocks.CHERINE_LANTERN, decoration);
@@ -469,30 +465,9 @@ public class ParadiseLostItems {
         return new BoatSet(boatType, boat, chestBoat);
     }
 
-    // For access to protected constructors:
-
-    private static class ParadiseLostPickaxeItem extends PickaxeItem {
-        protected ParadiseLostPickaxeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
-            super(material, attackDamage, attackSpeed, settings);
-        }
-    }
-
-    private static class ParadiseLostAxeItem extends AxeItem {
-        protected ParadiseLostAxeItem(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
-            super(material, attackDamage, attackSpeed, settings);
-        }
-    }
-
     private static class ParadiseLostHoeItem extends HoeItem {
         protected ParadiseLostHoeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
             super(material, attackDamage, attackSpeed, settings);
-        }
-    }
-
-    private static class ParadiseLostMusicDiscItem extends MusicDiscItem {
-        protected ParadiseLostMusicDiscItem(int comparatorValueIn, SoundEvent soundIn, Settings settings) {
-            // TODO: Length will probably need to be changed
-            super(comparatorValueIn, soundIn, settings, 0);
         }
     }
 

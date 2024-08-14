@@ -2,14 +2,13 @@
   "type": "minecraft:delta_feature",
   "config": {
     "contents": {
-      "Name": "minecraft:water"
+      "Name": "minecraft:water",
+      "Properties": {
+        "level": "0"
+      }
     },
     "rim": {
-      "Name": "minecraft:cobbled_floestone_slab",
-      "Properties": {
-        "type": "bottom",
-        "waterlogged": "true"
-      }
+      "Name": "paradise_lost:mossy_floestone"
     },
     "rim_size": {
       "type": "minecraft:uniform",
