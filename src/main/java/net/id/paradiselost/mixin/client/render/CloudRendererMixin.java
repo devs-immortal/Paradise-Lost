@@ -63,7 +63,7 @@ public final class CloudRendererMixin {
         throw new NullPointerException("null cannot be cast to non-null type net.minecraft.client.world.ClientWorld");
     }
 
-    @Inject(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FDDD)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lorg/joml/Matrix4f;FDDD)V", at = @At("HEAD"), cancellable = true)
     public void renderClouds(MatrixStack matrices, Matrix4f model, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
         if (world.getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, 160, 1f, 1f);
