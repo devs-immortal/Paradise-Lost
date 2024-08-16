@@ -1,11 +1,12 @@
 package net.id.paradiselost.blocks;
 
+import net.id.paradiselost.blocks.decorative.ParadiseSignBlock;
+import net.id.paradiselost.blocks.decorative.ParadiseWallSignBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.world.feature.tree.generator.MotherAurelSaplingGenerator;
-import net.id.paradiselost.world.feature.tree.generator.OrangeSaplingGenerator;
+import net.id.paradiselost.world.feature.tree.generator.*;
 import net.minecraft.block.*;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.registry.Registries;
@@ -268,8 +269,8 @@ public class BlockRegistration {
 
         var signSettings = AbstractBlock.Settings.copy(Blocks.OAK_SIGN);
 
-        SignBlock signBlock = new SignBlock(signSettings, woodType);
-        WallSignBlock wallSignBlock = new WallSignBlock(signSettings.dropsLike(signBlock), woodType);
+        SignBlock signBlock = new ParadiseSignBlock(signSettings, woodType);
+        WallSignBlock wallSignBlock = new ParadiseWallSignBlock(signSettings.dropsLike(signBlock), woodType);
 
         add(woodType.name() + "_sign", signBlock);
         add(woodType.name() + "_wall_sign", wallSignBlock);
