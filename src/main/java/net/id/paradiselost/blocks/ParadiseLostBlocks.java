@@ -277,7 +277,8 @@ public class ParadiseLostBlocks {
     //dungeon
 //    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
 
-    public static void init() {}
+    public static void init() {
+    }
 
 //    @Environment(EnvType.CLIENT)
 //    public static void initClient() {

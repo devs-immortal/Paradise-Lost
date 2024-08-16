@@ -14,8 +14,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
-import java.util.function.Supplier;
-
 public class ParadiseLostMushroomBlock extends MushroomPlantBlock {
 
     private final HangType type;

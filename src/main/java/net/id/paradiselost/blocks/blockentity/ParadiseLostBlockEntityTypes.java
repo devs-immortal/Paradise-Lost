@@ -3,7 +3,6 @@ package net.id.paradiselost.blocks.blockentity;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
@@ -28,7 +27,6 @@ public class ParadiseLostBlockEntityTypes {
         register("cherine_campfire", CHERINE_CAMPFIRE);
         register("tree_tap", TREE_TAP);
         register("sign", SIGN);
-//        register("dungeonswitch", DUNGEON_SWITCH);
     }
     
     private static void register(String name, BlockEntityType<?> type) {

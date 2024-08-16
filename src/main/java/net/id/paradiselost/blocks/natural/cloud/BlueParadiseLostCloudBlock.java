@@ -1,6 +1,5 @@
 package net.id.paradiselost.blocks.natural.cloud;
 
-import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;

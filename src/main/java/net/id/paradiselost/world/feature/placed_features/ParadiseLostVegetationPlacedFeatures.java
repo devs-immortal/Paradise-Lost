@@ -35,6 +35,7 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
     public static final RegistryKey<PlacedFeature> THICKET_LIVERWORT_CARPET = of("patch_thicket_liverwort_carpet");
     public static final RegistryKey<PlacedFeature> THICKET_SHAMROCK = of("patch_thicket_shamrock");
 
-    public static void init() {}
+    public static void init() {
+    }
 
 }

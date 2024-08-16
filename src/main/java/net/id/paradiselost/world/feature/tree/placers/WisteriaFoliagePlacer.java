@@ -19,7 +19,6 @@ import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 import java.util.Set;
-import java.util.function.BiConsumer;
 
 public class WisteriaFoliagePlacer extends FoliagePlacer {
 

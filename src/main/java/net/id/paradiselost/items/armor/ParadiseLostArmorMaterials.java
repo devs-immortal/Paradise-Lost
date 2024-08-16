@@ -35,7 +35,7 @@ public enum ParadiseLostArmorMaterials implements StringIdentifiable, ArmorMater
         map.put(ArmorItem.Type.LEGGINGS, 5);
         map.put(ArmorItem.Type.CHESTPLATE, 6);
         map.put(ArmorItem.Type.HELMET, 3);
-    }), 15, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_OLVITE, 0.0F, 0.1F, () -> Ingredient.ofItems(ParadiseLostItems.REFINED_SURTRUM));
+    }), 15, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_SURTRUM, 0.0F, 0.1F, () -> Ingredient.ofItems(ParadiseLostItems.REFINED_SURTRUM));
 
     // copied from base armor materials class
 
@@ -66,11 +66,11 @@ public enum ParadiseLostArmorMaterials implements StringIdentifiable, ArmorMater
     }
 
     public int getDurability(ArmorItem.Type type) {
-        return (Integer)BASE_DURABILITY.get(type) * this.durabilityMultiplier;
+        return BASE_DURABILITY.get(type) * this.durabilityMultiplier;
     }
 
     public int getProtection(ArmorItem.Type type) {
-        return (Integer)this.protectionAmounts.get(type);
+        return this.protectionAmounts.get(type);
     }
 
     public int getEnchantability() {
@@ -82,7 +82,7 @@ public enum ParadiseLostArmorMaterials implements StringIdentifiable, ArmorMater
     }
 
     public Ingredient getRepairIngredient() {
-        return (Ingredient)this.repairIngredientSupplier.get();
+        return this.repairIngredientSupplier.get();
     }
 
     public String getName() {

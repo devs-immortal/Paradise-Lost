@@ -46,7 +46,7 @@ public class BlockLikeSet {
     /**
      * @return An immutable copy of this {@link BlockLikeSet}'s entries.
      */
-    public Map<Vec3i, BlockLikeEntity> getEntries(){
+    public Map<Vec3i, BlockLikeEntity> getEntries() {
         return Map.copyOf(entries);
     }
 
@@ -143,7 +143,7 @@ public class BlockLikeSet {
          *               If there has already been an entity added at that location,
          *               this entity will be ignored and not added.
          */
-        public Builder add(BlockLikeEntity entity){
+        public Builder add(BlockLikeEntity entity) {
             BlockPos pos = entity.getBlockPos();
             if (!isAlreadyInSet(pos)) {
                 this.entries.put(pos.subtract(origin), entity);
@@ -157,8 +157,8 @@ public class BlockLikeSet {
          * @param entity The entity that should be added to the {@link BlockLikeSet}.
          * @param predicate A {@link Predicate} to test whether the block should be added.
          */
-        public Builder addIf(BlockLikeEntity entity, Predicate<Map<Vec3i, BlockLikeEntity>> predicate){
-            if (predicate.test(Map.copyOf(entries))){
+        public Builder addIf(BlockLikeEntity entity, Predicate<Map<Vec3i, BlockLikeEntity>> predicate) {
+            if (predicate.test(Map.copyOf(entries))) {
                 return this.add(entity);
             }
             return this;
@@ -167,14 +167,14 @@ public class BlockLikeSet {
         /**
          * @return The size of the {@link BlockLikeSet} so far.
          */
-        public int size(){
+        public int size() {
             return entries.size();
         }
 
         /**
          * @return The {@link BlockLikeSet} that has been built.
          */
-        public BlockLikeSet build(){
+        public BlockLikeSet build() {
             return new BlockLikeSet(entries);
         }
 

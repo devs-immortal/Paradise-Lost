@@ -6,14 +6,12 @@ import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.screen.handler.MoaScreenHandler;
-import net.id.paradiselost.screen.slot.PreviewSlot;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 
 import static net.id.paradiselost.ParadiseLost.locate;
-import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
 
 public final class ParadiseLostScreens {
     private ParadiseLostScreens() {

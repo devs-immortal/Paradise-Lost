@@ -1,19 +1,12 @@
 package net.id.paradiselost.entities.projectile;
 
-import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.BlazeEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
-import net.minecraft.entity.projectile.thrown.ThrownEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -22,7 +15,6 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 
 public class ThrownNitraEntity extends ThrownItemEntity {
 
@@ -43,7 +35,7 @@ public class ThrownNitraEntity extends ThrownItemEntity {
         super.onCollision(hitResult);
         doDamage();
         if (!this.world.isClient) {
-            this.world.sendEntityStatus(this, (byte)3);
+            this.world.sendEntityStatus(this, (byte) 3);
             this.discard();
         }
     }
@@ -62,7 +54,7 @@ public class ThrownNitraEntity extends ThrownItemEntity {
     }
 
     private void doDamage() {
-        var hit = this.world.getOtherEntities(this, new Box(this.getX()-1.5, this.getY()-1.5, this.getZ()-1.5, this.getX()+1.5, this.getY()+1.5, this.getZ()+1.5));
+        var hit = this.world.getOtherEntities(this, new Box(this.getX() - 1.5, this.getY() - 1.5, this.getZ() - 1.5, this.getX() + 1.5, this.getY() + 1.5, this.getZ() + 1.5));
         for (Entity e : hit) {
             Vec3d diff = this.getPos().subtract(e.getPos()).negate().normalize();
             e.addVelocity(diff.x, diff.y, diff.z);

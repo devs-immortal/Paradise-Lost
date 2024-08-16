@@ -48,6 +48,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryKey<ConfiguredFeature<?, ?>> THICKET_TREES = of("trees_thicket");
     public static final RegistryKey<ConfiguredFeature<?, ?>> RAINBOW_FOREST_TREES = of("trees_rainbow_forest");
 
-    public static void init() {}
+    public static void init() {
+    }
 
 }

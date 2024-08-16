@@ -14,7 +14,7 @@ public class BloomedCalciteUtil {
 
     public static void applyHealing(Entity applier, World world, BlockPos blockPos, Random random, ItemStack itemStack) {
         if (applier instanceof ServerPlayerEntity) {
-            Criteria.ITEM_USED_ON_BLOCK.trigger((ServerPlayerEntity)applier, blockPos, itemStack);
+            Criteria.ITEM_USED_ON_BLOCK.trigger((ServerPlayerEntity) applier, blockPos, itemStack);
         }
 
         world.setBlockState(blockPos, ParadiseLostBlocks.BLOOMED_CALCITE.getDefaultState());

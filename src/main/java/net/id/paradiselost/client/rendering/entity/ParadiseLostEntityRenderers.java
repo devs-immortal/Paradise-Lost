@@ -23,7 +23,6 @@ public class ParadiseLostEntityRenderers {
 
         // passive
         register(ParadiseLostEntityTypes.MOA, MoaEntityRenderer::new);
-//        register(ParadiseLostEntityTypes.AMBYST, AmbystRenderer::new);
 
         // projectile
         register(ParadiseLostEntityTypes.THROWN_NITRA, FlyingItemEntityRenderer::new);

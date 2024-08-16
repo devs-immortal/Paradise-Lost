@@ -299,9 +299,9 @@ public class ParadiseLostItemGroups {
 
     public static void init() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS)
-            .register((itemGroup) -> {
-                itemGroup.add(MOA_SPAWN_EGG);
-                itemGroup.add(ENVOY_SPAWN_EGG);
-            });
+                .register((itemGroup) -> {
+                    itemGroup.add(MOA_SPAWN_EGG);
+                    itemGroup.add(ENVOY_SPAWN_EGG);
+                });
     }
 }

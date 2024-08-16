@@ -11,5 +11,6 @@ public class ParadiseLostWoodTypes {
     public static WoodType ORANGE = WoodTypeBuilder.copyOf(WoodType.OAK).register(ParadiseLost.locate("orange"), ParadiseLostBlockSets.ORANGE);
     public static WoodType WISTERIA = WoodTypeBuilder.copyOf(WoodType.OAK).register(ParadiseLost.locate("wisteria"), ParadiseLostBlockSets.WISTERIA);
 
-    public static void init() {}
+    public static void init() {
+    }
 }

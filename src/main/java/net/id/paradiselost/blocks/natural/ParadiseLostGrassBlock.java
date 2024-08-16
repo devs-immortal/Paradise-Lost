@@ -65,7 +65,7 @@ public class ParadiseLostGrassBlock extends SpreadableParadiseLostBlock implemen
                 if (list.isEmpty()) {
                     continue;
                 }
-                placedFeature = ((RandomPatchFeatureConfig)((ConfiguredFeature)list.get(0)).config()).feature();
+                placedFeature = ((RandomPatchFeatureConfig) ((ConfiguredFeature) list.get(0)).config()).feature();
             } else {
                 placedFeature = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(ParadiseLostVegetationPlacedFeatures.GRASS).get();
             }

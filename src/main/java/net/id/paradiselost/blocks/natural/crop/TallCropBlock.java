@@ -37,7 +37,7 @@ public class TallCropBlock extends CropBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random){
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         this.tryGrow(state, world, pos, random, 25F);
     }
 
@@ -47,7 +47,7 @@ public class TallCropBlock extends CropBlock {
             pos = pos.down();
             state = world.getBlockState(pos);
         }
-        if (!state.isOf(this)){
+        if (!state.isOf(this)) {
             return;
         }
         int newAge = this.getAge(state) + this.getGrowthAmount(world);
@@ -138,7 +138,7 @@ public class TallCropBlock extends CropBlock {
                 return super.getOutlineShape(state, world, pos, context);
             } else {
                 // Fill in the bottom block if the plant is two-tall
-                return Block.createCuboidShape(0, 0, 0,16, 16, 16);
+                return Block.createCuboidShape(0, 0, 0, 16, 16, 16);
             }
         } else {
             return super.getOutlineShape(this.withAge(state.get(AGE) - this.lastSingleBlockAge - 1), world, pos, context);

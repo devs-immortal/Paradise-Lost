@@ -1,7 +1,6 @@
 package net.id.paradiselost.items;
 
 import com.chocohead.mm.api.ClassTinkerers;
-import com.google.common.collect.ImmutableList;
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
@@ -26,9 +25,6 @@ import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
@@ -432,7 +428,8 @@ public class ParadiseLostItems {
 
     public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, ORANGE_BOATS, WISTERIA_BOATS};
 
-    public static void init() {}
+    public static void init() {
+    }
 
     @SafeVarargs
     private static <V extends Item> V add(String id, V item, Consumer<ItemConvertible>... additionalActions) {

@@ -30,6 +30,7 @@ public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final RegistryKey<PlacedFeature> TUNDRA_PONDS = of("tundra_pond");
     public static final RegistryKey<PlacedFeature> TUNDRA_SNOW = of("tundra_snow");
 
-    public static void init() {}
+    public static void init() {
+    }
 
 }

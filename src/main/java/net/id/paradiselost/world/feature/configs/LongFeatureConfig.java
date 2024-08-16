@@ -3,15 +3,12 @@ package net.id.paradiselost.world.feature.configs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.registry.RegistryCodecs;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-
-import java.util.List;
 
 public record LongFeatureConfig(IntProvider size, BlockStateProvider body, BlockStateProvider top, BlockStateProvider shell, float topChance, float shellChance, RegistryEntryList<Block> validFloor) implements FeatureConfig {
     public static final Codec<LongFeatureConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(

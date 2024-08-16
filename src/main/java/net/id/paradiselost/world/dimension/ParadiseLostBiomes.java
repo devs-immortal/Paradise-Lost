@@ -26,7 +26,8 @@ public final class ParadiseLostBiomes {
     public static final RegistryKey<Biome> TRADEWINDS_KEY = of("tradewinds");
     public static final RegistryKey<Biome> WISTERIA_WOODS_KEY = of("wisteria_woods");
 
-    public static void init() {}
+    public static void init() {
+    }
 
     private static RegistryKey<Biome> of(String name) {
         return RegistryKey.of(RegistryKeys.BIOME, locate(name));

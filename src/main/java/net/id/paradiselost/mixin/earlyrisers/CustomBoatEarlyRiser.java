@@ -8,7 +8,7 @@ public class CustomBoatEarlyRiser implements Runnable {
 
     @Override
     public void run() {
-        MappingResolver remapper  = FabricLoader.getInstance().getMappingResolver();
+        MappingResolver remapper = FabricLoader.getInstance().getMappingResolver();
 
         String boatType = remapper.mapClassName("intermediary", "net.minecraft.class_1690$class_1692");
         String block = 'L' + remapper.mapClassName("intermediary", "net.minecraft.class_2248") + ';';

@@ -10,5 +10,6 @@ public class ParadiseLostBlockSets {
     public static BlockSetType ORANGE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(ParadiseLost.locate("orange"));
     public static BlockSetType WISTERIA = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(ParadiseLost.locate("wisteria"));
 
-    public static void init() {}
+    public static void init() {
+    }
 }

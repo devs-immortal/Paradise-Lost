@@ -15,6 +15,7 @@ public class ParadiseLostDamageTypes {
         return new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(key));
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 
 }

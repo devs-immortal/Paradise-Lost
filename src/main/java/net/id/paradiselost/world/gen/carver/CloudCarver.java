@@ -13,7 +13,6 @@ import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.carver.CarverContext;
 import net.minecraft.world.gen.carver.CarvingMask;
 import net.minecraft.world.gen.chunk.AquiferSampler;
-import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;

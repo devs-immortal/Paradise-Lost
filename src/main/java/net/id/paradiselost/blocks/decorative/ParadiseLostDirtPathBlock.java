@@ -7,7 +7,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ParadiseLostDirtPathBlock extends DirtPathBlock {

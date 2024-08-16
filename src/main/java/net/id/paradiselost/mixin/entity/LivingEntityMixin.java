@@ -3,7 +3,6 @@ package net.id.paradiselost.mixin.entity;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
-import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.tag.ParadiseLostItemTags;

@@ -1,7 +1,6 @@
 package net.id.paradiselost.world.gen.carver;
 
 import net.id.paradiselost.ParadiseLost;
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.carver.Carver;
@@ -17,6 +16,7 @@ public class ParadiseLostCarvers {
         return (Carver<T>) Registry.register(Registries.CARVER, ParadiseLost.locate(name), carver);
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 
 }

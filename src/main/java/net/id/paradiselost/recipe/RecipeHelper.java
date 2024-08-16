@@ -22,7 +22,7 @@ public class RecipeHelper {
 
         ItemStack stack = new ItemStack(item, count);
         String nbt = JsonHelper.getString(json, "nbt", "");
-        if(nbt.isEmpty()) {
+        if (nbt.isEmpty()) {
             return stack;
         }
 
