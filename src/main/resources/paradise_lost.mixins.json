@@ -31,6 +31,7 @@
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
     "server.ServerPlayNetworkHandlerMixin",
+    "server.ServerWorldMixin",
     "world.gen.structure.JigsawStructureMixin",
     "world.ExplosionMixin",
     "util.NbtCompoundAccessor",
@@ -41,6 +42,7 @@
   ],
   "client": [
     "client.ClientPlayNetworkHandlerMixin",
+    "client.ClientWorldMixin",
     "client.ItemStackMixin",
     "client.render.BackgroundRendererMixin",
     "client.render.CloudRendererMixin",
