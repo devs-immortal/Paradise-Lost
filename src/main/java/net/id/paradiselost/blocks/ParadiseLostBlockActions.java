@@ -49,6 +49,6 @@ class ParadiseLostBlockActions {
 
     protected static Consumer<Block> clientOnly(Consumer<Block> func) {
         if (isClient) return func;
-        return (block) -> {};
+        return (block) -> { };
     }
 }
