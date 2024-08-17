@@ -18,16 +18,28 @@
     "douse": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "item": {
-          "item": "minecraft:potion"
-        },
-        "location": {
-          "block": {
-            "blocks": [
-              "minecraft:calcite"
-            ]
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "minecraft:calcite"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "minecraft:potion",
+                "minecraft:splash_potion",
+                "minecraft:lingering_potion"
+              ]
+            }
           }
-        }
+        ]
       }
     },
     "hold_bc": {

@@ -18,16 +18,24 @@
     "fill": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "item": {
-          "tag": "fabric:raw_meat"
-        },
-        "location": {
-          "block": {
-            "blocks": [
-              "paradise_lost:food_bowl"
-            ]
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "paradise_lost:food_bowl"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "tag": "fabric:raw_meat"
+            }
           }
-        }
+        ]
       }
     }
   },

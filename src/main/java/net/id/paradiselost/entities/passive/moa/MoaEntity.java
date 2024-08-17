@@ -11,6 +11,7 @@ import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.items.tools.bloodstone.BloodstoneItem;
 import net.id.paradiselost.screen.handler.MoaScreenHandler;
 import net.id.paradiselost.tag.ParadiseLostItemTags;
+import net.id.paradiselost.util.DummyInventory;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.AbstractChestBlock;
@@ -33,7 +34,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -63,7 +63,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameable, InventoryChangedListener, RideableInventory {
-    private static final SimpleInventory DUMMY = new SimpleInventory(0);
+    private static final SimpleInventory DUMMY = new DummyInventory();
 
     public static final TrackedData<Integer> AIR_TICKS = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<ItemStack> CHEST = DataTracker.registerData(MoaEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);

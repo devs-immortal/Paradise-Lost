@@ -109,7 +109,7 @@
   "block.paradise_lost.aurel_button": "Aurel Button",
   "block.paradise_lost.aurel_pressure_plate": "Aurel Pressure Plate",
   "block.paradise_lost.aurel_sign": "Aurel Sign",
-  "block.paradise_lost.aurel_wall_sign": "Aurel Wall Sign",
+  "block.paradise_lost.aurel_hanging_sign": "Aurel Hanging Sign",
 
   "block.paradise_lost.mother_aurel_sapling": "Mother Aurel Sapling",
   "block.paradise_lost.mother_aurel_log": "Mother Aurel Log",
@@ -127,7 +127,7 @@
   "block.paradise_lost.mother_aurel_button": "Mother Aurel Button",
   "block.paradise_lost.mother_aurel_pressure_plate": "Mother Aurel Pressure Plate",
   "block.paradise_lost.mother_aurel_sign": "Mother Aurel Sign",
-  "block.paradise_lost.mother_aurel_wall_sign": "Mother Aurel Wall Sign",
+  "block.paradise_lost.mother_aurel_hanging_sign": "Mother Aurel Hanging Sign",
 
   "block.paradise_lost.orange_sapling": "Orange Sapling",
   "block.paradise_lost.orange_log": "Orange Log",
@@ -145,7 +145,7 @@
   "block.paradise_lost.orange_button": "Orange Button",
   "block.paradise_lost.orange_pressure_plate": "Orange Pressure Plate",
   "block.paradise_lost.orange_sign": "Orange Sign",
-  "block.paradise_lost.orange_wall_sign": "Orange Wall Sign",
+  "block.paradise_lost.orange_hanging_sign": "Orange Hanging Sign",
 
   "block.paradise_lost.wisteria_log": "Wisteria Log",
   "block.paradise_lost.wisteria_wood": "Wisteria Wood",
@@ -161,7 +161,7 @@
   "block.paradise_lost.wisteria_button": "Wisteria Button",
   "block.paradise_lost.wisteria_pressure_plate": "Wisteria Pressure Plate",
   "block.paradise_lost.wisteria_sign": "Wisteria Sign",
-  "block.paradise_lost.wisteria_wall_sign": "Wisteria Wall Sign",
+  "block.paradise_lost.wisteria_hanging_sign": "Wisteria Hanging Sign",
 
   "block.paradise_lost.rose_wisteria_leaves": "Rose Wisteria Leaves",
   "block.paradise_lost.rose_wisteria_leaf_pile": "Rose Wisteria Leaf Pile",

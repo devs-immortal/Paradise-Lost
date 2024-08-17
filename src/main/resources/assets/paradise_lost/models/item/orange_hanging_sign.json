@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "paradise_lost:item/orange_hanging_sign"
+	}
+}

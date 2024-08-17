@@ -1,6 +1,9 @@
 package net.id.paradiselost.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.id.paradiselost.blocks.decorative.ParadiseHangingSignBlock;
 import net.id.paradiselost.blocks.decorative.ParadiseSignBlock;
+import net.id.paradiselost.blocks.decorative.ParadiseWallHangingSignBlock;
 import net.id.paradiselost.blocks.decorative.ParadiseWallSignBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.tree.FruitingLeavesBlock;
@@ -10,6 +13,7 @@ import net.id.paradiselost.world.feature.tree.generator.*;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.sapling.SaplingGenerator;
+import net.minecraft.client.gui.screen.ingame.HangingSignEditScreen;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -265,26 +269,32 @@ public class BlockRegistration {
     }
 
     // SIGN SET
-
     public static SignSet registerSignSet(WoodType woodType) {
 
-        var signSettings = AbstractBlock.Settings.copy(Blocks.OAK_SIGN);
+        var signSettings = FabricBlockSettings.copy(Blocks.OAK_SIGN);
+        var hangingSignSettings = FabricBlockSettings.copy(Blocks.OAK_HANGING_SIGN);
 
         SignBlock signBlock = new ParadiseSignBlock(signSettings, woodType);
         WallSignBlock wallSignBlock = new ParadiseWallSignBlock(signSettings.dropsLike(signBlock), woodType);
+        HangingSignBlock hangingSign = new ParadiseHangingSignBlock(hangingSignSettings, woodType);
+        WallHangingSignBlock wallHangingSign = new ParadiseWallHangingSignBlock(hangingSignSettings.dropsLike(hangingSign), woodType);
 
         add(woodType.name() + "_sign", signBlock);
         add(woodType.name() + "_wall_sign", wallSignBlock);
+        add(woodType.name() + "_hanging_sign", hangingSign);
+        add(woodType.name() + "_wall_hanging_sign", wallHangingSign);
 
-        return new SignSet(signBlock, wallSignBlock);
+        return new SignSet(signBlock, wallSignBlock, hangingSign, wallHangingSign);
     }
 
     public record SignSet(
             SignBlock sign,
-            WallSignBlock wallSign
+            WallSignBlock wallSign,
+            HangingSignBlock hangingSign,
+            WallHangingSignBlock wallHangingSign
             ) implements Iterable<Block> {
         public @NotNull Iterator<Block> iterator() {
-            return Arrays.stream(new Block[]{sign, wallSign}).iterator();
+            return Arrays.stream(new Block[]{sign, wallSign, hangingSign, wallHangingSign}).iterator();
         }
     }
 }

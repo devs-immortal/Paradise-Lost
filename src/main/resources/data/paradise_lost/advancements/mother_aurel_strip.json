@@ -18,16 +18,24 @@
     "strip": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "item": {
-          "tag": "c:axes"
-        },
-        "location": {
-          "block": {
-            "blocks": [
-              "paradise_lost:mother_aurel_log"
-            ]
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "paradise_lost:mother_aurel_log"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "tag": "c:axes"
+            }
           }
-        }
+        ]
       }
     },
     "hold_amber": {

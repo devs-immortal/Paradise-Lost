@@ -36,6 +36,19 @@ public class ParadiseLostItemGroups {
                 entries.add(AUREL_TRAPDOOR);
                 entries.add(AUREL_PRESSURE_PLATE);
                 entries.add(AUREL_BUTTON);
+                entries.add(MOTHER_AUREL_LOG);
+                entries.add(MOTHER_AUREL_WOOD);
+                entries.add(STRIPPED_MOTHER_AUREL_LOG);
+                entries.add(STRIPPED_MOTHER_AUREL_WOOD);
+                entries.add(MOTHER_AUREL_PLANKS);
+                entries.add(MOTHER_AUREL_STAIRS);
+                entries.add(MOTHER_AUREL_SLAB);
+                entries.add(MOTHER_AUREL_FENCE);
+                entries.add(MOTHER_AUREL_FENCE_GATE);
+                entries.add(MOTHER_AUREL_DOOR);
+                entries.add(MOTHER_AUREL_TRAPDOOR);
+                entries.add(MOTHER_AUREL_PRESSURE_PLATE);
+                entries.add(MOTHER_AUREL_BUTTON);
                 entries.add(ORANGE_LOG);
                 entries.add(ORANGE_WOOD);
                 entries.add(STRIPPED_ORANGE_LOG);
@@ -201,9 +214,13 @@ public class ParadiseLostItemGroups {
                 entries.add(FOOD_BOWL);
                 entries.add(TREE_TAP);
                 entries.add(AUREL_SIGN);
+                entries.add(AUREL_HANGING_SIGN);
                 entries.add(MOTHER_AUREL_SIGN);
+                entries.add(MOTHER_AUREL_HANGING_SIGN);
                 entries.add(ORANGE_SIGN);
+                entries.add(ORANGE_HANGING_SIGN);
                 entries.add(WISTERIA_SIGN);
+                entries.add(WISTERIA_HANGING_SIGN);
 
             }));
     public static final RegistryKey<ItemGroup> PARADISE_EQUIPMENT = create("equipment", FabricItemGroup.builder()

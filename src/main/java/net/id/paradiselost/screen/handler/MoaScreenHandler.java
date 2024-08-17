@@ -30,6 +30,14 @@ import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
  */
 public class MoaScreenHandler extends ScreenHandler {
     private final SimpleInventory dummy = new SimpleInventory(20) {
+        public void setStack(int slot, ItemStack stack) {
+            this.stacks.set(slot, stack);
+            if (!stack.isEmpty() && stack.getCount() > this.getMaxCountPerStack()) {
+                stack.setCount(this.getMaxCountPerStack());
+            }
+
+            this.markDirty();
+        }
         @Override
         public boolean isValid(int slot, ItemStack stack) {
             return false;

@@ -50,7 +50,6 @@ public class FloatingBlock extends ExperienceDroppingBlock {
         if (!this.powered || worldIn.isReceivingRedstonePower(pos)) {
             if (!worldIn.isClient) {
                 FloatingBlockHelper.ANY.tryCreate(worldIn, pos);
-                System.out.println("creating float block?");
             }
         }
     }

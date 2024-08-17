@@ -1,5 +1,6 @@
 package net.id.paradiselost.screen.slot;
 
+import net.id.paradiselost.util.DummyInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
@@ -25,7 +26,7 @@ public class FakeSlot extends Slot {
      * @param filter Filters allowed stacks
      */
     public FakeSlot(int x, int y, Supplier<ItemStack> getter, Consumer<ItemStack> setter, Predicate<ItemStack> filter) {
-        super(new SimpleInventory(0), 0, x, y);
+        super(new DummyInventory(), 0, x, y);
         this.getter = getter;
         this.setter = setter;
         this.filter = filter;

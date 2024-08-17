@@ -5,6 +5,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.WallSignBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 public class ParadiseWallSignBlock extends WallSignBlock {
@@ -13,6 +15,8 @@ public class ParadiseWallSignBlock extends WallSignBlock {
     }
 
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
+        this.lootTableId = identifier.withPrefixedPath("blocks/");
         return new ParadiseSignBlockEntity(pos, state);
     }
 }

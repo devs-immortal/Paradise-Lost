@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:orange_hanging_sign"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "paradise_lost:blocks/orange_hanging_sign"
+}

@@ -3,8 +3,10 @@ package net.id.paradiselost.mixin.server;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.server.network.EntityTrackerEntry;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,7 +26,7 @@ public class EntityTrackerEntryMixin {
     private Entity entity;
 
     @Inject(method = "sendPackets", at = @At("HEAD"))
-    private void sendPackets(Consumer<Packet<?>> sender, CallbackInfo ci) {
+    private void sendPackets(ServerPlayerEntity player, Consumer<Packet<ClientPlayPacketListener>> sender, CallbackInfo ci) {
         if (this.entity instanceof LivingEntity) {
             this.flipped = ((ParadiseLostEntityExtensions) this.entity).getFlipped();
             this.gravFlippedTime = ((ParadiseLostEntityExtensions) this.entity).getFlipTime();

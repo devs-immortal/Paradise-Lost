@@ -42,7 +42,7 @@
   "client": [
     "client.ClientPlayNetworkHandlerMixin",
     "client.ClientWorldMixin",
-    "client.ItemStackMixin",
+    "client.network.ClientPlayerEntityMixin",
     "client.render.BackgroundRendererMixin",
     "client.render.CloudRendererMixin",
     "client.render.EntityModelsMixin",

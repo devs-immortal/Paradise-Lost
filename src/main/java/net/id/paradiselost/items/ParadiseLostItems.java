@@ -405,9 +405,13 @@ public class ParadiseLostItems {
     public static final BlockItem PERMAFROST_PATH = add("frozen_path", ParadiseLostBlocks.PERMAFROST_PATH, decoration);
     // signs, wall stuff.
     public static final SignItem AUREL_SIGN = add("aurel_sign", new SignItem(sign, ParadiseLostBlocks.AUREL_SIGNS.sign(), ParadiseLostBlocks.AUREL_SIGNS.wallSign()));
+    public static final SignItem AUREL_HANGING_SIGN = add("aurel_hanging_sign", new HangingSignItem(ParadiseLostBlocks.AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.AUREL_SIGNS.wallHangingSign(), sign));
     public static final SignItem MOTHER_AUREL_SIGN = add("mother_aurel_sign", new SignItem(sign, ParadiseLostBlocks.MOTHER_AUREL_SIGNS.sign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallSign()));
+    public static final SignItem MOTHER_AUREL_HANGING_SIGN = add("mother_aurel_hanging_sign", new HangingSignItem(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallHangingSign(), sign));
     public static final SignItem ORANGE_SIGN = add("orange_sign", new SignItem(sign, ParadiseLostBlocks.ORANGE_SIGNS.sign(), ParadiseLostBlocks.ORANGE_SIGNS.wallSign()));
+    public static final SignItem ORANGE_HANGING_SIGN = add("orange_hanging_sign", new HangingSignItem(ParadiseLostBlocks.ORANGE_SIGNS.hangingSign(), ParadiseLostBlocks.ORANGE_SIGNS.wallHangingSign(), sign));
     public static final SignItem WISTERIA_SIGN = add("wisteria_sign", new SignItem(sign, ParadiseLostBlocks.WISTERIA_SIGNS.sign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallSign()));
+    public static final SignItem WISTERIA_HANGING_SIGN = add("wisteria_hanging_sign", new HangingSignItem(ParadiseLostBlocks.WISTERIA_SIGNS.hangingSign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallHangingSign(), sign));
     // beds
 
     // etc.

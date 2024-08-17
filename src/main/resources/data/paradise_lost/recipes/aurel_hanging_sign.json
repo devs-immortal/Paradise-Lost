@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "hanging_sign",
+  "pattern": [
+    "X X",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:stripped_aurel_log"
+    },
+    "X": {
+      "item": "paradise_lost:olvite_chain"
+    }
+  },
+  "result": {
+    "item": "paradise_lost:aurel_hanging_sign",
+    "count": 6
+  }
+}
