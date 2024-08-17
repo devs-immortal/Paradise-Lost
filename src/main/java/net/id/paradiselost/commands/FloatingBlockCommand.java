@@ -27,7 +27,7 @@ public class FloatingBlockCommand {
 
     private static int floatBlock(ServerCommandSource source, BlockPos pos, boolean force) {
         if (!source.getWorld().getBlockState(pos).isAir() && FloatingBlockHelper.ANY.tryCreate(source.getWorld(), pos, force)) {
-            source.sendFeedback(Text.translatable("commands.paradise_lost.gravitate.success"), true);
+            source.sendFeedback(() -> Text.translatable("commands.paradise_lost.gravitate.success"), true);
         } else {
             source.sendError(Text.translatable("commands.paradise_lost.gravitate.failure"));
         }

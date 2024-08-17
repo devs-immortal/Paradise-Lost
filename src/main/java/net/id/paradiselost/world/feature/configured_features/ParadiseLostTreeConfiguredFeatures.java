@@ -28,8 +28,6 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryKey<ConfiguredFeature<?, ?>> FALLEN_LEAVES = of("fallen_leaves");
     public static final RegistryKey<ConfiguredFeature<?, ?>> FALLEN_ROSE_LEAVES = of("fallen_rose_leaves");
     public static final RegistryKey<ConfiguredFeature<?, ?>> FALLEN_LAVENDER_LEAVES = of("fallen_lavender_leaves");
-    //public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> FALLEN_ROSE_LEAVES = register("fallen_rose_leaves", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ROSE_WISTERIA_LEAF_PILE.getDefaultState(), 10).add(ROSE_WISTERIA_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 2).build()), UniformIntProvider.create(4, 10), ConstantIntProvider.create(7), UniformIntProvider.create(3, 6), 1.2));
-    //public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> FALLEN_LAVENDER_LEAVES = register("fallen_lavender_leaves", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(LAVENDER_WISTERIA_LEAF_PILE.getDefaultState(), 10).add(LAVENDER_WISTERIA_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, true), 2).build()), UniformIntProvider.create(4, 10), ConstantIntProvider.create(7), UniformIntProvider.create(3, 6), 1.2));
 
     // Logs
     public static final RegistryKey<ConfiguredFeature<?, ?>> THICKET_FALLEN_LOG = of("thicket_fallen_log");

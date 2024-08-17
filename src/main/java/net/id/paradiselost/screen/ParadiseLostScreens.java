@@ -18,7 +18,7 @@ public final class ParadiseLostScreens {
     }
 
     public static final ScreenHandlerType<MoaScreenHandler> MOA = register("moa", (syncId, inventory, buffer) -> {
-        Entity entity = inventory.player.world.getEntityById(buffer.readVarInt());
+        Entity entity = inventory.player.getWorld().getEntityById(buffer.readVarInt());
         if (!(entity instanceof MoaEntity moa)) {
             return null;
         }

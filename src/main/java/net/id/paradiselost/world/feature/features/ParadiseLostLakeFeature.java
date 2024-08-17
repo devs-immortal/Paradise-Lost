@@ -6,10 +6,11 @@ import net.id.paradiselost.world.feature.configs.DynamicConfiguration;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.LakeFeature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
@@ -79,14 +80,13 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
                         if (lakeEdge) {
                             var state = context.getWorld().getBlockState(blockPos.add(xOff, yOff, zOff));
 
-                            Material material = state.getMaterial();
                             // There is a liquid above the lake, abort
-                            if (yOff >= 4 && material.isLiquid()) {
+                            if (yOff >= 4 && state.isLiquid()) {
                                 return false;
                             }
 
                             // There is a non-solid, non-lake block on the edge, abort
-                            if (yOff < 4 && !material.isSolid() && context.getWorld().getBlockState(blockPos.add(xOff, yOff, zOff)) != context.getConfig().state) {
+                            if (yOff < 4 && !state.isSolid() && context.getWorld().getBlockState(blockPos.add(xOff, yOff, zOff)) != context.getConfig().state) {
                                 return false;
                             }
                         }
@@ -119,8 +119,9 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
                 }
             }
 
+
             // Replace 50% of lave lake edge blocks with floestone.
-            if (context.getConfig().state.getMaterial() == Material.LAVA) {
+            if (context.getConfig().state.getFluidState().isIn(FluidTags.LAVA)) {
                 for (int xOff = 0; xOff < 16; xOff++) {
                     for (int zOff = 0; zOff < 16; zOff++) {
                         for (int yOff = 0; yOff < 8; yOff++) {
@@ -133,7 +134,7 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
                                         || yOff < 7 && waterMap[(xOff * 16 + zOff) * 8 + yOff + 1]
                                         || yOff > 0 && waterMap[(xOff * 16 + zOff) * 8 + (yOff - 1)]
                                     );
-                            if (lakeEdge && (yOff < 4 || context.getRandom().nextInt(2) != 0) && context.getWorld().getBlockState(blockPos.add(xOff, yOff, zOff)).getMaterial().isSolid()) {
+                            if (lakeEdge && (yOff < 4 || context.getRandom().nextInt(2) != 0) && context.getWorld().getBlockState(blockPos.add(xOff, yOff, zOff)).isSolid()) {
                                 context.getWorld().setBlockState(blockPos.add(xOff, yOff, zOff), ParadiseLostBlocks.FLOESTONE.getDefaultState(), Block.NOTIFY_LISTENERS);
                             }
                         }
@@ -142,7 +143,7 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
             }
 
             // Cover water lakes with ice in frozen biomes
-            if (context.getConfig().state.getMaterial() == Material.WATER) {
+            if (context.getConfig().state.getFluidState().isIn(FluidTags.WATER)) {
                 for (int xOff = 0; xOff < 16; xOff++) {
                     for (int zOff = 0; zOff < 16; zOff++) {
                         var blockPos3 = blockPos.add(xOff, 4, zOff);

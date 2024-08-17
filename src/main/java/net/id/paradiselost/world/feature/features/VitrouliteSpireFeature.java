@@ -48,7 +48,7 @@ public class VitrouliteSpireFeature extends Feature<DefaultFeatureConfig> {
                     var state = secStates.get(0);
                     var offset = origin.offset(dir);
 
-                    if (world.getBlockState(offset).getMaterial().isReplaceable()) {
+                    if (world.getBlockState(offset).isReplaceable()) {
 
                         if (world.getBlockState(offset.down()).isAir()) {
                             world.setBlockState(offset.down(), state, Block.NOTIFY_LISTENERS);
@@ -70,7 +70,7 @@ public class VitrouliteSpireFeature extends Feature<DefaultFeatureConfig> {
                                     var secState = random.nextBoolean() ? Blocks.SNOW_BLOCK.getDefaultState() : ParadiseLostBlocks.COBBLED_FLOESTONE.getDefaultState();
                                     var secOffset = offset.offset(secDir);
 
-                                    if (world.getBlockState(secOffset).getMaterial().isReplaceable()) {
+                                    if (world.getBlockState(secOffset).isReplaceable()) {
 
                                         if (world.getBlockState(secOffset.down()).isAir()) {
                                             world.setBlockState(secOffset.down(), state, Block.NOTIFY_LISTENERS);

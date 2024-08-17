@@ -22,8 +22,6 @@ public class ParadiseLostFeatures {
     public static final ParadiseLostBoulderFeature BOULDER = register("boulder", new ParadiseLostBoulderFeature(BoulderFeatureConfig.CODEC));
     public static final VitrouliteSpireFeature VITROULITE_SPIRE_FEATURE = register("vitroulite_spire", new VitrouliteSpireFeature(DefaultFeatureConfig.CODEC));
 
-    public static final ProjectedOrganicCoverFeature ORGANIC_GROUNDCOVER_FEATURE = register("organic_groundcover_feature", new ProjectedOrganicCoverFeature(ProjectedOrganicCoverConfig.CODEC));
-
     public static final HoneyNettleFeature HONEY_NETTLE_FEATURE = register("honey_nettle", new HoneyNettleFeature(DefaultFeatureConfig.CODEC));
 
     public static final PillarFeature PILLAR_FEATURE = register("pillar_feature", new PillarFeature(LongFeatureConfig.CODEC));

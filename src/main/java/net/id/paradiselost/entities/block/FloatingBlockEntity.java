@@ -45,7 +45,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
     public void postTickMoveEntities() {
         if (FallingBlock.canFallThrough(this.blockState)) return;
 
-        List<Entity> otherEntities = this.world.getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 3 * (this.prevY - this.getY()), 0)));
+        List<Entity> otherEntities = this.getWorld().getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 3 * (this.prevY - this.getY()), 0)));
         for (Entity entity : otherEntities) {
             if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides) {
                 entity.move(MovementType.SHULKER_BOX, this.getVelocity());
@@ -84,7 +84,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
     public boolean shouldCease() {
         return super.shouldCease()
                || (this.isOnGround() && (this.isDropping() || this.getVelocity().getY() == 0)
-                   || (this.verticalCollision && !this.onGround));
+                   || (this.verticalCollision && !this.isOnGround()));
     }
     
     public Supplier<Boolean> getDropState() {

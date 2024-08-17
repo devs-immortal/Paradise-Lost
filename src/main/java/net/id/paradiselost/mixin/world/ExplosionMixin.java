@@ -15,6 +15,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -110,9 +111,9 @@ public abstract class ExplosionMixin extends Object implements ExplosionExtensio
                         if (var11 instanceof ServerWorld) {
                             ServerWorld serverWorld = (ServerWorld) var11;
                             BlockEntity blockEntity = blockState.hasBlockEntity() ? this.world.getBlockEntity(blockPos) : null;
-                            LootContext.Builder builder = (new LootContext.Builder(serverWorld)).random(this.world.random).parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(blockPos)).parameter(LootContextParameters.TOOL, ItemStack.EMPTY).optionalParameter(LootContextParameters.BLOCK_ENTITY, blockEntity).optionalParameter(LootContextParameters.THIS_ENTITY, this.entity);
-                            if (this.destructionType == Explosion.DestructionType.DESTROY) {
-                                builder.parameter(LootContextParameters.EXPLOSION_RADIUS, this.power);
+                            LootContextParameterSet.Builder builder = (new LootContextParameterSet.Builder(serverWorld)).add(LootContextParameters.ORIGIN, Vec3d.ofCenter(blockPos)).add(LootContextParameters.TOOL, ItemStack.EMPTY).addOptional(LootContextParameters.BLOCK_ENTITY, blockEntity).addOptional(LootContextParameters.THIS_ENTITY, this.entity);
+                            if (this.destructionType == Explosion.DestructionType.DESTROY_WITH_DECAY) {
+                                builder.add(LootContextParameters.EXPLOSION_RADIUS, this.power);
                             }
 
                             blockState.onStacksDropped(serverWorld, blockPos, ItemStack.EMPTY, bl2);

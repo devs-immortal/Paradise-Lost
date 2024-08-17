@@ -65,7 +65,7 @@ public class TallCropBlock extends CropBlock {
     }
 
     private boolean canGrowUp(World world, BlockPos pos, BlockState state, int age) {
-        return world.getBlockState(pos.up()).isOf(this) || world.getBlockState(pos.up()).getMaterial().isReplaceable();
+        return world.getBlockState(pos.up()).isOf(this) || world.getBlockState(pos.up()).isReplaceable();
     }
 
     /**
@@ -87,7 +87,7 @@ public class TallCropBlock extends CropBlock {
                 // More likely if there's more moisture
                 if (random.nextInt((int) (upperBound / moisture) + 1) == 0) {
                     if (age >= Block.NOTIFY_LISTENERS) {
-                        if (world.getBlockState(pos.up()).isOf(this) || world.getBlockState(pos.up()).getMaterial().isReplaceable()) {
+                        if (world.getBlockState(pos.up()).isOf(this) || world.getBlockState(pos.up()).isReplaceable()) {
                             world.setBlockState(pos, this.withAge(age + 1), Block.NOTIFY_LISTENERS);
                             world.setBlockState(pos.up(), this.withAgeAndHalf(age + 1, DoubleBlockHalf.UPPER), Block.NOTIFY_LISTENERS);
                         }

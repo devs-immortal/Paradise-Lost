@@ -2,7 +2,6 @@ package net.id.paradiselost.blocks.natural.cloud;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.registry.tag.BlockTags;
@@ -39,7 +38,6 @@ public class GoldenParadiseLostCloudBlock extends ParadiseLostCloudBlock {
     }
 
     private boolean canFallThrough(BlockState state) {
-        Material material = state.getMaterial();
-        return state.isAir() || state.isIn(BlockTags.FIRE) || material.isLiquid() || material.isReplaceable() || state == ParadiseLostBlocks.GOLDEN_CLOUD.getDefaultState();
+        return state.isAir() || state.isIn(BlockTags.FIRE) || state.isLiquid() || state.isReplaceable() || state == ParadiseLostBlocks.GOLDEN_CLOUD.getDefaultState();
     }
 }

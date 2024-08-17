@@ -28,7 +28,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     @Inject(method = "isPlayerNotCollidingWithBlocks", at = @At("RETURN"), cancellable = true)
     void isPlayerNotCollidingWithBlocks(WorldView worldView, Box box, CallbackInfoReturnable<Boolean> cir) {
         if (cir.getReturnValue()) {
-            List<Entity> list = player.world.getOtherEntities(player, player.getBoundingBox());
+            List<Entity> list = player.getWorld().getOtherEntities(player, player.getBoundingBox());
             for (Entity entity : list) {
                 if (entity instanceof FloatingBlockEntity) {
                     cir.setReturnValue(false);

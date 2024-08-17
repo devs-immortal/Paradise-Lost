@@ -22,7 +22,7 @@ public class FoodBowlBlockEntity extends BlockEntity {
     @SuppressWarnings("ConstantConditions")
     public boolean handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
         ItemStack storedFood = inventory.get(0);
-        if (!storedFood.isEmpty() && (handStack.isEmpty() || !handStack.isItemEqual(storedFood))) {
+        if (!storedFood.isEmpty() && (handStack.isEmpty() || !handStack.equals(storedFood))) {
             if (!player.getInventory().insertStack(storedFood)) {
                 world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY() + 0.75, pos.getZ(), storedFood, 0, 0, 0));
             }

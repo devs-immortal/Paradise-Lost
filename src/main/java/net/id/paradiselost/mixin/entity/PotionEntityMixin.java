@@ -32,7 +32,7 @@ public class PotionEntityMixin extends ThrownItemEntity {
 
     @Inject(method = "onBlockHit", at = @At("TAIL"), cancellable = true)
     protected void onBlockHit(BlockHitResult blockHitResult, CallbackInfo ci) {
-        if (!this.world.isClient) {
+        if (!this.getWorld().isClient) {
             ItemStack itemStack = this.getStack();
             List<StatusEffectInstance> list = PotionUtil.getPotionEffects(itemStack);
             boolean healingPotion = list.stream().anyMatch((e) -> e.getEffectType() == StatusEffects.INSTANT_HEALTH);
@@ -41,10 +41,10 @@ public class PotionEntityMixin extends ThrownItemEntity {
             BlockPos landBlock = blockPos.offset(direction);
             if (healingPotion) {
                 List<BlockPos> affected = new LinkedList<>();
-                if (world.getBlockState(landBlock.up()).isOf(Blocks.CALCITE)) {
+                if (getWorld().getBlockState(landBlock.up()).isOf(Blocks.CALCITE)) {
                     affected.add(landBlock.up());
                 }
-                if (world.getBlockState(landBlock.down()).isOf(Blocks.CALCITE)) {
+                if (getWorld().getBlockState(landBlock.down()).isOf(Blocks.CALCITE)) {
                     affected.add(landBlock.down());
                 }
                 addIfValid(landBlock, affected);
@@ -61,8 +61,8 @@ public class PotionEntityMixin extends ThrownItemEntity {
                 }
                 if (!affected.isEmpty()) {
                     Collections.shuffle(affected);
-                    BloomedCalciteUtil.applyHealing(this.getOwner(), world, affected.get(0), this.world.random, itemStack);
-                    if (affected.size() > 1 && this.world.random.nextBoolean()) BloomedCalciteUtil.applyHealing(this.getOwner(), world, affected.get(1), this.world.random, itemStack);
+                    BloomedCalciteUtil.applyHealing(this.getOwner(), getWorld(), affected.get(0), this.getWorld().random, itemStack);
+                    if (affected.size() > 1 && this.getWorld().random.nextBoolean()) BloomedCalciteUtil.applyHealing(this.getOwner(), getWorld(), affected.get(1), this.getWorld().random, itemStack);
                 }
             }
 
@@ -70,7 +70,7 @@ public class PotionEntityMixin extends ThrownItemEntity {
     }
 
     private void addIfValid(BlockPos pos, List<BlockPos> list) {
-        if (world.getBlockState(pos).isOf(Blocks.CALCITE)) {
+        if (getWorld().getBlockState(pos).isOf(Blocks.CALCITE)) {
             list.add(pos);
         }
     }

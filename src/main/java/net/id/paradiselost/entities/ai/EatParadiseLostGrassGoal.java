@@ -22,7 +22,7 @@ public class EatParadiseLostGrassGoal extends Goal {
 
     public EatParadiseLostGrassGoal(MobEntity entity) {
         this.owner = entity;
-        this.world = entity.world;
+        this.world = entity.getWorld();
 
         this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK, Goal.Control.JUMP));
     }

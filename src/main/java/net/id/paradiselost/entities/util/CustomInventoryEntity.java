@@ -15,5 +15,5 @@ public interface CustomInventoryEntity extends RideableInventory {
      *
      * @param player The player that opened the inventory
      */
-    void openInventory(PlayerEntity player);
+    void method_6722(PlayerEntity player);
 }

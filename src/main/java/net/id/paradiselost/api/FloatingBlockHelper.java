@@ -2,6 +2,9 @@ package net.id.paradiselost.api;
 
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.util.FloatingBlockHelperImpls;
+import net.id.paradiselost.entities.util.FloatingBlockHelperImpls.Any;
+import net.id.paradiselost.entities.util.FloatingBlockHelperImpls.Pusher;
+import net.id.paradiselost.entities.util.FloatingBlockHelperImpls.Standard;
 import net.id.paradiselost.items.tools.base_tools.GravityWandItem;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.minecraft.block.BlockState;
@@ -49,7 +52,7 @@ public interface FloatingBlockHelper {
      * floating block is 50 blocks from the height limit, and isn't a fast floater.
      */
     Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = (entity) -> {
-        World world = entity.world;
+        World world = entity.getWorld() ;
         BlockPos pos = entity.getBlockPos();
         int distFromTop = world.getTopY() - pos.getY();
         return !entity.isInTag(ParadiseLostBlockTags.DECAYING_FLOATERS) && distFromTop <= 50;

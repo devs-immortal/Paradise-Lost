@@ -3,6 +3,7 @@ package net.id.paradiselost.items.misc;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.api.MoaAPI;
+import net.id.paradiselost.api.MoaAPI.MoaRace;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;

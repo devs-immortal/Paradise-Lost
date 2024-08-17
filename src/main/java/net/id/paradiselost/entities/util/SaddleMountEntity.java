@@ -69,15 +69,15 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
             if (heldItem.getItem() == Items.SADDLE && !this.isBaby()) {
                 if (!player.isCreative()) player.setStackInHand(hand, ItemStack.EMPTY);
 
-                if (player.world.isClient)
-                    player.world.playSound(player, player.getBlockPos(), SoundEvents.ENTITY_PIG_SADDLE, SoundCategory.AMBIENT, 1.0F, 1.0F);
+                if (player.getWorld().isClient)
+                    player.getWorld().playSound(player, player.getBlockPos(), SoundEvents.ENTITY_PIG_SADDLE, SoundCategory.AMBIENT, 1.0F, 1.0F);
 
                 this.setSaddled(true);
                 return ActionResult.SUCCESS;
             }
         } else {
             if (this.getPassengerList().isEmpty()) {
-                if (!player.world.isClient) {
+                if (!player.getWorld().isClient) {
                     player.startRiding(this);
                     player.prevYaw = player.getYaw();
                     player.setYaw(this.getYaw());
@@ -137,7 +137,7 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     public void saddle(@Nullable SoundCategory sound) {
         //this.items.setStack(0, new ItemStack(Items.SADDLE));
         if (sound != null) {
-            world.playSoundFromEntity(null, this, SoundEvents.ENTITY_PIG_SADDLE, sound, 0.5F, 1.0F);
+            getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_PIG_SADDLE, sound, 0.5F, 1.0F);
         }
     }
 }

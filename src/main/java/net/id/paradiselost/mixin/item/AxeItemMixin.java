@@ -6,6 +6,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.*;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -30,11 +31,11 @@ public class AxeItemMixin {
 
         if (world.getBlockState(blockPos).getBlock() == ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.log() && !world.isClient) {
             ServerWorld server = (ServerWorld) world;
-            LootTable supplier = server.getServer().getLootManager().getTable(ParadiseLostLootTables.MOTHER_AUREL_STRIPPING);
-            List<ItemStack> items = supplier.generateLoot(new LootContext.Builder(server)
-                    .parameter(LootContextParameters.BLOCK_STATE, world.getBlockState(blockPos))
-                    .parameter(LootContextParameters.ORIGIN, Vec3d.of(blockPos))
-                    .parameter(LootContextParameters.TOOL, context.getStack())
+            LootTable supplier = server.getServer().getLootManager().getLootTable(ParadiseLostLootTables.MOTHER_AUREL_STRIPPING);
+            List<ItemStack> items = supplier.generateLoot(new LootContextParameterSet.Builder(server)
+                    .add(LootContextParameters.BLOCK_STATE, world.getBlockState(blockPos))
+                    .add(LootContextParameters.ORIGIN, Vec3d.of(blockPos))
+                    .add(LootContextParameters.TOOL, context.getStack())
                     .build(LootContextTypes.BLOCK)
             );
             Vec3d offsetDirection = context.getHitPos();

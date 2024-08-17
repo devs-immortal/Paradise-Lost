@@ -54,12 +54,12 @@ public class ParadiseLostAnimalEntity extends AnimalEntity {
             double d = this.random.nextGaussian() * 0.02D;
             double e = this.random.nextGaussian() * 0.02D;
             double f = this.random.nextGaussian() * 0.02D;
-            this.world.addParticle(parameters, this.getParticleX(1.0D), this.getRandomBodyY() + yOffset, this.getParticleZ(1.0D), d, e, f);
+            this.getWorld().addParticle(parameters, this.getParticleX(1.0D), this.getRandomBodyY() + yOffset, this.getParticleZ(1.0D), d, e, f);
         }
     }
 
     public void produceParticlesServer(ParticleEffect parameters, int rolls, int maxAmount, float yOffset) {
-        if (world instanceof ServerWorld server) {
+        if (getWorld() instanceof ServerWorld server) {
             maxAmount = maxAmount + 1;
             for (int i = 0; i < rolls; ++i) {
                 double d = this.random.nextGaussian() * 0.02D;

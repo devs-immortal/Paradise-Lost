@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.id.paradiselost.api.MoaAPI;
+import net.id.paradiselost.api.MoaAPI.MoaRace;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
@@ -67,7 +68,7 @@ public class MoaGenes implements AutoSyncedComponent {
     }
 
     public void initMoa(@NotNull MoaEntity moa) {
-        World world = moa.world;
+        World world = moa.getWorld();
         Random random = moa.getRandom();
         race = MoaAPI.getMoaFromSpawning(world.getBiome(moa.getBlockPos()).getKey().get(), random);
         affinity = race.defaultAffinity();

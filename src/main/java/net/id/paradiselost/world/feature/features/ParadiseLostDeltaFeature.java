@@ -83,7 +83,7 @@ public class ParadiseLostDeltaFeature extends DeltaFeature {
                 if (filledPositions.contains(currentPos)) {
                     continue;
                 }
-                boolean isAir = !world.getBlockState(currentPos).getMaterial().isSolid();
+                boolean isAir = !world.getBlockState(currentPos).isSolid();
                 if (isAir && direction != Direction.UP || !isAir && direction == Direction.UP) {
                     return false;
                 }

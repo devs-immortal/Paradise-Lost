@@ -7,12 +7,17 @@ import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.text.Text;
 
 import static net.id.paradiselost.items.ParadiseLostItems.*;
 
 public class ParadiseLostItemGroups {
 
-    private static final ItemGroup PARADISE_BLOCKS = FabricItemGroup.builder(ParadiseLost.locate("building_blocks"))
+    public static final RegistryKey<ItemGroup> PARADISE_BLOCKS = create("building_blocks", FabricItemGroup.builder()
             .icon(() -> new ItemStack(ParadiseLostBlocks.CHISELED_FLOESTONE))
             .entries((context, entries) -> {
                 // Woodstuff
@@ -104,9 +109,8 @@ public class ParadiseLostItemGroups {
                 entries.add(OLVITE_CHAIN);
                 entries.add(REFINED_SURTRUM_BLOCK);
 
-            }).build();
-
-    private static final ItemGroup PARADISE_PLANTS = FabricItemGroup.builder(ParadiseLost.locate("plants"))
+            }));
+    public static final RegistryKey<ItemGroup> PARADISE_PLANTS = create("plants", FabricItemGroup.builder()
             .icon(() -> new ItemStack(ParadiseLostBlocks.HIGHLANDS_GRASS))
             .entries((context, entries) -> {
                 // soil
@@ -175,9 +179,8 @@ public class ParadiseLostItemGroups {
                 entries.add(SWEDROOT);
                 entries.add(SWEDROOT_SPREAD);
 
-            }).build();
-
-    private static final ItemGroup PARADISE_DECO = FabricItemGroup.builder(ParadiseLost.locate("decoration"))
+            }));
+    public static final RegistryKey<ItemGroup> PARADISE_DECO = create("decoration", FabricItemGroup.builder()
             .icon(() -> new ItemStack(ParadiseLostBlocks.CHERINE_LANTERN))
             .entries((context, entries) -> {
                 // clouds
@@ -202,9 +205,8 @@ public class ParadiseLostItemGroups {
                 entries.add(ORANGE_SIGN);
                 entries.add(WISTERIA_SIGN);
 
-            }).build();
-
-    private static final ItemGroup PARADISE_EQUIPMENT = FabricItemGroup.builder(ParadiseLost.locate("equipment"))
+            }));
+    public static final RegistryKey<ItemGroup> PARADISE_EQUIPMENT = create("equipment", FabricItemGroup.builder()
             .icon(() -> new ItemStack(SURTRUM_PICKAXE))
             .entries((context, entries) -> {
                 // actual tools
@@ -260,9 +262,8 @@ public class ParadiseLostItemGroups {
                 entries.add(WISTERIA_BOATS.chestBoat());
                 entries.add(CLOUD_PARACHUTE);
                 entries.add(GOLDEN_CLOUD_PARACHUTE);
-            }).build();
-
-    private static final ItemGroup PARADISE_RESOURCES = FabricItemGroup.builder(ParadiseLost.locate("resources"))
+            }));
+    public static final RegistryKey<ItemGroup> PARADISE_RESOURCES = create("resources", FabricItemGroup.builder()
             .icon(() -> new ItemStack(CHERINE))
             .entries((context, entries) -> {
                 //
@@ -275,9 +276,8 @@ public class ParadiseLostItemGroups {
                 entries.add(GOLDEN_AMBER);
                 entries.add(FLAX_THREAD);
                 entries.add(FLAXWEAVE);
-            }).build();
-
-    private static final ItemGroup PARADISE_FOOD = FabricItemGroup.builder(ParadiseLost.locate("food"))
+            }));
+    public static final RegistryKey<ItemGroup> PARADISE_FOOD = create("food", FabricItemGroup.builder()
             .icon(() -> new ItemStack(AMADRYS_NOODLES))
             .entries((context, entries) -> {
                 // all
@@ -295,7 +295,7 @@ public class ParadiseLostItemGroups {
                 // loot
                 //entries.add(CHEESECAKE); // TODO
 
-            }).build();
+            }));
 
     public static void init() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS)
@@ -303,5 +303,12 @@ public class ParadiseLostItemGroups {
                     itemGroup.add(MOA_SPAWN_EGG);
                     itemGroup.add(ENVOY_SPAWN_EGG);
                 });
+    }
+
+    // item group registry helper
+    private static RegistryKey<ItemGroup> create(String identifier, ItemGroup.Builder itemGroup) {
+        var key = RegistryKey.of(RegistryKeys.ITEM_GROUP, ParadiseLost.locate(identifier));
+        Registry.register(Registries.ITEM_GROUP, key, itemGroup.displayName(Text.translatable("itemGroup.paradise_lost." + identifier)).build());
+        return key;
     }
 }

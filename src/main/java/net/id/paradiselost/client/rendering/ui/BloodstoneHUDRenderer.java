@@ -6,7 +6,7 @@ import net.fabricmc.api.Environment;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.items.tools.bloodstone.*;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
 import net.minecraft.client.util.math.MatrixStack;
@@ -25,7 +25,7 @@ import net.minecraft.util.math.MathHelper;
 @Environment(EnvType.CLIENT)
 //probably can be cleaned up
 public class BloodstoneHUDRenderer {
-    public static void render(MatrixStack matrixStack, float delta) {
+    public static void render(DrawContext context, float delta) {
         PlayerEntity player = MinecraftClient.getInstance().player;
         ItemStack stack = player.getMainHandStack();
         if (stack.getItem() instanceof BloodstoneItem) {
@@ -34,18 +34,19 @@ public class BloodstoneHUDRenderer {
                 MinecraftClient client = MinecraftClient.getInstance();
                 BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromNBT(nbt.getCompound(BloodstoneCapturedData.NBT_TAG));
                 if (client.currentScreen == null && isLookingAtMatchingEntity(client, capturedData) || doUUIDMatch(player, capturedData)) {
+                    var matrixStack = context.getMatrices();
                     matrixStack.push();
                     RenderSystem.enableBlend();
                     RenderSystem.defaultBlendFunc();
                     matrixStack.translate(client.getWindow().getScaledWidth() / 2f, client.getWindow().getScaledHeight() / 2f, 0);
                     if (stack.getItem() instanceof CherineBloodstoneItem) {
-                        renderCherine(matrixStack, client, capturedData);
+                        renderCherine(context, client, capturedData);
                     } else if (stack.getItem() instanceof OlviteBloodstoneItem) {
-                        renderOlvite(matrixStack, client, capturedData);
+                        renderOlvite(context, client, capturedData);
                     } else if (stack.getItem() instanceof SurtrumBloodstoneItem) {
-                        renderSurtrum(matrixStack, client, capturedData);
+                        renderSurtrum(context, client, capturedData);
                     } else if (stack.getItem() instanceof AbstentineBloodstoneItem) {
-                        renderAbstentine(matrixStack, client, capturedData);
+                        renderAbstentine(context, client, capturedData);
                     }
                     RenderSystem.disableBlend();
                     matrixStack.pop();
@@ -74,51 +75,51 @@ public class BloodstoneHUDRenderer {
         return capturedData.uuid.equals(entity.getUuid());
     }
 
-    private static void renderCherine(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+    private static void renderCherine(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
-        renderRing(matrixStack, 0, 0);
-        renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.REGENERATION), Text.literal(bloodstoneCapturedData.HP), 0, 80);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.RESISTANCE), Text.literal(bloodstoneCapturedData.DF), -80, 0);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), Text.literal(bloodstoneCapturedData.TF), 80, 0);
+        renderRing(context, 0, 0);
+        renderText(context, client, bloodstoneCapturedData.name, 0, -80);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.REGENERATION), Text.literal(bloodstoneCapturedData.HP), 0, 80);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.RESISTANCE), Text.literal(bloodstoneCapturedData.DF), -80, 0);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), Text.literal(bloodstoneCapturedData.TF), 80, 0);
     }
 
-    private static void renderOlvite(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+    private static void renderOlvite(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
         var effectAtlas = client.getSpriteAtlas(new Identifier("textures/atlas/blocks.png"));
         Sprite affinitySprite = effectAtlas.apply(ParadiseLost.locate("item/icons/affinity"));
         Sprite raceSprite = effectAtlas.apply(ParadiseLost.locate("item/icons/race"));
 
-        renderRing(matrixStack, 0, 0);
-        renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
+        renderRing(context, 0, 0);
+        renderText(context, client, bloodstoneCapturedData.name, 0, -80);
 
-        renderIconWText(matrixStack, client, affinitySprite, Text.translatable(bloodstoneCapturedData.Affinity), 76, -25);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), Text.literal(bloodstoneCapturedData.Owner), 47, 65);
-        renderIconWText(matrixStack, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), Text.literal(bloodstoneCapturedData.Hunger), -47, 65);
-        renderIconWText(matrixStack, client, raceSprite, Text.translatable(bloodstoneCapturedData.Race), -76, -25);
+        renderIconWText(context, client, affinitySprite, Text.translatable(bloodstoneCapturedData.Affinity), 76, -25);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), Text.literal(bloodstoneCapturedData.Owner), 47, 65);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), Text.literal(bloodstoneCapturedData.Hunger), -47, 65);
+        renderIconWText(context, client, raceSprite, Text.translatable(bloodstoneCapturedData.Race), -76, -25);
     }
 
-    private static void renderSurtrum(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
-        renderRing(matrixStack, 0, 0);
-        renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
-        renderText(matrixStack, client, Text.translatable("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), 63, -50);
-        renderText(matrixStack, client, Text.translatable("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)), 80, 0);
-        renderText(matrixStack, client, Text.translatable("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)), 63, 50);
-        renderText(matrixStack, client, Text.translatable("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)), -63, -50);
-        renderText(matrixStack, client, Text.translatable("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)), -80, 0);
-        renderText(matrixStack, client, Text.translatable("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), -63, 50);
+    private static void renderSurtrum(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+        renderRing(context, 0, 0);
+        renderText(context, client, bloodstoneCapturedData.name, 0, -80);
+        renderText(context, client, Text.translatable("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), 63, -50);
+        renderText(context, client, Text.translatable("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)), 80, 0);
+        renderText(context, client, Text.translatable("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)), 63, 50);
+        renderText(context, client, Text.translatable("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)), -63, -50);
+        renderText(context, client, Text.translatable("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)), -80, 0);
+        renderText(context, client, Text.translatable("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), -63, 50);
     }
 
-    private static void renderAbstentine(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
-        renderRing(matrixStack, 0, 0);
-        renderText(matrixStack, client, bloodstoneCapturedData.name, 0, -80);
+    private static void renderAbstentine(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
+        renderRing(context, 0, 0);
+        renderText(context, client, bloodstoneCapturedData.name, 0, -80);
         for (int i = 0; i < bloodstoneCapturedData.conditionDataList.size(); i++) {
             Pair<Integer, Integer> offset = getCircularPosition(80, i + 1, bloodstoneCapturedData.conditionDataList.size());
-            renderCondition(matrixStack, client, bloodstoneCapturedData.conditionDataList.get(i), offset.getLeft(), offset.getRight());
+            renderCondition(context, client, bloodstoneCapturedData.conditionDataList.get(i), offset.getLeft(), offset.getRight());
         }
     }
 
-    private static void renderCondition(MatrixStack matrixStack, MinecraftClient client, BloodstoneCapturedData.ConditionData conditionData, int offsetX, int offsetY) {
+    private static void renderCondition(DrawContext context, MinecraftClient client, BloodstoneCapturedData.ConditionData conditionData, int offsetX, int offsetY) {
         if (offsetX == 0) {
             offsetX = 109 / 2;
         } else if (offsetX < 0) {
@@ -126,24 +127,22 @@ public class BloodstoneHUDRenderer {
         }
 
         int renderWidth = (int) MathHelper.clamp((109 - 15) * conditionData.severity(), 0, (109 - 15));
+        var matrixStack = context.getMatrices();
         matrixStack.push();
         matrixStack.translate(offsetX, offsetY, 0);
         matrixStack.translate(-54.5, -6, 0);
         matrixStack.scale(1.15f, 1.15f, 1);
         matrixStack.translate(54.5, 6, 0);
-        RenderSystem.setShaderTexture(0, ParadiseLost.locate("textures/hud/bloodstone/" + conditionData.id() + "_bar.png"));
-        DrawableHelper.drawTexture(matrixStack, -7, -7, 0, 0, 15 + renderWidth, 12, 109, 12);
-        RenderSystem.setShaderTexture(0, ParadiseLost.locate("textures/hud/bloodstone/condition_bar.png"));
-        DrawableHelper.drawTexture(matrixStack, -7, -7, 0, 0, 109, 12, 109, 12);
+        context.drawTexture(ParadiseLost.locate("textures/hud/bloodstone/" + conditionData.id() + "_bar.png"), -7, -7, 0, 0, 15 + renderWidth, 12, 109, 12);
+        context.drawTexture(ParadiseLost.locate("textures/hud/bloodstone/condition_bar.png"), -7, -7, 0, 0, 109, 12, 109, 12);
         matrixStack.pop();
     }
 
-    private static void renderRing(MatrixStack matrixStack, int offsetX, int offsetY) {
-        RenderSystem.setShaderTexture(0, ParadiseLost.locate("textures/hud/bloodstone/bloodstone_ring.png"));
-        DrawableHelper.drawTexture(matrixStack, offsetX - 75, offsetY - 75, 0, 0, 150, 150, 150, 150);
+    private static void renderRing(DrawContext context, int offsetX, int offsetY) {
+        context.drawTexture(ParadiseLost.locate("textures/hud/bloodstone/bloodstone_ring.png"), offsetX - 75, offsetY - 75, 0, 0, 150, 150, 150, 150);
     }
 
-    private static void renderIconWText(MatrixStack matrixStack, MinecraftClient client, Sprite sprite, Text text, int offsetX, int offsetY) {
+    private static void renderIconWText(DrawContext context, MinecraftClient client, Sprite sprite, Text text, int offsetX, int offsetY) {
         int totalWidth = ((sprite.getContents().getWidth()) + 2 + client.textRenderer.getWidth(text));
         int totalHeight = client.textRenderer.fontHeight / 2;
 
@@ -156,11 +155,11 @@ public class BloodstoneHUDRenderer {
 
         RenderSystem.setShaderTexture(0, sprite.getAtlasId());
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1);
-        DrawableHelper.drawSprite(matrixStack, startX, offsetY - 9, 0, 18, 18, sprite);  //  0 z correct?
-        client.textRenderer.drawWithShadow(matrixStack, text, startX + sprite.getContents().getWidth() + 2, offsetY - totalHeight, 14737632);
+        context.drawSprite(startX, offsetY - 9, 0, 18, 18, sprite);  //  0 z correct?
+        context.drawTextWithShadow(client.textRenderer, text, startX + sprite.getContents().getWidth() + 2, offsetY - totalHeight, 14737632);
     }
 
-    private static void renderText(MatrixStack matrixStack, MinecraftClient client, Text text, int offsetX, int offsetY) {
+    private static void renderText(DrawContext context, MinecraftClient client, Text text, int offsetX, int offsetY) {
         int totalWidth = client.textRenderer.getWidth(text);
         int totalHeight = client.textRenderer.fontHeight / 2;
 
@@ -171,7 +170,7 @@ public class BloodstoneHUDRenderer {
             startX = (offsetX - totalWidth);
         }
 
-        client.textRenderer.drawWithShadow(matrixStack, text, startX, offsetY - totalHeight, 14737632);
+        context.drawTextWithShadow(client.textRenderer, text, startX, offsetY - totalHeight, 14737632);
     }
 
     private static Pair<Integer, Integer> getCircularPosition(int radius, int itemNum, int totalItems) {

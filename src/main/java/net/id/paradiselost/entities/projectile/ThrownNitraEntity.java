@@ -1,5 +1,6 @@
 package net.id.paradiselost.entities.projectile;
 
+import java.util.List;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.entity.Entity;
@@ -34,8 +35,8 @@ public class ThrownNitraEntity extends ThrownItemEntity {
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         doDamage();
-        if (!this.world.isClient) {
-            this.world.sendEntityStatus(this, (byte) 3);
+        if (!this.getWorld().isClient) {
+            this.getWorld().sendEntityStatus(this, (byte) 3);
             this.discard();
         }
     }
@@ -43,22 +44,22 @@ public class ThrownNitraEntity extends ThrownItemEntity {
     public void handleStatus(byte status) {
         if (status == 3) {
             for (int i = 0; i < 4; i++) {
-                this.world.addParticle(ParticleTypes.EXPLOSION,
+                this.getWorld().addParticle(ParticleTypes.EXPLOSION,
                         this.getX() + this.random.nextDouble() - 0.5, this.getY() + this.random.nextDouble() - 0.5, this.getZ() + this.random.nextDouble() - 0.5,
                         0.0, 0.0, 0.0
                 );
             }
-            this.world.playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 1.0F, 1.1F + this.random.nextFloat() * 0.4F, false);
+            this.getWorld().playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 1.0F, 1.1F + this.random.nextFloat() * 0.4F, false);
         }
 
     }
 
     private void doDamage() {
-        var hit = this.world.getOtherEntities(this, new Box(this.getX() - 1.5, this.getY() - 1.5, this.getZ() - 1.5, this.getX() + 1.5, this.getY() + 1.5, this.getZ() + 1.5));
+        var hit = this.getWorld().getOtherEntities(this, new Box(this.getX() - 1.5, this.getY() - 1.5, this.getZ() - 1.5, this.getX() + 1.5, this.getY() + 1.5, this.getZ() + 1.5));
         for (Entity e : hit) {
             Vec3d diff = this.getPos().subtract(e.getPos()).negate().normalize();
             e.addVelocity(diff.x, diff.y, diff.z);
-            e.damage(this.world.getDamageSources().explosion(null, e), 2);
+            e.damage(this.getWorld().getDamageSources().explosion(null, e), 2);
         }
     }
 

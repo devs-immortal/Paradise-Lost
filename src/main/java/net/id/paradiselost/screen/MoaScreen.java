@@ -6,10 +6,10 @@ import net.fabricmc.api.Environment;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.screen.handler.MoaScreenHandler;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -32,32 +32,32 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
         backgroundHeight = 184;
         playerInventoryTitleY += 18;
     }
-    
+
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(DrawContext matrices, int mouseX, int mouseY, float delta) {
         renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
         drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
     
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - backgroundWidth) >> 1;
         int y = (height - backgroundHeight) >> 1;
-        drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
         
         if (handler.hasMoaInventory()) {
-            drawTexture(matrices, x + 79, y + 17, 0, 184, 90, 72);
+            context.drawTexture(TEXTURE, x + 79, y + 17, 0, 184, 90, 72);
         }
     
         //FIXME This would prevent the entity from escaping the box bounds
         var scale = MinecraftClient.getInstance().getWindow().getScaleFactor();
         //RenderSystem.enableScissor(this.x + (int) ((x + 26) * scale), this.y + (int) ((y + 18) * scale), (int) (52 * scale), (int) (52 * scale));
         try {
-            InventoryScreen.drawEntity(matrices, x + 51, y + 60, 17, x + 51 - mouseX, y + 25 - mouseY, moa);
+            InventoryScreen.drawEntity(context, x + 51, y + 60, 17, x + 51 - mouseX, y + 25 - mouseY, moa);
         } finally {
             RenderSystem.disableScissor();
         }

@@ -151,9 +151,8 @@ public class AurelBucketItem extends Item {
             return false;
         } else {
             BlockState stateIn = worldIn.getBlockState(posIn);
-            Material material = stateIn.getMaterial();
-            boolean flag = !material.isSolid();
-            boolean flag1 = material.isReplaceable();
+            boolean flag = !stateIn.isSolid();
+            boolean flag1 = stateIn.isReplaceable();
 
             if (worldIn.isAir(posIn) || flag || flag1 || stateIn.getBlock() instanceof FluidFillable && ((FluidFillable) stateIn.getBlock()).canFillWithFluid(worldIn, posIn, stateIn, this.containedBlock)) {
                 if (worldIn.getRegistryKey().equals(World.NETHER)) {
@@ -170,7 +169,7 @@ public class AurelBucketItem extends Item {
                         this.playEmptySound(playerIn, worldIn, posIn);
                     }
                 } else {
-                    if (!worldIn.isClient && (flag || flag1) && !material.isLiquid()) {
+                    if (!worldIn.isClient && (flag || flag1) && !stateIn.isLiquid()) {
                         worldIn.breakBlock(posIn, true);
                     }
 

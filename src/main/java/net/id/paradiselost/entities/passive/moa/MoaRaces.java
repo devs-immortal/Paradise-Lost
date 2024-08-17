@@ -2,6 +2,8 @@ package net.id.paradiselost.entities.passive.moa;
 
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.api.MoaAPI;
+import net.id.paradiselost.api.MoaAPI.MoaBreedingContext;
+import net.id.paradiselost.api.MoaAPI.MoaRace;
 import net.minecraft.particle.ParticleTypes;
 
 import java.util.function.Predicate;

@@ -69,7 +69,7 @@ public abstract class InGameOverlayRendererMixin {
             double e = player.getEyeY() + (double) (((float) ((i >> 1) % 2) - 0.5F) * 0.1F);
             double f = player.getZ() + (double) (((float) ((i >> 2) % 2) - 0.5F) * player.getWidth() * 0.8F);
             mutable.set(d, e, f);
-            BlockState blockState = player.world.getBlockState(mutable);
+            BlockState blockState = player.getWorld().getBlockState(mutable);
             if (blockState.getBlock() instanceof ParadiseLostCloudBlock) {
                 cir.setReturnValue(blockState);
                 cir.cancel();

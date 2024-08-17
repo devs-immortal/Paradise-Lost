@@ -84,7 +84,7 @@ public class MoaScreenHandler extends ScreenHandler {
         );
     
         //FIXME This needs a real fix, without this the client never sees that the Moa has an inventory
-        if (moa.world.isClient) {
+        if (moa.getWorld().isClient) {
             moa.refreshChest(false);
             moaInventory = moa.getInventory();
         }

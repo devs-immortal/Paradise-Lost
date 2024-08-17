@@ -24,7 +24,7 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
         var world = context.getWorld();
         var length = config.size().get(random);
 
-        if (world.getBlockState(origin.down()).getMaterial().isReplaceable()) {
+        if (world.getBlockState(origin.down()).isReplaceable()) {
             origin = origin.down();
         }
 
@@ -40,8 +40,8 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
                 adjust: {
                     var placementState = world.getBlockState(placement);
 
-                    if (!placementState.getMaterial().isReplaceable()) {
-                        if (!shifted && world.getBlockState(placement.up()).getMaterial().isReplaceable() && placementState.isSideSolidFullSquare(world, placement, Direction.UP)) {
+                    if (!placementState.isReplaceable()) {
+                        if (!shifted && world.getBlockState(placement.up()).isReplaceable() && placementState.isSideSolidFullSquare(world, placement, Direction.UP)) {
                             placement = placement.up();
                             shifted = true;
                             break adjust;
@@ -49,9 +49,9 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
                         return i > 0;
                     }
 
-                    if (world.getBlockState(placement.down()).getMaterial().isReplaceable()) {
+                    if (world.getBlockState(placement.down()).isReplaceable()) {
 
-                        if (world.getBlockState(placement.down(2)).getMaterial().isReplaceable()) {
+                        if (world.getBlockState(placement.down(2)).isReplaceable()) {
                             return i > 0;
                         }
 

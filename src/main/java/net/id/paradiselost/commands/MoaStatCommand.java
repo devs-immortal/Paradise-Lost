@@ -15,6 +15,7 @@ import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
+import net.minecraft.server.command.GameModeCommand;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -50,18 +51,18 @@ public class MoaStatCommand {
         entities.forEach(entity -> {
             if (entity instanceof MoaEntity moa) {
                 MoaGenes genes = moa.getGenes();
-                source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
-                source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.race", Text.translatable(genes.getRace().getTranslationKey())).formatted(Formatting.LIGHT_PURPLE), false);
+                source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
+                source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.race", Text.translatable(genes.getRace().getTranslationKey())).formatted(Formatting.LIGHT_PURPLE), false);
                 if (attributeId.equals("HUNGER")) {
-                    source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.print", Text.translatable("commands.paradise_lost.moastat.hunger"), String.format("%.2f", genes.getHunger())).formatted(Formatting.GOLD, Formatting.ITALIC), false);
+                    source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.print", Text.translatable("commands.paradise_lost.moastat.hunger"), String.format("%.2f", genes.getHunger())).formatted(Formatting.GOLD, Formatting.ITALIC), false);
                 } else if (attributeId.equals("ALL")) {
                     for (MoaAttributes attribute : MoaAttributes.values()) {
-                        source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.print", Text.translatable(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.GOLD, Formatting.ITALIC), false);
+                        source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.print", Text.translatable(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.GOLD, Formatting.ITALIC), false);
                     }
                 } else {
                     try {
                         MoaAttributes attribute = MoaAttributes.valueOf(attributeId);
-                        source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.print", Text.translatable(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.GOLD, Formatting.ITALIC), false);
+                        source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.print", Text.translatable(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.GOLD, Formatting.ITALIC), false);
                     } catch (IllegalArgumentException e) {
                         source.sendError(Text.translatable("commands.paradise_lost.moastat.failure.attribute"));
                     }
@@ -76,21 +77,21 @@ public class MoaStatCommand {
     private static int setStat(ServerCommandSource source, Entity entity, String attributeId, float value) {
         if (entity instanceof MoaEntity moa) {
             MoaGenes genes = moa.getGenes();
-            source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
-            source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.race", Text.translatable(genes.getRace().getTranslationKey())).formatted(Formatting.LIGHT_PURPLE), false);
+            source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
+            source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.race", Text.translatable(genes.getRace().getTranslationKey())).formatted(Formatting.LIGHT_PURPLE), false);
             if (attributeId.equals("HUNGER")) {
                 genes.setHunger(Math.min(Math.max(value, 100), 0));
-                source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.set", Text.translatable("commands.paradise_lost.moastat.hunger"), String.format("%.2f", genes.getHunger())).formatted(Formatting.AQUA, Formatting.ITALIC), false);
+                source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.set", Text.translatable("commands.paradise_lost.moastat.hunger"), String.format("%.2f", genes.getHunger())).formatted(Formatting.AQUA, Formatting.ITALIC), false);
             } else if (attributeId.equals("ALL")) {
                 for (MoaAttributes attribute : MoaAttributes.values()) {
                     genes.setAttribute(attribute, value);
-                    source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.set", Text.translatable(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.AQUA, Formatting.ITALIC), false);
+                    source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.set", Text.translatable(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.AQUA, Formatting.ITALIC), false);
                 }
             } else {
                 try {
                     MoaAttributes attribute = MoaAttributes.valueOf(attributeId);
                     genes.setAttribute(attribute, value);
-                    source.sendFeedback(Text.translatable("commands.paradise_lost.moastat.set", Text.translatable(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.AQUA, Formatting.ITALIC), false);
+                    source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.set", Text.translatable(attribute.getTranslationKey()), genes.getAttribute(attribute)).formatted(Formatting.AQUA, Formatting.ITALIC), false);
                 } catch (IllegalArgumentException e) {
                     source.sendError(Text.translatable("commands.paradise_lost.moastat.failure.attribute"));
                 }

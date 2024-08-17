@@ -20,8 +20,6 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     public static final RegistryKey<ConfiguredFeature<?, ?>> PLATEAU_FOLIAGE = of("patch_plateau_foliage");
     public static final RegistryKey<ConfiguredFeature<?, ?>> PLATEAU_FLOWERING_GRASS = of("patch_plateau_flowering_grass");
     public static final RegistryKey<ConfiguredFeature<?, ?>> PLATEAU_SHAMROCK = of("patch_plateau_shamrock");
-    // public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> PLATEAU_FLOWERING_GRASS = register("patch_plateau_flowering_grass", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(GRASS_FLOWERING), UniformIntProvider.create(3, 10), ConstantIntProvider.create(5), UniformIntProvider.create(3, 6), 1.5));
-    // public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> PLATEAU_SHAMROCK = register("patch_plateau_shamrock", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(MALT_SPRIG), UniformIntProvider.create(2, 6), ConstantIntProvider.create(5), UniformIntProvider.create(4, 7), 1.4));
 
     // Shield
     public static final RegistryKey<ConfiguredFeature<?, ?>> SHIELD_FOLIAGE = of("patch_shield_foliage");
@@ -31,8 +29,6 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     // Thicket
     public static final RegistryKey<ConfiguredFeature<?, ?>> THICKET_LIVERWORT_CARPET = of("patch_thicket_liverwort_carpet");
     public static final RegistryKey<ConfiguredFeature<?, ?>> THICKET_SHAMROCK = of("patch_thicket_shamrock");
-    //public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> THICKET_LIVERWORT_CARPET = register("patch_thicket_liverwort_carpet", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(LIVERWORT_CARPET), UniformIntProvider.create(1, 4), ConstantIntProvider.create(5), UniformIntProvider.create(5, 8), 1.3));
-    //public static final RegistryEntry<ConfiguredFeature<ProjectedOrganicCoverConfig, ?>> THICKET_SHAMROCK = register("patch_thicket_shamrock", ParadiseLostFeatures.ORGANIC_GROUNDCOVER_FEATURE, new ProjectedOrganicCoverConfig(BlockStateProvider.of(SHAMROCK), UniformIntProvider.create(2, 6), ConstantIntProvider.create(5), UniformIntProvider.create(4, 7), 1.3));
 
     // Tundra
     public static final RegistryKey<ConfiguredFeature<?, ?>> TUNDRA_FOLIAGE = of("patch_tundra_foliage");

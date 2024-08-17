@@ -8,6 +8,7 @@ import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.world.feature.tree.generator.*;
 import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

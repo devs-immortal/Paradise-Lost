@@ -1,6 +1,7 @@
 package net.id.paradiselost.blocks.blockentity;
 
 import net.id.paradiselost.component.MoaGenes;
+import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.block.BlockState;

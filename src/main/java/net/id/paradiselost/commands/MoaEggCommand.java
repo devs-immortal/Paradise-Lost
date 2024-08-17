@@ -6,6 +6,7 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.id.paradiselost.api.MoaAPI;
+import net.id.paradiselost.api.MoaAPI.MoaRace;
 import net.id.paradiselost.component.MoaGenes;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.command.argument.IdentifierArgumentType;
@@ -50,7 +51,7 @@ public class MoaEggCommand {
                 if (!player.getInventory().insertStack(template)) {
                     ItemScatterer.spawn(source.getWorld(), player.getX(), player.getY(), player.getZ(), egg);
                 }
-                source.sendFeedback(Text.translatable("commands.paradise_lost.moaegg.success", egg.toHoverableText(), targets.iterator().next().getDisplayName()), true);
+                source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moaegg.success", egg.toHoverableText(), targets.iterator().next().getDisplayName()), true);
             });
         }
 

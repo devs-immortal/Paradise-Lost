@@ -111,7 +111,7 @@ public final class CloudRendererMixin {
                     cloudsBuffer.close();
                 }
                 
-                cloudsBuffer = new VertexBuffer();
+                cloudsBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
                 BufferBuilder.BuiltBuffer builtBuffer = renderClouds(bufferBuilder, posX, posY, posZ, cloudColor);
                 cloudsBuffer.bind();
                 cloudsBuffer.upload(builtBuffer);
