@@ -25,12 +25,17 @@ import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static net.id.paradiselost.ParadiseLost.MOD_ID;
@@ -108,7 +113,19 @@ public class ParadiseLostItems {
     public static final SurtrumBloodstoneItem SURTRUM_BLOODSTONE = add("surtrum_bloodstone", new SurtrumBloodstoneItem(unstackableTool().fireproof()));
     public static final AbstentineBloodstoneItem ABSTENTINE_BLOODSTONE = add("abstentine_bloodstone", new AbstentineBloodstoneItem(unstackableRareTool()));
 
-    public static final Item GLAZED_GOLD_UPGRADE = add("glazed_gold_upgrade_smithing_template", new Item(tool()));
+
+    private static final Text GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT = Text.translatable(Util.createTranslationKey("item", locate("smithing_template.glazed_gold_upgrade.applies_to"))).formatted(Formatting.BLUE);
+    private static final Text GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT = Text.translatable(Util.createTranslationKey("item", locate("smithing_template.glazed_gold_upgrade.ingredients"))).formatted(Formatting.BLUE);
+    private static final Text GLAZED_GOLD_UPGRADE_TEXT = Text.translatable(Util.createTranslationKey("upgrade", locate("glazed_gold_upgrade"))).formatted(Formatting.GRAY);
+    private static final Text GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT = Text.translatable(Util.createTranslationKey("item", locate("smithing_template.glazed_gold_upgrade.base_slot_description")));
+    private static final Text GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT = Text.translatable(Util.createTranslationKey("item", locate("smithing_template.glazed_gold_upgrade.additions_slot_description")));
+
+    public static final Item GLAZED_GOLD_UPGRADE = add("glazed_gold_upgrade_smithing_template", new SmithingTemplateItem(
+            GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT, GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT, GLAZED_GOLD_UPGRADE_TEXT, GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT, GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT,
+            List.of(new Identifier("item/empty_armor_slot_helmet"), new Identifier("item/empty_armor_slot_chestplate"), new Identifier("item/empty_armor_slot_leggings"), new Identifier("item/empty_armor_slot_boots"),
+                    new Identifier("item/empty_slot_hoe"), new Identifier("item/empty_slot_axe"), new Identifier("item/empty_slot_sword"), new Identifier("item/empty_slot_shovel"), new Identifier("item/empty_slot_pickaxe")),
+            List.of(new Identifier("item/empty_slot_ingot"))
+    ));
 
     private static Settings wearable() {
         return new Settings();
