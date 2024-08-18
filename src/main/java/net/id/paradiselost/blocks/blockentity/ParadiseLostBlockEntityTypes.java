@@ -3,7 +3,6 @@ package net.id.paradiselost.blocks.blockentity;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.HangingSignBlockEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 

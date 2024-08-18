@@ -1,7 +1,6 @@
 package net.id.paradiselost.api;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMap.Builder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.id.paradiselost.ParadiseLost;
@@ -19,7 +18,6 @@ import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.function.Predicate;
 
 /**

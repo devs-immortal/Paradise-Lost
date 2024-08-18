@@ -1,7 +1,6 @@
 package net.id.paradiselost.screen.slot;
 
 import net.id.paradiselost.util.DummyInventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 

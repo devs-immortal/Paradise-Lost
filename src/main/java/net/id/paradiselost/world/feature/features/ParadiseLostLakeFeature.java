@@ -10,7 +10,6 @@ import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.LakeFeature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
