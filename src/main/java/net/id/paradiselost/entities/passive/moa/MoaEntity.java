@@ -17,6 +17,7 @@ import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.AbstractChestBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.control.JumpControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -25,7 +26,9 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.AbstractDonkeyEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,6 +37,8 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.ElytraItem;
+import net.minecraft.item.FireworkRocketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -54,6 +59,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.NotNull;
@@ -300,7 +306,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     public boolean isGliding() {
-        return !isTouchingWater() && dataTracker.get(AIR_TICKS) > 20;
+        return !isTouchingWater() && dataTracker.get(AIR_TICKS) > 4;
     }
 
     @Override
@@ -318,22 +324,45 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return this.isSaddled();
     }
 
+    @Nullable
+    public LivingEntity getControllingPassenger() {
+        Entity var3 = this.getFirstPassenger();
+        if (var3 instanceof MobEntity mobEntity) {
+            return mobEntity;
+        } else {
+            if (this.isSaddled()) {
+                var3 = this.getFirstPassenger();
+                if (var3 instanceof PlayerEntity) {
+                    PlayerEntity playerEntity = (PlayerEntity)var3;
+                    return playerEntity;
+                }
+            }
+
+            return null;
+        }
+    }
+
+    protected Vec3d getControlledMovementInput(PlayerEntity controllingPlayer, Vec3d movementInput) {
+        float f = controllingPlayer.sidewaysSpeed * 0.5F;
+        float g = controllingPlayer.forwardSpeed;
+        if (g <= 0.0F) {
+            g *= 0.25F;
+        }
+
+        return new Vec3d(f, 0.0, g);
+    }
+
     @Override
-    public void travel(Vec3d movementInput) {
+    protected void tickControlled(PlayerEntity controllingPlayer, Vec3d movementInput) {
         if (this.isAlive()) {
-            LivingEntity livingEntity = (LivingEntity) this.getPrimaryPassenger();
-            if (this.hasPassengers() && livingEntity != null && this.canBeControlledByRider()) {
+            if (this.hasPassengers() && controllingPlayer != null && this.canBeControlledByRider()) {
                 this.prevYaw = this.getYaw();
-                this.setYaw(livingEntity.getYaw());
-                this.setPitch(livingEntity.getPitch() * 0.5F);
+                this.setYaw(controllingPlayer.getYaw());
+                this.setPitch(controllingPlayer.getPitch() * 0.5F);
                 this.setRotation(this.getYaw(), this.getPitch());
                 this.bodyYaw = this.getYaw();
                 this.headYaw = this.bodyYaw;
-                float f = livingEntity.sidewaysSpeed * 0.5F;
-                float g = livingEntity.forwardSpeed;
-                if (g <= 0.0F) {
-                    g *= 0.25F;
-                }
+                var movement = getControlledMovementInput(controllingPlayer, movementInput);
 
                 if (this.jumpStrength > 0.0F && !this.isInAir && this.isOnGround()) {
                     double d = 0.1F * (double) this.jumpStrength * (double) this.getJumpVelocityMultiplier();
@@ -346,8 +375,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
                     Vec3d vec3d = this.getVelocity();
                     this.setVelocity(vec3d.x, h, vec3d.z);
+
                     this.velocityDirty = true;
-                    if (g > 0.0F) {
+                    if (movement.z > 0.0F) {
                         float adjVel = jumpStrength / 2F;
                         float i = MathHelper.sin(this.getYaw() * 0.017453292F);
                         float j = MathHelper.cos(this.getYaw() * 0.017453292F);
@@ -365,9 +395,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
                 //this.airStrafingSpeed = getFlyingSpeed(); TODO?
                 if (this.isLogicalSideForUpdatingMovement()) {
-                    this.setMovementSpeed(getMountedMoveSpeed());
-                    super.travel(new Vec3d(f, movementInput.y, g));
-                } else if (livingEntity instanceof PlayerEntity) {
+                    this.setMovementSpeed(getSpeed());
+                    super.travel(new Vec3d(movement.x, movementInput.y, movement.z));
+                } else {
                     this.setVelocity(Vec3d.ZERO);
                 }
 
@@ -392,8 +422,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return getGenes().getAttribute(MoaAttributes.GROUND_SPEED) * 0.65F;
     }
 
-    public float getFlyingSpeed() {
-        return isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) * 0.8F : getMovementSpeed() * 0.1F;
+    public float getSpeed() {
+        return isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) : getMountedMoveSpeed();
     }
 
     @Override
@@ -522,7 +552,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     public void fall() {
         if (this.getVelocity().y < 0.0D && !this.isSneaking()) {
-            this.setVelocity(this.getVelocity().multiply(1.0D, isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) * 1.4 : 1D, 1.0D));
+            this.setVelocity(this.getVelocity().multiply(1.0D, isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) : 1D, 1.0D));
         }
     }
 
