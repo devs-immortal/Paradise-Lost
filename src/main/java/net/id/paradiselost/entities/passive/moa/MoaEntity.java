@@ -393,9 +393,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     isInAir = false;
                 }
 
-                //this.airStrafingSpeed = getFlyingSpeed(); TODO?
                 if (this.isLogicalSideForUpdatingMovement()) {
-                    this.setMovementSpeed(getSpeed());
+                    this.setMovementSpeed(getMovementSpeed());
                     super.travel(new Vec3d(movement.x, movementInput.y, movement.z));
                 } else {
                     this.setVelocity(Vec3d.ZERO);
@@ -403,7 +402,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
                 this.updateLimbs(false);
             } else {
-                //this.airStrafingSpeed = getFlyingSpeed(); TODO?
                 super.travel(movementInput);
             }
             if (getGenes().getRace().legendary() && getVelocity().lengthSquared() > 0.02 && random.nextFloat() < 0.55F) {
@@ -419,11 +417,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public float getMovementSpeed() {
-        return getGenes().getAttribute(MoaAttributes.GROUND_SPEED) * 0.65F;
-    }
-
-    public float getSpeed() {
-        return isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) : getMountedMoveSpeed();
+        return isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) * 10.0F : getGenes().getAttribute(MoaAttributes.GROUND_SPEED) * 0.65F;
     }
 
     @Override
