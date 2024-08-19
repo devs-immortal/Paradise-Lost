@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 import static net.id.paradiselost.items.tools.ParadiseLostToolMaterials.ParadiseToolMaterial.create;
 
 @SuppressWarnings("unused")
-public class ParadiseLostToolMaterials  {
+public class ParadiseLostToolMaterials {
     public static ToolMaterial OLVITE = create(MiningLevels.IRON, 250, 4.5f, 2f, 14, () -> IngredientUtil.itemIngredient(ParadiseLostItems.OLVITE));
     public static ToolMaterial SURTRUM = create(MiningLevels.DIAMOND, 827, 7.0f, 3f, 16, () -> IngredientUtil.itemIngredient(ParadiseLostItems.REFINED_SURTRUM));
     public static ToolMaterial GLAZED_GOLD = create(MiningLevels.IRON, 131, 12f, 2f, 22, () -> IngredientUtil.itemIngredient(ParadiseLostItems.GOLDEN_AMBER));
