@@ -50,4 +50,4 @@ Assets are all rights are reserved by Immortal Devs.
 
 You can find out more information about the license [here](https://github.com/devs-immortal/Paradise-Lost/blob/2.1.0/1.19.2/master/LICENSE.md).
 
-<a href="https://curseforge.com/minecraft/mc-mods/fabric-api" target="_blank"><img alt="Fabric API - Mods - Minecraft - CurseForge" src="https://i.imgur.com/Ol1Tcf8.png" height="48"></a>&nbsp;&nbsp;<a href="https://curseforge.com/minecraft/mc-mods/trinkets" target="_blank"><img alt="Trinkets (Fabric) - Mods - Minecraft - CurseForge" src="https://immortaldevs.net/trinkets.webp" height="48"></a>
+<a href="https://curseforge.com/minecraft/mc-mods/fabric-api" target="_blank"><img alt="Fabric API - Mods - Minecraft - CurseForge" src="https://i.imgur.com/B0gfNNm.png" height="48"></a>&nbsp;&nbsp;<a href="https://curseforge.com/minecraft/mc-mods/cloth-config" target="_blank"><img alt="Cloth Config - Mods - Minecraft - CurseForge" src="https://i.imgur.com/pY3r4OC.png" height="48"></a>
