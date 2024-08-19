@@ -24,7 +24,6 @@
     "item.PotionItemMixin",
     "item.ShearsMixin",
     "item.SwordItemAccessor",
-    "item.ToolMaterialsAccessor",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
