@@ -243,10 +243,6 @@
 
 
   "item.paradise_lost.golden_amber": "Golden Amber",
-  "item.paradise_lost.nightmare_fuel": "Nightmare Fuel",
-  "item.paradise_lost.nightmare_fuel.tooltip": "Warm to the touch",
-  "item.paradise_lost.crow_eye": "Crow's Eye",
-  "item.paradise_lost.crow_eye.tooltip": "???",
   "item.paradise_lost.cherine": "Cherine Shard",
   "item.paradise_lost.olvite": "Olvite",
   "item.paradise_lost.olvite_nugget": "Olvite Nugget",
@@ -315,13 +311,11 @@
   "item.paradise_lost.amadrys_bread_glazed": "Glazed Amadrys Loaf",
   "item.paradise_lost.swedroot": "Swedroot",
   "item.paradise_lost.flaxseed" : "Flaxseed",
-  "item.paradise_lost.gingerbread_man": "Gingerbread Man",
   "item.paradise_lost.moa_meat": "Moa Chop",
   "item.paradise_lost.moa_meat_cooked": "Cooked Moa Chop",
 
   "item.paradise_lost.portal": "Paradise Portal",
 
-  "item.paradise_lost.lore_book": "Book of Lore",
   "item.paradise_lost.moa_egg": "Moa Egg",
 
   "item.paradise_lost.aurel_bucket": "Aurel Bucket",
@@ -349,8 +343,6 @@
 
   "death.attack.fall": "%1$s plummeted from the heavens",
   "death.attack.fall.player": "%1$s was thrown off the heavens above by %2$s",
-  "death.attack.nightmare": "%1$s was consumed by shifting shadows",
-  "death.attack.nightmare.player": "%1$s was fed to the shadows by %2$s",
 
 
   "moa.egg.adult": "pre-grown",
@@ -393,11 +385,6 @@
   "commands.paradise_lost.moastat.set": "Set %1$s to %2$s",
   "commands.paradise_lost.gravitate.failure" : "Couldn't float the block(s)",
   "commands.paradise_lost.gravitate.success" : "Successfully floated the block(s)",
-  "commands.paradise_lost.lore.get.locked" : "locked",
-  "commands.paradise_lost.lore.get.hidden" : "hidden",
-  "commands.paradise_lost.lore.get.free" : "free",
-  "commands.paradise_lost.lore.get.unlocked" : "unlocked",
-  "commands.paradise_lost.lore.get.completed" : "completed",
 
 
   "info.paradise_lost.bloodstone.cherine": "Peer into the heart",

@@ -13,7 +13,6 @@ val customportalapiVersion: String by properties
 val cardinalComponentsVersion: String by properties
 val trinketsVersion: String by properties
 val crowdinTranslateVersion: String by properties
-val entityAttributesVersion: String by properties
 val modmenuVersion: String by properties
 val satinVersion: String by properties
 val clothConfigVersion: String by properties
@@ -132,12 +131,6 @@ dependencies {
             name = "fabric-api",
             version = fabricApiVersion,
     )
-
-    modImplementation(
-            group = "com.jamieswhiteshirt",
-            name = "reach-entity-attributes",
-            version = entityAttributesVersion,
-    ).also(::include)
 
     modImplementation(
             group = "dev.emi",
