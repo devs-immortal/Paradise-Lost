@@ -11,6 +11,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.CampfireCookingRecipe;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Clearable;
 import net.minecraft.util.ItemScatterer;
@@ -27,12 +29,14 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     private final DefaultedList<ItemStack> itemsBeingCooked;
     private final int[] cookingTimes;
     private final int[] cookingTotalTimes;
+    private final RecipeManager.MatchGetter<Inventory, CampfireCookingRecipe> matchGetter;
 
     public CherineCampfireBlockEntity(BlockPos pos, BlockState state) {
         super(ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, pos, state);
         this.itemsBeingCooked = DefaultedList.ofSize(4, ItemStack.EMPTY);
         this.cookingTimes = new int[4];
         this.cookingTotalTimes = new int[4];
+        this.matchGetter = RecipeManager.createCachedMatchGetter(RecipeType.CAMPFIRE_COOKING);
     }
 
     public static void litServerTick(World world, BlockPos pos, BlockState state, CherineCampfireBlockEntity campfire) {
@@ -45,9 +49,7 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
                 campfire.cookingTimes[i]++;
                 if (campfire.cookingTimes[i] >= campfire.cookingTotalTimes[i]) {
                     Inventory inventory = new SimpleInventory(itemStack);
-                    ItemStack itemStack2 = world.getRecipeManager().getFirstMatch(RecipeType.CAMPFIRE_COOKING, inventory, world)
-                            .map((recipe) -> recipe.craft(inventory, world.getRegistryManager()))
-                            .orElse(itemStack);
+                    ItemStack itemStack2 = campfire.matchGetter.getFirstMatch(inventory, world).map((entry) -> entry.value().craft(inventory, world.getRegistryManager())).orElse(itemStack);
                     ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), itemStack2);
                     campfire.itemsBeingCooked.set(i, ItemStack.EMPTY);
                     world.updateListeners(pos, state, state, 3);
@@ -146,10 +148,10 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
         return nbtCompound;
     }
 
-    public Optional<CampfireCookingRecipe> getRecipeFor(ItemStack item) {
+    public Optional<RecipeEntry<CampfireCookingRecipe>> getRecipeFor(ItemStack item) {
         return itemsBeingCooked.stream().noneMatch(ItemStack::isEmpty)
                 ? Optional.empty()
-                : world.getRecipeManager().getFirstMatch(RecipeType.CAMPFIRE_COOKING, new SimpleInventory(item), world);
+                : this.matchGetter.getFirstMatch(new SimpleInventory(item), world);
     }
 
     public boolean addItem(ItemStack item, int cookTime) {

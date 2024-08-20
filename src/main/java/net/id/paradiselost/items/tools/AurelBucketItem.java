@@ -58,7 +58,7 @@ public class AurelBucketItem extends Item {
                         Fluid fluid = (hitState.getFluidState().getFluid());
 
                         if (fluid == Fluids.WATER) {
-                            ((FluidDrainable) hitState.getBlock()).tryDrainFluid(worldIn, hitPos, hitState);
+                            ((FluidDrainable) hitState.getBlock()).tryDrainFluid(playerIn, worldIn, hitPos, hitState);
                             playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                             playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
                             ItemStack fillStack = this.fillBucket(currentStack, playerIn, ParadiseLostItems.AUREL_WATER_BUCKET);
@@ -154,7 +154,7 @@ public class AurelBucketItem extends Item {
             boolean flag = !stateIn.isSolid();
             boolean flag1 = stateIn.isReplaceable();
 
-            if (worldIn.isAir(posIn) || flag || flag1 || stateIn.getBlock() instanceof FluidFillable && ((FluidFillable) stateIn.getBlock()).canFillWithFluid(worldIn, posIn, stateIn, this.containedBlock)) {
+            if (worldIn.isAir(posIn) || flag || flag1 || stateIn.getBlock() instanceof FluidFillable && ((FluidFillable) stateIn.getBlock()).canFillWithFluid(playerIn, worldIn, posIn, stateIn, this.containedBlock)) {
                 if (worldIn.getRegistryKey().equals(World.NETHER)) {
                     int i = posIn.getX();
                     int j = posIn.getY();

@@ -25,12 +25,4 @@ public class PlayerManagerMixin {
             cir.getReturnValue().giveItemStack(new ItemStack(ParadiseLostItems.PARADISE_LOST_PORTAL));
         }
     }
-
-    @Inject(
-            method = "sendWorldInfo",
-            at = @At("HEAD")
-    )
-    private void sendWorldInfo(ServerPlayerEntity player, ServerWorld world, CallbackInfo ci) {
-        player.networkHandler.sendPacket(ParadiseLostGameRules.getMaxAugmentedSpeedSyncPacket(world.getGameRules().get(ParadiseLostGameRules.MAX_AUGMENTED_SPEED).get()));
-    }
 }

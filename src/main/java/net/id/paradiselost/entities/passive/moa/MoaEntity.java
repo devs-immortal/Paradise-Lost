@@ -27,6 +27,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -550,7 +551,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         super.setJumping(jump);
     }
 
-    @Override
+
     public double getMountedHeightOffset() {
         return 1.03;
     }

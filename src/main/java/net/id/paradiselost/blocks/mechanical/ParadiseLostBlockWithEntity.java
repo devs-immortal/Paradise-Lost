@@ -2,6 +2,7 @@ package net.id.paradiselost.blocks.mechanical;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -52,7 +53,7 @@ public abstract class ParadiseLostBlockWithEntity extends BlockWithEntity implem
     }
 
     @Override
-    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
         return loggable && !(Boolean) state.get(Properties.WATERLOGGED) && fluid == Fluids.WATER;
     }
 

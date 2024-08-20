@@ -10,6 +10,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.CampfireCookingRecipe;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -30,9 +31,9 @@ public class CherineCampfireBlock extends CampfireBlock {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CherineCampfireBlockEntity campfire) {
             ItemStack itemStack = player.getStackInHand(hand);
-            Optional<CampfireCookingRecipe> optional = campfire.getRecipeFor(itemStack);
+            Optional<RecipeEntry<CampfireCookingRecipe>> optional = campfire.getRecipeFor(itemStack);
             if (optional.isPresent()) {
-                if (!world.isClient && campfire.addItem(player.getAbilities().creativeMode ? itemStack.copy() : itemStack, optional.get().getCookTime())) {
+                if (!world.isClient && campfire.addItem(player.getAbilities().creativeMode ? itemStack.copy() : itemStack, optional.get().value().getCookingTime())) {
                     player.incrementStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return ActionResult.SUCCESS;
                 }
@@ -53,9 +54,9 @@ public class CherineCampfireBlock extends CampfireBlock {
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         if (world.isClient) {
-            return state.get(LIT) ? checkType(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::clientTick) : null;
+            return state.get(LIT) ? validateTicker(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::clientTick) : null;
         } else {
-            return state.get(LIT) ? checkType(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::litServerTick) : checkType(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::unlitServerTick);
+            return state.get(LIT) ? validateTicker(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::litServerTick) : validateTicker(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::unlitServerTick);
         }
     }
 }

@@ -2,12 +2,12 @@ import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.
 
 val paradiseLostVersion: String by properties
 
-val minecraftVersion: String by properties
-val yarnVersion: String by properties
-val loaderVersion: String by properties
+val minecraft_version: String by properties
+val yarn_mappings: String by properties
+val loader_version: String by properties
 val javaVersion: String by properties
 
-val fabricApiVersion: String by properties
+val fabric_version: String by properties
 val fabricAsmVersion: String by properties
 val customportalapiVersion: String by properties
 val cardinalComponentsVersion: String by properties
@@ -18,7 +18,7 @@ val satinVersion: String by properties
 val clothConfigVersion: String by properties
 
 plugins {
-    id("fabric-loom") version "1.0-SNAPSHOT"
+    id("fabric-loom") version "1.5-SNAPSHOT"
     id("com.modrinth.minotaur") version "1.2.1"
     id("de.guntram.mcmod.crowdin-translate") version "1.4+1.19"
     `maven-publish`
@@ -86,20 +86,20 @@ dependencies {
     minecraft(
             group = "com.mojang",
             name = "minecraft",
-            version = minecraftVersion,
+            version = minecraft_version,
     )
 
     mappings(
             group = "net.fabricmc",
             name = "yarn",
-            version = yarnVersion,
+            version = yarn_mappings,
             classifier = "v2",
     )
 
     modImplementation(
             group = "net.fabricmc",
             name = "fabric-loader",
-            version = loaderVersion,
+            version = loader_version,
     )
 
     modImplementation(
@@ -129,7 +129,7 @@ dependencies {
     modImplementation(
             group = "net.fabricmc.fabric-api",
             name = "fabric-api",
-            version = fabricApiVersion,
+            version = fabric_version,
     )
 
     modImplementation(

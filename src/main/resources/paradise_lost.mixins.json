@@ -39,7 +39,6 @@
     "brain.SensorTypeInvoker"
   ],
   "client": [
-    "client.ClientPlayNetworkHandlerMixin",
     "client.ClientWorldMixin",
     "client.network.ClientPlayerEntityMixin",
     "client.render.BackgroundRendererMixin",
