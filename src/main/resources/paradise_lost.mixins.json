@@ -32,7 +32,6 @@
     "world.gen.structure.JigsawStructureMixin",
     "world.gen.UtilMixin",
     "world.ExplosionMixin",
-    "util.NbtCompoundAccessor",
     "util.SlotAccessor",
     "brain.MemoryModuleTypeInvoker",
     "brain.ActivityInvoker",
