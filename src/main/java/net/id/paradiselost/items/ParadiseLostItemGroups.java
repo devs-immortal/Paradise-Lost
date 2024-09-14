@@ -277,8 +277,6 @@ public class ParadiseLostItemGroups {
                 entries.add(ORANGE_BOATS.chestBoat());
                 entries.add(WISTERIA_BOATS.boat());
                 entries.add(WISTERIA_BOATS.chestBoat());
-                entries.add(CLOUD_PARACHUTE);
-                entries.add(GOLDEN_CLOUD_PARACHUTE);
             }));
     public static final RegistryKey<ItemGroup> PARADISE_RESOURCES = create("resources", FabricItemGroup.builder()
             .icon(() -> new ItemStack(CHERINE))

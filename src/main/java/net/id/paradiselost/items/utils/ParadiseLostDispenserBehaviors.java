@@ -73,13 +73,13 @@ public class ParadiseLostDispenserBehaviors {
             BlockPos blockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
             BlockState blockState = worldAccess.getBlockState(blockPos);
             Block block = blockState.getBlock();
-            if (block instanceof FluidDrainable fluidDrainable) {
+            if (block instanceof FluidDrainable fluidDrainable && blockState.getFluidState().isOf(Fluids.WATER)) {
                 ItemStack itemStack = fluidDrainable.tryDrainFluid(null, worldAccess, blockPos, blockState);
                 if (itemStack.isEmpty()) {
                     return super.dispenseSilently(pointer, stack);
                 } else {
                     worldAccess.emitGameEvent(null, GameEvent.FLUID_PICKUP, blockPos);
-                    Item item = itemStack.getItem();
+                    Item item = ParadiseLostItems.AUREL_WATER_BUCKET;
                     stack.decrement(1);
                     if (stack.isEmpty()) {
                         return new ItemStack(item);

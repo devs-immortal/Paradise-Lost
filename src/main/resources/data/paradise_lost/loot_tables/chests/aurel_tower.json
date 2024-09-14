@@ -54,10 +54,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:cold_parachute"
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:spyglass"
         },
         {

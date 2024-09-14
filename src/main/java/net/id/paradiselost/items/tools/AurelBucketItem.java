@@ -8,11 +8,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.BucketItem;
+import net.minecraft.item.FluidModificationItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.*;
@@ -21,8 +25,11 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
-public class AurelBucketItem extends Item {
+public class AurelBucketItem extends Item implements FluidModificationItem {
     private final Fluid containedBlock;
 
     public AurelBucketItem(Settings settings) {
@@ -166,14 +173,14 @@ public class AurelBucketItem extends Item {
                     }
                 } else if (stateIn.getBlock() instanceof FluidFillable) {
                     if (((FluidFillable) stateIn.getBlock()).tryFillWithFluid(worldIn, posIn, stateIn, ((FlowableFluid) this.containedBlock).getStill(false))) {
-                        this.playEmptySound(playerIn, worldIn, posIn);
+                        this.playEmptyingSound(playerIn, worldIn, posIn);
                     }
                 } else {
                     if (!worldIn.isClient && (flag || flag1) && !stateIn.isLiquid()) {
                         worldIn.breakBlock(posIn, true);
                     }
 
-                    this.playEmptySound(playerIn, worldIn, posIn);
+                    this.playEmptyingSound(playerIn, worldIn, posIn);
                     worldIn.setBlockState(posIn, this.containedBlock.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
                 }
 
@@ -184,8 +191,78 @@ public class AurelBucketItem extends Item {
         }
     }
 
-    protected void playEmptySound(PlayerEntity player, World worldIn, BlockPos pos) {
-        worldIn.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+    protected void playEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos) {
+        SoundEvent soundEvent = SoundEvents.ITEM_BUCKET_EMPTY;
+        world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        world.emitGameEvent(player, GameEvent.FLUID_PLACE, pos);
     }
 
+    @Override
+    public void onEmptied(@Nullable PlayerEntity player, World world, ItemStack stack, BlockPos pos) {
+        FluidModificationItem.super.onEmptied(player, world, stack, pos);
+    }
+
+    @Override
+    public boolean placeFluid(@Nullable PlayerEntity player, World world, BlockPos pos, @Nullable BlockHitResult hitResult) {
+        FlowableFluid flowableFluid;
+        Block block;
+        boolean bl;
+        FluidFillable fluidFillable;
+        BlockState blockState;
+        boolean var10000;
+        label82: {
+            blockState = world.getBlockState(pos);
+            block = blockState.getBlock();
+            bl = blockState.canBucketPlace(Fluids.WATER);
+            if (!blockState.isAir() && !bl) {
+                label80: {
+                    if (block instanceof FluidFillable) {
+                        fluidFillable = (FluidFillable)block;
+                        if (fluidFillable.canFillWithFluid(player, world, pos, blockState, Fluids.WATER)) {
+                            break label80;
+                        }
+                    }
+
+                    var10000 = false;
+                    break label82;
+                }
+            }
+
+            var10000 = true;
+        }
+
+        boolean bl2 = var10000;
+        if (!bl2) {
+            return hitResult != null && this.placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null);
+        } else if (world.getDimension().ultrawarm()) {
+            int i = pos.getX();
+            int j = pos.getY();
+            int k = pos.getZ();
+            world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
+
+            for(int l = 0; l < 8; ++l) {
+                world.addParticle(ParticleTypes.LARGE_SMOKE, (double)i + Math.random(), (double)j + Math.random(), (double)k + Math.random(), 0.0, 0.0, 0.0);
+            }
+
+            return true;
+        } else {
+            if (block instanceof FluidFillable) {
+                fluidFillable = (FluidFillable)block;
+                fluidFillable.tryFillWithFluid(world, pos, blockState, Fluids.WATER.getStill(false));
+                this.playEmptyingSound(player, world, pos);
+                return true;
+            }
+
+            if (!world.isClient && bl && !blockState.isLiquid()) {
+                world.breakBlock(pos, true);
+            }
+
+            if (!world.setBlockState(pos, Fluids.WATER.getDefaultState().getBlockState(), 11) && !blockState.getFluidState().isStill()) {
+                return false;
+            } else {
+                this.playEmptyingSound(player, world, pos);
+                return true;
+            }
+        }
+    }
 }
