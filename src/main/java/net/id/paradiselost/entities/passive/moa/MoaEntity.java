@@ -29,6 +29,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -60,6 +61,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -664,6 +666,15 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 }
             });
         }
+    }
+
+    @Override
+    protected Vector3f getPassengerAttachmentPos(Entity passenger, EntityDimensions dimensions, float scaleFactor) {
+        return new Vector3f(0.0F, this.getPassengerAttachmentY(dimensions, scaleFactor), 0.0F);
+    }
+
+    protected float getPassengerAttachmentY(EntityDimensions dimensions, float scaleFactor) {
+        return dimensions.height + -0.75F * scaleFactor;
     }
     
     /**

@@ -145,7 +145,7 @@ public class BlockRegistration {
         var pressurePlateSettings = AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(woodColor);
 
 
-        SaplingBlock sapling = add(saplingId, new SaplingBlock(saplingGenerator, saplingSettings), cutoutRenderLayer);
+        SaplingBlock sapling = add(saplingId, new ParadiseLostSaplingBlock(saplingGenerator, saplingSettings), cutoutRenderLayer);
         PillarBlock strippedLog = add(strippedLogId, new PillarBlock(logSettings), flammableLog);
         PillarBlock strippedWood = add(strippedWoodId, new PillarBlock(logSettings), flammableLog);
         Block planks = add(plankId, new Block(plankSettings), flammablePlanks);
@@ -212,7 +212,7 @@ public class BlockRegistration {
         var buttonSettings = AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(woodColor);
         var pressurePlateSettings = AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(woodColor);
 
-        SaplingBlock sapling = add(saplingId, new SaplingBlock(saplingGenerator, saplingSettings), cutoutRenderLayer);
+        SaplingBlock sapling = add(saplingId, new ParadiseLostSaplingBlock(saplingGenerator, saplingSettings), cutoutRenderLayer);
         PillarBlock strippedLog = add(strippedLogId, new PillarBlock(logSettings), flammableLog);
         PillarBlock strippedWood = add(strippedWoodId, new PillarBlock(logSettings), flammableLog);
         Block planks = add(plankId, new Block(plankSettings), flammablePlanks);
