@@ -120,7 +120,7 @@ public final class CloudRendererMixin {
 
             RenderSystem.setShader(GameRenderer::getPositionTexColorNormalProgram);
             RenderSystem.setShaderTexture(0, CLOUDS);
-            BackgroundRenderer.setFogBlack();
+            BackgroundRenderer.applyFogColor();
             matrices.push();
             matrices.scale(12.0F, 1.0F, 12.0F);
             matrices.scale(cloudScale, cloudScale, cloudScale);

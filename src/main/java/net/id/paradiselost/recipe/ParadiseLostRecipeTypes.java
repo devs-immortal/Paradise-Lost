@@ -27,7 +27,7 @@ public class ParadiseLostRecipeTypes {
 	}
 
 	public static void init() {
-		TREE_TAP_RECIPE_SERIALIZER = registerSerializer(TREE_TAP_RECIPE_ID, new TreeTapRecipeSerializer(TreeTapRecipe::new));
+		TREE_TAP_RECIPE_SERIALIZER = registerSerializer(TREE_TAP_RECIPE_ID, new TreeTapRecipe.Serializer());
 		TREE_TAP_RECIPE_TYPE = registerRecipeType(TREE_TAP_RECIPE_ID);
 	}
 

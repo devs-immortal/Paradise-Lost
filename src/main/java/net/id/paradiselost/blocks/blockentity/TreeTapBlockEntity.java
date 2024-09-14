@@ -20,6 +20,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.recipe.CampfireCookingRecipe;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipeManager;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -134,10 +137,10 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
 			return;
 		}
 
-		Optional<TreeTapRecipe> recipe = this.world.getRecipeManager().getFirstMatch(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE, this, this.world);
-		if (recipe.isPresent() && world.random.nextInt(recipe.get().getChance()) == 0) {
-			ItemStack output = recipe.get().craft(this, world.getRegistryManager());
-            Block convertBlock = recipe.get().getOutputBlock();
+		Optional<RecipeEntry<TreeTapRecipe>> recipe = this.world.getRecipeManager().getFirstMatch(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE, this, this.getWorld());
+		if (recipe.isPresent() && world.random.nextInt(recipe.get().value().getChance()) == 0) {
+			ItemStack output = recipe.get().value().craft(this, world.getRegistryManager());
+            Block convertBlock = recipe.get().value().getOutputBlock();
             BlockPos attachedPos = this.pos.offset(world.getBlockState(this.pos).get(TreeTapBlock.FACING).getOpposite());
             BlockState attachedBlock = world.getBlockState(attachedPos);
             if (convertBlock != Blocks.BEE_NEST) {

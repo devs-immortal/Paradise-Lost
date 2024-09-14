@@ -35,7 +35,7 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
 
     @Override
     public void render(DrawContext matrices, int mouseX, int mouseY, float delta) {
-        renderBackground(matrices);
+        renderBackground(matrices, mouseX, mouseY, delta);
         super.render(matrices, mouseX, mouseY, delta);
         drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
@@ -57,7 +57,7 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
         var scale = MinecraftClient.getInstance().getWindow().getScaleFactor();
         //RenderSystem.enableScissor(this.x + (int) ((x + 26) * scale), this.y + (int) ((y + 18) * scale), (int) (52 * scale), (int) (52 * scale));
         try {
-            InventoryScreen.drawEntity(context, x + 51, y + 60, 17, x + 51 - mouseX, y + 25 - mouseY, moa);
+            InventoryScreen.drawEntity(context, x + 51, y + 60, x + 68, y + 77, 1, 17, x + 51 - mouseX, y + 25 - mouseY, moa);
         } finally {
             RenderSystem.disableScissor();
         }
