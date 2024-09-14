@@ -7,7 +7,9 @@
   "result_block": "paradise_lost:wisteria_log",
   "result": {
     "item": "minecraft:potion",
-    "nbt": "{Potion: \"minecraft:water\"}"
+    "nbt": {
+      "Potion": "minecraft:water"
+    }
   },
   "chance": 1
 }

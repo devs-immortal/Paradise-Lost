@@ -8,12 +8,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.FluidModificationItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -217,7 +215,7 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
             if (!blockState.isAir() && !bl) {
                 label80: {
                     if (block instanceof FluidFillable) {
-                        fluidFillable = (FluidFillable)block;
+                        fluidFillable = (FluidFillable) block;
                         if (fluidFillable.canFillWithFluid(player, world, pos, blockState, Fluids.WATER)) {
                             break label80;
                         }
@@ -240,14 +238,14 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
             int k = pos.getZ();
             world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
 
-            for(int l = 0; l < 8; ++l) {
-                world.addParticle(ParticleTypes.LARGE_SMOKE, (double)i + Math.random(), (double)j + Math.random(), (double)k + Math.random(), 0.0, 0.0, 0.0);
+            for (int l = 0; l < 8; ++l) {
+                world.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0, 0.0, 0.0);
             }
 
             return true;
         } else {
             if (block instanceof FluidFillable) {
-                fluidFillable = (FluidFillable)block;
+                fluidFillable = (FluidFillable) block;
                 fluidFillable.tryFillWithFluid(world, pos, blockState, Fluids.WATER.getStill(false));
                 this.playEmptyingSound(player, world, pos);
                 return true;

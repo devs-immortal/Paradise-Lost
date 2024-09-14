@@ -1,25 +1,19 @@
 package net.id.paradiselost.items.utils;
 
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.items.tools.AurelBucketItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.FluidDrainable;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.block.entity.DispenserBlockEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.FluidModificationItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -33,7 +27,7 @@ public class ParadiseLostDispenserBehaviors {
 
         @Override
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            FluidModificationItem fluidModificationItem = (FluidModificationItem)stack.getItem();
+            FluidModificationItem fluidModificationItem = (FluidModificationItem) stack.getItem();
             BlockPos blockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
             World world = pointer.world();
             if (fluidModificationItem.placeFluid(null, world, blockPos, null)) {
@@ -49,7 +43,7 @@ public class ParadiseLostDispenserBehaviors {
         @Override
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
             Direction direction = pointer.state().get(DispenserBlock.FACING);
-            EntityType<?> entityType = ((SpawnEggItem)stack.getItem()).getEntityType(stack.getNbt());
+            EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getNbt());
 
             try {
                 entityType.spawnFromItemStack(pointer.world(), stack, null, pointer.pos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);

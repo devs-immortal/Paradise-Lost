@@ -5,7 +5,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.screen.handler.MoaScreenHandler;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -52,14 +51,7 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
         if (handler.hasMoaInventory()) {
             context.drawTexture(TEXTURE, x + 79, y + 17, 0, 184, 90, 72);
         }
-    
-        //FIXME This would prevent the entity from escaping the box bounds
-        var scale = MinecraftClient.getInstance().getWindow().getScaleFactor();
-        //RenderSystem.enableScissor(this.x + (int) ((x + 26) * scale), this.y + (int) ((y + 18) * scale), (int) (52 * scale), (int) (52 * scale));
-        try {
-            InventoryScreen.drawEntity(context, x + 51, y + 60, x + 68, y + 77, 1, 17, x + 51 - mouseX, y + 25 - mouseY, moa);
-        } finally {
-            RenderSystem.disableScissor();
-        }
+
+        InventoryScreen.drawEntity(context, x + 26, y + 18, x + 78, y + 70, 17, 0.25F, mouseX, mouseY, moa);
     }
 }

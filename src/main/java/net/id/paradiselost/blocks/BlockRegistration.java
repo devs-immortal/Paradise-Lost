@@ -235,7 +235,7 @@ public class BlockRegistration {
             FenceBlock fence, FenceGateBlock fenceGate,
             DoorBlock door, TrapdoorBlock trapdoor,
             ButtonBlock button, PressurePlateBlock pressurePlate
-            ) implements Iterable<Block> {
+    ) implements Iterable<Block> {
         public @NotNull Iterator<Block> iterator() {
             return Arrays.stream(new Block[]{
                     sapling, flowerPot,
@@ -258,7 +258,7 @@ public class BlockRegistration {
 
     public record SimpleBlockSet(
             Block block, StairsBlock stairs, SlabBlock slab
-            ) implements Iterable<Block> {
+    ) implements Iterable<Block> {
         public @NotNull Iterator<Block> iterator() {
             return Arrays.stream(new Block[]{
                     block, stairs, slab
@@ -290,7 +290,7 @@ public class BlockRegistration {
             WallSignBlock wallSign,
             HangingSignBlock hangingSign,
             WallHangingSignBlock wallHangingSign
-            ) implements Iterable<Block> {
+    ) implements Iterable<Block> {
         public @NotNull Iterator<Block> iterator() {
             return Arrays.stream(new Block[]{sign, wallSign, hangingSign, wallHangingSign}).iterator();
         }

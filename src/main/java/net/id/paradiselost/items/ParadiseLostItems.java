@@ -488,7 +488,7 @@ public class ParadiseLostItems {
             BoatEntity.Type type,
             BoatItem boat,
             BoatItem chestBoat
-            ) implements Iterable<Item> {
+    ) implements Iterable<Item> {
         public @NotNull Iterator<Item> iterator() {
             return Arrays.stream(new Item[]{boat, chestBoat}).iterator();
         }

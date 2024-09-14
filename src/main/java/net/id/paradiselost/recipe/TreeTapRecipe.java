@@ -8,11 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeCodecs;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.SmithingRecipe;
-import net.minecraft.recipe.SmithingTransformRecipe;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -86,7 +83,7 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
                 Ingredient.ALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
                 Identifier.CODEC.fieldOf("tapped_block").forGetter((recipe) -> Registries.BLOCK.getId(recipe.tappedBlock)),
                 Identifier.CODEC.fieldOf("result_block").forGetter((recipe) -> Registries.BLOCK.getId(recipe.resultBlock)),
-                RecipeCodecs.CRAFTING_RESULT.fieldOf("result").forGetter((recipe) -> recipe.result),
+                ParadiseLostRecipeCodecs.NBT_CRAFTING_RESULT.fieldOf("result").forGetter((recipe) -> recipe.result),
                 Codecs.POSITIVE_INT.fieldOf("chance").forGetter((recipe) -> recipe.chance)
         ).apply(instance, TreeTapRecipe::new));
 
