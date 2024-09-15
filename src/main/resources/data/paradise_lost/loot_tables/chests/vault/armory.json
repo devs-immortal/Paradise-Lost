@@ -130,11 +130,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:cold_parachute",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
           "name": "paradise_lost:amadrys_bread",
           "weight": 2,
           "functions": [

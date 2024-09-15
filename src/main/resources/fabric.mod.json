@@ -28,7 +28,6 @@
     "java": ">=17",
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*",
-    "trinkets": "*",
     "cloth-config": "*"
   },
   "mixins": [

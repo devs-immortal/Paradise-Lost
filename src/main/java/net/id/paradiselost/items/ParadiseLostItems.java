@@ -1,11 +1,9 @@
 package net.id.paradiselost.items;
 
 import com.chocohead.mm.api.ClassTinkerers;
-import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
-import net.id.paradiselost.items.accessories.ParachuteTrinketItem;
 import net.id.paradiselost.items.armor.ParadiseLostArmorMaterials;
 import net.id.paradiselost.items.food.ParadiseLostFoodComponent;
 import net.id.paradiselost.items.misc.*;
@@ -103,9 +101,6 @@ public class ParadiseLostItems {
     public static final AxeItem GLAZED_GOLD_AXE = add("glazed_gold_axe", new AxeItem(ParadiseLostToolMaterials.GLAZED_GOLD, 6f, -3.0f, tool()));
     public static final SwordItem GLAZED_GOLD_SWORD = add("glazed_gold_sword", new SwordItem(ParadiseLostToolMaterials.GLAZED_GOLD, 3, -2.4f, tool()));
     public static final HoeItem GLAZED_GOLD_HOE = add("glazed_gold_hoe", new ParadiseLostHoeItem(ParadiseLostToolMaterials.GLAZED_GOLD, -2, -2.0f, tool()));
-
-    public static final TrinketItem CLOUD_PARACHUTE = add("cold_parachute", new ParachuteTrinketItem(unstackableTool(), "cloud_parachute"));
-    public static final TrinketItem GOLDEN_CLOUD_PARACHUTE = add("golden_parachute", new ParachuteTrinketItem(tool().maxCount(1).maxDamage(20), "golden_parachute"));
 
     public static final GravityWandItem LEVITA_WAND = add("levita_wand", new GravityWandItem(unstackableRareTool().maxDamage(100)));
     public static final CherineBloodstoneItem CHERINE_BLOODSTONE = add("cherine_bloodstone", new CherineBloodstoneItem(unstackableTool()));

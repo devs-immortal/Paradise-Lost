@@ -11,7 +11,6 @@ val fabricApiVersion: String by properties
 val fabricAsmVersion: String by properties
 val customportalapiVersion: String by properties
 val cardinalComponentsVersion: String by properties
-val trinketsVersion: String by properties
 val crowdinTranslateVersion: String by properties
 val modmenuVersion: String by properties
 val satinVersion: String by properties
@@ -131,12 +130,6 @@ dependencies {
             name = "fabric-api",
             version = fabricApiVersion,
     )
-
-    modImplementation(
-            group = "dev.emi",
-            name = "trinkets",
-            version = trinketsVersion,
-    ).also(::include)
 
     modImplementation(
             group = "me.shedaniel.cloth",
