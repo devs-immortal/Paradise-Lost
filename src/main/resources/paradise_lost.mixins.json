@@ -40,6 +40,7 @@
   "client": [
     "client.ClientPlayNetworkHandlerMixin",
     "client.ClientWorldMixin",
+    "client.MinecraftClientMixin",
     "client.network.ClientPlayerEntityMixin",
     "client.render.BackgroundRendererMixin",
     "client.render.CloudRendererMixin",
