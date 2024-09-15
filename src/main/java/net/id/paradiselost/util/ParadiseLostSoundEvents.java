@@ -2,7 +2,9 @@ package net.id.paradiselost.util;
 
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
 import static net.id.paradiselost.ParadiseLost.locate;
@@ -37,6 +39,8 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_ENVOY_DAMAGE = register("entity.envoy.damage");
 
     public static final SoundEvent MUSIC_PARADISE_LOST = register("music.paradise");
+
+    public static final MusicSound PARADISE_MUSIC_SOUND = new MusicSound(Registries.SOUND_EVENT.getEntry(MUSIC_PARADISE_LOST), 6000, 24000, true);
 
     public static void init() {
     }
