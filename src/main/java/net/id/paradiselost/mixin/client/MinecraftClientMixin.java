@@ -21,7 +21,7 @@ public class MinecraftClientMixin {
 
     @Inject(method = "getMusicType", at = @At(value = "RETURN"), cancellable = true)
     void getMusicType(CallbackInfoReturnable<MusicSound> cir) {
-        if (this.player != null && this.player.getWorld().getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
+        if (this.player != null && this.player.method_48926().getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             cir.setReturnValue(ParadiseLostSoundEvents.PARADISE_MUSIC_SOUND);
         }
     }

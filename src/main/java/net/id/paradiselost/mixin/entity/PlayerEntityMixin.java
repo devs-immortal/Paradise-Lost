@@ -46,8 +46,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             cancellable = true
     )
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (source == getWorld().getDamageSources().outOfWorld() && getY() < getWorld().getBottomY() - 1 && getWorld().getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
-            if (!getWorld().isClient()) {
+        if (source == method_48926().getDamageSources().outOfWorld() && getY() < method_48926().getBottomY() - 1 && method_48926().getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
+            if (!method_48926().isClient()) {
                 setParadiseLostFallen(true);
                 ServerWorld overworld = getServer().getWorld(World.OVERWORLD);
                 WorldBorder worldBorder = overworld.getWorldBorder();
@@ -55,8 +55,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 double zMin = Math.max(-2.9999872E7D, worldBorder.getBoundNorth() + 16.0D);
                 double xMax = Math.min(2.9999872E7D, worldBorder.getBoundEast() - 16.0D);
                 double zMax = Math.min(2.9999872E7D, worldBorder.getBoundSouth() - 16.0D);
-                double scaleFactor = DimensionType.getCoordinateScaleFactor(getWorld().getDimension(), overworld.getDimension());
-                BlockPos blockPos3 = new BlockPos((int) MathHelper.clamp(getX() * scaleFactor, xMin, xMax), getWorld().getTopY() + 128, (int) MathHelper.clamp(getZ() * scaleFactor, zMin, zMax));
+                double scaleFactor = DimensionType.getCoordinateScaleFactor(method_48926().getDimension(), overworld.getDimension());
+                BlockPos blockPos3 = new BlockPos((int) MathHelper.clamp(getX() * scaleFactor, xMin, xMax), method_48926().getTopY() + 128, (int) MathHelper.clamp(getZ() * scaleFactor, zMin, zMax));
 
                 ((ServerPlayerEntity) (Object) this).teleport(overworld, blockPos3.getX(), blockPos3.getY(), blockPos3.getZ(), getYaw(), getPitch());
                 StatusEffectInstance ef = new StatusEffectInstance(StatusEffects.NAUSEA, 160, 2, false, false, true);
@@ -95,7 +95,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 if (fallDistance >= 2.0F) {
                     increaseStat(Stats.FALL_ONE_CM, (int) Math.round((double) fallDistance * 100.0D));
                 }
-                cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageTypes.of(getWorld(), ParadiseLostDamageTypes.FALL_FROM_PARADISE)));
+                cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageTypes.of(method_48926(), ParadiseLostDamageTypes.FALL_FROM_PARADISE)));
             }
             cir.cancel();
         }

@@ -1,10 +1,11 @@
 package net.id.paradiselost.blocks.natural.plant;
 
+import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.FernBlock;
+import net.minecraft.block.PlantBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
@@ -13,13 +14,19 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 
-public class ParadiseLostBrushBlock extends FernBlock {
+public class ParadiseLostBrushBlock extends PlantBlock {
 
+    public static final MapCodec<ParadiseLostBrushBlock> CODEC = createCodec(ParadiseLostBrushBlock::new);
     private final TagKey<Block> validFloors;
     private final boolean override;
 
     public ParadiseLostBrushBlock(Settings settings) {
         this(settings.offset(OffsetType.XZ), ParadiseLostBlockTags.GENERIC_VALID_GROUND, false);
+    }
+
+    @Override
+    protected MapCodec<? extends PlantBlock> getCodec() {
+        return CODEC;
     }
 
     public ParadiseLostBrushBlock(Settings settings, TagKey<Block> validFloors, boolean override) {

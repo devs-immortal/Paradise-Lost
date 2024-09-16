@@ -11,7 +11,6 @@ import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.world.feature.tree.generator.*;
 import net.minecraft.block.*;
-import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -56,7 +55,7 @@ public class BlockRegistration {
 
     // WOOD BLOCK SET
 
-    public static WoodBlockSet registerWoodBlockSet(WoodType woodType, BlockSetType blockSetType, SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor, MapColor leafColor) {
+    public static WoodBlockSet registerWoodBlockSet(WoodType woodType, BlockSetType blockSetType, net.minecraft.block.SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor, MapColor leafColor) {
         var id = woodType.name().split(":")[1];
         return registerWoodBlockSet(
                 woodType, blockSetType,
@@ -132,7 +131,7 @@ public class BlockRegistration {
             String fenceId, String fenceGateId,
             String doorId, String trapdoorId,
             String buttonId, String pressurePlateId,
-            SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor, MapColor leafColor
+            net.minecraft.block.SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor, MapColor leafColor
     ) {
         var saplingSettings = AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(woodColor);
         var flowerPotSettings = AbstractBlock.Settings.copy(Blocks.POTTED_OAK_SAPLING);
@@ -201,7 +200,7 @@ public class BlockRegistration {
             String fenceId, String fenceGateId,
             String doorId, String trapdoorId,
             String buttonId, String pressurePlateId,
-            SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor
+            net.minecraft.block.SaplingGenerator saplingGenerator, MapColor woodColor, MapColor barkColor
     ) {
         var saplingSettings = AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(woodColor);
         var flowerPotSettings = AbstractBlock.Settings.copy(Blocks.POTTED_OAK_SAPLING);

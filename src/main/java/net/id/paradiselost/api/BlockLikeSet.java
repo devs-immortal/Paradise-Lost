@@ -71,7 +71,7 @@ public class BlockLikeSet {
         for (BlockLikeEntity block : entries.values()) {
             if (block.isRemoved()) {
                 // If one block ceases, the rest must as well.
-                World world = block.getWorld();
+                World world = block.method_48926();
                 BlockState state = block.getBlockState();
                 boolean success = world.getBlockState(block.getBlockPos()).isOf(state.getBlock());
                 this.land(block, success);
@@ -88,7 +88,7 @@ public class BlockLikeSet {
                 if (success) {
                     block.cease();
                 } else {
-                    World world = block.getWorld();
+                    World world = block.method_48926();
                     BlockState state = block.getBlockState();
                     BlockPos pos = block.getBlockPos();
 

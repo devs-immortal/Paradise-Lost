@@ -46,8 +46,8 @@ public class EnvoyEntity extends SkeletonEntity {
 
 
     public void tick() {
-        if (this.getWorld().isClient && this.getEnlightened() && this.random.nextInt(3) == 0) {
-            this.getWorld().addParticle(ParticleTypes.CLOUD,
+        if (this.method_48926().isClient && this.getEnlightened() && this.random.nextInt(3) == 0) {
+            this.method_48926().addParticle(ParticleTypes.CLOUD,
                     this.getParticleX(0.2), (this.getY() + this.random.nextDouble() * 0.6) + 0.85, this.getParticleZ(0.2),
                     (this.random.nextDouble() - 0.5) * 0.05, -this.random.nextDouble() * 0.025, (this.random.nextDouble() - 0.5) * 0.05
             );
