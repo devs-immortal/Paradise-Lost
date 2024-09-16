@@ -1,8 +1,10 @@
 package net.id.paradiselost.blocks.mechanical;
 
+import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.blocks.blockentity.IncubatorBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -19,10 +21,16 @@ import org.jetbrains.annotations.Nullable;
 
 public class IncubatorBlock extends ParadiseLostBlockWithEntity {
 
+    public static final MapCodec<IncubatorBlock> CODEC = createCodec(IncubatorBlock::new);
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 5, 16);
 
     public IncubatorBlock(Settings settings) {
         super(settings, true);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override

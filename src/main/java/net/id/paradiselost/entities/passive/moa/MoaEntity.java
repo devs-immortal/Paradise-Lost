@@ -173,8 +173,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         } else {
             if (inventory.size() != 0) {
                 inventory.removeListener(this);
-                if (scatterItems && !method_48926().isClient) {
-                    ItemScatterer.spawn(method_48926(), this, inventory);
+                if (scatterItems && !getWorld().isClient) {
+                    ItemScatterer.spawn(getWorld(), this, inventory);
                 }
                 inventory.clear();
                 inventory = DUMMY;
@@ -186,7 +186,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     protected void dropInventory() {
         super.dropInventory();
         if (hasChest()) {
-            if (!method_48926().isClient) {
+            if (!getWorld().isClient) {
                 dropStack(getChest());
             }
             setChest(ItemStack.EMPTY);
@@ -233,7 +233,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     protected void playHurtSound(DamageSource source) {
-        this.method_48926().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_HURT, SoundCategory.NEUTRAL, 0.225F, MathHelper.clamp(this.random.nextFloat(), 0.5f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.15f));
+        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_HURT, SoundCategory.NEUTRAL, 0.225F, MathHelper.clamp(this.random.nextFloat(), 0.5f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.15f));
     }
 
     @Override
@@ -250,9 +250,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         if (age % 15 == 0) {
             if (isGliding()) {
-                this.method_48926().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 4.5F, MathHelper.clamp(this.random.nextFloat(), 0.85f, 1.2f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.35f));
+                this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 4.5F, MathHelper.clamp(this.random.nextFloat(), 0.85f, 1.2f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.35f));
             } else if (random.nextFloat() < 0.057334F) {
-                this.method_48926().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundCategory.NEUTRAL, 1.5F + random.nextFloat() * 2, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.25f));
+                this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundCategory.NEUTRAL, 1.5F + random.nextFloat() * 2, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.25f));
             }
         }
 
@@ -273,11 +273,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 genes.setHunger(hunger - (1F / 12000F));
             }
         }
-        if (getHealth() < getMaxHealth() && hunger > 65F && method_48926().getTime() % 20 == 0 && random.nextBoolean()) {
+        if (getHealth() < getMaxHealth() && hunger > 65F && getWorld().getTime() % 20 == 0 && random.nextBoolean()) {
             heal(1);
             genes.setHunger(hunger - 0.5F);
         }
-        if (hunger < 20F && method_48926().getTime() % 10 == 0) {
+        if (hunger < 20F && getWorld().getTime() % 10 == 0) {
             produceParticlesServer(ParticleTypes.ANGRY_VILLAGER, random.nextInt(3), 1, 0);
             if (hunger < 10F && hasPassengers()) {
                 removeAllPassengers();
@@ -423,7 +423,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             return ActionResult.PASS;
         }
 
-        if (!method_48926().isClient()) {
+        if (!getWorld().isClient()) {
             ItemStack heldStack = player.getStackInHand(hand);
             if (getGenes().isTamed()) {
                 // Allow the player to open the GUI at any time
@@ -440,7 +440,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 var item = heldStack.getItem();
                 if (item.isFood() && item.getFoodComponent().isMeat()) {
                     feedMob(heldStack);
-                    return ActionResult.success(method_48926().isClient());
+                    return ActionResult.success(getWorld().isClient());
                 } else if (!hasChest() && item instanceof BlockItem blockItem && blockItem.getBlock() instanceof AbstractChestBlock) {
                     // Set a new chest, if there is none.
                     var chestStack = heldStack.copy();
@@ -449,7 +449,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                         heldStack.decrement(1);
                     }
                     setChest(heldStack);
-                    return ActionResult.success(method_48926().isClient);
+                    return ActionResult.success(getWorld().isClient);
                 }
             } else {
                 if (heldStack.getItem() != ParadiseLostItems.ORANGE && heldStack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES)) {
@@ -538,7 +538,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     protected void playStepSound(BlockPos posIn, BlockState stateIn) {
-        this.method_48926().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_STEP, SoundCategory.NEUTRAL, 0.15F, 1F);
+        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_STEP, SoundCategory.NEUTRAL, 0.15F, 1F);
     }
 
     public void fall() {
@@ -609,7 +609,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     public void startJumping(int height) {
         this.jumping = true;
-        this.method_48926().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 7.5F, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.8f));
+        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 7.5F, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.8f));
     }
 
     @Override
@@ -630,14 +630,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     @Override
-    public EntityView method_48926() {
+    public EntityView getWorld() {
         return null;
     }
 
     @Nullable
     @Override
     public LivingEntity getOwner() {
-        return Optional.ofNullable(getOwnerUuid()).map(method_48926()::getPlayerByUuid).orElse(null);
+        return Optional.ofNullable(getOwnerUuid()).map(getWorld()::getPlayerByUuid).orElse(null);
     }
     
     @Override
@@ -647,7 +647,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     
     @Override
     public void method_6722(PlayerEntity player) {
-        if (!method_48926().isClient && (!hasPassengers() || hasPassenger(player)) && getGenes().isTamed()) {
+        if (!getWorld().isClient && (!hasPassengers() || hasPassenger(player)) && getGenes().isTamed()) {
             player.openHandledScreen(new ExtendedScreenHandlerFactory() {
                 @Override
                 public Text getDisplayName() {
@@ -736,7 +736,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
 
         protected void tryEat() {
-            if (method_48926().getBlockEntity(targetPos) instanceof FoodBowlBlockEntity foodBowl) {
+            if (getWorld().getBlockEntity(targetPos) instanceof FoodBowlBlockEntity foodBowl) {
                 ItemStack foodStack = foodBowl.getContainedItem();
                 if (foodStack.isFood() && foodStack.getItem().getFoodComponent().isMeat()) {
                     feedMob(foodStack);

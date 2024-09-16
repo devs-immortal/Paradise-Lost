@@ -60,7 +60,7 @@ public class BloodstoneCapturedData {
             nbt.putString("MAX_HEALTH", MAX_HEALTH);
         }
         nbt.putUuid("uuid", uuid);
-        nbt.putString("name", Text.Serializer.toJson(name));
+        nbt.putString("name", Text.Serialization.toJsonTree(name).getAsString());
         nbt.putString("HP", HP);
         nbt.putString("DF", DF);
         nbt.putString("TF", TF);
@@ -90,7 +90,7 @@ public class BloodstoneCapturedData {
             bloodstoneCapturedData.MAX_HEALTH = nbt.getString("MAX_HEALTH");
         }
         bloodstoneCapturedData.uuid = nbt.getUuid("uuid");
-        bloodstoneCapturedData.name = Text.Serializer.fromJson(nbt.getString("name"));
+        bloodstoneCapturedData.name = Text.Serialization.fromJson(nbt.getString("name"));
         bloodstoneCapturedData.HP = nbt.getString("HP");
         bloodstoneCapturedData.DF = nbt.getString("DF");
         bloodstoneCapturedData.TF = nbt.getString("TF");

@@ -141,11 +141,6 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        super.onBreak(world, pos, state, player);
-    }
-
-    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(GROWTH, CAPPED, NATURAL);

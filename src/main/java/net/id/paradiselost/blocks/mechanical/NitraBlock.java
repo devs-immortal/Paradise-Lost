@@ -67,7 +67,7 @@ public class NitraBlock extends Block {
     }
 
     private static void ignite(World world, BlockPos pos, float power, @Nullable LivingEntity igniter) {
-        Explosion explosion = new Explosion(world, igniter, null, null, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, false, Explosion.DestructionType.DESTROY);
+        Explosion explosion = new Explosion(world, igniter, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, false, Explosion.DestructionType.DESTROY);
         if (!world.isClient) {
             explosion.collectBlocksAndDamageEntities();
             world.emitGameEvent(igniter, GameEvent.PRIME_FUSE, pos);

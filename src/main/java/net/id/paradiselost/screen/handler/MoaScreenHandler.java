@@ -31,7 +31,7 @@ import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
 public class MoaScreenHandler extends ScreenHandler {
     private final SimpleInventory dummy = new SimpleInventory(20) {
         public void setStack(int slot, ItemStack stack) {
-            this.stacks.set(slot, stack);
+            this.heldStacks.set(slot, stack);
             if (!stack.isEmpty() && stack.getCount() > this.getMaxCountPerStack()) {
                 stack.setCount(this.getMaxCountPerStack());
             }
@@ -92,7 +92,7 @@ public class MoaScreenHandler extends ScreenHandler {
         );
     
         //FIXME This needs a real fix, without this the client never sees that the Moa has an inventory
-        if (moa.method_48926().isClient) {
+        if (moa.getWorld().isClient) {
             moa.refreshChest(false);
             moaInventory = moa.getInventory();
         }

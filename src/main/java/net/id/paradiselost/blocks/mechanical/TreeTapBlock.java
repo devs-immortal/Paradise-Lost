@@ -1,9 +1,12 @@
 package net.id.paradiselost.blocks.mechanical;
 
+import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.blocks.blockentity.TreeTapBlockEntity;
+import net.id.paradiselost.blocks.natural.tree.ParadiseLostHangerBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,11 +35,18 @@ import org.jetbrains.annotations.Nullable;
 
 public class TreeTapBlock extends ParadiseLostBlockWithEntity {
 
+    public static final MapCodec<TreeTapBlock> CODEC = createCodec(TreeTapBlock::new);
+
 	public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 5, 16);
 
     public TreeTapBlock(Settings settings) {
         super(settings, true);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override

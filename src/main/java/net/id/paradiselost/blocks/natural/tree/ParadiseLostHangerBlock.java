@@ -1,5 +1,6 @@
 package net.id.paradiselost.blocks.natural.tree;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -17,6 +18,8 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
 public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable {
+
+    public static final MapCodec<ParadiseLostHangerBlock> CODEC = createCodec(ParadiseLostHangerBlock::new);
     public static final BooleanProperty TIP = BooleanProperty.of("tip");
     protected static final VoxelShape FULL_SHAPE;
     protected static final VoxelShape TIP_SHAPE;
@@ -29,6 +32,11 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
     public ParadiseLostHangerBlock(Settings settings) {
         super(settings.offset(OffsetType.XZ));
         this.setDefaultState((this.stateManager.getDefaultState()).with(TIP, true));
+    }
+
+    @Override
+    protected MapCodec<? extends PlantBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

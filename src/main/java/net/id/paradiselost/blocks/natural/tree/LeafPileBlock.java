@@ -1,5 +1,6 @@
 package net.id.paradiselost.blocks.natural.tree;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FallingBlockEntity;
@@ -14,10 +15,17 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
 public class LeafPileBlock extends FallingBlock {
+
+    public static final MapCodec<LeafPileBlock> CODEC = createCodec(LeafPileBlock::new);
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 
     public LeafPileBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends FallingBlock> getCodec() {
+        return CODEC;
     }
 
     @SuppressWarnings("deprecation")

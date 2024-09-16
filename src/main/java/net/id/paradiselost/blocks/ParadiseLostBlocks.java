@@ -13,7 +13,7 @@ import net.id.paradiselost.blocks.natural.crop.*;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
-import net.id.paradiselost.world.feature.tree.generator.*;
+import net.id.paradiselost.world.feature.tree.ParadiseLostSaplingGenerators;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.piston.PistonBehavior;
@@ -140,7 +140,7 @@ public class ParadiseLostBlocks {
         return create().strength(0.2f).sounds(BlockSoundGroup.VINE).replaceable().nonOpaque().suffocates(never).blockVision(never).pistonBehavior(PistonBehavior.DESTROY);
     }
     // Aurel Wood
-    public static final WoodBlockSet AUREL_WOODSTUFF = registerWoodBlockSet(ParadiseLostWoodTypes.AUREL, ParadiseLostBlockSets.AUREL, new AurelSaplingGenerator(), MapColor.DARK_RED, MapColor.DARK_RED, MapColor.PALE_GREEN);
+    public static final WoodBlockSet AUREL_WOODSTUFF = registerWoodBlockSet(ParadiseLostWoodTypes.AUREL, ParadiseLostBlockSets.AUREL, ParadiseLostSaplingGenerators.AUREL, MapColor.DARK_RED, MapColor.DARK_RED, MapColor.PALE_GREEN);
     public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(copy(OAK_LOG).mapColor(MapColor.DARK_RED)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedLog()));
     public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(copy(OAK_LOG).mapColor(MapColor.DARK_RED)), flammableLog, cutoutRenderLayer);
     public static final LeafPileBlock AUREL_LEAF_PILE = add("aurel_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.PALE_GREEN)), flammableLeaves, cutoutMippedRenderLayer);
@@ -168,25 +168,25 @@ public class ParadiseLostBlocks {
 
     public static final WisteriaLeavesBlock ROSE_WISTERIA_LEAVES = add("rose_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.PINK)), flammableLeaves, cutoutMippedRenderLayer);
     public static final LeafPileBlock ROSE_WISTERIA_LEAF_PILE = add("rose_wisteria_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.PINK)), flammableLeaves, cutoutMippedRenderLayer);
-    public static final SaplingBlock ROSE_WISTERIA_SAPLING = add("rose_wisteria_sapling", new ParadiseLostSaplingBlock(new RoseWisteriaSaplingGenerator(), wisteriaSapling().mapColor(MapColor.PINK)), cutoutRenderLayer);
+    public static final SaplingBlock ROSE_WISTERIA_SAPLING = add("rose_wisteria_sapling", new ParadiseLostSaplingBlock(ParadiseLostSaplingGenerators.ROSE_WISTERIA, wisteriaSapling().mapColor(MapColor.PINK)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_ROSE_WISTERIA_SAPLING = add("potted_rose_wisteria_sapling", new FlowerPotBlock(ROSE_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);
     public static final ParadiseLostHangerBlock ROSE_WISTERIA_HANGER = add("rose_wisteria_hanger", new ParadiseLostHangerBlock(wisteriaHanger().mapColor(MapColor.PINK)), flammableLeaves, cutoutRenderLayer);
 
     public static final WisteriaLeavesBlock FROST_WISTERIA_LEAVES = add("frost_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.LIGHT_BLUE)), flammableLeaves, cutoutMippedRenderLayer);
     public static final LeafPileBlock FROST_WISTERIA_LEAF_PILE = add("frost_wisteria_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.LIGHT_BLUE)), flammableLeaves, cutoutMippedRenderLayer);
-    public static final SaplingBlock FROST_WISTERIA_SAPLING = add("frost_wisteria_sapling", new ParadiseLostSaplingBlock(new FrostWisteriaSaplingGenerator(), wisteriaSapling().mapColor(MapColor.LIGHT_BLUE)), cutoutRenderLayer);
+    public static final SaplingBlock FROST_WISTERIA_SAPLING = add("frost_wisteria_sapling", new ParadiseLostSaplingBlock(ParadiseLostSaplingGenerators.FROST_WISTERIA, wisteriaSapling().mapColor(MapColor.LIGHT_BLUE)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_FROST_WISTERIA_SAPLING = add("potted_frost_wisteria_sapling", new FlowerPotBlock(FROST_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);
     public static final ParadiseLostHangerBlock FROST_WISTERIA_HANGER = add("frost_wisteria_hanger", new ParadiseLostHangerBlock(wisteriaHanger().mapColor(MapColor.LIGHT_BLUE)), flammableLeaves, cutoutRenderLayer);
 
     public static final WisteriaLeavesBlock LAVENDER_WISTERIA_LEAVES = add("lavender_wisteria_leaves", new WisteriaLeavesBlock(wisteriaLeaf().mapColor(MapColor.MAGENTA)), flammableLeaves, cutoutMippedRenderLayer);
     public static final LeafPileBlock LAVENDER_WISTERIA_LEAF_PILE = add("lavender_wisteria_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.MAGENTA)), flammableLeaves, cutoutMippedRenderLayer);
-    public static final SaplingBlock LAVENDER_WISTERIA_SAPLING = add("lavender_wisteria_sapling", new ParadiseLostSaplingBlock(new LavenderWisteriaSaplingGenerator(), wisteriaSapling().mapColor(MapColor.MAGENTA)), cutoutRenderLayer);
+    public static final SaplingBlock LAVENDER_WISTERIA_SAPLING = add("lavender_wisteria_sapling", new ParadiseLostSaplingBlock(ParadiseLostSaplingGenerators.LAVENDER_WISTERIA, wisteriaSapling().mapColor(MapColor.MAGENTA)), cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_LAVENDER_WISTERIA_SAPLING = add("potted_lavender_wisteria_sapling", new FlowerPotBlock(LAVENDER_WISTERIA_SAPLING, flowerPot()), cutoutRenderLayer);
     public static final ParadiseLostHangerBlock LAVENDER_WISTERIA_HANGER = add("lavender_wisteria_hanger", new ParadiseLostHangerBlock(wisteriaHanger().mapColor(MapColor.MAGENTA)), flammableLeaves, cutoutRenderLayer);
 
     // Grasses
     private static Settings shrub() {
-        return copy(Blocks.GRASS).mapColor(MapColor.PALE_GREEN);
+        return copy(Blocks.SHORT_GRASS).mapColor(MapColor.PALE_GREEN);
     }
     private static Settings crop() {
         return copy(Blocks.WHEAT).mapColor(MapColor.PALE_GREEN);
@@ -211,9 +211,9 @@ public class ParadiseLostBlocks {
 
     public static final GlowLichenBlock SWEDROOT_SPREAD = add("swedroot_spread", new GlowLichenBlock(Settings.create().mapColor(MapColor.OAK_TAN).pistonBehavior(PistonBehavior.DESTROY).noCollision().strength(1F).sounds(BlockSoundGroup.SHROOMLIGHT)), cutoutRenderLayer);
 
-    public static final WallClingingPlantBlock ROOTCAP = add("rootcap", new WallClingingPlantBlock(copy(BROWN_MUSHROOM), ParadiseLostBlockTags.FUNGI_CLINGABLES), cutoutRenderLayer);
-    public static final ParadiseLostMushroomPlantBlock BROWN_SPORECAP = add("brown_sporecap", new ParadiseLostMushroomPlantBlock(copy(BROWN_MUSHROOM), BlockTags.MUSHROOM_GROW_BLOCK), cutoutRenderLayer);
-    public static final ParadiseLostHangingMushroomPlantBlock PINK_SPORECAP = add("pink_sporecap", new ParadiseLostHangingMushroomPlantBlock(copy(BROWN_MUSHROOM), BlockTags.MUSHROOM_GROW_BLOCK), cutoutRenderLayer);
+    public static final WallClingingPlantBlock ROOTCAP = add("rootcap", new WallClingingPlantBlock(ParadiseLostBlockTags.FUNGI_CLINGABLES, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
+    public static final ParadiseLostMushroomPlantBlock BROWN_SPORECAP = add("brown_sporecap", new ParadiseLostMushroomPlantBlock(BlockTags.MUSHROOM_GROW_BLOCK, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
+    public static final ParadiseLostHangingMushroomPlantBlock PINK_SPORECAP = add("pink_sporecap", new ParadiseLostHangingMushroomPlantBlock(BlockTags.MUSHROOM_GROW_BLOCK, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
 
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(crop().mapColor(MapColor.PINK)), flammablePlant, cutoutMippedRenderLayer);
     public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(crop().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
@@ -249,9 +249,9 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostTallBrushBlock WILD_FLAX = add("wild_flax", new ParadiseLostTallBrushBlock(flower()), flammablePlant, cutoutMippedRenderLayer);
 
     // Ores
-    public static final ExperienceDroppingBlock CHERINE_ORE = add("cherine_ore", new ExperienceDroppingBlock(create().requiresTool().strength(3f), UniformIntProvider.create(0, 2)));
-    public static final ExperienceDroppingBlock OLVITE_ORE = add("olvite_ore", new ExperienceDroppingBlock(create().requiresTool().strength(3f), UniformIntProvider.create(1, 3)));
-    public static final ExperienceDroppingBlock SURTRUM = add("surtrum", new SurtrumOreBlock(create().sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f), UniformIntProvider.create(2, 5)));
+    public static final ExperienceDroppingBlock CHERINE_ORE = add("cherine_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), create().requiresTool().strength(3f)));
+    public static final ExperienceDroppingBlock OLVITE_ORE = add("olvite_ore", new ExperienceDroppingBlock(UniformIntProvider.create(1, 3), create().requiresTool().strength(3f)));
+    public static final ExperienceDroppingBlock SURTRUM = add("surtrum", new SurtrumOreBlock(UniformIntProvider.create(2, 5), create().sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f)));
     public static final Block METAMORPHIC_SHELL = add("metamorphic_shell", new Block(create().sounds(BlockSoundGroup.TUFF).requiresTool().strength(40f, 6f)));
     public static final PoofBlock SURTRUM_AIR = add("surtrum_air", new PoofBlock(create().replaceable().sounds(BlockSoundGroup.NETHER_GOLD_ORE)));
     public static final FloatingBlock LEVITA_ORE = add("levita_ore", new FloatingBlock(false, create().requiresTool().strength(4f), UniformIntProvider.create(4, 7)));
@@ -259,8 +259,8 @@ public class ParadiseLostBlocks {
     public static final Block OLVITE_BLOCK = add("olvite_block", new Block(create().requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
     public static final Block REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new Block(create().requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL)));
     // Misc
-    public static final ButtonBlock FLOESTONE_BUTTON = add("floestone_button", new ButtonBlock(Settings.create().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY), BlockSetType.STONE, 20, false));
-    public static final PressurePlateBlock FLOESTONE_PRESSURE_PLATE = add("floestone_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, copy(STONE_PRESSURE_PLATE), BlockSetType.STONE));
+    public static final ButtonBlock FLOESTONE_BUTTON = add("floestone_button", new ParadiseLostButtonBlock(BlockSetType.STONE, 20, Settings.create().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final PressurePlateBlock FLOESTONE_PRESSURE_PLATE = add("floestone_pressure_plate", new ParadiseLostPressurePlateBlock(BlockSetType.STONE, copy(STONE_PRESSURE_PLATE)));
     public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, create().strength(3f, 3f).sounds(BlockSoundGroup.STONE)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
     public static final CherineLanternBlock CHERINE_LANTERN = add("cherine_lantern", new CherineLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);

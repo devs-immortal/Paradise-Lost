@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class ParadiseHangingSignBlock extends HangingSignBlock {
     public ParadiseHangingSignBlock(Settings settings, WoodType woodType) {
-        super(settings, woodType);
+        super(woodType, settings);
     }
 
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {

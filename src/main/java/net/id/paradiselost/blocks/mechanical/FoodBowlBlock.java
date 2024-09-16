@@ -1,8 +1,10 @@
 package net.id.paradiselost.blocks.mechanical;
 
+import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.blocks.blockentity.FoodBowlBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
 
+    public static final MapCodec<FoodBowlBlock> CODEC = createCodec(FoodBowlBlock::new);
     public static final EnumProperty<Direction.Axis> AXIS = Properties.HORIZONTAL_AXIS;
     public static final BooleanProperty FULL = BooleanProperty.of("full");
     private final VoxelShape shapeZ = Block.createCuboidShape(0, 0, 1, 16, 8, 15);
@@ -31,6 +34,11 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
     public FoodBowlBlock(Settings settings) {
         super(settings, false);
         setDefaultState(getDefaultState().with(AXIS, Direction.Axis.X).with(FULL, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override

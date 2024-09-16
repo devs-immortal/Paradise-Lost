@@ -194,7 +194,7 @@ public class TallCropBlock extends CropBlock {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient) {
             if (player.isCreative()) {
                 onBreakInCreative(world, pos, state, player);
@@ -203,7 +203,7 @@ public class TallCropBlock extends CropBlock {
             }
         }
 
-        super.onBreak(world, pos, state, player);
+        return super.onBreak(world, pos, state, player);
     }
 
     @Override

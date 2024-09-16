@@ -1,9 +1,15 @@
 package net.id.paradiselost.blocks.natural.plant;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
+import net.minecraft.data.server.tag.TagProvider;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
@@ -12,9 +18,13 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class ParadiseLostMushroomPlantBlock extends PlantBlock {
+
+    public static final MapCodec<ParadiseLostMushroomPlantBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            TagKey.codec(RegistryKeys.BLOCK).fieldOf("plantable_on").forGetter((block) -> block.plantableOn), createSettingsCodec()
+    ).apply(instance, ParadiseLostMushroomPlantBlock::new));
     protected final TagKey<Block> plantableOn;
 
-    public ParadiseLostMushroomPlantBlock(Settings settings, TagKey<Block> plantableOn) {
+    public ParadiseLostMushroomPlantBlock(TagKey<Block> plantableOn, Settings settings) {
         super(settings);
         this.plantableOn = plantableOn;
     }
@@ -55,7 +65,12 @@ public class ParadiseLostMushroomPlantBlock extends PlantBlock {
         }
         
     }
-    
+
+    @Override
+    protected MapCodec<? extends PlantBlock> getCodec() {
+        return CODEC;
+    }
+
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return floor.isOpaqueFullCube(world, pos);

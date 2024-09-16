@@ -19,7 +19,7 @@ public class ParadiseLostMushroomBlock extends MushroomPlantBlock {
     private final HangType type;
 
     public ParadiseLostMushroomBlock(Settings settings, RegistryKey<ConfiguredFeature<?, ?>> feature, HangType type) {
-        super(settings, feature);
+        super(feature, settings);
         this.type = type;
     }
 

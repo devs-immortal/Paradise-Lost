@@ -5,11 +5,15 @@ import net.id.paradiselost.blocks.decorative.ParadiseHangingSignBlock;
 import net.id.paradiselost.blocks.decorative.ParadiseSignBlock;
 import net.id.paradiselost.blocks.decorative.ParadiseWallHangingSignBlock;
 import net.id.paradiselost.blocks.decorative.ParadiseWallSignBlock;
+import net.id.paradiselost.blocks.mechanical.ParadiseLostButtonBlock;
+import net.id.paradiselost.blocks.mechanical.ParadiseLostDoorBlock;
+import net.id.paradiselost.blocks.mechanical.ParadiseLostPressurePlateBlock;
+import net.id.paradiselost.blocks.mechanical.ParadiseLostTrapdoorBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.world.feature.tree.generator.*;
+import net.id.paradiselost.world.feature.tree.ParadiseLostSaplingGenerators;
 import net.minecraft.block.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -75,7 +79,7 @@ public class BlockRegistration {
         var saplingSettings = AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(MapColor.GOLD).luminance(state -> 3);
         var flowerPotSettings = AbstractBlock.Settings.copy(Blocks.POTTED_OAK_SAPLING).luminance(state -> 3);
         var leavesSettings = AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.GOLD).luminance(state -> 5);
-        SaplingBlock sapling = add(id + "_sapling", new ParadiseLostSaplingBlock(new MotherAurelSaplingGenerator(), saplingSettings), cutoutRenderLayer);
+        SaplingBlock sapling = add(id + "_sapling", new ParadiseLostSaplingBlock(ParadiseLostSaplingGenerators.MOTHER_AUREL, saplingSettings), cutoutRenderLayer);
         return registerWoodBlockSet(
                 ParadiseLostWoodTypes.MOTHER_AUREL, ParadiseLostBlockSets.MOTHER_AUREL,
                 sapling,
@@ -103,7 +107,7 @@ public class BlockRegistration {
                 id + "_fence", id + "_fence_gate",
                 id + "_door", id + "_trapdoor",
                 id + "_button", id + "_pressure_plate",
-                new OrangeSaplingGenerator(), MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.RAW_IRON_PINK
+                ParadiseLostSaplingGenerators.ORANGE, MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.RAW_IRON_PINK
         );
     }
 
@@ -153,9 +157,9 @@ public class BlockRegistration {
                 add(logId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedLog)), add(woodId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedWood)), strippedLog, strippedWood,
                 add(leavesId, new LeavesBlock(leavesSettings), flammableLeaves, cutoutMippedRenderLayer),
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
-                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings, woodType), flammablePlanks),
-                add(doorId, new DoorBlock(doorSettings, blockSetType), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings, blockSetType), cutoutMippedRenderLayer),
-                add(buttonId, new ButtonBlock(buttonSettings, blockSetType, 30, true)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings, blockSetType))
+                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(woodType, plankSettings), flammablePlanks),
+                add(doorId, new ParadiseLostDoorBlock(blockSetType, doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new ParadiseLostTrapdoorBlock(blockSetType, trapdoorSettings), cutoutMippedRenderLayer),
+                add(buttonId, new ParadiseLostButtonBlock(blockSetType, 30, buttonSettings)), add(pressurePlateId, new ParadiseLostPressurePlateBlock(blockSetType, pressurePlateSettings))
         );
     }
 
@@ -185,9 +189,9 @@ public class BlockRegistration {
                 add(logId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedLog)), add(woodId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedWood)), strippedLog, strippedWood,
                 leaves,
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
-                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings, woodType), flammablePlanks),
-                add(doorId, new DoorBlock(doorSettings, blockSetType), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings, blockSetType), cutoutMippedRenderLayer),
-                add(buttonId, new ButtonBlock(buttonSettings, blockSetType, 30, true)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings, blockSetType))
+                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(woodType, plankSettings), flammablePlanks),
+                add(doorId, new ParadiseLostDoorBlock(blockSetType, doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new ParadiseLostTrapdoorBlock(blockSetType, trapdoorSettings), cutoutMippedRenderLayer),
+                add(buttonId, new ParadiseLostButtonBlock(blockSetType, 30, buttonSettings)), add(pressurePlateId, new ParadiseLostPressurePlateBlock(blockSetType, pressurePlateSettings))
         );
     }
 
@@ -220,9 +224,9 @@ public class BlockRegistration {
                 add(logId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedLog)), add(woodId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedWood)), strippedLog, strippedWood,
                 leaves,
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
-                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(plankSettings, woodType), flammablePlanks),
-                add(doorId, new DoorBlock(doorSettings, blockSetType), cutoutMippedRenderLayer), add(trapdoorId, new TrapdoorBlock(trapdoorSettings, blockSetType), cutoutMippedRenderLayer),
-                add(buttonId, new ButtonBlock(buttonSettings, blockSetType, 30, true)), add(pressurePlateId, new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, pressurePlateSettings, blockSetType))
+                add(fenceId, new FenceBlock(plankSettings), flammablePlanks), add(fenceGateId, new FenceGateBlock(woodType, plankSettings), flammablePlanks),
+                add(doorId, new ParadiseLostDoorBlock(blockSetType, doorSettings), cutoutMippedRenderLayer), add(trapdoorId, new ParadiseLostTrapdoorBlock(blockSetType, trapdoorSettings), cutoutMippedRenderLayer),
+                add(buttonId, new ParadiseLostButtonBlock(blockSetType, 30, buttonSettings)), add(pressurePlateId, new ParadiseLostPressurePlateBlock(blockSetType, pressurePlateSettings))
         );
     }
 

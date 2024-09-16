@@ -39,8 +39,8 @@ public abstract class BloodstoneItem extends Item {
         var stack = user.getStackInHand(hand);
         BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromEntity(entity);
         stack.getOrCreateNbt().put(BloodstoneCapturedData.NBT_TAG, capturedData.toNBT());
-        playPrickEffects(user.method_48926(), entity.getBlockPos());
-        return ActionResult.success(user.method_48926().isClient());
+        playPrickEffects(user.getWorld(), entity.getBlockPos());
+        return ActionResult.success(user.getWorld().isClient());
     }
 
     @Override
@@ -49,7 +49,7 @@ public abstract class BloodstoneItem extends Item {
             ItemStack stack = user.getStackInHand(hand);
             BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromEntity(user);
             stack.getOrCreateNbt().put(BloodstoneCapturedData.NBT_TAG, capturedData.toNBT());
-            playPrickEffects(user.method_48926(), user.getBlockPos());
+            playPrickEffects(user.getWorld(), user.getBlockPos());
             return TypedActionResult.success(stack);
         }
         return super.use(world, user, hand);

@@ -52,7 +52,7 @@ public interface FloatingBlockHelper {
      * floating block is 50 blocks from the height limit, and isn't a fast floater.
      */
     Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = (entity) -> {
-        World world = entity.method_48926();
+        World world = entity.getWorld();
         BlockPos pos = entity.getBlockPos();
         int distFromTop = world.getTopY() - pos.getY();
         return !entity.isInTag(ParadiseLostBlockTags.DECAYING_FLOATERS) && distFromTop <= 50;

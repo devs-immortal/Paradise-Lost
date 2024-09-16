@@ -5,6 +5,6 @@ import net.minecraft.block.TorchBlock;
 
 public class CherineTorchBlock extends TorchBlock {
     public CherineTorchBlock(Settings settings) {
-        super(settings, ParadiseLostParticles.CHERINE_FLAME);
+        super(ParadiseLostParticles.CHERINE_FLAME, settings);
     }
 }

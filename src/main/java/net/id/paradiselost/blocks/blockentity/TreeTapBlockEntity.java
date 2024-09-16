@@ -88,7 +88,7 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
     }
 
     @Override
-    protected DefaultedList<ItemStack> getInvStackList() {
+    protected DefaultedList<ItemStack> method_11282() {
         return inventory;
     }
 

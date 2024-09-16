@@ -45,7 +45,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
     public void postTickMoveEntities() {
         if (FallingBlock.canFallThrough(this.blockState)) return;
 
-        List<Entity> otherEntities = this.method_48926().getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 3 * (this.prevY - this.getY()), 0)));
+        List<Entity> otherEntities = this.getWorld().getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 3 * (this.prevY - this.getY()), 0)));
         for (Entity entity : otherEntities) {
             if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides) {
                 entity.move(MovementType.SHULKER_BOX, this.getVelocity());

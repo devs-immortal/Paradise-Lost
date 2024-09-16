@@ -10,8 +10,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
 public class ParadiseLostHangingMushroomPlantBlock extends ParadiseLostMushroomPlantBlock {
-    public ParadiseLostHangingMushroomPlantBlock(Settings settings, TagKey<Block> plantableOn) {
-        super(settings, plantableOn);
+    public ParadiseLostHangingMushroomPlantBlock(TagKey<Block> plantableOn, Settings settings) {
+        super(plantableOn, settings);
     }
     
     @Override

@@ -9,8 +9,8 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 public class SurtrumOreBlock extends ExperienceDroppingBlock {
-    public SurtrumOreBlock(Settings settings, IntProvider experience) {
-        super(settings, experience);
+    public SurtrumOreBlock(IntProvider experience, Settings settings) {
+        super(experience, settings);
     }
 
     @Override

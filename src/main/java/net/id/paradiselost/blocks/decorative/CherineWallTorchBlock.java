@@ -5,6 +5,6 @@ import net.minecraft.block.WallTorchBlock;
 
 public class CherineWallTorchBlock extends WallTorchBlock {
     public CherineWallTorchBlock(Settings settings) {
-        super(settings, ParadiseLostParticles.CHERINE_FLAME);
+        super(ParadiseLostParticles.CHERINE_FLAME, settings);
     }
 }

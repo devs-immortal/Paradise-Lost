@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 public class ParadiseSignBlock extends SignBlock {
 
     public ParadiseSignBlock(Settings settings, WoodType woodType) {
-        super(settings, woodType);
+        super(woodType, settings);
         this.lootTableId = null;
     }
 

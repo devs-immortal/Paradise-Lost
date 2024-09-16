@@ -17,7 +17,7 @@ public class FloatingBlock extends ExperienceDroppingBlock {
     private final boolean powered;
 
     public FloatingBlock(boolean powered, Settings properties, UniformIntProvider experienceDropped) {
-        super(properties, experienceDropped);
+        super(experienceDropped, properties);
         this.powered = powered;
     }
 

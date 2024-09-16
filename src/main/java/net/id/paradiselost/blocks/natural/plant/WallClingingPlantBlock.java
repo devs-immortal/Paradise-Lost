@@ -1,10 +1,13 @@
 package net.id.paradiselost.blocks.natural.plant;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PlantBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -19,6 +22,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public class WallClingingPlantBlock extends PlantBlock {
+
+    public static final MapCodec<WallClingingPlantBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
+        return instance.group(TagKey.codec(RegistryKeys.BLOCK).fieldOf("clingable_blocks").forGetter((block) -> {
+            return block.clingableBlocks;
+        }), createSettingsCodec()).apply(instance, WallClingingPlantBlock::new);
+    });
     protected static final Map<Direction, VoxelShape> SHAPES = Map.of(
             Direction.NORTH, Block.createCuboidShape(0, 4, 0, 16, 12, 6),
             Direction.EAST, Block.createCuboidShape(10, 4, 0, 16, 12, 16),
@@ -28,7 +37,7 @@ public class WallClingingPlantBlock extends PlantBlock {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     private final @Nullable TagKey<Block> clingableBlocks;
 
-    public WallClingingPlantBlock(Settings settings, @Nullable TagKey<Block> clingableBlocks) {
+    public WallClingingPlantBlock(@Nullable TagKey<Block> clingableBlocks, Settings settings) {
         super(settings);
         this.clingableBlocks = clingableBlocks;
     }
@@ -52,6 +61,11 @@ public class WallClingingPlantBlock extends PlantBlock {
             return getDefaultState().with(FACING, ctx.getSide().getOpposite());
         }
         return null;
+    }
+
+    @Override
+    protected MapCodec<? extends PlantBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

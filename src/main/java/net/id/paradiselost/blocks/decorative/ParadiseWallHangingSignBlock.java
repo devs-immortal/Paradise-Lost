@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 public class ParadiseWallHangingSignBlock extends WallHangingSignBlock {
 
     public ParadiseWallHangingSignBlock(Settings settings, WoodType woodType) {
-        super(settings, woodType);
+        super(woodType, settings);
     }
 
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {

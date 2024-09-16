@@ -62,9 +62,4 @@ public class BlackcurrantBushBlock extends SweetBerryBushBlock {
         world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_BLACKCURRANT_BUSH_PICK_BLUEBERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
         world.setBlockState(pos, state.with(AGE, 1), Block.NOTIFY_LISTENERS);
     }
-
-    @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(this.asItem());
-    }
 }

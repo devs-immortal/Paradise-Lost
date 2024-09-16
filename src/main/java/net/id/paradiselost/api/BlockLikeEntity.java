@@ -77,10 +77,10 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             return super.calculateBoundingBox();
         }
         BlockPos origin = this.dataTracker.get(ORIGIN);
-        VoxelShape shape = this.blockState.getCollisionShape(method_48926(), origin);
+        VoxelShape shape = this.blockState.getCollisionShape(getWorld(), origin);
         if (shape.isEmpty()) {
             this.collides = false;
-            shape = this.blockState.getOutlineShape(method_48926(), origin);
+            shape = this.blockState.getOutlineShape(getWorld(), origin);
             if (shape.isEmpty()) {
                 return super.calculateBoundingBox();
             }
@@ -112,7 +112,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
      */
     public void postTickEntityCollision(Entity entity) {
         if (!(entity instanceof BlockLikeEntity ble && ble.partOfSet)) {
-            this.blockState.onEntityCollision(method_48926(), this.getBlockPos(), entity);
+            this.blockState.onEntityCollision(getWorld(), this.getBlockPos(), entity);
         }
     }
 
@@ -120,32 +120,32 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
      * @return Whether this entity should cease and return to being a block in the world.
      */
     public boolean shouldCease() {
-        if (this.method_48926().isClient) return false;
+        if (this.getWorld().isClient) return false;
 
         BlockPos blockPos = this.getBlockPos();
         boolean isConcrete = this.blockState.getBlock() instanceof ConcretePowderBlock;
 
-        if (isConcrete && this.method_48926().getFluidState(blockPos).isIn(FluidTags.WATER)) {
+        if (isConcrete && this.getWorld().getFluidState(blockPos).isIn(FluidTags.WATER)) {
             return true;
         }
 
         double speed = this.getVelocity().lengthSquared();
 
         if (isConcrete && speed > 1.0D) {
-            BlockHitResult blockHitResult = this.method_48926().raycast(new RaycastContext(
+            BlockHitResult blockHitResult = this.getWorld().raycast(new RaycastContext(
                     new Vec3d(this.prevX, this.prevY, this.prevZ),
                     new Vec3d(this.getX(), this.getY(), this.getZ()),
                     RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.SOURCE_ONLY, this)
             );
 
             if (blockHitResult.getType() != HitResult.Type.MISS
-                    && this.method_48926().getFluidState(blockHitResult.getBlockPos()).isIn(FluidTags.WATER)) {
+                    && this.getWorld().getFluidState(blockHitResult.getBlockPos()).isIn(FluidTags.WATER)) {
                 return true;
             }
         }
 
         // Check if it is outside of the world
-        return this.moveTime > 100 && (blockPos.getY() < this.method_48926().getBottomY() || blockPos.getY() > this.method_48926().getTopY());
+        return this.moveTime > 100 && (blockPos.getY() < this.getWorld().getBottomY() || blockPos.getY() > this.getWorld().getTopY());
     }
 
     /**
@@ -167,9 +167,9 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         if (this.moveTime++ == 0) {
             BlockPos blockPos = this.getBlockPos();
             Block block = this.blockState.getBlock();
-            if (this.method_48926().getBlockState(blockPos).isOf(block)) {
-                this.method_48926().removeBlock(blockPos, false);
-            } else if (!this.method_48926().isClient && !this.partOfSet) {
+            if (this.getWorld().getBlockState(blockPos).isOf(block)) {
+                this.getWorld().removeBlock(blockPos, false);
+            } else if (!this.getWorld().isClient && !this.partOfSet) {
                 this.discard();
                 return;
             }
@@ -189,7 +189,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     public void postTickMoveEntities() {
         if (FallingBlock.canFallThrough(this.blockState)) return;
 
-        List<Entity> otherEntities = this.method_48926().getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 0.5, 0)));
+        List<Entity> otherEntities = this.getWorld().getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 0.5, 0)));
         for (var entity : otherEntities) {
             if (!(entity instanceof BlockLikeEntity) && !entity.noClip && collides) {
                 entity.move(MovementType.SHULKER_BOX, this.getVelocity());
@@ -214,10 +214,10 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         }
 
         boolean flag = this.blockState.isIn(BlockTags.ANVIL);
-        DamageSource damageSource2 = flag ? this.method_48926().getDamageSources().fallingAnvil(this) : this.method_48926().getDamageSources().fallingBlock(this);
+        DamageSource damageSource2 = flag ? this.getWorld().getDamageSources().fallingAnvil(this) : this.getWorld().getDamageSources().fallingBlock(this);
         float f = Math.min(MathHelper.floor((float) i * this.fallHurtAmount), this.fallHurtMax);
 
-        this.method_48926().getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0))).forEach(entity -> entity.damage(damageSource2, f));
+        this.getWorld().getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0))).forEach(entity -> entity.damage(damageSource2, f));
 
         if (flag && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
             BlockState blockstate = AnvilBlock.getLandingState(this.blockState);
@@ -262,7 +262,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
     @Environment(EnvType.CLIENT)
     public World getWorldObj() {
-        return this.method_48926();
+        return this.getWorld();
     }
 
     @Override
@@ -292,7 +292,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             return;
         }
         BlockPos pos = this.getBlockPos();
-        BlockState state = this.method_48926().getBlockState(pos);
+        BlockState state = this.getWorld().getBlockState(pos);
         // I don't like this
         if (state.isOf(Blocks.MOVING_PISTON)) {
             this.setVelocity(this.getVelocity().multiply(0.7, 0.5, 0.7));
@@ -309,21 +309,21 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
      */
     public boolean trySetBlock() {
         BlockPos blockPos = this.getBlockPos();
-        BlockState blockState = this.method_48926().getBlockState(blockPos);
-        boolean canReplace = blockState.canReplace(new AutomaticItemPlacementContext(this.method_48926(), blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
-        boolean canPlace = this.blockState.canPlaceAt(this.method_48926(), blockPos);
+        BlockState blockState = this.getWorld().getBlockState(blockPos);
+        boolean canReplace = blockState.canReplace(new AutomaticItemPlacementContext(this.getWorld(), blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
+        boolean canPlace = this.blockState.canPlaceAt(this.getWorld(), blockPos);
 
         if (!this.canSetBlock || !canPlace || !canReplace)
             return false;
 
-        if (this.blockState.contains(Properties.WATERLOGGED) && this.method_48926().getFluidState(blockPos).getFluid() == Fluids.WATER) {
+        if (this.blockState.contains(Properties.WATERLOGGED) && this.getWorld().getFluidState(blockPos).getFluid() == Fluids.WATER) {
             this.blockState = this.blockState.with(Properties.WATERLOGGED, true);
         }
 
-        if (this.method_48926().setBlockState(blockPos, this.blockState, Block.NOTIFY_ALL)) {
+        if (this.getWorld().setBlockState(blockPos, this.blockState, Block.NOTIFY_ALL)) {
             this.discard();
             if (this.blockEntityData != null && this.blockState.hasBlockEntity()) {
-                BlockEntity blockEntity = this.method_48926().getBlockEntity(blockPos);
+                BlockEntity blockEntity = this.getWorld().getBlockEntity(blockPos);
                 if (blockEntity != null) {
                     NbtCompound compoundTag = blockEntity.createNbt();
                     for (String keyName : this.blockEntityData.getKeys()) {
@@ -340,15 +340,15 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             for (Direction dir : Direction.stream().toList()) {
                 var newState = this.blockState.getStateForNeighborUpdate(
                         dir,
-                        this.method_48926().getBlockState(blockPos.offset(dir)),
-                        this.method_48926(),
+                        this.getWorld().getBlockState(blockPos.offset(dir)),
+                        this.getWorld(),
                         blockPos,
                         blockPos.offset(dir)
                 );
-                this.method_48926().setBlockState(blockPos, newState);
+                this.getWorld().setBlockState(blockPos, newState);
                 this.blockState = newState;
             }
-            method_48926().scheduleBlockTick(blockPos, this.blockState.getBlock(), 1);
+            getWorld().scheduleBlockTick(blockPos, this.blockState.getBlock(), 1);
             // Stop entities from clipping through the block when it's set
             this.postTickMoveEntities();
             return true;
@@ -363,11 +363,11 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         if (this.isRemoved()) return;
 
         this.discard();
-        if (this.dropItem && this.method_48926().getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-            Block.dropStacks(this.blockState, this.method_48926(), this.getBlockPos());
+        if (this.dropItem && this.getWorld().getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+            Block.dropStacks(this.blockState, this.getWorld(), this.getBlockPos());
         }
         // spawn break particles
-        method_48926().syncWorldEvent(null, WorldEvents.BLOCK_BROKEN, this.getBlockPos(), Block.getRawIdFromState(blockState));
+        getWorld().syncWorldEvent(null, WorldEvents.BLOCK_BROKEN, this.getBlockPos(), Block.getRawIdFromState(blockState));
     }
 
     @Override

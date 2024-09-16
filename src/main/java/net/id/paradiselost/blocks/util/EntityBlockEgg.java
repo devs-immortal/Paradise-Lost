@@ -32,10 +32,11 @@ public class EntityBlockEgg extends Block {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!player.isCreative()) {
             world.spawnEntity(function.apply(world, pos));
         }
         world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos);
+        return state;
     }
 }
