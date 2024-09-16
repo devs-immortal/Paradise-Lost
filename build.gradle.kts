@@ -17,7 +17,7 @@ val satinVersion: String by properties
 val clothConfigVersion: String by properties
 
 plugins {
-    id("fabric-loom") version "1.5-SNAPSHOT"
+    id("fabric-loom") version "1.7-SNAPSHOT"
     id("com.modrinth.minotaur") version "1.2.1"
     id("de.guntram.mcmod.crowdin-translate") version "1.4+1.19"
     `maven-publish`
