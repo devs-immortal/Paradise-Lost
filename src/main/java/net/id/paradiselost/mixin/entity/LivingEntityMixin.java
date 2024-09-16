@@ -1,6 +1,5 @@
 package net.id.paradiselost.mixin.entity;
 
-import net.id.paradiselost.component.MoaGenes;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;

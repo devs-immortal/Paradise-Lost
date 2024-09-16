@@ -2,7 +2,6 @@ package net.id.paradiselost.blocks.mechanical;
 
 import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.blocks.blockentity.TreeTapBlockEntity;
-import net.id.paradiselost.blocks.natural.tree.ParadiseLostHangerBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;

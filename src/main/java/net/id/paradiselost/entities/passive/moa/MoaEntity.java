@@ -35,7 +35,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -428,7 +427,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             if (getGenes().isTamed()) {
                 // Allow the player to open the GUI at any time
                 if (player.isSneaking()) {
-                    method_6722(player);
+                    openInventory(player);
                     return ActionResult.SUCCESS;
                 }
                 
@@ -630,7 +629,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     @Override
-    public EntityView getWorld() {
+    public EntityView method_48926() {
         return null;
     }
 
@@ -646,7 +645,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
     
     @Override
-    public void method_6722(PlayerEntity player) {
+    public void openInventory(PlayerEntity player) {
         if (!getWorld().isClient && (!hasPassengers() || hasPassenger(player)) && getGenes().isTamed()) {
             player.openHandledScreen(new ExtendedScreenHandlerFactory() {
                 @Override
