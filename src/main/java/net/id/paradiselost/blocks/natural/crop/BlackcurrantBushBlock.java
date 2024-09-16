@@ -40,16 +40,13 @@ public class BlackcurrantBushBlock extends SweetBerryBushBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         int i = state.get(AGE);
-        boolean mature = i == 3;
-        if (!mature && player.getStackInHand(hand).getItem() == Items.BONE_MEAL) {
-            return ActionResult.PASS;
-        } else if (i > 1) {
+        if (i > 1) {
             tryPickBerries(world, pos, state);
             return ActionResult.success(world.isClient);
         } else {
-            return ActionResult.FAIL;
+            return super.onUse(state, world, pos, player, hit);
         }
     }
 

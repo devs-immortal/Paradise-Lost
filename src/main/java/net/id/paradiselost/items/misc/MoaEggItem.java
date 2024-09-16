@@ -3,6 +3,7 @@ package net.id.paradiselost.items.misc;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.api.MoaAPI;
+import net.id.paradiselost.api.MoaAPI.MoaRace;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class MoaEggItem extends Item {
-    public MoaEggItem(Settings settings) {
+    public MoaEggItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 
@@ -49,7 +50,7 @@ public class MoaEggItem extends Item {
 
     @Override
     @Environment(EnvType.CLIENT)
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, net.minecraft.item.Item.TooltipContext context) {
         if (stack.getOrCreateNbt().contains("genes")) {
             NbtCompound geneTag = stack.getSubNbt("genes");
             Identifier raceId = Identifier.tryParse(geneTag.getString("raceId"));

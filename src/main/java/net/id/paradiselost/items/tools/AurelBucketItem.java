@@ -30,12 +30,12 @@ import org.jetbrains.annotations.Nullable;
 public class AurelBucketItem extends Item implements FluidModificationItem {
     private final Fluid containedBlock;
 
-    public AurelBucketItem(Settings settings) {
+    public AurelBucketItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
         this.containedBlock = Fluids.EMPTY;
     }
 
-    public AurelBucketItem(Fluid containedFluidIn, Settings settings) {
+    public AurelBucketItem(Fluid containedFluidIn, net.minecraft.item.Item.Settings settings) {
         super(settings);
         this.containedBlock = containedFluidIn;
     }

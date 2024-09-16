@@ -6,6 +6,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.structure.StructurePieceType;
+import net.minecraft.util.Identifier;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;
@@ -13,9 +14,6 @@ import net.minecraft.world.gen.structure.StructureType;
 import static net.id.paradiselost.ParadiseLost.locate;
 
 public class ParadiseLostStructureFeatures {
-    public static final TagKey<Structure> WELL_KEY = tagKey("well");
-    public static final StructureType<WellFeature> WELL = () -> WellFeature.CODEC;
-    public static final StructurePieceType WELL_PIECE = WellGenerator.Piece::new;
     
     public static final TagKey<Structure> AUREL_TOWER_KEY = tagKey("aurel_tower");
     public static final StructureType<AurelTowerFeature> AUREL_TOWER = () -> AurelTowerFeature.CODEC;
@@ -26,7 +24,6 @@ public class ParadiseLostStructureFeatures {
     }
     
     public static void init() {
-        register(WELL_KEY, WELL, WELL_PIECE);
         register(AUREL_TOWER_KEY, AUREL_TOWER, AUREL_TOWER_PIECE);
     }
     

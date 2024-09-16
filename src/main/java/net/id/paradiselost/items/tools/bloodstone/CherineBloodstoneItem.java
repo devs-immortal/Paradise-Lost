@@ -7,7 +7,7 @@ import net.minecraft.util.Formatting;
 import java.util.List;
 
 public class CherineBloodstoneItem extends BloodstoneItem {
-    public CherineBloodstoneItem(Settings settings) {
+    public CherineBloodstoneItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 

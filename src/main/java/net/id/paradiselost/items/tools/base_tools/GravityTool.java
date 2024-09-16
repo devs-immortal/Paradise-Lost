@@ -4,6 +4,7 @@ import net.id.paradiselost.api.FloatingBlockHelper;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -47,7 +48,7 @@ public class GravityTool {
         }
 
         if (context.getPlayer() != null && !context.getPlayer().isCreative()) {
-            context.getStack().damage(4, context.getPlayer(), (p) -> p.sendToolBreakStatus(context.getHand()));
+            context.getStack().damage(4, context.getPlayer(), LivingEntity.getSlotForHand(context.getHand()));
         }
 
         return ActionResult.SUCCESS;

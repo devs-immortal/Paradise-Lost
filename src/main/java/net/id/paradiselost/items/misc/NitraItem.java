@@ -12,7 +12,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class NitraItem extends Item {
-    public NitraItem(Settings settings) {
+    public NitraItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 

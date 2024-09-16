@@ -30,7 +30,7 @@ public class ParadiseLostPortalItem extends Item {
             new byte[]{-2, 1, 0}
     };
 
-    public ParadiseLostPortalItem(Settings settings) {
+    public ParadiseLostPortalItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 

@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public abstract class BloodstoneItem extends Item {
-    public BloodstoneItem(Settings settings) {
+    public BloodstoneItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 
@@ -29,7 +29,7 @@ public abstract class BloodstoneItem extends Item {
 
     @Override
     @Environment(EnvType.CLIENT)
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, net.minecraft.item.Item.TooltipContext context) {
         tooltip.addAll(getDefaultText());
         super.appendTooltip(stack, world, tooltip, context);
     }

@@ -7,7 +7,7 @@ import net.minecraft.util.Formatting;
 import java.util.List;
 
 public class SurtrumBloodstoneItem extends BloodstoneItem {
-    public SurtrumBloodstoneItem(Settings settings) {
+    public SurtrumBloodstoneItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 

@@ -8,7 +8,7 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.*;
 
 public class GravityWandItem extends Item {
-    public GravityWandItem(Settings settings) {
+    public GravityWandItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 

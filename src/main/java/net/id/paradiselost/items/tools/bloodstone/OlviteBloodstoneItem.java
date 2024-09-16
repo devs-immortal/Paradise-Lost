@@ -7,7 +7,7 @@ import net.minecraft.util.Formatting;
 import java.util.List;
 
 public class OlviteBloodstoneItem extends BloodstoneItem {
-    public OlviteBloodstoneItem(Settings settings) {
+    public OlviteBloodstoneItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 

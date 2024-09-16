@@ -1,5 +1,6 @@
 package net.id.paradiselost.entities.projectile;
 
+import java.util.List;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.entity.Entity;

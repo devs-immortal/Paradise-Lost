@@ -7,7 +7,7 @@ import net.minecraft.util.Formatting;
 import java.util.List;
 
 public class AbstentineBloodstoneItem extends BloodstoneItem {
-    public AbstentineBloodstoneItem(Settings settings) {
+    public AbstentineBloodstoneItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 

@@ -23,7 +23,6 @@ public class ParadiseLostParticles {
     public static DefaultParticleType MOTHER_AUREL_LEAF = register("golden_leaf");
     public static DefaultParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal");
     public static DefaultParticleType CHERINE_FLAME = register("cherine_flame");
-    public static DefaultParticleType VENOM_BUBBLE = register("venom_bubble");
     
     /**
      * Registers a simple particle type.
@@ -64,7 +63,6 @@ public class ParadiseLostParticles {
         public static void init() {
             register(MOTHER_AUREL_LEAF, MotherAurelLeafParticle.DefaultFactory::new);
             register(FALLING_ORANGE_PETAL, FallingOrangePetalParticle.DefaultFactory::new);
-            register(VENOM_BUBBLE, VenomBubbleParticle.DefaultFactory::new);
             register(CHERINE_FLAME, CherineFlameParticle.DefaultFactory::new);
         }
         
