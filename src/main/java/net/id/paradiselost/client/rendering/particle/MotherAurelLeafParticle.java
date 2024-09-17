@@ -5,7 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 
@@ -76,7 +76,7 @@ public class MotherAurelLeafParticle extends SpriteBillboardParticle {
     }
 
     @Environment(EnvType.CLIENT)
-    public static class DefaultFactory implements ParticleFactory<DefaultParticleType> {
+    public static class DefaultFactory implements ParticleFactory<SimpleParticleType> {
         private final SpriteProvider provider;
 
         public DefaultFactory(SpriteProvider provider) {
@@ -84,7 +84,7 @@ public class MotherAurelLeafParticle extends SpriteBillboardParticle {
         }
 
         @Override
-        public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
             return new MotherAurelLeafParticle(world, x, y, z, velocityX, velocityY, velocityZ, this.provider);
         }
     }

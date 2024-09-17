@@ -2,6 +2,7 @@ package net.id.paradiselost.util;
 
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -20,9 +21,9 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent BLOCK_SURTRUM_RUSH = register("block.surtrum_air.rush");
     public static final SoundEvent BLOCK_SURTRUM_CRACKLE = register("block.surtrum_air.crackle");
 
-    public static final SoundEvent ITEM_ARMOR_EQUIP_OLVITE = register("item.armor.equip.olvite");
-    public static final SoundEvent ITEM_ARMOR_EQUIP_GLAZED_GOLD = register("item.armor.equip.glazed_gold");
-    public static final SoundEvent ITEM_ARMOR_EQUIP_SURTRUM = register("item.armor.equip.surtrum");
+    public static final RegistryEntry<SoundEvent> ITEM_ARMOR_EQUIP_OLVITE = registerReference("item.armor.equip.olvite");
+    public static final RegistryEntry<SoundEvent> ITEM_ARMOR_EQUIP_GLAZED_GOLD = registerReference("item.armor.equip.glazed_gold");
+    public static final RegistryEntry<SoundEvent> ITEM_ARMOR_EQUIP_SURTRUM = registerReference("item.armor.equip.surtrum");
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = register("item.bloodstone.prick");
 
 
@@ -47,6 +48,11 @@ public final class ParadiseLostSoundEvents {
     private static SoundEvent register(String location) {
         Identifier id = locate(location);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+    }
+
+    private static RegistryEntry.Reference<SoundEvent> registerReference(String location) {
+        Identifier id = locate(location);
+        return Registry.registerReference(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
 }

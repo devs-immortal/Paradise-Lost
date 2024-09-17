@@ -2,6 +2,8 @@ package net.id.paradiselost.mixin.entity;
 
 import net.id.paradiselost.util.BloomedCalciteUtil;
 import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -9,7 +11,7 @@ import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -34,8 +36,8 @@ public class PotionEntityMixin extends ThrownItemEntity {
     protected void onBlockHit(BlockHitResult blockHitResult, CallbackInfo ci) {
         if (!this.getWorld().isClient) {
             ItemStack itemStack = this.getStack();
-            List<StatusEffectInstance> list = PotionUtil.getPotionEffects(itemStack);
-            boolean healingPotion = list.stream().anyMatch((e) -> e.getEffectType() == StatusEffects.INSTANT_HEALTH);
+            PotionContentsComponent potionContentsComponent = itemStack.getOrDefault(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT);
+            boolean healingPotion = potionContentsComponent.matches(Potions.HEALING) || potionContentsComponent.matches(Potions.STRONG_HEALING);
             Direction direction = blockHitResult.getSide();
             BlockPos blockPos = blockHitResult.getBlockPos();
             BlockPos landBlock = blockPos.offset(direction);

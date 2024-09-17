@@ -3,13 +3,14 @@ package net.id.paradiselost.mixin.item;
 import net.id.paradiselost.util.BloomedCalciteUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.Items;
 import net.minecraft.item.PotionItem;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -33,7 +34,8 @@ public class PotionItemMixin {
         ItemStack itemStack = context.getStack();
         BlockState blockState = world.getBlockState(blockPos);
         Random random = world.random;
-        if (blockState.isOf(Blocks.CALCITE) && itemStack.isOf(Items.POTION) && (PotionUtil.getPotion(itemStack) == Potions.HEALING || PotionUtil.getPotion(itemStack) == Potions.STRONG_HEALING)) {
+        PotionContentsComponent potionContentsComponent = itemStack.getOrDefault(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT);
+        if (blockState.isOf(Blocks.CALCITE) && itemStack.isOf(Items.POTION) && (potionContentsComponent.matches(Potions.HEALING) || potionContentsComponent.matches(Potions.STRONG_HEALING))) {
             playerEntity.setStackInHand(context.getHand(), ItemUsage.exchangeStack(itemStack, playerEntity, new ItemStack(Items.GLASS_BOTTLE)));
             BloomedCalciteUtil.applyHealing(playerEntity, world, blockPos, random, itemStack);
             if (!world.isClient) {

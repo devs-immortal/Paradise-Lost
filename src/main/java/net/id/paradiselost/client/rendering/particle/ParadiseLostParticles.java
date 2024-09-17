@@ -6,9 +6,9 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry.PendingParticleFactory;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.id.paradiselost.ParadiseLost;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
@@ -20,9 +20,9 @@ import net.minecraft.registry.Registry;
  * FIXME Refactor this for naming issues.
  */
 public class ParadiseLostParticles {
-    public static DefaultParticleType MOTHER_AUREL_LEAF = register("golden_leaf");
-    public static DefaultParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal");
-    public static DefaultParticleType CHERINE_FLAME = register("cherine_flame");
+    public static SimpleParticleType MOTHER_AUREL_LEAF = register("golden_leaf");
+    public static SimpleParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal");
+    public static SimpleParticleType CHERINE_FLAME = register("cherine_flame");
     
     /**
      * Registers a simple particle type.
@@ -30,20 +30,8 @@ public class ParadiseLostParticles {
      * @param id THe name of the new particle
      * @return The new type
      */
-    private static DefaultParticleType register(String id) {
+    private static SimpleParticleType register(String id) {
         return Registry.register(Registries.PARTICLE_TYPE, ParadiseLost.locate(id), FabricParticleTypes.simple(true));
-    }
-    
-    /**
-     * Registers a complex particle type.
-     *
-     * @param id      The name of the new particle
-     * @param factory The common factory
-     * @param <T>     The type of the effect
-     * @return The new type
-     */
-    private static <T extends ParticleEffect> ParticleType<T> register(String id, ParticleEffect.Factory<T> factory) {
-        return Registry.register(Registries.PARTICLE_TYPE, ParadiseLost.locate(id), FabricParticleTypes.complex(true, factory));
     }
     
     /**
