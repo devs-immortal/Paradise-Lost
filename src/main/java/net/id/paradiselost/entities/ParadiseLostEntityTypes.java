@@ -49,16 +49,16 @@ public class ParadiseLostEntityTypes {
         return (entityType) -> FabricDefaultAttributeRegistry.register(entityType, builder.get());
     }
 
-    private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, Heightmap.Type heightmapType, SpawnRestriction.SpawnPredicate<T> predicate) {
+    private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnLocation location, Heightmap.Type heightmapType, SpawnRestriction.SpawnPredicate<T> predicate) {
         return (entityType) -> SpawnRestriction.register(entityType, location, heightmapType, predicate);
     }
 
-    private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnRestriction.Location location, SpawnRestriction.SpawnPredicate<T> predicate) {
+    private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnLocation location, SpawnRestriction.SpawnPredicate<T> predicate) {
         return spawnRestrictions(location, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate);
     }
 
     private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnRestriction.SpawnPredicate<T> predicate) {
-        return spawnRestrictions(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate);
+        return spawnRestrictions(SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate);
     }
 
     public static void init() {

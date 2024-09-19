@@ -1,7 +1,6 @@
 package net.id.paradiselost.items;
 
 import com.chocohead.mm.api.ClassTinkerers;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.armor.ParadiseLostArmorMaterials;
@@ -47,10 +46,6 @@ public class ParadiseLostItems {
     /*
     Begin items
      */
-
-    private static FabricItemSettings nightmare() {
-        return new FabricItemSettings().fireproof();
-    }
 
     private static Settings resource() {
         return new Settings();
