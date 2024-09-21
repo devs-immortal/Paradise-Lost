@@ -4,11 +4,11 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.id.paradiselost.api.MoaAPI;
-import net.id.paradiselost.api.MoaAPI.MoaRace;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
@@ -35,20 +35,13 @@ public class MoaGenes implements AutoSyncedComponent {
     }
 
     public static ItemStack getEggForCommand(MoaAPI.MoaRace race, World world, boolean baby) {
-        ItemStack stack = new ItemStack(ParadiseLostItems.MOA_EGG);
-        NbtCompound nbt = stack.getOrCreateSubNbt("genes");
         Random random = world.getRandom();
-        MoaGenes genes = new MoaGenes();
+        ItemStack stack = new ItemStack(ParadiseLostItems.MOA_EGG);
 
-        for (MoaAttributes attribute : MoaAttributes.values()) {
-            genes.attributeMap.addTo(attribute, race.statWeighting().configure(attribute, race, random));
-        }
-        genes.race = race;
-        genes.affinity = race.defaultAffinity();
-        genes.initialized = true;
+        var attributes = Arrays.stream(MoaAttributes.values()).map(ma -> new ParadiseLostDataComponentTypes.MoaAttributeComponent(ma.name(), race.statWeighting().configure(ma, race, random))).toList();
+        var genes = new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), race.defaultAffinity().name(), baby, 0.0F, "", attributes);
 
-        genes.writeToNbt(nbt);
-        nbt.putBoolean("baby", baby);
+        stack.set(ParadiseLostDataComponentTypes.MOA_GENES, genes);
         return stack;
     }
 
@@ -56,7 +49,7 @@ public class MoaGenes implements AutoSyncedComponent {
         MoaEntity moa = ParadiseLostEntityTypes.MOA.create(world);
         MoaGenes genes = moa.getGenes();
         if (stack.isOf(ParadiseLostItems.MOA_EGG)) {
-            genes.readFromNbt(stack.getOrCreateSubNbt("genes"));
+            genes.fromComponent(stack.get(ParadiseLostDataComponentTypes.MOA_GENES));
             genes.owner = owner == null ? UUID.randomUUID() : owner;
         }
         moa.setBreedingAge(-43200);
@@ -180,6 +173,16 @@ public class MoaGenes implements AutoSyncedComponent {
                 }
             });
         }
+    }
+
+    public void fromComponent(ParadiseLostDataComponentTypes.MoaGeneComponent com) {
+        initialized = true;
+        race = MoaAPI.getRace(com.race());
+        affinity = com.affinity().isEmpty() ? race.defaultAffinity() : MoaAttributes.valueOf(com.affinity());
+        legendary = race.legendary();
+        hunger = com.hunger();
+        owner = com.ownerId();
+        com.attributes().iterator().forEachRemaining(attribute -> attributeMap.put(MoaAttributes.valueOf(attribute.attribute()), attribute.value()));
     }
 
     @Override

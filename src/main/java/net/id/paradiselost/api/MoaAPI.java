@@ -1,7 +1,6 @@
 package net.id.paradiselost.api;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMap.Builder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.id.paradiselost.ParadiseLost;
@@ -19,7 +18,6 @@ import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.function.Predicate;
 
 /**
@@ -258,8 +256,7 @@ public class MoaAPI {
      * @param legendary       Whether the created {@code MoaRace} will be legendary
      * @param particles       The particles emitted by this MoaRace, if it is legendary
      */
-    public record MoaRace(MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting,
-                                 boolean glowing, boolean legendary, ParticleType<?> particles) {
+    public record MoaRace(MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting, boolean glowing, boolean legendary, ParticleType<?> particles) {
         public MoaRace(MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting) {
             this(defaultAffinity, statWeighting, false, false, ParticleTypes.ENCHANT);
         }

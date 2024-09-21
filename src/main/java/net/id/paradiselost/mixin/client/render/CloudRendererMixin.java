@@ -1,6 +1,5 @@
 package net.id.paradiselost.mixin.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.minecraft.client.MinecraftClient;
@@ -63,90 +62,80 @@ public final class CloudRendererMixin {
         throw new NullPointerException("null cannot be cast to non-null type net.minecraft.client.world.ClientWorld");
     }
 
-    @Inject(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lorg/joml/Matrix4f;FDDD)V", at = @At("HEAD"), cancellable = true)
-    public void renderClouds(MatrixStack matrices, Matrix4f model, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
+    @Inject(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FDDD)V", at = @At("HEAD"), cancellable = true)
+    public void renderClouds(MatrixStack matrices, Matrix4f matrix4f, Matrix4f matrix4f2, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
         if (world.getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
-            internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, 160, 1f, 1f);
-            internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, 64, 1.25f, -2f);
-            internalCloudRender(matrices, model, tickDelta, cameraX, cameraY, cameraZ, -196, 2f, 1.5f);
+            internalCloudRender(matrices, matrix4f, matrix4f2, tickDelta, cameraX, cameraY, cameraZ, 160, 1f, 1f);
+            internalCloudRender(matrices, matrix4f, matrix4f2, tickDelta, cameraX, cameraY, cameraZ, 64, 1.25f, -2f);
+            internalCloudRender(matrices, matrix4f, matrix4f2, tickDelta, cameraX, cameraY, cameraZ, -196, 2f, 1.5f);
             ci.cancel();
         }
     }
 
     // TODO: Replace this mostly copy-pasted code with some redirects or injections (PL-1.7)
-    private void internalCloudRender(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, double cameraX, double cameraY, double cameraZ, float cloudOffset, float cloudScale, float speedMod) {
-        float cloudHeight = this.world.getDimensionEffects().getCloudsHeight();
-        if (!Float.isNaN(cloudHeight)) {
-            RenderSystem.disableCull();
-            RenderSystem.enableBlend();
-            RenderSystem.enableDepthTest();
-            RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
-            RenderSystem.depthMask(true);
-            double speed = ((this.ticks + tickDelta) * (0.03F * speedMod));
-            double posX = (cameraX + speed) / 12.0D / cloudScale;
-            double posY = (cloudHeight - cameraY + cloudOffset) / cloudScale + 0.33F;
-            double posZ = cameraZ / 12.0D / cloudScale + 0.33000001311302185D;
-            posX -= MathHelper.floor(posX / 2048.0D) * 2048;
-            posZ -= MathHelper.floor(posZ / 2048.0D) * 2048;
-            float adjustedX = (float) (posX - (double) MathHelper.floor(posX));
-            float adjustedY = (float) (posY / 4.0D - (double) MathHelper.floor(posY / 4.0D)) * 4.0F;
-            float adjustedZ = (float) (posZ - (double) MathHelper.floor(posZ));
-            Vec3d cloudColor = this.world.getCloudsColor(tickDelta);
-            int floorX = (int) Math.floor(posX);
-            int floorY = (int) Math.floor(posY / 4.0D);
-            int floorZ = (int) Math.floor(posZ);
-            if (floorX != this.lastCloudsBlockX || floorY != this.lastCloudsBlockY || floorZ != this.lastCloudsBlockZ || this.client.options.getCloudRenderMode().getValue() != this.lastCloudRenderMode || this.lastCloudsColor.squaredDistanceTo(cloudColor) > 2.0E-4D) {
-                this.lastCloudsBlockX = floorX;
-                this.lastCloudsBlockY = floorY;
-                this.lastCloudsBlockZ = floorZ;
-                this.lastCloudsColor = cloudColor;
-                this.lastCloudRenderMode = this.client.options.getCloudRenderMode().getValue();
+    private void internalCloudRender(MatrixStack matrices, Matrix4f matrix4f, Matrix4f matrix4f2, float tickDelta, double cameraX, double cameraY, double cameraZ, float cloudOffset, float cloudScale, float speedMod) {
+        float f = this.world.getDimensionEffects().getCloudsHeight();
+        if (!Float.isNaN(f)) {
+            float g = 12.0F;
+            float h = 4.0F;
+            double d = 2.0E-4;
+            double e = (((float)this.ticks + tickDelta) * 0.03F);
+            double i = (cameraX + e) / 12.0;
+            double j = (f - (float)cameraY + 0.33F);
+            double k = cameraZ / 12.0 + 0.33000001311302185;
+            i -= (MathHelper.floor(i / 2048.0) * 2048);
+            k -= (MathHelper.floor(k / 2048.0) * 2048);
+            float l = (float)(i - (double)MathHelper.floor(i));
+            float m = (float)(j / 4.0 - (double)MathHelper.floor(j / 4.0)) * 4.0F;
+            float n = (float)(k - (double)MathHelper.floor(k));
+            Vec3d vec3d = this.world.getCloudsColor(tickDelta);
+            int o = (int)Math.floor(i);
+            int p = (int)Math.floor(j / 4.0);
+            int q = (int)Math.floor(k);
+            if (o != this.lastCloudsBlockX || p != this.lastCloudsBlockY || q != this.lastCloudsBlockZ || this.client.options.getCloudRenderModeValue() != this.lastCloudRenderMode || this.lastCloudsColor.squaredDistanceTo(vec3d) > 2.0E-4) {
+                this.lastCloudsBlockX = o;
+                this.lastCloudsBlockY = p;
+                this.lastCloudsBlockZ = q;
+                this.lastCloudsColor = vec3d;
+                this.lastCloudRenderMode = this.client.options.getCloudRenderModeValue();
                 this.cloudsDirty = true;
             }
 
-            if (cloudsDirty) {
-                cloudsDirty = false;
+            if (this.cloudsDirty) {
+                this.cloudsDirty = false;
                 BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
-                if (cloudsBuffer != null) {
-                    cloudsBuffer.close();
+                if (this.cloudsBuffer != null) {
+                    this.cloudsBuffer.close();
                 }
-                
-                cloudsBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
-                BufferBuilder.BuiltBuffer builtBuffer = renderClouds(bufferBuilder, posX, posY, posZ, cloudColor);
-                cloudsBuffer.bind();
-                cloudsBuffer.upload(builtBuffer);
+
+                this.cloudsBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
+                BufferBuilder.BuiltBuffer builtBuffer = this.renderClouds(bufferBuilder, i, j, k, vec3d);
+                this.cloudsBuffer.bind();
+                this.cloudsBuffer.upload(builtBuffer);
                 VertexBuffer.unbind();
             }
 
-            RenderSystem.setShader(GameRenderer::getPositionTexColorNormalProgram);
-            RenderSystem.setShaderTexture(0, CLOUDS);
             BackgroundRenderer.applyFogColor();
             matrices.push();
+            matrices.multiplyPositionMatrix(matrix4f);
             matrices.scale(12.0F, 1.0F, 12.0F);
-            matrices.scale(cloudScale, cloudScale, cloudScale);
-            matrices.translate(-adjustedX, adjustedY, -adjustedZ);
-            
-            if (cloudsBuffer != null) {
-                cloudsBuffer.bind();
-                
-                //TODO Double check bytecode, this feels really weird. If this is correct, pure Mojank.
-                int passes = lastCloudRenderMode == CloudRenderMode.FANCY ? 0 : 1;
-                for (int pass = passes; pass < 2; pass++) {
-                    if (pass == 0) {
-                        RenderSystem.colorMask(false, false, false, false);
-                    } else {
-                        RenderSystem.colorMask(true, true, true, true);
-                    }
-                    ShaderProgram shader = RenderSystem.getShader();
-                    cloudsBuffer.draw(matrices.peek().getPositionMatrix(), projectionMatrix, shader);
+            matrices.translate(-l, m, -n);
+            if (this.cloudsBuffer != null) {
+                this.cloudsBuffer.bind();
+                int r = this.lastCloudRenderMode == CloudRenderMode.FANCY ? 0 : 1;
+
+                for(int s = r; s < 2; ++s) {
+                    RenderLayer renderLayer = s == 0 ? RenderLayer.getFancyClouds() : RenderLayer.getFastClouds();
+                    renderLayer.startDrawing();
+                    ShaderProgram shaderProgram = RenderSystem.getShader();
+                    this.cloudsBuffer.draw(matrices.peek().getPositionMatrix(), matrix4f2, shaderProgram);
+                    renderLayer.endDrawing();
                 }
+
                 VertexBuffer.unbind();
             }
 
             matrices.pop();
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.enableCull();
-            RenderSystem.disableBlend();
         }
     }
 }
