@@ -58,38 +58,4 @@ public class ParadiseLostDimension {
 				.registerPostTPPortalAmbience(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRAVEL, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
 				.registerPortal();
     }
-    
-    public static void registerDimensionTypes(MutableRegistry<DimensionType> registry) {
-        registry.add(DIMENSION_TYPE, dimensionType, Lifecycle.stable());
-    }
-    
-    // FIXME This needs to be called again, or replaced.
-    public static void registerDefaultOptions(DynamicRegistryManager registryManager, SimpleRegistry<DimensionOptions> registry, long seed, boolean useInstance) {
-        /*
-        Yes this is awful, no I don't care. It works. Blame Mojang.
-        Rational:
-         They had the super big brain idea to make the server and client datapack logic function differently. This is an
-         ugly but working way to make the server behave a little more like the client for our use case.
-         
-         This still uses the normal JSON files, but it reads them here before the server has a chance to behave
-         differently.
-        */
-        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-            return;
-        }
-    
-        try {
-            registry.add(
-                    OPTIONS_KEY,
-                    MiscUtil.deserializeDataJson(
-                        RegistryOps.of(JsonOps.INSTANCE, registryManager),
-                        DimensionOptions.CODEC,
-                        locate("dimension/paradise_lost")
-                    ),
-                    Lifecycle.stable()
-            );
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read dimension options", e);
-        }
-    }
 }

@@ -30,7 +30,7 @@ public class AxeItemMixin {
 
         if (world.getBlockState(blockPos).getBlock() == ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.log() && !world.isClient) {
             ServerWorld server = (ServerWorld) world;
-            LootTable supplier = server.getServer().getLootManager().getLootTable(ParadiseLostLootTables.MOTHER_AUREL_STRIPPING);
+            LootTable supplier = server.getServer().getReloadableRegistries().getLootTable(ParadiseLostLootTables.MOTHER_AUREL_STRIPPING);
             List<ItemStack> items = supplier.generateLoot(new LootContextParameterSet.Builder(server)
                     .add(LootContextParameters.BLOCK_STATE, world.getBlockState(blockPos))
                     .add(LootContextParameters.ORIGIN, Vec3d.of(blockPos))

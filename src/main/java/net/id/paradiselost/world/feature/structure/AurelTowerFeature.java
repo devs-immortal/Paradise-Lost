@@ -2,6 +2,7 @@ package net.id.paradiselost.world.feature.structure;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.world.feature.structure.generator.AurelTowerGenerator;
 import net.minecraft.structure.*;
@@ -17,7 +18,7 @@ import net.minecraft.world.gen.structure.StructureType;
 import java.util.Optional;
 
 public class AurelTowerFeature extends Structure {
-    public static final Codec<AurelTowerFeature> CODEC = createCodec(AurelTowerFeature::new);
+    public static final MapCodec<AurelTowerFeature> CODEC = createCodec(AurelTowerFeature::new);
     
     private static final int X_OFFSET = 4;
     private static final int Z_OFFSET = 4;
