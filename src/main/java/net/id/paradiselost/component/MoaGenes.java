@@ -38,8 +38,15 @@ public class MoaGenes implements AutoSyncedComponent {
         Random random = world.getRandom();
         ItemStack stack = new ItemStack(ParadiseLostItems.MOA_EGG);
 
-        var attributes = Arrays.stream(MoaAttributes.values()).map(ma -> new ParadiseLostDataComponentTypes.MoaAttributeComponent(ma.name(), race.statWeighting().configure(ma, race, random))).toList();
-        var genes = new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), race.defaultAffinity().name(), baby, 0.0F, "", attributes);
+        float attr1 = race.statWeighting().configure(MoaAttributes.GROUND_SPEED, race, random);
+        float attr2 = race.statWeighting().configure(MoaAttributes.GLIDING_SPEED, race, random);
+        float attr3 = race.statWeighting().configure(MoaAttributes.GLIDING_DECAY, race, random);
+        float attr4 = race.statWeighting().configure(MoaAttributes.JUMPING_STRENGTH, race, random);
+        float attr5 = race.statWeighting().configure(MoaAttributes.DROP_MULTIPLIER, race, random);
+        float attr6 = race.statWeighting().configure(MoaAttributes.MAX_HEALTH, race, random);
+
+        var attributes = new ParadiseLostDataComponentTypes.MoaAttributeComponent(attr1, attr2, attr3, attr4, attr5, attr6);
+        var genes = new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), race.defaultAffinity().name(), baby, 0.0F, null, attributes);
 
         stack.set(ParadiseLostDataComponentTypes.MOA_GENES, genes);
         return stack;
@@ -76,7 +83,6 @@ public class MoaGenes implements AutoSyncedComponent {
         var childRace = MoaAPI.getMoaFromBreeding(this, otherParent, world, pos);
 
         ItemStack stack = new ItemStack(ParadiseLostItems.MOA_EGG);
-        NbtCompound nbt = stack.getOrCreateSubNbt("genes");
         Random random = world.getRandom();
         MoaGenes genes = new MoaGenes();
 
@@ -93,8 +99,8 @@ public class MoaGenes implements AutoSyncedComponent {
         genes.owner = random.nextBoolean() ? this.owner : otherParent.owner;
         genes.initialized = true;
 
-        genes.writeToNbt(nbt);
-        nbt.putBoolean("baby", true);
+        var com = genes.intoComponent();
+        stack.set(ParadiseLostDataComponentTypes.MOA_GENES, com);
         return stack;
     }
 
@@ -182,7 +188,12 @@ public class MoaGenes implements AutoSyncedComponent {
         legendary = race.legendary();
         hunger = com.hunger();
         owner = com.ownerId();
-        com.attributes().iterator().forEachRemaining(attribute -> attributeMap.put(MoaAttributes.valueOf(attribute.attribute()), attribute.value()));
+        attributeMap.put(MoaAttributes.GROUND_SPEED, com.attributes().groundSpeed());
+        attributeMap.put(MoaAttributes.GLIDING_SPEED, com.attributes().glidingSpeed());
+        attributeMap.put(MoaAttributes.GLIDING_DECAY, com.attributes().glidingDecay());
+        attributeMap.put(MoaAttributes.JUMPING_STRENGTH, com.attributes().jumpStrength());
+        attributeMap.put(MoaAttributes.DROP_MULTIPLIER, com.attributes().dropMultiplier());
+        attributeMap.put(MoaAttributes.MAX_HEALTH, com.attributes().maxHealth());
     }
 
     @Override
@@ -199,5 +210,17 @@ public class MoaGenes implements AutoSyncedComponent {
             }
             Arrays.stream(MoaAttributes.values()).forEach(attribute -> tag.putFloat(attribute.name(), attributeMap.getFloat(attribute)));
         }
+    }
+
+    public ParadiseLostDataComponentTypes.MoaGeneComponent intoComponent() {
+        var attributes = new ParadiseLostDataComponentTypes.MoaAttributeComponent(
+                attributeMap.getFloat(MoaAttributes.GROUND_SPEED),
+                attributeMap.getFloat(MoaAttributes.GLIDING_SPEED),
+                attributeMap.getFloat(MoaAttributes.GLIDING_DECAY),
+                attributeMap.getFloat(MoaAttributes.JUMPING_STRENGTH),
+                attributeMap.getFloat(MoaAttributes.DROP_MULTIPLIER),
+                attributeMap.getFloat(MoaAttributes.MAX_HEALTH)
+        );
+        return new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), affinity.name(), true, hunger, owner, attributes);
     }
 }

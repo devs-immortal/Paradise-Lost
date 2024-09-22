@@ -70,8 +70,8 @@ public class SliderEntity extends BlockLikeEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(DIRECTION, Direction.NORTH);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(DIRECTION, Direction.NORTH);
     }
 }

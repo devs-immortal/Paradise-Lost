@@ -1,12 +1,16 @@
 package net.id.paradiselost.screen.handler;
 
 import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
+import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.id.paradiselost.mixin.util.SlotAccessor;
 import net.id.paradiselost.screen.ParadiseLostScreens;
 import net.id.paradiselost.screen.slot.FakeSlot;
 import net.minecraft.block.AbstractChestBlock;
+import net.minecraft.block.BlockSetType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -15,6 +19,10 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SaddleItem;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.Identifier;
@@ -23,6 +31,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import static net.id.paradiselost.ParadiseLost.locate;
 import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
 
 /**
@@ -64,7 +73,7 @@ public class MoaScreenHandler extends ScreenHandler {
     
                 @Override
                 public Pair<Identifier, Identifier> getBackgroundSprite() {
-                    return Pair.of(BLOCK_ATLAS_TEXTURE, ParadiseLost.locate("item/slot/empty_slot_saddle"));
+                    return Pair.of(BLOCK_ATLAS_TEXTURE, locate("item/slot/empty_slot_saddle"));
                 }
             }
         );
@@ -86,7 +95,7 @@ public class MoaScreenHandler extends ScreenHandler {
     
                 @Override
                 public Pair<Identifier, Identifier> getBackgroundSprite() {
-                    return Pair.of(BLOCK_ATLAS_TEXTURE, ParadiseLost.locate("item/slot/empty_slot_chest"));
+                    return Pair.of(BLOCK_ATLAS_TEXTURE, locate("item/slot/empty_slot_chest"));
                 }
             }
         );
@@ -174,5 +183,32 @@ public class MoaScreenHandler extends ScreenHandler {
         }
         slot.onTakeItem(player, stack);
         return result;
+    }
+
+    public record MoaScreenData(int entityId) implements CustomPayload {
+
+        public static Id<MoaScreenData> ID = new Id<>(locate("moa_data"));
+
+
+        public static final Codec<MoaScreenData> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+                Codec.INT.fieldOf("entity_id").forGetter(MoaScreenData::entityId)
+        ).apply(instance, MoaScreenData::new));
+        public static final PacketCodec<RegistryByteBuf, MoaScreenData> PACKET_CODEC;
+
+        static {
+            PACKET_CODEC = PacketCodec.tuple(
+                    PacketCodecs.INTEGER, MoaScreenData::entityId,
+                    MoaScreenData::new
+            );
+        }
+
+        public int entityId() {
+            return this.entityId;
+        }
+
+        @Override
+        public Id<? extends CustomPayload> getId() {
+            return ID;
+        }
     }
 }

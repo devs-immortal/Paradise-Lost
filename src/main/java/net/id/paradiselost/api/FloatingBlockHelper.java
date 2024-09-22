@@ -129,7 +129,7 @@ public interface FloatingBlockHelper {
         BlockState state = world.getBlockState(pos);
         Item heldItem = context.getStack().getItem();
         return world.getBlockEntity(pos) == null && state.getHardness(world, pos) != -1.0F
-                && (!state.isToolRequired() || heldItem.isSuitableFor(state) || (heldItem instanceof GravityWandItem && validForWand(state)))
+                && (!state.isToolRequired() || heldItem.canMine(state, world, pos, context.getPlayer()) || (heldItem instanceof GravityWandItem && validForWand(state)))
                 && !state.isIn(ParadiseLostBlockTags.NON_FLOATERS);
     }
 

@@ -32,9 +32,9 @@ public class EnvoyEntity extends SkeletonEntity {
         return this.dataTracker.get(ENLIGHTENED);
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ENLIGHTENED, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ENLIGHTENED, false);
     }
 
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {

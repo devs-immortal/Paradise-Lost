@@ -325,7 +325,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             if (this.blockEntityData != null && this.blockState.hasBlockEntity()) {
                 BlockEntity blockEntity = this.getWorld().getBlockEntity(blockPos);
                 if (blockEntity != null) {
-                    NbtCompound compoundTag = blockEntity.createNbt();
+                    NbtCompound compoundTag = blockEntity.createNbt(this.getWorld().getRegistryManager());
                     for (String keyName : this.blockEntityData.getKeys()) {
                         NbtElement tag = this.blockEntityData.get(keyName);
                         if (tag != null && !"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName)) {
@@ -333,7 +333,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
                         }
                     }
 
-                    blockEntity.readNbt(compoundTag);
+                    blockEntity.read(compoundTag, this.getWorld().getRegistryManager());
                     blockEntity.markDirty();
                 }
             }
@@ -427,8 +427,8 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        this.dataTracker.startTracking(ORIGIN, BlockPos.ORIGIN);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        builder.add(ORIGIN, BlockPos.ORIGIN);
     }
 
     //@Override

@@ -26,9 +26,9 @@ public abstract class MountableEntity extends ParadiseLostAnimalEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(RIDER_SNEAKING, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(RIDER_SNEAKING, false);
     }
     
     //TODO Should this do more than just `return false;`?

@@ -34,7 +34,7 @@ public class ParadiseLostDataComponentTypes {
 
     // Component Source
 
-    public record MoaGeneComponent(Identifier race, String affinity, boolean isBaby, float hunger, UUID ownerId, List<MoaAttributeComponent> attributes) {
+    public record MoaGeneComponent(Identifier race, String affinity, boolean isBaby, float hunger, UUID ownerId, MoaAttributeComponent attributes) {
 
         public static final Codec<MoaGeneComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
                 Identifier.CODEC.optionalFieldOf("race", ParadiseLost.locate("fallback")).forGetter(MoaGeneComponent::race),
@@ -42,7 +42,7 @@ public class ParadiseLostDataComponentTypes {
                 Codec.BOOL.optionalFieldOf("is_baby", true).forGetter(MoaGeneComponent::isBaby),
                 Codec.FLOAT.optionalFieldOf("hunger", 0.0F).forGetter(MoaGeneComponent::hunger),
                 Uuids.CODEC.optionalFieldOf("owner_id", null).forGetter(MoaGeneComponent::ownerId),
-                MoaAttributeComponent.CODEC.listOf().optionalFieldOf("attributes", List.of()).forGetter(MoaGeneComponent::attributes)
+                MoaAttributeComponent.CODEC.optionalFieldOf("attributes", null).forGetter(MoaGeneComponent::attributes)
         ).apply(instance, MoaGeneComponent::new));
         public static final PacketCodec<RegistryByteBuf, MoaGeneComponent> PACKET_CODEC;
 
@@ -53,7 +53,7 @@ public class ParadiseLostDataComponentTypes {
                     PacketCodecs.BOOL, MoaGeneComponent::isBaby,
                     PacketCodecs.FLOAT, MoaGeneComponent::hunger,
                     Uuids.PACKET_CODEC, MoaGeneComponent::ownerId,
-                    MoaAttributeComponent.PACKET_CODEC.collect(PacketCodecs.toList()), MoaGeneComponent::attributes,
+                    MoaAttributeComponent.PACKET_CODEC, MoaGeneComponent::attributes,
                     MoaGeneComponent::new
             );
         }
@@ -78,34 +78,58 @@ public class ParadiseLostDataComponentTypes {
             return this.ownerId;
         }
 
-        public List<MoaAttributeComponent> attributes() {
+        public MoaAttributeComponent attributes() {
             return this.attributes;
         }
 
     }
 
-    public record MoaAttributeComponent(String attribute, float value) {
+    public record MoaAttributeComponent(float groundSpeed, float glidingSpeed, float glidingDecay, float jumpStrength, float dropMultiplier, float maxHealth) {
 
         public static final Codec<MoaAttributeComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-                Codec.STRING.fieldOf("attribute").forGetter(MoaAttributeComponent::attribute),
-                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::value)
+                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::groundSpeed),
+                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::glidingSpeed),
+                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::glidingDecay),
+                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::jumpStrength),
+                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::dropMultiplier),
+                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::maxHealth)
         ).apply(instance, MoaAttributeComponent::new));
         public static final PacketCodec<RegistryByteBuf, MoaAttributeComponent> PACKET_CODEC;
 
         static {
             PACKET_CODEC = PacketCodec.tuple(
-                    PacketCodecs.STRING, MoaAttributeComponent::attribute,
-                    PacketCodecs.FLOAT, MoaAttributeComponent::value,
+                    PacketCodecs.FLOAT, MoaAttributeComponent::groundSpeed,
+                    PacketCodecs.FLOAT, MoaAttributeComponent::glidingSpeed,
+                    PacketCodecs.FLOAT, MoaAttributeComponent::glidingDecay,
+                    PacketCodecs.FLOAT, MoaAttributeComponent::jumpStrength,
+                    PacketCodecs.FLOAT, MoaAttributeComponent::dropMultiplier,
+                    PacketCodecs.FLOAT, MoaAttributeComponent::maxHealth,
                     MoaAttributeComponent::new
             );
         }
 
-        public String attribute() {
-            return this.attribute;
+        public float groundSpeed() {
+            return this.groundSpeed;
         }
 
-        public float value() {
-            return this.value;
+        public float glidingSpeed() {
+            return this.glidingSpeed;
+        }
+
+        public float glidingDecay() {
+            return this.glidingDecay;
+        }
+
+        public float jumpStrength() {
+            return this.jumpStrength;
+        }
+
+        public float dropMultiplier() {
+            return this.dropMultiplier;
+        }
+
+        public float maxHealth() {
+            return this.maxHealth;
         }
 
     }

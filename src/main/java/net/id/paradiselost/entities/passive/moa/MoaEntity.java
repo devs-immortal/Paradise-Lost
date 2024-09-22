@@ -118,10 +118,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        dataTracker.startTracking(AIR_TICKS, 0);
-        dataTracker.startTracking(CHEST, ItemStack.EMPTY);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(AIR_TICKS, 0);
+        builder.add(CHEST, ItemStack.EMPTY);
     }
     
     /**
@@ -649,6 +649,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         if (!getWorld().isClient && (!hasPassengers() || hasPassenger(player)) && getGenes().isTamed()) {
             player.openHandledScreen(new ExtendedScreenHandlerFactory() {
                 @Override
+                public Object getScreenOpeningData(ServerPlayerEntity player) {
+                    return MoaEntity.this.getId();
+                }
+
+                @Override
                 public Text getDisplayName() {
                     return Text.translatable("container.paradise_lost.moa");
                 }
@@ -656,11 +661,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 @Override
                 public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
                     return new MoaScreenHandler(syncId, inv, inventory, MoaEntity.this);
-                }
-    
-                @Override
-                public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-                    buf.writeVarInt(MoaEntity.this.getId());
                 }
             });
         }

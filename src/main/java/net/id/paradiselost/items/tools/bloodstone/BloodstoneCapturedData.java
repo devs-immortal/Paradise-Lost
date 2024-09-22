@@ -1,5 +1,6 @@
 package net.id.paradiselost.items.tools.bloodstone;
 
+import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -39,8 +40,6 @@ public class BloodstoneCapturedData {
 
     public BloodstoneCapturedData() {
     }
-
-    public static final String NBT_TAG = "capturedEntityData";
 
     public NbtCompound toNBT() {
         NbtCompound nbt = new NbtCompound();
