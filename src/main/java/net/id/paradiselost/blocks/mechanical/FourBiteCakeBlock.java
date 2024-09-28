@@ -46,14 +46,14 @@ public class FourBiteCakeBlock extends Block {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return BITES_TO_SHAPE[state.get(BITES)];
     }
-    
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (world.isClient) {
             if (tryEat(world, pos, state, player).isAccepted()) {
                 return ActionResult.SUCCESS;
             }
-            if (player.getStackInHand(hand).isEmpty()) {
+            if (player.getStackInHand(Hand.MAIN_HAND).isEmpty()) {
                 return ActionResult.CONSUME;
             }
         }
@@ -110,7 +110,7 @@ public class FourBiteCakeBlock extends Block {
     }
     
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+    public boolean canPathfindThrough(BlockState state, NavigationType type) {
         return false;
     }
 }

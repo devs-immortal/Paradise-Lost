@@ -7,8 +7,10 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.FluidDrainable;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.FluidModificationItem;
 import net.minecraft.item.Item;
@@ -43,7 +45,7 @@ public class ParadiseLostDispenserBehaviors {
         @Override
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
             Direction direction = pointer.state().get(DispenserBlock.FACING);
-            EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getNbt());
+            EntityType<?> entityType = ((SpawnEggItem)stack.getItem()).getEntityType(stack);
 
             try {
                 entityType.spawnFromItemStack(pointer.world(), stack, null, pointer.pos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);

@@ -9,7 +9,6 @@ import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.blocks.ParadiseLostWoodTypes;
 import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
 import net.id.paradiselost.client.model.ParadiseLostModelLayers;
-import net.id.paradiselost.client.model.ParadiseLostModelPredicates;
 import net.id.paradiselost.client.model.armor.ParadiseLostArmorModels;
 import net.id.paradiselost.client.rendering.block.ParadiseLostBlockEntityRenderers;
 import net.id.paradiselost.client.rendering.entity.ParadiseLostEntityRenderers;
@@ -30,12 +29,10 @@ import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.gen.carver.ParadiseLostCarvers;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
-import java.lang.invoke.MethodHandle;
+
 import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodHandles.Lookup;
 import java.lang.invoke.MethodType;
 
 /**
@@ -107,7 +104,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
     @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
         initializeCrowdin();
-        ParadiseLostModelPredicates.initClient();
         ParadiseLostArmorModels.initClient();
         ParadiseLostModelLayers.initClient();
         ParadiseLostEntityRenderers.initClient();

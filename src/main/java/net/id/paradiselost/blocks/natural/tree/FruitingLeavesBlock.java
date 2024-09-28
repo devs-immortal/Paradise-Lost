@@ -80,7 +80,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         Random random = world.getRandom();
         int growth = state.get(GROWTH);
 
@@ -93,7 +93,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
                     spawnPetalBurst(world, random, pos);
                 }
             } else {
-                int fortune = EnchantmentHelper.get(player.getStackInHand(hand)).getOrDefault(Enchantments.FORTUNE, 0);
+                int fortune = EnchantmentHelper.getEquipmentLevel(Enchantments.FORTUNE, player);
                 ItemStack drops = new ItemStack(fruit.get(), random.nextInt(fortune + 1 + random.nextInt(1)) + 1);
                 if (!player.giveItemStack(drops)) {
                     ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), drops);
@@ -102,7 +102,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
             return ActionResult.success(world.isClient());
         }
 
-        return super.onUse(state, world, pos, player, hand, hit);
+        return super.onUse(state, world, pos, player, hit);
     }
 
     private void spawnPetalBurst(World world, Random random, BlockPos pos) {

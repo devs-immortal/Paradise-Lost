@@ -79,7 +79,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     public MoaEntity(EntityType<? extends MoaEntity> entityType, World world) {
         super(entityType, world);
-        this.setStepHeight(1.0F);
         this.secsUntilEgg = this.getRandomEggTime();
         refreshChest(false);
     }
@@ -87,7 +86,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public static DefaultAttributeContainer.Builder createMoaAttributes() {
         return createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D)
+                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0);
     }
 
     @Override

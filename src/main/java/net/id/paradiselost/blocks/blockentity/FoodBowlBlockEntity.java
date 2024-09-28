@@ -1,5 +1,6 @@
 package net.id.paradiselost.blocks.blockentity;
 
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.id.paradiselost.blocks.mechanical.FoodBowlBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -31,9 +32,7 @@ public class FoodBowlBlockEntity extends BlockEntity {
             return true;
         }
 
-        Item food = handStack.getItem();
-
-        if (food.isFood() && food.getFoodComponent().isMeat()) {
+        if (handStack.isIn(ConventionalItemTags.RAW_MEATS_FOODS)) {
             if (storedFood.isEmpty()) {
                 inventory.set(0, handStack);
                 player.setStackInHand(hand, ItemStack.EMPTY);
