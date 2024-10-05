@@ -7,6 +7,7 @@ import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.CampfireCookingRecipe;
@@ -30,11 +31,11 @@ public class CherineCampfireBlock extends CampfireBlock {
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof CherineCampfireBlockEntity campfire) {
+        if (blockEntity instanceof CherineCampfireBlockEntity campfireBlockEntity) {
             ItemStack itemStack = player.getStackInHand(hand);
-            Optional<RecipeEntry<CampfireCookingRecipe>> optional = campfire.getRecipeFor(itemStack);
+            Optional<RecipeEntry<CampfireCookingRecipe>> optional = campfireBlockEntity.getRecipeFor(itemStack);
             if (optional.isPresent()) {
-                if (!world.isClient && campfire.addItem(player.getAbilities().creativeMode ? itemStack.copy() : itemStack, optional.get().value().getCookingTime())) {
+                if (!world.isClient && campfireBlockEntity.addItem(player, player.isInCreativeMode() ? itemStack.copy() : itemStack, ((CampfireCookingRecipe)((RecipeEntry)optional.get()).value()).getCookingTime())) {
                     player.incrementStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return ItemActionResult.SUCCESS;
                 }
