@@ -7,7 +7,7 @@
     "item": "minecraft:golden_chestplate"
   },
   "result": {
-    "item": "paradise_lost:glazed_gold_chestplate"
+    "id": "paradise_lost:glazed_gold_chestplate"
   },
   "template": {
     "item": "paradise_lost:glazed_gold_upgrade_smithing_template"

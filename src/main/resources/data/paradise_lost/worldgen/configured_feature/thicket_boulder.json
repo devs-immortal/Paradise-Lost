@@ -21,10 +21,8 @@
     "tries": 6,
     "size": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 5,
-        "min_inclusive": 2
-      }
+      "max_inclusive": 5,
+      "min_inclusive": 2
     }
   }
 }

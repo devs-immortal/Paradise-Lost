@@ -7,7 +7,7 @@
     "item": "minecraft:golden_pickaxe"
   },
   "result": {
-    "item": "paradise_lost:glazed_gold_pickaxe"
+    "id": "paradise_lost:glazed_gold_pickaxe"
   },
   "template": {
     "item": "paradise_lost:glazed_gold_upgrade_smithing_template"

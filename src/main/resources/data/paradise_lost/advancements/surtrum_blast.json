@@ -34,7 +34,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "paradise_lost:surtrum"
+      "id": "paradise_lost:surtrum"
     },
     "show_toast": true,
     "title": {

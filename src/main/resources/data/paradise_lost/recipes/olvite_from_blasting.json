@@ -3,7 +3,9 @@
   "ingredient": {
     "item": "paradise_lost:olvite_ore"
   },
-  "result": "paradise_lost:olvite",
+  "result": {
+    "id": "paradise_lost:olvite"
+  },
   "experience": 0.6,
   "cookingtime": 100
 }

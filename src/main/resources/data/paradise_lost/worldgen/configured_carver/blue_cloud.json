@@ -13,10 +13,8 @@
     },
     "yScale": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_exclusive": 1.1,
-        "min_inclusive": 0.5
-      }
+      "max_exclusive": 1.1,
+      "min_inclusive": 0.5
     },
     "lava_level": {
       "above_bottom": 32
@@ -24,17 +22,13 @@
     "replaceable": "#minecraft:overworld_carver_replaceables",
     "horizontal_radius_multiplier": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_exclusive": 6.75,
-        "min_inclusive": 5.48
-      }
+      "max_exclusive": 6.75,
+      "min_inclusive": 5.48
     },
     "vertical_radius_multiplier": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_exclusive": 0.5,
-        "min_inclusive": 0.3
-      }
+      "max_exclusive": 0.5,
+      "min_inclusive": 0.3
     },
     "cloud_block": {
       "type": "minecraft:simple_state_provider",
@@ -48,17 +42,13 @@
     },
     "yaw_pitch_ratio": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_exclusive": 0.35,
-        "min_inclusive": 0.285
-      }
+      "max_exclusive": 0.35,
+      "min_inclusive": 0.285
     },
     "size_multiplier": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 7,
-        "min_inclusive": 6
-      }
+      "max_inclusive": 7,
+      "min_inclusive": 6
     },
     "max_yaw": {
       "type": "minecraft:constant",

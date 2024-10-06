@@ -10,6 +10,6 @@
     "###"
   ],
   "result": {
-    "item": "minecraft:minecart"
+    "id": "minecraft:minecart"
   }
 }

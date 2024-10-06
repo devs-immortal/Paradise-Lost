@@ -1,6 +1,5 @@
 package net.id.paradiselost.component;
 
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.id.paradiselost.api.MoaAPI;
@@ -11,11 +10,13 @@ import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.Arrays;
 import java.util.UUID;
@@ -152,7 +153,7 @@ public class MoaGenes implements AutoSyncedComponent {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag) {
+    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         initialized = tag.getBoolean("initialized");
         if (initialized) {
             race = MoaAPI.getRace(Identifier.tryParse(tag.getString("raceId")));
@@ -197,7 +198,7 @@ public class MoaGenes implements AutoSyncedComponent {
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag) {
+    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         tag.putBoolean("initialized", initialized);
         if (initialized) {
             tag.putString("raceId", race.getId().toString());

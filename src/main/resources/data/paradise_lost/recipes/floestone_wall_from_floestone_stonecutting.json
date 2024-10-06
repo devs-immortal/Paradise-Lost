@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "paradise_lost:floestone"
   },
-  "result": "paradise_lost:floestone_wall",
-  "count": 1
+  "result": {
+    "id": "paradise_lost:floestone_wall",
+    "count": 1
+  }
 }

@@ -22,7 +22,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "paradise_lost:nitra"
+      "id": "paradise_lost:nitra"
     },
     "show_toast": true,
     "title": {

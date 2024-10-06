@@ -3,7 +3,9 @@
   "ingredient": {
     "item": "paradise_lost:swedroot_pulp"
   },
-  "result": "minecraft:sugar",
+  "result": {
+    "id": "minecraft:sugar"
+  },
   "experience": 0.1,
   "cookingtime": 100
 }

@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "paradise_lost:heliolith"
   },
-  "result": "paradise_lost:heliolith_stairs",
-  "count": 1
+  "result": {
+    "id": "paradise_lost:heliolith_stairs",
+    "count": 1
+  }
 }

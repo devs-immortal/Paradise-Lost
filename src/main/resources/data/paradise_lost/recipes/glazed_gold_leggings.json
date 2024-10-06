@@ -7,7 +7,7 @@
     "item": "minecraft:golden_leggings"
   },
   "result": {
-    "item": "paradise_lost:glazed_gold_leggings"
+    "id": "paradise_lost:glazed_gold_leggings"
   },
   "template": {
     "item": "paradise_lost:glazed_gold_upgrade_smithing_template"

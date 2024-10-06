@@ -7,7 +7,7 @@
       "translate": "advancements.paradise_lost.tame_moa.description"
     },
     "icon": {
-      "item": "minecraft:saddle"
+      "id": "minecraft:saddle"
     },
     "frame": "task",
     "show_toast": true,

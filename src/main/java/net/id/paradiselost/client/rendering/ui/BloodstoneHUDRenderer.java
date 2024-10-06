@@ -30,7 +30,7 @@ import net.minecraft.util.math.MathHelper;
 @Environment(EnvType.CLIENT)
 //probably can be cleaned up
 public class BloodstoneHUDRenderer {
-    public static void render(DrawContext context, float delta) {
+    public static void render(DrawContext context) {
         PlayerEntity player = MinecraftClient.getInstance().player;
         ItemStack stack = player.getMainHandStack();
         if (stack.getItem() instanceof BloodstoneItem) {

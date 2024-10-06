@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "paradise_lost:golden_amber_tile"
   },
-  "result": "paradise_lost:golden_amber_tile_slab",
-  "count": 2
+  "result": {
+    "id": "paradise_lost:golden_amber_tile_slab",
+    "count": 2
+  }
 }

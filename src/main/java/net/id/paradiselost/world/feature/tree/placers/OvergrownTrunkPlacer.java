@@ -2,6 +2,7 @@ package net.id.paradiselost.world.feature.tree.placers;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradiselost.world.feature.tree.ParadiseLostTreeHell;
 import net.minecraft.block.BlockState;
@@ -23,7 +24,7 @@ import java.util.function.BiConsumer;
 public class OvergrownTrunkPlacer extends TrunkPlacer {
 
     @SuppressWarnings("CodeBlock2Expr")
-    public static final Codec<OvergrownTrunkPlacer> CODEC = RecordCodecBuilder.create((instance) -> {
+    public static final MapCodec<OvergrownTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
         return instance.group(Codec.intRange(0, 32).fieldOf("base_height").forGetter((placer) -> {
             return placer.baseHeight;
         }), Codec.intRange(0, 24).fieldOf("height_rand_a").forGetter((placer) -> {

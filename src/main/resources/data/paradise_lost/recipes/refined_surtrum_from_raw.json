@@ -3,7 +3,9 @@
   "ingredient": {
     "item": "paradise_lost:surtrum"
   },
-  "result": "paradise_lost:refined_surtrum",
+  "result": {
+    "id": "paradise_lost:refined_surtrum"
+  },
   "experience": 0.8,
   "cookingtime": 200
 }

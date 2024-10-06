@@ -7,7 +7,7 @@
     "item": "minecraft:golden_shovel"
   },
   "result": {
-    "item": "paradise_lost:glazed_gold_shovel"
+    "id": "paradise_lost:glazed_gold_shovel"
   },
   "template": {
     "item": "paradise_lost:glazed_gold_upgrade_smithing_template"

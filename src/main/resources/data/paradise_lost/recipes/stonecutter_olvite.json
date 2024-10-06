@@ -13,6 +13,6 @@
     "###"
   ],
   "result": {
-    "item": "minecraft:stonecutter"
+    "id": "minecraft:stonecutter"
   }
 }

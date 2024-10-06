@@ -493,7 +493,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
         compound.putInt("airTicks", dataTracker.get(AIR_TICKS));
-        compound.put("chest", dataTracker.get(CHEST).encode(this.getRegistryManager()));
+        compound.put("chest", dataTracker.get(CHEST).encodeAllowEmpty(this.getRegistryManager()));
         if (inventory != DUMMY) {
             compound.put("chestContents", inventory.toNbtList(this.getRegistryManager()));
         }

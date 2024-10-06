@@ -1,6 +1,7 @@
 package net.id.paradiselost.world.feature.tree.placers;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradiselost.world.feature.tree.ParadiseLostTreeHell;
 import net.minecraft.block.BlockState;
@@ -26,7 +27,7 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
      * https://www.desmos.com/calculator/n4q9yugst4
      */
 
-    public static final Codec<WisteriaTrunkPlacer> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<WisteriaTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             IntProvider.VALUE_CODEC.fieldOf("max_branch_range").forGetter(placer -> placer.maxBranchRange),
             IntProvider.VALUE_CODEC.fieldOf("branch_count").forGetter(placer -> placer.branchCount),
             FloatProvider.VALUE_CODEC.fieldOf("branch_range").forGetter(placer -> placer.branchRange),

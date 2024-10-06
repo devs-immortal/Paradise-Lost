@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntityRenderer.class)
 public class LivingEntityRendererMixin {
     @Inject(method = "setupTransforms", at = @At("TAIL"))
-    private void setupTransforms(LivingEntity entity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta, CallbackInfo ci) {
+    private void setupTransforms(LivingEntity entity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta, float scale, CallbackInfo ci) {
         if (((ParadiseLostEntityExtensions) entity).getFlipped()) {
             if (!(entity instanceof PlayerEntity)) {
                 matrices.translate(0.0D, entity.getHeight() + 0.1F, 0.0D);

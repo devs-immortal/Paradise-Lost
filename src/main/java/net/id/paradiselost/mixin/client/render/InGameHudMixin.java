@@ -26,7 +26,7 @@ public abstract class InGameHudMixin {
     protected abstract void renderOverlay(DrawContext context, Identifier texture, float opacity);
 
     @Inject(method = "renderHotbar", at = @At("HEAD"))
-    public void renderOverlay(float tickDelta, DrawContext context, CallbackInfo ci) {
+    public void renderOverlay(DrawContext context, float tickDelta, CallbackInfo ci) {
         List<ParadiseLostOverlayRegistrar.Overlay> overlays = ParadiseLostOverlayRegistrar.getOverlays();
         Entity entity = MinecraftClient.getInstance().cameraEntity;
         if (entity instanceof LivingEntity player) {
@@ -36,11 +36,11 @@ public abstract class InGameHudMixin {
                 }
             });
         }
+        BloodstoneHUDRenderer.render(context);
     }
 
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;render(Lnet/minecraft/client/gui/DrawContext;)V"))
-    public void renderBloodstone(DrawContext context, float tickDelta, CallbackInfo ci) {
-        // TODO: probably move this inject to somewhere else (PL-1.7)
-        BloodstoneHUDRenderer.render(context, tickDelta);
-    }
+//    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;render(Lnet/minecraft/client/gui/DrawContext;)V"))
+//    public void renderBloodstone(DrawContext context, CallbackInfo ci) {
+//        // TODO: probably move this inject to somewhere else (PL-1.7)
+//    }
 }

@@ -7,7 +7,7 @@
     "item": "minecraft:golden_boots"
   },
   "result": {
-    "item": "paradise_lost:glazed_gold_boots"
+    "id": "paradise_lost:glazed_gold_boots"
   },
   "template": {
     "item": "paradise_lost:glazed_gold_upgrade_smithing_template"

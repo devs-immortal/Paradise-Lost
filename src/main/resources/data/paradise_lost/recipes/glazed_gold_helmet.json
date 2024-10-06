@@ -7,7 +7,7 @@
     "item": "minecraft:golden_helmet"
   },
   "result": {
-    "item": "paradise_lost:glazed_gold_helmet"
+    "id": "paradise_lost:glazed_gold_helmet"
   },
   "template": {
     "item": "paradise_lost:glazed_gold_upgrade_smithing_template"

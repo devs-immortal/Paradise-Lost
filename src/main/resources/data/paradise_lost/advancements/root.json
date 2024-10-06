@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "paradise_lost:chiseled_floestone"
+      "id": "paradise_lost:chiseled_floestone"
     },
     "title": {
       "translate": "advancements.paradise_lost.root.title",

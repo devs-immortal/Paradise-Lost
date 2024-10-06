@@ -10,10 +10,8 @@
     "tries": 3,
     "size": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 5,
-        "min_inclusive": 3
-      }
+      "max_inclusive": 5,
+      "min_inclusive": 3
     }
   }
 }

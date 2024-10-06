@@ -1,6 +1,7 @@
 package net.id.paradiselost.mixin.item;
 
 import net.id.paradiselost.util.MapDimensionData;
+import net.minecraft.component.type.MapIdComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.map.MapState;
 import net.minecraft.network.packet.Packet;
@@ -21,9 +22,8 @@ public class MapStateMixin {
     public RegistryKey<World> dimension;
 
     @Inject(method = "getPlayerMarkerPacket", at = @At("RETURN"), cancellable = true)
-    public void addDimensionData(int id, PlayerEntity player, CallbackInfoReturnable<Packet<?>> cir) {
+    public void addDimensionData(MapIdComponent mapId, PlayerEntity player, CallbackInfoReturnable<Packet<?>> cir) {
         Packet<?> packetData = cir.getReturnValue();
-
         if (packetData instanceof MapDimensionData) {
             ((MapDimensionData) packetData).setDimension(dimension);
         }

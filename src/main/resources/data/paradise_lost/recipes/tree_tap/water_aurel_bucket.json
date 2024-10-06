@@ -6,7 +6,7 @@
   "tapped_block": "paradise_lost:wisteria_log",
   "result_block": "paradise_lost:wisteria_log",
   "result": {
-    "item": "paradise_lost:aurel_water_bucket"
+    "id": "paradise_lost:aurel_water_bucket"
   },
   "chance": 2
 }

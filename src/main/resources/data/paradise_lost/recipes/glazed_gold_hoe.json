@@ -7,7 +7,7 @@
     "item": "minecraft:golden_hoe"
   },
   "result": {
-    "item": "paradise_lost:glazed_gold_hoe"
+    "id": "paradise_lost:glazed_gold_hoe"
   },
   "template": {
     "item": "paradise_lost:glazed_gold_upgrade_smithing_template"

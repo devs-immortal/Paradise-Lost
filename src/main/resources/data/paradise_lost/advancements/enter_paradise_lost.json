@@ -2,7 +2,7 @@
   "parent": "paradise_lost:bloomed_calcite_craft",
   "display": {
     "icon": {
-      "item": "paradise_lost:bloomed_calcite"
+      "id": "paradise_lost:bloomed_calcite"
     },
     "title": {
       "translate": "advancements.paradise_lost.enter_paradise_lost.title"

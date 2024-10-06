@@ -20,31 +20,23 @@
     },
     "height": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 5,
-        "min_inclusive": 3
-      }
+      "max_inclusive": 5,
+      "min_inclusive": 3
     },
     "width": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 10,
-        "min_inclusive": 6
-      }
+      "max_inclusive": 10,
+      "min_inclusive": 6
     },
     "length": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 10,
-        "min_inclusive": 4
-      }
+      "max_inclusive": 10,
+      "min_inclusive": 4
     },
     "length_offset": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 6,
-        "min_inclusive": 3
-      }
+      "max_inclusive": 6,
+      "min_inclusive": 3
     }
   }
 }

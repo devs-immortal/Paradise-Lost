@@ -13,10 +13,8 @@
       "offset": 0,
       "radius": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 5,
-          "min_inclusive": 3
-        }
+        "max_inclusive": 5,
+        "min_inclusive": 3
       }
     },
     "foliage_provider": {
@@ -42,31 +40,23 @@
       "type": "paradise_lost:wisteria_trunk_placer",
       "max_branch_range": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 4,
-          "min_inclusive": 3
-        }
+        "max_inclusive": 4,
+        "min_inclusive": 3
       },
       "branch_count": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 4,
-          "min_inclusive": 3
-        }
+        "max_inclusive": 4,
+        "min_inclusive": 3
       },
       "branch_range": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_exclusive": 3.0,
-          "min_inclusive": 1.5
-        }
+        "max_exclusive": 3.0,
+        "min_inclusive": 1.5
       },
       "branch_height": {
         "type": "minecraft:uniform",
-        "value": {
-          "max_exclusive": 10.0,
-          "min_inclusive": 6.0
-        }
+        "max_exclusive": 10.0,
+        "min_inclusive": 6.0
       },
       "base_height": 4,
       "height_rand_a": 3,

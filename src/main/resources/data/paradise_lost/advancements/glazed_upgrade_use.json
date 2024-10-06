@@ -118,7 +118,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "paradise_lost:glazed_gold_pickaxe"
+      "id": "paradise_lost:glazed_gold_pickaxe"
     },
     "show_toast": true,
     "title": {

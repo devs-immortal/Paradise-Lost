@@ -23,7 +23,6 @@
     "item.MapStateMixin",
     "item.PotionItemMixin",
     "item.ShearsMixin",
-    "item.SwordItemAccessor",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",

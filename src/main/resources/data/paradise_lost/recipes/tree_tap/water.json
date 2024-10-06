@@ -6,7 +6,7 @@
   "tapped_block": "paradise_lost:wisteria_log",
   "result_block": "paradise_lost:wisteria_log",
   "result": {
-    "item": "minecraft:potion",
+    "id": "minecraft:potion",
     "nbt": {
       "Potion": "minecraft:water"
     }

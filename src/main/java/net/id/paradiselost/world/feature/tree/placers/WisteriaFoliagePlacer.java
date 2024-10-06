@@ -1,7 +1,9 @@
 package net.id.paradiselost.world.feature.tree.placers;
 
 import com.google.common.collect.Sets;
+import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostHangerBlock;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
@@ -15,6 +17,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
@@ -22,8 +25,11 @@ import java.util.Set;
 
 public class WisteriaFoliagePlacer extends FoliagePlacer {
 
-    public static final Codec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
-            fillFoliagePlacerFields(instance).apply(instance, WisteriaFoliagePlacer::new));
+    public static final MapCodec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> createCodec(instance).apply(instance, WisteriaFoliagePlacer::new));
+
+    protected static <P extends WisteriaFoliagePlacer> Products.P2<RecordCodecBuilder.Mu<P>, IntProvider, IntProvider> createCodec(RecordCodecBuilder.Instance<P> builder) {
+        return fillFoliagePlacerFields(builder);
+    }
 
     public WisteriaFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);

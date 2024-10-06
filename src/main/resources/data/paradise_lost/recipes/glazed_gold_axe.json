@@ -7,7 +7,7 @@
     "item": "minecraft:golden_axe"
   },
   "result": {
-    "item": "paradise_lost:glazed_gold_axe"
+    "id": "paradise_lost:glazed_gold_axe"
   },
   "template": {
     "item": "paradise_lost:glazed_gold_upgrade_smithing_template"

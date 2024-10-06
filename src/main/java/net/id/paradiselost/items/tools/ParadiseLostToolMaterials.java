@@ -24,6 +24,7 @@ public class ParadiseLostToolMaterials {
 
     static class ParadiseToolMaterial implements ToolMaterial {
 
+        private final TagKey<Block> incorrectTag;
         private final int miningLevel;
         private final int itemDurability;
         private final float miningSpeed;
@@ -31,7 +32,8 @@ public class ParadiseLostToolMaterials {
         private final int enchantability;
         private final Lazy<Ingredient> repairIngredient;
 
-        ParadiseToolMaterial(TagKey incorrect, int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
+        ParadiseToolMaterial(final TagKey incorrect, int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
+            this.incorrectTag = incorrect;
             this.miningLevel = miningLevel;
             this.itemDurability = itemDurability;
             this.miningSpeed = miningSpeed;
@@ -40,7 +42,7 @@ public class ParadiseLostToolMaterials {
             this.repairIngredient = new Lazy(repairIngredient);
         }
 
-        public static ParadiseToolMaterial create(TagKey incorrect, int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
+        public static ParadiseToolMaterial create(final TagKey incorrect, int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
             return new ParadiseToolMaterial(incorrect, miningLevel, itemDurability, miningSpeed, attackDamage, enchantability, repairIngredient);
         }
 
@@ -58,7 +60,7 @@ public class ParadiseLostToolMaterials {
 
         @Override
         public TagKey<Block> getInverseTag() {
-            return null;
+            return this.incorrectTag;
         }
 
         public int getMiningLevel() {
