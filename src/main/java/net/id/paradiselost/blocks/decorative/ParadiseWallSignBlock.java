@@ -14,9 +14,9 @@ public class ParadiseWallSignBlock extends WallSignBlock {
         super(woodType, settings);
     }
 
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
-        this.lootTableId = identifier.withPrefixedPath("blocks/");
-        return new ParadiseSignBlockEntity(pos, state);
-    }
+//    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+//        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
+//        this.lootTableId = identifier.withPrefixedPath("blocks/");
+//        return new ParadiseSignBlockEntity(pos, state);
+//    }
 }

@@ -18,12 +18,10 @@ public enum MoaAttributes {
         this.gradeInterval = gradeInterval;
     }
 
-    public String getRatingTierTranslationKey(MoaEntity moa) {
+    public String getRatingTierTranslationKey(float attribute) {
         if (min > max) {
-            return getRatingTierInverse(moa);
+            return getRatingTierInverse(attribute);
         }
-
-        float attribute = getAttribute(moa);
 
         if (attribute <= min) {
             return getRatingTierTranslationKey(1);
@@ -42,9 +40,7 @@ public enum MoaAttributes {
     }
 
     //used when smaller is better
-    public String getRatingTierInverse(MoaEntity moa) {
-        float attribute = getAttribute(moa);
-
+    public String getRatingTierInverse(float attribute) {
         if (attribute <= min) {
             return getRatingTierTranslationKey(1);
         }

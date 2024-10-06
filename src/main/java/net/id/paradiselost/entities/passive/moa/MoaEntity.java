@@ -3,12 +3,14 @@ package net.id.paradiselost.entities.passive.moa;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.id.paradiselost.blocks.blockentity.FoodBowlBlockEntity;
 import net.id.paradiselost.component.MoaGenes;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.util.SaddleMountEntity;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.items.tools.bloodstone.BloodstoneItem;
+import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.id.paradiselost.screen.handler.MoaScreenHandler;
 import net.id.paradiselost.tag.ParadiseLostItemTags;
 import net.id.paradiselost.util.DummyInventory;
@@ -16,6 +18,7 @@ import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.AbstractChestBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -39,7 +42,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -51,7 +53,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -104,12 +105,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         if (!genes.isInitialized()) {
             genes.initMoa(this);
             setHealth(genes.getAttribute(MoaAttributes.MAX_HEALTH));
         }
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     @Override
@@ -437,7 +438,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 }
                 
                 var item = heldStack.getItem();
-                if (item.isFood() && item.getFoodComponent().isMeat()) {
+                if (heldStack.isIn(ConventionalItemTags.RAW_MEATS_FOODS)) {
                     feedMob(heldStack);
                     return ActionResult.success(getWorld().isClient());
                 } else if (!hasChest() && item instanceof BlockItem blockItem && blockItem.getBlock() instanceof AbstractChestBlock) {
@@ -457,7 +458,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     produceParticlesServer(new ItemStackParticleEffect(ParticleTypes.ITEM, heldStack), 2 + random.nextInt(4), 7, 0);
                     //spawnConsumptionEffects(heldStack, 7 + random.nextInt(13));
 
-                    if (random.nextFloat() < 0.04F * (heldStack.isFood() ? heldStack.getItem().getFoodComponent().getHunger() : 2)) {
+                    var foodComponent = heldStack.getOrDefault(DataComponentTypes.FOOD, null);
+                    if (random.nextFloat() < 0.04F * (foodComponent == null ? 2 : foodComponent.nutrition())) {
                         getGenes().tame(player.getUuid());
                         playSound(ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, 2, 0.75F);
                         produceParticlesServer(ParticleTypes.HAPPY_VILLAGER, 2 + random.nextInt(4), 7, 0);
@@ -474,7 +476,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     private void feedMob(ItemStack heldStack) {
-        float hungerRestored = heldStack.getItem().getFoodComponent().getHunger() * 4;
+        float hungerRestored = heldStack.get(DataComponentTypes.FOOD).nutrition() * 4;
         float satiation = getGenes().getHunger();
         float hunger = 100 - satiation;
         if (hunger > 1) {
@@ -491,9 +493,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
         compound.putInt("airTicks", dataTracker.get(AIR_TICKS));
-        compound.put("chest", dataTracker.get(CHEST).writeNbt(new NbtCompound()));
+        compound.put("chest", dataTracker.get(CHEST).encode(this.getRegistryManager()));
         if (inventory != DUMMY) {
-            compound.put("chestContents", inventory.toNbtList());
+            compound.put("chestContents", inventory.toNbtList(this.getRegistryManager()));
         }
     }
 
@@ -501,10 +503,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void readCustomDataFromNbt(NbtCompound compound) {
         super.readCustomDataFromNbt(compound);
         dataTracker.set(AIR_TICKS, compound.getInt("airTicks"));
-        dataTracker.set(CHEST, ItemStack.fromNbt(compound.getCompound("chest")));
+        dataTracker.set(CHEST, ItemStack.fromNbtOrEmpty(this.getRegistryManager(), compound.getCompound("chest")));
         refreshChest(false);
         if (inventory != DUMMY) {
-            inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE));
+            inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE), this.getRegistryManager());
         }
     }
 
@@ -571,13 +573,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             return null;
         }
         var babyGenes = baby.getGenes();
-        babyGenes.readFromNbt(eggStack.getOrCreateSubNbt("genes"));
+        babyGenes.fromComponent(eggStack.get(ParadiseLostDataComponentTypes.MOA_GENES));
         return baby;
-    }
-
-    @Override
-    public Identifier getLootTableId() {
-        return null;
     }
 
     @Override
@@ -667,12 +664,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     @Override
-    protected Vector3f getPassengerAttachmentPos(Entity passenger, EntityDimensions dimensions, float scaleFactor) {
-        return new Vector3f(0.0F, this.getPassengerAttachmentY(dimensions, scaleFactor), 0.0F);
+    protected Vec3d getPassengerAttachmentPos(Entity passenger, EntityDimensions dimensions, float scaleFactor) {
+        return new Vec3d(0.0F, this.getPassengerAttachmentY(dimensions, scaleFactor), 0.0F);
     }
 
     protected float getPassengerAttachmentY(EntityDimensions dimensions, float scaleFactor) {
-        return dimensions.height + -0.75F * scaleFactor;
+        return dimensions.height() + -0.75F * scaleFactor;
     }
     
     /**
@@ -716,7 +713,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         protected boolean isTargetPos(WorldView world, BlockPos pos) {
             if (world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
                 ItemStack foodStack = foodBowl.getContainedItem();
-                return foodStack.isFood() && foodStack.getItem().getFoodComponent().isMeat();
+                return foodStack.isIn(ConventionalItemTags.RAW_MEATS_FOODS);
             }
             return false;
         }
@@ -737,7 +734,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         protected void tryEat() {
             if (getWorld().getBlockEntity(targetPos) instanceof FoodBowlBlockEntity foodBowl) {
                 ItemStack foodStack = foodBowl.getContainedItem();
-                if (foodStack.isFood() && foodStack.getItem().getFoodComponent().isMeat()) {
+                if (foodStack.isIn(ConventionalItemTags.RAW_MEATS_FOODS)) {
                     feedMob(foodStack);
                 }
             }

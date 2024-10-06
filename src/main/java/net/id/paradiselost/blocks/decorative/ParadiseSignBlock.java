@@ -13,13 +13,13 @@ public class ParadiseSignBlock extends SignBlock {
 
     public ParadiseSignBlock(Settings settings, WoodType woodType) {
         super(woodType, settings);
-        this.lootTableId = null;
+//        this.lootTableId = null;
     }
 
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
-        this.lootTableId = identifier.withPrefixedPath("blocks/");
-        return new ParadiseSignBlockEntity(pos, state);
-    }
+//    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+//        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
+//        this.lootTableId = identifier.withPrefixedPath("blocks/");
+//        return new ParadiseSignBlockEntity(pos, state);
+//    }
 
 }

@@ -2,6 +2,7 @@ package net.id.paradiselost.items.tools.bloodstone;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.client.item.TooltipType;
 import net.minecraft.entity.LivingEntity;
@@ -37,7 +38,10 @@ public abstract class BloodstoneItem extends Item {
     public ActionResult useOnEntity(ItemStack unused, PlayerEntity user, LivingEntity entity, Hand hand) {
         var stack = user.getStackInHand(hand);
         BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromEntity(entity);
-        stack.getOrCreateNbt().put(BloodstoneCapturedData.NBT_TAG, capturedData.toNBT());
+        if (capturedData.isMoa) {
+            stack.set(ParadiseLostDataComponentTypes.MOA_GENES, capturedData.moaGeneComponent);
+        }
+        stack.set(ParadiseLostDataComponentTypes.BLOODSTONE, capturedData.bloodstoneComponent);
         playPrickEffects(user.getWorld(), entity.getBlockPos());
         return ActionResult.success(user.getWorld().isClient());
     }
@@ -47,7 +51,7 @@ public abstract class BloodstoneItem extends Item {
         if (user.isSneaking()) {
             ItemStack stack = user.getStackInHand(hand);
             BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromEntity(user);
-            stack.getOrCreateNbt().put(BloodstoneCapturedData.NBT_TAG, capturedData.toNBT());
+            stack.set(ParadiseLostDataComponentTypes.BLOODSTONE, capturedData.bloodstoneComponent);
             playPrickEffects(user.getWorld(), user.getBlockPos());
             return TypedActionResult.success(stack);
         }

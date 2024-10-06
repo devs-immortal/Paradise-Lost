@@ -9,8 +9,11 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
+import net.minecraft.text.TextCodecs;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Uuids;
+import net.minecraft.util.dynamic.Codecs;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +26,7 @@ public class ParadiseLostDataComponentTypes {
     // Registered Components
 
     public static final DataComponentType<MoaGeneComponent> MOA_GENES = register("moa_genes", (builder) -> builder.codec(MoaGeneComponent.CODEC).packetCodec(MoaGeneComponent.PACKET_CODEC).cache());
-
+    public static final DataComponentType<BloodstoneComponent> BLOODSTONE = register("bloodstone", (builder) -> builder.codec(BloodstoneComponent.CODEC).packetCodec(BloodstoneComponent.PACKET_CODEC));
 
 
     // Util
@@ -87,12 +90,12 @@ public class ParadiseLostDataComponentTypes {
     public record MoaAttributeComponent(float groundSpeed, float glidingSpeed, float glidingDecay, float jumpStrength, float dropMultiplier, float maxHealth) {
 
         public static final Codec<MoaAttributeComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::groundSpeed),
-                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::glidingSpeed),
-                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::glidingDecay),
-                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::jumpStrength),
-                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::dropMultiplier),
-                Codec.FLOAT.fieldOf("value").forGetter(MoaAttributeComponent::maxHealth)
+                Codec.FLOAT.fieldOf("ground_speed").forGetter(MoaAttributeComponent::groundSpeed),
+                Codec.FLOAT.fieldOf("gliding_speed").forGetter(MoaAttributeComponent::glidingSpeed),
+                Codec.FLOAT.fieldOf("gliding_decay").forGetter(MoaAttributeComponent::glidingDecay),
+                Codec.FLOAT.fieldOf("jump_strength").forGetter(MoaAttributeComponent::jumpStrength),
+                Codec.FLOAT.fieldOf("drop_multiplier").forGetter(MoaAttributeComponent::dropMultiplier),
+                Codec.FLOAT.fieldOf("max_health").forGetter(MoaAttributeComponent::maxHealth)
         ).apply(instance, MoaAttributeComponent::new));
         public static final PacketCodec<RegistryByteBuf, MoaAttributeComponent> PACKET_CODEC;
 
@@ -130,6 +133,56 @@ public class ParadiseLostDataComponentTypes {
 
         public float maxHealth() {
             return this.maxHealth;
+        }
+
+    }
+
+    public record BloodstoneComponent(UUID uuid, Text name, String health, String defense, String toughness, String owner) {
+
+        public static final Codec<BloodstoneComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+                Uuids.CODEC.fieldOf("uuid").forGetter(BloodstoneComponent::uuid),
+                TextCodecs.CODEC.fieldOf("name").forGetter(BloodstoneComponent::name),
+                Codec.STRING.fieldOf("health").forGetter(BloodstoneComponent::health),
+                Codec.STRING.fieldOf("defense").forGetter(BloodstoneComponent::defense),
+                Codec.STRING.fieldOf("toughness").forGetter(BloodstoneComponent::toughness),
+                Codec.STRING.fieldOf("owner").forGetter(BloodstoneComponent::owner)
+        ).apply(instance, BloodstoneComponent::new));
+        public static final PacketCodec<RegistryByteBuf, BloodstoneComponent> PACKET_CODEC;
+
+        static {
+            PACKET_CODEC = PacketCodec.tuple(
+                    Uuids.PACKET_CODEC, BloodstoneComponent::uuid,
+                    TextCodecs.PACKET_CODEC, BloodstoneComponent::name,
+                    PacketCodecs.STRING, BloodstoneComponent::health,
+                    PacketCodecs.STRING, BloodstoneComponent::defense,
+                    PacketCodecs.STRING, BloodstoneComponent::toughness,
+                    PacketCodecs.STRING, BloodstoneComponent::owner,
+                    BloodstoneComponent::new
+            );
+        }
+
+        public UUID uuid() {
+            return this.uuid;
+        }
+
+        public Text name() {
+            return this.name;
+        }
+
+        public String health() {
+            return this.health;
+        }
+
+        public String defense() {
+            return this.defense;
+        }
+
+        public String toughness() {
+            return this.toughness;
+        }
+
+        public String owner() {
+            return this.owner;
         }
 
     }

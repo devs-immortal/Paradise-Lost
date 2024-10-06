@@ -15,10 +15,10 @@ public class ParadiseWallHangingSignBlock extends WallHangingSignBlock {
         super(woodType, settings);
     }
 
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
-        this.lootTableId = identifier.withPrefixedPath("blocks/");
-        return new ParadiseHangingSignBlockEntity(pos, state);
-    }
+//    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+//        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
+//        this.lootTableId = identifier.withPrefixedPath("blocks/");
+//        return new ParadiseHangingSignBlockEntity(pos, state);
+//    }
 
 }

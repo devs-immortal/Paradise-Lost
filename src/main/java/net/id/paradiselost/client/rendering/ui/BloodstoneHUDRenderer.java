@@ -5,7 +5,11 @@ import java.util.function.Function;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.ParadiseLost;
+import net.id.paradiselost.api.MoaAPI;
+import net.id.paradiselost.entities.passive.moa.MoaAttributes;
+import net.id.paradiselost.entities.passive.moa.MoaRaces;
 import net.id.paradiselost.items.tools.bloodstone.*;
+import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.texture.Sprite;
@@ -30,10 +34,10 @@ public class BloodstoneHUDRenderer {
         PlayerEntity player = MinecraftClient.getInstance().player;
         ItemStack stack = player.getMainHandStack();
         if (stack.getItem() instanceof BloodstoneItem) {
-            NbtCompound nbt = stack.getOrCreateNbt();
-            if (nbt.contains(BloodstoneCapturedData.NBT_TAG)) {
+            var hasBloodstoneData = stack.getComponents().stream().anyMatch((c) -> c.type() == ParadiseLostDataComponentTypes.MOA_GENES || c.type() == ParadiseLostDataComponentTypes.BLOODSTONE);
+            if (hasBloodstoneData) {
                 MinecraftClient client = MinecraftClient.getInstance();
-                BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromNBT(nbt.getCompound(BloodstoneCapturedData.NBT_TAG));
+                BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromComponents(stack);
                 if (client.currentScreen == null && isLookingAtMatchingEntity(client, capturedData) || doUUIDMatch(player, capturedData)) {
                     var matrixStack = context.getMatrices();
                     matrixStack.push();
@@ -46,8 +50,6 @@ public class BloodstoneHUDRenderer {
                         renderOlvite(context, client, capturedData);
                     } else if (stack.getItem() instanceof SurtrumBloodstoneItem) {
                         renderSurtrum(context, client, capturedData);
-                    } else if (stack.getItem() instanceof AbstentineBloodstoneItem) {
-                        renderAbstentine(context, client, capturedData);
                     }
                     RenderSystem.disableBlend();
                     matrixStack.pop();
@@ -73,16 +75,17 @@ public class BloodstoneHUDRenderer {
     }
 
     private static boolean doUUIDMatch(LivingEntity entity, BloodstoneCapturedData capturedData) {
-        return capturedData.uuid.equals(entity.getUuid());
+        return capturedData.bloodstoneComponent.uuid().equals(entity.getUuid());
     }
 
     private static void renderCherine(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
         renderRing(context, 0, 0);
-        renderText(context, client, bloodstoneCapturedData.name, 0, -80);
-        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.REGENERATION), Text.literal(bloodstoneCapturedData.HP), 0, 80);
-        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.RESISTANCE), Text.literal(bloodstoneCapturedData.DF), -80, 0);
-        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), Text.literal(bloodstoneCapturedData.TF), 80, 0);
+        var component = bloodstoneCapturedData.bloodstoneComponent;
+        renderText(context, client, component.name(), 0, -80);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.REGENERATION), Text.literal(component.health()), 0, 80);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.RESISTANCE), Text.literal(component.defense()), -80, 0);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.ABSORPTION), Text.literal(component.toughness()), 80, 0);
     }
 
     private static void renderOlvite(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
@@ -92,32 +95,23 @@ public class BloodstoneHUDRenderer {
         Sprite raceSprite = effectAtlas.apply(ParadiseLost.locate("item/icons/race"));
 
         renderRing(context, 0, 0);
-        renderText(context, client, bloodstoneCapturedData.name, 0, -80);
+        renderText(context, client, bloodstoneCapturedData.bloodstoneComponent.name(), 0, -80);
 
-        renderIconWText(context, client, affinitySprite, Text.translatable(bloodstoneCapturedData.Affinity), 76, -25);
-        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), Text.literal(bloodstoneCapturedData.Owner), 47, 65);
-        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), Text.literal(bloodstoneCapturedData.Hunger), -47, 65);
-        renderIconWText(context, client, raceSprite, Text.translatable(bloodstoneCapturedData.Race), -76, -25);
+        renderIconWText(context, client, affinitySprite, Text.translatable(MoaAttributes.valueOf(bloodstoneCapturedData.moaGeneComponent.affinity()).getTranslationKey()), 76, -25);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), Text.literal(bloodstoneCapturedData.bloodstoneComponent.owner()), 47, 65);
+        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), Text.literal(String.format("%.1f", bloodstoneCapturedData.moaGeneComponent.hunger()) + "/" + 100.0), -47, 65);
+        renderIconWText(context, client, raceSprite, Text.translatable(MoaAPI.getRace(bloodstoneCapturedData.moaGeneComponent.race()).getTranslationKey()), -76, -25);
     }
 
     private static void renderSurtrum(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         renderRing(context, 0, 0);
-        renderText(context, client, bloodstoneCapturedData.name, 0, -80);
-        renderText(context, client, Text.translatable("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GROUND_SPEED)), 63, -50);
-        renderText(context, client, Text.translatable("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_SPEED)), 80, 0);
-        renderText(context, client, Text.translatable("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.GLIDING_DECAY)), 63, 50);
-        renderText(context, client, Text.translatable("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.JUMPING_STRENGTH)), -63, -50);
-        renderText(context, client, Text.translatable("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.DROP_MULTIPLIER)), -80, 0);
-        renderText(context, client, Text.translatable("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(bloodstoneCapturedData.MAX_HEALTH)), -63, 50);
-    }
-
-    private static void renderAbstentine(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
-        renderRing(context, 0, 0);
-        renderText(context, client, bloodstoneCapturedData.name, 0, -80);
-        for (int i = 0; i < bloodstoneCapturedData.conditionDataList.size(); i++) {
-            Pair<Integer, Integer> offset = getCircularPosition(80, i + 1, bloodstoneCapturedData.conditionDataList.size());
-            renderCondition(context, client, bloodstoneCapturedData.conditionDataList.get(i), offset.getLeft(), offset.getRight());
-        }
+        renderText(context, client, bloodstoneCapturedData.bloodstoneComponent.name(), 0, -80);
+        renderText(context, client, Text.translatable("moa.attribute.ground_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(MoaAttributes.GROUND_SPEED.getRatingTierTranslationKey(bloodstoneCapturedData.moaGeneComponent.attributes().groundSpeed()))), 63, -50);
+        renderText(context, client, Text.translatable("moa.attribute.gliding_speed").append(": ").append(bloodstoneCapturedData.getRatingWithColor(MoaAttributes.GROUND_SPEED.getRatingTierTranslationKey(bloodstoneCapturedData.moaGeneComponent.attributes().glidingSpeed()))), 80, 0);
+        renderText(context, client, Text.translatable("moa.attribute.gliding_decay").append(": ").append(bloodstoneCapturedData.getRatingWithColor(MoaAttributes.GROUND_SPEED.getRatingTierTranslationKey(bloodstoneCapturedData.moaGeneComponent.attributes().glidingDecay()))), 63, 50);
+        renderText(context, client, Text.translatable("moa.attribute.jumping_strength").append(": ").append(bloodstoneCapturedData.getRatingWithColor(MoaAttributes.GROUND_SPEED.getRatingTierTranslationKey(bloodstoneCapturedData.moaGeneComponent.attributes().jumpStrength()))), -63, -50);
+        renderText(context, client, Text.translatable("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(MoaAttributes.GROUND_SPEED.getRatingTierTranslationKey(bloodstoneCapturedData.moaGeneComponent.attributes().dropMultiplier()))), -80, 0);
+        renderText(context, client, Text.translatable("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(MoaAttributes.GROUND_SPEED.getRatingTierTranslationKey(bloodstoneCapturedData.moaGeneComponent.attributes().maxHealth()))), -63, 50);
     }
 
     private static void renderCondition(DrawContext context, MinecraftClient client, BloodstoneCapturedData.ConditionData conditionData, int offsetX, int offsetY) {
