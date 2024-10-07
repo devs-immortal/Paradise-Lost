@@ -11,6 +11,7 @@ import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -79,6 +80,6 @@ public class PotionEntityMixin extends ThrownItemEntity {
 
     @Override
     public Item getDefaultItem() {
-        return null;
+        return Items.SPLASH_POTION;
     }
 }

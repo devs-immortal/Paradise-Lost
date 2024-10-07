@@ -188,7 +188,7 @@ public class MoaGenes implements AutoSyncedComponent {
         affinity = com.affinity().isEmpty() ? race.defaultAffinity() : MoaAttributes.valueOf(com.affinity());
         legendary = race.legendary();
         hunger = com.hunger();
-        owner = com.ownerId();
+        if (com.ownerId() != UUID.fromString("00000000-0000-0000-0000-000000000000")) owner = com.ownerId();
         attributeMap.put(MoaAttributes.GROUND_SPEED, com.attributes().groundSpeed());
         attributeMap.put(MoaAttributes.GLIDING_SPEED, com.attributes().glidingSpeed());
         attributeMap.put(MoaAttributes.GLIDING_DECAY, com.attributes().glidingDecay());

@@ -647,7 +647,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             player.openHandledScreen(new ExtendedScreenHandlerFactory() {
                 @Override
                 public Object getScreenOpeningData(ServerPlayerEntity player) {
-                    return MoaEntity.this.getId();
+                    return new MoaScreenHandler.MoaScreenData(MoaEntity.this.getId());
                 }
 
                 @Override

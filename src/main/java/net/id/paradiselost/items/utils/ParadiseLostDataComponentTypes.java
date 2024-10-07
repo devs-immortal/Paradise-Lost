@@ -35,6 +35,9 @@ public class ParadiseLostDataComponentTypes {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, locate(id), builderOperator.apply(DataComponentType.builder()).build());
     }
 
+    public static void init() {
+    }
+
     // Component Source
 
     public record MoaGeneComponent(Identifier race, String affinity, boolean isBaby, float hunger, UUID ownerId, MoaAttributeComponent attributes) {
@@ -44,8 +47,8 @@ public class ParadiseLostDataComponentTypes {
                 Codec.STRING.optionalFieldOf("affinity", "").forGetter(MoaGeneComponent::affinity),
                 Codec.BOOL.optionalFieldOf("is_baby", true).forGetter(MoaGeneComponent::isBaby),
                 Codec.FLOAT.optionalFieldOf("hunger", 0.0F).forGetter(MoaGeneComponent::hunger),
-                Uuids.CODEC.optionalFieldOf("owner_id", null).forGetter(MoaGeneComponent::ownerId),
-                MoaAttributeComponent.CODEC.optionalFieldOf("attributes", null).forGetter(MoaGeneComponent::attributes)
+                Uuids.CODEC.optionalFieldOf("owner_id", UUID.fromString("00000000-0000-0000-0000-000000000000")).forGetter(MoaGeneComponent::ownerId),
+                MoaAttributeComponent.CODEC.optionalFieldOf("attributes", new MoaAttributeComponent(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)).forGetter(MoaGeneComponent::attributes)
         ).apply(instance, MoaGeneComponent::new));
         public static final PacketCodec<RegistryByteBuf, MoaGeneComponent> PACKET_CODEC;
 

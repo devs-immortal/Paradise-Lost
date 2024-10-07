@@ -20,6 +20,7 @@ import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaRaces;
 import net.id.paradiselost.items.ParadiseLostItemGroups;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.screen.ParadiseLostScreens;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
@@ -91,6 +92,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         MoaRaces.init();
         ParadiseLostScreens.init();
         ParadiseLostParticles.init();
+        ParadiseLostDataComponentTypes.init();
 
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
 			// since the portal can be configured to open with other mods blocks

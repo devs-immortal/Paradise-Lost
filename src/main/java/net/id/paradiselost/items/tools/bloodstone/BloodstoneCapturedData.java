@@ -52,7 +52,7 @@ public class BloodstoneCapturedData {
                     moa.getGenes().getAffinity().getTranslationKey(),
                     moa.isBaby(),
                     moa.getGenes().getHunger(),
-                    moa.getOwner().getUuid(),
+                    moa.getOwner() == null ? UUID.fromString("00000000-0000-0000-0000-000000000000") : moa.getOwner().getUuid(),
                     //surtrum
                     new ParadiseLostDataComponentTypes.MoaAttributeComponent(
                             moa.getGenes().getAttribute(MoaAttributes.GROUND_SPEED),
