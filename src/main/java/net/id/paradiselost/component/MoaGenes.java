@@ -47,7 +47,7 @@ public class MoaGenes implements AutoSyncedComponent {
         float attr6 = race.statWeighting().configure(MoaAttributes.MAX_HEALTH, race, random);
 
         var attributes = new ParadiseLostDataComponentTypes.MoaAttributeComponent(attr1, attr2, attr3, attr4, attr5, attr6);
-        var genes = new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), race.defaultAffinity().name(), baby, 0.0F, null, attributes);
+        var genes = new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), race.defaultAffinity().name(), baby, 100.0F, UUID.fromString("00000000-0000-0000-0000-000000000000"), attributes);
 
         stack.set(ParadiseLostDataComponentTypes.MOA_GENES, genes);
         return stack;
@@ -58,7 +58,7 @@ public class MoaGenes implements AutoSyncedComponent {
         MoaGenes genes = moa.getGenes();
         if (stack.isOf(ParadiseLostItems.MOA_EGG)) {
             genes.fromComponent(stack.get(ParadiseLostDataComponentTypes.MOA_GENES));
-            genes.owner = owner == null ? UUID.randomUUID() : owner;
+            genes.owner = owner == null ? UUID.fromString("00000000-0000-0000-0000-000000000000") : owner;
         }
         moa.setBreedingAge(-43200);
         return moa;
@@ -188,7 +188,7 @@ public class MoaGenes implements AutoSyncedComponent {
         affinity = com.affinity().isEmpty() ? race.defaultAffinity() : MoaAttributes.valueOf(com.affinity());
         legendary = race.legendary();
         hunger = com.hunger();
-        if (com.ownerId() != UUID.fromString("00000000-0000-0000-0000-000000000000")) owner = com.ownerId();
+        if (!com.ownerId().equals(UUID.fromString("00000000-0000-0000-0000-000000000000"))) owner = com.ownerId();
         attributeMap.put(MoaAttributes.GROUND_SPEED, com.attributes().groundSpeed());
         attributeMap.put(MoaAttributes.GLIDING_SPEED, com.attributes().glidingSpeed());
         attributeMap.put(MoaAttributes.GLIDING_DECAY, com.attributes().glidingDecay());
@@ -222,6 +222,6 @@ public class MoaGenes implements AutoSyncedComponent {
                 attributeMap.getFloat(MoaAttributes.DROP_MULTIPLIER),
                 attributeMap.getFloat(MoaAttributes.MAX_HEALTH)
         );
-        return new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), affinity.name(), true, hunger, owner, attributes);
+        return new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), affinity.name(), true, hunger, owner == null ? UUID.fromString("00000000-0000-0000-0000-000000000000") : owner, attributes);
     }
 }
