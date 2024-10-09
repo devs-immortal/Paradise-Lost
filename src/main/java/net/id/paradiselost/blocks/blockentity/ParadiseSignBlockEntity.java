@@ -10,7 +10,8 @@ public class ParadiseSignBlockEntity extends SignBlockEntity {
         super(ParadiseLostBlockEntityTypes.SIGN, pos, state);
     }
 
-    public ParadiseSignBlockEntity(BlockEntityType blockEntityType, BlockPos blockPos, BlockState blockState) {
-        super(blockEntityType, blockPos, blockState);
+    @Override
+    public BlockEntityType<?> getType() {
+        return ParadiseLostBlockEntityTypes.SIGN;
     }
 }

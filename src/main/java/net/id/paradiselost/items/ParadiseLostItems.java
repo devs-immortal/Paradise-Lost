@@ -23,6 +23,7 @@ import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -141,23 +142,31 @@ public class ParadiseLostItems {
     private static final Settings WEARABLE = wearable();
     private static final Settings RARE_WEARABLE = wearable().rarity(RARE);
 
+    private static ArmorItem armorHelper(RegistryEntry<ArmorMaterial> mat, ArmorItem.Type type, int durabilityMultiplier, Item.Settings settings) {
+        return new ArmorItem(mat, type, WEARABLE.maxDamage(type.getMaxDamage(durabilityMultiplier)));
+    }
+
+    private static ArmorItem armorHelper(RegistryEntry<ArmorMaterial> mat, ArmorItem.Type type, int durabilityMultiplier) {
+        return armorHelper(mat, type, durabilityMultiplier, WEARABLE);
+    }
+
     // Olvite
-    public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.HELMET, WEARABLE));
-    public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.CHESTPLATE, WEARABLE));
-    public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.LEGGINGS, WEARABLE));
-    public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", new ArmorItem(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.BOOTS, WEARABLE));
+    public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.HELMET, 15));
+    public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.CHESTPLATE, 15));
+    public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.LEGGINGS, 15));
+    public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.BOOTS, 15));
 
     // Glazed Gold
-    public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.HELMET, WEARABLE));
-    public static final ArmorItem GLAZED_GOLD_CHESTPLATE = add("glazed_gold_chestplate", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.CHESTPLATE, WEARABLE));
-    public static final ArmorItem GLAZED_GOLD_LEGGINGS = add("glazed_gold_leggings", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.LEGGINGS, WEARABLE));
-    public static final ArmorItem GLAZED_GOLD_BOOTS = add("glazed_gold_boots", new ArmorItem(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.BOOTS, WEARABLE));
+    public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.HELMET, 21));
+    public static final ArmorItem GLAZED_GOLD_CHESTPLATE = add("glazed_gold_chestplate", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.CHESTPLATE, 21));
+    public static final ArmorItem GLAZED_GOLD_LEGGINGS = add("glazed_gold_leggings", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.LEGGINGS, 21));
+    public static final ArmorItem GLAZED_GOLD_BOOTS = add("glazed_gold_boots", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.BOOTS, 21));
 
     // Surtrum
-    public static final ArmorItem SURTRUM_HELMET = add("surtrum_helmet", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.HELMET, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_CHESTPLATE = add("surtrum_chestplate", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.CHESTPLATE, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.LEGGINGS, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", new ArmorItem(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.BOOTS, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_HELMET = add("surtrum_helmet", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.HELMET, 27, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_CHESTPLATE = add("surtrum_chestplate", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.CHESTPLATE, 27, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.LEGGINGS, 27, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.BOOTS, 27, wearable().fireproof()));
 
 
     private static Settings food() {
