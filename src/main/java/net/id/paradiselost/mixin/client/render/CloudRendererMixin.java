@@ -62,7 +62,7 @@ public final class CloudRendererMixin {
         throw new NullPointerException("null cannot be cast to non-null type net.minecraft.client.world.ClientWorld");
     }
 
-    @Inject(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FDDD)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderClouds", at = @At("HEAD"), cancellable = true)
     public void renderClouds(MatrixStack matrices, Matrix4f matrix4f, Matrix4f matrix4f2, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
         if (world.getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             internalCloudRender(matrices, matrix4f, matrix4f2, tickDelta, cameraX, cameraY, cameraZ, 160, 1f, 1f);
@@ -74,24 +74,21 @@ public final class CloudRendererMixin {
 
     // TODO: Replace this mostly copy-pasted code with some redirects or injections (PL-1.7)
     private void internalCloudRender(MatrixStack matrices, Matrix4f matrix4f, Matrix4f matrix4f2, float tickDelta, double cameraX, double cameraY, double cameraZ, float cloudOffset, float cloudScale, float speedMod) {
-        float f = this.world.getDimensionEffects().getCloudsHeight();
-        if (!Float.isNaN(f)) {
-            float g = 12.0F;
-            float h = 4.0F;
-            double d = 2.0E-4;
-            double e = (((float)this.ticks + tickDelta) * 0.03F);
-            double i = (cameraX + e) / 12.0;
-            double j = (f - (float)cameraY + 0.33F);
-            double k = cameraZ / 12.0 + 0.33000001311302185;
-            i -= (MathHelper.floor(i / 2048.0) * 2048);
-            k -= (MathHelper.floor(k / 2048.0) * 2048);
-            float l = (float)(i - (double)MathHelper.floor(i));
-            float m = (float)(j / 4.0 - (double)MathHelper.floor(j / 4.0)) * 4.0F;
-            float n = (float)(k - (double)MathHelper.floor(k));
+        float cloudHeight = this.world.getDimensionEffects().getCloudsHeight();
+        if (!Float.isNaN(cloudHeight)) {
+            double speed = ((this.ticks + tickDelta) * (0.03F * speedMod));
+            double posX = (cameraX + speed) / 12.0D / cloudScale;
+            double posY = (cloudHeight - cameraY + cloudOffset) / cloudScale + 0.33F;
+            double posZ = cameraZ / 12.0D / cloudScale + 0.33000001311302185D;
+            posX -= (MathHelper.floor(posX / 2048.0) * 2048);
+            posZ -= (MathHelper.floor(posZ / 2048.0) * 2048);
+            float l = (float)(posX - (double)MathHelper.floor(posX));
+            float m = (float)(posY / 4.0 - (double)MathHelper.floor(posY / 4.0)) * 4.0F;
+            float n = (float)(posZ - (double)MathHelper.floor(posZ));
             Vec3d vec3d = this.world.getCloudsColor(tickDelta);
-            int o = (int)Math.floor(i);
-            int p = (int)Math.floor(j / 4.0);
-            int q = (int)Math.floor(k);
+            int o = (int)Math.floor(posX);
+            int p = (int)Math.floor(posY / 4.0);
+            int q = (int)Math.floor(posZ);
             if (o != this.lastCloudsBlockX || p != this.lastCloudsBlockY || q != this.lastCloudsBlockZ || this.client.options.getCloudRenderModeValue() != this.lastCloudRenderMode || this.lastCloudsColor.squaredDistanceTo(vec3d) > 2.0E-4) {
                 this.lastCloudsBlockX = o;
                 this.lastCloudsBlockY = p;
@@ -109,7 +106,7 @@ public final class CloudRendererMixin {
                 }
 
                 this.cloudsBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
-                BufferBuilder.BuiltBuffer builtBuffer = this.renderClouds(bufferBuilder, i, j, k, vec3d);
+                BufferBuilder.BuiltBuffer builtBuffer = this.renderClouds(bufferBuilder, posX, posY, posZ, vec3d);
                 this.cloudsBuffer.bind();
                 this.cloudsBuffer.upload(builtBuffer);
                 VertexBuffer.unbind();
@@ -119,6 +116,7 @@ public final class CloudRendererMixin {
             matrices.push();
             matrices.multiplyPositionMatrix(matrix4f);
             matrices.scale(12.0F, 1.0F, 12.0F);
+            matrices.scale(cloudScale, cloudScale, cloudScale);
             matrices.translate(-l, m, -n);
             if (this.cloudsBuffer != null) {
                 this.cloudsBuffer.bind();
