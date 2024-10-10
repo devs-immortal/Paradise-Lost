@@ -2,10 +2,8 @@ package net.id.paradiselost.items.tools;
 
 import net.fabricmc.yarn.constants.MiningLevels;
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.items.utils.IngredientUtil;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
@@ -13,10 +11,9 @@ import static net.id.paradiselost.items.tools.ParadiseLostToolMaterials.Paradise
 
 @SuppressWarnings("unused")
 public class ParadiseLostToolMaterials {
-    public static ToolMaterial OLVITE = create(MiningLevels.IRON, 250, 4.5f, 2f, 14, () -> IngredientUtil.itemIngredient(ParadiseLostItems.OLVITE));
-    public static ToolMaterial SURTRUM = create(MiningLevels.DIAMOND, 827, 7.0f, 3f, 16, () -> IngredientUtil.itemIngredient(ParadiseLostItems.REFINED_SURTRUM));
-    public static ToolMaterial GLAZED_GOLD = create(MiningLevels.IRON, 131, 12f, 2f, 22, () -> IngredientUtil.itemIngredient(ParadiseLostItems.GOLDEN_AMBER));
-
+    public static final ToolMaterial OLVITE = create(MiningLevels.IRON, 250, 4.5f, 2f, 14, () -> Ingredient.ofItems(ParadiseLostItems.OLVITE));
+    public static ToolMaterial SURTRUM = create(MiningLevels.DIAMOND, 827, 7.0f, 3f, 16, () -> Ingredient.ofItems(ParadiseLostItems.REFINED_SURTRUM));
+    public static ToolMaterial GLAZED_GOLD = create(MiningLevels.IRON, 131, 12f, 2f, 22, () -> Ingredient.ofItems(ParadiseLostItems.GOLDEN_AMBER));
 
 
     static class ParadiseToolMaterial implements ToolMaterial {
@@ -26,18 +23,18 @@ public class ParadiseLostToolMaterials {
         private final float miningSpeed;
         private final float attackDamage;
         private final int enchantability;
-        private final Lazy<Ingredient> repairIngredient;
+        private final Supplier<Ingredient> repairIngredient;
 
-        ParadiseToolMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
+        ParadiseToolMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
             this.miningLevel = miningLevel;
             this.itemDurability = itemDurability;
             this.miningSpeed = miningSpeed;
             this.attackDamage = attackDamage;
             this.enchantability = enchantability;
-            this.repairIngredient = new Lazy(repairIngredient);
+            this.repairIngredient = repairIngredient;
         }
 
-        public static ParadiseToolMaterial create(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
+        public static ParadiseToolMaterial create(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
             return new ParadiseToolMaterial(miningLevel, itemDurability, miningSpeed, attackDamage, enchantability, repairIngredient);
         }
 

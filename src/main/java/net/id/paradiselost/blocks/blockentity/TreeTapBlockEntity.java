@@ -144,8 +144,8 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
             if (convertBlock != Blocks.BEE_NEST) {
                 stack.decrement(1);
 
-                if (convertBlock != world.getBlockState(this.pos).getBlock()) {
-                    world.setBlockState(attachedPos, convertBlock.getDefaultState(), 0);
+                if (convertBlock != attachedBlock.getBlock()) {
+                    world.setBlockState(attachedPos, convertBlock.getDefaultState());
                 }
                 if (!world.isClient) world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
 
