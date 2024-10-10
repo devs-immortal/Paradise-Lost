@@ -40,6 +40,8 @@ public abstract class BloodstoneItem extends Item {
         BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromEntity(entity);
         if (capturedData.isMoa) {
             stack.set(ParadiseLostDataComponentTypes.MOA_GENES, capturedData.moaGeneComponent);
+        } else {
+            stack.remove(ParadiseLostDataComponentTypes.MOA_GENES);
         }
         stack.set(ParadiseLostDataComponentTypes.BLOODSTONE, capturedData.bloodstoneComponent);
         playPrickEffects(user.getWorld(), entity.getBlockPos());

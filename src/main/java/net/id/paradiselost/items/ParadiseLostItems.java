@@ -9,7 +9,6 @@ import net.id.paradiselost.items.misc.*;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.items.tools.AurelBucketItem;
 import net.id.paradiselost.items.tools.base_tools.*;
-import net.id.paradiselost.items.tools.bloodstone.AbstentineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
@@ -39,7 +38,6 @@ import java.util.function.Consumer;
 import static net.id.paradiselost.ParadiseLost.MOD_ID;
 import static net.id.paradiselost.ParadiseLost.locate;
 import static net.id.paradiselost.items.ParadiseLostItemActions.*;
-import static net.minecraft.entity.EquipmentSlot.*;
 import static net.minecraft.util.Rarity.*;
 
 @SuppressWarnings("unused")
@@ -117,7 +115,6 @@ public class ParadiseLostItems {
     public static final CherineBloodstoneItem CHERINE_BLOODSTONE = add("cherine_bloodstone", new CherineBloodstoneItem(unstackableTool()));
     public static final OlviteBloodstoneItem OLVITE_BLOODSTONE = add("olvite_bloodstone", new OlviteBloodstoneItem(unstackableTool()));
     public static final SurtrumBloodstoneItem SURTRUM_BLOODSTONE = add("surtrum_bloodstone", new SurtrumBloodstoneItem(unstackableTool().fireproof()));
-    public static final AbstentineBloodstoneItem ABSTENTINE_BLOODSTONE = add("abstentine_bloodstone", new AbstentineBloodstoneItem(unstackableRareTool()));
 
 
     private static final Text GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT = Text.translatable(Util.createTranslationKey("item", locate("smithing_template.glazed_gold_upgrade.applies_to"))).formatted(Formatting.BLUE);

@@ -21,7 +21,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 //probably can be cleaned up
@@ -93,10 +92,12 @@ public class BloodstoneHUDRenderer {
         renderRing(context, 0, 0);
         renderText(context, client, bloodstoneCapturedData.bloodstoneComponent.name(), 0, -80);
 
-        renderIconWText(context, client, affinitySprite, Text.translatable(bloodstoneCapturedData.moaGeneComponent.affinity()), 76, -25);
-        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), Text.literal(bloodstoneCapturedData.bloodstoneComponent.owner()), 47, 65);
-        renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), Text.literal(String.format("%.1f", bloodstoneCapturedData.moaGeneComponent.hunger()) + "/" + 100.0), -47, 65);
-        renderIconWText(context, client, raceSprite, Text.translatable(MoaAPI.getRace(bloodstoneCapturedData.moaGeneComponent.race()).getTranslationKey()), -76, -25);
+        if (bloodstoneCapturedData.moaGeneComponent != null) {
+            renderIconWText(context, client, affinitySprite, Text.translatable(bloodstoneCapturedData.moaGeneComponent.affinity()), 76, -25);
+            renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.INVISIBILITY), Text.literal(bloodstoneCapturedData.bloodstoneComponent.owner()), 47, 65);
+            renderIconWText(context, client, statusEffectSpriteManager.getSprite(StatusEffects.HUNGER), Text.literal(String.format("%.1f", bloodstoneCapturedData.moaGeneComponent.hunger()) + "/" + 100.0), -47, 65);
+            renderIconWText(context, client, raceSprite, Text.translatable(MoaAPI.getRace(bloodstoneCapturedData.moaGeneComponent.race()).getTranslationKey()), -76, -25);
+        }
     }
 
     private static void renderSurtrum(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
@@ -110,25 +111,6 @@ public class BloodstoneHUDRenderer {
             renderText(context, client, Text.translatable("moa.attribute.drop_multiplier").append(": ").append(bloodstoneCapturedData.getRatingWithColor(MoaAttributes.DROP_MULTIPLIER.getRatingTierTranslationKey(bloodstoneCapturedData.moaGeneComponent.attributes().dropMultiplier()))), -80, 0);
             renderText(context, client, Text.translatable("moa.attribute.max_health").append(": ").append(bloodstoneCapturedData.getRatingWithColor(MoaAttributes.MAX_HEALTH.getRatingTierTranslationKey(bloodstoneCapturedData.moaGeneComponent.attributes().maxHealth()))), -63, 50);
         }
-    }
-
-    private static void renderCondition(DrawContext context, MinecraftClient client, BloodstoneCapturedData.ConditionData conditionData, int offsetX, int offsetY) {
-        if (offsetX == 0) {
-            offsetX = 109 / 2;
-        } else if (offsetX < 0) {
-            offsetX = offsetX - (109 / 2);
-        }
-
-        int renderWidth = (int) MathHelper.clamp((109 - 15) * conditionData.severity(), 0, (109 - 15));
-        var matrixStack = context.getMatrices();
-        matrixStack.push();
-        matrixStack.translate(offsetX, offsetY, 0);
-        matrixStack.translate(-54.5, -6, 0);
-        matrixStack.scale(1.15f, 1.15f, 1);
-        matrixStack.translate(54.5, 6, 0);
-        context.drawTexture(ParadiseLost.locate("textures/hud/bloodstone/" + conditionData.id() + "_bar.png"), -7, -7, 0, 0, 15 + renderWidth, 12, 109, 12);
-        context.drawTexture(ParadiseLost.locate("textures/hud/bloodstone/condition_bar.png"), -7, -7, 0, 0, 109, 12, 109, 12);
-        matrixStack.pop();
     }
 
     private static void renderRing(DrawContext context, int offsetX, int offsetY) {

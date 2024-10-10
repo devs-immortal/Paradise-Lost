@@ -247,7 +247,6 @@ public class ParadiseLostItemGroups {
                 entries.add(CHERINE_BLOODSTONE);
                 entries.add(OLVITE_BLOODSTONE);
                 entries.add(SURTRUM_BLOODSTONE);
-                entries.add(ABSTENTINE_BLOODSTONE);
                 // misc
                 entries.add(AUREL_BUCKET);
                 entries.add(AUREL_WATER_BUCKET);
