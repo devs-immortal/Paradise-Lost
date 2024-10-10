@@ -1,26 +1,26 @@
 package net.id.paradiselost.items.tools;
 
+import com.google.common.base.Suppliers;
 import net.fabricmc.yarn.constants.MiningLevels;
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.items.utils.IngredientUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
-import static net.id.paradiselost.items.tools.ParadiseLostToolMaterials.ParadiseToolMaterial.create;
-
 @SuppressWarnings("unused")
 public class ParadiseLostToolMaterials {
-    public static ToolMaterial OLVITE = create(BlockTags.INCORRECT_FOR_IRON_TOOL, MiningLevels.IRON, 250, 4.5f, 2f, 14, () -> IngredientUtil.itemIngredient(ParadiseLostItems.OLVITE));
-    public static ToolMaterial SURTRUM = create(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, MiningLevels.DIAMOND, 827, 7.0f, 3f, 16, () -> IngredientUtil.itemIngredient(ParadiseLostItems.REFINED_SURTRUM));
-    public static ToolMaterial GLAZED_GOLD = create(BlockTags.INCORRECT_FOR_IRON_TOOL, MiningLevels.IRON, 131, 12f, 2f, 22, () -> IngredientUtil.itemIngredient(ParadiseLostItems.GOLDEN_AMBER));
+    public static final ToolMaterial OLVITE = create(BlockTags.INCORRECT_FOR_IRON_TOOL, MiningLevels.IRON, 250, 4.5f, 2f, 14, () -> Ingredient.ofItems(ParadiseLostItems.OLVITE));
+    public static final ToolMaterial SURTRUM = create(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, MiningLevels.DIAMOND, 827, 7.0f, 3f, 16, () -> Ingredient.ofItems(ParadiseLostItems.REFINED_SURTRUM));
+    public static final ToolMaterial GLAZED_GOLD = create(BlockTags.INCORRECT_FOR_IRON_TOOL, MiningLevels.IRON, 131, 12f, 2f, 22, () -> Ingredient.ofItems(ParadiseLostItems.GOLDEN_AMBER));
 
 
+    public static ToolMaterial create(final TagKey incorrect, int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
+        return new ParadiseToolMaterial(incorrect, miningLevel, itemDurability, miningSpeed, attackDamage, enchantability, repairIngredient);
+    }
 
     static class ParadiseToolMaterial implements ToolMaterial {
 
@@ -30,20 +30,16 @@ public class ParadiseLostToolMaterials {
         private final float miningSpeed;
         private final float attackDamage;
         private final int enchantability;
-        private final Lazy<Ingredient> repairIngredient;
+        private final Supplier<Ingredient> repairIngredient;
 
-        ParadiseToolMaterial(final TagKey incorrect, int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
+        ParadiseToolMaterial(final TagKey incorrect, int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, final Supplier<Ingredient> repairIngredient) {
             this.incorrectTag = incorrect;
             this.miningLevel = miningLevel;
             this.itemDurability = itemDurability;
             this.miningSpeed = miningSpeed;
             this.attackDamage = attackDamage;
             this.enchantability = enchantability;
-            this.repairIngredient = new Lazy(repairIngredient);
-        }
-
-        public static ParadiseToolMaterial create(final TagKey incorrect, int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier repairIngredient) {
-            return new ParadiseToolMaterial(incorrect, miningLevel, itemDurability, miningSpeed, attackDamage, enchantability, repairIngredient);
+            this.repairIngredient = Suppliers.memoize(repairIngredient::get);
         }
 
         public int getDurability() {
