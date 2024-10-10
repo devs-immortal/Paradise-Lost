@@ -3,13 +3,13 @@
   "ingredient": {
     "item": "minecraft:glass_bottle"
   },
-  "tapped_block": "paradise_lost:wisteria_log",
-  "result_block": "paradise_lost:wisteria_log",
+  "tapped_block": "minecraft:crying_obsidian",
+  "result_block": "minecraft:obsidian",
   "result": {
     "id": "minecraft:potion"
   },
   "potion_content": {
-    "potion": "minecraft:water"
+    "potion": "minecraft:regeneration"
   },
-  "chance": 1
+  "chance": 2
 }
