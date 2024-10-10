@@ -60,7 +60,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 
 import java.util.Optional;
 import java.util.UUID;

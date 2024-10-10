@@ -24,11 +24,10 @@
   },
   "depends": {
     "fabricloader": ">=0.12.12",
-    "minecraft": ">=1.20.2",
+    "minecraft": ">=1.20.5",
     "java": ">=21",
     "fabric-api-base": "*",
-    "fabric-registry-sync-v0": "*",
-    "cloth-config": "*"
+    "fabric-registry-sync-v0": "*"
   },
   "mixins": [
     "paradise_lost.mixins.json"

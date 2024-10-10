@@ -46,7 +46,7 @@ repositories {
     }
 
     maven {
-        name = "Ladysnake"
+        name = "Ladysnake Mods"
         url = uri("https://maven.ladysnake.org/releases")
     }
 
@@ -74,11 +74,6 @@ repositories {
         name = "Jitpack"
         url = uri("https://jitpack.io")
     }
-
-    maven {
-        name = "Ladysnake Mods"
-        url = uri("https://maven.ladysnake.org/releases")
-    }
 }
 
 dependencies {
@@ -102,13 +97,13 @@ dependencies {
     )
 
     modImplementation(
-            group = "dev.onyxstudios.cardinal-components-api",
+            group = "org.ladysnake.cardinal-components-api",
             name = "cardinal-components-base",
             version = cardinalComponentsVersion,
     ).also(::include)
 
     modImplementation(
-            group = "dev.onyxstudios.cardinal-components-api",
+            group = "org.ladysnake.cardinal-components-api",
             name = "cardinal-components-entity",
             version = cardinalComponentsVersion,
     ).also(::include)
@@ -130,18 +125,6 @@ dependencies {
             name = "fabric-api",
             version = fabric_version,
     )
-
-    modImplementation(
-            group = "me.shedaniel.cloth",
-            name = "cloth-config-fabric",
-            version = clothConfigVersion,
-    )
-    modImplementation(
-            group = "dev.onyxstudios.cardinal-components-api",
-            name = "cardinal-components-base",
-            version = cardinalComponentsVersion,
-    )
-
 
 }
 
