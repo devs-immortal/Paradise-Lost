@@ -7,13 +7,11 @@ import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.CampfireCookingRecipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -35,7 +33,7 @@ public class CherineCampfireBlock extends CampfireBlock {
             ItemStack itemStack = player.getStackInHand(hand);
             Optional<RecipeEntry<CampfireCookingRecipe>> optional = campfireBlockEntity.getRecipeFor(itemStack);
             if (optional.isPresent()) {
-                if (!world.isClient && campfireBlockEntity.addItem(player, player.isInCreativeMode() ? itemStack.copy() : itemStack, ((CampfireCookingRecipe)((RecipeEntry)optional.get()).value()).getCookingTime())) {
+                if (!world.isClient && campfireBlockEntity.addItem(player, player.isInCreativeMode() ? itemStack.copy() : itemStack, ((CampfireCookingRecipe) ((RecipeEntry) optional.get()).value()).getCookingTime())) {
                     player.incrementStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return ItemActionResult.SUCCESS;
                 }

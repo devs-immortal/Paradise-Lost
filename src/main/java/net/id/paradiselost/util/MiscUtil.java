@@ -2,7 +2,6 @@ package net.id.paradiselost.util;
 
 import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.util.Identifier;
@@ -10,10 +9,8 @@ import net.minecraft.util.JsonHelper;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 
 public final class MiscUtil {
     private MiscUtil() {

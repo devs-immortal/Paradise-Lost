@@ -1,14 +1,8 @@
 package net.id.paradiselost.loot;
 
-import com.google.common.collect.Sets;
-import net.id.paradiselost.ParadiseLost;
 import net.minecraft.loot.LootTable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-
-import java.util.Collections;
-import java.util.Set;
 
 import static net.id.paradiselost.ParadiseLost.locate;
 

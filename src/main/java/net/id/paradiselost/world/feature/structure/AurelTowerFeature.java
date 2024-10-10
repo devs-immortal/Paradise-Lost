@@ -1,7 +1,6 @@
 package net.id.paradiselost.world.feature.structure;
 
 import com.mojang.datafixers.util.Either;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.world.feature.structure.generator.AurelTowerGenerator;

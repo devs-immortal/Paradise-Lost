@@ -1,25 +1,21 @@
 package net.id.paradiselost.client.rendering.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import java.util.function.Function;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.api.MoaAPI;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
-import net.id.paradiselost.entities.passive.moa.MoaRaces;
 import net.id.paradiselost.items.tools.bloodstone.*;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;

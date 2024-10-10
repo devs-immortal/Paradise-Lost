@@ -4,7 +4,6 @@ import net.id.paradiselost.api.FloatingBlockHelper;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

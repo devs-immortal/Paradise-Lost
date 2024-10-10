@@ -1,6 +1,5 @@
 package net.id.paradiselost.world.feature.tree;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.world.feature.tree.placers.OvergrownTrunkPlacer;
@@ -12,9 +11,6 @@ import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import net.minecraft.world.gen.trunk.TrunkPlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacerType;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class ParadiseLostTreeHell {
@@ -34,6 +30,6 @@ public class ParadiseLostTreeHell {
     }
 
     private static <P extends TrunkPlacer> TrunkPlacerType<P> registerTrunk(String name, MapCodec<P> codec) {
-        return (TrunkPlacerType)Registry.register(Registries.TRUNK_PLACER_TYPE, ParadiseLost.locate(name), new TrunkPlacerType(codec));
+        return Registry.register(Registries.TRUNK_PLACER_TYPE, ParadiseLost.locate(name), new TrunkPlacerType(codec));
     }
 }

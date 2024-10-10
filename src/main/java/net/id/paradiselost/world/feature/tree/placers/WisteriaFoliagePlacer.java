@@ -2,7 +2,6 @@ package net.id.paradiselost.world.feature.tree.placers;
 
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.Products;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostHangerBlock;
@@ -17,7 +16,6 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 

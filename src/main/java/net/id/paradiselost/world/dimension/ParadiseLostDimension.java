@@ -1,21 +1,13 @@
 package net.id.paradiselost.world.dimension;
 
-import com.mojang.serialization.JsonOps;
-import com.mojang.serialization.Lifecycle;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.util.MiscUtil;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.kyrptonaught.customportalapi.event.CPASoundEventData;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.MutableRegistry;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryOps;
-import net.minecraft.registry.SimpleRegistry;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.dimension.DimensionType;

@@ -82,13 +82,13 @@ public final class CloudRendererMixin {
             double posZ = cameraZ / 12.0D / cloudScale + 0.33000001311302185D;
             posX -= (MathHelper.floor(posX / 2048.0) * 2048);
             posZ -= (MathHelper.floor(posZ / 2048.0) * 2048);
-            float l = (float)(posX - (double)MathHelper.floor(posX));
-            float m = (float)(posY / 4.0 - (double)MathHelper.floor(posY / 4.0)) * 4.0F;
-            float n = (float)(posZ - (double)MathHelper.floor(posZ));
+            float l = (float) (posX - (double) MathHelper.floor(posX));
+            float m = (float) (posY / 4.0 - (double) MathHelper.floor(posY / 4.0)) * 4.0F;
+            float n = (float) (posZ - (double) MathHelper.floor(posZ));
             Vec3d vec3d = this.world.getCloudsColor(tickDelta);
-            int o = (int)Math.floor(posX);
-            int p = (int)Math.floor(posY / 4.0);
-            int q = (int)Math.floor(posZ);
+            int o = (int) Math.floor(posX);
+            int p = (int) Math.floor(posY / 4.0);
+            int q = (int) Math.floor(posZ);
             if (o != this.lastCloudsBlockX || p != this.lastCloudsBlockY || q != this.lastCloudsBlockZ || this.client.options.getCloudRenderModeValue() != this.lastCloudRenderMode || this.lastCloudsColor.squaredDistanceTo(vec3d) > 2.0E-4) {
                 this.lastCloudsBlockX = o;
                 this.lastCloudsBlockY = p;
@@ -122,7 +122,7 @@ public final class CloudRendererMixin {
                 this.cloudsBuffer.bind();
                 int r = this.lastCloudRenderMode == CloudRenderMode.FANCY ? 0 : 1;
 
-                for(int s = r; s < 2; ++s) {
+                for (int s = r; s < 2; ++s) {
                     RenderLayer renderLayer = s == 0 ? RenderLayer.getFancyClouds() : RenderLayer.getFastClouds();
                     renderLayer.startDrawing();
                     ShaderProgram shaderProgram = RenderSystem.getShader();

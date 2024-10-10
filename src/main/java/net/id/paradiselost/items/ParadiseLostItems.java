@@ -27,12 +27,10 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 
-import javax.tools.Tool;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -262,7 +260,7 @@ public class ParadiseLostItems {
     public static final BlockItem STRIPPED_ORANGE_WOOD = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.strippedWood());
     public static final BlockItem STRIPPED_WISTERIA_WOOD = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.strippedWood());
     // wood
-    public static final BlockItem AUREL_WOOD = add( ParadiseLostBlocks.AUREL_WOODSTUFF.wood());
+    public static final BlockItem AUREL_WOOD = add(ParadiseLostBlocks.AUREL_WOODSTUFF.wood());
     public static final BlockItem MOTHER_AUREL_WOOD = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.wood());
     public static final BlockItem ORANGE_WOOD = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.wood());
     public static final BlockItem WISTERIA_WOOD = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.wood());

@@ -1,7 +1,6 @@
 package net.id.paradiselost.mixin.entity;
 
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.items.ParadiseLostItems.BoatSet;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.ChestBoatEntity;

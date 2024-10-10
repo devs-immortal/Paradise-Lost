@@ -49,18 +49,18 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     public static void litServerTick(World world, BlockPos pos, BlockState state, CherineCampfireBlockEntity campfire) {
         boolean bl = false;
 
-        for(int i = 0; i < campfire.itemsBeingCooked.size(); ++i) {
-            ItemStack itemStack = (ItemStack)campfire.itemsBeingCooked.get(i);
+        for (int i = 0; i < campfire.itemsBeingCooked.size(); ++i) {
+            ItemStack itemStack = campfire.itemsBeingCooked.get(i);
             if (!itemStack.isEmpty()) {
                 bl = true;
                 int var10002 = campfire.cookingTimes[i]++;
                 if (campfire.cookingTimes[i] >= campfire.cookingTotalTimes[i]) {
-                    Inventory inventory = new SimpleInventory(new ItemStack[]{itemStack});
-                    ItemStack itemStack2 = (ItemStack)campfire.matchGetter.getFirstMatch(inventory, world).map((recipe) -> {
-                        return ((CampfireCookingRecipe)recipe.value()).craft(inventory, world.getRegistryManager());
+                    Inventory inventory = new SimpleInventory(itemStack);
+                    ItemStack itemStack2 = campfire.matchGetter.getFirstMatch(inventory, world).map((recipe) -> {
+                        return recipe.value().craft(inventory, world.getRegistryManager());
                     }).orElse(itemStack);
                     if (itemStack2.isItemEnabled(world.getEnabledFeatures())) {
-                        ItemScatterer.spawn(world, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), itemStack2);
+                        ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), itemStack2);
                         campfire.itemsBeingCooked.set(i, ItemStack.EMPTY);
                         world.updateListeners(pos, state, state, 3);
                         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
@@ -78,7 +78,7 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     public static void unlitServerTick(World world, BlockPos pos, BlockState state, CherineCampfireBlockEntity campfire) {
         boolean bl = false;
 
-        for(int i = 0; i < campfire.itemsBeingCooked.size(); ++i) {
+        for (int i = 0; i < campfire.itemsBeingCooked.size(); ++i) {
             if (campfire.cookingTimes[i] > 0) {
                 bl = true;
                 campfire.cookingTimes[i] = MathHelper.clamp(campfire.cookingTimes[i] - 2, 0, campfire.cookingTotalTimes[i]);
@@ -95,22 +95,21 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
         Random random = world.random;
         int i;
         if (random.nextFloat() < 0.11F) {
-            for(i = 0; i < random.nextInt(2) + 2; ++i) {
-                CampfireBlock.spawnSmokeParticle(world, pos, (Boolean)state.get(CampfireBlock.SIGNAL_FIRE), false);
+            for (i = 0; i < random.nextInt(2) + 2; ++i) {
+                CampfireBlock.spawnSmokeParticle(world, pos, state.get(CampfireBlock.SIGNAL_FIRE), false);
             }
         }
 
-        i = ((Direction)state.get(CampfireBlock.FACING)).getHorizontal();
+        i = (state.get(CampfireBlock.FACING)).getHorizontal();
 
-        for(int j = 0; j < campfire.itemsBeingCooked.size(); ++j) {
-            if (!((ItemStack)campfire.itemsBeingCooked.get(j)).isEmpty() && random.nextFloat() < 0.2F) {
+        for (int j = 0; j < campfire.itemsBeingCooked.size(); ++j) {
+            if (!(campfire.itemsBeingCooked.get(j)).isEmpty() && random.nextFloat() < 0.2F) {
                 Direction direction = Direction.fromHorizontal(Math.floorMod(j + i, 4));
-                float f = 0.3125F;
-                double d = (double)pos.getX() + 0.5 - (double)((float)direction.getOffsetX() * 0.3125F) + (double)((float)direction.rotateYClockwise().getOffsetX() * 0.3125F);
-                double e = (double)pos.getY() + 0.5;
-                double g = (double)pos.getZ() + 0.5 - (double)((float)direction.getOffsetZ() * 0.3125F) + (double)((float)direction.rotateYClockwise().getOffsetZ() * 0.3125F);
+                double d = (double) pos.getX() + 0.5 - (double) ((float) direction.getOffsetX() * 0.3125F) + (double) ((float) direction.rotateYClockwise().getOffsetX() * 0.3125F);
+                double e = (double) pos.getY() + 0.5;
+                double g = (double) pos.getZ() + 0.5 - (double) ((float) direction.getOffsetZ() * 0.3125F) + (double) ((float) direction.rotateYClockwise().getOffsetZ() * 0.3125F);
 
-                for(int k = 0; k < 4; ++k) {
+                for (int k = 0; k < 4; ++k) {
                     world.addParticle(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0);
                 }
             }
@@ -161,8 +160,8 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     }
 
     public boolean addItem(@Nullable Entity user, ItemStack stack, int cookTime) {
-        for(int i = 0; i < this.itemsBeingCooked.size(); ++i) {
-            ItemStack itemStack = (ItemStack)this.itemsBeingCooked.get(i);
+        for (int i = 0; i < this.itemsBeingCooked.size(); ++i) {
+            ItemStack itemStack = this.itemsBeingCooked.get(i);
             if (itemStack.isEmpty()) {
                 this.cookingTotalTimes[i] = cookTime;
                 this.cookingTimes[i] = 0;
@@ -185,16 +184,9 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
         this.itemsBeingCooked.clear();
     }
 
-    public void spawnItemsBeingCooked() {
-        if (this.world != null) {
-            this.updateListeners();
-        }
-
-    }
-
     protected void readComponents(BlockEntity.ComponentsAccess components) {
         super.readComponents(components);
-        ((ContainerComponent)components.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)).copyTo(this.getItemsBeingCooked());
+        (components.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)).copyTo(this.getItemsBeingCooked());
     }
 
     protected void addComponents(ComponentMap.Builder componentMapBuilder) {

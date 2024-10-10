@@ -2,16 +2,8 @@ package net.id.paradiselost.util;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.block.BrewingStandBlock;
-import net.minecraft.block.FallingBlock;
-import net.minecraft.block.TorchBlock;
-import net.minecraft.client.util.ParticleUtil;
-import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.mob.WitchEntity;
-import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.EntityEffectParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;

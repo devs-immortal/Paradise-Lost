@@ -1,6 +1,5 @@
 package net.id.paradiselost.entities.projectile;
 
-import java.util.List;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.entity.Entity;
@@ -9,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;

@@ -13,9 +13,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Uuids;
-import net.minecraft.util.dynamic.Codecs;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.function.UnaryOperator;
 

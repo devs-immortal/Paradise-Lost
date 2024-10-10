@@ -1,24 +1,17 @@
 package net.id.paradiselost.items.tools.bloodstone;
 
-import net.id.paradiselost.api.MoaAPI;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
-import net.id.paradiselost.entities.passive.moa.MoaRaces;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class BloodstoneCapturedData {
