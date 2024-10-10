@@ -85,7 +85,7 @@ public class BloodstoneHUDRenderer {
 
     private static void renderOlvite(DrawContext context, MinecraftClient client, BloodstoneCapturedData bloodstoneCapturedData) {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
-        var effectAtlas = client.getSpriteAtlas(new Identifier("textures/atlas/blocks.png"));
+        var effectAtlas = client.getSpriteAtlas(Identifier.of("textures/atlas/blocks.png"));
         Sprite affinitySprite = effectAtlas.apply(ParadiseLost.locate("item/icons/affinity"));
         Sprite raceSprite = effectAtlas.apply(ParadiseLost.locate("item/icons/race"));
 

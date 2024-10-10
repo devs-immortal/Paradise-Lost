@@ -624,10 +624,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return getGenes().getOwner();
     }
 
-    @Override
-    public EntityView method_48926() {
-        return null;
-    }
 
     @Nullable
     @Override

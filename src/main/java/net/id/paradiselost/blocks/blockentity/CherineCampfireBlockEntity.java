@@ -186,12 +186,12 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
 
     protected void readComponents(BlockEntity.ComponentsAccess components) {
         super.readComponents(components);
-        (components.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)).copyTo(this.getItemsBeingCooked());
+        (components.getOrDefault(ComponentTypes.CONTAINER, ContainerComponent.DEFAULT)).copyTo(this.getItemsBeingCooked());
     }
 
     protected void addComponents(ComponentMap.Builder componentMapBuilder) {
         super.addComponents(componentMapBuilder);
-        componentMapBuilder.add(DataComponentTypes.CONTAINER, ContainerComponent.fromStacks(this.getItemsBeingCooked()));
+        componentMapBuilder.add(ComponentTypes.CONTAINER, ContainerComponent.fromStacks(this.getItemsBeingCooked()));
     }
 
     public void removeFromCopiedStackNbt(NbtCompound nbt) {

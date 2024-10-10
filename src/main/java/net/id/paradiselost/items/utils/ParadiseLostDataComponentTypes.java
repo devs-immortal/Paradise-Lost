@@ -3,7 +3,7 @@ package net.id.paradiselost.items.utils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradiselost.ParadiseLost;
-import net.minecraft.component.DataComponentType;
+import net.minecraft.component.ComponentType;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
@@ -23,14 +23,14 @@ public class ParadiseLostDataComponentTypes {
 
     // Registered Components
 
-    public static final DataComponentType<MoaGeneComponent> MOA_GENES = register("moa_genes", (builder) -> builder.codec(MoaGeneComponent.CODEC).packetCodec(MoaGeneComponent.PACKET_CODEC).cache());
-    public static final DataComponentType<BloodstoneComponent> BLOODSTONE = register("bloodstone", (builder) -> builder.codec(BloodstoneComponent.CODEC).packetCodec(BloodstoneComponent.PACKET_CODEC));
+    public static final ComponentType<MoaGeneComponent> MOA_GENES = register("moa_genes", (builder) -> builder.codec(MoaGeneComponent.CODEC).packetCodec(MoaGeneComponent.PACKET_CODEC).cache());
+    public static final ComponentType<BloodstoneComponent> BLOODSTONE = register("bloodstone", (builder) -> builder.codec(BloodstoneComponent.CODEC).packetCodec(BloodstoneComponent.PACKET_CODEC));
 
 
     // Util
 
-    private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
-        return Registry.register(Registries.DATA_COMPONENT_TYPE, locate(id), builderOperator.apply(DataComponentType.builder()).build());
+    private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
+        return Registry.register(Registries.DATA_COMPONENT_TYPE, locate(id), builderOperator.apply(ComponentType.builder()).build());
     }
 
     public static void init() {

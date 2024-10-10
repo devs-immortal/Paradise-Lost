@@ -4,10 +4,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
-import net.kyrptonaught.customportalapi.interfaces.EntityInCustomPortal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +20,7 @@ public class ParadiseLostPortalBlock extends CustomPortalBlock {
     @Override
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (!(MinecraftClient.getInstance().player instanceof EntityInCustomPortal entity && entity.didTeleport()) && random.nextInt(200) == 0) {
+        if (random.nextInt(200) == 0) {
             world.getProfiler().push("portal");
             world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, ParadiseLostSoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
             world.getProfiler().pop();

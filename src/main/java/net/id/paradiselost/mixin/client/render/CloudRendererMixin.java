@@ -54,7 +54,7 @@ public final class CloudRendererMixin {
     @Nullable
     private VertexBuffer cloudsBuffer;
     
-    @Shadow private BufferBuilder.BuiltBuffer renderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color) {
+    @Shadow private BuiltBuffer buildCloudsBuffer(Tessellator tessellator, double x, double y, double z, Vec3d color) {
         throw new AssertionError();
     }
 
@@ -100,15 +100,13 @@ public final class CloudRendererMixin {
 
             if (this.cloudsDirty) {
                 this.cloudsDirty = false;
-                BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
                 if (this.cloudsBuffer != null) {
                     this.cloudsBuffer.close();
                 }
 
                 this.cloudsBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
-                BufferBuilder.BuiltBuffer builtBuffer = this.renderClouds(bufferBuilder, posX, posY, posZ, vec3d);
                 this.cloudsBuffer.bind();
-                this.cloudsBuffer.upload(builtBuffer);
+                this.cloudsBuffer.upload(this.buildCloudsBuffer(Tessellator.getInstance(), posX, posY, posZ, vec3d));
                 VertexBuffer.unbind();
             }
 

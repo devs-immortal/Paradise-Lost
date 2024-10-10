@@ -129,7 +129,7 @@ public class MoaGenes implements AutoSyncedComponent {
         Identifier id = this.race.getId();
         String name = id.getPath();
         String namespace = id.getNamespace();
-        return new Identifier(namespace, "textures/entity/moa/" + name + ".png");
+        return Identifier.of(namespace, "textures/entity/moa/" + name + ".png");
     }
 
     public float getHunger() {

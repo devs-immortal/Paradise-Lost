@@ -6,9 +6,9 @@ import net.fabricmc.fabric.impl.client.rendering.ColorProviderRegistryImpl;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.blocks.util.DynamicColorBlock;
 import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.color.world.FoliageColors;
-import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.registry.Registries;
+import net.minecraft.world.biome.FoliageColors;
+import net.minecraft.world.biome.GrassColors;
 
 @Environment(EnvType.CLIENT)
 public class ParadiseLostColorProviders {

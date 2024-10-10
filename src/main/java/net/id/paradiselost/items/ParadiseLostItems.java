@@ -125,9 +125,9 @@ public class ParadiseLostItems {
 
     public static final Item GLAZED_GOLD_UPGRADE = add("glazed_gold_upgrade_smithing_template", new SmithingTemplateItem(
             GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT, GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT, GLAZED_GOLD_UPGRADE_TEXT, GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT, GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT,
-            List.of(new Identifier("item/empty_armor_slot_helmet"), new Identifier("item/empty_armor_slot_chestplate"), new Identifier("item/empty_armor_slot_leggings"), new Identifier("item/empty_armor_slot_boots"),
-                    new Identifier("item/empty_slot_hoe"), new Identifier("item/empty_slot_axe"), new Identifier("item/empty_slot_sword"), new Identifier("item/empty_slot_shovel"), new Identifier("item/empty_slot_pickaxe")),
-            List.of(new Identifier("item/empty_slot_ingot"))
+            List.of(Identifier.of("item/empty_armor_slot_helmet"), Identifier.of("item/empty_armor_slot_chestplate"), Identifier.of("item/empty_armor_slot_leggings"), Identifier.of("item/empty_armor_slot_boots"),
+                    Identifier.of("item/empty_slot_hoe"), Identifier.of("item/empty_slot_axe"), Identifier.of("item/empty_slot_sword"), Identifier.of("item/empty_slot_shovel"), Identifier.of("item/empty_slot_pickaxe")),
+            List.of(Identifier.of("item/empty_slot_ingot"))
     ));
 
     private static Settings wearable() {

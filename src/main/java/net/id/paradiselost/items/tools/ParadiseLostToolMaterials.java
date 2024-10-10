@@ -1,7 +1,6 @@
 package net.id.paradiselost.items.tools;
 
 import com.google.common.base.Suppliers;
-import net.fabricmc.yarn.constants.MiningLevels;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.ToolMaterial;

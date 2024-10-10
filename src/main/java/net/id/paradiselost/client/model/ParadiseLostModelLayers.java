@@ -6,7 +6,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.mixin.client.rendering.EntityModelLayersAccessor;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.client.model.armor.PhoenixArmorModel;
-import net.id.paradiselost.client.model.block.DungeonSwitchModel;
 import net.id.paradiselost.client.model.entity.*;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.TexturedModelData;
@@ -30,7 +29,6 @@ public class ParadiseLostModelLayers {
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer PHOENIX_ARMOR = register("phoenix_armor", "main", PhoenixArmorModel.getTexturedModelData());
 
-    public static final EntityModelLayer DUNGEON_SWITCH = register("dungeon_switch", "main", DungeonSwitchModel.getTexturedModelData());
 
     public static EntityModelLayer register(Identifier id, String layer, TexturedModelData data) {
         EntityModelLayer entityModelLayer = new EntityModelLayer(id, layer);

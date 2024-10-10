@@ -65,9 +65,9 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
      */
     public static Identifier locate(String location) {
         if (location.contains(":")) {
-            return new Identifier(location);
+            return Identifier.of(location);
         } else {
-            return new Identifier(MOD_ID, location);
+            return Identifier.of(MOD_ID, location);
         }
     }
 
