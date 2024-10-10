@@ -45,10 +45,10 @@ public class FakeSlot extends Slot {
     public boolean hasStack() {
         return !getStack().isEmpty();
     }
-    
+
     @Override
-    public void setStack(ItemStack stack) {
-        if (stack.equals(getStack())) {
+    public void setStack(ItemStack stack, ItemStack previousStack) {
+        if (stack.equals(previousStack)) {
             return;
         }
         setter.accept(stack);

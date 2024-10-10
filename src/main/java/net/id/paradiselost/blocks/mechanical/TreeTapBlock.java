@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -72,7 +73,7 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
 
 		BlockPos blockPos = pos.offset(direction.getOpposite());
 		BlockState blockState = world.getBlockState(blockPos);
-		return blockState.isSideSolidFullSquare(world, blockPos, direction);
+		return blockState.isSideSolidFullSquare(world, blockPos, direction) || blockState.isOf(Blocks.DRAGON_HEAD);
 	}
 
 	@Override
