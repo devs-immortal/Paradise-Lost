@@ -38,24 +38,18 @@ public abstract class InGameOverlayRendererMixin {
         MinecraftClient client = MinecraftClient.getInstance();
         BlockState overlayState = getInWallBlockState(client.player);
         if (overlayState != null && overlayState.getBlock() instanceof ParadiseLostCloudBlock) {
-            RenderSystem.setShader(GameRenderer::getPositionColorTexProgram);
             RenderSystem.setShaderTexture(0, ParadiseLost.locate("textures/block/" + Registries.BLOCK.getId(overlayState.getBlock()).getPath() + ".png"));
-            BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
-            float f = client.player.getBrightnessAtEyes();
-            RenderSystem.enableBlend();
-            RenderSystem.defaultBlendFunc();
-            RenderSystem.setShaderColor(f, f, f, 0.775F);
+            RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
+            float brightness = client.player.getBrightnessAtEyes();
             float yaw = client.player.getYaw() / 192.0F;
             float pitch = client.player.getPitch() / 192.0F;
             Matrix4f matrix4f = matrices.peek().getPositionMatrix();
-            bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
-            bufferBuilder.vertex(matrix4f, -1.0F, -1.0F, -0.5F).texture(1.0F - yaw, 1.0F + pitch).next();
-            bufferBuilder.vertex(matrix4f, 1.0F, -1.0F, -0.5F).texture(0.0F - yaw, 1.0F + pitch).next();
-            bufferBuilder.vertex(matrix4f, 1.0F, 1.0F, -0.5F).texture(0.0F - yaw, 0.0F + pitch).next();
-            bufferBuilder.vertex(matrix4f, -1.0F, 1.0F, -0.5F).texture(1.0F - yaw, 0.0F + pitch).next();
+            BufferBuilder bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
+            bufferBuilder.vertex(matrix4f, -1.0F, -1.0F, -0.5F).texture(1.0F - yaw, 1.0F + pitch).color(brightness, brightness, brightness, 0.075F);
+            bufferBuilder.vertex(matrix4f, 1.0F, -1.0F, -0.5F).texture(0.0F - yaw, 1.0F + pitch).color(brightness, brightness, brightness, 0.075F);
+            bufferBuilder.vertex(matrix4f, 1.0F, 1.0F, -0.5F).texture(0.0F - yaw, 0.0F + pitch).color(brightness, brightness, brightness, 0.075F);
+            bufferBuilder.vertex(matrix4f, -1.0F, 1.0F, -0.5F).texture(1.0F - yaw, 0.0F + pitch).color(brightness, brightness, brightness, 0.075F);
             BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-            //FIXME? Should this be removed? The original doesn't have it.
-            RenderSystem.disableBlend();
             ci.cancel();
         }
     }

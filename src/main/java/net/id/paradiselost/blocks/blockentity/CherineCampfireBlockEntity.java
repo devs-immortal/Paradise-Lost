@@ -3,10 +3,13 @@ package net.id.paradiselost.blocks.blockentity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
@@ -18,6 +21,7 @@ import net.minecraft.recipe.CampfireCookingRecipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Clearable;
 import net.minecraft.util.ItemScatterer;
@@ -36,7 +40,7 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     private final DefaultedList<ItemStack> itemsBeingCooked;
     private final int[] cookingTimes;
     private final int[] cookingTotalTimes;
-    private final RecipeManager.MatchGetter<Inventory, CampfireCookingRecipe> matchGetter;
+    private final RecipeManager.MatchGetter<SingleStackRecipeInput, CampfireCookingRecipe> matchGetter;
 
     public CherineCampfireBlockEntity(BlockPos pos, BlockState state) {
         super(ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, pos, state);
@@ -53,11 +57,10 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
             ItemStack itemStack = campfire.itemsBeingCooked.get(i);
             if (!itemStack.isEmpty()) {
                 bl = true;
-                int var10002 = campfire.cookingTimes[i]++;
                 if (campfire.cookingTimes[i] >= campfire.cookingTotalTimes[i]) {
-                    Inventory inventory = new SimpleInventory(itemStack);
-                    ItemStack itemStack2 = campfire.matchGetter.getFirstMatch(inventory, world).map((recipe) -> {
-                        return recipe.value().craft(inventory, world.getRegistryManager());
+                    SingleStackRecipeInput singleStackRecipeInput = new SingleStackRecipeInput(itemStack);
+                    ItemStack itemStack2 = campfire.matchGetter.getFirstMatch(singleStackRecipeInput, world).map((recipe) -> {
+                        return (recipe.value()).craft(singleStackRecipeInput, world.getRegistryManager());
                     }).orElse(itemStack);
                     if (itemStack2.isItemEnabled(world.getEnabledFeatures())) {
                         ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), itemStack2);
@@ -109,7 +112,7 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
                 double e = (double) pos.getY() + 0.5;
                 double g = (double) pos.getZ() + 0.5 - (double) ((float) direction.getOffsetZ() * 0.3125F) + (double) ((float) direction.rotateYClockwise().getOffsetZ() * 0.3125F);
 
-                for (int k = 0; k < 4; ++k) {
+                for(int k = 0; k < 4; ++k) {
                     world.addParticle(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0);
                 }
             }
@@ -156,16 +159,16 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     }
 
     public Optional<RecipeEntry<CampfireCookingRecipe>> getRecipeFor(ItemStack stack) {
-        return this.itemsBeingCooked.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.matchGetter.getFirstMatch(new SimpleInventory(new ItemStack[]{stack}), this.world);
+        return this.itemsBeingCooked.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.matchGetter.getFirstMatch(new SingleStackRecipeInput(stack), this.world);
     }
 
-    public boolean addItem(@Nullable Entity user, ItemStack stack, int cookTime) {
-        for (int i = 0; i < this.itemsBeingCooked.size(); ++i) {
-            ItemStack itemStack = this.itemsBeingCooked.get(i);
+    public boolean addItem(@Nullable LivingEntity user, ItemStack stack, int cookTime) {
+        for(int i = 0; i < this.itemsBeingCooked.size(); ++i) {
+            ItemStack itemStack = (ItemStack)this.itemsBeingCooked.get(i);
             if (itemStack.isEmpty()) {
                 this.cookingTotalTimes[i] = cookTime;
                 this.cookingTimes[i] = 0;
-                this.itemsBeingCooked.set(i, stack.split(1));
+                this.itemsBeingCooked.set(i, stack.splitUnlessCreative(1, user));
                 this.world.emitGameEvent(GameEvent.BLOCK_CHANGE, this.getPos(), GameEvent.Emitter.of(user, this.getCachedState()));
                 this.updateListeners();
                 return true;
@@ -184,14 +187,15 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
         this.itemsBeingCooked.clear();
     }
 
+
     protected void readComponents(BlockEntity.ComponentsAccess components) {
         super.readComponents(components);
-        (components.getOrDefault(ComponentTypes.CONTAINER, ContainerComponent.DEFAULT)).copyTo(this.getItemsBeingCooked());
+        (components.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)).copyTo(this.getItemsBeingCooked());
     }
 
     protected void addComponents(ComponentMap.Builder componentMapBuilder) {
         super.addComponents(componentMapBuilder);
-        componentMapBuilder.add(ComponentTypes.CONTAINER, ContainerComponent.fromStacks(this.getItemsBeingCooked()));
+        componentMapBuilder.add(DataComponentTypes.CONTAINER, ContainerComponent.fromStacks(this.getItemsBeingCooked()));
     }
 
     public void removeFromCopiedStackNbt(NbtCompound nbt) {

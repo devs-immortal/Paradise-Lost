@@ -119,11 +119,6 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
-        return 32;
-    }
-
-    @Override
     public UseAction getUseAction(ItemStack stack) {
         if (stack.getItem() != ParadiseLostItems.AUREL_WATER_BUCKET && stack.getItem() != ParadiseLostItems.AUREL_BUCKET) {
             return UseAction.DRINK;

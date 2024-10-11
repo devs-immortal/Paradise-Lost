@@ -92,8 +92,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
                     spawnPetalBurst(world, random, pos);
                 }
             } else {
-                int fortune = EnchantmentHelper.getEquipmentLevel(Enchantments.FORTUNE, player);
-                ItemStack drops = new ItemStack(fruit.get(), random.nextInt(fortune + 1 + random.nextInt(1)) + 1);
+                ItemStack drops = new ItemStack(fruit.get(), random.nextInt(1 + random.nextInt(1)) + 1);
                 if (!player.giveItemStack(drops)) {
                     ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), drops);
                 }

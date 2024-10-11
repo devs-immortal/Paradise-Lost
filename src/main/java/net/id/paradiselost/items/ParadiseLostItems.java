@@ -177,7 +177,7 @@ public class ParadiseLostItems {
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(ParadiseLostBlocks.AMADRYS, food(ParadiseLostFoodComponent.GENERIC_WORSE)), compostable30);
     public static final AliasedBlockItem NITRA_SEED = add("nitra", new AliasedBlockItem(ParadiseLostBlocks.NITRA, food()), compostable15);
     public static final Item NITRA_BULB = add("nitra_bulb", new NitraItem(food()), compostable50);
-    public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new StewItem(food(ParadiseLostFoodComponent.AMADRYS_NOODLES)));
+    public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new Item(food(ParadiseLostFoodComponent.AMADRYS_NOODLES)));
     public static final Item AMADRYS_BREAD = add("amadrys_bread", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD)), compostable50);
     public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED)), compostable50);
     public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);

@@ -7,6 +7,7 @@ import net.id.paradiselost.client.rendering.ui.BloodstoneHUDRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
@@ -26,7 +27,7 @@ public abstract class InGameHudMixin {
     protected abstract void renderOverlay(DrawContext context, Identifier texture, float opacity);
 
     @Inject(method = "renderHotbar", at = @At("HEAD"))
-    public void renderOverlay(DrawContext context, float tickDelta, CallbackInfo ci) {
+    public void renderOverlay(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         List<ParadiseLostOverlayRegistrar.Overlay> overlays = ParadiseLostOverlayRegistrar.getOverlays();
         Entity entity = MinecraftClient.getInstance().cameraEntity;
         if (entity instanceof LivingEntity player) {
@@ -38,9 +39,4 @@ public abstract class InGameHudMixin {
         }
         BloodstoneHUDRenderer.render(context);
     }
-
-//    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;render(Lnet/minecraft/client/gui/DrawContext;)V"))
-//    public void renderBloodstone(DrawContext context, CallbackInfo ci) {
-//        // TODO: probably move this inject to somewhere else (PL-1.7)
-//    }
 }

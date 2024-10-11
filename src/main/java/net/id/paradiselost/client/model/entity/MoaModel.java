@@ -100,13 +100,7 @@ public class MoaModel extends EntityModel<MoaEntity> {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        torso.render(matrixStack, buffer, packedLight, packedOverlay);
-    }
-
-    public void setRotationAngle(ModelPart bone, float x, float y, float z) {
-        bone.pitch = x;
-        bone.yaw = y;
-        bone.roll = z;
+    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+        torso.render(matrices, vertices, light, overlay);
     }
 }

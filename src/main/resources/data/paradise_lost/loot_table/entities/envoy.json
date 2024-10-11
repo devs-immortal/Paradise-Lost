@@ -34,7 +34,7 @@
               "add": false
             },
             {
-              "function": "minecraft:looting_enchant",
+              "function": "minecraft:enchanted_count_increase"
               "count": {
                 "type": "minecraft:uniform",
                 "min": 0,

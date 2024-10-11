@@ -9,11 +9,14 @@ import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.FluidModificationItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -63,29 +66,14 @@ public class ParadiseLostDispenserBehaviors {
 
         @Override
         public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            WorldAccess worldAccess = pointer.world();
+            FluidModificationItem fluidModificationItem = (FluidModificationItem)stack.getItem();
             BlockPos blockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
-            BlockState blockState = worldAccess.getBlockState(blockPos);
-            Block block = blockState.getBlock();
-            if (block instanceof FluidDrainable fluidDrainable && blockState.getFluidState().isOf(Fluids.WATER)) {
-                ItemStack itemStack = fluidDrainable.tryDrainFluid(null, worldAccess, blockPos, blockState);
-                if (itemStack.isEmpty()) {
-                    return super.dispenseSilently(pointer, stack);
-                } else {
-                    worldAccess.emitGameEvent(null, GameEvent.FLUID_PICKUP, blockPos);
-                    Item item = ParadiseLostItems.AUREL_WATER_BUCKET;
-                    stack.decrement(1);
-                    if (stack.isEmpty()) {
-                        return new ItemStack(item);
-                    } else {
-                        if (pointer.blockEntity().addToFirstFreeSlot(new ItemStack(item)) < 0) {
-                            this.fallbackBehavior.dispense(pointer, new ItemStack(item));
-                        }
-                        return stack;
-                    }
-                }
+            World world = pointer.world();
+            if (fluidModificationItem.placeFluid(null, world, blockPos, null)) {
+                fluidModificationItem.onEmptied(null, world, stack, blockPos);
+                return this.decrementStackWithRemainder(pointer, stack, new ItemStack(ParadiseLostItems.AUREL_WATER_BUCKET));
             } else {
-                return super.dispenseSilently(pointer, stack);
+                return this.fallbackBehavior.dispense(pointer, stack);
             }
         }
     };
