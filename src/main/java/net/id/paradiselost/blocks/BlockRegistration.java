@@ -16,6 +16,7 @@ import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.world.feature.tree.ParadiseLostSaplingGenerators;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -42,6 +43,10 @@ public class BlockRegistration {
     static class ParadiseLostFarmlandBlock extends FarmlandBlock {
         ParadiseLostFarmlandBlock(Settings settings) {
             super(settings);
+        }
+
+        public BlockState getPlacementState(ItemPlacementContext ctx) {
+            return !this.getDefaultState().canPlaceAt(ctx.getWorld(), ctx.getBlockPos()) ? ParadiseLostBlocks.DIRT.getDefaultState() : super.getPlacementState(ctx);
         }
     }
 

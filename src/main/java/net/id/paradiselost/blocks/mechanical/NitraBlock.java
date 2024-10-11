@@ -28,6 +28,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class NitraBlock extends Block {
 
+    private static final float BASE_EXPLOSIVE_POWER = 2.5F;
+
     public NitraBlock(Settings settings) {
         super(settings);
     }
@@ -56,7 +58,7 @@ public class NitraBlock extends Block {
     }
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        ignite(world, pos, 2F, null);
+        ignite(world, pos, BASE_EXPLOSIVE_POWER, null);
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
         world.spawnParticles(ParticleTypes.EXPLOSION_EMITTER, pos.getX(), pos.getY(), pos.getZ(), 1, 0.0, 0.0, 0.0, 0.0);
         world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F, random.nextLong());
@@ -80,7 +82,7 @@ public class NitraBlock extends Block {
         if (!itemStack.isOf(Items.FLINT_AND_STEEL) && !itemStack.isOf(Items.FIRE_CHARGE)) {
             return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
         } else {
-            ignite(world, pos, 2F, player);
+            ignite(world, pos, BASE_EXPLOSIVE_POWER, player);
             world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
             Item item = itemStack.getItem();
             if (!player.isCreative()) {
@@ -101,7 +103,7 @@ public class NitraBlock extends Block {
             BlockPos blockPos = hit.getBlockPos();
             Entity entity = projectile.getOwner();
             if (projectile.isOnFire() && projectile.canModifyAt(world, blockPos)) {
-                ignite(world, blockPos, 2F, entity instanceof LivingEntity ? (LivingEntity) entity : null);
+                ignite(world, blockPos, BASE_EXPLOSIVE_POWER, entity instanceof LivingEntity ? (LivingEntity) entity : null);
                 world.removeBlock(blockPos, false);
             }
         }

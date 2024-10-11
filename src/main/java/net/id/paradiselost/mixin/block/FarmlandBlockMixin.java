@@ -21,7 +21,7 @@ public class FarmlandBlockMixin {
     @Inject(method = "setToDirt", at = @At("HEAD"), cancellable = true)
     private static void onSetToDirt(@Nullable Entity entity, BlockState state, World world, BlockPos pos, CallbackInfo ci) {
         if (state.isOf(ParadiseLostBlocks.FARMLAND)) {
-            BlockState blockState = pushEntitiesUpBeforeBlockChange(state, Blocks.DIRT.getDefaultState(), world, pos);
+            BlockState blockState = pushEntitiesUpBeforeBlockChange(state, ParadiseLostBlocks.DIRT.getDefaultState(), world, pos);
             world.setBlockState(pos, blockState);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(entity, blockState));
             ci.cancel();

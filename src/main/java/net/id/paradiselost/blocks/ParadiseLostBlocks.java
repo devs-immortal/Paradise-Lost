@@ -128,7 +128,7 @@ public class ParadiseLostBlocks {
     public static final SlabBlock GOLDEN_AMBER_TILE_SLAB = add("golden_amber_tile_slab", new SlabBlock(amberTiles()));
     public static final ParadiseLostStairsBlock GOLDEN_AMBER_TILE_STAIRS = add("golden_amber_tile_stairs", new ParadiseLostStairsBlock(GOLDEN_AMBER_TILE.getDefaultState(), amberTiles()));
 
-    public static final Block BLOOMED_CALCITE = add("bloomed_calcite", new CropGrowthBlock(copy(CALCITE).ticksRandomly(), 2));
+    public static final CropGrowthBlock BLOOMED_CALCITE = add("bloomed_calcite", new CropGrowthBlock(copy(CALCITE).ticksRandomly(), 2));
 
     protected static Settings flowerPot() {
         return copy(POTTED_OAK_SAPLING);
