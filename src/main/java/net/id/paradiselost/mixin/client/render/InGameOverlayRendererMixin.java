@@ -38,18 +38,23 @@ public abstract class InGameOverlayRendererMixin {
         MinecraftClient client = MinecraftClient.getInstance();
         BlockState overlayState = getInWallBlockState(client.player);
         if (overlayState != null && overlayState.getBlock() instanceof ParadiseLostCloudBlock) {
+            RenderSystem.setShader(GameRenderer::getPositionTexProgram);
             RenderSystem.setShaderTexture(0, ParadiseLost.locate("textures/block/" + Registries.BLOCK.getId(overlayState.getBlock()).getPath() + ".png"));
-            RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
-            float brightness = client.player.getBrightnessAtEyes();
+            BlockPos blockPos = BlockPos.ofFloored(client.player.getX(), client.player.getEyeY(), client.player.getZ());
+            float brightness = LightmapTextureManager.getBrightness(client.player.getWorld().getDimension(), client.player.getWorld().getLightLevel(blockPos));
+            RenderSystem.enableBlend();
+            RenderSystem.setShaderColor(brightness, brightness, brightness, 0.6F);
             float yaw = client.player.getYaw() / 192.0F;
             float pitch = client.player.getPitch() / 192.0F;
             Matrix4f matrix4f = matrices.peek().getPositionMatrix();
-            BufferBuilder bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-            bufferBuilder.vertex(matrix4f, -1.0F, -1.0F, -0.5F).texture(1.0F - yaw, 1.0F + pitch).color(brightness, brightness, brightness, 0.075F);
-            bufferBuilder.vertex(matrix4f, 1.0F, -1.0F, -0.5F).texture(0.0F - yaw, 1.0F + pitch).color(brightness, brightness, brightness, 0.075F);
-            bufferBuilder.vertex(matrix4f, 1.0F, 1.0F, -0.5F).texture(0.0F - yaw, 0.0F + pitch).color(brightness, brightness, brightness, 0.075F);
-            bufferBuilder.vertex(matrix4f, -1.0F, 1.0F, -0.5F).texture(1.0F - yaw, 0.0F + pitch).color(brightness, brightness, brightness, 0.075F);
+            BufferBuilder bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
+            bufferBuilder.vertex(matrix4f, -1.0F, -1.0F, -0.5F).texture(1.0F - yaw, 1.0F + pitch);
+            bufferBuilder.vertex(matrix4f, 1.0F, -1.0F, -0.5F).texture(0.0F - yaw, 1.0F + pitch);
+            bufferBuilder.vertex(matrix4f, 1.0F, 1.0F, -0.5F).texture(0.0F - yaw, 0.0F + pitch);
+            bufferBuilder.vertex(matrix4f, -1.0F, 1.0F, -0.5F).texture(1.0F - yaw, 0.0F + pitch);
             BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.disableBlend();
             ci.cancel();
         }
     }
