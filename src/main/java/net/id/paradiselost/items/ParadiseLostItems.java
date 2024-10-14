@@ -242,6 +242,7 @@ public class ParadiseLostItems {
     // logs
     public static final BlockItem AUREL_LOG = add(ParadiseLostBlocks.AUREL_WOODSTUFF.log());
     public static final BlockItem MOTTLED_AUREL_LOG = add(ParadiseLostBlocks.MOTTLED_AUREL_LOG);
+    public static final BlockItem MOTTLED_AUREL_WOOD = add(ParadiseLostBlocks.MOTTLED_AUREL_WOOD);
     public static final BlockItem MOTTLED_AUREL_FALLEN_LOG = add(ParadiseLostBlocks.MOTTLED_AUREL_FALLEN_LOG);
     public static final BlockItem MOTHER_AUREL_LOG = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.log());
     public static final BlockItem ORANGE_LOG = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.log());

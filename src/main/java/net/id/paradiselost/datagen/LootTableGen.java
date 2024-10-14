@@ -114,6 +114,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
         // Aurel Wood
         addWoodBlockSetDrops(AUREL_WOODSTUFF, 0.05F, 0.0625F, 0.083333336F, 0.1F);
         addDrop(MOTTLED_AUREL_LOG);
+        addDrop(MOTTLED_AUREL_WOOD);
         addDrop(MOTTLED_AUREL_FALLEN_LOG);
         addDropsWithShears(AUREL_LEAF_PILE);
         addDrop(AUREL_BOOKSHELF, block -> this.drops(block, Items.BOOK, ConstantLootNumberProvider.create(3.0F)));

@@ -6,6 +6,10 @@
       {
         "chance": 0.1,
         "feature": "paradise_lost:aurel_shrub"
+      },
+      {
+        "chance": 0.01,
+        "feature": "paradise_lost:tree_mother_aurel"
       }
     ]
   }

@@ -13,7 +13,6 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final RegistryKey<PlacedFeature> MIXED_TREES = of("trees_mixed");
     public static final RegistryKey<PlacedFeature> SPARSE_TREES = of("trees_sparse");
     public static final RegistryKey<PlacedFeature> THICKET_TREES = of("trees_thicket");
-    public static final RegistryKey<PlacedFeature> THICKET_MOTHER_AUREL_TREES = of("trees_thicket_mother_aurel");
     public static final RegistryKey<PlacedFeature> RAINBOW_FOREST_TREES = of("trees_rainbow_forest");
 
     // Fallen leaves

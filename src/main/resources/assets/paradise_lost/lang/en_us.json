@@ -92,6 +92,7 @@
   "block.paradise_lost.aurel_sapling": "Aurel Sapling",
   "block.paradise_lost.aurel_log": "Aurel Log",
   "block.paradise_lost.mottled_aurel_log": "Mottled Aurel Log",
+  "block.paradise_lost.mottled_aurel_wood": "Mottled Aurel Wood",
   "block.paradise_lost.mottled_aurel_fallen_log": "Hollow Mottled Aurel Log",
   "block.paradise_lost.aurel_wood": "Aurel Wood",
   "block.paradise_lost.stripped_aurel_log": "Stripped Aurel Log",
@@ -240,8 +241,6 @@
   "entity.paradise_lost.floating_block": "Floating Block",
   "entity.paradise_lost.moa": "Moa",
   "entity.paradise_lost.envoy": "Envoy",
-
-  "item.minecraft.potion.effect.wither": "Potion of Decay",
 
   "item.paradise_lost.golden_amber": "Golden Amber",
   "item.paradise_lost.cherine": "Cherine Shard",

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:mottled_aurel_log"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:mottled_aurel_wood",
+    "count": 3
+  }
+}

@@ -23,6 +23,7 @@ public class ParadiseLostItemGroups {
                 // Woodstuff
                 entries.add(AUREL_LOG);
                 entries.add(MOTTLED_AUREL_LOG);
+                entries.add(MOTTLED_AUREL_WOOD);
                 entries.add(AUREL_WOOD);
                 entries.add(STRIPPED_AUREL_LOG);
                 entries.add(STRIPPED_AUREL_WOOD);
