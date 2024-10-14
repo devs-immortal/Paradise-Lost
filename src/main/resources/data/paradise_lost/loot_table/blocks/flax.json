@@ -1,8 +1,12 @@
 {
   "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -10,91 +14,57 @@
           "children": [
             {
               "type": "minecraft:item",
-              "functions": [
-                {
-                  "add": false,
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 4.0,
-                    "min": 1.0
-                  },
-                  "function": "minecraft:set_count"
-                }
-              ],
               "conditions": [
                 {
-                  "condition": "minecraft:block_state_property",
                   "block": "paradise_lost:flax",
+                  "condition": "minecraft:block_state_property",
                   "properties": {
-                    "half": "lower",
-                    "age": "7"
+                    "age": "7",
+                    "half": "lower"
                   }
                 }
               ],
-              "name": "paradise_lost:flax_thread"
+              "name": "paradise_lost:flaxseed"
             },
             {
               "type": "minecraft:item",
-              "name": "paradise_lost:flaxseed"
+              "name": "paradise_lost:flax_thread"
             }
           ]
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "paradise_lost:flax",
-          "properties": {
-            "half": "lower",
-            "age": "7"
-          }
-        }
-      ]
+      "rolls": 1.0
     },
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "paradise_lost:flax",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "7",
+            "half": "lower"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "functions": [
             {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 0.0
-              },
-              "function": "minecraft:set_count"
-            },
-            {
-              "function": "minecraft:apply_bonus",
               "enchantment": "minecraft:fortune",
               "formula": "minecraft:binomial_with_bonus_count",
+              "function": "minecraft:apply_bonus",
               "parameters": {
                 "extra": 3,
                 "probability": 0.5714286
               }
             }
           ],
-          "name": "paradise_lost:flaxseed"
+          "name": "paradise_lost:flax_thread"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "paradise_lost:flax",
-          "properties": {
-            "half": "lower",
-            "age": "7"
-          }
-        }
-      ]
-    }
-  ],
-  "functions": [
-    {
-      "function": "minecraft:explosion_decay"
+      "rolls": 1.0
     }
   ]
 }

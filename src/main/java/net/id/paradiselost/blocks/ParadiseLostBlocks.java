@@ -43,19 +43,19 @@ public class ParadiseLostBlocks {
         return copy(Blocks.DIRT).strength(2f).sounds(BlockSoundGroup.GILDED_BLACKSTONE);
     }
 
+    // Soil Blocks
     public static final FarmlandBlock FARMLAND = add("farmland", new ParadiseLostFarmlandBlock(copy(Blocks.FARMLAND)));
     public static final ParadiseLostDirtPathBlock DIRT_PATH = add("grass_path", new ParadiseLostDirtPathBlock(copy(Blocks.DIRT_PATH), () -> ParadiseLostBlocks.DIRT));
     public static final ParadiseLostDirtPathBlock PERMAFROST_PATH = add("frozen_path", new ParadiseLostDirtPathBlock(permafrost(), () -> ParadiseLostBlocks.PERMAFROST));
     public static final ParadiseLostGrassBlock HIGHLANDS_GRASS = add("highlands_grass", new ParadiseLostGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
     public static final ParadiseLostSnowyBlock FROZEN_GRASS = add("frozen_grass", new ParadiseLostSnowyBlock(grassBlock().mapColor(MapColor.WHITE).strength(2F).sounds(BlockSoundGroup.GILDED_BLACKSTONE)), flattenable(ParadiseLostBlocks.PERMAFROST_PATH));
-    // Soil Blocks
+
     public static final Block DIRT = add("dirt", new Block(copy(Blocks.DIRT).strength(0.3f)), tillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
     public static final Block COARSE_DIRT = add("coarse_dirt", new Block(copy(Blocks.DIRT).strength(0.3f)), coarseTillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
     public static final FloatingBlock LEVITA = add("levita", new FloatingBlock(false, copy(Blocks.GRAVEL).strength(0.3f)));
     public static final Block PERMAFROST = add("permafrost", new Block(permafrost()), flattenable(ParadiseLostBlocks.PERMAFROST_PATH));
     public static final Block PACKED_SWEDROOT = add("packed_swedroot", new Block(create().strength(2f).sounds(BlockSoundGroup.SHROOMLIGHT)));
 
-    // Glass Blocks
 
     // Clouds
     private static Settings cloud() {
@@ -66,7 +66,7 @@ public class ParadiseLostBlocks {
     public static final BlueParadiseLostCloudBlock BLUE_CLOUD = add("blue_cloud", new BlueParadiseLostCloudBlock(cloud().mapColor(MapColor.LIGHT_BLUE)), translucentRenderLayer);
     public static final GoldenParadiseLostCloudBlock GOLDEN_CLOUD = add("golden_cloud", new GoldenParadiseLostCloudBlock(cloud().mapColor(MapColor.GOLD)), translucentRenderLayer);
 
-    // Smooth Floestone
+    // Floestone
     private static Settings floestone() {
         return create().mapColor(MapColor.LIGHT_GRAY).requiresTool().strength(0.5f, 5f).sounds(BlockSoundGroup.STONE);
     }
@@ -117,17 +117,19 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostStairsBlock SMOOTH_HELIOLITH_STAIRS = add("smooth_heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone()));
     public static final WallBlock HELIOLITH_WALL = add("heliolith_wall", new WallBlock(floestone()));
 
-    // LEVITA BRICK
-    public static final SimpleBlockSet LEVITA_BRICK_SET = registerSimpleBlockSet("levita_brick", create().mapColor(MapColor.LIGHT_BLUE_GRAY).requiresTool().strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE));
+    // Levita Brick
+    public static final SimpleBlockSet LEVITA_BRICK_SET = registerSimpleBlockSet("levita_brick", create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE));
 
     private static Settings amberTiles() {
         return create().mapColor(MapColor.GOLD).requiresTool().sounds(BlockSoundGroup.CALCITE).strength(2, 6);
     }
 
+    // Golden Amber Tile
     public static final Block GOLDEN_AMBER_TILE = add("golden_amber_tile", new Block(amberTiles()));
     public static final SlabBlock GOLDEN_AMBER_TILE_SLAB = add("golden_amber_tile_slab", new SlabBlock(amberTiles()));
     public static final ParadiseLostStairsBlock GOLDEN_AMBER_TILE_STAIRS = add("golden_amber_tile_stairs", new ParadiseLostStairsBlock(GOLDEN_AMBER_TILE.getDefaultState(), amberTiles()));
 
+    // Misc
     public static final CropGrowthBlock BLOOMED_CALCITE = add("bloomed_calcite", new CropGrowthBlock(copy(CALCITE).ticksRandomly(), 2));
 
     protected static Settings flowerPot() {
@@ -205,12 +207,6 @@ public class ParadiseLostBlocks {
     public static final Block LIVERWORT = add("liverwort", new Block(copy(MOSS_BLOCK).sounds(BlockSoundGroup.AZALEA_LEAVES)));
     public static final CarpetBlock LIVERWORT_CARPET = add("liverwort_carpet", new CarpetBlock(copy(MOSS_BLOCK).sounds(BlockSoundGroup.AZALEA_LEAVES)));
 
-    private static Settings lichen() {
-        return copy(OAK_WOOD).mapColor(MapColor.DULL_RED).sounds(BlockSoundGroup.MOSS_BLOCK);
-    }
-
-    public static final GlowLichenBlock SWEDROOT_SPREAD = add("swedroot_spread", new GlowLichenBlock(Settings.create().mapColor(MapColor.OAK_TAN).pistonBehavior(PistonBehavior.DESTROY).noCollision().strength(1F).sounds(BlockSoundGroup.SHROOMLIGHT)), cutoutRenderLayer);
-
     public static final WallClingingPlantBlock ROOTCAP = add("rootcap", new WallClingingPlantBlock(ParadiseLostBlockTags.FUNGI_CLINGABLES, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
     public static final ParadiseLostMushroomPlantBlock BROWN_SPORECAP = add("brown_sporecap", new ParadiseLostMushroomPlantBlock(BlockTags.MUSHROOM_GROW_BLOCK, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
     public static final ParadiseLostHangingMushroomPlantBlock PINK_SPORECAP = add("pink_sporecap", new ParadiseLostHangingMushroomPlantBlock(BlockTags.MUSHROOM_GROW_BLOCK, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
@@ -266,7 +262,6 @@ public class ParadiseLostBlocks {
     public static final CherineLanternBlock CHERINE_LANTERN = add("cherine_lantern", new CherineLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);
     public static final ParadiseLostPortalBlock BLUE_PORTAL = add("blue_portal", new ParadiseLostPortalBlock(copy(NETHER_PORTAL).nonOpaque().blockVision(never).mapColor(MapColor.BLUE)), translucentRenderLayer);
 
-    // Torches
     private static Settings cherineTorch() {
         return copy(TORCH).ticksRandomly().luminance(state -> 15);
     }
@@ -280,22 +275,7 @@ public class ParadiseLostBlocks {
 	public static final Block TREE_TAP = add("tree_tap", new TreeTapBlock(create().mapColor(MapColor.SPRUCE_BROWN).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque().ticksRandomly()), cutoutRenderLayer);
     public static final NitraBlock NITRA_BUNCH = add("nitra_bunch", new NitraBlock(create().mapColor(MapColor.PALE_YELLOW).strength(0.5f).sounds(BlockSoundGroup.WET_GRASS)));
 
-    //dungeon
-//    public static final DungeonSwitchBlock DUNGEON_SWITCH = add("dungeonswitch", new DungeonSwitchBlock(of(Material.METAL, MapColor.BLUE).strength(-1.0F, 3600000.0F)));
-
     public static void init() {
     }
-
-//    @Environment(EnvType.CLIENT)
-//    public static void initClient() {
-//        for (var signSet : List.of(AUREL_SIGNS, MOTHER_AUREL_SIGNS, ORANGE_SIGNS, WISTERIA_SIGNS)) {
-//            TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(
-//                    signSet.type(), new SpriteIdentifier(
-//                            TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, new Identifier("entity/signs/" + signSet.type().getName())
-//                    )
-//            );
-//        }
-//    }
-
 
 }

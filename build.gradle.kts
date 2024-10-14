@@ -219,6 +219,10 @@ crowdintranslate {
     verbose = true
 }
 
+fabricApi {
+    configureDataGeneration()
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {

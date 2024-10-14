@@ -2,140 +2,96 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:alternatives",
-          "children": [
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "items": [
-                      "minecraft:shears"
-                    ]
-                  }
-                }
-              ],
-              "functions": [
-                {
-                  "function": "minecraft:set_count",
-                  "count": 2.0,
-                  "add": false
-                }
-              ],
-              "name": "paradise_lost:grass_plant"
-            },
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:survives_explosion"
-                },
-                {
-                  "condition": "minecraft:random_chance",
-                  "chance": 0.125
-                }
-              ],
-              "name": "minecraft:wheat_seeds"
-            }
-          ]
-        }
-      ],
       "conditions": [
         {
-          "condition": "minecraft:block_state_property",
           "block": "paradise_lost:tall_grass",
+          "condition": "minecraft:block_state_property",
           "properties": {
             "half": "lower"
           }
         },
         {
           "condition": "minecraft:location_check",
+          "offsetY": 1,
           "predicate": {
             "block": {
-              "blocks": [
-                "paradise_lost:tall_grass"
-              ],
+              "blocks": "paradise_lost:tall_grass",
               "state": {
                 "half": "upper"
               }
             }
-          },
-          "offsetY": 1
-        }
-      ]
-    },
-    {
-      "rolls": 1.0,
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:alternatives",
-          "children": [
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "items": [
-                      "minecraft:shears"
-                    ]
-                  }
-                }
-              ],
-              "functions": [
-                {
-                  "function": "minecraft:set_count",
-                  "count": 2.0,
-                  "add": false
-                }
-              ],
-              "name": "paradise_lost:grass_plant"
-            },
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:survives_explosion"
-                },
-                {
-                  "condition": "minecraft:random_chance",
-                  "chance": 0.125
-                }
-              ],
-              "name": "minecraft:wheat_seeds"
-            }
-          ]
+          }
         }
       ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": "minecraft:shears"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "paradise_lost:grass_plant"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:block_state_property",
           "block": "paradise_lost:tall_grass",
+          "condition": "minecraft:block_state_property",
           "properties": {
             "half": "upper"
           }
         },
         {
           "condition": "minecraft:location_check",
+          "offsetY": -1,
           "predicate": {
             "block": {
-              "blocks": [
-                "paradise_lost:tall_grass"
-              ],
+              "blocks": "paradise_lost:tall_grass",
               "state": {
                 "half": "lower"
               }
             }
-          },
-          "offsetY": -1
+          }
         }
-      ]
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": "minecraft:shears"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "paradise_lost:grass_plant"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

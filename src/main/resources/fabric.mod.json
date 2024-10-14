@@ -48,6 +48,9 @@
     ],
     "mm:early_risers": [
       "net.id.paradiselost.mixin.earlyrisers.CustomBoatEarlyRiser"
+    ],
+    "fabric-datagen": [
+      "net.id.paradiselost.datagen.ParadiseLostDataGen"
     ]
   },
   "custom": {

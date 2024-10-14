@@ -190,7 +190,6 @@ public class ParadiseLostItemGroups {
                 entries.add(NITRA_SEED);
                 entries.add(NITRA_BULB);
                 entries.add(SWEDROOT);
-                entries.add(SWEDROOT_SPREAD);
 
             }));
     public static final RegistryKey<ItemGroup> PARADISE_DECO = create("decoration", FabricItemGroup.builder()
