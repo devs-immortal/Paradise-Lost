@@ -2,7 +2,6 @@ package net.id.paradiselost.mixin.block;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;

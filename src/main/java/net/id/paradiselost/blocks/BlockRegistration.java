@@ -89,7 +89,7 @@ public class BlockRegistration {
         return registerWoodBlockSet(
                 ParadiseLostWoodTypes.MOTHER_AUREL, ParadiseLostBlockSets.MOTHER_AUREL,
                 sapling,
-                add("potted_" + id + "_sapling", new FlowerPotBlock(sapling, flowerPotSettings)),
+                add("potted_" + id + "_sapling", new FlowerPotBlock(sapling, flowerPotSettings), cutoutRenderLayer),
                 id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
                 add(id + "_leaves", new ParadiseLostLeavesBlock(leavesSettings), flammableLeaves, cutoutMippedRenderLayer),
                 id + "_planks", id + "_stairs", id + "_slab",
@@ -159,7 +159,7 @@ public class BlockRegistration {
         PillarBlock strippedWood = add(strippedWoodId, new PillarBlock(logSettings), flammableLog);
         Block planks = add(plankId, new Block(plankSettings), flammablePlanks);
         return new WoodBlockSet(
-                sapling, add(flowerPotId, new FlowerPotBlock(sapling, flowerPotSettings)),
+                sapling, add(flowerPotId, new FlowerPotBlock(sapling, flowerPotSettings), cutoutRenderLayer),
                 add(logId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedLog)), add(woodId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedWood)), strippedLog, strippedWood,
                 add(leavesId, new LeavesBlock(leavesSettings), flammableLeaves, cutoutMippedRenderLayer),
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),
@@ -226,7 +226,7 @@ public class BlockRegistration {
         PillarBlock strippedWood = add(strippedWoodId, new PillarBlock(logSettings), flammableLog);
         Block planks = add(plankId, new Block(plankSettings), flammablePlanks);
         return new WoodBlockSet(
-                sapling, add(flowerPotId, new FlowerPotBlock(sapling, flowerPotSettings)),
+                sapling, add(flowerPotId, new FlowerPotBlock(sapling, flowerPotSettings), cutoutRenderLayer),
                 add(logId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedLog)), add(woodId, new PillarBlock(logSettings), flammableLog, stripsTo(strippedWood)), strippedLog, strippedWood,
                 leaves,
                 planks, add(plankStairsId, new ParadiseLostStairsBlock(planks.getDefaultState(), plankSettings), flammablePlanks), add(plankSlabId, new SlabBlock(plankSettings), flammablePlanks),

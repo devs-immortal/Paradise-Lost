@@ -427,6 +427,20 @@
   "subtitles.paradise_lost.item.bloodstone.prick": "Bloodstone pricks",
 
 
+  "tag.item.paradise_lost.aurel_logs": "Aurel Logs",
+  "tag.item.paradise_lost.clouds": "Clouds",
+  "tag.item.paradise_lost.hangers": "Tree Hangers",
+  "tag.item.paradise_lost.hollow_logs": "Hollow Logs",
+  "tag.item.paradise_lost.igniting_tools": "Igniting Tools",
+  "tag.item.paradise_lost.moa_temptables": "Moa Temptables",
+  "tag.item.paradise_lost.mother_aurel_logs": "Mother Aurel Logs",
+  "tag.item.paradise_lost.mushrooms": "Paradise Fungi",
+  "tag.item.paradise_lost.orange_logs": "Orange Logs",
+  "tag.item.paradise_lost.righteous_weapons": "Righteous Weapons",
+  "tag.item.paradise_lost.sacred_weapons": "Sacred Weapons",
+  "tag.item.paradise_lost.wisteria_logs": "Wisteria Logs",
+
+
   "advancements.paradise_lost.bloomed_calcite_craft.title": "Healing Crystals",
   "advancements.paradise_lost.bloomed_calcite_craft.description": "Douse a calcite block with a healing potion",
   "advancements.paradise_lost.consume_food.title": "Exotic Starter",

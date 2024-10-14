@@ -1,14 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:oak_slab",
-    "minecraft:spruce_slab",
-    "minecraft:birch_slab",
-    "minecraft:jungle_slab",
-    "minecraft:acacia_slab",
-    "minecraft:dark_oak_slab",
-    "minecraft:crimson_slab",
-    "minecraft:warped_slab",
-    "#paradise_lost:wooden_slabs"
+    "paradise_lost:aurel_slab",
+    "paradise_lost:mother_aurel_slab",
+    "paradise_lost:wisteria_slab",
+    "paradise_lost:orange_slab"
   ]
 }

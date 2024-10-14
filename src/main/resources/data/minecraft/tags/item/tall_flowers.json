@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:sunflower",
-    "minecraft:lilac",
-    "minecraft:peony",
-    "minecraft:rose_bush"
+    "paradise_lost:wild_flax"
   ]
 }

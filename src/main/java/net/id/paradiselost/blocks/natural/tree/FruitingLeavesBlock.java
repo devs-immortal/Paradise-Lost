@@ -3,8 +3,6 @@ package net.id.paradiselost.blocks.natural.tree;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

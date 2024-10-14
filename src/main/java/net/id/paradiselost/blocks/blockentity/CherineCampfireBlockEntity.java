@@ -3,16 +3,11 @@ package net.id.paradiselost.blocks.blockentity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ContainerComponent;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
@@ -112,7 +107,7 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
                 double e = (double) pos.getY() + 0.5;
                 double g = (double) pos.getZ() + 0.5 - (double) ((float) direction.getOffsetZ() * 0.3125F) + (double) ((float) direction.rotateYClockwise().getOffsetZ() * 0.3125F);
 
-                for(int k = 0; k < 4; ++k) {
+                for (int k = 0; k < 4; ++k) {
                     world.addParticle(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0);
                 }
             }
@@ -163,8 +158,8 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     }
 
     public boolean addItem(@Nullable LivingEntity user, ItemStack stack, int cookTime) {
-        for(int i = 0; i < this.itemsBeingCooked.size(); ++i) {
-            ItemStack itemStack = (ItemStack)this.itemsBeingCooked.get(i);
+        for (int i = 0; i < this.itemsBeingCooked.size(); ++i) {
+            ItemStack itemStack = this.itemsBeingCooked.get(i);
             if (itemStack.isEmpty()) {
                 this.cookingTotalTimes[i] = cookTime;
                 this.cookingTimes[i] = 0;

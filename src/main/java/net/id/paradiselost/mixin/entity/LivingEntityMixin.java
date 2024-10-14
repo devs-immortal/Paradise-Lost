@@ -11,18 +11,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.loot.function.LootFunctionTypes;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
@@ -91,7 +87,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     private ItemEntity dropStackInternal(ItemStack stack) {
         Optional<RecipeEntry<SmeltingRecipe>> optional = this.getWorld().getRecipeManager().getFirstMatch(RecipeType.SMELTING, new SingleStackRecipeInput(stack), getWorld());
         if (optional.isPresent()) {
-            ItemStack itemStack = (((RecipeEntry)optional.get()).value()).getResult(getWorld().getRegistryManager());
+            ItemStack itemStack = ((optional.get()).value()).getResult(getWorld().getRegistryManager());
             if (!itemStack.isEmpty()) {
                 return this.dropStack(itemStack.copyWithCount(stack.getCount()), 0.0F);
             }

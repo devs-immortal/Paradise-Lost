@@ -1,14 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:oak_door",
-    "minecraft:spruce_door",
-    "minecraft:birch_door",
-    "minecraft:jungle_door",
-    "minecraft:acacia_door",
-    "minecraft:dark_oak_door",
-    "minecraft:crimson_door",
-    "minecraft:warped_door",
-    "#paradise_lost:wooden_doors"
+    "paradise_lost:aurel_door",
+    "paradise_lost:mother_aurel_door",
+    "paradise_lost:wisteria_door",
+    "paradise_lost:orange_door"
   ]
 }

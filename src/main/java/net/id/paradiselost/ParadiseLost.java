@@ -13,7 +13,6 @@ import net.id.paradiselost.client.model.armor.ParadiseLostArmorModels;
 import net.id.paradiselost.client.rendering.block.ParadiseLostBlockEntityRenderers;
 import net.id.paradiselost.client.rendering.entity.ParadiseLostEntityRenderers;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
-import net.id.paradiselost.client.rendering.texture.ParadiseLostTextures;
 import net.id.paradiselost.client.rendering.util.ParadiseLostColorProviders;
 import net.id.paradiselost.commands.ParadiseLostCommands;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
@@ -112,7 +111,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostColorProviders.initClient();
         ParadiseLostBlockEntityRenderers.initClient();
         ParadiseLostParticles.Client.init();
-        ParadiseLostTextures.initClient();
         ParadiseLostScreens.initClient();
     }
 

@@ -1,14 +1,11 @@
 {
   "replace": false,
   "values": [
-    "minecraft:oak_sapling",
-    "minecraft:spruce_sapling",
-    "minecraft:birch_sapling",
-    "minecraft:jungle_sapling",
-    "minecraft:acacia_sapling",
-    "minecraft:dark_oak_sapling",
-    "minecraft:azalea",
-    "minecraft:flowering_azalea",
-    "#paradise_lost:saplings"
+    "paradise_lost:aurel_sapling",
+    "paradise_lost:mother_aurel_sapling",
+    "paradise_lost:rose_wisteria_sapling",
+    "paradise_lost:frost_wisteria_sapling",
+    "paradise_lost:lavender_wisteria_sapling",
+    "paradise_lost:orange_sapling"
   ]
 }
