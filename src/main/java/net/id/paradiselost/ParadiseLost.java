@@ -92,13 +92,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostScreens.init();
         ParadiseLostParticles.init();
         ParadiseLostDataComponentTypes.init();
-
-		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-			// since the portal can be configured to open with other mods blocks
-			// we have to wait until all mods have loaded
-			// and therefore have to register the portal late
-			ParadiseLostDimension.initPortal();
-		});
+        ParadiseLostDimension.initPortal();
     }
 
     @Override
