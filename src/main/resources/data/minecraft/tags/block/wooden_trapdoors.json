@@ -1,14 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:acacia_trapdoor",
-    "minecraft:birch_trapdoor",
-    "minecraft:dark_oak_trapdoor",
-    "minecraft:jungle_trapdoor",
-    "minecraft:oak_trapdoor",
-    "minecraft:spruce_trapdoor",
-    "minecraft:crimson_trapdoor",
-    "minecraft:warped_trapdoor",
-    "#paradise_lost:wooden_trapdoors"
+    "paradise_lost:aurel_trapdoor",
+    "paradise_lost:mother_aurel_trapdoor",
+    "paradise_lost:wisteria_trapdoor",
+    "paradise_lost:orange_trapdoor"
   ]
 }

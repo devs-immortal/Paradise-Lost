@@ -1,14 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:oak_planks",
-    "minecraft:spruce_planks",
-    "minecraft:birch_planks",
-    "minecraft:jungle_planks",
-    "minecraft:acacia_planks",
-    "minecraft:dark_oak_planks",
-    "minecraft:crimson_planks",
-    "minecraft:warped_planks",
-    "#paradise_lost:planks"
+    "paradise_lost:aurel_planks",
+    "paradise_lost:mother_aurel_planks",
+    "paradise_lost:wisteria_planks",
+    "paradise_lost:orange_planks"
   ]
 }

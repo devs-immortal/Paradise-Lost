@@ -1,10 +1,5 @@
 {
   "values": [
-    "minecraft:obsidian",
-    "minecraft:crying_obsidian",
-    "minecraft:netherite_block",
-    "minecraft:respawn_anchor",
-    "minecraft:ancient_debris",
-    "#paradise_lost:requires_diamond_tool"
+    "paradise_lost:metamorphic_shell"
   ]
 }

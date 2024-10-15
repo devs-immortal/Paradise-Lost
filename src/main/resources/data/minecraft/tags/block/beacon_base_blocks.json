@@ -1,11 +1,6 @@
 {
-  "replace": false,
   "values": [
-    "minecraft:netherite_block",
-    "minecraft:emerald_block",
-    "minecraft:diamond_block",
-    "minecraft:gold_block",
-    "minecraft:iron_block",
-    "#paradise_lost:ore_blocks"
+    "paradise_lost:olvite_block",
+    "paradise_lost:refined_surtrum_block"
   ]
 }

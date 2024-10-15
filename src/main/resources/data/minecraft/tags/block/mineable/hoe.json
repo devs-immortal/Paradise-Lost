@@ -1,6 +1,21 @@
 {
-  "replace": false,
   "values": [
-    "#paradise_lost:mineable_by_hoe"
+    "paradise_lost:liverwort",
+    "paradise_lost:liverwort_carpet",
+    "#paradise_lost:hangers",
+    "paradise_lost:rose_wisteria_leaf_pile",
+    "paradise_lost:frost_wisteria_leaf_pile",
+    "paradise_lost:lavender_wisteria_leaf_pile",
+    "paradise_lost:aurel_leaf_pile",
+    "paradise_lost:amadrys_bundle",
+    "paradise_lost:nitra_bunch",
+    "paradise_lost:aurel_leaves",
+    "paradise_lost:mother_aurel_leaves",
+    "paradise_lost:orange_leaves",
+    "paradise_lost:rose_wisteria_leaves",
+    "paradise_lost:frost_wisteria_leaves",
+    "paradise_lost:lavender_wisteria_leaves",
+    "paradise_lost:nitra_bunch",
+    "paradise_lost:nitra_bunch"
   ]
 }

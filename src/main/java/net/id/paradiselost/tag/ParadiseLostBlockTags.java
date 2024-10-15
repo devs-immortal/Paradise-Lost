@@ -7,7 +7,7 @@ import net.minecraft.registry.tag.TagKey;
 
 public class ParadiseLostBlockTags {
 
-    public static final TagKey<Block> DIRT_BLOCKS = register("dirt_blocks");
+    public static final TagKey<Block> DIRT_BLOCKS = register("worldgen/dirt_blocks");
 
     //Gravity
     public static final TagKey<Block> FAST_FLOATERS = register("fast_floaters");
@@ -26,9 +26,6 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> BASE_PARADISE_LOST_STONE = register("worldgen/base_stone");
     public static final TagKey<Block> FLUID_REPLACEABLES = register("worldgen/fluid_replaceable");
     public static final TagKey<Block> BASE_REPLACEABLES = register("worldgen/base_replaceables");
-
-    //JEB, WHY ARE SHEARS HARDCODED
-    public static final TagKey<Block> PARADISE_LOST_SHEARABLE = register("mineable_by_shears");
 
     private static TagKey<Block> register(String id) {
         return TagKey.of(RegistryKeys.BLOCK, ParadiseLost.locate(id));

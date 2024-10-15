@@ -1,14 +1,11 @@
 {
   "replace": false,
   "values": [
-    "minecraft:jungle_leaves",
-    "minecraft:oak_leaves",
-    "minecraft:spruce_leaves",
-    "minecraft:dark_oak_leaves",
-    "minecraft:acacia_leaves",
-    "minecraft:birch_leaves",
-    "minecraft:azalea_leaves",
-    "minecraft:flowering_azalea_leaves",
-    "#paradise_lost:leaves"
+    "paradise_lost:aurel_leaves",
+    "paradise_lost:mother_aurel_leaves",
+    "paradise_lost:rose_wisteria_leaves",
+    "paradise_lost:frost_wisteria_leaves",
+    "paradise_lost:lavender_wisteria_leaves",
+    "paradise_lost:orange_leaves"
   ]
 }

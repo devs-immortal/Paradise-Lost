@@ -40,9 +40,6 @@
   "block.paradise_lost.pink_cloud": "Pink Cloud",
   "block.paradise_lost.golden_cloud": "Golden Cloud",
 
-  "block.paradise_lost.dense_cloud": "Dense Cloud",
-  "block.paradise_lost.spring_water": "Spring Water",
-
   "block.paradise_lost.bloomed_calcite": "Bloomed Calcite",
 
   "block.paradise_lost.floestone": "Floestone",
@@ -190,8 +187,6 @@
   "block.paradise_lost.honey_nettle": "Honey Nettle",
   "block.paradise_lost.liverwort": "Liverwort",
   "block.paradise_lost.liverwort_carpet": "Liverwort Carpet",
-
-  "block.paradise_lost.swedroot_spread": "Swedroot Spread",
 
   "block.paradise_lost.rootcap": "Rootcap",
   "block.paradise_lost.brown_sporecap": "Brown Sporecap",

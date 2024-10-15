@@ -1,8 +1,8 @@
 {
-  "replace": false,
   "values": [
-    "#minecraft:logs",
-    "#paradise_lost:worldgen/dirt_blocks",
+    "paradise_lost:dirt",
+    "paradise_lost:coarse_dirt",
+    "paradise_lost:floestone",
     "paradise_lost:cobbled_floestone",
     "paradise_lost:mossy_floestone"
   ]

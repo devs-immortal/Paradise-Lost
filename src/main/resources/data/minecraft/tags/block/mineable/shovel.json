@@ -1,6 +1,16 @@
 {
-  "replace": false,
   "values": [
-    "#paradise_lost:mineable_by_shovel"
+    "paradise_lost:highlands_grass",
+    "paradise_lost:frozen_grass",
+    "paradise_lost:dirt",
+    "paradise_lost:coarse_dirt",
+    "paradise_lost:permafrost",
+    "paradise_lost:levita",
+    "paradise_lost:farmland",
+    "paradise_lost:grass_path",
+    "paradise_lost:frozen_path",
+    "paradise_lost:levita_brick",
+    "paradise_lost:levita_brick_slab",
+    "paradise_lost:levita_brick_stairs"
   ]
 }

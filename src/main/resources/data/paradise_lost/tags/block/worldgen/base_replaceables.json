@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#paradise_lost:natural_stone",
-    "#paradise_lost:dirt_blocks"
+    "#paradise_lost:worldgen/natural_stone",
+    "#paradise_lost:worldgen/dirt_blocks"
   ]
 }

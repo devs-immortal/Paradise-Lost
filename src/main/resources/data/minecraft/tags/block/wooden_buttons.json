@@ -1,14 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:oak_button",
-    "minecraft:spruce_button",
-    "minecraft:birch_button",
-    "minecraft:jungle_button",
-    "minecraft:acacia_button",
-    "minecraft:dark_oak_button",
-    "minecraft:crimson_button",
-    "minecraft:warped_button",
-    "#paradise_lost:wooden_buttons"
+    "paradise_lost:aurel_button",
+    "paradise_lost:mother_aurel_button",
+    "paradise_lost:wisteria_button",
+    "paradise_lost:orange_button"
   ]
 }

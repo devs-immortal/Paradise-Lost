@@ -1,6 +1,12 @@
 {
-  "replace": false,
   "values": [
-    "#paradise_lost:mineable_by_axe"
+    "paradise_lost:packed_swedroot",
+    "paradise_lost:cherine_campfire",
+    "paradise_lost:aurel_bookshelf",
+    "paradise_lost:blackcurrant_bush",
+    "paradise_lost:incubator",
+    "paradise_lost:food_bowl",
+    "paradise_lost:tree_tap",
+    "#paradise_lost:hollow_logs"
   ]
 }
