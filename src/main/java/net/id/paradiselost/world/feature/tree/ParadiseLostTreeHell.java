@@ -2,6 +2,7 @@ package net.id.paradiselost.world.feature.tree;
 
 import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.ParadiseLost;
+import net.id.paradiselost.world.feature.tree.placers.PointedBallFoliagePlacer;
 import net.id.paradiselost.world.feature.tree.placers.OvergrownTrunkPlacer;
 import net.id.paradiselost.world.feature.tree.placers.WisteriaFoliagePlacer;
 import net.id.paradiselost.world.feature.tree.placers.WisteriaTrunkPlacer;
@@ -16,11 +17,13 @@ import net.minecraft.world.gen.trunk.TrunkPlacerType;
 public class ParadiseLostTreeHell {
 
     public static FoliagePlacerType<WisteriaFoliagePlacer> WISTERIA_FOLIAGE;
+    public static FoliagePlacerType<PointedBallFoliagePlacer> POINTED_BALL_FOLIAGE;
     public static TrunkPlacerType<WisteriaTrunkPlacer> WISTERIA_TRUNK;
     public static TrunkPlacerType<OvergrownTrunkPlacer> OVERGROWN_TRUNK;
 
     public static void init() {
         WISTERIA_FOLIAGE = registerFoliage("wisteria_foliage_placer", WisteriaFoliagePlacer.CODEC);
+        POINTED_BALL_FOLIAGE = registerFoliage("pointed_ball_foliage_placer", PointedBallFoliagePlacer.CODEC);
         WISTERIA_TRUNK = registerTrunk("wisteria_trunk_placer", WisteriaTrunkPlacer.CODEC);
         OVERGROWN_TRUNK = registerTrunk("overgrown_trunk_placer", OvergrownTrunkPlacer.CODEC);
     }

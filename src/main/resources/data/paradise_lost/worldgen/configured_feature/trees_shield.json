@@ -4,7 +4,7 @@
     "default": "paradise_lost:tree_mottled_aurel",
     "features": [
       {
-        "chance": 0.15,
+        "chance": 0.05,
         "feature": "paradise_lost:tree_dwarf_mottled_aurel"
       }
     ]

@@ -9,10 +9,9 @@
       }
     },
     "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "height": 3,
-      "offset": 0,
-      "radius": {
+      "type": "paradise_lost:pointed_ball_foliage_placer",
+      "offset": 3,
+      "count": {
         "type": "minecraft:uniform",
         "max_inclusive": 3,
         "min_inclusive": 2
@@ -39,8 +38,8 @@
     },
     "trunk_placer": {
       "type": "paradise_lost:overgrown_trunk_placer",
-      "base_height": 5,
-      "height_rand_a": 10,
+      "base_height": 10,
+      "height_rand_a": 7,
       "height_rand_b": 0,
       "overgrowth": {
         "type": "minecraft:simple_state_provider",
