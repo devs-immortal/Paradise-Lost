@@ -9,6 +9,7 @@ import net.id.paradiselost.blocks.mechanical.ParadiseLostButtonBlock;
 import net.id.paradiselost.blocks.mechanical.ParadiseLostDoorBlock;
 import net.id.paradiselost.blocks.mechanical.ParadiseLostPressurePlateBlock;
 import net.id.paradiselost.blocks.mechanical.ParadiseLostTrapdoorBlock;
+import net.id.paradiselost.blocks.natural.ParadiseLostMultiSaplingBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
 import net.id.paradiselost.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
@@ -20,10 +21,13 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static net.id.paradiselost.ParadiseLost.locate;
@@ -154,7 +158,10 @@ public class BlockRegistration {
         var pressurePlateSettings = AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(woodColor);
 
 
-        SaplingBlock sapling = add(saplingId, new ParadiseLostSaplingBlock(saplingGenerator, saplingSettings), cutoutRenderLayer);
+        SaplingBlock sapling = add(saplingId, new ParadiseLostMultiSaplingBlock(saplingGenerator, saplingSettings, List.of(
+                new Pair<>(ParadiseLostBlocks.MOSSY_FLOESTONE, ParadiseLostSaplingGenerators.MOTTLED_AUREL),
+                new Pair<>(ParadiseLostBlocks.LIVERWORT, ParadiseLostSaplingGenerators.THICKET_AUREL)
+        )), cutoutRenderLayer);
         PillarBlock strippedLog = add(strippedLogId, new PillarBlock(logSettings), flammableLog);
         PillarBlock strippedWood = add(strippedWoodId, new PillarBlock(logSettings), flammableLog);
         Block planks = add(plankId, new Block(plankSettings), flammablePlanks);

@@ -20,7 +20,7 @@
     },
     {
       "processor_type": "minecraft:protected_blocks",
-      "value": "#minecraft:air"
+      "value": "#paradise_lost:structures_avoid"
     }
   ]
 }
