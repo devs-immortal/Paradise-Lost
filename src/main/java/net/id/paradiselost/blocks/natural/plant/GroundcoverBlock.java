@@ -16,23 +16,9 @@ import net.minecraft.world.World;
 public class GroundcoverBlock extends ParadiseLostBrushBlock {
 
     public static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 2, 16);
-    private final double slowdown;
 
-    public GroundcoverBlock(Settings settings, double slowdown) {
+    public GroundcoverBlock(Settings settings) {
         super(settings.offset(OffsetType.NONE));
-        this.slowdown = slowdown;
-    }
-
-    public GroundcoverBlock(Settings settings, TagKey<Block> validFloors, boolean override, double slowdown) {
-        super(settings, validFloors, override);
-        this.slowdown = slowdown;
-    }
-
-    @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (slowdown < 1 && entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
-            entity.slowMovement(state, new Vec3d(slowdown, 1, slowdown));
-        }
     }
 
     @Override

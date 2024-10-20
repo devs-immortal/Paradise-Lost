@@ -191,7 +191,7 @@ public class ParadiseLostBlocks {
 
     // Grasses
     private static Settings shrub() {
-        return copy(Blocks.SHORT_GRASS).mapColor(MapColor.PALE_GREEN);
+        return copy(Blocks.SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ).mapColor(MapColor.PALE_GREEN);
     }
     private static Settings crop() {
         return copy(Blocks.WHEAT).mapColor(MapColor.PALE_GREEN);
@@ -204,8 +204,8 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostBrushBlock FERN = add("fern", new ParadiseLostBrushBlock(shrub()), flammablePlant, cutoutRenderLayer);
     public static final FlowerPotBlock POTTED_FERN = add("potted_fern", new FlowerPotBlock(FERN, flowerPot()), cutoutRenderLayer);
     public static final ParadiseLostBrushBlock BUSH = add("bush", new ParadiseLostBrushBlock(shrub()), flammablePlant, cutoutRenderLayer);
-    public static final GroundcoverBlock SHAMROCK = add("shamrock", new GroundcoverBlock(shrub().sounds(BlockSoundGroup.AZALEA_LEAVES), 0.99999), flammablePlant, cutoutRenderLayer);
-    public static final GroundcoverBlock MALT_SPRIG = add("malt_sprig", new GroundcoverBlock(shrub().sounds(BlockSoundGroup.AZALEA_LEAVES), 1), flammablePlant, cutoutRenderLayer);
+    public static final GroundcoverBlock SHAMROCK = add("shamrock", new GroundcoverBlock(shrub().sounds(BlockSoundGroup.AZALEA_LEAVES)), flammablePlant, cutoutRenderLayer);
+    public static final GroundcoverBlock MALT_SPRIG = add("malt_sprig", new GroundcoverBlock(shrub().sounds(BlockSoundGroup.AZALEA_LEAVES)), flammablePlant, cutoutRenderLayer);
     public static final TallWaterPlantBlock HONEY_NETTLE = add("honey_nettle", new TallWaterPlantBlock(shrub().sounds(BlockSoundGroup.SMALL_DRIPLEAF)), cutoutRenderLayer);
 
     public static final WallClingingPlantBlock ROOTCAP = add("rootcap", new WallClingingPlantBlock(ParadiseLostBlockTags.FUNGI_CLINGABLES, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
@@ -214,7 +214,7 @@ public class ParadiseLostBlocks {
 
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(crop().mapColor(MapColor.PINK)), flammablePlant, cutoutMippedRenderLayer);
     public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(crop().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
-    public static final SwedrootCropBlock SWEDROOT = add("swedroot", new SwedrootCropBlock(shrub().mapColor(MapColor.BLUE)), flammablePlant, cutoutRenderLayer);
+    public static final SwedrootCropBlock SWEDROOT = add("swedroot", new SwedrootCropBlock(shrub().offset(AbstractBlock.OffsetType.NONE).mapColor(MapColor.BLUE)), flammablePlant, cutoutRenderLayer);
     public static final CropBlock NITRA = add("nitra", new CropBlock(crop().mapColor(MapColor.PALE_YELLOW)), flammablePlant, cutoutMippedRenderLayer);
 
     public static final Block FLAXWEAVE_CUSHION = add("flaxweave_cushion", new FlaxweaveCushionBlock(create().mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));

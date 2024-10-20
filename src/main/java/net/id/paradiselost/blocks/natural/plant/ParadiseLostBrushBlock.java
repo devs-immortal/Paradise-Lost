@@ -24,7 +24,7 @@ public class ParadiseLostBrushBlock extends PlantBlock implements Fertilizable {
     private final boolean override;
 
     public ParadiseLostBrushBlock(Settings settings) {
-        this(settings.offset(OffsetType.XZ), ParadiseLostBlockTags.GENERIC_VALID_GROUND, false);
+        this(settings, ParadiseLostBlockTags.GENERIC_VALID_GROUND, false);
     }
 
     @Override
