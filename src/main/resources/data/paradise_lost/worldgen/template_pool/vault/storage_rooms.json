@@ -8,7 +8,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/storage_rooms/storage_armory_1",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -17,7 +17,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/storage_rooms/storage_armory_2",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -26,7 +26,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/storage_rooms/storage_armory_3",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -35,7 +35,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/storage_rooms/storage_stable_1",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -44,7 +44,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/storage_rooms/storage_stable_2",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -53,7 +53,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/storage_rooms/storage_stable_3",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -62,7 +62,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/storage_rooms/storage_valuable_1",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -71,7 +71,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/storage_rooms/storage_valuable_2",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -80,7 +80,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/storage_rooms/storage_valuable_3",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     }
   ]

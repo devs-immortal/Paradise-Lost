@@ -8,7 +8,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/enlightened_envoy",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     }
   ]

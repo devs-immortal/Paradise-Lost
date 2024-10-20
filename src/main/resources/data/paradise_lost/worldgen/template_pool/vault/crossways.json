@@ -8,7 +8,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/crossways/crossway_1",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -17,7 +17,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/crossways/crossway_2",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     },
     {
@@ -26,7 +26,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/crossways/crossway_3",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "paradise_lost:vault_proc"
       }
     }
   ]
