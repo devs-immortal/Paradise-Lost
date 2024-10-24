@@ -10,6 +10,8 @@ import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
+import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
+import net.minecraft.data.server.loottable.vanilla.VanillaLootTableProviders;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
@@ -217,6 +219,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
         // Ores
         addOreDrops(CHERINE_ORE, ParadiseLostItems.CHERINE);
         addOreDrops(OLVITE_ORE, ParadiseLostItems.OLVITE);
+        addDrop(FLOESTONE_REDSTONE_ORE, this::redstoneOreDrops);
         addOreDrops(SURTRUM, ParadiseLostItems.RAW_SURTRUM);
         addDrop(METAMORPHIC_SHELL);
         addOreDrops(LEVITA_ORE, ParadiseLostItems.LEVITA_GEM);

@@ -115,6 +115,7 @@ public class ParadiseLostItemGroups {
                 // ores
                 entries.add(CHERINE_ORE);
                 entries.add(OLVITE_ORE);
+                entries.add(FLOESTONE_REDSTONE_ORE);
                 entries.add(SURTRUM);
                 entries.add(METAMORPHIC_SHELL);
                 entries.add(LEVITA_ORE);

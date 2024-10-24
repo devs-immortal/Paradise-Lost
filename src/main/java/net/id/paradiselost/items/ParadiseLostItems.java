@@ -230,6 +230,7 @@ public class ParadiseLostItems {
     // ores
     public static final BlockItem CHERINE_ORE = add(ParadiseLostBlocks.CHERINE_ORE);
     public static final BlockItem OLVITE_ORE = add(ParadiseLostBlocks.OLVITE_ORE);
+    public static final BlockItem FLOESTONE_REDSTONE_ORE = add(ParadiseLostBlocks.FLOESTONE_REDSTONE_ORE);
     public static final BlockItem SURTRUM = add(ParadiseLostBlocks.SURTRUM, new Settings().fireproof());
     public static final BlockItem METAMORPHIC_SHELL = add(ParadiseLostBlocks.METAMORPHIC_SHELL);
     public static final BlockItem LEVITA_ORE = add(ParadiseLostBlocks.LEVITA_ORE);

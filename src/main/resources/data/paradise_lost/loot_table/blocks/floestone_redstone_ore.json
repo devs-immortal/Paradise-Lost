@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "paradise_lost:cherine_ore"
+              "name": "paradise_lost:floestone_redstone_ore"
             },
             {
               "type": "minecraft:item",
@@ -35,8 +35,8 @@
                   "add": false,
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 2.0,
-                    "min": 1.0
+                    "max": 5.0,
+                    "min": 4.0
                   },
                   "function": "minecraft:set_count"
                 },
@@ -52,7 +52,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "paradise_lost:cherine"
+              "name": "minecraft:redstone"
             }
           ]
         }

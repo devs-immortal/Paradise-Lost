@@ -244,10 +244,11 @@ public class ParadiseLostBlocks {
 
     // Tall Flowers
     public static final ParadiseLostTallBrushBlock WILD_FLAX = add("wild_flax", new ParadiseLostTallBrushBlock(flower()), flammablePlant, cutoutMippedRenderLayer);
-
+    
     // Ores
-    public static final ExperienceDroppingBlock CHERINE_ORE = add("cherine_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), create().requiresTool().strength(3f)));
-    public static final ExperienceDroppingBlock OLVITE_ORE = add("olvite_ore", new ExperienceDroppingBlock(UniformIntProvider.create(1, 3), create().requiresTool().strength(3f)));
+    public static final ExperienceDroppingBlock CHERINE_ORE = add("cherine_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), create().requiresTool().strength(1f, 3f)));
+    public static final ExperienceDroppingBlock OLVITE_ORE = add("olvite_ore", new ExperienceDroppingBlock(UniformIntProvider.create(1, 3), create().requiresTool().strength(1.5f, 3f)));
+    public static final RedstoneOreBlock FLOESTONE_REDSTONE_ORE = add("floestone_redstone_ore", new RedstoneOreBlock(copy(REDSTONE_ORE).strength(1.5f, 3f)));
     public static final ExperienceDroppingBlock SURTRUM = add("surtrum", new SurtrumOreBlock(UniformIntProvider.create(2, 5), create().sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f)));
     public static final Block METAMORPHIC_SHELL = add("metamorphic_shell", new Block(create().sounds(BlockSoundGroup.TUFF).requiresTool().strength(40f, 6f)));
     public static final PoofBlock SURTRUM_AIR = add("surtrum_air", new PoofBlock(create().replaceable().sounds(BlockSoundGroup.NETHER_GOLD_ORE)));

@@ -80,10 +80,7 @@ def generate_slab_block(block_id, base_block_id, texture):
     
 
 
-generate_standard_item("aurel_hanging_sign")
-generate_standard_item("mother_aurel_hanging_sign")
-generate_standard_item("orange_hanging_sign")
-generate_standard_item("wisteria_hanging_sign")
+generate_standard_block("floestone_redstone_ore")
 
 
 
