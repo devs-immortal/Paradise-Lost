@@ -1,6 +1,7 @@
 package net.id.paradiselost.mixin.entity;
 
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
+import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.minecraft.entity.EntityType;
@@ -10,6 +11,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
@@ -98,6 +100,13 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageTypes.of(getWorld(), ParadiseLostDamageTypes.FALL_FROM_PARADISE)));
             }
             cir.cancel();
+        }
+    }
+
+    @Inject(method = "isUsingSpyglass", at = @At("TAIL"), cancellable = true)
+    public void isUsingSpyglass(CallbackInfoReturnable<Boolean> cir) {
+        if (this.isUsingItem() && this.getActiveItem().isOf(ParadiseLostItems.OLVITE_SPYGLASS)) {
+            cir.setReturnValue(true);
         }
     }
 }

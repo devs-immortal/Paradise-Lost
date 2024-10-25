@@ -15,6 +15,9 @@ import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.TallPlantBlock;
+import net.minecraft.client.render.RenderLayers;
+import net.minecraft.client.render.entity.feature.PlayerHeldItemFeatureRenderer;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.fluid.Fluids;
@@ -111,6 +114,10 @@ public class ParadiseLostItems {
     public static final SwordItem GLAZED_GOLD_SWORD = add("glazed_gold_sword", new SwordItem(ParadiseLostToolMaterials.GLAZED_GOLD, sword(ParadiseLostToolMaterials.GLAZED_GOLD, 3, -2.4f)));
     public static final HoeItem GLAZED_GOLD_HOE = add("glazed_gold_hoe", new HoeItem(ParadiseLostToolMaterials.GLAZED_GOLD, hoe(ParadiseLostToolMaterials.GLAZED_GOLD, -2, -2.0f)));
 
+    // misc
+    public static final SpyglassItem OLVITE_SPYGLASS = add("olvite_spyglass", new SpyglassItem(unstackableTool()));
+
+    // wands
     public static final GravityWandItem LEVITA_WAND = add("levita_wand", new GravityWandItem(unstackableRareTool().maxDamage(100)));
     public static final CherineBloodstoneItem CHERINE_BLOODSTONE = add("cherine_bloodstone", new CherineBloodstoneItem(unstackableTool()));
     public static final OlviteBloodstoneItem OLVITE_BLOODSTONE = add("olvite_bloodstone", new OlviteBloodstoneItem(unstackableTool()));

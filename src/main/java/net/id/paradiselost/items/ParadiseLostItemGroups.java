@@ -243,6 +243,8 @@ public class ParadiseLostItemGroups {
                 entries.add(GLAZED_GOLD_PICKAXE);
                 entries.add(GLAZED_GOLD_AXE);
                 entries.add(GLAZED_GOLD_HOE);
+                // misc
+                entries.add(OLVITE_SPYGLASS);
                 // wands
                 entries.add(LEVITA_WAND);
                 entries.add(CHERINE_BLOODSTONE);
