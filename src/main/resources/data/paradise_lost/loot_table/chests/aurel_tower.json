@@ -54,7 +54,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:spyglass"
+          "name": "paradise_lost:olvite_spyglass"
         },
         {
           "type": "minecraft:item",

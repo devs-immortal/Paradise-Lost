@@ -52,6 +52,7 @@
     "client.render.ModelLoaderMixin",
     "client.render.NativeImageAccessor",
     "client.render.PlayerHeldItemFeatureRendererMixin",
+    "client.render.WorldRendererMixin",
     "devel.client.HandledScreenMixin"
   ],
   "injectors": {
