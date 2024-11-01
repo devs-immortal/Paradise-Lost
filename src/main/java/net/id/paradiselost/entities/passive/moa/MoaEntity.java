@@ -93,13 +93,13 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new MoaEscapeDangerGoal(this, 2));
-        this.goalSelector.add(2, new EatFromBowlGoal(1, 24, 16));
+        this.goalSelector.add(1, new MoaEscapeDangerGoal(this, 0.8));
+        this.goalSelector.add(2, new EatFromBowlGoal(0.4, 24, 16));
         this.goalSelector.add(3, new AnimalMateGoal(this, 0.25F));
-        this.goalSelector.add(4, new TemptGoal(this, 1.0D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
-        this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.add(6, new WanderAroundFarGoal(this, 0.4F)); //WanderGoal
-        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 4.5F));
+        this.goalSelector.add(4, new TemptGoal(this, 0.3D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
+        this.goalSelector.add(5, new FollowParentGoal(this, 0.5D));
+        this.goalSelector.add(6, new WanderAroundGoal(this, 0.20F)); //WanderGoal
+        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 4.5F, 0.7f));
         this.goalSelector.add(8, new LookAroundGoal(this)); //LookGoal
     }
 
@@ -593,7 +593,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public boolean shouldSpawnSprintingParticles() {
-        return Math.abs(getVelocity().multiply(1, 0, 1).length()) > 0 && !isTouchingWater() && !isGliding();
+        return Math.abs(getVelocity().multiply(1, 0, 1).length()) > 0 && !isTouchingWater() && isGliding();
     }
 
     @Override
@@ -686,7 +686,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     public void startJumping(int height) {
         this.jumping = true;
-        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 7.5F, MathHelper.clamp(this.random.nextFloat(), 0.55f, 0.8f));
+        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.8F, MathHelper.clamp(this.random.nextFloat(), 0.7f, 0.8f));
     }
 
     @Override
