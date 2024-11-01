@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:golden_amber"
+    }
+  },
+  "result": {
+    "count": 16,
+    "id": "paradise_lost:golden_amber_bars"
+  }
+}

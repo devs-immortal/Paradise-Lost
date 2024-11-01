@@ -208,6 +208,7 @@ public class ParadiseLostItemGroups {
                 entries.add(CHERINE_CAMPFIRE);
                 entries.add(AUREL_BOOKSHELF);
                 entries.add(FLAXWEAVE_CUSHION);
+                entries.add(GOLDEN_AMBER_BARS);
                 entries.add(AMADRYS_BUNDLE);
                 entries.add(NITRA_BUNCH);
                 entries.add(LEVITATOR);

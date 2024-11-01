@@ -270,6 +270,7 @@ public class ParadiseLostBlocks {
 
     public static final CherineTorchBlock CHERINE_TORCH = add("cherine_torch", new CherineTorchBlock(cherineTorch()), cutoutRenderLayer);
     public static final CherineWallTorchBlock CHERINE_TORCH_WALL = add("cherine_wall_torch", new CherineWallTorchBlock(cherineTorch().dropsLike(CHERINE_TORCH)), cutoutRenderLayer);
+    public static final PaneBlock GOLDEN_AMBER_BARS = add("golden_amber_bars", new PaneBlock(copy(IRON_BARS)), cutoutMippedRenderLayer);
 
     // Usables
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(create().mapColor(MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);

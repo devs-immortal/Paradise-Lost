@@ -224,6 +224,7 @@
   "block.paradise_lost.blue_portal": "Paradise Portal",
 
   "block.paradise_lost.cherine_torch": "Cherine Torch",
+  "block.paradise_lost.golden_amber_bars": "Golden Amber Bars",
 
   "block.paradise_lost.incubator": "Incubator",
   "block.paradise_lost.food_bowl": "Feeding Trough",
@@ -333,9 +334,6 @@
   "item.paradise_lost.wisteria_chest_boat": "Wisteria Boat with Chest",
 
 
-  "trinkets.slot.chest.parachute": "Parachute",
-
-
   "death.attack.fall": "%1$s plummeted from the heavens",
   "death.attack.fall.player": "%1$s was thrown off the heavens above by %2$s",
 
@@ -385,7 +383,6 @@
   "info.paradise_lost.bloodstone.cherine": "Peer into the heart",
   "info.paradise_lost.bloodstone.olvite": "Peer into the mind",
   "info.paradise_lost.bloodstone.surtrum": "Peer into the will",
-  "info.paradise_lost.bloodstone.abstentine": "Peer into the soul",
 
 
   "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries": "Blackcurrants pop",
