@@ -8,7 +8,9 @@
     ],
     "subtitle": "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries"
   },
-  
+
+
+
   "block.portal.ambient": {
     "sounds": [
       "paradise_lost:block/portal/ambient"
@@ -27,7 +29,9 @@
     ],
     "subtitle": "subtitles.paradise_lost.block.portal.trigger"
   },
-  
+
+
+
   "block.surtrum_air.rush": {
     "sounds": [
       {
@@ -83,22 +87,32 @@
     ],
     "subtitle": "subtitles.paradise_lost.item.bloodstone.prick"
   },
-  
+
+
+
   "entity.moa.ambient": {
     "sounds": [
-      {
-        "name": "entity.parrot.ambient",
-        "type": "event"
-      }
+      "paradise_lost:entity/passive/moa/moaambient1",
+      "paradise_lost:entity/passive/moa/moaambient2"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.ambient"
+  },
+
+  "entity.moa.ambient.sing": {
+    "sounds": [
+      "paradise_lost:entity/passive/moa/moaambient3",
+      "paradise_lost:entity/passive/moa/moaambient4",
+      "paradise_lost:entity/passive/moa/moaambient5",
+      "paradise_lost:entity/passive/moa/moaambient6"
     ],
     "subtitle": "subtitles.paradise_lost.entity.moa.ambient"
   },
   "entity.moa.gliding": {
     "sounds": [
-      {
-        "name": "entity.phantom.flap",
-        "type": "event"
-      }
+      "paradise_lost:entity/passive/moa/moaflap1",
+      "paradise_lost:entity/passive/moa/moaflap3",
+      "paradise_lost:entity/passive/moa/moaflap4",
+      "paradise_lost:entity/passive/moa/moaflap5"
     ],
     "subtitle": "subtitles.paradise_lost.entity.moa.gliding"
   },
@@ -174,7 +188,9 @@
     ],
     "subtitle": "subtitles.paradise_lost.entity.envoy.damage"
   },
-  
+
+
+
   "music.paradise": {
     "sounds": [
       {
