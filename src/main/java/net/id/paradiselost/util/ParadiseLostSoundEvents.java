@@ -28,6 +28,7 @@ public final class ParadiseLostSoundEvents {
 
 
     public static final SoundEvent ENTITY_MOA_AMBIENT = register("entity.moa.ambient");
+    public static final SoundEvent ENTITY_MOA_AMBIENT_SING = register("entity.moa.ambient.sing");
     public static final SoundEvent ENTITY_MOA_GLIDING = register("entity.moa.gliding");
     public static final SoundEvent ENTITY_MOA_DEATH = register("entity.moa.death");
     public static final SoundEvent ENTITY_MOA_HURT = register("entity.moa.hurt");
@@ -35,6 +36,7 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MOA_LAY_EGG = register("entity.moa.lay_egg");
     public static final SoundEvent ENTITY_MOA_EGG_HATCH = register("entity.moa.egg_hatch");
     public static final SoundEvent ENTITY_MOA_STEP = register("entity.moa.step");
+
     public static final SoundEvent ENTITY_NITRA_THROW = register("entity.nitra.throw");
     public static final SoundEvent ENTITY_ENVOY_DAMAGE = register("entity.envoy.damage");
 
