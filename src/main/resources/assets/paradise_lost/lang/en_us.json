@@ -399,6 +399,7 @@
   "subtitles.paradise_lost.block.orange_leaves.break_differently": "Orange leaves broken",
 
   "subtitles.paradise_lost.entity.moa.ambient": "Moa chirps",
+  "subtitles.paradise_lost.entity.moa.ambient.sing": "Moa sings",
   "subtitles.paradise_lost.entity.moa.gliding": "Moa glides",
   "subtitles.paradise_lost.entity.moa.death": "Moa dies",
   "subtitles.paradise_lost.entity.moa.hurt": "Moa hurts",
@@ -406,10 +407,21 @@
   "subtitles.paradise_lost.entity.moa.lay_egg": "Moa lays egg",
   "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
   "subtitles.paradise_lost.entity.moa.step": "Moa walks",
-  
+
+
+  "subtitles.paradise_lost.entity.envoy.ambient": "Envoy rattles",
+  "subtitles.paradise_lost.entity.envoy.step": "Envoy walks",
+  "subtitles.paradise_lost.entity.envoy.hurt": "Envoy hurts",
+  "subtitles.paradise_lost.entity.envoy.death": "Envoy dies",
+  "subtitles.paradise_lost.entity.envoy.gets_enlightened": "Envoy becomes Enlightened",
+  "subtitles.paradise_lost.entity.envoy.enlightened.ambient": "Enlightened chimes",
+  "subtitles.paradise_lost.entity.envoy.enlightened.step": "Enlightened walks",
+  "subtitles.paradise_lost.entity.envoy.enlightened.hurt": "Enlightened hurts",
+  "subtitles.paradise_lost.entity.envoy.enlightened.death": "Enlightened dies",
+
+
+
   "subtitles.paradise_lost.entity.nitra.throw": "Nitra Flies",
-  
-  "subtitles.paradise_lost.entity.moa.step": "Moa walks",
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",

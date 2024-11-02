@@ -181,15 +181,88 @@
     ],
     "subtitle": "subtitles.paradise_lost.entity.nitra.throw"
   },
-  "entity.envoy.damage": {
+  "entity.envoy.ambient": {
+    "sounds": [
+      {
+        "name": "entity.skeleton.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.ambient"
+  },
+  "entity.envoy.step": {
+    "sounds": [
+      {
+        "name": "entity.skeleton.step",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.step"
+  },
+  "entity.envoy.hurt": {
+    "sounds": [
+      {
+        "name": "entity.skeleton.hurt",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.hurt"
+  },
+  "entity.envoy.death": {
+    "sounds": [
+      {
+        "name": "entity.wither_skeleton.death",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.death"
+  },
+  "entity.envoy.gets_enlightened": {
+    "sounds": [
+      {
+        "name": "entity.zombie_villager.converted",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.ambient"
+  },
+  "entity.envoy.enlightened.ambient": {
+    "sounds": [
+      {
+        "name": "block.amethyst_block.chime",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.ambient"
+  },
+  "entity.envoy.enlightened.step": {
+    "sounds": [
+      {
+        "name": "block.amethyst_block.step",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.step"
+  },
+  "entity.envoy.enlightened.hurt": {
+    "sounds": [
+      {
+        "name": "block.amethyst_block.hit",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.hurt"
+  },
+  "entity.envoy.enlightened.death": {
     "sounds": [
       {
         "name": "block.amethyst_block.break",
         "type": "event"
       }
     ],
-    "subtitle": "subtitles.paradise_lost.entity.envoy.damage"
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.death"
   },
+
 
 
 

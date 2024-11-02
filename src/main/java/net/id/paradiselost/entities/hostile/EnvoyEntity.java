@@ -16,6 +16,7 @@ import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
@@ -56,13 +57,28 @@ public class EnvoyEntity extends SkeletonEntity {
     }
 
     protected SoundEvent getHurtSound(DamageSource source) {
-        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_DAMAGE : super.getHurtSound(source);
+        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_HURT : ParadiseLostSoundEvents.ENTITY_ENVOY_HURT;
+    }
+
+    protected SoundEvent getDeathSound() {
+        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_DEATH : ParadiseLostSoundEvents.ENTITY_ENVOY_DEATH;
+    }
+
+    protected SoundEvent getStepSound() {
+        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_STEP : ParadiseLostSoundEvents.ENTITY_ENVOY_STEP;
+    }
+
+    protected SoundEvent getAmbientSound() {
+        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_AMBIENT : ParadiseLostSoundEvents.ENTITY_ENVOY_AMBIENT;
     }
 
     public boolean damage(DamageSource source, float amount) {
         float dmg = amount;
         if (this.getEnlightened()) {
             dmg /= 2;
+        }
+        if (this.isAffectedByDaylight()) {
+            dmg *= 3f;
         }
         return super.damage(source, dmg);
     }
@@ -79,7 +95,10 @@ public class EnvoyEntity extends SkeletonEntity {
     }
     public static DefaultAttributeContainer.Builder createEnvoyAttributes() {
         return createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, -1)
+                .add(EntityAttributes.GENERIC_SCALE, 1.1f);
+
     }
 
     @Override

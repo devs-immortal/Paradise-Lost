@@ -37,8 +37,17 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MOA_EGG_HATCH = register("entity.moa.egg_hatch");
     public static final SoundEvent ENTITY_MOA_STEP = register("entity.moa.step");
 
+    public static final SoundEvent ENTITY_ENVOY_AMBIENT = register(("entity.envoy.ambient"));
+    public static final SoundEvent ENTITY_ENVOY_HURT = register(("entity.envoy.hurt"));
+    public static final SoundEvent ENTITY_ENVOY_DEATH = register(("entity.envoy.death"));
+    public static final SoundEvent ENTITY_ENVOY_STEP = register(("entity.envoy.step"));
+    public static final SoundEvent ENTITY_ENVOY_GETS_ENLIGHTENED = register(("entity.envoy.gets_enlightened"));
+    public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_AMBIENT = register(("entity.envoy.enlightened.ambient"));
+    public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_HURT = register(("entity.envoy.enlightened.hurt"));
+    public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_DEATH = register(("entity.envoy.enlightened.death"));
+    public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_STEP = register(("entity.envoy.enlightened.step"));
+
     public static final SoundEvent ENTITY_NITRA_THROW = register("entity.nitra.throw");
-    public static final SoundEvent ENTITY_ENVOY_DAMAGE = register("entity.envoy.damage");
 
     public static final SoundEvent MUSIC_PARADISE_LOST = register("music.paradise");
 

@@ -717,7 +717,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public void startJumping(int height) {
-        if (!isGliding()){
+        if (!isGliding()) {
             this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.25F, getRandomFloat(0.64f,0.69f));
         }
         this.jumping = true;
