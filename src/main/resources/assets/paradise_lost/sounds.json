@@ -92,8 +92,10 @@
 
   "entity.moa.ambient": {
     "sounds": [
-      "paradise_lost:entity/passive/moa/moaambient1",
-      "paradise_lost:entity/passive/moa/moaambient2"
+      "paradise_lost:entity/passive/moa/moachirp1",
+      "paradise_lost:entity/passive/moa/moachirp2",
+      "paradise_lost:entity/passive/moa/moachirp3",
+      "paradise_lost:entity/passive/moa/moachirp4"
     ],
     "subtitle": "subtitles.paradise_lost.entity.moa.ambient"
   },

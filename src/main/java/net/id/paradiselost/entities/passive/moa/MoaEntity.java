@@ -31,6 +31,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -92,15 +93,39 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new MoaEscapeDangerGoal(this, 0.8));
-        this.goalSelector.add(2, new EatFromBowlGoal(0.4, 24, 16));
-        this.goalSelector.add(3, new AnimalMateGoal(this, 0.25F));
-        this.goalSelector.add(4, new TemptGoal(this, 0.3D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
-        this.goalSelector.add(5, new FollowParentGoal(this, 0.5D));
-        this.goalSelector.add(6, new WanderAroundGoal(this, 0.20F)); //WanderGoal
-        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 4.5F, 0.7f));
-        this.goalSelector.add(8, new LookAroundGoal(this)); //LookGoal
+
+        this.goalSelector.add(0, new MoaEscapeDangerGoal(this, 0.8));
+
+        this.goalSelector.add(1, new EatFromBowlGoal(0.4, 24, 16));
+        this.goalSelector.add(2, new AnimalMateGoal(this, 0.25F));
+
+
+        this.goalSelector.add(7, new LookAtEntityGoal(this, ParrotEntity.class, 18F, 0.35f));
+        this.goalSelector.add(7, new StopAndLookAtEntityGoal(this, ParrotEntity.class, 25, 0.25f));
+        this.goalSelector.add(8, new StopAndLookAtEntityGoal(this, LivingEntity.class, 15, 0.10f));
+
+        if (!isBaby()){
+            this.goalSelector.add(2, new TemptGoal(this, 0.13D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
+            this.goalSelector.add(8, new LookAtEntityGoal(this, MoaEntity.class, 8F, 0.15f));
+        }
+        else {
+            this.goalSelector.add(2, new TemptGoal(this, 0.16D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
+            this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 5F, 0.5f));
+        }
+
+        if (!isSaddled()){
+            this.goalSelector.add(11, new WanderAroundFarGoal(this, 0.08F, 0.4f)); //WanderGoal
+            //this.goalSelector.add(11, new WanderAroundFarGoal(this, 0.15F, 0.2f));
+        }
+        else {
+            this.goalSelector.add(11, new WanderAroundGoal(this, 0.03F));
+        }
+        this.goalSelector.add(12, new LookAroundGoal(this)); //LookGoal
+
+        this.goalSelector.add(12, new SwimGoal(this));
+        this.goalSelector.add(12, new FollowParentGoal(this, 0.11D));
+        this.goalSelector.add(12, new FlyGoal(this, 0.1f));
+
     }
 
     @Override
@@ -170,7 +195,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 inventory.addListener(this);
             }
         } else {
-            if (inventory.size() != 0) {
+            if (!inventory.isEmpty()) {
                 inventory.removeListener(this);
                 if (scatterItems && !getWorld().isClient) {
                     ItemScatterer.spawn(getWorld(), this, inventory);
@@ -201,13 +226,13 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public float getWingRoll() {
 
         //Gliding flapping system
-        if (dataTracker.get(AIR_TICKS) >= 1) {
+        if (dataTracker.get(AIR_TICKS) >= 4) {
             curWingRoll = MathHelper.sin(age / wingFlapSpeed) * 0.73F + 0.1F;
             atWingBottom = false;  // Reset peak for landing
         } else {
             // When da boy wan flap
             if (flapCount > 0 && !isSaddled()) {
-                curWingRoll = MathHelper.sin(randFlapTimer / wingFlapSpeed * randFlapSpeed) * 0.73F + 0.1F;
+                curWingRoll = MathHelper.sin(randFlapTimer / (wingFlapSpeed - randFlapSpeed)) * 0.73F + 0.1F;
 
                 if (curWingRoll < prevWingRoll && !atWingBottom) {
                     //System.out.println("Flap " + flapCount + " bottom reached");
@@ -217,9 +242,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     //randFlapSpeed += 0.1f;
                     atWingBottom = false;
                 }
-            }
-            else
-            {
+            } else {
                 float baseWingRoll = 1.39626F; // Idle position (Default was 1.39626)
                 float lDif = -baseWingRoll - curWingRoll;
                 if (Math.abs(lDif) > 0.005F) {
@@ -254,41 +277,54 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return curLegPitch;
     }
 
+    public float getRandomFloat(float from, float to){
+        float finalNumber = 1;
+
+        from *= 100;
+        to *= 100;
+
+        finalNumber = from + this.random.nextInt((int)to);
+        return finalNumber / 100;
+    }
+
 //Moa Sound stuff
     int moaSoundCallCooldown;
     private float soundChance = 0;
     private float songChance = 0;
     public void attemptMoaSound()
     {
-
         if (random.nextFloat() < 0.2f + soundChance) {
-            if (this.random.nextFloat() > 0.05f + songChance) {
+            if (this.random.nextFloat() > 0.05f + songChance || isBaby()) {
                 //Small chirp
-                moaSoundCallCooldown = 80 + random.nextInt(45);
+                moaSoundCallCooldown = 60 + random.nextInt(55);
                 songChance += MathHelper.clamp(this.random.nextFloat(), 0.1f, 0.04f);
-                this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundCategory.NEUTRAL, MathHelper.clamp(this.random.nextFloat(), 0.25f, 0.5f), MathHelper.clamp(this.random.nextFloat(), 0.80f, 1.25f) + MathHelper.clamp(this.random.nextFloat(), -0.3f, .3f));
+
+                if (!isBaby()){
+                    this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundCategory.NEUTRAL, 0.05f, getRandomFloat(0.85f, 0.92f));
+                } else {
+                    this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundCategory.NEUTRAL, 0.03f, getRandomFloat(1f, 1.1f));
+                }
             } else {
                 //Play little song sometimes so it doesn't get annoying
                 moaSoundCallCooldown = 200 + random.nextInt(25);
                 songChance = 0;
-                //attemptMoaFlap(true);
-                this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT_SING, SoundCategory.NEUTRAL, MathHelper.clamp(this.random.nextFloat(), 0.5f, 0.6f), MathHelper.clamp(this.random.nextFloat(), .85f, 1.15f) + MathHelper.clamp(this.random.nextFloat(), 0f, .1f));
+                this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT_SING, SoundCategory.NEUTRAL, 0.16f, getRandomFloat(0.98f, 1.02f));
             }
         } else {
-            moaSoundCallCooldown = 20 + random.nextInt(50);
-            soundChance += MathHelper.clamp(this.random.nextFloat(), 0.08f, 0.11f);
+            if (isSaddled()) {
+                moaSoundCallCooldown = 120 + random.nextInt(80);
+                soundChance += getRandomFloat(0.04f, 0.13f);
+            } else {
+                moaSoundCallCooldown = 50 + random.nextInt(160);
+                soundChance += getRandomFloat(0.04f, 0.16f);
+            }
         }
     }
     private boolean canFlap = true;
     public void attemptMoaFlap(boolean bypassFlapCheck)
     {
-        if (getWingRoll() > 0.8 && canFlap || bypassFlapCheck)
-        {
-
-            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(),
-                ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.6F,
-                MathHelper.clamp(this.random.nextFloat(), 0.9f, 1.1f) + MathHelper.clamp(this.random.nextFloat(), -0.2f, 0.2f));
-
+        if (getWingRoll() > 0.8 && canFlap || bypassFlapCheck) {
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.25F, getRandomFloat(0.9f, 0.97f));
             canFlap = false;
         }
         else if (getWingRoll() < -0.3f) {canFlap = true;}
@@ -301,7 +337,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     protected void playHurtSound(DamageSource source) {
-        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_HURT, SoundCategory.NEUTRAL, 0.225F, MathHelper.clamp(this.random.nextFloat(), 0.5f, 0.7f) + MathHelper.clamp(this.random.nextFloat(), 0f, 0.15f));
+        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_HURT, SoundCategory.NEUTRAL, 0.06F, getRandomFloat(0.78f, 0.82f));
     }
 
     @Override
@@ -322,8 +358,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         } else {
             dataTracker.set(AIR_TICKS, 0);
                 if (randFlapTimer <= 0) {
-                    randFlapSpeed = (int) (Math.random() * 2f) + 1.2f; // Pick random flapping speed
-                    flapCount = (int) (Math.random() * 5) + 2; // Pick random flaps
+                    randFlapSpeed = getRandomFloat(2f, 2.5f);
+                    flapCount = (int) (Math.random() * 5) + 2;
                     randFlapTimer = (int) (Math.random() * 1000) + 50; // Time For next flap
                 } else {
                     randFlapTimer--;
@@ -331,7 +367,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
 
         if (this.jumping) {
-            this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
+
+            this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
+            this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D)); //Smooths it out
         }
 
         this.fall();
@@ -357,13 +395,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             produceParticlesServer(ParticleTypes.ANGRY_VILLAGER, random.nextInt(3), 1, 0);
             if (hunger < 10F && hasPassengers()) {
                 removeAllPassengers();
-                playSound(ParadiseLostSoundEvents.ENTITY_MOA_DEATH, 1, 1.5F + random.nextFloat() * 0.5F);
+                playSound(ParadiseLostSoundEvents.ENTITY_MOA_DEATH, 0.15f, 1.5F + random.nextFloat() * 0.5F);
             }
         }
         if (getGenes().getRace().legendary() && getVelocity().lengthSquared() <= 0.02 && random.nextFloat() < 0.1F && random.nextBoolean()) {
             produceParticles((ParticleEffect) getGenes().getRace().particles(), 5, 0.25F);
         }
-
     }
 
 
@@ -530,14 +567,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             } else {
                 if (heldStack.getItem() != ParadiseLostItems.ORANGE && heldStack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES)) {
                     eat(player, hand, heldStack);
-                    playSound(ParadiseLostSoundEvents.ENTITY_MOA_EAT, 1, 0.5F + random.nextFloat() / 3F);
+                    playSound(ParadiseLostSoundEvents.ENTITY_MOA_EAT, 1, 0.4F + random.nextFloat() / 3F);
                     produceParticlesServer(new ItemStackParticleEffect(ParticleTypes.ITEM, heldStack), 2 + random.nextInt(4), 7, 0);
                     //spawnConsumptionEffects(heldStack, 7 + random.nextInt(13));
 
                     var foodComponent = heldStack.getOrDefault(DataComponentTypes.FOOD, null);
                     if (random.nextFloat() < 0.04F * (foodComponent == null ? 2 : foodComponent.nutrition())) {
                         getGenes().tame(player.getUuid());
-                        playSound(ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, 2, 0.75F);
+                        playSound(ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, 0.34f, 0.75F);
                         produceParticlesServer(ParticleTypes.HAPPY_VILLAGER, 2 + random.nextInt(4), 7, 0);
                         if (player instanceof ServerPlayerEntity) {
                             Criteria.TAME_ANIMAL.trigger((ServerPlayerEntity) player, this);
@@ -588,7 +625,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public boolean shouldSpawnSprintingParticles() {
-        return Math.abs(getVelocity().multiply(1, 0, 1).length()) > 0 && !isTouchingWater() && isGliding();
+        return Math.abs(getVelocity().multiply(1d, 0, 1d).length()) > 0.4f && !isTouchingWater() && !isGliding() && isBaby();
     }
 
     @Override
@@ -680,8 +717,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public void startJumping(int height) {
+        if (!isGliding()){
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.25F, getRandomFloat(0.64f,0.69f));
+        }
         this.jumping = true;
-        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.8F, MathHelper.clamp(this.random.nextFloat(), 0.7f, 0.8f));
     }
 
     @Override
@@ -775,7 +814,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
 
         public double getDesiredSquaredDistanceToTarget() {
-            return 2.0D;
+            return 4.0D;
         }
 
         public boolean shouldResetPath() {
