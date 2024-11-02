@@ -104,20 +104,18 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         this.goalSelector.add(7, new StopAndLookAtEntityGoal(this, ParrotEntity.class, 25, 0.25f));
         this.goalSelector.add(8, new StopAndLookAtEntityGoal(this, LivingEntity.class, 15, 0.10f));
 
-        if (!isBaby()){
+        if (!isBaby()) {
             this.goalSelector.add(2, new TemptGoal(this, 0.13D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
             this.goalSelector.add(8, new LookAtEntityGoal(this, MoaEntity.class, 8F, 0.15f));
-        }
-        else {
+        } else {
             this.goalSelector.add(2, new TemptGoal(this, 0.16D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
             this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 5F, 0.5f));
         }
 
-        if (!isSaddled()){
+        if (!isSaddled()) {
             this.goalSelector.add(11, new WanderAroundFarGoal(this, 0.08F, 0.4f)); //WanderGoal
             //this.goalSelector.add(11, new WanderAroundFarGoal(this, 0.15F, 0.2f));
-        }
-        else {
+        } else {
             this.goalSelector.add(11, new WanderAroundGoal(this, 0.03F));
         }
         this.goalSelector.add(12, new LookAroundGoal(this)); //LookGoal
@@ -249,8 +247,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     curWingRoll += lDif / 6;
                 }
             }
-
-
             prevWingRoll = curWingRoll; // Update previous wing roll for peak detection
         }
         //System.out.println(curWingRoll);
@@ -299,7 +295,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 moaSoundCallCooldown = 60 + random.nextInt(55);
                 songChance += MathHelper.clamp(this.random.nextFloat(), 0.1f, 0.04f);
 
-                if (!isBaby()){
+                if (!isBaby()) {
                     this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundCategory.NEUTRAL, 0.05f, getRandomFloat(0.85f, 0.92f));
                 } else {
                     this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundCategory.NEUTRAL, 0.03f, getRandomFloat(1f, 1.1f));
@@ -326,8 +322,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         if (getWingRoll() > 0.8 && canFlap || bypassFlapCheck) {
             this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.25F, getRandomFloat(0.9f, 0.97f));
             canFlap = false;
+        } else if (getWingRoll() < -0.3f) {
+            canFlap = true;
         }
-        else if (getWingRoll() < -0.3f) {canFlap = true;}
     }
 
 
@@ -357,17 +354,16 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             attemptMoaFlap(false);
         } else {
             dataTracker.set(AIR_TICKS, 0);
-                if (randFlapTimer <= 0) {
-                    randFlapSpeed = getRandomFloat(2f, 2.5f);
-                    flapCount = (int) (Math.random() * 5) + 2;
-                    randFlapTimer = (int) (Math.random() * 1000) + 50; // Time For next flap
-                } else {
-                    randFlapTimer--;
-                }
+            if (randFlapTimer <= 0) {
+                randFlapSpeed = getRandomFloat(2f, 2.5f);
+                flapCount = (int) (Math.random() * 5) + 2;
+                randFlapTimer = (int) (Math.random() * 1000) + 50; // Time For next flap
+            } else {
+                randFlapTimer--;
+            }
         }
 
         if (this.jumping) {
-
             this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
             this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D)); //Smooths it out
         }
