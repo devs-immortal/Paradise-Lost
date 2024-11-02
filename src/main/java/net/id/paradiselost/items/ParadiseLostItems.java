@@ -372,6 +372,7 @@ public class ParadiseLostItems {
     // lights
     public static final BlockItem CHERINE_LANTERN = add(ParadiseLostBlocks.CHERINE_LANTERN);
     public static final VerticallyAttachableBlockItem CHERINE_TORCH = add("cherine_torch", new VerticallyAttachableBlockItem(ParadiseLostBlocks.CHERINE_TORCH, ParadiseLostBlocks.CHERINE_TORCH_WALL, new Settings(), Direction.DOWN));
+    public static final BlockItem GOLDEN_AMBER_BARS = add(ParadiseLostBlocks.GOLDEN_AMBER_BARS);
     // util blocks (enchanter, freezer, etc.)
 
     // redstone
