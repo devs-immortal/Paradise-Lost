@@ -5,7 +5,7 @@ import net.id.paradiselost.component.MoaGenes;
 public enum MoaAttributes {
     GROUND_SPEED(0.24F, 0.8F, 0.1F),
     GLIDING_SPEED(0.07F, 0.25F, 0.03F),
-    GLIDING_DECAY(0.5F, 0.9F, 0.06F),
+    GLIDING_DECAY(0.5F, 0.8F, 0.06F),
     JUMPING_STRENGTH(0.18F, 0.28F, 0.02F),
     DROP_MULTIPLIER(1, 6, 1),
     MAX_HEALTH(10, 40, 5);

@@ -93,7 +93,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     protected void initGoals() {
-
+        /*
         this.goalSelector.add(0, new MoaEscapeDangerGoal(this, 0.8));
 
         this.goalSelector.add(1, new EatFromBowlGoal(0.4, 24, 16));
@@ -123,6 +123,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         this.goalSelector.add(12, new SwimGoal(this));
         this.goalSelector.add(12, new FollowParentGoal(this, 0.11D));
         this.goalSelector.add(12, new FlyGoal(this, 0.1f));
+        */
+
 
     }
 
@@ -224,7 +226,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public float getWingRoll() {
 
         //Gliding flapping system
-        if (dataTracker.get(AIR_TICKS) >= 4) {
+        if (dataTracker.get(AIR_TICKS) >= 3) {
             curWingRoll = MathHelper.sin(age / wingFlapSpeed) * 0.73F + 0.1F;
             atWingBottom = false;  // Reset peak for landing
         } else {
@@ -308,10 +310,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             }
         } else {
             if (isSaddled()) {
-                moaSoundCallCooldown = 120 + random.nextInt(80);
+                moaSoundCallCooldown = 150 + random.nextInt(150);
                 soundChance += getRandomFloat(0.04f, 0.13f);
             } else {
-                moaSoundCallCooldown = 50 + random.nextInt(160);
+                moaSoundCallCooldown = 100 + random.nextInt(250);
                 soundChance += getRandomFloat(0.04f, 0.16f);
             }
         }
@@ -340,6 +342,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     public void tick() {
         super.tick();
+        this.fall();
 
         isInAir = !isOnGround();
 
@@ -364,11 +367,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
 
         if (this.jumping) {
-            this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D));
-            this.setVelocity(this.getVelocity().add(0.0D, 0.03D, 0.0D)); //Smooths it out
+            this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
         }
-
-        this.fall();
 
         if (hasPassengers()) {
             streamPassengersAndSelf().forEach(entity -> entity.fallDistance = 0);
@@ -470,6 +470,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 this.headYaw = this.bodyYaw;
                 var movement = getControlledMovementInput(controllingPlayer, movementInput);
 
+                final float groundAcceleration = 0.006F;
+                final float flyingAcceleration = 0.001F;
+                final float maxGroundSpeed = 0.5F;
+                final float maxFlyingSpeed = 0.7F;
+
                 if (this.jumpStrength > 0.0F && !this.isInAir && this.isOnGround()) {
                     double d = 0.1F * (double) this.jumpStrength * (double) this.getJumpVelocityMultiplier();
                     double h;
@@ -481,31 +486,42 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
                     Vec3d vec3d = this.getVelocity();
                     this.setVelocity(vec3d.x, h, vec3d.z);
-
+/*
                     this.velocityDirty = true;
                     if (movement.z > 0.0F) {
-                        float adjVel = jumpStrength / 2F;
-                        float i = MathHelper.sin(this.getYaw() * 0.017453292F);
-                        float j = MathHelper.cos(this.getYaw() * 0.017453292F);
+                        float adjVel = 0.02f;
+                        float i = MathHelper.sin(this.getYaw() * 0.01745F);
+                        float j = MathHelper.cos(this.getYaw() * 0.01745F);
                         this.setVelocity(this.getVelocity().add(-0.4F * i * adjVel, 0.0D, 0.4F * j * adjVel));
                     }
-
+*/
                     this.jumpStrength = 0.0F;
                 }
 
+                // Reset jump when grounded
                 if (jumpStrength <= 0.01F && isOnGround()) {
                     this.jumpStrength = 0.0F;
                     this.jumping = false;
                     isInAir = false;
                 }
-
+                // acceleration
                 if (this.isLogicalSideForUpdatingMovement()) {
-                    this.setMovementSpeed(getMovementSpeed());
-                    super.travel(new Vec3d(movement.x, movementInput.y, movement.z));
+                    //this.rise();
+                    float currentSpeed = 0;
+                    if (!this.isGliding()) {
+                        currentSpeed = getMovementSpeed();
+                        currentSpeed = Math.min(currentSpeed + groundAcceleration, maxGroundSpeed);
+                    } else {
+                        currentSpeed = getMovementSpeed();
+                        currentSpeed = Math.min(currentSpeed + flyingAcceleration, maxFlyingSpeed);
+                    }
+                    //System.out.println(currentSpeed);
+                    this.setMovementSpeed(currentSpeed);
+                    super.travel(new Vec3d(movement.x * currentSpeed, movementInput.y, movement.z * currentSpeed));
                 } else {
                     this.setVelocity(Vec3d.ZERO);
                 }
-
+                //System.out.println(getVelocity());
                 this.updateLimbs(false);
             } else {
                 super.travel(movementInput);
@@ -547,7 +563,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 }
                 
                 var item = heldStack.getItem();
-                if (heldStack.isIn(ConventionalItemTags.RAW_MEATS_FOODS)) {
+                if (heldStack.isIn(ConventionalItemTags.RAW_MEAT_FOODS)) {
                     feedMob(heldStack);
                     return ActionResult.success(getWorld().isClient());
                 } else if (!hasChest() && item instanceof BlockItem blockItem && blockItem.getBlock() instanceof AbstractChestBlock) {
@@ -653,7 +669,15 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     public void fall() {
         if (this.getVelocity().y < 0.0D && !this.isSneaking()) {
-            this.setVelocity(this.getVelocity().multiply(1.0D, isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) : 1D, 1.0D));
+            this.setVelocity(this.getVelocity().multiply(1D, isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) : 0.9D, 1.0D));
+        }
+    }
+
+    public void rise() {
+        if ((this.getVelocity().y > 0.005f  && this.getVelocity().y < 1f)&& !this.isSneaking() && hasPassengers()) {
+            this.setVelocity(this.getVelocity().add(0, 0.15f, 0));
+            //This is janky, but makes moa fall less fast, has a bug that makes it infinite fly lol
+            //System.out.println(getVelocity().getY());
         }
     }
 
@@ -865,9 +889,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             if (isOnGround()){
                 isInAir = false;
             }
-            moaSoundCallCooldown = 20 + random.nextInt(350);
-            songChance = MathHelper.clamp(random.nextFloat(), 0f, 0.5f);
-
+            moaSoundCallCooldown = 150 + random.nextInt(350);
+            songChance = MathHelper.clamp(random.nextFloat(), 0f, 0.3f);
 
             this.timer = 0;
             super.start();
