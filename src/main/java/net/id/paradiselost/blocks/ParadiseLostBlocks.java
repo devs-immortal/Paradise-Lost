@@ -13,9 +13,12 @@ import net.id.paradiselost.blocks.natural.crop.*;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
+import net.id.paradiselost.world.feature.configured_features.ParadiseLostConfiguredFeatures;
+import net.id.paradiselost.world.feature.configured_features.ParadiseLostTreeConfiguredFeatures;
 import net.id.paradiselost.world.feature.tree.ParadiseLostSaplingGenerators;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.tag.BlockTags;
@@ -209,8 +212,12 @@ public class ParadiseLostBlocks {
     public static final TallWaterPlantBlock HONEY_NETTLE = add("honey_nettle", new TallWaterPlantBlock(shrub().sounds(BlockSoundGroup.SMALL_DRIPLEAF)), cutoutRenderLayer);
 
     public static final WallClingingPlantBlock ROOTCAP = add("rootcap", new WallClingingPlantBlock(ParadiseLostBlockTags.FUNGI_CLINGABLES, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
-    public static final ParadiseLostMushroomPlantBlock BROWN_SPORECAP = add("brown_sporecap", new ParadiseLostMushroomPlantBlock(BlockTags.MUSHROOM_GROW_BLOCK, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
+    public static final ParadiseLostMushroomPlantBlock BROWN_SPORECAP = add("brown_sporecap", new ParadiseLostMushroomPlantBlock(BlockTags.MUSHROOM_GROW_BLOCK, ParadiseLostTreeConfiguredFeatures.HUGE_BROWN_SPORECAP, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
     public static final ParadiseLostHangingMushroomPlantBlock PINK_SPORECAP = add("pink_sporecap", new ParadiseLostHangingMushroomPlantBlock(BlockTags.MUSHROOM_GROW_BLOCK, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
+
+    public static final Block ROOTCAP_BLOCK = add("rootcap_block", new MushroomBlock(copy(BROWN_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_BROWN)));
+    public static final Block BROWN_SPORECAP_BLOCK = add("brown_sporecap_block", new MushroomBlock(copy(BROWN_MUSHROOM_BLOCK).mapColor(MapColor.BROWN)));
+    public static final Block PINK_SPORECAP_BLOCK = add("pink_sporecap_block", new MushroomBlock(copy(BROWN_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_PINK)));
 
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(crop().mapColor(MapColor.PINK)), flammablePlant, cutoutMippedRenderLayer);
     public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(crop().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);

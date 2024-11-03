@@ -191,6 +191,9 @@
   "block.paradise_lost.rootcap": "Rootcap",
   "block.paradise_lost.brown_sporecap": "Brown Sporecap",
   "block.paradise_lost.pink_sporecap": "Pink Sporecap",
+  "block.paradise_lost.rootcap_block": "Rootcap Block",
+  "block.paradise_lost.brown_sporecap_block": "Brown Sporecap Block",
+  "block.paradise_lost.pink_sporecap_block": "Pink Sporecap Block",
 
   "block.paradise_lost.flaxweave_cushion" : "Flaxweave Cushion",
 

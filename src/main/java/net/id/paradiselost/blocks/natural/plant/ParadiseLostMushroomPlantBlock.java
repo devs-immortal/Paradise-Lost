@@ -3,27 +3,36 @@ package net.id.paradiselost.blocks.natural.plant;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Random;
 
-public class ParadiseLostMushroomPlantBlock extends PlantBlock {
+public class ParadiseLostMushroomPlantBlock extends PlantBlock implements Fertilizable {
 
     public static final MapCodec<ParadiseLostMushroomPlantBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            TagKey.codec(RegistryKeys.BLOCK).fieldOf("plantable_on").forGetter((block) -> block.plantableOn), createSettingsCodec()
+            TagKey.codec(RegistryKeys.BLOCK).fieldOf("plantable_on").forGetter((block) -> block.plantableOn),
+            RegistryKey.createCodec(RegistryKeys.CONFIGURED_FEATURE).fieldOf("feature").forGetter(block -> block.featureKey),
+            createSettingsCodec()
     ).apply(instance, ParadiseLostMushroomPlantBlock::new));
     protected final TagKey<Block> plantableOn;
+    private final RegistryKey<ConfiguredFeature<?, ?>> featureKey;
 
-    public ParadiseLostMushroomPlantBlock(TagKey<Block> plantableOn, Settings settings) {
+    public ParadiseLostMushroomPlantBlock(TagKey<Block> plantableOn, RegistryKey<ConfiguredFeature<?, ?>> featureKey, Settings settings) {
         super(settings);
         this.plantableOn = plantableOn;
+        this.featureKey = featureKey;
     }
     
     @Override
@@ -81,6 +90,29 @@ public class ParadiseLostMushroomPlantBlock extends PlantBlock {
             return true;
         } else {
             return world.getBaseLightLevel(pos, 0) < 13 && canPlantOnTop(blockState, world, blockPos);
+        }
+    }
+
+    @Override
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean canGrow(World world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
+        return random.nextFloat() < 0.4;
+    }
+
+    @Override
+    public void grow(ServerWorld world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
+        Optional<? extends RegistryEntry<ConfiguredFeature<?, ?>>> optional = world.getRegistryManager()
+                .get(RegistryKeys.CONFIGURED_FEATURE)
+                .getEntry(this.featureKey);
+        if (!optional.isEmpty()) {
+            world.removeBlock(pos, false);
+            if (!((ConfiguredFeature)((RegistryEntry)optional.get()).value()).generate(world, world.getChunkManager().getChunkGenerator(), random, pos)) {
+                world.setBlockState(pos, state, Block.NOTIFY_ALL);
+            }
         }
     }
 }

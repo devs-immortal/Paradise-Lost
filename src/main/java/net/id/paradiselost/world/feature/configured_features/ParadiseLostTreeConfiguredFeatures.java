@@ -36,6 +36,9 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryKey<ConfiguredFeature<?, ?>> SHIELD_STUMPS = of("shield_stumps");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SHIELD_HOLLOW_STUMPS = of("shield_hollow_stumps");
 
+    // Mushrooms
+    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_BROWN_SPORECAP = of("huge_brown_sporecap");
+
     // Assortments
     public static final RegistryKey<ConfiguredFeature<?, ?>> SCATTERED_TREES = of("trees_scattered");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SHIELD_TREES = of("trees_shield");

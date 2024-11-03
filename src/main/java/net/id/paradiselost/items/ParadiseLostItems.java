@@ -362,6 +362,9 @@ public class ParadiseLostItems {
     public static final BlockItem ROOTCAP = add(ParadiseLostBlocks.ROOTCAP, compostable65);
     public static final BlockItem BROWN_SPORECAP = add(ParadiseLostBlocks.BROWN_SPORECAP, compostable65);
     public static final BlockItem PINK_SPORECAP = add(ParadiseLostBlocks.PINK_SPORECAP, compostable65);
+    public static final BlockItem ROOTCAP_BLOCK = add(ParadiseLostBlocks.ROOTCAP_BLOCK, compostable85);
+    public static final BlockItem BROWN_SPORECAP_BLOCK = add(ParadiseLostBlocks.BROWN_SPORECAP_BLOCK, compostable85);
+    public static final BlockItem PINK_SPORECAP_BLOCK = add(ParadiseLostBlocks.PINK_SPORECAP_BLOCK, compostable85);
 
     public static final BlockItem FLAXWEAVE_CUSHION = add(ParadiseLostBlocks.FLAXWEAVE_CUSHION, fuel(300));
 

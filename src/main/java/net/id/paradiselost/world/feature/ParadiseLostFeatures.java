@@ -13,12 +13,12 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.DeltaFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.HugeMushroomFeatureConfig;
 
 public class ParadiseLostFeatures {
     public static final ParadiseLostLakeFeature LAKE = register("lake", new ParadiseLostLakeFeature(DynamicConfiguration.CODEC));
 
     public static final ParadiseLostDeltaFeature DELTA_FEATURE = register("delta_feature", new ParadiseLostDeltaFeature(DeltaFeatureConfig.CODEC));
-    public static final GroundcoverFeature GROUNDCOVER_FEATURE = register("groundcover_feature", new GroundcoverFeature(GroundcoverFeatureConfig.CODEC));
     public static final ParadiseLostBoulderFeature BOULDER = register("boulder", new ParadiseLostBoulderFeature(BoulderFeatureConfig.CODEC));
     public static final VitrouliteSpireFeature VITROULITE_SPIRE_FEATURE = register("vitroulite_spire", new VitrouliteSpireFeature(DefaultFeatureConfig.CODEC));
 
@@ -29,6 +29,9 @@ public class ParadiseLostFeatures {
 
     public static final JaggedOreFeature JAGGED_ORE = register("jagged_ore", new JaggedOreFeature(JaggedOreConfig.CODEC));
     public static final SurtrumMeteoriteFeature SURTRUM_METEORITE_FEATURE = register("surtrum_meteorite", new SurtrumMeteoriteFeature(DefaultFeatureConfig.CODEC));
+
+    public static final HugeBrownSporecapFeature BROWN_SPORECAP_FEATURE = register("huge_brown_sporecap", new HugeBrownSporecapFeature(HugeMushroomFeatureConfig.CODEC));
+
 
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String id, F feature) {
         return Registry.register(Registries.FEATURE, ParadiseLost.locate(id), feature);

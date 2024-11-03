@@ -2,26 +2,32 @@ package net.id.paradiselost.blocks.natural.plant;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Fertilizable;
 import net.minecraft.block.PlantBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class WallClingingPlantBlock extends PlantBlock {
+public class WallClingingPlantBlock extends PlantBlock implements Fertilizable {
 
     public static final MapCodec<WallClingingPlantBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
         return instance.group(TagKey.codec(RegistryKeys.BLOCK).fieldOf("clingable_blocks").forGetter((block) -> {
@@ -81,5 +87,39 @@ public class WallClingingPlantBlock extends PlantBlock {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(FACING);
+    }
+
+    @Override
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+        Direction facing = state.get(FACING).getOpposite();
+        return random.nextFloat() < 0.4 && hasRoomToGrow(world, pos, facing);
+    }
+
+    @Override
+    public void grow(ServerWorld world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
+        BlockState capState = ParadiseLostBlocks.ROOTCAP_BLOCK.getDefaultState();
+        Direction facing = state.get(FACING).getOpposite();
+        for (int l = 0; l <= 1; l++) {
+            for (int m = -1; m <= 1; m++) {
+                world.setBlockState(pos.offset(facing, l).offset(facing.rotateClockwise(Direction.Axis.Y), m), capState);
+            }
+        }
+    }
+
+    private boolean hasRoomToGrow(World world, BlockPos pos, Direction facing) {
+        for (int l = 0; l <= 2; l++) {
+            for (int m = -1; m <= 1; m++) {
+                BlockState blockState2 = world.getBlockState(pos.offset(facing, l).offset(facing.rotateClockwise(Direction.Axis.Y), m));
+                if (!blockState2.isAir() && !blockState2.isIn(BlockTags.LEAVES) && !blockState2.isOf(this)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

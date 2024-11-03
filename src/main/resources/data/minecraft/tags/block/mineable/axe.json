@@ -7,6 +7,9 @@
     "paradise_lost:incubator",
     "paradise_lost:food_bowl",
     "paradise_lost:tree_tap",
+    "paradise_lost:rootcap_block",
+    "paradise_lost:brown_sporecap_block",
+    "paradise_lost:pink_sporecap_block",
     "#paradise_lost:hollow_logs"
   ]
 }

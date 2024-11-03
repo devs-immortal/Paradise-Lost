@@ -185,6 +185,9 @@ public class ParadiseLostItemGroups {
                 entries.add(ROOTCAP);
                 entries.add(BROWN_SPORECAP);
                 entries.add(PINK_SPORECAP);
+                entries.add(ROOTCAP_BLOCK);
+                entries.add(BROWN_SPORECAP_BLOCK);
+                entries.add(PINK_SPORECAP_BLOCK);
                 // plants
                 entries.add(BLACKCURRANT);
                 entries.add(AMADRYS_BUSHEL);
