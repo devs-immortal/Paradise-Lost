@@ -366,9 +366,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             }
         }
 
-        if (this.jumping) {
+/*        if (this.jumping) {
             this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
-        }
+        }*/
 
         if (hasPassengers()) {
             streamPassengersAndSelf().forEach(entity -> entity.fallDistance = 0);
@@ -467,10 +467,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         float g = controllingPlayer.forwardSpeed;
         if (g == 0 && f == 0) {
             curGroundSpeed = Math.clamp(curGroundSpeed - 0.1f, (getGenes().getAttribute(MoaAttributes.GROUND_SPEED) - 0.2f) * 0.4f, getGenes().getAttribute(MoaAttributes.GROUND_SPEED)  * 0.4f);
-            curFlyingSpeed = Math.clamp(curFlyingSpeed - 0.01f, 0.4f, getGenes().getAttribute(MoaAttributes.GLIDING_SPEED)  * 5.0F);
+            curFlyingSpeed = Math.clamp(curFlyingSpeed - 0.05f, 0.25f, getGenes().getAttribute(MoaAttributes.GLIDING_SPEED)  * 8.0F);
         } else {
             curGroundSpeed = Math.clamp(curGroundSpeed + groundAcceleration, (getGenes().getAttribute(MoaAttributes.GROUND_SPEED) - 0.2f) * 0.4f, getGenes().getAttribute(MoaAttributes.GROUND_SPEED)  * 0.4f);
-            curFlyingSpeed = Math.clamp(curFlyingSpeed + flyingAcceleration, 0.4f, getGenes().getAttribute(MoaAttributes.GLIDING_SPEED)  * 5.0F);
+            curFlyingSpeed = Math.clamp(curFlyingSpeed + flyingAcceleration, 0.25f, getGenes().getAttribute(MoaAttributes.GLIDING_SPEED)  * 8.0F);
         }
     }
 
@@ -519,6 +519,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 // acceleration
 
                 if (this.isLogicalSideForUpdatingMovement()) {
+
                     //this.rise();
 /*                    if (!this.isGliding()) {
                         this.setMovementSpeed(curGroundSpeed);
@@ -528,7 +529,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                         System.out.println(curFlyingSpeed);
                     }*/
                     //System.out.println(currentSpeed);
-                    super.travel(new Vec3d(movement.x, movementInput.y, movement.z));
+                    super.travel(new Vec3d(movement.x, 0.3f, movement.z));
                 } else {
                     this.setVelocity(Vec3d.ZERO);
                 }
@@ -541,6 +542,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 produceParticles((ParticleEffect) getGenes().getRace().particles(), 3, 0.25F);
             }
         }
+    }
+    @Override
+    protected void updateLimbs(float posDelta) {
+        float f = Math.min(posDelta * 2.0F, 0.5F);
+        this.limbAnimator.updateLimbs(f, 0.4F);
     }
 
     @Override
@@ -681,9 +687,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void fall() {
         if (this.getVelocity().y < 0.0D && !this.isSneaking()) {
             this.setVelocity(this.getVelocity().multiply(1D, isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) : 0.9D, 1.0D));
+            //this.setVelocity(this.getVelocity().add(0.0D, 0.05D, 0.0D));
         }
     }
 
+/*
     public void rise() {
         if ((this.getVelocity().y > 0.005f  && this.getVelocity().y < 1f)&& !this.isSneaking() && hasPassengers()) {
             this.setVelocity(this.getVelocity().add(0, 0.15f, 0));
@@ -691,6 +699,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             //System.out.println(getVelocity().getY());
         }
     }
+*/
 
     @Override
     public void setJumping(boolean jump) {
@@ -750,8 +759,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void startJumping(int height) {
         if (!isGliding()) {
             this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.25F, getRandomFloat(0.64f,0.69f));
+            this.jumping = true;
+        } else {
+            this.jumping = false;
         }
-        this.jumping = true;
     }
 
     @Override
