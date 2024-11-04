@@ -448,14 +448,30 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
     }
 
+    float curGroundSpeed = 0F;
+    float curFlyingSpeed = 0;
+    final float groundAcceleration = 0.004F;
+    final float flyingAcceleration = 0.04F;
+
     protected Vec3d getControlledMovementInput(PlayerEntity controllingPlayer, Vec3d movementInput) {
         float f = controllingPlayer.sidewaysSpeed * 0.5F;
         float g = controllingPlayer.forwardSpeed;
         if (g <= 0.0F) {
             g *= 0.25F;
         }
-
         return new Vec3d(f, 0.0, g);
+    }
+
+    private void calcAcceleration(PlayerEntity controllingPlayer) {
+        float f = controllingPlayer.sidewaysSpeed * 0.5F;
+        float g = controllingPlayer.forwardSpeed;
+        if (g == 0 && f == 0) {
+            curGroundSpeed = Math.clamp(curGroundSpeed - 0.1f, (getGenes().getAttribute(MoaAttributes.GROUND_SPEED) - 0.2f) * 0.4f, getGenes().getAttribute(MoaAttributes.GROUND_SPEED)  * 0.4f);
+            curFlyingSpeed = Math.clamp(curFlyingSpeed - 0.01f, 0.4f, getGenes().getAttribute(MoaAttributes.GLIDING_SPEED)  * 5.0F);
+        } else {
+            curGroundSpeed = Math.clamp(curGroundSpeed + groundAcceleration, (getGenes().getAttribute(MoaAttributes.GROUND_SPEED) - 0.2f) * 0.4f, getGenes().getAttribute(MoaAttributes.GROUND_SPEED)  * 0.4f);
+            curFlyingSpeed = Math.clamp(curFlyingSpeed + flyingAcceleration, 0.4f, getGenes().getAttribute(MoaAttributes.GLIDING_SPEED)  * 5.0F);
+        }
     }
 
     @Override
@@ -469,11 +485,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 this.bodyYaw = this.getYaw();
                 this.headYaw = this.bodyYaw;
                 var movement = getControlledMovementInput(controllingPlayer, movementInput);
-
-                final float groundAcceleration = 0.006F;
-                final float flyingAcceleration = 0.001F;
-                final float maxGroundSpeed = 0.5F;
-                final float maxFlyingSpeed = 0.7F;
+                calcAcceleration(controllingPlayer);
 
                 if (this.jumpStrength > 0.0F && !this.isInAir && this.isOnGround()) {
                     double d = 0.1F * (double) this.jumpStrength * (double) this.getJumpVelocityMultiplier();
@@ -505,19 +517,18 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     isInAir = false;
                 }
                 // acceleration
+
                 if (this.isLogicalSideForUpdatingMovement()) {
                     //this.rise();
-                    float currentSpeed = 0;
-                    if (!this.isGliding()) {
-                        currentSpeed = getMovementSpeed();
-                        currentSpeed = Math.min(currentSpeed + groundAcceleration, maxGroundSpeed);
+/*                    if (!this.isGliding()) {
+                        this.setMovementSpeed(curGroundSpeed);
+                        System.out.println(curGroundSpeed);
                     } else {
-                        currentSpeed = getMovementSpeed();
-                        currentSpeed = Math.min(currentSpeed + flyingAcceleration, maxFlyingSpeed);
-                    }
+                        this.setMovementSpeed(curFlyingSpeed);
+                        System.out.println(curFlyingSpeed);
+                    }*/
                     //System.out.println(currentSpeed);
-                    this.setMovementSpeed(currentSpeed);
-                    super.travel(new Vec3d(movement.x * currentSpeed, movementInput.y, movement.z * currentSpeed));
+                    super.travel(new Vec3d(movement.x, movementInput.y, movement.z));
                 } else {
                     this.setVelocity(Vec3d.ZERO);
                 }
@@ -539,7 +550,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public float getMovementSpeed() {
-        return isGliding() ? getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) * 10.0F : getGenes().getAttribute(MoaAttributes.GROUND_SPEED) * 0.60F;
+        return isGliding() ? curFlyingSpeed : curGroundSpeed;
     }
 
     @Override
