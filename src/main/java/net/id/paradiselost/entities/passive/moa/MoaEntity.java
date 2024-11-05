@@ -30,6 +30,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -93,39 +94,28 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     protected void initGoals() {
-        /*
+
         this.goalSelector.add(0, new MoaEscapeDangerGoal(this, 0.8));
 
         this.goalSelector.add(1, new EatFromBowlGoal(0.4, 24, 16));
         this.goalSelector.add(2, new AnimalMateGoal(this, 0.25F));
+        this.goalSelector.add(8, new LookAroundGoal(this)); //LookGoal
 
-
-        this.goalSelector.add(7, new LookAtEntityGoal(this, ParrotEntity.class, 18F, 0.35f));
-        this.goalSelector.add(7, new StopAndLookAtEntityGoal(this, ParrotEntity.class, 25, 0.25f));
-        this.goalSelector.add(8, new StopAndLookAtEntityGoal(this, LivingEntity.class, 15, 0.10f));
+        this.goalSelector.add(7, new LookAtEntityGoal(this, ParrotEntity.class, 18F, 0.035f));
+        this.goalSelector.add(8, new StopAndLookAtEntityGoal(this, ParrotEntity.class, 25, 0.025f));
+        this.goalSelector.add(7, new StopAndLookAtEntityGoal(this, LivingEntity.class, 10, 0.005f));
 
         if (!isBaby()) {
-            this.goalSelector.add(2, new TemptGoal(this, 0.13D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
-            this.goalSelector.add(8, new LookAtEntityGoal(this, MoaEntity.class, 8F, 0.15f));
+            this.goalSelector.add(2, new TemptGoal(this, 0.7D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
         } else {
-            this.goalSelector.add(2, new TemptGoal(this, 0.16D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
-            this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 5F, 0.5f));
+            this.goalSelector.add(2, new TemptGoal(this, 1D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
+            this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 5F, 0.01f));
         }
-
-        if (!isSaddled()) {
-            this.goalSelector.add(11, new WanderAroundFarGoal(this, 0.08F, 0.4f)); //WanderGoal
-            //this.goalSelector.add(11, new WanderAroundFarGoal(this, 0.15F, 0.2f));
-        } else {
-            this.goalSelector.add(11, new WanderAroundGoal(this, 0.03F));
-        }
-        this.goalSelector.add(12, new LookAroundGoal(this)); //LookGoal
-
-        this.goalSelector.add(12, new SwimGoal(this));
+        this.goalSelector.add(9, new WanderAroundFarGoal(this, 0.32F, 1f)); //WanderGoal
+        this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(12, new FollowParentGoal(this, 0.11D));
-        this.goalSelector.add(12, new FlyGoal(this, 0.1f));
-        */
 
-
+        super.initGoals();
     }
 
     @Override
@@ -242,17 +232,22 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
         return curWingRoll;
     }
-
     void doRandomFlapping() {
-        curWingRoll = MathHelper.sin(randFlapTimer / (wingFlapSpeed - randFlapSpeed)) * 0.73F + 0.1F;
+
+        float baseWingRoll = MathHelper.sin(randFlapTimer / (wingFlapSpeed - randFlapSpeed)) * (0.67F + (randFlapSpeed / 8));
+        float lDif = -baseWingRoll - curWingRoll;
+        if (Math.abs(lDif) > 0.005F) {
+            curWingRoll += lDif / 4;
+        }
+
         if (curWingRoll < prevWingRoll && !atWingBottom) {
             atWingBottom = true;
             flapCount--;
         } else if (curWingRoll > prevWingRoll) {
             atWingBottom = false;
         }
-
         prevWingRoll = curWingRoll;
+        //System.out.println(curWingRoll + " - " + prevWingRoll + " - " + atWingBottom);
     }
 
     public float getWingYaw() {
@@ -355,22 +350,19 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         } else {
             dataTracker.set(AIR_TICKS, 0);
             if (randFlapTimer <= 0) {
-                randFlapSpeed = getRandomFloat(2f, 2.5f);
-                flapCount = (int) (Math.random() * 5) + 2;
-                randFlapTimer = (int) (Math.random() * 1000) + 50; // Time For next flap
+                randFlapSpeed = getRandomFloat(0f, 2f);
+                flapCount = (int) getRandomFloat(3, 6);
+                randFlapTimer = (int) getRandomFloat(250, 800); // Time For next flap
             } else {
                 randFlapTimer--;
             }
         }
 
-        if (dataTracker.get(AIR_TICKS) > 25) {
-            this.setVelocity(this.getVelocity().add(0.0D, -0.001D, 0.0D));
-        }
+
 
         if (hasPassengers()) {
             streamPassengersAndSelf().forEach(entity -> entity.fallDistance = 0);
         }
-
         MoaGenes genes = getGenes();
         float hunger = genes.getHunger();
         if (genes.isTamed()) {
@@ -393,8 +385,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         if (getGenes().getRace().legendary() && getVelocity().lengthSquared() <= 0.02 && random.nextFloat() < 0.1F && random.nextBoolean()) {
             produceParticles((ParticleEffect) getGenes().getRace().particles(), 5, 0.25F);
         }
-        super.tick();
+
         this.fall();
+        super.tick();
     }
 
 
@@ -462,15 +455,15 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     private void calcGeneSpeeds() {
         genGroundSpeed = (getGenes().getAttribute(MoaAttributes.GROUND_SPEED) - 0.24f) * 0.072f + 0.1f; //From 0.1 to ~0.3
-        genGlidingSpeed = (getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) - 0.055f) * 0.52f + 0.3f; //From 0.3 to ~0.4
-        genGlidingDecay = (getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) * -0.3f) + 0.48f; //From 0.18 to 0.48
+        genGlidingSpeed = (getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) - 0.055f) * 0.52f + 0.37f; //From 0.37 to ~0.47
+        genGlidingDecay = (getGenes().getAttribute(MoaAttributes.GLIDING_DECAY) * -0.23f) + 0.42f; //From 0.42 to ~0.19
         genJumpHeight = (getGenes().getAttribute(MoaAttributes.JUMPING_STRENGTH) - 0.15f) * 0.14f + 0.033f; //0.033 to ~0.047
 
         groundAcceleration = (getGenes().getAttribute(MoaAttributes.GROUND_SPEED) - 0.24f) * 0.05f + 0.01f; //0.01 to ~0.05
-        flyingAcceleration = (getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) * 0.1f); //0.005 and 0.025
+        flyingAcceleration = (getGenes().getAttribute(MoaAttributes.GLIDING_SPEED) * 0.1f); //0.005 to 0.025
     }
 
-    private void calcAcceleration(@NotNull PlayerEntity controllingPlayer) {
+    private void calcAcceleration(PlayerEntity controllingPlayer) {
         float f = controllingPlayer.sidewaysSpeed * 0.5F;
         float g = controllingPlayer.forwardSpeed;
         calcGeneSpeeds();
@@ -546,8 +539,14 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
     @Override
     protected void updateLimbs(float posDelta) {
-        float f = Math.min(posDelta * 2.0F, 0.5F);
-        this.limbAnimator.updateLimbs(f, 0.4F);
+        if (hasPassengers()) {
+            float f = Math.min(posDelta * 2.0F, 0.5F);
+            this.limbAnimator.updateLimbs(f, 0.4F);
+        } else {
+            float f = Math.min(posDelta * 4.0F, 3F);
+            this.limbAnimator.updateLimbs(f, 0.5F);
+        }
+
     }
 
     @Override
@@ -557,7 +556,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public float getMovementSpeed() {
-        return isGliding() ? curFlyingSpeed : curGroundSpeed;
+        if (!hasPassengers()) {
+            return isGliding() ? 0.1f : 0.08f;
+        } else {
+            return isGliding() ? curFlyingSpeed : curGroundSpeed;
+        }
     }
 
     @Override
@@ -686,8 +689,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     public void fall() {
-        if (this.getVelocity().y <= 0.0D && !this.isSneaking()) {
-            this.setVelocity(this.getVelocity().multiply(1D, isGliding() ? genGlidingDecay : 1D, 1.0D));
+        calcGeneSpeeds();
+        if (this.getVelocity().y < 0.0D && !this.isSneaking()) {
+            this.setVelocity(this.getVelocity().multiply(1D, isGliding() ? genGlidingDecay : 1f, 1.0D));
         }
 
     }
@@ -731,7 +735,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     public void setJumpStrength(int heldJumpStrength) {
         //
-
         if (this.isSaddled()) {
             if (heldJumpStrength <= 0.2f) {
                 heldJumpStrength = 0;
@@ -747,7 +750,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
                 this.jumping = true;
             }
-
+        }
+        else {
+            heldJumpStrength = 0;
+            this.jumping = false;
         }
     }
 
@@ -909,8 +915,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         @Override
         public void start() {
+            calcGeneSpeeds();
             moaSoundCallCooldown = 150 + random.nextInt(350);
             songChance = MathHelper.clamp(random.nextFloat(), 0f, 0.3f);
+            randFlapTimer = getRandomFloat(200, 1000);
 
             this.timer = 0;
             super.start();
