@@ -3,10 +3,10 @@ package net.id.paradiselost.entities.passive.moa;
 import net.id.paradiselost.component.MoaGenes;
 
 public enum MoaAttributes {
-    GROUND_SPEED(0.3F, 0.5F, 0.1F),
-    GLIDING_SPEED(0.15F, 0.25F, 0.03F),
-    GLIDING_DECAY(0.5F, 0.8F, 0.06F),
-    JUMPING_STRENGTH(0.18F, 0.28F, 0.02F),
+    GROUND_SPEED(0.24F, 1F, 0.1F),
+    GLIDING_SPEED(0.055F, 0.25F, 0.03F),
+    GLIDING_DECAY(0.5F, 0.9F, 0.06F),
+    JUMPING_STRENGTH(0.15F, 0.25F, 0.018F),
     DROP_MULTIPLIER(1, 6, 1),
     MAX_HEALTH(15, 40, 5);
 
