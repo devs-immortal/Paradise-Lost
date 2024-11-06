@@ -28,6 +28,7 @@ public class ParadiseLostModelLayers {
     public static final EntityModelLayer ENVOY_OUTER_ARMOR = register("envoy", "outer_armor", OUTER_ARMOR_MODEL_DATA);
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer PHOENIX_ARMOR = register("phoenix_armor", "main", PhoenixArmorModel.getTexturedModelData());
+    public static final EntityModelLayer POPOM = register("popom", "main", EnvoyEntityModel.getTexturedModelData());
 
 
     public static EntityModelLayer register(Identifier id, String layer, TexturedModelData data) {

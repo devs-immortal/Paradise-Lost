@@ -314,8 +314,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
     }
     private boolean canFlap = true;
-    public void attemptMoaFlap(boolean bypassFlapCheck)
-    {
+    public void attemptMoaFlap(boolean bypassFlapCheck) {
         if (getWingRoll() > 0.8 && canFlap || bypassFlapCheck) {
             this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.25F, getRandomFloat(0.9f, 0.97f));
             canFlap = false;

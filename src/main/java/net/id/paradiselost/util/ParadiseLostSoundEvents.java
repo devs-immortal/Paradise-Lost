@@ -37,6 +37,11 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MOA_EGG_HATCH = register("entity.moa.egg_hatch");
     public static final SoundEvent ENTITY_MOA_STEP = register("entity.moa.step");
 
+    public static final SoundEvent ENTITY_POPOM_AMBIENT = register(("entity.popom.ambient"));
+    public static final SoundEvent ENTITY_POPOM_HURT = register(("entity.popom.hurt"));
+    public static final SoundEvent ENTITY_POPOM_DEATH = register(("entity.popom.death"));
+
+
     public static final SoundEvent ENTITY_ENVOY_AMBIENT = register(("entity.envoy.ambient"));
     public static final SoundEvent ENTITY_ENVOY_HURT = register(("entity.envoy.hurt"));
     public static final SoundEvent ENTITY_ENVOY_DEATH = register(("entity.envoy.death"));

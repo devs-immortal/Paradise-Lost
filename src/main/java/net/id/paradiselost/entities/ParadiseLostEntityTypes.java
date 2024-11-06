@@ -6,6 +6,7 @@ import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.block.SliderEntity;
 import net.id.paradiselost.entities.hostile.EnvoyEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
+import net.id.paradiselost.entities.passive.PopomEntity;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.entities.projectile.ThrownNitraEntity;
 import net.minecraft.entity.*;
@@ -40,6 +41,9 @@ public class ParadiseLostEntityTypes {
     // passive
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(1.0F, 2.0F), 5),
             attributes(MoaEntity::createMoaAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
+
+    public static final EntityType<PopomEntity> POPOM = add("popom", of(PopomEntity::new, CREATURE, changing(1.0F, 2.0F), 5),
+            attributes(PopomEntity::createPopomAttributes), spawnRestrictions(PopomEntity::canMobSpawn));
 
     // projectile
     public static final EntityType<ThrownNitraEntity> THROWN_NITRA = add("thrown_nitra", of(ThrownNitraEntity::new, MISC, changing(0.5F, 0.5F), 5));
