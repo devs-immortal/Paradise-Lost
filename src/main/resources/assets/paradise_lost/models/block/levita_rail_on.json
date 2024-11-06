@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/rail_flat",
+  "textures": {
+    "rail": "paradise_lost:block/levita_rail_on"
+  }
+}

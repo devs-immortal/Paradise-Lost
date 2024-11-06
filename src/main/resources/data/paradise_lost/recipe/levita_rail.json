@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ILI",
+    "ISI",
+    "ILI"
+  ],
+  "key": {
+    "I": {
+      "tag": "paradise_lost:iron_interchangable"
+    },
+    "L": {
+      "item": "paradise_lost:levita_gem"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:levita_rail",
+    "count": 12
+  }
+}

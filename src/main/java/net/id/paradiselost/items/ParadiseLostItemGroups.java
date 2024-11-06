@@ -215,6 +215,7 @@ public class ParadiseLostItemGroups {
                 entries.add(AMADRYS_BUNDLE);
                 entries.add(NITRA_BUNCH);
                 entries.add(LEVITATOR);
+                entries.add(LEVITA_RAIL);
                 entries.add(INCUBATOR);
                 entries.add(FOOD_BOWL);
                 entries.add(TREE_TAP);

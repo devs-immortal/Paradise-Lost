@@ -284,6 +284,7 @@ public class ParadiseLostBlocks {
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(create().mapColor(MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
 	public static final Block TREE_TAP = add("tree_tap", new TreeTapBlock(create().mapColor(MapColor.SPRUCE_BROWN).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque().ticksRandomly()), cutoutRenderLayer);
     public static final NitraBlock NITRA_BUNCH = add("nitra_bunch", new NitraBlock(create().mapColor(MapColor.PALE_YELLOW).strength(0.5f).sounds(BlockSoundGroup.WET_GRASS)));
+    public static final Block LEVITA_RAIL = add("levita_rail", new LevitaRailBlock(create().noCollision().strength(0.7F).sounds(BlockSoundGroup.METAL)), cutoutMippedRenderLayer);
 
     public static void init() {
     }

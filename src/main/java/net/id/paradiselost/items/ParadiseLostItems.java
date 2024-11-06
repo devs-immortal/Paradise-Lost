@@ -199,6 +199,7 @@ public class ParadiseLostItems {
     public static final BlockItem FOOD_BOWL = add(ParadiseLostBlocks.FOOD_BOWL, fuel(300));
     public static final BlockItem TREE_TAP = add(ParadiseLostBlocks.TREE_TAP, fuel(300));
     public static final BlockItem NITRA_BUNCH = add(ParadiseLostBlocks.NITRA_BUNCH, fuel(3200));
+    public static final BlockItem LEVITA_RAIL = add(ParadiseLostBlocks.LEVITA_RAIL);
 
     public static final AurelBucketItem AUREL_BUCKET = add("aurel_bucket", new AurelBucketItem(new Settings().maxCount(16)), fuel(200), emptyBucketBehavior);
 

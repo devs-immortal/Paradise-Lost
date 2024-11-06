@@ -56,8 +56,7 @@
   "custom": {
     "cardinal-components": [
       "paradise_lost:moa_genetics",
-      "paradise_lost:luv",
-      "paradise_lost:lore_state"
+      "paradise_lost:minecart_float"
     ],
     "modmenu": {
       "links": {
