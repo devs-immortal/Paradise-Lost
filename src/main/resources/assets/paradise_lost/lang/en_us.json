@@ -242,6 +242,7 @@
   "entity.paradise_lost.floating_block": "Floating Block",
   "entity.paradise_lost.moa": "Moa",
   "entity.paradise_lost.envoy": "Envoy",
+  "entity.paradise_list.popom": "Popom",
 
   "item.paradise_lost.golden_amber": "Golden Amber",
   "item.paradise_lost.cherine": "Cherine Shard",
@@ -325,6 +326,7 @@
   "item.paradise_lost.hellenrose_spawn_egg": "Hellenrose Spawn Egg",
   "item.paradise_lost.envoy_spawn_egg": "Envoy Spawn Egg",
   "item.paradise_lost.moa_spawn_egg": "Moa Spawn Egg",
+  "item.paradise_lost.popom_spawn_egg": "Popom Spawn Egg",
 
   "item.paradise_lost.aurel_boat": "Aurel Boat",
   "item.paradise_lost.mother_aurel_boat": "Mother Aurel Boat",
@@ -380,13 +382,24 @@
   "commands.paradise_lost.moastat.hunger": "Hunger",
   "commands.paradise_lost.moastat.print": "%1$s = %2$s",
   "commands.paradise_lost.moastat.set": "Set %1$s to %2$s",
+
+  "subtitles.paradise_lost.entity.moa.ambient": "Moa chirps",
+  "subtitles.paradise_lost.entity.moa.ambient.sing": "Moa sings",
+  "subtitles.paradise_lost.entity.moa.gliding": "Moa flaps",
+  "subtitles.paradise_lost.entity.moa.death": "Moa dies",
+  "subtitles.paradise_lost.entity.moa.hurt": "Moa hurts",
+  "subtitles.paradise_lost.entity.moa.eat": "Moa eats",
+  "subtitles.paradise_lost.entity.moa.lay_egg": "Moa lays egg",
+  "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
+  "subtitles.paradise_lost.entity.moa.step": "Moa walks",
+
   "commands.paradise_lost.gravitate.failure" : "Couldn't float the block(s)",
   "commands.paradise_lost.gravitate.success" : "Successfully floated the block(s)",
 
 
-  "info.paradise_lost.bloodstone.cherine": "Peer into the heart",
-  "info.paradise_lost.bloodstone.olvite": "Peer into the mind",
-  "info.paradise_lost.bloodstone.surtrum": "Peer into the will",
+  "info.paradise_lost.bloodstone.cherine": "Peer into the creatures heart",
+  "info.paradise_lost.bloodstone.olvite": "Peer into the creatures mind",
+  "info.paradise_lost.bloodstone.surtrum": "Peer into the creatures will",
 
 
   "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries": "Blackcurrants pop",
@@ -401,16 +414,6 @@
   "subtitles.paradise_lost.block.orange_leaves.break": "Orange leaves break",
   "subtitles.paradise_lost.block.orange_leaves.drop_fruit": "Orange leaves drop fruit",
   "subtitles.paradise_lost.block.orange_leaves.break_differently": "Orange leaves broken",
-
-  "subtitles.paradise_lost.entity.moa.ambient": "Moa chirps",
-  "subtitles.paradise_lost.entity.moa.ambient.sing": "Moa sings",
-  "subtitles.paradise_lost.entity.moa.gliding": "Moa flaps",
-  "subtitles.paradise_lost.entity.moa.death": "Moa dies",
-  "subtitles.paradise_lost.entity.moa.hurt": "Moa hurts",
-  "subtitles.paradise_lost.entity.moa.eat": "Moa eats",
-  "subtitles.paradise_lost.entity.moa.lay_egg": "Moa lays egg",
-  "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
-  "subtitles.paradise_lost.entity.moa.step": "Moa walks",
 
 
   "subtitles.paradise_lost.entity.envoy.ambient": "Envoy rattles",
