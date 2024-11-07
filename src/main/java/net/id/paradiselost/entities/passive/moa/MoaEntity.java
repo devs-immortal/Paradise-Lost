@@ -207,23 +207,88 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
     }
 
-    float wingFlapSpeed = 2.5f, randFlapSpeed, randFlapTimer, prevWingRoll;
+    float wingFlapSpeed = 2.5f;
+    float idleFlapSpeed = 12;
+    float randFlapSpeed, randFlapTimer = 200f, prevWingRoll, prevWingYaw;
     private int flapCount = 0;
+    private int prevFlapCount = 0;
     private boolean atWingBottom;
+    private boolean atWingYawBottom;
 
-    public float getWingRoll() {
-
-        if (dataTracker.get(AIR_TICKS) >= 4) {
-            //Gliding flapping system
-            curWingRoll = MathHelper.sin(age / wingFlapSpeed) * 0.73F + 0.1F;
-            atWingBottom = false;  // Reset peak for landing
-        } else {
-            // When da boy wan flap
+    void pickRollOrYawFlapping(boolean theFinalPickForRollingOrYawingTheWingsOfTheMoa) {
+        prevFlapCount = flapCount;
+        if (theFinalPickForRollingOrYawingTheWingsOfTheMoa) {
             if (flapCount > 0 && !isSaddled()) {
-                doRandomFlapping();
+                //Smoothing to randomly roll flap
+                float baseWingRoll = MathHelper.sin(randFlapTimer / (wingFlapSpeed - randFlapSpeed)) * (0.67F + (randFlapSpeed / 8));
+                float lDif = -baseWingRoll - curWingRoll;
+                if (Math.abs(lDif) > 0.005F) {
+                    curWingRoll += lDif / 4;
+                }
+
+                if (curWingRoll < prevWingRoll && !atWingBottom) {
+                    atWingBottom = true;
+                    flapCount--;
+                } else if (curWingRoll > prevWingRoll) {
+
+                    atWingBottom = false;
+                }
+                prevWingRoll = curWingRoll;
+
+/*                if (flapCount != prevFlapCount) {
+                    prevFlapCount = flapCount;
+                    this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.3F, getRandomFloat(0.95f, 0.97f));
+                }*/
+            } else {
+                //Smoothing to base
+                float baseWingRoll = 1.39626F; //Idle position (Default was 1.39626)
+                float lDif = -baseWingRoll - curWingRoll;
+                if (Math.abs(lDif) > 0.005F) {
+                    curWingRoll += lDif / 6;
+                }
+            }
+        } else {
+            if (flapCount > 0 && !isSaddled()) {
+                //Smoothing to randomly yaw flap
+                float baseWingYaw = MathHelper.sin(randFlapTimer / 1) * (0.42F + (randFlapSpeed / 12));
+                float lDif = -baseWingYaw - curWingYaw;
+                if (Math.abs(lDif) > 0.005F) {
+                    curWingYaw += lDif / 3;
+                }
+
+                if (curWingYaw < prevWingYaw && !atWingYawBottom) {
+                    atWingYawBottom = true;
+                    flapCount--;
+                } else if (curWingYaw > prevWingYaw) {
+
+                    atWingYawBottom = false;
+                }
+                prevWingYaw = curWingYaw;
+
+/*                if (flapCount != prevFlapCount) {
+                    prevFlapCount = flapCount;
+                    this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.3F, getRandomFloat(1.15f, 1.17f));
+                }*/
             } else {
                 //Base position when not flapping etc
-                float baseWingRoll = 1.39626F; //Idle position (Default was 1.39626)
+                float baseWingYaw = 0.174533F; //Idle position (Default was 0.174533)
+                float lDif = -baseWingYaw - curWingYaw;
+                if (Math.abs(lDif) > 0.005F) {
+                    curWingYaw += lDif / 6;
+                }
+            }
+        }
+    }
+
+    public float getWingRoll() {
+        if (flapCount <= 0 || isSaddled()) {
+            if (dataTracker.get(AIR_TICKS) >= 4) {
+                //Gliding flapping system
+                curWingRoll = MathHelper.sin(age / wingFlapSpeed) * 0.73F + 0.1F;
+                atWingBottom = false;  // Reset peak for landing
+            } else {
+                //Base position when not flapping etc
+                float baseWingRoll = MathHelper.sin(age / idleFlapSpeed) * 0.05F + 1.39626F; //Idle position (Default was 1.39626)
                 float lDif = -baseWingRoll - curWingRoll;
                 if (Math.abs(lDif) > 0.005F) {
                     curWingRoll += lDif / 6;
@@ -232,31 +297,16 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         }
         return curWingRoll;
     }
-    void doRandomFlapping() {
-
-        float baseWingRoll = MathHelper.sin(randFlapTimer / (wingFlapSpeed - randFlapSpeed)) * (0.67F + (randFlapSpeed / 8));
-        float lDif = -baseWingRoll - curWingRoll;
-        if (Math.abs(lDif) > 0.005F) {
-            curWingRoll += lDif / 4;
-        }
-
-        if (curWingRoll < prevWingRoll && !atWingBottom) {
-            atWingBottom = true;
-            flapCount--;
-        } else if (curWingRoll > prevWingRoll) {
-            atWingBottom = false;
-        }
-        prevWingRoll = curWingRoll;
-        //System.out.println(curWingRoll + " - " + prevWingRoll + " - " + atWingBottom);
-    }
 
     public float getWingYaw() {
-        float baseWingYaw = isGliding() ? 0.95626F : 0.174533F;
-
-        float lDif = -baseWingYaw - curWingYaw;
-        if (Math.abs(lDif) > 0.005F) {
-            curWingYaw += lDif / 12.75;
+        if (flapCount <= 0) {
+            float baseWingYaw = isGliding() ? 0.95626F : 0.174533F;
+            float lDif = -baseWingYaw - curWingYaw;
+            if (Math.abs(lDif) > 0.005F) {
+                curWingYaw += lDif / 12.75f;
+            }
         }
+
         return curWingYaw;
     }
 
@@ -281,7 +331,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
 //Moa Sound stuff
-    int moaSoundCallCooldown;
+    int moaSoundCallCooldown = 200;
     private float soundChance = 0;
     private float songChance = 0;
     public void attemptMoaSound()
@@ -332,7 +382,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     protected void playHurtSound(DamageSource source) {
         this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_HURT, SoundCategory.NEUTRAL, 0.2F, getRandomFloat(0.78f, 0.82f));
     }
-
+    boolean shouldRoll;
     @Override
     public void tick() {
         isInAir = !isOnGround();
@@ -343,15 +393,20 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             attemptMoaSound();
         }
 
+        if (flapCount > 0 && !isSaddled()) {
+            pickRollOrYawFlapping(shouldRoll);
+        }
+
         if (isInAir) {
             dataTracker.set(AIR_TICKS, dataTracker.get(AIR_TICKS) + 1);
             attemptMoaFlap(false);
         } else {
             dataTracker.set(AIR_TICKS, 0);
             if (randFlapTimer <= 0) {
+                shouldRoll = getRandomFloat(0f, 1f) > 0.5f;
                 randFlapSpeed = getRandomFloat(0f, 2f);
-                flapCount = (int) getRandomFloat(3, 6);
-                randFlapTimer = (int) getRandomFloat(250, 800); // Time For next flap
+                flapCount = (int) getRandomFloat(2, 6);
+                randFlapTimer = (int) getRandomFloat(150, 800); // Time For next flap
             } else {
                 randFlapTimer--;
             }
