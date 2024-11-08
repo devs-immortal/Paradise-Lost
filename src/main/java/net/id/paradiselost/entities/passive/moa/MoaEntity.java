@@ -708,6 +708,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         if (inventory != DUMMY) {
             inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE), this.getRegistryManager());
         }
+
+        calcGeneSpeeds();
+        moaSoundCallCooldown = 150 + random.nextInt(350);
+        songChance = MathHelper.clamp(random.nextFloat(), 0f, 0.3f);
+        randFlapTimer = getRandomFloat(200, 1000);
     }
 
     @Override
@@ -969,11 +974,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         @Override
         public void start() {
-            calcGeneSpeeds();
-            moaSoundCallCooldown = 150 + random.nextInt(350);
-            songChance = MathHelper.clamp(random.nextFloat(), 0f, 0.3f);
-            randFlapTimer = getRandomFloat(200, 1000);
-
             this.timer = 0;
             super.start();
         }
