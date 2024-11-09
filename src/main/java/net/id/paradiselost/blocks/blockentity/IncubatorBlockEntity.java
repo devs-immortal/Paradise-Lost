@@ -1,5 +1,6 @@
 package net.id.paradiselost.blocks.blockentity;
 
+import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.component.MoaGenes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
@@ -34,6 +35,16 @@ public class IncubatorBlockEntity extends BlockEntity {
     public static <T extends BlockEntity> void tickServer(World world, BlockPos pos, BlockState state, T entity) {
         IncubatorBlockEntity incubator = (IncubatorBlockEntity) entity;
         if (incubator.egg.getItem() == ParadiseLostItems.MOA_EGG) {
+
+            if (world.getTime() % 10 == 0) {
+                if (world.getBlockState(pos.up()).isOf(ParadiseLostBlocks.CHERINE_LANTERN)) { //Whoever would like to change this to use block tags is allowed to, thank you :)
+                    incubator.hatchTicks -= 2;
+                }
+                if (world.getBlockState(pos.down()).isOf(ParadiseLostBlocks.AMADRYS_BUNDLE)) {
+                    incubator.hatchTicks -= 1;
+                }
+            }
+
             incubator.hatchTicks--;
             if (incubator.hatchTicks <= 0) {
                 incubator.hatchTicks = 0;

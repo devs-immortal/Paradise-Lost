@@ -299,7 +299,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     public float getWingYaw() {
-        if (flapCount <= 0 || hasPassengers()) {
+        if (flapCount <= 0 || isSaddled()) {
             float baseWingYaw = isGliding() ? 0.95626F : 0.174533F;
             float lDif = -baseWingYaw - curWingYaw;
             if (Math.abs(lDif) > 0.005F) {
@@ -336,8 +336,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     private float songChance = 0;
     public void attemptMoaSound()
     {
-        if (random.nextFloat() < 0.2f + soundChance) {
-            if (this.random.nextFloat() > 0.05f + songChance || isBaby()) {
+        if (this.random.nextFloat() < 0.2f + this.soundChance) {
+            if (this.random.nextFloat() > 0.05f + this.songChance || isBaby()) {
                 //Small chirp
                 this.moaSoundCallCooldown = 60 + random.nextInt(55);
                 this.songChance += MathHelper.clamp(this.random.nextFloat(), 0.1f, 0.04f);
@@ -349,16 +349,16 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 }
             } else {
                 //Play little song sometimes so it doesn't get annoying
-                this.moaSoundCallCooldown = 200 + random.nextInt(25);
+                this.moaSoundCallCooldown = 200 + this.random.nextInt(25);
                 this.songChance = 0;
                 this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT_SING, SoundCategory.NEUTRAL, 0.23f, getRandomFloat(0.98f, 1.02f));
             }
         } else {
             if (isSaddled()) {
-                this.moaSoundCallCooldown = 150 + random.nextInt(150);
+                this.moaSoundCallCooldown = 150 + this.random.nextInt(150);
                 this.soundChance += getRandomFloat(0.04f, 0.13f);
             } else {
-                this.moaSoundCallCooldown = 100 + random.nextInt(250);
+                this.moaSoundCallCooldown = 100 + this.random.nextInt(250);
                 this.soundChance += getRandomFloat(0.04f, 0.16f);
             }
         }
@@ -387,10 +387,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void tick() {
         isInAir = !isOnGround();
 
-        if (moaSoundCallCooldown > 0) {
+        if (this.moaSoundCallCooldown > 0) {
             this.moaSoundCallCooldown--;
         } else {
-            attemptMoaSound();
+            this.attemptMoaSound();
         }
 
         if (flapCount > 0 && !isSaddled()) {
