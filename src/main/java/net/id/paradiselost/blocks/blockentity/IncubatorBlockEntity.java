@@ -21,6 +21,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+import static net.id.paradiselost.tag.ParadiseLostBlockTags.INCUBATOR_WARMER_LIGHTS;
+import static net.id.paradiselost.tag.ParadiseLostBlockTags.INCUBATOR_WARMER_BEDS;
+
 public class IncubatorBlockEntity extends BlockEntity {
 
     private UUID owner;
@@ -37,10 +40,10 @@ public class IncubatorBlockEntity extends BlockEntity {
         if (incubator.egg.getItem() == ParadiseLostItems.MOA_EGG) {
 
             if (world.getTime() % 10 == 0) {
-                if (world.getBlockState(pos.up()).isOf(ParadiseLostBlocks.CHERINE_LANTERN)) { //Whoever would like to change this to use block tags is allowed to, thank you :)
+                if (world.getBlockState(pos.up()).isIn(INCUBATOR_WARMER_LIGHTS)) { //Split tags, think I did it right
                     incubator.hatchTicks -= 2;
                 }
-                if (world.getBlockState(pos.down()).isOf(ParadiseLostBlocks.AMADRYS_BUNDLE)) {
+                if (world.getBlockState(pos.down()).isIn(INCUBATOR_WARMER_BEDS)) {
                     incubator.hatchTicks -= 1;
                 }
             }

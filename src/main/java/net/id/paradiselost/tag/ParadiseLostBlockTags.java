@@ -27,6 +27,10 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> FLUID_REPLACEABLES = register("worldgen/fluid_replaceable");
     public static final TagKey<Block> BASE_REPLACEABLES = register("worldgen/base_replaceables");
 
+    //Moa Breeding
+    public static final TagKey<Block> INCUBATOR_WARMER_LIGHTS = register("incubator_warmer_lights");
+    public static final TagKey<Block> INCUBATOR_WARMER_BEDS = register("incubator_warmer_beds");
+
     private static TagKey<Block> register(String id) {
         return TagKey.of(RegistryKeys.BLOCK, ParadiseLost.locate(id));
     }
