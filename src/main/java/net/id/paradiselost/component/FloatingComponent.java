@@ -35,6 +35,11 @@ public class FloatingComponent implements AutoSyncedComponent {
         floatTime = 20 * FLOAT_SECONDS;
     }
 
+    public void stopFloating() {
+        floating = false;
+        floatTime = 0;
+    }
+
     public void tick() {
         floatTime--;
         if (floatTime == 0) {

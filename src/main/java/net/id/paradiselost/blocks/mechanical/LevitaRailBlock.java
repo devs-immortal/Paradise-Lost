@@ -26,7 +26,11 @@ public class LevitaRailBlock extends PoweredRailBlock {
             List<AbstractMinecartEntity> list = this.getCarts(world, pos, AbstractMinecartEntity.class, e -> true);
             for (AbstractMinecartEntity cart : list) {
                 var floatingComponent = ParadiseLostComponents.FLOATING_KEY.get(cart);
-                floatingComponent.startFloating();
+                if (state.get(POWERED)) {
+                    floatingComponent.startFloating();
+                } else {
+                    floatingComponent.stopFloating();
+                }
                 ParadiseLostComponents.FLOATING_KEY.sync(cart);
             }
         }
