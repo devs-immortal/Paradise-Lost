@@ -5,6 +5,7 @@ import net.id.paradiselost.component.MoaGenes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.LanternBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -53,7 +54,7 @@ public class IncubatorBlockEntity extends BlockEntity {
                 incubator.hatchTicks = 0;
                 var moa = MoaGenes.getMoaFromEgg(world, incubator.egg, incubator.owner);
                 moa.refreshPositionAndAngles(pos.getX() + 0.25, pos.getY() + 0.65, pos.getZ() + 0.25, world.getRandom().nextFloat() * 360 - 180, 0);
-                world.playSound(null, pos, ParadiseLostSoundEvents.ENTITY_MOA_EGG_HATCH, SoundCategory.BLOCKS, 2F, 0.5F);
+                world.playSound(null, pos, ParadiseLostSoundEvents.ENTITY_MOA_EGG_HATCH, SoundCategory.BLOCKS, 0.8F, 0.5F);
                 world.spawnEntity(moa);
                 incubator.egg = ItemStack.EMPTY;
                 incubator.markDirty();
