@@ -299,7 +299,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     public float getWingYaw() {
-        if (flapCount <= 0) {
+        if (flapCount <= 0 || hasPassengers()) {
             float baseWingYaw = isGliding() ? 0.95626F : 0.174533F;
             float lDif = -baseWingYaw - curWingYaw;
             if (Math.abs(lDif) > 0.005F) {
@@ -717,7 +717,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public boolean shouldSpawnSprintingParticles() {
-        return Math.abs(getVelocity().multiply(1d, 0, 1d).length()) > 0.4f && !isTouchingWater() && !isGliding() && isBaby();
+        return curGroundSpeed >= genGroundSpeed - 0.01f;
+        //return Math.abs(getVelocity().multiply(1d, 0, 1d).length()) > 0.4f && !isTouchingWater() && !isGliding() && isBaby();
     }
 
     @Override

@@ -85,7 +85,7 @@ public class MoaModel extends EntityModel<MoaEntity> {
         float speedPitch = (float) Math.min((new Vec3d(entity.getVelocity().getX(), 0, entity.getVelocity().getZ()).length() * 1.1F), 1F) + 0.1309F;
         neck.pitch = speedPitch;
         head.pitch = -speedPitch + headPitch * 0.017453F;
-        if (!entity.isGliding()) {
+        if (!entity.isInAir) {
             limbSwingAmount /= 2;
             right_leg.pitch = MathHelper.cos(limbSwing * 0.6662F) * 2F * limbSwingAmount + 0.2618F;
             left_leg.pitch = MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * 2F * limbSwingAmount + 0.2618F;
