@@ -209,14 +209,14 @@ public class MoaAPI {
     public enum SpawnStatWeighting {
         // Isn't this array of numbers nice? Could probably be defined in json instead.
         SPEED(0.08F, 0.1F, 0.02F, 0.03F, 0F, 0.1F, 0F, -0.01F, 0, 8, 0f, 0.02f),
-        GLIDE(0.013F, 0.08F, 0.035F, 0.039F, -0.04F, 0.08F, 0F, -0.01F, 0, 6, 0f, 0.02f),
-        ENDURANCE(0.023F, 0.06F, 0.02F, 0.02F, -0.085F, 0.08F, -0.01F, -0.02F, 2, 8, 0f, 0.02f),
-        TANK(0.0F, 0.07F, 0.01F, 0.02F, -0.025F, 0.01F, -0.02F, -0.01F, 6, 6, 0.4f, 0.02f),
-        MEATY(0.03F, 0.07F, 0.01F, 0.02F, -0.025F, 0.05F, -0.02F, -0.01F, 0, 2, 1.1f, 0.6f),
+        GLIDE(0.013F, 0.08F, 0.035F, 0.039F, 0F, 0.08F, 0F, 0.005F, 0, 6, 0f, 0.02f),
+        ENDURANCE(0.023F, 0.06F, 0.02F, 0.02F, -0.02F, 0.08F, -0.01F, -0.01F, 2, 8, 0f, 0.02f),
+        TANK(0.0F, 0.07F, 0.01F, 0.02F, -0.025F, 0.11F, -0.02F, -0.01F, 4, 6, 0.4f, 0.02f),
+        MEATY(0.03F, 0.07F, 0.01F, 0.02F, -0.025F, 0.15F, -0.02F, -0.01F, 0, 2, 1.1f, 0.6f),
         MYTHICAL_SPEED(0.31F, 0.17F, 0.082F, 0.0375F, 0F, 0.1F, 0F, -0.01F, 0, 8, 0.5f, 0.02f),
-        MYTHICAL_GLIDE(0.013F, 0.08F, 0.035F, 0.039F, -0.085F, 0.085F, 0F, -0.01F, 0, 6, 0.5f, 0.02f),
-        MYTHICAL_TANK(0.0F, 0.07F, 0.01F, 0.02F, -0.025F, 0.05F, -0.03F, -0.01F, 14, 6, 0.5f, 0.02f),
-        MYTHICAL_ALL(0.31F, 0.17F, 0.035F, 0.039F, -0.085F, 0.085F, -0.03F, -0.01F, 14, 6, 0.5f, 0.02f);
+        MYTHICAL_GLIDE(0.013F, 0.08F, 0.035F, 0.039F, 0F, 0.185F, 0F, -0.01F, 0, 6, 0.5f, 0.02f),
+        MYTHICAL_TANK(0.0F, 0.07F, 0.01F, 0.02F, -0.025F, 0.15F, -0.03F, -0.01F, 14, 6, 0.5f, 0.02f),
+        MYTHICAL_ALL(0.31F, 0.17F, 0.035F, 0.039F, -0.085F, 0.185F, -0.03F, -0.01F, 14, 6, 0.5f, 0.02f);
 
         private final ImmutableMap<MoaAttributes, Weighting> data;
 

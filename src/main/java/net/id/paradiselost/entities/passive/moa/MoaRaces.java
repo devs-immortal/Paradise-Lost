@@ -57,10 +57,10 @@ public class MoaRaces {
         registerBreeding(FOXTROT, 0.2F, TANGERINE, GOLDENROD);
 
         registerSpawning(SCARLET, 2, WISTERIA_WOODS_KEY);
-        registerBreeding(SCARLET, 0.075F, STRAWBERRY_WISTAR, HIGHLANDS_BLUE);
+        registerBreeding(SCARLET, 15F, STRAWBERRY_WISTAR, HIGHLANDS_BLUE);
 
         registerSpawning(REDHOOD, 5, HIGHLANDS_THICKET_KEY);
-        registerBreeding(REDHOOD, 0.1F, FOXTROT, HIGHLANDS_BLUE);
+        registerBreeding(REDHOOD, 10F, FOXTROT, HIGHLANDS_BLUE);
 
         Predicate<MoaBreedingContext> moonstruckRequirements = ctx -> ctx.world().isNight() && ctx.world().getRandom().nextFloat() <= 0.25F;
 
