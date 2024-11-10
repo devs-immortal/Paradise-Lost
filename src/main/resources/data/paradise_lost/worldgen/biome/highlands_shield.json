@@ -17,15 +17,15 @@
   "effects": {
     "fog_color": 16777215,
     "foliage_color": 16441439,
-    "grass_color": 13762516,
+    "grass_color": 9826514,
     "music": {
       "max_delay": 24000,
       "min_delay": 12000,
       "replace_current_music": false,
       "sound": "paradise_lost:music.paradise"
     },
-    "sky_color": 12632319,
-    "water_color": 5826047,
+    "sky_color": 12635902,
+    "water_color": 4908287,
     "water_fog_color": 6547455
   },
   "features": [

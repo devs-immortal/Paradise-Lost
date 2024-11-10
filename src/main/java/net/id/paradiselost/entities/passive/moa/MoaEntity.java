@@ -88,7 +88,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public static DefaultAttributeContainer.Builder createMoaAttributes() {
         return createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 3.0D)
                 .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0);
     }
 

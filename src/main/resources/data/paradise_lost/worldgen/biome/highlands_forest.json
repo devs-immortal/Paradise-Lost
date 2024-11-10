@@ -15,9 +15,9 @@
   },
   "downfall": 0.8,
   "effects": {
-    "fog_color": 16777215,
-    "foliage_color": 15859609,
-    "grass_color": 10673090,
+    "fog_color": 15134207,
+    "foliage_color": 15597423,
+    "grass_color": 9565385,
     "music": {
       "max_delay": 24000,
       "min_delay": 12000,
