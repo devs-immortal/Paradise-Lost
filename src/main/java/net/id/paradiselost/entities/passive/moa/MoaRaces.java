@@ -21,15 +21,15 @@ import static net.id.paradiselost.world.dimension.ParadiseLostBiomes.*;
  * @author Jack Papel
  */
 public class MoaRaces {
-    public static final MoaRace HIGHLANDS_BLUE = register("highlands_blue", new MoaRace(GROUND_SPEED, SPEED));
-    public static final MoaRace GOLDENROD = register("goldenrod", new MoaRace(JUMPING_STRENGTH, ENDURANCE));
+    public static final MoaRace HIGHLANDS_BLUE = register("highlands_blue", new MoaRace(DROP_MULTIPLIER, MEATY));
+    public static final MoaRace GOLDENROD = register("goldenrod", new MoaRace(GROUND_SPEED, ENDURANCE));
     public static final MoaRace MINTGRASS = register("mintgrass", new MoaRace(GLIDING_SPEED, SPEED));
     public static final MoaRace STRAWBERRY_WISTAR = register("strawberry_wistar", new MoaRace(GLIDING_DECAY, SPEED));
     public static final MoaRace TANGERINE = register("tangerine", new MoaRace(JUMPING_STRENGTH, SPEED));
-    public static final MoaRace FOXTROT = register("foxtrot", new MoaRace(DROP_MULTIPLIER, TANK));
+    public static final MoaRace FOXTROT = register("foxtrot", new MoaRace(GLIDING_DECAY, GLIDE));
     public static final MoaRace SCARLET = register("scarlet", new MoaRace(GLIDING_SPEED, ENDURANCE));
     public static final MoaRace REDHOOD = register("redhood", new MoaRace(MAX_HEALTH, TANK));
-    public static final MoaRace MOONSTRUCK = register("moonstruck", new MoaRace(GLIDING_SPEED, SPEED, true, true, ParticleTypes.GLOW));
+    public static final MoaRace MOONSTRUCK = register("moonstruck", new MoaRace(GLIDING_SPEED, GLIDE, true, true, ParticleTypes.GLOW));
 
     private static MoaRace register(String name, MoaRace race) {
         return MoaAPI.register(ParadiseLost.locate(name), race);
