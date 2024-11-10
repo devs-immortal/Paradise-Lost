@@ -339,7 +339,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         if (this.random.nextFloat() < 0.2f + this.soundChance) {
             if (this.random.nextFloat() > 0.05f + this.songChance || isBaby()) {
                 //Small chirp
-                this.moaSoundCallCooldown = 60 + random.nextInt(55);
+                this.moaSoundCallCooldown = 160 + this.random.nextInt(155);
                 this.songChance += MathHelper.clamp(this.random.nextFloat(), 0.1f, 0.04f);
 
                 if (!isBaby()) {
