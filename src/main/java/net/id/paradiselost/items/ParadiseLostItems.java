@@ -64,6 +64,8 @@ public class ParadiseLostItems {
     public static final Item FLAXWEAVE = add("flaxweave", new Item(resource()));
     public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource()), compostable30);
 
+    public static final Item POPOM_JELLY = add("popom_jelly", new Item(resource()), compostable30);
+
 
     private static Settings tool() {
         return new Settings();
@@ -196,7 +198,6 @@ public class ParadiseLostItems {
 
     public static final MoaEggItem MOA_EGG = add("moa_egg", new MoaEggItem(new Settings().maxCount(1)));
     public static final BlockItem NITRA_BUNCH = add(ParadiseLostBlocks.NITRA_BUNCH, fuel(3200));
-
 
     public static final AurelBucketItem AUREL_BUCKET = add("aurel_bucket", new AurelBucketItem(new Settings().maxCount(16)), fuel(200), emptyBucketBehavior);
 
@@ -442,7 +443,7 @@ public class ParadiseLostItems {
 
     // beds
 
-    // Redstone items, buttons n pressureplates etc.
+    // Redstone items, buttons n pressure plates etc.
     public static final BlockItem FLOESTONE_BUTTON = add(ParadiseLostBlocks.FLOESTONE_BUTTON);
     public static final BlockItem FLOESTONE_PRESSURE_PLATE = add(ParadiseLostBlocks.FLOESTONE_PRESSURE_PLATE);
 

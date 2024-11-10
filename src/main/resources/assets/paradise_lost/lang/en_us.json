@@ -235,9 +235,7 @@
   "block.paradise_lost.nitra_bunch": "Nitra Bunch",
   "block.paradise_lost.levita_rail": "Levita Rail",
 
-
   "container.paradise_lost.moa": "Moa",
-
 
   "entity.paradise_lost.floating_block": "Floating Block",
   "entity.paradise_lost.moa": "Moa",
@@ -254,6 +252,7 @@
   "item.paradise_lost.flax_thread" : "Flax Thread",
   "item.paradise_lost.flaxweave" : "Flaxweave",
   "item.paradise_lost.swedroot_pulp": "Swedroot Pulp",
+  "item.paradise_lost.popom_jelly": "Popom Jelly",
 
   "item.paradise_lost.olvite_shovel": "Olvite Shovel",
   "item.paradise_lost.olvite_pickaxe": "Olvite Pickaxe",
