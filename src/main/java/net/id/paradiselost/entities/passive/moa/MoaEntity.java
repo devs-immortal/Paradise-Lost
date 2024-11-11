@@ -339,8 +339,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         if (this.random.nextFloat() < 0.2f + this.soundChance) {
             if (this.random.nextFloat() > 0.05f + this.songChance || isBaby()) {
                 //Small chirp
-                this.moaSoundCallCooldown = 160 + this.random.nextInt(155);
-                this.songChance += MathHelper.clamp(this.random.nextFloat(), 0.1f, 0.04f);
+                this.moaSoundCallCooldown = (int) getRandomFloat(60, 150);
+                this.songChance += getRandomFloat(0.04f, 0.1f);
 
                 if (!isBaby()) {
                     this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundCategory.NEUTRAL, 0.15f, getRandomFloat(0.85f, 0.92f));
@@ -349,24 +349,26 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 }
             } else {
                 //Play little song sometimes so it doesn't get annoying
-                this.moaSoundCallCooldown = 200 + this.random.nextInt(25);
+                this.moaSoundCallCooldown = (int) getRandomFloat(60, 150);
                 this.songChance = 0;
                 this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT_SING, SoundCategory.NEUTRAL, 0.23f, getRandomFloat(0.98f, 1.02f));
             }
         } else {
             if (isSaddled()) {
-                this.moaSoundCallCooldown = 150 + this.random.nextInt(150);
-                this.soundChance += getRandomFloat(0.04f, 0.13f);
+                this.moaSoundCallCooldown = (int) getRandomFloat(60, 150);
+                this.soundChance += getRandomFloat(0.02f, 0.06f);
             } else {
-                this.moaSoundCallCooldown = 100 + this.random.nextInt(250);
-                this.soundChance += getRandomFloat(0.04f, 0.16f);
+                this.moaSoundCallCooldown = (int) getRandomFloat(30, 90);
+                this.soundChance += getRandomFloat(0.02f, 0.09f);
             }
         }
     }
     private boolean canFlap = true;
     public void attemptMoaFlap(boolean bypassFlapCheck) {
         if (getWingRoll() > 0.8 && canFlap || bypassFlapCheck) {
-            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.6F, getRandomFloat(0.9f, 0.97f));
+            if (!this.getWorld().isClient) {
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.8F, getRandomFloat(0.9f, 0.97f));
+            }
             this.canFlap = false;
         } else if (getWingRoll() < -0.3f) {
             this.canFlap = true;
@@ -387,10 +389,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void tick() {
         isInAir = !isOnGround();
 
-        if (this.moaSoundCallCooldown > 0) {
-            this.moaSoundCallCooldown--;
-        } else {
-            this.attemptMoaSound();
+        if (!this.getWorld().isClient) {
+            if (this.moaSoundCallCooldown > 0) {
+                this.moaSoundCallCooldown--;
+            } else {
+                this.attemptMoaSound();
+            }
         }
 
         if (flapCount > 0 && !isSaddled()) {
