@@ -29,6 +29,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
@@ -118,6 +119,7 @@ public class ParadiseLostItems {
 
     // misc
     public static final SpyglassItem OLVITE_SPYGLASS = add("olvite_spyglass", new SpyglassItem(unstackableTool()));
+    public static final TotemOfLevitationItem TOTEM_OF_LEVITATION = add("totem_of_levitation", new TotemOfLevitationItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)));
 
     // wands
     public static final GravityWandItem LEVITA_WAND = add("levita_wand", new GravityWandItem(unstackableRareTool().maxDamage(100)));

@@ -250,6 +250,7 @@ public class ParadiseLostItemGroups {
                 entries.add(GLAZED_GOLD_HOE);
                 // misc
                 entries.add(OLVITE_SPYGLASS);
+                entries.add(TOTEM_OF_LEVITATION);
                 // wands
                 entries.add(LEVITA_WAND);
                 entries.add(CHERINE_BLOODSTONE);
