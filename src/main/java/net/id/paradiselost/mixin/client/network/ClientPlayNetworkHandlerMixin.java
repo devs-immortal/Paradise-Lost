@@ -23,7 +23,7 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
     @Inject(method = "playSpawnSound", at = @At("HEAD"))
     private void playSpawnSound(Entity entity, CallbackInfo ci) {
         if (entity instanceof AbstractMinecartEntity abstractMinecartEntity) {
-            this.client.getSoundManager().play(new LevitaMovingMinecartSoundInstance(abstractMinecartEntity));
+            this.client.getSoundManager().play(new LevitaMovingMinecartSoundInstance(abstractMinecartEntity, false));
         }
     }
 }

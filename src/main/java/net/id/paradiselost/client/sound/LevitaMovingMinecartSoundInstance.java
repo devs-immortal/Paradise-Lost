@@ -12,8 +12,8 @@ public class LevitaMovingMinecartSoundInstance extends MovingSoundInstance {
     private final AbstractMinecartEntity minecart;
     private float distance = 0.0F;
 
-    public LevitaMovingMinecartSoundInstance(AbstractMinecartEntity minecart) {
-        super(ParadiseLostSoundEvents.ENTITY_MINECART_ROLLING_LEVITATING, SoundCategory.NEUTRAL, SoundInstance.createRandom());
+    public LevitaMovingMinecartSoundInstance(AbstractMinecartEntity minecart, boolean inside) {
+        super(inside ? ParadiseLostSoundEvents.ENTITY_MINECART_INSIDE_LEVITATING : ParadiseLostSoundEvents.ENTITY_MINECART_ROLLING_LEVITATING, SoundCategory.NEUTRAL, SoundInstance.createRandom());
         this.minecart = minecart;
         this.repeat = true;
         this.repeatDelay = 0;
@@ -43,7 +43,7 @@ public class LevitaMovingMinecartSoundInstance extends MovingSoundInstance {
             this.z = this.minecart.getZ();
             float f = (float) this.minecart.getVelocity().horizontalLength();
             var floatingComponent = ParadiseLostComponents.FLOATING_KEY.get(minecart);
-            if (f >= 0.01F && this.minecart.getWorld().getTickManager().shouldTick() && floatingComponent.getFloating()) {
+            if (f >= 0.01F && this.minecart.getWorld().getTickManager().shouldTick() && floatingComponent.getFloating() && !floatingComponent.isCartOnRail(this.minecart)) {
                 this.distance = MathHelper.clamp(this.distance + 0.0025F, 0.0F, 1.0F);
                 this.volume = MathHelper.lerp(MathHelper.clamp(f, 0.0F, 0.5F), 0.0F, 0.7F);
             } else {
