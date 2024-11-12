@@ -262,6 +262,18 @@
     ],
     "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.death"
   },
+  "entity.minecart.inside_levitating": {
+    "sounds": [
+      "paradise_lost:entity/minecart/inside_levitating"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.minecart.inside_levitating"
+  },
+  "entity.minecart.rolling_levitating": {
+    "sounds": [
+      "paradise_lost:entity/minecart/rolling_levitating"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.minecart.rolling_levitating"
+  },
 
 
 

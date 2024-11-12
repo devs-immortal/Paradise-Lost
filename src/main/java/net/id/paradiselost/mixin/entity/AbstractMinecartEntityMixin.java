@@ -2,17 +2,21 @@ package net.id.paradiselost.mixin.entity;
 
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.component.ParadiseLostComponents;
+import net.minecraft.block.AbstractRailBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.VehicleEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -25,10 +29,10 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity {
     }
 
     @Shadow
-    private boolean onRail;
+    protected abstract double getMaxSpeed();
 
     @Shadow
-    protected abstract double getMaxSpeed();
+    public abstract boolean isOnRail();
 
     @Inject(method = "moveOffRail", at = @At("HEAD"), cancellable = true)
     protected void moveOffRail(CallbackInfo ci) {
@@ -45,10 +49,10 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity {
         }
     }
 
-    @Inject(method = "tick", at = @At("HEAD"))
+    @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo ci) {
         var floatingComponent = ParadiseLostComponents.FLOATING_KEY.get(this);
-        if (this.getWorld().isClient && !this.onRail && floatingComponent.getFloating()) {
+        if (this.getWorld().isClient && !floatingComponent.isCartOnRail((AbstractMinecartEntity) (VehicleEntity) this) && floatingComponent.getFloating()) {
             var pos = this.getPos();
             var rightParticlePos = pos.add(this.getVelocity().normalize().multiply(0.35F).rotateY(1.57F));
             var leftParticlePos = pos.add(this.getVelocity().normalize().multiply(0.35F).rotateY(-1.57F));

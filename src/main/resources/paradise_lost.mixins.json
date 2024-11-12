@@ -39,6 +39,7 @@
     "client.ClientWorldMixin",
     "client.MinecraftClientMixin",
     "client.network.ClientPlayerEntityMixin",
+    "client.network.ClientPlayNetworkHandlerMixin",
     "client.render.BackgroundRendererMixin",
     "client.render.ClientWorldPropertiesMixin",
     "client.render.CloudRendererMixin",
@@ -53,6 +54,7 @@
     "client.render.NativeImageAccessor",
     "client.render.PlayerHeldItemFeatureRendererMixin",
     "client.render.WorldRendererMixin",
+    "client.sound.MovingMinecartSoundInstanceMixin",
     "devel.client.HandledScreenMixin"
   ],
   "injectors": {

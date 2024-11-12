@@ -80,7 +80,7 @@ def generate_slab_block(block_id, base_block_id, texture):
     
 
 
-generate_standard_block("floestone_redstone_ore")
+generate_standard_item("totem_of_levitation")
 
 
 
