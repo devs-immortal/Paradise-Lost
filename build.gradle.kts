@@ -14,7 +14,6 @@ val cardinalComponentsVersion: String by properties
 val crowdinTranslateVersion: String by properties
 val modmenuVersion: String by properties
 val satinVersion: String by properties
-val clothConfigVersion: String by properties
 
 plugins {
     id("fabric-loom") version "1.7-SNAPSHOT"

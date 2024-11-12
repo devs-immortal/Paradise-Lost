@@ -28,6 +28,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static net.id.paradiselost.world.ParadiseLostGameRules.PARADISE_VOID_KILLS;
+
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements ParadiseLostEntityExtensions {
 
@@ -48,7 +50,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             cancellable = true
     )
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (source == getWorld().getDamageSources().outOfWorld() && getY() < getWorld().getBottomY() - 1 && getWorld().getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
+        if (source == getWorld().getDamageSources().outOfWorld() && getY() < getWorld().getBottomY() - 1 && getWorld().getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY && !getWorld().getGameRules().getBoolean(PARADISE_VOID_KILLS)) {
             if (!getWorld().isClient()) {
                 setParadiseLostFallen(true);
                 ServerWorld overworld = getServer().getWorld(World.OVERWORLD);

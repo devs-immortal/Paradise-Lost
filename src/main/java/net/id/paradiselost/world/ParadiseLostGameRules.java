@@ -1,8 +1,15 @@
 package net.id.paradiselost.world;
 
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.world.GameRules;
+
 public class ParadiseLostGameRules {
 
     public static void init() {
-        // N/A
     }
+
+    public static final GameRules.Key<GameRules.BooleanRule> PARADISE_VOID_KILLS = GameRuleRegistry.register("paradiseVoidKills", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
+
+
 }
