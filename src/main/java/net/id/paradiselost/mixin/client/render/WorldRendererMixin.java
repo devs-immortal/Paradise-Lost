@@ -1,11 +1,10 @@
 package net.id.paradiselost.mixin.client.render;
 
-import net.id.paradiselost.client.rendering.util.ParadiseLostWorldEvents;
+import net.id.paradiselost.client.rendering.util.ParadiseLostEvents;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -32,7 +31,7 @@ public abstract class WorldRendererMixin {
     @Inject(method = "processWorldEvent(ILnet/minecraft/util/math/BlockPos;I)V", at = @At("TAIL"), cancellable = true)
     public void processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
         Random random = this.world.random;
-        if (eventId == ParadiseLostWorldEvents.NITRA_EXPLODE) {
+        if (eventId == ParadiseLostEvents.NITRA_EXPLODE) {
             this.world.playSoundAtBlockCenter(pos, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.NEUTRAL, 0.3F, 1.1F + random.nextFloat() * 0.4F, false);
             for (int i = 0; i < 4; i++) {
                 this.addParticle(ParticleTypes.CLOUD,

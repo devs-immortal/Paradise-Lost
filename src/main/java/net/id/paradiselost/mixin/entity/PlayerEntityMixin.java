@@ -1,7 +1,9 @@
 package net.id.paradiselost.mixin.entity;
 
+import net.id.paradiselost.client.rendering.util.ParadiseLostEvents;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.util.MiscUtil;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.minecraft.entity.EntityType;
@@ -11,7 +13,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
@@ -50,8 +51,16 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             cancellable = true
     )
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (source == getWorld().getDamageSources().outOfWorld() && getY() < getWorld().getBottomY() - 1 && getWorld().getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY && !getWorld().getGameRules().getBoolean(PARADISE_VOID_KILLS)) {
-            if (!getWorld().isClient()) {
+
+        if (source == getWorld().getDamageSources().outOfWorld() && getWorld().getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY && !getWorld().isClient()) {
+            if (MiscUtil.useLevitationTotem(this)) {
+                // apply effects
+                getWorld().sendEntityStatus(this, ParadiseLostEvents.LEVITATION_TOTEM_USED); // custom totem animation
+                setVelocity(this.getVelocity().x,0.6d, this.getVelocity().z);
+                velocityModified = true;
+                addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 110, 50));
+                addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 260, 1));
+            } else if (!getWorld().getGameRules().getBoolean(PARADISE_VOID_KILLS) && getY() < getWorld().getBottomY() - 80) {
                 setParadiseLostFallen(true);
                 ServerWorld overworld = getServer().getWorld(World.OVERWORLD);
                 WorldBorder worldBorder = overworld.getWorldBorder();
@@ -67,7 +76,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 addStatusEffect(ef);
             }
             cir.setReturnValue(false);
-            cir.cancel();
         }
     }
 

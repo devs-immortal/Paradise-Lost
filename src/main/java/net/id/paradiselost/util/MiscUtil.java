@@ -4,6 +4,10 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
+import net.id.paradiselost.items.ParadiseLostItems;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 
@@ -65,5 +69,20 @@ public final class MiscUtil {
                 throw new IOException(decodeResult.error().get().message());
             }
         }
+    }
+
+    public static boolean useLevitationTotem(LivingEntity entity) {
+        ItemStack itemStack = null;
+
+        for (Hand hand : Hand.values()) {
+            ItemStack itemStack2 = entity.getStackInHand(hand);
+            if (itemStack2.isOf(ParadiseLostItems.TOTEM_OF_LEVITATION)) {
+                itemStack = itemStack2.copy();
+                itemStack2.decrement(1);
+                break;
+            }
+        }
+
+        return itemStack != null;
     }
 }
