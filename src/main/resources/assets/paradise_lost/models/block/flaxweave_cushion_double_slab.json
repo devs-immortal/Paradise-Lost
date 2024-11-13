@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "paradise_lost:block/flaxweave_cushion",
+    "side": "paradise_lost:block/flaxweave_cushion_slab_side"
+  }
+}

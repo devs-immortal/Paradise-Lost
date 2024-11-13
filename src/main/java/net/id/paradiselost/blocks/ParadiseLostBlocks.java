@@ -225,6 +225,7 @@ public class ParadiseLostBlocks {
     public static final CropBlock NITRA = add("nitra", new CropBlock(crop().mapColor(MapColor.PALE_YELLOW)), flammablePlant, cutoutMippedRenderLayer);
 
     public static final Block FLAXWEAVE_CUSHION = add("flaxweave_cushion", new FlaxweaveCushionBlock(create().mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));
+    public static final SlabBlock FLAXWEAVE_CUSHION_SLAB = add("flaxweave_cushion_slab", new FlaxweaveCushionSlabBlock(create().mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));
 
     public static final BlackcurrantBushBlock BLACKCURRANT_BUSH = add("blackcurrant_bush", new BlackcurrantBushBlock(create().strength(0.2f)
             .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision()), flammablePlant, cutoutRenderLayer);

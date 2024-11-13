@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "O": {
+      "item": "paradise_lost:olvite"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "O",
+    "S",
+    "P"
+  ],
+  "result": {
+    "id": "minecraft:tripwire_hook",
+    "count": 12
+  }
+}

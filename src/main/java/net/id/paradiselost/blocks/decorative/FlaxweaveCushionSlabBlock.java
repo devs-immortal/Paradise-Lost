@@ -1,0 +1,23 @@
+package net.id.paradiselost.blocks.decorative;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.entity.Entity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+public class FlaxweaveCushionSlabBlock extends SlabBlock {
+    public FlaxweaveCushionSlabBlock(Settings settings) {
+        super(settings);
+    }
+
+    @Override
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+        entity.handleFallDamage(fallDistance, 0.1F, world.getDamageSources().fall()); // cancel most fall damage
+        if (fallDistance > 3F && !world.isClient) {
+            this.spawnBreakParticles(world, null, pos, state); // spawn particles
+            world.playSound(null, pos, soundGroup.getHitSound(), SoundCategory.BLOCKS, 0.7F, 1.0F); // and play cushion sound
+        }
+    }
+}

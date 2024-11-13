@@ -380,6 +380,7 @@ public class ParadiseLostItems {
     public static final BlockItem PINK_SPORECAP_BLOCK = add(ParadiseLostBlocks.PINK_SPORECAP_BLOCK, compostable85);
 
     public static final BlockItem FLAXWEAVE_CUSHION = add(ParadiseLostBlocks.FLAXWEAVE_CUSHION, fuel(300));
+    public static final BlockItem FLAXWEAVE_CUSHION_SLAB = add(ParadiseLostBlocks.FLAXWEAVE_CUSHION_SLAB, fuel(150));
     public static final BlockItem AMADRYS_BUNDLE = add(ParadiseLostBlocks.AMADRYS_BUNDLE, compostable85);
     public static final BlockItem CHEESECAKE = add(ParadiseLostBlocks.CHEESECAKE);
 

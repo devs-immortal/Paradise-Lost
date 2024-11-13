@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/slab",
+	"textures": {
+		"bottom": "paradise_lost:block/flaxweave_cushion",
+		"top": "paradise_lost:block/flaxweave_cushion",
+		"side": "paradise_lost:block/flaxweave_cushion_slab_side"
+	}
+}

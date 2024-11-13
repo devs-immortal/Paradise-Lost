@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:flaxweave_cushion"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:flaxweave_cushion_slab",
+    "count": 6
+  }
+}

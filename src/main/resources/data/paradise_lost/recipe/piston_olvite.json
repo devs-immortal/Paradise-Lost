@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "O": {
+      "item": "paradise_lost:cobbled_floestone"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "I": {
+      "item": "paradise_lost:olvite"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "OIO",
+    "ORO"
+  ],
+  "result": {
+    "id": "minecraft:piston"
+  }
+}

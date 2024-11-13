@@ -80,7 +80,7 @@ def generate_slab_block(block_id, base_block_id, texture):
     
 
 
-generate_standard_item("totem_of_levitation")
+generate_slab_block("flaxweave_cushion_slab", "flaxweave_cushion_double_slab", "flaxweave_cushion")
 
 
 

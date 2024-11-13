@@ -791,10 +791,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     protected void dropLoot(DamageSource source, boolean causedByPlayer) {
+        super.dropLoot(source, causedByPlayer);
         dropStack(new ItemStack(ParadiseLostItems.MOA_MEAT, (int) Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER))));
-        if (random.nextBoolean()) {
-            dropStack(new ItemStack(Items.FEATHER, (int) (Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER)) / 2)));
-        }
     }
 
     @Override
