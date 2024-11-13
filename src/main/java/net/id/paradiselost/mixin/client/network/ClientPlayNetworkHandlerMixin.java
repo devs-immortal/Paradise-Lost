@@ -1,5 +1,6 @@
 package net.id.paradiselost.mixin.client.network;
 
+import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.client.rendering.util.ParadiseLostEvents;
 import net.id.paradiselost.client.sound.LevitaMovingMinecartSoundInstance;
 import net.id.paradiselost.items.ParadiseLostItems;
@@ -46,7 +47,7 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
         Entity entity = packet.getEntity(this.world);
         if (entity != null) {
             if (packet.getStatus() == ParadiseLostEvents.LEVITATION_TOTEM_USED) {
-                this.client.particleManager.addEmitter(entity, ParticleTypes.TOTEM_OF_UNDYING, 30);
+                this.client.particleManager.addEmitter(entity, ParadiseLostParticles.LEVITATION_TOTEM, 30);
                 this.world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0F, 1.0F, false);
                 if (entity == this.client.player) {
                     this.client.gameRenderer.showFloatingItem(ParadiseLostItems.TOTEM_OF_LEVITATION.getDefaultStack());

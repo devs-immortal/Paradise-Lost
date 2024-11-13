@@ -25,6 +25,7 @@ public class ParadiseLostParticles {
     public static SimpleParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal");
     public static SimpleParticleType CHERINE_FLAME = register("cherine_flame");
     public static SimpleParticleType LEVITA_BLOOP = register("levita_bloop");
+    public static SimpleParticleType LEVITATION_TOTEM = register("levitation_totem");
     
     /**
      * Registers a simple particle type.
@@ -55,6 +56,7 @@ public class ParadiseLostParticles {
             register(FALLING_ORANGE_PETAL, FallingOrangePetalParticle.DefaultFactory::new);
             register(CHERINE_FLAME, CherineFlameParticle.DefaultFactory::new);
             register(LEVITA_BLOOP, LevitaBloopParticle.DefaultFactory::new);
+            register(LEVITATION_TOTEM, LevitationTotemParticle.DefaultFactory::new);
         }
         
         /**

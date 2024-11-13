@@ -14,6 +14,7 @@ import net.minecraft.particle.SimpleParticleType;
  * Basically just a SuspendParticle, but that particle isn't public :I
  * These are bigger than normal suspend particles though
  */
+@Environment(EnvType.CLIENT)
 public class LevitaBloopParticle extends SpriteBillboardParticle {
 
     LevitaBloopParticle(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
