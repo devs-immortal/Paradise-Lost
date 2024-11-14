@@ -41,7 +41,7 @@ public class IncubatorBlockEntity extends BlockEntity {
         if (incubator.egg.getItem() == ParadiseLostItems.MOA_EGG) {
 
             if (world.getTime() % 10 == 0) {
-                if (world.getBlockState(pos.up()).isIn(INCUBATOR_WARMER_LIGHTS)) { //Split tags, think I did it right
+                if (world.getBlockState(pos.up(2)).isIn(INCUBATOR_WARMER_LIGHTS) || world.getBlockState(pos.up(1)).isIn(INCUBATOR_WARMER_LIGHTS)) { //Split tags, think I did it right
                     incubator.hatchTicks -= 2;
                 }
                 if (world.getBlockState(pos.down()).isIn(INCUBATOR_WARMER_BEDS)) {

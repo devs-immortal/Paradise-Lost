@@ -48,14 +48,14 @@ public class ParadiseLostBlocks {
 
     // Soil Blocks
     public static final FarmlandBlock FARMLAND = add("farmland", new ParadiseLostFarmlandBlock(copy(Blocks.FARMLAND)));
-    public static final ParadiseLostDirtPathBlock DIRT_PATH = add("grass_path", new ParadiseLostDirtPathBlock(copy(Blocks.DIRT_PATH), () -> ParadiseLostBlocks.DIRT));
+    public static final ParadiseLostDirtPathBlock DIRT_PATH = add("grass_path", new ParadiseLostDirtPathBlock(copy(Blocks.DIRT_PATH).mapColor(MapColor.TERRACOTTA_CYAN), () -> ParadiseLostBlocks.DIRT));
     public static final ParadiseLostDirtPathBlock PERMAFROST_PATH = add("frozen_path", new ParadiseLostDirtPathBlock(permafrost(), () -> ParadiseLostBlocks.PERMAFROST));
     public static final ParadiseLostGrassBlock HIGHLANDS_GRASS = add("highlands_grass", new ParadiseLostGrassBlock(grassBlock()), cutoutMippedRenderLayer, tillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
     public static final ParadiseLostSnowyBlock FROZEN_GRASS = add("frozen_grass", new ParadiseLostSnowyBlock(grassBlock().mapColor(MapColor.WHITE).strength(2F).sounds(BlockSoundGroup.GILDED_BLACKSTONE)), flattenable(ParadiseLostBlocks.PERMAFROST_PATH));
 
-    public static final Block DIRT = add("dirt", new Block(copy(Blocks.DIRT).strength(0.3f)), tillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
-    public static final Block COARSE_DIRT = add("coarse_dirt", new Block(copy(Blocks.DIRT).strength(0.3f)), coarseTillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
-    public static final FloatingBlock LEVITA = add("levita", new FloatingBlock(false, copy(Blocks.GRAVEL).strength(0.3f)));
+    public static final Block DIRT = add("dirt", new Block(copy(Blocks.DIRT).strength(0.3f).mapColor(MapColor.BROWN)), tillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
+    public static final Block COARSE_DIRT = add("coarse_dirt", new Block(copy(Blocks.DIRT).mapColor(MapColor.BROWN).strength(0.3f)), coarseTillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
+    public static final FloatingBlock LEVITA = add("levita", new FloatingBlock(false, copy(Blocks.GRAVEL).mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).strength(0.3f)));
     public static final Block PERMAFROST = add("permafrost", new Block(permafrost()), flattenable(ParadiseLostBlocks.PERMAFROST_PATH));
     public static final Block PACKED_SWEDROOT = add("packed_swedroot", new Block(create().strength(2f).sounds(BlockSoundGroup.SHROOMLIGHT)));
     public static final Block LIVERWORT = add("liverwort", new Block(copy(MOSS_BLOCK).sounds(BlockSoundGroup.AZALEA_LEAVES)));
@@ -86,21 +86,21 @@ public class ParadiseLostBlocks {
         return floestone().strength(0.4f, 8f);
     }
 
-    public static final Block COBBLED_FLOESTONE = add("cobbled_floestone", new Block(cobbledFloestone()));
-    public static final SlabBlock COBBLED_FLOESTONE_SLAB = add("cobbled_floestone_slab", new SlabBlock(cobbledFloestone()));
-    public static final ParadiseLostStairsBlock COBBLED_FLOESTONE_STAIRS = add("cobbled_floestone_stairs", new ParadiseLostStairsBlock(COBBLED_FLOESTONE.getDefaultState(), cobbledFloestone()));
-    public static final WallBlock COBBLED_FLOESTONE_WALL = add("cobbled_floestone_wall", new WallBlock(cobbledFloestone()));
+    public static final Block COBBLED_FLOESTONE = add("cobbled_floestone", new Block(cobbledFloestone().mapColor(MapColor.LIGHT_GRAY)));
+    public static final SlabBlock COBBLED_FLOESTONE_SLAB = add("cobbled_floestone_slab", new SlabBlock(cobbledFloestone().mapColor(MapColor.LIGHT_GRAY)));
+    public static final ParadiseLostStairsBlock COBBLED_FLOESTONE_STAIRS = add("cobbled_floestone_stairs", new ParadiseLostStairsBlock(COBBLED_FLOESTONE.getDefaultState(), cobbledFloestone().mapColor(MapColor.LIGHT_GRAY)));
+    public static final WallBlock COBBLED_FLOESTONE_WALL = add("cobbled_floestone_wall", new WallBlock(cobbledFloestone().mapColor(MapColor.LIGHT_GRAY)));
 
     // Mossy Floestone
     private static Settings mossyCobbledFloestone() {
         return cobbledFloestone().mapColor(MapColor.PALE_GREEN);
     }
 
-    public static final Block MOSSY_FLOESTONE = add("mossy_floestone", new Block(mossyCobbledFloestone()));
+    public static final Block MOSSY_FLOESTONE = add("mossy_floestone", new Block(mossyCobbledFloestone().mapColor(MapColor.LICHEN_GREEN)));
     public static final Block GOLDEN_MOSSY_FLOESTONE = add("golden_mossy_floestone", new Block(mossyCobbledFloestone().strength(2f, 6f).mapColor(MapColor.GOLD)));
-    public static final SlabBlock MOSSY_FLOESTONE_SLAB = add("mossy_floestone_slab", new SlabBlock(mossyCobbledFloestone()));
-    public static final ParadiseLostStairsBlock MOSSY_FLOESTONE_STAIRS = add("mossy_floestone_stairs", new ParadiseLostStairsBlock(MOSSY_FLOESTONE.getDefaultState(), mossyCobbledFloestone()));
-    public static final WallBlock MOSSY_FLOESTONE_WALL = add("mossy_floestone_wall", new WallBlock(mossyCobbledFloestone()));
+    public static final SlabBlock MOSSY_FLOESTONE_SLAB = add("mossy_floestone_slab", new SlabBlock(mossyCobbledFloestone().mapColor(MapColor.LICHEN_GREEN)));
+    public static final ParadiseLostStairsBlock MOSSY_FLOESTONE_STAIRS = add("mossy_floestone_stairs", new ParadiseLostStairsBlock(MOSSY_FLOESTONE.getDefaultState(), mossyCobbledFloestone().mapColor(MapColor.LICHEN_GREEN)));
+    public static final WallBlock MOSSY_FLOESTONE_WALL = add("mossy_floestone_wall", new WallBlock(mossyCobbledFloestone().mapColor(MapColor.LICHEN_GREEN)));
 
     // Floestone Bricks
     private static Settings floestoneBrick() {
@@ -114,12 +114,12 @@ public class ParadiseLostBlocks {
     public static final WallBlock FLOESTONE_BRICK_WALL = add("floestone_brick_wall", new WallBlock(floestoneBrick()));
 
     // Heliolith
-    public static final Block HELIOLITH = add("heliolith", new Block(floestone()));
-    public static final Block SMOOTH_HELIOLITH = add("smooth_heliolith", new Block(floestone()));
-    public static final SlabBlock HELIOLITH_SLAB = add("heliolith_slab", new SlabBlock(floestone()));
-    public static final SlabBlock SMOOTH_HELIOLITH_SLAB = add("smooth_heliolith_slab", new SlabBlock(floestone()));
-    public static final ParadiseLostStairsBlock HELIOLITH_STAIRS = add("heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone()));
-    public static final ParadiseLostStairsBlock SMOOTH_HELIOLITH_STAIRS = add("smooth_heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone()));
+    public static final Block HELIOLITH = add("heliolith", new Block(floestone().mapColor(MapColor.TERRACOTTA_WHITE)));
+    public static final Block SMOOTH_HELIOLITH = add("smooth_heliolith", new Block(floestone().mapColor(MapColor.TERRACOTTA_WHITE)));
+    public static final SlabBlock HELIOLITH_SLAB = add("heliolith_slab", new SlabBlock(floestone().mapColor(MapColor.TERRACOTTA_WHITE)));
+    public static final SlabBlock SMOOTH_HELIOLITH_SLAB = add("smooth_heliolith_slab", new SlabBlock(floestone().mapColor(MapColor.TERRACOTTA_WHITE)));
+    public static final ParadiseLostStairsBlock HELIOLITH_STAIRS = add("heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone().mapColor(MapColor.TERRACOTTA_WHITE)));
+    public static final ParadiseLostStairsBlock SMOOTH_HELIOLITH_STAIRS = add("smooth_heliolith_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestone().mapColor(MapColor.TERRACOTTA_WHITE)));
     public static final WallBlock HELIOLITH_WALL = add("heliolith_wall", new WallBlock(floestone()));
 
     // Levita Brick
@@ -147,12 +147,12 @@ public class ParadiseLostBlocks {
         return create().strength(0.2f).sounds(BlockSoundGroup.VINE).replaceable().nonOpaque().suffocates(never).blockVision(never).pistonBehavior(PistonBehavior.DESTROY);
     }
     // Aurel Wood
-    public static final WoodBlockSet AUREL_WOODSTUFF = registerWoodBlockSet(ParadiseLostWoodTypes.AUREL, ParadiseLostBlockSets.AUREL, ParadiseLostSaplingGenerators.AUREL, MapColor.DARK_RED, MapColor.DARK_RED, MapColor.PALE_GREEN);
-    public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(copy(OAK_LOG).mapColor(MapColor.DARK_RED)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedLog()));
+    public static final WoodBlockSet AUREL_WOODSTUFF = registerWoodBlockSet(ParadiseLostWoodTypes.AUREL, ParadiseLostBlockSets.AUREL, ParadiseLostSaplingGenerators.AUREL, MapColor.TERRACOTTA_BROWN, MapColor.TERRACOTTA_BROWN, MapColor.PALE_GREEN);
+    public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(copy(OAK_LOG).mapColor(MapColor.TERRACOTTA_WHITE)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedLog()));
     public static final PillarBlock MOTTLED_AUREL_WOOD = add("mottled_aurel_wood", new PillarBlock(copy(OAK_LOG).mapColor(MapColor.PALE_YELLOW)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedWood()));
-    public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(copy(OAK_LOG).mapColor(MapColor.DARK_RED)), flammableLog, cutoutRenderLayer);
+    public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(copy(OAK_LOG).mapColor(MapColor.TERRACOTTA_WHITE)), flammableLog, cutoutRenderLayer);
     public static final LeafPileBlock AUREL_LEAF_PILE = add("aurel_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.PALE_GREEN)), flammableLeaves, cutoutMippedRenderLayer);
-    public static final Block AUREL_BOOKSHELF = add("aurel_bookshelf", new Block(copy(BOOKSHELF).mapColor(MapColor.DARK_RED)), flammable(30, 20));
+    public static final Block AUREL_BOOKSHELF = add("aurel_bookshelf", new Block(copy(BOOKSHELF).mapColor(MapColor.TERRACOTTA_BROWN)), flammable(30, 20));
     public static final SignSet AUREL_SIGNS = registerSignSet(ParadiseLostWoodTypes.AUREL);
     // Mother Aurel Wood
     public static final WoodBlockSet MOTHER_AUREL_WOODSTUFF = registerWoodBlockSetMotherAurel();
@@ -228,7 +228,7 @@ public class ParadiseLostBlocks {
     public static final SlabBlock FLAXWEAVE_CUSHION_SLAB = add("flaxweave_cushion_slab", new FlaxweaveCushionSlabBlock(create().mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));
 
     public static final BlackcurrantBushBlock BLACKCURRANT_BUSH = add("blackcurrant_bush", new BlackcurrantBushBlock(create().strength(0.2f)
-            .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision()), flammablePlant, cutoutRenderLayer);
+            .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision().mapColor(MapColor.PURPLE)), flammablePlant, cutoutRenderLayer);
 
     public static final FourBiteCakeBlock CHEESECAKE = add("halflight_cheesecake", new FourBiteCakeBlock(Settings.copy(CAKE)));
 

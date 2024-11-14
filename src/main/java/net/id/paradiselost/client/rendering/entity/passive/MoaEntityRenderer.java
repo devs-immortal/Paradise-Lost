@@ -21,7 +21,7 @@ public class MoaEntityRenderer extends MobEntityRenderer<MoaEntity, MoaModel> {
 
     @Override
     protected void scale(MoaEntity moa, MatrixStack matrixStack, float partialTicks) {
-        float moaScale = moa.isBaby() ? 0.3334F : 1.0F;
+        float moaScale = moa.isBaby() ? Math.min(0.43F + (moa.age * 0.00001f), 0.65f) : 1.0F;
         matrixStack.scale(moaScale, moaScale, moaScale);
     }
 
