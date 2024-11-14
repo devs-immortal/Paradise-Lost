@@ -67,9 +67,9 @@ public class ParadiseLostBlocks {
         return create().strength(0.2F).sounds(BlockSoundGroup.WOOL).nonOpaque().solidBlock(never).suffocates(never).blockVision(never);
     }
 
-    public static final ParadiseLostCloudBlock COLD_CLOUD = add("cold_cloud", new ParadiseLostCloudBlock(cloud().mapColor(MapColor.WHITE)), translucentRenderLayer);
-    public static final BlueParadiseLostCloudBlock BLUE_CLOUD = add("blue_cloud", new BlueParadiseLostCloudBlock(cloud().mapColor(MapColor.LIGHT_BLUE)), translucentRenderLayer);
-    public static final GoldenParadiseLostCloudBlock GOLDEN_CLOUD = add("golden_cloud", new GoldenParadiseLostCloudBlock(cloud().mapColor(MapColor.GOLD)), translucentRenderLayer);
+    public static final ParadiseLostCloudBlock COLD_CLOUD = add("cold_cloud", new ParadiseLostCloudBlock(cloud().mapColor(MapColor.LIGHT_GRAY)), translucentRenderLayer);
+    public static final BlueParadiseLostCloudBlock BLUE_CLOUD = add("blue_cloud", new BlueParadiseLostCloudBlock(cloud().mapColor(MapColor.CYAN)), translucentRenderLayer);
+    public static final GoldenParadiseLostCloudBlock GOLDEN_CLOUD = add("golden_cloud", new GoldenParadiseLostCloudBlock(cloud().mapColor(MapColor.YELLOW)), translucentRenderLayer);
 
     // Floestone
     private static Settings floestone() {
