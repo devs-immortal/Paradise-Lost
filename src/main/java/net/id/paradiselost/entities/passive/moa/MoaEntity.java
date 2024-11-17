@@ -88,32 +88,35 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public static DefaultAttributeContainer.Builder createMoaAttributes() {
         return createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 3.0D)
-                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D)
+                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0)
+                //.add(EntityAttributes.GENERIC_GRAVITY, 0.95f)
+                .add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.22f)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f);
     }
 
     @Override
     protected void initGoals() {
 
-        this.goalSelector.add(0, new MoaEscapeDangerGoal(this, 0.8));
+        this.goalSelector.add(0, new MoaEscapeDangerGoal(this, 0.9f));
 
         this.goalSelector.add(1, new EatFromBowlGoal(0.4, 24, 16));
-        this.goalSelector.add(2, new AnimalMateGoal(this, 0.25F));
-        this.goalSelector.add(8, new LookAroundGoal(this)); //LookGoal
+        this.goalSelector.add(1, new AnimalMateGoal(this, 0.25F));
+        this.goalSelector.add(2, new TemptGoal(this, 0.7D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
 
-        this.goalSelector.add(7, new LookAtEntityGoal(this, ParrotEntity.class, 18F, 0.035f));
-        this.goalSelector.add(8, new StopAndLookAtEntityGoal(this, ParrotEntity.class, 25, 0.025f));
-        this.goalSelector.add(7, new StopAndLookAtEntityGoal(this, LivingEntity.class, 10, 0.005f));
 
-        if (!isBaby()) {
-            this.goalSelector.add(2, new TemptGoal(this, 0.7D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
-        } else {
-            this.goalSelector.add(2, new TemptGoal(this, 1D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
-            this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 5F, 0.01f));
-        }
-        this.goalSelector.add(9, new WanderAroundFarGoal(this, 0.32F, 1f)); //WanderGoal
+        this.goalSelector.add(7, new LookAtEntityGoal(this, ParrotEntity.class, 18F, 5f));
+        this.goalSelector.add(7, new StopAndLookAtEntityGoal(this, ParrotEntity.class, 25, 8f));
+
+        this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 10F, 40f));
+        this.goalSelector.add(8, new StopAndLookAtEntityGoal(this, LivingEntity.class, 4, 70f));
+
+        //this.goalSelector.add(9, new WanderAroundFarGoal(this, 0.32F, 0.01f)); //WanderGoal
+        this.goalSelector.add(9, new MoaWanderAroundGoal(this, 0.320D, 210));
+        //this.goalSelector.add(10, new MoaWanderAroundGoal(this, 0.400D, 290));
+        this.goalSelector.add(11, new LookAroundGoal(this)); //LookGoal
         this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(12, new FollowParentGoal(this, 0.11D));
+        this.goalSelector.add(12, new FollowParentGoal(this, 0.33D));
 
         super.initGoals();
     }
@@ -206,6 +209,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             setChest(ItemStack.EMPTY);
         }
     }
+
 
     float wingFlapSpeed = 2.5f;
     float idleFlapSpeed = 12;
@@ -312,7 +316,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     public float getLegPitch() {
         float baseLegPitch = isGliding() ? -1.5708F : 0.0174533F;
-
         float lDif = -baseLegPitch - curLegPitch;
         if (Math.abs(lDif) > 0.005F) {
             curLegPitch += lDif / 6;
@@ -322,15 +325,13 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     public float getRandomFloat(float from, float to){
         float finalNumber = 1;
-
         from *= 100;
         to *= 100;
-
         finalNumber = from + this.random.nextInt((int)to);
         return finalNumber / 100;
     }
 
-//Moa Sound stuff
+    //Moa Sound stuff
     int moaSoundCallCooldown = 200;
     private float soundChance = 0;
     private float songChance = 0;
@@ -433,9 +434,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             genes.setHunger(hunger - 0.5F);
         }
 
-        if (hunger < 20F && getWorld().getTime() % 10 == 0) {
+        if ((hunger < 15F && getWorld().getTime() % 10 == 0 && isSaddled())) {
             produceParticlesServer(ParticleTypes.ANGRY_VILLAGER, random.nextInt(3), 1, 0);
-            if (hunger < 10F && hasPassengers()) {
+            if (hunger < 8F && hasPassengers()) {
                 removeAllPassengers();
                 playSound(ParadiseLostSoundEvents.ENTITY_MOA_DEATH, 0.15f, 1.5F + random.nextFloat() * 0.5F);
             }
