@@ -36,9 +36,9 @@ public class FloatingComponent implements AutoSyncedComponent {
         return floatTime;
     }
 
-    public void startFloating() {
+    public void addFloating() {
         floating = true;
-        floatTime = 20 * FLOAT_SECONDS;
+        floatTime += 20 * FLOAT_SECONDS;
     }
 
     public void stopFloating() {

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_rail_raised_ne",
+  "textures": {
+    "rail": "paradise_lost:block/levita_rail_triggered"
+  }
+}
