@@ -372,6 +372,10 @@ public class ParadiseLostItems {
     public static final BlockItem LIVERWORT = add(ParadiseLostBlocks.LIVERWORT, compostable100, fuel(150));
     public static final BlockItem LIVERWORT_CARPET = add(ParadiseLostBlocks.LIVERWORT_CARPET, compostable65, fuel(100));
 
+    public static final BlockItem THATCH_BLOCK = add(ParadiseLostBlocks.THATCH_SET.block(), compostable15, fuel(100));
+    public static final BlockItem THATCH_STAIRS = add(ParadiseLostBlocks.THATCH_SET.stairs(), compostable15, fuel(100));
+    public static final BlockItem THATCH_SLAB = add(ParadiseLostBlocks.THATCH_SET.slab(), compostable15, fuel(50));
+
     public static final BlockItem ROOTCAP = add(ParadiseLostBlocks.ROOTCAP, compostable65);
     public static final BlockItem BROWN_SPORECAP = add(ParadiseLostBlocks.BROWN_SPORECAP, compostable65);
     public static final BlockItem PINK_SPORECAP = add(ParadiseLostBlocks.PINK_SPORECAP, compostable65);
@@ -391,6 +395,7 @@ public class ParadiseLostItems {
     // util blocks (enchanter, freezer, etc.)
     public static final BlockItem CHERINE_CAMPFIRE = add(ParadiseLostBlocks.CHERINE_CAMPFIRE);
     public static final BlockItem INCUBATOR = add(ParadiseLostBlocks.INCUBATOR, fuel(300));
+    public static final BlockItem NEST = add(ParadiseLostBlocks.NEST, fuel(300));
     public static final BlockItem FOOD_BOWL = add(ParadiseLostBlocks.FOOD_BOWL, fuel(300));
     public static final BlockItem TREE_TAP = add(ParadiseLostBlocks.TREE_TAP, fuel(300));
 

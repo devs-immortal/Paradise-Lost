@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/coral_fan",
+	"textures": {
+		"fan": "paradise_lost:block/thatch_fan"
+	}
+}

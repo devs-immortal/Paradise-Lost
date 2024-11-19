@@ -187,6 +187,9 @@
   "block.paradise_lost.honey_nettle": "Honey Nettle",
   "block.paradise_lost.liverwort": "Liverwort",
   "block.paradise_lost.liverwort_carpet": "Liverwort Carpet",
+  "block.paradise_lost.thatch": "Thatch",
+  "block.paradise_lost.thatch_stairs": "Thatch Stairs",
+  "block.paradise_lost.thatch_slab": "Thatch Slab",
 
   "block.paradise_lost.rootcap": "Rootcap",
   "block.paradise_lost.brown_sporecap": "Brown Sporecap",
@@ -231,6 +234,7 @@
   "block.paradise_lost.golden_amber_bars": "Golden Amber Bars",
 
   "block.paradise_lost.incubator": "Incubator",
+  "block.paradise_lost.nest": "Moa Nest",
   "block.paradise_lost.food_bowl": "Feeding Trough",
   "block.paradise_lost.tree_tap": "Tree Tap",
   "block.paradise_lost.nitra_bunch": "Nitra Bunch",

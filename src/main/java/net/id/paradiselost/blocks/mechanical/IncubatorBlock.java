@@ -24,9 +24,16 @@ public class IncubatorBlock extends ParadiseLostBlockWithEntity {
 
     public static final MapCodec<IncubatorBlock> CODEC = createCodec(IncubatorBlock::new);
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 5, 16);
+    private float offsetHeight;
 
     public IncubatorBlock(Settings settings) {
         super(settings, true);
+        this.offsetHeight = 0.55F;
+    }
+
+    public IncubatorBlock(Settings settings, float offsetHeight) {
+        super(settings, true);
+        this.offsetHeight = offsetHeight;
     }
 
     @Override
@@ -57,6 +64,6 @@ public class IncubatorBlock extends ParadiseLostBlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new IncubatorBlockEntity(pos, state);
+        return new IncubatorBlockEntity(pos, state, this.offsetHeight);
     }
 }

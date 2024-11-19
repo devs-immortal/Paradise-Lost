@@ -10,6 +10,10 @@
     "paradise_lost:rootcap_block",
     "paradise_lost:brown_sporecap_block",
     "paradise_lost:pink_sporecap_block",
+    "paradise_lost:thatch",
+    "paradise_lost:thatch_stairs",
+    "paradise_lost:thatch_slab",
+    "paradise_lost:nest",
     "#paradise_lost:hollow_logs"
   ]
 }

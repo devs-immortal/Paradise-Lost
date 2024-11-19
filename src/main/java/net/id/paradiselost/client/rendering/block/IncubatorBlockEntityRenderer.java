@@ -26,14 +26,14 @@ public class IncubatorBlockEntityRenderer implements BlockEntityRenderer<Incubat
         if (entity.hasItem()) {
             if (isMoaEggInIncubator(entity)) {
                 matrices.push();
-                matrices.translate(0.5, 0.55, 0.5);
+                matrices.translate(0.5, entity.getOffsetHeight(), 0.5);
                 matrices.scale(1F, 1F, 5F); //Thick egg
                 MinecraftClient.getInstance().getItemRenderer().renderItem(entity.getItem(), ModelTransformationMode.FIXED, light, overlay, matrices, vertexConsumers, null, 0);
                 matrices.pop();
             }
             else {
                 matrices.push();
-                matrices.translate(0.5, 0.55, 0.5);
+                matrices.translate(0.5, entity.getOffsetHeight(), 0.5);
                 matrices.scale(0.9F, 0.9F, 0.9F);
                 MinecraftClient.getInstance().getItemRenderer().renderItem(entity.getItem(), ModelTransformationMode.FIXED, light, overlay, matrices, vertexConsumers, null, 0);
                 matrices.pop();

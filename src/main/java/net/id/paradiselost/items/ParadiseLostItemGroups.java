@@ -76,6 +76,9 @@ public class ParadiseLostItemGroups {
                 entries.add(WISTERIA_TRAPDOOR);
                 entries.add(WISTERIA_PRESSURE_PLATE);
                 entries.add(WISTERIA_BUTTON);
+                entries.add(THATCH_BLOCK);
+                entries.add(THATCH_STAIRS);
+                entries.add(THATCH_SLAB);
                 // Stone / stonelike
                 entries.add(FLOESTONE);
                 entries.add(FLOESTONE_STAIRS);
@@ -140,6 +143,9 @@ public class ParadiseLostItemGroups {
                 entries.add(LIVERWORT);
                 entries.add(LIVERWORT_CARPET);
                 entries.add(LEVITA);
+                entries.add(THATCH_BLOCK);
+                entries.add(THATCH_STAIRS);
+                entries.add(THATCH_SLAB);
                 // "packed" blocks
                 entries.add(PACKED_SWEDROOT);
                 entries.add(AMADRYS_BUNDLE);
@@ -218,6 +224,7 @@ public class ParadiseLostItemGroups {
                 entries.add(LEVITATOR);
                 entries.add(LEVITA_RAIL);
                 entries.add(INCUBATOR);
+                entries.add(NEST);
                 entries.add(FOOD_BOWL);
                 entries.add(TREE_TAP);
                 entries.add(AUREL_SIGN);

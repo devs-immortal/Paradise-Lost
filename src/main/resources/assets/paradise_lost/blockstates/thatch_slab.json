@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"type=bottom": {
+			"model": "paradise_lost:block/thatch_slab"
+		},
+		"type=double": {
+			"model": "paradise_lost:block/thatch"
+		},
+		"type=top": {
+			"model": "paradise_lost:block/thatch_slab_top"
+		}
+	}
+}

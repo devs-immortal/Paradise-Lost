@@ -11,7 +11,7 @@ import static net.id.paradiselost.ParadiseLost.locate;
 
 public class ParadiseLostBlockEntityTypes {
     public static final BlockEntityType<FoodBowlBlockEntity> FOOD_BOWL = create(FoodBowlBlockEntity::new, ParadiseLostBlocks.FOOD_BOWL).build();
-    public static final BlockEntityType<IncubatorBlockEntity> INCUBATOR = create(IncubatorBlockEntity::new, ParadiseLostBlocks.INCUBATOR).build();
+    public static final BlockEntityType<IncubatorBlockEntity> INCUBATOR = create(IncubatorBlockEntity::new, ParadiseLostBlocks.INCUBATOR, ParadiseLostBlocks.NEST).build();
     public static final BlockEntityType<CherineCampfireBlockEntity> CHERINE_CAMPFIRE = create(CherineCampfireBlockEntity::new, ParadiseLostBlocks.CHERINE_CAMPFIRE).build();
 	public static final BlockEntityType<TreeTapBlockEntity> TREE_TAP = create(TreeTapBlockEntity::new, ParadiseLostBlocks.TREE_TAP).build();
     public static final BlockEntityType<ParadiseSignBlockEntity> SIGN = create(ParadiseSignBlockEntity::new,

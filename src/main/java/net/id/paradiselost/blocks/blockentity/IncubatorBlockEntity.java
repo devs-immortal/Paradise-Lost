@@ -30,16 +30,23 @@ public class IncubatorBlockEntity extends BlockEntity {
     private UUID owner;
     private int hatchTicks = 100;
     private ItemStack egg;
+    private float offsetHeight;
+
+    public IncubatorBlockEntity(BlockPos pos, BlockState state, float offsetHeight) {
+        super(ParadiseLostBlockEntityTypes.INCUBATOR, pos, state);
+        this.egg = ItemStack.EMPTY;
+        this.offsetHeight = offsetHeight;
+    }
 
     public IncubatorBlockEntity(BlockPos pos, BlockState state) {
         super(ParadiseLostBlockEntityTypes.INCUBATOR, pos, state);
         this.egg = ItemStack.EMPTY;
+        this.offsetHeight = 0.55F;
     }
 
     public static <T extends BlockEntity> void tickServer(World world, BlockPos pos, BlockState state, T entity) {
         IncubatorBlockEntity incubator = (IncubatorBlockEntity) entity;
         if (incubator.egg.getItem() == ParadiseLostItems.MOA_EGG) {
-
             if (world.getTime() % 10 == 0) {
                 if (world.getBlockState(pos.up(2)).isIn(INCUBATOR_WARMER_LIGHTS) || world.getBlockState(pos.up(1)).isIn(INCUBATOR_WARMER_LIGHTS)) { //Split tags, think I did it right
                     incubator.hatchTicks -= 2;
@@ -57,12 +64,13 @@ public class IncubatorBlockEntity extends BlockEntity {
                 world.playSound(null, pos, ParadiseLostSoundEvents.ENTITY_MOA_EGG_HATCH, SoundCategory.BLOCKS, 0.8F, 0.5F);
                 world.spawnEntity(moa);
                 incubator.egg = ItemStack.EMPTY;
-                incubator.markDirty();
             }
+            incubator.markDirty();
         }
     }
 
     public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
+        markDirty();
         owner = player.getUuid();
         ItemStack stored = egg.copy();
         egg = handStack.copy();
@@ -76,6 +84,9 @@ public class IncubatorBlockEntity extends BlockEntity {
 
     public ItemStack getItem() {
         return egg;
+    }
+    public float getOffsetHeight() {
+        return offsetHeight;
     }
 
     @Override

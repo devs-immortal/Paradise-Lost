@@ -80,7 +80,9 @@ def generate_slab_block(block_id, base_block_id, texture):
     
 
 
-generate_slab_block("flaxweave_cushion_slab", "flaxweave_cushion_double_slab", "flaxweave_cushion")
-
+generate_standard_block("thatch")
+generate_stairs_block("thatch_stairs", "thatch")
+generate_slab_block("thatch_slab", "thatch", "thatch")
+generate_standard_block("nest")
 
 
