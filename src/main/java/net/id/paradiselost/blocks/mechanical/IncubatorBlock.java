@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -48,6 +49,17 @@ public class IncubatorBlock extends ParadiseLostBlockWithEntity {
             return ItemActionResult.success(world.isClient());
         }
         return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof IncubatorBlockEntity && ((IncubatorBlockEntity) blockEntity).hasItem()) {
+                ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), ((IncubatorBlockEntity) blockEntity).getItem());
+            }
+        }
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 
     @Nullable
