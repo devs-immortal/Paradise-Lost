@@ -89,10 +89,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D)
-                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0)
+                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0);
                 //.add(EntityAttributes.GENERIC_GRAVITY, 0.95f)
-                .add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.22f)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f);
+                //.add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.22f)
+                //.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f);
     }
 
     @Override
@@ -105,16 +105,16 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         this.goalSelector.add(2, new TemptGoal(this, 0.7D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
 
 
-        this.goalSelector.add(7, new LookAtEntityGoal(this, ParrotEntity.class, 18F, 5f));
-        this.goalSelector.add(7, new StopAndLookAtEntityGoal(this, ParrotEntity.class, 25, 8f));
+        this.goalSelector.add(7, new LookAtEntityGoal(this, ParrotEntity.class, 18F, 100f));
+        this.goalSelector.add(7, new StopAndLookAtEntityGoal(this, ParrotEntity.class, 25, 120f));
 
-        this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 10F, 40f));
-        this.goalSelector.add(8, new StopAndLookAtEntityGoal(this, LivingEntity.class, 4, 70f));
+        this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 10F, 150f));
+        this.goalSelector.add(8, new StopAndLookAtEntityGoal(this, LivingEntity.class, 4, 180f));
 
         //this.goalSelector.add(9, new WanderAroundFarGoal(this, 0.32F, 0.01f)); //WanderGoal
-        this.goalSelector.add(9, new MoaWanderAroundGoal(this, 0.320D, 210));
+        this.goalSelector.add(9, new MoaWanderAroundGoal(this, 0.320D, 230));
         //this.goalSelector.add(10, new MoaWanderAroundGoal(this, 0.400D, 290));
-        this.goalSelector.add(11, new LookAroundGoal(this)); //LookGoal
+        this.goalSelector.add(10, new LookAroundGoal(this)); //LookGoal
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(12, new FollowParentGoal(this, 0.33D));
 
@@ -291,10 +291,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 curWingRoll = MathHelper.sin(age / wingFlapSpeed) * 0.73F + 0.1F;
                 atWingBottom = false;  // Reset peak for landing
             } else {
-                //Base position when not flapping etc
-                float baseWingRoll = MathHelper.sin(age / idleFlapSpeed) * 0.05F + 1.39626F; //Idle position (Default was 1.39626)
+                //Base position when not flapping etc, this sine is for "breating" animations
+                float baseWingRoll = MathHelper.sin(age / idleFlapSpeed + (randFlapSpeed * 0.1f)) * 0.05F + 1.39626F; //Idle position (Default was 1.39626)
                 float lDif = -baseWingRoll - curWingRoll;
-                if (Math.abs(lDif) > 0.005F) {
+                if (Math.abs(lDif) > 0.0005F) {
                     curWingRoll += lDif / 6;
                 }
             }
@@ -715,6 +715,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE), this.getRegistryManager());
         }
 
+        setMovementSpeed(genes.getAttribute(MoaAttributes.GROUND_SPEED));
         calcGeneSpeeds();
         moaSoundCallCooldown = 50 + random.nextInt(150);
         songChance = MathHelper.clamp(random.nextFloat(), 0f, 0.3f);

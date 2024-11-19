@@ -53,7 +53,7 @@ public class MoaWanderAroundGoal extends Goal {
             double highestY = Double.NEGATIVE_INFINITY;
 
             //Take 3 samples, get the one with the highest Y value
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 2; i++) {
                 Vec3d sampleTarget = this.getWanderTarget();
                 if (sampleTarget != null && sampleTarget.y > highestY) {
                     highestY = sampleTarget.y;
