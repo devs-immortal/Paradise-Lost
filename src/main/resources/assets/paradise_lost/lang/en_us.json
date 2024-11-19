@@ -457,10 +457,12 @@
   "tag.item.paradise_lost.hangers": "Tree Hangers",
   "tag.item.paradise_lost.hollow_logs": "Hollow Logs",
   "tag.item.paradise_lost.igniting_tools": "Igniting Tools",
+  "tag.item.paradise_lost.iron_interchangable": "Paradise Iron Substitutes",
   "tag.item.paradise_lost.moa_temptables": "Moa Temptables",
   "tag.item.paradise_lost.mother_aurel_logs": "Mother Aurel Logs",
   "tag.item.paradise_lost.mushrooms": "Paradise Fungi",
   "tag.item.paradise_lost.orange_logs": "Orange Logs",
+  "tag.item.paradise_lost.paradise_planks": "Paradise Wooden Planks",
   "tag.item.paradise_lost.righteous_weapons": "Righteous Weapons",
   "tag.item.paradise_lost.sacred_weapons": "Sacred Weapons",
   "tag.item.paradise_lost.wisteria_logs": "Wisteria Logs",
@@ -494,6 +496,8 @@
   "advancements.paradise_lost.surtrum_blast.description": "Blast your way into a Meteorite and harvest some Surtrum",
   "advancements.paradise_lost.tame_moa.title": "Air Superiority",
   "advancements.paradise_lost.tame_moa.description": "Tame a wild Moa with raw meat",
+  "advancements.paradise_lost.use_levitation_totem.title": "Void Avoider",
+  "advancements.paradise_lost.use_levitation_totem.description": "Activate a Totem of Levitation by falling into the void or falling from a great height",
   "advancements.paradise_lost.void_paradise_lost.title": "I've been falling, for 30 minutes!",
   "advancements.paradise_lost.void_paradise_lost.description": "Fall into the Overworld from Paradise"
 }

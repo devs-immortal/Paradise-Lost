@@ -5,11 +5,16 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.minecraft.world.event.GameEvent;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -79,6 +84,12 @@ public final class MiscUtil {
             if (itemStack2.isOf(ParadiseLostItems.TOTEM_OF_LEVITATION)) {
                 itemStack = itemStack2.copy();
                 itemStack2.decrement(1);
+                // advancement logic
+                if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
+                    serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(ParadiseLostItems.TOTEM_OF_LEVITATION));
+                    Criteria.USED_TOTEM.trigger(serverPlayerEntity, itemStack);
+                    entity.emitGameEvent(GameEvent.ITEM_INTERACT_FINISH);
+                }
                 break;
             }
         }

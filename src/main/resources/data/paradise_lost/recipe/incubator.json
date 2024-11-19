@@ -1,11 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
+    " # ",
     "X#X"
   ],
   "key": {
     "#": {
-      "item": "minecraft:hay_block"
+      "item": "paradise_lost:thatch"
     },
     "X": {
       "tag": "minecraft:planks"

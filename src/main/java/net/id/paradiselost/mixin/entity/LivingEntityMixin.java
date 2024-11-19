@@ -110,7 +110,6 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         if (!this.isInvulnerableTo(source) && !this.getWorld().isClient && !this.isDead()) {
             if (source.isIn(DamageTypeTags.IS_FALL)) { // regular fall damage save
                 float modified = this.modifyAppliedDamage(source, amount);
-                System.out.println("TAKING: " + modified + " WITH HEALTH: " + getHealth());
                 // if damage 5 hearts or greater or player would be killed by the damage
                 if ((modified >= 10.0 || modified >= getHealth()) && MiscUtil.useLevitationTotem((LivingEntity) (Entity) this)) {
                     // apply effects
@@ -128,7 +127,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
                     setVelocity(this.getVelocity().x,0.6d, this.getVelocity().z);
                     velocityModified = true;
                     addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 110, 30));
-                    addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 260, 1));
+                    addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 320, 1));
                     // skip all other damage code
                     cir.setReturnValue(false);
                 }

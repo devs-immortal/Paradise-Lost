@@ -1,0 +1,32 @@
+{
+  "parent": "paradise_lost:root",
+  "criteria": {
+    "used_totem": {
+      "conditions": {
+        "item": {
+          "items": "paradise_lost:totem_of_levitation"
+        }
+      },
+      "trigger": "minecraft:used_totem"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.use_levitation_totem.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "paradise_lost:totem_of_levitation"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.use_levitation_totem.title"
+    }
+  },
+  "requirements": [
+    [
+      "used_totem"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
