@@ -1,30 +1,80 @@
 name: Java CI with Gradle
 
-on: [ push ]
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v1
+      - name: Get last successful run time
+        id: last_run
+        uses: actions/github-script@v7
         with:
+          script: |
+            const runs = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: context.workflow,
+              branch: context.ref.replace('refs/heads/', ''),
+              status: 'success',
+              per_page: 1
+            });
+            if (runs.data.workflow_runs.length > 0) {
+              const lastRunTime = runs.data.workflow_runs[0].updated_at;
+              core.setOutput('lastRunTime', lastRunTime);
+            } else {
+              core.setOutput('lastRunTime', '1970-01-01T00:00:00Z');
+            }
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for new commits since last successful run
+        id: check_commits
+        run: |
+          git fetch origin
+          COMMITS=$(git rev-list --since="${{ steps.last_run.outputs.lastRunTime }}" HEAD)
+          if [ -z "$COMMITS" ]; then
+            echo "No new commits found."
+            echo "new_commits=false" >> $GITHUB_OUTPUT
+          else
+            echo "New commits found."
+            echo "new_commits=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Exit if no new commits
+        if: steps.check_commits.outputs.new_commits == 'false'
+        run: exit 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
           java-version: 21
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
         run: ./gradlew build
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: artifacts
           path: ./build/libs/
+
       - name: Release Build
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: CHANGELOG.md
           files: "./build/libs/**"
+
       - name: Build Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
@@ -32,6 +82,7 @@ jobs:
           severity: info
           details: Build Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
       - name: Build Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
@@ -39,6 +90,7 @@ jobs:
           severity: error
           details: Build Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
       - name: Build Cancelled
         uses: rjstone/discord-webhook-notify@v1
         if: cancelled()
@@ -46,18 +98,25 @@ jobs:
           severity: warn
           details: Build Cancelled!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   checkstyle:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v1
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
         with:
+          distribution: temurin
           java-version: 21
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Checkstyle with Gradle
         run: ./gradlew checkstyleMain
+
       - name: Checkstyle Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
