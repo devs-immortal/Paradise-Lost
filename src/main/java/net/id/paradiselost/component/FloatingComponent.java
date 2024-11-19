@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
 
 public class FloatingComponent implements AutoSyncedComponent {
 
-    private static final int FLOAT_SECONDS = 4;
+    private static final double FLOAT_SECONDS = 4.1;
     private boolean floating = false;
     private int floatTime = 0;
 
@@ -38,7 +38,7 @@ public class FloatingComponent implements AutoSyncedComponent {
 
     public void addFloating() {
         floating = true;
-        floatTime += 20 * FLOAT_SECONDS;
+        floatTime += (int) (20 * FLOAT_SECONDS);
     }
 
     public void stopFloating() {

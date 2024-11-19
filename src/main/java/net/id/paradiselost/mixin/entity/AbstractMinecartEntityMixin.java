@@ -40,7 +40,6 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity {
         if (!this.isOnGround() && floatingComponent.getFloating() && floatingComponent.getFloatTime() > 0) {
             double d = this.getMaxSpeed();
             Vec3d vec3d = this.getVelocity();
-            System.out.println(vec3d);
             this.setVelocity(MathHelper.clamp(vec3d.x, -d, d), 0, MathHelper.clamp(vec3d.z, -d, d));
             this.move(MovementType.SELF, this.getVelocity());
             // decrement
