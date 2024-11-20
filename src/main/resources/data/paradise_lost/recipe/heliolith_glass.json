@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "paradise_lost:heliolith"
+  },
+  "result": {
+    "id": "minecraft:glass"
+  },
+  "experience": 0.2,
+  "cookingtime": 200
+}
