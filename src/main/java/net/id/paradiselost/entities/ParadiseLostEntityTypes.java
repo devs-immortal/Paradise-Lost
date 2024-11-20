@@ -11,6 +11,7 @@ import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.entities.projectile.ThrownNitraEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -36,7 +37,7 @@ public class ParadiseLostEntityTypes {
 
     // Hostile
     public static final EntityType<EnvoyEntity> ENVOY = add("envoy", of(EnvoyEntity::new, MONSTER, changing(0.6F, 1.95F), 10),
-            attributes(EnvoyEntity::createEnvoyAttributes), spawnRestrictions(EnvoyEntity::canMobSpawn));
+            attributes(EnvoyEntity::createEnvoyAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
 
     // passive
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(0.8F, 1.9F), 5),
