@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "paradise_lost:birdcage",
+      "weight": 1
+    } 
+  ],
+  "placement": {
+    "salt": 60030,
+    "spacing": 60,
+    "separation": 30,
+    "type": "minecraft:random_spread"
+  }
+}

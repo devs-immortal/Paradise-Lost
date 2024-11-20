@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#paradise_lost:has_structure/birdcage",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "start_pool": "paradise_lost:birdcage/roofs",
+  "size": 7,
+  "start_height": {
+    "absolute": 100
+  },
+  "max_distance_from_center": 116,
+  "dimension_padding": 50,
+  "use_expansion_hack": false
+}
