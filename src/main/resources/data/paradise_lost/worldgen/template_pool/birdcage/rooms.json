@@ -1,0 +1,51 @@
+{
+	"name": "paradise_lost:birdcage/rooms",
+	"fallback": "minecraft:empty",
+	"elements": [
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/rooms/room_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/rooms/room_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/rooms/room_3",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/rooms/room_4",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/rooms/room_5",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    }
+  ]
+}

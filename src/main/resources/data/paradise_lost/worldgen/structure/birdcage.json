@@ -5,11 +5,11 @@
   "spawn_overrides": {},
   "terrain_adaptation": "none",
   "start_pool": "paradise_lost:birdcage/roofs",
-  "size": 7,
+  "size": 8,
   "start_height": {
     "absolute": 100
   },
-  "max_distance_from_center": 116,
+  "max_distance_from_center": 128,
   "dimension_padding": 50,
   "use_expansion_hack": false
 }
