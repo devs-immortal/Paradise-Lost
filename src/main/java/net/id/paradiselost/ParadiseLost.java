@@ -115,8 +115,8 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
             try {
                 var CrowdinTranslate = Class.forName("de.guntram.mcmod.crowdintranslate.CrowdinTranslate");
                 var lookup = MethodHandles.lookup();
-                var downloadTranslations = lookup.findStatic(CrowdinTranslate, "downloadTranslations", MethodType.methodType(void.class, String.class, String.class));
-                downloadTranslations.invokeExact("paradise_lost", MOD_ID);
+                var downloadTranslations = lookup.findStatic(CrowdinTranslate, "downloadTranslations", MethodType.methodType(void.class, String.class));
+                downloadTranslations.invokeExact(MOD_ID);
             } catch (Throwable e) {
                 LOG.warn("Failed to setup Crowdin Translate", e);
             }

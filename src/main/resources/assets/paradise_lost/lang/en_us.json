@@ -5,12 +5,7 @@
   "itemGroup.paradise_lost.food": "Paradise Foods",
   "itemGroup.paradise_lost.resources": "Paradise Resources",
   "itemGroup.paradise_lost.equipment": "Paradise Equipment",
-
-
-  "createWorld.customize.preset.paradise_lost.sandbox": "Paradise - Sandbox",
-
-  "text.autoconfig.Paradise_Lost.title": "Paradise Lost Config",
-  "text.autoconfig.Paradise_Lost.option.ParadiseLostPortalBaseBlock": "Portal Block",
+  
 
   "biome.paradise_lost.autumnal_tundra": "Autumnal Tundra",
   "biome.paradise_lost.continental_plateau": "Continental Plateau",
@@ -37,7 +32,6 @@
 
   "block.paradise_lost.cold_cloud": "Cold Cloud",
   "block.paradise_lost.blue_cloud": "Blue Cloud",
-  "block.paradise_lost.pink_cloud": "Pink Cloud",
   "block.paradise_lost.golden_cloud": "Golden Cloud",
 
   "block.paradise_lost.bloomed_calcite": "Bloomed Calcite",
@@ -198,8 +192,8 @@
   "block.paradise_lost.brown_sporecap_block": "Brown Sporecap Block",
   "block.paradise_lost.pink_sporecap_block": "Pink Sporecap Block",
 
-  "block.paradise_lost.flaxweave_cushion" : "Flaxweave Cushion",
-  "block.paradise_lost.flaxweave_cushion_slab" : "Flaxweave Cushion Slab",
+  "block.paradise_lost.flaxweave_cushion": "Flaxweave Cushion",
+  "block.paradise_lost.flaxweave_cushion_slab": "Flaxweave Cushion Slab",
 
   "block.paradise_lost.blackcurrant_bush": "Blackcurrant Bush",
 
@@ -213,7 +207,7 @@
   "block.paradise_lost.drigean": "Drigean",
   "block.paradise_lost.luminar": "Luminar",
 
-  "block.paradise_lost.wild_flax" : "Wild Flax",
+  "block.paradise_lost.wild_flax": "Wild Flax",
 
   "block.paradise_lost.cherine_ore": "Cherine Ore",
   "block.paradise_lost.olvite_ore": "Olvite Ore",
@@ -254,8 +248,8 @@
   "item.paradise_lost.refined_surtrum": "Refined Surtrum",
   "item.paradise_lost.raw_surtrum": "Surtrum Fragment",
   "item.paradise_lost.levita_gem": "Levita Bead",
-  "item.paradise_lost.flax_thread" : "Flax Thread",
-  "item.paradise_lost.flaxweave" : "Flaxweave",
+  "item.paradise_lost.flax_thread": "Flax Thread",
+  "item.paradise_lost.flaxweave": "Flaxweave",
   "item.paradise_lost.swedroot_pulp": "Swedroot Pulp",
   "item.paradise_lost.popom_jelly": "Popom Jelly",
 
@@ -316,7 +310,7 @@
   "item.paradise_lost.amadrys_bread": "Amadrys Loaf",
   "item.paradise_lost.amadrys_bread_glazed": "Glazed Amadrys Loaf",
   "item.paradise_lost.swedroot": "Swedroot",
-  "item.paradise_lost.flaxseed" : "Flaxseed",
+  "item.paradise_lost.flaxseed": "Flaxseed",
   "item.paradise_lost.moa_meat": "Moa Chop",
   "item.paradise_lost.moa_meat_cooked": "Cooked Moa Chop",
 
@@ -327,8 +321,7 @@
   "item.paradise_lost.aurel_bucket": "Aurel Bucket",
   "item.paradise_lost.aurel_water_bucket": "Aurel Water Bucket",
   "item.paradise_lost.aurel_milk_bucket": "Aurel Milk Bucket",
-
-  "item.paradise_lost.hellenrose_spawn_egg": "Hellenrose Spawn Egg",
+  
   "item.paradise_lost.envoy_spawn_egg": "Envoy Spawn Egg",
   "item.paradise_lost.moa_spawn_egg": "Moa Spawn Egg",
   "item.paradise_lost.popom_spawn_egg": "Popom Spawn Egg",
@@ -351,7 +344,7 @@
 
   "moa.egg.adult": "pre-grown",
 
-  "moa.race.paradise_lost.fallback" : "Exceptional",
+  "moa.race.paradise_lost.fallback": "Exceptional",
   "moa.race.paradise_lost.foxtrot": "Foxtrot",
   "moa.race.paradise_lost.goldenrod": "Goldenrod",
   "moa.race.paradise_lost.highlands_blue": "Common Blue",
@@ -403,8 +396,8 @@
   "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
   "subtitles.paradise_lost.entity.moa.step": "Moa walks",
 
-  "commands.paradise_lost.gravitate.failure" : "Couldn't float the block(s)",
-  "commands.paradise_lost.gravitate.success" : "Successfully floated the block(s)",
+  "commands.paradise_lost.gravitate.failure": "Couldn't float the block(s)",
+  "commands.paradise_lost.gravitate.success": "Successfully floated the block(s)",
 
 
   "info.paradise_lost.bloodstone.cherine": "Peer into the creatures heart",
@@ -431,10 +424,10 @@
   "subtitles.paradise_lost.entity.envoy.hurt": "Envoy hurts",
   "subtitles.paradise_lost.entity.envoy.death": "Envoy dies",
   "subtitles.paradise_lost.entity.envoy.gets_enlightened": "Envoy becomes Enlightened",
-  "subtitles.paradise_lost.entity.envoy.enlightened.ambient": "Enlightened chimes",
-  "subtitles.paradise_lost.entity.envoy.enlightened.step": "Enlightened walks",
-  "subtitles.paradise_lost.entity.envoy.enlightened.hurt": "Enlightened hurts",
-  "subtitles.paradise_lost.entity.envoy.enlightened.death": "Enlightened dies",
+  "subtitles.paradise_lost.entity.envoy.enlightened.ambient": "Enlightened Envoy chimes",
+  "subtitles.paradise_lost.entity.envoy.enlightened.step": "Enlightened Envoy walks",
+  "subtitles.paradise_lost.entity.envoy.enlightened.hurt": "Enlightened Envoy hurts",
+  "subtitles.paradise_lost.entity.envoy.enlightened.death": "Enlightened Envoy dies",
 
   "subtitles.paradise_lost.entity.minecart.inside_levitating": "Minecart twinkles",
   "subtitles.paradise_lost.entity.minecart.rolling_levitating": "Minecart twinkles",
