@@ -1,40 +1,32 @@
 # Paradise Lost
-![Minecraft 1.19.2](https://img.shields.io/badge/Minecraft-1.19.2-brightgreen)
 [![Discord](https://img.shields.io/discord/770691727568404521.svg?logoColor=FFFFFF&logo=discord&color=7289DA)](https://discord.com/invite/wmMa47n)
 [![Code license (MIT)](https://img.shields.io/github/license/devs-immortal/Paradise-Lost)](https://github.com/devs-immortal/Paradise-Lost/blob/0.2.0/1.19/master/LICENSE.md)
 [![Asset license (Unlicensed)](https://img.shields.io/badge/assets%20license-All%20Rights%20Reserved-red.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-**Is this official?**
+### What is Paradise Lost?
 
-Paradise Lost stands to be a new Skylands Dimension mod, inspired by the legendary Aether mod and seeking to grant great, fresh adventures.
+Paradise Lost is a Skylands Dimension mod, inspired by the legendary Aether mod and looking to provide fresh adventures and fun mechanics to explore.
 
-**What is Paradise Lost?**
-
-Let me tell you a tale of a land in the sky, a hostile paradise lost to time. ...
-
-These old skylands are shattered world set on a canvas of clouds, painted with dreamy colors, cast upon a new dawn.
-This world is a host to a great many creatures, peoples, and places, amidst the sea of clouds you may find
-landscapes unlike any you've seen before, dungeons filled with trap and treasure, and hamlets that may make a for a goody home.
-Gaze upon the horizon as a new dawn breaks over this olden land, allow yourself to get lost in the endless expanse, let your heart guide you.
-
-Gaze upon the moon as you wander amidst snow, song, and sand, remembering the home you left behind but never looking back.
-For what does homesickness say forthwith about a man when wonders lay abound at each crevice...
-Regardless, why are you still here? Go venture out! I am not going to tell you the whole story, go find it out yourself!
-After all...
-An explorer must explore.
+Paradise Lost is designed to fit seamlessly with Vanilla progression and style, becoming accessible after players have explored both the Overworld and Nether. Many blocks and items can be found in and derived from resources in Paradise to be used for function and fun. Unique structures can be found with custom mobs for players to fight and loot to be had.
 
 You can download the mod on [Modrinth](https://modrinth.com/mod/paradise-lost), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
 
 **Soundtrack:** [Aether Reborn - Volume 1](https://sunsette.bandcamp.com/album/aether-reborn-volume-1)
 
-**The Aether repository:** [GildedGames/The-Aether](https://github.com/Gilded-Games/The-Aether)
+## Contributing
+### Developing
 
-## Translations
-[![Crowdin](https://badges.crowdin.net/aether/localized.svg)](https://crowdin.com/project/aether)
+We are always looking for new ideas and feedback to keep the mod interesting and bug free. If you would like to contribute, check out the source on GitHub and follow the instructions there for writing a suggestion for the mod.
+
+Also consider joining the **[Immortal Devs' Discord channel](https://discord.gg/8q7dNtHAvJ)** and talking about the mod there if you are interested in following the development or discussing with us and other players!
+
+### Translation
+
+[![Crowdin](https://badges.crowdin.net/paradiselost/localized.svg)](https://crowdin.com/project/paradiselost)
 
 Paradise Lost makes use of crowd sourced translations. 
 
-**You can help translate Paradise Lost to additional languages here: [crowdin.com](https://crowdin.com/project/aether).**
+**You can help translate Paradise Lost to additional languages here: [crowdin.com](https://crowdin.com/project/paradiselost).**
 
 ## Gallery
 
@@ -50,4 +42,4 @@ Assets are all rights are reserved by Immortal Devs.
 
 You can find out more information about the license [here](https://github.com/devs-immortal/Paradise-Lost/blob/2.1.0/1.19.2/master/LICENSE.md).
 
-<a href="https://curseforge.com/minecraft/mc-mods/fabric-api" target="_blank"><img alt="Fabric API - Mods - Minecraft - CurseForge" src="https://i.imgur.com/B0gfNNm.png" height="48"></a>&nbsp;&nbsp;<a href="https://curseforge.com/minecraft/mc-mods/cloth-config" target="_blank"><img alt="Cloth Config - Mods - Minecraft - CurseForge" src="https://i.imgur.com/pY3r4OC.png" height="48"></a>
+<a href="https://curseforge.com/minecraft/mc-mods/fabric-api" target="_blank"><img alt="Fabric API - Mods - Minecraft - CurseForge" src="https://i.imgur.com/B0gfNNm.png" height="48"></a>&nbsp;&nbsp;<a href="https://curseforge.com/minecraft/mc-mods/cloth-config" target="_blank"></a>
