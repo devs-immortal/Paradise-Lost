@@ -27,10 +27,6 @@ public class JigsawStructureMixin {
 
     @Shadow
     @Final
-    private HeightProvider startHeight;
-
-    @Shadow
-    @Final
     private Optional<Heightmap.Type> projectStartToHeightmap;
 
     @Inject(
