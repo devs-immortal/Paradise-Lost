@@ -1,0 +1,171 @@
+{
+  "type": "minecraft:equipment",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": {
+            "pools": [
+              {
+                "bonus_rolls": 0.0,
+                "conditions": [
+                  {
+                    "chance": 0.5,
+                    "condition": "minecraft:random_chance"
+                  }
+                ],
+                "entries": [
+                  {
+                    "type": "minecraft:item",
+                    "functions": [],
+                    "name": "paradise_lost:olvite_helmet"
+                  }
+                ],
+                "rolls": 1.0
+              },
+              {
+                "bonus_rolls": 0.0,
+                "conditions": [
+                  {
+                    "chance": 0.5,
+                    "condition": "minecraft:random_chance"
+                  }
+                ],
+                "entries": [
+                  {
+                    "type": "minecraft:item",
+                    "functions": [],
+                    "name": "paradise_lost:olvite_chestplate"
+                  }
+                ],
+                "rolls": 1.0
+              }
+            ]
+          },
+          "weight": 4
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": {
+            "pools": [
+              {
+                "bonus_rolls": 0.0,
+                "conditions": [
+                  {
+                    "chance": 0.5,
+                    "condition": "minecraft:random_chance"
+                  }
+                ],
+                "entries": [
+                  {
+                    "type": "minecraft:item",
+                    "functions": [],
+                    "name": "paradise_lost:olvite_helmet"
+                  }
+                ],
+                "rolls": 1.0
+              },
+              {
+                "bonus_rolls": 0.0,
+                "conditions": [
+                  {
+                    "chance": 0.5,
+                    "condition": "minecraft:random_chance"
+                  }
+                ],
+                "entries": [
+                  {
+                    "type": "minecraft:item",
+                    "functions": [],
+                    "name": "paradise_lost:olvite_chestplate"
+                  }
+                ],
+                "rolls": 1.0
+              },
+              {
+                "bonus_rolls": 0.0,
+                "conditions": [
+                  {
+                    "chance": 0.5,
+                    "condition": "minecraft:random_chance"
+                  }
+                ],
+                "entries": [
+                  {
+                    "type": "minecraft:item",
+                    "functions": [],
+                    "name": "paradise_lost:olvite_leggings"
+                  }
+                ],
+                "rolls": 1.0
+              },
+              {
+                "bonus_rolls": 0.0,
+                "conditions": [
+                  {
+                    "chance": 0.5,
+                    "condition": "minecraft:random_chance"
+                  }
+                ],
+                "entries": [
+                  {
+                    "type": "minecraft:item",
+                    "functions": [],
+                    "name": "paradise_lost:olvite_boots"
+                  }
+                ],
+                "rolls": 1.0
+              }
+            ]
+          },
+          "weight": 1
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:olvite_sword",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "enchantments": {
+                "minecraft:sharpness": 1.0
+              },
+              "function": "minecraft:set_enchantments"
+            }
+          ],
+          "name": "paradise_lost:olvite_sword"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "enchantments": {
+                "minecraft:knockback": 1.0
+              },
+              "function": "minecraft:set_enchantments"
+            }
+          ],
+          "name": "paradise_lost:olvite_axe"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:olvite_axe"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "paradise_lost:equipment/birdcage_envoy"
+}
