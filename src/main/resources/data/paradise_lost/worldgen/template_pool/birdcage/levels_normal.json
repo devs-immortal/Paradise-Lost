@@ -3,7 +3,7 @@
 	"fallback": "minecraft:empty",
 	"elements": [
     {
-      "weight": 2,
+      "weight": 8,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/levels/normal/normal_1",
@@ -12,7 +12,7 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 12,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/levels/normal/normal_2",
@@ -21,7 +21,25 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 4,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/levels/normal/normal_1_spawner",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/levels/normal/normal_2_spawner",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 6,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/levels/normal/normal_3",
