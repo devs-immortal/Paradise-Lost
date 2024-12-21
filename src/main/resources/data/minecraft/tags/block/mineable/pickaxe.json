@@ -41,12 +41,15 @@
     "paradise_lost:levita_brick",
     "paradise_lost:levita_brick_slab",
     "paradise_lost:levita_brick_stairs",
+    "paradise_lost:chiseled_levita_brick",
+    "paradise_lost:burnished_stone",
+    "paradise_lost:burnished_stone_slab",
+    "paradise_lost:burnished_stone_stairs",
     "paradise_lost:golden_amber_tile",
     "paradise_lost:golden_amber_tile_slab",
     "paradise_lost:golden_amber_tile_stairs",
     "paradise_lost:floestone_button",
     "paradise_lost:floestone_pressure_plate",
-    "paradise_lost:smooth_heliolith_slab",
     "paradise_lost:golden_amber_bars"
   ]
 }

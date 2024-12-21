@@ -126,6 +126,10 @@ public class ParadiseLostBlocks {
 
     // Levita Brick
     public static final SimpleBlockSet LEVITA_BRICK_SET = registerSimpleBlockSet("levita_brick", create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE));
+    public static final Block CHISELED_LEVITA_BRICK = add("chiseled_levita_brick", new Block(create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE)));
+
+    // Burnished Stone
+    public static final SimpleBlockSet BURNISHED_STONE_SET = registerSimpleBlockSet("burnished_stone", create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool());
 
     private static Settings amberTiles() {
         return create().mapColor(MapColor.GOLD).requiresTool().sounds(BlockSoundGroup.CALCITE).strength(2, 6);

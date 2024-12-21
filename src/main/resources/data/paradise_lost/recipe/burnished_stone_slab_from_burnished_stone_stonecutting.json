@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "paradise_lost:burnished_stone"
+  },
+  "result": {
+    "id": "paradise_lost:burnished_stone_slab",
+    "count": 2
+  }
+}

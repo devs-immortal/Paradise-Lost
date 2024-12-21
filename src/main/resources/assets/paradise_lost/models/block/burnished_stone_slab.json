@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/slab",
+	"textures": {
+		"bottom": "paradise_lost:block/burnished_stone",
+		"top": "paradise_lost:block/burnished_stone",
+		"side": "paradise_lost:block/burnished_stone"
+	}
+}

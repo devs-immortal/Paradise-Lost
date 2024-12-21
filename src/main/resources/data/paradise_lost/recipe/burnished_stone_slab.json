@@ -1,0 +1,17 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:burnished_stone"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:burnished_stone_slab",
+    "count": 6
+  }
+}
+        

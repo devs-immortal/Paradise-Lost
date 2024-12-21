@@ -80,9 +80,9 @@ def generate_slab_block(block_id, base_block_id, texture):
     
 
 
-generate_standard_block("thatch")
-generate_stairs_block("thatch_stairs", "thatch")
-generate_slab_block("thatch_slab", "thatch", "thatch")
-generate_standard_block("nest")
+generate_standard_block("burnished_stone")
+generate_stairs_block("burnished_stone_stairs", "burnished_stone")
+generate_slab_block("burnished_stone_slab", "burnished_stone", "burnished_stone")
+generate_standard_block("chiseled_levita_brick")
 
 
