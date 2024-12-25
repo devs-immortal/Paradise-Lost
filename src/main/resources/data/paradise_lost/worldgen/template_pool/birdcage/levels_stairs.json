@@ -3,7 +3,7 @@
 	"fallback": "minecraft:empty",
 	"elements": [
     {
-      "weight": 1,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/levels/stairs/stairs_1",
@@ -12,10 +12,37 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 5,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/levels/stairs/stairs_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/levels/stairs/stairs_3",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/levels/stairs/stairs_4",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/levels/stairs/stairs_2_spawner",
         "projection": "rigid",
         "processors": "paradise_lost:birdcage_proc"
       }

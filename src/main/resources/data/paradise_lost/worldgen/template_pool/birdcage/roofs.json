@@ -3,10 +3,37 @@
 	"fallback": "minecraft:empty",
 	"elements": [
     {
-      "weight": 1,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/roofs/roof_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/roofs/roof_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/roofs/roof_3",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/roofs/roof_4",
         "projection": "rigid",
         "processors": "paradise_lost:birdcage_proc"
       }
