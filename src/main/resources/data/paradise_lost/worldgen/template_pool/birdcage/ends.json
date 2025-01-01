@@ -1,6 +1,6 @@
 {
 	"name": "paradise_lost:birdcage/ends",
-	"fallback": "minecraft:empty",
+	"fallback": "paradise_lost:birdcage/caps",
 	"elements": [
     {
       "weight": 4,
