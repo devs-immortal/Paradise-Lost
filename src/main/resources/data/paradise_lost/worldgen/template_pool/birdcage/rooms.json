@@ -1,6 +1,6 @@
 {
 	"name": "paradise_lost:birdcage/rooms",
-	"fallback": "minecraft:empty",
+	"fallback": "paradise_lost:birdcage/ends",
 	"elements": [
     {
       "weight": 2,

@@ -1,6 +1,6 @@
 {
 	"name": "paradise_lost:birdcage/connectors",
-	"fallback": "minecraft:empty",
+	"fallback": "paradise_lost:birdcage/ends",
 	"elements": [
     {
       "weight": 1,
