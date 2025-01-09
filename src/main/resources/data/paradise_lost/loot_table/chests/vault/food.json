@@ -2,74 +2,69 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 2,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_upgrade_smithing_template"
+          "name": "paradise_lost:cherine_torch",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:amadrys_bread",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4,
+                "max": 9
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:swedroot",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:amadrys_bushel",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 13,
+                "max": 19
+              }
+            }
+          ]
         }
       ]
-    },
-    {
-      "bonus_rolls": 0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_upgrade_smithing_template",
-          "weight": 4,
-          "functions": []
-        },
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_sword",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.6,
-                "max": 1.5
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_chestplate",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.6,
-                "max": 1.5
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_helmet",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.6,
-                "max": 1.5
-              }
-            }
-          ]
-        }
-      ],
-      "rolls": {
-        "type": "minecraft:uniform",
-        "max": 3,
-        "min": 1
-      }
     },
     {
       "rolls": {
@@ -80,60 +75,60 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_pickaxe",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.6,
-                "max": 1.5
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_shovel",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.6,
-                "max": 1.5
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:golden_amber_tile",
-          "weight": 3,
+          "name": "paradise_lost:amadrys_bread_glazed",
+          "weight": 5,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 3,
-                "max": 16
+                "min": 1,
+                "max": 5
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:golden_amber",
+          "name": "minecraft:sugar",
           "weight": 4,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 6,
-                "max": 12
+                "min": 3,
+                "max": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:amadrys_bundle",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:packed_swedroot",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
               }
             }
           ]
@@ -144,15 +139,9 @@
       "rolls": {
         "type": "minecraft:uniform",
         "min": 0,
-        "max": 2
+        "max": 1
       },
       "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_upgrade_smithing_template",
-          "weight": 1,
-          "functions": []
-        },
         {
           "type": "minecraft:item",
           "name": "paradise_lost:mother_aurel_sapling",
@@ -170,30 +159,21 @@
         },
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_leggings",
+          "name": "paradise_lost:ancient_flower",
+          "weight": 3,
+          "functions": []
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:glazed_gold_hoe",
           "weight": 1,
           "functions": [
             {
               "function": "minecraft:set_damage",
               "damage": {
                 "type": "minecraft:uniform",
-                "min": 0.3,
-                "max": 1
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:glazed_gold_boots",
-          "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.3,
-                "max": 1
+                "min": 0.8,
+                "max": 1.5
               }
             }
           ]
@@ -201,5 +181,6 @@
       ]
     }
   ],
-  "random_sequence": "paradise_lost:chests/vault/valuable"
+  "functions": [],
+  "random_sequence": "paradise_lost:chests/vault/food"
 }
