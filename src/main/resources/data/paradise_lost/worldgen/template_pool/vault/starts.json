@@ -1,0 +1,15 @@
+{
+	"name": "paradise_lost:vault/starts",
+	"fallback": "minecraft:empty",
+	"elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/starts/start_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    }
+  ]
+}

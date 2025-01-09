@@ -1,0 +1,51 @@
+{
+	"name": "paradise_lost:vault/second_floor/tall_halls_non_end",
+	"fallback": "paradise_lost:vault/second_floor/tall_halls_fallback",
+	"elements": [
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_3",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_4",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_5",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    }
+  ]
+}
