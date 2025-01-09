@@ -3,7 +3,7 @@
 	"fallback": "paradise_lost:vault/catacomb_fallback",
 	"elements": [
     {
-      "weight": 4,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/catacomb/passage_1",
@@ -12,7 +12,7 @@
       }
     },
     {
-      "weight": 4,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/catacomb/passage_2",
@@ -31,7 +31,7 @@
     },
     
     {
-      "weight": 4,
+      "weight": 5,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/catacomb/crossway_1",
@@ -40,7 +40,7 @@
       }
     },
     {
-      "weight": 4,
+      "weight": 5,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/catacomb/crossway_2",
@@ -104,7 +104,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/catacomb/room_chest_1",
@@ -113,7 +113,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/catacomb/room_chest_2",
@@ -132,7 +132,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/catacomb/end_2",

@@ -3,7 +3,7 @@
 	"fallback": "paradise_lost:vault/second_floor/tall_halls_fallback",
 	"elements": [
     {
-      "weight": 3,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/second_floor/tall_halls/hall_1",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/second_floor/tall_halls/hall_3",
@@ -30,7 +30,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/second_floor/tall_halls/hall_4",
@@ -39,7 +39,7 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/second_floor/tall_halls/hall_5",
