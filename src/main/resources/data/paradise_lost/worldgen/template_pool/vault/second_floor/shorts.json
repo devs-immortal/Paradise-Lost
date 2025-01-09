@@ -31,7 +31,7 @@
     },
     
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/second_floor/shorts/passthru_big_1",
@@ -40,7 +40,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/second_floor/shorts/passthru_big_2",
