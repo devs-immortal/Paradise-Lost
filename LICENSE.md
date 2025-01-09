@@ -1,7 +1,7 @@
 The MIT License (MIT)
 =====================
 
-Copyright &copy; 2024 ImmortalDevs
+Copyright &copy; 2020 ‐ 2025 ImmortalDevs
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
