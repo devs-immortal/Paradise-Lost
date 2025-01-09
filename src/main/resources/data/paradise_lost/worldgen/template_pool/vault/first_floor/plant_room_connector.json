@@ -1,0 +1,71 @@
+{
+	"name": "paradise_lost:vault/first_floor/plant_room_connector",
+	"fallback": "paradise_lost:vault/first_floor/plant_room_connector_fallback",
+	"elements": [
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/plant/room_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/plant/room_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/plant/room_3",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/plant/room_4",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/plant/connector_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    
+    {
+      "weight": 6,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/plant/endcap_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/plant/endcap_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    }
+  ]
+}

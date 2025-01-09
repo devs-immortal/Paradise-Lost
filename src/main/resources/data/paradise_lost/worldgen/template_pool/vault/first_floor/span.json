@@ -1,30 +1,49 @@
 {
-	"name": "paradise_lost:vault/second_floor/shorts",
-	"fallback": "paradise_lost:vault/second_floor/shorts_fallback",
+	"name": "paradise_lost:vault/first_floor/span",
+	"fallback": "paradise_lost:vault/first_floor/span_fallback",
 	"elements": [
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/plant/room_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
     {
       "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/short_hall_1",
+        "location": "paradise_lost:vault/first_floor/plant/room_3",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 3,
+      "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/short_hall_2",
+        "location": "paradise_lost:vault/first_floor/plant/room_4",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/span/big_room_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 3,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/short_hall_3",
+        "location": "paradise_lost:vault/first_floor/catacomb_staircase",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -34,7 +53,7 @@
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_big_1",
+        "location": "paradise_lost:vault/first_floor/span/room_chest_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -43,25 +62,16 @@
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_big_2",
+        "location": "paradise_lost:vault/first_floor/span/room_chest_2",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 3,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_big_3",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_chest_1",
+        "location": "paradise_lost:vault/first_floor/span/room_chest_3",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -70,7 +80,7 @@
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_chest_2",
+        "location": "paradise_lost:vault/first_floor/span/room_chest_4",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -79,80 +89,53 @@
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_chest_3",
+        "location": "paradise_lost:vault/first_floor/span/room_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 1,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_chest_4",
+        "location": "paradise_lost:vault/first_floor/span/room_2",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 6,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_1",
+        "location": "paradise_lost:vault/first_floor/span/room_3",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 6,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_2",
+        "location": "paradise_lost:vault/first_floor/span/room_4",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 6,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/passthru_3",
+        "location": "paradise_lost:vault/first_floor/span/room_5",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     
     {
-      "weight": 3,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/room_2",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/room_3",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/room_4",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/room_5",
+        "location": "paradise_lost:vault/first_floor/span/passthru_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -161,25 +144,34 @@
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/room_chest_1",
+        "location": "paradise_lost:vault/first_floor/span/passthru_2",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/room_chest_2",
+        "location": "paradise_lost:vault/first_floor/span/passthru_3",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/room_chest_3",
+        "location": "paradise_lost:vault/first_floor/span/passthru_4",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/span/passthru_5",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -188,16 +180,7 @@
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/room_chest_4",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/shorts/room_chest_5",
+        "location": "paradise_lost:vault/first_floor/span/passthru_chest_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }

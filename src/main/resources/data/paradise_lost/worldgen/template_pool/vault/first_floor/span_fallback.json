@@ -1,0 +1,33 @@
+{
+	"name": "paradise_lost:vault/first_floor/span",
+	"fallback": "minecraft:empty",
+	"elements": [
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/span/room_chest_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/span/room_chest_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/first_floor/span/room_chest_3",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    }
+  ]
+}
