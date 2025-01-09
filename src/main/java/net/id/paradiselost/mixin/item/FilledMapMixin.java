@@ -37,8 +37,8 @@ public abstract class FilledMapMixin {
     private MapColor updateColors(BlockState instance, BlockView world, BlockPos pos) {
         if (
                 ((World) world).getRegistryKey().equals(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY)
-                && pos.equals(Vec3i.ZERO)
-                && !world.getBlockState(pos).isOf(Blocks.BEDROCK)
+                        && pos.getY() == 0
+                        && instance.isOf(Blocks.BEDROCK)
         ) {
             return ParadiseLostMapColorUtil.PARADISE_LOST_BACKGROUND;
         } else {

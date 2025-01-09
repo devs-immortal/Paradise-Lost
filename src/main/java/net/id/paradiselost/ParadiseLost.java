@@ -25,6 +25,7 @@ import net.id.paradiselost.screen.ParadiseLostScreens;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.world.ParadiseLostGameRules;
+import net.id.paradiselost.world.ParadiseLostMapDecorationTypes;
 import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
@@ -84,6 +85,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostItems.init();
         ParadiseLostItemGroups.init();
         ParadiseLostBlockEntityTypes.init();
+        ParadiseLostMapDecorationTypes.init();
         ParadiseLostRecipeTypes.init();
         ParadiseLostCommands.init();
         ParadiseLostGameRules.init();

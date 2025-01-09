@@ -54,11 +54,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:olvite_spyglass"
+          "name": "paradise_lost:olvite_spyglass",
+          "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:saddle"
+          "name": "minecraft:saddle",
+          "weight": 1
         }
       ]
     },
@@ -72,6 +74,37 @@
         {
           "type": "minecraft:item",
           "name": "paradise_lost:aurel_water_bucket"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "decoration": "paradise_lost:vault",
+              "function": "minecraft:exploration_map",
+              "destination": "paradise_lost:vault",
+              "skip_existing_chunks": false,
+              "zoom": 1
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "translate": "filled_map.paradise_lost.vault"
+              },
+              "target": "item_name"
+            }
+          ],
+          "name": "minecraft:map"
         }
       ],
       "conditions": [
