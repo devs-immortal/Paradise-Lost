@@ -7,8 +7,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ConnectingBlock;
 import net.minecraft.block.MushroomBlock;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
@@ -17,10 +15,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-
-import java.util.Arrays;
-import java.util.Optional;
 
 public class ParadiseLostHangingMushroomPlantBlock extends ParadiseLostMushroomPlantBlock {
     public ParadiseLostHangingMushroomPlantBlock(TagKey<Block> plantableOn, Settings settings) {

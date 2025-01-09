@@ -24,7 +24,6 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;

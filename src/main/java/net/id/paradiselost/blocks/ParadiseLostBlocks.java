@@ -1,10 +1,5 @@
 package net.id.paradiselost.blocks;
 
-import net.id.paradiselost.blocks.BlockRegistration.ParadiseLostFarmlandBlock;
-import net.id.paradiselost.blocks.BlockRegistration.ParadiseLostStairsBlock;
-import net.id.paradiselost.blocks.BlockRegistration.SignSet;
-import net.id.paradiselost.blocks.BlockRegistration.SimpleBlockSet;
-import net.id.paradiselost.blocks.BlockRegistration.WoodBlockSet;
 import net.id.paradiselost.blocks.decorative.*;
 import net.id.paradiselost.blocks.mechanical.*;
 import net.id.paradiselost.blocks.natural.*;
@@ -13,12 +8,10 @@ import net.id.paradiselost.blocks.natural.crop.*;
 import net.id.paradiselost.blocks.natural.plant.*;
 import net.id.paradiselost.blocks.natural.tree.*;
 import net.id.paradiselost.tag.ParadiseLostBlockTags;
-import net.id.paradiselost.world.feature.configured_features.ParadiseLostConfiguredFeatures;
 import net.id.paradiselost.world.feature.configured_features.ParadiseLostTreeConfiguredFeatures;
 import net.id.paradiselost.world.feature.tree.ParadiseLostSaplingGenerators;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
-import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.tag.BlockTags;

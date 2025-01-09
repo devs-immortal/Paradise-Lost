@@ -8,7 +8,6 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
-import org.spongepowered.asm.mixin.Unique;
 
 public class FloatingComponent implements AutoSyncedComponent {
 

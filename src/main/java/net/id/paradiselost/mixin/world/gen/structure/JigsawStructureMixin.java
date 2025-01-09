@@ -2,7 +2,6 @@ package net.id.paradiselost.mixin.world.gen.structure;
 
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.heightprovider.HeightProvider;
 import net.minecraft.world.gen.structure.JigsawStructure;
 import net.minecraft.world.gen.structure.Structure;
 import org.spongepowered.asm.mixin.Final;

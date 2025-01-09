@@ -1,7 +1,6 @@
 package net.id.paradiselost.blocks.mechanical;
 
 import net.id.paradiselost.component.ParadiseLostComponents;
-import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

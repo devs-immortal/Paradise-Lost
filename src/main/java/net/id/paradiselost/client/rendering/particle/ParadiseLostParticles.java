@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.id.paradiselost.ParadiseLost;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
