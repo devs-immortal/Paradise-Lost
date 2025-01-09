@@ -25,12 +25,7 @@ public class ParadiseLostHangingMushroomPlantBlock extends ParadiseLostMushroomP
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return Block.createCuboidShape(5.0D, 10.0D, 5.0D, 11.0D, 16.0D, 11.0D);
     }
-    
-    @Override
-    protected boolean canPlantOnTop(BlockState ceil, BlockView world, BlockPos pos) {
-        return ceil.isOpaqueFullCube(world, pos);
-    }
-    
+
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.up();
@@ -44,10 +39,10 @@ public class ParadiseLostHangingMushroomPlantBlock extends ParadiseLostMushroomP
 
     @Override
     public void grow(ServerWorld world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
-        int mushroomHeight = random.nextInt(4)+4;
+        int mushroomHeight = random.nextInt(4) + 4;
         BlockState stemState = Blocks.MUSHROOM_STEM.getDefaultState().with(MushroomBlock.DOWN, false);
         BlockState capState = ParadiseLostBlocks.PINK_SPORECAP_BLOCK.getDefaultState().with(MushroomBlock.UP, false);
-        if (this.hasRoomToGrow(mushroomHeight+1, world, pos)) {
+        if (this.hasRoomToGrow(mushroomHeight + 1, world, pos)) {
             // stem
             for (int i = 0; i < mushroomHeight; i++) {
                 world.setBlockState(pos.down(i), stemState);
@@ -71,7 +66,7 @@ public class ParadiseLostHangingMushroomPlantBlock extends ParadiseLostMushroomP
             }
             // extra detail
             if (mushroomHeight >= 5 && random.nextBoolean()) {
-                BlockPos layer = pos.down(random.nextBetween(1, mushroomHeight-4));
+                BlockPos layer = pos.down(random.nextBetween(1, mushroomHeight - 4));
                 Direction d = (Direction) ConnectingBlock.FACING_PROPERTIES.keySet().toArray()[random.nextBetween(2, 5)];
                 world.setBlockState(layer.offset(d), capState);
                 world.setBlockState(layer.offset(d).offset(d.rotateClockwise(Direction.Axis.Y)), capState);

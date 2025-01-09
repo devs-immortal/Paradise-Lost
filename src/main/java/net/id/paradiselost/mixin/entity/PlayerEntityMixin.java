@@ -56,7 +56,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             if (MiscUtil.useLevitationTotem(this)) {
                 // apply effects
                 getWorld().sendEntityStatus(this, ParadiseLostEvents.LEVITATION_TOTEM_USED); // custom totem animation
-                setVelocity(this.getVelocity().x,0.6d, this.getVelocity().z);
+                setVelocity(this.getVelocity().x, 0.6d, this.getVelocity().z);
                 velocityModified = true;
                 addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 120, 50));
                 addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 320, 1));

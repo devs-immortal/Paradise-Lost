@@ -114,7 +114,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
                 if ((modified >= 10.0 || modified >= getHealth()) && MiscUtil.useLevitationTotem((LivingEntity) (Entity) this)) {
                     // apply effects
                     getWorld().sendEntityStatus(this, ParadiseLostEvents.LEVITATION_TOTEM_USED); // custom totem animation
-                    setVelocity(this.getVelocity().x,0.6d, this.getVelocity().z);
+                    setVelocity(this.getVelocity().x, 0.6d, this.getVelocity().z);
                     velocityModified = true;
                     addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 15, 1));
                     // skip all other damage code
@@ -124,7 +124,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
                 if (MiscUtil.useLevitationTotem((LivingEntity) (Entity) this)) {
                     // apply effects
                     getWorld().sendEntityStatus(this, ParadiseLostEvents.LEVITATION_TOTEM_USED); // custom totem animation
-                    setVelocity(this.getVelocity().x,0.6d, this.getVelocity().z);
+                    setVelocity(this.getVelocity().x, 0.6d, this.getVelocity().z);
                     velocityModified = true;
                     addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 110, 30));
                     addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 320, 1));

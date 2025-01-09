@@ -28,7 +28,7 @@ public class LevitaBloopParticle extends SpriteBillboardParticle {
         this.velocityX *= 0.02F;
         this.velocityY *= 0.02F;
         this.velocityZ *= 0.02F;
-        this.maxAge = (int)(20.0 / (Math.random() * 0.8 + 0.2));
+        this.maxAge = (int) (20.0 / (Math.random() * 0.8 + 0.2));
     }
 
     @Override

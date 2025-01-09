@@ -110,7 +110,7 @@ public class ParadiseLostMushroomPlantBlock extends PlantBlock implements Fertil
                 .getEntry(this.featureKey);
         if (!optional.isEmpty()) {
             world.removeBlock(pos, false);
-            if (!((ConfiguredFeature)((RegistryEntry)optional.get()).value()).generate(world, world.getChunkManager().getChunkGenerator(), random, pos)) {
+            if (!((ConfiguredFeature) ((RegistryEntry) optional.get()).value()).generate(world, world.getChunkManager().getChunkGenerator(), random, pos)) {
                 world.setBlockState(pos, state, Block.NOTIFY_ALL);
             }
         }

@@ -82,7 +82,7 @@ public abstract class ItemRendererMixin {
     public void getModel(ItemStack stack, World world, LivingEntity entity, int seed, CallbackInfoReturnable<BakedModel> cir) {
         if (stack.isOf(ParadiseLostItems.OLVITE_SPYGLASS)) {
             BakedModel bakedModel = this.models.getModelManager().getModel(OLVITE_SPYGLASS_IN_HAND);
-            ClientWorld clientWorld = world instanceof ClientWorld ? (ClientWorld)world : null;
+            ClientWorld clientWorld = world instanceof ClientWorld ? (ClientWorld) world : null;
             BakedModel bakedModel2 = bakedModel.getOverrides().apply(bakedModel, stack, clientWorld, entity, seed);
             cir.setReturnValue(bakedModel2 == null ? this.models.getModelManager().getMissingModel() : bakedModel2);
         }

@@ -59,8 +59,8 @@ public abstract class InGameHudMixin {
     @Inject(method = "renderSpyglassOverlay", at = @At("HEAD"), cancellable = true)
     private void renderSpyglassOverlay(DrawContext context, float scale, CallbackInfo ci) {
         if (this.client.player.getActiveItem().isOf(ParadiseLostItems.OLVITE_SPYGLASS)) {
-            float f = (float)Math.min(context.getScaledWindowWidth(), context.getScaledWindowHeight());
-            float h = Math.min((float)context.getScaledWindowWidth() / f, (float)context.getScaledWindowHeight() / f) * scale;
+            float f = (float) Math.min(context.getScaledWindowWidth(), context.getScaledWindowHeight());
+            float h = Math.min((float) context.getScaledWindowWidth() / f, (float) context.getScaledWindowHeight() / f) * scale;
             int i = MathHelper.floor(f * h);
             int j = MathHelper.floor(f * h);
             int k = (context.getScaledWindowWidth() - i) / 2;

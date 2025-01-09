@@ -18,9 +18,9 @@ public class LevitaMovingMinecartSoundInstance extends MovingSoundInstance {
         this.repeat = true;
         this.repeatDelay = 0;
         this.volume = 0.0F;
-        this.x = ((float)minecart.getX());
-        this.y = ((float)minecart.getY());
-        this.z = ((float)minecart.getZ());
+        this.x = ((float) minecart.getX());
+        this.y = ((float) minecart.getY());
+        this.z = ((float) minecart.getZ());
     }
 
     @Override

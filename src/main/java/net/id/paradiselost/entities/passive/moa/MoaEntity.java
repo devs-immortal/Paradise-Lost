@@ -321,11 +321,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         return curLegPitch;
     }
 
-    public float getRandomFloat(float from, float to){
+    public float getRandomFloat(float from, float to) {
         float finalNumber = 1;
         from *= 100;
         to *= 100;
-        finalNumber = from + this.random.nextInt((int)to);
+        finalNumber = from + this.random.nextInt((int) to);
         return finalNumber / 100;
     }
 
@@ -333,8 +333,8 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     int moaSoundCallCooldown = 200;
     private float soundChance = 0;
     private float songChance = 0;
-    public void attemptMoaSound()
-    {
+
+    public void attemptMoaSound() {
         if (this.random.nextFloat() < 0.2f + this.soundChance) {
             if (this.random.nextFloat() > 0.05f + this.songChance || isBaby()) {
                 //Small chirp
@@ -366,7 +366,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void attemptMoaFlap(boolean bypassFlapCheck) {
         if (getWingRoll() > 0.8 && canFlap || bypassFlapCheck) {
             if (!this.getWorld().isClient) {
-            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.9F, getRandomFloat(0.9f, 0.97f));
+                this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.9F, getRandomFloat(0.9f, 0.97f));
             }
             this.canFlap = false;
         } else if (getWingRoll() < -0.3f) {
@@ -527,10 +527,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         calcGeneSpeeds();
 
         if (g == 0 && f == 0) {
-            curGroundSpeed = Math.clamp(curGroundSpeed - 0.1f, genGroundSpeed  * 0.07f , genGroundSpeed);
+            curGroundSpeed = Math.clamp(curGroundSpeed - 0.1f, genGroundSpeed * 0.07f, genGroundSpeed);
             curFlyingSpeed = Math.clamp(curFlyingSpeed - 0.05f, genGlidingSpeed * 0.1f, genGlidingSpeed);
         } else {
-            curGroundSpeed = Math.clamp(curGroundSpeed + groundAcceleration, genGroundSpeed  * 0.07f, genGroundSpeed);
+            curGroundSpeed = Math.clamp(curGroundSpeed + groundAcceleration, genGroundSpeed * 0.07f, genGroundSpeed);
             curFlyingSpeed = Math.clamp(curFlyingSpeed + flyingAcceleration + (Math.abs((float) getVelocity().y / 10)), genGlidingSpeed * 0.1f, genGlidingSpeed);
         }
     }
@@ -813,8 +813,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
                 this.jumping = true;
             }
-        }
-        else {
+        } else {
             heldJumpStrength = 0;
             this.jumping = false;
         }
@@ -828,7 +827,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     @Override
     public void startJumping(int height) {
         if (!isGliding() && isOnGround()) {
-            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.25F, getRandomFloat(0.64f,0.69f));
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_GLIDING, SoundCategory.NEUTRAL, 0.25F, getRandomFloat(0.64f, 0.69f));
             this.jumping = true;
         } else {
             this.jumping = false;
