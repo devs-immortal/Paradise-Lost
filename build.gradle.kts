@@ -1,19 +1,14 @@
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
-
 val paradiseLostVersion: String by properties
 
-val minecraft_version: String by properties
-val yarn_mappings: String by properties
-val loader_version: String by properties
+val minecraftVersion: String by properties
+val yarnMappings: String by properties
+val loaderVersion: String by properties
 val javaVersion: String by properties
 
-val fabric_version: String by properties
+val fabricVersion: String by properties
 val fabricAsmVersion: String by properties
-val customportalapiVersion: String by properties
+val customPortalApiVersion: String by properties
 val cardinalComponentsVersion: String by properties
-val crowdinTranslateVersion: String by properties
-val modmenuVersion: String by properties
-val satinVersion: String by properties
 
 plugins {
     id("fabric-loom") version "1.7-SNAPSHOT"
@@ -79,20 +74,20 @@ dependencies {
     minecraft(
             group = "com.mojang",
             name = "minecraft",
-            version = minecraft_version,
+            version = minecraftVersion,
     )
 
     mappings(
             group = "net.fabricmc",
             name = "yarn",
-            version = yarn_mappings,
+            version = yarnMappings,
             classifier = "v2",
     )
 
     modImplementation(
             group = "net.fabricmc",
             name = "fabric-loader",
-            version = loader_version,
+            version = loaderVersion,
     )
 
     modImplementation(
@@ -110,7 +105,7 @@ dependencies {
     modImplementation(
             group = "net.kyrptonaught",
             name = "customportalapi",
-            version = customportalapiVersion,
+            version = customPortalApiVersion,
     ).also(::include).exclude(module = "sodium")
 
     modImplementation(
@@ -122,7 +117,7 @@ dependencies {
     modImplementation(
             group = "net.fabricmc.fabric-api",
             name = "fabric-api",
-            version = fabric_version,
+            version = fabricVersion,
     )
 
 }
