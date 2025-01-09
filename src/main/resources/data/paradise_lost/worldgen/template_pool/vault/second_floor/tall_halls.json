@@ -39,7 +39,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/second_floor/tall_halls/hall_5",
@@ -48,10 +48,46 @@
       }
     },
     {
-      "weight": 4,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:vault/second_floor/tall_halls/endcap_chest_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_chest_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_3",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
