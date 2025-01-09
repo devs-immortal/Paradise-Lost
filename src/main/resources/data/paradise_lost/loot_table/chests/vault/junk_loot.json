@@ -17,8 +17,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 6,
-                "max": 18
+                "min": 4,
+                "max": 13
               }
             }
           ]
@@ -32,15 +32,15 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 6,
-                "max": 17
+                "min": 4,
+                "max": 13
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:mother_aurel_log",
+          "name": "minecraft:book",
           "weight": 2,
           "functions": [
             {
@@ -55,15 +55,15 @@
         },
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:golden_mossy_floestone",
+          "name": "paradise_lost:cherine",
           "weight": 1,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 3,
-                "max": 10
+                "min": 1,
+                "max": 5
               }
             }
           ]
@@ -109,7 +109,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:levita",
+          "name": "paradise_lost:brown_sporecap",
           "weight": 1,
           "functions": [
             {
@@ -117,7 +117,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 7
+                "max": 3
               }
             }
           ]
