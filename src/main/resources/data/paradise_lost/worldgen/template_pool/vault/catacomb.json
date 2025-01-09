@@ -1,21 +1,12 @@
 {
-	"name": "paradise_lost:vault/second_floor/tall_halls",
-	"fallback": "paradise_lost:vault/second_floor/tall_halls_fallback",
+	"name": "paradise_lost:vault/catacomb",
+	"fallback": "paradise_lost:vault/catacomb_fallback",
 	"elements": [
     {
-      "weight": 1,
+      "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/hall_1",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 2,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/hall_2",
+        "location": "paradise_lost:vault/catacomb/passage_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -24,7 +15,26 @@
       "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/hall_3",
+        "location": "paradise_lost:vault/catacomb/passage_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/passage_chest_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    
+    {
+      "weight": 4,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/crossway_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -33,43 +43,7 @@
       "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/hall_4",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/hall_5",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_chest_1",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_chest_2",
-        "projection": "rigid",
-        "processors": "paradise_lost:vault_proc"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_1",
+        "location": "paradise_lost:vault/catacomb/crossway_2",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -78,7 +52,7 @@
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_2",
+        "location": "paradise_lost:vault/catacomb/crossway_rare_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
@@ -87,55 +61,85 @@
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_3",
+        "location": "paradise_lost:vault/catacomb/crossway_rare_2",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 1,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_1",
+        "location": "paradise_lost:vault/catacomb/crossway_rare_3",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/room_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 1,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_2",
+        "location": "paradise_lost:vault/catacomb/room_2",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 1,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_pillar_1",
+        "location": "paradise_lost:vault/catacomb/room_3",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 1,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_pillar_2",
+        "location": "paradise_lost:vault/catacomb/room_chest_1",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     },
     {
-      "weight": 1,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:vault/second_floor/tall_halls/endcap_pillar_3",
+        "location": "paradise_lost:vault/catacomb/room_chest_2",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+     
+    {
+      "weight": 4,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/end_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:vault_proc"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/end_2",
         "projection": "rigid",
         "processors": "paradise_lost:vault_proc"
       }
     }
+    
   ]
 }
