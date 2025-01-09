@@ -11,8 +11,8 @@ val customPortalApiVersion: String by properties
 val cardinalComponentsVersion: String by properties
 
 plugins {
-    id("fabric-loom") version "1.7-SNAPSHOT"
-    id("com.modrinth.minotaur") version "1.2.1"
+    id("fabric-loom") version "1.9-SNAPSHOT"
+    id("com.modrinth.minotaur") version "2.8.7"
     id("de.guntram.mcmod.crowdin-translate") version "1.4+1.19"
     `maven-publish`
     checkstyle
