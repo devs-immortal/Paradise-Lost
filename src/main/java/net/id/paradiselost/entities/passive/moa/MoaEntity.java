@@ -109,7 +109,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 10F, 150f));
         this.goalSelector.add(8, new StopAndLookAtEntityGoal(this, LivingEntity.class, 4, 180f));
 
-        //this.goalSelector.add(9, new WanderAroundFarGoal(this, 0.32F, 0.01f)); //WanderGoal
+        this.goalSelector.add(9, new WanderAroundFarGoal(this, 0.32F, 0.01f)); //WanderGoal
         this.goalSelector.add(9, new MoaWanderAroundGoal(this, 0.320D, 230));
         //this.goalSelector.add(10, new MoaWanderAroundGoal(this, 0.400D, 290));
         this.goalSelector.add(10, new LookAroundGoal(this)); //LookGoal

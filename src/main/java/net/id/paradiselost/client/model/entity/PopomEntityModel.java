@@ -2,6 +2,7 @@ package net.id.paradiselost.client.model.entity;
 
 import com.google.common.collect.ImmutableList;
 import net.id.paradiselost.entities.passive.PopomEntity;
+import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelPartBuilder;
@@ -44,13 +45,13 @@ public class PopomEntityModel<T extends PopomEntity> extends AnimalModel<T> {
         ModelData ModelData = new ModelData();
         ModelPartData root = ModelData.getRoot();
 
-        ModelPartData body0 = root.addChild("body0", ModelPartBuilder.create().uv(0, 78).cuboid(-5.0F, -9.0F, -8.0F, 10.0F, 6.0F, 15.0F), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData body0 = root.addChild("body0", ModelPartBuilder.create().uv(0, 78).cuboid(-5.0F, -9.0F, -8.0F, 10.0F, 6.0F, 15.0F, new Dilation(1F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-        ModelPartData body1 = root.addChild("body1", ModelPartBuilder.create().uv(0, 54).cuboid(-5.5F, -11.0F, -8.0F, 11.0F, 8.0F, 16.0F), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData body1 = root.addChild("body1", ModelPartBuilder.create().uv(0, 54).cuboid(-5.5F, -11.0F, -8.0F, 11.0F, 8.0F, 16.0F, new Dilation(1.05F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-        ModelPartData body2 = root.addChild("body2", ModelPartBuilder.create().uv(0, 28).cuboid(-6.0F, -12.0F, -8.0F, 12.0F, 9.0F, 17.0F), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData body2 = root.addChild("body2", ModelPartBuilder.create().uv(0, 28).cuboid(-6.0F, -12.0F, -8.0F, 12.0F, 9.0F, 17.0F, new Dilation(1.1F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-        ModelPartData body3 = root.addChild("body3", ModelPartBuilder.create().uv(0, 0).cuboid(-7.0F, -13.0F, -8.0F, 14.0F, 10.0F, 18.0F), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData body3 = root.addChild("body3", ModelPartBuilder.create().uv(0, 0).cuboid(-7.0F, -13.0F, -8.0F, 14.0F, 10.0F, 18.0F, new Dilation(1.15F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
         ModelPartData head = root.addChild("head", ModelPartBuilder.create().uv(38, 54).cuboid(-4.0F, -2.0F, -4.0F, 8.0F, 4.0F, 4.0F)
                 .uv(38, 62).cuboid(-3.0F, -5.0F, -5.0F, 6.0F, 3.0F, 3.0F), ModelTransform.pivot(0.0F, 19.0F, -8.0F));
