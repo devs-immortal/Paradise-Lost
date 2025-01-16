@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "paradise_lost:block/thatch_fan"
+    "layer0": "paradise_lost:item/nest"
   }
 }
