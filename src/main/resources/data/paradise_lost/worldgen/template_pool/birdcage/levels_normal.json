@@ -57,7 +57,7 @@
       }
     },
     {
-      "weight": 5,
+      "weight": 6,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/levels/normal/normal_1_spawner",
@@ -66,7 +66,7 @@
       }
     },
     {
-      "weight": 5,
+      "weight": 6,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/levels/normal/normal_2_spawner",
