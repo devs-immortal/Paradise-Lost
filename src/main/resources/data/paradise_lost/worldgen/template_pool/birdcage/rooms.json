@@ -147,10 +147,19 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/rooms/small_turn_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/rooms/small_turn_2",
         "projection": "rigid",
         "processors": "paradise_lost:birdcage_proc"
       }

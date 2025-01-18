@@ -20,6 +20,16 @@
         "processors": "paradise_lost:birdcage_proc"
       }
     },
+    
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_tunnel_1",
+        "projection": "rigid",
+        "processors": "paradise_lost:birdcage_proc"
+      }
+    },
     {
       "weight": 1,
       "element": {
