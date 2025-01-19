@@ -62,8 +62,6 @@ public class ParadiseLostItems {
     public static final Item FLAXWEAVE = add("flaxweave", new Item(resource()));
     public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource()), compostable30);
 
-    public static final Item POPOM_JELLY = add("popom_jelly", new Item(resource()), compostable30);
-
 
     private static Settings tool() {
         return new Settings();
@@ -188,10 +186,12 @@ public class ParadiseLostItems {
     public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new Item(food(ParadiseLostFoodComponent.AMADRYS_NOODLES)));
     public static final Item AMADRYS_BREAD = add("amadrys_bread", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD)), compostable50);
     public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED)), compostable50);
+    public static final Item AMADRYS_BREAD_GLAZED_FILLED = add("amadrys_bread_glazed_filled", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED_FILLED)), compostable50);
     public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
     public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(ParadiseLostBlocks.FLAX, food()), compostable30);
     public static final Item MOA_MEAT = add("moa_meat", new Item(food(ParadiseLostFoodComponent.MOA_MEAT)));
     public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", new Item(food(ParadiseLostFoodComponent.COOKED_MOA_MEAT)));
+    public static final Item POPOM_JELLY = add("popom_jelly", new Item(food(ParadiseLostFoodComponent.POPOM_JELLY)), compostable15);
 
     public static final ParadiseLostPortalItem PARADISE_LOST_PORTAL = add("portal", new ParadiseLostPortalItem(new Settings()));
 
@@ -476,6 +476,7 @@ public class ParadiseLostItems {
     public static final BoatSet WISTERIA_BOATS = addBoatItems("wisteria", "PARADISE_LOST_WISTERIA");
 
     public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, ORANGE_BOATS, WISTERIA_BOATS};
+
 
     public static void init() {
     }

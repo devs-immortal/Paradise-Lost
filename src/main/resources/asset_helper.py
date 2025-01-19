@@ -80,9 +80,6 @@ def generate_slab_block(block_id, base_block_id, texture):
     
 
 
-generate_standard_block("burnished_stone")
-generate_stairs_block("burnished_stone_stairs", "burnished_stone")
-generate_slab_block("burnished_stone_slab", "burnished_stone", "burnished_stone")
-generate_standard_block("chiseled_levita_brick")
+generate_standard_item("amadrys_bread_glazed_filled")
 
 

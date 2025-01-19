@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paradise_lost:amadrys_bread"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "paradise_lost:popom_jelly"
+    }
+  ],
+  "result": {
+    "id": "paradise_lost:amadrys_bread_glazed_filled",
+    "count": 1
+  }
+}

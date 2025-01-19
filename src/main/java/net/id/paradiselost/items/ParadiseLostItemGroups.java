@@ -311,7 +311,6 @@ public class ParadiseLostItemGroups {
                 entries.add(GOLDEN_AMBER);
                 entries.add(FLAX_THREAD);
                 entries.add(FLAXWEAVE);
-                entries.add(POPOM_JELLY);
             }));
     public static final RegistryKey<ItemGroup> PARADISE_FOOD = create("food", FabricItemGroup.builder()
             .icon(() -> new ItemStack(AMADRYS_NOODLES))
@@ -322,14 +321,16 @@ public class ParadiseLostItemGroups {
                 entries.add(AMADRYS_BUSHEL);
                 entries.add(AMADRYS_BREAD);
                 entries.add(AMADRYS_BREAD_GLAZED);
+                entries.add(AMADRYS_BREAD_GLAZED_FILLED);
                 entries.add(AMADRYS_NOODLES);
                 entries.add(SWEDROOT);
                 entries.add(SWEDROOT_PULP);
                 // meat
                 entries.add(MOA_MEAT);
                 entries.add(COOKED_MOA_MEAT);
+                entries.add(POPOM_JELLY);
                 // loot
-                //entries.add(CHEESECAKE); // TODO
+                entries.add(CHEESECAKE);
 
             }));
 
