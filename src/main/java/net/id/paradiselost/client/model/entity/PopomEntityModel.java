@@ -83,10 +83,10 @@ public class PopomEntityModel<T extends PopomEntity> extends AnimalModel<T> {
             float f = 0.5F;
             matrices.scale(f, f, f);
             matrices.translate(0.0F, 1.6F, 0.0F);
-            this.getFurs()[2].render(matrices, vertices, light, overlay, color);
+            this.getFurs()[1].render(matrices, vertices, light, overlay, color);
             matrices.pop();
         } else {
-            this.getFurs()[furSize].render(matrices, vertices, light, overlay, color);
+            this.getFurs()[Math.min(3, furSize)].render(matrices, vertices, light, overlay, color);
         }
     }
 

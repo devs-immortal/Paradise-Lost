@@ -1,7 +1,9 @@
 package net.id.paradiselost.entities.passive;
 
+import net.id.paradiselost.entities.ai.EatFlowersGoal;
 import net.id.paradiselost.tag.ParadiseLostItemTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
+import net.minecraft.client.render.entity.SheepEntityRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
@@ -48,6 +50,7 @@ public class PopomEntity extends AnimalEntity {
         this.goalSelector.add(2, new AnimalMateGoal(this, 0.9));
         this.goalSelector.add(3, new TemptGoal(this, 0.8, stack -> stack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES), false));
         this.goalSelector.add(4, new FollowParentGoal(this, 1.05));
+        this.goalSelector.add(5, new EatFlowersGoal(this, 0.95));
         this.goalSelector.add(6, new WanderAroundFarGoal(this, 0.6));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
@@ -102,6 +105,10 @@ public class PopomEntity extends AnimalEntity {
 
     public int getFurSize() {
         return this.dataTracker.get(FUR_SIZE);
+    }
+
+    public void eat() {
+        this.dataTracker.set(FUR_SIZE, this.dataTracker.get(FUR_SIZE)+1);
     }
 
     static {
