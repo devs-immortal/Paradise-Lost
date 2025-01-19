@@ -10,22 +10,16 @@
             "default_state": {
               "Name": "paradise_lost:cloudsbluff"
             },
-            "high_chance": 0.33333334,
+            "high_chance": 0.5,
             "high_states": [
-              {
-                "Name": "paradise_lost:ataraxia"
-              },
-              {
-                "Name": "paradise_lost:ancient_flower"
-              }
-            ],
-            "low_states": [
-              {
-                "Name": "paradise_lost:luminar"
-              },
               {
                 "Name": "paradise_lost:drigean"
               },
+              {
+                "Name": "paradise_lost:ataraxia"
+              }
+            ],
+            "low_states": [
               {
                 "Name": "paradise_lost:ancient_flower"
               }

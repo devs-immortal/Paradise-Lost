@@ -71,6 +71,6 @@ public class EatFlowersGoal extends MoveToTargetPosGoal {
     @Override
     protected boolean isTargetPos(WorldView world, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos.up());
-        return blockState.isIn(BlockTags.SMALL_FLOWERS);
+        return !blockState.isOf(Blocks.WITHER_ROSE) && blockState.isIn(BlockTags.SMALL_FLOWERS);
     }
 }

@@ -1,5 +1,5 @@
 {
-  "feature": "paradise_lost:patch_flowers",
+  "feature": "paradise_lost:patch_flowers_thicket",
   "placement": [
     {
       "type": "minecraft:noise_threshold_count",
@@ -9,7 +9,7 @@
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 24
+      "chance": 48
     },
     {
       "type": "minecraft:in_square"

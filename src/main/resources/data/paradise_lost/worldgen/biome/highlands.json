@@ -81,6 +81,12 @@
         "maxCount": 4,
         "minCount": 2,
         "weight": 6
+      },
+      {
+        "type": "paradise_lost:popom",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 4
       }
     ],
     "misc": [],

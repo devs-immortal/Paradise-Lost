@@ -8,24 +8,15 @@
           "to_place": {
             "type": "minecraft:noise_threshold_provider",
             "default_state": {
-              "Name": "paradise_lost:cloudsbluff"
+              "Name": "paradise_lost:luminar"
             },
             "high_chance": 0.33333334,
             "high_states": [
               {
-                "Name": "paradise_lost:ataraxia"
-              },
-              {
-                "Name": "paradise_lost:ancient_flower"
+                "Name": "paradise_lost:cloudsbluff"
               }
             ],
             "low_states": [
-              {
-                "Name": "paradise_lost:luminar"
-              },
-              {
-                "Name": "paradise_lost:drigean"
-              },
               {
                 "Name": "paradise_lost:ancient_flower"
               }
@@ -52,7 +43,7 @@
         }
       ]
     },
-    "tries": 64,
+    "tries": 32,
     "xz_spread": 6,
     "y_spread": 2
   }

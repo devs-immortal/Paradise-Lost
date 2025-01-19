@@ -88,8 +88,8 @@
     "creature": [
       {
         "type": "paradise_lost:moa",
-        "maxCount": 4,
-        "minCount": 2,
+        "maxCount": 3,
+        "minCount": 1,
         "weight": 6
       }
     ],

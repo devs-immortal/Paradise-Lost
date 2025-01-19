@@ -56,6 +56,7 @@
       "paradise_lost:patch_brown_sporecap",
       "paradise_lost:patch_pink_sporecap",
       "paradise_lost:natural_swedroot",
+      "paradise_lost:patch_flowers_thicket",
       "paradise_lost:patch_grass",
       "paradise_lost:patch_thicket_shamrock",
       "paradise_lost:patch_thicket_liverwort_carpet",
@@ -81,8 +82,8 @@
     "creature": [
       {
         "type": "paradise_lost:moa",
-        "maxCount": 4,
-        "minCount": 2,
+        "maxCount": 3,
+        "minCount": 1,
         "weight": 6
       }
     ],

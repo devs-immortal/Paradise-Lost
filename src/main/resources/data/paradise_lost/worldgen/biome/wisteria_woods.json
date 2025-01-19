@@ -53,7 +53,7 @@
       "paradise_lost:patch_brown_sporecap",
       "paradise_lost:patch_pink_sporecap",
       "paradise_lost:natural_swedroot",
-      "paradise_lost:patch_flowers",
+      "paradise_lost:patch_flowers_forest",
       "paradise_lost:patch_grass",
       "paradise_lost:fallen_rose_leaves",
       "paradise_lost:fallen_lavender_leaves",
@@ -81,6 +81,12 @@
         "maxCount": 4,
         "minCount": 2,
         "weight": 6
+      },
+      {
+        "type": "paradise_lost:popom",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 3
       }
     ],
     "misc": [],
