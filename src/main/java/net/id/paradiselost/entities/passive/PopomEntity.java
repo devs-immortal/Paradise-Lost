@@ -4,8 +4,10 @@ import net.id.paradiselost.entities.ai.EatFlowersGoal;
 import net.id.paradiselost.tag.ParadiseLostItemTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.client.render.entity.SheepEntityRenderer;
+import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.EatGrassGoal;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -26,12 +28,14 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class PopomEntity extends AnimalEntity {
 
     private static final TrackedData<Integer> FUR_SIZE;
+    private int eatingTimer;
 
     public PopomEntity(EntityType<? extends PopomEntity> entityType, World world) {
         super(entityType, world);
@@ -44,7 +48,6 @@ public class PopomEntity extends AnimalEntity {
 
     @Override
     protected void initGoals() {
-
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.1));
         this.goalSelector.add(2, new AnimalMateGoal(this, 0.9));
@@ -103,12 +106,40 @@ public class PopomEntity extends AnimalEntity {
         return stack.isIn(ItemTags.FLOWERS);
     }
 
+    @Override
+    public void tickMovement() {
+        if (this.getWorld().isClient) {
+            this.eatingTimer = Math.max(0, this.eatingTimer - 1);
+        }
+
+        super.tickMovement();
+    }
+
+    @Override
+    public void handleStatus(byte status) {
+        if (status == EntityStatuses.SET_SHEEP_EAT_GRASS_TIMER_OR_PRIME_TNT_MINECART) {
+            this.eatingTimer = 40;
+        } else {
+            super.handleStatus(status);
+        }
+    }
+
+    public float getHeadAngle(float delta) {
+        if (this.eatingTimer > 4 && this.eatingTimer <= 36) {
+            float f = ((float)(this.eatingTimer - 4) - delta) / 32.0F;
+            return (float) (Math.PI / 5) + 0.21991149F * MathHelper.sin(f * 28.7F);
+        } else {
+            return this.eatingTimer > 0 ? (float) (Math.PI / 5) : this.getPitch() * (float) (Math.PI / 180.0);
+        }
+    }
+
     public int getFurSize() {
         return this.dataTracker.get(FUR_SIZE);
     }
 
     public void eat() {
-        this.dataTracker.set(FUR_SIZE, this.dataTracker.get(FUR_SIZE)+1);
+        System.out.println("EATED");
+        this.dataTracker.set(FUR_SIZE, getFurSize()+1);
     }
 
     static {

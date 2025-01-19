@@ -106,7 +106,7 @@ public class PopomEntityModel<T extends PopomEntity> extends AnimalModel<T> {
 
     @Override
     public void setAngles(PopomEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        this.head.pitch = headPitch * (float) (Math.PI / 180.0) * 0.3F;
+        this.head.pitch = headPitch * (float) (Math.PI / 180.0) * 0.3F + entity.getHeadAngle(animationProgress);
         this.head.yaw = headYaw * (float) (Math.PI / 180.0) * 0.3F;
         this.brleg.pitch = MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance;
         this.blleg.pitch = MathHelper.cos(limbAngle * 0.6662F + (float) Math.PI) * 1.4F * limbDistance;

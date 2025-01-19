@@ -4,6 +4,7 @@ import net.id.paradiselost.entities.passive.PopomEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
 import net.minecraft.registry.tag.BlockTags;
@@ -28,53 +29,42 @@ public class EatFlowersGoal extends MoveToTargetPosGoal {
 
     @Override
     public boolean canStart() {
-        return this.goober.getFurSize() < 3 && super.canStart(); //this.cat.isTamed() && !this.cat.isSitting() && super.canStart();
+        return this.goober.getFurSize() < 3 && !this.goober.isBaby() && super.canStart(); //this.cat.isTamed() && !this.cat.isSitting() && super.canStart();
+    }
+
+    @Override
+    public void start() {
+        super.start();
+        this.timer = -1;
     }
 
     @Override
     public void stop() {
         super.stop();
-        this.timer = 0;
         this.eating = false;
     }
 
     @Override
     public double getDesiredDistanceToTarget() {
-        return 1.4;
-    }
-
-    public int getTimer() {
-        return this.timer;
+        return 1.6;
     }
 
     @Override
     public void tick() {
         super.tick();
-        this.timer = Math.max(0, this.timer - 1);
-        if (this.hasReached() && !this.eating) {
+        if (timer > 0) this.timer = Math.max(0, this.timer - 1);
+        if (this.timer == this.getTickCount(0) && this.eating) {
+            if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+                this.world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, targetPos.up(), Block.getRawIdFromState(world.getBlockState(targetPos.up())));
+                this.world.setBlockState(targetPos.up(), Blocks.AIR.getDefaultState(), Block.NOTIFY_LISTENERS);
+            }
+            this.goober.eat();
+            this.stop();
+        } else if (this.hasReached() && !this.eating && this.timer == -1) {
+            this.world.sendEntityStatus(this.mob, EntityStatuses.SET_SHEEP_EAT_GRASS_TIMER_OR_PRIME_TNT_MINECART);
             this.timer = this.getTickCount(40);
             this.eating = true;
-            this.world.sendEntityStatus(this.mob, EntityStatuses.SET_SHEEP_EAT_GRASS_TIMER_OR_PRIME_TNT_MINECART);
-        }
-        if (this.timer == this.getTickCount(4)) {
-            BlockPos pos = null;
-            for (int x = -1; x < 2; x++) {
-                for (int z = -1; z < 2; z++) {
-                    for (int y = -1; y < 2; y++) {
-                        if (world.getBlockState(goober.getBlockPos().add(x, y, z)).isIn(BlockTags.SMALL_FLOWERS)) {
-                            pos = goober.getBlockPos().add(x, y, z);
-                        }
-                    }
-                }
-            }
-            if (pos != null) {
-                if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-                    this.world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, pos, Block.getRawIdFromState(world.getBlockState(pos)));
-                    this.world.setBlockState(pos, Blocks.AIR.getDefaultState(), Block.NOTIFY_LISTENERS);
-                }
-                this.goober.eat();
-                this.stop();
-            }
+            goober.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, targetPos.up().toCenterPos());
         }
     }
 
