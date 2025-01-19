@@ -27,6 +27,8 @@ public class PopomEntityModel<T extends PopomEntity> extends AnimalModel<T> {
     private final ModelPart flleg;
     private final ModelPart brleg;
     private final ModelPart blleg;
+    private final ModelPart mrleg;
+    private final ModelPart mlleg;
 
     public PopomEntityModel(ModelPart root) {
         super(true, 25.0F, 2.0F, 3.0F, 3.0F, 48.0F);
@@ -39,6 +41,8 @@ public class PopomEntityModel<T extends PopomEntity> extends AnimalModel<T> {
         this.flleg = root.getChild("flleg");
         this.brleg = root.getChild("brleg");
         this.blleg = root.getChild("blleg");
+        this.mrleg = root.getChild("mrleg");
+        this.mlleg = root.getChild("mlleg");
     }
 
     public static TexturedModelData getTexturedModelData() {
@@ -56,13 +60,17 @@ public class PopomEntityModel<T extends PopomEntity> extends AnimalModel<T> {
         ModelPartData head = root.addChild("head", ModelPartBuilder.create().uv(38, 54).cuboid(-4.0F, -2.0F, -4.0F, 8.0F, 4.0F, 4.0F)
                 .uv(38, 62).cuboid(-3.0F, -5.0F, -5.0F, 6.0F, 3.0F, 3.0F), ModelTransform.pivot(0.0F, 19.0F, -8.0F));
 
-        ModelPartData frleg = root.addChild("frleg", ModelPartBuilder.create().uv(0, 116).cuboid(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), ModelTransform.pivot(-2.0F, 21.0F, -5.0F));
+        ModelPartData frleg = root.addChild("frleg", ModelPartBuilder.create().uv(0, 116).cuboid(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), ModelTransform.pivot(-2.0F, 21.0F, -6.0F));
 
-        ModelPartData flleg = root.addChild("flleg", ModelPartBuilder.create().uv(0, 122).cuboid(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), ModelTransform.pivot(2.0F, 21.0F, -5.0F));
+        ModelPartData flleg = root.addChild("flleg", ModelPartBuilder.create().uv(0, 122).cuboid(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), ModelTransform.pivot(2.0F, 21.0F, -6.0F));
 
         ModelPartData brleg = root.addChild("brleg", ModelPartBuilder.create().uv(12, 116).cuboid(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), ModelTransform.pivot(-2.0F, 21.0F, 4.0F));
 
         ModelPartData blleg = root.addChild("blleg", ModelPartBuilder.create().uv(12, 122).cuboid(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), ModelTransform.pivot(2.0F, 21.0F, 4.0F));
+
+        ModelPartData mrleg = root.addChild("mrleg", ModelPartBuilder.create().uv(12, 116).cuboid(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), ModelTransform.pivot(-2.0F, 21.0F, -1.0F));
+
+        ModelPartData mlleg = root.addChild("mlleg", ModelPartBuilder.create().uv(12, 122).cuboid(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), ModelTransform.pivot(2.0F, 21.0F, -1.0F));
 
         return TexturedModelData.of(ModelData, 64, 128);
     }
@@ -89,7 +97,7 @@ public class PopomEntityModel<T extends PopomEntity> extends AnimalModel<T> {
 
     @Override
     protected Iterable<ModelPart> getBodyParts() {
-        return ImmutableList.of(this.frleg, this.flleg, this.brleg, this.blleg);
+        return ImmutableList.of(this.frleg, this.flleg, this.brleg, this.blleg, this.mrleg, this.mlleg);
     }
 
     protected ModelPart[] getFurs() {
@@ -98,11 +106,17 @@ public class PopomEntityModel<T extends PopomEntity> extends AnimalModel<T> {
 
     @Override
     public void setAngles(PopomEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        this.head.pitch = headPitch * (float) (Math.PI / 180.0);
-        this.head.yaw = headYaw * (float) (Math.PI / 180.0);
+        this.head.pitch = headPitch * (float) (Math.PI / 180.0) * 0.3F;
+        this.head.yaw = headYaw * (float) (Math.PI / 180.0) * 0.3F;
         this.brleg.pitch = MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance;
         this.blleg.pitch = MathHelper.cos(limbAngle * 0.6662F + (float) Math.PI) * 1.4F * limbDistance;
-        this.frleg.pitch = MathHelper.cos(limbAngle * 0.6662F + (float) Math.PI) * 1.4F * limbDistance;
-        this.flleg.pitch = MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance;
+        this.frleg.pitch = MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance;
+        this.flleg.pitch = MathHelper.cos(limbAngle * 0.6662F + (float) Math.PI) * 1.4F * limbDistance;
+        this.mrleg.pitch = MathHelper.cos(limbAngle * 0.6662F + (float) Math.PI) * 1.4F * limbDistance;
+        this.mlleg.pitch = MathHelper.cos(limbAngle * 0.6662F) * 1.4F * limbDistance;
+        this.body0.roll = MathHelper.cos(limbAngle * 0.9F) * 0.3F * limbDistance;
+        this.body1.roll = MathHelper.cos(limbAngle * 0.9F) * 0.3F * limbDistance;
+        this.body2.roll = MathHelper.cos(limbAngle * 0.9F) * 0.3F * limbDistance;
+        this.body3.roll = MathHelper.cos(limbAngle * 0.9F) * 0.3F * limbDistance;
     }
 }
