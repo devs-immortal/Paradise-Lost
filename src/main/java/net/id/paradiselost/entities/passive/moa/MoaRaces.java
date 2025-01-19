@@ -40,8 +40,9 @@ public class MoaRaces {
     //Mythical
     public static final MoaRace MOONSTRUCK = register("moonstruck", new MoaRace(GLIDING_SPEED, GLIDE, true, true, ParticleTypes.GLOW));
 
-    //Breeding exclusive ones perhaps?
+    //Breeding exclusive
     public static final MoaRace GREENSEED = register("greenseed", new MoaRace(JUMPING_STRENGTH, ENDURANCE));
+    public static final MoaRace AQUILAN = register("aquilan", new MoaRace(GLIDING_SPEED, SPEED));
 
     private static MoaRace register(String name, MoaRace race) {
         return MoaAPI.register(ParadiseLost.locate(name), race);
@@ -52,7 +53,7 @@ public class MoaRaces {
         registerSpawning(HIGHLANDS_BLUE, 50, HIGHLANDS_PLAINS_KEY);
         registerSpawning(HIGHLANDS_BLUE, 45, HIGHLANDS_FOREST_KEY);
 
-        registerSpawning(HIGHLANDS_CYAN, 30, HIGHLANDS_PLAINS_KEY); //New, variation for the normal blue one
+        registerSpawning(HIGHLANDS_CYAN, 30, HIGHLANDS_PLAINS_KEY);
 
         registerSpawning(GOLDENROD, 10, HIGHLANDS_SHIELD_KEY);
         registerSpawning(GOLDENROD, 25, HIGHLANDS_FOREST_KEY);
@@ -62,11 +63,13 @@ public class MoaRaces {
         registerSpawning(MINTGRASS, 45, HIGHLANDS_THICKET_KEY);
 
         registerSpawning(STRAWBERRY_WISTAR, 45, WISTERIA_WOODS_KEY);
-        registerSpawning(BLACKCURRANT_WISTAR, 29, WISTERIA_WOODS_KEY); //New, spawns here because fits nice with biome colors
+        registerSpawning(BLACKCURRANT_WISTAR, 29, WISTERIA_WOODS_KEY);
 
-        registerSpawning(GREYHOUND, 15, HIGHLANDS_PLAINS_KEY); //New, spawns on plains because it runs fast
+        registerSpawning(GREYHOUND, 15, AUTUMNAL_TUNDRA_KEY);
+        registerSpawning(GREYHOUND, 15, CONTINENTAL_PLATEAU_KEY);
 
-        registerSpawning(FROSTGRASS, 10, AUTUMNAL_TUNDRA_KEY); //New, Tundra boye
+        registerSpawning(FROSTGRASS, 10, AUTUMNAL_TUNDRA_KEY);
+        registerSpawning(FROSTGRASS, 10, CONTINENTAL_PLATEAU_KEY);
 
         registerSpawning(TANGERINE, 15, HIGHLANDS_FOREST_KEY);
         registerSpawning(TANGERINE, 45, HIGHLANDS_THICKET_KEY);
@@ -81,7 +84,8 @@ public class MoaRaces {
         registerSpawning(REDHOOD, 5, HIGHLANDS_THICKET_KEY);
         registerBreeding(REDHOOD, 0.2F, FOXTROT, HIGHLANDS_BLUE);
 
-        registerBreeding(GREENSEED, 0.1F, SCARLET, MINTGRASS); //New
+        registerBreeding(GREENSEED, 0.33F, SCARLET, MINTGRASS);
+        registerBreeding(AQUILAN, 0.2F, REDHOOD, FOXTROT);
 
         Predicate<MoaBreedingContext> moonstruckRequirements = ctx -> ctx.world().isNight() && ctx.world().getRandom().nextFloat() <= 0.25F;
 
