@@ -340,6 +340,10 @@
   "item.paradise_lost.mother_aurel_chest_boat": "Mother Aurel Boat with Chest",
   "item.paradise_lost.orange_chest_boat": "Orange Boat with Chest",
   "item.paradise_lost.wisteria_chest_boat": "Wisteria Boat with Chest",
+  
+  "item.minecraft.potion.effect.health_boost": "Potion of Endurance",
+  "item.minecraft.splash_potion.effect.health_boost": "Splash Potion of Endurance",
+  "item.minecraft.lingering_potion.effect.health_boost": "Lingering Potion of Endurance",
 
 
   "death.attack.fall": "%1$s plummeted from the heavens",

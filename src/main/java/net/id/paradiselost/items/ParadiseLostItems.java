@@ -16,10 +16,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.component.type.FoodComponent;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
+import net.minecraft.potion.Potion;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -478,6 +481,15 @@ public class ParadiseLostItems {
     public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, ORANGE_BOATS, WISTERIA_BOATS};
 
 
+    public static final RegistryEntry<Potion> HEALTH_BOOST_POTION = registerPotion("health_boost", new Potion(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 6000, 1)));
+    public static final RegistryEntry<Potion> LONG_HEALTH_BOOST_POTION = registerPotion(
+            "long_health_boost", new Potion("health_boost", new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 12000, 1))
+    );
+    public static final RegistryEntry<Potion> STRONG_HEALTH_BOOST_POTION = registerPotion(
+            "strong_health_boost", new Potion("health_boost", new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 3000, 3))
+    );
+
+
     public static void init() {
     }
 
@@ -536,5 +548,9 @@ public class ParadiseLostItems {
         public @NotNull Iterator<Item> iterator() {
             return Arrays.stream(new Item[]{boat, chestBoat}).iterator();
         }
+    }
+
+    private static RegistryEntry<Potion> registerPotion(String name, Potion potion) {
+        return Registry.registerReference(Registries.POTION, locate(name), potion);
     }
 }

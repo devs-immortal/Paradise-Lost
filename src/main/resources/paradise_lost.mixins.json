@@ -25,6 +25,7 @@
     "item.ItemMixin",
     "item.MapStateMixin",
     "item.PotionItemMixin",
+    "potion.BrewingRecipeRegistryMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayerEntityMixin",
