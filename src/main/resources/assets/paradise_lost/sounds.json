@@ -172,6 +172,17 @@
     ],
     "subtitle": "subtitles.paradise_lost.entity.moa.step"
   },
+  
+  "entity.popom.harvest": {
+    "sounds": [
+      {
+        "name": "block.honey_block.fall",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.popom.harvest"
+  },
+  
   "entity.nitra.throw": {
     "sounds": [
       {

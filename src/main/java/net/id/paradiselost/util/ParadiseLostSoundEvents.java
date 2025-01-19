@@ -40,6 +40,7 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_POPOM_AMBIENT = register(("entity.popom.ambient"));
     public static final SoundEvent ENTITY_POPOM_HURT = register(("entity.popom.hurt"));
     public static final SoundEvent ENTITY_POPOM_DEATH = register(("entity.popom.death"));
+    public static final SoundEvent ENTITY_POPOM_HARVEST = register(("entity.popom.harvest"));
 
 
     public static final SoundEvent ENTITY_ENVOY_AMBIENT = register(("entity.envoy.ambient"));

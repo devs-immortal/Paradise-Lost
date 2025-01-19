@@ -243,8 +243,8 @@
 
   "entity.paradise_lost.floating_block": "Floating Block",
   "entity.paradise_lost.moa": "Moa",
+  "entity.paradise_lost.popom": "Popom",
   "entity.paradise_lost.envoy": "Envoy",
-  "entity.paradise_list.popom": "Popom",
 
   "item.paradise_lost.golden_amber": "Golden Amber",
   "item.paradise_lost.cherine": "Cherine Shard",
@@ -389,16 +389,6 @@
   "commands.paradise_lost.moastat.print": "%1$s = %2$s",
   "commands.paradise_lost.moastat.set": "Set %1$s to %2$s",
 
-  "subtitles.paradise_lost.entity.moa.ambient": "Moa chirps",
-  "subtitles.paradise_lost.entity.moa.ambient.sing": "Moa sings",
-  "subtitles.paradise_lost.entity.moa.gliding": "Moa flaps",
-  "subtitles.paradise_lost.entity.moa.death": "Moa dies",
-  "subtitles.paradise_lost.entity.moa.hurt": "Moa hurts",
-  "subtitles.paradise_lost.entity.moa.eat": "Moa eats",
-  "subtitles.paradise_lost.entity.moa.lay_egg": "Moa lays egg",
-  "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
-  "subtitles.paradise_lost.entity.moa.step": "Moa walks",
-
   "commands.paradise_lost.gravitate.failure": "Couldn't float the block(s)",
   "commands.paradise_lost.gravitate.success": "Successfully floated the block(s)",
 
@@ -421,6 +411,18 @@
   "subtitles.paradise_lost.block.orange_leaves.drop_fruit": "Orange leaves drop fruit",
   "subtitles.paradise_lost.block.orange_leaves.break_differently": "Orange leaves broken",
 
+
+  "subtitles.paradise_lost.entity.moa.ambient": "Moa chirps",
+  "subtitles.paradise_lost.entity.moa.ambient.sing": "Moa sings",
+  "subtitles.paradise_lost.entity.moa.gliding": "Moa flaps",
+  "subtitles.paradise_lost.entity.moa.death": "Moa dies",
+  "subtitles.paradise_lost.entity.moa.hurt": "Moa hurts",
+  "subtitles.paradise_lost.entity.moa.eat": "Moa eats",
+  "subtitles.paradise_lost.entity.moa.lay_egg": "Moa lays egg",
+  "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
+  "subtitles.paradise_lost.entity.moa.step": "Moa walks",
+  
+  "subtitles.paradise_lost.entity.popom.harvest": "Popom Squelches",
 
   "subtitles.paradise_lost.entity.envoy.ambient": "Envoy rattles",
   "subtitles.paradise_lost.entity.envoy.step": "Envoy walks",
