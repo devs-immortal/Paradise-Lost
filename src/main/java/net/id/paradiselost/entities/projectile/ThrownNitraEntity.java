@@ -56,6 +56,16 @@ public class ThrownNitraEntity extends ThrownItemEntity {
     }
 
     @Override
+    public boolean isOnFire() {
+        return true;
+    }
+
+    @Override
+    public boolean doesRenderOnFire() {
+        return false;
+    }
+
+    @Override
     protected Item getDefaultItem() {
         return ParadiseLostItems.NITRA_BULB;
     }

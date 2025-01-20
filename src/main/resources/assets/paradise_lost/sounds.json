@@ -219,10 +219,10 @@
   },
   "entity.nitra.explode": {
     "sounds": [
-      {
-        "name": "entity.generic.explode",
-        "type": "event"
-      }
+      "paradise_lost:entity/nitra/nitra_1",
+      "paradise_lost:entity/nitra/nitra_2",
+      "paradise_lost:entity/nitra/nitra_3",
+      "paradise_lost:entity/nitra/nitra_4"
     ],
     "subtitle": "subtitles.paradise_lost.entity.nitra.explode"
   },

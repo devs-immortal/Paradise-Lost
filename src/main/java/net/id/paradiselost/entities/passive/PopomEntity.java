@@ -80,7 +80,7 @@ public class PopomEntity extends AnimalEntity {
 
     @Override
     protected float getSoundVolume() {
-        return 0.3F;
+        return 0.5F;
     }
 
     @Override

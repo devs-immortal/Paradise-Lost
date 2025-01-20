@@ -10,6 +10,7 @@ import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,7 +33,8 @@ public abstract class WorldRendererMixin {
     public void processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
         Random random = this.world.random;
         if (eventId == ParadiseLostEvents.NITRA_EXPLODE) {
-            this.world.playSoundAtBlockCenter(pos, ParadiseLostSoundEvents.ENTITY_NITRA_EXPLODE, SoundCategory.NEUTRAL, 0.3F, 1.1F + random.nextFloat() * 0.4F, false);
+            this.world.playSoundAtBlockCenter(pos, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.NEUTRAL, 0.3F, 1.0F + random.nextFloat() * 0.4F, false);
+            this.world.playSoundAtBlockCenter(pos, ParadiseLostSoundEvents.ENTITY_NITRA_EXPLODE, SoundCategory.NEUTRAL, 2.0F, 0.5F + random.nextFloat() * 0.4F, false);
             for (int i = 0; i < 4; i++) {
                 this.addParticle(ParticleTypes.CLOUD,
                         pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), pos.getZ() + random.nextDouble(),
