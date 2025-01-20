@@ -6,11 +6,13 @@
 
 ### What is Paradise Lost?
 
-Paradise Lost is a Skylands Dimension mod, inspired by the legendary Aether mod and looking to provide fresh adventures and fun mechanics to explore.
+Paradise Lost is a Skylands Dimension mod, inspired by the legendary Aether mod and looking to provide fresh adventures and fun mechanics to explore. Build a frame out of Bloomed Calcite, flood it with water and step through to Paradise...
 
-Paradise Lost is designed to fit seamlessly with Vanilla progression and style, becoming accessible after players have explored both the Overworld and Nether. Many blocks and items can be found in and derived from resources in Paradise to be used for function and fun. Unique structures can be found with custom mobs for players to fight and loot to be had.
+Build a cozy home in the sky, forage in new biomes for plants and resources, or go adventuring through expansive structures with unique rewards!
 
-You can download the mod on [Modrinth](https://modrinth.com/mod/paradise-lost), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
+Paradise Lost is designed to fit seamlessly with Vanilla progression and style, becoming accessible after players have explored both the Overworld and Nether. Paradise is home to new mobs, new resources, and many functional and decorative blocks. Unique structures can be discovered and explored where players can discover new equipment, valuables, and more!
+
+You can find the mod on [Modrinth](https://modrinth.com/mod/paradise-lost), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paradise-lost), or in the [releases tab](https://github.com/devs-immortal/Paradise-Lost/releases) on Github.
 
 **Soundtrack:** [Aether Reborn - Volume 1](https://sunsette.bandcamp.com/album/aether-reborn-volume-1)
 
@@ -29,10 +31,11 @@ Paradise Lost makes use of crowd sourced translations.
 
 ## Gallery
 
-| <img src="https://immortaldevs.net/2024-05-05_13.00.26.png" width="570"> | <img src="https://immortaldevs.net/2024-05-05_12.56.59.png" width="570"> |
+| ![2025-01-19_22 46 12](https://github.com/user-attachments/assets/8f977cbc-4585-4d4e-9ae7-279b59f49db5) | ![2025-01-19_22 48 46](https://github.com/user-attachments/assets/0c554f81-1d22-4851-89c3-28a4ca6a5f1b) |
 | --- | --- |
-| <img src="https://immortaldevs.net/2024-05-05_12.24.35.png" width="570"> | <img src="https://immortaldevs.net/2024-05-05_12.22.24.png" width="570"> |
-| <img src="https://immortaldevs.net/2024-05-05_13.04.22.png" width="570"> | <img src="https://immortaldevs.net/2024-05-05_13.04.12.png" width="570"> |
+| ![2025-01-19_22 49 44](https://github.com/user-attachments/assets/143c6699-89c4-4ba8-8a87-1806479bf1e9) | ![2025-01-19_22 59 46](https://github.com/user-attachments/assets/8380bd73-4abb-4ce4-8f5b-8a50b0ea4eba) |
+| ![2025-01-19_22 56 09](https://github.com/user-attachments/assets/af3f2b29-ce61-4b76-84aa-82e907052b5c) | ![2025-01-19_22 52 08](https://github.com/user-attachments/assets/f2bd7e7c-07d8-497a-a874-7b9649b68558) |
+
 
 ## License information
 Created by Immortal Devs.\
