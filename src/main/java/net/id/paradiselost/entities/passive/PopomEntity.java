@@ -165,7 +165,7 @@ public class PopomEntity extends AnimalEntity {
 
     public float getHeadAngle(float delta) {
         if (this.eatingTimer > 4 && this.eatingTimer <= 36) {
-            float f = ((float)(this.eatingTimer - 4) - delta) / 32.0F;
+            float f = ((float) (this.eatingTimer - 4) - delta) / 32.0F;
             return (float) (Math.PI / 5) + 0.21991149F * MathHelper.sin(f * 28.7F);
         } else {
             return this.eatingTimer > 0 ? (float) (Math.PI / 5) : this.getPitch() * (float) (Math.PI / 180.0);
@@ -181,7 +181,7 @@ public class PopomEntity extends AnimalEntity {
     }
 
     public void eat() {
-        this.setFurSize(getFurSize()+1);
+        this.setFurSize(getFurSize() + 1);
     }
 
     static {
