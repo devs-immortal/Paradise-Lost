@@ -1,5 +1,5 @@
 # Paradise Lost
-![header](https://github.com/user-attachments/assets/65d3e75e-23f7-4fc9-a0c7-c8d28ab0736f)
+![header](https://github.com/user-attachments/assets/66317400-dc89-4c54-bd1b-834458f21d07)
 
 [![Discord](https://img.shields.io/discord/770691727568404521.svg?logoColor=FFFFFF&logo=discord&color=7289DA)](https://discord.com/invite/wmMa47n)
 [![Code license (MIT)](https://img.shields.io/github/license/devs-immortal/Paradise-Lost)](https://github.com/devs-immortal/Paradise-Lost/blob/0.2.0/1.19/master/LICENSE.md)
