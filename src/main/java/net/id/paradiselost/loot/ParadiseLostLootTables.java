@@ -9,6 +9,10 @@ import static net.id.paradiselost.ParadiseLost.locate;
 public class ParadiseLostLootTables {
     public static final RegistryKey<LootTable> MOTHER_AUREL_STRIPPING = register("gameplay/mother_aurel_log_strip");
 
+    public static final RegistryKey<LootTable> POPOM_JELLY_LEVEL_0 = register("entities/popom/jelly_0");
+    public static final RegistryKey<LootTable> POPOM_JELLY_LEVEL_2 = register("entities/popom/jelly_2");
+    public static final RegistryKey<LootTable> POPOM_JELLY_LEVEL_3 = register("entities/popom/jelly_3");
+
 
     public ParadiseLostLootTables() {
     }

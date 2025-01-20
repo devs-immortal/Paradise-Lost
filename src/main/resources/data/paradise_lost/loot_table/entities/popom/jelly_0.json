@@ -1,0 +1,48 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 3
+      },
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:white_wool",
+          "weight": 4,
+          "functions": []
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:magenta_wool",
+          "weight": 1,
+          "functions": []
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:popom_jelly",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": -1,
+                "max": 1
+              },
+              "add": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

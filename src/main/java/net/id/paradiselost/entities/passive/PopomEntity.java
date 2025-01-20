@@ -3,6 +3,7 @@ package net.id.paradiselost.entities.passive;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.ai.EatFlowersGoal;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.loot.ParadiseLostLootTables;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
@@ -25,7 +26,9 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootTable;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -182,6 +185,15 @@ public class PopomEntity extends AnimalEntity {
 
     public void eat() {
         this.setFurSize(getFurSize() + 1);
+    }
+
+    @Override
+    public RegistryKey<LootTable> getLootTableId() {
+        return switch (this.getFurSize()) {
+            case 2 -> ParadiseLostLootTables.POPOM_JELLY_LEVEL_2;
+            case 3 -> ParadiseLostLootTables.POPOM_JELLY_LEVEL_3;
+            default -> ParadiseLostLootTables.POPOM_JELLY_LEVEL_0;
+        };
     }
 
     static {
