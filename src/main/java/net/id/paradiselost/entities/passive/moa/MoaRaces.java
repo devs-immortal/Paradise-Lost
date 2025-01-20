@@ -85,7 +85,7 @@ public class MoaRaces {
         registerBreeding(REDHOOD, 0.2F, FOXTROT, HIGHLANDS_BLUE);
 
         registerBreeding(GREENSEED, 0.33F, SCARLET, MINTGRASS);
-        registerBreeding(AQUILAN, 0.2F, REDHOOD, FOXTROT);
+        registerBreeding(AQUILAN, 0.2F, GREYHOUND, FROSTGRASS);
 
         Predicate<MoaBreedingContext> moonstruckRequirements = ctx -> ctx.world().isNight() && ctx.world().getRandom().nextFloat() <= 0.25F;
 

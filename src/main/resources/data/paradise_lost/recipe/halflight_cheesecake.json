@@ -1,25 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
+    "PPP",
     "AAA",
-    "BEB",
     "CCC"
   ],
   "key": {
     "A": {
       "tag": "c:buckets/milk"
     },
-    "B": {
-      "item": "minecraft:sugar"
+    "P": {
+      "item": "paradise_lost:popom_jelly"
     },
     "C": {
-      "item": "minecraft:wheat"
-    },
-    "E": {
-      "item": "minecraft:egg"
+      "item": "paradise_lost:amadrys_bushel"
     }
   },
   "result": {
-    "id": "minecraft:cake"
+    "id": "paradise_lost:halflight_cheesecake"
   }
 }

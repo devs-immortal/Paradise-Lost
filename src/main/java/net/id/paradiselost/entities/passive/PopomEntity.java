@@ -3,14 +3,11 @@ package net.id.paradiselost.entities.passive;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.ai.EatFlowersGoal;
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.tag.ParadiseLostItemTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
-import net.minecraft.client.render.entity.SheepEntityRenderer;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
-import net.minecraft.entity.ai.goal.EatGrassGoal;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -20,27 +17,23 @@ import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 public class PopomEntity extends AnimalEntity {
@@ -77,10 +70,15 @@ public class PopomEntity extends AnimalEntity {
     protected SoundEvent getAmbientSound() {
         return ParadiseLostSoundEvents.ENTITY_POPOM_AMBIENT;
     }
-/*    @Override
-    protected SoundEvent getHurtSound(DamageSource source) {
-        return ParadiseLostSoundEvents.ENTITY_POPOM_HURT;
-    }*/
+
+    protected void playHurtSound(DamageSource damageSource) {
+        this.playSound(ParadiseLostSoundEvents.ENTITY_POPOM_HURT, this.getSoundVolume(), this.getSoundPitch() + 0.3F);
+    }
+
+    @Override
+    protected float getSoundVolume() {
+        return 0.3F;
+    }
 
     @Override
     protected SoundEvent getDeathSound() {

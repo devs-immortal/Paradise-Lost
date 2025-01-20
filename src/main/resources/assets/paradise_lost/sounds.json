@@ -173,6 +173,31 @@
     "subtitle": "subtitles.paradise_lost.entity.moa.step"
   },
   
+  "entity.popom.ambient": {
+    "sounds": [
+      "paradise_lost:entity/passive/popom/popom_ambient_1",
+      "paradise_lost:entity/passive/popom/popom_ambient_2",
+      "paradise_lost:entity/passive/popom/popom_ambient_3",
+      "paradise_lost:entity/passive/popom/popom_ambient_4",
+      "paradise_lost:entity/passive/popom/popom_ambient_5",
+      "paradise_lost:entity/passive/popom/popom_ambient_6"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.popom.ambient"
+  },
+  "entity.popom.hurt": {
+    "sounds": [
+      "paradise_lost:entity/passive/popom/popom_death_1",
+      "paradise_lost:entity/passive/popom/popom_death_2"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.popom.hurt"
+  },
+  "entity.popom.death": {
+    "sounds": [
+      "paradise_lost:entity/passive/popom/popom_death_1",
+      "paradise_lost:entity/passive/popom/popom_death_2"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.popom.death"
+  },
   "entity.popom.harvest": {
     "sounds": [
       {
@@ -191,6 +216,15 @@
       }
     ],
     "subtitle": "subtitles.paradise_lost.entity.nitra.throw"
+  },
+  "entity.nitra.explode": {
+    "sounds": [
+      {
+        "name": "entity.generic.explode",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.nitra.explode"
   },
   "entity.envoy.ambient": {
     "sounds": [

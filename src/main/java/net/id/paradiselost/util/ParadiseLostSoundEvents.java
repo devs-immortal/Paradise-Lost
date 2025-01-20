@@ -57,6 +57,7 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MINECART_ROLLING_LEVITATING = register(("entity.minecart.rolling_levitating"));
 
     public static final SoundEvent ENTITY_NITRA_THROW = register("entity.nitra.throw");
+    public static final SoundEvent ENTITY_NITRA_EXPLODE = register("entity.nitra.explode");
 
     public static final SoundEvent MUSIC_PARADISE_LOST = register("music.paradise");
 

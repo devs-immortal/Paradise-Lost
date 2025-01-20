@@ -428,7 +428,10 @@
   "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
   "subtitles.paradise_lost.entity.moa.step": "Moa walks",
   
-  "subtitles.paradise_lost.entity.popom.harvest": "Popom Squelches",
+  "subtitles.paradise_lost.entity.popom.ambient": "Popom peeps",
+  "subtitles.paradise_lost.entity.popom.hurt": "Popom hurts",
+  "subtitles.paradise_lost.entity.popom.death": "Popom dies",
+  "subtitles.paradise_lost.entity.popom.harvest": "Popom squelches",
 
   "subtitles.paradise_lost.entity.envoy.ambient": "Envoy rattles",
   "subtitles.paradise_lost.entity.envoy.step": "Envoy walks",
@@ -443,8 +446,8 @@
   "subtitles.paradise_lost.entity.minecart.inside_levitating": "Minecart twinkles",
   "subtitles.paradise_lost.entity.minecart.rolling_levitating": "Minecart twinkles",
 
-
-  "subtitles.paradise_lost.entity.nitra.throw": "Nitra Flies",
+  "subtitles.paradise_lost.entity.nitra.throw": "Nitra flies",
+  "subtitles.paradise_lost.entity.nitra.explode": "Nitra pops",
 
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",
@@ -456,7 +459,7 @@
   "filled_map.paradise_lost.vault": "Vault Explorer Map",
   
   
-  "gamerule.paradiseVoidKills": "Paradise Lost's void kills players",
+  "gamerule.paradiseVoidKills": "Paradise's void kills players",
 
 
   "tag.item.paradise_lost.aurel_logs": "Aurel Logs",
