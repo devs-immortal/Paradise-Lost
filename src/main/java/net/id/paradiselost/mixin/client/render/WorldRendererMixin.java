@@ -33,7 +33,7 @@ public abstract class WorldRendererMixin {
     public void processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
         Random random = this.world.random;
         if (eventId == ParadiseLostEvents.NITRA_EXPLODE) {
-            this.world.playSoundAtBlockCenter(pos, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.NEUTRAL, 0.3F, 1.0F + random.nextFloat() * 0.4F, false);
+            this.world.playSoundAtBlockCenter(pos, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.NEUTRAL, 0.2F, 1.0F + random.nextFloat() * 0.4F, false);
             this.world.playSoundAtBlockCenter(pos, ParadiseLostSoundEvents.ENTITY_NITRA_EXPLODE, SoundCategory.NEUTRAL, 2.0F, 0.5F + random.nextFloat() * 0.4F, false);
             for (int i = 0; i < 4; i++) {
                 this.addParticle(ParticleTypes.CLOUD,
