@@ -1,4 +1,6 @@
 # Paradise Lost
+![header](https://github.com/user-attachments/assets/66317400-dc89-4c54-bd1b-834458f21d07)
+
 [![Discord](https://img.shields.io/discord/770691727568404521.svg?logoColor=FFFFFF&logo=discord&color=7289DA)](https://discord.com/invite/wmMa47n)
 [![Code license (MIT)](https://img.shields.io/github/license/devs-immortal/Paradise-Lost)](https://github.com/devs-immortal/Paradise-Lost/blob/0.2.0/1.19/master/LICENSE.md)
 [![Asset license (Unlicensed)](https://img.shields.io/badge/assets%20license-All%20Rights%20Reserved-red.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
