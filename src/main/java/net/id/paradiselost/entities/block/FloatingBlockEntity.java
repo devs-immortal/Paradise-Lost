@@ -82,9 +82,9 @@ public class FloatingBlockEntity extends BlockLikeEntity {
     
     @Override
     public boolean shouldCease() {
-        return super.shouldCease()
+        return !this.getWorld().isClient && (super.shouldCease()
                || (this.isOnGround() && (this.isDropping() || this.getVelocity().getY() == 0)
-                   || (this.verticalCollision && !this.isOnGround()));
+                   || (this.verticalCollision && !this.isOnGround())));
     }
     
     public Supplier<Boolean> getDropState() {

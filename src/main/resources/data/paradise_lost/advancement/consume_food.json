@@ -63,6 +63,14 @@
         }
       }
     },
+    "swatgredfil": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:amadrys_bread_glazed_filled"]
+        }
+      }
+    },
     "groot": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -86,6 +94,14 @@
           "items": ["paradise_lost:moa_meat_cooked"]
         }
       }
+    },
+    "geli": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["paradise_lost:popom_jelly"]
+        }
+      }
     }
   },
   "requirements": [
@@ -96,9 +112,11 @@
       "modles",
       "gred",
       "swatgred",
+      "swatgredfil",
       "groot",
       "mert",
-      "cokmert"
+      "cokmert",
+      "geli"
     ]
   ],
   "parent": "paradise_lost:root"
