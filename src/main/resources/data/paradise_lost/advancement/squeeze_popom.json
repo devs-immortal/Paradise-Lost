@@ -1,0 +1,40 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.paradise_lost.squeeze_popom.title"
+    },
+    "description": {
+      "translate": "advancements.paradise_lost.squeeze_popom.description"
+    },
+    "icon": {
+      "id": "paradise_lost:popom_jelly"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "squeeze": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "paradise_lost:popom"
+            }
+          }
+        ],
+        "item": {}
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "requirements": [
+    [
+      "squeeze"
+    ]
+  ],
+  "parent": "paradise_lost:root"
+}
