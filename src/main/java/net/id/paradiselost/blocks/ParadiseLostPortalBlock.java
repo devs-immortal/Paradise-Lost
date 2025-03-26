@@ -6,11 +6,14 @@ import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.kyrptonaught.customportalapi.CustomPortalBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+
+import static net.id.paradiselost.world.ParadiseLostGameRules.PARADISE_PORTAL_ENABLED;
 
 public class ParadiseLostPortalBlock extends CustomPortalBlock {
     public ParadiseLostPortalBlock(Settings settings) {
@@ -44,6 +47,13 @@ public class ParadiseLostPortalBlock extends CustomPortalBlock {
             world.addParticle(ParticleTypes.DRIPPING_WATER, d, e, f, g, h, j);
         else
             world.addParticle(ParticleTypes.CLOUD, d, e, f, 0, 0, 0);
+    }
+
+    @Override
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        if (world.getGameRules().getBoolean(PARADISE_PORTAL_ENABLED)) {
+            super.onEntityCollision(state, world, pos, entity);
+        }
     }
 
     @Override
