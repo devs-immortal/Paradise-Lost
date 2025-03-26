@@ -11,6 +11,7 @@
     "brain.ActivityInvoker",
     "brain.MemoryModuleTypeInvoker",
     "brain.SensorTypeInvoker",
+    "cpa.PortalPlacerMixin",
     "enchantment.EnchantmentHelperMixin",
     "entity.AbstractMinecartEntityMixin",
     "entity.BoatEntityMixin",

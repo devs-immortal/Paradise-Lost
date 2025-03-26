@@ -10,6 +10,7 @@ public class ParadiseLostGameRules {
     }
 
     public static final GameRules.Key<GameRules.BooleanRule> PARADISE_VOID_KILLS = GameRuleRegistry.register("paradiseVoidKills", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
+    public static final GameRules.Key<GameRules.BooleanRule> PARADISE_PORTAL_ENABLED = GameRuleRegistry.register("paradisePortalEnabled", GameRules.Category.UPDATES, GameRuleFactory.createBooleanRule(true));
 
 
 }
