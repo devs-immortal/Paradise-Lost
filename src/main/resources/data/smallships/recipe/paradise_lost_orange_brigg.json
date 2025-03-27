@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "brigg",
+  "pattern": [
+    "sls",
+    "bbb"
+  ],
+  "key": {
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "s": {
+      "item": "smallships:sail"
+    },
+    "b": {
+      "item": "paradise_lost:orange_chest_boat"
+    }
+  },
+  "result": {
+    "id": "smallships:paradise_lost_orange_brigg"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "smallships"
+      ]
+    }
+  ]
+}

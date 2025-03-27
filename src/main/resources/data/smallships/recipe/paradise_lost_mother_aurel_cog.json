@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "cog",
+  "pattern": [
+    "lsl",
+    "bbb"
+  ],
+  "key": {
+    "s": {
+      "item": "smallships:sail"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "b": {
+      "item": "paradise_lost:mother_aurel_boat"
+    }
+  },
+  "result": {
+    "id": "smallships:paradise_lost_mother_aurel_cog"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "smallships"
+      ]
+    }
+  ]
+}
