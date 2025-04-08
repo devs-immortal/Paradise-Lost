@@ -28,24 +28,35 @@ import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 public class AurelBucketItem extends Item implements FluidModificationItem {
-    private final Fluid containedBlock;
+    private final Fluid containedFluid;
+    private final Block containedBlock;
 
     public AurelBucketItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
-        this.containedBlock = Fluids.EMPTY;
+        this.containedFluid = Fluids.EMPTY;
+        this.containedBlock = null;
     }
 
     public AurelBucketItem(Fluid containedFluidIn, net.minecraft.item.Item.Settings settings) {
         super(settings);
-        this.containedBlock = containedFluidIn;
+        this.containedFluid = containedFluidIn;
+        this.containedBlock = null;
+    }
+
+    public AurelBucketItem(Block containedBlockIn, net.minecraft.item.Item.Settings settings) {
+        super(settings);
+        this.containedFluid = null;
+        this.containedBlock = containedBlockIn;
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack currentStack = playerIn.getStackInHand(handIn);
-        BlockHitResult hitResult = raycast(worldIn, playerIn, this.containedBlock == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
+        BlockHitResult hitResult = raycast(worldIn, playerIn, this.containedFluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
 
-        if (currentStack.getItem() != ParadiseLostItems.AUREL_WATER_BUCKET && currentStack.getItem() != ParadiseLostItems.AUREL_BUCKET) {
+        if (currentStack.getItem() != ParadiseLostItems.AUREL_WATER_BUCKET &&
+                currentStack.getItem() != ParadiseLostItems.AUREL_BUCKET &&
+                currentStack.getItem() != ParadiseLostItems.AUREL_POWDER_SNOW_BUCKET) {
             playerIn.setCurrentHand(handIn);
             return new TypedActionResult<>(ActionResult.PASS, currentStack);
         }
@@ -56,17 +67,22 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
             BlockPos hitPos = hitResult.getBlockPos();
 
             if (worldIn.canPlayerModifyAt(playerIn, hitPos) && playerIn.canPlaceOn(hitPos, hitResult.getSide(), currentStack)) {
-                if (this.containedBlock == Fluids.EMPTY) {
+                if (this.containedFluid == Fluids.EMPTY) {
                     BlockState hitState = worldIn.getBlockState(hitPos);
 
                     if (hitState.getBlock() instanceof FluidDrainable) {
-                        Fluid fluid = (hitState.getFluidState().getFluid());
-
-                        if (fluid == Fluids.WATER) {
+                        if (hitState.getFluidState().getFluid() == Fluids.WATER) {
                             ((FluidDrainable) hitState.getBlock()).tryDrainFluid(playerIn, worldIn, hitPos, hitState);
                             playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                             playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
                             ItemStack fillStack = this.fillBucket(currentStack, playerIn, ParadiseLostItems.AUREL_WATER_BUCKET);
+
+                            return new TypedActionResult<>(ActionResult.SUCCESS, fillStack);
+                        } else if (hitState.isOf(Blocks.POWDER_SNOW)) {
+                            ((FluidDrainable) hitState.getBlock()).tryDrainFluid(playerIn, worldIn, hitPos, hitState);
+                            playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
+                            playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL_POWDER_SNOW, 1.0F, 1.0F);
+                            ItemStack fillStack = this.fillBucket(currentStack, playerIn, ParadiseLostItems.AUREL_POWDER_SNOW_BUCKET);
 
                             return new TypedActionResult<>(ActionResult.SUCCESS, fillStack);
                         }
@@ -147,14 +163,24 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
     }
 
     public boolean placeLiquid(PlayerEntity playerIn, World worldIn, BlockPos posIn, BlockHitResult hitResult) {
-        if (!(this.containedBlock instanceof FlowableFluid)) {
+        if (this.containedBlock != null) {
+            if (worldIn.isInBuildLimit(posIn) && worldIn.getBlockState(posIn).isReplaceable()) {
+                if (!worldIn.isClient) {
+                    worldIn.setBlockState(posIn, this.containedBlock.getDefaultState(), Block.NOTIFY_ALL);
+                }
+                this.playEmptyingSound(playerIn, worldIn, posIn, SoundEvents.ITEM_BUCKET_EMPTY_POWDER_SNOW);
+                return true;
+            } else {
+                return false;
+            }
+        } else if (!(this.containedFluid instanceof FlowableFluid)) {
             return false;
         } else {
             BlockState stateIn = worldIn.getBlockState(posIn);
             boolean flag = !stateIn.isSolid();
             boolean flag1 = stateIn.isReplaceable();
 
-            if (worldIn.isAir(posIn) || flag || flag1 || stateIn.getBlock() instanceof FluidFillable && ((FluidFillable) stateIn.getBlock()).canFillWithFluid(playerIn, worldIn, posIn, stateIn, this.containedBlock)) {
+            if (worldIn.isAir(posIn) || flag || flag1 || stateIn.getBlock() instanceof FluidFillable && ((FluidFillable) stateIn.getBlock()).canFillWithFluid(playerIn, worldIn, posIn, stateIn, this.containedFluid)) {
                 if (worldIn.getRegistryKey().equals(World.NETHER)) {
                     int i = posIn.getX();
                     int j = posIn.getY();
@@ -165,16 +191,16 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
                         worldIn.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0D, 0.0D, 0.0D);
                     }
                 } else if (stateIn.getBlock() instanceof FluidFillable) {
-                    if (((FluidFillable) stateIn.getBlock()).tryFillWithFluid(worldIn, posIn, stateIn, ((FlowableFluid) this.containedBlock).getStill(false))) {
-                        this.playEmptyingSound(playerIn, worldIn, posIn);
+                    if (((FluidFillable) stateIn.getBlock()).tryFillWithFluid(worldIn, posIn, stateIn, ((FlowableFluid) this.containedFluid).getStill(false))) {
+                        this.playEmptyingSound(playerIn, worldIn, posIn, SoundEvents.ITEM_BUCKET_EMPTY);
                     }
                 } else {
                     if (!worldIn.isClient && (flag || flag1) && !stateIn.isLiquid()) {
                         worldIn.breakBlock(posIn, true);
                     }
 
-                    this.playEmptyingSound(playerIn, worldIn, posIn);
-                    worldIn.setBlockState(posIn, this.containedBlock.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
+                    this.playEmptyingSound(playerIn, worldIn, posIn, SoundEvents.ITEM_BUCKET_EMPTY);
+                    worldIn.setBlockState(posIn, this.containedFluid.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
                 }
 
                 return true;
@@ -184,8 +210,7 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
         }
     }
 
-    protected void playEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos) {
-        SoundEvent soundEvent = SoundEvents.ITEM_BUCKET_EMPTY;
+    protected void playEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, SoundEvent soundEvent) {
         world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
         world.emitGameEvent(player, GameEvent.FLUID_PLACE, pos);
     }
@@ -242,7 +267,7 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
             if (block instanceof FluidFillable) {
                 fluidFillable = (FluidFillable) block;
                 fluidFillable.tryFillWithFluid(world, pos, blockState, Fluids.WATER.getStill(false));
-                this.playEmptyingSound(player, world, pos);
+                this.playEmptyingSound(player, world, pos, SoundEvents.ITEM_BUCKET_EMPTY);
                 return true;
             }
 
@@ -253,7 +278,7 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
             if (!world.setBlockState(pos, Fluids.WATER.getDefaultState().getBlockState(), 11) && !blockState.getFluidState().isStill()) {
                 return false;
             } else {
-                this.playEmptyingSound(player, world, pos);
+                this.playEmptyingSound(player, world, pos, SoundEvents.ITEM_BUCKET_EMPTY);
                 return true;
             }
         }

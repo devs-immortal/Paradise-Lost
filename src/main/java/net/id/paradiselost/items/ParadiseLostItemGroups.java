@@ -271,6 +271,7 @@ public class ParadiseLostItemGroups {
                 // misc
                 entries.add(AUREL_BUCKET);
                 entries.add(AUREL_WATER_BUCKET);
+                entries.add(AUREL_POWDER_SNOW_BUCKET);
                 entries.add(AUREL_MILK_BUCKET);
                 entries.add(NITRA_BULB);
                 // armor

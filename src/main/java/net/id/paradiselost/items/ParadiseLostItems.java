@@ -13,6 +13,7 @@ import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.component.type.FoodComponent;
@@ -205,6 +206,7 @@ public class ParadiseLostItems {
 
     private static final Settings aurelBucket = new Settings().maxCount(1).recipeRemainder(AUREL_BUCKET);
     public static final AurelBucketItem AUREL_WATER_BUCKET = add("aurel_water_bucket", new AurelBucketItem(Fluids.WATER, aurelBucket), emptiableBucketBehavior);
+    public static final AurelBucketItem AUREL_POWDER_SNOW_BUCKET = add("aurel_powder_snow_bucket", new AurelBucketItem(Blocks.POWDER_SNOW, aurelBucket), emptiableBucketBehavior);
     public static final AurelBucketItem AUREL_MILK_BUCKET = add("aurel_milk_bucket", new AurelBucketItem(aurelBucket));
 
     // Creative spawn eggs
