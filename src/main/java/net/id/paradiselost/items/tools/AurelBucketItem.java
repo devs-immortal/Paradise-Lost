@@ -54,9 +54,7 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
         ItemStack currentStack = playerIn.getStackInHand(handIn);
         BlockHitResult hitResult = raycast(worldIn, playerIn, this.containedFluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
 
-        if (currentStack.getItem() != ParadiseLostItems.AUREL_WATER_BUCKET &&
-                currentStack.getItem() != ParadiseLostItems.AUREL_BUCKET &&
-                currentStack.getItem() != ParadiseLostItems.AUREL_POWDER_SNOW_BUCKET) {
+        if (currentStack.getItem() == ParadiseLostItems.AUREL_MILK_BUCKET) {
             playerIn.setCurrentHand(handIn);
             return new TypedActionResult<>(ActionResult.PASS, currentStack);
         }
@@ -217,12 +215,11 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
 
     @Override
     public void onEmptied(@Nullable PlayerEntity player, World world, ItemStack stack, BlockPos pos) {
-        FluidModificationItem.super.onEmptied(player, world, stack, pos);
+
     }
 
     @Override
     public boolean placeFluid(@Nullable PlayerEntity player, World world, BlockPos pos, @Nullable BlockHitResult hitResult) {
-        FlowableFluid flowableFluid;
         Block block;
         boolean bl;
         FluidFillable fluidFillable;

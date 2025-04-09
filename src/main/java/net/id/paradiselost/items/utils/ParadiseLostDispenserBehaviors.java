@@ -1,11 +1,14 @@
 package net.id.paradiselost.items.utils;
 
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.FluidModificationItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
@@ -24,9 +27,35 @@ public class ParadiseLostDispenserBehaviors {
             FluidModificationItem fluidModificationItem = (FluidModificationItem) stack.getItem();
             BlockPos blockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
             World world = pointer.world();
-            if (fluidModificationItem.placeFluid(null, world, blockPos, null)) {
+            if (stack.isOf(ParadiseLostItems.AUREL_POWDER_SNOW_BUCKET)) {
+                if (world.isInBuildLimit(blockPos) && world.getBlockState(blockPos).isReplaceable()) {
+                    world.setBlockState(blockPos, Blocks.POWDER_SNOW.getDefaultState());
+                    return new ItemStack(ParadiseLostItems.AUREL_BUCKET);
+                }
+                return this.fallbackBehavior.dispense(pointer, stack);
+            } else if (fluidModificationItem.placeFluid(null, world, blockPos, null)) {
                 fluidModificationItem.onEmptied(null, world, stack, blockPos);
                 return new ItemStack(ParadiseLostItems.AUREL_BUCKET);
+            } else {
+                return this.fallbackBehavior.dispense(pointer, stack);
+            }
+        }
+    };
+
+    public static DispenserBehavior emptyBucket = new ItemDispenserBehavior() {
+        private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
+
+        @Override
+        public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+            BlockPos blockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
+            World world = pointer.world();
+            FluidState fluidState = world.getFluidState(blockPos);
+            if (fluidState.isOf(Fluids.WATER) && fluidState.isStill()) {
+                world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
+                return this.decrementStackWithRemainder(pointer, stack, new ItemStack(ParadiseLostItems.AUREL_WATER_BUCKET));
+            } else if (world.getBlockState(blockPos).isOf(Blocks.POWDER_SNOW)) {
+                world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
+                return this.decrementStackWithRemainder(pointer, stack, new ItemStack(ParadiseLostItems.AUREL_POWDER_SNOW_BUCKET));
             } else {
                 return this.fallbackBehavior.dispense(pointer, stack);
             }
@@ -49,23 +78,6 @@ public class ParadiseLostDispenserBehaviors {
             stack.decrement(1);
             pointer.world().emitGameEvent(null, GameEvent.ENTITY_PLACE, pointer.pos());
             return stack;
-        }
-    };
-
-    public static DispenserBehavior emptyBucket = new ItemDispenserBehavior() {
-        private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
-
-        @Override
-        public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-            FluidModificationItem fluidModificationItem = (FluidModificationItem) stack.getItem();
-            BlockPos blockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
-            World world = pointer.world();
-            if (fluidModificationItem.placeFluid(null, world, blockPos, null)) {
-                fluidModificationItem.onEmptied(null, world, stack, blockPos);
-                return this.decrementStackWithRemainder(pointer, stack, new ItemStack(ParadiseLostItems.AUREL_WATER_BUCKET));
-            } else {
-                return this.fallbackBehavior.dispense(pointer, stack);
-            }
         }
     };
 }
