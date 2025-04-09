@@ -1,7 +1,7 @@
 package net.id.paradiselost.entities.passive;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.tag.ParadiseLostBlockTags;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -16,7 +16,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-public class ParadiseLostAnimalEntity extends AnimalEntity {
+public abstract class ParadiseLostAnimalEntity extends AnimalEntity {
 
     protected ParadiseLostAnimalEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -27,12 +27,12 @@ public class ParadiseLostAnimalEntity extends AnimalEntity {
     }
 
     public static boolean isValidNaturalParadiseLostSpawn(EntityType<? extends ParadiseLostAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isOf(ParadiseLostBlocks.HIGHLANDS_GRASS) && world.getBaseLightLevel(pos, 0) > 8;
+        return world.getBlockState(pos.down()).isIn(ParadiseLostBlockTags.ANIMALS_PREFERRED) && world.getBaseLightLevel(pos, 0) > 8;
     }
 
     @Override
     public float getPathfindingFavor(BlockPos pos, WorldView worldIn) {
-        return worldIn.getBlockState(pos.down()).getBlock() == ParadiseLostBlocks.HIGHLANDS_GRASS ? 10.0F : worldIn.getLightLevel(pos) - 0.5F;
+        return worldIn.getBlockState(pos.down()).isIn(ParadiseLostBlockTags.ANIMALS_PREFERRED) ? 10.0F : worldIn.getLightLevel(pos) - 0.5F;
     }
 
     @Override

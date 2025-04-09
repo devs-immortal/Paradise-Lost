@@ -7,7 +7,7 @@ import net.minecraft.registry.tag.TagKey;
 
 public class ParadiseLostBlockTags {
 
-    public static final TagKey<Block> DIRT_BLOCKS = register("worldgen/dirt_blocks");
+    public static final TagKey<Block> ANIMALS_PREFERRED = register("animals_preferred");
 
     //Gravity
     public static final TagKey<Block> FAST_FLOATERS = register("fast_floaters");
@@ -22,6 +22,7 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> SWEDROOT_PLANTABLE = register("plants/swedroot_plantable");
 
     //Worldgen
+    public static final TagKey<Block> DIRT_BLOCKS = register("worldgen/dirt_blocks");
     public static final TagKey<Block> CLOUD_CARVER_REPLACEABLES = register("worldgen/cloud_carver_replaceables");
     public static final TagKey<Block> BASE_PARADISE_LOST_STONE = register("worldgen/base_stone");
     public static final TagKey<Block> FLUID_REPLACEABLES = register("worldgen/fluid_replaceable");
