@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.block.SliderEntity;
 import net.id.paradiselost.entities.hostile.EnvoyEntity;
+import net.id.paradiselost.entities.hostile.QuintEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
 import net.id.paradiselost.entities.passive.PopomEntity;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
@@ -38,6 +39,8 @@ public class ParadiseLostEntityTypes {
     // Hostile
     public static final EntityType<EnvoyEntity> ENVOY = add("envoy", of(EnvoyEntity::new, MONSTER, changing(0.6F, 1.95F), 10),
             attributes(EnvoyEntity::createEnvoyAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
+    public static final EntityType<QuintEntity> QUINT = add("quint", of(QuintEntity::new, MONSTER, changing(0.65F, 0.65F), 16),
+            attributes(QuintEntity::createQuintAttributes), spawnRestrictions(QuintEntity::canMobSpawn));
 
     // passive
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(0.8F, 1.9F), 5),

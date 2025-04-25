@@ -32,6 +32,23 @@ public class EnvoyEntity extends SkeletonEntity {
         return this.dataTracker.get(ENLIGHTENED);
     }
 
+    public void setEnlightened(boolean value) {
+        if (value) playEnlighteningEffects();
+        this.dataTracker.set(ENLIGHTENED, value);
+    }
+
+    private void playEnlighteningEffects() {
+        this.playSound(ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_HURT); // TODO
+        if (this.getWorld().isClient) {
+            for (int i = 0; i < 18; i++) {
+                this.getWorld().addParticle(ParticleTypes.CLOUD,
+                        this.getParticleX(0.2), (this.getY() + this.random.nextDouble() * 0.6) + 0.85, this.getParticleZ(0.2),
+                        (this.random.nextDouble() - 0.5) * 0.3, (this.random.nextDouble() - 0.5) * 0.3, (this.random.nextDouble() - 0.5) * 0.3
+                );
+            }
+        }
+    }
+
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(ENLIGHTENED, false);
