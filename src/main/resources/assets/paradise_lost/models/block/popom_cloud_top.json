@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "up": "paradise_lost:block/popom_cloud_top",
+    "down": "paradise_lost:block/popom_cloud_bottom",
+    "north": "paradise_lost:block/popom_cloud_side",
+    "south": "paradise_lost:block/popom_cloud_side",
+    "west": "paradise_lost:block/popom_cloud_side",
+    "east": "paradise_lost:block/popom_cloud_side"
+  }
+}
