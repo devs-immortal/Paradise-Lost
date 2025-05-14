@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paradise_lost:popom_jelly"
+    },
+    {
+      "item": "paradise_lost:blue_cloud"
+    }
+  ],
+  "result": {
+    "id": "minecraft:popom_cloud"
+  }
+}

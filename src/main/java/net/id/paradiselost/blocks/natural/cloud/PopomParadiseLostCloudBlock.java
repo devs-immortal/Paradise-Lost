@@ -68,7 +68,6 @@ public class PopomParadiseLostCloudBlock extends ParadiseLostCloudBlock {
         Vec3d motion = entity.getVelocity();
         Direction direction = state.get(FACING);
 
-        // If crouching and going downwards, slow the fall
         if (entity.isSneaking()) {
             if (motion.y < 0) {
                 entity.setVelocity(motion.multiply(1.0, 0.005, 1.0));
@@ -76,20 +75,35 @@ public class PopomParadiseLostCloudBlock extends ParadiseLostCloudBlock {
             return;
         }
 
-        if (motion.length() < 2) {
-            // Launch direction based on block facing
+        if (true) { //todo
             Vec3d launchVec = new Vec3d(
                     direction.getOffsetX(),
                     direction.getOffsetY(),
                     direction.getOffsetZ()
             ).normalize();
 
-            double launchStrength = 2.0;
-            Vec3d newVel = launchVec.multiply(launchStrength);
-            entity.setVelocity(newVel);
+            double launchStrength = 2.2;
+            double retainHorizontal = 0.2;
+            double retainVertical = 0.25;
+            double horizontalSpeedSq = motion.x * motion.x + motion.z * motion.z;
+            double verticalSpeedSq = motion.y * motion.y;
+
+            //Horizontal boost
+            double newX = motion.x;
+            double newZ = motion.z;
+            if (horizontalSpeedSq < 5.0) {
+                newX = motion.x * retainHorizontal + launchVec.x * launchStrength * (1.0 - retainHorizontal);
+                newZ = motion.z * retainHorizontal + launchVec.z * launchStrength * (1.0 - retainHorizontal);
+            }
+
+            //Vertical boost
+            double newY = motion.y;
+            if (verticalSpeedSq < 4.0) {
+                newY = motion.y * retainVertical + launchVec.y * launchStrength * (1.0 - retainVertical);
+            }
+
+            entity.setVelocity(newX, newY, newZ);
         }
-
-
         if (world.isClient && !entity.verticalCollision && !(entity instanceof PlayerEntity player && player.isCreative())) {
             for (int count = 0; count < 50; count++) {
                 double xOffset = pos.getX() + world.random.nextDouble();
