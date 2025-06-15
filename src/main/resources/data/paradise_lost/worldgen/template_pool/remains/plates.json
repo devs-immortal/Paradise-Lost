@@ -1,0 +1,39 @@
+{
+	"name": "paradise_lost:remains/plates",
+	"fallback": "minecraft:empty",
+	"elements": [
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/plates/big_1",
+        "projection": "terrain_matching",
+        "processors": {
+          "processors": []
+        }
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/plates/medium_1",
+        "projection": "terrain_matching",
+        "processors": {
+          "processors": []
+        }
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/plates/medium_2",
+        "projection": "terrain_matching",
+        "processors": {
+          "processors": []
+        }
+      }
+    }
+  ]
+}

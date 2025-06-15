@@ -1,0 +1,17 @@
+{
+	"name": "paradise_lost:remains/starting_plates",
+	"fallback": "minecraft:empty",
+	"elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/plates/start",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "paradise_lost:remains",
+      "weight": 1
+    } 
+  ],
+  "placement": {
+    "salt": 3456,
+    "spacing": 24,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}
