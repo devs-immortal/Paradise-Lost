@@ -233,7 +233,7 @@ public class ParadiseLostItems {
     public static final BlockItem COLD_CLOUD = add(ParadiseLostBlocks.COLD_CLOUD);
     public static final BlockItem BLUE_CLOUD = add(ParadiseLostBlocks.BLUE_CLOUD);
     public static final BlockItem GOLDEN_CLOUD = add(ParadiseLostBlocks.GOLDEN_CLOUD);
-    public static final BlockItem POPOM_CLOUD = add(ParadiseLostBlocks.POPOM_CLOUD);
+    public static final BlockItem GREEN_CLOUD = add(ParadiseLostBlocks.GREEN_CLOUD);
 
     // planks
     public static final BlockItem AUREL_PLANKS = add(ParadiseLostBlocks.AUREL_WOODSTUFF.plank(), fuel(300));

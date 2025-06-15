@@ -20,12 +20,12 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class PopomParadiseLostCloudBlock extends ParadiseLostCloudBlock {
+public class DirectionalParadiseLostCloudBlock extends ParadiseLostCloudBlock {
     public static final DirectionProperty FACING = Properties.FACING;
 
     protected static VoxelShape SHAPE = VoxelShapes.empty();
 
-    public PopomParadiseLostCloudBlock(Settings settings) {
+    public DirectionalParadiseLostCloudBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.UP));
     }

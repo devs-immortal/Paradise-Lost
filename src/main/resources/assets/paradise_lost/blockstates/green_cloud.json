@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "paradise_lost:block/green_cloud",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "paradise_lost:block/green_cloud",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "paradise_lost:block/green_cloud"
+    },
+    "facing=south": {
+      "model": "paradise_lost:block/green_cloud",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "paradise_lost:block/green_cloud",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "paradise_lost:block/green_cloud",
+      "y": 270
+    }
+  }
+}

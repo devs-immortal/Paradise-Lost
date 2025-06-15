@@ -62,7 +62,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
         addDrop(COLD_CLOUD);
         addDrop(BLUE_CLOUD);
         addDrop(GOLDEN_CLOUD);
-        addDrop(POPOM_CLOUD);
+        addDrop(GREEN_CLOUD);
 
         // Floestone
         addDrop(FLOESTONE, block -> this.drops(block, COBBLED_FLOESTONE));

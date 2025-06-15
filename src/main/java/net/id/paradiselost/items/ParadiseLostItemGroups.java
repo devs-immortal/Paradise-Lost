@@ -214,7 +214,7 @@ public class ParadiseLostItemGroups {
                 entries.add(COLD_CLOUD);
                 entries.add(BLUE_CLOUD);
                 entries.add(GOLDEN_CLOUD);
-                entries.add(POPOM_CLOUD);
+                entries.add(GREEN_CLOUD);
                 // misc
                 entries.add(CHERINE_TORCH);
                 entries.add(CHERINE_LANTERN);
