@@ -99,6 +99,9 @@ public class ParadiseLostItemGroups {
                 entries.add(FLOESTONE_BRICK_STAIRS);
                 entries.add(FLOESTONE_BRICK_SLAB);
                 entries.add(FLOESTONE_BRICK_WALL);
+                entries.add(SMOOTH_FLOESTONE);
+                entries.add(SMOOTH_FLOESTONE_STAIRS);
+                entries.add(SMOOTH_FLOESTONE_SLAB);
                 entries.add(CHISELED_FLOESTONE);
                 entries.add(HELIOLITH);
                 entries.add(HELIOLITH_STAIRS);

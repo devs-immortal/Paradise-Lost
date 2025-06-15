@@ -1,0 +1,19 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:smooth_floestone"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:smooth_floestone_stairs",
+    "count": 4
+  }
+}
+        

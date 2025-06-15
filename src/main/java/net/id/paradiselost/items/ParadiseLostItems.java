@@ -297,6 +297,7 @@ public class ParadiseLostItems {
     // bricks
     public static final BlockItem FLOESTONE_BRICK = add(ParadiseLostBlocks.FLOESTONE_BRICK);
     public static final BlockItem CHISELED_FLOESTONE = add(ParadiseLostBlocks.CHISELED_FLOESTONE);
+    public static final BlockItem SMOOTH_FLOESTONE = add(ParadiseLostBlocks.SMOOTH_FLOESTONE);
     public static final BlockItem SMOOTH_HELIOLITH = add(ParadiseLostBlocks.SMOOTH_HELIOLITH);
     public static final BlockItem LEVITA_BRICK = add(ParadiseLostBlocks.LEVITA_BRICK_SET.block());
     public static final BlockItem CHISELED_LEVITA_BRICK = add(ParadiseLostBlocks.CHISELED_LEVITA_BRICK);
@@ -315,6 +316,7 @@ public class ParadiseLostItems {
     public static final BlockItem MOSSY_FLOESTONE_STAIRS = add(ParadiseLostBlocks.MOSSY_FLOESTONE_STAIRS);
     public static final BlockItem HELIOLITH_STAIRS = add(ParadiseLostBlocks.HELIOLITH_STAIRS);
     public static final BlockItem FLOESTONE_BRICK_STAIRS = add(ParadiseLostBlocks.FLOESTONE_BRICK_STAIRS);
+    public static final BlockItem SMOOTH_FLOESTONE_STAIRS = add(ParadiseLostBlocks.SMOOTH_FLOESTONE_STAIRS);
     public static final BlockItem SMOOTH_HELIOLITH_STAIRS = add(ParadiseLostBlocks.SMOOTH_HELIOLITH_STAIRS);
     public static final BlockItem LEVITA_BRICK_STAIRS = add(ParadiseLostBlocks.LEVITA_BRICK_SET.stairs());
     public static final BlockItem BURNISHED_STONE_STAIRS = add(ParadiseLostBlocks.BURNISHED_STONE_SET.stairs());
@@ -325,6 +327,7 @@ public class ParadiseLostItems {
     public static final BlockItem MOSSY_FLOESTONE_SLAB = add(ParadiseLostBlocks.MOSSY_FLOESTONE_SLAB);
     public static final BlockItem HELIOLITH_SLAB = add(ParadiseLostBlocks.HELIOLITH_SLAB);
     public static final BlockItem FLOESTONE_BRICK_SLAB = add(ParadiseLostBlocks.FLOESTONE_BRICK_SLAB);
+    public static final BlockItem SMOOTH_FLOESTONE_SLAB = add(ParadiseLostBlocks.SMOOTH_FLOESTONE_SLAB);
     public static final BlockItem SMOOTH_HELIOLITH_SLAB = add(ParadiseLostBlocks.SMOOTH_HELIOLITH_SLAB);
     public static final BlockItem LEVITA_BRICK_SLAB = add(ParadiseLostBlocks.LEVITA_BRICK_SET.slab());
     public static final BlockItem BURNISHED_STONE_SLAB = add(ParadiseLostBlocks.BURNISHED_STONE_SET.slab());

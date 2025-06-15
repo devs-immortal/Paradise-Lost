@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "paradise_lost:floestone_brick"
+  },
+  "result": {
+    "id": "paradise_lost:smooth_floestone_slab",
+    "count": 2
+  }
+}

@@ -79,7 +79,6 @@ def generate_slab_block(block_id, base_block_id, texture):
     item_model_file.close()
     
 
-
-generate_standard_item("amadrys_bread_glazed_filled")
+generate_stairs_block("smooth_floestone_stairs", "smooth_floestone")
 
 

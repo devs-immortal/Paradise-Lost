@@ -108,6 +108,9 @@ public class ParadiseLostBlocks {
     public static final SlabBlock FLOESTONE_BRICK_SLAB = add("floestone_brick_slab", new SlabBlock(floestoneBrick()));
     public static final ParadiseLostStairsBlock FLOESTONE_BRICK_STAIRS = add("floestone_brick_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestoneBrick()));
     public static final WallBlock FLOESTONE_BRICK_WALL = add("floestone_brick_wall", new WallBlock(floestoneBrick()));
+    public static final Block SMOOTH_FLOESTONE = add("smooth_floestone", new Block(floestoneBrick()));
+    public static final SlabBlock SMOOTH_FLOESTONE_SLAB = add("smooth_floestone_slab", new SlabBlock(floestoneBrick()));
+    public static final ParadiseLostStairsBlock SMOOTH_FLOESTONE_STAIRS = add("smooth_floestone_stairs", new ParadiseLostStairsBlock(SMOOTH_FLOESTONE.getDefaultState(), floestoneBrick()));
 
     // Heliolith
     public static final Block HELIOLITH = add("heliolith", new Block(floestone().mapColor(MapColor.TERRACOTTA_WHITE)));

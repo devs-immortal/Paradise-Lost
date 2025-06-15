@@ -86,6 +86,9 @@ public class LootTableGen extends FabricBlockLootTableProvider {
         addDrop(FLOESTONE_BRICK_SLAB, this::slabDrops);
         addDrop(FLOESTONE_BRICK_STAIRS);
         addDrop(FLOESTONE_BRICK_WALL);
+        addDrop(SMOOTH_FLOESTONE);
+        addDrop(SMOOTH_FLOESTONE_SLAB, this::slabDrops);
+        addDrop(SMOOTH_FLOESTONE_STAIRS);
 
         // Heliolith
         addDrop(HELIOLITH);
