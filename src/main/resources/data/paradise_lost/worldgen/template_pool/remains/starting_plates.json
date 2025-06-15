@@ -7,7 +7,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/plates/start",
-        "projection": "rigid",
+        "projection": "terrain_matching",
         "processors": {
           "processors": []
         }

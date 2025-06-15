@@ -3,7 +3,7 @@
 	"fallback": "minecraft:empty",
 	"elements": [
     {
-      "weight": 6,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_1",
@@ -14,7 +14,7 @@
       }
     },
     {
-      "weight": 6,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_2",
@@ -25,18 +25,7 @@
       }
     },
     {
-      "weight": 6,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/building_3",
-        "projection": "rigid",
-        "processors": {
-          "processors": []
-        }
-      }
-    },
-    {
-      "weight": 6,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_4",
@@ -47,7 +36,18 @@
       }
     },
     {
-      "weight": 6,
+      "weight": 9,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/structures/building_4",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      }
+    },
+    {
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_5",
@@ -58,40 +58,7 @@
       }
     },
     {
-      "weight": 6,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/building_6",
-        "projection": "rigid",
-        "processors": {
-          "processors": []
-        }
-      }
-    },
-    {
-      "weight": 6,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/building_7",
-        "projection": "rigid",
-        "processors": {
-          "processors": []
-        }
-      }
-    },
-    {
-      "weight": 6,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/building_8",
-        "projection": "rigid",
-        "processors": {
-          "processors": []
-        }
-      }
-    },
-    {
-      "weight": 6,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_9",
@@ -102,10 +69,10 @@
       }
     },
     {
-      "weight": 6,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/building_10",
+        "location": "paradise_lost:remains/structures/building_7",
         "projection": "rigid",
         "processors": {
           "processors": []
@@ -113,7 +80,7 @@
       }
     },
     {
-      "weight": 6,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_11",
@@ -124,7 +91,40 @@
       }
     },
     {
-      "weight": 6,
+      "weight": 9,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/structures/building_9",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      }
+    },
+    {
+      "weight": 9,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/structures/building_10",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      }
+    },
+    {
+      "weight": 9,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/structures/building_11",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      }
+    },
+    {
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_12",
@@ -135,18 +135,7 @@
       }
     },
     {
-      "weight": 6,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/building_13",
-        "projection": "rigid",
-        "processors": {
-          "processors": []
-        }
-      }
-    },
-    {
-      "weight": 6,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_14",
@@ -157,7 +146,18 @@
       }
     },
     {
-      "weight": 6,
+      "weight": 9,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/structures/building_14",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      }
+    },
+    {
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_15",
@@ -169,7 +169,7 @@
     },
     
     {
-      "weight": 3,
+      "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_rare_1",
@@ -180,7 +180,7 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_rare_2",
@@ -191,10 +191,10 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/building_rare_3",
+        "location": "paradise_lost:remains/structures/building_rare_4",
         "projection": "rigid",
         "processors": {
           "processors": []
@@ -202,7 +202,7 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_rare_4",
@@ -214,7 +214,7 @@
     },
     
     {
-      "weight": 8,
+      "weight": 11,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/ruin_1",
@@ -225,7 +225,7 @@
       }
     },
     {
-      "weight": 8,
+      "weight": 11,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/ruin_2",
@@ -236,18 +236,7 @@
       }
     },
     {
-      "weight": 8,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/ruin_3",
-        "projection": "rigid",
-        "processors": {
-          "processors": []
-        }
-      }
-    },
-    {
-      "weight": 8,
+      "weight": 11,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/ruin_4",
@@ -258,7 +247,18 @@
       }
     },
     {
-      "weight": 8,
+      "weight": 11,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/structures/ruin_4",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      }
+    },
+    {
+      "weight": 11,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/ruin_5",
@@ -269,10 +269,10 @@
       }
     },
     {
-      "weight": 8,
+      "weight": 11,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/ruin_6",
+        "location": "paradise_lost:remains/structures/ruin_9",
         "projection": "rigid",
         "processors": {
           "processors": []
@@ -280,7 +280,7 @@
       }
     },
     {
-      "weight": 8,
+      "weight": 11,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/ruin_7",
@@ -291,7 +291,7 @@
       }
     },
     {
-      "weight": 4,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/fallen_wall_1",
@@ -303,7 +303,7 @@
     },
     
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/ruin_rare_1",
@@ -314,7 +314,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/ruin_rare_2",
@@ -326,7 +326,7 @@
     },
     
     {
-      "weight": 2,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/farm_1",
@@ -337,7 +337,7 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/farm_2",
@@ -348,10 +348,10 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/farm_3",
+        "location": "paradise_lost:remains/structures/farm_4",
         "projection": "rigid",
         "processors": {
           "processors": []
@@ -371,7 +371,7 @@
     },
     
     {
-      "weight": 2,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/deco_1",
@@ -382,7 +382,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/deco_2",
@@ -393,10 +393,10 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/structures/deco_3",
+        "location": "paradise_lost:remains/structures/deco_4",
         "projection": "rigid",
         "processors": {
           "processors": []
@@ -438,7 +438,7 @@
       }
     },
     {
-      "weight": 2,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/obelisk_2",
