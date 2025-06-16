@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:skull_pottery_sherd"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:arms_up_pottery_sherd"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:flaxseed"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:flaxweave"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:cherine"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:olvite_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stone_hoe"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stone_axe"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "paradise_lost:archaeology/remains_common"
+}

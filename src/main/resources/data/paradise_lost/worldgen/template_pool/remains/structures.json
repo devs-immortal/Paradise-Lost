@@ -169,7 +169,7 @@
     },
     
     {
-      "weight": 8,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_rare_1",
@@ -180,7 +180,7 @@
       }
     },
     {
-      "weight": 8,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_rare_2",
@@ -191,7 +191,7 @@
       }
     },
     {
-      "weight": 8,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_rare_3",
@@ -202,7 +202,7 @@
       }
     },
     {
-      "weight": 8,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/building_rare_4",
@@ -292,7 +292,7 @@
     },
     
     {
-      "weight": 6,
+      "weight": 5,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/ruin_rare_1",
@@ -303,7 +303,7 @@
       }
     },
     {
-      "weight": 6,
+      "weight": 5,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/ruin_rare_2",

@@ -286,7 +286,7 @@ public class ParadiseLostBlocks {
     public static final PaneBlock GOLDEN_AMBER_BARS = add("golden_amber_bars", new PaneBlock(copy(IRON_BARS)), cutoutMippedRenderLayer);
 
     // Usables
-    public static final BrushableBlock SUSPICIOUS_DIRT = add("suspicious_dirt", new BrushableBlock(DIRT, SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL, SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL_COMPLETE, copy(DIRT).strength(0.25F).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final BrushableBlock SUSPICIOUS_DIRT = add("suspicious_dirt", new BrushableBlock(DIRT, SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL, SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL_COMPLETE, copy(DIRT).strength(0.25F).sounds(BlockSoundGroup.SUSPICIOUS_GRAVEL).pistonBehavior(PistonBehavior.DESTROY)));
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(create().mapColor(MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final IncubatorBlock NEST = add("nest", new IncubatorBlock(create().mapColor(MapColor.PALE_YELLOW).strength(0.3f).sounds(BlockSoundGroup.GRASS).nonOpaque(), 0.35F), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(create().mapColor(MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
