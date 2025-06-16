@@ -349,7 +349,7 @@
     },
     
     {
-      "weight": 3,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/structures/obelisk_1",

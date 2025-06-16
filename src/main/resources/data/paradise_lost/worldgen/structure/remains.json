@@ -5,7 +5,7 @@
   "spawn_overrides": {},
   "terrain_adaptation": "beard_thin",
   "start_pool": "paradise_lost:remains/starting_plates",
-  "size": 5,
+  "size": 4,
   "start_height": {
     "absolute": 0
   },
