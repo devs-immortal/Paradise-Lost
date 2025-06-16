@@ -466,6 +466,7 @@ public class ParadiseLostItems {
     // Redstone items, buttons n pressure plates etc.
     public static final BlockItem FLOESTONE_BUTTON = add(ParadiseLostBlocks.FLOESTONE_BUTTON);
     public static final BlockItem FLOESTONE_PRESSURE_PLATE = add(ParadiseLostBlocks.FLOESTONE_PRESSURE_PLATE);
+    public static final BlockItem OLVITE_PRESSURE_PLATE = add(ParadiseLostBlocks.OLVITE_PRESSURE_PLATE);
 
     public static final BlockItem AUREL_BUTTON = add(ParadiseLostBlocks.AUREL_WOODSTUFF.button(), fuel(100));
     public static final BlockItem MOTHER_AUREL_BUTTON = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.button(), fuel(100));

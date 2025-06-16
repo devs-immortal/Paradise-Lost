@@ -232,6 +232,7 @@ public class ParadiseLostItemGroups {
                 entries.add(NITRA_BUNCH);
                 entries.add(LEVITATOR);
                 entries.add(LEVITA_RAIL);
+                entries.add(OLVITE_PRESSURE_PLATE);
                 entries.add(INCUBATOR);
                 entries.add(NEST);
                 entries.add(FOOD_BOWL);

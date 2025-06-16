@@ -272,6 +272,7 @@ public class ParadiseLostBlocks {
     // Misc
     public static final ButtonBlock FLOESTONE_BUTTON = add("floestone_button", new ParadiseLostButtonBlock(BlockSetType.STONE, 20, Settings.create().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)));
     public static final PressurePlateBlock FLOESTONE_PRESSURE_PLATE = add("floestone_pressure_plate", new ParadiseLostPressurePlateBlock(BlockSetType.STONE, copy(STONE_PRESSURE_PLATE)));
+    public static final OlvitePressurePlateBlock OLVITE_PRESSURE_PLATE = add("olvite_pressure_plate", new OlvitePressurePlateBlock(create().mapColor(MapColor.PALE_GREEN).solid().instrument(NoteBlockInstrument.BASEDRUM).requiresTool().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)));
     public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, create().strength(3f, 3f).sounds(BlockSoundGroup.STONE)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
     public static final CherineLanternBlock CHERINE_LANTERN = add("cherine_lantern", new CherineLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);

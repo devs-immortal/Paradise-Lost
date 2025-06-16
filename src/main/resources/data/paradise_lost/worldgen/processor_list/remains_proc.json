@@ -1,8 +1,0 @@
-{
-  "processors": [
-    {
-      "processor_type": "minecraft:protected_blocks",
-      "value": "#paradise_lost:clouds"
-    }
-  ]
-}
