@@ -3,36 +3,57 @@
 	"fallback": "minecraft:empty",
 	"elements": [
     {
-      "weight": 3,
+      "weight": 21,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/plates/big_1",
         "projection": "terrain_matching",
-        "processors": {
-          "processors": []
-        }
+        "processors": "paradise_lost:remains_proc"
       }
     },
     {
-      "weight": 2,
+      "weight": 14,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/plates/medium_1",
         "projection": "terrain_matching",
-        "processors": {
-          "processors": []
-        }
+        "processors": "paradise_lost:remains_proc"
+      }
+    },
+    {
+      "weight": 14,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/plates/medium_2",
+        "projection": "terrain_matching",
+        "processors": "paradise_lost:remains_proc"
       }
     },
     {
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:remains/plates/medium_2",
+        "location": "paradise_lost:remains/plates/big_1_sus",
         "projection": "terrain_matching",
-        "processors": {
-          "processors": []
-        }
+        "processors": "paradise_lost:remains_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/plates/medium_1_sus",
+        "projection": "terrain_matching",
+        "processors": "paradise_lost:remains_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/plates/medium_2_sus",
+        "projection": "terrain_matching",
+        "processors": "paradise_lost:remains_proc"
       }
     }
   ]

@@ -3,10 +3,21 @@
 	"fallback": "minecraft:empty",
 	"elements": [
     {
-      "weight": 1,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:remains/plates/start",
+        "projection": "terrain_matching",
+        "processors": {
+          "processors": []
+        }
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:remains/plates/start_sus",
         "projection": "terrain_matching",
         "processors": {
           "processors": []

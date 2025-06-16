@@ -12,10 +12,12 @@ import net.id.paradiselost.world.feature.configured_features.ParadiseLostTreeCon
 import net.id.paradiselost.world.feature.tree.ParadiseLostSaplingGenerators;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.copy;
@@ -284,6 +286,7 @@ public class ParadiseLostBlocks {
     public static final PaneBlock GOLDEN_AMBER_BARS = add("golden_amber_bars", new PaneBlock(copy(IRON_BARS)), cutoutMippedRenderLayer);
 
     // Usables
+    public static final BrushableBlock SUSPICIOUS_DIRT = add("suspicious_dirt", new BrushableBlock(DIRT, SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL, SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL_COMPLETE, copy(DIRT).strength(0.25F).pistonBehavior(PistonBehavior.DESTROY)));
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(create().mapColor(MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final IncubatorBlock NEST = add("nest", new IncubatorBlock(create().mapColor(MapColor.PALE_YELLOW).strength(0.3f).sounds(BlockSoundGroup.GRASS).nonOpaque(), 0.35F), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(create().mapColor(MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);

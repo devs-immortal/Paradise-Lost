@@ -404,6 +404,7 @@ public class ParadiseLostItems {
 
     // util blocks (enchanter, freezer, etc.)
     public static final BlockItem CHERINE_CAMPFIRE = add(ParadiseLostBlocks.CHERINE_CAMPFIRE);
+    public static final BlockItem SUSPICIOUS_DIRT = add(ParadiseLostBlocks.SUSPICIOUS_DIRT);
     public static final BlockItem INCUBATOR = add(ParadiseLostBlocks.INCUBATOR, fuel(300));
     public static final BlockItem NEST = add(ParadiseLostBlocks.NEST, fuel(300));
     public static final BlockItem FOOD_BOWL = add(ParadiseLostBlocks.FOOD_BOWL, fuel(300));

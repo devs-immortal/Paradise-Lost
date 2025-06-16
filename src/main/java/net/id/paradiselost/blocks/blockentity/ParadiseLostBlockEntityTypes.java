@@ -34,6 +34,7 @@ public class ParadiseLostBlockEntityTypes {
         register("tree_tap", TREE_TAP);
         register("sign", SIGN);
         register("hanging_sign", HANGING_SIGN);
+        BlockEntityType.BRUSHABLE_BLOCK.addSupportedBlock(ParadiseLostBlocks.SUSPICIOUS_DIRT);
     }
     
     private static void register(String name, BlockEntityType<?> type) {
