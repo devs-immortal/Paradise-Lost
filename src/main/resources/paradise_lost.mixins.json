@@ -4,7 +4,6 @@
   "package": "net.id.paradiselost.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "block.BlockEntityTypeMixin",
     "block.BlockMixin",
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",

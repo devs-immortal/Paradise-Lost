@@ -228,6 +228,7 @@ public class ParadiseLostItemGroups {
                 entries.add(FLAXWEAVE_CUSHION_SLAB);
                 entries.add(GOLDEN_AMBER_BARS);
                 entries.add(AMADRYS_BUNDLE);
+                entries.add(SUSPICIOUS_DIRT);
                 entries.add(NITRA_BUNCH);
                 entries.add(LEVITATOR);
                 entries.add(LEVITA_RAIL);
