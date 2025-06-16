@@ -104,42 +104,6 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
         }
     }
 
-    @Override
-    public ItemStack finishUsing(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (entityLiving instanceof PlayerEntity) {
-            return onBucketContentsConsumed(stack, worldIn, (PlayerEntity) entityLiving);
-        }
-        return super.finishUsing(stack, worldIn, entityLiving);
-    }
-
-    public ItemStack onBucketContentsConsumed(ItemStack stack, World world, PlayerEntity playerEntity) {
-
-        if (playerEntity instanceof ServerPlayerEntity) {
-            ServerPlayerEntity entityPlayerMp = (ServerPlayerEntity) playerEntity;
-            Criteria.CONSUME_ITEM.trigger(entityPlayerMp, stack);
-            playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
-        }
-
-        if (!playerEntity.isCreative()) {
-            stack.setCount(stack.getCount() - 1);
-        }
-
-        if (stack.getItem() == ParadiseLostItems.AUREL_MILK_BUCKET) {
-            if (!world.isClient) {
-                playerEntity.clearStatusEffects();
-            }
-        }
-        return stack.isEmpty() ? new ItemStack(ParadiseLostItems.AUREL_BUCKET) : stack;
-    }
-
-    @Override
-    public UseAction getUseAction(ItemStack stack) {
-        if (stack.getItem() != ParadiseLostItems.AUREL_WATER_BUCKET && stack.getItem() != ParadiseLostItems.AUREL_BUCKET) {
-            return UseAction.DRINK;
-        }
-        return UseAction.NONE;
-    }
-
     protected ItemStack emptyBucket(ItemStack stackIn, PlayerEntity playerIn) {
         return !playerIn.getAbilities().creativeMode ? new ItemStack(ParadiseLostItems.AUREL_BUCKET) : stackIn;
     }

@@ -6,6 +6,7 @@ import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.armor.ParadiseLostArmorMaterials;
 import net.id.paradiselost.items.food.ParadiseLostFoodComponent;
 import net.id.paradiselost.items.misc.*;
+import net.id.paradiselost.items.tools.AurelMilkBucketItem;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.items.tools.AurelBucketItem;
 import net.id.paradiselost.items.tools.base_tools.*;
@@ -207,7 +208,7 @@ public class ParadiseLostItems {
     private static final Settings aurelBucket = new Settings().maxCount(1).recipeRemainder(AUREL_BUCKET);
     public static final AurelBucketItem AUREL_WATER_BUCKET = add("aurel_water_bucket", new AurelBucketItem(Fluids.WATER, aurelBucket), emptiableBucketBehavior);
     public static final AurelBucketItem AUREL_POWDER_SNOW_BUCKET = add("aurel_powder_snow_bucket", new AurelBucketItem(Blocks.POWDER_SNOW, aurelBucket), emptiableBucketBehavior);
-    public static final AurelBucketItem AUREL_MILK_BUCKET = add("aurel_milk_bucket", new AurelBucketItem(aurelBucket));
+    public static final AurelMilkBucketItem AUREL_MILK_BUCKET = add("aurel_milk_bucket", new AurelMilkBucketItem(new Item.Settings().recipeRemainder(AUREL_BUCKET).maxCount(1)));
 
     // Creative spawn eggs
     public static final SpawnEggItem ENVOY_SPAWN_EGG = add("envoy_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.ENVOY, 0xc5b1af, 0x993c3c, new Settings()), spawnEggBehavior);
