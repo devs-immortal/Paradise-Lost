@@ -14,11 +14,19 @@
         },
         {
           "type": "minecraft:item",
+          "name": "minecraft:flower_pot"
+        },
+        {
+          "type": "minecraft:item",
           "name": "paradise_lost:flaxseed"
         },
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:flaxweave"
+          "name": "paradise_lost:flaxseed"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:olvite"
         },
         {
           "type": "minecraft:item",
@@ -26,7 +34,29 @@
         },
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:olvite_helmet"
+          "name": "paradise_lost:cherine"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:xp_circlet",
+          "functions": [
+            {
+              "components": {
+                "paradise_lost:xp_circlet": {
+                  "xp_content": 100
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:xp_circlet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:wooden_hoe"
         },
         {
           "type": "minecraft:item",
@@ -35,6 +65,10 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:stone_axe"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stone_shovel"
         }
       ],
       "rolls": 1.0

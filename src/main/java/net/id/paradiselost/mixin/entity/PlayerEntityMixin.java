@@ -3,16 +3,22 @@ package net.id.paradiselost.mixin.entity;
 import net.id.paradiselost.client.rendering.util.ParadiseLostEvents;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.items.armor.XpCircletItem;
 import net.id.paradiselost.util.MiscUtil;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
+import net.minecraft.component.EnchantmentEffectComponentTypes;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
@@ -22,6 +28,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.dimension.DimensionType;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,6 +43,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
 
     private boolean paradise_lost$fallen = false;
 
+    @Shadow @Final
+    PlayerInventory inventory;
+    @Shadow
+    public int experienceLevel;
+
     public PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
         super(type, world);
     }
@@ -44,6 +56,12 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
     public abstract void increaseStat(Identifier stat, int amount);
 
     @Shadow public abstract PlayerAbilities getAbilities();
+
+    @Shadow
+    public float experienceProgress;
+
+    @Shadow
+    public abstract Iterable<ItemStack> getArmorItems();
 
     @Inject(
             method = "damage",
@@ -114,10 +132,26 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
         }
     }
 
+    // olvite spyglass shenanigans
     @Inject(method = "isUsingSpyglass", at = @At("TAIL"), cancellable = true)
     public void isUsingSpyglass(CallbackInfoReturnable<Boolean> cir) {
         if (this.isUsingItem() && this.getActiveItem().isOf(ParadiseLostItems.OLVITE_SPYGLASS)) {
             cir.setReturnValue(true);
         }
     }
+
+    // charge equipped circlets
+
+    @Inject(method = "vanishCursedItems", at = @At("TAIL"))
+    public void vanishCursedItems(CallbackInfo ci) {
+        for (ItemStack stack : this.getArmorItems()) {
+            if (!stack.isEmpty() && stack.isOf(ParadiseLostItems.XP_CIRCLET)) {
+                XpCircletItem.chargeCirclet(stack, (PlayerEntity)(Object)this);
+                this.experienceLevel = 0;
+                this.experienceProgress = 0;
+                break;
+            }
+        }
+    }
+
 }

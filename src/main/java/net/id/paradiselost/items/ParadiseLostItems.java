@@ -4,6 +4,7 @@ import com.chocohead.mm.api.ClassTinkerers;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.armor.ParadiseLostArmorMaterials;
+import net.id.paradiselost.items.armor.XpCircletItem;
 import net.id.paradiselost.items.food.ParadiseLostFoodComponent;
 import net.id.paradiselost.items.misc.*;
 import net.id.paradiselost.items.tools.AurelMilkBucketItem;
@@ -20,6 +21,7 @@ import net.minecraft.block.TallPlantBlock;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -174,6 +176,8 @@ public class ParadiseLostItems {
     public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.LEGGINGS, 27, wearable().fireproof()));
     public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.BOOTS, 27, wearable().fireproof()));
 
+    // Relic
+    public static final XpCircletItem XP_CIRCLET = add("xp_circlet", new XpCircletItem(ParadiseLostArmorMaterials.RELIC, ArmorItem.Type.HELMET, WEARABLE.maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
 
     private static Settings food() {
         return new Settings();

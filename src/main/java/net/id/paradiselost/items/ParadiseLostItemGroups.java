@@ -293,6 +293,7 @@ public class ParadiseLostItemGroups {
                 entries.add(GLAZED_GOLD_CHESTPLATE);
                 entries.add(GLAZED_GOLD_LEGGINGS);
                 entries.add(GLAZED_GOLD_BOOTS);
+                entries.add(XP_CIRCLET);
                 // upgrades
                 entries.add(GLAZED_GOLD_UPGRADE);
                 // travel

@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradiselost.ParadiseLost;
 import net.minecraft.component.ComponentType;
+import net.minecraft.item.CrossbowItem;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
@@ -25,7 +26,7 @@ public class ParadiseLostDataComponentTypes {
 
     public static final ComponentType<MoaGeneComponent> MOA_GENES = register("moa_genes", (builder) -> builder.codec(MoaGeneComponent.CODEC).packetCodec(MoaGeneComponent.PACKET_CODEC).cache());
     public static final ComponentType<BloodstoneComponent> BLOODSTONE = register("bloodstone", (builder) -> builder.codec(BloodstoneComponent.CODEC).packetCodec(BloodstoneComponent.PACKET_CODEC));
-
+    public static final ComponentType<XpCircletChargeComponent> XP_CIRCLET_CHARGE = register("xp_circlet", (builder) -> builder.codec(XpCircletChargeComponent.CODEC).packetCodec(XpCircletChargeComponent.PACKET_CODEC));
 
     // Util
 
@@ -184,6 +185,30 @@ public class ParadiseLostDataComponentTypes {
 
         public String owner() {
             return this.owner;
+        }
+
+    }
+
+    public record XpCircletChargeComponent(int storedXp) {
+
+        public static final Codec<XpCircletChargeComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+                Codec.INT.fieldOf("xp_content").forGetter(XpCircletChargeComponent::storedXp)
+        ).apply(instance, XpCircletChargeComponent::new));
+        public static final PacketCodec<RegistryByteBuf, XpCircletChargeComponent> PACKET_CODEC;
+
+        static {
+            PACKET_CODEC = PacketCodec.tuple(
+                    PacketCodecs.INTEGER, XpCircletChargeComponent::storedXp,
+                    XpCircletChargeComponent::new
+            );
+        }
+
+        public int storedXp() {
+            return this.storedXp;
+        }
+
+        public boolean charged() {
+            return this.storedXp > 0;
         }
 
     }

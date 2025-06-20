@@ -312,6 +312,8 @@
   "item.paradise_lost.surtrum_chestplate": "Surtrum Chestplate",
   "item.paradise_lost.surtrum_leggings": "Surtrum Leggings",
   "item.paradise_lost.surtrum_boots": "Surtrum Boots",
+  
+  "item.paradise_lost.xp_circlet": "Circlet of Knowledge",
 
   "item.paradise_lost.blackcurrant": "Blackcurrant",
   "item.paradise_lost.orange": "Orange",
@@ -460,6 +462,7 @@
   "subtitles.paradise_lost.item.armor.equip.olvite": "Olvite armor clanks",
   "subtitles.paradise_lost.item.armor.equip.glazed_gold": "Glazed Gold armor clinks",
   "subtitles.paradise_lost.item.armor.equip.surtrum": "Surtrum armor clunks",
+  "subtitles.paradise_lost.item.armor.equip.relic": "Ancient armor scrapes",
 
   "subtitles.paradise_lost.item.bloodstone.prick": "Bloodstone pricks",
   

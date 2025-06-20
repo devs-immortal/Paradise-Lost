@@ -24,6 +24,7 @@ public final class ParadiseLostSoundEvents {
     public static final RegistryEntry<SoundEvent> ITEM_ARMOR_EQUIP_OLVITE = registerReference("item.armor.equip.olvite");
     public static final RegistryEntry<SoundEvent> ITEM_ARMOR_EQUIP_GLAZED_GOLD = registerReference("item.armor.equip.glazed_gold");
     public static final RegistryEntry<SoundEvent> ITEM_ARMOR_EQUIP_SURTRUM = registerReference("item.armor.equip.surtrum");
+    public static final RegistryEntry<SoundEvent> ITEM_ARMOR_EQUIP_RELIC = registerReference("item.armor.equip.relic");
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = register("item.bloodstone.prick");
 
 

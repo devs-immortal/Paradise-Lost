@@ -4,15 +4,19 @@ import net.id.paradiselost.client.rendering.util.ParadiseLostEvents;
 import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
+import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.items.armor.XpCircletItem;
 import net.id.paradiselost.tag.ParadiseLostItemTags;
 import net.id.paradiselost.util.MiscUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
@@ -132,6 +136,13 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
                     cir.setReturnValue(false);
                 }
             }
+        }
+    }
+
+    @Inject(method = "onEquipStack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;emitGameEvent(Lnet/minecraft/registry/entry/RegistryEntry;)V"))
+    public void onEquipStack(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
+        if (slot == EquipmentSlot.HEAD && newStack.isOf(ParadiseLostItems.XP_CIRCLET)) {
+            XpCircletItem.dischargeCirclet(newStack, (PlayerEntity)(Object)this);
         }
     }
 

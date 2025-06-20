@@ -19,6 +19,7 @@ import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaRaces;
 import net.id.paradiselost.items.ParadiseLostItemGroups;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.items.armor.XpCircletItem;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.screen.ParadiseLostScreens;
@@ -30,6 +31,7 @@ import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.gen.carver.ParadiseLostCarvers;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 
@@ -108,6 +110,12 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         ParadiseLostBlockEntityRenderers.initClient();
         ParadiseLostParticles.Client.init();
         ParadiseLostScreens.initClient();
+        // temp until better method in 1.21.5 I think?
+        ModelPredicateProviderRegistry.register(
+                ParadiseLostItems.XP_CIRCLET,
+                locate("charged"),
+                (stack, world, entity, seed) -> stack.getItem() instanceof XpCircletItem && XpCircletItem.isCharged(stack) ? 1.0F : 0.0F
+        );
     }
 
     @Environment(EnvType.CLIENT)
