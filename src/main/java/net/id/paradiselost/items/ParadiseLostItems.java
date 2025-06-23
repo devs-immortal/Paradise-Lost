@@ -177,7 +177,7 @@ public class ParadiseLostItems {
     public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.BOOTS, 27, wearable().fireproof()));
 
     // Relic
-    public static final XpCircletItem XP_CIRCLET = add("xp_circlet", new XpCircletItem(ParadiseLostArmorMaterials.RELIC, ArmorItem.Type.HELMET, WEARABLE.maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
+    public static final XpCircletItem XP_CIRCLET = add("xp_circlet", new XpCircletItem(ParadiseLostArmorMaterials.RELIC, ArmorItem.Type.HELMET, WEARABLE.maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15)).rarity(RARE)));
 
     private static Settings food() {
         return new Settings();
