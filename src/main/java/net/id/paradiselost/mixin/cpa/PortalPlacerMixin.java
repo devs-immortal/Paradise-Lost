@@ -17,10 +17,10 @@ import static net.id.paradiselost.world.ParadiseLostGameRules.PARADISE_PORTAL_EN
 @Mixin(PortalPlacer.class)
 public class PortalPlacerMixin {
 
-
     @Inject(method = "createPortal", at = @At("HEAD"), cancellable = true)
     private static void createPortal(PortalLink link, Block foundationBlock, World world, BlockPos portalPos, BlockPos framePos, PortalIgnitionSource ignitionSource, CallbackInfoReturnable<Boolean> cir) {
         if (foundationBlock == ParadiseLostBlocks.BLOOMED_CALCITE && !world.getGameRules().getBoolean(PARADISE_PORTAL_ENABLED))
             cir.cancel();
     }
+
 }
