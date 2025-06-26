@@ -6,6 +6,22 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "minecraft:calcite"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:calcite"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:calcite"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:skull_pottery_sherd"
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:skull_pottery_sherd"
         },
         {
@@ -14,19 +30,15 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:flower_pot"
+          "name": "minecraft:arms_up_pottery_sherd"
         },
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:flaxseed"
+          "name": "paradise_lost:calcite_flower_pot"
         },
         {
           "type": "minecraft:item",
-          "name": "paradise_lost:flaxseed"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:olvite"
+          "name": "paradise_lost:calcite_flower_pot"
         },
         {
           "type": "minecraft:item",
@@ -56,15 +68,15 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:wooden_hoe"
+          "name": "paradise_lost:xp_circlet"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:stone_hoe"
+          "name": "minecraft:stone_pickaxe"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:stone_axe"
+          "name": "minecraft:stone_pickaxe"
         },
         {
           "type": "minecraft:item",

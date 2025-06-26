@@ -408,6 +408,7 @@ public class ParadiseLostItems {
     public static final VerticallyAttachableBlockItem CHERINE_TORCH = add("cherine_torch", new VerticallyAttachableBlockItem(ParadiseLostBlocks.CHERINE_TORCH, ParadiseLostBlocks.CHERINE_TORCH_WALL, new Settings(), Direction.DOWN));
 
     // util blocks (enchanter, freezer, etc.)
+    public static final BlockItem CALCITE_FLOWER_POT = add(ParadiseLostBlocks.CALCITE_FLOWER_POT);
     public static final BlockItem CHERINE_CAMPFIRE = add(ParadiseLostBlocks.CHERINE_CAMPFIRE);
     public static final BlockItem SUSPICIOUS_DIRT = add(ParadiseLostBlocks.SUSPICIOUS_DIRT);
     public static final BlockItem INCUBATOR = add(ParadiseLostBlocks.INCUBATOR, fuel(300));

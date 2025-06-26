@@ -2,12 +2,25 @@ package net.id.paradiselost;
 
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
+import net.fabricmc.fabric.api.client.model.loading.v1.ModelModifier;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.renderer.v1.Renderer;
+import net.fabricmc.fabric.api.renderer.v1.RendererAccess;
+import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial;
+import net.fabricmc.fabric.api.renderer.v1.material.ShadeMode;
+import net.fabricmc.fabric.api.renderer.v1.mesh.MutableQuadView;
+import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
+import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
+import net.fabricmc.fabric.api.renderer.v1.model.ModelHelper;
+import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
+import net.fabricmc.fabric.impl.renderer.VanillaModelEncoder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradiselost.blocks.ParadiseLostBlockSets;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.blocks.ParadiseLostWoodTypes;
 import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
+import net.id.paradiselost.client.model.ModifiedFlowerPotModel;
 import net.id.paradiselost.client.model.ParadiseLostModelLayers;
 import net.id.paradiselost.client.model.armor.ParadiseLostArmorModels;
 import net.id.paradiselost.client.rendering.block.ParadiseLostBlockEntityRenderers;
@@ -21,6 +34,7 @@ import net.id.paradiselost.items.ParadiseLostItemGroups;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.items.armor.XpCircletItem;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
+import net.id.paradiselost.mixin.block.FlowerPotBlockMixin;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.screen.ParadiseLostScreens;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
@@ -31,12 +45,27 @@ import net.id.paradiselost.world.dimension.ParadiseLostBiomes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
 import net.id.paradiselost.world.feature.ParadiseLostFeatures;
 import net.id.paradiselost.world.gen.carver.ParadiseLostCarvers;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.BakedQuad;
+import net.minecraft.client.texture.Sprite;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.BlockRenderView;
 import org.slf4j.Logger;
+import org.spongepowered.asm.mixin.Unique;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Docs for Paradise Lost are sometimes written long after the code itself has been written, and oftentimes by different
@@ -52,7 +81,7 @@ import java.lang.invoke.MethodType;
  * <br><br>
  * A list of developers can be found in {@code resources/fabric.mod.json}.
  */
-public class ParadiseLost implements ModInitializer, ClientModInitializer, DedicatedServerModInitializer {
+public class ParadiseLost implements ModInitializer, ClientModInitializer {
     public static final String MOD_ID = "paradise_lost";
     public static final Logger LOG = LogUtils.getLogger();
 
@@ -116,6 +145,17 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
                 locate("charged"),
                 (stack, world, entity, seed) -> stack.getItem() instanceof XpCircletItem && XpCircletItem.isCharged(stack) ? 1.0F : 0.0F
         );
+        ModelLoadingPlugin.register(pluginContext -> {
+            pluginContext.modifyModelAfterBake().register(ModelModifier.OVERRIDE_PHASE, (model, context) -> {
+                Identifier id = context.resourceId();
+
+                if (id != null && id.toString().contains("potted")) {
+                    return new ModifiedFlowerPotModel(model);
+                }
+
+                return model;
+            });
+        });
     }
 
     @Environment(EnvType.CLIENT)
@@ -133,53 +173,4 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
         }
     }
 
-    // FIXME This is really really really stupid.
-    @Environment(EnvType.SERVER)
-    private static final String DISABLE_WORLD_CHECK = "PARADISE_LOST_DISABLE_WORLD_CHECK";
-
-    @Override
-    public void onInitializeServer() {
-        ServerLifecycleEvents.SERVER_STARTED.register((server) -> {
-            if (System.getProperty(DISABLE_WORLD_CHECK) != null) {
-                return;
-            }
-
-            var world = server.getWorld(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY);
-            if (world == null) {
-                var message = """
-                        This crash is intentional. This is because of a bug in vanilla Minecraft that caused Paradise Lost
-                        to be unable to add the Paradise Lost dimension.
-                                            
-                        Please restart the server. This should solve this error.
-                                            
-                        The related issue on Mojang's issue tracker is MC-195468 at https://bugs.mojang.com/browse/MC-195468
-                                            
-                        You should only ever see this error message once per world.
-                        If restarting the server doesn't solve the issue, then please contact us at https://discord.gg/eRsJ6F3Wng
-                                            
-                        If you would like to suppress this crash add -D%s to your arguments.
-                        For example, if you have:
-                        java -jar fabric-server.jar nogui
-                        you would want to add -D%s after the `java` part, like so:
-                        java -D%s -jar fabric-server.jar nogui
-                        """
-                        .formatted(
-                                DISABLE_WORLD_CHECK,
-                                DISABLE_WORLD_CHECK,
-                                DISABLE_WORLD_CHECK
-                        );
-
-                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                    // To people who might want to change this to use the Logger class, don't.
-                    // It will not print the message when you do that. I tried.
-                    System.err.println(
-                            "\n".repeat(10)
-                                    + message
-                                    + "\n".repeat(10)
-                    );
-                }));
-                throw new RuntimeException(message);
-            }
-        });
-    }
 }
