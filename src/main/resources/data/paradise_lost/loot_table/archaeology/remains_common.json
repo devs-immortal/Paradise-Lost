@@ -14,10 +14,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:calcite"
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:skull_pottery_sherd"
         },
         {
@@ -31,10 +27,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:arms_up_pottery_sherd"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:calcite_flower_pot"
         },
         {
           "type": "minecraft:item",
