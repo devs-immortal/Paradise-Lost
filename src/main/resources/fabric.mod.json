@@ -35,9 +35,6 @@
     "client": [
       "net.id.paradiselost.ParadiseLost"
     ],
-    "server": [
-      "net.id.paradiselost.ParadiseLost"
-    ],
     "cardinal-components": [
       "net.id.paradiselost.component.ParadiseLostComponents"
     ],

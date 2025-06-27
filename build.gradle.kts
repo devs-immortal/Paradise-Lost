@@ -7,6 +7,7 @@ val javaVersion: String by properties
 
 val fabricVersion: String by properties
 val fabricAsmVersion: String by properties
+val sherdsApiVersion: String by properties
 val customPortalApiVersion: String by properties
 val cardinalComponentsVersion: String by properties
 
@@ -57,6 +58,16 @@ repositories {
     maven {
         name = "JamesWhiteShirt"
         url = uri("https://maven.jamieswhiteshirt.com/libs-release/")
+    }
+
+    maven {
+        name = "Sherds API"
+        url = uri("https://dl.cloudsmith.io/public/thomasglasser/sherdsapi/maven")
+    }
+
+    maven {
+        name = "Sherds API (Tommylib)"
+        url = uri("https://dl.cloudsmith.io/public/thomasglasser/tommylib/maven")
     }
 
     maven {
@@ -112,6 +123,12 @@ dependencies {
             group = "com.github.Chocohead",
             name = "Fabric-ASM",
             version = fabricAsmVersion,
+    ).also(::include)
+
+    modImplementation(
+            group = "dev.thomasglasser.sherdsapi",
+            name = "sherdsapi-fabric-1.21",
+            version = sherdsApiVersion,
     ).also(::include)
 
     modImplementation(

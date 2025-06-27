@@ -68,6 +68,8 @@ public class ParadiseLostItems {
     public static final Item FLAXWEAVE = add("flaxweave", new Item(resource()));
     public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource()), compostable30);
 
+    // Loot
+    public static final Item SOL_POTTERY_SHERD = add("sol_pottery_sherd", new Item(resource()));
 
     private static Settings tool() {
         return new Settings();
