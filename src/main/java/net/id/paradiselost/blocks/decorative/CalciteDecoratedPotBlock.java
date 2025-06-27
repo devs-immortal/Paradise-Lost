@@ -51,15 +51,15 @@ public class CalciteDecoratedPotBlock extends DecoratedPotBlock {
                     float f;
                     if (decoratedPotBlockEntity.isEmpty()) {
                         decoratedPotBlockEntity.setStack(itemStack2);
-                        f = (float)itemStack2.getCount() / (float)itemStack2.getMaxCount();
+                        f = (float) itemStack2.getCount() / (float) itemStack2.getMaxCount();
                     } else {
                         itemStack.increment(1);
-                        f = (float)itemStack.getCount() / (float)itemStack.getMaxCount();
+                        f = (float) itemStack.getCount() / (float) itemStack.getMaxCount();
                     }
 
                     world.playSound(null, pos, SoundEvents.BLOCK_DECORATED_POT_INSERT, SoundCategory.BLOCKS, 1.0F, 0.7F + 0.5F * f);
                     if (world instanceof ServerWorld serverWorld) {
-                        serverWorld.spawnParticles(ParticleTypes.DUST_PLUME, (double)pos.getX() + 0.5, (double)pos.getY() + 1.2, (double)pos.getZ() + 0.5, 7, 0.0, 0.0, 0.0, 0.0);
+                        serverWorld.spawnParticles(ParticleTypes.DUST_PLUME, (double) pos.getX() + 0.5, (double) pos.getY() + 1.2, (double) pos.getZ() + 0.5, 7, 0.0, 0.0, 0.0, 0.0);
                     }
 
                     decoratedPotBlockEntity.markDirty();

@@ -38,9 +38,9 @@ public class XpCircletItem extends ArmorItem {
         if (level < 17)
             return level * level + 6 * level;
         else if (level < 32)
-            return (int)Math.floor((2.5 * level * level) - (40.5 * level) + 360);
+            return (int) Math.floor((2.5 * level * level) - (40.5 * level) + 360);
         else
-            return (int)Math.floor((4.5 * level * level) - (162.5 * level) + 2220);
+            return (int) Math.floor((4.5 * level * level) - (162.5 * level) + 2220);
     }
 
     private static int experienceForNextLevel(int level) {

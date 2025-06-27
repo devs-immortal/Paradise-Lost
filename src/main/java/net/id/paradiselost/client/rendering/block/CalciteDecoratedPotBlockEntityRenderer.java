@@ -22,7 +22,6 @@ import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
@@ -103,7 +102,7 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
 
             if (normalSprite != null) {
                 var textureIdentifier = normalSprite.getTextureId();
-                var calciteSprite = new SpriteIdentifier(normalSprite.getAtlasId(), Identifier.of(textureIdentifier.getNamespace(), textureIdentifier.getPath()+"_calcite"));
+                var calciteSprite = new SpriteIdentifier(normalSprite.getAtlasId(), Identifier.of(textureIdentifier.getNamespace(), textureIdentifier.getPath() + "_calcite"));
                 return calciteSprite;
             }
         }
@@ -121,7 +120,7 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
         matrixStack.translate(-0.5, 0.0, -0.5);
         CalciteDecoratedPotBlockEntity.WobbleType wobbleType = decoratedPotBlockEntity.lastWobbleType;
         if (wobbleType != null && decoratedPotBlockEntity.getWorld() != null) {
-            float g = ((float)(decoratedPotBlockEntity.getWorld().getTime() - decoratedPotBlockEntity.lastWobbleTime) + f) / (float)wobbleType.lengthInTicks;
+            float g = ((float) (decoratedPotBlockEntity.getWorld().getTime() - decoratedPotBlockEntity.lastWobbleTime) + f) / (float) wobbleType.lengthInTicks;
             if (g >= 0.0F && g <= 1.0F) {
                 if (wobbleType == CalciteDecoratedPotBlockEntity.WobbleType.POSITIVE) {
                     float h = 0.015625F;

@@ -7,10 +7,7 @@ import net.id.paradiselost.items.armor.XpCircletItem;
 import net.id.paradiselost.util.MiscUtil;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
-import net.minecraft.component.EnchantmentEffectComponentTypes;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -43,7 +40,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
 
     private boolean paradise_lost$fallen = false;
 
-    @Shadow @Final
+    @Final
+    @Shadow
     PlayerInventory inventory;
     @Shadow
     public int experienceLevel;
@@ -146,7 +144,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
     public void vanishCursedItems(CallbackInfo ci) {
         for (ItemStack stack : this.getArmorItems()) {
             if (!stack.isEmpty() && stack.isOf(ParadiseLostItems.XP_CIRCLET)) {
-                XpCircletItem.chargeCirclet(stack, (PlayerEntity)(Object)this);
+                XpCircletItem.chargeCirclet(stack, (PlayerEntity) (Object) this);
                 this.experienceLevel = 0;
                 this.experienceProgress = 0;
                 break;

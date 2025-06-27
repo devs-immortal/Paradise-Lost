@@ -6,7 +6,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
 import net.minecraft.item.MilkBucketItem;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;

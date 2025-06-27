@@ -142,7 +142,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     @Inject(method = "onEquipStack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;emitGameEvent(Lnet/minecraft/registry/entry/RegistryEntry;)V"))
     public void onEquipStack(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
         if (slot == EquipmentSlot.HEAD && newStack.isOf(ParadiseLostItems.XP_CIRCLET)) {
-            XpCircletItem.dischargeCirclet(newStack, (PlayerEntity)(Object)this);
+            XpCircletItem.dischargeCirclet(newStack, (PlayerEntity) (Object) this);
         }
     }
 

@@ -1,9 +1,7 @@
 package net.id.paradiselost.items.tools;
 
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
@@ -12,7 +10,6 @@ import net.minecraft.item.FluidModificationItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;

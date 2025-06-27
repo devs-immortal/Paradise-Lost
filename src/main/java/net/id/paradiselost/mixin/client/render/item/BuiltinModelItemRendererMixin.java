@@ -2,10 +2,7 @@ package net.id.paradiselost.mixin.client.render.item;
 
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.blocks.blockentity.CalciteDecoratedPotBlockEntity;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
@@ -35,7 +32,7 @@ public class BuiltinModelItemRendererMixin {
     public void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, CallbackInfo ci) {
         Item item = stack.getItem();
         if (item instanceof BlockItem) {
-            BlockState blockState = ((BlockItem)item).getBlock().getDefaultState();
+            BlockState blockState = ((BlockItem) item).getBlock().getDefaultState();
             if (blockState.isOf(ParadiseLostBlocks.CALCITE_DECORATED_POT)) {
                 this.renderCalciteDecoratedPot.readFrom(stack);
                 this.blockEntityRenderDispatcher.renderEntity(this.renderCalciteDecoratedPot, matrices, vertexConsumers, light, overlay);
