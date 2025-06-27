@@ -70,6 +70,7 @@ public class ParadiseLostItems {
 
     // Loot
     public static final Item SOL_POTTERY_SHERD = add("sol_pottery_sherd", new Item(resource()));
+    public static final Item COO_POTTERY_SHERD = add("coo_pottery_sherd", new Item(resource()));
 
     private static Settings tool() {
         return new Settings();

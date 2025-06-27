@@ -322,6 +322,7 @@ public class ParadiseLostItemGroups {
                 entries.add(FLAX_THREAD);
                 entries.add(FLAXWEAVE);
                 entries.add(SOL_POTTERY_SHERD);
+                entries.add(COO_POTTERY_SHERD);
             }));
     public static final RegistryKey<ItemGroup> PARADISE_FOOD = create("food", FabricItemGroup.builder()
             .icon(() -> new ItemStack(AMADRYS_NOODLES))

@@ -14,19 +14,19 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:skull_pottery_sherd"
+          "name": "paradise_lost:sol_pottery_sherd"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:skull_pottery_sherd"
+          "name": "paradise_lost:sol_pottery_sherd"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:arms_up_pottery_sherd"
+          "name": "paradise_lost:coo_pottery_sherd"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:arms_up_pottery_sherd"
+          "name": "paradise_lost:coo_pottery_sherd"
         },
         {
           "type": "minecraft:item",
@@ -53,10 +53,6 @@
               "function": "minecraft:set_components"
             }
           ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "paradise_lost:xp_circlet"
         },
         {
           "type": "minecraft:item",
