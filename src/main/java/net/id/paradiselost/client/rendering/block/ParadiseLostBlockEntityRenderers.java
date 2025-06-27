@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.block.entity.DecoratedPotBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.HangingSignBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 
@@ -17,6 +18,7 @@ public class ParadiseLostBlockEntityRenderers {
         BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.TREE_TAP, TreeTapBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.SIGN, SignBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.HANGING_SIGN, HangingSignBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.CALCITE_DECORATED_POT, CalciteDecoratedPotBlockEntityRenderer::new);
 		// BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.DUNGEON_SWITCH, DungeonSwitchBlockEntityRenderer::new);
     }
 }

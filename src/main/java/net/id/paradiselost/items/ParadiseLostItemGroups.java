@@ -223,6 +223,7 @@ public class ParadiseLostItemGroups {
                 entries.add(CHERINE_LANTERN);
                 entries.add(OLVITE_CHAIN);
                 entries.add(CALCITE_FLOWER_POT);
+                entries.add(CALCITE_DECORATED_POT);
                 entries.add(CHERINE_CAMPFIRE);
                 entries.add(AUREL_BOOKSHELF);
                 entries.add(FLAXWEAVE_CUSHION);

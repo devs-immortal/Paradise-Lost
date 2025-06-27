@@ -27,6 +27,7 @@
     "item.MapStateMixin",
     "item.PotionItemMixin",
     "potion.BrewingRecipeRegistryMixin",
+    "recipe.CraftingDecoratedPotRecipeMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayNetworkHandlerMixin",
@@ -54,6 +55,7 @@
     "client.render.NativeImageAccessor",
     "client.render.PlayerHeldItemFeatureRendererMixin",
     "client.render.WorldRendererMixin",
+    "client.render.item.BuiltinModelItemRendererMixin",
     "client.sound.MinecartInsideSoundInstanceMixin",
     "client.sound.MovingMinecartSoundInstanceMixin"
   ],

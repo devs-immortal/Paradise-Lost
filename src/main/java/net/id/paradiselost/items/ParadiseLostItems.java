@@ -409,6 +409,7 @@ public class ParadiseLostItems {
 
     // util blocks (enchanter, freezer, etc.)
     public static final BlockItem CALCITE_FLOWER_POT = add(ParadiseLostBlocks.CALCITE_FLOWER_POT);
+    public static final BlockItem CALCITE_DECORATED_POT = add(ParadiseLostBlocks.CALCITE_DECORATED_POT);
     public static final BlockItem CHERINE_CAMPFIRE = add(ParadiseLostBlocks.CHERINE_CAMPFIRE);
     public static final BlockItem SUSPICIOUS_DIRT = add(ParadiseLostBlocks.SUSPICIOUS_DIRT);
     public static final BlockItem INCUBATOR = add(ParadiseLostBlocks.INCUBATOR, fuel(300));

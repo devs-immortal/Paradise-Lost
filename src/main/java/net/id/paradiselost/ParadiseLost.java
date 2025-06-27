@@ -148,11 +148,9 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer {
         ModelLoadingPlugin.register(pluginContext -> {
             pluginContext.modifyModelAfterBake().register(ModelModifier.OVERRIDE_PHASE, (model, context) -> {
                 Identifier id = context.resourceId();
-
                 if (id != null && id.toString().contains("potted")) {
                     return new ModifiedFlowerPotModel(model);
                 }
-
                 return model;
             });
         });

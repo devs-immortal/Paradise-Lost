@@ -146,7 +146,8 @@ public class ParadiseLostBlocks {
         return copy(POTTED_OAK_SAPLING);
     }
 
-    public static final CalciteFlowerPotBlock CALCITE_FLOWER_POT = add("calcite_flower_pot", new CalciteFlowerPotBlock(AbstractBlock.Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)));
+    public static final CalciteFlowerPotBlock CALCITE_FLOWER_POT = add("calcite_flower_pot", new CalciteFlowerPotBlock(copy(FLOWER_POT)));
+    public static final CalciteDecoratedPotBlock CALCITE_DECORATED_POT = add("calcite_decorated_pot", new CalciteDecoratedPotBlock(copy(DECORATED_POT).mapColor(MapColor.WHITE)));
 
     public static final CampfireBlock CHERINE_CAMPFIRE = add("cherine_campfire", new CherineCampfireBlock(false, 1, Settings.copy(CAMPFIRE)), cutoutRenderLayer);
 
