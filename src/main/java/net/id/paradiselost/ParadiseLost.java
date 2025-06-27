@@ -2,16 +2,13 @@ package net.id.paradiselost;
 
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
-import net.fabricmc.fabric.api.client.model.loading.v1.ModelModifier;
 import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradiselost.blocks.ParadiseLostBlockSets;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.blocks.ParadiseLostWoodTypes;
 import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
-import net.id.paradiselost.client.model.ModifiedFlowerPotModel;
 import net.id.paradiselost.client.model.ParadiseLostModelLayers;
-import net.id.paradiselost.client.model.armor.ParadiseLostArmorModels;
+import net.id.paradiselost.client.model.armor.ParadiseLostModels;
 import net.id.paradiselost.client.rendering.block.ParadiseLostBlockEntityRenderers;
 import net.id.paradiselost.client.rendering.entity.ParadiseLostEntityRenderers;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
@@ -105,7 +102,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer {
     @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
         initializeCrowdin();
-        ParadiseLostArmorModels.initClient();
+        ParadiseLostModels.initClient();
         ParadiseLostModelLayers.initClient();
         ParadiseLostEntityRenderers.initClient();
         ParadiseLostColorProviders.initClient();
@@ -118,15 +115,6 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer {
                 locate("charged"),
                 (stack, world, entity, seed) -> stack.getItem() instanceof XpCircletItem && XpCircletItem.isCharged(stack) ? 1.0F : 0.0F
         );
-        ModelLoadingPlugin.register(pluginContext -> {
-            pluginContext.modifyModelAfterBake().register(ModelModifier.OVERRIDE_PHASE, (model, context) -> {
-                Identifier id = context.resourceId();
-                if (id != null && id.toString().contains("potted")) {
-                    return new ModifiedFlowerPotModel(model);
-                }
-                return model;
-            });
-        });
     }
 
     @Environment(EnvType.CLIENT)
