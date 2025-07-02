@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "paradise_lost:bloomed_calcite"
+  },
+  "result": {
+    "id": "paradise_lost:bloomed_calcite_tiles",
+    "count": 1
+  }
+}

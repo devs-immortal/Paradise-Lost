@@ -130,6 +130,7 @@ public class ParadiseLostBlocks {
     // Burnished Stone
     public static final SimpleBlockSet BURNISHED_STONE_SET = registerSimpleBlockSet("burnished_stone", create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool());
 
+
     private static Settings amberTiles() {
         return create().mapColor(MapColor.GOLD).requiresTool().sounds(BlockSoundGroup.CALCITE).strength(2, 6);
     }
@@ -141,6 +142,8 @@ public class ParadiseLostBlocks {
 
     // Misc
     public static final CropGrowthBlock BLOOMED_CALCITE = add("bloomed_calcite", new CropGrowthBlock(copy(CALCITE).ticksRandomly(), 2));
+    public static final Block CALCITE_TILES = add("calcite_tiles", new Block(copy(CALCITE)));
+    public static final Block BLOOMED_CALCITE_TILES = add("bloomed_calcite_tiles", new Block(copy(CALCITE)));
 
     protected static Settings flowerPot() {
         return copy(POTTED_OAK_SAPLING);

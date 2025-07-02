@@ -120,6 +120,8 @@ public class ParadiseLostItemGroups {
                 entries.add(GOLDEN_AMBER_TILE);
                 entries.add(GOLDEN_AMBER_TILE_STAIRS);
                 entries.add(GOLDEN_AMBER_TILE_SLAB);
+                entries.add(CALCITE_TILES);
+                entries.add(BLOOMED_CALCITE_TILES);
                 // overworld hybrid
                 entries.add(BLOOMED_CALCITE);
                 // ores

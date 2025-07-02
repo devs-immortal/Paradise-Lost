@@ -79,6 +79,7 @@ def generate_slab_block(block_id, base_block_id, texture):
     item_model_file.close()
     
 
-generate_standard_block("suspicious_dirt")
+generate_standard_block("bloomed_calcite_tiles")
+generate_standard_block("calcite_tiles")
 
 

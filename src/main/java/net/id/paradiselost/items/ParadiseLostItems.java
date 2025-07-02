@@ -310,6 +310,8 @@ public class ParadiseLostItems {
     public static final BlockItem CHISELED_LEVITA_BRICK = add(ParadiseLostBlocks.CHISELED_LEVITA_BRICK);
     public static final BlockItem BURNISHED_STONE = add(ParadiseLostBlocks.BURNISHED_STONE_SET.block());
     public static final BlockItem GOLDEN_AMBER_TILE = add(ParadiseLostBlocks.GOLDEN_AMBER_TILE);
+    public static final BlockItem CALCITE_TILES = add(ParadiseLostBlocks.CALCITE_TILES);
+    public static final BlockItem BLOOMED_CALCITE_TILES = add(ParadiseLostBlocks.BLOOMED_CALCITE_TILES);
 
     // stairs
     public static final BlockItem AUREL_STAIRS = add(ParadiseLostBlocks.AUREL_WOODSTUFF.plankStairs(), fuel(300));
