@@ -37,7 +37,8 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
 
                 var placement = origin.offset(axis, i);
 
-                adjust: {
+                adjust:
+                {
                     var placementState = world.getBlockState(placement);
 
                     if (!placementState.isReplaceable()) {
@@ -81,8 +82,7 @@ public class FallenPillarFeature extends Feature<LongFeatureConfig> {
                         var shellState = config.shell().get(random, shell);
                         if (shellState.contains(Properties.HORIZONTAL_FACING)) {
                             shellState = shellState.with(Properties.HORIZONTAL_FACING, dir.getOpposite());
-                        }
-                        else if (shellState.contains(Properties.FACING)) {
+                        } else if (shellState.contains(Properties.FACING)) {
                             shellState = shellState.with(Properties.FACING, dir.getOpposite());
                         }
                         world.setBlockState(shell, shellState, Block.NOTIFY_ALL);

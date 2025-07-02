@@ -122,9 +122,9 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer {
         // No code changes for when the mod isn't present. :-)
         if (FabricLoader.getInstance().isModLoaded("crowdin-translate")) {
             try {
-                var CrowdinTranslate = Class.forName("de.guntram.mcmod.crowdintranslate.CrowdinTranslate");
+                var crowdinTranslate = Class.forName("de.guntram.mcmod.crowdintranslate.CrowdinTranslate");
                 var lookup = MethodHandles.lookup();
-                var downloadTranslations = lookup.findStatic(CrowdinTranslate, "downloadTranslations", MethodType.methodType(void.class, String.class));
+                var downloadTranslations = lookup.findStatic(crowdinTranslate, "downloadTranslations", MethodType.methodType(void.class, String.class));
                 downloadTranslations.invokeExact(MOD_ID);
             } catch (Throwable e) {
                 LOG.warn("Failed to setup Crowdin Translate", e);

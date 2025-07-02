@@ -23,13 +23,13 @@ public class ParadiseLostDimension {
     public static final RegistryKey<DimensionType> DIMENSION_TYPE = key(RegistryKeys.DIMENSION_TYPE, MOD_ID);
     public static final RegistryKey<DimensionOptions> OPTIONS_KEY = key(RegistryKeys.DIMENSION, MOD_ID);
     public static final RegistryKey<FlatLevelGeneratorPreset> SUPERFLAT_PRESET = key(RegistryKeys.FLAT_LEVEL_GENERATOR_PRESET, MOD_ID);
-    
+
     private static DimensionType dimensionType;
-    
+
     private static <T> RegistryKey<T> key(RegistryKey<? extends Registry<T>> registry, String name) {
         return RegistryKey.of(registry, locate(name));
     }
-    
+
     public static void init() {
         try {
             dimensionType = MiscUtil.deserializeDataJson(DimensionType.CODEC, locate("dimension_type/paradise_lost"));
@@ -39,15 +39,15 @@ public class ParadiseLostDimension {
     }
 
     public static void initPortal() {
-		CustomPortalBuilder.beginPortal()
-				.frameBlock(ParadiseLostBlocks.BLOOMED_CALCITE)
-				.customPortalBlock(ParadiseLostBlocks.BLUE_PORTAL)
-				.destDimID(locate(MOD_ID))
-				.tintColor(55, 89, 195)
-				.lightWithWater()
-				.onlyLightInOverworld()
-				.registerInPortalAmbienceSound(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRIGGER, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
-				.registerPostTPPortalAmbience(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRAVEL, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
-				.registerPortal();
+        CustomPortalBuilder.beginPortal()
+                .frameBlock(ParadiseLostBlocks.BLOOMED_CALCITE)
+                .customPortalBlock(ParadiseLostBlocks.BLUE_PORTAL)
+                .destDimID(locate(MOD_ID))
+                .tintColor(55, 89, 195)
+                .lightWithWater()
+                .onlyLightInOverworld()
+                .registerInPortalAmbienceSound(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRIGGER, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
+                .registerPostTPPortalAmbience(player -> new CPASoundEventData(ParadiseLostSoundEvents.BLOCK_PORTAL_TRAVEL, player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F))
+                .registerPortal();
     }
 }

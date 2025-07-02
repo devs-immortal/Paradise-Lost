@@ -19,6 +19,7 @@ public class EnvoyEyesFeatureRenderer<T extends EnvoyEntity> extends EyesFeature
         super(featureRendererContext);
     }
 
+    @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if (entity.getEnlightened()) {
             super.render(matrices, vertexConsumers, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);

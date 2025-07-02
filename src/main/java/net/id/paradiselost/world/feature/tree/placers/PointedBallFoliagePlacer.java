@@ -16,7 +16,7 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class PointedBallFoliagePlacer extends FoliagePlacer {
 
-    public static final MapCodec<PointedBallFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+    public static final MapCodec<PointedBallFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             IntProvider.createValidatingCodec(0, 16).fieldOf("offset").forGetter(placer -> placer.offset),
             IntProvider.createValidatingCodec(1, 4).fieldOf("count").forGetter(placer -> placer.count)
     ).apply(instance, PointedBallFoliagePlacer::new));

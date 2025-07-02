@@ -74,8 +74,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public boolean isInAir;
     protected int secsUntilEgg;
     private MoaGenes genes;
-    
-    @NotNull private SimpleInventory inventory = DUMMY;
+
+    @NotNull
+    private SimpleInventory inventory = DUMMY;
 
     public MoaEntity(EntityType<? extends MoaEntity> entityType, World world) {
         super(entityType, world);
@@ -88,9 +89,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D)
                 .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0);
-                //.add(EntityAttributes.GENERIC_GRAVITY, 0.95f)
-                //.add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.22f)
-                //.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f);
+        //.add(EntityAttributes.GENERIC_GRAVITY, 0.95f)
+        //.add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.22f)
+        //.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f);
     }
 
     @Override
@@ -139,7 +140,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         builder.add(AIR_TICKS, 0);
         builder.add(CHEST, ItemStack.EMPTY);
     }
-    
+
     /**
      * Gets the {@link ItemStack} of the chest on this Moa.
      *
@@ -148,7 +149,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public ItemStack getChest() {
         return dataTracker.get(CHEST);
     }
-    
+
     /**
      * Checks if this Moa is wearing a chest.
      *
@@ -157,10 +158,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public boolean hasChest() {
         return !getChest().isEmpty();
     }
-    
+
     /**
      * Sets a new chest for this Moa from the provided {@link ItemStack}.
-     *
+     * <p>
      * This will drop the items if the chest is removed.
      *
      * @param stack The new stack
@@ -173,7 +174,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         dataTracker.set(CHEST, stack);
         refreshChest(true);
     }
-    
+
     /**
      * Refreshes the inventory of this Moa when the chest changes.
      *
@@ -196,7 +197,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             }
         }
     }
-    
+
     @Override
     protected void dropInventory() {
         super.dropInventory();
@@ -362,7 +363,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             }
         }
     }
+
     private boolean canFlap = true;
+
     public void attemptMoaFlap(boolean bypassFlapCheck) {
         if (getWingRoll() > 0.8 && canFlap || bypassFlapCheck) {
             if (!this.getWorld().isClient) {
@@ -383,7 +386,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     protected void playHurtSound(DamageSource source) {
         this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_HURT, SoundCategory.NEUTRAL, 0.2F, getRandomFloat(0.78f, 0.82f));
     }
+
     boolean shouldRoll;
+
     @Override
     public void tick() {
         isInAir = !isOnGround();
@@ -414,7 +419,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 randFlapTimer--;
             }
         }
-
 
 
         if (hasPassengers()) {
@@ -595,6 +599,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             }
         }
     }
+
     @Override
     protected void updateLimbs(float posDelta) {
         if (hasPassengers()) {
@@ -635,12 +640,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     openInventory(player);
                     return ActionResult.SUCCESS;
                 }
-                
+
                 // Short circuit to hopefully save a few cycles.
                 if (heldStack.isEmpty()) {
                     return super.interactMob(player, hand);
                 }
-                
+
                 var item = heldStack.getItem();
                 if (heldStack.isIn(ConventionalItemTags.RAW_MEAT_FOODS)) {
                     feedMob(heldStack);
@@ -775,10 +780,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         if (!(matingAnimal instanceof MoaEntity matingMoa)) {
             return null;
         }
-        
+
         var genesA = getGenes();
         var genesB = matingMoa.getGenes();
-        
+
         var eggStack = genesA.getEggForBreeding(genesB, world, getBlockPos());
         var baby = ParadiseLostEntityTypes.MOA.create(world);
         if (baby == null) {
@@ -857,12 +862,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public LivingEntity getOwner() {
         return Optional.ofNullable(getOwnerUuid()).map(getWorld()::getPlayerByUuid).orElse(null);
     }
-    
+
     @Override
     public void onInventoryChanged(Inventory sender) {
         //TODO
     }
-    
+
     @Override
     public void openInventory(PlayerEntity player) {
         if (!getWorld().isClient && (!hasPassengers() || hasPassenger(player)) && getGenes().isTamed()) {
@@ -876,7 +881,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 public Text getDisplayName() {
                     return Text.translatable("container.paradise_lost.moa");
                 }
-    
+
                 @Override
                 public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
                     return new MoaScreenHandler(syncId, inv, inventory, MoaEntity.this);
@@ -893,7 +898,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     protected float getPassengerAttachmentY(EntityDimensions dimensions, float scaleFactor) {
         return dimensions.height() + -0.75F * scaleFactor;
     }
-    
+
     /**
      * Gets the current {@link Inventory} of this Moa, may be empty.
      *
@@ -950,7 +955,6 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
             } else if (!this.hasReached() && MoaEntity.this.random.nextFloat() < 0.025F) {
                 MoaEntity.this.playSound(ParadiseLostSoundEvents.ENTITY_MOA_DEATH, 0.5F, 2.0F);
             }
-
 
 
             super.tick();

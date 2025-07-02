@@ -29,7 +29,7 @@ public class BloodstoneHUDRenderer {
         PlayerEntity player = MinecraftClient.getInstance().player;
         ItemStack stack = player.getMainHandStack();
         if (stack.getItem() instanceof BloodstoneItem) {
-            var hasBloodstoneData = stack.getComponents().stream().anyMatch((c) -> c.type() == ParadiseLostDataComponentTypes.MOA_GENES || c.type() == ParadiseLostDataComponentTypes.BLOODSTONE);
+            var hasBloodstoneData = stack.getComponents().stream().anyMatch(c -> c.type() == ParadiseLostDataComponentTypes.MOA_GENES || c.type() == ParadiseLostDataComponentTypes.BLOODSTONE);
             if (hasBloodstoneData) {
                 MinecraftClient client = MinecraftClient.getInstance();
                 BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromComponents(stack);
@@ -56,8 +56,8 @@ public class BloodstoneHUDRenderer {
     private static boolean isLookingAtMatchingEntity(MinecraftClient client, BloodstoneCapturedData capturedData) {
         if (
                 client.crosshairTarget == null
-                || client.crosshairTarget.getType() != HitResult.Type.ENTITY
-                || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity)
+                        || client.crosshairTarget.getType() != HitResult.Type.ENTITY
+                        || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity)
         ) {
             return false;
         }

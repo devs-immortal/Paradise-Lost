@@ -8,7 +8,13 @@ import net.id.paradiselost.blocks.natural.cloud.ParadiseLostCloudBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameOverlayRenderer;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
@@ -64,9 +70,9 @@ public abstract class InGameOverlayRendererMixin {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
 
         for (int i = 0; i < 8; ++i) {
-            double d = player.getX() + (double) (((float) ((i) % 2) - 0.5F) * player.getWidth() * 0.8F);
-            double e = player.getEyeY() + (double) (((float) ((i >> 1) % 2) - 0.5F) * 0.1F);
-            double f = player.getZ() + (double) (((float) ((i >> 2) % 2) - 0.5F) * player.getWidth() * 0.8F);
+            double d = player.getX() + ((i % 2) - 0.5F) * player.getWidth() * 0.8F;
+            double e = player.getEyeY() + (((i >> 1) % 2) - 0.5F) * 0.1F;
+            double f = player.getZ() + (((i >> 2) % 2) - 0.5F) * player.getWidth() * 0.8F;
             mutable.set(d, e, f);
             BlockState blockState = player.getWorld().getBlockState(mutable);
             if (blockState.getBlock() instanceof ParadiseLostCloudBlock) {

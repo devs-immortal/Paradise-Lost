@@ -310,7 +310,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
                                 LootPool.builder()
                                         .conditionally(
                                                 BlockStatePropertyLootCondition.builder(BLACKCURRANT_BUSH)
-                                                .properties(StatePredicate.Builder.create().exactMatch(SweetBerryBushBlock.AGE, 3)))
+                                                        .properties(StatePredicate.Builder.create().exactMatch(SweetBerryBushBlock.AGE, 3)))
                                         .with(ItemEntry.builder(block).apply(ApplyBonusLootFunction.binomialWithBonusCount(impl.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3)))
                         )
         );

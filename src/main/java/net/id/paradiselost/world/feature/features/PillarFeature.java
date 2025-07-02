@@ -49,8 +49,7 @@ public class PillarFeature extends Feature<LongFeatureConfig> {
 
                             if (shellState.contains(Properties.HORIZONTAL_FACING)) {
                                 shellState = shellState.with(Properties.HORIZONTAL_FACING, dir.getOpposite());
-                            }
-                            else if (shellState.contains(Properties.FACING)) {
+                            } else if (shellState.contains(Properties.FACING)) {
                                 shellState = shellState.with(Properties.FACING, dir.getOpposite());
                             }
 

@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 
-
 @Mixin(MemoryModuleType.class)
 public interface MemoryModuleTypeInvoker {
 
@@ -15,8 +14,8 @@ public interface MemoryModuleTypeInvoker {
         throw new AssertionError();
     }
 
-   // @Invoker("register")
-   // static <U> MemoryModuleType<U> invokeRegister(String id) {
-   //     throw new AssertionError();
-   // }
+    // @Invoker("register")
+    // static <U> MemoryModuleType<U> invokeRegister(String id) {
+    //     throw new AssertionError();
+    // }
 }

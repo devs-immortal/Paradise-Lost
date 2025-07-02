@@ -50,21 +50,21 @@ public class FloatingBlockEntity extends BlockLikeEntity {
             if (!(entity instanceof BlockLikeEntity) && !entity.noClip && this.collides) {
                 entity.move(MovementType.SHULKER_BOX, this.getVelocity());
                 entity.setOnGround(true);
-                
+
                 entity.setPosition(entity.getX(), this.getBoundingBox().maxY, entity.getZ());
                 entity.fallDistance = 0F;
             }
             this.postTickEntityCollision(entity);
         }
     }
-    
+
     @Override
     public void postTickMovement() {
         // Drag
         this.setVelocity(this.getVelocity().multiply(0.98D));
-        
+
         this.lastYVelocity = this.getVelocity().y;
-        
+
         if (!this.hasNoGravity()) {
             if (!isDropping() && !shouldBeginDropping()) {
                 if (isInTag(ParadiseLostBlockTags.FAST_FLOATERS)) {
@@ -79,55 +79,55 @@ public class FloatingBlockEntity extends BlockLikeEntity {
         }
         this.move(MovementType.SELF, this.getVelocity());
     }
-    
+
     @Override
     public boolean shouldCease() {
         return !this.getWorld().isClient && (super.shouldCease()
-               || (this.isOnGround() && (this.isDropping() || this.getVelocity().getY() == 0)
-                   || (this.verticalCollision && !this.isOnGround())));
+                || (this.isOnGround() && (this.isDropping() || this.getVelocity().getY() == 0)
+                || (this.verticalCollision && !this.isOnGround())));
     }
-    
+
     public Supplier<Boolean> getDropState() {
         return dropState;
     }
-    
+
     public void setDropState(Supplier<Boolean> supplier) {
         dropState = supplier;
     }
-    
+
     public boolean shouldBeginDropping() {
         return getDropState().get();
     }
-    
+
     public boolean isDropping() {
         return dropping;
     }
-    
+
     public void setDropping(boolean dropping) {
         this.dropping = dropping;
     }
-    
+
     public BiConsumer<Double, Boolean> getOnEndFloating() {
         return this.onEndFloating;
     }
-    
+
     // It's fine if this isn't properly synced
     public void setOnEndFloating(BiConsumer<Double, Boolean> consumer) {
         this.onEndFloating = consumer;
     }
-    
+
     @Override
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
         compound.putBoolean("Dropping", this.isDropping());
     }
-    
+
     @Override
     public void readCustomDataFromNbt(NbtCompound compound) {
         super.readCustomDataFromNbt(compound);
         if (compound.contains("Dropping", 99)) this.setDropping(compound.getBoolean("Dropping"));
     }
-    
+
     @Override
     public boolean trySetBlock() {
         if (super.trySetBlock()) {
@@ -136,7 +136,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
         }
         return false;
     }
-    
+
     @Override
     public void breakApart() {
         super.breakApart();
@@ -146,7 +146,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
     public boolean isInTag(TagKey<Block> tag) {
         return this.getBlockState().isIn(tag) && !this.partOfSet;
     }
-    
+
     @Override
     public void alignWith(BlockLikeEntity other, Vec3i offset) {
         super.alignWith(other, offset);

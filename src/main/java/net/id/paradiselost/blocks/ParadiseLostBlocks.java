@@ -29,7 +29,7 @@ import static net.id.paradiselost.blocks.BlockRegistration.*;
 @SuppressWarnings("unused")
 public class ParadiseLostBlocks {
 
-	protected static Settings unbreakable(AbstractBlock.Settings settings) {
+    protected static Settings unbreakable(AbstractBlock.Settings settings) {
         return settings.strength(-1f, 3600000f);
     }
 
@@ -37,6 +37,7 @@ public class ParadiseLostBlocks {
     private static Settings grassBlock() {
         return copy(Blocks.GRASS_BLOCK).mapColor(MapColor.LICHEN_GREEN).strength(0.4f);
     }
+
     private static Settings permafrost() {
         return copy(Blocks.DIRT).strength(2f).sounds(BlockSoundGroup.GILDED_BLACKSTONE);
     }
@@ -157,6 +158,7 @@ public class ParadiseLostBlocks {
     protected static Settings leafPile() {
         return create().strength(0.2f).sounds(BlockSoundGroup.VINE).replaceable().nonOpaque().suffocates(never).blockVision(never).pistonBehavior(PistonBehavior.DESTROY);
     }
+
     // Aurel Wood
     public static final WoodBlockSet AUREL_WOODSTUFF = registerWoodBlockSet(ParadiseLostWoodTypes.AUREL, ParadiseLostBlockSets.AUREL, ParadiseLostSaplingGenerators.AUREL, MapColor.TERRACOTTA_BROWN, MapColor.TERRACOTTA_BROWN, MapColor.PALE_GREEN);
     public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(copy(OAK_LOG).mapColor(MapColor.TERRACOTTA_WHITE)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedLog()));
@@ -178,9 +180,11 @@ public class ParadiseLostBlocks {
     protected static Settings wisteriaLeaf() {
         return copy(OAK_LEAVES);
     }
+
     protected static Settings wisteriaHanger() {
         return create().pistonBehavior(PistonBehavior.DESTROY).strength(0.2f).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).suffocates(never).blockVision(never);
     }
+
     protected static Settings wisteriaSapling() {
         return copy(Blocks.OAK_SAPLING);
     }
@@ -207,6 +211,7 @@ public class ParadiseLostBlocks {
     private static Settings shrub() {
         return copy(Blocks.SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ).mapColor(MapColor.PALE_GREEN);
     }
+
     private static Settings crop() {
         return copy(Blocks.WHEAT).mapColor(MapColor.PALE_GREEN);
     }
@@ -263,7 +268,7 @@ public class ParadiseLostBlocks {
 
     // Tall Flowers
     public static final ParadiseLostTallBrushBlock WILD_FLAX = add("wild_flax", new ParadiseLostTallBrushBlock(flower()), flammablePlant, cutoutMippedRenderLayer);
-    
+
     // Ores
     public static final ExperienceDroppingBlock CHERINE_ORE = add("cherine_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), create().requiresTool().strength(1f, 3f)));
     public static final ExperienceDroppingBlock OLVITE_ORE = add("olvite_ore", new ExperienceDroppingBlock(UniformIntProvider.create(1, 3), create().requiresTool().strength(1.5f, 3f)));
@@ -297,7 +302,7 @@ public class ParadiseLostBlocks {
     public static final IncubatorBlock INCUBATOR = add("incubator", new IncubatorBlock(create().mapColor(MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
     public static final IncubatorBlock NEST = add("nest", new IncubatorBlock(create().mapColor(MapColor.PALE_YELLOW).strength(0.3f).sounds(BlockSoundGroup.GRASS).nonOpaque(), 0.35F), cutoutMippedRenderLayer);
     public static final FoodBowlBlock FOOD_BOWL = add("food_bowl", new FoodBowlBlock(create().mapColor(MapColor.DULL_RED).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()), cutoutMippedRenderLayer);
-	public static final Block TREE_TAP = add("tree_tap", new TreeTapBlock(create().mapColor(MapColor.SPRUCE_BROWN).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque().ticksRandomly()), cutoutRenderLayer);
+    public static final Block TREE_TAP = add("tree_tap", new TreeTapBlock(create().mapColor(MapColor.SPRUCE_BROWN).strength(2.5f).sounds(BlockSoundGroup.WOOD).nonOpaque().ticksRandomly()), cutoutRenderLayer);
     public static final NitraBlock NITRA_BUNCH = add("nitra_bunch", new NitraBlock(create().mapColor(MapColor.PALE_YELLOW).strength(0.5f).sounds(BlockSoundGroup.WET_GRASS)));
     public static final Block LEVITA_RAIL = add("levita_rail", new LevitaRailBlock(create().noCollision().strength(0.7F).sounds(BlockSoundGroup.METAL)), cutoutMippedRenderLayer);
 

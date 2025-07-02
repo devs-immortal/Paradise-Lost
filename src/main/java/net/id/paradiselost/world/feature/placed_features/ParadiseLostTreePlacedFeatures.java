@@ -29,6 +29,7 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final RegistryKey<PlacedFeature> SHIELD_HOLLOW_STUMPS = of("shield_hollow_stumps");
 
     public static void init() {
+        // no-op
     }
 
 }

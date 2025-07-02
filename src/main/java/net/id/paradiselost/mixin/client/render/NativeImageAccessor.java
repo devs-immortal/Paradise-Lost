@@ -9,5 +9,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Environment(EnvType.CLIENT)
 @Mixin(NativeImage.class)
 public interface NativeImageAccessor {
-    @Accessor long getPointer();
+    @Accessor
+    long getPointer();
 }

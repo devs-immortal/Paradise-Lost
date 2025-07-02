@@ -32,14 +32,14 @@ public class ParadiseLostEntityRenderers {
         // projectile
         register(ParadiseLostEntityTypes.THROWN_NITRA, FlyingItemEntityRenderer::new);
     }
-    
+
     @SafeVarargs
     private static <T extends Entity> void register(EntityRendererFactory<T> factory, EntityType<? extends T>... types) {
         for (var type : types) {
             register(type, factory);
         }
     }
-    
+
     private static <T extends Entity> void register(EntityType<? extends T> clazz, EntityRendererFactory<T> factory) {
         EntityRendererRegistry.register(clazz, factory);
     }

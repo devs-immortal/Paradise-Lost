@@ -20,6 +20,7 @@ public class PopomEntityRenderer extends MobEntityRenderer<PopomEntity, PopomEnt
         super(renderManager, new PopomEntityModel<>(renderManager.getPart(ParadiseLostModelLayers.POPOM)), 0.7F);
     }
 
+    @Override
     public void render(PopomEntity popomEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         matrixStack.push();
         this.model.furSize = popomEntity.getFurSize();

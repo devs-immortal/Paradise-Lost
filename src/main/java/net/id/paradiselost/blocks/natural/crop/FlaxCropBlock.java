@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 
 public class FlaxCropBlock extends TallCropBlock {
-    
+
     public FlaxCropBlock(Settings settings) {
         super(settings, 2);
     }

@@ -38,7 +38,7 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
 
     public static final MapCodec<TreeTapBlock> CODEC = createCodec(TreeTapBlock::new);
 
-	public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 5, 16);
 
     public TreeTapBlock(Settings settings) {
@@ -53,7 +53,7 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!player.isSneaking() && world.getBlockEntity(pos) instanceof TreeTapBlockEntity treeTapBlockEntity) {
-			treeTapBlockEntity.handleUse(player, hand, player.getStackInHand(hand));
+            treeTapBlockEntity.handleUse(player, hand, player.getStackInHand(hand));
             return ItemActionResult.success(world.isClient());
         }
         return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
@@ -64,87 +64,87 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
         return SHAPE;
     }
 
-	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		Direction direction = state.get(FACING);
-		if (!direction.getAxis().isHorizontal()) {
-			return false;
-		}
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        Direction direction = state.get(FACING);
+        if (!direction.getAxis().isHorizontal()) {
+            return false;
+        }
 
-		BlockPos blockPos = pos.offset(direction.getOpposite());
-		BlockState blockState = world.getBlockState(blockPos);
-		return blockState.isSideSolidFullSquare(world, blockPos, direction) || blockState.isOf(Blocks.DRAGON_HEAD);
-	}
+        BlockPos blockPos = pos.offset(direction.getOpposite());
+        BlockState blockState = world.getBlockState(blockPos);
+        return blockState.isSideSolidFullSquare(world, blockPos, direction) || blockState.isOf(Blocks.DRAGON_HEAD);
+    }
 
-	@Override
-	public BlockRenderType getRenderType(BlockState state) {
-		return BlockRenderType.MODEL;
-	}
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
 
-	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		Direction direction = ctx.getSide();
-		if (!direction.getAxis().isHorizontal()) {
-			return null;
-		}
-		return this.getDefaultState().with(FACING, direction);
-	}
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        Direction direction = ctx.getSide();
+        if (!direction.getAxis().isHorizontal()) {
+            return null;
+        }
+        return this.getDefaultState().with(FACING, direction);
+    }
 
-	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-		builder.add(WATERLOGGED, POWERED, FACING);
-	}
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(WATERLOGGED, POWERED, FACING);
+    }
 
-	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
-		return state.with(FACING, rotation.rotate(state.get(FACING)));
-	}
+    @Override
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    }
 
-	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror) {
-		return state.rotate(mirror.getRotation(state.get(FACING)));
-	}
+    @Override
+    public BlockState mirror(BlockState state, BlockMirror mirror) {
+        return state.rotate(mirror.getRotation(state.get(FACING)));
+    }
 
-	@Override
-	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		super.randomTick(state, world, pos, random);
-		if (!world.isClient && world.getBlockEntity(pos) instanceof TreeTapBlockEntity treeTapBlockEntity) {
-			treeTapBlockEntity.tryCraft();
-		}
-	}
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        super.randomTick(state, world, pos, random);
+        if (!world.isClient && world.getBlockEntity(pos) instanceof TreeTapBlockEntity treeTapBlockEntity) {
+            treeTapBlockEntity.tryCraft();
+        }
+    }
 
-	@Nullable
-	@Override
-	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new TreeTapBlockEntity(pos, state);
     }
 
-	@Override
-	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-		if (!state.isOf(newState.getBlock())) {
-			scatterContents(world, pos);
-			world.updateComparators(pos, this);
-		}
-		super.onStateReplaced(state, world, pos, newState, moved);
-	}
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.isOf(newState.getBlock())) {
+            scatterContents(world, pos);
+            world.updateComparators(pos, this);
+        }
+        super.onStateReplaced(state, world, pos, newState, moved);
+    }
 
-	public static void scatterContents(World world, BlockPos pos) {
-		Block block = world.getBlockState(pos).getBlock();
-		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof Inventory inventory) {
-			ItemScatterer.spawn(world, pos, inventory);
-			world.updateComparators(pos, block);
-		}
-	}
+    public static void scatterContents(World world, BlockPos pos) {
+        Block block = world.getBlockState(pos).getBlock();
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof Inventory inventory) {
+            ItemScatterer.spawn(world, pos, inventory);
+            world.updateComparators(pos, block);
+        }
+    }
 
-	@Override
-	public boolean hasComparatorOutput(BlockState state) {
-		return true;
-	}
+    @Override
+    public boolean hasComparatorOutput(BlockState state) {
+        return true;
+    }
 
-	@Override
-	public int getComparatorOutput(BlockState state, @NotNull World world, BlockPos pos) {
-		return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
-	}
+    @Override
+    public int getComparatorOutput(BlockState state, @NotNull World world, BlockPos pos) {
+        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+    }
 
 }

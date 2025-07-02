@@ -34,7 +34,7 @@ public class AurelTowerGenerator {
         }
 
         public Piece(StructureTemplateManager manager, NbtCompound nbt) {
-            super(ParadiseLostStructureFeatures.AUREL_TOWER_PIECE, nbt, manager, (identifier) -> createPlacementData(BlockRotation.valueOf(nbt.getString("Rot"))));
+            super(ParadiseLostStructureFeatures.AUREL_TOWER_PIECE, nbt, manager, identifier -> createPlacementData(BlockRotation.valueOf(nbt.getString("Rot"))));
         }
 
         public Piece(StructureContext context, NbtCompound nbtCompound) {

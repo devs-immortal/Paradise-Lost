@@ -75,27 +75,34 @@ public class ParadiseLostItems {
     private static Settings tool() {
         return new Settings();
     }
+
     private static Settings shovel(ToolMaterial material, float attackDamage, float attackSpeed) {
         return tool().attributeModifiers(ShovelItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
+
     private static Settings pickaxe(ToolMaterial material, float attackDamage, float attackSpeed) {
         return tool().attributeModifiers(PickaxeItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
+
     private static Settings axe(ToolMaterial material, float attackDamage, float attackSpeed) {
         return tool().attributeModifiers(AxeItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
+
     private static Settings sword(ToolMaterial material, int attackDamage, float attackSpeed) {
         return tool().attributeModifiers(SwordItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
+
     private static Settings hoe(ToolMaterial material, float attackDamage, float attackSpeed) {
         return tool().attributeModifiers(HoeItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
 
     private static final Settings tool = tool();
     private static final Settings rareTool = tool().rarity(RARE);
+
     private static Settings unstackableTool() {
         return tool().maxCount(1);
     }
+
     private static Settings unstackableRareTool() {
         return tool().maxCount(1).rarity(RARE);
     }
@@ -497,7 +504,7 @@ public class ParadiseLostItems {
     public static final BoatSet ORANGE_BOATS = addBoatItems("orange", "PARADISE_LOST_ORANGE");
     public static final BoatSet WISTERIA_BOATS = addBoatItems("wisteria", "PARADISE_LOST_WISTERIA");
 
-    public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, ORANGE_BOATS, WISTERIA_BOATS};
+    public static final BoatSet[] BOAT_SETS = new BoatSet[]{AUREL_BOATS, MOTHER_AUREL_BOATS, ORANGE_BOATS, WISTERIA_BOATS};
 
 
     public static final RegistryEntry<Potion> HEALTH_BOOST_POTION = registerPotion("health_boost", new Potion(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 6000, 1)));

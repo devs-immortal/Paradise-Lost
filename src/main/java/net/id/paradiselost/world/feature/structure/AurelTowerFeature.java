@@ -18,10 +18,10 @@ import java.util.Optional;
 
 public class AurelTowerFeature extends Structure {
     public static final MapCodec<AurelTowerFeature> CODEC = createCodec(AurelTowerFeature::new);
-    
+
     private static final int X_OFFSET = 4;
     private static final int Z_OFFSET = 4;
-    
+
     public AurelTowerFeature(Structure.Config config) {
         super(config);
     }
@@ -40,7 +40,7 @@ public class AurelTowerFeature extends Structure {
         BlockPos newPos = new BlockPos(pos.getStartPos().getX() - X_OFFSET, y, pos.getStartPos().getZ() - Z_OFFSET);
         AurelTowerGenerator.addPieces(context.structureTemplateManager(), collector, BlockRotation.NONE, newPos);
     }
-    
+
     @Override
     public Optional<StructurePosition> getStructurePosition(Context context) {
         context.random().nextDouble();
@@ -50,7 +50,7 @@ public class AurelTowerFeature extends Structure {
         addPieces(structurePiecesCollector, context);
         return Optional.of(new Structure.StructurePosition(blockPos, Either.right(structurePiecesCollector)));
     }
-    
+
     @Override
     public StructureType<?> getType() {
         return ParadiseLostStructureFeatures.AUREL_TOWER;

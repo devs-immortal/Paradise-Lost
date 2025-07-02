@@ -19,7 +19,8 @@ public class PiglinBrainMixin {
         Iterable<ItemStack> iterable = entity.getArmorItems();
         for (ItemStack itemStack : iterable) {
             Item item = itemStack.getItem();
-            if (!(item instanceof ArmorItem) || ((ArmorItem) item).getMaterial() != ParadiseLostArmorMaterials.GLAZED_GOLD) continue;
+            if (!(item instanceof ArmorItem armorItem) || armorItem.getMaterial() != ParadiseLostArmorMaterials.GLAZED_GOLD)
+                continue;
             cir.setReturnValue(true);
         }
     }

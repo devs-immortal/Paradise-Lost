@@ -15,7 +15,7 @@ public class FakeSlot extends Slot {
     private final Supplier<ItemStack> getter;
     private final Consumer<ItemStack> setter;
     private final Predicate<ItemStack> filter;
-    
+
     /**
      *
      * @param x The X pos of the slot
@@ -30,17 +30,17 @@ public class FakeSlot extends Slot {
         this.setter = setter;
         this.filter = filter;
     }
-    
+
     @Override
     public boolean canInsert(ItemStack stack) {
         return stack.isEmpty() || filter.test(stack);
     }
-    
+
     @Override
     public ItemStack getStack() {
         return getter.get();
     }
-    
+
     @Override
     public boolean hasStack() {
         return !getStack().isEmpty();
@@ -54,7 +54,7 @@ public class FakeSlot extends Slot {
         setter.accept(stack);
         markDirty();
     }
-    
+
     @Override
     public ItemStack takeStack(int amount) {
         var existing = getStack();
@@ -62,7 +62,7 @@ public class FakeSlot extends Slot {
         setStack(existing);
         return result;
     }
-    
+
     @Override
     public void markDirty() {
     }

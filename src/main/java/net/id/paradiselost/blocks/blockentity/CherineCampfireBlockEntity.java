@@ -54,9 +54,9 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
                 bl = true;
                 if (campfire.cookingTimes[i] >= campfire.cookingTotalTimes[i]) {
                     SingleStackRecipeInput singleStackRecipeInput = new SingleStackRecipeInput(itemStack);
-                    ItemStack itemStack2 = campfire.matchGetter.getFirstMatch(singleStackRecipeInput, world).map((recipe) -> {
-                        return (recipe.value()).craft(singleStackRecipeInput, world.getRegistryManager());
-                    }).orElse(itemStack);
+                    ItemStack itemStack2 = campfire.matchGetter.getFirstMatch(singleStackRecipeInput, world).map(
+                            recipe -> recipe.value().craft(singleStackRecipeInput, world.getRegistryManager())
+                    ).orElse(itemStack);
                     if (itemStack2.isItemEnabled(world.getEnabledFeatures())) {
                         ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), itemStack2);
                         campfire.itemsBeingCooked.set(i, ItemStack.EMPTY);
@@ -103,9 +103,9 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
         for (int j = 0; j < campfire.itemsBeingCooked.size(); ++j) {
             if (!(campfire.itemsBeingCooked.get(j)).isEmpty() && random.nextFloat() < 0.2F) {
                 Direction direction = Direction.fromHorizontal(Math.floorMod(j + i, 4));
-                double d = (double) pos.getX() + 0.5 - (double) ((float) direction.getOffsetX() * 0.3125F) + (double) ((float) direction.rotateYClockwise().getOffsetX() * 0.3125F);
-                double e = (double) pos.getY() + 0.5;
-                double g = (double) pos.getZ() + 0.5 - (double) ((float) direction.getOffsetZ() * 0.3125F) + (double) ((float) direction.rotateYClockwise().getOffsetZ() * 0.3125F);
+                double d = pos.getX() + 0.5 - (direction.getOffsetX() * 0.3125F) + (direction.rotateYClockwise().getOffsetX() * 0.3125F);
+                double e = pos.getY() + 0.5;
+                double g = pos.getZ() + 0.5 - (direction.getOffsetZ() * 0.3125F) + (direction.rotateYClockwise().getOffsetZ() * 0.3125F);
 
                 for (int k = 0; k < 4; ++k) {
                     world.addParticle(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0);
@@ -119,6 +119,7 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
         return this.itemsBeingCooked;
     }
 
+    @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
         this.itemsBeingCooked.clear();
@@ -136,6 +137,7 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
 
     }
 
+    @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.writeNbt(nbt, registryLookup);
         Inventories.writeNbt(nbt, this.itemsBeingCooked, true, registryLookup);
@@ -143,10 +145,12 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
         nbt.putIntArray("CookingTotalTimes", this.cookingTotalTimes);
     }
 
+    @Override
     public BlockEntityUpdateS2CPacket toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
+    @Override
     public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
         NbtCompound nbtCompound = new NbtCompound();
         Inventories.writeNbt(nbtCompound, this.itemsBeingCooked, true, registryLookup);
@@ -154,7 +158,9 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     }
 
     public Optional<RecipeEntry<CampfireCookingRecipe>> getRecipeFor(ItemStack stack) {
-        return this.itemsBeingCooked.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.matchGetter.getFirstMatch(new SingleStackRecipeInput(stack), this.world);
+        return this.itemsBeingCooked.stream().noneMatch(ItemStack::isEmpty)
+                ? Optional.empty()
+                : this.matchGetter.getFirstMatch(new SingleStackRecipeInput(stack), this.world);
     }
 
     public boolean addItem(@Nullable LivingEntity user, ItemStack stack, int cookTime) {
@@ -183,16 +189,19 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     }
 
 
+    @Override
     protected void readComponents(BlockEntity.ComponentsAccess components) {
         super.readComponents(components);
         (components.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)).copyTo(this.getItemsBeingCooked());
     }
 
+    @Override
     protected void addComponents(ComponentMap.Builder componentMapBuilder) {
         super.addComponents(componentMapBuilder);
         componentMapBuilder.add(DataComponentTypes.CONTAINER, ContainerComponent.fromStacks(this.getItemsBeingCooked()));
     }
 
+    @Override
     public void removeFromCopiedStackNbt(NbtCompound nbt) {
         nbt.remove("Items");
     }

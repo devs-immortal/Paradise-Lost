@@ -17,7 +17,7 @@ public class RenderUtils {
     public static int toHex(int r, int g, int b) {
         return MathHelper.packRgb(r, g, b);
     }
-    
+
     @Deprecated(forRemoval = true)
     public static int toHex(int r, int g, int b, int a) {
         return MathHelper.packRgb(r, g, b) | (a << 24);

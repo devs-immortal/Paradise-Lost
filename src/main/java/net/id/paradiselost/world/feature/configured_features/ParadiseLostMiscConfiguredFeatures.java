@@ -30,6 +30,7 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryKey<ConfiguredFeature<?, ?>> TUNDRA_SNOW = of("tundra_snow");
 
     public static void init() {
+        // no-op
     }
 
 }

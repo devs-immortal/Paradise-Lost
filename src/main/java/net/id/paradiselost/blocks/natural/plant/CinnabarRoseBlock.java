@@ -35,9 +35,9 @@ public class CinnabarRoseBlock extends ParadiseLostMushroomBlock {
         if (world.isClient()) {
             Random random = world.getRandom();
             for (int i = 0; i < 9; i++) {
-                double d = (double) pos.getX() + random.nextDouble();
-                double e = (double) pos.getY() + random.nextDouble();
-                double f = (double) pos.getZ() + random.nextDouble();
+                double d = pos.getX() + random.nextDouble();
+                double e = pos.getY() + random.nextDouble();
+                double f = pos.getZ() + random.nextDouble();
                 world.addParticle(DustParticleEffect.DEFAULT, d, e, f, 0.0D, 0.0D, 0.0D);
             }
         }
@@ -87,9 +87,9 @@ public class CinnabarRoseBlock extends ParadiseLostMushroomBlock {
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (state.get(BLOOMING)) {
             for (int i = 0; i < 3; i++) {
-                double d = (double) pos.getX() + random.nextDouble();
-                double e = (double) pos.getY() + random.nextDouble();
-                double f = (double) pos.getZ() + random.nextDouble();
+                double d = pos.getX() + random.nextDouble();
+                double e = pos.getY() + random.nextDouble();
+                double f = pos.getZ() + random.nextDouble();
                 world.addParticle(DustParticleEffect.DEFAULT, d, e, f, 0.0D, 0.0D, 0.0D);
             }
         }

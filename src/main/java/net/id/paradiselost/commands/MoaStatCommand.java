@@ -33,7 +33,7 @@ public class MoaStatCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 literal("moastat")
-                        .requires((source) -> source.hasPermissionLevel(2))
+                        .requires(source -> source.hasPermissionLevel(2))
                         .then(argument("target", EntityArgumentType.entities())
                                 .then(literal("query")
                                         .executes(context -> printStat(context.getSource(), EntityArgumentType.getEntities(context, "target"), null))
@@ -79,7 +79,7 @@ public class MoaStatCommand {
             source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.name", moa.getDisplayName()).formatted(Formatting.LIGHT_PURPLE), false);
             source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.race", Text.translatable(genes.getRace().getTranslationKey())).formatted(Formatting.LIGHT_PURPLE), false);
             if (attributeId.equals("HUNGER")) {
-                genes.setHunger(Math.min(Math.max(value, 100), 0));
+                genes.setHunger(Math.clamp(value, 0, 100));
                 source.sendFeedback(() -> Text.translatable("commands.paradise_lost.moastat.set", Text.translatable("commands.paradise_lost.moastat.hunger"), String.format("%.2f", genes.getHunger())).formatted(Formatting.AQUA, Formatting.ITALIC), false);
             } else if (attributeId.equals("ALL")) {
                 for (MoaAttributes attribute : MoaAttributes.values()) {

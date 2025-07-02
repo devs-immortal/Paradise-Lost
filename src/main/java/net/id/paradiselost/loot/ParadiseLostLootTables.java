@@ -13,12 +13,7 @@ public class ParadiseLostLootTables {
     public static final RegistryKey<LootTable> POPOM_JELLY_LEVEL_2 = register("entities/popom/jelly_2");
     public static final RegistryKey<LootTable> POPOM_JELLY_LEVEL_3 = register("entities/popom/jelly_3");
 
-
-    public ParadiseLostLootTables() {
-    }
-
     private static RegistryKey<LootTable> register(String id) {
         return RegistryKey.of(RegistryKeys.LOOT_TABLE, locate(id));
     }
-
 }

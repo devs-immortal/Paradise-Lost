@@ -36,7 +36,7 @@ public class ParadiseLostPlacedFeatures {
     public static RegistryKey<PlacedFeature> of(String id) {
         return RegistryKey.of(RegistryKeys.PLACED_FEATURE, locate(id));
     }
-    
+
     public static void init() {
         ParadiseLostTreeConfiguredFeatures.init();
         ParadiseLostVegetationPlacedFeatures.init();

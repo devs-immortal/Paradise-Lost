@@ -17,6 +17,7 @@ public class ParadiseWallHangingSignBlock extends WallHangingSignBlock {
         super(woodType, settings);
     }
 
+    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
         this.lootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE, identifier.withPrefixedPath("blocks/"));

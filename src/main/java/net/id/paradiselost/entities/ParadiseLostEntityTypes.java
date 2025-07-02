@@ -54,11 +54,11 @@ public class ParadiseLostEntityTypes {
 
 
     private static Consumer<? super EntityType<? extends LivingEntity>> attributes(Supplier<DefaultAttributeContainer.Builder> builder) {
-        return (entityType) -> FabricDefaultAttributeRegistry.register(entityType, builder.get());
+        return entityType -> FabricDefaultAttributeRegistry.register(entityType, builder.get());
     }
 
     private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnLocation location, Heightmap.Type heightmapType, SpawnRestriction.SpawnPredicate<T> predicate) {
-        return (entityType) -> SpawnRestriction.register(entityType, location, heightmapType, predicate);
+        return entityType -> SpawnRestriction.register(entityType, location, heightmapType, predicate);
     }
 
     private static <T extends MobEntity> Consumer<EntityType<T>> spawnRestrictions(SpawnLocation location, SpawnRestriction.SpawnPredicate<T> predicate) {

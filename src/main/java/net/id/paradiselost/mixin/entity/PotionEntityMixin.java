@@ -55,7 +55,7 @@ public class PotionEntityMixin extends ThrownItemEntity {
                     addIfValid(landBlock.up().offset(dir), affected);
                     addIfValid(landBlock.down().offset(dir), affected);
                 }
-                for (BlockPos pos : new BlockPos[] {landBlock, landBlock.north(), landBlock.south()}) {
+                for (BlockPos pos : new BlockPos[]{landBlock, landBlock.north(), landBlock.south()}) {
                     addIfValid(pos, affected);
                     addIfValid(pos.east(), affected);
                     addIfValid(pos.west(), affected);

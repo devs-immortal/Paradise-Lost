@@ -16,6 +16,7 @@ public class CropGrowthBlock extends Block {
         this.boostChance = boostChance;
     }
 
+    @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockState upBlock = world.getBlockState(pos.up(2));
         if (upBlock.getBlock() instanceof CropBlock && random.nextInt(this.boostChance) == 0) {

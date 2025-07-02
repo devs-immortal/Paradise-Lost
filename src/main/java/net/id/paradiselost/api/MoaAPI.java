@@ -56,6 +56,7 @@ public class MoaAPI {
      * returning null.
      */
     public static final MoaRace FALLBACK_MOA = new MoaRace(MoaAttributes.GROUND_SPEED, SpawnStatWeighting.TANK);
+
     static {
         register(ParadiseLost.locate("fallback"), FALLBACK_MOA);
     }
@@ -188,12 +189,12 @@ public class MoaAPI {
     }
 
     private static Predicate<MoaBreedingContext> createIdentityCheck(MoaRace raceA, MoaRace raceB) {
-        return (ctx) -> (raceA == ctx.parentA.getRace() && raceB == ctx.parentB.getRace())
+        return ctx -> (raceA == ctx.parentA.getRace() && raceB == ctx.parentB.getRace())
                 || (raceB == ctx.parentA.getRace() && raceA == ctx.parentB.getRace());
     }
 
     private static Predicate<MoaBreedingContext> createChanceCheck(float chance) {
-        return (ctx) -> ctx.world.getRandom().nextFloat() < chance;
+        return ctx -> ctx.world.getRandom().nextFloat() < chance;
     }
 
     public record MoaBreedingContext(MoaGenes parentA, MoaGenes parentB, World world, BlockPos pos) {

@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class SurtrumMeteoriteFeature extends Feature<DefaultFeatureConfig> {
-    
+
     public SurtrumMeteoriteFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }
@@ -34,7 +34,8 @@ public class SurtrumMeteoriteFeature extends Feature<DefaultFeatureConfig> {
             } else if (Math.sqrt(center.getSquaredDistance(i)) < size + rand.nextFloat() * 0.7) {
                 if (rand.nextBoolean()) {
                     for (BlockPos j : BlockPos.iterateOutwards(i, 1, 1, 1)) {
-                        if (Math.sqrt(i.getSquaredDistance(j)) < 1 + rand.nextFloat() && world.getBlockState(j).isAir()) world.setBlockState(j, ParadiseLostBlocks.FLOESTONE.getDefaultState(), Block.NOTIFY_LISTENERS);
+                        if (Math.sqrt(i.getSquaredDistance(j)) < 1 + rand.nextFloat() && world.getBlockState(j).isAir())
+                            world.setBlockState(j, ParadiseLostBlocks.FLOESTONE.getDefaultState(), Block.NOTIFY_LISTENERS);
                     }
                 } else {
                     world.setBlockState(i, ParadiseLostBlocks.FLOESTONE.getDefaultState(), Block.NOTIFY_LISTENERS);
@@ -45,5 +46,5 @@ public class SurtrumMeteoriteFeature extends Feature<DefaultFeatureConfig> {
 
         return true;
     }
-    
+
 }

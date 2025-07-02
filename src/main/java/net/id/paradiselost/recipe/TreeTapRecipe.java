@@ -24,29 +24,29 @@ import java.util.Optional;
 
 public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
 
-	protected final Ingredient ingredient;
+    protected final Ingredient ingredient;
     protected final ItemStack result;
     protected final Block tappedBlock;
     protected final Block resultBlock;
     protected final int chance;
 
-	public TreeTapRecipe(Ingredient ingredient, Identifier tappedBlock, Identifier resultBlock, ItemStack result, Optional<PotionContentsComponent> contents, int chance) {
-		this.ingredient = ingredient;
-		this.result = result;
+    public TreeTapRecipe(Ingredient ingredient, Identifier tappedBlock, Identifier resultBlock, ItemStack result, Optional<PotionContentsComponent> contents, int chance) {
+        this.ingredient = ingredient;
+        this.result = result;
         contents.ifPresent(potionContentsComponent -> result.set(DataComponentTypes.POTION_CONTENTS, potionContentsComponent));
         this.tappedBlock = Registries.BLOCK.get(tappedBlock);
         this.resultBlock = Registries.BLOCK.get(resultBlock);
         this.chance = chance;
-	}
+    }
 
-	@Override
-	public boolean matches(TreeTapBlockEntity inventory, World world) {
-		if (!ingredient.test(inventory.getStack(0))) {
-			return false;
-		}
+    @Override
+    public boolean matches(TreeTapBlockEntity inventory, World world) {
+        if (!ingredient.test(inventory.getStack(0))) {
+            return false;
+        }
 
-		return inventory.getTappedState().isOf(this.tappedBlock);
-	}
+        return inventory.getTappedState().isOf(this.tappedBlock);
+    }
 
     @Override
     public ItemStack craft(TreeTapBlockEntity inventory, RegistryWrapper.WrapperLookup lookup) {
@@ -54,9 +54,9 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
     }
 
     @Override
-	public boolean fits(int width, int height) {
-		return true;
-	}
+    public boolean fits(int width, int height) {
+        return true;
+    }
 
     @Override
     public ItemStack getResult(RegistryWrapper.WrapperLookup registriesLookup) {
@@ -71,15 +71,15 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
         return chance;
     }
 
-	@Override
-	public RecipeSerializer<?> getSerializer() {
-		return ParadiseLostRecipeTypes.TREE_TAP_RECIPE_SERIALIZER;
-	}
+    @Override
+    public RecipeSerializer<?> getSerializer() {
+        return ParadiseLostRecipeTypes.TREE_TAP_RECIPE_SERIALIZER;
+    }
 
-	@Override
-	public RecipeType<?> getType() {
-		return ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE;
-	}
+    @Override
+    public RecipeType<?> getType() {
+        return ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE;
+    }
 
     public static class Serializer implements RecipeSerializer<TreeTapRecipe> {
 
@@ -87,18 +87,15 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
             return recipe.result.getComponents().contains(DataComponentTypes.POTION_CONTENTS) ? Optional.of(recipe.result.get(DataComponentTypes.POTION_CONTENTS)) : Optional.empty();
         }
 
-        private static final MapCodec<TreeTapRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
-                Identifier.CODEC.fieldOf("tapped_block").forGetter((recipe) -> Registries.BLOCK.getId(recipe.tappedBlock)),
-                Identifier.CODEC.fieldOf("result_block").forGetter((recipe) -> Registries.BLOCK.getId(recipe.resultBlock)),
-                ItemStack.CODEC.fieldOf("result").forGetter((recipe) -> recipe.result),
-                PotionContentsComponent.CODEC.optionalFieldOf("potion_content").forGetter((recipe) -> getOptionalPotionContentsComponent(recipe)),
-                Codecs.POSITIVE_INT.fieldOf("chance").forGetter((recipe) -> recipe.chance)
+        private static final MapCodec<TreeTapRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
+                Identifier.CODEC.fieldOf("tapped_block").forGetter(recipe -> Registries.BLOCK.getId(recipe.tappedBlock)),
+                Identifier.CODEC.fieldOf("result_block").forGetter(recipe -> Registries.BLOCK.getId(recipe.resultBlock)),
+                ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+                PotionContentsComponent.CODEC.optionalFieldOf("potion_content").forGetter(Serializer::getOptionalPotionContentsComponent),
+                Codecs.POSITIVE_INT.fieldOf("chance").forGetter(recipe -> recipe.chance)
         ).apply(instance, TreeTapRecipe::new));
         public static final PacketCodec<RegistryByteBuf, TreeTapRecipe> PACKET_CODEC = PacketCodec.ofStatic(Serializer::write, Serializer::read);
-
-        public Serializer() {
-        }
 
         @Override
         public MapCodec<TreeTapRecipe> codec() {

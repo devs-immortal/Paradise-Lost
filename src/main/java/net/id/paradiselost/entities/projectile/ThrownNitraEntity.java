@@ -25,11 +25,13 @@ public class ThrownNitraEntity extends ThrownItemEntity {
         super(ParadiseLostEntityTypes.THROWN_NITRA, owner, world);
     }
 
+    @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         doDamage();
     }
 
+    @Override
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         doDamage();
@@ -39,6 +41,7 @@ public class ThrownNitraEntity extends ThrownItemEntity {
         }
     }
 
+    @Override
     public void handleStatus(byte status) {
         if (status == EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES) {
             this.getWorld().syncWorldEvent(ParadiseLostEvents.NITRA_EXPLODE, this.getBlockPos(), 0);

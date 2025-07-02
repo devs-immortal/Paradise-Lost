@@ -20,7 +20,7 @@ public class ParadiseLostHangingMushroomPlantBlock extends ParadiseLostMushroomP
     public ParadiseLostHangingMushroomPlantBlock(TagKey<Block> plantableOn, Settings settings) {
         super(plantableOn, null, settings);
     }
-    
+
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return Block.createCuboidShape(5.0D, 10.0D, 5.0D, 11.0D, 16.0D, 11.0D);

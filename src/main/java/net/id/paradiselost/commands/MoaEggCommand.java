@@ -29,7 +29,7 @@ public class MoaEggCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
                 literal("moaegg")
-                        .requires((source) -> source.hasPermissionLevel(2))
+                        .requires(source -> source.hasPermissionLevel(2))
                         .then(argument("target", EntityArgumentType.players()).then((argument("race", IdentifierArgumentType.identifier()).suggests(RACES)
                                 .executes(context -> execute(context.getSource(), EntityArgumentType.getPlayers(context, "target"), IdentifierArgumentType.getIdentifier(context, "race"), false)))
                                 .then(literal("asBaby")
@@ -39,7 +39,7 @@ public class MoaEggCommand {
 
     private static int execute(ServerCommandSource source, Collection<ServerPlayerEntity> targets, Identifier raceId, boolean baby) {
         var race = MoaAPI.getRace(raceId);
-    
+
         // If the player intends to get the fallback, let them get it. Otherwise, fail.
         if (race == MoaAPI.FALLBACK_MOA && raceId.compareTo(MoaAPI.FALLBACK_MOA.getId()) != 0) {
             source.sendError(Text.translatable("commands.paradise_lost.moaegg.failure", raceId.toString()));

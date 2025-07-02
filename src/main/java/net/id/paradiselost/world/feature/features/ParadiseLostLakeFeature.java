@@ -18,7 +18,7 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
     static {
         CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
     }
-    
+
     public ParadiseLostLakeFeature(Codec<DynamicConfiguration> codec) {
         super(codec);
     }
@@ -68,12 +68,12 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
                         //TODO Break this thing down some.
                         boolean lakeEdge =
                                 !waterMap[(xOff * 16 + zOff) * 8 + yOff]
-                                && (xOff < 15 && waterMap[((xOff + 1) * 16 + zOff) * 8 + yOff]
-                                    || xOff > 0 && waterMap[((xOff - 1) * 16 + zOff) * 8 + yOff]
-                                    || zOff < 15 && waterMap[(xOff * 16 + zOff + 1) * 8 + yOff]
-                                    || zOff > 0 && waterMap[(xOff * 16 + (zOff - 1)) * 8 + yOff]
-                                    || yOff < 7 && waterMap[(xOff * 16 + zOff) * 8 + yOff + 1]
-                                    || yOff > 0 && waterMap[(xOff * 16 + zOff) * 8 + (yOff - 1)]
+                                        && (xOff < 15 && waterMap[((xOff + 1) * 16 + zOff) * 8 + yOff]
+                                        || xOff > 0 && waterMap[((xOff - 1) * 16 + zOff) * 8 + yOff]
+                                        || zOff < 15 && waterMap[(xOff * 16 + zOff + 1) * 8 + yOff]
+                                        || zOff > 0 && waterMap[(xOff * 16 + (zOff - 1)) * 8 + yOff]
+                                        || yOff < 7 && waterMap[(xOff * 16 + zOff) * 8 + yOff + 1]
+                                        || yOff > 0 && waterMap[(xOff * 16 + zOff) * 8 + (yOff - 1)]
                                 );
 
                         if (lakeEdge) {
@@ -98,7 +98,9 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
                 for (int zOff = 0; zOff < 16; zOff++) {
                     for (int yOff = 0; yOff < 8; yOff++) {
                         if (waterMap[(xOff * 16 + zOff) * 8 + yOff]) {
-                            context.getWorld().setBlockState(blockPos.add(xOff, yOff, zOff), yOff >= 4 ? CAVE_AIR : context.getConfig().state, Block.NOTIFY_LISTENERS);
+                            context.getWorld().setBlockState(blockPos.add(xOff, yOff, zOff), yOff >= 4
+                                    ? CAVE_AIR
+                                    : context.getConfig().state, Block.NOTIFY_LISTENERS);
                         }
                     }
                 }
@@ -126,12 +128,12 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
                         for (int yOff = 0; yOff < 8; yOff++) {
                             boolean lakeEdge =
                                     !waterMap[(xOff * 16 + zOff) * 8 + yOff]
-                                    && (xOff < 15 && waterMap[((xOff + 1) * 16 + zOff) * 8 + yOff]
-                                        || xOff > 0 && waterMap[((xOff - 1) * 16 + zOff) * 8 + yOff]
-                                        || zOff < 15 && waterMap[(xOff * 16 + zOff + 1) * 8 + yOff]
-                                        || zOff > 0 && waterMap[(xOff * 16 + (zOff - 1)) * 8 + yOff]
-                                        || yOff < 7 && waterMap[(xOff * 16 + zOff) * 8 + yOff + 1]
-                                        || yOff > 0 && waterMap[(xOff * 16 + zOff) * 8 + (yOff - 1)]
+                                            && (xOff < 15 && waterMap[((xOff + 1) * 16 + zOff) * 8 + yOff]
+                                            || xOff > 0 && waterMap[((xOff - 1) * 16 + zOff) * 8 + yOff]
+                                            || zOff < 15 && waterMap[(xOff * 16 + zOff + 1) * 8 + yOff]
+                                            || zOff > 0 && waterMap[(xOff * 16 + (zOff - 1)) * 8 + yOff]
+                                            || yOff < 7 && waterMap[(xOff * 16 + zOff) * 8 + yOff + 1]
+                                            || yOff > 0 && waterMap[(xOff * 16 + zOff) * 8 + (yOff - 1)]
                                     );
                             if (lakeEdge && (yOff < 4 || context.getRandom().nextInt(2) != 0) && context.getWorld().getBlockState(blockPos.add(xOff, yOff, zOff)).isSolid()) {
                                 context.getWorld().setBlockState(blockPos.add(xOff, yOff, zOff), ParadiseLostBlocks.FLOESTONE.getDefaultState(), Block.NOTIFY_LISTENERS);

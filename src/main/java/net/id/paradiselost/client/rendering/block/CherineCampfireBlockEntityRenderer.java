@@ -20,13 +20,13 @@ public class CherineCampfireBlockEntityRenderer implements BlockEntityRenderer<C
     public CherineCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
         this.itemRenderer = ctx.getItemRenderer();
     }
-    
+
     @Override
     public void render(CherineCampfireBlockEntity campfireBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
         Direction direction = campfireBlockEntity.getCachedState().get(CampfireBlock.FACING);
         DefaultedList<ItemStack> defaultedList = campfireBlockEntity.getItemsBeingCooked();
         int k = (int) campfireBlockEntity.getPos().asLong();
-        
+
         for (int l = 0; l < defaultedList.size(); ++l) {
             ItemStack itemStack = defaultedList.get(l);
             if (itemStack != ItemStack.EMPTY) {

@@ -49,19 +49,23 @@ public class EnvoyEntity extends SkeletonEntity {
         }
     }
 
+    @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(ENLIGHTENED, false);
     }
 
+    @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
     }
 
+    @Override
     public boolean isShaking() {
         return this.getEnlightened() || super.isShaking();
     }
 
 
+    @Override
     public void tick() {
         if (this.getWorld().isClient && this.getEnlightened() && this.random.nextInt(3) == 0) {
             this.getWorld().addParticle(ParticleTypes.CLOUD,
@@ -72,22 +76,34 @@ public class EnvoyEntity extends SkeletonEntity {
         super.tick();
     }
 
+    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_HURT : ParadiseLostSoundEvents.ENTITY_ENVOY_HURT;
+        return this.getEnlightened()
+                ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_HURT
+                : ParadiseLostSoundEvents.ENTITY_ENVOY_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
-        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_DEATH : ParadiseLostSoundEvents.ENTITY_ENVOY_DEATH;
+        return this.getEnlightened()
+                ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_DEATH
+                : ParadiseLostSoundEvents.ENTITY_ENVOY_DEATH;
     }
 
     protected SoundEvent getStepSound() {
-        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_STEP : ParadiseLostSoundEvents.ENTITY_ENVOY_STEP;
+        return this.getEnlightened()
+                ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_STEP
+                : ParadiseLostSoundEvents.ENTITY_ENVOY_STEP;
     }
 
+    @Override
     protected SoundEvent getAmbientSound() {
-        return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_AMBIENT : ParadiseLostSoundEvents.ENTITY_ENVOY_AMBIENT;
+        return this.getEnlightened()
+                ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_AMBIENT
+                : ParadiseLostSoundEvents.ENTITY_ENVOY_AMBIENT;
     }
 
+    @Override
     public boolean damage(DamageSource source, float amount) {
         float dmg = amount;
         if (this.getEnlightened()) {
@@ -99,16 +115,17 @@ public class EnvoyEntity extends SkeletonEntity {
         return super.damage(source, dmg);
     }
 
+    @Override
     public boolean tryAttack(Entity target) {
         if (!super.tryAttack(target)) {
             return false;
-        } else {
-            if (target instanceof LivingEntity) {
-                ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 200), this);
-            }
-            return true;
         }
+        if (target instanceof LivingEntity entity) {
+            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 200), this);
+        }
+        return true;
     }
+
     public static DefaultAttributeContainer.Builder createEnvoyAttributes() {
         return createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D)

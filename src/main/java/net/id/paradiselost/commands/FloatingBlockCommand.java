@@ -17,11 +17,11 @@ public class FloatingBlockCommand {
         // make this work for entities too, eventually.
         dispatcher.register(
                 literal("gravitate")
-                        .requires((source) -> source.hasPermissionLevel(2))
+                        .requires(source -> source.hasPermissionLevel(2))
                         .then(argument("pos", BlockPosArgumentType.blockPos())
                                 .executes((context -> floatBlock(context.getSource(), BlockPosArgumentType.getLoadedBlockPos(context, "pos"), false)))
                                 .then(literal("force")
-                                        .executes((context) -> floatBlock(context.getSource(), BlockPosArgumentType.getLoadedBlockPos(context, "pos"), true))))
+                                        .executes(context -> floatBlock(context.getSource(), BlockPosArgumentType.getLoadedBlockPos(context, "pos"), true))))
         );
     }
 

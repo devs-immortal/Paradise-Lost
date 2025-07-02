@@ -13,11 +13,11 @@ public class ParadiseLostBlockEntityRenderers {
     @Environment(EnvType.CLIENT)
     public static void initClient() {
         BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.INCUBATOR, IncubatorBlockEntityRenderer::new);
-		BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.TREE_TAP, TreeTapBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.SIGN, SignBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.HANGING_SIGN, HangingSignBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.CALCITE_DECORATED_POT, CalciteDecoratedPotBlockEntityRenderer::new);
-		// BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.DUNGEON_SWITCH, DungeonSwitchBlockEntityRenderer::new);
+        // BlockEntityRendererFactories.register(ParadiseLostBlockEntityTypes.DUNGEON_SWITCH, DungeonSwitchBlockEntityRenderer::new);
     }
 }

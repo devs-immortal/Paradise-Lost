@@ -20,6 +20,7 @@ public class TallWaterPlantBlock extends TallPlantBlock implements Waterloggable
         super(settings.offset(OffsetType.XYZ));
     }
 
+    @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return floor.isOf(ParadiseLostBlocks.FLOESTONE) || super.canPlantOnTop(floor, world, pos);
     }

@@ -30,10 +30,10 @@ public final class ParadiseLostScreens {
 
         return new MoaScreenHandler(syncId, inventory, moa.getInventory(), moa);
     }, MoaScreenHandler.MoaScreenData.PACKET_CODEC);
-    
+
     public static void init() {
     }
-    
+
     @Environment(EnvType.CLIENT)
     public static void initClient() {
         register(MOA, MoaScreen::new);

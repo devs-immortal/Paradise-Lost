@@ -38,7 +38,8 @@ public class ParadiseLostGrassBlock extends SpreadableParadiseLostBlock implemen
         BlockPos blockPos = pos.up();
         BlockState blockState = ParadiseLostBlocks.GRASS.getDefaultState();
 
-        block0: for (int i = 0; i < 128; ++i) {
+        block0:
+        for (int i = 0; i < 128; ++i) {
             RegistryEntry<PlacedFeature> placedFeature;
             BlockPos blockPos2 = blockPos;
 

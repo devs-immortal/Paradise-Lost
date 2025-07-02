@@ -22,11 +22,11 @@ import static net.id.paradiselost.ParadiseLost.locate;
 public class MoaScreen extends HandledScreen<MoaScreenHandler> {
     private static final Identifier TEXTURE = locate("textures/gui/container/moa.png");
     private final MoaEntity moa;
-    
+
     public MoaScreen(MoaScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         moa = handler.moa();
-        
+
         backgroundWidth = 176;
         backgroundHeight = 184;
         playerInventoryTitleY += 18;
@@ -38,7 +38,7 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
         super.render(matrices, mouseX, mouseY, delta);
         drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
-    
+
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
@@ -47,7 +47,7 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
         int x = (width - backgroundWidth) >> 1;
         int y = (height - backgroundHeight) >> 1;
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
-        
+
         if (handler.hasMoaInventory()) {
             context.drawTexture(TEXTURE, x + 79, y + 17, 0, 184, 90, 72);
         }

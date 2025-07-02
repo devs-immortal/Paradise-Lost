@@ -48,7 +48,7 @@ public class DirectionalParadiseLostCloudBlock extends ParadiseLostCloudBlock {
             return state;
         }
     }
-    
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{FACING});

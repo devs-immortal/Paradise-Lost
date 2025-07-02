@@ -11,7 +11,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -36,12 +35,12 @@ public class FourBiteCakeBlock extends Block {
         Block.createCuboidShape(8.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
         Block.createCuboidShape(8.0D, 0.0D, 8.0D, 15.0D, 8.0D, 15.0D),
     };
-    
+
     public FourBiteCakeBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(BITES, 0));
     }
-    
+
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return BITES_TO_SHAPE[state.get(BITES)];
@@ -59,7 +58,7 @@ public class FourBiteCakeBlock extends Block {
         }
         return tryEat(world, pos, state, player);
     }
-    
+
     protected static ActionResult tryEat(WorldAccess world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!player.canConsume(false)) {
             return ActionResult.PASS;
@@ -79,36 +78,36 @@ public class FourBiteCakeBlock extends Block {
             return ActionResult.SUCCESS;
         }
     }
-    
+
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         return direction == Direction.DOWN && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
-    
+
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return world.getBlockState(pos.down()).isSolid();
     }
-    
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{BITES});
+        builder.add(BITES);
     }
-    
+
     @Override
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return getComparatorOutput(state.get(BITES));
     }
-    
+
     public static int getComparatorOutput(int bites) {
         return (3 - bites) * 5;
     }
-    
+
     @Override
     public boolean hasComparatorOutput(BlockState state) {
         return true;
     }
-    
+
     @Override
     public boolean canPathfindThrough(BlockState state, NavigationType type) {
         return false;

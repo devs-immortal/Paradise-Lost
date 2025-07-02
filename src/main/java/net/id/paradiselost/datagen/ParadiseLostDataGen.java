@@ -4,7 +4,6 @@ import dev.thomasglasser.sherdsapi.api.data.FabricSherdDatagenSuite;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.id.paradiselost.ParadiseLost;
-import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.registry.RegistryBuilder;
 
 public class ParadiseLostDataGen implements DataGeneratorEntrypoint {
@@ -14,13 +13,12 @@ public class ParadiseLostDataGen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
         FabricDataGenerator.Pack pack = generator.createPack();
-        //pack.addProvider(LootTableGen::new);
-        //sherdSuite.makeSherdSuite("sol", ParadiseLostItems.SOL_POTTERY_SHERD).build(pack);
+        // pack.addProvider(LootTableGen::new);
+        // sherdSuite.makeSherdSuite("sol", ParadiseLostItems.SOL_POTTERY_SHERD).build(pack);
     }
 
     @Override
-    public void buildRegistry(RegistryBuilder registryBuilder)
-    {
-        //sherdSuite.buildRegistry(registryBuilder);
+    public void buildRegistry(RegistryBuilder registryBuilder) {
+        // sherdSuite.buildRegistry(registryBuilder);
     }
 }

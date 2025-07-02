@@ -23,7 +23,7 @@ import java.nio.charset.StandardCharsets;
 public final class MiscUtil {
     private MiscUtil() {
     }
-    
+
     /**
      * Should only be used by methods that are never actually called, used to make Accessors less painful.
      */
@@ -31,7 +31,7 @@ public final class MiscUtil {
     public static <T> T dummyObject() {
         return (T) new Object();
     }
-    
+
     /**
      * Deserializes a JSON file that is stored in the "data" directory of this mod.
      *
@@ -44,7 +44,7 @@ public final class MiscUtil {
     public static <T> T deserializeDataJson(Codec<T> codec, Identifier resource) throws IOException {
         return deserializeDataJson(JsonOps.INSTANCE, codec, resource);
     }
-    
+
     /**
      * Deserializes a JSON file that is stored in the "data" directory of this mod.
      *
@@ -64,7 +64,7 @@ public final class MiscUtil {
         try (stream) {
             var reader = new InputStreamReader(stream, StandardCharsets.UTF_8);
             var decodeResult = codec.decode(ops, JsonHelper.deserialize(reader));
-            
+
             var result = decodeResult.result();
             if (result.isPresent()) {
                 return result.get().getFirst();

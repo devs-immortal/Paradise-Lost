@@ -20,8 +20,9 @@ import java.util.List;
  */
 @Mixin(ServerPlayNetworkHandler.class)
 public abstract class ServerPlayNetworkHandlerMixin {
-    @Shadow public ServerPlayerEntity player;
-    
+    @Shadow
+    public ServerPlayerEntity player;
+
     /**
      * Stop the player from rubber banding when riding a floating block
      */

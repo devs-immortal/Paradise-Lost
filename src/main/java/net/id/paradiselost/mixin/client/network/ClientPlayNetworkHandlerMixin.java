@@ -40,15 +40,14 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
     @Inject(method = "onEntityStatus", at = @At("RETURN"))
     public void onEntityStatus(EntityStatusS2CPacket packet, CallbackInfo ci) {
         Entity entity = packet.getEntity(this.world);
-        if (entity != null) {
-            if (packet.getStatus() == ParadiseLostEvents.LEVITATION_TOTEM_USED) {
-                this.client.particleManager.addEmitter(entity, ParadiseLostParticles.LEVITATION_TOTEM, 30);
-                this.world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0F, 1.0F, false);
-                if (entity == this.client.player) {
-                    this.client.gameRenderer.showFloatingItem(ParadiseLostItems.TOTEM_OF_LEVITATION.getDefaultStack());
-                }
+        if (entity != null && packet.getStatus() == ParadiseLostEvents.LEVITATION_TOTEM_USED) {
+            this.client.particleManager.addEmitter(entity, ParadiseLostParticles.LEVITATION_TOTEM, 30);
+            this.world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0F, 1.0F, false);
+            if (entity == this.client.player) {
+                this.client.gameRenderer.showFloatingItem(ParadiseLostItems.TOTEM_OF_LEVITATION.getDefaultStack());
             }
         }
+
     }
 
 }

@@ -23,9 +23,9 @@ public class ParadiseLostDataComponentTypes {
 
     // Registered Components
 
-    public static final ComponentType<MoaGeneComponent> MOA_GENES = register("moa_genes", (builder) -> builder.codec(MoaGeneComponent.CODEC).packetCodec(MoaGeneComponent.PACKET_CODEC).cache());
-    public static final ComponentType<BloodstoneComponent> BLOODSTONE = register("bloodstone", (builder) -> builder.codec(BloodstoneComponent.CODEC).packetCodec(BloodstoneComponent.PACKET_CODEC));
-    public static final ComponentType<XpCircletChargeComponent> XP_CIRCLET_CHARGE = register("xp_circlet", (builder) -> builder.codec(XpCircletChargeComponent.CODEC).packetCodec(XpCircletChargeComponent.PACKET_CODEC));
+    public static final ComponentType<MoaGeneComponent> MOA_GENES = register("moa_genes", builder -> builder.codec(MoaGeneComponent.CODEC).packetCodec(MoaGeneComponent.PACKET_CODEC).cache());
+    public static final ComponentType<BloodstoneComponent> BLOODSTONE = register("bloodstone", builder -> builder.codec(BloodstoneComponent.CODEC).packetCodec(BloodstoneComponent.PACKET_CODEC));
+    public static final ComponentType<XpCircletChargeComponent> XP_CIRCLET_CHARGE = register("xp_circlet", builder -> builder.codec(XpCircletChargeComponent.CODEC).packetCodec(XpCircletChargeComponent.PACKET_CODEC));
 
     // Util
 
@@ -40,7 +40,7 @@ public class ParadiseLostDataComponentTypes {
 
     public record MoaGeneComponent(Identifier race, String affinity, boolean isBaby, float hunger, UUID ownerId, MoaAttributeComponent attributes) {
 
-        public static final Codec<MoaGeneComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+        public static final Codec<MoaGeneComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Identifier.CODEC.optionalFieldOf("race", ParadiseLost.locate("fallback")).forGetter(MoaGeneComponent::race),
                 Codec.STRING.optionalFieldOf("affinity", "").forGetter(MoaGeneComponent::affinity),
                 Codec.BOOL.optionalFieldOf("is_baby", true).forGetter(MoaGeneComponent::isBaby),
@@ -90,7 +90,7 @@ public class ParadiseLostDataComponentTypes {
 
     public record MoaAttributeComponent(float groundSpeed, float glidingSpeed, float glidingDecay, float jumpStrength, float dropMultiplier, float maxHealth) {
 
-        public static final Codec<MoaAttributeComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+        public static final Codec<MoaAttributeComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.FLOAT.fieldOf("ground_speed").forGetter(MoaAttributeComponent::groundSpeed),
                 Codec.FLOAT.fieldOf("gliding_speed").forGetter(MoaAttributeComponent::glidingSpeed),
                 Codec.FLOAT.fieldOf("gliding_decay").forGetter(MoaAttributeComponent::glidingDecay),
@@ -140,7 +140,7 @@ public class ParadiseLostDataComponentTypes {
 
     public record BloodstoneComponent(UUID uuid, Text name, String health, String defense, String toughness, String owner) {
 
-        public static final Codec<BloodstoneComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+        public static final Codec<BloodstoneComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Uuids.CODEC.fieldOf("uuid").forGetter(BloodstoneComponent::uuid),
                 TextCodecs.CODEC.fieldOf("name").forGetter(BloodstoneComponent::name),
                 Codec.STRING.fieldOf("health").forGetter(BloodstoneComponent::health),
@@ -190,7 +190,7 @@ public class ParadiseLostDataComponentTypes {
 
     public record XpCircletChargeComponent(int storedXp) {
 
-        public static final Codec<XpCircletChargeComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+        public static final Codec<XpCircletChargeComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.INT.fieldOf("xp_content").forGetter(XpCircletChargeComponent::storedXp)
         ).apply(instance, XpCircletChargeComponent::new));
         public static final PacketCodec<RegistryByteBuf, XpCircletChargeComponent> PACKET_CODEC;

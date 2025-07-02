@@ -23,7 +23,7 @@ import java.util.Set;
 
 public class WisteriaFoliagePlacer extends FoliagePlacer {
 
-    public static final MapCodec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> createCodec(instance).apply(instance, WisteriaFoliagePlacer::new));
+    public static final MapCodec<WisteriaFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> createCodec(instance).apply(instance, WisteriaFoliagePlacer::new));
 
     protected static <P extends WisteriaFoliagePlacer> Products.P2<RecordCodecBuilder.Mu<P>, IntProvider, IntProvider> createCodec(RecordCodecBuilder.Instance<P> builder) {
         return fillFoliagePlacerFields(builder);

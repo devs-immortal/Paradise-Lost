@@ -9,8 +9,10 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.block.FluidRenderer;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockRenderView;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,11 +29,13 @@ public class FluidRendererMixin {
 
     @Inject(method = "render", at = @At("HEAD"))
     private void render(BlockRenderView world, BlockPos pos, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState, CallbackInfo ci) {
-        fadeAlpha = 1F;
-        if (MinecraftClient.getInstance().world.getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
-            if (fluidState.getFluid().matchesType(Fluids.WATER)) {
-                fadeAlpha = Math.min((pos.getY() - world.getBottomY()) / 32F, 1);
-            }
+        RegistryKey<World> worldKey = MinecraftClient.getInstance().world != null
+                ? MinecraftClient.getInstance().world.getRegistryKey()
+                : null;
+        if (worldKey == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY && fluidState.getFluid().matchesType(Fluids.WATER)) {
+            fadeAlpha = Math.min((pos.getY() - world.getBottomY()) / 32F, 1);
+        } else {
+            fadeAlpha = 1F;
         }
     }
 

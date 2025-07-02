@@ -9,17 +9,17 @@ import net.minecraft.world.World;
 
 public class FlaxweaveCushionBlock extends Block {
 
-	public FlaxweaveCushionBlock(Settings settings) {
-		super(settings);
-	}
+    public FlaxweaveCushionBlock(Settings settings) {
+        super(settings);
+    }
 
-	@Override
-	public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-		entity.handleFallDamage(fallDistance, 0.1F, world.getDamageSources().fall()); // cancel most fall damage
-		if (fallDistance > 3F && !world.isClient) {
-			this.spawnBreakParticles(world, null, pos, state); // spawn particles
-			world.playSound(null, pos, soundGroup.getHitSound(), SoundCategory.BLOCKS, 0.7F, 1.0F); // and play cushion sound
-		}
-	}
+    @Override
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+        entity.handleFallDamage(fallDistance, 0.1F, world.getDamageSources().fall()); // cancel most fall damage
+        if (fallDistance > 3F && !world.isClient) {
+            this.spawnBreakParticles(world, null, pos, state); // spawn particles
+            world.playSound(null, pos, soundGroup.getHitSound(), SoundCategory.BLOCKS, 0.7F, 1.0F); // and play cushion sound
+        }
+    }
 
 }

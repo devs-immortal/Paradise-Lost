@@ -12,7 +12,7 @@ public class ParadiseLostBlockEntityTypes {
     public static final BlockEntityType<FoodBowlBlockEntity> FOOD_BOWL = BlockEntityType.Builder.create(FoodBowlBlockEntity::new, ParadiseLostBlocks.FOOD_BOWL).build();
     public static final BlockEntityType<IncubatorBlockEntity> INCUBATOR = BlockEntityType.Builder.create(IncubatorBlockEntity::new, ParadiseLostBlocks.INCUBATOR, ParadiseLostBlocks.NEST).build();
     public static final BlockEntityType<CherineCampfireBlockEntity> CHERINE_CAMPFIRE = BlockEntityType.Builder.create(CherineCampfireBlockEntity::new, ParadiseLostBlocks.CHERINE_CAMPFIRE).build();
-	public static final BlockEntityType<TreeTapBlockEntity> TREE_TAP = BlockEntityType.Builder.create(TreeTapBlockEntity::new, ParadiseLostBlocks.TREE_TAP).build();
+    public static final BlockEntityType<TreeTapBlockEntity> TREE_TAP = BlockEntityType.Builder.create(TreeTapBlockEntity::new, ParadiseLostBlocks.TREE_TAP).build();
     public static final BlockEntityType<ParadiseSignBlockEntity> SIGN = BlockEntityType.Builder.create(ParadiseSignBlockEntity::new,
             ParadiseLostBlocks.AUREL_SIGNS.sign(), ParadiseLostBlocks.AUREL_SIGNS.wallSign(),
             ParadiseLostBlocks.MOTHER_AUREL_SIGNS.sign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallSign(),
@@ -37,7 +37,7 @@ public class ParadiseLostBlockEntityTypes {
         register("calcite_decorated_pot", CALCITE_DECORATED_POT);
         BlockEntityType.BRUSHABLE_BLOCK.addSupportedBlock(ParadiseLostBlocks.SUSPICIOUS_DIRT);
     }
-    
+
     private static void register(String name, BlockEntityType<?> type) {
         Registry.register(Registries.BLOCK_ENTITY_TYPE, locate(name), type);
     }

@@ -7,12 +7,12 @@ import java.util.Objects;
 
 public class UncheckedWriter implements AutoCloseable {
     private final BufferedWriter writer;
-    
+
     public UncheckedWriter(BufferedWriter writer) {
         Objects.requireNonNull(writer, "writer was null");
         this.writer = writer;
     }
-    
+
     @Override
     public void close() {
         try {
@@ -21,7 +21,7 @@ public class UncheckedWriter implements AutoCloseable {
             throw new UncheckedIOException(e);
         }
     }
-    
+
     public void write(String string) {
         Objects.requireNonNull(string, "string was null");
         try {

@@ -83,6 +83,7 @@ public class IncubatorBlockEntity extends BlockEntity {
     public ItemStack getItem() {
         return egg;
     }
+
     public float getOffsetHeight() {
         return offsetHeight;
     }
@@ -120,5 +121,5 @@ public class IncubatorBlockEntity extends BlockEntity {
     public Packet<ClientPlayPacketListener> toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
     }
-    
+
 }

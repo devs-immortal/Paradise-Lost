@@ -13,12 +13,12 @@ import net.minecraft.util.math.Direction;
 
 public class SixFacingBlock extends Block {
     public static final DirectionProperty FACING = Properties.FACING;
-    
+
     public SixFacingBlock(AbstractBlock.Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.UP));
     }
-    
+
     @Override
     public BlockState rotate(BlockState state, BlockRotation rotation) {
         return changeRotation(state, rotation);
@@ -37,12 +37,12 @@ public class SixFacingBlock extends Block {
             return state;
         }
     }
-    
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING});
+        builder.add(FACING);
     }
-    
+
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return getDefaultState().with(FACING, ctx.getSide());

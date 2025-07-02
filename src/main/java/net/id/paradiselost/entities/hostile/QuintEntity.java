@@ -1,6 +1,5 @@
 package net.id.paradiselost.entities.hostile;
 
-import com.google.common.collect.Lists;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -11,29 +10,21 @@ import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.BeeEntity;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 public class QuintEntity extends PathAwareEntity implements Monster {
 
@@ -92,7 +83,10 @@ public class QuintEntity extends PathAwareEntity implements Monster {
     }
 
     private boolean isValidEnvoy(Entity ent) {
-        return ent instanceof EnvoyEntity && !((EnvoyEntity) ent).getEnlightened();
+        if (ent instanceof EnvoyEntity envoy) {
+            return !envoy.getEnlightened();
+        }
+        return false;
     }
 
     static class GetCloseToEnlightenGoal extends Goal {

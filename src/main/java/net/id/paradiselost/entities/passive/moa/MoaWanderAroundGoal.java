@@ -1,6 +1,7 @@
 package net.id.paradiselost.entities.passive.moa;
 
 import java.util.EnumSet;
+
 import net.minecraft.entity.ai.NoPenaltyTargeting;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.PathAwareEntity;

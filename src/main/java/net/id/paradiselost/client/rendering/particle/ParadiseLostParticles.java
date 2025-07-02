@@ -25,7 +25,7 @@ public class ParadiseLostParticles {
     public static SimpleParticleType CHERINE_FLAME = register("cherine_flame");
     public static SimpleParticleType LEVITA_BLOOP = register("levita_bloop");
     public static SimpleParticleType LEVITATION_TOTEM = register("levitation_totem");
-    
+
     /**
      * Registers a simple particle type.
      *
@@ -35,13 +35,13 @@ public class ParadiseLostParticles {
     private static SimpleParticleType register(String id) {
         return Registry.register(Registries.PARTICLE_TYPE, ParadiseLost.locate(id), FabricParticleTypes.simple(true));
     }
-    
+
     /**
      * Ensures that clinit ran.
      */
     public static void init() {
     }
-    
+
     /**
      * The client half of the particle system.
      */
@@ -57,7 +57,7 @@ public class ParadiseLostParticles {
             register(LEVITA_BLOOP, LevitaBloopParticle.DefaultFactory::new);
             register(LEVITATION_TOTEM, LevitationTotemParticle.DefaultFactory::new);
         }
-        
+
         /**
          * Registers the client side of a particle.
          *

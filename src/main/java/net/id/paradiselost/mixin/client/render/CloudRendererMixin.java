@@ -53,8 +53,9 @@ public final class CloudRendererMixin {
     @Shadow
     @Nullable
     private VertexBuffer cloudsBuffer;
-    
-    @Shadow private BuiltBuffer buildCloudsBuffer(Tessellator tessellator, double x, double y, double z, Vec3d color) {
+
+    @Shadow
+    private BuiltBuffer buildCloudsBuffer(Tessellator tessellator, double x, double y, double z, Vec3d color) {
         throw new AssertionError();
     }
 
@@ -82,9 +83,9 @@ public final class CloudRendererMixin {
             double posZ = cameraZ / 12.0D / cloudScale + 0.33000001311302185D;
             posX -= (MathHelper.floor(posX / 2048.0) * 2048);
             posZ -= (MathHelper.floor(posZ / 2048.0) * 2048);
-            float l = (float) (posX - (double) MathHelper.floor(posX));
-            float m = (float) (posY / 4.0 - (double) MathHelper.floor(posY / 4.0)) * 4.0F;
-            float n = (float) (posZ - (double) MathHelper.floor(posZ));
+            float l = (float) (posX - MathHelper.floor(posX));
+            float m = (float) (posY / 4.0 - MathHelper.floor(posY / 4.0)) * 4.0F;
+            float n = (float) (posZ - MathHelper.floor(posZ));
             Vec3d vec3d = this.world.getCloudsColor(tickDelta);
             int o = (int) Math.floor(posX);
             int p = (int) Math.floor(posY / 4.0);

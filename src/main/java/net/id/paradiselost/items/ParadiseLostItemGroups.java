@@ -350,7 +350,7 @@ public class ParadiseLostItemGroups {
 
     public static void init() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS)
-                .register((itemGroup) -> {
+                .register(itemGroup -> {
                     itemGroup.add(MOA_SPAWN_EGG);
                     itemGroup.add(ENVOY_SPAWN_EGG);
                     itemGroup.add(POPOM_SPAWN_EGG);

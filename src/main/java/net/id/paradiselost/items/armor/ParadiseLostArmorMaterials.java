@@ -25,28 +25,28 @@ public class ParadiseLostArmorMaterials {
     public static final RegistryEntry<ArmorMaterial> RELIC;
 
     static {
-        OLVITE = register("paradise_lost_olvite", Util.make(new EnumMap(ArmorItem.Type.class), (map) -> {
+        OLVITE = register("paradise_lost_olvite", Util.make(new EnumMap(ArmorItem.Type.class), map -> {
             map.put(ArmorItem.Type.BOOTS, 2);
             map.put(ArmorItem.Type.LEGGINGS, 4);
             map.put(ArmorItem.Type.CHESTPLATE, 6);
             map.put(ArmorItem.Type.HELMET, 2);
             map.put(ArmorItem.Type.BODY, 4);
         }), 9, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_OLVITE, 0.0F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.OLVITE));
-        GLAZED_GOLD = register("paradise_lost_glazed_gold", Util.make(new EnumMap(ArmorItem.Type.class), (map) -> {
+        GLAZED_GOLD = register("paradise_lost_glazed_gold", Util.make(new EnumMap(ArmorItem.Type.class), map -> {
             map.put(ArmorItem.Type.BOOTS, 1);
             map.put(ArmorItem.Type.LEGGINGS, 3);
             map.put(ArmorItem.Type.CHESTPLATE, 5);
             map.put(ArmorItem.Type.HELMET, 2);
             map.put(ArmorItem.Type.BODY, 3);
         }), 25, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_GLAZED_GOLD, 0.0F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.GOLDEN_AMBER));
-        SURTRUM = register("paradise_lost_surtrum", Util.make(new EnumMap(ArmorItem.Type.class), (map) -> {
+        SURTRUM = register("paradise_lost_surtrum", Util.make(new EnumMap(ArmorItem.Type.class), map -> {
             map.put(ArmorItem.Type.BOOTS, 2);
             map.put(ArmorItem.Type.LEGGINGS, 5);
             map.put(ArmorItem.Type.CHESTPLATE, 6);
             map.put(ArmorItem.Type.HELMET, 3);
             map.put(ArmorItem.Type.BODY, 5);
         }), 15, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_SURTRUM, 0.0F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.REFINED_SURTRUM));
-        RELIC = register("paradise_lost_relic", Util.make(new EnumMap(ArmorItem.Type.class), (map) -> {
+        RELIC = register("paradise_lost_relic", Util.make(new EnumMap(ArmorItem.Type.class), map -> {
             map.put(ArmorItem.Type.BOOTS, 1);
             map.put(ArmorItem.Type.LEGGINGS, 4);
             map.put(ArmorItem.Type.CHESTPLATE, 5);

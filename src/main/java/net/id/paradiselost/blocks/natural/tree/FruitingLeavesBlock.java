@@ -103,7 +103,7 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
 
     private void spawnPetalBurst(World world, Random random, BlockPos pos) {
         for (int i = 0; i < random.nextInt(9) + 5; i++) {
-            world.addParticle(ParadiseLostParticles.FALLING_ORANGE_PETAL, (double) pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), (double) pos.getZ() + random.nextDouble(), speed, world.getRandom().nextDouble() / -20.0, 0);
+            world.addParticle(ParadiseLostParticles.FALLING_ORANGE_PETAL, pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), pos.getZ() + random.nextDouble(), speed, world.getRandom().nextDouble() / -20.0, 0);
         }
     }
 
@@ -126,9 +126,9 @@ public class FruitingLeavesBlock extends ParadiseLostLeavesBlock {
 
                 for (int leaf = 0; leaf < random.nextInt(2) + 3; leaf++) {
                     if (world.random.nextInt(3) == 0) {
-                        double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetX() * 0.6D;
-                        double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetZ() * 0.6D;
-                        world.addParticle(ParadiseLostParticles.FALLING_ORANGE_PETAL, (double) pos.getX() + d, pos.getY(), (double) pos.getZ() + f, speed, world.getRandom().nextDouble() / -20.0, 0);
+                        double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5D + direction.getOffsetX() * 0.6D;
+                        double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5D + direction.getOffsetZ() * 0.6D;
+                        world.addParticle(ParadiseLostParticles.FALLING_ORANGE_PETAL, pos.getX() + d, pos.getY(), pos.getZ() + f, speed, world.getRandom().nextDouble() / -20.0, 0);
                     }
                 }
             }

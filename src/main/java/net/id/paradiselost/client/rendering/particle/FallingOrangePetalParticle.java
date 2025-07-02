@@ -16,7 +16,8 @@ public class FallingOrangePetalParticle extends SpriteBillboardParticle {
 
     private static final SplittableRandom random = new SplittableRandom();
     private final float rotateFactor;
-    private final double velocityComposite, velocityDown;
+    private final double velocityComposite;
+    private final double velocityDown;
 
     protected FallingOrangePetalParticle(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, SpriteProvider provider) {
         super(clientWorld, d, e, f);
@@ -37,6 +38,7 @@ public class FallingOrangePetalParticle extends SpriteBillboardParticle {
         this.scale = (float) (0.0375 + (random.nextDouble() / 16));
     }
 
+    @Override
     public void tick() {
         velocityY = velocityDown;
         super.tick();

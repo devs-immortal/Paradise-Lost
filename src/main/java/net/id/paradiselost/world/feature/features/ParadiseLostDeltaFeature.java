@@ -16,11 +16,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ParadiseLostDeltaFeature extends DeltaFeature {
-    
+
     public ParadiseLostDeltaFeature(Codec<DeltaFeatureConfig> codec) {
         super(codec);
     }
-    
+
     @Override
     public boolean generate(FeatureContext<DeltaFeatureConfig> context) {
         boolean modified = false;
@@ -36,24 +36,24 @@ public class ParadiseLostDeltaFeature extends DeltaFeature {
         int xSize = featureConfig.getSize().get(random);
         int zSize = featureConfig.getSize().get(random);
         int size = Math.max(xSize, zSize);
-        
+
         Set<BlockPos> filledPositions = new HashSet<>();
-        
+
         var rim = featureConfig.getRim();
         var contents = featureConfig.getContents();
-        
+
         for (BlockPos currentPos : BlockPos.iterateOutwards(origin, xSize, 0, zSize)) {
             if (currentPos.getManhattanDistance(origin) > size) {
                 break;
             }
-            
+
             if (canPlace(world, currentPos, contents, filledPositions)) {
                 if (bl3) {
                     modified = true;
                     setBlockState(world, currentPos, rim);
                     filledPositions.add(currentPos);
                 }
-                
+
                 BlockPos blockPos3 = currentPos.add(i, 0, j);
                 if (canPlace(world, blockPos3, contents, filledPositions)) {
                     modified = true;
@@ -62,17 +62,17 @@ public class ParadiseLostDeltaFeature extends DeltaFeature {
                 }
             }
         }
-        
+
         return modified;
     }
-    
+
     private static boolean canPlace(WorldAccess world, BlockPos pos, BlockState contents, Set<BlockPos> filledPositions) {
         BlockState blockState = world.getBlockState(pos);
-    
+
         if (!blockState.isIn(ParadiseLostBlockTags.FLUID_REPLACEABLES)) {
             return false;
         }
-        
+
         if (blockState.isOf(contents.getBlock())) {
             return false;
         } else if (blockState.getHardness(world, pos) <= -1) {
@@ -88,7 +88,7 @@ public class ParadiseLostDeltaFeature extends DeltaFeature {
                     return false;
                 }
             }
-            
+
             return true;
         }
     }

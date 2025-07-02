@@ -21,6 +21,7 @@ public class EnvoyEntityRenderer extends SkeletonEntityRenderer {
         this.addFeature(new EnvoyEyesFeatureRenderer(this));
     }
 
+    @Override
     public Identifier getTexture(AbstractSkeletonEntity entity) {
         if (((EnvoyEntity) entity).getEnlightened()) {
             return TEXTURE_ENLIGHTENED;

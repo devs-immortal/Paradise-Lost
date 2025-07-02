@@ -53,7 +53,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
     @Shadow
     public abstract void increaseStat(Identifier stat, int amount);
 
-    @Shadow public abstract PlayerAbilities getAbilities();
+    @Shadow
+    public abstract PlayerAbilities getAbilities();
 
     @Shadow
     public float experienceProgress;
@@ -122,7 +123,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 cir.setReturnValue(false);
             } else {
                 if (fallDistance >= 2.0F) {
-                    increaseStat(Stats.FALL_ONE_CM, (int) Math.round((double) fallDistance * 100.0D));
+                    increaseStat(Stats.FALL_ONE_CM, (int) Math.round(fallDistance * 100.0D));
                 }
                 cir.setReturnValue(super.handleFallDamage(fallDistance, damageMultiplier, ParadiseLostDamageTypes.of(getWorld(), ParadiseLostDamageTypes.FALL_FROM_PARADISE)));
             }

@@ -51,9 +51,9 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
 
                 for (int leaf = 0; leaf < 9; leaf++) {
                     if (world.random.nextInt(3) == 0) {
-                        double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetX() * 0.6D;
-                        double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetZ() * 0.6D;
-                        world.addParticle(ParadiseLostParticles.MOTHER_AUREL_LEAF, (double) pos.getX() + d, pos.getY(), (double) pos.getZ() + f, speed, world.getRandom().nextDouble() / -20.0, 0);
+                        double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5D + direction.getOffsetX() * 0.6D;
+                        double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5D + direction.getOffsetZ() * 0.6D;
+                        world.addParticle(ParadiseLostParticles.MOTHER_AUREL_LEAF, pos.getX() + d, pos.getY(), pos.getZ() + f, speed, world.getRandom().nextDouble() / -20.0, 0);
                     }
                 }
             }

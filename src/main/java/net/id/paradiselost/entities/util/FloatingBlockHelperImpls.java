@@ -18,7 +18,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import static net.id.paradiselost.api.FloatingBlockHelper.*;
+import static net.id.paradiselost.api.FloatingBlockHelper.isBlockBlacklisted;
 
 public class FloatingBlockHelperImpls {
     /**
@@ -36,6 +36,7 @@ public class FloatingBlockHelperImpls {
 
         /**
          * Try to create whatever floating block type is appropriate for the given position.
+         *
          * @param pos   The position of the block that should be floated.
          * @param force If true, the block will be floated even if it is on the blacklist
          *              ({@code ParadiseLostBlockTags.NON_FLOATERS}) or immovable by pistons.
@@ -72,8 +73,10 @@ public class FloatingBlockHelperImpls {
         public static Standard getInstance() {
             return INSTANCE;
         }
+
         /**
          * Try to create a standard floating block at the given position.
+         *
          * @param pos   The position of the block that should be floated.
          * @param force If true, the block will be floated even if it is on the blacklist
          *              ({@code ParadiseLostBlockTags.NON_FLOATERS}) or immovable by pistons.
@@ -139,6 +142,7 @@ public class FloatingBlockHelperImpls {
         public static Double getInstance() {
             return INSTANCE;
         }
+
         /**
          * Try to create a double floating block, such as a door or tall grass plant.
          * @param pos The position of the block that should be floated. It doesn't matter which
@@ -207,8 +211,10 @@ public class FloatingBlockHelperImpls {
         public static Pusher getInstance() {
             return INSTANCE;
         }
+
         /**
          * Try to create a floating block pusher, which is a piston-like floating block structure.
+         *
          * @param pos The position of the block that should be the pusher.
          * @return Whether a floating block could be created.
          */
@@ -290,11 +296,9 @@ public class FloatingBlockHelperImpls {
                         /* up has already been checked */
                 }) {
                     BlockState adjacentState = world.getBlockState(newPos);
-                    if (isAdjacentBlockStuck(state, adjacentState)) {
-                        // check the rest of the tree above the side block
-                        if (!continueTree(world, newPos, builder, overrideBlacklist)) {
-                            return false;
-                        }
+                    // check the rest of the tree above the side block
+                    if (isAdjacentBlockStuck(state, adjacentState) && !continueTree(world, newPos, builder, overrideBlacklist)) {
+                        return false;
                     }
                 }
             }
@@ -302,13 +306,10 @@ public class FloatingBlockHelperImpls {
         }
 
         private static boolean isAdjacentBlockStuck(BlockState state, BlockState adjacentState) {
-            if (state.isOf(Blocks.HONEY_BLOCK) && adjacentState.isOf(Blocks.SLIME_BLOCK)) {
+            if (state.isOf(Blocks.HONEY_BLOCK) && adjacentState.isOf(Blocks.SLIME_BLOCK) || state.isOf(Blocks.SLIME_BLOCK) && adjacentState.isOf(Blocks.HONEY_BLOCK)) {
                 return false;
-            } else if (state.isOf(Blocks.SLIME_BLOCK) && adjacentState.isOf(Blocks.HONEY_BLOCK)) {
-                return false;
-            } else {
-                return (state.isOf(Blocks.SLIME_BLOCK) || state.isOf(Blocks.HONEY_BLOCK)) || (adjacentState.isOf(Blocks.SLIME_BLOCK) || adjacentState.isOf(Blocks.HONEY_BLOCK));
             }
+            return (state.isOf(Blocks.SLIME_BLOCK) || state.isOf(Blocks.HONEY_BLOCK)) || (adjacentState.isOf(Blocks.SLIME_BLOCK) || adjacentState.isOf(Blocks.HONEY_BLOCK));
         }
     }
 }

@@ -24,10 +24,12 @@ public class ParadiseLostMultiSaplingBlock extends SaplingBlock {
 
     }
 
+    @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return (super.canPlantOnTop(floor, world, pos) || floor.isOf(ParadiseLostBlocks.MOSSY_FLOESTONE) || floor.isOf(ParadiseLostBlocks.LIVERWORT));
     }
 
+    @Override
     public void generate(ServerWorld world, BlockPos pos, BlockState state, Random random) {
         if (state.get(STAGE) == 0) {
             world.setBlockState(pos, state.cycle(STAGE), Block.NO_REDRAW);

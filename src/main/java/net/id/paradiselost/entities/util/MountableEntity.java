@@ -30,7 +30,7 @@ public abstract class MountableEntity extends ParadiseLostAnimalEntity {
         super.initDataTracker(builder);
         builder.add(RIDER_SNEAKING, false);
     }
-    
+
     //TODO Should this do more than just `return false;`?
     protected boolean canBeControlledByRider() {
         return false;

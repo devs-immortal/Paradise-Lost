@@ -114,7 +114,7 @@ public class CloudCarver extends Carver<CloudCarverConfig> {
         for (int i = branchStartIndex; i < branchCount; ++i) {
             // Make the yaw the sin of the cave from [0, pi], making it larger in the middle and smaller at the edges.
             // The horizontal size of the cave ranges from [1.5, 1.5 + width].
-            double scaledYaw = 1.5 + (double) (MathHelper.sin(3.1415927F * (float) i / (float) branchCount) * width);
+            double scaledYaw = 1.5 + (MathHelper.sin(3.1415927F * i / branchCount) * width);
             // Scale the pitch by 1.0. The nether carver uses 2.0.
             double scaledPitch = scaledYaw * yawToPitchRatio;
 

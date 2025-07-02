@@ -38,6 +38,7 @@ public abstract class FlowerPotBlockMixin extends Block {
     @Final
     @Shadow
     private static Map<Block, Block> CONTENT_TO_POTTED;
+
     @Shadow
     protected abstract boolean isEmpty();
 

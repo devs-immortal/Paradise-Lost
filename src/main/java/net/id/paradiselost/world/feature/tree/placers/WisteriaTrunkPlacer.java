@@ -37,8 +37,10 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
             Codec.INT.fieldOf("height_rand_b").forGetter(placer -> placer.secondRandomHeight)
     ).apply(instance, WisteriaTrunkPlacer::new));
 
-    private final IntProvider maxBranchRange, branchCount;
-    private final FloatProvider branchHeight, branchRange;
+    private final IntProvider maxBranchRange;
+    private final IntProvider branchCount;
+    private final FloatProvider branchHeight;
+    private final FloatProvider branchRange;
 
     public WisteriaTrunkPlacer(IntProvider maxBranchRange, IntProvider branchCount, FloatProvider branchRange, FloatProvider branchHeight, int baseHeight, int firstRandomHeight, int secondRandomHeight) {
         super(baseHeight, firstRandomHeight, secondRandomHeight);
@@ -112,7 +114,8 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
     }
 
     // Mojang, why isn't there a builtin function to do this?
-    private static final Direction[] directions = new Direction[] {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
+    private static final Direction[] directions = new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
+
     private Direction randomDirection(Random random) {
         return directions[random.nextInt(directions.length)];
     }

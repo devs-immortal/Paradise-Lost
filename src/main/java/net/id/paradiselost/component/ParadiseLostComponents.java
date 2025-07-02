@@ -12,7 +12,7 @@ public class ParadiseLostComponents implements EntityComponentInitializer {
 
     public static final ComponentKey<MoaGenes> MOA_GENETICS_KEY = ComponentRegistry.getOrCreate(ParadiseLost.locate("moa_genetics"), MoaGenes.class);
     public static final ComponentKey<FloatingComponent> FLOATING_KEY = ComponentRegistry.getOrCreate(ParadiseLost.locate("minecart_float"), FloatingComponent.class);
-    
+
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         registry.registerFor(MoaEntity.class, MOA_GENETICS_KEY, moa -> new MoaGenes());

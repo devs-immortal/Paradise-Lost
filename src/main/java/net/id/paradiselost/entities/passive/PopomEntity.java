@@ -48,6 +48,7 @@ public class PopomEntity extends AnimalEntity {
         super(entityType, world);
     }
 
+    @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(FUR_SIZE, 0);
@@ -74,6 +75,7 @@ public class PopomEntity extends AnimalEntity {
         return ParadiseLostSoundEvents.ENTITY_POPOM_AMBIENT;
     }
 
+    @Override
     protected void playHurtSound(DamageSource damageSource) {
         this.playSound(ParadiseLostSoundEvents.ENTITY_POPOM_HURT, this.getSoundVolume(), this.getSoundPitch() + 0.3F);
     }
@@ -168,7 +170,7 @@ public class PopomEntity extends AnimalEntity {
 
     public float getHeadAngle(float delta) {
         if (this.eatingTimer > 4 && this.eatingTimer <= 36) {
-            float f = ((float) (this.eatingTimer - 4) - delta) / 32.0F;
+            float f = (this.eatingTimer - 4 - delta) / 32.0F;
             return (float) (Math.PI / 5) + 0.21991149F * MathHelper.sin(f * 28.7F);
         } else {
             return this.eatingTimer > 0 ? (float) (Math.PI / 5) : this.getPitch() * (float) (Math.PI / 180.0);

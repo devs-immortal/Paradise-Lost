@@ -38,6 +38,7 @@ public class MotherAurelLeafParticle extends SpriteBillboardParticle {
         this.scale = (float) (0.06 + (random.nextDouble() / 14));
     }
 
+    @Override
     public void tick() {
         velocityY = velocityDown;
         super.tick();

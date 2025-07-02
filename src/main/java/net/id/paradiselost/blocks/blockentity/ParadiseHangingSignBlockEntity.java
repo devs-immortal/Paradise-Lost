@@ -10,6 +10,7 @@ public class ParadiseHangingSignBlockEntity extends HangingSignBlockEntity {
     public ParadiseHangingSignBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(blockPos, blockState);
     }
+
     @Override
     public BlockEntityType<?> getType() {
         return ParadiseLostBlockEntityTypes.HANGING_SIGN;

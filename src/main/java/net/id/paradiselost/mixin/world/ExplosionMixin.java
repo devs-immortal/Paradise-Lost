@@ -85,7 +85,7 @@ public abstract class ExplosionMixin extends Object implements ExplosionExtensio
 
         boolean bl = this.destructionType != Explosion.DestructionType.KEEP;
         if (particles) {
-            if (!(this.power < 2.0F) && bl) {
+            if (this.power >= 2.0F && bl) {
                 this.world.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.x, this.y, this.z, 1.0, 0.0, 0.0);
             } else {
                 this.world.addParticle(ParticleTypes.EXPLOSION, this.x, this.y, this.z, 1.0, 0.0, 0.0);
@@ -93,7 +93,7 @@ public abstract class ExplosionMixin extends Object implements ExplosionExtensio
         }
 
         if (bl) {
-            ObjectArrayList<Pair<ItemStack, BlockPos>> objectArrayList = new ObjectArrayList();
+            ObjectArrayList<Pair<ItemStack, BlockPos>> objectArrayList = new ObjectArrayList<>();
             boolean bl2 = this.getCausingEntity() instanceof PlayerEntity;
             Util.shuffle(this.affectedBlocks, this.world.random);
             ObjectListIterator var5 = this.affectedBlocks.iterator();
@@ -105,22 +105,27 @@ public abstract class ExplosionMixin extends Object implements ExplosionExtensio
                 if (!blockState.isAir()) {
                     BlockPos blockPos2 = blockPos.toImmutable();
                     this.world.getProfiler().push("explosion_blocks");
-                    if (block.shouldDropItemsOnExplosion((Explosion) (Object) this)) {
-                        World var11 = this.world;
-                        if (var11 instanceof ServerWorld) {
-                            ServerWorld serverWorld = (ServerWorld) var11;
-                            BlockEntity blockEntity = blockState.hasBlockEntity() ? this.world.getBlockEntity(blockPos) : null;
-                            LootContextParameterSet.Builder builder = (new LootContextParameterSet.Builder(serverWorld)).add(LootContextParameters.ORIGIN, Vec3d.ofCenter(blockPos)).add(LootContextParameters.TOOL, ItemStack.EMPTY).addOptional(LootContextParameters.BLOCK_ENTITY, blockEntity).addOptional(LootContextParameters.THIS_ENTITY, this.entity);
-                            if (this.destructionType == Explosion.DestructionType.DESTROY_WITH_DECAY) {
-                                builder.add(LootContextParameters.EXPLOSION_RADIUS, this.power);
-                            }
+                    if (block.shouldDropItemsOnExplosion((Explosion) (Object) this) && this.world instanceof ServerWorld serverWorld) {
+                        BlockEntity blockEntity = blockState.hasBlockEntity()
+                                ? this.world.getBlockEntity(blockPos)
+                                : null;
 
-                            blockState.onStacksDropped(serverWorld, blockPos, ItemStack.EMPTY, bl2);
-                            blockState.getDroppedStacks(builder).forEach((stack) -> {
-                                tryMergeStack(objectArrayList, stack, blockPos2);
-                            });
+                        LootContextParameterSet.Builder builder = (new LootContextParameterSet.Builder(serverWorld))
+                                .add(LootContextParameters.ORIGIN, Vec3d.ofCenter(blockPos))
+                                .add(LootContextParameters.TOOL, ItemStack.EMPTY)
+                                .addOptional(LootContextParameters.BLOCK_ENTITY, blockEntity)
+                                .addOptional(LootContextParameters.THIS_ENTITY, this.entity);
+
+                        if (this.destructionType == Explosion.DestructionType.DESTROY_WITH_DECAY) {
+                            builder.add(LootContextParameters.EXPLOSION_RADIUS, this.power);
                         }
+
+                        blockState.onStacksDropped(serverWorld, blockPos, ItemStack.EMPTY, bl2);
+                        blockState.getDroppedStacks(builder).forEach(
+                                stack -> tryMergeStack(objectArrayList, stack, blockPos2)
+                        );
                     }
+
 
                     this.world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
                     block.onDestroyedByExplosion(this.world, blockPos, (Explosion) (Object) this);
@@ -137,7 +142,6 @@ public abstract class ExplosionMixin extends Object implements ExplosionExtensio
         }
 
         if (this.createFire) {
-
             for (BlockPos blockPos3 : this.affectedBlocks) {
                 if (this.random.nextInt(3) == 0 && this.world.getBlockState(blockPos3).isAir() && this.world.getBlockState(blockPos3.down()).isOpaqueFullCube(this.world, blockPos3.down())) {
                     this.world.setBlockState(blockPos3, AbstractFireBlock.getState(this.world, blockPos3));

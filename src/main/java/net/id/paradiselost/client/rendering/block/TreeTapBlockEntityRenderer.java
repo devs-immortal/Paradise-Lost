@@ -18,7 +18,7 @@ public class TreeTapBlockEntityRenderer implements BlockEntityRenderer<TreeTapBl
     public void render(TreeTapBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         if (!entity.isEmpty()) {
             matrices.push();
-			// todo: rotate along facing axis
+            // todo: rotate along facing axis
             matrices.translate(0.5, 0.4, 0.5);
             matrices.scale(0.75F, 0.75F, 0.75F);
             MinecraftClient.getInstance().getItemRenderer().renderItem(entity.getStack(0), ModelTransformationMode.FIXED, light, overlay, matrices, vertexConsumers, null, 0);

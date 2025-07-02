@@ -49,16 +49,16 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
         this.matchGetter = RecipeManager.createCachedMatchGetter(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE);
     }
 
-	public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
-        ItemStack stored = inventory.get(0);
-        if (!handStack.isEmpty() && inventory.get(0).isEmpty()) {
+    public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
+        ItemStack stored = inventory.getFirst();
+        if (!handStack.isEmpty() && stored.isEmpty()) {
             inventory.set(0, handStack.split(1));
         } else {
             player.giveItemStack(stored);
             inventory.set(0, ItemStack.EMPTY);
         }
         markDirty();
-	}
+    }
 
     public int[] getAvailableSlots(Direction side) {
         return new int[1];
@@ -97,18 +97,18 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
         if (world != null && !world.isClient) updateInClientWorld();
     }
 
-	@Override
-	public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-		super.readNbt(nbt, registryLookup);
+    @Override
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
         this.inventory.clear();
-		Inventories.readNbt(nbt, inventory, registryLookup);
-	}
+        Inventories.readNbt(nbt, inventory, registryLookup);
+    }
 
-	@Override
-	public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-		super.writeNbt(nbt, registryLookup);
-		Inventories.writeNbt(nbt, inventory, registryLookup);
-	}
+    @Override
+    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
+        Inventories.writeNbt(nbt, inventory, registryLookup);
+    }
 
     @Override
     protected Text getContainerName() {
@@ -131,18 +131,18 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
     }
 
     public BlockState getTappedState() {
-		return this.world.getBlockState(this.pos.offset(getCachedState().get(Properties.HORIZONTAL_FACING).getOpposite()));
-	}
+        return this.world.getBlockState(this.pos.offset(getCachedState().get(Properties.HORIZONTAL_FACING).getOpposite()));
+    }
 
-	public void tryCraft() {
-		ItemStack stack = getStack(0);
-		if (stack.isEmpty()) {
-			return;
-		}
+    public void tryCraft() {
+        ItemStack stack = getStack(0);
+        if (stack.isEmpty()) {
+            return;
+        }
 
-		Optional<RecipeEntry<TreeTapRecipe>> recipe = this.matchGetter.getFirstMatch(this, this.getWorld());
-		if (recipe.isPresent() && world.random.nextInt(recipe.get().value().getChance()) == 0) {
-			ItemStack output = recipe.get().value().craft(this, world.getRegistryManager());
+        Optional<RecipeEntry<TreeTapRecipe>> recipe = this.matchGetter.getFirstMatch(this, this.getWorld());
+        if (recipe.isPresent() && world.random.nextInt(recipe.get().value().getChance()) == 0) {
+            ItemStack output = recipe.get().value().craft(this, world.getRegistryManager());
             Block convertBlock = recipe.get().value().getOutputBlock();
             BlockPos attachedPos = this.pos.offset(world.getBlockState(this.pos).get(TreeTapBlock.FACING).getOpposite());
             BlockState attachedBlock = world.getBlockState(attachedPos);
@@ -152,7 +152,8 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
                 if (convertBlock != world.getBlockState(attachedPos).getBlock()) {
                     world.setBlockState(attachedPos, convertBlock.getDefaultState());
                 }
-                if (!world.isClient) world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
+                if (!world.isClient)
+                    world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
 
                 this.inventory.set(0, output);
                 inventoryChanged();
@@ -161,14 +162,15 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
 
                 world.setBlockState(attachedPos, attachedBlock.with(BeehiveBlock.HONEY_LEVEL, 0));
 
-                if (!world.isClient) world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
+                if (!world.isClient)
+                    world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.5f, world.getRandom().nextFloat() * 0.4f + 0.8f);
 
                 this.inventory.set(0, output);
                 inventoryChanged();
             }
-		}
+        }
         tryTansferItemsOut();
-	}
+    }
 
     public void tryTansferItemsOut() {
         ItemStack stack = getStack(0);
@@ -176,31 +178,31 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
             return;
         }
 
-        ItemStack contents = this.inventory.get(0);
+        ItemStack contents = this.inventory.getFirst();
         BlockEntity possibleHopper = world.getBlockEntity(pos.down());
-        if (possibleHopper instanceof Inventory) {
-            contents = HopperBlockEntity.transfer(this, (Inventory) possibleHopper, contents, Direction.UP);
+        if (possibleHopper instanceof Inventory hopper) {
+            contents = HopperBlockEntity.transfer(this, hopper, contents, Direction.UP);
         }
         this.inventory.set(0, contents);
         inventoryChanged();
     }
 
-	@Override
-	public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
-		NbtCompound nbtCompound = new NbtCompound();
-		this.writeNbt(nbtCompound, registryLookup);
-		return nbtCompound;
-	}
+    @Override
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        NbtCompound nbtCompound = new NbtCompound();
+        this.writeNbt(nbtCompound, registryLookup);
+        return nbtCompound;
+    }
 
-	@Nullable
-	@Override
-	public Packet<ClientPlayPacketListener> toUpdatePacket() {
-		return BlockEntityUpdateS2CPacket.create(this);
-	}
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
 
-	public void updateInClientWorld() {
-		((ServerWorld) world).getChunkManager().markForUpdate(pos);
-	}
+    public void updateInClientWorld() {
+        ((ServerWorld) world).getChunkManager().markForUpdate(pos);
+    }
 
     @Override
     public ItemStack getStackInSlot(int slot) {

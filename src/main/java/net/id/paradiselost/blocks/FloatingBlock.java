@@ -47,11 +47,10 @@ public class FloatingBlock extends ExperienceDroppingBlock {
     }
 
     private void checkFloatable(World worldIn, BlockPos pos) {
-        if (!this.powered || worldIn.isReceivingRedstonePower(pos)) {
-            if (!worldIn.isClient) {
-                FloatingBlockHelper.ANY.tryCreate(worldIn, pos);
-            }
+        if (worldIn.isClient || this.powered && !worldIn.isReceivingRedstonePower(pos)) {
+            return;
         }
+        FloatingBlockHelper.ANY.tryCreate(worldIn, pos);
     }
 
     protected int getFallDelay() {

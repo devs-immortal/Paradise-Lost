@@ -222,6 +222,8 @@ public class MoaGenes implements AutoSyncedComponent {
                 attributeMap.getFloat(MoaAttributes.DROP_MULTIPLIER),
                 attributeMap.getFloat(MoaAttributes.MAX_HEALTH)
         );
-        return new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), affinity.name(), true, hunger, owner == null ? UUID.fromString("00000000-0000-0000-0000-000000000000") : owner, attributes);
+        return new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), affinity.name(), true, hunger, owner == null
+                ? UUID.fromString("00000000-0000-0000-0000-000000000000")
+                : owner, attributes);
     }
 }

@@ -36,6 +36,7 @@ import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
  */
 public class MoaScreenHandler extends ScreenHandler {
     private final SimpleInventory dummy = new SimpleInventory(20) {
+        @Override
         public void setStack(int slot, ItemStack stack) {
             this.heldStacks.set(slot, stack);
             if (!stack.isEmpty() && stack.getCount() > this.getMaxCountPerStack()) {
@@ -44,6 +45,7 @@ public class MoaScreenHandler extends ScreenHandler {
 
             this.markDirty();
         }
+
         @Override
         public boolean isValid(int slot, ItemStack stack) {
             return false;
@@ -56,56 +58,56 @@ public class MoaScreenHandler extends ScreenHandler {
     public MoaScreenHandler(int syncId, PlayerInventory playerInventory, Inventory moaInventory, MoaEntity moa) {
         super(ParadiseLostScreens.MOA, syncId);
         this.moa = moa;
-        
+
         addSlot(new FakeSlot(
-                8, 18,
-                () -> moa.isSaddled() ? new ItemStack(Items.SADDLE) : ItemStack.EMPTY,
-                (stack) -> moa.setSaddled(!stack.isEmpty() && stack.getItem() instanceof SaddleItem),
-                (stack) -> stack.getItem() instanceof SaddleItem
-            ) {
-                @Override
-                public int getMaxItemCount() {
-                    return 1;
+                        8, 18,
+                        () -> moa.isSaddled() ? new ItemStack(Items.SADDLE) : ItemStack.EMPTY,
+                        stack -> moa.setSaddled(!stack.isEmpty() && stack.getItem() instanceof SaddleItem),
+                        stack -> stack.getItem() instanceof SaddleItem
+                ) {
+                    @Override
+                    public int getMaxItemCount() {
+                        return 1;
+                    }
+
+                    @Override
+                    public Pair<Identifier, Identifier> getBackgroundSprite() {
+                        return Pair.of(BLOCK_ATLAS_TEXTURE, locate("item/slot/empty_slot_saddle"));
+                    }
                 }
-    
-                @Override
-                public Pair<Identifier, Identifier> getBackgroundSprite() {
-                    return Pair.of(BLOCK_ATLAS_TEXTURE, locate("item/slot/empty_slot_saddle"));
-                }
-            }
         );
         addSlot(new FakeSlot(
-                8, 36,
-                moa::getChest,
-                moa::setChest,
-                (stack) -> stack.getItem() instanceof BlockItem item && item.getBlock() instanceof AbstractChestBlock
-            ) {
-                @Override
-                public int getMaxItemCount() {
-                    return 1;
+                        8, 36,
+                        moa::getChest,
+                        moa::setChest,
+                        stack -> stack.getItem() instanceof BlockItem item && item.getBlock() instanceof AbstractChestBlock
+                ) {
+                    @Override
+                    public int getMaxItemCount() {
+                        return 1;
+                    }
+
+                    @Override
+                    public void markDirty() {
+                        updateChestState();
+                    }
+
+                    @Override
+                    public Pair<Identifier, Identifier> getBackgroundSprite() {
+                        return Pair.of(BLOCK_ATLAS_TEXTURE, locate("item/slot/empty_slot_chest"));
+                    }
                 }
-    
-                @Override
-                public void markDirty() {
-                    updateChestState();
-                }
-    
-                @Override
-                public Pair<Identifier, Identifier> getBackgroundSprite() {
-                    return Pair.of(BLOCK_ATLAS_TEXTURE, locate("item/slot/empty_slot_chest"));
-                }
-            }
         );
-    
+
         //FIXME This needs a real fix, without this the client never sees that the Moa has an inventory
         if (moa.getWorld().isClient) {
             moa.refreshChest(false);
             moaInventory = moa.getInventory();
         }
-        
+
         enableMoaInventory = moa.hasChest();
         var chestInventory = enableMoaInventory ? moaInventory : dummy;
-        
+
         Set<Slot> moaChestSlots = new HashSet<>();
         for (int y = 0; y < 4; y++) {
             int slotY = 18 + 18 * y;
@@ -119,7 +121,7 @@ public class MoaScreenHandler extends ScreenHandler {
             }
         }
         this.moaChestSlots = Collections.unmodifiableSet(moaChestSlots);
-        
+
         for (int y = 0; y < 3; ++y) {
             for (int x = 0; x < 9; ++x) {
                 addSlot(new Slot(playerInventory, x + y * 9 + 9, 8 + x * 18, 102 + y * 18));
@@ -129,14 +131,14 @@ public class MoaScreenHandler extends ScreenHandler {
             addSlot(new Slot(playerInventory, x, 8 + x * 18, 160));
         }
     }
-    
+
     private void updateChestState() {
         var hasChest = moa.hasChest();
         if (hasChest == enableMoaInventory) {
             return;
         }
         enableMoaInventory = hasChest;
-        
+
         var inventory = hasChest ? moa.getInventory() : dummy;
         for (var slot : moaChestSlots) {
             ((SlotAccessor) slot).setInventory(inventory);
@@ -147,15 +149,15 @@ public class MoaScreenHandler extends ScreenHandler {
     public boolean canUse(PlayerEntity player) {
         return player.squaredDistanceTo(moa) <= 64;
     }
-    
+
     public boolean hasMoaInventory() {
         return enableMoaInventory;
     }
-    
+
     public MoaEntity moa() {
         return moa;
     }
-    
+
     @Override
     public ItemStack quickMove(PlayerEntity player, int sourceSlot) {
         ItemStack result = ItemStack.EMPTY;
@@ -164,7 +166,7 @@ public class MoaScreenHandler extends ScreenHandler {
         if (!slot.hasStack()) {
             return result;
         }
-        
+
         var stack = slot.getStack();
         result = stack.copy();
         if (sourceSlot < 21 ? !insertItem(stack, 22, 57, true) : !insertItem(stack, 2, 22, false)) {
@@ -187,7 +189,7 @@ public class MoaScreenHandler extends ScreenHandler {
         public static Id<MoaScreenData> ID = new Id<>(locate("moa_data"));
 
 
-        public static final Codec<MoaScreenData> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+        public static final Codec<MoaScreenData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.INT.fieldOf("entity_id").forGetter(MoaScreenData::entityId)
         ).apply(instance, MoaScreenData::new));
         public static final PacketCodec<RegistryByteBuf, MoaScreenData> PACKET_CODEC;

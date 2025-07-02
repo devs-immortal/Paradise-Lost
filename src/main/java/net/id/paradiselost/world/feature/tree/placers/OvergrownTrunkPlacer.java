@@ -1,6 +1,5 @@
 package net.id.paradiselost.world.feature.tree.placers;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -24,18 +23,14 @@ import java.util.function.BiConsumer;
 public class OvergrownTrunkPlacer extends TrunkPlacer {
 
     @SuppressWarnings("CodeBlock2Expr")
-    public static final MapCodec<OvergrownTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
-        return instance.group(Codec.intRange(0, 32).fieldOf("base_height").forGetter((placer) -> {
-            return placer.baseHeight;
-        }), Codec.intRange(0, 24).fieldOf("height_rand_a").forGetter((placer) -> {
-            return placer.firstRandomHeight;
-        }), Codec.intRange(0, 24).fieldOf("height_rand_b").forGetter((placer) -> {
-            return placer.secondRandomHeight;
-        }), BlockStateProvider.TYPE_CODEC.fieldOf("overgrowth").forGetter((placer) -> {
-            return placer.overgrowthProvider;
-        }), Codec.floatRange(0, 1).fieldOf("chance").forGetter((placer) -> {
-            return placer.overgrowthChance;
-        })).apply(instance, OvergrownTrunkPlacer::new);
+    public static final MapCodec<OvergrownTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> {
+        return instance.group(
+                Codec.intRange(0, 32).fieldOf("base_height").forGetter(placer -> placer.baseHeight),
+                Codec.intRange(0, 24).fieldOf("height_rand_a").forGetter(placer -> placer.firstRandomHeight),
+                Codec.intRange(0, 24).fieldOf("height_rand_b").forGetter(placer -> placer.secondRandomHeight),
+                BlockStateProvider.TYPE_CODEC.fieldOf("overgrowth").forGetter(placer -> placer.overgrowthProvider),
+                Codec.floatRange(0, 1).fieldOf("chance").forGetter(placer -> placer.overgrowthChance)
+        ).apply(instance, OvergrownTrunkPlacer::new);
     });
 
     private final BlockStateProvider overgrowthProvider;
@@ -84,6 +79,6 @@ public class OvergrownTrunkPlacer extends TrunkPlacer {
             }
         }
 
-        return ImmutableList.of(new FoliagePlacer.TreeNode(startPos.up(height), 0, false));
+        return List.of(new FoliagePlacer.TreeNode(startPos.up(height), 0, false));
     }
 }

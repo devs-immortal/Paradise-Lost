@@ -34,6 +34,7 @@ public class ParadiseLostVegetationConfiguredFeatures extends ParadiseLostConfig
     public static final RegistryKey<ConfiguredFeature<?, ?>> TUNDRA_FOLIAGE = of("patch_tundra_foliage");
 
     public static void init() {
+        // no-op
     }
 
 }

@@ -13,6 +13,7 @@ import static net.id.paradiselost.ParadiseLost.locate;
 public class ParadiseLostMapDecorationTypes {
 
     public static void init() {
+        // no-op
     }
 
     public static final RegistryEntry<MapDecorationType> VAULT = register(

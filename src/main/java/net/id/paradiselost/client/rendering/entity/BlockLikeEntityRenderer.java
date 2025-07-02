@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 @Environment(EnvType.CLIENT)
 public class BlockLikeEntityRenderer extends EntityRenderer<BlockLikeEntity> {
     private final Random random = Random.create();
-    
+
     public BlockLikeEntityRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager);
         this.shadowRadius = 0.5F;

@@ -18,19 +18,20 @@ import org.spongepowered.asm.mixin.injection.Slice;
 public abstract class FilledMapMixin {
     /**
      * Changes the color of the paradise_lost void to a pleasant blue.
+     *
      * @author Jack Papel
      */
     @Redirect(
             method = "updateColors",
             slice = @Slice(
-                from = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/item/map/MapState;removeBanner(Lnet/minecraft/world/BlockView;II)V"
-                )
+                    from = @At(
+                            value = "INVOKE",
+                            target = "Lnet/minecraft/item/map/MapState;removeBanner(Lnet/minecraft/world/BlockView;II)V"
+                    )
             ),
             at = @At(
-                value = "INVOKE",
-                target = "Lnet/minecraft/block/BlockState;getMapColor(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/MapColor;"
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/block/BlockState;getMapColor(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/MapColor;"
             )
     )
     private MapColor updateColors(BlockState instance, BlockView world, BlockPos pos) {

@@ -11,11 +11,11 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -29,11 +29,12 @@ import java.util.Map;
 
 public class WallClingingPlantBlock extends PlantBlock implements Fertilizable {
 
-    public static final MapCodec<WallClingingPlantBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
-        return instance.group(TagKey.codec(RegistryKeys.BLOCK).fieldOf("clingable_blocks").forGetter((block) -> {
-            return block.clingableBlocks;
-        }), createSettingsCodec()).apply(instance, WallClingingPlantBlock::new);
-    });
+    public static final MapCodec<WallClingingPlantBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(
+                    TagKey.codec(RegistryKeys.BLOCK).fieldOf("clingable_blocks").forGetter(block -> block.clingableBlocks),
+                    createSettingsCodec()
+            ).apply(instance, WallClingingPlantBlock::new)
+    );
     protected static final Map<Direction, VoxelShape> SHAPES = Map.of(
             Direction.NORTH, Block.createCuboidShape(0, 4, 0, 16, 12, 6),
             Direction.EAST, Block.createCuboidShape(10, 4, 0, 16, 12, 16),
@@ -47,12 +48,12 @@ public class WallClingingPlantBlock extends PlantBlock implements Fertilizable {
         super(settings);
         this.clingableBlocks = clingableBlocks;
     }
-    
+
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPES.get(state.get(FACING));
     }
-    
+
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         var wall = pos.offset(state.get(FACING));

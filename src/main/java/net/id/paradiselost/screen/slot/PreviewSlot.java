@@ -14,12 +14,12 @@ import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
  */
 public class PreviewSlot extends Slot {
     private final Identifier image;
-    
+
     public PreviewSlot(Identifier image, Inventory inventory, int index, int x, int y) {
         super(inventory, index, x, y);
         this.image = image;
     }
-    
+
     @Environment(EnvType.CLIENT)
     @Override
     public Pair<Identifier, Identifier> getBackgroundSprite() {

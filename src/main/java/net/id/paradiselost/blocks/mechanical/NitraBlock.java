@@ -34,22 +34,21 @@ public class NitraBlock extends Block {
         super(settings);
     }
 
+    @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        if (!oldState.isOf(state.getBlock())) {
-            if (world.isReceivingRedstonePower(pos)) {
-                world.scheduleBlockTick(pos, this, 1);
-            }
-
+        if (!oldState.isOf(state.getBlock()) && world.isReceivingRedstonePower(pos)) {
+            world.scheduleBlockTick(pos, this, 1);
         }
     }
 
+    @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (world.isReceivingRedstonePower(pos)) {
             world.scheduleBlockTick(pos, this, 1);
         }
-
     }
 
+    @Override
     public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
         float sourcePower = ((ExplosionExtensions) explosion).getPower();
         if (!world.isClient && sourcePower > 0.5F) {
@@ -57,6 +56,7 @@ public class NitraBlock extends Block {
         }
     }
 
+    @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         ignite(world, pos, BASE_EXPLOSIVE_POWER, null);
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
@@ -77,6 +77,7 @@ public class NitraBlock extends Block {
         ((ExplosionExtensions) explosion).affectWorld(true, SoundEvents.ENTITY_GENERIC_EXPLODE.value());
     }
 
+    @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
         if (!itemStack.isOf(Items.FLINT_AND_STEEL) && !itemStack.isOf(Items.FIRE_CHARGE)) {
@@ -98,18 +99,20 @@ public class NitraBlock extends Block {
         }
     }
 
+    @Override
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
         if (!world.isClient) {
             BlockPos blockPos = hit.getBlockPos();
-            Entity entity = projectile.getOwner();
+            Entity owner = projectile.getOwner();
             if (projectile.isOnFire() && projectile.canModifyAt(world, blockPos)) {
-                ignite(world, blockPos, BASE_EXPLOSIVE_POWER, entity instanceof LivingEntity ? (LivingEntity) entity : null);
+                ignite(world, blockPos, BASE_EXPLOSIVE_POWER, owner instanceof LivingEntity entity ? entity : null);
                 world.removeBlock(blockPos, false);
             }
         }
 
     }
 
+    @Override
     public boolean shouldDropItemsOnExplosion(Explosion explosion) {
         return false;
     }
