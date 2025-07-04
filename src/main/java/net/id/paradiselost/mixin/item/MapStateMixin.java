@@ -24,8 +24,8 @@ public class MapStateMixin {
     @Inject(method = "getPlayerMarkerPacket", at = @At("RETURN"), cancellable = true)
     public void addDimensionData(MapIdComponent mapId, PlayerEntity player, CallbackInfoReturnable<Packet<?>> cir) {
         Packet<?> packetData = cir.getReturnValue();
-        if (packetData instanceof MapDimensionData) {
-            ((MapDimensionData) packetData).setDimension(dimension);
+        if (packetData instanceof MapDimensionData mapData) {
+            mapData.setDimension(dimension);
         }
     }
 }

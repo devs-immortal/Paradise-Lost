@@ -48,6 +48,7 @@ public class BlockRegistration {
             super(settings);
         }
 
+        @Override
         public BlockState getPlacementState(ItemPlacementContext ctx) {
             return !this.getDefaultState().canPlaceAt(ctx.getWorld(), ctx.getBlockPos()) ? ParadiseLostBlocks.DIRT.getDefaultState() : super.getPlacementState(ctx);
         }

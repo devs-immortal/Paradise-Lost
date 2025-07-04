@@ -34,6 +34,7 @@ public class ParadiseLostDataComponentTypes {
     }
 
     public static void init() {
+        // no-op
     }
 
     // Component Source
@@ -61,31 +62,6 @@ public class ParadiseLostDataComponentTypes {
                     MoaGeneComponent::new
             );
         }
-
-        public Identifier race() {
-            return this.race;
-        }
-
-        public String affinity() {
-            return this.affinity;
-        }
-
-        public boolean isBaby() {
-            return this.isBaby;
-        }
-
-        public float hunger() {
-            return this.hunger;
-        }
-
-        public UUID ownerId() {
-            return this.ownerId;
-        }
-
-        public MoaAttributeComponent attributes() {
-            return this.attributes;
-        }
-
     }
 
     public record MoaAttributeComponent(float groundSpeed, float glidingSpeed, float glidingDecay, float jumpStrength, float dropMultiplier, float maxHealth) {
@@ -111,31 +87,6 @@ public class ParadiseLostDataComponentTypes {
                     MoaAttributeComponent::new
             );
         }
-
-        public float groundSpeed() {
-            return this.groundSpeed;
-        }
-
-        public float glidingSpeed() {
-            return this.glidingSpeed;
-        }
-
-        public float glidingDecay() {
-            return this.glidingDecay;
-        }
-
-        public float jumpStrength() {
-            return this.jumpStrength;
-        }
-
-        public float dropMultiplier() {
-            return this.dropMultiplier;
-        }
-
-        public float maxHealth() {
-            return this.maxHealth;
-        }
-
     }
 
     public record BloodstoneComponent(UUID uuid, Text name, String health, String defense, String toughness, String owner) {
@@ -161,31 +112,6 @@ public class ParadiseLostDataComponentTypes {
                     BloodstoneComponent::new
             );
         }
-
-        public UUID uuid() {
-            return this.uuid;
-        }
-
-        public Text name() {
-            return this.name;
-        }
-
-        public String health() {
-            return this.health;
-        }
-
-        public String defense() {
-            return this.defense;
-        }
-
-        public String toughness() {
-            return this.toughness;
-        }
-
-        public String owner() {
-            return this.owner;
-        }
-
     }
 
     public record XpCircletChargeComponent(int storedXp) {
@@ -200,10 +126,6 @@ public class ParadiseLostDataComponentTypes {
                     PacketCodecs.INTEGER, XpCircletChargeComponent::storedXp,
                     XpCircletChargeComponent::new
             );
-        }
-
-        public int storedXp() {
-            return this.storedXp;
         }
 
         public boolean charged() {

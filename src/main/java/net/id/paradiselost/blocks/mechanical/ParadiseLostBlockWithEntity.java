@@ -44,8 +44,8 @@ public abstract class ParadiseLostBlockWithEntity extends BlockWithEntity implem
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof Inventory) {
-                ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
+            if (blockEntity instanceof Inventory inventory) {
+                ItemScatterer.spawn(world, pos, inventory);
                 world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);

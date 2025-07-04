@@ -63,6 +63,7 @@ public class CalciteDecoratedPotBlockEntity extends BlockEntity implements Loota
         }
     }
 
+    @Override
     public BlockEntityUpdateS2CPacket toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
     }

@@ -21,7 +21,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class FloatingBlockEntity extends BlockLikeEntity {
-    private Supplier<Boolean> dropState = () -> FloatingBlockHelper.DEFAULT_DROP_STATE.apply(this);
+    private Supplier<Boolean> dropState = () -> FloatingBlockHelper.DEFAULT_DROP_STATE.test(this);
     private boolean dropping = false;
     private BiConsumer<Double, Boolean> onEndFloating = (f, b) -> {
     };

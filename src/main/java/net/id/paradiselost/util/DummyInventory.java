@@ -9,6 +9,7 @@ public class DummyInventory extends SimpleInventory {
         super(0);
     }
 
+    @Override
     public void setStack(int slot, ItemStack stack) {
     }
 

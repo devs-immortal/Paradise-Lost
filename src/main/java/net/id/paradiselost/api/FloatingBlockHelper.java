@@ -48,7 +48,7 @@ public interface FloatingBlockHelper {
      * The default conditions under which a floating block goes from floating to falling. By default, this is when a
      * floating block is 50 blocks from the height limit, and isn't a fast floater.
      */
-    Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = entity -> {
+    Predicate<FloatingBlockEntity> DEFAULT_DROP_STATE = entity -> {
         World world = entity.getWorld();
         BlockPos pos = entity.getBlockPos();
         int distFromTop = world.getTopY() - pos.getY();
@@ -166,7 +166,7 @@ public interface FloatingBlockHelper {
          * @param pos       The position of the block that should be added to the structure.
          * @param predicate A predicate to test whether the block should be added.
          */
-        public SetBuilder addif(BlockPos pos, Predicate<Map<Vec3i, BlockLikeEntity>> predicate) {
+        public SetBuilder addIf(BlockPos pos, Predicate<Map<Vec3i, BlockLikeEntity>> predicate) {
             if (predicate.test(Map.copyOf(this.entries))) {
                 return this.add(pos);
             }

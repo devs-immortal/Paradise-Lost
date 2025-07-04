@@ -60,11 +60,9 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
         if (!state.canPlaceAt(world, pos)) {
             return Blocks.AIR.getDefaultState();
-        } else if (!(world.getBlockState(pos.down()).getBlock() instanceof ParadiseLostHangerBlock)) {
-            return this.getDefaultState().with(TIP, true);
-        } else {
-            return this.getDefaultState().with(TIP, false);
         }
+        Block blockBelow = world.getBlockState(pos.down()).getBlock();
+        return this.getDefaultState().with(TIP, !(blockBelow instanceof ParadiseLostHangerBlock));
     }
 
     @Override
@@ -77,9 +75,8 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         if (state.get(TIP)) {
             return TIP_SHAPE;
-        } else {
-            return FULL_SHAPE;
         }
+        return FULL_SHAPE;
     }
 
     @Override

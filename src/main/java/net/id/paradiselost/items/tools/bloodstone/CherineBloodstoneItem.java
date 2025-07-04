@@ -1,6 +1,5 @@
 package net.id.paradiselost.items.tools.bloodstone;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -13,6 +12,6 @@ public class CherineBloodstoneItem extends BloodstoneItem {
 
     @Override
     protected List<Text> getDefaultText() {
-        return ImmutableList.of(Text.translatable("info.paradise_lost.bloodstone.cherine").formatted(Formatting.GOLD));
+        return List.of(Text.translatable("info.paradise_lost.bloodstone.cherine").formatted(Formatting.GOLD));
     }
 }

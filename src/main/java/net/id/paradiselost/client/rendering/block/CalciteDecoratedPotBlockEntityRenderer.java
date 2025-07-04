@@ -120,10 +120,9 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
         matrixStack.translate(-0.5, 0.0, -0.5);
         CalciteDecoratedPotBlockEntity.WobbleType wobbleType = decoratedPotBlockEntity.lastWobbleType;
         if (wobbleType != null && decoratedPotBlockEntity.getWorld() != null) {
-            float g = ((float) (decoratedPotBlockEntity.getWorld().getTime() - decoratedPotBlockEntity.lastWobbleTime) + f) / (float) wobbleType.lengthInTicks;
+            float g = ((decoratedPotBlockEntity.getWorld().getTime() - decoratedPotBlockEntity.lastWobbleTime) + f) / wobbleType.lengthInTicks;
             if (g >= 0.0F && g <= 1.0F) {
                 if (wobbleType == CalciteDecoratedPotBlockEntity.WobbleType.POSITIVE) {
-                    float h = 0.015625F;
                     float k = g * (float) (Math.PI * 2);
                     float l = -1.5F * (MathHelper.cos(k) + 0.5F) * MathHelper.sin(k / 2.0F);
                     matrixStack.multiply(RotationAxis.POSITIVE_X.rotation(l * 0.015625F), 0.5F, 0.0F, 0.5F);

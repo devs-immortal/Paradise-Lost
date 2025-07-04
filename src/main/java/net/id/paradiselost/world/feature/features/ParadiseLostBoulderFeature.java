@@ -37,18 +37,16 @@ public class ParadiseLostBoulderFeature extends Feature<BoulderFeatureConfig> {
         if (blockPos.getY() <= structureWorldAccess.getBottomY() + 3) {
             return false;
         } else {
-
-            var tries = config.tries().get(random);
-            var size = config.size().get(random);
+            int size = config.size().get(random);
 
             for (int i = 0; i < 3; ++i) {
                 int j = random.nextInt(size);
                 int k = random.nextInt(size);
                 int l = random.nextInt(size);
-                float f = (float) (j + k + l) * 0.333F + 0.5F;
+                float f = (j + k + l) * 0.333F + 0.5F;
 
                 for (BlockPos bodyPos : BlockPos.iterate(blockPos.add(-j, -k, -l), blockPos.add(j, k, l))) {
-                    if (bodyPos.getSquaredDistance(blockPos) <= (double) (f * f)) {
+                    if (bodyPos.getSquaredDistance(blockPos) <= (f * f)) {
                         structureWorldAccess.setBlockState(bodyPos, config.body().get(random, bodyPos), Block.NO_REDRAW);
                     }
                 }

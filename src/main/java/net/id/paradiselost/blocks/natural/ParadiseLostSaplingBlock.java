@@ -13,6 +13,7 @@ public class ParadiseLostSaplingBlock extends SaplingBlock {
         super(generator, settings);
     }
 
+    @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return (super.canPlantOnTop(floor, world, pos) || floor.isOf(ParadiseLostBlocks.MOSSY_FLOESTONE));
     }

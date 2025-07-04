@@ -31,8 +31,8 @@ public class BuiltinModelItemRendererMixin {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, CallbackInfo ci) {
         Item item = stack.getItem();
-        if (item instanceof BlockItem) {
-            BlockState blockState = ((BlockItem) item).getBlock().getDefaultState();
+        if (item instanceof BlockItem blockItem) {
+            BlockState blockState = blockItem.getBlock().getDefaultState();
             if (blockState.isOf(ParadiseLostBlocks.CALCITE_DECORATED_POT)) {
                 this.renderCalciteDecoratedPot.readFrom(stack);
                 this.blockEntityRenderDispatcher.renderEntity(this.renderCalciteDecoratedPot, matrices, vertexConsumers, light, overlay);

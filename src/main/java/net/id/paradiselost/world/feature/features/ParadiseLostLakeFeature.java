@@ -50,9 +50,9 @@ public class ParadiseLostLakeFeature extends Feature<DynamicConfiguration> {
                 for (int xOff = 1; xOff < 15; xOff++) {
                     for (int zOff = 1; zOff < 15; zOff++) {
                         for (int yOff = 1; yOff < 7; yOff++) {
-                            double o = ((double) xOff - xCenter) / (xSize / 2.0D);
-                            double p = ((double) yOff - yCenter) / (ySize / 2.0D);
-                            double q = ((double) zOff - zCenter) / (zSize / 2.0D);
+                            double o = (xOff - xCenter) / (xSize / 2.0D);
+                            double p = (yOff - yCenter) / (ySize / 2.0D);
+                            double q = (zOff - zCenter) / (zSize / 2.0D);
                             double r = o * o + p * p + q * q;
                             if (r < 1.0D) {
                                 waterMap[(xOff * 16 + zOff) * 8 + yOff] = true;

@@ -2,12 +2,9 @@ package net.id.paradiselost.world.feature.structure;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.MapCodec;
-import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.world.feature.structure.generator.AurelTowerGenerator;
 import net.minecraft.structure.*;
-import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.Heightmap;
@@ -27,14 +24,16 @@ public class AurelTowerFeature extends Structure {
     }
 
     private static void addPieces(StructurePiecesCollector collector, Context context) {
-        StructureTemplate structure = context.structureTemplateManager().getTemplateOrBlank(ParadiseLost.locate("aurel_tower"));
-        BlockRotation blockRotation = BlockRotation.NONE;
         ChunkPos pos = context.chunkPos();
-        BlockPos pivot = new BlockPos(structure.getSize().getX() / 2, 0, structure.getSize().getZ() / 2);
-        BlockBox boundingBox = structure.calculateBoundingBox(pos.getStartPos(), blockRotation, pivot, BlockMirror.NONE);
-        BlockPos center = boundingBox.getCenter();
-        int y = context.chunkGenerator().getHeight(pos.getStartPos().getX() - X_OFFSET, pos.getStartPos().getZ() - Z_OFFSET, Heightmap.Type.WORLD_SURFACE_WG, context.world(), context.noiseConfig());
-        if (y < 0) { // DON'T PLACE ON THE BOTTOM OF THE WORLD
+        int y = context.chunkGenerator().getHeight(
+                pos.getStartPos().getX() - X_OFFSET,
+                pos.getStartPos().getZ() - Z_OFFSET,
+                Heightmap.Type.WORLD_SURFACE_WG,
+                context.world(),
+                context.noiseConfig()
+        );
+        // DON'T PLACE ON THE BOTTOM OF THE WORLD
+        if (y < 0) {
             return;
         }
         BlockPos newPos = new BlockPos(pos.getStartPos().getX() - X_OFFSET, y, pos.getStartPos().getZ() - Z_OFFSET);

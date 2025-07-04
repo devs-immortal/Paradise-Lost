@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 public class ParadiseLostCloudBlock extends TransparentBlock {
 
-    protected static VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 0.01, 16.0);
+    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 0.01, 16.0);
 
     public ParadiseLostCloudBlock(Settings properties) {
         super(properties);

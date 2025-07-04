@@ -55,6 +55,7 @@ public class LevitaRailBlock extends PoweredRailBlock {
         }
     }
 
+    @Override
     protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         world.setBlockState(pos, state.with(TRIGGERED, false), 3);
     }

@@ -55,8 +55,8 @@ public class IncubatorBlock extends ParadiseLostBlockWithEntity {
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof IncubatorBlockEntity && ((IncubatorBlockEntity) blockEntity).hasItem()) {
-                ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), ((IncubatorBlockEntity) blockEntity).getItem());
+            if (blockEntity instanceof IncubatorBlockEntity entity && entity.hasItem()) {
+                ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), entity.getItem());
             }
         }
         super.onStateReplaced(state, world, pos, newState, moved);

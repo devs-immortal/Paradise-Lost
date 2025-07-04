@@ -34,7 +34,7 @@ public class PoofBlock extends Block {
                 world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY(), pos.getZ(), rand.nextFloat() * 0.5, rand.nextFloat() * 0.5, rand.nextFloat() * 0.5);
             }
             if (rand.nextBoolean()) world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_SURTRUM_RUSH, SoundCategory.BLOCKS, 0.1F + rand.nextFloat() * 0.2F, rand.nextFloat() * 0.7F + 0.3F);
-            List<Entity> entities = world.getNonSpectatingEntities(Entity.class, new Box(pos.getX() - 5, pos.getY() - 5, pos.getZ() - 5, pos.getX() + 5, pos.getY() + 5, pos.getZ() + 5));
+            List<Entity> entities = world.getNonSpectatingEntities(Entity.class, new Box(pos.getX() - 5D, pos.getY() - 5D, pos.getZ() - 5D, pos.getX() + 5D, pos.getY() + 5D, pos.getZ() + 5D));
             for (Entity p : entities) {
                 if (p != null && p.isAlive() && p.getBlockPos().isWithinDistance(pos, 5)) p.setFireTicks(60);
             }
