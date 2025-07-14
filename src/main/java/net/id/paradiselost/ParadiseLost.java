@@ -40,7 +40,7 @@ import java.lang.invoke.MethodType;
  * Docs for Paradise Lost are sometimes written long after the code itself has been written, and oftentimes by different
  * authors than the author of the code itself. If you have any questions or concerns regarding documentation, please
  * contact either the doc author or the code author, or both, via our <a
- * href="https://discord.gg/eRsJ6F3Wng">Discord</a>.
+ * href="https://discord.com/invite/TvuNtNYEvr">Discord</a>.
  * <br><br>
  * The doc author can usually be found at the end of the first doc of the class, next to a tilde.
  * <br><br>
@@ -147,7 +147,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer, Dedic
                         The related issue on Mojang's issue tracker is MC-195468 at https://bugs.mojang.com/browse/MC-195468
                                             
                         You should only ever see this error message once per world.
-                        If restarting the server doesn't solve the issue, then please contact us at https://discord.gg/eRsJ6F3Wng
+                        If restarting the server doesn't solve the issue, then please contact us at https://discord.com/invite/TvuNtNYEvr
                                             
                         If you would like to suppress this crash add -D%s to your arguments.
                         For example, if you have:
