@@ -19,7 +19,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        If you'd like to have a real-time conversation for more detail or privacy, we recommend joining our [discord server](https://discord.com/invite/wmMa47n).
+        If you'd like to have a real-time conversation for more detail or privacy, we recommend joining our [discord server](https://discord.com/invite/TvuNtNYEvr).
         It's not required, but a conversation is easier to hold there than on Github.
   - type: textarea
     id: suggestion

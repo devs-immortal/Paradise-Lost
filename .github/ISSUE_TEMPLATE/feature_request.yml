@@ -12,7 +12,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        If you haven't already, bring your idea to our [discord server](https://discord.com/invite/wmMa47n)!
+        If you haven't already, bring your idea to our [discord server](https://discord.com/invite/TvuNtNYEvr)!
   - type: textarea
     id: feature
     attributes:

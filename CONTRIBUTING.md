@@ -42,11 +42,11 @@
 
 #### **Do you intend to add a new feature or change an existing one?**
 
-* Suggest your change as a feature request or to our [discord](https://discord.gg/eRsJ6F3Wng) first. If you don't, you might spend a bunch of time on something we end up rejecting.
+* Suggest your change as a feature request or to our [discord](https://discord.com/invite/TvuNtNYEvr) first. If you don't, you might spend a bunch of time on something we end up rejecting.
 
 #### **Do you have questions about the source code?**
 
-* Ask any question about our code in our [discord](https://discord.gg/eRsJ6F3Wng). You can also use the blank issue form, but it is not recommended.
+* Ask any question about our code in our [discord](https://discord.com/invite/TvuNtNYEvr). You can also use the blank issue form, but it is not recommended.
 
 #### **Do you want to contribute to documentation?**
 
