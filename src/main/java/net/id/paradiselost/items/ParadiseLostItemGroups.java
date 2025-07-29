@@ -354,6 +354,7 @@ public class ParadiseLostItemGroups {
                     itemGroup.add(MOA_SPAWN_EGG);
                     itemGroup.add(ENVOY_SPAWN_EGG);
                     itemGroup.add(POPOM_SPAWN_EGG);
+                    itemGroup.add(QUINT_SPAWN_EGG);
                 });
     }
 

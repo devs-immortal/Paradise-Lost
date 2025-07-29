@@ -1,7 +1,9 @@
 package net.id.paradiselost.entities.hostile;
 
 import com.google.common.collect.Lists;
+import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.minecraft.block.BlockState;
+import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -20,10 +22,12 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.BeeEntity;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Util;
 import net.minecraft.util.annotation.Debug;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Difficulty;
@@ -64,11 +68,6 @@ public class QuintEntity extends PathAwareEntity implements Monster {
         this.goalSelector.add(4, new RandomlyFloatGoal(this));
     }
 
-    @Debug
-    public GoalSelector getGoalSelector() {
-        return this.goalSelector;
-    }
-
     @Override
     protected EntityNavigation createNavigation(World world) {
         BirdNavigation birdNavigation = new BirdNavigation(this, world) {
@@ -87,6 +86,18 @@ public class QuintEntity extends PathAwareEntity implements Monster {
     protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
     }
 
+    @Override
+    public void lookAt(EntityAnchorArgumentType.EntityAnchor anchorPoint, Vec3d target) {
+    }
+
+    @Override
+    public void setAngles(float yaw, float pitch) {
+    }
+
+    @Override
+    protected void setRotation(float yaw, float pitch) {
+    }
+
 
     @Nullable
     private EnvoyEntity findValidEnvoy(double range) {
@@ -103,6 +114,17 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
     private boolean isValidEnvoy(Entity ent) {
         return ent instanceof EnvoyEntity && !((EnvoyEntity) ent).getEnlightened();
+    }
+
+    @Override
+    public void tick() {
+        if (this.getWorld().isClient && this.random.nextInt(3) == 0) {
+            this.getWorld().addParticle(ParadiseLostParticles.LIT_CLOUD,
+                    this.getParticleX(0.2), (this.getY() + 0.15 + this.random.nextDouble() * 0.4), this.getParticleZ(0.2),
+                    (this.random.nextDouble() - 0.5) * 0.05, -this.random.nextDouble() * 0.025, (this.random.nextDouble() - 0.5) * 0.05
+            );
+        }
+        super.tick();
     }
 
     static class GetCloseToEnlightenGoal extends Goal {
