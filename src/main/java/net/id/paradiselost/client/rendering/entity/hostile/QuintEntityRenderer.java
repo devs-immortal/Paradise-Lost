@@ -4,14 +4,8 @@ import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.client.model.ParadiseLostModelLayers;
 import net.id.paradiselost.client.model.entity.QuintEntityModel;
 import net.id.paradiselost.entities.hostile.QuintEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.mob.BlazeEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 

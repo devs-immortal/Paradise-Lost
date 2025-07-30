@@ -2,18 +2,14 @@ package net.id.paradiselost.items.tools;
 
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.ParadiseLostItems;
-import net.id.paradiselost.items.tools.base_tools.GravityTool;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.Spawner;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -106,7 +102,7 @@ public class WardedJarItem extends Item {
             if (!(world.getBlockState(blockPos).getBlock() instanceof FluidBlock)) {
                 return TypedActionResult.pass(itemStack);
             } else if (world.canPlayerModifyAt(user, blockPos) && user.canPlaceOn(blockPos, blockHitResult.getSide(), itemStack)) {
-                Entity entity = this.containedEntityType.spawnFromItemStack((ServerWorld)world, itemStack, user, blockPos, SpawnReason.MOB_SUMMONED, false, false);
+                Entity entity = this.containedEntityType.spawnFromItemStack((ServerWorld) world, itemStack, user, blockPos, SpawnReason.MOB_SUMMONED, false, false);
                 if (entity == null) {
                     return TypedActionResult.pass(itemStack);
                 } else {

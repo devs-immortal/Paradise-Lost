@@ -27,13 +27,13 @@ public class LitCloudParticle extends SpriteBillboardParticle {
         this.velocityX += velocityX;
         this.velocityY += velocityY;
         this.velocityZ += velocityZ;
-        float g = 1.0F - (float)(Math.random() * 0.30000001192092896);
+        float g = 1.0F - (float) (Math.random() * 0.30000001192092896);
         this.red = g;
         this.green = g;
         this.blue = g;
         this.scale *= 1.875F;
-        int i = (int)(8.0 / (Math.random() * 0.8 + 0.3));
-        this.maxAge = (int)Math.max((float)i * 2.5F, 1.0F);
+        int i = (int) (8.0 / (Math.random() * 0.8 + 0.3));
+        this.maxAge = (int) Math.max((float) i * 2.5F, 1.0F);
         this.collidesWithWorld = false;
         this.setSpriteForAge(spriteProvider);
     }
@@ -43,7 +43,7 @@ public class LitCloudParticle extends SpriteBillboardParticle {
     }
 
     public float getSize(float tickDelta) {
-        return this.scale * MathHelper.clamp(((float)this.age + tickDelta) / (float)this.maxAge * 32.0F, 0.0F, 1.0F);
+        return this.scale * MathHelper.clamp(((float) this.age + tickDelta) / (float) this.maxAge * 32.0F, 0.0F, 1.0F);
     }
 
     public void tick() {
