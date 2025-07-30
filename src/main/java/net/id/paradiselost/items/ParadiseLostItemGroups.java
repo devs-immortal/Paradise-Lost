@@ -278,6 +278,10 @@ public class ParadiseLostItemGroups {
                 entries.add(CHERINE_BLOODSTONE);
                 entries.add(OLVITE_BLOODSTONE);
                 entries.add(SURTRUM_BLOODSTONE);
+                // jars
+                entries.add(WARDED_JAR);
+                entries.add(WARDED_JAR_ALLAY);
+                entries.add(WARDED_JAR_QUINT);
                 // misc
                 entries.add(AUREL_BUCKET);
                 entries.add(AUREL_WATER_BUCKET);

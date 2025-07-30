@@ -10,6 +10,7 @@ import net.id.paradiselost.items.misc.*;
 import net.id.paradiselost.items.tools.AurelMilkBucketItem;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.items.tools.AurelBucketItem;
+import net.id.paradiselost.items.tools.WardedJarItem;
 import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
@@ -19,6 +20,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.component.type.FoodComponent;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.vehicle.BoatEntity;
@@ -215,6 +217,14 @@ public class ParadiseLostItems {
     public static final AurelBucketItem AUREL_WATER_BUCKET = add("aurel_water_bucket", new AurelBucketItem(Fluids.WATER, aurelBucket), emptiableBucketBehavior);
     public static final AurelBucketItem AUREL_POWDER_SNOW_BUCKET = add("aurel_powder_snow_bucket", new AurelBucketItem(Blocks.POWDER_SNOW, aurelBucket), emptiableBucketBehavior);
     public static final AurelMilkBucketItem AUREL_MILK_BUCKET = add("aurel_milk_bucket", new AurelMilkBucketItem(new Item.Settings().recipeRemainder(AUREL_BUCKET).maxCount(1)));
+
+
+    public static final WardedJarItem WARDED_JAR = add("warded_jar", new WardedJarItem(new Settings()));
+    private static Settings wardedJar() {
+        return new Settings().maxCount(1).recipeRemainder(WARDED_JAR);
+    }
+    public static final WardedJarItem WARDED_JAR_ALLAY = add("warded_jar_allay", new WardedJarItem(EntityType.ALLAY, wardedJar()));
+    public static final WardedJarItem WARDED_JAR_QUINT = add("warded_jar_quint", new WardedJarItem(ParadiseLostEntityTypes.QUINT, wardedJar()));
 
     // Creative spawn eggs
     public static final SpawnEggItem ENVOY_SPAWN_EGG = add("envoy_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.ENVOY, 0xc5b1af, 0x993c3c, new Settings()), spawnEggBehavior);
