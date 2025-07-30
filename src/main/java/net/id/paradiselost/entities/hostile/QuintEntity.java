@@ -144,7 +144,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
         @Override
         public void start() {
             if (target != null) {
-                mob.navigation.startMovingAlong(mob.navigation.findPathTo(target.getBlockPos(), 1), 1.0);
+                mob.navigation.startMovingAlong(mob.navigation.findPathTo(target.getBlockPos(), 1), 2.0);
             }
         }
     }
@@ -172,14 +172,22 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         @Override
         public boolean shouldContinue() {
-            return mob.navigation.isFollowingPath() || (target != null && !target.getEnlightened());
+            return (mob.navigation.isFollowingPath() || (target != null && !target.getEnlightened())) && target.distanceTo(this.mob) < 6;
         }
 
         @Override
         public void tick() {
+            System.out.println(target.distanceTo(this.mob));
             if (target != null && target.distanceTo(this.mob) < 1.0) {
                 target.setEnlightened(true);
                 this.mob.discard();
+            }
+        }
+
+        @Override
+        public void start() {
+            if (target != null) {
+                mob.navigation.startMovingAlong(mob.navigation.findPathTo(target.getBlockPos(), 1), 2.0);
             }
         }
     }
