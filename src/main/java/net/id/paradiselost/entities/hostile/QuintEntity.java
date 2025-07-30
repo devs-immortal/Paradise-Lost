@@ -190,7 +190,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         @Override
         public void tick() {
-            if (target != null && target.distanceTo(this.mob) < 0.75) {
+            if (target != null && target.distanceTo(this.mob) < 1.0) {
                 target.setEnlightened(true);
                 this.mob.discard();
             }

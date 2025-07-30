@@ -92,8 +92,8 @@
     "monster": [
       {
         "type": "paradise_lost:envoy",
-        "maxCount": 3,
-        "minCount": 1,
+        "maxCount": 4,
+        "minCount": 2,
         "weight": 50
       }
     ],

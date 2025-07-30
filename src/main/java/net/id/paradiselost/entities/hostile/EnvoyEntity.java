@@ -1,24 +1,40 @@
 package net.id.paradiselost.entities.hostile;
 
+import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
+import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.DrownedEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
 public class EnvoyEntity extends SkeletonEntity {
 
@@ -41,11 +57,27 @@ public class EnvoyEntity extends SkeletonEntity {
         this.playSound(ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_HURT); // TODO
         if (this.getWorld().isClient) {
             for (int i = 0; i < 18; i++) {
-                this.getWorld().addParticle(ParticleTypes.CLOUD,
+                this.getWorld().addParticle(ParadiseLostParticles.LIT_CLOUD,
                         this.getParticleX(0.2), (this.getY() + this.random.nextDouble() * 0.6) + 0.85, this.getParticleZ(0.2),
                         (this.random.nextDouble() - 0.5) * 0.3, (this.random.nextDouble() - 0.5) * 0.3, (this.random.nextDouble() - 0.5) * 0.3
                 );
             }
+        }
+    }
+
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
+        entityData = super.initialize(world, difficulty, spawnReason, entityData);
+        if (spawnReason == SpawnReason.NATURAL && world.getRandom().nextFloat() < 0.05F) {
+            this.setEnlightened(true);
+        }
+
+        return entityData;
+    }
+
+    public void onDeath(DamageSource damageSource) {
+        super.onDeath(damageSource);
+        if (this.getWorld() instanceof ServerWorld serverWorld && this.getEnlightened() && damageSource.isIn(DamageTypeTags.IS_PLAYER_ATTACK)) {
+            ParadiseLostEntityTypes.QUINT.spawn(serverWorld, this.getBlockPos().up(), SpawnReason.MOB_SUMMONED);
         }
     }
 
