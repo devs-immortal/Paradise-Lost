@@ -17,6 +17,7 @@ import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.world.feature.tree.ParadiseLostSaplingGenerators;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -148,13 +149,13 @@ public class BlockRegistration {
     ) {
         var saplingSettings = AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(woodColor);
         var flowerPotSettings = AbstractBlock.Settings.copy(Blocks.POTTED_OAK_SAPLING);
-        var logSettings = AbstractBlock.Settings.copy(Blocks.OAK_LOG).mapColor(barkColor);
+        var logSettings = AbstractBlock.Settings.copy(Blocks.OAK_LOG).mapColor(barkColor).instrument(NoteBlockInstrument.BASS);
         var leavesSettings = AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(leafColor);
-        var plankSettings = AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(woodColor);
-        var doorSettings = AbstractBlock.Settings.copy(Blocks.OAK_DOOR).mapColor(woodColor);
-        var trapdoorSettings = AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR).mapColor(woodColor);
+        var plankSettings = AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(woodColor).instrument(NoteBlockInstrument.BASS);
+        var doorSettings = AbstractBlock.Settings.copy(Blocks.OAK_DOOR).mapColor(woodColor).instrument(NoteBlockInstrument.BASS);
+        var trapdoorSettings = AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR).mapColor(woodColor).instrument(NoteBlockInstrument.BASS);
         var buttonSettings = AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(woodColor);
-        var pressurePlateSettings = AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(woodColor);
+        var pressurePlateSettings = AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(woodColor).instrument(NoteBlockInstrument.BASS);
 
 
         SaplingBlock sapling = add(saplingId, new ParadiseLostMultiSaplingBlock(saplingGenerator, saplingSettings, List.of(
@@ -284,8 +285,8 @@ public class BlockRegistration {
     // SIGN SET
     public static SignSet registerSignSet(WoodType woodType) {
 
-        var signSettings = FabricBlockSettings.copy(Blocks.OAK_SIGN);
-        var hangingSignSettings = FabricBlockSettings.copy(Blocks.OAK_HANGING_SIGN);
+        var signSettings = FabricBlockSettings.copy(Blocks.OAK_SIGN).instrument(NoteBlockInstrument.BASS);
+        var hangingSignSettings = FabricBlockSettings.copy(Blocks.OAK_HANGING_SIGN).instrument(NoteBlockInstrument.BASS);
 
         SignBlock signBlock = new ParadiseSignBlock(signSettings, woodType);
         WallSignBlock wallSignBlock = new ParadiseWallSignBlock(signSettings.dropsLike(signBlock), woodType);

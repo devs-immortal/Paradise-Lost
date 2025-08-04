@@ -33,6 +33,7 @@
     "server.PlayerManagerMixin",
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
+    "util.SimpleDefaultedRegistryMixin",
     "util.SlotAccessor",
     "world.ExplosionMixin",
     "world.gen.UtilMixin",
