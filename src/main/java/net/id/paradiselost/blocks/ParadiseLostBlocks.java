@@ -130,6 +130,8 @@ public class ParadiseLostBlocks {
 
     // Burnished Stone
     public static final SimpleBlockSet BURNISHED_STONE_SET = registerSimpleBlockSet("burnished_stone", create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM));
+    public static final Block BURNISHED_STONE_PLAQUE = add("burnished_stone_plaque", new Block(create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block BURNISHED_STONE_SCRIPT = add("burnished_stone_script", new Block(create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM)));
 
 
     private static Settings amberTiles() {

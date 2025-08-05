@@ -115,6 +115,8 @@ public class ParadiseLostItemGroups {
                 entries.add(LEVITA_BRICK_SLAB);
                 entries.add(CHISELED_LEVITA_BRICK);
                 entries.add(BURNISHED_STONE);
+                entries.add(BURNISHED_STONE_PLAQUE);
+                entries.add(BURNISHED_STONE_SCRIPT);
                 entries.add(BURNISHED_STONE_STAIRS);
                 entries.add(BURNISHED_STONE_SLAB);
                 entries.add(GOLDEN_AMBER_TILE);

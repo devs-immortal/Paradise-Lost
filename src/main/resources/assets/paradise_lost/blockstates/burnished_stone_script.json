@@ -1,0 +1,84 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "paradise_lost:block/burnished_stone_a"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_b"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_c"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_d"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_e"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_f"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_g"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_h"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_i"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_j"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_k"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_l"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_m"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_n"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_o"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_p"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_q"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_r"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_s"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_t"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_u"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_v"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_w"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_x"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_y"
+      },
+      {
+        "model": "paradise_lost:block/burnished_stone_z"
+      }
+    ]
+  }
+}
