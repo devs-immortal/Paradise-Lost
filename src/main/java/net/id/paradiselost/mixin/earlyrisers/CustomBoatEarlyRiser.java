@@ -15,7 +15,7 @@ public class CustomBoatEarlyRiser implements Runnable {
         ClassTinkerers.enumBuilder(boatType, block, "Ljava/lang/String;")
                 .addEnum("PARADISE_LOST_AUREL", () -> new Object[] {null, "paradise_lost_aurel"})
                 .addEnum("PARADISE_LOST_MOTHER_AUREL", () -> new Object[] {null, "paradise_lost_mother_aurel"})
-                .addEnum("PARADISE_LOST_ORANGE", () -> new Object[] {null, "paradise_lost_orange"})
+                .addEnum("PARADISE_LOST_MENTH", () -> new Object[] {null, "paradise_lost_menth"})
                 .addEnum("PARADISE_LOST_WISTERIA", () -> new Object[] {null, "paradise_lost_wisteria"})
                 .build();
     }

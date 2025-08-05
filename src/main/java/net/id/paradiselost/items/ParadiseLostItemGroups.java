@@ -50,19 +50,19 @@ public class ParadiseLostItemGroups {
                 entries.add(MOTHER_AUREL_TRAPDOOR);
                 entries.add(MOTHER_AUREL_PRESSURE_PLATE);
                 entries.add(MOTHER_AUREL_BUTTON);
-                entries.add(ORANGE_LOG);
-                entries.add(ORANGE_WOOD);
-                entries.add(STRIPPED_ORANGE_LOG);
-                entries.add(STRIPPED_ORANGE_WOOD);
-                entries.add(ORANGE_PLANKS);
-                entries.add(ORANGE_STAIRS);
-                entries.add(ORANGE_SLAB);
-                entries.add(ORANGE_FENCE);
-                entries.add(ORANGE_FENCE_GATE);
-                entries.add(ORANGE_DOOR);
-                entries.add(ORANGE_TRAPDOOR);
-                entries.add(ORANGE_PRESSURE_PLATE);
-                entries.add(ORANGE_BUTTON);
+                entries.add(MENTH_LOG);
+                entries.add(MENTH_WOOD);
+                entries.add(STRIPPED_MENTH_LOG);
+                entries.add(STRIPPED_MENTH_WOOD);
+                entries.add(MENTH_PLANKS);
+                entries.add(MENTH_STAIRS);
+                entries.add(MENTH_SLAB);
+                entries.add(MENTH_FENCE);
+                entries.add(MENTH_FENCE_GATE);
+                entries.add(MENTH_DOOR);
+                entries.add(MENTH_TRAPDOOR);
+                entries.add(MENTH_PRESSURE_PLATE);
+                entries.add(MENTH_BUTTON);
                 entries.add(WISTERIA_LOG);
                 entries.add(WISTERIA_WOOD);
                 entries.add(STRIPPED_WISTERIA_LOG);
@@ -167,8 +167,8 @@ public class ParadiseLostItemGroups {
                 entries.add(AUREL_LEAF_PILE);
                 entries.add(MOTHER_AUREL_SAPLING);
                 entries.add(MOTHER_AUREL_LEAVES);
-                entries.add(ORANGE_SAPLING);
-                entries.add(ORANGE_LEAVES);
+                entries.add(MENTH_SAPLING);
+                entries.add(MENTH_LEAVES);
                 entries.add(ROSE_WISTERIA_SAPLING);
                 entries.add(ROSE_WISTERIA_LEAVES);
                 entries.add(ROSE_WISTERIA_HANGER);
@@ -247,8 +247,8 @@ public class ParadiseLostItemGroups {
                 entries.add(AUREL_HANGING_SIGN);
                 entries.add(MOTHER_AUREL_SIGN);
                 entries.add(MOTHER_AUREL_HANGING_SIGN);
-                entries.add(ORANGE_SIGN);
-                entries.add(ORANGE_HANGING_SIGN);
+                entries.add(MENTH_SIGN);
+                entries.add(MENTH_HANGING_SIGN);
                 entries.add(WISTERIA_SIGN);
                 entries.add(WISTERIA_HANGING_SIGN);
 
@@ -311,8 +311,8 @@ public class ParadiseLostItemGroups {
                 entries.add(AUREL_BOATS.chestBoat());
                 entries.add(MOTHER_AUREL_BOATS.boat());
                 entries.add(MOTHER_AUREL_BOATS.chestBoat());
-                entries.add(ORANGE_BOATS.boat());
-                entries.add(ORANGE_BOATS.chestBoat());
+                entries.add(MENTH_BOATS.boat());
+                entries.add(MENTH_BOATS.chestBoat());
                 entries.add(WISTERIA_BOATS.boat());
                 entries.add(WISTERIA_BOATS.chestBoat());
             }));
@@ -337,7 +337,6 @@ public class ParadiseLostItemGroups {
             .entries((context, entries) -> {
                 // all
                 entries.add(BLACKCURRANT);
-                entries.add(ORANGE);
                 entries.add(AMADRYS_BUSHEL);
                 entries.add(AMADRYS_BREAD);
                 entries.add(AMADRYS_BREAD_GLAZED);

@@ -8,7 +8,6 @@ import net.minecraft.item.Items;
 @SuppressWarnings("unused")
 public class ParadiseLostFoodComponent {
     public static final FoodComponent BLACKCURRANT = new FoodComponent.Builder().nutrition(2).saturationModifier(0.5F).snack().build();
-    public static final FoodComponent ORANGE = new FoodComponent.Builder().nutrition(5).saturationModifier(0.8F).snack().build();
     public static final FoodComponent MOA_MEAT = new FoodComponent.Builder().nutrition(3).saturationModifier(0.3F).build();
     public static final FoodComponent COOKED_MOA_MEAT = new FoodComponent.Builder().nutrition(6).saturationModifier(1F).build();
     public static final FoodComponent POPOM_JELLY = new FoodComponent.Builder().nutrition(1).saturationModifier(1.0F).alwaysEdible()

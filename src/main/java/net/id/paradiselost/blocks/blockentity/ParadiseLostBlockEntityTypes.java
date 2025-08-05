@@ -16,13 +16,13 @@ public class ParadiseLostBlockEntityTypes {
     public static final BlockEntityType<ParadiseSignBlockEntity> SIGN = BlockEntityType.Builder.create(ParadiseSignBlockEntity::new,
             ParadiseLostBlocks.AUREL_SIGNS.sign(), ParadiseLostBlocks.AUREL_SIGNS.wallSign(),
             ParadiseLostBlocks.MOTHER_AUREL_SIGNS.sign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallSign(),
-            ParadiseLostBlocks.ORANGE_SIGNS.sign(), ParadiseLostBlocks.ORANGE_SIGNS.wallSign(),
+            ParadiseLostBlocks.MENTH_SIGNS.sign(), ParadiseLostBlocks.MENTH_SIGNS.wallSign(),
             ParadiseLostBlocks.WISTERIA_SIGNS.sign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallSign()
     ).build();
     public static final BlockEntityType<ParadiseHangingSignBlockEntity> HANGING_SIGN = BlockEntityType.Builder.create(ParadiseHangingSignBlockEntity::new,
             ParadiseLostBlocks.AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.AUREL_SIGNS.wallHangingSign(),
             ParadiseLostBlocks.MOTHER_AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallHangingSign(),
-            ParadiseLostBlocks.ORANGE_SIGNS.hangingSign(), ParadiseLostBlocks.ORANGE_SIGNS.wallHangingSign(),
+            ParadiseLostBlocks.MENTH_SIGNS.hangingSign(), ParadiseLostBlocks.MENTH_SIGNS.wallHangingSign(),
             ParadiseLostBlocks.WISTERIA_SIGNS.hangingSign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallHangingSign()
     ).build();
     public static final BlockEntityType<CalciteDecoratedPotBlockEntity> CALCITE_DECORATED_POT = BlockEntityType.Builder.create(CalciteDecoratedPotBlockEntity::new, ParadiseLostBlocks.CALCITE_DECORATED_POT).build();

@@ -127,9 +127,9 @@ public class LootTableGen extends FabricBlockLootTableProvider {
         addWoodBlockSetDrops(MOTHER_AUREL_WOODSTUFF, 0.005F, 0.00625F, 0.0083333336F, 0.01F);
         addSignSetDrops(MOTHER_AUREL_SIGNS);
 
-        // Orange Wood
-        addWoodBlockSetDrops(ORANGE_WOODSTUFF, 0.05F, 0.0625F, 0.083333336F, 0.1F);
-        addSignSetDrops(ORANGE_SIGNS);
+        // Menth Wood
+        addWoodBlockSetDrops(MENTH_WOODSTUFF, 0.05F, 0.0625F, 0.083333336F, 0.1F);
+        addSignSetDrops(MENTH_SIGNS);
 
         // Wisteria Wood
         addDrop(WISTERIA_WOODSTUFF.log());

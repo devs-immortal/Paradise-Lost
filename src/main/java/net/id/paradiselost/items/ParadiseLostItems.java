@@ -192,7 +192,6 @@ public class ParadiseLostItems {
     }
 
     public static final AliasedBlockItem BLACKCURRANT = add("blackcurrant", new AliasedBlockItem(ParadiseLostBlocks.BLACKCURRANT_BUSH, food(ParadiseLostFoodComponent.BLACKCURRANT)), compostable30);
-    public static final Item ORANGE = add("orange", new Item(food(ParadiseLostFoodComponent.ORANGE)), compostable65);
     public static final AliasedBlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new AliasedBlockItem(ParadiseLostBlocks.AMADRYS, food(ParadiseLostFoodComponent.GENERIC_WORSE)), compostable30);
     public static final AliasedBlockItem NITRA_SEED = add("nitra", new AliasedBlockItem(ParadiseLostBlocks.NITRA, food()), compostable15);
     public static final Item NITRA_BULB = add("nitra_bulb", new NitraItem(food()), compostable50);
@@ -256,7 +255,7 @@ public class ParadiseLostItems {
     // planks
     public static final BlockItem AUREL_PLANKS = add(ParadiseLostBlocks.AUREL_WOODSTUFF.plank(), fuel(300));
     public static final BlockItem MOTHER_AUREL_PLANKS = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.plank(), fuel(300));
-    public static final BlockItem ORANGE_PLANKS = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.plank(), fuel(300));
+    public static final BlockItem MENTH_PLANKS = add(ParadiseLostBlocks.MENTH_WOODSTUFF.plank(), fuel(300));
     public static final BlockItem WISTERIA_PLANKS = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.plank(), fuel(300));
     public static final BlockItem AUREL_BOOKSHELF = add(ParadiseLostBlocks.AUREL_BOOKSHELF, fuel(300));
 
@@ -279,32 +278,32 @@ public class ParadiseLostItems {
     public static final BlockItem MOTTLED_AUREL_WOOD = add(ParadiseLostBlocks.MOTTLED_AUREL_WOOD, fuel(300));
     public static final BlockItem MOTTLED_AUREL_FALLEN_LOG = add(ParadiseLostBlocks.MOTTLED_AUREL_FALLEN_LOG, fuel(300));
     public static final BlockItem MOTHER_AUREL_LOG = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.log(), fuel(300));
-    public static final BlockItem ORANGE_LOG = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.log(), fuel(300));
+    public static final BlockItem MENTH_LOG = add(ParadiseLostBlocks.MENTH_WOODSTUFF.log(), fuel(300));
     public static final BlockItem WISTERIA_LOG = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.log(), fuel(300));
 
     // stripped logs
     public static final BlockItem STRIPPED_AUREL_LOG = add(ParadiseLostBlocks.AUREL_WOODSTUFF.strippedLog(), fuel(300));
     public static final BlockItem STRIPPED_MOTHER_AUREL_LOG = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.strippedLog(), fuel(300));
-    public static final BlockItem STRIPPED_ORANGE_LOG = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.strippedLog(), fuel(300));
+    public static final BlockItem STRIPPED_MENTH_LOG = add(ParadiseLostBlocks.MENTH_WOODSTUFF.strippedLog(), fuel(300));
     public static final BlockItem STRIPPED_WISTERIA_LOG = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.strippedLog(), fuel(300));
 
     // stripped wood
     public static final BlockItem STRIPPED_AUREL_WOOD = add(ParadiseLostBlocks.AUREL_WOODSTUFF.strippedWood(), fuel(300));
     public static final BlockItem STRIPPED_MOTHER_AUREL_WOOD = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.strippedWood(), fuel(300));
-    public static final BlockItem STRIPPED_ORANGE_WOOD = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.strippedWood(), fuel(300));
+    public static final BlockItem STRIPPED_MENTH_WOOD = add(ParadiseLostBlocks.MENTH_WOODSTUFF.strippedWood(), fuel(300));
     public static final BlockItem STRIPPED_WISTERIA_WOOD = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.strippedWood(), fuel(300));
 
     // wood
     public static final BlockItem AUREL_WOOD = add(ParadiseLostBlocks.AUREL_WOODSTUFF.wood(), fuel(300));
     public static final BlockItem MOTHER_AUREL_WOOD = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.wood(), fuel(300));
-    public static final BlockItem ORANGE_WOOD = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.wood(), fuel(300));
+    public static final BlockItem MENTH_WOOD = add(ParadiseLostBlocks.MENTH_WOODSTUFF.wood(), fuel(300));
     public static final BlockItem WISTERIA_WOOD = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.wood(), fuel(300));
     // glass
 
     // slabs
     public static final BlockItem AUREL_SLAB = add(ParadiseLostBlocks.AUREL_WOODSTUFF.plankSlab(), fuel(150));
     public static final BlockItem MOTHER_AUREL_SLAB = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.plankSlab(), fuel(150));
-    public static final BlockItem ORANGE_SLAB = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.plankSlab(), fuel(150));
+    public static final BlockItem MENTH_SLAB = add(ParadiseLostBlocks.MENTH_WOODSTUFF.plankSlab(), fuel(150));
     public static final BlockItem WISTERIA_SLAB = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.plankSlab(), fuel(150));
 
     // smooth stuff
@@ -329,7 +328,7 @@ public class ParadiseLostItems {
     // stairs
     public static final BlockItem AUREL_STAIRS = add(ParadiseLostBlocks.AUREL_WOODSTUFF.plankStairs(), fuel(300));
     public static final BlockItem MOTHER_AUREL_STAIRS = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.plankStairs(), fuel(300));
-    public static final BlockItem ORANGE_STAIRS = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.plankStairs(), fuel(300));
+    public static final BlockItem MENTH_STAIRS = add(ParadiseLostBlocks.MENTH_WOODSTUFF.plankStairs(), fuel(300));
     public static final BlockItem WISTERIA_STAIRS = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.plankStairs(), fuel(300));
 
     // stone stairs + slabs
@@ -358,7 +357,7 @@ public class ParadiseLostItems {
     // saplings
     public static final BlockItem AUREL_SAPLING = add(ParadiseLostBlocks.AUREL_WOODSTUFF.sapling(), compostable30, fuel(100));
     public static final BlockItem MOTHER_AUREL_SAPLING = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.sapling(), compostable30, fuel(100));
-    public static final BlockItem ORANGE_SAPLING = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.sapling(), compostable30, fuel(100));
+    public static final BlockItem MENTH_SAPLING = add(ParadiseLostBlocks.MENTH_WOODSTUFF.sapling(), compostable30, fuel(100));
     public static final BlockItem ROSE_WISTERIA_SAPLING = add(ParadiseLostBlocks.ROSE_WISTERIA_SAPLING, compostable30, fuel(100));
     public static final BlockItem FROST_WISTERIA_SAPLING = add(ParadiseLostBlocks.FROST_WISTERIA_SAPLING, compostable30, fuel(100));
     public static final BlockItem LAVENDER_WISTERIA_SAPLING = add(ParadiseLostBlocks.LAVENDER_WISTERIA_SAPLING, compostable30, fuel(100));
@@ -366,7 +365,7 @@ public class ParadiseLostItems {
     // leaves
     public static final BlockItem AUREL_LEAVES = add(ParadiseLostBlocks.AUREL_WOODSTUFF.leaves(), compostable30);
     public static final BlockItem MOTHER_AUREL_LEAVES = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.leaves(), compostable30);
-    public static final BlockItem ORANGE_LEAVES = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.leaves(), compostable30);
+    public static final BlockItem MENTH_LEAVES = add(ParadiseLostBlocks.MENTH_WOODSTUFF.leaves(), compostable30);
     public static final BlockItem ROSE_WISTERIA_LEAVES = add(ParadiseLostBlocks.ROSE_WISTERIA_LEAVES, compostable30);
     public static final BlockItem FROST_WISTERIA_LEAVES = add(ParadiseLostBlocks.FROST_WISTERIA_LEAVES, compostable30);
     public static final BlockItem LAVENDER_WISTERIA_LEAVES = add(ParadiseLostBlocks.LAVENDER_WISTERIA_LEAVES, compostable30);
@@ -437,23 +436,23 @@ public class ParadiseLostItems {
     // door-like things
     public static final BlockItem AUREL_DOOR = add(ParadiseLostBlocks.AUREL_WOODSTUFF.door(), fuel(200));
     public static final BlockItem MOTHER_AUREL_DOOR = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.door(), fuel(200));
-    public static final BlockItem ORANGE_DOOR = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.door(), fuel(200));
+    public static final BlockItem MENTH_DOOR = add(ParadiseLostBlocks.MENTH_WOODSTUFF.door(), fuel(200));
     public static final BlockItem WISTERIA_DOOR = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.door(), fuel(200));
 
     public static final BlockItem AUREL_TRAPDOOR = add(ParadiseLostBlocks.AUREL_WOODSTUFF.trapdoor(), fuel(300));
     public static final BlockItem MOTHER_AUREL_TRAPDOOR = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.trapdoor(), fuel(300));
-    public static final BlockItem ORANGE_TRAPDOOR = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.trapdoor(), fuel(300));
+    public static final BlockItem MENTH_TRAPDOOR = add(ParadiseLostBlocks.MENTH_WOODSTUFF.trapdoor(), fuel(300));
     public static final BlockItem WISTERIA_TRAPDOOR = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.trapdoor(), fuel(300));
 
     public static final BlockItem AUREL_FENCE_GATE = add(ParadiseLostBlocks.AUREL_WOODSTUFF.fenceGate(), fuel(300));
     public static final BlockItem MOTHER_AUREL_FENCE_GATE = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.fenceGate(), fuel(300));
-    public static final BlockItem ORANGE_FENCE_GATE = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.fenceGate(), fuel(300));
+    public static final BlockItem MENTH_FENCE_GATE = add(ParadiseLostBlocks.MENTH_WOODSTUFF.fenceGate(), fuel(300));
     public static final BlockItem WISTERIA_FENCE_GATE = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.fenceGate(), fuel(300));
 
     // fences
     public static final BlockItem AUREL_FENCE = add(ParadiseLostBlocks.AUREL_WOODSTUFF.fence(), fuel(300));
     public static final BlockItem MOTHER_AUREL_FENCE = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.fence(), fuel(300));
-    public static final BlockItem ORANGE_FENCE = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.fence(), fuel(300));
+    public static final BlockItem MENTH_FENCE = add(ParadiseLostBlocks.MENTH_WOODSTUFF.fence(), fuel(300));
     public static final BlockItem WISTERIA_FENCE = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.fence(), fuel(300));
 
     // walls
@@ -479,8 +478,8 @@ public class ParadiseLostItems {
     public static final SignItem AUREL_HANGING_SIGN = add("aurel_hanging_sign", new HangingSignItem(ParadiseLostBlocks.AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.AUREL_SIGNS.wallHangingSign(), sign), fuel(200));
     public static final SignItem MOTHER_AUREL_SIGN = add("mother_aurel_sign", new SignItem(sign, ParadiseLostBlocks.MOTHER_AUREL_SIGNS.sign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallSign()), fuel(200));
     public static final SignItem MOTHER_AUREL_HANGING_SIGN = add("mother_aurel_hanging_sign", new HangingSignItem(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallHangingSign(), sign), fuel(200));
-    public static final SignItem ORANGE_SIGN = add("orange_sign", new SignItem(sign, ParadiseLostBlocks.ORANGE_SIGNS.sign(), ParadiseLostBlocks.ORANGE_SIGNS.wallSign()), fuel(200));
-    public static final SignItem ORANGE_HANGING_SIGN = add("orange_hanging_sign", new HangingSignItem(ParadiseLostBlocks.ORANGE_SIGNS.hangingSign(), ParadiseLostBlocks.ORANGE_SIGNS.wallHangingSign(), sign), fuel(200));
+    public static final SignItem MENTH_SIGN = add("menth_sign", new SignItem(sign, ParadiseLostBlocks.MENTH_SIGNS.sign(), ParadiseLostBlocks.MENTH_SIGNS.wallSign()), fuel(200));
+    public static final SignItem MENTH_HANGING_SIGN = add("menth_hanging_sign", new HangingSignItem(ParadiseLostBlocks.MENTH_SIGNS.hangingSign(), ParadiseLostBlocks.MENTH_SIGNS.wallHangingSign(), sign), fuel(200));
     public static final SignItem WISTERIA_SIGN = add("wisteria_sign", new SignItem(sign, ParadiseLostBlocks.WISTERIA_SIGNS.sign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallSign()));
     public static final SignItem WISTERIA_HANGING_SIGN = add("wisteria_hanging_sign", new HangingSignItem(ParadiseLostBlocks.WISTERIA_SIGNS.hangingSign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallHangingSign(), sign), fuel(200));
 
@@ -493,12 +492,12 @@ public class ParadiseLostItems {
 
     public static final BlockItem AUREL_BUTTON = add(ParadiseLostBlocks.AUREL_WOODSTUFF.button(), fuel(100));
     public static final BlockItem MOTHER_AUREL_BUTTON = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.button(), fuel(100));
-    public static final BlockItem ORANGE_BUTTON = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.button(), fuel(100));
+    public static final BlockItem MENTH_BUTTON = add(ParadiseLostBlocks.MENTH_WOODSTUFF.button(), fuel(100));
     public static final BlockItem WISTERIA_BUTTON = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.button(), fuel(100));
 
     public static final BlockItem AUREL_PRESSURE_PLATE = add(ParadiseLostBlocks.AUREL_WOODSTUFF.pressurePlate(), fuel(100));
     public static final BlockItem MOTHER_AUREL_PRESSURE_PLATE = add(ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.pressurePlate(), fuel(100));
-    public static final BlockItem ORANGE_PRESSURE_PLATE = add(ParadiseLostBlocks.ORANGE_WOODSTUFF.pressurePlate(), fuel(100));
+    public static final BlockItem MENTH_PRESSURE_PLATE = add(ParadiseLostBlocks.MENTH_WOODSTUFF.pressurePlate(), fuel(100));
     public static final BlockItem WISTERIA_PRESSURE_PLATE = add(ParadiseLostBlocks.WISTERIA_WOODSTUFF.pressurePlate(), fuel(100));
 
     public static final BlockItem LEVITA_RAIL = add(ParadiseLostBlocks.LEVITA_RAIL);
@@ -507,10 +506,10 @@ public class ParadiseLostItems {
 
     public static final BoatSet AUREL_BOATS = addBoatItems("aurel", "PARADISE_LOST_AUREL");
     public static final BoatSet MOTHER_AUREL_BOATS = addBoatItems("mother_aurel", "PARADISE_LOST_MOTHER_AUREL");
-    public static final BoatSet ORANGE_BOATS = addBoatItems("orange", "PARADISE_LOST_ORANGE");
+    public static final BoatSet MENTH_BOATS = addBoatItems("menth", "PARADISE_LOST_MENTH");
     public static final BoatSet WISTERIA_BOATS = addBoatItems("wisteria", "PARADISE_LOST_WISTERIA");
 
-    public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, ORANGE_BOATS, WISTERIA_BOATS};
+    public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, MENTH_BOATS, WISTERIA_BOATS};
 
 
     public static final RegistryEntry<Potion> HEALTH_BOOST_POTION = registerPotion("health_boost", new Potion(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 6000, 1)));

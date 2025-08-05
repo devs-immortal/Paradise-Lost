@@ -11,17 +11,13 @@ import net.id.paradiselost.blocks.mechanical.ParadiseLostPressurePlateBlock;
 import net.id.paradiselost.blocks.mechanical.ParadiseLostTrapdoorBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostMultiSaplingBlock;
 import net.id.paradiselost.blocks.natural.ParadiseLostSaplingBlock;
-import net.id.paradiselost.blocks.natural.tree.FruitingLeavesBlock;
 import net.id.paradiselost.blocks.natural.tree.ParadiseLostLeavesBlock;
-import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.world.feature.tree.ParadiseLostSaplingGenerators;
 import net.minecraft.block.*;
-import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
@@ -101,23 +97,6 @@ public class BlockRegistration {
                 id + "_door", id + "_trapdoor",
                 id + "_button", id + "_pressure_plate",
                 MapColor.GOLD, MapColor.TERRACOTTA_RED
-        );
-    }
-
-    public static WoodBlockSet registerWoodBlockSetOrange() {
-        String id = "orange";
-        var leavesSettings = AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.PALE_GREEN).sounds(BlockSoundGroup.AZALEA_LEAVES);
-        FruitingLeavesBlock leaves = add(id + "_leaves", new FruitingLeavesBlock(leavesSettings, () -> ParadiseLostItems.ORANGE), flammableLeaves, cutoutMippedRenderLayer);
-        return registerWoodBlockSet(
-                ParadiseLostWoodTypes.ORANGE, ParadiseLostBlockSets.ORANGE,
-                id + "_sapling", "potted_" + id + "_sapling",
-                id + "_log", id + "_wood", "stripped_" + id + "_log", "stripped_" + id + "_wood",
-                leaves,
-                id + "_planks", id + "_stairs", id + "_slab",
-                id + "_fence", id + "_fence_gate",
-                id + "_door", id + "_trapdoor",
-                id + "_button", id + "_pressure_plate",
-                ParadiseLostSaplingGenerators.ORANGE, MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.RAW_IRON_PINK
         );
     }
 

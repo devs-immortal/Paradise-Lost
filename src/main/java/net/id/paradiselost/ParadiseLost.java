@@ -22,6 +22,7 @@ import net.id.paradiselost.items.armor.XpCircletItem;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.screen.ParadiseLostScreens;
+import net.id.paradiselost.util.ParadiseLostAliasFix;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.world.ParadiseLostGameRules;
@@ -85,6 +86,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer {
         ParadiseLostEntityTypes.init();
         ParadiseLostItems.init();
         ParadiseLostItemGroups.init();
+        ParadiseLostAliasFix.init();
         ParadiseLostBlockEntityTypes.init();
         ParadiseLostMapDecorationTypes.init();
         ParadiseLostRecipeTypes.init();

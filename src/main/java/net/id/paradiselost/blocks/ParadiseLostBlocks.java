@@ -171,9 +171,9 @@ public class ParadiseLostBlocks {
     // Mother Aurel Wood
     public static final WoodBlockSet MOTHER_AUREL_WOODSTUFF = registerWoodBlockSetMotherAurel();
     public static final SignSet MOTHER_AUREL_SIGNS = registerSignSet(ParadiseLostWoodTypes.MOTHER_AUREL);
-    // Orange Wood
-    public static final WoodBlockSet ORANGE_WOODSTUFF = registerWoodBlockSetOrange();
-    public static final SignSet ORANGE_SIGNS = registerSignSet(ParadiseLostWoodTypes.ORANGE);
+    // Menth Wood
+    public static final WoodBlockSet MENTH_WOODSTUFF = registerWoodBlockSet(ParadiseLostWoodTypes.MENTH, ParadiseLostBlockSets.MENTH, ParadiseLostSaplingGenerators.AUREL, MapColor.LICHEN_GREEN, MapColor.LICHEN_GREEN, MapColor.DARK_GREEN);
+    public static final SignSet MENTH_SIGNS = registerSignSet(ParadiseLostWoodTypes.MENTH);
     // Wisteria Wood
     public static final WoodBlockSet WISTERIA_WOODSTUFF = registerWoodBlockSetWisteria();
     public static final SignSet WISTERIA_SIGNS = registerSignSet(ParadiseLostWoodTypes.WISTERIA);
