@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "paradise_lost:block/burnished_stone",
+    "side": "paradise_lost:block/burnished_stone_plaque"
+  }
+}

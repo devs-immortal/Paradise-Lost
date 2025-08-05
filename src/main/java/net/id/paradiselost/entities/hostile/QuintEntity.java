@@ -1,6 +1,8 @@
 package net.id.paradiselost.entities.hostile;
 
+import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.minecraft.block.BlockState;
+import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -28,17 +30,21 @@ import java.util.EnumSet;
 
 public class QuintEntity extends PathAwareEntity implements Monster {
 
-    private static final double ENLIGHTEN_FOLLOW_RANGE = 10;
+    private static final double ENLIGHTEN_FOLLOW_RANGE = 18;
     private static final double ENLIGHTEN_RANGE = 2;
 
     public QuintEntity(EntityType<? extends QuintEntity> entityType, World world) {
         super(entityType, world);
-        this.moveControl = new FlightMoveControl(this, 60, true);
+        this.moveControl = new FlightMoveControl(this, 20, true);
     }
 
     @Override
     public float getPathfindingFavor(BlockPos pos, WorldView world) {
-        return world.getBlockState(pos).isAir() ? 10.0F : 0.0F;
+        if (!world.getBlockState(pos.down(1)).isAir() || !world.getBlockState(pos.down(2)).isAir())
+            return 10.0F;
+        if (!world.getBlockState(pos.down(3)).isAir() || !world.getBlockState(pos.down(4)).isAir())
+            return 8.0F;
+        return world.getBlockState(pos).isAir() ? 6.0F : 0.0F;
     }
 
     @Override
@@ -47,7 +53,6 @@ public class QuintEntity extends PathAwareEntity implements Monster {
         this.goalSelector.add(2, new GetCloseToEnlightenGoal(this));
         this.goalSelector.add(3, new FloatIdleGoal(this));
         this.goalSelector.add(4, new RandomlyFloatGoal(this));
-
     }
 
     @Override
@@ -58,7 +63,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
                 return !this.world.getBlockState(pos.down()).isAir();
             }
         };
-        birdNavigation.setCanPathThroughDoors(false);
+        birdNavigation.setCanPathThroughDoors(true);
         birdNavigation.setCanSwim(false);
         birdNavigation.setCanEnterOpenDoors(true);
         return birdNavigation;
@@ -66,6 +71,18 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
     @Override
     protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
+    }
+
+    @Override
+    public void lookAt(EntityAnchorArgumentType.EntityAnchor anchorPoint, Vec3d target) {
+    }
+
+    @Override
+    public void setAngles(float yaw, float pitch) {
+    }
+
+    @Override
+    protected void setRotation(float yaw, float pitch) {
     }
 
 
@@ -87,6 +104,17 @@ public class QuintEntity extends PathAwareEntity implements Monster {
             return !envoy.getEnlightened();
         }
         return false;
+    }
+
+    @Override
+    public void tick() {
+        if (this.getWorld().isClient && this.random.nextInt(3) == 0) {
+            this.getWorld().addParticle(ParadiseLostParticles.LIT_CLOUD,
+                    this.getParticleX(0.2), (this.getY() + 0.15 + this.random.nextDouble() * 0.4), this.getParticleZ(0.2),
+                    (this.random.nextDouble() - 0.5) * 0.05, -this.random.nextDouble() * 0.025, (this.random.nextDouble() - 0.5) * 0.05
+            );
+        }
+        super.tick();
     }
 
     static class GetCloseToEnlightenGoal extends Goal {
@@ -119,7 +147,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
         @Override
         public void start() {
             if (target != null) {
-                mob.navigation.startMovingAlong(mob.navigation.findPathTo(target, 1), 1.0);
+                mob.navigation.startMovingAlong(mob.navigation.findPathTo(target.getBlockPos(), 1), 2.0);
             }
         }
     }
@@ -146,10 +174,23 @@ public class QuintEntity extends PathAwareEntity implements Monster {
         }
 
         @Override
-        public void start() {
-            if (target != null) {
+        public boolean shouldContinue() {
+            return (mob.navigation.isFollowingPath() || (target != null && !target.getEnlightened())) && target.distanceTo(this.mob) < 6;
+        }
+
+        @Override
+        public void tick() {
+            System.out.println(target.distanceTo(this.mob));
+            if (target != null && target.distanceTo(this.mob) < 1.0) {
                 target.setEnlightened(true);
                 this.mob.discard();
+            }
+        }
+
+        @Override
+        public void start() {
+            if (target != null) {
+                mob.navigation.startMovingAlong(mob.navigation.findPathTo(target.getBlockPos(), 1), 2.0);
             }
         }
     }
@@ -166,7 +207,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         @Override
         public boolean canStart() {
-            return mob.navigation.isIdle() && mob.random.nextInt(14) == 0;
+            return mob.random.nextInt(2) == 0;
         }
 
         @Override
@@ -188,6 +229,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
     static class RandomlyFloatGoal extends Goal {
 
         protected final QuintEntity mob;
+        protected int delay = 0;
 
         RandomlyFloatGoal(QuintEntity mob) {
             this.setControls(EnumSet.of(Goal.Control.MOVE));
@@ -201,7 +243,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         @Override
         public boolean shouldContinue() {
-            return mob.navigation.isFollowingPath();
+            return (mob.navigation.isFollowingPath() || ++this.delay < 80);
         }
 
         @Override
@@ -212,10 +254,15 @@ public class QuintEntity extends PathAwareEntity implements Monster {
             }
         }
 
+        @Override
+        public void stop() {
+            this.delay = 0;
+        }
+
         @Nullable
         private Vec3d getRandomLocation() {
             Vec3d vec3d2 = mob.getRotationVec(0.0F);
-            Vec3d vec3d3 = AboveGroundTargeting.find(mob, 8, 7, vec3d2.x, vec3d2.z, (float) (Math.PI / 2), 3, 1);
+            Vec3d vec3d3 = AboveGroundTargeting.find(mob, 8, 7, vec3d2.x, vec3d2.z, (float) (Math.PI / 2), 5, 2);
             return vec3d3 != null ? vec3d3 : NoPenaltySolidTargeting.find(mob, 8, 4, -2, vec3d2.x, vec3d2.z, (float) (Math.PI / 2));
         }
     }
@@ -226,6 +273,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
     public static DefaultAttributeContainer.Builder createQuintAttributes() {
         return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5F);
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3);
     }
 }

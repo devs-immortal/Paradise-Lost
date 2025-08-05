@@ -10,6 +10,7 @@ import net.id.paradiselost.items.misc.*;
 import net.id.paradiselost.items.tools.AurelMilkBucketItem;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.items.tools.AurelBucketItem;
+import net.id.paradiselost.items.tools.WardedJarItem;
 import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
@@ -19,6 +20,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.component.type.FoodComponent;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.vehicle.BoatEntity;
@@ -223,10 +225,19 @@ public class ParadiseLostItems {
     public static final AurelBucketItem AUREL_POWDER_SNOW_BUCKET = add("aurel_powder_snow_bucket", new AurelBucketItem(Blocks.POWDER_SNOW, aurelBucket), emptiableBucketBehavior);
     public static final AurelMilkBucketItem AUREL_MILK_BUCKET = add("aurel_milk_bucket", new AurelMilkBucketItem(new Item.Settings().recipeRemainder(AUREL_BUCKET).maxCount(1)));
 
+
+    public static final WardedJarItem WARDED_JAR = add("warded_jar", new WardedJarItem(new Settings()));
+    private static Settings wardedJar() {
+        return new Settings().maxCount(1).recipeRemainder(WARDED_JAR);
+    }
+    public static final WardedJarItem WARDED_JAR_ALLAY = add("warded_jar_allay", new WardedJarItem(EntityType.ALLAY, wardedJar()));
+    public static final WardedJarItem WARDED_JAR_QUINT = add("warded_jar_quint", new WardedJarItem(ParadiseLostEntityTypes.QUINT, wardedJar()));
+
     // Creative spawn eggs
     public static final SpawnEggItem ENVOY_SPAWN_EGG = add("envoy_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.ENVOY, 0xc5b1af, 0x993c3c, new Settings()), spawnEggBehavior);
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, new Settings()), spawnEggBehavior);
     public static final SpawnEggItem POPOM_SPAWN_EGG = add("popom_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.POPOM, 0xd984e8, 0xd4d0cf, new Settings()), spawnEggBehavior);
+    public static final SpawnEggItem QUINT_SPAWN_EGG = add("quint_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.QUINT, 0xd9d0d9, 0xeeebf0, new Settings()), spawnEggBehavior);
 
     public static final BlockItem BLOOMED_CALCITE = add(ParadiseLostBlocks.BLOOMED_CALCITE);
 
@@ -316,6 +327,8 @@ public class ParadiseLostItems {
     public static final BlockItem LEVITA_BRICK = add(ParadiseLostBlocks.LEVITA_BRICK_SET.block());
     public static final BlockItem CHISELED_LEVITA_BRICK = add(ParadiseLostBlocks.CHISELED_LEVITA_BRICK);
     public static final BlockItem BURNISHED_STONE = add(ParadiseLostBlocks.BURNISHED_STONE_SET.block());
+    public static final BlockItem BURNISHED_STONE_PLAQUE = add(ParadiseLostBlocks.BURNISHED_STONE_PLAQUE);
+    public static final BlockItem BURNISHED_STONE_SCRIPT = add(ParadiseLostBlocks.BURNISHED_STONE_SCRIPT);
     public static final BlockItem GOLDEN_AMBER_TILE = add(ParadiseLostBlocks.GOLDEN_AMBER_TILE);
     public static final BlockItem CALCITE_TILES = add(ParadiseLostBlocks.CALCITE_TILES);
     public static final BlockItem BLOOMED_CALCITE_TILES = add(ParadiseLostBlocks.BLOOMED_CALCITE_TILES);

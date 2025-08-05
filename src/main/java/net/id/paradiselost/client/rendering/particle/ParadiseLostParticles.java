@@ -20,12 +20,13 @@ import net.minecraft.registry.Registry;
  * FIXME Refactor this for naming issues.
  */
 public class ParadiseLostParticles {
-    public static final SimpleParticleType MOTHER_AUREL_LEAF = register("golden_leaf");
-    public static final SimpleParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal");
-    public static final SimpleParticleType CHERINE_FLAME = register("cherine_flame");
-    public static final SimpleParticleType LEVITA_BLOOP = register("levita_bloop");
-    public static final SimpleParticleType LEVITATION_TOTEM = register("levitation_totem");
-
+    public static SimpleParticleType CHERINE_FLAME = register("cherine_flame");
+    public static SimpleParticleType FALLING_ORANGE_PETAL = register("falling_orange_petal");
+    public static SimpleParticleType MOTHER_AUREL_LEAF = register("golden_leaf");
+    public static SimpleParticleType LEVITA_BLOOP = register("levita_bloop");
+    public static SimpleParticleType LEVITATION_TOTEM = register("levitation_totem");
+    public static SimpleParticleType LIT_CLOUD = register("lit_cloud");
+    
     /**
      * Registers a simple particle type.
      *
@@ -51,11 +52,12 @@ public class ParadiseLostParticles {
          * Registers the client half of this.
          */
         public static void init() {
-            register(MOTHER_AUREL_LEAF, MotherAurelLeafParticle.DefaultFactory::new);
-            register(FALLING_ORANGE_PETAL, FallingOrangePetalParticle.DefaultFactory::new);
             register(CHERINE_FLAME, CherineFlameParticle.DefaultFactory::new);
+            register(FALLING_ORANGE_PETAL, FallingOrangePetalParticle.DefaultFactory::new);
+            register(MOTHER_AUREL_LEAF, MotherAurelLeafParticle.DefaultFactory::new);
             register(LEVITA_BLOOP, LevitaBloopParticle.DefaultFactory::new);
             register(LEVITATION_TOTEM, LevitationTotemParticle.DefaultFactory::new);
+            register(LIT_CLOUD, LitCloudParticle.DefaultFactory::new);
         }
 
         /**

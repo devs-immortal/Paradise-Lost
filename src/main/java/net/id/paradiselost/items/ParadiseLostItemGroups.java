@@ -115,6 +115,8 @@ public class ParadiseLostItemGroups {
                 entries.add(LEVITA_BRICK_SLAB);
                 entries.add(CHISELED_LEVITA_BRICK);
                 entries.add(BURNISHED_STONE);
+                entries.add(BURNISHED_STONE_PLAQUE);
+                entries.add(BURNISHED_STONE_SCRIPT);
                 entries.add(BURNISHED_STONE_STAIRS);
                 entries.add(BURNISHED_STONE_SLAB);
                 entries.add(GOLDEN_AMBER_TILE);
@@ -278,6 +280,10 @@ public class ParadiseLostItemGroups {
                 entries.add(CHERINE_BLOODSTONE);
                 entries.add(OLVITE_BLOODSTONE);
                 entries.add(SURTRUM_BLOODSTONE);
+                // jars
+                entries.add(WARDED_JAR);
+                entries.add(WARDED_JAR_ALLAY);
+                entries.add(WARDED_JAR_QUINT);
                 // misc
                 entries.add(AUREL_BUCKET);
                 entries.add(AUREL_WATER_BUCKET);
@@ -354,6 +360,7 @@ public class ParadiseLostItemGroups {
                     itemGroup.add(MOA_SPAWN_EGG);
                     itemGroup.add(ENVOY_SPAWN_EGG);
                     itemGroup.add(POPOM_SPAWN_EGG);
+                    itemGroup.add(QUINT_SPAWN_EGG);
                 });
     }
 

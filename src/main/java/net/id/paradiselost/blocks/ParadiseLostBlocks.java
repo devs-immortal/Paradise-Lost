@@ -15,6 +15,7 @@ import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.registry.SimpleDefaultedRegistry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvents;
@@ -53,11 +54,11 @@ public class ParadiseLostBlocks {
     public static final Block COARSE_DIRT = add("coarse_dirt", new Block(copy(Blocks.DIRT).mapColor(MapColor.BROWN).strength(0.3f)), coarseTillable(), flattenable(ParadiseLostBlocks.DIRT_PATH));
     public static final FloatingBlock LEVITA = add("levita", new FloatingBlock(false, copy(Blocks.GRAVEL).mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).strength(0.3f)));
     public static final Block PERMAFROST = add("permafrost", new Block(permafrost()), flattenable(ParadiseLostBlocks.PERMAFROST_PATH));
-    public static final Block PACKED_SWEDROOT = add("packed_swedroot", new Block(create().strength(2f).sounds(BlockSoundGroup.SHROOMLIGHT)));
+    public static final Block PACKED_SWEDROOT = add("packed_swedroot", new Block(create().strength(2f).sounds(BlockSoundGroup.SHROOMLIGHT).instrument(NoteBlockInstrument.BANJO)));
     public static final Block LIVERWORT = add("liverwort", new Block(copy(MOSS_BLOCK).sounds(BlockSoundGroup.AZALEA_LEAVES)));
     public static final CarpetBlock LIVERWORT_CARPET = add("liverwort_carpet", new CarpetBlock(copy(MOSS_BLOCK).sounds(BlockSoundGroup.AZALEA_LEAVES)));
 
-    public static final SimpleBlockSet THATCH_SET = registerSimpleBlockSet("thatch", create().mapColor(MapColor.PALE_YELLOW).strength(0.3f).sounds(BlockSoundGroup.GRASS));
+    public static final SimpleBlockSet THATCH_SET = registerSimpleBlockSet("thatch", create().mapColor(MapColor.PALE_YELLOW).strength(0.3f).sounds(BlockSoundGroup.GRASS).instrument(NoteBlockInstrument.BANJO));
 
 
     // Clouds
@@ -72,7 +73,7 @@ public class ParadiseLostBlocks {
 
     // Floestone
     private static Settings floestone() {
-        return create().mapColor(MapColor.LIGHT_GRAY).requiresTool().strength(0.5f, 5f).sounds(BlockSoundGroup.STONE);
+        return create().mapColor(MapColor.LIGHT_GRAY).requiresTool().strength(0.5f, 5f).sounds(BlockSoundGroup.STONE).instrument(NoteBlockInstrument.BASEDRUM);
     }
 
     public static final Block FLOESTONE = add("floestone", new Block(floestone()));
@@ -101,7 +102,7 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostStairsBlock MOSSY_FLOESTONE_STAIRS = add("mossy_floestone_stairs", new ParadiseLostStairsBlock(MOSSY_FLOESTONE.getDefaultState(), mossyCobbledFloestone().mapColor(MapColor.LICHEN_GREEN)));
     public static final WallBlock MOSSY_FLOESTONE_WALL = add("mossy_floestone_wall", new WallBlock(mossyCobbledFloestone().mapColor(MapColor.LICHEN_GREEN)));
 
-    // Floestone Bricks
+    // Floestone brick
     private static Settings floestoneBrick() {
         return floestone().strength(1.5f, 6f);
     }
@@ -125,15 +126,17 @@ public class ParadiseLostBlocks {
     public static final WallBlock HELIOLITH_WALL = add("heliolith_wall", new WallBlock(floestone()));
 
     // Levita Brick
-    public static final SimpleBlockSet LEVITA_BRICK_SET = registerSimpleBlockSet("levita_brick", create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE));
-    public static final Block CHISELED_LEVITA_BRICK = add("chiseled_levita_brick", new Block(create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE)));
+    public static final SimpleBlockSet LEVITA_BRICK_SET = registerSimpleBlockSet("levita_brick", create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE).instrument(NoteBlockInstrument.BASEDRUM));
+    public static final Block CHISELED_LEVITA_BRICK = add("chiseled_levita_brick", new Block(create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE).instrument(NoteBlockInstrument.BASEDRUM)));
 
     // Burnished Stone
-    public static final SimpleBlockSet BURNISHED_STONE_SET = registerSimpleBlockSet("burnished_stone", create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool());
+    public static final SimpleBlockSet BURNISHED_STONE_SET = registerSimpleBlockSet("burnished_stone", create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM));
+    public static final Block BURNISHED_STONE_PLAQUE = add("burnished_stone_plaque", new Block(create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block BURNISHED_STONE_SCRIPT = add("burnished_stone_script", new Block(create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM)));
 
 
     private static Settings amberTiles() {
-        return create().mapColor(MapColor.GOLD).requiresTool().sounds(BlockSoundGroup.CALCITE).strength(2, 6);
+        return create().mapColor(MapColor.GOLD).requiresTool().sounds(BlockSoundGroup.CALCITE).strength(2, 6).instrument(NoteBlockInstrument.BASEDRUM);
     }
 
     // Golden Amber Tile
@@ -142,9 +145,9 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostStairsBlock GOLDEN_AMBER_TILE_STAIRS = add("golden_amber_tile_stairs", new ParadiseLostStairsBlock(GOLDEN_AMBER_TILE.getDefaultState(), amberTiles()));
 
     // Misc
-    public static final CropGrowthBlock BLOOMED_CALCITE = add("bloomed_calcite", new CropGrowthBlock(copy(CALCITE).ticksRandomly(), 2));
-    public static final Block CALCITE_TILES = add("calcite_tiles", new Block(copy(CALCITE)));
-    public static final Block BLOOMED_CALCITE_TILES = add("bloomed_calcite_tiles", new Block(copy(CALCITE)));
+    public static final CropGrowthBlock BLOOMED_CALCITE = add("bloomed_calcite", new CropGrowthBlock(copy(CALCITE).instrument(NoteBlockInstrument.BASEDRUM).ticksRandomly(), 2));
+    public static final Block CALCITE_TILES = add("calcite_tiles", new Block(copy(CALCITE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block BLOOMED_CALCITE_TILES = add("bloomed_calcite_tiles", new Block(copy(CALCITE).instrument(NoteBlockInstrument.BASEDRUM)));
 
     protected static Settings flowerPot() {
         return copy(POTTED_OAK_SAPLING);
@@ -153,7 +156,7 @@ public class ParadiseLostBlocks {
     public static final CalciteFlowerPotBlock CALCITE_FLOWER_POT = add("calcite_flower_pot", new CalciteFlowerPotBlock(copy(FLOWER_POT)));
     public static final CalciteDecoratedPotBlock CALCITE_DECORATED_POT = add("calcite_decorated_pot", new CalciteDecoratedPotBlock(copy(DECORATED_POT).mapColor(MapColor.WHITE)));
 
-    public static final CampfireBlock CHERINE_CAMPFIRE = add("cherine_campfire", new CherineCampfireBlock(false, 1, Settings.copy(CAMPFIRE)), cutoutRenderLayer);
+    public static final CampfireBlock CHERINE_CAMPFIRE = add("cherine_campfire", new CherineCampfireBlock(false, 1, copy(CAMPFIRE).instrument(NoteBlockInstrument.BASS)), cutoutRenderLayer);
 
     protected static Settings leafPile() {
         return create().strength(0.2f).sounds(BlockSoundGroup.VINE).replaceable().nonOpaque().suffocates(never).blockVision(never).pistonBehavior(PistonBehavior.DESTROY);
@@ -161,11 +164,11 @@ public class ParadiseLostBlocks {
 
     // Aurel Wood
     public static final WoodBlockSet AUREL_WOODSTUFF = registerWoodBlockSet(ParadiseLostWoodTypes.AUREL, ParadiseLostBlockSets.AUREL, ParadiseLostSaplingGenerators.AUREL, MapColor.TERRACOTTA_BROWN, MapColor.TERRACOTTA_BROWN, MapColor.PALE_GREEN);
-    public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(copy(OAK_LOG).mapColor(MapColor.TERRACOTTA_WHITE)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedLog()));
-    public static final PillarBlock MOTTLED_AUREL_WOOD = add("mottled_aurel_wood", new PillarBlock(copy(OAK_LOG).mapColor(MapColor.PALE_YELLOW)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedWood()));
-    public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(copy(OAK_LOG).mapColor(MapColor.TERRACOTTA_WHITE)), flammableLog, cutoutRenderLayer);
+    public static final PillarBlock MOTTLED_AUREL_LOG = add("mottled_aurel_log", new PillarBlock(copy(OAK_LOG).instrument(NoteBlockInstrument.BASS).mapColor(MapColor.TERRACOTTA_WHITE)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedLog()));
+    public static final PillarBlock MOTTLED_AUREL_WOOD = add("mottled_aurel_wood", new PillarBlock(copy(OAK_LOG).instrument(NoteBlockInstrument.BASS).mapColor(MapColor.PALE_YELLOW)), flammableLog, stripsTo(AUREL_WOODSTUFF.strippedWood()));
+    public static final ChuteBlock MOTTLED_AUREL_FALLEN_LOG = add("mottled_aurel_fallen_log", new ChuteBlock(copy(OAK_LOG).instrument(NoteBlockInstrument.BASS).mapColor(MapColor.TERRACOTTA_WHITE)), flammableLog, cutoutRenderLayer);
     public static final LeafPileBlock AUREL_LEAF_PILE = add("aurel_leaf_pile", new LeafPileBlock(leafPile().mapColor(MapColor.PALE_GREEN)), flammableLeaves, cutoutMippedRenderLayer);
-    public static final Block AUREL_BOOKSHELF = add("aurel_bookshelf", new Block(copy(BOOKSHELF).mapColor(MapColor.TERRACOTTA_BROWN)), flammable(30, 20));
+    public static final Block AUREL_BOOKSHELF = add("aurel_bookshelf", new Block(copy(BOOKSHELF).instrument(NoteBlockInstrument.BASS).mapColor(MapColor.TERRACOTTA_BROWN)), flammable(30, 20));
     public static final SignSet AUREL_SIGNS = registerSignSet(ParadiseLostWoodTypes.AUREL);
     // Mother Aurel Wood
     public static final WoodBlockSet MOTHER_AUREL_WOODSTUFF = registerWoodBlockSetMotherAurel();
@@ -231,17 +234,17 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostMushroomPlantBlock BROWN_SPORECAP = add("brown_sporecap", new ParadiseLostMushroomPlantBlock(BlockTags.MUSHROOM_GROW_BLOCK, ParadiseLostTreeConfiguredFeatures.HUGE_BROWN_SPORECAP, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
     public static final ParadiseLostHangingMushroomPlantBlock PINK_SPORECAP = add("pink_sporecap", new ParadiseLostHangingMushroomPlantBlock(BlockTags.MUSHROOM_GROW_BLOCK, copy(BROWN_MUSHROOM)), cutoutRenderLayer);
 
-    public static final Block ROOTCAP_BLOCK = add("rootcap_block", new MushroomBlock(copy(BROWN_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_BROWN)));
-    public static final Block BROWN_SPORECAP_BLOCK = add("brown_sporecap_block", new MushroomBlock(copy(BROWN_MUSHROOM_BLOCK).mapColor(MapColor.BROWN)));
-    public static final Block PINK_SPORECAP_BLOCK = add("pink_sporecap_block", new MushroomBlock(copy(BROWN_MUSHROOM_BLOCK).mapColor(MapColor.TERRACOTTA_PINK)));
+    public static final Block ROOTCAP_BLOCK = add("rootcap_block", new MushroomBlock(copy(BROWN_MUSHROOM_BLOCK).instrument(NoteBlockInstrument.BASS).mapColor(MapColor.TERRACOTTA_BROWN)));
+    public static final Block BROWN_SPORECAP_BLOCK = add("brown_sporecap_block", new MushroomBlock(copy(BROWN_MUSHROOM_BLOCK).instrument(NoteBlockInstrument.BASS).mapColor(MapColor.BROWN)));
+    public static final Block PINK_SPORECAP_BLOCK = add("pink_sporecap_block", new MushroomBlock(copy(BROWN_MUSHROOM_BLOCK).instrument(NoteBlockInstrument.BASS).mapColor(MapColor.TERRACOTTA_PINK)));
 
     public static final AmadrysCropBlock AMADRYS = add("amadrys", new AmadrysCropBlock(crop().mapColor(MapColor.PINK)), flammablePlant, cutoutMippedRenderLayer);
     public static final FlaxCropBlock FLAX = add("flax", new FlaxCropBlock(crop().mapColor(MapColor.OAK_TAN)), flammablePlant, cutoutRenderLayer);
     public static final SwedrootCropBlock SWEDROOT = add("swedroot", new SwedrootCropBlock(shrub().offset(AbstractBlock.OffsetType.NONE).mapColor(MapColor.BLUE)), flammablePlant, cutoutRenderLayer);
     public static final CropBlock NITRA = add("nitra", new CropBlock(crop().mapColor(MapColor.PALE_YELLOW)), flammablePlant, cutoutMippedRenderLayer);
 
-    public static final Block FLAXWEAVE_CUSHION = add("flaxweave_cushion", new FlaxweaveCushionBlock(create().mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));
-    public static final SlabBlock FLAXWEAVE_CUSHION_SLAB = add("flaxweave_cushion_slab", new FlaxweaveCushionSlabBlock(create().mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F)), flammable(40, 10));
+    public static final Block FLAXWEAVE_CUSHION = add("flaxweave_cushion", new FlaxweaveCushionBlock(create().mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F).instrument(NoteBlockInstrument.GUITAR)), flammable(40, 10));
+    public static final SlabBlock FLAXWEAVE_CUSHION_SLAB = add("flaxweave_cushion_slab", new FlaxweaveCushionSlabBlock(create().mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.WOOL).strength(0.2F).instrument(NoteBlockInstrument.GUITAR)), flammable(40, 10));
 
     public static final BlackcurrantBushBlock BLACKCURRANT_BUSH = add("blackcurrant_bush", new BlackcurrantBushBlock(create().strength(0.2f)
             .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision().mapColor(MapColor.PURPLE)), flammablePlant, cutoutRenderLayer);
@@ -270,21 +273,21 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostTallBrushBlock WILD_FLAX = add("wild_flax", new ParadiseLostTallBrushBlock(flower()), flammablePlant, cutoutMippedRenderLayer);
 
     // Ores
-    public static final ExperienceDroppingBlock CHERINE_ORE = add("cherine_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), create().requiresTool().strength(1f, 3f)));
-    public static final ExperienceDroppingBlock OLVITE_ORE = add("olvite_ore", new ExperienceDroppingBlock(UniformIntProvider.create(1, 3), create().requiresTool().strength(1.5f, 3f)));
-    public static final RedstoneOreBlock FLOESTONE_REDSTONE_ORE = add("floestone_redstone_ore", new RedstoneOreBlock(copy(REDSTONE_ORE).strength(1.5f, 3f)));
-    public static final ExperienceDroppingBlock SURTRUM = add("surtrum", new SurtrumOreBlock(UniformIntProvider.create(2, 5), create().sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f)));
-    public static final Block METAMORPHIC_SHELL = add("metamorphic_shell", new Block(create().sounds(BlockSoundGroup.TUFF).requiresTool().strength(40f, 6f)));
+    public static final ExperienceDroppingBlock CHERINE_ORE = add("cherine_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), create().requiresTool().strength(1f, 3f).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final ExperienceDroppingBlock OLVITE_ORE = add("olvite_ore", new ExperienceDroppingBlock(UniformIntProvider.create(1, 3), create().requiresTool().strength(1.5f, 3f).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final RedstoneOreBlock FLOESTONE_REDSTONE_ORE = add("floestone_redstone_ore", new RedstoneOreBlock(copy(REDSTONE_ORE).strength(1.5f, 3f).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final ExperienceDroppingBlock SURTRUM = add("surtrum", new SurtrumOreBlock(UniformIntProvider.create(2, 5), create().sounds(BlockSoundGroup.NETHER_GOLD_ORE).requiresTool().strength(9f, 20f).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block METAMORPHIC_SHELL = add("metamorphic_shell", new Block(create().sounds(BlockSoundGroup.TUFF).requiresTool().strength(40f, 6f).instrument(NoteBlockInstrument.BASEDRUM)));
     public static final PoofBlock SURTRUM_AIR = add("surtrum_air", new PoofBlock(create().replaceable().sounds(BlockSoundGroup.NETHER_GOLD_ORE)));
-    public static final FloatingBlock LEVITA_ORE = add("levita_ore", new FloatingBlock(false, create().requiresTool().strength(4f), UniformIntProvider.create(4, 7)));
+    public static final FloatingBlock LEVITA_ORE = add("levita_ore", new FloatingBlock(false, create().requiresTool().strength(4f).instrument(NoteBlockInstrument.BASEDRUM), UniformIntProvider.create(4, 7)));
     public static final Block CHERINE_BLOCK = add("cherine_block", new Block(create().requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.STONE)));
-    public static final Block OLVITE_BLOCK = add("olvite_block", new Block(create().requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL)));
-    public static final Block REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new Block(create().requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL)));
+    public static final Block OLVITE_BLOCK = add("olvite_block", new Block(create().requiresTool().strength(3f, -1f).sounds(BlockSoundGroup.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE)));
+    public static final Block REFINED_SURTRUM_BLOCK = add("refined_surtrum_block", new Block(create().requiresTool().strength(4f, -1f).sounds(BlockSoundGroup.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE)));
     // Misc
     public static final ButtonBlock FLOESTONE_BUTTON = add("floestone_button", new ParadiseLostButtonBlock(BlockSetType.STONE, 20, Settings.create().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)));
-    public static final PressurePlateBlock FLOESTONE_PRESSURE_PLATE = add("floestone_pressure_plate", new ParadiseLostPressurePlateBlock(BlockSetType.STONE, copy(STONE_PRESSURE_PLATE)));
-    public static final OlvitePressurePlateBlock OLVITE_PRESSURE_PLATE = add("olvite_pressure_plate", new OlvitePressurePlateBlock(create().mapColor(MapColor.PALE_GREEN).solid().instrument(NoteBlockInstrument.BASEDRUM).requiresTool().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)));
-    public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, create().strength(3f, 3f).sounds(BlockSoundGroup.STONE)));
+    public static final PressurePlateBlock FLOESTONE_PRESSURE_PLATE = add("floestone_pressure_plate", new ParadiseLostPressurePlateBlock(BlockSetType.STONE, copy(STONE_PRESSURE_PLATE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final OlvitePressurePlateBlock OLVITE_PRESSURE_PLATE = add("olvite_pressure_plate", new OlvitePressurePlateBlock(create().mapColor(MapColor.PALE_GREEN).solid().instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresTool().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final FloatingBlock LEVITATOR = add("levitator", new FloatingBlock(true, create().strength(3f, 3f).sounds(BlockSoundGroup.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
     public static final ChainBlock OLVITE_CHAIN = add("olvite_chain", new ChainBlock(copy(CHAIN)), cutoutMippedRenderLayer);
     public static final CherineLanternBlock CHERINE_LANTERN = add("cherine_lantern", new CherineLanternBlock(copy(LANTERN).resistance(1f)), cutoutMippedRenderLayer);
     public static final ParadiseLostPortalBlock BLUE_PORTAL = add("blue_portal", new ParadiseLostPortalBlock(copy(NETHER_PORTAL).nonOpaque().blockVision(never).mapColor(MapColor.BLUE)), translucentRenderLayer);
