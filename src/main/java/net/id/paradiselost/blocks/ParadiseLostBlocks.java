@@ -101,16 +101,16 @@ public class ParadiseLostBlocks {
     public static final ParadiseLostStairsBlock MOSSY_FLOESTONE_STAIRS = add("mossy_floestone_stairs", new ParadiseLostStairsBlock(MOSSY_FLOESTONE.getDefaultState(), mossyCobbledFloestone().mapColor(MapColor.LICHEN_GREEN)));
     public static final WallBlock MOSSY_FLOESTONE_WALL = add("mossy_floestone_wall", new WallBlock(mossyCobbledFloestone().mapColor(MapColor.LICHEN_GREEN)));
 
-    // Floestone Bricks
+    // Floestone brick
     private static Settings floestoneBrick() {
         return floestone().strength(1.5f, 6f);
     }
 
-    public static final Block FLOESTONE_BRICK = add("floestone_bricks", new Block(floestoneBrick()));
+    public static final Block FLOESTONE_BRICK = add("floestone_brick", new Block(floestoneBrick()));
     public static final Block CHISELED_FLOESTONE = add("chiseled_floestone", new Block(floestoneBrick()));
-    public static final SlabBlock FLOESTONE_BRICK_SLAB = add("floestone_bricks_slab", new SlabBlock(floestoneBrick()));
-    public static final ParadiseLostStairsBlock FLOESTONE_BRICK_STAIRS = add("floestone_bricks_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestoneBrick()));
-    public static final WallBlock FLOESTONE_BRICK_WALL = add("floestone_bricks_wall", new WallBlock(floestoneBrick()));
+    public static final SlabBlock FLOESTONE_BRICK_SLAB = add("floestone_brick_slab", new SlabBlock(floestoneBrick()));
+    public static final ParadiseLostStairsBlock FLOESTONE_BRICK_STAIRS = add("floestone_brick_stairs", new ParadiseLostStairsBlock(FLOESTONE_BRICK.getDefaultState(), floestoneBrick()));
+    public static final WallBlock FLOESTONE_BRICK_WALL = add("floestone_brick_wall", new WallBlock(floestoneBrick()));
     public static final Block SMOOTH_FLOESTONE = add("smooth_floestone", new Block(floestoneBrick()));
     public static final SlabBlock SMOOTH_FLOESTONE_SLAB = add("smooth_floestone_slab", new SlabBlock(floestoneBrick()));
     public static final ParadiseLostStairsBlock SMOOTH_FLOESTONE_STAIRS = add("smooth_floestone_stairs", new ParadiseLostStairsBlock(SMOOTH_FLOESTONE.getDefaultState(), floestoneBrick()));
@@ -125,8 +125,8 @@ public class ParadiseLostBlocks {
     public static final WallBlock HELIOLITH_WALL = add("heliolith_wall", new WallBlock(floestone()));
 
     // Levita Brick
-    public static final SimpleBlockSet LEVITA_BRICK_SET = registerSimpleBlockSet("levita_bricks", create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE).instrument(NoteBlockInstrument.BASEDRUM));
-    public static final Block CHISELED_LEVITA_BRICK = add("chiseled_levita_bricks", new Block(create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final SimpleBlockSet LEVITA_BRICK_SET = registerSimpleBlockSet("levita_brick", create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE).instrument(NoteBlockInstrument.BASEDRUM));
+    public static final Block CHISELED_LEVITA_BRICK = add("chiseled_levita_brick", new Block(create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE).instrument(NoteBlockInstrument.BASEDRUM)));
 
     // Burnished Stone
     public static final SimpleBlockSet BURNISHED_STONE_SET = registerSimpleBlockSet("burnished_stone", create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM));
