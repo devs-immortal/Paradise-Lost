@@ -13,7 +13,7 @@ public class ParadiseLostDataGen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
         FabricDataGenerator.Pack pack = generator.createPack();
-        //pack.addProvider(LootTableGen::new);
+        pack.addProvider(LootTableGen::new);
         //sherdSuite.makeSherdSuite("sol", ParadiseLostItems.SOL_POTTERY_SHERD).build(pack);
     }
 

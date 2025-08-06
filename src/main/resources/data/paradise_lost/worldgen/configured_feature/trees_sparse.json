@@ -6,10 +6,6 @@
       {
         "chance": 0.1,
         "feature": "paradise_lost:tree_fancy_aurel"
-      },
-      {
-        "chance": 0.02,
-        "feature": "paradise_lost:tree_wild_orange"
       }
     ]
   }

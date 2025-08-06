@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:menth_log"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:menth_wood",
+    "count": 3
+  }
+}

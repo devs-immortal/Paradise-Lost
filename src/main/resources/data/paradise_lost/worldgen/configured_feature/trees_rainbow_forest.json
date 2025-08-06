@@ -22,10 +22,6 @@
       {
         "chance": 0.2,
         "feature": "paradise_lost:tree_aurel"
-      },
-      {
-        "chance": 0.0125,
-        "feature": "paradise_lost:tree_wild_orange"
       }
     ]
   }

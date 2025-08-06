@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "paradise_lost:menth_planks"
+    }
+  ],
+  "result": {
+    "id": "paradise_lost:menth_button"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:menth_planks"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:menth_stairs",
+    "count": 4
+  }
+}

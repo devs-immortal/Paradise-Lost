@@ -10,8 +10,6 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryKey<ConfiguredFeature<?, ?>> MOTTLED_AUREL = of("tree_mottled_aurel");
     public static final RegistryKey<ConfiguredFeature<?, ?>> DWARF_MOTTLED_AUREL = of("tree_dwarf_mottled_aurel");
     public static final RegistryKey<ConfiguredFeature<?, ?>> MOTHER_AUREL_TREE = of("tree_mother_aurel");
-    public static final RegistryKey<ConfiguredFeature<?, ?>> ORANGE_TREE = of("tree_orange");
-    public static final RegistryKey<ConfiguredFeature<?, ?>> WILD_ORANGE_TREE = of("tree_wild_orange");
     public static final RegistryKey<ConfiguredFeature<?, ?>> FANCY_AUREL_TREE = of("tree_fancy_aurel");
     public static final RegistryKey<ConfiguredFeature<?, ?>> THICKET_AUREL_TREE = of("tree_thicket_aurel");
 

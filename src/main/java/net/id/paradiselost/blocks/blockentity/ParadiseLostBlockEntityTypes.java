@@ -36,6 +36,14 @@ public class ParadiseLostBlockEntityTypes {
         register("hanging_sign", HANGING_SIGN);
         register("calcite_decorated_pot", CALCITE_DECORATED_POT);
         BlockEntityType.BRUSHABLE_BLOCK.addSupportedBlock(ParadiseLostBlocks.SUSPICIOUS_DIRT);
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.AUREL_SIGNS.hangingSign());
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.AUREL_SIGNS.wallHangingSign());
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.hangingSign());
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallHangingSign());
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.MENTH_SIGNS.hangingSign());
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.MENTH_SIGNS.wallHangingSign());
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.WISTERIA_SIGNS.hangingSign());
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.WISTERIA_SIGNS.wallHangingSign());
     }
     
     private static void register(String name, BlockEntityType<?> type) {

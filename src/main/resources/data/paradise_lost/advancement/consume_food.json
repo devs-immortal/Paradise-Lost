@@ -23,14 +23,6 @@
         }
       }
     },
-    "orang": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item": {
-          "items": ["paradise_lost:orange"]
-        }
-      }
-    },
     "bushin": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -107,7 +99,6 @@
   "requirements": [
     [
       "blacurent",
-      "orang",
       "bushin",
       "modles",
       "gred",

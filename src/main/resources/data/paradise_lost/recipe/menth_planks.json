@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "paradise_lost:menth_logs"
+    }
+  ],
+  "result": {
+    "id": "paradise_lost:menth_planks",
+    "count": 4
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence_gate",
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "paradise_lost:menth_planks"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:menth_fence_gate"
+  }
+}

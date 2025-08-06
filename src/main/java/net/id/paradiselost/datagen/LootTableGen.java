@@ -102,6 +102,10 @@ public class LootTableGen extends FabricBlockLootTableProvider {
         // Levita Brick
         addSimpleBlockSetDrops(LEVITA_BRICK_SET);
 
+        addSimpleBlockSetDrops(BURNISHED_STONE_SET);
+        addDrop(BURNISHED_STONE_PLAQUE);
+        addDrop(BURNISHED_STONE_SCRIPT);
+
         // Golden Amber Tile
         addDrop(GOLDEN_AMBER_TILE);
         addDrop(GOLDEN_AMBER_TILE_SLAB, this::slabDrops);

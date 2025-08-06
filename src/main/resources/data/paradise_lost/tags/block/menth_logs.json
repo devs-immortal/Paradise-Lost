@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "paradise_lost:menth_log",
+    "paradise_lost:menth_wood",
+    "paradise_lost:stripped_menth_log",
+    "paradise_lost:stripped_menth_wood"
+  ]
+}

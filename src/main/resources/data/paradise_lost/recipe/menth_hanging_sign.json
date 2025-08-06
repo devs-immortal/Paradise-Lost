@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "hanging_sign",
+  "pattern": [
+    "X X",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:stripped_menth_log"
+    },
+    "X": {
+      "item": "paradise_lost:olvite_chain"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:menth_hanging_sign",
+    "count": 6
+  }
+}

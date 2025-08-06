@@ -269,8 +269,8 @@ public class BlockRegistration {
 
         SignBlock signBlock = new ParadiseSignBlock(signSettings, woodType);
         WallSignBlock wallSignBlock = new ParadiseWallSignBlock(signSettings.dropsLike(signBlock), woodType);
-        HangingSignBlock hangingSign = new ParadiseHangingSignBlock(hangingSignSettings, woodType);
-        WallHangingSignBlock wallHangingSign = new ParadiseWallHangingSignBlock(hangingSignSettings.dropsLike(hangingSign), woodType);
+        HangingSignBlock hangingSign = new ParadiseHangingSignBlock(woodType, hangingSignSettings);
+        WallHangingSignBlock wallHangingSign = new ParadiseWallHangingSignBlock(woodType, hangingSignSettings.dropsLike(hangingSign));
 
         add(woodType.name() + "_sign", signBlock);
         add(woodType.name() + "_wall_sign", wallSignBlock);
