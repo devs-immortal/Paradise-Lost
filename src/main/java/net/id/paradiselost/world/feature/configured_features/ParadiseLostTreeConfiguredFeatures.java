@@ -12,6 +12,7 @@ public class ParadiseLostTreeConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final RegistryKey<ConfiguredFeature<?, ?>> MOTHER_AUREL_TREE = of("tree_mother_aurel");
     public static final RegistryKey<ConfiguredFeature<?, ?>> FANCY_AUREL_TREE = of("tree_fancy_aurel");
     public static final RegistryKey<ConfiguredFeature<?, ?>> THICKET_AUREL_TREE = of("tree_thicket_aurel");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MENTH_TREE = of("tree_menth");
 
     // Wisteria
     public static final RegistryKey<ConfiguredFeature<?, ?>> ROSE_WISTERIA_TREE = of("tree_rose_wisteria");
