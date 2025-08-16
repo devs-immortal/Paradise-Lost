@@ -17,6 +17,7 @@ import static net.id.paradiselost.ParadiseLost.locate;
  */
 public final class ParadiseLostBiomes {
     public static final RegistryKey<Biome> AUTUMNAL_TUNDRA_KEY = of("autumnal_tundra");
+    public static final RegistryKey<Biome> CALCITE_CRAGLANDS_KEY = of("calcite_craglands");
     public static final RegistryKey<Biome> CONTINENTAL_PLATEAU_KEY = of("continental_plateau");
     public static final RegistryKey<Biome> HIGHLANDS_PLAINS_KEY = of("highlands");
     public static final RegistryKey<Biome> HIGHLANDS_FOREST_KEY = of("highlands_forest");

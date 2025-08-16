@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "paradise_lost:tree_menth",
+    "features": [
+      {
+        "chance": 0.05,
+        "feature": "paradise_lost:tree_aurel"
+      }
+    ]
+  }
+}

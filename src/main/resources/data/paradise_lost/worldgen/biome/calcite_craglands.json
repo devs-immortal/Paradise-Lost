@@ -1,0 +1,103 @@
+{
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "paradise_lost:large_cold_cloud",
+      "paradise_lost:cold_cloud",
+      "paradise_lost:tiny_cold_cloud",
+      "paradise_lost:large_blue_cloud",
+      "paradise_lost:blue_cloud",
+      "paradise_lost:tiny_blue_cloud",
+      "paradise_lost:large_golden_cloud",
+      "paradise_lost:golden_cloud",
+      "paradise_lost:tiny_golden_cloud"
+    ]
+  },
+  "downfall": 0.8,
+  "effects": {
+    "fog_color": 16777215,
+    "foliage_color": 15859609,
+    "grass_color": 11066843,
+    "music": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "replace_current_music": false,
+      "sound": "paradise_lost:music.paradise"
+    },
+    "sky_color": 12632319,
+    "water_color": 5826047,
+    "water_fog_color": 6547455
+  },
+  "features": [
+    [
+      "paradise_lost:surtrum_meteorite"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "paradise_lost:calcite_blob",
+      "paradise_lost:heliolith_blob",
+      "paradise_lost:levita_blob",
+      "paradise_lost:ore_cherine",
+      "paradise_lost:ore_levita",
+      "paradise_lost:ore_olvite",
+      "paradise_lost:ore_floestone_redstone"
+    ],
+    [],
+    [
+      "paradise_lost:spring_water"
+    ],
+    [
+      "paradise_lost:patch_brown_sporecap",
+      "paradise_lost:patch_pink_sporecap",
+      "paradise_lost:natural_swedroot",
+      "paradise_lost:patch_grass",
+      "paradise_lost:patch_blackcurrant",
+      "paradise_lost:trees_craglands"
+    ],
+    [
+      "minecraft:freeze_top_layer"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {
+    "paradise_lost:envoy": {
+      "charge": 0.7,
+      "energy_budget": 0.2
+    }
+  },
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "paradise_lost:moa",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "paradise_lost:popom",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 4
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "paradise_lost:envoy",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 50
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.4
+}

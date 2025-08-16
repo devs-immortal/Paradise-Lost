@@ -168,7 +168,8 @@
                         "if_true": {
                           "type": "minecraft:biome",
                           "biome_is": [
-                            "paradise_lost:highlands_forest"
+                            "paradise_lost:highlands_forest",
+                            "paradise_lost:calcite_craglands"
                           ]
                         },
                         "then_run": {
@@ -590,19 +591,5 @@
       }
 
     ]
-  },
-  "structures": {
-    "structures": {
-      "paradise_lost:well": {
-        "spacing": 32,
-        "separation": 8,
-        "salt": 42069
-      },
-      "paradise_lost:aurel_tower": {
-        "spacing": 48,
-        "separation": 10,
-        "salt": 123123
-      }
-    }
   }
 }

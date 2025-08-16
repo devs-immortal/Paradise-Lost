@@ -1,9 +1,11 @@
 {
-  "type": "minecraft:flat_cache",
-  "argument": {
-    "type": "minecraft:noise",
-    "noise": "minecraft:surface",
-    "xz_scale": 1,
-    "y_scale": 1
-  }
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:y_clamped_gradient",
+    "from_value": 1.5,
+    "from_y": -64,
+    "to_value": -1.5,
+    "to_y": 320
+  },
+  "argument2": "minecraft:overworld/offset"
 }
