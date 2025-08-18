@@ -90,11 +90,10 @@ public abstract class SurfaceBuilderMixin {
 
     @Unique
     private void placeCragPillar(BlockColumn column, int x, int z, int surfaceY, HeightLimitView chunk) {
-        var pillarState = Blocks.CALCITE.getDefaultState();
         double e = Math.min(Math.abs(this.badlandsSurfaceNoise.sample(x, 0.0, z) * 8.25), this.badlandsPillarNoise.sample(x * 0.2, 0.0, z * 0.2) * 15.0);
         if (surfaceY > 60 && !(e <= 0.0)) {
             double h = Math.abs(this.badlandsPillarRoofNoise.sample(x * 0.75, 0.0, z * 0.75) * 1.5);
-            double preHeight = Math.min(e * e * 2.5, Math.ceil(h * 30.0) + 12.0);
+            double preHeight = Math.min(e * e * 2.5, Math.ceil(h * 30.0) + 10.0);
             int j = MathHelper.floor(surfaceY + preHeight);
             if (surfaceY <= j && preHeight > 5) {
                 int steps = 0;
