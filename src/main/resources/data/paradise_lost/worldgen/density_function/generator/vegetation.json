@@ -1,6 +1,6 @@
 {
   "type": "minecraft:shifted_noise",
-  "xz_scale": 0.4,
+  "xz_scale": 0.33,
   "y_scale": 0.0,
   "noise": "paradise_lost:generator/vegetation",
   "shift_x": "minecraft:shift_x",
