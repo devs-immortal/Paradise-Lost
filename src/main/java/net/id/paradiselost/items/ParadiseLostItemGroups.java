@@ -14,6 +14,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 
 import static net.id.paradiselost.items.ParadiseLostItems.*;
+import static net.id.paradiselost.items.ParadiseLostItems.BURNISHED_STONE_WALL;
 
 public class ParadiseLostItemGroups {
 
@@ -115,15 +116,22 @@ public class ParadiseLostItemGroups {
                 entries.add(LEVITA_BRICK_SLAB);
                 entries.add(CHISELED_LEVITA_BRICK);
                 entries.add(BURNISHED_STONE);
-                entries.add(BURNISHED_STONE_PLAQUE);
-                entries.add(BURNISHED_STONE_SCRIPT);
                 entries.add(BURNISHED_STONE_STAIRS);
                 entries.add(BURNISHED_STONE_SLAB);
+                entries.add(BURNISHED_STONE_WALL);
+                entries.add(BURNISHED_STONE_PLAQUE);
+                entries.add(BURNISHED_STONE_SCRIPT);
                 entries.add(GOLDEN_AMBER_TILE);
                 entries.add(GOLDEN_AMBER_TILE_STAIRS);
                 entries.add(GOLDEN_AMBER_TILE_SLAB);
                 entries.add(CALCITE_TILES);
+                entries.add(CALCITE_TILES_STAIRS);
+                entries.add(CALCITE_TILES_SLAB);
+                entries.add(CALCITE_TILES_WALL);
                 entries.add(BLOOMED_CALCITE_TILES);
+                entries.add(BLOOMED_CALCITE_TILES_STAIRS);
+                entries.add(BLOOMED_CALCITE_TILES_SLAB);
+                entries.add(BLOOMED_CALCITE_TILES_WALL);
                 // overworld hybrid
                 entries.add(BLOOMED_CALCITE);
                 // ores

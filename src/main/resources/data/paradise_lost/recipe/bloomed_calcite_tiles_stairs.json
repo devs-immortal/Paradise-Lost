@@ -1,0 +1,19 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "paradise_lost:bloomed_calcite_tiles"
+    }
+  },
+  "result": {
+    "id": "paradise_lost:bloomed_calcite_tiles_stairs",
+    "count": 4
+  }
+}
+        

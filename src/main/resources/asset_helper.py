@@ -79,7 +79,11 @@ def generate_slab_block(block_id, base_block_id, texture):
     item_model_file.close()
     
 
-generate_standard_block("bloomed_calcite_tiles")
-generate_standard_block("calcite_tiles")
+generate_stairs_block("bloomed_calcite_tiles_stairs", "bloomed_calcite_tiles")
+generate_slab_block("bloomed_calcite_tiles_slab", "bloomed_calcite_tiles", "bloomed_calcite_tiles")
+
+
+generate_stairs_block("calcite_tiles_stairs", "calcite_tiles")
+generate_slab_block("calcite_tiles_slab", "calcite_tiles", "calcite_tiles")
 
 
