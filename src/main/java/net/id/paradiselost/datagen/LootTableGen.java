@@ -103,6 +103,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
         addSimpleBlockSetDrops(LEVITA_BRICK_SET);
 
         addSimpleBlockSetDrops(BURNISHED_STONE_SET);
+        addDrop(BURNISHED_STONE_WALL);
         addDrop(BURNISHED_STONE_PLAQUE);
         addDrop(BURNISHED_STONE_SCRIPT);
 
@@ -111,6 +112,10 @@ public class LootTableGen extends FabricBlockLootTableProvider {
         addDrop(GOLDEN_AMBER_TILE_SLAB, this::slabDrops);
         addDrop(GOLDEN_AMBER_TILE_STAIRS);
 
+        addSimpleBlockSetDrops(CALCITE_TILES_SET);
+        addDrop(CALCITE_TILES_WALL);
+        addSimpleBlockSetDrops(BLOOMED_CALCITE_TILES_SET);
+        addDrop(BLOOMED_CALCITE_TILES_WALL);
 
         // Misc
         addDrop(BLOOMED_CALCITE);

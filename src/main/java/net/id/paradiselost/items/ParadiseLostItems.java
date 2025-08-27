@@ -322,8 +322,8 @@ public class ParadiseLostItems {
     public static final BlockItem BURNISHED_STONE_PLAQUE = add(ParadiseLostBlocks.BURNISHED_STONE_PLAQUE);
     public static final BlockItem BURNISHED_STONE_SCRIPT = add(ParadiseLostBlocks.BURNISHED_STONE_SCRIPT);
     public static final BlockItem GOLDEN_AMBER_TILE = add(ParadiseLostBlocks.GOLDEN_AMBER_TILE);
-    public static final BlockItem CALCITE_TILES = add(ParadiseLostBlocks.CALCITE_TILES);
-    public static final BlockItem BLOOMED_CALCITE_TILES = add(ParadiseLostBlocks.BLOOMED_CALCITE_TILES);
+    public static final BlockItem CALCITE_TILES = add(ParadiseLostBlocks.CALCITE_TILES_SET.block());
+    public static final BlockItem BLOOMED_CALCITE_TILES = add(ParadiseLostBlocks.BLOOMED_CALCITE_TILES_SET.block());
 
     // stairs
     public static final BlockItem AUREL_STAIRS = add(ParadiseLostBlocks.AUREL_WOODSTUFF.plankStairs(), fuel(300));
@@ -342,6 +342,8 @@ public class ParadiseLostItems {
     public static final BlockItem LEVITA_BRICK_STAIRS = add(ParadiseLostBlocks.LEVITA_BRICK_SET.stairs());
     public static final BlockItem BURNISHED_STONE_STAIRS = add(ParadiseLostBlocks.BURNISHED_STONE_SET.stairs());
     public static final BlockItem GOLDEN_AMBER_TILE_STAIRS = add(ParadiseLostBlocks.GOLDEN_AMBER_TILE_STAIRS);
+    public static final BlockItem CALCITE_TILES_STAIRS = add(ParadiseLostBlocks.CALCITE_TILES_SET.stairs());
+    public static final BlockItem BLOOMED_CALCITE_TILES_STAIRS = add(ParadiseLostBlocks.BLOOMED_CALCITE_TILES_SET.stairs());
 
     public static final BlockItem FLOESTONE_SLAB = add(ParadiseLostBlocks.FLOESTONE_SLAB);
     public static final BlockItem COBBLED_FLOESTONE_SLAB = add(ParadiseLostBlocks.COBBLED_FLOESTONE_SLAB);
@@ -353,6 +355,8 @@ public class ParadiseLostItems {
     public static final BlockItem LEVITA_BRICK_SLAB = add(ParadiseLostBlocks.LEVITA_BRICK_SET.slab());
     public static final BlockItem BURNISHED_STONE_SLAB = add(ParadiseLostBlocks.BURNISHED_STONE_SET.slab());
     public static final BlockItem GOLDEN_AMBER_TILE_SLAB = add(ParadiseLostBlocks.GOLDEN_AMBER_TILE_SLAB);
+    public static final BlockItem CALCITE_TILES_SLAB = add(ParadiseLostBlocks.CALCITE_TILES_SET.slab());
+    public static final BlockItem BLOOMED_CALCITE_TILES_SLAB = add(ParadiseLostBlocks.BLOOMED_CALCITE_TILES_SET.slab());
 
     // saplings
     public static final BlockItem AUREL_SAPLING = add(ParadiseLostBlocks.AUREL_WOODSTUFF.sapling(), compostable30, fuel(100));
@@ -461,6 +465,9 @@ public class ParadiseLostItems {
     public static final BlockItem MOSSY_FLOESTONE_WALL = add(ParadiseLostBlocks.MOSSY_FLOESTONE_WALL);
     public static final BlockItem HELIOLITH_WALL = add(ParadiseLostBlocks.HELIOLITH_WALL);
     public static final BlockItem FLOESTONE_BRICK_WALL = add(ParadiseLostBlocks.FLOESTONE_BRICK_WALL);
+    public static final BlockItem BURNISHED_STONE_WALL = add(ParadiseLostBlocks.BURNISHED_STONE_WALL);
+    public static final BlockItem CALCITE_TILES_WALL = add(ParadiseLostBlocks.CALCITE_TILES_WALL);
+    public static final BlockItem BLOOMED_CALCITE_TILES_WALL = add(ParadiseLostBlocks.BLOOMED_CALCITE_TILES_WALL);
 
     // panes & chains
     public static final BlockItem OLVITE_CHAIN = add(ParadiseLostBlocks.OLVITE_CHAIN);

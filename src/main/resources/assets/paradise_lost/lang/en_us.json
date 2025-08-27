@@ -80,6 +80,7 @@
   "block.paradise_lost.burnished_stone": "Burnished Stone",
   "block.paradise_lost.burnished_stone_slab": "Burnished Stone Slab",
   "block.paradise_lost.burnished_stone_stairs": "Burnished Stone Stairs",
+  "block.paradise_lost.burnished_stone_wall": "Burnished Stone Wall",
   "block.paradise_lost.burnished_stone_plaque": "Burnished Stone Plaque",
   "block.paradise_lost.burnished_stone_script": "Inscribed Burnished Stone",
   
@@ -88,7 +89,13 @@
   "block.paradise_lost.golden_amber_tile_stairs": "Golden Amber Tile Stairs",
   
   "block.paradise_lost.calcite_tiles": "Calcite Tiles",
+  "block.paradise_lost.calcite_tiles_slab": "Calcite Tiles Slab",
+  "block.paradise_lost.calcite_tiles_stairs": "Calcite Tiles Stairs",
+  "block.paradise_lost.calcite_tiles_wall": "Calcite Tiles Wall",
   "block.paradise_lost.bloomed_calcite_tiles": "Bloomed Calcite Tiles",
+  "block.paradise_lost.bloomed_calcite_tiles_slab": "Bloomed Calcite Tiles Slab",
+  "block.paradise_lost.bloomed_calcite_tiles_stairs": "Bloomed Calcite Tiles Stairs",
+  "block.paradise_lost.bloomed_calcite_tiles_wall": "Bloomed Calcite Tiles Wall",
 
   "block.paradise_lost.floestone_button": "Floestone Button",
   "block.paradise_lost.floestone_pressure_plate": "Floestone Pressure Plate",

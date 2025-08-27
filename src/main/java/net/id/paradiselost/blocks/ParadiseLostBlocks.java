@@ -15,7 +15,6 @@ import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.registry.SimpleDefaultedRegistry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvents;
@@ -129,9 +128,13 @@ public class ParadiseLostBlocks {
     public static final Block CHISELED_LEVITA_BRICK = add("chiseled_levita_brick", new Block(create().mapColor(MapColor.LIGHT_BLUE_GRAY).strength(0.3f, 3f).sounds(BlockSoundGroup.CALCITE).instrument(NoteBlockInstrument.BASEDRUM)));
 
     // Burnished Stone
-    public static final SimpleBlockSet BURNISHED_STONE_SET = registerSimpleBlockSet("burnished_stone", create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM));
-    public static final Block BURNISHED_STONE_PLAQUE = add("burnished_stone_plaque", new Block(create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM)));
-    public static final Block BURNISHED_STONE_SCRIPT = add("burnished_stone_script", new Block(create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM)));
+    private static Settings burnishedStone() {
+        return create().mapColor(MapColor.DEEPSLATE_GRAY).strength(4f, 6f).requiresTool().instrument(NoteBlockInstrument.BASEDRUM);
+    }
+    public static final SimpleBlockSet BURNISHED_STONE_SET = registerSimpleBlockSet("burnished_stone", burnishedStone());
+    public static final WallBlock BURNISHED_STONE_WALL = add("burnished_stone_wall", new WallBlock(burnishedStone()));
+    public static final Block BURNISHED_STONE_PLAQUE = add("burnished_stone_plaque", new Block(burnishedStone()));
+    public static final Block BURNISHED_STONE_SCRIPT = add("burnished_stone_script", new Block(burnishedStone()));
 
 
     private static Settings amberTiles() {
@@ -145,8 +148,10 @@ public class ParadiseLostBlocks {
 
     // Misc
     public static final CropGrowthBlock BLOOMED_CALCITE = add("bloomed_calcite", new CropGrowthBlock(copy(CALCITE).instrument(NoteBlockInstrument.BASEDRUM).ticksRandomly(), 2));
-    public static final Block CALCITE_TILES = add("calcite_tiles", new Block(copy(CALCITE).instrument(NoteBlockInstrument.BASEDRUM)));
-    public static final Block BLOOMED_CALCITE_TILES = add("bloomed_calcite_tiles", new Block(copy(CALCITE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final SimpleBlockSet CALCITE_TILES_SET = registerSimpleBlockSet("calcite_tiles", copy(CALCITE).instrument(NoteBlockInstrument.BASEDRUM));
+    public static final WallBlock CALCITE_TILES_WALL = add("calcite_tiles_wall", new WallBlock(floestone()));
+    public static final SimpleBlockSet BLOOMED_CALCITE_TILES_SET = registerSimpleBlockSet("bloomed_calcite_tiles", copy(CALCITE).instrument(NoteBlockInstrument.BASEDRUM));
+    public static final WallBlock BLOOMED_CALCITE_TILES_WALL = add("bloomed_calcite_tiles_wall", new WallBlock(floestone()));
 
     protected static Settings flowerPot() {
         return copy(POTTED_OAK_SAPLING);
