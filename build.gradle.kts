@@ -11,6 +11,10 @@ val sherdsApiVersion: String by properties
 val customPortalApiVersion: String by properties
 val cardinalComponentsVersion: String by properties
 
+val moonlightVersion: String by properties
+val everyCompatVersion: String by properties
+val stoneZoneVersion: String by properties
+
 plugins {
     id("fabric-loom") version "1.11-SNAPSHOT"
     id("com.modrinth.minotaur") version "2.8.7"
@@ -135,6 +139,24 @@ dependencies {
             group = "net.fabricmc.fabric-api",
             name = "fabric-api",
             version = fabricVersion,
+    )
+
+    modImplementation(
+            group = "maven.modrinth",
+            name = "moonlight",
+            version = moonlightVersion,
+    )
+
+    modImplementation(
+            group = "maven.modrinth",
+            name = "every-compat",
+            version = everyCompatVersion,
+    )
+
+    modImplementation(
+            group = "maven.modrinth",
+            name = "stone-zone",
+            version = stoneZoneVersion,
     )
 
 }

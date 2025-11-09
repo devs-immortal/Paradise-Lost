@@ -14,6 +14,7 @@ import net.id.paradiselost.client.rendering.entity.ParadiseLostEntityRenderers;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.client.rendering.util.ParadiseLostColorProviders;
 import net.id.paradiselost.commands.ParadiseLostCommands;
+import net.id.paradiselost.compat.EveryCompCompat;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaRaces;
 import net.id.paradiselost.items.ParadiseLostItemGroups;
@@ -98,6 +99,9 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer {
         ParadiseLostParticles.init();
         ParadiseLostDataComponentTypes.init();
         ParadiseLostDimension.initPortal();
+        if (FabricLoader.getInstance().isModLoaded("everycomp")) {
+            EveryCompCompat.init();
+        }
     }
 
     @Override
