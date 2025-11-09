@@ -3,7 +3,7 @@ package net.id.paradiselost.client.rendering.entity.hostile;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.client.model.ParadiseLostModelLayers;
 import net.id.paradiselost.client.model.entity.QuintEntityModel;
-import net.id.paradiselost.entities.hostile.QuintEntity;
+import net.id.paradiselost.entities.passive.QuintEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;

@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.block.SliderEntity;
 import net.id.paradiselost.entities.hostile.EnvoyEntity;
-import net.id.paradiselost.entities.hostile.QuintEntity;
+import net.id.paradiselost.entities.passive.QuintEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
 import net.id.paradiselost.entities.passive.PopomEntity;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;

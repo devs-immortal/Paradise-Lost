@@ -1,6 +1,6 @@
 package net.id.paradiselost.client.model.entity;
 
-import net.id.paradiselost.entities.hostile.QuintEntity;
+import net.id.paradiselost.entities.passive.QuintEntity;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;

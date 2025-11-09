@@ -2,6 +2,8 @@ package net.id.paradiselost.mixin.world.gen.structure;
 
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.HeightContext;
+import net.minecraft.world.gen.heightprovider.HeightProvider;
 import net.minecraft.world.gen.structure.JigsawStructure;
 import net.minecraft.world.gen.structure.Structure;
 import org.spongepowered.asm.mixin.Final;
@@ -26,6 +28,10 @@ public class JigsawStructureMixin {
 
     @Shadow
     @Final
+    private HeightProvider startHeight;
+
+    @Shadow
+    @Final
     private Optional<Heightmap.Type> projectStartToHeightmap;
 
     @Inject(
@@ -35,10 +41,11 @@ public class JigsawStructureMixin {
     )
     public void getStructurePosition(Structure.Context context, CallbackInfoReturnable<Optional<Structure.StructurePosition>> cir) {
         ChunkPos chunkPos = context.chunkPos();
+        int startHeightPos = this.startHeight.get(context.random(), new HeightContext(context.chunkGenerator(), context.world()));
         var surfaceHeight = context.chunkGenerator().getHeight(chunkPos.getStartX(), chunkPos.getStartZ(), projectStartToHeightmap.orElse(Heightmap.Type.WORLD_SURFACE_WG), context.world(), context.noiseConfig());
         //System.out.println("Generating structure at height " + surfaceHeight + ", find at pos [" + chunkPos.getStartX() + ", " + chunkPos.getStartZ() + "]");
         //int i = this.startHeight.get(context.random(), new HeightContext(context.chunkGenerator(), context.world()));
-        if (surfaceHeight <= context.world().getBottomY()) {
+        if (startHeightPos >= context.world().getBottomY() && surfaceHeight <= context.world().getBottomY()) {
             cir.setReturnValue(Optional.empty());
         }
 

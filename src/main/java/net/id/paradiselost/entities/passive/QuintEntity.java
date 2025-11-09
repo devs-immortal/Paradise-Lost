@@ -1,6 +1,7 @@
-package net.id.paradiselost.entities.hostile;
+package net.id.paradiselost.entities.passive;
 
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
+import net.id.paradiselost.entities.hostile.EnvoyEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
