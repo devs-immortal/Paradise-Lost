@@ -280,6 +280,7 @@ public class ParadiseLostItemGroups {
                 entries.add(GLAZED_GOLD_PICKAXE);
                 entries.add(GLAZED_GOLD_AXE);
                 entries.add(GLAZED_GOLD_HOE);
+                entries.add(SOUL_BLADE);
                 // misc
                 entries.add(OLVITE_SPYGLASS);
                 entries.add(TOTEM_OF_LEVITATION);
@@ -300,6 +301,7 @@ public class ParadiseLostItemGroups {
                 entries.add(NITRA_BULB);
                 // armor
                 entries.add(OLVITE_HELMET);
+                entries.add(OLVITE_HELMET_ORNATE);
                 entries.add(OLVITE_CHESTPLATE);
                 entries.add(OLVITE_LEGGINGS);
                 entries.add(OLVITE_BOOTS);

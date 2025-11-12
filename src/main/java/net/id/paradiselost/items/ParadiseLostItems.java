@@ -1,7 +1,9 @@
 package net.id.paradiselost.items;
 
 import com.chocohead.mm.api.ClassTinkerers;
+import net.fabricmc.fabric.impl.client.rendering.ArmorRendererRegistryImpl;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
+import net.id.paradiselost.client.rendering.armor.OrnateOlviteArmorRenderer;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.armor.ParadiseLostArmorMaterials;
 import net.id.paradiselost.items.armor.XpCircletItem;
@@ -123,6 +125,8 @@ public class ParadiseLostItems {
     public static final SwordItem GLAZED_GOLD_SWORD = add("glazed_gold_sword", new SwordItem(ParadiseLostToolMaterials.GLAZED_GOLD, sword(ParadiseLostToolMaterials.GLAZED_GOLD, 3, -2.4f)));
     public static final HoeItem GLAZED_GOLD_HOE = add("glazed_gold_hoe", new HoeItem(ParadiseLostToolMaterials.GLAZED_GOLD, hoe(ParadiseLostToolMaterials.GLAZED_GOLD, -2, -2.0f)));
 
+    public static final SwordItem SOUL_BLADE = add("soul_blade", new SwordItem(ParadiseLostToolMaterials.RELIC, sword(ParadiseLostToolMaterials.RELIC, 1, -2.8f)));
+
     // misc
     public static final SpyglassItem OLVITE_SPYGLASS = add("olvite_spyglass", new SpyglassItem(unstackableTool()));
     public static final Item TOTEM_OF_LEVITATION = add("totem_of_levitation", new Item(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)));
@@ -167,6 +171,7 @@ public class ParadiseLostItems {
     public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.CHESTPLATE, 15));
     public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.LEGGINGS, 15));
     public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.BOOTS, 15));
+    public static final ArmorItem OLVITE_HELMET_ORNATE = add("ornate_olvite_helmet", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.HELMET, 15));
 
     // Glazed Gold
     public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.HELMET, 21));
@@ -529,6 +534,7 @@ public class ParadiseLostItems {
 
 
     public static void init() {
+        ArmorRendererRegistryImpl.register(new OrnateOlviteArmorRenderer(), OLVITE_HELMET_ORNATE);
     }
 
     @SafeVarargs

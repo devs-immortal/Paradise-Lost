@@ -15,6 +15,7 @@ public class ParadiseLostToolMaterials {
     public static final ToolMaterial OLVITE = create(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 4.5f, 2f, 14, () -> Ingredient.ofItems(ParadiseLostItems.OLVITE));
     public static final ToolMaterial SURTRUM = create(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 827, 7.0f, 3f, 16, () -> Ingredient.ofItems(ParadiseLostItems.REFINED_SURTRUM));
     public static final ToolMaterial GLAZED_GOLD = create(BlockTags.INCORRECT_FOR_IRON_TOOL, 131, 12f, 2f, 22, () -> Ingredient.ofItems(ParadiseLostItems.GOLDEN_AMBER));
+    public static final ToolMaterial RELIC = create(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 636, 6.5f, 2.5f, 17, Ingredient::empty);
 
 
     public static ToolMaterial create(final TagKey<Block> incorrect, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {

@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.id.paradiselost.client.model.ParadiseLostModelLayers;
-import net.id.paradiselost.client.model.armor.PhoenixArmorModel;
+import net.id.paradiselost.client.model.armor.OrnateOlviteArmorModel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
@@ -15,18 +15,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class PhoenixArmorRenderer implements ArmorRenderer { //24: Left this in to repurpose it later because I liked it
-    private static final Identifier TEXTURE = Identifier.of("minecraft", "textures/models/armor/paradise_lost_phoenix_layer_1.png");
-    private static PhoenixArmorModel phoenixArmorModel;
+public class OrnateOlviteArmorRenderer implements ArmorRenderer {
+    private static final Identifier TEXTURE = Identifier.of("minecraft", "textures/models/armor/paradise_lost_ornate_olvite.png");
+    private static OrnateOlviteArmorModel armorModel;
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {
-        if (phoenixArmorModel == null) {
-            phoenixArmorModel = new PhoenixArmorModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(ParadiseLostModelLayers.PHOENIX_ARMOR));
+        if (armorModel == null) {
+            armorModel = new OrnateOlviteArmorModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(ParadiseLostModelLayers.PHOENIX_ARMOR));
         }
-        contextModel.copyBipedStateTo(phoenixArmorModel);
-        phoenixArmorModel.setVisible(false);
-        phoenixArmorModel.head.visible = slot == EquipmentSlot.HEAD;
-        ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, phoenixArmorModel, TEXTURE);
+        contextModel.copyBipedStateTo(armorModel);
+        armorModel.setVisible(false);
+        armorModel.head.visible = slot == EquipmentSlot.HEAD;
+        ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, armorModel, TEXTURE);
     }
 }
