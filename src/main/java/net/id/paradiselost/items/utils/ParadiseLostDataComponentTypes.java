@@ -14,6 +14,7 @@ import net.minecraft.text.TextCodecs;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Uuids;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.function.UnaryOperator;
 
@@ -26,6 +27,7 @@ public class ParadiseLostDataComponentTypes {
     public static final ComponentType<MoaGeneComponent> MOA_GENES = register("moa_genes", (builder) -> builder.codec(MoaGeneComponent.CODEC).packetCodec(MoaGeneComponent.PACKET_CODEC).cache());
     public static final ComponentType<BloodstoneComponent> BLOODSTONE = register("bloodstone", (builder) -> builder.codec(BloodstoneComponent.CODEC).packetCodec(BloodstoneComponent.PACKET_CODEC));
     public static final ComponentType<XpCircletChargeComponent> XP_CIRCLET_CHARGE = register("xp_circlet", (builder) -> builder.codec(XpCircletChargeComponent.CODEC).packetCodec(XpCircletChargeComponent.PACKET_CODEC));
+    public static final ComponentType<CollectedSoulsComponent> COLLECTED_SOULS = register("collected_souls", (builder) -> builder.codec(CollectedSoulsComponent.CODEC).packetCodec(CollectedSoulsComponent.PACKET_CODEC));
 
     // Util
 
@@ -208,6 +210,30 @@ public class ParadiseLostDataComponentTypes {
 
         public boolean charged() {
             return this.storedXp > 0;
+        }
+
+    }
+
+    public record CollectedSoulsComponent(List<String> soulIds) {
+
+        public static final Codec<CollectedSoulsComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+                Codec.STRING.listOf().fieldOf("souls").forGetter(CollectedSoulsComponent::soulIds)
+        ).apply(instance, CollectedSoulsComponent::new));
+        public static final PacketCodec<RegistryByteBuf, CollectedSoulsComponent> PACKET_CODEC;
+
+        static {
+            PACKET_CODEC = PacketCodec.tuple(
+                    PacketCodecs.STRING.collect(PacketCodecs.toList()), CollectedSoulsComponent::soulIds,
+                    CollectedSoulsComponent::new
+            );
+        }
+
+        public List<String> soulIds() {
+            return this.soulIds;
+        }
+
+        public int soulCount() {
+            return this.soulIds.size();
         }
 
     }

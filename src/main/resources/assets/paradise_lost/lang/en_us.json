@@ -299,6 +299,8 @@
   "item.paradise_lost.glazed_gold_axe": "Glazed Gold Axe",
   "item.paradise_lost.glazed_gold_sword": "Glazed Gold Sword",
   "item.paradise_lost.glazed_gold_hoe": "Glazed Gold Hoe",
+  
+  "item.paradise_lost.soul_blade": "Bloomed Blade",
 
   "item.paradise_lost.olvite_spyglass": "Olvite Spyglass",
   "item.paradise_lost.totem_of_levitation": "Totem Of Levitation",
@@ -434,6 +436,8 @@
   "info.paradise_lost.bloodstone.cherine": "Peer into the creatures heart",
   "info.paradise_lost.bloodstone.olvite": "Peer into the creatures mind",
   "info.paradise_lost.bloodstone.surtrum": "Peer into the creatures will",
+  "info.paradise_lost.soul_blade.soul_count_1": "Contains 1 Soul",
+  "info.paradise_lost.soul_blade.soul_count_n": "Contains %1$s Souls",
 
 
   "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries": "Blackcurrants pop",

@@ -12,6 +12,7 @@ import net.id.paradiselost.items.misc.*;
 import net.id.paradiselost.items.tools.AurelMilkBucketItem;
 import net.id.paradiselost.items.tools.ParadiseLostToolMaterials;
 import net.id.paradiselost.items.tools.AurelBucketItem;
+import net.id.paradiselost.items.tools.SoulSwordItem;
 import net.id.paradiselost.items.tools.WardedJarItem;
 import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
@@ -125,7 +126,7 @@ public class ParadiseLostItems {
     public static final SwordItem GLAZED_GOLD_SWORD = add("glazed_gold_sword", new SwordItem(ParadiseLostToolMaterials.GLAZED_GOLD, sword(ParadiseLostToolMaterials.GLAZED_GOLD, 3, -2.4f)));
     public static final HoeItem GLAZED_GOLD_HOE = add("glazed_gold_hoe", new HoeItem(ParadiseLostToolMaterials.GLAZED_GOLD, hoe(ParadiseLostToolMaterials.GLAZED_GOLD, -2, -2.0f)));
 
-    public static final SwordItem SOUL_BLADE = add("soul_blade", new SwordItem(ParadiseLostToolMaterials.RELIC, sword(ParadiseLostToolMaterials.RELIC, 1, -2.8f)));
+    public static final SwordItem SOUL_BLADE = add("soul_blade", new SoulSwordItem(ParadiseLostToolMaterials.SOUL_BLADE, sword(ParadiseLostToolMaterials.SOUL_BLADE, 1, -2.8f)));
 
     // misc
     public static final SpyglassItem OLVITE_SPYGLASS = add("olvite_spyglass", new SpyglassItem(unstackableTool()));
