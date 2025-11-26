@@ -24,6 +24,7 @@ import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.screen.ParadiseLostScreens;
 import net.id.paradiselost.util.ParadiseLostAliasFix;
+import net.id.paradiselost.util.ParadiseLostCriteria;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.id.paradiselost.world.ParadiseLostGameRules;
@@ -99,6 +100,7 @@ public class ParadiseLost implements ModInitializer, ClientModInitializer {
         ParadiseLostParticles.init();
         ParadiseLostDataComponentTypes.init();
         ParadiseLostDimension.initPortal();
+        ParadiseLostCriteria.init();
         if (FabricLoader.getInstance().isModLoaded("everycomp")) {
             EveryCompCompat.init();
         }

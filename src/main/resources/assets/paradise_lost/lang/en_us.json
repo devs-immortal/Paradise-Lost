@@ -266,6 +266,7 @@
   "entity.paradise_lost.moa": "Moa",
   "entity.paradise_lost.popom": "Popom",
   "entity.paradise_lost.envoy": "Envoy",
+  "entity.paradise_lost.quint": "Quint",
 
   "item.paradise_lost.golden_amber": "Golden Amber",
   "item.paradise_lost.cherine": "Cherine Shard",
@@ -487,6 +488,8 @@
 
   "subtitles.paradise_lost.item.bloodstone.prick": "Bloodstone pricks",
   
+  "subtitles.paradise_lost.item.soul_blade.harvest": "Soul is Absorbed",
+  
   
   "filled_map.paradise_lost.vault": "Vault Explorer Map",
   
@@ -511,10 +514,16 @@
   "tag.item.paradise_lost.wisteria_logs": "Wisteria Logs",
 
 
+  "advancements.paradise_lost.bloomed_blade_goal.title": "Grim Reaper",
+  "advancements.paradise_lost.bloomed_blade_goal.description": "Collect 50 Souls in a Single Bloomed Blade",
   "advancements.paradise_lost.bloomed_calcite_craft.title": "Healing Crystals",
   "advancements.paradise_lost.bloomed_calcite_craft.description": "Douse a calcite block with a healing potion",
-  "advancements.paradise_lost.consume_food.title": "Exotic Starter",
-  "advancements.paradise_lost.consume_food.description": "Consume something from Paradise",
+  "advancements.paradise_lost.calcite_sherd.title": "Respecting the Remains",
+  "advancements.paradise_lost.calcite_sherd.description": "Brush a Suspicious block to obtain a Calcite Pottery Sherd",
+  "advancements.paradise_lost.circlet_stored.title": "Saved for Later",
+  "advancements.paradise_lost.circlet_stored.description": "Use a Circlet of Knowledge to prevent losing XP",
+  "advancements.paradise_lost.circlet_stored_a_lot.title": "Nearly losing it all",
+  "advancements.paradise_lost.circlet_stored_a_lot.description": "Use a Circlet of Knowledge to prevent losing a significant amount of XP",
   "advancements.paradise_lost.enter_paradise_lost.title": "We Need to Go Higher",
   "advancements.paradise_lost.enter_paradise_lost.description": "Build a frame of Bloomed Calcite, flood it with water, and step into the light",
   "advancements.paradise_lost.float_up_paradise_lost.title": "To Infinity",

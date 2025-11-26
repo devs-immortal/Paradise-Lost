@@ -1,0 +1,27 @@
+{
+  "parent": "paradise_lost:root",
+  "criteria": {
+    "goal": {
+      "trigger": "paradise_lost:bloomed_blade_goal"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.bloomed_blade_goal.description"
+    },
+    "icon": {
+      "id": "paradise_lost:soul_blade"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.bloomed_blade_goal.title"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "requirements": [
+    [
+      "goal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

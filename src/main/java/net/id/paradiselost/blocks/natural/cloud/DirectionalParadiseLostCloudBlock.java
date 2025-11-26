@@ -75,7 +75,7 @@ public class DirectionalParadiseLostCloudBlock extends ParadiseLostCloudBlock {
             return;
         }
 
-        if (true) { //todo
+        if (true) {
             Vec3d launchVec = new Vec3d(
                     direction.getOffsetX(),
                     direction.getOffsetY(),

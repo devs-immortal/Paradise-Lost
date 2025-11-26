@@ -46,7 +46,7 @@ public class EnvoyEntity extends SkeletonEntity {
     }
 
     private void playEnlighteningEffects() {
-        this.playSound(ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_HURT); // TODO
+        this.playSound(ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_HURT);
         if (this.getWorld().isClient) {
             for (int i = 0; i < 18; i++) {
                 this.getWorld().addParticle(ParadiseLostParticles.LIT_CLOUD,

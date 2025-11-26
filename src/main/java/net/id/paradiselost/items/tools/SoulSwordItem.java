@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
+import net.id.paradiselost.util.ParadiseLostCriteria;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -45,6 +47,9 @@ public class SoulSwordItem extends SwordItem {
                 stack.remove(ParadiseLostDataComponentTypes.COLLECTED_SOULS);
                 stack.set(ParadiseLostDataComponentTypes.COLLECTED_SOULS, new ParadiseLostDataComponentTypes.CollectedSoulsComponent(newSouls));
                 playCollectEffects(attacker.getWorld(), attacker.getBlockPos());
+                if (attacker instanceof ServerPlayerEntity serverPlayer && newSouls.size() >= 50) {
+                    ParadiseLostCriteria.BLOOMED_BLADE_GOAL.trigger(serverPlayer, attacker.getBlockPos(), stack);
+                }
             }
         }
         stack.damage(1, attacker, EquipmentSlot.MAINHAND);
@@ -67,7 +72,7 @@ public class SoulSwordItem extends SwordItem {
     }
 
     private void playCollectEffects(World world, BlockPos pos) {
-        world.playSound(null, pos, ParadiseLostSoundEvents.ITEM_BLOODSTONE_PRICK, SoundCategory.PLAYERS, 0.5F, 0.5F); // TODO
+        world.playSound(null, pos, ParadiseLostSoundEvents.SOUL_BLADE_HARVEST, SoundCategory.PLAYERS, 1.5F, 0.0F);
     }
 
 }

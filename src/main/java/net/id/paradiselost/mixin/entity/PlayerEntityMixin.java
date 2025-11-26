@@ -5,8 +5,10 @@ import net.id.paradiselost.entities.ParadiseLostEntityExtensions;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.items.armor.XpCircletItem;
 import net.id.paradiselost.util.MiscUtil;
+import net.id.paradiselost.util.ParadiseLostCriteria;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -145,6 +147,12 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
         for (ItemStack stack : this.getArmorItems()) {
             if (!stack.isEmpty() && stack.isOf(ParadiseLostItems.XP_CIRCLET)) {
                 XpCircletItem.chargeCirclet(stack, (PlayerEntity) (Object) this);
+                if ((Object) this instanceof ServerPlayerEntity player) {
+                    ParadiseLostCriteria.XP_CIRCLET_CHARGED.trigger(player, player.getBlockPos(), stack);
+                    if (experienceLevel > 29) {
+                        ParadiseLostCriteria.XP_CIRCLET_CHARGED_30.trigger(player, player.getBlockPos(), stack);
+                    }
+                }
                 this.experienceLevel = 0;
                 this.experienceProgress = 0;
                 break;

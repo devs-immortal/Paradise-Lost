@@ -26,6 +26,7 @@ public final class ParadiseLostSoundEvents {
     public static final RegistryEntry<SoundEvent> ITEM_ARMOR_EQUIP_SURTRUM = registerReference("item.armor.equip.surtrum");
     public static final RegistryEntry<SoundEvent> ITEM_ARMOR_EQUIP_RELIC = registerReference("item.armor.equip.relic");
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = register("item.bloodstone.prick");
+    public static final SoundEvent SOUL_BLADE_HARVEST = register("item.soul_blade.harvest");
 
 
     public static final SoundEvent ENTITY_MOA_AMBIENT = register("entity.moa.ambient");

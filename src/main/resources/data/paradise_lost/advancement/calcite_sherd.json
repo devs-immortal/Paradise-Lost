@@ -1,0 +1,42 @@
+{
+  "parent": "paradise_lost:root",
+  "criteria": {
+    "remains": {
+      "conditions": {
+        "loot_table": "paradise_lost:archaeology/remains_common"
+      },
+      "trigger": "minecraft:player_generates_container_loot"
+    },
+    "has_sherd": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#paradise_lost:calcite_pot_sherds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.calcite_sherd.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paradise_lost:calcite_decorated_pot"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.calcite_sherd.title"
+    }
+  },
+  "requirements": [
+    [
+      "remains"
+    ],
+    [
+      "has_sherd"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

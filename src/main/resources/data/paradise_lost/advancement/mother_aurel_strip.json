@@ -9,10 +9,7 @@
     "icon": {
       "id": "paradise_lost:golden_amber"
     },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
+    "frame": "task"
   },
   "criteria": {
     "strip": {

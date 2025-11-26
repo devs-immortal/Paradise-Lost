@@ -1,0 +1,32 @@
+{
+  "parent": "paradise_lost:circlet_stored",
+  "criteria": {
+    "charged": {
+      "trigger": "paradise_lost:xp_circlet_charged_30"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.circlet_stored_a_lot.description"
+    },
+    "icon": {
+      "components": {
+        "paradise_lost:xp_circlet": {
+          "xp_content": 100
+        }
+      },
+      "id": "paradise_lost:xp_circlet"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.circlet_stored_a_lot.title"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "requirements": [
+    [
+      "charged"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,25 @@
+{
+  "parent": "paradise_lost:root",
+  "criteria": {
+    "charged": {
+      "trigger": "paradise_lost:xp_circlet_charged"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.circlet_stored.description"
+    },
+    "icon": {
+      "id": "paradise_lost:xp_circlet"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.circlet_stored.title"
+    }
+  },
+  "requirements": [
+    [
+      "charged"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

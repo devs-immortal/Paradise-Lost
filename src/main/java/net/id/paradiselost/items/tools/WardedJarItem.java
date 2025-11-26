@@ -2,6 +2,7 @@ package net.id.paradiselost.items.tools;
 
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.ParadiseLostItems;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
@@ -45,21 +47,19 @@ public class WardedJarItem extends Item {
         if (this.containedEntityType != null) return ActionResult.PASS;
         World world = player.getWorld();
         if (entity.getType().equals(EntityType.ALLAY)) {
-            if (world instanceof ServerWorld) {
-                ItemEntity itemEntity = new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), entity.getStackInHand(Hand.MAIN_HAND));
-                itemEntity.setToDefaultPickupDelay();
-                entity.discard();
-                world.spawnEntity(itemEntity);
-                stack.decrementUnlessCreative(1, player);
-                player.giveItemStack(new ItemStack(ParadiseLostItems.WARDED_JAR_ALLAY));
-            }
+            ItemEntity itemEntity = new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), entity.getStackInHand(Hand.MAIN_HAND));
+            itemEntity.setToDefaultPickupDelay();
+            entity.discard();
+            world.spawnEntity(itemEntity);
+            stack.decrementUnlessCreative(1, player);
+            var jarItem = new ItemStack(ParadiseLostItems.WARDED_JAR_ALLAY);
+            player.giveItemStack(jarItem);
             return ActionResult.SUCCESS;
         } else if (entity.getType().equals(ParadiseLostEntityTypes.QUINT)) {
-            if (world instanceof ServerWorld) {
-                entity.discard();
-                stack.decrementUnlessCreative(1, player);
-                player.giveItemStack(new ItemStack(ParadiseLostItems.WARDED_JAR_QUINT));
-            }
+            entity.discard();
+            stack.decrementUnlessCreative(1, player);
+            var jarItem = new ItemStack(ParadiseLostItems.WARDED_JAR_QUINT);
+            player.giveItemStack(jarItem);
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;

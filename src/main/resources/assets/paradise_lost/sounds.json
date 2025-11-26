@@ -96,6 +96,15 @@
     ],
     "subtitle": "subtitles.paradise_lost.item.bloodstone.prick"
   },
+  "item.soul_blade.harvest": {
+    "sounds": [
+      {
+        "name": "entity.allay.item_taken",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.item.soul_blade.harvest"
+  },
 
 
 
