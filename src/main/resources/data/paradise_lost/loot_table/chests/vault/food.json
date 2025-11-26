@@ -13,8 +13,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 4
+                "min": 0,
+                "max": 2
               }
             }
           ]
@@ -28,8 +28,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 4,
-                "max": 9
+                "min": 2,
+                "max": 4
               }
             }
           ]
@@ -44,7 +44,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 5
+                "max": 3
               }
             }
           ]
@@ -58,8 +58,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 7,
-                "max": 14
+                "min": 2,
+                "max": 6
               }
             }
           ]
@@ -82,7 +82,7 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
+                "min": 2,
                 "max": 5
               }
             }
@@ -97,8 +97,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 2,
-                "max": 6
+                "min": 1,
+                "max": 2
               }
             }
           ]
@@ -112,8 +112,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 2
+                "min": 0,
+                "max": 1
               }
             }
           ]
@@ -127,8 +127,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 2,
-                "max": 4
+                "min": 0,
+                "max": 3
               }
             }
           ]

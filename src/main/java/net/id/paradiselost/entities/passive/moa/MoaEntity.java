@@ -46,6 +46,7 @@ import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -465,7 +466,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.getItem() == ParadiseLostItems.POPOM_JELLY;
+        return stack.isIn(ParadiseLostItemTags.MOA_BREEDABLES);
     }
 
     @Override
@@ -656,7 +657,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                     return ActionResult.success(getWorld().isClient);
                 }
             } else {
-                if (heldStack.getItem() != ParadiseLostItems.POPOM_JELLY && heldStack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES)) {
+                if (!heldStack.isIn(ParadiseLostItemTags.MOA_BREEDABLES) && heldStack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES)) {
                     eat(player, hand, heldStack);
                     playSound(ParadiseLostSoundEvents.ENTITY_MOA_EAT, 1, 0.4F + random.nextFloat() / 3F);
                     produceParticlesServer(new ItemStackParticleEffect(ParticleTypes.ITEM, heldStack), 2 + random.nextInt(4), 7, 0);

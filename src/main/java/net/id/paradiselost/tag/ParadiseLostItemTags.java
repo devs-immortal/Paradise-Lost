@@ -6,6 +6,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 
 public class ParadiseLostItemTags {
+    public static final TagKey<Item> MOA_BREEDABLES = register("moa_breedables");
     public static final TagKey<Item> MOA_TEMPTABLES = register("moa_temptables");
     public static final TagKey<Item> RIGHTEOUS_WEAPONS = register("righteous_weapons");
     public static final TagKey<Item> SACRED_WEAPONS = register("sacred_weapons");
