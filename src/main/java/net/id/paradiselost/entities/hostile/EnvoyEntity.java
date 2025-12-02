@@ -28,7 +28,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class EnvoyEntity extends SkeletonEntity {
+public class EnvoyEntity extends SkeletonEntity implements IEnlightenable{
 
     private static final TrackedData<Boolean> ENLIGHTENED;
 
@@ -46,7 +46,7 @@ public class EnvoyEntity extends SkeletonEntity {
     }
 
     private void playEnlighteningEffects() {
-        this.playSound(ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_HURT);
+        this.playSound(ParadiseLostSoundEvents.ENTITY_ENVOY_GETS_ENLIGHTENED);
         if (this.getWorld().isClient) {
             for (int i = 0; i < 18; i++) {
                 this.getWorld().addParticle(ParadiseLostParticles.LIT_CLOUD,

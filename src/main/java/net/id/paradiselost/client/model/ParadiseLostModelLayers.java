@@ -11,6 +11,7 @@ import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.ZombieEntityModel;
 import net.minecraft.util.Identifier;
 
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Map;
 @Environment(EnvType.CLIENT)
 public class ParadiseLostModelLayers {
 
+    public static final TexturedModelData BIPED_MODEL_DATA = TexturedModelData.of(BipedEntityModel.getModelData(Dilation.NONE, 0.0F), 64, 64);
     public static final TexturedModelData INNER_ARMOR_MODEL_DATA = TexturedModelData.of(BipedEntityModel.getModelData(new Dilation(0.5F), 0.0F), 64, 32);
     public static final TexturedModelData OUTER_ARMOR_MODEL_DATA = TexturedModelData.of(BipedEntityModel.getModelData(new Dilation(1.0F), 0.0F), 64, 32);
 
@@ -26,6 +28,9 @@ public class ParadiseLostModelLayers {
     public static final EntityModelLayer ENVOY = register("envoy", "main", EnvoyEntityModel.getTexturedModelData());
     public static final EntityModelLayer ENVOY_INNER_ARMOR = register("envoy", "inner_armor", INNER_ARMOR_MODEL_DATA);
     public static final EntityModelLayer ENVOY_OUTER_ARMOR = register("envoy", "outer_armor", OUTER_ARMOR_MODEL_DATA);
+    public static final EntityModelLayer KEEPER = register("keeper", "main", BIPED_MODEL_DATA);
+    public static final EntityModelLayer KEEPER_INNER_ARMOR = register("keeper", "inner_armor", INNER_ARMOR_MODEL_DATA);
+    public static final EntityModelLayer KEEPER_OUTER_ARMOR = register("keeper", "outer_armor", OUTER_ARMOR_MODEL_DATA);
     public static final EntityModelLayer QUINT = register("quint", "main", QuintEntityModel.getTexturedModelData());
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer POPOM = register("popom", "main", PopomEntityModel.getTexturedModelData());

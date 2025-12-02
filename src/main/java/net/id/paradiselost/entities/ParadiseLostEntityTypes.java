@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.block.SliderEntity;
 import net.id.paradiselost.entities.hostile.EnvoyEntity;
+import net.id.paradiselost.entities.hostile.KeeperEntity;
 import net.id.paradiselost.entities.passive.QuintEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
 import net.id.paradiselost.entities.passive.PopomEntity;
@@ -39,15 +40,17 @@ public class ParadiseLostEntityTypes {
     // Hostile
     public static final EntityType<EnvoyEntity> ENVOY = add("envoy", of(EnvoyEntity::new, MONSTER, changing(0.6F, 1.95F), 10),
             attributes(EnvoyEntity::createEnvoyAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
-    public static final EntityType<QuintEntity> QUINT = add("quint", of(QuintEntity::new, MONSTER, changing(0.65F, 0.65F), 16),
-            attributes(QuintEntity::createQuintAttributes), spawnRestrictions(QuintEntity::canMobSpawn));
+    public static final EntityType<KeeperEntity> KEEPER = add("keeper", of(KeeperEntity::new, MONSTER, changing(0.6F, 1.95F), 16),
+            attributes(KeeperEntity::createKeeperAttributes), spawnRestrictions(KeeperEntity::noSpawn));
 
     // passive
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(0.8F, 1.9F), 5),
             attributes(MoaEntity::createMoaAttributes), spawnRestrictions(ParadiseLostAnimalEntity::isValidNaturalParadiseLostSpawn));
-
     public static final EntityType<PopomEntity> POPOM = add("popom", of(PopomEntity::new, CREATURE, changing(1.1F, 1.0F), 5),
             attributes(PopomEntity::createPopomAttributes), spawnRestrictions(PopomEntity::canMobSpawn));
+
+    public static final EntityType<QuintEntity> QUINT = add("quint", of(QuintEntity::new, MONSTER, changing(0.65F, 0.65F), 16),
+            attributes(QuintEntity::createQuintAttributes), spawnRestrictions(QuintEntity::canMobSpawn));
 
     // projectile
     public static final EntityType<ThrownNitraEntity> THROWN_NITRA = add("thrown_nitra", of(ThrownNitraEntity::new, MISC, changing(0.5F, 0.5F), 5));

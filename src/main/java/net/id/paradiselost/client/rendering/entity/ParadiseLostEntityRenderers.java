@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.id.paradiselost.client.rendering.entity.hostile.EnvoyEntityRenderer;
+import net.id.paradiselost.client.rendering.entity.hostile.KeeperEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.hostile.QuintEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.MoaEntityRenderer;
 import net.id.paradiselost.client.rendering.entity.passive.PopomEntityRenderer;
@@ -22,12 +23,13 @@ public class ParadiseLostEntityRenderers {
 
         // hostile
         register(ParadiseLostEntityTypes.ENVOY, EnvoyEntityRenderer::new);
-        register(ParadiseLostEntityTypes.QUINT, QuintEntityRenderer::new);
+        register(ParadiseLostEntityTypes.KEEPER, KeeperEntityRenderer::new);
 
         // passive
         register(ParadiseLostEntityTypes.MOA, MoaEntityRenderer::new);
-
         register(ParadiseLostEntityTypes.POPOM, PopomEntityRenderer::new);
+
+        register(ParadiseLostEntityTypes.QUINT, QuintEntityRenderer::new);
 
         // projectile
         register(ParadiseLostEntityTypes.THROWN_NITRA, FlyingItemEntityRenderer::new);

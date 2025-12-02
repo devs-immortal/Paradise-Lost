@@ -2,6 +2,8 @@ package net.id.paradiselost.entities.passive;
 
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.entities.hostile.EnvoyEntity;
+import net.id.paradiselost.entities.hostile.IEnlightenable;
+import net.id.paradiselost.entities.hostile.KeeperEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
@@ -88,20 +90,21 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
 
     @Nullable
-    private EnvoyEntity findValidEnvoy(double range) {
+    private IEnlightenable findValidEnlightenTarget(double range) {
         var world = this.getWorld();
         var pos = this.getPos();
-        var possibleEnvoys = world.getOtherEntities(this, Box.of(pos, range, range, range), this::isValidEnvoy);
+        var possibleEnvoys = world.getOtherEntities(this, Box.of(pos, range, range, range), this::isEnlightenableEntity);
         for (var pe : possibleEnvoys) {
             if (this.canSee(pe)) {
-                return (EnvoyEntity) pe;
+                return (IEnlightenable) pe;
             }
         }
         return null;
     }
 
-    private boolean isValidEnvoy(Entity ent) {
-        return ent instanceof EnvoyEntity && !((EnvoyEntity) ent).getEnlightened();
+    private boolean isEnlightenableEntity(Entity ent) {
+        return (ent instanceof EnvoyEntity envoy && !envoy.getEnlightened()) ||
+         (ent instanceof KeeperEntity keeper && !keeper.getEnlightened());
     }
 
     @Override
@@ -119,7 +122,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         protected final QuintEntity mob;
         @Nullable
-        protected EnvoyEntity target;
+        protected IEnlightenable target;
 
         GetCloseToEnlightenGoal(QuintEntity mob) {
             this.setControls(EnumSet.of(Goal.Control.MOVE));
@@ -128,7 +131,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         @Override
         public boolean canStart() {
-            var valid = this.mob.findValidEnvoy(ENLIGHTEN_FOLLOW_RANGE);
+            var valid = this.mob.findValidEnlightenTarget(ENLIGHTEN_FOLLOW_RANGE);
             if (valid != null) {
                 target = valid;
                 return mob.random.nextInt(10) == 0;
@@ -145,7 +148,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
         @Override
         public void start() {
             if (target != null) {
-                mob.navigation.startMovingAlong(mob.navigation.findPathTo(target.getBlockPos(), 1), 2.0);
+                mob.navigation.startMovingAlong(mob.navigation.findPathTo(((Entity) target).getBlockPos(), 1), 2.0);
             }
         }
     }
@@ -154,7 +157,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         protected final QuintEntity mob;
         @Nullable
-        protected EnvoyEntity target;
+        protected IEnlightenable target;
 
         EnlightenGoal(QuintEntity mob) {
             this.mob = mob;
@@ -162,7 +165,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         @Override
         public boolean canStart() {
-            var valid = this.mob.findValidEnvoy(ENLIGHTEN_RANGE);
+            var valid = this.mob.findValidEnlightenTarget(ENLIGHTEN_RANGE);
             if (valid != null) {
                 target = valid;
                 return true;
@@ -173,13 +176,13 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         @Override
         public boolean shouldContinue() {
-            return (mob.navigation.isFollowingPath() || (target != null && !target.getEnlightened())) && target.distanceTo(this.mob) < 6;
+            return (mob.navigation.isFollowingPath() || (target != null && !target.getEnlightened())) && ((Entity) target).distanceTo(this.mob) < 6;
         }
 
         @Override
         public void tick() {
-            System.out.println(target.distanceTo(this.mob));
-            if (target != null && target.distanceTo(this.mob) < 1.0) {
+            System.out.println(((Entity) target).distanceTo(this.mob));
+            if (target != null && ((Entity) target).distanceTo(this.mob) < 1.0) {
                 target.setEnlightened(true);
                 this.mob.discard();
             }
@@ -188,7 +191,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
         @Override
         public void start() {
             if (target != null) {
-                mob.navigation.startMovingAlong(mob.navigation.findPathTo(target.getBlockPos(), 1), 2.0);
+                mob.navigation.startMovingAlong(mob.navigation.findPathTo(((Entity) target).getBlockPos(), 1), 2.0);
             }
         }
     }
