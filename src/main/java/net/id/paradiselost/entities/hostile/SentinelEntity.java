@@ -20,15 +20,14 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 
-public class KeeperEntity extends ZombieEntity implements IEnlightenable {
+public class SentinelEntity extends ZombieEntity implements IEnlightenable {
 
     private static final TrackedData<Boolean> ENLIGHTENED;
 
-    public KeeperEntity(EntityType<? extends KeeperEntity> entityType, World world) {
+    public SentinelEntity(EntityType<? extends SentinelEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -96,7 +95,7 @@ public class KeeperEntity extends ZombieEntity implements IEnlightenable {
         return !this.getEnlightened();
     }
 
-    public static DefaultAttributeContainer.Builder createKeeperAttributes() {
+    public static DefaultAttributeContainer.Builder createSentinelAttributes() {
         return createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.15F)
@@ -126,7 +125,7 @@ public class KeeperEntity extends ZombieEntity implements IEnlightenable {
     }
 
     static {
-        ENLIGHTENED = DataTracker.registerData(KeeperEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+        ENLIGHTENED = DataTracker.registerData(SentinelEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     }
 
 

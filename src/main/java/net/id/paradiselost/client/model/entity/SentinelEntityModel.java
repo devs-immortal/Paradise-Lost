@@ -4,15 +4,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.CrossbowPosing;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.util.Arm;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class KeeperEntityModel<T extends HostileEntity> extends BipedEntityModel<T> {
-    public KeeperEntityModel(ModelPart modelPart) {
+public class SentinelEntityModel<T extends HostileEntity> extends BipedEntityModel<T> {
+    public SentinelEntityModel(ModelPart modelPart) {
         super(modelPart);
     }
 

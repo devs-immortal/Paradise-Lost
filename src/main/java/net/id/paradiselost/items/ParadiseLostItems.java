@@ -233,7 +233,7 @@ public class ParadiseLostItems {
 
     // Creative spawn eggs
     public static final SpawnEggItem ENVOY_SPAWN_EGG = add("envoy_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.ENVOY, 0xc5b1af, 0x993c3c, new Settings()), spawnEggBehavior);
-    public static final SpawnEggItem KEEPER_SPAWN_EGG = add("keeper_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.KEEPER, 0xc5b1af, 0x993c3c, new Settings()), spawnEggBehavior); //todo
+    public static final SpawnEggItem SENTINEL_SPAWN_EGG = add("sentinel_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.SENTINEL, 0xf7eeec, 0xb97675, new Settings()), spawnEggBehavior);
     public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, new Settings()), spawnEggBehavior);
     public static final SpawnEggItem POPOM_SPAWN_EGG = add("popom_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.POPOM, 0xd984e8, 0xd4d0cf, new Settings()), spawnEggBehavior);
     public static final SpawnEggItem QUINT_SPAWN_EGG = add("quint_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.QUINT, 0xd9d0d9, 0xeeebf0, new Settings()), spawnEggBehavior);

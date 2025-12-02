@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.id.paradiselost.entities.block.FloatingBlockEntity;
 import net.id.paradiselost.entities.block.SliderEntity;
 import net.id.paradiselost.entities.hostile.EnvoyEntity;
-import net.id.paradiselost.entities.hostile.KeeperEntity;
+import net.id.paradiselost.entities.hostile.SentinelEntity;
 import net.id.paradiselost.entities.passive.QuintEntity;
 import net.id.paradiselost.entities.passive.ParadiseLostAnimalEntity;
 import net.id.paradiselost.entities.passive.PopomEntity;
@@ -40,8 +40,8 @@ public class ParadiseLostEntityTypes {
     // Hostile
     public static final EntityType<EnvoyEntity> ENVOY = add("envoy", of(EnvoyEntity::new, MONSTER, changing(0.6F, 1.95F), 10),
             attributes(EnvoyEntity::createEnvoyAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
-    public static final EntityType<KeeperEntity> KEEPER = add("keeper", of(KeeperEntity::new, MONSTER, changing(0.6F, 1.95F), 16),
-            attributes(KeeperEntity::createKeeperAttributes), spawnRestrictions(KeeperEntity::noSpawn));
+    public static final EntityType<SentinelEntity> SENTINEL = add("sentinel", of(SentinelEntity::new, MONSTER, changing(0.6F, 1.95F), 16),
+            attributes(SentinelEntity::createSentinelAttributes), spawnRestrictions(SentinelEntity::noSpawn));
 
     // passive
     public static final EntityType<MoaEntity> MOA = add("moa", of(MoaEntity::new, CREATURE, changing(0.8F, 1.9F), 5),

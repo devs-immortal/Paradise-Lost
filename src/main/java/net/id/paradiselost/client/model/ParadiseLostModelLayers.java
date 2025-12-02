@@ -28,9 +28,9 @@ public class ParadiseLostModelLayers {
     public static final EntityModelLayer ENVOY = register("envoy", "main", EnvoyEntityModel.getTexturedModelData());
     public static final EntityModelLayer ENVOY_INNER_ARMOR = register("envoy", "inner_armor", INNER_ARMOR_MODEL_DATA);
     public static final EntityModelLayer ENVOY_OUTER_ARMOR = register("envoy", "outer_armor", OUTER_ARMOR_MODEL_DATA);
-    public static final EntityModelLayer KEEPER = register("keeper", "main", BIPED_MODEL_DATA);
-    public static final EntityModelLayer KEEPER_INNER_ARMOR = register("keeper", "inner_armor", INNER_ARMOR_MODEL_DATA);
-    public static final EntityModelLayer KEEPER_OUTER_ARMOR = register("keeper", "outer_armor", OUTER_ARMOR_MODEL_DATA);
+    public static final EntityModelLayer SENTINEL = register("sentinel", "main", BIPED_MODEL_DATA);
+    public static final EntityModelLayer SENTINEL_INNER_ARMOR = register("sentinel", "inner_armor", INNER_ARMOR_MODEL_DATA);
+    public static final EntityModelLayer SENTINEL_OUTER_ARMOR = register("sentinel", "outer_armor", OUTER_ARMOR_MODEL_DATA);
     public static final EntityModelLayer QUINT = register("quint", "main", QuintEntityModel.getTexturedModelData());
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer POPOM = register("popom", "main", PopomEntityModel.getTexturedModelData());

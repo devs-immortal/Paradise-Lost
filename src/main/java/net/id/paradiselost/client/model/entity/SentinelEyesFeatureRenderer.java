@@ -3,7 +3,7 @@ package net.id.paradiselost.client.model.entity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.ParadiseLost;
-import net.id.paradiselost.entities.hostile.KeeperEntity;
+import net.id.paradiselost.entities.hostile.SentinelEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.EyesFeatureRenderer;
@@ -11,11 +11,11 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.util.math.MatrixStack;
 
 @Environment(EnvType.CLIENT)
-public class KeeperEyesFeatureRenderer<T extends KeeperEntity> extends EyesFeatureRenderer<T, KeeperEntityModel<T>> {
+public class SentinelEyesFeatureRenderer<T extends SentinelEntity> extends EyesFeatureRenderer<T, SentinelEntityModel<T>> {
 
-    private static final RenderLayer TEXTURE = RenderLayer.getEyes(ParadiseLost.locate("textures/entity/keeper/keeper_eyes.png"));
+    private static final RenderLayer TEXTURE = RenderLayer.getEyes(ParadiseLost.locate("textures/entity/sentinel/sentinel_eyes.png"));
 
-    public KeeperEyesFeatureRenderer(FeatureRendererContext<T, KeeperEntityModel<T>> featureRendererContext) {
+    public SentinelEyesFeatureRenderer(FeatureRendererContext<T, SentinelEntityModel<T>> featureRendererContext) {
         super(featureRendererContext);
     }
 

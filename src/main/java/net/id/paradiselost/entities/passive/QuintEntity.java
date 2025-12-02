@@ -3,7 +3,7 @@ package net.id.paradiselost.entities.passive;
 import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.entities.hostile.EnvoyEntity;
 import net.id.paradiselost.entities.hostile.IEnlightenable;
-import net.id.paradiselost.entities.hostile.KeeperEntity;
+import net.id.paradiselost.entities.hostile.SentinelEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
@@ -104,7 +104,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
     private boolean isEnlightenableEntity(Entity ent) {
         return (ent instanceof EnvoyEntity envoy && !envoy.getEnlightened()) ||
-         (ent instanceof KeeperEntity keeper && !keeper.getEnlightened());
+         (ent instanceof SentinelEntity sentinel && !sentinel.getEnlightened());
     }
 
     @Override

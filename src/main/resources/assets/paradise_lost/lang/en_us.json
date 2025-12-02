@@ -267,7 +267,7 @@
   "entity.paradise_lost.popom": "Popom",
   "entity.paradise_lost.quint": "Quint",
   "entity.paradise_lost.envoy": "Envoy",
-  "entity.paradise_lost.keeper": "Keeper",
+  "entity.paradise_lost.sentinel": "Calcified Sentinel",
 
   "item.paradise_lost.golden_amber": "Golden Amber",
   "item.paradise_lost.cherine": "Cherine Shard",
@@ -364,6 +364,7 @@
   "item.paradise_lost.warded_jar_quint": "Warded Jar with Quint",
   
   "item.paradise_lost.envoy_spawn_egg": "Envoy Spawn Egg",
+  "item.paradise_lost.sentinel_spawn_egg": "Calcified Sentinel Spawn Egg",
   "item.paradise_lost.moa_spawn_egg": "Moa Spawn Egg",
   "item.paradise_lost.popom_spawn_egg": "Popom Spawn Egg",
   "item.paradise_lost.quint_spawn_egg": "Quint Spawn Egg",

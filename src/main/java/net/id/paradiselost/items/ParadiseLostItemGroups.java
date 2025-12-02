@@ -370,7 +370,7 @@ public class ParadiseLostItemGroups {
                     itemGroup.add(POPOM_SPAWN_EGG);
                     itemGroup.add(QUINT_SPAWN_EGG);
                     itemGroup.add(ENVOY_SPAWN_EGG);
-                    itemGroup.add(KEEPER_SPAWN_EGG);
+                    itemGroup.add(SENTINEL_SPAWN_EGG);
                 });
     }
 
