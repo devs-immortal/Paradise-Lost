@@ -12,7 +12,7 @@ import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class EnvoyEntityRenderer extends SkeletonEntityRenderer {
+public class EnvoyEntityRenderer extends SkeletonEntityRenderer<EnvoyEntity> {
     private static final Identifier TEXTURE = ParadiseLost.locate("textures/entity/envoy/envoy.png");
     private static final Identifier TEXTURE_ENLIGHTENED = ParadiseLost.locate("textures/entity/envoy/envoy_enlightened.png");
 
@@ -21,8 +21,8 @@ public class EnvoyEntityRenderer extends SkeletonEntityRenderer {
         this.addFeature(new EnvoyEyesFeatureRenderer(this));
     }
 
-    public Identifier getTexture(AbstractSkeletonEntity entity) {
-        if (((EnvoyEntity) entity).getEnlightened()) {
+    public Identifier getTexture(EnvoyEntity entity) {
+        if (entity.getEnlightened()) {
             return TEXTURE_ENLIGHTENED;
         }
         return TEXTURE;
