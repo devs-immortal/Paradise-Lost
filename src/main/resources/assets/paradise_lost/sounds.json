@@ -326,15 +326,6 @@
     "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.death"
   },
   
-  "entity.sentinel.ambient": {
-    "sounds": [
-      {
-        "name": "entity.skeleton.ambient",
-        "type": "event"
-      }
-    ],
-    "subtitle": "subtitles.paradise_lost.entity.sentinel.ambient"
-  },
   "entity.sentinel.step": {
     "sounds": [
       {

@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "paradise_lost:palace",
+      "weight": 1
+    } 
+  ],
+  "placement": {
+    "salt": 7222,
+    "spacing": 50,
+    "separation": 18,
+    "type": "minecraft:random_spread"
+  }
+}
