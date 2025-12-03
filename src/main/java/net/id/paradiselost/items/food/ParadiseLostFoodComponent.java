@@ -20,4 +20,7 @@ public class ParadiseLostFoodComponent {
     public static final FoodComponent AMADRYS_BREAD_GLAZED = new FoodComponent.Builder().nutrition(8).saturationModifier(1.4F).build();
     public static final FoodComponent AMADRYS_BREAD_GLAZED_FILLED = new FoodComponent.Builder().nutrition(9).saturationModifier(1.4F)
             .statusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1, 0), 1.0F).build();
+    public static final FoodComponent BLACKCURRANT_PIE = new FoodComponent.Builder().nutrition(9).saturationModifier(0.2F).build();
+    public static final FoodComponent BLACKCURRANT_COOKIE = new FoodComponent.Builder().nutrition(5).saturationModifier(1.2F).build();
+    public static final FoodComponent ROOT_STEW = new FoodComponent.Builder().nutrition(10).saturationModifier(1.5F).usingConvertsTo(Items.BOWL).build();
 }

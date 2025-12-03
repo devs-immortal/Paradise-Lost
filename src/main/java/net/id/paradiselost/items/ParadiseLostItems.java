@@ -206,6 +206,11 @@ public class ParadiseLostItems {
     public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED)), compostable50);
     public static final Item AMADRYS_BREAD_GLAZED_FILLED = add("amadrys_bread_glazed_filled", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED_FILLED)), compostable50);
     public static final AliasedBlockItem SWEDROOT = add("swedroot", new AliasedBlockItem(ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
+
+    public static final Item BLACKCURRANT_PIE = add("blackcurrant_pie", new Item(food(ParadiseLostFoodComponent.BLACKCURRANT_PIE)), compostable100);
+    public static final Item BLACKCURRANT_COOKIE = add("blackcurrant_cookie", new Item(food(ParadiseLostFoodComponent.BLACKCURRANT_COOKIE)), compostable85);
+    public static final Item ROOT_STEW = add("root_stew", new Item(food(ParadiseLostFoodComponent.ROOT_STEW)));
+
     public static final AliasedBlockItem FLAXSEED = add("flaxseed", new AliasedBlockItem(ParadiseLostBlocks.FLAX, food()), compostable30);
     public static final Item MOA_MEAT = add("moa_meat", new Item(food(ParadiseLostFoodComponent.MOA_MEAT)));
     public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", new Item(food(ParadiseLostFoodComponent.COOKED_MOA_MEAT)));

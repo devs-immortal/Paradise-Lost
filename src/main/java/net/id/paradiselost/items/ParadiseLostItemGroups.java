@@ -351,13 +351,16 @@ public class ParadiseLostItemGroups {
                 entries.add(AMADRYS_BREAD);
                 entries.add(AMADRYS_BREAD_GLAZED);
                 entries.add(AMADRYS_BREAD_GLAZED_FILLED);
+                entries.add(POPOM_JELLY);
+                entries.add(BLACKCURRANT_PIE);
+                entries.add(BLACKCURRANT_COOKIE);
                 entries.add(AMADRYS_NOODLES);
+                entries.add(ROOT_STEW);
                 entries.add(SWEDROOT);
                 entries.add(SWEDROOT_PULP);
                 // meat
                 entries.add(MOA_MEAT);
                 entries.add(COOKED_MOA_MEAT);
-                entries.add(POPOM_JELLY);
                 // loot
                 entries.add(CHEESECAKE);
 

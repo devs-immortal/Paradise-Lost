@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "paradise_lost:amadrys_bread_glazed"
+    "paradise_lost:blackcurrant_cookie",
+    "paradise_lost:amadrys_bread_glazed",
+    "paradise_lost:amadrys_bread_glazed_filled"
   ]
 }
