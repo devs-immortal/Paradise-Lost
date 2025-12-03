@@ -5,6 +5,7 @@ import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
@@ -28,7 +29,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class EnvoyEntity extends SkeletonEntity implements IEnlightenable{
+public class EnvoyEntity extends SkeletonEntity implements IEnlightenable {
 
     private static final TrackedData<Boolean> ENLIGHTENED;
 
@@ -47,13 +48,20 @@ public class EnvoyEntity extends SkeletonEntity implements IEnlightenable{
 
     private void playEnlighteningEffects() {
         this.playSound(ParadiseLostSoundEvents.ENTITY_ENVOY_GETS_ENLIGHTENED);
-        if (this.getWorld().isClient) {
+        this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_WITCH_PARTICLES);
+    }
+
+    @Override
+    public void handleStatus(byte status) {
+        if (status == EntityStatuses.ADD_WITCH_PARTICLES) {
             for (int i = 0; i < 18; i++) {
                 this.getWorld().addParticle(ParadiseLostParticles.LIT_CLOUD,
                         this.getParticleX(0.2), (this.getY() + this.random.nextDouble() * 0.6) + 0.85, this.getParticleZ(0.2),
                         (this.random.nextDouble() - 0.5) * 0.3, (this.random.nextDouble() - 0.5) * 0.3, (this.random.nextDouble() - 0.5) * 0.3
                 );
             }
+        } else {
+            super.handleStatus(status);
         }
     }
 
@@ -88,7 +96,7 @@ public class EnvoyEntity extends SkeletonEntity implements IEnlightenable{
 
     public void tick() {
         if (this.getWorld().isClient && this.getEnlightened() && this.random.nextInt(3) == 0) {
-            this.getWorld().addParticle(ParticleTypes.CLOUD,
+            this.getWorld().addParticle(ParadiseLostParticles.LIT_CLOUD,
                     this.getParticleX(0.2), (this.getY() + this.random.nextDouble() * 0.6) + 0.85, this.getParticleZ(0.2),
                     (this.random.nextDouble() - 0.5) * 0.05, -this.random.nextDouble() * 0.025, (this.random.nextDouble() - 0.5) * 0.05
             );
@@ -137,7 +145,7 @@ public class EnvoyEntity extends SkeletonEntity implements IEnlightenable{
         return createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, -1)
-                .add(EntityAttributes.GENERIC_SCALE, 1.1f);
+                .add(EntityAttributes.GENERIC_SCALE, 1.05f);
 
     }
 

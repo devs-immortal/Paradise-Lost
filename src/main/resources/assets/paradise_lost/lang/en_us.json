@@ -476,6 +476,10 @@
   "subtitles.paradise_lost.entity.envoy.enlightened.step": "Enlightened Envoy walks",
   "subtitles.paradise_lost.entity.envoy.enlightened.hurt": "Enlightened Envoy hurts",
   "subtitles.paradise_lost.entity.envoy.enlightened.death": "Enlightened Envoy dies",
+  
+  "subtitles.paradise_lost.entity.sentinel.step": "Sentinel walks",
+  "subtitles.paradise_lost.entity.sentinel.hurt": "Sentinel hurts",
+  "subtitles.paradise_lost.entity.sentinel.death": "Sentinel dies",
 
   "subtitles.paradise_lost.entity.minecart.inside_levitating": "Minecart twinkles",
   "subtitles.paradise_lost.entity.minecart.rolling_levitating": "Minecart twinkles",

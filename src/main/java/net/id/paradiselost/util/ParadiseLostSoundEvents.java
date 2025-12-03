@@ -55,6 +55,10 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_DEATH = register(("entity.envoy.enlightened.death"));
     public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_STEP = register(("entity.envoy.enlightened.step"));
 
+    public static final SoundEvent ENTITY_SENTINEL_HURT = register(("entity.sentinel.hurt"));
+    public static final SoundEvent ENTITY_SENTINEL_DEATH = register(("entity.sentinel.death"));
+    public static final SoundEvent ENTITY_SENTINEL_STEP = register(("entity.sentinel.step"));
+
     public static final SoundEvent ENTITY_MINECART_INSIDE_LEVITATING = register(("entity.minecart.inside_levitating"));
     public static final SoundEvent ENTITY_MINECART_ROLLING_LEVITATING = register(("entity.minecart.rolling_levitating"));
 

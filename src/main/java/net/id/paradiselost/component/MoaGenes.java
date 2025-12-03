@@ -171,7 +171,6 @@ public class MoaGenes implements AutoSyncedComponent {
                     attributeMap.put(attribute, tag.getFloat(attribute.name()));
                 } else {
                     // AZZY THIS IS SO CURSED WHY IS JUMPING BACKWARDSSSSSSS
-                    // TODO b1.7 make this not be so weird
                     if (attribute.equals(MoaAttributes.JUMPING_STRENGTH)) {
                         attributeMap.put(attribute, attribute.max);
                     } else {

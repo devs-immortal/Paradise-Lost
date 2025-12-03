@@ -89,12 +89,6 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
         return returnValue;
     }
 
-    // @Override
-    // public boolean canBeControlledByRider() {
-    //     // TODO: A tempted system would be needed here to resolve this, similar to PigEntity and HorseEntity
-    //     return true;
-    // }
-
     @Override
     public boolean isInsideWall() {
         if (!this.getPassengerList().isEmpty()) return false;

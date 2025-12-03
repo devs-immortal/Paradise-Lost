@@ -39,6 +39,7 @@ public class QuintEntity extends PathAwareEntity implements Monster {
     public QuintEntity(EntityType<? extends QuintEntity> entityType, World world) {
         super(entityType, world);
         this.moveControl = new FlightMoveControl(this, 20, true);
+        this.experiencePoints = 20;
     }
 
     @Override
@@ -181,7 +182,6 @@ public class QuintEntity extends PathAwareEntity implements Monster {
 
         @Override
         public void tick() {
-            System.out.println(((Entity) target).distanceTo(this.mob));
             if (target != null && ((Entity) target).distanceTo(this.mob) < 1.0) {
                 target.setEnlightened(true);
                 this.mob.discard();

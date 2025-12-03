@@ -861,7 +861,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     
     @Override
     public void onInventoryChanged(Inventory sender) {
-        //TODO
+        // TODO?
     }
     
     @Override

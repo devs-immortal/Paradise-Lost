@@ -325,6 +325,44 @@
     ],
     "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.death"
   },
+  
+  "entity.sentinel.ambient": {
+    "sounds": [
+      {
+        "name": "entity.skeleton.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.sentinel.ambient"
+  },
+  "entity.sentinel.step": {
+    "sounds": [
+      {
+        "name": "block.calcite.step",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.sentinel.step"
+  },
+  "entity.sentinel.hurt": {
+    "sounds": [
+      {
+        "name": "block.basalt.place",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.sentinel.hurt"
+  },
+  "entity.sentinel.death": {
+    "sounds": [
+      {
+        "name": "entity.snow_golem.death",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.sentinel.death"
+  },
+  
   "entity.minecart.inside_levitating": {
     "sounds": [
       "paradise_lost:entity/minecart/inside_levitating"

@@ -40,7 +40,7 @@ public class ParadiseLostEntityTypes {
     // Hostile
     public static final EntityType<EnvoyEntity> ENVOY = add("envoy", of(EnvoyEntity::new, MONSTER, changing(0.6F, 1.95F), 10),
             attributes(EnvoyEntity::createEnvoyAttributes), spawnRestrictions(HostileEntity::canSpawnInDark));
-    public static final EntityType<SentinelEntity> SENTINEL = add("sentinel", of(SentinelEntity::new, MONSTER, changing(0.6F, 1.95F), 16),
+    public static final EntityType<SentinelEntity> SENTINEL = add("sentinel", of(SentinelEntity::new, MONSTER, changing(0.6F, 2.25F), 16),
             attributes(SentinelEntity::createSentinelAttributes), spawnRestrictions(SentinelEntity::noSpawn));
 
     // passive
