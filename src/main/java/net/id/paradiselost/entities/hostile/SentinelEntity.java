@@ -109,6 +109,9 @@ public class SentinelEntity extends ZombieEntity implements IEnlightenable {
 
     public boolean damage(DamageSource source, float amount) {
         if (!this.getEnlightened()) {
+            if (source.isSourceCreativePlayer()) {
+                return super.damage(source, 1000);
+            }
             return false;
         }
         return super.damage(source, amount);
