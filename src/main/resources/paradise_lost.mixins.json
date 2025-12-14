@@ -28,7 +28,6 @@
     "item.MapStateMixin",
     "item.PotionItemMixin",
     "potion.BrewingRecipeRegistryMixin",
-    "recipe.CraftingDecoratedPotRecipeMixin",
     "server.EntityTrackerEntryMixin",
     "server.PlayerManagerMixin",
     "server.ServerPlayNetworkHandlerMixin",

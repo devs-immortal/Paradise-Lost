@@ -11,6 +11,8 @@ public class ParadiseLostItemTags {
     public static final TagKey<Item> RIGHTEOUS_WEAPONS = register("righteous_weapons");
     public static final TagKey<Item> SACRED_WEAPONS = register("sacred_weapons");
     public static final TagKey<Item> IGNITING_TOOLS = register("igniting_tools");
+    public static final TagKey<Item> CALCITE_DECORATED_POT_INGREDIENTS = register("calcite_decorated_pot_ingredients");
+
 
     private static TagKey<Item> register(String id) {
         return TagKey.of(RegistryKeys.ITEM, ParadiseLost.locate(id));
