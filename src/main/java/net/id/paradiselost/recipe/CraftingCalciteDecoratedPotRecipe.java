@@ -29,19 +29,16 @@ public class CraftingCalciteDecoratedPotRecipe extends SpecialCraftingRecipe {
                     case 5:
                     case 7:
                         if (!itemStack.isIn(ParadiseLostItemTags.CALCITE_DECORATED_POT_INGREDIENTS)) {
-                            System.out.println("Not valid ingredient!" + i);
                             return false;
                         }
                         break;
                     case 4:
                         if (!itemStack.isOf(Items.CALCITE)) {
-                            System.out.println("Not calcite!" + i);
                             return false;
                         }
                         break;
                     default:
                         if (!itemStack.isOf(Items.AIR)) {
-                            System.out.println("Not air!" + i);
                             return false;
                         }
                 }
