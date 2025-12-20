@@ -236,6 +236,8 @@ public class ParadiseLostItems {
     public static final WardedJarItem WARDED_JAR_ALLAY = add("warded_jar_allay", new WardedJarItem(EntityType.ALLAY, wardedJar()));
     public static final WardedJarItem WARDED_JAR_QUINT = add("warded_jar_quint", new WardedJarItem(ParadiseLostEntityTypes.QUINT, wardedJar()));
 
+    public static final Item PALACE_KEY = add("palace_key", new Item(new Settings()));
+
     // Creative spawn eggs
     public static final SpawnEggItem ENVOY_SPAWN_EGG = add("envoy_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.ENVOY, 0xc5b1af, 0x993c3c, new Settings()), spawnEggBehavior);
     public static final SpawnEggItem SENTINEL_SPAWN_EGG = add("sentinel_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.SENTINEL, 0xf7eeec, 0xffc0bf, new Settings()), spawnEggBehavior);

@@ -299,6 +299,7 @@ public class ParadiseLostItemGroups {
                 entries.add(AUREL_POWDER_SNOW_BUCKET);
                 entries.add(AUREL_MILK_BUCKET);
                 entries.add(NITRA_BULB);
+                entries.add(PALACE_KEY);
                 // armor
                 entries.add(OLVITE_HELMET);
                 entries.add(OLVITE_HELMET_ORNATE);

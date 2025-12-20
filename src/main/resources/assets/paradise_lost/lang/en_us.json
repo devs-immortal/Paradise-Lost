@@ -104,6 +104,8 @@
   "block.paradise_lost.calcite_decorated_pot": "Calcite Decorated Pot",
   "block.paradise_lost.calcite_flower_pot": "Calcite Flower Pot",
   "block.paradise_lost.cherine_campfire": "Cherine Campfire",
+  "block.paradise_lost.palace_door": "Palace Door",
+  "block.paradise_lost.palace_door_extension": "Palace Door",
 
   "block.paradise_lost.aurel_sapling": "Aurel Sapling",
   "block.paradise_lost.aurel_log": "Aurel Log",
@@ -362,6 +364,8 @@
   "item.paradise_lost.aurel_water_bucket": "Aurel Water Bucket",
   "item.paradise_lost.aurel_powder_snow_bucket": "Aurel Powder Snow Bucket",
   "item.paradise_lost.aurel_milk_bucket": "Aurel Milk Bucket",
+  
+  "item.paradise_lost.palace_key": "Palace Key",
   
   "item.paradise_lost.warded_jar": "Warded Jar",
   "item.paradise_lost.warded_jar_allay": "Warded Jar with Allay",

@@ -3,6 +3,7 @@ package net.id.paradiselost.blocks.mechanical;
 import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.blocks.blockentity.IncubatorBlockEntity;
 import net.id.paradiselost.blocks.blockentity.PalaceDoorBlockEntity;
+import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -31,8 +32,9 @@ public class PalaceDoorBlock extends BlockWithEntity {
 
     @Override
     public ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!player.isSneaking() && world.getBlockEntity(pos) instanceof PalaceDoorBlockEntity be) {
-            be.open();
+        if (!player.isSneaking() && stack.isOf(ParadiseLostItems.PALACE_KEY) && world.getBlockEntity(pos) instanceof PalaceDoorBlockEntity be) {
+            stack.decrementUnlessCreative(1, player);
+            be.open(true);
             // TODO!
             return ItemActionResult.CONSUME;
         }

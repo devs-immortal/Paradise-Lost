@@ -47,17 +47,21 @@ public class PalaceDoorBlockEntityRenderer implements BlockEntityRenderer<Palace
     public void render(PalaceDoorBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int light, int overlay) {
         VertexConsumer vertexConsumer = DOORS.getVertexConsumer(vertexConsumerProvider, RenderLayer::getEntityCutout);
         matrices.push();
-        matrices.multiply(RotationAxis.POSITIVE_X.rotation(3.141592653589793f), 0.0F, 0.0F, 0.0F);
+        matrices.multiply(RotationAxis.POSITIVE_X.rotation(3.141592653589793F), 0.0F, 0.0F, 0.0F);
+        if (false) { //TODO: rotated doors
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotation(1.57079632679F), 0.0F, 0.0F, 0.0F);
+            matrices.translate(0.0, 0.0, 1.0);
+        }
         // left door
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_Y.rotation(entity.getDoorAngle()), -1.0F, 0.0F, -0.5F);
-        matrices.translate(0.5, 0.5, -0.5);
+        matrices.translate(0.5, 2.5, -0.5);
         door.render(matrices, vertexConsumer, light, overlay);
         matrices.pop();
         // right door
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_Y.rotation(-(entity.getDoorAngle()) + 3.141592653589793F), 2F, 0.0F, -0.5F);
-        matrices.translate(3.5, 0.5, -0.5);
+        matrices.translate(3.5, 2.5, -0.5);
         door.render(matrices, vertexConsumer, light, overlay);
         matrices.pop();
         matrices.pop();

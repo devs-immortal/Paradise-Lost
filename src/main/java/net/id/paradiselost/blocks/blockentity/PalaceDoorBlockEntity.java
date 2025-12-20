@@ -7,6 +7,8 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,7 +30,7 @@ public class PalaceDoorBlockEntity extends BlockEntity {
         this.doorOpened = DoorOpenDirection.Closed;
     }
 
-    public void open() {
+    public void open(boolean out) {
         if (this.world != null && !this.world.isClient()) {
             this.world.addSyncedBlockEvent(this.getPos(), this.getCachedState().getBlock(), 1, DoorOpenDirection.Out.ordinal());
         }
@@ -39,6 +41,8 @@ public class PalaceDoorBlockEntity extends BlockEntity {
         if (this.world != null && type == 1) {
             this.doorOpened = DoorOpenDirection.values()[data];
             this.doorOpenTime = this.world.getTime();
+            this.world.playSound(this.pos.getX(), this.pos.getY()-2, this.pos.getZ(), SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.BLOCKS, 2.0F, 1.0F, true);
+            markDirty();
             return true;
         } else {
             return super.onSyncedBlockEvent(type, data);
@@ -47,11 +51,10 @@ public class PalaceDoorBlockEntity extends BlockEntity {
 
     public float getDoorAngle() {
         if (this.getWorld() == null || this.doorOpened == DoorOpenDirection.Closed) return 0;
+        var time = this.getWorld().getTime() - this.doorOpenTime;
         if (this.doorOpened == DoorOpenDirection.In) {
-            var time = this.getWorld().getTime() - this.doorOpenTime;
             return (float) Math.min(time/DOOR_OPEN_SPEED, Math.PI/2.0);
         } else {
-            var time = this.getWorld().getTime() - this.doorOpenTime;
             return -(float) Math.min(time/DOOR_OPEN_SPEED, Math.PI/2.0);
         }
     }
@@ -59,11 +62,13 @@ public class PalaceDoorBlockEntity extends BlockEntity {
     @Override
     public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.writeNbt(nbt, registryLookup);
+        nbt.putInt("doorOpened", this.doorOpened.ordinal());
     }
 
     @Override
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
+        this.doorOpened = DoorOpenDirection.values()[nbt.getInt("doorOpened")];
     }
 
     @Override
