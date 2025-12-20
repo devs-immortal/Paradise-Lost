@@ -22,7 +22,7 @@ public class OrnateOlviteArmorRenderer implements ArmorRenderer {
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {
         if (armorModel == null) {
-            armorModel = new OrnateOlviteArmorModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(ParadiseLostModelLayers.PHOENIX_ARMOR));
+            armorModel = new OrnateOlviteArmorModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(ParadiseLostModelLayers.ORNATE_OLVITE_ARMOR));
         }
         contextModel.copyBipedStateTo(armorModel);
         armorModel.setVisible(false);

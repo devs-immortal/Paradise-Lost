@@ -7,11 +7,11 @@ import net.fabricmc.fabric.mixin.client.rendering.EntityModelLayersAccessor;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.client.model.armor.OrnateOlviteArmorModel;
 import net.id.paradiselost.client.model.entity.*;
+import net.id.paradiselost.client.rendering.block.PalaceDoorBlockEntityRenderer;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.ZombieEntityModel;
 import net.minecraft.util.Identifier;
 
 import java.util.Map;
@@ -35,7 +35,9 @@ public class ParadiseLostModelLayers {
     public static final EntityModelLayer MOA = register("moa", "main", MoaModel.getTexturedModelData());
     public static final EntityModelLayer POPOM = register("popom", "main", PopomEntityModel.getTexturedModelData());
 
-    public static final EntityModelLayer PHOENIX_ARMOR = register("phoenix_armor", "main", OrnateOlviteArmorModel.getTexturedModelData());
+    public static final EntityModelLayer ORNATE_OLVITE_ARMOR = register("ornate_olvite", "main", OrnateOlviteArmorModel.getTexturedModelData());
+
+    public static final EntityModelLayer PALACE_DOOR = register("palace_door", "main", PalaceDoorBlockEntityRenderer.getTexturedModelData());
 
 
     public static EntityModelLayer register(Identifier id, String layer, TexturedModelData data) {

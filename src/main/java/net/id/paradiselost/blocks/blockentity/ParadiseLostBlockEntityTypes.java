@@ -26,6 +26,7 @@ public class ParadiseLostBlockEntityTypes {
             ParadiseLostBlocks.WISTERIA_SIGNS.hangingSign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallHangingSign()
     ).build();
     public static final BlockEntityType<CalciteDecoratedPotBlockEntity> CALCITE_DECORATED_POT = BlockEntityType.Builder.create(CalciteDecoratedPotBlockEntity::new, ParadiseLostBlocks.CALCITE_DECORATED_POT).build();
+    public static final BlockEntityType<PalaceDoorBlockEntity> PALACE_DOOR = BlockEntityType.Builder.create(PalaceDoorBlockEntity::new, ParadiseLostBlocks.PALACE_DOOR).build();
 
     public static void init() {
         register("food_bowl", FOOD_BOWL);
@@ -35,6 +36,7 @@ public class ParadiseLostBlockEntityTypes {
         register("sign", SIGN);
         register("hanging_sign", HANGING_SIGN);
         register("calcite_decorated_pot", CALCITE_DECORATED_POT);
+        register("palace_door", PALACE_DOOR);
         BlockEntityType.BRUSHABLE_BLOCK.addSupportedBlock(ParadiseLostBlocks.SUSPICIOUS_DIRT);
         BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.AUREL_SIGNS.hangingSign());
         BlockEntityType.HANGING_SIGN.addSupportedBlock(ParadiseLostBlocks.AUREL_SIGNS.wallHangingSign());
