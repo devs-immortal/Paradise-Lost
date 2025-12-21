@@ -48,10 +48,9 @@ public class PalaceDoorBlockEntityRenderer implements BlockEntityRenderer<Palace
         VertexConsumer vertexConsumer = DOORS.getVertexConsumer(vertexConsumerProvider, RenderLayer::getEntityCutout);
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_X.rotation(3.141592653589793F), 0.0F, 0.0F, 0.0F);
-        if (false) { //TODO: rotated doors
-            matrices.multiply(RotationAxis.POSITIVE_Y.rotation(1.57079632679F), 0.0F, 0.0F, 0.0F);
-            matrices.translate(0.0, 0.0, 1.0);
-        }
+        matrices.translate(0.0, 0.0, 0.0);
+
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotation((float) Math.toRadians(entity.getRotation())), 0.5F, 0.0F, -0.5F);
         // left door
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_Y.rotation(entity.getDoorAngle()), -1.0F, 0.0F, -0.5F);
@@ -64,6 +63,7 @@ public class PalaceDoorBlockEntityRenderer implements BlockEntityRenderer<Palace
         matrices.translate(3.5, 2.5, -0.5);
         door.render(matrices, vertexConsumer, light, overlay);
         matrices.pop();
+
         matrices.pop();
     }
 
