@@ -217,6 +217,7 @@ public class ParadiseLostItems {
     public static final Item POPOM_JELLY = add("popom_jelly", new Item(food(ParadiseLostFoodComponent.POPOM_JELLY)), compostable15);
 
     public static final ParadiseLostPortalItem PARADISE_LOST_PORTAL = add("portal", new ParadiseLostPortalItem(new Settings()));
+    public static final PalaceDoorPlacerItem PALACE_DOOR_PLACER = add("palace_door_placer", new PalaceDoorPlacerItem(new Settings()));
 
     public static final MoaEggItem MOA_EGG = add("moa_egg", new MoaEggItem(new Settings().maxCount(1)));
     public static final BlockItem NITRA_BUNCH = add(ParadiseLostBlocks.NITRA_BUNCH, fuel(3200));

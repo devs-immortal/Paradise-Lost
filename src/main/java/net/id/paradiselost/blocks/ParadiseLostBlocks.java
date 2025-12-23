@@ -163,6 +163,7 @@ public class ParadiseLostBlocks {
     public static final CampfireBlock CHERINE_CAMPFIRE = add("cherine_campfire", new CherineCampfireBlock(false, 1, copy(CAMPFIRE).instrument(NoteBlockInstrument.BASS)), cutoutRenderLayer);
 
     public static final PalaceDoorBlock PALACE_DOOR = add("palace_door", new PalaceDoorBlock(copy(BEDROCK).nonOpaque().mapColor(MapColor.YELLOW)));
+    public static final PalaceDoorExtensionBlock PALACE_DOOR_EXTENSION = add("palace_door_extension", new PalaceDoorExtensionBlock(copy(BEDROCK).nonOpaque().mapColor(MapColor.YELLOW)));
 
     protected static Settings leafPile() {
         return create().strength(0.2f).sounds(BlockSoundGroup.VINE).replaceable().nonOpaque().suffocates(never).blockVision(never).pistonBehavior(PistonBehavior.DESTROY);
