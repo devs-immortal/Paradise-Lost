@@ -32,6 +32,21 @@
 
 
 
+  "block.palace_door.open": {
+    "sounds": [
+      "paradise_lost:block/palace_door/click_open"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.palace_door.open"
+  },
+  "block.palace_door.unlock": {
+    "sounds": [
+      "paradise_lost:block/palace_door/open"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.palace_door.unlock"
+  },
+
+
+
   "block.surtrum_air.rush": {
     "sounds": [
       {

@@ -18,6 +18,8 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent BLOCK_PORTAL_AMBIENT = register("block.portal.ambient");
     public static final SoundEvent BLOCK_PORTAL_TRAVEL = register("block.portal.travel");
     public static final SoundEvent BLOCK_PORTAL_TRIGGER = register("block.portal.trigger");
+    public static final SoundEvent BLOCK_PALACE_DOOR_OPEN = register("block.palace_door.open");
+    public static final SoundEvent BLOCK_PALACE_DOOR_UNLOCK = register("block.palace_door.unlock");
     public static final SoundEvent BLOCK_SURTRUM_RUSH = register("block.surtrum_air.rush");
     public static final SoundEvent BLOCK_SURTRUM_CRACKLE = register("block.surtrum_air.crackle");
 

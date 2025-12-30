@@ -458,6 +458,9 @@
   "subtitles.paradise_lost.block.portal.travel": "Paradise portal noise fades",
   "subtitles.paradise_lost.block.portal.trigger": "Paradise portal noise intensifies",
   
+  "subtitles.paradise_lost.block.palace_door.open": "Door creaks",
+  "subtitles.paradise_lost.block.palace_door.unlock": "Lock clicks",
+  
   "subtitles.paradise_lost.block.surtrum_air.rush": "Hot air rushes out",
   "subtitles.paradise_lost.block.surtrum_air.crackle": "Meteorite Crackles",
 
