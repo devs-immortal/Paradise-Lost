@@ -1,0 +1,15 @@
+{
+	"name": "paradise_lost:palace/corners/corners_2",
+	"fallback": "minecraft:empty",
+	"elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/corners/corner_2",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}

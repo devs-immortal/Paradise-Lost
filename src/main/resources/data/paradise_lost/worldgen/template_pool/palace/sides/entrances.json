@@ -6,7 +6,25 @@
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:palace/sides/entrance_1",
+        "location": "paradise_lost:palace/sides/entrance_1_1",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/sides/entrance_1_2",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/sides/entrance_1_3",
         "projection": "rigid",
         "processors": "minecraft:empty"
       }
