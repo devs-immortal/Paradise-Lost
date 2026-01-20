@@ -25,7 +25,7 @@
   "start_pool": "paradise_lost:palace/starts",
   "size": 5,
   "start_height": {
-    "absolute": 150
+    "absolute": 155
   },
   "max_distance_from_center": 128,
   "dimension_padding": 50,
