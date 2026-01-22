@@ -1,0 +1,78 @@
+{
+	"name": "paradise_lost:palace/corners/bottoms",
+	"fallback": "minecraft:empty",
+	"elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/corners/corner_1_bottom",
+        "projection": "rigid",
+        "processors": "paradise_lost:palace_dissolve_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/corners/corner_2_bottom",
+        "projection": "rigid",
+        "processors": "paradise_lost:palace_dissolve_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/corners/corner_3_bottom",
+        "projection": "rigid",
+        "processors": "paradise_lost:palace_dissolve_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/sides/back_1_bottom",
+        "projection": "rigid",
+        "processors": "paradise_lost:palace_dissolve_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/sides/entrance_1_bottom",
+        "projection": "rigid",
+        "processors": "paradise_lost:palace_dissolve_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/sides/side_1_bottom",
+        "projection": "rigid",
+        "processors": "paradise_lost:palace_dissolve_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/sides/side_2_bottom",
+        "projection": "rigid",
+        "processors": "paradise_lost:palace_dissolve_proc"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/sides/side_3_bottom",
+        "projection": "rigid",
+        "processors": "paradise_lost:palace_dissolve_proc"
+      }
+    }
+  ]
+}
