@@ -79,6 +79,11 @@ public class SentinelEntity extends ZombieEntity implements IEnlightenable {
     }
 
     @Override
+    public boolean cannotDespawn() {
+        return true;
+    }
+    
+    @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
         this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(ParadiseLostItems.SOUL_BLADE));
     }
