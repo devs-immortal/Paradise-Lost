@@ -126,7 +126,7 @@ public class ParadiseLostItems {
     public static final SwordItem GLAZED_GOLD_SWORD = add("glazed_gold_sword", new SwordItem(ParadiseLostToolMaterials.GLAZED_GOLD, sword(ParadiseLostToolMaterials.GLAZED_GOLD, 3, -2.4f)));
     public static final HoeItem GLAZED_GOLD_HOE = add("glazed_gold_hoe", new HoeItem(ParadiseLostToolMaterials.GLAZED_GOLD, hoe(ParadiseLostToolMaterials.GLAZED_GOLD, -2, -2.0f)));
 
-    public static final SwordItem SOUL_BLADE = add("soul_blade", new SoulSwordItem(ParadiseLostToolMaterials.SOUL_BLADE, sword(ParadiseLostToolMaterials.SOUL_BLADE, 1, -2.8f)));
+    public static final SwordItem SOUL_BLADE = add("soul_blade", new SoulSwordItem(ParadiseLostToolMaterials.SOUL_BLADE, sword(ParadiseLostToolMaterials.SOUL_BLADE, 1, -2.8f).rarity(Rarity.EPIC)));
 
     // misc
     public static final SpyglassItem OLVITE_SPYGLASS = add("olvite_spyglass", new SpyglassItem(unstackableTool()));
