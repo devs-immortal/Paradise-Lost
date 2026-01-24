@@ -79,6 +79,10 @@ public class SentinelEntity extends ZombieEntity implements IEnlightenable {
     }
 
     @Override
+    public void setBaby(boolean baby) {
+    }
+
+    @Override
     public boolean cannotDespawn() {
         return true;
     }
