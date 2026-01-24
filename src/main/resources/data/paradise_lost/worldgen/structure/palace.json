@@ -8,22 +8,16 @@
       "spawns": [
         {
           "type": "paradise_lost:envoy",
-          "maxCount": 3,
+          "maxCount": 4,
           "minCount": 2,
           "weight": 10
-        },
-        {
-          "type": "paradise_lost:quint",
-          "maxCount": 2,
-          "minCount": 1,
-          "weight": 5
         }
       ]
     }
   },
   "terrain_adaptation": "none",
   "start_pool": "paradise_lost:palace/starts",
-  "size": 5,
+  "size": 6,
   "start_height": {
     "absolute": 155
   },
