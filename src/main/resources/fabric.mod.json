@@ -19,7 +19,7 @@
   },
   "depends": {
     "fabricloader": ">=0.12.12",
-    "minecraft": ">=1.21.0",
+    "minecraft": ">=1.21.1",
     "java": ">=21",
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*"
@@ -52,7 +52,7 @@
     ],
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.com/invite/TvuNtNYEvr"
+        "modmenu.discord": "https://discord.gg/qASmCe9a"
       }
     }
   }
