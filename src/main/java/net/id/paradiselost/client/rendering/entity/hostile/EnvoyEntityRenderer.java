@@ -8,7 +8,6 @@ import net.id.paradiselost.client.model.entity.EnvoyEyesFeatureRenderer;
 import net.id.paradiselost.entities.hostile.EnvoyEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.SkeletonEntityRenderer;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)

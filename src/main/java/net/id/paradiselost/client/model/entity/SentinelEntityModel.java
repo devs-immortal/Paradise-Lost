@@ -36,7 +36,7 @@ public class SentinelEntityModel<T extends HostileEntity> extends BipedEntityMod
         this.leftArm.pivotX = 5.0F;
         float k = 1.0F;
         if (bl) {
-            k = (float)livingEntity.getVelocity().lengthSquared();
+            k = (float) livingEntity.getVelocity().lengthSquared();
             k /= 0.2F;
             k *= k * k;
         }
@@ -65,7 +65,7 @@ public class SentinelEntityModel<T extends HostileEntity> extends BipedEntityMod
             this.leftLeg.yaw = (float) (-Math.PI / 10);
             this.leftLeg.roll = -0.07853982F;
         }
-//
+
         this.rightArm.yaw = 0.0F;
         this.leftArm.yaw = 0.0F;
 

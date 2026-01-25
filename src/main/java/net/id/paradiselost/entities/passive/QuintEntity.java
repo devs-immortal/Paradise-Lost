@@ -104,8 +104,8 @@ public class QuintEntity extends PathAwareEntity implements Monster {
     }
 
     private boolean isEnlightenableEntity(Entity ent) {
-        return (ent instanceof EnvoyEntity envoy && !envoy.getEnlightened()) ||
-         (ent instanceof SentinelEntity sentinel && !sentinel.getEnlightened());
+        return (ent instanceof EnvoyEntity envoy && !envoy.getEnlightened())
+                || (ent instanceof SentinelEntity sentinel && !sentinel.getEnlightened());
     }
 
     @Override

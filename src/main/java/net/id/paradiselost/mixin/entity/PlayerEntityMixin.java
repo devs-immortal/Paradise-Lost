@@ -8,7 +8,6 @@ import net.id.paradiselost.util.MiscUtil;
 import net.id.paradiselost.util.ParadiseLostCriteria;
 import net.id.paradiselost.util.ParadiseLostDamageTypes;
 import net.id.paradiselost.world.dimension.ParadiseLostDimension;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;

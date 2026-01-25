@@ -66,12 +66,12 @@ repositories {
 
     maven {
         name = "Sherds API"
-        url = uri("https://dl.cloudsmith.io/public/thomasglasser/sherdsapi/maven")
+        url = uri("https://dl.cloudsmith.io/public/thomasglasser/sherdsapi/maven/")
     }
 
     maven {
         name = "Sherds API (Tommylib)"
-        url = uri("https://dl.cloudsmith.io/public/thomasglasser/tommylib/maven")
+        url = uri("https://dl.cloudsmith.io/public/thomasglasser/tommylib/maven/")
     }
 
     maven {
@@ -131,7 +131,7 @@ dependencies {
 
     modImplementation(
             group = "dev.thomasglasser.sherdsapi",
-            name = "sherdsapi-fabric-1.21",
+            name = "sherdsapi-fabric-1.21.1",
             version = sherdsApiVersion,
     ).also(::include)
 

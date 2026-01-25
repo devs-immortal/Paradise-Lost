@@ -100,7 +100,7 @@ public abstract class SurfaceBuilderMixin {
                 for (int k = j; k >= chunk.getBottomY(); k--) {
                     if (!column.getState(k).isAir()) {
                         column.setState(k, this.defaultState);
-                        column.setState(k-1, this.defaultState);
+                        column.setState(k - 1, this.defaultState);
                         break;
                     }
                     if (e > 3.2 && steps == 0) {
@@ -108,7 +108,7 @@ public abstract class SurfaceBuilderMixin {
                     } else if (e > 3.3 && steps == 1) {
                         column.setState(k, ParadiseLostBlocks.DIRT.getDefaultState());
                     } else {
-                        column.setState(k, (steps > preHeight/2) ? this.defaultState : Blocks.CALCITE.getDefaultState());
+                        column.setState(k, (steps > preHeight / 2) ? this.defaultState : Blocks.CALCITE.getDefaultState());
                     }
                     steps++;
                 }

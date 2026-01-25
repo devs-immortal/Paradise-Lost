@@ -4,8 +4,6 @@ import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.blocks.mechanical.PalaceDoorBlock;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FallingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -25,7 +23,7 @@ import org.joml.Vector3f;
 public class PalaceDoorBlockEntity extends BlockEntity {
 
     private static final float DOOR_OPEN_SPEED = 66F;
-    private static final float MAX_DOOR_ANGLE = (float) (Math.PI/2.0);
+    private static final float MAX_DOOR_ANGLE = (float) (Math.PI / 2.0);
     private static final DustParticleEffect DUST_PARTICLE = new DustParticleEffect(new Vector3f(0.69F, 0.659F, 0.627F), 1.0F);
 
     private boolean doorOpened;
@@ -54,8 +52,8 @@ public class PalaceDoorBlockEntity extends BlockEntity {
         } else if (this.world != null && type == 1 && data == 1) {
             this.doorOpened = true;
             this.doorOpenTime = this.world.getTime();
-            this.world.playSound(this.pos.getX(), this.pos.getY()-2, this.pos.getZ(), ParadiseLostSoundEvents.BLOCK_PALACE_DOOR_OPEN, SoundCategory.BLOCKS, 2.0F, 1.0F, true);
-            this.world.playSound(this.pos.getX(), this.pos.getY()-2, this.pos.getZ(), ParadiseLostSoundEvents.BLOCK_PALACE_DOOR_UNLOCK, SoundCategory.BLOCKS, 2.0F, 1.0F, true);
+            this.world.playSound(this.pos.getX(), this.pos.getY() - 2, this.pos.getZ(), ParadiseLostSoundEvents.BLOCK_PALACE_DOOR_OPEN, SoundCategory.BLOCKS, 2.0F, 1.0F, true);
+            this.world.playSound(this.pos.getX(), this.pos.getY() - 2, this.pos.getZ(), ParadiseLostSoundEvents.BLOCK_PALACE_DOOR_UNLOCK, SoundCategory.BLOCKS, 2.0F, 1.0F, true);
             markDirty();
             return true;
         } else {
@@ -86,7 +84,7 @@ public class PalaceDoorBlockEntity extends BlockEntity {
         if (this.doorFullyOpened) {
             return MAX_DOOR_ANGLE;
         } else if (this.doorOpened) {
-            var doorAngle = time/DOOR_OPEN_SPEED;
+            var doorAngle = time / DOOR_OPEN_SPEED;
             if (doorAngle > MAX_DOOR_ANGLE) {
                 this.world.addSyncedBlockEvent(this.getPos(), this.getCachedState().getBlock(), 1, 0);
                 return MAX_DOOR_ANGLE;

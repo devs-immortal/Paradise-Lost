@@ -1,7 +1,9 @@
 package net.id.paradiselost.items;
 
 import com.chocohead.mm.api.ClassTinkerers;
+import dev.thomasglasser.sherdsapi.api.SherdsApiDataComponents;
 import net.fabricmc.fabric.impl.client.rendering.ArmorRendererRegistryImpl;
+import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
 import net.id.paradiselost.client.rendering.armor.OrnateOlviteArmorRenderer;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
@@ -74,8 +76,8 @@ public class ParadiseLostItems {
     public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource()), compostable30);
 
     // Loot
-    public static final Item SOL_POTTERY_SHERD = add("sol_pottery_sherd", new Item(resource()));
-    public static final Item COO_POTTERY_SHERD = add("coo_pottery_sherd", new Item(resource()));
+    public static final Item SOL_POTTERY_SHERD = add("sol_pottery_sherd", new Item(resource().component(SherdsApiDataComponents.SHERD_PATTERN.get(), ParadiseLost.locate("sol_pottery_pattern"))));
+    public static final Item COO_POTTERY_SHERD = add("coo_pottery_sherd", new Item(resource().component(SherdsApiDataComponents.SHERD_PATTERN.get(), ParadiseLost.locate("coo_pottery_pattern"))));
 
     private static Settings tool() {
         return new Settings();

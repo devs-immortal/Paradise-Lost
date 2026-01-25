@@ -1,6 +1,5 @@
 package net.id.paradiselost.blocks.decorative;
 
-import net.id.paradiselost.blocks.blockentity.ParadiseHangingSignBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WallHangingSignBlock;
 import net.minecraft.block.WoodType;

@@ -1,17 +1,12 @@
 package net.id.paradiselost.blocks.mechanical;
 
-import net.id.paradiselost.blocks.ParadiseLostBlocks;
-import net.id.paradiselost.blocks.blockentity.PalaceDoorBlockEntity;
-import net.id.paradiselost.items.ParadiseLostItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.BlockMirror;
@@ -23,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 
 public class PalaceDoorExtensionBlock extends Block {
 
