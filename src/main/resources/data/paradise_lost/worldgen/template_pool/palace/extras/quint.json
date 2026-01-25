@@ -1,0 +1,15 @@
+{
+	"name": "paradise_lost:palace/extras/quint",
+	"fallback": "minecraft:empty",
+	"elements": [
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:palace/extras/quint",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}
