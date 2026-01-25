@@ -4,6 +4,7 @@ import net.id.paradiselost.client.rendering.particle.ParadiseLostParticles;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
+import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -26,6 +27,8 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 
 public class SentinelEntity extends ZombieEntity implements IEnlightenable {
@@ -78,8 +81,10 @@ public class SentinelEntity extends ZombieEntity implements IEnlightenable {
         return false;
     }
 
+    @Nullable
     @Override
-    public void setBaby(boolean baby) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
+        return super.initialize(world, difficulty, spawnReason, new ZombieEntity.ZombieData(false, false));
     }
 
     @Override
