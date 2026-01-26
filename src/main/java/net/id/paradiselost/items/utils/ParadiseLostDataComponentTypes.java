@@ -16,6 +16,7 @@ import net.minecraft.util.Uuids;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 import static net.id.paradiselost.ParadiseLost.locate;
@@ -29,7 +30,11 @@ public class ParadiseLostDataComponentTypes {
     public static final ComponentType<XpCircletChargeComponent> XP_CIRCLET_CHARGE = register("xp_circlet", (builder) -> builder.codec(XpCircletChargeComponent.CODEC).packetCodec(XpCircletChargeComponent.PACKET_CODEC));
     public static final ComponentType<CollectedSoulsComponent> COLLECTED_SOULS = register("collected_souls", (builder) -> builder.codec(CollectedSoulsComponent.CODEC).packetCodec(CollectedSoulsComponent.PACKET_CODEC));
 
-    // Util
+    // SHERDSAPI STANDIN
+    public static final Supplier<ComponentType<Identifier>> SHERDS_STANDIN = () -> (ComponentType<Identifier>) Registries.DATA_COMPONENT_TYPE.getEntry(Identifier.of("sherdsapi", "sherd_pattern")).get().value();
+    public static final boolean SHERDS_AVAILABLE = Registries.DATA_COMPONENT_TYPE.getEntry(Identifier.of("sherdsapi", "sherd_pattern")).isPresent();
+
+    // Util sherdsapi:sherd_pattern
 
     private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, locate(id), builderOperator.apply(ComponentType.builder()).build());

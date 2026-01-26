@@ -1,7 +1,6 @@
 package net.id.paradiselost.items;
 
 import com.chocohead.mm.api.ClassTinkerers;
-import dev.thomasglasser.sherdsapi.api.SherdsApiDataComponents;
 import net.fabricmc.fabric.impl.client.rendering.ArmorRendererRegistryImpl;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
@@ -20,6 +19,7 @@ import net.id.paradiselost.items.tools.base_tools.*;
 import net.id.paradiselost.items.tools.bloodstone.CherineBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.SurtrumBloodstoneItem;
 import net.id.paradiselost.items.tools.bloodstone.OlviteBloodstoneItem;
+import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
@@ -76,8 +76,8 @@ public class ParadiseLostItems {
     public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource()), compostable30);
 
     // Loot
-    public static final Item SOL_POTTERY_SHERD = add("sol_pottery_sherd", new Item(resource().component(SherdsApiDataComponents.SHERD_PATTERN.get(), ParadiseLost.locate("sol_pottery_pattern"))));
-    public static final Item COO_POTTERY_SHERD = add("coo_pottery_sherd", new Item(resource().component(SherdsApiDataComponents.SHERD_PATTERN.get(), ParadiseLost.locate("coo_pottery_pattern"))));
+    public static final DeferedSherdItem SOL_POTTERY_SHERD = add("sol_pottery_sherd", new DeferedSherdItem(resource()));
+    public static final DeferedSherdItem COO_POTTERY_SHERD = add("coo_pottery_sherd", new DeferedSherdItem(resource()));
 
     private static Settings tool() {
         return new Settings();

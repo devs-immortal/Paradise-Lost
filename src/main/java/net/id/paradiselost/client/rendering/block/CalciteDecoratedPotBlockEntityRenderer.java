@@ -1,8 +1,9 @@
 package net.id.paradiselost.client.rendering.block;
 
-import dev.thomasglasser.sherdsapi.api.SherdsApiDataComponents;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.blockentity.CalciteDecoratedPotBlockEntity;
+import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.block.DecoratedPotPatterns;
 import net.minecraft.block.entity.Sherds;
 import net.minecraft.client.model.Dilation;
@@ -105,9 +106,10 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
                 var textureIdentifier = normalSprite.getTextureId();
                 var calciteSprite = new SpriteIdentifier(normalSprite.getAtlasId(), Identifier.of(textureIdentifier.getNamespace(), textureIdentifier.getPath() + "_calcite"));
                 return calciteSprite;
-            } else if (sherd.get().getComponents().contains(SherdsApiDataComponents.SHERD_PATTERN.get())) {
-                var sherdComponent = sherd.get().getComponents().get(SherdsApiDataComponents.SHERD_PATTERN.get());
-                return new SpriteIdentifier(DECORATED_POT_ATLAS_TEXTURE, Identifier.of(sherdComponent.getNamespace(), "entity/decorated_pot/" + sherdComponent.getPath() + "_calcite"));
+            } else if (sherd.get() == ParadiseLostItems.SOL_POTTERY_SHERD) {
+                return new SpriteIdentifier(DECORATED_POT_ATLAS_TEXTURE, ParadiseLost.locate("entity/decorated_pot/sol_pottery_pattern_calcite"));
+            } else if (sherd.get() == ParadiseLostItems.COO_POTTERY_SHERD) {
+                return new SpriteIdentifier(DECORATED_POT_ATLAS_TEXTURE, ParadiseLost.locate("entity/decorated_pot/coo_pottery_pattern_calcite"));
             }
         }
 

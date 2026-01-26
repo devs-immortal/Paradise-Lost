@@ -130,12 +130,6 @@ dependencies {
     ).also(::include)
 
     modImplementation(
-            group = "dev.thomasglasser.sherdsapi",
-            name = "sherdsapi-fabric-1.21.1",
-            version = sherdsApiVersion,
-    ).also(::include)
-
-    modImplementation(
             group = "net.fabricmc.fabric-api",
             name = "fabric-api",
             version = fabricVersion,
