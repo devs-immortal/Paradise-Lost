@@ -86,6 +86,8 @@ public abstract class FlowerPotBlockMixin extends Block {
             return drops.stream().map(itemStack -> {
                 if (itemStack.isOf(Items.FLOWER_POT)) {
                     return new ItemStack(ParadiseLostItems.CALCITE_FLOWER_POT, itemStack.getCount());
+                } else if (itemStack.isOf(Items.BRICK)) {
+                    return new ItemStack(Items.CALCITE, itemStack.getCount());
                 } else {
                     return itemStack;
                 }
