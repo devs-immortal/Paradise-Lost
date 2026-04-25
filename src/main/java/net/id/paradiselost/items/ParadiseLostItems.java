@@ -546,7 +546,6 @@ public class ParadiseLostItems {
 
 
     public static void init() {
-        ArmorRendererRegistryImpl.register(new OrnateOlviteArmorRenderer(), OLVITE_HELMET_ORNATE);
     }
 
     @SafeVarargs
