@@ -136,13 +136,13 @@ public class SentinelEntity extends ZombieEntity implements IEnlightenable {
     }
 
     public static DefaultAttributeContainer.Builder createSentinelAttributes() {
-        return createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 80.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0)
-                .add(EntityAttributes.GENERIC_SCALE, 1.15f);
+        return createHostileAttributes().add(EntityAttributes.MAX_HEALTH, 80.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 35.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.2F)
+                .add(EntityAttributes.ATTACK_DAMAGE, 3.0)
+                .add(EntityAttributes.KNOCKBACK_RESISTANCE, 1D)
+                .add(EntityAttributes.ATTACK_DAMAGE, 6.0)
+                .add(EntityAttributes.SCALE, 1.15f);
     }
 
 

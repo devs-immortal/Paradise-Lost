@@ -40,7 +40,7 @@ public class MoaEggItem extends Item {
             moa.refreshPositionAndAngles(contextIn.getBlockPos().up(), 0, 0);
             moa.setHealth(moa.getGenes().getAttribute(MoaAttributes.MAX_HEALTH));
             world.spawnEntity(moa);
-            return ActionResult.success(world.isClient());
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
         }
         return super.useOnBlock(contextIn);
     }

@@ -16,7 +16,7 @@ val everyCompatVersion: String by properties
 val stoneZoneVersion: String by properties
 
 plugins {
-    id("fabric-loom") version "1.11-SNAPSHOT"
+    id("fabric-loom") version "1.16-SNAPSHOT"
     id("com.modrinth.minotaur") version "2.8.7"
     id("de.guntram.mcmod.crowdin-translate") version "1.4+1.19"
     `maven-publish`

@@ -3,7 +3,7 @@ package net.id.paradiselost.items.armor;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 

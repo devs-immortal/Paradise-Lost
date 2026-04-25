@@ -48,7 +48,7 @@ public class BlackcurrantBushBlock extends SweetBerryBushBlock {
         int i = state.get(AGE);
         if (i > 1) {
             tryPickBerries(world, pos, state);
-            return ActionResult.success(world.isClient);
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
         } else {
             return super.onUse(state, world, pos, player, hit);
         }

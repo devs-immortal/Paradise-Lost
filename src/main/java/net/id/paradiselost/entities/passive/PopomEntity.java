@@ -91,8 +91,8 @@ public class PopomEntity extends AnimalEntity {
     // Define attributes for Popom
     public static DefaultAttributeContainer.Builder createPopomAttributes() {
         return createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
+                .add(EntityAttributes.MAX_HEALTH, 10.0D)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.25D);
     }
 
     @Override

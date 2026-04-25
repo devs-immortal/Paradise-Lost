@@ -18,7 +18,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -87,30 +86,30 @@ public class WardedJarItem extends Item {
         return ActionResult.SUCCESS;
     }
 
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        if (this.containedEntityType == null) return TypedActionResult.pass(itemStack);
+        if (this.containedEntityType == null) return ActionResult.PASS;
         BlockHitResult blockHitResult = raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
         if (blockHitResult.getType() != HitResult.Type.BLOCK) {
-            return TypedActionResult.pass(itemStack);
+            return ActionResult.PASS;
         } else if (!(world instanceof ServerWorld)) {
-            return TypedActionResult.success(itemStack);
+            return ActionResult.SUCCESS.withNewHandStack(itemStack);
         } else {
             BlockPos blockPos = blockHitResult.getBlockPos();
             if (!(world.getBlockState(blockPos).getBlock() instanceof FluidBlock)) {
-                return TypedActionResult.pass(itemStack);
+                return ActionResult.PASS;
             } else if (world.canPlayerModifyAt(user, blockPos) && user.canPlaceOn(blockPos, blockHitResult.getSide(), itemStack)) {
                 Entity entity = this.containedEntityType.spawnFromItemStack((ServerWorld) world, itemStack, user, blockPos, SpawnReason.MOB_SUMMONED, false, false);
                 if (entity == null) {
-                    return TypedActionResult.pass(itemStack);
+                    return ActionResult.PASS;
                 } else {
                     itemStack.decrementUnlessCreative(1, user);
                     user.incrementStat(Stats.USED.getOrCreateStat(this));
                     world.emitGameEvent(user, GameEvent.ENTITY_PLACE, entity.getPos());
-                    return new TypedActionResult<>(ActionResult.SUCCESS, new ItemStack(ParadiseLostItems.WARDED_JAR));
+                    return ActionResult.SUCCESS.withNewHandStack(new ItemStack(ParadiseLostItems.WARDED_JAR));
                 }
             } else {
-                return TypedActionResult.fail(itemStack);
+                return ActionResult.FAIL;
             }
         }
     }

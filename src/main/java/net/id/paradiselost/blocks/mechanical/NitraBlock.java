@@ -17,7 +17,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -77,7 +77,7 @@ public class NitraBlock extends Block {
         ((ExplosionExtensions) explosion).affectWorld(true, SoundEvents.ENTITY_GENERIC_EXPLODE.value());
     }
 
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
         if (!itemStack.isOf(Items.FLINT_AND_STEEL) && !itemStack.isOf(Items.FIRE_CHARGE)) {
             return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
@@ -94,7 +94,7 @@ public class NitraBlock extends Block {
             }
 
             player.incrementStat(Stats.USED.getOrCreateStat(item));
-            return ItemActionResult.success(world.isClient);
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
         }
     }
 

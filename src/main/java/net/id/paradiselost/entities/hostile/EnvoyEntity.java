@@ -142,9 +142,9 @@ public class EnvoyEntity extends SkeletonEntity implements IEnlightenable {
     }
     public static DefaultAttributeContainer.Builder createEnvoyAttributes() {
         return createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, -1)
-                .add(EntityAttributes.GENERIC_SCALE, 1.05f);
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.2D)
+                .add(EntityAttributes.KNOCKBACK_RESISTANCE, -1)
+                .add(EntityAttributes.SCALE, 1.05f);
 
     }
 

@@ -13,7 +13,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
@@ -40,7 +40,7 @@ public class WallClingingPlantBlock extends PlantBlock implements Fertilizable {
             Direction.SOUTH, Block.createCuboidShape(0, 4, 10, 16, 12, 16),
             Direction.WEST, Block.createCuboidShape(0, 4, 0, 6, 12, 16)
     );
-    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
     private final @Nullable TagKey<Block> clingableBlocks;
 
     public WallClingingPlantBlock(@Nullable TagKey<Block> clingableBlocks, Settings settings) {

@@ -85,12 +85,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
     public static DefaultAttributeContainer.Builder createMoaAttributes() {
         return createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D)
-                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0);
-                //.add(EntityAttributes.GENERIC_GRAVITY, 0.95f)
-                //.add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.22f)
-                //.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f);
+                .add(EntityAttributes.MAX_HEALTH, 35.0D)
+                .add(EntityAttributes.MOVEMENT_SPEED, 1.0D)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0);
+                //.add(EntityAttributes.GRAVITY, 0.95f)
+                //.add(EntityAttributes.JUMP_STRENGTH, 0.22f)
+                //.add(EntityAttributes.FLYING_SPEED, 0.5f);
     }
 
     @Override
@@ -644,7 +644,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 var item = heldStack.getItem();
                 if (heldStack.isIn(ConventionalItemTags.RAW_MEAT_FOODS)) {
                     feedMob(heldStack);
-                    return ActionResult.success(getWorld().isClient());
+                    return getWorld().isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
                 } else if (!hasChest() && item instanceof BlockItem blockItem && blockItem.getBlock() instanceof AbstractChestBlock) {
                     // Set a new chest, if there is none.
                     var chestStack = heldStack.copy();
@@ -653,7 +653,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                         heldStack.decrement(1);
                     }
                     setChest(heldStack);
-                    return ActionResult.success(getWorld().isClient);
+                    return getWorld().isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
                 }
             } else {
                 if (!heldStack.isIn(ParadiseLostItemTags.MOA_BREEDABLES) && heldStack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES)) {

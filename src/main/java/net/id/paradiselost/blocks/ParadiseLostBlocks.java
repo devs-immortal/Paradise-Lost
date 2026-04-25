@@ -20,9 +20,9 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
-import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.copy;
-import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.create;
 import static net.id.paradiselost.blocks.ParadiseLostBlockActions.*;
+import static net.minecraft.block.AbstractBlock.Settings.copy;
+import static net.minecraft.block.AbstractBlock.Settings.create;
 import static net.minecraft.block.Blocks.*;
 import static net.id.paradiselost.blocks.BlockRegistration.*;
 
@@ -252,9 +252,9 @@ public class ParadiseLostBlocks {
     public static final BlackcurrantBushBlock BLACKCURRANT_BUSH = add("blackcurrant_bush", new BlackcurrantBushBlock(create().strength(0.2f)
             .ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().suffocates(never).blockVision(never).noCollision().mapColor(MapColor.PURPLE)), flammablePlant, cutoutRenderLayer);
 
-    public static final FourBiteCakeBlock CHEESECAKE = add("halflight_cheesecake", new FourBiteCakeBlock(Settings.copy(CAKE)));
+    public static final FourBiteCakeBlock CHEESECAKE = add("halflight_cheesecake", new FourBiteCakeBlock(copy(CAKE)));
 
-    public static final SixFacingBlock AMADRYS_BUNDLE = add("amadrys_bundle", new SixFacingBlock(Settings.copy(HAY_BLOCK)));
+    public static final SixFacingBlock AMADRYS_BUNDLE = add("amadrys_bundle", new SixFacingBlock(copy(HAY_BLOCK)));
 
     // Flowers
     private static Settings flower() {
@@ -300,7 +300,7 @@ public class ParadiseLostBlocks {
     }
 
     public static final CherineTorchBlock CHERINE_TORCH = add("cherine_torch", new CherineTorchBlock(cherineTorch()), cutoutRenderLayer);
-    public static final CherineWallTorchBlock CHERINE_TORCH_WALL = add("cherine_wall_torch", new CherineWallTorchBlock(cherineTorch().dropsLike(CHERINE_TORCH)), cutoutRenderLayer);
+    public static final CherineWallTorchBlock CHERINE_TORCH_WALL = add("cherine_wall_torch", new CherineWallTorchBlock(cherineTorch().lootTable(CHERINE_TORCH.getLootTableKey())), cutoutRenderLayer);
     public static final PaneBlock GOLDEN_AMBER_BARS = add("golden_amber_bars", new PaneBlock(copy(IRON_BARS)), cutoutMippedRenderLayer);
 
     // Usables

@@ -14,8 +14,8 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -43,11 +43,13 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
     }
 
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!player.isSneaking() && world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
-            return ItemActionResult.success(foodBowl.handleUse(player, hand, player.getStackInHand(hand)) && world.isClient());
+            return foodBowl.handleUse(player, hand, player.getStackInHand(hand)) && world.isClient
+                    ? ActionResult.SUCCESS
+                    : ActionResult.SUCCESS_SERVER;
         }
-        return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
     }
 
     @Override

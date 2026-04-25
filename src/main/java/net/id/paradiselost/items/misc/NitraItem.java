@@ -7,8 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class NitraItem extends Item {
@@ -16,7 +16,7 @@ public class NitraItem extends Item {
         super(settings);
     }
 
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), ParadiseLostSoundEvents.ENTITY_NITRA_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         user.getItemCooldownManager().set(this, 10);
@@ -32,6 +32,8 @@ public class NitraItem extends Item {
             itemStack.decrement(1);
         }
 
-        return TypedActionResult.success(itemStack, world.isClient());
+        return world.isClient
+                ? ActionResult.SUCCESS.withNewHandStack(itemStack)
+                : ActionResult.SUCCESS_SERVER.withNewHandStack(itemStack);
     }
 }

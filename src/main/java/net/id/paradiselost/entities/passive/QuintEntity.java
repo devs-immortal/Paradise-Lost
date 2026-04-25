@@ -273,8 +273,8 @@ public class QuintEntity extends PathAwareEntity implements Monster {
     }
 
     public static DefaultAttributeContainer.Builder createQuintAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3);
+        return MobEntity.createMobAttributes().add(EntityAttributes.MAX_HEALTH, 6.0)
+                .add(EntityAttributes.FLYING_SPEED, 0.5)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.3);
     }
 }

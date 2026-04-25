@@ -41,7 +41,7 @@ public class PotionItemMixin {
             if (!world.isClient) {
                 world.playSound(null, blockPos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
-            cir.setReturnValue(ActionResult.success(world.isClient));
+            cir.setReturnValue(world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER);
             cir.cancel();
         }
     }

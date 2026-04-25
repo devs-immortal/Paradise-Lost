@@ -1,6 +1,5 @@
 package net.id.paradiselost.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.id.paradiselost.blocks.decorative.ParadiseHangingSignBlock;
 import net.id.paradiselost.blocks.decorative.ParadiseSignBlock;
 import net.id.paradiselost.blocks.decorative.ParadiseWallHangingSignBlock;
@@ -264,13 +263,13 @@ public class BlockRegistration {
     // SIGN SET
     public static SignSet registerSignSet(WoodType woodType) {
 
-        var signSettings = FabricBlockSettings.copy(Blocks.OAK_SIGN).instrument(NoteBlockInstrument.BASS);
-        var hangingSignSettings = FabricBlockSettings.copy(Blocks.OAK_HANGING_SIGN).instrument(NoteBlockInstrument.BASS);
+        var signSettings = AbstractBlock.Settings.copy(Blocks.OAK_SIGN).instrument(NoteBlockInstrument.BASS);
+        var hangingSignSettings = AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN).instrument(NoteBlockInstrument.BASS);
 
         SignBlock signBlock = new ParadiseSignBlock(signSettings, woodType);
-        WallSignBlock wallSignBlock = new ParadiseWallSignBlock(signSettings.dropsLike(signBlock), woodType);
+        WallSignBlock wallSignBlock = new ParadiseWallSignBlock(signSettings.lootTable(signBlock.getLootTableKey()), woodType);
         HangingSignBlock hangingSign = new ParadiseHangingSignBlock(woodType, hangingSignSettings);
-        WallHangingSignBlock wallHangingSign = new ParadiseWallHangingSignBlock(woodType, hangingSignSettings.dropsLike(hangingSign));
+        WallHangingSignBlock wallHangingSign = new ParadiseWallHangingSignBlock(woodType, hangingSignSettings.lootTable(hangingSign.getLootTableKey()));
 
         add(woodType.name() + "_sign", signBlock);
         add(woodType.name() + "_wall_sign", wallSignBlock);

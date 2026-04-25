@@ -21,7 +21,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeManager;
+import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.recipe.input.RecipeInput;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenHandler;
@@ -41,12 +41,12 @@ import java.util.Optional;
 public class TreeTapBlockEntity extends LootableContainerBlockEntity implements SidedInventory, RecipeInput {
 
     private final DefaultedList<ItemStack> inventory;
-    private final RecipeManager.MatchGetter<TreeTapBlockEntity, TreeTapRecipe> matchGetter;
+    private final ServerRecipeManager.MatchGetter<TreeTapBlockEntity, TreeTapRecipe> matchGetter;
 
     public TreeTapBlockEntity(BlockPos pos, BlockState state) {
         super(ParadiseLostBlockEntityTypes.TREE_TAP, pos, state);
         this.inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
-        this.matchGetter = RecipeManager.createCachedMatchGetter(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE);
+        this.matchGetter = ServerRecipeManager.createCachedMatchGetter(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE);
     }
 
 	public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {

@@ -13,7 +13,7 @@ import net.minecraft.recipe.CampfireCookingRecipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -27,7 +27,7 @@ public class CherineCampfireBlock extends CampfireBlock {
     }
     
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CherineCampfireBlockEntity campfireBlockEntity) {
             ItemStack itemStack = player.getStackInHand(hand);
@@ -35,14 +35,14 @@ public class CherineCampfireBlock extends CampfireBlock {
             if (optional.isPresent()) {
                 if (!world.isClient && campfireBlockEntity.addItem(player, player.isInCreativeMode() ? itemStack.copy() : itemStack, ((CampfireCookingRecipe) ((RecipeEntry) optional.get()).value()).getCookingTime())) {
                     player.incrementStat(Stats.INTERACT_WITH_CAMPFIRE);
-                    return ItemActionResult.SUCCESS;
+                    return ActionResult.SUCCESS;
                 }
 
-                return ItemActionResult.CONSUME;
+                return ActionResult.CONSUME;
             }
         }
 
-        return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return ActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
