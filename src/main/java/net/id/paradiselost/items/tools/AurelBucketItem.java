@@ -65,16 +65,16 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
                 if (this.containedFluid == Fluids.EMPTY) {
                     BlockState hitState = worldIn.getBlockState(hitPos);
 
-                    if (hitState.getBlock() instanceof FluidDrainable) {
+                    if (hitState.getBlock() instanceof FluidDrainable block) {
                         if (hitState.getFluidState().getFluid() == Fluids.WATER) {
-                            ((FluidDrainable) hitState.getBlock()).tryDrainFluid(playerIn, worldIn, hitPos, hitState);
+                            block.tryDrainFluid(playerIn, worldIn, hitPos, hitState);
                             playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                             playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
                             ItemStack fillStack = this.fillBucket(currentStack, playerIn, ParadiseLostItems.AUREL_WATER_BUCKET);
 
                             return ActionResult.SUCCESS.withNewHandStack(fillStack);
                         } else if (hitState.isOf(Blocks.POWDER_SNOW)) {
-                            ((FluidDrainable) hitState.getBlock()).tryDrainFluid(playerIn, worldIn, hitPos, hitState);
+                            block.tryDrainFluid(playerIn, worldIn, hitPos, hitState);
                             playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                             playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL_POWDER_SNOW, 1.0F, 1.0F);
                             ItemStack fillStack = this.fillBucket(currentStack, playerIn, ParadiseLostItems.AUREL_POWDER_SNOW_BUCKET);

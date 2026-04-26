@@ -25,8 +25,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SoulSwordItem extends SwordItem {
-    public SoulSwordItem(ToolMaterial toolMaterial, Settings settings) {
-        super(toolMaterial, settings);
+    public SoulSwordItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, Settings settings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings);
     }
 
     @Override
