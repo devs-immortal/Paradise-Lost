@@ -38,7 +38,7 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
             Direction direction = Direction.DOWN;
             BlockPos blockPos = pos.offset(direction);
             BlockState blockState = world.getBlockState(blockPos);
-            if (!(!blockState.isSideSolidFullSquare(world, blockPos, direction.getOpposite()) && !blockState.isTransparent(world, blockPos))) {
+            if (!(!blockState.isSideSolidFullSquare(world, blockPos, direction.getOpposite()) && !blockState.isTransparent())) {
 
                 if (speed == 0 || world.getTime() % 3000 == 0) {
                     speed = world.getRandom().nextInt(4);
@@ -51,9 +51,9 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
 
                 for (int leaf = 0; leaf < 9; leaf++) {
                     if (world.random.nextInt(3) == 0) {
-                        double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetX() * 0.6D;
-                        double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5D + (double) direction.getOffsetZ() * 0.6D;
-                        world.addParticle(ParadiseLostParticles.MOTHER_AUREL_LEAF, (double) pos.getX() + d, pos.getY(), (double) pos.getZ() + f, speed, world.getRandom().nextDouble() / -20.0, 0);
+                        double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5D + direction.getOffsetX() * 0.6D;
+                        double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5D + direction.getOffsetZ() * 0.6D;
+                        world.addParticle(ParadiseLostParticles.MOTHER_AUREL_LEAF, pos.getX() + d, pos.getY(), pos.getZ() + f, speed, world.getRandom().nextDouble() / -20.0, 0);
                     }
                 }
             }
@@ -62,7 +62,7 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
     }
 
     @Override
-    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+    protected boolean isTransparent(BlockState state) {
         return false;
     }
 
@@ -73,19 +73,12 @@ public class ParadiseLostLeavesBlock extends LeavesBlock implements Fertilizable
     }
 
     @Override
-    public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
+    protected int getOpacity(BlockState state) {
         return 1;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
-        return VoxelShapes.fullCube();
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    protected VoxelShape getCullingShape(BlockState state) {
         return VoxelShapes.fullCube();
     }
 

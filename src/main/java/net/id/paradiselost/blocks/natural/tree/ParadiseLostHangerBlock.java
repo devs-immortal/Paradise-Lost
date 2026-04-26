@@ -16,6 +16,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 
 public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable {
 
@@ -57,7 +58,7 @@ public class ParadiseLostHangerBlock extends PlantBlock implements Fertilizable 
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         if (!state.canPlaceAt(world, pos)) {
             return Blocks.AIR.getDefaultState();
         } else if (!(world.getBlockState(pos.down()).getBlock() instanceof ParadiseLostHangerBlock)) {

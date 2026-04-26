@@ -79,7 +79,7 @@ public class ParadiseLostMushroomPlantBlock extends PlantBlock implements Fertil
 
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOpaqueFullCube(world, pos);
+        return floor.isOpaqueFullCube();
     }
     
     @Override

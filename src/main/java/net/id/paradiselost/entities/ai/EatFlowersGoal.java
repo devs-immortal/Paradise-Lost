@@ -8,6 +8,7 @@ import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -16,20 +17,20 @@ import net.minecraft.world.WorldView;
 
 public class EatFlowersGoal extends MoveToTargetPosGoal {
     private final PopomEntity goober;
-    private final World world;
+    private final ServerWorld world;
     private int timer;
     private boolean eating;
 
     public EatFlowersGoal(PopomEntity goober, double speed) {
         super(goober, speed, 8, 3);
         this.goober = goober;
-        this.world = goober.getWorld();
+        this.world = getServerWorld(goober);
         this.eating = false;
     }
 
     @Override
     public boolean canStart() {
-        return this.goober.getFurSize() < 3 && !this.goober.isBaby() && super.canStart(); //this.cat.isTamed() && !this.cat.isSitting() && super.canStart();
+        return this.goober.getFurSize() < 3 && !this.goober.isBaby() && super.canStart(); // this.cat.isTamed() && !this.cat.isSitting() && super.canStart();
     }
 
     @Override

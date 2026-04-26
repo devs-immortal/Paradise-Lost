@@ -1,11 +1,8 @@
 package net.id.paradiselost.items;
 
-import com.chocohead.mm.api.ClassTinkerers;
 import dev.thomasglasser.sherdsapi.api.SherdsApiDataComponents;
-import net.fabricmc.fabric.impl.client.rendering.ArmorRendererRegistryImpl;
 import net.id.paradiselost.ParadiseLost;
 import net.id.paradiselost.blocks.ParadiseLostBlocks;
-import net.id.paradiselost.client.rendering.armor.OrnateOlviteArmorRenderer;
 import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.items.armor.ParadiseLostArmorMaterials;
 import net.id.paradiselost.items.armor.XpCircletItem;
@@ -28,10 +25,12 @@ import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.AbstractBoatEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -82,27 +81,34 @@ public class ParadiseLostItems {
     private static Settings tool() {
         return new Settings();
     }
+
     private static Settings shovel(ToolMaterial material, float attackDamage, float attackSpeed) {
         return tool().attributeModifiers(ShovelItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
+
     private static Settings pickaxe(ToolMaterial material, float attackDamage, float attackSpeed) {
         return tool().attributeModifiers(PickaxeItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
+
     private static Settings axe(ToolMaterial material, float attackDamage, float attackSpeed) {
         return tool().attributeModifiers(AxeItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
+
     private static Settings sword(ToolMaterial material, int attackDamage, float attackSpeed) {
         return tool().attributeModifiers(SwordItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
+
     private static Settings hoe(ToolMaterial material, float attackDamage, float attackSpeed) {
         return tool().attributeModifiers(HoeItem.createAttributeModifiers(material, attackDamage, attackSpeed));
     }
 
     private static final Settings tool = tool();
     private static final Settings rareTool = tool().rarity(RARE);
+
     private static Settings unstackableTool() {
         return tool().maxCount(1);
     }
+
     private static Settings unstackableRareTool() {
         return tool().maxCount(1).rarity(RARE);
     }
@@ -161,35 +167,35 @@ public class ParadiseLostItems {
     private static final Settings WEARABLE = wearable();
     private static final Settings RARE_WEARABLE = wearable().rarity(RARE);
 
-    private static ArmorItem armorHelper(RegistryEntry<ArmorMaterial> mat, ArmorItem.Type type, int durabilityMultiplier, Item.Settings settings) {
+    private static ArmorItem armorHelper(RegistryEntry<ArmorMaterial> mat, EquipmentType type, int durabilityMultiplier, Item.Settings settings) {
         return new ArmorItem(mat, type, WEARABLE.maxDamage(type.getMaxDamage(durabilityMultiplier)));
     }
 
-    private static ArmorItem armorHelper(RegistryEntry<ArmorMaterial> mat, ArmorItem.Type type, int durabilityMultiplier) {
+    private static ArmorItem armorHelper(RegistryEntry<ArmorMaterial> mat, EquipmentType type, int durabilityMultiplier) {
         return armorHelper(mat, type, durabilityMultiplier, WEARABLE);
     }
 
     // Olvite
-    public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.HELMET, 15));
-    public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.CHESTPLATE, 15));
-    public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.LEGGINGS, 15));
-    public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.BOOTS, 15));
-    public static final ArmorItem OLVITE_HELMET_ORNATE = add("ornate_olvite_helmet", armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.HELMET, 15));
+    public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", armorHelper(ParadiseLostArmorMaterials.OLVITE, EquipmentType.HELMET, 15));
+    public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", armorHelper(ParadiseLostArmorMaterials.OLVITE, EquipmentType.CHESTPLATE, 15));
+    public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", armorHelper(ParadiseLostArmorMaterials.OLVITE, EquipmentType.LEGGINGS, 15));
+    public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", armorHelper(ParadiseLostArmorMaterials.OLVITE, EquipmentType.BOOTS, 15));
+    public static final ArmorItem OLVITE_HELMET_ORNATE = add("ornate_olvite_helmet", armorHelper(ParadiseLostArmorMaterials.OLVITE, EquipmentType.HELMET, 15));
 
     // Glazed Gold
-    public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.HELMET, 21));
-    public static final ArmorItem GLAZED_GOLD_CHESTPLATE = add("glazed_gold_chestplate", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.CHESTPLATE, 21));
-    public static final ArmorItem GLAZED_GOLD_LEGGINGS = add("glazed_gold_leggings", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.LEGGINGS, 21));
-    public static final ArmorItem GLAZED_GOLD_BOOTS = add("glazed_gold_boots", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, ArmorItem.Type.BOOTS, 21));
+    public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, EquipmentType.HELMET, 21));
+    public static final ArmorItem GLAZED_GOLD_CHESTPLATE = add("glazed_gold_chestplate", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, EquipmentType.CHESTPLATE, 21));
+    public static final ArmorItem GLAZED_GOLD_LEGGINGS = add("glazed_gold_leggings", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, EquipmentType.LEGGINGS, 21));
+    public static final ArmorItem GLAZED_GOLD_BOOTS = add("glazed_gold_boots", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD, EquipmentType.BOOTS, 21));
 
     // Surtrum
-    public static final ArmorItem SURTRUM_HELMET = add("surtrum_helmet", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.HELMET, 27, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_CHESTPLATE = add("surtrum_chestplate", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.CHESTPLATE, 27, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.LEGGINGS, 27, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.BOOTS, 27, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_HELMET = add("surtrum_helmet", armorHelper(ParadiseLostArmorMaterials.SURTRUM, EquipmentType.HELMET, 27, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_CHESTPLATE = add("surtrum_chestplate", armorHelper(ParadiseLostArmorMaterials.SURTRUM, EquipmentType.CHESTPLATE, 27, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", armorHelper(ParadiseLostArmorMaterials.SURTRUM, EquipmentType.LEGGINGS, 27, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", armorHelper(ParadiseLostArmorMaterials.SURTRUM, EquipmentType.BOOTS, 27, wearable().fireproof()));
 
     // Relic
-    public static final XpCircletItem XP_CIRCLET = add("xp_circlet", new XpCircletItem(ParadiseLostArmorMaterials.RELIC, ArmorItem.Type.HELMET, WEARABLE.maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15)).rarity(RARE)));
+    public static final XpCircletItem XP_CIRCLET = add("xp_circlet", new XpCircletItem(ParadiseLostArmorMaterials.RELIC, EquipmentType.HELMET, WEARABLE.maxDamage(EquipmentType.HELMET.getMaxDamage(15)).rarity(RARE)));
 
     private static Settings food() {
         return new Settings();
@@ -233,9 +239,11 @@ public class ParadiseLostItems {
 
 
     public static final WardedJarItem WARDED_JAR = add("warded_jar", new WardedJarItem(new Settings()));
+
     private static Settings wardedJar() {
         return new Settings().maxCount(1).recipeRemainder(WARDED_JAR);
     }
+
     public static final WardedJarItem WARDED_JAR_ALLAY = add("warded_jar_allay", new WardedJarItem(EntityType.ALLAY, wardedJar()));
     public static final WardedJarItem WARDED_JAR_QUINT = add("warded_jar_quint", new WardedJarItem(ParadiseLostEntityTypes.QUINT, wardedJar()));
 
@@ -528,12 +536,12 @@ public class ParadiseLostItems {
 
     public static final BlockItem LEVITATOR = add(ParadiseLostBlocks.LEVITATOR);
 
-    public static final BoatSet AUREL_BOATS = addBoatItems("aurel", "PARADISE_LOST_AUREL");
-    public static final BoatSet MOTHER_AUREL_BOATS = addBoatItems("mother_aurel", "PARADISE_LOST_MOTHER_AUREL");
-    public static final BoatSet MENTH_BOATS = addBoatItems("menth", "PARADISE_LOST_MENTH");
-    public static final BoatSet WISTERIA_BOATS = addBoatItems("wisteria", "PARADISE_LOST_WISTERIA");
+    public static final BoatSet AUREL_BOATS = addBoatItems("aurel", ParadiseLostEntityTypes.AUREL_BOAT, ParadiseLostEntityTypes.AUREL_CHEST_BOAT);
+    public static final BoatSet MOTHER_AUREL_BOATS = addBoatItems("mother_aurel", ParadiseLostEntityTypes.MOTHER_AUREL_BOAT, ParadiseLostEntityTypes.MOTHER_AUREL_CHEST_BOAT);
+    public static final BoatSet MENTH_BOATS = addBoatItems("menth", ParadiseLostEntityTypes.MENTH_BOAT, ParadiseLostEntityTypes.MENTH_CHEST_BOAT);
+    public static final BoatSet WISTERIA_BOATS = addBoatItems("wisteria", ParadiseLostEntityTypes.WISTERIA_BOAT, ParadiseLostEntityTypes.WISTERIA_CHEST_BOAT);
 
-    public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, MENTH_BOATS, WISTERIA_BOATS};
+    public static final BoatSet[] BOAT_SETS = new BoatSet[]{AUREL_BOATS, MOTHER_AUREL_BOATS, MENTH_BOATS, WISTERIA_BOATS};
 
 
     public static final RegistryEntry<Potion> HEALTH_BOOST_POTION = registerPotion("health_boost", new Potion(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 6000, 1)));
@@ -584,19 +592,16 @@ public class ParadiseLostItems {
                 additionalActions);
     }
 
-    private static BoatSet addBoatItems(String woodId, String boatTypeId) {
+    private static BoatSet addBoatItems(String woodId, EntityType<? extends AbstractBoatEntity> boatType, EntityType<? extends AbstractBoatEntity> chestBoatType) {
         String boatId = (MOD_ID + "_" + woodId);
 
-        BoatEntity.Type boatType = ClassTinkerers.getEnum(BoatEntity.Type.class, boatTypeId);
+        BoatItem boat = add(woodId + "_boat", new BoatItem(boatType, new Item.Settings().maxCount(1)), fuel(1200));
+        BoatItem chestBoat = add(woodId + "_chest_boat", new BoatItem(chestBoatType, new Item.Settings().maxCount(1)), fuel(1200));
 
-        BoatItem boat = add(woodId + "_boat", new BoatItem(false, boatType, new Settings().maxCount(1)), fuel(1200));
-        BoatItem chestBoat = add(woodId + "_chest_boat", new BoatItem(true, boatType, new Settings().maxCount(1)), fuel(1200));
-
-        return new BoatSet(boatType, boat, chestBoat);
+        return new BoatSet(boat, chestBoat);
     }
 
     public record BoatSet(
-            BoatEntity.Type type,
             BoatItem boat,
             BoatItem chestBoat
     ) implements Iterable<Item> {

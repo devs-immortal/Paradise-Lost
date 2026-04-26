@@ -4,6 +4,7 @@ import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -25,45 +26,45 @@ public class ParadiseLostArmorMaterials {
     public static final RegistryEntry<ArmorMaterial> RELIC;
 
     static {
-        OLVITE = register("paradise_lost_olvite", Util.make(new EnumMap(ArmorItem.Type.class), (map) -> {
-            map.put(ArmorItem.Type.BOOTS, 2);
-            map.put(ArmorItem.Type.LEGGINGS, 4);
-            map.put(ArmorItem.Type.CHESTPLATE, 6);
-            map.put(ArmorItem.Type.HELMET, 2);
-            map.put(ArmorItem.Type.BODY, 4);
+        OLVITE = register("paradise_lost_olvite", Util.make(new EnumMap(EquipmentType.class), (map) -> {
+            map.put(EquipmentType.BOOTS, 2);
+            map.put(EquipmentType.LEGGINGS, 4);
+            map.put(EquipmentType.CHESTPLATE, 6);
+            map.put(EquipmentType.HELMET, 2);
+            map.put(EquipmentType.BODY, 4);
         }), 9, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_OLVITE, 0.0F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.OLVITE));
-        GLAZED_GOLD = register("paradise_lost_glazed_gold", Util.make(new EnumMap(ArmorItem.Type.class), (map) -> {
-            map.put(ArmorItem.Type.BOOTS, 1);
-            map.put(ArmorItem.Type.LEGGINGS, 3);
-            map.put(ArmorItem.Type.CHESTPLATE, 5);
-            map.put(ArmorItem.Type.HELMET, 2);
-            map.put(ArmorItem.Type.BODY, 3);
+        GLAZED_GOLD = register("paradise_lost_glazed_gold", Util.make(new EnumMap(EquipmentType.class), (map) -> {
+            map.put(EquipmentType.BOOTS, 1);
+            map.put(EquipmentType.LEGGINGS, 3);
+            map.put(EquipmentType.CHESTPLATE, 5);
+            map.put(EquipmentType.HELMET, 2);
+            map.put(EquipmentType.BODY, 3);
         }), 25, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_GLAZED_GOLD, 0.0F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.GOLDEN_AMBER));
-        SURTRUM = register("paradise_lost_surtrum", Util.make(new EnumMap(ArmorItem.Type.class), (map) -> {
-            map.put(ArmorItem.Type.BOOTS, 2);
-            map.put(ArmorItem.Type.LEGGINGS, 5);
-            map.put(ArmorItem.Type.CHESTPLATE, 6);
-            map.put(ArmorItem.Type.HELMET, 3);
-            map.put(ArmorItem.Type.BODY, 5);
+        SURTRUM = register("paradise_lost_surtrum", Util.make(new EnumMap(EquipmentType.class), (map) -> {
+            map.put(EquipmentType.BOOTS, 2);
+            map.put(EquipmentType.LEGGINGS, 5);
+            map.put(EquipmentType.CHESTPLATE, 6);
+            map.put(EquipmentType.HELMET, 3);
+            map.put(EquipmentType.BODY, 5);
         }), 15, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_SURTRUM, 0.0F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.REFINED_SURTRUM));
-        RELIC = register("paradise_lost_relic", Util.make(new EnumMap(ArmorItem.Type.class), (map) -> {
-            map.put(ArmorItem.Type.BOOTS, 1);
-            map.put(ArmorItem.Type.LEGGINGS, 4);
-            map.put(ArmorItem.Type.CHESTPLATE, 5);
-            map.put(ArmorItem.Type.HELMET, 2);
-            map.put(ArmorItem.Type.BODY, 4);
+        RELIC = register("paradise_lost_relic", Util.make(new EnumMap(EquipmentType.class), (map) -> {
+            map.put(EquipmentType.BOOTS, 1);
+            map.put(EquipmentType.LEGGINGS, 4);
+            map.put(EquipmentType.CHESTPLATE, 5);
+            map.put(EquipmentType.HELMET, 2);
+            map.put(EquipmentType.BODY, 4);
         }), 12, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_RELIC, 0.5F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.FLOESTONE));
     }
 
-    private static RegistryEntry<ArmorMaterial> register(String id, EnumMap<ArmorItem.Type, Integer> defense, int enchantability, RegistryEntry<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
+    private static RegistryEntry<ArmorMaterial> register(String id, EnumMap<EquipmentType, Integer> defense, int enchantability, RegistryEntry<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
         List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(Identifier.of(id)));
         return register(id, defense, enchantability, equipSound, toughness, knockbackResistance, repairIngredient, list);
     }
 
-    private static RegistryEntry<ArmorMaterial> register(String id, EnumMap<ArmorItem.Type, Integer> defense, int enchantability, RegistryEntry<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient, List<ArmorMaterial.Layer> layers) {
-        EnumMap<ArmorItem.Type, Integer> enumMap = new EnumMap(ArmorItem.Type.class);
+    private static RegistryEntry<ArmorMaterial> register(String id, EnumMap<EquipmentType, Integer> defense, int enchantability, RegistryEntry<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient, List<ArmorMaterial.Layer> layers) {
+        EnumMap<EquipmentType, Integer> enumMap = new EnumMap(EquipmentType.class);
 
-        for (ArmorItem.Type type : ArmorItem.Type.values()) {
+        for (EquipmentType type : EquipmentType.values()) {
             enumMap.put(type, defense.get(type));
         }
 

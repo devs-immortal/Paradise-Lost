@@ -10,14 +10,18 @@ import net.minecraft.block.piston.PistonHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static net.id.paradiselost.entities.util.FloatingBlockHelperImpls.*;
+import static net.id.paradiselost.entities.util.FloatingBlockHelperImpls.Any;
+import static net.id.paradiselost.entities.util.FloatingBlockHelperImpls.Pusher;
+import static net.id.paradiselost.entities.util.FloatingBlockHelperImpls.Standard;
 
 /**
  * A helper class designed to aid in the creation of floating blocks.
@@ -48,7 +52,7 @@ public interface FloatingBlockHelper {
      * The default conditions under which a floating block goes from floating to falling. By default, this is when a
      * floating block is 50 blocks from the height limit, and isn't a fast floater.
      */
-    Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = (entity) -> {
+    Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = entity -> {
         World world = entity.getWorld();
         BlockPos pos = entity.getBlockPos();
         int distFromTop = world.getTopY() - pos.getY();

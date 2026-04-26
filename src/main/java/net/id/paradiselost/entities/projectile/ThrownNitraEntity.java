@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
@@ -25,11 +26,13 @@ public class ThrownNitraEntity extends ThrownItemEntity {
         super(ParadiseLostEntityTypes.THROWN_NITRA, owner, world);
     }
 
+    @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         doDamage();
     }
 
+    @Override
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         doDamage();
@@ -39,19 +42,20 @@ public class ThrownNitraEntity extends ThrownItemEntity {
         }
     }
 
+    @Override
     public void handleStatus(byte status) {
         if (status == EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES) {
             this.getWorld().syncWorldEvent(ParadiseLostEvents.NITRA_EXPLODE, this.getBlockPos(), 0);
         }
-
     }
 
     private void doDamage() {
-        var hit = this.getWorld().getOtherEntities(this, new Box(this.getX() - 1.5, this.getY() - 1.5, this.getZ() - 1.5, this.getX() + 1.5, this.getY() + 1.5, this.getZ() + 1.5));
-        for (Entity e : hit) {
-            Vec3d diff = this.getPos().subtract(e.getPos()).negate().normalize();
-            e.addVelocity(diff.x, diff.y, diff.z);
-            e.damage(this.getWorld().getDamageSources().explosion(null, e), 2);
+        var world = (ServerWorld) this.getWorld();
+        var hit = world.getOtherEntities(this, new Box(this.getX() - 1.5, this.getY() - 1.5, this.getZ() - 1.5, this.getX() + 1.5, this.getY() + 1.5, this.getZ() + 1.5));
+        for (Entity entity : hit) {
+            Vec3d diff = this.getPos().subtract(entity.getPos()).negate().normalize();
+            entity.addVelocity(diff.x, diff.y, diff.z);
+            entity.damage(world, world.getDamageSources().explosion(null, entity), 2);
         }
     }
 

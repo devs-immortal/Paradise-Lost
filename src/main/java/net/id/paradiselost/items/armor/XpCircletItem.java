@@ -3,12 +3,12 @@ package net.id.paradiselost.items.armor;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 
 public class XpCircletItem extends ArmorItem {
-    public XpCircletItem(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+    public XpCircletItem(ArmorMaterial material, EquipmentType type, Settings settings) {
         super(material, type, settings);
     }
 

@@ -5,10 +5,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SignBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 public class ParadiseSignBlock extends SignBlock {
@@ -17,9 +13,11 @@ public class ParadiseSignBlock extends SignBlock {
         super(woodType, settings);
     }
 
+    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
-        this.lootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE, identifier.withPrefixedPath("blocks/"));
+//        FIXME: check if this is actually necessary, and if so, find a better way to do it
+//        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
+//        this.lootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE, identifier.withPrefixedPath("blocks/"));
         return new ParadiseSignBlockEntity(pos, state);
     }
 

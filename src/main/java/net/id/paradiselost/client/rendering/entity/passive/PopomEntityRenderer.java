@@ -9,6 +9,8 @@ import net.id.paradiselost.entities.passive.PopomEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
@@ -27,7 +29,8 @@ public class PopomEntityRenderer extends MobEntityRenderer<PopomEntity, PopomEnt
         super.render(popomEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
 
-    public Identifier getTexture(PopomEntity entity) {
+    @Override
+    public Identifier getTexture(LivingEntityRenderState state) {
         return TEXTURE;
     }
 }

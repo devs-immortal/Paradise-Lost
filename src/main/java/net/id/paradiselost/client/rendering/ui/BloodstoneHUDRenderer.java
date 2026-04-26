@@ -10,6 +10,7 @@ import net.id.paradiselost.items.tools.bloodstone.*;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
 import net.minecraft.entity.LivingEntity;
@@ -130,7 +131,7 @@ public class BloodstoneHUDRenderer {
 
         RenderSystem.setShaderTexture(0, sprite.getAtlasId());
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1);
-        context.drawSprite(startX, offsetY - 9, 0, 18, 18, sprite);  //  0 z correct?
+        context.drawSpriteStretched(RenderLayer::getGuiTextured, sprite, startX, offsetY - 9, 18, 18);
         context.drawTextWithShadow(client.textRenderer, text, startX + sprite.getContents().getWidth() + 2, offsetY - totalHeight, 14737632);
     }
 

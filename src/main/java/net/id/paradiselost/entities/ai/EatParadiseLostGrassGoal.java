@@ -6,9 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.predicate.block.BlockStatePredicate;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
@@ -17,12 +17,12 @@ public class EatParadiseLostGrassGoal extends Goal {
     private static final Predicate<BlockState> grass = BlockStatePredicate.forBlock(ParadiseLostBlocks.HIGHLANDS_GRASS);
 
     private final MobEntity owner;
-    private final World world;
+    private final ServerWorld world;
     private int timer;
 
     public EatParadiseLostGrassGoal(MobEntity entity) {
         this.owner = entity;
-        this.world = entity.getWorld();
+        this.world = getServerWorld(entity);
 
         this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK, Goal.Control.JUMP));
     }
