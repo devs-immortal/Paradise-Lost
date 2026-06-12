@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "paradise_lost:olvite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "paradise_lost:olvite"
+      }
+    ]
+  }
+}

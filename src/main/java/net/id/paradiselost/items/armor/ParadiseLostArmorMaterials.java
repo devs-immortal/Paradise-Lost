@@ -1,74 +1,47 @@
 package net.id.paradiselost.items.armor;
 
-import net.id.paradiselost.items.ParadiseLostItems;
+import net.id.paradiselost.ParadiseLost;
+import net.id.paradiselost.tag.ParadiseLostItemTags;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.equipment.EquipmentType;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 
 import java.util.EnumMap;
-import java.util.List;
-import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class ParadiseLostArmorMaterials {
 
-    public static final RegistryEntry<ArmorMaterial> OLVITE;
-    public static final RegistryEntry<ArmorMaterial> GLAZED_GOLD;
-    public static final RegistryEntry<ArmorMaterial> SURTRUM;
-    public static final RegistryEntry<ArmorMaterial> RELIC;
+    public static final ArmorMaterial OLVITE = new ArmorMaterial(15, Util.make(new EnumMap<>(EquipmentType.class), (map) -> {
+        map.put(EquipmentType.BOOTS, 2);
+        map.put(EquipmentType.LEGGINGS, 4);
+        map.put(EquipmentType.CHESTPLATE, 6);
+        map.put(EquipmentType.HELMET, 2);
+        map.put(EquipmentType.BODY, 4);
+    }), 9, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_OLVITE, 0.0F, 0.0F, ParadiseLostItemTags.REPAIRS_OLVITE_ARMOR, ParadiseLost.locate("olvite"));
 
-    static {
-        OLVITE = register("paradise_lost_olvite", Util.make(new EnumMap(EquipmentType.class), (map) -> {
-            map.put(EquipmentType.BOOTS, 2);
-            map.put(EquipmentType.LEGGINGS, 4);
-            map.put(EquipmentType.CHESTPLATE, 6);
-            map.put(EquipmentType.HELMET, 2);
-            map.put(EquipmentType.BODY, 4);
-        }), 9, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_OLVITE, 0.0F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.OLVITE));
-        GLAZED_GOLD = register("paradise_lost_glazed_gold", Util.make(new EnumMap(EquipmentType.class), (map) -> {
-            map.put(EquipmentType.BOOTS, 1);
-            map.put(EquipmentType.LEGGINGS, 3);
-            map.put(EquipmentType.CHESTPLATE, 5);
-            map.put(EquipmentType.HELMET, 2);
-            map.put(EquipmentType.BODY, 3);
-        }), 25, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_GLAZED_GOLD, 0.0F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.GOLDEN_AMBER));
-        SURTRUM = register("paradise_lost_surtrum", Util.make(new EnumMap(EquipmentType.class), (map) -> {
-            map.put(EquipmentType.BOOTS, 2);
-            map.put(EquipmentType.LEGGINGS, 5);
-            map.put(EquipmentType.CHESTPLATE, 6);
-            map.put(EquipmentType.HELMET, 3);
-            map.put(EquipmentType.BODY, 5);
-        }), 15, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_SURTRUM, 0.0F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.REFINED_SURTRUM));
-        RELIC = register("paradise_lost_relic", Util.make(new EnumMap(EquipmentType.class), (map) -> {
-            map.put(EquipmentType.BOOTS, 1);
-            map.put(EquipmentType.LEGGINGS, 4);
-            map.put(EquipmentType.CHESTPLATE, 5);
-            map.put(EquipmentType.HELMET, 2);
-            map.put(EquipmentType.BODY, 4);
-        }), 12, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_RELIC, 0.5F, 0.0F, () -> Ingredient.ofItems(ParadiseLostItems.FLOESTONE));
-    }
+    public static final ArmorMaterial GLAZED_GOLD = new ArmorMaterial(21, Util.make(new EnumMap<>(EquipmentType.class), (map) -> {
+        map.put(EquipmentType.BOOTS, 1);
+        map.put(EquipmentType.LEGGINGS, 3);
+        map.put(EquipmentType.CHESTPLATE, 5);
+        map.put(EquipmentType.HELMET, 2);
+        map.put(EquipmentType.BODY, 3);
+    }), 25, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_GLAZED_GOLD, 0.0F, 0.0F, ParadiseLostItemTags.REPAIRS_GLAZED_GOLD_ARMOR, ParadiseLost.locate("glazed_gold"));
 
-    private static RegistryEntry<ArmorMaterial> register(String id, EnumMap<EquipmentType, Integer> defense, int enchantability, RegistryEntry<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
-        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(Identifier.of(id)));
-        return register(id, defense, enchantability, equipSound, toughness, knockbackResistance, repairIngredient, list);
-    }
+    public static final ArmorMaterial SURTRUM = new ArmorMaterial(27, Util.make(new EnumMap<>(EquipmentType.class), (map) -> {
+        map.put(EquipmentType.BOOTS, 2);
+        map.put(EquipmentType.LEGGINGS, 5);
+        map.put(EquipmentType.CHESTPLATE, 6);
+        map.put(EquipmentType.HELMET, 3);
+        map.put(EquipmentType.BODY, 5);
+    }), 15, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_SURTRUM, 0.0F, 0.0F, ParadiseLostItemTags.REPAIRS_SURTRUM_ARMOR, ParadiseLost.locate("surtrum"));
 
-    private static RegistryEntry<ArmorMaterial> register(String id, EnumMap<EquipmentType, Integer> defense, int enchantability, RegistryEntry<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient, List<ArmorMaterial.Layer> layers) {
-        EnumMap<EquipmentType, Integer> enumMap = new EnumMap(EquipmentType.class);
-
-        for (EquipmentType type : EquipmentType.values()) {
-            enumMap.put(type, defense.get(type));
-        }
-
-        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(id), new ArmorMaterial(enumMap, enchantability, equipSound, repairIngredient, layers, toughness, knockbackResistance));
-    }
+    public static final ArmorMaterial RELIC = new ArmorMaterial(15, Util.make(new EnumMap<>(EquipmentType.class), (map) -> {
+        map.put(EquipmentType.BOOTS, 1);
+        map.put(EquipmentType.LEGGINGS, 4);
+        map.put(EquipmentType.CHESTPLATE, 5);
+        map.put(EquipmentType.HELMET, 2);
+        map.put(EquipmentType.BODY, 4);
+    }), 12, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_RELIC, 0.5F, 0.0F, ParadiseLostItemTags.REPAIRS_RELIC_ARMOR, ParadiseLost.locate("relic"));
 
 }

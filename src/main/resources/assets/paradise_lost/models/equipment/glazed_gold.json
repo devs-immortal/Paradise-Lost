@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "paradise_lost:glazed_gold"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "paradise_lost:glazed_gold"
+      }
+    ]
+  }
+}

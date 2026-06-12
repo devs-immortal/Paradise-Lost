@@ -22,6 +22,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.EntityType;
@@ -36,6 +37,8 @@ import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -49,6 +52,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static net.id.paradiselost.ParadiseLost.MOD_ID;
 import static net.id.paradiselost.ParadiseLost.locate;
@@ -65,20 +69,20 @@ public class ParadiseLostItems {
         return new Settings();
     }
 
-    public static final Item GOLDEN_AMBER = add("golden_amber", new Item(resource()));
-    public static final Item CHERINE = add("cherine", new Item(resource()), fuel(500));
-    public static final Item OLVITE = add("olvite", new Item(resource()));
-    public static final Item OLVITE_NUGGET = add("olvite_nugget", new Item(resource()));
-    public static final Item REFINED_SURTRUM = add("refined_surtrum", new Item(resource().fireproof()));
-    public static final Item RAW_SURTRUM = add("raw_surtrum", new Item(resource().fireproof()));
-    public static final Item LEVITA_GEM = add("levita_gem", new Item(resource()));
-    public static final Item FLAX_THREAD = add("flax_thread", new Item(resource()));
-    public static final Item FLAXWEAVE = add("flaxweave", new Item(resource()));
-    public static final Item SWEDROOT_PULP = add("swedroot_pulp", new Item(resource()), compostable30);
+    public static final Item GOLDEN_AMBER = add("golden_amber", Item::new, resource());
+    public static final Item CHERINE = add("cherine", Item::new, resource(), fuel(500));
+    public static final Item OLVITE = add("olvite", Item::new, resource());
+    public static final Item OLVITE_NUGGET = add("olvite_nugget", Item::new, resource());
+    public static final Item REFINED_SURTRUM = add("refined_surtrum", Item::new, resource().fireproof());
+    public static final Item RAW_SURTRUM = add("raw_surtrum", Item::new, resource().fireproof());
+    public static final Item LEVITA_GEM = add("levita_gem", Item::new, resource());
+    public static final Item FLAX_THREAD = add("flax_thread", Item::new, resource());
+    public static final Item FLAXWEAVE = add("flaxweave", Item::new, resource());
+    public static final Item SWEDROOT_PULP = add("swedroot_pulp", Item::new, resource(), compostable30);
 
     // Loot
-    public static final Item SOL_POTTERY_SHERD = add("sol_pottery_sherd", new Item(resource().component(SherdsApiDataComponents.SHERD_PATTERN.get(), ParadiseLost.locate("sol_pottery_pattern"))));
-    public static final Item COO_POTTERY_SHERD = add("coo_pottery_sherd", new Item(resource().component(SherdsApiDataComponents.SHERD_PATTERN.get(), ParadiseLost.locate("coo_pottery_pattern"))));
+    public static final Item SOL_POTTERY_SHERD = add("sol_pottery_sherd", Item::new, resource().component(SherdsApiDataComponents.SHERD_PATTERN.get(), ParadiseLost.locate("sol_pottery_pattern")));
+    public static final Item COO_POTTERY_SHERD = add("coo_pottery_sherd", Item::new, resource().component(SherdsApiDataComponents.SHERD_PATTERN.get(), ParadiseLost.locate("coo_pottery_pattern")));
 
     private static Settings tool() {
         return new Settings();
@@ -96,37 +100,37 @@ public class ParadiseLostItems {
     }
 
     // Olvite
-    public static final ShovelItem OLVITE_SHOVEL = add("olvite_shovel", new ShovelItem(ParadiseLostToolMaterials.OLVITE,1.5F, -3F, tool()));
-    public static final PickaxeItem OLVITE_PICKAXE = add("olvite_pickaxe", new PickaxeItem(ParadiseLostToolMaterials.OLVITE, 1F, -2.8F, tool()));
-    public static final AxeItem OLVITE_AXE = add("olvite_axe", new AxeItem(ParadiseLostToolMaterials.OLVITE, 6f, -3.1f, tool()));
-    public static final SwordItem OLVITE_SWORD = add("olvite_sword", new SwordItem(ParadiseLostToolMaterials.OLVITE, 3, -2.4f, tool()));
-    public static final HoeItem OLVITE_HOE = add("olvite_hoe", new HoeItem(ParadiseLostToolMaterials.OLVITE, -2, -1f, tool()));
+    public static final ShovelItem OLVITE_SHOVEL = add("olvite_shovel", settings -> new ShovelItem(ParadiseLostToolMaterials.OLVITE, 1.5F, -3F, settings), tool());
+    public static final PickaxeItem OLVITE_PICKAXE = add("olvite_pickaxe", settings -> new PickaxeItem(ParadiseLostToolMaterials.OLVITE, 1F, -2.8F, settings), tool());
+    public static final AxeItem OLVITE_AXE = add("olvite_axe", settings -> new AxeItem(ParadiseLostToolMaterials.OLVITE, 6f, -3.1f, settings), tool());
+    public static final SwordItem OLVITE_SWORD = add("olvite_sword", settings -> new SwordItem(ParadiseLostToolMaterials.OLVITE, 3, -2.4f, settings), tool());
+    public static final HoeItem OLVITE_HOE = add("olvite_hoe", settings -> new HoeItem(ParadiseLostToolMaterials.OLVITE, -2, -1f, settings), tool());
 
     // Surtrum
-    public static final ShovelItem SURTRUM_SHOVEL = add("surtrum_shovel", new ShovelItem(ParadiseLostToolMaterials.SURTRUM,2.5f, -3f, tool().fireproof()));
-    public static final PickaxeItem SURTRUM_PICKAXE = add("surtrum_pickaxe", new PickaxeItem(ParadiseLostToolMaterials.SURTRUM,  2, -2.8f, tool().fireproof()));
-    public static final AxeItem SURTRUM_AXE = add("surtrum_axe", new AxeItem(ParadiseLostToolMaterials.SURTRUM, 6f, -3.1f, tool().fireproof()));
-    public static final SwordItem SURTRUM_SWORD = add("surtrum_sword", new SwordItem(ParadiseLostToolMaterials.SURTRUM,  4, -2.4f, tool().fireproof()));
-    public static final HoeItem SURTRUM_HOE = add("surtrum_hoe", new HoeItem(ParadiseLostToolMaterials.SURTRUM,  -3, 0f, tool().fireproof()));
+    public static final ShovelItem SURTRUM_SHOVEL = add("surtrum_shovel", settings -> new ShovelItem(ParadiseLostToolMaterials.SURTRUM, 2.5f, -3f, settings), tool().fireproof());
+    public static final PickaxeItem SURTRUM_PICKAXE = add("surtrum_pickaxe", settings -> new PickaxeItem(ParadiseLostToolMaterials.SURTRUM, 2, -2.8f, settings), tool().fireproof());
+    public static final AxeItem SURTRUM_AXE = add("surtrum_axe", settings -> new AxeItem(ParadiseLostToolMaterials.SURTRUM, 6f, -3.1f, settings), tool().fireproof());
+    public static final SwordItem SURTRUM_SWORD = add("surtrum_sword", settings -> new SwordItem(ParadiseLostToolMaterials.SURTRUM, 4, -2.4f, settings), tool().fireproof());
+    public static final HoeItem SURTRUM_HOE = add("surtrum_hoe", settings -> new HoeItem(ParadiseLostToolMaterials.SURTRUM, -3, 0f, settings), tool().fireproof());
 
     // Glazed Gold
-    public static final ShovelItem GLAZED_GOLD_SHOVEL = add("glazed_gold_shovel", new ShovelItem(ParadiseLostToolMaterials.GLAZED_GOLD, 1.5f, -3f, tool()));
-    public static final PickaxeItem GLAZED_GOLD_PICKAXE = add("glazed_gold_pickaxe", new PickaxeItem(ParadiseLostToolMaterials.GLAZED_GOLD, 1, -2.8f, tool()));
-    public static final AxeItem GLAZED_GOLD_AXE = add("glazed_gold_axe", new AxeItem(ParadiseLostToolMaterials.GLAZED_GOLD, 6f, -3.0f, tool()));
-    public static final SwordItem GLAZED_GOLD_SWORD = add("glazed_gold_sword", new SwordItem(ParadiseLostToolMaterials.GLAZED_GOLD, 3, -2.4f, tool()));
-    public static final HoeItem GLAZED_GOLD_HOE = add("glazed_gold_hoe", new HoeItem(ParadiseLostToolMaterials.GLAZED_GOLD, -2, -2.0f, tool()));
+    public static final ShovelItem GLAZED_GOLD_SHOVEL = add("glazed_gold_shovel", settings -> new ShovelItem(ParadiseLostToolMaterials.GLAZED_GOLD, 1.5f, -3f, settings), tool());
+    public static final PickaxeItem GLAZED_GOLD_PICKAXE = add("glazed_gold_pickaxe", settings -> new PickaxeItem(ParadiseLostToolMaterials.GLAZED_GOLD, 1, -2.8f, settings), tool());
+    public static final AxeItem GLAZED_GOLD_AXE = add("glazed_gold_axe", settings -> new AxeItem(ParadiseLostToolMaterials.GLAZED_GOLD, 6f, -3.0f, settings), tool());
+    public static final SwordItem GLAZED_GOLD_SWORD = add("glazed_gold_sword", settings -> new SwordItem(ParadiseLostToolMaterials.GLAZED_GOLD, 3, -2.4f, settings), tool());
+    public static final HoeItem GLAZED_GOLD_HOE = add("glazed_gold_hoe", settings -> new HoeItem(ParadiseLostToolMaterials.GLAZED_GOLD, -2, -2.0f, settings), tool());
 
-    public static final SwordItem SOUL_BLADE = add("soul_blade", new SoulSwordItem(ParadiseLostToolMaterials.SOUL_BLADE, 1, -2.8f, tool().rarity(Rarity.EPIC)));
+    public static final SwordItem SOUL_BLADE = add("soul_blade", settings -> new SoulSwordItem(ParadiseLostToolMaterials.SOUL_BLADE, 1, -2.8f, settings), tool().rarity(Rarity.EPIC));
 
     // misc
-    public static final SpyglassItem OLVITE_SPYGLASS = add("olvite_spyglass", new SpyglassItem(unstackableTool()));
-    public static final Item TOTEM_OF_LEVITATION = add("totem_of_levitation", new Item(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)));
+    public static final SpyglassItem OLVITE_SPYGLASS = add("olvite_spyglass", SpyglassItem::new, unstackableTool());
+    public static final Item TOTEM_OF_LEVITATION = add("totem_of_levitation", Item::new, new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON));
 
     // wands
-    public static final GravityWandItem LEVITA_WAND = add("levita_wand", new GravityWandItem(unstackableRareTool().maxDamage(100)));
-    public static final CherineBloodstoneItem CHERINE_BLOODSTONE = add("cherine_bloodstone", new CherineBloodstoneItem(unstackableTool()));
-    public static final OlviteBloodstoneItem OLVITE_BLOODSTONE = add("olvite_bloodstone", new OlviteBloodstoneItem(unstackableTool()));
-    public static final SurtrumBloodstoneItem SURTRUM_BLOODSTONE = add("surtrum_bloodstone", new SurtrumBloodstoneItem(unstackableTool().fireproof()));
+    public static final GravityWandItem LEVITA_WAND = add("levita_wand", GravityWandItem::new, unstackableRareTool().maxDamage(100));
+    public static final CherineBloodstoneItem CHERINE_BLOODSTONE = add("cherine_bloodstone", CherineBloodstoneItem::new, unstackableTool());
+    public static final OlviteBloodstoneItem OLVITE_BLOODSTONE = add("olvite_bloodstone", OlviteBloodstoneItem::new, unstackableTool());
+    public static final SurtrumBloodstoneItem SURTRUM_BLOODSTONE = add("surtrum_bloodstone", SurtrumBloodstoneItem::new, unstackableTool().fireproof());
 
 
     private static final Text GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT = Text.translatable(Util.createTranslationKey("item", locate("smithing_template.glazed_gold_upgrade.applies_to"))).formatted(Formatting.BLUE);
@@ -134,13 +138,8 @@ public class ParadiseLostItems {
     private static final Text GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT = Text.translatable(Util.createTranslationKey("item", locate("smithing_template.glazed_gold_upgrade.base_slot_description")));
     private static final Text GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT = Text.translatable(Util.createTranslationKey("item", locate("smithing_template.glazed_gold_upgrade.additions_slot_description")));
 
-    public static final Item GLAZED_GOLD_UPGRADE = add("glazed_gold_upgrade_smithing_template", new SmithingTemplateItem(
-            GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT, GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT, GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT, GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT,
-            List.of(Identifier.of("item/empty_armor_slot_helmet"), Identifier.of("item/empty_armor_slot_chestplate"), Identifier.of("item/empty_armor_slot_leggings"), Identifier.of("item/empty_armor_slot_boots"),
-                    Identifier.of("item/empty_slot_hoe"), Identifier.of("item/empty_slot_axe"), Identifier.of("item/empty_slot_sword"), Identifier.of("item/empty_slot_shovel"), Identifier.of("item/empty_slot_pickaxe")),
-            List.of(Identifier.of("item/empty_slot_ingot")),
-            new Settings()
-    ));
+    public static final Item GLAZED_GOLD_UPGRADE = add("glazed_gold_upgrade_smithing_template", settings -> new SmithingTemplateItem(GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT, GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT, GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT, GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT, List.of(Identifier.of("item/empty_armor_slot_helmet"), Identifier.of("item/empty_armor_slot_chestplate"), Identifier.of("item/empty_armor_slot_leggings"), Identifier.of("item/empty_armor_slot_boots"),
+                    Identifier.of("item/empty_slot_hoe"), Identifier.of("item/empty_slot_axe"), Identifier.of("item/empty_slot_sword"), Identifier.of("item/empty_slot_shovel"), Identifier.of("item/empty_slot_pickaxe")), List.of(Identifier.of("item/empty_slot_ingot")), settings), new Settings());
 
     private static Settings wearable() {
         return new Settings();
@@ -149,35 +148,27 @@ public class ParadiseLostItems {
     private static final Settings WEARABLE = wearable();
     private static final Settings RARE_WEARABLE = wearable().rarity(RARE);
 
-    private static ArmorItem armorHelper(ArmorMaterial mat, EquipmentType type, int durabilityMultiplier, Item.Settings settings) {
-        return new ArmorItem(mat, type, WEARABLE.maxDamage(type.getMaxDamage(durabilityMultiplier)));
-    }
-
-    private static ArmorItem armorHelper(ArmorMaterial mat, EquipmentType type, int durabilityMultiplier) {
-        return armorHelper(mat, type, durabilityMultiplier, WEARABLE);
-    }
-
     // Olvite
-    public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", armorHelper(ParadiseLostArmorMaterials.OLVITE.value(), EquipmentType.HELMET, 15));
-    public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", armorHelper(ParadiseLostArmorMaterials.OLVITE.value(), EquipmentType.CHESTPLATE, 15));
-    public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", armorHelper(ParadiseLostArmorMaterials.OLVITE.value(), EquipmentType.LEGGINGS, 15));
-    public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", armorHelper(ParadiseLostArmorMaterials.OLVITE.value(), EquipmentType.BOOTS, 15));
-    public static final ArmorItem OLVITE_HELMET_ORNATE = add("ornate_olvite_helmet", armorHelper(ParadiseLostArmorMaterials.OLVITE.value(), EquipmentType.HELMET, 15));
+    public static final ArmorItem OLVITE_HELMET = add("olvite_helmet", armor(ParadiseLostArmorMaterials.OLVITE, EquipmentType.HELMET), WEARABLE);
+    public static final ArmorItem OLVITE_CHESTPLATE = add("olvite_chestplate", armor(ParadiseLostArmorMaterials.OLVITE, EquipmentType.CHESTPLATE), WEARABLE);
+    public static final ArmorItem OLVITE_LEGGINGS = add("olvite_leggings", armor(ParadiseLostArmorMaterials.OLVITE, EquipmentType.LEGGINGS), WEARABLE);
+    public static final ArmorItem OLVITE_BOOTS = add("olvite_boots", armor(ParadiseLostArmorMaterials.OLVITE, EquipmentType.BOOTS), WEARABLE);
+    public static final ArmorItem OLVITE_HELMET_ORNATE = add("ornate_olvite_helmet", armor(ParadiseLostArmorMaterials.OLVITE, EquipmentType.HELMET), WEARABLE);
 
     // Glazed Gold
-    public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD.value(), EquipmentType.HELMET, 21));
-    public static final ArmorItem GLAZED_GOLD_CHESTPLATE = add("glazed_gold_chestplate", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD.value(), EquipmentType.CHESTPLATE, 21));
-    public static final ArmorItem GLAZED_GOLD_LEGGINGS = add("glazed_gold_leggings", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD.value(), EquipmentType.LEGGINGS, 21));
-    public static final ArmorItem GLAZED_GOLD_BOOTS = add("glazed_gold_boots", armorHelper(ParadiseLostArmorMaterials.GLAZED_GOLD.value(), EquipmentType.BOOTS, 21));
+    public static final ArmorItem GLAZED_GOLD_HELMET = add("glazed_gold_helmet", armor(ParadiseLostArmorMaterials.GLAZED_GOLD, EquipmentType.HELMET), WEARABLE);
+    public static final ArmorItem GLAZED_GOLD_CHESTPLATE = add("glazed_gold_chestplate", armor(ParadiseLostArmorMaterials.GLAZED_GOLD, EquipmentType.CHESTPLATE), WEARABLE);
+    public static final ArmorItem GLAZED_GOLD_LEGGINGS = add("glazed_gold_leggings", armor(ParadiseLostArmorMaterials.GLAZED_GOLD, EquipmentType.LEGGINGS), WEARABLE);
+    public static final ArmorItem GLAZED_GOLD_BOOTS = add("glazed_gold_boots", armor(ParadiseLostArmorMaterials.GLAZED_GOLD, EquipmentType.BOOTS), WEARABLE);
 
     // Surtrum
-    public static final ArmorItem SURTRUM_HELMET = add("surtrum_helmet", armorHelper(ParadiseLostArmorMaterials.SURTRUM.value(), EquipmentType.HELMET, 27, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_CHESTPLATE = add("surtrum_chestplate", armorHelper(ParadiseLostArmorMaterials.SURTRUM.value(), EquipmentType.CHESTPLATE, 27, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", armorHelper(ParadiseLostArmorMaterials.SURTRUM.value(), EquipmentType.LEGGINGS, 27, wearable().fireproof()));
-    public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", armorHelper(ParadiseLostArmorMaterials.SURTRUM.value(), EquipmentType.BOOTS, 27, wearable().fireproof()));
+    public static final ArmorItem SURTRUM_HELMET = add("surtrum_helmet", armor(ParadiseLostArmorMaterials.SURTRUM, EquipmentType.HELMET), wearable().fireproof());
+    public static final ArmorItem SURTRUM_CHESTPLATE = add("surtrum_chestplate", armor(ParadiseLostArmorMaterials.SURTRUM, EquipmentType.CHESTPLATE), wearable().fireproof());
+    public static final ArmorItem SURTRUM_LEGGINGS = add("surtrum_leggings", armor(ParadiseLostArmorMaterials.SURTRUM, EquipmentType.LEGGINGS), wearable().fireproof());
+    public static final ArmorItem SURTRUM_BOOTS = add("surtrum_boots", armor(ParadiseLostArmorMaterials.SURTRUM, EquipmentType.BOOTS), wearable().fireproof());
 
     // Relic
-    public static final XpCircletItem XP_CIRCLET = add("xp_circlet", new XpCircletItem(ParadiseLostArmorMaterials.RELIC.value(), EquipmentType.HELMET, WEARABLE.maxDamage(EquipmentType.HELMET.getMaxDamage(15)).rarity(RARE)));
+    public static final XpCircletItem XP_CIRCLET = add("xp_circlet", settings -> new XpCircletItem(ParadiseLostArmorMaterials.RELIC, EquipmentType.HELMET, settings), WEARABLE.rarity(RARE));
 
     private static Settings food() {
         return new Settings();
@@ -187,59 +178,60 @@ public class ParadiseLostItems {
         return new Settings().food(foodComponent);
     }
 
-    public static final BlockItem BLACKCURRANT = add("blackcurrant", new BlockItem(ParadiseLostBlocks.BLACKCURRANT_BUSH, food(ParadiseLostFoodComponent.BLACKCURRANT)), compostable30);
-    public static final BlockItem AMADRYS_BUSHEL = add("amadrys_bushel", new BlockItem(ParadiseLostBlocks.AMADRYS, food(ParadiseLostFoodComponent.GENERIC_WORSE)), compostable30);
-    public static final BlockItem NITRA_SEED = add("nitra", new BlockItem(ParadiseLostBlocks.NITRA, food()), compostable15);
-    public static final Item NITRA_BULB = add("nitra_bulb", new NitraItem(food()), compostable50);
-    public static final Item AMADRYS_NOODLES = add("amadrys_noodles", new Item(food(ParadiseLostFoodComponent.AMADRYS_NOODLES)));
-    public static final Item AMADRYS_BREAD = add("amadrys_bread", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD)), compostable50);
-    public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED)), compostable50);
-    public static final Item AMADRYS_BREAD_GLAZED_FILLED = add("amadrys_bread_glazed_filled", new Item(food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED_FILLED)), compostable50);
-    public static final BlockItem SWEDROOT = add("swedroot", new BlockItem(ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
+    private static Settings food(FoodComponent foodComponent, ConsumableComponent consumableComponent) {
+        return new Settings().food(foodComponent, consumableComponent);
+    }
 
-    public static final Item BLACKCURRANT_PIE = add("blackcurrant_pie", new Item(food(ParadiseLostFoodComponent.BLACKCURRANT_PIE)), compostable100);
-    public static final Item BLACKCURRANT_COOKIE = add("blackcurrant_cookie", new Item(food(ParadiseLostFoodComponent.BLACKCURRANT_COOKIE)), compostable85);
-    public static final Item ROOT_STEW = add("root_stew", new Item(food(ParadiseLostFoodComponent.ROOT_STEW)));
+    public static final BlockItem BLACKCURRANT = add("blackcurrant", ParadiseLostBlocks.BLACKCURRANT_BUSH, food(ParadiseLostFoodComponent.BLACKCURRANT, ParadiseLostFoodComponent.BLACKCURRANT_CONSUMABLE), compostable30);
+    public static final BlockItem AMADRYS_BUSHEL = add("amadrys_bushel", ParadiseLostBlocks.AMADRYS, food(ParadiseLostFoodComponent.GENERIC_WORSE, ParadiseLostFoodComponent.GENERIC_WORSE_CONSUMABLE), compostable30);
+    public static final BlockItem NITRA_SEED = add("nitra", ParadiseLostBlocks.NITRA, food(), compostable15);
+    public static final Item NITRA_BULB = add("nitra_bulb", NitraItem::new, food(), compostable50);
+    public static final Item AMADRYS_NOODLES = add("amadrys_noodles", Item::new, food(ParadiseLostFoodComponent.AMADRYS_NOODLES).useRemainder(Items.BOWL));
+    public static final Item AMADRYS_BREAD = add("amadrys_bread", Item::new, food(ParadiseLostFoodComponent.AMADRYS_BREAD), compostable50);
+    public static final Item AMADRYS_BREAD_GLAZED = add("amadrys_bread_glazed", Item::new, food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED), compostable50);
+    public static final Item AMADRYS_BREAD_GLAZED_FILLED = add("amadrys_bread_glazed_filled", Item::new, food(ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED_FILLED, ParadiseLostFoodComponent.AMADRYS_BREAD_GLAZED_FILLED_CONSUMABLE), compostable50);
+    public static final BlockItem SWEDROOT = add("swedroot", ParadiseLostBlocks.SWEDROOT, food(ParadiseLostFoodComponent.SWEDROOT), compostable30);
 
-    public static final BlockItem FLAXSEED = add("flaxseed", new BlockItem(ParadiseLostBlocks.FLAX, food()), compostable30);
-    public static final Item MOA_MEAT = add("moa_meat", new Item(food(ParadiseLostFoodComponent.MOA_MEAT)));
-    public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", new Item(food(ParadiseLostFoodComponent.COOKED_MOA_MEAT)));
-    public static final Item POPOM_JELLY = add("popom_jelly", new Item(food(ParadiseLostFoodComponent.POPOM_JELLY)), compostable15);
+    public static final Item BLACKCURRANT_PIE = add("blackcurrant_pie", Item::new, food(ParadiseLostFoodComponent.BLACKCURRANT_PIE), compostable100);
+    public static final Item BLACKCURRANT_COOKIE = add("blackcurrant_cookie", Item::new, food(ParadiseLostFoodComponent.BLACKCURRANT_COOKIE), compostable85);
+    public static final Item ROOT_STEW = add("root_stew", Item::new, food(ParadiseLostFoodComponent.ROOT_STEW).useRemainder(Items.BOWL));
 
-    public static final ParadiseLostPortalItem PARADISE_LOST_PORTAL = add("portal", new ParadiseLostPortalItem(new Settings()));
-    public static final PalaceDoorPlacerItem PALACE_DOOR_PLACER = add("palace_door_placer", new PalaceDoorPlacerItem(new Settings()));
+    public static final BlockItem FLAXSEED = add("flaxseed", ParadiseLostBlocks.FLAX, food(), compostable30);
+    public static final Item MOA_MEAT = add("moa_meat", Item::new, food(ParadiseLostFoodComponent.MOA_MEAT));
+    public static final Item COOKED_MOA_MEAT = add("moa_meat_cooked", Item::new, food(ParadiseLostFoodComponent.COOKED_MOA_MEAT));
+    public static final Item POPOM_JELLY = add("popom_jelly", Item::new, food(ParadiseLostFoodComponent.POPOM_JELLY, ParadiseLostFoodComponent.POPOM_JELLY_CONSUMABLE), compostable15);
 
-    public static final MoaEggItem MOA_EGG = add("moa_egg", new MoaEggItem(new Settings().maxCount(1)));
+    public static final ParadiseLostPortalItem PARADISE_LOST_PORTAL = add("portal", ParadiseLostPortalItem::new, new Settings());
+    public static final PalaceDoorPlacerItem PALACE_DOOR_PLACER = add("palace_door_placer", PalaceDoorPlacerItem::new, new Settings());
+
+    public static final MoaEggItem MOA_EGG = add("moa_egg", MoaEggItem::new, new Settings().maxCount(1));
     public static final BlockItem NITRA_BUNCH = add(ParadiseLostBlocks.NITRA_BUNCH, fuel(3200));
 
-    public static final AurelBucketItem AUREL_BUCKET = add("aurel_bucket", new AurelBucketItem(new Settings().maxCount(16)), fuel(200), emptyBucketBehavior);
+    public static final AurelBucketItem AUREL_BUCKET = add("aurel_bucket", AurelBucketItem::new, new Settings().maxCount(16), fuel(200), emptyBucketBehavior);
 
     private static final Settings aurelBucket = new Settings().maxCount(1).recipeRemainder(AUREL_BUCKET);
-    public static final AurelBucketItem AUREL_WATER_BUCKET = add("aurel_water_bucket", new AurelBucketItem(Fluids.WATER, aurelBucket), emptiableBucketBehavior);
-    public static final AurelBucketItem AUREL_POWDER_SNOW_BUCKET = add("aurel_powder_snow_bucket", new AurelBucketItem(Blocks.POWDER_SNOW, aurelBucket), emptiableBucketBehavior);
-    public static final AurelMilkBucketItem AUREL_MILK_BUCKET = add(
-            "aurel_milk_bucket",
-            new AurelMilkBucketItem(new Item.Settings().recipeRemainder(AUREL_BUCKET).component(DataComponentTypes.CONSUMABLE, ConsumableComponents.MILK_BUCKET).maxCount(1))
-    );
+    public static final AurelBucketItem AUREL_WATER_BUCKET = add("aurel_water_bucket", settings -> new AurelBucketItem(Fluids.WATER, settings), aurelBucket, emptiableBucketBehavior);
+    public static final AurelBucketItem AUREL_POWDER_SNOW_BUCKET = add("aurel_powder_snow_bucket", settings -> new AurelBucketItem(Blocks.POWDER_SNOW, settings), aurelBucket, emptiableBucketBehavior);
+    public static final AurelMilkBucketItem AUREL_MILK_BUCKET = add("aurel_milk_bucket", AurelMilkBucketItem::new, new Item.Settings().recipeRemainder(AUREL_BUCKET).component(DataComponentTypes.CONSUMABLE, ConsumableComponents.MILK_BUCKET).maxCount(1));
 
 
-    public static final WardedJarItem WARDED_JAR = add("warded_jar", new WardedJarItem(new Settings()));
+    public static final WardedJarItem WARDED_JAR = add("warded_jar", WardedJarItem::new, new Settings());
 
     private static Settings wardedJar() {
         return new Settings().maxCount(1).recipeRemainder(WARDED_JAR);
     }
 
-    public static final WardedJarItem WARDED_JAR_ALLAY = add("warded_jar_allay", new WardedJarItem(EntityType.ALLAY, wardedJar()));
-    public static final WardedJarItem WARDED_JAR_QUINT = add("warded_jar_quint", new WardedJarItem(ParadiseLostEntityTypes.QUINT, wardedJar()));
+    public static final WardedJarItem WARDED_JAR_ALLAY = add("warded_jar_allay", settings -> new WardedJarItem(EntityType.ALLAY, settings), wardedJar());
+    public static final WardedJarItem WARDED_JAR_QUINT = add("warded_jar_quint", settings -> new WardedJarItem(ParadiseLostEntityTypes.QUINT, settings), wardedJar());
 
-    public static final Item PALACE_KEY = add("palace_key", new Item(new Settings()));
+    public static final Item PALACE_KEY = add("palace_key", Item::new, new Settings());
 
     // Creative spawn eggs
-    public static final SpawnEggItem ENVOY_SPAWN_EGG = add("envoy_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.ENVOY, 0xc5b1af, 0x993c3c, new Settings()), spawnEggBehavior);
-    public static final SpawnEggItem SENTINEL_SPAWN_EGG = add("sentinel_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.SENTINEL, 0xf7eeec, 0xffc0bf, new Settings()), spawnEggBehavior);
-    public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, new Settings()), spawnEggBehavior);
-    public static final SpawnEggItem POPOM_SPAWN_EGG = add("popom_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.POPOM, 0xd984e8, 0xd4d0cf, new Settings()), spawnEggBehavior);
-    public static final SpawnEggItem QUINT_SPAWN_EGG = add("quint_spawn_egg", new SpawnEggItem(ParadiseLostEntityTypes.QUINT, 0xd9d0d9, 0xeeebf0, new Settings()), spawnEggBehavior);
+    public static final SpawnEggItem ENVOY_SPAWN_EGG = add("envoy_spawn_egg", settings -> new SpawnEggItem(ParadiseLostEntityTypes.ENVOY, 0xc5b1af, 0x993c3c, settings), new Settings(), spawnEggBehavior);
+    public static final SpawnEggItem SENTINEL_SPAWN_EGG = add("sentinel_spawn_egg", settings -> new SpawnEggItem(ParadiseLostEntityTypes.SENTINEL, 0xf7eeec, 0xffc0bf, settings), new Settings(), spawnEggBehavior);
+    public static final SpawnEggItem MOA_SPAWN_EGG = add("moa_spawn_egg", settings -> new SpawnEggItem(ParadiseLostEntityTypes.MOA, 0xC55C2E4, 0xB3A8BB, settings), new Settings(), spawnEggBehavior);
+    public static final SpawnEggItem POPOM_SPAWN_EGG = add("popom_spawn_egg", settings -> new SpawnEggItem(ParadiseLostEntityTypes.POPOM, 0xd984e8, 0xd4d0cf, settings), new Settings(), spawnEggBehavior);
+    public static final SpawnEggItem QUINT_SPAWN_EGG = add("quint_spawn_egg", settings -> new SpawnEggItem(ParadiseLostEntityTypes.QUINT, 0xd9d0d9, 0xeeebf0, settings), new Settings(), spawnEggBehavior);
 
     public static final BlockItem BLOOMED_CALCITE = add(ParadiseLostBlocks.BLOOMED_CALCITE);
 
@@ -435,7 +427,7 @@ public class ParadiseLostItems {
 
     // lights
     public static final BlockItem CHERINE_LANTERN = add(ParadiseLostBlocks.CHERINE_LANTERN);
-    public static final VerticallyAttachableBlockItem CHERINE_TORCH = add("cherine_torch", new VerticallyAttachableBlockItem(ParadiseLostBlocks.CHERINE_TORCH, ParadiseLostBlocks.CHERINE_TORCH_WALL, Direction.DOWN, new Settings()));
+    public static final VerticallyAttachableBlockItem CHERINE_TORCH = add("cherine_torch", settings -> new VerticallyAttachableBlockItem(ParadiseLostBlocks.CHERINE_TORCH, ParadiseLostBlocks.CHERINE_TORCH_WALL, Direction.DOWN, settings), new Settings().translationKey(ParadiseLostBlocks.CHERINE_TORCH.getTranslationKey()));
 
     // util blocks (enchanter, freezer, etc.)
     public static final BlockItem CALCITE_FLOWER_POT = add(ParadiseLostBlocks.CALCITE_FLOWER_POT);
@@ -490,15 +482,18 @@ public class ParadiseLostItems {
     public static final BlockItem PERMAFROST_PATH = add(ParadiseLostBlocks.PERMAFROST_PATH);
 
     // signs, wall stuff.
-    private static final Settings sign = new Settings().maxCount(16);
-    public static final SignItem AUREL_SIGN = add("aurel_sign", new SignItem(ParadiseLostBlocks.AUREL_SIGNS.sign(), ParadiseLostBlocks.AUREL_SIGNS.wallSign(), sign), fuel(200));
-    public static final SignItem AUREL_HANGING_SIGN = add("aurel_hanging_sign", new HangingSignItem(ParadiseLostBlocks.AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.AUREL_SIGNS.wallHangingSign(), sign), fuel(200));
-    public static final SignItem MOTHER_AUREL_SIGN = add("mother_aurel_sign", new SignItem(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.sign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallSign(), sign), fuel(200));
-    public static final SignItem MOTHER_AUREL_HANGING_SIGN = add("mother_aurel_hanging_sign", new HangingSignItem(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallHangingSign(), sign), fuel(200));
-    public static final SignItem MENTH_SIGN = add("menth_sign", new SignItem(ParadiseLostBlocks.MENTH_SIGNS.sign(), ParadiseLostBlocks.MENTH_SIGNS.wallSign(), sign), fuel(200));
-    public static final SignItem MENTH_HANGING_SIGN = add("menth_hanging_sign", new HangingSignItem(ParadiseLostBlocks.MENTH_SIGNS.hangingSign(), ParadiseLostBlocks.MENTH_SIGNS.wallHangingSign(), sign), fuel(200));
-    public static final SignItem WISTERIA_SIGN = add("wisteria_sign", new SignItem(ParadiseLostBlocks.WISTERIA_SIGNS.sign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallSign(), sign), fuel(200));
-    public static final SignItem WISTERIA_HANGING_SIGN = add("wisteria_hanging_sign", new HangingSignItem(ParadiseLostBlocks.WISTERIA_SIGNS.hangingSign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallHangingSign(), sign), fuel(200));
+    private static Settings sign(Block signBlock) {
+        return new Settings().maxCount(16).translationKey(signBlock.getTranslationKey());
+    }
+
+    public static final SignItem AUREL_SIGN = add("aurel_sign", settings -> new SignItem(ParadiseLostBlocks.AUREL_SIGNS.sign(), ParadiseLostBlocks.AUREL_SIGNS.wallSign(), settings), sign(ParadiseLostBlocks.AUREL_SIGNS.sign()), fuel(200));
+    public static final SignItem AUREL_HANGING_SIGN = add("aurel_hanging_sign", settings -> new HangingSignItem(ParadiseLostBlocks.AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.AUREL_SIGNS.wallHangingSign(), settings), sign(ParadiseLostBlocks.AUREL_SIGNS.hangingSign()), fuel(200));
+    public static final SignItem MOTHER_AUREL_SIGN = add("mother_aurel_sign", settings -> new SignItem(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.sign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallSign(), settings), sign(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.sign()), fuel(200));
+    public static final SignItem MOTHER_AUREL_HANGING_SIGN = add("mother_aurel_hanging_sign", settings -> new HangingSignItem(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.hangingSign(), ParadiseLostBlocks.MOTHER_AUREL_SIGNS.wallHangingSign(), settings), sign(ParadiseLostBlocks.MOTHER_AUREL_SIGNS.hangingSign()), fuel(200));
+    public static final SignItem MENTH_SIGN = add("menth_sign", settings -> new SignItem(ParadiseLostBlocks.MENTH_SIGNS.sign(), ParadiseLostBlocks.MENTH_SIGNS.wallSign(), settings), sign(ParadiseLostBlocks.MENTH_SIGNS.sign()), fuel(200));
+    public static final SignItem MENTH_HANGING_SIGN = add("menth_hanging_sign", settings -> new HangingSignItem(ParadiseLostBlocks.MENTH_SIGNS.hangingSign(), ParadiseLostBlocks.MENTH_SIGNS.wallHangingSign(), settings), sign(ParadiseLostBlocks.MENTH_SIGNS.hangingSign()), fuel(200));
+    public static final SignItem WISTERIA_SIGN = add("wisteria_sign", settings -> new SignItem(ParadiseLostBlocks.WISTERIA_SIGNS.sign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallSign(), settings), sign(ParadiseLostBlocks.WISTERIA_SIGNS.sign()), fuel(200));
+    public static final SignItem WISTERIA_HANGING_SIGN = add("wisteria_hanging_sign", settings -> new HangingSignItem(ParadiseLostBlocks.WISTERIA_SIGNS.hangingSign(), ParadiseLostBlocks.WISTERIA_SIGNS.wallHangingSign(), settings), sign(ParadiseLostBlocks.WISTERIA_SIGNS.hangingSign()), fuel(200));
 
     // beds
 
@@ -544,8 +539,14 @@ public class ParadiseLostItems {
     }
 
     @SafeVarargs
-    private static <V extends Item> V add(String id, V item, Consumer<ItemConvertible>... additionalActions) {
-        var registeredItem = Registry.register(Registries.ITEM, locate(id), item);
+    private static <V extends Item> V add(String id, Function<Settings, V> factory, Settings settings, Consumer<ItemConvertible>... additionalActions) {
+        return add(locate(id), factory, settings, additionalActions);
+    }
+
+    @SafeVarargs
+    private static <V extends Item> V add(Identifier id, Function<Settings, V> factory, Settings settings, Consumer<ItemConvertible>... additionalActions) {
+        RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, id);
+        var registeredItem = Registry.register(Registries.ITEM, key, factory.apply(settings.registryKey(key)));
         for (var action : additionalActions) {
             action.accept(registeredItem);
         }
@@ -553,37 +554,39 @@ public class ParadiseLostItems {
     }
 
     @SafeVarargs
-    private static <V extends Item> V add(Identifier id, V item, Consumer<ItemConvertible>... additionalActions) {
-        var registeredItem = Registry.register(Registries.ITEM, id, item);
-        for (var action : additionalActions) {
-            action.accept(registeredItem);
-        }
-        return registeredItem;
+    private static BlockItem add(String id, Block block, Settings settings, Consumer<ItemConvertible>... additionalActions) {
+        return add(locate(id), block, settings, additionalActions);
     }
 
     @SafeVarargs
     private static BlockItem add(Block block, Consumer<ItemConvertible>... additionalActions) {
-        return add(Registries.BLOCK.getId(block),
-                (block instanceof DoorBlock || block instanceof TallPlantBlock)
-                        ? new TallBlockItem(block, new Settings())
-                        : new BlockItem(block, new Settings()),
-                additionalActions);
+        return add(Registries.BLOCK.getId(block), block, new Settings(), additionalActions);
     }
 
     @SafeVarargs
     private static BlockItem add(Block block, Settings settings, Consumer<ItemConvertible>... additionalActions) {
-        return add(Registries.BLOCK.getId(block),
+        return add(Registries.BLOCK.getId(block), block, settings, additionalActions);
+    }
+
+    @SafeVarargs
+    private static BlockItem add(Identifier id, Block block, Settings settings, Consumer<ItemConvertible>... additionalActions) {
+        return add(id,
                 (block instanceof DoorBlock || block instanceof TallPlantBlock)
-                        ? new TallBlockItem(block, settings)
-                        : new BlockItem(block, settings),
+                        ? blockItemSettings -> new TallBlockItem(block, blockItemSettings)
+                        : blockItemSettings -> new BlockItem(block, blockItemSettings),
+                settings.translationKey(block.getTranslationKey()),
                 additionalActions);
+    }
+
+    private static Function<Settings, ArmorItem> armor(ArmorMaterial material, EquipmentType type) {
+        return settings -> new ArmorItem(material, type, settings);
     }
 
     private static BoatSet addBoatItems(String woodId, EntityType<? extends AbstractBoatEntity> boatType, EntityType<? extends AbstractBoatEntity> chestBoatType) {
         String boatId = (MOD_ID + "_" + woodId);
 
-        BoatItem boat = add(woodId + "_boat", new BoatItem(boatType, new Item.Settings().maxCount(1)), fuel(1200));
-        BoatItem chestBoat = add(woodId + "_chest_boat", new BoatItem(chestBoatType, new Item.Settings().maxCount(1)), fuel(1200));
+        BoatItem boat = add(woodId + "_boat", settings -> new BoatItem(boatType, settings), new Item.Settings().maxCount(1), fuel(1200));
+        BoatItem chestBoat = add(woodId + "_chest_boat", settings -> new BoatItem(chestBoatType, settings), new Item.Settings().maxCount(1), fuel(1200));
 
         return new BoatSet(boat, chestBoat);
     }
