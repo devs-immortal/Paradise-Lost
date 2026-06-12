@@ -5,51 +5,61 @@ import net.fabricmc.api.Environment;
 import net.id.paradiselost.api.BlockLikeEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.Frustum;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayers;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.client.render.entity.state.FallingBlockEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
 
 @SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
-public class BlockLikeEntityRenderer extends EntityRenderer<BlockLikeEntity> {
-    private final Random random = Random.create();
-    
+public class BlockLikeEntityRenderer extends EntityRenderer<BlockLikeEntity, FallingBlockEntityRenderState> {
+    private final BlockRenderManager blockRenderManager;
+
     public BlockLikeEntityRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager);
         this.shadowRadius = 0.5F;
+        this.blockRenderManager = renderManager.getBlockRenderManager();
     }
 
     @Override
-    public void render(BlockLikeEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        BlockState blockState = entity.getBlockState();
-
-        if (blockState.getRenderType() == BlockRenderType.MODEL) {
-            World world = entity.getWorldObj();
-
-            if (blockState != world.getBlockState(new BlockPos(entity.getBlockPos())) && blockState.getRenderType() != BlockRenderType.INVISIBLE) {
-                matrices.push();
-
-                BlockPos blockpos = new BlockPos(new BlockPos(entity.getBlockPos()));
-                matrices.translate(-0.5, 0.0, -0.5);
-                BlockRenderManager blockRenderManager = MinecraftClient.getInstance().getBlockRenderManager();
-                blockRenderManager.getModelRenderer().render(world, blockRenderManager.getModel(blockState), blockState, blockpos, matrices, vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(blockState)), false, random, blockState.getRenderingSeed(entity.getOrigin()), OverlayTexture.DEFAULT_UV);
-                matrices.pop();
-                super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
-            }
+    public boolean shouldRender(BlockLikeEntity entity, Frustum frustum, double x, double y, double z) {
+        if (!super.shouldRender(entity, frustum, x, y, z)) {
+            return false;
         }
+        return entity.getBlockState() != entity.getWorldObj().getBlockState(entity.getBlockPos());
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public Identifier getTexture(BlockLikeEntity entityIn) {
-        return SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE;
+    public void render(FallingBlockEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        BlockState blockState = state.blockState;
+        if (blockState.getRenderType() != BlockRenderType.MODEL) {
+            return;
+        }
+        matrices.push();
+        matrices.translate(-0.5, 0.0, -0.5);
+        this.blockRenderManager.getModelRenderer().render(state, this.blockRenderManager.getModel(blockState), blockState, state.currentPos, matrices, vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(blockState)), false, Random.create(), blockState.getRenderingSeed(state.fallingBlockPos), OverlayTexture.DEFAULT_UV);
+        matrices.pop();
+        super.render(state, matrices, vertexConsumers, light);
+    }
+
+    @Override
+    public FallingBlockEntityRenderState createRenderState() {
+        return new FallingBlockEntityRenderState();
+    }
+
+    @Override
+    public void updateRenderState(BlockLikeEntity entity, FallingBlockEntityRenderState state, float tickDelta) {
+        super.updateRenderState(entity, state, tickDelta);
+        state.fallingBlockPos = entity.getOrigin();
+        state.currentPos = entity.getBlockPos();
+        state.blockState = entity.getBlockState();
+        state.biome = entity.getWorldObj().getBiome(entity.getBlockPos());
+        state.world = entity.getWorldObj();
     }
 }

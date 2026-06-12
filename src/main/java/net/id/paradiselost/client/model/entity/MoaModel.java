@@ -7,16 +7,13 @@ package net.id.paradiselost.client.model.entity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.id.paradiselost.entities.passive.moa.MoaEntity;
+import net.id.paradiselost.client.rendering.entity.state.MoaEntityRenderState;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
-public class MoaModel extends EntityModel<MoaEntity> {
+public class MoaModel extends EntityModel<MoaEntityRenderState> {
     private final ModelPart beak;
     private final ModelPart neck;
     private final ModelPart head;
@@ -35,6 +32,7 @@ public class MoaModel extends EntityModel<MoaEntity> {
     private final ModelPart tail;
 
     public MoaModel(ModelPart root) {
+        super(root);
         this.torso = root.getChild("torso");
         this.tail = this.torso.getChild("tail");
         this.neck = this.torso.getChild("neck");
@@ -76,31 +74,27 @@ public class MoaModel extends EntityModel<MoaEntity> {
     }
 
     @Override
-    public void setAngles(MoaEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        saddle.visible = entity.isSaddled();
-        chest.visible = entity.hasChest();
-        float netYaw = netHeadYaw * 0.017453292F;
+    public void setAngles(MoaEntityRenderState state) {
+        super.setAngles(state);
+        saddle.visible = state.saddled;
+        chest.visible = state.hasChest;
+        float netYaw = state.yawDegrees * 0.017453292F;
         head.yaw = netYaw / 4;
         neck.yaw = (netYaw / 4) * 3;
-        float speedPitch = (float) Math.min((new Vec3d(entity.getVelocity().getX(), 0, entity.getVelocity().getZ()).length() * 1.1F), 1F) + 0.1309F;
+        float speedPitch = Math.min(state.horizontalSpeed * 1.1F, 1F) + 0.1309F;
         neck.pitch = speedPitch;
-        head.pitch = -speedPitch + headPitch * 0.017453F;
-        if (!entity.isInAir) {
-            limbSwingAmount /= 2;
-            right_leg.pitch = MathHelper.cos(limbSwing * 0.6662F) * 2F * limbSwingAmount + 0.2618F;
-            left_leg.pitch = MathHelper.cos(limbSwing * 0.6662F + 3.1415927F) * 2F * limbSwingAmount + 0.2618F;
+        head.pitch = -speedPitch + state.pitch * 0.017453F;
+        if (!state.inAir) {
+            float limbSwingAmount = state.limbAmplitudeMultiplier / 2;
+            right_leg.pitch = MathHelper.cos(state.limbFrequency * 0.6662F) * 2F * limbSwingAmount + 0.2618F;
+            left_leg.pitch = MathHelper.cos(state.limbFrequency * 0.6662F + 3.1415927F) * 2F * limbSwingAmount + 0.2618F;
         } else {
-            left_leg.pitch = entity.getLegPitch();
+            left_leg.pitch = state.legPitch;
             right_leg.pitch = left_leg.pitch;
         }
-        left_wing.roll = entity.getWingRoll();
+        left_wing.roll = state.wingRoll;
         right_wing.roll = -left_wing.roll;
-        left_wing.yaw = entity.getWingYaw();
+        left_wing.yaw = state.wingYaw;
         right_wing.yaw = -left_wing.yaw;
-    }
-
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-        torso.render(matrices, vertices, light, overlay);
     }
 }
