@@ -3,6 +3,7 @@ package net.id.paradiselost.blocks.blockentity;
 import net.id.paradiselost.blocks.mechanical.TreeTapBlock;
 import net.id.paradiselost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradiselost.recipe.TreeTapRecipe;
+import net.id.paradiselost.recipe.TreeTapRecipeInput;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,7 +23,6 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.ServerRecipeManager;
-import net.minecraft.recipe.input.RecipeInput;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
@@ -38,10 +38,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class TreeTapBlockEntity extends LootableContainerBlockEntity implements SidedInventory, RecipeInput {
+public class TreeTapBlockEntity extends LootableContainerBlockEntity implements SidedInventory {
 
     private final DefaultedList<ItemStack> inventory;
-    private final ServerRecipeManager.MatchGetter<TreeTapBlockEntity, TreeTapRecipe> matchGetter;
+    private final ServerRecipeManager.MatchGetter<TreeTapRecipeInput, TreeTapRecipe> matchGetter;
 
     public TreeTapBlockEntity(BlockPos pos, BlockState state) {
         super(ParadiseLostBlockEntityTypes.TREE_TAP, pos, state);
@@ -140,9 +140,10 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
 			return;
 		}
 
-		Optional<RecipeEntry<TreeTapRecipe>> recipe = this.matchGetter.getFirstMatch(this, (ServerWorld) this.getWorld());
+		TreeTapRecipeInput input = new TreeTapRecipeInput(stack, getTappedState());
+		Optional<RecipeEntry<TreeTapRecipe>> recipe = this.matchGetter.getFirstMatch(input, (ServerWorld) this.getWorld());
 		if (recipe.isPresent() && world.random.nextInt(recipe.get().value().getChance()) == 0) {
-			ItemStack output = recipe.get().value().craft(this, world.getRegistryManager());
+			ItemStack output = recipe.get().value().craft(input, world.getRegistryManager());
             Block convertBlock = recipe.get().value().getOutputBlock();
             BlockPos attachedPos = this.pos.offset(world.getBlockState(this.pos).get(TreeTapBlock.FACING).getOpposite());
             BlockState attachedBlock = world.getBlockState(attachedPos);
@@ -201,9 +202,4 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
 	public void updateInClientWorld() {
 		((ServerWorld) world).getChunkManager().markForUpdate(pos);
 	}
-
-    @Override
-    public ItemStack getStackInSlot(int slot) {
-        return inventory.get(slot);
-    }
 }

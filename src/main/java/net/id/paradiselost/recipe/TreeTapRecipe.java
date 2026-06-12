@@ -2,7 +2,6 @@ package net.id.paradiselost.recipe;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.id.paradiselost.blocks.blockentity.TreeTapBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
+public class TreeTapRecipe implements Recipe<TreeTapRecipeInput> {
 
 	protected final Ingredient ingredient;
     protected final ItemStack result;
@@ -45,16 +44,16 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
 	}
 
 	@Override
-	public boolean matches(TreeTapBlockEntity inventory, World world) {
-		if (!ingredient.test(inventory.getStack(0))) {
+	public boolean matches(TreeTapRecipeInput input, World world) {
+		if (!ingredient.test(input.stack())) {
 			return false;
 		}
 
-		return inventory.getTappedState().isOf(this.tappedBlock);
+		return input.tappedState().isOf(this.tappedBlock);
 	}
 
     @Override
-    public ItemStack craft(TreeTapBlockEntity inventory, RegistryWrapper.WrapperLookup lookup) {
+    public ItemStack craft(TreeTapRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
         return result.copy();
     }
 
