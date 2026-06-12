@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:olvite_block"
-    }
+    "paradise_lost:olvite_block"
   ],
   "result": {
     "id": "paradise_lost:olvite",

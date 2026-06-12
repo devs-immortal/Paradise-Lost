@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "/": {
-      "item": "minecraft:stick"
-    },
-    "_": {
-      "item": "paradise_lost:burnished_stone_slab"
-    }
+    "/": "minecraft:stick",
+    "_": "paradise_lost:burnished_stone_slab"
   },
   "pattern": [
     "///",

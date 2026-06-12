@@ -1,15 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:golden_amber"
-    },
-    {
-      "item": "paradise_lost:golden_amber"
-    },
-    {
-      "item": "paradise_lost:golden_amber"
-    }
+    "paradise_lost:golden_amber",
+    "paradise_lost:golden_amber",
+    "paradise_lost:golden_amber"
   ],
   "result": {
     "id": "minecraft:raw_gold"

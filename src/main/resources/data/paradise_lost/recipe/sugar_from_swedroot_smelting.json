@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "paradise_lost:swedroot_pulp"
-  },
+  "ingredient": "paradise_lost:swedroot_pulp",
   "result": {
     "id": "minecraft:sugar"
   },

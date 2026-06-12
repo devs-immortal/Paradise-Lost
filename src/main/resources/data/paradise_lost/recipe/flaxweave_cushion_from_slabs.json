@@ -5,9 +5,7 @@
     "#"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:flaxweave_cushion_slab"
-    }
+    "#": "paradise_lost:flaxweave_cushion_slab"
   },
   "result": {
     "id": "paradise_lost:flaxweave_cushion"

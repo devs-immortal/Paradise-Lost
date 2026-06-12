@@ -5,12 +5,8 @@
     "#"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:cobbled_floestone"
-    },
-    "X": {
-      "item": "minecraft:stick"
-    }
+    "#": "paradise_lost:cobbled_floestone",
+    "X": "minecraft:stick"
   },
   "result": {
     "id": "minecraft:lever"

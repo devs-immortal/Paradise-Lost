@@ -5,9 +5,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:smooth_heliolith"
-    }
+    "#": "paradise_lost:smooth_heliolith"
   },
   "result": {
     "id": "paradise_lost:smooth_heliolith_slab",

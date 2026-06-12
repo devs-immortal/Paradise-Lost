@@ -5,12 +5,8 @@
     "X#X"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:thatch"
-    },
-    "X": {
-      "tag": "minecraft:planks"
-    }
+    "#": "paradise_lost:thatch",
+    "X": "#minecraft:planks"
   },
   "result": {
     "id": "paradise_lost:incubator"

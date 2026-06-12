@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "paradise_lost:cherine_ore"
-  },
+  "ingredient": "paradise_lost:cherine_ore",
   "result": {
     "id": "paradise_lost:cherine"
   },

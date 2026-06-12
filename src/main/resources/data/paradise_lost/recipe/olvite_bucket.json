@@ -5,9 +5,7 @@
     " # "
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:olvite"
-    }
+    "#": "paradise_lost:olvite"
   },
   "result": {
     "id": "minecraft:bucket"

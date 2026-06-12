@@ -1,8 +1,6 @@
 {
   "type": "paradise_lost:tree_tap",
-  "ingredient": {
-    "item": "minecraft:bowl"
-  },
+  "ingredient": "minecraft:bowl",
   "tapped_block": "minecraft:mushroom_stem",
   "result_block": "minecraft:mushroom_stem",
   "result": {

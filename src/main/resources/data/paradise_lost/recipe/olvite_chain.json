@@ -6,12 +6,8 @@
     "N"
   ],
   "key": {
-    "I": {
-      "item": "paradise_lost:olvite"
-    },
-    "N": {
-      "item": "paradise_lost:olvite_nugget"
-    }
+    "I": "paradise_lost:olvite",
+    "N": "paradise_lost:olvite_nugget"
   },
   "result": {
     "id": "paradise_lost:olvite_chain"

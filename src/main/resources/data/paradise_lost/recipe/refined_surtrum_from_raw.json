@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "paradise_lost:surtrum"
-  },
+  "ingredient": "paradise_lost:surtrum",
   "result": {
     "id": "paradise_lost:refined_surtrum"
   },

@@ -4,9 +4,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:golden_amber_tile"
-    }
+    "#": "paradise_lost:golden_amber_tile"
   },
   "result": {
     "id": "paradise_lost:golden_amber_tile_slab",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "group": "wooden_button",
   "ingredients": [
-    {
-      "item": "paradise_lost:mother_aurel_planks"
-    }
+    "paradise_lost:mother_aurel_planks"
   ],
   "result": {
     "id": "paradise_lost:mother_aurel_button"

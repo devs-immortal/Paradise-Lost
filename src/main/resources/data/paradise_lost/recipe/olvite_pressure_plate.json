@@ -4,9 +4,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:olvite"
-    }
+    "#": "paradise_lost:olvite"
   },
   "result": {
     "id": "paradise_lost:olvite_pressure_plate"

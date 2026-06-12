@@ -1,18 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "minecraft:bowl"
-    },
-    {
-      "item": "paradise_lost:amadrys_bushel"
-    },
-    {
-      "item": "paradise_lost:blackcurrant"
-    },
-    {
-      "tag": "paradise_lost:mushrooms"
-    }
+    "minecraft:bowl",
+    "paradise_lost:amadrys_bushel",
+    "paradise_lost:blackcurrant",
+    "#paradise_lost:mushrooms"
   ],
   "result": {
     "id": "paradise_lost:amadrys_noodles",

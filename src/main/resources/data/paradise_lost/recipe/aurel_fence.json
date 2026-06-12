@@ -6,12 +6,8 @@
     "W#W"
   ],
   "key": {
-    "W": {
-      "item": "paradise_lost:aurel_planks"
-    },
-    "#": {
-      "item": "minecraft:stick"
-    }
+    "W": "paradise_lost:aurel_planks",
+    "#": "minecraft:stick"
   },
   "result": {
     "id": "paradise_lost:aurel_fence",

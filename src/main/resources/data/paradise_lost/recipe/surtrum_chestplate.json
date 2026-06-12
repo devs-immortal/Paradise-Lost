@@ -6,9 +6,7 @@
     "XXX"
   ],
   "key": {
-    "X": {
-      "item": "paradise_lost:refined_surtrum"
-    }
+    "X": "paradise_lost:refined_surtrum"
   },
   "result": {
     "id": "paradise_lost:surtrum_chestplate"

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "paradise_lost:olvite_ore"
-  },
+  "ingredient": "paradise_lost:olvite_ore",
   "result": {
     "id": "paradise_lost:olvite"
   },

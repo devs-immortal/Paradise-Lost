@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:ataraxia"
-    }
+    "paradise_lost:ataraxia"
   ],
   "result": {
     "id": "minecraft:purple_dye"

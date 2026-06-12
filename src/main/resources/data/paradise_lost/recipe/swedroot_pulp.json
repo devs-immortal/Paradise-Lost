@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:swedroot"
-    }
+    "paradise_lost:swedroot"
   ],
   "result": {
     "id": "paradise_lost:swedroot_pulp",

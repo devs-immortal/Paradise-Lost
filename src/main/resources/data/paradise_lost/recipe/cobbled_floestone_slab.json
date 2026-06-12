@@ -4,9 +4,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:cobbled_floestone"
-    }
+    "#": "paradise_lost:cobbled_floestone"
   },
   "result": {
     "id": "paradise_lost:cobbled_floestone_slab",

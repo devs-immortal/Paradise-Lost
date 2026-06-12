@@ -1,8 +1,6 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "paradise_lost:levita_ore"
-  },
+  "ingredient": "paradise_lost:levita_ore",
   "result": {
     "id": "paradise_lost:levita_gem"
   },

@@ -6,12 +6,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:floestone"
-    },
-    "X": {
-      "tag": "minecraft:planks"
-    }
+    "#": "paradise_lost:floestone",
+    "X": "#minecraft:planks"
   },
   "result": {
     "id": "paradise_lost:food_bowl"

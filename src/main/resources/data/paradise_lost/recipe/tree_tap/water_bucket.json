@@ -1,8 +1,6 @@
 {
   "type": "paradise_lost:tree_tap",
-  "ingredient": {
-    "item": "minecraft:bucket"
-  },
+  "ingredient": "minecraft:bucket",
   "tapped_block": "paradise_lost:wisteria_log",
   "result_block": "paradise_lost:wisteria_log",
   "result": {

@@ -5,9 +5,7 @@
     "#"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:floestone_brick_slab"
-    }
+    "#": "paradise_lost:floestone_brick_slab"
   },
   "result": {
     "id": "paradise_lost:chiseled_floestone"

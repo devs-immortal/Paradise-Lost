@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "item": "paradise_lost:flaxweave"
-    },
-    {
-      "item": "paradise_lost:flaxweave"
-    }
+    "minecraft:paper",
+    "minecraft:paper",
+    "minecraft:paper",
+    "paradise_lost:flaxweave",
+    "paradise_lost:flaxweave"
   ],
   "result": {
     "count": 1,

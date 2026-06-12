@@ -1,12 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "O": {
-      "item": "paradise_lost:olvite"
-    },
-    "A": {
-      "item": "minecraft:glass"
-    }
+    "O": "paradise_lost:olvite",
+    "A": "minecraft:glass"
   },
   "pattern": [
     "A",

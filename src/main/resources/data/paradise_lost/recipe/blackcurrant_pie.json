@@ -1,18 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:blackcurrant"
-    },
-    {
-      "item": "paradise_lost:blackcurrant"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "minecraft:sugar"
-    }
+    "paradise_lost:blackcurrant",
+    "paradise_lost:blackcurrant",
+    "minecraft:egg",
+    "minecraft:sugar"
   ],
   "result": {
     "id": "paradise_lost:blackcurrant_pie",

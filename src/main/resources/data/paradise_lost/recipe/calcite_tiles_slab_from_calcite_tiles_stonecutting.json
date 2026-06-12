@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "paradise_lost:calcite_tiles"
-  },
+  "ingredient": "paradise_lost:calcite_tiles",
   "result": {
     "id": "paradise_lost:calcite_tiles_slab",
     "count": 2

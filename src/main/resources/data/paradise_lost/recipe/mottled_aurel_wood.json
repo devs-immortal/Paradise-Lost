@@ -6,9 +6,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:mottled_aurel_log"
-    }
+    "#": "paradise_lost:mottled_aurel_log"
   },
   "result": {
     "id": "paradise_lost:mottled_aurel_wood",

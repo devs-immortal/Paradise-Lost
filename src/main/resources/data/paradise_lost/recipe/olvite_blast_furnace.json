@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "paradise_lost:burnished_stone"
-    },
-    "I": {
-      "item": "paradise_lost:olvite"
-    },
-    "X": {
-      "item": "minecraft:furnace"
-    }
+    "#": "paradise_lost:burnished_stone",
+    "I": "paradise_lost:olvite",
+    "X": "minecraft:furnace"
   },
   "pattern": [
     "III",

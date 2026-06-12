@@ -4,9 +4,7 @@
     "BBB"
   ],
   "key": {
-    "B": {
-      "item": "paradise_lost:amadrys_bushel"
-    }
+    "B": "paradise_lost:amadrys_bushel"
   },
   "result": {
     "id": "paradise_lost:amadrys_bread",

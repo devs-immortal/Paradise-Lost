@@ -7,9 +7,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:calcite_tiles"
-    }
+    "#": "paradise_lost:calcite_tiles"
   },
   "result": {
     "id": "paradise_lost:calcite_tiles_stairs",

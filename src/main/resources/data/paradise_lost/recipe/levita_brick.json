@@ -5,9 +5,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:levita"
-    }
+    "#": "paradise_lost:levita"
   },
   "result": {
     "id": "paradise_lost:levita_brick",

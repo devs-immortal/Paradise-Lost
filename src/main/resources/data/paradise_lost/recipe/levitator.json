@@ -6,15 +6,9 @@
     "SRS"
   ],
   "key": {
-    "G": {
-      "item": "paradise_lost:levita_gem"
-    },
-    "S": {
-      "item": "paradise_lost:floestone_brick"
-    },
-    "R": {
-      "item": "minecraft:redstone"
-    }
+    "G": "paradise_lost:levita_gem",
+    "S": "paradise_lost:floestone_brick",
+    "R": "minecraft:redstone"
   },
   "result": {
     "id": "paradise_lost:levitator"

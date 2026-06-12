@@ -1,15 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "-": {
-      "item": "paradise_lost:floestone_slab"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
+    "#": "#minecraft:planks",
+    "-": "paradise_lost:floestone_slab",
+    "I": "minecraft:stick"
   },
   "pattern": [
     "I-I",

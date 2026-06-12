@@ -5,9 +5,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:nitra_bulb"
-    }
+    "#": "paradise_lost:nitra_bulb"
   },
   "result": {
     "id": "paradise_lost:nitra_bunch"

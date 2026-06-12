@@ -6,12 +6,8 @@
     "#X"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "X": {
-      "tag": "minecraft:leaves"
-    }
+    "#": "minecraft:stick",
+    "X": "#minecraft:leaves"
   },
   "result": {
     "id": "paradise_lost:thatch",

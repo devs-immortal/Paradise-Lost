@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:calcite"
-  },
+  "ingredient": "minecraft:calcite",
   "result": {
     "id": "paradise_lost:calcite_tiles_stairs",
     "count": 1

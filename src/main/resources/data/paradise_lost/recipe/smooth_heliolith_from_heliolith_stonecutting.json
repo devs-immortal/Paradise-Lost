@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "paradise_lost:heliolith"
-  },
+  "ingredient": "paradise_lost:heliolith",
   "result": {
     "id": "paradise_lost:smooth_heliolith",
     "count": 1

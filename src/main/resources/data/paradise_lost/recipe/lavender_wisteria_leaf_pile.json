@@ -4,9 +4,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:lavender_wisteria_leaves"
-    }
+    "#": "paradise_lost:lavender_wisteria_leaves"
   },
   "result": {
     "id": "paradise_lost:lavender_wisteria_leaf_pile",

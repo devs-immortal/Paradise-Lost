@@ -140,7 +140,7 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
 			return;
 		}
 
-		Optional<RecipeEntry<TreeTapRecipe>> recipe = this.matchGetter.getFirstMatch(this, this.getWorld());
+		Optional<RecipeEntry<TreeTapRecipe>> recipe = this.matchGetter.getFirstMatch(this, (ServerWorld) this.getWorld());
 		if (recipe.isPresent() && world.random.nextInt(recipe.get().value().getChance()) == 0) {
 			ItemStack output = recipe.get().value().craft(this, world.getRegistryManager());
             Block convertBlock = recipe.get().value().getOutputBlock();
@@ -205,10 +205,5 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
     @Override
     public ItemStack getStackInSlot(int slot) {
         return inventory.get(slot);
-    }
-
-    @Override
-    public int getSize() {
-        return 1;
     }
 }

@@ -18,10 +18,10 @@ public class CraftingCalciteDecoratedPotRecipe extends SpecialCraftingRecipe {
     }
 
     public boolean matches(CraftingRecipeInput craftingRecipeInput, World world) {
-        if (!this.fits(craftingRecipeInput.getWidth(), craftingRecipeInput.getHeight())) {
+        if (craftingRecipeInput.getWidth() != 3 || craftingRecipeInput.getHeight() != 3) {
             return false;
         } else {
-            for (int i = 0; i < craftingRecipeInput.getSize(); i++) {
+            for (int i = 0; i < craftingRecipeInput.size(); i++) {
                 ItemStack itemStack = craftingRecipeInput.getStackInSlot(i);
                 switch (i) {
                     case 1:
@@ -59,12 +59,7 @@ public class CraftingCalciteDecoratedPotRecipe extends SpecialCraftingRecipe {
     }
 
     @Override
-    public boolean fits(int width, int height) {
-        return width == 3 && height == 3;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends SpecialCraftingRecipe> getSerializer() {
         return RecipeSerializer.CRAFTING_DECORATED_POT;
     }
 }

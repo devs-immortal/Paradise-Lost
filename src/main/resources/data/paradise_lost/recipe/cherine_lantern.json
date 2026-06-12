@@ -6,12 +6,8 @@
     "XXX"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:cherine_torch"
-    },
-    "X": {
-      "item": "paradise_lost:olvite_nugget"
-    }
+    "#": "paradise_lost:cherine_torch",
+    "X": "paradise_lost:olvite_nugget"
   },
   "result": {
     "id": "paradise_lost:cherine_lantern"

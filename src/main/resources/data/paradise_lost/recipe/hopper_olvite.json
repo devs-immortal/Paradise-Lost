@@ -1,12 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "C": {
-      "item": "minecraft:chest"
-    },
-    "I": {
-      "item": "paradise_lost:olvite"
-    }
+    "C": "minecraft:chest",
+    "I": "paradise_lost:olvite"
   },
   "pattern": [
     "I I",

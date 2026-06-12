@@ -5,6 +5,7 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SpecialCraftingRecipe;
+import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
@@ -13,6 +14,7 @@ public class ParadiseLostRecipeTypes {
     public static final String TREE_TAP_RECIPE_ID = "tree_tap";
     public static RecipeSerializer<TreeTapRecipe> TREE_TAP_RECIPE_SERIALIZER;
     public static RecipeType<TreeTapRecipe> TREE_TAP_RECIPE_TYPE;
+    public static RecipeBookCategory TREE_TAP_RECIPE_BOOK_CATEGORY;
 
     public static final String CALCITE_DECORATED_POT_RECIPE_ID = "crafting_calcite_decorated_pot";
     public static RecipeSerializer<CraftingCalciteDecoratedPotRecipe> CALCITE_DECORATED_POT_RECIPE_SERIALIZER;
@@ -34,6 +36,7 @@ public class ParadiseLostRecipeTypes {
     public static void init() {
         TREE_TAP_RECIPE_SERIALIZER = registerSerializer(TREE_TAP_RECIPE_ID, new TreeTapRecipe.Serializer());
         TREE_TAP_RECIPE_TYPE = registerRecipeType(TREE_TAP_RECIPE_ID);
+        TREE_TAP_RECIPE_BOOK_CATEGORY = Registry.register(Registries.RECIPE_BOOK_CATEGORY, ParadiseLost.locate(TREE_TAP_RECIPE_ID), new RecipeBookCategory());
         CALCITE_DECORATED_POT_RECIPE_SERIALIZER = registerSerializer(CALCITE_DECORATED_POT_RECIPE_ID, new SpecialCraftingRecipe.SpecialRecipeSerializer<>(CraftingCalciteDecoratedPotRecipe::new));
         CALCITE_DECORATED_POT_RECIPE_TYPE = registerRecipeType(CALCITE_DECORATED_POT_RECIPE_ID);
 

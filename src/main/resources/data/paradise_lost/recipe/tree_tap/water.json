@@ -1,8 +1,6 @@
 {
   "type": "paradise_lost:tree_tap",
-  "ingredient": {
-    "item": "minecraft:glass_bottle"
-  },
+  "ingredient": "minecraft:glass_bottle",
   "tapped_block": "paradise_lost:wisteria_log",
   "result_block": "paradise_lost:wisteria_log",
   "result": {

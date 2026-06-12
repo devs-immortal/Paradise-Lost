@@ -1,15 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "O": {
-      "item": "paradise_lost:olvite"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "P": {
-      "tag": "minecraft:planks"
-    }
+    "O": "paradise_lost:olvite",
+    "S": "minecraft:stick",
+    "P": "#minecraft:planks"
   },
   "pattern": [
     "O",

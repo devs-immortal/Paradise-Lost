@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:amadrys_bundle"
-    }
+    "paradise_lost:amadrys_bundle"
   ],
   "result": {
     "id": "paradise_lost:amadrys_bushel",

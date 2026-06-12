@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:nitra_bunch"
-    }
+    "paradise_lost:nitra_bunch"
   ],
   "result": {
     "id": "paradise_lost:nitra_bulb",

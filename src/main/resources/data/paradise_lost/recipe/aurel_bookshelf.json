@@ -6,12 +6,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:aurel_planks"
-    },
-    "X": {
-      "item": "minecraft:book"
-    }
+    "#": "paradise_lost:aurel_planks",
+    "X": "minecraft:book"
   },
   "result": {
     "id": "paradise_lost:aurel_bookshelf"

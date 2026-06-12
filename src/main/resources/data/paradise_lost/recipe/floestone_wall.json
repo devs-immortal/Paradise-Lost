@@ -5,9 +5,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:floestone"
-    }
+    "#": "paradise_lost:floestone"
   },
   "result": {
     "id": "paradise_lost:floestone_wall",
