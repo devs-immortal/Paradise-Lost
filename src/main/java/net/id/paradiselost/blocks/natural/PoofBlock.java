@@ -30,14 +30,16 @@ public class PoofBlock extends Block {
     @Override
     protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         if (neighborState.isAir()) {
-            for (int i = 0; i < 4; i++) {
-                world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY(), pos.getZ(), random.nextFloat() * 0.5, random.nextFloat() * 0.5, random.nextFloat() * 0.5);
-            }
-            if (random.nextBoolean())
-                world.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_SURTRUM_RUSH, SoundCategory.BLOCKS, 0.1F + random.nextFloat() * 0.2F, random.nextFloat() * 0.7F + 0.3F);
-            List<Entity> entities = world.getNonSpectatingEntities(Entity.class, new Box(pos.getX() - 5d, pos.getY() - 5d, pos.getZ() - 5d, pos.getX() + 5d, pos.getY() + 5d, pos.getZ() + 5d));
-            for (Entity p : entities) {
-                if (p != null && p.isAlive() && p.getBlockPos().isWithinDistance(pos, 5)) p.setFireTicks(60);
+            if (world instanceof World realWorld) {
+                for (int i = 0; i < 4; i++) {
+                    realWorld.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY(), pos.getZ(), random.nextFloat() * 0.5, random.nextFloat() * 0.5, random.nextFloat() * 0.5);
+                }
+                if (random.nextBoolean())
+                    realWorld.playSound(null, pos, ParadiseLostSoundEvents.BLOCK_SURTRUM_RUSH, SoundCategory.BLOCKS, 0.1F + random.nextFloat() * 0.2F, random.nextFloat() * 0.7F + 0.3F);
+                List<Entity> entities = realWorld.getNonSpectatingEntities(Entity.class, new Box(pos.getX() - 5d, pos.getY() - 5d, pos.getZ() - 5d, pos.getX() + 5d, pos.getY() + 5d, pos.getZ() + 5d));
+                for (Entity p : entities) {
+                    if (p != null && p.isAlive() && p.getBlockPos().isWithinDistance(pos, 5)) p.setFireTicks(60);
+                }
             }
             return Blocks.AIR.getDefaultState();
         }

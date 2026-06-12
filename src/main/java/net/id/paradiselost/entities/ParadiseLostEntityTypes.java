@@ -21,6 +21,7 @@ import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.ChestBoatEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -65,9 +66,9 @@ public class ParadiseLostEntityTypes {
     );
 
     // Boats
-    public static final EntityType<ChestBoatEntity> AUREL_BOAT = add(
+    public static final EntityType<BoatEntity> AUREL_BOAT = add(
             "aurel_boat",
-            of((type, world) -> new ChestBoatEntity(type, world, ParadiseLostItems.AUREL_BOATS::boat), MISC, 1.375F, 0.5625F, 10)
+            of((type, world) -> new BoatEntity(type, world, ParadiseLostItems.AUREL_BOATS::boat), MISC, 1.375F, 0.5625F, 10)
     );
 
     public static final EntityType<ChestBoatEntity> AUREL_CHEST_BOAT = add(
@@ -75,9 +76,9 @@ public class ParadiseLostEntityTypes {
             of((type, world) -> new ChestBoatEntity(type, world, ParadiseLostItems.AUREL_BOATS::chestBoat), MISC, 1.375F, 0.5625F, 10)
     );
 
-    public static final EntityType<ChestBoatEntity> MOTHER_AUREL_BOAT = add(
+    public static final EntityType<BoatEntity> MOTHER_AUREL_BOAT = add(
             "mother_aurel_boat",
-            of((type, world) -> new ChestBoatEntity(type, world, ParadiseLostItems.MOTHER_AUREL_BOATS::boat), MISC, 1.375F, 0.5625F, 10)
+            of((type, world) -> new BoatEntity(type, world, ParadiseLostItems.MOTHER_AUREL_BOATS::boat), MISC, 1.375F, 0.5625F, 10)
     );
 
     public static final EntityType<ChestBoatEntity> MOTHER_AUREL_CHEST_BOAT = add(
@@ -85,9 +86,9 @@ public class ParadiseLostEntityTypes {
             of((type, world) -> new ChestBoatEntity(type, world, ParadiseLostItems.MOTHER_AUREL_BOATS::chestBoat), MISC, 1.375F, 0.5625F, 10)
     );
 
-    public static final EntityType<ChestBoatEntity> MENTH_BOAT = add(
+    public static final EntityType<BoatEntity> MENTH_BOAT = add(
             "menth_boat",
-            of((type, world) -> new ChestBoatEntity(type, world, ParadiseLostItems.MENTH_BOATS::boat), MISC, 1.375F, 0.5625F, 10)
+            of((type, world) -> new BoatEntity(type, world, ParadiseLostItems.MENTH_BOATS::boat), MISC, 1.375F, 0.5625F, 10)
     );
 
     public static final EntityType<ChestBoatEntity> MENTH_CHEST_BOAT = add(
@@ -95,9 +96,9 @@ public class ParadiseLostEntityTypes {
             of((type, world) -> new ChestBoatEntity(type, world, ParadiseLostItems.MENTH_BOATS::chestBoat), MISC, 1.375F, 0.5625F, 10)
     );
 
-    public static final EntityType<ChestBoatEntity> WISTERIA_BOAT = add(
+    public static final EntityType<BoatEntity> WISTERIA_BOAT = add(
             "wisteria_boat",
-            of((type, world) -> new ChestBoatEntity(type, world, ParadiseLostItems.WISTERIA_BOATS::boat), MISC, 1.375F, 0.5625F, 10)
+            of((type, world) -> new BoatEntity(type, world, ParadiseLostItems.WISTERIA_BOATS::boat), MISC, 1.375F, 0.5625F, 10)
     );
 
     public static final EntityType<ChestBoatEntity> WISTERIA_CHEST_BOAT = add(

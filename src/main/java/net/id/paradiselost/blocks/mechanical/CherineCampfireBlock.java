@@ -9,8 +9,8 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.CampfireCookingRecipe;
-import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipePropertySet;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ActionResult;
@@ -31,18 +31,17 @@ public class CherineCampfireBlock extends CampfireBlock {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CherineCampfireBlockEntity campfireBlockEntity) {
             ItemStack itemStack = player.getStackInHand(hand);
-            Optional<RecipeEntry<CampfireCookingRecipe>> optional = campfireBlockEntity.getRecipeFor(itemStack);
-            if (optional.isPresent()) {
-                if (!world.isClient && campfireBlockEntity.addItem(player, player.isInCreativeMode() ? itemStack.copy() : itemStack, ((CampfireCookingRecipe) ((RecipeEntry) optional.get()).value()).getCookingTime())) {
+            if (world.getRecipeManager().getPropertySet(RecipePropertySet.CAMPFIRE_INPUT).canUse(itemStack)) {
+                if (world instanceof ServerWorld serverWorld && campfireBlockEntity.addItem(serverWorld, player, itemStack)) {
                     player.incrementStat(Stats.INTERACT_WITH_CAMPFIRE);
-                    return ActionResult.SUCCESS;
+                    return ActionResult.SUCCESS_SERVER;
                 }
 
                 return ActionResult.CONSUME;
             }
         }
 
-        return ActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
     }
 
     @Override
@@ -53,10 +52,12 @@ public class CherineCampfireBlock extends CampfireBlock {
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        if (world.isClient) {
-            return state.get(LIT) ? validateTicker(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::clientTick) : null;
-        } else {
-            return state.get(LIT) ? validateTicker(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::litServerTick) : validateTicker(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::unlitServerTick);
+        if (world instanceof ServerWorld serverWorld) {
+            if (state.get(LIT)) {
+                return validateTicker(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, (tickWorld, pos, tickState, blockEntity) -> CherineCampfireBlockEntity.litServerTick(serverWorld, pos, tickState, blockEntity));
+            }
+            return validateTicker(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::unlitServerTick);
         }
+        return state.get(LIT) ? validateTicker(type, ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, CherineCampfireBlockEntity::clientTick) : null;
     }
 }

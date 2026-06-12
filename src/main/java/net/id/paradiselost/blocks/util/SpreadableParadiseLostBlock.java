@@ -26,8 +26,8 @@ public abstract class SpreadableParadiseLostBlock extends SnowyBlock {
         } else if (blockState.getFluidState().getLevel() == 8) {
             return false;
         }
-        int i = ChunkLightProvider.getRealisticOpacity(world, state, pos, blockState, blockPos, Direction.UP, blockState.getOpacity());
-        return i < world.getMaxLightLevel();
+        int i = ChunkLightProvider.getRealisticOpacity(state, blockState, Direction.UP, blockState.getOpacity());
+        return i < 15;
     }
 
     private static boolean canSpread(BlockState state, WorldView world, BlockPos pos) {

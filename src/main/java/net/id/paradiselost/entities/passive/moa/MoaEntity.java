@@ -100,7 +100,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         this.goalSelector.add(1, new EatFromBowlGoal(0.4, 24, 16));
         this.goalSelector.add(1, new AnimalMateGoal(this, 0.25F));
-        this.goalSelector.add(2, new TemptGoal(this, 0.7D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
+        this.goalSelector.add(2, new TemptGoal(this, 0.7D, stack -> stack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES), false));
 
 
         this.goalSelector.add(7, new LookAtEntityGoal(this, ParrotEntity.class, 18F, 100f));
@@ -198,11 +198,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
     
     @Override
-    protected void dropInventory() {
-        super.dropInventory();
+    protected void dropInventory(ServerWorld world) {
+        super.dropInventory(world);
         if (hasChest()) {
             if (!getWorld().isClient) {
-                dropStack(getChest());
+                dropStack(world, getChest());
             }
             setChest(ItemStack.EMPTY);
         }
@@ -599,10 +599,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     protected void updateLimbs(float posDelta) {
         if (hasPassengers()) {
             float f = Math.min(posDelta * 2.0F, 0.5F);
-            this.limbAnimator.updateLimbs(f, 0.4F);
+            this.limbAnimator.updateLimbs(f, 0.4F, 1.0F);
         } else {
             float f = Math.min(posDelta * 4.0F, 3F);
-            this.limbAnimator.updateLimbs(f, 0.5F);
+            this.limbAnimator.updateLimbs(f, 0.5F, 1.0F);
         }
 
     }
@@ -685,7 +685,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         float hunger = 100 - satiation;
         if (hunger > 1) {
             int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), heldStack.getCount());
-            spawnConsumptionEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
+            spawnItemParticles(heldStack, 10 + random.nextInt(consumption * 2 + 1));
             heldStack.decrement(consumption);
             getGenes().setHunger(satiation + (consumption * hungerRestored));
             playSound(ParadiseLostSoundEvents.ENTITY_MOA_EAT, 1.5F, 0.8F);
@@ -697,7 +697,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
         compound.putInt("airTicks", dataTracker.get(AIR_TICKS));
-        compound.put("chest", dataTracker.get(CHEST).encodeAllowEmpty(this.getRegistryManager()));
+        compound.put("chest", dataTracker.get(CHEST).toNbtAllowEmpty(this.getRegistryManager()));
         if (inventory != DUMMY) {
             compound.put("chestContents", inventory.toNbtList(this.getRegistryManager()));
         }
@@ -780,7 +780,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         var genesB = matingMoa.getGenes();
         
         var eggStack = genesA.getEggForBreeding(genesB, world, getBlockPos());
-        var baby = ParadiseLostEntityTypes.MOA.create(world);
+        var baby = ParadiseLostEntityTypes.MOA.create(world, SpawnReason.BREEDING);
         if (baby == null) {
             return null;
         }
@@ -790,9 +790,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     @Override
-    protected void dropLoot(DamageSource source, boolean causedByPlayer) {
-        super.dropLoot(source, causedByPlayer);
-        dropStack(new ItemStack(ParadiseLostItems.MOA_MEAT, (int) Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER))));
+    protected void dropLoot(ServerWorld world, DamageSource source, boolean causedByPlayer) {
+        super.dropLoot(world, source, causedByPlayer);
+        dropStack(world, new ItemStack(ParadiseLostItems.MOA_MEAT, (int) Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER))));
     }
 
     @Override

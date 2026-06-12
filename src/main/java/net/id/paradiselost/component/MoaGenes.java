@@ -8,6 +8,7 @@ import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
@@ -54,7 +55,7 @@ public class MoaGenes implements AutoSyncedComponent {
     }
 
     public static MoaEntity getMoaFromEgg(World world, ItemStack stack, UUID owner) {
-        MoaEntity moa = ParadiseLostEntityTypes.MOA.create(world);
+        MoaEntity moa = ParadiseLostEntityTypes.MOA.create(world, SpawnReason.BREEDING);
         MoaGenes genes = moa.getGenes();
         if (stack.isOf(ParadiseLostItems.MOA_EGG)) {
             genes.fromComponent(stack.get(ParadiseLostDataComponentTypes.MOA_GENES));

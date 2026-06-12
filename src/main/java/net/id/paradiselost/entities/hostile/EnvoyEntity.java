@@ -119,7 +119,7 @@ public class EnvoyEntity extends SkeletonEntity implements IEnlightenable {
         return this.getEnlightened() ? ParadiseLostSoundEvents.ENTITY_ENVOY_ENLIGHTENED_AMBIENT : ParadiseLostSoundEvents.ENTITY_ENVOY_AMBIENT;
     }
 
-    public boolean damage(DamageSource source, float amount) {
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
         float dmg = amount;
         if (this.getEnlightened()) {
             dmg /= 2;
@@ -127,11 +127,11 @@ public class EnvoyEntity extends SkeletonEntity implements IEnlightenable {
         if (this.isAffectedByDaylight()) {
             dmg *= 3f;
         }
-        return super.damage(source, dmg);
+        return super.damage(world, source, dmg);
     }
 
-    public boolean tryAttack(Entity target) {
-        if (!super.tryAttack(target)) {
+    public boolean tryAttack(ServerWorld world, Entity target) {
+        if (!super.tryAttack(world, target)) {
             return false;
         } else {
             if (target instanceof LivingEntity) {

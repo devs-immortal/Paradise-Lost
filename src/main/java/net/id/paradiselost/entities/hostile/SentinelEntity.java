@@ -121,14 +121,14 @@ public class SentinelEntity extends ZombieEntity implements IEnlightenable {
         return ParadiseLostSoundEvents.ENTITY_SENTINEL_STEP;
     }
 
-    public boolean damage(DamageSource source, float amount) {
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
         if (!this.getEnlightened()) {
             if (source.isSourceCreativePlayer()) {
-                return super.damage(source, 1000);
+                return super.damage(world, source, 1000);
             }
             return false;
         }
-        return super.damage(source, amount);
+        return super.damage(world, source, amount);
     }
 
     public boolean isAiDisabled() {

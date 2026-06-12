@@ -20,6 +20,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.EntityTrackerEntry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.crash.CrashReportSection;
 import net.minecraft.util.hit.BlockHitResult;
@@ -148,7 +149,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         }
 
         // Check if it is outside of the world
-        return this.moveTime > 100 && (blockPos.getY() < this.getWorld().getBottomY() || blockPos.getY() > this.getWorld().getTopY());
+        return this.moveTime > 100 && (blockPos.getY() < this.getWorld().getBottomY() || blockPos.getY() > this.getWorld().getTopYInclusive() + 1);
     }
 
     /**
@@ -220,7 +221,9 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         DamageSource damageSource2 = flag ? this.getWorld().getDamageSources().fallingAnvil(this) : this.getWorld().getDamageSources().fallingBlock(this);
         float f = Math.min(MathHelper.floor((float) i * this.fallHurtAmount), this.fallHurtMax);
 
-        this.getWorld().getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0))).forEach(entity -> entity.damage(damageSource2, f));
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            this.getWorld().getOtherEntities(this, getBoundingBox().union(getBoundingBox().offset(0, 1 + -2 * this.getVelocity().getY(), 0))).forEach(entity -> entity.damage(serverWorld, damageSource2, f));
+        }
 
         if (flag && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
             BlockState blockstate = AnvilBlock.getLandingState(this.blockState);
@@ -246,7 +249,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound compound) {
-        this.blockState = NbtHelper.toBlockState(BuiltinRegistries.createWrapperLookup().getWrapperOrThrow(RegistryKeys.BLOCK), compound.getCompound("BlockState"));
+        this.blockState = NbtHelper.toBlockState(BuiltinRegistries.createWrapperLookup().getOrThrow(RegistryKeys.BLOCK), compound.getCompound("BlockState"));
         this.moveTime = compound.getInt("Time");
         if (compound.contains("HurtEntities", 99)) {
             this.hurtEntities = compound.getBoolean("HurtEntities");
@@ -342,11 +345,13 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             }
             for (Direction dir : Direction.stream().toList()) {
                 var newState = this.blockState.getStateForNeighborUpdate(
-                        dir,
-                        this.getWorld().getBlockState(blockPos.offset(dir)),
+                        this.getWorld(),
                         this.getWorld(),
                         blockPos,
-                        blockPos.offset(dir)
+                        dir,
+                        blockPos.offset(dir),
+                        this.getWorld().getBlockState(blockPos.offset(dir)),
+                        this.getWorld().getRandom()
                 );
                 this.getWorld().setBlockState(blockPos, newState);
                 this.blockState = newState;
@@ -366,7 +371,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         if (this.isRemoved()) return;
 
         this.discard();
-        if (this.dropItem && this.getWorld().getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+        if (this.dropItem && this.getWorld() instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
             Block.dropStacks(this.blockState, this.getWorld(), this.getBlockPos());
         }
         // spawn break particles

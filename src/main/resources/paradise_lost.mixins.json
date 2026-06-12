@@ -15,10 +15,8 @@
     "enchantment.EnchantmentHelperMixin",
     "entity.AbstractMinecartEntityMixin",
     "entity.AllayEntityMixin",
-    "entity.ChestBoatEntityMixin",
     "entity.CowEntityMixin",
     "entity.LivingEntityMixin",
-    "entity.PiglinBrainMixin",
     "entity.PlayerEntityMixin",
     "entity.PotionEntityMixin",
     "item.AxeItemMixin",
@@ -32,7 +30,6 @@
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
     "util.SlotAccessor",
-    "world.ExplosionMixin",
     "world.gen.SurfaceBuilderMixin",
     "world.gen.UtilMixin",
     "world.gen.structure.JigsawStructureMixin"

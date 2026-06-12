@@ -91,7 +91,7 @@ public class IncubatorBlockEntity extends BlockEntity {
     public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.writeNbt(nbt, registryLookup);
         if (!egg.isEmpty()) {
-            nbt.put("egg", egg.encode(registryLookup));
+            nbt.put("egg", egg.toNbt(registryLookup));
         }
         nbt.putInt("hatchTicks", hatchTicks);
     }

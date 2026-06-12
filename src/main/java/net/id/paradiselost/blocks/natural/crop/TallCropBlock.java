@@ -167,7 +167,7 @@ public class TallCropBlock extends CropBlock {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockPos blockPos = ctx.getBlockPos();
         World world = ctx.getWorld();
-        return blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos.up()).canReplace(ctx) ? this.withAgeAndHalf(0, DoubleBlockHalf.LOWER) : null;
+        return blockPos.getY() < world.getTopYInclusive() && world.getBlockState(blockPos.up()).canReplace(ctx) ? this.withAgeAndHalf(0, DoubleBlockHalf.LOWER) : null;
     }
 
     @Override

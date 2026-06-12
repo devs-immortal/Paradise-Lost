@@ -16,15 +16,15 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 
 public class PalaceDoorBlockEntity extends BlockEntity {
 
     private static final float DOOR_OPEN_SPEED = 66F;
     private static final float MAX_DOOR_ANGLE = (float) (Math.PI / 2.0);
-    private static final DustParticleEffect DUST_PARTICLE = new DustParticleEffect(new Vector3f(0.69F, 0.659F, 0.627F), 1.0F);
+    private static final DustParticleEffect DUST_PARTICLE = new DustParticleEffect(ColorHelper.fromFloats(1.0F, 0.69F, 0.659F, 0.627F), 1.0F);
 
     private boolean doorOpened;
     public boolean doorFullyOpened;

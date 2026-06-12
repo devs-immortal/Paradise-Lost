@@ -19,11 +19,13 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -52,6 +54,9 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @Shadow
     public abstract boolean isDead();
+
+    @Shadow
+    public abstract boolean isInvulnerableTo(ServerWorld world, DamageSource source);
 
     @Shadow
     protected abstract float modifyAppliedDamage(DamageSource source, float amount);
@@ -99,18 +104,18 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         }
     }
 
-    @ModifyArgs(method = "dropLoot", at = @At(value = "INVOKE", target = "Lnet/minecraft/loot/LootTable;generateLoot(Lnet/minecraft/loot/context/LootContextParameterSet;JLjava/util/function/Consumer;)V"))
-    private void dropSmeltedLoot(Args args) {
-        LootContextParameterSet lootContextParameterSet = args.get(0);
-        var weapon = lootContextParameterSet.get(LootContextParameters.DAMAGE_SOURCE).getWeaponStack();
+    @ModifyArgs(method = "dropLoot", at = @At(value = "INVOKE", target = "Lnet/minecraft/loot/LootTable;generateLoot(Lnet/minecraft/loot/context/LootWorldContext;JLjava/util/function/Consumer;)V"))
+    private void dropSmeltedLoot(Args args, ServerWorld world, DamageSource damageSource, boolean causedByPlayer) {
+        LootWorldContext lootWorldContext = args.get(0);
+        var weapon = lootWorldContext.getParameters().getOrThrow(LootContextParameters.DAMAGE_SOURCE).getWeaponStack();
         if (weapon != null && weapon.isIn(ParadiseLostItemTags.IGNITING_TOOLS)) {
-            args.set(2, (Consumer<ItemStack>) this::dropStackInternal);
+            args.set(2, (Consumer<ItemStack>) stack -> this.dropStackInternal(world, stack));
         }
     }
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (!this.isInvulnerableTo(source) && !this.getWorld().isClient && !this.isDead()) {
+    public void damage(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        if (!this.isInvulnerableTo(world, source) && !this.getWorld().isClient && !this.isDead()) {
             if (source.isIn(DamageTypeTags.IS_FALL)) { // regular fall damage save
                 float modified = this.modifyAppliedDamage(source, amount);
                 // if damage 5 hearts or greater or player would be killed by the damage
@@ -147,15 +152,15 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @Unique
     @Nullable
-    private ItemEntity dropStackInternal(ItemStack stack) {
-        Optional<RecipeEntry<SmeltingRecipe>> optional = this.getWorld().getRecipeManager().getFirstMatch(RecipeType.SMELTING, new SingleStackRecipeInput(stack), getWorld());
+    private ItemEntity dropStackInternal(ServerWorld world, ItemStack stack) {
+        Optional<RecipeEntry<SmeltingRecipe>> optional = world.getRecipeManager().getFirstMatch(RecipeType.SMELTING, new SingleStackRecipeInput(stack), world);
         if (optional.isPresent()) {
-            ItemStack itemStack = ((optional.get()).value()).getResult(getWorld().getRegistryManager());
+            ItemStack itemStack = optional.get().value().craft(new SingleStackRecipeInput(stack), world.getRegistryManager());
             if (!itemStack.isEmpty()) {
-                return this.dropStack(itemStack.copyWithCount(stack.getCount()), 0.0F);
+                return this.dropStack(world, itemStack.copyWithCount(stack.getCount()), 0.0F);
             }
         }
-        return this.dropStack(stack);
+        return this.dropStack(world, stack);
     }
 
 }

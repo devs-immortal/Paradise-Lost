@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -22,8 +23,8 @@ public class ThrownNitraEntity extends ThrownItemEntity {
         super(entityType, world);
     }
 
-    public ThrownNitraEntity(World world, LivingEntity owner) {
-        super(ParadiseLostEntityTypes.THROWN_NITRA, owner, world);
+    public ThrownNitraEntity(World world, LivingEntity owner, ItemStack stack) {
+        super(ParadiseLostEntityTypes.THROWN_NITRA, owner, world, stack);
     }
 
     @Override

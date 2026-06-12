@@ -8,9 +8,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.profiler.Profilers;
 import net.minecraft.world.World;
 
 import static net.id.paradiselost.world.ParadiseLostGameRules.PARADISE_PORTAL_ENABLED;
@@ -24,9 +26,9 @@ public class ParadiseLostPortalBlock extends CustomPortalBlock {
     @Environment(EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (random.nextInt(200) == 0) {
-            world.getProfiler().push("portal");
+            Profilers.get().push("portal");
             world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, ParadiseLostSoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
-            world.getProfiler().pop();
+            Profilers.get().pop();
         }
 
         double d = (double) pos.getX() + random.nextDouble();
@@ -51,7 +53,7 @@ public class ParadiseLostPortalBlock extends CustomPortalBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (world.getGameRules().getBoolean(PARADISE_PORTAL_ENABLED)) {
+        if (!(world instanceof ServerWorld serverWorld) || serverWorld.getGameRules().getBoolean(PARADISE_PORTAL_ENABLED)) {
             super.onEntityCollision(state, world, pos, entity);
         }
     }

@@ -1,6 +1,5 @@
 package net.id.paradiselost.blocks.mechanical;
 
-import net.id.paradiselost.world.ExplosionExtensions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,10 +19,13 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.block.WireOrientation;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.explosion.Explosion;
+import net.minecraft.world.explosion.ExplosionImpl;
 import org.jetbrains.annotations.Nullable;
 
 public class NitraBlock extends Block {
@@ -43,16 +45,16 @@ public class NitraBlock extends Block {
         }
     }
 
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
         if (world.isReceivingRedstonePower(pos)) {
             world.scheduleBlockTick(pos, this, 1);
         }
 
     }
 
-    public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
-        float sourcePower = ((ExplosionExtensions) explosion).getPower();
-        if (!world.isClient && sourcePower > 0.5F) {
+    public void onDestroyedByExplosion(ServerWorld world, BlockPos pos, Explosion explosion) {
+        float sourcePower = explosion.getPower();
+        if (sourcePower > 0.5F) {
             ignite(world, pos, sourcePower - 0.5F);
         }
     }
@@ -69,12 +71,14 @@ public class NitraBlock extends Block {
     }
 
     private static void ignite(World world, BlockPos pos, float power, @Nullable LivingEntity igniter) {
-        Explosion explosion = new Explosion(world, igniter, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, false, Explosion.DestructionType.DESTROY);
-        if (!world.isClient) {
-            explosion.collectBlocksAndDamageEntities();
-            world.emitGameEvent(igniter, GameEvent.PRIME_FUSE, pos);
+        if (world instanceof ServerWorld serverWorld) {
+            ExplosionImpl explosion = new ExplosionImpl(serverWorld, igniter, null, null, new Vec3d(pos.getX(), pos.getY() + 0.5D, pos.getZ()), power, false, Explosion.DestructionType.DESTROY);
+            explosion.explode();
+            serverWorld.emitGameEvent(igniter, GameEvent.PRIME_FUSE, pos);
+        } else {
+            world.playSound(pos.getX(), pos.getY() + 0.5D, pos.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.BLOCKS, 4.0F, (1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F, false);
+            world.addParticle(power < 2.0F ? ParticleTypes.EXPLOSION : ParticleTypes.EXPLOSION_EMITTER, pos.getX(), pos.getY() + 0.5D, pos.getZ(), 1.0, 0.0, 0.0);
         }
-        ((ExplosionExtensions) explosion).affectWorld(true, SoundEvents.ENTITY_GENERIC_EXPLODE.value());
     }
 
     protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
@@ -99,10 +103,10 @@ public class NitraBlock extends Block {
     }
 
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-        if (!world.isClient) {
+        if (world instanceof ServerWorld serverWorld) {
             BlockPos blockPos = hit.getBlockPos();
             Entity entity = projectile.getOwner();
-            if (projectile.isOnFire() && projectile.canModifyAt(world, blockPos)) {
+            if (projectile.isOnFire() && projectile.canModifyAt(serverWorld, blockPos)) {
                 ignite(world, blockPos, BASE_EXPLOSIVE_POWER, entity instanceof LivingEntity ? (LivingEntity) entity : null);
                 world.removeBlock(blockPos, false);
             }

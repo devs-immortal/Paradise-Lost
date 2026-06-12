@@ -77,7 +77,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 velocityModified = true;
                 addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 120, 50));
                 addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 320, 1));
-            } else if (!getWorld().getGameRules().getBoolean(PARADISE_VOID_KILLS) && getY() < getWorld().getBottomY() - 80) {
+            } else if (!((ServerWorld) getWorld()).getGameRules().getBoolean(PARADISE_VOID_KILLS) && getY() < getWorld().getBottomY() - 80) {
                 // fall out of world
                 setParadiseLostFallen(true);
                 ServerWorld overworld = getServer().getWorld(World.OVERWORLD);
@@ -87,9 +87,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 double xMax = Math.min(2.9999872E7D, worldBorder.getBoundEast() - 16.0D);
                 double zMax = Math.min(2.9999872E7D, worldBorder.getBoundSouth() - 16.0D);
                 double scaleFactor = DimensionType.getCoordinateScaleFactor(getWorld().getDimension(), overworld.getDimension());
-                BlockPos blockPos3 = new BlockPos((int) MathHelper.clamp(getX() * scaleFactor, xMin, xMax), getWorld().getTopY() + 128, (int) MathHelper.clamp(getZ() * scaleFactor, zMin, zMax));
+                BlockPos blockPos3 = new BlockPos((int) MathHelper.clamp(getX() * scaleFactor, xMin, xMax), getWorld().getTopYInclusive() + 129, (int) MathHelper.clamp(getZ() * scaleFactor, zMin, zMax));
 
-                ((ServerPlayerEntity) (Object) this).teleport(overworld, blockPos3.getX(), blockPos3.getY(), blockPos3.getZ(), getYaw(), getPitch());
+                ((ServerPlayerEntity) (Object) this).teleport(overworld, blockPos3.getX(), blockPos3.getY(), blockPos3.getZ(), java.util.Set.of(), getYaw(), getPitch(), true);
                 StatusEffectInstance ef = new StatusEffectInstance(StatusEffects.NAUSEA, 160, 2, false, false, true);
                 addStatusEffect(ef);
             }

@@ -106,8 +106,8 @@ public class ParadiseLostMushroomPlantBlock extends PlantBlock implements Fertil
     @Override
     public void grow(ServerWorld world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
         Optional<? extends RegistryEntry<ConfiguredFeature<?, ?>>> optional = world.getRegistryManager()
-                .get(RegistryKeys.CONFIGURED_FEATURE)
-                .getEntry(this.featureKey);
+                .getOrThrow(RegistryKeys.CONFIGURED_FEATURE)
+                .getOptional(this.featureKey);
         if (!optional.isEmpty()) {
             world.removeBlock(pos, false);
             if (!((ConfiguredFeature) ((RegistryEntry) optional.get()).value()).generate(world, world.getChunkManager().getChunkGenerator(), random, pos)) {

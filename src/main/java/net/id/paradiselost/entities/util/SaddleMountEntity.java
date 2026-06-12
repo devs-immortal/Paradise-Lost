@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -36,11 +37,11 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     }
 
     @Override
-    public boolean damage(DamageSource damagesource, float i) {
+    public boolean damage(ServerWorld world, DamageSource damagesource, float i) {
         if ((damagesource.getAttacker() instanceof PlayerEntity) && (!this.getPassengerList().isEmpty() && this.getPassengerList().get(0) == damagesource.getSource()))
             return false;
 
-        return super.damage(damagesource, i);
+        return super.damage(world, damagesource, i);
     }
 
     @Override
@@ -50,10 +51,10 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
     }
 
     @Override
-    protected void dropInventory() {
-        super.dropInventory();
+    protected void dropInventory(ServerWorld world) {
+        super.dropInventory(world);
         if (this.isSaddled()) {
-            this.dropItem(Items.SADDLE);
+            this.dropItem(world, Items.SADDLE);
         }
     }
 
