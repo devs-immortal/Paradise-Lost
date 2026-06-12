@@ -115,7 +115,7 @@ public class BloodstoneHUDRenderer {
     }
 
     private static void renderRing(DrawContext context, int offsetX, int offsetY) {
-        context.drawTexture(ParadiseLost.locate("textures/hud/bloodstone/bloodstone_ring.png"), offsetX - 75, offsetY - 75, 0, 0, 150, 150, 150, 150);
+        context.drawTexture(RenderLayer::getGuiTextured, ParadiseLost.locate("textures/hud/bloodstone/bloodstone_ring.png"), offsetX - 75, offsetY - 75, 0, 0, 150, 150, 150, 150);
     }
 
     private static void renderIconWText(DrawContext context, MinecraftClient client, Sprite sprite, Text text, int offsetX, int offsetY) {

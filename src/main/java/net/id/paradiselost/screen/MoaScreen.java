@@ -1,6 +1,5 @@
 package net.id.paradiselost.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
@@ -8,7 +7,7 @@ import net.id.paradiselost.screen.handler.MoaScreenHandler;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -41,15 +40,12 @@ public class MoaScreen extends HandledScreen<MoaScreenHandler> {
     
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - backgroundWidth) >> 1;
         int y = (height - backgroundHeight) >> 1;
-        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
-        
+        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256);
+
         if (handler.hasMoaInventory()) {
-            context.drawTexture(TEXTURE, x + 79, y + 17, 0, 184, 90, 72);
+            context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x + 79, y + 17, 0, 184, 90, 72, 256, 256);
         }
 
         InventoryScreen.drawEntity(context, x + 26, y + 18, x + 78, y + 70, 17, 0.25F, mouseX, mouseY, moa);

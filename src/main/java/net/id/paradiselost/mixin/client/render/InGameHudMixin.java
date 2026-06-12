@@ -67,9 +67,7 @@ public abstract class InGameHudMixin {
             int l = (context.getScaledWindowHeight() - j) / 2;
             int m = k + i;
             int n = l + j;
-            RenderSystem.enableBlend();
-            context.drawTexture(OLVITE_SPYGLASS_SCOPE, k, l, -90, 0.0F, 0.0F, i, j, i, j);
-            RenderSystem.disableBlend();
+            context.drawTexture(RenderLayer::getGuiTextured, OLVITE_SPYGLASS_SCOPE, k, l, 0.0F, 0.0F, i, j, i, j);
             context.fill(RenderLayer.getGuiOverlay(), 0, n, context.getScaledWindowWidth(), context.getScaledWindowHeight(), -90, Colors.BLACK);
             context.fill(RenderLayer.getGuiOverlay(), 0, 0, context.getScaledWindowWidth(), l, -90, Colors.BLACK);
             context.fill(RenderLayer.getGuiOverlay(), 0, l, k, n, -90, Colors.BLACK);
