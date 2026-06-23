@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.VehicleEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -23,16 +24,16 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity {
     }
 
     @Shadow
-    protected abstract double getMaxSpeed();
+    protected abstract double getMaxSpeed(ServerWorld world);
 
     @Shadow
     public abstract boolean isOnRail();
 
     @Inject(method = "moveOffRail", at = @At("HEAD"), cancellable = true)
-    protected void moveOffRail(CallbackInfo ci) {
+    protected void moveOffRail(ServerWorld world, CallbackInfo ci) {
         var floatingComponent = ParadiseLostComponents.FLOATING_KEY.get(this);
         if (!this.isOnGround() && floatingComponent.getFloating() && floatingComponent.getFloatTime() > 0) {
-            double d = this.getMaxSpeed();
+            double d = this.getMaxSpeed(world);
             Vec3d vec3d = this.getVelocity();
             this.setVelocity(MathHelper.clamp(vec3d.x, -d, d), 0, MathHelper.clamp(vec3d.z, -d, d));
             this.move(MovementType.SELF, this.getVelocity());

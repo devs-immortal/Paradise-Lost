@@ -67,7 +67,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             at = @At("HEAD"),
             cancellable = true
     )
-    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    public void damage(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 
         if (source == getWorld().getDamageSources().outOfWorld() && getWorld().getRegistryKey() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY && !getWorld().isClient()) {
             if (MiscUtil.useLevitationTotem(this)) {

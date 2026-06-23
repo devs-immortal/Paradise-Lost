@@ -49,7 +49,7 @@
     "client.render.LivingEntityRendererMixin",
     "client.render.NativeImageAccessor",
     "client.render.PlayerHeldItemFeatureRendererMixin",
-    "client.render.WorldRendererMixin",
+    "client.render.WorldEventHandlerMixin",
     "client.render.item.BuiltinModelItemRendererMixin",
     "client.sound.MinecartInsideSoundInstanceMixin",
     "client.sound.MovingMinecartSoundInstanceMixin"
