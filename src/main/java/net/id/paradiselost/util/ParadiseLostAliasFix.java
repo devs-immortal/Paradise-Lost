@@ -1,10 +1,13 @@
 package net.id.paradiselost.util;
 
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
+
+import static net.id.paradiselost.ParadiseLost.locate;
+
 public class ParadiseLostAliasFix {
 
     public static void init() {
-        // TODO(1.21.2): Either backport addAlias to 1.21.2 or wait for 1.21.3
-        /*
         Registries.BLOCK.addAlias(locate("orange_sapling"), locate("aurel_sapling"));
         Registries.BLOCK.addAlias(locate("orange_log"), locate("aurel_log"));
         Registries.BLOCK.addAlias(locate("orange_wood"), locate("aurel_wood"));
@@ -42,7 +45,6 @@ public class ParadiseLostAliasFix {
         Registries.ITEM.addAlias(locate("orange_hanging_sign"), locate("aurel_hanging_sign"));
 
         Registries.ITEM.addAlias(locate("orange"), Identifier.ofVanilla("apple"));
-        */
     }
 
 }
