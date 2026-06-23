@@ -1,13 +1,9 @@
 package net.id.paradiselost.compat;
 
-import net.id.paradiselost.ParadiseLost;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.mehvahdjukaar.stone_zone.api.set.VanillaRockChildKeys;
-import net.mehvahdjukaar.stone_zone.api.set.stone.StoneTypeRegistry;
-
 public class EveryCompCompat {
 
     public static void init() {
+/*
         WoodTypeRegistry woodReg = WoodTypeRegistry.INSTANCE;
         StoneTypeRegistry stoneReg = StoneTypeRegistry.INSTANCE;
 
@@ -24,8 +20,7 @@ public class EveryCompCompat {
                 .childBlock(VanillaRockChildKeys.POLISHED, "smooth_heliolith");
         stoneReg.addSimpleFinder(ParadiseLost.MOD_ID, "levita")
                 .childBlock(VanillaRockChildKeys.POLISHED, "levita_brick");
-
-
+*/
     }
 
 }
