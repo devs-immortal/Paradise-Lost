@@ -16,7 +16,6 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static net.id.paradiselost.entities.util.FloatingBlockHelperImpls.Any;
@@ -52,7 +51,7 @@ public interface FloatingBlockHelper {
      * The default conditions under which a floating block goes from floating to falling. By default, this is when a
      * floating block is 50 blocks from the height limit, and isn't a fast floater.
      */
-    Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = entity -> {
+    Predicate<FloatingBlockEntity> DEFAULT_DROP_STATE = entity -> {
         World world = entity.getWorld();
         BlockPos pos = entity.getBlockPos();
         int distFromTop = world.getTopYInclusive() + 1 - pos.getY();
