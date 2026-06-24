@@ -199,10 +199,6 @@ public class MoaScreenHandler extends ScreenHandler {
             );
         }
 
-        public int entityId() {
-            return this.entityId;
-        }
-
         @Override
         public Id<? extends CustomPayload> getId() {
             return ID;
