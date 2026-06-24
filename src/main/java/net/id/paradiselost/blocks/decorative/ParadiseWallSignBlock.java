@@ -14,9 +14,6 @@ public class ParadiseWallSignBlock extends WallSignBlock {
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-//        FIXME: check if this is actually necessary, and if so, find a better way to do it
-//        Identifier identifier = Registries.BLOCK.getId(this.asBlock()); // this is stupid
-//        this.lootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE, identifier.withPrefixedPath("blocks/"));
         return new ParadiseSignBlockEntity(pos, state);
     }
 }
