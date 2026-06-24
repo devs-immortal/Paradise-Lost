@@ -65,15 +65,15 @@ public abstract class ItemRendererMixin {
             boolean bl = renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.GROUND || renderMode == ModelTransformationMode.FIXED;
             if (bl && stack.isOf(ParadiseLostItems.OLVITE_SPYGLASS)) {
                 matrices.push();
-                model = this.bakedModelManager.getModel(OLVITE_SPYGLASS);
-                model.getTransformation().getTransformation(renderMode).apply(leftHanded, matrices);
+                BakedModel spyglassModel = this.bakedModelManager.getModel(OLVITE_SPYGLASS);
+                spyglassModel.getTransformation().getTransformation(renderMode).apply(leftHanded, matrices);
                 matrices.translate(-0.5F, -0.5F, -0.5F);
 
                 RenderLayer renderLayer = RenderLayers.getItemLayer(stack);
                 VertexConsumer vertexConsumer;
                 vertexConsumer = getItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
 
-                this.renderBakedItemModel(model, stack, light, overlay, matrices, vertexConsumer);
+                this.renderBakedItemModel(spyglassModel, stack, light, overlay, matrices, vertexConsumer);
 
                 matrices.pop();
                 ci.cancel();
