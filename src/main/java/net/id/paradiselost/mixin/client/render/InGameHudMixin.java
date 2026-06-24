@@ -1,6 +1,5 @@
 package net.id.paradiselost.mixin.client.render;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.id.paradiselost.client.rendering.ui.ParadiseLostOverlayRegistrar;

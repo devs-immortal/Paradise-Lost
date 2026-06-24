@@ -19,8 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-
 public class CherineCampfireBlock extends CampfireBlock {
     public CherineCampfireBlock(boolean emitsParticles, int fireDamage, Settings settings) {
         super(emitsParticles, fireDamage, settings);
