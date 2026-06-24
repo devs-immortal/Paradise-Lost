@@ -20,7 +20,6 @@ public class LitCloudParticle extends SpriteBillboardParticle {
         super(world, x, y, z, 0.0, 0.0, 0.0);
         this.velocityMultiplier = 0.96F;
         this.spriteProvider = spriteProvider;
-        float f = 2.5F;
         this.velocityX *= 0.10000000149011612;
         this.velocityY *= 0.10000000149011612;
         this.velocityZ *= 0.10000000149011612;
@@ -33,7 +32,7 @@ public class LitCloudParticle extends SpriteBillboardParticle {
         this.blue = g;
         this.scale *= 1.875F;
         int i = (int) (8.0 / (Math.random() * 0.8 + 0.3));
-        this.maxAge = (int) Math.max((float) i * 2.5F, 1.0F);
+        this.maxAge = (int) Math.max(i * 2.5F, 1.0F);
         this.collidesWithWorld = false;
         this.setSpriteForAge(spriteProvider);
     }

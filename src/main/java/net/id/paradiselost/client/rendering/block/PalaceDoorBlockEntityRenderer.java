@@ -35,7 +35,7 @@ public class PalaceDoorBlockEntityRenderer implements BlockEntityRenderer<Palace
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         
-        ModelPartData door = modelPartData.addChild("door", ModelPartBuilder.create()
+        modelPartData.addChild("door", ModelPartBuilder.create()
                         .uv(0, 116).cuboid(0.0F, -51.0F, -0.5F, 24.0F, 32.0F, 1.0F, Dilation.NONE)
                         .uv(0, 0).cuboid(0.0F, -112.0F, -2.0F, 24.0F, 112.0F, 4.0F, Dilation.NONE),
                 ModelTransform.pivot(-24.0F, 24.0F, 0.0F));
