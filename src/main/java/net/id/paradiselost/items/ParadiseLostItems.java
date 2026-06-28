@@ -28,7 +28,6 @@ import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
@@ -528,14 +527,6 @@ public class ParadiseLostItems {
 
     public static final BlockItem LEVITATOR = add(ParadiseLostBlocks.LEVITATOR);
 
-    public static final BoatSet AUREL_BOATS = addBoatItems("aurel", "PARADISE_LOST_AUREL");
-    public static final BoatSet MOTHER_AUREL_BOATS = addBoatItems("mother_aurel", "PARADISE_LOST_MOTHER_AUREL");
-    public static final BoatSet MENTH_BOATS = addBoatItems("menth", "PARADISE_LOST_MENTH");
-    public static final BoatSet WISTERIA_BOATS = addBoatItems("wisteria", "PARADISE_LOST_WISTERIA");
-
-    public static final BoatSet[] BOAT_SETS = new BoatSet[] {AUREL_BOATS, MOTHER_AUREL_BOATS, MENTH_BOATS, WISTERIA_BOATS};
-
-
     public static final RegistryEntry<Potion> HEALTH_BOOST_POTION = registerPotion("health_boost", new Potion(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 6000, 1)));
     public static final RegistryEntry<Potion> LONG_HEALTH_BOOST_POTION = registerPotion(
             "long_health_boost", new Potion("health_boost", new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 12000, 1))
@@ -582,27 +573,6 @@ public class ParadiseLostItems {
                         ? new TallBlockItem(block, settings)
                         : new BlockItem(block, settings),
                 additionalActions);
-    }
-
-    private static BoatSet addBoatItems(String woodId, String boatTypeId) {
-        String boatId = (MOD_ID + "_" + woodId);
-
-        BoatEntity.Type boatType = ClassTinkerers.getEnum(BoatEntity.Type.class, boatTypeId);
-
-        BoatItem boat = add(woodId + "_boat", new BoatItem(false, boatType, new Settings().maxCount(1)), fuel(1200));
-        BoatItem chestBoat = add(woodId + "_chest_boat", new BoatItem(true, boatType, new Settings().maxCount(1)), fuel(1200));
-
-        return new BoatSet(boatType, boat, chestBoat);
-    }
-
-    public record BoatSet(
-            BoatEntity.Type type,
-            BoatItem boat,
-            BoatItem chestBoat
-    ) implements Iterable<Item> {
-        public @NotNull Iterator<Item> iterator() {
-            return Arrays.stream(new Item[]{boat, chestBoat}).iterator();
-        }
     }
 
     private static RegistryEntry<Potion> registerPotion(String name, Potion potion) {

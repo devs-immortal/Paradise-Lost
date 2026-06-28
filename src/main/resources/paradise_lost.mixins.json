@@ -15,8 +15,6 @@
     "enchantment.EnchantmentHelperMixin",
     "entity.AbstractMinecartEntityMixin",
     "entity.AllayEntityMixin",
-    "entity.BoatEntityMixin",
-    "entity.ChestBoatEntityMixin",
     "entity.CowEntityMixin",
     "entity.LivingEntityMixin",
     "entity.PiglinBrainMixin",

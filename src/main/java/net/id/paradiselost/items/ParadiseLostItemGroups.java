@@ -317,15 +317,6 @@ public class ParadiseLostItemGroups {
                 entries.add(XP_CIRCLET);
                 // upgrades
                 entries.add(GLAZED_GOLD_UPGRADE);
-                // travel
-                entries.add(AUREL_BOATS.boat());
-                entries.add(AUREL_BOATS.chestBoat());
-                entries.add(MOTHER_AUREL_BOATS.boat());
-                entries.add(MOTHER_AUREL_BOATS.chestBoat());
-                entries.add(MENTH_BOATS.boat());
-                entries.add(MENTH_BOATS.chestBoat());
-                entries.add(WISTERIA_BOATS.boat());
-                entries.add(WISTERIA_BOATS.chestBoat());
             }));
     public static final RegistryKey<ItemGroup> PARADISE_RESOURCES = create("resources", FabricItemGroup.builder()
             .icon(() -> new ItemStack(CHERINE))
