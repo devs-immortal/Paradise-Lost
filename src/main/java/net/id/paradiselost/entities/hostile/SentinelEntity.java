@@ -142,7 +142,8 @@ public class SentinelEntity extends ZombieEntity implements IEnlightenable {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0)
-                .add(EntityAttributes.GENERIC_SCALE, 1.15f);
+                .add(EntityAttributes.GENERIC_SCALE, 1.15f)
+                .add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS, 0F);
     }
 
 
