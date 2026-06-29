@@ -109,7 +109,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         }
     }
 
-    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (!this.isInvulnerableTo(source) && !this.getWorld().isClient && !this.isDead()) {
             if (source.isIn(DamageTypeTags.IS_FALL)) { // regular fall damage save
