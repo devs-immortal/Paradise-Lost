@@ -8,6 +8,7 @@
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
     "block.FlowerPotBlockMixin",
+    "block.PowderSnowBlockMixin",
     "brain.ActivityInvoker",
     "brain.MemoryModuleTypeInvoker",
     "brain.SensorTypeInvoker",

@@ -5,6 +5,7 @@ import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.registry.ItemRegistry;
+import net.id.paradise_lost.item.armor.FloatyBootsItem;
 import net.id.paradise_lost.item.armor.XpCircletItem;
 import net.id.paradise_lost.tag.ParadiseLostItemTags;
 import net.id.paradise_lost.util.MiscUtil;
@@ -38,6 +39,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
@@ -96,6 +98,21 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         if ((Object) this instanceof Player player && ((ParadiseLostEntityExtensions) player).isFloatyAnchored()) {
             ci.cancel();
         }
+    }
+
+    @Inject(method = "dampensVibrations", at = @At("HEAD"), cancellable = true)
+    private void paradiseLost$floatyBootsDampensVibrations(CallbackInfoReturnable<Boolean> cir) {
+        if (FloatyBootsItem.isWearing((LivingEntity) (Object) this)) {
+            cir.setReturnValue(true);
+        }
+    }
+
+    @ModifyVariable(method = "calculateFallDamage", at = @At("HEAD"), argsOnly = true, ordinal = 0)
+    private float paradiseLost$floatyBootsFeatherFalling(float fallDistance) {
+        if (FloatyBootsItem.isWearing((LivingEntity) (Object) this)) {
+            return Math.max(0.0F, fallDistance - FloatyBootsItem.FEATHER_FALLING_BLOCKS);
+        }
+        return fallDistance;
     }
 
     @Inject(method = "tick", at = @At("TAIL"))

@@ -2,7 +2,9 @@ package net.id.paradise_lost.datagen;
 
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.registry.MoaBreedingRegistry;
+import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.id.paradise_lost.registry.MoaSpawnRegistry;
+import net.id.paradise_lost.registry.MoaSpawnStatWeightingRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.PackOutput;
@@ -16,6 +18,8 @@ public final class ParadiseLostMoaDatapackProvider extends DatapackBuiltinEntrie
 
     public ParadiseLostMoaDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, lookupProvider, BUILDER, Set.of(ModConstants.MODID));
+        MoaSpawnStatWeightingRegistry.REGISTRY.addToSet(BUILDER);
+        MoaRaceRegistry.REGISTRY.addToSet(BUILDER);
         MoaSpawnRegistry.REGISTRY.addToSet(BUILDER);
         MoaBreedingRegistry.REGISTRY.addToSet(BUILDER);
     }

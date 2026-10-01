@@ -15,6 +15,10 @@
     {
       "id": "paradise_lost:surtrum_helmet",
       "required": false
+    },
+    {
+      "id": "paradise_lost:floaty_boots",
+      "required": false
     }
   ]
 }
