@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_farmland",
+  "textures": {
+    "dirt": "paradise_lost:block/dirt",
+    "particle": "paradise_lost:block/dirt",
+    "top": "paradise_lost:block/farmland"
+  }
+}

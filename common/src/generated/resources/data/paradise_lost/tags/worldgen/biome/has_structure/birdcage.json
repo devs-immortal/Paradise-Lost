@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:highlands",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:highlands_forest",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_woods",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "races": [
+    {
+      "race": "paradise_lost:goldenrod",
+      "weight": 10
+    },
+    {
+      "race": "paradise_lost:foxtrot",
+      "weight": 4
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_1",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_2",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_3",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_4",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_1_broken",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_2_broken",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_3_broken",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_4_broken",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_external_1",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_external_2",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_external_3",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_external_4",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_external_1_broken",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_external_2_broken",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_external_3_broken",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/stairwells/stairwell_external_4_broken",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

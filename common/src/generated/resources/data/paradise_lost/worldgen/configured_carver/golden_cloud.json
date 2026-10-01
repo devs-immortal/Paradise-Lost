@@ -1,0 +1,50 @@
+{
+  "type": "paradise_lost:cloud_carver",
+  "config": {
+    "cloud_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:golden_cloud"
+      }
+    },
+    "engorged_chance": 3,
+    "horizontal_radius_multiplier": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.25,
+      "min_inclusive": 0.5
+    },
+    "lava_level": {
+      "above_bottom": 32
+    },
+    "max_yaw": 1.5,
+    "probability": 0.0085,
+    "replaceable": "#minecraft:overworld_carver_replaceables",
+    "size_multiplier": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 5,
+      "min_inclusive": 2
+    },
+    "vertical_radius_multiplier": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.0,
+      "min_inclusive": 0.6
+    },
+    "width_multiplier": 0.35,
+    "y": {
+      "type": "minecraft:uniform",
+      "max_inclusive": {
+        "absolute": 68
+      },
+      "min_inclusive": {
+        "above_bottom": 14
+      }
+    },
+    "yScale": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.1,
+      "min_inclusive": 0.5
+    },
+    "yaw_multiplier": 0.225,
+    "yaw_pitch_ratio": 0.225
+  }
+}

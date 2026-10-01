@@ -1,0 +1,56 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:calcite_flower_pot",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_ancient_flower",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_ataraxia",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_cloudsbluff",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_drigean",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_luminar",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_aurel_sapling",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_mother_aurel_sapling",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_menth_sapling",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_rose_wisteria_sapling",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_frost_wisteria_sapling",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_lavender_wisteria_sapling",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:potted_fern",
+      "required": false
+    }
+  ]
+}

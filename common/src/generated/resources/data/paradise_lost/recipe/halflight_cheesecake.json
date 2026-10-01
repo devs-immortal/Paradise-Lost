@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:buckets/milk"
+    },
+    "C": {
+      "item": "paradise_lost:amadrys_bushel"
+    },
+    "P": {
+      "item": "paradise_lost:popom_jelly"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "AAA",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:halflight_cheesecake"
+  }
+}

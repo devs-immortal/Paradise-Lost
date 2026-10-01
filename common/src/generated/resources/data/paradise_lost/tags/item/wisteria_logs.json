@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:wisteria_log",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_wood",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:stripped_wisteria_log",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:stripped_wisteria_wood",
+      "required": false
+    }
+  ]
+}

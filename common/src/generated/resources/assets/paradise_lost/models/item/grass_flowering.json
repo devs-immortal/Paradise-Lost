@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "paradise_lost:block/grass",
+    "layer1": "paradise_lost:block/grass_flowers"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#bottom"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "west": {
+          "texture": "#side"
+        }
+      },
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        8,
+        15
+      ]
+    }
+  ],
+  "textures": {
+    "bottom": "paradise_lost:block/halflight_cheesecake_bottom",
+    "particle": "paradise_lost:block/halflight_cheesecake_side",
+    "side": "paradise_lost:block/halflight_cheesecake_side",
+    "top": "paradise_lost:block/halflight_cheesecake_top"
+  }
+}

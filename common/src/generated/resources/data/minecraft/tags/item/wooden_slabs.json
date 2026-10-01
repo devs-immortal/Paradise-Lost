@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:aurel_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mother_aurel_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:menth_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_slab",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:aurel_hanging_sign",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mother_aurel_hanging_sign",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:menth_hanging_sign",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_hanging_sign",
+      "required": false
+    }
+  ]
+}

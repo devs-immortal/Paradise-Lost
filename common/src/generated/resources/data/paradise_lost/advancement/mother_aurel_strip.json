@@ -1,0 +1,55 @@
+{
+  "parent": "paradise_lost:mother_aurel",
+  "criteria": {
+    "hold_amber": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paradise_lost:golden_amber"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "strip": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "paradise_lost:mother_aurel_log"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "#c:axes"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.mother_aurel_strip.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paradise_lost:golden_amber"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.mother_aurel_strip.title"
+    }
+  },
+  "requirements": [
+    [
+      "strip",
+      "hold_amber"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

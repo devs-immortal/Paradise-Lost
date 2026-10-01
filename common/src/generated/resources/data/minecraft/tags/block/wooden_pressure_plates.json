@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:aurel_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mother_aurel_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:menth_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_pressure_plate",
+      "required": false
+    }
+  ]
+}

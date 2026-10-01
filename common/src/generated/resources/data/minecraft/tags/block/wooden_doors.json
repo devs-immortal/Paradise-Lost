@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:aurel_door",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mother_aurel_door",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:menth_door",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_door",
+      "required": false
+    }
+  ]
+}

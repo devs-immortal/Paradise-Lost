@@ -1,0 +1,19 @@
+{
+  "values": [
+    "#minecraft:air",
+    "#minecraft:leaves",
+    "#paradise_lost:clouds",
+    {
+      "id": "paradise_lost:metamorphic_shell",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_air",
+      "required": false
+    }
+  ]
+}

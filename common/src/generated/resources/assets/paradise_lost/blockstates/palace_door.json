@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=east,open=false": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=east,open=true": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=north,open=false": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=north,open=true": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=south,open=false": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=south,open=true": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=west,open=false": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=west,open=true": {
+      "model": "paradise_lost:block/palace_door"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "races": [
+    {
+      "race": "paradise_lost:mintgrass",
+      "weight": 45
+    },
+    {
+      "race": "paradise_lost:tangerine",
+      "weight": 45
+    },
+    {
+      "race": "paradise_lost:redhood",
+      "weight": 5
+    },
+    {
+      "race": "paradise_lost:moonstruck",
+      "weight": 5
+    }
+  ]
+}

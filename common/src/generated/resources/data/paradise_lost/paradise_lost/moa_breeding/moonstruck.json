@@ -1,0 +1,17 @@
+[
+  {
+    "chance": 0.25,
+    "conditions": [
+      {
+        "condition": "minecraft:time_check",
+        "period": 24000,
+        "value": {
+          "max": 23000.0,
+          "min": 13000.0
+        }
+      }
+    ],
+    "parent1": "paradise_lost:redhood",
+    "parent2": "paradise_lost:strawberry_wistar"
+  }
+]

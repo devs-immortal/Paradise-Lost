@@ -1,0 +1,248 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:cherine_ore",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_ore",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone_redstone_ore",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:metamorphic_shell",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:levita_ore",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:cherine_block",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_block",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:refined_surtrum_block",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:levitator",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_chain",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:cherine_lantern",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:bloomed_calcite",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:smooth_floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:smooth_floestone_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:smooth_floestone_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:cobbled_floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:cobbled_floestone_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:cobbled_floestone_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:golden_mossy_floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:heliolith",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:heliolith_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:heliolith_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone_brick",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone_brick",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:chiseled_floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone_brick_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone_brick_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:smooth_heliolith",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:smooth_heliolith_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:smooth_heliolith_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:levita_brick",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:levita_brick_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:levita_brick_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:chiseled_levita_brick",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:burnished_stone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:burnished_stone_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:burnished_stone_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:burnished_stone_plaque",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:burnished_stone_script",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:golden_amber_tile",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:golden_amber_tile_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:golden_amber_tile_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone_button",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_pressure_plate",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:golden_amber_bars",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:calcite_tiles",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:calcite_tiles_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:calcite_tiles_stairs",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:bloomed_calcite_tiles",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:bloomed_calcite_tiles_slab",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:bloomed_calcite_tiles_stairs",
+      "required": false
+    }
+  ]
+}

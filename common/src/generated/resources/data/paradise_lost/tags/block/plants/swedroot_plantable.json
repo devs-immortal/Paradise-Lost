@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#paradise_lost:worldgen/dirt_blocks",
+    {
+      "id": "paradise_lost:packed_swedroot",
+      "required": false
+    }
+  ]
+}

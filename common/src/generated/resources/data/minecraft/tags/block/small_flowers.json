@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:ancient_flower",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:ataraxia",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:cloudsbluff",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:drigean",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:luminar",
+      "required": false
+    }
+  ]
+}

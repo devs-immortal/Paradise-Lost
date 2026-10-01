@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.id.paradise_lost.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "block.FarmlandBlockMixin",
+    "block.FlowerPotBlockMixin",
+    "entity.LivingEntityMixin",
+    "server.EntityTrackerEntryMixin"
+  ],
+  "client": [
+    "client.MinecraftClientMixin",
+    "client.render.EntityModelsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1,
+    "maxShiftBy": 5
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "minecraft:iron_ingot",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite",
+      "required": false
+    }
+  ]
+}

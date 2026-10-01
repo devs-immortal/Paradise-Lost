@@ -1,0 +1,50 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_1",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_2",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_3",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_4",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/second_floor/tall_halls/hall_5",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "paradise_lost:vault/second_floor/tall_halls_fallback"
+}

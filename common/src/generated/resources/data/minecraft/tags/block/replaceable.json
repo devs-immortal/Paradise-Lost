@@ -1,0 +1,64 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:aurel_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:rose_wisteria_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:rose_wisteria_hanger",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:frost_wisteria_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:frost_wisteria_hanger",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:lavender_wisteria_leaf_pile",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:lavender_wisteria_hanger",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:grass_plant",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:grass_flowering",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:short_grass",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:tall_grass",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:fern",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:bush",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:shamrock",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:malt_sprig",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/passage_1",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/passage_2",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/passage_chest_1",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/crossway_1",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 5
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/crossway_2",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 5
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/crossway_rare_1",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/crossway_rare_2",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/crossway_rare_3",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/room_1",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/room_2",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/room_3",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/room_chest_1",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/room_chest_2",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/end_1",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:vault/catacomb/end_2",
+        "processors": "paradise_lost:vault_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    }
+  ],
+  "fallback": "paradise_lost:vault/catacomb_fallback"
+}

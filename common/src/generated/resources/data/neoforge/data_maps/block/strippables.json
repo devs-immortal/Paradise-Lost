@@ -1,0 +1,34 @@
+{
+  "values": {
+    "paradise_lost:aurel_log": {
+      "stripped_block": "paradise_lost:stripped_aurel_log"
+    },
+    "paradise_lost:aurel_wood": {
+      "stripped_block": "paradise_lost:stripped_aurel_wood"
+    },
+    "paradise_lost:menth_log": {
+      "stripped_block": "paradise_lost:stripped_menth_log"
+    },
+    "paradise_lost:menth_wood": {
+      "stripped_block": "paradise_lost:stripped_menth_wood"
+    },
+    "paradise_lost:mother_aurel_log": {
+      "stripped_block": "paradise_lost:stripped_mother_aurel_log"
+    },
+    "paradise_lost:mother_aurel_wood": {
+      "stripped_block": "paradise_lost:stripped_mother_aurel_wood"
+    },
+    "paradise_lost:mottled_aurel_log": {
+      "stripped_block": "paradise_lost:stripped_aurel_log"
+    },
+    "paradise_lost:mottled_aurel_wood": {
+      "stripped_block": "paradise_lost:stripped_aurel_wood"
+    },
+    "paradise_lost:wisteria_log": {
+      "stripped_block": "paradise_lost:stripped_wisteria_log"
+    },
+    "paradise_lost:wisteria_wood": {
+      "stripped_block": "paradise_lost:stripped_wisteria_wood"
+    }
+  }
+}

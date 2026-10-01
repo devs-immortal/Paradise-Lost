@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#minecraft:logs",
+    "#paradise_lost:worldgen/dirt_blocks",
+    {
+      "id": "paradise_lost:mossy_floestone",
+      "required": false
+    }
+  ]
+}

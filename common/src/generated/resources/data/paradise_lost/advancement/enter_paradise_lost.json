@@ -1,0 +1,30 @@
+{
+  "parent": "paradise_lost:bloomed_calcite_craft",
+  "criteria": {
+    "entered_nether": {
+      "conditions": {
+        "to": "paradise_lost:paradise_lost"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.enter_paradise_lost.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "paradise_lost:bloomed_calcite"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.enter_paradise_lost.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_nether"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

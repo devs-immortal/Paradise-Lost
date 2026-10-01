@@ -1,0 +1,157 @@
+{
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#flowerpot"
+        },
+        "east": {
+          "texture": "#flowerpot"
+        },
+        "north": {
+          "texture": "#flowerpot"
+        },
+        "south": {
+          "texture": "#flowerpot"
+        },
+        "up": {
+          "texture": "#flowerpot"
+        },
+        "west": {
+          "texture": "#flowerpot"
+        }
+      },
+      "from": [
+        5,
+        0,
+        5
+      ],
+      "to": [
+        6,
+        6,
+        11
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#flowerpot"
+        },
+        "east": {
+          "texture": "#flowerpot"
+        },
+        "north": {
+          "texture": "#flowerpot"
+        },
+        "south": {
+          "texture": "#flowerpot"
+        },
+        "up": {
+          "texture": "#flowerpot"
+        },
+        "west": {
+          "texture": "#flowerpot"
+        }
+      },
+      "from": [
+        10,
+        0,
+        5
+      ],
+      "to": [
+        11,
+        6,
+        11
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#flowerpot"
+        },
+        "north": {
+          "texture": "#flowerpot"
+        },
+        "south": {
+          "texture": "#flowerpot"
+        },
+        "up": {
+          "texture": "#flowerpot"
+        }
+      },
+      "from": [
+        6,
+        0,
+        5
+      ],
+      "to": [
+        10,
+        6,
+        6
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#flowerpot"
+        },
+        "north": {
+          "texture": "#flowerpot"
+        },
+        "south": {
+          "texture": "#flowerpot"
+        },
+        "up": {
+          "texture": "#flowerpot"
+        }
+      },
+      "from": [
+        6,
+        0,
+        10
+      ],
+      "to": [
+        10,
+        6,
+        11
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#flowerpot",
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#dirt"
+        }
+      },
+      "from": [
+        6,
+        0,
+        6
+      ],
+      "to": [
+        10,
+        4,
+        10
+      ]
+    }
+  ],
+  "textures": {
+    "dirt": "paradise_lost:block/dirt",
+    "flowerpot": "paradise_lost:block/calcite_flower_pot",
+    "particle": "paradise_lost:block/calcite_flower_pot"
+  }
+}

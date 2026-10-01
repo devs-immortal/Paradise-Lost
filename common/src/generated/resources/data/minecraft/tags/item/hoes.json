@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:surtrum_hoe",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:glazed_gold_hoe",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_hoe",
+      "required": false
+    }
+  ]
+}

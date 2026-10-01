@@ -1,0 +1,7 @@
+{
+  "parent": "paradise_lost:block/wisteria_hanger",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "leaves": "paradise_lost:block/frost_wisteria_leaves"
+  }
+}

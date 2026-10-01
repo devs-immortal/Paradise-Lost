@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:aurel_trapdoor",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mother_aurel_trapdoor",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:menth_trapdoor",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_trapdoor",
+      "required": false
+    }
+  ]
+}

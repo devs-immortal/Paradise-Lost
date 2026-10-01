@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "paradise_lost:floestone"
+    },
+    "X": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "X X",
+    "X X",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:food_bowl"
+  }
+}

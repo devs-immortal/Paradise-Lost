@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:amadrys_bundle",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:thatch",
+      "required": false
+    },
+    {
+      "id": "minecraft:hay_block",
+      "required": false
+    }
+  ]
+}

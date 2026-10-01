@@ -1,0 +1,13 @@
+{
+  "type": "paradise_lost:tree_tap",
+  "chance": 2,
+  "ingredient": {
+    "item": "minecraft:bucket"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:water_bucket"
+  },
+  "result_block": "paradise_lost:wisteria_log",
+  "tapped_block": "paradise_lost:wisteria_log"
+}

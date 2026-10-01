@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:surtrum_shovel",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_pickaxe",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_axe",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_sword",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_hoe",
+      "required": false
+    }
+  ]
+}

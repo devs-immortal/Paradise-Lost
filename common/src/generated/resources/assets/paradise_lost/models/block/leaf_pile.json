@@ -1,0 +1,51 @@
+{
+  "parent": "minecraft:block/thin_block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#leaves",
+          "tintindex": 0
+        },
+        "east": {
+          "cullface": "east",
+          "texture": "#leaves",
+          "tintindex": 0
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#leaves",
+          "tintindex": 0
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#leaves",
+          "tintindex": 0
+        },
+        "up": {
+          "texture": "#leaves",
+          "tintindex": 0
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#leaves",
+          "tintindex": 0
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        1,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "particle": "#leaves"
+  }
+}

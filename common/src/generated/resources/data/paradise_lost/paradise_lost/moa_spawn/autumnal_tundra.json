@@ -1,0 +1,12 @@
+{
+  "races": [
+    {
+      "race": "paradise_lost:greyhound",
+      "weight": 15
+    },
+    {
+      "race": "paradise_lost:frostgrass",
+      "weight": 10
+    }
+  ]
+}

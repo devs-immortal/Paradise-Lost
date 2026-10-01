@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_piston",
+  "textures": {
+    "bottom": "paradise_lost:block/amadrys_bundle_bottom",
+    "platform": "paradise_lost:block/amadrys_bundle_top",
+    "side": "paradise_lost:block/amadrys_bundle_side"
+  }
+}

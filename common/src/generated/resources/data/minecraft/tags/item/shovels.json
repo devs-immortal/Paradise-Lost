@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:surtrum_shovel",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:glazed_gold_shovel",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_shovel",
+      "required": false
+    }
+  ]
+}

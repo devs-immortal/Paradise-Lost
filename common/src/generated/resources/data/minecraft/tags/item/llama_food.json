@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:amadrys_bushel",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:amadrys_bundle",
+      "required": false
+    }
+  ]
+}

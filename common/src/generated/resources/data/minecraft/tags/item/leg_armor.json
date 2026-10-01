@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:glazed_gold_leggings",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_leggings",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_leggings",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floaty_leggings",
+      "required": false
+    }
+  ]
+}

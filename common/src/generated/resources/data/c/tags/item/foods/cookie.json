@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:blackcurrant_cookie",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:amadrys_bread_glazed",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:amadrys_bread_glazed_filled",
+      "required": false
+    }
+  ]
+}

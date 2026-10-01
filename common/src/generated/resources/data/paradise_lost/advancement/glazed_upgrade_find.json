@@ -1,0 +1,33 @@
+{
+  "parent": "paradise_lost:mother_aurel_strip",
+  "criteria": {
+    "upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paradise_lost:glazed_gold_upgrade_smithing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.glazed_upgrade_find.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paradise_lost:glazed_gold_upgrade_smithing_template"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.glazed_upgrade_find.title"
+    }
+  },
+  "requirements": [
+    [
+      "upgrade"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

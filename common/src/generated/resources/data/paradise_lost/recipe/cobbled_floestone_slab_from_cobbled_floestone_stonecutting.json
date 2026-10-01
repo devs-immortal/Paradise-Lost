@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "paradise_lost:cobbled_floestone"
+  },
+  "result": {
+    "count": 2,
+    "id": "paradise_lost:cobbled_floestone_slab"
+  }
+}

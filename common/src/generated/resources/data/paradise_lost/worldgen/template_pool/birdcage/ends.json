@@ -1,0 +1,86 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_closet_1",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_closet_2",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_closet_3",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_closet_4",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_room_1",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_room_2",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_room_3",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_tunnel_1",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "paradise_lost:birdcage/ends/end_tunnel_1",
+        "processors": "paradise_lost:birdcage_proc",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "paradise_lost:birdcage/caps"
+}

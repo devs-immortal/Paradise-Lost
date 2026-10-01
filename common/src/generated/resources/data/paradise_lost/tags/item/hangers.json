@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:frost_wisteria_hanger",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:rose_wisteria_hanger",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:lavender_wisteria_hanger",
+      "required": false
+    }
+  ]
+}

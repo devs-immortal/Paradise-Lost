@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone",
+      "required": false
+    }
+  ]
+}

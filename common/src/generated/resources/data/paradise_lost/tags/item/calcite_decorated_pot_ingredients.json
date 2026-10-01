@@ -1,0 +1,9 @@
+{
+  "values": [
+    {
+      "id": "minecraft:calcite",
+      "required": false
+    },
+    "#minecraft:decorated_pot_sherds"
+  ]
+}

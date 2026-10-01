@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:stripped_aurel_log",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:stripped_mother_aurel_log",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:stripped_menth_log",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:stripped_wisteria_log",
+      "required": false
+    }
+  ]
+}

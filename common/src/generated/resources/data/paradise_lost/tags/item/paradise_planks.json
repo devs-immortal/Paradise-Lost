@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:aurel_planks",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mother_aurel_planks",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:menth_planks",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_planks",
+      "required": false
+    }
+  ]
+}

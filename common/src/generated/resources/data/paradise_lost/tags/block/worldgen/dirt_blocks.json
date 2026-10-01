@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:highlands_grass",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:dirt",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:coarse_dirt",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:permafrost",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:frozen_grass",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:liverwort",
+      "required": false
+    }
+  ]
+}

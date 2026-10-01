@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:surtrum_boots",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_leggings",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_chestplate",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:surtrum_helmet",
+      "required": false
+    }
+  ]
+}

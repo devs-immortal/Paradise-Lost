@@ -1,0 +1,37 @@
+{
+  "parent": "paradise_lost:root",
+  "criteria": {
+    "tame": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "paradise_lost:moa"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tame_animal"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.tame_moa.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:saddle"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.tame_moa.title"
+    }
+  },
+  "requirements": [
+    [
+      "tame"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

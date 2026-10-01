@@ -1,0 +1,184 @@
+{
+  "values": {
+    "paradise_lost:amadrys_bread": {
+      "chance": 0.5
+    },
+    "paradise_lost:amadrys_bread_glazed": {
+      "chance": 0.5
+    },
+    "paradise_lost:amadrys_bread_glazed_filled": {
+      "chance": 0.5
+    },
+    "paradise_lost:amadrys_bundle": {
+      "chance": 0.85
+    },
+    "paradise_lost:amadrys_bushel": {
+      "chance": 0.3
+    },
+    "paradise_lost:ancient_flower": {
+      "chance": 0.65
+    },
+    "paradise_lost:ataraxia": {
+      "chance": 0.65
+    },
+    "paradise_lost:aurel_leaf_pile": {
+      "chance": 0.3
+    },
+    "paradise_lost:aurel_leaves": {
+      "chance": 0.3
+    },
+    "paradise_lost:aurel_sapling": {
+      "chance": 0.3
+    },
+    "paradise_lost:blackcurrant": {
+      "chance": 0.3
+    },
+    "paradise_lost:blackcurrant_cookie": {
+      "chance": 0.85
+    },
+    "paradise_lost:blackcurrant_pie": {
+      "chance": 1.0
+    },
+    "paradise_lost:brown_sporecap": {
+      "chance": 0.65
+    },
+    "paradise_lost:brown_sporecap_block": {
+      "chance": 0.85
+    },
+    "paradise_lost:bush": {
+      "chance": 0.3
+    },
+    "paradise_lost:cloudsbluff": {
+      "chance": 0.65
+    },
+    "paradise_lost:drigean": {
+      "chance": 0.65
+    },
+    "paradise_lost:fern": {
+      "chance": 0.3
+    },
+    "paradise_lost:flaxseed": {
+      "chance": 0.3
+    },
+    "paradise_lost:frost_wisteria_hanger": {
+      "chance": 0.3
+    },
+    "paradise_lost:frost_wisteria_leaf_pile": {
+      "chance": 0.3
+    },
+    "paradise_lost:frost_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "paradise_lost:frost_wisteria_sapling": {
+      "chance": 0.3
+    },
+    "paradise_lost:grass_flowering": {
+      "chance": 0.3
+    },
+    "paradise_lost:grass_plant": {
+      "chance": 0.3
+    },
+    "paradise_lost:honey_nettle": {
+      "chance": 0.5
+    },
+    "paradise_lost:lavender_wisteria_hanger": {
+      "chance": 0.3
+    },
+    "paradise_lost:lavender_wisteria_leaf_pile": {
+      "chance": 0.3
+    },
+    "paradise_lost:lavender_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "paradise_lost:lavender_wisteria_sapling": {
+      "chance": 0.3
+    },
+    "paradise_lost:liverwort": {
+      "chance": 1.0
+    },
+    "paradise_lost:liverwort_carpet": {
+      "chance": 0.65
+    },
+    "paradise_lost:luminar": {
+      "chance": 0.65
+    },
+    "paradise_lost:malt_sprig": {
+      "chance": 0.3
+    },
+    "paradise_lost:menth_leaves": {
+      "chance": 0.3
+    },
+    "paradise_lost:menth_sapling": {
+      "chance": 0.3
+    },
+    "paradise_lost:mother_aurel_leaves": {
+      "chance": 0.3
+    },
+    "paradise_lost:mother_aurel_sapling": {
+      "chance": 0.3
+    },
+    "paradise_lost:nitra": {
+      "chance": 0.15
+    },
+    "paradise_lost:nitra_bulb": {
+      "chance": 0.5
+    },
+    "paradise_lost:packed_swedroot": {
+      "chance": 0.85
+    },
+    "paradise_lost:pink_sporecap": {
+      "chance": 0.65
+    },
+    "paradise_lost:pink_sporecap_block": {
+      "chance": 0.85
+    },
+    "paradise_lost:popom_jelly": {
+      "chance": 0.15
+    },
+    "paradise_lost:rootcap": {
+      "chance": 0.65
+    },
+    "paradise_lost:rootcap_block": {
+      "chance": 0.85
+    },
+    "paradise_lost:rose_wisteria_hanger": {
+      "chance": 0.3
+    },
+    "paradise_lost:rose_wisteria_leaf_pile": {
+      "chance": 0.3
+    },
+    "paradise_lost:rose_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "paradise_lost:rose_wisteria_sapling": {
+      "chance": 0.3
+    },
+    "paradise_lost:shamrock": {
+      "chance": 0.5
+    },
+    "paradise_lost:short_grass": {
+      "chance": 0.3
+    },
+    "paradise_lost:swedroot": {
+      "chance": 0.3
+    },
+    "paradise_lost:swedroot_pulp": {
+      "chance": 0.3
+    },
+    "paradise_lost:tall_grass": {
+      "chance": 0.5
+    },
+    "paradise_lost:thatch": {
+      "chance": 0.15
+    },
+    "paradise_lost:thatch_slab": {
+      "chance": 0.15
+    },
+    "paradise_lost:thatch_stairs": {
+      "chance": 0.15
+    },
+    "paradise_lost:wild_flax": {
+      "chance": 1.0
+    }
+  }
+}

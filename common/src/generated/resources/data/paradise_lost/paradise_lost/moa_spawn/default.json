@@ -1,0 +1,8 @@
+{
+  "races": [
+    {
+      "race": "paradise_lost:fallback",
+      "weight": 1
+    }
+  ]
+}

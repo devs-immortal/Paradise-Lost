@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/dirt_path",
+  "textures": {
+    "bottom": "paradise_lost:block/dirt",
+    "particle": "paradise_lost:block/dirt",
+    "side": "paradise_lost:block/grass_path_side",
+    "top": "paradise_lost:block/grass_path_top"
+  }
+}

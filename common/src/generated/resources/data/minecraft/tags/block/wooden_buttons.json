@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:aurel_button",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mother_aurel_button",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:menth_button",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_button",
+      "required": false
+    }
+  ]
+}

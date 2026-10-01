@@ -1,0 +1,36 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:levita",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:cobbled_floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:heliolith",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:cherine_ore",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_ore",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:levita_ore",
+      "required": false
+    }
+  ]
+}

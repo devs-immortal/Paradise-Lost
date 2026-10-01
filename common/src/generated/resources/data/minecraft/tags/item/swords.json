@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:surtrum_sword",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:glazed_gold_sword",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:olvite_sword",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:soul_blade",
+      "required": false
+    }
+  ]
+}

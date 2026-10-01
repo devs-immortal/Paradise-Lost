@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:sol_pottery_sherd",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:coo_pottery_sherd",
+      "required": false
+    }
+  ]
+}

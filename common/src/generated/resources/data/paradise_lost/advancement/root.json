@@ -1,0 +1,32 @@
+{
+  "criteria": {
+    "entered_paradise": {
+      "conditions": {
+        "to": "paradise_lost:paradise_lost"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "paradise_lost:textures/block/floestone.png",
+    "description": {
+      "translate": "advancements.paradise_lost.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paradise_lost:chiseled_floestone"
+    },
+    "show_toast": false,
+    "title": {
+      "color": "aqua",
+      "translate": "advancements.paradise_lost.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_paradise"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

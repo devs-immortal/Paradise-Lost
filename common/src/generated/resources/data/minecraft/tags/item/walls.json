@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:floestone_brick_wall",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone_brick_wall",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:floestone_wall",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mossy_floestone_wall",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:cobbled_floestone_wall",
+      "required": false
+    }
+  ]
+}

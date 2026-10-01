@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:amadrys_noodles",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:popom_jelly",
+      "required": false
+    }
+  ]
+}

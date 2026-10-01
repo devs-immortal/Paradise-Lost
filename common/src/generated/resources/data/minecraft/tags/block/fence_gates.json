@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:aurel_fence_gate",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:mother_aurel_fence_gate",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:menth_fence_gate",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_fence_gate",
+      "required": false
+    }
+  ]
+}

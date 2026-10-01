@@ -1,0 +1,1902 @@
+{
+  "type": "paradise_lost:paradise_lost",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "paradise_lost:tradewinds",
+          "parameters": {
+            "continentalness": [
+              -1.2,
+              -1.05
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:continental_plateau",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              -0.19
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.05
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:autumnal_tundra",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              0.3,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:calcite_craglands",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              -0.19
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.05
+            ],
+            "humidity": [
+              -0.1,
+              0.7
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              -0.19
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.05
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:calcite_craglands",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              -0.19
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.05
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              0.3,
+              0.7
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              -0.19
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.05
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              -0.19
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.05
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              0.3,
+              0.7
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:continental_plateau",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.05,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_shield",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.05,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.05,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_shield",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.05,
+              1.0
+            ],
+            "humidity": [
+              0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.05,
+              1.0
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.05,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              -1.05,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.05,
+              1.0
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              -0.2225
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:calcite_craglands",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              -0.2225
+            ],
+            "humidity": [
+              -0.1,
+              0.7
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              -0.2225
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:calcite_craglands",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              -0.2225
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              -0.2225
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              -0.2225
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              -0.2225
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:continental_plateau",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -0.2225,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_shield",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -0.2225,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -0.2225,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_shield",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -0.2225,
+              1.0
+            ],
+            "humidity": [
+              0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -0.2225,
+              1.0
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -0.2225,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -0.2225,
+              1.0
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:autumnal_tundra",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.45
+            ],
+            "humidity": [
+              -0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:wisteria_woods",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.45
+            ],
+            "humidity": [
+              -1.0,
+              -0.35
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -0.35,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.45
+            ],
+            "humidity": [
+              -0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              -0.35
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.45
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.45
+            ],
+            "humidity": [
+              0.3,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.45
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              0.45
+            ],
+            "humidity": [
+              0.3,
+              0.7
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              -1.0,
+              1.0
+            ],
+            "humidity": [
+              0.7,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:continental_plateau",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              0.8
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              0.8
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_shield",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              0.8
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              0.8
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_shield",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              0.8
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              1.0
+            ],
+            "humidity": [
+              0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              0.8
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              1.0
+            ],
+            "humidity": [
+              0.3,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              0.8
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              0.8
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              1.0
+            ],
+            "humidity": [
+              0.3,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:autumnal_tundra",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:wisteria_woods",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "humidity": [
+              -1.0,
+              -0.35
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "humidity": [
+              -0.35,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "humidity": [
+              0.3,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "humidity": [
+              0.3,
+              0.7
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:continental_plateau",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.55,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.0,
+              -0.45
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.55,
+              1.0
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_shield",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.55,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.55,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_shield",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.55,
+              1.0
+            ],
+            "humidity": [
+              0.1,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_forest",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.55,
+              1.0
+            ],
+            "humidity": [
+              0.3,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.2,
+              0.55
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_thicket",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.55,
+              1.0
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "biome": "paradise_lost:highlands_grand_glade",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1.0
+            ],
+            "depth": 0.0,
+            "erosion": [
+              0.55,
+              1.0
+            ],
+            "humidity": [
+              0.3,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.55,
+              1.0
+            ],
+            "weirdness": [
+              -1.0,
+              1.0
+            ]
+          }
+        }
+      ]
+    },
+    "settings": "paradise_lost:noise"
+  }
+}
