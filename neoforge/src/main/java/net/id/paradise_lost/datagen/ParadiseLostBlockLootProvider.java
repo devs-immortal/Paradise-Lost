@@ -15,6 +15,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -65,7 +67,7 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
         addDrop(FROZEN_GRASS.get(), block -> createSingleItemTableWithSilkTouch(block, PERMAFROST.get()));
         addDrop(DIRT.get());
         addDrop(COARSE_DIRT.get());
-        addDrop(LEVITA.get());
+        addDrop(LEVITA.get(), this::levitaDrops);
         addDrop(PERMAFROST.get());
         addDrop(PACKED_SWEDROOT.get());
 
@@ -300,6 +302,21 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
                                         )
                                 )
                 );
+    }
+
+    private LootTable.Builder levitaDrops(Block block) {
+        HolderLookup.RegistryLookup<Enchantment> impl = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+        return this.createSilkTouchDispatchTable(
+                block,
+                this.applyExplosionCondition(
+                        block,
+                        LootItem.lootTableItem(ItemRegistry.LEVITA_SHARD.get())
+                                .when(
+                                        BonusLevelTableCondition.bonusLevelFlatChance(impl.getOrThrow(Enchantments.FORTUNE), 0.07F, 0.12F, 0.185F, 0.65F)
+                                )
+                                .otherwise(LootItem.lootTableItem(block))
+                )
+        );
     }
 
     private LootTable.Builder shearsWeightedDrops(Block block, ItemLike drop, NumberProvider provider) {

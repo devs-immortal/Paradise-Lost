@@ -114,7 +114,6 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1, 3))
                         .add(item(ItemRegistry.GOLDEN_AMBER.get(), 2).apply(count(0, 3)))
                         .add(item(Items.GOLD_NUGGET, 1).apply(count(1, 3))))
-                .withPool(floatyLeggingsPool())
                 .setRandomSequence(ModConstants.id("chests/palace/artisan")));
 
         HolderLookup.RegistryLookup<Enchantment> enchantments = registries.lookupOrThrow(Registries.ENCHANTMENT);
@@ -130,7 +129,6 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(Items.WRITABLE_BOOK, 1))
                         .add(item(Items.BOOK, 6).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(30.0F))
                                 .fromOptions(enchantments.getOrThrow(EnchantmentTags.ON_RANDOM_LOOT)))))
-                .withPool(floatyLeggingsPool())
                 .setRandomSequence(ModConstants.id("chests/palace/library")));
 
         output.accept(ParadiseLostLootTables.PALACE_SECRET_JUNK, LootTable.lootTable()
@@ -160,7 +158,6 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(Items.GLASS_BOTTLE, 1))
                         .add(item(Items.BOWL, 1))
                         .add(item(ItemRegistry.BLACKCURRANT.get(), 1)))
-                .withPool(floatyLeggingsPool())
                 .setRandomSequence(ModConstants.id("chests/palace/sweets")));
 
         output.accept(ParadiseLostLootTables.VAULT_FOOD, LootTable.lootTable()

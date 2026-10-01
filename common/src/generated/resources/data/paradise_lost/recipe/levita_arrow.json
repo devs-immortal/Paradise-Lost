@@ -1,37 +1,24 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "ingredients": [
-    {
-      "item": "minecraft:arrow"
+  "key": {
+    "A": {
+      "item": "paradise_lost:levita_shard"
     },
-    {
-      "item": "minecraft:arrow"
+    "F": {
+      "item": "minecraft:feather"
     },
-    {
-      "item": "minecraft:arrow"
-    },
-    {
-      "item": "minecraft:arrow"
-    },
-    {
-      "item": "minecraft:arrow"
-    },
-    {
-      "item": "minecraft:arrow"
-    },
-    {
-      "item": "minecraft:arrow"
-    },
-    {
-      "item": "minecraft:arrow"
-    },
-    {
-      "item": "paradise_lost:levita_gem"
+    "I": {
+      "item": "minecraft:stick"
     }
+  },
+  "pattern": [
+    "A",
+    "I",
+    "F"
   ],
   "result": {
-    "count": 8,
+    "count": 4,
     "id": "paradise_lost:levita_arrow"
   }
 }

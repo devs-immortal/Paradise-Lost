@@ -77,33 +77,6 @@
         "max": 3.0,
         "min": 1.0
       }
-    },
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "chance": 0.35,
-          "condition": "minecraft:random_chance"
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.7
-              },
-              "function": "minecraft:set_damage"
-            }
-          ],
-          "name": "paradise_lost:floaty_leggings"
-        }
-      ],
-      "rolls": 1.0
     }
   ],
   "random_sequence": "paradise_lost:chests/palace/key"

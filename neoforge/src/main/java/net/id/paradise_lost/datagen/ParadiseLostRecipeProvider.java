@@ -1047,6 +1047,16 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy("has_ingredient", has(BlockRegistry.COBBLED_FLOESTONE.get()))
                 .save(output, ModConstants.id("lever_from_floestone"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.LEVITA_ARROW.get(), 4)
+                .define('A', ItemRegistry.LEVITA_SHARD.get())
+                .define('I', Items.STICK)
+                .define('F', Items.FEATHER)
+                .pattern("A")
+                .pattern("I")
+                .pattern("F")
+                .unlockedBy("has_ingredient", has(ItemRegistry.LEVITA_SHARD.get()))
+                .save(output, ModConstants.id("levita_arrow"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockRegistry.LEVITA_BRICK_SET.block().get(), 4)
                 .define('#', BlockRegistry.LEVITA.get())
                 .pattern("##")
@@ -1084,20 +1094,18 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy("has_ingredient", has(BlockRegistry.LEVITA_ORE.get()))
                 .save(output, ModConstants.id("levita_from_smelting"));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.LEVITA_ARROW.get(), 8)
-                .requires(Items.ARROW, 8)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistry.LEVITA_SHARD.get(), 4)
                 .requires(ItemRegistry.LEVITA_GEM.get())
                 .unlockedBy("has_ingredient", has(ItemRegistry.LEVITA_GEM.get()))
-                .save(output, ModConstants.id("levita_arrow"));
+                .save(output, ModConstants.id("levita_shard"));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockRegistry.LEVITA_RAIL.get(), 12)
-                .define('I', ParadiseLostItemTags.IRON_INTERCHANGABLE)
-                .define('L', ItemRegistry.LEVITA_GEM.get())
-                .define('S', Items.STICK)
-                .pattern("ILI")
-                .pattern("ISI")
-                .pattern("ILI")
-                .unlockedBy("has_ingredient", has(ParadiseLostItemTags.IRON_INTERCHANGABLE))
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockRegistry.LEVITA_RAIL.get(), 1)
+                .define('L', ItemRegistry.LEVITA_SHARD.get())
+                .define('S', Items.ACTIVATOR_RAIL)
+                .pattern("L")
+                .pattern("S")
+                .pattern("L")
+                .unlockedBy("has_ingredient", has(ItemRegistry.LEVITA_SHARD.get()))
                 .save(output, ModConstants.id("levita_rail"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.LEVITA_WAND.get(), 1)
@@ -1110,7 +1118,7 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .save(output, ModConstants.id("levita_wand"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockRegistry.LEVITATOR.get(), 1)
-                .define('G', ItemRegistry.LEVITA_GEM.get())
+                .define('G', ItemRegistry.LEVITA_SHARD.get())
                 .define('R', Items.REDSTONE)
                 .define('S', BlockRegistry.FLOESTONE_BRICK.get())
                 .pattern("SRS")

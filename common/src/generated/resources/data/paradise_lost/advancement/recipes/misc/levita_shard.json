@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "paradise_lost:levita_shard"
+            "items": "paradise_lost:levita_gem"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paradise_lost:levita_arrow"
+        "recipe": "paradise_lost:levita_shard"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "paradise_lost:levita_arrow"
+      "paradise_lost:levita_shard"
     ]
   }
 }

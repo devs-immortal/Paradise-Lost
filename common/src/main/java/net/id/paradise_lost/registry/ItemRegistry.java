@@ -89,6 +89,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item, Item> REFINED_SURTRUM = add("refined_surtrum", () -> new Item(resource().fireResistant()));
     public static final RegistryObject<Item, Item> RAW_SURTRUM = add("raw_surtrum", () -> new Item(resource().fireResistant()));
     public static final RegistryObject<Item, Item> LEVITA_GEM = add("levita_gem", () -> new Item(resource()));
+    public static final RegistryObject<Item, Item> LEVITA_SHARD = add("levita_shard", () -> new Item(resource()));
     public static final RegistryObject<Item, LevitaArrowItem> LEVITA_ARROW = add("levita_arrow", () -> new LevitaArrowItem(resource()), projectileBehavior);
     public static final RegistryObject<Item, Item> FLAX_THREAD = add("flax_thread", () -> new Item(resource()));
     public static final RegistryObject<Item, Item> FLAXWEAVE = add("flaxweave", () -> new Item(resource()));

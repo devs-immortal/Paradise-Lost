@@ -354,6 +354,7 @@ public class CreativeTabRegistry {
                         output.accept(RAW_SURTRUM.get());
                         output.accept(REFINED_SURTRUM.get());
                         output.accept(LEVITA_GEM.get());
+                        output.accept(LEVITA_SHARD.get());
                         output.accept(GOLDEN_AMBER.get());
                         output.accept(FLAX_THREAD.get());
                         output.accept(FLAXWEAVE.get());
