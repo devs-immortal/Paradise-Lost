@@ -1,6 +1,6 @@
 package net.id.paradise_lost.block.mechanical;
 
-import net.id.paradise_lost.component.MinecartFloating;
+import net.id.paradise_lost.attachments.MinecartFloating;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -39,17 +39,16 @@ public class LevitaRailBlock extends PoweredRailBlock {
         if (!world.isClientSide) {
             List<AbstractMinecart> list = this.getCarts(world, pos, AbstractMinecart.class, e -> true);
             for (AbstractMinecart cart : list) {
-                var floatingComponent = MinecartFloating.get(cart);
+                MinecartFloating.updateInclineFromRail(cart, state.getValue(SHAPE), cart.getDeltaMovement());
                 if (state.getValue(POWERED)) {
                     if (!state.getValue(TRIGGERED)) {
-                        floatingComponent.addFloating();
+                        MinecartFloating.addFloating(cart);
                         world.setBlock(pos, state.setValue(TRIGGERED, true), 3);
                         world.scheduleTick(pos, this, 80);
                     }
                 } else {
-                    floatingComponent.stopFloating();
+                    MinecartFloating.stopFloating(cart);
                 }
-                MinecartFloating.sync(cart);
             }
         }
     }

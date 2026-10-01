@@ -55,8 +55,9 @@ public class ParadiseLostItemTagsProvider extends ItemTagsProvider {
         woods(ItemTags.CHEST_BOATS, "%s_chest_boat");
         entry(ItemTags.DECORATED_POT_SHERDS, ParadiseLostItemTags.CALCITE_POT_SHERDS);
         entry(ItemTags.DURABILITY_ENCHANTABLE, "xp_circlet");
-        entry(ItemTags.FOOT_ARMOR, "glazed_gold_boots", "olvite_boots", "surtrum_boots");
-        entry(mc("freeze_immune_wearables"), "surtrum_boots", "surtrum_leggings", "surtrum_chestplate", "surtrum_helmet");
+        entry(ItemTags.FOOT_ARMOR, "glazed_gold_boots", "olvite_boots", "surtrum_boots", "floaty_boots");
+        entry(mc("freeze_immune_wearables"), "surtrum_boots", "surtrum_leggings", "surtrum_chestplate", "surtrum_helmet", "floaty_boots");
+        entry(ItemTags.DAMPENS_VIBRATIONS, "floaty_boots");
         woods(ItemTags.HANGING_SIGNS, "%s_hanging_sign");
         entry(ItemTags.HEAD_ARMOR, "glazed_gold_helmet", "olvite_helmet", "ornate_olvite_helmet", "surtrum_helmet");
         entry(ItemTags.HOES, "surtrum_hoe", "glazed_gold_hoe", "olvite_hoe");

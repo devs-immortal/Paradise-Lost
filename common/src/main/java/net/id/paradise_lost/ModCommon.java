@@ -9,6 +9,7 @@ import net.id.paradise_lost.registry.EntityRegistry;
 import net.id.paradise_lost.registry.MoaBreedingRegistry;
 import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.id.paradise_lost.registry.MoaSpawnRegistry;
+import net.id.paradise_lost.registry.MoaSpawnStatWeightingRegistry;
 import net.id.paradise_lost.entity.ModEntities;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.registry.CreativeTabRegistry;
@@ -55,6 +56,7 @@ public final class ModCommon {
         ParadiseLostCommands.init();
         ParadiseLostGameRules.init();
         ParadiseLostSoundEvents.init();
+        MoaSpawnStatWeightingRegistry.init();
         MoaRaceRegistry.init();
         MoaSpawnRegistry.init();
         MoaBreedingRegistry.init();

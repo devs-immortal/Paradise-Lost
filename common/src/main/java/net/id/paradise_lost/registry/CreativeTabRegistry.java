@@ -329,6 +329,7 @@ public class CreativeTabRegistry {
                         output.accept(GLAZED_GOLD_BOOTS.get());
                         output.accept(XP_CIRCLET.get());
                         output.accept(FLOATY_LEGGINGS.get());
+                        output.accept(FLOATY_BOOTS.get());
 
                         output.accept(GLAZED_GOLD_UPGRADE.get());
 

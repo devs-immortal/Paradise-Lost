@@ -40,7 +40,7 @@ public class BloodstoneCapturedData {
             bloodstoneCapturedData.isMoa = true;
             bloodstoneCapturedData.moaGeneComponent = new ParadiseLostDataComponentTypes.MoaGeneComponent(
 
-                    moa.getGenes().getRace().getId(),
+                    moa.getGenes().getRaceId(),
                     moa.getGenes().getAffinity().getTranslationKey(),
                     moa.isBaby(),
                     moa.getGenes().getHunger(),

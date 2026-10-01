@@ -1,0 +1,7 @@
+{
+  "default_affinity": "GLIDING_SPEED",
+  "glowing": true,
+  "legendary": true,
+  "particles": "minecraft:glow",
+  "stat_weighting": "paradise_lost:glide"
+}

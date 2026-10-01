@@ -6,6 +6,7 @@ import net.id.paradise_lost.api.MoaAPI;
 import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.item.tool.bloodstone.*;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
+import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -92,7 +93,11 @@ public class BloodstoneHUDRenderer {
             renderIconWText(context, client, affinitySprite, Component.translatable(bloodstoneCapturedData.moaGeneComponent.affinity()), 76, -25);
             renderIconWText(context, client, statusEffectSpriteManager.get(MobEffects.INVISIBILITY), Component.literal(bloodstoneCapturedData.bloodstoneComponent.owner()), 47, 65);
             renderIconWText(context, client, statusEffectSpriteManager.get(MobEffects.HUNGER), Component.literal(String.format("%.1f", bloodstoneCapturedData.moaGeneComponent.hunger()) + "/" + 100.0), -47, 65);
-            renderIconWText(context, client, raceSprite, Component.translatable(MoaAPI.getRace(bloodstoneCapturedData.moaGeneComponent.race()).getTranslationKey()), -76, -25);
+            var raceId = bloodstoneCapturedData.moaGeneComponent.race();
+            var race = client.level != null
+                    ? MoaAPI.getRace(client.level, raceId)
+                    : MoaRaceRegistry.FALLBACK_VALUE;
+            renderIconWText(context, client, raceSprite, Component.translatable(race.translationKey(raceId)), -76, -25);
         }
     }
 

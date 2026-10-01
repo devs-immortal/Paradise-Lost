@@ -2,6 +2,7 @@ package net.id.paradise_lost.registry;
 
 import net.id.paradise_lost.entity.vehicle.ParadiseLostBoatType;
 import net.id.paradise_lost.item.ParadiseLostBoatItem;
+import net.id.paradise_lost.item.armor.FloatyBootsItem;
 import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
 import net.id.paradise_lost.item.armor.ParadiseLostArmorMaterials;
 import net.id.paradise_lost.item.armor.XpCircletItem;
@@ -198,6 +199,9 @@ public class ItemRegistry {
     public static final RegistryObject<Item, FloatyLeggingsItem> FLOATY_LEGGINGS = add("floaty_leggings",
             () -> new FloatyLeggingsItem(ParadiseLostArmorMaterials.FLOATY,
                     WEARABLE.durability(ArmorItem.Type.LEGGINGS.getDurability(66)).rarity(UNCOMMON)));
+    public static final RegistryObject<Item, FloatyBootsItem> FLOATY_BOOTS = add("floaty_boots",
+            () -> new FloatyBootsItem(ParadiseLostArmorMaterials.FLOATY,
+                    WEARABLE.durability(ArmorItem.Type.BOOTS.getDurability(66)).rarity(UNCOMMON)));
     private static Properties food() {
         return new Properties();
     }

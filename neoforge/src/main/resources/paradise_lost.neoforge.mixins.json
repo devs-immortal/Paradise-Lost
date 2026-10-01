@@ -10,6 +10,7 @@
     "block.LevitaRailBlockMixin",
     "block.PoweredRailBlockMixin",
     "entity.AbstractMinecartMixin",
+    "item.FloatyBootsItemMixin",
     "server.EntityTrackerEntryMixin"
   ],
   "injectors": {

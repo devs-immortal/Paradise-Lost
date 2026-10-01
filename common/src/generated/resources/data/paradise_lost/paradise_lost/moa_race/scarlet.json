@@ -1,0 +1,4 @@
+{
+  "default_affinity": "GROUND_SPEED",
+  "stat_weighting": "paradise_lost:speed"
+}

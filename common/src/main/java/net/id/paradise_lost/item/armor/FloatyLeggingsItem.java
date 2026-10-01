@@ -1,9 +1,12 @@
 package net.id.paradise_lost.item.armor;
 
+import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.networking.packet.FloatyAnchorC2SPacket;
 import net.id.paradise_lost.networking.packet.PacketHandler;
+import net.id.paradise_lost.platform.Services;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -11,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
 
 public class FloatyLeggingsItem extends ArmorItem {
@@ -29,17 +33,41 @@ public class FloatyLeggingsItem extends ArmorItem {
         return entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof FloatyLeggingsItem;
     }
 
+    public static boolean isSurvivalLike(Player player) {
+        return !player.isCreative() && !player.isSpectator();
+    }
+
     public static boolean canUseFloaty(Player player) {
         return isWearing(player)
                 && !player.isPassenger()
                 && !player.getAbilities().flying
-                && !player.isFallFlying()
-                && !player.isCreative()
-                && !player.isSpectator();
+                && !player.isFallFlying();
     }
 
     public static boolean canAnchor(Player player) {
-        return canUseFloaty(player) && !player.onGround();
+        return canUseFloaty(player) && isSurvivalLike(player) && !player.onGround();
+    }
+
+    public static void onGameModeChanged(ServerPlayer player, GameType from, GameType to) {
+        if (from.isSurvival() == to.isSurvival()) {
+            return;
+        }
+        if (!(player instanceof ParadiseLostEntityExtensions extensions)) {
+            return;
+        }
+        if (from.isSurvival()) {
+            Services.ATTACHMENTS.setAttachedValue(
+                    player, CommonDataAttachments.FLOATY_ANCHORED_SAVED, extensions.isFloatyAnchored());
+            if (extensions.isFloatyAnchored()) {
+                extensions.setFloatyAnchored(false);
+            }
+        } else {
+            boolean saved = Boolean.TRUE.equals(
+                    Services.ATTACHMENTS.getOrCreateAttachedValue(player, CommonDataAttachments.FLOATY_ANCHORED_SAVED));
+            if (saved && canAnchor(player)) {
+                extensions.setFloatyAnchored(true);
+            }
+        }
     }
 
     public static void toggleAnchorFromClient(Player player) {

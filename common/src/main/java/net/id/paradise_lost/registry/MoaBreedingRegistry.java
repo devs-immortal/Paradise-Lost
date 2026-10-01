@@ -6,7 +6,6 @@ import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.ParadiseLost;
 import net.id.paradise_lost.api.MoaAPI.MoaBreedingContext;
 import net.id.paradise_lost.api.MoaAPI.MoaRace;
-import net.id.paradise_lost.registration.RegistryObject;
 import net.id.paradise_lost.registration.registries.DatapackRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -60,16 +59,16 @@ public final class MoaBreedingRegistry {
     }
 
     private static void table(BootstrapContext<BreedingRecipes> context,
-                              RegistryObject<MoaRace, MoaRace> child,
+                              ResourceKey<MoaRace> child,
                               BreedingEntry... recipes) {
-        context.register(ResourceKey.create(REGISTRY.key(), child.getId()),
+        context.register(ResourceKey.create(REGISTRY.key(), child.location()),
                 new BreedingRecipes(List.of(recipes)));
     }
 
-    private static BreedingEntry pair(RegistryObject<MoaRace, MoaRace> first,
-                                      RegistryObject<MoaRace, MoaRace> second,
+    private static BreedingEntry pair(ResourceKey<MoaRace> first,
+                                      ResourceKey<MoaRace> second,
                                       float chance, LootItemCondition... conditions) {
-        return new BreedingEntry(first.getId(), second.getId(), chance, List.of(conditions));
+        return new BreedingEntry(first.location(), second.location(), chance, List.of(conditions));
     }
 
     private static LootItemCondition night() {
@@ -78,15 +77,13 @@ public final class MoaBreedingRegistry {
                 .build();
     }
 
-    public static MoaRace getMoaFromBreeding(MoaBreedingContext ctx) {
+    public static ResourceLocation getMoaRaceIdFromBreeding(MoaBreedingContext ctx) {
         Registry<BreedingRecipes> rules = REGISTRY.get(ctx.world().registryAccess());
-        MoaRace parentA = ctx.parentA().getRace();
-        MoaRace parentB = ctx.parentB().getRace();
-        ResourceLocation idA = parentA.getId();
-        ResourceLocation idB = parentB.getId();
+        ResourceLocation idA = ctx.parentA().getRaceId();
+        ResourceLocation idB = ctx.parentB().getRaceId();
 
         LootContext lootContext = null;
-        for (IndexedRecipe recipe : index(rules)) {
+        for (IndexedRecipe recipe : index(ctx, rules)) {
             if (!recipe.matches(idA, idB)) {
                 continue;
             }
@@ -101,27 +98,27 @@ public final class MoaBreedingRegistry {
             if (ctx.world().getRandom().nextFloat() >= recipe.entry().chance()) {
                 continue;
             }
-            return recipe.child();
+            return recipe.childId();
         }
 
-        if (parentA == MoaRaceRegistry.FALLBACK_MOA.get()) {
-            return parentB;
+        if (MoaRaceRegistry.isFallback(idA)) {
+            return idB;
         }
-        if (parentB == MoaRaceRegistry.FALLBACK_MOA.get()) {
-            return parentA;
+        if (MoaRaceRegistry.isFallback(idB)) {
+            return idA;
         }
-        return ctx.world().getRandom().nextBoolean() ? parentA : parentB;
+        return ctx.world().getRandom().nextBoolean() ? idA : idB;
     }
 
-    private static List<IndexedRecipe> index(Registry<BreedingRecipes> rules) {
+    private static List<IndexedRecipe> index(MoaBreedingContext ctx, Registry<BreedingRecipes> rules) {
         List<IndexedRecipe> indexed = new ArrayList<>();
         for (var entry : rules.entrySet()) {
-            MoaRace child = resolve(entry.getKey().location());
-            if (child == null) {
+            ResourceLocation childId = entry.getKey().location();
+            if (resolve(ctx, childId) == null) {
                 continue;
             }
             for (BreedingEntry recipe : entry.getValue().recipes()) {
-                indexed.add(new IndexedRecipe(child, recipe));
+                indexed.add(new IndexedRecipe(childId, recipe));
             }
         }
         return indexed;
@@ -137,8 +134,8 @@ public final class MoaBreedingRegistry {
         return new LootContext.Builder(params).create(Optional.empty());
     }
 
-    private static MoaRace resolve(ResourceLocation raceId) {
-        var race = MoaRaceRegistry.MOA_RACES.getOptional(raceId);
+    private static MoaRace resolve(MoaBreedingContext ctx, ResourceLocation raceId) {
+        var race = MoaRaceRegistry.find(ctx.world().registryAccess(), raceId);
         if (race.isEmpty()) {
             if (WARNED_MISSING_RACES.add(raceId)) {
                 ParadiseLost.LOG.error("moa_breeding refers to {} which is not a registered moa race; ignoring it", raceId);
@@ -148,7 +145,7 @@ public final class MoaBreedingRegistry {
         return race.get();
     }
 
-    private record IndexedRecipe(MoaRace child, BreedingEntry entry) {
+    private record IndexedRecipe(ResourceLocation childId, BreedingEntry entry) {
         boolean matches(ResourceLocation parentA, ResourceLocation parentB) {
             return (entry.parent1().equals(parentA) && entry.parent2().equals(parentB))
                     || (entry.parent1().equals(parentB) && entry.parent2().equals(parentA));

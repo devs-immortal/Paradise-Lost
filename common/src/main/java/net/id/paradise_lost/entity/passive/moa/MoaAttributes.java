@@ -1,8 +1,10 @@
 package net.id.paradise_lost.entity.passive.moa;
 
+import com.mojang.serialization.Codec;
 import net.id.paradise_lost.component.MoaGenes;
+import net.minecraft.util.StringRepresentable;
 
-public enum MoaAttributes {
+public enum MoaAttributes implements StringRepresentable {
     GROUND_SPEED(0.24F, 1F, 0.1F),
     GLIDING_SPEED(0.055F, 0.25F, 0.03F),
     GLIDING_DECAY(0.5F, 0.9F, 0.06F),
@@ -10,12 +12,19 @@ public enum MoaAttributes {
     DROP_MULTIPLIER(1, 6, 1),
     MAX_HEALTH(15, 40, 5);
 
+    public static final Codec<MoaAttributes> CODEC = StringRepresentable.fromEnum(MoaAttributes::values);
+
     public final float min, max, gradeInterval;
 
     MoaAttributes(float min, float max, float gradeInterval) {
         this.min = min;
         this.max = max;
         this.gradeInterval = gradeInterval;
+    }
+
+    @Override
+    public String getSerializedName() {
+        return name();
     }
 
     public String getRatingTierTranslationKey(float attribute) {

@@ -8,6 +8,7 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.api.MoaAPI;
 import net.id.paradise_lost.component.MoaGenes;
+import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
@@ -38,21 +39,22 @@ public class MoaEggCommand {
     }
 
     private static int execute(CommandSourceStack source, Collection<ServerPlayer> targets, ResourceLocation raceId, boolean baby) {
-
-        var race = MoaAPI.findRace(raceId).orElse(null);
+        var access = source.registryAccess();
+        var resolvedId = raceId;
+        var race = MoaAPI.findRace(access, resolvedId).orElse(null);
         if (race == null && raceId.getNamespace().equals("minecraft")) {
-
-            race = MoaAPI.findRace(ModConstants.id(raceId.getPath())).orElse(null);
+            resolvedId = ModConstants.id(raceId.getPath());
+            race = MoaAPI.findRace(access, resolvedId).orElse(null);
         }
         if (race == null) {
-
             source.sendFailure(Component.translatable("commands.paradise_lost.moaegg.fallback", raceId.toString()));
-            race = MoaAPI.getFallbackRace();
+            resolvedId = MoaRaceRegistry.FALLBACK_ID;
+            race = MoaAPI.getFallbackRace(access);
         }
 
-        ItemStack template = MoaGenes.getEggForCommand(race, source.getLevel(), baby);
+        ItemStack template = MoaGenes.getEggForCommand(race, resolvedId, source.getLevel(), baby);
+        ResourceLocation finalRaceId = resolvedId;
         targets.forEach(player -> {
-
             ItemStack egg = template.copy();
             if (!player.getInventory().add(egg)) {
                 Containers.dropItemStack(source.getLevel(), player.getX(), player.getY(), player.getZ(), egg);
@@ -67,7 +69,7 @@ public class MoaEggCommand {
 
         @Override
         public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) {
-            MoaAPI.getRegisteredRaces().forEachRemaining(race -> builder.suggest(race.getId().toString()));
+            MoaAPI.getRegisteredRaceIds(context.getSource().registryAccess()).forEach(id -> builder.suggest(id.toString()));
             return builder.buildFuture();
         }
     }

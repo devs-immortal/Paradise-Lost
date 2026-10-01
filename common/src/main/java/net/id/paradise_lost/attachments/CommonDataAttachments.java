@@ -19,18 +19,38 @@ public class CommonDataAttachments {
                     .networkSynchronized(ByteBufCodecs.VAR_INT)
                     .build("minecart_floating_time"));
 
+    public static final CommonDataAttachment<Integer> MINE_CART_FLOAT_INCLINE =
+            register(CommonDataAttachment.create(o -> 0)
+                    .codec(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build("minecart_float_incline"));
+
+    public static final CommonDataAttachment<String> MINE_CART_FLOAT_SHAPE =
+            register(CommonDataAttachment.create(o -> "")
+                    .codec(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build("minecart_float_shape"));
+
     public static final CommonDataAttachment<Boolean> FLOATY_ANCHORED =
             register(CommonDataAttachment.create(o -> false)
                     .codec(Codec.BOOL)
                     .networkSynchronized(ByteBufCodecs.BOOL)
                     .build("floaty_anchored"));
 
+    public static final CommonDataAttachment<Boolean> FLOATY_ANCHORED_SAVED =
+            register(CommonDataAttachment.create(o -> false)
+                    .codec(Codec.BOOL)
+                    .build("floaty_anchored_saved"));
+
     public static CommonDataAttachment<?> lookup(ResourceLocation location) {
         return MAP.get(location);
     }
     public static void init() {
         Objects.requireNonNull(MINE_CART_FLOATING.getName());
+        Objects.requireNonNull(MINE_CART_FLOAT_INCLINE.getName());
+        Objects.requireNonNull(MINE_CART_FLOAT_SHAPE.getName());
         Objects.requireNonNull(FLOATY_ANCHORED.getName());
+        Objects.requireNonNull(FLOATY_ANCHORED_SAVED.getName());
     }
 
     static <T> CommonDataAttachment<T> register(CommonDataAttachment<T> type) {
