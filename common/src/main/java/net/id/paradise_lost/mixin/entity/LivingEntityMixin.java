@@ -93,18 +93,16 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         }
     }
 
-    @Inject(method = "updateWalkAnimation", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "updateWalkAnimation", at = @At("HEAD"))
     private void paradiseLost$floatyWalkAnimation(float posDelta, CallbackInfo ci) {
-        if ((Object) this instanceof Player player && ((ParadiseLostEntityExtensions) player).isFloatyAnchored()) {
-            ci.cancel();
+        if ((Object) this instanceof Player player) {
+            ((ParadiseLostEntityExtensions) player).isFloatyAnchored();
         }
     }
 
-    @Inject(method = "dampensVibrations", at = @At("HEAD"), cancellable = true)
-    private void paradiseLost$floatyBootsDampensVibrations(CallbackInfoReturnable<Boolean> cir) {
-        if (FloatyBootsItem.isWearing((LivingEntity) (Object) this)) {
-            cir.setReturnValue(true);
-        }
+    @Override
+    public boolean dampensVibrations() {
+        return FloatyBootsItem.isWearing((LivingEntity) (Object) this) || super.dampensVibrations();
     }
 
     @ModifyVariable(method = "calculateFallDamage", at = @At("HEAD"), argsOnly = true, ordinal = 0)

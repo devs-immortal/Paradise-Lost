@@ -48,9 +48,9 @@ public abstract class ClientPlayerEntityMixin {
 
         boolean jumping = this.input != null && this.input.jumping;
         boolean wearing = FloatyLeggingsItem.isWearing(player);
-        boolean blocked = player.isCreative() || player.isSpectator();
+        boolean canToggleAnchor = FloatyLeggingsItem.isSurvivalLike(player);
 
-        if (wearing && !blocked && !this.paradiseLost$floatyWasJumping && jumping) {
+        if (wearing && canToggleAnchor && !this.paradiseLost$floatyWasJumping && jumping) {
             if (this.paradiseLost$floatyJumpToggleTimer == 0) {
                 this.paradiseLost$floatyJumpToggleTimer = FloatyLeggingsItem.JUMP_TOGGLE_TICKS;
             } else if (FloatyLeggingsItem.canAnchor(player)) {
