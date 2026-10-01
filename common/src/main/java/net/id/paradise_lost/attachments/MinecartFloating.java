@@ -1,7 +1,10 @@
 package net.id.paradise_lost.attachments;
 
+import com.mojang.datafixers.util.Pair;
 import net.id.paradise_lost.platform.Services;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.Mth;
@@ -11,14 +14,26 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.Vec3;
 
-/**
- * Minecart levitation state stored as data attachments ({@link CommonDataAttachments#MINE_CART_FLOATING},
- * {@link CommonDataAttachments#MINE_CART_FLOAT_INCLINE}).
- */
+import java.util.Locale;
+import java.util.Map;
+
 public final class MinecartFloating {
     private static final double FLOAT_SECONDS = 4.1;
     private static final double MOTION_EPSILON = 0.05D;
     private static final String LEGACY_NBT_KEY = "paradiseLostFloating";
+
+    private static final Map<RailShape, Pair<Vec3i, Vec3i>> RAIL_EXITS = Map.ofEntries(
+            Map.entry(RailShape.NORTH_SOUTH, Pair.of(Direction.NORTH.getNormal(), Direction.SOUTH.getNormal())),
+            Map.entry(RailShape.EAST_WEST, Pair.of(Direction.WEST.getNormal(), Direction.EAST.getNormal())),
+            Map.entry(RailShape.ASCENDING_EAST, Pair.of(Direction.WEST.getNormal().below(), Direction.EAST.getNormal())),
+            Map.entry(RailShape.ASCENDING_WEST, Pair.of(Direction.WEST.getNormal(), Direction.EAST.getNormal().below())),
+            Map.entry(RailShape.ASCENDING_NORTH, Pair.of(Direction.NORTH.getNormal(), Direction.SOUTH.getNormal().below())),
+            Map.entry(RailShape.ASCENDING_SOUTH, Pair.of(Direction.NORTH.getNormal().below(), Direction.SOUTH.getNormal())),
+            Map.entry(RailShape.SOUTH_EAST, Pair.of(Direction.SOUTH.getNormal(), Direction.EAST.getNormal())),
+            Map.entry(RailShape.SOUTH_WEST, Pair.of(Direction.SOUTH.getNormal(), Direction.WEST.getNormal())),
+            Map.entry(RailShape.NORTH_WEST, Pair.of(Direction.NORTH.getNormal(), Direction.WEST.getNormal())),
+            Map.entry(RailShape.NORTH_EAST, Pair.of(Direction.NORTH.getNormal(), Direction.EAST.getNormal()))
+    );
 
     private MinecartFloating() {
     }
@@ -35,6 +50,7 @@ public final class MinecartFloating {
         Services.ATTACHMENTS.setAttachedValue(cart, CommonDataAttachments.MINE_CART_FLOATING, Math.max(time, 0));
         if (time <= 0) {
             setIncline(cart, 0);
+            setRailShape(cart, "");
         }
     }
 
@@ -45,6 +61,31 @@ public final class MinecartFloating {
     public static void setIncline(AbstractMinecart cart, int incline) {
         Services.ATTACHMENTS.setAttachedValue(
                 cart, CommonDataAttachments.MINE_CART_FLOAT_INCLINE, Mth.clamp(incline, -1, 1));
+    }
+
+    public static String getRailShapeName(AbstractMinecart cart) {
+        return Services.ATTACHMENTS.getOrCreateAttachedValue(cart, CommonDataAttachments.MINE_CART_FLOAT_SHAPE);
+    }
+
+    public static void setRailShape(AbstractMinecart cart, RailShape shape) {
+        setRailShape(cart, shape == null ? "" : shape.getSerializedName());
+    }
+
+    public static void setRailShape(AbstractMinecart cart, String shapeName) {
+        Services.ATTACHMENTS.setAttachedValue(
+                cart, CommonDataAttachments.MINE_CART_FLOAT_SHAPE, shapeName == null ? "" : shapeName);
+    }
+
+    public static RailShape getRailShape(AbstractMinecart cart) {
+        String name = getRailShapeName(cart);
+        if (name == null || name.isEmpty()) {
+            return null;
+        }
+        try {
+            return RailShape.valueOf(name.toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException ignored) {
+            return null;
+        }
     }
 
     public static void addFloating(AbstractMinecart cart) {
@@ -59,11 +100,8 @@ public final class MinecartFloating {
         setFloatTime(cart, getFloatTime(cart) - 1);
     }
 
-    /**
-     * Remember whether the cart is climbing or descending a non-flat rail so off-rail
-     * levitation can continue on that diagonal until float time runs out.
-     */
     public static void updateInclineFromRail(AbstractMinecart cart, RailShape shape, Vec3 motion) {
+        setRailShape(cart, shape);
         if (!shape.isAscending()) {
             setIncline(cart, 0);
             return;
@@ -89,16 +127,38 @@ public final class MinecartFloating {
         }
     }
 
-    /**
-     * Best-effort refresh when leaving rails: if a rail block is still at the cart's
-     * position, sync incline from that shape so non-flat exits keep climbing/descending.
-     * Does not look below the cart — that would wipe incline while flying over other rails.
-     */
-    public static void refreshInclineFromCurrentRail(AbstractMinecart cart) {
-        BlockState state = cart.level().getBlockState(cart.blockPosition());
+    public static void captureRailState(AbstractMinecart cart) {
+        BlockPos pos = cart.blockPosition();
+        BlockState state = cart.level().getBlockState(pos);
+        if (!BaseRailBlock.isRail(state)) {
+            state = cart.level().getBlockState(pos.below());
+        }
         if (state.getBlock() instanceof BaseRailBlock rail) {
             updateInclineFromRail(cart, state.getValue(rail.getShapeProperty()), cart.getDeltaMovement());
         }
+    }
+
+    public static void applyFloatingRotation(AbstractMinecart cart) {
+        RailShape shape = getRailShape(cart);
+        Pair<Vec3i, Vec3i> exits = shape == null ? null : RAIL_EXITS.get(shape);
+        if (exits == null || !shape.isAscending()) {
+            cart.setXRot(0.0F);
+            return;
+        }
+        Vec3 first = Vec3.atLowerCornerOf(exits.getFirst());
+        Vec3 second = Vec3.atLowerCornerOf(exits.getSecond());
+        Vec3 tangent = first.subtract(second);
+        if (tangent.lengthSqr() == 0.0D) {
+            cart.setXRot(0.0F);
+            return;
+        }
+        tangent = tangent.normalize();
+        Vec3 motion = cart.getDeltaMovement();
+        if (tangent.x * motion.x + tangent.z * motion.z < 0.0D) {
+            tangent = tangent.scale(-1.0D);
+        }
+        cart.setYRot((float) (Math.atan2(tangent.z, tangent.x) * (180.0D / Math.PI)));
+        cart.setXRot((float) (Math.atan(tangent.y) * 73.0D));
     }
 
     public static boolean isCartOnRail(AbstractMinecart cart) {
@@ -106,12 +166,12 @@ public final class MinecartFloating {
         int j = Mth.floor(cart.getY());
         int k = Mth.floor(cart.getZ());
         BlockState blockState = cart.level().getBlockState(new BlockPos(i, j, k));
-        return BaseRailBlock.isRail(blockState);
+        if (BaseRailBlock.isRail(blockState)) {
+            return true;
+        }
+        return BaseRailBlock.isRail(cart.level().getBlockState(new BlockPos(i, j - 1, k)));
     }
 
-    /**
-     * One-time migration from the old manual NBT blob into attachments.
-     */
     public static void loadLegacyNbt(AbstractMinecart cart, CompoundTag tag) {
         if (!tag.contains(LEGACY_NBT_KEY, Tag.TAG_COMPOUND)) {
             return;
@@ -120,6 +180,9 @@ public final class MinecartFloating {
         int time = floating.getInt("floatTime");
         setFloatTime(cart, floating.getBoolean("floating") ? Math.max(time, 1) : time);
         setIncline(cart, floating.getInt("floatIncline"));
+        if (floating.contains("floatShape", Tag.TAG_STRING)) {
+            setRailShape(cart, floating.getString("floatShape"));
+        }
         tag.remove(LEGACY_NBT_KEY);
     }
 }
