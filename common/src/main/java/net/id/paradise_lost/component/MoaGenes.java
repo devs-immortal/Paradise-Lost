@@ -7,8 +7,11 @@ import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
+import net.id.paradise_lost.registry.MoaRaceRegistry;
+import net.id.paradise_lost.registry.MoaSpawnRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +24,8 @@ import net.minecraft.nbt.Tag;
 
 public class MoaGenes {
     private final Object2FloatOpenHashMap<MoaAttributes> attributeMap = new Object2FloatOpenHashMap<>();
-    private MoaAPI.MoaRace race = MoaAPI.getRace(null);
+    private ResourceLocation raceId = MoaRaceRegistry.FALLBACK_ID;
+    private MoaAPI.MoaRace race = MoaRaceRegistry.FALLBACK_VALUE;
     private MoaAttributes affinity;
     private boolean legendary, initialized;
     private UUID owner;
@@ -30,19 +34,19 @@ public class MoaGenes {
     public MoaGenes() {
     }
 
-    public static ItemStack getEggForCommand(MoaAPI.MoaRace race, Level world, boolean baby) {
+    public static ItemStack getEggForCommand(MoaAPI.MoaRace race, ResourceLocation raceId, Level world, boolean baby) {
         RandomSource random = world.getRandom();
         ItemStack stack = new ItemStack(ItemRegistry.MOA_EGG.get());
 
-        float attr1 = race.statWeighting().configure(MoaAttributes.GROUND_SPEED, race, random);
-        float attr2 = race.statWeighting().configure(MoaAttributes.GLIDING_SPEED, race, random);
-        float attr3 = race.statWeighting().configure(MoaAttributes.GLIDING_DECAY, race, random);
-        float attr4 = race.statWeighting().configure(MoaAttributes.JUMPING_STRENGTH, race, random);
-        float attr5 = race.statWeighting().configure(MoaAttributes.DROP_MULTIPLIER, race, random);
-        float attr6 = race.statWeighting().configure(MoaAttributes.MAX_HEALTH, race, random);
+        float attr1 = race.weighting().configure(MoaAttributes.GROUND_SPEED, race, random);
+        float attr2 = race.weighting().configure(MoaAttributes.GLIDING_SPEED, race, random);
+        float attr3 = race.weighting().configure(MoaAttributes.GLIDING_DECAY, race, random);
+        float attr4 = race.weighting().configure(MoaAttributes.JUMPING_STRENGTH, race, random);
+        float attr5 = race.weighting().configure(MoaAttributes.DROP_MULTIPLIER, race, random);
+        float attr6 = race.weighting().configure(MoaAttributes.MAX_HEALTH, race, random);
 
         var attributes = new ParadiseLostDataComponentTypes.MoaAttributeComponent(attr1, attr2, attr3, attr4, attr5, attr6);
-        var genes = new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), race.defaultAffinity().name(), baby, 100.0F, UUID.fromString("00000000-0000-0000-0000-000000000000"), attributes);
+        var genes = new ParadiseLostDataComponentTypes.MoaGeneComponent(raceId, race.defaultAffinity().name(), baby, 100.0F, UUID.fromString("00000000-0000-0000-0000-000000000000"), attributes);
 
         stack.set(ParadiseLostDataComponentTypes.MOA_GENES, genes);
         return stack;
@@ -55,9 +59,8 @@ public class MoaGenes {
         if (stack.is(ItemRegistry.MOA_EGG.get())) {
             var component = stack.get(ParadiseLostDataComponentTypes.MOA_GENES);
             if (component != null) {
-                genes.fromComponent(component);
+                genes.fromComponent(component, world.registryAccess());
             } else {
-
                 genes.initMoa(moa);
             }
             genes.owner = owner == null ? UUID.fromString("00000000-0000-0000-0000-000000000000") : owner;
@@ -77,17 +80,20 @@ public class MoaGenes {
     public void initMoa(@NotNull MoaEntity moa) {
         Level world = moa.level();
         RandomSource random = moa.getRandom();
-        race = MoaAPI.getMoaFromSpawning(world, world.getBiome(moa.blockPosition()).unwrapKey().get(), random);
+        raceId = MoaSpawnRegistry.getMoaRaceIdFromSpawning(
+                world, world.getBiome(moa.blockPosition()).unwrapKey().get(), random);
+        race = MoaAPI.getRace(world, raceId);
         affinity = race.defaultAffinity();
 
         for (MoaAttributes attribute : MoaAttributes.values()) {
-            attributeMap.addTo(attribute, race.statWeighting().configure(attribute, race, random));
+            attributeMap.addTo(attribute, race.weighting().configure(attribute, race, random));
         }
         initialized = true;
     }
 
     public ItemStack getEggForBreeding(MoaGenes otherParent, Level world, BlockPos pos) {
-        var childRace = MoaAPI.getMoaFromBreeding(this, otherParent, world, pos);
+        ResourceLocation childRaceId = MoaAPI.getMoaRaceIdFromBreeding(this, otherParent, world, pos);
+        MoaAPI.MoaRace childRace = MoaAPI.getRace(world, childRaceId);
 
         ItemStack stack = new ItemStack(ItemRegistry.MOA_EGG.get());
         RandomSource random = world.getRandom();
@@ -101,6 +107,7 @@ public class MoaGenes {
                 increaseChance /= 2;
             }
         }
+        genes.raceId = childRaceId;
         genes.race = childRace;
         genes.affinity = random.nextBoolean() ? this.affinity : otherParent.affinity;
         genes.owner = random.nextBoolean() ? this.owner : otherParent.owner;
@@ -131,11 +138,22 @@ public class MoaGenes {
         return race;
     }
 
+    public ResourceLocation getRaceId() {
+        return raceId;
+    }
+
+    public void setRace(ResourceLocation id, MoaAPI.MoaRace race) {
+        this.raceId = id;
+        this.race = race;
+        this.legendary = race.legendary();
+    }
+
     public ResourceLocation getTexture() {
-        ResourceLocation id = this.race.getId();
-        String name = id.getPath();
-        String namespace = id.getNamespace();
-        return ResourceLocation.fromNamespaceAndPath(namespace, "textures/entity/moa/" + name + ".png");
+        return race.textureFor(raceId);
+    }
+
+    public String getRaceTranslationKey() {
+        return race.translationKey(raceId);
     }
 
     public float getHunger() {
@@ -161,7 +179,12 @@ public class MoaGenes {
     public void readFromNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
         initialized = tag.getBoolean("initialized");
         if (initialized) {
-            race = MoaAPI.getRace(ResourceLocation.tryParse(tag.getString("raceId")));
+            raceId = ResourceLocation.tryParse(tag.getString("raceId"));
+            if (raceId == null) {
+                raceId = MoaRaceRegistry.FALLBACK_ID;
+            }
+            RegistryAccess access = registryLookup instanceof RegistryAccess ra ? ra : null;
+            race = access != null ? MoaAPI.getRace(access, raceId) : MoaRaceRegistry.FALLBACK_VALUE;
             String affinityStr = tag.getString("affinity");
             affinity = affinityStr.isEmpty() ? race.defaultAffinity() : MoaAttributes.valueOf(affinityStr);
             legendary = tag.getBoolean("legendary");
@@ -175,7 +198,6 @@ public class MoaGenes {
                 if (tag.contains(attribute.name(), Tag.TAG_FLOAT)) {
                     attributeMap.put(attribute, tag.getFloat(attribute.name()));
                 } else {
-
                     if (attribute.equals(MoaAttributes.JUMPING_STRENGTH)) {
                         attributeMap.put(attribute, attribute.max);
                     } else {
@@ -187,8 +209,13 @@ public class MoaGenes {
     }
 
     public void fromComponent(ParadiseLostDataComponentTypes.MoaGeneComponent com) {
+        fromComponent(com, null);
+    }
+
+    public void fromComponent(ParadiseLostDataComponentTypes.MoaGeneComponent com, RegistryAccess access) {
         initialized = true;
-        race = MoaAPI.getRace(com.race());
+        raceId = com.race() != null ? com.race() : MoaRaceRegistry.FALLBACK_ID;
+        race = access != null ? MoaAPI.getRace(access, raceId) : MoaRaceRegistry.FALLBACK_VALUE;
         affinity = com.affinity().isEmpty() ? race.defaultAffinity() : MoaAttributes.valueOf(com.affinity());
         legendary = race.legendary();
         hunger = com.hunger();
@@ -201,10 +228,20 @@ public class MoaGenes {
         attributeMap.put(MoaAttributes.MAX_HEALTH, com.attributes().maxHealth());
     }
 
+    public void resolveRace(RegistryAccess access) {
+        if (raceId != null) {
+            race = MoaAPI.getRace(access, raceId);
+            legendary = race.legendary();
+            if (affinity == null) {
+                affinity = race.defaultAffinity();
+            }
+        }
+    }
+
     public void writeToNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
         tag.putBoolean("initialized", initialized);
         if (initialized) {
-            tag.putString("raceId", race.getId().toString());
+            tag.putString("raceId", raceId.toString());
             tag.putString("affinity", affinity.name());
             tag.putBoolean("legendary", legendary);
             tag.putFloat("hunger", hunger);
@@ -225,6 +262,6 @@ public class MoaGenes {
                 attributeMap.getFloat(MoaAttributes.DROP_MULTIPLIER),
                 attributeMap.getFloat(MoaAttributes.MAX_HEALTH)
         );
-        return new ParadiseLostDataComponentTypes.MoaGeneComponent(race.getId(), affinity.name(), true, hunger, owner == null ? UUID.fromString("00000000-0000-0000-0000-000000000000") : owner, attributes);
+        return new ParadiseLostDataComponentTypes.MoaGeneComponent(raceId, affinity.name(), true, hunger, owner == null ? UUID.fromString("00000000-0000-0000-0000-000000000000") : owner, attributes);
     }
 }

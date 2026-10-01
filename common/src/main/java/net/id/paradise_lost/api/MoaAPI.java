@@ -1,45 +1,51 @@
 package net.id.paradise_lost.api;
 
-import com.google.common.collect.ImmutableMap;
-import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.ParadiseLost;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradise_lost.component.MoaGenes;
 import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.registry.MoaBreedingRegistry;
 import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.id.paradise_lost.registry.MoaSpawnRegistry;
+import net.id.paradise_lost.registry.MoaSpawnStatWeightingRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class MoaAPI {
 
-    public static Optional<MoaRace> findRace(ResourceLocation raceId) {
-        if (raceId == null) {
-            return Optional.empty();
-        }
-        return MoaRaceRegistry.MOA_RACES.getOptional(raceId);
+    public static Optional<MoaRace> findRace(RegistryAccess access, ResourceLocation raceId) {
+        return MoaRaceRegistry.find(access, raceId);
     }
 
-    public static MoaRace getRace(ResourceLocation raceId) {
-        return findRace(raceId).orElseGet(MoaRaceRegistry.FALLBACK_MOA);
+    public static MoaRace getRace(RegistryAccess access, @Nullable ResourceLocation raceId) {
+        return MoaRaceRegistry.getOrFallback(access, raceId);
     }
 
-    public static MoaRace getFallbackRace() {
-        return MoaRaceRegistry.FALLBACK_MOA.get();
+    public static MoaRace getRace(Level level, @Nullable ResourceLocation raceId) {
+        return getRace(level.registryAccess(), raceId);
     }
 
-    public static Iterator<MoaRace> getRegisteredRaces() {
-        return MoaRaceRegistry.MOA_RACES.iterator();
+    public static MoaRace getFallbackRace(RegistryAccess access) {
+        return MoaRaceRegistry.fallback(access);
+    }
+
+    public static Stream<ResourceLocation> getRegisteredRaceIds(RegistryAccess access) {
+        return MoaRaceRegistry.raceIds(access);
     }
 
     @NotNull
@@ -47,73 +53,129 @@ public class MoaAPI {
         return MoaSpawnRegistry.getMoaFromSpawning(world, biome, random);
     }
 
-    public static MoaRace getMoaFromBreeding(MoaBreedingContext ctx) {
-        return MoaBreedingRegistry.getMoaFromBreeding(ctx);
+    public static ResourceLocation getMoaRaceIdFromBreeding(MoaBreedingContext ctx) {
+        return MoaBreedingRegistry.getMoaRaceIdFromBreeding(ctx);
     }
 
-    public static MoaRace getMoaFromBreeding(MoaGenes parentA, MoaGenes parentB, Level world, BlockPos pos) {
-        return getMoaFromBreeding(new MoaBreedingContext(parentA, parentB, world, pos));
+    public static ResourceLocation getMoaRaceIdFromBreeding(MoaGenes parentA, MoaGenes parentB, Level world, BlockPos pos) {
+        return getMoaRaceIdFromBreeding(new MoaBreedingContext(parentA, parentB, world, pos));
     }
 
     public record MoaBreedingContext(MoaGenes parentA, MoaGenes parentB, Level world, BlockPos pos) {
     }
 
-    public enum SpawnStatWeighting {
+    public record AttributeWeighting(float base, float variance) {
+        public static final Codec<AttributeWeighting> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.FLOAT.fieldOf("base").forGetter(AttributeWeighting::base),
+                Codec.FLOAT.fieldOf("variance").forGetter(AttributeWeighting::variance)
+        ).apply(instance, AttributeWeighting::new));
+    }
 
-        SPEED(0.08F, 0.1F, 0.02F, 0.03F, -0.02F, 0.2F, 0F, -0.01F, 0, 8, 0f, 0.02f),
-        GLIDE(0.013F, 0.08F, 0.035F, 0.039F, -0.01F, 0.05F, 0F, 0.005F, 0, 6, 0f, 0.02f),
-        ENDURANCE(0.023F, 0.06F, 0.02F, 0.02F, -0.02F, 0.04F, -0.01F, -0.01F, 2, 8, 0f, 0.02f),
-        TANK(0.0F, 0.07F, 0.01F, 0.02F, -0.025F, 0.02F, -0.02F, -0.01F, 4, 6, 0.4f, 0.02f),
-        MEATY(0.03F, 0.07F, 0.01F, 0.02F, -0.025F, 0.01F, -0.02F, -0.01F, 0, 2, 1.1f, 0.6f),
-        MYTHICAL_SPEED(0.31F, 0.17F, 0.082F, 0.0375F, 0F, 0.1F, 0F, -0.01F, 0, 8, 0.5f, 0.02f),
-        MYTHICAL_GLIDE(0.013F, 0.08F, 0.035F, 0.039F, 0F, 0.185F, 0F, -0.01F, 0, 6, 0.5f, 0.02f),
-        MYTHICAL_TANK(0.0F, 0.07F, 0.01F, 0.02F, -0.025F, 0.15F, -0.03F, -0.01F, 14, 6, 0.5f, 0.02f),
-        MYTHICAL_ALL(0.31F, 0.17F, 0.035F, 0.039F, -0.085F, 0.185F, -0.03F, -0.01F, 14, 6, 0.5f, 0.02f);
+    /**
+     * Datapack-defined spawn-stat curve. Addons can register new profiles and point races at them.
+     */
+    public record SpawnStatWeighting(
+            AttributeWeighting groundSpeed,
+            AttributeWeighting glidingSpeed,
+            AttributeWeighting glidingDecay,
+            AttributeWeighting jumpingStrength,
+            AttributeWeighting maxHealth,
+            AttributeWeighting dropMultiplier
+    ) {
+        public static final Codec<SpawnStatWeighting> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                AttributeWeighting.CODEC.fieldOf("ground_speed").forGetter(SpawnStatWeighting::groundSpeed),
+                AttributeWeighting.CODEC.fieldOf("gliding_speed").forGetter(SpawnStatWeighting::glidingSpeed),
+                AttributeWeighting.CODEC.fieldOf("gliding_decay").forGetter(SpawnStatWeighting::glidingDecay),
+                AttributeWeighting.CODEC.fieldOf("jumping_strength").forGetter(SpawnStatWeighting::jumpingStrength),
+                AttributeWeighting.CODEC.fieldOf("max_health").forGetter(SpawnStatWeighting::maxHealth),
+                AttributeWeighting.CODEC.fieldOf("drop_multiplier").forGetter(SpawnStatWeighting::dropMultiplier)
+        ).apply(instance, SpawnStatWeighting::new));
 
-        private final ImmutableMap<MoaAttributes, Weighting> data;
-
-        SpawnStatWeighting(float baseGroundSpeed, float groundSpeedVariance, float baseGlidingSpeed, float glidingSpeedVariance, float baseGlidingDecay, float glidingDecayVariance, float baseJumpStrength, float jumpStrengthVariance, float baseMaxHealth, float maxHealthVariance, float baseDropMultiplier, float maxDropMultiplierVariance) {
-            var builder = ImmutableMap.<MoaAttributes, Weighting>builder();
-            builder.put(MoaAttributes.GROUND_SPEED, new Weighting(baseGroundSpeed, groundSpeedVariance));
-            builder.put(MoaAttributes.GLIDING_SPEED, new Weighting(baseGlidingSpeed, glidingSpeedVariance));
-            builder.put(MoaAttributes.GLIDING_DECAY, new Weighting(baseGlidingDecay, glidingDecayVariance));
-            builder.put(MoaAttributes.JUMPING_STRENGTH, new Weighting(baseJumpStrength, jumpStrengthVariance));
-            builder.put(MoaAttributes.MAX_HEALTH, new Weighting(baseMaxHealth, maxHealthVariance));
-            builder.put(MoaAttributes.DROP_MULTIPLIER, new Weighting(baseDropMultiplier, maxDropMultiplierVariance));
-            data = builder.build();
+        public static SpawnStatWeighting of(
+                float groundSpeedBase, float groundSpeedVariance,
+                float glidingSpeedBase, float glidingSpeedVariance,
+                float glidingDecayBase, float glidingDecayVariance,
+                float jumpingStrengthBase, float jumpingStrengthVariance,
+                float maxHealthBase, float maxHealthVariance,
+                float dropMultiplierBase, float dropMultiplierVariance
+        ) {
+            return new SpawnStatWeighting(
+                    new AttributeWeighting(groundSpeedBase, groundSpeedVariance),
+                    new AttributeWeighting(glidingSpeedBase, glidingSpeedVariance),
+                    new AttributeWeighting(glidingDecayBase, glidingDecayVariance),
+                    new AttributeWeighting(jumpingStrengthBase, jumpingStrengthVariance),
+                    new AttributeWeighting(maxHealthBase, maxHealthVariance),
+                    new AttributeWeighting(dropMultiplierBase, dropMultiplierVariance)
+            );
         }
 
-        @SuppressWarnings("ConstantConditions")
+        public AttributeWeighting forAttribute(MoaAttributes attribute) {
+            return switch (attribute) {
+                case GROUND_SPEED -> groundSpeed;
+                case GLIDING_SPEED -> glidingSpeed;
+                case GLIDING_DECAY -> glidingDecay;
+                case JUMPING_STRENGTH -> jumpingStrength;
+                case MAX_HEALTH -> maxHealth;
+                case DROP_MULTIPLIER -> dropMultiplier;
+            };
+        }
+
         public float configure(MoaAttributes attribute, MoaRace race, RandomSource random) {
-            Weighting statData = data.get(attribute);
-            return Math.min(attribute.max, attribute.min + (statData.base + (random.nextFloat() * statData.variance) * (
-                    race.defaultAffinity == attribute
+            AttributeWeighting statData = forAttribute(attribute);
+            return Math.min(attribute.max, attribute.min + (statData.base() + (random.nextFloat() * statData.variance()) * (
+                    race.defaultAffinity() == attribute
                             ? (attribute == MoaAttributes.DROP_MULTIPLIER ? 2F : 1.05F)
                             : 1F)));
         }
-
-        private static record Weighting(float base, float variance) {
-        }
     }
 
-    public record MoaRace(MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting, boolean glowing, boolean legendary, ParticleType<?> particles) {
-        public MoaRace(MoaAttributes defaultAffinity, SpawnStatWeighting statWeighting) {
-            this(defaultAffinity, statWeighting, false, false, ParticleTypes.ENCHANT);
+    /**
+     * Datapack-defined moa race. Texture defaults to {@code <namespace>:textures/entity/moa/<path>.png}
+     * unless {@code texture} is set explicitly — addons can ship races under their own namespace.
+     */
+    public record MoaRace(
+            MoaAttributes defaultAffinity,
+            Holder<SpawnStatWeighting> statWeighting,
+            boolean glowing,
+            boolean legendary,
+            ParticleType<?> particles,
+            Optional<ResourceLocation> texture
+    ) {
+        public static final Codec<MoaRace> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                MoaAttributes.CODEC.fieldOf("default_affinity").forGetter(MoaRace::defaultAffinity),
+                RegistryFileCodec.create(
+                        MoaSpawnStatWeightingRegistry.REGISTRY.key(),
+                        SpawnStatWeighting.DIRECT_CODEC
+                ).fieldOf("stat_weighting").forGetter(MoaRace::statWeighting),
+                Codec.BOOL.optionalFieldOf("glowing", false).forGetter(MoaRace::glowing),
+                Codec.BOOL.optionalFieldOf("legendary", false).forGetter(MoaRace::legendary),
+                BuiltInRegistries.PARTICLE_TYPE.byNameCodec().optionalFieldOf("particles", ParticleTypes.ENCHANT).forGetter(MoaRace::particles),
+                ResourceLocation.CODEC.optionalFieldOf("texture").forGetter(MoaRace::texture)
+        ).apply(instance, MoaRace::new));
+
+        public MoaRace(MoaAttributes defaultAffinity, Holder<SpawnStatWeighting> statWeighting) {
+            this(defaultAffinity, statWeighting, false, false, ParticleTypes.ENCHANT, Optional.empty());
         }
 
-        public ResourceLocation getId() {
-            ResourceLocation key = MoaRaceRegistry.MOA_RACES.getKey(this);
-            if (key != null) {
-                return key;
-            }
-            ParadiseLost.LOG.error("MoaAPI.MoaRace.getId() called for an unregistered race. Report this to somebody.");
-
-            return ModConstants.id("fallback");
+        public MoaRace(MoaAttributes defaultAffinity, Holder<SpawnStatWeighting> statWeighting, boolean glowing, boolean legendary, ParticleType<?> particles) {
+            this(defaultAffinity, statWeighting, glowing, legendary, particles, Optional.empty());
         }
 
-        public String getTranslationKey() {
-            ResourceLocation id = this.getId();
-            return "moa.race." + id.getNamespace() + "." + id.getPath();
+        public SpawnStatWeighting weighting() {
+            return statWeighting.value();
+        }
+
+        /**
+         * Resolves the entity texture for this race id.
+         * Default: {@code namespace:textures/entity/moa/path.png}
+         */
+        public ResourceLocation textureFor(ResourceLocation raceId) {
+            return texture.orElseGet(() -> ResourceLocation.fromNamespaceAndPath(
+                    raceId.getNamespace(), "textures/entity/moa/" + raceId.getPath() + ".png"));
+        }
+
+        public String translationKey(ResourceLocation raceId) {
+            return "moa.race." + raceId.getNamespace() + "." + raceId.getPath();
         }
     }
 }

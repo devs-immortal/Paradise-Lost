@@ -1,12 +1,14 @@
 package net.id.paradise_lost.item.misc;
 
-import net.id.paradise_lost.api.MoaAPI;
 import net.id.paradise_lost.registry.EntityRegistry;
 import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
+import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -30,7 +32,7 @@ public class MoaEggItem extends Item {
         if (player != null && stack.getComponents().has(ParadiseLostDataComponentTypes.MOA_GENES) && player.isCreative()) {
             MoaEntity moa = EntityRegistry.MOA.get().create(world);
             ParadiseLostDataComponentTypes.MoaGeneComponent geneTag = stack.get(ParadiseLostDataComponentTypes.MOA_GENES);
-            moa.getGenes().fromComponent(geneTag);
+            moa.getGenes().fromComponent(geneTag, world.registryAccess());
             if (geneTag.isBaby()) {
                 moa.setAge(-43200);
             }
@@ -48,9 +50,13 @@ public class MoaEggItem extends Item {
         var genes = stack.getOrDefault(ParadiseLostDataComponentTypes.MOA_GENES, null);
         if (genes != null) {
             ResourceLocation raceId = genes.race();
-            var race = MoaAPI.getRace(raceId);
             if (raceId != null) {
-                tooltip.add(Component.translatable(race.getTranslationKey()).withStyle(race.legendary() ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.DARK_AQUA));
+                var race = context.registries()
+                        .lookup(MoaRaceRegistry.REGISTRY.key())
+                        .flatMap(reg -> reg.get(ResourceKey.create(MoaRaceRegistry.REGISTRY.key(), raceId)))
+                        .map(Holder.Reference::value)
+                        .orElse(MoaRaceRegistry.FALLBACK_VALUE);
+                tooltip.add(Component.translatable(race.translationKey(raceId)).withStyle(race.legendary() ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.DARK_AQUA));
             }
             if (!genes.isBaby()) {
                 tooltip.add(Component.translatable("moa.egg.adult").withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.ITALIC));

@@ -428,7 +428,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
 
     @Override
         protected Component getTypeName() {
-        return Component.translatable(getGenes().getRace().getTranslationKey(), "Moa");
+        return Component.translatable(getGenes().getRaceTranslationKey(), "Moa");
     }
 
     @Override
@@ -763,7 +763,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
             return null;
         }
         var babyGenes = baby.getGenes();
-        babyGenes.fromComponent(eggStack.get(ParadiseLostDataComponentTypes.MOA_GENES));
+        babyGenes.fromComponent(eggStack.get(ParadiseLostDataComponentTypes.MOA_GENES), world.registryAccess());
         baby.syncGenes();
         return baby;
     }

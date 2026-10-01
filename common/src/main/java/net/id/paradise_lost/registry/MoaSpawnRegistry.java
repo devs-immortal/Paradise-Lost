@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.ParadiseLost;
 import net.id.paradise_lost.api.MoaAPI.MoaRace;
-import net.id.paradise_lost.registration.RegistryObject;
 import net.id.paradise_lost.registration.registries.DatapackRegistry;
 import net.id.paradise_lost.world.dimension.ParadiseLostBiomes;
 import net.minecraft.core.Holder;
@@ -97,7 +96,7 @@ public final class MoaSpawnRegistry {
                 weighted(MoaRaceRegistry.MINTGRASS, 30));
 
         context.register(ResourceKey.create(REGISTRY.key(), DEFAULT_ID), races(
-                weighted(MoaRaceRegistry.FALLBACK_MOA, 1)));
+                weighted(MoaRaceRegistry.FALLBACK, 1)));
     }
 
     private static void table(BootstrapContext<SpawnEntry> context, ResourceKey<Biome> biome, WeightedRace... entries) {
@@ -108,11 +107,16 @@ public final class MoaSpawnRegistry {
         return new SpawnEntry(Optional.empty(), List.of(entries));
     }
 
-    private static WeightedRace weighted(RegistryObject<MoaRace, MoaRace> race, int weight) {
-        return new WeightedRace(race.getId(), weight);
+    private static WeightedRace weighted(ResourceKey<MoaRace> race, int weight) {
+        return new WeightedRace(race.location(), weight);
     }
 
     public static MoaRace getMoaFromSpawning(Level world, ResourceKey<Biome> biome, RandomSource random) {
+        ResourceLocation id = getMoaRaceIdFromSpawning(world, biome, random);
+        return MoaRaceRegistry.getOrFallback(world.registryAccess(), id);
+    }
+
+    public static ResourceLocation getMoaRaceIdFromSpawning(Level world, ResourceKey<Biome> biome, RandomSource random) {
         Registry<SpawnEntry> tables = REGISTRY.get(world.registryAccess());
         Holder<Biome> holder = world.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(biome);
 
@@ -132,23 +136,22 @@ public final class MoaSpawnRegistry {
         if (pool.isEmpty()) {
             tables.getOptional(DEFAULT_ID).ifPresent(table -> pool.addAll(table.races()));
         }
-        MoaRace race = pick(pool, random);
-        return race != null ? race : MoaRaceRegistry.FALLBACK_MOA.get();
+        ResourceLocation raceId = pick(world, pool, random);
+        return raceId != null ? raceId : MoaRaceRegistry.FALLBACK_ID;
     }
 
-    private static MoaRace pick(List<WeightedRace> candidates, RandomSource random) {
-        List<WeightedEntry.Wrapper<MoaRace>> weighted = new ArrayList<>(candidates.size());
+    private static ResourceLocation pick(Level world, List<WeightedRace> candidates, RandomSource random) {
+        List<WeightedEntry.Wrapper<ResourceLocation>> weighted = new ArrayList<>(candidates.size());
         for (WeightedRace entry : candidates) {
-            MoaRace race = resolve(entry.race());
-            if (race != null) {
-                weighted.add(WeightedEntry.wrap(race, entry.weight()));
+            if (resolve(world, entry.race()) != null) {
+                weighted.add(WeightedEntry.wrap(entry.race(), entry.weight()));
             }
         }
         return WeightedRandom.getRandomItem(random, weighted).map(WeightedEntry.Wrapper::data).orElse(null);
     }
 
-    private static MoaRace resolve(ResourceLocation raceId) {
-        var race = MoaRaceRegistry.MOA_RACES.getOptional(raceId);
+    private static MoaRace resolve(Level world, ResourceLocation raceId) {
+        var race = MoaRaceRegistry.find(world.registryAccess(), raceId);
         if (race.isEmpty()) {
             if (WARNED_MISSING_RACES.add(raceId)) {
                 ParadiseLost.LOG.error("moa_spawn refers to {} which is not a registered moa race; ignoring it", raceId);

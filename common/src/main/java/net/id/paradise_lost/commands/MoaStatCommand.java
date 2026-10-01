@@ -48,7 +48,7 @@ public class MoaStatCommand {
             if (entity instanceof MoaEntity moa) {
                 MoaGenes genes = moa.getGenes();
                 source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moastat.name", moa.getDisplayName()).withStyle(ChatFormatting.LIGHT_PURPLE), false);
-                source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moastat.race", Component.translatable(genes.getRace().getTranslationKey())).withStyle(ChatFormatting.LIGHT_PURPLE), false);
+                source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moastat.race", Component.translatable(genes.getRaceTranslationKey())).withStyle(ChatFormatting.LIGHT_PURPLE), false);
                 if (attributeId.equals("HUNGER")) {
                     source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moastat.print", Component.translatable("commands.paradise_lost.moastat.hunger"), String.format("%.2f", genes.getHunger())).withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC), false);
                 } else if (attributeId.equals("ALL")) {
@@ -74,7 +74,7 @@ public class MoaStatCommand {
         if (entity instanceof MoaEntity moa) {
             MoaGenes genes = moa.getGenes();
             source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moastat.name", moa.getDisplayName()).withStyle(ChatFormatting.LIGHT_PURPLE), false);
-            source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moastat.race", Component.translatable(genes.getRace().getTranslationKey())).withStyle(ChatFormatting.LIGHT_PURPLE), false);
+            source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moastat.race", Component.translatable(genes.getRaceTranslationKey())).withStyle(ChatFormatting.LIGHT_PURPLE), false);
             if (attributeId.equals("HUNGER")) {
                 genes.setHunger(Math.min(Math.max(value, 100), 0));
                 source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moastat.set", Component.translatable("commands.paradise_lost.moastat.hunger"), String.format("%.2f", genes.getHunger())).withStyle(ChatFormatting.AQUA, ChatFormatting.ITALIC), false);

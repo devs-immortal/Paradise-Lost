@@ -19,6 +19,12 @@ public class CommonDataAttachments {
                     .networkSynchronized(ByteBufCodecs.VAR_INT)
                     .build("minecart_floating_time"));
 
+    public static final CommonDataAttachment<Integer> MINE_CART_FLOAT_INCLINE =
+            register(CommonDataAttachment.create(o -> 0)
+                    .codec(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build("minecart_float_incline"));
+
     public static final CommonDataAttachment<Boolean> FLOATY_ANCHORED =
             register(CommonDataAttachment.create(o -> false)
                     .codec(Codec.BOOL)
@@ -30,6 +36,7 @@ public class CommonDataAttachments {
     }
     public static void init() {
         Objects.requireNonNull(MINE_CART_FLOATING.getName());
+        Objects.requireNonNull(MINE_CART_FLOAT_INCLINE.getName());
         Objects.requireNonNull(FLOATY_ANCHORED.getName());
     }
 
