@@ -74,7 +74,7 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
         return false;
     }
 
-    public DefaultedList<ItemStack> getItems() {
+    public DefaultedList<ItemStack> retrieveItems() {
         return inventory;
     }
 
@@ -85,7 +85,7 @@ public class TreeTapBlockEntity extends LootableContainerBlockEntity implements 
 
     @Override
     public void setStack(int slot, ItemStack stack) {
-        getItems().set(slot, stack);
+        retrieveItems().set(slot, stack);
         if (stack.getCount() > 1) {
             stack.setCount(1);
         }
