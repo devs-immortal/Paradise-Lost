@@ -1,12 +1,6 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:flaxweave_cushion",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:flaxweave_cushion_slab",
-      "required": false
-    }
+    "paradise_lost:flaxweave_cushion",
+    "paradise_lost:flaxweave_cushion_slab"
   ]
 }

@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:liverwort_carpet",
-      "required": false
-    }
+    "paradise_lost:liverwort_carpet"
   ]
 }

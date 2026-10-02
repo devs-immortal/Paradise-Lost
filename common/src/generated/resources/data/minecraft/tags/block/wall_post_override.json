@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:cherine_torch",
-      "required": false
-    }
+    "paradise_lost:cherine_torch"
   ]
 }

@@ -1,28 +1,10 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:aurel_log",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:mottled_aurel_log",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:mottled_aurel_wood",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:aurel_wood",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:stripped_aurel_log",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:stripped_aurel_wood",
-      "required": false
-    }
+    "paradise_lost:aurel_log",
+    "paradise_lost:mottled_aurel_log",
+    "paradise_lost:mottled_aurel_wood",
+    "paradise_lost:aurel_wood",
+    "paradise_lost:stripped_aurel_log",
+    "paradise_lost:stripped_aurel_wood"
   ]
 }

@@ -1,61 +1,19 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:packed_swedroot",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:cherine_campfire",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:aurel_bookshelf",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:blackcurrant_bush",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:incubator",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:food_bowl",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:tree_tap",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:rootcap_block",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:brown_sporecap_block",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:pink_sporecap_block",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:thatch",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:thatch_stairs",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:thatch_slab",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:nest",
-      "required": false
-    },
+    "paradise_lost:packed_swedroot",
+    "paradise_lost:cherine_campfire",
+    "paradise_lost:aurel_bookshelf",
+    "paradise_lost:blackcurrant_bush",
+    "paradise_lost:incubator",
+    "paradise_lost:food_bowl",
+    "paradise_lost:tree_tap",
+    "paradise_lost:rootcap_block",
+    "paradise_lost:brown_sporecap_block",
+    "paradise_lost:pink_sporecap_block",
+    "paradise_lost:thatch",
+    "paradise_lost:thatch_stairs",
+    "paradise_lost:thatch_slab",
+    "paradise_lost:nest",
     "#paradise_lost:hollow_logs"
   ]
 }

@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:levita_rail",
-      "required": false
-    }
+    "paradise_lost:levita_rail"
   ]
 }
