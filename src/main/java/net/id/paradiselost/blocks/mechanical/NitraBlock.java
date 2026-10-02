@@ -10,22 +10,17 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.block.WireOrientation;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.explosion.Explosion;
-import net.minecraft.world.explosion.ExplosionImpl;
 import org.jetbrains.annotations.Nullable;
 
 public class NitraBlock extends Block {
@@ -62,8 +57,6 @@ public class NitraBlock extends Block {
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         ignite(world, pos, BASE_EXPLOSIVE_POWER, null);
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
-        world.spawnParticles(ParticleTypes.EXPLOSION_EMITTER, pos.getX(), pos.getY(), pos.getZ(), 1, 0.0, 0.0, 0.0, 0.0);
-        world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F, random.nextLong());
     }
 
     public static void ignite(World world, BlockPos pos, float power) {
@@ -72,12 +65,8 @@ public class NitraBlock extends Block {
 
     private static void ignite(World world, BlockPos pos, float power, @Nullable LivingEntity igniter) {
         if (world instanceof ServerWorld serverWorld) {
-            ExplosionImpl explosion = new ExplosionImpl(serverWorld, igniter, null, null, new Vec3d(pos.getX(), pos.getY() + 0.5D, pos.getZ()), power, false, Explosion.DestructionType.DESTROY);
-            explosion.explode();
+            serverWorld.createExplosion(igniter, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, World.ExplosionSourceType.TNT);
             serverWorld.emitGameEvent(igniter, GameEvent.PRIME_FUSE, pos);
-        } else {
-            world.playSound(pos.getX(), pos.getY() + 0.5D, pos.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.BLOCKS, 4.0F, (1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F, false);
-            world.addParticle(power < 2.0F ? ParticleTypes.EXPLOSION : ParticleTypes.EXPLOSION_EMITTER, pos.getX(), pos.getY() + 0.5D, pos.getZ(), 1.0, 0.0, 0.0);
         }
     }
 
