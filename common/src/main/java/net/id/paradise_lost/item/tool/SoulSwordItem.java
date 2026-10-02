@@ -40,10 +40,11 @@ public class SoulSwordItem extends SwordItem {
     @Override
     public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (target.isDeadOrDying()) {
-            List<String> currentSouls = stack.getComponents().has(ParadiseLostDataComponentTypes.COLLECTED_SOULS)
-                    ? stack.get(ParadiseLostDataComponentTypes.COLLECTED_SOULS).soulIds()
-                    : new LinkedList<>();
-            var newSouls = new LinkedList<>(currentSouls);
+            var current = stack.getOrDefault(
+                    ParadiseLostDataComponentTypes.COLLECTED_SOULS,
+                    new ParadiseLostDataComponentTypes.CollectedSoulsComponent(List.of())
+            );
+            var newSouls = new LinkedList<>(current.soulIds());
             boolean gainedSoul = false;
 
             var entityName = target.getType().getDescriptionId();
@@ -59,7 +60,6 @@ public class SoulSwordItem extends SwordItem {
             }
 
             if (gainedSoul) {
-                stack.remove(ParadiseLostDataComponentTypes.COLLECTED_SOULS);
                 stack.set(
                         ParadiseLostDataComponentTypes.COLLECTED_SOULS,
                         new ParadiseLostDataComponentTypes.CollectedSoulsComponent(newSouls)
@@ -79,15 +79,19 @@ public class SoulSwordItem extends SwordItem {
         if (soulCount == 1) {
             tooltip.addAll(ImmutableList.of(Component.translatable("info.paradise_lost.soul_blade.soul_count_1").withStyle(ChatFormatting.LIGHT_PURPLE)));
         } else {
-            tooltip.addAll(ImmutableList.of(Component.translatable("info.paradise_lost.soul_blade.soul_count_n", getSoulCount(stack)).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            tooltip.addAll(ImmutableList.of(Component.translatable("info.paradise_lost.soul_blade.soul_count_n", soulCount).withStyle(ChatFormatting.LIGHT_PURPLE)));
         }
         super.appendHoverText(stack, context, tooltip, type);
     }
 
     private int getSoulCount(ItemStack itemStack) {
-        return (itemStack != null && itemStack.getComponents().has(ParadiseLostDataComponentTypes.COLLECTED_SOULS))
-                ? itemStack.get(ParadiseLostDataComponentTypes.COLLECTED_SOULS).soulCount()
-                : 0;
+        if (itemStack == null) {
+            return 0;
+        }
+        return itemStack.getOrDefault(
+                ParadiseLostDataComponentTypes.COLLECTED_SOULS,
+                new ParadiseLostDataComponentTypes.CollectedSoulsComponent(List.of())
+        ).soulCount();
     }
 
     private void playCollectEffects(Level world, BlockPos pos) {
