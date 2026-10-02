@@ -77,7 +77,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
                 velocityModified = true;
                 addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 120, 50));
                 addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 320, 1));
-            } else if (!((ServerWorld) getWorld()).getGameRules().getBoolean(PARADISE_VOID_KILLS) && getY() < getWorld().getBottomY() - 80) {
+            } else if (((ServerWorld) getWorld()).getGameRules().getBoolean(PARADISE_VOID_KILLS)) {
+                return;
+            } else if (getY() < getWorld().getBottomY() - 80) {
                 // fall out of world
                 setParadiseLostFallen(true);
                 ServerWorld overworld = getServer().getWorld(World.OVERWORLD);
