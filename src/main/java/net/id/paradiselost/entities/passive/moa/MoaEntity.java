@@ -35,6 +35,7 @@ import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.inventory.SimpleInventory;
@@ -698,7 +699,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         compound.putInt("airTicks", dataTracker.get(AIR_TICKS));
         compound.put("chest", dataTracker.get(CHEST).toNbtAllowEmpty(this.getRegistryManager()));
         if (inventory != DUMMY) {
-            compound.put("chestContents", inventory.toNbtList(this.getRegistryManager()));
+            Inventories.writeNbt(compound, inventory.getHeldStacks(), this.getRegistryManager());
         }
     }
 
@@ -709,7 +710,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         dataTracker.set(CHEST, ItemStack.fromNbtOrEmpty(this.getRegistryManager(), compound.getCompound("chest")));
         refreshChest(false);
         if (inventory != DUMMY) {
-            inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE), this.getRegistryManager());
+            if (compound.contains("Items")) {
+                Inventories.readNbt(compound, inventory.getHeldStacks(), this.getRegistryManager());
+            } else {
+                // older saves stored the chest without slot indexes
+                inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE), this.getRegistryManager());
+            }
         }
 
         setMovementSpeed(genes.getAttribute(MoaAttributes.GROUND_SPEED));
