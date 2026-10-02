@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 import java.util.Map;
@@ -139,26 +140,49 @@ public final class MinecartFloating {
     }
 
     public static void applyFloatingRotation(AbstractMinecart cart) {
+        Vec3 tangent = getMotionAlignedTangent(cart);
+        if (tangent == null) {
+            cart.setXRot(0.0F);
+            cart.xRotO = 0.0F;
+            return;
+        }
+        float pitch = getIncline(cart) * 45.0F;
+        cart.setXRot(pitch);
+        cart.xRotO = pitch;
+    }
+
+    public static boolean shouldUseFloatingRenderRotation(AbstractMinecart cart) {
+        return isFloating(cart) && !isCartOnRail(cart) && getRailShape(cart) != null;
+    }
+
+    @Nullable
+    public static Float getFloatingRenderYaw(AbstractMinecart cart) {
+        Vec3 tangent = getMotionAlignedTangent(cart);
+        if (tangent == null) {
+            return null;
+        }
+        return (float) (Math.atan2(tangent.z, tangent.x) * (180.0D / Math.PI));
+    }
+
+    @Nullable
+    public static Vec3 getMotionAlignedTangent(AbstractMinecart cart) {
         RailShape shape = getRailShape(cart);
         Pair<Vec3i, Vec3i> exits = shape == null ? null : RAIL_EXITS.get(shape);
         if (exits == null || !shape.isAscending()) {
-            cart.setXRot(0.0F);
-            return;
+            return null;
         }
         Vec3 first = Vec3.atLowerCornerOf(exits.getFirst());
         Vec3 second = Vec3.atLowerCornerOf(exits.getSecond());
         Vec3 tangent = first.subtract(second);
         if (tangent.lengthSqr() == 0.0D) {
-            cart.setXRot(0.0F);
-            return;
+            return null;
         }
         tangent = tangent.normalize();
         Vec3 motion = cart.getDeltaMovement();
         if (tangent.x * motion.x + tangent.z * motion.z < 0.0D) {
             tangent = tangent.scale(-1.0D);
         }
-        cart.setYRot((float) (Math.atan2(tangent.z, tangent.x) * (180.0D / Math.PI)));
-        cart.setXRot((float) (Math.atan(tangent.y) * 73.0D));
+        return tangent;
     }
 
     public static boolean isCartOnRail(AbstractMinecart cart) {
