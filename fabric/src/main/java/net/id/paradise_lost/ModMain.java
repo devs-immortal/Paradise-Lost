@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.util.TriState;
 import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.commands.ParadiseLostCommands;
+import net.id.paradise_lost.data.FabricDataEntries;
 import net.id.paradise_lost.entity.ModEntities;
 import net.id.paradise_lost.networking.packet.PacketHandler;
 import net.id.paradise_lost.platform.Services;
@@ -21,6 +22,7 @@ public class ModMain implements ModInitializer {
     public void onInitialize() {
         Services.PLATFORM.getPlatformName();
         ModCommon.init();
+        FabricDataEntries.apply();
 
         ParadiseLostAliasFix.init();
         CommonDataAttachments.init();

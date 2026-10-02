@@ -3,18 +3,14 @@ package net.id.paradise_lost.services;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.id.paradise_lost.platform.services.IRegistrationHelper;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 public class FabricRegistrationHelper implements IRegistrationHelper {
@@ -22,13 +18,6 @@ public class FabricRegistrationHelper implements IRegistrationHelper {
     public void setFlammable(Object block, int encouragement, int flammability) {
         if (block instanceof Block b) {
             FlammableBlockRegistry.getDefaultInstance().add(b, encouragement, flammability);
-        }
-    }
-
-    @Override
-    public void registerStrippable(Object log, Object stripped) {
-        if (log instanceof Block logBlock && stripped instanceof Block strippedBlock) {
-            StrippableBlockRegistry.register(logBlock, strippedBlock);
         }
     }
 
@@ -44,16 +33,6 @@ public class FabricRegistrationHelper implements IRegistrationHelper {
         if (block instanceof Block b && pathResult instanceof Block result) {
             FlattenableBlockRegistry.register(b, result.defaultBlockState());
         }
-    }
-
-    @Override
-    public void registerFuel(ItemLike item, int burnTime) {
-        FuelRegistry.INSTANCE.add(item, burnTime);
-    }
-
-    @Override
-    public void registerCompostable(ItemLike item, float chance) {
-        CompostingChanceRegistry.INSTANCE.add(item, chance);
     }
 
     @Override

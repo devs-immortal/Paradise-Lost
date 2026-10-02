@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.services.NeoForgeRegistrationHelper;
+import net.id.paradise_lost.data.ParadiseLostDataEntries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.DataMapProvider;
@@ -17,7 +17,7 @@ public class ParadiseLostStrippablesProvider extends DataMapProvider {
     @Override
     protected void gather(HolderLookup.Provider provider) {
         var builder = builder(NeoForgeDataMaps.STRIPPABLES);
-        NeoForgeRegistrationHelper.getStrippables().forEach((log, stripped) ->
+        ParadiseLostDataEntries.strippables().forEach((log, stripped) ->
                 builder.add(log.builtInRegistryHolder(), new Strippable(stripped), false));
     }
 
