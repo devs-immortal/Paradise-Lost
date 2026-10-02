@@ -23,6 +23,7 @@ public class ParadiseLostItemTags {
     public static final TagKey<Item> SACRED_WEAPONS = register("sacred_weapons");
     public static final TagKey<Item> IGNITING_TOOLS = register("igniting_tools");
     public static final TagKey<Item> CALCITE_DECORATED_POT_INGREDIENTS = register("calcite_decorated_pot_ingredients");
+    public static final TagKey<Item> RENDING_ENCHANTABLE = register("enchantable/rending");
 
     private static TagKey<Item> register(String id) {
         return TagKey.create(Registries.ITEM, ModConstants.id(id));

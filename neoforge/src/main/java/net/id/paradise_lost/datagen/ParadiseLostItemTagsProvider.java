@@ -1,6 +1,7 @@
 package net.id.paradise_lost.datagen;
 
 import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.tag.ParadiseLostItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -115,6 +116,8 @@ public class ParadiseLostItemTagsProvider extends ItemTagsProvider {
         entry(ParadiseLostItemTags.PARADISE_PLANKS, "aurel_planks", "mother_aurel_planks", "menth_planks", "wisteria_planks");
         entry(ParadiseLostItemTags.RIGHTEOUS_WEAPONS, "minecraft:golden_sword", "minecraft:netherite_sword", "glazed_gold_sword");
         this.tag(ParadiseLostItemTags.SACRED_WEAPONS);
+        tag(ParadiseLostItemTags.RENDING_ENCHANTABLE)
+                .add(ItemRegistry.SOUL_BLADE.get());
         entry(ParadiseLostItemTags.WISTERIA_LOGS, "wisteria_log", "wisteria_wood", "stripped_wisteria_log", "stripped_wisteria_wood");
     }
 

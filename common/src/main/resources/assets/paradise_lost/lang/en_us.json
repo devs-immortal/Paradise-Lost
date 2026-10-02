@@ -315,6 +315,8 @@
   
   "item.paradise_lost.soul_blade": "Bloomed Blade",
 
+  "enchantment.paradise_lost.rending": "Rending",
+
   "item.paradise_lost.olvite_spyglass": "Olvite Spyglass",
   "item.paradise_lost.totem_of_levitation": "Totem Of Levitation",
 
@@ -542,6 +544,7 @@
   "tag.item.paradise_lost.paradise_planks": "Paradise Wooden Planks",
   "tag.item.paradise_lost.righteous_weapons": "Righteous Weapons",
   "tag.item.paradise_lost.sacred_weapons": "Sacred Weapons",
+  "tag.item.paradise_lost.enchantable.rending": "Rending Enchantable",
   "tag.item.paradise_lost.wisteria_logs": "Wisteria Logs",
 
 

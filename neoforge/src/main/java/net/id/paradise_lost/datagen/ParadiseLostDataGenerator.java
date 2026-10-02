@@ -1,8 +1,6 @@
 package net.id.paradise_lost.datagen;
 
 import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.registry.MoaBreedingRegistry;
-import net.id.paradise_lost.registry.MoaSpawnRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -30,6 +28,9 @@ public final class ParadiseLostDataGenerator {
 
         CompletableFuture<HolderLookup.Provider> lookup = event.getLookupProvider();
 
+        var withDamage = generator.addProvider(event.includeServer(), new ParadiseLostDamageTypesProvider(packOutput, lookup)).getRegistryProvider();
+        var withEnchantments = generator.addProvider(event.includeServer(), new ParadiseLostEnchantmentProvider(packOutput, withDamage)).getRegistryProvider();
+
         generator.addProvider(event.includeServer(), new LootTableProvider(
                 packOutput,
                 Set.of(),
@@ -42,32 +43,30 @@ public final class ParadiseLostDataGenerator {
                         new LootTableProvider.SubProviderEntry(ParadiseLostGameplayLootProvider::new, LootContextParamSets.BLOCK),
                         new LootTableProvider.SubProviderEntry(ParadiseLostPopomLootProvider::new, LootContextParamSets.ENTITY)
                 ),
-                lookup
+                withEnchantments
         ));
-        generator.addProvider(event.includeServer(), new ParadiseLostCompostablesProvider(packOutput, lookup));
-        generator.addProvider(event.includeServer(), new ParadiseLostFuelsProvider(packOutput, lookup));
-        generator.addProvider(event.includeServer(), new ParadiseLostStrippablesProvider(packOutput, lookup));
-        generator.addProvider(event.includeServer(), new ParadiseLostMoaDatapackProvider(packOutput, lookup));
-//        generator.addProvider(event.includeServer(), MoaSpawnRegistry.REGISTRY.bootstrapDataGenerator(lookup).create(packOutput));
-//        generator.addProvider(event.includeServer(), MoaBreedingRegistry.REGISTRY.bootstrapDataGenerator(lookup).create(packOutput));
+        generator.addProvider(event.includeServer(), new ParadiseLostCompostablesProvider(packOutput, withEnchantments));
+        generator.addProvider(event.includeServer(), new ParadiseLostFuelsProvider(packOutput, withEnchantments));
+        generator.addProvider(event.includeServer(), new ParadiseLostStrippablesProvider(packOutput, withEnchantments));
+        generator.addProvider(event.includeServer(), new ParadiseLostMoaDatapackProvider(packOutput, withEnchantments));
 
-        BlockTagsProvider blockTags = new ParadiseLostBlockTagsProvider(packOutput, lookup, existing);
+        BlockTagsProvider blockTags = new ParadiseLostBlockTagsProvider(packOutput, withEnchantments, existing);
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ParadiseLostItemTagsProvider(packOutput, lookup, blockTags.contentsGetter(), existing));
-        generator.addProvider(event.includeServer(), new ParadiseLostBiomeTagsProvider(packOutput, lookup, existing));
-        generator.addProvider(event.includeServer(), new ParadiseLostEntityTypeTagsProvider(packOutput, lookup));
-        var new_lookup = generator.addProvider(event.includeServer(), new ParadiseLostDamageTypesProvider(packOutput, lookup)).getRegistryProvider();
-        generator.addProvider(event.includeServer(), new ParadiseLostDamageTypeTagsProvider(packOutput, new_lookup, existing));
-        generator.addProvider(event.includeServer(), new ParadiseLostStructureTagsProvider(packOutput, new_lookup, existing));
+        generator.addProvider(event.includeServer(), new ParadiseLostItemTagsProvider(packOutput, withEnchantments, blockTags.contentsGetter(), existing));
+        generator.addProvider(event.includeServer(), new ParadiseLostBiomeTagsProvider(packOutput, withEnchantments, existing));
+        generator.addProvider(event.includeServer(), new ParadiseLostEntityTypeTagsProvider(packOutput, withEnchantments));
+        generator.addProvider(event.includeServer(), new ParadiseLostDamageTypeTagsProvider(packOutput, withEnchantments, existing));
+        generator.addProvider(event.includeServer(), new ParadiseLostEnchantmentTagsProvider(packOutput, withEnchantments, existing));
+        generator.addProvider(event.includeServer(), new ParadiseLostStructureTagsProvider(packOutput, withEnchantments, existing));
 
-        generator.addProvider(event.includeServer(), new ParadiseLostRecipeProvider(packOutput, new_lookup));
-        generator.addProvider(event.includeServer(), new ParadiseLostAdvancementProvider(packOutput, new_lookup, existing));
+        generator.addProvider(event.includeServer(), new ParadiseLostRecipeProvider(packOutput, withEnchantments));
+        generator.addProvider(event.includeServer(), new ParadiseLostAdvancementProvider(packOutput, withEnchantments, existing));
 
         generator.addProvider(event.includeClient(), new ParadiseLostStaticModelsProvider(packOutput, existing));
         generator.addProvider(event.includeClient(), new ParadiseLostBlockStateProvider(packOutput, existing));
         generator.addProvider(event.includeClient(), new ParadiseLostItemModelProvider(packOutput, existing));
         generator.addProvider(event.includeClient(), new ParadiseLostSoundDefinitionsProvider(packOutput, existing));
         generator.addProvider(event.includeClient(), new ParadiseLostParticleDescriptionProvider(packOutput, existing));
-        generator.addProvider(event.includeServer(), new ParadiseLostWorldGenProvider(packOutput, new_lookup));
+        generator.addProvider(event.includeServer(), new ParadiseLostWorldGenProvider(packOutput, withEnchantments));
     }
 }

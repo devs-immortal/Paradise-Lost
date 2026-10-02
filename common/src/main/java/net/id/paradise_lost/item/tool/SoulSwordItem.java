@@ -1,6 +1,7 @@
 package net.id.paradise_lost.item.tool;
 
 import com.google.common.collect.ImmutableList;
+import net.id.paradise_lost.enchantment.ParadiseLostEnchantmentHelper;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.util.ParadiseLostCriteria;
 import net.id.paradise_lost.util.ParadiseLostSoundEvents;
@@ -18,10 +19,13 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class SoulSwordItem extends SwordItem {
+    private static final String RENDING_BONUS_SOUL_PREFIX = "paradise_lost:rending_soul/";
+
     public SoulSwordItem(Tier toolMaterial, Properties settings) {
         super(toolMaterial, settings);
     }
@@ -36,13 +40,30 @@ public class SoulSwordItem extends SwordItem {
     @Override
     public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (target.isDeadOrDying()) {
-            List<String> currentSouls = stack.getComponents().has(ParadiseLostDataComponentTypes.COLLECTED_SOULS) ? stack.get(ParadiseLostDataComponentTypes.COLLECTED_SOULS).soulIds() : new LinkedList<>();
+            List<String> currentSouls = stack.getComponents().has(ParadiseLostDataComponentTypes.COLLECTED_SOULS)
+                    ? stack.get(ParadiseLostDataComponentTypes.COLLECTED_SOULS).soulIds()
+                    : new LinkedList<>();
+            var newSouls = new LinkedList<>(currentSouls);
+            boolean gainedSoul = false;
+
             var entityName = target.getType().getDescriptionId();
-            if (!currentSouls.contains(entityName)) {
-                var newSouls = new LinkedList<>(currentSouls);
+            if (!newSouls.contains(entityName)) {
                 newSouls.add(entityName);
+                gainedSoul = true;
+            }
+
+            if (!attacker.level().isClientSide()
+                    && ParadiseLostEnchantmentHelper.rollExtraSoul(stack, attacker.level(), attacker.getRandom())) {
+                newSouls.add(RENDING_BONUS_SOUL_PREFIX + newSouls.size());
+                gainedSoul = true;
+            }
+
+            if (gainedSoul) {
                 stack.remove(ParadiseLostDataComponentTypes.COLLECTED_SOULS);
-                stack.set(ParadiseLostDataComponentTypes.COLLECTED_SOULS, new ParadiseLostDataComponentTypes.CollectedSoulsComponent(newSouls));
+                stack.set(
+                        ParadiseLostDataComponentTypes.COLLECTED_SOULS,
+                        new ParadiseLostDataComponentTypes.CollectedSoulsComponent(newSouls)
+                );
                 playCollectEffects(attacker.level(), attacker.blockPosition());
                 if (attacker instanceof ServerPlayer serverPlayer && newSouls.size() >= 50) {
                     ParadiseLostCriteria.BLOOMED_BLADE_GOAL.trigger(serverPlayer, attacker.blockPosition(), stack);
@@ -53,7 +74,7 @@ public class SoulSwordItem extends SwordItem {
     }
 
     @Override
-        public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         var soulCount = getSoulCount(stack);
         if (soulCount == 1) {
             tooltip.addAll(ImmutableList.of(Component.translatable("info.paradise_lost.soul_blade.soul_count_1").withStyle(ChatFormatting.LIGHT_PURPLE)));
@@ -64,11 +85,12 @@ public class SoulSwordItem extends SwordItem {
     }
 
     private int getSoulCount(ItemStack itemStack) {
-        return (itemStack != null && itemStack.getComponents().has(ParadiseLostDataComponentTypes.COLLECTED_SOULS)) ? itemStack.get(ParadiseLostDataComponentTypes.COLLECTED_SOULS).soulCount() : 0;
+        return (itemStack != null && itemStack.getComponents().has(ParadiseLostDataComponentTypes.COLLECTED_SOULS))
+                ? itemStack.get(ParadiseLostDataComponentTypes.COLLECTED_SOULS).soulCount()
+                : 0;
     }
 
     private void playCollectEffects(Level world, BlockPos pos) {
         world.playSound(null, pos, ParadiseLostSoundEvents.SOUL_BLADE_HARVEST, SoundSource.PLAYERS, 1.5F, 0.0F);
     }
-
 }
