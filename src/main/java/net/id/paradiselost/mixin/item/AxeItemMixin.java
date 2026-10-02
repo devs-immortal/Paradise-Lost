@@ -5,9 +5,9 @@ import net.id.paradiselost.loot.ParadiseLostLootTables;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.*;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +31,7 @@ public class AxeItemMixin {
         if (world.getBlockState(blockPos).getBlock() == ParadiseLostBlocks.MOTHER_AUREL_WOODSTUFF.log() && !world.isClient) {
             ServerWorld server = (ServerWorld) world;
             LootTable supplier = server.getServer().getReloadableRegistries().getLootTable(ParadiseLostLootTables.MOTHER_AUREL_STRIPPING);
-            List<ItemStack> items = supplier.generateLoot(new LootContextParameterSet.Builder(server)
+            List<ItemStack> items = supplier.generateLoot(new LootWorldContext.Builder(server)
                     .add(LootContextParameters.BLOCK_STATE, world.getBlockState(blockPos))
                     .add(LootContextParameters.ORIGIN, Vec3d.of(blockPos))
                     .add(LootContextParameters.TOOL, context.getStack())

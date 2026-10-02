@@ -63,7 +63,7 @@ public class BloodstoneCapturedData {
                 entity.getName(),
                 String.format("%.1f", entity.getHealth()) + "/" + String.format("%.1f", entity.getMaxHealth()),
                 "" + entity.getArmor(),
-                "" + MathHelper.floor(entity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)),
+                "" + MathHelper.floor(entity.getAttributeValue(EntityAttributes.ARMOR_TOUGHNESS)),
                 owner
         );
 
@@ -84,7 +84,7 @@ public class BloodstoneCapturedData {
         };
     }
 
-    public static record ConditionData(String id, float severity) {
+    public record ConditionData(String id, float severity) {
         public static ConditionData fromNBT(NbtCompound nbt) {
             return new ConditionData(nbt.getString("id"), nbt.getFloat("severity"));
         }

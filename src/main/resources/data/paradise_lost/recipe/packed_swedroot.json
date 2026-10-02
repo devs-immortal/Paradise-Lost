@@ -5,9 +5,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:swedroot"
-    }
+    "#": "paradise_lost:swedroot"
   },
   "result": {
     "id": "paradise_lost:packed_swedroot",

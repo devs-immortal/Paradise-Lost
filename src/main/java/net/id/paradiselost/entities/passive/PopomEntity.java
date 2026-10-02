@@ -8,6 +8,7 @@ import net.id.paradiselost.util.ParadiseLostSoundEvents;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
@@ -26,9 +27,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootTable;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -39,6 +38,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 public class PopomEntity extends AnimalEntity {
 
     private static final TrackedData<Integer> FUR_SIZE;
@@ -46,6 +47,7 @@ public class PopomEntity extends AnimalEntity {
 
     public PopomEntity(EntityType<? extends PopomEntity> entityType, World world) {
         super(entityType, world);
+        this.updateLootTable();
     }
 
     protected void initDataTracker(DataTracker.Builder builder) {
@@ -90,9 +92,9 @@ public class PopomEntity extends AnimalEntity {
 
     // Define attributes for Popom
     public static DefaultAttributeContainer.Builder createPopomAttributes() {
-        return createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
+        return createAnimalAttributes()
+                .add(EntityAttributes.MAX_HEALTH, 10.0D)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.25D);
     }
 
     @Override
@@ -100,12 +102,12 @@ public class PopomEntity extends AnimalEntity {
         ItemStack itemStack = player.getStackInHand(hand);
         if (itemStack.isEmpty()) {
             int furSize = this.getFurSize();
-            if (!this.getWorld().isClient && furSize > 1) {
+            if (this.getWorld() instanceof ServerWorld serverWorld && furSize > 1) {
                 this.getWorld().playSoundFromEntity(null, this, ParadiseLostSoundEvents.ENTITY_POPOM_HARVEST, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 int i = furSize == 2 ? 1 + this.random.nextInt(2) : 2 + this.random.nextInt(3);
 
                 for (int j = 0; j < i; j++) {
-                    ItemEntity itemEntity = this.dropItem(ParadiseLostItems.POPOM_JELLY);
+                    ItemEntity itemEntity = this.dropItem(serverWorld, ParadiseLostItems.POPOM_JELLY);
                     if (itemEntity != null) {
                         itemEntity.setVelocity(
                                 itemEntity.getVelocity()
@@ -128,7 +130,7 @@ public class PopomEntity extends AnimalEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ParadiseLostEntityTypes.POPOM.create(world);
+        return ParadiseLostEntityTypes.POPOM.create(world, SpawnReason.BREEDING);
     }
 
     @Override
@@ -168,7 +170,7 @@ public class PopomEntity extends AnimalEntity {
 
     public float getHeadAngle(float delta) {
         if (this.eatingTimer > 4 && this.eatingTimer <= 36) {
-            float f = ((float) (this.eatingTimer - 4) - delta) / 32.0F;
+            float f = ((this.eatingTimer - 4) - delta) / 32.0F;
             return (float) (Math.PI / 5) + 0.21991149F * MathHelper.sin(f * 28.7F);
         } else {
             return this.eatingTimer > 0 ? (float) (Math.PI / 5) : this.getPitch() * (float) (Math.PI / 180.0);
@@ -181,19 +183,21 @@ public class PopomEntity extends AnimalEntity {
 
     public void setFurSize(int size) {
         this.dataTracker.set(FUR_SIZE, size);
+        this.updateLootTable();
     }
 
     public void eat() {
         this.setFurSize(getFurSize() + 1);
     }
 
-    @Override
-    public RegistryKey<LootTable> getLootTableId() {
-        return switch (this.getFurSize()) {
+    // MobEntity#getLootTableKey is final in 1.21.2, so the per-fur-size loot table is applied
+    // through the (access-widened) MobEntity#lootTable override field instead.
+    private void updateLootTable() {
+        this.lootTable = Optional.of(switch (this.getFurSize()) {
             case 2 -> ParadiseLostLootTables.POPOM_JELLY_LEVEL_2;
             case 3 -> ParadiseLostLootTables.POPOM_JELLY_LEVEL_3;
             default -> ParadiseLostLootTables.POPOM_JELLY_LEVEL_0;
-        };
+        });
     }
 
     static {

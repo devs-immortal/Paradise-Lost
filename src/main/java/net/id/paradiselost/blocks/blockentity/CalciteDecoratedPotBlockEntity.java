@@ -46,7 +46,7 @@ public class CalciteDecoratedPotBlockEntity extends BlockEntity implements Loota
         super.writeNbt(nbt, registryLookup);
         this.sherds.toNbt(nbt);
         if (!this.writeLootTable(nbt) && !this.stack.isEmpty()) {
-            nbt.put("item", this.stack.encode(registryLookup));
+            nbt.put("item", this.stack.toNbt(registryLookup));
         }
     }
 

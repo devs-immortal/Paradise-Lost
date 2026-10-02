@@ -60,7 +60,7 @@ public abstract class SurfaceBuilderMixin {
             @Override
             public void setState(int y, BlockState state) {
                 HeightLimitView heightLimitView = chunk.getHeightLimitView();
-                if (y >= heightLimitView.getBottomY() && y < heightLimitView.getTopY()) {
+                if (y >= heightLimitView.getBottomY() && y <= heightLimitView.getTopYInclusive()) {
                     chunk.setBlockState(mutable.setY(y), state, false);
                     if (!state.getFluidState().isEmpty()) {
                         chunk.markBlockForPostProcessing(mutable);

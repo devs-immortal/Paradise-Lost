@@ -5,10 +5,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 
 @Environment(EnvType.CLIENT)
-public class OrnateOlviteArmorModel extends BipedEntityModel<LivingEntity> {
+public class OrnateOlviteArmorModel extends BipedEntityModel<BipedEntityRenderState> {
 
     public OrnateOlviteArmorModel(ModelPart root) {
         super(root);

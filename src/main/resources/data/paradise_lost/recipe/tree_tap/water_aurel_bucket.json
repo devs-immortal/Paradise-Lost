@@ -1,8 +1,6 @@
 {
   "type": "paradise_lost:tree_tap",
-  "ingredient": {
-    "item": "paradise_lost:aurel_bucket"
-  },
+  "ingredient": "paradise_lost:aurel_bucket",
   "tapped_block": "paradise_lost:wisteria_log",
   "result_block": "paradise_lost:wisteria_log",
   "result": {

@@ -11,12 +11,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -51,22 +50,22 @@ public abstract class FlowerPotBlockMixin extends Block {
     }
 
     @Inject(method = "onUseWithItem", at = @At(value = "HEAD"), cancellable = true)
-    public void onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ItemActionResult> cir) {
+    public void onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (state.isOf(ParadiseLostBlocks.CALCITE_FLOWER_POT)) {
             BlockState blockState = (stack.getItem() instanceof BlockItem blockItem
                     ? CONTENT_TO_POTTED.getOrDefault(blockItem.getBlock(), Blocks.AIR)
                     : Blocks.AIR)
                     .getDefaultState();
             if (blockState.isAir()) {
-                cir.setReturnValue(ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
+                cir.setReturnValue(ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION);
             } else if (!this.isEmpty()) {
-                cir.setReturnValue(ItemActionResult.CONSUME);
+                cir.setReturnValue(ActionResult.CONSUME);
             } else {
                 world.setBlockState(pos, blockState.with(CalciteFlowerPotBlock.IS_CALCITE, true), Block.NOTIFY_ALL);
                 world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                 player.incrementStat(Stats.POT_FLOWER);
                 stack.decrementUnlessCreative(1, player);
-                cir.setReturnValue(ItemActionResult.success(world.isClient));
+                cir.setReturnValue(world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER);
             }
             cir.cancel();
         }
@@ -80,7 +79,7 @@ public abstract class FlowerPotBlockMixin extends Block {
     }
 
     @Override
-    protected List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+    protected List<ItemStack> getDroppedStacks(BlockState state, LootWorldContext.Builder builder) {
         var drops = super.getDroppedStacks(state, builder);
         if (state.get(CalciteFlowerPotBlock.IS_CALCITE)) {
             return drops.stream().map(itemStack -> {

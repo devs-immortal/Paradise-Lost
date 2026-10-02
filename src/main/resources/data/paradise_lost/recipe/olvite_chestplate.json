@@ -6,9 +6,7 @@
     "XXX"
   ],
   "key": {
-    "X": {
-      "item": "paradise_lost:olvite"
-    }
+    "X": "paradise_lost:olvite"
   },
   "result": {
     "id": "paradise_lost:olvite_chestplate"

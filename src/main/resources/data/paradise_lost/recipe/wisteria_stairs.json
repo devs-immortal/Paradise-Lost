@@ -7,9 +7,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:wisteria_planks"
-    }
+    "#": "paradise_lost:wisteria_planks"
   },
   "result": {
     "id": "paradise_lost:wisteria_stairs",

@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:drigean"
-    }
+    "paradise_lost:drigean"
   ],
   "result": {
     "id": "minecraft:orange_dye"

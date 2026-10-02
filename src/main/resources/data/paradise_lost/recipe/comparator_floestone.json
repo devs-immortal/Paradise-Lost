@@ -1,15 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "#": {
-      "item": "minecraft:redstone_torch"
-    },
-    "I": {
-      "item": "paradise_lost:floestone"
-    },
-    "X": {
-      "item": "minecraft:quartz"
-    }
+    "#": "minecraft:redstone_torch",
+    "I": "paradise_lost:floestone",
+    "X": "minecraft:quartz"
   },
   "pattern": [
     " # ",

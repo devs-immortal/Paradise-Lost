@@ -7,8 +7,8 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -16,7 +16,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -38,10 +37,10 @@ public class CalciteDecoratedPotBlock extends DecoratedPotBlock {
     }
 
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.getBlockEntity(pos) instanceof CalciteDecoratedPotBlockEntity decoratedPotBlockEntity) {
             if (world.isClient) {
-                return ItemActionResult.CONSUME;
+                return ActionResult.CONSUME;
             } else {
                 ItemStack itemStack = decoratedPotBlockEntity.getStack();
                 if (!stack.isEmpty() && (itemStack.isEmpty() || ItemStack.areItemsAndComponentsEqual(itemStack, stack) && itemStack.getCount() < itemStack.getMaxCount())) {
@@ -64,13 +63,13 @@ public class CalciteDecoratedPotBlock extends DecoratedPotBlock {
 
                     decoratedPotBlockEntity.markDirty();
                     world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                    return ItemActionResult.SUCCESS;
+                    return ActionResult.SUCCESS;
                 } else {
-                    return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                    return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
                 }
             }
         } else {
-            return ItemActionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+            return ActionResult.PASS;
         }
     }
 
@@ -87,11 +86,11 @@ public class CalciteDecoratedPotBlock extends DecoratedPotBlock {
     }
 
     @Override
-    protected List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+    protected List<ItemStack> getDroppedStacks(BlockState state, LootWorldContext.Builder builder) {
         BlockEntity blockEntity = builder.getOptional(LootContextParameters.BLOCK_ENTITY);
         if (blockEntity instanceof CalciteDecoratedPotBlockEntity decoratedPotBlockEntity) {
             builder.addDynamicDrop(SHERDS_DYNAMIC_DROP_ID, lootConsumer -> {
-                for (Item item : decoratedPotBlockEntity.getSherds().stream()) {
+                for (Item item : decoratedPotBlockEntity.getSherds().toList()) {
                     lootConsumer.accept(item.getDefaultStack());
                 }
             });

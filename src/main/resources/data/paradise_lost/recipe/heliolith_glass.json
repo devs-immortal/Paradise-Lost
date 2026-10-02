@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "paradise_lost:heliolith"
-  },
+  "ingredient": "paradise_lost:heliolith",
   "result": {
     "id": "minecraft:glass"
   },

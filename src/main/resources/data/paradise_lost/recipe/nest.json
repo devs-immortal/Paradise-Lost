@@ -4,9 +4,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:thatch"
-    }
+    "#": "paradise_lost:thatch"
   },
   "result": {
     "id": "paradise_lost:nest"

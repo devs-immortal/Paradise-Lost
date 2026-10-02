@@ -35,6 +35,7 @@ import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.inventory.SimpleInventory;
@@ -45,7 +46,6 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -84,13 +84,13 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     public static DefaultAttributeContainer.Builder createMoaAttributes() {
-        return createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 35.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0D)
-                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0);
-                //.add(EntityAttributes.GENERIC_GRAVITY, 0.95f)
-                //.add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.22f)
-                //.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f);
+        return createAnimalAttributes()
+                .add(EntityAttributes.MAX_HEALTH, 35.0D)
+                .add(EntityAttributes.MOVEMENT_SPEED, 1.0D)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0);
+                //.add(EntityAttributes.GRAVITY, 0.95f)
+                //.add(EntityAttributes.JUMP_STRENGTH, 0.22f)
+                //.add(EntityAttributes.FLYING_SPEED, 0.5f);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
 
         this.goalSelector.add(1, new EatFromBowlGoal(0.4, 24, 16));
         this.goalSelector.add(1, new AnimalMateGoal(this, 0.25F));
-        this.goalSelector.add(2, new TemptGoal(this, 0.7D, Ingredient.fromTag(ParadiseLostItemTags.MOA_TEMPTABLES), false));
+        this.goalSelector.add(2, new TemptGoal(this, 0.7D, stack -> stack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES), false));
 
 
         this.goalSelector.add(7, new LookAtEntityGoal(this, ParrotEntity.class, 18F, 100f));
@@ -198,11 +198,11 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
     
     @Override
-    protected void dropInventory() {
-        super.dropInventory();
+    protected void dropInventory(ServerWorld world) {
+        super.dropInventory(world);
         if (hasChest()) {
             if (!getWorld().isClient) {
-                dropStack(getChest());
+                dropStack(world, getChest());
             }
             setChest(ItemStack.EMPTY);
         }
@@ -599,10 +599,10 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     protected void updateLimbs(float posDelta) {
         if (hasPassengers()) {
             float f = Math.min(posDelta * 2.0F, 0.5F);
-            this.limbAnimator.updateLimbs(f, 0.4F);
+            this.limbAnimator.updateLimbs(f, 0.4F, 1.0F);
         } else {
             float f = Math.min(posDelta * 4.0F, 3F);
-            this.limbAnimator.updateLimbs(f, 0.5F);
+            this.limbAnimator.updateLimbs(f, 0.5F, 1.0F);
         }
 
     }
@@ -644,7 +644,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                 var item = heldStack.getItem();
                 if (heldStack.isIn(ConventionalItemTags.RAW_MEAT_FOODS)) {
                     feedMob(heldStack);
-                    return ActionResult.success(getWorld().isClient());
+                    return getWorld().isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
                 } else if (!hasChest() && item instanceof BlockItem blockItem && blockItem.getBlock() instanceof AbstractChestBlock) {
                     // Set a new chest, if there is none.
                     var chestStack = heldStack.copy();
@@ -653,7 +653,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
                         heldStack.decrement(1);
                     }
                     setChest(heldStack);
-                    return ActionResult.success(getWorld().isClient);
+                    return getWorld().isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
                 }
             } else {
                 if (!heldStack.isIn(ParadiseLostItemTags.MOA_BREEDABLES) && heldStack.isIn(ParadiseLostItemTags.MOA_TEMPTABLES)) {
@@ -685,7 +685,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         float hunger = 100 - satiation;
         if (hunger > 1) {
             int consumption = Math.min((int) Math.ceil(hunger / hungerRestored), heldStack.getCount());
-            spawnConsumptionEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
+            spawnItemParticles(heldStack, 10 + random.nextInt(consumption * 2 + 1));
             heldStack.decrement(consumption);
             getGenes().setHunger(satiation + (consumption * hungerRestored));
             playSound(ParadiseLostSoundEvents.ENTITY_MOA_EAT, 1.5F, 0.8F);
@@ -697,9 +697,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     public void writeCustomDataToNbt(NbtCompound compound) {
         super.writeCustomDataToNbt(compound);
         compound.putInt("airTicks", dataTracker.get(AIR_TICKS));
-        compound.put("chest", dataTracker.get(CHEST).encodeAllowEmpty(this.getRegistryManager()));
+        compound.put("chest", dataTracker.get(CHEST).toNbtAllowEmpty(this.getRegistryManager()));
         if (inventory != DUMMY) {
-            compound.put("chestContents", inventory.toNbtList(this.getRegistryManager()));
+            Inventories.writeNbt(compound, inventory.getHeldStacks(), this.getRegistryManager());
         }
     }
 
@@ -710,7 +710,12 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         dataTracker.set(CHEST, ItemStack.fromNbtOrEmpty(this.getRegistryManager(), compound.getCompound("chest")));
         refreshChest(false);
         if (inventory != DUMMY) {
-            inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE), this.getRegistryManager());
+            if (compound.contains("Items")) {
+                Inventories.readNbt(compound, inventory.getHeldStacks(), this.getRegistryManager());
+            } else {
+                // older saves stored the chest without slot indexes
+                inventory.readNbtList(compound.getList("chestContents", NbtElement.COMPOUND_TYPE), this.getRegistryManager());
+            }
         }
 
         setMovementSpeed(genes.getAttribute(MoaAttributes.GROUND_SPEED));
@@ -780,7 +785,7 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
         var genesB = matingMoa.getGenes();
         
         var eggStack = genesA.getEggForBreeding(genesB, world, getBlockPos());
-        var baby = ParadiseLostEntityTypes.MOA.create(world);
+        var baby = ParadiseLostEntityTypes.MOA.create(world, SpawnReason.BREEDING);
         if (baby == null) {
             return null;
         }
@@ -790,9 +795,9 @@ public class MoaEntity extends SaddleMountEntity implements JumpingMount, Tameab
     }
 
     @Override
-    protected void dropLoot(DamageSource source, boolean causedByPlayer) {
-        super.dropLoot(source, causedByPlayer);
-        dropStack(new ItemStack(ParadiseLostItems.MOA_MEAT, (int) Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER))));
+    protected void dropLoot(ServerWorld world, DamageSource source, boolean causedByPlayer) {
+        super.dropLoot(world, source, causedByPlayer);
+        dropStack(world, new ItemStack(ParadiseLostItems.MOA_MEAT, (int) Math.round(0.337 + random.nextFloat() * getGenes().getAttribute(MoaAttributes.DROP_MULTIPLIER))));
     }
 
     @Override

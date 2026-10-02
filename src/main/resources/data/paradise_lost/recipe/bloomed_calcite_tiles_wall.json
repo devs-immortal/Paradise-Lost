@@ -5,9 +5,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:bloomed_calcite_tiles"
-    }
+    "#": "paradise_lost:bloomed_calcite_tiles"
   },
   "result": {
     "id": "paradise_lost:bloomed_calcite_tiles_wall",

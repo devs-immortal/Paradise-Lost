@@ -9,7 +9,6 @@ import net.minecraft.block.CropBlock;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
@@ -258,7 +257,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
     private LootTable.Builder tallPlantNoSeedsDrops(Block tallPlant, Block shortPlant) {
         LootPoolEntry.Builder<?> builder = ItemEntry.builder(shortPlant)
                 .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0F)))
-                .conditionally(WITH_SHEARS);
+                .conditionally(this.createWithShearsCondition());
         return LootTable.builder()
                 .pool(
                         LootPool.builder()
@@ -269,7 +268,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
                                 .conditionally(
                                         LocationCheckLootCondition.builder(
                                                 LocationPredicate.Builder.create()
-                                                        .block(BlockPredicate.Builder.create().blocks(tallPlant).state(StatePredicate.Builder.create().exactMatch(TallPlantBlock.HALF, DoubleBlockHalf.UPPER))),
+                                                        .block(BlockPredicate.Builder.create().blocks(this.registries.getOrThrow(RegistryKeys.BLOCK), tallPlant).state(StatePredicate.Builder.create().exactMatch(TallPlantBlock.HALF, DoubleBlockHalf.UPPER))),
                                                 new BlockPos(0, 1, 0)
                                         )
                                 )
@@ -283,7 +282,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
                                 .conditionally(
                                         LocationCheckLootCondition.builder(
                                                 LocationPredicate.Builder.create()
-                                                        .block(BlockPredicate.Builder.create().blocks(tallPlant).state(StatePredicate.Builder.create().exactMatch(TallPlantBlock.HALF, DoubleBlockHalf.LOWER))),
+                                                        .block(BlockPredicate.Builder.create().blocks(this.registries.getOrThrow(RegistryKeys.BLOCK), tallPlant).state(StatePredicate.Builder.create().exactMatch(TallPlantBlock.HALF, DoubleBlockHalf.LOWER))),
                                                 new BlockPos(0, -1, 0)
                                         )
                                 )
@@ -291,7 +290,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
     }
 
     private LootTable.Builder shearsWeightedDrops(Block block, ItemConvertible drop, LootNumberProvider provider) {
-        RegistryWrapper.Impl<Enchantment> impl = this.registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+        RegistryWrapper.Impl<Enchantment> impl = this.registries.getOrThrow(RegistryKeys.ENCHANTMENT);
         LootPoolEntry.Builder<?> builder = this.applyExplosionDecay(
                 block,
                 ItemEntry.builder(drop)
@@ -311,7 +310,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
     }
 
     private LootTable.Builder bushDrops(Block block) {
-        RegistryWrapper.Impl<Enchantment> impl = this.registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+        RegistryWrapper.Impl<Enchantment> impl = this.registries.getOrThrow(RegistryKeys.ENCHANTMENT);
         return this.applyExplosionDecay(
                 block,
                 LootTable.builder()
@@ -326,7 +325,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
     }
 
     private LootTable.Builder wildFlaxDrops() {
-        RegistryWrapper.Impl<Enchantment> impl = this.registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+        RegistryWrapper.Impl<Enchantment> impl = this.registries.getOrThrow(RegistryKeys.ENCHANTMENT);
         var condition = BlockStatePropertyLootCondition.builder(WILD_FLAX)
                 .properties(StatePredicate.Builder.create().exactMatch(TallPlantBlock.HALF, DoubleBlockHalf.LOWER));
         return this.applyExplosionDecay(
@@ -346,7 +345,7 @@ public class LootTableGen extends FabricBlockLootTableProvider {
     }
 
     private void addDropsWithShears(Block block) {
-        addDrop(block, BlockLootTableGenerator::dropsWithShears);
+        addDrop(block, this::dropsWithShears);
     }
 
     private void addOreDrops(Block withSilkTouch, Item withoutSilkTouch) {

@@ -6,9 +6,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:wisteria_log"
-    }
+    "#": "paradise_lost:wisteria_log"
   },
   "result": {
     "id": "paradise_lost:wisteria_wood",

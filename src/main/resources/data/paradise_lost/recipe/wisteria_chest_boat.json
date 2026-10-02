@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "group": "chest_boat",
   "ingredients": [
-    {
-      "item": "minecraft:chest"
-    },
-    {
-      "item": "paradise_lost:wisteria_boat"
-    }
+    "minecraft:chest",
+    "paradise_lost:wisteria_boat"
   ],
   "result": {
     "id": "paradise_lost:wisteria_chest_boat"

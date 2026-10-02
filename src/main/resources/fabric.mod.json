@@ -19,8 +19,8 @@
   },
   "depends": {
     "fabricloader": ">=0.12.12",
-    "fabric": ">=0.116.11+1.21.1",
-    "minecraft": ">=1.21.1",
+    "fabric": ">=0.114.1+1.21.3",
+    "minecraft": ">=1.21.2",
     "java": ">=21",
     "fabric-api-base": "*",
     "fabric-registry-sync-v0": "*"
@@ -38,9 +38,6 @@
     ],
     "cardinal-components": [
       "net.id.paradiselost.component.ParadiseLostComponents"
-    ],
-    "mm:early_risers": [
-      "net.id.paradiselost.mixin.earlyrisers.CustomBoatEarlyRiser"
     ],
     "fabric-datagen": [
       "net.id.paradiselost.datagen.ParadiseLostDataGen"

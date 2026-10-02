@@ -1,12 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "R": {
-      "item": "minecraft:redstone"
-    },
-    "I": {
-      "item": "paradise_lost:olvite"
-    }
+    "R": "minecraft:redstone",
+    "I": "paradise_lost:olvite"
   },
   "pattern": [
     " I ",

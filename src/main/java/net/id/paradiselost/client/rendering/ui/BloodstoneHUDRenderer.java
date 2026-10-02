@@ -10,6 +10,7 @@ import net.id.paradiselost.items.tools.bloodstone.*;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
 import net.minecraft.entity.LivingEntity;
@@ -56,8 +57,8 @@ public class BloodstoneHUDRenderer {
     private static boolean isLookingAtMatchingEntity(MinecraftClient client, BloodstoneCapturedData capturedData) {
         if (
                 client.crosshairTarget == null
-                || client.crosshairTarget.getType() != HitResult.Type.ENTITY
-                || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity)
+                    || client.crosshairTarget.getType() != HitResult.Type.ENTITY
+                    || !(((EntityHitResult) client.crosshairTarget).getEntity() instanceof LivingEntity)
         ) {
             return false;
         }
@@ -114,7 +115,7 @@ public class BloodstoneHUDRenderer {
     }
 
     private static void renderRing(DrawContext context, int offsetX, int offsetY) {
-        context.drawTexture(ParadiseLost.locate("textures/hud/bloodstone/bloodstone_ring.png"), offsetX - 75, offsetY - 75, 0, 0, 150, 150, 150, 150);
+        context.drawTexture(RenderLayer::getGuiTextured, ParadiseLost.locate("textures/hud/bloodstone/bloodstone_ring.png"), offsetX - 75, offsetY - 75, 0, 0, 150, 150, 150, 150);
     }
 
     private static void renderIconWText(DrawContext context, MinecraftClient client, Sprite sprite, Text text, int offsetX, int offsetY) {
@@ -130,7 +131,7 @@ public class BloodstoneHUDRenderer {
 
         RenderSystem.setShaderTexture(0, sprite.getAtlasId());
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1);
-        context.drawSprite(startX, offsetY - 9, 0, 18, 18, sprite);  //  0 z correct?
+        context.drawSpriteStretched(RenderLayer::getGuiTextured, sprite, startX, offsetY - 9, 18, 18);
         context.drawTextWithShadow(client.textRenderer, text, startX + sprite.getContents().getWidth() + 2, offsetY - totalHeight, 14737632);
     }
 

@@ -6,9 +6,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:menth_log"
-    }
+    "#": "paradise_lost:menth_log"
   },
   "result": {
     "id": "paradise_lost:menth_wood",

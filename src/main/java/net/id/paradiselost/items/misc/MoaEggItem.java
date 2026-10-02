@@ -7,6 +7,7 @@ import net.id.paradiselost.entities.ParadiseLostEntityTypes;
 import net.id.paradiselost.entities.passive.moa.MoaAttributes;
 import net.id.paradiselost.entities.passive.moa.MoaEntity;
 import net.id.paradiselost.items.utils.ParadiseLostDataComponentTypes;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,7 +32,7 @@ public class MoaEggItem extends Item {
         PlayerEntity player = contextIn.getPlayer();
         ItemStack stack = contextIn.getStack();
         if (player != null && stack.getComponents().contains(ParadiseLostDataComponentTypes.MOA_GENES) && player.isCreative()) {
-            MoaEntity moa = ParadiseLostEntityTypes.MOA.create(world);
+            MoaEntity moa = ParadiseLostEntityTypes.MOA.create(world, SpawnReason.SPAWN_ITEM_USE);
             ParadiseLostDataComponentTypes.MoaGeneComponent geneTag = stack.get(ParadiseLostDataComponentTypes.MOA_GENES);
             moa.getGenes().fromComponent(geneTag);
             if (geneTag.isBaby()) {
@@ -40,7 +41,7 @@ public class MoaEggItem extends Item {
             moa.refreshPositionAndAngles(contextIn.getBlockPos().up(), 0, 0);
             moa.setHealth(moa.getGenes().getAttribute(MoaAttributes.MAX_HEALTH));
             world.spawnEntity(moa);
-            return ActionResult.success(world.isClient());
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
         }
         return super.useOnBlock(contextIn);
     }

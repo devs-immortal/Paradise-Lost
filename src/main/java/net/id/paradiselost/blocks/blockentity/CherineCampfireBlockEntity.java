@@ -14,10 +14,11 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.CampfireCookingRecipe;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Clearable;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
@@ -35,17 +36,17 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
     private final DefaultedList<ItemStack> itemsBeingCooked;
     private final int[] cookingTimes;
     private final int[] cookingTotalTimes;
-    private final RecipeManager.MatchGetter<SingleStackRecipeInput, CampfireCookingRecipe> matchGetter;
+    private final ServerRecipeManager.MatchGetter<SingleStackRecipeInput, CampfireCookingRecipe> matchGetter;
 
     public CherineCampfireBlockEntity(BlockPos pos, BlockState state) {
         super(ParadiseLostBlockEntityTypes.CHERINE_CAMPFIRE, pos, state);
         this.itemsBeingCooked = DefaultedList.ofSize(4, ItemStack.EMPTY);
         this.cookingTimes = new int[4];
         this.cookingTotalTimes = new int[4];
-        this.matchGetter = RecipeManager.createCachedMatchGetter(RecipeType.CAMPFIRE_COOKING);
+        this.matchGetter = ServerRecipeManager.createCachedMatchGetter(RecipeType.CAMPFIRE_COOKING);
     }
 
-    public static void litServerTick(World world, BlockPos pos, BlockState state, CherineCampfireBlockEntity campfire) {
+    public static void litServerTick(ServerWorld world, BlockPos pos, BlockState state, CherineCampfireBlockEntity campfire) {
         boolean bl = false;
 
         for (int i = 0; i < campfire.itemsBeingCooked.size(); ++i) {
@@ -153,18 +154,18 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
         return nbtCompound;
     }
 
-    public Optional<RecipeEntry<CampfireCookingRecipe>> getRecipeFor(ItemStack stack) {
-        return this.itemsBeingCooked.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.matchGetter.getFirstMatch(new SingleStackRecipeInput(stack), this.world);
-    }
-
-    public boolean addItem(@Nullable LivingEntity user, ItemStack stack, int cookTime) {
+    public boolean addItem(ServerWorld world, @Nullable LivingEntity user, ItemStack stack) {
         for (int i = 0; i < this.itemsBeingCooked.size(); ++i) {
             ItemStack itemStack = this.itemsBeingCooked.get(i);
             if (itemStack.isEmpty()) {
-                this.cookingTotalTimes[i] = cookTime;
+                Optional<RecipeEntry<CampfireCookingRecipe>> optional = world.getRecipeManager().getFirstMatch(RecipeType.CAMPFIRE_COOKING, new SingleStackRecipeInput(stack), world);
+                if (optional.isEmpty()) {
+                    return false;
+                }
+                this.cookingTotalTimes[i] = optional.get().value().getCookingTime();
                 this.cookingTimes[i] = 0;
                 this.itemsBeingCooked.set(i, stack.splitUnlessCreative(1, user));
-                this.world.emitGameEvent(GameEvent.BLOCK_CHANGE, this.getPos(), GameEvent.Emitter.of(user, this.getCachedState()));
+                world.emitGameEvent(GameEvent.BLOCK_CHANGE, this.getPos(), GameEvent.Emitter.of(user, this.getCachedState()));
                 this.updateListeners();
                 return true;
             }

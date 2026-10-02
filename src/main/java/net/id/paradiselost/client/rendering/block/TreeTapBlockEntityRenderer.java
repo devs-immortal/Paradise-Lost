@@ -7,6 +7,7 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.render.block.entity.*;
 import net.minecraft.client.render.model.json.*;
 import net.minecraft.client.util.math.*;
+import net.minecraft.item.ModelTransformationMode;
 
 @Environment(EnvType.CLIENT)
 public class TreeTapBlockEntityRenderer implements BlockEntityRenderer<TreeTapBlockEntity> {

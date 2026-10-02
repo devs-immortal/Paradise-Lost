@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "paradise_lost:burnished_stone"
-  },
+  "ingredient": "paradise_lost:burnished_stone",
   "result": {
     "id": "paradise_lost:burnished_stone_wall",
     "count": 1

@@ -5,3 +5,6 @@ extendable    method    net/minecraft/world/gen/carver/Carver    getState    (Ln
 accessible    class     net/minecraft/client/render/RenderPhase$TextureBase
 
 accessible    field     net/minecraft/block/MapColor    COLORS    [Lnet/minecraft/block/MapColor;
+
+accessible    field     net/minecraft/entity/mob/MobEntity    lootTable    Ljava/util/Optional;
+mutable    field     net/minecraft/entity/mob/MobEntity    lootTable    Ljava/util/Optional;

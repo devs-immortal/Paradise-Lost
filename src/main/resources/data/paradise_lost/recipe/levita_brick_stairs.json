@@ -6,9 +6,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:levita_brick"
-    }
+    "#": "paradise_lost:levita_brick"
   },
   "result": {
     "id": "paradise_lost:levita_brick_stairs",

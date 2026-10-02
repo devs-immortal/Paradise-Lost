@@ -6,9 +6,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:tinted_glass"
-    }
+    "#": "minecraft:tinted_glass"
   },
   "result": {
     "id": "paradise_lost:warded_jar"

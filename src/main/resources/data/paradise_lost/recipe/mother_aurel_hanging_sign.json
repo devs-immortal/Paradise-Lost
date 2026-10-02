@@ -8,12 +8,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:stripped_mother_aurel_log"
-    },
-    "X": {
-      "item": "paradise_lost:olvite_chain"
-    }
+    "#": "paradise_lost:stripped_mother_aurel_log",
+    "X": "paradise_lost:olvite_chain"
   },
   "result": {
     "id": "paradise_lost:mother_aurel_hanging_sign",

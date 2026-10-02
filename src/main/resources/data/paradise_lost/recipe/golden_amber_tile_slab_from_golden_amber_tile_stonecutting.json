@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "paradise_lost:golden_amber_tile"
-  },
+  "ingredient": "paradise_lost:golden_amber_tile",
   "result": {
     "id": "paradise_lost:golden_amber_tile_slab",
     "count": 2

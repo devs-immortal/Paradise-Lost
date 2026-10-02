@@ -6,9 +6,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:olvite_nugget"
-    }
+    "#": "paradise_lost:olvite_nugget"
   },
   "result": {
     "id": "paradise_lost:olvite"

@@ -15,7 +15,7 @@ public class ParadiseLostTallBrushBlock extends TallPlantBlock {
     private final boolean override;
 
     public ParadiseLostTallBrushBlock(Settings settings) {
-        this(settings, ParadiseLostBlockTags.GENERIC_VALID_GROUND, false);
+        this(settings, ParadiseLostBlockTags.VALID_GROUND, false);
     }
 
     public ParadiseLostTallBrushBlock(Settings settings, TagKey<Block> validFloors, boolean override) {

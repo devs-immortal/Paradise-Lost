@@ -16,6 +16,7 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.block.WireOrientation;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class ParadiseLostBlockWithEntity extends BlockWithEntity implements Waterloggable {
@@ -58,13 +59,13 @@ public abstract class ParadiseLostBlockWithEntity extends BlockWithEntity implem
     }
 
     @Override
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, @Nullable WireOrientation wireOrientation, boolean notify) {
         boolean powered = world.isReceivingRedstonePower(pos);
         if (powered != state.get(POWERED)) {
             world.setBlockState(pos, state.with(POWERED, powered), Block.NOTIFY_ALL);
             pulseUpdate(state, world, pos, powered);
         }
-        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+        super.neighborUpdate(state, world, pos, block, wireOrientation, notify);
     }
 
     protected void pulseUpdate(BlockState state, World world, BlockPos pos, boolean on) {

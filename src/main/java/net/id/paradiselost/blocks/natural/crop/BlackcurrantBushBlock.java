@@ -16,7 +16,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
@@ -32,7 +31,7 @@ public class BlackcurrantBushBlock extends SweetBerryBushBlock {
     }
 
     @Override
-    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+    protected boolean isTransparent(BlockState state) {
         return true;
     }
 
@@ -48,7 +47,7 @@ public class BlackcurrantBushBlock extends SweetBerryBushBlock {
         int i = state.get(AGE);
         if (i > 1) {
             tryPickBerries(world, pos, state);
-            return ActionResult.success(world.isClient);
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
         } else {
             return super.onUse(state, world, pos, player, hit);
         }

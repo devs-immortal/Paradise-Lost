@@ -1,15 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "#": {
-      "item": "minecraft:redstone_torch"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "X": {
-      "item": "paradise_lost:olvite"
-    }
+    "#": "minecraft:redstone_torch",
+    "S": "minecraft:stick",
+    "X": "paradise_lost:olvite"
   },
   "pattern": [
     "XSX",

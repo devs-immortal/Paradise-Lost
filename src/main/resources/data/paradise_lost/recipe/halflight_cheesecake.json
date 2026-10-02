@@ -6,15 +6,9 @@
     "CCC"
   ],
   "key": {
-    "A": {
-      "tag": "c:buckets/milk"
-    },
-    "P": {
-      "item": "paradise_lost:popom_jelly"
-    },
-    "C": {
-      "item": "paradise_lost:amadrys_bushel"
-    }
+    "A": "#c:buckets/milk",
+    "P": "paradise_lost:popom_jelly",
+    "C": "paradise_lost:amadrys_bushel"
   },
   "result": {
     "id": "paradise_lost:halflight_cheesecake"

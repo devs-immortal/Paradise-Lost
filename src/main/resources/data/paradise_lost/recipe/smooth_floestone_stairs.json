@@ -7,9 +7,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:smooth_floestone"
-    }
+    "#": "paradise_lost:smooth_floestone"
   },
   "result": {
     "id": "paradise_lost:smooth_floestone_stairs",

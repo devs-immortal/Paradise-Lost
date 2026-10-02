@@ -6,9 +6,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:menth_planks"
-    }
+    "#": "paradise_lost:menth_planks"
   },
   "result": {
     "id": "paradise_lost:menth_boat"

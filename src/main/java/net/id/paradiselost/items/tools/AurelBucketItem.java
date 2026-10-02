@@ -47,17 +47,17 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack currentStack = playerIn.getStackInHand(handIn);
         BlockHitResult hitResult = raycast(worldIn, playerIn, this.containedFluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
 
         if (currentStack.getItem() == ParadiseLostItems.AUREL_MILK_BUCKET) {
             playerIn.setCurrentHand(handIn);
-            return new TypedActionResult<>(ActionResult.PASS, currentStack);
+            return ActionResult.PASS;
         }
 
         if (hitResult == null) {
-            return new TypedActionResult<>(ActionResult.PASS, currentStack);
+            return ActionResult.PASS;
         } else if (hitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos hitPos = hitResult.getBlockPos();
 
@@ -65,25 +65,25 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
                 if (this.containedFluid == Fluids.EMPTY) {
                     BlockState hitState = worldIn.getBlockState(hitPos);
 
-                    if (hitState.getBlock() instanceof FluidDrainable) {
+                    if (hitState.getBlock() instanceof FluidDrainable block) {
                         if (hitState.getFluidState().getFluid() == Fluids.WATER) {
-                            ((FluidDrainable) hitState.getBlock()).tryDrainFluid(playerIn, worldIn, hitPos, hitState);
+                            block.tryDrainFluid(playerIn, worldIn, hitPos, hitState);
                             playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                             playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
                             ItemStack fillStack = this.fillBucket(currentStack, playerIn, ParadiseLostItems.AUREL_WATER_BUCKET);
 
-                            return new TypedActionResult<>(ActionResult.SUCCESS, fillStack);
+                            return ActionResult.SUCCESS.withNewHandStack(fillStack);
                         } else if (hitState.isOf(Blocks.POWDER_SNOW)) {
-                            ((FluidDrainable) hitState.getBlock()).tryDrainFluid(playerIn, worldIn, hitPos, hitState);
+                            block.tryDrainFluid(playerIn, worldIn, hitPos, hitState);
                             playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
                             playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL_POWDER_SNOW, 1.0F, 1.0F);
                             ItemStack fillStack = this.fillBucket(currentStack, playerIn, ParadiseLostItems.AUREL_POWDER_SNOW_BUCKET);
 
-                            return new TypedActionResult<>(ActionResult.SUCCESS, fillStack);
+                            return ActionResult.SUCCESS.withNewHandStack(fillStack);
                         }
                     }
 
-                    return new TypedActionResult<>(ActionResult.FAIL, currentStack);
+                    return ActionResult.FAIL;
                 } else {
                     BlockState hitBlockState = worldIn.getBlockState(hitPos);
                     BlockPos adjustedPos = hitBlockState.getBlock() instanceof FluidFillable ? hitPos : hitResult.getBlockPos().offset(hitResult.getSide());
@@ -91,13 +91,13 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
                     this.placeLiquid(playerIn, worldIn, adjustedPos, hitResult);
 
                     playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
-                    return new TypedActionResult<>(ActionResult.SUCCESS, this.emptyBucket(currentStack, playerIn));
+                    return ActionResult.SUCCESS.withNewHandStack(this.emptyBucket(currentStack, playerIn));
                 }
             } else {
-                return new TypedActionResult<>(ActionResult.FAIL, currentStack);
+                return ActionResult.FAIL;
             }
         } else {
-            return new TypedActionResult<>(ActionResult.PASS, currentStack);
+            return ActionResult.PASS;
         }
     }
 
@@ -217,7 +217,7 @@ public class AurelBucketItem extends Item implements FluidModificationItem {
             world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
 
             for (int l = 0; l < 8; ++l) {
-                world.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0, 0.0, 0.0);
+                world.addParticle(ParticleTypes.LARGE_SMOKE, i + Math.random(), j + Math.random(), k + Math.random(), 0.0, 0.0, 0.0);
             }
 
             return true;

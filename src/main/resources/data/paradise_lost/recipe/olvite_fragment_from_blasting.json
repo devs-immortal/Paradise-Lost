@@ -1,33 +1,15 @@
 {
   "type": "minecraft:blasting",
   "ingredient": [
-    {
-      "item": "paradise_lost:olvite_pickaxe"
-    },
-    {
-      "item": "paradise_lost:olvite_shovel"
-    },
-    {
-      "item": "paradise_lost:olvite_axe"
-    },
-    {
-      "item": "paradise_lost:olvite_hoe"
-    },
-    {
-      "item": "paradise_lost:olvite_sword"
-    },
-    {
-      "item": "paradise_lost:olvite_helmet"
-    },
-    {
-      "item": "paradise_lost:olvite_chestplate"
-    },
-    {
-      "item": "paradise_lost:olvite_leggings"
-    },
-    {
-      "item": "paradise_lost:olvite_boots"
-    }
+    "paradise_lost:olvite_pickaxe",
+    "paradise_lost:olvite_shovel",
+    "paradise_lost:olvite_axe",
+    "paradise_lost:olvite_hoe",
+    "paradise_lost:olvite_sword",
+    "paradise_lost:olvite_helmet",
+    "paradise_lost:olvite_chestplate",
+    "paradise_lost:olvite_leggings",
+    "paradise_lost:olvite_boots"
   ],
   "result": {
     "id": "paradise_lost:olvite_nugget"

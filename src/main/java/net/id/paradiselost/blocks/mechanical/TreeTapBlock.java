@@ -16,12 +16,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -38,7 +38,7 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
 
     public static final MapCodec<TreeTapBlock> CODEC = createCodec(TreeTapBlock::new);
 
-	public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+	public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 5, 16);
 
     public TreeTapBlock(Settings settings) {
@@ -51,10 +51,10 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
     }
 
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!player.isSneaking() && world.getBlockEntity(pos) instanceof TreeTapBlockEntity treeTapBlockEntity) {
 			treeTapBlockEntity.handleUse(player, hand, player.getStackInHand(hand));
-            return ItemActionResult.success(world.isClient());
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
         }
         return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
     }

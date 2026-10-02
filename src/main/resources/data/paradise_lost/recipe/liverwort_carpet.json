@@ -4,9 +4,7 @@
     "BB"
   ],
   "key": {
-    "B": {
-      "item": "paradise_lost:liverwort"
-    }
+    "B": "paradise_lost:liverwort"
   },
   "result": {
     "id": "paradise_lost:liverwort_carpet",

@@ -6,15 +6,9 @@
     "ILI"
   ],
   "key": {
-    "I": {
-      "tag": "paradise_lost:iron_interchangable"
-    },
-    "L": {
-      "item": "paradise_lost:levita_gem"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    }
+    "I": "#paradise_lost:iron_interchangable",
+    "L": "paradise_lost:levita_gem",
+    "S": "minecraft:stick"
   },
   "result": {
     "id": "paradise_lost:levita_rail",

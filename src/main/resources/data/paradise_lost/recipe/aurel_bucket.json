@@ -6,9 +6,7 @@
     " # "
   ],
   "key": {
-    "#": {
-      "tag": "paradise_lost:paradise_planks"
-    }
+    "#": "#paradise_lost:paradise_planks"
   },
   "result": {
     "id": "paradise_lost:aurel_bucket"

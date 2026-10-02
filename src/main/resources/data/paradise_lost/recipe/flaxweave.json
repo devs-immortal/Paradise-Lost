@@ -5,9 +5,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:flax_thread"
-    }
+    "#": "paradise_lost:flax_thread"
   },
   "result": {
     "id": "paradise_lost:flaxweave",

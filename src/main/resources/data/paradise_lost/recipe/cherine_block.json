@@ -6,9 +6,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:cherine"
-    }
+    "#": "paradise_lost:cherine"
   },
   "result": {
     "id": "paradise_lost:cherine_block"

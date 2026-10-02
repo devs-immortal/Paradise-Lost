@@ -4,9 +4,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:aurel_leaves"
-    }
+    "#": "paradise_lost:aurel_leaves"
   },
   "result": {
     "id": "paradise_lost:aurel_leaf_pile",

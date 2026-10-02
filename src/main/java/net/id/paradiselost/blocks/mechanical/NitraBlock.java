@@ -1,6 +1,5 @@
 package net.id.paradiselost.blocks.mechanical;
 
-import net.id.paradiselost.world.ExplosionExtensions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,17 +10,15 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.block.WireOrientation;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
@@ -43,16 +40,16 @@ public class NitraBlock extends Block {
         }
     }
 
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
         if (world.isReceivingRedstonePower(pos)) {
             world.scheduleBlockTick(pos, this, 1);
         }
 
     }
 
-    public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
-        float sourcePower = ((ExplosionExtensions) explosion).getPower();
-        if (!world.isClient && sourcePower > 0.5F) {
+    public void onDestroyedByExplosion(ServerWorld world, BlockPos pos, Explosion explosion) {
+        float sourcePower = explosion.getPower();
+        if (sourcePower > 0.5F) {
             ignite(world, pos, sourcePower - 0.5F);
         }
     }
@@ -60,8 +57,6 @@ public class NitraBlock extends Block {
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         ignite(world, pos, BASE_EXPLOSIVE_POWER, null);
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
-        world.spawnParticles(ParticleTypes.EXPLOSION_EMITTER, pos.getX(), pos.getY(), pos.getZ(), 1, 0.0, 0.0, 0.0, 0.0);
-        world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F, random.nextLong());
     }
 
     public static void ignite(World world, BlockPos pos, float power) {
@@ -69,15 +64,13 @@ public class NitraBlock extends Block {
     }
 
     private static void ignite(World world, BlockPos pos, float power, @Nullable LivingEntity igniter) {
-        Explosion explosion = new Explosion(world, igniter, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, false, Explosion.DestructionType.DESTROY);
-        if (!world.isClient) {
-            explosion.collectBlocksAndDamageEntities();
-            world.emitGameEvent(igniter, GameEvent.PRIME_FUSE, pos);
+        if (world instanceof ServerWorld serverWorld) {
+            serverWorld.createExplosion(igniter, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, World.ExplosionSourceType.TNT);
+            serverWorld.emitGameEvent(igniter, GameEvent.PRIME_FUSE, pos);
         }
-        ((ExplosionExtensions) explosion).affectWorld(true, SoundEvents.ENTITY_GENERIC_EXPLODE.value());
     }
 
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
         if (!itemStack.isOf(Items.FLINT_AND_STEEL) && !itemStack.isOf(Items.FIRE_CHARGE)) {
             return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
@@ -94,15 +87,15 @@ public class NitraBlock extends Block {
             }
 
             player.incrementStat(Stats.USED.getOrCreateStat(item));
-            return ItemActionResult.success(world.isClient);
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
         }
     }
 
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-        if (!world.isClient) {
+        if (world instanceof ServerWorld serverWorld) {
             BlockPos blockPos = hit.getBlockPos();
             Entity entity = projectile.getOwner();
-            if (projectile.isOnFire() && projectile.canModifyAt(world, blockPos)) {
+            if (projectile.isOnFire() && projectile.canModifyAt(serverWorld, blockPos)) {
                 ignite(world, blockPos, BASE_EXPLOSIVE_POWER, entity instanceof LivingEntity ? (LivingEntity) entity : null);
                 world.removeBlock(blockPos, false);
             }

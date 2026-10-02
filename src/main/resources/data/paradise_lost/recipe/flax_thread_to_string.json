@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:flax_thread"
-    }
+    "paradise_lost:flax_thread"
   ],
   "result": {
     "id": "minecraft:string",

@@ -6,15 +6,9 @@
     "LLL"
   ],
   "key": {
-    "L": {
-      "tag": "minecraft:logs"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "paradise_lost:cherine"
-    }
+    "L": "#minecraft:logs",
+    "S": "minecraft:stick",
+    "C": "paradise_lost:cherine"
   },
   "result": {
     "id": "paradise_lost:cherine_campfire"

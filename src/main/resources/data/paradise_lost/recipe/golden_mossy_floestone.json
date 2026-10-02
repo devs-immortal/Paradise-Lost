@@ -1,12 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:mossy_floestone"
-    },
-    {
-      "item": "minecraft:gold_nugget"
-    }
+    "paradise_lost:mossy_floestone",
+    "minecraft:gold_nugget"
   ],
   "result": {
     "id": "paradise_lost:golden_mossy_floestone"

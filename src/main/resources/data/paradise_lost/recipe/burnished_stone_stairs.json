@@ -7,9 +7,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:burnished_stone"
-    }
+    "#": "paradise_lost:burnished_stone"
   },
   "result": {
     "id": "paradise_lost:burnished_stone_stairs",

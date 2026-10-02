@@ -4,23 +4,23 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.Vec3i;
 
 public class RenderUtils {
 
     public static int toHex(Vec3i color) {
-        return MathHelper.packRgb(color.getX(), color.getY(), color.getZ());
+        return ColorHelper.getArgb(color.getX(), color.getY(), color.getZ());
     }
 
     @Deprecated(forRemoval = true)
     public static int toHex(int r, int g, int b) {
-        return MathHelper.packRgb(r, g, b);
+        return ColorHelper.getArgb(r, g, b);
     }
     
     @Deprecated(forRemoval = true)
     public static int toHex(int r, int g, int b, int a) {
-        return MathHelper.packRgb(r, g, b) | (a << 24);
+        return ColorHelper.getArgb(a, r, g, b);
     }
 
     public static Vec3i toRGB(int hex) {

@@ -2,6 +2,7 @@ package net.id.paradiselost.blocks.mechanical;
 
 import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.blocks.blockentity.IncubatorBlockEntity;
+import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -12,7 +13,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -43,12 +44,12 @@ public class IncubatorBlock extends ParadiseLostBlockWithEntity {
     }
 
     @Override
-    public ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!player.isSneaking() && world.getBlockEntity(pos) instanceof IncubatorBlockEntity incubator) {
             incubator.handleUse(player, hand, player.getStackInHand(hand));
-            return ItemActionResult.success(world.isClient());
+            return world.isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
         }
-        return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class IncubatorBlock extends ParadiseLostBlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return IncubatorBlockEntity::tickServer;
+        return world.isClient ? null : validateTicker(type, ParadiseLostBlockEntityTypes.INCUBATOR, IncubatorBlockEntity::tickServer);
     }
 
     @Override

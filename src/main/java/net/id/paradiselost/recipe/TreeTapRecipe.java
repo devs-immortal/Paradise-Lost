@@ -2,7 +2,6 @@ package net.id.paradiselost.recipe;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.id.paradiselost.blocks.blockentity.TreeTapBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
@@ -11,24 +10,29 @@ import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.IngredientPlacement;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
+public class TreeTapRecipe implements Recipe<TreeTapRecipeInput> {
 
 	protected final Ingredient ingredient;
     protected final ItemStack result;
     protected final Block tappedBlock;
     protected final Block resultBlock;
     protected final int chance;
+    @Nullable
+    private IngredientPlacement ingredientPlacement;
 
 	public TreeTapRecipe(Ingredient ingredient, Identifier tappedBlock, Identifier resultBlock, ItemStack result, Optional<PotionContentsComponent> contents, int chance) {
 		this.ingredient = ingredient;
@@ -40,27 +44,17 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
 	}
 
 	@Override
-	public boolean matches(TreeTapBlockEntity inventory, World world) {
-		if (!ingredient.test(inventory.getStack(0))) {
+	public boolean matches(TreeTapRecipeInput input, World world) {
+		if (!ingredient.test(input.stack())) {
 			return false;
 		}
 
-		return inventory.getTappedState().isOf(this.tappedBlock);
+		return input.tappedState().isOf(this.tappedBlock);
 	}
 
     @Override
-    public ItemStack craft(TreeTapBlockEntity inventory, RegistryWrapper.WrapperLookup lookup) {
+    public ItemStack craft(TreeTapRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
         return result.copy();
-    }
-
-    @Override
-	public boolean fits(int width, int height) {
-		return true;
-	}
-
-    @Override
-    public ItemStack getResult(RegistryWrapper.WrapperLookup registriesLookup) {
-        return result;
     }
 
     public Block getOutputBlock() {
@@ -72,14 +66,27 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
     }
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<TreeTapRecipe> getSerializer() {
 		return ParadiseLostRecipeTypes.TREE_TAP_RECIPE_SERIALIZER;
 	}
 
 	@Override
-	public RecipeType<?> getType() {
+	public RecipeType<TreeTapRecipe> getType() {
 		return ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE;
 	}
+
+    @Override
+    public IngredientPlacement getIngredientPlacement() {
+        if (this.ingredientPlacement == null) {
+            this.ingredientPlacement = IngredientPlacement.forSingleSlot(this.ingredient);
+        }
+        return this.ingredientPlacement;
+    }
+
+    @Override
+    public RecipeBookCategory getRecipeBookCategory() {
+        return ParadiseLostRecipeTypes.TREE_TAP_RECIPE_BOOK_CATEGORY;
+    }
 
     public static class Serializer implements RecipeSerializer<TreeTapRecipe> {
 
@@ -88,7 +95,7 @@ public class TreeTapRecipe implements Recipe<TreeTapBlockEntity> {
         }
 
         private static final MapCodec<TreeTapRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
+                Ingredient.CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
                 Identifier.CODEC.fieldOf("tapped_block").forGetter((recipe) -> Registries.BLOCK.getId(recipe.tappedBlock)),
                 Identifier.CODEC.fieldOf("result_block").forGetter((recipe) -> Registries.BLOCK.getId(recipe.resultBlock)),
                 ItemStack.CODEC.fieldOf("result").forGetter((recipe) -> recipe.result),

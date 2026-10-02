@@ -1,15 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "minecraft:gold_block"
-  },
-  "base": {
-    "item": "minecraft:golden_hoe"
-  },
+  "addition": "minecraft:gold_block",
+  "base": "minecraft:golden_hoe",
   "result": {
     "id": "paradise_lost:glazed_gold_hoe"
   },
-  "template": {
-    "item": "paradise_lost:glazed_gold_upgrade_smithing_template"
-  }
+  "template": "paradise_lost:glazed_gold_upgrade_smithing_template"
 }

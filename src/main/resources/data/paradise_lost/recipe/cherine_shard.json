@@ -1,9 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "paradise_lost:cherine_block"
-    }
+    "paradise_lost:cherine_block"
   ],
   "result": {
     "id": "paradise_lost:cherine",

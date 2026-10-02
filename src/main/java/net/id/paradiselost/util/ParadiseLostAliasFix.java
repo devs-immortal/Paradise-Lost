@@ -45,7 +45,6 @@ public class ParadiseLostAliasFix {
         Registries.ITEM.addAlias(locate("orange_hanging_sign"), locate("aurel_hanging_sign"));
 
         Registries.ITEM.addAlias(locate("orange"), Identifier.ofVanilla("apple"));
-
     }
 
 }

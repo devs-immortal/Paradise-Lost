@@ -42,7 +42,7 @@ public class ParadiseLostDispenserBehaviors {
         }
     };
 
-    public static DispenserBehavior emptyBucket = new ItemDispenserBehavior() {
+    public static final DispenserBehavior emptyBucket = new ItemDispenserBehavior() {
         private final ItemDispenserBehavior fallbackBehavior = new ItemDispenserBehavior();
 
         @Override

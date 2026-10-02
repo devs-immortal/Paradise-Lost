@@ -5,13 +5,9 @@
     "#"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
+    "#": "minecraft:stick",
     "X": [
-      {
-        "item": "paradise_lost:cherine"
-      }
+      "paradise_lost:cherine"
     ]
   },
   "result": {

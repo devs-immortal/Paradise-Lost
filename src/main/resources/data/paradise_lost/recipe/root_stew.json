@@ -1,21 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "tag": "c:foods/raw_meat"
-    },
-    {
-      "item": "paradise_lost:swedroot_pulp"
-    },
-    {
-      "item": "minecraft:carrot"
-    },
-    {
-      "item": "minecraft:potato"
-    },
-    {
-      "item": "minecraft:bowl"
-    }
+    "#c:foods/raw_meat",
+    "paradise_lost:swedroot_pulp",
+    "minecraft:carrot",
+    "minecraft:potato",
+    "minecraft:bowl"
   ],
   "result": {
     "id": "paradise_lost:root_stew",

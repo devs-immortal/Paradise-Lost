@@ -243,7 +243,7 @@ public class MoaAPI {
                             : 1F)));
         }
 
-        private static record Weighting(float base, float variance) {
+        private record Weighting(float base, float variance) {
         }
     }
 

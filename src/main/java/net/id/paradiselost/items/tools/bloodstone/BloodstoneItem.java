@@ -13,7 +13,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -45,17 +44,17 @@ public abstract class BloodstoneItem extends Item {
         }
         stack.set(ParadiseLostDataComponentTypes.BLOODSTONE, capturedData.bloodstoneComponent);
         playPrickEffects(user.getWorld(), entity.getBlockPos());
-        return ActionResult.success(user.getWorld().isClient());
+        return user.getWorld().isClient ? ActionResult.SUCCESS : ActionResult.SUCCESS_SERVER;
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         if (user.isSneaking()) {
             ItemStack stack = user.getStackInHand(hand);
             BloodstoneCapturedData capturedData = BloodstoneCapturedData.fromEntity(user);
             stack.set(ParadiseLostDataComponentTypes.BLOODSTONE, capturedData.bloodstoneComponent);
             playPrickEffects(user.getWorld(), user.getBlockPos());
-            return TypedActionResult.success(stack);
+            return ActionResult.SUCCESS.withNewHandStack(stack);
         }
         return super.use(world, user, hand);
     }

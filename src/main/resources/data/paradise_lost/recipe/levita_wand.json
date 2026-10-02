@@ -6,12 +6,8 @@
     "#  "
   ],
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "X": {
-      "item": "paradise_lost:levita_gem"
-    }
+    "#": "minecraft:stick",
+    "X": "paradise_lost:levita_gem"
   },
   "result": {
     "id": "paradise_lost:levita_wand"

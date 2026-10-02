@@ -19,7 +19,7 @@
     "lava_level": {
       "above_bottom": 0
     },
-    "replaceable": "#minecraft:overworld_carver_replaceables",
+    "replaceable": "#paradise_lost:worldgen/cloud_carver_replaceables",
     "horizontal_radius_multiplier": {
       "type": "minecraft:uniform",
       "max_exclusive": 0.75,

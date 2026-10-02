@@ -5,9 +5,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:raw_surtrum"
-    }
+    "#": "paradise_lost:raw_surtrum"
   },
   "result": {
     "id": "paradise_lost:surtrum"

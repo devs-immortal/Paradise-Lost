@@ -6,18 +6,10 @@
     "CCC"
   ],
   "key": {
-    "A": {
-      "tag": "c:buckets/milk"
-    },
-    "B": {
-      "item": "minecraft:sugar"
-    },
-    "C": {
-      "item": "minecraft:wheat"
-    },
-    "E": {
-      "item": "minecraft:egg"
-    }
+    "A": "#c:buckets/milk",
+    "B": "minecraft:sugar",
+    "C": "minecraft:wheat",
+    "E": "minecraft:egg"
   },
   "result": {
     "id": "minecraft:cake"

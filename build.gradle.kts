@@ -8,6 +8,7 @@ val javaVersion: String by properties
 val fabricVersion: String by properties
 val fabricAsmVersion: String by properties
 val sherdsApiVersion: String by properties
+val tommylibVersion: String by properties
 val customPortalApiVersion: String by properties
 val cardinalComponentsVersion: String by properties
 
@@ -16,7 +17,7 @@ val everyCompatVersion: String by properties
 val stoneZoneVersion: String by properties
 
 plugins {
-    id("fabric-loom") version "1.13-SNAPSHOT"
+    id("fabric-loom") version "1.16-SNAPSHOT"
     id("com.modrinth.minotaur") version "2.8.7"
     id("de.guntram.mcmod.crowdin-translate") version "1.4+1.19"
     `maven-publish`
@@ -131,34 +132,37 @@ dependencies {
 
     modImplementation(
             group = "dev.thomasglasser.sherdsapi",
-            name = "sherdsapi-fabric-1.21.1",
+            name = "sherdsapi-fabric-1.21.3",
             version = sherdsApiVersion,
     ).also(::include)
 
     modImplementation(
-            group = "net.fabricmc.fabric-api",
-            name = "fabric-api",
-            version = fabricVersion,
-    )
+            group = "dev.thomasglasser.tommylib",
+            name = "tommylib-fabric-1.21.3",
+            version = tommylibVersion,
+    ).also(::include)
 
-    modImplementation(
-            group = "maven.modrinth",
-            name = "moonlight",
-            version = moonlightVersion,
-    )
+    modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion") {
+        version { strictly(fabricVersion) }
+    }
 
-    modImplementation(
-            group = "maven.modrinth",
-            name = "every-compat",
-            version = everyCompatVersion,
-    )
-
-    modImplementation(
-            group = "maven.modrinth",
-            name = "stone-zone",
-            version = stoneZoneVersion,
-    )
-
+//    modImplementation(
+//            group = "maven.modrinth",
+//            name = "moonlight",
+//            version = moonlightVersion,
+//    )
+//
+//    modImplementation(
+//            group = "maven.modrinth",
+//            name = "every-compat",
+//            version = everyCompatVersion,
+//    )
+//
+//    modImplementation(
+//            group = "maven.modrinth",
+//            name = "stone-zone",
+//            version = stoneZoneVersion,
+//    )
 }
 
 tasks {

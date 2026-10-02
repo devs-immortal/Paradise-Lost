@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "group": "planks",
   "ingredients": [
-    {
-      "tag": "paradise_lost:menth_logs"
-    }
+    "#paradise_lost:menth_logs"
   ],
   "result": {
     "id": "paradise_lost:menth_planks",

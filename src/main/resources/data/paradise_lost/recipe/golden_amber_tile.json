@@ -5,9 +5,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "paradise_lost:golden_amber"
-    }
+    "#": "paradise_lost:golden_amber"
   },
   "result": {
     "count": 4,
