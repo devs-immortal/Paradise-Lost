@@ -27,6 +27,7 @@ public final class ParadiseLostSoundEvents {
     public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_GLAZED_GOLD = registerReference("item.armor.equip.glazed_gold");
     public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_SURTRUM = registerReference("item.armor.equip.surtrum");
     public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_RELIC = registerReference("item.armor.equip.relic");
+    public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_FLAXWEAVE = registerReference("item.armor.equip.flaxweave");
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = register("item.bloodstone.prick");
     public static final SoundEvent SOUL_BLADE_HARVEST = register("item.soul_blade.harvest");
 

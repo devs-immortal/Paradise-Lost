@@ -55,6 +55,9 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
         add(ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_RELIC.value(), SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.item.armor.equip.relic")
                 .with(event("item.armor.equip_chain")));
+        add(ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_FLAXWEAVE.value(), SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.item.armor.equip.flaxweave")
+                .with(event("item.armor.equip_leather")));
 
         add(ParadiseLostSoundEvents.ITEM_BLOODSTONE_PRICK, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.item.bloodstone.prick")

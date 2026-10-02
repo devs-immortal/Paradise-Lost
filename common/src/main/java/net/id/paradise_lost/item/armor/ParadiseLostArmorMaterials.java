@@ -71,7 +71,7 @@ public class ParadiseLostArmorMaterials {
             map.put(ArmorItem.Type.CHESTPLATE, 3);
             map.put(ArmorItem.Type.HELMET, 1);
             map.put(ArmorItem.Type.BODY, 2);
-        }), 10, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_RELIC, 0.0F, 0.0F, () -> Ingredient.of(ItemRegistry.LEVITA_GEM.get()));
+        }), 10, ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_FLAXWEAVE, 0.0F, 0.0F, () -> Ingredient.of(ItemRegistry.FLAXWEAVE.get()));
     }
 
     private static Holder<ArmorMaterial> register(String id, EnumMap<ArmorItem.Type, Integer> defense, int enchantability, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {

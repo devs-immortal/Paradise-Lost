@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "item": "paradise_lost:levita_gem"
+    },
+    "X": {
+      "item": "paradise_lost:flaxweave"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "G G",
+    "X X"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:floaty_leggings"
+  }
+}

@@ -613,6 +613,15 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy("has_ingredient", has(ItemRegistry.FLAXWEAVE.get()))
                 .save(output, ModConstants.id("floaty_boots"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.FLOATY_LEGGINGS.get(), 1)
+                .define('X', ItemRegistry.FLAXWEAVE.get())
+                .define('G', ItemRegistry.LEVITA_GEM.get())
+                .pattern("XXX")
+                .pattern("G G")
+                .pattern("X X")
+                .unlockedBy("has_ingredient", has(ItemRegistry.FLAXWEAVE.get()))
+                .save(output, ModConstants.id("floaty_leggings"));
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BOOK, 1)
                 .requires(Items.PAPER)
                 .requires(Items.PAPER)
