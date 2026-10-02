@@ -11,6 +11,7 @@ import net.id.paradiselost.client.rendering.block.PalaceDoorBlockEntityRenderer;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 
@@ -38,6 +39,15 @@ public class ParadiseLostModelLayers {
     public static final EntityModelLayer ORNATE_OLVITE_ARMOR = register("ornate_olvite", "main", OrnateOlviteArmorModel.getTexturedModelData());
 
     public static final EntityModelLayer PALACE_DOOR = register("palace_door", "main", PalaceDoorBlockEntityRenderer.getTexturedModelData());
+
+    public static final EntityModelLayer AUREL_BOAT = register("boat/aurel", "main", BoatEntityModel.getTexturedModelData());
+    public static final EntityModelLayer AUREL_CHEST_BOAT = register("chest_boat/aurel", "main", BoatEntityModel.getChestTexturedModelData());
+    public static final EntityModelLayer MOTHER_AUREL_BOAT = register("boat/mother_aurel", "main", BoatEntityModel.getTexturedModelData());
+    public static final EntityModelLayer MOTHER_AUREL_CHEST_BOAT = register("chest_boat/mother_aurel", "main", BoatEntityModel.getChestTexturedModelData());
+    public static final EntityModelLayer MENTH_BOAT = register("boat/menth", "main", BoatEntityModel.getTexturedModelData());
+    public static final EntityModelLayer MENTH_CHEST_BOAT = register("chest_boat/menth", "main", BoatEntityModel.getChestTexturedModelData());
+    public static final EntityModelLayer WISTERIA_BOAT = register("boat/wisteria", "main", BoatEntityModel.getTexturedModelData());
+    public static final EntityModelLayer WISTERIA_CHEST_BOAT = register("chest_boat/wisteria", "main", BoatEntityModel.getChestTexturedModelData());
 
 
     public static EntityModelLayer register(Identifier id, String layer, TexturedModelData data) {

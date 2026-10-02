@@ -3,6 +3,7 @@ package net.id.paradiselost.blocks.blockentity;
 import net.id.paradiselost.component.MoaGenes;
 import net.id.paradiselost.items.ParadiseLostItems;
 import net.id.paradiselost.util.ParadiseLostSoundEvents;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -62,18 +63,24 @@ public class IncubatorBlockEntity extends BlockEntity {
                 world.playSound(null, pos, ParadiseLostSoundEvents.ENTITY_MOA_EGG_HATCH, SoundCategory.BLOCKS, 0.8F, 0.5F);
                 world.spawnEntity(moa);
                 incubator.egg = ItemStack.EMPTY;
+                incubator.sync();
             }
             incubator.markDirty();
         }
     }
 
     public void handleUse(PlayerEntity player, Hand hand, ItemStack handStack) {
-        markDirty();
         owner = player.getUuid();
         ItemStack stored = egg.copy();
         egg = handStack.copy();
         player.setStackInHand(hand, stored);
         hatchTicks = (int) (12000 / world.getBiome(pos).value().getTemperature());
+        sync();
+    }
+
+    private void sync() {
+        markDirty();
+        world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
     }
 
     public boolean hasItem() {

@@ -54,7 +54,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static net.id.paradiselost.ParadiseLost.MOD_ID;
 import static net.id.paradiselost.ParadiseLost.locate;
 import static net.id.paradiselost.items.ParadiseLostItemActions.*;
 import static net.minecraft.util.Rarity.*;
@@ -560,12 +559,12 @@ public class ParadiseLostItems {
 
     @SafeVarargs
     private static BlockItem add(Block block, Consumer<ItemConvertible>... additionalActions) {
-        return add(Registries.BLOCK.getId(block), block, new Settings(), additionalActions);
+        return add(block, new Settings(), additionalActions);
     }
 
     @SafeVarargs
     private static BlockItem add(Block block, Settings settings, Consumer<ItemConvertible>... additionalActions) {
-        return add(Registries.BLOCK.getId(block), block, settings, additionalActions);
+        return add(Registries.BLOCK.getId(block), block, settings.translationKey(block.getTranslationKey()), additionalActions);
     }
 
     @SafeVarargs
@@ -574,7 +573,7 @@ public class ParadiseLostItems {
                 (block instanceof DoorBlock || block instanceof TallPlantBlock)
                         ? blockItemSettings -> new TallBlockItem(block, blockItemSettings)
                         : blockItemSettings -> new BlockItem(block, blockItemSettings),
-                settings.translationKey(block.getTranslationKey()),
+                settings,
                 additionalActions);
     }
 
@@ -583,8 +582,6 @@ public class ParadiseLostItems {
     }
 
     private static BoatSet addBoatItems(String woodId, EntityType<? extends AbstractBoatEntity> boatType, EntityType<? extends AbstractBoatEntity> chestBoatType) {
-        String boatId = (MOD_ID + "_" + woodId);
-
         BoatItem boat = add(woodId + "_boat", settings -> new BoatItem(boatType, settings), new Item.Settings().maxCount(1), fuel(1200));
         BoatItem chestBoat = add(woodId + "_chest_boat", settings -> new BoatItem(chestBoatType, settings), new Item.Settings().maxCount(1), fuel(1200));
 

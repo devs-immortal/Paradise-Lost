@@ -2,6 +2,7 @@ package net.id.paradiselost.blocks.mechanical;
 
 import com.mojang.serialization.MapCodec;
 import net.id.paradiselost.blocks.blockentity.IncubatorBlockEntity;
+import net.id.paradiselost.blocks.blockentity.ParadiseLostBlockEntityTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -65,7 +66,7 @@ public class IncubatorBlock extends ParadiseLostBlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return IncubatorBlockEntity::tickServer;
+        return world.isClient ? null : validateTicker(type, ParadiseLostBlockEntityTypes.INCUBATOR, IncubatorBlockEntity::tickServer);
     }
 
     @Override
