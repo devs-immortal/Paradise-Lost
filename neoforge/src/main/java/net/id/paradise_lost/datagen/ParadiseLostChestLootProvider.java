@@ -4,6 +4,7 @@ import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.loot.ParadiseLostLootTables;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
+import net.id.paradise_lost.util.ParadiseLostEnchantments;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
@@ -129,6 +130,13 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(Items.WRITABLE_BOOK, 1))
                         .add(item(Items.BOOK, 6).apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(30.0F))
                                 .fromOptions(enchantments.getOrThrow(EnchantmentTags.ON_RANDOM_LOOT)))))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .when(LootItemRandomChanceCondition.randomChance(0.35F))
+                        .add(LootItem.lootTableItem(Items.BOOK)
+                                .apply(new SetEnchantmentsFunction.Builder(false)
+                                        .withEnchantment(
+                                                enchantments.getOrThrow(ParadiseLostEnchantments.RENDING),
+                                                UniformGenerator.between(1.0F, 3.0F)))))
                 .setRandomSequence(ModConstants.id("chests/palace/library")));
 
         output.accept(ParadiseLostLootTables.PALACE_SECRET_JUNK, LootTable.lootTable()

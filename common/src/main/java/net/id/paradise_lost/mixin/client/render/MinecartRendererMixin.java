@@ -6,6 +6,7 @@ import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(MinecartRenderer.class)
@@ -19,11 +20,21 @@ public class MinecartRendererMixin {
                     ordinal = 0
             )
     )
-    private Vec3 paradiseLost$useFloatingEntityRotation(AbstractMinecart cart, double x, double y, double z) {
-        // Skip nearby-rail snap (causes exit twitch); use entity yaw/pitch from last rail shape.
-        if (MinecartFloating.isFloating(cart) && !MinecartFloating.isCartOnRail(cart)) {
+    private Vec3 paradiseLost$skipExitRailSnap(AbstractMinecart cart, double x, double y, double z) {
+        if (MinecartFloating.shouldUseFloatingRenderRotation(cart)) {
             return null;
         }
         return cart.getPos(x, y, z);
+    }
+
+    @ModifyVariable(method = "render", at = @At("HEAD"), argsOnly = true, ordinal = 0)
+    private float paradiseLost$floatingRailYaw(float entityYaw, AbstractMinecart cart) {
+        if (MinecartFloating.shouldUseFloatingRenderRotation(cart)) {
+            Float yaw = MinecartFloating.getFloatingRenderYaw(cart);
+            if (yaw != null) {
+                return yaw;
+            }
+        }
+        return entityYaw;
     }
 }
