@@ -140,19 +140,27 @@ public final class MinecartFloating {
     }
 
     public static void applyFloatingRotation(AbstractMinecart cart) {
-        Vec3 tangent = getMotionAlignedTangent(cart);
-        if (tangent == null) {
+        int incline = getIncline(cart);
+        if (incline == 0 || getMotionAlignedTangent(cart) == null) {
             cart.setXRot(0.0F);
             cart.xRotO = 0.0F;
             return;
         }
-        float pitch = getIncline(cart) * 45.0F;
+        float pitch = incline * 45.0F;
         cart.setXRot(pitch);
         cart.xRotO = pitch;
     }
 
     public static boolean shouldUseFloatingRenderRotation(AbstractMinecart cart) {
-        return isFloating(cart) && !isCartOnRail(cart) && getRailShape(cart) != null;
+        return isFloating(cart) && getIncline(cart) != 0;
+    }
+
+
+    public static boolean isMidairAboveRail(AbstractMinecart cart, BlockPos railPos, boolean alreadyLeftRails) {
+        return alreadyLeftRails
+                && isFloating(cart)
+                && getIncline(cart) != 0
+                && cart.getY() - railPos.getY() > 0.4D;
     }
 
     @Nullable
