@@ -1,0 +1,11 @@
+{
+  "type": "paradise_lost:lake",
+  "config": {
+    "state": {
+      "Name": "minecraft:water",
+      "Properties": {
+        "level": "0"
+      }
+    }
+  }
+}

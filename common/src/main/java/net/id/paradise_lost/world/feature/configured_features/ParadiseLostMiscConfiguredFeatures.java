@@ -2,6 +2,8 @@ package net.id.paradise_lost.world.feature.configured_features;
 
 import net.id.paradise_lost.world.feature.ParadiseLostFeatures;
 import net.id.paradise_lost.world.feature.configs.BoulderFeatureConfig;
+import net.id.paradise_lost.world.feature.configs.RiverConfiguration;
+import net.id.paradise_lost.world.feature.configs.FrozenAwareFeatureConfig;
 import net.id.paradise_lost.world.feature.configs.JaggedOreConfig;
 import net.id.paradise_lost.world.feature.configs.LongFeatureConfig;
 import net.id.paradise_lost.world.feature.placed_features.ParadiseLostMiscPlacedFeatures;
@@ -35,6 +37,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
@@ -86,6 +89,12 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
     public static final ResourceKey<ConfiguredFeature<?, ?>> TUNDRA_SNOW = of("tundra_snow");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TUNDRA_SPIRES = of("tundra_spires");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_SPRING = of("spring_water");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_LAKE = of("water_lake");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_LAKE = of("ice_lake");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> RIVER_CHANNEL = of("river_channel");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FROZEN_RIVER_CHANNEL = of("frozen_river_channel");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VOID_SPILL = of("void_spill");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FROZEN_VOID_SPILL = of("frozen_void_spill");
 
     public static void init() {
     }
@@ -109,5 +118,11 @@ public class ParadiseLostMiscConfiguredFeatures extends ParadiseLostConfiguredFe
         register(context, TUNDRA_PONDS, Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(Blocks.ICE.defaultBlockState(), Blocks.PACKED_ICE.defaultBlockState(), UniformInt.of(4, 9), UniformInt.of(0, 1)));
         register(context, TUNDRA_SNOW, Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(Blocks.POWDER_SNOW.defaultBlockState(), Blocks.SNOW_BLOCK.defaultBlockState(), UniformInt.of(3, 8), UniformInt.of(0, 1)));
         register(context, TUNDRA_SPIRES, ParadiseLostFeatures.VITROULITE_SPIRE_FEATURE, NoneFeatureConfiguration.INSTANCE);
+        register(context, WATER_LAKE, ParadiseLostFeatures.LAKE, new BlockStateConfiguration(Blocks.WATER.defaultBlockState()));
+        register(context, ICE_LAKE, ParadiseLostFeatures.LAKE, new BlockStateConfiguration(Blocks.WATER.defaultBlockState()));
+        register(context, RIVER_CHANNEL, ParadiseLostFeatures.RIVER_CHANNEL, RiverConfiguration.thawed());
+        register(context, FROZEN_RIVER_CHANNEL, ParadiseLostFeatures.RIVER_CHANNEL, RiverConfiguration.iced());
+        register(context, VOID_SPILL, ParadiseLostFeatures.VOID_SPILL, FrozenAwareFeatureConfig.THAWED);
+        register(context, FROZEN_VOID_SPILL, ParadiseLostFeatures.VOID_SPILL, FrozenAwareFeatureConfig.FROZEN);
     }
 }

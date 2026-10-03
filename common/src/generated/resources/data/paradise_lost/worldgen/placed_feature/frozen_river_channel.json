@@ -1,0 +1,8 @@
+{
+  "feature": "paradise_lost:frozen_river_channel",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

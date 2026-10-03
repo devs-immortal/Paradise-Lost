@@ -66,7 +66,7 @@ public final class ParadiseLostBiomes {
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityRegistry.ENVOY.get(), 50, 2, 3))
                         .addMobCharge(EntityRegistry.ENVOY.get(), 0.7d, 0.2d)
                         .build())
-                .generationSettings(baseGen(placedFeatures, carvers)
+                .generationSettings(baseGen(placedFeatures, carvers, true, true, RiverStyle.ICE)
                         .addFeature(GenerationStep.Decoration.LAKES, ParadiseLostMiscPlacedFeatures.TUNDRA_PONDS)
                         .addFeature(GenerationStep.Decoration.LAKES, ParadiseLostMiscPlacedFeatures.TUNDRA_SNOW)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ParadiseLostMiscPlacedFeatures.GENERIC_BOULDER)
@@ -315,7 +315,7 @@ public final class ParadiseLostBiomes {
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityRegistry.ENVOY.get(), 50, 1, 3))
                         .addMobCharge(EntityRegistry.ENVOY.get(), 0.7d, 0.2d)
                         .build())
-                .generationSettings(baseGen(placedFeatures, carvers, false)
+                .generationSettings(baseGen(placedFeatures, carvers, false, true, RiverStyle.NONE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostVegetationPlacedFeatures.NATURAL_SWEDROOT)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostVegetationPlacedFeatures.TALL_GRASS)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostVegetationPlacedFeatures.BUSH)
@@ -354,17 +354,25 @@ public final class ParadiseLostBiomes {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostTreePlacedFeatures.RAINBOW_FOREST_TREES)
                         .build())
                 .build());
-
     }
 
     private static final Music PARADISE_MUSIC = new Music(Holder.direct(ParadiseLostSoundEvents.MUSIC_PARADISE_LOST), 12000, 24000, false);
     private static final ResourceKey<ConfiguredWorldCarver<?>> CAVE = ResourceKey.create(Registries.CONFIGURED_CARVER, ResourceLocation.withDefaultNamespace("cave"));
 
+    /** Noise rivers cut land like vanilla; NONE for void/tradewinds. */
+    private enum RiverStyle { NONE, WATER, ICE }
+
     private static BiomeGenerationSettings.Builder baseGen(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
-        return baseGen(features, carvers, true);
+        return baseGen(features, carvers, true, true, RiverStyle.WATER);
     }
 
-    private static BiomeGenerationSettings.Builder baseGen(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers, boolean calciteBlob) {
+    private static BiomeGenerationSettings.Builder baseGen(
+            HolderGetter<PlacedFeature> features,
+            HolderGetter<ConfiguredWorldCarver<?>> carvers,
+            boolean calciteBlob,
+            boolean fluidSprings,
+            RiverStyle riverStyle
+    ) {
         var builder = new BiomeGenerationSettings.Builder(features, carvers)
                 .addCarver(GenerationStep.Carving.AIR, CAVE)
                 .addCarver(GenerationStep.Carving.AIR, ParadiseLostConfiguredCarvers.LARGE_COLD_CLOUD)
@@ -380,14 +388,25 @@ public final class ParadiseLostBiomes {
         if (calciteBlob) {
             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ParadiseLostMiscPlacedFeatures.CALCITE_BLOB);
         }
-        return builder
+        // Noise-contour rivers: once per chunk, before vegetation (zip LOCAL_MODIFICATIONS)
+        if (riverStyle == RiverStyle.WATER) {
+            builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ParadiseLostMiscPlacedFeatures.RIVER_CHANNEL);
+            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostTreePlacedFeatures.RIVERBANK_TREES);
+        } else if (riverStyle == RiverStyle.ICE) {
+            builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ParadiseLostMiscPlacedFeatures.FROZEN_RIVER_CHANNEL);
+            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostTreePlacedFeatures.FROZEN_RIVERBANK_TREES);
+        }
+        builder
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ParadiseLostMiscPlacedFeatures.HELIOLITH_BLOB)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ParadiseLostMiscPlacedFeatures.LEVITA_BLOB)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ParadiseLostMiscPlacedFeatures.ORE_CHERINE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ParadiseLostMiscPlacedFeatures.ORE_LEVITA)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ParadiseLostMiscPlacedFeatures.ORE_OLVITE)
-                .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ParadiseLostMiscPlacedFeatures.ORE_FLOESTONE_REDSTONE)
-                .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, ParadiseLostMiscPlacedFeatures.WATER_SPRING)
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ParadiseLostMiscPlacedFeatures.ORE_FLOESTONE_REDSTONE);
+        if (fluidSprings) {
+            builder.addFeature(GenerationStep.Decoration.FLUID_SPRINGS, ParadiseLostMiscPlacedFeatures.WATER_SPRING);
+        }
+        return builder
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostVegetationPlacedFeatures.PATCH_BROWN_SPORECAP)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostVegetationPlacedFeatures.PATCH_PINK_SPORECAP)
                 .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, MiscOverworldPlacements.FREEZE_TOP_LAYER);
