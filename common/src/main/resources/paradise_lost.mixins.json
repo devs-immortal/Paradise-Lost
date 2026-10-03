@@ -47,6 +47,7 @@
     "client.render.ClientWorldPropertiesMixin",
     "client.render.CloudRendererMixin",
     "client.render.FluidRendererMixin",
+    "client.render.HumanoidArmorLayerMixin",
     "client.render.InGameHudMixin",
     "client.render.InGameOverlayRendererMixin",
     "client.render.ItemRendererMixin",
