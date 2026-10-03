@@ -221,6 +221,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item, ItemNameBlockItem> SWEDROOT = add("swedroot", () -> new ItemNameBlockItem(BlockRegistry.SWEDROOT.get(), food(ParadiseLostFoodComponent.SWEDROOT)), compostable30);
     public static final RegistryObject<Item, Item> BLACKCURRANT_PIE = add("blackcurrant_pie", () -> new Item(food(ParadiseLostFoodComponent.BLACKCURRANT_PIE)), compostable100);
     public static final RegistryObject<Item, Item> BLACKCURRANT_COOKIE = add("blackcurrant_cookie", () -> new Item(food(ParadiseLostFoodComponent.BLACKCURRANT_COOKIE)), compostable85);
+    public static final RegistryObject<Item, OminousCookieItem> OMINOUS_COOKIE = add("ominous_cookie", () -> new OminousCookieItem(food(ParadiseLostFoodComponent.OMINOUS_COOKIE)), compostable85);
     public static final RegistryObject<Item, Item> ROOT_STEW = add("root_stew", () -> new Item(food(ParadiseLostFoodComponent.ROOT_STEW)));
     public static final RegistryObject<Item, ItemNameBlockItem> FLAXSEED = add("flaxseed", () -> new ItemNameBlockItem(BlockRegistry.FLAX.get(), food()), compostable30);
     public static final RegistryObject<Item, Item> MOA_MEAT = add("moa_meat", () -> new Item(food(ParadiseLostFoodComponent.MOA_MEAT)));

@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:moa_meat",
-      "required": false
-    }
+    "paradise_lost:moa_meat"
   ]
 }

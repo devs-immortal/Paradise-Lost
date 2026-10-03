@@ -1,12 +1,6 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:amadrys_bushel",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:amadrys_bundle",
-      "required": false
-    }
+    "paradise_lost:amadrys_bushel",
+    "paradise_lost:amadrys_bundle"
   ]
 }

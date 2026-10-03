@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:amadrys_bread",
-      "required": false
-    }
+    "paradise_lost:amadrys_bread"
   ]
 }

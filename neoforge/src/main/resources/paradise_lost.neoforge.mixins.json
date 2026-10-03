@@ -11,6 +11,7 @@
     "block.PoweredRailBlockMixin",
     "entity.AbstractMinecartMixin",
     "item.FloatyBootsItemMixin",
+    "item.FloatyLeggingsItemMixin",
     "server.EntityTrackerEntryMixin"
   ],
   "injectors": {

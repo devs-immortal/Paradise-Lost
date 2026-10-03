@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:popom_jelly",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:swedroot",
-      "required": false
-    },
-    {
-      "id": "minecraft:sugar",
-      "required": false
-    }
+    "paradise_lost:popom_jelly",
+    "paradise_lost:swedroot",
+    "minecraft:sugar"
   ]
 }

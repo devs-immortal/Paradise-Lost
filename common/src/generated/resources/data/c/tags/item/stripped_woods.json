@@ -1,20 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:stripped_aurel_wood",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:stripped_mother_aurel_wood",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:stripped_menth_wood",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:stripped_wisteria_wood",
-      "required": false
-    }
+    "paradise_lost:stripped_aurel_wood",
+    "paradise_lost:stripped_mother_aurel_wood",
+    "paradise_lost:stripped_menth_wood",
+    "paradise_lost:stripped_wisteria_wood"
   ]
 }

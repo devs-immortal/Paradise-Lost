@@ -23,6 +23,9 @@ public class ParadiseLostRecipeTypes {
     public static RecipeSerializer<CraftingCalciteDecoratedPotRecipe> CALCITE_DECORATED_POT_RECIPE_SERIALIZER;
     public static RecipeType<CraftingCalciteDecoratedPotRecipe> CALCITE_DECORATED_POT_RECIPE_TYPE;
 
+    public static final String OMINOUS_COOKIE_RECIPE_ID = "crafting_ominous_cookie";
+    public static RecipeSerializer<CraftingOminousCookieRecipe> OMINOUS_COOKIE_RECIPE_SERIALIZER;
+
     @SuppressWarnings("unchecked")
     static <S extends RecipeSerializer<T>, T extends Recipe<?>> S registerSerializer(String id, S serializer) {
         RECIPE_SERIALIZERS.register(id, () -> serializer);
@@ -46,5 +49,6 @@ public class ParadiseLostRecipeTypes {
         TREE_TAP_RECIPE_TYPE = registerRecipeType(TREE_TAP_RECIPE_ID);
         CALCITE_DECORATED_POT_RECIPE_SERIALIZER = registerSerializer(CALCITE_DECORATED_POT_RECIPE_ID, new SimpleCraftingRecipeSerializer<>(CraftingCalciteDecoratedPotRecipe::new));
         CALCITE_DECORATED_POT_RECIPE_TYPE = registerRecipeType(CALCITE_DECORATED_POT_RECIPE_ID);
+        OMINOUS_COOKIE_RECIPE_SERIALIZER = registerSerializer(OMINOUS_COOKIE_RECIPE_ID, new CraftingOminousCookieRecipe.Serializer());
     }
 }

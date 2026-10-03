@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:cherine_ore",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:olvite_ore",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:levita_ore",
-      "required": false
-    }
+    "paradise_lost:cherine_ore",
+    "paradise_lost:olvite_ore",
+    "paradise_lost:levita_ore"
   ]
 }

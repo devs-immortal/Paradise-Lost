@@ -1,16 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:blackcurrant_cookie",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:amadrys_bread_glazed",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:amadrys_bread_glazed_filled",
-      "required": false
-    }
+    "paradise_lost:blackcurrant_cookie",
+    "paradise_lost:ominous_cookie",
+    "paradise_lost:amadrys_bread_glazed",
+    "paradise_lost:amadrys_bread_glazed_filled"
   ]
 }

@@ -1,20 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:glazed_gold_boots",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:olvite_boots",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:surtrum_boots",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:floaty_boots",
-      "required": false
-    }
+    "paradise_lost:glazed_gold_boots",
+    "paradise_lost:olvite_boots",
+    "paradise_lost:surtrum_boots",
+    "paradise_lost:floaty_boots"
   ]
 }

@@ -1,20 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:glazed_gold_helmet",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:olvite_helmet",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:ornate_olvite_helmet",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:surtrum_helmet",
-      "required": false
-    }
+    "paradise_lost:glazed_gold_helmet",
+    "paradise_lost:olvite_helmet",
+    "paradise_lost:ornate_olvite_helmet",
+    "paradise_lost:surtrum_helmet"
   ]
 }

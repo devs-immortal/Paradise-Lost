@@ -123,6 +123,9 @@
     "paradise_lost:nitra_bulb": {
       "chance": 0.5
     },
+    "paradise_lost:ominous_cookie": {
+      "chance": 0.85
+    },
     "paradise_lost:packed_swedroot": {
       "chance": 0.85
     },

@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:surtrum_axe",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:glazed_gold_axe",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:olvite_axe",
-      "required": false
-    }
+    "paradise_lost:surtrum_axe",
+    "paradise_lost:glazed_gold_axe",
+    "paradise_lost:olvite_axe"
   ]
 }

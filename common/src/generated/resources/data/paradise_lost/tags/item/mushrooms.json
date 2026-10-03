@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:rootcap",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:brown_sporecap",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:pink_sporecap",
-      "required": false
-    }
+    "paradise_lost:rootcap",
+    "paradise_lost:brown_sporecap",
+    "paradise_lost:pink_sporecap"
   ]
 }
