@@ -1,68 +1,97 @@
 package net.id.paradise_lost.recipe;
 
-import net.id.paradise_lost.registry.ItemRegistry;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapedRecipePattern;
 
-/**
- * Shaped-like cookie recipe:
- * <pre>
- * A C A
- *   O
- * </pre>
- * where A is amadrys bushel, C is cocoa beans, and O is an ominous bottle.
- * Yields 8 cookies that inherit {@link DataComponents#OMINOUS_BOTTLE_AMPLIFIER}.
- */
-public class CraftingOminousCookieRecipe extends CustomRecipe {
+public class CraftingOminousCookieRecipe extends ShapedRecipe {
     public static final int OUTPUT_COUNT = 8;
 
-    public CraftingOminousCookieRecipe(CraftingBookCategory category) {
-        super(category);
-    }
+    private final ShapedRecipePattern shapedPattern;
 
-    @Override
-    public boolean matches(CraftingInput input, Level world) {
-        if (input.width() != 3 || input.height() != 2) {
-            return false;
-        }
-        return input.getItem(0).isEmpty() &&
-                input.getItem(1).is(Items.OMINOUS_BOTTLE) &&
-                input.getItem(2).isEmpty() &&
-                input.getItem(3).is(ItemRegistry.AMADRYS_BUSHEL.get()) &&
-                input.getItem(4).is(Items.COCOA_BEANS) &&
-                input.getItem(5).is(ItemRegistry.AMADRYS_BUSHEL.get());
+    public CraftingOminousCookieRecipe(
+            String group,
+            CraftingBookCategory category,
+            ShapedRecipePattern pattern,
+            ItemStack result,
+            boolean showNotification
+    ) {
+        super(group, category, pattern, result, showNotification);
+        this.shapedPattern = pattern;
     }
 
     @Override
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
-        ItemStack bottle = input.getItem(1);
-        ItemStack result = new ItemStack(ItemRegistry.OMINOUS_COOKIE.get(), OUTPUT_COUNT);
-        Integer amplifier = bottle.get(DataComponents.OMINOUS_BOTTLE_AMPLIFIER);
-        if (amplifier != null) {
-            result.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, amplifier);
+        ItemStack result = super.assemble(input, registries);
+        for (int i = 0; i < input.size(); i++) {
+            ItemStack stack = input.getItem(i);
+            if (stack.is(Items.OMINOUS_BOTTLE)) {
+                Integer amplifier = stack.get(DataComponents.OMINOUS_BOTTLE_AMPLIFIER);
+                if (amplifier != null) {
+                    result.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, amplifier);
+                }
+                break;
+            }
         }
         return result;
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return width >= 3 && height >= 2;
-    }
-
-    @Override
-    public ItemStack getResultItem(HolderLookup.Provider registries) {
-        return new ItemStack(ItemRegistry.OMINOUS_COOKIE.get(), OUTPUT_COUNT);
-    }
-
-    @Override
     public RecipeSerializer<?> getSerializer() {
         return ParadiseLostRecipeTypes.OMINOUS_COOKIE_RECIPE_SERIALIZER;
+    }
+
+    public static class Serializer implements RecipeSerializer<CraftingOminousCookieRecipe> {
+        public static final MapCodec<CraftingOminousCookieRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                Codec.STRING.optionalFieldOf("group", "").forGetter(ShapedRecipe::getGroup),
+                CraftingBookCategory.CODEC.optionalFieldOf("category", CraftingBookCategory.MISC).forGetter(ShapedRecipe::category),
+                ShapedRecipePattern.MAP_CODEC.forGetter(recipe -> recipe.shapedPattern),
+                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(recipe -> recipe.getResultItem(RegistryAccess.EMPTY)),
+                Codec.BOOL.optionalFieldOf("show_notification", true).forGetter(ShapedRecipe::showNotification)
+        ).apply(instance, CraftingOminousCookieRecipe::new));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, CraftingOminousCookieRecipe> STREAM_CODEC = StreamCodec.of(
+                Serializer::toNetwork,
+                Serializer::fromNetwork
+        );
+
+        private static CraftingOminousCookieRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+            String group = buffer.readUtf();
+            CraftingBookCategory category = buffer.readEnum(CraftingBookCategory.class);
+            ShapedRecipePattern pattern = ShapedRecipePattern.STREAM_CODEC.decode(buffer);
+            ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);
+            boolean showNotification = buffer.readBoolean();
+            return new CraftingOminousCookieRecipe(group, category, pattern, result, showNotification);
+        }
+
+        private static void toNetwork(RegistryFriendlyByteBuf buffer, CraftingOminousCookieRecipe recipe) {
+            buffer.writeUtf(recipe.getGroup());
+            buffer.writeEnum(recipe.category());
+            ShapedRecipePattern.STREAM_CODEC.encode(buffer, recipe.shapedPattern);
+            ItemStack.STREAM_CODEC.encode(buffer, recipe.getResultItem(RegistryAccess.EMPTY));
+            buffer.writeBoolean(recipe.showNotification());
+        }
+
+        @Override
+        public MapCodec<CraftingOminousCookieRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, CraftingOminousCookieRecipe> streamCodec() {
+            return STREAM_CODEC;
+        }
     }
 }
