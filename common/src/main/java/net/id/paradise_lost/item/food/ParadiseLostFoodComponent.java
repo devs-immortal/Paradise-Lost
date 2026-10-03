@@ -23,6 +23,6 @@ public class ParadiseLostFoodComponent {
     public static final FoodProperties BLACKCURRANT_PIE = new FoodProperties.Builder().nutrition(9).saturationModifier(0.2F).build();
     public static final FoodProperties BLACKCURRANT_COOKIE = new FoodProperties.Builder().nutrition(5).saturationModifier(1.2F).build();
     /** Matches vanilla cookie nutrition / saturation; Bad Omen is applied from the stack's ominous amplifier. */
-    public static final FoodProperties OMINOUS_COOKIE = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build();
+    public static final FoodProperties OMINOUS_COOKIE = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).alwaysEdible().build();
     public static final FoodProperties ROOT_STEW = new FoodProperties.Builder().nutrition(10).saturationModifier(1.5F).usingConvertsTo(Items.BOWL).build();
 }
