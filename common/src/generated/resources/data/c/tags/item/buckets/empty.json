@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:aurel_bucket",
-      "required": false
-    }
+    "paradise_lost:aurel_bucket"
   ]
 }

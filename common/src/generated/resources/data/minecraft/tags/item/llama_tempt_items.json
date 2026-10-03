@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:amadrys_bundle",
-      "required": false
-    }
+    "paradise_lost:amadrys_bundle"
   ]
 }

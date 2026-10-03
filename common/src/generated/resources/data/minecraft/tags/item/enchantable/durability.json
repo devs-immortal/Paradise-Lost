@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:xp_circlet",
-      "required": false
-    }
+    "paradise_lost:xp_circlet"
   ]
 }

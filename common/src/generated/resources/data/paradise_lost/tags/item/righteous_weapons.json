@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "minecraft:golden_sword",
-      "required": false
-    },
-    {
-      "id": "minecraft:netherite_sword",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:glazed_gold_sword",
-      "required": false
-    }
+    "minecraft:golden_sword",
+    "minecraft:netherite_sword",
+    "paradise_lost:glazed_gold_sword"
   ]
 }

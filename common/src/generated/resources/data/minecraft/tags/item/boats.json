@@ -1,20 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:aurel_boat",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:mother_aurel_boat",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:menth_boat",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:wisteria_boat",
-      "required": false
-    }
+    "paradise_lost:aurel_boat",
+    "paradise_lost:mother_aurel_boat",
+    "paradise_lost:menth_boat",
+    "paradise_lost:wisteria_boat"
   ]
 }

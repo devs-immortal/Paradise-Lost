@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:cobbled_floestone",
-      "required": false
-    }
+    "paradise_lost:cobbled_floestone"
   ]
 }

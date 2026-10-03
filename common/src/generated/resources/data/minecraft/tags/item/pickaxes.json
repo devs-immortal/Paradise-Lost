@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:surtrum_pickaxe",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:glazed_gold_pickaxe",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:olvite_pickaxe",
-      "required": false
-    }
+    "paradise_lost:surtrum_pickaxe",
+    "paradise_lost:glazed_gold_pickaxe",
+    "paradise_lost:olvite_pickaxe"
   ]
 }

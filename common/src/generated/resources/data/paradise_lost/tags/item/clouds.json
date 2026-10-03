@@ -1,20 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:cold_cloud",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:blue_cloud",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:golden_cloud",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:green_cloud",
-      "required": false
-    }
+    "paradise_lost:cold_cloud",
+    "paradise_lost:blue_cloud",
+    "paradise_lost:golden_cloud",
+    "paradise_lost:green_cloud"
   ]
 }

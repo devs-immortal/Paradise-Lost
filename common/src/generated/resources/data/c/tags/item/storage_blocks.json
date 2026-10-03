@@ -1,28 +1,10 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:flaxweave_cushion",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:amadrys_bundle",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:cherine_block",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:olvite_block",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:refined_surtrum_block",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:nitra_bunch",
-      "required": false
-    }
+    "paradise_lost:flaxweave_cushion",
+    "paradise_lost:amadrys_bundle",
+    "paradise_lost:cherine_block",
+    "paradise_lost:olvite_block",
+    "paradise_lost:refined_surtrum_block",
+    "paradise_lost:nitra_bunch"
   ]
 }

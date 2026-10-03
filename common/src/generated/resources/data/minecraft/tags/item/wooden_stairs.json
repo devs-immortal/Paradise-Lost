@@ -1,20 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:aurel_stairs",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:mother_aurel_stairs",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:menth_stairs",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:wisteria_stairs",
-      "required": false
-    }
+    "paradise_lost:aurel_stairs",
+    "paradise_lost:mother_aurel_stairs",
+    "paradise_lost:menth_stairs",
+    "paradise_lost:wisteria_stairs"
   ]
 }

@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:nitra_bulb",
-      "required": false
-    }
+    "paradise_lost:nitra_bulb"
   ]
 }

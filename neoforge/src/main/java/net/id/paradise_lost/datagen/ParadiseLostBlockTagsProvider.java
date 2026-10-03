@@ -189,6 +189,11 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.SMALL_FLOWERS).add(
                 ANCIENT_FLOWER.get(), ATARAXIA.get(), CLOUDSBLUFF.get(), DRIGEAN.get(), LUMINAR.get()
         );
+        tag(BlockTags.SLABS).add(
+                LEVITA_BRICK_SET.slab().get(),
+                FLOESTONE_BRICK_SLAB.get(), MOSSY_FLOESTONE_BRICK_SLAB.get(),
+                FLOESTONE_SLAB.get(), MOSSY_FLOESTONE_SLAB.get(), COBBLED_FLOESTONE_SLAB.get()
+        );
         tag(BlockTags.STAIRS).add(
                 LEVITA_BRICK_SET.stairs().get(),
                 FLOESTONE_BRICK_STAIRS.get(), MOSSY_FLOESTONE_BRICK_STAIRS.get(),

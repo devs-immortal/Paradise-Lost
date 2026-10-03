@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:blackcurrant_pie",
-      "required": false
-    }
+    "paradise_lost:blackcurrant_pie"
   ]
 }

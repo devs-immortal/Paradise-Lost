@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:wild_flax",
-      "required": false
-    }
+    "paradise_lost:wild_flax"
   ]
 }

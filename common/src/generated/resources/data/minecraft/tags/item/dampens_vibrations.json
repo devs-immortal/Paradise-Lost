@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:floaty_boots",
-      "required": false
-    }
+    "paradise_lost:floaty_boots"
   ]
 }

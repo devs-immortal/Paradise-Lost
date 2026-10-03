@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:glazed_gold_chestplate",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:olvite_chestplate",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:surtrum_chestplate",
-      "required": false
-    }
+    "paradise_lost:glazed_gold_chestplate",
+    "paradise_lost:olvite_chestplate",
+    "paradise_lost:surtrum_chestplate"
   ]
 }

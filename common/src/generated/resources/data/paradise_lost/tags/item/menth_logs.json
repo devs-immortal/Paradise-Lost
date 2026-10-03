@@ -1,20 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:menth_log",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:menth_wood",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:stripped_menth_log",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:stripped_menth_wood",
-      "required": false
-    }
+    "paradise_lost:menth_log",
+    "paradise_lost:menth_wood",
+    "paradise_lost:stripped_menth_log",
+    "paradise_lost:stripped_menth_wood"
   ]
 }
