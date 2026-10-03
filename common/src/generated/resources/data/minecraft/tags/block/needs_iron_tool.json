@@ -1,20 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:floestone_redstone_ore",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:surtrum",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:levita_ore",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:refined_surtrum_block",
-      "required": false
-    }
+    "paradise_lost:floestone_redstone_ore",
+    "paradise_lost:surtrum",
+    "paradise_lost:levita_ore",
+    "paradise_lost:refined_surtrum_block"
   ]
 }

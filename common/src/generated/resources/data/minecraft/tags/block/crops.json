@@ -1,20 +1,8 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:amadrys",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:flax",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:swedroot",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:nitra",
-      "required": false
-    }
+    "paradise_lost:amadrys",
+    "paradise_lost:flax",
+    "paradise_lost:swedroot",
+    "paradise_lost:nitra"
   ]
 }

@@ -1,11 +1,11 @@
 package net.id.paradise_lost.world.gen.carver;
 
 import net.id.paradise_lost.registry.BlockRegistry;
+import net.id.paradise_lost.tag.ParadiseLostBlockTags;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformFloat;
@@ -37,7 +37,7 @@ public final class ParadiseLostConfiguredCarvers {
     }
 
     public static void bootstrap(BootstrapContext<ConfiguredWorldCarver<?>> context) {
-        HolderSet.Named<Block> replaceable = context.lookup(Registries.BLOCK).getOrThrow(BlockTags.OVERWORLD_CARVER_REPLACEABLES);
+        HolderSet.Named<Block> replaceable = context.lookup(Registries.BLOCK).getOrThrow(ParadiseLostBlockTags.CLOUD_CARVER_REPLACEABLES);
         context.register(BLUE_CLOUD, new ConfiguredWorldCarver<>(
                 ParadiseLostCarvers.CLOUD_CARVER,
                 new CloudCarverConfig(

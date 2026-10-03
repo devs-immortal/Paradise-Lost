@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:highlands_grass",
-      "required": false
-    }
+    "paradise_lost:highlands_grass"
   ]
 }

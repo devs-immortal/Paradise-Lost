@@ -158,13 +158,12 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         if (this.level().isClientSide() || this.level().dimension() != ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             return;
         }
-        Entity self = (Entity) (Object) this;
-        if (ParadiseLostVoidEscape.tryEscape(self)) {
+        // Escape when paradiseVoidKills is false. When the rule is true (or escape fails),
+        // leave vanilla void damage alone — previously we always cancelled and dealt a custom
+        // 4-heart hit, so the gamerule never actually restored normal void death.
+        if (ParadiseLostVoidEscape.tryEscape((Entity) (Object) this)) {
             ci.cancel();
-            return;
         }
-        this.hurt(ParadiseLostDamageTypes.of(this.level(), ParadiseLostDamageTypes.FALL_FROM_PARADISE), 4.0F);
-        ci.cancel();
     }
 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)

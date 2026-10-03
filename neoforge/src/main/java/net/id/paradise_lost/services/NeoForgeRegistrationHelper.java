@@ -3,9 +3,7 @@ package net.id.paradise_lost.services;
 import net.id.paradise_lost.platform.services.IRegistrationHelper;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
@@ -19,26 +17,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NeoForgeRegistrationHelper implements IRegistrationHelper {
-    private static final Map<Block, Block> STRIPPABLES = new ConcurrentHashMap<>();
     private static final Map<Block, Block> TILLABLES = new ConcurrentHashMap<>();
     private static final Map<Block, Block> FLATTENABLES = new ConcurrentHashMap<>();
-
-    private static final Map<Item, Integer> FUELS = new ConcurrentHashMap<>();
-    private static final Map<Item, Float> COMPOST = new ConcurrentHashMap<>();
     private static boolean toolListenersRegistered;
 
     @Override
     public void setFlammable(Object block, int encouragement, int flammability) {
         if (block instanceof Block b) {
             ((FireBlock) Blocks.FIRE).setFlammable(b, encouragement, flammability);
-        }
-    }
-
-    @Override
-    public void registerStrippable(Object log, Object stripped) {
-
-        if (log instanceof Block logBlock && stripped instanceof Block strippedBlock) {
-            STRIPPABLES.put(logBlock, strippedBlock);
         }
     }
 
@@ -81,29 +67,6 @@ public class NeoForgeRegistrationHelper implements IRegistrationHelper {
                 event.setFinalState(path.defaultBlockState());
             }
         }
-    }
-
-    @Override
-    public void registerFuel(ItemLike item, int burnTime) {
-
-        FUELS.put(item.asItem(), burnTime);
-    }
-
-    @Override
-    public void registerCompostable(ItemLike item, float chance) {
-        COMPOST.put(item.asItem(), chance);
-    }
-
-    public static Map<Item, Float> getCompostables() {
-        return Map.copyOf(COMPOST);
-    }
-
-    public static Map<Item, Integer> getFuels() {
-        return Map.copyOf(FUELS);
-    }
-
-    public static Map<Block, Block> getStrippables() {
-        return Map.copyOf(STRIPPABLES);
     }
 
     @Override

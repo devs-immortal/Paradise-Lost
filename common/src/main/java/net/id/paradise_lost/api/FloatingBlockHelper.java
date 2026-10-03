@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.piston.PistonStructureResolver;
 import net.minecraft.world.level.block.state.BlockState;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface FloatingBlockHelper {
@@ -32,7 +31,7 @@ public interface FloatingBlockHelper {
 
     Pusher PUSHER = Pusher.getInstance();
 
-    Function<FloatingBlockEntity, Boolean> DEFAULT_DROP_STATE = (entity) -> {
+    Predicate<FloatingBlockEntity> DEFAULT_DROP_STATE = (entity) -> {
         Level world = entity.level();
         BlockPos pos = entity.blockPosition();
         int distFromTop = world.getMaxBuildHeight() - pos.getY();

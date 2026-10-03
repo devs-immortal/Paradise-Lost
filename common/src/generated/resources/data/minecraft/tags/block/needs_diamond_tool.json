@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:metamorphic_shell",
-      "required": false
-    }
+    "paradise_lost:metamorphic_shell"
   ]
 }

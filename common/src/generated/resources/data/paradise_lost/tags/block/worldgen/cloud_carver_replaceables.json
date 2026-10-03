@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "minecraft:air",
-      "required": false
-    },
-    {
-      "id": "minecraft:void_air",
-      "required": false
-    },
-    {
-      "id": "minecraft:cave_air",
-      "required": false
-    }
+    "minecraft:air",
+    "minecraft:void_air",
+    "minecraft:cave_air"
   ]
 }

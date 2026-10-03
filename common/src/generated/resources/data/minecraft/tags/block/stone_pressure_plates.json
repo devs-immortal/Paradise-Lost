@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:floestone_pressure_plate",
-      "required": false
-    }
+    "paradise_lost:floestone_pressure_plate"
   ]
 }

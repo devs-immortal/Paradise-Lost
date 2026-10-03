@@ -1,12 +1,6 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:cherine_torch",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:cherine_lantern",
-      "required": false
-    }
+    "paradise_lost:cherine_torch",
+    "paradise_lost:cherine_lantern"
   ]
 }

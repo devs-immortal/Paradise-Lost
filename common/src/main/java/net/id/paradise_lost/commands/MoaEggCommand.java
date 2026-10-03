@@ -53,13 +53,14 @@ public class MoaEggCommand {
         }
 
         ItemStack template = MoaGenes.getEggForCommand(race, resolvedId, source.getLevel(), baby);
-        ResourceLocation finalRaceId = resolvedId;
+        // Capture before inventory.add: a successful add empties the stack, so getDisplayName() becomes Air.
+        Component eggName = template.getHoverName();
         targets.forEach(player -> {
             ItemStack egg = template.copy();
             if (!player.getInventory().add(egg)) {
                 Containers.dropItemStack(source.getLevel(), player.getX(), player.getY(), player.getZ(), egg);
             }
-            source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moaegg.success", egg.getDisplayName(), player.getDisplayName()), true);
+            source.sendSuccess(() -> Component.translatable("commands.paradise_lost.moaegg.success", eggName, player.getDisplayName()), true);
         });
 
         return targets.size();

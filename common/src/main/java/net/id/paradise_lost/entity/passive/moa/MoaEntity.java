@@ -670,7 +670,9 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
         compound.putInt("airTicks", entityData.get(AIR_TICKS));
         compound.put("chest", entityData.get(CHEST).saveOptional(this.registryAccess()));
         if (inventory != DUMMY) {
-            compound.put("chestContents", inventory.createTag(this.registryAccess()));
+            // SimpleContainer.createTag/fromTag pack non-empty stacks into consecutive slots,
+            // which reshuffles the chest on relog. Write Slot indices ourselves.
+            compound.put("chestContents", saveChestContents());
         }
         CompoundTag genesTag = new CompoundTag();
         getGenes().writeToNbt(genesTag, this.registryAccess());
@@ -683,8 +685,8 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
         entityData.set(AIR_TICKS, compound.getInt("airTicks"));
         entityData.set(CHEST, ItemStack.parseOptional(this.registryAccess(), compound.getCompound("chest")));
         refreshChest(false);
-        if (inventory != DUMMY) {
-            inventory.fromTag(compound.getList("chestContents", Tag.TAG_COMPOUND), this.registryAccess());
+        if (inventory != DUMMY && compound.contains("chestContents", Tag.TAG_LIST)) {
+            loadChestContents(compound.getList("chestContents", Tag.TAG_COMPOUND));
         }
         if (compound.contains("moaGenes", Tag.TAG_COMPOUND)) {
             getGenes().readFromNbt(compound.getCompound("moaGenes"), this.registryAccess());
@@ -885,6 +887,43 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
 
     public Container getInventory() {
         return inventory;
+    }
+
+    private net.minecraft.nbt.ListTag saveChestContents() {
+        net.minecraft.nbt.ListTag list = new net.minecraft.nbt.ListTag();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.isEmpty()) {
+                continue;
+            }
+            CompoundTag entry = new CompoundTag();
+            entry.putByte("Slot", (byte) i);
+            list.add(stack.save(this.registryAccess(), entry));
+        }
+        return list;
+    }
+
+    private void loadChestContents(net.minecraft.nbt.ListTag list) {
+        inventory.clearContent();
+        boolean hasSlots = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.getCompound(i).contains("Slot", Tag.TAG_BYTE)) {
+                hasSlots = true;
+                break;
+            }
+        }
+        if (hasSlots) {
+            for (int i = 0; i < list.size(); i++) {
+                CompoundTag entry = list.getCompound(i);
+                int slot = entry.getByte("Slot") & 255;
+                if (slot < inventory.getContainerSize()) {
+                    inventory.setItem(slot, ItemStack.parse(this.registryAccess(), entry).orElse(ItemStack.EMPTY));
+                }
+            }
+        } else {
+            // Pre-fix worlds: packed list with no Slot indices — best-effort restore
+            inventory.fromTag(list, this.registryAccess());
+        }
     }
 
     private class MoaEscapeDangerGoal extends PanicGoal {

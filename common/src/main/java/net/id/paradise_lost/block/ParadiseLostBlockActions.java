@@ -1,5 +1,6 @@
 package net.id.paradise_lost.block;
 
+import net.id.paradise_lost.data.ParadiseLostDataEntries;
 import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.registration.RegistryObject;
 import net.id.paradise_lost.registry.BlockRegistry;
@@ -28,7 +29,7 @@ public class ParadiseLostBlockActions {
     public static final Consumer<Block> cutoutMippedRenderLayer = clientOnly(RenderUtils::cutoutMippedRenderLayer);
 
     public static Consumer<Block> stripsTo(Supplier<? extends Block> stripped) {
-        return (original) -> Services.REGISTRATION.registerStrippable(original, stripped.get());
+        return (original) -> ParadiseLostDataEntries.registerStrippable(original, stripped.get());
     }
 
     public static Consumer<Block> stripsTo(RegistryObject<Block, ? extends Block> stripped) {

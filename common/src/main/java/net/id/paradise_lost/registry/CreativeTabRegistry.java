@@ -4,10 +4,14 @@ import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.registration.RegistryObject;
+import net.id.paradise_lost.util.ParadiseLostEnchantments;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
@@ -293,6 +297,8 @@ public class CreativeTabRegistry {
                         output.accept(GLAZED_GOLD_AXE.get());
                         output.accept(GLAZED_GOLD_HOE.get());
                         output.accept(SOUL_BLADE.get());
+                        var rending = params.holders().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ParadiseLostEnchantments.RENDING);
+                        output.accept(EnchantedBookItem.createForEnchantment(new EnchantmentInstance(rending, rending.value().getMaxLevel())));
 
                         output.accept(OLVITE_SPYGLASS.get());
                         output.accept(TOTEM_OF_LEVITATION.get());

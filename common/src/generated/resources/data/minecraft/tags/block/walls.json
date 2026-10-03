@@ -1,40 +1,13 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:floestone_wall",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:cobbled_floestone_wall",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:mossy_floestone_wall",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:heliolith_wall",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:floestone_brick_wall",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:mossy_floestone_brick_wall",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:burnished_stone_wall",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:calcite_tiles_wall",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:bloomed_calcite_tiles_wall",
-      "required": false
-    }
+    "paradise_lost:floestone_wall",
+    "paradise_lost:cobbled_floestone_wall",
+    "paradise_lost:mossy_floestone_wall",
+    "paradise_lost:heliolith_wall",
+    "paradise_lost:floestone_brick_wall",
+    "paradise_lost:mossy_floestone_brick_wall",
+    "paradise_lost:burnished_stone_wall",
+    "paradise_lost:calcite_tiles_wall",
+    "paradise_lost:bloomed_calcite_tiles_wall"
   ]
 }

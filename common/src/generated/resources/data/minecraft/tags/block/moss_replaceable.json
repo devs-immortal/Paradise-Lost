@@ -1,24 +1,9 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:dirt",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:coarse_dirt",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:floestone",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:cobbled_floestone",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:mossy_floestone",
-      "required": false
-    }
+    "paradise_lost:dirt",
+    "paradise_lost:coarse_dirt",
+    "paradise_lost:floestone",
+    "paradise_lost:cobbled_floestone",
+    "paradise_lost:mossy_floestone"
   ]
 }

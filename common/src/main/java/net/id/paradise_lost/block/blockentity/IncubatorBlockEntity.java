@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -62,18 +63,28 @@ public class IncubatorBlockEntity extends BlockEntity {
                 world.playSound(null, pos, ParadiseLostSoundEvents.ENTITY_MOA_EGG_HATCH, SoundSource.BLOCKS, 0.8F, 0.5F);
                 world.addFreshEntity(moa);
                 incubator.egg = ItemStack.EMPTY;
+                incubator.syncToClient();
             }
             incubator.setChanged();
         }
     }
 
     public void handleUse(Player player, InteractionHand hand, ItemStack handStack) {
-        setChanged();
         owner = player.getUUID();
         ItemStack stored = egg.copy();
         egg = handStack.copy();
         player.setItemInHand(hand, stored);
         hatchTicks = (int) (12000 / level.getBiome(worldPosition).value().getBaseTemperature());
+        syncToClient();
+        setChanged();
+    }
+
+    /** markDirty alone does not push BE data to nearby clients. */
+    private void syncToClient() {
+        setChanged();
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.getChunkSource().blockChanged(worldPosition);
+        }
     }
 
     public boolean hasItem() {
@@ -92,6 +103,10 @@ public class IncubatorBlockEntity extends BlockEntity {
         super.saveAdditional(nbt, registryLookup);
         if (!egg.isEmpty()) {
             nbt.put("egg", egg.save(registryLookup));
+        } else {
+            // Chunk save reuses the tag: without this the old egg key survives hatching and
+            // the egg comes back on reload.
+            nbt.remove("egg");
         }
         nbt.putInt("hatchTicks", hatchTicks);
     }
