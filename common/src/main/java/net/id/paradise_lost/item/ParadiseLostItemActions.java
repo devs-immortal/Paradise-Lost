@@ -1,6 +1,6 @@
 package net.id.paradise_lost.item;
 
-import net.id.paradise_lost.platform.Services;
+import net.id.paradise_lost.data.ParadiseLostDataEntries;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.DispenserBlock;
 
@@ -23,11 +23,11 @@ public class ParadiseLostItemActions {
     public static final Consumer<ItemLike> projectileBehavior = DispenserBlock::registerProjectileBehavior;
 
     public static Consumer<ItemLike> fuel(int ticks) {
-        return item -> Services.REGISTRATION.registerFuel(item, ticks);
+        return item -> ParadiseLostDataEntries.registerFuel(item, ticks);
     }
 
     public static Consumer<ItemLike> compostable(float chance) {
-        return item -> Services.REGISTRATION.registerCompostable(item, chance);
+        return item -> ParadiseLostDataEntries.registerCompostable(item, chance);
     }
 
     private ParadiseLostItemActions() {}

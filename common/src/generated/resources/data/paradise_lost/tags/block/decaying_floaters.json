@@ -1,12 +1,6 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:levita",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:levita_ore",
-      "required": false
-    }
+    "paradise_lost:levita",
+    "paradise_lost:levita_ore"
   ]
 }

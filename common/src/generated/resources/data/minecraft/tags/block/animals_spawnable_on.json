@@ -1,12 +1,6 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:highlands_grass",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:frozen_grass",
-      "required": false
-    }
+    "paradise_lost:highlands_grass",
+    "paradise_lost:frozen_grass"
   ]
 }

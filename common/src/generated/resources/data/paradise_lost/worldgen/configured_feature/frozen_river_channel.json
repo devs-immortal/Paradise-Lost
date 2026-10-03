@@ -1,0 +1,23 @@
+{
+  "type": "paradise_lost:river_channel",
+  "config": {
+    "scale": 0.004,
+    "half_width": 6.0,
+    "warp_scale": 0.01,
+    "warp_strength": 40.0,
+    "max_depth": 6,
+    "level_radius": 7,
+    "max_cut": 6,
+    "lake_max_cut": 3,
+    "bank_width": 3,
+    "salt": 0,
+    "frozen": true,
+    "bed": {
+      "Name": "paradise_lost:permafrost"
+    },
+    "lake_scale": 0.012,
+    "lake_threshold": 0.3,
+    "lake_extra_width": 10.0,
+    "lake_extra_depth": 9
+  }
+}

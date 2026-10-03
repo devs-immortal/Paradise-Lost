@@ -39,6 +39,7 @@
       "paradise_lost:tundra_snow"
     ],
     [
+      "paradise_lost:frozen_river_channel",
       "paradise_lost:generic_boulder"
     ],
     [],
@@ -58,6 +59,7 @@
       "paradise_lost:spring_water"
     ],
     [
+      "paradise_lost:trees_frozen_riverbank",
       "paradise_lost:patch_brown_sporecap",
       "paradise_lost:patch_pink_sporecap",
       "paradise_lost:natural_swedroot",

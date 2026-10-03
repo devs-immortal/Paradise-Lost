@@ -126,8 +126,8 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:random_chance",
-          "chance": 0.35
+          "chance": 0.35,
+          "condition": "minecraft:random_chance"
         }
       ],
       "entries": [
@@ -139,8 +139,8 @@
               "enchantments": {
                 "paradise_lost:rending": {
                   "type": "minecraft:uniform",
-                  "min": 1.0,
-                  "max": 3.0
+                  "max": 3.0,
+                  "min": 1.0
                 }
               },
               "function": "minecraft:set_enchantments"

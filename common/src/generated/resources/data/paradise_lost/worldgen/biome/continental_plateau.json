@@ -36,6 +36,7 @@
     ],
     [],
     [
+      "paradise_lost:river_channel",
       "paradise_lost:plains_boulder"
     ],
     [],
@@ -55,6 +56,7 @@
       "paradise_lost:spring_water"
     ],
     [
+      "paradise_lost:trees_riverbank",
       "paradise_lost:patch_brown_sporecap",
       "paradise_lost:patch_pink_sporecap",
       "paradise_lost:natural_swedroot",

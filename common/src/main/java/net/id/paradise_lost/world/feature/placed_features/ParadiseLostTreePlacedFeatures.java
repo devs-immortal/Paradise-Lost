@@ -3,6 +3,7 @@ package net.id.paradise_lost.world.feature.placed_features;
 import net.id.paradise_lost.world.feature.configured_features.ParadiseLostMiscConfiguredFeatures;
 import net.id.paradise_lost.world.feature.configured_features.ParadiseLostTreeConfiguredFeatures;
 import net.id.paradise_lost.world.feature.configured_features.ParadiseLostVegetationConfiguredFeatures;
+import net.id.paradise_lost.world.feature.placement.RiverBankPlacement;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -71,6 +72,8 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SHIELD_STUMPS = of("shield_stumps");
     public static final ResourceKey<PlacedFeature> SHIELD_TREES = of("trees_shield");
     public static final ResourceKey<PlacedFeature> SPARSE_TREES = of("trees_sparse");
+    public static final ResourceKey<PlacedFeature> RIVERBANK_TREES = of("trees_riverbank");
+    public static final ResourceKey<PlacedFeature> FROZEN_RIVERBANK_TREES = of("trees_frozen_riverbank");
     public static final ResourceKey<PlacedFeature> THICKET_AUREL_TREE = of("tree_thicket_aurel");
     public static final ResourceKey<PlacedFeature> THICKET_FALLEN_LOG = of("thicket_fallen_log");
     public static final ResourceKey<PlacedFeature> THICKET_TREES = of("trees_thicket");
@@ -188,6 +191,20 @@ public class ParadiseLostTreePlacedFeatures extends ParadiseLostPlacedFeatures {
         register(context, SPARSE_TREES, configuredFeatures.getOrThrow(ParadiseLostTreeConfiguredFeatures.SPARSE_TREES),
                 CountPlacement.of(new WeightedListInt(SimpleWeightedRandomList.<IntProvider>builder().add(ConstantInt.of(0), 15).add(ConstantInt.of(1), 1).build())),
                 InSquarePlacement.spread(),
+                SurfaceWaterDepthFilter.forMaxDepth(0),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                BiomeFilter.biome());
+        register(context, RIVERBANK_TREES, configuredFeatures.getOrThrow(ParadiseLostTreeConfiguredFeatures.SPARSE_TREES),
+                CountPlacement.of(UniformInt.of(10, 16)),
+                InSquarePlacement.spread(),
+                RiverBankPlacement.between(1f, 12f),
+                SurfaceWaterDepthFilter.forMaxDepth(0),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                BiomeFilter.biome());
+        register(context, FROZEN_RIVERBANK_TREES, configuredFeatures.getOrThrow(ParadiseLostTreeConfiguredFeatures.MIXED_TREES),
+                CountPlacement.of(UniformInt.of(6, 10)),
+                InSquarePlacement.spread(),
+                RiverBankPlacement.between(1f, 10f),
                 SurfaceWaterDepthFilter.forMaxDepth(0),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
                 BiomeFilter.biome());

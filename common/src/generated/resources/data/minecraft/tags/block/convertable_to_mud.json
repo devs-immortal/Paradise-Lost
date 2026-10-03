@@ -1,12 +1,6 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:dirt",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:coarse_dirt",
-      "required": false
-    }
+    "paradise_lost:dirt",
+    "paradise_lost:coarse_dirt"
   ]
 }

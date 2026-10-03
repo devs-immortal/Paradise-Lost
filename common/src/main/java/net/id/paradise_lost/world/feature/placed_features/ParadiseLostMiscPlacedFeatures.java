@@ -60,6 +60,12 @@ public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TUNDRA_SNOW = of("tundra_snow");
     public static final ResourceKey<PlacedFeature> TUNDRA_SPIRES = of("tundra_spires");
     public static final ResourceKey<PlacedFeature> WATER_SPRING = of("spring_water");
+    public static final ResourceKey<PlacedFeature> WATER_LAKE = of("water_lake");
+    public static final ResourceKey<PlacedFeature> ICE_LAKE = of("ice_lake");
+    public static final ResourceKey<PlacedFeature> RIVER_CHANNEL = of("river_channel");
+    public static final ResourceKey<PlacedFeature> FROZEN_RIVER_CHANNEL = of("frozen_river_channel");
+    public static final ResourceKey<PlacedFeature> VOID_SPILL = of("void_spill");
+    public static final ResourceKey<PlacedFeature> FROZEN_VOID_SPILL = of("frozen_void_spill");
 
     public static void init() {
     }
@@ -145,5 +151,29 @@ public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 CountPlacement.of(5));
+        register(context, WATER_LAKE, configuredFeatures.getOrThrow(ParadiseLostMiscConfiguredFeatures.WATER_LAKE),
+                RarityFilter.onAverageOnceEvery(28),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome());
+        register(context, ICE_LAKE, configuredFeatures.getOrThrow(ParadiseLostMiscConfiguredFeatures.ICE_LAKE),
+                RarityFilter.onAverageOnceEvery(28),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome());
+        register(context, RIVER_CHANNEL, configuredFeatures.getOrThrow(ParadiseLostMiscConfiguredFeatures.RIVER_CHANNEL),
+                BiomeFilter.biome());
+        register(context, FROZEN_RIVER_CHANNEL, configuredFeatures.getOrThrow(ParadiseLostMiscConfiguredFeatures.FROZEN_RIVER_CHANNEL),
+                BiomeFilter.biome());
+        register(context, VOID_SPILL, configuredFeatures.getOrThrow(ParadiseLostMiscConfiguredFeatures.VOID_SPILL),
+                CountPlacement.of(2),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome());
+        register(context, FROZEN_VOID_SPILL, configuredFeatures.getOrThrow(ParadiseLostMiscConfiguredFeatures.FROZEN_VOID_SPILL),
+                CountPlacement.of(2),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome());
     }
 }

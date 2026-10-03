@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:levitator",
-      "required": false
-    }
+    "paradise_lost:levitator"
   ]
 }

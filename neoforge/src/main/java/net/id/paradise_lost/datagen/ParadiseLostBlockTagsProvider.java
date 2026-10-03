@@ -1,24 +1,38 @@
 package net.id.paradise_lost.datagen;
 
 import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.registry.BlockRegistry.SignSet;
+import net.id.paradise_lost.registry.BlockRegistry.WoodBlockSet;
 import net.id.paradise_lost.tag.ParadiseLostBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagsProvider.TagAppender;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import static net.id.paradise_lost.registry.BlockRegistry.*;
+
 public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
-    private static final String[] WOODS = {"aurel", "mother_aurel", "menth", "wisteria"};
+    private static final TagKey<Block> ANIMALS_SPAWNABLE_ON = TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace("animals_spawnable_on"));
+    private static final TagKey<Block> CONVERTABLE_TO_MUD = TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace("convertable_to_mud"));
+    private static final TagKey<Block> MOSS_REPLACEABLE = TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace("moss_replaceable"));
+
+    private static final List<WoodBlockSet> WOOD_SETS = List.of(
+            AUREL_WOODSTUFF, MOTHER_AUREL_WOODSTUFF, MENTH_WOODSTUFF, WISTERIA_WOODSTUFF
+    );
+    private static final List<SignSet> SIGN_SETS = List.of(
+            AUREL_SIGNS, MOTHER_AUREL_SIGNS, MENTH_SIGNS, WISTERIA_SIGNS
+    );
 
     public ParadiseLostBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, ModConstants.MODID, existingFileHelper);
@@ -26,157 +40,277 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        entry(Tags.Blocks.BOOKSHELVES, "aurel_bookshelf");
-        entry(Tags.Blocks.CHAINS, "olvite_chain");
-        entry(Tags.Blocks.COBBLESTONES, "cobbled_floestone");
-        entry(Tags.Blocks.ORES, "cherine_ore", "olvite_ore", "levita_ore");
-        entry(Tags.Blocks.STONES, "floestone");
-        entry(Tags.Blocks.STORAGE_BLOCKS, "flaxweave_cushion", "amadrys_bundle", "cherine_block", "olvite_block", "refined_surtrum_block", "nitra_bunch");
-        woods(Tags.Blocks.STRIPPED_LOGS, "stripped_%s_log");
-        woods(Tags.Blocks.STRIPPED_WOODS, "stripped_%s_wood");
-        entry(mc("animals_spawnable_on"), "highlands_grass", "frozen_grass");
-        entry(BlockTags.BEACON_BASE_BLOCKS, "olvite_block", "refined_surtrum_block");
-        entry(BlockTags.CAMPFIRES, "cherine_campfire");
-        woods(BlockTags.CEILING_HANGING_SIGNS, "%s_hanging_sign");
-        entry(BlockTags.COMBINATION_STEP_SOUND_BLOCKS, "liverwort_carpet");
-        entry(mc("convertable_to_mud"), "dirt", "coarse_dirt");
-        entry(BlockTags.CROPS, "amadrys", "flax", "swedroot", "nitra");
-        entry(BlockTags.DIRT, "dirt", "coarse_dirt", "permafrost", "highlands_grass", "frozen_grass", "suspicious_dirt");
-        entry(BlockTags.ENCHANTMENT_POWER_PROVIDER, "aurel_bookshelf");
-        woods(BlockTags.FENCE_GATES, "%s_fence_gate");
-        entry(BlockTags.FLOWER_POTS, "calcite_flower_pot", "potted_ancient_flower", "potted_ataraxia", "potted_cloudsbluff", "potted_drigean", "potted_luminar",
-                "potted_aurel_sapling", "potted_mother_aurel_sapling", "potted_menth_sapling",
-                "potted_rose_wisteria_sapling", "potted_frost_wisteria_sapling", "potted_lavender_wisteria_sapling", "potted_fern");
-        entry(BlockTags.LEAVES, "aurel_leaves", "mother_aurel_leaves", "rose_wisteria_leaves", "frost_wisteria_leaves", "lavender_wisteria_leaves", "menth_leaves");
-        entry(BlockTags.LOGS,
-                ParadiseLostBlockTags.AUREL_LOGS, ParadiseLostBlockTags.MOTHER_AUREL_LOGS,
-                ParadiseLostBlockTags.WISTERIA_LOGS, ParadiseLostBlockTags.MENTH_LOGS, ParadiseLostBlockTags.HOLLOW_LOGS);
-        entry(BlockTags.LOGS_THAT_BURN,
-                ParadiseLostBlockTags.AUREL_LOGS, ParadiseLostBlockTags.MOTHER_AUREL_LOGS,
-                ParadiseLostBlockTags.WISTERIA_LOGS, ParadiseLostBlockTags.MENTH_LOGS, ParadiseLostBlockTags.HOLLOW_LOGS);
-        entry(BlockTags.MAINTAINS_FARMLAND, "amadrys", "flax", "nitra");
-        entry(BlockTags.MINEABLE_WITH_AXE,
-                "packed_swedroot", "cherine_campfire", "aurel_bookshelf", "blackcurrant_bush", "incubator", "food_bowl", "tree_tap",
-                "rootcap_block", "brown_sporecap_block", "pink_sporecap_block", "thatch", "thatch_stairs", "thatch_slab", "nest",
-                ParadiseLostBlockTags.HOLLOW_LOGS);
-        entry(BlockTags.MINEABLE_WITH_HOE,
-                "liverwort", "liverwort_carpet", ParadiseLostBlockTags.HANGERS,
-                "rose_wisteria_leaf_pile", "frost_wisteria_leaf_pile", "lavender_wisteria_leaf_pile", "aurel_leaf_pile",
-                "amadrys_bundle", "nitra_bunch",
-                "aurel_leaves", "mother_aurel_leaves", "menth_leaves",
-                "rose_wisteria_leaves", "frost_wisteria_leaves", "lavender_wisteria_leaves");
-        entry(BlockTags.MINEABLE_WITH_PICKAXE,
-                "cherine_ore", "olvite_ore", "floestone_redstone_ore", "surtrum", "metamorphic_shell", "levita_ore",
-                "cherine_block", "olvite_block", "refined_surtrum_block", "levitator", "olvite_chain", "cherine_lantern", "bloomed_calcite",
-                "floestone", "floestone_slab", "floestone_stairs", "smooth_floestone", "smooth_floestone_slab", "smooth_floestone_stairs",
-                "cobbled_floestone", "cobbled_floestone_slab", "cobbled_floestone_stairs",
-                "mossy_floestone", "golden_mossy_floestone", "mossy_floestone_slab", "mossy_floestone_stairs",
-                "heliolith", "heliolith_slab", "heliolith_stairs",
-                "floestone_brick", "mossy_floestone_brick", "chiseled_floestone", "floestone_brick_slab", "mossy_floestone_brick_slab",
-                "floestone_brick_stairs", "mossy_floestone_brick_stairs",
-                "smooth_heliolith", "smooth_heliolith_slab", "smooth_heliolith_stairs",
-                "levita_brick", "levita_brick_slab", "levita_brick_stairs", "chiseled_levita_brick",
-                "burnished_stone", "burnished_stone_slab", "burnished_stone_stairs", "burnished_stone_plaque", "burnished_stone_script",
-                "golden_amber_tile", "golden_amber_tile_slab", "golden_amber_tile_stairs",
-                "floestone_button", "floestone_pressure_plate", "olvite_pressure_plate", "golden_amber_bars",
-                "calcite_tiles", "calcite_tiles_slab", "calcite_tiles_stairs",
-                "bloomed_calcite_tiles", "bloomed_calcite_tiles_slab", "bloomed_calcite_tiles_stairs");
-        entry(BlockTags.MINEABLE_WITH_SHOVEL,
-                "highlands_grass", "frozen_grass", "dirt", "coarse_dirt", "permafrost", "levita", "farmland", "grass_path", "frozen_path",
-                "levita_brick", "levita_brick_slab", "levita_brick_stairs", "chiseled_levita_brick", "suspicious_dirt");
-        entry(mc("moss_replaceable"), "dirt", "coarse_dirt", "floestone", "cobbled_floestone", "mossy_floestone");
-        entry(BlockTags.NEEDS_DIAMOND_TOOL, "metamorphic_shell");
-        entry(BlockTags.NEEDS_IRON_TOOL, "floestone_redstone_ore", "surtrum", "levita_ore", "refined_surtrum_block");
-        entry(BlockTags.NEEDS_STONE_TOOL, "olvite_ore", "olvite_block", "levitator");
-        entry(BlockTags.OVERWORLD_CARVER_REPLACEABLES,
-                "levita", "floestone", "cobbled_floestone", "mossy_floestone", "heliolith", "cherine_ore", "olvite_ore", "levita_ore");
-        woods(BlockTags.PLANKS, "%s_planks");
-        entry(BlockTags.PRESSURE_PLATES, "olvite_pressure_plate");
-        entry(BlockTags.RAILS, "levita_rail");
-        entry(BlockTags.REDSTONE_ORES, "floestone_redstone_ore");
-        String[] replaceable = {
-                "aurel_leaf_pile", "rose_wisteria_leaf_pile", "rose_wisteria_hanger",
-                "frost_wisteria_leaf_pile", "frost_wisteria_hanger", "lavender_wisteria_leaf_pile", "lavender_wisteria_hanger",
-                "grass_plant", "grass_flowering", "short_grass", "tall_grass", "fern", "bush", "shamrock", "malt_sprig"
-        };
-        entry(BlockTags.REPLACEABLE, (Object[]) replaceable);
-        entry(BlockTags.REPLACEABLE_BY_TREES, (Object[]) replaceable);
-        entry(BlockTags.SAPLINGS, "aurel_sapling", "mother_aurel_sapling", "rose_wisteria_sapling", "frost_wisteria_sapling", "lavender_wisteria_sapling", "menth_sapling");
-        entry(BlockTags.SMALL_FLOWERS, "ancient_flower", "ataraxia", "cloudsbluff", "drigean", "luminar");
-        entry(BlockTags.STAIRS, "levita_brick_stairs", "floestone_brick_stairs", "mossy_floestone_brick_stairs", "floestone_stairs", "mossy_floestone_stairs", "cobbled_floestone_stairs");
-        woods(BlockTags.STANDING_SIGNS, "%s_sign");
-        entry(BlockTags.STONE_BUTTONS, "floestone_button");
-        entry(BlockTags.STONE_PRESSURE_PLATES, "floestone_pressure_plate");
-        entry(BlockTags.SWORD_EFFICIENT, "flaxweave_cushion", "flaxweave_cushion_slab");
-        entry(BlockTags.TALL_FLOWERS, "wild_flax");
-        entry(BlockTags.VALID_SPAWN, "highlands_grass");
-        woods(BlockTags.WALL_HANGING_SIGNS, "%s_wall_hanging_sign");
-        entry(BlockTags.WALL_POST_OVERRIDE, "cherine_torch");
-        woods(BlockTags.WALL_SIGNS, "%s_wall_sign");
-        entry(BlockTags.WALLS,
-                "floestone_wall", "cobbled_floestone_wall", "mossy_floestone_wall", "heliolith_wall",
-                "floestone_brick_wall", "mossy_floestone_brick_wall", "burnished_stone_wall",
-                "calcite_tiles_wall", "bloomed_calcite_tiles_wall");
-        woods(BlockTags.WOODEN_BUTTONS, "%s_button");
-        woods(BlockTags.WOODEN_DOORS, "%s_door");
-        woods(BlockTags.WOODEN_FENCES, "%s_fence");
-        woods(BlockTags.WOODEN_PRESSURE_PLATES, "%s_pressure_plate");
-        woods(BlockTags.WOODEN_SLABS, "%s_slab");
-        woods(BlockTags.WOODEN_STAIRS, "%s_stairs");
-        woods(BlockTags.WOODEN_TRAPDOORS, "%s_trapdoor");
+        tag(Tags.Blocks.BOOKSHELVES).add(AUREL_BOOKSHELF.get());
+        tag(Tags.Blocks.CHAINS).add(OLVITE_CHAIN.get());
+        tag(Tags.Blocks.COBBLESTONES).add(COBBLED_FLOESTONE.get());
+        tag(Tags.Blocks.ORES).add(CHERINE_ORE.get(), OLVITE_ORE.get(), LEVITA_ORE.get());
+        tag(Tags.Blocks.STONES).add(FLOESTONE.get());
+        tag(Tags.Blocks.STORAGE_BLOCKS).add(
+                FLAXWEAVE_CUSHION.get(), AMADRYS_BUNDLE.get(), CHERINE_BLOCK.get(), OLVITE_BLOCK.get(),
+                REFINED_SURTRUM_BLOCK.get(), NITRA_BUNCH.get()
+        );
 
-        entry(ParadiseLostBlockTags.ANIMALS_PREFERRED, "highlands_grass", "frozen_grass");
-        entry(ParadiseLostBlockTags.AUREL_LOGS,
-                "aurel_log", "mottled_aurel_log", "mottled_aurel_wood", "aurel_wood", "stripped_aurel_log", "stripped_aurel_wood");
-        entry(ParadiseLostBlockTags.CLOUDS, "cold_cloud", "blue_cloud", "golden_cloud", "green_cloud");
-        entry(ParadiseLostBlockTags.DECAYING_FLOATERS, "levita", "levita_ore");
-        entry(ParadiseLostBlockTags.FAST_FLOATERS, "levitator");
-        entry(ParadiseLostBlockTags.HANGERS, "frost_wisteria_hanger", "rose_wisteria_hanger", "lavender_wisteria_hanger");
-        entry(ParadiseLostBlockTags.HOLLOW_LOGS, "mottled_aurel_fallen_log");
-        this.tag(ParadiseLostBlockTags.HURTABLE_FLOATERS);
-        entry(ParadiseLostBlockTags.INCUBATOR_WARMER_BEDS, "amadrys_bundle", "thatch", "minecraft:hay_block");
-        entry(ParadiseLostBlockTags.INCUBATOR_WARMER_LIGHTS, "cherine_torch", "cherine_lantern");
-        entry(ParadiseLostBlockTags.MENTH_LOGS, "menth_log", "menth_wood", "stripped_menth_log", "stripped_menth_wood");
-        entry(ParadiseLostBlockTags.MOTHER_AUREL_LOGS, "mother_aurel_log", "mother_aurel_wood", "stripped_mother_aurel_log", "stripped_mother_aurel_wood");
-        this.tag(ParadiseLostBlockTags.NON_FLOATERS);
-        entry(ParadiseLostBlockTags.FUNGI_CLINGABLES, BlockTags.LOGS, BlockTags.PLANKS);
-        entry(ParadiseLostBlockTags.GENERIC_VALID_GROUND, BlockTags.LOGS, ParadiseLostBlockTags.DIRT_BLOCKS, "mossy_floestone");
-        entry(ParadiseLostBlockTags.SWEDROOT_PLANTABLE, ParadiseLostBlockTags.DIRT_BLOCKS, "packed_swedroot");
-        entry(ParadiseLostBlockTags.PUSH_FLOATERS, "levitator");
-        entry(ParadiseLostBlockTags.STRUCTURES_AVOID,
-                BlockTags.AIR, BlockTags.LEAVES, ParadiseLostBlockTags.CLOUDS,
-                "metamorphic_shell", "surtrum", "surtrum_air");
-        entry(ParadiseLostBlockTags.WISTERIA_LOGS, "wisteria_log", "wisteria_wood", "stripped_wisteria_log", "stripped_wisteria_wood");
-        entry(ParadiseLostBlockTags.BASE_REPLACEABLES, ParadiseLostBlockTags.NATURAL_STONE, ParadiseLostBlockTags.DIRT_BLOCKS);
-        entry(ParadiseLostBlockTags.BASE_PARADISE_LOST_STONE, "floestone", "mossy_floestone");
-        entry(ParadiseLostBlockTags.CLOUD_CARVER_REPLACEABLES, "minecraft:air", "minecraft:void_air", "minecraft:cave_air");
-        entry(ParadiseLostBlockTags.DIRT_BLOCKS, "highlands_grass", "dirt", "coarse_dirt", "permafrost", "frozen_grass", "liverwort");
-        entry(ParadiseLostBlockTags.FLUID_REPLACEABLES, ParadiseLostBlockTags.NATURAL_STONE, ParadiseLostBlockTags.DIRT_BLOCKS);
-        entry(ParadiseLostBlockTags.NATURAL_STONE, "floestone", "cobbled_floestone", "mossy_floestone", "golden_mossy_floestone", "heliolith");
-    }
+        addWoodSetVanillaTags();
+        addSignVanillaTags();
 
-    private void woods(TagKey<Block> tag, String pattern) {
-        Object[] ids = new Object[WOODS.length];
-        for (int i = 0; i < WOODS.length; i++) {
-            ids[i] = pattern.formatted(WOODS[i]);
-        }
-        entry(tag, ids);
-    }
+        tag(ANIMALS_SPAWNABLE_ON).add(HIGHLANDS_GRASS.get(), FROZEN_GRASS.get());
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(OLVITE_BLOCK.get(), REFINED_SURTRUM_BLOCK.get());
+        tag(BlockTags.CAMPFIRES).add(CHERINE_CAMPFIRE.get());
+        tag(BlockTags.COMBINATION_STEP_SOUND_BLOCKS).add(LIVERWORT_CARPET.get());
+        tag(CONVERTABLE_TO_MUD).add(DIRT.get(), COARSE_DIRT.get());
+        tag(BlockTags.CROPS).add(AMADRYS.get(), FLAX.get(), SWEDROOT.get(), NITRA.get());
+        tag(BlockTags.DIRT).add(
+                DIRT.get(), COARSE_DIRT.get(), PERMAFROST.get(), HIGHLANDS_GRASS.get(), FROZEN_GRASS.get(),
+                SUSPICIOUS_DIRT.get()
+        );
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    private void entry(TagKey<Block> tag, Object... parts) {
-        TagAppender appender = this.tag(tag);
-        for (Object part : parts) {
-            if (part instanceof TagKey<?> ref) {
-                appender.addTag((TagKey) ref);
-            } else {
-                String id = (String) part;
-                appender.addOptional(id.indexOf(':') >= 0 ? ResourceLocation.parse(id) : ModConstants.id(id));
+        tag(BlockTags.ENCHANTMENT_POWER_PROVIDER).add(AUREL_BOOKSHELF.get());
+
+        tag(BlockTags.FLOWER_POTS).add(
+                CALCITE_FLOWER_POT.get(),
+                POTTED_ANCIENT_FLOWER.get(), POTTED_ATARAXIA.get(), POTTED_CLOUDSBLUFF.get(),
+                POTTED_DRIGEAN.get(), POTTED_LUMINAR.get(),
+                POTTED_ROSE_WISTERIA_SAPLING.get(), POTTED_FROST_WISTERIA_SAPLING.get(),
+                POTTED_LAVENDER_WISTERIA_SAPLING.get(), POTTED_FERN.get()
+        );
+        for (WoodBlockSet set : WOOD_SETS) {
+            if (set.flowerPot() != null) {
+                tag(BlockTags.FLOWER_POTS).add(set.flowerPot().get());
             }
         }
+
+        tag(BlockTags.LEAVES).add(
+                ROSE_WISTERIA_LEAVES.get(), FROST_WISTERIA_LEAVES.get(), LAVENDER_WISTERIA_LEAVES.get()
+        );
+        for (WoodBlockSet set : WOOD_SETS) {
+            if (set.leaves() != null) {
+                tag(BlockTags.LEAVES).add(set.leaves().get());
+            }
+        }
+
+        tag(BlockTags.LOGS)
+                .addTag(ParadiseLostBlockTags.AUREL_LOGS)
+                .addTag(ParadiseLostBlockTags.MOTHER_AUREL_LOGS)
+                .addTag(ParadiseLostBlockTags.WISTERIA_LOGS)
+                .addTag(ParadiseLostBlockTags.MENTH_LOGS)
+                .addTag(ParadiseLostBlockTags.HOLLOW_LOGS);
+        tag(BlockTags.LOGS_THAT_BURN)
+                .addTag(ParadiseLostBlockTags.AUREL_LOGS)
+                .addTag(ParadiseLostBlockTags.MOTHER_AUREL_LOGS)
+                .addTag(ParadiseLostBlockTags.WISTERIA_LOGS)
+                .addTag(ParadiseLostBlockTags.MENTH_LOGS)
+                .addTag(ParadiseLostBlockTags.HOLLOW_LOGS);
+
+        tag(BlockTags.MAINTAINS_FARMLAND).add(AMADRYS.get(), FLAX.get(), NITRA.get());
+
+        tag(BlockTags.MINEABLE_WITH_AXE).add(
+                PACKED_SWEDROOT.get(), CHERINE_CAMPFIRE.get(), AUREL_BOOKSHELF.get(), BLACKCURRANT_BUSH.get(),
+                INCUBATOR.get(), FOOD_BOWL.get(), TREE_TAP.get(),
+                ROOTCAP_BLOCK.get(), BROWN_SPORECAP_BLOCK.get(), PINK_SPORECAP_BLOCK.get(),
+                THATCH_SET.block().get(), THATCH_SET.stairs().get(), THATCH_SET.slab().get(),
+                NEST.get()
+        ).addTag(ParadiseLostBlockTags.HOLLOW_LOGS);
+
+        tag(BlockTags.MINEABLE_WITH_HOE).add(
+                LIVERWORT.get(), LIVERWORT_CARPET.get(),
+                ROSE_WISTERIA_LEAF_PILE.get(), FROST_WISTERIA_LEAF_PILE.get(), LAVENDER_WISTERIA_LEAF_PILE.get(),
+                AUREL_LEAF_PILE.get(),
+                AMADRYS_BUNDLE.get(), NITRA_BUNCH.get(),
+                ROSE_WISTERIA_LEAVES.get(), FROST_WISTERIA_LEAVES.get(), LAVENDER_WISTERIA_LEAVES.get()
+        ).addTag(ParadiseLostBlockTags.HANGERS);
+        for (WoodBlockSet set : WOOD_SETS) {
+            if (set.leaves() != null) {
+                tag(BlockTags.MINEABLE_WITH_HOE).add(set.leaves().get());
+            }
+        }
+
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                CHERINE_ORE.get(), OLVITE_ORE.get(), FLOESTONE_REDSTONE_ORE.get(), SURTRUM.get(),
+                METAMORPHIC_SHELL.get(), LEVITA_ORE.get(),
+                CHERINE_BLOCK.get(), OLVITE_BLOCK.get(), REFINED_SURTRUM_BLOCK.get(), LEVITATOR.get(),
+                OLVITE_CHAIN.get(), CHERINE_LANTERN.get(), BLOOMED_CALCITE.get(),
+                FLOESTONE.get(), FLOESTONE_SLAB.get(), FLOESTONE_STAIRS.get(),
+                SMOOTH_FLOESTONE.get(), SMOOTH_FLOESTONE_SLAB.get(), SMOOTH_FLOESTONE_STAIRS.get(),
+                COBBLED_FLOESTONE.get(), COBBLED_FLOESTONE_SLAB.get(), COBBLED_FLOESTONE_STAIRS.get(),
+                MOSSY_FLOESTONE.get(), GOLDEN_MOSSY_FLOESTONE.get(), MOSSY_FLOESTONE_SLAB.get(), MOSSY_FLOESTONE_STAIRS.get(),
+                HELIOLITH.get(), HELIOLITH_SLAB.get(), HELIOLITH_STAIRS.get(),
+                FLOESTONE_BRICK.get(), MOSSY_FLOESTONE_BRICK.get(), CHISELED_FLOESTONE.get(),
+                FLOESTONE_BRICK_SLAB.get(), MOSSY_FLOESTONE_BRICK_SLAB.get(),
+                FLOESTONE_BRICK_STAIRS.get(), MOSSY_FLOESTONE_BRICK_STAIRS.get(),
+                SMOOTH_HELIOLITH.get(), SMOOTH_HELIOLITH_SLAB.get(), SMOOTH_HELIOLITH_STAIRS.get(),
+                CHISELED_LEVITA_BRICK.get(),
+                BURNISHED_STONE_SET.block().get(), BURNISHED_STONE_SET.stairs().get(), BURNISHED_STONE_SET.slab().get(),
+                BURNISHED_STONE_PLAQUE.get(), BURNISHED_STONE_SCRIPT.get(),
+                GOLDEN_AMBER_TILE.get(), GOLDEN_AMBER_TILE_SLAB.get(), GOLDEN_AMBER_TILE_STAIRS.get(),
+                FLOESTONE_BUTTON.get(), FLOESTONE_PRESSURE_PLATE.get(), OLVITE_PRESSURE_PLATE.get(), GOLDEN_AMBER_BARS.get(),
+                CALCITE_TILES_SET.block().get(), CALCITE_TILES_SET.stairs().get(), CALCITE_TILES_SET.slab().get(),
+                BLOOMED_CALCITE_TILES_SET.block().get(), BLOOMED_CALCITE_TILES_SET.stairs().get(), BLOOMED_CALCITE_TILES_SET.slab().get()
+        );
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                LEVITA_BRICK_SET.block().get(), LEVITA_BRICK_SET.stairs().get(), LEVITA_BRICK_SET.slab().get()
+        );
+
+        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
+                HIGHLANDS_GRASS.get(), FROZEN_GRASS.get(), DIRT.get(), COARSE_DIRT.get(), PERMAFROST.get(),
+                LEVITA.get(), FARMLAND.get(), DIRT_PATH.get(), PERMAFROST_PATH.get(), SUSPICIOUS_DIRT.get(),
+                LEVITA_BRICK_SET.block().get(), LEVITA_BRICK_SET.stairs().get(), LEVITA_BRICK_SET.slab().get(),
+                CHISELED_LEVITA_BRICK.get()
+        );
+
+        tag(MOSS_REPLACEABLE).add(
+                DIRT.get(), COARSE_DIRT.get(), FLOESTONE.get(), COBBLED_FLOESTONE.get(), MOSSY_FLOESTONE.get()
+        );
+
+        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(METAMORPHIC_SHELL.get());
+        tag(BlockTags.NEEDS_IRON_TOOL).add(
+                FLOESTONE_REDSTONE_ORE.get(), SURTRUM.get(), LEVITA_ORE.get(), REFINED_SURTRUM_BLOCK.get()
+        );
+        tag(BlockTags.NEEDS_STONE_TOOL).add(OLVITE_ORE.get(), OLVITE_BLOCK.get(), LEVITATOR.get());
+        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(
+                LEVITA.get(), FLOESTONE.get(), COBBLED_FLOESTONE.get(), MOSSY_FLOESTONE.get(), HELIOLITH.get(),
+                CHERINE_ORE.get(), OLVITE_ORE.get(), LEVITA_ORE.get()
+        );
+
+        tag(BlockTags.PRESSURE_PLATES).add(OLVITE_PRESSURE_PLATE.get());
+        tag(BlockTags.RAILS).add(LEVITA_RAIL.get());
+        tag(BlockTags.REDSTONE_ORES).add(FLOESTONE_REDSTONE_ORE.get());
+
+        addReplaceableTags();
+
+        tag(BlockTags.SAPLINGS).add(
+                ROSE_WISTERIA_SAPLING.get(), FROST_WISTERIA_SAPLING.get(), LAVENDER_WISTERIA_SAPLING.get()
+        );
+        for (WoodBlockSet set : WOOD_SETS) {
+            if (set.sapling() != null) {
+                tag(BlockTags.SAPLINGS).add(set.sapling().get());
+            }
+        }
+
+        tag(BlockTags.SMALL_FLOWERS).add(
+                ANCIENT_FLOWER.get(), ATARAXIA.get(), CLOUDSBLUFF.get(), DRIGEAN.get(), LUMINAR.get()
+        );
+        tag(BlockTags.STAIRS).add(
+                LEVITA_BRICK_SET.stairs().get(),
+                FLOESTONE_BRICK_STAIRS.get(), MOSSY_FLOESTONE_BRICK_STAIRS.get(),
+                FLOESTONE_STAIRS.get(), MOSSY_FLOESTONE_STAIRS.get(), COBBLED_FLOESTONE_STAIRS.get()
+        );
+        tag(BlockTags.STONE_BUTTONS).add(FLOESTONE_BUTTON.get());
+        tag(BlockTags.STONE_PRESSURE_PLATES).add(FLOESTONE_PRESSURE_PLATE.get());
+        tag(BlockTags.SWORD_EFFICIENT).add(FLAXWEAVE_CUSHION.get(), FLAXWEAVE_CUSHION_SLAB.get());
+        tag(BlockTags.TALL_FLOWERS).add(WILD_FLAX.get());
+        tag(BlockTags.VALID_SPAWN).add(HIGHLANDS_GRASS.get());
+        tag(BlockTags.WALL_POST_OVERRIDE).add(CHERINE_TORCH.get());
+        tag(BlockTags.WALLS).add(
+                FLOESTONE_WALL.get(), COBBLED_FLOESTONE_WALL.get(), MOSSY_FLOESTONE_WALL.get(), HELIOLITH_WALL.get(),
+                FLOESTONE_BRICK_WALL.get(), MOSSY_FLOESTONE_BRICK_WALL.get(), BURNISHED_STONE_WALL.get(),
+                CALCITE_TILES_WALL.get(), BLOOMED_CALCITE_TILES_WALL.get()
+        );
+
+        tag(ParadiseLostBlockTags.ANIMALS_PREFERRED).add(HIGHLANDS_GRASS.get(), FROZEN_GRASS.get());
+        tag(ParadiseLostBlockTags.AUREL_LOGS).add(
+                AUREL_WOODSTUFF.log().get(), MOTTLED_AUREL_LOG.get(), MOTTLED_AUREL_WOOD.get(),
+                AUREL_WOODSTUFF.wood().get(), AUREL_WOODSTUFF.strippedLog().get(), AUREL_WOODSTUFF.strippedWood().get()
+        );
+        tag(ParadiseLostBlockTags.CLOUDS).add(
+                COLD_CLOUD.get(), BLUE_CLOUD.get(), GOLDEN_CLOUD.get(), GREEN_CLOUD.get()
+        );
+        tag(ParadiseLostBlockTags.DECAYING_FLOATERS).add(LEVITA.get(), LEVITA_ORE.get());
+        tag(ParadiseLostBlockTags.FAST_FLOATERS).add(LEVITATOR.get());
+        tag(ParadiseLostBlockTags.HANGERS).add(
+                FROST_WISTERIA_HANGER.get(), ROSE_WISTERIA_HANGER.get(), LAVENDER_WISTERIA_HANGER.get()
+        );
+        tag(ParadiseLostBlockTags.HOLLOW_LOGS).add(MOTTLED_AUREL_FALLEN_LOG.get());
+        tag(ParadiseLostBlockTags.HURTABLE_FLOATERS);
+        tag(ParadiseLostBlockTags.INCUBATOR_WARMER_BEDS).add(
+                AMADRYS_BUNDLE.get(), THATCH_SET.block().get(), Blocks.HAY_BLOCK
+        );
+        tag(ParadiseLostBlockTags.INCUBATOR_WARMER_LIGHTS).add(CHERINE_TORCH.get(), CHERINE_LANTERN.get());
+        tag(ParadiseLostBlockTags.MENTH_LOGS).add(
+                MENTH_WOODSTUFF.log().get(), MENTH_WOODSTUFF.wood().get(),
+                MENTH_WOODSTUFF.strippedLog().get(), MENTH_WOODSTUFF.strippedWood().get()
+        );
+        tag(ParadiseLostBlockTags.MOTHER_AUREL_LOGS).add(
+                MOTHER_AUREL_WOODSTUFF.log().get(), MOTHER_AUREL_WOODSTUFF.wood().get(),
+                MOTHER_AUREL_WOODSTUFF.strippedLog().get(), MOTHER_AUREL_WOODSTUFF.strippedWood().get()
+        );
+        tag(ParadiseLostBlockTags.NON_FLOATERS);
+        tag(ParadiseLostBlockTags.FUNGI_CLINGABLES)
+                .addTag(BlockTags.LOGS)
+                .addTag(BlockTags.PLANKS);
+        tag(ParadiseLostBlockTags.GENERIC_VALID_GROUND)
+                .addTag(BlockTags.LOGS)
+                .addTag(ParadiseLostBlockTags.DIRT_BLOCKS)
+                .add(MOSSY_FLOESTONE.get());
+        tag(ParadiseLostBlockTags.SWEDROOT_PLANTABLE)
+                .addTag(ParadiseLostBlockTags.DIRT_BLOCKS)
+                .add(PACKED_SWEDROOT.get());
+        tag(ParadiseLostBlockTags.PUSH_FLOATERS).add(LEVITATOR.get());
+        tag(ParadiseLostBlockTags.STRUCTURES_AVOID)
+                .addTag(BlockTags.AIR)
+                .addTag(BlockTags.LEAVES)
+                .addTag(ParadiseLostBlockTags.CLOUDS)
+                .add(METAMORPHIC_SHELL.get(), SURTRUM.get(), SURTRUM_AIR.get());
+        tag(ParadiseLostBlockTags.WISTERIA_LOGS).add(
+                WISTERIA_WOODSTUFF.log().get(), WISTERIA_WOODSTUFF.wood().get(),
+                WISTERIA_WOODSTUFF.strippedLog().get(), WISTERIA_WOODSTUFF.strippedWood().get()
+        );
+        tag(ParadiseLostBlockTags.BASE_REPLACEABLES)
+                .addTag(ParadiseLostBlockTags.NATURAL_STONE)
+                .addTag(ParadiseLostBlockTags.DIRT_BLOCKS);
+        tag(ParadiseLostBlockTags.BASE_PARADISE_LOST_STONE).add(FLOESTONE.get(), MOSSY_FLOESTONE.get());
+        tag(ParadiseLostBlockTags.CLOUD_CARVER_REPLACEABLES).add(
+                Blocks.AIR, Blocks.VOID_AIR, Blocks.CAVE_AIR
+        );
+        tag(ParadiseLostBlockTags.DIRT_BLOCKS).add(
+                HIGHLANDS_GRASS.get(), DIRT.get(), COARSE_DIRT.get(), PERMAFROST.get(), FROZEN_GRASS.get(),
+                LIVERWORT.get()
+        );
+        tag(ParadiseLostBlockTags.FLUID_REPLACEABLES)
+                .addTag(ParadiseLostBlockTags.NATURAL_STONE)
+                .addTag(ParadiseLostBlockTags.DIRT_BLOCKS);
+        tag(ParadiseLostBlockTags.NATURAL_STONE).add(
+                FLOESTONE.get(), COBBLED_FLOESTONE.get(), MOSSY_FLOESTONE.get(), GOLDEN_MOSSY_FLOESTONE.get(),
+                HELIOLITH.get()
+        );
     }
 
-    private static TagKey<Block> mc(String path) {
-        return TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace(path));
+    private void addWoodSetVanillaTags() {
+        for (WoodBlockSet set : WOOD_SETS) {
+            tag(Tags.Blocks.STRIPPED_LOGS).add(set.strippedLog().get());
+            tag(Tags.Blocks.STRIPPED_WOODS).add(set.strippedWood().get());
+            tag(BlockTags.PLANKS).add(set.plank().get());
+            tag(BlockTags.FENCE_GATES).add(set.fenceGate().get());
+            tag(BlockTags.WOODEN_BUTTONS).add(set.button().get());
+            tag(BlockTags.WOODEN_DOORS).add(set.door().get());
+            tag(BlockTags.WOODEN_FENCES).add(set.fence().get());
+            tag(BlockTags.WOODEN_PRESSURE_PLATES).add(set.pressurePlate().get());
+            tag(BlockTags.WOODEN_SLABS).add(set.plankSlab().get());
+            tag(BlockTags.WOODEN_STAIRS).add(set.plankStairs().get());
+            tag(BlockTags.WOODEN_TRAPDOORS).add(set.trapdoor().get());
+        }
+    }
+
+    private void addSignVanillaTags() {
+        for (SignSet signs : SIGN_SETS) {
+            tag(BlockTags.CEILING_HANGING_SIGNS).add(signs.hangingSign().get());
+            tag(BlockTags.STANDING_SIGNS).add(signs.sign().get());
+            tag(BlockTags.WALL_HANGING_SIGNS).add(signs.wallHangingSign().get());
+            tag(BlockTags.WALL_SIGNS).add(signs.wallSign().get());
+        }
+    }
+
+    private void addReplaceableTags() {
+        Block[] replaceable = {
+                AUREL_LEAF_PILE.get(),
+                ROSE_WISTERIA_LEAF_PILE.get(), ROSE_WISTERIA_HANGER.get(),
+                FROST_WISTERIA_LEAF_PILE.get(), FROST_WISTERIA_HANGER.get(),
+                LAVENDER_WISTERIA_LEAF_PILE.get(), LAVENDER_WISTERIA_HANGER.get(),
+                GRASS.get(), GRASS_FLOWERING.get(), SHORT_GRASS.get(), TALL_GRASS.get(),
+                FERN.get(), BUSH.get(), SHAMROCK.get(), MALT_SPRIG.get()
+        };
+        for (Block block : replaceable) {
+            tag(BlockTags.REPLACEABLE).add(block);
+            tag(BlockTags.REPLACEABLE_BY_TREES).add(block);
+        }
     }
 }

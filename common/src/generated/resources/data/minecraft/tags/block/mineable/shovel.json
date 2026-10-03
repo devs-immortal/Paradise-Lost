@@ -1,60 +1,18 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:highlands_grass",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:frozen_grass",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:dirt",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:coarse_dirt",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:permafrost",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:levita",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:farmland",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:grass_path",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:frozen_path",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:levita_brick",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:levita_brick_slab",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:levita_brick_stairs",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:chiseled_levita_brick",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:suspicious_dirt",
-      "required": false
-    }
+    "paradise_lost:highlands_grass",
+    "paradise_lost:frozen_grass",
+    "paradise_lost:dirt",
+    "paradise_lost:coarse_dirt",
+    "paradise_lost:permafrost",
+    "paradise_lost:levita",
+    "paradise_lost:farmland",
+    "paradise_lost:grass_path",
+    "paradise_lost:frozen_path",
+    "paradise_lost:suspicious_dirt",
+    "paradise_lost:levita_brick",
+    "paradise_lost:levita_brick_stairs",
+    "paradise_lost:levita_brick_slab",
+    "paradise_lost:chiseled_levita_brick"
   ]
 }

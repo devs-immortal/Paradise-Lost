@@ -2,8 +2,13 @@ package net.id.paradise_lost.world.feature.structure;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.MapCodec;
-import net.id.paradise_lost.ParadiseLost;
+import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.world.feature.RiverField;
+import net.id.paradise_lost.world.feature.configs.RiverConfiguration;
 import net.id.paradise_lost.world.feature.structure.generator.AurelTowerGenerator;
+import net.minecraft.core.Holder;
+import net.minecraft.core.QuartPos;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.level.ChunkPos;
@@ -16,7 +21,6 @@ import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import java.util.Optional;
-import net.id.paradise_lost.ModConstants;
 
 public class AurelTowerFeature extends Structure {
     public static final MapCodec<AurelTowerFeature> CODEC = simpleCodec(AurelTowerFeature::new);
@@ -47,10 +51,28 @@ public class AurelTowerFeature extends Structure {
     public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
         context.random().nextDouble();
         ChunkPos chunkPos = context.chunkPos();
+        int anchorX = chunkPos.getWorldPosition().getX() - X_OFFSET;
+        int anchorZ = chunkPos.getWorldPosition().getZ() - Z_OFFSET;
+        if (anchoredInRiver(context, anchorX, anchorZ)) {
+            return Optional.empty();
+        }
         BlockPos blockPos = new BlockPos(chunkPos.getMiddleBlockX(), 50, chunkPos.getMinBlockZ());
         StructurePiecesBuilder structurePiecesCollector = new StructurePiecesBuilder();
         addPieces(structurePiecesCollector, context);
         return Optional.of(new Structure.GenerationStub(blockPos, Either.right(structurePiecesCollector)));
+    }
+
+    private static boolean anchoredInRiver(GenerationContext context, int x, int z) {
+        Holder<Biome> biome = context.biomeSource().getNoiseBiome(
+                QuartPos.fromBlock(x), 0, QuartPos.fromBlock(z), context.randomState().sampler());
+        boolean paradise = biome.unwrapKey()
+                .map(key -> ModConstants.MODID.equals(key.location().getNamespace()))
+                .orElse(false);
+        if (!paradise) {
+            return false;
+        }
+        RiverConfiguration river = RiverConfiguration.noiseDefaults();
+        return RiverField.covers(RiverField.noise(context.seed(), river.salt()), river, x, z, 2.0);
     }
 
     @Override

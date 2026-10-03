@@ -2,9 +2,25 @@ package net.id.paradise_lost.world.feature;
 
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.registration.RegistrationProvider;
-import net.id.paradise_lost.world.feature.configs.*;
+import net.id.paradise_lost.world.feature.configs.BoulderFeatureConfig;
+import net.id.paradise_lost.world.feature.configs.RiverConfiguration;
+import net.id.paradise_lost.world.feature.configs.FrozenAwareFeatureConfig;
+import net.id.paradise_lost.world.feature.configs.JaggedOreConfig;
+import net.id.paradise_lost.world.feature.configs.LongFeatureConfig;
 import net.id.paradise_lost.world.feature.configured_features.ParadiseLostConfiguredFeatures;
-import net.id.paradise_lost.world.feature.features.*;
+import net.id.paradise_lost.world.feature.features.FallenPillarFeature;
+import net.id.paradise_lost.world.feature.features.HoneyNettleFeature;
+import net.id.paradise_lost.world.feature.features.HugeBrownSporecapFeature;
+import net.id.paradise_lost.world.feature.features.JaggedOreFeature;
+import net.id.paradise_lost.world.feature.features.ParadiseLostBoulderFeature;
+import net.id.paradise_lost.world.feature.features.ParadiseLostDeltaFeature;
+import net.id.paradise_lost.world.feature.features.ParadiseLostLakeFeature;
+import net.id.paradise_lost.world.feature.features.PillarFeature;
+import net.id.paradise_lost.world.feature.features.RiverChannelFeature;
+import net.id.paradise_lost.world.feature.features.SurtrumMeteoriteFeature;
+import net.id.paradise_lost.world.feature.features.VitrouliteSpireFeature;
+import net.id.paradise_lost.world.feature.features.VoidSpillFeature;
+import net.id.paradise_lost.world.feature.placement.ParadiseLostPlacementModifiers;
 import net.id.paradise_lost.world.feature.placed_features.ParadiseLostPlacedFeatures;
 import net.id.paradise_lost.world.feature.structure.ParadiseLostStructureFeatures;
 import net.id.paradise_lost.world.feature.tree.ParadiseLostTreeHell;
@@ -21,6 +37,8 @@ public class ParadiseLostFeatures {
             RegistrationProvider.get(Registries.FEATURE, ModConstants.MODID);
 
     public static final ParadiseLostLakeFeature LAKE = register("lake", new ParadiseLostLakeFeature(BlockStateConfiguration.CODEC));
+    public static final RiverChannelFeature RIVER_CHANNEL = register("river_channel", new RiverChannelFeature(RiverConfiguration.CODEC));
+    public static final VoidSpillFeature VOID_SPILL = register("void_spill", new VoidSpillFeature(FrozenAwareFeatureConfig.CODEC));
 
     public static final ParadiseLostDeltaFeature DELTA_FEATURE = register("delta_feature", new ParadiseLostDeltaFeature(DeltaFeatureConfiguration.CODEC));
     public static final ParadiseLostBoulderFeature BOULDER = register("boulder", new ParadiseLostBoulderFeature(BoulderFeatureConfig.CODEC));
@@ -42,6 +60,7 @@ public class ParadiseLostFeatures {
     }
 
     public static void init() {
+        ParadiseLostPlacementModifiers.init();
         ParadiseLostTreeHell.init();
         ParadiseLostStructureFeatures.init();
         ParadiseLostConfiguredFeatures.init();

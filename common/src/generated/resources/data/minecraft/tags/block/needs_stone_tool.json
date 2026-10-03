@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "paradise_lost:olvite_ore",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:olvite_block",
-      "required": false
-    },
-    {
-      "id": "paradise_lost:levitator",
-      "required": false
-    }
+    "paradise_lost:olvite_ore",
+    "paradise_lost:olvite_block",
+    "paradise_lost:levitator"
   ]
 }
