@@ -63,15 +63,15 @@ public abstract class ItemRendererMixin {
             boolean bl = renderMode == ItemDisplayContext.GUI || renderMode == ItemDisplayContext.GROUND || renderMode == ItemDisplayContext.FIXED;
             if (bl && stack.is(ItemRegistry.OLVITE_SPYGLASS.get())) {
                 matrices.pushPose();
-                model = this.itemModelShaper.getModelManager().getModel(OLVITE_SPYGLASS);
-                model.getTransforms().getTransform(renderMode).apply(leftHanded, matrices);
+                BakedModel spyglassModel = this.itemModelShaper.getModelManager().getModel(OLVITE_SPYGLASS);
+                spyglassModel.getTransforms().getTransform(renderMode).apply(leftHanded, matrices);
                 matrices.translate(-0.5F, -0.5F, -0.5F);
 
                 RenderType renderLayer = ItemBlockRenderTypes.getRenderType(stack, true);
                 VertexConsumer vertexConsumer;
                 vertexConsumer = getFoilBufferDirect(vertexConsumers, renderLayer, true, stack.hasFoil());
 
-                this.renderModelLists(model, stack, light, overlay, matrices, vertexConsumer);
+                this.renderModelLists(spyglassModel, stack, light, overlay, matrices, vertexConsumer);
 
                 matrices.popPose();
                 ci.cancel();

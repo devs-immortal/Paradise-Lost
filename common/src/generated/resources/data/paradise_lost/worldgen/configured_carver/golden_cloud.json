@@ -18,7 +18,7 @@
     },
     "max_yaw": 1.5,
     "probability": 0.0085,
-    "replaceable": "#minecraft:overworld_carver_replaceables",
+    "replaceable": "#paradise_lost:worldgen/cloud_carver_replaceables",
     "size_multiplier": {
       "type": "minecraft:uniform",
       "max_inclusive": 5,
@@ -45,6 +45,10 @@
       "min_inclusive": 0.5
     },
     "yaw_multiplier": 0.225,
-    "yaw_pitch_ratio": 0.225
+    "yaw_pitch_ratio": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 0.5,
+      "min_inclusive": 0.35
+    }
   }
 }
