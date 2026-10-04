@@ -1,5 +1,9 @@
 package net.id.paradise_lost.datagen;
 
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.block.DecoratedPotBlock;
+import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.minecraft.advancements.critereon.BlockPredicate;
@@ -121,7 +125,7 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
         addDrop(LEVITA_RAIL.get());
         addDrop(GOLDEN_AMBER_BARS.get());
         addDrop(CALCITE_FLOWER_POT.get());
-        addDrop(CALCITE_DECORATED_POT.get());
+        addDrop(CALCITE_DECORATED_POT.get(), this::decoratedPotTable);
 
         addSimpleBlockSetDrops(BURNISHED_STONE_SET);
         addDrop(BURNISHED_STONE_WALL.get());
@@ -434,6 +438,25 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
 
     private void addDrop(Block block, LootTable.Builder builder) {
         add(block, builder);
+    }
+
+    private LootTable.Builder decoratedPotTable(Block block) {
+        return LootTable.lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .add(
+                                        DynamicLoot.dynamicEntry(DecoratedPotBlock.SHERDS_DYNAMIC_DROP_ID)
+                                                .when(
+                                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DecoratedPotBlock.CRACKED, true))
+                                                )
+                                                .otherwise(
+                                                        LootItem.lootTableItem(block)
+                                                                .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).include(DataComponents.POT_DECORATIONS))
+                                                )
+                                )
+                );
     }
 
     private void addPottedPlantDrops(Block block) {

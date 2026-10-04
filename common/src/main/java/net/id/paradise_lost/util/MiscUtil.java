@@ -52,6 +52,15 @@ public final class MiscUtil {
         }
     }
 
+    public static boolean hasLevitationTotem(LivingEntity entity) {
+        for (InteractionHand hand : InteractionHand.values()) {
+            if (entity.getItemInHand(hand).is(ItemRegistry.TOTEM_OF_LEVITATION.get())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean useLevitationTotem(LivingEntity entity) {
         ItemStack itemStack = null;
 

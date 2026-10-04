@@ -49,6 +49,7 @@ public class PopomEntity extends Animal {
 
     public PopomEntity(EntityType<? extends PopomEntity> entityType, Level world) {
         super(entityType, world);
+        this.updateLootTable();
     }
 
     protected void defineSynchedData(SynchedEntityData.Builder builder) {

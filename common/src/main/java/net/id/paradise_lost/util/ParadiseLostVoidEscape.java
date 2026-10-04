@@ -45,6 +45,9 @@ public final class ParadiseLostVoidEscape {
         if (level.getGameRules().getBoolean(PARADISE_VOID_KILLS)) {
             return false;
         }
+        if (entity instanceof LivingEntity living && MiscUtil.hasLevitationTotem(living)) {
+            return false;
+        }
 
         Entity root = entity.getRootVehicle();
         if (!ESCAPING.add(root.getUUID())) {
