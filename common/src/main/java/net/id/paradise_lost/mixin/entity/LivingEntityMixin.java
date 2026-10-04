@@ -12,8 +12,12 @@ import net.id.paradise_lost.util.MiscUtil;
 import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.id.paradise_lost.util.ParadiseLostVoidEscape;
 import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -27,6 +31,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -60,7 +65,11 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     public abstract boolean isDeadOrDying();
 
     @Shadow
-    protected abstract float getDamageAfterMagicAbsorb(DamageSource source, float amount);
+    public abstract boolean hasEffect(Holder<MobEffect> effect);
+
+    @Shadow
+    @Nullable
+    public abstract MobEffectInstance getEffect(Holder<MobEffect> effect);
 
     @Shadow
     @Final
@@ -170,7 +179,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (!this.isInvulnerableTo(source) && !this.level().isClientSide && !this.isDeadOrDying()) {
             if (source.is(DamageTypeTags.IS_FALL)) {
-                float modified = this.getDamageAfterMagicAbsorb(source, amount);
+                float modified = paradiseLost$previewMagicAbsorb(source, amount);
 
                 if ((modified >= 10.0 || modified >= getHealth()) && MiscUtil.useLevitationTotem((LivingEntity) (Entity) this)) {
 
@@ -198,6 +207,31 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
                 }
             }
         }
+    }
+
+    @Unique
+    private float paradiseLost$previewMagicAbsorb(DamageSource source, float damageAmount) {
+        if (source.is(DamageTypeTags.BYPASSES_EFFECTS)) {
+            return damageAmount;
+        }
+        if (this.hasEffect(MobEffects.DAMAGE_RESISTANCE) && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
+            MobEffectInstance resistance = this.getEffect(MobEffects.DAMAGE_RESISTANCE);
+            if (resistance != null) {
+                int reduction = (resistance.getAmplifier() + 1) * 5;
+                damageAmount = Math.max(damageAmount * (25 - reduction) / 25.0F, 0.0F);
+            }
+        }
+        if (damageAmount <= 0.0F || source.is(DamageTypeTags.BYPASSES_ENCHANTMENTS)) {
+            return damageAmount;
+        }
+        float protection = 0.0F;
+        if (this.level() instanceof ServerLevel serverLevel) {
+            protection = EnchantmentHelper.getDamageProtection(serverLevel, (LivingEntity) (Object) this, source);
+        }
+        if (protection > 0.0F) {
+            damageAmount = CombatRules.getDamageAfterMagicAbsorb(damageAmount, protection);
+        }
+        return damageAmount;
     }
 
     @Inject(method = "onEquipItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;gameEvent(Lnet/minecraft/core/Holder;)V"))

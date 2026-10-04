@@ -5,11 +5,9 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,7 +15,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
 
 public class CraftingOminousCookieRecipe extends ShapedRecipe {
-    public static final int OUTPUT_COUNT = 8;
+    public static final int OUTPUT_COUNT = OminousCookieCrafting.OUTPUT_COUNT;
 
     private final ShapedRecipePattern shapedPattern;
 
@@ -35,16 +33,7 @@ public class CraftingOminousCookieRecipe extends ShapedRecipe {
     @Override
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
         ItemStack result = super.assemble(input, registries);
-        for (int i = 0; i < input.size(); i++) {
-            ItemStack stack = input.getItem(i);
-            if (stack.is(Items.OMINOUS_BOTTLE)) {
-                Integer amplifier = stack.get(DataComponents.OMINOUS_BOTTLE_AMPLIFIER);
-                if (amplifier != null) {
-                    result.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, amplifier);
-                }
-                break;
-            }
-        }
+        OminousCookieCrafting.copyAmplifier(input, result);
         return result;
     }
 
@@ -54,7 +43,7 @@ public class CraftingOminousCookieRecipe extends ShapedRecipe {
     }
 
     public static class Serializer implements RecipeSerializer<CraftingOminousCookieRecipe> {
-        public static final MapCodec<CraftingOminousCookieRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+        private static final MapCodec<CraftingOminousCookieRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Codec.STRING.optionalFieldOf("group", "").forGetter(ShapedRecipe::getGroup),
                 CraftingBookCategory.CODEC.optionalFieldOf("category", CraftingBookCategory.MISC).forGetter(ShapedRecipe::category),
                 ShapedRecipePattern.MAP_CODEC.forGetter(recipe -> recipe.shapedPattern),
@@ -62,7 +51,7 @@ public class CraftingOminousCookieRecipe extends ShapedRecipe {
                 Codec.BOOL.optionalFieldOf("show_notification", true).forGetter(ShapedRecipe::showNotification)
         ).apply(instance, CraftingOminousCookieRecipe::new));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, CraftingOminousCookieRecipe> STREAM_CODEC = StreamCodec.of(
+        private static final StreamCodec<RegistryFriendlyByteBuf, CraftingOminousCookieRecipe> STREAM_CODEC = StreamCodec.of(
                 Serializer::toNetwork,
                 Serializer::fromNetwork
         );
@@ -86,7 +75,7 @@ public class CraftingOminousCookieRecipe extends ShapedRecipe {
 
         @Override
         public MapCodec<CraftingOminousCookieRecipe> codec() {
-            return CODEC;
+            return MAP_CODEC;
         }
 
         @Override
