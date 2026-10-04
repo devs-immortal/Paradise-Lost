@@ -675,7 +675,7 @@ public class BlockRegistry {
     }
 
     public static final RegistryObject<Block, CherineTorchBlock> CHERINE_TORCH = addNoItem("cherine_torch", () -> new CherineTorchBlock(cherineTorch()), cutoutRenderLayer);
-    public static final RegistryObject<Block, CherineWallTorchBlock> CHERINE_TORCH_WALL = addNoItem("cherine_wall_torch", () -> new CherineWallTorchBlock(ofFullCopy(CHERINE_TORCH.get())), cutoutRenderLayer);
+    public static final RegistryObject<Block, CherineWallTorchBlock> CHERINE_TORCH_WALL = addNoItem("cherine_wall_torch", () -> new CherineWallTorchBlock(ofFullCopy(CHERINE_TORCH.get()).dropsLike(CHERINE_TORCH.get())), cutoutRenderLayer);
     public static final RegistryObject<Block, GoldenAmberBarsBlock> GOLDEN_AMBER_BARS = add("golden_amber_bars", () -> new GoldenAmberBarsBlock(ofFullCopy(IRON_BARS)), cutoutMippedRenderLayer);
 
     public static final RegistryObject<Block, BrushableBlock> SUSPICIOUS_DIRT = add("suspicious_dirt", () -> new BrushableBlock(DIRT.get(), SoundEvents.BRUSH_GRAVEL, SoundEvents.BRUSH_GRAVEL_COMPLETED, ofFullCopy(DIRT.get()).strength(0.25F).sound(SoundType.SUSPICIOUS_GRAVEL).pushReaction(PushReaction.DESTROY)));
