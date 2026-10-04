@@ -51,12 +51,11 @@ public class SoulSwordItem extends SwordItem {
             if (!newSouls.contains(entityName)) {
                 newSouls.add(entityName);
                 gainedSoul = true;
-            }
 
-            if (!attacker.level().isClientSide()
-                    && ParadiseLostEnchantmentHelper.rollExtraSoul(stack, attacker.level(), attacker.getRandom())) {
-                newSouls.add(RENDING_BONUS_SOUL_PREFIX + newSouls.size());
-                gainedSoul = true;
+                if (!attacker.level().isClientSide()
+                        && ParadiseLostEnchantmentHelper.rollExtraSoul(stack, attacker.level(), attacker.getRandom())) {
+                    newSouls.add(RENDING_BONUS_SOUL_PREFIX + newSouls.size());
+                }
             }
 
             if (gainedSoul) {

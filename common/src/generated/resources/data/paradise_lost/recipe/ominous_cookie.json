@@ -1,5 +1,6 @@
 {
   "type": "paradise_lost:crafting_ominous_cookie",
+  "category": "misc",
   "key": {
     "A": {
       "item": "paradise_lost:amadrys_bushel"
