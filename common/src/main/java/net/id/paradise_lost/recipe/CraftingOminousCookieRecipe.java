@@ -15,6 +15,8 @@ import net.minecraft.world.item.crafting.ShapedRecipePattern;
 public class CraftingOminousCookieRecipe extends ShapedRecipe {
     public static final int OUTPUT_COUNT = OminousCookieCrafting.OUTPUT_COUNT;
 
+    private final ShapedRecipePattern shapedPattern;
+
     public CraftingOminousCookieRecipe(
             String group,
             CraftingBookCategory category,
@@ -48,12 +50,17 @@ public class CraftingOminousCookieRecipe extends ShapedRecipe {
     }
 
     public static class Serializer implements RecipeSerializer<CraftingOminousCookieRecipe> {
-        private static final MapCodec<CraftingOminousCookieRecipe> MAP_CODEC =
-                ShapedRecipe.Serializer.CODEC.xmap(CraftingOminousCookieRecipe::new, recipe -> recipe);
+        private static final MapCodec<CraftingOminousCookieRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                Codec.STRING.optionalFieldOf("group", "").forGetter(ShapedRecipe::getGroup),
+                CraftingBookCategory.CODEC.optionalFieldOf("category", CraftingBookCategory.MISC).forGetter(ShapedRecipe::category),
+                ShapedRecipePattern.MAP_CODEC.forGetter(recipe -> recipe.shapedPattern),
+                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(recipe -> recipe.getResultItem(RegistryAccess.EMPTY)),
+                Codec.BOOL.optionalFieldOf("show_notification", true).forGetter(ShapedRecipe::showNotification)
+        ).apply(instance, CraftingOminousCookieRecipe::new));
 
         private static final StreamCodec<RegistryFriendlyByteBuf, CraftingOminousCookieRecipe> STREAM_CODEC = StreamCodec.of(
-                (buffer, recipe) -> ShapedRecipe.Serializer.STREAM_CODEC.encode(buffer, recipe),
-                buffer -> new CraftingOminousCookieRecipe(ShapedRecipe.Serializer.STREAM_CODEC.decode(buffer))
+                Serializer::toNetwork,
+                Serializer::fromNetwork
         );
 
         @Override
