@@ -1,5 +1,6 @@
 package net.id.paradise_lost.block;
 
+import net.id.paradise_lost.ModConstants;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
@@ -14,6 +15,6 @@ public final class ParadiseLostWoodTypes {
     public static void init() {}
 
     private static WoodType register(String name, BlockSetType setType) {
-        return WoodType.register(new WoodType(name, setType));
+        return WoodType.register(new WoodType(ModConstants.id(name).toString(), setType));
     }
 }
