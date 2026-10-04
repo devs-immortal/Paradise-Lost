@@ -1,5 +1,6 @@
 {
   "type": "paradise_lost:crafting_ominous_cookie_shapeless",
+  "category": "misc",
   "ingredients": [
     {
       "item": "paradise_lost:blackcurrant_cookie"
