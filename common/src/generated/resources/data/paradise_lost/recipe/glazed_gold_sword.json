@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "minecraft:gold_block",
+  "base": "minecraft:golden_sword",
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:glazed_gold_sword"
+  },
+  "template": "paradise_lost:glazed_gold_upgrade_smithing_template"
+}

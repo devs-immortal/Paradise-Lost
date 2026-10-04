@@ -1,0 +1,11 @@
+{
+  "type": "paradise_lost:tree_tap",
+  "chance": 3,
+  "ingredient": "minecraft:bowl",
+  "result": {
+    "count": 1,
+    "id": "minecraft:mushroom_stew"
+  },
+  "result_block": "minecraft:mushroom_stem",
+  "tapped_block": "minecraft:mushroom_stem"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "paradise_lost:tree_tap",
+  "chance": 1,
+  "ingredient": "minecraft:glass_bottle",
+  "potion_content": {},
+  "result": {
+    "count": 1,
+    "id": "minecraft:potion"
+  },
+  "result_block": "paradise_lost:wisteria_log",
+  "tapped_block": "paradise_lost:wisteria_log"
+}

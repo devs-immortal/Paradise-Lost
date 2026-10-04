@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_piston",
+  "textures": {
+    "bottom": "paradise_lost:block/green_cloud_bottom",
+    "platform": "paradise_lost:block/green_cloud_top",
+    "side": "paradise_lost:block/green_cloud_side"
+  }
+}

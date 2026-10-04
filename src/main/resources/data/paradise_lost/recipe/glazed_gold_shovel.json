@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "addition": "minecraft:gold_block",
-  "base": "minecraft:golden_shovel",
-  "result": {
-    "id": "paradise_lost:glazed_gold_shovel"
-  },
-  "template": "paradise_lost:glazed_gold_upgrade_smithing_template"
-}

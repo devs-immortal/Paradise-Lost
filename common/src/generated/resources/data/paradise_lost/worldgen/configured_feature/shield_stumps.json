@@ -1,0 +1,46 @@
+{
+  "type": "paradise_lost:pillar_feature",
+  "config": {
+    "body": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:mottled_aurel_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    "floor": [
+      "paradise_lost:highlands_grass",
+      "paradise_lost:coarse_dirt",
+      "paradise_lost:floestone",
+      "paradise_lost:cobbled_floestone"
+    ],
+    "shell": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:rootcap",
+        "Properties": {
+          "facing": "north"
+        }
+      }
+    },
+    "shell_chance": 0.225,
+    "size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 1
+    },
+    "top": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:mottled_aurel_fallen_log",
+        "Properties": {
+          "axis": "y",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "top_chance": 0.1
+  }
+}

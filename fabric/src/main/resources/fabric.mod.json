@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "${mod_id}",
+	"version": "${version}",
+	"name": "${mod_display_name}",
+	"description": "${mod_description}",
+	"authors": [
+		"${mod_authors}"
+	],
+	"contact": {
+		"homepage": "${mod_homepage}",
+		"issues": "${mod_issues_tracker}",
+		"sources": "${mod_git_repo}"
+	},
+	"license": "${mod_license}",
+	"icon": "assets/${mod_id}/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "net.id.paradise_lost.ModMain"
+		],
+		"client": [
+          "net.id.paradise_lost.client.FabricClient"
+		]
+	},
+	"mixins": [
+		"${mod_id}.mixins.json",
+		"paradise_lost.fabric.mixins.json"
+	],
+	"accessWidener": "${mod_id}.accesswidener",
+	"depends": {
+   		"fabricloader": ">=${fabric_loader_version_range}",
+		"fabric-api": ">=${fabric_api_version_range}",
+		"java": ">=${java_version}",
+		"minecraft": ">=${minecraft_version}"
+	},
+	"suggests": {
+		"everycomp": "*",
+		"moonlight": "*",
+		"stonezone": "*"
+	}
+}

@@ -1,0 +1,28 @@
+{
+  "elements": [
+    {
+      "faces": {
+        "east": {
+          "texture": "#portal"
+        },
+        "west": {
+          "texture": "#portal"
+        }
+      },
+      "from": [
+        6,
+        0,
+        0
+      ],
+      "to": [
+        10,
+        16,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "particle": "paradise_lost:block/blue_portal",
+    "portal": "paradise_lost:block/blue_portal"
+  }
+}

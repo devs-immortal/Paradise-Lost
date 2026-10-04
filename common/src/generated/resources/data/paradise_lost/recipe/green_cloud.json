@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "paradise_lost:golden_cloud",
+    "paradise_lost:blue_cloud"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:green_cloud"
+  }
+}

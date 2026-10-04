@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#paradise_lost:has_structure/vault",
+  "dimension_padding": 50,
+  "max_distance_from_center": 116,
+  "size": 8,
+  "spawn_overrides": {},
+  "start_height": {
+    "absolute": 105
+  },
+  "start_pool": "paradise_lost:vault/starts",
+  "step": "underground_structures",
+  "terrain_adaptation": "encapsulate",
+  "use_expansion_hack": false
+}

@@ -1,0 +1,26 @@
+{
+  "drop_multiplier": {
+    "base": 0.4,
+    "variance": 0.02
+  },
+  "gliding_decay": {
+    "base": -0.025,
+    "variance": 0.02
+  },
+  "gliding_speed": {
+    "base": 0.01,
+    "variance": 0.02
+  },
+  "ground_speed": {
+    "base": 0.0,
+    "variance": 0.07
+  },
+  "jumping_strength": {
+    "base": -0.02,
+    "variance": -0.01
+  },
+  "max_health": {
+    "base": 4.0,
+    "variance": 6.0
+  }
+}

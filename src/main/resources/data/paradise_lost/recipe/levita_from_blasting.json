@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": "paradise_lost:levita_ore",
-  "result": {
-    "id": "paradise_lost:levita_gem"
-  },
-  "experience": 1.2,
-  "cookingtime": 100
-}

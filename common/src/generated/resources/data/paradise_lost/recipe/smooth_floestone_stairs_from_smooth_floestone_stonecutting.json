@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "paradise_lost:smooth_floestone",
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:smooth_floestone_stairs"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "paradise_lost:tree_tap",
+  "chance": 2,
+  "ingredient": "minecraft:glass_bottle",
+  "potion_content": {},
+  "result": {
+    "count": 1,
+    "id": "minecraft:potion"
+  },
+  "result_block": "minecraft:obsidian",
+  "tapped_block": "minecraft:crying_obsidian"
+}

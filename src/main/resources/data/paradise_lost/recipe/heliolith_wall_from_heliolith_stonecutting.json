@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "paradise_lost:heliolith",
-  "result": {
-    "id": "paradise_lost:heliolith_wall",
-    "count": 1
-  }
-}

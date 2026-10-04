@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "paradise_lost:amadrys_bushel",
+    "C": "paradise_lost:blackcurrant"
+  },
+  "pattern": [
+    "BCB"
+  ],
+  "result": {
+    "count": 8,
+    "id": "paradise_lost:blackcurrant_cookie"
+  }
+}

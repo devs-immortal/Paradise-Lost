@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "paradise_lost:block/blackcurrant_bush_stage3"
+  }
+}

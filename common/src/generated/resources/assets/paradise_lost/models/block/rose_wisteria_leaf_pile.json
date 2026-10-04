@@ -1,0 +1,7 @@
+{
+  "parent": "paradise_lost:block/leaf_pile",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "leaves": "paradise_lost:block/rose_wisteria_leaves"
+  }
+}

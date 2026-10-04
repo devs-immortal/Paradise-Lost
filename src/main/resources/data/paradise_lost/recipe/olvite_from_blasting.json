@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": "paradise_lost:olvite_ore",
-  "result": {
-    "id": "paradise_lost:olvite"
-  },
-  "experience": 0.6,
-  "cookingtime": 100
-}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "paradise_lost:calcite_tiles",
-  "result": {
-    "id": "paradise_lost:calcite_tiles_stairs",
-    "count": 1
-  }
-}

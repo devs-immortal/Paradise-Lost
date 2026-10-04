@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.8,
+  "ingredient": "paradise_lost:surtrum",
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:refined_surtrum"
+  }
+}

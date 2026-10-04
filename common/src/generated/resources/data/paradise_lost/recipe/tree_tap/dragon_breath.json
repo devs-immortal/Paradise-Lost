@@ -1,0 +1,11 @@
+{
+  "type": "paradise_lost:tree_tap",
+  "chance": 8,
+  "ingredient": "minecraft:glass_bottle",
+  "result": {
+    "count": 1,
+    "id": "minecraft:dragon_breath"
+  },
+  "result_block": "minecraft:dragon_head",
+  "tapped_block": "minecraft:dragon_head"
+}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    "paradise_lost:ancient_flower"
-  ],
-  "result": {
-    "id": "minecraft:white_dye"
-  }
-}

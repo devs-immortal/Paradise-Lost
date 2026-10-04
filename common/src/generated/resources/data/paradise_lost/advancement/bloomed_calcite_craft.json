@@ -1,0 +1,59 @@
+{
+  "parent": "minecraft:nether/brew_potion",
+  "criteria": {
+    "douse": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "minecraft:calcite"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "minecraft:potion",
+                "minecraft:splash_potion",
+                "minecraft:lingering_potion"
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    },
+    "hold_bc": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paradise_lost:bloomed_calcite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.bloomed_calcite_craft.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paradise_lost:bloomed_calcite"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.bloomed_calcite_craft.title"
+    }
+  },
+  "requirements": [
+    [
+      "douse",
+      "hold_bc"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "paradise_lost:block/amadrys_bundle_bottom",
+    "side": "paradise_lost:block/amadrys_bundle_side",
+    "top": "paradise_lost:block/amadrys_bundle_top"
+  }
+}

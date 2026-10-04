@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "paradise_lost:thatch",
+    "X": "#minecraft:planks"
+  },
+  "pattern": [
+    " # ",
+    "X#X"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:incubator"
+  }
+}

@@ -1,0 +1,404 @@
+{
+  "block.blackcurrant_bush.pick_blueberries": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.sweet_berry_bush.pick_berries"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries"
+  },
+  "block.palace_door.open": {
+    "sounds": [
+      "paradise_lost:block/palace_door/click_open"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.palace_door.open"
+  },
+  "block.palace_door.unlock": {
+    "sounds": [
+      "paradise_lost:block/palace_door/open"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.palace_door.unlock"
+  },
+  "block.portal.ambient": {
+    "sounds": [
+      "paradise_lost:block/portal/ambient"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.portal.ambient"
+  },
+  "block.portal.travel": {
+    "sounds": [
+      "paradise_lost:block/portal/travel"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.portal.travel"
+  },
+  "block.portal.trigger": {
+    "sounds": [
+      "paradise_lost:block/portal/trigger"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.portal.trigger"
+  },
+  "block.surtrum_air.crackle": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.fire.ambient"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.block.surtrum_air.crackle"
+  },
+  "block.surtrum_air.rush": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.fire.extinguish"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.block.surtrum_air.rush"
+  },
+  "entity.envoy.ambient": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.skeleton.ambient"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.ambient"
+  },
+  "entity.envoy.death": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.wither_skeleton.death"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.death"
+  },
+  "entity.envoy.enlightened.ambient": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.amethyst_block.chime"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.ambient"
+  },
+  "entity.envoy.enlightened.death": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.amethyst_block.break"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.death"
+  },
+  "entity.envoy.enlightened.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.amethyst_block.hit"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.hurt"
+  },
+  "entity.envoy.enlightened.step": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.amethyst_block.step"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.step"
+  },
+  "entity.envoy.gets_enlightened": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.zombie_villager.converted"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.enlightened.ambient"
+  },
+  "entity.envoy.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.skeleton.hurt"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.hurt"
+  },
+  "entity.envoy.step": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.skeleton.step"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.envoy.step"
+  },
+  "entity.minecart.inside_levitating": {
+    "sounds": [
+      "paradise_lost:entity/minecart/inside_levitating"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.minecart.inside_levitating"
+  },
+  "entity.minecart.rolling_levitating": {
+    "sounds": [
+      "paradise_lost:entity/minecart/rolling_levitating"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.minecart.rolling_levitating"
+  },
+  "entity.moa.ambient": {
+    "sounds": [
+      "paradise_lost:entity/passive/moa/moachirp1",
+      "paradise_lost:entity/passive/moa/moachirp2",
+      "paradise_lost:entity/passive/moa/moachirp3",
+      "paradise_lost:entity/passive/moa/moachirp4"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.ambient"
+  },
+  "entity.moa.ambient.sing": {
+    "sounds": [
+      "paradise_lost:entity/passive/moa/moaambient3",
+      "paradise_lost:entity/passive/moa/moaambient4",
+      "paradise_lost:entity/passive/moa/moaambient5",
+      "paradise_lost:entity/passive/moa/moaambient6"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.ambient"
+  },
+  "entity.moa.death": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.parrot.death"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.death"
+  },
+  "entity.moa.eat": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.parrot.eat"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.eat"
+  },
+  "entity.moa.egg_hatch": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.turtle.egg_hatch"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.egg_hatch"
+  },
+  "entity.moa.gliding": {
+    "sounds": [
+      "paradise_lost:entity/passive/moa/moaflap1",
+      "paradise_lost:entity/passive/moa/moaflap3",
+      "paradise_lost:entity/passive/moa/moaflap4",
+      "paradise_lost:entity/passive/moa/moaflap5"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.gliding"
+  },
+  "entity.moa.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.bat.death"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.hurt"
+  },
+  "entity.moa.lay_egg": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.turtle.lay_egg"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.lay_egg"
+  },
+  "entity.moa.step": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.pig.step"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.moa.step"
+  },
+  "entity.nitra.explode": {
+    "sounds": [
+      "paradise_lost:entity/nitra/nitra_1",
+      "paradise_lost:entity/nitra/nitra_2",
+      "paradise_lost:entity/nitra/nitra_3",
+      "paradise_lost:entity/nitra/nitra_4"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.nitra.explode"
+  },
+  "entity.nitra.throw": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.snowball.throw"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.nitra.throw"
+  },
+  "entity.popom.ambient": {
+    "sounds": [
+      "paradise_lost:entity/passive/popom/popom_ambient_1",
+      "paradise_lost:entity/passive/popom/popom_ambient_2",
+      "paradise_lost:entity/passive/popom/popom_ambient_3",
+      "paradise_lost:entity/passive/popom/popom_ambient_4",
+      "paradise_lost:entity/passive/popom/popom_ambient_5",
+      "paradise_lost:entity/passive/popom/popom_ambient_6"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.popom.ambient"
+  },
+  "entity.popom.death": {
+    "sounds": [
+      "paradise_lost:entity/passive/popom/popom_death_1",
+      "paradise_lost:entity/passive/popom/popom_death_2"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.popom.death"
+  },
+  "entity.popom.harvest": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.honey_block.fall"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.popom.harvest"
+  },
+  "entity.popom.hurt": {
+    "sounds": [
+      "paradise_lost:entity/passive/popom/popom_death_1",
+      "paradise_lost:entity/passive/popom/popom_death_2"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.popom.hurt"
+  },
+  "entity.sentinel.death": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.snow_golem.death"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.sentinel.death"
+  },
+  "entity.sentinel.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.basalt.place"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.sentinel.hurt"
+  },
+  "entity.sentinel.step": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.calcite.step"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.sentinel.step"
+  },
+  "item.armor.equip.flaxweave": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_leather"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.item.armor.equip.flaxweave"
+  },
+  "item.armor.equip.glazed_gold": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_gold"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.item.armor.equip.glazed_gold"
+  },
+  "item.armor.equip.olvite": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_iron"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.item.armor.equip.olvite"
+  },
+  "item.armor.equip.relic": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_chain"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.item.armor.equip.relic"
+  },
+  "item.armor.equip.surtrum": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_netherite"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.item.armor.equip.surtrum"
+  },
+  "item.bloodstone.prick": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.bee.sting"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.item.bloodstone.prick"
+  },
+  "item.soul_blade.harvest": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.allay.item_taken"
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.item.soul_blade.harvest"
+  },
+  "music.paradise": {
+    "sounds": [
+      {
+        "name": "paradise_lost:music/paradise_lost/cloud_ocean",
+        "stream": true
+      },
+      {
+        "name": "paradise_lost:music/paradise_lost/constellation",
+        "stream": true
+      },
+      {
+        "name": "paradise_lost:music/paradise_lost/floating",
+        "stream": true
+      },
+      {
+        "name": "paradise_lost:music/paradise_lost/overcast",
+        "stream": true
+      },
+      {
+        "name": "paradise_lost:music/paradise_lost/spirit_sunset",
+        "stream": true
+      },
+      {
+        "name": "paradise_lost:music/paradise_lost/sullen_lullaby",
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.paradise_lost.block.portal.ambient"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": "paradise_lost:levita_shard",
+    "S": "minecraft:activator_rail"
+  },
+  "pattern": [
+    "L",
+    "S",
+    "L"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:levita_rail"
+  }
+}

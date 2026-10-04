@@ -1,8 +1,0 @@
-{
-	"parent": "minecraft:block/slab_top",
-	"textures": {
-		"bottom": "paradise_lost:block/thatch",
-		"top": "paradise_lost:block/thatch",
-		"side": "paradise_lost:block/thatch"
-	}
-}

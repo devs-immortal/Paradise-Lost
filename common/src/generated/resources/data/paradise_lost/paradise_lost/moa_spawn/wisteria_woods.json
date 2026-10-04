@@ -1,0 +1,20 @@
+{
+  "races": [
+    {
+      "race": "paradise_lost:goldenrod",
+      "weight": 45
+    },
+    {
+      "race": "paradise_lost:strawberry_wistar",
+      "weight": 45
+    },
+    {
+      "race": "paradise_lost:blackcurrant_wistar",
+      "weight": 29
+    },
+    {
+      "race": "paradise_lost:scarlet",
+      "weight": 2
+    }
+  ]
+}

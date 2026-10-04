@@ -1,0 +1,82 @@
+{
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "faces": {
+        "east": {
+          "texture": "#bars",
+          "uv": [
+            6.0,
+            0.0,
+            2.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#bars",
+          "uv": [
+            10.0,
+            0.0,
+            14.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        8,
+        0,
+        6
+      ],
+      "rotation": {
+        "angle": 0.0,
+        "axis": "y",
+        "origin": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "to": [
+        8,
+        16,
+        10
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#bars",
+          "uv": [
+            10.0,
+            0.0,
+            14.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#bars",
+          "uv": [
+            6.0,
+            0.0,
+            2.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        0,
+        8
+      ],
+      "to": [
+        10,
+        16,
+        8
+      ]
+    }
+  ],
+  "textures": {
+    "bars": "paradise_lost:block/golden_amber_bars",
+    "particle": "paradise_lost:block/golden_amber_bars"
+  }
+}

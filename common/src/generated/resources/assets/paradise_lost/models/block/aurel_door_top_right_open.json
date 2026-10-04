@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_top_right_open",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "paradise_lost:block/aurel_door_bottom",
+    "top": "paradise_lost:block/aurel_door_top"
+  }
+}

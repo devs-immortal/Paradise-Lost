@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/tinted_flower_pot_cross",
-  "textures": {
-    "plant": "paradise_lost:block/fern"
-  }
-}

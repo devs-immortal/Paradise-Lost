@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "mossy_floestone_brick",
+  "ingredients": [
+    "paradise_lost:floestone_brick",
+    "minecraft:vine"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:mossy_floestone_brick"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "moisture=0": {
+      "model": "paradise_lost:block/farmland"
+    },
+    "moisture=1": {
+      "model": "paradise_lost:block/farmland"
+    },
+    "moisture=2": {
+      "model": "paradise_lost:block/farmland"
+    },
+    "moisture=3": {
+      "model": "paradise_lost:block/farmland"
+    },
+    "moisture=4": {
+      "model": "paradise_lost:block/farmland"
+    },
+    "moisture=5": {
+      "model": "paradise_lost:block/farmland"
+    },
+    "moisture=6": {
+      "model": "paradise_lost:block/farmland"
+    },
+    "moisture=7": {
+      "model": "paradise_lost:block/farmland_moist"
+    }
+  }
+}

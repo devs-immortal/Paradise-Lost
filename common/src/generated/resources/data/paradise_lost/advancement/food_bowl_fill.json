@@ -1,0 +1,44 @@
+{
+  "parent": "paradise_lost:tame_moa",
+  "criteria": {
+    "fill": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "paradise_lost:food_bowl"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "#c:foods/raw_meat"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.food_bowl_fill.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paradise_lost:food_bowl"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.food_bowl_fill.title"
+    }
+  },
+  "requirements": [
+    [
+      "fill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

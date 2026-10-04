@@ -1,0 +1,88 @@
+{
+  "variants": {
+    "powered=false,shape=ascending_east,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_raised_ne",
+      "y": 90
+    },
+    "powered=false,shape=ascending_east,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_raised_ne",
+      "y": 90
+    },
+    "powered=false,shape=ascending_north,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_raised_ne"
+    },
+    "powered=false,shape=ascending_north,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_raised_ne"
+    },
+    "powered=false,shape=ascending_south,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_raised_sw"
+    },
+    "powered=false,shape=ascending_south,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_raised_sw"
+    },
+    "powered=false,shape=ascending_west,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_raised_sw",
+      "y": 90
+    },
+    "powered=false,shape=ascending_west,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_raised_sw",
+      "y": 90
+    },
+    "powered=false,shape=east_west,triggered=false": {
+      "model": "paradise_lost:block/levita_rail",
+      "y": 90
+    },
+    "powered=false,shape=east_west,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered",
+      "y": 90
+    },
+    "powered=false,shape=north_south,triggered=false": {
+      "model": "paradise_lost:block/levita_rail"
+    },
+    "powered=false,shape=north_south,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered"
+    },
+    "powered=true,shape=ascending_east,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_on_raised_ne",
+      "y": 90
+    },
+    "powered=true,shape=ascending_east,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_on_raised_ne",
+      "y": 90
+    },
+    "powered=true,shape=ascending_north,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_on_raised_ne"
+    },
+    "powered=true,shape=ascending_north,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_on_raised_ne"
+    },
+    "powered=true,shape=ascending_south,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_on_raised_sw"
+    },
+    "powered=true,shape=ascending_south,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_on_raised_sw"
+    },
+    "powered=true,shape=ascending_west,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_on_raised_sw",
+      "y": 90
+    },
+    "powered=true,shape=ascending_west,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_on_raised_sw",
+      "y": 90
+    },
+    "powered=true,shape=east_west,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_on",
+      "y": 90
+    },
+    "powered=true,shape=east_west,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_on",
+      "y": 90
+    },
+    "powered=true,shape=north_south,triggered=false": {
+      "model": "paradise_lost:block/levita_rail_on"
+    },
+    "powered=true,shape=north_south,triggered=true": {
+      "model": "paradise_lost:block/levita_rail_triggered_on"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+package net.id.paradise_lost.entity.passive.moa;
+
+import com.mojang.serialization.Codec;
+import net.id.paradise_lost.component.MoaGenes;
+import net.minecraft.util.StringRepresentable;
+
+public enum MoaAttributes implements StringRepresentable {
+    GROUND_SPEED(0.24F, 1F, 0.1F),
+    GLIDING_SPEED(0.055F, 0.25F, 0.03F),
+    GLIDING_DECAY(0.5F, 0.9F, 0.06F),
+    JUMPING_STRENGTH(0.15F, 0.25F, 0.018F),
+    DROP_MULTIPLIER(1, 6, 1),
+    MAX_HEALTH(15, 40, 5);
+
+    public static final Codec<MoaAttributes> CODEC = StringRepresentable.fromEnum(MoaAttributes::values);
+
+    public final float min, max, gradeInterval;
+
+    MoaAttributes(float min, float max, float gradeInterval) {
+        this.min = min;
+        this.max = max;
+        this.gradeInterval = gradeInterval;
+    }
+
+    @Override
+    public String getSerializedName() {
+        return name();
+    }
+
+    public String getRatingTierTranslationKey(float attribute) {
+        if (min > max) {
+            return getRatingTierInverse(attribute);
+        }
+
+        if (attribute <= min) {
+            return getRatingTierTranslationKey(1);
+        }
+        if (attribute >= max) {
+            return getRatingTierTranslationKey(7);
+        }
+
+        double out = (attribute - min) / gradeInterval;
+
+        return getRatingTierTranslationKey((int) (out + 2));
+    }
+
+    private String getRatingTierTranslationKey(int tier) {
+        return "moa.attribute.tier." + tier;
+    }
+
+    public String getRatingTierInverse(float attribute) {
+        if (attribute <= min) {
+            return getRatingTierTranslationKey(1);
+        }
+        if (attribute >= max) {
+            return getRatingTierTranslationKey(7);
+        }
+
+        double out = (attribute - min) / gradeInterval;
+
+        return getRatingTierTranslationKey((int) (out + 1));
+    }
+
+    public float getAttribute(MoaEntity moa) {
+        return moa.getGenes().getAttribute(this);
+    }
+
+    public float fromBreeding(MoaGenes parentA, MoaGenes parentB, boolean increase) {
+        float stat = (parentA.getAttribute(this) / 2) + (parentB.getAttribute(this) / 2);
+        if (parentA.getAffinity() == this) {
+            stat += gradeInterval / 3;
+        }
+        if (parentB.getAffinity() == this) {
+            stat += gradeInterval / 3;
+        }
+        if (increase) {
+            stat += gradeInterval / 4;
+        }
+        return stat;
+    }
+
+    public String getTranslationKey() {
+        return "moa.attribute." + this.name().toLowerCase();
+    }
+}

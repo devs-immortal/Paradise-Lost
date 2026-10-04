@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": [
+    "paradise_lost:olvite_pickaxe",
+    "paradise_lost:olvite_shovel",
+    "paradise_lost:olvite_axe",
+    "paradise_lost:olvite_hoe",
+    "paradise_lost:olvite_sword",
+    "paradise_lost:olvite_helmet",
+    "paradise_lost:olvite_chestplate",
+    "paradise_lost:olvite_leggings",
+    "paradise_lost:olvite_boots"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:olvite_nugget"
+  }
+}

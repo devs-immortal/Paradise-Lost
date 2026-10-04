@@ -1,0 +1,86 @@
+package net.id.paradise_lost.util;
+
+import static net.id.paradise_lost.ModConstants.id;
+
+import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.registration.RegistrationProvider;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.Music;
+import net.minecraft.sounds.SoundEvent;
+
+public final class ParadiseLostSoundEvents {
+    private static final RegistrationProvider<SoundEvent> SOUND_EVENTS =
+            RegistrationProvider.get(Registries.SOUND_EVENT, ModConstants.MODID);
+
+    public static final SoundEvent BLOCK_BLACKCURRANT_BUSH_PICK_BLUEBERRIES = register("block.blackcurrant_bush.pick_blueberries");
+    public static final SoundEvent BLOCK_PORTAL_AMBIENT = register("block.portal.ambient");
+    public static final SoundEvent BLOCK_PORTAL_TRAVEL = register("block.portal.travel");
+    public static final SoundEvent BLOCK_PORTAL_TRIGGER = register("block.portal.trigger");
+    public static final SoundEvent BLOCK_PALACE_DOOR_OPEN = register("block.palace_door.open");
+    public static final SoundEvent BLOCK_PALACE_DOOR_UNLOCK = register("block.palace_door.unlock");
+    public static final SoundEvent BLOCK_SURTRUM_RUSH = register("block.surtrum_air.rush");
+    public static final SoundEvent BLOCK_SURTRUM_CRACKLE = register("block.surtrum_air.crackle");
+
+    public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_OLVITE = registerReference("item.armor.equip.olvite");
+    public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_GLAZED_GOLD = registerReference("item.armor.equip.glazed_gold");
+    public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_SURTRUM = registerReference("item.armor.equip.surtrum");
+    public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_RELIC = registerReference("item.armor.equip.relic");
+    public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_FLAXWEAVE = registerReference("item.armor.equip.flaxweave");
+    public static final SoundEvent ITEM_BLOODSTONE_PRICK = register("item.bloodstone.prick");
+    public static final SoundEvent SOUL_BLADE_HARVEST = register("item.soul_blade.harvest");
+
+    public static final SoundEvent ENTITY_MOA_AMBIENT = register("entity.moa.ambient");
+    public static final SoundEvent ENTITY_MOA_AMBIENT_SING = register("entity.moa.ambient.sing");
+    public static final SoundEvent ENTITY_MOA_GLIDING = register("entity.moa.gliding");
+    public static final SoundEvent ENTITY_MOA_DEATH = register("entity.moa.death");
+    public static final SoundEvent ENTITY_MOA_HURT = register("entity.moa.hurt");
+    public static final SoundEvent ENTITY_MOA_EAT = register("entity.moa.eat");
+    public static final SoundEvent ENTITY_MOA_LAY_EGG = register("entity.moa.lay_egg");
+    public static final SoundEvent ENTITY_MOA_EGG_HATCH = register("entity.moa.egg_hatch");
+    public static final SoundEvent ENTITY_MOA_STEP = register("entity.moa.step");
+
+    public static final SoundEvent ENTITY_POPOM_AMBIENT = register(("entity.popom.ambient"));
+    public static final SoundEvent ENTITY_POPOM_HURT = register(("entity.popom.hurt"));
+    public static final SoundEvent ENTITY_POPOM_DEATH = register(("entity.popom.death"));
+    public static final SoundEvent ENTITY_POPOM_HARVEST = register(("entity.popom.harvest"));
+
+    public static final SoundEvent ENTITY_ENVOY_AMBIENT = register(("entity.envoy.ambient"));
+    public static final SoundEvent ENTITY_ENVOY_HURT = register(("entity.envoy.hurt"));
+    public static final SoundEvent ENTITY_ENVOY_DEATH = register(("entity.envoy.death"));
+    public static final SoundEvent ENTITY_ENVOY_STEP = register(("entity.envoy.step"));
+    public static final SoundEvent ENTITY_ENVOY_GETS_ENLIGHTENED = register(("entity.envoy.gets_enlightened"));
+    public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_AMBIENT = register(("entity.envoy.enlightened.ambient"));
+    public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_HURT = register(("entity.envoy.enlightened.hurt"));
+    public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_DEATH = register(("entity.envoy.enlightened.death"));
+    public static final SoundEvent ENTITY_ENVOY_ENLIGHTENED_STEP = register(("entity.envoy.enlightened.step"));
+
+    public static final SoundEvent ENTITY_SENTINEL_HURT = register(("entity.sentinel.hurt"));
+    public static final SoundEvent ENTITY_SENTINEL_DEATH = register(("entity.sentinel.death"));
+    public static final SoundEvent ENTITY_SENTINEL_STEP = register(("entity.sentinel.step"));
+
+    public static final SoundEvent ENTITY_MINECART_INSIDE_LEVITATING = register(("entity.minecart.inside_levitating"));
+    public static final SoundEvent ENTITY_MINECART_ROLLING_LEVITATING = register(("entity.minecart.rolling_levitating"));
+
+    public static final SoundEvent ENTITY_NITRA_THROW = register("entity.nitra.throw");
+    public static final SoundEvent ENTITY_NITRA_EXPLODE = register("entity.nitra.explode");
+
+    public static final SoundEvent MUSIC_PARADISE_LOST = register("music.paradise");
+
+    public static final Music PARADISE_MUSIC_SOUND = new Music(Holder.direct(MUSIC_PARADISE_LOST), 6000, 24000, true);
+
+    public static void init() {
+    }
+
+    private static SoundEvent register(String location) {
+        ResourceLocation resourceId = id(location);
+        SoundEvent event = SoundEvent.createVariableRangeEvent(resourceId);
+        SOUND_EVENTS.register(location, () -> event);
+        return event;
+    }
+
+    private static Holder<SoundEvent> registerReference(String location) {
+        return Holder.direct(register(location));
+    }
+}

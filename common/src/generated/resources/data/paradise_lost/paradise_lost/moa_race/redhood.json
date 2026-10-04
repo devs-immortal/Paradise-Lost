@@ -1,0 +1,4 @@
+{
+  "default_affinity": "MAX_HEALTH",
+  "stat_weighting": "paradise_lost:tank"
+}

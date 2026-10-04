@@ -1,0 +1,38 @@
+{
+  "parent": "paradise_lost:root",
+  "criteria": {
+    "squeeze": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "paradise_lost:popom"
+            }
+          }
+        ],
+        "item": {}
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.paradise_lost.squeeze_popom.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paradise_lost:popom_jelly"
+    },
+    "title": {
+      "translate": "advancements.paradise_lost.squeeze_popom.title"
+    }
+  },
+  "requirements": [
+    [
+      "squeeze"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

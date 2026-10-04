@@ -1,0 +1,17 @@
+{
+  "type": "paradise_lost:boulder",
+  "config": {
+    "body": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:cobbled_floestone"
+      }
+    },
+    "size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 5,
+      "min_inclusive": 3
+    },
+    "tries": 3
+  }
+}

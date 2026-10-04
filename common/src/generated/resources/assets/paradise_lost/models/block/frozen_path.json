@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/dirt_path",
+  "textures": {
+    "bottom": "paradise_lost:block/permafrost",
+    "particle": "paradise_lost:block/permafrost",
+    "side": "paradise_lost:block/frozen_path_side",
+    "top": "paradise_lost:block/frozen_path_top"
+  }
+}

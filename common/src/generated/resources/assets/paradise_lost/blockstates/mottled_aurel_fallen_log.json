@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "paradise_lost:block/mottled_aurel_fallen_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "paradise_lost:block/mottled_aurel_fallen_log"
+    },
+    "axis=z": {
+      "model": "paradise_lost:block/mottled_aurel_fallen_log",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "paradise_lost:block/highlands_grass"
+      },
+      {
+        "model": "paradise_lost:block/highlands_grass",
+        "y": 90
+      },
+      {
+        "model": "paradise_lost:block/highlands_grass",
+        "y": 180
+      },
+      {
+        "model": "paradise_lost:block/highlands_grass",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "paradise_lost:block/grass_snowy"
+    }
+  }
+}

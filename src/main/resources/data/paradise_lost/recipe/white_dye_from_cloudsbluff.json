@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    "paradise_lost:cloudsbluff"
-  ],
-  "result": {
-    "id": "minecraft:white_dye"
-  }
-}

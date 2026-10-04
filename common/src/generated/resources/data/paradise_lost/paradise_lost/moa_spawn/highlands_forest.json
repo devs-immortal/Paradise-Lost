@@ -1,0 +1,16 @@
+{
+  "races": [
+    {
+      "race": "paradise_lost:highlands_blue",
+      "weight": 45
+    },
+    {
+      "race": "paradise_lost:goldenrod",
+      "weight": 25
+    },
+    {
+      "race": "paradise_lost:tangerine",
+      "weight": 15
+    }
+  ]
+}

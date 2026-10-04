@@ -1,0 +1,121 @@
+{
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "faces": {
+        "east": {
+          "texture": "#edge"
+        },
+        "west": {
+          "texture": "#edge",
+          "uv": [
+            8.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        8,
+        0,
+        8
+      ],
+      "to": [
+        8,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "south": {
+          "cullface": "south",
+          "texture": "#edge"
+        }
+      },
+      "from": [
+        7,
+        0,
+        9
+      ],
+      "to": [
+        9,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "rotation": 90,
+          "texture": "#edge",
+          "uv": [
+            8.0,
+            2.0,
+            15.0,
+            0.0
+          ]
+        },
+        "up": {
+          "rotation": 270,
+          "texture": "#edge",
+          "uv": [
+            8.0,
+            0.0,
+            15.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        7,
+        0.001,
+        9
+      ],
+      "to": [
+        9,
+        0.001,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "rotation": 90,
+          "texture": "#edge",
+          "uv": [
+            8.0,
+            2.0,
+            15.0,
+            0.0
+          ]
+        },
+        "up": {
+          "rotation": 270,
+          "texture": "#edge",
+          "uv": [
+            8.0,
+            0.0,
+            15.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        7,
+        15.999,
+        9
+      ],
+      "to": [
+        9,
+        15.999,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "edge": "paradise_lost:block/golden_amber_bars",
+    "particle": "paradise_lost:block/golden_amber_bars"
+  }
+}

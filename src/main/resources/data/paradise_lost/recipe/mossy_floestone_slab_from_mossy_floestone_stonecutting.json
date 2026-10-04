@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "paradise_lost:mossy_floestone",
-  "result": {
-    "id": "paradise_lost:mossy_floestone_slab",
-    "count": 2
-  }
-}

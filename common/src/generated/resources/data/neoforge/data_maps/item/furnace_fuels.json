@@ -1,0 +1,283 @@
+{
+  "values": {
+    "paradise_lost:aurel_boat": {
+      "burn_time": 1200
+    },
+    "paradise_lost:aurel_bookshelf": {
+      "burn_time": 300
+    },
+    "paradise_lost:aurel_bucket": {
+      "burn_time": 200
+    },
+    "paradise_lost:aurel_button": {
+      "burn_time": 100
+    },
+    "paradise_lost:aurel_chest_boat": {
+      "burn_time": 1200
+    },
+    "paradise_lost:aurel_door": {
+      "burn_time": 200
+    },
+    "paradise_lost:aurel_fence": {
+      "burn_time": 300
+    },
+    "paradise_lost:aurel_fence_gate": {
+      "burn_time": 300
+    },
+    "paradise_lost:aurel_hanging_sign": {
+      "burn_time": 200
+    },
+    "paradise_lost:aurel_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:aurel_planks": {
+      "burn_time": 300
+    },
+    "paradise_lost:aurel_pressure_plate": {
+      "burn_time": 100
+    },
+    "paradise_lost:aurel_sapling": {
+      "burn_time": 100
+    },
+    "paradise_lost:aurel_sign": {
+      "burn_time": 200
+    },
+    "paradise_lost:aurel_slab": {
+      "burn_time": 150
+    },
+    "paradise_lost:aurel_stairs": {
+      "burn_time": 300
+    },
+    "paradise_lost:aurel_trapdoor": {
+      "burn_time": 300
+    },
+    "paradise_lost:aurel_wood": {
+      "burn_time": 300
+    },
+    "paradise_lost:cherine": {
+      "burn_time": 500
+    },
+    "paradise_lost:cherine_block": {
+      "burn_time": 5000
+    },
+    "paradise_lost:drigean": {
+      "burn_time": 1600
+    },
+    "paradise_lost:flaxweave_cushion": {
+      "burn_time": 300
+    },
+    "paradise_lost:flaxweave_cushion_slab": {
+      "burn_time": 150
+    },
+    "paradise_lost:food_bowl": {
+      "burn_time": 300
+    },
+    "paradise_lost:frost_wisteria_sapling": {
+      "burn_time": 100
+    },
+    "paradise_lost:incubator": {
+      "burn_time": 300
+    },
+    "paradise_lost:lavender_wisteria_sapling": {
+      "burn_time": 100
+    },
+    "paradise_lost:liverwort": {
+      "burn_time": 150
+    },
+    "paradise_lost:liverwort_carpet": {
+      "burn_time": 100
+    },
+    "paradise_lost:menth_boat": {
+      "burn_time": 1200
+    },
+    "paradise_lost:menth_button": {
+      "burn_time": 100
+    },
+    "paradise_lost:menth_chest_boat": {
+      "burn_time": 1200
+    },
+    "paradise_lost:menth_door": {
+      "burn_time": 200
+    },
+    "paradise_lost:menth_fence": {
+      "burn_time": 300
+    },
+    "paradise_lost:menth_fence_gate": {
+      "burn_time": 300
+    },
+    "paradise_lost:menth_hanging_sign": {
+      "burn_time": 200
+    },
+    "paradise_lost:menth_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:menth_planks": {
+      "burn_time": 300
+    },
+    "paradise_lost:menth_pressure_plate": {
+      "burn_time": 100
+    },
+    "paradise_lost:menth_sapling": {
+      "burn_time": 100
+    },
+    "paradise_lost:menth_sign": {
+      "burn_time": 200
+    },
+    "paradise_lost:menth_slab": {
+      "burn_time": 150
+    },
+    "paradise_lost:menth_stairs": {
+      "burn_time": 300
+    },
+    "paradise_lost:menth_trapdoor": {
+      "burn_time": 300
+    },
+    "paradise_lost:menth_wood": {
+      "burn_time": 300
+    },
+    "paradise_lost:mother_aurel_boat": {
+      "burn_time": 1200
+    },
+    "paradise_lost:mother_aurel_button": {
+      "burn_time": 100
+    },
+    "paradise_lost:mother_aurel_chest_boat": {
+      "burn_time": 1200
+    },
+    "paradise_lost:mother_aurel_door": {
+      "burn_time": 200
+    },
+    "paradise_lost:mother_aurel_fence": {
+      "burn_time": 300
+    },
+    "paradise_lost:mother_aurel_fence_gate": {
+      "burn_time": 300
+    },
+    "paradise_lost:mother_aurel_hanging_sign": {
+      "burn_time": 200
+    },
+    "paradise_lost:mother_aurel_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:mother_aurel_planks": {
+      "burn_time": 300
+    },
+    "paradise_lost:mother_aurel_pressure_plate": {
+      "burn_time": 100
+    },
+    "paradise_lost:mother_aurel_sapling": {
+      "burn_time": 100
+    },
+    "paradise_lost:mother_aurel_sign": {
+      "burn_time": 200
+    },
+    "paradise_lost:mother_aurel_slab": {
+      "burn_time": 150
+    },
+    "paradise_lost:mother_aurel_stairs": {
+      "burn_time": 300
+    },
+    "paradise_lost:mother_aurel_trapdoor": {
+      "burn_time": 300
+    },
+    "paradise_lost:mother_aurel_wood": {
+      "burn_time": 300
+    },
+    "paradise_lost:mottled_aurel_fallen_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:mottled_aurel_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:mottled_aurel_wood": {
+      "burn_time": 300
+    },
+    "paradise_lost:nest": {
+      "burn_time": 300
+    },
+    "paradise_lost:nitra_bunch": {
+      "burn_time": 3200
+    },
+    "paradise_lost:rose_wisteria_sapling": {
+      "burn_time": 100
+    },
+    "paradise_lost:stripped_aurel_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:stripped_aurel_wood": {
+      "burn_time": 300
+    },
+    "paradise_lost:stripped_menth_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:stripped_menth_wood": {
+      "burn_time": 300
+    },
+    "paradise_lost:stripped_mother_aurel_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:stripped_mother_aurel_wood": {
+      "burn_time": 300
+    },
+    "paradise_lost:stripped_wisteria_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:stripped_wisteria_wood": {
+      "burn_time": 300
+    },
+    "paradise_lost:thatch": {
+      "burn_time": 100
+    },
+    "paradise_lost:thatch_slab": {
+      "burn_time": 50
+    },
+    "paradise_lost:thatch_stairs": {
+      "burn_time": 100
+    },
+    "paradise_lost:tree_tap": {
+      "burn_time": 300
+    },
+    "paradise_lost:wisteria_boat": {
+      "burn_time": 1200
+    },
+    "paradise_lost:wisteria_button": {
+      "burn_time": 100
+    },
+    "paradise_lost:wisteria_chest_boat": {
+      "burn_time": 1200
+    },
+    "paradise_lost:wisteria_door": {
+      "burn_time": 200
+    },
+    "paradise_lost:wisteria_fence": {
+      "burn_time": 300
+    },
+    "paradise_lost:wisteria_fence_gate": {
+      "burn_time": 300
+    },
+    "paradise_lost:wisteria_hanging_sign": {
+      "burn_time": 200
+    },
+    "paradise_lost:wisteria_log": {
+      "burn_time": 300
+    },
+    "paradise_lost:wisteria_planks": {
+      "burn_time": 300
+    },
+    "paradise_lost:wisteria_pressure_plate": {
+      "burn_time": 100
+    },
+    "paradise_lost:wisteria_slab": {
+      "burn_time": 150
+    },
+    "paradise_lost:wisteria_stairs": {
+      "burn_time": 300
+    },
+    "paradise_lost:wisteria_trapdoor": {
+      "burn_time": 300
+    },
+    "paradise_lost:wisteria_wood": {
+      "burn_time": 300
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "display": {
+    "fixed": {
+      "scale": [
+        1.5,
+        1.5,
+        1.5
+      ],
+      "translation": [
+        0.0,
+        0.0,
+        -1.5
+      ]
+    },
+    "ground": {
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        -67.5,
+        0.0,
+        45.0
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    "head": {
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.6,
+        1.6,
+        1.6
+      ],
+      "translation": [
+        0.0,
+        0.0,
+        -16.0
+      ]
+    },
+    "thirdperson_righthand": {
+      "translation": [
+        0.0,
+        -2.0,
+        0.0
+      ]
+    }
+  },
+  "elements": [
+    {
+      "faces": {
+        "east": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            2.0,
+            2.0,
+            7.0
+          ]
+        },
+        "north": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            2.0,
+            2.0,
+            7.0
+          ]
+        },
+        "south": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            2.0,
+            2.0,
+            7.0
+          ]
+        },
+        "up": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            2.0,
+            2.0,
+            7.0
+          ]
+        }
+      },
+      "from": [
+        7,
+        8.5,
+        7
+      ],
+      "to": [
+        9,
+        13.5,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            13.0,
+            2.0,
+            15.0
+          ]
+        },
+        "east": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            7.0,
+            2.0,
+            13.0
+          ]
+        },
+        "north": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            7.0,
+            2.0,
+            13.0
+          ]
+        },
+        "south": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            7.0,
+            2.0,
+            13.0
+          ]
+        },
+        "up": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            5.0,
+            2.0,
+            7.0
+          ]
+        },
+        "west": {
+          "texture": "#spyglass",
+          "uv": [
+            0.0,
+            7.0,
+            2.0,
+            13.0
+          ]
+        }
+      },
+      "from": [
+        6.9,
+        2.4,
+        6.9
+      ],
+      "to": [
+        9.1,
+        8.6,
+        9.1
+      ]
+    }
+  ],
+  "gui_light": "front",
+  "textures": {
+    "spyglass": "paradise_lost:item/olvite_spyglass_model"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=north": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=south": {
+      "model": "paradise_lost:block/palace_door"
+    },
+    "facing=west": {
+      "model": "paradise_lost:block/palace_door"
+    }
+  }
+}

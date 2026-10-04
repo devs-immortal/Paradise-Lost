@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    "#paradise_lost:wisteria_logs"
+  ],
+  "result": {
+    "count": 4,
+    "id": "paradise_lost:wisteria_planks"
+  }
+}

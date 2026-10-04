@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_bottom_top",
-  "textures": {
-    "top": "paradise_lost:block/smooth_floestone",
-    "bottom": "paradise_lost:block/smooth_floestone",
-    "side": "paradise_lost:block/levitator_side"
-  }
-}

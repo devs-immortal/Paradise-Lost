@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "minecraft:gold_block",
+  "base": "minecraft:golden_pickaxe",
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:glazed_gold_pickaxe"
+  },
+  "template": "paradise_lost:glazed_gold_upgrade_smithing_template"
+}

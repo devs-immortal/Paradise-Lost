@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "paradise_lost:golden_amber",
+    "G": "minecraft:gold_block",
+    "T": "paradise_lost:glazed_gold_upgrade_smithing_template"
+  },
+  "pattern": [
+    "ATA",
+    "AGA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:glazed_gold_upgrade_smithing_template"
+  }
+}

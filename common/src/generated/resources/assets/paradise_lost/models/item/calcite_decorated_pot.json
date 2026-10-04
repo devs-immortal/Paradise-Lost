@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/decorated_pot",
+  "textures": {
+    "particle": "minecraft:block/calcite"
+  }
+}

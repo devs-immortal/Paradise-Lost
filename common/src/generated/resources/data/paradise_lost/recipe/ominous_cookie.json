@@ -1,0 +1,16 @@
+{
+  "type": "paradise_lost:crafting_ominous_cookie",
+  "key": {
+    "A": "paradise_lost:amadrys_bushel",
+    "B": "paradise_lost:blackcurrant",
+    "O": "minecraft:ominous_bottle"
+  },
+  "pattern": [
+    " O ",
+    "ABA"
+  ],
+  "result": {
+    "count": 8,
+    "id": "paradise_lost:ominous_cookie"
+  }
+}

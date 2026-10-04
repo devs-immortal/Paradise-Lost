@@ -1,0 +1,39 @@
+{
+  "type": "paradise_lost:fallen_pillar_feature",
+  "config": {
+    "body": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:aurel_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    "floor": [
+      "paradise_lost:highlands_grass",
+      "paradise_lost:coarse_dirt",
+      "paradise_lost:floestone",
+      "paradise_lost:cobbled_floestone"
+    ],
+    "shell": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:liverwort_carpet"
+      }
+    },
+    "shell_chance": 0.35,
+    "size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 6,
+      "min_inclusive": 3
+    },
+    "top": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "paradise_lost:liverwort_carpet"
+      }
+    },
+    "top_chance": 0.5
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "paradise_lost:aurel_tower",
+  "biomes": "#paradise_lost:has_structure/aurel_tower",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

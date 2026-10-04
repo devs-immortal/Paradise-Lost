@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "paradise_lost:block/mother_aurel_pressure_plate"
+    },
+    "powered=true": {
+      "model": "paradise_lost:block/mother_aurel_pressure_plate_down"
+    }
+  }
+}

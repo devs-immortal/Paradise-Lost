@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "paradise_lost:levita_shard",
+    "R": "minecraft:redstone",
+    "S": "paradise_lost:floestone_brick"
+  },
+  "pattern": [
+    "SRS",
+    "GGG",
+    "SRS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paradise_lost:levitator"
+  }
+}
