@@ -35,6 +35,11 @@ public class CraftingOminousCookieRecipe extends ShapedRecipe {
     @Override
     public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
         ItemStack result = super.assemble(input, registries);
+        copyAmplifier(input, result);
+        return result;
+    }
+
+    private static void copyAmplifier(CraftingInput input, ItemStack result) {
         for (int i = 0; i < input.size(); i++) {
             ItemStack stack = input.getItem(i);
             if (stack.is(Items.OMINOUS_BOTTLE)) {
@@ -45,7 +50,6 @@ public class CraftingOminousCookieRecipe extends ShapedRecipe {
                 break;
             }
         }
-        return result;
     }
 
     @Override

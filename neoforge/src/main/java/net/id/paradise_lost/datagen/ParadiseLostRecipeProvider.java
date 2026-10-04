@@ -3,6 +3,7 @@ package net.id.paradise_lost.datagen;
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.recipe.CraftingCalciteDecoratedPotRecipe;
 import net.id.paradise_lost.recipe.CraftingOminousCookieRecipe;
+import net.id.paradise_lost.recipe.CraftingOminousCookieShapelessRecipe;
 import net.id.paradise_lost.recipe.TreeTapRecipe;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
@@ -29,6 +30,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
@@ -61,6 +63,52 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 ItemRegistry.WISTERIA_BOATS.boat().get(), ItemRegistry.WISTERIA_BOATS.chestBoat().get());
 
         buildExtraRecipes(output);
+    }
+
+    private void ominousCookieShaped(RecipeOutput output) {
+        ResourceLocation id = ModConstants.id("ominous_cookie");
+        CraftingOminousCookieRecipe recipe = new CraftingOminousCookieRecipe(
+                "",
+                CraftingBookCategory.MISC,
+                ShapedRecipePattern.of(
+                        Map.of(
+                                'O', Ingredient.of(Items.OMINOUS_BOTTLE),
+                                'A', Ingredient.of(ItemRegistry.AMADRYS_BUSHEL.get()),
+                                'B', Ingredient.of(ItemRegistry.BLACKCURRANT.get())
+                        ),
+                        " O ",
+                        "ABA"
+                ),
+                new ItemStack(ItemRegistry.OMINOUS_COOKIE.get(), CraftingOminousCookieRecipe.OUTPUT_COUNT),
+                true
+        );
+        Advancement.Builder advancement = output.advancement()
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
+                .addCriterion("has_ingredient", has(ItemRegistry.AMADRYS_BUSHEL.get()))
+                .rewards(AdvancementRewards.Builder.recipe(id))
+                .requirements(AdvancementRequirements.Strategy.OR);
+        output.accept(id, recipe, advancement.build(id.withPrefix("recipes/misc/")));
+    }
+
+    private void ominousCookieShapeless(RecipeOutput output) {
+        ResourceLocation id = ModConstants.id("ominous_cookie_from_cookies");
+        NonNullList<Ingredient> ingredients = NonNullList.create();
+        for (int i = 0; i < CraftingOminousCookieShapelessRecipe.OUTPUT_COUNT; i++) {
+            ingredients.add(Ingredient.of(ItemRegistry.BLACKCURRANT_COOKIE.get()));
+        }
+        ingredients.add(Ingredient.of(Items.OMINOUS_BOTTLE));
+        CraftingOminousCookieShapelessRecipe recipe = new CraftingOminousCookieShapelessRecipe(
+                "",
+                CraftingBookCategory.MISC,
+                new ItemStack(ItemRegistry.OMINOUS_COOKIE.get(), CraftingOminousCookieShapelessRecipe.OUTPUT_COUNT),
+                ingredients
+        );
+        Advancement.Builder advancement = output.advancement()
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
+                .addCriterion("has_ingredient", has(ItemRegistry.BLACKCURRANT_COOKIE.get()))
+                .rewards(AdvancementRewards.Builder.recipe(id))
+                .requirements(AdvancementRequirements.Strategy.OR);
+        output.accept(id, recipe, advancement.build(id.withPrefix("recipes/misc/")));
     }
 
     private void woodSet(
@@ -360,28 +408,8 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
         SpecialRecipeBuilder.special(CraftingCalciteDecoratedPotRecipe::new)
                 .save(output, ModConstants.id("calcite_decorated_pot"));
 
-        ResourceLocation ominousCookieId = ModConstants.id("ominous_cookie");
-        CraftingOminousCookieRecipe ominousCookieRecipe = new CraftingOminousCookieRecipe(
-                "",
-                CraftingBookCategory.MISC,
-                ShapedRecipePattern.of(
-                        Map.of(
-                                'O', Ingredient.of(Items.OMINOUS_BOTTLE),
-                                'A', Ingredient.of(ItemRegistry.AMADRYS_BUSHEL.get()),
-                                'B', Ingredient.of(ItemRegistry.BLACKCURRANT.get())
-                        ),
-                        " O ",
-                        "ABA"
-                ),
-                new ItemStack(ItemRegistry.OMINOUS_COOKIE.get(), CraftingOminousCookieRecipe.OUTPUT_COUNT),
-                true
-        );
-        Advancement.Builder ominousCookieAdvancement = output.advancement()
-                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(ominousCookieId))
-                .addCriterion("has_ingredient", has(ItemRegistry.AMADRYS_BUSHEL.get()))
-                .rewards(AdvancementRewards.Builder.recipe(ominousCookieId))
-                .requirements(AdvancementRequirements.Strategy.OR);
-        output.accept(ominousCookieId, ominousCookieRecipe, ominousCookieAdvancement.build(ominousCookieId.withPrefix("recipes/misc/")));
+        ominousCookieShaped(output);
+        ominousCookieShapeless(output);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockRegistry.CALCITE_DECORATED_POT.get(), 1)
                 .define('#', Items.CALCITE)
