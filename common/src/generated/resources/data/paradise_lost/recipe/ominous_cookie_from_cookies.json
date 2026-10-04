@@ -1,0 +1,19 @@
+{
+  "type": "paradise_lost:crafting_ominous_cookie_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "paradise_lost:blackcurrant_cookie",
+    "paradise_lost:blackcurrant_cookie",
+    "paradise_lost:blackcurrant_cookie",
+    "paradise_lost:blackcurrant_cookie",
+    "paradise_lost:blackcurrant_cookie",
+    "paradise_lost:blackcurrant_cookie",
+    "paradise_lost:blackcurrant_cookie",
+    "paradise_lost:blackcurrant_cookie",
+    "minecraft:ominous_bottle"
+  ],
+  "result": {
+    "count": 8,
+    "id": "paradise_lost:ominous_cookie"
+  }
+}
