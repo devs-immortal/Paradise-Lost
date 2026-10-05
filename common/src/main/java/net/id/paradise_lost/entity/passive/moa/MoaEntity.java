@@ -982,6 +982,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
                 ItemStack foodStack = foodBowl.getContainedItem();
                 if (foodStack.is(ItemTags.MEAT)) {
                     feedMob(foodStack);
+                    foodBowl.updateState();
                 }
             }
         }

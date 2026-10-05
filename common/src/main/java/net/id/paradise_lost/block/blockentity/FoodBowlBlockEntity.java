@@ -50,7 +50,7 @@ public class FoodBowlBlockEntity extends BlockEntity {
     }
 
     @SuppressWarnings("ConstantConditions")
-    private void updateState() {
+    public void updateState() {
         setChanged();
         level.setBlockAndUpdate(worldPosition, getBlockState().setValue(FoodBowlBlock.FULL, !inventory.get(0).isEmpty()));
     }
