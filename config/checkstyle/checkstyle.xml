@@ -21,7 +21,11 @@
         </module>
         <module name="RightCurly">
             <property name="option" value="alone"/>
-            <property name="tokens" value="LITERAL_ELSE, METHOD_DEF"/>
+            <property name="tokens" value="LITERAL_ELSE"/>
+        </module>
+        <module name="RightCurly">
+            <property name="option" value="alone_or_singleline"/>
+            <property name="tokens" value="METHOD_DEF"/>
         </module>
         <module name="OneTopLevelClass"/>
         <module name="RequireThis"/>
@@ -41,7 +45,10 @@
         <module name="SingleSpaceSeparator"/>
         <module name="TypecastParenPad"/>
         <module name="WhitespaceAfter"/>
-        <module name="WhitespaceAround"/>
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+        </module>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
         <module name="SeparatorWrap">
