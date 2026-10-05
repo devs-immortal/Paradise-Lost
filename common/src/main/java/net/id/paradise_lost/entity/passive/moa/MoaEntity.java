@@ -623,7 +623,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
                     if (!player.isCreative()) {
                         heldStack.shrink(1);
                     }
-                    setChest(heldStack);
+                    setChest(chestStack);
                     return InteractionResult.sidedSuccess(level().isClientSide);
                 }
             } else {
