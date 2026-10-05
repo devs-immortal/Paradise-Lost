@@ -5,6 +5,7 @@ import net.id.paradise_lost.block.blockentity.FoodBowlBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -53,6 +54,14 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
             return ItemInteractionResult.CONSUME;
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.is(newState.getBlock()) && world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
+            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), foodBowl.getContainedItem());
+        }
+        super.onRemove(state, world, pos, newState, moved);
     }
 
     @Override
