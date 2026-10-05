@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.id.paradise_lost.block.blockentity.FoodBowlBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -45,7 +46,11 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!player.isShiftKeyDown() && world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
-            return ItemInteractionResult.sidedSuccess(foodBowl.handleUse(player, hand, player.getItemInHand(hand)) && world.isClientSide());
+            if (world.isClientSide()) {
+                return ItemInteractionResult.sidedSuccess(state.getValue(FULL) || stack.is(ItemTags.MEAT));
+            }
+            foodBowl.handleUse(player, hand, stack);
+            return ItemInteractionResult.CONSUME;
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
