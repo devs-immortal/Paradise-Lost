@@ -1,11 +1,7 @@
 package net.id.paradise_lost.block.mechanical;
 
-import net.id.paradise_lost.world.ExplosionExtensions;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -51,7 +47,7 @@ public class NitraBlock extends Block {
     }
 
     public void wasExploded(Level world, BlockPos pos, Explosion explosion) {
-        float sourcePower = ((ExplosionExtensions) explosion).getPower();
+        float sourcePower = explosion.radius();
         if (!world.isClientSide && sourcePower > 0.5F) {
             ignite(world, pos, sourcePower - 0.5F);
         }
@@ -60,8 +56,6 @@ public class NitraBlock extends Block {
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         ignite(world, pos, BASE_EXPLOSIVE_POWER, null);
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
-        world.sendParticles(ParticleTypes.EXPLOSION_EMITTER, pos.getX(), pos.getY(), pos.getZ(), 1, 0.0, 0.0, 0.0, 0.0);
-        world.playSeededSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F, random.nextLong());
     }
 
     public static void ignite(Level world, BlockPos pos, float power) {
@@ -69,12 +63,10 @@ public class NitraBlock extends Block {
     }
 
     private static void ignite(Level world, BlockPos pos, float power, @Nullable LivingEntity igniter) {
-        Explosion explosion = new Explosion(world, igniter, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, false, Explosion.BlockInteraction.DESTROY);
-        if (!world.isClientSide) {
-            explosion.explode();
-            world.gameEvent(igniter, GameEvent.PRIME_FUSE, pos);
+        if (world instanceof ServerLevel serverLevel) {
+            serverLevel.explode(igniter, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, Level.ExplosionInteraction.TNT);
+            serverLevel.gameEvent(igniter, GameEvent.PRIME_FUSE, pos);
         }
-        ((ExplosionExtensions) explosion).affectWorld(true, SoundEvents.GENERIC_EXPLODE.value());
     }
 
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {

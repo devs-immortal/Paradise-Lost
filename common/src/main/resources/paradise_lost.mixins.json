@@ -34,7 +34,6 @@
     "server.ServerPlayerGameModeMixin",
     "server.ServerWorldMixin",
     "util.SlotAccessor",
-    "world.ExplosionMixin",
     "world.gen.SurfaceBuilderMixin",
     "world.gen.UtilMixin",
     "world.gen.structure.JigsawStructureMixin"
