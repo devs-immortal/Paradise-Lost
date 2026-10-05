@@ -659,6 +659,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
             triggerItemUseEffects(heldStack, 10 + random.nextInt(consumption * 2 + 1));
             heldStack.shrink(consumption);
             getGenes().setHunger(satiation + (consumption * hungerRestored));
+            syncGenes();
             playSound(ParadiseLostSoundEvents.ENTITY_MOA_EAT, 1.5F, 0.8F);
             produceParticles(ParticleTypes.HAPPY_VILLAGER);
         }
