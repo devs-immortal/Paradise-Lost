@@ -8,7 +8,6 @@ import net.id.paradise_lost.item.armor.XpCircletItem;
 import net.id.paradise_lost.item.food.ParadiseLostFoodComponent;
 import net.id.paradise_lost.item.misc.*;
 import net.id.paradise_lost.item.tool.AurelBucketItem;
-import net.id.paradise_lost.item.tool.AurelMilkBucketItem;
 import net.id.paradise_lost.item.tool.ParadiseLostToolMaterials;
 import net.id.paradise_lost.item.tool.SoulSwordItem;
 import net.id.paradise_lost.item.tool.WardedJarItem;
@@ -224,7 +223,7 @@ public class ItemRegistry {
     }
     public static final RegistryObject<Item, AurelBucketItem> AUREL_WATER_BUCKET = add("aurel_water_bucket", settings -> new AurelBucketItem(Fluids.WATER, settings), ItemRegistry::aurelBucket, emptiableBucketBehavior);
     public static final RegistryObject<Item, AurelBucketItem> AUREL_POWDER_SNOW_BUCKET = add("aurel_powder_snow_bucket", settings -> new AurelBucketItem(Blocks.POWDER_SNOW, settings), ItemRegistry::aurelBucket, emptiableBucketBehavior);
-    public static final RegistryObject<Item, AurelMilkBucketItem> AUREL_MILK_BUCKET = add("aurel_milk_bucket", AurelMilkBucketItem::new,
+    public static final RegistryObject<Item, Item> AUREL_MILK_BUCKET = add("aurel_milk_bucket", Item::new,
             () -> new Item.Properties().craftRemainder(AUREL_BUCKET.get()).component(DataComponents.CONSUMABLE, Consumables.MILK_BUCKET).usingConvertsTo(AUREL_BUCKET.get()).stacksTo(1));
     public static final RegistryObject<Item, WardedJarItem> WARDED_JAR = add("warded_jar", WardedJarItem::new, new Properties());
     private static Properties wardedJar() {
