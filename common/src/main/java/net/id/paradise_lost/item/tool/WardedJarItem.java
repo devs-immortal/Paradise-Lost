@@ -48,18 +48,23 @@ public class WardedJarItem extends Item {
             itemEntity.setDefaultPickUpDelay();
             entity.discard();
             world.addFreshEntity(itemEntity);
-            stack.consume(1, player);
-            var jarItem = new ItemStack(ItemRegistry.WARDED_JAR_ALLAY.get());
-            player.addItem(jarItem);
+            fillJar(stack, player, hand, new ItemStack(ItemRegistry.WARDED_JAR_ALLAY.get()));
             return InteractionResult.SUCCESS;
         } else if (entity.getType().equals(EntityRegistry.QUINT.get())) {
             entity.discard();
-            stack.consume(1, player);
-            var jarItem = new ItemStack(ItemRegistry.WARDED_JAR_QUINT.get());
-            player.addItem(jarItem);
+            fillJar(stack, player, hand, new ItemStack(ItemRegistry.WARDED_JAR_QUINT.get()));
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
+    }
+
+    private static void fillJar(ItemStack stack, Player player, InteractionHand hand, ItemStack filled) {
+        if (stack.getCount() == 1 && !player.hasInfiniteMaterials()) {
+            player.setItemInHand(hand, filled);
+        } else {
+            stack.consume(1, player);
+            if (!player.getInventory().add(filled)) player.drop(filled, false);
+        }
     }
 
     public InteractionResult useOn(UseOnContext context) {

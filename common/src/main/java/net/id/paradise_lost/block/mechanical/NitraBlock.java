@@ -55,8 +55,8 @@ public class NitraBlock extends Block {
     }
 
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        ignite(world, pos, BASE_EXPLOSIVE_POWER, null);
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
+        ignite(world, pos, BASE_EXPLOSIVE_POWER, null);
     }
 
     public static void ignite(Level world, BlockPos pos, float power) {
@@ -75,8 +75,8 @@ public class NitraBlock extends Block {
         if (!itemStack.is(Items.FLINT_AND_STEEL) && !itemStack.is(Items.FIRE_CHARGE)) {
             return super.useItemOn(stack, state, world, pos, player, hand, hit);
         } else {
-            ignite(world, pos, BASE_EXPLOSIVE_POWER, player);
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
+            ignite(world, pos, BASE_EXPLOSIVE_POWER, player);
             Item item = itemStack.getItem();
             if (!player.isCreative()) {
                 if (itemStack.is(Items.FLINT_AND_STEEL)) {
@@ -96,8 +96,8 @@ public class NitraBlock extends Block {
             BlockPos blockPos = hit.getBlockPos();
             Entity entity = projectile.getOwner();
             if (projectile.isOnFire() && projectile.mayInteract(serverLevel, blockPos)) {
-                ignite(world, blockPos, BASE_EXPLOSIVE_POWER, entity instanceof LivingEntity ? (LivingEntity) entity : null);
                 world.removeBlock(blockPos, false);
+                ignite(world, blockPos, BASE_EXPLOSIVE_POWER, entity instanceof LivingEntity ? (LivingEntity) entity : null);
             }
         }
 

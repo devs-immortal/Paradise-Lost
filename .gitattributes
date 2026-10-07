@@ -14,3 +14,4 @@
 *.pyd binary
 *.jks binary
 *.ogg binary
+*.nbt binary

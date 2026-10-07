@@ -57,7 +57,7 @@ public class TreeTapBlockEntity extends RandomizableContainerBlockEntity impleme
             player.addItem(stored);
             inventory.set(0, ItemStack.EMPTY);
         }
-        setChanged();
+        inventoryChanged();
 	}
 
     public int[] getSlotsForFace(Direction side) {

@@ -620,7 +620,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
                     if (!player.isCreative()) {
                         heldStack.shrink(1);
                     }
-                    setChest(heldStack);
+                    setChest(chestStack);
                     return InteractionResult.SUCCESS;
                 }
             } else {
@@ -656,6 +656,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
             spawnItemParticles(heldStack, 10 + random.nextInt(consumption * 2 + 1));
             heldStack.shrink(consumption);
             getGenes().setHunger(satiation + (consumption * hungerRestored));
+            syncGenes();
             playSound(ParadiseLostSoundEvents.ENTITY_MOA_EAT, 1.5F, 0.8F);
             produceParticles(ParticleTypes.HAPPY_VILLAGER);
         }
@@ -978,6 +979,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
                 ItemStack foodStack = foodBowl.getContainedItem();
                 if (foodStack.is(ItemTags.MEAT)) {
                     feedMob(foodStack);
+                    foodBowl.updateState();
                 }
             }
         }

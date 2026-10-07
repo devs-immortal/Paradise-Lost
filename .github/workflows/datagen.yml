@@ -1,0 +1,32 @@
+name: Data Gen
+
+on: [ pull_request ]
+jobs:
+  datagen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: microsoft
+          java-version: 21
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Clear generated data
+        run: rm -rf common/src/generated/resources
+
+      - name: Run data gen
+        run: ./gradlew :neoforge:runData
+
+      - name: Check generated data is up to date
+        run: |
+          changes=$(git status --porcelain -- common/src/generated)
+          if [ -n "$changes" ]; then
+            echo "$changes"
+            echo "::error::Generated data is out of date. Run ./gradlew :neoforge:runData and commit the result."
+            exit 1
+          fi

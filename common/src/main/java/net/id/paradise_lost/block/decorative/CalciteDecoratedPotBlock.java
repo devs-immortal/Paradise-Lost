@@ -97,6 +97,7 @@ public class CalciteDecoratedPotBlock extends DecoratedPotBlock {
                 for (Optional<Item> sherd : List.of(sherds.back(), sherds.left(), sherds.right(), sherds.front())) {
                     lootConsumer.accept(sherd.orElse(Items.CALCITE).getDefaultInstance());
                 }
+                lootConsumer.accept(Items.CALCITE.getDefaultInstance());
             });
         }
 
