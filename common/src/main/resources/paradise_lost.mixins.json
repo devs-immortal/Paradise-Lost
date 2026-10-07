@@ -25,6 +25,7 @@
     "item.AxeItemMixin",
     "item.FilledMapMixin",
     "item.ItemMixin",
+    "item.ItemStackMixin",
     "item.MapStateMixin",
     "item.PotionItemMixin",
     "portal.LiquidBlockPortalMixin",

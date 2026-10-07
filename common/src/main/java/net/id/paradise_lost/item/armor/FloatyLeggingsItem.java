@@ -32,7 +32,28 @@ public class FloatyLeggingsItem extends ArmorItem {
     }
 
     public static boolean isFloatyEnabled(ItemStack stack) {
-        return stack.getDamageValue() < stack.getMaxDamage() - 1;
+        return !isBroken(stack);
+    }
+
+    public static boolean isBroken(ItemStack stack) {
+        return stack.isDamageableItem() && stack.getDamageValue() >= stack.getMaxDamage() - 1;
+    }
+
+    public static int getDefensePoints(FloatyLeggingsItem item) {
+        return item.getMaterial().value().getDefense(item.getType());
+    }
+
+    public static boolean applyWearDamage(ItemStack stack, int amount, LivingEntity entity, EquipmentSlot slot) {
+        if (!(stack.getItem() instanceof FloatyLeggingsItem) || !stack.isDamageableItem()) {
+            return false;
+        }
+        int cap = stack.getMaxDamage() - 1;
+        int before = stack.getDamageValue();
+        if (before >= cap) {
+            return false;
+        }
+        stack.setDamageValue(Math.min(before + amount, cap));
+        return stack.getDamageValue() != before;
     }
 
     public static boolean isSurvivalLike(Player player) {

@@ -6,6 +6,7 @@ import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.item.armor.FloatyBootsItem;
+import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
 import net.id.paradise_lost.item.armor.XpCircletItem;
 import net.id.paradise_lost.tag.ParadiseLostItemTags;
 import net.id.paradise_lost.util.MiscUtil;
@@ -13,6 +14,8 @@ import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.id.paradise_lost.util.ParadiseLostVoidEscape;
 import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
 import net.minecraft.core.Holder;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.CombatRules;
@@ -112,6 +115,17 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     @Override
     public boolean dampensVibrations() {
         return FloatyBootsItem.isWearing((LivingEntity) (Object) this) || super.dampensVibrations();
+    }
+
+    @Inject(method = "getAttributeValue", at = @At("RETURN"), cancellable = true)
+    private void paradiseLost$brokenFloatyLeggingsNoArmor(Holder<Attribute> attribute, CallbackInfoReturnable<Double> cir) {
+        if (!attribute.is(Attributes.ARMOR)) {
+            return;
+        }
+        ItemStack legs = ((LivingEntity) (Object) this).getItemBySlot(EquipmentSlot.LEGS);
+        if (legs.getItem() instanceof FloatyLeggingsItem leggings && FloatyLeggingsItem.isBroken(legs)) {
+            cir.setReturnValue(Math.max(0.0D, cir.getReturnValue() - FloatyLeggingsItem.getDefensePoints(leggings)));
+        }
     }
 
     @ModifyVariable(method = "calculateFallDamage", at = @At("HEAD"), argsOnly = true, ordinal = 0)
