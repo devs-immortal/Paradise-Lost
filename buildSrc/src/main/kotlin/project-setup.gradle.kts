@@ -3,6 +3,7 @@ plugins {
     `maven-publish`
     idea
     eclipse
+    checkstyle
     id("repositories")
 }
 
@@ -47,6 +48,14 @@ val modGitRepo          : String by project
 
 base {
     archivesName = "$modId-${project.name}-${getVersion("minecraft")}"
+}
+
+checkstyle {
+    sourceSets = emptyList()
+}
+
+tasks.named<Checkstyle>("checkstyleMain") {
+    setSource(layout.projectDirectory.dir("src/main/java"))
 }
 
 tasks.withType<Test>().configureEach {

@@ -7,6 +7,7 @@ import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.Item;
@@ -17,14 +18,17 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.DecoratedPotBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
@@ -121,7 +125,7 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
         addDrop(LEVITA_RAIL.get());
         addDrop(GOLDEN_AMBER_BARS.get());
         addDrop(CALCITE_FLOWER_POT.get());
-        addDrop(CALCITE_DECORATED_POT.get());
+        addDrop(CALCITE_DECORATED_POT.get(), this::decoratedPotTable);
 
         addSimpleBlockSetDrops(BURNISHED_STONE_SET);
         addDrop(BURNISHED_STONE_WALL.get());
@@ -333,9 +337,7 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
     private LootTable.Builder campfireDrops(Block block) {
         return this.createSilkTouchDispatchTable(
                 block,
-                this.applyExplosionCondition(
-                        block, LootItem.lootTableItem(Items.CHARCOAL).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))
-                )
+                this.applyExplosionCondition(block, LootItem.lootTableItem(ItemRegistry.CHERINE.get()))
         );
     }
 
@@ -434,6 +436,25 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
 
     private void addDrop(Block block, LootTable.Builder builder) {
         add(block, builder);
+    }
+
+    private LootTable.Builder decoratedPotTable(Block block) {
+        return LootTable.lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .add(
+                                        DynamicLoot.dynamicEntry(DecoratedPotBlock.SHERDS_DYNAMIC_DROP_ID)
+                                                .when(
+                                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DecoratedPotBlock.CRACKED, true))
+                                                )
+                                                .otherwise(
+                                                        LootItem.lootTableItem(block)
+                                                                .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).include(DataComponents.POT_DECORATIONS))
+                                                )
+                                )
+                );
     }
 
     private void addPottedPlantDrops(Block block) {

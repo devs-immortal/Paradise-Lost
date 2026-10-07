@@ -112,6 +112,7 @@
   "block.paradise_lost.palace_door_extension": "Palace Door",
 
   "block.paradise_lost.aurel_sapling": "Aurel Sapling",
+  "block.paradise_lost.potted_aurel_sapling": "Potted Aurel Sapling",
   "block.paradise_lost.aurel_log": "Aurel Log",
   "block.paradise_lost.mottled_aurel_log": "Mottled Aurel Log",
   "block.paradise_lost.mottled_aurel_wood": "Mottled Aurel Wood",
@@ -135,6 +136,7 @@
   "block.paradise_lost.aurel_hanging_sign": "Aurel Hanging Sign",
 
   "block.paradise_lost.mother_aurel_sapling": "Mother Aurel Sapling",
+  "block.paradise_lost.potted_mother_aurel_sapling": "Potted Mother Aurel Sapling",
   "block.paradise_lost.mother_aurel_log": "Mother Aurel Log",
   "block.paradise_lost.mother_aurel_wood": "Mother Aurel Wood",
   "block.paradise_lost.stripped_mother_aurel_log": "Stripped Mother Aurel Log",
@@ -153,6 +155,7 @@
   "block.paradise_lost.mother_aurel_hanging_sign": "Mother Aurel Hanging Sign",
 
   "block.paradise_lost.menth_sapling": "Menth Sapling",
+  "block.paradise_lost.potted_menth_sapling": "Potted Menth Sapling",
   "block.paradise_lost.menth_log": "Menth Log",
   "block.paradise_lost.menth_wood": "Menth Wood",
   "block.paradise_lost.stripped_menth_log": "Stripped Menth Log",
@@ -189,16 +192,19 @@
   "block.paradise_lost.rose_wisteria_leaves": "Rose Wisteria Leaves",
   "block.paradise_lost.rose_wisteria_leaf_pile": "Rose Wisteria Leaf Pile",
   "block.paradise_lost.rose_wisteria_sapling": "Rose Wisteria Sapling",
+  "block.paradise_lost.potted_rose_wisteria_sapling": "Potted Rose Wisteria Sapling",
   "block.paradise_lost.rose_wisteria_hanger": "Rose Wisteria Hangers",
 
   "block.paradise_lost.frost_wisteria_leaves": "Frost Wisteria Leaves",
   "block.paradise_lost.frost_wisteria_leaf_pile": "Frost Wisteria Leaf Pile",
   "block.paradise_lost.frost_wisteria_sapling": "Frost Wisteria Sapling",
+  "block.paradise_lost.potted_frost_wisteria_sapling": "Potted Frost Wisteria Sapling",
   "block.paradise_lost.frost_wisteria_hanger": "Frost Wisteria Hangers",
 
   "block.paradise_lost.lavender_wisteria_leaves": "Lavender Wisteria Leaves",
   "block.paradise_lost.lavender_wisteria_leaf_pile": "Lavender Wisteria Leaf Pile",
   "block.paradise_lost.lavender_wisteria_sapling": "Lavender Wisteria Sapling",
+  "block.paradise_lost.potted_lavender_wisteria_sapling": "Potted Lavender Wisteria Sapling",
   "block.paradise_lost.lavender_wisteria_hanger": "Lavender Wisteria Hangers",
 
   "block.paradise_lost.grass_plant": "Gale Grass",
@@ -206,6 +212,7 @@
   "block.paradise_lost.short_grass": "Stubby Gale Grass",
   "block.paradise_lost.tall_grass": "Gale Tall Grass",
   "block.paradise_lost.fern": "Sunwort",
+  "block.paradise_lost.potted_fern": "Potted Sunwort",
   "block.paradise_lost.bush": "Puffin",
   "block.paradise_lost.shamrock": "Shamrock",
   "block.paradise_lost.malt_sprig": "Malt Sprig",
@@ -232,11 +239,21 @@
 
   "block.paradise_lost.amadrys_bundle": "Amadrys Bundle",
 
+  "block.paradise_lost.amadrys": "Amadrys Crops",
+  "block.paradise_lost.flax": "Flax Crops",
+  "block.paradise_lost.swedroot": "Swedroot Crops",
+  "block.paradise_lost.nitra": "Nitra Crops",
+
   "block.paradise_lost.ancient_flower": "Ancient Flower",
   "block.paradise_lost.ataraxia": "Ataraxia",
   "block.paradise_lost.cloudsbluff": "Cloudsbluff",
   "block.paradise_lost.drigean": "Drigean",
   "block.paradise_lost.luminar": "Luminar",
+  "block.paradise_lost.potted_ancient_flower": "Potted Ancient Flower",
+  "block.paradise_lost.potted_ataraxia": "Potted Ataraxia",
+  "block.paradise_lost.potted_cloudsbluff": "Potted Cloudsbluff",
+  "block.paradise_lost.potted_drigean": "Potted Drigean",
+  "block.paradise_lost.potted_luminar": "Potted Luminar",
 
   "block.paradise_lost.wild_flax": "Wild Flax",
 
@@ -244,6 +261,7 @@
   "block.paradise_lost.olvite_ore": "Olvite Ore",
   "block.paradise_lost.floestone_redstone_ore": "Floestone Redstone Ore",
   "block.paradise_lost.surtrum": "Surtrum",
+  "block.paradise_lost.surtrum_air": "Surtrum Air",
   "block.paradise_lost.metamorphic_shell": "Metamorphic Shell",
   "block.paradise_lost.levita_ore": "Levita Ore",
   "block.paradise_lost.cherine_block": "Block of Cherine",
@@ -277,6 +295,16 @@
   "entity.paradise_lost.envoy": "Envoy",
   "entity.paradise_lost.sentinel": "Calcified Sentinel",
   "entity.paradise_lost.levita_arrow": "Levita Arrow",
+  "entity.paradise_lost.slider": "Slider",
+  "entity.paradise_lost.thrown_nitra": "Nitra Bulb",
+  "entity.paradise_lost.aurel_boat": "Aurel Boat",
+  "entity.paradise_lost.aurel_chest_boat": "Aurel Boat with Chest",
+  "entity.paradise_lost.mother_aurel_boat": "Mother Aurel Boat",
+  "entity.paradise_lost.mother_aurel_chest_boat": "Mother Aurel Boat with Chest",
+  "entity.paradise_lost.menth_boat": "Menth Boat",
+  "entity.paradise_lost.menth_chest_boat": "Menth Boat with Chest",
+  "entity.paradise_lost.wisteria_boat": "Wisteria Boat",
+  "entity.paradise_lost.wisteria_chest_boat": "Wisteria Boat with Chest",
 
   "item.paradise_lost.golden_amber": "Golden Amber",
   "item.paradise_lost.cherine": "Cherine Shard",

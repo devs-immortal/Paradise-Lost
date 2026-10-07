@@ -163,7 +163,7 @@ public class MoaScreenHandler extends AbstractContainerMenu {
 
         var stack = slot.getItem();
         result = stack.copy();
-        if (sourceSlot < 21 ? !moveItemStackTo(stack, 22, 57, true) : !moveItemStackTo(stack, 2, 22, false)) {
+        if (sourceSlot < 22 ? !moveItemStackTo(stack, 22, 58, true) : !moveItemStackTo(stack, 2, 22, false)) {
             return ItemStack.EMPTY;
         }
         if (stack.isEmpty()) {
