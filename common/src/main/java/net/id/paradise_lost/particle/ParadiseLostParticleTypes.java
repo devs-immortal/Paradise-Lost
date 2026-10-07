@@ -15,6 +15,7 @@ public final class ParadiseLostParticleTypes {
     public static final SimpleParticleType LEVITA_BLOOP = register("levita_bloop");
     public static final SimpleParticleType LEVITATION_TOTEM = register("levitation_totem");
     public static final SimpleParticleType LIT_CLOUD = register("lit_cloud");
+    public static final SimpleParticleType LEVITA_SPARKLE = register("levita_sparkle");
 
     private ParadiseLostParticleTypes() {}
 
