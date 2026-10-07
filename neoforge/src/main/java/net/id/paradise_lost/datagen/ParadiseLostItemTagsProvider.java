@@ -71,7 +71,7 @@ public class ParadiseLostItemTagsProvider extends ItemTagsProvider {
         tag(Tags.Items.FOODS_BREAD).add(AMADRYS_BREAD.get());
         tag(Tags.Items.FOODS_COOKED_MEAT).add(COOKED_MOA_MEAT.get());
         tag(Tags.Items.FOODS_COOKIE).add(
-                BLACKCURRANT_COOKIE.get(), OMINOUS_COOKIE.get(),
+                BLACKCURRANT_COOKIE.get(),
                 AMADRYS_BREAD_GLAZED.get(), AMADRYS_BREAD_GLAZED_FILLED.get()
         );
         tag(Tags.Items.FOODS_FRUIT).add(BLACKCURRANT.get());

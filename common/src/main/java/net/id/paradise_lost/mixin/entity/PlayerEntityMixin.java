@@ -20,7 +20,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Inventory;
@@ -105,15 +104,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             return;
         }
 
-        if (isFloatyAnchored() && FloatyLeggingsItem.isFloatyEnabled(player.getItemBySlot(EquipmentSlot.LEGS))) {
+        if (isFloatyAnchored()) {
             FloatyLeggingsItem.beginAnchoredHover(player);
             paradiseLost$floatyHoldingNoGravity = true;
         } else {
-            if (isFloatyAnchored()) {
-                setFloatyAnchored(false);
-            } else {
-                paradiseLost$clearFloatyHover(player);
-            }
+            paradiseLost$clearFloatyHover(player);
         }
     }
 
@@ -125,23 +120,19 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
         }
 
         if (isFloatyAnchored()) {
-            if (!FloatyLeggingsItem.isFloatyEnabled(player.getItemBySlot(EquipmentSlot.LEGS))) {
-                setFloatyAnchored(false);
-                return;
-            }
             if (!player.level().isClientSide() && ++paradiseLost$floatyDamageTicker >= FloatyLeggingsItem.DURABILITY_INTERVAL_TICKS) {
                 paradiseLost$floatyDamageTicker = 0;
                 FloatyLeggingsItem.hurtWhileAnchored(player);
             }
+        } else {
+            FloatyLeggingsItem.applyPassiveSlowFall(player);
         }
     }
 
     @Inject(method = "travel", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$floatyTravel(Vec3 movementInput, CallbackInfo ci) {
         Player player = (Player) (Object) this;
-        if (!isFloatyAnchored()
-                || !FloatyLeggingsItem.canUseFloaty(player)
-                || !FloatyLeggingsItem.isFloatyEnabled(player.getItemBySlot(EquipmentSlot.LEGS))) {
+        if (!isFloatyAnchored() || !FloatyLeggingsItem.canUseFloaty(player)) {
             return;
         }
         FloatyLeggingsItem.travelAnchored(player, this.xxa, this.zza);
