@@ -4,6 +4,8 @@ import com.mojang.serialization.MapCodec;
 import net.id.paradise_lost.block.blockentity.FoodBowlBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -45,9 +47,20 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!player.isShiftKeyDown() && world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
-            return ItemInteractionResult.sidedSuccess(foodBowl.handleUse(player, hand, player.getItemInHand(hand)) && world.isClientSide());
+            boolean used = world.isClientSide() ? state.getValue(FULL) || stack.is(ItemTags.MEAT) : foodBowl.handleUse(player, hand, stack);
+            if (used) {
+                return ItemInteractionResult.sidedSuccess(world.isClientSide());
+            }
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.is(newState.getBlock()) && world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
+            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), foodBowl.getContainedItem());
+        }
+        super.onRemove(state, world, pos, newState, moved);
     }
 
     @Override

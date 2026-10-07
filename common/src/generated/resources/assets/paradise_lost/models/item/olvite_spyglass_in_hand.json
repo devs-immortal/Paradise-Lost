@@ -187,6 +187,7 @@
   ],
   "gui_light": "front",
   "textures": {
+    "particle": "paradise_lost:item/olvite_spyglass",
     "spyglass": "paradise_lost:item/olvite_spyglass_model"
   }
 }

@@ -14,4 +14,9 @@ public class ParadiseHangingSignBlockEntity extends HangingSignBlockEntity {
     public BlockEntityType<?> getType() {
         return ParadiseLostBlockEntityTypes.HANGING_SIGN.get();
     }
+
+    @Override
+    public boolean isValidBlockState(BlockState state) {
+        return getType().isValid(state);
+    }
 }

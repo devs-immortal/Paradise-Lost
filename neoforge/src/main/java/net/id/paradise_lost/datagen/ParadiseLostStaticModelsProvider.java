@@ -419,6 +419,7 @@ public class ParadiseLostStaticModelsProvider extends ModelProvider<ParadiseLost
         Builder olvite_spyglass_in_hand = getBuilder("item/olvite_spyglass_in_hand");
         olvite_spyglass_in_hand.guiLight(BlockModel.GuiLight.FRONT);
         olvite_spyglass_in_hand.texture("spyglass", "paradise_lost:item/olvite_spyglass_model");
+        olvite_spyglass_in_hand.texture("particle", "paradise_lost:item/olvite_spyglass");
         var spyEyepiece = olvite_spyglass_in_hand.element().from(7, 8.5f, 7).to(9, 13.5f, 9);
         for (Direction side : NESW) {
             spyEyepiece.face(side).uvs(0, 2, 2, 7).texture("#spyglass").end();

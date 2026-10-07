@@ -167,9 +167,15 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         if (this.level().isClientSide() || this.level().dimension() != ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             return;
         }
+        if (this.hasEffect(MobEffects.LEVITATION)) {
+            ci.cancel();
+            return;
+        }
+        if (((LivingEntity) (Object) this).isHolding(ItemRegistry.TOTEM_OF_LEVITATION.get())) {
+            return;
+        }
         // Escape when paradiseVoidKills is false. When the rule is true (or escape fails),
-        // leave vanilla void damage alone — previously we always cancelled and dealt a custom
-        // 4-heart hit, so the gamerule never actually restored normal void death.
+        // leave vanilla void damage alone.
         if (ParadiseLostVoidEscape.tryEscape((Entity) (Object) this)) {
             ci.cancel();
         }
@@ -236,8 +242,8 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @Inject(method = "onEquipItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;gameEvent(Lnet/minecraft/core/Holder;)V"))
     public void onEquipStack(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
-        if (slot == EquipmentSlot.HEAD && newStack.is(ItemRegistry.XP_CIRCLET.get())) {
-            XpCircletItem.dischargeCirclet(newStack, (Player) (Object) this);
+        if (slot == EquipmentSlot.HEAD && newStack.is(ItemRegistry.XP_CIRCLET.get()) && (Object) this instanceof Player player) {
+            XpCircletItem.dischargeCirclet(newStack, player);
         }
     }
 
