@@ -35,6 +35,7 @@ import net.id.paradise_lost.registration.RegistryObject;
 import net.id.paradise_lost.tag.ParadiseLostBlockTags;
 import net.id.paradise_lost.world.feature.configured_features.ParadiseLostTreeConfiguredFeatures;
 import net.id.paradise_lost.world.feature.tree.ParadiseLostSaplingGenerators;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
@@ -43,6 +44,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -76,6 +78,7 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.WallSignBlock;
+import net.minecraft.world.level.block.entity.PotDecorations;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -537,7 +540,8 @@ public class BlockRegistry {
     }
 
     public static final RegistryObject<Block, CalciteFlowerPotBlock> CALCITE_FLOWER_POT = add("calcite_flower_pot", () -> new CalciteFlowerPotBlock(ofFullCopy(FLOWER_POT)));
-    public static final RegistryObject<Block, CalciteDecoratedPotBlock> CALCITE_DECORATED_POT = add("calcite_decorated_pot", () -> new CalciteDecoratedPotBlock(ofFullCopy(DECORATED_POT).mapColor(MapColor.SNOW)));
+    public static final RegistryObject<Block, CalciteDecoratedPotBlock> CALCITE_DECORATED_POT = add("calcite_decorated_pot", () -> new CalciteDecoratedPotBlock(ofFullCopy(DECORATED_POT).mapColor(MapColor.SNOW)),
+            new Item.Properties().component(DataComponents.POT_DECORATIONS, PotDecorations.EMPTY).component(DataComponents.CONTAINER, ItemContainerContents.EMPTY));
 
     public static final RegistryObject<Block, CampfireBlock> CHERINE_CAMPFIRE = add("cherine_campfire", () -> new CherineCampfireBlock(false, 1, ofFullCopy(CAMPFIRE).instrument(NoteBlockInstrument.BASS)), cutoutRenderLayer);
 
