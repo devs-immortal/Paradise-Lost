@@ -290,9 +290,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(ItemRegistry.AMADRYS_BUSHEL.get(), 5).apply(count(4, 7)))
                         .add(item(BlockRegistry.AMADRYS_BUNDLE.get(), 3).apply(count(1, 2)))
                         .add(item(ItemRegistry.AMADRYS_NOODLES.get(), 3))
-                        .add(item(ItemRegistry.AMADRYS_BREAD_GLAZED.get(), 1).apply(count(1, 4)))
-                        .add(item(ItemRegistry.OMINOUS_COOKIE.get(), 2).apply(count(1, 3))
-                                .apply(SetOminousBottleAmplifierFunction.setAmplifier(UniformGenerator.between(0.0F, 4.0F))))));
+                        .add(item(ItemRegistry.AMADRYS_BREAD_GLAZED.get(), 1).apply(count(1, 4)))));
 
         output.accept(ParadiseLostLootTables.SPAWNER_LEVITATION_RESOURCES, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))

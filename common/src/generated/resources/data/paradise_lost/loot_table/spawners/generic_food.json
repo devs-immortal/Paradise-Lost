@@ -71,30 +71,6 @@
             }
           ],
           "name": "paradise_lost:amadrys_bread_glazed"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            },
-            {
-              "amplifier": {
-                "type": "minecraft:uniform",
-                "max": 4.0,
-                "min": 0.0
-              },
-              "function": "minecraft:set_ominous_bottle_amplifier"
-            }
-          ],
-          "name": "paradise_lost:ominous_cookie",
-          "weight": 2
         }
       ],
       "rolls": 4.0

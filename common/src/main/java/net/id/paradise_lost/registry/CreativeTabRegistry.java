@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.OminousBottleItem;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 
 import static net.id.paradise_lost.registry.ItemRegistry.*;
@@ -386,11 +385,6 @@ public class CreativeTabRegistry {
                         output.accept(POPOM_JELLY.get());
                         output.accept(BLACKCURRANT_PIE.get());
                         output.accept(BLACKCURRANT_COOKIE.get());
-                        for (int amplifier = OminousBottleItem.MIN_AMPLIFIER; amplifier <= OminousBottleItem.MAX_AMPLIFIER; amplifier++) {
-                            ItemStack cookie = new ItemStack(OMINOUS_COOKIE.get());
-                            cookie.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, amplifier);
-                            output.accept(cookie);
-                        }
                         output.accept(AMADRYS_NOODLES.get());
                         output.accept(ROOT_STEW.get());
                         output.accept(SWEDROOT.get());
