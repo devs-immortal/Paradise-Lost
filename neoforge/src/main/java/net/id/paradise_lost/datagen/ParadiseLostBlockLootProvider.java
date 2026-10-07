@@ -337,9 +337,7 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
     private LootTable.Builder campfireDrops(Block block) {
         return this.createSilkTouchDispatchTable(
                 block,
-                this.applyExplosionCondition(
-                        block, LootItem.lootTableItem(Items.CHARCOAL).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))
-                )
+                this.applyExplosionCondition(block, LootItem.lootTableItem(ItemRegistry.CHERINE.get()))
         );
     }
 
