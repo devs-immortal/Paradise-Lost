@@ -1,5 +1,6 @@
 package net.id.paradise_lost.mixin.entity;
 
+import net.id.paradise_lost.particle.ParadiseLostParticleTypes;
 import net.id.paradise_lost.util.ParadiseLostEvents;
 import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
@@ -12,6 +13,9 @@ import net.id.paradise_lost.util.ParadiseLostCriteria;
 import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.id.paradise_lost.util.ParadiseLostVoidEscape;
 import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
+import net.minecraft.client.renderer.entity.layers.ParrotOnShoulderLayer;
+import net.minecraft.core.Rotations;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -123,6 +127,12 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             if (!player.level().isClientSide() && ++paradiseLost$floatyDamageTicker >= FloatyLeggingsItem.DURABILITY_INTERVAL_TICKS) {
                 paradiseLost$floatyDamageTicker = 0;
                 FloatyLeggingsItem.hurtWhileAnchored(player);
+            }
+            if (paradiseLost$floatyDamageTicker == 0) {
+                var leg1 = player.position().add(new Vec3(0.3, 0.5, 0.025).yRot((float) Math.toRadians(-player.yBodyRot)));
+                var leg2 = player.position().add(new Vec3(-0.3, 0.5, 0.025).yRot((float) Math.toRadians(-player.yBodyRot)));
+                player.level().addParticle(ParadiseLostParticleTypes.LEVITA_SPARKLE, leg1.x(), leg1.y(), leg1.z(), 0.0, 0.0, 0.0);
+                player.level().addParticle(ParadiseLostParticleTypes.LEVITA_SPARKLE, leg2.x(), leg2.y(), leg2.z(), 0.0, 0.0, 0.0);
             }
         } else {
             FloatyLeggingsItem.applyPassiveSlowFall(player);

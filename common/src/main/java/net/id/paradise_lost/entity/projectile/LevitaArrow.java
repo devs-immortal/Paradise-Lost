@@ -26,8 +26,8 @@ public class LevitaArrow extends AbstractArrow {
     @Override
     public void tick() {
         super.tick();
-        if (!this.inGround && this.level().isClientSide && this.tickCount % 2 == 0) {
-            this.level().addParticle(ParadiseLostParticleTypes.LEVITA_BLOOP, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
+        if (!this.inGround && this.level().isClientSide) {
+            this.level().addParticle(ParadiseLostParticleTypes.LEVITA_SPARKLE, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
         }
     }
 
