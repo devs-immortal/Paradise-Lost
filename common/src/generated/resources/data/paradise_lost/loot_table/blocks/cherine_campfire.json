@@ -35,14 +35,7 @@
                   "condition": "minecraft:survives_explosion"
                 }
               ],
-              "functions": [
-                {
-                  "add": false,
-                  "count": 2.0,
-                  "function": "minecraft:set_count"
-                }
-              ],
-              "name": "minecraft:charcoal"
+              "name": "paradise_lost:cherine"
             }
           ]
         }

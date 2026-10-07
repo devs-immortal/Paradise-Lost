@@ -168,15 +168,12 @@ public class ItemRegistry {
         return new Properties();
     }
 
-    private static final Properties WEARABLE = wearable();
-    private static final Properties RARE_WEARABLE = wearable().rarity(RARE);
-
     private static ArmorItem armorHelper(Holder<ArmorMaterial> mat, ArmorItem.Type type, int durabilityMultiplier, Item.Properties settings) {
-        return new ArmorItem(mat, type, WEARABLE.durability(type.getDurability(durabilityMultiplier)));
+        return new ArmorItem(mat, type, settings.durability(type.getDurability(durabilityMultiplier)));
     }
 
     private static ArmorItem armorHelper(Holder<ArmorMaterial> mat, ArmorItem.Type type, int durabilityMultiplier) {
-        return armorHelper(mat, type, durabilityMultiplier, WEARABLE);
+        return armorHelper(mat, type, durabilityMultiplier, wearable());
     }
 
     public static final RegistryObject<Item, ArmorItem> OLVITE_HELMET = add("olvite_helmet", () -> armorHelper(ParadiseLostArmorMaterials.OLVITE, ArmorItem.Type.HELMET, 15));
@@ -195,13 +192,13 @@ public class ItemRegistry {
     public static final RegistryObject<Item, ArmorItem> SURTRUM_LEGGINGS = add("surtrum_leggings", () -> armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.LEGGINGS, 27, wearable().fireResistant()));
     public static final RegistryObject<Item, ArmorItem> SURTRUM_BOOTS = add("surtrum_boots", () -> armorHelper(ParadiseLostArmorMaterials.SURTRUM, ArmorItem.Type.BOOTS, 27, wearable().fireResistant()));
 
-    public static final RegistryObject<Item, XpCircletItem> XP_CIRCLET = add("xp_circlet", () -> new XpCircletItem(ParadiseLostArmorMaterials.RELIC, ArmorItem.Type.HELMET, WEARABLE.durability(ArmorItem.Type.HELMET.getDurability(15)).rarity(RARE)));
+    public static final RegistryObject<Item, XpCircletItem> XP_CIRCLET = add("xp_circlet", () -> new XpCircletItem(ParadiseLostArmorMaterials.RELIC, ArmorItem.Type.HELMET, wearable().durability(ArmorItem.Type.HELMET.getDurability(15)).rarity(RARE)));
     public static final RegistryObject<Item, FloatyLeggingsItem> FLOATY_LEGGINGS = add("floaty_leggings",
             () -> new FloatyLeggingsItem(ParadiseLostArmorMaterials.FLOATY,
-                    WEARABLE.durability(ArmorItem.Type.LEGGINGS.getDurability(66)).rarity(UNCOMMON)));
+                    wearable().durability(ArmorItem.Type.LEGGINGS.getDurability(66)).rarity(UNCOMMON)));
     public static final RegistryObject<Item, FloatyBootsItem> FLOATY_BOOTS = add("floaty_boots",
             () -> new FloatyBootsItem(ParadiseLostArmorMaterials.FLOATY,
-                    WEARABLE.durability(ArmorItem.Type.BOOTS.getDurability(66)).rarity(UNCOMMON)));
+                    wearable().durability(ArmorItem.Type.BOOTS.getDurability(66)).rarity(UNCOMMON)));
     private static Properties food() {
         return new Properties();
     }

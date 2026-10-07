@@ -3,6 +3,7 @@ package net.id.paradise_lost.recipe;
 import net.id.paradise_lost.block.blockentity.CalciteDecoratedPotBlockEntity;
 import net.id.paradise_lost.tag.ParadiseLostItemTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
@@ -11,6 +12,8 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.PotDecorations;
+
+import java.util.Optional;
 
 public class CraftingCalciteDecoratedPotRecipe extends CustomRecipe {
     public CraftingCalciteDecoratedPotRecipe(CraftingBookCategory craftingRecipeCategory) {
@@ -51,12 +54,16 @@ public class CraftingCalciteDecoratedPotRecipe extends CustomRecipe {
     @Override
     public ItemStack assemble(CraftingInput craftingRecipeInput, HolderLookup.Provider wrapperLookup) {
         PotDecorations sherds = new PotDecorations(
-                craftingRecipeInput.getItem(1).getItem(),
-                craftingRecipeInput.getItem(3).getItem(),
-                craftingRecipeInput.getItem(5).getItem(),
-                craftingRecipeInput.getItem(7).getItem()
+                side(craftingRecipeInput.getItem(1)),
+                side(craftingRecipeInput.getItem(3)),
+                side(craftingRecipeInput.getItem(5)),
+                side(craftingRecipeInput.getItem(7))
         );
         return CalciteDecoratedPotBlockEntity.getStackWith(sherds);
+    }
+
+    private static Optional<Item> side(ItemStack stack) {
+        return stack.is(Items.CALCITE) ? Optional.empty() : Optional.of(stack.getItem());
     }
 
     @Override

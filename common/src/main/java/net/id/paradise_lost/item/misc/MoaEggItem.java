@@ -6,6 +6,7 @@ import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -36,7 +37,11 @@ public class MoaEggItem extends Item {
             if (geneTag.isBaby()) {
                 moa.setAge(-43200);
             }
-            moa.moveTo(contextIn.getClickedPos().above(), 0, 0);
+            BlockPos clicked = contextIn.getClickedPos();
+            BlockPos spawnPos = world.getBlockState(clicked).getCollisionShape(world, clicked).isEmpty()
+                    ? clicked
+                    : clicked.relative(contextIn.getClickedFace());
+            moa.moveTo(spawnPos, 0, 0);
             moa.setHealth(moa.getGenes().getAttribute(MoaAttributes.MAX_HEALTH));
             moa.syncGenes();
             world.addFreshEntity(moa);
