@@ -26,7 +26,10 @@ public abstract class FloatyLeggingsItemMixin extends ArmorItem {
     public @Nullable ResourceLocation getArmorTexture(
             ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel
     ) {
-        if (innerModel && entity instanceof ParadiseLostEntityExtensions extensions && extensions.isFloatyAnchored()) {
+        if (innerModel
+                && FloatyLeggingsItem.isFloatyEnabled(stack)
+                && entity instanceof ParadiseLostEntityExtensions extensions
+                && extensions.isFloatyAnchored()) {
             return FLOATY_LEGGINGS_ANCHORED;
         }
         return null;
