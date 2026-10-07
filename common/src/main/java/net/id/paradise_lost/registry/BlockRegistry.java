@@ -406,17 +406,24 @@ public class BlockRegistry {
     }
 
     public static SignSet registerSignSet(WoodType woodType) {
-        var signSettings = BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN).instrument(NoteBlockInstrument.BASS);
-        var hangingSignSettings = BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN).instrument(NoteBlockInstrument.BASS);
-
         String name = woodType.name().contains(":") ? woodType.name().split(":", 2)[1] : woodType.name();
 
-        RegistryObject<Block, StandingSignBlock> signBlock = addNoItem(name + "_sign", settings -> new ParadiseSignBlock(settings, woodType), signSettings);
-        RegistryObject<Block, WallSignBlock> wallSignBlock = addNoItem(name + "_wall_sign", settings -> new ParadiseWallSignBlock(settings, woodType), signSettings);
-        RegistryObject<Block, CeilingHangingSignBlock> hangingSign = addNoItem(name + "_hanging_sign", settings -> new ParadiseHangingSignBlock(woodType, settings), hangingSignSettings);
-        RegistryObject<Block, WallHangingSignBlock> wallHangingSign = addNoItem(name + "_wall_hanging_sign", settings -> new ParadiseWallHangingSignBlock(woodType, settings), hangingSignSettings);
+        RegistryObject<Block, StandingSignBlock> signBlock = addNoItem(name + "_sign", settings -> new ParadiseSignBlock(settings, woodType), signSettings());
+        RegistryObject<Block, WallSignBlock> wallSignBlock = addNoItem(name + "_wall_sign", settings -> new ParadiseWallSignBlock(settings, woodType),
+                signSettings().overrideDescription(Util.makeDescriptionId("block", id(name + "_sign"))));
+        RegistryObject<Block, CeilingHangingSignBlock> hangingSign = addNoItem(name + "_hanging_sign", settings -> new ParadiseHangingSignBlock(woodType, settings), hangingSignSettings());
+        RegistryObject<Block, WallHangingSignBlock> wallHangingSign = addNoItem(name + "_wall_hanging_sign", settings -> new ParadiseWallHangingSignBlock(woodType, settings),
+                hangingSignSettings().overrideDescription(Util.makeDescriptionId("block", id(name + "_hanging_sign"))));
 
         return new SignSet(signBlock, wallSignBlock, hangingSign, wallHangingSign);
+    }
+
+    private static Properties signSettings() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN).instrument(NoteBlockInstrument.BASS);
+    }
+
+    private static Properties hangingSignSettings() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN).instrument(NoteBlockInstrument.BASS);
     }
 
     public record SignSet(
