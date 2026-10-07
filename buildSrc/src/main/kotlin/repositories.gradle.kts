@@ -16,12 +16,9 @@ repositories {
         "https://jitpack.io",
         "com.github.Chocohead")
 
-    mavenRepo("SherdsAPI",
-        "https://dl.cloudsmith.io/public/thomasglasser/sherdsapi/maven/",
-        "dev.thomasglasser.sherdsapi")
-
-    mavenRepo("TommyLib",
-        "https://dl.cloudsmith.io/public/thomasglasser/tommylib/maven/",
+    mavenRepo("ThomasGlasser",
+        "https://maven.thomasglasser.dev/releases",
+        "dev.thomasglasser.sherdsapi",
         "dev.thomasglasser.tommylib")
 
     mavenRepo("Modrinth",
