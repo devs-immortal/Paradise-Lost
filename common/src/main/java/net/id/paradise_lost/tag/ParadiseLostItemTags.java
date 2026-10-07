@@ -15,7 +15,6 @@ public class ParadiseLostItemTags {
     public static final TagKey<Item> CLOUDS = register("clouds");
     public static final TagKey<Item> HANGERS = register("hangers");
     public static final TagKey<Item> MUSHROOMS = register("mushrooms");
-    public static final TagKey<Item> IRON_INTERCHANGABLE = register("iron_interchangable");
     public static final TagKey<Item> CALCITE_POT_SHERDS = register("calcite_pot_sherds");
     public static final TagKey<Item> MOA_BREEDABLES = register("moa_breedables");
     public static final TagKey<Item> MOA_TEMPTABLES = register("moa_temptables");
