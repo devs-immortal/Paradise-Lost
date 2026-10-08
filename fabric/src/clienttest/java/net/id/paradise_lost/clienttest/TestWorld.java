@@ -44,6 +44,9 @@ final class TestWorld {
         GameRules rules = new GameRules();
 
         rules.getRule(GameRules.RULE_DO_IMMEDIATE_RESPAWN).set(true, null);
+        rules.getRule(GameRules.RULE_NATURAL_REGENERATION).set(false, null);
+        rules.getRule(GameRules.RULE_DAYLIGHT).set(false, null);
+        rules.getRule(GameRules.RULE_WEATHER_CYCLE).set(false, null);
         LevelSettings settings = new LevelSettings(NAME, GameType.SURVIVAL, false, Difficulty.PEACEFUL, true, rules, data);
 
         WorldOptions options = WorldOptions.defaultWithRandomSeed();
@@ -68,6 +71,7 @@ final class TestWorld {
         onServer(server -> {
             ServerPlayer player = player(server);
             player.setGameMode(GameType.SURVIVAL);
+            player.setHealth(player.getMaxHealth());
             player.getFoodData().setFoodLevel(20);
             player.getInventory().clearContent();
             player.setDeltaMovement(Vec3.ZERO);
