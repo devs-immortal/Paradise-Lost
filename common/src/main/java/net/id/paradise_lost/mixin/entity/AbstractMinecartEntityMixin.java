@@ -150,13 +150,19 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         }
         if (!this.level().isClientSide()) {
             if (!this.paradiseLost$wasOffRail) {
+                // Read incline before prepareTakeoff (flat takeoff clears it).
+                int inclineAtExit = MinecartFloating.getIncline(cart);
                 MinecartFloating.prepareTakeoff(cart);
-                this.paradiseLost$exitGrace = EXIT_GRACE_TICKS;
+                // Descent only: short pier-clear. Climb uses open-air slope noclip. Flat stays brief.
+                int grace = inclineAtExit < 0
+                        ? MinecartFloating.slopeDescentExitGraceTicks()
+                        : EXIT_GRACE_TICKS;
+                this.paradiseLost$exitGrace = grace;
                 this.paradiseLost$wasOffRail = true;
                 MinecartFloating.setOffRail(cart, true);
                 MinecartFloating.debugEvent(cart, "comeOff",
-                        "first exit grace=" + EXIT_GRACE_TICKS
-                                + " incline=" + MinecartFloating.getIncline(cart)
+                        "first exit grace=" + grace
+                                + " incline=" + inclineAtExit
                                 + " shape=" + MinecartFloating.getRailShapeName(cart)
                                 + " motion=" + this.getDeltaMovement());
             }
