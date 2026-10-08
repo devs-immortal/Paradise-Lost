@@ -1,27 +1,26 @@
 package net.id.paradise_lost.mixin.item;
 
 import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
 
-    @Inject(
+    @ModifyVariable(
             method = "hurtAndBreak(ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V",
             at = @At("HEAD"),
-            cancellable = true
+            argsOnly = true,
+            ordinal = 0
     )
-    private void paradiseLost$floatyLeggingsWearDamage(int amount, LivingEntity entity, EquipmentSlot slot, CallbackInfo ci) {
+    private int paradiseLost$capFloatyLeggingsWearDamage(int amount) {
         ItemStack stack = (ItemStack) (Object) this;
-        if (stack.getItem() instanceof FloatyLeggingsItem) {
-            FloatyLeggingsItem.applyWearDamage(stack, amount, entity, slot);
-            ci.cancel();
+        if (!(stack.getItem() instanceof FloatyLeggingsItem) || !stack.isDamageableItem()) {
+            return amount;
         }
+        int room = Math.max(0, stack.getMaxDamage() - 1 - stack.getDamageValue());
+        return Math.min(amount, room);
     }
 }

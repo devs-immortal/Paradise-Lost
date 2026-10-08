@@ -43,35 +43,20 @@ public class FloatyLeggingsItem extends ArmorItem {
         return item.getMaterial().value().getDefense(item.getType());
     }
 
-    public static boolean applyWearDamage(ItemStack stack, int amount, LivingEntity entity, EquipmentSlot slot) {
-        if (!(stack.getItem() instanceof FloatyLeggingsItem) || !stack.isDamageableItem()) {
-            return false;
-        }
-        int cap = stack.getMaxDamage() - 1;
-        int before = stack.getDamageValue();
-        if (before >= cap) {
-            return false;
-        }
-        stack.setDamageValue(Math.min(before + amount, cap));
-        return stack.getDamageValue() != before;
-    }
-
     public static boolean isSurvivalLike(Player player) {
         return !player.isCreative() && !player.isSpectator();
     }
 
     public static boolean canUseFloaty(Player player) {
         return isWearing(player)
+                && isFloatyEnabled(player.getItemBySlot(EquipmentSlot.LEGS))
                 && !player.isPassenger()
                 && !player.getAbilities().flying
                 && !player.isFallFlying();
     }
 
     public static boolean canAnchor(Player player) {
-        return canUseFloaty(player)
-                && isSurvivalLike(player)
-                && !player.onGround()
-                && isFloatyEnabled(player.getItemBySlot(EquipmentSlot.LEGS));
+        return canUseFloaty(player) && isSurvivalLike(player) && !player.onGround();
     }
 
     public static void onGameModeChanged(ServerPlayer player, GameType from, GameType to) {

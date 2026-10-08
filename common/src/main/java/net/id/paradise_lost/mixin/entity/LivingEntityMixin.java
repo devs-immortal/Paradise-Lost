@@ -44,6 +44,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
@@ -117,15 +118,16 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         return FloatyBootsItem.isWearing((LivingEntity) (Object) this) || super.dampensVibrations();
     }
 
-    @Inject(method = "getAttributeValue", at = @At("RETURN"), cancellable = true)
-    private void paradiseLost$brokenFloatyLeggingsNoArmor(Holder<Attribute> attribute, CallbackInfoReturnable<Double> cir) {
+    @ModifyReturnValue(method = "getAttributeValue", at = @At("RETURN"))
+    private double paradiseLost$brokenFloatyLeggingsNoArmor(double original, Holder<Attribute> attribute) {
         if (!attribute.is(Attributes.ARMOR)) {
-            return;
+            return original;
         }
         ItemStack legs = ((LivingEntity) (Object) this).getItemBySlot(EquipmentSlot.LEGS);
         if (legs.getItem() instanceof FloatyLeggingsItem leggings && FloatyLeggingsItem.isBroken(legs)) {
-            cir.setReturnValue(Math.max(0.0D, cir.getReturnValue() - FloatyLeggingsItem.getDefensePoints(leggings)));
+            return Math.max(0.0D, original - FloatyLeggingsItem.getDefensePoints(leggings));
         }
+        return original;
     }
 
     @ModifyVariable(method = "calculateFallDamage", at = @At("HEAD"), argsOnly = true, ordinal = 0)
