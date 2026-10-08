@@ -9,6 +9,9 @@
       "net.id.paradise_lost.clienttest.ClientTestRunner"
     ]
   },
+  "mixins": [
+    "paradise_lost_clienttest.mixins.json"
+  ],
   "depends": {
     "paradise_lost": "*"
   }

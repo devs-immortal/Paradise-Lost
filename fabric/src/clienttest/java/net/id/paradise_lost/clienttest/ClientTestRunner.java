@@ -20,12 +20,15 @@ public class ClientTestRunner implements ClientModInitializer {
     private static final int WORLD_SETTLE_TICKS = 40;
     private static final int RESET_SETTLE_TICKS = 20;
 
+    public static String title;
+
     private Phase phase = Phase.CREATE_WORLD;
     private final Deque<Test> tests = new ArrayDeque<>();
     private final List<String> failures = new ArrayList<>();
 
     private Running running;
     private int testIndex;
+    private int testCount;
     private int wait;
 
     @Override
@@ -57,6 +60,7 @@ public class ClientTestRunner implements ClientModInitializer {
         tests.addAll(FoodTests.all());
         String only = System.getenv("RUN_ONLY");
         if (only != null) tests.removeIf(test -> !test.name().contains(only));
+        testCount = tests.size();
     }
 
     private void runTests() {
@@ -77,6 +81,7 @@ public class ClientTestRunner implements ClientModInitializer {
             return;
         }
         running = new Running(test, Recorder.logErrors.size());
+        setTitle("[" + (testIndex + 1) + "/" + testCount + "] " + test.name());
         try {
             TestWorld.resetPlayer(testIndex++);
         } catch (Exception t) {
@@ -131,6 +136,11 @@ public class ClientTestRunner implements ClientModInitializer {
         LOG.error("FAIL {}: {} {}", name, cause.getMessage(), cause instanceof AssertionError ? null : cause);
         failures.add(name + ": " + cause.getMessage());
         running = null;
+    }
+
+    private static void setTitle(String text) {
+        title = text;
+        client().updateTitle();
     }
 
     private void finish() {
