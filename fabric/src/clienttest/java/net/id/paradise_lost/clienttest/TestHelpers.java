@@ -1,0 +1,71 @@
+package net.id.paradise_lost.clienttest;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.server.IntegratedServer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+public final class TestHelpers {
+    private TestHelpers() {
+    }
+
+    public static Minecraft client() {
+        return Minecraft.getInstance();
+    }
+
+    public static void onServer(Consumer<IntegratedServer> action) {
+        IntegratedServer server = client().getSingleplayerServer();
+        server.submit(() -> action.accept(server)).join();
+    }
+
+    public static <T> T fromServer(Function<IntegratedServer, T> action) {
+        IntegratedServer server = client().getSingleplayerServer();
+        return server.submit(() -> action.apply(server)).join();
+    }
+
+    public static ServerPlayer player(IntegratedServer server) {
+        return server.getPlayerList().getPlayers().getFirst();
+    }
+
+    public static ServerLevel world(IntegratedServer server) {
+        return player(server).serverLevel();
+    }
+
+    public static void check(boolean condition, String message) {
+        if (!condition) throw new AssertionError(message);
+    }
+
+    public static BlockHitResult topOf(BlockPos pos) {
+        return new BlockHitResult(Vec3.atCenterOf(pos).add(0, 0.5, 0), Direction.UP, pos, false);
+    }
+
+    public static void useOn(BlockPos pos) {
+        client().gameMode.useItemOn(client().player, InteractionHand.MAIN_HAND, topOf(pos));
+    }
+
+    public static void hold(ServerPlayer player, Item item) {
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item));
+    }
+
+    public static BlockPos ahead(ServerPlayer player, int distance, int side) {
+        Direction facing = player.getDirection();
+        return player.blockPosition().relative(facing, distance).relative(facing.getClockWise(), side);
+    }
+
+    public static void teleport(ServerPlayer player, ResourceKey<Level> world, double x, double y, double z, float pitch) {
+        player.teleportTo(player.getServer().getLevel(world), x, y, z, Set.of(), 0, pitch);
+    }
+}

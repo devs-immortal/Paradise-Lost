@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "paradise_lost_clienttest",
+  "version": "1.0.0",
+  "name": "Client Game Tests",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.id.paradise_lost.clienttest.ClientTestRunner"
+    ]
+  },
+  "depends": {
+    "paradise_lost": "*"
+  }
+}
