@@ -5,20 +5,19 @@
     "#": {
       "item": "minecraft:redstone_torch"
     },
-    "S": {
-      "item": "minecraft:stick"
+    "I": {
+      "item": "paradise_lost:floestone"
     },
     "X": {
-      "tag": "c:ingots/iron"
+      "item": "minecraft:redstone"
     }
   },
   "pattern": [
-    "XSX",
-    "X#X",
-    "XSX"
+    "#X#",
+    "III"
   ],
   "result": {
-    "count": 6,
-    "id": "minecraft:activator_rail"
+    "count": 1,
+    "id": "minecraft:repeater"
   }
 }

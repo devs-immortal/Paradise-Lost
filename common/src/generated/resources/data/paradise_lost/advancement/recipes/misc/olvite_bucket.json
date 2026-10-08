@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_c_ingots_iron": {
+    "has_ingredient": {
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/iron"
+            "items": "paradise_lost:olvite"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_c_ingots_iron"
+      "has_ingredient"
     ]
   ],
   "rewards": {

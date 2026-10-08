@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_c_slime_balls": {
+    "has_ingredient": {
       "conditions": {
         "items": [
           {
-            "items": "#c:slime_balls"
+            "items": "paradise_lost:popom_jelly"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_c_slime_balls"
+      "has_ingredient"
     ]
   ],
   "rewards": {

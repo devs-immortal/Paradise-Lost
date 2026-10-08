@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_flaxweave": {
+    "has_ingredient": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_flaxweave"
+      "has_ingredient"
     ]
   ],
   "rewards": {

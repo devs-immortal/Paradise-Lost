@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_floestone_pressure_plate": {
+    "has_ingredient": {
       "conditions": {
         "items": [
           {
-            "items": "paradise_lost:floestone_pressure_plate"
+            "items": "#minecraft:planks"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paradise_lost:detector_rail_olvite"
+        "recipe": "paradise_lost:grindstone_floestone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_floestone_pressure_plate"
+      "has_ingredient"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paradise_lost:detector_rail_olvite"
+      "paradise_lost:grindstone_floestone"
     ]
   }
 }

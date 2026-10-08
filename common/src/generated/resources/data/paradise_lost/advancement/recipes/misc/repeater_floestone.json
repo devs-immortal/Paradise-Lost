@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_c_ingots_iron": {
+    "has_ingredient": {
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/iron"
+            "items": "minecraft:redstone_torch"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paradise_lost:heavy_weighted_pressure_plate_olvite"
+        "recipe": "paradise_lost:repeater_floestone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_c_ingots_iron"
+      "has_ingredient"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paradise_lost:heavy_weighted_pressure_plate_olvite"
+      "paradise_lost:repeater_floestone"
     ]
   }
 }

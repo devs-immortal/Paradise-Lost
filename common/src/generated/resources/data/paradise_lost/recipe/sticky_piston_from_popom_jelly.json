@@ -2,15 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
+    "#": {
+      "item": "paradise_lost:popom_jelly"
+    },
     "P": {
       "item": "minecraft:piston"
-    },
-    "S": {
-      "tag": "c:slime_balls"
     }
   },
   "pattern": [
-    "S",
+    "#",
     "P"
   ],
   "result": {

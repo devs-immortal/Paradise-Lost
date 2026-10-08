@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_blaze_powder": {
+    "has_ingredient": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:blaze_powder"
+            "items": "paradise_lost:flaxweave"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paradise_lost:magma_cream_from_slime_balls"
+        "recipe": "paradise_lost:flaxweave_item_frame"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_blaze_powder"
+      "has_ingredient"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paradise_lost:magma_cream_from_slime_balls"
+      "paradise_lost:flaxweave_item_frame"
     ]
   }
 }

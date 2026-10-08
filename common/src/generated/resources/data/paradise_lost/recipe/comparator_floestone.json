@@ -3,22 +3,22 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "paradise_lost:burnished_stone"
+      "item": "minecraft:redstone_torch"
     },
     "I": {
-      "item": "paradise_lost:olvite"
+      "item": "paradise_lost:floestone"
     },
     "X": {
-      "item": "minecraft:furnace"
+      "item": "minecraft:quartz"
     }
   },
   "pattern": [
-    "III",
-    "IXI",
-    "###"
+    " # ",
+    "#X#",
+    "III"
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:blast_furnace"
+    "id": "minecraft:comparator"
   }
 }
