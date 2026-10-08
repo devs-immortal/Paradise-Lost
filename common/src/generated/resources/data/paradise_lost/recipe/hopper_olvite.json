@@ -2,19 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "P": {
-      "item": "minecraft:piston"
+    "C": {
+      "item": "minecraft:chest"
     },
-    "S": {
-      "tag": "c:slime_balls"
+    "I": {
+      "tag": "c:ingots/iron"
     }
   },
   "pattern": [
-    "S",
-    "P"
+    "I I",
+    "ICI",
+    " I "
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:sticky_piston"
+    "id": "minecraft:hopper"
   }
 }

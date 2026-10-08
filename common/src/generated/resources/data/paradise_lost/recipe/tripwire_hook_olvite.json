@@ -2,20 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "F": {
-      "item": "paradise_lost:flaxweave"
+    "O": {
+      "tag": "c:ingots/iron"
+    },
+    "P": {
+      "tag": "minecraft:planks"
     },
     "S": {
       "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "SSS",
-    "SFS",
-    "SSS"
+    "O",
+    "S",
+    "P"
   ],
   "result": {
-    "count": 1,
-    "id": "minecraft:item_frame"
+    "count": 2,
+    "id": "minecraft:tripwire_hook"
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paradise_lost:sticky_piston_from_popom_jelly"
+        "recipe": "paradise_lost:slime_block_from_slime_balls"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "paradise_lost:sticky_piston_from_popom_jelly"
+      "paradise_lost:slime_block_from_slime_balls"
     ]
   }
 }

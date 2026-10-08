@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ingredient": {
+    "has_cobbled_floestone": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:stick"
+            "items": "paradise_lost:cobbled_floestone"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paradise_lost:burnished_stone_armor_stand"
+        "recipe": "minecraft:lever"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_ingredient"
+      "has_cobbled_floestone"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paradise_lost:burnished_stone_armor_stand"
+      "minecraft:lever"
     ]
   }
 }

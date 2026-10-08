@@ -6,7 +6,7 @@
       "item": "paradise_lost:burnished_stone"
     },
     "I": {
-      "item": "paradise_lost:olvite"
+      "tag": "c:ingots/iron"
     },
     "X": {
       "item": "minecraft:furnace"

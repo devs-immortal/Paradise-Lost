@@ -7,11 +7,11 @@
     }
   },
   "pattern": [
-    "# #",
-    " # "
+    "###",
+    "###"
   ],
   "result": {
-    "count": 1,
-    "id": "minecraft:bucket"
+    "count": 16,
+    "id": "minecraft:iron_bars"
   }
 }

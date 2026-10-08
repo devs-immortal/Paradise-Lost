@@ -3,18 +3,15 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "paradise_lost:cobbled_floestone"
-    },
-    "X": {
-      "item": "minecraft:stick"
+      "tag": "c:ingots/iron"
     }
   },
   "pattern": [
-    "X",
-    "#"
+    "# #",
+    "###"
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:lever"
+    "id": "minecraft:minecart"
   }
 }

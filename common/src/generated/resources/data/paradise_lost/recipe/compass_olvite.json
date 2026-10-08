@@ -2,16 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
+    "I": {
       "tag": "c:ingots/iron"
+    },
+    "R": {
+      "item": "minecraft:redstone"
     }
   },
   "pattern": [
-    "# #",
-    " # "
+    " I ",
+    "IRI",
+    " I "
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:bucket"
+    "id": "minecraft:compass"
   }
 }

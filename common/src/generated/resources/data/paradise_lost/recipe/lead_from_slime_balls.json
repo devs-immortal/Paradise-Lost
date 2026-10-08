@@ -2,19 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "P": {
-      "item": "minecraft:piston"
-    },
-    "S": {
+    "O": {
       "tag": "c:slime_balls"
+    },
+    "~": {
+      "item": "minecraft:string"
     }
   },
   "pattern": [
-    "S",
-    "P"
+    "~~ ",
+    "~O ",
+    "  ~"
   ],
   "result": {
-    "count": 1,
-    "id": "minecraft:sticky_piston"
+    "count": 2,
+    "id": "minecraft:lead"
   }
 }

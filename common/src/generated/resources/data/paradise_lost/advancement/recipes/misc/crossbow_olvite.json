@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_c_slime_balls": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
-            "items": "#c:slime_balls"
+            "items": "minecraft:stick"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paradise_lost:sticky_piston_from_popom_jelly"
+        "recipe": "paradise_lost:crossbow_olvite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_c_slime_balls"
+      "has_stick"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paradise_lost:sticky_piston_from_popom_jelly"
+      "paradise_lost:crossbow_olvite"
     ]
   }
 }

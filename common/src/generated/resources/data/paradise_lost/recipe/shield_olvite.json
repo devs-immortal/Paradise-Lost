@@ -2,22 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
+    "W": {
       "tag": "minecraft:planks"
     },
-    "-": {
-      "item": "paradise_lost:floestone_slab"
-    },
-    "I": {
-      "item": "minecraft:stick"
+    "o": {
+      "tag": "c:ingots/iron"
     }
   },
   "pattern": [
-    "I-I",
-    "# #"
+    "WoW",
+    "WWW",
+    " W "
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:grindstone"
+    "id": "minecraft:shield"
   }
 }

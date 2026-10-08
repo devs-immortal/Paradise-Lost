@@ -2,20 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "/": {
+    "#": {
       "item": "minecraft:stick"
     },
-    "_": {
-      "item": "paradise_lost:burnished_stone_slab"
+    "X": {
+      "tag": "c:ingots/iron"
     }
   },
   "pattern": [
-    "///",
-    " / ",
-    "/_/"
+    "X X",
+    "X#X",
+    "X X"
   ],
   "result": {
-    "count": 1,
-    "id": "minecraft:armor_stand"
+    "count": 16,
+    "id": "minecraft:rail"
   }
 }

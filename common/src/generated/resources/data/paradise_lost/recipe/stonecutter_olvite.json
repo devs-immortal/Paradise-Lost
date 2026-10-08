@@ -3,22 +3,18 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:redstone_torch"
-    },
-    "I": {
       "item": "paradise_lost:floestone"
     },
-    "X": {
-      "item": "minecraft:quartz"
+    "I": {
+      "tag": "c:ingots/iron"
     }
   },
   "pattern": [
-    " # ",
-    "#X#",
-    "III"
+    " I ",
+    "###"
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:comparator"
+    "id": "minecraft:stonecutter"
   }
 }

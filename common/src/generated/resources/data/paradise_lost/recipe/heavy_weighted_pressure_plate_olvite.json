@@ -7,11 +7,10 @@
     }
   },
   "pattern": [
-    "# #",
-    " # "
+    "##"
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:bucket"
+    "id": "minecraft:heavy_weighted_pressure_plate"
   }
 }

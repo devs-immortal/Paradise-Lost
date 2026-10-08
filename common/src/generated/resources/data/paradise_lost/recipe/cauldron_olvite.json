@@ -8,10 +8,11 @@
   },
   "pattern": [
     "# #",
-    " # "
+    "# #",
+    "###"
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:bucket"
+    "id": "minecraft:cauldron"
   }
 }

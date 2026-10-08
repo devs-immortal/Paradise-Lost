@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ingredient": {
+    "has_redstone_torch": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paradise_lost:comparator_floestone"
+        "recipe": "minecraft:comparator"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_ingredient"
+      "has_redstone_torch"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paradise_lost:comparator_floestone"
+      "minecraft:comparator"
     ]
   }
 }
