@@ -66,15 +66,19 @@ final class TestWorld {
     }
 
     static void resetPlayer(int slot) {
+        client().options.keyUse.setDown(false);
+        client().options.keyShift.setDown(false);
         client().player.getInventory().selected = 0;
         if (client().screen != null) client().player.closeContainer();
         onServer(server -> {
             ServerPlayer player = player(server);
+            player.stopRiding();
             player.setGameMode(GameType.SURVIVAL);
             player.setHealth(player.getMaxHealth());
             player.getFoodData().setFoodLevel(20);
             player.getInventory().clearContent();
             player.setDeltaMovement(Vec3.ZERO);
+            player.fallDistance = 0;
             teleport(player, Level.OVERWORLD, slot * 64 + 0.5, -60, 0.5, 0);
         });
         Recorder.reset();

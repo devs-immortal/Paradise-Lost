@@ -2,6 +2,7 @@ package net.id.paradise_lost.clienttest;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.id.paradise_lost.clienttest.tests.BoatTests;
 import net.id.paradise_lost.clienttest.tests.FoodTests;
 import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
@@ -58,6 +59,7 @@ public class ClientTestRunner implements ClientModInitializer {
 
     private void loadTests() {
         tests.addAll(FoodTests.all());
+        tests.addAll(BoatTests.all());
         String group = System.getenv("RUN_ONLY");
         if (group != null) tests.removeIf(test -> !test.group().equalsIgnoreCase(group));
         testCount = tests.size();
