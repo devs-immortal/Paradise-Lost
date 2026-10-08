@@ -58,8 +58,8 @@ public class ClientTestRunner implements ClientModInitializer {
 
     private void loadTests() {
         tests.addAll(FoodTests.all());
-        String only = System.getenv("RUN_ONLY");
-        if (only != null) tests.removeIf(test -> !test.name().contains(only));
+        String group = System.getenv("RUN_ONLY");
+        if (group != null) tests.removeIf(test -> !test.group().equalsIgnoreCase(group));
         testCount = tests.size();
     }
 
@@ -81,7 +81,7 @@ public class ClientTestRunner implements ClientModInitializer {
             return;
         }
         running = new Running(test, Recorder.logErrors.size());
-        setTitle("[" + (testIndex + 1) + "/" + testCount + "] " + test.name());
+        setTitle("[" + (testIndex + 1) + "/" + testCount + "] " + test.fullName());
         try {
             TestWorld.resetPlayer(testIndex++);
         } catch (Exception t) {
@@ -110,7 +110,7 @@ public class ClientTestRunner implements ClientModInitializer {
             fail(t);
             return;
         }
-        LOG.info("PASS {}", running.test.name());
+        LOG.info("PASS {}", running.test.fullName());
         running = null;
     }
 
@@ -132,7 +132,7 @@ public class ClientTestRunner implements ClientModInitializer {
 
     private void fail(Throwable t) {
         Throwable cause = t instanceof CompletionException && t.getCause() != null ? t.getCause() : t;
-        String name = running.test.name();
+        String name = running.test.fullName();
         LOG.error("FAIL {}: {} {}", name, cause.getMessage(), cause instanceof AssertionError ? null : cause);
         failures.add(name + ": " + cause.getMessage());
         running = null;
