@@ -22,11 +22,10 @@ import java.util.Locale;
 import java.util.Map;
 
 public final class MinecartFloating {
-    public static final boolean DEBUG_LOG = false;
+    public static final boolean DEBUG_LOG = true;
 
     private static final double FLOAT_SECONDS = 4.1;
     private static final double MOTION_EPSILON = 0.05D;
-    private static final double PARALLEL_DOT = 0.92D;
     private static final String LEGACY_NBT_KEY = "paradiseLostFloating";
     private static final String DEBUG_PREFIX = "[PL-MinecartFloat]";
 
@@ -251,43 +250,161 @@ public final class MinecartFloating {
     public static void prepareReconnect(AbstractMinecart cart) {
         captureRailState(cart);
         setOffRail(cart, false);
-        captureRailRenderPose(cart);
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        boolean alreadyFlat = pose.paradiseLost$hasRailRenderPose()
+                && Math.abs(pose.paradiseLost$getRailRenderPitch()) <= 0.01F
+                && Math.abs(getSyncedFloatPitch(cart)) <= 0.01F;
+        if (!alreadyFlat) {
+            captureRailRenderPose(cart);
+        }
         RailShape landed = getRailShape(cart);
         if (getIncline(cart) == 0 || landed == null || !landed.isAscending()) {
+            float yaw = alreadyFlat
+                    ? getSyncedFloatYaw(cart)
+                    : (pose.paradiseLost$hasRailRenderPose()
+                            ? yawAlongMotion(cart, pose.paradiseLost$getRailRenderYaw())
+                            : getSyncedFloatYaw(cart));
             clearFloatingPitch(cart);
-            setSyncedFloatPose(cart, getSyncedFloatYaw(cart), 0.0F);
+            setSyncedFloatPose(cart, yaw, 0.0F);
+            snapEntityRotation(cart, yaw, 0.0F);
+            pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
         } else {
             applyFloatingRotation(cart);
         }
     }
 
-    public static boolean isParallelToRail(AbstractMinecart cart, RailShape shape) {
-        Pair<Vec3i, Vec3i> exits = RAIL_EXITS.get(shape);
-        if (exits == null) {
+    public static boolean shouldUseSlopeNoclip(AbstractMinecart cart) {
+        if (getIncline(cart) == 0) {
             return false;
         }
-        Vec3 approach = new Vec3(cart.getDeltaMovement().x, 0.0D, cart.getDeltaMovement().z);
-        if (approach.lengthSqr() <= MOTION_EPSILON * MOTION_EPSILON) {
-            approach = Vec3.directionFromRotation(cart.getYRot(), 0.0F).multiply(1.0D, 0.0D, 1.0D);
-        }
-        if (approach.lengthSqr() <= 1.0E-8D) {
+        BlockPos railPos = findRailPos(cart);
+        if (railPos == null) {
             return false;
         }
-        approach = approach.normalize();
-        Vec3 exitA = Vec3.atLowerCornerOf(exits.getFirst());
-        Vec3 exitB = Vec3.atLowerCornerOf(exits.getSecond());
-        Vec3 flatA = new Vec3(exitA.x, 0.0D, exitA.z);
-        Vec3 flatB = new Vec3(exitB.x, 0.0D, exitB.z);
-        if (flatA.lengthSqr() > 1.0E-8D) {
-            flatA = flatA.normalize();
+        BlockState railState = cart.level().getBlockState(railPos);
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)) {
+            return false;
         }
-        if (flatB.lengthSqr() > 1.0E-8D) {
-            flatB = flatB.normalize();
-        }
-        return horizontalDot(approach, flatA) >= PARALLEL_DOT
-                || horizontalDot(approach, flatB) >= PARALLEL_DOT;
+        return railState.getValue(rail.getShapeProperty()).isAscending();
     }
 
+    private static final double FLAT_CONNECT_HEIGHT = 0.28D;
+
+    private static final double FLAT_POSE_ADOPT_HEIGHT = 0.50D;
+
+    public static boolean isNearFlatConnectHeight(AbstractMinecart cart, BlockPos railPos) {
+        return cart.getY() - railPos.getY() <= FLAT_CONNECT_HEIGHT;
+    }
+
+    public static boolean isNearFlatPoseAdoptHeight(AbstractMinecart cart, BlockPos railPos) {
+        return cart.getY() - railPos.getY() <= FLAT_POSE_ADOPT_HEIGHT;
+    }
+
+    public static boolean isFlatRailConnectTooEarly(AbstractMinecart cart, BlockPos railPos, BlockState railState) {
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)
+                || railState.getValue(rail.getShapeProperty()).isAscending()) {
+            return false;
+        }
+        return !isNearFlatConnectHeight(cart, railPos);
+    }
+
+    public static void adaptFloatToFlatRailBelow(AbstractMinecart cart, BlockState railState) {
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)) {
+            return;
+        }
+        RailShape shape = railState.getValue(rail.getShapeProperty());
+        if (shape.isAscending()) {
+            return;
+        }
+        BlockPos railPos = findRailPos(cart);
+        if (railPos == null || !isNearFlatPoseAdoptHeight(cart, railPos)) {
+            return;
+        }
+        boolean changed = false;
+        // Clear incline only once seated — earlier clear synced a flat fall while client was high.
+        if (getIncline(cart) != 0 && isSettledOnRail(cart, railPos)) {
+            setIncline(cart, 0);
+            changed = true;
+        }
+        setRailShape(cart, shape);
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        boolean alreadyFlat = pose.paradiseLost$hasRailRenderPose()
+                && Math.abs(pose.paradiseLost$getRailRenderPitch()) <= 0.01F
+                && Math.abs(getSyncedFloatPitch(cart)) <= 0.01F;
+        if (alreadyFlat) {
+            if (changed) {
+                debug(cart, "flatAdapt", "incline only shape=" + shape
+                        + " yAbove=" + String.format(java.util.Locale.ROOT, "%.3f", cart.getY() - railPos.getY()));
+            }
+            return;
+        }
+        // One-shot: sample landing yaw from motion, hard-snap yaw+pitch together.
+        captureRailRenderPose(cart);
+        float yaw = pose.paradiseLost$hasRailRenderPose()
+                ? yawAlongMotion(cart, pose.paradiseLost$getRailRenderYaw())
+                : getSyncedFloatYaw(cart);
+        pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
+        setSyncedFloatPose(cart, yaw, 0.0F);
+        snapEntityRotation(cart, yaw, 0.0F);
+        debug(cart, "flatAdapt", "pitch=0 yaw=" + String.format(java.util.Locale.ROOT, "%.1f", yaw)
+                + " shape=" + shape
+                + " incline=" + getIncline(cart)
+                + " yAbove=" + String.format(java.util.Locale.ROOT, "%.3f", cart.getY() - railPos.getY()));
+    }
+
+    public static double softenSlopeDescentOntoFlat(AbstractMinecart cart, double yMotion) {
+        if (yMotion >= 0.0D || !isFloating(cart)) {
+            return yMotion;
+        }
+        BlockPos railPos = findRailPos(cart);
+        if (railPos == null || !isNearFlatConnectHeight(cart, railPos)) {
+            return yMotion;
+        }
+        BlockState railState = cart.level().getBlockState(railPos);
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)
+                || railState.getValue(rail.getShapeProperty()).isAscending()) {
+            return yMotion;
+        }
+        double height = cart.getY() - railPos.getY();
+        double target = 0.0625D;
+        if (height <= target) {
+            return 0.0D;
+        }
+        double maxStep = Math.min(0.35D, height - target);
+        return -Math.min(Math.abs(yMotion), maxStep);
+    }
+
+
+    public static double descentSpeedOntoFlatRail(AbstractMinecart cart, BlockPos railPos) {
+        if (!isFloating(cart)) {
+            return 0.0D;
+        }
+        if (getIncline(cart) != 0) {
+            return 0.0D;
+        }
+        BlockState railState = cart.level().getBlockState(railPos);
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)
+                || railState.getValue(rail.getShapeProperty()).isAscending()) {
+            return 0.0D;
+        }
+        if (isSettledOnRail(cart, railPos)) {
+            return 0.0D;
+        }
+        double height = cart.getY() - railPos.getY();
+        double target = 0.0625D;
+        if (height <= target) {
+            return 0.0D;
+        }
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        boolean slopePose = pose.paradiseLost$hasRailRenderPose()
+                && Math.abs(pose.paradiseLost$getRailRenderPitch()) > 1.0F;
+        boolean catchUp = !isOffRail(cart) || slopePose;
+        if (!catchUp && !isNearFlatConnectHeight(cart, railPos)) {
+            return 0.0D;
+        }
+        double cap = catchUp ? 0.50D : 0.35D;
+        return -Math.min(cap, Math.max(0.10D, height - target));
+    }
 
     public static void applyFloatingRotation(AbstractMinecart cart) {
         MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
@@ -308,20 +425,18 @@ public final class MinecartFloating {
     }
 
     private static boolean shouldKeepSlopePitch(AbstractMinecart cart) {
-        if (getIncline(cart) != 0) {
-            return true;
-        }
-        RailShape shape = getRailShape(cart);
-        if (shape != null && shape.isAscending()) {
-            return true;
-        }
-        BlockPos railPos = findRailPos(cart);
-        if (railPos == null) {
+        if (getIncline(cart) == 0) {
             return false;
         }
-        BlockState railState = cart.level().getBlockState(railPos);
-        return railState.getBlock() instanceof BaseRailBlock rail
-                && railState.getValue(rail.getShapeProperty()).isAscending();
+        BlockPos railPos = findRailPos(cart);
+        if (railPos != null) {
+            BlockState railState = cart.level().getBlockState(railPos);
+            if (railState.getBlock() instanceof BaseRailBlock rail
+                    && !railState.getValue(rail.getShapeProperty()).isAscending()) {
+                return !isNearFlatPoseAdoptHeight(cart, railPos);
+            }
+        }
+        return true;
     }
 
 
@@ -331,8 +446,57 @@ public final class MinecartFloating {
         }
         float yaw = getSyncedFloatYaw(cart);
         float pitch = getSyncedFloatPitch(cart);
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        if (pose.paradiseLost$hasRailRenderPose()
+                && Math.abs(pose.paradiseLost$getRailRenderPitch()) > 1.0F
+                && Math.abs(pitch) <= 0.01F
+                && shouldHoldSlopePitchAgainstSync(cart)) {
+            yaw = pose.paradiseLost$getRailRenderYaw();
+            pitch = pose.paradiseLost$getRailRenderPitch();
+        } else if (Math.abs(pitch) <= 0.01F) {
+            yaw = getSyncedFloatYaw(cart);
+        }
         snapEntityRotation(cart, yaw, pitch);
-        ((MinecartFloatPoseAccess) cart).paradiseLost$setRailRenderPose(yaw, pitch);
+        pose.paradiseLost$setRailRenderPose(yaw, pitch);
+    }
+
+    private static boolean shouldHoldSlopePitchAgainstSync(AbstractMinecart cart) {
+        if (Math.abs(getSyncedFloatPitch(cart)) > 0.01F) {
+            return false;
+        }
+        BlockPos railPos = findRailPos(cart);
+        if (railPos == null) {
+            return true;
+        }
+        BlockState railState = cart.level().getBlockState(railPos);
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)
+                || railState.getValue(rail.getShapeProperty()).isAscending()) {
+            return false;
+        }
+        return !isNearFlatPoseAdoptHeight(cart, railPos);
+    }
+
+    private static float yawAlongMotion(AbstractMinecart cart, float railYaw) {
+        Vec3 motion = cart.getDeltaMovement().multiply(1.0D, 0.0D, 1.0D);
+        float a = Mth.wrapDegrees(railYaw);
+        float b = Mth.wrapDegrees(railYaw + 180.0F);
+        if (motion.lengthSqr() < 1.0E-6D) {
+            return nearestRailYaw(cart.getYRot(), railYaw);
+        }
+        motion = motion.normalize();
+        Vec3 dirA = Vec3.directionFromRotation(0.0F, a);
+        Vec3 dirB = Vec3.directionFromRotation(0.0F, b);
+        double dotA = dirA.x * motion.x + dirA.z * motion.z;
+        double dotB = dirB.x * motion.x + dirB.z * motion.z;
+        return dotA >= dotB ? a : b;
+    }
+
+    private static float nearestRailYaw(float currentYaw, float railYaw) {
+        float a = Mth.wrapDegrees(railYaw);
+        float b = Mth.wrapDegrees(railYaw + 180.0F);
+        return Math.abs(Mth.wrapDegrees(a - currentYaw)) <= Math.abs(Mth.wrapDegrees(b - currentYaw))
+                ? a
+                : b;
     }
 
     public static void setSyncedFloatPose(AbstractMinecart cart, float yaw, float pitch) {
@@ -349,17 +513,62 @@ public final class MinecartFloating {
     }
 
     private static void snapEntityRotation(AbstractMinecart cart, float yaw, float pitch) {
+        applyEntityRotation(cart, yaw, pitch, true);
+    }
+
+    private static void applyEntityRotation(AbstractMinecart cart, float yaw, float pitch, boolean hardSnap) {
         cart.setYRot(yaw);
-        cart.yRotO = yaw;
         cart.setXRot(pitch);
         cart.xRotO = pitch;
+        if (hardSnap) {
+            cart.yRotO = yaw;
+        }
     }
 
     public static boolean shouldSkipRailRenderSnap(AbstractMinecart cart) {
         if (POS_CAPTURE_BYPASS.get() > 0) {
             return false;
         }
-        return isFloating(cart) && isOffRail(cart);
+        if (!isFloating(cart)) {
+            return false;
+        }
+        BlockPos railPos = findRailPos(cart);
+        if (railPos != null && isSettledOnRail(cart, railPos)) {
+            return false;
+        }
+        if (isOffRail(cart)) {
+            return true;
+        }
+        return isUnsettledAboveFlatRail(cart);
+    }
+
+
+    public static boolean isUnsettledAboveFlatRail(AbstractMinecart cart) {
+        BlockPos railPos = findRailPos(cart);
+        if (railPos == null) {
+            return false;
+        }
+        BlockState railState = cart.level().getBlockState(railPos);
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)
+                || railState.getValue(rail.getShapeProperty()).isAscending()) {
+            return false;
+        }
+        return !isSettledOnRail(cart, railPos);
+    }
+
+    public static boolean shouldCancelTrackWhileFloating(
+            AbstractMinecart cart, BlockPos railPos, BlockState railState, boolean leftRails) {
+        if (isMidairAboveRail(cart, railPos, leftRails)) {
+            return true;
+        }
+        if (!isFloating(cart)) {
+            return false;
+        }
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)
+                || railState.getValue(rail.getShapeProperty()).isAscending()) {
+            return false;
+        }
+        return !isSettledOnRail(cart, railPos);
     }
 
     public static void maintainSlopeEntityPitch(AbstractMinecart cart) {
@@ -379,10 +588,13 @@ public final class MinecartFloating {
         if (!pose.paradiseLost$hasRailRenderPose()) {
             return;
         }
+        float yaw = pose.paradiseLost$getRailRenderYaw();
         float pitch = pose.paradiseLost$getRailRenderPitch();
+        cart.setYRot(yaw);
+        cart.yRotO = yaw;
         cart.setXRot(pitch);
         cart.xRotO = pitch;
-        setSyncedFloatPose(cart, getSyncedFloatYaw(cart), pitch);
+        setSyncedFloatPose(cart, yaw, pitch);
     }
 
     public static void clearFloatingPitch(AbstractMinecart cart) {
@@ -437,21 +649,6 @@ public final class MinecartFloating {
         if (isCornerRail(shape)) {
             setRailShape(cart, shape);
             debug(cart, "nudge", "skip corner shape=" + shape);
-            return;
-        }
-        if (isParallelToRail(cart, shape)) {
-            setRailShape(cart, shape);
-            Vec3 motion = cart.getDeltaMovement();
-            if (shape.isAscending()) {
-                updateInclineFromRail(cart, shape, motion);
-                int incline = getIncline(cart);
-                if (incline != 0) {
-                    cart.setDeltaMovement(motion.x, incline * motion.horizontalDistance(), motion.z);
-                }
-            } else {
-                updateInclineFromRail(cart, shape, motion);
-            }
-            debug(cart, "nudge", "parallel skip XZ shape=" + shape + " incline=" + getIncline(cart));
             return;
         }
         Pair<Vec3i, Vec3i> exits = RAIL_EXITS.get(shape);
