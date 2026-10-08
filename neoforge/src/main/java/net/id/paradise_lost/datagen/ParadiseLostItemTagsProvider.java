@@ -81,7 +81,6 @@ public class ParadiseLostItemTagsProvider extends ItemTagsProvider {
         tag(Tags.Items.FOODS_VEGETABLE).add(NITRA_BULB.get());
 
         tag(Tags.Items.INGOTS_IRON).add(OLVITE.get());
-        tag(Tags.Items.SLIME_BALLS).add(POPOM_JELLY.get());
 
         tag(ItemTags.ARROWS).add(LEVITA_ARROW.get());
         tag(ItemTags.AXES).add(SURTRUM_AXE.get(), GLAZED_GOLD_AXE.get(), OLVITE_AXE.get());
@@ -123,6 +122,7 @@ public class ParadiseLostItemTagsProvider extends ItemTagsProvider {
         tag(ParadiseLostItemTags.IGNITING_TOOLS).add(
                 SURTRUM_SHOVEL.get(), SURTRUM_PICKAXE.get(), SURTRUM_AXE.get(), SURTRUM_SWORD.get(), SURTRUM_HOE.get()
         );
+        tag(ParadiseLostItemTags.IRON_INTERCHANGABLE).add(Items.IRON_INGOT, OLVITE.get());
         tag(ParadiseLostItemTags.MOA_BREEDABLES).add(POPOM_JELLY.get(), ItemRegistry.SWEDROOT.get(), Items.SUGAR);
         tag(ParadiseLostItemTags.MOA_TEMPTABLES).addTag(Tags.Items.FOODS_RAW_MEAT);
         tag(ParadiseLostItemTags.MUSHROOMS).add(ROOTCAP.get().asItem(), BROWN_SPORECAP.get().asItem(), PINK_SPORECAP.get().asItem());
