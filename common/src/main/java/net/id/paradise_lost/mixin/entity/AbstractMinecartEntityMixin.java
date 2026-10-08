@@ -130,7 +130,10 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 ci.cancel();
                 return;
             }
-            MinecartFloating.adaptFloatToFlatRailBelow(cart, state);
+            if (!this.level().isClientSide()) {
+                // Ascending: refresh incline/Y for carousel climb (p.1). Flat: landing pose (p.2).
+                MinecartFloating.adaptFloatWhileGhosting(cart, state);
+            }
             MinecartFloating.debugEvent(cart, "skipTrack",
                     "midair cancel moveAlongTrack at " + pos + " leftRails=" + leftRails
                             + " unsettledFlat=" + MinecartFloating.isUnsettledAboveFlatRail(cart));
@@ -273,12 +276,18 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 this.paradiseLost$wasOffRail = false;
                 if (!this.level().isClientSide()) {
                     MinecartFloating.captureRailState(cart);
-                    MinecartFloating.captureRailRenderPose(cart);
-                    if (MinecartFloating.getIncline(cart) == 0) {
-                        MinecartFloating.clearFloatingPitch(cart);
+                    if (MinecartFloating.getIncline(cart) != 0) {
+                        // Slope: always refresh offs pose (vanilla MinecartRenderer pair). Only force
+                        // entity rot while skipSnap — settled on-rail uses getPos for render.
+                        MinecartFloating.captureRailRenderPose(cart);
+                        if (MinecartFloating.shouldSkipRailRenderSnap(cart)) {
+                            MinecartFloating.maintainSlopeEntityPitch(cart);
+                        } else {
+                            MinecartFloating.publishSlopePoseToSync(cart);
+                        }
                     } else {
-                        // Fight vanilla zeroing xRot so client does not lerp pitch flat after reconnect.
-                        MinecartFloating.maintainSlopeEntityPitch(cart);
+                        // Straight flat only: refresh float yaw attachments for takeoff/reconnect.
+                        MinecartFloating.syncFlatFloatYawFromMotion(cart);
                     }
                 }
                 MinecartFloating.debugTick(cart, false, false, "onRail");
