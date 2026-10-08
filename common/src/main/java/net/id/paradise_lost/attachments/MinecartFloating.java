@@ -72,6 +72,9 @@ public final class MinecartFloating {
     }
 
     public static void setOffRail(AbstractMinecart cart, boolean offRail) {
+        if (isOffRail(cart) == offRail) {
+            return;
+        }
         Services.ATTACHMENTS.setAttachedValue(cart, CommonDataAttachments.MINE_CART_FLOAT_OFF_RAIL, offRail);
     }
 
@@ -80,8 +83,11 @@ public final class MinecartFloating {
     }
 
     public static void setIncline(AbstractMinecart cart, int incline) {
-        Services.ATTACHMENTS.setAttachedValue(
-                cart, CommonDataAttachments.MINE_CART_FLOAT_INCLINE, Mth.clamp(incline, -1, 1));
+        int clamped = Mth.clamp(incline, -1, 1);
+        if (getIncline(cart) == clamped) {
+            return;
+        }
+        Services.ATTACHMENTS.setAttachedValue(cart, CommonDataAttachments.MINE_CART_FLOAT_INCLINE, clamped);
     }
 
     public static String getRailShapeName(AbstractMinecart cart) {
@@ -93,8 +99,12 @@ public final class MinecartFloating {
     }
 
     public static void setRailShape(AbstractMinecart cart, String shapeName) {
-        Services.ATTACHMENTS.setAttachedValue(
-                cart, CommonDataAttachments.MINE_CART_FLOAT_SHAPE, shapeName == null ? "" : shapeName);
+        String next = shapeName == null ? "" : shapeName;
+        String current = getRailShapeName(cart);
+        if (next.equals(current == null ? "" : current)) {
+            return;
+        }
+        Services.ATTACHMENTS.setAttachedValue(cart, CommonDataAttachments.MINE_CART_FLOAT_SHAPE, next);
     }
 
     public static RailShape getRailShape(AbstractMinecart cart) {
@@ -807,8 +817,12 @@ public final class MinecartFloating {
     }
 
     public static void setSyncedFloatPose(AbstractMinecart cart, float yaw, float pitch) {
-        Services.ATTACHMENTS.setAttachedValue(cart, CommonDataAttachments.MINE_CART_FLOAT_YAW, yaw);
-        Services.ATTACHMENTS.setAttachedValue(cart, CommonDataAttachments.MINE_CART_FLOAT_PITCH, pitch);
+        if (Float.floatToIntBits(getSyncedFloatYaw(cart)) != Float.floatToIntBits(yaw)) {
+            Services.ATTACHMENTS.setAttachedValue(cart, CommonDataAttachments.MINE_CART_FLOAT_YAW, yaw);
+        }
+        if (Float.floatToIntBits(getSyncedFloatPitch(cart)) != Float.floatToIntBits(pitch)) {
+            Services.ATTACHMENTS.setAttachedValue(cart, CommonDataAttachments.MINE_CART_FLOAT_PITCH, pitch);
+        }
     }
 
     public static float getSyncedFloatYaw(AbstractMinecart cart) {
