@@ -64,7 +64,7 @@ public class NitraBlock extends Block {
 
     private static void ignite(Level world, BlockPos pos, float power, @Nullable LivingEntity igniter) {
         if (world instanceof ServerLevel serverLevel) {
-            serverLevel.explode(igniter, pos.getX(), pos.getY() + 0.5D, pos.getZ(), power, Level.ExplosionInteraction.TNT);
+            serverLevel.explode(igniter, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, power, Level.ExplosionInteraction.TNT);
             serverLevel.gameEvent(igniter, GameEvent.PRIME_FUSE, pos);
         }
     }
