@@ -59,7 +59,7 @@ public final class FoodTests {
                     client().options.keyUse.setDown(false);
                     int sips = Recorder.sips.get();
                     int finalSips = Recorder.finalSips.get();
-                    check(sips >= 6 && finalSips == 1, sips + " sips while drinking and " + finalSips + " final sip");
+                    check(sips == 6 && finalSips == 1, sips + " sips while drinking and " + finalSips + " final sip");
                 })
         );
     }
