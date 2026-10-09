@@ -4,10 +4,10 @@
   "package": "net.id.paradise_lost.clienttest.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "ClientPlayNetworkHandlerMixin",
+    "ClientPacketListenerMixin",
     "LevelRendererMixin",
     "LivingEntityMixin",
-    "MinecraftMixin",
+    "MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1
