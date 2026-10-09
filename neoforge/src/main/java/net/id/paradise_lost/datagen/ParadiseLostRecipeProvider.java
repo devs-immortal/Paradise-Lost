@@ -158,17 +158,15 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
 
     private void buildExtraRecipes(RecipeOutput output) {
 
-
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.ACTIVATOR_RAIL, 6)
-//                .define('#', Items.REDSTONE_TORCH)
-//                .define('S', Items.STICK)
-//                .define('X', ItemRegistry.OLVITE.get())
-//                .pattern("XSX")
-//                .pattern("X#X")
-//                .pattern("XSX")
-//                .unlockedBy(HAS_INGREDIENT, has(Items.REDSTONE_TORCH))
-//                .save(output, ModConstants.id("activator_rail_olvite"));
-
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.ACTIVATOR_RAIL, 6)
+                .define('#', Items.REDSTONE_TORCH)
+                .define('S', Items.STICK)
+                .define('X', ItemRegistry.OLVITE.get())
+                .pattern("XSX")
+                .pattern("X#X")
+                .pattern("XSX")
+                .unlockedBy(HAS_INGREDIENT, has(Items.REDSTONE_TORCH))
+                .save(output, ModConstants.id("activator_rail_olvite"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.AMADRYS_BREAD.get(), 1)
                 .define('B', ItemRegistry.AMADRYS_BUSHEL.get())
@@ -552,14 +550,14 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy(HAS_INGREDIENT, has(Items.REDSTONE_TORCH))
                 .save(output, ModConstants.id("comparator_floestone"));
 
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.COMPASS, 1)
-//                .define('I', ItemRegistry.OLVITE.get())
-//                .define('R', Items.REDSTONE)
-//                .pattern(" I ")
-//                .pattern("IRI")
-//                .pattern(" I ")
-//                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
-//                .save(output, ModConstants.id("compass_olvite"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.COMPASS, 1)
+                .define('I', ItemRegistry.OLVITE.get())
+                .define('R', Items.REDSTONE)
+                .pattern(" I ")
+                .pattern("IRI")
+                .pattern(" I ")
+                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
+                .save(output, ModConstants.id("compass_olvite"));
 
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ItemRegistry.MOA_MEAT.get()), RecipeCategory.MISC, ItemRegistry.COOKED_MOA_MEAT.get(), 0.3F, 600)
                 .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.MOA_MEAT.get()))
@@ -573,37 +571,37 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.MOA_MEAT.get()))
                 .save(output, ModConstants.id("cooked_moa_meat_from_smoking"));
 
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CRAFTER, 1)
-//                .define('#', ItemRegistry.OLVITE.get())
-//                .define('C', Items.CRAFTING_TABLE)
-//                .define('D', Items.DROPPER)
-//                .define('R', Items.REDSTONE)
-//                .pattern("###")
-//                .pattern("#C#")
-//                .pattern("RDR")
-//                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
-//                .save(output, ModConstants.id("crafter_olvite"));
-//
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CROSSBOW, 1)
-//                .define('#', Items.STICK)
-//                .define('$', Items.TRIPWIRE_HOOK)
-//                .define('&', ItemRegistry.OLVITE.get())
-//                .define('~', Items.STRING)
-//                .pattern("#&#")
-//                .pattern("~$~")
-//                .pattern(" # ")
-//                .unlockedBy(HAS_INGREDIENT, has(Items.STICK))
-//                .save(output, ModConstants.id("crossbow_olvite"));
-//
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.DETECTOR_RAIL, 6)
-//                .define('#', BlockRegistry.FLOESTONE_PRESSURE_PLATE.get())
-//                .define('R', Items.REDSTONE)
-//                .define('X', ItemRegistry.OLVITE.get())
-//                .pattern("X X")
-//                .pattern("X#X")
-//                .pattern("XRX")
-//                .unlockedBy(HAS_INGREDIENT, has(BlockRegistry.FLOESTONE_PRESSURE_PLATE.get()))
-//                .save(output, ModConstants.id("detector_rail_olvite"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CRAFTER, 1)
+                .define('#', ItemRegistry.OLVITE.get())
+                .define('C', Items.CRAFTING_TABLE)
+                .define('D', Items.DROPPER)
+                .define('R', Items.REDSTONE)
+                .pattern("###")
+                .pattern("#C#")
+                .pattern("RDR")
+                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
+                .save(output, ModConstants.id("crafter_olvite"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CROSSBOW, 1)
+                .define('#', Items.STICK)
+                .define('$', Items.TRIPWIRE_HOOK)
+                .define('&', ItemRegistry.OLVITE.get())
+                .define('~', Items.STRING)
+                .pattern("#&#")
+                .pattern("~$~")
+                .pattern(" # ")
+                .unlockedBy(HAS_INGREDIENT, has(Items.STICK))
+                .save(output, ModConstants.id("crossbow_olvite"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.DETECTOR_RAIL, 6)
+                .define('#', BlockRegistry.FLOESTONE_PRESSURE_PLATE.get())
+                .define('R', Items.REDSTONE)
+                .define('X', ItemRegistry.OLVITE.get())
+                .pattern("X X")
+                .pattern("X#X")
+                .pattern("XRX")
+                .unlockedBy(HAS_INGREDIENT, has(BlockRegistry.FLOESTONE_PRESSURE_PLATE.get()))
+                .save(output, ModConstants.id("detector_rail_olvite"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING, 2)
                 .requires(ItemRegistry.FLAX_THREAD.get())
@@ -1043,15 +1041,14 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy(HAS_INGREDIENT, has(BlockRegistry.HELIOLITH.get()))
                 .save(output, ModConstants.id("heliolith_wall_from_heliolith_stonecutting"));
 
-
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.HOPPER, 1)
-//                .define('C', Items.CHEST)
-//                .define('I', ItemRegistry.OLVITE.get())
-//                .pattern("I I")
-//                .pattern("ICI")
-//                .pattern(" I ")
-//                .unlockedBy(HAS_INGREDIENT, has(Items.CHEST))
-//                .save(output, ModConstants.id("hopper_olvite"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.HOPPER, 1)
+                .define('C', Items.CHEST)
+                .define('I', ItemRegistry.OLVITE.get())
+                .pattern("I I")
+                .pattern("ICI")
+                .pattern(" I ")
+                .unlockedBy(HAS_INGREDIENT, has(Items.CHEST))
+                .save(output, ModConstants.id("hopper_olvite"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockRegistry.INCUBATOR.get(), 1)
                 .define('#', BlockRegistry.THATCH_SET.block().get())
@@ -1161,12 +1158,12 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy(HAS_INGREDIENT, has(BlockRegistry.LIVERWORT.get()))
                 .save(output, ModConstants.id("liverwort_carpet"));
 
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.MINECART, 1)
-//                .define('#', ItemRegistry.OLVITE.get())
-//                .pattern("# #")
-//                .pattern("###")
-//                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
-//                .save(output, ModConstants.id("minecart_olvite"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.MINECART, 1)
+                .define('#', ItemRegistry.OLVITE.get())
+                .pattern("# #")
+                .pattern("###")
+                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
+                .save(output, ModConstants.id("minecart_olvite"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BlockRegistry.MOSSY_FLOESTONE.get(), 1)
                 .requires(BlockRegistry.COBBLED_FLOESTONE.get())
@@ -1419,32 +1416,30 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.SWEDROOT.get()))
                 .save(output, ModConstants.id("packed_swedroot"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.PISTON, 1)
+                .define('I', ItemRegistry.OLVITE.get())
+                .define('O', BlockRegistry.COBBLED_FLOESTONE.get())
+                .define('P', TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks")))
+                .define('R', Items.REDSTONE)
+                .pattern("PPP")
+                .pattern("OIO")
+                .pattern("ORO")
+                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
+                .save(output, ModConstants.id("piston_olvite"));
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PURPLE_DYE, 1)
                 .requires(BlockRegistry.ATARAXIA.get())
                 .unlockedBy(HAS_INGREDIENT, has(BlockRegistry.ATARAXIA.get()))
                 .save(output, ModConstants.id("purple_dye_from_ataraxia"));
 
-
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.PISTON, 1)
-//                .define('I', ItemRegistry.OLVITE.get())
-//                .define('O', BlockRegistry.COBBLED_FLOESTONE.get())
-//                .define('P', TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks")))
-//                .define('R', Items.REDSTONE)
-//                .pattern("PPP")
-//                .pattern("OIO")
-//                .pattern("ORO")
-//                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
-//                .save(output, ModConstants.id("piston_olvite"));
-//
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.RAIL, 16)
-//                .define('#', Items.STICK)
-//                .define('X', ItemRegistry.OLVITE.get())
-//                .pattern("X X")
-//                .pattern("X#X")
-//                .pattern("X X")
-//                .unlockedBy(HAS_INGREDIENT, has(Items.STICK))
-//                .save(output, ModConstants.id("rail_olvite"));
-
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.RAIL, 16)
+                .define('#', Items.STICK)
+                .define('X', ItemRegistry.OLVITE.get())
+                .pattern("X X")
+                .pattern("X#X")
+                .pattern("X X")
+                .unlockedBy(HAS_INGREDIENT, has(Items.STICK))
+                .save(output, ModConstants.id("rail_olvite"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.RAW_GOLD, 1)
                 .requires(ItemRegistry.GOLDEN_AMBER.get())
@@ -1494,32 +1489,30 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy(HAS_INGREDIENT, has(BlockRegistry.ROSE_WISTERIA_LEAVES.get()))
                 .save(output, ModConstants.id("rose_wisteria_leaf_pile"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SHEARS, 1)
+                .define('#', ItemRegistry.OLVITE.get())
+                .pattern(" #")
+                .pattern("# ")
+                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
+                .save(output, ModConstants.id("shears_olvite"));
 
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SHEARS, 1)
-//                .define('#', ItemRegistry.OLVITE.get())
-//                .pattern(" #")
-//                .pattern("# ")
-//                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
-//                .save(output, ModConstants.id("shears_olvite"));
-//
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SHIELD, 1)
-//                .define('W', TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks")))
-//                .define('o', ItemRegistry.OLVITE.get())
-//                .pattern("WoW")
-//                .pattern("WWW")
-//                .pattern(" W ")
-//                .unlockedBy(HAS_INGREDIENT, has(TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks"))))
-//                .save(output, ModConstants.id("shield_olvite"));
-//
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SMITHING_TABLE, 1)
-//                .define('#', TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks")))
-//                .define('@', ItemRegistry.OLVITE.get())
-//                .pattern("@@")
-//                .pattern("##")
-//                .pattern("##")
-//                .unlockedBy(HAS_INGREDIENT, has(TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks"))))
-//                .save(output, ModConstants.id("smithing_table_olvite"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SHIELD, 1)
+                .define('W', TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks")))
+                .define('o', ItemRegistry.OLVITE.get())
+                .pattern("WoW")
+                .pattern("WWW")
+                .pattern(" W ")
+                .unlockedBy(HAS_INGREDIENT, has(TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks"))))
+                .save(output, ModConstants.id("shield_olvite"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SMITHING_TABLE, 1)
+                .define('#', TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks")))
+                .define('@', ItemRegistry.OLVITE.get())
+                .pattern("@@")
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy(HAS_INGREDIENT, has(TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks"))))
+                .save(output, ModConstants.id("smithing_table_olvite"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockRegistry.SMOOTH_FLOESTONE.get(), 9)
                 .define('#', BlockRegistry.FLOESTONE.get())
@@ -1612,15 +1605,13 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.POPOM_JELLY.get()))
                 .save(output, ModConstants.id("sticky_piston_from_popom_jelly"));
 
-
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STONECUTTER, 1)
-//                .define('#', BlockRegistry.FLOESTONE.get())
-//                .define('I', ItemRegistry.OLVITE.get())
-//                .pattern(" I ")
-//                .pattern("###")
-//                .unlockedBy(HAS_INGREDIENT, has(BlockRegistry.FLOESTONE.get()))
-//                .save(output, ModConstants.id("stonecutter_olvite"));
-
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STONECUTTER, 1)
+                .define('#', BlockRegistry.FLOESTONE.get())
+                .define('I', ItemRegistry.OLVITE.get())
+                .pattern(" I ")
+                .pattern("###")
+                .unlockedBy(HAS_INGREDIENT, has(BlockRegistry.FLOESTONE.get()))
+                .save(output, ModConstants.id("stonecutter_olvite"));
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ItemRegistry.SWEDROOT_PULP.get()), RecipeCategory.MISC, Items.SUGAR, 0.1F, 200)
                 .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.SWEDROOT_PULP.get()))
@@ -1842,16 +1833,15 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlockedBy(HAS_INGREDIENT, has(TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks"))))
                 .save(output, ModConstants.id("tree_tap"));
 
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TRIPWIRE_HOOK, 2)
-//                .define('O', ItemRegistry.OLVITE.get())
-//                .define('P', TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks")))
-//                .define('S', Items.STICK)
-//                .pattern("O")
-//                .pattern("S")
-//                .pattern("P")
-//                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
-//                .save(output, ModConstants.id("tripwire_hook_olvite"));
-
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TRIPWIRE_HOOK, 2)
+                .define('O', ItemRegistry.OLVITE.get())
+                .define('P', TagKey.create(Registries.ITEM, ResourceLocation.parse("minecraft:planks")))
+                .define('S', Items.STICK)
+                .pattern("O")
+                .pattern("S")
+                .pattern("P")
+                .unlockedBy(HAS_INGREDIENT, has(ItemRegistry.OLVITE.get()))
+                .save(output, ModConstants.id("tripwire_hook_olvite"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.WARDED_JAR.get(), 1)
                 .define('#', Items.TINTED_GLASS)

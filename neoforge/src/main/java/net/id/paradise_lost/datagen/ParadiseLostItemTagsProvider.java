@@ -80,8 +80,6 @@ public class ParadiseLostItemTagsProvider extends ItemTagsProvider {
         tag(Tags.Items.FOODS_SOUP).add(ROOT_STEW.get());
         tag(Tags.Items.FOODS_VEGETABLE).add(NITRA_BULB.get());
 
-        tag(Tags.Items.INGOTS_IRON).add(OLVITE.get());
-
         tag(ItemTags.ARROWS).add(LEVITA_ARROW.get());
         tag(ItemTags.AXES).add(SURTRUM_AXE.get(), GLAZED_GOLD_AXE.get(), OLVITE_AXE.get());
         tag(ItemTags.CHEST_ARMOR).add(GLAZED_GOLD_CHESTPLATE.get(), OLVITE_CHESTPLATE.get(), SURTRUM_CHESTPLATE.get());
