@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.id.paradise_lost.clienttest.tests.BoatTests;
 import net.id.paradise_lost.clienttest.tests.FoodTests;
 import net.id.paradise_lost.clienttest.tests.NitraTests;
+import net.id.paradise_lost.clienttest.tests.PotTests;
 import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +63,7 @@ public class ClientTestRunner implements ClientModInitializer {
         tests.addAll(FoodTests.all());
         tests.addAll(BoatTests.all());
         tests.addAll(NitraTests.all());
+        tests.addAll(PotTests.all());
         String group = System.getenv("RUN_ONLY");
         if (group != null) tests.removeIf(test -> !test.group().equalsIgnoreCase(group));
         testCount = tests.size();

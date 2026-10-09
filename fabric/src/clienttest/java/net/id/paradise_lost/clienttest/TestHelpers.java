@@ -61,6 +61,10 @@ public final class TestHelpers {
         if (!condition) throw new AssertionError(message);
     }
 
+    public static void expect(List<String> wrong, boolean ok, String what) {
+        if (!ok) wrong.add(what);
+    }
+
     public static void checkAll(List<String> wrong) {
         check(wrong.isEmpty(), String.join("; ", wrong));
     }
