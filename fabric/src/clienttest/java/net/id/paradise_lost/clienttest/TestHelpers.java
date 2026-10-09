@@ -77,6 +77,10 @@ public final class TestHelpers {
         client().gameMode.useItemOn(client().player, InteractionHand.MAIN_HAND, topOf(pos));
     }
 
+    public static void hold(ServerPlayer player, Item item, int count) {
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item, count));
+    }
+
     public static void hold(ServerPlayer player, Item item) {
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item));
     }
