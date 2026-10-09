@@ -71,9 +71,14 @@ final class TestWorld {
         client().player.getInventory().selected = 0;
         if (client().screen != null) client().player.closeContainer();
         onServer(server -> {
+            server.setDifficulty(Difficulty.PEACEFUL, true);
+            server.getGameRules().getRule(ParadiseLostGameRules.PARADISE_VOID_KILLS).set(false, server);
+            server.getGameRules().getRule(ParadiseLostGameRules.PARADISE_PORTAL_ENABLED).set(true, server);
             ServerPlayer player = player(server);
             player.stopRiding();
             player.setGameMode(GameType.SURVIVAL);
+            player.removeAllEffects();
+            player.clearFire();
             player.setHealth(player.getMaxHealth());
             player.getFoodData().setFoodLevel(20);
             player.getInventory().clearContent();
