@@ -40,7 +40,7 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
 
         for (Item item : BuiltInRegistries.ITEM) {
             var key = BuiltInRegistries.ITEM.getKey(item);
-            if (key == null || !ModConstants.MODID.equals(key.getNamespace())) {
+            if (!ModConstants.MODID.equals(key.getNamespace())) {
                 continue;
             }
             if (item instanceof BlockItem || item instanceof SignItem || item instanceof SpawnEggItem) {
@@ -104,6 +104,15 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
                 .override()
                 .predicate(modLoc("charged"), 1)
                 .model(getExistingFile(modLoc("item/xp_circlet_charged")))
+                .end();
+
+        withExistingParent("floaty_leggings_broken", mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/floaty_leggings_broken"));
+        withExistingParent("floaty_leggings", mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/floaty_leggings"))
+                .override()
+                .predicate(modLoc("broken"), 1)
+                .model(getExistingFile(modLoc("item/floaty_leggings_broken")))
                 .end();
 
         withExistingParent("soul_blade_damaged", mcLoc("item/handheld"))

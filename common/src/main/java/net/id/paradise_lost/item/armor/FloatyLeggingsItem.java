@@ -22,8 +22,6 @@ public class FloatyLeggingsItem extends ArmorItem {
     public static final int JUMP_TOGGLE_TICKS = 7;
     private static final double DESCEND_SPEED = -0.15D;
     private static final double HORIZONTAL_FRICTION = 0.6D * 0.91D;
-    private static final double SLOW_FALL_TERMINAL = -0.05D;
-    private static final double SLOW_FALL_GRAVITY_CORRECTION = 0.07D;
 
     public FloatyLeggingsItem(Holder<ArmorMaterial> material, Properties settings) {
         super(material, Type.LEGGINGS, settings);
@@ -33,12 +31,25 @@ public class FloatyLeggingsItem extends ArmorItem {
         return entity.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof FloatyLeggingsItem;
     }
 
+    public static boolean isFloatyEnabled(ItemStack stack) {
+        return !isBroken(stack);
+    }
+
+    public static boolean isBroken(ItemStack stack) {
+        return stack.isDamageableItem() && stack.getDamageValue() >= stack.getMaxDamage() - 1;
+    }
+
+    public static int getDefensePoints(FloatyLeggingsItem item) {
+        return item.getMaterial().value().getDefense(item.getType());
+    }
+
     public static boolean isSurvivalLike(Player player) {
         return !player.isCreative() && !player.isSpectator();
     }
 
     public static boolean canUseFloaty(Player player) {
         return isWearing(player)
+                && isFloatyEnabled(player.getItemBySlot(EquipmentSlot.LEGS))
                 && !player.isPassenger()
                 && !player.getAbilities().flying
                 && !player.isFallFlying();
@@ -80,20 +91,6 @@ public class FloatyLeggingsItem extends ArmorItem {
             player.resetFallDistance();
         }
         PacketHandler.sendToServer(new FloatyAnchorC2SPacket(next));
-    }
-
-    public static void applyPassiveSlowFall(Player player) {
-        Vec3 motion = player.getDeltaMovement();
-        if (motion.y < 0.0D) {
-            double y = motion.y + SLOW_FALL_GRAVITY_CORRECTION;
-            if (y > 0.0D) {
-                y = 0.0D;
-            } else if (y < SLOW_FALL_TERMINAL) {
-                y = SLOW_FALL_TERMINAL;
-            }
-            player.setDeltaMovement(motion.x, y, motion.z);
-        }
-        player.resetFallDistance();
     }
 
     public static void beginAnchoredHover(Player player) {

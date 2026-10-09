@@ -6,6 +6,7 @@ import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.item.armor.FloatyBootsItem;
+import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
 import net.id.paradise_lost.item.armor.XpCircletItem;
 import net.id.paradise_lost.tag.ParadiseLostItemTags;
 import net.id.paradise_lost.util.MiscUtil;
@@ -13,6 +14,8 @@ import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.id.paradise_lost.util.ParadiseLostVoidEscape;
 import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
 import net.minecraft.core.Holder;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.CombatRules;
@@ -41,6 +44,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
@@ -112,6 +116,18 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     @Override
     public boolean dampensVibrations() {
         return FloatyBootsItem.isWearing((LivingEntity) (Object) this) || super.dampensVibrations();
+    }
+
+    @ModifyReturnValue(method = "getAttributeValue", at = @At("RETURN"))
+    private double paradiseLost$brokenFloatyLeggingsNoArmor(double original, Holder<Attribute> attribute) {
+        if (!attribute.is(Attributes.ARMOR)) {
+            return original;
+        }
+        ItemStack legs = ((LivingEntity) (Object) this).getItemBySlot(EquipmentSlot.LEGS);
+        if (legs.getItem() instanceof FloatyLeggingsItem leggings && FloatyLeggingsItem.isBroken(legs)) {
+            return Math.max(0.0D, original - FloatyLeggingsItem.getDefensePoints(leggings));
+        }
+        return original;
     }
 
     @ModifyVariable(method = "calculateFallDamage", at = @At("HEAD"), argsOnly = true, ordinal = 0)
