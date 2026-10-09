@@ -1,6 +1,5 @@
 package net.id.paradise_lost.world.feature.placed_features;
 
-import net.id.paradise_lost.world.feature.configured_features.ParadiseLostTreeConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;

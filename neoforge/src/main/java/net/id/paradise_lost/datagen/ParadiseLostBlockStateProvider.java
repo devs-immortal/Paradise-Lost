@@ -2,7 +2,6 @@ package net.id.paradise_lost.datagen;
 
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.block.ParadiseLostPortalBlock;
-import net.id.paradise_lost.block.decorative.SixFacingBlock;
 import net.id.paradise_lost.block.mechanical.FoodBowlBlock;
 import net.id.paradise_lost.block.mechanical.FourBiteCakeBlock;
 import net.id.paradise_lost.block.mechanical.LevitaRailBlock;
@@ -794,7 +793,9 @@ public class ParadiseLostBlockStateProvider extends BlockStateProvider {
         }, BlockStateProperties.WATERLOGGED);
     }
 
-    private enum RailGeometry {FLAT, RAISED_NE, RAISED_SW}
+    private enum RailGeometry {
+        FLAT, RAISED_NE, RAISED_SW
+    }
 
     private static int powerIndex(boolean triggered, boolean powered) {
         return (triggered ? 2 : 0) + (powered ? 1 : 0);

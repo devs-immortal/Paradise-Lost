@@ -193,5 +193,6 @@ public final class EntityRegistry {
     public record AttributeRegistration(
             Supplier<? extends EntityType<? extends LivingEntity>> type,
             Supplier<AttributeSupplier.Builder> builder
-    ) {}
+    ) {
+    }
 }

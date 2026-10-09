@@ -3,7 +3,6 @@ package net.id.paradise_lost.datagen;
 import net.id.paradise_lost.item.ParadiseLostBoatItem;
 
 import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -15,8 +14,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SignItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
-import net.minecraft.client.renderer.block.model.BlockModel;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 

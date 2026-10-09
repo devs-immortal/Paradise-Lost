@@ -38,7 +38,7 @@ public class LevitaSparkleParticle extends TextureSheetParticle {
         if (this.age++ >= this.lifetime) {
             this.remove();
         } else {
-            this.yd = this.yd - (double)this.gravity;
+            this.yd = this.yd - (double) this.gravity;
             this.roll += polarity;
             this.move(this.xd, this.yd, this.zd);
             this.setSpriteFromAge(this.sprites);
@@ -58,8 +58,8 @@ public class LevitaSparkleParticle extends TextureSheetParticle {
     public record DefaultFactory(SpriteSet spriteProvider) implements ParticleProvider<SimpleParticleType> {
 
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i) {
-                return new LevitaSparkleParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-            }
+            return new LevitaSparkleParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
+    }
 
 }

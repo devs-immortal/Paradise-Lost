@@ -15,7 +15,7 @@ public class PreviewSlot extends Slot {
         this.image = image;
     }
 
-        @Override
+    @Override
     public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
         return Pair.of(BLOCK_ATLAS, image);
     }

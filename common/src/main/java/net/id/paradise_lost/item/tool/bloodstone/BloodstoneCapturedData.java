@@ -83,7 +83,7 @@ public class BloodstoneCapturedData {
         };
     }
 
-    public static record ConditionData(String id, float severity) {
+    public record ConditionData(String id, float severity) {
         public static ConditionData fromNBT(CompoundTag nbt) {
             return new ConditionData(nbt.getString("id"), nbt.getFloat("severity"));
         }

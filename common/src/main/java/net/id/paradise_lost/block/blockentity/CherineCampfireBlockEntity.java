@@ -53,7 +53,7 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
             if (!itemStack.isEmpty()) {
                 bl = true;
                 ++campfire.cookingTimes[i];
-                if (campfire.cookingTimes[i] >=campfire.cookingTotalTimes[i]) {
+                if (campfire.cookingTimes[i] >= campfire.cookingTotalTimes[i]) {
                     SingleRecipeInput singleStackRecipeInput = new SingleRecipeInput(itemStack);
                     ItemStack itemStack2 = campfire.matchGetter.getRecipeFor(singleStackRecipeInput, world).map((recipe) -> {
                         return (recipe.value()).assemble(singleStackRecipeInput, world.registryAccess());

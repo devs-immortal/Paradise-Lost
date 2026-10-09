@@ -1,7 +1,6 @@
 package net.id.paradise_lost.datagen;
 
 import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.id.paradise_lost.world.dimension.ParadiseLostBiomes;
 import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
 import net.id.paradise_lost.world.dimension.ParadiseLostLevelStem;
@@ -23,8 +22,6 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.damagesource.DamageScaling;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 

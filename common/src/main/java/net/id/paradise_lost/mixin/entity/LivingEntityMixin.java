@@ -10,7 +10,6 @@ import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
 import net.id.paradise_lost.item.armor.XpCircletItem;
 import net.id.paradise_lost.tag.ParadiseLostItemTags;
 import net.id.paradise_lost.util.MiscUtil;
-import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.id.paradise_lost.util.ParadiseLostVoidEscape;
 import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
 import net.minecraft.core.Holder;
