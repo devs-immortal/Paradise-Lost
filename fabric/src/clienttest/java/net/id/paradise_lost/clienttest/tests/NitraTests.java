@@ -35,7 +35,6 @@ public final class NitraTests {
         return List.of(
                 nitraArrow(),
                 nitraFlint(),
-                nitraRedstone(),
                 nitraChain(),
                 nitraExplodesOnce(),
                 nitraBreaksBlocks(),
@@ -78,22 +77,8 @@ public final class NitraTests {
         );
     }
 
-    private static Test nitraRedstone() {
-        return new Test(GROUP, "redstone explodes for the client",
-                Step.run(0, () -> onServer(server -> {
-                    ServerPlayer player = player(server);
-                    ServerLevel world = player.serverLevel();
-                    pos = ahead(player, 10, 0);
-                    world.setBlockAndUpdate(pos, BlockRegistry.NITRA_BUNCH.get().defaultBlockState());
-                    world.setBlockAndUpdate(pos.above(), Blocks.REDSTONE_BLOCK.defaultBlockState());
-                })),
-                Step.until("nitra to be set off", 20, () -> nitraGone(pos)),
-                Step.until("explosion on the client", 20, () -> Recorder.explosionsNear(pos, 3) >= 1)
-        );
-    }
-
     private static Test nitraChain() {
-        return new Test(GROUP, "chain reaction explodes each bunch for the client",
+        return new Test(GROUP, "chain reaction explodes each bunch and drops no nitra",
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -113,12 +98,16 @@ public final class NitraTests {
                 })),
                 Step.until("3 explosions on the client", 20, () -> fromServer(server ->
                         Recorder.explosionsNear(pos.relative(player(server).getDirection().getClockWise()), 4) >= 3)),
-                explosionCount(3, () -> fromServer(server -> pos.relative(player(server).getDirection().getClockWise())), 4)
+                explosionCount(3, () -> fromServer(server -> pos.relative(player(server).getDirection().getClockWise())), 4),
+                Step.run(0, () -> onServer(server -> {
+                    Map<Item, Integer> dropped = drops(world(server), pos, 5);
+                    check(!dropped.containsKey(BlockRegistry.NITRA_BUNCH.get().asItem()), "exploded nitra dropped itself: " + describe(dropped));
+                }))
         );
     }
 
     private static Test nitraExplodesOnce() {
-        return new Test(GROUP, "one bunch makes one explosion",
+        return new Test(GROUP, "redstone makes one explosion at the bunch's center",
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -127,7 +116,8 @@ public final class NitraTests {
                     world.setBlockAndUpdate(pos.above(), Blocks.REDSTONE_BLOCK.defaultBlockState());
                 })),
                 Step.until("nitra to be set off", 20, () -> nitraGone(pos)),
-                explosionCount(1, () -> pos, 3)
+                explosionCount(1, () -> pos, 3),
+                Step.run(0, () -> check(Recorder.explosionsNear(pos, 0.1) == 1, "explosion is not at the center of the bunch: " + Recorder.explosions))
         );
     }
 
@@ -148,7 +138,6 @@ public final class NitraTests {
                     check(!world.getBlockState(sand).is(Blocks.SAND), "sand next to the nitra was not destroyed");
                     Map<Item, Integer> dropped = drops(world, pos, 5);
                     check(dropped.containsKey(Items.SAND), "explosion dropped " + describe(dropped) + " no sand");
-                    check(!dropped.containsKey(BlockRegistry.NITRA_BUNCH.get().asItem()), "nitra dropped itself: " + describe(dropped));
                 }))
         );
     }
