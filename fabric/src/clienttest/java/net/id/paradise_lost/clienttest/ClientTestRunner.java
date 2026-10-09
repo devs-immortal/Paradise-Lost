@@ -88,7 +88,7 @@ public class ClientTestRunner implements ClientModInitializer {
         setTitle("[" + (testIndex + 1) + "/" + testCount + "] " + test.fullName());
         try {
             TestWorld.resetPlayer(testIndex++);
-        } catch (Exception t) {
+        } catch (Throwable t) {
             fail(t);
             return;
         }
@@ -110,7 +110,7 @@ public class ClientTestRunner implements ClientModInitializer {
                 return;
             }
             checkNoNewLogErrors();
-        } catch (Exception t) {
+        } catch (Throwable t) {
             fail(t);
             return;
         }
@@ -137,7 +137,11 @@ public class ClientTestRunner implements ClientModInitializer {
     private void fail(Throwable t) {
         Throwable cause = t instanceof CompletionException && t.getCause() != null ? t.getCause() : t;
         String name = running.test.fullName();
-        LOG.error("FAIL {}: {} {}", name, cause.getMessage(), cause instanceof AssertionError ? null : cause);
+        if (cause instanceof AssertionError) {
+            LOG.error("FAIL {}: {}", name, cause.getMessage());
+        } else {
+            LOG.error("FAIL {}: {}", name, cause.getMessage(), cause);
+        }
         failures.add(name + ": " + cause.getMessage());
         running = null;
     }
