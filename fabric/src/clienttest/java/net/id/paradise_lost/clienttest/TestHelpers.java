@@ -17,6 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -28,6 +30,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public final class TestHelpers {
+    private static final Logger LOG = LoggerFactory.getLogger("ClientTest");
+
     private TestHelpers() {
     }
 

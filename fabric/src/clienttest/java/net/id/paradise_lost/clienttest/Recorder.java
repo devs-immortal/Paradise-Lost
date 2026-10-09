@@ -1,5 +1,7 @@
 package net.id.paradise_lost.clienttest;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Appender;
@@ -16,8 +18,10 @@ import java.util.stream.Stream;
 
 // counts events that tests check
 public final class Recorder {
+    public static final List<Vec3> explosions = new CopyOnWriteArrayList<>();
     public static final AtomicInteger sips = new AtomicInteger();
     public static final AtomicInteger finalSips = new AtomicInteger();
+    public static final List<String> levelEvents = new CopyOnWriteArrayList<>();
 
     static final List<String> logErrors = new CopyOnWriteArrayList<>();
     static final List<String> logWarnings = new CopyOnWriteArrayList<>();
@@ -53,5 +57,12 @@ public final class Recorder {
 
     static void reset() {
         Stream.of(sips, finalSips).forEach(counter -> counter.set(0));
+        explosions.clear();
+        levelEvents.clear();
+    }
+
+    public static long explosionsNear(BlockPos pos, double radius) {
+        Vec3 center = Vec3.atCenterOf(pos);
+        return explosions.stream().filter(e -> e.closerThan(center, radius)).count();
     }
 }
