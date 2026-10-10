@@ -1,5 +1,12 @@
 package net.id.paradise_lost.clienttest.tests;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
+import com.mojang.serialization.JsonOps;
+import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradise_lost.block.blockentity.ParadiseHangingSignBlockEntity;
 import net.id.paradise_lost.clienttest.Step;
 import net.id.paradise_lost.clienttest.Test;
@@ -19,8 +26,10 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SignBlock;
@@ -31,9 +40,11 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -56,7 +67,8 @@ public final class RegistryTests {
                 langEntries(),
                 sounds(),
                 particles(),
-                lootTables()
+                lootTables(),
+                recipeFormat()
         );
     }
 
@@ -209,5 +221,64 @@ public final class RegistryTests {
             });
             check(wrong.isEmpty(), "missing loot tables " + wrong);
         })));
+    }
+
+    private static Test recipeFormat() {
+        return new Test(GROUP, "every recipe file decodes", Step.run(0, () -> onServer(server -> {
+            var ops = server.registryAccess().createSerializationContext(JsonOps.INSTANCE);
+            List<String> wrong = new ArrayList<>();
+            Map<ResourceLocation, Resource> files = server.getResourceManager().listResources("recipe", path -> path.getPath().endsWith(".json"));
+            int checked = 0;
+
+            for (var file : files.entrySet()) {
+                if (!file.getValue().sourcePackId().contains(MOD))
+                    continue;
+
+                JsonObject json;
+                try (Reader reader = file.getValue().openAsReader()) {
+                    json = JsonParser.parseReader(reader).getAsJsonObject();
+                } catch (Exception e) {
+                    wrong.add(file.getKey() + ": " + e);
+                    continue;
+                }
+
+                if (!loaded(json.get("type").getAsString()))
+                    continue;
+
+                json.remove("fabric:load_conditions");
+                json.remove("neoforge:conditions");
+                checked++;
+
+                var result = Recipe.CODEC.parse(ops, withoutMissingMods(json));
+                result.error().ifPresent(error -> wrong.add(file.getKey() + ": " + error.message()));
+            }
+            check(checked > 0, "found no recipe files from the mod");
+            checkAll(wrong);
+        })));
+    }
+
+    private static boolean loaded(String id) {
+        String namespace = ResourceLocation.parse(id.startsWith("#") ? id.substring(1) : id).getNamespace();
+        return namespace.equals("minecraft") || namespace.equals("c") || FabricLoader.getInstance().isModLoaded(namespace);
+    }
+
+    private static JsonElement withoutMissingMods(JsonElement json) {
+        if (json instanceof JsonObject object) {
+            JsonObject copy = new JsonObject();
+            object.entrySet().forEach(e -> copy.add(e.getKey(), withoutMissingMods(e.getValue())));
+            return copy;
+        }
+        if (json instanceof JsonArray array) {
+            JsonArray copy = new JsonArray();
+            array.forEach(e -> copy.add(withoutMissingMods(e)));
+            return copy;
+        }
+        if (json instanceof JsonPrimitive primitive && primitive.isString()) {
+            String value = primitive.getAsString();
+            if (value.matches("#?[a-z0-9_.-]+:[a-z0-9_./-]+") && !loaded(value)) {
+                return new JsonPrimitive(value.startsWith("#") ? "#minecraft:planks" : "minecraft:stone");
+            }
+        }
+        return json;
     }
 }
