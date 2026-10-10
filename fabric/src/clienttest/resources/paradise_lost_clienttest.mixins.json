@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "ClientPacketListenerMixin",
+    "HangingSignEditScreenAccessor",
     "LevelRendererMixin",
     "LivingEntityMixin",
     "MinecraftMixin"

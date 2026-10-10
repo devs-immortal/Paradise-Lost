@@ -8,6 +8,7 @@ import net.id.paradise_lost.clienttest.tests.FoodTests;
 import net.id.paradise_lost.clienttest.tests.LevitaTests;
 import net.id.paradise_lost.clienttest.tests.NitraTests;
 import net.id.paradise_lost.clienttest.tests.PotTests;
+import net.id.paradise_lost.clienttest.tests.RegistryTests;
 import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +69,7 @@ public class ClientTestRunner implements ClientModInitializer {
         tests.addAll(FoodBowlTests.all());
         tests.addAll(LevitaTests.all());
         tests.addAll(PotTests.all());
+        tests.addAll(RegistryTests.all());
         String group = System.getenv("RUN_ONLY");
         if (group != null) tests.removeIf(test -> !test.group().equalsIgnoreCase(group));
         testCount = tests.size();
