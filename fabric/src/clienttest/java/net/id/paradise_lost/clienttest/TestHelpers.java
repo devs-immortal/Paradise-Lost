@@ -10,6 +10,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -83,6 +86,12 @@ public final class TestHelpers {
 
     public static void hold(ServerPlayer player, Item item) {
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item));
+    }
+
+    public static int spawnNoAi(ServerPlayer player, EntityType<? extends Mob> type, BlockPos at) {
+        Mob mob = type.spawn(player.serverLevel(), at, MobSpawnType.COMMAND);
+        mob.setNoAi(true);
+        return mob.getId();
     }
 
     public static BlockPos ahead(ServerPlayer player, int distance, int side) {
