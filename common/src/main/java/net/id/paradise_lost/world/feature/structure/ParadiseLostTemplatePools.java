@@ -290,9 +290,10 @@ public final class ParadiseLostTemplatePools {
         context.register(PALACE_EXTRAS_SIDE_3_DECORATIONS, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/extras/side_3_deco_1", emptyProcessors), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/extras/side_3_deco_1", emptyProcessors), 2),
                 Pair.of(StructurePoolElement.single("paradise_lost:palace/extras/side_3_deco_2", emptyProcessors), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/extras/side_3_deco_3", emptyProcessors), 2)
+                        Pair.of(StructurePoolElement.single("paradise_lost:palace/extras/side_3_deco_3", emptyProcessors), 2),
+                        Pair.of(StructurePoolElement.single("paradise_lost:palace/extras/side_3_deco_4", emptyProcessors), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(PALACE_EXTRAS_SPIRE, new StructureTemplatePool(

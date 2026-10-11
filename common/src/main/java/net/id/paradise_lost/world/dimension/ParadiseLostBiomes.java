@@ -14,6 +14,7 @@ import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -65,6 +66,8 @@ public final class ParadiseLostBiomes {
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityRegistry.MOA.get(), 6, 2, 4))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityRegistry.ENVOY.get(), 50, 2, 3))
                         .addMobCharge(EntityRegistry.ENVOY.get(), 0.7d, 0.2d)
+                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.BREEZE, 5, 1, 2))
+                        .addMobCharge(EntityType.BREEZE, 1.0d, 0.1d)
                         .build())
                 .generationSettings(baseGen(placedFeatures, carvers)
                         .addFeature(GenerationStep.Decoration.LAKES, ParadiseLostMiscPlacedFeatures.TUNDRA_PONDS)
@@ -95,6 +98,8 @@ public final class ParadiseLostBiomes {
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityRegistry.POPOM.get(), 4, 2, 3))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityRegistry.ENVOY.get(), 50, 2, 3))
                         .addMobCharge(EntityRegistry.ENVOY.get(), 0.7d, 0.2d)
+                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.BREEZE, 5, 1, 2))
+                        .addMobCharge(EntityType.BREEZE, 1.0d, 0.1d)
                         .build())
                 .generationSettings(baseGen(placedFeatures, carvers)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostVegetationPlacedFeatures.NATURAL_SWEDROOT)
@@ -121,6 +126,8 @@ public final class ParadiseLostBiomes {
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityRegistry.MOA.get(), 6, 2, 4))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityRegistry.ENVOY.get(), 50, 2, 3))
                         .addMobCharge(EntityRegistry.ENVOY.get(), 0.7d, 0.2d)
+                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.BREEZE, 5, 1, 2))
+                        .addMobCharge(EntityType.BREEZE, 1.0d, 0.1d)
                         .build())
                 .generationSettings(baseGen(placedFeatures, carvers)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ParadiseLostMiscPlacedFeatures.PLAINS_BOULDER)
@@ -153,6 +160,8 @@ public final class ParadiseLostBiomes {
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityRegistry.POPOM.get(), 4, 2, 3))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityRegistry.ENVOY.get(), 50, 2, 3))
                         .addMobCharge(EntityRegistry.ENVOY.get(), 0.7d, 0.2d)
+                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.BREEZE, 5, 1, 2))
+                        .addMobCharge(EntityType.BREEZE, 1.0d, 0.1d)
                         .build())
                 .generationSettings(baseGen(placedFeatures, carvers)
                         .addFeature(GenerationStep.Decoration.LAKES, ParadiseLostMiscPlacedFeatures.PLAINS_BOULDER)
@@ -183,6 +192,8 @@ public final class ParadiseLostBiomes {
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityRegistry.POPOM.get(), 6, 1, 3))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityRegistry.ENVOY.get(), 50, 2, 3))
                         .addMobCharge(EntityRegistry.ENVOY.get(), 0.7d, 0.2d)
+                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.BREEZE, 5, 1, 2))
+                        .addMobCharge(EntityType.BREEZE, 1.0d, 0.1d)
                         .build())
                 .generationSettings(baseGen(placedFeatures, carvers)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ParadiseLostVegetationPlacedFeatures.NATURAL_SWEDROOT)
