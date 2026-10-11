@@ -90,10 +90,9 @@ public class ParadiseLostPortalForcer {
                 for (int y = surfaceY; y >= this.level.getMinBuildHeight(); --y) {
                     cursor.setY(y);
                     if (this.level.isEmptyBlock(cursor)) {
-                        int emptyBottom;
-                        for (emptyBottom = y;
-                             y > this.level.getMinBuildHeight() && this.level.isEmptyBlock(cursor.move(Direction.DOWN));
-                             --y) {
+                        int emptyBottom = y;
+                        while (y > this.level.getMinBuildHeight() && this.level.isEmptyBlock(cursor.move(Direction.DOWN))) {
+                            --y;
                         }
 
                         if (y + 4 <= maxY) {

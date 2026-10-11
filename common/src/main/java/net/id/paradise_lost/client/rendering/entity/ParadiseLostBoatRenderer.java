@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Axis;
-import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.entity.vehicle.ParadiseLostBoatEntity;
 import net.id.paradise_lost.entity.vehicle.ParadiseLostBoatType;
 import net.id.paradise_lost.entity.vehicle.ParadiseLostChestBoatEntity;

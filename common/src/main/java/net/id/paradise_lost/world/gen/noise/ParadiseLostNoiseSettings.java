@@ -1,12 +1,10 @@
 package net.id.paradise_lost.world.gen.noise;
 
 import net.id.paradise_lost.registry.BlockRegistry;
-import net.id.paradise_lost.world.dimension.ParadiseLostBiomes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SnowyDirtBlock;

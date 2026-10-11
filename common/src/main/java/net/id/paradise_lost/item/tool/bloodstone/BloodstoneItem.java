@@ -21,10 +21,10 @@ public abstract class BloodstoneItem extends Item {
         super(settings);
     }
 
-        protected abstract List<Component> getDefaultText();
+    protected abstract List<Component> getDefaultText();
 
     @Override
-        public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         tooltip.addAll(getDefaultText());
         super.appendHoverText(stack, context, tooltip, type);
     }

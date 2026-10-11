@@ -24,7 +24,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.Portal;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
@@ -292,11 +291,15 @@ public class ParadiseLostPortalBlock extends Block implements Portal {
     @Override
     protected BlockState rotate(BlockState state, Rotation rotation) {
         return switch (rotation) {
-            case COUNTERCLOCKWISE_90, CLOCKWISE_90 -> switch (state.getValue(AXIS)) {
-                case Z -> state.setValue(AXIS, Direction.Axis.X);
-                case X -> state.setValue(AXIS, Direction.Axis.Z);
-                default -> state;
-            };
+            case COUNTERCLOCKWISE_90, CLOCKWISE_90 -> swapHorizontalAxis(state);
+            default -> state;
+        };
+    }
+
+    private static BlockState swapHorizontalAxis(BlockState state) {
+        return switch (state.getValue(AXIS)) {
+            case Z -> state.setValue(AXIS, Direction.Axis.X);
+            case X -> state.setValue(AXIS, Direction.Axis.Z);
             default -> state;
         };
     }

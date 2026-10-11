@@ -78,9 +78,9 @@ public class ParadiseLostPortalShape {
 
     @Nullable
     private BlockPos calculateBottomLeft(BlockPos pos) {
-        for (int i = Math.max(this.level.getMinBuildHeight(), pos.getY() - 21);
-             pos.getY() > i && isEmpty(this.level.getBlockState(pos.below()));
-             pos = pos.below()) {
+        int minY = Math.max(this.level.getMinBuildHeight(), pos.getY() - 21);
+        while (pos.getY() > minY && isEmpty(this.level.getBlockState(pos.below()))) {
+            pos = pos.below();
         }
         Direction direction = this.rightDir.getOpposite();
         int j = this.getDistanceUntilEdgeAboveFrame(pos, direction) - 1;
