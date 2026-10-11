@@ -1,0 +1,74 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "paradise_lost:totem_of_levitation",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "paradise_lost:levita_gem",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "paradise_lost:root_stew",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "paradise_lost:moa_genes": {
+                  "affinity": "GLIDING_DECAY",
+                  "attributes": {
+                    "drop_multiplier": 1.0,
+                    "gliding_decay": 0.75,
+                    "gliding_speed": 0.2,
+                    "ground_speed": 0.5,
+                    "jump_strength": 0.185,
+                    "max_health": 25.0
+                  },
+                  "hunger": 100.0,
+                  "race": "paradise_lost:greenseed"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "paradise_lost:moa_egg",
+          "weight": 7
+        }
+      ],
+      "rolls": 2.0
+    }
+  ],
+  "random_sequence": "paradise_lost:spawners/birdcage_ominous"
+}

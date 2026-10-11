@@ -61,6 +61,27 @@
           "type": "minecraft:item",
           "name": "paradise_lost:levita_gem",
           "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "decoration": "paradise_lost:palace",
+              "destination": "paradise_lost:palace",
+              "function": "minecraft:exploration_map",
+              "skip_existing_chunks": false,
+              "zoom": 1
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "translate": "filled_map.paradise_lost.palace"
+              },
+              "target": "item_name"
+            }
+          ],
+          "name": "minecraft:map",
+          "weight": 7
         }
       ],
       "rolls": 1.0
