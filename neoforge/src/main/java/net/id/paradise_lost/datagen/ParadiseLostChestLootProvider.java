@@ -338,13 +338,13 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(ItemRegistry.ROOT_STEW.get(), 2).apply(count(1, 3)))
                         .add(LootItem.lootTableItem(ItemRegistry.MOA_EGG.get())
                                 .apply(SetComponentsFunction.setComponent(ParadiseLostDataComponentTypes.MOA_GENES, new ParadiseLostDataComponentTypes.MoaGeneComponent(
-                                        MoaRaceRegistry.GREENSEED.location(),
+                                        MoaRaceRegistry.CHARNELA.location(),
                                         MoaAttributes.GLIDING_DECAY.toString(),
                                         true,
                                         100,
                                         UUID.fromString("00000000-0000-0000-0000-000000000000"),
                                         new ParadiseLostDataComponentTypes.MoaAttributeComponent(0.5F, 0.2F, 0.75F, 0.185F, 1, 25)
-                                ))).setWeight(7))));
+                                ))).setWeight(4))));
     }
 
     private static LootPool.Builder floatyLeggingsPool() {

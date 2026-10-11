@@ -57,14 +57,14 @@
                     "max_health": 25.0
                   },
                   "hunger": 100.0,
-                  "race": "paradise_lost:greenseed"
+                  "race": "paradise_lost:charnela"
                 }
               },
               "function": "minecraft:set_components"
             }
           ],
           "name": "paradise_lost:moa_egg",
-          "weight": 7
+          "weight": 4
         }
       ],
       "rolls": 2.0
