@@ -16,6 +16,7 @@ public class ParadiseLostStructureTags {
     public static final TagKey<Biome> BIRDCAGE_HAS_STRUCTURE = biome("has_structure/birdcage");
 
     public static final TagKey<Structure> VAULT = structure("vault");
+    public static final TagKey<Structure> PALACE = structure("palace");
 
     private static TagKey<Biome> biome(String id) {
         return TagKey.create(Registries.BIOME, ModConstants.id(id));

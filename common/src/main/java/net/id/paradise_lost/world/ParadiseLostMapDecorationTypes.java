@@ -20,6 +20,10 @@ public class ParadiseLostMapDecorationTypes {
             "vault", "vault", true, MapColor.TERRACOTTA_ORANGE.col, false, true
     );
 
+    public static final Holder<MapDecorationType> PALACE = register(
+            "palace", "palace", true, MapColor.COLOR_CYAN.col, false, true
+    );
+
     private static Holder<MapDecorationType> register(
             String id, String assetId, boolean showOnItemFrame, int mapColor, boolean trackCount, boolean explorationMapElement
     ) {
