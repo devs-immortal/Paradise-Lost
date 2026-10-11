@@ -22,6 +22,22 @@
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "paradise_lost:levita_shard",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
           "name": "paradise_lost:levitator",
           "weight": 3
         },
@@ -35,7 +51,7 @@
           "weight": 6
         }
       ],
-      "rolls": 1.0
+      "rolls": 2.0
     }
   ],
   "random_sequence": "paradise_lost:spawners/levitation_resources"

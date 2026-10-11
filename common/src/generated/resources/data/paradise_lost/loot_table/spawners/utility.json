@@ -70,6 +70,19 @@
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:ominous_bottle_amplifier": 0
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:ominous_bottle",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
           "name": "paradise_lost:flaxweave_cushion"
         },
         {
