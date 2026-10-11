@@ -9,7 +9,6 @@ import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.id.paradise_lost.util.ParadiseLostEnchantments;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
