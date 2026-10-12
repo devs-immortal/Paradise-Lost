@@ -20,7 +20,8 @@ public record FoodBowlCtrlC2SPacket(boolean dumpStack) implements C2SModPacket<R
 
     private static final Map<UUID, Pending> PENDING_DUMP = new ConcurrentHashMap<>();
 
-    private record Pending(boolean dumpStack, long gameTime) {}
+    private record Pending(boolean dumpStack, long gameTime) {
+    }
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
