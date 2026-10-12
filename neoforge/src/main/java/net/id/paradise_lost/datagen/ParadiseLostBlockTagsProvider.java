@@ -255,6 +255,12 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
                 .addTag(BlockTags.LEAVES)
                 .addTag(ParadiseLostBlockTags.CLOUDS)
                 .add(METAMORPHIC_SHELL.get(), SURTRUM.get(), SURTRUM_AIR.get());
+        tag(ParadiseLostBlockTags.PORTAL_IGNORE)
+                .addTag(ParadiseLostBlockTags.CLOUDS)
+                .addTag(ParadiseLostBlockTags.HANGERS)
+                .addTag(BlockTags.LOGS)
+                .addTag(BlockTags.LEAVES)
+                .addTag(BlockTags.REPLACEABLE);
         tag(ParadiseLostBlockTags.WISTERIA_LOGS).add(
                 WISTERIA_WOODSTUFF.log().get(), WISTERIA_WOODSTUFF.wood().get(),
                 WISTERIA_WOODSTUFF.strippedLog().get(), WISTERIA_WOODSTUFF.strippedWood().get()

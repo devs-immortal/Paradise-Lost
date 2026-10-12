@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.border.WorldBorder;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.DimensionTransition;
 
@@ -28,7 +29,7 @@ import java.util.Optional;
 
 public class ParadiseLostPortalForcer {
 
-    public static final int PARADISE_MIN_PORTAL_Y = 90;
+    public static final int PARADISE_MIN_PORTAL_Y = 100;
     private static final int PARADISE_MAX_SURFACE_DROP = 24;
 
     public static final DimensionTransition.PostDimensionTransition PLAY_PORTAL_SOUND =
@@ -94,11 +95,13 @@ public class ParadiseLostPortalForcer {
                 : this.level.getMinBuildHeight();
 
         for (BlockPos.MutableBlockPos cursor : BlockPos.spiralAround(pos, 64, Direction.EAST, Direction.SOUTH)) {
+            boolean on_land = true;
             int surfaceY = paradise
                     ? this.findIslandSurfaceY(cursor.getX(), cursor.getZ(), maxY, minSearchY, scratch)
                     : Math.min(maxY, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, cursor.getX(), cursor.getZ()));
             if (surfaceY == Integer.MIN_VALUE) {
-                continue;
+                surfaceY = minSearchY;
+                on_land = false;
             }
             int searchFloor = paradise
                     ? Math.max(minSearchY, surfaceY - PARADISE_MAX_SURFACE_DROP)
@@ -109,33 +112,22 @@ public class ParadiseLostPortalForcer {
             if (worldBorder.isWithinBounds(cursor) && worldBorder.isWithinBounds(cursor.move(direction, 1))) {
                 cursor.move(direction.getOpposite(), 1);
 
-                for (int y = surfaceY; y >= searchFloor; --y) {
-                    cursor.setY(y);
-                    if (this.isOpenForPortal(cursor)) {
-                        int emptyBottom = y;
-                        while (y > searchFloor && this.isOpenForPortal(cursor.move(Direction.DOWN))) {
-                            --y;
-                        }
+                var y = surfaceY;
+                while (y > searchFloor && this.isPortalIgnore(this.level.getBlockState(new BlockPos(cursor.getX(), y, cursor.getZ())))) {
+                    --y;
+                }
 
-                        if (y + 4 <= maxY) {
-                            int airColumn = emptyBottom - y;
-                            if (airColumn <= 0 || airColumn >= 3) {
-                                cursor.setY(y);
-                                if (cursor.getY() >= minSearchY
-                                        && this.canHostFrame(cursor, scratch, direction, 0)) {
-                                    double dist = paradise ? horizontalDistSqr(pos, cursor) : pos.distSqr(cursor);
-                                    if (this.canHostFrame(cursor, scratch, direction, -1)
-                                            && this.canHostFrame(cursor, scratch, direction, 1)
-                                            && (bestDist == -1.0 || bestDist > dist)) {
-                                        bestDist = dist;
-                                        bestPos = cursor.immutable();
-                                    }
-                                    if (bestDist == -1.0 && (backupDist == -1.0 || backupDist > dist)) {
-                                        backupDist = dist;
-                                        backupPos = cursor.immutable();
-                                    }
-                                }
-                            }
+                if (y + 5 <= maxY) {
+                    cursor.setY(y + 1);
+                    if (cursor.getY() >= minSearchY) {
+                        double dist = paradise ? horizontalDistSqr(pos, cursor) : pos.distSqr(cursor);
+                        if ((bestDist == -1.0 || bestDist > dist) && on_land) {
+                            bestDist = dist;
+                            bestPos = cursor.immutable();
+                        }
+                        if (bestDist == -1.0 && (backupDist == -1.0 || backupDist > dist)) {
+                            backupDist = dist;
+                            backupPos = cursor.immutable();
                         }
                     }
                 }
@@ -196,23 +188,16 @@ public class ParadiseLostPortalForcer {
     }
 
     private int findIslandSurfaceY(int x, int z, int maxY, int minY, BlockPos.MutableBlockPos scratch) {
-        int y = Math.min(maxY, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z));
-        while (y >= minY && this.isOpenForPortal(scratch.set(x, y, z))) {
-            --y;
-        }
-        if (y < minY || !this.isIslandGround(this.level.getBlockState(scratch.set(x, y, z)))) {
+        this.level.getChunk(x >> 4, z >> 4, ChunkStatus.FULL, true);
+        int y = Math.min(maxY, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z) + 20);
+        if (y < minY) {
             return Integer.MIN_VALUE;
         }
         return Math.min(maxY, y + 1);
     }
 
-    private boolean isOpenForPortal(BlockPos pos) {
-        BlockState state = this.level.getBlockState(pos);
-        return this.level.isEmptyBlock(pos) || state.is(ParadiseLostBlockTags.CLOUDS);
-    }
-
-    private boolean isIslandGround(BlockState state) {
-        return !state.isAir() && !state.is(ParadiseLostBlockTags.CLOUDS) && !state.canBeReplaced();
+    private boolean isPortalIgnore(BlockState state) {
+        return state.isAir() && state.is(ParadiseLostBlockTags.PORTAL_IGNORE);
     }
 
     private static Direction.Axis plane(Direction.Axis axis) {
@@ -251,6 +236,9 @@ public class ParadiseLostPortalForcer {
                 if (!this.level.getBlockState(mutable).blocksMotion()) {
                     this.level.setBlock(mutable, frame, 3);
                 }
+                for (int h = 1; h < 4; ++h) {
+                    this.level.setBlock(mutable.above(h), Blocks.AIR.defaultBlockState(), 3);
+                }
             }
         }
 
@@ -263,27 +251,5 @@ public class ParadiseLostPortalForcer {
                 this.level.getPoiManager().add(mutable.immutable(), ParadiseLostPoi.BLUE_PORTAL.asHolder());
             }
         }
-    }
-
-    private boolean canHostFrame(BlockPos originalPos, BlockPos.MutableBlockPos offsetPos, Direction direction, int offsetScale) {
-        Direction clockWise = direction.getClockWise();
-        for (int i = -1; i < 3; ++i) {
-            for (int j = -1; j < 4; ++j) {
-                offsetPos.setWithOffset(
-                        originalPos,
-                        direction.getStepX() * i + clockWise.getStepX() * offsetScale,
-                        j,
-                        direction.getStepZ() * i + clockWise.getStepZ() * offsetScale
-                );
-                BlockState state = this.level.getBlockState(offsetPos);
-                if (j < 0 && (state.isAir() || state.is(ParadiseLostBlockTags.CLOUDS))) {
-                    return false;
-                }
-                if (j >= 0 && !this.level.isEmptyBlock(offsetPos)) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }
