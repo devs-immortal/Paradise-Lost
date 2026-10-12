@@ -3,6 +3,7 @@ package net.id.paradise_lost.clienttest.tests;
 import net.id.paradise_lost.clienttest.Step;
 import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.registry.EntityRegistry;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -33,6 +34,7 @@ public final class BoatTests {
             EntityRegistry.AUREL_BOAT, EntityRegistry.MOTHER_AUREL_BOAT, EntityRegistry.MENTH_BOAT, EntityRegistry.WISTERIA_BOAT,
             EntityRegistry.AUREL_CHEST_BOAT, EntityRegistry.MOTHER_AUREL_CHEST_BOAT, EntityRegistry.MENTH_CHEST_BOAT, EntityRegistry.WISTERIA_CHEST_BOAT
     );
+    private static final List<String> WOODS = List.of("aurel", "mother_aurel", "menth", "wisteria");
 
     private static Entity entity;
 
@@ -60,25 +62,27 @@ public final class BoatTests {
     private static Test boatsRender() {
         return new Test(GROUP, "boats render",
                 Step.run(0, () -> {
-                    List<String> missing = new ArrayList<>();
+                    List<String> wrong = new ArrayList<>();
                     for (int i = 0; i < BOATS.size(); i++) {
                         Entity boat = boat(i).create(client().level);
-                        if (client().getEntityRenderDispatcher().getRenderer(boat) == null) {
-                            missing.add(EntityType.getKey(boat(i)).toString());
-                        }
-                    }
-                    check(missing.isEmpty(), "no renderer for " + missing);
-                }),
+                        String id = EntityType.getKey(boat(i)).toString();
 
-                Step.run(0, () -> {
-                    List<ResourceLocation> missing = new ArrayList<>();
-                    for (String folder : List.of("boat", "chest_boat")) {
-                        for (String wood : List.of("aurel", "mother_aurel", "menth", "wisteria")) {
-                            ResourceLocation texture = ResourceLocation.fromNamespaceAndPath("paradise_lost", "textures/entity/" + folder + "/" + wood + ".png");
-                            if (client().getResourceManager().getResource(texture).isEmpty()) missing.add(texture);
+                        EntityRenderer<? super Entity> renderer = client().getEntityRenderDispatcher().getRenderer(boat);
+                        if (renderer == null) {
+                            wrong.add("no renderer for " + id);
+                            continue;
+                        }
+
+                        ResourceLocation expected = ResourceLocation.fromNamespaceAndPath("paradise_lost",
+                                "textures/entity/" + (i < 4 ? "boat" : "chest_boat") + "/" + WOODS.get(i % 4) + ".png");
+                        ResourceLocation texture = renderer.getTextureLocation(boat);
+                        if (!texture.equals(expected)) {
+                            wrong.add(id + " uses " + texture + " expected " + expected);
+                        } else if (client().getResourceManager().getResource(texture).isEmpty()) {
+                            wrong.add("missing texture " + texture);
                         }
                     }
-                    check(missing.isEmpty(), "missing textures " + missing);
+                    checkAll(wrong);
                 }),
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
