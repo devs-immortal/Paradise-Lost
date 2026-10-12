@@ -2,11 +2,16 @@ package net.id.paradise_lost.block.mechanical;
 
 import com.mojang.serialization.MapCodec;
 import net.id.paradise_lost.block.blockentity.FoodBowlBlockEntity;
+import net.id.paradise_lost.networking.packet.FoodBowlCtrlC2SPacket;
+import net.id.paradise_lost.networking.packet.PacketHandler;
+import net.id.paradise_lost.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -46,13 +51,36 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!player.isShiftKeyDown() && world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
-            boolean used = world.isClientSide() ? state.getValue(FULL) || stack.is(ItemTags.MEAT) : foodBowl.handleUse(player, hand, stack);
+        // Sneak is reserved by vanilla; Ctrl dumps the stack (synced via packet before this interact).
+        if (world.isClientSide()) {
+            PacketHandler.sendToServer(new FoodBowlCtrlC2SPacket(Services.CLIENT.isControlKeyDown()));
+        }
+        if (world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
+            ItemStack handStack = player.getItemInHand(hand);
+            boolean dumpStack = player instanceof ServerPlayer serverPlayer
+                    && FoodBowlCtrlC2SPacket.consumeDumpRequest(serverPlayer);
+            boolean used = world.isClientSide()
+                    ? state.getValue(FULL) || handStack.is(ItemTags.MEAT) || Services.CLIENT.isControlKeyDown()
+                    : foodBowl.handleUse(player, hand, handStack, dumpStack);
             if (used) {
                 return ItemInteractionResult.sidedSuccess(world.isClientSide());
             }
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        // Empty-hand take-out (useItemOn is not used when both hands are empty).
+        if (world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
+            boolean used = world.isClientSide()
+                    ? state.getValue(FULL)
+                    : foodBowl.handleUse(player, InteractionHand.MAIN_HAND, ItemStack.EMPTY, false);
+            if (used) {
+                return InteractionResult.sidedSuccess(world.isClientSide());
+            }
+        }
+        return InteractionResult.PASS;
     }
 
     @Override

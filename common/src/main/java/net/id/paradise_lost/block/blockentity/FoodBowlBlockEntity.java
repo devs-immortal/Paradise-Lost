@@ -2,13 +2,13 @@ package net.id.paradise_lost.block.blockentity;
 
 import net.minecraft.tags.ItemTags;
 import net.id.paradise_lost.block.mechanical.FoodBowlBlock;
+import net.id.paradise_lost.util.PlayerInventoryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,25 +23,32 @@ public class FoodBowlBlockEntity extends BlockEntity {
     }
 
     @SuppressWarnings("ConstantConditions")
-    public boolean handleUse(Player player, InteractionHand hand, ItemStack handStack) {
-        ItemStack storedFood = inventory.get(0);
+    public boolean handleUse(Player player, InteractionHand hand, ItemStack handStack, boolean dumpStack) {
+        ItemStack storedFood = inventory.getFirst();
         if (!storedFood.isEmpty() && (handStack.isEmpty() || !ItemStack.isSameItemSameComponents(handStack, storedFood))) {
-            if (!player.getInventory().add(storedFood)) {
-                level.addFreshEntity(new ItemEntity(level, worldPosition.getX(), worldPosition.getY() + 0.75, worldPosition.getZ(), storedFood, 0, 0, 0));
-            }
+            ItemStack toReturn = storedFood.copy();
             inventory.clear();
+            PlayerInventoryHelper.giveBack(player, hand, toReturn);
             updateState();
             return true;
         }
 
         if (handStack.is(ItemTags.MEAT)) {
+            int space = storedFood.isEmpty()
+                    ? handStack.getMaxStackSize()
+                    : storedFood.getMaxStackSize() - storedFood.getCount();
+            if (space <= 0) {
+                return false;
+            }
+
+            int toDeposit = dumpStack ? Math.min(space, handStack.getCount()) : 1;
             if (storedFood.isEmpty()) {
-                inventory.set(0, handStack);
-                player.setItemInHand(hand, ItemStack.EMPTY);
+                inventory.set(0, handStack.copyWithCount(toDeposit));
             } else {
-                int overflow = (storedFood.getCount() + handStack.getCount()) - 64;
-                storedFood.setCount(Math.min(64 + overflow, 64));
-                handStack.setCount(Math.max(overflow, 0));
+                storedFood.grow(toDeposit);
+            }
+            if (!player.getAbilities().instabuild) {
+                handStack.shrink(toDeposit);
             }
             updateState();
             return true;
@@ -52,11 +59,11 @@ public class FoodBowlBlockEntity extends BlockEntity {
     @SuppressWarnings("ConstantConditions")
     public void updateState() {
         setChanged();
-        level.setBlockAndUpdate(worldPosition, getBlockState().setValue(FoodBowlBlock.FULL, !inventory.get(0).isEmpty()));
+        level.setBlockAndUpdate(worldPosition, getBlockState().setValue(FoodBowlBlock.FULL, !inventory.getFirst().isEmpty()));
     }
 
     public ItemStack getContainedItem() {
-        return inventory.get(0);
+        return inventory.getFirst();
     }
 
     @Override

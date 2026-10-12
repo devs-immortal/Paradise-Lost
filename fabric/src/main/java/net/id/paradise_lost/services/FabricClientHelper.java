@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.api.EnvType;
 import net.id.paradise_lost.platform.services.IClientHelper;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 
@@ -27,6 +28,11 @@ public class FabricClientHelper implements IClientHelper {
         if (isPhysicalClient() && block instanceof Block b) {
             BlockRenderLayerMap.INSTANCE.putBlock(b, RenderType.translucent());
         }
+    }
+
+    @Override
+    public boolean isControlKeyDown() {
+        return isPhysicalClient() && Screen.hasControlDown();
     }
 
     private static boolean isPhysicalClient() {
