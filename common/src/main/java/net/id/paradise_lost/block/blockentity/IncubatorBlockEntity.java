@@ -3,7 +3,9 @@ package net.id.paradise_lost.block.blockentity;
 import net.id.paradise_lost.component.MoaGenes;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.util.ParadiseLostSoundEvents;
+import net.id.paradise_lost.util.PlayerInventoryHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -30,6 +32,7 @@ public class IncubatorBlockEntity extends BlockEntity {
     private int hatchTicks = 100;
     private ItemStack egg;
     private float offsetHeight;
+    private Direction itemFacing = Direction.SOUTH;
 
     public IncubatorBlockEntity(BlockPos pos, BlockState state, float offsetHeight) {
         super(ParadiseLostBlockEntityTypes.INCUBATOR.get(), pos, state);
@@ -71,15 +74,33 @@ public class IncubatorBlockEntity extends BlockEntity {
 
     public void handleUse(Player player, InteractionHand hand, ItemStack handStack) {
         owner = player.getUUID();
-        ItemStack stored = egg.copy();
-        egg = handStack.copy();
-        player.setItemInHand(hand, stored);
-        hatchTicks = (int) (12000 / level.getBiome(worldPosition).value().getBaseTemperature());
+        if (egg.isEmpty()) {
+            if (handStack.isEmpty()) {
+                return;
+            }
+            placeFromHand(player, handStack);
+        } else if (handStack.isEmpty()) {
+            ItemStack toReturn = egg.copy();
+            egg = ItemStack.EMPTY;
+            PlayerInventoryHelper.giveBack(player, hand, toReturn);
+        } else {
+            ItemStack toReturn = egg.copy();
+            placeFromHand(player, handStack);
+            PlayerInventoryHelper.giveBack(player, hand, toReturn);
+        }
         syncToClient();
         setChanged();
     }
 
-    /** markDirty alone does not push BE data to nearby clients. */
+    private void placeFromHand(Player player, ItemStack handStack) {
+        egg = handStack.copyWithCount(1);
+        itemFacing = player.getDirection();
+        if (!player.getAbilities().instabuild) {
+            handStack.shrink(1);
+        }
+        hatchTicks = (int) (12000 / level.getBiome(worldPosition).value().getBaseTemperature());
+    }
+
     private void syncToClient() {
         setChanged();
         if (level instanceof ServerLevel serverLevel) {
@@ -94,8 +115,13 @@ public class IncubatorBlockEntity extends BlockEntity {
     public ItemStack getItem() {
         return egg;
     }
+
     public float getOffsetHeight() {
         return offsetHeight;
+    }
+
+    public Direction getItemFacing() {
+        return itemFacing;
     }
 
     @Override
@@ -104,11 +130,10 @@ public class IncubatorBlockEntity extends BlockEntity {
         if (!egg.isEmpty()) {
             nbt.put("egg", egg.save(registryLookup));
         } else {
-            // Chunk save reuses the tag: without this the old egg key survives hatching and
-            // the egg comes back on reload.
             nbt.remove("egg");
         }
         nbt.putInt("hatchTicks", hatchTicks);
+        nbt.putString("itemFacing", itemFacing.getSerializedName());
     }
 
     @Override
@@ -121,6 +146,14 @@ public class IncubatorBlockEntity extends BlockEntity {
         }
 
         hatchTicks = nbt.getInt("hatchTicks");
+        if (nbt.contains("itemFacing")) {
+            itemFacing = Direction.byName(nbt.getString("itemFacing"));
+            if (itemFacing == null || !itemFacing.getAxis().isHorizontal()) {
+                itemFacing = Direction.SOUTH;
+            }
+        } else {
+            itemFacing = Direction.SOUTH;
+        }
     }
 
     @Override
