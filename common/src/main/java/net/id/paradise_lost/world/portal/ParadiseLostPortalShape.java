@@ -169,7 +169,12 @@ public class ParadiseLostPortalShape {
         BlockPos.betweenClosed(
                 this.bottomLeft,
                 this.bottomLeft.relative(Direction.UP, this.height - 1).relative(this.rightDir, this.width - 1)
-        ).forEach(pos -> this.level.setBlock(pos, blockState, 2 | 16));
+        ).forEach(pos -> {
+            this.level.setBlock(pos, blockState, 2 | 16);
+            if (this.level instanceof ServerLevel serverLevel) {
+                serverLevel.getPoiManager().add(pos.immutable(), ParadiseLostPoi.BLUE_PORTAL.asHolder());
+            }
+        });
     }
 
     public boolean isComplete() {

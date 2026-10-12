@@ -135,7 +135,11 @@ public class ParadiseLostPortalBlock extends Block implements Portal {
 
         WorldBorder border = destination.getWorldBorder();
         double scale = DimensionType.getTeleportationScale(level.dimensionType(), destination.dimensionType());
-        BlockPos scaled = border.clampToBounds(entity.getX() * scale, entity.getY(), entity.getZ() * scale);
+        double searchY = entity.getY();
+        if (targetKey == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
+            searchY = Math.max(searchY, ParadiseLostPortalForcer.PARADISE_MIN_PORTAL_Y);
+        }
+        BlockPos scaled = border.clampToBounds(entity.getX() * scale, searchY, entity.getZ() * scale);
 
         return getExitPortal(destination, entity, pos, scaled, border);
     }
