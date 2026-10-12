@@ -2,15 +2,15 @@ package net.id.paradise_lost.block.mechanical;
 
 import com.mojang.serialization.MapCodec;
 import net.id.paradise_lost.block.blockentity.FoodBowlBlockEntity;
-import net.id.paradise_lost.networking.packet.FoodBowlInteractC2SPacket;
+import net.id.paradise_lost.networking.packet.FoodBowlCtrlC2SPacket;
 import net.id.paradise_lost.networking.packet.PacketHandler;
 import net.id.paradise_lost.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -57,25 +57,20 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
         }
 
         if (world.isClientSide()) {
-            PacketHandler.sendToServer(new FoodBowlInteractC2SPacket(
-                    pos,
-                    hand == InteractionHand.MAIN_HAND,
-                    Services.CLIENT.isControlKeyDown()
-            ));
+            PacketHandler.sendToServer(new FoodBowlCtrlC2SPacket(Services.CLIENT.isControlKeyDown()));
+            return ItemInteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.SUCCESS;
-    }
 
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
-        if (!state.getValue(FULL)) {
-            return InteractionResult.PASS;
+        if (!(world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        if (world.isClientSide()) {
-            PacketHandler.sendToServer(new FoodBowlInteractC2SPacket(pos, true, false));
-            return InteractionResult.SUCCESS;
+
+        boolean dumpStack = player instanceof ServerPlayer serverPlayer
+                && FoodBowlCtrlC2SPacket.pollDump(serverPlayer);
+        if (foodBowl.handleUse(player, hand, handStack, dumpStack)) {
+            return ItemInteractionResult.SUCCESS;
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
