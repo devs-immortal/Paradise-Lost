@@ -55,8 +55,7 @@ public class ParadiseLostPortalForcer {
         PoiManager poiManager = this.level.getPoiManager();
         int radius = 128;
         poiManager.ensureLoadedAndValid(this.level, exitPos, radius);
-
-        Optional<BlockPos> fromPoi = poiManager.getInSquare(
+        return poiManager.getInSquare(
                         type -> type.is(ParadiseLostPoi.BLUE_PORTAL_KEY),
                         exitPos,
                         radius,
@@ -66,17 +65,6 @@ public class ParadiseLostPortalForcer {
                 .filter(worldBorder::isWithinBounds)
                 .filter(this::isLinkedPortalBlock)
                 .min(Comparator.<BlockPos>comparingDouble(pos -> pos.distSqr(exitPos)).thenComparingInt(Vec3i::getY));
-        if (fromPoi.isPresent()) {
-            return fromPoi;
-        }
-
-        int vertical = Math.min(256, this.level.getLogicalHeight());
-        return BlockPos.findClosestMatch(exitPos, radius, vertical, this::isLinkedPortalBlock)
-                .filter(worldBorder::isWithinBounds)
-                .map(pos -> {
-                    poiManager.add(pos, ParadiseLostPoi.BLUE_PORTAL.asHolder());
-                    return pos;
-                });
     }
 
     private boolean isLinkedPortalBlock(BlockPos pos) {
