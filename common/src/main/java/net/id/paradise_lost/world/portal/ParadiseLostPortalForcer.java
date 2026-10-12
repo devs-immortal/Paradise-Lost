@@ -30,7 +30,7 @@ import java.util.Optional;
 public class ParadiseLostPortalForcer {
 
     public static final int PARADISE_MIN_PORTAL_Y = 100;
-    private static final int PARADISE_MAX_SURFACE_DROP = 24;
+    private static final int PARADISE_MAX_SURFACE_DROP = 32;
 
     public static final DimensionTransition.PostDimensionTransition PLAY_PORTAL_SOUND =
             ParadiseLostPortalForcer::playTravelSound;
