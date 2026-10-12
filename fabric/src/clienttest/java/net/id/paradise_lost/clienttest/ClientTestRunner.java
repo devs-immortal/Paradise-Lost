@@ -6,6 +6,7 @@ import net.id.paradise_lost.clienttest.tests.BoatTests;
 import net.id.paradise_lost.clienttest.tests.FoodBowlTests;
 import net.id.paradise_lost.clienttest.tests.FoodTests;
 import net.id.paradise_lost.clienttest.tests.LevitaTests;
+import net.id.paradise_lost.clienttest.tests.MoaTests;
 import net.id.paradise_lost.clienttest.tests.NitraTests;
 import net.id.paradise_lost.clienttest.tests.PotTests;
 import net.id.paradise_lost.clienttest.tests.RegistryTests;
@@ -68,6 +69,7 @@ public class ClientTestRunner implements ClientModInitializer {
         tests.addAll(NitraTests.all());
         tests.addAll(FoodBowlTests.all());
         tests.addAll(LevitaTests.all());
+        tests.addAll(MoaTests.all());
         tests.addAll(PotTests.all());
         tests.addAll(RegistryTests.all());
         String group = System.getenv("RUN_ONLY");
