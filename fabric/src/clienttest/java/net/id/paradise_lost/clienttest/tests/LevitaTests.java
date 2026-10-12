@@ -12,6 +12,7 @@ import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -19,11 +20,17 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.entity.vehicle.Minecart;
+import net.minecraft.world.entity.vehicle.MinecartFurnace;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.PoweredRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -31,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
+import java.util.function.DoublePredicate;
 
 import static net.id.paradise_lost.clienttest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
@@ -38,6 +46,7 @@ import static net.id.paradise_lost.registry.ItemRegistry.*;
 public final class LevitaTests {
     private static final String GROUP = "Levita";
     private static final int CHARGE = 82;
+    private static final int STAIRS = 6;
     private static BlockPos pos;
     private static int entityId;
     private static int secondId;
@@ -51,6 +60,9 @@ public final class LevitaTests {
     private static double speedA;
     private static double speedB;
     private static double speedC;
+    private static String state;
+    private static double levitaTop;
+    private static double plainTop;
 
     private LevitaTests() {
     }
@@ -69,7 +81,20 @@ public final class LevitaTests {
                 triggerLockClears(),
                 standingCartStays(),
                 railNeitherBoostsNorBrakes(),
-                unpoweredRailEndsFloat()
+                unpoweredRailEndsFloat(),
+                powerSpreadsOnlyAlongLevitaRails(),
+                floatsOverGapAndRejoins(),
+                fallsWhenFloatEnds(),
+                wallStopsFloatingCart(),
+                slopeLaunchesUpward(),
+                ceilingStopsRisingCart(),
+                descendingCartStaysAboveGround(),
+                cartStaysOnClimbingRun(),
+                cartStaysOnDescendingRun(),
+                levitaSlopesClimbLikePlainSlopes(),
+                riderStaysInFloatingCart(),
+                otherMinecartsFloat(),
+                floatStateSurvivesSaveLoad()
         );
     }
 
@@ -298,6 +323,284 @@ public final class LevitaTests {
         );
     }
 
+    private static Test powerSpreadsOnlyAlongLevitaRails() {
+        return new Test(GROUP, "power spreads along levita rails only",
+                setup(world -> {
+                    BlockPos other = start.relative(dir.getClockWise(), 3);
+                    track(world, start, "llllllllll");
+                    world.setBlockAndUpdate(start.relative(dir, 10), Blocks.POWERED_RAIL.defaultBlockState());
+                    for (int i = 0; i < 3; i++) {
+                        world.setBlockAndUpdate(other.relative(dir, i), Blocks.POWERED_RAIL.defaultBlockState());
+                    }
+                    track(world, other.relative(dir, 3), "ll");
+                    world.setBlockAndUpdate(start.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+                    world.setBlockAndUpdate(other.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+                }),
+                Step.run(10, () -> onServer(server -> {
+                    ServerLevel world = world(server);
+                    BlockPos other = start.relative(dir.getClockWise(), 3);
+                    List<String> wrong = new ArrayList<>();
+                    for (int i = 0; i < 10; i++) {
+                        boolean powered = world.getBlockState(start.relative(dir, i)).getValue(PoweredRailBlock.POWERED);
+                        expect(wrong, powered == i <= 8, "levita rail " + i + " powered=" + powered);
+                    }
+                    expect(wrong, !world.getBlockState(start.relative(dir, 10)).getValue(PoweredRailBlock.POWERED),
+                            "vanilla powered rail after the levita run is powered");
+                    expect(wrong, world.getBlockState(other.relative(dir, 2)).getValue(PoweredRailBlock.POWERED),
+                            "vanilla powered rails are not powered");
+                    expect(wrong, !world.getBlockState(other.relative(dir, 3)).getValue(PoweredRailBlock.POWERED),
+                            "levita rail after vanilla powered run is powered");
+                    checkAll(wrong);
+                }))
+        );
+    }
+
+    private static Test floatsOverGapAndRejoins() {
+        return new Test(GROUP, "floating cart crosses gap and lands on rails again",
+                setup(world -> {
+                    track(world, start, "rLrr......rrrr");
+                    trench(world, 4, 9);
+                    entityId = launch(world, EntityType.MINECART, start, 0.4);
+                }),
+                Step.until("cart to reach the far rails", 60, () -> fromServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    double a = along(cart);
+                    if (a > 3.5 && a < 9.5) {
+                        check(Math.abs(cart.getY() - start.getY()) < 0.2, "cart is at y=" + fmt(cart.getY()) + " over the gap" + describe(cart) + floatState(cart));
+                    }
+                    return a > 11.5;
+                })),
+                Step.run(0, () -> onServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    check(world(server).getBlockState(cart.blockPosition()).is(Blocks.RAIL), "cart is not on the far rails: " + describe(cart) + floatState(cart));
+                    check(cart.getDeltaMovement().horizontalDistance() > 0.1, "cart stopped on the far rails: " + describe(cart));
+                }))
+        );
+    }
+
+    private static Test fallsWhenFloatEnds() {
+        return new Test(GROUP, "floating cart falls when the float runs out",
+                setup(world -> {
+                    track(world, start, "rLrr");
+                    trench(world, 4, 54);
+                    entityId = launch(world, EntityType.MINECART, start, 0.4);
+                }),
+                Step.until("cart to float", 40, () -> serverFloating(entityId)),
+                Step.until("float to end", CHARGE + 20, () -> fromServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    if (along(cart) > 3.5) {
+                        check(Math.abs(cart.getY() - start.getY()) < 0.3, "floating cart is at y=" + fmt(cart.getY()) + describe(cart) + floatState(cart));
+                    }
+                    return !MinecartFloating.isFloating(cart);
+                })),
+                Step.until("cart to fall into the trench", 40, () -> fromServer(server -> serverCart(server, entityId).getY() < start.getY() - 1.5))
+        );
+    }
+
+    private static Test wallStopsFloatingCart() {
+        return new Test(GROUP, "wall stops a cart that just floated off the track",
+                setup(world -> {
+                    track(world, start, "rLrr");
+                    BlockPos wall = start.relative(dir, 5);
+                    fill(world, wall.relative(dir.getClockWise()), wall.relative(dir.getCounterClockWise()).above(), Blocks.STONE.defaultBlockState());
+                    entityId = launch(world, EntityType.MINECART, start, 0.4);
+                    ticks = 0;
+                }),
+                Step.until("cart to float", 40, () -> serverFloating(entityId)),
+                Step.until("40 ticks at the wall", 50, () -> fromServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    check(along(cart) < 4.5 - cart.getBbWidth() / 2 + 0.01, "cart went into the wall: " + describe(cart) + floatState(cart));
+                    return ++ticks >= 40;
+                }))
+        );
+    }
+
+    private static Test slopeLaunchesUpward() {
+        return new Test(GROUP, "powered slope launches the cart upward at 45 degrees",
+                setup(world -> {
+                    singleSlope(world, false);
+                    entityId = launch(world, EntityType.MINECART, start.relative(dir, -2), 0.4);
+                    ticks = 0;
+                }),
+                Step.until("cart to rise 3 blocks", 40, () -> fromServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    state = describe(cart) + floatState(cart);
+                    return cart.getY() > start.getY() + 3 || ++ticks >= 39;
+                })),
+                Step.run(0, () -> onServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    check(cart.getY() > start.getY() + 3, "cart did not rise 3 blocks in 40 ticks:" + state);
+                    check(MinecartFloating.getIncline(cart) == 1, "server incline is " + MinecartFloating.getIncline(cart) + floatState(cart));
+                    check(Math.abs(side(cart)) < 0.1, "cart drifted sideways: " + describe(cart));
+                })),
+                Step.until("client to show the 45 degree float", 20, () -> {
+                    AbstractMinecart cart = clientCart(entityId);
+                    return MinecartFloating.getIncline(cart) == 1
+                            && Math.abs(Math.abs(cart.getXRot()) - 45) < 1
+                            && MinecartFloating.getFloatingRenderYaw(cart) != null;
+                })
+        );
+    }
+
+    private static Test ceilingStopsRisingCart() {
+        return new Test(GROUP, "ceiling stops a rising cart",
+                setup(world -> {
+                    singleSlope(world, false);
+                    Direction side = dir.getClockWise();
+                    fill(world, start.relative(dir, 1).relative(side).above(4), start.relative(dir, 15).relative(side.getOpposite()).above(4), Blocks.STONE.defaultBlockState());
+                    entityId = launch(world, EntityType.MINECART, start.relative(dir, -2), 0.4);
+                    ticks = 0;
+                    seen = start.getY();
+                }),
+                Step.until("40 ticks under the ceiling", 50, () -> fromServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    seen = Math.max(seen, cart.getY());
+                    check(cart.getBoundingBox().maxY <= start.getY() + 4.01, "cart went into the ceiling: " + describe(cart) + floatState(cart));
+                    return ++ticks >= 40;
+                })),
+                Step.run(0, () -> check(seen > start.getY() + 2, "cart only rose to y=" + fmt(seen) + ", so the ceiling was never tested"))
+        );
+    }
+
+    private static Test descendingCartStaysAboveGround() {
+        return new Test(GROUP, "cart floating down a slope stays above the ground",
+                setup(world -> {
+                    singleSlope(world, true);
+                    entityId = launch(world, EntityType.MINECART, start.relative(dir).above(), -0.4);
+                    ticks = 0;
+                    seen = 0;
+                }),
+                Step.until("40 ticks after the slope", 60, () -> fromServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    ServerLevel world = world(server);
+                    seen = Math.min(seen, along(cart));
+                    check(cart.getY() >= start.getY() - 0.1, "cart sank to y=" + fmt(cart.getY()) + describe(cart) + floatState(cart));
+                    check(world.getBlockState(cart.blockPosition()).getCollisionShape(world, cart.blockPosition()).isEmpty(),
+                            "cart is inside " + world.getBlockState(cart.blockPosition()).getBlock().getName().getString() + describe(cart) + floatState(cart));
+                    return ++ticks >= 40;
+                })),
+                Step.run(0, () -> check(seen < -1, "setup: cart never left the bottom of the slope"))
+        );
+    }
+
+    private static Test cartStaysOnClimbingRun() {
+        return new Test(GROUP, "ridden cart stays on a long climbing run of powered slopes, also when it rolls back",
+                setup(world -> {
+                    staircase(world, start, true);
+                    entityId = launch(world, EntityType.MINECART, start, 0.4);
+                    check(world.players().getFirst().startRiding(world.getEntity(entityId), true), "setup: startRiding returned false");
+                    ticks = 0;
+                }),
+                Step.until("100 ticks on the run", 110, () -> stairsTick(along -> false))
+        );
+    }
+
+    private static Test cartStaysOnDescendingRun() {
+        return new Test(GROUP, "ridden cart stays on a long descending run of powered slopes",
+                setup(world -> {
+                    staircase(world, start, true);
+                    entityId = launch(world, EntityType.MINECART, start.relative(dir, STAIRS).above(STAIRS), -0.4);
+                    check(world.players().getFirst().startRiding(world.getEntity(entityId), true), "setup: startRiding returned false");
+                    ticks = 0;
+                }),
+                Step.until("cart to reach the bottom", 110, () -> stairsTick(along -> along < -1.5)),
+                Step.run(0, () -> onServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    check(along(cart) < -1.5, "cart did not reach the bottom: " + describe(cart) + floatState(cart));
+                }))
+        );
+    }
+
+    private static Test levitaSlopesClimbLikePlainSlopes() {
+        return new Test(GROUP, "cart climbs powered levita slopes as high as plain rail slopes",
+                setup(world -> {
+                    staircase(world, start, true);
+                    staircase(world, start.relative(dir.getClockWise(), 3), false);
+                    entityId = launch(world, EntityType.MINECART, start, 0.4);
+                    secondId = launch(world, EntityType.MINECART, start.relative(dir.getClockWise(), 3), 0.4);
+                    levitaTop = plainTop = start.getY();
+                    ticks = 0;
+                }),
+                Step.until("60 ticks of climbing", 70, () -> fromServer(server -> {
+                    levitaTop = Math.max(levitaTop, serverCart(server, entityId).getY());
+                    plainTop = Math.max(plainTop, serverCart(server, secondId).getY());
+                    return ++ticks >= 60;
+                })),
+                Step.run(0, () -> check(levitaTop >= plainTop - 0.5, "levita cart rose " + fmt(levitaTop - start.getY())
+                        + " blocks, plain cart rose " + fmt(plainTop - start.getY())))
+        );
+    }
+
+    private static Test riderStaysInFloatingCart() {
+        return new Test(GROUP, "player stays in a floating cart",
+                setup(world -> {
+                    track(world, start, "rLrrr");
+                    entityId = launch(world, EntityType.MINECART, start, 0.4);
+                    check(world.players().getFirst().startRiding(world.getEntity(entityId), true), "setup: startRiding returned false");
+                }),
+                Step.until("ridden cart to float on the client", 60, () ->
+                        clientFloating(entityId) && client().player.getVehicle() == clientCart(entityId)),
+                Step.until("float to end", CHARGE + 20, () -> fromServer(server -> {
+                    AbstractMinecart cart = serverCart(server, entityId);
+                    check(player(server).getVehicle() == cart, "player left the cart at " + describe(cart) + floatState(cart));
+                    return !MinecartFloating.isFloating(cart);
+                })),
+                Step.run(0, () -> check(client().player.getVehicle() == clientCart(entityId), "client player is not in the cart after the float"))
+        );
+    }
+
+    private static Test otherMinecartsFloat() {
+        return new Test(GROUP, "chest and furnace minecarts float too",
+                setup(world -> {
+                    BlockPos other = start.relative(dir.getClockWise(), 3);
+                    track(world, start, "rLrrr");
+                    track(world, other, "rLrrr");
+                    entityId = launch(world, EntityType.CHEST_MINECART, start, 0.4);
+                    secondId = launch(world, EntityType.FURNACE_MINECART, other, 0.2);
+                    MinecartFurnace furnace = (MinecartFurnace) world.getEntity(secondId);
+                    setField(furnace, "fuel", 1000);
+                    furnace.xPush = dir.getStepX();
+                    furnace.zPush = dir.getStepZ();
+                }),
+                Step.until("chest minecart to float", 60, () -> serverFloating(entityId)),
+                Step.until("furnace minecart to float", 60, () -> serverFloating(secondId))
+        );
+    }
+
+    private static Test floatStateSurvivesSaveLoad() {
+        return new Test(GROUP, "float state survives save and load, also from legacy NBT",
+                Step.run(0, () -> onServer(server -> {
+                    ServerLevel world = world(server);
+                    List<String> wrong = new ArrayList<>();
+
+                    Minecart saved = EntityType.MINECART.create(world);
+                    MinecartFloating.setFloatTime(saved, 50);
+                    MinecartFloating.setIncline(saved, 1);
+                    MinecartFloating.setRailShape(saved, RailShape.ASCENDING_SOUTH);
+                    Minecart loaded = EntityType.MINECART.create(world);
+                    loaded.load(saved.saveWithoutId(new CompoundTag()));
+                    expect(wrong, MinecartFloating.getFloatTime(loaded) == 50, "float time " + MinecartFloating.getFloatTime(loaded));
+                    expect(wrong, MinecartFloating.getIncline(loaded) == 1, "incline " + MinecartFloating.getIncline(loaded));
+                    expect(wrong, MinecartFloating.getRailShape(loaded) == RailShape.ASCENDING_SOUTH, "shape " + MinecartFloating.getRailShapeName(loaded));
+
+                    CompoundTag tag = EntityType.MINECART.create(world).saveWithoutId(new CompoundTag());
+                    CompoundTag legacy = new CompoundTag();
+                    legacy.putBoolean("floating", true);
+                    legacy.putInt("floatTime", 30);
+                    legacy.putInt("floatIncline", -1);
+                    legacy.putString("floatShape", "ascending_north");
+                    tag.put("paradiseLostFloating", legacy);
+                    Minecart old = EntityType.MINECART.create(world);
+                    old.load(tag);
+                    expect(wrong, MinecartFloating.getFloatTime(old) == 30, "legacy float time " + MinecartFloating.getFloatTime(old));
+                    expect(wrong, MinecartFloating.getIncline(old) == -1, "legacy incline " + MinecartFloating.getIncline(old));
+                    expect(wrong, MinecartFloating.getRailShape(old) == RailShape.ASCENDING_NORTH, "legacy shape " + MinecartFloating.getRailShapeName(old));
+                    expect(wrong, !old.saveWithoutId(new CompoundTag()).contains("paradiseLostFloating"), "re-save still has the legacy key");
+                    checkAll(wrong);
+                }))
+        );
+    }
+
     private static Step setup(Consumer<ServerLevel> builder) {
         return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
@@ -321,6 +624,93 @@ public final class LevitaTests {
             BlockState block = c == 'r' ? Blocks.RAIL.defaultBlockState() : BlockRegistry.LEVITA_RAIL.get().defaultBlockState();
             world.setBlockAndUpdate(at, block);
         }
+    }
+
+    private static void slope(ServerLevel world, BlockPos at) {
+        RailShape shape = switch (dir) {
+            case NORTH -> RailShape.ASCENDING_NORTH;
+            case SOUTH -> RailShape.ASCENDING_SOUTH;
+            case EAST -> RailShape.ASCENDING_EAST;
+            default -> RailShape.ASCENDING_WEST;
+        };
+        BlockState old = world.getBlockState(at);
+        Property<RailShape> property = ((BaseRailBlock) old.getBlock()).getShapeProperty();
+        world.setBlock(at, old.setValue(property, shape), Block.UPDATE_ALL);
+
+        BlockState now = world.getBlockState(at);
+        check(now.is(old.getBlock()) && now.getValue(property) == shape, "setup: slope at " + at.toShortString() + " is " + now);
+    }
+
+    private static void singleSlope(ServerLevel world, boolean down) {
+        world.setBlockAndUpdate(start.relative(dir), Blocks.STONE.defaultBlockState());
+        track(world, start, "L");
+        if (down) {
+            track(world, start.relative(dir).above(), "r");
+        } else {
+            track(world, start.relative(dir, -2), "rr");
+        }
+        slope(world, start);
+    }
+
+    private static void staircase(ServerLevel world, BlockPos from, boolean levita) {
+        for (int i = 0; i < STAIRS; i++) {
+            BlockPos at = from.relative(dir, i).above(i);
+            if (!levita)
+                world.setBlockAndUpdate(at.below(), Blocks.STONE.defaultBlockState());
+            track(world, at, levita ? "L" : "r");
+        }
+        BlockPos top = from.relative(dir, STAIRS).above(STAIRS);
+        fill(world, top.below(), top.relative(dir).below(), Blocks.STONE.defaultBlockState());
+        track(world, top, "rr");
+        track(world, from.relative(dir, -3), "rrr");
+        for (int i = 0; i < STAIRS; i++) {
+            slope(world, from.relative(dir, i).above(i));
+        }
+    }
+
+    private static boolean stairsTick(DoublePredicate done) {
+        int clientIncline = 0;
+        if (client().level.getEntity(entityId) instanceof AbstractMinecart client) {
+            checkOnStairs(client, "client");
+            clientIncline = MinecartFloating.getIncline(client);
+        }
+        int seenIncline = clientIncline;
+        return fromServer(server -> {
+            AbstractMinecart cart = serverCart(server, entityId);
+            checkOnStairs(cart, "server");
+            int serverIncline = MinecartFloating.getIncline(cart);
+            check(seenIncline == 0 || serverIncline == 0 || seenIncline == serverIncline,
+                    "client incline " + seenIncline + " but server incline " + serverIncline + describe(cart));
+            return done.test(along(cart)) || ++ticks >= 100;
+        });
+    }
+
+    private static void checkOnStairs(AbstractMinecart cart, String where) {
+        double a = along(cart);
+        double rise = cart.getY() - start.getY();
+        double expected = Math.clamp(a + 0.5, 0, STAIRS);
+        check(Math.abs(side(cart)) < 0.3, where + " cart is " + fmt(side(cart)) + " blocks beside the track" + describe(cart) + floatState(cart));
+        check(Math.abs(rise - expected) < 0.6, where + " cart is " + fmt(rise) + " above the bottom, expected about " + fmt(expected)
+                + describe(cart) + floatState(cart));
+
+        Vec3 tangent = MinecartFloating.getMotionAlignedTangent(cart);
+        if (MinecartFloating.shouldUseFloatingRenderRotation(cart) && tangent != null) {
+            Vec3 sideways = Vec3.atLowerCornerOf(dir.getClockWise().getNormal());
+            check(Math.abs(tangent.dot(sideways)) < 0.01, where + " cart renders across the track, shape " + MinecartFloating.getRailShapeName(cart) + describe(cart));
+
+            boolean facesUp = tangent.dot(Vec3.atLowerCornerOf(dir.getNormal())) > 0;
+            check(facesUp == MinecartFloating.getIncline(cart) > 0, where + " cart is drawn tilted the wrong way, it faces "
+                    + (facesUp ? "up" : "down") + " the slope" + describe(cart) + floatState(cart));
+        }
+    }
+
+    private static void trench(ServerLevel world, int from, int to) {
+        Direction side = dir.getClockWise();
+        fill(world, start.relative(dir, from).relative(side).below(3), start.relative(dir, to).relative(side.getOpposite()).below(), Blocks.AIR.defaultBlockState());
+    }
+
+    private static void fill(ServerLevel world, BlockPos a, BlockPos b, BlockState state) {
+        for (BlockPos at : BlockPos.betweenClosed(a, b)) world.setBlockAndUpdate(at, state);
     }
 
     private static int launch(ServerLevel world, EntityType<? extends AbstractMinecart> type, BlockPos at, double speed) {
