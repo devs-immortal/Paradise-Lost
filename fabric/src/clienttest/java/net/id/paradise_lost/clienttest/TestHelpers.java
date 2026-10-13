@@ -112,6 +112,21 @@ public final class TestHelpers {
         }
     }
 
+    public static <T> T getField(Object target, String name) {
+        return getField(target, target.getClass(), name);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T getField(Object target, Class<?> owner, String name) {
+        try {
+            Field field = owner.getDeclaredField(name);
+            field.setAccessible(true);
+            return (T) field.get(target);
+        } catch (ReflectiveOperationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static BlockPos ahead(ServerPlayer player, int distance, int side) {
         Direction facing = player.getDirection();
         return player.blockPosition().relative(facing, distance).relative(facing.getClockWise(), side);

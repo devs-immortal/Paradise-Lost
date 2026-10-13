@@ -1,6 +1,11 @@
 package net.id.paradise_lost.clienttest;
 
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.phys.Vec3;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +26,8 @@ public final class Recorder {
     public static final List<Vec3> explosions = new CopyOnWriteArrayList<>();
     public static final AtomicInteger sips = new AtomicInteger();
     public static final AtomicInteger finalSips = new AtomicInteger();
+    public static final List<DamageSource> playerDamage = new CopyOnWriteArrayList<>();
+    public static final List<DamageSource> playerDeaths = new CopyOnWriteArrayList<>();
     public static final List<String> levelEvents = new CopyOnWriteArrayList<>();
 
     static final List<String> logErrors = new CopyOnWriteArrayList<>();
@@ -48,6 +55,12 @@ public final class Recorder {
         LoggerContext logContext = (LoggerContext) LogManager.getContext(false);
         logContext.getConfiguration().getRootLogger().addAppender(appender, null, null);
         logContext.updateLoggers();
+        ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, baseDamage, damageTaken, blocked) -> {
+            if (entity instanceof ServerPlayer) playerDamage.add(source);
+        });
+        ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
+            if (entity instanceof ServerPlayer) playerDeaths.add(source);
+        });
     }
 
     static List<String> errorsSince(int start) {
@@ -58,11 +71,17 @@ public final class Recorder {
     static void reset() {
         Stream.of(sips, finalSips).forEach(counter -> counter.set(0));
         explosions.clear();
+        playerDamage.clear();
+        playerDeaths.clear();
         levelEvents.clear();
     }
 
     public static long explosionsNear(BlockPos pos, double radius) {
         Vec3 center = Vec3.atCenterOf(pos);
         return explosions.stream().filter(e -> e.closerThan(center, radius)).count();
+    }
+
+    public static boolean playerHurtBy(ResourceKey<DamageType> type) {
+        return Stream.concat(playerDamage.stream(), playerDeaths.stream()).anyMatch(source -> source.is(type));
     }
 }
