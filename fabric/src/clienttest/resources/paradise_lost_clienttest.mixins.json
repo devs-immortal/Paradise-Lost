@@ -8,7 +8,8 @@
     "HangingSignEditScreenAccessor",
     "LevelRendererMixin",
     "LivingEntityMixin",
-    "MinecraftMixin"
+    "MinecraftMixin",
+    "RenderStateShardMixin"
   ],
   "injectors": {
     "defaultRequire": 1

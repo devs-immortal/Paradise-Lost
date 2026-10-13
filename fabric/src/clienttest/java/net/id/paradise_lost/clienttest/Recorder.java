@@ -1,5 +1,6 @@
 package net.id.paradise_lost.clienttest;
 
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -26,6 +27,8 @@ public final class Recorder {
     public static final List<Vec3> explosions = new CopyOnWriteArrayList<>();
     public static final AtomicInteger sips = new AtomicInteger();
     public static final AtomicInteger finalSips = new AtomicInteger();
+    public static final AtomicInteger cloudCalls = new AtomicInteger();
+    public static final AtomicInteger frames = new AtomicInteger();
     public static final List<DamageSource> playerDamage = new CopyOnWriteArrayList<>();
     public static final List<DamageSource> playerDeaths = new CopyOnWriteArrayList<>();
     public static final List<String> levelEvents = new CopyOnWriteArrayList<>();
@@ -55,6 +58,7 @@ public final class Recorder {
         LoggerContext logContext = (LoggerContext) LogManager.getContext(false);
         logContext.getConfiguration().getRootLogger().addAppender(appender, null, null);
         logContext.updateLoggers();
+        WorldRenderEvents.END.register(context -> frames.incrementAndGet());
         ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, baseDamage, damageTaken, blocked) -> {
             if (entity instanceof ServerPlayer) playerDamage.add(source);
         });
@@ -69,7 +73,7 @@ public final class Recorder {
     }
 
     static void reset() {
-        Stream.of(sips, finalSips).forEach(counter -> counter.set(0));
+        Stream.of(sips, finalSips, cloudCalls, frames).forEach(counter -> counter.set(0));
         explosions.clear();
         playerDamage.clear();
         playerDeaths.clear();
@@ -83,5 +87,9 @@ public final class Recorder {
 
     public static boolean playerHurtBy(ResourceKey<DamageType> type) {
         return Stream.concat(playerDamage.stream(), playerDeaths.stream()).anyMatch(source -> source.is(type));
+    }
+
+    public static boolean playerDiedFrom(ResourceKey<DamageType> type) {
+        return playerDeaths.stream().anyMatch(source -> source.is(type));
     }
 }
