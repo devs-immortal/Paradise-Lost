@@ -2,7 +2,6 @@ package net.id.paradise_lost.world.feature.structure;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.MapCodec;
-import net.id.paradise_lost.ParadiseLost;
 import net.id.paradise_lost.world.feature.structure.generator.AurelTowerGenerator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.structure.*;

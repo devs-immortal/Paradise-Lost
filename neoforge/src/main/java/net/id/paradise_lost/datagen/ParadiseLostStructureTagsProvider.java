@@ -21,5 +21,6 @@ public class ParadiseLostStructureTagsProvider extends TagsProvider<Structure> {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(ParadiseLostStructureTags.VAULT).addOptional(ParadiseLostStructures.VAULT.location());
+        this.tag(ParadiseLostStructureTags.PALACE).addOptional(ParadiseLostStructures.PALACE.location());
     }
 }

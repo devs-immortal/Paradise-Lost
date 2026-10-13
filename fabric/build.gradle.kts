@@ -55,11 +55,7 @@ afterEvaluate {
     reg.configureJarTask(tasks.named<Jar>("jar").get())
 }
 
-// Datagen still has extensive Yarn leftovers; keep it out of the main compile until remapped.
 sourceSets {
-    named("main") {
-        java.exclude("**/datagen/**")
-    }
     create("clienttest") {
         val main = sourceSets["main"]
         compileClasspath += main.compileClasspath + main.output

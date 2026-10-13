@@ -30,6 +30,7 @@ public class ParadiseLostLootTables {
     public static final ResourceKey<LootTable> SPAWNER_GENERIC_FOOD = register("spawners/generic_food");
     public static final ResourceKey<LootTable> SPAWNER_LEVITATION_RESOURCES = register("spawners/levitation_resources");
     public static final ResourceKey<LootTable> SPAWNER_UTILITY = register("spawners/utility");
+    public static final ResourceKey<LootTable> SPAWNER_BIRDCAGE_OMINOUS = register("spawners/birdcage_ominous");
 
     public static final ResourceKey<LootTable> BIRDCAGE_ENVOY = register("equipment/birdcage_envoy");
     public static final ResourceKey<LootTable> BIRDCAGE_ENVOY_OMINOUS = register("equipment/birdcage_envoy_ominous");

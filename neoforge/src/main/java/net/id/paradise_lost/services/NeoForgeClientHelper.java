@@ -1,6 +1,7 @@
 package net.id.paradise_lost.services;
 
 import net.id.paradise_lost.platform.services.IClientHelper;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
@@ -27,6 +28,11 @@ public class NeoForgeClientHelper implements IClientHelper {
     @Override
     public void setRenderLayerTranslucent(Object block) {
         deferRenderLayer(block, RenderType.translucent());
+    }
+
+    @Override
+    public boolean isControlKeyDown() {
+        return FMLEnvironment.dist == Dist.CLIENT && Screen.hasControlDown();
     }
 
     private void deferRenderLayer(Object block, RenderType type) {

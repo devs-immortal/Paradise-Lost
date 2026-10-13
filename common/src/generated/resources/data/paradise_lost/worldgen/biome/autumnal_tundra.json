@@ -71,6 +71,10 @@
   ],
   "has_precipitation": true,
   "spawn_costs": {
+    "minecraft:breeze": {
+      "charge": 1.0,
+      "energy_budget": 0.1
+    },
     "paradise_lost:envoy": {
       "charge": 0.7,
       "energy_budget": 0.2
@@ -94,6 +98,12 @@
         "maxCount": 3,
         "minCount": 2,
         "weight": 50
+      },
+      {
+        "type": "minecraft:breeze",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 5
       }
     ],
     "underground_water_creature": [],

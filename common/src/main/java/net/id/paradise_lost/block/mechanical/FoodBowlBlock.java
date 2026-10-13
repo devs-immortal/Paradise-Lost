@@ -2,8 +2,12 @@ package net.id.paradise_lost.block.mechanical;
 
 import com.mojang.serialization.MapCodec;
 import net.id.paradise_lost.block.blockentity.FoodBowlBlockEntity;
+import net.id.paradise_lost.networking.packet.FoodBowlCtrlC2SPacket;
+import net.id.paradise_lost.networking.packet.PacketHandler;
+import net.id.paradise_lost.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -46,11 +50,25 @@ public class FoodBowlBlock extends ParadiseLostBlockWithEntity {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!player.isShiftKeyDown() && world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl) {
-            boolean used = world.isClientSide() ? state.getValue(FULL) || stack.is(ItemTags.MEAT) : foodBowl.handleUse(player, hand, stack);
-            if (used) {
-                return ItemInteractionResult.sidedSuccess(world.isClientSide());
-            }
+        ItemStack handStack = player.getItemInHand(hand);
+        boolean canUse = state.getValue(FULL) || handStack.is(ItemTags.MEAT);
+        if (!canUse) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
+        if (world.isClientSide()) {
+            PacketHandler.sendToServer(new FoodBowlCtrlC2SPacket(Services.CLIENT.isControlKeyDown()));
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        if (!(world.getBlockEntity(pos) instanceof FoodBowlBlockEntity foodBowl)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
+        boolean dumpStack = player instanceof ServerPlayer serverPlayer
+                && FoodBowlCtrlC2SPacket.pollDump(serverPlayer);
+        if (foodBowl.handleUse(player, hand, handStack, dumpStack)) {
+            return ItemInteractionResult.SUCCESS;
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }

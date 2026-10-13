@@ -1,6 +1,7 @@
 package net.id.paradise_lost.client;
 
 import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
 import net.id.paradise_lost.item.armor.XpCircletItem;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -78,6 +79,8 @@ public final class ClientRegistration {
     public static void registerItemProperties() {
         ItemProperties.register(ItemRegistry.XP_CIRCLET.get(), ModConstants.id("charged"),
                 (stack, level, entity, seed) -> XpCircletItem.isCharged(stack) ? 1.0F : 0.0F);
+        ItemProperties.register(ItemRegistry.FLOATY_LEGGINGS.get(), ModConstants.id("broken"),
+                (stack, level, entity, seed) -> FloatyLeggingsItem.isFloatyEnabled(stack) ? 0.0F : 1.0F);
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})

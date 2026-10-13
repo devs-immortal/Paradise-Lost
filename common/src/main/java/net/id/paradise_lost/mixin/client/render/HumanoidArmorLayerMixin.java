@@ -44,6 +44,7 @@ public class HumanoidArmorLayerMixin {
         if (secondLayer
                 && slot == EquipmentSlot.LEGS
                 && entity.getItemBySlot(slot).getItem() instanceof FloatyLeggingsItem
+                && FloatyLeggingsItem.isFloatyEnabled(entity.getItemBySlot(slot))
                 && entity instanceof ParadiseLostEntityExtensions extensions
                 && extensions.isFloatyAnchored()) {
             return FLOATY_LEGGINGS_ANCHORED;

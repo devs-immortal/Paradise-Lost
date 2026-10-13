@@ -1,11 +1,15 @@
 package net.id.paradise_lost.datagen;
 
 import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
+import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.loot.ParadiseLostLootTables;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
+import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.id.paradise_lost.util.ParadiseLostEnchantments;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.network.chat.Component;
@@ -26,12 +30,16 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCon
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import java.util.UUID;
 import java.util.function.BiConsumer;
 
 public class ParadiseLostChestLootProvider implements LootTableSubProvider {
     private static final TagKey<Structure> VAULT_STRUCTURES = TagKey.create(Registries.STRUCTURE, ModConstants.id("vault"));
     private static final ResourceKey<MapDecorationType> VAULT_DECORATION =
             ResourceKey.create(Registries.MAP_DECORATION_TYPE, ModConstants.id("vault"));
+    private static final TagKey<Structure> PALACE_STRUCTURES = TagKey.create(Registries.STRUCTURE, ModConstants.id("palace"));
+    private static final ResourceKey<MapDecorationType> PALACE_DECORATION =
+            ResourceKey.create(Registries.MAP_DECORATION_TYPE, ModConstants.id("palace"));
 
     private final HolderLookup.Provider registries;
 
@@ -89,7 +97,9 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(BlockRegistry.BLOOMED_CALCITE.get(), 1)))
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(item(ItemRegistry.FLAXWEAVE.get(), 3))
-                        .add(item(BlockRegistry.PINK_SPORECAP.get(), 3).apply(count(1, 3))))
+                        .add(item(BlockRegistry.PINK_SPORECAP.get(), 3).apply(count(1, 3)))
+                        .add(LootItem.lootTableItem(Items.OMINOUS_BOTTLE)
+                                .apply(SetComponentsFunction.setComponent(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, 0)).setWeight(2)))
                 .setRandomSequence(ModConstants.id("chests/birdcage/tomb_bare")));
 
         output.accept(ParadiseLostLootTables.PALACE_ARTISAN, LootTable.lootTable()
@@ -281,7 +291,16 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(ItemRegistry.FLAX_THREAD.get(), 10).apply(count(3, 9)))
                         .add(item(ItemRegistry.FLAXSEED.get(), 5).apply(count(2, 3)))
                         .add(item(ItemRegistry.OLVITE.get(), 5))
-                        .add(item(ItemRegistry.LEVITA_GEM.get(), 3)))
+                        .add(item(ItemRegistry.LEVITA_GEM.get(), 3))
+                        .add(LootItem.lootTableItem(Items.MAP)
+                                .apply(ExplorationMapFunction.makeExplorationMap()
+                                        .setDestination(PALACE_STRUCTURES)
+                                        .setMapDecoration(registries.lookupOrThrow(Registries.MAP_DECORATION_TYPE).getOrThrow(PALACE_DECORATION))
+                                        .setZoom((byte) 1)
+                                        .setSkipKnownStructures(false))
+                                .apply(SetNameFunction.setName(
+                                        Component.translatable("filled_map.paradise_lost.palace"),
+                                        SetNameFunction.Target.ITEM_NAME)).setWeight(7)))
                 .setRandomSequence(ModConstants.id("pots/remains")));
 
         output.accept(ParadiseLostLootTables.SPAWNER_GENERIC_FOOD, LootTable.lootTable()
@@ -293,8 +312,9 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(ItemRegistry.AMADRYS_BREAD_GLAZED.get(), 1).apply(count(1, 4)))));
 
         output.accept(ParadiseLostLootTables.SPAWNER_LEVITATION_RESOURCES, LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2))
                         .add(item(ItemRegistry.LEVITA_GEM.get(), 5).apply(count(1, 2)))
+                        .add(item(ItemRegistry.LEVITA_SHARD.get(), 4).apply(count(3, 6)))
                         .add(item(BlockRegistry.LEVITATOR.get(), 3))
                         .add(item(ItemRegistry.LEVITA_WAND.get(), 1))
                         .add(item(ItemRegistry.TOTEM_OF_LEVITATION.get(), 6))));
@@ -305,8 +325,25 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(BlockRegistry.NITRA_BUNCH.get(), 4).apply(count(1, 4)))
                         .add(item(BlockRegistry.BLUE_CLOUD.get(), 4).apply(count(2, 6)))
                         .add(item(ItemRegistry.NITRA_BULB.get(), 3).apply(count(3, 8)))
+                        .add(LootItem.lootTableItem(Items.OMINOUS_BOTTLE)
+                                .apply(SetComponentsFunction.setComponent(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, 0)).setWeight(2))
                         .add(item(BlockRegistry.FLAXWEAVE_CUSHION.get(), 1))
                         .add(item(ItemRegistry.NITRA_SEED.get(), 1))));
+
+        output.accept(ParadiseLostLootTables.SPAWNER_BIRDCAGE_OMINOUS, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2))
+                        .add(item(ItemRegistry.TOTEM_OF_LEVITATION.get(), 4))
+                        .add(item(ItemRegistry.LEVITA_GEM.get(), 3).apply(count(2, 4)))
+                        .add(item(ItemRegistry.ROOT_STEW.get(), 2).apply(count(1, 3)))
+                        .add(LootItem.lootTableItem(ItemRegistry.MOA_EGG.get())
+                                .apply(SetComponentsFunction.setComponent(ParadiseLostDataComponentTypes.MOA_GENES, new ParadiseLostDataComponentTypes.MoaGeneComponent(
+                                        MoaRaceRegistry.CHARNELA.location(),
+                                        MoaAttributes.GLIDING_DECAY.toString(),
+                                        true,
+                                        100,
+                                        UUID.fromString("00000000-0000-0000-0000-000000000000"),
+                                        new ParadiseLostDataComponentTypes.MoaAttributeComponent(0.5F, 0.2F, 0.75F, 0.185F, 1, 25)
+                                ))).setWeight(4))));
     }
 
     private static LootPool.Builder floatyLeggingsPool() {

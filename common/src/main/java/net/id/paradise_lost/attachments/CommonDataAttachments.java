@@ -31,6 +31,24 @@ public class CommonDataAttachments {
                     .networkSynchronized(ByteBufCodecs.STRING_UTF8)
                     .build("minecart_float_shape"));
 
+    public static final CommonDataAttachment<Boolean> MINE_CART_FLOAT_OFF_RAIL =
+            register(CommonDataAttachment.create(o -> false)
+                    .codec(Codec.BOOL)
+                    .networkSynchronized(ByteBufCodecs.BOOL)
+                    .build("minecart_float_off_rail"));
+
+    public static final CommonDataAttachment<Float> MINE_CART_FLOAT_YAW =
+            register(CommonDataAttachment.create(o -> 0.0F)
+                    .codec(Codec.FLOAT)
+                    .networkSynchronized(ByteBufCodecs.FLOAT)
+                    .build("minecart_float_yaw"));
+
+    public static final CommonDataAttachment<Float> MINE_CART_FLOAT_PITCH =
+            register(CommonDataAttachment.create(o -> 0.0F)
+                    .codec(Codec.FLOAT)
+                    .networkSynchronized(ByteBufCodecs.FLOAT)
+                    .build("minecart_float_pitch"));
+
     public static final CommonDataAttachment<Boolean> FLOATY_ANCHORED =
             register(CommonDataAttachment.create(o -> false)
                     .codec(Codec.BOOL)
@@ -49,6 +67,9 @@ public class CommonDataAttachments {
         Objects.requireNonNull(MINE_CART_FLOATING.getName());
         Objects.requireNonNull(MINE_CART_FLOAT_INCLINE.getName());
         Objects.requireNonNull(MINE_CART_FLOAT_SHAPE.getName());
+        Objects.requireNonNull(MINE_CART_FLOAT_OFF_RAIL.getName());
+        Objects.requireNonNull(MINE_CART_FLOAT_YAW.getName());
+        Objects.requireNonNull(MINE_CART_FLOAT_PITCH.getName());
         Objects.requireNonNull(FLOATY_ANCHORED.getName());
         Objects.requireNonNull(FLOATY_ANCHORED_SAVED.getName());
     }

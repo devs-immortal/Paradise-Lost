@@ -4,7 +4,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 
 @Environment(EnvType.CLIENT)
 public final class FabricColorProviders {

@@ -55,6 +55,19 @@
           ],
           "name": "paradise_lost:pink_sporecap",
           "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:ominous_bottle_amplifier": 0
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:ominous_bottle",
+          "weight": 2
         }
       ],
       "rolls": 1.0

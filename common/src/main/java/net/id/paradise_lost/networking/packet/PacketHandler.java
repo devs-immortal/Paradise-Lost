@@ -5,10 +5,12 @@ import net.minecraft.server.level.ServerPlayer;
 
 public final class PacketHandler {
 
-    private PacketHandler() {}
+    private PacketHandler() {
+    }
 
     public static void registerPackets() {
         Services.NETWORK.registerServerPlayPacket(FloatyAnchorC2SPacket.TYPE, FloatyAnchorC2SPacket.CODEC);
+        Services.NETWORK.registerServerPlayPacket(FoodBowlCtrlC2SPacket.TYPE, FoodBowlCtrlC2SPacket.CODEC);
     }
 
 
