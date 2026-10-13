@@ -1,4 +1,4 @@
-package net.id.paradise_lost.clienttest;
+package net.id.paradise_lost.gametest;
 
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;

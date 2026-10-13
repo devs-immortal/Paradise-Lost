@@ -1,19 +1,19 @@
-package net.id.paradise_lost.clienttest;
+package net.id.paradise_lost.gametest;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.id.paradise_lost.clienttest.tests.BlockTests;
-import net.id.paradise_lost.clienttest.tests.BoatTests;
-import net.id.paradise_lost.clienttest.tests.DimensionTests;
-import net.id.paradise_lost.clienttest.tests.EntityTests;
-import net.id.paradise_lost.clienttest.tests.FoodBowlTests;
-import net.id.paradise_lost.clienttest.tests.FoodTests;
-import net.id.paradise_lost.clienttest.tests.ItemTests;
-import net.id.paradise_lost.clienttest.tests.LevitaTests;
-import net.id.paradise_lost.clienttest.tests.MoaTests;
-import net.id.paradise_lost.clienttest.tests.NitraTests;
-import net.id.paradise_lost.clienttest.tests.PotTests;
-import net.id.paradise_lost.clienttest.tests.RegistryTests;
+import net.id.paradise_lost.gametest.tests.BlockTests;
+import net.id.paradise_lost.gametest.tests.BoatTests;
+import net.id.paradise_lost.gametest.tests.DimensionTests;
+import net.id.paradise_lost.gametest.tests.EntityTests;
+import net.id.paradise_lost.gametest.tests.FoodBowlTests;
+import net.id.paradise_lost.gametest.tests.FoodTests;
+import net.id.paradise_lost.gametest.tests.ItemTests;
+import net.id.paradise_lost.gametest.tests.LevitaTests;
+import net.id.paradise_lost.gametest.tests.MoaTests;
+import net.id.paradise_lost.gametest.tests.NitraTests;
+import net.id.paradise_lost.gametest.tests.PotTests;
+import net.id.paradise_lost.gametest.tests.RegistryTests;
 import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.concurrent.CompletionException;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.client;
+import static net.id.paradise_lost.gametest.TestHelpers.client;
 
 public class ClientTestRunner implements ClientModInitializer {
     private static final Logger LOG = LoggerFactory.getLogger("ClientTest");

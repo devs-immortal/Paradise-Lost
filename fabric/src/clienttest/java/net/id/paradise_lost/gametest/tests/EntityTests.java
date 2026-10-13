@@ -1,7 +1,7 @@
-package net.id.paradise_lost.clienttest.tests;
+package net.id.paradise_lost.gametest.tests;
 
-import net.id.paradise_lost.clienttest.ClientTest;
-import net.id.paradise_lost.clienttest.Step;
+import net.id.paradise_lost.gametest.ClientTest;
+import net.id.paradise_lost.gametest.Step;
 import net.id.paradise_lost.entity.hostile.EnvoyEntity;
 import net.id.paradise_lost.entity.hostile.SentinelEntity;
 import net.id.paradise_lost.entity.passive.PopomEntity;
@@ -32,7 +32,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.*;
+import static net.id.paradise_lost.gametest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class EntityTests {

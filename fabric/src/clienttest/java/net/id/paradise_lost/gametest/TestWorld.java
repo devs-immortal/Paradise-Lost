@@ -1,4 +1,4 @@
-package net.id.paradise_lost.clienttest;
+package net.id.paradise_lost.gametest;
 
 import net.fabricmc.fabric.impl.resource.loader.ModResourcePackUtil;
 import net.id.paradise_lost.world.ParadiseLostGameRules;
@@ -25,7 +25,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.IOException;
 import java.util.Optional;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.*;
+import static net.id.paradise_lost.gametest.TestHelpers.*;
 
 final class TestWorld {
     private static final String NAME = "clienttest";

@@ -1,6 +1,6 @@
-package net.id.paradise_lost.clienttest.mixin;
+package net.id.paradise_lost.gametest.mixin;
 
-import net.id.paradise_lost.clienttest.ClientTestRunner;
+import net.id.paradise_lost.gametest.ClientTestRunner;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

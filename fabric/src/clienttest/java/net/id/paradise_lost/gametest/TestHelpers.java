@@ -1,4 +1,4 @@
-package net.id.paradise_lost.clienttest;
+package net.id.paradise_lost.gametest;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;

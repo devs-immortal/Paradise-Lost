@@ -1,4 +1,4 @@
-package net.id.paradise_lost.clienttest.tests;
+package net.id.paradise_lost.gametest.tests;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -8,9 +8,9 @@ import com.google.gson.JsonPrimitive;
 import com.mojang.serialization.JsonOps;
 import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradise_lost.block.blockentity.ParadiseHangingSignBlockEntity;
-import net.id.paradise_lost.clienttest.ClientTest;
-import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.mixin.HangingSignEditScreenAccessor;
+import net.id.paradise_lost.gametest.ClientTest;
+import net.id.paradise_lost.gametest.Step;
+import net.id.paradise_lost.gametest.mixin.HangingSignEditScreenAccessor;
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
 import net.minecraft.client.renderer.Sheets;
@@ -48,7 +48,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.*;
+import static net.id.paradise_lost.gametest.TestHelpers.*;
 
 public final class RegistryTests {
     private static final String MOD = "paradise_lost";

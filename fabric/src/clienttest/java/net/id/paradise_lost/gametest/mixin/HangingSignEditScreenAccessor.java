@@ -1,4 +1,4 @@
-package net.id.paradise_lost.clienttest.mixin;
+package net.id.paradise_lost.gametest.mixin;
 
 import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
 import net.minecraft.resources.ResourceLocation;

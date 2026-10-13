@@ -1,8 +1,8 @@
-package net.id.paradise_lost.clienttest.tests;
+package net.id.paradise_lost.gametest.tests;
 
-import net.id.paradise_lost.clienttest.ClientTest;
-import net.id.paradise_lost.clienttest.Recorder;
-import net.id.paradise_lost.clienttest.Step;
+import net.id.paradise_lost.gametest.ClientTest;
+import net.id.paradise_lost.gametest.Recorder;
+import net.id.paradise_lost.gametest.Step;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.item.armor.XpCircletItem;
@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.*;
+import static net.id.paradise_lost.gametest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class ItemTests {

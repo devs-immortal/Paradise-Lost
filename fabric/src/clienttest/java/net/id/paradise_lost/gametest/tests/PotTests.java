@@ -1,8 +1,8 @@
-package net.id.paradise_lost.clienttest.tests;
+package net.id.paradise_lost.gametest.tests;
 
 import net.id.paradise_lost.block.blockentity.CalciteDecoratedPotBlockEntity;
-import net.id.paradise_lost.clienttest.ClientTest;
-import net.id.paradise_lost.clienttest.Step;
+import net.id.paradise_lost.gametest.ClientTest;
+import net.id.paradise_lost.gametest.Step;
 import net.id.paradise_lost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.*;
+import static net.id.paradise_lost.gametest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class PotTests {

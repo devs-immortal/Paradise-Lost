@@ -1,6 +1,6 @@
-package net.id.paradise_lost.clienttest.mixin;
+package net.id.paradise_lost.gametest.mixin;
 
-import net.id.paradise_lost.clienttest.Recorder;
+import net.id.paradise_lost.gametest.Recorder;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

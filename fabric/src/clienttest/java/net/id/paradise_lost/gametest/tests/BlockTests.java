@@ -1,4 +1,4 @@
-package net.id.paradise_lost.clienttest.tests;
+package net.id.paradise_lost.gametest.tests;
 
 import net.id.paradise_lost.block.blockentity.CherineCampfireBlockEntity;
 import net.id.paradise_lost.block.blockentity.ParadiseLostBlockEntityTypes;
@@ -7,9 +7,9 @@ import net.id.paradise_lost.block.decorative.CalciteFlowerPotBlock;
 import net.id.paradise_lost.block.mechanical.PalaceDoorBlock;
 import net.id.paradise_lost.block.mechanical.TreeTapBlock;
 import net.id.paradise_lost.block.natural.crop.TallCropBlock;
-import net.id.paradise_lost.clienttest.ClientTest;
-import net.id.paradise_lost.clienttest.Recorder;
-import net.id.paradise_lost.clienttest.Step;
+import net.id.paradise_lost.gametest.ClientTest;
+import net.id.paradise_lost.gametest.Recorder;
+import net.id.paradise_lost.gametest.Step;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
 import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
@@ -48,7 +48,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.*;
+import static net.id.paradise_lost.gametest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class BlockTests {

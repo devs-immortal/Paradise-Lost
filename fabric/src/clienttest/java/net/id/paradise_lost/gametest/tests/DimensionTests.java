@@ -1,10 +1,10 @@
-package net.id.paradise_lost.clienttest.tests;
+package net.id.paradise_lost.gametest.tests;
 
-import net.id.paradise_lost.clienttest.ClientTest;
-import net.id.paradise_lost.clienttest.Recorder;
-import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
-import net.id.paradise_lost.clienttest.TestFactory;
+import net.id.paradise_lost.gametest.ClientTest;
+import net.id.paradise_lost.gametest.Recorder;
+import net.id.paradise_lost.gametest.Step;
+import net.id.paradise_lost.gametest.Test;
+import net.id.paradise_lost.gametest.TestFactory;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.id.paradise_lost.util.RegistryUtil;
@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.*;
+import static net.id.paradise_lost.gametest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class DimensionTests {

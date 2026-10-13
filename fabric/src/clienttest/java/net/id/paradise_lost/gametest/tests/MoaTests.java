@@ -1,9 +1,9 @@
-package net.id.paradise_lost.clienttest.tests;
+package net.id.paradise_lost.gametest.tests;
 
 import net.id.paradise_lost.block.blockentity.IncubatorBlockEntity;
 import net.id.paradise_lost.client.screen.MoaScreen;
-import net.id.paradise_lost.clienttest.ClientTest;
-import net.id.paradise_lost.clienttest.Step;
+import net.id.paradise_lost.gametest.ClientTest;
+import net.id.paradise_lost.gametest.Step;
 import net.id.paradise_lost.component.MoaGenes;
 import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.registry.BlockRegistry;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.*;
+import static net.id.paradise_lost.gametest.TestHelpers.*;
 
 public final class MoaTests {
     private static BlockPos pos;

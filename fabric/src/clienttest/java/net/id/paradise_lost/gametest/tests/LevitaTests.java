@@ -1,9 +1,9 @@
-package net.id.paradise_lost.clienttest.tests;
+package net.id.paradise_lost.gametest.tests;
 
 import net.id.paradise_lost.attachments.MinecartFloating;
 import net.id.paradise_lost.block.mechanical.LevitaRailBlock;
-import net.id.paradise_lost.clienttest.ClientTest;
-import net.id.paradise_lost.clienttest.Step;
+import net.id.paradise_lost.gametest.ClientTest;
+import net.id.paradise_lost.gametest.Step;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.entity.block.FloatingBlockEntity;
 import net.id.paradise_lost.entity.projectile.LevitaArrow;
@@ -40,7 +40,7 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.DoublePredicate;
 
-import static net.id.paradise_lost.clienttest.TestHelpers.*;
+import static net.id.paradise_lost.gametest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class LevitaTests {
