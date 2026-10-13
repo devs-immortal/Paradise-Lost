@@ -4,6 +4,7 @@ import net.id.paradise_lost.attachments.MinecartFloating;
 import net.id.paradise_lost.block.mechanical.LevitaRailBlock;
 import net.id.paradise_lost.gametest.ClientTest;
 import net.id.paradise_lost.gametest.Step;
+import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.entity.block.FloatingBlockEntity;
 import net.id.paradise_lost.entity.projectile.LevitaArrow;
@@ -423,7 +424,7 @@ public final class LevitaTests {
                     AbstractMinecart cart = clientCart(entityId);
                     return MinecartFloating.getIncline(cart) == 1
                             && Math.abs(Math.abs(cart.getXRot()) - 45) < 1
-                            && MinecartFloating.getFloatingRenderYaw(cart) != null;
+                            && ((MinecartFloatPoseAccess) cart).paradiseLost$hasRailRenderPose();
                 })
         );
     }
@@ -685,14 +686,19 @@ public final class LevitaTests {
         check(Math.abs(rise - expected) < 0.6, where + " cart is " + fmt(rise) + " above the bottom, expected about " + fmt(expected)
                 + describe(cart) + floatState(cart));
 
-        Vec3 tangent = MinecartFloating.getMotionAlignedTangent(cart);
-        if (MinecartFloating.shouldUseFloatingRenderRotation(cart) && tangent != null) {
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        if (MinecartFloating.isFloating(cart) && MinecartFloating.getIncline(cart) != 0 && pose.paradiseLost$hasRailRenderPose()) {
+            double yaw = Math.toRadians(pose.paradiseLost$getRailRenderYaw());
+            float pitch = pose.paradiseLost$getRailRenderPitch();
+            Vec3 facing = new Vec3(Math.cos(yaw), 0, Math.sin(yaw));
             Vec3 sideways = Vec3.atLowerCornerOf(dir.getClockWise().getNormal());
-            check(Math.abs(tangent.dot(sideways)) < 0.01, where + " cart renders across the track, shape " + MinecartFloating.getRailShapeName(cart) + describe(cart));
+            check(Math.abs(facing.dot(sideways)) < 0.01, where + " cart renders across the track, shape " + MinecartFloating.getRailShapeName(cart) + describe(cart));
 
-            boolean facesUp = tangent.dot(Vec3.atLowerCornerOf(dir.getNormal())) > 0;
-            check(facesUp == MinecartFloating.getIncline(cart) > 0, where + " cart is drawn tilted the wrong way, it faces "
-                    + (facesUp ? "up" : "down") + " the slope" + describe(cart) + floatState(cart));
+            if (Math.abs(pitch) > 1) {
+                boolean facesUp = facing.dot(Vec3.atLowerCornerOf(dir.getNormal())) > 0;
+                check(facesUp == pitch > 0, where + " cart is drawn tilted the wrong way, it faces " 
+                    + (facesUp ? "up" : "down") + " the slope with pitch " + fmt(pitch) + describe(cart) + floatState(cart));
+            }
         }
     }
 

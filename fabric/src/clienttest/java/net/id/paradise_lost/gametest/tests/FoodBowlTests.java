@@ -54,7 +54,7 @@ public final class FoodBowlTests {
         placeEmptyBowl(player);
         var bowl = (FoodBowlBlockEntity) player.serverLevel().getBlockEntity(pos);
         hold(player, food, count);
-        bowl.handleUse(player, InteractionHand.MAIN_HAND, player.getMainHandItem());
+        bowl.handleUse(player, InteractionHand.MAIN_HAND, player.getMainHandItem(), true);
         return bowl;
     }
 
@@ -70,8 +70,10 @@ public final class FoodBowlTests {
                 Step.until("client bowl to look full", 20, () -> clientBowlFull(true)),
                 Step.run(5, () -> onServer(server -> {
                     ItemStack stored = ((FoodBowlBlockEntity) world(server).getBlockEntity(pos)).getContainedItem();
-                    check(stored.is(Items.BEEF) && stored.getCount() == 3, "bowl holds " + stored);
-                    check(player(server).getMainHandItem().isEmpty(), "hand still holds " + player(server).getMainHandItem());
+                    check(stored.is(Items.BEEF) && stored.getCount() == 1, "bowl holds " + stored);
+
+                    int hand = player(server).getMainHandItem().getCount();
+                    check(hand == 2, "hand holds " + hand + " beef, expected 2");
                 }))
         );
     }
@@ -89,21 +91,19 @@ public final class FoodBowlTests {
                 Step.run(10, () -> useOn(pos)),
                 Step.run(10, () -> onServer(server -> {
                     ItemStack stored = ((FoodBowlBlockEntity) world(server).getBlockEntity(pos)).getContainedItem();
-                    check(stored.is(Items.BEEF) && stored.getCount() == 8, "bowl holds " + stored + " after adding 5 beef to 3, expected 8");
+                    check(stored.is(Items.BEEF) && stored.getCount() == 2, "bowl holds " + stored + " after 2 clicks, expected 2");
                 }))
         );
     }
 
-    @ClientTest("topping up past 64 leaves the rest in the hand")
+    @ClientTest("topping up to 64 keeps the rest in the hand")
     private static List<Step> foodBowlOverflow() {
         return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
-                    placeEmptyBowl(player);
-                    hold(player, Items.BEEF, 60);
+                    placeBowl(player, Items.BEEF, 63);
+                    hold(player, Items.BEEF, 10);
                 })),
-                Step.run(10, () -> useOn(pos)),
-                Step.run(10, () -> onServer(server -> hold(player(server), Items.BEEF, 10))),
                 Step.until("client to hold 10 beef", 20, () -> client().player.getMainHandItem().getCount() == 10),
                 Step.run(0, () -> useOn(pos)),
                 Step.run(10, () -> {
@@ -111,9 +111,9 @@ public final class FoodBowlTests {
                     onServer(server -> {
                         ItemStack stored = serverBowl(server).getContainedItem();
                         int hand = player(server).getMainHandItem().getCount();
-                        check(stored.getCount() == 64 && hand == 6, "bowl holds " + stored.getCount() + " and hand " + hand + " after adding 10 beef to 60, expected 64 and 6");
+                        check(stored.getCount() == 64 && hand == 9, "bowl holds " + stored.getCount() + " and hand " + hand + " after adding 1 beef to 63, expected 64 and 9");
                     });
-                    check(clientHand == 6, "client hand holds " + clientHand + " beef, expected 6");
+                    check(clientHand == 9, "client hand holds " + clientHand + " beef, expected 9");
                 })
         );
     }
@@ -135,7 +135,7 @@ public final class FoodBowlTests {
                     check(serverBowl(server).getContainedItem().isEmpty(), "bowl still holds " + serverBowl(server).getContainedItem());
 
                     int beef = player.getInventory().countItem(Items.BEEF);
-                    check(beef == 3, "player got " + beef + " beef back, expected 3");
+                    check(beef == 1, "player got " + beef + " beef back, expected 1");
                     check(player.getMainHandItem().is(Items.PORKCHOP), "hand holds " + player.getMainHandItem() + " expected the porkchop");
                 }))
         );
@@ -150,7 +150,7 @@ public final class FoodBowlTests {
             chunk.setUnsaved(false);
 
             hold(player, Items.BEEF, 2);
-            bowl.handleUse(player, InteractionHand.MAIN_HAND, player.getMainHandItem());
+            bowl.handleUse(player, InteractionHand.MAIN_HAND, player.getMainHandItem(), true);
             check(bowl.getContainedItem().getCount() == 5, "bowl holds " + bowl.getContainedItem());
             check(chunk.isUnsaved(), "chunk is not marked for saving after the bowl changed");
         }));
@@ -195,7 +195,7 @@ public final class FoodBowlTests {
             BlockPos bowlPos = ahead(player, 6, 0);
             world.setBlockAndUpdate(bowlPos, BlockRegistry.FOOD_BOWL.get().defaultBlockState());
             hold(player, Items.BEEF, 64);
-            ((FoodBowlBlockEntity) world.getBlockEntity(bowlPos)).handleUse(player, InteractionHand.MAIN_HAND, player.getMainHandItem());
+            ((FoodBowlBlockEntity) world.getBlockEntity(bowlPos)).handleUse(player, InteractionHand.MAIN_HAND, player.getMainHandItem(), true);
 
             Vec3 center = Vec3.atCenterOf(bowlPos);
             world.explode(null, center.x, center.y, center.z, 4, Level.ExplosionInteraction.TNT);
@@ -271,8 +271,10 @@ public final class FoodBowlTests {
                 Step.until("client bowl to look full", 20, () -> clientBowlFull(true)),
                 Step.run(5, () -> onServer(server -> {
                     ItemStack stored = serverBowl(server).getContainedItem();
-                    check(stored.is(Items.BEEF) && stored.getCount() == 3, "bowl holds " + stored);
-                    check(player(server).getOffhandItem().isEmpty(), "off hand still holds " + player(server).getOffhandItem());
+                    check(stored.is(Items.BEEF) && stored.getCount() == 1, "bowl holds " + stored);
+                    
+                    int offHand = player(server).getOffhandItem().getCount();
+                    check(offHand == 2, "off hand holds " + offHand + " beef, expected 2");
                 }))
         );
     }
