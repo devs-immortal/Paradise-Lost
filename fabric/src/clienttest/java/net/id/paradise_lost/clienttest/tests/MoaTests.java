@@ -2,8 +2,8 @@ package net.id.paradise_lost.clienttest.tests;
 
 import net.id.paradise_lost.block.blockentity.IncubatorBlockEntity;
 import net.id.paradise_lost.client.screen.MoaScreen;
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.component.MoaGenes;
 import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.registry.BlockRegistry;
@@ -38,29 +38,10 @@ import java.util.Map;
 import static net.id.paradise_lost.clienttest.TestHelpers.*;
 
 public final class MoaTests {
-    private static final String GROUP = "Moa";
     private static BlockPos pos;
     private static int entityId;
 
     private MoaTests() {
-    }
-
-    public static List<Test> all() {
-        return List.of(
-                moaMenuOpens(),
-                moaTakesChest(),
-                moaTakesOneOfTwoChests(),
-                moaCreativeKeepsChest(),
-                moaMenuShiftClickFromChest(),
-                moaMenuShiftClickToLastHotbarSlot(),
-                moaMenuClientShiftClick(),
-                moaMenuShiftClickFillsLastChestSlot(),
-                moaSaddleAndRide(),
-                moaHungerSyncs(),
-                moaInventorySaveLoad(),
-                moaEggHatch(),
-                moaEggBesideWall()
-        );
     }
 
     private static MoaEntity tamedMoa(ServerPlayer player) {
@@ -76,8 +57,9 @@ public final class MoaTests {
         return (MoaEntity) world(server).getEntity(entityId);
     }
 
-    private static Test moaMenuOpens() {
-        return new Test(GROUP, "sneak and right click opens the moa menu on client",
+    @ClientTest("sneak and right click opens the moa menu on client")
+    private static List<Step> moaMenuOpens() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> tamedMoa(player(server)))),
                 Step.run(10, () -> client().options.keyShift.setDown(true)),
                 Step.run(3, () -> interact(entityId)),
@@ -89,8 +71,9 @@ public final class MoaTests {
         );
     }
 
-    private static Test moaTakesChest() {
-        return new Test(GROUP, "single chest from survival goes onto the moa",
+    @ClientTest("single chest from survival goes onto the moa")
+    private static List<Step> moaTakesChest() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     tamedMoa(player);
@@ -105,8 +88,9 @@ public final class MoaTests {
         );
     }
 
-    private static Test moaTakesOneOfTwoChests() {
-        return new Test(GROUP, "chest from stack of 2 leaves 1 and the moa keeps its copy",
+    @ClientTest("chest from stack of 2 leaves 1 and the moa keeps its copy")
+    private static List<Step> moaTakesOneOfTwoChests() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     tamedMoa(player);
@@ -124,8 +108,9 @@ public final class MoaTests {
         );
     }
 
-    private static Test moaCreativeKeepsChest() {
-        return new Test(GROUP, "creative player keeps the chest",
+    @ClientTest("creative player keeps the chest")
+    private static List<Step> moaCreativeKeepsChest() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.setGameMode(GameType.CREATIVE);
@@ -151,19 +136,21 @@ public final class MoaTests {
         check(player.containerMenu != player.inventoryMenu, "moa menu did not open");
     }
 
-    private static Test moaMenuShiftClickFromChest() {
-        return new Test(GROUP, "menu shift click from the last moa chest slot moves to the player", Step.run(0, () -> onServer(server -> {
+    @ClientTest("menu shift click from the last moa chest slot moves to the player")
+    private static Step moaMenuShiftClickFromChest() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             openMoaMenu(player, 19, new ItemStack(Items.DIAMOND));
             player.containerMenu.quickMoveStack(player, 21);
             int inPlayer = player.getInventory().countItem(Items.DIAMOND);
             player.closeContainer();
             check(inPlayer == 1, "diamond from menu slot 21 is not in the player inventory");
-        })));
+        }));
     }
 
-    private static Test moaMenuShiftClickToLastHotbarSlot() {
-        return new Test(GROUP, "menu shift click from the moa chest can use the last hotbar slot", Step.run(0, () -> onServer(server -> {
+    @ClientTest("menu shift click from the moa chest can use the last hotbar slot")
+    private static Step moaMenuShiftClickToLastHotbarSlot() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             Inventory inventory = player.getInventory();
             for (int i = 0; i < Inventory.INVENTORY_SIZE; i++) {
@@ -175,11 +162,12 @@ public final class MoaTests {
             ItemStack lastSlot = inventory.getItem(8);
             player.closeContainer();
             check(lastSlot.is(Items.DIAMOND), "only free slot is hotbar slot 8, it holds " + lastSlot);
-        })));
+        }));
     }
 
-    private static Test moaMenuClientShiftClick() {
-        return new Test(GROUP, "menu shift clicks from the client match the server",
+    @ClientTest("menu shift clicks from the client match the server")
+    private static List<Step> moaMenuClientShiftClick() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     MoaEntity moa = tamedMoa(player);
@@ -212,8 +200,9 @@ public final class MoaTests {
         );
     }
 
-    private static Test moaMenuShiftClickFillsLastChestSlot() {
-        return new Test(GROUP, "menu shiftclick from the player fills the last moa chest slot", Step.run(0, () -> onServer(server -> {
+    @ClientTest("menu shiftclick from the player fills the last moa chest slot")
+    private static Step moaMenuShiftClickFillsLastChestSlot() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             openMoaMenu(player, 0, new ItemStack(Items.DIRT, 64));
 
@@ -226,11 +215,12 @@ public final class MoaTests {
             ItemStack last = moaChest.getItem(19);
             player.closeContainer();
             check(last.is(Items.DIAMOND), "last moa chest slot holds " + last + " expected the diamond");
-        })));
+        }));
     }
 
-    private static Test moaSaddleAndRide() {
-        return new Test(GROUP, "saddle and ride moa",
+    @ClientTest("saddle and ride moa")
+    private static List<Step> moaSaddleAndRide() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     tamedMoa(player);
@@ -243,8 +233,9 @@ public final class MoaTests {
         );
     }
 
-    private static Test moaHungerSyncs() {
-        return new Test(GROUP, "hunger after feeding reaches the client",
+    @ClientTest("hunger after feeding reaches the client")
+    private static List<Step> moaHungerSyncs() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     MoaEntity moa = tamedMoa(player);
@@ -264,8 +255,9 @@ public final class MoaTests {
         );
     }
 
-    private static Test moaInventorySaveLoad() {
-        return new Test(GROUP, "inventory keeps slots after save and load", Step.run(0, () -> onServer(server -> {
+    @ClientTest("inventory keeps slots after save and load")
+    private static Step moaInventorySaveLoad() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ServerLevel world = player.serverLevel();
             MoaEntity moa = MoaGenes.getMoaFromEgg(world, goldenrodEgg(world, false), player.getUUID(), ahead(player, 3, 0));
@@ -287,7 +279,7 @@ public final class MoaTests {
                 }
             }
             checkAll(wrong);
-        })));
+        }));
     }
 
     private static ItemStack goldenrodEgg(ServerLevel world, boolean baby) {
@@ -295,8 +287,9 @@ public final class MoaTests {
         return MoaGenes.getEggForCommand(MoaRaceRegistry.getOrFallback(world.registryAccess(), raceId), raceId, world, baby);
     }
 
-    private static Test moaEggHatch() {
-        return new Test(GROUP, "egg disappears from incubator after hatching",
+    @ClientTest("egg disappears from incubator after hatching")
+    private static List<Step> moaEggHatch() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -320,8 +313,9 @@ public final class MoaTests {
         );
     }
 
-    private static Test moaEggBesideWall() {
-        return new Test(GROUP, "moa spawned from an egg on the side of a wall is not inside a block",
+    @ClientTest("moa spawned from an egg on the side of a wall is not inside a block")
+    private static List<Step> moaEggBesideWall() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();

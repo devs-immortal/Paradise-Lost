@@ -7,9 +7,9 @@ import net.id.paradise_lost.block.decorative.CalciteFlowerPotBlock;
 import net.id.paradise_lost.block.mechanical.PalaceDoorBlock;
 import net.id.paradise_lost.block.mechanical.TreeTapBlock;
 import net.id.paradise_lost.block.natural.crop.TallCropBlock;
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Recorder;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
 import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
@@ -59,37 +59,9 @@ public final class BlockTests {
     private BlockTests() {
     }
 
-    public static List<Test> all() {
+    @ClientTest(value = "cooks food", group = "Campfire")
+    private static List<Step> campfireCooks() {
         return List.of(
-                campfireCooks(),
-                campfireCooksFour(),
-                campfireUnlit(),
-                campfireDropsCherine(),
-                treeTap(),
-                treeTapSyncsToOtherPlayers(),
-                treeTapTakeOutSyncs(),
-                hangingSignPlaces(),
-                wallHangingSigns(),
-                wallVariantDrops(),
-                palaceDoorOpens(),
-                palaceDoorBreaks(),
-                blueCloudBounces(),
-                goldenCloudDropsThrough(),
-                coldCloudSoftensFall(),
-                healingPotionBloomsCalcite(),
-                splashHealingBloomsCalcite(),
-                calciteFlowerPot(),
-                vanillaFlowerPot(),
-                blackcurrantPicking(),
-                farmlandTramples(),
-                cropsGrowAndDrop(),
-                strippingMotherAurel(),
-                surtrumAirPoofs()
-        );
-    }
-
-    private static Test campfireCooks() {
-        return new Test("Campfire", "cooks food",
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);
@@ -107,8 +79,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test campfireCooksFour() {
-        return new Test("Campfire", "cooks all four items",
+    @ClientTest(value = "cooks all four items", group = "Campfire")
+    private static List<Step> campfireCooksFour() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);
@@ -135,8 +108,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test campfireUnlit() {
-        return new Test("Campfire", "does not cook while unlit, cooks after relighting",
+    @ClientTest(value = "does not cook while unlit, cooks after relighting", group = "Campfire")
+    private static List<Step> campfireUnlit() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -161,8 +135,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test campfireDropsCherine() {
-        return new Test("Campfire", "drops cherine", Step.run(0, () -> onServer(server -> {
+    @ClientTest(value = "drops cherine", group = "Campfire")
+    private static Step campfireDropsCherine() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             BlockPos campfire = ahead(player, 3, 0);
             player.serverLevel().setBlockAndUpdate(campfire, BlockRegistry.CHERINE_CAMPFIRE.get().defaultBlockState());
@@ -170,44 +145,43 @@ public final class BlockTests {
             player.gameMode.destroyBlock(campfire);
             Map<Item, Integer> dropped = drops(player.serverLevel(), campfire);
             check(dropped.equals(Map.of(CHERINE.get(), 1)), "dropped " + describe(dropped) + " expected 1 cherine");
-        })));
+        }));
     }
 
-    private static Test treeTap() {
-        return new Test("Tree tap", "fills bottles from logs and bee nests",
-                Step.run(0, () -> onServer(server -> {
-                    ServerPlayer player = player(server);
-                    ServerLevel world = player.serverLevel();
-                    Direction facing = player.getDirection();
-                    List<String> wrong = new ArrayList<>();
+    @ClientTest(value = "fills bottles from logs and bee nests", group = "Tree tap")
+    private static Step treeTap() {
+        return Step.run(0, () -> onServer(server -> {
+            ServerPlayer player = player(server);
+            ServerLevel world = player.serverLevel();
+            Direction facing = player.getDirection();
+            List<String> wrong = new ArrayList<>();
 
-                    BlockPos tap = ahead(player, 3, -1);
-                    world.setBlockAndUpdate(tap.relative(facing), BlockRegistry.WISTERIA_WOODSTUFF.log().get().defaultBlockState());
-                    TreeTapBlockEntity water = placeTap(world, tap, facing);
-                    water.tryCraft();
-                    expect(wrong, water.getItem(0).is(Items.POTION), "wisteria log gave " + water.getItem(0));
+            BlockPos tap = ahead(player, 3, -1);
+            world.setBlockAndUpdate(tap.relative(facing), BlockRegistry.WISTERIA_WOODSTUFF.log().get().defaultBlockState());
+            TreeTapBlockEntity water = placeTap(world, tap, facing);
+            water.tryCraft();
+            expect(wrong, water.getItem(0).is(Items.POTION), "wisteria log gave " + water.getItem(0));
 
-                    BlockPos nestTap = ahead(player, 3, 1);
-                    BlockPos nest = nestTap.relative(facing);
-                    world.setBlockAndUpdate(nest, Blocks.BEE_NEST.defaultBlockState().setValue(BeehiveBlock.HONEY_LEVEL, 5).setValue(BeehiveBlock.FACING, facing.getOpposite()));
-                    TreeTapBlockEntity honey = placeTap(world, nestTap, facing);
-                    for (int i = 0; i < 100 && !honey.getItem(0).is(Items.HONEY_BOTTLE); i++) {
-                        honey.tryCraft();
-                    }
-                    expect(wrong, honey.getItem(0).is(Items.HONEY_BOTTLE), "bee nest gave " + honey.getItem(0));
-                    expect(wrong, world.getBlockState(nest).getValue(BeehiveBlock.HONEY_LEVEL) == 0, "bee nest kept its honey");
+            BlockPos nestTap = ahead(player, 3, 1);
+            BlockPos nest = nestTap.relative(facing);
+            world.setBlockAndUpdate(nest, Blocks.BEE_NEST.defaultBlockState().setValue(BeehiveBlock.HONEY_LEVEL, 5).setValue(BeehiveBlock.FACING, facing.getOpposite()));
+            TreeTapBlockEntity honey = placeTap(world, nestTap, facing);
+            for (int i = 0; i < 100 && !honey.getItem(0).is(Items.HONEY_BOTTLE); i++) {
+                honey.tryCraft();
+            }
+            expect(wrong, honey.getItem(0).is(Items.HONEY_BOTTLE), "bee nest gave " + honey.getItem(0));
+            expect(wrong, world.getBlockState(nest).getValue(BeehiveBlock.HONEY_LEVEL) == 0, "bee nest kept its honey");
 
-                    BlockPos stoneTap = ahead(player, 6, 0);
-                    world.setBlockAndUpdate(stoneTap.relative(facing), Blocks.STONE.defaultBlockState());
-                    TreeTapBlockEntity nothing = placeTap(world, stoneTap, facing);
-                    for (int i = 0; i < 20; i++) {
-                        nothing.tryCraft();
-                    }
-                    expect(wrong, nothing.getItem(0).is(Items.GLASS_BOTTLE), "stone gave " + nothing.getItem(0));
+            BlockPos stoneTap = ahead(player, 6, 0);
+            world.setBlockAndUpdate(stoneTap.relative(facing), Blocks.STONE.defaultBlockState());
+            TreeTapBlockEntity nothing = placeTap(world, stoneTap, facing);
+            for (int i = 0; i < 20; i++) {
+                nothing.tryCraft();
+            }
+            expect(wrong, nothing.getItem(0).is(Items.GLASS_BOTTLE), "stone gave " + nothing.getItem(0));
 
-                    checkAll(wrong);
-                }))
-        );
+            checkAll(wrong);
+        }));
     }
 
     private static TreeTapBlockEntity placeTap(ServerLevel world, BlockPos tap, Direction towardsLog) {
@@ -217,8 +191,9 @@ public final class BlockTests {
         return entity;
     }
 
-    private static Test treeTapSyncsToOtherPlayers() {
-        return new Test("Tree tap", "bottle put in by someone else shows on the client",
+    @ClientTest(value = "bottle put in by someone else shows on the client", group = "Tree tap")
+    private static List<Step> treeTapSyncsToOtherPlayers() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -238,8 +213,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test treeTapTakeOutSyncs() {
-        return new Test("Tree tap", "bottle taken out by someone else disappears on the client",
+    @ClientTest(value = "bottle taken out by someone else disappears on the client", group = "Tree tap")
+    private static List<Step> treeTapTakeOutSyncs() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -263,8 +239,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test hangingSignPlaces() {
-        return new Test("Sign", "hanging sign can be placed by a player",
+    @ClientTest(value = "hanging sign can be placed by a player", group = "Sign")
+    private static List<Step> hangingSignPlaces() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);
@@ -281,7 +258,8 @@ public final class BlockTests {
         );
     }
 
-    private static Test wallHangingSigns() {
+    @ClientTest(value = "wall hanging sign of every wood places on a wall and keeps its text", group = "Sign")
+    private static List<Step> wallHangingSigns() {
         List<BlockRegistry.SignSet> signs = List.of(BlockRegistry.AUREL_SIGNS, BlockRegistry.MOTHER_AUREL_SIGNS, BlockRegistry.MENTH_SIGNS, BlockRegistry.WISTERIA_SIGNS);
         List<Item> items = List.of(AUREL_HANGING_SIGN.get(), MOTHER_AUREL_HANGING_SIGN.get(), MENTH_HANGING_SIGN.get(), WISTERIA_HANGING_SIGN.get());
         List<Step> steps = new ArrayList<>();
@@ -331,11 +309,12 @@ public final class BlockTests {
             })));
         }
 
-        return new Test("Sign", "wall hanging sign of every wood places on a wall and keeps its text", steps);
+        return steps;
     }
 
-    private static Test wallVariantDrops() {
-        return new Test("Sign", "wall torch and wall sign drop their standing item", Step.run(0, () -> onServer(server -> {
+    @ClientTest(value = "wall torch and wall sign drop their standing item", group = "Sign")
+    private static Step wallVariantDrops() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ServerLevel world = player.serverLevel();
             List<String> wrong = new ArrayList<>();
@@ -356,11 +335,12 @@ public final class BlockTests {
             expect(wrong, signDrops.equals(Map.of(AUREL_SIGN.get(), 1)), "aurel wall sign dropped " + describe(signDrops));
 
             checkAll(wrong);
-        })));
+        }));
     }
 
-    private static Test palaceDoorOpens() {
-        return new Test("Palace door", "placer builds it and the key opens it",
+    @ClientTest(value = "placer builds it and the key opens it", group = "Palace door")
+    private static List<Step> palaceDoorOpens() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 3, 0);
@@ -383,8 +363,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test palaceDoorBreaks() {
-        return new Test("Palace door", "breaking it removes the extension blocks",
+    @ClientTest(value = "breaking it removes the extension blocks", group = "Palace door")
+    private static List<Step> palaceDoorBreaks() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 3, 0);
@@ -417,24 +398,27 @@ public final class BlockTests {
         });
     }
 
-    private static Test blueCloudBounces() {
-        return new Test("Cloud", "blue cloud bounces the player up",
+    @ClientTest(value = "blue cloud bounces the player up", group = "Cloud")
+    private static List<Step> blueCloudBounces() {
+        return List.of(
                 Step.run(0, () -> overCloud(BlockRegistry.BLUE_CLOUD.get(), 0, 6)),
                 Step.until("client player to bounce", 60, () -> client().player.getDeltaMovement().y > 1.5),
                 Step.run(0, () -> check(!Recorder.playerHurtBy(DamageTypes.FALL), "took fall damage"))
         );
     }
 
-    private static Test goldenCloudDropsThrough() {
-        return new Test("Cloud", "golden cloud drops the player through",
+    @ClientTest(value = "golden cloud drops the player through", group = "Cloud")
+    private static List<Step> goldenCloudDropsThrough() {
+        return List.of(
                 Step.run(0, () -> overCloud(BlockRegistry.GOLDEN_CLOUD.get(), 5, 6)),
                 Step.until("player below the cloud", 60, () -> fromServer(server -> player(server).getY() < pos.getY())),
                 Step.until("fall damage", 40, () -> Recorder.playerHurtBy(DamageTypes.FALL))
         );
     }
 
-    private static Test coldCloudSoftensFall() {
-        return new Test("Cloud", "cold cloud stops fall damage",
+    @ClientTest(value = "cold cloud stops fall damage", group = "Cloud")
+    private static List<Step> coldCloudSoftensFall() {
+        return List.of(
                 Step.run(0, () -> overCloud(BlockRegistry.COLD_CLOUD.get(), 0, 20)),
                 Step.run(5, () -> {}),
                 Step.until("landing", 100, () -> fromServer(server -> player(server).onGround() || player(server).getY() < pos.getY() + 1)),
@@ -442,8 +426,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test healingPotionBloomsCalcite() {
-        return new Test("Calcite", "healing potion turns calcite into bloomed calcite",
+    @ClientTest(value = "healing potion turns calcite into bloomed calcite", group = "Calcite")
+    private static List<Step> healingPotionBloomsCalcite() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);
@@ -456,8 +441,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test splashHealingBloomsCalcite() {
-        return new Test("Calcite", "splash healing potion turns calcite into bloomed calcite",
+    @ClientTest(value = "splash healing potion turns calcite into bloomed calcite", group = "Calcite")
+    private static List<Step> splashHealingBloomsCalcite() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -474,8 +460,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test calciteFlowerPot() {
-        return new Test("Flower pot", "calcite pot can pot a flower, give it back and break",
+    @ClientTest(value = "calcite pot can pot a flower, give it back and break", group = "Flower pot")
+    private static List<Step> calciteFlowerPot() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);
@@ -503,8 +490,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test vanillaFlowerPot() {
-        return new Test("Flower pot", "vanilla pot still works with a Paradise Lost flower",
+    @ClientTest(value = "vanilla pot still works with a Paradise Lost flower", group = "Flower pot")
+    private static List<Step> vanillaFlowerPot() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);
@@ -524,8 +512,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test blackcurrantPicking() {
-        return new Test("Crops", "picking a ripe blackcurrant bush drops berries",
+    @ClientTest(value = "picking a ripe blackcurrant bush drops berries", group = "Crops")
+    private static List<Step> blackcurrantPicking() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);
@@ -540,8 +529,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test farmlandTramples() {
-        return new Test("Crops", "Paradise Lost farmland is trampled into Paradise Lost dirt",
+    @ClientTest(value = "Paradise Lost farmland is trampled into Paradise Lost dirt", group = "Crops")
+    private static List<Step> farmlandTramples() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = player.blockPosition().below();
@@ -556,8 +546,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test cropsGrowAndDrop() {
-        return new Test("Crops", "grow with bone meal and drop their harvest", Step.run(0, () -> onServer(server -> {
+    @ClientTest(value = "grow with bone meal and drop their harvest", group = "Crops")
+    private static Step cropsGrowAndDrop() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ServerLevel world = player.serverLevel();
             List<String> wrong = new ArrayList<>();
@@ -604,11 +595,12 @@ public final class BlockTests {
             }
 
             checkAll(wrong);
-        })));
+        }));
     }
 
-    private static Test strippingMotherAurel() {
-        return new Test("Blocks", "axe strips Paradise Lost logs",
+    @ClientTest(value = "axe strips Paradise Lost logs", group = "Blocks")
+    private static List<Step> strippingMotherAurel() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);
@@ -621,8 +613,9 @@ public final class BlockTests {
         );
     }
 
-    private static Test surtrumAirPoofs() {
-        return new Test("Blocks", "surtrum air disappears and burns nearby mobs when opened",
+    @ClientTest(value = "surtrum air disappears and burns nearby mobs when opened", group = "Blocks")
+    private static List<Step> surtrumAirPoofs() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();

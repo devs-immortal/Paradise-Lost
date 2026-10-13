@@ -30,6 +30,20 @@ public class ClientTestRunner implements ClientModInitializer {
     private static final Logger LOG = LoggerFactory.getLogger("ClientTest");
     private static final int WORLD_SETTLE_TICKS = 40;
     private static final int RESET_SETTLE_TICKS = 20;
+    private static final List<Class<?>> TEST_CLASSES = List.of(
+            FoodTests.class,
+            BoatTests.class,
+            NitraTests.class,
+            BlockTests.class,
+            DimensionTests.class,
+            EntityTests.class,
+            FoodBowlTests.class,
+            ItemTests.class,
+            LevitaTests.class,
+            MoaTests.class,
+            PotTests.class,
+            RegistryTests.class
+    );
 
     public static String title;
 
@@ -68,20 +82,9 @@ public class ClientTestRunner implements ClientModInitializer {
     }
 
     private void loadTests() {
-        tests.addAll(FoodTests.all());
-        tests.addAll(BoatTests.all());
-        tests.addAll(NitraTests.all());
-        tests.addAll(BlockTests.all());
-        tests.addAll(DimensionTests.all());
-        tests.addAll(EntityTests.all());
-        tests.addAll(FoodBowlTests.all());
-        tests.addAll(ItemTests.all());
-        tests.addAll(LevitaTests.all());
-        tests.addAll(MoaTests.all());
-        tests.addAll(PotTests.all());
-        tests.addAll(RegistryTests.all());
-        String group = System.getenv("RUN_ONLY");
-        if (group != null) tests.removeIf(test -> !test.group().equalsIgnoreCase(group));
+        TEST_CLASSES.forEach(type -> tests.addAll(TestLoader.load(type)));
+        String only = System.getenv("RUN_ONLY");
+        if (only != null) tests.removeIf(test -> !test.group().equalsIgnoreCase(only) && !test.fullName().equalsIgnoreCase(only));
         testCount = tests.size();
     }
 

@@ -1,8 +1,8 @@
 package net.id.paradise_lost.clienttest.tests;
 
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Recorder;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.item.armor.XpCircletItem;
@@ -55,32 +55,9 @@ public final class ItemTests {
     private ItemTests() {
     }
 
-    public static List<Test> all() {
-        return List.of(
-                armorAndTools(),
-                fuelAndCompost(),
-                itemNames(),
-                ignitingToolSmeltsDrops(),
-                olviteSpyglassScopes(),
-                soulBladeCollectsSouls(),
-                xpCircletOnMobs(),
-                xpCircletDispenser(),
-                xpCircletStoresXpOnDeath(),
-                bloodstoneCaptures(),
-                aurelBucketWater(),
-                aurelBucketMilk(),
-                aurelBucketPowderSnow(),
-                aurelBucketDispenser(),
-                levitationTotemStopsFall(),
-                floatyBootsFall(),
-                floatyAnchorSync(),
-                floatyDoubleJumpAnchors(),
-                floatyLeggingsOnMobs()
-        );
-    }
-
-    private static Test armorAndTools() {
-        return new Test("Items", "armor and tools keep their stats, repair items and tags", Step.run(0, () -> {
+    @ClientTest(value = "armor and tools keep their stats, repair items and tags", group = "Items")
+    private static Step armorAndTools() {
+        return Step.run(0, () -> {
             List<String> wrong = new ArrayList<>();
 
             expect(wrong, new ItemStack(OLVITE_HELMET.get()).getMaxDamage() == ArmorItem.Type.HELMET.getDurability(15), "olvite helmet durability");
@@ -111,11 +88,12 @@ public final class ItemTests {
             expect(wrong, PiglinAi.isWearingGold(stand), "glazed gold is not piglin safe");
 
             checkAll(wrong);
-        }));
+        });
     }
 
-    private static Test fuelAndCompost() {
-        return new Test("Items", "fuel and compost values are registered", Step.run(0, () -> onServer(server -> {
+    @ClientTest(value = "fuel and compost values are registered", group = "Items")
+    private static Step fuelAndCompost() {
+        return Step.run(0, () -> onServer(server -> {
             List<String> wrong = new ArrayList<>();
             Map<Item, Integer> fuel = AbstractFurnaceBlockEntity.getFuel();
 
@@ -126,11 +104,12 @@ public final class ItemTests {
             expect(wrong, ComposterBlock.COMPOSTABLES.getFloat(SWEDROOT_PULP.get()) == 0.3F, "swedroot pulp compost chance");
 
             checkAll(wrong);
-        })));
+        }));
     }
 
-    private static Test itemNames() {
-        return new Test("Items", "names use item lang keys", Step.run(0, () -> {
+    @ClientTest(value = "names use item lang keys", group = "Items")
+    private static Step itemNames() {
+        return Step.run(0, () -> {
             List<String> wrong = new ArrayList<>();
             for (Item item : List.<Item>of(BLACKCURRANT.get(), AMADRYS_BUSHEL.get(), NITRA_SEED.get(), SWEDROOT.get(), FLAXSEED.get())) {
                 String key = Util.makeDescriptionId("item", BuiltInRegistries.ITEM.getKey(item));
@@ -145,11 +124,12 @@ public final class ItemTests {
             }
 
             checkAll(wrong);
-        }));
+        });
     }
 
-    private static Test ignitingToolSmeltsDrops() {
-        return new Test("Items", "igniting tools smelt mob drops", Step.run(0, () -> onServer(server -> {
+    @ClientTest(value = "igniting tools smelt mob drops", group = "Items")
+    private static Step ignitingToolSmeltsDrops() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ServerLevel world = player.serverLevel();
             hold(player, SURTRUM_SWORD.get());
@@ -162,11 +142,12 @@ public final class ItemTests {
 
             Map<Item, Integer> loot = drops(world, at);
             check(loot.containsKey(Items.COOKED_BEEF) && !loot.containsKey(Items.BEEF), "cow dropped " + describe(loot));
-        })));
+        }));
     }
 
-    private static Test olviteSpyglassScopes() {
-        return new Test("Items", "olvite spyglass zooms like the vanilla spyglass",
+    @ClientTest(value = "olvite spyglass zooms like the vanilla spyglass", group = "Items")
+    private static List<Step> olviteSpyglassScopes() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> hold(player(server), OLVITE_SPYGLASS.get()))),
                 Step.run(10, () -> client().options.keyUse.setDown(true)),
                 Step.until("client player to scope", 20, () -> client().player.isScoping()),
@@ -174,8 +155,9 @@ public final class ItemTests {
         );
     }
 
-    private static Test soulBladeCollectsSouls() {
-        return new Test("Soul blade", "collects one soul per mob type and hits harder",
+    @ClientTest(value = "collects one soul per mob type and hits harder", group = "Soul blade")
+    private static List<Step> soulBladeCollectsSouls() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     hold(player, SOUL_BLADE.get());
@@ -204,8 +186,9 @@ public final class ItemTests {
     }
 
 
-    private static Test xpCircletOnMobs() {
-        return new Test("XP circlet", "can go on a mob or armor stand head", Step.run(0, () -> onServer(server -> {
+    @ClientTest(value = "can go on a mob or armor stand head", group = "XP circlet")
+    private static Step xpCircletOnMobs() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ServerLevel world = player.serverLevel();
             List<String> wrong = new ArrayList<>();
@@ -222,11 +205,12 @@ public final class ItemTests {
             }
 
             checkAll(wrong);
-        })));
+        }));
     }
 
-    private static Test xpCircletDispenser() {
-        return new Test("XP circlet", "dispenser puts it on an armor stand",
+    @ClientTest(value = "dispenser puts it on an armor stand", group = "XP circlet")
+    private static List<Step> xpCircletDispenser() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -246,8 +230,9 @@ public final class ItemTests {
         );
     }
 
-    private static Test xpCircletStoresXpOnDeath() {
-        return new Test("XP circlet", "stores XP on death and gives it back when worn",
+    @ClientTest(value = "stores XP on death and gives it back when worn", group = "XP circlet")
+    private static List<Step> xpCircletStoresXpOnDeath() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = player.blockPosition();
@@ -285,8 +270,9 @@ public final class ItemTests {
         );
     }
 
-    private static Test bloodstoneCaptures() {
-        return new Test("Bloodstone", "captures a mob's stats",
+    @ClientTest(value = "captures a mob's stats", group = "Bloodstone")
+    private static List<Step> bloodstoneCaptures() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     entityIds.clear();
@@ -318,8 +304,9 @@ public final class ItemTests {
         return fromServer(server -> player(server).getMainHandItem().is(item));
     }
 
-    private static Test aurelBucketWater() {
-        return new Test("Aurel bucket", "picks up and places water",
+    @ClientTest(value = "picks up and places water", group = "Aurel bucket")
+    private static List<Step> aurelBucketWater() {
+        return List.of(
                 Step.run(0, () -> lookDownAt(Blocks.WATER.defaultBlockState(), AUREL_BUCKET.get())),
                 Step.run(10, ItemTests::useItem),
                 Step.until("aurel water bucket", 20, () -> holding(AUREL_WATER_BUCKET.get())),
@@ -330,8 +317,9 @@ public final class ItemTests {
         );
     }
 
-    private static Test aurelBucketMilk() {
-        return new Test("Aurel bucket", "milks a cow",
+    @ClientTest(value = "milks a cow", group = "Aurel bucket")
+    private static List<Step> aurelBucketMilk() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     entityIds.clear();
@@ -343,16 +331,18 @@ public final class ItemTests {
         );
     }
 
-    private static Test aurelBucketPowderSnow() {
-        return new Test("Aurel bucket", "picks up powder snow",
+    @ClientTest(value = "picks up powder snow", group = "Aurel bucket")
+    private static List<Step> aurelBucketPowderSnow() {
+        return List.of(
                 Step.run(0, () -> lookDownAt(Blocks.POWDER_SNOW.defaultBlockState(), AUREL_BUCKET.get())),
                 Step.run(10, ItemTests::useItem),
                 Step.until("aurel powder snow bucket", 20, () -> holding(AUREL_POWDER_SNOW_BUCKET.get()))
         );
     }
 
-    private static Test aurelBucketDispenser() {
-        return new Test("Aurel bucket", "dispenser places water from an aurel water bucket",
+    @ClientTest(value = "dispenser places water from an aurel water bucket", group = "Aurel bucket")
+    private static List<Step> aurelBucketDispenser() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -368,8 +358,9 @@ public final class ItemTests {
         );
     }
 
-    private static Test levitationTotemStopsFall() {
-        return new Test("Totem", "levitation totem stops a big fall and shows on the client",
+    @ClientTest(value = "levitation totem stops a big fall and shows on the client", group = "Totem")
+    private static List<Step> levitationTotemStopsFall() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     hold(player, TOTEM_OF_LEVITATION.get());
@@ -382,8 +373,9 @@ public final class ItemTests {
         );
     }
 
-    private static Test floatyBootsFall() {
-        return new Test("Floaty", "boots soften a 14 block fall",
+    @ClientTest(value = "boots soften a 14 block fall", group = "Floaty")
+    private static List<Step> floatyBootsFall() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.setItemSlot(EquipmentSlot.FEET, new ItemStack(FLOATY_BOOTS.get()));
@@ -395,8 +387,9 @@ public final class ItemTests {
         );
     }
 
-    private static Test floatyAnchorSync() {
-        return new Test("Floaty", "anchor state syncs to the client",
+    @ClientTest(value = "anchor state syncs to the client", group = "Floaty")
+    private static List<Step> floatyAnchorSync() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.setItemSlot(EquipmentSlot.LEGS, new ItemStack(FLOATY_LEGGINGS.get()));
@@ -410,8 +403,9 @@ public final class ItemTests {
         );
     }
 
-    private static Test floatyDoubleJumpAnchors() {
-        return new Test("Floaty", "double jump in the air toggles the anchor",
+    @ClientTest(value = "double jump in the air toggles the anchor", group = "Floaty")
+    private static List<Step> floatyDoubleJumpAnchors() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.setItemSlot(EquipmentSlot.LEGS, new ItemStack(FLOATY_LEGGINGS.get()));
@@ -426,8 +420,9 @@ public final class ItemTests {
         );
     }
 
-    private static Test floatyLeggingsOnMobs() {
-        return new Test("Floaty", "leggings slow the fall of an armor stand and a cow",
+    @ClientTest(value = "leggings slow the fall of an armor stand and a cow", group = "Floaty")
+    private static List<Step> floatyLeggingsOnMobs() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();

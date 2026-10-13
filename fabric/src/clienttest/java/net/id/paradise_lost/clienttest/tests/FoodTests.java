@@ -1,8 +1,8 @@
 package net.id.paradise_lost.clienttest.tests;
 
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Recorder;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,31 +16,31 @@ import static net.id.paradise_lost.clienttest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class FoodTests {
-    private static final String GROUP = "Food";
     private static BlockPos pos;
 
     private FoodTests() {
     }
 
-    public static List<Test> all() {
-        return List.of(
-                blackcurrantEatTime(),
-                heals("popom jelly heals", POPOM_JELLY.get()),
-                heals("jelly-filled roll heals", AMADRYS_BREAD_GLAZED_FILLED.get()),
-                aurelMilkSips(),
-                cheesecakeBites()
-        );
-    }
-
-    private static Test blackcurrantEatTime() {
-        return new Test(GROUP, "blackcurrant eat time is 16", Step.run(0, () -> {
+    @ClientTest("blackcurrant eat time is 16")
+    private static Step blackcurrantEatTime() {
+        return Step.run(0, () -> {
             int ticks = new ItemStack(BLACKCURRANT.get()).getUseDuration(client().player);
             check(ticks == 16, "eat time is " + ticks + " ticks");
-        }));
+        });
     }
 
-    private static Test heals(String name, Item food) {
-        return new Test(GROUP, name,
+    @ClientTest("popom jelly heals")
+    private static List<Step> popomJellyHeals() {
+        return heals(POPOM_JELLY.get());
+    }
+
+    @ClientTest("jelly-filled roll heals")
+    private static List<Step> jellyFilledRollHeals() {
+        return heals(AMADRYS_BREAD_GLAZED_FILLED.get());
+    }
+
+    private static List<Step> heals(Item food) {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.setHealth(10);
@@ -50,8 +50,9 @@ public final class FoodTests {
         );
     }
 
-    private static Test aurelMilkSips() {
-        return new Test(GROUP, "aurel milk has 7 sips like vanilla milk",
+    @ClientTest("aurel milk has 7 sips like vanilla milk")
+    private static List<Step> aurelMilkSips() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> hold(player(server), AUREL_MILK_BUCKET.get()))),
                 Step.run(10, () -> client().options.keyUse.setDown(true)),
                 Step.until("drinking to finish", 80, () -> fromServer(server -> player(server).getMainHandItem().is(AUREL_BUCKET.get()))),
@@ -64,8 +65,9 @@ public final class FoodTests {
         );
     }
 
-    private static Test cheesecakeBites() {
-        return new Test(GROUP, "4 bites of halflight cheesecake feed and regenerate",
+    @ClientTest("4 bites of halflight cheesecake feed and regenerate")
+    private static List<Step> cheesecakeBites() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);

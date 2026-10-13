@@ -1,8 +1,10 @@
 package net.id.paradise_lost.clienttest.tests;
 
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Recorder;
 import net.id.paradise_lost.clienttest.Step;
 import net.id.paradise_lost.clienttest.Test;
+import net.id.paradise_lost.clienttest.TestFactory;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.id.paradise_lost.util.RegistryUtil;
@@ -54,31 +56,6 @@ public final class DimensionTests {
     private DimensionTests() {
     }
 
-    public static List<Test> all() {
-        List<Test> tests = new ArrayList<>(List.of(
-                registryUtilMissingKey(),
-                portalDisabled(),
-                portalTravel(),
-                skylandsClouds(),
-                voidKills(),
-                voidTeleport(),
-                voidTotem(),
-                voidTotemWhenVoidKills(),
-                voidAfterLevitation(),
-                blockShowroom()
-        ));
-
-        client().level.registryAccess().lookupOrThrow(Registries.BIOME).listElementIds()
-                .filter(key -> key.location().getNamespace().equals("paradise_lost"))
-                .forEach(key -> tests.add(biomeGenerates(key)));
-        fromServer(server -> server.registryAccess().lookupOrThrow(Registries.STRUCTURE).listElementIds()
-                .filter(key -> key.location().getNamespace().equals("paradise_lost"))
-                .toList())
-                .forEach(key -> tests.add(structureGenerates(key)));
-
-        return tests;
-    }
-
     private static void buildFrame(ServerPlayer player) {
         ServerLevel world = player.serverLevel();
         across = player.getDirection().getClockWise();
@@ -108,8 +85,9 @@ public final class DimensionTests {
         return true;
     }
 
-    private static Test portalDisabled() {
-        return new Test("Portal", "does not light when paradisePortalEnabled is false",
+    @ClientTest(value = "does not light when paradisePortalEnabled is false", group = "Portal")
+    private static List<Step> portalDisabled() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     server.getGameRules().getRule(ParadiseLostGameRules.PARADISE_PORTAL_ENABLED).set(false, server);
                     buildFrame(player(server));
@@ -123,8 +101,9 @@ public final class DimensionTests {
         );
     }
 
-    private static Test portalTravel() {
-        return new Test("Portal", "water lights it, it leads to Paradise Lost and back",
+    @ClientTest(value = "water lights it, it leads to Paradise Lost and back", group = "Portal")
+    private static List<Step> portalTravel() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     buildFrame(player(server));
                     world(server).setBlockAndUpdate(opening(), Blocks.WATER.defaultBlockState());
@@ -147,6 +126,24 @@ public final class DimensionTests {
                 })),
                 Step.until("client back in the Overworld", 300, () -> client().level.dimension() == Level.OVERWORLD && client().screen == null)
         );
+    }
+
+    @TestFactory
+    private static List<Test> biomes() {
+        return client().level.registryAccess().lookupOrThrow(Registries.BIOME).listElementIds()
+                .filter(key -> key.location().getNamespace().equals("paradise_lost"))
+                .map(DimensionTests::biomeGenerates)
+                .toList();
+    }
+
+    @TestFactory
+    private static List<Test> structures() {
+        return fromServer(server -> server.registryAccess().lookupOrThrow(Registries.STRUCTURE).listElementIds()
+                .filter(key -> key.location().getNamespace().equals("paradise_lost"))
+                .toList())
+                .stream()
+                .map(DimensionTests::structureGenerates)
+                .toList();
     }
 
     private static Test biomeGenerates(ResourceKey<Biome> biome) {
@@ -228,8 +225,9 @@ public final class DimensionTests {
         return structure.value().findValidGenerationPoint(context).isPresent();
     }
 
-    private static Test blockShowroom() {
-        return new Test("Skylands", "every Paradise Lost block renders in Paradise Lost",
+    @ClientTest(value = "every Paradise Lost block renders in Paradise Lost", group = "Skylands")
+    private static List<Step> blockShowroom() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.setGameMode(GameType.SPECTATOR);
@@ -264,8 +262,9 @@ public final class DimensionTests {
         );
     }
 
-    private static Test registryUtilMissingKey() {
-        return new Test("Skylands", "RegistryUtil handles a missing dimension type", Step.run(0, () -> {
+    @ClientTest(value = "RegistryUtil handles a missing dimension type", group = "Skylands")
+    private static Step registryUtilMissingKey() {
+        return Step.run(0, () -> {
             ResourceKey<DimensionType> missing = ResourceKey.create(Registries.DIMENSION_TYPE, ResourceLocation.fromNamespaceAndPath("paradise_lost", "missing"));
 
             boolean matches;
@@ -276,11 +275,12 @@ public final class DimensionTests {
             }
 
             check(!matches, "returned true for a missing key");
-        }));
+        });
     }
 
-    private static Test skylandsClouds() {
-        return new Test("Skylands", "clouds render 3 layers",
+    @ClientTest(value = "clouds render 3 layers", group = "Skylands")
+    private static List<Step> skylandsClouds() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.setGameMode(GameType.SPECTATOR);
@@ -304,8 +304,9 @@ public final class DimensionTests {
         teleport(player, ParadiseLostDimension.PARADISE_LOST_WORLD_KEY, player.getX(), -150, player.getZ(), 0);
     }
 
-    private static Test voidKills() {
-        return new Test("Void", "kills when paradiseVoidKills is true",
+    @ClientTest(value = "kills when paradiseVoidKills is true", group = "Void")
+    private static List<Step> voidKills() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     server.getGameRules().getRule(ParadiseLostGameRules.PARADISE_VOID_KILLS).set(true, server);
                     intoVoid(player(server));
@@ -314,8 +315,9 @@ public final class DimensionTests {
         );
     }
 
-    private static Test voidTeleport() {
-        return new Test("Void", "teleports to the overworld when paradiseVoidKills is false",
+    @ClientTest(value = "teleports to the overworld when paradiseVoidKills is false", group = "Void")
+    private static List<Step> voidTeleport() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     teleport(player, ParadiseLostDimension.PARADISE_LOST_WORLD_KEY, player.getX(), -120, player.getZ(), 0);
@@ -331,8 +333,9 @@ public final class DimensionTests {
         );
     }
 
-    private static Test voidTotem() {
-        return new Test("Void", "levitation totem saves from the void",
+    @ClientTest(value = "levitation totem saves from the void", group = "Void")
+    private static List<Step> voidTotem() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(TOTEM_OF_LEVITATION.get()));
@@ -355,8 +358,9 @@ public final class DimensionTests {
         );
     }
 
-    private static Test voidTotemWhenVoidKills() {
-        return new Test("Void", "levitation totem in the main hand saves from the void when paradiseVoidKills is true",
+    @ClientTest(value = "levitation totem in the main hand saves from the void when paradiseVoidKills is true", group = "Void")
+    private static List<Step> voidTotemWhenVoidKills() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     server.getGameRules().getRule(ParadiseLostGameRules.PARADISE_VOID_KILLS).set(true, server);
 
@@ -377,8 +381,9 @@ public final class DimensionTests {
         );
     }
 
-    private static Test voidAfterLevitation() {
-        return new Test("Void", "levitating player is still sent to the overworld when levitation ends",
+    @ClientTest(value = "levitating player is still sent to the overworld when levitation ends", group = "Void")
+    private static List<Step> voidAfterLevitation() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20, 0));

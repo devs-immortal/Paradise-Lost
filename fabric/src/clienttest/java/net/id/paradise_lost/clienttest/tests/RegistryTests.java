@@ -8,8 +8,8 @@ import com.google.gson.JsonPrimitive;
 import com.mojang.serialization.JsonOps;
 import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradise_lost.block.blockentity.ParadiseHangingSignBlockEntity;
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.clienttest.mixin.HangingSignEditScreenAccessor;
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
@@ -51,25 +51,10 @@ import java.util.function.Consumer;
 import static net.id.paradise_lost.clienttest.TestHelpers.*;
 
 public final class RegistryTests {
-    private static final String GROUP = "Registry";
     private static final String MOD = "paradise_lost";
     private static final Set<String> DROP_NOTHING = Set.of("blocks/surtrum_air", "blocks/blue_portal", "blocks/suspicious_dirt");
 
     private RegistryTests() {
-    }
-
-    public static List<Test> all() {
-        return List.of(
-                blockModels(),
-                itemModels(),
-                signTextures(),
-                hangingSignScreenTextures(),
-                langEntries(),
-                sounds(),
-                particles(),
-                lootTables(),
-                recipeFormat()
-        );
     }
 
     private static <T> void forEachOurs(Registry<T> registry, Consumer<T> action) {
@@ -95,8 +80,9 @@ public final class RegistryTests {
         return texture.equals(MissingTextureAtlasSprite.getLocation());
     }
 
-    private static Test blockModels() {
-        return new Test(GROUP, "every block state has model and textures", Step.run(0, () -> {
+    @ClientTest("every block state has model and textures")
+    private static Step blockModels() {
+        return Step.run(0, () -> {
             BakedModel missingModel = client().getModelManager().getMissingModel();
             List<String> wrong = new ArrayList<>();
             forEachOurs(BuiltInRegistries.BLOCK, block -> {
@@ -113,11 +99,12 @@ public final class RegistryTests {
                 }
             });
             checkAll(wrong);
-        }));
+        });
     }
 
-    private static Test itemModels() {
-        return new Test(GROUP, "every item has a model and textures", Step.run(0, () -> {
+    @ClientTest("every item has a model and textures")
+    private static Step itemModels() {
+        return Step.run(0, () -> {
             BakedModel missingModel = client().getModelManager().getMissingModel();
             List<String> wrong = new ArrayList<>();
             forEachOurs(BuiltInRegistries.ITEM, item -> {
@@ -132,11 +119,12 @@ public final class RegistryTests {
             if (client().getModelManager().getModel(spyglass) == missingModel)
                 wrong.add(spyglass + " extra model was never loaded");
             checkAll(wrong);
-        }));
+        });
     }
 
-    private static Test signTextures() {
-        return new Test(GROUP, "every sign wood type has sign and hanging sign textures", Step.run(0, () -> {
+    @ClientTest("every sign wood type has sign and hanging sign textures")
+    private static Step signTextures() {
+        return Step.run(0, () -> {
             Set<WoodType> woodTypes = new LinkedHashSet<>();
             forEachOurs(BuiltInRegistries.BLOCK, block -> {
                 if (block instanceof SignBlock) woodTypes.add(SignBlock.getWoodType(block));
@@ -149,11 +137,12 @@ public final class RegistryTests {
                 expect(wrong, !isMissing(Sheets.getHangingSignMaterial(woodType).sprite().contents().name()), woodType.name() + " hanging sign");
             }
             check(wrong.isEmpty(), "missing texture for " + wrong);
-        }));
+        });
     }
 
-    private static Test hangingSignScreenTextures() {
-        return new Test(GROUP, "every hanging sign edit screen has texture", Step.run(0, () -> {
+    @ClientTest("every hanging sign edit screen has texture")
+    private static Step hangingSignScreenTextures() {
+        return Step.run(0, () -> {
             List<String> wrong = new ArrayList<>();
             forEachOurs(BuiltInRegistries.BLOCK, block -> {
                 if (!(block instanceof CeilingHangingSignBlock) && !(block instanceof WallHangingSignBlock))
@@ -170,11 +159,12 @@ public final class RegistryTests {
                 }
             });
             check(wrong.isEmpty(), "no edit screen texture for " + wrong);
-        }));
+        });
     }
 
-    private static Test langEntries() {
-        return new Test(GROUP, "every block, item, entity and biome has a name", Step.run(0, () -> {
+    @ClientTest("every block, item, entity and biome has a name")
+    private static Step langEntries() {
+        return Step.run(0, () -> {
             List<String> wrong = new ArrayList<>();
             forEachOurs(BuiltInRegistries.BLOCK, block -> expect(wrong, I18n.exists(block.getDescriptionId()), block.getDescriptionId()));
             forEachOurs(BuiltInRegistries.ITEM, item -> expect(wrong, I18n.exists(item.getDescriptionId()), item.getDescriptionId()));
@@ -184,20 +174,22 @@ public final class RegistryTests {
                     .map(key -> Util.makeDescriptionId("biome", key.location()))
                     .forEach(key -> expect(wrong, I18n.exists(key), key));
             check(wrong.isEmpty(), "no lang entry for " + wrong);
-        }));
+        });
     }
 
-    private static Test sounds() {
-        return new Test(GROUP, "every sound event is in sounds.json", Step.run(0, () -> {
+    @ClientTest("every sound event is in sounds.json")
+    private static Step sounds() {
+        return Step.run(0, () -> {
             List<String> wrong = new ArrayList<>();
             forEachOurs(BuiltInRegistries.SOUND_EVENT, sound ->
                     expect(wrong, client().getSoundManager().getSoundEvent(sound.getLocation()) != null, sound.getLocation().toString()));
             check(wrong.isEmpty(), "no sounds.json entry for " + wrong);
-        }));
+        });
     }
 
-    private static Test particles() {
-        return new Test(GROUP, "every simple particle type has a provider", Step.run(0, () -> {
+    @ClientTest("every simple particle type has a provider")
+    private static Step particles() {
+        return Step.run(0, () -> {
             Vec3 at = client().player.position();
             List<String> wrong = new ArrayList<>();
             forEachOurs(BuiltInRegistries.PARTICLE_TYPE, type -> {
@@ -207,11 +199,12 @@ public final class RegistryTests {
                 }
             });
             check(wrong.isEmpty(), "no particle provider for " + wrong);
-        }));
+        });
     }
 
-    private static Test lootTables() {
-        return new Test(GROUP, "every block that names a loot table has one", Step.run(0, () -> onServer(server -> {
+    @ClientTest("every block that names a loot table has one")
+    private static Step lootTables() {
+        return Step.run(0, () -> onServer(server -> {
             List<String> wrong = new ArrayList<>();
             forEachOurs(BuiltInRegistries.BLOCK, block -> {
                 var key = block.getLootTable();
@@ -220,11 +213,12 @@ public final class RegistryTests {
                     wrong.add(key.location().toString());
             });
             check(wrong.isEmpty(), "missing loot tables " + wrong);
-        })));
+        }));
     }
 
-    private static Test recipeFormat() {
-        return new Test(GROUP, "every recipe file decodes", Step.run(0, () -> onServer(server -> {
+    @ClientTest("every recipe file decodes")
+    private static Step recipeFormat() {
+        return Step.run(0, () -> onServer(server -> {
             var ops = server.registryAccess().createSerializationContext(JsonOps.INSTANCE);
             List<String> wrong = new ArrayList<>();
             Map<ResourceLocation, Resource> files = server.getResourceManager().listResources("recipe", path -> path.getPath().endsWith(".json"));
@@ -254,7 +248,7 @@ public final class RegistryTests {
             }
             check(checked > 0, "found no recipe files from the mod");
             checkAll(wrong);
-        })));
+        }));
     }
 
     private static boolean loaded(String id) {

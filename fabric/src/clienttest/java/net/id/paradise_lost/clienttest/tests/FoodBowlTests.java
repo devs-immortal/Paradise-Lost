@@ -2,8 +2,8 @@ package net.id.paradise_lost.clienttest.tests;
 
 import net.id.paradise_lost.block.blockentity.FoodBowlBlockEntity;
 import net.id.paradise_lost.block.mechanical.FoodBowlBlock;
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.EntityRegistry;
@@ -31,27 +31,9 @@ import java.util.Map;
 import static net.id.paradise_lost.clienttest.TestHelpers.*;
 
 public final class FoodBowlTests {
-    private static final String GROUP = "Food bowl";
     private static BlockPos pos;
 
     private FoodBowlTests() {
-    }
-
-    public static List<Test> all() {
-        return List.of(
-                foodBowlFills(),
-                foodBowlTopsUp(),
-                foodBowlOverflow(),
-                foodBowlOtherMeat(),
-                foodBowlMarksChunk(),
-                foodBowlClientHand(),
-                foodBowlBreakDrops(),
-                foodBowlExplodes(),
-                foodBowlMoaEats(),
-                foodBowlMoaEatsSome(),
-                foodBowlOffHand(),
-                foodBowlSaveLoad()
-        );
     }
 
     private static boolean clientBowlFull(boolean full) {
@@ -76,8 +58,9 @@ public final class FoodBowlTests {
         return bowl;
     }
 
-    private static Test foodBowlFills() {
-        return new Test(GROUP, "right click with meat fills it",
+    @ClientTest("right click with meat fills it")
+    private static List<Step> foodBowlFills() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     placeEmptyBowl(player);
@@ -93,8 +76,9 @@ public final class FoodBowlTests {
         );
     }
 
-    private static Test foodBowlTopsUp() {
-        return new Test(GROUP, "more of the same meat adds to the stack",
+    @ClientTest("more of the same meat adds to the stack")
+    private static List<Step> foodBowlTopsUp() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     placeEmptyBowl(player);
@@ -110,8 +94,9 @@ public final class FoodBowlTests {
         );
     }
 
-    private static Test foodBowlOverflow() {
-        return new Test(GROUP, "topping up past 64 leaves the rest in the hand",
+    @ClientTest("topping up past 64 leaves the rest in the hand")
+    private static List<Step> foodBowlOverflow() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     placeEmptyBowl(player);
@@ -133,8 +118,9 @@ public final class FoodBowlTests {
         );
     }
 
-    private static Test foodBowlOtherMeat() {
-        return new Test(GROUP, "other meat takes the stored food out",
+    @ClientTest("other meat takes the stored food out")
+    private static List<Step> foodBowlOtherMeat() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     placeEmptyBowl(player);
@@ -155,8 +141,9 @@ public final class FoodBowlTests {
         );
     }
 
-    private static Test foodBowlMarksChunk() {
-        return new Test(GROUP, "topping up marks the chunk for saving", Step.run(0, () -> onServer(server -> {
+    @ClientTest("topping up marks the chunk for saving")
+    private static Step foodBowlMarksChunk() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             FoodBowlBlockEntity bowl = placeBowl(player, Items.BEEF, 3);
             var chunk = player.serverLevel().getChunkAt(pos);
@@ -166,11 +153,12 @@ public final class FoodBowlTests {
             bowl.handleUse(player, InteractionHand.MAIN_HAND, player.getMainHandItem());
             check(bowl.getContainedItem().getCount() == 5, "bowl holds " + bowl.getContainedItem());
             check(chunk.isUnsaved(), "chunk is not marked for saving after the bowl changed");
-        })));
+        }));
     }
 
-    private static Test foodBowlClientHand() {
-        return new Test(GROUP, "client hand matches the server after topping up a bowl someone else filled",
+    @ClientTest("client hand matches the server after topping up a bowl someone else filled")
+    private static List<Step> foodBowlClientHand() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     placeBowl(player, Items.BEEF, 64);
@@ -187,19 +175,21 @@ public final class FoodBowlTests {
         );
     }
 
-    private static Test foodBowlBreakDrops() {
-        return new Test(GROUP, "breaking a full bowl drops its food", Step.run(0, () -> onServer(server -> {
+    @ClientTest("breaking a full bowl drops its food")
+    private static Step foodBowlBreakDrops() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             placeBowl(player, Items.BEEF, 4);
             player.gameMode.destroyBlock(pos);
 
             Map<Item, Integer> dropped = drops(player.serverLevel(), pos);
             check(dropped.getOrDefault(Items.BEEF, 0) == 4, "full bowl dropped " + describe(dropped) + " expected 4 beef with it");
-        })));
+        }));
     }
 
-    private static Test foodBowlExplodes() {
-        return new Test(GROUP, "blowing up a full bowl drops all its food", Step.run(0, () -> onServer(server -> {
+    @ClientTest("blowing up a full bowl drops all its food")
+    private static Step foodBowlExplodes() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ServerLevel world = player.serverLevel();
             BlockPos bowlPos = ahead(player, 6, 0);
@@ -213,7 +203,7 @@ public final class FoodBowlTests {
 
             Map<Item, Integer> dropped = drops(world, bowlPos);
             check(dropped.getOrDefault(Items.BEEF, 0) == 64, "blown up bowl dropped " + describe(dropped) + " expected 64 beef");
-        })));
+        }));
     }
 
     private static void moaEatsFromBowl(ServerPlayer player, float hunger) {
@@ -235,8 +225,9 @@ public final class FoodBowlTests {
         }
     }
 
-    private static Test foodBowlMoaEats() {
-        return new Test(GROUP, "a moa eating the last food empties the bowl",
+    @ClientTest("a moa eating the last food empties the bowl")
+    private static List<Step> foodBowlMoaEats() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     FoodBowlBlockEntity bowl = placeBowl(player, Items.BEEF, 1);
@@ -249,8 +240,9 @@ public final class FoodBowlTests {
         );
     }
 
-    private static Test foodBowlMoaEatsSome() {
-        return new Test(GROUP, "a moa eating some of the food marks the chunk for saving", Step.run(0, () -> onServer(server -> {
+    @ClientTest("a moa eating some of the food marks the chunk for saving")
+    private static Step foodBowlMoaEatsSome() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             FoodBowlBlockEntity bowl = placeBowl(player, Items.BEEF, 10);
             var chunk = player.serverLevel().getChunkAt(pos);
@@ -259,11 +251,12 @@ public final class FoodBowlTests {
             moaEatsFromBowl(player, 40);
             check(bowl.getContainedItem().getCount() == 5, "bowl holds " + bowl.getContainedItem() + " after the moa ate, expected 5 beef");
             check(chunk.isUnsaved(), "chunk is not marked for saving after the moa ate from the bowl");
-        })));
+        }));
     }
 
-    private static Test foodBowlOffHand() {
-        return new Test(GROUP, "meat in the off hand fills it when the main hand is empty",
+    @ClientTest("meat in the off hand fills it when the main hand is empty")
+    private static List<Step> foodBowlOffHand() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     placeEmptyBowl(player);
@@ -284,8 +277,9 @@ public final class FoodBowlTests {
         );
     }
 
-    private static Test foodBowlSaveLoad() {
-        return new Test(GROUP, "keeps its food after save and load", Step.run(0, () -> onServer(server -> {
+    @ClientTest("keeps its food after save and load")
+    private static Step foodBowlSaveLoad() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ServerLevel world = player.serverLevel();
             FoodBowlBlockEntity bowl = placeBowl(player, Items.BEEF, 4);
@@ -294,6 +288,6 @@ public final class FoodBowlTests {
             BlockEntity loaded = BlockEntity.loadStatic(pos, world.getBlockState(pos), bowl.saveWithFullMetadata(world.registryAccess()), world.registryAccess());
             ItemStack stored = ((FoodBowlBlockEntity) loaded).getContainedItem();
             check(stored.is(Items.BEEF) && stored.getCount() == 4, "loaded bowl holds " + stored);
-        })));
+        }));
     }
 }

@@ -1,8 +1,8 @@
 package net.id.paradise_lost.clienttest.tests;
 
 import net.id.paradise_lost.block.blockentity.CalciteDecoratedPotBlockEntity;
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.recipe.ParadiseLostRecipeTypes;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
@@ -34,42 +34,32 @@ import static net.id.paradise_lost.clienttest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class PotTests {
-    private static final String GROUP = "Pot";
 
     private PotTests() {
     }
 
-    public static List<Test> all() {
-        return List.of(
-                calcitePotShatters(),
-                calcitePotSerializer(),
-                calcitePotStacks(),
-                potsDrop(),
-                calcitePotKeepsSherds(),
-                calcitePotHalfSherds(),
-                calcitePotSilkTouch()
-        );
-    }
-
-    private static Test calcitePotShatters() {
-        return new Test(GROUP, "default calcite pot shatters into 5 calcite, not bricks", Step.run(0, () -> onServer(server -> {
+    @ClientTest("default calcite pot shatters into 5 calcite, not bricks")
+    private static Step calcitePotShatters() {
+        return Step.run(0, () -> onServer(server -> {
             String wrong = breakPot(player(server), 0, BlockRegistry.CALCITE_DECORATED_POT.get(), null, Items.IRON_PICKAXE, Map.of(Items.CALCITE, 5));
             check(wrong == null, wrong);
-        })));
+        }));
     }
 
-    private static Test calcitePotSerializer() {
-        return new Test(GROUP, "calcite pot recipe uses its own serializer", Step.run(0, () -> onServer(server -> {
+    @ClientTest("calcite pot recipe uses its own serializer")
+    private static Step calcitePotSerializer() {
+        return Step.run(0, () -> onServer(server -> {
             var recipe = server.getRecipeManager()
                     .byKey(ResourceLocation.fromNamespaceAndPath("paradise_lost", "calcite_decorated_pot"))
                     .orElseThrow(() -> new AssertionError("recipe paradise_lost:calcite_decorated_pot not found"));
             var serializer = recipe.value().getSerializer();
             check(serializer == ParadiseLostRecipeTypes.CALCITE_DECORATED_POT_RECIPE_SERIALIZER, "serializer is " + BuiltInRegistries.RECIPE_SERIALIZER.getKey(serializer));
-        })));
+        }));
     }
 
-    private static Test calcitePotStacks() {
-        return new Test(GROUP, "a crafted calcite pot stacks with the creative one", Step.run(0, () -> onServer(server -> {
+    @ClientTest("a crafted calcite pot stacks with the creative one")
+    private static Step calcitePotStacks() {
+        return Step.run(0, () -> onServer(server -> {
             ServerLevel world = world(server);
             ItemStack calcite = new ItemStack(Items.CALCITE);
             CraftingInput input = CraftingInput.of(3, 3, List.of(
@@ -87,11 +77,12 @@ public final class PotTests {
                         recipe.id() + " crafted " + crafted + " with " + crafted.getComponentsPatch() + " creative pot has " + creative.getComponentsPatch());
             }
             checkAll(wrong);
-        })));
+        }));
     }
 
-    private static Test potsDrop() {
-        return new Test(GROUP, "pots drop items when broken", Step.run(0, () -> onServer(server -> {
+    @ClientTest("pots drop items when broken")
+    private static Step potsDrop() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             Item calcitePot = BlockRegistry.CALCITE_DECORATED_POT.get().asItem();
             PotDecorations plSherds = new PotDecorations(SOL_POTTERY_SHERD.get(), COO_POTTERY_SHERD.get(), SOL_POTTERY_SHERD.get(), COO_POTTERY_SHERD.get());
@@ -104,7 +95,7 @@ public final class PotTests {
             wrong.removeIf(Objects::isNull);
 
             checkAll(wrong);
-        })));
+        }));
     }
 
     private static List<ItemStack> breakCalcitePot(ServerPlayer player, PotDecorations sherds, ItemStack tool) {
@@ -120,30 +111,33 @@ public final class PotTests {
         return dropStacks(world, potPos, 1.5);
     }
 
-    private static Test calcitePotKeepsSherds() {
-        return new Test(GROUP, "calcite pot with sherds keeps them when broken by hand", Step.run(0, () -> onServer(server -> {
+    @ClientTest("calcite pot with sherds keeps them when broken by hand")
+    private static Step calcitePotKeepsSherds() {
+        return Step.run(0, () -> onServer(server -> {
             PotDecorations sherds = new PotDecorations(SOL_POTTERY_SHERD.get(), COO_POTTERY_SHERD.get(), Items.ANGLER_POTTERY_SHERD, SOL_POTTERY_SHERD.get());
             List<ItemStack> dropped = breakCalcitePot(player(server), sherds, ItemStack.EMPTY);
             check(dropped.size() == 1 && dropped.getFirst().is(BlockRegistry.CALCITE_DECORATED_POT.get().asItem()), "dropped " + dropped);
 
             PotDecorations kept = dropped.getFirst().get(DataComponents.POT_DECORATIONS);
             check(sherds.equals(kept), "dropped pot has " + kept + " expected " + sherds);
-        })));
+        }));
     }
 
-    private static Test calcitePotHalfSherds() {
-        return new Test(GROUP, "calcite pot with 2 sherds shatters into 2 sherds and 3 calcite", Step.run(0, () -> onServer(server -> {
+    @ClientTest("calcite pot with 2 sherds shatters into 2 sherds and 3 calcite")
+    private static Step calcitePotHalfSherds() {
+        return Step.run(0, () -> onServer(server -> {
             PotDecorations sherds = new PotDecorations(Optional.of(SOL_POTTERY_SHERD.get()), Optional.empty(), Optional.of(COO_POTTERY_SHERD.get()), Optional.empty());
             Map<Item, Integer> drops = new LinkedHashMap<>();
             breakCalcitePot(player(server), sherds, new ItemStack(Items.IRON_PICKAXE)).forEach(stack -> drops.merge(stack.getItem(), stack.getCount(), Integer::sum));
 
             Map<Item, Integer> expected = Map.of(SOL_POTTERY_SHERD.get(), 1, COO_POTTERY_SHERD.get(), 1, Items.CALCITE, 3);
             check(drops.equals(expected), "dropped " + describe(drops) + " expected " + describe(expected));
-        })));
+        }));
     }
 
-    private static Test calcitePotSilkTouch() {
-        return new Test(GROUP, "calcite pot broken with a silk touch pickaxe drops the whole pot", Step.run(0, () -> onServer(server -> {
+    @ClientTest("calcite pot broken with a silk touch pickaxe drops the whole pot")
+    private static Step calcitePotSilkTouch() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ItemStack pickaxe = new ItemStack(Items.IRON_PICKAXE);
             pickaxe.enchant(player.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.SILK_TOUCH), 1);
@@ -152,7 +146,7 @@ public final class PotTests {
             List<ItemStack> dropped = breakCalcitePot(player, sherds, pickaxe);
             check(dropped.size() == 1 && dropped.getFirst().is(BlockRegistry.CALCITE_DECORATED_POT.get().asItem())
                     && sherds.equals(dropped.getFirst().get(DataComponents.POT_DECORATIONS)), "dropped " + dropped);
-        })));
+        }));
     }
 
     private static String breakPot(ServerPlayer player, int side, Block block, PotDecorations sherds, Item tool, Map<Item, Integer> expected) {

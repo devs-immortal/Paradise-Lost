@@ -2,8 +2,8 @@ package net.id.paradise_lost.clienttest.tests;
 
 import net.id.paradise_lost.attachments.MinecartFloating;
 import net.id.paradise_lost.block.mechanical.LevitaRailBlock;
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.entity.block.FloatingBlockEntity;
 import net.id.paradise_lost.entity.projectile.LevitaArrow;
@@ -44,7 +44,6 @@ import static net.id.paradise_lost.clienttest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class LevitaTests {
-    private static final String GROUP = "Levita";
     private static final int CHARGE = 82;
     private static final int STAIRS = 6;
     private static BlockPos pos;
@@ -67,44 +66,14 @@ public final class LevitaTests {
     private LevitaTests() {
     }
 
-    public static List<Test> all() {
-        return List.of(
-                levitaFloats(),
-                levitatorNeedsPower(),
-                levitaWandFloatsBlock(),
-                levitaWandFlipsEntity(),
-                levitaRailFloatsMinecart(),
-                levitaArrowRises(),
-                railGivesOneCharge(),
-                floatTimeStacks(),
-                secondCartFloats(),
-                triggerLockClears(),
-                standingCartStays(),
-                railNeitherBoostsNorBrakes(),
-                unpoweredRailEndsFloat(),
-                powerSpreadsOnlyAlongLevitaRails(),
-                floatsOverGapAndRejoins(),
-                fallsWhenFloatEnds(),
-                wallStopsFloatingCart(),
-                slopeLaunchesUpward(),
-                ceilingStopsRisingCart(),
-                descendingCartStaysAboveGround(),
-                cartStaysOnClimbingRun(),
-                cartStaysOnDescendingRun(),
-                levitaSlopesClimbLikePlainSlopes(),
-                riderStaysInFloatingCart(),
-                otherMinecartsFloat(),
-                floatStateSurvivesSaveLoad()
-        );
-    }
-
     private static boolean clientSeesFloating(Block block) {
         return !client().level.getEntitiesOfClass(FloatingBlockEntity.class, new AABB(pos).inflate(2, 30, 2),
                 e -> e.getBlockState().is(block)).isEmpty();
     }
 
-    private static Test levitaFloats() {
-        return new Test(GROUP, "levita floats up and the client sees the floating block",
+    @ClientTest("levita floats up and the client sees the floating block")
+    private static List<Step> levitaFloats() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 3, 0);
@@ -115,8 +84,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test levitatorNeedsPower() {
-        return new Test(GROUP, "levitator floats only with redstone power",
+    @ClientTest("levitator floats only with redstone power")
+    private static List<Step> levitatorNeedsPower() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 3, 0);
@@ -132,8 +102,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test levitaWandFloatsBlock() {
-        return new Test(GROUP, "wand floats a block and loses durability",
+    @ClientTest("wand floats a block and loses durability")
+    private static List<Step> levitaWandFloatsBlock() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 2, 0);
@@ -149,8 +120,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test levitaWandFlipsEntity() {
-        return new Test(GROUP, "gravity flipped by the wand reaches the client",
+    @ClientTest("gravity flipped by the wand reaches the client")
+    private static List<Step> levitaWandFlipsEntity() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     entityId = spawnNoAi(player, EntityType.COW, ahead(player, 3, 0));
@@ -165,8 +137,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test levitaRailFloatsMinecart() {
-        return new Test(GROUP, "powered levita rail makes a minecart float",
+    @ClientTest("powered levita rail makes a minecart float")
+    private static List<Step> levitaRailFloatsMinecart() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rLrr");
                     entityId = launch(world, EntityType.MINECART, start, 0.4);
@@ -176,8 +149,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test levitaArrowRises() {
-        return new Test(GROUP, "arrow shot from a bow rises on the client",
+    @ClientTest("arrow shot from a bow rises on the client")
+    private static List<Step> levitaArrowRises() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     hold(player, Items.BOW, 1);
@@ -197,8 +171,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test railGivesOneCharge() {
-        return new Test(GROUP, "one powered rail gives one float charge that runs out on both sides",
+    @ClientTest("one powered rail gives one float charge that runs out on both sides")
+    private static List<Step> railGivesOneCharge() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rLrrr");
                     entityId = launch(world, EntityType.MINECART, start, 0.4);
@@ -221,8 +196,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test floatTimeStacks() {
-        return new Test(GROUP, "float time stacks over a run of powered rails",
+    @ClientTest("float time stacks over a run of powered rails")
+    private static List<Step> floatTimeStacks() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rLLLrr");
                     entityId = launch(world, EntityType.MINECART, start, 0.4);
@@ -237,8 +213,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test secondCartFloats() {
-        return new Test(GROUP, "a second cart right behind the first also floats",
+    @ClientTest("a second cart right behind the first also floats")
+    private static List<Step> secondCartFloats() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rrLrrrrrrr");
                     entityId = launch(world, EntityType.MINECART, start, 0.4);
@@ -249,8 +226,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test triggerLockClears() {
-        return new Test(GROUP, "rail trigger shows on the client and clears again",
+    @ClientTest("rail trigger shows on the client and clears again")
+    private static List<Step> triggerLockClears() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rLrrr");
                     pos = start.relative(dir, 1);
@@ -263,8 +241,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test standingCartStays() {
-        return new Test(GROUP, "a standing cart on a powered rail floats in place",
+    @ClientTest("a standing cart on a powered rail floats in place")
+    private static List<Step> standingCartStays() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "L");
                     entityId = launch(world, EntityType.MINECART, start, 0);
@@ -279,8 +258,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test railNeitherBoostsNorBrakes() {
-        return new Test(GROUP, "levita rails neither boost nor brake a cart",
+    @ClientTest("levita rails neither boost nor brake a cart")
+    private static List<Step> railNeitherBoostsNorBrakes() {
+        return List.of(
                 setup(world -> {
                     Direction side = dir.getClockWise();
                     track(world, start, "rrrrrr");
@@ -308,8 +288,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test unpoweredRailEndsFloat() {
-        return new Test(GROUP, "an unpowered levita rail ends the float",
+    @ClientTest("an unpowered levita rail ends the float")
+    private static List<Step> unpoweredRailEndsFloat() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rLrrlrr");
                     entityId = launch(world, EntityType.MINECART, start, 0.4);
@@ -323,8 +304,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test powerSpreadsOnlyAlongLevitaRails() {
-        return new Test(GROUP, "power spreads along levita rails only",
+    @ClientTest("power spreads along levita rails only")
+    private static List<Step> powerSpreadsOnlyAlongLevitaRails() {
+        return List.of(
                 setup(world -> {
                     BlockPos other = start.relative(dir.getClockWise(), 3);
                     track(world, start, "llllllllll");
@@ -355,8 +337,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test floatsOverGapAndRejoins() {
-        return new Test(GROUP, "floating cart crosses gap and lands on rails again",
+    @ClientTest("floating cart crosses gap and lands on rails again")
+    private static List<Step> floatsOverGapAndRejoins() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rLrr......rrrr");
                     trench(world, 4, 9);
@@ -378,8 +361,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test fallsWhenFloatEnds() {
-        return new Test(GROUP, "floating cart falls when the float runs out",
+    @ClientTest("floating cart falls when the float runs out")
+    private static List<Step> fallsWhenFloatEnds() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rLrr");
                     trench(world, 4, 54);
@@ -397,8 +381,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test wallStopsFloatingCart() {
-        return new Test(GROUP, "wall stops a cart that just floated off the track",
+    @ClientTest("wall stops a cart that just floated off the track")
+    private static List<Step> wallStopsFloatingCart() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rLrr");
                     BlockPos wall = start.relative(dir, 5);
@@ -415,8 +400,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test slopeLaunchesUpward() {
-        return new Test(GROUP, "powered slope launches the cart upward at 45 degrees",
+    @ClientTest("powered slope launches the cart upward at 45 degrees")
+    private static List<Step> slopeLaunchesUpward() {
+        return List.of(
                 setup(world -> {
                     singleSlope(world, false);
                     entityId = launch(world, EntityType.MINECART, start.relative(dir, -2), 0.4);
@@ -442,8 +428,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test ceilingStopsRisingCart() {
-        return new Test(GROUP, "ceiling stops a rising cart",
+    @ClientTest("ceiling stops a rising cart")
+    private static List<Step> ceilingStopsRisingCart() {
+        return List.of(
                 setup(world -> {
                     singleSlope(world, false);
                     Direction side = dir.getClockWise();
@@ -462,8 +449,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test descendingCartStaysAboveGround() {
-        return new Test(GROUP, "cart floating down a slope stays above the ground",
+    @ClientTest("cart floating down a slope stays above the ground")
+    private static List<Step> descendingCartStaysAboveGround() {
+        return List.of(
                 setup(world -> {
                     singleSlope(world, true);
                     entityId = launch(world, EntityType.MINECART, start.relative(dir).above(), -0.4);
@@ -483,8 +471,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test cartStaysOnClimbingRun() {
-        return new Test(GROUP, "ridden cart stays on a long climbing run of powered slopes, also when it rolls back",
+    @ClientTest("ridden cart stays on a long climbing run of powered slopes, also when it rolls back")
+    private static List<Step> cartStaysOnClimbingRun() {
+        return List.of(
                 setup(world -> {
                     staircase(world, start, true);
                     entityId = launch(world, EntityType.MINECART, start, 0.4);
@@ -495,8 +484,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test cartStaysOnDescendingRun() {
-        return new Test(GROUP, "ridden cart stays on a long descending run of powered slopes",
+    @ClientTest("ridden cart stays on a long descending run of powered slopes")
+    private static List<Step> cartStaysOnDescendingRun() {
+        return List.of(
                 setup(world -> {
                     staircase(world, start, true);
                     entityId = launch(world, EntityType.MINECART, start.relative(dir, STAIRS).above(STAIRS), -0.4);
@@ -511,8 +501,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test levitaSlopesClimbLikePlainSlopes() {
-        return new Test(GROUP, "cart climbs powered levita slopes as high as plain rail slopes",
+    @ClientTest("cart climbs powered levita slopes as high as plain rail slopes")
+    private static List<Step> levitaSlopesClimbLikePlainSlopes() {
+        return List.of(
                 setup(world -> {
                     staircase(world, start, true);
                     staircase(world, start.relative(dir.getClockWise(), 3), false);
@@ -531,8 +522,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test riderStaysInFloatingCart() {
-        return new Test(GROUP, "player stays in a floating cart",
+    @ClientTest("player stays in a floating cart")
+    private static List<Step> riderStaysInFloatingCart() {
+        return List.of(
                 setup(world -> {
                     track(world, start, "rLrrr");
                     entityId = launch(world, EntityType.MINECART, start, 0.4);
@@ -549,8 +541,9 @@ public final class LevitaTests {
         );
     }
 
-    private static Test otherMinecartsFloat() {
-        return new Test(GROUP, "chest and furnace minecarts float too",
+    @ClientTest("chest and furnace minecarts float too")
+    private static List<Step> otherMinecartsFloat() {
+        return List.of(
                 setup(world -> {
                     BlockPos other = start.relative(dir.getClockWise(), 3);
                     track(world, start, "rLrrr");
@@ -567,38 +560,37 @@ public final class LevitaTests {
         );
     }
 
-    private static Test floatStateSurvivesSaveLoad() {
-        return new Test(GROUP, "float state survives save and load, also from legacy NBT",
-                Step.run(0, () -> onServer(server -> {
-                    ServerLevel world = world(server);
-                    List<String> wrong = new ArrayList<>();
+    @ClientTest("float state survives save and load, also from legacy NBT")
+    private static Step floatStateSurvivesSaveLoad() {
+        return Step.run(0, () -> onServer(server -> {
+            ServerLevel world = world(server);
+            List<String> wrong = new ArrayList<>();
 
-                    Minecart saved = EntityType.MINECART.create(world);
-                    MinecartFloating.setFloatTime(saved, 50);
-                    MinecartFloating.setIncline(saved, 1);
-                    MinecartFloating.setRailShape(saved, RailShape.ASCENDING_SOUTH);
-                    Minecart loaded = EntityType.MINECART.create(world);
-                    loaded.load(saved.saveWithoutId(new CompoundTag()));
-                    expect(wrong, MinecartFloating.getFloatTime(loaded) == 50, "float time " + MinecartFloating.getFloatTime(loaded));
-                    expect(wrong, MinecartFloating.getIncline(loaded) == 1, "incline " + MinecartFloating.getIncline(loaded));
-                    expect(wrong, MinecartFloating.getRailShape(loaded) == RailShape.ASCENDING_SOUTH, "shape " + MinecartFloating.getRailShapeName(loaded));
+            Minecart saved = EntityType.MINECART.create(world);
+            MinecartFloating.setFloatTime(saved, 50);
+            MinecartFloating.setIncline(saved, 1);
+            MinecartFloating.setRailShape(saved, RailShape.ASCENDING_SOUTH);
+            Minecart loaded = EntityType.MINECART.create(world);
+            loaded.load(saved.saveWithoutId(new CompoundTag()));
+            expect(wrong, MinecartFloating.getFloatTime(loaded) == 50, "float time " + MinecartFloating.getFloatTime(loaded));
+            expect(wrong, MinecartFloating.getIncline(loaded) == 1, "incline " + MinecartFloating.getIncline(loaded));
+            expect(wrong, MinecartFloating.getRailShape(loaded) == RailShape.ASCENDING_SOUTH, "shape " + MinecartFloating.getRailShapeName(loaded));
 
-                    CompoundTag tag = EntityType.MINECART.create(world).saveWithoutId(new CompoundTag());
-                    CompoundTag legacy = new CompoundTag();
-                    legacy.putBoolean("floating", true);
-                    legacy.putInt("floatTime", 30);
-                    legacy.putInt("floatIncline", -1);
-                    legacy.putString("floatShape", "ascending_north");
-                    tag.put("paradiseLostFloating", legacy);
-                    Minecart old = EntityType.MINECART.create(world);
-                    old.load(tag);
-                    expect(wrong, MinecartFloating.getFloatTime(old) == 30, "legacy float time " + MinecartFloating.getFloatTime(old));
-                    expect(wrong, MinecartFloating.getIncline(old) == -1, "legacy incline " + MinecartFloating.getIncline(old));
-                    expect(wrong, MinecartFloating.getRailShape(old) == RailShape.ASCENDING_NORTH, "legacy shape " + MinecartFloating.getRailShapeName(old));
-                    expect(wrong, !old.saveWithoutId(new CompoundTag()).contains("paradiseLostFloating"), "re-save still has the legacy key");
-                    checkAll(wrong);
-                }))
-        );
+            CompoundTag tag = EntityType.MINECART.create(world).saveWithoutId(new CompoundTag());
+            CompoundTag legacy = new CompoundTag();
+            legacy.putBoolean("floating", true);
+            legacy.putInt("floatTime", 30);
+            legacy.putInt("floatIncline", -1);
+            legacy.putString("floatShape", "ascending_north");
+            tag.put("paradiseLostFloating", legacy);
+            Minecart old = EntityType.MINECART.create(world);
+            old.load(tag);
+            expect(wrong, MinecartFloating.getFloatTime(old) == 30, "legacy float time " + MinecartFloating.getFloatTime(old));
+            expect(wrong, MinecartFloating.getIncline(old) == -1, "legacy incline " + MinecartFloating.getIncline(old));
+            expect(wrong, MinecartFloating.getRailShape(old) == RailShape.ASCENDING_NORTH, "legacy shape " + MinecartFloating.getRailShapeName(old));
+            expect(wrong, !old.saveWithoutId(new CompoundTag()).contains("paradiseLostFloating"), "re-save still has the legacy key");
+            checkAll(wrong);
+        }));
     }
 
     private static Step setup(Consumer<ServerLevel> builder) {

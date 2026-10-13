@@ -1,8 +1,8 @@
 package net.id.paradise_lost.clienttest.tests;
 
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Recorder;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.entity.projectile.ThrownNitraEntity;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
@@ -24,26 +24,15 @@ import static net.id.paradise_lost.clienttest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class NitraTests {
-    private static final String GROUP = "Nitra";
     private static BlockPos pos;
     private static int entityId;
 
     private NitraTests() {
     }
 
-    public static List<Test> all() {
+    @ClientTest("burning arrow explodes for the client")
+    private static List<Step> nitraArrow() {
         return List.of(
-                nitraArrow(),
-                nitraFlint(),
-                nitraChain(),
-                nitraExplodesOnce(),
-                nitraBreaksBlocks(),
-                thrownNitra()
-        );
-    }
-
-    private static Test nitraArrow() {
-        return new Test(GROUP, "burning arrow explodes for the client",
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -62,8 +51,9 @@ public final class NitraTests {
         );
     }
 
-    private static Test nitraFlint() {
-        return new Test(GROUP, "flint and steel explodes for the client",
+    @ClientTest("flint and steel explodes for the client")
+    private static List<Step> nitraFlint() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     pos = ahead(player, 3, 0);
@@ -77,8 +67,9 @@ public final class NitraTests {
         );
     }
 
-    private static Test nitraChain() {
-        return new Test(GROUP, "chain reaction explodes each bunch and drops no nitra",
+    @ClientTest("chain reaction explodes each bunch and drops no nitra")
+    private static List<Step> nitraChain() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -106,8 +97,9 @@ public final class NitraTests {
         );
     }
 
-    private static Test nitraExplodesOnce() {
-        return new Test(GROUP, "redstone makes one explosion at the bunch's center",
+    @ClientTest("redstone makes one explosion at the bunch's center")
+    private static List<Step> nitraExplodesOnce() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -121,8 +113,9 @@ public final class NitraTests {
         );
     }
 
-    private static Test nitraBreaksBlocks() {
-        return new Test(GROUP, "explosion breaks a nearby block and drops it",
+    @ClientTest("explosion breaks a nearby block and drops it")
+    private static List<Step> nitraBreaksBlocks() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -142,8 +135,9 @@ public final class NitraTests {
         );
     }
 
-    private static Test thrownNitra() {
-        return new Test(GROUP, "thrown nitra explodes on the client",
+    @ClientTest("thrown nitra explodes on the client")
+    private static List<Step> thrownNitra() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();

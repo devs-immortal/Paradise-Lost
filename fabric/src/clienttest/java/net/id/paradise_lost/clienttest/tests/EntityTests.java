@@ -1,7 +1,7 @@
 package net.id.paradise_lost.clienttest.tests;
 
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.entity.hostile.EnvoyEntity;
 import net.id.paradise_lost.entity.hostile.SentinelEntity;
 import net.id.paradise_lost.entity.passive.PopomEntity;
@@ -41,25 +41,9 @@ public final class EntityTests {
     private EntityTests() {
     }
 
-    public static List<Test> all() {
+    @ClientTest(value = "empty hand takes jelly and shrinks its fur on the client", group = "Popom")
+    private static List<Step> popomShears() {
         return List.of(
-                popomShears(),
-                popomLootAfterLoad(),
-                envoyEnlightenSyncs(),
-                sentinelImmuneUntilEnlightened(),
-                wardedJarCapturesAllay(),
-                wardedJarFromStack(),
-                wardedJarCapturesQuint(),
-                wardedJarCreative(),
-                wardedJarOffHand(),
-                wardedJarFullInventory(),
-                wardedJarReleaseReturnsJar(),
-                entityShowroom()
-        );
-    }
-
-    private static Test popomShears() {
-        return new Test("Popom", "empty hand takes jelly and shrinks its fur on the client",
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     PopomEntity popom = EntityRegistry.POPOM.get().spawn(player.serverLevel(), ahead(player, 2, 0), MobSpawnType.COMMAND);
@@ -77,8 +61,9 @@ public final class EntityTests {
         );
     }
 
-    private static Test popomLootAfterLoad() {
-        return new Test("Popom", "keeps its fur loot table after save and load", Step.run(0, () -> onServer(server -> {
+    @ClientTest(value = "keeps its fur loot table after save and load", group = "Popom")
+    private static Step popomLootAfterLoad() {
+        return Step.run(0, () -> onServer(server -> {
             ServerLevel world = world(server);
             PopomEntity popom = EntityRegistry.POPOM.get().create(world);
             check(popom.getLootTable().equals(ParadiseLostLootTables.POPOM_JELLY_LEVEL_0), "new popom loot table is " + popom.getLootTable());
@@ -88,11 +73,12 @@ public final class EntityTests {
             PopomEntity loaded = EntityRegistry.POPOM.get().create(world);
             loaded.load(nbt);
             check(loaded.getLootTable().equals(ParadiseLostLootTables.POPOM_JELLY_LEVEL_3), "loaded popom loot table is " + loaded.getLootTable());
-        })));
+        }));
     }
 
-    private static Test envoyEnlightenSyncs() {
-        return new Test("Envoy", "enlightened state reaches the client",
+    @ClientTest(value = "enlightened state reaches the client", group = "Envoy")
+    private static List<Step> envoyEnlightenSyncs() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     server.setDifficulty(Difficulty.EASY, true);
                     ServerPlayer player = player(server);
@@ -105,8 +91,9 @@ public final class EntityTests {
         );
     }
 
-    private static Test sentinelImmuneUntilEnlightened() {
-        return new Test("Sentinel", "immune until enlightened then drops quint when killed", Step.run(0, () -> onServer(server -> {
+    @ClientTest(value = "immune until enlightened then drops quint when killed", group = "Sentinel")
+    private static Step sentinelImmuneUntilEnlightened() {
+        return Step.run(0, () -> onServer(server -> {
             server.setDifficulty(Difficulty.EASY, true);
             ServerPlayer player = player(server);
             ServerLevel world = player.serverLevel();
@@ -122,11 +109,12 @@ public final class EntityTests {
 
             List<QuintEntity> quints = world.getEntitiesOfClass(QuintEntity.class, new AABB(at).inflate(3), e -> true);
             check(quints.size() == 1, quints.size() + " quints near the dead sentinel");
-        })));
+        }));
     }
 
-    private static Test wardedJarCapturesAllay() {
-        return new Test("Warded jar", "captures allay and releases it",
+    @ClientTest(value = "captures allay and releases it", group = "Warded jar")
+    private static List<Step> wardedJarCapturesAllay() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     entityId = spawnNoAi(player, EntityType.ALLAY, ahead(player, 2, 0));
@@ -158,8 +146,9 @@ public final class EntityTests {
                 BuiltInRegistries.ITEM.getKey(item).getPath() + ": " + server + " on the server " + client + " on the client, expected " + expected);
     }
 
-    private static Test wardedJarFromStack() {
-        return new Test("Warded jar", "one jar from stack of 3 captures an allay",
+    @ClientTest(value = "one jar from stack of 3 captures an allay", group = "Warded jar")
+    private static List<Step> wardedJarFromStack() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     entityId = spawnNoAi(player, EntityType.ALLAY, ahead(player, 2, 0));
@@ -176,8 +165,9 @@ public final class EntityTests {
         );
     }
 
-    private static Test wardedJarCapturesQuint() {
-        return new Test("Warded jar", "the last jar captures a quint",
+    @ClientTest(value = "the last jar captures a quint", group = "Warded jar")
+    private static List<Step> wardedJarCapturesQuint() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     entityId = spawnNoAi(player, EntityRegistry.QUINT.get(), ahead(player, 2, 0));
@@ -194,8 +184,9 @@ public final class EntityTests {
         );
     }
 
-    private static Test wardedJarCreative() {
-        return new Test("Warded jar", "creative capture keeps the empty jar",
+    @ClientTest(value = "creative capture keeps the empty jar", group = "Warded jar")
+    private static List<Step> wardedJarCreative() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     player.setGameMode(GameType.CREATIVE);
@@ -214,8 +205,9 @@ public final class EntityTests {
         );
     }
 
-    private static Test wardedJarOffHand() {
-        return new Test("Warded jar", "the last jar in the off hand captures an allay",
+    @ClientTest(value = "the last jar in the off hand captures an allay", group = "Warded jar")
+    private static List<Step> wardedJarOffHand() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     entityId = spawnNoAi(player, EntityType.ALLAY, ahead(player, 2, 0));
@@ -232,8 +224,9 @@ public final class EntityTests {
         );
     }
 
-    private static Test wardedJarFullInventory() {
-        return new Test("Warded jar", "with a full inventory the filled jar is dropped",
+    @ClientTest(value = "with a full inventory the filled jar is dropped", group = "Warded jar")
+    private static List<Step> wardedJarFullInventory() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     entityId = spawnNoAi(player, EntityType.ALLAY, ahead(player, 2, 0));
@@ -255,8 +248,9 @@ public final class EntityTests {
         );
     }
 
-    private static Test wardedJarReleaseReturnsJar() {
-        return new Test("Warded jar", "releasing the last filled jar gives back one empty jar",
+    @ClientTest(value = "releasing the last filled jar gives back one empty jar", group = "Warded jar")
+    private static List<Step> wardedJarReleaseReturnsJar() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> hold(player(server), WARDED_JAR_ALLAY.get(), 1))),
                 Step.run(10, () -> useOn(fromServer(server -> ahead(player(server), 2, 0).below()))),
                 Step.until("allay released", 20, () -> fromServer(server ->
@@ -270,8 +264,9 @@ public final class EntityTests {
         );
     }
 
-    private static Test entityShowroom() {
-        return new Test("Entities", "every Paradise Lost entity renders",
+    @ClientTest(value = "every Paradise Lost entity renders", group = "Entities")
+    private static List<Step> entityShowroom() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     server.setDifficulty(Difficulty.EASY, true);
                     ServerPlayer player = player(server);

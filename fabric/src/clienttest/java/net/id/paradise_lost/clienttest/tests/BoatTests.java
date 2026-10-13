@@ -1,7 +1,7 @@
 package net.id.paradise_lost.clienttest.tests;
 
+import net.id.paradise_lost.clienttest.ClientTest;
 import net.id.paradise_lost.clienttest.Step;
-import net.id.paradise_lost.clienttest.Test;
 import net.id.paradise_lost.registry.EntityRegistry;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.core.BlockPos;
@@ -29,7 +29,6 @@ import static net.id.paradise_lost.clienttest.TestHelpers.*;
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class BoatTests {
-    private static final String GROUP = "Boat";
     private static final List<Supplier<? extends EntityType<? extends Boat>>> BOATS = List.of(
             EntityRegistry.AUREL_BOAT, EntityRegistry.MOTHER_AUREL_BOAT, EntityRegistry.MENTH_BOAT, EntityRegistry.WISTERIA_BOAT,
             EntityRegistry.AUREL_CHEST_BOAT, EntityRegistry.MOTHER_AUREL_CHEST_BOAT, EntityRegistry.MENTH_CHEST_BOAT, EntityRegistry.WISTERIA_CHEST_BOAT
@@ -41,15 +40,6 @@ public final class BoatTests {
     private BoatTests() {
     }
 
-    public static List<Test> all() {
-        return List.of(
-                boatsRender(),
-                boatRide(),
-                boatDrops(),
-                boatSaveLoad()
-        );
-    }
-
     private static EntityType<? extends Boat> boat(int index) {
         return BOATS.get(index).get();
     }
@@ -59,8 +49,9 @@ public final class BoatTests {
         return index < 4 ? set.boat().get() : set.chestBoat().get();
     }
 
-    private static Test boatsRender() {
-        return new Test(GROUP, "boats render",
+    @ClientTest("boats render")
+    private static List<Step> boatsRender() {
+        return List.of(
                 Step.run(0, () -> {
                     List<String> wrong = new ArrayList<>();
                     for (int i = 0; i < BOATS.size(); i++) {
@@ -100,8 +91,9 @@ public final class BoatTests {
         );
     }
 
-    private static Test boatRide() {
-        return new Test(GROUP, "player can ride",
+    @ClientTest("player can ride")
+    private static List<Step> boatRide() {
+        return List.of(
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
                     ServerLevel world = player.serverLevel();
@@ -118,8 +110,9 @@ public final class BoatTests {
         );
     }
 
-    private static Test boatDrops() {
-        return new Test(GROUP, "boats drop their own item and chest contents", Step.run(0, () -> onServer(server -> {
+    @ClientTest("boats drop their own item and chest contents")
+    private static Step boatDrops() {
+        return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ServerLevel world = player.serverLevel();
             List<String> wrong = new ArrayList<>();
@@ -142,11 +135,12 @@ public final class BoatTests {
                 }
             }
             checkAll(wrong);
-        })));
+        }));
     }
 
-    private static Test boatSaveLoad() {
-        return new Test(GROUP, "boats keep type, item and chest contents after relog", Step.run(0, () -> onServer(server -> {
+    @ClientTest("boats keep type, item and chest contents after relog")
+    private static Step boatSaveLoad() {
+        return Step.run(0, () -> onServer(server -> {
             ServerLevel world = world(server);
             List<String> wrong = new ArrayList<>();
             for (int i = 0; i < BOATS.size(); i++) {
@@ -165,6 +159,6 @@ public final class BoatTests {
                 }
             }
             checkAll(wrong);
-        })));
+        }));
     }
 }
