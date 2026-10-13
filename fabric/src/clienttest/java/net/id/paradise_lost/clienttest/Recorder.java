@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -31,6 +32,7 @@ public final class Recorder {
     public static final AtomicInteger frames = new AtomicInteger();
     public static final List<DamageSource> playerDamage = new CopyOnWriteArrayList<>();
     public static final List<DamageSource> playerDeaths = new CopyOnWriteArrayList<>();
+    public static final List<ItemStack> itemActivations = new CopyOnWriteArrayList<>();
     public static final List<String> levelEvents = new CopyOnWriteArrayList<>();
 
     static final List<String> logErrors = new CopyOnWriteArrayList<>();
@@ -77,6 +79,7 @@ public final class Recorder {
         explosions.clear();
         playerDamage.clear();
         playerDeaths.clear();
+        itemActivations.clear();
         levelEvents.clear();
     }
 

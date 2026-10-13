@@ -8,6 +8,7 @@ import net.id.paradise_lost.clienttest.tests.DimensionTests;
 import net.id.paradise_lost.clienttest.tests.EntityTests;
 import net.id.paradise_lost.clienttest.tests.FoodBowlTests;
 import net.id.paradise_lost.clienttest.tests.FoodTests;
+import net.id.paradise_lost.clienttest.tests.ItemTests;
 import net.id.paradise_lost.clienttest.tests.LevitaTests;
 import net.id.paradise_lost.clienttest.tests.MoaTests;
 import net.id.paradise_lost.clienttest.tests.NitraTests;
@@ -74,6 +75,7 @@ public class ClientTestRunner implements ClientModInitializer {
         tests.addAll(DimensionTests.all());
         tests.addAll(EntityTests.all());
         tests.addAll(FoodBowlTests.all());
+        tests.addAll(ItemTests.all());
         tests.addAll(LevitaTests.all());
         tests.addAll(MoaTests.all());
         tests.addAll(PotTests.all());
