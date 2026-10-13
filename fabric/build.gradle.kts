@@ -67,6 +67,10 @@ sourceSets {
     }
 }
 
+tasks.named("check") {
+    dependsOn("clienttestClasses")
+}
+
 loom {
     listOf(
         file("src/main/resources/$modId.accesswidener"),
