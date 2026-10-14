@@ -137,9 +137,9 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
                 .texture("layer0", modLoc("block/rootcap0"));
         withExistingParent("rootcap_block", modLoc("block/rootcap_block_inventory"));
 
-        hangerTip("rose_wisteria_hanger_plant", "rose_wisteria_hanger_tip");
-        hangerTip("frost_wisteria_hanger_plant", "frost_wisteria_hanger_tip");
-        hangerTip("lavender_wisteria_hanger_plant", "lavender_wisteria_hanger_tip");
+        hangerTip("rose_wisteria_hanger", "rose_wisteria_hanger_tip");
+        hangerTip("frost_wisteria_hanger", "frost_wisteria_hanger_tip");
+        hangerTip("lavender_wisteria_hanger", "lavender_wisteria_hanger_tip");
 
         decoratedPot();
         amadrysBundle();
