@@ -1,6 +1,5 @@
 package net.id.paradise_lost.util;
 
-import net.id.paradise_lost.ParadiseLost;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageSource;

@@ -15,5 +15,6 @@ public final class ParadiseLostParticles {
         ParticleFactoryRegistry.getInstance().register(ParadiseLostParticleTypes.LEVITA_BLOOP, LevitaBloopParticle.DefaultFactory::new);
         ParticleFactoryRegistry.getInstance().register(ParadiseLostParticleTypes.LEVITATION_TOTEM, LevitationTotemParticle.DefaultFactory::new);
         ParticleFactoryRegistry.getInstance().register(ParadiseLostParticleTypes.LIT_CLOUD, LitCloudParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(ParadiseLostParticleTypes.LEVITA_SPARKLE, LevitaSparkleParticle.DefaultFactory::new);
     }
 }

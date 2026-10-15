@@ -6,4 +6,6 @@ public interface IClientHelper {
     void setRenderLayerCutoutMipped(Object block);
 
     void setRenderLayerTranslucent(Object block);
+
+    boolean isControlKeyDown();
 }

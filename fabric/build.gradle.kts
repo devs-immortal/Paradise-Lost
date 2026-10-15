@@ -55,11 +55,16 @@ afterEvaluate {
     reg.configureJarTask(tasks.named<Jar>("jar").get())
 }
 
-// Datagen still has extensive Yarn leftovers; keep it out of the main compile until remapped.
 sourceSets {
-    named("main") {
-        java.exclude("**/datagen/**")
+    create("clienttest") {
+        val main = sourceSets["main"]
+        compileClasspath += main.compileClasspath + main.output
+        runtimeClasspath += main.runtimeClasspath + main.output
     }
+}
+
+tasks.named("check") {
+    dependsOn("clienttestClasses")
 }
 
 loom {
@@ -68,6 +73,15 @@ loom {
         project(":common").file("src/main/resources/$modId.accesswidener"),
         file("src/main/resources/$modId.classtweaker")
     ).firstOrNull { it.exists() }?.let(accessWidenerPath::set)
+
+    mods {
+        create(modId) {
+            sourceSet(sourceSets["main"])
+        }
+        create("${modId}_clienttest") {
+            sourceSet(sourceSets["clienttest"])
+        }
+    }
 
     runs {
         configureEach {
@@ -83,6 +97,14 @@ loom {
 
         named("server") {
             server()
+        }
+
+        create("clientTest") {
+            client()
+            configName = "Fabric Client Game Tests"
+            source(sourceSets["clienttest"])
+            runDir("runs/clienttest")
+            programArg("--username=Tester")
         }
     }
 }

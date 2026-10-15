@@ -2,7 +2,6 @@ package net.id.paradise_lost.datagen;
 
 
 import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -15,8 +14,6 @@ import net.minecraft.world.item.SignItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.SwordItem;
-import net.minecraft.client.renderer.block.model.BlockModel;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -40,7 +37,7 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
 
         for (Item item : BuiltInRegistries.ITEM) {
             var key = BuiltInRegistries.ITEM.getKey(item);
-            if (key == null || !ModConstants.MODID.equals(key.getNamespace())) {
+            if (!ModConstants.MODID.equals(key.getNamespace())) {
                 continue;
             }
             if (item instanceof BlockItem || item instanceof SignItem || item instanceof SpawnEggItem) {
@@ -106,6 +103,15 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
                 .model(getExistingFile(modLoc("item/xp_circlet_charged")))
                 .end();
 
+        withExistingParent("floaty_leggings_broken", mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/floaty_leggings_broken"));
+        withExistingParent("floaty_leggings", mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/floaty_leggings"))
+                .override()
+                .predicate(modLoc("broken"), 1)
+                .model(getExistingFile(modLoc("item/floaty_leggings_broken")))
+                .end();
+
         withExistingParent("soul_blade_damaged", mcLoc("item/handheld"))
                 .texture("layer0", modLoc("item/soul_blade_damaged"));
         withExistingParent("soul_blade", mcLoc("item/handheld"))
@@ -131,9 +137,9 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
                 .texture("layer0", modLoc("block/rootcap0"));
         withExistingParent("rootcap_block", modLoc("block/rootcap_block_inventory"));
 
-        hangerTip("rose_wisteria_hanger_plant", "rose_wisteria_hanger_tip");
-        hangerTip("frost_wisteria_hanger_plant", "frost_wisteria_hanger_tip");
-        hangerTip("lavender_wisteria_hanger_plant", "lavender_wisteria_hanger_tip");
+        hangerTip("rose_wisteria_hanger", "rose_wisteria_hanger_tip");
+        hangerTip("frost_wisteria_hanger", "frost_wisteria_hanger_tip");
+        hangerTip("lavender_wisteria_hanger", "lavender_wisteria_hanger_tip");
 
         decoratedPot();
         amadrysBundle();

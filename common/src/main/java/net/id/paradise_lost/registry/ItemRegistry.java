@@ -208,7 +208,6 @@ public class ItemRegistry {
     public static final RegistryObject<Item, BlockItem> SWEDROOT = add("swedroot", blockItem(BlockRegistry.SWEDROOT), food(ParadiseLostFoodComponent.SWEDROOT), compostable30);
     public static final RegistryObject<Item, Item> BLACKCURRANT_PIE = add("blackcurrant_pie", Item::new, food(ParadiseLostFoodComponent.BLACKCURRANT_PIE), compostable100);
     public static final RegistryObject<Item, Item> BLACKCURRANT_COOKIE = add("blackcurrant_cookie", Item::new, food(ParadiseLostFoodComponent.BLACKCURRANT_COOKIE), compostable85);
-    public static final RegistryObject<Item, OminousCookieItem> OMINOUS_COOKIE = add("ominous_cookie", OminousCookieItem::new, food(ParadiseLostFoodComponent.OMINOUS_COOKIE), compostable85);
     public static final RegistryObject<Item, Item> ROOT_STEW = add("root_stew", Item::new, food(ParadiseLostFoodComponent.ROOT_STEW).usingConvertsTo(Items.BOWL));
     public static final RegistryObject<Item, BlockItem> FLAXSEED = add("flaxseed", blockItem(BlockRegistry.FLAX), food(), compostable30);
     public static final RegistryObject<Item, Item> MOA_MEAT = add("moa_meat", Item::new, food(ParadiseLostFoodComponent.MOA_MEAT));

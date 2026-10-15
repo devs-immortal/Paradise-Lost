@@ -1,16 +1,13 @@
 package net.id.paradise_lost.client;
 
 import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.client.rendering.particle.LevitaSparkleParticle;
 import net.id.paradise_lost.services.NeoForgeClientHelper;
 import net.id.paradise_lost.client.model.CalciteFlowerPotModel;
 import net.id.paradise_lost.client.model.ParadiseLostModelLayers;
 import net.id.paradise_lost.client.rendering.armor.OrnateOlviteArmorClientExtensions;
 import net.id.paradise_lost.client.rendering.block.PalaceDoorBlockEntityRendererNeoForge;
-import net.id.paradise_lost.client.rendering.particle.CherineFlameParticle;
-import net.id.paradise_lost.client.rendering.particle.LevitaBloopParticle;
-import net.id.paradise_lost.client.rendering.particle.LevitationTotemParticle;
-import net.id.paradise_lost.client.rendering.particle.LitCloudParticle;
-import net.id.paradise_lost.client.rendering.particle.MotherAurelLeafParticle;
+import net.id.paradise_lost.client.rendering.particle.*;
 import net.id.paradise_lost.client.rendering.util.ParadiseLostColorProviders;
 import net.id.paradise_lost.client.screen.MoaScreen;
 import net.id.paradise_lost.registry.ItemRegistry;
@@ -80,6 +77,7 @@ public class NeoForgeClient {
         event.registerSpriteSet(ParadiseLostParticleTypes.LEVITA_BLOOP, LevitaBloopParticle.DefaultFactory::new);
         event.registerSpriteSet(ParadiseLostParticleTypes.LEVITATION_TOTEM, LevitationTotemParticle.DefaultFactory::new);
         event.registerSpriteSet(ParadiseLostParticleTypes.LIT_CLOUD, LitCloudParticle.DefaultFactory::new);
+        event.registerSpriteSet(ParadiseLostParticleTypes.LEVITA_SPARKLE, LevitaSparkleParticle.DefaultFactory::new);
     }
 
     private static void registerScreens(RegisterMenuScreensEvent event) {

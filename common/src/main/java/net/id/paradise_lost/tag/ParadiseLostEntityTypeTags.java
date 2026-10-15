@@ -1,6 +1,5 @@
 package net.id.paradise_lost.tag;
 
-import net.id.paradise_lost.ParadiseLost;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;

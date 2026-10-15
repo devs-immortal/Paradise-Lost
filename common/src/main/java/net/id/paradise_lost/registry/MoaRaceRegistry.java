@@ -44,6 +44,7 @@ public final class MoaRaceRegistry {
     public static final ResourceKey<MoaRace> MOONSTRUCK = key("moonstruck");
     public static final ResourceKey<MoaRace> GREENSEED = key("greenseed");
     public static final ResourceKey<MoaRace> AQUILAN = key("aquilan");
+    public static final ResourceKey<MoaRace> CHARNELA = key("charnela");
 
     /** Used before registry access is available (genes field init, missing lookups). */
     public static final MoaRace FALLBACK_VALUE = new MoaRace(
@@ -109,6 +110,7 @@ public final class MoaRaceRegistry {
         register(context, MOONSTRUCK, new MoaRace(GLIDING_SPEED, glide, true, true, ParticleTypes.GLOW, Optional.empty()));
         register(context, GREENSEED, new MoaRace(JUMPING_STRENGTH, endurance));
         register(context, AQUILAN, new MoaRace(GLIDING_SPEED, speed));
+        register(context, CHARNELA, new MoaRace(GLIDING_DECAY, glide));
         register(context, FALLBACK, new MoaRace(GROUND_SPEED, tank, false, false, ParticleTypes.ENCHANT, Optional.empty()));
     }
 

@@ -5,15 +5,12 @@ import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.registration.RegistryObject;
 import net.id.paradise_lost.util.ParadiseLostEnchantments;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.OminousBottleAmplifier;
-import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 
 import static net.id.paradise_lost.registry.ItemRegistry.*;
@@ -387,11 +384,6 @@ public class CreativeTabRegistry {
                         output.accept(POPOM_JELLY.get());
                         output.accept(BLACKCURRANT_PIE.get());
                         output.accept(BLACKCURRANT_COOKIE.get());
-                        for (int amplifier = OminousBottleAmplifier.MIN_AMPLIFIER; amplifier <= OminousBottleAmplifier.MAX_AMPLIFIER; amplifier++) {
-                            ItemStack cookie = new ItemStack(OMINOUS_COOKIE.get());
-                            cookie.set(ParadiseLostDataComponentTypes.OMINOUS_COOKIE_AMPLIFIER, amplifier);
-                            output.accept(cookie);
-                        }
                         output.accept(AMADRYS_NOODLES.get());
                         output.accept(ROOT_STEW.get());
                         output.accept(SWEDROOT.get());

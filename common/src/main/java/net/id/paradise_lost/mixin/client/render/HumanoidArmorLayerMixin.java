@@ -56,7 +56,8 @@ public class HumanoidArmorLayerMixin {
     ) {
         if (this.paradiseLost$floatyAnchored
                 && layerType == EquipmentModel.LayerType.HUMANOID_LEGGINGS
-                && item.getItem() instanceof FloatyLeggingsItem) {
+                && item.getItem() instanceof FloatyLeggingsItem
+                && FloatyLeggingsItem.isFloatyEnabled(item)) {
             equipmentModel = FLOATY_ANCHORED;
         }
         original.call(renderer, layerType, equipmentModel, armorModel, item, poseStack, bufferSource, packedLight);

@@ -5,9 +5,10 @@ import net.minecraft.server.level.ServerLevel;
 
 public interface ParadiseLostMinecartExtensions {
     /**
-     * Moves a floating cart that is midair above a rail without snapping it back onto the rail.
+     * Runs before vanilla rail movement. A floating cart above the rail moves on its own instead of snapping back
+     * onto the rail.
      *
      * @return whether the cart was moved, so the regular rail movement must be skipped
      */
-    boolean paradiseLost$moveMidairAboveRail(ServerLevel level, BlockPos railPos);
+    boolean paradiseLost$skipMoveAlongTrack(ServerLevel level, BlockPos railPos);
 }

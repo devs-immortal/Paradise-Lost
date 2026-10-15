@@ -38,5 +38,12 @@ public class ParadiseLostParticleDescriptionProvider extends ParticleDescription
                 ResourceLocation.withDefaultNamespace("generic_2"),
                 ResourceLocation.withDefaultNamespace("generic_1"),
                 ResourceLocation.withDefaultNamespace("generic_0"));
+        spriteSet(ParadiseLostParticleTypes.LEVITA_SPARKLE,
+                ModConstants.id("levita_sparkle_0"),
+                ModConstants.id("levita_sparkle_1"),
+                ModConstants.id("levita_sparkle_2"),
+                ModConstants.id("levita_sparkle_3"),
+                ModConstants.id("levita_sparkle_4"),
+                ModConstants.id("levita_sparkle_5"));
     }
 }

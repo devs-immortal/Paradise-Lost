@@ -250,7 +250,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         if (this.blockState.isAir()) this.blockState = Blocks.STONE.defaultBlockState();
     }
 
-        public Level getWorldObj() {
+    public Level getWorldObj() {
         return this.level();
     }
 
@@ -387,7 +387,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         return false;
     }
 
-        public BlockPos getOrigin() {
+    public BlockPos getOrigin() {
         return this.entityData.get(ORIGIN);
     }
 

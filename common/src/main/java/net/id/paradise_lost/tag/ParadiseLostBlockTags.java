@@ -15,6 +15,7 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> CLOUDS = register("clouds");
     public static final TagKey<Block> HANGERS = register("hangers");
     public static final TagKey<Block> STRUCTURES_AVOID = register("structures_avoid");
+    public static final TagKey<Block> PORTAL_IGNORE = register("portal_ignore");
 
     public static final TagKey<Block> ANIMALS_PREFERRED = register("animals_preferred");
 
