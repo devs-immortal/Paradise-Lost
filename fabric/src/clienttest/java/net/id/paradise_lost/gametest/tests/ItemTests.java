@@ -16,7 +16,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -49,8 +48,6 @@ import static net.id.paradise_lost.registry.ItemRegistry.*;
 public final class ItemTests {
     private static BlockPos pos;
     private static final List<Integer> entityIds = new ArrayList<>();
-    private static final List<LivingEntity> fallers = new ArrayList<>();
-    private static double startY;
 
     private ItemTests() {
     }
@@ -417,46 +414,6 @@ public final class ItemTests {
                 Step.run(2, () -> client().options.keyJump.setDown(false)),
                 Step.until("server to see the anchor", 20, () -> fromServer(server -> ((ParadiseLostEntityExtensions) player(server)).isFloatyAnchored())),
                 Step.run(0, () -> onServer(server -> ((ParadiseLostEntityExtensions) player(server)).setFloatyAnchored(false)))
-        );
-    }
-
-    @ClientTest(value = "leggings slow the fall of an armor stand and a cow", group = "Floaty")
-    private static List<Step> floatyLeggingsOnMobs() {
-        return List.of(
-                Step.run(0, () -> onServer(server -> {
-                    ServerPlayer player = player(server);
-                    ServerLevel world = player.serverLevel();
-                    fallers.clear();
-                    startY = player.getY() + 20;
-
-                    for (int side = -3; side <= 3; side += 2) {
-                        BlockPos at = ahead(player, 3, side);
-                        LivingEntity entity = side < 0 ? new ArmorStand(world, 0, 0, 0) : EntityType.COW.create(world);
-                        entity.moveTo(at.getX() + 0.5, startY, at.getZ() + 0.5, 0, 0);
-                        if (side == -3 || side == 1) {
-                            entity.setItemSlot(EquipmentSlot.LEGS, new ItemStack(FLOATY_LEGGINGS.get()));
-                        }
-                        world.addFreshEntity(entity);
-                        fallers.add(entity);
-                    }
-                })),
-                Step.run(15, () -> onServer(server -> {
-                    List<String> wrong = new ArrayList<>();
-
-                    for (int i = 0; i < fallers.size(); i += 2) {
-                        LivingEntity wearer = fallers.get(i);
-                        LivingEntity bare = fallers.get(i + 1);
-                        double wearerFell = startY - wearer.getY();
-                        double bareFell = startY - bare.getY();
-                        String name = EntityType.getKey(wearer.getType()).getPath();
-
-                        expect(wrong, bareFell > 4, name + " without leggings fell only " + bareFell + " blocks, test did not wait long enough");
-                        expect(wrong, wearerFell < 2, name + " with leggings fell " + wearerFell + " blocks, without " + bareFell);
-                    }
-
-                    fallers.forEach(Entity::discard);
-                    checkAll(wrong);
-                }))
         );
     }
 

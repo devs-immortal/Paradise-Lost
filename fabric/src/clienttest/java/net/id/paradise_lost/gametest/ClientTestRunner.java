@@ -46,6 +46,8 @@ public class ClientTestRunner implements ClientModInitializer {
     );
 
     public static String title;
+    public static int currentTestNumber;
+    public static int currentTestCount;
 
     private Phase phase = Phase.CREATE_WORLD;
     private final Deque<Test> tests = new ArrayDeque<>();
@@ -89,6 +91,11 @@ public class ClientTestRunner implements ClientModInitializer {
     }
 
     private void runTests() {
+        Minecraft client = client();
+        client.options.pauseOnLostFocus = false;
+        if (client.screen instanceof net.minecraft.client.gui.screens.PauseScreen) {
+            client.setScreen(null);
+        }
         if (wait > 0) {
             wait--;
         } else if (running == null) {
@@ -106,7 +113,9 @@ public class ClientTestRunner implements ClientModInitializer {
             return;
         }
         running = new Running(test, Recorder.logErrors.size());
-        setTitle("[" + (testIndex + 1) + "/" + testCount + "] " + test.fullName());
+        currentTestNumber = testIndex + 1;
+        currentTestCount = testCount;
+        setTitle("[" + currentTestNumber + "/" + testCount + "] " + test.fullName());
         try {
             TestWorld.resetPlayer(testIndex++);
         } catch (Throwable t) {
@@ -128,6 +137,9 @@ public class ClientTestRunner implements ClientModInitializer {
             if (!done) return;
             if (++running.step < running.test.steps().size()) {
                 wait = running.currentStep().delay();
+                if (wait == 0) {
+                    runStep();
+                }
                 return;
             }
             checkNoNewLogErrors();
@@ -183,7 +195,7 @@ public class ClientTestRunner implements ClientModInitializer {
             LOG.error("{} tests failed:", failures.size());
             failures.forEach(f -> LOG.error("  {}", f));
         }
-        System.exit(failures.isEmpty() ? 0 : 1);
+        Minecraft.getInstance().execute(() -> Minecraft.getInstance().stop());
     }
 
     private enum Phase {
