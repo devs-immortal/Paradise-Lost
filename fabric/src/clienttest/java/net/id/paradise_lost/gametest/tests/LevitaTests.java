@@ -1568,6 +1568,18 @@ public final class LevitaTests {
             expect(wrong, MinecartFloating.getIncline(old) == -1, "legacy incline " + MinecartFloating.getIncline(old));
             expect(wrong, MinecartFloating.getRailShape(old) == RailShape.ASCENDING_NORTH, "legacy shape " + MinecartFloating.getRailShapeName(old));
             expect(wrong, !old.saveWithoutId(new CompoundTag()).contains("paradiseLostFloating"), "re-save still has the legacy key");
+
+            CompoundTag ccaTag = EntityType.MINECART.create(world).saveWithoutId(new CompoundTag());
+            CompoundTag ccaRoot = new CompoundTag();
+            CompoundTag ccaFloat = new CompoundTag();
+            ccaFloat.putBoolean("floating", true);
+            ccaFloat.putInt("floatTime", 42);
+            ccaRoot.put("paradise_lost:minecart_float", ccaFloat);
+            ccaTag.put("cardinal_components", ccaRoot);
+            Minecart fromCca = EntityType.MINECART.create(world);
+            fromCca.load(ccaTag);
+            expect(wrong, MinecartFloating.getFloatTime(fromCca) == 42, "cca float time " + MinecartFloating.getFloatTime(fromCca));
+            expect(wrong, !fromCca.saveWithoutId(new CompoundTag()).contains("cardinal_components"), "re-save still has CCA float");
             checkAll(wrong);
         }));
     }

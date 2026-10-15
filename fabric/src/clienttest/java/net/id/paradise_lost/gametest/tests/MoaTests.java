@@ -282,6 +282,42 @@ public final class MoaTests {
         }));
     }
 
+    @ClientTest("2.4 CCA moa genetics migrate into moaGenes")
+    private static Step moaGenesCcaMigrates() {
+        return Step.run(0, () -> onServer(server -> {
+            ServerPlayer player = player(server);
+            ServerLevel world = player.serverLevel();
+            MoaEntity source = MoaGenes.getMoaFromEgg(world, goldenrodEgg(world, false), player.getUUID(), ahead(player, 3, 0));
+            source.getGenes().setHunger(73.5F);
+            CompoundTag genes = new CompoundTag();
+            source.getGenes().writeToNbt(genes, world.registryAccess());
+
+            CompoundTag nbt = new CompoundTag();
+            CompoundTag cca = new CompoundTag();
+            cca.put("paradise_lost:moa_genetics", genes);
+            nbt.put("cardinal_components", cca);
+
+            MoaEntity loaded = EntityRegistry.MOA.get().create(world);
+            loaded.load(nbt);
+
+            List<String> wrong = new ArrayList<>();
+            if (Math.abs(loaded.getGenes().getHunger() - 73.5F) > 0.01F) {
+                wrong.add("hunger is " + loaded.getGenes().getHunger() + " expected 73.5");
+            }
+            if (!loaded.getGenes().getRaceId().equals(MoaRaceRegistry.GOLDENROD.location())) {
+                wrong.add("race is " + loaded.getGenes().getRaceId());
+            }
+            CompoundTag resaved = loaded.saveWithoutId(new CompoundTag());
+            if (!resaved.contains("moaGenes")) {
+                wrong.add("re-save missing moaGenes");
+            }
+            if (resaved.contains("cardinal_components")) {
+                wrong.add("re-save still has CCA genetics");
+            }
+            checkAll(wrong);
+        }));
+    }
+
     private static ItemStack goldenrodEgg(ServerLevel world, boolean baby) {
         ResourceLocation raceId = MoaRaceRegistry.GOLDENROD.location();
         return MoaGenes.getEggForCommand(MoaRaceRegistry.getOrFallback(world.registryAccess(), raceId), raceId, world, baby);

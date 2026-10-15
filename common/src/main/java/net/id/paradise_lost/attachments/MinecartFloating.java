@@ -2,6 +2,7 @@ package net.id.paradise_lost.attachments;
 
 import com.mojang.datafixers.util.Pair;
 import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.datafixer.MinecartFloatDataFix;
 import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
 import net.id.paradise_lost.platform.Services;
 import net.minecraft.core.BlockPos;
@@ -2487,16 +2488,16 @@ public final class MinecartFloating {
     }
 
     public static void loadLegacyNbt(AbstractMinecart cart, CompoundTag tag) {
-        if (!tag.contains(LEGACY_NBT_KEY, Tag.TAG_COMPOUND)) {
-            return;
+        if (tag.contains(LEGACY_NBT_KEY, Tag.TAG_COMPOUND)) {
+            CompoundTag floating = tag.getCompound(LEGACY_NBT_KEY);
+            int time = floating.getInt("floatTime");
+            setFloatTime(cart, floating.getBoolean("floating") ? Math.max(time, 1) : time);
+            setIncline(cart, floating.getInt("floatIncline"));
+            if (floating.contains("floatShape", Tag.TAG_STRING)) {
+                setRailShape(cart, floating.getString("floatShape"));
+            }
+            tag.remove(LEGACY_NBT_KEY);
         }
-        CompoundTag floating = tag.getCompound(LEGACY_NBT_KEY);
-        int time = floating.getInt("floatTime");
-        setFloatTime(cart, floating.getBoolean("floating") ? Math.max(time, 1) : time);
-        setIncline(cart, floating.getInt("floatIncline"));
-        if (floating.contains("floatShape", Tag.TAG_STRING)) {
-            setRailShape(cart, floating.getString("floatShape"));
-        }
-        tag.remove(LEGACY_NBT_KEY);
+        MinecartFloatDataFix.migrateCardinal(cart, tag);
     }
 }
