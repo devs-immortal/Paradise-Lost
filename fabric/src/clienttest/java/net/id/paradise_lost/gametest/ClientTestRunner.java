@@ -20,8 +20,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CompletionException;
 
 import static net.id.paradise_lost.gametest.TestHelpers.client;
@@ -86,7 +88,16 @@ public class ClientTestRunner implements ClientModInitializer {
     private void loadTests() {
         TEST_CLASSES.forEach(type -> tests.addAll(TestLoader.load(type)));
         String only = System.getenv("RUN_ONLY");
-        if (only != null) tests.removeIf(test -> !test.group().equalsIgnoreCase(only) && !test.fullName().equalsIgnoreCase(only));
+        if (only != null) {
+            String[] filters = Arrays.stream(only.split(";"))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .toArray(String[]::new);
+            tests.removeIf(test -> Arrays.stream(filters).noneMatch(filter ->
+                    test.group().equalsIgnoreCase(filter)
+                            || test.fullName().equalsIgnoreCase(filter)
+                            || test.name().toLowerCase(Locale.ROOT).contains(filter.toLowerCase(Locale.ROOT))));
+        }
         testCount = tests.size();
     }
 

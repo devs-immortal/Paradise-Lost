@@ -90,7 +90,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     }
 
     /**
-     * Off-rail float only: force the vanilla off-track render path (entity yaw/pitch). Do <em>not</em> rewrite seated
+     * Off-rail float only: force the vanilla off-track render path (entity yaw/pitch). Don't rewrite seated
      * {@code getPos}/{@code getPosOffs} — that broke curve posing (offs collapsed → renderer fell back to stuck entity
      * yaw on corners).
      */
@@ -243,9 +243,17 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         double y = 0.0D;
         int incline = MinecartFloating.getIncline(cart);
         if (incline != 0) {
+            boolean openAir = MinecartFloating.findRailPos(cart) == null;
             // Descending into empty air — hold height a bit, then level if nothing shows up.
-            if (incline < 0 && MinecartFloating.findRailPos(cart) == null
-                    && !MinecartFloating.shouldKeepOpenAirDescent(cart)) {
+            if (incline < 0 && openAir && !MinecartFloating.shouldKeepOpenAirDescent(cart)) {
+                y = 0.0D;
+                if (++this.paradiseLost$noDescentPathTicks >= 4) {
+                    MinecartFloating.levelOpenAirFlight(cart);
+                    incline = 0;
+                    this.paradiseLost$noDescentPathTicks = 0;
+                }
+            } else if (incline > 0 && openAir && !MinecartFloating.shouldKeepOpenAirClimb(cart)) {
+                // Past the last slope/solid stair — stop climbing into the sky.
                 y = 0.0D;
                 if (++this.paradiseLost$noDescentPathTicks >= 4) {
                     MinecartFloating.levelOpenAirFlight(cart);
@@ -353,7 +361,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                         }
                         MinecartFloating.applyFloatingRotation(cart);
                     } else {
-                        MinecartFloating.applySyncedFloatingRotation(cart);
+                        paradiseLost$applyClientFloatPose(cart);
                     }
                     MinecartFloating.debugTick(cart, leftRails, midair,
                             settled ? "ghostRailLerp" : (midair ? "ghostRail" : "ghostRailLerp"));
@@ -366,7 +374,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                     }
                     MinecartFloating.applyFloatingRotation(cart);
                 } else {
-                    MinecartFloating.applySyncedFloatingRotation(cart);
+                    paradiseLost$applyClientFloatPose(cart);
                 }
                 MinecartFloating.debugTick(cart, leftRails, true,
                         unsettledFlat ? "ghostRailDesync" : "ghostRailPending");
@@ -387,6 +395,8 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                     } else {
                         MinecartFloating.syncFlatFloatYawFromMotion(cart);
                     }
+                } else {
+                    paradiseLost$applyClientFloatPose(cart);
                 }
                 MinecartFloating.debugTick(cart, false, false, "onRail");
             }
@@ -414,9 +424,14 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             }
             if (this.paradiseLost$wasOffRail) {
                 MinecartFloating.applyFloatingRotation(cart);
+                if (firstExit) {
+                    // comeOffTrack was skipped this tick (left during moveAlongTrack).
+                    // Move now with slope noclip so we don't stick on the next stair pier.
+                    this.paradiseLost$moveFloating(cart, true);
+                }
             }
         } else if (MinecartFloating.isOffRail(cart) || MinecartFloating.isFloating(cart)) {
-            MinecartFloating.applySyncedFloatingRotation(cart);
+            paradiseLost$applyClientFloatPose(cart);
         }
         MinecartFloating.debugTick(cart, this.paradiseLost$wasOffRail, false, "air");
         if (this.level().isClientSide()) {
@@ -428,6 +443,16 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 this.level().addParticle(ParadiseLostParticleTypes.LEVITA_BLOOP, rightParticlePos.x(), this.getY(), rightParticlePos.z(), 0, 0, 0);
                 this.level().addParticle(ParadiseLostParticleTypes.LEVITA_BLOOP, leftParticlePos.x(), this.getY(), leftParticlePos.z(), 0, 0, 0);
             }
+        }
+    }
+
+    /** Hold ±45 while incline is live; once flat, follow sync so landings can level. */
+    @Unique
+    private void paradiseLost$applyClientFloatPose(AbstractMinecart cart) {
+        if (MinecartFloating.getIncline(cart) != 0) {
+            MinecartFloating.maintainSlopeFloatPose(cart);
+        } else {
+            MinecartFloating.applySyncedFloatingRotation(cart);
         }
     }
 }
