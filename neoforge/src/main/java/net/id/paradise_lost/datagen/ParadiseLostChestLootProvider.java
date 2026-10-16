@@ -332,9 +332,9 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
 
         output.accept(ParadiseLostLootTables.SPAWNER_BIRDCAGE_OMINOUS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2))
-                        .add(item(ItemRegistry.TOTEM_OF_LEVITATION.get(), 4))
-                        .add(item(ItemRegistry.LEVITA_GEM.get(), 3).apply(count(2, 4)))
-                        .add(item(ItemRegistry.ROOT_STEW.get(), 2).apply(count(1, 3)))
+                        .add(item(ItemRegistry.TOTEM_OF_LEVITATION.get(), 8))
+                        .add(item(ItemRegistry.LEVITA_GEM.get(), 6).apply(count(2, 4)))
+                        .add(item(ItemRegistry.ROOT_STEW.get(), 4).apply(count(1, 3)))
                         .add(LootItem.lootTableItem(ItemRegistry.MOA_EGG.get())
                                 .apply(SetComponentsFunction.setComponent(ParadiseLostDataComponentTypes.MOA_GENES, new ParadiseLostDataComponentTypes.MoaGeneComponent(
                                         MoaRaceRegistry.CHARNELA.location(),
@@ -343,7 +343,9 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                                         100,
                                         UUID.fromString("00000000-0000-0000-0000-000000000000"),
                                         new ParadiseLostDataComponentTypes.MoaAttributeComponent(0.5F, 0.2F, 0.75F, 0.185F, 1, 25)
-                                ))).setWeight(4))));
+                                ))).setWeight(6))
+                        .add(item(ItemRegistry.LEVITA_WAND.get(), 1))
+                        .add(item(Items.EXPERIENCE_BOTTLE, 5).apply(count(5, 16)))));
     }
 
     private static LootPool.Builder floatyLeggingsPool() {
