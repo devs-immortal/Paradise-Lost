@@ -18,7 +18,7 @@
             }
           ],
           "name": "paradise_lost:flaxweave",
-          "weight": 15
+          "weight": 13
         },
         {
           "type": "minecraft:item",
@@ -34,7 +34,7 @@
             }
           ],
           "name": "paradise_lost:flax_thread",
-          "weight": 10
+          "weight": 9
         },
         {
           "type": "minecraft:item",
@@ -51,6 +51,22 @@
           ],
           "name": "paradise_lost:flaxseed",
           "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 12.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "paradise_lost:levita_arrow",
+          "weight": 4
         },
         {
           "type": "minecraft:item",

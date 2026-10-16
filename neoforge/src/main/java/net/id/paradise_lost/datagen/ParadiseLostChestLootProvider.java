@@ -287,9 +287,10 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
 
         output.accept(ParadiseLostLootTables.POTS_REMAINS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).setBonusRolls(ConstantValue.exactly(0))
-                        .add(item(ItemRegistry.FLAXWEAVE.get(), 15).apply(count(1, 3)))
-                        .add(item(ItemRegistry.FLAX_THREAD.get(), 10).apply(count(3, 9)))
+                        .add(item(ItemRegistry.FLAXWEAVE.get(), 13).apply(count(1, 3)))
+                        .add(item(ItemRegistry.FLAX_THREAD.get(), 9).apply(count(3, 9)))
                         .add(item(ItemRegistry.FLAXSEED.get(), 5).apply(count(2, 3)))
+                        .add(item(ItemRegistry.LEVITA_ARROW.get(), 4).apply(count(4, 12)))
                         .add(item(ItemRegistry.OLVITE.get(), 5))
                         .add(item(ItemRegistry.LEVITA_GEM.get(), 3))
                         .add(LootItem.lootTableItem(Items.MAP)
