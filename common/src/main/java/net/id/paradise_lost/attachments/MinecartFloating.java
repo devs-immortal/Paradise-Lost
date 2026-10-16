@@ -1966,8 +1966,174 @@ public final class MinecartFloating {
         return towardHighEnd ? 44.9F : -44.9F;
     }
 
+    private static final float MAX_RENDER_YAW_STEP_PER_TICK = 40.0F;
+    private static final Map<AbstractMinecart, RenderYawFilter> RENDER_YAW_FILTERS = new java.util.WeakHashMap<>();
+
+    /**
+     * Limits how fast the drawn yaw can change. The pose source flips between vanilla and ours around curves and
+     * slope ends, and each source can disagree by tens of degrees for a tick, which shows up as the cart snapping
+     * round. Following the wanted yaw at a bounded rate turns those snaps into a short smooth turn.
+     * <p>
+     * The cart looks the same from both ends, so a pose can also be drawn as yaw + 180 with the pitch negated. The
+     * filter takes whichever of the two is closer to what is on screen, and {@link #pitchSign()} says which it took.
+     * Without that, a climb would be drawn tilted down the slope whenever the two sources disagree about direction.
+     */
+    public static final class RenderYawFilter {
+        private float yaw;
+        private float time;
+        private boolean set;
+        private float pitchSign = 1.0F;
+
+        public float apply(float wanted, float time) {
+            if (!set || time < this.time - 0.001F || time - this.time > 2.0F) {
+                return reset(wanted, time);
+            }
+            float dt = time - this.time;
+            if (dt <= 0.0001F) {
+                return yaw;
+            }
+            float direct = Mth.wrapDegrees(wanted - yaw);
+            float flipped = Mth.wrapDegrees(wanted + 180.0F - yaw);
+            float diff;
+            if (Math.abs(flipped) < Math.abs(direct)) {
+                diff = flipped;
+                pitchSign = -1.0F;
+            } else {
+                diff = direct;
+                pitchSign = 1.0F;
+            }
+            float limit = MAX_RENDER_YAW_STEP_PER_TICK * dt;
+            yaw = Mth.wrapDegrees(yaw + Mth.clamp(diff, -limit, limit));
+            this.time = time;
+            return yaw;
+        }
+
+        public float pitchSign() {
+            return pitchSign;
+        }
+
+        private float reset(float wanted, float time) {
+            yaw = wanted;
+            this.time = time;
+            set = true;
+            pitchSign = 1.0F;
+            return yaw;
+        }
+    }
+
+    /**
+     * Client only. How much of the full slope tilt vanilla would draw at this spot, 0 for flat to 1 for a full slope,
+     * or null when no rail is there. Vanilla looks 0.3 ahead and behind on the rail, so it eases into and out of a
+     * slope over about half a block. The float pose is either flat or a full 45 degrees, so it was drawn up to
+     * a few ticks late at the end of a slope. The client cart also trails the rail height a little while it
+     * catches up, so the lookup is retried a bit higher when nothing is found.
+     */
+    @Nullable
+    public static Float railSlopeScale(AbstractMinecart cart, double x, double y, double z) {
+        if (!cart.level().isClientSide()) {
+            return null;
+        }
+        // Float carts have getPos switched off while they are off the rail, this needs the real lookup.
+        POS_CAPTURE_BYPASS.set(POS_CAPTURE_BYPASS.get() + 1);
+        try {
+            for (double lift = 0.0D; lift <= 0.61D; lift += 0.3D) {
+                double yy = y + lift;
+                BlockPos railAt = BlockPos.containing(x, yy, z);
+                if (!BaseRailBlock.isRail(cart.level().getBlockState(railAt))
+                        || y - railAt.getY() < -0.7D || y - railAt.getY() > 0.9D) {
+                    continue;
+                }
+                Vec3 at = cart.getPos(x, yy, z);
+                if (at == null) {
+                    continue;
+                }
+                Vec3 a = cart.getPosOffs(x, yy, z, 0.3F);
+                Vec3 b = cart.getPosOffs(x, yy, z, -0.3F);
+                if (a == null) {
+                    a = at;
+                }
+                if (b == null) {
+                    b = at;
+                }
+                double run = Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.z - a.z) * (b.z - a.z));
+                double rise = Math.abs(b.y - a.y);
+                if (run < 1.0E-4D && rise < 1.0E-4D) {
+                    return null;
+                }
+                return (float) Math.min(1.0D, rise / Math.max(run, 1.0E-4D));
+            }
+            return null;
+        } finally {
+            POS_CAPTURE_BYPASS.set(POS_CAPTURE_BYPASS.get() - 1);
+        }
+    }
+    /**
+     * -1 while the smoothed yaw is drawn the other way round (see {@link RenderYawFilter}), so the pitch has to flip.
+     */
+    public static float smoothRenderPitchSign(AbstractMinecart cart) {
+        if (!cart.level().isClientSide() || !isFloating(cart)) {
+            return 1.0F;
+        }
+        RenderYawFilter filter = RENDER_YAW_FILTERS.get(cart);
+        return filter == null ? 1.0F : filter.pitchSign();
+    }
+    /**
+     * Render yaw in degrees as given to the renderer (180 minus the atan2 yaw), smoothed per cart.
+     */
+    public static float smoothRenderYawDegrees(AbstractMinecart cart, float wantedDegrees, float partialTicks) {
+        if (!cart.level().isClientSide() || !isFloating(cart)) {
+            RENDER_YAW_FILTERS.remove(cart);
+            return wantedDegrees;
+        }
+        return RENDER_YAW_FILTERS.computeIfAbsent(cart, c -> new RenderYawFilter())
+                .apply(wantedDegrees, cart.tickCount + partialTicks);
+    }
+
+    /**
+     * Client only. True while the cart sits on a curve that vanilla would pick up by itself. The server incline for the
+     * slope next to the curve arrives early, and our axis-snapped yaw would turn the cart before the curve does.
+     */
+    private static boolean isRidingCurveLikeVanilla(AbstractMinecart cart) {
+        if (!cart.level().isClientSide() || isOffRail(cart)) {
+            return false;
+        }
+        double x = cart.getX();
+        double y = cart.getY();
+        double z = cart.getZ();
+        if (isCurveCell(cart, x, y, z)) {
+            return true;
+        }
+        // Vanilla samples the rail 0.3 ahead and behind, so it starts turning before the curve cell.
+        POS_CAPTURE_BYPASS.set(POS_CAPTURE_BYPASS.get() + 1);
+        try {
+            Vec3 ahead = cart.getPosOffs(x, y, z, 0.3F);
+            Vec3 behind = cart.getPosOffs(x, y, z, -0.3F);
+            return (ahead != null && isCurveCell(cart, ahead.x, ahead.y, ahead.z))
+                    || (behind != null && isCurveCell(cart, behind.x, behind.y, behind.z));
+        } finally {
+            POS_CAPTURE_BYPASS.set(POS_CAPTURE_BYPASS.get() - 1);
+        }
+    }
+
+    private static boolean isCurveCell(AbstractMinecart cart, double x, double y, double z) {
+        int i = Mth.floor(x);
+        int j = Mth.floor(y);
+        int k = Mth.floor(z);
+        for (int dy = 0; dy >= -1; dy--) {
+            BlockState state = cart.level().getBlockState(new BlockPos(i, j + dy, k));
+            if (state.getBlock() instanceof BaseRailBlock rail
+                    && isCornerRail(state.getValue(rail.getShapeProperty()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean shouldUseFloatRenderPose(AbstractMinecart cart) {
         if (!isFloating(cart)) {
+            return false;
+        }
+        if (isRidingCurveLikeVanilla(cart)) {
             return false;
         }
         // The client cart is visibly climbing or diving, whatever the synced incline says right now.

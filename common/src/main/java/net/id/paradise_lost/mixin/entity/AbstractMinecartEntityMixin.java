@@ -257,10 +257,12 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                     this.paradiseLost$noDescentPathTicks = 0;
                 }
             } else if (incline > 0 && openAir && !MinecartFloating.shouldKeepOpenAirClimb(cart)) {
-                // Past the last slope/solid stair, stop climbing into the sky.
+                // Past the last slope/solid stair: the climb is over, so let the cart drop
+                // instead of coasting level for the rest of the float.
                 y = 0.0D;
-                if (++this.paradiseLost$noDescentPathTicks >= 4) {
+                if (++this.paradiseLost$noDescentPathTicks >= 2) {
                     MinecartFloating.levelOpenAirFlight(cart);
+                    MinecartFloating.stopFloating(cart);
                     incline = 0;
                     this.paradiseLost$noDescentPathTicks = 0;
                 }
