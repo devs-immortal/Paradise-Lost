@@ -23,7 +23,7 @@
 	},
 	"mixins": [
 		"${mod_id}.mixins.json",
-		"paradise_lost.fabric.mixins.json"
+		"${mod_id}.fabric.mixins.json"
 	],
 	"accessWidener": "${mod_id}.accesswidener",
 	"depends": {

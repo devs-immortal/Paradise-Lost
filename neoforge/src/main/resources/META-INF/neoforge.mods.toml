@@ -18,7 +18,7 @@ ${mod_description}
     config = "${mod_id}.mixins.json"
 
 [[mixins]]
-    config = "paradise_lost.neoforge.mixins.json"
+    config = "${mod_id}.neoforge.mixins.json"
 
 [[accessTransformers]]
     file = "META-INF/accesstransformer.cfg"
