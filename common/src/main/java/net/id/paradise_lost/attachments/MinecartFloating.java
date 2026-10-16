@@ -1561,9 +1561,7 @@ public final class MinecartFloating {
                 if (localSlope) {
                     yaw = pose.paradiseLost$getRailRenderYaw();
                     pitch = pose.paradiseLost$getRailRenderPitch();
-                } else if (Math.abs(pitch) > 1.0F) {
-                    // sync pitch already holds slope from cornerKeepSlope
-                } else {
+                } else if (Math.abs(pitch) <= 1.0F) {
                     pitch = 0.0F;
                 }
             } else {
@@ -2343,10 +2341,8 @@ public final class MinecartFloating {
         BlockState at = cart.level().getBlockState(pos);
         if (BaseRailBlock.isRail(at)) {
             // High above a through-flat with a higher target, ignore it. Otherwise it's the landing.
-            if (climbFloat && isFlatStraightRail(at) && cart.getY() - pos.getY() > 0.45D
-                    && hasHigherClimbTarget(cart, pos)) {
-                // fall through to above / null
-            } else {
+            if (!(climbFloat && isFlatStraightRail(at) && cart.getY() - pos.getY() > 0.45D
+                    && hasHigherClimbTarget(cart, pos))) {
                 return pos;
             }
         }
