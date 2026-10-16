@@ -1,7 +1,7 @@
 package net.id.paradise_lost.mixin.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.id.paradise_lost.attachments.MinecartFloating;
+import net.id.paradise_lost.util.MinecartFloatingHelper;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.MinecartRenderer;
 import net.minecraft.util.Mth;
@@ -58,11 +58,11 @@ public class MinecartRendererMixin {
         if (entity == null) {
             return degrees;
         }
-        float wanted = MinecartFloating.shouldUseFloatRenderPose(entity)
-                ? 180.0F - MinecartFloating.getFloatRenderYaw(entity)
+        float wanted = MinecartFloatingHelper.shouldUseFloatRenderPose(entity)
+                ? 180.0F - MinecartFloatingHelper.getFloatRenderYaw(entity)
                 : degrees;
         Float partial = PARADISE_LOST$RENDER_PARTIAL.get();
-        return MinecartFloating.smoothRenderYawDegrees(entity, wanted, partial == null ? 0.0F : partial);
+        return MinecartFloatingHelper.smoothRenderYawDegrees(entity, wanted, partial == null ? 0.0F : partial);
     }
 
     /**
@@ -83,11 +83,11 @@ public class MinecartRendererMixin {
             return degrees;
         }
         float wanted = degrees;
-        if (MinecartFloating.shouldUseFloatRenderPose(entity)) {
-            wanted = -MinecartFloating.getFloatRenderPitch(entity);
+        if (MinecartFloatingHelper.shouldUseFloatRenderPose(entity)) {
+            wanted = -MinecartFloatingHelper.getFloatRenderPitch(entity);
             Float partial = PARADISE_LOST$RENDER_PARTIAL.get();
             float t = partial == null ? 1.0F : partial;
-            Float scale = MinecartFloating.railSlopeScale(entity,
+            Float scale = MinecartFloatingHelper.railSlopeScale(entity,
                     Mth.lerp(t, entity.xOld, entity.getX()),
                     Mth.lerp(t, entity.yOld, entity.getY()),
                     Mth.lerp(t, entity.zOld, entity.getZ()));
@@ -95,6 +95,6 @@ public class MinecartRendererMixin {
                 wanted *= scale;
             }
         }
-        return wanted * MinecartFloating.smoothRenderPitchSign(entity);
+        return wanted * MinecartFloatingHelper.smoothRenderPitchSign(entity);
     }
 }
