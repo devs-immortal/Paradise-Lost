@@ -69,6 +69,7 @@ public final class MinecartFloating {
             setIncline(cart, 0);
             setRailShape(cart, "");
             setOffRail(cart, false);
+            ((MinecartFloatPoseAccess) cart).paradiseLost$setOpenAirClimbGrace(0);
         }
     }
 
@@ -165,7 +166,7 @@ public final class MinecartFloating {
             setIncline(cart, -1);
             return;
         }
-        // Curve → slope transitions often lack a clear axis component (CW vs CCW). Pick by
+        // Curve to slope transitions often lack a clear axis component (CW vs CCW). Pick by
         // which rail exit the motion aligns with (upper vs lower).
         Pair<Vec3i, Vec3i> exits = RAIL_EXITS.get(shape);
         if (exits == null) {
@@ -182,7 +183,7 @@ public final class MinecartFloating {
         Vec3i lower = a.getY() < b.getY() ? a : b;
         double dotUpper = horizontalDot(horizontal, Vec3.atLowerCornerOf(upper));
         double dotLower = horizontalDot(horizontal, Vec3.atLowerCornerOf(lower));
-        // Wider hysteresis — tiny exit-dot margins flipped incline every tick on carousel slopes.
+        // Wider hysteresis, tiny exit-dot margins flipped incline every tick on carousel slopes.
         int current = getIncline(cart);
         if (dotUpper > dotLower + 0.20D) {
             setIncline(cart, 1);
@@ -225,7 +226,7 @@ public final class MinecartFloating {
 
     /**
      * @param allowUnsettledAscending when true, midair over ascending still samples pose at the projected rail seat.
-     *                                Used when incline flips (descend→climb) before the cart seats — cart.y offs are
+     *                                Used when incline flips (descend to climb) before the cart seats, cart.y offs are
      *                                unreliable high above the rail.
      */
     public static void captureRailRenderPose(AbstractMinecart cart, boolean allowUnsettledAscending) {
@@ -260,7 +261,7 @@ public final class MinecartFloating {
                 dir = dir.normalize();
             }
             float yaw = (float) (Math.atan2(dir.z, dir.x) * (180.0D / Math.PI));
-            // Flat curves can sample a bogus dy from neighboring slopes — only keep pitch on ascents.
+            // Flat curves can sample a bogus dy from neighboring slopes, only keep pitch on ascents.
             float pitch = 0.0F;
             BlockPos railPos = findRailPos(cart);
             RailShape shape = null;
@@ -271,7 +272,7 @@ public final class MinecartFloating {
                     if (shape.isAscending()) {
                         // High above an ascending (e.g. transition onto a corner) samples garbage
                         // offs and can leave stale slope pitch on the next rail. Only capture when
-                        // seated — unless incline-flip needs a midair refresh, in which case sample
+                        // seated, unless incline-flip needs a midair refresh, in which case sample
                         // at the projected rail seat instead.
                         if (!isSettledOnRail(cart, railPos)) {
                             if (!allowUnsettledAscending) {
@@ -293,7 +294,7 @@ public final class MinecartFloating {
                             usedMotionDir = false;
                             yaw = (float) (Math.atan2(dir.z, dir.x) * (180.0D / Math.PI));
                             float trialPitch = (float) (Math.atan(dir.y) * 73.0D);
-                            // Seat sample still unusable — keep prior pose.
+                            // Seat sample still unusable, keep prior pose.
                             if (Math.abs(trialPitch) < 25.0F || Math.abs(trialPitch) > 60.0F) {
                                 return;
                             }
@@ -304,7 +305,7 @@ public final class MinecartFloating {
                         float axis = (shape == RailShape.ASCENDING_EAST || shape == RailShape.ASCENDING_WEST)
                                 ? 0.0F
                                 : 90.0F;
-                        // Bad offs sample while floating — keep the last good ±45° instead of publishing a shallow tilt.
+                        // Bad offs sample while floating, keep the last good 45 degrees instead of publishing a shallow tilt.
                         boolean keptPriorSlope = false;
                         if (isFloating(cart) && getIncline(cart) != 0
                                 && (Math.abs(pitch) < 40.0F || Math.abs(pitch) > 50.0F)) {
@@ -362,7 +363,7 @@ public final class MinecartFloating {
                     yaw = nearestRailYaw(pose.paradiseLost$getRailRenderYaw(), yaw);
                 }
                 float oldPitch = pose.paradiseLost$getRailRenderPitch();
-                // Micro-jitter only (<5°). Wider magnitude freeze can stick takeoff below the
+                // Micro-jitter only (<5 degrees). Wider magnitude freeze can stick takeoff below the
                 // true slope pitch from offs.
                 if (Math.abs(pitch) > 1.0F && Math.abs(oldPitch) > 1.0F
                         && Math.signum(pitch) == Math.signum(oldPitch)
@@ -375,7 +376,7 @@ public final class MinecartFloating {
                 if (hasCredibleSlopeLaunchPitch(cart, pose)) {
                     return;
                 }
-                // Synthesize here — do not call ensureAscendingFloatPose (it re-enters capture).
+                // Synthesize here, do not call ensureAscendingFloatPose (it re-enters capture).
                 pitch = synthSlopePitch(cart, yaw);
             }
             pose.paradiseLost$setRailRenderPose(yaw, pitch);
@@ -385,7 +386,7 @@ public final class MinecartFloating {
     }
 
     public static void prepareTakeoff(AbstractMinecart cart) {
-        // Remember slope state first — captureRailState can overwrite it with a floor flat underfoot.
+        // Remember slope state first, captureRailState can overwrite it with a floor flat underfoot.
         RailShape priorShape = getRailShape(cart);
         int priorIncline = getIncline(cart);
         boolean slopeExit = priorIncline != 0
@@ -393,21 +394,21 @@ public final class MinecartFloating {
                 || poseHasSlopePitch(cart);
         captureRailState(cart);
         RailShape shape = getRailShape(cart);
-        if (slopeExit && (shape == null || !shape.isAscending())) {
-            // Underfoot flat is not the exit rail — keep the slope we left with.
+        // Only keep the slope if the cart was really climbing or descending. An old ascending shape left
+        // behind by levelFlight used to bring incline=1 back on the next flat takeoff.
+        if (priorIncline != 0 && slopeExit && (shape == null || !shape.isAscending())) {
+            // Underfoot flat is not the exit rail, keep the slope we left with.
             if (priorShape != null && priorShape.isAscending()) {
                 setRailShape(cart, priorShape);
                 shape = priorShape;
             } else if (shape == null || !shape.isAscending()) {
                 shape = priorShape;
             }
-            int incline = priorIncline != 0
-                    ? priorIncline
-                    : (cart.getDeltaMovement().y < -MOTION_EPSILON ? -1 : 1);
-            setIncline(cart, incline);
+            setIncline(cart, priorIncline);
             if (shape != null && shape.isAscending()) {
                 ensureAscendingFloatPose(cart, shape);
                 applyFloatingRotation(cart);
+                armOpenAirClimbGrace(cart, priorIncline);
                 debug(cart, "takeoff", "slopeKeep incline=" + getIncline(cart)
                         + " shape=" + getRailShapeName(cart)
                         + " railPose=" + formatRailPose(cart)
@@ -415,11 +416,17 @@ public final class MinecartFloating {
                 return;
             }
         }
-        // Flat takeoff (or unknown): never carry slope pitch into the gap — photo regression.
+        // Flat takeoff (or unknown): never carry slope pitch into the gap, photo regression.
         if (getIncline(cart) == 0 || shape == null || !shape.isAscending()) {
             captureRailRenderPose(cart);
             setIncline(cart, 0);
+            // Forget the climb so the next gap doesn't start with a slope that isn't there.
+            if (shape == null || shape.isAscending()) {
+                setRailShape(cart, "");
+                shape = null;
+            }
             MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+            pose.paradiseLost$setOpenAirClimbGrace(0);
             float yaw = resolveFlatFloatYaw(cart, shape);
             clearFloatingPitch(cart);
             setSyncedFloatPose(cart, yaw, 0.0F);
@@ -428,14 +435,34 @@ public final class MinecartFloating {
             debug(cart, "takeoff", "flat pitch=0 yaw=" + String.format(Locale.ROOT, "%.1f", yaw)
                     + " shape=" + getRailShapeName(cart));
         } else {
-            // Short ascending rails often never settle long enough for gated capture — force
+            // Short ascending rails often never settle long enough for gated capture, force
             // seat-sample / synthesize before freezing the air pose.
             ensureAscendingFloatPose(cart, shape);
             applyFloatingRotation(cart);
+            armOpenAirClimbGrace(cart, getIncline(cart));
             debug(cart, "takeoff", "slope incline=" + getIncline(cart)
                     + " shape=" + getRailShapeName(cart)
                     + " railPose=" + formatRailPose(cart));
         }
+    }
+
+    /** About 2.5 seconds of climbing in the open after leaving an ascending rail (slopeLaunchesUpward). */
+    private static final int OPEN_AIR_CLIMB_GRACE_TICKS = 50;
+    /** Once the grace is over, only a ceiling this close keeps the cart rising. Far-off trees used to tilt it forever. */
+    private static final int IMMINENT_CEILING_BLOCKS = 3;
+    private static final int CEILING_LOOKAHEAD_BLOCKS = 12;
+
+    private static void armOpenAirClimbGrace(AbstractMinecart cart, int incline) {
+        if (incline <= 0) {
+            return;
+        }
+        int grace = OPEN_AIR_CLIMB_GRACE_TICKS;
+        int solidDist = distanceToSolidAbove(cart, CEILING_LOOKAHEAD_BLOCKS);
+        // A high ceiling (the test puts stone about 10 up) stretches the grace until it gets close.
+        if (solidDist > IMMINENT_CEILING_BLOCKS) {
+            grace = Math.max(grace, (solidDist - IMMINENT_CEILING_BLOCKS) * 10 + 20);
+        }
+        ((MinecartFloatPoseAccess) cart).paradiseLost$setOpenAirClimbGrace(grace);
     }
 
     /**
@@ -450,7 +477,7 @@ public final class MinecartFloating {
         float axis = (shape == RailShape.ASCENDING_EAST || shape == RailShape.ASCENDING_WEST)
                 ? 0.0F
                 : 90.0F;
-        // |pitch|≈45 isn't enough — wrong sign reads as a 90° tilt on NeoForge.
+        // |pitch|≈45 isn't enough, wrong sign reads as a 90 degrees tilt on NeoForge.
         if (hasCredibleSlopeLaunchPitch(cart, pose)) {
             return;
         }
@@ -466,7 +493,7 @@ public final class MinecartFloating {
                 + " incline=" + getIncline(cart));
     }
 
-    /** Near ±45 and the right sign for this shape+yaw. */
+    /** Near 45 degrees and the right sign for this shape+yaw. */
     private static boolean hasCredibleSlopeLaunchPitch(AbstractMinecart cart, MinecartFloatPoseAccess pose) {
         if (!pose.paradiseLost$hasRailRenderPose()) {
             return false;
@@ -486,13 +513,13 @@ public final class MinecartFloating {
         return true;
     }
 
-    /** ±45 from shape+yaw; incline-only guess is wrong on half the E/W cases. */
+    /** Pitch of 45 degrees from the rail shape and yaw. Climbing is stored as +44.9, like the flipped E/W offsets. */
     private static float synthSlopePitch(AbstractMinecart cart, float yaw) {
         RailShape shape = getRailShape(cart);
         if (shape != null && shape.isAscending()) {
             return pitchFromAscendingShape(shape, yaw);
         }
-        return getIncline(cart) >= 0 ? -44.9F : 44.9F;
+        return getIncline(cart) >= 0 ? 44.9F : -44.9F;
     }
 
     /**
@@ -513,7 +540,7 @@ public final class MinecartFloating {
     }
 
     /**
-     * Pose yaw on the travel axis (atan2, 0=east). Sync defaults to 0 — don't treat
+     * Pose yaw on the travel axis (atan2, 0=east). Sync defaults to 0, don't treat
      * "no motion" as aligned when the stored shape is N/S.
      */
     private static boolean isSlopeYawAlignedWithMotion(AbstractMinecart cart, float poseYaw) {
@@ -530,7 +557,7 @@ public final class MinecartFloating {
             float delta = Math.abs(Mth.wrapDegrees(poseYaw - expected));
             return delta <= 35.0F || delta >= 145.0F;
         }
-        // No travel and no shape — can't prove misalignment.
+        // No travel and no shape, can't prove misalignment.
         return true;
     }
 
@@ -573,20 +600,19 @@ public final class MinecartFloating {
 
     /**
      * Keep float yaw/sync in MinecartRenderer (atan2) space on straight flats. On corners, only clear stale slope pitch
-     * — do not overwrite curve yaw (vanilla getPos poses the curve).
+     *, do not overwrite curve yaw (vanilla getPos poses the curve).
      */
     public static void syncFlatFloatYawFromMotion(AbstractMinecart cart) {
         MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
-        // Don't wipe slope pitch the same tick we just seated onto a corner.
+        // Still seated on an ascending rail with slope pitch left over, so maintainSlope handles it.
+        // Corners used to return early here as well, which left junctions stuck at 45 degrees.
         if (isFloating(cart) && poseHasSlopePitch(cart)) {
             BlockPos railPos = findRailPos(cart);
             if (railPos != null) {
                 BlockState railState = cart.level().getBlockState(railPos);
-                if (railState.getBlock() instanceof BaseRailBlock rail) {
-                    RailShape under = railState.getValue(rail.getShapeProperty());
-                    if (under.isAscending() || isCornerRail(under)) {
-                        return;
-                    }
+                if (railState.getBlock() instanceof BaseRailBlock rail
+                        && railState.getValue(rail.getShapeProperty()).isAscending()) {
+                    return;
                 }
             } else if (isOffRail(cart)) {
                 return;
@@ -595,7 +621,7 @@ public final class MinecartFloating {
         clearFloatingPitch(cart);
         RailShape shape = getRailShape(cart);
         if (shape != RailShape.EAST_WEST && shape != RailShape.NORTH_SOUTH) {
-            // Post-slope corners: zero pitch only — do not overwrite curve yaw.
+            // Corners and unknown shapes: only zero the pitch, keep the curve yaw.
             float yaw = pose.paradiseLost$hasRailRenderPose()
                     ? pose.paradiseLost$getRailRenderYaw()
                     : getSyncedFloatYaw(cart);
@@ -711,7 +737,7 @@ public final class MinecartFloating {
         }
         captureRailState(cart);
         setOffRail(cart, false);
-        // Snap into vanilla rail seat — float often left Y at *.000 while seat is *.0625
+        // Snap into vanilla rail seat, float often left Y at *.000 while seat is *.0625
         // (carousel looked like it hovered above the rail).
         POS_CAPTURE_BYPASS.set(POS_CAPTURE_BYPASS.get() + 1);
         try {
@@ -730,12 +756,12 @@ public final class MinecartFloating {
             setRailShape(cart, landed);
         }
         if (landed != null && landed.isAscending()) {
-            // Landing on a slope — restore incline if a perp approach zeroed it.
+            // Landing on a slope, restore incline if a perp approach zeroed it.
             if (getIncline(cart) == 0) {
                 updateInclineFromRail(cart, landed, cart.getDeltaMovement());
             }
             if (getIncline(cart) == 0) {
-                // Motion still cross-axis after nudge flicker — pick climb/descend from vertical speed.
+                // Motion still cross-axis after nudge flicker, pick climb/descend from vertical speed.
                 Vec3 motion = cart.getDeltaMovement();
                 int incline = motion.y < -MOTION_EPSILON ? -1 : 1;
                 setIncline(cart, incline);
@@ -771,58 +797,27 @@ public final class MinecartFloating {
                     + " incline=" + getIncline(cart)
                     + " motion=" + fmt(cart.getDeltaMovement()));
         } else if (landed != null && isCornerRail(landed)) {
-            // Keep publishing slope tilt so the client doesn't flash flat on a corner seat.
-            float priorYaw = pose.paradiseLost$hasRailRenderPose()
-                    ? pose.paradiseLost$getRailRenderYaw() : getSyncedFloatYaw(cart);
-            float priorPitch = pose.paradiseLost$hasRailRenderPose()
-                    ? pose.paradiseLost$getRailRenderPitch() : getSyncedFloatPitch(cart);
-            boolean hadSlope = Math.abs(priorPitch) > 1.0F
-                    || priorIncline != 0
-                    || (priorStoredShape != null && priorStoredShape.isAscending());
+            // Seating on a corner always flattens the cart. Corner flyovers in the middle of a climb go through deferSeat
+            // (keepSlopeFloatThroughCorner), not reconnect. cornerKeepSlope used to leave the cart at 45 degrees
+            // on junctions because syncFlatFloatYawFromMotion wouldn't clear the curve pitch.
             setIncline(cart, 0);
-            if (hadSlope) {
-                if (Math.abs(priorPitch) <= 1.0F
-                        && priorStoredShape != null && priorStoredShape.isAscending()) {
-                    ensureAscendingFloatPose(cart, priorStoredShape);
-                    priorYaw = pose.paradiseLost$hasRailRenderPose()
-                            ? pose.paradiseLost$getRailRenderYaw() : priorYaw;
-                    priorPitch = pose.paradiseLost$hasRailRenderPose()
-                            ? pose.paradiseLost$getRailRenderPitch() : -44.9F;
-                }
-                pose.paradiseLost$setRailRenderPose(priorYaw, priorPitch);
-                setSyncedFloatPose(cart, priorYaw, priorPitch);
-                snapEntityRotation(cart, priorYaw, priorPitch);
-                debug(cart, "reconnect", "cornerKeepSlope yaw/pitch="
-                        + String.format(Locale.ROOT, "%.1f/%.1f", priorYaw, priorPitch)
-                        + " shape=" + landed
-                        + " from=" + priorStoredShape
-                        + " motion=" + fmt(cart.getDeltaMovement()));
-            } else {
-                captureRailRenderPose(cart);
-                if (pose.paradiseLost$hasRailRenderPose()) {
-                    applyFloatingRotation(cart);
-                    debug(cart, "reconnect", "corner yaw/pitch="
-                            + String.format(Locale.ROOT, "%.1f/%.1f",
-                            pose.paradiseLost$getRailRenderYaw(), pose.paradiseLost$getRailRenderPitch())
-                            + " shape=" + landed
-                            + " motion=" + fmt(cart.getDeltaMovement()));
-                } else {
-                    float yaw = resolveFlatFloatYaw(cart, landed);
-                    clearFloatingPitch(cart);
-                    setSyncedFloatPose(cart, yaw, 0.0F);
-                    snapEntityRotation(cart, yaw, 0.0F);
-                    pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
-                    debug(cart, "reconnect", "cornerFlat yaw=" + String.format(Locale.ROOT, "%.1f", yaw)
-                            + " shape=" + landed
-                            + " motion=" + fmt(cart.getDeltaMovement()));
-                }
-            }
+            pose.paradiseLost$setOpenAirClimbGrace(0);
+            float yaw = resolveFlatFloatYaw(cart, landed);
+            clearFloatingPitch(cart);
+            setSyncedFloatPose(cart, yaw, 0.0F);
+            snapEntityRotation(cart, yaw, 0.0F);
+            pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
+            debug(cart, "reconnect", "cornerFlat yaw=" + String.format(Locale.ROOT, "%.1f", yaw)
+                    + " shape=" + landed
+                    + " from=" + priorStoredShape
+                    + " motion=" + fmt(cart.getDeltaMovement()));
         } else {
             float yaw = resolveFlatFloatYaw(cart, landed);
             clearFloatingPitch(cart);
             setSyncedFloatPose(cart, yaw, 0.0F);
             snapEntityRotation(cart, yaw, 0.0F);
             pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
+            pose.paradiseLost$setOpenAirClimbGrace(0);
             debug(cart, "reconnect", "flat yaw=" + String.format(Locale.ROOT, "%.1f", yaw)
                     + " shape=" + getRailShapeName(cart)
                     + " motion=" + fmt(cart.getDeltaMovement()));
@@ -861,7 +856,7 @@ public final class MinecartFloating {
                 }
             }
         }
-        // Open air toward more slope — keep noclip.
+        // Open air toward more slope, keep noclip.
         if (incline != 0
                 && (hasContinuingAscendingRailAhead(cart) || hasContinuingSlopeSolidAhead(cart))) {
             return true;
@@ -897,7 +892,7 @@ public final class MinecartFloating {
         }
         if (flatTarget != null) {
             double height = cart.getY() - flatTarget.getY();
-            // Only restore while still under the pier — at/above is a descend landing.
+            // Only restore while still under the pier, at/above is a descend landing.
             if (height >= 0.0D) {
                 return;
             }
@@ -916,14 +911,18 @@ public final class MinecartFloating {
         }
     }
 
-    /** Force a credible ±45° pose whenever incline says we're on a slope. */
+    /** Force a credible 45 degrees pose whenever incline says we're on a slope. */
     public static void maintainSlopeFloatPose(AbstractMinecart cart) {
         if (getIncline(cart) == 0) {
             return;
         }
+        // No slope tilt over a straight flat landing.
+        if (flattenPoseOverStraightFlat(cart)) {
+            return;
+        }
         RailShape shape = getRailShape(cart);
         if (shape == null || !shape.isAscending()) {
-            // Incline is set but shape was lost — still show a slope tilt along motion.
+            // Incline is set but shape was lost, still show a slope tilt along motion.
             MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
             float yaw = slopeYawFromMotionOrPose(cart);
             float pitch = synthSlopePitch(cart, yaw);
@@ -941,7 +940,7 @@ public final class MinecartFloating {
         if (!pose.paradiseLost$hasRailRenderPose()) {
             return;
         }
-        // Reject shallow offs samples, east-default yaw, or wrong-sign ±45.
+        // Reject shallow offs samples, east-default yaw, or wrong-sign 45 degrees.
         if (!hasCredibleSlopeLaunchPitch(cart, pose)) {
             ensureAscendingFloatPose(cart, shape);
         }
@@ -986,7 +985,7 @@ public final class MinecartFloating {
         if (isSettledOnRail(cart, ahead)) {
             return null;
         }
-        // Must be at/above the cart — a floor flat below is not an ascend-flat target.
+        // Must be at/above the cart, a floor flat below is not an ascend-flat target.
         if (ahead.getY() + 1 < cart.blockPosition().getY()) {
             return null;
         }
@@ -1018,12 +1017,12 @@ public final class MinecartFloating {
                 || isCornerRail(state.getValue(rail.getShapeProperty()))) {
             return false;
         }
-        // Under the pier or not seated yet — both need noclip.
+        // Under the pier or not seated yet, both need noclip.
         return !isSettledOnRail(cart, ahead);
     }
 
     /**
-     * Descent-only comeOffTrack noclip ticks to clear the exit pier. Keep short — 12 let carts coast above the next
+     * Descent-only comeOffTrack noclip ticks to clear the exit pier. Keep short. 12 let carts coast above the next
      * rail (carousel "flies a little above").
      */
     public static int slopeDescentExitGraceTicks() {
@@ -1032,7 +1031,7 @@ public final class MinecartFloating {
 
     private static final double FLAT_CONNECT_HEIGHT = 0.28D;
     /**
-     * Match {@link #isSettledOnRail} flat threshold — flatten only when seating.
+     * Match {@link #isSettledOnRail} flat threshold, flatten only when seating.
      */
     private static final double FLAT_POSE_ADOPT = 0.16D;
 
@@ -1046,11 +1045,11 @@ public final class MinecartFloating {
             return cart.getY() - railPos.getY() <= FLAT_POSE_ADOPT;
         }
         RailShape shape = railState.getValue(rail.getShapeProperty());
-        // Curves are not flat landings — never adopt flat pose on corners (carousel).
+        // Curves are not flat landings, never adopt flat pose on corners (carousel).
         if (isCornerRail(shape) || shape.isAscending()) {
             return false;
         }
-        // Same moment as rail connection / settle — earlier adopt rotates before seating.
+        // Same moment as rail connection / settle, earlier adopt rotates before seating.
         return isSettledOnRail(cart, railPos);
     }
 
@@ -1076,8 +1075,22 @@ public final class MinecartFloating {
             return;
         }
         if (isCornerRail(shape)) {
-            if (getIncline(cart) != 0 || poseHasSlopePitch(cart)) {
+            // Only keep the slope through a corner while the climb is still going; pitch left over
+            // after levelling out used to leave junctions at 45 degrees.
+            if (getIncline(cart) != 0
+                    && (isClimbMemory(cart)
+                    || hasContinuingAscendingRailAhead(cart)
+                    || hasContinuingSlopeSolidAhead(cart))) {
                 keepSlopeFloatThroughCorner(cart, findRailPos(cart), railState);
+            } else if (getIncline(cart) != 0 || poseHasSlopePitch(cart)) {
+                setIncline(cart, 0);
+                float yaw = resolveFlatFloatYaw(cart, shape);
+                clearFloatingPitch(cart);
+                setSyncedFloatPose(cart, yaw, 0.0F);
+                snapEntityRotation(cart, yaw, 0.0F);
+                MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+                pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
+                pose.paradiseLost$setOpenAirClimbGrace(0);
             }
             return;
         }
@@ -1102,6 +1115,10 @@ public final class MinecartFloating {
         if (getIncline(cart) > 0 && isInterveningFlatWhileClimbing(cart, railPos, railState)) {
             return;
         }
+        // Flat crest with more slope after it: don't flatten the pitch or incline yet.
+        if (getIncline(cart) != 0 && slopePathStillContinues(cart, getIncline(cart))) {
+            return;
+        }
         if (isSettledOnRail(cart, railPos)) {
             return;
         }
@@ -1110,7 +1127,7 @@ public final class MinecartFloating {
         if (height < 0.0D || height > 0.55D) {
             return;
         }
-        // Still over an ascending rail — leave flat landing alone.
+        // Still over an ascending rail, leave flat landing alone.
         BlockPos underfoot = findRailPos(cart);
         if (underfoot != null && !underfoot.equals(railPos)) {
             BlockState underState = cart.level().getBlockState(underfoot);
@@ -1127,23 +1144,18 @@ public final class MinecartFloating {
             return;
         }
         nudgeVelocityToRail(cart, railState);
+        // Flat landing: drop the slope pitch. Holding 45 degrees while aligning left carts
+        // tilted on powered flats until they reached seat height, or even after.
+        setIncline(cart, 0);
         float yaw = resolveFlatFloatYaw(cart, shape);
-        // Keep the tilt; only fix yaw onto the landing.
-        float pitch = 0.0F;
         MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
-        if (getIncline(cart) != 0) {
-            if (pose.paradiseLost$hasRailRenderPose()
-                    && Math.abs(pose.paradiseLost$getRailRenderPitch()) > 1.0F) {
-                pitch = pose.paradiseLost$getRailRenderPitch();
-            } else {
-                pitch = getSyncedFloatPitch(cart);
-            }
-        }
-        setSyncedFloatPose(cart, yaw, pitch);
-        snapEntityRotation(cart, yaw, pitch);
-        pose.paradiseLost$setRailRenderPose(yaw, pitch);
+        clearFloatingPitch(cart);
+        setSyncedFloatPose(cart, yaw, 0.0F);
+        snapEntityRotation(cart, yaw, 0.0F);
+        pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
+        pose.paradiseLost$setOpenAirClimbGrace(0);
         debug(cart, "flatAlign", "yaw=" + String.format(Locale.ROOT, "%.1f", yaw)
-                + " pitch=" + String.format(Locale.ROOT, "%.1f", pitch)
+                + " pitch=0"
                 + " shape=" + shape
                 + " yAbove=" + String.format(Locale.ROOT, "%.3f", height)
                 + " motion=" + fmt(cart.getDeltaMovement()));
@@ -1200,8 +1212,8 @@ public final class MinecartFloating {
             if (flatPose && !hasCredibleSlopeLaunchPitch(cart, pose)) {
                 ensureAscendingFloatPose(cart, shape);
             }
-            // Seat sample can still fail midair — opposite ascending rails reverse offs yaw (~180°)
-            // while keeping slope pitch (south -90/-45 → north +90/-45). Only when the rail
+            // Seat sample can still fail midair, opposite ascending rails reverse offs yaw (~180 degrees)
+            // while keeping slope pitch (south -90/-45 to north +90/-45). Only when the rail
             // reversed; same-shape incline flips correctly keep the prior offs pair.
             if (isOppositeAscending(priorShape, shape)
                     && pose.paradiseLost$hasRailRenderPose()
@@ -1259,37 +1271,48 @@ public final class MinecartFloating {
             return;
         }
         BlockPos railPos = findRailPos(cart);
-        // Flying past a deep floor — keep slope. Near a real track flat — adopt it.
+        // Flying past a deep floor, keep slope. Near a real track flat, adopt it.
         if (railPos != null
                 && getIncline(cart) > 0
                 && (hasContinuingAscendingRailAhead(cart) || hasContinuingSlopeSolidAhead(cart))
                 && isInterveningFlatWhileClimbing(cart, railPos, railState)) {
             return;
         }
-        // Flatten only when settled on the rail (same gate as reconnect).
-        if (railPos == null || !isSettledOnRail(cart, railPos) || !isNearFlatPoseAdoptHeight(cart, railPos)) {
+        if (railPos == null) {
+            return;
+        }
+        // Flat crest while the slope continues (descending onto stairs and the like): don't take it yet.
+        if (getIncline(cart) != 0 && slopePathStillContinues(cart, getIncline(cart))) {
+            return;
+        }
+        double height = cart.getY() - railPos.getY();
+        // Only near the seat band. Don't wipe the tilt while still climbing or launching high above.
+        boolean nearSeat = isSettledOnRail(cart, railPos)
+                || isNearFlatPoseAdoptHeight(cart, railPos)
+                || (height >= 0.0D && height <= 0.55D);
+        if (!nearSeat) {
             return;
         }
         if (getIncline(cart) != 0) {
             setIncline(cart, 0);
         }
         setRailShape(cart, shape);
-        // Fix cross-axis approach before sampling yaw.
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        pose.paradiseLost$setOpenAirClimbGrace(0);
         if (!isParallelToRail(cart, shape)) {
             nudgeVelocityToRail(cart, railState);
         }
-        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
-        // Face the landing axis even if pitch is already flat.
         float yaw = resolveFlatFloatYaw(cart, shape);
-        boolean yawOnAxis = isStraightRailAxisYaw(yaw, shape);
-        boolean poseOnAxis = pose.paradiseLost$hasRailRenderPose()
-                && isStraightRailAxisYaw(pose.paradiseLost$getRailRenderYaw(), shape)
-                && Math.abs(pose.paradiseLost$getRailRenderPitch()) <= 0.01F
-                && Math.abs(getSyncedFloatPitch(cart)) <= 0.01F
+        boolean alreadyFlat = Math.abs(getSyncedFloatPitch(cart)) <= 0.01F
+                && (!pose.paradiseLost$hasRailRenderPose()
+                || Math.abs(pose.paradiseLost$getRailRenderPitch()) <= 0.01F)
+                && isStraightRailAxisYaw(yaw, shape)
+                && pose.paradiseLost$hasRailRenderPose()
                 && Math.abs(Mth.wrapDegrees(pose.paradiseLost$getRailRenderYaw() - yaw)) <= 1.0F;
-        if (yawOnAxis && poseOnAxis) {
+        if (alreadyFlat) {
             return;
         }
+        clearFloatingPitch(cart);
         pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
         setSyncedFloatPose(cart, yaw, 0.0F);
         snapEntityRotation(cart, yaw, 0.0F);
@@ -1297,7 +1320,8 @@ public final class MinecartFloating {
                 + " shape=" + shape
                 + " parallel=" + isParallelToRail(cart, shape)
                 + " incline=" + getIncline(cart)
-                + " yAbove=" + String.format(java.util.Locale.ROOT, "%.3f", cart.getY() - railPos.getY())
+                + " yAbove=" + String.format(java.util.Locale.ROOT, "%.3f", height)
+                + " nearSeat=" + nearSeat
                 + " motion=" + fmt(cart.getDeltaMovement()));
     }
 
@@ -1339,7 +1363,7 @@ public final class MinecartFloating {
                     || aheadState.getValue(rail.getShapeProperty()).isAscending()) {
                 return yMotion;
             }
-            // Deep floor under a later climb — keep going up.
+            // Deep floor under a later climb, keep going up.
             if (isDeepFlatBelowClimb(cart, ahead, aheadState)
                     && (hasContinuingAscendingRailAhead(cart) || hasContinuingSlopeSolidAhead(cart))) {
                 return yMotion;
@@ -1361,14 +1385,14 @@ public final class MinecartFloating {
         }
         double target = 0.0625D;
         double height = cart.getY() - railPos.getY();
-        // Deep floor underfoot — don't kill climb Y.
+        // Deep floor underfoot, don't kill climb Y.
         if (height > 1.0D) {
             return yMotion;
         }
         if (isInterveningFlatWhileClimbing(cart, railPos, railState)) {
             return yMotion;
         }
-        // Normal track flat — drop onto the seat instead of hovering above it.
+        // Normal track flat, drop onto the seat instead of hovering above it.
         if (height > target) {
             return -Math.min(0.35D, height - target);
         }
@@ -1408,6 +1432,10 @@ public final class MinecartFloating {
     }
 
     public static void applyFloatingRotation(AbstractMinecart cart) {
+        // Over a real flat landing, never publish 45 degrees again from a leftover incline.
+        if (flattenPoseOverStraightFlat(cart)) {
+            return;
+        }
         MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
         float yaw;
         float pitch = 0.0F;
@@ -1424,7 +1452,7 @@ public final class MinecartFloating {
         if (getIncline(cart) == 0) {
             pitch = 0.0F;
         } else if (Math.abs(pitch) <= 1.0F) {
-            // Still climbing — invent a ±45° if pose got wiped.
+            // Still climbing, invent a 45 degrees if pose got wiped.
             RailShape shape = getRailShape(cart);
             if (shape != null && shape.isAscending()) {
                 ensureAscendingFloatPose(cart, shape);
@@ -1456,7 +1484,7 @@ public final class MinecartFloating {
                     return poseHasSlopePitch(cart);
                 }
                 if (!shape.isAscending()) {
-                    // Incline already 0 — stay tilted until we're in the adopt band.
+                    // Incline already 0, stay tilted until we're in the adopt band.
                     return poseHasSlopePitch(cart) && !isNearFlatPoseAdoptHeight(cart, railPos);
                 }
             }
@@ -1482,8 +1510,23 @@ public final class MinecartFloating {
                 && Math.abs(pose.paradiseLost$getRailRenderPitch()) > 1.0F;
         BlockPos railPos = findRailPos(cart);
         boolean settled = railPos != null && isSettledOnRail(cart, railPos);
+        // The climb incline got synced while the cart is still seated on a flat, so level the pitch.
+        if (cart.level().isClientSide() && getIncline(cart) != 0 && !clientShouldHoldSlopePose(cart)) {
+            if (railPos != null) {
+                BlockState railState = cart.level().getBlockState(railPos);
+                if (railState.getBlock() instanceof BaseRailBlock rail) {
+                    RailShape shape = railState.getValue(rail.getShapeProperty());
+                    if (!shape.isAscending() && !isCornerRail(shape)) {
+                        yaw = resolveFlatFloatYaw(cart, shape);
+                    }
+                }
+            }
+            snapEntityRotation(cart, yaw, 0.0F);
+            pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
+            return;
+        }
         if (getIncline(cart) == 0) {
-            // Incline already cleared on the server — keep local tilt until we actually seat.
+            // Incline already cleared on the server, keep local tilt until we actually seat.
             if (!settled && shouldKeepMidairSlopePose(cart, railPos)) {
                 if (localSlope) {
                     yaw = pose.paradiseLost$getRailRenderYaw();
@@ -1497,7 +1540,7 @@ public final class MinecartFloating {
                 pitch = 0.0F;
             }
         } else if (Math.abs(pitch) <= 1.0F) {
-            // Sync pitch lagging / missing while incline is live — never write flat over a slope.
+            // Sync pitch lagging / missing while incline is live, never write flat over a slope.
             if (localSlope && isSlopeYawAlignedWithMotion(cart, pose.paradiseLost$getRailRenderYaw())) {
                 yaw = pose.paradiseLost$getRailRenderYaw();
                 pitch = pose.paradiseLost$getRailRenderPitch();
@@ -1513,7 +1556,7 @@ public final class MinecartFloating {
                 if (Math.abs(pitch) <= 1.0F) {
                     pitch = synthSlopePitch(cart, yaw);
                 }
-                // Sync yaw defaults to 0 (east) — realign to motion or we sit 90° off on N/S slopes.
+                // Sync yaw defaults to 0 (east), realign to motion or we sit 90 degrees off on N/S slopes.
                 if (!isSlopeYawAlignedWithMotion(cart, yaw)) {
                     yaw = slopeYawFromMotionOrPose(cart);
                     if (Math.abs(Math.abs(pitch) - 45.0F) < 8.0F) {
@@ -1522,7 +1565,7 @@ public final class MinecartFloating {
                 }
             }
         } else if (!isSlopeYawAlignedWithMotion(cart, yaw)) {
-            // Sync pitch ok but yaw still the east default — fix axis without flattening.
+            // Sync pitch ok but yaw still the east default, fix axis without flattening.
             yaw = slopeYawFromMotionOrPose(cart);
             if (localSlope
                     && Math.abs(Math.abs(pose.paradiseLost$getRailRenderPitch()) - 45.0F) < 5.0F
@@ -1552,7 +1595,7 @@ public final class MinecartFloating {
         if (!slopeLive) {
             return false;
         }
-        // Only defer while actively climbing — descents seat on flats normally.
+        // Only defer while actively climbing, descents seat on flats normally.
         if (getIncline(cart) > 0
                 && (hasContinuingAscendingRailAhead(cart) || hasContinuingSlopeSolidAhead(cart))
                 && isInterveningFlatWhileClimbing(cart, pos, state)) {
@@ -1575,7 +1618,7 @@ public final class MinecartFloating {
             return true;
         }
         double height = cart.getY() - pos.getY();
-        // Close enough to seat — this is real track.
+        // Close enough to seat, this is real track.
         if (height <= FLAT_CONNECT_HEIGHT) {
             return false;
         }
@@ -1600,22 +1643,22 @@ public final class MinecartFloating {
     }
 
     /**
-     * After incline hits 0, only keep leftover tilt while unsettled over a curve.
-     * Straight flats / leftover ascending underfoot after a flat adopt must drop pitch —
-     * otherwise the client stays at ±45 after incline already synced flat.
+     * Once incline is 0, leftover tilt is only kept while the cart is unsettled over a curve during an
+     * active climb (ascending memory or a slope that continues). Settled corners and carts that have
+     * already levelled out have to drop the pitch, or junctions stay at 45 degrees.
      */
     private static boolean shouldKeepMidairSlopePose(AbstractMinecart cart, @Nullable BlockPos railPos) {
         if (getIncline(cart) != 0) {
             return true;
         }
-        // Already leveled — don't resurrect tilt in empty air.
+        // Already leveled, don't resurrect tilt in empty air.
         if (railPos == null) {
             return false;
         }
         if (isSettledOnRail(cart, railPos)) {
             return false;
         }
-        // Stored flat means we already adopted a landing — don't keep slope pitch from underfoot ascent.
+        // Stored flat means we already adopted a landing, don't keep slope pitch from underfoot ascent.
         RailShape stored = getRailShape(cart);
         if (stored == RailShape.NORTH_SOUTH || stored == RailShape.EAST_WEST) {
             return false;
@@ -1625,17 +1668,107 @@ public final class MinecartFloating {
             return false;
         }
         RailShape shape = railState.getValue(rail.getShapeProperty());
-        // Curves only — ascending underfoot with incline 0 is a flat-adopt race, not a hold.
-        return isCornerRail(shape);
+        // Curves only while a climb is still in progress, not after levelFlight or a flat reconnect.
+        return isCornerRail(shape)
+                && poseHasSlopePitch(cart)
+                && (isClimbMemory(cart)
+                || hasContinuingAscendingRailAhead(cart)
+                || hasContinuingSlopeSolidAhead(cart));
+    }
+
+    private static final Map<AbstractMinecart, float[]> CLIENT_MOTION_POSE = new java.util.WeakHashMap<>();
+
+    /**
+     * Client only. The server pose (incline, synced yaw/pitch) arrives several ticks before the lerped client
+     * cart gets there, so drawing it makes the cart turn or tilt early. This works from what the client cart
+     * is doing instead: close to a rail it follows that rail, otherwise it follows its own movement.
+     * Null while the cart is standing still, then the normal pose logic applies.
+     */
+    @Nullable
+    private static float[] clientMotionPose(AbstractMinecart cart) {
+        if (!cart.level().isClientSide()) {
+            return null;
+        }
+        double dx = cart.getX() - cart.xOld;
+        double dy = cart.getY() - cart.yOld;
+        double dz = cart.getZ() - cart.zOld;
+        double horizontal = Math.sqrt(dx * dx + dz * dz);
+        // xOld is stale while the client isn't ticking entities, so velocity has to agree too.
+        if (horizontal < 0.04D || cart.getDeltaMovement().horizontalDistanceSqr() < 4.0E-4D) {
+            CLIENT_MOTION_POSE.remove(cart);
+            return null;
+        }
+        float travelYaw = (float) (Math.atan2(dz, dx) * 180.0D / Math.PI);
+        float yaw = snapYawToAxis(travelYaw);
+        float[] previous = CLIENT_MOTION_POSE.get(cart);
+        if (previous != null && !isNearAxis(travelYaw)) {
+            // Lerping across a turn looks diagonal for a few ticks, so keep the facing it had.
+            yaw = previous[0];
+        }
+        float pitch;
+        RailShape near = clientRailShapeNearUnderfoot(cart);
+        if (near == null) {
+            double ratio = dy / horizontal;
+            pitch = ratio > 0.3D ? 44.9F : (ratio < -0.3D ? -44.9F : 0.0F);
+        } else if (near.isAscending()) {
+            float climbYaw = yawFromAscendingShape(near, 1);
+            boolean towardHighEnd = Math.abs(Mth.wrapDegrees(travelYaw - climbYaw)) <= 90.0F;
+            yaw = towardHighEnd ? climbYaw : Mth.wrapDegrees(climbYaw + 180.0F);
+            pitch = towardHighEnd ? 44.9F : -44.9F;
+        } else if (isCornerRail(near)) {
+            pitch = 0.0F;
+        } else {
+            // The lerp keeps sinking the cart onto a flat rail for a few ticks after it connects. That isn't a dive.
+            boolean eastWest = near == RailShape.EAST_WEST;
+            double along = eastWest ? dx : dz;
+            yaw = eastWest ? (along >= 0.0D ? 0.0F : 180.0F) : (along >= 0.0D ? 90.0F : -90.0F);
+            pitch = 0.0F;
+        }
+        float[] last = CLIENT_MOTION_POSE.computeIfAbsent(cart, c -> new float[2]);
+        last[0] = yaw;
+        last[1] = pitch;
+        return last;
+    }
+
+    private static boolean isNearAxis(float yaw) {
+        return Math.abs(Mth.wrapDegrees(yaw - Math.round(yaw / 90.0F) * 90.0F)) <= 30.0F;
+    }
+
+    private static float snapYawToAxis(float yaw) {
+        float nearestAxis = Math.round(yaw / 90.0F) * 90.0F;
+        return Math.abs(Mth.wrapDegrees(yaw - nearestAxis)) <= 30.0F ? Mth.wrapDegrees(nearestAxis) : yaw;
+    }
+
+    /** Shape of a rail the client cart is sitting on or just above, or null when it is clear of rails. */
+    @Nullable
+    private static RailShape clientRailShapeNearUnderfoot(AbstractMinecart cart) {
+        BlockPos pos = cart.blockPosition();
+        for (BlockPos at : new BlockPos[]{pos, pos.below()}) {
+            BlockState state = cart.level().getBlockState(at);
+            if (!(state.getBlock() instanceof BaseRailBlock rail)) {
+                continue;
+            }
+            RailShape shape = state.getValue(rail.getShapeProperty());
+            double height = cart.getY() - at.getY();
+            double limit = shape.isAscending() ? ASCENDING_SEAT_HEIGHT : 0.8D;
+            if (height >= -0.1D && height <= limit) {
+                return shape;
+            }
+        }
+        return null;
     }
 
     /** Yaw/pitch for MinecartRenderer when getPos is skipped (atan2 space, 0=east). */
     public static float getFloatRenderYaw(AbstractMinecart cart) {
+        float[] seen = clientMotionPose(cart);
+        if (seen != null) {
+            return seen[0];
+        }
         MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
         float yaw = pose.paradiseLost$hasRailRenderPose()
                 ? pose.paradiseLost$getRailRenderYaw()
                 : getSyncedFloatYaw(cart);
-        // Sync/default yaw is 0=east; N/S slopes need ±90 or mid-air looks 90° off.
+        // Sync/default yaw is 0=east; N/S slopes need +/-90 or mid-air looks 90 degrees off.
         if ((getIncline(cart) != 0 || isClimbMemory(cart) || isOffRail(cart))
                 && !isSlopeYawAlignedWithMotion(cart, yaw)) {
             return slopeYawFromMotionOrPose(cart);
@@ -1643,22 +1776,80 @@ public final class MinecartFloating {
         return yaw;
     }
 
+    /**
+     * If the cart is in the seat band over a straight flat that isn't a floor in the middle of a climb,
+     * clear the incline and pitch. Returns true if it dealt with the pose.
+     */
+    private static boolean flattenPoseOverStraightFlat(AbstractMinecart cart) {
+        BlockPos railPos = findRailPos(cart);
+        if (railPos == null) {
+            return false;
+        }
+        BlockState state = cart.level().getBlockState(railPos);
+        if (!(state.getBlock() instanceof BaseRailBlock rail)) {
+            return false;
+        }
+        RailShape under = state.getValue(rail.getShapeProperty());
+        if (under.isAscending() || isCornerRail(under)) {
+            return false;
+        }
+        double height = cart.getY() - railPos.getY();
+        boolean nearSeat = isSettledOnRail(cart, railPos)
+                || isNearFlatPoseAdoptHeight(cart, railPos)
+                || (height >= 0.0D && height <= 0.55D);
+        if (!nearSeat) {
+            return false;
+        }
+        int incline = getIncline(cart);
+        if (incline > 0 && isInterveningFlatWhileClimbing(cart, railPos, state)) {
+            return false;
+        }
+        // Flat crest before a descending run, or a climb with more slope ahead: keep the tilt.
+        if (incline != 0 && slopePathStillContinues(cart, incline)) {
+            return false;
+        }
+        if (incline == 0
+                && Math.abs(getSyncedFloatPitch(cart)) <= 0.01F
+                && !poseHasSlopePitch(cart)) {
+            return false;
+        }
+        setIncline(cart, 0);
+        setRailShape(cart, under);
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        pose.paradiseLost$setOpenAirClimbGrace(0);
+        float yaw = resolveFlatFloatYaw(cart, under);
+        clearFloatingPitch(cart);
+        setSyncedFloatPose(cart, yaw, 0.0F);
+        snapEntityRotation(cart, yaw, 0.0F);
+        pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
+        return true;
+    }
+
     public static float getFloatRenderPitch(AbstractMinecart cart) {
+        float[] seen = clientMotionPose(cart);
+        if (seen != null) {
+            return seen[1];
+        }
         BlockPos railPos = findRailPos(cart);
         boolean settled = railPos != null && isSettledOnRail(cart, railPos);
+        // The climb incline is synced while the cart is still on the flat, so don't draw 45 degrees yet.
+        if (cart.level().isClientSide() && getIncline(cart) != 0 && !clientShouldHoldSlopePose(cart)) {
+            return 0.0F;
+        }
         float pitch = effectiveFloatPitch(cart);
         float yaw = getFloatRenderYaw(cart);
         RailShape shape = getRailShape(cart);
-        // Also reject wrong-sign ±45 for this shape.
+        // Also reject wrong-sign 45 degrees for this shape.
         boolean pitchOk = Math.abs(Math.abs(pitch) - 45.0F) < 8.0F
                 && isSlopeYawAlignedWithMotion(cart, yaw)
                 && (shape == null || !shape.isAscending()
                 || Math.abs(pitch - pitchFromAscendingShape(shape, yaw)) <= 10.0F);
-        // Keep slope midair even if incline already synced to 0.
+        // Keep the slope in mid-air even if the incline already synced to 0 (curves only).
         if (!settled && shouldKeepMidairSlopePose(cart, railPos) && pitchOk) {
             return pitch;
         }
-        if (getIncline(cart) != 0 || (!settled && isClimbMemory(cart))) {
+        // Only while the incline is live. Climb memory alone tilted ceiling and flat takeoffs again.
+        if (getIncline(cart) != 0) {
             if (pitchOk) {
                 return pitch;
             }
@@ -1667,37 +1858,102 @@ public final class MinecartFloating {
             }
             return synthSlopePitch(cart, yaw);
         }
-        if (Math.abs(pitch) > 1.0F) {
-            return pitch;
-        }
+        // The incline is already flat, so never keep a leftover 45 degrees (it used to stick to one direction in open air).
         return 0.0F;
     }
 
-    /** Match offs pitch for an ascending shape given travel yaw (atan2 space). */
+    /**
+     * Client: hold 45 degrees while the incline is live on a slope path. A straight flat underfoot drops
+     * the tilt only if it's a real landing (seat band, no slope continuing), not the flat crest
+     * before a descending run and not when the cart is still high above a flat during a launch or gap.
+     */
+    public static boolean clientShouldHoldSlopePose(AbstractMinecart cart) {
+        int incline = getIncline(cart);
+        if (incline == 0) {
+            return false;
+        }
+        BlockPos railPos = findRailPos(cart);
+        if (railPos != null) {
+            BlockState state = cart.level().getBlockState(railPos);
+            if (state.getBlock() instanceof BaseRailBlock rail) {
+                RailShape under = state.getValue(rail.getShapeProperty());
+                if (under.isAscending() || isCornerRail(under)) {
+                    return true;
+                }
+                // Straight flat underfoot.
+                if (incline > 0 && isInterveningFlatWhileClimbing(cart, railPos, state)) {
+                    return true;
+                }
+                // There is still slope ahead on the way down or up, so keep the tilt on the flat crest.
+                if (slopePathStillContinues(cart, incline)) {
+                    return true;
+                }
+                double height = cart.getY() - railPos.getY();
+                boolean nearSeat = isSettledOnRail(cart, railPos)
+                        || isNearFlatPoseAdoptHeight(cart, railPos)
+                        || (height >= 0.0D && height <= 0.55D);
+                // In the seat band of a real flat landing: no slope tilt.
+                if (nearSeat) {
+                    return false;
+                }
+                // Still high over a flat cell (launch or gap): keep the slope.
+                return true;
+            }
+        }
+        // Open air with no rail: keep the slope for the climb or descent.
+        return true;
+    }
+
+    /** True while an ascending rail, a solid slope or an open-air target is still ahead of the incline. */
+    private static boolean slopePathStillContinues(AbstractMinecart cart, int incline) {
+        if (hasContinuingAscendingRailAhead(cart) || hasContinuingSlopeSolidAhead(cart)) {
+            return true;
+        }
+        if (incline < 0) {
+            return shouldKeepOpenAirDescent(cart) || hasOpenAirSlopeTarget(cart);
+        }
+        if (incline > 0) {
+            return isBelowContinuingFlatLanding(cart)
+                    || ((MinecartFloatPoseAccess) cart).paradiseLost$getOpenAirClimbGrace() > 0;
+        }
+        return false;
+    }
+
+    /**
+     * Stored float pitch for an ascending shape and the travel yaw (atan2, 0 = east).
+     * Climbing (toward the high end) is always +44.9, which matches the flipped E/W getPosOffs.
+     * The old per-shape offsYaw table gave N/S climbs the opposite sign from E/W.
+     */
     private static float pitchFromAscendingShape(RailShape shape, float yaw) {
-        float offsPitch = switch (shape) {
-            case ASCENDING_WEST -> 44.9F;
-            case ASCENDING_EAST, ASCENDING_SOUTH, ASCENDING_NORTH -> -44.9F;
-            default -> -44.9F;
-        };
-        float offsYaw = switch (shape) {
-            case ASCENDING_EAST, ASCENDING_WEST -> 180.0F;
-            default -> -90.0F;
-        };
-        return Math.abs(Mth.wrapDegrees(yaw - offsYaw)) > 90.0F ? -offsPitch : offsPitch;
+        float climbYaw = yawFromAscendingShape(shape, 1);
+        boolean towardHighEnd = Math.abs(Mth.wrapDegrees(yaw - climbYaw)) <= 90.0F;
+        return towardHighEnd ? 44.9F : -44.9F;
     }
 
     public static boolean shouldUseFloatRenderPose(AbstractMinecart cart) {
         if (!isFloating(cart)) {
             return false;
         }
-        // Slope float always uses our pose — vanilla getPos flashes flat on reconnect.
+        // The client cart is visibly climbing or diving, whatever the synced incline says right now.
+        float[] seen = clientMotionPose(cart);
+        if (seen != null && (Math.abs(seen[1]) > 1.0F || isOffRail(cart))) {
+            return true;
+        }
+        BlockPos railPos = findRailPos(cart);
+        // Settled on a flat or corner with the incline cleared: vanilla pose, even if the pitch sync is behind.
+        if (getIncline(cart) == 0 && railPos != null && isSettledOnRail(cart, railPos)) {
+            BlockState railState = cart.level().getBlockState(railPos);
+            if (railState.getBlock() instanceof BaseRailBlock rail
+                    && !railState.getValue(rail.getShapeProperty()).isAscending()) {
+                return false;
+            }
+        }
+        // Slope float always uses our pose, vanilla getPos flashes flat on reconnect.
         if (getIncline(cart) != 0
                 || isClimbMemory(cart)
                 || Math.abs(effectiveFloatPitch(cart)) > 1.0F) {
             return true;
         }
-        BlockPos railPos = findRailPos(cart);
         if (railPos != null && isSettledOnRail(cart, railPos)) {
             return false;
         }
@@ -1719,7 +1975,7 @@ public final class MinecartFloating {
             if (Math.abs(local - expected) <= 10.0F) {
                 return local;
             }
-            // Local flipped vs shape — use sync if it matches.
+            // Local flipped vs shape, use sync if it matches.
             if (Math.abs(sync) > 1.0F && Math.abs(sync - expected) <= 10.0F) {
                 return sync;
             }
@@ -1733,7 +1989,7 @@ public final class MinecartFloating {
             return false;
         }
         // Flat takeoff publishes incline=0 + sync pitch=0. Never keep a stale local slope pose
-        // after that — open-air hold can leave the client tilted across a flat gap.
+        // after that, open-air hold can leave the client tilted across a flat gap.
         if (getIncline(cart) == 0) {
             return false;
         }
@@ -1759,7 +2015,7 @@ public final class MinecartFloating {
 
     /**
      * Float / MinecartRenderer yaw uses atan2(dz, dx): 0=east, 90=south, 180=west, -90=north. Do NOT use
-     * {@link Vec3#directionFromRotation} here — that is entity look (0=south).
+     * {@link Vec3#directionFromRotation} here, that is entity look (0=south).
      */
     private static float yawAlongMotion(AbstractMinecart cart, float railYaw) {
         Vec3 motion = horizontalTravelVector(cart);
@@ -1836,7 +2092,7 @@ public final class MinecartFloating {
     }
 
     /**
-     * Snap entity rotation in MinecartRenderer offs space (0=east). Don't convert to look-yaw —
+     * Snap entity rotation in MinecartRenderer offs space (0=east). Don't convert to look-yaw , 
      * that makes a correct slope look diagonal.
      */
     private static void applyEntityRotation(AbstractMinecart cart, float railYaw, float pitch, boolean hardSnap) {
@@ -1856,7 +2112,7 @@ public final class MinecartFloating {
         if (!isFloating(cart)) {
             return false;
         }
-        // Off-rail: never let getPos sample a nearby rail — crest/gap offs are often ~90° wrong.
+        // Off-rail: never let getPos sample a nearby rail, crest/gap offs are often ~90 degrees wrong.
         if (isOffRail(cart)) {
             return true;
         }
@@ -1867,7 +2123,7 @@ public final class MinecartFloating {
         if (railPos != null && isSettledOnRail(cart, railPos)) {
             return false;
         }
-        // Slope float — don't let getPos sample a floor rail mid-gap.
+        // Slope float, don't let getPos sample a floor rail mid-gap.
         if (getIncline(cart) != 0 || isClimbMemory(cart) || Math.abs(effectiveFloatPitch(cart)) > 1.0F) {
             return true;
         }
@@ -1950,6 +2206,8 @@ public final class MinecartFloating {
         cart.setDeltaMovement(motion.x, 0.0D, motion.z);
         setIncline(cart, 0);
         clearFloatingPitch(cart);
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        pose.paradiseLost$setOpenAirClimbGrace(0);
         // Prefer the flat underfoot over a remembered approach shape for yaw.
         RailShape shape = getRailShape(cart);
         BlockPos railPos = findRailPos(cart);
@@ -1966,10 +2224,15 @@ public final class MinecartFloating {
                 }
             }
         }
+        // Clear the ascending climb memory, or the next flat takeoff brings the 45 degrees back.
+        if (shape != null && shape.isAscending()) {
+            setRailShape(cart, "");
+            shape = null;
+        }
         float yaw = resolveFlatFloatYaw(cart, shape);
         setSyncedFloatPose(cart, yaw, 0.0F);
         snapEntityRotation(cart, yaw, 0.0F);
-        ((MinecartFloatPoseAccess) cart).paradiseLost$setRailRenderPose(yaw, 0.0F);
+        pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
         debug(cart, "levelFlight", "pitch=0 dy=0 yaw=" + String.format(Locale.ROOT, "%.1f", yaw)
                 + " shape=" + shape
                 + " motion=" + fmt(cart.getDeltaMovement()));
@@ -1985,14 +2248,14 @@ public final class MinecartFloating {
         if (!onGround && !verticalCollision) {
             return false;
         }
-        // Screenshot hold — don't flatten while we're frozen.
+        // A cart that has stopped has nothing to flatten out of.
         if (cart.getDeltaMovement().horizontalDistanceSqr() < MOTION_EPSILON * MOTION_EPSILON) {
             return false;
         }
         if (findRailPos(cart) != null) {
             return false;
         }
-        // Still climbing into a real landing — don't level out.
+        // Still climbing into a real landing, don't level out.
         // Do not key off climb-memory alone: remembered ascending shape after the rails end
         // (ceiling / floor skim / top of a solid stair run) must still flatten.
         if (isBelowContinuingFlatLanding(cart)) {
@@ -2020,10 +2283,17 @@ public final class MinecartFloating {
             return false;
         }
         if (railState.getValue(rail.getShapeProperty()).isAscending()) {
-            // Ascending seat Y spans ~0..1 within the rail cell — 0.45 only covers the low end.
+            // Ascending seat Y spans ~0..1 within the rail cell. 0.45 only covers the low end.
             return height <= ASCENDING_SEAT_HEIGHT;
         }
-        return height <= 0.16D;
+        // A diving cart drops this far in its next tick. If it had to be within 0.16 to count as seated, it could step right
+        // over a one-block rail across its path (a perpendicular landing) without ever being counted as seated.
+        double limit = 0.16D;
+        Vec3 motion = cart.getDeltaMovement();
+        if (isFloating(cart) && motion.y < -0.05D) {
+            limit = Math.max(limit, -motion.y + 0.02D);
+        }
+        return height <= limit;
     }
 
     @Nullable
@@ -2032,7 +2302,7 @@ public final class MinecartFloating {
         boolean climbFloat = isFloating(cart) && getIncline(cart) > 0;
         BlockState at = cart.level().getBlockState(pos);
         if (BaseRailBlock.isRail(at)) {
-            // High above a through-flat with a higher target — ignore it. Otherwise it's the landing.
+            // High above a through-flat with a higher target, ignore it. Otherwise it's the landing.
             if (climbFloat && isFlatStraightRail(at) && cart.getY() - pos.getY() > 0.45D
                     && hasHigherClimbTarget(cart, pos)) {
                 // fall through to above / null
@@ -2056,7 +2326,7 @@ public final class MinecartFloating {
                 return below;
             }
         }
-        // Might be under a pier — look up a couple blocks.
+        // Might be under a pier, look up a couple blocks.
         if (climbFloat) {
             for (int dy = 1; dy <= 2; dy++) {
                 BlockPos above = pos.above(dy);
@@ -2088,7 +2358,7 @@ public final class MinecartFloating {
             dz = motion.z > 0.0D ? 1 : -1;
         }
         for (int step = 1; step <= 4; step++) {
-            // dy from 1 — same-level ascending later isn't a "higher" target.
+            // dy from 1, same-level ascending later isn't a "higher" target.
             for (int dy = 1; dy <= 3; dy++) {
                 BlockState state = level.getBlockState(flatPos.offset(dx * step, dy, dz * step));
                 if (state.getBlock() instanceof BaseRailBlock rail
@@ -2120,7 +2390,7 @@ public final class MinecartFloating {
         BlockState railState = cart.level().getBlockState(railPos);
         boolean ascendingUnder = railState.getBlock() instanceof BaseRailBlock rail
                 && railState.getValue(rail.getShapeProperty()).isAscending();
-        // High above underfoot rail — treat as midair even if offRail hasn't synced.
+        // High above underfoot rail, treat as midair even if offRail hasn't synced.
         boolean slopeFloat = getIncline(cart) != 0 || isClimbMemory(cart) || poseHasSlopePitch(cart);
         if (!alreadyLeftRails && !slopeFloat) {
             return false;
@@ -2139,7 +2409,7 @@ public final class MinecartFloating {
         return findContinuingRailAhead(cart, false) != null;
     }
 
-    /** Ascending rail continues ahead. Flats don't count — those need a real takeoff + seat. */
+    /** Ascending rail continues ahead. Flats don't count, those need a real takeoff + seat. */
     public static boolean hasContinuingAscendingRailAhead(AbstractMinecart cart) {
         return findContinuingRailAhead(cart, true) != null;
     }
@@ -2169,7 +2439,7 @@ public final class MinecartFloating {
                 dz = motion.z > 0.0D ? 1 : -1;
             }
         } else {
-            // Float yaw is 0=east — not look-yaw (Direction.fromYRot would face the wrong way).
+            // Float yaw is 0=east, not look-yaw (Direction.fromYRot would face the wrong way).
             float railYaw = getSyncedFloatYaw(cart);
             MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
             if (pose.paradiseLost$hasRailRenderPose()) {
@@ -2253,7 +2523,7 @@ public final class MinecartFloating {
         return null;
     }
 
-    /** Flat more than a block below — not a climb target. */
+    /** Flat more than a block below, not a climb target. */
     private static boolean isDeepFlatBelowClimb(AbstractMinecart cart, BlockPos ahead, BlockState state) {
         if (!(state.getBlock() instanceof BaseRailBlock rail)) {
             return false;
@@ -2274,8 +2544,8 @@ public final class MinecartFloating {
 
     /**
      * Open-air climb while incline is live and we still have a target: continuing rail/stair,
-     * climb-memory from takeoff, or a ceiling above. Without climb-memory, slopeLaunchesUpward
-     * flattens powered sky launches after a few ticks.
+     * a short grace after takeoff (sky launch), or a ceiling that is about to be hit.
+     * Climb memory alone or far-away solids (trees) used to keep one-block launches tilted forever.
      */
     public static boolean shouldKeepOpenAirClimb(AbstractMinecart cart) {
         if (getIncline(cart) <= 0) {
@@ -2283,24 +2553,27 @@ public final class MinecartFloating {
         }
         if (hasContinuingAscendingRailAhead(cart)
                 || hasContinuingSlopeSolidAhead(cart)
-                || isBelowContinuingFlatLanding(cart)
-                || isClimbMemory(cart)) {
+                || isBelowContinuingFlatLanding(cart)) {
             return true;
         }
-        // Ceiling tests place slabs ~10 blocks up; keep climbing until that slab is in range.
-        return hasSolidAbove(cart, 12);
+        if (((MinecartFloatPoseAccess) cart).paradiseLost$getOpenAirClimbGrace() > 0) {
+            return true;
+        }
+        // After the grace only a close ceiling keeps the cart rising, not foliage 8 or more blocks up.
+        return distanceToSolidAbove(cart, IMMINENT_CEILING_BLOCKS) > 0;
     }
 
-    private static boolean hasSolidAbove(AbstractMinecart cart, int maxBlocks) {
+    /** Number of blocks up to the first collidable block above, or 0 if there is none within maxBlocks. */
+    private static int distanceToSolidAbove(AbstractMinecart cart, int maxBlocks) {
         BlockPos.MutableBlockPos cursor = cart.blockPosition().mutable();
         for (int i = 1; i <= maxBlocks; i++) {
             cursor.move(0, 1, 0);
             BlockState state = cart.level().getBlockState(cursor);
             if (!state.getCollisionShape(cart.level(), cursor).isEmpty()) {
-                return true;
+                return i;
             }
         }
-        return false;
+        return 0;
     }
 
     /** Rail, solid stair, or remembered slope still worth aiming at. */
@@ -2359,9 +2632,9 @@ public final class MinecartFloating {
         int firstPierY = Integer.MIN_VALUE;
         int distinctY = 0;
         int sign = incline > 0 ? 1 : -1;
-        // Use feet — carts often sit inside the pier cell.
+        // Use feet, carts often sit inside the pier cell.
         // Pier sits one below the path cell ahead.
-        // ±1 Y covers skimming a bit high/low off a lip.
+        // +/-1 Y covers skimming a bit high/low off a lip.
         // Do not skip "head-height" piers: on a climb the next tread is often at headY, and
         // isWalkableStairPier already rejects face-walls (solid with solid above).
         double feetY = cart.getY();
@@ -2394,7 +2667,7 @@ public final class MinecartFloating {
         return distinctY >= 2;
     }
 
-    /** Solid underfoot with air above — a tread, not a wall. */
+    /** Solid underfoot with air above, a tread, not a wall. */
     private static boolean isWalkableStairPier(Level level, BlockPos pier) {
         if (!isBlockingSolid(level, pier)) {
             return false;
@@ -2441,7 +2714,7 @@ public final class MinecartFloating {
             along = along.scale(-1.0D);
         }
         along = along.normalize();
-        // Restore climb/descend Y too — pier friction often zeros the whole vector.
+        // Restore climb/descend Y too, pier friction often zeros the whole vector.
         cart.setDeltaMovement(along.x * minSpeed, incline * minSpeed, along.z * minSpeed);
     }
 
@@ -2527,7 +2800,7 @@ public final class MinecartFloating {
             debug(cart, "nudge", "skip corner shape=" + shape);
             return;
         }
-        // Already parallel — keep XZ, just refresh incline/Y.
+        // Already parallel, keep XZ, just refresh incline/Y.
         if (isParallelToRail(cart, shape)) {
             setRailShape(cart, shape);
             Vec3 motion = cart.getDeltaMovement();
@@ -2576,7 +2849,7 @@ public final class MinecartFloating {
 
         setRailShape(cart, shape);
         double speed = Math.max(motion.horizontalDistance(), MOTION_EPSILON);
-        // Keep nudge horizontal — Y comes from incline, not from ascending exit normals.
+        // Keep nudge horizontal. Y comes from incline, not from ascending exit normals.
         Vec3 flatAlong = new Vec3(along.x, 0.0D, along.z);
         if (flatAlong.lengthSqr() > 1.0E-8D) {
             flatAlong = flatAlong.normalize();

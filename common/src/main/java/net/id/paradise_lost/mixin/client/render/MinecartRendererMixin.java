@@ -12,10 +12,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * Float pose has to hit {@code Axis.rotationDegrees} — by {@code mulPose} the
- * {@code 180 - entityYaw} / {@code -pitch} args are already on the stack.
- */
 @Mixin(MinecartRenderer.class)
 public class MinecartRendererMixin {
 
@@ -39,7 +35,9 @@ public class MinecartRendererMixin {
         PARADISE_LOST$RENDER_CART.remove();
     }
 
-    /** First rotationDegrees call: {@code 180 - entityYaw} (offs may already have set yaw). */
+    /**
+     * First rotationDegrees call: {@code 180 - entityYaw} (offs may already have set yaw).
+     */
     @ModifyArg(
             method = "render",
             at = @At(
@@ -57,7 +55,9 @@ public class MinecartRendererMixin {
         return degrees;
     }
 
-    /** Second call: {@code -pitch}. */
+    /**
+     * Second call: {@code -pitch}.
+     */
     @ModifyArg(
             method = "render",
             at = @At(

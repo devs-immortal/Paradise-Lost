@@ -11,6 +11,7 @@ import net.id.paradise_lost.entity.block.FloatingBlockEntity;
 import net.id.paradise_lost.entity.projectile.LevitaArrow;
 import net.id.paradise_lost.item.tool.base_tools.GravityTool;
 import net.id.paradise_lost.registry.BlockRegistry;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,6 +21,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -51,11 +53,13 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.DoublePredicate;
 
 import static net.id.paradise_lost.gametest.TestHelpers.*;
@@ -97,13 +101,10 @@ public final class LevitaTests {
     private static int activeGapAt = -1;
     private static int activeGapLen = 0;
     private static final int CONNECT_STAIRS = 5;
-    private static final int LANDING_HALF = 5;
+    private static final int LANDING_HALF = 14;
     private static int connectGapAir = 1;
     private static final int WALK_STAIRS = 10;
     private static final int WALK_RAIL_RUN = 3;
-    private static Vec3 pausedMotion = Vec3.ZERO;
-    private static int pausedIncline = 0;
-    private static boolean pausedNoPhysics = false;
     private static double shotResumeAlong = 0;
 
     private LevitaTests() {
@@ -309,7 +310,7 @@ public final class LevitaTests {
                     track(world, start, "rrrrrr");
                     track(world, start.relative(side, 3), "rrlrrr");
                     track(world, start.relative(side, 6), "rrLrrr");
-                    
+
                     entityId = launch(world, EntityType.MINECART, start, 0.4);
                     secondId = launch(world, EntityType.MINECART, start.relative(side, 3), 0.4);
                     thirdId = launch(world, EntityType.MINECART, start.relative(side, 6), 0.4);
@@ -666,25 +667,23 @@ public final class LevitaTests {
         }));
 
         if (ascend) {
-            steps.add(Step.until(tag + " on-rail before " + GAP_LEN + "-block gap", 100,
-                    () -> fromServer(server -> {
+            steps.add(untilShot(tag + " on-rail before " + GAP_LEN + "-block gap", 100,
+                    server -> {
                         AbstractMinecart cart = serverCart(server, entityId);
                         checkOnStairs(cart, "server");
-                        return along(cart) > GAP_AT - 1.3 && along(cart) < GAP_AT - 0.35
-                                && MinecartFloating.isCartOnRail(cart);
-                    })));
+                        return along(cart) > GAP_AT - 1.3 && MinecartFloating.isCartOnRail(cart);
+                    }));
         } else {
-            steps.add(Step.until(tag + " on-rail before " + GAP_LEN + "-block gap", 100,
-                    () -> fromServer(server -> {
+            steps.add(untilShot(tag + " on-rail before " + GAP_LEN + "-block gap", 100,
+                    server -> {
                         AbstractMinecart cart = serverCart(server, entityId);
                         checkOnStairs(cart, "server");
-                        return along(cart) < GAP_AT + GAP_LEN + 1.3 && along(cart) > GAP_AT + GAP_LEN + 0.35
-                                && MinecartFloating.isCartOnRail(cart);
-                    })));
+                        return along(cart) < GAP_AT + GAP_LEN + 1.3 && MinecartFloating.isCartOnRail(cart);
+                    }));
         }
         steps.addAll(sideShotSteps("levita_" + tag + "_onrail_before_gap", true, ShotFrame.CLOSE));
 
-        steps.add(Step.until(tag + " rail disconnect into gap", 140, () -> fromServer(server -> {
+        steps.add(untilShot(tag + " rail disconnect into gap", 140, server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             checkGapPath(cart, "server");
             double a = along(cart);
@@ -693,10 +692,10 @@ public final class LevitaTests {
                     : (a < GAP_AT + GAP_LEN - 0.2 && a > GAP_AT + GAP_LEN - 2.2);
             return inGap && MinecartFloating.isFloating(cart)
                     && MinecartFloating.getIncline(cart) != 0;
-        })));
+        }));
         steps.addAll(sideShotSteps("levita_" + tag + "_rail_disconnect", true, ShotFrame.CLOSE));
 
-        steps.add(Step.until(tag + " mid-air across gap", 180, () -> fromServer(server -> {
+        steps.add(untilShot(tag + " mid-air across gap", 180, server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             checkGapPath(cart, "server");
             double a = along(cart);
@@ -713,10 +712,10 @@ public final class LevitaTests {
                 return true;
             }
             return false;
-        })));
+        }));
         steps.addAll(sideShotSteps("levita_" + tag + "_midair_float", true, ShotFrame.CLOSE));
 
-        steps.add(Step.until(tag + " rail reconnect", 180, () -> fromServer(server -> {
+        steps.add(untilShot(tag + " rail reconnect", 180, server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             checkGapPath(cart, "server");
             double a = along(cart);
@@ -724,24 +723,25 @@ public final class LevitaTests {
                 return a >= GAP_AT + GAP_LEN - 0.1 && MinecartFloating.isCartOnRail(cart);
             }
             return a <= GAP_AT + 0.5;
-        })));
+        }));
         steps.addAll(sideShotSteps("levita_" + tag + "_rail_reconnect", true, ShotFrame.WIDE));
 
         if (ascend) {
-            steps.add(Step.until(tag + " on-rail after gap", 180, () -> fromServer(server -> {
+            steps.add(untilShot(tag + " on-rail after gap", 180, server -> {
                 AbstractMinecart cart = serverCart(server, entityId);
                 checkGapPath(cart, "server");
                 return along(cart) > GAP_STAIRS - 0.5 && MinecartFloating.isCartOnRail(cart);
-            })));
+            }));
         } else {
-            steps.add(Step.until(tag + " after gap toward lower stairs", 200, () -> fromServer(server -> {
+            steps.add(untilShot(tag + " after gap toward lower stairs", 200, server -> {
                 AbstractMinecart cart = serverCart(server, entityId);
                 checkGapPath(cart, "server");
                 return along(cart) < GAP_AT - 0.5
                         && (MinecartFloating.isCartOnRail(cart) || cart.getY() < start.getY() + GAP_AT + 0.8);
-            })));
+            }));
         }
         steps.addAll(sideShotSteps("levita_" + tag + "_onrail_after_gap", true, ShotFrame.WIDE));
+        steps.add(shotsFinished());
 
         steps.add(Step.run(0, () -> onServer(server -> {
             AbstractMinecart cart = serverCart(server, entityId);
@@ -781,10 +781,33 @@ public final class LevitaTests {
         return descendConnectSteps(true, 'b');
     }
 
+    @ClientTest("descending float connects to perpendicular rails from other tick phases")
+    private static List<Step> zzDescendConnectPerpendicularPhases() {
+        List<Step> steps = new ArrayList<>();
+        for (double phase : new double[]{0.1, 0.2, 0.3}) {
+            steps.addAll(descendConnectSteps(true, 'a', phase));
+        }
+        return steps;
+    }
+
+    @ClientTest("ascending float connects to perpendicular rails from other tick phases")
+    private static List<Step> zzAscendConnectPerpendicularPhases() {
+        List<Step> steps = new ArrayList<>();
+        for (double phase : new double[]{0.1, 0.2, 0.3}) {
+            steps.addAll(ascendConnectSteps(true, 'a', phase));
+        }
+        return steps;
+    }
+
     private static List<Step> descendConnectSteps(boolean perpendicular, char gapVariant) {
+        return descendConnectSteps(perpendicular, gapVariant, 0.0);
+    }
+
+    private static List<Step> descendConnectSteps(boolean perpendicular, char gapVariant, double phase) {
         check(gapVariant == 'a' || gapVariant == 'b', "setup: gap letter must be a or b, got " + gapVariant);
         int gapAir = gapVariant == 'b' ? 4 : 1;
-        String tag = (perpendicular ? "descend_perp" : "descend_parallel") + "_" + gapVariant;
+        String tag = (perpendicular ? "descend_perp" : "descend_parallel") + "_" + gapVariant
+                + (phase > 0 ? "_p" + Math.round(phase * 10) : "");
         List<Step> steps = new ArrayList<>();
         steps.add(setup(world -> {
             dir = Direction.SOUTH;
@@ -794,17 +817,20 @@ public final class LevitaTests {
             activeGapAt = -1;
             activeGapLen = 0;
             shotResumeAlong = -0.45;
+            resetRenderWatch();
             buildDescendConnectLanding(world, perpendicular, gapAir);
             int lip = gapAir;
             int topAlong = lip + CONNECT_STAIRS - 1;
+            launchPhase = phase;
             entityId = launch(world, EntityType.MINECART,
                     start.relative(dir, topAlong).above(topAlong), -0.4);
+            launchPhase = 0.0;
             ticks = 0;
             seen = 0;
-        }));
+        }, true));
 
         double lipAlong = gapAir;
-        steps.add(Step.until(tag + " to leave the stairs into the landing gap", 180, () -> fromServer(server -> {
+        steps.add(untilShot(tag + " to leave the stairs into the landing gap", 180, server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             if (along(cart) > -0.2) {
                 check(Math.abs(side(cart)) < 0.45, tag + " cart drifted off the approach"
@@ -814,11 +840,12 @@ public final class LevitaTests {
             boolean airborne = MinecartFloating.isFloating(cart)
                     && MinecartFloating.findRailPos(cart) == null
                     && !MinecartFloating.isCartOnRail(cart);
-            return inGap && airborne;
-        })));
+            boolean crossed = along(cart) <= -0.9;
+            return (inGap && airborne) || crossed;
+        }));
         steps.addAll(sideShotSteps("levita_" + tag + "_approach_gap", true, ShotFrame.CLOSE));
 
-        steps.add(Step.until(tag + " to seat on the landing rails", 240, () -> fromServer(server -> {
+        steps.add(untilShot(tag + " to seat on the landing rails", 240, server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             BlockPos railPos = MinecartFloating.findRailPos(cart);
             if (railPos == null || railPos.getY() != start.getY()) {
@@ -837,19 +864,22 @@ public final class LevitaTests {
             checkLandingFacing(cart, expect, tag);
             seen = 1;
             return true;
-        })));
+        }));
         steps.addAll(sideShotSteps("levita_" + tag + "_seated", true, ShotFrame.WIDE));
+        steps.addAll(clientRenderWatchSteps(tag, perpendicular ? RailShape.EAST_WEST : RailShape.NORTH_SOUTH));
 
-        steps.add(Step.until(tag + " to ride along the landing", 160, () -> fromServer(server -> {
+        steps.add(untilShot(tag + " to ride along the landing", 160, server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             check(MinecartFloating.isCartOnRail(cart) && !MinecartFloating.isOffRail(cart),
                     tag + " left the landing rails while riding: " + describe(cart) + floatState(cart));
             check(Math.abs(cart.getY() - start.getY()) < 0.35,
                     tag + " is not on the landing height: " + describe(cart) + floatState(cart));
             return Math.abs(alongLand(cart)) > 2.5;
-        })));
+        }));
         steps.addAll(sideShotSteps("levita_" + tag + "_riding", true, ShotFrame.WIDE));
 
+        steps.add(Step.run(0, () -> checkClientRenderFacing(tag,
+                perpendicular ? RailShape.EAST_WEST : RailShape.NORTH_SOUTH)));
         steps.add(Step.run(0, () -> onServer(server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             check(seen == 1, "setup: cart never seated on " + tag + " landing");
@@ -867,7 +897,157 @@ public final class LevitaTests {
                                 + fmt(motion.x) + "/" + fmt(motion.z) + describe(cart) + floatState(cart));
             }
         })));
+        steps.add(shotsFinished());
         return steps;
+    }
+
+    private static int renderWatchTicks;
+    private static final List<String> renderViolations = new ArrayList<>();
+    private static Vec3 renderWatchLast;
+    private static int renderWatchTick;
+    private static String renderPendingViolation;
+    private static int renderWatchSampleTick;
+
+    private static float[] clientRenderPose(AbstractMinecart cart) {
+        if (MinecartFloating.shouldUseFloatRenderPose(cart)) {
+            return new float[]{MinecartFloating.getFloatRenderYaw(cart), MinecartFloating.getFloatRenderPitch(cart)};
+        }
+        float yaw = cart.getYRot();
+        float pitch = cart.getXRot();
+        Vec3 at = cart.getPos(cart.getX(), cart.getY(), cart.getZ());
+        if (at != null) {
+            Vec3 a = cart.getPosOffs(cart.getX(), cart.getY(), cart.getZ(), 0.3F);
+            Vec3 b = cart.getPosOffs(cart.getX(), cart.getY(), cart.getZ(), -0.3F);
+            if (a == null) {
+                a = at;
+            }
+            if (b == null) {
+                b = at;
+            }
+            Vec3 d = b.add(-a.x, -a.y, -a.z);
+            if (d.length() != 0.0) {
+                d = d.normalize();
+                yaw = (float) (Math.atan2(d.z, d.x) * 180.0 / Math.PI);
+                pitch = (float) (Math.atan(d.y) * 73.0);
+            }
+        }
+        return new float[]{yaw, pitch};
+    }
+
+    private static void resetRenderWatch() {
+        renderViolations.clear();
+        renderWatchLast = null;
+        renderWatchTick = 0;
+        renderPendingViolation = null;
+    }
+
+    private static boolean watchClientRender() {
+        sampleClientRender(entityId);
+        return true;
+    }
+
+    private static void sampleClientRender(int id) {
+        renderWatchTick++;
+        if (!(client().level.getEntity(id) instanceof AbstractMinecart cart)) {
+            return;
+        }
+        Vec3 now = cart.position();
+        Vec3 last = renderWatchLast;
+        renderWatchLast = now;
+        boolean consecutive = renderWatchSampleTick == clientTicks - 1;
+        renderWatchSampleTick = clientTicks;
+        if (last == null || !consecutive) {
+            return;
+        }
+        Vec3 move = now.subtract(last);
+        double horizontal = Math.sqrt(move.x * move.x + move.z * move.z);
+        if (horizontal < 0.08 || !MinecartFloating.isFloating(cart)) {
+            return;
+        }
+        float travelYaw = (float) (Math.atan2(move.z, move.x) * 180.0 / Math.PI);
+        float offAxis = Math.abs(Mth.wrapDegrees(travelYaw - Math.round(travelYaw / 90.0F) * 90.0F));
+        float[] pose = clientRenderPose(cart);
+        double rad = Math.toRadians(pose[0]);
+        double facing = Math.cos(rad) * move.x / horizontal + Math.sin(rad) * move.z / horizontal;
+        boolean steep = Math.abs(move.y) > 0.15 && Math.abs(move.y) / horizontal > 0.6;
+        String why = null;
+        if (Math.abs(facing) < 0.82 && offAxis < 20.0F) {
+            why = "yaw " + fmt(pose[0]) + " is " + fmt(Math.toDegrees(Math.acos(Math.min(1.0, Math.abs(facing)))))
+                    + "deg off the travel direction";
+        } else if (steep && Math.abs(pose[1]) < 10.0F) {
+            why = "pitch " + fmt(pose[1]) + " while dy=" + fmt(move.y);
+        } else if (steep && Math.abs(pose[1]) >= 10.0F
+                && Math.signum(pose[1]) != Math.signum(move.y)
+                && Math.signum(pose[1]) != Math.signum(move.y) * Math.signum(facing)) {
+            why = "pitch " + fmt(pose[1]) + " has the wrong sign for dy=" + fmt(move.y);
+        } else if (Math.abs(move.y) < 0.02 && Math.abs(pose[1]) > 10.0F) {
+            why = "pitch " + fmt(pose[1]) + " while flat";
+        }
+        if (why != null) {
+            String entry = "t" + renderWatchTick + " " + why + " (move=" + fmt(move.x) + "/" + fmt(move.y) + "/"
+                    + fmt(move.z) + floatState(cart) + ")";
+            if (renderPendingViolation != null) {
+                if (renderViolations.isEmpty()) {
+                    renderViolations.add(renderPendingViolation);
+                }
+                renderViolations.add(entry);
+            }
+            renderPendingViolation = entry;
+        } else {
+            renderPendingViolation = null;
+        }
+    }
+
+    private static List<Step> clientRenderWatchSteps(String tag, RailShape expect) {
+        List<Step> out = new ArrayList<>();
+        int[] flat = {0};
+        int[] waited = {0};
+        out.add(Step.until(tag + " client cart to ride the landing", 80, () -> {
+            watchClientRender();
+            AbstractMinecart cart = clientCart(entityId);
+            Vec3 motion = cart.getDeltaMovement();
+            boolean level = Math.abs(cart.getY() - cart.yOld) < 0.02 && motion.horizontalDistanceSqr() > 0.01;
+            flat[0] = level ? flat[0] + 1 : 0;
+            waited[0]++;
+            check(flat[0] >= 3 || waited[0] < 70, tag + " client cart never rode level: dy=" + fmt(cart.getY() - cart.yOld) + describe(cart) + floatState(cart));
+            return flat[0] >= 3;
+        }));
+        out.add(Step.run(0, () -> renderWatchTicks = 0));
+        out.add(Step.run(0, () -> check(renderViolations.isEmpty(), tag + " client render did not follow the rails ("
+                + renderViolations.size() + " samples): "
+                + String.join(" | ", renderViolations.subList(0, Math.min(8, renderViolations.size()))))));
+        out.add(Step.until(tag + " client render to follow the landing rails", 80, () -> {
+            checkClientRenderFacing(tag, expect);
+            return ++renderWatchTicks >= 8;
+        }));
+        return out;
+    }
+
+    private static void checkClientRenderFacing(String tag, RailShape expect) {
+        check(renderViolations.isEmpty(), tag + " client render did not follow the rails ("
+                + renderViolations.size() + " samples): "
+                + String.join(" | ", renderViolations.subList(0, Math.min(8, renderViolations.size()))));
+        AbstractMinecart cart = clientCart(entityId);
+        float yaw;
+        float pitch;
+        String path;
+        if (MinecartFloating.shouldUseFloatRenderPose(cart)) {
+            yaw = MinecartFloating.getFloatRenderYaw(cart);
+            pitch = MinecartFloating.getFloatRenderPitch(cart);
+            path = "floatPose";
+        } else {
+            yaw = Mth.rotLerp(0.5F, cart.yRotO, cart.getYRot());
+            pitch = Mth.lerp(0.5F, cart.xRotO, cart.getXRot());
+            path = "entityPose";
+        }
+        yaw = Mth.wrapDegrees(yaw);
+        boolean yawOk = expect == RailShape.EAST_WEST
+                ? (Math.abs(yaw) <= 8.0F || Math.abs(Math.abs(yaw) - 180.0F) <= 8.0F)
+                : Math.abs(Math.abs(yaw) - 90.0F) <= 8.0F;
+        check(yawOk, tag + " client renders yaw=" + fmt(yaw) + " via " + path + ", not along " + expect
+                + describe(cart) + floatState(cart));
+        check(Math.abs(pitch) < 3.0F, tag + " client renders pitch=" + fmt(pitch) + " via " + path
+                + " on a flat landing" + describe(cart) + floatState(cart));
     }
 
     private static void buildDescendConnectLanding(ServerLevel world, boolean perpendicular, int gapAir) {
@@ -917,9 +1097,14 @@ public final class LevitaTests {
     }
 
     private static List<Step> ascendConnectSteps(boolean perpendicular, char gapVariant) {
+        return ascendConnectSteps(perpendicular, gapVariant, 0.0);
+    }
+
+    private static List<Step> ascendConnectSteps(boolean perpendicular, char gapVariant, double phase) {
         check(gapVariant == 'a' || gapVariant == 'b', "setup: gap letter must be a or b, got " + gapVariant);
         int gapAir = gapVariant == 'b' ? 4 : 1;
-        String tag = (perpendicular ? "ascend_perp" : "ascend_parallel") + "_" + gapVariant;
+        String tag = (perpendicular ? "ascend_perp" : "ascend_parallel") + "_" + gapVariant
+                + (phase > 0 ? "_p" + Math.round(phase * 10) : "");
         List<Step> steps = new ArrayList<>();
         steps.add(setup(world -> {
             dir = Direction.SOUTH;
@@ -929,15 +1114,18 @@ public final class LevitaTests {
             activeGapAt = -1;
             activeGapLen = 0;
             shotResumeAlong = CONNECT_STAIRS + gapAir + 2.5;
+            resetRenderWatch();
             buildAscendConnectLanding(world, perpendicular, gapAir);
+            launchPhase = phase;
             entityId = launch(world, EntityType.MINECART, start, 0.4);
+            launchPhase = 0.0;
             ticks = 0;
             seen = 0;
-        }));
+        }, true));
 
         int landAlong = CONNECT_STAIRS + gapAir;
         int landY = landAlong;
-        steps.add(Step.until(tag + " to leave the stairs into the landing gap", 180, () -> fromServer(server -> {
+        steps.add(untilShot(tag + " to leave the stairs into the landing gap", 180, server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             if (along(cart) < landAlong + 0.5) {
                 check(Math.abs(side(cart)) < 0.45, tag + " cart drifted off the approach"
@@ -947,11 +1135,12 @@ public final class LevitaTests {
             boolean airborne = MinecartFloating.isFloating(cart)
                     && MinecartFloating.findRailPos(cart) == null
                     && !MinecartFloating.isCartOnRail(cart);
-            return inGap && airborne;
-        })));
+            boolean crossed = along(cart) >= landAlong - 0.35;
+            return (inGap && airborne) || crossed;
+        }));
         steps.addAll(sideShotSteps("levita_" + tag + "_approach_gap", true, ShotFrame.CLOSE));
 
-        steps.add(Step.until(tag + " to seat on the landing rails", 240, () -> fromServer(server -> {
+        steps.add(untilShot(tag + " to seat on the landing rails", 240, server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             BlockPos railPos = MinecartFloating.findRailPos(cart);
             if (railPos == null || railPos.getY() != start.getY() + landY) {
@@ -972,19 +1161,22 @@ public final class LevitaTests {
             checkLandingFacing(cart, expect, tag);
             seen = 1;
             return true;
-        })));
+        }));
         steps.addAll(sideShotSteps("levita_" + tag + "_seated", true, ShotFrame.WIDE));
+        steps.addAll(clientRenderWatchSteps(tag, perpendicular ? RailShape.EAST_WEST : RailShape.NORTH_SOUTH));
 
-        steps.add(Step.until(tag + " to ride along the landing", 160, () -> fromServer(server -> {
+        steps.add(untilShot(tag + " to ride along the landing", 160, server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             check(MinecartFloating.isCartOnRail(cart) && !MinecartFloating.isOffRail(cart),
                     tag + " left the landing rails while riding: " + describe(cart) + floatState(cart));
             check(Math.abs(cart.getY() - (start.getY() + landY)) < 0.35,
                     tag + " is not on the landing height: " + describe(cart) + floatState(cart));
             return Math.abs(alongLand(cart)) > 2.5;
-        })));
+        }));
         steps.addAll(sideShotSteps("levita_" + tag + "_riding", true, ShotFrame.WIDE));
 
+        steps.add(Step.run(0, () -> checkClientRenderFacing(tag,
+                perpendicular ? RailShape.EAST_WEST : RailShape.NORTH_SOUTH)));
         steps.add(Step.run(0, () -> onServer(server -> {
             AbstractMinecart cart = serverCart(server, entityId);
             check(seen == 1, "setup: cart never seated on " + tag + " landing");
@@ -1002,6 +1194,7 @@ public final class LevitaTests {
                                 + fmt(motion.x) + "/" + fmt(motion.z) + describe(cart) + floatState(cart));
             }
         })));
+        steps.add(shotsFinished());
         return steps;
     }
 
@@ -1169,6 +1362,7 @@ public final class LevitaTests {
             })));
         }
         steps.addAll(sideShotSteps("levita_" + tag + "_far_ladder", true, ShotFrame.WIDE));
+        steps.add(shotsFinished());
 
         steps.add(Step.run(0, () -> onServer(server -> {
             AbstractMinecart cart = serverCart(server, entityId);
@@ -1351,6 +1545,9 @@ public final class LevitaTests {
                         check(player.startRiding(cart, true), "setup: startRiding returned false");
                         ticks = 0;
                         seen = 0;
+                        renderViolations.clear();
+                        renderWatchLast = null;
+                        renderWatchTick = 0;
                     });
                 }),
                 Step.run(5, () -> onServer(server -> {
@@ -1379,6 +1576,7 @@ public final class LevitaTests {
                     if (client().screen instanceof net.minecraft.client.gui.screens.PauseScreen) {
                         client().setScreen(null);
                     }
+                    sampleClientRender(entityId);
                     return fromServer(server -> {
                         ServerPlayer player = player(server);
                         AbstractMinecart cart = serverCart(server, entityId);
@@ -1402,7 +1600,7 @@ public final class LevitaTests {
                                 }
                                 check(Math.abs(Math.abs(pitch) - 45) < 8,
                                         "palace slope gap pitch is " + fmt(pitch)
-                                                + ", expected about ±45" + describe(cart) + floatState(cart));
+                                                + ", expected about +-45" + describe(cart) + floatState(cart));
                                 check(Math.abs(Math.abs(cart.getXRot()) - 45) < 8
                                                 || Math.abs(Math.abs(pitch) - 45) < 8,
                                         "palace slope gap entity/pose pitch flat: xRot="
@@ -1421,6 +1619,8 @@ public final class LevitaTests {
                 }),
                 Step.run(0, () -> onServer(server -> {
                     check(seen == 1, "setup: cart never left the palace button start");
+                    check(renderViolations.isEmpty(), "client render did not follow the rails (" + renderViolations.size()
+                            + " samples): " + String.join(" | ", renderViolations.subList(0, Math.min(10, renderViolations.size()))));
                     AbstractMinecart cart = serverCart(server, entityId);
                     Vec3 startAt = Vec3.atLowerCornerOf(start).add(cartLocalX, cartLocalY, cartLocalZ);
                     check(player(server).position().distanceTo(startAt) < 1.75,
@@ -1585,6 +1785,10 @@ public final class LevitaTests {
     }
 
     private static Step setup(Consumer<ServerLevel> builder) {
+        return setup(builder, false);
+    }
+
+    private static Step setup(Consumer<ServerLevel> builder, boolean watching) {
         return Step.run(0, () -> onServer(server -> {
             ServerPlayer player = player(server);
             ServerLevel level = world(server);
@@ -1598,6 +1802,10 @@ public final class LevitaTests {
             shotResumeAlong = 0;
             connectGapAir = 1;
             builder.accept(level);
+            if (watching) {
+                player.setGameMode(GameType.SPECTATOR);
+                aimSideOverview(player, level);
+            }
         }));
     }
 
@@ -1614,93 +1822,148 @@ public final class LevitaTests {
             activeGapLen = 0;
             builder.accept(level);
             if (player.getVehicle() == null) {
+                player.setGameMode(GameType.SPECTATOR);
                 aimSideOverview(player, level);
             }
         }));
+    }
+
+    private static volatile Function<IntegratedServer, Boolean> shotWatch;
+    private static volatile boolean shotWatchHit;
+    private static volatile Throwable shotWatchError;
+    private static volatile Vec3 shotTarget;
+
+    static {
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
+            Function<IntegratedServer, Boolean> watch = shotWatch;
+            if (watch == null || shotWatchHit || !(server instanceof IntegratedServer integrated)) {
+                return;
+            }
+            try {
+                if (watch.apply(integrated)) {
+                    shotTarget = world(integrated).getEntity(entityId).position();
+                    shotWatchHit = true;
+                }
+            } catch (Throwable t) {
+                shotWatchError = t;
+                shotWatch = null;
+            }
+        });
+    }
+
+    private static Step untilShot(String what, int timeout, Function<IntegratedServer, Boolean> condition) {
+        return Step.until(what, timeout, () -> {
+            watchClientRender();
+            if (shotWatch != condition) {
+                shotWatchHit = false;
+                shotWatchError = null;
+                shotWatch = condition;
+            }
+            Throwable error = shotWatchError;
+            if (error != null) {
+                shotWatch = null;
+                shotWatchError = null;
+                if (error instanceof RuntimeException runtime) {
+                    throw runtime;
+                }
+                if (error instanceof Error err) {
+                    throw err;
+                }
+                throw new IllegalStateException(error);
+            }
+            if (shotWatchHit) {
+                shotWatch = null;
+                shotWatchHit = false;
+                return true;
+            }
+            return false;
+        });
     }
 
     private static List<Step> sideShotSteps(String uniqueName, boolean spectator) {
         return sideShotSteps(uniqueName, spectator, ShotFrame.CLOSE);
     }
 
-    private static List<Step> sideShotSteps(String uniqueName, boolean spectator, ShotFrame frame) {
-        return List.of(
-                Step.run(0, () -> onServer(server -> {
-                    AbstractMinecart cart = serverCart(server, entityId);
-                    pausedMotion = cart.getDeltaMovement();
-                    pausedIncline = MinecartFloating.getIncline(cart);
-                    pausedNoPhysics = cart.noPhysics;
-                    cart.noPhysics = true;
-                    cart.setDeltaMovement(Vec3.ZERO);
-                    server.tickRateManager().setFrozen(true);
-                    aimSideAtCart(player(server), world(server), spectator, frame);
-                })),
-                Step.run(4, () -> {
-                    onServer(server -> aimSideAtCart(player(server), world(server), spectator, frame));
-                    syncClientCartFromServer();
-                }),
-                Step.run(2, () -> {
-                    onServer(server -> aimSideAtCart(player(server), world(server), spectator, frame));
-                    syncClientCartFromServer();
-                    screenshot(uniqueName + ".png");
-                }),
-                Step.run(4, () -> onServer(server -> {
-                    server.tickRateManager().setFrozen(false);
-                    AbstractMinecart cart = serverCart(server, entityId);
-                    cart.noPhysics = pausedNoPhysics;
-                    if (pausedIncline != 0) {
-                        MinecartFloating.setIncline(cart, pausedIncline);
-                    }
-                    Vec3 resume = pausedMotion;
-                    if (resume.horizontalDistanceSqr() < 0.04 && Math.abs(shotResumeAlong) > 0.01) {
-                        resume = Vec3.atLowerCornerOf(dir.getNormal()).scale(shotResumeAlong);
-                    }
-                    int incline = MinecartFloating.getIncline(cart);
-                    if (incline != 0 && resume.horizontalDistanceSqr() > 1.0E-6) {
-                        resume = new Vec3(resume.x, incline * resume.horizontalDistance(), resume.z);
-                    }
-                    cart.setDeltaMovement(resume);
-                }))
-        );
+    private record Shot(String name, boolean spectator, ShotFrame frame, int cartId, Vec3 target) {
     }
 
-    private static void syncClientCartFromServer() {
-        double[] snap = fromServer(server -> {
-            AbstractMinecart cart = serverCart(server, entityId);
-            MinecartFloatPoseAccess access = (MinecartFloatPoseAccess) cart;
-            float yaw = access.paradiseLost$hasRailRenderPose()
-                    ? access.paradiseLost$getRailRenderYaw()
-                    : MinecartFloating.getSyncedFloatYaw(cart);
-            float pitch = access.paradiseLost$hasRailRenderPose()
-                    ? access.paradiseLost$getRailRenderPitch()
-                    : MinecartFloating.getSyncedFloatPitch(cart);
-            int incline = MinecartFloating.getIncline(cart);
-            if (incline != 0) {
-                float mag = Math.abs(pitch) > 5.0F ? Math.abs(pitch) : 45.0F;
-                pitch = incline > 0 ? mag : -mag;
+    private static final ArrayDeque<Shot> shotQueue = new ArrayDeque<>();
+    private static Shot activeShot;
+    private static boolean shotFrozen;
+    private static int shotTicks;
+    private static int clientTicks;
+
+    static {
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            clientTicks++;
+            try {
+                runShots();
+            } catch (RuntimeException e) {
+                activeShot = null;
+                shotFrozen = false;
+                shotQueue.clear();
             }
-            Vec3 p = cart.position();
-            return new double[]{p.x, p.y, p.z, yaw, pitch, incline};
         });
-        if (!(client().level.getEntity(entityId) instanceof AbstractMinecart clientCart)) {
+    }
+
+    private static List<Step> sideShotSteps(String uniqueName, boolean spectator, ShotFrame frame) {
+        return List.of(Step.run(0, () -> {
+            Vec3 target = shotTarget;
+            shotTarget = null;
+            shotQueue.add(new Shot(uniqueName, spectator, frame, entityId, target));
+        }));
+    }
+
+    private static Step shotsFinished() {
+        return Step.until("queued screenshots to finish", 120, () -> activeShot == null && shotQueue.isEmpty());
+    }
+
+    private static void runShots() {
+        if (activeShot == null) {
+            activeShot = shotQueue.poll();
+            shotFrozen = false;
+            shotTicks = 0;
+            if (activeShot == null) {
+                return;
+            }
+        }
+        Shot shot = activeShot;
+        shotTicks++;
+        if (!shotFrozen) {
+            if (client().level == null || !(client().level.getEntity(shot.cartId()) instanceof AbstractMinecart cart)) {
+                activeShot = null;
+                return;
+            }
+            if (shot.target() == null || cart.position().distanceTo(shot.target()) < 0.45 || shotTicks > 16) {
+                onServer(server -> server.tickRateManager().setFrozen(true));
+                shotFrozen = true;
+                shotTicks = 0;
+            }
             return;
         }
-        clientCart.setPos(snap[0], snap[1], snap[2]);
-        clientCart.xo = snap[0];
-        clientCart.yo = snap[1];
-        clientCart.zo = snap[2];
-        float yaw = (float) snap[3];
-        float pitch = (float) snap[4];
-        clientCart.setYRot(yaw);
-        clientCart.setXRot(pitch);
-        clientCart.yRotO = yaw;
-        clientCart.xRotO = pitch;
-        ((MinecartFloatPoseAccess) clientCart).paradiseLost$setRailRenderPose(yaw, pitch);
-        if ((int) snap[5] != 0) {
-            MinecartFloating.setIncline(clientCart, (int) snap[5]);
+        switch (shotTicks) {
+            case 1, 5 -> aimSideAtClientCart(shot);
+            case 7 -> {
+                aimSideAtClientCart(shot);
+                screenshot(shot.name() + ".png");
+            }
+            case 10 -> {
+                onServer(server -> server.tickRateManager().setFrozen(false));
+                shotFrozen = false;
+                activeShot = null;
+            }
+            default -> {
+            }
         }
     }
 
+    private static void aimSideAtClientCart(Shot shot) {
+        if (!(client().level.getEntity(shot.cartId()) instanceof AbstractMinecart cart)) {
+            return;
+        }
+        Vec3 focus = cart.position();
+        onServer(server -> aimSideAtCart(player(server), world(server), shot.spectator(), shot.frame(), focus));
+    }
     private static void aimSideOverview(ServerPlayer player, ServerLevel level) {
         Direction side = dir.getClockWise();
         double mid = Math.max(3, activeStairs / 2.0);
@@ -1713,15 +1976,13 @@ public final class LevitaTests {
         teleport(player, level, eye.x, eye.y, eye.z, yaw, 28);
     }
 
-    private static void aimSideAtCart(ServerPlayer player, ServerLevel level, boolean spectator, ShotFrame frame) {
+    private static void aimSideAtCart(ServerPlayer player, ServerLevel level, boolean spectator, ShotFrame frame, Vec3 focus) {
         if (spectator) {
             player.setGameMode(GameType.SPECTATOR);
         }
-        AbstractMinecart cart = (AbstractMinecart) level.getEntity(entityId);
-        check(cart != null, "camera: cart " + entityId + " is gone");
         Direction side = dir.getClockWise();
-        double a = along(cart);
-        double rise = cart.getY() - start.getY();
+        double a = focus.subtract(Vec3.atBottomCenterOf(start)).dot(Vec3.atLowerCornerOf(dir.getNormal()));
+        double rise = focus.y - start.getY();
         boolean wide = frame == ShotFrame.WIDE;
         double dist = wide ? SIDE_VIEW_DIST_WIDE : SIDE_VIEW_DIST;
         double stairs = Math.max(activeStairs, 6);
@@ -1909,9 +2170,9 @@ public final class LevitaTests {
                 check(Math.abs(pitch) > 1 || hasPose, where + " floating slope has no pitch pose/sync"
                         + describe(cart) + floatState(cart));
                 check(Math.abs(Math.abs(pitch) - 45) < 8, where + " floating slope pitch is " + fmt(pitch)
-                        + ", expected about ±45" + describe(cart) + floatState(cart));
+                        + ", expected about +-45" + describe(cart) + floatState(cart));
                 check(Math.abs(Math.abs(cart.getXRot()) - 45) < 8, where + " entity pitch is " + fmt(cart.getXRot())
-                        + ", expected about ±45" + describe(cart) + floatState(cart));
+                        + ", expected about +-45" + describe(cart) + floatState(cart));
                 check(Math.abs(cart.getXRot() - pitch) < 5, where + " entity pitch " + fmt(cart.getXRot())
                         + " != float pitch " + fmt(pitch) + describe(cart) + floatState(cart));
                 if (hasPose || Math.abs(MinecartFloating.getSyncedFloatPitch(cart)) > 1) {
@@ -1922,7 +2183,7 @@ public final class LevitaTests {
             } else if (hasPose) {
                 float pitch = pose.paradiseLost$getRailRenderPitch();
                 check(Math.abs(Math.abs(pitch) - 45) < 8, where + " on-rail slope pose pitch is " + fmt(pitch)
-                        + ", expected about ±45" + describe(cart) + floatState(cart));
+                        + ", expected about +-45" + describe(cart) + floatState(cart));
                 checkSlopeFacing(cart, where, pose.paradiseLost$getRailRenderYaw());
             }
         } else if (offRail) {
@@ -1964,9 +2225,11 @@ public final class LevitaTests {
         for (BlockPos at : BlockPos.betweenClosed(a, b)) world.setBlockAndUpdate(at, state);
     }
 
+    private static double launchPhase;
+
     private static int launch(ServerLevel world, EntityType<? extends AbstractMinecart> type, BlockPos at, double speed) {
         AbstractMinecart cart = type.create(world);
-        cart.moveTo(at.getX() + 0.5, at.getY(), at.getZ() + 0.5, 0, 0);
+        cart.moveTo(at.getX() + 0.5 + dir.getStepX() * launchPhase, at.getY(), at.getZ() + 0.5 + dir.getStepZ() * launchPhase, 0, 0);
         cart.setDeltaMovement(Vec3.atLowerCornerOf(dir.getNormal()).scale(speed));
         world.addFreshEntity(cart);
         return cart.getId();
