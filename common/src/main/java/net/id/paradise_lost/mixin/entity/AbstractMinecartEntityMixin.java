@@ -43,7 +43,13 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     private int paradiseLost$exitGrace;
 
     @Unique
+    private int paradiseLost$noDescentPathTicks;
+
+    @Unique
     private boolean paradiseLost$wasOffRail;
+
+    @Unique
+    private int paradiseLost$openAirClimbGrace;
 
     public AbstractMinecartEntityMixin(EntityType<?> entityType, Level world) {
         super(entityType, world);
@@ -81,14 +87,24 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         this.paradiseLost$railRenderPitch = 0.0F;
     }
 
+    @Override
+    public void paradiseLost$setOpenAirClimbGrace(int ticks) {
+        this.paradiseLost$openAirClimbGrace = Math.max(0, ticks);
+    }
+
+    @Override
+    public int paradiseLost$getOpenAirClimbGrace() {
+        return this.paradiseLost$openAirClimbGrace;
+    }
+
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void paradiseLost$loadLegacyFloating(CompoundTag tag, CallbackInfo ci) {
         MinecartFloating.loadLegacyNbt((AbstractMinecart) (Object) this, tag);
     }
 
     /**
-     * Off-rail float only: force the vanilla off-track render path (entity yaw/pitch). Do <em>not</em> rewrite seated
-     * {@code getPos}/{@code getPosOffs} — that broke curve posing (offs collapsed → renderer fell back to stuck entity
+     * Off-rail float only: force the vanilla off-track render path (entity yaw/pitch). Don't rewrite seated
+     * {@code getPos}/{@code getPosOffs}, that broke curve posing (offs collapsed to renderer fell back to stuck entity
      * yaw on corners).
      */
     @Inject(method = "getPos(DDD)Lnet/minecraft/world/phys/Vec3;", at = @At("HEAD"), cancellable = true)
@@ -116,26 +132,42 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 && this.paradiseLost$wasOffRail
                 && MinecartFloating.isFloating(cart)
                 && !MinecartFloating.isMidairAboveRail(cart, pos, true)) {
-            // Soft nudge+float kept wasOff and climbed above the next ascending segment.
-            // Hard-seat and let vanilla moveAlongTrack ride the rest of the path.
+            // Still climbing past a floor/corner, don't seat yet or the tilt drops out.
+            if (MinecartFloating.shouldDeferSlopeToCornerHardSeat(cart, pos, state)) {
+                MinecartFloating.keepSlopeFloatThroughCorner(cart, pos, state);
+                MinecartFloating.debugEvent(cart, "deferSeat",
+                        "keep slope over corner/flat at " + pos
+                                + " shape=" + MinecartFloating.getRailShapeName(cart));
+                this.paradiseLost$moveFloating(cart, false);
+                ci.cancel();
+                return;
+            }
+            // Close enough: snap onto the rail and hand off to vanilla.
             this.paradiseLost$exitGrace = 0;
-            this.paradiseLost$wasOffRail = false;
-            MinecartFloating.nudgeVelocityToRail(cart, state);
             MinecartFloating.prepareReconnect(cart);
+            if (MinecartFloating.isOffRail(cart)) {
+                // prepareReconnect decided this isn't a real landing yet.
+                this.paradiseLost$wasOffRail = true;
+                MinecartFloating.debugEvent(cart, "deferSeat",
+                        "reconnect kept float at " + pos
+                                + " shape=" + MinecartFloating.getRailShapeName(cart));
+                this.paradiseLost$moveFloating(cart, false);
+                ci.cancel();
+                return;
+            }
+            this.paradiseLost$wasOffRail = false;
             MinecartFloating.debugEvent(cart, "reconnect",
                     "hard seat at " + pos + " shape=" + MinecartFloating.getRailShapeName(cart));
             return;
         }
         if (MinecartFloating.shouldCancelTrackWhileFloating(cart, pos, state, leftRails)) {
-            // Flat far above: keep airborne float (no flatten/latch). Near seat: adapt like perpendicular.
-            // Also covers client offRail=false while still high — vanilla moveAlongTrack would teleport.
+            // Too high to seat, keep floating. Also catches client desync where offRail is already false.
             if (MinecartFloating.isFlatRailConnectTooEarly(cart, pos, state)) {
                 this.paradiseLost$moveFloating(cart, false);
                 ci.cancel();
                 return;
             }
             if (!this.level().isClientSide()) {
-                // Ascending: refresh incline/Y for carousel climb (p.1). Flat: landing pose (p.2).
                 MinecartFloating.adaptFloatWhileGhosting(cart, state);
             }
             MinecartFloating.debugEvent(cart, "skipTrack",
@@ -155,45 +187,38 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         if (!this.level().isClientSide()) {
             boolean alreadyOff = this.paradiseLost$wasOffRail;
             this.paradiseLost$beginFloatTakeoff(cart, "comeOff");
-            // Deferred stair-gap takeoff: still bridge with float motion, but wasOff stays false
-            // so the next block can seat via moveAlongTrack.
             this.paradiseLost$moveFloating(cart, true);
             if (!alreadyOff && !this.paradiseLost$wasOffRail) {
-                // beginFloatTakeoff deferred — clear any accidental offRail from move path.
+                // Takeoff was held; don't leave a stale offRail flag.
                 MinecartFloating.setOffRail(cart, false);
             }
             ci.cancel();
         } else if (MinecartFloating.isOffRail(cart) || MinecartFloating.isFloating(cart)) {
-            // offRail sync can lag; still cancel vanilla comeOffTrack so network lerp
-            // does not rotate toward landing while we are mid-air.
+            // Client: kill vanilla come-off even if offRail hasn't synced yet.
             this.paradiseLost$moveFloating(cart, false);
             ci.cancel();
         }
     }
 
     /**
-     * First airborne exit: capture takeoff pose + grace. Shared by comeOffTrack and the tick air branch — leaving
-     * during moveAlongTrack skips comeOffTrack until the next tick, so the air branch must still run takeoff or the
-     * cart freezes a flat pose.
+     * Start a float gap: freeze pose, set grace, mark off-rail. Called from comeOffTrack and the
+     * air tick branch (leaving during moveAlongTrack can skip comeOff for a tick).
      */
     @Unique
     private void paradiseLost$beginFloatTakeoff(AbstractMinecart cart, String reason) {
         if (this.paradiseLost$wasOffRail) {
             return;
         }
-        // Stair/short gaps: comeOffTrack and air-branch both hit this — do not mark off-rail or
-        // the cart floats past the rest of the path.
-        if (MinecartFloating.hasContinuingRailAhead(cart)) {
-            MinecartFloating.debugEvent(cart, reason,
-                    "defer takeoff continuing rail ahead shape="
-                            + MinecartFloating.getRailShapeName(cart)
-                            + " motion=" + this.getDeltaMovement());
+        // A cart that has basically stopped isn't taking off, so don't lock in a flat takeoff.
+        Vec3 exitMotion = this.getDeltaMovement();
+        if (exitMotion.horizontalDistanceSqr() <= 0.0025D) {
+            MinecartFloating.debugEvent(cart, reason, "hold takeoff near-zero motion");
             return;
         }
-        // Read incline before prepareTakeoff (flat takeoff clears it).
+        // Capture incline before prepareTakeoff; flat takeoff clears it.
         int inclineAtExit = MinecartFloating.getIncline(cart);
         MinecartFloating.prepareTakeoff(cart);
-        // Descent only: short pier-clear. Climb uses open-air slope noclip. Flat stays brief.
+        // Slightly longer grace when leaving a descent lip.
         int grace = inclineAtExit < 0
                 ? MinecartFloating.slopeDescentExitGraceTicks()
                 : EXIT_GRACE_TICKS;
@@ -209,6 +234,12 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
 
     @Unique
     private void paradiseLost$moveFloating(AbstractMinecart cart, boolean tickFloatTime) {
+        if (this.paradiseLost$openAirClimbGrace > 0) {
+            this.paradiseLost$openAirClimbGrace--;
+        }
+        // Stair collision can zero xz; nudge enough to keep the diagonal.
+        MinecartFloating.assistOpenAirSlopeTravel(cart);
+        MinecartFloating.maintainClimbTowardFlatLanding(cart);
         double d = this.getMaxSpeed();
         Vec3 vec3d = this.getDeltaMovement();
         double x = Mth.clamp(vec3d.x, -d, d);
@@ -216,10 +247,31 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         double y = 0.0D;
         int incline = MinecartFloating.getIncline(cart);
         if (incline != 0) {
-            y = incline * Math.sqrt(x * x + z * z);
-            // Soft-seat onto flat without clearing incline (keeps slope pitch until settle).
-            y = MinecartFloating.softenSlopeDescentOntoFlat(cart, y);
+            boolean openAir = MinecartFloating.findRailPos(cart) == null;
+            // Descending into empty air, hold height a bit, then level if nothing shows up.
+            if (incline < 0 && openAir && !MinecartFloating.shouldKeepOpenAirDescent(cart)) {
+                y = 0.0D;
+                if (++this.paradiseLost$noDescentPathTicks >= 4) {
+                    MinecartFloating.levelOpenAirFlight(cart);
+                    incline = 0;
+                    this.paradiseLost$noDescentPathTicks = 0;
+                }
+            } else if (incline > 0 && openAir && !MinecartFloating.shouldKeepOpenAirClimb(cart)) {
+                // Past the last slope/solid stair, stop climbing into the sky.
+                y = 0.0D;
+                if (++this.paradiseLost$noDescentPathTicks >= 4) {
+                    MinecartFloating.levelOpenAirFlight(cart);
+                    incline = 0;
+                    this.paradiseLost$noDescentPathTicks = 0;
+                }
+            } else {
+                this.paradiseLost$noDescentPathTicks = 0;
+                y = incline * Math.sqrt(x * x + z * z);
+                y = MinecartFloating.softenSlopeDescentOntoFlat(cart, y);
+                y = MinecartFloating.softenSlopeAscentOntoFlat(cart, y);
+            }
         } else {
+            this.paradiseLost$noDescentPathTicks = 0;
             BlockPos railPos = MinecartFloating.findRailPos(cart);
             if (railPos != null) {
                 y = MinecartFloating.descentSpeedOntoFlatRail(cart, railPos);
@@ -227,8 +279,8 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         }
         this.setDeltaMovement(x, y, z);
 
-        // Slope noclip only over ascending rails / open air — not over flat piers (phases through).
-        boolean noclip = MinecartFloating.shouldUseSlopeNoclip(cart) || this.paradiseLost$exitGrace > 0;
+        boolean noclip = MinecartFloating.shouldUseSlopeNoclip(cart)
+                || (this.paradiseLost$exitGrace > 0 && MinecartFloating.shouldUseExitGraceNoclip(cart));
         if (this.paradiseLost$exitGrace > 0) {
             this.paradiseLost$exitGrace--;
         }
@@ -244,6 +296,14 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             this.move(MoverType.SELF, this.getDeltaMovement());
         }
 
+        // Hit solid with nothing to land on, level out and coast.
+        if (!this.level().isClientSide()
+                && MinecartFloating.shouldLevelAgainstSolidBarrier(cart, this.onGround(), this.verticalCollision)) {
+            MinecartFloating.levelOpenAirFlight(cart);
+            MinecartFloating.debugEvent(cart, "solidBarrier",
+                    "onGround=" + this.onGround() + " vertCol=" + this.verticalCollision);
+        }
+
         if (tickFloatTime) {
             MinecartFloating.tick(cart);
         }
@@ -254,14 +314,14 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         AbstractMinecart cart = (AbstractMinecart) (Object) this;
         if (!MinecartFloating.isFloating(cart)) {
             this.paradiseLost$exitGrace = 0;
+            this.paradiseLost$noDescentPathTicks = 0;
             this.paradiseLost$wasOffRail = false;
             MinecartFloating.setOffRail(cart, false);
             this.paradiseLost$clearRailRenderPose();
             return;
         }
 
-        // Do not mark off-rail from a brief !onRail at tick end — that froze look-ahead curve
-        // poses (early corner rotate) and triggered reconnect nudges. comeOffTrack owns takeoff.
+        // comeOffTrack owns takeoff, don't flip offRail from a one-tick !onRail blip.
 
         boolean offRailNow = MinecartFloating.isOffRail(cart);
 
@@ -270,41 +330,55 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                     ? offRailNow
                     : (this.paradiseLost$wasOffRail || offRailNow);
             BlockPos railPos = MinecartFloating.findRailPos(cart);
+            if (!this.level().isClientSide() && railPos != null) {
+                MinecartFloating.assistFloatingSlopeTravel(cart, this.level().getBlockState(railPos));
+            }
             boolean midair = railPos != null && MinecartFloating.isMidairAboveRail(cart, railPos, leftRails);
-            // Client often receives offRail=false while still ~1–2 blocks above a flat pier.
+            // Client can clear offRail while still a block or two above the pier.
             boolean unsettledFlat = MinecartFloating.isUnsettledAboveFlatRail(cart);
             boolean keepFloat = midair || unsettledFlat;
 
-            // Synced off-rail: keep float pose until settled on the rail.
             if (offRailNow) {
                 boolean settled = railPos != null && MinecartFloating.isSettledOnRail(cart, railPos);
                 if (settled && !this.level().isClientSide()) {
-                    this.paradiseLost$exitGrace = 0;
-                    this.paradiseLost$wasOffRail = false;
-                    MinecartFloating.prepareReconnect(cart);
-                    MinecartFloating.debugTick(cart, false, false, "reconnect");
+                    BlockState seatState = this.level().getBlockState(railPos);
+                    if (MinecartFloating.shouldDeferSlopeToCornerHardSeat(cart, railPos, seatState)) {
+                        MinecartFloating.keepSlopeFloatThroughCorner(cart, railPos, seatState);
+                        MinecartFloating.applyFloatingRotation(cart);
+                        MinecartFloating.debugTick(cart, leftRails, midair, "deferSeatTick");
+                    } else {
+                        this.paradiseLost$exitGrace = 0;
+                        MinecartFloating.prepareReconnect(cart);
+                        if (MinecartFloating.isOffRail(cart)) {
+                            this.paradiseLost$wasOffRail = true;
+                            MinecartFloating.applyFloatingRotation(cart);
+                            MinecartFloating.debugTick(cart, leftRails, midair, "deferSeatTick");
+                        } else {
+                            this.paradiseLost$wasOffRail = false;
+                            MinecartFloating.debugTick(cart, false, false, "reconnect");
+                        }
+                    }
                 } else {
                     if (!this.level().isClientSide()) {
                         if (railPos != null) {
-                            // Pose adopt (~0.50) is earlier than soft-seat (~0.28); do not gate on connect.
                             MinecartFloating.adaptFloatToFlatRailBelow(cart, this.level().getBlockState(railPos));
                         }
                         MinecartFloating.applyFloatingRotation(cart);
                     } else {
-                        MinecartFloating.applySyncedFloatingRotation(cart);
+                        paradiseLost$applyClientFloatPose(cart);
                     }
                     MinecartFloating.debugTick(cart, leftRails, midair,
                             settled ? "ghostRailLerp" : (midair ? "ghostRail" : "ghostRailLerp"));
                 }
             } else if (keepFloat) {
-                // offRail cleared (or never set locally) but still high — do not snap to onRail pose.
+                // Still high even though offRail is already false, keep the float pose.
                 if (!this.level().isClientSide()) {
                     if (railPos != null) {
                         MinecartFloating.adaptFloatToFlatRailBelow(cart, this.level().getBlockState(railPos));
                     }
                     MinecartFloating.applyFloatingRotation(cart);
                 } else {
-                    MinecartFloating.applySyncedFloatingRotation(cart);
+                    paradiseLost$applyClientFloatPose(cart);
                 }
                 MinecartFloating.debugTick(cart, leftRails, true,
                         unsettledFlat ? "ghostRailDesync" : "ghostRailPending");
@@ -314,18 +388,19 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 if (!this.level().isClientSide()) {
                     MinecartFloating.captureRailState(cart);
                     if (MinecartFloating.getIncline(cart) != 0) {
-                        // Slope: settle-gated offs only. Force-ensure every tick can lock a bad
-                        // early pitch and skip later correct samples.
                         MinecartFloating.captureRailRenderPose(cart);
+                        // Offs can spit out garbage near mixed geometry, clamp back to 45 degrees.
+                        MinecartFloating.maintainSlopeFloatPose(cart);
                         if (MinecartFloating.shouldSkipRailRenderSnap(cart)) {
                             MinecartFloating.maintainSlopeEntityPitch(cart);
                         } else {
                             MinecartFloating.publishSlopePoseToSync(cart);
                         }
                     } else {
-                        // Straight flat only: refresh float yaw attachments for takeoff/reconnect.
                         MinecartFloating.syncFlatFloatYawFromMotion(cart);
                     }
+                } else {
+                    paradiseLost$applyClientFloatPose(cart);
                 }
                 MinecartFloating.debugTick(cart, false, false, "onRail");
             }
@@ -335,25 +410,32 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             return;
         }
 
-        // True airborne (no rail under cart). comeOffTrack usually set offRail already; keep pose frozen.
-        // Client must keep applying float pose even after offRail=false sync — otherwise network
-        // lerps toward landing yaw, then ghostRailDesync snaps back (perpendicular double-rotate).
+        // Open air. Client still applies float pose when offRail sync is late.
         if (!this.level().isClientSide()) {
             boolean firstExit = !this.paradiseLost$wasOffRail;
             this.paradiseLost$beginFloatTakeoff(cart, "airTakeoff");
             if (firstExit && this.paradiseLost$wasOffRail) {
-                // comeOff path applies incline Y via moveFloating; mirror on air-branch takeoff.
                 Vec3 motion = this.getDeltaMovement();
                 int incline = MinecartFloating.getIncline(cart);
-                if (incline != 0) {
+                if (incline > 0
+                        || (incline < 0 && (MinecartFloating.findRailPos(cart) != null
+                        || MinecartFloating.shouldKeepOpenAirDescent(cart)))) {
                     this.setDeltaMovement(motion.x, incline * motion.horizontalDistance(), motion.z);
+                } else if (incline < 0) {
+                    // No landing in sight, hold height, keep incline for the next look-ahead tick.
+                    this.setDeltaMovement(motion.x, 0.0D, motion.z);
                 }
             }
             if (this.paradiseLost$wasOffRail) {
                 MinecartFloating.applyFloatingRotation(cart);
+                if (firstExit) {
+                    // comeOffTrack was skipped this tick (left during moveAlongTrack).
+                    // Move now with slope noclip so we don't stick on the next stair pier.
+                    this.paradiseLost$moveFloating(cart, true);
+                }
             }
         } else if (MinecartFloating.isOffRail(cart) || MinecartFloating.isFloating(cart)) {
-            MinecartFloating.applySyncedFloatingRotation(cart);
+            paradiseLost$applyClientFloatPose(cart);
         }
         MinecartFloating.debugTick(cart, this.paradiseLost$wasOffRail, false, "air");
         if (this.level().isClientSide()) {
@@ -365,6 +447,16 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 this.level().addParticle(ParadiseLostParticleTypes.LEVITA_BLOOP, rightParticlePos.x(), this.getY(), rightParticlePos.z(), 0, 0, 0);
                 this.level().addParticle(ParadiseLostParticleTypes.LEVITA_BLOOP, leftParticlePos.x(), this.getY(), leftParticlePos.z(), 0, 0, 0);
             }
+        }
+    }
+
+    /** 45 degrees only if the rail under this client cart really is a slope, since the incline sync runs ahead. */
+    @Unique
+    private void paradiseLost$applyClientFloatPose(AbstractMinecart cart) {
+        if (MinecartFloating.clientShouldHoldSlopePose(cart)) {
+            MinecartFloating.maintainSlopeFloatPose(cart);
+        } else {
+            MinecartFloating.applySyncedFloatingRotation(cart);
         }
     }
 }

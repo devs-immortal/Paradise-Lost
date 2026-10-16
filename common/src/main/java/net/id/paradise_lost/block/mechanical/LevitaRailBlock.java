@@ -41,10 +41,15 @@ public class LevitaRailBlock extends PoweredRailBlock {
             for (AbstractMinecart cart : list) {
                 MinecartFloating.updateInclineFromRail(cart, state.getValue(SHAPE), cart.getDeltaMovement());
                 if (state.getValue(POWERED)) {
+                    // TRIGGERED is a visual/lock that prevents per-tick re-charge of a cart already
+                    // floating on this rail. A follow-up cart with no float time still gets a charge.
                     if (!state.getValue(TRIGGERED)) {
                         MinecartFloating.addFloating(cart);
                         world.setBlock(pos, state.setValue(TRIGGERED, true), 3);
                         world.scheduleTick(pos, this, 80);
+                        state = state.setValue(TRIGGERED, true);
+                    } else if (MinecartFloating.getFloatTime(cart) <= 0) {
+                        MinecartFloating.addFloating(cart);
                     }
                 } else {
                     MinecartFloating.stopFloating(cart);

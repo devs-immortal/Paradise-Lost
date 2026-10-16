@@ -20,8 +20,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CompletionException;
 
 import static net.id.paradise_lost.gametest.TestHelpers.client;
@@ -46,6 +48,8 @@ public class ClientTestRunner implements ClientModInitializer {
     );
 
     public static String title;
+    public static int currentTestNumber;
+    public static int currentTestCount;
 
     private Phase phase = Phase.CREATE_WORLD;
     private final Deque<Test> tests = new ArrayDeque<>();
@@ -84,11 +88,25 @@ public class ClientTestRunner implements ClientModInitializer {
     private void loadTests() {
         TEST_CLASSES.forEach(type -> tests.addAll(TestLoader.load(type)));
         String only = System.getenv("RUN_ONLY");
-        if (only != null) tests.removeIf(test -> !test.group().equalsIgnoreCase(only) && !test.fullName().equalsIgnoreCase(only));
+        if (only != null) {
+            String[] filters = Arrays.stream(only.split(";"))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .toArray(String[]::new);
+            tests.removeIf(test -> Arrays.stream(filters).noneMatch(filter ->
+                    test.group().equalsIgnoreCase(filter)
+                            || test.fullName().equalsIgnoreCase(filter)
+                            || test.name().toLowerCase(Locale.ROOT).contains(filter.toLowerCase(Locale.ROOT))));
+        }
         testCount = tests.size();
     }
 
     private void runTests() {
+        Minecraft client = client();
+        client.options.pauseOnLostFocus = false;
+        if (client.screen instanceof net.minecraft.client.gui.screens.PauseScreen) {
+            client.setScreen(null);
+        }
         if (wait > 0) {
             wait--;
         } else if (running == null) {
@@ -106,7 +124,9 @@ public class ClientTestRunner implements ClientModInitializer {
             return;
         }
         running = new Running(test, Recorder.logErrors.size());
-        setTitle("[" + (testIndex + 1) + "/" + testCount + "] " + test.fullName());
+        currentTestNumber = testIndex + 1;
+        currentTestCount = testCount;
+        setTitle("[" + currentTestNumber + "/" + testCount + "] " + test.fullName());
         try {
             TestWorld.resetPlayer(testIndex++);
         } catch (Throwable t) {
@@ -128,6 +148,9 @@ public class ClientTestRunner implements ClientModInitializer {
             if (!done) return;
             if (++running.step < running.test.steps().size()) {
                 wait = running.currentStep().delay();
+                if (wait == 0) {
+                    runStep();
+                }
                 return;
             }
             checkNoNewLogErrors();
@@ -183,7 +206,7 @@ public class ClientTestRunner implements ClientModInitializer {
             LOG.error("{} tests failed:", failures.size());
             failures.forEach(f -> LOG.error("  {}", f));
         }
-        System.exit(failures.isEmpty() ? 0 : 1);
+        Minecraft.getInstance().execute(() -> Minecraft.getInstance().stop());
     }
 
     private enum Phase {
