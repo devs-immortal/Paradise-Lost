@@ -113,14 +113,12 @@ tasks.withType<ProcessResources>().configureEach {
         exclude("**/neoforge.mods.toml")
     }
 
-    // gradle.properties keeps a single comma-separated author list; Fabric needs a JSON
-    // array while NeoForge/JAR manifests want the plain string.
-    val modAuthorsJson = modAuthors
+    val modAuthorsList = modAuthors
         .split(',')
         .map { it.trim() }
         .filter { it.isNotEmpty() }
-        .joinToString(prefix = "[", postfix = "]", separator = ", ") {
-            "\"${it.replace("\\", "\\\\").replace("\"", "\\\"")}\""
+        .joinToString(separator = "\", \"") {
+            it.replace("\\", "\\\\").replace("\"", "\\\"")
         }
 
     val expandProps = mapOf(
@@ -129,7 +127,7 @@ tasks.withType<ProcessResources>().configureEach {
         "mod_display_name"               to modDisplayName,
         "mod_license"                    to modLicense,
         "mod_authors"                    to modAuthors,
-        "mod_authors_json"               to modAuthorsJson,
+        "mod_authors_list"               to modAuthorsList,
         "mod_description"                to modDescription,
         "mod_homepage"                   to modHomepage,
         "mod_issues_tracker"             to modIssuesTracker,

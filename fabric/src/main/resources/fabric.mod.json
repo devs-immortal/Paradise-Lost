@@ -4,7 +4,7 @@
 	"version": "${version}",
 	"name": "${mod_display_name}",
 	"description": "${mod_description}",
-	"authors": ${mod_authors_json},
+	"authors": ["${mod_authors_list}"],
 	"contact": {
 		"homepage": "${mod_homepage}",
 		"issues": "${mod_issues_tracker}",
