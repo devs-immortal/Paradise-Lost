@@ -8,6 +8,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 
 public class ParadiseLostStructureTags {
 
+    public static final TagKey<Biome> IS_PARADISE_LOST = biome("is_paradise_lost");
     public static final TagKey<Biome> AUREL_TOWER_HAS_STRUCTURE = biome("has_structure/aurel_tower");
     public static final TagKey<Biome> WELL_HAS_STRUCTURE = biome("has_structure/well");
     public static final TagKey<Biome> VAULT_HAS_STRUCTURE = biome("has_structure/vault");

@@ -186,6 +186,10 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
             }
         }
 
+        tag(BlockTags.DAMPENS_VIBRATIONS).add(
+                FLAXWEAVE_CUSHION.get(), FLAXWEAVE_CUSHION_SLAB.get()
+        );
+
         tag(BlockTags.SMALL_FLOWERS).add(
                 ANCIENT_FLOWER.get(), ATARAXIA.get(), CLOUDSBLUFF.get(), DRIGEAN.get(), LUMINAR.get()
         );
