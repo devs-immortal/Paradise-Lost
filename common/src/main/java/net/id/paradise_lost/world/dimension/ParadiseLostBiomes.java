@@ -24,8 +24,6 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import java.util.List;
-
 import static net.id.paradise_lost.ModConstants.id;
 
 public final class ParadiseLostBiomes {
