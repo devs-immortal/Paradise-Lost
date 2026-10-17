@@ -4,7 +4,6 @@ import net.id.paradise_lost.particle.ParadiseLostParticleTypes;
 import net.id.paradise_lost.util.ParadiseLostEvents;
 import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
-import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
 import net.id.paradise_lost.item.armor.XpCircletItem;
@@ -59,7 +58,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
     @Shadow
     public abstract void awardStat(ResourceLocation stat, int amount);
 
-    @Shadow public abstract Abilities getAbilities();
+    @Shadow
+    public abstract Abilities getAbilities();
 
     @Shadow
     public float experienceProgress;
@@ -155,14 +155,13 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
 
     @Override
     public boolean isFloatyAnchored() {
-        Boolean anchored = Services.ATTACHMENTS.getAttachedValue(this, CommonDataAttachments.FLOATY_ANCHORED);
-        return Boolean.TRUE.equals(anchored);
+        return CommonDataAttachments.ANCHORING.isAnchored((Player) (Object) this);
     }
 
     @Override
     public void setFloatyAnchored(boolean anchored) {
         Player player = (Player) (Object) this;
-        Services.ATTACHMENTS.setAttachedValue(player, CommonDataAttachments.FLOATY_ANCHORED, anchored);
+        CommonDataAttachments.ANCHORING.setAnchored(player, anchored);
         if (!anchored) {
             this.paradiseLost$floatyDamageTicker = 0;
             paradiseLost$clearFloatyHover(player);

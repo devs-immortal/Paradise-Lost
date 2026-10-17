@@ -1,6 +1,6 @@
 package net.id.paradise_lost.mixin.client.sound;
 
-import net.id.paradise_lost.attachments.MinecartFloating;
+import net.id.paradise_lost.util.MinecartFloatingHelper;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.RidingMinecartSoundInstance;
 import net.minecraft.sounds.SoundEvent;
@@ -28,7 +28,7 @@ public abstract class MinecartInsideSoundInstanceMixin extends AbstractTickableS
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo ci) {
         if (!this.minecart.isRemoved()) {
-            if (MinecartFloating.isFloating(this.minecart) && !MinecartFloating.isCartOnRail(this.minecart)) {
+            if (MinecartFloatingHelper.isFloating(this.minecart) && !MinecartFloatingHelper.isCartOnRail(this.minecart)) {
                 this.volume = 0.0F;
             }
         }

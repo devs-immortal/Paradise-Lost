@@ -1,9 +1,10 @@
 package net.id.paradise_lost.mixin.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.id.paradise_lost.attachments.MinecartFloating;
+import net.id.paradise_lost.util.MinecartFloatingHelper;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.MinecartRenderer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,6 +19,9 @@ public class MinecartRendererMixin {
     @Unique
     private static final ThreadLocal<AbstractMinecart> PARADISE_LOST$RENDER_CART = new ThreadLocal<>();
 
+    @Unique
+    private static final ThreadLocal<Float> PARADISE_LOST$RENDER_PARTIAL = new ThreadLocal<>();
+
     @Inject(method = "render", at = @At("HEAD"))
     private void paradiseLost$captureRenderCart(
             AbstractMinecart entity,
@@ -28,11 +32,13 @@ public class MinecartRendererMixin {
             int packedLight,
             CallbackInfo ci) {
         PARADISE_LOST$RENDER_CART.set(entity);
+        PARADISE_LOST$RENDER_PARTIAL.set(partialTicks);
     }
 
     @Inject(method = "render", at = @At("RETURN"))
     private void paradiseLost$clearRenderCart(CallbackInfo ci) {
         PARADISE_LOST$RENDER_CART.remove();
+        PARADISE_LOST$RENDER_PARTIAL.remove();
     }
 
     /**
@@ -49,10 +55,14 @@ public class MinecartRendererMixin {
     )
     private float paradiseLost$forceFloatYawDegrees(float degrees) {
         AbstractMinecart entity = PARADISE_LOST$RENDER_CART.get();
-        if (entity != null && MinecartFloating.shouldUseFloatRenderPose(entity)) {
-            return 180.0F - MinecartFloating.getFloatRenderYaw(entity);
+        if (entity == null) {
+            return degrees;
         }
-        return degrees;
+        float wanted = MinecartFloatingHelper.shouldUseFloatRenderPose(entity)
+                ? 180.0F - MinecartFloatingHelper.getFloatRenderYaw(entity)
+                : degrees;
+        Float partial = PARADISE_LOST$RENDER_PARTIAL.get();
+        return MinecartFloatingHelper.smoothRenderYawDegrees(entity, wanted, partial == null ? 0.0F : partial);
     }
 
     /**
@@ -69,9 +79,22 @@ public class MinecartRendererMixin {
     )
     private float paradiseLost$forceFloatPitchDegrees(float degrees) {
         AbstractMinecart entity = PARADISE_LOST$RENDER_CART.get();
-        if (entity != null && MinecartFloating.shouldUseFloatRenderPose(entity)) {
-            return -MinecartFloating.getFloatRenderPitch(entity);
+        if (entity == null) {
+            return degrees;
         }
-        return degrees;
+        float wanted = degrees;
+        if (MinecartFloatingHelper.shouldUseFloatRenderPose(entity)) {
+            wanted = -MinecartFloatingHelper.getFloatRenderPitch(entity);
+            Float partial = PARADISE_LOST$RENDER_PARTIAL.get();
+            float t = partial == null ? 1.0F : partial;
+            Float scale = MinecartFloatingHelper.railSlopeScale(entity,
+                    Mth.lerp(t, entity.xOld, entity.getX()),
+                    Mth.lerp(t, entity.yOld, entity.getY()),
+                    Mth.lerp(t, entity.zOld, entity.getZ()));
+            if (scale != null) {
+                wanted *= scale;
+            }
+        }
+        return wanted * MinecartFloatingHelper.smoothRenderPitchSign(entity);
     }
 }
