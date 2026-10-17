@@ -38,6 +38,19 @@ public final class ParadiseLostBiomes {
     public static final ResourceKey<Biome> TRADEWINDS_KEY = of("tradewinds");
     public static final ResourceKey<Biome> WISTERIA_WOODS_KEY = of("wisteria_woods");
 
+    public static ResourceKey<Biome>[] allBiomes() {
+        return new ResourceKey[] {AUTUMNAL_TUNDRA_KEY,
+                CALCITE_CRAGLANDS_KEY,
+                CONTINENTAL_PLATEAU_KEY,
+                HIGHLANDS_PLAINS_KEY,
+                HIGHLANDS_FOREST_KEY,
+                HIGHLANDS_GRAND_GLADE_KEY,
+                HIGHLANDS_SHIELD_KEY,
+                HIGHLANDS_THICKET_KEY,
+                TRADEWINDS_KEY,
+                WISTERIA_WOODS_KEY};
+    }
+
     public static void init() {
     }
 
