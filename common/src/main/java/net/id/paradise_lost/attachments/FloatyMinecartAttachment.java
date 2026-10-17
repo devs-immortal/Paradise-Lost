@@ -21,8 +21,7 @@ public class FloatyMinecartAttachment extends CommonDataAttachment<FloatyMinecar
     }
 
     public State get(Entity cart) {
-        State state = Services.ATTACHMENTS.getAttachedValue(cart, this);
-        return state == null ? State.DEFAULT : state;
+        return Services.ATTACHMENTS.getOrCreateAttachedValue(cart, this);
     }
 
     public void set(Entity cart, State state) {

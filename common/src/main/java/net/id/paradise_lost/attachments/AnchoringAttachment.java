@@ -21,8 +21,7 @@ public class AnchoringAttachment extends CommonDataAttachment<AnchoringAttachmen
     }
 
     public State get(Entity player) {
-        State state = Services.ATTACHMENTS.getAttachedValue(player, this);
-        return state == null ? State.DEFAULT : state;
+        return Services.ATTACHMENTS.getOrCreateAttachedValue(player, this);
     }
 
     public void set(Entity player, State state) {
