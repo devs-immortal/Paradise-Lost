@@ -30,6 +30,16 @@ jobs:
             exit 1
           fi
 
+      - name: Run compat tests
+        run: xvfb-run -a -s "-screen 0 854x480x24" ./gradlew :fabric:runClientCompatTest
+
+      - name: Check all compat tests ran
+        run: |
+          if ! grep -q "(ClientTest) All tests passed" fabric/runs/compattest/logs/latest.log; then
+            echo "::error::Compat test run did not finish. See the uploaded logs."
+            exit 1
+          fi
+
       - name: Upload test output
         if: always()
         uses: actions/upload-artifact@v6
@@ -39,4 +49,7 @@ jobs:
             fabric/runs/clienttest/logs/latest.log
             fabric/runs/clienttest/screenshots/
             fabric/runs/clienttest/crash-reports/
+            fabric/runs/compattest/logs/latest.log
+            fabric/runs/compattest/screenshots/
+            fabric/runs/compattest/crash-reports/
           if-no-files-found: ignore

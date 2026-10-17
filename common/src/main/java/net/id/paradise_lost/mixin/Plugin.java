@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 public final class Plugin implements IMixinConfigPlugin {
+    private static final String WILDER_WILD_SNOW_BLANKET = "net/frozenblock/wilderwild/worldgen/impl/feature/SnowBlanketFeature.class";
+
     @Override
     public void onLoad(String mixinPackage) {
     }
@@ -24,25 +26,17 @@ public final class Plugin implements IMixinConfigPlugin {
 
     @Override
     public List<String> getMixins() {
-        if (classPresent("net.frozenblock.wilderwild.worldgen.impl.feature.SnowBlanketFeature")
-                || classPresent("net.frozenblock.wilderwild.levelgen.feature.SnowBlanketFeature")) {
-            return List.of("compat.wilderwild.SnowBlanketFeatureMixin");
-        }
-        return List.of();
+        return isPresent(WILDER_WILD_SNOW_BLANKET) ? List.of("compat.wilderwild.SnowBlanketFeatureMixin") : List.of();
     }
 
-    private static boolean classPresent(String name) {
-        String path = name.replace('.', '/') + ".class";
-        try {
-            ClassLoader cl = Plugin.class.getClassLoader();
-            if (cl != null && cl.getResource(path) != null) {
+    private static boolean isPresent(String classPath) {
+        ClassLoader[] loaders = {Plugin.class.getClassLoader(), Thread.currentThread().getContextClassLoader()};
+        for (ClassLoader loader : loaders) {
+            if (loader != null && loader.getResource(classPath) != null) {
                 return true;
             }
-            ClassLoader ctx = Thread.currentThread().getContextClassLoader();
-            return ctx != null && ctx.getResource(path) != null;
-        } catch (Throwable ignored) {
-            return false;
         }
+        return false;
     }
 
     @Override

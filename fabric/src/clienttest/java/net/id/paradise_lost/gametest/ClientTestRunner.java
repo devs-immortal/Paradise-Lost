@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.id.paradise_lost.gametest.tests.BlockTests;
 import net.id.paradise_lost.gametest.tests.BoatTests;
+import net.id.paradise_lost.gametest.tests.CompatTests;
 import net.id.paradise_lost.gametest.tests.DimensionTests;
 import net.id.paradise_lost.gametest.tests.EntityTests;
 import net.id.paradise_lost.gametest.tests.FoodBowlTests;
@@ -37,6 +38,7 @@ public class ClientTestRunner implements ClientModInitializer {
             BoatTests.class,
             NitraTests.class,
             BlockTests.class,
+            CompatTests.class,
             DimensionTests.class,
             EntityTests.class,
             FoodBowlTests.class,
