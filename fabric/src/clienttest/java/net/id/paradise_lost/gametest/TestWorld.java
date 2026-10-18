@@ -84,7 +84,7 @@ final class TestWorld {
             player.getInventory().clearContent();
             player.setDeltaMovement(Vec3.ZERO);
             player.fallDistance = 0;
-            teleport(player, Level.OVERWORLD, slot * 64 + 0.5, -60, 0.5, 0);
+            teleport(player, Level.OVERWORLD, slot * 128 + 0.5, -60, 0.5, 0);
         });
         Recorder.reset();
     }

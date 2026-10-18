@@ -10,4 +10,8 @@ public interface MinecartFloatPoseAccess {
     boolean paradiseLost$hasRailRenderPose();
 
     void paradiseLost$clearRailRenderPose();
+
+    void paradiseLost$setOpenAirClimbGrace(int ticks);
+
+    int paradiseLost$getOpenAirClimbGrace();
 }

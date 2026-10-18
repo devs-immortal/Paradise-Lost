@@ -163,4 +163,46 @@ public final class BoatTests {
             checkAll(wrong);
         }));
     }
+
+    @ClientTest("2.4 custom boat Type migrates to dedicated entity types")
+    private static Step legacyBoatTypeMigrates() {
+        return Step.run(0, () -> onServer(server -> {
+            ServerLevel world = world(server);
+            List<String> wrong = new ArrayList<>();
+            String[] woods = {"aurel", "mother_aurel", "menth", "wisteria"};
+            for (int i = 0; i < woods.length; i++) {
+                String wood = woods[i];
+                CompoundTag boatTag = new CompoundTag();
+                boatTag.putString("id", "minecraft:boat");
+                boatTag.putString("Type", "paradise_lost_" + wood);
+                boatTag.put("Pos", listOfDoubles(0.5, 64, 0.5));
+                Entity loadedBoat = EntityType.create(boatTag, world, EntitySpawnReason.LOAD).orElse(null);
+                EntityType<? extends AbstractBoat> expectedBoat = boat(i);
+                if (loadedBoat == null || loadedBoat.getType() != expectedBoat) {
+                    wrong.add("boat " + wood + " loaded as "
+                            + (loadedBoat == null ? "nothing" : EntityType.getKey(loadedBoat.getType())));
+                }
+
+                CompoundTag chestTag = new CompoundTag();
+                chestTag.putString("id", "minecraft:chest_boat");
+                chestTag.putString("Type", "paradise_lost_" + wood);
+                chestTag.put("Pos", listOfDoubles(1.5, 64, 0.5));
+                Entity loadedChest = EntityType.create(chestTag, world, EntitySpawnReason.LOAD).orElse(null);
+                EntityType<? extends AbstractBoat> expectedChest = boat(i + 4);
+                if (loadedChest == null || loadedChest.getType() != expectedChest) {
+                    wrong.add("chest_boat " + wood + " loaded as "
+                            + (loadedChest == null ? "nothing" : EntityType.getKey(loadedChest.getType())));
+                }
+            }
+            checkAll(wrong);
+        }));
+    }
+
+    private static net.minecraft.nbt.ListTag listOfDoubles(double x, double y, double z) {
+        net.minecraft.nbt.ListTag list = new net.minecraft.nbt.ListTag();
+        list.add(net.minecraft.nbt.DoubleTag.valueOf(x));
+        list.add(net.minecraft.nbt.DoubleTag.valueOf(y));
+        list.add(net.minecraft.nbt.DoubleTag.valueOf(z));
+        return list;
+    }
 }

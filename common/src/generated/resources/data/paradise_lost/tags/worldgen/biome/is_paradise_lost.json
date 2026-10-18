@@ -1,0 +1,44 @@
+{
+  "values": [
+    {
+      "id": "paradise_lost:autumnal_tundra",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:calcite_craglands",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:continental_plateau",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:highlands",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:highlands_forest",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:highlands_grand_glade",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:highlands_shield",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:highlands_thicket",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:tradewinds",
+      "required": false
+    },
+    {
+      "id": "paradise_lost:wisteria_woods",
+      "required": false
+    }
+  ]
+}

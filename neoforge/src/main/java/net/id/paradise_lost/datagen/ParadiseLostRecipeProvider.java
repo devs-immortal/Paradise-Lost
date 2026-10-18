@@ -945,7 +945,7 @@ public class ParadiseLostRecipeProvider extends RecipeProvider implements ICondi
                 .unlocks("has_template", has(ItemRegistry.GLAZED_GOLD_UPGRADE.get()))
                 .save(output, recipeKey("glazed_gold_sword"));
 
-        shaped(RecipeCategory.MISC, ItemRegistry.GLAZED_GOLD_UPGRADE.get(), 1)
+        shaped(RecipeCategory.MISC, ItemRegistry.GLAZED_GOLD_UPGRADE.get(), 2)
                 .define('A', ItemRegistry.GOLDEN_AMBER.get())
                 .define('G', Items.GOLD_BLOCK)
                 .define('T', ItemRegistry.GLAZED_GOLD_UPGRADE.get())

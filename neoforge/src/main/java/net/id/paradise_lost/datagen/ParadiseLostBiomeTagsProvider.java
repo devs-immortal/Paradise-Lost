@@ -20,6 +20,8 @@ public class ParadiseLostBiomeTagsProvider extends BiomeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        tag(ParadiseLostStructureTags.IS_PARADISE_LOST, ParadiseLostBiomes.allBiomes());
+
         tag(ParadiseLostStructureTags.AUREL_TOWER_HAS_STRUCTURE,
                 ParadiseLostBiomes.HIGHLANDS_PLAINS_KEY,
                 ParadiseLostBiomes.HIGHLANDS_FOREST_KEY,

@@ -13,6 +13,8 @@ plugins {
 
 val modId: String by project
 val sherdsApiVersion: String by project
+val wilderWildVersion = "4.2.1-mc1.21.2"
+val frozenLibVersion = "2.2.4-mc1.21.2"
 
 dependencies {
     minecraft(libs.minecraft)
@@ -63,6 +65,25 @@ sourceSets {
     }
 }
 
+sourceSets {
+    create("compat") {
+        val clienttest = sourceSets["clienttest"]
+        compileClasspath += clienttest.compileClasspath
+        runtimeClasspath += clienttest.runtimeClasspath + clienttest.output
+    }
+}
+
+loom.createRemapConfigurations(sourceSets["compat"])
+
+val modCompatRuntimeOnly by configurations.getting
+
+dependencies {
+    modCompileOnly("maven.modrinth:wilder-wild:$wilderWildVersion")
+    modCompileOnly("maven.modrinth:frozenlib:$frozenLibVersion")
+    modCompatRuntimeOnly("maven.modrinth:wilder-wild:$wilderWildVersion")
+    modCompatRuntimeOnly("maven.modrinth:frozenlib:$frozenLibVersion")
+}
+
 tasks.named("check") {
     dependsOn("clienttestClasses")
 }
@@ -105,6 +126,15 @@ loom {
             source(sourceSets["clienttest"])
             runDir("runs/clienttest")
             programArg("--username=Tester")
+        }
+
+        create("clientCompatTest") {
+            client()
+            configName = "Fabric Client Compat Tests"
+            source(sourceSets["compat"])
+            runDir("runs/compattest")
+            programArg("--username=Tester")
+            environmentVariable("RUN_ONLY", "Compat")
         }
     }
 }

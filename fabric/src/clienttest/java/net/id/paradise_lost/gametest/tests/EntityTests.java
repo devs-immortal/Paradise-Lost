@@ -80,14 +80,23 @@ public final class EntityTests {
     private static List<Step> envoyEnlightenSyncs() {
         return List.of(
                 Step.run(0, () -> onServer(server -> {
+                    // After dimension tests the overworld chunk can still be loading.
                     server.setDifficulty(Difficulty.EASY, true);
                     ServerPlayer player = player(server);
-                    EnvoyEntity envoy = EntityRegistry.ENVOY.get().spawn(player.serverLevel(), ahead(player, 4, 0), EntitySpawnReason.COMMAND);
+                    BlockPos at = ahead(player, 4, 0);
+                    player.serverLevel().getChunk(at);
+                    EnvoyEntity envoy = EntityRegistry.ENVOY.get().spawn(player.serverLevel(), at, EntitySpawnReason.COMMAND);
+                    check(envoy != null, "envoy failed to spawn");
                     envoy.setNoAi(true);
+                    envoy.setInvulnerable(true);
+                    envoy.clearFire();
                     envoy.setEnlightened(true);
                     entityId = envoy.getId();
                 })),
-                Step.until("client envoy to be enlightened", 20, () -> client().level.getEntity(entityId) instanceof EnvoyEntity envoy && envoy.getEnlightened())
+                // Wait for the entity first so a slow spawn doesn't look like a sync failure.
+                Step.until("client envoy to spawn", 60, () -> client().level.getEntity(entityId) instanceof EnvoyEntity),
+                Step.until("client envoy to be enlightened", 40, () ->
+                        ((EnvoyEntity) client().level.getEntity(entityId)).getEnlightened())
         );
     }
 

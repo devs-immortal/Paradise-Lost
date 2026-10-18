@@ -103,6 +103,10 @@ public final class DimensionTests {
 
     @ClientTest(value = "water lights it, it leads to Paradise Lost and back", group = "Portal")
     private static List<Step> portalTravel() {
+        return portalTravelSteps();
+    }
+
+    static List<Step> portalTravelSteps() {
         return List.of(
                 Step.run(0, () -> onServer(server -> {
                     buildFrame(player(server));

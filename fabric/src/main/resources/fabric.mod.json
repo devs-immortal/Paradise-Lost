@@ -4,9 +4,7 @@
 	"version": "${version}",
 	"name": "${mod_display_name}",
 	"description": "${mod_description}",
-	"authors": [
-		"${mod_authors}"
-	],
+	"authors": ["${mod_authors_list}"],
 	"contact": {
 		"homepage": "${mod_homepage}",
 		"issues": "${mod_issues_tracker}",
@@ -25,7 +23,7 @@
 	},
 	"mixins": [
 		"${mod_id}.mixins.json",
-		"paradise_lost.fabric.mixins.json"
+		"${mod_id}.fabric.mixins.json"
 	],
 	"accessWidener": "${mod_id}.accesswidener",
 	"depends": {

@@ -4,6 +4,7 @@ import net.id.paradise_lost.platform.Services;
 import net.minecraft.tags.ItemTags;
 import net.id.paradise_lost.block.blockentity.FoodBowlBlockEntity;
 import net.id.paradise_lost.component.MoaGenes;
+import net.id.paradise_lost.datafixer.MoaGenesDataFix;
 import net.id.paradise_lost.registry.EntityRegistry;
 import net.id.paradise_lost.entity.util.SaddleMountEntity;
 import net.id.paradise_lost.registry.ItemRegistry;
@@ -686,6 +687,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
         if (inventory != DUMMY && compound.contains("chestContents", Tag.TAG_LIST)) {
             loadChestContents(compound.getList("chestContents", Tag.TAG_COMPOUND));
         }
+        MoaGenesDataFix.migrate(compound);
         if (compound.contains("moaGenes", Tag.TAG_COMPOUND)) {
             getGenes().readFromNbt(compound.getCompound("moaGenes"), this.registryAccess());
         }

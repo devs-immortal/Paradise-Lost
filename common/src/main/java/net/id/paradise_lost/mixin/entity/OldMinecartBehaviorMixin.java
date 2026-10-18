@@ -1,6 +1,6 @@
 package net.id.paradise_lost.mixin.entity;
 
-import net.id.paradise_lost.attachments.MinecartFloating;
+import net.id.paradise_lost.util.MinecartFloatingHelper;
 import net.id.paradise_lost.entity.ParadiseLostMinecartExtensions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
@@ -33,7 +33,7 @@ public abstract class OldMinecartBehaviorMixin extends MinecartBehavior {
      */
     @Inject(method = "getPos(DDD)Lnet/minecraft/world/phys/Vec3;", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$skipFloatingRailSnap(double x, double y, double z, CallbackInfoReturnable<Vec3> cir) {
-        if (MinecartFloating.shouldSkipRailRenderSnap(this.minecart)) {
+        if (MinecartFloatingHelper.shouldSkipRailRenderSnap(this.minecart)) {
             cir.setReturnValue(null);
         }
     }
@@ -41,7 +41,7 @@ public abstract class OldMinecartBehaviorMixin extends MinecartBehavior {
     @Inject(method = "getPosOffs(DDDD)Lnet/minecraft/world/phys/Vec3;", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$skipFloatingRailOffs(
             double x, double y, double z, double offset, CallbackInfoReturnable<Vec3> cir) {
-        if (MinecartFloating.shouldSkipRailRenderSnap(this.minecart)) {
+        if (MinecartFloatingHelper.shouldSkipRailRenderSnap(this.minecart)) {
             cir.setReturnValue(null);
         }
     }

@@ -4,7 +4,6 @@ import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.networking.packet.FloatyAnchorC2SPacket;
 import net.id.paradise_lost.networking.packet.PacketHandler;
-import net.id.paradise_lost.platform.Services;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -70,15 +69,13 @@ public class FloatyLeggingsItem extends ArmorItem {
             return;
         }
         if (from.isSurvival()) {
-            Services.ATTACHMENTS.setAttachedValue(
-                    player, CommonDataAttachments.FLOATY_ANCHORED_SAVED, extensions.isFloatyAnchored());
+            CommonDataAttachments.ANCHORING.setAnchoredBeforeLeavingSurvival(player, extensions.isFloatyAnchored());
             if (extensions.isFloatyAnchored()) {
                 extensions.setFloatyAnchored(false);
             }
         } else {
-            boolean saved = Boolean.TRUE.equals(
-                    Services.ATTACHMENTS.getOrCreateAttachedValue(player, CommonDataAttachments.FLOATY_ANCHORED_SAVED));
-            if (saved && canAnchor(player)) {
+            boolean wasAnchored = CommonDataAttachments.ANCHORING.wasAnchoredBeforeLeavingSurvival(player);
+            if (wasAnchored && canAnchor(player)) {
                 extensions.setFloatyAnchored(true);
             }
         }

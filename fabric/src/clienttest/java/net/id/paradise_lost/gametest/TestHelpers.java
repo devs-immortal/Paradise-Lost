@@ -46,11 +46,13 @@ public final class TestHelpers {
 
     public static void onServer(Consumer<IntegratedServer> action) {
         IntegratedServer server = client().getSingleplayerServer();
+        check(server != null, "integrated server is gone (game paused or shutting down)");
         server.submit(() -> action.accept(server)).join();
     }
 
     public static <T> T fromServer(Function<IntegratedServer, T> action) {
         IntegratedServer server = client().getSingleplayerServer();
+        check(server != null, "integrated server is gone (game paused or shutting down)");
         return server.submit(() -> action.apply(server)).join();
     }
 
@@ -133,7 +135,17 @@ public final class TestHelpers {
     }
 
     public static void teleport(ServerPlayer player, ResourceKey<Level> world, double x, double y, double z, float pitch) {
-        player.teleportTo(player.getServer().getLevel(world), x, y, z, Set.of(), 0, pitch, true);
+        teleport(player, world, x, y, z, 0, pitch);
+    }
+
+    public static void teleport(ServerPlayer player, ResourceKey<Level> world, double x, double y, double z, float yaw, float pitch) {
+        ServerLevel level = client().getSingleplayerServer().getLevel(world);
+        check(level != null, "missing level " + world.location());
+        teleport(player, level, x, y, z, yaw, pitch);
+    }
+
+    public static void teleport(ServerPlayer player, ServerLevel world, double x, double y, double z, float yaw, float pitch) {
+        player.teleportTo(world, x, y, z, Set.of(), yaw, pitch, true);
     }
 
     public static Map<Item, Integer> drops(ServerLevel world, BlockPos pos) {
@@ -171,8 +183,15 @@ public final class TestHelpers {
     public static void screenshot(String name, boolean hud) {
         Minecraft client = client();
         client.options.hideGui = !hud;
+        String numbered = name;
+        if (ClientTestRunner.currentTestNumber > 0) {
+            String base = name.endsWith(".png") ? name.substring(0, name.length() - 4) : name;
+            String ext = name.endsWith(".png") ? ".png" : "";
+            numbered = String.format("%02d_%s%s", ClientTestRunner.currentTestNumber, base, ext);
+        }
+        String fileName = numbered;
         client.execute(() -> {
-            Screenshot.grab(client.gameDirectory, name, client.getMainRenderTarget(), message -> LOG.info(message.getString()));
+            Screenshot.grab(client.gameDirectory, fileName, client.getMainRenderTarget(), message -> LOG.info(message.getString()));
             client.options.hideGui = false;
         });
     }
