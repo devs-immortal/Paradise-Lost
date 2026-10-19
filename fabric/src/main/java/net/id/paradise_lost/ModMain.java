@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.item.v1.EnchantmentEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.fabric.api.util.TriState;
 import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.commands.ParadiseLostCommands;
@@ -15,6 +16,7 @@ import net.id.paradise_lost.registry.EntityRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.screen.FabricScreens;
 import net.id.paradise_lost.util.ParadiseLostAliasFix;
+import net.id.paradise_lost.util.RegistryUtil;
 import net.minecraft.world.item.enchantment.Enchantments;
 
 public class ModMain implements ModInitializer {
@@ -41,5 +43,6 @@ public class ModMain implements ModInitializer {
             }
             return TriState.DEFAULT;
         });
+        FabricBrewingRecipeRegistryBuilder.BUILD.register(RegistryUtil::addBrewingRecipes);
     }
 }
