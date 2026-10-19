@@ -60,6 +60,10 @@ public class CreativeTabRegistry {
                         output.accept(BlockRegistry.FLOESTONE_BRICK_STAIRS.get());
                         output.accept(BlockRegistry.FLOESTONE_BRICK_SLAB.get());
                         output.accept(BlockRegistry.FLOESTONE_BRICK_WALL.get());
+                        output.accept(BlockRegistry.MOSSY_FLOESTONE_BRICK.get());
+                        output.accept(BlockRegistry.MOSSY_FLOESTONE_BRICK_STAIRS.get());
+                        output.accept(BlockRegistry.MOSSY_FLOESTONE_BRICK_SLAB.get());
+                        output.accept(BlockRegistry.MOSSY_FLOESTONE_BRICK_WALL.get());
                         output.accept(BlockRegistry.SMOOTH_FLOESTONE.get());
                         output.accept(BlockRegistry.SMOOTH_FLOESTONE_STAIRS.get());
                         output.accept(BlockRegistry.SMOOTH_FLOESTONE_SLAB.get());
