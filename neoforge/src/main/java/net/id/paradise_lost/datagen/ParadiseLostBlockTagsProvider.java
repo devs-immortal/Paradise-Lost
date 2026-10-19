@@ -35,7 +35,7 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
     );
 
     public ParadiseLostBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, PLConstants.MODID, existingFileHelper);
+        super(output, lookupProvider, PLConstants.MOD_ID, existingFileHelper);
     }
 
     @Override

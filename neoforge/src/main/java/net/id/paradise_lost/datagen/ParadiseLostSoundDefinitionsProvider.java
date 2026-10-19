@@ -10,7 +10,7 @@ import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvider {
     public ParadiseLostSoundDefinitionsProvider(PackOutput output, ExistingFileHelper helper) {
-        super(output, PLConstants.MODID, helper);
+        super(output, PLConstants.MOD_ID, helper);
     }
 
     @Override

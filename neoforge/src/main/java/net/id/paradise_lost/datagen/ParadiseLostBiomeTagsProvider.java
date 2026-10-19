@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ParadiseLostBiomeTagsProvider extends BiomeTagsProvider {
     public ParadiseLostBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, PLConstants.MODID, existingFileHelper);
+        super(output, lookupProvider, PLConstants.MOD_ID, existingFileHelper);
     }
 
     @Override

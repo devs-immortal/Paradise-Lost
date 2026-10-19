@@ -15,7 +15,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ParadiseLostStaticModelsProvider extends ModelProvider<ParadiseLostStaticModelsProvider.Builder> {
     public ParadiseLostStaticModelsProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, PLConstants.MODID, BLOCK_FOLDER, Builder::new, existingFileHelper);
+        super(output, PLConstants.MOD_ID, BLOCK_FOLDER, Builder::new, existingFileHelper);
     }
 
     @Override
@@ -1188,7 +1188,7 @@ public class ParadiseLostStaticModelsProvider extends ModelProvider<ParadiseLost
     }
 
     private static String blockTex(String name) {
-        return PLConstants.MODID + ":block/" + name;
+        return PLConstants.MOD_ID + ":block/" + name;
     }
 
     private Builder parented(String name, ModelFile parent) {

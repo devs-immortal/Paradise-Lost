@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ParadiseLostStructureTagsProvider extends TagsProvider<Structure> {
     public ParadiseLostStructureTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.STRUCTURE, lookupProvider, PLConstants.MODID, existingFileHelper);
+        super(output, Registries.STRUCTURE, lookupProvider, PLConstants.MOD_ID, existingFileHelper);
     }
 
     @Override

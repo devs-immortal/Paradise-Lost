@@ -23,7 +23,7 @@ import static net.id.paradise_lost.registry.ItemRegistry.*;
 public class ParadiseLostItemTagsProvider extends ItemTagsProvider {
     public ParadiseLostItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
                                         CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, blockTags, PLConstants.MODID, existingFileHelper);
+        super(output, lookupProvider, blockTags, PLConstants.MOD_ID, existingFileHelper);
     }
 
     @Override

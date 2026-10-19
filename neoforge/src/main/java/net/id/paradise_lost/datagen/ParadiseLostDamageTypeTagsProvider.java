@@ -16,7 +16,7 @@ import net.minecraft.world.damagesource.DamageType;
 
 public class ParadiseLostDamageTypeTagsProvider extends TagsProvider<DamageType> {
     public ParadiseLostDamageTypeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.DAMAGE_TYPE, lookupProvider, PLConstants.MODID, existingFileHelper);
+        super(output, Registries.DAMAGE_TYPE, lookupProvider, PLConstants.MOD_ID, existingFileHelper);
     }
 
     @Override
