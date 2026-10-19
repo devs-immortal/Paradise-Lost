@@ -1,6 +1,6 @@
 package net.id.paradise_lost.tag;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -40,6 +40,6 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> INCUBATOR_WARMER_BEDS = register("incubator_warmer_beds");
 
     private static TagKey<Block> register(String id) {
-        return TagKey.create(Registries.BLOCK, PLConstants.id(id));
+        return TagKey.create(Registries.BLOCK, ModConstants.locate(id));
     }
 }

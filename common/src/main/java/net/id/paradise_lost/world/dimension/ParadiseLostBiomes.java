@@ -24,7 +24,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import static net.id.paradise_lost.PLConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 public final class ParadiseLostBiomes {
     public static final ResourceKey<Biome> AUTUMNAL_TUNDRA_KEY = of("autumnal_tundra");
@@ -55,7 +55,7 @@ public final class ParadiseLostBiomes {
     }
 
     private static ResourceKey<Biome> of(String name) {
-        return ResourceKey.create(Registries.BIOME, id(name));
+        return ResourceKey.create(Registries.BIOME, locate(name));
     }
 
     public static void bootstrap(BootstrapContext<Biome> context) {

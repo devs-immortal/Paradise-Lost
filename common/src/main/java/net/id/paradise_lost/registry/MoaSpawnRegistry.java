@@ -2,7 +2,7 @@ package net.id.paradise_lost.registry;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.api.MoaAPI.MoaRace;
 import net.id.paradise_lost.registration.registries.DatapackRegistry;
 import net.id.paradise_lost.world.dimension.ParadiseLostBiomes;
@@ -29,13 +29,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class MoaSpawnRegistry {
 
     public static final DatapackRegistry<SpawnEntry> REGISTRY =
-            DatapackRegistry.<SpawnEntry>builder(ResourceLocation.fromNamespaceAndPath(PLConstants.MOD_ID, "moa_spawn"))
+            DatapackRegistry.<SpawnEntry>builder(ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, "moa_spawn"))
                     .withElementCodec(SpawnEntry.CODEC)
                     .withNetworkCodec(SpawnEntry.CODEC)
                     .withBootstrap(MoaSpawnRegistry::bootstrap)
                     .build();
 
-    public static final ResourceLocation DEFAULT_ID = PLConstants.id("default");
+    public static final ResourceLocation DEFAULT_ID = ModConstants.locate("default");
 
     private static final Set<ResourceLocation> WARNED_MISSING_RACES = ConcurrentHashMap.newKeySet();
 
@@ -153,7 +153,7 @@ public final class MoaSpawnRegistry {
         var race = MoaRaceRegistry.find(world.registryAccess(), raceId);
         if (race.isEmpty()) {
             if (WARNED_MISSING_RACES.add(raceId)) {
-                PLConstants.LOGGER.error("moa_spawn refers to {} which is not a registered moa race; ignoring it", raceId);
+                ModConstants.LOGGER.error("moa_spawn refers to {} which is not a registered moa race; ignoring it", raceId);
             }
             return null;
         }

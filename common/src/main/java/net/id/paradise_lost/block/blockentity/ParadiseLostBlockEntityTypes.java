@@ -1,6 +1,6 @@
 package net.id.paradise_lost.block.blockentity;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.registration.RegistryObject;
@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 public class ParadiseLostBlockEntityTypes {
     private static final RegistrationProvider<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
-            RegistrationProvider.get(Registries.BLOCK_ENTITY_TYPE, PLConstants.MOD_ID);
+            RegistrationProvider.get(Registries.BLOCK_ENTITY_TYPE, ModConstants.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<?>, BlockEntityType<FoodBowlBlockEntity>> FOOD_BOWL = register("food_bowl",
             () -> BlockEntityType.Builder.of(FoodBowlBlockEntity::new, BlockRegistry.FOOD_BOWL.get()).build(null));

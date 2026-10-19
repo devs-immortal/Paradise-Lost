@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.tag.ParadiseLostStructureTags;
 import net.id.paradise_lost.world.feature.structure.ParadiseLostStructures;
 import net.minecraft.core.HolderLookup;
@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ParadiseLostStructureTagsProvider extends TagsProvider<Structure> {
     public ParadiseLostStructureTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.STRUCTURE, lookupProvider, PLConstants.MOD_ID, existingFileHelper);
+        super(output, Registries.STRUCTURE, lookupProvider, ModConstants.MOD_ID, existingFileHelper);
     }
 
     @Override

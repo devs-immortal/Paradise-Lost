@@ -1,6 +1,6 @@
 package net.id.paradise_lost.client.rendering.entity.hostile;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.client.model.ParadiseLostModelLayers;
 import net.id.paradise_lost.client.model.entity.QuintEntityModel;
 import net.id.paradise_lost.entity.passive.QuintEntity;
@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class QuintEntityRenderer extends MobRenderer<QuintEntity, QuintEntityModel> {
 
-    private static final ResourceLocation TEXTURE = PLConstants.id("textures/entity/quint.png");
+    private static final ResourceLocation TEXTURE = ModConstants.locate("textures/entity/quint.png");
 
     public QuintEntityRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new QuintEntityModel(renderManager.bakeLayer(ParadiseLostModelLayers.QUINT)), 0.0F);

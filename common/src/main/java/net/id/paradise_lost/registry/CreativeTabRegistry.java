@@ -1,6 +1,6 @@
 package net.id.paradise_lost.registry;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.registration.RegistryObject;
@@ -21,7 +21,7 @@ public class CreativeTabRegistry {
     }
 
     protected static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS =
-            RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, PLConstants.MOD_ID);
+            RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, ModConstants.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab, CreativeModeTab> PARADISE_BLOCKS_TAB = CREATIVE_MODE_TABS.register("building_blocks",
             () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)

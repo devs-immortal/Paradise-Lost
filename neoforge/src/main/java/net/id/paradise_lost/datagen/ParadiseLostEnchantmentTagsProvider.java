@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.util.ParadiseLostEnchantments;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -17,7 +17,7 @@ public class ParadiseLostEnchantmentTagsProvider extends EnchantmentTagsProvider
             CompletableFuture<HolderLookup.Provider> lookupProvider,
             @Nullable ExistingFileHelper existingFileHelper
     ) {
-        super(output, lookupProvider, PLConstants.MOD_ID, existingFileHelper);
+        super(output, lookupProvider, ModConstants.MOD_ID, existingFileHelper);
     }
 
     @Override

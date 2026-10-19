@@ -1,6 +1,6 @@
 package net.id.paradise_lost.networking.packet;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -12,7 +12,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public record FoodBowlCtrlC2SPacket(boolean dumpStack) implements C2SModPacket<RegistryFriendlyByteBuf> {
-    public static final Type<FoodBowlCtrlC2SPacket> TYPE = new Type<>(PLConstants.id("food_bowl_ctrl"));
+    public static final Type<FoodBowlCtrlC2SPacket> TYPE = new Type<>(ModConstants.locate("food_bowl_ctrl"));
     public static final StreamCodec<RegistryFriendlyByteBuf, FoodBowlCtrlC2SPacket> CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL, FoodBowlCtrlC2SPacket::dumpStack,
             FoodBowlCtrlC2SPacket::new

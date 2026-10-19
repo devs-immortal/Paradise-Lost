@@ -1,6 +1,6 @@
 package net.id.paradise_lost.mixin.item;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
 import net.minecraft.core.Holder;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(FloatyLeggingsItem.class)
 public abstract class FloatyLeggingsItemMixin extends ArmorItem {
     private static final ResourceLocation FLOATY_LEGGINGS_ANCHORED =
-            PLConstants.id("textures/models/armor/floaty_layer_2_on.png");
+            ModConstants.locate("textures/models/armor/floaty_layer_2_on.png");
 
     public FloatyLeggingsItemMixin(Holder<ArmorMaterial> material, Type type, Properties properties) {
         super(material, type, properties);

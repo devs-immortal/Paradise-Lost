@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datafixer;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public final class LegacyCardinalComponents {
     public static final String ROOT_KEY = "cardinal_components";
-    public static final ResourceLocation MOA_GENETICS = PLConstants.id("moa_genetics");
-    public static final ResourceLocation MINECART_FLOAT = PLConstants.id("minecart_float");
+    public static final ResourceLocation MOA_GENETICS = ModConstants.locate("moa_genetics");
+    public static final ResourceLocation MINECART_FLOAT = ModConstants.locate("minecart_float");
 
     private LegacyCardinalComponents() {
     }

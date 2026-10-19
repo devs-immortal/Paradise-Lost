@@ -1,6 +1,6 @@
 package net.id.paradise_lost.registry;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.entity.block.FloatingBlockEntity;
 import net.id.paradise_lost.entity.block.SliderEntity;
 import net.id.paradise_lost.entity.hostile.EnvoyEntity;
@@ -44,7 +44,7 @@ import static net.minecraft.world.entity.MobCategory.MONSTER;
 @SuppressWarnings({"unused", "SameParameterValue"})
 public final class EntityRegistry {
     public static final RegistrationProvider<EntityType<?>> ENTITY_TYPES =
-            RegistrationProvider.get(Registries.ENTITY_TYPE, PLConstants.MOD_ID);
+            RegistrationProvider.get(Registries.ENTITY_TYPE, ModConstants.MOD_ID);
 
     private static final List<AttributeRegistration> ATTRIBUTE_REGISTRATIONS = new ArrayList<>();
     private static final List<Runnable> SPAWN_REGISTRATIONS = new ArrayList<>();

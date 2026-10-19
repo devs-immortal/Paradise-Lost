@@ -1,7 +1,7 @@
 package net.id.paradise_lost.client.rendering.block;
 
 import net.id.paradise_lost.block.blockentity.CalciteDecoratedPotBlockEntity;
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -37,8 +37,8 @@ import com.mojang.math.Axis;
 
 public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRenderer<CalciteDecoratedPotBlockEntity> {
 
-    public static final Material CALCITE_DECORATED_POT_BASE = createDecoratedPotPatternTextureId(PLConstants.id("calcite_decorated_pot_base"));
-    public static final Material CALCITE_DECORATED_POT_SIDE = createDecoratedPotPatternTextureId(PLConstants.id("calcite_decorated_pot_side"));
+    public static final Material CALCITE_DECORATED_POT_BASE = createDecoratedPotPatternTextureId(ModConstants.locate("calcite_decorated_pot_base"));
+    public static final Material CALCITE_DECORATED_POT_SIDE = createDecoratedPotPatternTextureId(ModConstants.locate("calcite_decorated_pot_side"));
 
     private static Material createDecoratedPotPatternTextureId(ResourceLocation patternId) {
         return new Material(DECORATED_POT_SHEET, patternId.withPrefix("entity/decorated_pot/"));
@@ -108,7 +108,7 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
 
                 var calciteSprite = new Material(
                         normalSprite.atlasLocation(),
-                        ResourceLocation.fromNamespaceAndPath(PLConstants.MOD_ID, textureIdentifier.getPath() + "_calcite")
+                        ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, textureIdentifier.getPath() + "_calcite")
                 );
                 return calciteSprite;
             }

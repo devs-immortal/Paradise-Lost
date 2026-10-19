@@ -1,7 +1,7 @@
 package net.id.paradise_lost.client.rendering.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.entity.projectile.LevitaArrow;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class LevitaArrowRenderer extends ArrowRenderer<LevitaArrow> {
-    private static final ResourceLocation TEXTURE = PLConstants.id("textures/entity/projectiles/levita_arrow.png");
+    private static final ResourceLocation TEXTURE = ModConstants.locate("textures/entity/projectiles/levita_arrow.png");
 
     public LevitaArrowRenderer(EntityRendererProvider.Context context) {
         super(context);

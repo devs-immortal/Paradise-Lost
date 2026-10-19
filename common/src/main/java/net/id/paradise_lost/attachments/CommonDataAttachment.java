@@ -1,7 +1,7 @@
 package net.id.paradise_lost.attachments;
 
 import com.mojang.serialization.Codec;
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
@@ -104,7 +104,7 @@ public class CommonDataAttachment<T> {
         }
 
         public CommonDataAttachment<T> build(String name) {
-            return build(ResourceLocation.fromNamespaceAndPath(PLConstants.MOD_ID, name));
+            return build(ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, name));
         }
 
         public CommonDataAttachment<T> build(ResourceLocation name) {

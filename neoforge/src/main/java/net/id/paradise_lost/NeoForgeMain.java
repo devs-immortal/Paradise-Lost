@@ -23,12 +23,12 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
-@Mod(PLConstants.MOD_ID)
-public class PLNeoForge {
-    public PLNeoForge(IEventBus modBus, ModContainer modContainer) {
+@Mod(ModConstants.MOD_ID)
+public class NeoForgeMain {
+    public NeoForgeMain(IEventBus modBus, ModContainer modContainer) {
         NeoForgePlatformHelper.bindModBus(modBus);
         Services.PLATFORM.getPlatformName();
-        PLCommon.init();
+        ModCommon.init();
         NeoForgeScreens.register();
         modBus.<EntityAttributeCreationEvent>addListener(event -> ModEntities.registerEntityAttributes(event::put));
         modBus.addListener(this::commonSetup);
@@ -45,7 +45,7 @@ public class PLNeoForge {
     }
 
     private void setupPackets(RegisterPayloadHandlersEvent event) {
-        NeoForgeNetworkHelper.setRegistrar(event.registrar(PLConstants.MOD_ID).versioned("1").optional());
+        NeoForgeNetworkHelper.setRegistrar(event.registrar(ModConstants.MOD_ID).versioned("1").optional());
         PacketHandler.registerPackets();
     }
 

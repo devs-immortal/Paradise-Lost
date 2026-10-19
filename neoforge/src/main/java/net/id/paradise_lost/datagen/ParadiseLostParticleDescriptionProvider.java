@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.particle.ParadiseLostParticleTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -14,11 +14,11 @@ public class ParadiseLostParticleDescriptionProvider extends ParticleDescription
 
     @Override
     protected void addDescriptions() {
-        sprite(ParadiseLostParticleTypes.CHERINE_FLAME, PLConstants.id("cherine_flame"));
+        sprite(ParadiseLostParticleTypes.CHERINE_FLAME, ModConstants.locate("cherine_flame"));
         spriteSet(ParadiseLostParticleTypes.MOTHER_AUREL_LEAF,
-                PLConstants.id("golden_leaf_1"),
-                PLConstants.id("golden_leaf_2"),
-                PLConstants.id("golden_leaf_3"));
+                ModConstants.locate("golden_leaf_1"),
+                ModConstants.locate("golden_leaf_2"),
+                ModConstants.locate("golden_leaf_3"));
         sprite(ParadiseLostParticleTypes.LEVITA_BLOOP, ResourceLocation.withDefaultNamespace("generic_0"));
         spriteSet(ParadiseLostParticleTypes.LEVITATION_TOTEM,
                 ResourceLocation.withDefaultNamespace("glitter_7"),
@@ -39,11 +39,11 @@ public class ParadiseLostParticleDescriptionProvider extends ParticleDescription
                 ResourceLocation.withDefaultNamespace("generic_1"),
                 ResourceLocation.withDefaultNamespace("generic_0"));
         spriteSet(ParadiseLostParticleTypes.LEVITA_SPARKLE,
-                PLConstants.id("levita_sparkle_0"),
-                PLConstants.id("levita_sparkle_1"),
-                PLConstants.id("levita_sparkle_2"),
-                PLConstants.id("levita_sparkle_3"),
-                PLConstants.id("levita_sparkle_4"),
-                PLConstants.id("levita_sparkle_5"));
+                ModConstants.locate("levita_sparkle_0"),
+                ModConstants.locate("levita_sparkle_1"),
+                ModConstants.locate("levita_sparkle_2"),
+                ModConstants.locate("levita_sparkle_3"),
+                ModConstants.locate("levita_sparkle_4"),
+                ModConstants.locate("levita_sparkle_5"));
     }
 }

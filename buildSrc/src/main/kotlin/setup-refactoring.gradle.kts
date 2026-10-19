@@ -272,7 +272,7 @@ private fun isInitialUnmodifiedSetup(): Boolean {
             return false
     }
 
-    return commonProject == null || commonProject.projectDir.resolve("src/main/java/io/github/myname/mymod/PLConstants.java").takeIf { it.exists() }?.let { it ->
+    return commonProject == null || commonProject.projectDir.resolve("src/main/java/io/github/myname/mymod/ModConstants.java").takeIf { it.exists() }?.let { it ->
         return@let it.readText().contains("MODID = \"mymod\"")
     }?: false
 }

@@ -28,8 +28,8 @@ import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
 import net.id.paradise_lost.world.feature.ParadiseLostFeatures;
 import net.id.paradise_lost.world.gen.carver.ParadiseLostCarvers;
 
-public final class PLCommon {
-    private PLCommon() {}
+public final class ModCommon {
+    private ModCommon() {}
 
     public static void init() {
         Services.PLATFORM.getPlatformName();

@@ -1,6 +1,6 @@
 package net.id.paradise_lost.registry;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.api.MoaAPI.SpawnStatWeighting;
 import net.id.paradise_lost.registration.registries.DatapackRegistry;
 import net.minecraft.core.Holder;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public final class MoaSpawnStatWeightingRegistry {
 
     public static final DatapackRegistry<SpawnStatWeighting> REGISTRY =
-            DatapackRegistry.<SpawnStatWeighting>builder(PLConstants.id("moa_spawn_stat_weighting"))
+            DatapackRegistry.<SpawnStatWeighting>builder(ModConstants.locate("moa_spawn_stat_weighting"))
                     .withElementCodec(SpawnStatWeighting.DIRECT_CODEC)
                     .withNetworkCodec(SpawnStatWeighting.DIRECT_CODEC)
                     .withBootstrap(MoaSpawnStatWeightingRegistry::bootstrap)
@@ -42,7 +42,7 @@ public final class MoaSpawnStatWeightingRegistry {
     }
 
     public static ResourceKey<SpawnStatWeighting> key(String path) {
-        return ResourceKey.create(REGISTRY.key(), PLConstants.id(path));
+        return ResourceKey.create(REGISTRY.key(), ModConstants.locate(path));
     }
 
     public static Registry<SpawnStatWeighting> get(RegistryAccess access) {

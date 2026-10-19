@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.tag.ParadiseLostItemTags;
 import net.id.paradise_lost.util.ParadiseLostEnchantments;
 import net.minecraft.core.HolderGetter;
@@ -22,7 +22,7 @@ public class ParadiseLostEnchantmentProvider extends DatapackBuiltinEntriesProvi
             .add(Registries.ENCHANTMENT, ParadiseLostEnchantmentProvider::bootstrap);
 
     public ParadiseLostEnchantmentProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(PLConstants.MOD_ID));
+        super(output, registries, BUILDER, Set.of(ModConstants.MOD_ID));
     }
 
     private static void bootstrap(BootstrapContext<Enchantment> context) {

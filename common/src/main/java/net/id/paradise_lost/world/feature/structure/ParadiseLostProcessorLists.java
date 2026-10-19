@@ -16,7 +16,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 import java.util.List;
 
-import static net.id.paradise_lost.PLConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 public final class ParadiseLostProcessorLists {
     private ParadiseLostProcessorLists() {}
@@ -26,7 +26,7 @@ public final class ParadiseLostProcessorLists {
     public static final ResourceKey<StructureProcessorList> VAULT_PROC = of("vault_proc");
 
     public static ResourceKey<StructureProcessorList> of(String name) {
-        return ResourceKey.create(Registries.PROCESSOR_LIST, id(name));
+        return ResourceKey.create(Registries.PROCESSOR_LIST, locate(name));
     }
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {

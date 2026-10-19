@@ -1,6 +1,6 @@
 package net.id.paradise_lost.platform;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.platform.services.IAttachmentHelper;
 import net.id.paradise_lost.platform.services.IClientHelper;
 import net.id.paradise_lost.platform.services.ICompatHelper;
@@ -33,7 +33,7 @@ public final class Services {
         final T loadedService = ServiceLoader.load(clazz)
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
-        PLConstants.LOGGER.debug("Loaded {} for service {}", loadedService, clazz);
+        ModConstants.LOGGER.debug("Loaded {} for service {}", loadedService, clazz);
         return loadedService;
     }
 }

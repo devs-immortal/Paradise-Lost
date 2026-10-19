@@ -10,7 +10,7 @@ import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
-import static net.id.paradise_lost.PLConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 public final class ParadiseLostDensityFunctions {
     public static final ResourceKey<DensityFunction> BULK = of("bulk");
@@ -28,7 +28,7 @@ public final class ParadiseLostDensityFunctions {
     }
 
     private static ResourceKey<DensityFunction> of(String name) {
-        return ResourceKey.create(Registries.DENSITY_FUNCTION, id(name));
+        return ResourceKey.create(Registries.DENSITY_FUNCTION, locate(name));
     }
 
     private static final double CLIMATE_AMPLITUDE = 1.4;

@@ -1,6 +1,6 @@
 package net.id.paradise_lost.compat;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 
 import java.lang.reflect.Method;
 
@@ -12,23 +12,23 @@ public final class ParadiseLostEveryCompat {
             Class<?> woodRegClass = Class.forName("net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry");
             Object woodReg = woodRegClass.getField("INSTANCE").get(null);
             Method addWood = woodRegClass.getMethod("addSimpleFinder", String.class, String.class);
-            addWood.invoke(woodReg, PLConstants.MOD_ID, "aurel");
-            addWood.invoke(woodReg, PLConstants.MOD_ID, "menth");
-            addWood.invoke(woodReg, PLConstants.MOD_ID, "mother_aurel");
-            addWood.invoke(woodReg, PLConstants.MOD_ID, "wisteria");
+            addWood.invoke(woodReg, ModConstants.MOD_ID, "aurel");
+            addWood.invoke(woodReg, ModConstants.MOD_ID, "menth");
+            addWood.invoke(woodReg, ModConstants.MOD_ID, "mother_aurel");
+            addWood.invoke(woodReg, ModConstants.MOD_ID, "wisteria");
 
             Class<?> leafRegClass = Class.forName("net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry");
             Object leafReg = leafRegClass.getField("INSTANCE").get(null);
             Method addLeaf = leafRegClass.getMethod("addSimpleFinder", String.class, String.class);
-            addLeaf.invoke(leafReg, PLConstants.MOD_ID, "aurel");
-            addLeaf.invoke(leafReg, PLConstants.MOD_ID, "menth");
-            addLeaf.invoke(leafReg, PLConstants.MOD_ID, "mother_aurel");
-            addLeaf.invoke(leafReg, PLConstants.MOD_ID, "rose_wisteria");
-            addLeaf.invoke(leafReg, PLConstants.MOD_ID, "frost_wisteria");
-            addLeaf.invoke(leafReg, PLConstants.MOD_ID, "lavender_wisteria");
+            addLeaf.invoke(leafReg, ModConstants.MOD_ID, "aurel");
+            addLeaf.invoke(leafReg, ModConstants.MOD_ID, "menth");
+            addLeaf.invoke(leafReg, ModConstants.MOD_ID, "mother_aurel");
+            addLeaf.invoke(leafReg, ModConstants.MOD_ID, "rose_wisteria");
+            addLeaf.invoke(leafReg, ModConstants.MOD_ID, "frost_wisteria");
+            addLeaf.invoke(leafReg, ModConstants.MOD_ID, "lavender_wisteria");
 
             Method mapLeaves = leafRegClass.getMethod("addLeavesToWoodMapping", String.class, String.class);
-            String mod = PLConstants.MOD_ID;
+            String mod = ModConstants.MOD_ID;
             mapLeaves.invoke(leafReg, mod + ":aurel", mod + ":aurel");
             mapLeaves.invoke(leafReg, mod + ":menth", mod + ":menth");
             mapLeaves.invoke(leafReg, mod + ":mother_aurel", mod + ":mother_aurel");
@@ -53,7 +53,7 @@ public final class ParadiseLostEveryCompat {
             Method stone = null;
             Method childBlock = null;
 
-            Object floestone = addSimpleFinder.invoke(stoneReg, PLConstants.MOD_ID, "floestone");
+            Object floestone = addSimpleFinder.invoke(stoneReg, ModConstants.MOD_ID, "floestone");
             stone = floestone.getClass().getMethod("stone", String.class);
             childBlock = floestone.getClass().getMethod("childBlock", Object.class, String.class);
             floestone = stone.invoke(floestone, "floestone");
@@ -61,10 +61,10 @@ public final class ParadiseLostEveryCompat {
             childBlock.invoke(floestone, mossy, "mossy_floestone");
             childBlock.invoke(floestone, bricks, "floestone_brick");
 
-            Object heliolith = addSimpleFinder.invoke(stoneReg, PLConstants.MOD_ID, "heliolith");
+            Object heliolith = addSimpleFinder.invoke(stoneReg, ModConstants.MOD_ID, "heliolith");
             childBlock.invoke(heliolith, polished, "smooth_heliolith");
 
-            Object levita = addSimpleFinder.invoke(stoneReg, PLConstants.MOD_ID, "levita");
+            Object levita = addSimpleFinder.invoke(stoneReg, ModConstants.MOD_ID, "levita");
             childBlock.invoke(levita, polished, "levita_brick");
         } catch (ReflectiveOperationException ignored) {
         }

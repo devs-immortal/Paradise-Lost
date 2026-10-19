@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.tag.ParadiseLostBlockTags;
 import net.id.paradise_lost.tag.ParadiseLostItemTags;
@@ -23,7 +23,7 @@ import static net.id.paradise_lost.registry.ItemRegistry.*;
 public class ParadiseLostItemTagsProvider extends ItemTagsProvider {
     public ParadiseLostItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
                                         CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, blockTags, PLConstants.MOD_ID, existingFileHelper);
+        super(output, lookupProvider, blockTags, ModConstants.MOD_ID, existingFileHelper);
     }
 
     @Override

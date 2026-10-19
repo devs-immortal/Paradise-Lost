@@ -22,10 +22,10 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSeriali
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 
 public class AurelTowerGenerator {
-    private static final ResourceLocation AUREL_TOWER = PLConstants.id("aurel_tower");
+    private static final ResourceLocation AUREL_TOWER = ModConstants.locate("aurel_tower");
 
     public static void addPieces(StructureTemplateManager manager, StructurePieceAccessor structurePiecesHolder, Rotation blockRotation, BlockPos pos) {
         structurePiecesHolder.addPiece(new AurelTowerGenerator.Piece(manager, AUREL_TOWER, pos, blockRotation));

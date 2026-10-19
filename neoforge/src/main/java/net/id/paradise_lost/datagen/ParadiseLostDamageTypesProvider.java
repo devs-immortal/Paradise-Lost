@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -19,7 +19,7 @@ public class ParadiseLostDamageTypesProvider extends DatapackBuiltinEntriesProvi
             .add(Registries.DAMAGE_TYPE, ParadiseLostDamageTypesProvider::bootstrapDamageTypes);
 
     public ParadiseLostDamageTypesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, BUILDER, Set.of(PLConstants.MOD_ID));
+        super(output, lookupProvider, BUILDER, Set.of(ModConstants.MOD_ID));
     }
 
     public static void bootstrapDamageTypes(BootstrapContext<DamageType> context) {

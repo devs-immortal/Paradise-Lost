@@ -1,6 +1,6 @@
 package net.id.paradise_lost.registry;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.api.MoaAPI.MoaRace;
 import net.id.paradise_lost.api.MoaAPI.SpawnStatWeighting;
 import net.id.paradise_lost.registration.registries.DatapackRegistry;
@@ -20,13 +20,13 @@ import static net.id.paradise_lost.entity.passive.moa.MoaAttributes.*;
 public final class MoaRaceRegistry {
 
     public static final DatapackRegistry<MoaRace> REGISTRY =
-            DatapackRegistry.<MoaRace>builder(PLConstants.id("moa_race"))
+            DatapackRegistry.<MoaRace>builder(ModConstants.locate("moa_race"))
                     .withElementCodec(MoaRace.CODEC)
                     .withNetworkCodec(MoaRace.CODEC)
                     .withBootstrap(MoaRaceRegistry::bootstrap)
                     .build();
 
-    public static final ResourceLocation FALLBACK_ID = PLConstants.id("fallback");
+    public static final ResourceLocation FALLBACK_ID = ModConstants.locate("fallback");
     public static final ResourceKey<MoaRace> FALLBACK = key("fallback");
 
     public static final ResourceKey<MoaRace> HIGHLANDS_BLUE = key("highlands_blue");
@@ -57,7 +57,7 @@ public final class MoaRaceRegistry {
     }
 
     public static ResourceKey<MoaRace> key(String path) {
-        return ResourceKey.create(REGISTRY.key(), PLConstants.id(path));
+        return ResourceKey.create(REGISTRY.key(), ModConstants.locate(path));
     }
 
     public static Registry<MoaRace> get(RegistryAccess access) {

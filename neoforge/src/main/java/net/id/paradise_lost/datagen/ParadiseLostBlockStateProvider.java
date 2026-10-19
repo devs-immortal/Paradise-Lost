@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.block.ParadiseLostPortalBlock;
 import net.id.paradise_lost.block.mechanical.FoodBowlBlock;
 import net.id.paradise_lost.block.mechanical.FourBiteCakeBlock;
@@ -37,7 +37,7 @@ public class ParadiseLostBlockStateProvider extends BlockStateProvider {
     private final ExistingFileHelper existingFileHelper;
 
     public ParadiseLostBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, PLConstants.MOD_ID, exFileHelper);
+        super(output, ModConstants.MOD_ID, exFileHelper);
         this.existingFileHelper = exFileHelper;
     }
 

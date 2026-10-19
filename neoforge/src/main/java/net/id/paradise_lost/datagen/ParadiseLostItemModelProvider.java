@@ -2,7 +2,7 @@ package net.id.paradise_lost.datagen;
 
 import net.id.paradise_lost.item.ParadiseLostBoatItem;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -26,7 +26,7 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
     private final Set<ResourceLocation> explicitlyModelled = new HashSet<>();
 
     public ParadiseLostItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, PLConstants.MOD_ID, existingFileHelper);
+        super(output, ModConstants.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
 
         for (Item item : BuiltInRegistries.ITEM) {
             var key = BuiltInRegistries.ITEM.getKey(item);
-            if (!PLConstants.MOD_ID.equals(key.getNamespace())) {
+            if (!ModConstants.MOD_ID.equals(key.getNamespace())) {
                 continue;
             }
             if (item instanceof BlockItem || item instanceof SignItem || item instanceof SpawnEggItem) {

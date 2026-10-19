@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datafixer;
 
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
@@ -40,10 +40,10 @@ public final class CustomBoatDataFix {
         if (wood == null) {
             return false;
         }
-        ResourceLocation replacement = PLConstants.id(wood + (chest ? "_chest_boat" : "_boat"));
+        ResourceLocation replacement = ModConstants.locate(wood + (chest ? "_chest_boat" : "_boat"));
         entityTag.putString("id", replacement.toString());
         entityTag.remove("Type");
-        PLConstants.LOGGER.debug("Migrated legacy boat Type {} -> {}", type, replacement);
+        ModConstants.LOGGER.debug("Migrated legacy boat Type {} -> {}", type, replacement);
         return true;
     }
 

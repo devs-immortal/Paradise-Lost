@@ -1,7 +1,7 @@
 package net.id.paradise_lost.world.dimension;
 
 import com.mojang.datafixers.util.Pair;
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.world.gen.noise.ParadiseLostNoiseSettings;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -23,15 +23,15 @@ import java.util.List;
 import net.id.paradise_lost.world.portal.ParadiseLostPoi;
 
 public class ParadiseLostDimension {
-    public static final ResourceKey<Level> PARADISE_LOST_WORLD_KEY = key(Registries.DIMENSION, PLConstants.MOD_ID);
-    public static final ResourceKey<DimensionType> DIMENSION_TYPE = key(Registries.DIMENSION_TYPE, PLConstants.MOD_ID);
-    public static final ResourceKey<LevelStem> OPTIONS_KEY = key(Registries.LEVEL_STEM, PLConstants.MOD_ID);
-    public static final ResourceKey<FlatLevelGeneratorPreset> SUPERFLAT_PRESET = key(Registries.FLAT_LEVEL_GENERATOR_PRESET, PLConstants.MOD_ID);
+    public static final ResourceKey<Level> PARADISE_LOST_WORLD_KEY = key(Registries.DIMENSION, ModConstants.MOD_ID);
+    public static final ResourceKey<DimensionType> DIMENSION_TYPE = key(Registries.DIMENSION_TYPE, ModConstants.MOD_ID);
+    public static final ResourceKey<LevelStem> OPTIONS_KEY = key(Registries.LEVEL_STEM, ModConstants.MOD_ID);
+    public static final ResourceKey<FlatLevelGeneratorPreset> SUPERFLAT_PRESET = key(Registries.FLAT_LEVEL_GENERATOR_PRESET, ModConstants.MOD_ID);
     
     private static DimensionType dimensionType;
     
     private static <T> ResourceKey<T> key(ResourceKey<? extends Registry<T>> registry, String name) {
-        return ResourceKey.create(registry, PLConstants.locate(name));
+        return ResourceKey.create(registry, ModConstants.locate(name));
     }
     
     public static void init() {

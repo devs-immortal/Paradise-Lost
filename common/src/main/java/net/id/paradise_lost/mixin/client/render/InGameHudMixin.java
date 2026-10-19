@@ -30,13 +30,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-import static net.id.paradise_lost.PLConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 @Mixin(Gui.class)
 public abstract class InGameHudMixin {
 
     @Unique
-    private static final ResourceLocation OLVITE_SPYGLASS_SCOPE = id("textures/hud/olvite_spyglass_scope.png");
+    private static final ResourceLocation OLVITE_SPYGLASS_SCOPE = locate("textures/hud/olvite_spyglass_scope.png");
 
     @Shadow
     @Final

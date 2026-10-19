@@ -7,7 +7,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import net.id.paradise_lost.PLConstants;
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.block.natural.cloud.ParadiseLostCloudBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
@@ -42,7 +42,7 @@ public abstract class InGameOverlayRendererMixin {
         BlockState overlayState = getViewBlockingState(client.player);
         if (overlayState != null && overlayState.getBlock() instanceof ParadiseLostCloudBlock) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderTexture(0, PLConstants.id("textures/block/" + BuiltInRegistries.BLOCK.getKey(overlayState.getBlock()).getPath() + ".png"));
+            RenderSystem.setShaderTexture(0, ModConstants.locate("textures/block/" + BuiltInRegistries.BLOCK.getKey(overlayState.getBlock()).getPath() + ".png"));
             BlockPos blockPos = BlockPos.containing(client.player.getX(), client.player.getEyeY(), client.player.getZ());
             float brightness = LightTexture.getBrightness(client.player.level().dimensionType(), client.player.level().getMaxLocalRawBrightness(blockPos));
             RenderSystem.enableBlend();
