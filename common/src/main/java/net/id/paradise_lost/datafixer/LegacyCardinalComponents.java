@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public final class LegacyCardinalComponents {
     public static final String ROOT_KEY = "cardinal_components";
-    public static final ResourceLocation MOA_GENETICS = ModConstants.locate("moa_genetics");
-    public static final ResourceLocation MINECART_FLOAT = ModConstants.locate("minecart_float");
+    public static final ResourceLocation MOA_GENETICS = ModConstants.id("moa_genetics");
+    public static final ResourceLocation MINECART_FLOAT = ModConstants.id("minecart_float");
 
     private LegacyCardinalComponents() {
     }

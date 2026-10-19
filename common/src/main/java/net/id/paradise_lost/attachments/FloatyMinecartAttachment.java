@@ -17,7 +17,7 @@ import java.util.function.UnaryOperator;
 public class FloatyMinecartAttachment extends CommonDataAttachment<FloatyMinecartAttachment.State> {
 
     public FloatyMinecartAttachment() {
-        super(entity -> State.DEFAULT, ModConstants.locate("floaty_minecart"), false, State.CODEC, State.STREAM_CODEC);
+        super(entity -> State.DEFAULT, ModConstants.id("floaty_minecart"), false, State.CODEC, State.STREAM_CODEC);
     }
 
     public State get(Entity cart) {

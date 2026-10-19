@@ -22,7 +22,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 
 public class PalaceDoorBlockEntityRenderer implements BlockEntityRenderer<PalaceDoorBlockEntity> {
 
-    public static final Material DOORS = new Material(InventoryMenu.BLOCK_ATLAS, ModConstants.locate("block/palace_door"));
+    public static final Material DOORS = new Material(InventoryMenu.BLOCK_ATLAS, ModConstants.id("block/palace_door"));
 
     private final ModelPart door;
 

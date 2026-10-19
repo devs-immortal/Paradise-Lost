@@ -34,12 +34,12 @@ import java.util.UUID;
 import java.util.function.BiConsumer;
 
 public class ParadiseLostChestLootProvider implements LootTableSubProvider {
-    private static final TagKey<Structure> VAULT_STRUCTURES = TagKey.create(Registries.STRUCTURE, ModConstants.locate("vault"));
+    private static final TagKey<Structure> VAULT_STRUCTURES = TagKey.create(Registries.STRUCTURE, ModConstants.id("vault"));
     private static final ResourceKey<MapDecorationType> VAULT_DECORATION =
-            ResourceKey.create(Registries.MAP_DECORATION_TYPE, ModConstants.locate("vault"));
-    private static final TagKey<Structure> PALACE_STRUCTURES = TagKey.create(Registries.STRUCTURE, ModConstants.locate("palace"));
+            ResourceKey.create(Registries.MAP_DECORATION_TYPE, ModConstants.id("vault"));
+    private static final TagKey<Structure> PALACE_STRUCTURES = TagKey.create(Registries.STRUCTURE, ModConstants.id("palace"));
     private static final ResourceKey<MapDecorationType> PALACE_DECORATION =
-            ResourceKey.create(Registries.MAP_DECORATION_TYPE, ModConstants.locate("palace"));
+            ResourceKey.create(Registries.MAP_DECORATION_TYPE, ModConstants.id("palace"));
 
     private final HolderLookup.Provider registries;
 
@@ -88,7 +88,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(ItemRegistry.TOTEM_OF_LEVITATION.get(), 2))
                         .add(item(ItemRegistry.FLAXWEAVE.get(), 5).apply(count(1, 3)))
                         .add(item(BlockRegistry.PINK_SPORECAP.get(), 3).apply(count(1, 2))))
-                .setRandomSequence(ModConstants.locate("chests/birdcage/tomb")));
+                .setRandomSequence(ModConstants.id("chests/birdcage/tomb")));
 
         output.accept(ParadiseLostLootTables.BIRDCAGE_TOMB_BARE, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(4))
@@ -100,7 +100,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(BlockRegistry.PINK_SPORECAP.get(), 3).apply(count(1, 3)))
                         .add(LootItem.lootTableItem(Items.OMINOUS_BOTTLE)
                                 .apply(SetComponentsFunction.setComponent(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, 0)).setWeight(2)))
-                .setRandomSequence(ModConstants.locate("chests/birdcage/tomb_bare")));
+                .setRandomSequence(ModConstants.id("chests/birdcage/tomb_bare")));
 
         output.accept(ParadiseLostLootTables.PALACE_ARTISAN, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(3))
@@ -114,7 +114,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(ItemRegistry.GOLDEN_AMBER.get(), 2).apply(count(2, 6)))
                         .add(item(BlockRegistry.GOLDEN_AMBER_TILE.get(), 2).apply(count(1, 4))))
                 .withPool(floatyLeggingsPool())
-                .setRandomSequence(ModConstants.locate("chests/palace/artisan")));
+                .setRandomSequence(ModConstants.id("chests/palace/artisan")));
 
         output.accept(ParadiseLostLootTables.PALACE_KEY, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
@@ -125,7 +125,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1, 3))
                         .add(item(ItemRegistry.GOLDEN_AMBER.get(), 2).apply(count(0, 3)))
                         .add(item(Items.GOLD_NUGGET, 1).apply(count(1, 3))))
-                .setRandomSequence(ModConstants.locate("chests/palace/artisan")));
+                .setRandomSequence(ModConstants.id("chests/palace/artisan")));
 
         HolderLookup.RegistryLookup<Enchantment> enchantments = registries.lookupOrThrow(Registries.ENCHANTMENT);
         output.accept(ParadiseLostLootTables.PALACE_LIBRARY, LootTable.lootTable()
@@ -147,7 +147,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                                         .withEnchantment(
                                                 enchantments.getOrThrow(ParadiseLostEnchantments.RENDING),
                                                 UniformGenerator.between(1.0F, 3.0F)))))
-                .setRandomSequence(ModConstants.locate("chests/palace/library")));
+                .setRandomSequence(ModConstants.id("chests/palace/library")));
 
         output.accept(ParadiseLostLootTables.PALACE_SECRET_JUNK, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(3))
@@ -162,7 +162,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0, 1))
                         .add(item(ItemRegistry.OLVITE_HELMET_ORNATE.get(), 1).apply(damage(0.6F, 0.9F))))
                 .withPool(floatyLeggingsPool())
-                .setRandomSequence(ModConstants.locate("chests/palace/artisan")));
+                .setRandomSequence(ModConstants.id("chests/palace/artisan")));
 
         output.accept(ParadiseLostLootTables.PALACE_SWEETS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2))
@@ -176,7 +176,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(Items.GLASS_BOTTLE, 1))
                         .add(item(Items.BOWL, 1))
                         .add(item(ItemRegistry.BLACKCURRANT.get(), 1)))
-                .setRandomSequence(ModConstants.locate("chests/palace/sweets")));
+                .setRandomSequence(ModConstants.id("chests/palace/sweets")));
 
         output.accept(ParadiseLostLootTables.VAULT_FOOD, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2))
@@ -193,7 +193,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(BlockRegistry.MOTHER_AUREL_WOODSTUFF.sapling().get(), 8).apply(count(1, 3)))
                         .add(item(BlockRegistry.ANCIENT_FLOWER.get(), 3))
                         .add(item(ItemRegistry.GLAZED_GOLD_HOE.get(), 1).apply(damage(0.8F, 1.5F))))
-                .setRandomSequence(ModConstants.locate("chests/vault/food")));
+                .setRandomSequence(ModConstants.id("chests/vault/food")));
 
         output.accept(ParadiseLostLootTables.VAULT_JUNK_BLOCKS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1, 2))
@@ -210,7 +210,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(ItemRegistry.GLAZED_GOLD_AXE.get(), 2).apply(damage(0.3F, 1.0F)))
                         .add(item(ItemRegistry.GLAZED_GOLD_PICKAXE.get(), 2).apply(damage(0.3F, 1.0F)))
                         .add(item(ItemRegistry.GLAZED_GOLD_SHOVEL.get(), 2).apply(damage(0.3F, 1.0F))))
-                .setRandomSequence(ModConstants.locate("chests/vault/junk_blocks")));
+                .setRandomSequence(ModConstants.id("chests/vault/junk_blocks")));
 
         output.accept(ParadiseLostLootTables.VAULT_JUNK_DEBRIS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1, 3))
@@ -223,7 +223,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(BlockRegistry.BROWN_SPORECAP.get(), 1).apply(count(0, 1))))
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(-1, 1))
                         .add(LootItem.lootTableItem(Items.BOOK).apply(count(1, 3))))
-                .setRandomSequence(ModConstants.locate("chests/vault/junk_debris")));
+                .setRandomSequence(ModConstants.id("chests/vault/junk_debris")));
 
         output.accept(ParadiseLostLootTables.VAULT_JUNK_LOOT, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1, 3))
@@ -239,7 +239,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(-1, 1))
                         .add(item(Items.RAW_GOLD, 2).apply(count(1, 2)))
                         .add(item(BlockRegistry.CHERINE_LANTERN.get(), 1).apply(count(0, 2))))
-                .setRandomSequence(ModConstants.locate("chests/vault/junk_loot")));
+                .setRandomSequence(ModConstants.id("chests/vault/junk_loot")));
 
         output.accept(ParadiseLostLootTables.VAULT_JUNK_UTILITY, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1, 2))
@@ -254,7 +254,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(BlockRegistry.TREE_TAP.get(), 1))
                         .add(item(ItemRegistry.OLVITE_BLOODSTONE.get(), 3))
                         .add(item(ItemRegistry.GLAZED_GOLD_UPGRADE.get(), 3)))
-                .setRandomSequence(ModConstants.locate("chests/vault/junk_utility")));
+                .setRandomSequence(ModConstants.id("chests/vault/junk_utility")));
 
         output.accept(ParadiseLostLootTables.VAULT_VALUABLE, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
@@ -275,7 +275,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(Items.EXPERIENCE_BOTTLE, 5).apply(count(0, 2)))
                         .add(item(ItemRegistry.GLAZED_GOLD_LEGGINGS.get(), 1).apply(damage(0.3F, 1.0F)))
                         .add(item(ItemRegistry.GLAZED_GOLD_BOOTS.get(), 2).apply(damage(0.3F, 1.0F))))
-                .setRandomSequence(ModConstants.locate("chests/vault/valuable")));
+                .setRandomSequence(ModConstants.id("chests/vault/valuable")));
 
         output.accept(ParadiseLostLootTables.POTS_GENERIC, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).setBonusRolls(ConstantValue.exactly(0))
@@ -283,7 +283,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                         .add(item(ItemRegistry.CHERINE.get(), 5).apply(count(1, 6)))
                         .add(item(ItemRegistry.OLVITE_NUGGET.get(), 5).apply(count(2, 5)))
                         .add(item(ItemRegistry.OLVITE.get(), 5)))
-                .setRandomSequence(ModConstants.locate("pots/remains")));
+                .setRandomSequence(ModConstants.id("pots/remains")));
 
         output.accept(ParadiseLostLootTables.POTS_REMAINS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).setBonusRolls(ConstantValue.exactly(0))
@@ -302,7 +302,7 @@ public class ParadiseLostChestLootProvider implements LootTableSubProvider {
                                 .apply(SetNameFunction.setName(
                                         Component.translatable("filled_map.paradise_lost.palace"),
                                         SetNameFunction.Target.ITEM_NAME)).setWeight(7)))
-                .setRandomSequence(ModConstants.locate("pots/remains")));
+                .setRandomSequence(ModConstants.id("pots/remains")));
 
         output.accept(ParadiseLostLootTables.SPAWNER_GENERIC_FOOD, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(4))

@@ -55,7 +55,7 @@ public final class ParadiseLostBiomes {
     }
 
     private static ResourceKey<Biome> of(String name) {
-        return ResourceKey.create(Registries.BIOME, locate(name));
+        return ResourceKey.create(Registries.BIOME, id(name));
     }
 
     public static void bootstrap(BootstrapContext<Biome> context) {

@@ -20,8 +20,8 @@ import java.util.function.Function;
 
 public class CalciteFlowerPotModel implements BakedModel {
 
-    private static final ResourceLocation POT_TEXTURE = ModConstants.locate("block/calcite_flower_pot");
-    private static final ResourceLocation SOIL_TEXTURE = ModConstants.locate("block/dirt");
+    private static final ResourceLocation POT_TEXTURE = ModConstants.id("block/calcite_flower_pot");
+    private static final ResourceLocation SOIL_TEXTURE = ModConstants.id("block/dirt");
     private static final ResourceLocation VANILLA_POT_TEXTURE = ResourceLocation.withDefaultNamespace("block/flower_pot");
     private static final ResourceLocation VANILLA_SOIL_TEXTURE = ResourceLocation.withDefaultNamespace("block/dirt");
 

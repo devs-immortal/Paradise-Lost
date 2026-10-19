@@ -33,7 +33,7 @@ public final class ParadiseLostConfiguredCarvers {
     public static final ResourceKey<ConfiguredWorldCarver<?>> TINY_GOLDEN_CLOUD = of("tiny_golden_cloud");
 
     public static ResourceKey<ConfiguredWorldCarver<?>> of(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_CARVER, locate(name));
+        return ResourceKey.create(Registries.CONFIGURED_CARVER, id(name));
     }
 
     public static void bootstrap(BootstrapContext<ConfiguredWorldCarver<?>> context) {

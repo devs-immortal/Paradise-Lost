@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(FloatyLeggingsItem.class)
 public abstract class FloatyLeggingsItemMixin extends ArmorItem {
     private static final ResourceLocation FLOATY_LEGGINGS_ANCHORED =
-            ModConstants.locate("textures/models/armor/floaty_layer_2_on.png");
+            ModConstants.id("textures/models/armor/floaty_layer_2_on.png");
 
     public FloatyLeggingsItemMixin(Holder<ArmorMaterial> material, Type type, Properties properties) {
         super(material, type, properties);

@@ -65,7 +65,7 @@ public class ParadiseLostEquipmentLootProvider implements LootTableSubProvider {
                                 .apply(new SetEnchantmentsFunction.Builder(false)
                                         .withEnchantment(enchantments.getOrThrow(Enchantments.KNOCKBACK), ConstantValue.exactly(1.0F))))
                         .add(LootItem.lootTableItem(ItemRegistry.OLVITE_AXE.get())))
-                .setRandomSequence(ModConstants.locate("equipment/birdcage_envoy")));
+                .setRandomSequence(ModConstants.id("equipment/birdcage_envoy")));
 
         output.accept(ParadiseLostLootTables.BIRDCAGE_ENVOY_OMINOUS, LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).setBonusRolls(ConstantValue.exactly(0))
@@ -97,7 +97,7 @@ public class ParadiseLostEquipmentLootProvider implements LootTableSubProvider {
                                         .withEnchantment(enchantments.getOrThrow(Enchantments.KNOCKBACK), ConstantValue.exactly(1.0F))
                                         .withEnchantment(enchantments.getOrThrow(Enchantments.SHARPNESS), ConstantValue.exactly(2.0F))))
                         .add(LootItem.lootTableItem(ItemRegistry.OLVITE_AXE.get())))
-                .setRandomSequence(ModConstants.locate("equipment/birdcage_envoy_ominous")));
+                .setRandomSequence(ModConstants.id("equipment/birdcage_envoy_ominous")));
     }
 
     private static LootPoolSingletonContainer.Builder<?> item(ItemLike item, int weight) {

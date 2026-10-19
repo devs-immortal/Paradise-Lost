@@ -8,6 +8,6 @@ import net.id.paradise_lost.ModConstants;
 public class ParadiseLostEntityTypeTags {
 
     private static TagKey<EntityType<?>> register(String id) {
-        return TagKey.create(Registries.ENTITY_TYPE, ModConstants.locate(id));
+        return TagKey.create(Registries.ENTITY_TYPE, ModConstants.id(id));
     }
 }

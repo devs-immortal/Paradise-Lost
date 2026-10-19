@@ -10,7 +10,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 
 public record FloatyAnchorC2SPacket(boolean anchored) implements C2SModPacket<RegistryFriendlyByteBuf> {
-    public static final Type<FloatyAnchorC2SPacket> TYPE = new Type<>(ModConstants.locate("floaty_anchor"));
+    public static final Type<FloatyAnchorC2SPacket> TYPE = new Type<>(ModConstants.id("floaty_anchor"));
     public static final StreamCodec<RegistryFriendlyByteBuf, FloatyAnchorC2SPacket> CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL, FloatyAnchorC2SPacket::anchored,
             FloatyAnchorC2SPacket::new

@@ -15,7 +15,7 @@ import java.util.Set;
 
 public final class ParadiseLostPoi {
     public static final ResourceKey<PoiType> BLUE_PORTAL_KEY =
-            ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, ModConstants.locate("blue_portal"));
+            ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, ModConstants.id("blue_portal"));
 
     private static final RegistrationProvider<PoiType> POI =
             RegistrationProvider.get(Registries.POINT_OF_INTEREST_TYPE, ModConstants.MOD_ID);

@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(HumanoidArmorLayer.class)
 public class HumanoidArmorLayerMixin {
     private static final ResourceLocation FLOATY_LEGGINGS_ANCHORED =
-            ModConstants.locate("textures/models/armor/floaty_layer_2_on.png");
+            ModConstants.id("textures/models/armor/floaty_layer_2_on.png");
 
     @WrapOperation(
             method = "renderArmorPiece",

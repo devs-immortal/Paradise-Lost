@@ -10,7 +10,7 @@ public final class ModConstants {
 
     private ModConstants() {}
 
-    public static ResourceLocation locate(String location) {
+    public static ResourceLocation id(String location) {
         if (location.contains(":")) {
             return ResourceLocation.parse(location);
         }

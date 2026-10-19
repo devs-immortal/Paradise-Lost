@@ -40,6 +40,6 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> INCUBATOR_WARMER_BEDS = register("incubator_warmer_beds");
 
     private static TagKey<Block> register(String id) {
-        return TagKey.create(Registries.BLOCK, ModConstants.locate(id));
+        return TagKey.create(Registries.BLOCK, ModConstants.id(id));
     }
 }

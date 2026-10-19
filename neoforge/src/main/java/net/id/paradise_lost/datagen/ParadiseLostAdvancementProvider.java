@@ -67,7 +67,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                             BlockRegistry.CHISELED_FLOESTONE.get(),
                             Component.translatable("advancements.paradise_lost.root.title").withStyle(ChatFormatting.AQUA),
                             Component.translatable("advancements.paradise_lost.root.description"),
-                            ModConstants.locate("textures/block/floestone.png"),
+                            ModConstants.id("textures/block/floestone.png"),
                             AdvancementType.TASK,
                             false,
                             false,
@@ -75,7 +75,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     )
                     .addCriterion("entered_paradise", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY))
                     .requirements(AdvancementRequirements.allOf(List.of("entered_paradise")))
-                    .save(saver, ModConstants.locate("root"), existingFileHelper);
+                    .save(saver, ModConstants.id("root"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(root)
@@ -92,7 +92,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     .addCriterion("goal", emptyLocationCriterion(ParadiseLostCriteria.BLOOMED_BLADE_GOAL))
                     .requirements(AdvancementRequirements.allOf(List.of("goal")))
                     .sendsTelemetryEvent()
-                    .save(saver, ModConstants.locate("bloomed_blade_goal"), existingFileHelper);
+                    .save(saver, ModConstants.id("bloomed_blade_goal"), existingFileHelper);
 
             AdvancementHolder brewPotion = AdvancementSubProvider.createPlaceholder("minecraft:nether/brew_potion");
             AdvancementHolder bloomedCalciteCraft = Advancement.Builder.advancement()
@@ -113,7 +113,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     ))
                     .addCriterion("hold_bc", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.BLOOMED_CALCITE.get()))
                     .requirements(AdvancementRequirements.anyOf(List.of("douse", "hold_bc")))
-                    .save(saver, ModConstants.locate("bloomed_calcite_craft"), existingFileHelper);
+                    .save(saver, ModConstants.id("bloomed_calcite_craft"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(root)
@@ -133,7 +133,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     .addCriterion("remains", LootTableTrigger.TriggerInstance.lootTableUsed(ParadiseLostLootTables.REMAINS_COMMON))
                     .requirements(AdvancementRequirements.allOf(List.of("remains", "has_sherd")))
                     .sendsTelemetryEvent()
-                    .save(saver, ModConstants.locate("calcite_sherd"), existingFileHelper);
+                    .save(saver, ModConstants.id("calcite_sherd"), existingFileHelper);
 
             AdvancementHolder circletStored = Advancement.Builder.advancement()
                     .parent(root)
@@ -150,7 +150,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     .addCriterion("charged", emptyLocationCriterion(ParadiseLostCriteria.XP_CIRCLET_CHARGED))
                     .requirements(AdvancementRequirements.allOf(List.of("charged")))
                     .sendsTelemetryEvent()
-                    .save(saver, ModConstants.locate("circlet_stored"), existingFileHelper);
+                    .save(saver, ModConstants.id("circlet_stored"), existingFileHelper);
 
             ItemStack circletIcon = new ItemStack(ItemRegistry.XP_CIRCLET.get());
             circletIcon.set(ParadiseLostDataComponentTypes.XP_CIRCLET_CHARGE, new ParadiseLostDataComponentTypes.XpCircletChargeComponent(100));
@@ -169,7 +169,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     .addCriterion("charged", emptyLocationCriterion(ParadiseLostCriteria.XP_CIRCLET_CHARGED_30))
                     .requirements(AdvancementRequirements.allOf(List.of("charged")))
                     .sendsTelemetryEvent()
-                    .save(saver, ModConstants.locate("circlet_stored_a_lot"), existingFileHelper);
+                    .save(saver, ModConstants.id("circlet_stored_a_lot"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(bloomedCalciteCraft)
@@ -184,7 +184,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                             false
                     )
                     .addCriterion("entered_nether", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY))
-                    .save(saver, ModConstants.locate("enter_paradise_lost"), existingFileHelper);
+                    .save(saver, ModConstants.id("enter_paradise_lost"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(root)
@@ -204,7 +204,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                                     .setY(MinMaxBounds.Doubles.between(420.0, 450.0))
                     ))
                     .requirements(AdvancementRequirements.allOf(List.of("worldtop")))
-                    .save(saver, ModConstants.locate("float_up_paradise_lost"), existingFileHelper);
+                    .save(saver, ModConstants.id("float_up_paradise_lost"), existingFileHelper);
 
             AdvancementHolder tameMoa = Advancement.Builder.advancement()
                     .parent(root)
@@ -222,7 +222,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                             EntityPredicate.Builder.entity().of(EntityRegistry.MOA.get())
                     ))
                     .requirements(AdvancementRequirements.allOf(List.of("tame")))
-                    .save(saver, ModConstants.locate("tame_moa"), existingFileHelper);
+                    .save(saver, ModConstants.id("tame_moa"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(tameMoa)
@@ -241,7 +241,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                             ItemPredicate.Builder.item().of(FABRIC_RAW_MEAT)
                     ))
                     .requirements(AdvancementRequirements.allOf(List.of("fill")))
-                    .save(saver, ModConstants.locate("food_bowl_fill"), existingFileHelper);
+                    .save(saver, ModConstants.id("food_bowl_fill"), existingFileHelper);
 
             AdvancementHolder motherAurel = Advancement.Builder.advancement()
                     .parent(root)
@@ -260,7 +260,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     .addCriterion("sapling", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.MOTHER_AUREL_WOODSTUFF.sapling().get()))
                     .addCriterion("stripped_log", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.MOTHER_AUREL_WOODSTUFF.strippedLog().get()))
                     .requirements(AdvancementRequirements.anyOf(List.of("log", "stripped_log", "leaves", "sapling")))
-                    .save(saver, ModConstants.locate("mother_aurel"), existingFileHelper);
+                    .save(saver, ModConstants.id("mother_aurel"), existingFileHelper);
 
             AdvancementHolder motherAurelStrip = Advancement.Builder.advancement()
                     .parent(motherAurel)
@@ -280,7 +280,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                             ItemPredicate.Builder.item().of(C_AXES)
                     ))
                     .requirements(AdvancementRequirements.anyOf(List.of("strip", "hold_amber")))
-                    .save(saver, ModConstants.locate("mother_aurel_strip"), existingFileHelper);
+                    .save(saver, ModConstants.id("mother_aurel_strip"), existingFileHelper);
 
             AdvancementHolder glazedUpgradeFind = Advancement.Builder.advancement()
                     .parent(motherAurelStrip)
@@ -296,7 +296,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     )
                     .addCriterion("upgrade", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.GLAZED_GOLD_UPGRADE.get()))
                     .requirements(AdvancementRequirements.allOf(List.of("upgrade")))
-                    .save(saver, ModConstants.locate("glazed_upgrade_find"), existingFileHelper);
+                    .save(saver, ModConstants.id("glazed_upgrade_find"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(glazedUpgradeFind)
@@ -322,7 +322,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     .requirements(AdvancementRequirements.anyOf(List.of(
                             "shovel", "pickaxe", "axe", "sword", "hoe", "helmet", "chestplate", "leggings", "boots"
                     )))
-                    .save(saver, ModConstants.locate("glazed_upgrade_use"), existingFileHelper);
+                    .save(saver, ModConstants.id("glazed_upgrade_use"), existingFileHelper);
 
             AdvancementHolder nitraFind = Advancement.Builder.advancement()
                     .parent(root)
@@ -338,7 +338,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     )
                     .addCriterion("find", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.NITRA_SEED.get()))
                     .requirements(AdvancementRequirements.allOf(List.of("find")))
-                    .save(saver, ModConstants.locate("nitra_find"), existingFileHelper);
+                    .save(saver, ModConstants.id("nitra_find"), existingFileHelper);
 
             AdvancementHolder nitraBunch = Advancement.Builder.advancement()
                     .parent(nitraFind)
@@ -354,7 +354,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     )
                     .addCriterion("find", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.NITRA_BUNCH.get()))
                     .requirements(AdvancementRequirements.allOf(List.of("find")))
-                    .save(saver, ModConstants.locate("nitra_bunch"), existingFileHelper);
+                    .save(saver, ModConstants.id("nitra_bunch"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(root)
@@ -373,7 +373,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                             Optional.of(EntityPredicate.wrap(EntityPredicate.Builder.entity().of(EntityRegistry.POPOM.get())))
                     ))
                     .requirements(AdvancementRequirements.allOf(List.of("squeeze")))
-                    .save(saver, ModConstants.locate("squeeze_popom"), existingFileHelper);
+                    .save(saver, ModConstants.id("squeeze_popom"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(nitraBunch)
@@ -390,7 +390,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     .addCriterion("block", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.SURTRUM.get()))
                     .addCriterion("raw", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.RAW_SURTRUM.get()))
                     .requirements(AdvancementRequirements.anyOf(List.of("raw", "block")))
-                    .save(saver, ModConstants.locate("surtrum_blast"), existingFileHelper);
+                    .save(saver, ModConstants.id("surtrum_blast"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(root)
@@ -407,7 +407,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                     .addCriterion("used_totem", UsedTotemTrigger.TriggerInstance.usedTotem(ItemRegistry.TOTEM_OF_LEVITATION.get()))
                     .requirements(AdvancementRequirements.allOf(List.of("used_totem")))
                     .sendsTelemetryEvent()
-                    .save(saver, ModConstants.locate("use_levitation_totem"), existingFileHelper);
+                    .save(saver, ModConstants.id("use_levitation_totem"), existingFileHelper);
 
             Advancement.Builder.advancement()
                     .parent(root)
@@ -427,7 +427,7 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                                     .setY(MinMaxBounds.Doubles.between(-100.0, -7.0))
                     ))
                     .requirements(AdvancementRequirements.allOf(List.of("invoid")))
-                    .save(saver, ModConstants.locate("void_paradise_lost"), existingFileHelper);
+                    .save(saver, ModConstants.id("void_paradise_lost"), existingFileHelper);
         }
 
         private static Criterion<?> emptyLocationCriterion(ItemUsedOnLocationTrigger trigger) {

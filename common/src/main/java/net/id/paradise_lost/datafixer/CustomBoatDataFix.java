@@ -40,7 +40,7 @@ public final class CustomBoatDataFix {
         if (wood == null) {
             return false;
         }
-        ResourceLocation replacement = ModConstants.locate(wood + (chest ? "_chest_boat" : "_boat"));
+        ResourceLocation replacement = ModConstants.id(wood + (chest ? "_chest_boat" : "_boat"));
         entityTag.putString("id", replacement.toString());
         entityTag.remove("Type");
         ModConstants.LOGGER.debug("Migrated legacy boat Type {} -> {}", type, replacement);

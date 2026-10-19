@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class LevitaArrowRenderer extends ArrowRenderer<LevitaArrow> {
-    private static final ResourceLocation TEXTURE = ModConstants.locate("textures/entity/projectiles/levita_arrow.png");
+    private static final ResourceLocation TEXTURE = ModConstants.id("textures/entity/projectiles/levita_arrow.png");
 
     public LevitaArrowRenderer(EntityRendererProvider.Context context) {
         super(context);

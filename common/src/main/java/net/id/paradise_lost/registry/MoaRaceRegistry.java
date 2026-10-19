@@ -20,13 +20,13 @@ import static net.id.paradise_lost.entity.passive.moa.MoaAttributes.*;
 public final class MoaRaceRegistry {
 
     public static final DatapackRegistry<MoaRace> REGISTRY =
-            DatapackRegistry.<MoaRace>builder(ModConstants.locate("moa_race"))
+            DatapackRegistry.<MoaRace>builder(ModConstants.id("moa_race"))
                     .withElementCodec(MoaRace.CODEC)
                     .withNetworkCodec(MoaRace.CODEC)
                     .withBootstrap(MoaRaceRegistry::bootstrap)
                     .build();
 
-    public static final ResourceLocation FALLBACK_ID = ModConstants.locate("fallback");
+    public static final ResourceLocation FALLBACK_ID = ModConstants.id("fallback");
     public static final ResourceKey<MoaRace> FALLBACK = key("fallback");
 
     public static final ResourceKey<MoaRace> HIGHLANDS_BLUE = key("highlands_blue");
@@ -57,7 +57,7 @@ public final class MoaRaceRegistry {
     }
 
     public static ResourceKey<MoaRace> key(String path) {
-        return ResourceKey.create(REGISTRY.key(), ModConstants.locate(path));
+        return ResourceKey.create(REGISTRY.key(), ModConstants.id(path));
     }
 
     public static Registry<MoaRace> get(RegistryAccess access) {

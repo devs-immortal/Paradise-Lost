@@ -26,6 +26,6 @@ public class ParadiseLostItemTags {
     public static final TagKey<Item> RENDING_ENCHANTABLE = register("enchantable/rending");
 
     private static TagKey<Item> register(String id) {
-        return TagKey.create(Registries.ITEM, ModConstants.locate(id));
+        return TagKey.create(Registries.ITEM, ModConstants.id(id));
     }
 }

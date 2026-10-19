@@ -26,7 +26,7 @@ public final class ParadiseLostProcessorLists {
     public static final ResourceKey<StructureProcessorList> VAULT_PROC = of("vault_proc");
 
     public static ResourceKey<StructureProcessorList> of(String name) {
-        return ResourceKey.create(Registries.PROCESSOR_LIST, locate(name));
+        return ResourceKey.create(Registries.PROCESSOR_LIST, id(name));
     }
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {

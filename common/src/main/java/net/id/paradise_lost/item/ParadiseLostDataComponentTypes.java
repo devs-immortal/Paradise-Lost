@@ -38,7 +38,7 @@ public class ParadiseLostDataComponentTypes {
     public record MoaGeneComponent(ResourceLocation race, String affinity, boolean isBaby, float hunger, UUID ownerId, MoaAttributeComponent attributes) {
 
         public static final Codec<MoaGeneComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-                ResourceLocation.CODEC.optionalFieldOf("race", ModConstants.locate("fallback")).forGetter(MoaGeneComponent::race),
+                ResourceLocation.CODEC.optionalFieldOf("race", ModConstants.id("fallback")).forGetter(MoaGeneComponent::race),
                 Codec.STRING.optionalFieldOf("affinity", "").forGetter(MoaGeneComponent::affinity),
                 Codec.BOOL.optionalFieldOf("is_baby", true).forGetter(MoaGeneComponent::isBaby),
                 Codec.FLOAT.optionalFieldOf("hunger", 0.0F).forGetter(MoaGeneComponent::hunger),

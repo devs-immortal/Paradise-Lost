@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.layers.EyesLayer;
 
 public class SentinelEyesFeatureRenderer<T extends SentinelEntity> extends EyesLayer<T, SentinelEntityModel<T>> {
 
-    private static final RenderType TEXTURE = RenderType.eyes(ModConstants.locate("textures/entity/sentinel/sentinel_eyes.png"));
+    private static final RenderType TEXTURE = RenderType.eyes(ModConstants.id("textures/entity/sentinel/sentinel_eyes.png"));
 
     public SentinelEyesFeatureRenderer(RenderLayerParent<T, SentinelEntityModel<T>> featureRendererContext) {
         super(featureRendererContext);
