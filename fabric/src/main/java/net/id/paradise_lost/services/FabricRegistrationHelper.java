@@ -50,5 +50,8 @@ public class FabricRegistrationHelper implements IRegistrationHelper {
             itemGroup.accept(ItemRegistry.ENVOY_SPAWN_EGG.get());
             itemGroup.accept(ItemRegistry.SENTINEL_SPAWN_EGG.get());
         });
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(itemGroup -> {
+            itemGroup.accept(ItemRegistry.PARADISE_LOST_PORTAL.get());
+        });
     }
 }

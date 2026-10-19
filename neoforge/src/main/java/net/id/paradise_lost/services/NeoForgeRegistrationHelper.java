@@ -84,6 +84,9 @@ public class NeoForgeRegistrationHelper implements IRegistrationHelper {
                 event.accept(ItemRegistry.ENVOY_SPAWN_EGG.get());
                 event.accept(ItemRegistry.SENTINEL_SPAWN_EGG.get());
             }
+            if (event.getTabKey().equals(CreativeModeTabs.OP_BLOCKS)) {
+                event.accept(ItemRegistry.PARADISE_LOST_PORTAL.get());
+            }
         });
     }
 }
