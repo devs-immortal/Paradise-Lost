@@ -14,4 +14,9 @@ public abstract class LevelRendererMixin {
     private void clienttest$recordLevelEvent(int type, BlockPos pos, int data, CallbackInfo ci) {
         Recorder.levelEvents.add(type + "@" + pos.toShortString());
     }
+
+    @Inject(method = "renderLevel", at = @At("RETURN"))
+    private void clienttest$countFrame(CallbackInfo ci) {
+        Recorder.frames.incrementAndGet();
+    }
 }

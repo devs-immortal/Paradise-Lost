@@ -1,9 +1,9 @@
 package net.id.paradise_lost.gametest.tests;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradise_lost.gametest.Step;
 import net.id.paradise_lost.gametest.Test;
 import net.id.paradise_lost.gametest.TestFactory;
+import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
@@ -29,12 +29,12 @@ public final class CompatTests {
 
     @TestFactory
     private static List<Test> wilderWild() {
-        if (!FabricLoader.getInstance().isModLoaded("wilderwild")) {
+        if (!Services.PLATFORM.isModLoaded("wilderwild")) {
             return List.of();
         }
         return List.of(
                 new Test(GROUP, "Wilder Wild and FrozenLib are loaded", Step.run(0, () -> {
-                    check(FabricLoader.getInstance().isModLoaded("frozenlib"), "FrozenLib is missing");
+                    check(Services.PLATFORM.isModLoaded("frozenlib"), "FrozenLib is missing");
                 })),
                 new Test(GROUP, "Wilder Wild: Paradise Lost chunks finish generating", generateChunks()),
                 new Test(GROUP, "Wilder Wild: portal leads to Paradise Lost and back", DimensionTests.portalTravelSteps()),

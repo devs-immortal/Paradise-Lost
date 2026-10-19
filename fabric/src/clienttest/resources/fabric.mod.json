@@ -6,7 +6,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "net.id.paradise_lost.gametest.ClientTestRunner"
+      "net.id.paradise_lost.gametest.FabricClientTestEntry"
     ]
   },
   "mixins": [

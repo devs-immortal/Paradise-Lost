@@ -5,13 +5,13 @@ import net.id.paradise_lost.util.MinecartFloatingHelper;
 import net.id.paradise_lost.block.mechanical.LevitaRailBlock;
 import net.id.paradise_lost.gametest.ClientTest;
 import net.id.paradise_lost.gametest.Step;
+import net.id.paradise_lost.gametest.TickEvents;
 import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.entity.block.FloatingBlockEntity;
 import net.id.paradise_lost.entity.projectile.LevitaArrow;
 import net.id.paradise_lost.item.tool.base_tools.GravityTool;
 import net.id.paradise_lost.registry.BlockRegistry;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,7 +21,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -2274,7 +2273,7 @@ public final class LevitaTests {
     private static volatile Vec3 shotTarget;
 
     static {
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
+        TickEvents.SERVER_END.add(server -> {
             Function<IntegratedServer, Boolean> watch = shotWatch;
             if (watch == null || shotWatchHit || !(server instanceof IntegratedServer integrated)) {
                 return;
@@ -2334,7 +2333,7 @@ public final class LevitaTests {
     private static int clientTicks;
 
     static {
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+        TickEvents.CLIENT_END.add(() -> {
             clientTicks++;
             try {
                 runShots();

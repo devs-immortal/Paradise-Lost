@@ -1,7 +1,5 @@
 package net.id.paradise_lost.gametest;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.id.paradise_lost.gametest.tests.BlockTests;
 import net.id.paradise_lost.gametest.tests.BoatTests;
 import net.id.paradise_lost.gametest.tests.CompatTests;
@@ -16,6 +14,7 @@ import net.id.paradise_lost.gametest.tests.NitraTests;
 import net.id.paradise_lost.gametest.tests.PotTests;
 import net.id.paradise_lost.gametest.tests.RegistryTests;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.level.WorldDataConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,10 +25,11 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletionException;
+import java.util.function.Supplier;
 
 import static net.id.paradise_lost.gametest.TestHelpers.client;
 
-public class ClientTestRunner implements ClientModInitializer {
+public final class ClientTestRunner {
     private static final Logger LOG = LoggerFactory.getLogger("ClientTest");
     private static final int WORLD_SETTLE_TICKS = 40;
     private static final int RESET_SETTLE_TICKS = 20;
@@ -53,6 +53,7 @@ public class ClientTestRunner implements ClientModInitializer {
     public static int currentTestNumber;
     public static int currentTestCount;
 
+    private final Supplier<WorldDataConfiguration> dataConfiguration;
     private Phase phase = Phase.CREATE_WORLD;
     private final Deque<Test> tests = new ArrayDeque<>();
     private final List<String> failures = new ArrayList<>();
@@ -62,10 +63,14 @@ public class ClientTestRunner implements ClientModInitializer {
     private int testCount;
     private int wait;
 
-    @Override
-    public void onInitializeClient() {
+    private ClientTestRunner(Supplier<WorldDataConfiguration> dataConfiguration) {
+        this.dataConfiguration = dataConfiguration;
+    }
+
+    public static void init(Supplier<WorldDataConfiguration> dataConfiguration) {
+        ClientTestRunner runner = new ClientTestRunner(dataConfiguration);
         Recorder.register();
-        ClientTickEvents.END_CLIENT_TICK.register(client -> tick());
+        TickEvents.CLIENT_END.add(runner::tick);
     }
 
     private void tick() {
@@ -74,7 +79,7 @@ public class ClientTestRunner implements ClientModInitializer {
             case CREATE_WORLD -> {
                 if (client.getOverlay() != null) return;
                 client.options.pauseOnLostFocus = false;
-                TestWorld.create();
+                TestWorld.create(dataConfiguration.get());
                 phase = Phase.WAIT_FOR_WORLD;
             }
             case WAIT_FOR_WORLD -> {

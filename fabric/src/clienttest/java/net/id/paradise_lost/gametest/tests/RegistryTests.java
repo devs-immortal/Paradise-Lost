@@ -6,11 +6,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.mojang.serialization.JsonOps;
-import net.fabricmc.loader.api.FabricLoader;
 import net.id.paradise_lost.block.blockentity.ParadiseHangingSignBlockEntity;
 import net.id.paradise_lost.gametest.ClientTest;
 import net.id.paradise_lost.gametest.Step;
 import net.id.paradise_lost.gametest.mixin.HangingSignEditScreenAccessor;
+import net.id.paradise_lost.platform.Services;
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
 import net.minecraft.client.renderer.Sheets;
@@ -253,7 +253,7 @@ public final class RegistryTests {
 
     private static boolean loaded(String id) {
         String namespace = ResourceLocation.parse(id.startsWith("#") ? id.substring(1) : id).getNamespace();
-        return namespace.equals("minecraft") || namespace.equals("c") || FabricLoader.getInstance().isModLoaded(namespace);
+        return namespace.equals("minecraft") || namespace.equals("c") || Services.PLATFORM.isModLoaded(namespace);
     }
 
     private static JsonElement withoutMissingMods(JsonElement json) {

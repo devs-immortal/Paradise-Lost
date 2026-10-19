@@ -3,6 +3,9 @@
   "minVersion": "0.8",
   "package": "net.id.paradise_lost.gametest.mixin",
   "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MinecraftServerMixin"
+  ],
   "client": [
     "ClientPacketListenerMixin",
     "GameRendererMixin",
@@ -10,7 +13,8 @@
     "LevelRendererMixin",
     "LivingEntityMixin",
     "MinecraftMixin",
-    "RenderStateShardMixin"
+    "RenderStateShardMixin",
+    "ServerPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

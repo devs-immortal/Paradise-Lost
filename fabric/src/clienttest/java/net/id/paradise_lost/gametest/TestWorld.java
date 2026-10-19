@@ -1,6 +1,5 @@
 package net.id.paradise_lost.gametest;
 
-import net.fabricmc.fabric.impl.resource.loader.ModResourcePackUtil;
 import net.id.paradise_lost.world.ParadiseLostGameRules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -33,14 +32,13 @@ final class TestWorld {
     private TestWorld() {
     }
 
-    static void create() {
+    static void create(WorldDataConfiguration data) {
         try {
             FileUtils.deleteDirectory(client().getLevelSource().getBaseDir().resolve(NAME).toFile());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        WorldDataConfiguration data = ModResourcePackUtil.createDefaultDataConfiguration();
         GameRules rules = new GameRules();
 
         rules.getRule(GameRules.RULE_DO_IMMEDIATE_RESPAWN).set(true, null);

@@ -1,10 +1,7 @@
 package net.id.paradise_lost.gametest;
 
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.ItemStack;
@@ -60,13 +57,6 @@ public final class Recorder {
         LoggerContext logContext = (LoggerContext) LogManager.getContext(false);
         logContext.getConfiguration().getRootLogger().addAppender(appender, null, null);
         logContext.updateLoggers();
-        WorldRenderEvents.END.register(context -> frames.incrementAndGet());
-        ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, baseDamage, damageTaken, blocked) -> {
-            if (entity instanceof ServerPlayer) playerDamage.add(source);
-        });
-        ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
-            if (entity instanceof ServerPlayer) playerDeaths.add(source);
-        });
     }
 
     static List<String> errorsSince(int start) {
