@@ -51,7 +51,7 @@ public final class ParadiseLostAliasFix {
         aliasItem("orange_sign", "aurel_sign");
         aliasItem("orange_hanging_sign", "aurel_hanging_sign");
 
-        alias(BuiltInRegistries.ITEM, ModConstants.id("orange"), ResourceLocation.withDefaultNamespace("apple"));
+        alias(BuiltInRegistries.ITEM, ModConstants.locate("orange"), ResourceLocation.withDefaultNamespace("apple"));
 
         ModConstants.LOGGER.info("Registered {} registry aliases for renamed Paradise Lost content", ALIASES.size());
     }
@@ -65,11 +65,11 @@ public final class ParadiseLostAliasFix {
     }
 
     private static void aliasBlock(String from, String to) {
-        alias(BuiltInRegistries.BLOCK, ModConstants.id(from), ModConstants.id(to));
+        alias(BuiltInRegistries.BLOCK, ModConstants.locate(from), ModConstants.locate(to));
     }
 
     private static void aliasItem(String from, String to) {
-        alias(BuiltInRegistries.ITEM, ModConstants.id(from), ModConstants.id(to));
+        alias(BuiltInRegistries.ITEM, ModConstants.locate(from), ModConstants.locate(to));
     }
 
     private static void alias(Registry<?> registry, ResourceLocation from, ResourceLocation to) {

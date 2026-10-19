@@ -43,7 +43,7 @@ public class MoaEggCommand {
         var resolvedId = raceId;
         var race = MoaAPI.findRace(access, resolvedId).orElse(null);
         if (race == null && raceId.getNamespace().equals("minecraft")) {
-            resolvedId = ModConstants.id(raceId.getPath());
+            resolvedId = ModConstants.locate(raceId.getPath());
             race = MoaAPI.findRace(access, resolvedId).orElse(null);
         }
         if (race == null) {

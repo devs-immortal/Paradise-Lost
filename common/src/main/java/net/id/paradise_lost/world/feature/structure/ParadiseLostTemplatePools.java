@@ -72,7 +72,7 @@ public final class ParadiseLostTemplatePools {
     public static final ResourceKey<StructureTemplatePool> VAULT_STARTS = of("vault/starts");
 
     public static ResourceKey<StructureTemplatePool> of(String name) {
-        return ResourceKey.create(Registries.TEMPLATE_POOL, id(name));
+        return ResourceKey.create(Registries.TEMPLATE_POOL, locate(name));
     }
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
@@ -83,128 +83,128 @@ public final class ParadiseLostTemplatePools {
         context.register(BIRDCAGE_CAPS, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/caps/cap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/caps/cap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(BIRDCAGE_CENTERS, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_6", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2)
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/centers/center_6", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(BIRDCAGE_CONNECTORS, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("birdcage/ends"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("birdcage/ends"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_short_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_medium_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 7),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_short_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_medium_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 7),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_short_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_medium_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_short_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_medium_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_tunnel_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_tunnel_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_short_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_medium_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 7),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_short_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_medium_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 7),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_short_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_medium_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_short_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_medium_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/connectors/straight_long_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_tunnel_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_tunnel_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(BIRDCAGE_ENDS, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("birdcage/caps"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("birdcage/caps"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_closet_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_closet_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_closet_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_closet_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_tunnel_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_tunnel_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_closet_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_closet_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_closet_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_closet_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_tunnel_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/ends/end_tunnel_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(BIRDCAGE_LEVELS_NORMAL, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 8),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 11),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 6),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 8),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 10),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_6", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 6),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_1_spawner", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 6),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_2_spawner", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 6)
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 8),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 11),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 6),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 8),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 10),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_6", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 6),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_1_spawner", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 6),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/normal/normal_2_spawner", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 6)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(BIRDCAGE_LEVELS_STAIRS, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_2_spawner", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2)
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/levels/stairs/stairs_2_spawner", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(BIRDCAGE_ROOFS, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/roofs/roof_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/roofs/roof_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/roofs/roof_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/roofs/roof_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/roofs/roof_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/roofs/roof_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/roofs/roof_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/roofs/roof_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(BIRDCAGE_ROOMS, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("birdcage/ends"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("birdcage/ends"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/big_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_end_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_pass_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_turn_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/big_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_end_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_pass_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_turn_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/big_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_end_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_pass_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_turn_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/big_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_end_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_pass_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_turn_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/small_turn_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/small_turn_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/big_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_end_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_pass_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_turn_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/big_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_end_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_pass_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_turn_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/big_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_end_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_pass_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_turn_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/big_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_end_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_pass_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/medium_turn_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/small_turn_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:birdcage/rooms/small_turn_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(BIRDCAGE_STAIRWELLS, new StructureTemplatePool(
                 empty,
                 List.of(
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_1_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_2_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_3_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_4_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 3),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_1_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_2_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_3_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1),
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_4_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("birdcage_proc")))), 1)
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_1_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_2_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_3_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_4_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 3),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_1_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_2_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_3_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1),
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/stairwells/stairwell_external_4_broken", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("birdcage_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(BIRDCAGE_SPAWNERS, new StructureTemplatePool(
@@ -348,14 +348,14 @@ public final class ParadiseLostTemplatePools {
         context.register(PALACE_SIDES_BOTTOMS, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/corners/corner_1_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("palace_dissolve_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/corners/corner_2_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("palace_dissolve_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/corners/corner_3_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("palace_dissolve_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/back_1_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("palace_dissolve_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/entrance_1_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("palace_dissolve_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/side_1_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("palace_dissolve_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/side_2_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("palace_dissolve_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/side_3_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("palace_dissolve_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/corners/corner_1_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("palace_dissolve_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/corners/corner_2_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("palace_dissolve_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/corners/corner_3_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("palace_dissolve_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/back_1_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("palace_dissolve_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/entrance_1_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("palace_dissolve_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/side_1_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("palace_dissolve_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/side_2_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("palace_dissolve_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/sides/side_3_bottom", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("palace_dissolve_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(PALACE_SIDES_ENTRANCES, new StructureTemplatePool(
@@ -369,7 +369,7 @@ public final class ParadiseLostTemplatePools {
         context.register(PALACE_STARTS, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:palace/centers/center_bottom_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("palace_dissolve_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:palace/centers/center_bottom_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("palace_dissolve_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(REMAINS_PLATES, new StructureTemplatePool(
@@ -443,195 +443,195 @@ public final class ParadiseLostTemplatePools {
         context.register(VAULT_ARMORED_ENVOY, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/armored_envoy", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/armored_envoy", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_CATACOMB, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("vault/catacomb_fallback"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("vault/catacomb_fallback"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/passage_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/passage_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/passage_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/end_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/end_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/passage_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/passage_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/passage_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/end_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/end_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_CATACOMB_CROSSWAY, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("vault/catacomb_fallback"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("vault/catacomb_fallback"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/crossway_rare_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_CATACOMB_FALLBACK, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/end_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 5),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/end_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/end_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 5),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/catacomb/end_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_ENLIGHTENED_ENVOY, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/enlightened_envoy", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/enlightened_envoy", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_FIRST_FLOOR_PLANT_ROOM_CONNECTOR, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("vault/first_floor/plant_room_connector_fallback"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("vault/first_floor/plant_room_connector_fallback"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/connector_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/endcap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 6),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/endcap_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 5)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/connector_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/endcap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 6),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/endcap_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 5)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_FIRST_FLOOR_PLANT_ROOM_CONNECTOR_FALLBACK, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/endcap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/endcap_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/endcap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/endcap_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_FIRST_FLOOR_SPAN, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("vault/first_floor/span_fallback"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("vault/first_floor/span_fallback"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/big_room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/catacomb_staircase", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/plant/room_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/big_room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/catacomb_staircase", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/passthru_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_FIRST_FLOOR_SPAN_FALLBACK, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/first_floor/span/room_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_SECOND_FLOOR_SHORTS, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("vault/second_floor/shorts_fallback"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("vault/second_floor/shorts_fallback"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/short_hall_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/short_hall_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/short_hall_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_big_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_big_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_big_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_chest_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 6),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 6),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 6),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/short_hall_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/short_hall_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/short_hall_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_big_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_big_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_big_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_chest_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 6),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 6),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/passthru_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 6),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_SECOND_FLOOR_SHORTS_FALLBACK, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/shorts/room_chest_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_SECOND_FLOOR_TALL_HALLS, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("vault/second_floor/tall_halls_fallback"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("vault/second_floor/tall_halls_fallback"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 4),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 4),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_SECOND_FLOOR_TALL_HALLS_FALLBACK, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_chest_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/endcap_pillar_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_SECOND_FLOOR_TALL_HALLS_NON_END, new StructureTemplatePool(
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("vault/second_floor/tall_halls_fallback"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("vault/second_floor/tall_halls_fallback"))),
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 2),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 3),
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 2),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_2", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_3", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_4", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 3),
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/second_floor/tall_halls/hall_5", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(VAULT_STARTS, new StructureTemplatePool(
                 empty,
                 List.of(
-                Pair.of(StructurePoolElement.single("paradise_lost:vault/starts/start_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, id("vault_proc")))), 1)
+                Pair.of(StructurePoolElement.single("paradise_lost:vault/starts/start_1", processors.getOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, locate("vault_proc")))), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
     }

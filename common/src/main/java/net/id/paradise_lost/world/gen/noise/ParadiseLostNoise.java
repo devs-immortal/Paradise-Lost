@@ -32,7 +32,7 @@ public final class ParadiseLostNoise {
     }
 
     private static ResourceKey<NormalNoise.NoiseParameters> of(String name) {
-        return ResourceKey.create(Registries.NOISE, id(name));
+        return ResourceKey.create(Registries.NOISE, locate(name));
     }
 
     public static void bootstrap(BootstrapContext<NormalNoise.NoiseParameters> context) {

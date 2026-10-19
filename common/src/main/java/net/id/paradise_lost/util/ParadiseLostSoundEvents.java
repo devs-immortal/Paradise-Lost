@@ -74,7 +74,7 @@ public final class ParadiseLostSoundEvents {
     }
 
     private static SoundEvent register(String location) {
-        ResourceLocation resourceId = id(location);
+        ResourceLocation resourceId = locate(location);
         SoundEvent event = SoundEvent.createVariableRangeEvent(resourceId);
         SOUND_EVENTS.register(location, () -> event);
         return event;

@@ -37,7 +37,7 @@ public final class ParadiseLostStructures {
     public static final ResourceKey<Structure> VAULT = of("vault");
 
     public static ResourceKey<Structure> of(String name) {
-        return ResourceKey.create(Registries.STRUCTURE, id(name));
+        return ResourceKey.create(Registries.STRUCTURE, locate(name));
     }
 
     public static void bootstrap(BootstrapContext<Structure> context) {
@@ -47,7 +47,7 @@ public final class ParadiseLostStructures {
         context.register(AUREL_TOWER, new AurelTowerFeature(new Structure.StructureSettings(biomes.getOrThrow(ParadiseLostStructureTags.AUREL_TOWER_HAS_STRUCTURE), Map.of(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN)));
         context.register(BIRDCAGE, new JigsawStructure(
                 new Structure.StructureSettings(biomes.getOrThrow(ParadiseLostStructureTags.BIRDCAGE_HAS_STRUCTURE), Map.of(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("birdcage/roofs"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("birdcage/roofs"))),
                 Optional.empty(),
                 10,
                 ConstantHeight.of(VerticalAnchor.absolute(100)),
@@ -59,7 +59,7 @@ public final class ParadiseLostStructures {
                 JigsawStructure.DEFAULT_LIQUID_SETTINGS));
         context.register(PALACE, new JigsawStructure(
                 new Structure.StructureSettings(biomes.getOrThrow(ParadiseLostStructureTags.PALACE_HAS_STRUCTURE), Map.ofEntries(Map.entry(MobCategory.MONSTER, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.PIECE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(EntityRegistry.ENVOY.get(), 10, 2, 4))))), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("palace/starts"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("palace/starts"))),
                 Optional.empty(),
                 6,
                 ConstantHeight.of(VerticalAnchor.absolute(155)),
@@ -71,7 +71,7 @@ public final class ParadiseLostStructures {
                 JigsawStructure.DEFAULT_LIQUID_SETTINGS));
         context.register(REMAINS, new JigsawStructure(
                 new Structure.StructureSettings(biomes.getOrThrow(ParadiseLostStructureTags.REMAINS_HAS_STRUCTURE), Map.of(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("remains/starting_plates"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("remains/starting_plates"))),
                 Optional.empty(),
                 4,
                 ConstantHeight.of(VerticalAnchor.absolute(0)),
@@ -83,7 +83,7 @@ public final class ParadiseLostStructures {
                 JigsawStructure.DEFAULT_LIQUID_SETTINGS));
         context.register(VAULT, new JigsawStructure(
                 new Structure.StructureSettings(biomes.getOrThrow(ParadiseLostStructureTags.VAULT_HAS_STRUCTURE), Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.ENCAPSULATE),
-                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, id("vault/starts"))),
+                pools.getOrThrow(ResourceKey.create(Registries.TEMPLATE_POOL, locate("vault/starts"))),
                 Optional.empty(),
                 8,
                 ConstantHeight.of(VerticalAnchor.absolute(105)),

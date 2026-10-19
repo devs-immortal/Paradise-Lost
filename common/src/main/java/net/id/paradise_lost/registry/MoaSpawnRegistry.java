@@ -35,7 +35,7 @@ public final class MoaSpawnRegistry {
                     .withBootstrap(MoaSpawnRegistry::bootstrap)
                     .build();
 
-    public static final ResourceLocation DEFAULT_ID = ModConstants.id("default");
+    public static final ResourceLocation DEFAULT_ID = ModConstants.locate("default");
 
     private static final Set<ResourceLocation> WARNED_MISSING_RACES = ConcurrentHashMap.newKeySet();
 

@@ -31,9 +31,9 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 public abstract class ItemRendererMixin {
 
     @Unique
-    private static final ModelResourceLocation OLVITE_SPYGLASS = ModelResourceLocation.inventory(id("olvite_spyglass"));
+    private static final ModelResourceLocation OLVITE_SPYGLASS = ModelResourceLocation.inventory(locate("olvite_spyglass"));
     @Unique
-    private static final ModelResourceLocation OLVITE_SPYGLASS_IN_HAND = ModelResourceLocation.inventory(id("olvite_spyglass_in_hand"));
+    private static final ModelResourceLocation OLVITE_SPYGLASS_IN_HAND = ModelResourceLocation.inventory(locate("olvite_spyglass_in_hand"));
 
     @Final
     @Shadow

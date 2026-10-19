@@ -31,7 +31,7 @@ public class ParadiseLostDimension {
     private static DimensionType dimensionType;
     
     private static <T> ResourceKey<T> key(ResourceKey<? extends Registry<T>> registry, String name) {
-        return ResourceKey.create(registry, ModConstants.id(name));
+        return ResourceKey.create(registry, ModConstants.locate(name));
     }
     
     public static void init() {

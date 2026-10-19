@@ -22,7 +22,7 @@ public class ParadiseLostStructureFeatures {
     public static final StructurePieceType AUREL_TOWER_PIECE = AurelTowerGenerator.Piece::new;
 
     private static TagKey<Structure> tagKey(String name) {
-        return TagKey.create(Registries.STRUCTURE, id(name));
+        return TagKey.create(Registries.STRUCTURE, locate(name));
     }
 
     public static void init() {

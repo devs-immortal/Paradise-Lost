@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class EnvoyEntityRenderer extends SkeletonRenderer<EnvoyEntity> {
-    private static final ResourceLocation TEXTURE = ModConstants.id("textures/entity/envoy/envoy.png");
-    private static final ResourceLocation TEXTURE_ENLIGHTENED = ModConstants.id("textures/entity/envoy/envoy_enlightened.png");
+    private static final ResourceLocation TEXTURE = ModConstants.locate("textures/entity/envoy/envoy.png");
+    private static final ResourceLocation TEXTURE_ENLIGHTENED = ModConstants.locate("textures/entity/envoy/envoy_enlightened.png");
 
     public EnvoyEntityRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, ParadiseLostModelLayers.ENVOY, ParadiseLostModelLayers.ENVOY_INNER_ARMOR, ParadiseLostModelLayers.ENVOY_OUTER_ARMOR);

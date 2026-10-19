@@ -80,7 +80,7 @@ public class ItemRegistry {
     private static Properties withSherdPattern(Properties properties, String patternPath) {
         DataComponentType<ResourceLocation> type = (DataComponentType<ResourceLocation>) BuiltInRegistries.DATA_COMPONENT_TYPE.get(
                 ResourceLocation.fromNamespaceAndPath("sherdsapi", "sherd_pattern"));
-        return properties.component(type, id(patternPath));
+        return properties.component(type, locate(patternPath));
     }
 
     public static final RegistryObject<Item, Item> GOLDEN_AMBER = add("golden_amber", () -> new Item(resource()));
@@ -152,11 +152,11 @@ public class ItemRegistry {
     public static final RegistryObject<Item, CherineBloodstoneItem> CHERINE_BLOODSTONE = add("cherine_bloodstone", () -> new CherineBloodstoneItem(unstackableTool()));
     public static final RegistryObject<Item, OlviteBloodstoneItem> OLVITE_BLOODSTONE = add("olvite_bloodstone", () -> new OlviteBloodstoneItem(unstackableTool()));
     public static final RegistryObject<Item, SurtrumBloodstoneItem> SURTRUM_BLOODSTONE = add("surtrum_bloodstone", () -> new SurtrumBloodstoneItem(unstackableTool().fireResistant()));
-    private static final Component GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT = Component.translatable(Util.makeDescriptionId("item", id("smithing_template.glazed_gold_upgrade.applies_to"))).withStyle(ChatFormatting.BLUE);
-    private static final Component GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT = Component.translatable(Util.makeDescriptionId("item", id("smithing_template.glazed_gold_upgrade.ingredients"))).withStyle(ChatFormatting.BLUE);
-    private static final Component GLAZED_GOLD_UPGRADE_TEXT = Component.translatable(Util.makeDescriptionId("upgrade", id("glazed_gold_upgrade"))).withStyle(ChatFormatting.GRAY);
-    private static final Component GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT = Component.translatable(Util.makeDescriptionId("item", id("smithing_template.glazed_gold_upgrade.base_slot_description")));
-    private static final Component GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT = Component.translatable(Util.makeDescriptionId("item", id("smithing_template.glazed_gold_upgrade.additions_slot_description")));
+    private static final Component GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT = Component.translatable(Util.makeDescriptionId("item", locate("smithing_template.glazed_gold_upgrade.applies_to"))).withStyle(ChatFormatting.BLUE);
+    private static final Component GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT = Component.translatable(Util.makeDescriptionId("item", locate("smithing_template.glazed_gold_upgrade.ingredients"))).withStyle(ChatFormatting.BLUE);
+    private static final Component GLAZED_GOLD_UPGRADE_TEXT = Component.translatable(Util.makeDescriptionId("upgrade", locate("glazed_gold_upgrade"))).withStyle(ChatFormatting.GRAY);
+    private static final Component GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT = Component.translatable(Util.makeDescriptionId("item", locate("smithing_template.glazed_gold_upgrade.base_slot_description")));
+    private static final Component GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT = Component.translatable(Util.makeDescriptionId("item", locate("smithing_template.glazed_gold_upgrade.additions_slot_description")));
 
     public static final RegistryObject<Item, Item> GLAZED_GOLD_UPGRADE = add("glazed_gold_upgrade_smithing_template", () -> new SmithingTemplateItem(
             GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT, GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT, GLAZED_GOLD_UPGRADE_TEXT, GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT, GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT,

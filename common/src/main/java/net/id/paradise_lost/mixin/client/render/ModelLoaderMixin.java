@@ -19,7 +19,7 @@ import static net.id.paradise_lost.ModConstants.locate;
 public abstract class ModelLoaderMixin {
 
     @Unique
-    private static final ModelResourceLocation OLVITE_SPYGLASS_IN_HAND = ModelResourceLocation.inventory(id("olvite_spyglass_in_hand"));
+    private static final ModelResourceLocation OLVITE_SPYGLASS_IN_HAND = ModelResourceLocation.inventory(locate("olvite_spyglass_in_hand"));
 
     @Shadow
     protected abstract void loadSpecialItemModelAndDependencies(ModelResourceLocation id);

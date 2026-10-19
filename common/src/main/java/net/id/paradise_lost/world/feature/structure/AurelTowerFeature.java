@@ -27,7 +27,7 @@ public class AurelTowerFeature extends Structure {
     }
 
     private static void addPieces(StructurePiecesBuilder collector, GenerationContext context) {
-        StructureTemplate structure = context.structureTemplateManager().getOrCreate(ModConstants.id("aurel_tower"));
+        StructureTemplate structure = context.structureTemplateManager().getOrCreate(ModConstants.locate("aurel_tower"));
         Rotation blockRotation = Rotation.NONE;
         ChunkPos pos = context.chunkPos();
         BlockPos pivot = new BlockPos(structure.getSize().getX() / 2, 0, structure.getSize().getZ() / 2);

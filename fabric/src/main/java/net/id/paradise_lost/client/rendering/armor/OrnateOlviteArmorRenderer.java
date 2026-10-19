@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
 public class OrnateOlviteArmorRenderer implements ArmorRenderer {
-    private static final ResourceLocation TEXTURE = ModConstants.id("textures/models/armor/ornate_olvite.png");
+    private static final ResourceLocation TEXTURE = ModConstants.locate("textures/models/armor/ornate_olvite.png");
     private static OrnateOlviteArmorModel armorModel;
 
     @Override

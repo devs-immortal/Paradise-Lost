@@ -28,7 +28,7 @@ public final class ParadiseLostDensityFunctions {
     }
 
     private static ResourceKey<DensityFunction> of(String name) {
-        return ResourceKey.create(Registries.DENSITY_FUNCTION, id(name));
+        return ResourceKey.create(Registries.DENSITY_FUNCTION, locate(name));
     }
 
     private static final double CLIMATE_AMPLITUDE = 1.4;

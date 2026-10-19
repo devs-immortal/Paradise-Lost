@@ -1928,7 +1928,7 @@ public final class LevitaTests {
 
     @ClientTest("player rides palace side deco minecart loop back to the button")
     private static List<Step> zzPalaceSideDecoMinecartLoop() {
-        ResourceLocation structureId = ModConstants.id("palace/extras/side_3_deco_4");
+        ResourceLocation structureId = ModConstants.locate("palace/extras/side_3_deco_4");
         final double cartLocalX = 2.5;
         final double cartLocalY = 0.0625;
         final double cartLocalZ = 2.5;

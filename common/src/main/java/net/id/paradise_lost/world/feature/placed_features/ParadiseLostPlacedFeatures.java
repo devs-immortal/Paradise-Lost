@@ -38,7 +38,7 @@ public class ParadiseLostPlacedFeatures {
     static final PlacementModifier SPREAD_32_ABOVE = HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top());
 
     public static ResourceKey<PlacedFeature> of(String id) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, id(id));
+        return ResourceKey.create(Registries.PLACED_FEATURE, locate(id));
     }
 
     public static void init() {

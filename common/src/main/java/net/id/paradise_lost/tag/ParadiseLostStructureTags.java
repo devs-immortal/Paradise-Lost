@@ -20,11 +20,11 @@ public class ParadiseLostStructureTags {
     public static final TagKey<Structure> PALACE = structure("palace");
 
     private static TagKey<Biome> biome(String id) {
-        return TagKey.create(Registries.BIOME, ModConstants.id(id));
+        return TagKey.create(Registries.BIOME, ModConstants.locate(id));
     }
 
     private static TagKey<Structure> structure(String id) {
-        return TagKey.create(Registries.STRUCTURE, ModConstants.id(id));
+        return TagKey.create(Registries.STRUCTURE, ModConstants.locate(id));
     }
 }
 

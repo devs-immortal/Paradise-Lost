@@ -45,6 +45,6 @@ public class ParadiseLostLootTables {
     }
 
     private static ResourceKey<LootTable> register(String path) {
-        return ResourceKey.create(Registries.LOOT_TABLE, id(path));
+        return ResourceKey.create(Registries.LOOT_TABLE, locate(path));
     }
 }

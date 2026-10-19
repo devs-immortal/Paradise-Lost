@@ -17,7 +17,7 @@ import java.util.function.UnaryOperator;
 public class AnchoringAttachment extends CommonDataAttachment<AnchoringAttachment.State> {
 
     public AnchoringAttachment() {
-        super(entity -> State.DEFAULT, ModConstants.id("anchoring"), false, State.CODEC, State.STREAM_CODEC);
+        super(entity -> State.DEFAULT, ModConstants.locate("anchoring"), false, State.CODEC, State.STREAM_CODEC);
     }
 
     public State get(Entity player) {
