@@ -22,7 +22,7 @@ public class ParadiseLostEnchantmentProvider extends DatapackBuiltinEntriesProvi
             .add(Registries.ENCHANTMENT, ParadiseLostEnchantmentProvider::bootstrap);
 
     public ParadiseLostEnchantmentProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(ModConstants.MODID));
+        super(output, registries, BUILDER, Set.of(ModConstants.MOD_ID));
     }
 
     private static void bootstrap(BootstrapContext<Enchantment> context) {

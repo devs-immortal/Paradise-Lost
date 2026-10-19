@@ -15,6 +15,6 @@ public final class ParadiseLostWoodTypes {
     public static void init() {}
 
     private static WoodType register(String name, BlockSetType setType) {
-        return WoodType.register(new WoodType(ModConstants.id(name).toString(), setType));
+        return WoodType.register(new WoodType(ModConstants.locate(name).toString(), setType));
     }
 }

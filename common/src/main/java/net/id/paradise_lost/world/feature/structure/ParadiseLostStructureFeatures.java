@@ -9,20 +9,20 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 public class ParadiseLostStructureFeatures {
     private static final RegistrationProvider<StructureType<?>> STRUCTURE_TYPES =
-            RegistrationProvider.get(Registries.STRUCTURE_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.STRUCTURE_TYPE, ModConstants.MOD_ID);
     private static final RegistrationProvider<StructurePieceType> STRUCTURE_PIECES =
-            RegistrationProvider.get(Registries.STRUCTURE_PIECE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.STRUCTURE_PIECE, ModConstants.MOD_ID);
 
     public static final TagKey<Structure> AUREL_TOWER_KEY = tagKey("aurel_tower");
     public static final StructureType<AurelTowerFeature> AUREL_TOWER = () -> AurelTowerFeature.CODEC;
     public static final StructurePieceType AUREL_TOWER_PIECE = AurelTowerGenerator.Piece::new;
 
     private static TagKey<Structure> tagKey(String name) {
-        return TagKey.create(Registries.STRUCTURE, id(name));
+        return TagKey.create(Registries.STRUCTURE, locate(name));
     }
 
     public static void init() {

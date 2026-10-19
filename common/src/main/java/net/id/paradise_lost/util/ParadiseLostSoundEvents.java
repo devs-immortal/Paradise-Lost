@@ -1,6 +1,6 @@
 package net.id.paradise_lost.util;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.registration.RegistrationProvider;
@@ -12,7 +12,7 @@ import net.minecraft.sounds.SoundEvent;
 
 public final class ParadiseLostSoundEvents {
     private static final RegistrationProvider<SoundEvent> SOUND_EVENTS =
-            RegistrationProvider.get(Registries.SOUND_EVENT, ModConstants.MODID);
+            RegistrationProvider.get(Registries.SOUND_EVENT, ModConstants.MOD_ID);
 
     public static final SoundEvent BLOCK_BLACKCURRANT_BUSH_PICK_BLUEBERRIES = register("block.blackcurrant_bush.pick_blueberries");
     public static final SoundEvent BLOCK_PORTAL_AMBIENT = register("block.portal.ambient");
@@ -74,7 +74,7 @@ public final class ParadiseLostSoundEvents {
     }
 
     private static SoundEvent register(String location) {
-        ResourceLocation resourceId = id(location);
+        ResourceLocation resourceId = locate(location);
         SoundEvent event = SoundEvent.createVariableRangeEvent(resourceId);
         SOUND_EVENTS.register(location, () -> event);
         return event;

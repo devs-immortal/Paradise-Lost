@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 import static net.minecraft.world.inventory.InventoryMenu.BLOCK_ATLAS;
 
 public class MoaScreenHandler extends AbstractContainerMenu {
@@ -67,7 +67,7 @@ public class MoaScreenHandler extends AbstractContainerMenu {
 
                 @Override
                 public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                    return Pair.of(BLOCK_ATLAS, id("item/slot/empty_slot_saddle"));
+                    return Pair.of(BLOCK_ATLAS, locate("item/slot/empty_slot_saddle"));
                 }
             }
         );
@@ -89,7 +89,7 @@ public class MoaScreenHandler extends AbstractContainerMenu {
 
                 @Override
                 public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                    return Pair.of(BLOCK_ATLAS, id("item/slot/empty_slot_chest"));
+                    return Pair.of(BLOCK_ATLAS, locate("item/slot/empty_slot_chest"));
                 }
             }
         );
@@ -180,7 +180,7 @@ public class MoaScreenHandler extends AbstractContainerMenu {
 
     public record MoaScreenData(int entityId) implements CustomPacketPayload {
 
-        public static Type<MoaScreenData> ID = new Type<>(id("moa_data"));
+        public static Type<MoaScreenData> ID = new Type<>(locate("moa_data"));
 
         public static final Codec<MoaScreenData> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
                 Codec.INT.fieldOf("entity_id").forGetter(MoaScreenData::entityId)

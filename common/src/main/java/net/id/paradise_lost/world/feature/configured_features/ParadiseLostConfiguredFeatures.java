@@ -7,13 +7,13 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 @SuppressWarnings("unused")
 public class ParadiseLostConfiguredFeatures {
 
     public static ResourceKey<ConfiguredFeature<?, ?>> of(String id) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, id(id));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, locate(id));
     }
 
     public static void init() {

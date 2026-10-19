@@ -11,10 +11,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 public class MoaScreen extends AbstractContainerScreen<MoaScreenHandler> {
-    private static final ResourceLocation TEXTURE = id("textures/gui/container/moa.png");
+    private static final ResourceLocation TEXTURE = locate("textures/gui/container/moa.png");
     private final MoaEntity moa;
 
     public MoaScreen(MoaScreenHandler handler, Inventory inventory, Component title) {

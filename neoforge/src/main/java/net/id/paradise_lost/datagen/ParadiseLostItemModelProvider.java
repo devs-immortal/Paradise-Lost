@@ -26,7 +26,7 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
     private final Set<ResourceLocation> explicitlyModelled = new HashSet<>();
 
     public ParadiseLostItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, ModConstants.MODID, existingFileHelper);
+        super(output, ModConstants.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ParadiseLostItemModelProvider extends ItemModelProvider {
 
         for (Item item : BuiltInRegistries.ITEM) {
             var key = BuiltInRegistries.ITEM.getKey(item);
-            if (!ModConstants.MODID.equals(key.getNamespace())) {
+            if (!ModConstants.MOD_ID.equals(key.getNamespace())) {
                 continue;
             }
             if (item instanceof BlockItem || item instanceof SignItem || item instanceof SpawnEggItem) {

@@ -46,7 +46,7 @@ public final class ParadiseLostWorldGenProvider extends DatapackBuiltinEntriesPr
             .add(Registries.LEVEL_STEM, ParadiseLostLevelStem::bootstrap);
 
     public ParadiseLostWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, BUILDER, Set.of(ModConstants.MODID));
+        super(output, lookupProvider, BUILDER, Set.of(ModConstants.MOD_ID));
     }
 
     public static void bootstrapDimensionTypes(BootstrapContext<DimensionType> context) {

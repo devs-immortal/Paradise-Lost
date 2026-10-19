@@ -17,7 +17,7 @@ public class ParadiseLostEnchantmentTagsProvider extends EnchantmentTagsProvider
             CompletableFuture<HolderLookup.Provider> lookupProvider,
             @Nullable ExistingFileHelper existingFileHelper
     ) {
-        super(output, lookupProvider, ModConstants.MODID, existingFileHelper);
+        super(output, lookupProvider, ModConstants.MOD_ID, existingFileHelper);
     }
 
     @Override

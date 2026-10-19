@@ -1,7 +1,6 @@
 package net.id.paradise_lost.entity.passive.moa;
 
 import com.mojang.serialization.Codec;
-import net.id.paradise_lost.component.MoaGenes;
 import net.minecraft.util.StringRepresentable;
 
 public enum MoaAttributes implements StringRepresentable {

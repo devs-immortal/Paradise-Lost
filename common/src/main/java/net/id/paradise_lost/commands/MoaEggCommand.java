@@ -7,7 +7,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.api.MoaAPI;
-import net.id.paradise_lost.component.MoaGenes;
+import net.id.paradise_lost.entity.passive.moa.MoaGenes;
 import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -43,7 +43,7 @@ public class MoaEggCommand {
         var resolvedId = raceId;
         var race = MoaAPI.findRace(access, resolvedId).orElse(null);
         if (race == null && raceId.getNamespace().equals("minecraft")) {
-            resolvedId = ModConstants.id(raceId.getPath());
+            resolvedId = ModConstants.locate(raceId.getPath());
             race = MoaAPI.findRace(access, resolvedId).orElse(null);
         }
         if (race == null) {

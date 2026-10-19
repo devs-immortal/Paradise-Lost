@@ -1,10 +1,8 @@
-package net.id.paradise_lost.component;
+package net.id.paradise_lost.entity.passive.moa;
 
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import net.minecraft.nbt.CompoundTag;
 import net.id.paradise_lost.registry.EntityRegistry;
-import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
-import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.registry.MoaRaceRegistry;

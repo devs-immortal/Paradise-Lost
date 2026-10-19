@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public final class ParadiseLostScreens {
     public static final RegistrationProvider<MenuType<?>> MENUS =
-            RegistrationProvider.get(Registries.MENU, ModConstants.MODID);
+            RegistrationProvider.get(Registries.MENU, ModConstants.MOD_ID);
 
     public static RegistryObject<MenuType<?>, MenuType<MoaScreenHandler>> MOA;
 

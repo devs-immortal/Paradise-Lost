@@ -21,7 +21,7 @@ public class CreativeTabRegistry {
     }
 
     protected static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS =
-            RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, ModConstants.MODID);
+            RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, ModConstants.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab, CreativeModeTab> PARADISE_BLOCKS_TAB = CREATIVE_MODE_TABS.register("building_blocks",
             () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)

@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class QuintEntityRenderer extends MobRenderer<QuintEntity, QuintEntityModel> {
 
-    private static final ResourceLocation TEXTURE = ModConstants.id("textures/entity/quint.png");
+    private static final ResourceLocation TEXTURE = ModConstants.locate("textures/entity/quint.png");
 
     public QuintEntityRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new QuintEntityModel(renderManager.bakeLayer(ParadiseLostModelLayers.QUINT)), 0.0F);

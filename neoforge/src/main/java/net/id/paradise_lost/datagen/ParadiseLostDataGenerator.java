@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = ModConstants.MODID)
+@EventBusSubscriber(modid = ModConstants.MOD_ID)
 public final class ParadiseLostDataGenerator {
     private ParadiseLostDataGenerator() {}
 

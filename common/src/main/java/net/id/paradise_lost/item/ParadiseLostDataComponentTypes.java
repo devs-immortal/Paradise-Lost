@@ -19,7 +19,7 @@ import java.util.function.UnaryOperator;
 
 public class ParadiseLostDataComponentTypes {
     private static final RegistrationProvider<DataComponentType<?>> DATA_COMPONENT_TYPES =
-            RegistrationProvider.get(Registries.DATA_COMPONENT_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.DATA_COMPONENT_TYPE, ModConstants.MOD_ID);
 
     public static final DataComponentType<MoaGeneComponent> MOA_GENES = register("moa_genes", (builder) -> builder.persistent(MoaGeneComponent.CODEC).networkSynchronized(MoaGeneComponent.PACKET_CODEC).cacheEncoding());
     public static final DataComponentType<BloodstoneComponent> BLOODSTONE = register("bloodstone", (builder) -> builder.persistent(BloodstoneComponent.CODEC).networkSynchronized(BloodstoneComponent.PACKET_CODEC));
@@ -38,7 +38,7 @@ public class ParadiseLostDataComponentTypes {
     public record MoaGeneComponent(ResourceLocation race, String affinity, boolean isBaby, float hunger, UUID ownerId, MoaAttributeComponent attributes) {
 
         public static final Codec<MoaGeneComponent> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-                ResourceLocation.CODEC.optionalFieldOf("race", ModConstants.id("fallback")).forGetter(MoaGeneComponent::race),
+                ResourceLocation.CODEC.optionalFieldOf("race", ModConstants.locate("fallback")).forGetter(MoaGeneComponent::race),
                 Codec.STRING.optionalFieldOf("affinity", "").forGetter(MoaGeneComponent::affinity),
                 Codec.BOOL.optionalFieldOf("is_baby", true).forGetter(MoaGeneComponent::isBaby),
                 Codec.FLOAT.optionalFieldOf("hunger", 0.0F).forGetter(MoaGeneComponent::hunger),

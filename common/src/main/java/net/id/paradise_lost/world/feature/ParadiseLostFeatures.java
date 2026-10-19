@@ -18,7 +18,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 
 public class ParadiseLostFeatures {
     private static final RegistrationProvider<Feature<?>> FEATURES =
-            RegistrationProvider.get(Registries.FEATURE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.FEATURE, ModConstants.MOD_ID);
 
     public static final ParadiseLostLakeFeature LAKE = register("lake", new ParadiseLostLakeFeature(BlockStateConfiguration.CODEC));
 

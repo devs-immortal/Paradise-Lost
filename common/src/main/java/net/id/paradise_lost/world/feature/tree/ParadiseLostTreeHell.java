@@ -16,9 +16,9 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class ParadiseLostTreeHell {
     private static final RegistrationProvider<FoliagePlacerType<?>> FOLIAGE_PLACERS =
-            RegistrationProvider.get(Registries.FOLIAGE_PLACER_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.FOLIAGE_PLACER_TYPE, ModConstants.MOD_ID);
     private static final RegistrationProvider<TrunkPlacerType<?>> TRUNK_PLACERS =
-            RegistrationProvider.get(Registries.TRUNK_PLACER_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.TRUNK_PLACER_TYPE, ModConstants.MOD_ID);
 
     public static FoliagePlacerType<WisteriaFoliagePlacer> WISTERIA_FOLIAGE;
     public static FoliagePlacerType<PointedBallFoliagePlacer> POINTED_BALL_FOLIAGE;

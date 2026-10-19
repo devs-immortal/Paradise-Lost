@@ -42,6 +42,6 @@ public class ParadiseLostArchaeologyLootProvider implements LootTableSubProvider
                         .add(LootItem.lootTableItem(Items.STONE_PICKAXE))
                         .add(LootItem.lootTableItem(Items.STONE_PICKAXE))
                         .add(LootItem.lootTableItem(Items.STONE_SHOVEL)))
-                .setRandomSequence(ModConstants.id("archaeology/remains_common")));
+                .setRandomSequence(ModConstants.locate("archaeology/remains_common")));
     }
 }

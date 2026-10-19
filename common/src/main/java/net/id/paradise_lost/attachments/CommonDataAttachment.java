@@ -104,7 +104,7 @@ public class CommonDataAttachment<T> {
         }
 
         public CommonDataAttachment<T> build(String name) {
-            return build(ResourceLocation.fromNamespaceAndPath(ModConstants.MODID, name));
+            return build(ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, name));
         }
 
         public CommonDataAttachment<T> build(ResourceLocation name) {

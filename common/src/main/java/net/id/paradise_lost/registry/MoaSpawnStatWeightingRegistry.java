@@ -15,7 +15,7 @@ import java.util.Optional;
 public final class MoaSpawnStatWeightingRegistry {
 
     public static final DatapackRegistry<SpawnStatWeighting> REGISTRY =
-            DatapackRegistry.<SpawnStatWeighting>builder(ModConstants.id("moa_spawn_stat_weighting"))
+            DatapackRegistry.<SpawnStatWeighting>builder(ModConstants.locate("moa_spawn_stat_weighting"))
                     .withElementCodec(SpawnStatWeighting.DIRECT_CODEC)
                     .withNetworkCodec(SpawnStatWeighting.DIRECT_CODEC)
                     .withBootstrap(MoaSpawnStatWeightingRegistry::bootstrap)
@@ -42,7 +42,7 @@ public final class MoaSpawnStatWeightingRegistry {
     }
 
     public static ResourceKey<SpawnStatWeighting> key(String path) {
-        return ResourceKey.create(REGISTRY.key(), ModConstants.id(path));
+        return ResourceKey.create(REGISTRY.key(), ModConstants.locate(path));
     }
 
     public static Registry<SpawnStatWeighting> get(RegistryAccess access) {

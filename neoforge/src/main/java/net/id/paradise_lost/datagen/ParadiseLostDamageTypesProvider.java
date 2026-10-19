@@ -19,7 +19,7 @@ public class ParadiseLostDamageTypesProvider extends DatapackBuiltinEntriesProvi
             .add(Registries.DAMAGE_TYPE, ParadiseLostDamageTypesProvider::bootstrapDamageTypes);
 
     public ParadiseLostDamageTypesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, BUILDER, Set.of(ModConstants.MODID));
+        super(output, lookupProvider, BUILDER, Set.of(ModConstants.MOD_ID));
     }
 
     public static void bootstrapDamageTypes(BootstrapContext<DamageType> context) {

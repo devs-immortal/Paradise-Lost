@@ -10,6 +10,6 @@ public class ParadiseLostEnchantments {
     public static final ResourceKey<Enchantment> RENDING = key("rending");
 
     private static ResourceKey<Enchantment> key(String name) {
-        return ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(ModConstants.MODID, name));
+        return ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, name));
     }
 }

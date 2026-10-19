@@ -8,7 +8,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import net.id.paradise_lost.component.MoaGenes;
+import net.id.paradise_lost.entity.passive.moa.MoaGenes;
 import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.entity.passive.moa.MoaEntity;
 import net.minecraft.ChatFormatting;

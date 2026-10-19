@@ -99,7 +99,7 @@ import static net.minecraft.world.level.block.state.BlockBehaviour.Properties.of
 @SuppressWarnings("unused")
 public class BlockRegistry {
     public static final RegistrationProvider<Block> BLOCKS =
-            RegistrationProvider.get(Registries.BLOCK, ModConstants.MODID);
+            RegistrationProvider.get(Registries.BLOCK, ModConstants.MOD_ID);
 
     private static final List<Runnable> PENDING_BLOCK_ITEMS = new ArrayList<>();
 
