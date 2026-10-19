@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 public final class MinecartFloatingHelper {
-    public static final boolean DEBUG_LOG = Services.PLATFORM.isDevelopmentEnvironment();
+    public static final boolean DEBUG_LOG = Services.PLATFORM.isDevelopmentEnvironment() && System.getenv("GITHUB_ACTIONS") == null;
 
     private static final double FLOAT_SECONDS = 4.1;
     private static final double MOTION_EPSILON = 0.05D;

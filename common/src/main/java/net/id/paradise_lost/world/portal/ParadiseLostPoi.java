@@ -2,7 +2,6 @@ package net.id.paradise_lost.world.portal;
 
 import com.google.common.collect.ImmutableSet;
 import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.ParadiseLost;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.registration.RegistryObject;
@@ -16,10 +15,10 @@ import java.util.Set;
 
 public final class ParadiseLostPoi {
     public static final ResourceKey<PoiType> BLUE_PORTAL_KEY =
-            ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, ParadiseLost.locate("blue_portal"));
+            ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, ModConstants.locate("blue_portal"));
 
     private static final RegistrationProvider<PoiType> POI =
-            RegistrationProvider.get(Registries.POINT_OF_INTEREST_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.POINT_OF_INTEREST_TYPE, ModConstants.MOD_ID);
 
     public static final RegistryObject<PoiType, PoiType> BLUE_PORTAL = POI.register(
             "blue_portal",

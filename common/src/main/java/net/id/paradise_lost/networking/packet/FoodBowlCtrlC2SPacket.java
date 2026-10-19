@@ -12,7 +12,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public record FoodBowlCtrlC2SPacket(boolean dumpStack) implements C2SModPacket<RegistryFriendlyByteBuf> {
-    public static final Type<FoodBowlCtrlC2SPacket> TYPE = new Type<>(ModConstants.id("food_bowl_ctrl"));
+    public static final Type<FoodBowlCtrlC2SPacket> TYPE = new Type<>(ModConstants.locate("food_bowl_ctrl"));
     public static final StreamCodec<RegistryFriendlyByteBuf, FoodBowlCtrlC2SPacket> CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL, FoodBowlCtrlC2SPacket::dumpStack,
             FoodBowlCtrlC2SPacket::new

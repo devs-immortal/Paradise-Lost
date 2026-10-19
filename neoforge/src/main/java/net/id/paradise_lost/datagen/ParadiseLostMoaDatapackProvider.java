@@ -17,7 +17,7 @@ public final class ParadiseLostMoaDatapackProvider extends DatapackBuiltinEntrie
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder();
 
     public ParadiseLostMoaDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, BUILDER, Set.of(ModConstants.MODID));
+        super(output, lookupProvider, BUILDER, Set.of(ModConstants.MOD_ID));
         MoaSpawnStatWeightingRegistry.REGISTRY.addToSet(BUILDER);
         MoaRaceRegistry.REGISTRY.addToSet(BUILDER);
         MoaSpawnRegistry.REGISTRY.addToSet(BUILDER);

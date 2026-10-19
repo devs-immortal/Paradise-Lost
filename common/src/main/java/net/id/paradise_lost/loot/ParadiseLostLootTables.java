@@ -1,6 +1,6 @@
 package net.id.paradise_lost.loot;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -45,6 +45,6 @@ public class ParadiseLostLootTables {
     }
 
     private static ResourceKey<LootTable> register(String path) {
-        return ResourceKey.create(Registries.LOOT_TABLE, id(path));
+        return ResourceKey.create(Registries.LOOT_TABLE, locate(path));
     }
 }

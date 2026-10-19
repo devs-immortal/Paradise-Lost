@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.layers.EyesLayer;
 
 public class EnvoyEyesFeatureRenderer<T extends EnvoyEntity> extends EyesLayer<T, EnvoyEntityModel<T>> {
 
-    private static final RenderType TEXTURE = RenderType.eyes(ModConstants.id("textures/entity/envoy/envoy_enlightened_eyes.png"));
+    private static final RenderType TEXTURE = RenderType.eyes(ModConstants.locate("textures/entity/envoy/envoy_enlightened_eyes.png"));
 
     public EnvoyEyesFeatureRenderer(RenderLayerParent<T, EnvoyEntityModel<T>> featureRendererContext) {
         super(featureRendererContext);

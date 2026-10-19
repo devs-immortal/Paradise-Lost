@@ -14,11 +14,11 @@ public class ParadiseLostParticleDescriptionProvider extends ParticleDescription
 
     @Override
     protected void addDescriptions() {
-        sprite(ParadiseLostParticleTypes.CHERINE_FLAME, ModConstants.id("cherine_flame"));
+        sprite(ParadiseLostParticleTypes.CHERINE_FLAME, ModConstants.locate("cherine_flame"));
         spriteSet(ParadiseLostParticleTypes.MOTHER_AUREL_LEAF,
-                ModConstants.id("golden_leaf_1"),
-                ModConstants.id("golden_leaf_2"),
-                ModConstants.id("golden_leaf_3"));
+                ModConstants.locate("golden_leaf_1"),
+                ModConstants.locate("golden_leaf_2"),
+                ModConstants.locate("golden_leaf_3"));
         sprite(ParadiseLostParticleTypes.LEVITA_BLOOP, ResourceLocation.withDefaultNamespace("generic_0"));
         spriteSet(ParadiseLostParticleTypes.LEVITATION_TOTEM,
                 ResourceLocation.withDefaultNamespace("glitter_7"),
@@ -39,11 +39,11 @@ public class ParadiseLostParticleDescriptionProvider extends ParticleDescription
                 ResourceLocation.withDefaultNamespace("generic_1"),
                 ResourceLocation.withDefaultNamespace("generic_0"));
         spriteSet(ParadiseLostParticleTypes.LEVITA_SPARKLE,
-                ModConstants.id("levita_sparkle_0"),
-                ModConstants.id("levita_sparkle_1"),
-                ModConstants.id("levita_sparkle_2"),
-                ModConstants.id("levita_sparkle_3"),
-                ModConstants.id("levita_sparkle_4"),
-                ModConstants.id("levita_sparkle_5"));
+                ModConstants.locate("levita_sparkle_0"),
+                ModConstants.locate("levita_sparkle_1"),
+                ModConstants.locate("levita_sparkle_2"),
+                ModConstants.locate("levita_sparkle_3"),
+                ModConstants.locate("levita_sparkle_4"),
+                ModConstants.locate("levita_sparkle_5"));
     }
 }

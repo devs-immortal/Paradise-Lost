@@ -33,7 +33,7 @@ import net.neoforged.neoforge.client.event.SelectMusicEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
-@Mod(value = ModConstants.MODID, dist = Dist.CLIENT)
+@Mod(value = ModConstants.MOD_ID, dist = Dist.CLIENT)
 public class NeoForgeClient {
     public NeoForgeClient(IEventBus modBus, ModContainer modContainer) {
         modBus.addListener(EntityRenderersEvent.RegisterRenderers.class, NeoForgeClient::registerRenderers);

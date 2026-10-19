@@ -16,7 +16,7 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     public static IEventBus modBus() {
         if (modEventBus == null) {
-            throw new IllegalStateException("NeoForge mod bus not bound; call NeoForgePlatformHelper.bindModBus from ModMain first");
+            throw new IllegalStateException("NeoForge mod bus not bound; call NeoForgePlatformHelper.bindModBus from NeoForgeMain first");
         }
         return modEventBus;
     }

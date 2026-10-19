@@ -10,29 +10,32 @@ import net.id.paradise_lost.screen.NeoForgeScreens;
 import net.id.paradise_lost.services.NeoForgeNetworkHelper;
 import net.id.paradise_lost.services.NeoForgePlatformHelper;
 import net.id.paradise_lost.util.ParadiseLostAliasFix;
+import net.id.paradise_lost.util.RegistryUtil;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
-@Mod(ModConstants.MODID)
-public class ModMain {
-    public ModMain(IEventBus modBus, ModContainer modContainer) {
+@Mod(ModConstants.MOD_ID)
+public class NeoForgeMain {
+    public NeoForgeMain(IEventBus modBus, ModContainer modContainer) {
         NeoForgePlatformHelper.bindModBus(modBus);
         Services.PLATFORM.getPlatformName();
         ModCommon.init();
         NeoForgeScreens.register();
         modBus.<EntityAttributeCreationEvent>addListener(event -> ModEntities.registerEntityAttributes(event::put));
         modBus.addListener(this::commonSetup);
-
         modBus.addListener(this::setupPackets);
 
         NeoForge.EVENT_BUS.addListener(this::registerCommands);
+        NeoForge.EVENT_BUS.addListener(this::addBrewingRecipes);
 
         modBus.addListener(RegisterEvent.class, event -> CommonDataAttachments.init());
     }
@@ -42,7 +45,7 @@ public class ModMain {
     }
 
     private void setupPackets(RegisterPayloadHandlersEvent event) {
-        NeoForgeNetworkHelper.setRegistrar(event.registrar(ModConstants.MODID).versioned("1").optional());
+        NeoForgeNetworkHelper.setRegistrar(event.registrar(ModConstants.MOD_ID).versioned("1").optional());
         PacketHandler.registerPackets();
     }
 
@@ -50,5 +53,10 @@ public class ModMain {
 
         event.enqueueWork(ParadiseLostAliasFix::init);
         event.enqueueWork(EntityRegistry::registerSpawnPlacements);
+    }
+
+    private void addBrewingRecipes(RegisterBrewingRecipesEvent event) {
+        PotionBrewing.Builder builder = event.getBuilder();
+        RegistryUtil.addBrewingRecipes(builder);
     }
 }

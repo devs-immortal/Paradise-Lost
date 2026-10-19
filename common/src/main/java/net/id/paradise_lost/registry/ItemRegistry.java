@@ -62,7 +62,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 import static net.id.paradise_lost.item.ParadiseLostItemActions.*;
 import static net.minecraft.world.item.Rarity.*;
 import net.id.paradise_lost.ModConstants;
@@ -70,7 +70,7 @@ import net.id.paradise_lost.ModConstants;
 @SuppressWarnings("unused")
 public class ItemRegistry {
     public static final RegistrationProvider<Item> ITEMS =
-            RegistrationProvider.get(Registries.ITEM, ModConstants.MODID);
+            RegistrationProvider.get(Registries.ITEM, ModConstants.MOD_ID);
 
     private static Properties resource() {
         return new Properties();
@@ -80,7 +80,7 @@ public class ItemRegistry {
     private static Properties withSherdPattern(Properties properties, String patternPath) {
         DataComponentType<ResourceLocation> type = (DataComponentType<ResourceLocation>) BuiltInRegistries.DATA_COMPONENT_TYPE.get(
                 ResourceLocation.fromNamespaceAndPath("sherdsapi", "sherd_pattern"));
-        return properties.component(type, id(patternPath));
+        return properties.component(type, locate(patternPath));
     }
 
     public static final RegistryObject<Item, Item> GOLDEN_AMBER = add("golden_amber", () -> new Item(resource()));
@@ -152,11 +152,11 @@ public class ItemRegistry {
     public static final RegistryObject<Item, CherineBloodstoneItem> CHERINE_BLOODSTONE = add("cherine_bloodstone", () -> new CherineBloodstoneItem(unstackableTool()));
     public static final RegistryObject<Item, OlviteBloodstoneItem> OLVITE_BLOODSTONE = add("olvite_bloodstone", () -> new OlviteBloodstoneItem(unstackableTool()));
     public static final RegistryObject<Item, SurtrumBloodstoneItem> SURTRUM_BLOODSTONE = add("surtrum_bloodstone", () -> new SurtrumBloodstoneItem(unstackableTool().fireResistant()));
-    private static final Component GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT = Component.translatable(Util.makeDescriptionId("item", id("smithing_template.glazed_gold_upgrade.applies_to"))).withStyle(ChatFormatting.BLUE);
-    private static final Component GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT = Component.translatable(Util.makeDescriptionId("item", id("smithing_template.glazed_gold_upgrade.ingredients"))).withStyle(ChatFormatting.BLUE);
-    private static final Component GLAZED_GOLD_UPGRADE_TEXT = Component.translatable(Util.makeDescriptionId("upgrade", id("glazed_gold_upgrade"))).withStyle(ChatFormatting.GRAY);
-    private static final Component GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT = Component.translatable(Util.makeDescriptionId("item", id("smithing_template.glazed_gold_upgrade.base_slot_description")));
-    private static final Component GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT = Component.translatable(Util.makeDescriptionId("item", id("smithing_template.glazed_gold_upgrade.additions_slot_description")));
+    private static final Component GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT = Component.translatable(Util.makeDescriptionId("item", locate("smithing_template.glazed_gold_upgrade.applies_to"))).withStyle(ChatFormatting.BLUE);
+    private static final Component GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT = Component.translatable(Util.makeDescriptionId("item", locate("smithing_template.glazed_gold_upgrade.ingredients"))).withStyle(ChatFormatting.BLUE);
+    private static final Component GLAZED_GOLD_UPGRADE_TEXT = Component.translatable(Util.makeDescriptionId("upgrade", locate("glazed_gold_upgrade"))).withStyle(ChatFormatting.GRAY);
+    private static final Component GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT = Component.translatable(Util.makeDescriptionId("item", locate("smithing_template.glazed_gold_upgrade.base_slot_description")));
+    private static final Component GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT = Component.translatable(Util.makeDescriptionId("item", locate("smithing_template.glazed_gold_upgrade.additions_slot_description")));
 
     public static final RegistryObject<Item, Item> GLAZED_GOLD_UPGRADE = add("glazed_gold_upgrade_smithing_template", () -> new SmithingTemplateItem(
             GLAZED_GOLD_UPGRADE_APPLIES_TO_TEXT, GLAZED_GOLD_UPGRADE_INGREDIENTS_TEXT, GLAZED_GOLD_UPGRADE_TEXT, GLAZED_GOLD_UPGRADE_BASE_SLOT_DESCRIPTION_TEXT, GLAZED_GOLD_UPGRADE_ADDITIONS_SLOT_DESCRIPTION_TEXT,
@@ -267,7 +267,7 @@ public class ItemRegistry {
     public static BoatSet[] BOAT_SETS;
 
     private static final RegistrationProvider<Potion> POTIONS =
-            RegistrationProvider.get(Registries.POTION, ModConstants.MODID);
+            RegistrationProvider.get(Registries.POTION, ModConstants.MOD_ID);
 
     public static final Holder<Potion> HEALTH_BOOST_POTION = registerPotion("health_boost", () -> new Potion(new MobEffectInstance(MobEffects.HEALTH_BOOST, 6000, 1)));
     public static final Holder<Potion> LONG_HEALTH_BOOST_POTION = registerPotion(

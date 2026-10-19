@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class PopomEntityRenderer extends MobRenderer<PopomEntity, PopomEntityModel<PopomEntity>> {
-    private static final ResourceLocation TEXTURE = ModConstants.id("textures/entity/popom/popom.png");
+    private static final ResourceLocation TEXTURE = ModConstants.locate("textures/entity/popom/popom.png");
 
     public PopomEntityRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new PopomEntityModel<>(renderManager.bakeLayer(ParadiseLostModelLayers.POPOM)), 0.7F);

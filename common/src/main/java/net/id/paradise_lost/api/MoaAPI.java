@@ -2,7 +2,7 @@ package net.id.paradise_lost.api;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.id.paradise_lost.component.MoaGenes;
+import net.id.paradise_lost.entity.passive.moa.MoaGenes;
 import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.registry.MoaBreedingRegistry;
 import net.id.paradise_lost.registry.MoaRaceRegistry;

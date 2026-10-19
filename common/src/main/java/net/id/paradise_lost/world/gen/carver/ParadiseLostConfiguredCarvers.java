@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.ModConstants.locate;
 
 public final class ParadiseLostConfiguredCarvers {
     private ParadiseLostConfiguredCarvers() {}
@@ -33,7 +33,7 @@ public final class ParadiseLostConfiguredCarvers {
     public static final ResourceKey<ConfiguredWorldCarver<?>> TINY_GOLDEN_CLOUD = of("tiny_golden_cloud");
 
     public static ResourceKey<ConfiguredWorldCarver<?>> of(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_CARVER, id(name));
+        return ResourceKey.create(Registries.CONFIGURED_CARVER, locate(name));
     }
 
     public static void bootstrap(BootstrapContext<ConfiguredWorldCarver<?>> context) {

@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class SentinelEntityRenderer extends HumanoidMobRenderer<SentinelEntity, SentinelEntityModel<SentinelEntity>> {
-    private static final ResourceLocation TEXTURE = ModConstants.id("textures/entity/sentinel/sentinel.png");
+    private static final ResourceLocation TEXTURE = ModConstants.locate("textures/entity/sentinel/sentinel.png");
 
     public SentinelEntityRenderer(EntityRendererProvider.Context renderManager) {
         this(renderManager, ParadiseLostModelLayers.SENTINEL, ParadiseLostModelLayers.SENTINEL_INNER_ARMOR, ParadiseLostModelLayers.SENTINEL_OUTER_ARMOR);

@@ -44,7 +44,7 @@ import static net.minecraft.world.entity.MobCategory.MONSTER;
 @SuppressWarnings({"unused", "SameParameterValue"})
 public final class EntityRegistry {
     public static final RegistrationProvider<EntityType<?>> ENTITY_TYPES =
-            RegistrationProvider.get(Registries.ENTITY_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.ENTITY_TYPE, ModConstants.MOD_ID);
 
     private static final List<AttributeRegistration> ATTRIBUTE_REGISTRATIONS = new ArrayList<>();
     private static final List<Runnable> SPAWN_REGISTRATIONS = new ArrayList<>();

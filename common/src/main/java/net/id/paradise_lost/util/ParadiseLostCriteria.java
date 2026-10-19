@@ -8,7 +8,7 @@ import net.minecraft.core.registries.Registries;
 
 public class ParadiseLostCriteria {
     private static final RegistrationProvider<CriterionTrigger<?>> TRIGGERS =
-            RegistrationProvider.get(Registries.TRIGGER_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.TRIGGER_TYPE, ModConstants.MOD_ID);
 
     public static final ItemUsedOnLocationTrigger XP_CIRCLET_CHARGED = register("xp_circlet_charged", new ItemUsedOnLocationTrigger());
     public static final ItemUsedOnLocationTrigger XP_CIRCLET_CHARGED_30 = register("xp_circlet_charged_30", new ItemUsedOnLocationTrigger());

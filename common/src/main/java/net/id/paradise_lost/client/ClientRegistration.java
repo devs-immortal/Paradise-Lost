@@ -77,9 +77,9 @@ public final class ClientRegistration {
     }
 
     public static void registerItemProperties() {
-        ItemProperties.register(ItemRegistry.XP_CIRCLET.get(), ModConstants.id("charged"),
+        ItemProperties.register(ItemRegistry.XP_CIRCLET.get(), ModConstants.locate("charged"),
                 (stack, level, entity, seed) -> XpCircletItem.isCharged(stack) ? 1.0F : 0.0F);
-        ItemProperties.register(ItemRegistry.FLOATY_LEGGINGS.get(), ModConstants.id("broken"),
+        ItemProperties.register(ItemRegistry.FLOATY_LEGGINGS.get(), ModConstants.locate("broken"),
                 (stack, level, entity, seed) -> FloatyLeggingsItem.isFloatyEnabled(stack) ? 0.0F : 1.0F);
     }
 

@@ -5,13 +5,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class ModConstants {
-    public static final String MODID = "paradise_lost";
-    public static final Logger LOGGER = LogManager.getLogger(MODID);
-    private static final ResourceLocation BASE_ID = ResourceLocation.fromNamespaceAndPath(MODID, "");
+    public static final String MOD_ID = "paradise_lost";
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     private ModConstants() {}
 
-    public static ResourceLocation id(String path) {
-        return BASE_ID.withPath(path);
+    public static ResourceLocation locate(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }

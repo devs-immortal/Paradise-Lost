@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 public class ParadiseLostBlockEntityTypes {
     private static final RegistrationProvider<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
-            RegistrationProvider.get(Registries.BLOCK_ENTITY_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.BLOCK_ENTITY_TYPE, ModConstants.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<?>, BlockEntityType<FoodBowlBlockEntity>> FOOD_BOWL = register("food_bowl",
             () -> BlockEntityType.Builder.of(FoodBowlBlockEntity::new, BlockRegistry.FOOD_BOWL.get()).build(null));

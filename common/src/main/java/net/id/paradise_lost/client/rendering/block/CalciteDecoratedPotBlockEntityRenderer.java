@@ -37,8 +37,8 @@ import com.mojang.math.Axis;
 
 public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRenderer<CalciteDecoratedPotBlockEntity> {
 
-    public static final Material CALCITE_DECORATED_POT_BASE = createDecoratedPotPatternTextureId(ModConstants.id("calcite_decorated_pot_base"));
-    public static final Material CALCITE_DECORATED_POT_SIDE = createDecoratedPotPatternTextureId(ModConstants.id("calcite_decorated_pot_side"));
+    public static final Material CALCITE_DECORATED_POT_BASE = createDecoratedPotPatternTextureId(ModConstants.locate("calcite_decorated_pot_base"));
+    public static final Material CALCITE_DECORATED_POT_SIDE = createDecoratedPotPatternTextureId(ModConstants.locate("calcite_decorated_pot_side"));
 
     private static Material createDecoratedPotPatternTextureId(ResourceLocation patternId) {
         return new Material(DECORATED_POT_SHEET, patternId.withPrefix("entity/decorated_pot/"));
@@ -108,7 +108,7 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
 
                 var calciteSprite = new Material(
                         normalSprite.atlasLocation(),
-                        ResourceLocation.fromNamespaceAndPath(ModConstants.MODID, textureIdentifier.getPath() + "_calcite")
+                        ResourceLocation.fromNamespaceAndPath(ModConstants.MOD_ID, textureIdentifier.getPath() + "_calcite")
                 );
                 return calciteSprite;
             }

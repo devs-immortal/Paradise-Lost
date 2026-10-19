@@ -6,7 +6,6 @@ import net.id.paradise_lost.world.feature.structure.ParadiseLostStructureFeature
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -26,7 +25,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import net.id.paradise_lost.ModConstants;
 
 public class AurelTowerGenerator {
-    private static final ResourceLocation AUREL_TOWER = ModConstants.id("aurel_tower");
+    private static final ResourceLocation AUREL_TOWER = ModConstants.locate("aurel_tower");
 
     public static void addPieces(StructureTemplateManager manager, StructurePieceAccessor structurePiecesHolder, Rotation blockRotation, BlockPos pos) {
         structurePiecesHolder.addPiece(new AurelTowerGenerator.Piece(manager, AUREL_TOWER, pos, blockRotation));

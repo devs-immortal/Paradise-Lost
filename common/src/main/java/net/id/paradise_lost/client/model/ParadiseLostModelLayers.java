@@ -44,7 +44,7 @@ public class ParadiseLostModelLayers {
     }
 
     public static ModelLayerLocation register(String id, String layer, LayerDefinition data) {
-        return register(ModConstants.id(id), layer, data);
+        return register(ModConstants.locate(id), layer, data);
     }
 
     public static void initClient() {}

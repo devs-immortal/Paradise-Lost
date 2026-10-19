@@ -8,7 +8,7 @@ import net.minecraft.core.registries.Registries;
 
 public final class ParadiseLostParticleTypes {
     public static final RegistrationProvider<ParticleType<?>> PARTICLE_TYPES =
-            RegistrationProvider.get(Registries.PARTICLE_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.PARTICLE_TYPE, ModConstants.MOD_ID);
 
     public static final SimpleParticleType CHERINE_FLAME = register("cherine_flame");
     public static final SimpleParticleType MOTHER_AUREL_LEAF = register("golden_leaf");

@@ -37,7 +37,7 @@ public class ParadiseLostBlockStateProvider extends BlockStateProvider {
     private final ExistingFileHelper existingFileHelper;
 
     public ParadiseLostBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, ModConstants.MODID, exFileHelper);
+        super(output, ModConstants.MOD_ID, exFileHelper);
         this.existingFileHelper = exFileHelper;
     }
 
