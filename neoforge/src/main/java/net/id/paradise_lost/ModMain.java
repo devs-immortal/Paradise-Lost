@@ -32,10 +32,10 @@ public class ModMain {
         NeoForgeScreens.register();
         modBus.<EntityAttributeCreationEvent>addListener(event -> ModEntities.registerEntityAttributes(event::put));
         modBus.addListener(this::commonSetup);
-        modBus.addListener(this::addBrewingRecipes);
         modBus.addListener(this::setupPackets);
 
         NeoForge.EVENT_BUS.addListener(this::registerCommands);
+        NeoForge.EVENT_BUS.addListener(this::addBrewingRecipes);
 
         modBus.addListener(RegisterEvent.class, event -> CommonDataAttachments.init());
     }
