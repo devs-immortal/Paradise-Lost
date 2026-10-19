@@ -86,6 +86,7 @@ public class NeoForgeRegistrationHelper implements IRegistrationHelper {
             }
             if (event.getTabKey().equals(CreativeModeTabs.OP_BLOCKS)) {
                 event.accept(ItemRegistry.PARADISE_LOST_PORTAL.get());
+                event.accept(ItemRegistry.PALACE_DOOR_PLACER.get());
             }
         });
     }

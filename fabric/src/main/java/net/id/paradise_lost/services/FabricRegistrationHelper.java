@@ -52,6 +52,7 @@ public class FabricRegistrationHelper implements IRegistrationHelper {
         });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(itemGroup -> {
             itemGroup.accept(ItemRegistry.PARADISE_LOST_PORTAL.get());
+            itemGroup.accept(ItemRegistry.PALACE_DOOR_PLACER.get());
         });
     }
 }
