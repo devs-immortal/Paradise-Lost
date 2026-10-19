@@ -33,7 +33,7 @@ public class ParadiseLostRecipeTypes {
         RecipeType<T> type = new RecipeType<>() {
             @Override
             public String toString() {
-                return ModConstants.MOD_ID + ":" + id;
+                return ModConstants.locate(id).toString();
             }
         };
         RECIPE_TYPES.register(id, () -> type);
