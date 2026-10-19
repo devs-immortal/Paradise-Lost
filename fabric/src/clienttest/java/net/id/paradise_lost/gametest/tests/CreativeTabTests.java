@@ -24,14 +24,14 @@ import static net.id.paradise_lost.registry.BlockRegistry.*;
 
 public final class CreativeTabTests {
     private static final String MOD = "paradise_lost";
-    private static final Set<String> NOT_IN_TABS = Set.of("portal", "palace_door_placer", "moa_egg");
+    private static final Set<String> NOT_IN_TABS = Set.of("moa_egg");
     private static final List<WoodBlockSet> WOODS = List.of(AUREL_WOODSTUFF, MOTHER_AUREL_WOODSTUFF, MENTH_WOODSTUFF, WISTERIA_WOODSTUFF);
 
     private CreativeTabTests() {
     }
 
     private static Set<Item> items(CreativeModeTab tab) {
-        CreativeModeTabs.tryRebuildTabContents(client().player.connection.enabledFeatures(), false, client().level.registryAccess());
+        CreativeModeTabs.tryRebuildTabContents(client().player.connection.enabledFeatures(), true, client().level.registryAccess());
         return tab.getDisplayItems().stream().map(ItemStack::getItem).collect(Collectors.toSet());
     }
 
