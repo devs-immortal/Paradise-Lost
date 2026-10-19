@@ -7,7 +7,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.api.MoaAPI;
-import net.id.paradise_lost.component.MoaGenes;
+import net.id.paradise_lost.entity.passive.moa.MoaGenes;
 import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;

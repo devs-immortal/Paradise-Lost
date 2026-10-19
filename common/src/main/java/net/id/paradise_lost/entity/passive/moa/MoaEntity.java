@@ -3,7 +3,6 @@ package net.id.paradise_lost.entity.passive.moa;
 import net.id.paradise_lost.platform.Services;
 import net.minecraft.tags.ItemTags;
 import net.id.paradise_lost.block.blockentity.FoodBowlBlockEntity;
-import net.id.paradise_lost.component.MoaGenes;
 import net.id.paradise_lost.datafixer.MoaGenesDataFix;
 import net.id.paradise_lost.registry.EntityRegistry;
 import net.id.paradise_lost.entity.util.SaddleMountEntity;

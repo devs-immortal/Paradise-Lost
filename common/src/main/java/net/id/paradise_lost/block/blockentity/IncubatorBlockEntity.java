@@ -1,6 +1,6 @@
 package net.id.paradise_lost.block.blockentity;
 
-import net.id.paradise_lost.component.MoaGenes;
+import net.id.paradise_lost.entity.passive.moa.MoaGenes;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.util.ParadiseLostSoundEvents;
 import net.id.paradise_lost.util.PlayerInventoryHelper;
