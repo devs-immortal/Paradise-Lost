@@ -1,6 +1,6 @@
 package net.id.paradise_lost.tag;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
@@ -20,11 +20,11 @@ public class ParadiseLostStructureTags {
     public static final TagKey<Structure> PALACE = structure("palace");
 
     private static TagKey<Biome> biome(String id) {
-        return TagKey.create(Registries.BIOME, ModConstants.id(id));
+        return TagKey.create(Registries.BIOME, PLConstants.id(id));
     }
 
     private static TagKey<Structure> structure(String id) {
-        return TagKey.create(Registries.STRUCTURE, ModConstants.id(id));
+        return TagKey.create(Registries.STRUCTURE, PLConstants.id(id));
     }
 }
 

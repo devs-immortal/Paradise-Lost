@@ -7,7 +7,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 
 @SuppressWarnings("unused")
 public class ParadiseLostConfiguredFeatures {

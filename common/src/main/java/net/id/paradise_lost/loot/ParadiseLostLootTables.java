@@ -1,6 +1,6 @@
 package net.id.paradise_lost.loot;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

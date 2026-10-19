@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.util.ParadiseLostSoundEvents;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -10,7 +10,7 @@ import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvider {
     public ParadiseLostSoundDefinitionsProvider(PackOutput output, ExistingFileHelper helper) {
-        super(output, ModConstants.MODID, helper);
+        super(output, PLConstants.MODID, helper);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package net.id.paradise_lost.world.feature;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.world.feature.configs.*;
 import net.id.paradise_lost.world.feature.configured_features.ParadiseLostConfiguredFeatures;
@@ -18,7 +18,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 
 public class ParadiseLostFeatures {
     private static final RegistrationProvider<Feature<?>> FEATURES =
-            RegistrationProvider.get(Registries.FEATURE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.FEATURE, PLConstants.MOD_ID);
 
     public static final ParadiseLostLakeFeature LAKE = register("lake", new ParadiseLostLakeFeature(BlockStateConfiguration.CODEC));
 

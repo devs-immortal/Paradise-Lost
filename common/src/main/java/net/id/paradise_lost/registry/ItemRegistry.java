@@ -62,15 +62,15 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 import static net.id.paradise_lost.item.ParadiseLostItemActions.*;
 import static net.minecraft.world.item.Rarity.*;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 
 @SuppressWarnings("unused")
 public class ItemRegistry {
     public static final RegistrationProvider<Item> ITEMS =
-            RegistrationProvider.get(Registries.ITEM, ModConstants.MODID);
+            RegistrationProvider.get(Registries.ITEM, PLConstants.MOD_ID);
 
     private static Properties resource() {
         return new Properties();
@@ -267,7 +267,7 @@ public class ItemRegistry {
     public static BoatSet[] BOAT_SETS;
 
     private static final RegistrationProvider<Potion> POTIONS =
-            RegistrationProvider.get(Registries.POTION, ModConstants.MODID);
+            RegistrationProvider.get(Registries.POTION, PLConstants.MOD_ID);
 
     public static final Holder<Potion> HEALTH_BOOST_POTION = registerPotion("health_boost", () -> new Potion(new MobEffectInstance(MobEffects.HEALTH_BOOST, 6000, 1)));
     public static final Holder<Potion> LONG_HEALTH_BOOST_POTION = registerPotion(

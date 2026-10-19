@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.tag.ParadiseLostStructureTags;
 import net.id.paradise_lost.world.dimension.ParadiseLostBiomes;
 import net.minecraft.core.HolderLookup;
@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ParadiseLostBiomeTagsProvider extends BiomeTagsProvider {
     public ParadiseLostBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, ModConstants.MODID, existingFileHelper);
+        super(output, lookupProvider, PLConstants.MODID, existingFileHelper);
     }
 
     @Override

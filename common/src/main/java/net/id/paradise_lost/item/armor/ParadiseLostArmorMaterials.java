@@ -1,6 +1,6 @@
 package net.id.paradise_lost.item.armor;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.registration.RegistrationProvider;
@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class ParadiseLostArmorMaterials {
     private static final RegistrationProvider<ArmorMaterial> ARMOR_MATERIALS =
-            RegistrationProvider.get(Registries.ARMOR_MATERIAL, ModConstants.MODID);
+            RegistrationProvider.get(Registries.ARMOR_MATERIAL, PLConstants.MOD_ID);
 
     public static final Holder<ArmorMaterial> OLVITE;
     public static final Holder<ArmorMaterial> ORNATE_OLVITE;
@@ -75,7 +75,7 @@ public class ParadiseLostArmorMaterials {
     }
 
     private static Holder<ArmorMaterial> register(String id, EnumMap<ArmorItem.Type, Integer> defense, int enchantability, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
-        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(ModConstants.id(id)));
+        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(PLConstants.id(id)));
         return register(id, defense, enchantability, equipSound, toughness, knockbackResistance, repairIngredient, list);
     }
 

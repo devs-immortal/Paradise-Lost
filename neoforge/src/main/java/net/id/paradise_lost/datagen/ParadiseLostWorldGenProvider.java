@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.world.dimension.ParadiseLostBiomes;
 import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
 import net.id.paradise_lost.world.dimension.ParadiseLostLevelStem;
@@ -46,7 +46,7 @@ public final class ParadiseLostWorldGenProvider extends DatapackBuiltinEntriesPr
             .add(Registries.LEVEL_STEM, ParadiseLostLevelStem::bootstrap);
 
     public ParadiseLostWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, BUILDER, Set.of(ModConstants.MODID));
+        super(output, lookupProvider, BUILDER, Set.of(PLConstants.MODID));
     }
 
     public static void bootstrapDimensionTypes(BootstrapContext<DimensionType> context) {

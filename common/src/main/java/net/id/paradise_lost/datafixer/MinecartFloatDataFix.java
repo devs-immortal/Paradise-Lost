@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datafixer;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.util.MinecartFloatingHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -24,7 +24,7 @@ public final class MinecartFloatDataFix {
         boolean floating = legacy.getBoolean("floating");
         MinecartFloatingHelper.setFloatTime(cart, floating ? Math.max(time, 1) : time);
         LegacyCardinalComponents.remove(entityTag, LegacyCardinalComponents.MINECART_FLOAT);
-        ModConstants.LOGGER.debug("Migrated CCA minecart_float (floating={}, floatTime={})", floating, time);
+        PLConstants.LOGGER.debug("Migrated CCA minecart_float (floating={}, floatTime={})", floating, time);
         return true;
     }
 }

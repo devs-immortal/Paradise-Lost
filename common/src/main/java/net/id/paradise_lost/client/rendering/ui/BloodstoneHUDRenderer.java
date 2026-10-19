@@ -1,7 +1,7 @@
 package net.id.paradise_lost.client.rendering.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.api.MoaAPI;
 import net.id.paradise_lost.entity.passive.moa.MoaAttributes;
 import net.id.paradise_lost.item.tool.bloodstone.*;
@@ -81,8 +81,8 @@ public class BloodstoneHUDRenderer {
     private static void renderOlvite(GuiGraphics context, Minecraft client, BloodstoneCapturedData bloodstoneCapturedData) {
         MobEffectTextureManager statusEffectSpriteManager = client.getMobEffectTextures();
         var effectAtlas = client.getTextureAtlas(ResourceLocation.parse("textures/atlas/blocks.png"));
-        TextureAtlasSprite affinitySprite = effectAtlas.apply(ModConstants.id("item/icons/affinity"));
-        TextureAtlasSprite raceSprite = effectAtlas.apply(ModConstants.id("item/icons/race"));
+        TextureAtlasSprite affinitySprite = effectAtlas.apply(PLConstants.id("item/icons/affinity"));
+        TextureAtlasSprite raceSprite = effectAtlas.apply(PLConstants.id("item/icons/race"));
 
         renderRing(context, 0, 0);
         renderText(context, client, bloodstoneCapturedData.bloodstoneComponent.name(), 0, -80);
@@ -113,7 +113,7 @@ public class BloodstoneHUDRenderer {
     }
 
     private static void renderRing(GuiGraphics context, int offsetX, int offsetY) {
-        context.blit(ModConstants.id("textures/hud/bloodstone/bloodstone_ring.png"), offsetX - 75, offsetY - 75, 0, 0, 150, 150, 150, 150);
+        context.blit(PLConstants.id("textures/hud/bloodstone/bloodstone_ring.png"), offsetX - 75, offsetY - 75, 0, 0, 150, 150, 150, 150);
     }
 
     private static void renderIconWText(GuiGraphics context, Minecraft client, TextureAtlasSprite sprite, Component text, int offsetX, int offsetY) {

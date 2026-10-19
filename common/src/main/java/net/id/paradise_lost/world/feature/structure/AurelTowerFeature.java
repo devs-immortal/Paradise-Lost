@@ -4,7 +4,6 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.MapCodec;
 import net.id.paradise_lost.world.feature.structure.generator.AurelTowerGenerator;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
@@ -15,7 +14,7 @@ import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import java.util.Optional;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 
 public class AurelTowerFeature extends Structure {
     public static final MapCodec<AurelTowerFeature> CODEC = simpleCodec(AurelTowerFeature::new);
@@ -28,7 +27,7 @@ public class AurelTowerFeature extends Structure {
     }
 
     private static void addPieces(StructurePiecesBuilder collector, GenerationContext context) {
-        StructureTemplate structure = context.structureTemplateManager().getOrCreate(ModConstants.id("aurel_tower"));
+        StructureTemplate structure = context.structureTemplateManager().getOrCreate(PLConstants.id("aurel_tower"));
         Rotation blockRotation = Rotation.NONE;
         ChunkPos pos = context.chunkPos();
         BlockPos pivot = new BlockPos(structure.getSize().getX() / 2, 0, structure.getSize().getZ() / 2);

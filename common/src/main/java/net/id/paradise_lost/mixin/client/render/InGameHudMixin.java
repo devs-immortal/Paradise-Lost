@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 
 @Mixin(Gui.class)
 public abstract class InGameHudMixin {

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 
 @Mixin(ModelBakery.class)
 public abstract class ModelLoaderMixin {

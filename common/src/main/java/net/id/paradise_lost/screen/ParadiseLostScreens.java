@@ -1,6 +1,6 @@
 package net.id.paradise_lost.screen;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.registration.RegistryObject;
 import net.id.paradise_lost.screen.handler.MoaScreenHandler;
@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public final class ParadiseLostScreens {
     public static final RegistrationProvider<MenuType<?>> MENUS =
-            RegistrationProvider.get(Registries.MENU, ModConstants.MODID);
+            RegistrationProvider.get(Registries.MENU, PLConstants.MOD_ID);
 
     public static RegistryObject<MenuType<?>, MenuType<MoaScreenHandler>> MOA;
 

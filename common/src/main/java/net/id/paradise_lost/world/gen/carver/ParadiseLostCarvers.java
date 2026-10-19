@@ -1,6 +1,6 @@
 package net.id.paradise_lost.world.gen.carver;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.carver.CarverConfiguration;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.levelgen.carver.WorldCarver;
 @SuppressWarnings("unused")
 public class ParadiseLostCarvers {
     private static final RegistrationProvider<WorldCarver<?>> CARVERS =
-            RegistrationProvider.get(Registries.CARVER, ModConstants.MODID);
+            RegistrationProvider.get(Registries.CARVER, PLConstants.MOD_ID);
 
     public static final WorldCarver<CloudCarverConfig> CLOUD_CARVER =
             register("cloud_carver", new CloudCarver(CloudCarverConfig.CODEC));

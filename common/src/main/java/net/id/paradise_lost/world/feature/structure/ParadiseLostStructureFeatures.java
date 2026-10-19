@@ -1,6 +1,6 @@
 package net.id.paradise_lost.world.feature.structure;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.world.feature.structure.generator.AurelTowerGenerator;
 import net.minecraft.core.registries.Registries;
@@ -9,13 +9,13 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 
 public class ParadiseLostStructureFeatures {
     private static final RegistrationProvider<StructureType<?>> STRUCTURE_TYPES =
-            RegistrationProvider.get(Registries.STRUCTURE_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.STRUCTURE_TYPE, PLConstants.MOD_ID);
     private static final RegistrationProvider<StructurePieceType> STRUCTURE_PIECES =
-            RegistrationProvider.get(Registries.STRUCTURE_PIECE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.STRUCTURE_PIECE, PLConstants.MOD_ID);
 
     public static final TagKey<Structure> AUREL_TOWER_KEY = tagKey("aurel_tower");
     public static final StructureType<AurelTowerFeature> AUREL_TOWER = () -> AurelTowerFeature.CODEC;

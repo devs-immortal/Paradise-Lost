@@ -19,11 +19,11 @@ import net.id.paradise_lost.util.ParadiseLostAliasFix;
 import net.id.paradise_lost.util.RegistryUtil;
 import net.minecraft.world.item.enchantment.Enchantments;
 
-public class ModMain implements ModInitializer {
+public class PLFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         Services.PLATFORM.getPlatformName();
-        ModCommon.init();
+        PLCommon.init();
         FabricDataEntries.apply();
 
         ParadiseLostAliasFix.init();

@@ -7,7 +7,7 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 
 public final class ParadiseLostNoise {
     public static final ResourceKey<NormalNoise.NoiseParameters> GENERATOR_ELEVATION = of("generator/elevation");

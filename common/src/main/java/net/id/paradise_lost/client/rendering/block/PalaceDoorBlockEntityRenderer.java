@@ -3,7 +3,7 @@ package net.id.paradise_lost.client.rendering.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.block.blockentity.PalaceDoorBlockEntity;
 import net.id.paradise_lost.client.model.ParadiseLostModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
@@ -22,7 +22,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 
 public class PalaceDoorBlockEntityRenderer implements BlockEntityRenderer<PalaceDoorBlockEntity> {
 
-    public static final Material DOORS = new Material(InventoryMenu.BLOCK_ATLAS, ModConstants.id("block/palace_door"));
+    public static final Material DOORS = new Material(InventoryMenu.BLOCK_ATLAS, PLConstants.id("block/palace_door"));
 
     private final ModelPart door;
 

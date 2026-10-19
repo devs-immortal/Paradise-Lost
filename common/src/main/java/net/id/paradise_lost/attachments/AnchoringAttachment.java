@@ -3,7 +3,7 @@ package net.id.paradise_lost.attachments;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.platform.Services;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -17,7 +17,7 @@ import java.util.function.UnaryOperator;
 public class AnchoringAttachment extends CommonDataAttachment<AnchoringAttachment.State> {
 
     public AnchoringAttachment() {
-        super(entity -> State.DEFAULT, ModConstants.id("anchoring"), false, State.CODEC, State.STREAM_CODEC);
+        super(entity -> State.DEFAULT, PLConstants.id("anchoring"), false, State.CODEC, State.STREAM_CODEC);
     }
 
     public State get(Entity player) {

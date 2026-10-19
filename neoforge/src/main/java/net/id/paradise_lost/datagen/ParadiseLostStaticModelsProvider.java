@@ -2,7 +2,7 @@ package net.id.paradise_lost.datagen;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -15,7 +15,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ParadiseLostStaticModelsProvider extends ModelProvider<ParadiseLostStaticModelsProvider.Builder> {
     public ParadiseLostStaticModelsProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, ModConstants.MODID, BLOCK_FOLDER, Builder::new, existingFileHelper);
+        super(output, PLConstants.MODID, BLOCK_FOLDER, Builder::new, existingFileHelper);
     }
 
     @Override
@@ -1188,7 +1188,7 @@ public class ParadiseLostStaticModelsProvider extends ModelProvider<ParadiseLost
     }
 
     private static String blockTex(String name) {
-        return ModConstants.MODID + ":block/" + name;
+        return PLConstants.MODID + ":block/" + name;
     }
 
     private Builder parented(String name, ModelFile parent) {

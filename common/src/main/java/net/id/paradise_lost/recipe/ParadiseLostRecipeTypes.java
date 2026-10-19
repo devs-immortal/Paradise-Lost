@@ -1,7 +1,6 @@
 package net.id.paradise_lost.recipe;
 
-import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.ParadiseLost;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.Recipe;
@@ -11,9 +10,9 @@ import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 
 public class ParadiseLostRecipeTypes {
     private static final RegistrationProvider<RecipeSerializer<?>> RECIPE_SERIALIZERS =
-            RegistrationProvider.get(Registries.RECIPE_SERIALIZER, ModConstants.MODID);
+            RegistrationProvider.get(Registries.RECIPE_SERIALIZER, PLConstants.MOD_ID);
     private static final RegistrationProvider<RecipeType<?>> RECIPE_TYPES =
-            RegistrationProvider.get(Registries.RECIPE_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.RECIPE_TYPE, PLConstants.MOD_ID);
 
     public static final String TREE_TAP_RECIPE_ID = "tree_tap";
     public static RecipeSerializer<TreeTapRecipe> TREE_TAP_RECIPE_SERIALIZER;
@@ -34,7 +33,7 @@ public class ParadiseLostRecipeTypes {
         RecipeType<T> type = new RecipeType<>() {
             @Override
             public String toString() {
-                return ParadiseLost.MOD_ID + ":" + id;
+                return PLConstants.MOD_ID + ":" + id;
             }
         };
         RECIPE_TYPES.register(id, () -> type);

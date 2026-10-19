@@ -1,8 +1,8 @@
 package net.id.paradise_lost.world;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.saveddata.maps.MapDecorationType;
 
 public class ParadiseLostMapDecorationTypes {
     private static final RegistrationProvider<MapDecorationType> MAP_DECORATION_TYPES =
-            RegistrationProvider.get(Registries.MAP_DECORATION_TYPE, ModConstants.MODID);
+            RegistrationProvider.get(Registries.MAP_DECORATION_TYPE, PLConstants.MOD_ID);
 
     public static void init() {
     }

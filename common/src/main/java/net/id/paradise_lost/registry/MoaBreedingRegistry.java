@@ -2,8 +2,7 @@ package net.id.paradise_lost.registry;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.ParadiseLost;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.api.MoaAPI.MoaBreedingContext;
 import net.id.paradise_lost.api.MoaAPI.MoaRace;
 import net.id.paradise_lost.registration.registries.DatapackRegistry;
@@ -30,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class MoaBreedingRegistry {
 
     public static final DatapackRegistry<BreedingRecipes> REGISTRY =
-            DatapackRegistry.<BreedingRecipes>builder(ResourceLocation.fromNamespaceAndPath(ModConstants.MODID, "moa_breeding"))
+            DatapackRegistry.<BreedingRecipes>builder(ResourceLocation.fromNamespaceAndPath(PLConstants.MOD_ID, "moa_breeding"))
                     .withElementCodec(BreedingRecipes.CODEC)
                     .withNetworkCodec(BreedingRecipes.CODEC)
                     .withBootstrap(MoaBreedingRegistry::bootstrap)
@@ -138,7 +137,7 @@ public final class MoaBreedingRegistry {
         var race = MoaRaceRegistry.find(ctx.world().registryAccess(), raceId);
         if (race.isEmpty()) {
             if (WARNED_MISSING_RACES.add(raceId)) {
-                ParadiseLost.LOG.error("moa_breeding refers to {} which is not a registered moa race; ignoring it", raceId);
+                PLConstants.LOGGER.error("moa_breeding refers to {} which is not a registered moa race; ignoring it", raceId);
             }
             return null;
         }

@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.util.ParadiseLostDamageTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -16,7 +16,7 @@ import net.minecraft.world.damagesource.DamageType;
 
 public class ParadiseLostDamageTypeTagsProvider extends TagsProvider<DamageType> {
     public ParadiseLostDamageTypeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.DAMAGE_TYPE, lookupProvider, ModConstants.MODID, existingFileHelper);
+        super(output, Registries.DAMAGE_TYPE, lookupProvider, PLConstants.MODID, existingFileHelper);
     }
 
     @Override

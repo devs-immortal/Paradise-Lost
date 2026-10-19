@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.registry.MoaBreedingRegistry;
 import net.id.paradise_lost.registry.MoaRaceRegistry;
 import net.id.paradise_lost.registry.MoaSpawnRegistry;
@@ -17,7 +17,7 @@ public final class ParadiseLostMoaDatapackProvider extends DatapackBuiltinEntrie
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder();
 
     public ParadiseLostMoaDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, BUILDER, Set.of(ModConstants.MODID));
+        super(output, lookupProvider, BUILDER, Set.of(PLConstants.MODID));
         MoaSpawnStatWeightingRegistry.REGISTRY.addToSet(BUILDER);
         MoaRaceRegistry.REGISTRY.addToSet(BUILDER);
         MoaSpawnRegistry.REGISTRY.addToSet(BUILDER);

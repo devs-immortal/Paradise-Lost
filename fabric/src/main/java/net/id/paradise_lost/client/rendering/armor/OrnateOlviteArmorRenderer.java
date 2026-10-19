@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.client.model.ParadiseLostModelLayers;
 import net.id.paradise_lost.client.model.armor.OrnateOlviteArmorModel;
 import net.minecraft.client.Minecraft;
@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
 public class OrnateOlviteArmorRenderer implements ArmorRenderer {
-    private static final ResourceLocation TEXTURE = ModConstants.id("textures/models/armor/ornate_olvite.png");
+    private static final ResourceLocation TEXTURE = PLConstants.id("textures/models/armor/ornate_olvite.png");
     private static OrnateOlviteArmorModel armorModel;
 
     @Override

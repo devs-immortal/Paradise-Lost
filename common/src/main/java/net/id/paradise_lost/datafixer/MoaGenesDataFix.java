@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datafixer;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 
@@ -20,7 +20,7 @@ public final class MoaGenesDataFix {
         }
         entityTag.put(MOA_GENES_KEY, legacy.copy());
         LegacyCardinalComponents.remove(entityTag, LegacyCardinalComponents.MOA_GENETICS);
-        ModConstants.LOGGER.debug("Migrated CCA moa_genetics -> moaGenes");
+        PLConstants.LOGGER.debug("Migrated CCA moa_genetics -> moaGenes");
         return true;
     }
 }

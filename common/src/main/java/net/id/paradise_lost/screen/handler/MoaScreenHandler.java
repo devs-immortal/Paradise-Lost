@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 import static net.minecraft.world.inventory.InventoryMenu.BLOCK_ATLAS;
 
 public class MoaScreenHandler extends AbstractContainerMenu {

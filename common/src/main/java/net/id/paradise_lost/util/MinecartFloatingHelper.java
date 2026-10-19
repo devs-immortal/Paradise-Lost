@@ -1,7 +1,7 @@
 package net.id.paradise_lost.util;
 
 import com.mojang.datafixers.util.Pair;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.datafixer.MinecartFloatDataFix;
 import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
@@ -3074,7 +3074,7 @@ public final class MinecartFloatingHelper {
         if (!DEBUG_LOG) {
             return;
         }
-        ModConstants.LOGGER.info("{} {} id={} {}", DEBUG_PREFIX, event, cart.getId(), detail);
+        PLConstants.LOGGER.info("{} {} id={} {}", DEBUG_PREFIX, event, cart.getId(), detail);
     }
 
     private static String blockId(BlockState state) {

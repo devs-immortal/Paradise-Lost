@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.block.ChuteBlock;
 import net.id.paradise_lost.block.FloatingBlock;
 import net.id.paradise_lost.block.ParadiseLostBlockSets;
@@ -99,7 +99,7 @@ import static net.minecraft.world.level.block.state.BlockBehaviour.Properties.of
 @SuppressWarnings("unused")
 public class BlockRegistry {
     public static final RegistrationProvider<Block> BLOCKS =
-            RegistrationProvider.get(Registries.BLOCK, ModConstants.MODID);
+            RegistrationProvider.get(Registries.BLOCK, PLConstants.MOD_ID);
 
     private static final List<Runnable> PENDING_BLOCK_ITEMS = new ArrayList<>();
 

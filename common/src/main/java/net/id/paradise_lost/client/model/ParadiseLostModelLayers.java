@@ -1,7 +1,7 @@
 package net.id.paradise_lost.client.model;
 
 import com.google.common.collect.Maps;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.client.model.armor.OrnateOlviteArmorModel;
 import net.id.paradise_lost.client.model.entity.*;
 import net.id.paradise_lost.client.rendering.block.PalaceDoorBlockEntityRenderer;
@@ -44,7 +44,7 @@ public class ParadiseLostModelLayers {
     }
 
     public static ModelLayerLocation register(String id, String layer, LayerDefinition data) {
-        return register(ModConstants.id(id), layer, data);
+        return register(PLConstants.id(id), layer, data);
     }
 
     public static void initClient() {}

@@ -1,6 +1,6 @@
 package net.id.paradise_lost.block;
 
-import net.id.paradise_lost.ParadiseLost;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.util.ParadiseLostSoundEvents;
 import net.id.paradise_lost.world.ParadiseLostGameRules;
@@ -173,7 +173,7 @@ public class ParadiseLostPortalBlock extends Block implements Portal {
             Direction.Axis axis = entity.level().getBlockState(enteredPos).getOptionalValue(AXIS).orElse(Direction.Axis.X);
             Optional<BlockUtil.FoundRectangle> created = forcer.createPortal(exitSearchPos, axis);
             if (created.isEmpty()) {
-                ParadiseLost.LOG.error("Unable to create a Paradise Lost portal (likely outside world border)");
+                PLConstants.LOGGER.error("Unable to create a Paradise Lost portal (likely outside world border)");
                 return null;
             }
             rectangle = created.get();

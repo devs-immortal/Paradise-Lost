@@ -1,6 +1,6 @@
 package net.id.paradise_lost.tag;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -26,6 +26,6 @@ public class ParadiseLostItemTags {
     public static final TagKey<Item> RENDING_ENCHANTABLE = register("enchantable/rending");
 
     private static TagKey<Item> register(String id) {
-        return TagKey.create(Registries.ITEM, ModConstants.id(id));
+        return TagKey.create(Registries.ITEM, PLConstants.id(id));
     }
 }

@@ -24,7 +24,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 
 public final class ParadiseLostBiomes {
     public static final ResourceKey<Biome> AUTUMNAL_TUNDRA_KEY = of("autumnal_tundra");

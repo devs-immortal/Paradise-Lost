@@ -1,6 +1,6 @@
 package net.id.paradise_lost.util;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -51,9 +51,9 @@ public final class ParadiseLostAliasFix {
         aliasItem("orange_sign", "aurel_sign");
         aliasItem("orange_hanging_sign", "aurel_hanging_sign");
 
-        alias(BuiltInRegistries.ITEM, ModConstants.id("orange"), ResourceLocation.withDefaultNamespace("apple"));
+        alias(BuiltInRegistries.ITEM, PLConstants.id("orange"), ResourceLocation.withDefaultNamespace("apple"));
 
-        ModConstants.LOGGER.info("Registered {} registry aliases for renamed Paradise Lost content", ALIASES.size());
+        PLConstants.LOGGER.info("Registered {} registry aliases for renamed Paradise Lost content", ALIASES.size());
     }
 
     public static ResourceLocation resolve(ResourceLocation id) {
@@ -65,16 +65,16 @@ public final class ParadiseLostAliasFix {
     }
 
     private static void aliasBlock(String from, String to) {
-        alias(BuiltInRegistries.BLOCK, ModConstants.id(from), ModConstants.id(to));
+        alias(BuiltInRegistries.BLOCK, PLConstants.id(from), PLConstants.id(to));
     }
 
     private static void aliasItem(String from, String to) {
-        alias(BuiltInRegistries.ITEM, ModConstants.id(from), ModConstants.id(to));
+        alias(BuiltInRegistries.ITEM, PLConstants.id(from), PLConstants.id(to));
     }
 
     private static void alias(Registry<?> registry, ResourceLocation from, ResourceLocation to) {
         if (!registry.containsKey(to)) {
-            ModConstants.LOGGER.warn("Not aliasing {} -> {}: {} is not registered in {}", from, to, to, registry.key().location());
+            PLConstants.LOGGER.warn("Not aliasing {} -> {}: {} is not registered in {}", from, to, to, registry.key().location());
             return;
         }
         ALIASES.put(from, to);

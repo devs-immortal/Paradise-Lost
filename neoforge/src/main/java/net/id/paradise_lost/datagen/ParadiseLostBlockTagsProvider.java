@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.registry.BlockRegistry.SignSet;
 import net.id.paradise_lost.registry.BlockRegistry.WoodBlockSet;
 import net.id.paradise_lost.tag.ParadiseLostBlockTags;
@@ -35,7 +35,7 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
     );
 
     public ParadiseLostBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, ModConstants.MODID, existingFileHelper);
+        super(output, lookupProvider, PLConstants.MODID, existingFileHelper);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package net.id.paradise_lost.datagen;
 
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.loot.ParadiseLostLootTables;
 import net.id.paradise_lost.registry.BlockRegistry;
@@ -42,6 +42,6 @@ public class ParadiseLostArchaeologyLootProvider implements LootTableSubProvider
                         .add(LootItem.lootTableItem(Items.STONE_PICKAXE))
                         .add(LootItem.lootTableItem(Items.STONE_PICKAXE))
                         .add(LootItem.lootTableItem(Items.STONE_SHOVEL)))
-                .setRandomSequence(ModConstants.id("archaeology/remains_common")));
+                .setRandomSequence(PLConstants.id("archaeology/remains_common")));
     }
 }

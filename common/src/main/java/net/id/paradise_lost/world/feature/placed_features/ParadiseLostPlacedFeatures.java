@@ -19,7 +19,7 @@ import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
 
-import static net.id.paradise_lost.ModConstants.id;
+import static net.id.paradise_lost.PLConstants.id;
 
 @SuppressWarnings("unused")
 public class ParadiseLostPlacedFeatures {

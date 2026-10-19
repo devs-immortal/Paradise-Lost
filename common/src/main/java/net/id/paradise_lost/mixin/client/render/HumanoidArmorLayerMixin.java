@@ -3,7 +3,7 @@ package net.id.paradise_lost.mixin.client.render;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.PLConstants;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
 import net.minecraft.client.model.HumanoidModel;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(HumanoidArmorLayer.class)
 public class HumanoidArmorLayerMixin {
     private static final ResourceLocation FLOATY_LEGGINGS_ANCHORED =
-            ModConstants.id("textures/models/armor/floaty_layer_2_on.png");
+            PLConstants.id("textures/models/armor/floaty_layer_2_on.png");
 
     @WrapOperation(
             method = "renderArmorPiece",
