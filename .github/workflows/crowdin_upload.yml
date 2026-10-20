@@ -1,4 +1,4 @@
-name: Sync With Crowdin
+name: Upload Source to Crowdin
 
 jobs:
   synchronize-with-crowdin:
@@ -17,11 +17,6 @@ jobs:
         uses: crowdin/github-action@v3
         with:
           upload_sources: true
-          download_translations: true
-          localization_branch_name: crowdin-translations
-          create_pull_request: true
-          pull_request_title: 'Crowdin Translation Sync'
-          pull_request_body: 'New Crowdin translations by [Crowdin GH Action](https://github.com/crowdin/github-action)'
           source: 'common/src/main/resources/assets/paradise_lost/lang/en_us.json'
           translation: 'common/src/main/resources/assets/paradise_lost/lang/%locale_with_underscore%.json'
         env:
