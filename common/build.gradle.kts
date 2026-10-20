@@ -47,6 +47,17 @@ sourceSets.named("main") {
     resources.srcDir(file("src/generated/resources"))
 }
 
+sourceSets {
+    create("testmod") {
+        val main = sourceSets["main"]
+        compileClasspath += main.compileClasspath + main.output
+    }
+}
+
+tasks.named("check") {
+    dependsOn("testmodClasses")
+}
+
 //<editor-fold defaultstate="collapsed" desc="<Publishing>">
 publishing {
     publishing {
