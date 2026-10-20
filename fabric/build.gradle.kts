@@ -58,8 +58,10 @@ afterEvaluate {
 }
 
 sourceSets {
-    create("clienttest") {
+    create("testmod") {
         val main = sourceSets["main"]
+        java.srcDir(project(":common").file("src/testmod/java"))
+        resources.srcDir(project(":common").file("src/testmod/resources"))
         compileClasspath += main.compileClasspath + main.output
         runtimeClasspath += main.runtimeClasspath + main.output
     }
@@ -67,9 +69,9 @@ sourceSets {
 
 sourceSets {
     create("compat") {
-        val clienttest = sourceSets["clienttest"]
-        compileClasspath += clienttest.compileClasspath
-        runtimeClasspath += clienttest.runtimeClasspath + clienttest.output
+        val testmod = sourceSets["testmod"]
+        compileClasspath += testmod.compileClasspath
+        runtimeClasspath += testmod.runtimeClasspath + testmod.output
     }
 }
 
@@ -85,7 +87,7 @@ dependencies {
 }
 
 tasks.named("check") {
-    dependsOn("clienttestClasses")
+    dependsOn("testmodClasses")
 }
 
 loom {
@@ -99,8 +101,8 @@ loom {
         create(modId) {
             sourceSet(sourceSets["main"])
         }
-        create("${modId}_clienttest") {
-            sourceSet(sourceSets["clienttest"])
+        create("${modId}_testmod") {
+            sourceSet(sourceSets["testmod"])
         }
     }
 
@@ -123,7 +125,7 @@ loom {
         create("clientTest") {
             client()
             configName = "Fabric Client Game Tests"
-            source(sourceSets["clienttest"])
+            source(sourceSets["testmod"])
             runDir("runs/clienttest")
             programArg("--username=Tester")
         }
