@@ -17,7 +17,17 @@ public final class ServerTestRunner implements TestRun.Hooks {
     private static final int SITE_SPACING = 128;
     private static final int SITE_RADIUS = 64;
     private static final List<Class<?>> TEST_CLASSES = List.of(
-            DimensionTests.class
+            BlockTests.class,
+            BoatTests.class,
+            CreativeTabTests.class,
+            DimensionTests.class,
+            EntityTests.class,
+            ItemTests.class,
+            LevitaTests.class,
+            MoaTests.class,
+            NitraTests.class,
+            PotTests.class,
+            RegistryTests.class
     );
 
     private static MinecraftServer server;

@@ -5,11 +5,9 @@ import net.id.paradise_lost.entity.hostile.EnvoyEntity;
 import net.id.paradise_lost.entity.hostile.SentinelEntity;
 import net.id.paradise_lost.entity.passive.PopomEntity;
 import net.id.paradise_lost.entity.passive.QuintEntity;
-import net.id.paradise_lost.loot.ParadiseLostLootTables;
 import net.id.paradise_lost.registry.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Difficulty;
@@ -59,21 +57,6 @@ public final class EntityTests {
                     check(jelly.containsKey(POPOM_JELLY.get()), "popom dropped " + describe(jelly));
                 }))
         );
-    }
-
-    @ClientTest(value = "keeps its fur loot table after save and load", group = "Popom")
-    private static Step popomLootAfterLoad() {
-        return Step.run(0, () -> onServer(server -> {
-            ServerLevel world = world(server);
-            PopomEntity popom = EntityRegistry.POPOM.get().create(world);
-            check(popom.getLootTable().equals(ParadiseLostLootTables.POPOM_JELLY_LEVEL_0), "new popom loot table is " + popom.getLootTable());
-            popom.setFurSize(3);
-
-            CompoundTag nbt = popom.saveWithoutId(new CompoundTag());
-            PopomEntity loaded = EntityRegistry.POPOM.get().create(world);
-            loaded.load(nbt);
-            check(loaded.getLootTable().equals(ParadiseLostLootTables.POPOM_JELLY_LEVEL_3), "loaded popom loot table is " + loaded.getLootTable());
-        }));
     }
 
     @ClientTest(value = "enlightened state reaches the client", group = "Envoy")

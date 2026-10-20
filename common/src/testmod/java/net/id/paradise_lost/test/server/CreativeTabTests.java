@@ -1,9 +1,10 @@
-package net.id.paradise_lost.test.client;
+package net.id.paradise_lost.test.server;
 
 import net.id.paradise_lost.test.Step;
 import net.id.paradise_lost.registry.BlockRegistry.WoodBlockSet;
 import net.id.paradise_lost.registry.CreativeTabRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -19,7 +20,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static net.id.paradise_lost.test.TestHelpers.*;
-import static net.id.paradise_lost.test.client.ClientTestHelpers.*;
 import static net.id.paradise_lost.registry.BlockRegistry.*;
 
 public final class CreativeTabTests {
@@ -31,7 +31,8 @@ public final class CreativeTabTests {
     }
 
     private static Set<Item> items(CreativeModeTab tab) {
-        CreativeModeTabs.tryRebuildTabContents(client().player.connection.enabledFeatures(), true, client().level.registryAccess());
+        MinecraftServer server = ServerTestRunner.server();
+        CreativeModeTabs.tryRebuildTabContents(server.getWorldData().enabledFeatures(), true, server.registryAccess());
         return tab.getDisplayItems().stream().map(ItemStack::getItem).collect(Collectors.toSet());
     }
 
@@ -39,7 +40,7 @@ public final class CreativeTabTests {
         return block instanceof SaplingBlock || block instanceof LeavesBlock || block instanceof FlowerPotBlock;
     }
 
-    @ClientTest("building blocks tab has every wood set block")
+    @ServerTest("building blocks tab has every wood set block")
     private static Step woodBuildingBlocks() {
         return Step.run(0, () -> {
             Set<Item> tab = items(CreativeTabRegistry.PARADISE_BLOCKS_TAB.get());
@@ -57,7 +58,7 @@ public final class CreativeTabTests {
         });
     }
 
-    @ClientTest("plants tab has every wood set sapling and leaves")
+    @ServerTest("plants tab has every wood set sapling and leaves")
     private static Step woodPlants() {
         return Step.run(0, () -> {
             Set<Item> tab = items(CreativeTabRegistry.PARADISE_PLANTS_TAB.get());
@@ -72,7 +73,7 @@ public final class CreativeTabTests {
         });
     }
 
-    @ClientTest("every item is in a creative tab")
+    @ServerTest("every item is in a creative tab")
     private static Step everyItem() {
         return Step.run(0, () -> {
             Set<Item> listed = CreativeModeTabs.allTabs().stream()

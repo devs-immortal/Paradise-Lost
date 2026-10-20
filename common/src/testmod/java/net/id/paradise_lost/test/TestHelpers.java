@@ -1,7 +1,9 @@
 package net.id.paradise_lost.test;
 
+import net.id.paradise_lost.ModConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,6 +24,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public final class TestHelpers {
@@ -38,6 +41,12 @@ public final class TestHelpers {
 
     public static void checkAll(List<String> wrong) {
         check(wrong.isEmpty(), String.join("; ", wrong));
+    }
+
+    public static <T> void forEachOurs(Registry<T> registry, Consumer<T> action) {
+        for (T entry : registry) {
+            if (registry.getKey(entry).getNamespace().equals(ModConstants.MOD_ID)) action.accept(entry);
+        }
     }
 
     public static BlockHitResult topOf(BlockPos pos) {

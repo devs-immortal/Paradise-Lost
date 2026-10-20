@@ -22,7 +22,6 @@ public final class ClientTestRunner implements TestRun.Hooks {
             NitraTests.class,
             BlockTests.class,
             CompatTests.class,
-            CreativeTabTests.class,
             DimensionTests.class,
             EntityTests.class,
             FoodBowlTests.class,

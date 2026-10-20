@@ -113,28 +113,6 @@ public final class NitraTests {
         );
     }
 
-    @ClientTest("explosion breaks a nearby block and drops it")
-    private static List<Step> nitraBreaksBlocks() {
-        return List.of(
-                Step.run(0, () -> onServer(server -> {
-                    ServerPlayer player = player(server);
-                    ServerLevel world = player.serverLevel();
-                    pos = ahead(player, 10, 0);
-                    world.setBlockAndUpdate(pos.relative(player.getDirection().getClockWise()), Blocks.SAND.defaultBlockState());
-                    world.setBlockAndUpdate(pos, BlockRegistry.NITRA_BUNCH.get().defaultBlockState());
-                    world.setBlockAndUpdate(pos.above(), Blocks.REDSTONE_BLOCK.defaultBlockState());
-                })),
-                Step.until("nitra to be set off", 20, () -> nitraGone(pos)),
-                Step.run(5, () -> onServer(server -> {
-                    ServerLevel world = world(server);
-                    BlockPos sand = pos.relative(player(server).getDirection().getClockWise());
-                    check(!world.getBlockState(sand).is(Blocks.SAND), "sand next to the nitra was not destroyed");
-                    Map<Item, Integer> dropped = drops(world, pos, 5);
-                    check(dropped.containsKey(Items.SAND), "explosion dropped " + describe(dropped) + " no sand");
-                }))
-        );
-    }
-
     @ClientTest("thrown nitra explodes on the client")
     private static List<Step> thrownNitra() {
         return List.of(
