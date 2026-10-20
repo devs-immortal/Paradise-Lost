@@ -347,7 +347,7 @@ public final class BlockTests {
                     hold(player, PALACE_DOOR_PLACER.get(), 1);
                 })),
                 Step.run(10, () -> useOn(pos.below())),
-                Step.until("door to be placed", 20, () -> client().level.getBlockState(pos.above(4)).is(BlockRegistry.PALACE_DOOR.get())),
+                Step.until("door to be placed", 20, () -> fromServer(server -> world(server).getBlockState(pos.above(4)).is(BlockRegistry.PALACE_DOOR.get()))),
                 Step.run(0, () -> onServer(server -> hold(player(server), PALACE_KEY.get(), 1))),
                 Step.run(10, () -> useOn(pos)),
                 Step.until("client door to open", 20, () -> client().level.getBlockState(pos.above(4)).getValue(PalaceDoorBlock.OPEN)),
@@ -469,12 +469,13 @@ public final class BlockTests {
                     hold(player, BlockRegistry.CALCITE_FLOWER_POT.get().asItem(), 1);
                 })),
                 Step.run(10, () -> useOn(pos.below())),
-                Step.until("calcite pot placed", 20, () -> client().level.getBlockState(pos).is(BlockRegistry.CALCITE_FLOWER_POT.get())),
+                Step.until("calcite pot placed", 20, () -> fromServer(server -> world(server).getBlockState(pos).is(BlockRegistry.CALCITE_FLOWER_POT.get()))),
                 Step.run(0, () -> onServer(server -> hold(player(server), BlockRegistry.ANCIENT_FLOWER.get().asItem(), 1))),
                 Step.run(10, () -> useOn(pos)),
-                Step.until("client to show the potted flower in calcite", 20, () -> {
-                    BlockState state = client().level.getBlockState(pos);
-                    return state.is(BlockRegistry.POTTED_ANCIENT_FLOWER.get()) && state.getValue(CalciteFlowerPotBlock.IS_CALCITE);
+                Step.until("client and server to show the potted flower in calcite", 20, () -> {
+                    BlockState clientState = client().level.getBlockState(pos);
+                    BlockState serverState = fromServer(server -> world(server).getBlockState(pos));
+                    return clientState.equals(serverState) && clientState.is(BlockRegistry.POTTED_ANCIENT_FLOWER.get()) && clientState.getValue(CalciteFlowerPotBlock.IS_CALCITE);
                 }),
                 Step.run(0, () -> onServer(server -> player(server).setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY))),
                 Step.run(10, () -> useOn(pos)),
