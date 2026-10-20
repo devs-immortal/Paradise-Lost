@@ -160,7 +160,7 @@ val prepareServerTest by tasks.registering {
             online-mode=false
             level-type=minecraft:flat
             difficulty=peaceful
-            generate-structures=false
+            generator-settings={"layers":[{"block":"minecraft:bedrock","height":1},{"block":"minecraft:dirt","height":2},{"block":"minecraft:grass_block","height":1}],"biome":"minecraft:plains","structure_overrides":[]}
             max-tick-time=-1
             """.trimIndent() + "\n"
         )
