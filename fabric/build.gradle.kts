@@ -138,7 +138,37 @@ loom {
             programArg("--username=Tester")
             environmentVariable("RUN_ONLY", "Compat")
         }
+
+        create("serverTest") {
+            server()
+            configName = "Fabric Server Tests"
+            source(sourceSets["testmod"])
+            runDir("runs/servertest")
+            programArg("--nogui")
+        }
     }
+}
+
+val prepareServerTest by tasks.registering {
+    val dir = file("runs/servertest")
+    doLast {
+        dir.resolve("world").deleteRecursively()
+        dir.mkdirs()
+        dir.resolve("eula.txt").writeText("eula=true\n")
+        dir.resolve("server.properties").writeText(
+            """
+            online-mode=false
+            level-type=minecraft:flat
+            difficulty=peaceful
+            generator-settings={"layers":[{"block":"minecraft:bedrock","height":1},{"block":"minecraft:dirt","height":2},{"block":"minecraft:grass_block","height":1}],"biome":"minecraft:plains","structure_overrides":[]}
+            max-tick-time=-1
+            """.trimIndent() + "\n"
+        )
+    }
+}
+
+tasks.matching { it.name == "runServerTest" }.configureEach {
+    dependsOn(prepareServerTest)
 }
 
 tasks.withType<ProcessResources>().configureEach {

@@ -1,6 +1,7 @@
 package net.id.paradise_lost.test;
 
 import net.id.paradise_lost.test.client.ClientTest;
+import net.id.paradise_lost.test.server.ServerTest;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,13 +20,14 @@ public final class TestLoader {
         String defaultGroup = defaultGroup(type);
         List<Test> tests = new ArrayList<>();
         List<Method> methods = Arrays.stream(type.getDeclaredMethods())
-                .filter(m -> m.isAnnotationPresent(ClientTest.class) || m.isAnnotationPresent(TestFactory.class))
+                .filter(m -> m.isAnnotationPresent(ClientTest.class) || m.isAnnotationPresent(ServerTest.class) || m.isAnnotationPresent(TestFactory.class))
                 .sorted(Comparator.comparing(Method::getName))
                 .toList();
         for (Method method : methods) {
             Object result = invoke(method);
-            ClientTest test = method.getAnnotation(ClientTest.class);
-            if (test == null) {
+            ClientTest client = method.getAnnotation(ClientTest.class);
+            ServerTest server = method.getAnnotation(ServerTest.class);
+            if (client == null && server == null) {
                 tests.addAll((List<Test>) result);
                 continue;
             }
@@ -34,8 +36,9 @@ public final class TestLoader {
                 case List<?> list -> (List<Step>) list;
                 default -> throw new IllegalStateException(describe(method) + " must return Step or List<Step>");
             };
-            String group = test.group().isEmpty() ? defaultGroup : test.group();
-            tests.add(new Test(group, test.value(), steps));
+            String name = client != null ? client.value() : server.value();
+            String group = client != null ? client.group() : server.group();
+            tests.add(new Test(group.isEmpty() ? defaultGroup : group, name, steps));
         }
         return tests;
     }

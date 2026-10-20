@@ -42,7 +42,7 @@ public final class Recorder {
         Appender appender = new AbstractAppender("ClientTestRecorder", null, null, true, Property.EMPTY_ARRAY) {
             @Override
             public void append(LogEvent event) {
-                if (event.getLoggerName().equals("ClientTest")) return;
+                if (event.getLoggerName().equals("ClientTest") || event.getLoggerName().equals("ServerTest")) return;
                 if (event.getLoggerName().equals("com.mojang.blaze3d.audio.OpenAlUtil")) return;
                 String line = "[" + event.getLoggerName() + "] " + event.getMessage().getFormattedMessage()
                         + (event.getThrown() != null ? " (" + event.getThrown() + ")" : "");

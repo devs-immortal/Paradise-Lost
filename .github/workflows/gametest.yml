@@ -1,10 +1,30 @@
-name: Client Tests
+name: Game Tests
 
 on: [ pull_request ]
 jobs:
   game_test:
+    name: ${{ matrix.name }} tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Client
+            task: runClientTest
+            dir: clienttest
+            logger: ClientTest
+            xvfb: true
+          - name: Compat
+            task: runClientCompatTest
+            dir: compattest
+            logger: ClientTest
+            xvfb: true
+          - name: Server
+            task: runServerTest
+            dir: servertest
+            logger: ServerTest
+            xvfb: false
     steps:
       - uses: actions/checkout@v6
 
@@ -18,25 +38,16 @@ jobs:
         run: chmod +x gradlew
 
       - name: Install Xvfb
+        if: matrix.xvfb
         run: sudo apt-get update && sudo apt-get install -y xvfb
 
-      - name: Run client tests
-        run: xvfb-run -a -s "-screen 0 854x480x24" ./gradlew :fabric:runClientTest
+      - name: Run tests
+        run: ${{ matrix.xvfb && 'xvfb-run -a -s "-screen 0 854x480x24"' || '' }} ./gradlew :fabric:${{ matrix.task }}
 
       - name: Check all tests ran
         run: |
-          if ! grep -q "(ClientTest) All tests passed" fabric/runs/clienttest/logs/latest.log; then
-            echo "::error::Client test run did not finish. See the uploaded logs."
-            exit 1
-          fi
-
-      - name: Run compat tests
-        run: xvfb-run -a -s "-screen 0 854x480x24" ./gradlew :fabric:runClientCompatTest
-
-      - name: Check all compat tests ran
-        run: |
-          if ! grep -q "(ClientTest) All tests passed" fabric/runs/compattest/logs/latest.log; then
-            echo "::error::Compat test run did not finish. See the uploaded logs."
+          if ! grep -q "(${{ matrix.logger }}) All tests passed" fabric/runs/${{ matrix.dir }}/logs/latest.log; then
+            echo "::error::${{ matrix.name }} test run did not finish. See the uploaded logs."
             exit 1
           fi
 
@@ -44,12 +55,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v6
         with:
-          name: client-test-output
+          name: ${{ matrix.dir }}-output
           path: |
-            fabric/runs/clienttest/logs/latest.log
-            fabric/runs/clienttest/screenshots/
-            fabric/runs/clienttest/crash-reports/
-            fabric/runs/compattest/logs/latest.log
-            fabric/runs/compattest/screenshots/
-            fabric/runs/compattest/crash-reports/
+            fabric/runs/${{ matrix.dir }}/logs/latest.log
+            fabric/runs/${{ matrix.dir }}/screenshots/
+            fabric/runs/${{ matrix.dir }}/crash-reports/
           if-no-files-found: ignore
