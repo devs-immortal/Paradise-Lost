@@ -40,6 +40,16 @@ jobs:
             exit 1
           fi
 
+      - name: Run server tests
+        run: ./gradlew :fabric:runServerTest
+
+      - name: Check all server tests ran
+        run: |
+          if ! grep -q "(ServerTest) All tests passed" fabric/runs/servertest/logs/latest.log; then
+            echo "::error::Server test run did not finish. See the uploaded logs."
+            exit 1
+          fi
+
       - name: Upload test output
         if: always()
         uses: actions/upload-artifact@v6
@@ -52,4 +62,6 @@ jobs:
             fabric/runs/compattest/logs/latest.log
             fabric/runs/compattest/screenshots/
             fabric/runs/compattest/crash-reports/
+            fabric/runs/servertest/logs/latest.log
+            fabric/runs/servertest/crash-reports/
           if-no-files-found: ignore

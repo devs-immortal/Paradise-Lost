@@ -3,10 +3,12 @@
   "id": "paradise_lost_testmod",
   "version": "1.0.0",
   "name": "Paradise Lost Tests",
-  "environment": "client",
   "entrypoints": {
     "client": [
       "net.id.paradise_lost.test.FabricClientTestEntry"
+    ],
+    "server": [
+      "net.id.paradise_lost.test.FabricServerTestEntry"
     ]
   },
   "mixins": [
