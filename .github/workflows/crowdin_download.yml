@@ -1,5 +1,9 @@
 name: Download Translations from Crowdin
 
+on:
+  schedule:
+    - cron: '0 0 * * 5'
+    
 jobs:
   synchronize-with-crowdin:
     runs-on: ubuntu-latest

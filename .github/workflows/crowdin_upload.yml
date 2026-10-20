@@ -1,5 +1,8 @@
 name: Upload Source to Crowdin
 
+on:
+  workflow_dispatch:
+  
 jobs:
   synchronize-with-crowdin:
     runs-on: ubuntu-latest
