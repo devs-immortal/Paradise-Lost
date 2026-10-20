@@ -160,6 +160,8 @@ val prepareServerTest by tasks.registering {
             online-mode=false
             level-type=minecraft:flat
             difficulty=peaceful
+            generate-structures=false
+            max-tick-time=-1
             """.trimIndent() + "\n"
         )
     }
