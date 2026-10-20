@@ -3,6 +3,7 @@ package net.id.paradise_lost.gametest;
 import net.id.paradise_lost.gametest.tests.BlockTests;
 import net.id.paradise_lost.gametest.tests.BoatTests;
 import net.id.paradise_lost.gametest.tests.CompatTests;
+import net.id.paradise_lost.gametest.tests.CreativeTabTests;
 import net.id.paradise_lost.gametest.tests.DimensionTests;
 import net.id.paradise_lost.gametest.tests.EntityTests;
 import net.id.paradise_lost.gametest.tests.FoodBowlTests;
@@ -39,6 +40,7 @@ public final class ClientTestRunner {
             NitraTests.class,
             BlockTests.class,
             CompatTests.class,
+            CreativeTabTests.class,
             DimensionTests.class,
             EntityTests.class,
             FoodBowlTests.class,

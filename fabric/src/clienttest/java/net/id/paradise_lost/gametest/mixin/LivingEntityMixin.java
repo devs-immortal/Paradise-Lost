@@ -20,8 +20,15 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "triggerItemUseEffects", at = @At("HEAD"))
     private void clienttest$countSip(ItemStack stack, int particleCount, CallbackInfo ci) {
-        if ((Object) this == Minecraft.getInstance().player) {
-            (particleCount == 16 ? Recorder.finalSips : Recorder.sips).incrementAndGet();
+        if ((Object) this instanceof LivingEntity entity) {
+            if (entity != Minecraft.getInstance().player)
+                return;
+
+            if (particleCount == 16) {
+                Recorder.finalSips.incrementAndGet();
+            } else if (entity.getUseItemRemainingTicks() > 0) {
+                Recorder.sips.incrementAndGet();
+            }
         }
     }
 

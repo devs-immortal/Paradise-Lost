@@ -13,6 +13,8 @@ import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 
+import java.util.List;
+
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public class CreativeTabRegistry {
@@ -28,62 +30,13 @@ public class CreativeTabRegistry {
                     .icon(() -> new ItemStack(BlockRegistry.CHISELED_FLOESTONE.get()))
                     .title(Component.translatable(creativeTabKey("building_blocks")))
                     .displayItems((params, output) -> {
-
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.log().get());
+                        acceptWoodBlocks(output, BlockRegistry.AUREL_WOODSTUFF);
                         output.accept(BlockRegistry.MOTTLED_AUREL_LOG.get());
                         output.accept(BlockRegistry.MOTTLED_AUREL_WOOD.get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.wood().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.strippedLog().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.strippedWood().get());
                         output.accept(BlockRegistry.MOTTLED_AUREL_FALLEN_LOG.get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.plank().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.plankStairs().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.plankSlab().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.fence().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.fenceGate().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.door().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.trapdoor().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.pressurePlate().get());
-                        output.accept(BlockRegistry.AUREL_WOODSTUFF.button().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.log().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.wood().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.strippedLog().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.strippedWood().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.plank().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.plankStairs().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.plankSlab().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.fence().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.fenceGate().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.door().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.trapdoor().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.pressurePlate().get());
-                        output.accept(BlockRegistry.MOTHER_AUREL_WOODSTUFF.button().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.log().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.wood().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.strippedLog().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.strippedWood().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.plank().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.plankStairs().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.plankSlab().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.fence().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.fenceGate().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.door().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.trapdoor().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.pressurePlate().get());
-                        output.accept(BlockRegistry.MENTH_WOODSTUFF.button().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.log().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.wood().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.strippedLog().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.strippedWood().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.plank().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.plankStairs().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.plankSlab().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.fence().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.fenceGate().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.door().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.trapdoor().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.pressurePlate().get());
-                        output.accept(BlockRegistry.WISTERIA_WOODSTUFF.button().get());
+                        acceptWoodBlocks(output, BlockRegistry.MOTHER_AUREL_WOODSTUFF);
+                        acceptWoodBlocks(output, BlockRegistry.MENTH_WOODSTUFF);
+                        acceptWoodBlocks(output, BlockRegistry.WISTERIA_WOODSTUFF);
                         output.accept(BlockRegistry.THATCH_SET.block().get());
                         output.accept(BlockRegistry.THATCH_SET.stairs().get());
                         output.accept(BlockRegistry.THATCH_SET.slab().get());
@@ -107,6 +60,10 @@ public class CreativeTabRegistry {
                         output.accept(BlockRegistry.FLOESTONE_BRICK_STAIRS.get());
                         output.accept(BlockRegistry.FLOESTONE_BRICK_SLAB.get());
                         output.accept(BlockRegistry.FLOESTONE_BRICK_WALL.get());
+                        output.accept(BlockRegistry.MOSSY_FLOESTONE_BRICK.get());
+                        output.accept(BlockRegistry.MOSSY_FLOESTONE_BRICK_STAIRS.get());
+                        output.accept(BlockRegistry.MOSSY_FLOESTONE_BRICK_SLAB.get());
+                        output.accept(BlockRegistry.MOSSY_FLOESTONE_BRICK_WALL.get());
                         output.accept(BlockRegistry.SMOOTH_FLOESTONE.get());
                         output.accept(BlockRegistry.SMOOTH_FLOESTONE_STAIRS.get());
                         output.accept(BlockRegistry.SMOOTH_FLOESTONE_SLAB.get());
@@ -395,6 +352,14 @@ public class CreativeTabRegistry {
                         output.accept(BlockRegistry.CHEESECAKE.get());
                     })
                     .build());
+
+    private static void acceptWoodBlocks(CreativeModeTab.Output output, BlockRegistry.WoodBlockSet wood) {
+        for (var block : List.of(wood.log(), wood.wood(), wood.strippedLog(), wood.strippedWood(),
+                wood.plank(), wood.plankStairs(), wood.plankSlab(), wood.fence(), wood.fenceGate(),
+                wood.door(), wood.trapdoor(), wood.pressurePlate(), wood.button())) {
+            output.accept(block.get());
+        }
+    }
 
     private static String creativeTabKey(String name) {
         return "itemGroup.paradise_lost." + name;
