@@ -1,6 +1,12 @@
 {
   "parent": "paradise_lost:root",
   "criteria": {
+    "change_dim": {
+      "conditions": {
+        "to": "minecraft:overworld"
+      },
+      "trigger": "minecraft:changed_dimension"
+    },
     "invoid": {
       "conditions": {
         "player": [
@@ -40,6 +46,9 @@
   "requirements": [
     [
       "invoid"
+    ],
+    [
+      "change_dim"
     ]
   ],
   "sends_telemetry_event": true

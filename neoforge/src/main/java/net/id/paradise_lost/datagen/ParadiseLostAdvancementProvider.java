@@ -24,6 +24,7 @@ import net.minecraft.advancements.critereon.LootTableTrigger;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.PlayerInteractTrigger;
 import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.advancements.critereon.SlotsPredicate;
 import net.minecraft.advancements.critereon.TameAnimalTrigger;
 import net.minecraft.advancements.critereon.UsedTotemTrigger;
 import net.minecraft.core.HolderLookup;
@@ -33,22 +34,25 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.inventory.SlotRanges;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import net.minecraft.advancements.critereon.BlockPredicate;
 
 public class ParadiseLostAdvancementProvider extends AdvancementProvider {
-    private static final TagKey<Item> C_AXES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "axes"));
     private static final TagKey<Item> FABRIC_RAW_MEAT = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("fabric", "raw_meat"));
 
     public ParadiseLostAdvancementProvider(
@@ -274,12 +278,11 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                             true,
                             false
                     )
-                    .addCriterion("hold_amber", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.GOLDEN_AMBER.get()))
                     .addCriterion("strip", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
                             LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(BlockRegistry.MOTHER_AUREL_WOODSTUFF.log().get())),
-                            ItemPredicate.Builder.item().of(C_AXES)
+                            ItemPredicate.Builder.item().of(ItemTags.AXES)
                     ))
-                    .requirements(AdvancementRequirements.anyOf(List.of("strip", "hold_amber")))
+                    .requirements(AdvancementRequirements.anyOf(List.of("strip")))
                     .save(saver, ModConstants.locate("mother_aurel_strip"), existingFileHelper);
 
             AdvancementHolder glazedUpgradeFind = Advancement.Builder.advancement()
@@ -369,6 +372,9 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                             false
                     )
                     .addCriterion("squeeze", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(
+                            Optional.of(EntityPredicate.wrap(EntityPredicate.Builder.entity()
+                                    .slots(new SlotsPredicate(Map.of(SlotRanges.nameToIds("weapon.mainhand"), ItemPredicate.Builder.item().withCount(MinMaxBounds.Ints.exactly(0)).build())))
+                            )),
                             ItemPredicate.Builder.item(),
                             Optional.of(EntityPredicate.wrap(EntityPredicate.Builder.entity().of(EntityRegistry.POPOM.get())))
                     ))
@@ -426,7 +432,8 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                                     .setDimension(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY)
                                     .setY(MinMaxBounds.Doubles.between(-100.0, -7.0))
                     ))
-                    .requirements(AdvancementRequirements.allOf(List.of("invoid")))
+                    .addCriterion("change_dim", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(Level.OVERWORLD))
+                    .requirements(AdvancementRequirements.allOf(List.of("invoid", "change_dim")))
                     .save(saver, ModConstants.locate("void_paradise_lost"), existingFileHelper);
         }
 

@@ -1,0 +1,33 @@
+{
+  "values": [
+    "minecraft:area_effect_cloud",
+    "minecraft:block_display",
+    "minecraft:dragon_fireball",
+    "minecraft:egg",
+    "minecraft:end_crystal",
+    "minecraft:ender_pearl",
+    "minecraft:evoker_fangs",
+    "minecraft:experience_bottle",
+    "minecraft:falling_block",
+    "minecraft:firework_rocket",
+    "minecraft:glow_item_frame",
+    "minecraft:interaction",
+    "minecraft:item_display",
+    "minecraft:item_frame",
+    "minecraft:ominous_item_spawner",
+    "minecraft:fireball",
+    "minecraft:leash_knot",
+    "minecraft:lightning_bolt",
+    "minecraft:llama_spit",
+    "minecraft:marker",
+    "minecraft:painting",
+    "minecraft:potion",
+    "minecraft:shulker_bullet",
+    "minecraft:small_fireball",
+    "minecraft:snowball",
+    "minecraft:text_display",
+    "minecraft:wind_charge",
+    "minecraft:wither_skull",
+    "paradise_lost:thrown_nitra"
+  ]
+}

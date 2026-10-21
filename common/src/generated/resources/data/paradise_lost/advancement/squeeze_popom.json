@@ -12,7 +12,20 @@
             }
           }
         ],
-        "item": {}
+        "item": {},
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "slots": {
+                "weapon.mainhand": {
+                  "count": 0
+                }
+              }
+            }
+          }
+        ]
       },
       "trigger": "minecraft:player_interacted_with_entity"
     }
