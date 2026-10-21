@@ -19,6 +19,34 @@ public class ParadiseLostEntityTypeTagsProvider extends EntityTypeTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(EntityTypeTags.ARROWS).add(EntityRegistry.LEVITA_ARROW.get());
         this.tag(ParadiseLostEntityTypeTags.CANNOT_LEVITATE)
-                .add(EntityType.END_CRYSTAL);
+                .add(EntityType.AREA_EFFECT_CLOUD)
+                .add(EntityType.BLOCK_DISPLAY)
+                .add(EntityType.DRAGON_FIREBALL)
+                .add(EntityType.EGG)
+                .add(EntityType.END_CRYSTAL)
+                .add(EntityType.ENDER_PEARL)
+                .add(EntityType.EVOKER_FANGS)
+                .add(EntityType.EXPERIENCE_BOTTLE)
+                .add(EntityType.FALLING_BLOCK)
+                .add(EntityType.FIREWORK_ROCKET)
+                .add(EntityType.GLOW_ITEM_FRAME)
+                .add(EntityType.INTERACTION)
+                .add(EntityType.ITEM_DISPLAY)
+                .add(EntityType.ITEM_FRAME)
+                .add(EntityType.OMINOUS_ITEM_SPAWNER)
+                .add(EntityType.FIREBALL)
+                .add(EntityType.LEASH_KNOT)
+                .add(EntityType.LIGHTNING_BOLT)
+                .add(EntityType.LLAMA_SPIT)
+                .add(EntityType.MARKER)
+                .add(EntityType.PAINTING)
+                .add(EntityType.POTION)
+                .add(EntityType.SHULKER_BULLET)
+                .add(EntityType.SMALL_FIREBALL)
+                .add(EntityType.SNOWBALL)
+                .add(EntityType.TEXT_DISPLAY)
+                .add(EntityType.WIND_CHARGE)
+                .add(EntityType.WITHER_SKULL)
+                .add(EntityRegistry.THROWN_NITRA.get());
     }
 }
