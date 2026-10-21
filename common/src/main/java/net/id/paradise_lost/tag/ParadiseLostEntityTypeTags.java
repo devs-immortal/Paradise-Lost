@@ -4,7 +4,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.id.paradise_lost.ModConstants;
-import net.minecraft.world.level.block.Block;
 
 public class ParadiseLostEntityTypeTags {
 
