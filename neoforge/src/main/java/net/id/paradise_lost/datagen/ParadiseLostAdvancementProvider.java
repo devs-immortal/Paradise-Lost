@@ -40,6 +40,7 @@ import net.minecraft.world.inventory.SlotRanges;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -431,7 +432,8 @@ public class ParadiseLostAdvancementProvider extends AdvancementProvider {
                                     .setDimension(ParadiseLostDimension.PARADISE_LOST_WORLD_KEY)
                                     .setY(MinMaxBounds.Doubles.between(-100.0, -7.0))
                     ))
-                    .requirements(AdvancementRequirements.allOf(List.of("invoid")))
+                    .addCriterion("change_dim", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(Level.OVERWORLD))
+                    .requirements(AdvancementRequirements.allOf(List.of("invoid", "change_dim")))
                     .save(saver, ModConstants.locate("void_paradise_lost"), existingFileHelper);
         }
 
