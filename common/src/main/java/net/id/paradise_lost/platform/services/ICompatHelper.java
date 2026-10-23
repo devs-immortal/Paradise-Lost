@@ -1,6 +1,6 @@
 package net.id.paradise_lost.platform.services;
 
-import net.id.paradise_lost.compat.ParadiseLostEveryCompat;
+import net.id.paradise_lost.compat.*;
 import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.world.level.block.Block;
@@ -19,6 +19,9 @@ public interface ICompatHelper {
         }
         if (Services.PLATFORM.isModLoaded("stonezone")) {
             ParadiseLostEveryCompat.registerStoneTypes();
+        }
+        if (Services.PLATFORM.isModLoaded("farmersdelight")) {
+            ParadiseLostFarmersDelightCompat.addCompat();
         }
     }
 }

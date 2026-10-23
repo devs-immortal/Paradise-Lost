@@ -286,7 +286,7 @@ public class ItemRegistry {
     }
 
     @SafeVarargs
-    private static <V extends Item> RegistryObject<Item, V> add(String id, Supplier<V> item, Consumer<ItemLike>... additionalActions) {
+    public static <V extends Item> RegistryObject<Item, V> add(String id, Supplier<V> item, Consumer<ItemLike>... additionalActions) {
         return ITEMS.register(id, () -> {
             V i = item.get();
             for (var action : additionalActions) {

@@ -48,6 +48,7 @@ public final class ModCommon {
         EntityRegistry.init();
         ItemRegistry.init();
         ModEntities.init();
+        Services.COMPAT.initCompat();
         CreativeTabRegistry.init();
 
         ParadiseLostBlockEntityTypes.init();
@@ -65,6 +66,5 @@ public final class ModCommon {
         ParadiseLostParticleTypes.init();
         ParadiseLostDimension.initPortal();
         ParadiseLostCriteria.init();
-        Services.COMPAT.initCompat();
     }
 }

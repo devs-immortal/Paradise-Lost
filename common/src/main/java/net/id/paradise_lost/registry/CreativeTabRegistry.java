@@ -1,6 +1,7 @@
 package net.id.paradise_lost.registry;
 
 import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.compat.ParadiseLostFarmersDelightCompat;
 import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.registration.RegistryObject;
@@ -109,6 +110,14 @@ public class CreativeTabRegistry {
                         output.accept(BlockRegistry.OLVITE_BLOCK.get());
                         output.accept(BlockRegistry.OLVITE_CHAIN.get());
                         output.accept(BlockRegistry.REFINED_SURTRUM_BLOCK.get());
+
+                        if (Services.PLATFORM.isModLoaded("farmersdelight")) {
+                            output.accept(ParadiseLostFarmersDelightCompat.AUREL_CABINET_ITEM.get());
+                            output.accept(ParadiseLostFarmersDelightCompat.MOTHER_AUREL_CABINET_ITEM.get());
+                            output.accept(ParadiseLostFarmersDelightCompat.MENTH_CABINET_ITEM.get());
+                            output.accept(ParadiseLostFarmersDelightCompat.WISTERIA_CABINET_ITEM.get());
+                            output.accept(ParadiseLostFarmersDelightCompat.BLACKCURRANT_CRATE_ITEM.get());
+                        }
                     })
                     .build());
 
@@ -304,6 +313,11 @@ public class CreativeTabRegistry {
                         output.accept(MENTH_BOATS.chestBoat().get());
                         output.accept(WISTERIA_BOATS.boat().get());
                         output.accept(WISTERIA_BOATS.chestBoat().get());
+
+                        if (Services.PLATFORM.isModLoaded("farmersdelight")) {
+                            output.accept(ParadiseLostFarmersDelightCompat.OLVITE_KNIFE.get());
+                            output.accept(ParadiseLostFarmersDelightCompat.GLAZED_GOLD_KNIFE.get());
+                        }
                     })
                     .build());
 

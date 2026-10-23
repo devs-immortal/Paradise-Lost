@@ -4,6 +4,7 @@
   "package": "net.id.paradise_lost.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "block.BlockEntityTypeMixin",
     "block.BlockMixin",
     "block.CropBlockMixin",
     "block.FarmlandBlockMixin",
@@ -30,8 +31,8 @@
     "item.PotionItemMixin",
     "portal.LiquidBlockPortalMixin",
     "server.PlayerManagerMixin",
-    "server.ServerPlayNetworkHandlerMixin",
     "server.ServerPlayerGameModeMixin",
+    "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
     "util.SlotAccessor",
     "world.gen.SurfaceBuilderMixin",
