@@ -1,16 +1,6 @@
 {
   "parent": "paradise_lost:mother_aurel",
   "criteria": {
-    "hold_amber": {
-      "conditions": {
-        "items": [
-          {
-            "items": "paradise_lost:golden_amber"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "strip": {
       "conditions": {
         "location": [
@@ -25,7 +15,7 @@
           {
             "condition": "minecraft:match_tool",
             "predicate": {
-              "items": "#c:axes"
+              "items": "#minecraft:axes"
             }
           }
         ]
@@ -47,8 +37,7 @@
   },
   "requirements": [
     [
-      "strip",
-      "hold_amber"
+      "strip"
     ]
   ],
   "sends_telemetry_event": true

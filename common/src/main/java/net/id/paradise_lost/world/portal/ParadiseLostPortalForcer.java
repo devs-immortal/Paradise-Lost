@@ -30,6 +30,7 @@ import java.util.Optional;
 public class ParadiseLostPortalForcer {
 
     public static final int PARADISE_MIN_PORTAL_Y = 100;
+    public static final int OVERWORLD_MIN_PORTAL_Y = -59;
     private static final int PARADISE_MAX_SURFACE_DROP = 32;
 
     public static final DimensionTransition.PostDimensionTransition PLAY_PORTAL_SOUND =
@@ -142,7 +143,7 @@ public class ParadiseLostPortalForcer {
         if (bestDist == -1.0) {
             int minSafeY = paradise
                     ? Math.max(this.level.getMinBuildHeight() + 1, PARADISE_MIN_PORTAL_Y)
-                    : Math.max(this.level.getMinBuildHeight() + 1, 70);
+                    : OVERWORLD_MIN_PORTAL_Y;
             int maxSafeY = maxY - 9;
             if (maxSafeY < minSafeY) {
                 return Optional.empty();
@@ -177,6 +178,7 @@ public class ParadiseLostPortalForcer {
             }
         }
 
+        if (!paradise && bestPos.getY() < OVERWORLD_MIN_PORTAL_Y) bestPos = bestPos.atY(OVERWORLD_MIN_PORTAL_Y);
         placeStandardFrame(bestPos, direction, plane);
         return Optional.of(new BlockUtil.FoundRectangle(bestPos.immutable(), 2, 3));
     }

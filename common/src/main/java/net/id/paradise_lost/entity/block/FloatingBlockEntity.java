@@ -4,6 +4,7 @@ import net.id.paradise_lost.api.BlockLikeEntity;
 import net.id.paradise_lost.api.FloatingBlockHelper;
 import net.id.paradise_lost.registry.EntityRegistry;
 import net.id.paradise_lost.tag.ParadiseLostBlockTags;
+import net.id.paradise_lost.tag.ParadiseLostEntityTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
@@ -46,7 +47,7 @@ public class FloatingBlockEntity extends BlockLikeEntity {
 
         List<Entity> otherEntities = this.level().getEntities(this, getBoundingBox().minmax(getBoundingBox().move(0, 3 * (this.yo - this.getY()), 0)));
         for (Entity entity : otherEntities) {
-            if (!(entity instanceof BlockLikeEntity) && !entity.noPhysics && this.collides) {
+            if (!(entity instanceof BlockLikeEntity) && !entity.getType().is(ParadiseLostEntityTypeTags.CANNOT_LEVITATE) && !entity.noPhysics && this.collides) {
                 entity.move(MoverType.SHULKER_BOX, this.getDeltaMovement());
                 entity.setOnGround(true);
 
