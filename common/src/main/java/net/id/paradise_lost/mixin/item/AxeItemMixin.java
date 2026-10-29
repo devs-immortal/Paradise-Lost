@@ -10,12 +10,15 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -25,25 +28,40 @@ import java.util.List;
 @Mixin(AxeItem.class)
 public class AxeItemMixin {
 
-    @Inject(method = "useOn", at = @At("HEAD"))
-    public void useOnBlock(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
-        Level world = context.getLevel();
-        BlockPos blockPos = context.getClickedPos();
+    @Unique
+    private static final ThreadLocal<BlockState> paradiseLost$originalTreeLike = new ThreadLocal<>();
 
-        if (world.getBlockState(blockPos).getBlock() == BlockRegistry.MOTHER_AUREL_WOODSTUFF.log().get() && !world.isClientSide) {
-            ServerLevel server = (ServerLevel) world;
-            LootTable supplier = server.getServer().reloadableRegistries().getLootTable(ParadiseLostLootTables.MOTHER_AUREL_STRIPPING);
-            List<ItemStack> items = supplier.getRandomItems(new LootParams.Builder(server)
-                    .withParameter(LootContextParams.BLOCK_STATE, world.getBlockState(blockPos))
-                    .withParameter(LootContextParams.ORIGIN, Vec3.atLowerCornerOf(blockPos))
-                    .withParameter(LootContextParams.TOOL, context.getItemInHand())
-                    .create(LootContextParamSets.BLOCK)
-            );
-            Vec3 offsetDirection = context.getClickLocation();
-            for (ItemStack item : items) {
-                ItemEntity itemEntity = new ItemEntity(context.getLevel(), offsetDirection.x, offsetDirection.y, offsetDirection.z, item);
-                world.addFreshEntity(itemEntity);
-            }
+    @Inject(method = "useOn", at = @At("HEAD"))
+    private void paradiseLost$captureState(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
+        paradiseLost$originalTreeLike.set(context.getLevel().getBlockState(context.getClickedPos()));
+    }
+
+    @Inject(method = "useOn", at = @At("RETURN"))
+    private void paradiseLost$dropLoot(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
+        BlockState original = paradiseLost$originalTreeLike.get();
+        paradiseLost$originalTreeLike.remove();
+
+        Level level = context.getLevel();
+        if (original == null || !(level instanceof ServerLevel server)) return;
+        if (!cir.getReturnValue().consumesAction()) return;
+
+        Block treeLike = original.getBlock();
+        if (!treeLike.equals(BlockRegistry.MOTHER_AUREL_WOODSTUFF.log().get())
+                && !treeLike.equals(BlockRegistry.MOTHER_AUREL_WOODSTUFF.wood().get())) return;
+
+        BlockPos pos = context.getClickedPos();
+        LootTable table = server.getServer().reloadableRegistries()
+                .getLootTable(ParadiseLostLootTables.MOTHER_AUREL_STRIPPING);
+
+        List<ItemStack> items = table.getRandomItems(new LootParams.Builder(server)
+                .withParameter(LootContextParams.BLOCK_STATE, original)
+                .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+                .withParameter(LootContextParams.TOOL, context.getItemInHand())
+                .create(LootContextParamSets.BLOCK));
+
+        Vec3 loc = context.getClickLocation();
+        for (ItemStack stack : items) {
+            server.addFreshEntity(new ItemEntity(server, loc.x, loc.y, loc.z, stack));
         }
     }
 }
