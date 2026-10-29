@@ -15,6 +15,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -129,6 +130,15 @@ public final class ItemTests {
 
     @ServerTest(value = "dispenser places water from an aurel water bucket", group = "Aurel bucket")
     private static List<Step> aurelBucketDispenser() {
+        return dispenseAurelBucket(AUREL_WATER_BUCKET.get(), Blocks.WATER);
+    }
+
+    @ServerTest(value = "dispenser places powder snow from an aurel powder snow bucket", group = "Aurel bucket")
+    private static List<Step> aurelBucketDispenserPowderSnow() {
+        return dispenseAurelBucket(AUREL_POWDER_SNOW_BUCKET.get(), Blocks.POWDER_SNOW);
+    }
+
+    private static List<Step> dispenseAurelBucket(Item bucket, Block placed) {
         return List.of(
                 Step.run(0, () -> {
                     ServerLevel world = level();
@@ -136,10 +146,12 @@ public final class ItemTests {
                     pos = dispenser.relative(FACING);
 
                     world.setBlockAndUpdate(dispenser, Blocks.DISPENSER.defaultBlockState().setValue(DispenserBlock.FACING, FACING));
-                    ((DispenserBlockEntity) world.getBlockEntity(dispenser)).setItem(0, new ItemStack(AUREL_WATER_BUCKET.get()));
+                    ((DispenserBlockEntity) world.getBlockEntity(dispenser)).setItem(0, new ItemStack(bucket));
                     world.setBlockAndUpdate(dispenser.relative(FACING.getOpposite()), Blocks.REDSTONE_BLOCK.defaultBlockState());
                 }),
-                Step.until("water in front of the dispenser", 20, () -> level().getBlockState(pos).is(Blocks.WATER))
+                Step.until("block in front of the dispenser", 20, () -> level().getBlockState(pos).is(placed)),
+                Step.run(0, () -> check(((DispenserBlockEntity) level().getBlockEntity(pos.relative(FACING.getOpposite()))).getItem(0).is(AUREL_BUCKET.get()),
+                        "dispenser does not hold an empty aurel bucket"))
         );
     }
 
