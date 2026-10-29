@@ -141,8 +141,8 @@ public final class LivingEntityTests {
         return Step.run(0, () -> {
             ServerLevel world = level();
             MoaEntity moa = MoaGenes.getMoaFromEgg(world, MoaTests.goldenrodEgg(world, false), UUID.randomUUID(), ahead(3, 0));
-            float expected = moa.getGenes().getAttribute(MoaAttributes.MAX_HEALTH);
             check(moa.getGenes().isInitialized(), "genes are not initialized");
+            float expected = moa.getGenes().getAttribute(MoaAttributes.MAX_HEALTH);
             check(moa.getMaxHealth() == expected, "max health is " + moa.getMaxHealth() + " expected " + expected);
         });
     }
