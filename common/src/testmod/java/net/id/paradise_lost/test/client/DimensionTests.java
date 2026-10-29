@@ -191,7 +191,12 @@ public final class DimensionTests {
                     intoVoid(player);
                 })),
                 Step.until("levitation", 60, () -> fromServer(server -> player(server).hasEffect(MobEffects.LEVITATION))),
-                Step.run(0, () -> onServer(server -> check(player(server).getOffhandItem().isEmpty(), "totem was not used up"))),
+                Step.run(0, () -> onServer(server -> {
+                    ServerPlayer player = player(server);
+                    check(player.getOffhandItem().isEmpty(), "totem was not used up");
+                    int amplifier = player.getEffect(MobEffects.LEVITATION).getAmplifier();
+                    check(amplifier == 50, "levitation amplifier is " + amplifier + " expected 50");
+                })),
                 Step.until("rise above the void line", 200, () -> fromServer(server -> {
                     ServerPlayer player = player(server);
                     return player.level().dimension() != ParadiseLostDimension.PARADISE_LOST_WORLD_KEY

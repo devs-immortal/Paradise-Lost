@@ -24,6 +24,7 @@ public final class ServerTestRunner implements TestRun.Hooks {
             EntityTests.class,
             ItemTests.class,
             LevitaTests.class,
+            LivingEntityTests.class,
             MoaTests.class,
             NitraTests.class,
             PotTests.class,
