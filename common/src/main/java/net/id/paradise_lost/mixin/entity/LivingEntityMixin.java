@@ -202,32 +202,37 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
             if (source.is(DamageTypeTags.IS_FALL)) {
                 float modified = paradiseLost$previewMagicAbsorb(source, amount);
 
-                if ((modified >= 10.0 || modified >= getHealth()) && MiscUtil.useLevitationTotem((LivingEntity) (Entity) this)) {
-
-                    level().broadcastEntityEvent(this, ParadiseLostEvents.LEVITATION_TOTEM_USED);
-                    setDeltaMovement(this.getDeltaMovement().x, 0.6d, this.getDeltaMovement().z);
-                    hurtMarked = true;
-                    addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 15, 1));
-
+                if ((modified >= 10.0 || modified >= getHealth())
+                        && paradiseLost$useLevitationTotem(new MobEffectInstance(MobEffects.SLOW_FALLING, 15, 1))) {
                     cir.setReturnValue(false);
                 }
             } else if (this.level().dimension() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY
                     && (ParadiseLostVoidEscape.isOutOfWorldDamage(source)
                     || source == level().damageSources().fellOutOfWorld())) {
-                if (MiscUtil.useLevitationTotem((LivingEntity) (Entity) this)) {
-
-                    level().broadcastEntityEvent(this, ParadiseLostEvents.LEVITATION_TOTEM_USED);
-                    setDeltaMovement(this.getDeltaMovement().x, 0.6d, this.getDeltaMovement().z);
-                    hurtMarked = true;
-                    addEffect(new MobEffectInstance(MobEffects.LEVITATION, 110, 30));
-                    addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 320, 1));
-
+                boolean player = (Object) this instanceof Player;
+                if (paradiseLost$useLevitationTotem(
+                        new MobEffectInstance(MobEffects.LEVITATION, player ? 120 : 110, player ? 50 : 30),
+                        new MobEffectInstance(MobEffects.SLOW_FALLING, 320, 1))) {
                     cir.setReturnValue(false);
                 } else if (ParadiseLostVoidEscape.tryEscape((Entity) (Object) this)) {
                     cir.setReturnValue(false);
                 }
             }
         }
+    }
+
+    @Unique
+    private boolean paradiseLost$useLevitationTotem(MobEffectInstance... effects) {
+        if (!MiscUtil.useLevitationTotem((LivingEntity) (Object) this)) {
+            return false;
+        }
+        level().broadcastEntityEvent(this, ParadiseLostEvents.LEVITATION_TOTEM_USED);
+        setDeltaMovement(getDeltaMovement().x, 0.6D, getDeltaMovement().z);
+        hurtMarked = true;
+        for (MobEffectInstance effect : effects) {
+            addEffect(effect);
+        }
+        return true;
     }
 
     @Unique

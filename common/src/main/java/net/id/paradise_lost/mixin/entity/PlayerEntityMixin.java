@@ -1,24 +1,17 @@
 package net.id.paradise_lost.mixin.entity;
 
 import net.id.paradise_lost.particle.ParadiseLostParticleTypes;
-import net.id.paradise_lost.util.ParadiseLostEvents;
 import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
 import net.id.paradise_lost.item.armor.XpCircletItem;
-import net.id.paradise_lost.util.MiscUtil;
 import net.id.paradise_lost.util.ParadiseLostCriteria;
 import net.id.paradise_lost.util.ParadiseLostDamageTypes;
-import net.id.paradise_lost.util.ParadiseLostVoidEscape;
-import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Abilities;
@@ -66,31 +59,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
 
     @Shadow
     public abstract Iterable<ItemStack> getArmorSlots();
-
-    @Inject(
-            method = "hurt",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (level().isClientSide() || level().dimension() != ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
-            return;
-        }
-        if (!ParadiseLostVoidEscape.isOutOfWorldDamage(source)
-                && source != level().damageSources().fellOutOfWorld()) {
-            return;
-        }
-        if (MiscUtil.useLevitationTotem(this)) {
-            level().broadcastEntityEvent(this, ParadiseLostEvents.LEVITATION_TOTEM_USED);
-            setDeltaMovement(this.getDeltaMovement().x, 0.6d, this.getDeltaMovement().z);
-            hurtMarked = true;
-            addEffect(new MobEffectInstance(MobEffects.LEVITATION, 120, 50));
-            addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 320, 1));
-            cir.setReturnValue(false);
-        } else if (ParadiseLostVoidEscape.tryEscape((Entity) (Object) this)) {
-            cir.setReturnValue(false);
-        }
-    }
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void paradiseLost$preTickFloatyLeggings(CallbackInfo ci) {
