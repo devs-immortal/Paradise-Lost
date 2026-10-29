@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -93,9 +94,11 @@ public class AurelBucketItem extends Item implements DispensibleContainerItem {
                     return new InteractionResultHolder<>(InteractionResult.FAIL, currentStack);
                 } else {
                     BlockState hitBlockState = worldIn.getBlockState(hitPos);
-                    BlockPos adjustedPos = hitBlockState.getBlock() instanceof LiquidBlockContainer ? hitPos : hitResult.getBlockPos().relative(hitResult.getDirection());
+                    BlockPos adjustedPos = hitBlockState.getBlock() instanceof LiquidBlockContainer && this.containedFluid == Fluids.WATER ? hitPos : hitPos.relative(hitResult.getDirection());
 
-                    this.placeLiquid(playerIn, worldIn, adjustedPos, hitResult);
+                    if (!this.emptyContents(playerIn, worldIn, adjustedPos, hitResult)) {
+                        return new InteractionResultHolder<>(InteractionResult.FAIL, currentStack);
+                    }
 
                     playerIn.awardStat(Stats.ITEM_USED.get(this));
                     return new InteractionResultHolder<>(InteractionResult.SUCCESS, this.emptyBucket(currentStack, playerIn));
@@ -116,54 +119,6 @@ public class AurelBucketItem extends Item implements DispensibleContainerItem {
         return ItemUtils.createFilledResult(emptyBuckets, player, new ItemStack(fullBucket));
     }
 
-    public boolean placeLiquid(Player playerIn, Level worldIn, BlockPos posIn, BlockHitResult hitResult) {
-        if (this.containedBlock != null) {
-            if (worldIn.isInWorldBounds(posIn) && worldIn.getBlockState(posIn).canBeReplaced()) {
-                if (!worldIn.isClientSide) {
-                    worldIn.setBlock(posIn, this.containedBlock.defaultBlockState(), Block.UPDATE_ALL);
-                }
-                this.playEmptyingSound(playerIn, worldIn, posIn, SoundEvents.BUCKET_EMPTY_POWDER_SNOW);
-                return true;
-            } else {
-                return false;
-            }
-        } else if (!(this.containedFluid instanceof FlowingFluid)) {
-            return false;
-        } else {
-            BlockState stateIn = worldIn.getBlockState(posIn);
-            boolean flag = !stateIn.isSolid();
-            boolean flag1 = stateIn.canBeReplaced();
-
-            if (worldIn.isEmptyBlock(posIn) || flag || flag1 || stateIn.getBlock() instanceof LiquidBlockContainer && ((LiquidBlockContainer) stateIn.getBlock()).canPlaceLiquid(playerIn, worldIn, posIn, stateIn, this.containedFluid)) {
-                if (worldIn.dimension().equals(Level.NETHER)) {
-                    int i = posIn.getX();
-                    int j = posIn.getY();
-                    int k = posIn.getZ();
-                    worldIn.playSound(playerIn, posIn, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (worldIn.random.nextFloat() - worldIn.random.nextFloat()) * 0.8F);
-
-                    for (int l = 0; l < 8; ++l) {
-                        worldIn.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0D, 0.0D, 0.0D);
-                    }
-                } else if (stateIn.getBlock() instanceof LiquidBlockContainer) {
-                    if (((LiquidBlockContainer) stateIn.getBlock()).placeLiquid(worldIn, posIn, stateIn, ((FlowingFluid) this.containedFluid).getSource(false))) {
-                        this.playEmptyingSound(playerIn, worldIn, posIn, SoundEvents.BUCKET_EMPTY);
-                    }
-                } else {
-                    if (!worldIn.isClientSide && (flag || flag1) && !stateIn.liquid()) {
-                        worldIn.destroyBlock(posIn, true);
-                    }
-
-                    this.playEmptyingSound(playerIn, worldIn, posIn, SoundEvents.BUCKET_EMPTY);
-                    worldIn.setBlock(posIn, this.containedFluid.defaultFluidState().createLegacyBlock(), Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
-                }
-
-                return true;
-            } else {
-                return hitResult != null && this.placeLiquid(playerIn, worldIn, hitResult.getBlockPos().relative(hitResult.getDirection()), null);
-            }
-        }
-    }
-
     protected void playEmptyingSound(@Nullable Player player, LevelAccessor world, BlockPos pos, SoundEvent soundEvent) {
         world.playSound(player, pos, soundEvent, SoundSource.BLOCKS, 1.0F, 1.0F);
         world.gameEvent(player, GameEvent.FLUID_PLACE, pos);
@@ -176,64 +131,52 @@ public class AurelBucketItem extends Item implements DispensibleContainerItem {
 
     @Override
     public boolean emptyContents(@Nullable Player player, Level world, BlockPos pos, @Nullable BlockHitResult hitResult) {
-        Block block;
-        boolean bl;
-        LiquidBlockContainer fluidFillable;
-        BlockState blockState;
-        boolean var10000;
-        label82: {
-            blockState = world.getBlockState(pos);
-            block = blockState.getBlock();
-            bl = blockState.canBeReplaced(Fluids.WATER);
-            if (!blockState.isAir() && !bl) {
-                label80: {
-                    if (block instanceof LiquidBlockContainer) {
-                        fluidFillable = (LiquidBlockContainer) block;
-                        if (fluidFillable.canPlaceLiquid(player, world, pos, blockState, Fluids.WATER)) {
-                            break label80;
-                        }
-                    }
-
-                    var10000 = false;
-                    break label82;
-                }
-            }
-
-            var10000 = true;
-        }
-
-        boolean bl2 = var10000;
-        if (!bl2) {
-            return hitResult != null && this.emptyContents(player, world, hitResult.getBlockPos().relative(hitResult.getDirection()), null);
-        } else if (world.dimensionType().ultraWarm()) {
-            int i = pos.getX();
-            int j = pos.getY();
-            int k = pos.getZ();
-            world.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
-
-            for (int l = 0; l < 8; ++l) {
-                world.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0, 0.0, 0.0);
-            }
-
-            return true;
-        } else {
-            if (block instanceof LiquidBlockContainer) {
-                fluidFillable = (LiquidBlockContainer) block;
-                fluidFillable.placeLiquid(world, pos, blockState, Fluids.WATER.getSource(false));
-                this.playEmptyingSound(player, world, pos, SoundEvents.BUCKET_EMPTY);
-                return true;
-            }
-
-            if (!world.isClientSide && bl && !blockState.liquid()) {
-                world.destroyBlock(pos, true);
-            }
-
-            if (!world.setBlock(pos, Fluids.WATER.defaultFluidState().createLegacyBlock(), 11) && !blockState.getFluidState().isSource()) {
+        if (this.containedBlock != null) {
+            if (!world.isInWorldBounds(pos) || !world.getBlockState(pos).canBeReplaced()) {
                 return false;
-            } else {
-                this.playEmptyingSound(player, world, pos, SoundEvents.BUCKET_EMPTY);
-                return true;
             }
+            if (!world.isClientSide) {
+                world.setBlock(pos, this.containedBlock.defaultBlockState(), Block.UPDATE_ALL);
+            }
+            this.playEmptyingSound(player, world, pos, SoundEvents.BUCKET_EMPTY_POWDER_SNOW);
+            return true;
         }
+
+        if (!(this.containedFluid instanceof FlowingFluid flowingFluid)) {
+            return false;
+        }
+
+        BlockState state = world.getBlockState(pos);
+        boolean replaceable = state.canBeReplaced(flowingFluid);
+        boolean fillable = state.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(player, world, pos, state, flowingFluid);
+
+        if (!state.isAir() && !replaceable && !fillable) {
+            return hitResult != null && this.emptyContents(player, world, hitResult.getBlockPos().relative(hitResult.getDirection()), null);
+        }
+
+        if (world.dimensionType().ultraWarm() && flowingFluid.is(FluidTags.WATER)) {
+            world.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
+            for (int i = 0; i < 8; ++i) {
+                world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX() + Math.random(), pos.getY() + Math.random(), pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
+            }
+            return true;
+        }
+
+        if (fillable) {
+            ((LiquidBlockContainer) state.getBlock()).placeLiquid(world, pos, state, flowingFluid.getSource(false));
+            this.playEmptyingSound(player, world, pos, SoundEvents.BUCKET_EMPTY);
+            return true;
+        }
+
+        if (!world.isClientSide && replaceable && !state.liquid()) {
+            world.destroyBlock(pos, true);
+        }
+
+        if (!world.setBlock(pos, flowingFluid.defaultFluidState().createLegacyBlock(), Block.UPDATE_ALL_IMMEDIATE) && !state.getFluidState().isSource()) {
+            return false;
+        }
+
+        this.playEmptyingSound(player, world, pos, SoundEvents.BUCKET_EMPTY);
+        return true;
     }
 }
