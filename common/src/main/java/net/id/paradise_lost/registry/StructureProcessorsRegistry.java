@@ -14,7 +14,7 @@ public class StructureProcessorsRegistry {
 
     public static final RegistryObject<StructureProcessorType<?>, StructureProcessorType<SupportCheckerProcessor>>
             SUPPORT_CHECKER_PROCESSOR = STRUCTURE_PROCESSOR_REGISTRATION_PROVIDER.register("support_checker",
-            () -> () -> SupportCheckerProcessor.CODEC);
+                () -> () -> SupportCheckerProcessor.CODEC);
 
 
     public static void init() {
