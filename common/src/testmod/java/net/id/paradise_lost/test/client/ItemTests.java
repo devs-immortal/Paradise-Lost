@@ -221,12 +221,16 @@ public final class ItemTests {
         );
     }
 
-    @ClientTest(value = "picks up powder snow", group = "Aurel bucket")
+    @ClientTest(value = "picks up and places powder snow", group = "Aurel bucket")
     private static List<Step> aurelBucketPowderSnow() {
         return List.of(
                 Step.run(0, () -> lookDownAt(Blocks.POWDER_SNOW.defaultBlockState(), AUREL_BUCKET.get())),
                 Step.run(10, ItemTests::useItem),
-                Step.until("aurel powder snow bucket", 20, () -> holding(AUREL_POWDER_SNOW_BUCKET.get()))
+                Step.until("aurel powder snow bucket", 20, () -> holding(AUREL_POWDER_SNOW_BUCKET.get())),
+                Step.run(0, () -> check(fromServer(server -> world(server).getBlockState(pos).isAir()), "powder snow was not taken")),
+                Step.run(10, ItemTests::useItem),
+                Step.until("powder snow placed back", 20, () -> fromServer(server -> world(server).getBlockState(pos).is(Blocks.POWDER_SNOW))),
+                Step.run(0, () -> check(holding(AUREL_BUCKET.get()), "hand does not hold an empty aurel bucket"))
         );
     }
 

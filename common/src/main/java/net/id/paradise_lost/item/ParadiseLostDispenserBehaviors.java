@@ -27,13 +27,7 @@ public class ParadiseLostDispenserBehaviors {
             DispensibleContainerItem fluidModificationItem = (DispensibleContainerItem) stack.getItem();
             BlockPos blockPos = pointer.pos().relative(pointer.state().getValue(DispenserBlock.FACING));
             Level world = pointer.level();
-            if (stack.is(ItemRegistry.AUREL_POWDER_SNOW_BUCKET.get())) {
-                if (world.isInWorldBounds(blockPos) && world.getBlockState(blockPos).canBeReplaced()) {
-                    world.setBlockAndUpdate(blockPos, Blocks.POWDER_SNOW.defaultBlockState());
-                    return new ItemStack(ItemRegistry.AUREL_BUCKET.get());
-                }
-                return this.fallbackBehavior.dispense(pointer, stack);
-            } else if (fluidModificationItem.emptyContents(null, world, blockPos, null)) {
+            if (fluidModificationItem.emptyContents(null, world, blockPos, null)) {
                 fluidModificationItem.checkExtraContent(null, world, stack, blockPos);
                 return new ItemStack(ItemRegistry.AUREL_BUCKET.get());
             } else {
