@@ -18,16 +18,13 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(HumanoidArmorLayer.class)
 public class HumanoidArmorLayerMixin {
-    private static final ResourceLocation FLOATY_LEGGINGS_ANCHORED =
-            ModConstants.locate("textures/models/armor/floaty_layer_2_on.png");
 
     @WrapOperation(
             method = "renderArmorPiece",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/item/ArmorMaterial$Layer;texture(Z)Lnet/minecraft/resources/ResourceLocation;"
-            ),
-            require = 0
+            )
     )
     private ResourceLocation paradiseLost$floatyAnchoredTexture(
             ArmorMaterial.Layer layer,
@@ -40,15 +37,7 @@ public class HumanoidArmorLayerMixin {
             int light,
             HumanoidModel<?> model
     ) {
-        ResourceLocation texture = original.call(layer, secondLayer);
-        if (secondLayer
-                && slot == EquipmentSlot.LEGS
-                && entity.getItemBySlot(slot).getItem() instanceof FloatyLeggingsItem
-                && FloatyLeggingsItem.isFloatyEnabled(entity.getItemBySlot(slot))
-                && entity instanceof ParadiseLostEntityExtensions extensions
-                && extensions.isFloatyAnchored()) {
-            return FLOATY_LEGGINGS_ANCHORED;
-        }
-        return texture;
+        ResourceLocation anchored = FloatyLeggingsItem.anchoredTexture(entity.getItemBySlot(slot), entity, secondLayer);
+        return anchored != null ? anchored : original.call(layer, secondLayer);
     }
 }

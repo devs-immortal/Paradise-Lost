@@ -1,11 +1,14 @@
 package net.id.paradise_lost.item.armor;
 
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.networking.packet.FloatyAnchorC2SPacket;
 import net.id.paradise_lost.networking.packet.PacketHandler;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -15,12 +18,15 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 public class FloatyLeggingsItem extends ArmorItem {
     public static final int DURABILITY_INTERVAL_TICKS = 20;
     public static final int JUMP_TOGGLE_TICKS = 7;
     private static final double DESCEND_SPEED = -0.15D;
     private static final double HORIZONTAL_FRICTION = 0.6D * 0.91D;
+    public static final ResourceLocation ANCHORED_TEXTURE =
+            ModConstants.locate("textures/models/armor/floaty_layer_2_on.png");
 
     public FloatyLeggingsItem(Holder<ArmorMaterial> material, Properties settings) {
         super(material, Type.LEGGINGS, settings);
@@ -151,5 +157,16 @@ public class FloatyLeggingsItem extends ArmorItem {
         if (legs.getItem() instanceof FloatyLeggingsItem) {
             legs.hurtAndBreak(1, player, EquipmentSlot.LEGS);
         }
+    }
+
+    public static @Nullable ResourceLocation anchoredTexture(ItemStack stack, Entity entity, boolean innerModel) {
+        if (innerModel
+                && stack.getItem() instanceof FloatyLeggingsItem
+                && isFloatyEnabled(stack)
+                && entity instanceof ParadiseLostEntityExtensions ext
+                && ext.isFloatyAnchored()) {
+            return ANCHORED_TEXTURE;
+        }
+        return null;
     }
 }

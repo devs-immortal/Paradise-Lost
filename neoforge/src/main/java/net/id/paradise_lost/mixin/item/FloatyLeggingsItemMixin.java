@@ -12,11 +12,10 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(FloatyLeggingsItem.class)
 public abstract class FloatyLeggingsItemMixin extends ArmorItem {
-    private static final ResourceLocation FLOATY_LEGGINGS_ANCHORED =
-            ModConstants.locate("textures/models/armor/floaty_layer_2_on.png");
 
     public FloatyLeggingsItemMixin(Holder<ArmorMaterial> material, Type type, Properties properties) {
         super(material, type, properties);
@@ -26,12 +25,6 @@ public abstract class FloatyLeggingsItemMixin extends ArmorItem {
     public @Nullable ResourceLocation getArmorTexture(
             ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel
     ) {
-        if (innerModel
-                && FloatyLeggingsItem.isFloatyEnabled(stack)
-                && entity instanceof ParadiseLostEntityExtensions extensions
-                && extensions.isFloatyAnchored()) {
-            return FLOATY_LEGGINGS_ANCHORED;
-        }
-        return null;
+        return FloatyLeggingsItem.anchoredTexture(stack, entity, innerModel);
     }
 }

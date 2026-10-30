@@ -11,7 +11,8 @@
   ],
   "client": [
     "client.MinecraftClientMixin",
-    "client.render.EntityModelsMixin"
+    "client.render.EntityModelsMixin",
+    "client.render.HumanoidArmorLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1,
