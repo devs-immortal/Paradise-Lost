@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "paradise_lost_testmod",
+  "version": "1.0.0",
+  "name": "Paradise Lost Tests",
+  "entrypoints": {
+    "client": [
+      "net.id.paradise_lost.test.FabricClientTestEntry"
+    ],
+    "server": [
+      "net.id.paradise_lost.test.FabricServerTestEntry"
+    ]
+  },
+  "mixins": [
+    "paradise_lost_testmod.mixins.json"
+  ],
+  "depends": {
+    "paradise_lost": "*"
+  }
+}
