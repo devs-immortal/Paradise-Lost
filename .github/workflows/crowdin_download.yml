@@ -1,0 +1,34 @@
+name: Download Translations from Crowdin
+
+on:
+  schedule:
+    - cron: '0 0 * * 5'
+  workflow_dispatch:
+    
+jobs:
+  synchronize-with-crowdin:
+    runs-on: ubuntu-latest
+    
+    # Required permissions for Crowdin Action
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: crowdin action
+        uses: crowdin/github-action@v3
+        with:
+          download_translations: true
+          localization_branch_name: crowdin-translations
+          create_pull_request: true
+          pull_request_title: 'Crowdin Translation Sync'
+          pull_request_body: 'New Crowdin translations by [Crowdin GH Action](https://github.com/crowdin/github-action)'
+          source: 'common/src/main/resources/assets/paradise_lost/lang/en_us.json'
+          translation: 'common/src/main/resources/assets/paradise_lost/lang/%locale_with_underscore%.json'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
