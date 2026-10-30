@@ -36,13 +36,19 @@ public class FabricMain implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
                 ParadiseLostCommands.registerAll(dispatcher));
 
-        // Floaty boots already grant Feather Falling IV; ban the enchantment from stacking.
         EnchantmentEvents.ALLOW_ENCHANTING.register((enchantment, target, context) -> {
             if (target.is(ItemRegistry.FLOATY_BOOTS.get()) && enchantment.is(Enchantments.FEATHER_FALLING)) {
                 return TriState.FALSE;
             }
             return TriState.DEFAULT;
         });
+        EnchantmentEvents.ALLOW_ENCHANTING.register(((enchantment, target, enchantingContext) -> {
+            if ((target.is(ItemRegistry.SURTRUM_AXE.get()) || target.is(ItemRegistry.SURTRUM_SWORD.get()))
+                    && enchantment.is(Enchantments.FIRE_ASPECT)) {
+                return TriState.FALSE;
+            }
+            return TriState.DEFAULT;
+        }));
         FabricBrewingRecipeRegistryBuilder.BUILD.register(RegistryUtil::addBrewingRecipes);
     }
 }

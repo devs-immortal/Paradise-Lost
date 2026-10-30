@@ -12,6 +12,8 @@
     "entity.AbstractMinecartMixin",
     "item.FloatyBootsItemMixin",
     "item.FloatyLeggingsItemMixin",
+    "item.SurtrumAxeMixin",
+    "item.SurtrumSwordMixin",
     "server.EntityTrackerEntryMixin"
   ],
   "injectors": {
