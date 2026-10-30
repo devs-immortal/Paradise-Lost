@@ -16,6 +16,7 @@ import net.id.paradise_lost.registry.CreativeTabRegistry;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.recipe.ParadiseLostRecipeTypes;
+import net.id.paradise_lost.registry.StructureProcessorsRegistry;
 import net.id.paradise_lost.screen.ParadiseLostScreens;
 import net.id.paradise_lost.util.ParadiseLostCriteria;
 import net.id.paradise_lost.util.ParadiseLostDamageTypes;
@@ -49,7 +50,7 @@ public final class ModCommon {
         ItemRegistry.init();
         ModEntities.init();
         CreativeTabRegistry.init();
-
+        StructureProcessorsRegistry.init();
         ParadiseLostBlockEntityTypes.init();
         ParadiseLostMapDecorationTypes.init();
         ParadiseLostRecipeTypes.init();

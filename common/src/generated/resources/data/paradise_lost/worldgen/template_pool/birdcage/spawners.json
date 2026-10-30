@@ -4,7 +4,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "paradise_lost:birdcage/spawner",
-        "processors": "minecraft:empty",
+        "processors": "paradise_lost:birdcage_spawner_proc",
         "projection": "rigid"
       },
       "weight": 1

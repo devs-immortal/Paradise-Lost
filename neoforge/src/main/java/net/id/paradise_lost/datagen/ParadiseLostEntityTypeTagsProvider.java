@@ -17,8 +17,8 @@ public class ParadiseLostEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        this.tag(EntityTypeTags.ARROWS).add(EntityRegistry.LEVITA_ARROW.get());
-        this.tag(ParadiseLostEntityTypeTags.CANNOT_LEVITATE)
+        tag(EntityTypeTags.ARROWS).add(EntityRegistry.LEVITA_ARROW.get());
+        tag(ParadiseLostEntityTypeTags.CANNOT_LEVITATE)
                 .add(EntityType.AREA_EFFECT_CLOUD)
                 .add(EntityType.BLOCK_DISPLAY)
                 .add(EntityType.DRAGON_FIREBALL)
@@ -48,5 +48,9 @@ public class ParadiseLostEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .add(EntityType.WIND_CHARGE)
                 .add(EntityType.WITHER_SKULL)
                 .add(EntityRegistry.THROWN_NITRA.get());
+        tag(EntityTypeTags.SKELETONS)
+                .add(EntityRegistry.ENVOY.get());
+        tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
+                .add(EntityRegistry.SENTINEL.get());
     }
 }

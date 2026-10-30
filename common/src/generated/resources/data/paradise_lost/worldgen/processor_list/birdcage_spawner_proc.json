@@ -1,0 +1,7 @@
+{
+  "processors": [
+    {
+      "processor_type": "paradise_lost:support_checker"
+    }
+  ]
+}

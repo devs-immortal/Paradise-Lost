@@ -17,6 +17,11 @@ import net.id.paradise_lost.item.tool.base_tools.*;
 import net.id.paradise_lost.item.tool.bloodstone.CherineBloodstoneItem;
 import net.id.paradise_lost.item.tool.bloodstone.SurtrumBloodstoneItem;
 import net.id.paradise_lost.item.tool.bloodstone.OlviteBloodstoneItem;
+import net.id.paradise_lost.item.tool.surtrum.SurtrumAxeItem;
+import net.id.paradise_lost.item.tool.surtrum.SurtrumHoeItem;
+import net.id.paradise_lost.item.tool.surtrum.SurtrumPickaxeItem;
+import net.id.paradise_lost.item.tool.surtrum.SurtrumShovelItem;
+import net.id.paradise_lost.item.tool.surtrum.SurtrumSwordItem;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.registration.RegistryObject;
 import net.minecraft.ChatFormatting;
@@ -132,11 +137,11 @@ public class ItemRegistry {
     public static final RegistryObject<Item, SwordItem> OLVITE_SWORD = add("olvite_sword", () -> new SwordItem(ParadiseLostToolMaterials.OLVITE, sword(ParadiseLostToolMaterials.OLVITE, 3, -2.4f)));
     public static final RegistryObject<Item, HoeItem> OLVITE_HOE = add("olvite_hoe", () -> new HoeItem(ParadiseLostToolMaterials.OLVITE, hoe(ParadiseLostToolMaterials.OLVITE, -2, -1f)));
 
-    public static final RegistryObject<Item, ShovelItem> SURTRUM_SHOVEL = add("surtrum_shovel", () -> new ShovelItem(ParadiseLostToolMaterials.SURTRUM, shovel(ParadiseLostToolMaterials.SURTRUM, 2.5f, -3f).fireResistant()));
-    public static final RegistryObject<Item, PickaxeItem> SURTRUM_PICKAXE = add("surtrum_pickaxe", () -> new PickaxeItem(ParadiseLostToolMaterials.SURTRUM, pickaxe(ParadiseLostToolMaterials.SURTRUM, 2, -2.8f).fireResistant()));
-    public static final RegistryObject<Item, AxeItem> SURTRUM_AXE = add("surtrum_axe", () -> new AxeItem(ParadiseLostToolMaterials.SURTRUM, axe(ParadiseLostToolMaterials.SURTRUM, 6f, -3.1f).fireResistant()));
-    public static final RegistryObject<Item, SwordItem> SURTRUM_SWORD = add("surtrum_sword", () -> new SwordItem(ParadiseLostToolMaterials.SURTRUM, sword(ParadiseLostToolMaterials.SURTRUM, 4, -2.4f).fireResistant()));
-    public static final RegistryObject<Item, HoeItem> SURTRUM_HOE = add("surtrum_hoe", () -> new HoeItem(ParadiseLostToolMaterials.SURTRUM, hoe(ParadiseLostToolMaterials.SURTRUM, -3, 0f).fireResistant()));
+    public static final RegistryObject<Item, SurtrumShovelItem> SURTRUM_SHOVEL = add("surtrum_shovel", () -> new SurtrumShovelItem(ParadiseLostToolMaterials.SURTRUM, shovel(ParadiseLostToolMaterials.SURTRUM, 2.5f, -3f).fireResistant()));
+    public static final RegistryObject<Item, SurtrumPickaxeItem> SURTRUM_PICKAXE = add("surtrum_pickaxe", () -> new SurtrumPickaxeItem(ParadiseLostToolMaterials.SURTRUM, pickaxe(ParadiseLostToolMaterials.SURTRUM, 2, -2.8f).fireResistant()));
+    public static final RegistryObject<Item, SurtrumAxeItem> SURTRUM_AXE = add("surtrum_axe", () -> new SurtrumAxeItem(ParadiseLostToolMaterials.SURTRUM, axe(ParadiseLostToolMaterials.SURTRUM, 6f, -3.1f).fireResistant()));
+    public static final RegistryObject<Item, SurtrumSwordItem> SURTRUM_SWORD = add("surtrum_sword", () -> new SurtrumSwordItem(ParadiseLostToolMaterials.SURTRUM, sword(ParadiseLostToolMaterials.SURTRUM, 4, -2.4f).fireResistant()));
+    public static final RegistryObject<Item, SurtrumHoeItem> SURTRUM_HOE = add("surtrum_hoe", () -> new SurtrumHoeItem(ParadiseLostToolMaterials.SURTRUM, hoe(ParadiseLostToolMaterials.SURTRUM, -3, 0f).fireResistant()));
 
     public static final RegistryObject<Item, ShovelItem> GLAZED_GOLD_SHOVEL = add("glazed_gold_shovel", () -> new ShovelItem(ParadiseLostToolMaterials.GLAZED_GOLD, shovel(ParadiseLostToolMaterials.GLAZED_GOLD, 1.5f, -3f)));
     public static final RegistryObject<Item, PickaxeItem> GLAZED_GOLD_PICKAXE = add("glazed_gold_pickaxe", () -> new PickaxeItem(ParadiseLostToolMaterials.GLAZED_GOLD, pickaxe(ParadiseLostToolMaterials.GLAZED_GOLD, 1, -2.8f)));
