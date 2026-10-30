@@ -210,7 +210,8 @@ public final class ParadiseLostTemplatePools {
         context.register(BIRDCAGE_SPAWNERS, new StructureTemplatePool(
                 empty,
                 List.of(
-                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/spawner", emptyProcessors), 1)
+                        Pair.of(StructurePoolElement.single("paradise_lost:birdcage/spawner",
+                                processors.getOrThrow(ParadiseLostProcessorLists.BIRDCAGE_SPAWNER_PROC)), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID));
         context.register(PALACE_CENTERS_MIDS, new StructureTemplatePool(
