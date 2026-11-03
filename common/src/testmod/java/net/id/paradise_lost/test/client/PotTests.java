@@ -1,6 +1,20 @@
 package net.id.paradise_lost.test.client;
 
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.ByteBufferBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.id.paradise_lost.block.blockentity.CalciteDecoratedPotBlockEntity;
+import net.id.paradise_lost.client.rendering.block.CalciteDecoratedPotBlockEntityRenderer;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.HashMap;
+
 import net.id.paradise_lost.test.Step;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
@@ -60,12 +74,48 @@ public final class PotTests {
         }));
     }
 
+    @ClientTest("calcite pot item is drawn by the built-in item renderer like the vanilla pot")
+    private static Step calcitePotItemRenders() {
+        return Step.run(0, () -> {
+            PotDecorations sherds = new PotDecorations(Optional.of(Items.BRICK), Optional.empty(), Optional.empty(), Optional.empty());
+            List<String> wrong = new ArrayList<>();
+            expect(wrong, countRenderTypes(new ItemStack(Items.DECORATED_POT)) > 0, "the vanilla pot item drew nothing");
+            expect(wrong, countRenderTypes(new ItemStack(BlockRegistry.CALCITE_DECORATED_POT.get())) > 0, "the calcite pot item drew nothing");
+            expect(wrong, countRenderTypes(CalciteDecoratedPotBlockEntity.getStackWith(sherds)) > 0, "the calcite pot item with a sherd drew nothing");
+
+            BlockState calcite = BlockRegistry.CALCITE_DECORATED_POT.get().defaultBlockState();
+            expect(wrong, client().getBlockEntityRenderDispatcher().getRenderer(new CalciteDecoratedPotBlockEntity(BlockPos.ZERO, calcite))
+                            instanceof CalciteDecoratedPotBlockEntityRenderer,
+                    "the calcite pot entity does not use the calcite renderer");
+            checkAll(wrong);
+        });
+    }
+
+    private static int countRenderTypes(ItemStack stack) {
+        int[] requests = {0};
+        Map<RenderType, ByteBufferBuilder> memory = new HashMap<>();
+        Map<RenderType, BufferBuilder> builders = new HashMap<>();
+        MultiBufferSource source = type -> {
+            requests[0]++;
+            return builders.computeIfAbsent(type, t -> new BufferBuilder(
+                    memory.computeIfAbsent(t, x -> new ByteBufferBuilder(1 << 16)), t.mode(), t.format()));
+        };
+        try {
+            BakedModel model = client().getItemRenderer().getModel(stack, client().level, null, 0);
+            client().getItemRenderer().render(stack, ItemDisplayContext.GUI, false, new PoseStack(), source,
+                    LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, model);
+        } finally {
+            memory.values().forEach(ByteBufferBuilder::close);
+        }
+        return requests[0];
+    }
+
     private static List<ItemStack> breakCalcitePot(ServerPlayer player, PotDecorations sherds, ItemStack tool) {
         ServerLevel world = player.serverLevel();
         BlockPos potPos = ahead(player, 4, 0);
 
         world.setBlockAndUpdate(potPos, BlockRegistry.CALCITE_DECORATED_POT.get().defaultBlockState());
-        ((CalciteDecoratedPotBlockEntity) world.getBlockEntity(potPos)).readFrom(CalciteDecoratedPotBlockEntity.getStackWith(sherds));
+        ((CalciteDecoratedPotBlockEntity) world.getBlockEntity(potPos)).setFromItem(CalciteDecoratedPotBlockEntity.getStackWith(sherds));
 
         player.setItemInHand(InteractionHand.MAIN_HAND, tool);
         player.gameMode.destroyBlock(potPos);
@@ -116,7 +166,7 @@ public final class PotTests {
         BlockPos potPos = ahead(player, 4, side);
         world.setBlockAndUpdate(potPos, block.defaultBlockState());
         if (sherds != null && world.getBlockEntity(potPos) instanceof CalciteDecoratedPotBlockEntity pot) {
-            pot.readFrom(CalciteDecoratedPotBlockEntity.getStackWith(sherds));
+            pot.setFromItem(CalciteDecoratedPotBlockEntity.getStackWith(sherds));
         }
         player.setItemInHand(InteractionHand.MAIN_HAND, tool == null ? ItemStack.EMPTY : new ItemStack(tool));
         player.gameMode.destroyBlock(potPos);

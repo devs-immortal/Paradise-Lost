@@ -24,8 +24,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.world.level.block.entity.DecoratedPotPatterns;
 import net.minecraft.world.level.block.entity.PotDecorations;
+
 import java.util.EnumSet;
 import java.util.Optional;
 
@@ -131,15 +133,15 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
             CalciteDecoratedPotBlockEntity decoratedPotBlockEntity, float f, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int i, int j
     ) {
         matrixStack.pushPose();
-        Direction direction = decoratedPotBlockEntity.getHorizontalFacing();
+        Direction direction = decoratedPotBlockEntity.getDirection();
         matrixStack.translate(0.5, 0.0, 0.5);
         matrixStack.mulPose(Axis.YP.rotationDegrees(180.0F - direction.toYRot()));
         matrixStack.translate(-0.5, 0.0, -0.5);
-        CalciteDecoratedPotBlockEntity.WobbleType wobbleType = decoratedPotBlockEntity.lastWobbleType;
+        DecoratedPotBlockEntity.WobbleStyle wobbleType = decoratedPotBlockEntity.lastWobbleStyle;
         if (wobbleType != null && decoratedPotBlockEntity.getLevel() != null) {
-            float g = ((float) (decoratedPotBlockEntity.getLevel().getGameTime() - decoratedPotBlockEntity.lastWobbleTime) + f) / (float) wobbleType.lengthInTicks;
+            float g = ((float) (decoratedPotBlockEntity.getLevel().getGameTime() - decoratedPotBlockEntity.wobbleStartedAtTick) + f) / (float) wobbleType.duration;
             if (g >= 0.0F && g <= 1.0F) {
-                if (wobbleType == CalciteDecoratedPotBlockEntity.WobbleType.POSITIVE) {
+                if (wobbleType == DecoratedPotBlockEntity.WobbleStyle.POSITIVE) {
                     float h = 0.015625F;
                     float k = g * (float) (Math.PI * 2);
                     float l = -1.5F * (Mth.cos(k) + 0.5F) * Mth.sin(k / 2.0F);
@@ -158,7 +160,7 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
         this.neck.render(matrixStack, vertexConsumer, i, j);
         this.top.render(matrixStack, vertexConsumer, i, j);
         this.bottom.render(matrixStack, vertexConsumer, i, j);
-        PotDecorations sherds = decoratedPotBlockEntity.getSherds();
+        PotDecorations sherds = decoratedPotBlockEntity.getDecorations();
         this.renderDecoratedSide(this.front, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.front()));
         this.renderDecoratedSide(this.back, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.back()));
         this.renderDecoratedSide(this.left, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.left()));
