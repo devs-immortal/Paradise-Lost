@@ -4,7 +4,6 @@ import com.google.common.base.Suppliers;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
 import net.id.paradise_lost.tag.ParadiseLostBlockTags;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
