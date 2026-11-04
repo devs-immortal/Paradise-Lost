@@ -75,7 +75,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "paradise_lost:birdcage/ends/end_tunnel_1",
+        "location": "paradise_lost:birdcage/ends/end_tunnel_2",
         "processors": "paradise_lost:birdcage_proc",
         "projection": "rigid"
       },
