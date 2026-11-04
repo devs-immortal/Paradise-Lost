@@ -898,6 +898,9 @@ public final class MinecartFloatingHelper {
             if (height >= 0.0D) {
                 return;
             }
+            if (!climbMemory) {
+                return;
+            }
             setIncline(cart, 1);
             maintainSlopeFloatPose(cart);
             debug(cart, "climbRestore", "flatTarget=" + flatTarget
