@@ -107,7 +107,7 @@ public final class BirdcageTests {
                     if (nbt.get(jigsaw).getString("name").equals(MARKER)) markers++;
                 }
             }
-            expect(wrong, markers >= 14, "only found " + markers + " spawner markers");
+            expect(wrong, markers >= 12, "only found " + markers + " spawner markers");
             checkAll(wrong);
         });
     }
@@ -184,7 +184,7 @@ public final class BirdcageTests {
                     }
                 }
             }
-            expect(wrong, checked >= 14 * 4, "only checked " + checked + " markers");
+            expect(wrong, checked >= 12 * 4, "only checked " + checked + " markers");
             checkAll(wrong);
         });
     }

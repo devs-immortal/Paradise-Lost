@@ -1107,7 +1107,10 @@ public final class LevitaTests {
             watchClientRender();
             AbstractMinecart cart = clientCart(entityId);
             Vec3 motion = cart.getDeltaMovement();
-            boolean level = Math.abs(cart.getY() - cart.yOld) < 0.02 && motion.horizontalDistanceSqr() > 0.01;
+            // A client cart that has not moved for a tick or two also has dy=0 while it is still on the slope,
+            // which is not riding the landing yet.
+            boolean level = Math.abs(cart.getY() - cart.yOld) < 0.02 && motion.horizontalDistanceSqr() > 0.01
+                    && MinecartFloatingHelper.getIncline(cart) == 0;
             flat[0] = level ? flat[0] + 1 : 0;
             waited[0]++;
             check(flat[0] >= 3 || waited[0] < 70, tag + " client cart never rode level: dy=" + fmt(cart.getY() - cart.yOld) + describe(cart) + floatState(cart));

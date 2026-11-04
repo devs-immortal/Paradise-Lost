@@ -1,5 +1,6 @@
 package net.id.paradise_lost.test.client;
 
+import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.test.Recorder;
 import net.id.paradise_lost.world.ParadiseLostGameRules;
 import net.minecraft.client.Minecraft;
@@ -84,6 +85,7 @@ final class TestWorld {
             player.getInventory().clearContent();
             player.setDeltaMovement(Vec3.ZERO);
             player.fallDistance = 0;
+            ((ParadiseLostEntityExtensions) player).setParadiseLostFallen(false);
             teleport(player, Level.OVERWORLD, slot * 128 + 0.5, -60, 0.5, 0);
         });
         Recorder.reset();

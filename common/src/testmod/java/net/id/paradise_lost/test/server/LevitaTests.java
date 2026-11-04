@@ -242,6 +242,30 @@ public final class LevitaTests {
         );
     }
 
+    @ServerTest("flat floating cart does not climb onto a flat rail one block above")
+    private static List<Step> flatCartDoesNotClimbOntoRailAbove() {
+        return List.of(
+                setup(world -> {
+                    track(world, start, "rLrr");
+                    // two blocks of gap, then a flat rail on a block that is one higher than the cart's rails
+                    BlockPos upper = start.relative(dir, 6).above();
+                    fill(world, upper.below(), upper.relative(dir, 3).below(), Blocks.STONE.defaultBlockState());
+                    track(world, upper, "rrrr");
+                    entityId = launch(world, EntityType.MINECART, start, 0.4);
+                    ticks = 0;
+                    seen = start.getY();
+                }),
+                Step.until("cart to float", 40, () -> serverFloating(entityId)),
+                Step.until("80 ticks at the step", 90, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    seen = Math.max(seen, cart.getY());
+                    check(seen < start.getY() + 0.5, "cart climbed to y=" + fmt(seen) + " onto the rail above" + describe(cart) + floatState(cart));
+                    check(MinecartFloatingHelper.getIncline(cart) == 0, "flat cart got incline " + MinecartFloatingHelper.getIncline(cart) + describe(cart) + floatState(cart));
+                    return ++ticks >= 80;
+                })
+        );
+    }
+
     @ServerTest("ceiling stops a rising cart")
     private static List<Step> ceilingStopsRisingCart() {
         return List.of(
