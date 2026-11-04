@@ -8,7 +8,9 @@ plugins {
 }
 
 val libs = project.versionCatalogs.find("libs")
-version = getVersion("version")
+val commitSha = System.getenv("COMMIT_SHA")?.trim()?.takeIf { it.isNotEmpty() }?.take(7)
+val modVersion = getVersion("version") + (commitSha?.let { "+$it" } ?: "")
+version = modVersion
 
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(getVersion("java"))
@@ -151,7 +153,7 @@ tasks.withType<ProcessResources>().configureEach {
         "mod_issues_tracker"             to modIssuesTracker,
         "mod_git_repo"                   to modGitRepo,
 
-        "version"                        to getVersion("version"),
+        "version"                        to modVersion,
         "java_version"                   to getVersion("java"),
 
         "minecraft_version"              to getVersion("minecraft"),
@@ -200,9 +202,9 @@ tasks.withType<Jar>().configureEach {
         attributes(mapOf(
             "Specification-Title"     to modDisplayName,
             "Specification-Vendor"    to modAuthors,
-            "Specification-Version"   to getVersion("version"),
+            "Specification-Version"   to modVersion,
             "Implementation-Title"    to modDisplayName,
-            "Implementation-Version"  to getVersion("version"),
+            "Implementation-Version"  to modVersion,
             "Implementation-Vendor"   to modAuthors,
             "Built-On-Minecraft"      to getVersion("minecraft"),
             "MixinConfigs"            to "$modId.mixins.json"

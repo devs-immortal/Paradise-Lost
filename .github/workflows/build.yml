@@ -13,6 +13,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Appended to the mod version by buildSrc, e.g. 2.5.1+abc1234.
+      COMMIT_SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v6
 
@@ -28,8 +31,20 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - name: Upload Artifacts
+      - name: Upload Fabric build
         uses: actions/upload-artifact@v6
         with:
-          name: artifacts
-          path: ./build/libs/
+          name: paradise_lost-fabric
+          path: |
+            fabric/build/libs/*.jar
+            !fabric/build/libs/*-sources.jar
+          if-no-files-found: error
+
+      - name: Upload NeoForge build
+        uses: actions/upload-artifact@v6
+        with:
+          name: paradise_lost-neoforge
+          path: |
+            neoforge/build/libs/*.jar
+            !neoforge/build/libs/*-sources.jar
+          if-no-files-found: error
