@@ -52,7 +52,10 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
 
         addWoodSetVanillaTags();
         addSignVanillaTags();
-
+        tag(ParadiseLostBlockTags.INCORRECT_FOR_GLAZED_GOLD_TOOL).addTag(BlockTags.NEEDS_DIAMOND_TOOL);
+        tag(ParadiseLostBlockTags.INCORRECT_FOR_OLVITE_TOOL).addTag(BlockTags.NEEDS_DIAMOND_TOOL);
+        tag(ParadiseLostBlockTags.INCORRECT_FOR_SOUL_TOOL);
+        tag(ParadiseLostBlockTags.INCORRECT_FOR_SURTRUM_TOOL);
         tag(ANIMALS_SPAWNABLE_ON).add(HIGHLANDS_GRASS.get(), FROZEN_GRASS.get());
         tag(BlockTags.BEACON_BASE_BLOCKS).add(OLVITE_BLOCK.get(), REFINED_SURTRUM_BLOCK.get());
         tag(BlockTags.CAMPFIRES).add(CHERINE_CAMPFIRE.get());

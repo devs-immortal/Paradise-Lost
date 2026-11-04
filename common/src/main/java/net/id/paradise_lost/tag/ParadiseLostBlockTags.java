@@ -39,6 +39,11 @@ public class ParadiseLostBlockTags {
     public static final TagKey<Block> INCUBATOR_WARMER_LIGHTS = register("incubator_warmer_lights");
     public static final TagKey<Block> INCUBATOR_WARMER_BEDS = register("incubator_warmer_beds");
 
+    public static final TagKey<Block> INCORRECT_FOR_SOUL_TOOL = register("incorrect_for_soul_tool");
+    public static final TagKey<Block> INCORRECT_FOR_SURTRUM_TOOL = register("incorrect_for_surtrum_tool");
+    public static final TagKey<Block> INCORRECT_FOR_OLVITE_TOOL = register("incorrect_for_olvite_tool");
+    public static final TagKey<Block> INCORRECT_FOR_GLAZED_GOLD_TOOL = register("incorrect_for_glazed_gold_tool");
+
     private static TagKey<Block> register(String id) {
         return TagKey.create(Registries.BLOCK, ModConstants.locate(id));
     }

@@ -27,5 +27,6 @@ public class ParadiseLostDamageTypeTagsProvider extends TagsProvider<DamageType>
         this.tag(DamageTypeTags.BYPASSES_ENCHANTMENTS).add(ParadiseLostDamageTypes.FALL_FROM_PARADISE);
         this.tag(DamageTypeTags.BYPASSES_RESISTANCE).add(ParadiseLostDamageTypes.FALL_FROM_PARADISE);
         this.tag(DamageTypeTags.NO_IMPACT).add(ParadiseLostDamageTypes.FALL_FROM_PARADISE);
+        this.tag(DamageTypeTags.IS_FALL).add(ParadiseLostDamageTypes.FALL_FROM_PARADISE);
     }
 }
