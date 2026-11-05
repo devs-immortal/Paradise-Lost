@@ -1,6 +1,7 @@
 package net.id.paradise_lost.test.server;
 
 import net.id.paradise_lost.block.mechanical.LevitaRailBlock;
+import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.test.Step;
 import net.id.paradise_lost.util.MinecartFloatingHelper;
@@ -262,6 +263,91 @@ public final class LevitaTests {
                     check(seen < start.getY() + 0.5, "cart climbed to y=" + fmt(seen) + " onto the rail above" + describe(cart) + floatState(cart));
                     check(MinecartFloatingHelper.getIncline(cart) == 0, "flat cart got incline " + MinecartFloatingHelper.getIncline(cart) + describe(cart) + floatState(cart));
                     return ++ticks >= 80;
+                })
+        );
+    }
+
+    private static final double[] PERP_SPEEDS = {0.2, 0.25, 0.3};
+    private static final int[] PERP_GAPS = {0, 1, 2, 3};
+    private static final List<String> perpWrong = new ArrayList<>();
+
+    @ServerTest("flat floating cart reaches a perpendicular staircase after a gap at any speed")
+    private static List<Step> floatingCartReachesPerpendicularStaircase() {
+        List<Step> steps = new ArrayList<>();
+        steps.add(setup(world -> perpWrong.clear()));
+        for (double speed : PERP_SPEEDS) {
+            for (int gap : PERP_GAPS) {
+                steps.add(Step.run(0, () -> {
+                    Direction up = dir.getCounterClockWise();
+                    fill(level(), start.relative(dir, -3).relative(up, -2), start.relative(dir, 20).relative(up, 14).above(9), Blocks.AIR.defaultBlockState());
+                    track(level(), start, "rLrr");
+                    // The staircase runs across the track and the cart meets its second step, with the first one beside and below it.
+                    BlockPos first = start.relative(dir, 4 + gap);
+                    for (int i = -1; i < 5; i++) {
+                        BlockPos at = first.relative(up, i).above(i);
+                        level().setBlockAndUpdate(at.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+                    }
+                    for (int i = -1; i < 4; i++) {
+                        level().setBlockAndUpdate(first.relative(up, i).above(i), BlockRegistry.LEVITA_RAIL.get().defaultBlockState());
+                    }
+                    for (int i = -1; i < 4; i++) {
+                        forceShape(level(), first.relative(up, i).above(i), ascending(up));
+                    }
+                    BlockPos top = first.relative(up, 4).above(4);
+                    for (int i = 0; i < 6; i++) {
+                        level().setBlockAndUpdate(top.relative(up, i).below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+                        level().setBlockAndUpdate(top.relative(up, i), BlockRegistry.LEVITA_RAIL.get().defaultBlockState());
+                    }
+                    entityId = launch(level(), EntityType.MINECART, start, speed);
+                    ticks = 0;
+                    seen = start.getY();
+                }));
+                steps.add(Step.until("cart to climb the staircase", 110, () -> {
+                    AbstractMinecart cart = (AbstractMinecart) level().getEntity(entityId);
+                    if (cart != null) {
+                        seen = Math.max(seen, cart.getY());
+                    }
+                    return seen > start.getY() + 3.5 || ++ticks >= 100;
+                }));
+                steps.add(Step.run(0, () -> {
+                    AbstractMinecart cart = (AbstractMinecart) level().getEntity(entityId);
+                    if (seen <= start.getY() + 3.5) {
+                        perpWrong.add("speed " + speed + ", gap " + gap + ": cart stopped at the staircase"
+                                + (cart == null ? "" : describe(cart) + floatState(cart)));
+                    }
+                    if (cart != null) {
+                        cart.discard();
+                    }
+                }));
+            }
+        }
+        steps.add(Step.run(0, () -> checkAll(perpWrong)));
+        return steps;
+    }
+
+    @ServerTest("climbing cart levels out against a ledge that only clips the top of it")
+    private static List<Step> climbingCartLevelsOutAgainstOverhang() {
+        return List.of(
+                setup(world -> {
+                    int ledgeY = start.getY() + 8;
+                    BlockPos ledge = new BlockPos(start.getX(), ledgeY, start.getZ()).relative(dir, 5);
+                    fill(world, ledge.relative(dir.getClockWise(), 2), ledge.relative(dir.getCounterClockWise(), 2), Blocks.STONE.defaultBlockState());
+                    entityId = launch(world, EntityType.MINECART, start, 0);
+                    AbstractMinecart cart = serverCart(entityId);
+                    cart.setPos(start.getX() + 0.5, ledgeY - 4.9, start.getZ() + 0.5);
+                    cart.setDeltaMovement(dir.getStepX() * 0.4, 0.4, dir.getStepZ() * 0.4);
+                    MinecartFloatingHelper.setFloatTime(cart, 120);
+                    MinecartFloatingHelper.setRailShape(cart, ascending(dir));
+                    MinecartFloatingHelper.setIncline(cart, 1);
+                    ((MinecartFloatPoseAccess) cart).paradiseLost$setOpenAirClimbGrace(120);
+                    ticks = 0;
+                }),
+                Step.until("cart to reach the ledge", 40, () -> along(serverCart(entityId)) > 3.9),
+                Step.until("10 ticks against the ledge", 20, () -> ++ticks >= 10),
+                Step.run(0, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    check(MinecartFloatingHelper.getIncline(cart) == 0, "cart still hangs at incline " + MinecartFloatingHelper.getIncline(cart)
+                            + " against the ledge" + describe(cart) + floatState(cart));
                 })
         );
     }
@@ -713,7 +799,9 @@ public final class LevitaTests {
                 setup(world -> {
                     for (int i = 0; i < LONG_RUN; i++) {
                         BlockPos at = start.relative(dir, i).above(i);
-                        world.setBlockAndUpdate(at.below(), i % powerEvery == 0 ? Blocks.REDSTONE_BLOCK.defaultBlockState() : Blocks.STONE.defaultBlockState());
+                        world.setBlockAndUpdate(at.below(), i % powerEvery == 0
+                                ? Blocks.REDSTONE_BLOCK.defaultBlockState()
+                                : Blocks.STONE.defaultBlockState());
                         world.setBlockAndUpdate(at, BlockRegistry.LEVITA_RAIL.get().defaultBlockState());
                     }
                     BlockPos top = start.relative(dir, LONG_RUN).above(LONG_RUN);
@@ -723,7 +811,9 @@ public final class LevitaTests {
                     for (int i = 0; i < LONG_RUN; i++) {
                         slope(world, start.relative(dir, i).above(i));
                     }
-                    entityId = launch(world, EntityType.MINECART, floatingApproach ? start.relative(dir, -6) : start, speed);
+                    entityId = launch(world, EntityType.MINECART, floatingApproach
+                            ? start.relative(dir, -6)
+                            : start, speed);
                     if (rider) {
                         Entity passenger = EntityType.VILLAGER.create(world);
                         passenger.moveTo(world.getEntity(entityId).position());
@@ -796,8 +886,8 @@ public final class LevitaTests {
 
     /**
      * A cart that leaves the top of a run of downward slopes follows them. Once the last slope is behind it, a climbing
-     * cart keeps climbing in open air, so a descending one has to keep descending, with or without a rail ahead to
-     * land on. With a rail ahead it just has to land there.
+     * cart keeps climbing in open air, so a descending one has to keep descending, with or without a rail ahead to land
+     * on. With a rail ahead it just has to land there.
      */
     private static List<Step> descentSteps(int slopes, boolean railAhead) {
         List<Step> steps = new ArrayList<>();

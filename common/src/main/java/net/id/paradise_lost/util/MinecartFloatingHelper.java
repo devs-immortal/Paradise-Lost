@@ -2500,7 +2500,8 @@ public final class MinecartFloatingHelper {
         }
         BlockPos ahead = BlockPos.containing(cart.getX() + dx, cart.getY() + cart.getBbHeight() / 2.0D, cart.getZ() + dz);
         if (!isBlockingSolid(cart.level(), ahead)) {
-            return false;
+            BlockPos top = BlockPos.containing(cart.getX() + dx, cart.getY() + cart.getBbHeight() - 0.05D, cart.getZ() + dz);
+            return !top.equals(ahead) && isBlockingSolid(cart.level(), top) && !hasContinuingRailAhead(cart);
         }
         if (isBlockingSolid(cart.level(), ahead.above())) {
             return true;
@@ -3011,6 +3012,13 @@ public final class MinecartFloatingHelper {
             along = along.scale(-1.0D);
         }
         along = along.normalize();
+        // A cart that is still crossing the slope (a flat run ending beside the foot of a perpendicular stair) must
+        // not be turned onto it before it is over it: the rail is not under the cart yet, so the turn only drives it
+        // sideways into the stair's pier and stops it dead.
+        Vec3 heading = new Vec3(motion.x, 0.0D, motion.z);
+        if (heading.lengthSqr() > MOTION_EPSILON * MOTION_EPSILON && horizontalDot(heading.normalize(), along) < 0.5D) {
+            return;
+        }
         // Restore climb/descend Y too, pier friction often zeros the whole vector.
         cart.setDeltaMovement(along.x * minSpeed, incline * minSpeed, along.z * minSpeed);
     }
