@@ -267,7 +267,8 @@ public final class LevitaTests {
         );
     }
 
-    private static final double[] PERP_SPEEDS = {0.2, 0.25, 0.3};
+    // Slower carts run out of momentum on the flat run before they reach the slope, and slopes add none.
+    private static final double[] PERP_SPEEDS = {0.25, 0.3, 0.4};
     private static final int[] PERP_GAPS = {0, 1, 2, 3};
     private static final List<String> perpWrong = new ArrayList<>();
 
@@ -278,7 +279,11 @@ public final class LevitaTests {
         for (double speed : PERP_SPEEDS) {
             for (int gap : PERP_GAPS) {
                 steps.add(Step.run(0, () -> {
-                    Direction up = dir.getCounterClockWise();
+                    // A cart that meets a slope sideways leaves it the way vanilla does, towards its east/south end, so the
+                    // staircase has to rise that way for the cart to be expected to climb it.
+                    Direction up = dir.getClockWise().getAxisDirection() == Direction.AxisDirection.POSITIVE
+                            ? dir.getClockWise()
+                            : dir.getCounterClockWise();
                     fill(level(), start.relative(dir, -3).relative(up, -2), start.relative(dir, 20).relative(up, 14).above(9), Blocks.AIR.defaultBlockState());
                     track(level(), start, "rLrr");
                     // The staircase runs across the track and the cart meets its second step, with the first one beside and below it.

@@ -29,6 +29,8 @@ public final class MinecartFloatingHelper {
 
     private static final double FLOAT_SECONDS = 4.1;
     private static final double MOTION_EPSILON = 0.05D;
+    private static final double SLOPE_ASSIST_MIN_ALONG = MOTION_EPSILON;
+    private static final double SIDEWAYS_DOT = 0.1D;
     /**
      * Max Y above an ascending rail block while still on its seat curve (~0 at low end, ~1 at high).
      */
@@ -3037,7 +3039,9 @@ public final class MinecartFloatingHelper {
         }
         updateInclineFromRail(cart, shape, cart.getDeltaMovement());
         int incline = getIncline(cart);
-        if (incline == 0) {
+        // Only helps a cart that is climbing. A cart rolling down a slope (or drifting back after a stall) has gravity
+        // for that and must not be flung off the bottom.
+        if (incline <= 0) {
             return;
         }
         Pair<Vec3i, Vec3i> exits = RAIL_EXITS.get(shape);
@@ -3046,9 +3050,7 @@ public final class MinecartFloatingHelper {
         }
         Vec3i a = exits.getFirst();
         Vec3i b = exits.getSecond();
-        Vec3i upper = a.getY() >= b.getY() ? a : b;
-        Vec3i lower = a.getY() < b.getY() ? a : b;
-        Vec3i target = incline > 0 ? upper : lower;
+        Vec3i target = a.getY() >= b.getY() ? a : b;
         Vec3 dir = new Vec3(target.getX(), 0.0D, target.getZ());
         if (dir.lengthSqr() < 1.0E-8D) {
             return;
@@ -3057,10 +3059,43 @@ public final class MinecartFloatingHelper {
         Vec3 motion = cart.getDeltaMovement();
         double along = motion.x * dir.x + motion.z * dir.z;
         double minSpeed = 0.42D;
-        if (along < minSpeed) {
+        // Only keeps a cart that is already travelling up/down the slope from bleeding speed. A cart that is almost
+        // stopped (or drifting with gravity) must not be flung to full speed by a single slope rail, that would make
+        // the rail act like a powered one.
+        if (along >= SLOPE_ASSIST_MIN_ALONG && along < minSpeed) {
             double add = minSpeed - along;
             cart.setDeltaMovement(motion.x + dir.x * add, motion.y, motion.z + dir.z * add);
         }
+    }
+
+    /**
+     * Vanilla leaves a slope rail that the cart meets exactly sideways towards whichever side the last rounding error
+     * of its motion points to, so up or down was random. Pin it to the rail's second exit (east/south), which is what
+     * vanilla picks when the motion is exactly sideways.
+     */
+    public static void resolveSidewaysSlopeEntry(AbstractMinecart cart, BlockState railState) {
+        if (!isFloating(cart) || !(railState.getBlock() instanceof BaseRailBlock rail)) {
+            return;
+        }
+        RailShape shape = railState.getValue(rail.getShapeProperty());
+        Pair<Vec3i, Vec3i> exits = shape.isAscending() ? RAIL_EXITS.get(shape) : null;
+        if (exits == null) {
+            return;
+        }
+        Vec3 motion = cart.getDeltaMovement();
+        double speed = Math.sqrt(motion.x * motion.x + motion.z * motion.z);
+        if (speed < 1.0E-4D) {
+            return;
+        }
+        Vec3 first = new Vec3(exits.getFirst().getX(), 0.0D, exits.getFirst().getZ()).normalize();
+        Vec3 second = new Vec3(exits.getSecond().getX(), 0.0D, exits.getSecond().getZ()).normalize();
+        double dotFirst = (motion.x * first.x + motion.z * first.z) / speed;
+        double dotSecond = (motion.x * second.x + motion.z * second.z) / speed;
+        if (Math.abs(dotFirst) > SIDEWAYS_DOT || Math.abs(dotSecond) > SIDEWAYS_DOT) {
+            return;
+        }
+        cart.setDeltaMovement(second.x * speed, motion.y, second.z * speed);
+        debug(cart, "sideways", "shape=" + shape + " motion " + fmt(motion) + "->" + fmt(cart.getDeltaMovement()));
     }
 
     /**
@@ -3144,12 +3179,10 @@ public final class MinecartFloatingHelper {
         double dotA = horizontalDot(approach, exitA);
         double dotB = horizontalDot(approach, exitB);
         Vec3 along;
-        if (Math.max(dotA, dotB) >= 0.35D) {
-            along = dotA >= dotB ? exitA : exitB;
-        } else {
-            Vec3 right = new Vec3(approach.z, 0.0D, -approach.x);
-            along = horizontalDot(right, exitA) >= horizontalDot(right, exitB) ? exitA : exitB;
-        }
+        // Same pick as vanilla's moveAlongTrack: the exit the cart is heading towards, and for a cart that is exactly
+        // sideways on to the rail, the rail's second exit (east/south), so uphill or downhill depends only on the
+        // rail's orientation.
+        along = dotA > dotB + 1.0E-4D ? exitA : exitB;
 
         setRailShape(cart, shape);
         double speed = Math.max(motion.horizontalDistance(), MOTION_EPSILON);

@@ -175,6 +175,8 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                             + " unsettledFlat=" + MinecartFloatingHelper.isUnsettledAboveFlatRail(cart));
             this.paradiseLost$moveFloating(cart, false);
             ci.cancel();
+        } else {
+            MinecartFloatingHelper.resolveSidewaysSlopeEntry(cart, state);
         }
     }
 
@@ -201,8 +203,8 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     }
 
     /**
-     * Start a float gap: freeze pose, set grace, mark off-rail. Called from comeOffTrack and the
-     * air tick branch (leaving during moveAlongTrack can skip comeOff for a tick).
+     * Start a float gap: freeze pose, set grace, mark off-rail. Called from comeOffTrack and the air tick branch
+     * (leaving during moveAlongTrack can skip comeOff for a tick).
      */
     @Unique
     private void paradiseLost$beginFloatTakeoff(AbstractMinecart cart, String reason) {
@@ -455,7 +457,9 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         }
     }
 
-    /** 45 degrees only if the rail under this client cart really is a slope, since the incline sync runs ahead. */
+    /**
+     * 45 degrees only if the rail under this client cart really is a slope, since the incline sync runs ahead.
+     */
     @Unique
     private void paradiseLost$applyClientFloatPose(AbstractMinecart cart) {
         if (MinecartFloatingHelper.clientShouldHoldSlopePose(cart)) {
