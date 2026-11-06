@@ -2241,7 +2241,8 @@ public final class MinecartFloatingHelper {
         BlockPos railPos = findRailPos(cart);
         // Settled on a flat or corner with the incline cleared: vanilla pose. Do this before the client motion
         // pose, or leftover climb dy after a piston-style shove or a landing lerp keeps 45 degrees on the flat.
-        if (getIncline(cart) == 0 && railPos != null && isSettledOnRail(cart, railPos)) {
+        // Off-rail skips getPos, so a cart floating through a corner would otherwise fall back to a stale yaw.
+        if (!isOffRail(cart) && getIncline(cart) == 0 && railPos != null && isSettledOnRail(cart, railPos)) {
             BlockState railState = cart.level().getBlockState(railPos);
             if (railState.getBlock() instanceof BaseRailBlock rail
                     && !railState.getValue(rail.getShapeProperty()).isAscending()) {
