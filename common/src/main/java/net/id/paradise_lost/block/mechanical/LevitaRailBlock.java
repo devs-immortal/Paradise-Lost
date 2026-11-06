@@ -82,13 +82,7 @@ public class LevitaRailBlock extends PoweredRailBlock {
     }
 
     private static boolean isOnRail(AbstractMinecart cart, BlockPos pos) {
-        return cart.getBoundingBox().intersects(
-                pos.getX() + DETECTION_INSET,
-                pos.getY(),
-                pos.getZ() + DETECTION_INSET,
-                pos.getX() + 1 - DETECTION_INSET,
-                pos.getY() + 1 - DETECTION_INSET,
-                pos.getZ() + 1 - DETECTION_INSET);
+        return cart.getBoundingBox().intersects(detectionBox(pos));
     }
 
     private static AABB detectionBox(BlockPos pos) {
