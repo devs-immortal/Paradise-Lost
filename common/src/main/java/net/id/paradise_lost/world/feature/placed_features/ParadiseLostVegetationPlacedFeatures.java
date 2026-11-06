@@ -12,7 +12,6 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.CountOnEveryLayerPlacement;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.EnvironmentScanPlacement;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
@@ -70,7 +69,9 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
         register(context, PATCH_BROWN_SPORECAP, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.PATCH_BROWN_SPORECAP),
                 RarityFilter.onAverageOnceEvery(10),
                 InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(1));
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                CountPlacement.of(1),
+                BiomeFilter.biome());
         register(context, PATCH_BROWN_SPORECAP_COMMON, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.PATCH_BROWN_SPORECAP),
                 RarityFilter.onAverageOnceEvery(3),
                 InSquarePlacement.spread(),
@@ -78,11 +79,14 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
         register(context, BUSH, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.BUSH),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(1));
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                CountPlacement.of(1));
         register(context, DENSE_BUSH, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.DENSE_BUSH),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(3));
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                CountPlacement.of(2),
+                BiomeFilter.biome());
         register(context, FLOWERS, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.FLOWERS),
                 NoiseThresholdCountPlacement.of(-0.8D, 15, 4),
                 RarityFilter.onAverageOnceEvery(24),
@@ -104,7 +108,8 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
         register(context, GRASS, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.GRASS_BUSH),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(6));
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                CountPlacement.of(5));
         register(context, PATCH_PINK_SPORECAP, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.PATCH_PINK_SPORECAP),
                 CountPlacement.of(3),
                 InSquarePlacement.spread(),
@@ -114,11 +119,15 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
         register(context, PLATEAU_FLOWERING_GRASS, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.PLATEAU_FLOWERING_GRASS),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(5));
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                CountPlacement.of(4),
+                BiomeFilter.biome());
         register(context, PLATEAU_FOLIAGE, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.PLATEAU_FOLIAGE),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(3));
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                CountPlacement.of(2),
+                BiomeFilter.biome());
         register(context, PLATEAU_SHAMROCK, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.PLATEAU_SHAMROCK),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
@@ -142,7 +151,9 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
         register(context, TALL_GRASS, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.TALL_GRASS_BUSH),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(3));
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                CountPlacement.of(2),
+                BiomeFilter.biome());
         register(context, THICKET_LIVERWORT_CARPET, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.THICKET_LIVERWORT_CARPET),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
@@ -156,6 +167,8 @@ public class ParadiseLostVegetationPlacedFeatures extends ParadiseLostPlacedFeat
         register(context, TUNDRA_FOLIAGE, configuredFeatures.getOrThrow(ParadiseLostVegetationConfiguredFeatures.TUNDRA_FOLIAGE),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(3));
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                CountPlacement.of(2),
+                BiomeFilter.biome());
     }
 }
