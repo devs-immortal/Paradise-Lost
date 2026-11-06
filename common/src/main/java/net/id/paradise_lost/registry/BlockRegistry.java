@@ -45,7 +45,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -97,7 +96,7 @@ import static net.minecraft.world.level.block.state.BlockBehaviour.Properties.of
 import static net.minecraft.world.level.block.state.BlockBehaviour.Properties.ofFullCopy;
 
 @SuppressWarnings("unused")
-public class BlockRegistry {
+public final class BlockRegistry {
     public static final RegistrationProvider<Block> BLOCKS =
             RegistrationProvider.get(Registries.BLOCK, ModConstants.MOD_ID);
 
@@ -165,18 +164,6 @@ public class BlockRegistry {
             }
             return instance;
         });
-    }
-
-    public static class ParadiseLostFarmlandBlock extends FarmBlock {
-        ParadiseLostFarmlandBlock(BlockBehaviour.Properties settings) {
-            super(settings);
-        }
-
-        public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-            return !this.defaultBlockState().canSurvive(ctx.getLevel(), ctx.getClickedPos())
-                    ? DIRT.get().defaultBlockState()
-                    : super.getStateForPlacement(ctx);
-        }
     }
 
     public static class ParadiseLostPaneBlock extends IronBarsBlock {
@@ -421,7 +408,7 @@ public class BlockRegistry {
         }
     }
 
-	protected static Properties unbreakable(BlockBehaviour.Properties settings) {
+	private static Properties unbreakable(BlockBehaviour.Properties settings) {
         return settings.strength(-1f, 3600000f);
     }
 
@@ -535,7 +522,7 @@ public class BlockRegistry {
     public static final SimpleBlockSet BLOOMED_CALCITE_TILES_SET = registerSimpleBlockSet("bloomed_calcite_tiles", ofFullCopy(CALCITE).instrument(NoteBlockInstrument.BASEDRUM));
     public static final RegistryObject<Block, WallBlock> BLOOMED_CALCITE_TILES_WALL = add("bloomed_calcite_tiles_wall", () -> new WallBlock(floestone()));
 
-    protected static Properties flowerPot() {
+    private static Properties flowerPot() {
         return ofFullCopy(POTTED_OAK_SAPLING);
     }
 
@@ -548,7 +535,7 @@ public class BlockRegistry {
     public static final RegistryObject<Block, PalaceDoorBlock> PALACE_DOOR = addNoItem("palace_door", () -> new PalaceDoorBlock(ofFullCopy(BEDROCK).noOcclusion().mapColor(MapColor.COLOR_YELLOW)));
     public static final RegistryObject<Block, PalaceDoorExtensionBlock> PALACE_DOOR_EXTENSION = addNoItem("palace_door_extension", () -> new PalaceDoorExtensionBlock(ofFullCopy(BEDROCK).noOcclusion().mapColor(MapColor.COLOR_YELLOW)));
 
-    protected static Properties leafPile() {
+    private static Properties leafPile() {
         return of().strength(0.2f).sound(SoundType.VINE).replaceable().noOcclusion().isSuffocating(never).isViewBlocking(never).pushReaction(PushReaction.DESTROY);
     }
 
@@ -569,13 +556,13 @@ public class BlockRegistry {
     public static final WoodBlockSet WISTERIA_WOODSTUFF = registerWoodBlockSetWisteria();
     public static final SignSet WISTERIA_SIGNS = registerSignSet(ParadiseLostWoodTypes.WISTERIA);
 
-    protected static Properties wisteriaLeaf() {
+    private static Properties wisteriaLeaf() {
         return ofFullCopy(OAK_LEAVES);
     }
-    protected static Properties wisteriaHanger() {
+    private static Properties wisteriaHanger() {
         return of().pushReaction(PushReaction.DESTROY).strength(0.2f).noCollission().instabreak().sound(SoundType.GRASS).isSuffocating(never).isViewBlocking(never);
     }
-    protected static Properties wisteriaSapling() {
+    private static Properties wisteriaSapling() {
         return ofFullCopy(Blocks.OAK_SAPLING);
     }
 

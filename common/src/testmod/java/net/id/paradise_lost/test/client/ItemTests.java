@@ -5,6 +5,7 @@ import net.id.paradise_lost.test.Step;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.item.armor.XpCircletItem;
+import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.Util;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
@@ -23,7 +24,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 import java.util.ArrayList;
@@ -263,6 +267,46 @@ public final class ItemTests {
         );
     }
 
+    @ClientTest(value = "boots keep the player from trampling farmland", group = "Floaty")
+    private static List<Step> floatyBootsSpareFarmland() {
+        return playerLandsOnFarmland(Blocks.FARMLAND, true);
+    }
+
+    @ClientTest(value = "boots keep the player from trampling Paradise Lost farmland", group = "Floaty")
+    private static List<Step> floatyBootsSpareParadiseLostFarmland() {
+        return playerLandsOnFarmland(BlockRegistry.FARMLAND.get(), true);
+    }
+
+    @ClientTest(value = "a player without boots tramples farmland", group = "Floaty")
+    private static List<Step> farmlandTrampledByPlayer() {
+        return playerLandsOnFarmland(Blocks.FARMLAND, false);
+    }
+
+    private static List<Step> playerLandsOnFarmland(Block farmland, boolean boots) {
+        return List.of(
+                Step.run(0, () -> onServer(server -> {
+                    ServerPlayer player = player(server);
+                    pos = player.blockPosition().below();
+                    player.serverLevel().setBlockAndUpdate(pos, farmland.defaultBlockState().setValue(FarmBlock.MOISTURE, 7));
+                    if (boots) {
+                        player.setItemSlot(EquipmentSlot.FEET, new ItemStack(FLOATY_BOOTS.get()));
+                    }
+                    player.teleportTo(pos.getX() + 0.5, pos.getY() + 5D, pos.getZ() + 0.5);
+                })),
+                // onGround is still true right after the teleport, so wait for the player to be back down
+                Step.until("landing", 100, () -> fromServer(server -> (player(server).onGround() && player(server).getY() < pos.getY() + 1.5)
+                        || !world(server).getBlockState(pos).is(farmland))),
+                Step.run(5, () -> onServer(server -> {
+                    BlockState state = world(server).getBlockState(pos);
+                    if (boots) {
+                        check(state.is(farmland), "farmland was trampled into " + state);
+                    } else {
+                        check(!state.is(farmland), "setup: the player did not trample the farmland, so the test proves nothing");
+                    }
+                }))
+        );
+    }
+
     @ClientTest(value = "anchor state syncs to the client", group = "Floaty")
     private static List<Step> floatyAnchorSync() {
         return List.of(
@@ -276,6 +320,31 @@ public final class ItemTests {
                 Step.run(20, () -> onServer(server -> check(player(server).getY() > -55, "anchored player fell to y=" + player(server).getY()))),
                 Step.run(0, () -> onServer(server -> ((ParadiseLostEntityExtensions) player(server)).setFloatyAnchored(false))),
                 Step.until("client to see the release", 20, () -> !((ParadiseLostEntityExtensions) client().player).isFloatyAnchored())
+        );
+    }
+
+    @ClientTest(value = "mid-air mining penalty is skipped while anchored", group = "Floaty")
+    private static List<Step> floatyAnchorSkipsAirMiningPenalty() {
+        return List.of(
+                Step.run(0, () -> onServer(server -> {
+                    ServerPlayer player = player(server);
+                    player.setItemSlot(EquipmentSlot.LEGS, new ItemStack(FLOATY_LEGGINGS.get()));
+                    player.teleportTo(player.getX(), player.getY() + 20, player.getZ());
+                })),
+                Step.run(5, () -> onServer(server -> ((ParadiseLostEntityExtensions) player(server)).setFloatyAnchored(true))),
+                Step.run(3, () -> onServer(server -> {
+                    ServerPlayer player = player(server);
+                    List<String> wrong = new ArrayList<>();
+                    float anchored = player.getDestroySpeed(Blocks.DIRT.defaultBlockState());
+                    expect(wrong, !player.onGround(), "setup: the player is on the ground");
+                    expect(wrong, ((ParadiseLostEntityExtensions) player).isFloatyAnchored(), "setup: the player is not anchored");
+                    expect(wrong, anchored == 1.0F, "anchored mining speed in the air is " + anchored + ", expected 1.0");
+
+                    ((ParadiseLostEntityExtensions) player).setFloatyAnchored(false);
+                    float free = player.getDestroySpeed(Blocks.DIRT.defaultBlockState());
+                    expect(wrong, Math.abs(free - 0.2F) < 0.001F, "mining speed in the air without the anchor is " + free + ", expected 0.2");
+                    checkAll(wrong);
+                }))
         );
     }
 

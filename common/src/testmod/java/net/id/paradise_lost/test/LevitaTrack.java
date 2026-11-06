@@ -68,6 +68,25 @@ public final class LevitaTrack {
         check(now.is(old.getBlock()) && now.getValue(property) == shape, "setup: slope at " + at.toShortString() + " is " + now);
     }
 
+    public static void forceShape(ServerLevel world, BlockPos at, RailShape shape) {
+        BlockState old = world.getBlockState(at);
+        check(old.getBlock() instanceof BaseRailBlock, "setup: no rail at " + at.toShortString() + ", found " + old);
+        Property<RailShape> property = ((BaseRailBlock) old.getBlock()).getShapeProperty();
+        world.setBlock(at, old.setValue(property, shape), Block.UPDATE_CLIENTS);
+
+        BlockState now = world.getBlockState(at);
+        check(now.is(old.getBlock()) && now.getValue(property) == shape, "setup: rail at " + at.toShortString() + " is " + now);
+    }
+
+    public static RailShape ascending(Direction toward) {
+        return switch (toward) {
+            case NORTH -> RailShape.ASCENDING_NORTH;
+            case SOUTH -> RailShape.ASCENDING_SOUTH;
+            case EAST -> RailShape.ASCENDING_EAST;
+            default -> RailShape.ASCENDING_WEST;
+        };
+    }
+
     public static void singleSlope(ServerLevel world, boolean down) {
         world.setBlockAndUpdate(start.relative(dir), Blocks.STONE.defaultBlockState());
         track(world, start, "L");
@@ -105,6 +124,35 @@ public final class LevitaTrack {
     public static void placePoweredLevitaRail(ServerLevel world, BlockPos at) {
         world.setBlockAndUpdate(at.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
         world.setBlockAndUpdate(at, BlockRegistry.LEVITA_RAIL.get().defaultBlockState());
+    }
+
+    /**
+     * Valley of one descending powered rail and two ascending rails, the in-game "asymmetrical V-shaped ladder" that
+     * used to rotate early when the ascents were levita.
+     */
+    public static void valleyLadder(ServerLevel world, BlockPos from, boolean levitaAscents) {
+        BlockPos climb0 = from.relative(dir);
+        BlockPos climb1 = from.relative(dir, 2).above();
+        world.setBlockAndUpdate(from.relative(dir.getOpposite()), Blocks.STONE.defaultBlockState());
+        world.setBlockAndUpdate(climb1.relative(dir), Blocks.STONE.defaultBlockState());
+        if (levitaAscents) {
+            placePoweredLevitaRail(world, climb0);
+            placePoweredLevitaRail(world, climb1);
+        } else {
+            world.setBlockAndUpdate(climb0.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+            world.setBlockAndUpdate(climb0, Blocks.POWERED_RAIL.defaultBlockState());
+            world.setBlockAndUpdate(climb1.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+            world.setBlockAndUpdate(climb1, Blocks.POWERED_RAIL.defaultBlockState());
+        }
+        world.setBlockAndUpdate(from.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+        world.setBlockAndUpdate(from, Blocks.POWERED_RAIL.defaultBlockState());
+        lockValleyShapes(world, from);
+    }
+
+    public static void lockValleyShapes(ServerLevel world, BlockPos from) {
+        forceShape(world, from, ascending(dir.getOpposite()));
+        forceShape(world, from.relative(dir), ascending(dir));
+        forceShape(world, from.relative(dir, 2).above(), ascending(dir));
     }
 
     public static void trench(ServerLevel world, int from, int to) {

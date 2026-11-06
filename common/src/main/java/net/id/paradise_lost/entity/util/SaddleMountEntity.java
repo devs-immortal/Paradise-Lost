@@ -62,17 +62,17 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
         ItemStack heldItem = player.getItemInHand(hand);
         InteractionResult returnValue = super.mobInteract(player, hand);
 
-        if (!this.isSaddleable()) return super.mobInteract(player, hand);
+        if (!this.isSaddleable()) return returnValue;
 
         if (!this.isSaddled()) {
             if (heldItem.getItem() == Items.SADDLE && !this.isBaby()) {
-                if (!player.isCreative()) player.setItemInHand(hand, ItemStack.EMPTY);
-
-                if (player.level().isClientSide)
+                if (player.level().isClientSide) {
                     player.level().playSound(player, player.blockPosition(), SoundEvents.PIG_SADDLE, SoundSource.AMBIENT, 1.0F, 1.0F);
-
-                this.setSaddled(true);
-                return InteractionResult.SUCCESS;
+                } else {
+                    if (!player.isCreative()) player.setItemInHand(hand, ItemStack.EMPTY);
+                    this.setSaddled(true);
+                }
+                return InteractionResult.sidedSuccess(player.level().isClientSide);
             }
         } else {
             if (this.getPassengers().isEmpty()) {

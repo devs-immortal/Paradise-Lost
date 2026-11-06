@@ -13,6 +13,7 @@ plugins {
 
 val modId: String by project
 val sherdsApiVersion: String by project
+val debugJvmArgs: List<String> by extra
 val wilderWildVersion = "4.2.1-mc1.21.1"
 val frozenLibVersion = "2.2.4-mc1.21.1"
 
@@ -110,6 +111,7 @@ loom {
         configureEach {
             runDir("runs/$name")
             ideConfigGenerated(true)
+            vmArgs(debugJvmArgs)
             configName = "Fabric ${name.capitalized()}"
         }
 

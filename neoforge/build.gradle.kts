@@ -10,6 +10,7 @@ plugins {
 
 val modId: String by project
 val sherdsApiVersion: String by project
+val debugJvmArgs: List<String> by extra
 
 val commonMainResources = rootProject.project(":common").layout.projectDirectory.dir("src/main/resources").asFile
 val commonGeneratedResources = rootProject.project(":common").layout.projectDirectory.dir("src/generated/resources").asFile
@@ -36,6 +37,7 @@ neoForge {
     runs {
         configureEach {
             logLevel = org.slf4j.event.Level.DEBUG
+            jvmArguments.addAll(debugJvmArgs)
             // Match Warden Tools naming so IDEA run configs are easy to find
             ideName = "NeoForge ${name.replaceFirstChar { it.uppercase() }} (${project.path})"
         }

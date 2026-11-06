@@ -8,7 +8,9 @@ plugins {
 }
 
 val libs = project.versionCatalogs.find("libs")
-version = getVersion("version")
+val commitSha = System.getenv("COMMIT_SHA")?.trim()?.takeIf { it.isNotEmpty() }?.take(7)
+val modVersion = getVersion("version") + (commitSha?.let { "+$it" } ?: "")
+version = modVersion
 
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(getVersion("java"))
@@ -49,6 +51,24 @@ val modGitRepo          : String by project
 base {
     archivesName = "$modId-${project.name}-${getVersion("minecraft")}"
 }
+
+class DebugFlag(val property: String, val env: String, val jvmProperty: String)
+
+val debugFlags = listOf(
+    DebugFlag("debugMinecartFloat", "DEBUG_MINECART_FLOAT", "paradise_lost.debug.minecart_float"),
+    DebugFlag("debugMinecartRotation", "DEBUG_MINECART_ROTATION", "paradise_lost.debug.minecart_rotation")
+)
+val onCi = System.getenv("GITHUB_ACTIONS") != null
+extra["debugJvmArgs"] = debugFlags
+    .filter { flag ->
+        val fromEnv = System.getenv(flag.env)?.takeIf { it.isNotBlank() }
+        when {
+            fromEnv != null -> fromEnv.toBoolean()
+            onCi -> false
+            else -> providers.gradleProperty(flag.property).orNull.toBoolean()
+        }
+    }
+    .map { "-D${it.jvmProperty}=true" }
 
 checkstyle {
     sourceSets = emptyList()
@@ -133,7 +153,7 @@ tasks.withType<ProcessResources>().configureEach {
         "mod_issues_tracker"             to modIssuesTracker,
         "mod_git_repo"                   to modGitRepo,
 
-        "version"                        to getVersion("version"),
+        "version"                        to modVersion,
         "java_version"                   to getVersion("java"),
 
         "minecraft_version"              to getVersion("minecraft"),
@@ -182,9 +202,9 @@ tasks.withType<Jar>().configureEach {
         attributes(mapOf(
             "Specification-Title"     to modDisplayName,
             "Specification-Vendor"    to modAuthors,
-            "Specification-Version"   to getVersion("version"),
+            "Specification-Version"   to modVersion,
             "Implementation-Title"    to modDisplayName,
-            "Implementation-Version"  to getVersion("version"),
+            "Implementation-Version"  to modVersion,
             "Implementation-Vendor"   to modAuthors,
             "Built-On-Minecraft"      to getVersion("minecraft"),
             "MixinConfigs"            to "$modId.mixins.json"

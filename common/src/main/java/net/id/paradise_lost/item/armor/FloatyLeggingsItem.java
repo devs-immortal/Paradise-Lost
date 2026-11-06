@@ -60,6 +60,10 @@ public class FloatyLeggingsItem extends ArmorItem {
                 && !player.isFallFlying();
     }
 
+    public static boolean isAnchored(Player player) {
+        return player instanceof ParadiseLostEntityExtensions extensions && extensions.isFloatyAnchored();
+    }
+
     public static boolean canAnchor(Player player) {
         return canUseFloaty(player) && isSurvivalLike(player) && !player.onGround();
     }

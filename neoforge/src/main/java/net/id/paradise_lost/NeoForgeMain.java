@@ -3,6 +3,7 @@ package net.id.paradise_lost;
 import net.id.paradise_lost.attachments.CommonDataAttachments;
 import net.id.paradise_lost.commands.ParadiseLostCommands;
 import net.id.paradise_lost.entity.ModEntities;
+import net.id.paradise_lost.item.armor.FloatyBootsItem;
 import net.id.paradise_lost.networking.packet.PacketHandler;
 import net.id.paradise_lost.platform.Services;
 import net.id.paradise_lost.registry.EntityRegistry;
@@ -11,6 +12,7 @@ import net.id.paradise_lost.services.NeoForgeNetworkHelper;
 import net.id.paradise_lost.services.NeoForgePlatformHelper;
 import net.id.paradise_lost.util.ParadiseLostAliasFix;
 import net.id.paradise_lost.util.RegistryUtil;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -20,6 +22,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
@@ -36,8 +39,15 @@ public class NeoForgeMain {
 
         NeoForge.EVENT_BUS.addListener(this::registerCommands);
         NeoForge.EVENT_BUS.addListener(this::addBrewingRecipes);
+        NeoForge.EVENT_BUS.addListener(this::floatyBootsSpareFarmland);
 
         modBus.addListener(RegisterEvent.class, event -> CommonDataAttachments.init());
+    }
+
+    private void floatyBootsSpareFarmland(BlockEvent.FarmlandTrampleEvent event) {
+        if (event.getEntity() instanceof LivingEntity living && FloatyBootsItem.isWearing(living)) {
+            event.setCanceled(true);
+        }
     }
 
     private void registerCommands(RegisterCommandsEvent event) {

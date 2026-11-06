@@ -10,6 +10,7 @@
     "block.LevitaRailBlockMixin",
     "block.PoweredRailBlockMixin",
     "entity.AbstractMinecartMixin",
+    "entity.PlayerMiningMixin",
     "item.FloatyBootsItemMixin",
     "item.FloatyLeggingsItemMixin",
     "item.SurtrumAxeMixin",

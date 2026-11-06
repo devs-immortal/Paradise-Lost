@@ -3,7 +3,7 @@ package net.id.paradise_lost.item.tool;
 import com.google.common.base.Suppliers;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
-import net.minecraft.tags.BlockTags;
+import net.id.paradise_lost.tag.ParadiseLostBlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -12,10 +12,10 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class ParadiseLostToolMaterials {
-    public static final Tier OLVITE = create(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 4.5f, 2f, 14, () -> Ingredient.of(ItemRegistry.OLVITE.get()));
-    public static final Tier SURTRUM = create(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 827, 7.0f, 3f, 16, () -> Ingredient.of(ItemRegistry.REFINED_SURTRUM.get()));
-    public static final Tier GLAZED_GOLD = create(BlockTags.INCORRECT_FOR_IRON_TOOL, 131, 12f, 2f, 22, () -> Ingredient.of(ItemRegistry.GOLDEN_AMBER.get()));
-    public static final Tier SOUL_BLADE = create(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 636, 6.5f, 1.5f, 17, () -> Ingredient.of(BlockRegistry.BLOOMED_CALCITE.get()));
+    public static final Tier OLVITE = create(ParadiseLostBlockTags.INCORRECT_FOR_OLVITE_TOOL, 250, 4.5f, 2f, 14, () -> Ingredient.of(ItemRegistry.OLVITE.get()));
+    public static final Tier SURTRUM = create(ParadiseLostBlockTags.INCORRECT_FOR_SURTRUM_TOOL, 827, 7.0f, 3f, 16, () -> Ingredient.of(ItemRegistry.REFINED_SURTRUM.get()));
+    public static final Tier GLAZED_GOLD = create(ParadiseLostBlockTags.INCORRECT_FOR_GLAZED_GOLD_TOOL, 131, 12f, 2f, 22, () -> Ingredient.of(ItemRegistry.GOLDEN_AMBER.get()));
+    public static final Tier SOUL_BLADE = create(ParadiseLostBlockTags.INCORRECT_FOR_SOUL_TOOL, 636, 6.5f, 1.5f, 17, () -> Ingredient.of(BlockRegistry.BLOOMED_CALCITE.get()));
 
     public static Tier create(final TagKey<Block> incorrect, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
         return new ParadiseToolMaterial(incorrect, itemDurability, miningSpeed, attackDamage, enchantability, repairIngredient);

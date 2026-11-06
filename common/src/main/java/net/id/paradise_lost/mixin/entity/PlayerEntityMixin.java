@@ -15,6 +15,7 @@ import net.id.paradise_lost.world.dimension.ParadiseLostDimension;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -129,11 +130,25 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
             FloatyLeggingsItem.hurtWhileAnchored(player);
         }
         if (paradiseLost$floatyDamageTicker == 0) {
-            var leg1 = player.position().add(new Vec3(0.3, 0.5, 0.025).yRot((float) Math.toRadians(-player.yBodyRot)));
-            var leg2 = player.position().add(new Vec3(-0.3, 0.5, 0.025).yRot((float) Math.toRadians(-player.yBodyRot)));
+            // In case particles needs velocity
+            // double dx = player.getX() - player.xo;
+            // double dy = player.getY() - player.yo;
+            // double dz = player.getZ() - player.zo;
+            float swing = this.walkAnimation.position();
+            float amount = Math.min(this.walkAnimation.speed(), 1.0F);
+            var leg1 = paradiseLost$legPosition(player, 0.3, Mth.cos(swing * 0.6662F + (float) Math.PI) * 1.4F * amount);
+            var leg2 = paradiseLost$legPosition(player, -0.3, Mth.cos(swing * 0.6662F) * 1.4F * amount);
             player.level().addParticle(ParadiseLostParticleTypes.LEVITA_SPARKLE, leg1.x(), leg1.y(), leg1.z(), 0.0, 0.0, 0.0);
             player.level().addParticle(ParadiseLostParticleTypes.LEVITA_SPARKLE, leg2.x(), leg2.y(), leg2.z(), 0.0, 0.0, 0.0);
         }
+    }
+
+    @Unique
+    private static Vec3 paradiseLost$legPosition(Player player, double side, float angle) {
+        double hipHeight = 0.75;
+        double reach = 0.25;
+        Vec3 offset = new Vec3(side, hipHeight - reach * Mth.cos(angle), 0.025 - reach * Mth.sin(angle));
+        return player.position().add(offset.yRot((float) Math.toRadians(-player.yBodyRot)));
     }
 
     @Inject(method = "travel", at = @At("HEAD"), cancellable = true)

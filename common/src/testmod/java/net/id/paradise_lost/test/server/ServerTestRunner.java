@@ -17,6 +17,7 @@ public final class ServerTestRunner implements TestRun.Hooks {
     private static final int SITE_SPACING = 128;
     private static final int SITE_RADIUS = 64;
     private static final List<Class<?>> TEST_CLASSES = List.of(
+            BirdcageTests.class,
             BlockTests.class,
             BoatTests.class,
             CreativeTabTests.class,

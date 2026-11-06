@@ -4,9 +4,10 @@
   "package": "net.id.paradise_lost.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "block.FarmlandBlockMixin",
+    "block.FarmBlockMixin",
     "block.FlowerPotBlockMixin",
     "entity.LivingEntityMixin",
+    "entity.PlayerMiningMixin",
     "server.EntityTrackerEntryMixin"
   ],
   "client": [

@@ -89,7 +89,8 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
     protected int secsUntilEgg;
     private MoaGenes genes;
 
-    @NotNull private SimpleContainer inventory = DUMMY;
+    @NotNull
+    private SimpleContainer inventory = DUMMY;
 
     public MoaEntity(EntityType<? extends MoaEntity> entityType, Level world) {
         super(entityType, world);
@@ -344,7 +345,9 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
             }
         }
     }
+
     private boolean canFlap = true;
+
     public void attemptMoaFlap(boolean bypassFlapCheck) {
         if (getWingRoll() > 0.8 && canFlap || bypassFlapCheck) {
             if (!this.level().isClientSide) {
@@ -364,7 +367,9 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
     protected void playHurtSound(DamageSource source) {
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(), ParadiseLostSoundEvents.ENTITY_MOA_HURT, SoundSource.NEUTRAL, 0.2F, getRandomFloat(0.78f, 0.82f));
     }
+
     boolean shouldRoll;
+
     @Override
     public void tick() {
         isInAir = !onGround();
@@ -427,7 +432,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
     }
 
     @Override
-        protected Component getTypeName() {
+    protected Component getTypeName() {
         return Component.translatable(getGenes().getRaceTranslationKey(), "Moa");
     }
 
@@ -567,6 +572,7 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
             }
         }
     }
+
     @Override
     protected void updateWalkAnimation(float posDelta) {
         if (isVehicle()) {
@@ -599,15 +605,16 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
             return InteractionResult.PASS;
         }
 
+        if (getGenes().isTamed() && player.isShiftKeyDown()) {
+            if (!level().isClientSide()) {
+                openCustomInventoryScreen(player);
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide());
+        }
+
         if (!level().isClientSide()) {
             ItemStack heldStack = player.getItemInHand(hand);
             if (getGenes().isTamed()) {
-
-                if (player.isShiftKeyDown()) {
-                    openCustomInventoryScreen(player);
-                    return InteractionResult.SUCCESS;
-                }
-
                 if (heldStack.isEmpty()) {
                     return super.mobInteract(player, hand);
                 }

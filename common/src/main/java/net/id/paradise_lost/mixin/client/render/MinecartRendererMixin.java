@@ -58,11 +58,12 @@ public class MinecartRendererMixin {
         if (entity == null) {
             return degrees;
         }
-        float wanted = MinecartFloatingHelper.shouldUseFloatRenderPose(entity)
+        boolean floatPose = MinecartFloatingHelper.shouldUseFloatRenderPose(entity);
+        float wanted = floatPose
                 ? 180.0F - MinecartFloatingHelper.getFloatRenderYaw(entity)
                 : degrees;
         Float partial = PARADISE_LOST$RENDER_PARTIAL.get();
-        return MinecartFloatingHelper.smoothRenderYawDegrees(entity, wanted, partial == null ? 0.0F : partial);
+        return MinecartFloatingHelper.smoothRenderYawDegrees(entity, wanted, partial == null ? 0.0F : partial, floatPose);
     }
 
     /**

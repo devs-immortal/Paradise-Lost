@@ -3,7 +3,7 @@
 
 [versions]
 # Mod
-    version                         = "2.5.0"
+    version                         = "2.5.1"
 
 # Dependencies
     #geckolib                       = "4.8.4"

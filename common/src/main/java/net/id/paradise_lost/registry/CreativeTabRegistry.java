@@ -17,12 +17,12 @@ import java.util.List;
 
 import static net.id.paradise_lost.registry.ItemRegistry.*;
 
-public class CreativeTabRegistry {
+public final class CreativeTabRegistry {
     public static void init() {
         Services.REGISTRATION.registerCreativeTabEntries();
     }
 
-    protected static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS =
+    private static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS =
             RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, ModConstants.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab, CreativeModeTab> PARADISE_BLOCKS_TAB = CREATIVE_MODE_TABS.register("building_blocks",

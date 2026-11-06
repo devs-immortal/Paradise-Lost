@@ -58,6 +58,17 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     @Shadow
     protected abstract double getMaxSpeed();
 
+    /**
+     * A floating cart is not driving over the block below it, so honey and soul sand must not drag it to a halt.
+     */
+    @Override
+    public float getBlockSpeedFactor() {
+        if (MinecartFloatingHelper.isFloating((AbstractMinecart) (Object) this)) {
+            return 1.0F;
+        }
+        return super.getBlockSpeedFactor();
+    }
+
     @Override
     public void paradiseLost$setRailRenderPose(float yaw, float pitch) {
         this.paradiseLost$railRenderYaw = yaw;
@@ -167,7 +178,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 ci.cancel();
                 return;
             }
-            if (!this.level().isClientSide()) {
+            if (!this.level().isClientSide() && !MinecartFloatingHelper.isGhostSlopeBelow(cart, pos, state)) {
                 MinecartFloatingHelper.adaptFloatWhileGhosting(cart, state);
             }
             MinecartFloatingHelper.debugEvent(cart, "skipTrack",
@@ -175,6 +186,8 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                             + " unsettledFlat=" + MinecartFloatingHelper.isUnsettledAboveFlatRail(cart));
             this.paradiseLost$moveFloating(cart, false);
             ci.cancel();
+        } else {
+            MinecartFloatingHelper.resolveSidewaysSlopeEntry(cart, state);
         }
     }
 
@@ -201,8 +214,8 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     }
 
     /**
-     * Start a float gap: freeze pose, set grace, mark off-rail. Called from comeOffTrack and the
-     * air tick branch (leaving during moveAlongTrack can skip comeOff for a tick).
+     * Start a float gap: freeze pose, set grace, mark off-rail. Called from comeOffTrack and the air tick branch
+     * (leaving during moveAlongTrack can skip comeOff for a tick).
      */
     @Unique
     private void paradiseLost$beginFloatTakeoff(AbstractMinecart cart, String reason) {
@@ -281,6 +294,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         }
         this.setDeltaMovement(x, y, z);
 
+        Vec3 intended = this.getDeltaMovement();
         boolean noclip = MinecartFloatingHelper.shouldUseSlopeNoclip(cart)
                 || (this.paradiseLost$exitGrace > 0 && MinecartFloatingHelper.shouldUseExitGraceNoclip(cart));
         if (this.paradiseLost$exitGrace > 0) {
@@ -298,12 +312,14 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             this.move(MoverType.SELF, this.getDeltaMovement());
         }
 
-        // Hit solid with nothing to land on, level out and coast.
+        // Hit a floor, ceiling or wall with nothing to land on, level out and coast.
         if (!this.level().isClientSide()
-                && MinecartFloatingHelper.shouldLevelAgainstSolidBarrier(cart, this.onGround(), this.verticalCollision)) {
+                && MinecartFloatingHelper.shouldLevelAgainstSolidBarrier(cart, this.onGround(), this.verticalCollision,
+                this.horizontalCollision, intended)) {
             MinecartFloatingHelper.levelOpenAirFlight(cart);
             MinecartFloatingHelper.debugEvent(cart, "solidBarrier",
-                    "onGround=" + this.onGround() + " vertCol=" + this.verticalCollision);
+                    "onGround=" + this.onGround() + " vertCol=" + this.verticalCollision
+                            + " horCol=" + this.horizontalCollision);
         }
 
         if (tickFloatTime) {
@@ -452,7 +468,9 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         }
     }
 
-    /** 45 degrees only if the rail under this client cart really is a slope, since the incline sync runs ahead. */
+    /**
+     * 45 degrees only if the rail under this client cart really is a slope, since the incline sync runs ahead.
+     */
     @Unique
     private void paradiseLost$applyClientFloatPose(AbstractMinecart cart) {
         if (MinecartFloatingHelper.clientShouldHoldSlopePose(cart)) {

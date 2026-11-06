@@ -3,10 +3,12 @@
   "minVersion": "0.8",
   "package": "net.id.paradise_lost.mixin",
   "compatibilityLevel": "JAVA_21",
+  "mixinextras": {
+    "minVersion": "0.5.3"
+  },
   "mixins": [
     "block.BlockMixin",
     "block.CropBlockMixin",
-    "block.FarmlandBlockMixin",
     "block.FlowerPotBlockMixin",
     "block.PowderSnowBlockMixin",
     "brain.ActivityInvoker",
@@ -29,8 +31,8 @@
     "item.PotionItemMixin",
     "portal.LiquidBlockPortalMixin",
     "server.PlayerManagerMixin",
-    "server.ServerPlayNetworkHandlerMixin",
     "server.ServerPlayerGameModeMixin",
+    "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
     "util.SlotAccessor",
     "world.gen.SurfaceBuilderMixin",

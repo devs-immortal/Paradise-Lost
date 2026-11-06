@@ -1,43 +1,43 @@
 package net.id.paradise_lost.mixin.client.render.item;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.id.paradise_lost.registry.BlockRegistry;
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.id.paradise_lost.block.blockentity.CalciteDecoratedPotBlockEntity;
+import net.id.paradise_lost.block.decorative.CalciteDecoratedPotBlock;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BlockEntityWithoutLevelRenderer.class)
-public class BuiltinModelItemRendererMixin {
+public abstract class BuiltinModelItemRendererMixin {
 
-    private final CalciteDecoratedPotBlockEntity renderCalciteDecoratedPot = new CalciteDecoratedPotBlockEntity(BlockPos.ZERO, BlockRegistry.CALCITE_DECORATED_POT.get().defaultBlockState());
+    @Unique
+    private CalciteDecoratedPotBlockEntity paradiseLost$calcitePot;
 
-    @Final
-    @Shadow
-    private BlockEntityRenderDispatcher blockEntityRenderDispatcher;
+    @Definition(id = "is", method = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
+    @Definition(id = "DECORATED_POT", field = "Lnet/minecraft/world/level/block/Blocks;DECORATED_POT:Lnet/minecraft/world/level/block/Block;")
+    @Expression("?.is(DECORATED_POT)")
+    @ModifyExpressionValue(method = "renderByItem", at = @At("MIXINEXTRAS:EXPRESSION"))
+    private boolean paradiseLost$enterPotBranch(boolean original, @Local BlockState state) {
+        return original || state.getBlock() instanceof CalciteDecoratedPotBlock;
+    }
 
-    @Inject(method = "renderByItem", at = @At("HEAD"), cancellable = true)
-    public void render(ItemStack stack, ItemDisplayContext mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay, CallbackInfo ci) {
-        Item item = stack.getItem();
-        if (item instanceof BlockItem) {
-            BlockState blockState = ((BlockItem) item).getBlock().defaultBlockState();
-            if (blockState.is(BlockRegistry.CALCITE_DECORATED_POT.get())) {
-                this.renderCalciteDecoratedPot.readFrom(stack);
-                this.blockEntityRenderDispatcher.renderItem(this.renderCalciteDecoratedPot, matrices, vertexConsumers, light, overlay);
-                ci.cancel();
+    @Definition(id = "decoratedPot", field = "Lnet/minecraft/client/renderer/BlockEntityWithoutLevelRenderer;decoratedPot:Lnet/minecraft/world/level/block/entity/DecoratedPotBlockEntity;")
+    @Expression("this.decoratedPot")
+    @ModifyExpressionValue(method = "renderByItem", at = @At("MIXINEXTRAS:EXPRESSION"))
+    private DecoratedPotBlockEntity paradiseLost$swapPotEntity(DecoratedPotBlockEntity original, @Local BlockState state) {
+        if (state.getBlock() instanceof CalciteDecoratedPotBlock) {
+            if (this.paradiseLost$calcitePot == null) {
+                this.paradiseLost$calcitePot = new CalciteDecoratedPotBlockEntity(BlockPos.ZERO, state);
             }
+            return this.paradiseLost$calcitePot;
         }
+        return original;
     }
 }

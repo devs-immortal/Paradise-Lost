@@ -1,11 +1,27 @@
 name: Game Tests
 
-on: [ pull_request ]
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      debug_minecart_float:
+        description: Verbose minecart float log (paradise_lost.debug.minecart_float)
+        type: boolean
+        default: false
+      debug_minecart_rotation:
+        description: Minecart rotation tracing (paradise_lost.debug.minecart_rotation)
+        type: boolean
+        default: false
+
 jobs:
   game_test:
     name: ${{ matrix.name }} tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      # Read by buildSrc (project-setup.gradle.kts), they win over gradle.properties. Always false on pull requests.
+      DEBUG_MINECART_FLOAT: ${{ inputs.debug_minecart_float || false }}
+      DEBUG_MINECART_ROTATION: ${{ inputs.debug_minecart_rotation || false }}
     strategy:
       fail-fast: false
       matrix:

@@ -73,7 +73,7 @@ import static net.minecraft.world.item.Rarity.*;
 import net.id.paradise_lost.ModConstants;
 
 @SuppressWarnings("unused")
-public class ItemRegistry {
+public final class ItemRegistry {
     public static final RegistrationProvider<Item> ITEMS =
             RegistrationProvider.get(Registries.ITEM, ModConstants.MOD_ID);
 

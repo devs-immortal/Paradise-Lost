@@ -65,6 +65,87 @@ public final class MoaTests {
         );
     }
 
+    @ClientTest("sneak and right click with a saddle opens the menu and does not saddle the moa on the client")
+    private static List<Step> moaMenuWithSaddleInHand() {
+        return List.of(
+                Step.run(0, () -> onServer(server -> {
+                    ServerPlayer player = player(server);
+                    tamedMoa(player);
+                    hold(player, Items.SADDLE, 1);
+                })),
+                Step.run(10, () -> client().options.keyShift.setDown(true)),
+                Step.run(3, () -> interact(entityId)),
+                Step.until("moa screen", 20, () -> client().screen instanceof MoaScreen),
+                Step.run(5, () -> {
+                    List<String> wrong = new ArrayList<>();
+                    MoaEntity clientMoa = (MoaEntity) client().level.getEntity(entityId);
+                    expect(wrong, !clientMoa.isSaddled(), "the moa is saddled on the client");
+                    expect(wrong, client().player.getMainHandItem().is(Items.SADDLE), "client hand holds " + client().player.getMainHandItem());
+                    expect(wrong, client().player.containerMenu.getSlot(0).getItem().isEmpty(),
+                            "the menu shows " + client().player.containerMenu.getSlot(0).getItem() + " in the saddle slot");
+                    onServer(server -> {
+                        expect(wrong, !serverMoa(server).isSaddled(), "the moa is saddled on the server");
+                        expect(wrong, player(server).getMainHandItem().is(Items.SADDLE), "server hand holds " + player(server).getMainHandItem());
+                    });
+                    checkAll(wrong);
+                }),
+                Step.run(0, () -> {
+                    client().options.keyShift.setDown(false);
+                    client().player.closeContainer();
+                })
+        );
+    }
+
+    @ClientTest("sneak and right click with a chest opens the menu and does not give the moa a chest on the client")
+    private static List<Step> moaMenuWithChestInHand() {
+        return List.of(
+                Step.run(0, () -> onServer(server -> {
+                    ServerPlayer player = player(server);
+                    tamedMoa(player);
+                    hold(player, Items.CHEST, 1);
+                })),
+                Step.run(10, () -> client().options.keyShift.setDown(true)),
+                Step.run(3, () -> interact(entityId)),
+                Step.until("moa screen", 20, () -> client().screen instanceof MoaScreen),
+                Step.run(5, () -> {
+                    List<String> wrong = new ArrayList<>();
+                    expect(wrong, !((MoaEntity) client().level.getEntity(entityId)).hasChest(), "the moa has a chest on the client");
+                    expect(wrong, client().player.getMainHandItem().is(Items.CHEST), "client hand holds " + client().player.getMainHandItem());
+                    onServer(server -> {
+                        expect(wrong, !serverMoa(server).hasChest(), "the moa has a chest on the server");
+                        expect(wrong, player(server).getMainHandItem().is(Items.CHEST), "server hand holds " + player(server).getMainHandItem());
+                    });
+                    checkAll(wrong);
+                }),
+                Step.run(0, () -> {
+                    client().options.keyShift.setDown(false);
+                    client().player.closeContainer();
+                })
+        );
+    }
+
+    @ClientTest("right click with a saddle saddles the moa on both sides")
+    private static List<Step> moaTakesSaddle() {
+        return List.of(
+                Step.run(0, () -> onServer(server -> {
+                    ServerPlayer player = player(server);
+                    tamedMoa(player);
+                    hold(player, Items.SADDLE, 1);
+                })),
+                Step.run(10, () -> interact(entityId)),
+                Step.run(10, () -> {
+                    List<String> wrong = new ArrayList<>();
+                    expect(wrong, ((MoaEntity) client().level.getEntity(entityId)).isSaddled(), "the moa is not saddled on the client");
+                    expect(wrong, client().player.getMainHandItem().isEmpty(), "client hand holds " + client().player.getMainHandItem());
+                    onServer(server -> {
+                        expect(wrong, serverMoa(server).isSaddled(), "the moa is not saddled on the server");
+                        expect(wrong, player(server).getMainHandItem().isEmpty(), "server hand holds " + player(server).getMainHandItem());
+                    });
+                    checkAll(wrong);
+                })
+        );
+    }
+
     @ClientTest("single chest from survival goes onto the moa")
     private static List<Step> moaTakesChest() {
         return List.of(
