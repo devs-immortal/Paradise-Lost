@@ -34,7 +34,6 @@
     "server.ServerWorldMixin",
     "util.SlotAccessor",
     "world.gen.SurfaceBuilderMixin",
-    "world.gen.UtilMixin",
     "world.gen.structure.JigsawStructureMixin"
   ],
   "client": [

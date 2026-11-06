@@ -98,7 +98,9 @@ public class ParadiseLostMiscPlacedFeatures extends ParadiseLostPlacedFeatures {
         register(context, SHIELD_ROCKS, configuredFeatures.getOrThrow(ParadiseLostMiscConfiguredFeatures.SHIELD_ROCKS),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0))),
                 InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(1));
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                CountPlacement.of(1),
+                BiomeFilter.biome());
         register(context, WATER_SPRING, configuredFeatures.getOrThrow(ParadiseLostMiscConfiguredFeatures.WATER_SPRING),
                 CountPlacement.of(12),
                 InSquarePlacement.spread(),
